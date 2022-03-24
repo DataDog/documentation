@@ -204,7 +204,7 @@
         dest_path: '/tracing/setup_overview/setup/'
         file_name: 'ruby.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"]
+          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
           title: Tracing Ruby Applications
           kind: documentation
           code_lang: ruby
@@ -306,7 +306,7 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
@@ -324,7 +324,7 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
@@ -342,7 +342,7 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
@@ -378,7 +378,7 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
@@ -396,8 +396,8 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
-              text: "Explore Datadog RUM"
+              tag: "Documentation"
+              text: "Explore Real User Monitoring"
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file

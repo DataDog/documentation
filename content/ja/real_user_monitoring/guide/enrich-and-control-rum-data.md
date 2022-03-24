@@ -34,15 +34,15 @@ function beforeSend(event, context)
 
 ### コンテキスト
 コンテキストは、イベントの作成をトリガーする Browser API で構成されます。コンテキスト値は `event.type` に依存します。
-| RUM イベントタイプ   | コンテキスト                   |
-|------------------|---------------------------|
-| View             | [Location][3]                  |
-| Action           | [Event][4]                     |
-| Resource (XHR)   | [XMLHttpRequest][5] および [PerformanceResourceTiming][6]            |
-| Resource (Fetch) | [Request][7]、[Response][8]、および [PerformanceResourceTiming][6]      |
-| Resource (Other) | [PerformanceResourceTiming][6] |
-| Error            | [Error][9]                     |
-| Long Task        | [PerformanceLongTaskTiming][10] |
+| RUM イベントタイプ       | コンテキスト                                                         |
+|----------------------|-----------------------------------------------------------------|
+| View                 | [Location][3]                                                   |
+| Action               | [Event][4]                                                      |
+| Resource (XHR)       | [XMLHttpRequest][5] および [PerformanceResourceTiming][6]          |
+| Resource (Fetch)     | [Request][7]、[Response][8]、および [PerformanceResourceTiming][6] |
+| Resource (Other)     | [PerformanceResourceTiming][6]                                  |
+| Error                | [Error][9] またはエラーとして発生するその他の値                |
+| Long Task            | [PerformanceLongTaskTiming][10]                                 |
 
 コンテキストオブジェクトの構造の詳細については、[Browser SDK リポジトリ][11]を参照してください。
 

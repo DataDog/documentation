@@ -522,7 +522,7 @@ The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metricâ
 
 Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
-{{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 ```python

@@ -71,7 +71,7 @@ ID 情報を使って、セキュリティやパフォーマンスのインシ�
     | 設定          | 説明                                                |
     | ---------------- | ---------------------------------------------------------- |
     | `API Key`        | [Datadog API キー][2]を入力します。                           |
-    | `Region`         | Datadog EU サイト（app.datadoghq.eu）の場合は `EU` を、それ以外の場合は `GLOBAL` を入力します。   |
+    | `Region`           | ご使用の [Datadog サイト][3]。たとえば、app.datadoghq.eu の場合は `EU`、app.datadoghq.com の場合は `US1`、us3.datadoghq.com の場合は `US3`。 |
 
 
 6. Save をクリックします。
@@ -88,7 +88,8 @@ ID 情報を使って、セキュリティやパフォーマンスのインシ�
 ## 収集データ
 
 ### ログの収集
-Auth0 のログが収集され、Datadog に送信されます。送信されるログのタイプについては、[こちら][3]の説明を参照してください。
+
+Auth0 のログが収集され、Datadog に送信されます。送信されるログのタイプについては、[ログのイベントタイプコード][4]を参照してください。
 
 ### メトリクス
 
@@ -104,11 +105,12 @@ auth0 には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ヘルプが必要な場合は、[Datadog サポート][4]までお問い合せください。
-このインテグレーションの詳細は、Datadog の[ブログ記事][5]でご確認いただけます。
+ヘルプが必要な場合は、[Datadog サポート][5]までお問い合せください。
+このインテグレーションの詳細は、Datadog の[ブログ記事][6]でご確認いただけます。
 
 [1]: https://manage.auth0.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://auth0.com/docs/logs/references/log-event-type-codes
-[4]: https://docs.datadoghq.com/ja/help/
-[5]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
+[4]: https://auth0.com/docs/logs/references/log-event-type-codes
+[5]: https://docs.datadoghq.com/ja/help/
+[6]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/
