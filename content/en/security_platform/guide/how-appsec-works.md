@@ -1,5 +1,5 @@
 ---
-title: How Application Security works in Datadog
+title: How Application Security Works in Datadog
 kind: guide
 ---
 
@@ -7,17 +7,17 @@ kind: guide
 
 Datadog Application Security monitors application-level attacks aiming to exploit code-level vulnerabilities.
 
-APM records information about each HTTP request, these are referred to as traces. Datadog Application Security uses the information APM is already collecting, and flags any attack attempts based or suspicious requests that match known attack patterns. Security signals are an aggregation of suspicious requests. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
+APM records information about each HTTP request, referred to as traces. Datadog Application Security uses the information APM is already collecting, and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are an aggregation of suspicious requests. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
-Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. For application security to be effective, it’s critical to be embedded in the application to get access to the data. Datadog Application Security leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal to noise ratio, lowering false positives.
+Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. For Application Security to be effective, it must be embedded in the application to get access to the data. Datadog Application Security leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal to noise ratio, lowering false positives.
 
 ### Compatibility
 
-For Datadog Application Security to be compatible with your Datadog configuration, you must have APM enabled, and [send traces to Datadog][1]. It uses the same libraries used by the APM suite, so you don't need to deploy and maintain another library for this task. Steps to enable Datadog Application Security are specific to runtime language. Check to see if your language is supported in the [Application Security prerequisites][2].
+For Datadog Application Security to be compatible with your Datadog configuration, you must have APM enabled, and [send traces to Datadog][1]. Application Security uses the same libraries used by APM, so you don't need to deploy and maintain another library. Steps to enable Datadog Application Security are specific to runtime language. Check to see if your language is supported in the [Application Security prerequisites][2].
 
 ### Performance
 
-Datadog Application Security uses processes already contained in the Agent and APM, so there are no performance implications when using it. Datadog Application Security collects and enriches trace data from APM. It doesn't require extra overhead for processes like analyzing attack attempts, because it matches against known patterns and flags them. All processing is done platform-side, after traces have been flagged. 
+Datadog Application Security uses processes already contained in the Agent and APM, so there are no performance implications when using it. When APM is enabled, the Datadog Library generates distributed traces. Datadog Application Security flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
 
 
 ### Data privacy
@@ -39,9 +39,9 @@ Security Signals are automatically created when Datadog detects meaningful attac
 
 Datadog Application Security categorizes attack attempts into different threat types:
 
-* **Unqualified attacks** match inbound HTTP requests with known attack patterns, but don't have any correlation to the business-logic.
-* **Contextualized attacks** have a correlation between known attack patterns and business-logic.
-* A **Vulnerability is triggered** when there is a correlation between attack patterns, and there's evidence of a successful vulnerability trigger.
+* **Unqualified attacks** match inbound HTTP requests with known attack patterns. For example, no correlation with the service's business-logic is found after correlating with the execution context provided by the trace.
+* **Contextualized attacks** correlate the attack attempts performed on the service with a matching business-logic. For example, SQL injection patterns on a service performing SQL statements.
+* A **Vulnerability is triggered** when an attack attempt gives evidence that a vulnerability has been successfully exploited, after matching known attack patterns.
 
 Datadog Application Security includes over 100 attack patterns that help protect against [many different kinds of attacks][8], including the following vulnerabilities:
 
