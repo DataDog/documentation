@@ -80,8 +80,8 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 ## CI Visibility
 
 * Datadog tracks the number of unique committers who send test and pipeline data to the CI Visibility service.
-* A **committer** means an active git committer; identified by their git author email address. A committer is counted towards billing if they commit at least 3 times in a given month.
-  * In the event that a pipeline is not associated to a git repository, or git metadata is unavailable, the username of the person triggering the pipeline execution is used as the billable committer.
+* A **committer** means an active git committer, identified by their git author email address. A committer is counted towards billing if they commit at least three times in a given month.
+  * In the event that a pipeline is not associated with a git repository, or git metadata is unavailable, the username of the person triggering the pipeline execution is used as the billable committer.
 * For Pipeline Visibility, every pipeline, pipeline stage, and pipeline job counts as a **pipeline span**. For Testing Visibility, every individual test run counts as a **test span**.
 
 ## Troubleshooting
