@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 Alert graphs are timeseries graphs showing the current status of most monitors defined on your system:

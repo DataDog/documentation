@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The notes and links widget is similar to [free text widget][1], but allows for more formatting options.

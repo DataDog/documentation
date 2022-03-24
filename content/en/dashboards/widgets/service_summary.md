@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The service summary displays the graphs of a chosen [service][1] in your screenboard.
