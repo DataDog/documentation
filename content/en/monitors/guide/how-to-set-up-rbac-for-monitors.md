@@ -205,7 +205,7 @@ Clicking **Save** without making any changes also performs the update for your m
 
 **2. You want to restrict your monitor to some roles**
 
-Select the roles you want this monitor to be restricted to and save your monitor. The update of your monitor from non locked to restricted to some roles is performed automatically on save.
+In the **Restrict editing of this monitor to** dropdown menu, select the roles that can modify this monitor. Save the monitor. Monitor is restricted to the roles you selected.
 
 ## Further reading
 
