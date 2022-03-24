@@ -140,7 +140,7 @@ Editing includes any updates to the monitor configuration, deleting the monitor,
 
 **Note**: The limitations are applied both in the UI and API.
 
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the [dedicated guide][21].
+For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][21].
 
 ## Test notifications
 
