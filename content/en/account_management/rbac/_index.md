@@ -41,11 +41,9 @@ Datadog Read Only Role
 
 ## Custom roles
 
-Manage your custom roles through the Datadog site, the [Datadog Role API][6], or SAML directly. Find instructions below on how to create, update, or delete a role. See [Datadog Role Permissions][7] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
+The custom roles feature gives your organization the ability to create new roles with unique permission sets. Manage your custom roles through the Datadog site, the [Datadog Role API][6], or SAML directly. Find out below how to create, update, or delete a role. See [Datadog Role Permissions][7] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
 
 ### Enable custom roles
-
-Enabling custom roles gives your organization the ability to create new roles with unique permission sets. Manage your custom roles through the Datadog site, the [Datadog Role API][6], or SAML directly. Find below how to create, update, or delete a role. See [Datadog Role permissions][7] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
 
 1. Navigate to [Organization Settings][8]. 
 2. On the left side of the page, select **Roles**.
@@ -131,6 +129,11 @@ Once a role is deleted, permissions are updated for all users with the role. Use
 {{% tab "API" %}}
 
 Find an example of how to delete a role in the [Delete Role API reference][1].
+
+
+[1]: /api/latest/roles/#delete-role
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Clone a role
 
