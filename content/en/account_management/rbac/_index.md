@@ -45,10 +45,14 @@ Manage your custom roles through the Datadog site, the [Datadog Role API][6], or
 
 ### Enable custom roles
 
+Enabling custom roles gives your organization the ability to create new roles with unique permission sets. Manage your custom roles through the Datadog site, the [Datadog Role API][6], or SAML directly. Find below how to create, update, or delete a role. See [Datadog Role permissions][7] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
+
 1. Navigate to [Organization Settings][8]. 
 2. On the left side of the page, select **Roles**.
 3. Click the gear in the upper right corner. The Custom Roles popup appears.
 4. In the Custom Roles popup, click **Enable**.
+
+{{< img src="account_management/rbac/enable_custom_roles.png" alt="Custom Roles popup with Enable button" style="width:90%;">}}
 
 ### Create a custom role
 
