@@ -52,6 +52,8 @@ The custom roles feature gives your organization the ability to create new roles
 
 {{< img src="account_management/rbac/enable_custom_roles.png" alt="Custom Roles popup with Enable button" style="width:90%;">}}
 
+Alternatively, making a POST call to the [Create Role API endpoint][9] automatically enables Custom Roles for your organization.
+
 ### Create a custom role
 
 {{< tabs >}}
@@ -148,6 +150,8 @@ To clone an existing role:
 4. If you would like, modify the name or permissions of the role.
 5. Click the **Save** button at the bottom.
 
+{{< img src="account_management/rbac/clone_role.png" alt="List of two roles with Clone button highlighted" style="width:90%;">}}
+
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
@@ -161,7 +165,7 @@ Find an example of how to clone a role in the [Cloning A Role API reference][1].
 
 ## Restrict access to dashboards and monitors
 
-Once you have RBAC roles set up, you can restrict access to dashboards, monitors, and synthetic tests by user role. For more information, see [Dashboard Permissions][9], [Monitors Permissions][10], and [Synthetics Permissions][11].
+Once you have RBAC roles set up, you can restrict access to dashboards, monitors, and synthetic tests by user role. For more information, see [Dashboard Permissions][10], [Monitors Permissions][11], and [Synthetics Permissions][12].
 
 ## Further Reading
 
@@ -175,6 +179,7 @@ Once you have RBAC roles set up, you can restrict access to dashboards, monitors
 [6]: /api/v2/roles/
 [7]: /account_management/rbac/permissions/
 [8]: https://app.datadoghq.com/organization-settings/
-[9]: /dashboards/#permissions
-[10]: /monitors/notify/#permissions
-[11]: /synthetics/browser_tests/#permissions
+[9]: /api/latest/roles/#create-role
+[10]: /dashboards/#permissions
+[11]: /monitors/notify/#permissions
+[12]: /synthetics/browser_tests/#permissions
