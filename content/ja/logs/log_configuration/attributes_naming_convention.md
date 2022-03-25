@@ -1,23 +1,24 @@
 ---
-title: 属性とエイリアス設定
-kind: documentation
-description: 属性と命名規則の遵守について
 aliases:
-  - /ja/logs/processing/attributes_naming_convention/
+- /ja/logs/processing/attributes_naming_convention/
+description: 属性と命名規則の遵守について
 further_reading:
-  - link: logs/log_configuration/pipelines
-    tag: ドキュメント
-    text: Datadog のパイプライン
-  - link: logs/log_configuration/processors
-    tag: ドキュメント
-    text: 使用可能なプロセッサーのリスト
-  - link: logs/logging_without_limits
-    tag: ドキュメント
-    text: 無制限のログ
-  - link: logs/explorer
-    tag: ドキュメント
-    text: ログの調査方法
+- link: logs/log_configuration/pipelines
+  tag: ドキュメント
+  text: Datadog のパイプライン
+- link: logs/log_configuration/processors
+  tag: ドキュメント
+  text: 使用可能なプロセッサーのリスト
+- link: logs/logging_without_limits
+  tag: ドキュメント
+  text: 無制限のログ
+- link: logs/explorer
+  tag: ドキュメント
+  text: ログの調査方法
+kind: documentation
+title: 属性とエイリアス設定
 ---
+
 ## 概要
 
 さまざまなテクノロジーやアプリケーションから取得されるログを一元化すると、ログ管理環境に数十個から数百個の属性が生成されます。特に多数のチームのユーザーが同じ環境内で作業している場合は、その傾向が顕著です。
@@ -182,7 +183,7 @@ further_reading:
 | **完全名**   | **型** | **説明**                                                                                                                       |
 | :------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------ |
 | `db.instance`  | `string` | データベースインスタンス名。たとえば、Java で `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"` の場合、インスタンス名は `customers` です。       |
-| `db.statement` | `string` | 指定されたデータベースタイプのデータベースステートメント。たとえば、mySQL の場合は `"SELECT * FROM wuser_table"、Redis の場合は `"SET mykey 'WuValue'"` です。 |
+| `db.statement` | `string` | 指定されたデータベースタイプのデータベースステートメント。たとえば、mySQL の場合は `"SELECT * FROM wuser_table";`、Redis の場合は `"SET mykey 'WuValue'"` です。 |
 | `db.operation` | `string` | 実行された処理 ("query"、"update"、"delete" など)。                                                                   |
 | `db.user`      | `string` | 処理を実行するユーザー。                                                                                                     |
 
@@ -220,7 +221,7 @@ Datadog ではこの属性を[トレース検索][20]のデフォルトの[メ�
 | `syslog.timestamp` | `string` | ログのタイムスタンプ。通常は、予約済み属性 `date` に再マップされます。       |
 | `syslog.env`       | `string` | ログのソースが由来する環境名。                      |
 
-これらに依存するインテグレーションには、[Rsyslog][21]、[NxLog][22]、[Syslog-ng][23]、[Fluentd][24]、[Logstash][25] などがあります。
+これらに依存するインテグレーションには、[Rsyslog][21]、[NxLog][22]、[Syslog-ng][23]、[Fluentd][24]、[Logstash][25] があります。
 
 #### DNS
 
@@ -231,7 +232,7 @@ Datadog ではこの属性を[トレース検索][20]のデフォルトの[メ�
 | `dns.id`             | `string` | DNS のクエリ識別子。                                                 |
 | `dns.question.name`  | `string` | クエリ対象のドメイン名。                                                  |
 | `dns.question.type`  | `string` | DNS の質問の種類を指定する [2 オクテットのコード][26]。             |
-| `dns.question.class` | `string` | DNS の質問で検索されるクラス (インターネットを使用する場合は IN など) 。 |
+| `dns.question.class` | `string` | DNS の質問で検索されるクラス (インターネットを使用する場合は IP など) 。 |
 | `dns.question.size`  | `number` | DNS 質問のバイトサイズ。                                           |
 | `dns.answer.name`    | `string` | DNS で回答する際の IP アドレス。                                 |
 | `dns.answer.type`    | `string` | DNS の回答の種類を指定する [2 オクテットのコード][26]。               |
