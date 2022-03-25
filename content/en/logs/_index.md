@@ -4,8 +4,8 @@ kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 disable_sidebar: true
 aliases:
-    - /guides/logs/
-    - /logs/logging_without_limits
+  - /guides/logs/
+  - /logs/logging_without_limits
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
     tag: "Release Notes"

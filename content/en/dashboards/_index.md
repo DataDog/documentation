@@ -2,13 +2,13 @@
 title: Dashboards
 kind: documentation
 aliases:
-    - /guides/templating/
-    - /graphing/dashboards/
-    - /guides/graphing
-    - /graphing/miscellaneous/metrics_arithmetic
-    - /graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
-    - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
-    - /graphing/
+  - /guides/templating/
+  - /graphing/dashboards/
+  - /guides/graphing
+  - /graphing/miscellaneous/metrics_arithmetic
+  - /graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
+  - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
+  - /graphing/
 description: Visualize your data to gain insight
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Dashboards"

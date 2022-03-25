@@ -4,18 +4,18 @@ kind: documentation
 aliases:
   - /ci
 further_reading:
-    - link: "https://app.datadoghq.com/release-notes?category=CI%20Visibility"
-      tag: "Release Notes"
-      text: "Check out the latest CI Visibility releases! (App login required)."
-    - link: "/continuous_integration/explore_pipelines/"
-      tag: "Documentation"
-      text: "Start exploring pipeline data to resolve build problems"
-    - link: "/continuous_integration/explore_tests/"
-      tag: "Documentation"
-      text: "Start exploring tests data to find and fix problem tests"
-    - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
-      tag: "Blog"
-      text: "Monitor your CircleCI environment with Datadog"
+  - link: "https://app.datadoghq.com/release-notes?category=CI%20Visibility"
+    tag: "Release Notes"
+    text: "Check out the latest CI Visibility releases! (App login required)."
+  - link: "/continuous_integration/explore_pipelines/"
+    tag: "Documentation"
+    text: "Start exploring pipeline data to resolve build problems"
+  - link: "/continuous_integration/explore_tests/"
+    tag: "Documentation"
+    text: "Start exploring tests data to find and fix problem tests"
+  - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
+    tag: "Blog"
+    text: "Monitor your CircleCI environment with Datadog"
 ---
 
 {{< site-region region="gov" >}}

@@ -3,21 +3,21 @@ title: Alerting
 kind: documentation
 disable_sidebar: true
 aliases:
-    - /guides/monitors/
-    - /guides/monitoring/
-    - /guides/alerting/
-    - /guides/monitors/the-conditions
+  - /guides/monitors/
+  - /guides/monitoring/
+  - /guides/alerting/
+  - /guides/monitors/the-conditions
 description: "Create monitors, notify your teams when it matters, and manage your monitors using the alerting platform"
 further_reading:
-    - link: "https://app.datadoghq.com/release-notes?category=Alerting"
-      tag: "Release Notes"
-      text: "Check out the latest Datadog Alerting releases! (App login required)."
-    - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
-      tag: "Blog"
-      text: "Monitoring 101: Alerting on what matters"
-    - link: "/api/v1/monitors/"
-      tag: "Documentation"
-      text: "Datadog Monitors API"
+  - link: "https://app.datadoghq.com/release-notes?category=Alerting"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Alerting releases! (App login required)."
+  - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
+    tag: "Blog"
+    text: "Monitoring 101: Alerting on what matters"
+  - link: "/api/v1/monitors/"
+    tag: "Documentation"
+    text: "Datadog Monitors API"
 ---
 
 ## Overview
