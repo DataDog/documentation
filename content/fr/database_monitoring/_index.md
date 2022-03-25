@@ -37,7 +37,7 @@ La solution Database Monitoring de Datadog prend en charge la surveillance des v
 
 ## Explorer la solution Database Monitoring de Datadog
 
-Accédez à la surveillance de base de données en cliquant sur **[APM > Databases][1]** depuis l'interface.
+Accédez à Database Monitoring en cliquant sur **[APM > Databases][1]** depuis l'interface.
 
 ### Analysez les métriques de performance de vos requêtes
 
@@ -71,7 +71,7 @@ Les [plans d'exécution][4] vous aident à comprendre comment la base de donnée
 
 ### Visualisez toutes vos données sur des dashboards enrichis
 
-Identifiez rapidement les problèmes en visualisant vos métriques de base de données et vos métriques système sur des dashboards d'intégration détaillés pour les instances auto-hébergées et celles gérées dans le cloud. Clonez des dashboards pour les personnaliser et les enrichir avec vos propres métriques. Cliquez sur le lien **Dashboards** en haut des pages Query Metrics et Query Samples pour accéder aux dashboards de surveillance de base de données.
+Identifiez rapidement les problèmes en visualisant vos métriques de base de données et vos métriques système sur des dashboards d'intégration détaillés pour les instances auto-hébergées et celles gérées dans le cloud. Clonez des dashboards pour les personnaliser et les enrichir avec vos propres métriques. Cliquez sur le lien **Dashboards** en haut des pages Query Metrics et Query Samples pour accéder aux dashboards Database Monitoring.
 
 {{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="Database Monitoring" style="width:100%;">}}
 

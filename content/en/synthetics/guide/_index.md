@@ -31,4 +31,5 @@ private: true
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manage-browser-tests-through-the-api/" >}}Manage your browser tests programmatically{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of the RUM Explorer in Synthetics{{< /nextlink >}}
 {{< /whatsnext >}}

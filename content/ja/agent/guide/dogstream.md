@@ -237,7 +237,7 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## トラブルシューティング
 
-バグが発生した場合、ログパーサーからのトレースバックを確認できることがたいへん重要です。それには、[Agent ログ][6]を "DEBUG" レベルに設定して Agent を実行します。Agent のログレベルを設定するには、`datadog.conf` で、[この行][7]のコメントを解除して編集した後、[Agent を再起動][8]します。適切に設定すると、カスタムログパーサーのエラーから生成されたトレースバックを `collector.log` ファイルで確認できます。通常、トレースバックには "checks.collector(datadog.py:278) | Error while parsing line" のような文字列が含まれます。(エラーを生成する [Agent コードサンプル][9]もご参照ください)。
+バグが発生した場合、ログパーサーからのトレースバックを確認できることが重要です。それには、[Agent ログ][6]を "DEBUG" レベルに設定して Agent を実行します。Agent のログレベルを設定するには、`datadog.conf` で、[この行][7]のコメントを解除して編集した後、[Agent を再起動][8]します。適切に設定すると、カスタムログパーサーのエラーから生成されたトレースバックを `collector.log` ファイルで確認できます。通常、トレースバックには "checks.collector(datadog.py:278) | Error while parsing line" のような文字列が含まれます。(エラーを生成する [Agent コードサンプル][9]もご参照ください)。
 
 **注**: カスタムログパーサーに変更を加えた場合は必ず、[Agent を再起動][8]して、変更を有効にしてください。
 

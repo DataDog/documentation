@@ -1,7 +1,11 @@
 {
+  "audit": {
+    "name": "Audit",
+    "description": "Search your Audit Logs events over HTTP."
+  },
   "authn-mappings": {
     "name": "AuthN Mappings",
-    "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers."
+    "description": "[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers."
   },
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
@@ -50,6 +54,10 @@
   "processes": {
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization."
+  },
+  "rum": {
+    "name": "RUM",
+    "description": "Search your RUM events over HTTP."
   },
   "roles": {
     "name": "Roles",

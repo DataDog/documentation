@@ -62,10 +62,10 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 
 {{< img src="metrics/distributions/percentile_monitor.jpg" alt="Percentile threshold being set with a drop down for alert conditions in a monitor " style="width:80%;">}}
 
-### Threshold Queries for SLOs (beta) 
+### Threshold Queries for SLOs
 
 <div class="alert alert-warning">
-Threshold queries are in beta. 
+Threshold queries are in public beta.
 </div>
 
 Enabling DDSketch-calculated globally-accurate percentiles on your distribution metrics unlocks threshold queries for SLOs where you can count the number of raw distribution metric values if they exceed or fall below a numerical threshold. So for example, you can define SLOs for the past 30 days where the p95 request latency is < 10 seconds. 

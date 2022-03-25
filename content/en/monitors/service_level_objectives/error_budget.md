@@ -52,7 +52,7 @@ resource "datadog_monitor" "metric-based-slo" {
     EOT
 
     message = "Example monitor message"
-    monitor_thresholds = {
+    monitor_thresholds {
       critical = 75
     }
     tags = ["foo:bar", "baz"]

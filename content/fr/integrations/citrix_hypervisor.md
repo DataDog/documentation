@@ -26,7 +26,7 @@ git_integration_title: citrix_hypervisor
 guid: d6c1911b-f7fd-4537-af4f-1aa40dae40c2
 integration_id: citrix-hypervisor
 integration_title: "Citrix\_Hypervisor"
-integration_version: 1.0.1
+integration_version: 2.0.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

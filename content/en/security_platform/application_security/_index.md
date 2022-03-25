@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-application-security/"
   tag: "Blog"
   text: "Introducing Datadog Application Security"
+- link: "/security_platform/guide/how-appsec-works/"
+  tag: "Documentation"
+  text: "How Application Security Works in Datadog"
 ---
 
 <div class="alert alert-warning">

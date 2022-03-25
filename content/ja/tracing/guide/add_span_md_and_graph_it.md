@@ -1,5 +1,5 @@
 ---
-title: スパンタグを追加し、アプリケーションのパフォーマンスを分類する
+title: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
 kind: ガイド
 further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
@@ -244,7 +244,7 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 ## カスタムスパンタグを Analytics で活用する
 
-4) **[トレース検索ページ][6]**に移動します。
+4) **[トレースエクスプローラーページ][6]**に移動します。
 
 トレース検索ページでは、関心のある特定の[トレース][1]とインデックス化スパンを特定できます。ここでは、時間によってデフォルトタグ (`Env`、`Service`、`Resource` など、[さまざまなタグ][7]) にフィルターをかけることができます。
 
@@ -262,7 +262,7 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 6) **[Analytics][8] ページに移動します**。
 
-Analytics は、クエリを作成し無限濃度でトレースの調査を実施できる視覚的ツールです。ファセットを使用して、クエリにフィルターとスコープを設定します。詳細については、[トレース検索と Analytics の概要][9]をご確認ください。
+Analytics は、クエリを作成し無限濃度でトレースの調査を実施できる視覚的ツールです。ファセットを使用して、クエリにフィルターとスコープを設定します。詳細については、[トレースエクスプローラーの概要][9]をご確認ください。
 
 7) サービスファセット一覧で作業中の**サービスを選択**し、ファセットのステータスで **Error を選択**したら、group by フィールドで **`customer_id`** (またはスパンに追加した他のタグ) を選択します。
 
@@ -288,7 +288,7 @@ Analytics は、クエリを作成し無限濃度でトレースの調査を実�
 [4]: /ja/tracing/visualization/#resources
 [5]: /ja/tracing/visualization/#services
 [6]: https://app.datadoghq.com/apm/search
-[7]: /ja/tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[7]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
-[9]: /ja/tracing/trace_search_and_analytics/query_syntax/
+[9]: /ja/tracing/trace_explorer/query_syntax/
 [10]: /ja/tracing/guide/alert_anomalies_p99_database/

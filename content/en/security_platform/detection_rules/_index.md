@@ -5,12 +5,15 @@ aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/
 further_reading:
-- link: "cloud_siem/default_rules"
+- link: "/cloud_siem/default_rules"
   tag: "Documentation"
   text: "Explore default detection rules"
 - link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
   tag: "Blog"
   text: "Detect Abuse of Functionality with Datadog"
+- link: "https://www.datadoghq.com/blog/impossible-travel-detection-rules/"
+  tag: "Blog"
+  text: "Detect suspicious login activity with impossible travel detection rules"
 ---
 
 ## Overview
