@@ -70,8 +70,6 @@ To execute the remaining actions in this guide, your user account requires the D
 
 Check in the [Users list][8] that you have all these permissions. If you are missing any, ask a Datadog Admin user to set them for you.
 
-TODO check/remove screenshot
-{{< img src="logs/guide/rbac/admin_permissions.png" alt="Check your permissions as an admin"  style="width:60%;">}}
 
 ### Get an API key and an app key
 
@@ -128,9 +126,6 @@ When creating a new role:
 
 * Create with Standard Access.
 * Grant Read Index Data and Live Tail permissions—these are [legacy permissions][2] that you can safely enable.
-
-TODO: Update screenshot to reflect new roles UI.
-{{< img src="logs/guide/rbac/minimal_permissions.png" alt="Grant minimal permissions"  style="width:60%;">}}
 
 More information on creating roles is available in the [Account Management][3] section.
 
