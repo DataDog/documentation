@@ -114,8 +114,9 @@ Find an example of how to update a role in [Update Role API Reference][1].
 To delete a custom role:
 
 1. Go to your [Datadog Roles page][1].
-2. Select the delete button on the role you would like to delete.
-3. Confirm your decision.
+2. Hover over the role you would like to delete. A series of buttons appears to the right.
+3. Select the delete button on the role you would like to delete.
+4. Confirm your decision.
 
 
 Once a role is deleted, permissions are updated for all users with the role. Users without any roles cannot use Datadog effectively, but still maintain limited access.
@@ -127,8 +128,27 @@ Once a role is deleted, permissions are updated for all users with the role. Use
 
 Find an example of how to delete a role in the [Delete Role API reference][1].
 
+### Clone a role
 
-[1]: /api/latest/roles/#delete-role
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+To clone an existing role:
+
+1. Go to your [Datadog Roles page][1].
+2. Hover over the role you would like to clone. A series of buttons appears to the right.
+3. Select the clone button on the role you would like to delete.
+4. If you would like, modify the name or permissions of the role.
+5. Click the **Save** button at the bottom.
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+Find an example of how to clone a role in the [Cloning A Role API reference][1].
+
+[1]: /api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
 {{% /tab %}}
 {{< /tabs >}}
 
