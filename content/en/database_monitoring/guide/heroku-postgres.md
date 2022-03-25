@@ -10,7 +10,7 @@ further_reading:
 
 This guide assumes that you have configured the [Datadog Heroku buildpack][1] in your application dynos.
 
-[Datadog Database Monitoring][2] allows you to view query metrics and explain plans from all of your databases in a single place. This guide will cover how to set it up for [Heroku Postgres managed database][3].
+[Datadog Database Monitoring][2] allows you to view query metrics and explain plans from all of your databases in a single place. This guide covers how to set up Database Monitoring for a [Heroku Postgres managed database][3].
 
 *Note*: Only databases in the [Standard and Premium plans][4] publish metrics used by the integration. Not all the features of Database Monitoring are available when used with a Postgres instance in the Hobby plan.
 
@@ -24,7 +24,7 @@ heroku pg:credentials:create --name datadog
 heroku addons:attach <database-name> --credential datadog
 ```
 
-Attaching the new credential to the application will create a new environment variable in your application with the connection URL. Note that environment variable, as we use it later.
+Attaching the new credential to the application creates a new environment variable in your application with the connection URL. Note that environment variable, as you will use it later.
 
 Login to your Postgres database using the default credentials and give the `datadog` credential the right permissions:
 
@@ -83,7 +83,7 @@ instances:
     ssl: True
 ```
 
-Using the environment variable that was created when the `datadog` credential was attached to the application (in the example below we assume this is `HEROKU_POSTGRESQL_PINK_URL`, add the following to the [prerun script][5] to replace those values before starting the Datadog Agent:
+Using the environment variable that was created when the `datadog` credential was attached to the application (in the example below, this is assumed to be `HEROKU_POSTGRESQL_PINK_URL`) add the following to the [prerun script][5] to replace those values before starting the Datadog Agent:
 
 ```shell
 #!/usr/bin/env bash
