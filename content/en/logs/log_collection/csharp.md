@@ -249,7 +249,7 @@ If you have followed the instructions you should see in your file (for example `
 }
 ```
 
-If, despite the benefits of logging in JSON, you wish to log in raw string format, we recommend you update the `log4net conversion pattern` to automatically parse your logs with the C# integration Pipeline as follows:
+If, despite the benefits of logging in JSON, you wish to log in raw string format, try updating the `log4net conversion pattern` to automatically parse your logs with the C# integration Pipeline as follows:
 
 ```text
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
@@ -316,6 +316,20 @@ using (var log = new LoggerConfiguration()
 ```
 
 {{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
+    .CreateLogger())
+{
+    // Some code
+}
+```
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 ```csharp

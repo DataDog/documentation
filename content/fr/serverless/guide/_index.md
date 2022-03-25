@@ -2,17 +2,21 @@
 title: Guides d'utilisation de la surveillance sans serveur
 kind: guide
 ---
-Utilisez ces guides pour configurer les métriques, les traces et les logs dans votre écosystème sans serveur.
 
-- Premièrement, nous allons configurer les **métriques Lambda optimisées de Datadog** pour découvrir comment représenter graphiquement les démarrages à froid dans votre infrastructure Lambda.
-- Deuxièmement, nous activerons l'**ingestion de logs** Lambda et nous verrons comment parcourir les logs d'erreurs Lambda. Troisièmement, nous présenterons des outils conçus pour vous permettre d'identifier rapidement la cause réelle d'un problème en activant le **tracing distribué** Lambda.
-- Enfin, nous verrons comment surveiller des **métriques custom** et des services dans votre écosystème sans serveur.
+{{< whatsnext desc="Sections liées au Forwarder Datadog :" >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Installer la surveillance sans serveur avec le Forwarder Datadog pour Node.js{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Installer la surveillance sans serveur avec le Forwarder Datadog pour Python{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Installer la surveillance sans serveur avec le Forwarder Datadog pour Java{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Installer la surveillance sans serveur avec le Forwarder Datadog pour Go{{< /nextlink >}}
+{{< /whatsnext >}}
 
-# Choisissez votre langage
+{{< whatsnext desc="Sections liées à l'extension Lambda Datadog :" >}}
+    {{< nextlink href="/serverless/guide/extension_motivation" >}}Choisir s'il est pertinent de migrer vers l'extension Lambda Datadog{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/forwarder_extension_migration" >}}Migration depuis le Forwarder Datadog vers l'extension Lambda Datadog{{< /nextlink >}}
+{{< /whatsnext >}}
 
-{{< partial name="serverless/serverless-guide.html" >}}
-
-<br></br>  
-Pour les autres langages, la [documentation sur l'intégration AWS Lambda][1] offre des instructions de configuration plus détaillées.
-
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/#overview
+{{< whatsnext desc="Dépannage :" >}}
+    {{< nextlink href="/serverless/guide/troubleshoot_serverless_monitoring" >}}Dépannage de la surveillance sans serveur{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Tracing Lambda Node.js et compatibilité de webpack{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}Dépannage des erreurs de packages trop volumineux pour la surveillance sans serveur{{< /nextlink >}}
+{{< /whatsnext >}}

@@ -5,6 +5,9 @@ further_reading:
   - link: /api/latest/using-the-api/
     tag: Documentation
     text: Using the API
+  - link: /api/latest/scopes/
+    tag: Documentation
+    text: Authorization Scopes
   - link: /api/latest/rate-limits/
     tag: Documentation
     text: Rate Limits

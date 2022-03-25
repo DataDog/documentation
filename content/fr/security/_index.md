@@ -18,7 +18,7 @@ further_reading:
     tag: Documentation
     text: Considérations de sécurité supplémentaires
 ---
-<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Security Monitoring, consultez la section <a href="/security_monitoring" target="_blank">Security Monitoring</a>.</div>
+<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Cloud SIEM, consultez la section <a href="/security_platform/cloud_siem" target="_blank">Cloud SIEM</a>.</div>
 
 Datadog permet aux clients d'envoyer des données de différentes façons, par exemple, via l'[Agent][1], l'[API publique][2] et les [intégrations][3]. Cet article décrit les principales catégories de données que les clients peuvent transmettre à Datadog pour l'utilisation prévue de ce produit, et met en avant des scénarios dans lesquels les données transmises peuvent contenir des données personnelles. Consultez notre [page relative à la sécurité][4] et notre [politique de confidentialité][5] pour en savoir plus.
 
@@ -33,6 +33,10 @@ Les métriques d'infrastructure sont des séries temporelles représentant des n
 ## APM
 
 Les données de l'APM se divisent en quatre niveaux de granularité : les services, les ressources, les traces et les spans. Consultez la section [Débuter avec l'APM][7] pour en savoir plus sur chaque niveau. Les services et les ressources ne doivent pas contenir de données personnelles pour l'utilisation prévue du service. Si besoin, les clients doivent tirer parti de certaines fonctionnalités de l'Agent pour restreindre les données personnelles avant de transmettre les traces et les spans à Datadog. Consultez la page [Sécurité de l'APM][8] pour en savoir plus.
+
+## Surveillance de bases de données
+
+Avec la surveillance de bases de données, l'Agent recueille des métriques et des échantillons permettant de surveiller les performances historiques de requêtes normalisées. La granularité de ces données est définie par leur signature de requête normalisée et l'identifiant unique du host. La surveillance de bases de données ne transmet pas de données personnelles. Tous les paramètres de requête sont obfusqués et supprimés des échantillons recueillis avant leur envoi à Datadog.
 
 ## Logs
 

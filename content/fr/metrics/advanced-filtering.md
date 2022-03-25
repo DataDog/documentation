@@ -16,9 +16,9 @@ further_reading:
 
 ## Présentation
 
-Que vous utilisiez des monitors, des dashboards, des notebooks ou le Metrics Explorer pour interroger les données de vos métriques, vous pouvez filtrer les données afin d'affiner le contexte des séries temporelles renvoyées. Il est possible de filtrer n'importe quelle métrique en fonction d'un ou de plusieurs tags. Pour ce faire, utilisez le **menu déroulant** situé à droite de la métrique.
+Que vous utilisiez des monitors, des dashboards ou le Metrics Explorer pour interroger les données de vos métriques, vous pouvez filtrer les données afin d'affiner le contexte des séries temporelles renvoyées. Il est possible de filtrer toutes les métriques en fonction d'un ou de plusieurs tags. Pour ce faire, utilisez le **menu déroulant** situé à droite de la métrique.
 
-{{< img src="metrics/advanced-filtering/tags.png" alt="Filtrer avec des tags"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/tags.png" alt="Filtrer avec des tags" style="width:80%;" >}}
 
 Vous pouvez également appliquer un filtrage avancé à l'aide de filtres de valeur de tag basés sur des booléens ou des wildcards.
 
@@ -43,20 +43,20 @@ Vous pouvez utiliser la syntaxe suivante pour générer des requêtes de métriq
 avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/ex1.png" alt="Exemple 1"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/ex1.png" alt="Exemple 1" style="width:80%;" >}}
 
 ```
 avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1b, us-east4-b)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/ex2.gif" alt="Exemple 2"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/ex2.mp4" alt="Exemple 2" video=true style="width:80%;" >}}
 
 
 ```
 avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 ```
 
-{{< img src="metrics/advanced-filtering/NOTIN.jpg" alt="Exemple 3"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/NOTIN.jpg" alt="Exemple 3" style="width:80%;" >}}
 
 
 ### Requêtes avec des filtres basés sur des wildcards
@@ -74,13 +74,13 @@ Vous pouvez utiliser un wildcard afin d'inclure plusieurs valeurs de préfixe et
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcards1.gif" alt="Exemple 1"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/wildcards1.mp4" alt="Exemple 1" video=true style="width:80%;" >}}
 
 ```
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="Exemple 2"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="Exemple 2" style="width:80%;" >}}
 
 
 ## Pour aller plus loin

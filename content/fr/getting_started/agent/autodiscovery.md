@@ -35,7 +35,7 @@ L'Agent recherche des événements de création, destruction, démarrage ou enco
 
 ## Fonctionnement
 
-{{< img src="agent/autodiscovery/ad_1.png" alt="Présentation d'Autodiscovery"  style="width:80%;">}}
+{{< img src="agent/autodiscovery/ad_1.png" alt="Présentation d'Autodiscovery" style="width:80%;">}}
 
 Le schéma ci-dessus représente un nœud de host avec trois pods, notamment un pod Redis et un pod d'Agent. Le Kubelet, qui planifie les conteneurs, s'exécute en tant que binaire sur ce nœud et expose les endpoints `/metrics` et `/pods`. Toutes les 10 secondes, l'Agent interroge `/pods` et trouve les spécifications Redis. Il peut également consulter les informations sur le pod Redis.
 
@@ -62,7 +62,7 @@ annotations:
 
 Dans l'exemple ci-dessus, les étiquettes `tags.datadoghq.com` sont utilisées pour appliquer les valeurs `env`, `service` et même `version` sous forme de tags à l'ensemble des logs et métriques envoyés par le pod Redis. Ces étiquettes standard font partie du système de [tagging de service unifié][3]. Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous configurez des tags et des variables d'environnement.
 
-`check_names` comprend les noms des checks à exécuter, tandis qu'`init_configs` indique certains paramètres de configuration, comme l'intervalle minimum de collecte. Chaque élément d'`instances` représente la configuration à exécuter sur une instance d'un check. À noter qu'ici, `%%host%%` est une template variable dont la valeur correspond automatiquement à l'adresse IP de votre conteneur.
+`check_names` comprend les noms des checks à exécuter, tandis qu'`init_configs` indique certains paramètres de configuration, comme l'intervalle minimum de collecte. Chaque élément d'`instances` représente la configuration à exécuter sur une instance d'un check. **Remarque** : ici, `%%host%%` est une template variable dont la valeur correspond automatiquement à l'adresse IP de votre conteneur.
 
 L'Agent génère ainsi une configuration de check statique.
 
@@ -71,7 +71,7 @@ L'Agent génère ainsi une configuration de check statique.
 Il vous suffit de suivre les deux étapes suivantes pour configurer Autodiscovery pour votre infrastructure :
 
 1. [Activez Autodiscovery](#activer-autodiscovery) sur votre Agent Datadog.
-2. Créez des [modèles de configuration spécifiques à chaque intégration](#modeles-d-integration) pour chaque service à surveiller. Sachez que Datadog fournit des modèles de configuration automatique pour [certains services conteneurisés de base][4], tels qu'Apache et Redis.
+2. Créez des [modèles de configuration spécifiques à chaque intégration](#modeles-d-integration) pour chaque service à surveiller. **Remarque** : Datadog fournit des modèles de configuration automatique pour [certains services conteneurisés populaires][4], comme Apache et Redis.
 
 ### Activer Autodiscovery
 
@@ -148,9 +148,9 @@ ECS_FARGATE=true
 
 ### Modèles d'intégration
 
-Une fois la fonction Autodiscovery activée, l'Agent Datadog essaie automatiquement de l'utiliser [pour un certain nombre de services][4], notamment Apache et Redis, en se basant sur les fichiers de configuration Autodiscovery par défaut.
+Une fois la fonction Autodiscovery activée, l'Agent Datadog essaie automatiquement de l'utiliser pour plusieurs [services][4], notamment Apache et Redis, en se basant sur les fichiers de configuration Autodiscovery par défaut.
 
-Vous pouvez définir un modèle d'intégration de plusieurs façons : avec des annotations de pod Kubernetes, des étiquettes Docker, un fichier de configuration monté sur l'Agent, une ConfigMap ou encore des stockages key-value.
+Vous pouvez définir un modèle d'intégration de plusieurs façons : avec des annotations de pod Kubernetes, des étiquettes Docker, un fichier de configuration monté sur l'Agent, une ConfigMap ou encore des stockages key/value.
 
 Dans l'exemple suivant, les étiquettes Kubernetes `tags.datadoghq.com` sont utilisées pour appliquer les valeurs `env`, `service` et `version` sous forme de tags aux données du pod.
 

@@ -9,9 +9,9 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
 
-Your monthly billable volume for custom metrics (reflected on the Usage page) is calculated from the average number of distinct custom metrics over all hours in the current month.
+Your monthly billable count for custom metrics (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value.
 
-Metrics without Limits™ users will see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][3]. 
+Metrics without Limits™ users see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][3]. 
 
 ## Counting custom metrics
 
@@ -61,7 +61,7 @@ The count of custom metrics reporting from `temperature` scales with the most gr
 
 Suppose you also wanted to tag your temperature metric by `state` (which has two values: `NY` and `Florida`). This means you are tagging temperature by the tags: `country`, `region`, `state`, and `city`. Adding the state tag doesn't increase the level of granularity already present in your dataset provided by the city tag.
 
-To obtain the temperature in Florida, you can simply recombine the custom metrics of:
+To obtain the temperature in Florida, you can recombine the custom metrics of:
 
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
@@ -80,14 +80,20 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
-#### When will you be charged for ingested vs indexed custom metrics?
-If a metric is not configured with Metrics without Limits™, you're only charged for indexed custom metrics.
+#### When are you charged for ingested vs indexed custom metrics?
+For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
 
-{{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured Metrics have indexed custom metrics only" style="width:80%;">}}
+|                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics per host                             |
+| Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-If a metric is configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
+For metrics configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed custom metrics costs" style="width:80%;">}}
+|                                      | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
+|--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account Allotment                    | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
+| Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 Suppose you wanted to use Metrics without Limits™ to reduce the size of your `request.Latency` metric by keeping only the `endpoint` and `status` tags. This results in the following three unique tag combinations:
 
@@ -159,14 +165,20 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
-#### When will you be charged for ingested vs indexed custom metrics?
-If a metric is not configured with Metrics without Limits™, you're only charged for indexed custom metrics.
+#### When are you charged for ingested vs indexed custom metrics?
+For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
 
-{{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured metrics have indexed custom metrics only" style="width:80%;">}}
+|                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics per host                             |
+| Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-If a metric is configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
+For metrics configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed custom metrics costs" style="width:80%;">}}
+|                                      | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
+|--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account Allotment                    | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
+| Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
@@ -228,21 +240,27 @@ This table summarizes the effect of adding percentile aggregations to any distri
 
 ### Configure tags with Metrics without Limits™
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][4]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][2]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
 
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
-#### When will you be charged for ingested vs indexed custom metrics?
-If a metric is not configured with Metrics without Limits™, you're only charged for indexed custom metrics.
+#### When are you charged for ingested vs indexed custom metrics?
+For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
 
-{{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured Metrics have indexed custom metrics only" style="width:80%;">}}
+|                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics per host                             |
+| Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-If a metric is configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
+For metrics configured with Metrics without Limits™ (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed custom metrics costs" style="width:80%;">}}
+|                                      | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
+|--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Account Allotment                    | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
+| Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
 Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
 
@@ -261,10 +279,10 @@ Learn more about [Metrics without Limits™][2].
 
 ## Tracking custom metrics
 
-Administrative users (those with [Datadog Admin roles][5]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics  on the [usage details page][6]. See the [Usage Details][7] documentation for more information.
+Administrative users (those with [Datadog Admin roles][5]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics on the [usage details page][6]. See the [Usage Details][7] documentation for more information.
 
 For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][8]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
-{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.png" alt="Metrics Summary sidepanel" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Metrics Summary sidepanel" style="width:80%;">}}
 
 
 ## Allocation
@@ -278,7 +296,7 @@ These allocations are counted across your entire infrastructure. For example, if
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="Allocations for Custom Metrics"  >}}
 
-The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits™ to configure your metric.  Contact [Sales][9] or your [Customer Success][10] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
+The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits™ to configure your metric. Contact [Sales][9] or your [Customer Success][10] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
 ## Standard integrations
 
@@ -303,7 +321,7 @@ For billing questions, contact your [Customer Success][10] Manager.
 [3]: /metrics/metrics-without-limits
 [4]: /metrics/types/#metric-types
 [5]: /account_management/users/default_roles/
-[6]: https://app.datadoghq.com/account/usage/hourly
+[6]: https://app.datadoghq.com/billing/usage
 [7]: /account_management/billing/usage_details/
 [8]: https://app.datadoghq.com/metric/summary
 [9]: mailto:sales@datadoghq.com
@@ -314,11 +332,11 @@ For billing questions, contact your [Customer Success][10] Manager.
 [14]: /integrations/nagios/
 [15]: /integrations/pdh_check/
 [16]: /integrations/prometheus/
-[17]: /integrations/snmp/
-[18]: /integrations/windows_service/
-[19]: /integrations/wmi_check/
-[20]: /integrations/mysql/
-[21]: /integrations/oracle/
-[22]: /integrations/postgres/
-[23]: /integrations/sqlserver/
-[24]: /integrations/amazon_web_services/
+[17]: /integrations/windows_service/
+[18]: /integrations/wmi_check/
+[19]: /integrations/mysql/
+[20]: /integrations/oracle/
+[21]: /integrations/postgres/
+[22]: /integrations/sqlserver/
+[23]: /integrations/amazon_web_services/
+[24]: /help/

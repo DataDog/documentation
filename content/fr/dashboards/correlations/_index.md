@@ -58,7 +58,7 @@ Une liste de résultats s'affiche sous le graphique de recherche, avec les élé
 * **Correlations** : le nombre de métriques corrélées trouvées.
 * **Preview** : un graphique de prévisualisation des métriques corrélées.
 
-{{< img src="dashboards/correlations/search_results.png" alt="Résultats de la recherche" style="width:80%;">}}
+{{< img src="dashboards/correlations/search_results.png" alt="Résultats de recherche" style="width:80%;">}}
 
 Vous pouvez explorer les détails dès le début du chargement des résultats, sans avoir à attendre que celui-ci se termine. Lorsque la recherche est terminée, le message « Search completed! » s'affiche.
 

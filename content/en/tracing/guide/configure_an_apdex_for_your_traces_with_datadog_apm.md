@@ -5,8 +5,9 @@ aliases:
     - /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
     - /tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
 ---
+{{< jqmath-vanilla >}}
 
-[Apdex][1] (Application Performance Index) is an open standard developed by an alliance of companies that defines a standardized method to report, benchmark, and track application performance. Based on user experience satisfaction by measuring the response time of web applications and services, its role is to counterbalance response time average and percentiles which can be misleading by some extreme data points
+[Apdex][1] (Application Performance Index) is an open standard developed by an alliance of companies that defines a standardized method to report, benchmark, and track application performance. Based on user experience satisfaction by measuring the response time of web applications and services, its role is to counterbalance response time average and percentiles which can be misleading when there are extreme data points.
 
 ## Definition
 
@@ -15,37 +16,40 @@ Apdex is a numerical measure of user satisfaction with the performance of enterp
 * 0 = no users satisfied
 * 1 = all users satisfied
 
-To define your apdex, you need to be an administrator of your Datadog account. To define your apdex you need to first define a time threshold—**T**—separating satisfactory response times from unsatisfactory response times from your application or service. With one threshold you can then define three categories:
+To define your Apdex, you need to be an administrator of your Datadog account. First define a time threshold—**T**—separating satisfactory response times from unsatisfactory response times from your application or service. With one threshold you can then define three categories:
 
-* Satisfied requests have a response time below **T**
-* Tolerated requests have a response time equal to/above **T** and below/equal to **4T**
-* Frustrated requests have a response time above **4T** or returns an error
+* Satisfied requests have a response time below **T**.
+* Tolerated requests have a response time equal to or above **T** and below or equal to **4T**.
+* Frustrated requests have a response time above **4T** or returns an error.
 
-Once the threshold is defined and your requests are categorized, the apdex is defined as:
+Once the threshold is defined and your requests are categorized, the Apdex is defined as:
 
-{{< img src="tracing/faq/apdex_formula.png" alt="Apdex formula"  >}}
+$$\bo\text"Apdex"=({\bo\text"Satisfied"\text" requests" + {{\bo\text"Tolerated"\text"  requests"}
+ / 2}})/{\bo\text"Total"\text" requests"} $$
 
-Selecting the correct threshold is really important since the Frustrated requests are 4 times slower than "normal". If T=3 you can wait 3 seconds for a page to load but you might not tolerate waiting until 12 seconds.
+Selecting the correct threshold is important because the Frustrated requests are 4 times slower than "normal". If T=3 the user waits 3 seconds for a page to load but does not tolerate waiting 12 seconds.
 
-That's why the Apdex thresholds need to be set by admins, per service, before they are calculated.
+Apdex thresholds must be set by admins, per service, before Apdex scores calculated.
 
 ## Set your Apdex for your traces
 
-To visualize your application/service Apdex, you need to go on your service board, and select Apdex instead of latency:
+To visualize your application or service Apdex: 
 
-{{< img src="tracing/faq/apdex_selection.png" alt="Apdex Selection"  >}}
+1. On your service dashboard, select Apdex instead of latency:
 
-You can then use the pencil icon on the top left of your widget to configure your Apdex:
+   {{< img src="tracing/faq/apdex_selection.png" alt="Apdex Selection"  >}}
 
-{{< img src="tracing/faq/apdex_edit.png" alt="Apdex Edit"  >}}
+2. Use the pencil icon on the top left of your widget to configure your Apdex:
 
-Enter your threshold directly to visualize your request distribution:
+   {{< img src="tracing/faq/apdex_edit.png" alt="Apdex Edit"  >}}
 
-{{< img src="tracing/faq/apdex_update.png" alt="Apdex Update"  >}}
+3. Enter your threshold directly to visualize your request distribution:
 
-You can then save your widget to follow your Apdex evolution over time:
+   {{< img src="tracing/faq/apdex_update.png" alt="Apdex Update"  >}}
 
-{{< img src="tracing/faq/apm_save.png" alt="Apdex Save"  >}}
+4. Save your widget to follow your Apdex evolution over time:
+
+   {{< img src="tracing/faq/apm_save.png" alt="Apdex Save"  >}}
 
 ## Display your Apdex on your service page
 

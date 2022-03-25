@@ -5,16 +5,16 @@ description: Effectuer des recherches sur l'ensemble de vos signaux de sécurit�
 aliases:
   - /fr/security_monitoring/explorer/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/announcing-security-monitoring/'
+  - link: https://www.datadoghq.com/blog/announcing-security-monitoring/
     tag: Blog
-    text: En savoir plus sur le Security Monitoring
+    text: En savoir plus sur le Cloud SIEM
   - link: /security_monitoring/detection_rules/
     tag: Documentation
     text: En savoir plus sur la logique conditionnelle des règles de sécurité
 ---
 ## Présentation
 
-L'outil [Security Signals Explorer][1] vous permet de mettre en corrélation et de filtrer vos signaux. Vous pouvez également accéder aux dashboards Security Monitoring à partir de cette page.
+L'outil [Security Signals Explorer][1] vous permet de mettre en corrélation et de filtrer vos signaux. Vous pouvez également accéder aux dashboards Cloud SIEM à partir de cette page.
 
 Grâce à cette vue, vous pouvez :
 
@@ -55,6 +55,27 @@ Sous l'aperçu du signal figurent des onglets contenant des informations plus d�
 - L'onglet `Samples` répertorie des échantillons de logs afin de mieux comprendre le contexte dans lequel le signal s'est déclenché. Cliquez sur l'un de ces logs pour le consulter dans son intégralité.
 
 - L'onglet `Related Issues` affiche une liste de signaux connexes qui présentent les mêmes valeurs de regroupement pour faciliter le triage du signal.
+
+### Renseignements sur les menaces
+
+La solution Cloud SIEM de Datadog fournit des flux de renseignements sur les menaces minutieusement sélectionnés par des experts en la question. Ces flux sont constamment mis à jour de façon à inclure des données sur les activités suspicieuses connues (par exemple, des indicateurs de compromissions), afin que vous puissiez identifier rapidement les menaces potentielles que vous devez éliminer.
+
+{{< img src="security_platform/security_monitoring/explorer/threat_intelligence.png" alt="Renseignements sur les menaces dans le Security Signals Explorer"  >}}
+
+Datadog propose automatiquement des renseignements sur les menaces en analysant l'ensemble des logs ingérés possédant des attributs pertinents. Lorsqu'un log contient un indicateur de compromission, comme une IP anonymisée liée à un VPN, un proxy ou un nœud de sortie Tor, un attribut `threat_intel` est ajouté à l'événement de log, afin de fournir des insights supplémentaires basés sur les renseignements disponibles.
+
+Pour afficher tous les renseignements sur les menaces dans le Security Signals Explorer, utilisez la requête `@threat_intel.indicators_matched:*`. Les attributs supplémentaires suivants permettent d'interroger les renseignements sur les menaces :
+
+* `@threat_intel.results.category “anonymizer”, “scanner”`
+* `@threat_intel.results.intention “malicious”, “unknown”`
+* `@threat_intel.results.subcategory options "proxy", "tor", "vpn"`
+    **Remarque** : les attributs de sous-catégorie Proxy, Tor et VPN sont uniquement fournis par le partenaire IPinfo.
+
+### Détection des anomalies
+
+Si le signal de sécurité que vous étudiez a été généré suite à la détection d'une anomalie, un graphique représente l'anomalie. Sur la partie droite du graphique, un cadre indique la date à laquelle l'anomalie a été détectée.
+
+  {{< img src="security_platform/security_monitoring/explorer/anomaly-detection.png" alt="Graphique de détection d'anomalies" >}}
 
 ## Analyser visuellement vos signaux de sécurité
 

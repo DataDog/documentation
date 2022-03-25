@@ -8,7 +8,7 @@ further_reading:
 ---
 ## 概要
 
-[セキュリティモニタリング][1]では、自動修復ワークフローのトリガーとなる検出ルールを設定することができます。Datadog の [Webhook インテグレーション][2]では、[検出ルール][3]がトリガーされたときに、自動化したいサービスにペイロードを配信する Webhookを設定します。すべての Webhook ペイロードには、トリガーとなったイベントに関する情報と、下流のサービスを開始するために使用できるカスタムメッセージが含まれています。Webhook の URL を持つすべてのサービスのコマンドを自動化できます。セキュリティオーケストレーションツールや自動化応答ツールが受信した HTTP リクエストを受け入れ、これらの Webhook は定義した任意のワークフローを開始します。
+[Cloud SIEM][1] では、自動修復ワークフローのトリガーとなる検出ルールを設定することができます。Datadog の [Webhook インテグレーション][2]では、[検出ルール][3]がトリガーされたときに、自動化したいサービスにペイロードを配信する Webhookを設定します。すべての Webhook ペイロードには、トリガーとなったイベントに関する情報と、下流のサービスを開始するために使用できるカスタムメッセージが含まれています。Webhook の URL を持つすべてのサービスのコマンドを自動化できます。セキュリティオーケストレーションツールや自動化応答ツールが受信した HTTP リクエストを受け入れ、これらの Webhook は定義した任意のワークフローを開始します。
 
 以下のセキュリティシナリオを選択して、修復の自動化を開始します。
 
@@ -54,7 +54,7 @@ further_reading:
 
 ## アプリケーションの悪用および詐欺
 
-Datadog のセキュリティモニタリングを使用すると、アプリケーション全体の[悪用や詐欺][6]のパターンを発見することができます。例えば、ユーザーがアプリケーション内で無効なクレジットカード情報を使って何度も購入しようとした場合にトリガーされる[検知ルール][7]を設定します。次に、ユーザーの認証情報を無効にするサービスに対して修復指示を含むペイロードを送信する Webhook を設定します。
+Datadog Cloud SIEM を使用すると、アプリケーション全体の[悪用や詐欺][6]のパターンを発見することができます。例えば、ユーザーがアプリケーション内で無効なクレジットカード情報を使って何度も購入しようとした場合にトリガーされる[検知ルール][7]を設定します。次に、ユーザーの認証情報を無効にするサービスに対して修復指示を含むペイロードを送信する Webhook を設定します。
 
 次の例は、Datadog によってセキュリティシグナルが生成されたときに、関連する Webhook ペイロードがどのように見えるかを示しています。
 
@@ -87,10 +87,10 @@ Datadog はセキュリティシグナルを生成し、違反行為だけでな
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security_platform/security_monitoring/
+[1]: /ja/security_platform/cloud_siem/
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [3]: /ja/security_platform/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /ja/security_platform/security_monitoring/log_detection_rules/?tab=threshold#new-term
+[5]: /ja/security_platform/cloud_siem/log_detection_rules/?tab=threshold#new-term
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
-[7]: /ja/security_platform/security_monitoring/log_detection_rules/?tab=threshold#define-a-search-query
+[7]: /ja/security_platform/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query

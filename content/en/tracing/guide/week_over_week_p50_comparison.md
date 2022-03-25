@@ -30,7 +30,7 @@ Datadog can show you the latency of your application over time and how it compar
     This page contains a list of all instrumented [services][2] available in Datadog APM. You can search over your services by keywords, filter them by `env` tag, and set the timeline.
 2. **Search and open a relevant and active service**.
 
-    The web-store service is used in this example because it’s a stable service that we want to double check that there hasn’t been any issues over the last month.
+    This example uses the web-store service because it is stable. Double-check that issues have not appeared over the last month.
 
     {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2.png" alt="comparaison 2"  style="width:90%;">}}
 

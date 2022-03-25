@@ -30,7 +30,9 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 
 Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing incidents. You can configure additional fields that appear for all incidents in [Incident Settings][2].
 
-**Note**: Manage and create incidents with the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
+**Note**: View your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].”
+
+{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
 
 ### Creating an incident
 
@@ -200,7 +202,7 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [9]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [10]: /tracing/#2-instrument-your-application
 [11]: https://app.datadoghq.com/incidents/settings#Property-Fields
-[12]: /dashboards/querying/#incident-management-analytics
+[12]: /monitors/incident_management/analytics/#overview
 [13]: /integrations/pagerduty/
 [14]: /integrations/jira/
 [15]: /integrations/webhooks/

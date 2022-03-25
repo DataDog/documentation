@@ -38,7 +38,7 @@ supported_os:
 
 Rundeck rend les notifications Datadog encore plus puissantes en vous permettant d'automatiser certaines actions afin de faciliter le diagnostic et la résolution des incidents.
 
-Apprenez-en plus sur l'automatisation de vos runbooks pour réduire la durée des incidents [sur le site Web Rundeck][1].
+Consultez le [site Web Rundeck][1] pour découvrir comment automatiser vos runbooks afin de réduire la durée des incidents.
 
 Voici quelques exemples d'automatisations possibles :
 
@@ -61,7 +61,7 @@ Préparez au moins une tâche Rundeck qui doit se déclencher en réponse à une
 
 1. Dans votre projet Rundeck, cliquez sur l'option de navigation **Webhooks**.
 2. Cliquez sur **Add**.
-3. Donnez un nom au webhook.  (Par exemple, *Datadog-Restart Service*)
+3. Attribuez un nom au webhook. Exemple : `Datadog-Restart Service`.
 4. Cliquez sur le bouton **Choose Webhook Plugin** et sélectionnez **Run Job***.
 5. Sélectionnez la tâche que vous souhaitez exécuter lorsque ce webhook se déclenche.
 6. [Facultatif] Dans la ligne **Options**, ajoutez le texte suivant :
@@ -91,7 +91,6 @@ Préparez au moins une tâche Rundeck qui doit se déclencher en réponse à une
 Ajoutez cette intégration à n'importe quelle notification d'alerte dans Datadog en ajoutant le destinataire `@webhook-Rundeck_Restart_Service`. Le nom varie en fonction du nom que vous avez donné au webhook à l'étape 4a. Lorsque le monitor déclenche une alerte, le webhook exécute la tâche associée.
 
 D'autres plugins, tels qu'Advanced Run Job, peuvent également être utilisés selon vos besoins.
-
 
 ## Données collectées
 

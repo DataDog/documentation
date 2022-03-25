@@ -21,9 +21,9 @@ Optimisez vos opérations et vos finances en associant la plateforme de gestion 
 
 ## Configuration
 
-Pour associer votre application Datadog à votre compte Cloudability :
+Pour associer votre compte Datadog à votre compte Cloudability :
 
 - Connectez-vous en accédant à Cloudability >> Settings >> Vendor Credentials.
 - [Ajoutez vos clés d'API et d'application Datadog][1].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys

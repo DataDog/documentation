@@ -19,7 +19,7 @@ further_reading:
       text: 'Automatically configure your Log Explorer'
 ---
 
-{{< img src="logs/explorer/facet/facets_in_explorer.gif" alt="Facets in Explorer Facet" style="width:100%;">}}
+{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="Facets in Explorer Facet" video=true style="width:100%;">}}
 
 ## Overview
 
@@ -153,7 +153,7 @@ Hidden facets have no impact aside from the log explorer (for instance: live tai
 
 #### Hidden facets and teammates
 
-Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][24]. Hidden facets is part of the context saved in a saved view.
+Hiding facets is specific to your own troubleshooting context and does not impact your teammates' view, unless you update a [Saved View][24]. Hidden facets is part of the context saved in a saved view.
 
 ### Group facets
 
@@ -163,7 +163,7 @@ Facets are grouped into meaningful themes, to ease navigation in the facet list.
 
 ### Filter facets
 
-Use the search box on facets to scope down the whole facet list and jump more quickly to the very one you need to interact with. Facet search uses both facet display name and facet field name to scope down results.
+Use the search box on facets to scope down the whole facet list and navigate more quickly to the one you need to interact with. Facet search uses both facet display name and facet field name to scope results.
 
 {{< img src="logs/explorer/facet/search_facet.png" alt="Search Facet" style="width:30%;">}}
 

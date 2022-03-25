@@ -43,14 +43,14 @@ The two below parameters can be used to customize DNS resolution on your **API t
 `dnsUseHost`
 : **Type**: Boolean <br>
 **Default**: `true`<br>
-Use host local DNS configuration first (e.g., the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter if any.
+Use host local DNS configuration first (for example, the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter if any.
 
 `dnsServer`
 : **Type**: Array of Strings <br>
 **Default**: `["8.8.8.8","1.1.1.1"]`<br>
-DNS servers IPs to use in given order (e.g., `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`).
+DNS servers IPs to use in given order (for example, `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`).
 
-On **browser tests**, the DNS resolution is done directly by the browser, which usually reads DNS servers from the host. Alternatively, you can configure it at the container level (e.g., using the `--dns` flag on [Docker][1], or `dnsConfig.nameservers` on [Kubernetes][2]).
+On **browser tests**, the DNS resolution is done directly by the browser, which usually reads DNS servers from the host. Alternatively, you can configure it at the container level (for example, using the `--dns` flag on [Docker][1], or `dnsConfig.nameservers` on [Kubernetes][2]).
 
 ### Reserved IPs configuration
 
@@ -62,21 +62,21 @@ Prevent users from creating Synthetic tests on endpoints that are using reserved
 `allowedIPRanges`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
-Grant access to specific IPs and/or CIDR among IP ranges blocked through `enableDefaultBlockedIpRanges` or `blockedIPRanges` (e.g., `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
+Grant access to specific IPs and/or CIDR among IP ranges blocked through `enableDefaultBlockedIpRanges` or `blockedIPRanges` (for example, `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
 
 `blockedIPRanges`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
-Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `enableDefaultBlockedIpRanges` parameter to `true` (e.g. `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
+Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `enableDefaultBlockedIpRanges` parameter to `true` (for example, `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
 
-**Note:** The `whitelistedRange` and `blacklistedRange` parameters are now deprecated and should be replaced by the above listed ones.
+**Note:** The `whitelistedRange` and `blacklistedRange` parameters are deprecated and should be replaced by the above listed ones.
 
 ### Proxy configuration
 
 `proxyDatadog`
 : **Type**: String <br>
 **Default**: `none`<br>
-Proxy URL used by the private location to send requests to Datadog (e.g., `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+Proxy URL used by the private location to send requests to Datadog (for example, `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
 
 `proxyTestRequests`
 : **Type**: String <br>
@@ -88,7 +88,7 @@ Proxy URL used by the private location to send test requests to the endpoint.
 **Default**: `false`<br>
 Discard SSL errors when private location is using a proxy to send requests to Datadog.
 
-**Note:** The `proxy` parameter is now deprecated and should be replaced by `proxyDatadog`.
+**Note:** The `proxy` parameter is deprecated and should be replaced by `proxyDatadog`.
 
 ### Advanced configuration
 
@@ -97,10 +97,19 @@ Discard SSL errors when private location is using a proxy to send requests to Da
 **Default**: `10`<br>
 Maximum number of tests executed in parallel.
 
+`enableStatusProbes`
+: **Type**: Boolean <br>
+Enables the readiness and liveness of private location probes. This enables two endpoints: http://127.0.0.1:8080/liveness and http://127.0.0.1:8080/readiness.
+
 `maxTimeout`
 : **Type**: Number <br>
 **Default**: `60000`<br>
 Maximum test execution duration for API tests (in milliseconds).
+
+`statusProbesPort`
+: **Type**: Number <br>
+**Default**: `8080`<br>
+Overrides the port for the private location status probes. 
 
 ## Private root certificates
 
@@ -123,7 +132,7 @@ Format log output between `"pretty"`, and `"json"`. Setting your log format to `
 `verbosity`
 : **Type**: Number <br>
 **Default**: `3`<br>
-Verbosity level (e.g., `-v`, `-vv`, `-vvv`, ...).
+Verbosity level (for example, `-v`, `-vv`, `-vvv`, ...).
 
 `dumpConfig`
 : **Type**: Boolean <br>

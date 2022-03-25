@@ -1,0 +1,30 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_manage_status_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 50,
+        "height": 25
+      },
+      "definition": {
+        "type": "manage_status",
+        "summary_type": "monitors",
+        "display_format": "countsAndList",
+        "color_preference": "text",
+        "hide_zero_counts": true,
+        "show_last_triggered": false,
+        "query": "",
+        "sort": "status,asc",
+        "count": 50,
+        "start": 0
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

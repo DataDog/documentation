@@ -21,6 +21,8 @@ Online Archives is only available for AWS hosted Datadog customers (US1) site.
 
 {{< /site-region >}}
 
+{{< site-region region="us" >}}
+
 <div class="alert alert-warning">
 Online Archives is in limited availability. To request access, contact <a href="/help/">Datadog Support</a>.
 </div>
@@ -49,11 +51,16 @@ Configure Online Archives in the [Logs Index Configuration][3] page:
 
 ## Searching in Online Archives
 
-Select Online Archives from the dropdown in the Logs Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker.
+Select Online Archives from the dropdown in the Logs Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker. You can adjust the time picker by selecting pre-set options, up to 3 months, or by selecting the calendar view to search further back in time.
+
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="How to search your online archive" style="width:100%;">}}
 
 [Search][4] by typing in queries in the search bar or by selecting the relevant facet in the facet panel.
+
+**Notes**: 
+- You cannot export online archive logs to Dashboards, Notebooks, or Monitors.
+- The Transactions and Patterns view is not available for Online Archives.
 
 ## Analytics in Online Archives
 
@@ -75,7 +82,7 @@ Here are examples of different log retention strategies and how to implement the
 2. Enable Online Archives for this index.
 3. Add an exclusion filter on the index `status:Debug` with an exclusion percentage set at 90%. This exclusion filter only applies to the index.
 
-{{< img src="logs/log_configuration/online_archives/retain.png" alt="How to exclude things from your online archive" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/retain.png" alt="How to exclude things from the index" style="width:100%;">}}
 
 ### Security team wants to retain all their logs in Online Archives but none in Indexes
 
@@ -83,13 +90,13 @@ Here are examples of different log retention strategies and how to implement the
 2. Enable Online Archives for this index.
 3. Add a `*` exclusion filter on the index to filter out all logs from the Index but not from the Online Archives.
 
-{{< img src="logs/log_configuration/online_archives/exclusion.png" alt="How to exclude things from your online archive" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/exclusion.png" alt="How to exclude things from the index" style="width:100%;">}}
 
 **Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
-
-**Note:** Dashboards, Log Monitors, Patterns and Transactions are not available in Online Archives.
 
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: /logs/log_configuration/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
+
+{{< /site-region >}}

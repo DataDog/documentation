@@ -133,6 +133,12 @@ Classic:
       link: https://github.com/chonton/dogstatd-client
       dogstatsd: true
       authors: Chas Honton
+  - Lua:
+    - name: APISIX
+      link: https://apisix.apache.org/docs/apisix/next/plugins/datadog/
+      dogstatsd: true
+      authors: Apache APISIX
+      notes: Send custom metrics to DogStatsD using the UDP protocol.
   - NiFi:
     - name: DataDogReportingTask
       link: https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-datadog-nar/1.5.0/org.apache.nifi.reporting.datadog.DataDogReportingTask/index.html

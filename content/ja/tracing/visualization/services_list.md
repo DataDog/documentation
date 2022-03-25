@@ -44,6 +44,7 @@ further_reading:
 *  Cache
 *  Custom
 *  DB
+*  Serverless function
 *  Web
 
 また、たとえば Postgre、MySQL、Cassandra のインテグレーションでは、エイリアスが Type: "DB" にマッピングされ、Redis や Memcache のインテグレーションでは Type: "Cache" にマッピングされます。

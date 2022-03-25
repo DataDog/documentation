@@ -5,16 +5,19 @@ further_reading:
     - link: "/continuous_integration/guides/find_flaky_tests/"
       tag: "Guide"
       text: "Finding Flaky Tests"
+    - link: "/continuous_integration/guides/rum_integration/"
+      tag: "Guide"
+      text: "Linking CI Visibility and RUM"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-The [Tests][1] page, under the CI menu in Datadog, provides a test-first view into your CI health by showing you important metrics and results from your tests. It can help you drill down into performance problems and test failures that concern you primarily because you work on the related code (and less because you maintain the pipelines they are run in).
+The [Tests][1] page, under the CI menu in Datadog, provides a test-first view into your CI health by showing you important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you primarily because you work on the related code (and less because you maintain the pipelines they are run in).
 
 ## Explore tests
 
@@ -36,7 +39,7 @@ There's also information about the wall time of the most recent test suite run, 
 
 Hovering over the commit author avatar shows detailed information about the latest commit.
 
-#### Drill down for more details
+#### Investigate for more details
 
 Click on the row to see test suite run details such as test results for the last commit on this branch (or you can switch branches), failing tests and the most common errors, slow tests, flaky tests, and a complete list of test runs over the time frame selected. You can filter this list of test runs by facet to get to the information you want to see most.
 
@@ -44,7 +47,7 @@ Click into one of the test runs to see the test trace as a flame graph or a span
 
 #### Explore connections to services, resources, logs, and network events
 
-Click the CI provider link to drill down to the Resource, Service, or Analytics page for the test. You can also find complete tags information and links to related log events and network monitoring events.
+Click the CI provider link to examine the Resource, Service, or Analytics page for the test. You can also find complete tags information and links to related log events and network monitoring events.
 
 ### Default Branches view
 
@@ -52,11 +55,11 @@ A _test service_ is a group of tests associated with, for example, a project or 
 
 The Default Branches view shows similar information to the Branches view, but applied to the default branch, and sorted by most recent. It compares the current wall time with the average default branch wall time, to give you an indication of how your test suite performance is trending over time.
 
-Click on a row to see the analytics for tests run on the default branch, similar to drilling down for test run details from the Branches view.
+Click on a row to see the analytics for tests run on the default branch, similar to examining for test run details from the Branches view.
 
 ## Explore test runs
 
-On the [Test Runs][4] page, you can see the list of all runs over the selected time frame, filter by facet, and drill down into individual test run details. Each test run is reported as a trace, which in the case of integration tests includes calls made to datastores or third party services using regular [APM instrumentation][5].
+On the [Test Runs][4] page, you can see the list of all runs over the selected time frame, filter by facet, and examine individual test run details. Each test run is reported as a trace, which in the case of integration tests includes calls made to datastores or third party services using regular [APM instrumentation][5].
 
 Click into a particular test run to see the flame graph or span list for a test, for each time it's been run, similar to clicking into a test run from the Tests page.
 

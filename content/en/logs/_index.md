@@ -21,7 +21,7 @@ Logging the important parts of your system's operations is crucial for maintaini
 
 Datadog Log Management, also referred to as Datadog logs or logging, removes these limitations by decoupling log ingestion from indexing. This enables you to cost-effectively collect, process, archive, explore, and monitor all of your logs without limitations, also known as Logging without Limits\*.
 
-Logging without Limits\* enables a streamlined troubleshooting experience in the [Log Explorer][1], which empowers you and your teams to quickly assess and fix your infrastructure issues. It provides intuitive archiving to support your security and IT teams during audits and assessments. Logging without Limits* also powers [Datadog Security Monitoring][2], which detects security threats in your environment, without requiring you to index logs.
+Logging without Limits\* enables a streamlined troubleshooting experience in the [Log Explorer][1], which empowers you and your teams to quickly assess and fix your infrastructure issues. It provides intuitive archiving to support your security and IT teams during audits and assessments. Logging without Limits* also powers [Datadog Cloud SIEM][2], which detects security threats in your environment, without requiring you to index logs.
 
 {{< vimeo 293195142 >}}
 
@@ -65,7 +65,7 @@ Start exploring your ingested logs in the [Log Explorer][1].
 \*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/explorer/
-[2]: /security_monitoring/
+[2]: /security_platform/cloud_siem/
 [3]: /logs/log_collection/
 [4]: /logs/log_configuration/
 [5]: /tracing/connect_logs_and_traces/

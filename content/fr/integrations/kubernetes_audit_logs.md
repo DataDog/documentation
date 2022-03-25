@@ -5,7 +5,7 @@ kind: integration
 description: Effectuez le suivi de tous les événements ce qui se produisent dans vos clusters Kubernetes
 short_description: Surveillez vos clusters Kubernetes
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
 categories:
   - log collection
   - containers
@@ -25,14 +25,14 @@ further_reading:
   - link: logs/
     tag: Documentation
     text: Log Management
-  - link: 'https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/'
+  - link: https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/
     tag: Blog
     text: Logs d'audit Kubernetes clés pour la surveillance de la sécurité du cluster
 integration_id: kubernetes-audit-logs
 ---
 ## Présentation
 
-Recueillez des [logs d'audit Kubernetes][1] pour effectuer le suivi de tous les événements qui se produisent dans vos clusters Kubernetes, y compris tous les appels effectués vers l'API Kubernetes par vos services. Cela inclut le plan de contrôle (les contrôleurs intégrés et le scheduler), les daemons de nœud (le kubelet, kube-proxy, etc.), les services de cluster (p. ex., l'autoscaler de cluster), les utilisateurs qui effectuent des requêtes `kubectl`, et même l'API Kubernetes elle-même.
+Recueillez des [logs d'audit Kubernetes][1] pour effectuer le suivi de tous les événements qui se produisent dans vos clusters Kubernetes, y compris tous les appels effectués vers l'API Kubernetes par vos services. Cela inclut le plan de contrôle (les contrôleurs intégrés et le scheduler), les daemons de nœud (le kubelet, kube-proxy, etc.), les services de cluster (comme l'autoscaler de cluster), les utilisateurs qui effectuent des requêtes `kubectl`, et même l'API Kubernetes.
 
 L'intégration Logs d'audit Kubernetes vous permet de diagnostiquer les problèmes d'autorisation, d'identifier les politiques RBAC qui doivent être mises à jour, et d'effectuer le suivi de requêtes API lentes qui ont un impact sur l'ensemble de vos clusters. Plongez au cœur de ces sujets en regardant la [conférence donnée par Datadog à l'occasion du KubeCon 2019][2].
 
@@ -42,7 +42,7 @@ Cette intégration est **disponible à partir des versions > 6.0 de l'Agent**
 
 ### Configuration
 
-Pour en savoir plus sur la configuration des logs d'audit Kubernetes, consultez [la documentation Kubernetes officielle][3].
+Pour en savoir plus sur la configuration des logs d'audit Kubernetes, consultez la section [Audits de la documentation Kubernetes][3] (en anglais).
 
 Pour activer les logs d'audit dans Kubernetes :
 
@@ -108,9 +108,9 @@ rules:
 
 Cet exemple de fichier de politique configure le serveur d'API de façon à loguer au niveau de détail le plus élevé certains types d'opérations qui entraînent une modification du cluster (mise à jour, patch, création, suppression). Il suit également les requêtes envoyées à la ressource `subjectaccessreviews` au niveau le plus élevé pour aider à dépanner des problèmes de délégation d'authentification.
 
-Vous pouvez réduire le niveau de détail à `Metadata` pour les endpoints qui contiennent des données sensibles (p. ex., la ressource `tokenreviews`). Datadog omet également l'étape `RequestReceived` des logs.
+Vous pouvez réduire le niveau de détail sur `Metadata` pour les endpoints qui contiennent des données sensibles, comme la ressource `tokenreviews`. Datadog omet également l'étape `RequestReceived` des logs.
 
-Dans la dernière section, la politique est configurée de façon à loguer tous les éléments non couverts explicitement par les règles précédentes au niveau `Metadata`. Les logs d'audit étant parfois très détaillés, vous pouvez choisir d'exclure des actions/verbes moins sensibles (p. ex., les opérations qui ne modifient pas l'état du cluster comme list, watch et get).
+Dans la dernière section, la politique est configurée de façon à loguer tous les éléments non couverts explicitement par les règles précédentes au niveau `Metadata`. Les logs d'audit étant parfois très détaillés, vous pouvez choisir d'exclure des actions/verbes moins importantes, par exemple les opérations qui ne modifient pas l'état du cluster comme list, watch et get.
 
 ### Collecte de logs
 

@@ -27,7 +27,7 @@ You can also ensure your credentials are securely stored and obfuscated across t
 
 ## Include the login steps in your recording
 
-The first method is to record the steps that are needed to perform the login at the beginning of your browser tests: input your username, input your password, hit log in. You can then go on and [start recording subsequent steps][1].
+The first method is to record the steps that are needed to perform the login at the beginning of your browser tests: input your username, input your password, and click log in. You can then go on and [start recording subsequent steps][1].
 At test execution, the browser test systematically executes the first login steps before going through the rest of the journey.
 
 {{< img src="synthetics/guide/app_that_requires_login/login_test.mp4" video="true" alt="Demo of recording a login">}}
@@ -61,7 +61,7 @@ Some MFA providers may detect Datadog's browser tests as bots and prevent them f
 If your MFA process involves steps performed outside of the browser (such as voice, text message, or opening a mobile application that does not leverage TOTP), consider reaching out to your MFA provider to ask if your MFA settings can be modified or if MFA can be turned off when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers) for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][5] can help to work around that.
 
-<div class="alert alert-info">We are constantly adding features to help you record test scenarios more easily. Help us work on the MFA systems that matter the most to you by <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">sending us feedback</a>.</div>
+<div class="alert alert-info">Datadog is constantly adding features to help you record test scenarios more easily. <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">Sending feedback</a> about the MFA systems that matter the most to you is appreciated.</div>
 
 ## Leverage browser test configuration options
 
@@ -69,7 +69,7 @@ The second way to ensure that your Datadog Browser tests can login into your app
 
 - Specific headers
 - Cookies
-- Basic, Digest, or NTLM credentials
+- Basic Auth, Digest Auth, or NTLM credentials
 
 These configuration options are set at every test execution and apply to every step of your browser test at execution time, not recording time. 
 

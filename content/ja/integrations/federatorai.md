@@ -291,9 +291,9 @@ Federator.ai には、イベントは含まれません。
 
 ご不明な点は、[Federator.ai - インストールおよびコンフィギュレーションガイド][11]をご覧いただくか、[Datadog サポート][14]までお問い合わせください。
 
-[1]: https://prophetstor.com/federator-ai-2/
+[1]: https://prophetstor.com/federator_ai/
 [2]: https://github.com/DataDog/watermarkpodautoscaler
-[3]: https://youtu.be/IooFJnB8bb8
+[3]: https://youtu.be/AeSH8yGGA3Q
 [4]: https://youtu.be/qX_HF_zZ4BA
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/cluster_overview_dashboard.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/application_overview_dashboard.png

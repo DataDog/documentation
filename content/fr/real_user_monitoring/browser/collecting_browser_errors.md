@@ -5,15 +5,15 @@ further_reading:
   - link: /real_user_monitoring/error_tracking/
     tag: Documentation
     text: Suivi des erreurs
-  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
     tag: Blog
     text: Real User Monitoring
   - link: /real_user_monitoring/explorer/
     tag: Documentation
     text: Explorer vos vues dans Datadog
-  - link: /real_user_monitoring/explorer/analytics/
+  - link: /real_user_monitoring/explorer/visualize/
     tag: Documentation
-    text: Générer des analyses à partir de vos événements
+    text: Appliquer des visualisations sur vos événements
   - link: /real_user_monitoring/dashboards/
     tag: Documentation
     text: Dashboards RUM
@@ -23,42 +23,24 @@ Les erreurs frontend sont recueillies par le service Real User Monitoring (RUM).
 ## Origines des erreurs
 Les erreurs frontend sont réparties en quatre catégories différentes, en fonction de leur `error.origin` :
 
-- **network** : erreurs XHR ou Fetch résultant de requêtes AJAX. Les attributs spécifiques aux erreurs network sont disponibles [dans la documentation dédiée][1].
 - **source** : exceptions non gérées ou objets Promise rejetés non gérés (ces erreurs sont liées au code source).
 - **console** : appels d'API `console.error()`.
-- **custom** : les erreurs envoyées avec l'[API `addError` RUM](#recueillir-des-erreurs-manuellement) ont par défaut la valeur `custom`.
+- **custom** : erreurs envoyées avec l'[API `addError` RUM](#recueillir-des-erreurs-manuellement).
 
 ## Attributs d'erreur
 
-Pour en savoir plus sur les attributs par défaut de tous les types d'événements RUM, consultez la section relative à la [collecte de données RUM][2]. Pour obtenir des instructions afin de configurer l'échantillonnage ou le contexte global, consultez la section [Configuration avancée du RUM][3].
+Pour en savoir plus sur les attributs par défaut de tous les types d'événements RUM, consultez la section relative à la [collecte de données RUM][1]. Pour obtenir des instructions afin de configurer l'échantillonnage ou le contexte global, consultez la section [Modifier des données RUM et leur contexte][2].
 
 | Attribut       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.source`  | chaîne | L'origine de l'erreur (par exemple, `console` ou `network`).     |
-| `error.type`    | chaîne | Le type d'erreur (ou le code dans certains cas).                   |
+| `error.source`  | chaîne | L'origine de l'erreur (par exemple, `console`).         |
+| `error.type`    | chaîne | Le type d'erreur (ou le code dans certains cas).                     |
 | `error.message` | chaîne | Un message d'une ligne lisible et concis décrivant l'événement. |
 | `error.stack`   | chaîne | La stack trace ou toutes informations complémentaires relatives à l'erreur.     |
 
-### Erreurs network
-
-Les erreurs network comprennent des informations sur les requêtes HTTP ayant échoué. Les facettes suivantes sont recueillies :
-
-| Attribut                      | Type   | Description                                                                             |
-|--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `error.resource.status_code`             | nombre | Le code de statut de la réponse.                                                               |
-| `error.resource.method`                | chaîne | La méthode HTTP (par exemple, `POST` ou `GET`).           |
-| `error.resource.url`                     | chaîne | L'URL de la ressource.                                                                       |
-| `error.resource.url_host`        | chaîne | La partie de l'URL correspondant au host.                                                          |
-| `error.resource.url_path`        | chaîne | La partie de l'URL correspondant au chemin.                                                          |
-| `error.resource.url_query` | objet | Les parties de l'URL correspondant à la chaîne de requête, décomposées en attributs key/value de paramètres de requête. |
-| `error.resource.url_scheme`      | chaîne | Le nom du protocole de l'URL (HTTP ou HTTPS).                                            |
-| `error.resource.provider.name`      | chaîne | Le nom du fournisseur de ressources. Valeur par défaut : `unknown`.                                            |
-| `error.resource.provider.domain`      | chaîne | Le domaine du fournisseur de ressources.                                            |
-| `error.resource.provider.type`      | chaîne | Le type de fournisseur de ressources (par exemple, `first-party`, `cdn`, `ad` ou `analytics`).                                            |
-
 ### Erreurs source
 
-Les erreurs de type source comprennent des informations au niveau du code concernant l'erreur. Plus d'informations concernant les différents types d'erreurs sont disponibles dans [la documentation MDN][4].
+Les erreurs de type source comprennent des informations au niveau du code concernant l'erreur. Plus d'informations concernant les différents types d'erreurs sont disponibles dans [la documentation MDN][3].
 
 | Attribut       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -71,12 +53,11 @@ Surveillez les exceptions gérées, les objets Promise rejetés et les autres er
 {{< code-block lang="javascript" >}}
 addError(
     error: unknown,
-    context?: Context,
-    source: ErrorSource.CUSTOM | ErrorSource.NETWORK | ErrorSource.SOURCE = ErrorSource.CUSTOM
+    context?: Context
 );
 {{< /code-block >}}
 
-**Remarque** : la fonctionnalité de [suivi des erreurs][5] traite les erreurs envoyées avec la source `custom` ou `source` et qui contiennent une stack trace.
+**Remarque** : la fonctionnalité de [suivi des erreurs][4] traite toutes les erreurs envoyées avec la source `custom` ou `source` et contenant une stack trace. Les erreurs envoyées avec une autre source (comme `console`) ne sont pas traitées.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -91,16 +72,16 @@ datadogRum.addError(error, {
     pageStatus: 'beta',
 });
 
-// Envoyer une erreur network
+// Envoyer une erreur réseau
 fetch('<UNE_URL>').catch(function(error) {
-    datadogRum.addError(error, undefined, 'network');
+    datadogRum.addError(error);
 })
 
 // Envoyer une erreur d'exception gérée
 try {
-    //Logique de code
+    // Logique de code
 } catch (error) {
-    datadogRum.addError(error, undefined, 'source');
+    datadogRum.addError(error);
 }
 ```
 {{% /tab %}}
@@ -116,19 +97,19 @@ DD_RUM.onReady(function() {
     });
 });
 
-// Envoyer une erreur network
+// Envoyer une erreur réseau
 fetch('<UNE_URL>').catch(function(error) {
     DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'network');
+        DD_RUM.addError(error);
     });
 })
 
 // Envoyer une erreur d'exception gérée
 try {
-    //Logique de code
+    // Logique de code
 } catch (error) {
     DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'source');
+        DD_RUM.addError(error);
     })
 }
 ```
@@ -143,29 +124,51 @@ window.DD_RUM && DD_RUM.addError(error, {
     pageStatus: 'beta',
 });
 
-// Envoyer une erreur network
+// Envoyer une erreur réseau
 fetch('<UNE _URL>').catch(function(error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'network');
+    window.DD_RUM && DD_RUM.addError(error);
 })
 
 // Envoyer une erreur d'exception gérée
 try {
-    //Logique de code
+    // Logique de code
 } catch (error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'source');
+    window.DD_RUM && DD_RUM.addError(error);
 }
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
+## Dépannage
+
+### Erreur de script
+
+Pour des raisons de sécurité, les navigateurs masquent les détails des erreurs déclenchées par des scripts interorigines. L'onglet Error Details affiche alors une erreur avec comme seul message « Script error ».
+
+{{< img src="real_user_monitoring/browser/script-error.png" alt="Exemple d'erreur de script RUM" style="width:75%;" >}}
+
+Pour en savoir plus sur les scripts interorigines et découvrir pourquoi les détails sont masqués, consultez la section [CORS][5] et [cette remarque sur les gestionnaires d'événement globaux][6]. Votre erreur est potentiellement causée par l'une des situations suivantes :
+- Vos fichiers JavaScript sont hébergés sur un autre hostname (par exemple, `example.com` inclut des ressources de `static.example.com`).
+- Votre site Web inclut des bibliothèques JavaScript hébergées sur un CDN.
+- Votre site Web inclut des bibliothèques JavaScript tierces hébergées sur les serveurs du fournisseur.
+
+Pour gagner en visibilité sur les scripts interorigines, suivez les deux étapes ci-dessous :
+1. Appelez les bibliothèques JavaScript avec `crossorigin="anonymous"`.
+
+    Grâce à `crossorigin="anonymous"`, la requête servant à récupérer le script est sécurisée. Aucune donnée sensible n'est transmise via des cookies ou l'authentification HTTP.
+
+2. Configurez l'en-tête HTTP `Access-Control-Allow-Origin`.
+
+    Cet en-tête a généralement pour valeur `Access-Control-Allow-Origin: *`, ce qui autorise toutes les origines à récupérer la ressource. Restreignez plutôt les origines pouvant accéder à votre ressource avec, par exemple, `Access-Control-Allow-Origin: www.example.com`.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/real_user_monitoring/data_collected/error/#network-errors
-[2]: /fr/real_user_monitoring/browser/data_collected/
-[3]: /fr/real_user_monitoring/browser/advanced_configuration/
-[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[5]: /fr/real_user_monitoring/error_tracking
+[1]: /fr/real_user_monitoring/browser/data_collected/
+[2]: /fr/real_user_monitoring/browser/modifying_data_and_context/
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[4]: /fr/real_user_monitoring/error_tracking
+[5]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes

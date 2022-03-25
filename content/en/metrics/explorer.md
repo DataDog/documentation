@@ -19,13 +19,15 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 
 ## Graphing
 
-Click on the **Graph** text box to see a list of metrics you have submitted to Datadog. Begin by typing in the text box to filter the metrics, then click a metric to select it. Each metric you select creates a real-time graph visualization on the right side of the page.
+Click on the **Graph** text box to see a list of metrics you have submitted to Datadog within the last 24 hours. Begin by typing in the text box to filter the metrics, then click a metric to select it. Each metric you select creates a real-time graph visualization on the right side of the page.
 
 Above your graphs, you can specify the timeframe and graph size.
 
-{{< img src="metrics/explorer/graphs.png" alt="Metrics Explorer"  style="width:80%;" >}}
+{{< img src="metrics/explorer/graphs.png" alt="Metrics Explorer" style="width:80%;" >}}
 
 **Note**: The **Calculate as count where applicable** check box appears for metrics with the `RATE` type.
+
+Metrics that are not reported in the last 24 hours do not appear in the drop down menu. You can add these metrics to your graphs manually by entering the metric name or full query. 
 
 ### Scope
 
@@ -67,6 +69,6 @@ Create a snapshot of an individual graph by using the share icon in the upper ri
 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: /notebooks/
-[3]: /dashboards/screenboard/
-[4]: /dashboards/timeboard/
+[3]: /dashboards/#screenboards
+[4]: /dashboards/#timeboards
 [5]: /metrics/introduction/#space-aggregation

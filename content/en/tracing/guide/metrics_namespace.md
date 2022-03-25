@@ -117,7 +117,7 @@ With the following definitions:
 
 `trace.<SPAN_NAME>.duration.by_service`
 : **Prerequisite:** This metric exists for any APM service.<br>
-**Description:** Measure the total time spent actually processing for each service (i.e. it excludes time spent waiting on child processes).<br>
+**Description:** Measure the total time spent actually processing for each service (as in, it excludes time spent waiting on child processes).<br>
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `sublayer_service`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 

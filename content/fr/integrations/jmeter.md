@@ -39,7 +39,7 @@ supported_os:
 ---
 ## Présentation
 
-Le service d'écoute backend Datadog pour Apache JMeter est un plug-in JMeter open source qui permet d'envoyer des résultats de test à la plate-forme Datadog. Il fournit des rapports en temps réel sur des métriques de test relatives à la latence, au nombre d'octets envoyés et reçus, etc. Vous pouvez également envoyer à Datadog des résultats de test complets en tant qu'entrées de log.
+Le service d'écoute backend Datadog pour Apache JMeter est un plug-in JMeter open source qui permet d'envoyer des résultats de test à la plateforme Datadog. Il fournit des rapports en temps réel sur des métriques de test relatives à la latence, au nombre d'octets envoyés et reçus, etc. Vous pouvez également envoyer à Datadog des résultats de test complets en tant qu'entrées de log.
 
 ## Configuration
 

@@ -28,7 +28,7 @@ On the [SLO status page][1], select **New SLO +**. Then select [**Metric**][2].
 
 **Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx` || `code:3xx` || `code:4xx`. The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events would be `sum:httpservice.hits{!code:3xx}`.
 
-Why did we exclude `HTTP 3xx`? - These are typically redirects and should not count for or against the SLI, but other non 3xx based error codes should. In the `total` case we want all types minus `HTTP 3xx`, in the `numerator` we only want `OK` type status codes.
+Why is `HTTP 3xx` excluded? - These are typically redirects and should not count for or against the SLI, but other non-3xx based error codes should. In the `total` case, you want all types minus `HTTP 3xx`, in the `numerator`, you only want `OK` type status codes.
 
 #### Multi-group for metric-based SLIs
 

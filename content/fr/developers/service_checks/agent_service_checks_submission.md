@@ -2,7 +2,7 @@
 title: "Envoi de checks de service\_: check de l'Agent"
 kind: documentation
 further_reading:
-  - link: /developers/write_agent_check/
+  - link: /developers/custom_checks/write_agent_check/
     tag: Documentation
     text: Écrire un check d'Agent custom
 ---
@@ -24,7 +24,7 @@ Retrouvez ci-dessous les différents paramètres et types de données disponible
 
 ## Exemple
 
-Voici un exemple de check d'Agent test qui envoie un seul check de service régulièrement. Consultez la documentation [Écrire un check custom d'Agent][1] pour en savoir plus.
+Voici un exemple de check d'Agent test qui envoie régulièrement un seul check de service. Consultez la section [Écrire un check custom d'Agent][1] pour en savoir plus.
 
 1. Créez un répertoire `service_check_example.d/` dans le [dossier `conf.d/`][2] de votre Agent.
 
@@ -73,7 +73,7 @@ class MyClass(AgentCheck):
         (...)
     ```
 
-7. Enfin, accédez au [sommaire des checks de service][5] pour vérifier que votre check de service envoie bien des informations :
+7. Enfin, accédez au [sommaire des checks de service Datadog][5] pour vérifier que votre check de service envoie bien des données :
 
 {{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Checks de service" style="width:80%;">}}
 
@@ -81,7 +81,7 @@ class MyClass(AgentCheck):
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/write_agent_check/
+[1]: /fr/developers/custom_checks/write_agent_check/
 [2]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
 [4]: /fr/agent/guide/agent-commands/#agent-information

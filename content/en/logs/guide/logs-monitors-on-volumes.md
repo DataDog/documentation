@@ -38,7 +38,7 @@ To define anomaly detection monitors to be alerted of any unexpected indexing lo
 2. Select the `datadog.estimated_usage.logs.ingested_events` metric
 3. Add `datadog_is_excluded:false` in the `from` section (to monitor indexed logs and not ingested ones)
 4. Add the tag `service` and `datadog_index` in **count by** (to be notified if a specific service spikes or stops sending logs in any indexes)
-5. Set the alert condition to match your use case (e.g., evaluation window, number of times outside the expected range, etc.)
+5. Set the alert condition to match your use case (for example, an evaluation window, or number of times outside the expected range)
 6. Set the notification message with actionable instructions:
 
 {{< img src="logs/guide/anomaly_usage_notification.png" alt=" example anomaly notification"  style="width:70%;">}}
@@ -54,15 +54,13 @@ An unexpected amount of logs has been indexed in index {{datadog_index.name}}
 
 ## Estimated usage dashboard
 
-From log usage metrics, an estimated usage Dashboard can also be built to monitor your Log Management usage across Datadog. Here is an example of such a Dashboard:
+Once you begin ingesting logs, an out-of-the-box [dashboard][5] summarizing your log usage metrics is automatically installed in your account.
 
-{{< img src="logs/guide/log_usage_dashboard.png" alt="Log estimated usage dashboard"  style="width:70%;">}}
+{{< img src="logs/guide/logslight.png" alt="Log estimated usage dashboard" style="width:70%;">}}
 
 **Note**: The metrics used in this dashboard are estimates and might differ from official billing numbers.
 
-To import this dashboard, copy the [estimated usage dashboard JSON definition][5] and paste it as a New Dashboard. Alternatively use the `Import Dashboard JSON` option in the settings cog menu in the upper right corner of a New Dashboard.
-
-**Note**: This JSON definition cannot be imported as a Timeboard or Screenboard.
+To access this dashboard, go to **Dashboards > Dashboards List** and search for `Log Management - Estimated Usage`.
 
 ## Monitor indexed logs with fixed threshold
 
@@ -95,7 +93,7 @@ Here is an example of what the notification would look like in Slack:
 [2]: /monitors/create/types/anomaly/
 [3]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [4]: https://app.datadoghq.com/monitors#create/anomaly
-[5]: /resources/json/estimated_log_usage_dashboard_configuration.json
+[5]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [6]: https://app.datadoghq.com/logs
 [7]: /logs/explorer/search/
 [8]: /logs/indexes/#set-daily-quota

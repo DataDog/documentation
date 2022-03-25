@@ -13,7 +13,7 @@ further_reading:
     text: Consulter la liste complète des processeurs disponibles
   - link: logs/logging_without_limits
     tag: Documentation
-    text: Logging without Limits
+    text: Logging without Limits™
   - link: logs/explorer
     tag: Documentation
     text: Apprendre à explorer vos logs
@@ -220,7 +220,7 @@ Ces attributs sont liés aux données ajoutées par un Agent syslog-shipper ou l
 | `syslog.timestamp` | `string` | Le timestamp du log. Généralement remappé vers l'attribut réservé `date`.       |
 | `syslog.env`       | `string` | Le nom de l'environnement d'où provient la source des logs.                      |
 
-Des intégrations comme [Rsyslog][21], [NxLog][22], [Syslog-ng][23], [Fluentd][24] ou encore [Logstash][25] reposent sur ces attributs.
+Des intégrations comme [Rsyslog][21], [NxLog][22], [Syslog-ng][23], [Fluentd][24] et [Logstash][25] reposent sur ces attributs.
 
 #### DNS
 
@@ -231,7 +231,7 @@ Tous les attributs et toutes les mesures sont précédés par `dns`.
 | `dns.id`             | `string` | L'identificateur de la question DNS.                                                 |
 | `dns.question.name`  | `string` | Le nom de domaine interrogé.                                                  |
 | `dns.question.type`  | `string` | Un [code de deux octets][26] spécifiant le type de question DNS.             |
-| `dns.question.class` | `string` | La classe recherchée par la question DNS (p. ex. IN lorsque vous utilisez Internet). |
+| `dns.question.class` | `string` | La classe recherchée par la question DNS (par exemple, IP lorsque vous utilisez Internet). |
 | `dns.question.size`  | `number` | La taille de la question DNS en octets.                                           |
 | `dns.answer.name`    | `string` | L'adresse IP avec laquelle le DNS répond.                                 |
 | `dns.answer.type`    | `string` | Un [code de deux octets][26] spécifiant le type de réponse DNS.               |
@@ -245,8 +245,8 @@ Tous les attributs sont précédés par `evt`.
 
 | **Nom complet** | **Type** | **Description**                                                                       |
 |:--------------|:---------|:-------------------------------------------------------------------------------------|
-| `evt.name`    | `string` | Le nom partagé entre les événements générés par une même activité (p. ex., authentification). |
-| `evt.outcome` | `string` | Le résultat de l'événement (p. ex., `success`, `failure`).                                 |
+| `evt.name`    | `string` | Le nom partagé entre les événements générés par une même activité (par exemple, authentification). |
+| `evt.outcome` | `string` | Le résultat de l'événement (par exemple, `success`, `failure`).                                 |
 
 ## Alias
 

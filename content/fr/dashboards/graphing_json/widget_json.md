@@ -61,7 +61,7 @@ EVENTS_SCHEMA = {
 }
 ```
 
-Consultez la [documentation relative au flux d'événements][2] pour en savoir plus sur la syntaxe `<EVENT_QUERY>`.
+Consultez la [documentation relative au flux d'événements][2] pour en savoir plus sur la syntaxe des requêtes.
 
 ### Exemples
 
@@ -115,7 +115,7 @@ MARKERS_SCHEMA = {
 
 Les marqueurs suivants :
 
-{{< img src="dashboards/graphing_json/markers.png" alt="Marqueurs"  style="width:80%;">}}
+{{< img src="dashboards/graphing_json/markers.png" alt="Marqueurs" style="width:80%;">}}
 
 sont appliqués avec la configuration suivante :
 
@@ -183,7 +183,7 @@ CONDITIONAL_FORMATS_SCHEMA = {
 | `image_url`       | chaîne | Affiche une image en tant qu'arrière-plan.                                                                                                                                                                                                                                    |
 ## Schéma des intervalles
 
-Les intervalles de temps disponibles dépendent du widget que vous utilisez, mais le format général pour `time` est le suivant :
+Les intervalles de temps disponibles dépendent du widget que vous utilisez. Voici néanmoins le format général pour `time` :
 
 ```text
 TIME_SCHEMA = {

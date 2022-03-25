@@ -45,11 +45,11 @@ To combine multiple terms into a complex query, you can use any of the following
 
 Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.jpg" alt="search bar autocomplete "  style="width:80%;">}}
+{{< img src="logs/explorer/search/search_bar_autocomplete.jpg" alt="search bar autocomplete " style="width:80%;">}}
 
 ## Escaping of special characters
 
-The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character. You can’t search for special characters in a log message. However, you can search for special characters when they’re inside of  an attribute. To search for special characters, parse them into an attribute with the [grok parser][1], and then search for logs that contain the attribute.
+The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character. You can’t search for special characters in a log message. However, you can search for special characters when they’re inside of an attribute. To search for special characters, parse them into an attribute with the [grok parser][1], and then search for logs that contain the attribute.
 
 
 ## Attributes search
@@ -184,7 +184,7 @@ You can add facets on arrays of strings or numbers. All values included in the a
 
 In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
 
-{{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
+{{< img src="logs/explorer/search/array_search.png" alt="Array and Facets" style="width:80%;">}}
 
 {{< site-region region="us,eu" >}}
 
@@ -194,7 +194,7 @@ In the following example, CloudWatch logs for Windows contain an array of JSON o
 
 * `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
 
-{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects"  style="width:80%;">}}
+{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects" style="width:80%;">}}
 <p> </p>
 {{< /site-region >}}
 

@@ -21,7 +21,7 @@ This page shows you how to get started with Log Management in Datadog. If you ha
 
 ## Configure a logging source
 
-With Log Management, you can analyze and explore data in the Log Explorer, connect [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog, and use ingested logs for Datadog [Security Monitoring][4]. The lifecycle of a log within Datadog begins at ingestion from a logging source.
+With Log Management, you can analyze and explore data in the Log Explorer, connect [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog, and use ingested logs for Datadog [Cloud SIEM][4]. The lifecycle of a log within Datadog begins at ingestion from a logging source.
 
 {{< img src="/getting_started/logs/getting-started-overview.png" alt="Different types of log configurations">}}
 
@@ -90,7 +90,7 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
 
-For example, if you have logs flowing in from a service that you wish to drill down into, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
+For example, if you have logs flowing in from a service that you wish to examine further, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
 
 {{< img src="/getting_started/logs/error-pattern.png" alt="Filtering in the Log Explorer by error pattern">}}
 
@@ -128,7 +128,7 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [1]: https://www.datadoghq.com
 [2]: /tracing/connect_logs_and_traces/
 [3]: /logs/guide/correlate-logs-with-metrics/
-[4]: /security_platform/security_monitoring/
+[4]: /security_platform/cloud_siem/
 [5]: /getting_started/integrations/
 [6]: /agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli

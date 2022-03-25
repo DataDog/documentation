@@ -6,7 +6,7 @@ aliases:
     - /tracing/setup/docker/
     - /agent/apm/docker
 further_reading:
-    - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/trace'
+    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/trace'
       tag: 'Github'
       text: Source code
     - link: '/integrations/amazon_ecs/#trace-collection'
@@ -40,7 +40,8 @@ For example, the following command allows the Agent to receive traces from your 
 {{% tab "Linux" %}}
 
 ```shell
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+docker run -d --cgroupns host \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -p 127.0.0.1:8126:8126/tcp \
@@ -110,6 +111,7 @@ Then start the Agent and the application container, connected to the network pre
 # Datadog Agent
 docker run -d --name datadog-agent \
               --network <NETWORK_NAME> \
+              --cgroupns host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -133,6 +135,7 @@ Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (d
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
+              --cgroupns host \
               --network "<NETWORK_NAME>" \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
@@ -238,8 +241,7 @@ Set the environment variables before running your instrumented app:
 # Environment variables
 export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-export DD_INTEGRATIONS=/opt/datadog/integrations.json
+export CORECLR_PROFILER_PATH=<SYSTEM_DEPENDENT_PATH>
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
 # For containers
@@ -249,6 +251,18 @@ export DD_TRACE_AGENT_PORT=8126
 # Start your application
 dotnet example.dll
 ```
+
+The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
+
+   Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
+   ------------------------------------------|----------------------------
+   Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
+   Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
+   Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
+
+In the table above, `<APP_DIRECTORY>` refers to the directory containing the application's `.dll` files.
 
 {{< /programming-lang >}}
 

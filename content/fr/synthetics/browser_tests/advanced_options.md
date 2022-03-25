@@ -5,7 +5,7 @@ description: Configurer des options avancées pour les étapes des tests Browser
 further_reading:
   - link: /synthetics/browser_tests/actions/
     tag: Documentation
-    text: En savoir plus les étapes des tests Browser
+    text: En savoir plus sur les étapes des tests Browser
 ---
 ## Localisateur spécifié par l'utilisateur
 
@@ -20,7 +20,7 @@ Pour spécifier votre localisateur personnalisé :
 * L'élément HTML peut ensuite être sélectionné à l'aide d'un X-path ou une classe/un ID CSS, comme `div`, `h1` ou `.hero-body`.
 * Après avoir défini l'élément, cliquez sur **Test** pour le mettre en évidence dans l'enregistrement à droite.
 
-{{< img src="synthetics/browser_tests/advanced_options/css.gif" alt="Élément mis en évidence du test">}}
+{{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="Élément mis en évidence du test" video=true >}}
 
 Par défaut, la case **If user specified locator fails, fail test** est cochée. Cela signifie qu'en cas d'échec du localisateur, le test échoue.
 

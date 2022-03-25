@@ -91,7 +91,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 3. Navigate to the _Collect Logs_ tab in the [AWS Integration tile][4].
 4. Select the AWS Account from where you want to collect logs, and enter the ARN of the Lambda created in the previous section.
    {{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda" popup="true" style="width:80%;" >}}
-5. Select the services from which you'd like to collect logs and hit save. To stop collecting logs from a particular service, uncheck it.
+5. Select the services from which you'd like to collect logs and click save. To stop collecting logs from a particular service, uncheck it.
    {{< img src="logs/aws/AWSLogStep2.png" alt="Select services" popup="true" style="width:80%;" >}}
 6. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
 7. To stop collecting all AWS logs, press the _x_ next to each Lambda ARN. All triggers for that function are removed.
@@ -120,8 +120,8 @@ For Terraform users, you can provision and manage your triggers using the [aws_c
 ```conf
 resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filter" {
   name            = "datadog_log_subscription_filter"
-  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # e.g., /aws/lambda/my_lambda_name
-  destination_arn = <DATADOG_FORWARDER_ARN> # e.g., arn:aws:lambda:us-east-1:123:function:datadog-forwarder
+  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # for example, /aws/lambda/my_lambda_name
+  destination_arn = <DATADOG_FORWARDER_ARN> # for example,  arn:aws:lambda:us-east-1:123:function:datadog-forwarder
   filter_pattern  = ""
 }
 ```

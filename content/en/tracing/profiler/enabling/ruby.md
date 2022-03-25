@@ -14,23 +14,18 @@ further_reading:
     - link: 'tracing/profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
+    - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
+      tag: 'Blog'
+      text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
 ---
-
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">
-  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
-</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">
-Datadog Ruby Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
-</div>
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
-The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available for users on every platform (including macOS and Windows), but CPU time profiles are currently only available on Linux platforms**. 
+The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available for users on every platform (including macOS and Windows), but CPU time profiles are currently only available on Linux platforms**.
+
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 
@@ -47,28 +42,34 @@ To begin profiling applications:
 
 2. Install the gems with `bundle install`.
 
-3. You can auto-enable the profiler with environment variables:
+3. Enable the profiler:
 
-    ```shell
-    export DD_PROFILING_ENABLED=true
-    export DD_ENV=prod
-    export DD_SERVICE=my-web-app
-    export DD_VERSION=1.0.3
-    ```
+   {{< tabs >}}
+{{% tab "Environment variables" %}}
 
-    or in code:
+```shell
+export DD_PROFILING_ENABLED=true
+export DD_ENV=prod
+export DD_SERVICE=my-web-app
+export DD_VERSION=1.0.3
+```
 
-    ```ruby
-    Datadog.configure do |c|
-      c.profiling.enabled = true
-      c.env = 'prod'
-      c.service = 'my-web-app'
-      c.version = '1.0.3'
-    end
-    ```
+{{% /tab %}}
+{{% tab "In code" %}}
 
-    **Note**: For Rails applications you can create a `config/initializers/datadog.rb` file with the code configuration above.
+```ruby
+Datadog.configure do |c|
+  c.profiling.enabled = true
+  c.env = 'prod'
+  c.service = 'my-web-app'
+  c.version = '1.0.3'
+end
+```
 
+**Note**: For Rails applications, create a `config/initializers/datadog.rb` file with the code configuration above.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 4. Add the `ddtracerb exec` command to your Ruby application start command:
 

@@ -1,0 +1,38 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Create_a_new_dashboard_with_an_audit_logs_query with Audit Logs Query",
+  "widgets": [
+    {
+      "definition": {
+        "type": "timeseries",
+        "requests": [
+          {
+            "response_format": "timeseries",
+            "queries": [
+              {
+                "search": {
+                  "query": ""
+                },
+                "data_source": "audit",
+                "compute": {
+                  "aggregation": "count"
+                },
+                "name": "query1",
+                "indexes": [
+                  "*"
+                ],
+                "group_by": []
+              }
+            ]
+          }
+        ]
+      },
+      "layout": {
+        "x": 2,
+        "y": 0,
+        "width": 4,
+        "height": 2
+      }
+    }
+  ]
+}

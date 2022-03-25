@@ -9,7 +9,7 @@ further_reading:
 
 ## Enable debug mode
 
-Use Datadog debug settings to diagnose issues or audit trace data. We don't recommend enabling debug mode in production systems, because it increases the number of events that are sent to your loggers. Use it sparingly, for debugging purposes only.
+Use Datadog debug settings to diagnose issues or audit trace data. Datadog does not recommend that you enable debug mode in production systems because it increases the number of events that are sent to your loggers. Use debug mode for debugging purposes only.
 
 Debug mode is disabled by default. To enable it, follow the corresponding language tracer instructions:
 
@@ -81,19 +81,13 @@ func main() {
 
 {{< programming-lang lang="nodejs" >}}
 
-To enable debug mode for the Datadog Node.js Tracer, enable it during its `init`:
+To enable debug mode for the Datadog Node.js Tracer, use the environment variable `DD_TRACE_DEBUG=true`. 
 
-```javascript
-const tracer = require('dd-trace').init({
-  debug: true
-})
-```
+**Note:** For versions below 2.X, debug mode could be enabled programmatically inside the tracer initialization but this is no longer supported.
 
 **Application Logs**
 
-By default, logging from this library is disabled. In order to get debugging information and errors sent to logs, set the `debug` options to `true` in the [init()][1] method.
-
-The tracer will then log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
+In debug mode the tracer will log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
 
 For example:
 
@@ -108,8 +102,7 @@ const tracer = require('dd-trace').init({
   logger: {
     debug: message => logger.trace(message),
     error: err => logger.error(err)
-  },
-  debug: true
+  }
 })
 ```
 

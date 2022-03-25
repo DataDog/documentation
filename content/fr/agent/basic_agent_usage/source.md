@@ -19,11 +19,11 @@ further_reading:
 
 Cette page présente les fonctionnalités de base de l'Agent Datadog. Si vous n'avez pas encore installé l'Agent, vous trouverez des instructions sur la [page relative à l'intégration de l'Agent Datadog][1].
 
-Par défaut, votre Agent est installé dans sa propre sandbox à l'emplacement `~/.datadog-agent`. Vous êtes libre de déplacer ce dossier où vous le souhaitez. Cependant, cet article suppose que l'Agent est installé à son emplacement par défaut. Veillez donc à modifier les instructions en conséquence si vous avez décidé de le déplacer.
+Par défaut, votre Agent est installé dans sa propre sandbox à l'emplacement `~/.datadog-agent`. Vous pouvez déplacer ce dossier où vous le souhaitez. Toutefois, cet article part du principe que l'Agent est installé à son emplacement par défaut. Veillez donc à modifier les instructions en conséquence si vous avez décidé de le déplacer.
 
 ## Commandes
 
-L'Agent Datadog possède quelques commandes. Seules les commandes de _cycle de vie_ (à savoir, `start`, `stop`, `restart` et `status` sur l'Agent) doivent être exécutées avec `sudo`.
+Vous pouvez utiliser quelques commandes avec l'Agent Datadog. Seules les _commandes de cycle de vie_, à savoir `start`, `stop`, `restart` et `status`, doivent être exécutées avec `sudo`.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
@@ -80,7 +80,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 ## Dépannage
 
-[Consultez la documentation relative au dépannage de l'Agent][2].
+Consultez la [documentation relative au dépannage de l'Agent][2].
 
 ## Pour aller plus loin
 

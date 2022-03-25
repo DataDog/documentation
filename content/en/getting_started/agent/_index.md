@@ -84,7 +84,7 @@ The Agent sends events to Datadog when an Agent is started or restarted.
 ### Service checks
 
 **datadog.agent.up**:
-Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise returns `OK`.
+Returns `OK` if the Agent is able to connect to Datadog.
 
 **datadog.agent.check_status**:
 Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
@@ -117,11 +117,11 @@ For help troubleshooting the Agent:
 [5]: /logs/
 [6]: /tracing/
 [7]: https://www.datadoghq.com
-[8]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[8]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[12]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent#environment-variables
+[12]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent#environment-variables
 [13]: /agent/guide/agent-commands/#agent-status-and-information
 [14]: /agent/guide/agent-commands/
 [15]: /agent/guide/agent-commands/#start-the-agent

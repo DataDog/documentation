@@ -19,7 +19,7 @@ La visualisation de nuage de points vous permet de représenter deux métriques 
 
 ## Configuration
 
-{{< img src="dashboards/widgets/scatterplot/scatterplot_setup.png" alt="Configuration d'un nuage de points" style="width:80%;">}}
+{{< img src="dashboards/widgets/scatterplot/scatterplot_setup.png" alt="Configuration du widget Nuage de points" style="width:80%;">}}
 
 ### Configuration
 

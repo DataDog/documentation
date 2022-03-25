@@ -8,9 +8,9 @@ further_reading:
   - link: "/real_user_monitoring/explorer/"
     tag: "Documentation"
     text: "Explore your views within Datadog"
-  - link: "/real_user_monitoring/explorer/analytics/"
+  - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
-    text: "Build analytics upon your events"
+    text: "Apply visualizations on your events"
   - link: "/real_user_monitoring/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
@@ -39,7 +39,7 @@ RUM view events collect extensive performance metrics for every single page view
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
-| [Largest Contentful Paint][5] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (i.e. visible on screen) is rendered.         | <2.5s       |
+| [Largest Contentful Paint][5] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.         | <2.5s       |
 | [First Input Delay][6]        | Interactivity    | Time elapsed between a user’s first interaction with the page and the browser’s response.             | <100ms      |
 | [Cumulative Layout Shift][7]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts happening. | <0.1        |
 
@@ -53,7 +53,7 @@ RUM view events collect extensive performance metrics for every single page view
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                       |
-| `view.largest_contentful_paint` | number (ns) | Moment in the page load timeline in which the largest DOM object in the viewport (i.e. visible on screen) is rendered.                                                                                                |
+| `view.largest_contentful_paint` | number (ns) | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.                                                                                                |
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                             |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts happening.                                                                               |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info][9].                                                                             |

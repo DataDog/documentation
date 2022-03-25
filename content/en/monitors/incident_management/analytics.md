@@ -2,15 +2,11 @@
 title: Incident Management Analytics
 kind: documentation
 description: Track and analyze aggregated incident management statistics in Dashboards and Notebooks
-further_reading:
-- link: "dashboards/querying/#incident-management-analytics"
-  tag: "Documentation"
-  text: "Incident Management Analytics"
 ---
 
 ## Overview
 
-{{< img src="monitors/incidents/incident_analytics.gif" alt="Incident Management Analytics" style="width:80%;">}}
+{{< img src="monitors/incidents/incident_analytics.mp4" alt="Incident Management Analytics" video=true style="width:80%;">}}
 
 Incident Management Analytics is a queryable data source for aggregated incident statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][1] and [Notebooks][2] to analyze the history of your incident response over time. To give you a starting point, Datadog provides an Incident Management Overview [Dashboard template][3] and [Notebook template][4] that you can clone and customize as necessary.
 
@@ -19,6 +15,19 @@ The following widgets support Incident Management Analytics:
 * Timeseries
 * Top List 
 * Query Value 
+
+### Measures
+
+Datadog provides the following aggregated measures out of the box for forming analytics queries:
+
+1. Count (*)
+2. Customer Impact Duration 
+3. Status Active Duration (amount of time the incident was in `Active` status)
+4. Status Stable Duration (amount of time the incident was in `Stable` status)
+5. Time to Repair (customer impact end timestamp - incident creation timestamp)
+6. Time to Resolve (resolved timestamp - created timestamp)
+
+In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7]. 
 
 ### Graph configuration
 
@@ -47,13 +56,10 @@ To configure your graph using Incident Management Analytics data, follow these s
 
 {{< img src="monitors/incidents/incident_analytics_query_example.jpeg" alt="Incident Analytics Query Example" style="width:80%;">}}
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /dashboards/
 [2]: /notebooks/
 [3]: https://app.datadoghq.com/dash/integration/30523/incident-management-overview?from_ts=1632093826308&to_ts=1634685826308&live=true
 [4]: https://app.datadoghq.com/notebook/template/11/incident-management-overview
 [5]: /dashboards/querying/#select-your-visualization
 [6]: /dashboards/querying/#create-a-title
+[7]: /monitors/incident_management/incident_settings#property-fields

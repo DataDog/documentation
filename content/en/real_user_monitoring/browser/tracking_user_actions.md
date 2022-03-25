@@ -11,9 +11,9 @@ further_reading:
   - link: "/real_user_monitoring/explorer/"
     tag: "Documentation"
     text: "Explore your views within Datadog"
-  - link: "/real_user_monitoring/explorer/analytics/"
+  - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
-    text: "Build analytics upon your events"
+    text: "Apply visualizations on your events"
   - link: "/real_user_monitoring/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
@@ -95,7 +95,7 @@ Starting with [version 2.16.0][3], with the `actionNameAttribute` initialization
 
 ## Custom actions
 
-Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM SDK collects a visitor's cart data when they hit the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
+Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM SDK collects a visitor's cart data when they click the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -159,7 +159,6 @@ window.DD_RUM &&
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /real_user_monitoring/browser/modifying_data_and_context/
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes

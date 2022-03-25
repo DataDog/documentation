@@ -20,7 +20,7 @@ The [Metrics Summary page][1] displays a list of your metrics reported to Datado
 
 Search your metrics by name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tagexplorer2.gif" alt="Filter by Tag"  style="width:75%;">}}
+{{< img src="metrics/summary/tagexplorer2.mp4" alt="Filter by Tag" video=true style="width:75%;">}}
 
 ## Facet panel
 
@@ -35,21 +35,21 @@ The search bars provide the most comprehensive set of actions to filter the list
 ## Configuration of multiple metrics 
 There are two buttons that allow you to configure multiple metrics at a time: 
 
-{{< img src="metrics/summary/configurationbuttons.jpg" alt="Bulk Configuration Buttons"  style="width:75%;">}}
+{{< img src="metrics/summary/configurationbuttons.jpg" alt="Bulk Configuration Buttons" style="width:75%;">}}
 
 * **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics.
 
-{{< img src="metrics/summary/bulkpercentiles.jpg" alt="Bulk Percentiles"  style="width:75%;">}}
+{{< img src="metrics/summary/bulkpercentiles.jpg" alt="Bulk Percentiles" style="width:75%;">}}
 
 * **Configure Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
 
-{{< img src="metrics/summary/bulkconfig.gif" alt="Bulk Metric Tag Configuration"  style="width:75%;">}} 
+{{< img src="metrics/summary/bulkconfig.mp4" alt="Bulk Metric Tag Configuration" video=true style="width:75%;">}} 
 
 ## Metric details sidepanel
 
 Click on any metric name to display its details sidepanel for more information regarding the metric’s metadata and tags: 
 
-{{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel"  style="width:75%;">}}
+{{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel" style="width:75%;">}}
 
 ### Metric name
 
@@ -57,7 +57,7 @@ The name of your metric in the [Metrics Explorer][2], [dashboards][3], etc.
 
 ### Ingested Custom Metrics
 
-A metric name may emit multiple ingested custom metrics depending on its associated tag value combinations. Ingested custom metrics represent all the data originally submitted via code.
+A metric name may emit multiple ingested custom metrics depending on its associated tag value combinations. Ingested custom metrics represent all of the data originally submitted with code.
 
 Learn more in the [custom metrics][4] documentation.
 
@@ -83,7 +83,9 @@ The metadata attached to your metric. Most of the metadata can be edited on the 
 
 The unit for your metric (byte, second, request, query, etc.). See the [metric unit][7] page for more details.
 
-When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] that displays when hovering over the metric in your graph. **Note**: This does not change how a metric graph is displayed—it only changes the units of measurement that raw values are considered as, when hovering over a metric. Formatting is automatically applied for readability. For example, bytes (`B`) may be displayed as kibibytes (`KiB`).
+When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] that displays when hovering over the metric in your graph.
+
+**Note**: This does not change how a metric graph is displayed. It only changes the units of measurement that raw values are considered as when you hover over a metric. Formatting is automatically applied for readability. For example, bytes (`B`) may be displayed as kilobytes (`KiB`).
 
 #### Metric type
 
@@ -105,7 +107,7 @@ The metric description helps you understand what a metric does. Descriptions are
 
 ### Tags table
 
-The tags table offers a variety of ways to explore all the tag keys and tag values that are actively reporting in your metric’s data.
+The tags table offers multiple ways to explore all of the tag keys and tag values that are actively reporting in your metric’s data.
 
 Use the tags table to:
 
@@ -121,7 +123,7 @@ For any particular tag key, you can:
 - Open a graph of this metric filtered by your tag `key:value` pair in the Metrics Explorer.
 - Copy any tag `key:value` for filtering across the application.
 
-{{< img src="metrics/summary/updated_tags_table.gif" alt="Tags Table"  style="width:75%;">}}
+{{< img src="metrics/summary/updated_tags_table.mp4" alt="Tags Table" video=true style="width:75%;">}}
 
 [Learn more about tagging][5].
 
@@ -132,7 +134,7 @@ Metrics without Limits\* provides you control over the size of your custom metri
 
 You can configure tags using the bulk metric tag configuration button or the **Manage Tags** button in a metric's details side panel. 
 
-{{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution"  style="width:80%;">}}
+{{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution" style="width:80%;">}}
 
 1. Click on your custom distribution metric name in the **Metrics Summary** table to open the metrics details side panel.
 2. Click the **Manage Tags** button to open the tag configuration modal.
@@ -145,14 +147,14 @@ You can configure tags using the bulk metric tag configuration button or the **M
 
 Once your metric has been configured with Metrics without Limits\*, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
 
-### Fine-tune your metric with aggregations in Advanced Mode
+### Optimize your metric with aggregations in Advanced Mode
 
 For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits\*. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
 - Configured counts/rates are queryable with time/space aggregations of `SUM`
 - Configured gauges are queryable in time/space aggregations of `AVG`
 
-{{< img src="metrics/summary/customize_aggr_docs.jpg" alt="Refine aggregations on counts, rates, and gauges"  style="width:80%;">}}
+{{< img src="metrics/summary/customize_aggr_docs.jpg" alt="Refine aggregations on counts, rates, and gauges" style="width:80%;">}}
 
 More aggregations are available should they be valuable to you. You can add or remove aggregations at any time with no required Agent or code-level changes.
 

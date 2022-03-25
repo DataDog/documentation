@@ -1,7 +1,8 @@
 ---
 title: Graphing FAQ
 kind: faq
-private: true
+cascade: 
+  - private: true
 aliases:
     - /graphing/faq/how-to-merge-screenboards
     - /graphing/faq/false-spikes-sometimes-appear-on-my-sum-graph

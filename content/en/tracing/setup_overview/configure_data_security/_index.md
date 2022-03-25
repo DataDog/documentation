@@ -19,9 +19,9 @@ The Datadog Agent and some tracing libraries have  options available to address 
 
 If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
 
-## Filtering baseline
+## Generalizing resource names and filtering baseline
 
-Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security. In particular:
+Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security and generalize resource names to facilitate grouping during analysis. In particular:
 
 * **Environment variables are not collected by the Agent**
 * **SQL variables are obfuscated, even when not using prepared statements**: For example, the following `sql.query` attribute: `SELECT data FROM table WHERE key=123 LIMIT 10` has its variables obfuscated, to become the following Resource name: `SELECT data FROM table WHERE key = ? LIMIT ?`
@@ -38,36 +38,7 @@ Datadog enforces several filtering mechanisms on spans as a baseline, to provide
 
 ## Agent trace obfuscation
 
-Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate information attached to your traces.
-
-List of all environment variables available for Agent trace obfuscation:
-
-`DD_APM_CONFIG_OBFUSCATION_ELASTICSEARCH_ENABLED`
-: Whether or not to enable obfuscation in Elasticsearch.
-
-`DD_APM_CONFIG_OBFUSCATION_ELASTICSEARCH_KEEP_VALUES`
-: Whether or not to store obfuscated values from Elasticsearch.
-
-`DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`
-: A string containing values to remove from HTTP paths for obfuscation.
-
-`DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`
-: A string containing one or more query strings to remove for obfuscation.
-
-`DD_APM_CONFIG_OBFUSCATION_MEMCACHED_ENABLED`
-: Whether or not to enable obfuscation of `memcached`.
-
-`DD_APM_CONFIG_OBFUSCATION_MONGODB_ENABLED`
-: Whether or not to enable obfuscation of `mongodb`. 
-
-`DD_APM_CONFIG_OBFUSCATION_MONGODB_KEEP_VALUES`
-: Whether or not to store obfuscated values from `mongodb`.
-
-`DD_APM_CONFIG_OBFUSCATION_REDIS_ENABLED`
-: Whether or not to enable obfuscation for `redis`.
-
-`DD_APM_CONFIG_OBFUSCATION_REMOVE_STACK_TRACES`
-: Whether or not to remove stack traces for obfuscation.
+Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
 
 This option works with the following services:
 
@@ -201,7 +172,7 @@ apm_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Replace rules for tag filtering
+## Scrub sensitive data from your spans
 
 To scrub sensitive data from your [span][3]'s tags, use the `replace_tags` setting [in your datadog.yaml configuration file][4] or the `DD_APM_REPLACE_TAGS` environment variable. The value of the setting or environment variable is a list of one or more groups of parameters that specify how to replace sensitive data in your tags. These parameters are:
 

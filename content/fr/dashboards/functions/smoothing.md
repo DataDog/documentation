@@ -12,9 +12,9 @@ aliases:
 
 La fonction `autosmooth()` applique une moyenne mobile avec un intervalle sélectionné automatiquement. Elle lisse une série temporelle tout en préservant sa tendance. Dans cet exemple, la fonction choisit l'intervalle optimal pour lisser la série temporelle :
 
-{{< img src="dashboards/functions/smoothing/autosmooth_illustration.png" alt="illustration d'autosmooth" style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/autosmooth_illustration.png" alt="Illustration d'autosmooth" style="width:80%;">}}
 
-Lorsque la fonction est utilisée sur une requête `group by` (comme `avg by`), le même intervalle est appliqué à toutes les séries temporelles. Lorsque la fonction est utilisée sur plusieurs métriques d'un même graphique, différents intervalles peuvent être sélectionnés pour lisser de façon optimale chaque série temporelle de métrique.
+Lorsque la fonction est utilisée sur une requête `group by`, par exemple `avg by`, le même intervalle appliqué à toutes les séries temporelles. Lorsque la fonction est utilisée sur plusieurs métriques d'un même graphique, différents intervalles peuvent être sélectionnés pour lisser de façon optimale chaque série temporelle de métrique.
 
 L'algorithme est inspiré de l'[algorithme ASAP][1]. Vous pouvez en savoir plus dans cet [article de blog][2] (en anglais).
 
@@ -32,9 +32,9 @@ Remarque : la valeur de l'intervalle correspond au nombre de points de données
 
 Exemple :
 
-Si vous avez une métrique `10 + x%10 {*}` qui s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma3(10 + x%10 {*})` donne le graphique suivant :
+Si une métrique `10 + x%10 {*}` s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma3(10 + x%10 {*})` donne le graphique suivant :
 
-{{< img src="dashboards/functions/smoothing/ewma3.png" alt="EWMA3"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma3.png" alt="EWMA3" style="width:80%;">}}
 
 ### Ewma 5
 
@@ -46,9 +46,9 @@ Remarque : la valeur de l'intervalle correspond au nombre de points de données
 
 Exemple :
 
-Si vous avez une métrique `10 + x%10 {*}` qui s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma5(10 + x%10 {*})` donne le graphique suivant :
+Si une métrique `10 + x%10 {*}` s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma5(10 + x%10 {*})` donne le graphique suivant :
 
-{{< img src="dashboards/functions/smoothing/ewma5.png" alt="EWMA5"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma5.png" alt="EWMA5" style="width:80%;">}}
 
 ### Ewma 10
 
@@ -60,9 +60,9 @@ Remarque : la valeur de l'intervalle correspond au nombre de points de données
 
 Exemple :
 
-Si vous avez une métrique `10 + x%10 {*}` qui s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma10(10 + x%10 {*})` donne le graphique suivant :
+Si une métrique `10 + x%10 {*}` s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma10(10 + x%10 {*})` donne le graphique suivant :
 
-{{< img src="dashboards/functions/smoothing/ewma10.png" alt="EWMA10"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma10.png" alt="EWMA10" style="width:80%;">}}
 
 ### Ewma 20
 
@@ -74,9 +74,9 @@ Remarque : la valeur de l'intervalle correspond au nombre de points de données
 
 Exemple :
 
-Si vous avez une métrique `10 + x%10 {*}` qui s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma20(10 + x%10 {*})` donne le graphique suivant :
+Si une métrique `10 + x%10 {*}` s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma20(10 + x%10 {*})` donne le graphique suivant :
 
-{{< img src="dashboards/functions/smoothing/ewma20.png" alt="EWMA20"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma20.png" alt="EWMA20" style="width:80%;">}}
 
 ## Médiane
 
@@ -117,7 +117,7 @@ Remarque : la valeur de l'intervalle correspond au nombre de points de données
 {{< whatsnext desc="Consultez les autres fonctions disponibles :" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithme :  mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques sur votre métrique.  {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}Total : comptez les valeurs différentes de zéro ou différentes de null de votre métrique. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/count" >}}Nombre de valeurs : comptez les valeurs différentes de zéro ou différentes de null de votre métrique. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion : excluez certaines valeurs de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut pour votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}

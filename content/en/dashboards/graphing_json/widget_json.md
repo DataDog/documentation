@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 - link: "/dashboards/graphing_json/request_json/"
   tag: "Documentation"
   text: "Request JSON schema"
@@ -62,7 +62,7 @@ EVENTS_SCHEMA = {
 }
 ```
 
-See the [Event stream documentation][2] for more details about the `<EVENT_QUERY>` syntax.
+See the [Event stream documentation][2] for more details about the query syntax.
 
 ### Examples
 

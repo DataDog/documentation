@@ -6,9 +6,9 @@ aliases:
   - /fr/agent/faq/dogstream
 ---
 <div class="alert alert-danger">
-Dogstream est une fonctionnalité de l'Agent 5 dorénavant obsolète. Elle ne fera l'objet d'aucune mise à jour.
+Dogstream est une fonctionnalité de l'Agent 5 dorénavant obsolète. Elle ne fait plus l'objet d'aucune mise à jour.
 <br>
-L'Agent v6 est maintenant disponible ! <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">Passez à la nouvelle version</a> pour bénéficier des nouvelles fonctionnalités.
+L'Agent v6 est disponible ! <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">Passez à la nouvelle version</a> pour bénéficier des nouvelles fonctionnalités.
 </div>
 
 Les fichiers de log contiennent une multitude de données précieuses sur vos applications et vos opérations.
@@ -48,20 +48,20 @@ Si vous souhaitez parser un format de log différent, par exemple pour un logici
 
 `parsers:parse_web` indique que la fonction Python personnalisée se trouve dans un paquet appelé `parsers` dans le `PYTHONPATH` de l'Agent, et que le paquet `parsers` a une fonction appelée `parse_web`. Le `PYTHONPATH` de l'Agent est défini dans le script de démarrage de l'Agent, `/etc/init.d/datadog-agent`, dans la configuration du superviseur pour la version de l'Agent.
 
-Si le parser ne se trouve **pas** dans le `PYTHONPATH` de l'Agent, vous pouvez utiliser une autre syntaxe pour configurer votre parser de ligne :
+Si le parser ne se trouve **pas** dans le `PYTHONPATH` de l'Agent, vous pouvez utiliser une autre syntaxe pour configurer votre parser de lignes :
 
     dogstreams: /chemin/vers/log1:/chemin/vers/mon/module_parsing.py:custom_parser
 
 Dans ce format, l'Agent tente d'importer une fonction appelée `custom_parser` à partir de `/chemin/vers/mon/parsers_module.py`.
 
-Si votre parser de log personnalisé ne fonctionne pas, vérifiez tout d'abord les logs du Collector de l'Agent :
+Si votre parser de logs personnalisé ne fonctionne pas, vérifiez tout d'abord les logs du Collector de l'Agent :
 
 * Si l'Agent n'est pas en mesure d'importer votre fonction, recherchez `Could not load Dogstream line parser`.
 
 * Si tout fonctionne comme prévu, vous devriez voir `dogstream: parsing {nom du fichier} with {nom de la fonction} (requested {texte option de configuration})`.
 
 <div class="alert alert-warning">
-Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez pas une ligne existante) à n'importe quel fichier de log surveillé par l'Agent. L'Agent surveille uniquement la fin de chaque fichier de log et ne remarquera donc pas les modifications effectuées ailleurs dans le fichier.
+Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez pas une ligne existante) à n'importe quel fichier de log surveillé par l'Agent. L'Agent surveille uniquement la fin de chaque fichier de log et ne remarque donc pas les modifications effectuées ailleurs dans le fichier.
 </div>
 
 ### Rédaction de fonctions de parsing
@@ -85,7 +85,7 @@ Imaginons que vous recueillez des métriques à partir de logs qui ne sont pas f
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
 ```
 
-Vous pouvez définir un parser de log comme suit afin de recueillir une métrique à partir des données loguées dans votre compte Datadog :
+Vous pouvez définir un parser de logs comme suit afin de recueillir une métrique à partir des données loguées dans votre compte Datadog :
 
 ```python
 
@@ -119,20 +119,20 @@ Avertissement : le nombre de fois qu'une même métrique peut être recueillie 
 
 ## Parsing d'événements
 
-Le parsing d'événement se fait via les mêmes fonctions de parsing personnalisées que celles décrites ci-dessus, à une exception près : si votre fonction de parsing personnalisée renvoie un `dict` (ou une `list` de `dict`), Datadog la traite comme un événement, et non comme une métrique.
+Le parsing d'événements repose sur les mêmes fonctions de parsing personnalisées que celles décrites ci-dessus, à une exception près : si votre fonction de parsing personnalisée renvoie un `dict` (ou une `list` de `dict`), Datadog la traite comme un événement, et non comme une métrique.
 
 Les champs d'événement sont les suivants (en gras si obligatoires) :
 
 | Champ           | Type        | Valeur                                                                                                                                                                                                                             |
 |-----------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **msg_title**   | Chaîne      | Titre de l'événement, indexé par notre recherche de texte intégral.                                                                                                                                                                         |
+| **msg_title**   | Chaîne      | Titre de l'événement, indexé par la recherche de texte intégral.                                                                                                                                                                         |
 | **timestamp**   | Nombre entier     | Timestamp selon l'epoch Unix. En cas d'omission, la valeur par défaut est l'heure à laquelle l'Agent a parsé l'événement.                                                                                                                                        |
-| **msg_text**    | Chaîne      | Corps de l'événement, indexé par notre recherche de texte intégral.                                                                                                                                                                           |
-| alert_type      | Énumération de chaînes | Indique la gravité de l'événement. Valeurs possibles : `error`, `warning`, `success` ou `info`. En cas d'omission, la valeur par défaut est `info`. Peut être recherché avec `alert_type:valeur`                                                                  |
-| event_type      | Chaîne      | Décrit le type d'événement dont il s'agit. Utilisé pour générer la clé d'agrégation                                                                                                                                                         |
-| aggregation_key | Chaîne      | Décrit les éléments affectés par cet événement, le cas échéant. Utilisé pour générer la clé d'agrégation                                                                                                                                              |
-| host            | Chaîne      | Nom du host à l'origine de l'événement. L'événement reçoit automatiquement les tags que vous avez donnés au host en utilisant la [page de tagging][1]ou l'[API de tagging][2]. La valeur du host est utilisée pour générer la clé d'agrégation. |
-| **priority**    | Chaîne      | Détermine si l'événement est visible ou masqué par défaut dans le flux. Valeurs possibles : `low` ou `normal`                                                                                                                      |
+| **msg_text**    | Chaîne      | Corps de l'événement, indexé par la recherche de texte intégral.                                                                                                                                                                           |
+| alert_type      | Énumération de chaînes | Indique la gravité de l'événement. Valeurs possibles : `error`, `warning`, `success` ou `info`. En cas d'omission, la valeur par défaut est `info`. Peut être recherché avec `alert_type:value`.                                                                  |
+| event_type      | Chaîne      | Décrit le type d'événement dont il s'agit. Utilisé pour générer la clé d'agrégation.                                                                                                                                                         |
+| aggregation_key | Chaîne      | Décrit les éléments affectés par cet événement, le cas échéant. Utilisé pour générer la clé d'agrégation.                                                                                                                                              |
+| host            | Chaîne      | Nom du host à l'origine de l'événement. L'événement reçoit automatiquement les tags que vous avez attribués au host en utilisant la page de [tagging][1] ou l'[API de tagging][2]. La valeur du host est utilisée pour générer la clé d'agrégation. |
+| **priority**    | Chaîne      | Détermine si l'événement est visible ou masqué par défaut dans le flux. Valeurs possibles : `low` ou `normal`.                                                                                                                      |
 
 Les événements ayant la même clé d'agrégation sur une période de 24 heures sont regroupés sur le flux.
 La clé d'agrégation est une combinaison des champs suivants :
@@ -141,7 +141,7 @@ La clé d'agrégation est une combinaison des champs suivants :
 - aggregation_key
 - host
 
-Pour obtenir un exemple de parser d'événements, découvrez notre [parser d'événements de compactage Cassandra][3] livré avec l'Agent.
+Pour obtenir un exemple de parser d'événements, consultez notre [parser d'événements de compactage Cassandra][3] fourni avec l'Agent.
 
 ### Collecte d'événements
 
@@ -151,7 +151,7 @@ Imaginons que vous souhaitez recueillir des événements à partir de logs auxqu
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
-Vous pouvez définir un parser de log comme suit afin de créer un événement à partir des données loguées dans votre [flux d'événements][4] Datadog :
+Vous pouvez définir un parser de logs comme indiqué ci-dessous, afin de créer un événement à partir des données loguées dans votre [flux d'événements][4] Datadog :
 
 ```python
 
@@ -206,7 +206,7 @@ Votre parser_module.py doit contenir une fonction définie comme :
 def custom_parser(logger, line)
 ```
 
-Vous pouvez alors changer la parité de votre fonction de façon à ce qu'elle accepte des paramètres supplémentaires, comme illustré [dans cet exemple de l'Agent][5]
+Vous pouvez changer la parité de votre fonction de façon à ce qu'elle accepte des paramètres supplémentaires, comme illustré dans cet [exemple d'Agent][5].
 
 Ainsi, si vous modifiez votre fichier de configuration comme suit :
 
@@ -220,13 +220,13 @@ Et votre fonction de parsing comme suit :
 def custom_parser(logger, line, parser_state, *parser_args):
 ```
 
-Vous obtenez un paramètre tuple dans **parser_args** sous la forme de (customvar1, customvar2), prêt à être utilisé dans votre code à l'aide de parser_args[0] et parser_args[1].
+Vous obtenez un paramètre tuple dans **parser_args**, avec le format (`<VARIABLE_CUSTOM_1>`, `<VARIABLE_CUSTOM_2>`), prêt à être utilisé dans votre code à l'aide de parser_args[0] et parser_args[1].
 
 **Remarque** : le paramètre **parser_state** est facultatif, mais il doit figurer dans la signature de la fonction. Si vous avez un seul paramètre, vous devez utiliser **parser_args[1]** pour le récupérer.
 
 Par exemple, si vous utilisez le même parser que dans la documentation mais qu'au lieu d'extraire le nom de la métrique à partir du log, vous souhaitez le définir à l'aide de ce paramètre :
 
-Votre fichier de configuration contiendrait alors ceci :
+Le fichier de configuration contiendrait alors ce qui suit :
 
 ```text
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
@@ -234,11 +234,11 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Dépannage
 
-Personne n'étant à l'abri d'un bug, il est très important de pouvoir voir le traceback de vos parsers de log. Cela est possible si le niveau des [logs de votre Agent][6] est défini sur « DEBUG ». Le niveau de log de l'Agent peut être défini dans `datadog.conf` en supprimant la mise en commentaire de [cette ligne][7] et en la modifiant, puis en [redémarrant l'Agent][8]. Une fois ces modifications effectuées, le traceback associé aux erreurs dans votre parser de log personnalisé se trouvera dans le fichier *collector.log* ([lisez cet article pour savoir où se trouvent les logs de votre Agent][6]). Ce traceback comprend généralement la chaîne checks.collector(datadog.py:278) | Error while parsing line in them ([le code de l'Agent où l'erreur sera probablement générée se trouve ici][9]).
+Personne n'étant à l'abri d'un bug, il est très important de pouvoir visualiser le traceback de vos parsers de logs. Cela est possible si le niveau des [logs de votre Agent][6] est défini sur « DEBUG ». Le niveau de log de l'Agent peut être défini dans `datadog.conf` en supprimant la mise en commentaire de [cette ligne][7] et en la modifiant, puis en [redémarrant l'Agent][8]. Une fois ces modifications effectuées, le traceback associé aux erreurs dans votre parser de logs personnalisé se trouve dans le fichier `collector.log`. Il comprend généralement la chaîne « checks.collector(datadog.py:278) | Error while parsing line in them » (voir le [code de l'Agent][9] dans lequel l'erreur est susceptible d'être générée).
 
-Notez que lorsque vous modifiez votre parser de log personnalisé, vous devez [redémarrer l'Agent][8] pour appliquer vos modifications.
+**Remarque** : lorsque vous modifiez votre parser de logs personnalisé, vous devez [redémarrer l'Agent][8] pour appliquer vos modifications.
 
-Si vous pensez que l'erreur n'est pas liée à la fonction de votre parser de log personnalisé, n'hésitez pas à [contacter l'assistance][10]. Toutefois, commencez par définir le niveau de log sur « DEBUG » avant de lancer l'Agent quelques minutes en vous assurant que de nouveaux logs sont ajoutés à vos fichiers. Ensuite, [exécutez la commande flare][11] à partir de votre Agent. L'équipe d'assistance aura ainsi accès aux informations nécessaires pour dépanner efficacement le problème.
+Si vous pensez que l'erreur n'est pas liée à la fonction de votre parser de logs personnalisé, n'hésitez pas à [contacter l'assistance][10]. Toutefois, commencez par définir le niveau de log sur « DEBUG » avant de lancer l'Agent quelques minutes en vous assurant que de nouveaux logs sont ajoutés à vos fichiers. Ensuite, [exécutez la commande flare][11] à partir de votre Agent. L'équipe d'assistance aura ainsi accès aux informations nécessaires pour dépanner efficacement le problème.
 
 [1]: https://app.datadoghq.com/infrastructure#tags
 [2]: /fr/api/v1/tags/

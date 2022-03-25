@@ -14,11 +14,11 @@ further_reading:
 ---
 Le widget Image vous permet d'intégrer une image à votre dashboard. Une image désigne un fichier PNG, JPG ou GIF animé accessible depuis une URL :
 
-{{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true"  width="80%" >}}
+{{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true" style="width:80%;" >}}
 
 ## Configuration
 
-{{< img src="dashboards/widgets/image/image_setup.png" alt="Configuration image" style="width:80%;">}}
+{{< img src="dashboards/widgets/image/image_setup.png" alt="Configuration du widget Image" style="width:80%;">}}
 
 1. Saisissez l'URL de votre image.
 2. Choisissez une option d'affichage :

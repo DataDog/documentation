@@ -50,7 +50,9 @@ These can be seen as an array, a hashmap, or an object composed of 'simple' attr
 Matching: x/350. Bean name: java.lang - Attribute name: HeapMemoryUsage - Attribute type: javax.management.openmbean.CompositeData
 ```
 
-In this case, you need to add more details to JMXFetch on how to use this 'composite' attribute to create a numerical value for a metric. In order to do this, use a `.` to specify the component, i.e.:
+In this case, you need to add more details to JMXFetch on how to use this 'composite' attribute to create a numerical value for a metric.
+
+To do this, use a `.` to specify the component:
 
 ```yaml
 - include:

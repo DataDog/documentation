@@ -12,7 +12,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
-- link: "/synthetics/cicd_testing/ci_results_explorer"
+- link: "/synthetics/ci_results_explorer"
   tag: "Documentation"
   text: CI Results Explorer
 ---
@@ -50,12 +50,12 @@ Search through your Synthetic tests by clicking on the facets on the left panel 
 * **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click the other value checkbox or add the other value with an `OR` Boolean operator and wrap values with quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
 * **Search on multiple facets and text**: Click on values of different facets to create a search query that includes filtering for multiple facets. For example, `type:api``region:aws:us-east-2`. You can also mix facets and text. For example, `checkout type:browser`. Although invisible, the `AND` Boolean operator is applied when searching on multiple terms.
 * **Search on message**: Use message in your query to search through your tests’ notification messages (found in the **Message** property). For example, `message:testcontent`.
-* **Exclude facets or text**: Click on an existing filled checkbox to deselect a facet value or prepend your term with `-` to exclude it from the search query, e.g. `-state:paused`.
+* **Exclude facets or text**: Click on an existing filled checkbox to deselect a facet value or prepend your term with `-` to exclude it from the search query, for example, `-state:paused`.
 * **Perform custom matches**: Use wildcards (`*`). For example, `valid*`.
 
 If you want to exclusively search for browser tests, click **Browser Test** in the left panel. Click again to reselect all your tests, regardless of their type.
 
-{{< img src="synthetics/search/facet-search.gif" alt="Facet Search" >}}
+{{< img src="synthetics/search/facet-search.mp4" alt="Facet Search" video=true >}}
 
 ## Manage tests
 
@@ -74,9 +74,9 @@ Hover over a test in the table to populate options such as `Pause`, `Run Test No
 
 ### Audit events
 
-The creation, addition, and deletion of Synthetic tests, global variables, and private locations create events in the [event stream][4]. Generated events explain the change and display the user who performed the change.
+The creation, addition, and deletion of Synthetic tests, global variables, and private locations create events in the [event explorer][4]. Generated events explain the change and display the user who performed the change.
 
-Find all Synthetic Monitoring related changes by searching the event stream for `#audit synthetics`. Retrieve changes that were done on a specific test by searching on the id of your test. For example, `tags:public_id:4m7-bqy-mxq`.
+Find all Synthetic Monitoring related changes by searching the event explorer for `tags:(audit AND synthetics)`. Retrieve changes that were done on a specific test by searching on the id of your test. For example, `tags:"public_id:7sp-azg-r5m"`.
 
 {{< img src="synthetics/search/audit_events.png" alt="Synthetic Monitoring audit events" >}}
 
@@ -86,5 +86,5 @@ Find all Synthetic Monitoring related changes by searching the event stream for 
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: https://app.datadoghq.com/synthetics/explorer/ci
-[3]: /synthetics/cicd_testing/ci_results_explorer
+[3]: /synthetics/ci_results_explorer
 [4]: /events/

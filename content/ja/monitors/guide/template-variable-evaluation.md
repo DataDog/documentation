@@ -52,10 +52,10 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 | humanize_bytes(var) | 人間が読める形式の var バイトを返します|
 | humanize_bits(var)  | 人間が読める形式の var ビットを返します|
 | abs(var)            | var の絶対値を返します|
-| int(var)            | var を整数として返します|
+| int(var)            | var を床付き整数、つまり小数点以下の数値で返します。たとえば、var = 12.345 の場合、 `int(var)` は 12 を返します。|
 | float(var)          | var を浮動小数点数として返します|
 | trunc(var)          | var を整数として返します。これは int 関数のエイリアスです|
-| dec(var)            | 小数点の右側の数値を返します。たとえば、var = 12.345 の場合、dec(var) は 0.345 を返します。|
+| dec(var)            | 小数点の右側の数値を返します。たとえば、var = 12.345 の場合、`dec(var)` は 0.345 を返します。|
 
 次の関数は、数値テンプレート変数の値を数学関数への入力として使用します。
 

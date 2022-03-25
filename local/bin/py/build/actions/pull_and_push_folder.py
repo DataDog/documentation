@@ -33,7 +33,7 @@ def pull_and_push_folder(content, content_dir):
             txt = file_content
             if len(split) == 3:
                 _, fm, txt = split
-                new_yml = yaml.load(fm, Loader=yaml.FullLoader)
+                new_yml = yaml.safe_load(fm)
             elif len(split) == 1:
                 txt = split[0]
             # if front matter update existing

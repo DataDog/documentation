@@ -56,7 +56,7 @@ The majority of data that Datadog receives is submitted by the Agent, either thr
 
 Data submitted directly to the Datadog API is not aggregated by Datadog, with the exception of distribution metrics. The raw values sent to Datadog are stored as-is.
 
-Refer to the [Submission types and Datadog in-app types](#submission-types-and-datadog-in-app-types) section to see how different metric submission types are mapped to their corresponding in-app types.
+Read the [Submission types and Datadog in-app types](#submission-types-and-datadog-in-app-types) section to learn about how different metric submission types are mapped to their corresponding in-app types.
 
 ## Metric types
 
@@ -84,7 +84,7 @@ The GAUGE metric submission type represents a snapshot of events in one time int
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-The HISTOGRAM metric submission type represents the statistical distribution of a set of values calculated Agent-side in one time interval. Datadog’s HISTOGRAM metric type is an extension of the StatsD timing metric type: the Agent aggregates the values that are sent in a defined time interval and produces different metrics which represent the set of values.
+The HISTOGRAM metric submission type represents the statistical distribution of a set of values calculated Agent-side in one time interval. Datadog’s HISTOGRAM metric type is an extension of the StatsD timing metric type. The Agent aggregates the values that are sent in a defined time interval and produces different metrics which represent the set of values.
 
 If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time interval, the following metrics are produced by the Agent by default:
 
@@ -121,7 +121,7 @@ If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time in
 
 The DISTRIBUTION metric submission type represents the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. A DISTRIBUTION can be used to instrument logical objects, like services, independently from the underlying hosts.
 
-Unlike the HISTOGRAM metric type, which aggregates on the Agent during a given time interval, a DISTRIBUTION metric sends all the raw data during a time interval to Datadog, and aggregations occur server-side. Because the underlying data structure represents raw, unaggregated data, distributions provide two major features:
+Unlike the HISTOGRAM metric type, which aggregates on the Agent during a given time interval, a DISTRIBUTION metric sends all the raw data during a time interval to Datadog. Aggregations occur on the server-side. Because the underlying data structure represents raw, unaggregated data, distributions provide two major features:
 
 - Calculation of percentile aggregations
 - Customization of tagging
@@ -158,14 +158,14 @@ If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time
 
 Suppose you are submitting a COUNT metric, `activeusers.basket_size`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
-The Agent adds all the values received in one time interval and submits the total number, in this case `15`, as the COUNT metric’s value.
+The Agent adds all of the values received in one time interval. Then, it submits the total number, in this case `15`, as the COUNT metric’s value.
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
 Suppose you are submitting a RATE metric, `queue_messages.rate`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
-The Agent adds all the values received in one time interval and submits the total number divided by the total number of seconds in this time interval. In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric’s value.
+The Agent adds all of the values received in one time interval. Then, it submits the total number divided by the total number of seconds in this time interval. In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric’s value.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
@@ -218,7 +218,7 @@ That is, for a distribution metric with added percentile aggregations during a g
 
 #### Customization of tagging
 
-This functionality allows you to control tagging for metrics where host-level granularity is not necessary. Learn more about [Metrics withhout Limits™][1].
+This functionality allows you to control tagging for metrics where host-level granularity is not necessary. Learn more about [Metrics without Limits™][1].
 
 **Note**: The exclusion of tags with `!` is not accepted with this feature.
 
@@ -290,11 +290,12 @@ Submit your HISTOGRAM type metrics from one of the following sources:
 | [Agent check][1]  | `self.histogram(...)`      | HISTOGRAM       | GAUGE, RATE          |
 | [DogStatsD][2]    | `dog.histogram(...)`       | HISTOGRAM       | GAUGE, RATE          |
 
-**Note**: If you submit a TIMER metric to the Datadog Agent, it is equivalent to submitting a HISTOGRAM metric type within DogStatsD (not to be confused with timers in the standard StatsD). Timers represent duration data only; for example, the amount of time a section of code takes to execute or how long it takes to fully render a page.
+Submitting a TIMER metric to the Datadog Agent is equivalent to submitting a HISTOGRAM metric type within DogStatsD (not to be confused with timers in the standard StatsD). [DogStatsD `TIMER`][3] represents duration data only. For example, the amount of time a section of code takes to execute or how long it takes to fully render a page.
 
 
 [1]: /metrics/agent_metrics_submission/?tab=histogram
 [2]: /metrics/dogstatsd_metrics_submission/#histogram
+[3]: /metrics/dogstatsd_metrics_submission/#timer
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
@@ -311,7 +312,7 @@ Submit your DISTRIBUTION type metrics from the following source:
 
 ## Submission types and Datadog in-app types
 
-Find below a summary of all available metric submission sources and methods with the mapping between the corresponding metric submission type and the in-app types:
+Below is a summary of all available metric submission sources and methods. This table shows the mapping between the corresponding metric submission type and the in-app types:
 
 | Submission Source | Submission Method (Python)           | Submission Type | Datadog In-App Types |
 | ----------------- | ------------------------------------ | --------------- | -------------------- |

@@ -18,6 +18,9 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run HTTP tests on internal endpoints"
+- link: "/synthetics/multistep"
+  tag: "Documentation"
+  text: "Run multistep HTTP tests"
 ---
 ## Overview
 
@@ -39,6 +42,7 @@ After choosing to create an `HTTP` test, define your test's request.
    {{% tab "Request Options" %}}
 
    * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
+   * **Timeout**: Specify the amount of time in seconds before the test times out.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
@@ -47,16 +51,24 @@ After choosing to create an `HTTP` test, define your test's request.
    {{% tab "Authentication" %}}
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-   * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
-   This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+   * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM v1**: Add NTLM authentication credentials.
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+
+  </br>You can optionally specify the domain and work station in the **Additional configuration** section.  
+
+   {{% /tab %}}
+
+   {{% tab "Query Parameters" %}}
+
+   * **Encode parameters**: Add the name and value of query parameters that require encoding. 
 
    {{% /tab %}}
 
    {{% tab "Request Body" %}}
 
    * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
+   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
 
    {{% /tab %}}
 
@@ -75,7 +87,7 @@ After choosing to create an `HTTP` test, define your test's request.
    {{% tab "Proxy" %}}
 
    * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
+   * **Proxy header**: Add headers to include in the HTTP request to the proxy.
 
    {{% /tab %}}
 
@@ -101,7 +113,7 @@ Click **Test URL** to try out the request configuration. A response preview is d
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -110,9 +122,9 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
-**Note**: HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
+HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your HTTP test" style="width:90%;" >}}
 
@@ -134,7 +146,7 @@ Set alert conditions to determine the circumstances under which you want a test 
 
 #### Alerting rule
 
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
+When you set the alert conditions to: `An alert is triggered if your test fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes;
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
@@ -168,7 +180,7 @@ Click **Save** to save and start your test.
 
 ### Create local variables
 
-You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -199,6 +211,9 @@ A test is considered `FAILED` if it does not satisfy one or more assertions or i
 
 These reasons include the following:
 
+`CONNREFUSED`
+: No connection could be made because the target machine actively refused it.
+
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
 
@@ -213,8 +228,9 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. 
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 `MALFORMED_RESPONSE` 
 : The remote server responded with a payload that does not comply with HTTP specifications.
@@ -223,7 +239,15 @@ These reasons include the following:
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][13].
 
-If you have access to the [custom role feature][14], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][14], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+
+### Restrict access
+
+Access restriction is available for customers using [custom roles][15] on their accounts.
+
+You can restrict access to an HTTP test based on the roles in your organization. When creating an HTTP test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
@@ -231,7 +255,7 @@ If you have access to the [custom role feature][14], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: https://restfulapi.net/json-jsonpath/
 [6]: https://www.w3schools.com/xml/xpath_syntax.asp
@@ -243,3 +267,4 @@ If you have access to the [custom role feature][14], add your user to any custom
 [12]: /synthetics/api_tests/errors/#ssl-errors
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
+[15]: /account_management/rbac/#create-a-custom-role

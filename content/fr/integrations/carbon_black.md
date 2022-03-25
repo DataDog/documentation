@@ -4,9 +4,9 @@ categories:
   - Sécurité
 ddtype: crawler
 description: "Recueillir vos logs Carbon\_Black\_Defense"
-doc_link: 'https://docs.datadoghq.com/integrations/carbon_black/'
+doc_link: https://docs.datadoghq.com/integrations/carbon_black/
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md
 has_logo: true
 integration_title: "Carbon\_Black"
 is_public: true
@@ -15,81 +15,45 @@ name: carbon_black
 public_title: "Intégration Datadog/Carbon\_Black"
 short_description: "Recueillir vos logs Carbon\_Black\_Defense"
 version: '1.0'
+integration_id: carbonblack
 ---
 ## Présentation
 
-Utilisez l'intégration Datadog/Carbon Black pour transmettre vos logs Carbon Black Defense à Datadog.
+Utilisez l'intégration Datadog/Carbon Black pour transmettre vos événements et alertes EDR Carbon Black sous la forme de logs Datadog.
+
 
 ## Configuration
 
 ### Installation
 
-Commencez par installer et configurer le [log shipper Carbon Black Defense][1].
+Datadog utilise le forwarder d'événements Carbon Black, ainsi que le Forwarder Lambda de Datadog, pour recueillir des événements et des alertes Carbon Black depuis votre compartiment S3.
 
-### Configuration
+Carbon Black propose une fonctionnalité de [collecte Postman][1] pour l'API servant à créer le forwarder d'événements Carbon Black.
 
-Le fichier de configuration ci-dessous active votre shipper Carbon Black Defense afin de transmettre vos logs à Datadog :
+#### Configuration
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+1. [Installez le Forwarder Datadog][2].
+2. [Créez un compartiment dans AWS Management Console][3] afin d'y stocker vos événements.
+3. [Configurez le compartiment S3 de façon à ce que le forwarder Carbon Black puisse écrire des données][4].
+   - **Attention** : le nom du compartiment S3 rassemblant les événements CB doit commencer par le mot-clé `carbon-black`. Cela permet à Datadog d'identifier correctement la source des logs.
+5. [Créez un niveau d'accès dans la console Carbon Black Cloud][5].
+6. [Créez une clé d'API dans la console Carbon Black Cloud][6].
+7. [Configurez l'API dans Postman][7] en remplaçant la valeur des variables d'environnement Postman `cb_url`, `cb_org_key`, `cb_custom_id` et `cb_custom_key` par la clé créée lors de l'étape précédente.
+8. [Créez deux forwarders d'événements Carbon Black][8] avec des noms distincts pour les alertes (`"type": "alert"`) et les événements d'endpoint (`"type": "endpoint.event"`).
+9. [Configurez le Forwarder Datadog de façon à ce qu'il se déclenche sur le compartiment S3][9].
 
-```conf
-[general]
-
-template = {{source}}|{{version}}|{{vendor}}|{{product}}|{{dev_version}}|{{signature}}|{{name}}|{{severity}}|{{extension}}
-policy_action_severity = 4
-output_format=json
-output_type=http
-http_out=https://http-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DATADOG>?ddsource=cbdefense
-http_headers={"content-type": "application/json"}
-https_ssl_verify=True
-
-[cbdefense1]
-server_url = <URL_SERVEUR_CB_DEFENSE>
-siem_connector_id=<ID_API_CB_DEFENSE>
-siem_api_key=<CLÉ_SECRET_API_CB_DEFENSE>
-```
-
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
-
-```conf
-[general]
-
-template = {{source}}|{{version}}|{{vendor}}|{{product}}|{{dev_version}}|{{signature}}|{{name}}|{{severity}}|{{extension}}
-policy_action_severity = 4
-output_format=json
-output_type=http
-http_out=https://http-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DATADOG>?ddsource=cbdefense
-http_headers={"content-type": "application/json"}
-https_ssl_verify=True
-
-[cbdefense1]
-server_url = <URL_SERVEUR_CB_DEFENSE>
-siem_connector_id=<ID_API_CB_DEFENSE>
-siem_api_key=<CLÉ_SECRET_API_CB_DEFENSE>
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Remplacez les paramètres fictifs `<CLÉ_API_DATADOG>`, `<CLÉ_SECRET_API_CB_DEFENSE>`, `<ID_API_CB_DEFENSE>` et `<URL_SERVEUR_CB_DEFENSE>` pour terminer la configuration.
-
-Commencez par remplacer `<CLÉ_API_DATADOG>` par votre clé d'API Datadog, qui figure sur la page [API key de Datadog][2].
-
-Pour obtenir votre clé et votre ID d'API Carbon Black Defense, générez-les depuis Carbon Black :
-
-1. Accédez à _Settings_ -> _API KEYS_ -> _Add API Key_.
-2. Nommez votre clé.
-3. Sélectionnez le niveau d'accès **SIEM** pour la clé.
-4. Une fois votre clé créée, utilisez la clé et l'ID d'API pour remplacer les paramètres fictifs `<CLÉ_SECRET_API_CB_DEFENSE>` et `<ID_API_CB_DEFENSE>` dans le fichier de configuration de votre log shipper Carbon Black Defense.
-
-L'URL de votre serveur Carbon Black Defense se trouve sur votre dashboard Carbon Black. Accédez à _Settings_ -> _API KEYS_ -> _Download_ pour l'obtenir et consulter les descriptions de niveau d'accès. Remplacez le paramètre fictif `<URL_SERVEUR_CB_DEFENSE>` par cette valeur.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
-[1]: https://github.com/carbonblack/cb-defense-syslog-tls
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /fr/help/
+[1]: https://documenter.getpostman.com/view/7740922/SWE9YGSs?version=latest
+[2]: /fr/serverless/libraries_integrations/forwarder/
+[3]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-a-bucket
+[4]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-bucket-to-write-events
+[5]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-access-level
+[6]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-new-api-key
+[7]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-api-in-postman
+[8]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-new-forwarder
+[9]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
+[10]: /fr/help/

@@ -55,7 +55,7 @@ Le format global du `REQUEST_SCHEMA` est un array composé d'une ou de plusieurs
 
 Vous pouvez appliquer des fonctions au résultat de chaque requête.
 
-Si vous souhaitez en savoir plus sur les fonctions, des séries d'exemples sont disponibles depuis la [page Fonctions][1].
+Si vous souhaitez en savoir plus sur les fonctions, des séries d'exemples sont disponibles depuis la page [Fonctions][1].
 
 #### Méthode d'agrégation
 
@@ -130,15 +130,15 @@ L'exemple suivant permet de représenter graphiquement la charge mesurée sur 5�
 }
 ```
 
-Vous pouvez également additionner, soustraire, multiplier et diviser une série. Notez qu'aucune cohérence n'est ici imposée par Datadog : vous pouvez donc diviser une métrique apples par une métrique oranges.
+Vous pouvez également additionner, soustraire, multiplier et diviser une série. **Remarque** : aucune cohérence n'est imposée par Datadog ; vous *pouvez* donc diviser une métrique « pommes » par une métrique « oranges ».
 
 ```json
-{"viz": "timeseries", "requests": [{"q": "metric{apples} / metric{oranges}"}]}
+{"viz": "timeseries", "requests": [{"q": "metric{pommes} / metric{oranges}"}]}
 ```
 
 ## Scénarios
 
-{{< img src="dashboards/graphing_json/graph_example_for_json.png" alt="Graphique JSON"  style="width:75%;" >}}
+{{< img src="dashboards/graphing_json/graph_example_for_json.png" alt="Graphique JSON" style="width:75%;" >}}
 
 Voici le JSON correspondant à l'exemple ci-dessus. Il permet de représenter la moyenne `average` des octets réseau reçus pour un appareil et un host spécifiques, avec un regroupement par compte.
 
@@ -169,7 +169,7 @@ Voici le JSON correspondant à l'exemple ci-dessus. Il permet de représenter la
 ```
 
 
-{{< img src="dashboards/graphing_json/rate_example_for_json.png" alt="Exemple de taux"  style="width:75%;" >}}
+{{< img src="dashboards/graphing_json/rate_example_for_json.png" alt="Exemple de taux" style="width:75%;" >}}
 
 Voici un exemple avec la fonction `rate()`, qui accepte uniquement comme paramètre une seule métrique :
 
@@ -201,7 +201,7 @@ Voici un exemple avec la fonction `rate()`, qui accepte uniquement comme paramè
     ]
 ```
 
-Voici le même exemple avec une top list :
+Voici le même exemple sous la forme de top list :
 
 ```json
 {
@@ -267,7 +267,7 @@ Voici un exemple qui utilise la fonction de décalage temporel `week_before()` 
 
 L'exemple ci-dessous permet de représenter un ratio des logs `error` par rapport aux logs `info`, puis d'appliquer une fonction de décalage temporel.
 
-{{< img src="dashboards/graphing_json/advanced_graph_example_for_json.png" alt="Exemple de taux"  style="width:75%;" >}}
+{{< img src="dashboards/graphing_json/advanced_graph_example_for_json.png" alt="Exemple de ratio" style="width:75%;" >}}
 
 ```json
 {

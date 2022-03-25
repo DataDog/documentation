@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Pods/containers have no access to host files by default, which also applies to the Agent. If you try to configure your container Agent to collect logs from host files, you will see a similar error message to the one below:
+Pods/containers have no access to host files by default, which also applies to the Agent. If you try to configure your container Agent to collect logs from host files, an error message similar to the one below appears:
 
 ```
   syslog
@@ -118,6 +118,7 @@ Your Agent’s Docker installation command should look like this:
 
 ```
 docker run -d --name datadog-agent \
+           --cgroupns host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -133,7 +134,7 @@ docker run -d --name datadog-agent \
 
 ## Verification
 
-After you have set this all up, you can now deploy the Agent. You should be able to see something like the below when you run `docker exec -it datadog-agent agent status`:
+After you have set this all up, you can deploy the Agent. You should be able to see something like the below when you run `docker exec -it datadog-agent agent status`:
 
 ```
 ==========

@@ -136,6 +136,8 @@ The following table presents the list of collected resources and the minimal Age
 | CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
+| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
+| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
@@ -293,6 +295,48 @@ container_include: ["name:frontend.*"]
 ```
 
 **Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
+
+### Scrubbing sensitive information
+
+To prevent the leaking of sensitive data, you can scrub sensitive words in container YAML files. Container scrubbing is enabled by default for Helm charts, and some default sensitive words are provided:
+
+- `password`
+- `passwd`
+- `mysql_pwd`
+- `access_token`
+- `auth_token`
+- `api_key`
+- `apikey`
+- `pwd`
+- `secret`
+- `credentials`
+- `stripetoken`
+
+You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words. 
+
+**Note**: The additional sensitive words must be in lowercase, as the Agent compares the text with the pattern in lowercase. This means `password` scrubs `MY_PASSWORD` to `MY_*******`, while `PASSWORD` does not.
+
+You need to setup this environment variable for the following agents:
+
+- process-agent
+- cluster-agent
+
+```yaml
+env:
+    - name: DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS
+      value: "customword1 customword2 customword3"
+```
+
+For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
+
+```shell
+password <MY_PASSWORD>
+password=<MY_PASSWORD>
+password: <MY_PASSWORD>
+password::::== <MY_PASSWORD>
+```
+
+However it does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/secret/******` even though `secret` is a sensitive word.
 
 ## Further reading
 

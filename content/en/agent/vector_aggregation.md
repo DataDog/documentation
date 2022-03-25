@@ -52,6 +52,16 @@ logs_config:
 Where `VECTOR_HOST` is the hostname of the system running Vector and `VECTOR_PORT` is the TCP port on which
 the Vector `datadog_agent` source is listening.
 
+### Docker configuration
+
+If you are using Docker, add the following to your Agent configuration file.
+
+```
+-e DD_LOGS_CONFIG_LOGS_DD_URL=<VECTOR_HOST>:<VECTOR_PORT>
+-e DD_LOGS_CONFIG_LOGS_NO_SSL=true
+-e DD_LOGS_CONFIG_USE_HTTP=true
+```
+
 ### Vector configuration
 To receive logs from Datadog Agent, configure Vector with a [datadog_agent source][10].
 To send logs to Datadog, Vector must be configured with at least one [datadog_logs sink][11].

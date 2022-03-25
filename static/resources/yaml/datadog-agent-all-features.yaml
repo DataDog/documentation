@@ -4,18 +4,18 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    app: "datadog-agent"
-    chart: "datadog-2.22.15"
+    app: "datadog"
+    chart: "datadog-2.30.16"
     heritage: "Helm"
-    release: "datadog-agent"
-  name: datadog-agent-cluster-agent
+    release: "datadog"
+  name: datadog-cluster-agent
   namespace: default
 ---
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: datadog-agent
+  name: datadog
   namespace: default
   labels: {}
 type: Opaque
@@ -26,7 +26,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
   namespace: default
   labels: {}
 type: Opaque
@@ -37,7 +37,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-installinfo
+  name: datadog-installinfo
   namespace: default
   labels: {}
   annotations: {}
@@ -53,7 +53,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-system-probe-config
+  name: datadog-system-probe-config
   namespace: default
   labels: {}
 data:
@@ -69,12 +69,19 @@ data:
       collect_dns_stats: true
       max_tracked_connections: 131072
       conntrack_max_state_size: 131072
+      enable_runtime_compiler: false
+      runtime_compiler_output_dir: /var/tmp/datadog-agent/system-probe/build
+      kernel_header_download_dir: /var/tmp/datadog-agent/system-probe/kernel-headers
+      apt_config_dir: /host/etc/apt
+      yum_repos_dir: /host/etc/yum.repos.d
+      zypper_repos_dir: /host/etc/zypp/repos.d
     network_config:
       enabled: true
       conntrack_init_timeout: 10s
+    service_monitoring_config:
+      enabled: false
     runtime_security_config:
       enabled: true
-      debug: false
       socket: /var/run/sysprobe/runtime-security.sock
       policies:
         dir: /etc/datadog-agent/runtime-security.d
@@ -85,7 +92,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-security
+  name: datadog-security
   namespace: default
   labels: {}
 data:
@@ -134,6 +141,7 @@ data:
             "fchownat",
             "fcntl",
             "fcntl64",
+            "flock",
             "fstat",
             "fstat64",
             "fstatfs",
@@ -198,6 +206,7 @@ data:
             "recvmmsg",
             "recvmsg",
             "rename",
+            "renameat",
             "restart_syscall",
             "rmdir",
             "rt_sigaction",
@@ -238,6 +247,7 @@ data:
             "stat64",
             "statfs",
             "sysinfo",
+            "symlinkat",
             "tgkill",
             "umask",
             "uname",
@@ -279,7 +289,7 @@ apiVersion: "rbac.authorization.k8s.io/v1"
 kind: ClusterRole
 metadata:
   labels: {}
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
 rules:
   - apiGroups:
       - ""
@@ -365,6 +375,16 @@ rules:
       - get
       - update
   - apiGroups:
+      - ""
+    resources:
+      - persistentvolumes
+      - persistentvolumeclaims
+      - serviceaccounts
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
       - "apps"
     resources:
       - deployments
@@ -380,6 +400,25 @@ rules:
     resources:
       - cronjobs
       - jobs
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - "rbac.authorization.k8s.io"
+    resources:
+      - roles
+      - rolebindings
+      - clusterroles
+      - clusterrolebindings
     verbs:
       - list
       - get
@@ -419,7 +458,7 @@ rules:
     verbs:
       - use
     resourceNames:
-      - datadog-agent-cluster-agent
+      - datadog-cluster-agent
   - apiGroups:
       - "security.openshift.io"
     resources:
@@ -427,7 +466,7 @@ rules:
     verbs:
       - use
     resourceNames:
-      - datadog-agent-cluster-agent
+      - datadog-cluster-agent
       - hostnetwork
 ---
 # Source: datadog/templates/cluster-agent-rbac.yaml
@@ -435,27 +474,27 @@ apiVersion: "rbac.authorization.k8s.io/v1"
 kind: ClusterRoleBinding
 metadata:
   labels: {}
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
 subjects:
   - kind: ServiceAccount
-    name: datadog-agent-cluster-agent
+    name: datadog-cluster-agent
     namespace: default
 ---
 # Source: datadog/templates/agent-services.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
   namespace: default
   labels: {}
 spec:
   type: ClusterIP
   selector:
-    app: datadog-agent-cluster-agent
+    app: datadog-cluster-agent
   ports:
     - port: 5005
       name: agentport
@@ -465,18 +504,18 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: datadog-agent
+  name: datadog
   namespace: default
   labels: {}
 spec:
   selector:
     matchLabels:
-      app: datadog-agent
+      app: datadog
   template:
     metadata:
       labels:
-        app: datadog-agent
-      name: datadog-agent
+        app: datadog
+      name: datadog
       annotations:
         container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
         container.seccomp.security.alpha.kubernetes.io/system-probe: localhost/system-probe
@@ -484,7 +523,7 @@ spec:
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -499,7 +538,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -516,11 +555,11 @@ spec:
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_APM_ENABLED
               value: "false"
@@ -530,12 +569,16 @@ spec:
               value: "true"
             - name: DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE
               value: "true"
+            - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION
+              value: "false"
             - name: DD_HEALTH_PORT
               value: "5555"
             - name: DD_DOGSTATSD_SOCKET
               value: "/var/run/datadog/dsd.socket"
             - name: DD_EXTRA_CONFIG_PROVIDERS
               value: "clusterchecks endpointschecks"
+            - name: DD_EXPVAR_PORT
+              value: "6000"
           volumeMounts:
             - name: installinfo
               subPath: install_info
@@ -604,7 +647,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -620,7 +663,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -631,11 +674,11 @@ spec:
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_LOG_LEVEL
               value: "INFO"
@@ -670,7 +713,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -681,7 +724,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -692,14 +735,16 @@ spec:
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_PROCESS_AGENT_ENABLED
               value: "true"
+            - name: DD_PROCESS_AGENT_DISCOVERY_ENABLED
+              value: "false"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_SYSTEM_PROBE_ENABLED
@@ -713,15 +758,15 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/datadog-agent
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              mountPropagation: None
-              readOnly: true
             - name: logdatadog
               mountPath: /var/log/datadog
             - name: tmpdir
               mountPath: /tmp
               readOnly: false
+            - name: runtimesocketdir
+              mountPath: /host/var/run
+              mountPropagation: None
+              readOnly: true
             - name: cgroups
               mountPath: /host/sys/fs/cgroup
               mountPropagation: None
@@ -743,7 +788,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -755,6 +800,7 @@ spec:
                 - NET_BROADCAST
                 - NET_RAW
                 - IPC_LOCK
+                - CHOWN
             privileged: false
           command: ["/opt/datadog-agent/embedded/bin/system-probe", "--config=/etc/datadog-agent/system-probe.yaml"]
           env:
@@ -764,7 +810,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -795,12 +841,24 @@ spec:
               mountPath: /host/proc
               mountPropagation: None
               readOnly: true
-            - name: os-release
+            - name: etc-os-release
               mountPath: /host/etc/os-release
               mountPropagation: None
               readOnly: true
+            - name: etc-redhat-release
+              mountPath: /host/etc/redhat-release
+              mountPropagation: None
+              readOnly: true
+            - name: etc-fedora-release
+              mountPath: /host/etc/fedora-release
+              mountPropagation: None
+              readOnly: true
+            - name: etc-lsb-release
+              mountPath: /host/etc/lsb-release
+              mountPropagation: None
+              readOnly: true
         - name: security-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -814,7 +872,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -833,11 +891,11 @@ spec:
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
               value: "true"
@@ -857,11 +915,12 @@ spec:
             - name: tmpdir
               mountPath: /tmp
               readOnly: false
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              readOnly: true
             - name: dsdsocket
               mountPath: /var/run/datadog
+              readOnly: true
+            - name: runtimesocketdir
+              mountPath: /host/var/run
+              mountPropagation: None
               readOnly: true
             - name: cgroups
               mountPath: /host/sys/fs/cgroup
@@ -875,9 +934,6 @@ spec:
             - name: hostroot
               mountPath: /host/root
               readOnly: true
-            - name: runtimesocketdir
-              mountPath: /host/root/var/run
-              readOnly: true
             - name: procdir
               mountPath: /host/proc
               readOnly: true
@@ -889,7 +945,7 @@ spec:
               subPath: system-probe.yaml
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -899,7 +955,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -927,7 +983,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -937,7 +993,7 @@ spec:
               value: "yes"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -952,12 +1008,9 @@ spec:
       volumes:
         - name: installinfo
           configMap:
-            name: datadog-agent-installinfo
+            name: datadog-installinfo
         - name: config
           emptyDir: {}
-        - hostPath:
-            path: /var/run
-          name: runtimesocketdir
         - name: logdatadog
           emptyDir: {}
         - name: tmpdir
@@ -968,6 +1021,18 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
+        - hostPath:
+            path: /etc/os-release
+          name: etc-os-release
+        - hostPath:
+            path: /etc/redhat-release
+          name: etc-redhat-release
+        - hostPath:
+            path: /etc/fedora-release
+          name: etc-fedora-release
+        - hostPath:
+            path: /etc/lsb-release
+          name: etc-lsb-release
         - hostPath:
             path: /var/run/datadog/
             type: DirectoryOrCreate
@@ -980,10 +1045,10 @@ spec:
           emptyDir: {}
         - name: sysprobe-config
           configMap:
-            name: datadog-agent-system-probe-config
+            name: datadog-system-probe-config
         - name: datadog-agent-security
           configMap:
-            name: datadog-agent-security
+            name: datadog-security
         - hostPath:
             path: /var/lib/kubelet/seccomp
           name: seccomp-root
@@ -996,14 +1061,11 @@ spec:
             path: /etc/passwd
           name: passwd
         - hostPath:
-            path: /etc/group
-          name: group
-        - hostPath:
             path: /
           name: hostroot
         - hostPath:
-            path: /etc/os-release
-          name: os-release
+            path: /etc/group
+          name: group
         - hostPath:
             path: /var/lib/datadog-agent/logs
           name: pointerdir
@@ -1016,6 +1078,9 @@ spec:
         - hostPath:
             path: /var/lib/docker/containers
           name: logdockercontainerpath
+        - hostPath:
+            path: /var/run
+          name: runtimesocketdir
       tolerations:
       affinity: {}
       serviceAccountName: "datadog-agent"
@@ -1030,7 +1095,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: datadog-agent-cluster-agent
+  name: datadog-cluster-agent
   namespace: default
   labels: {}
 spec:
@@ -1042,23 +1107,26 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: datadog-agent-cluster-agent
+      app: datadog-cluster-agent
   template:
     metadata:
       labels:
-        app: datadog-agent-cluster-agent
-      name: datadog-agent-cluster-agent
+        app: datadog-cluster-agent
+      name: datadog-cluster-agent
       annotations: {}
     spec:
-      serviceAccountName: datadog-agent-cluster-agent
+      serviceAccountName: datadog-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:1.15.1"
+          image: "gcr.io/datadoghq/cluster-agent:1.18.0"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:
             - containerPort: 5005
               name: agentport
+              protocol: TCP
+            - containerPort: 5000
+              name: agentmetrics
               protocol: TCP
           env:
             - name: DD_HEALTH_PORT
@@ -1066,7 +1134,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
                   optional: true
             - name: DD_CLUSTER_CHECKS_ENABLED
@@ -1079,16 +1147,14 @@ spec:
               value: "INFO"
             - name: DD_LEADER_ELECTION
               value: "true"
-            - name: DD_LEADER_LEASE_DURATION
-              value: "15"
             - name: DD_COLLECT_KUBERNETES_EVENTS
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
-              value: datadog-agent-cluster-agent
+              value: datadog-cluster-agent
             - name: DD_CLUSTER_AGENT_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datadog-agent-cluster-agent
+                  name: datadog-cluster-agent
                   key: token
             - name: DD_KUBE_RESOURCES_NAMESPACE
               value: default
@@ -1128,15 +1194,17 @@ spec:
       volumes:
         - name: installinfo
           configMap:
-            name: datadog-agent-installinfo
+            name: datadog-installinfo
       affinity:
-        # Force scheduling the cluster agents on different nodes
+        # Prefer scheduling the cluster agents on different nodes
         # to guarantee that the standby instance can immediately take the lead from a leader running of a faulty node.
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchLabels:
-                  app: datadog-agent-cluster-agent
-              topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: datadog-cluster-agent
+                topologyKey: kubernetes.io/hostname
       nodeSelector:
         kubernetes.io/os: linux

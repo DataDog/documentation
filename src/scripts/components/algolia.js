@@ -216,44 +216,47 @@ if (searchContainer) {
     document.querySelector('.search-container').style.display = 'block';
 }
 
-const searchMobile = docsearch({
+const docsSearchInputMobile = document.querySelector('.docssearch-input-mobile');
+if (docsSearchInputMobile) {
+  const searchMobile = docsearch({
     appId: algoliaConfig.appId,
     apiKey: algoliaConfig.apiKey,
     indexName: isApiPage() ? algoliaConfig.api_index : algoliaConfig.index,
     inputSelector: '.docssearch-input-mobile',
     algoliaOptions: {
-        facetFilters: [`language:${lang}`]
+      facetFilters: [`language:${lang}`]
     },
     autocompleteOptions: {
-        autoselect: false
+      autoselect: false
     },
     debug: false // Set debug to true if you want to inspect the dropdown
-});
+  });
 
-let mobileEnableEnter = true;
+  let mobileEnableEnter = true;
 
-searchMobile.autocomplete.on('keyup', function(e) {
+  searchMobile.autocomplete.on('keyup', function (e) {
     if (e.keyCode === 13 && mobileEnableEnter) {
-        let { value } = this;
-        if (value.indexOf('#') > -1) {
-            value = value.replace("#", encodeURIComponent("#"));
-        }
-        window.location = `${baseUrl}/search/?s=${value}`;
+      let {value} = this;
+      if (value.indexOf('#') > -1) {
+        value = value.replace("#", encodeURIComponent("#"));
+      }
+      window.location = `${baseUrl}/search/?s=${value}`;
     }
-});
+  });
 
-searchMobile.autocomplete.on('autocomplete:cursorchanged', function() {
+  searchMobile.autocomplete.on('autocomplete:cursorchanged', function () {
     mobileEnableEnter = false;
-});
+  });
 
-searchMobile.autocomplete.on('autocomplete:cursorremoved', function() {
+  searchMobile.autocomplete.on('autocomplete:cursorremoved', function () {
     mobileEnableEnter = true;
-});
+  });
 
-searchMobile.autocomplete.on('autocomplete:shown', function() {
+  searchMobile.autocomplete.on('autocomplete:shown', function () {
     if (isApiPage()) {
-        enhanceApiResultStyles();
-        setApiEndpointAsSubcategory();
-        appendHomeLinkToAutocompleteWidget();
+      enhanceApiResultStyles();
+      setApiEndpointAsSubcategory();
+      appendHomeLinkToAutocompleteWidget();
     }
-})
+  })
+}

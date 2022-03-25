@@ -51,7 +51,7 @@ La page Overview contient un tableau récapitulatif des ressources transmettant 
 | Colonne             | Description                                                               |
 |--------------------|---------------------------------------------------------------------------|
 | Resource type      | Le type de ressource Azure.                                                   |
-| Total resources    | Le total de toutes les ressources pour le type de ressource en question.                          |
+| Total resources    | Le nombre total de toutes les ressources pour le type de ressource en question.                          |
 | Logs to Datadog    | Le nombre de ressources transmettant des logs à Datadog via l'intégration.    |
 | Metrics to Datadog | Le nombre de ressources transmettant des métriques à Datadog via l'intégration. |
 

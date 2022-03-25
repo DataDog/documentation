@@ -20,9 +20,14 @@ Les administrateurs peuvent accéder à l'onglet Usage Attribution à partir de 
 
 **Remarque** : les types de ressources suivants ne sont pas pris en charge par cet outil.
 
+- Analyzed Logs (Security)
+- Gestion des incidents
 - Événements de log indexés
-- Logs ingérés
-- Spans indexées
+- Ingested Logs
+- Indexed Spans
+- Spans ingérées
+- Network Flows
+- Real User Monitoring
 
 **Remarque : les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.**
 
@@ -41,7 +46,7 @@ La section **Applied Tags** vous permet d'effectuer plusieurs opérations :
 
 - Une fois les tags configurés, vous devez attendre 24 heures pour que le premier rapport soit généré.
 - Les rapports sont régulièrement générés.
-- Si vous modifiez des tags, les nouveaux rapports tiendront compte de vos changements. Cependant, les rapports précédents conserveront les anciens tags.
+- Si vous modifiez des tags, le nouveau rapport tient compte de vos changements. Cependant, les rapports précédents conservent les anciens tags.
 - Les rapports mensuels englobent l'ensemble de tags le plus récent. Si vous modifiez les tags au milieu du mois, les pourcentages d'utilisation risquent de ne pas correspondre. 
 
 ### Attribution de l'utilisation mensuelle
@@ -54,7 +59,7 @@ Dès que la création de rapports est lancée, ces derniers sont mis à jour quo
 - Si vous avez activé les comptes multi-org, l'utilisation est résumée pour toutes les organisations Datadog du compte parent.
 - Utilisez le sélecteur d'intervalle pour accéder aux rapports des mois précédents.
 - Les rapports mensuels ne sont générés qu'à la fin du mois. Chaque rapport mensuel est disponible le deuxième jour du mois suivant. 
-- Utilisez l'option « Export Current View » pour télécharger des rapports. Les rapports `.tsv` incluent les valeurs et pourcentages d'utilisation, afin de simplifier l'attribution des ressources et la rétrofacturation.
+- Utilisez l'option Export Current View pour télécharger des rapports. Les rapports `.tsv` incluent les valeurs et pourcentages d'utilisation, afin de simplifier l'attribution des ressources et la rétrofacturation.
 
 Les données mensuelles peuvent également être récupérées à l'aide de l'API publique de l'outil. Consultez la [documentation sur l'endpoint d'API][1] pour en savoir plus.
 

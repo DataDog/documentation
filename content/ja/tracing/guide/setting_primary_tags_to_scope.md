@@ -40,7 +40,7 @@ Datadog は、トレーサーに `env` を設定することをお勧めしま�
 #### Agent 環境
 
 `env` タグは、Agent コンフィギュレーションで設定できます。
-**トレーサーと Agent に異なる `env` タグを設定しないでください。これを行うと、[トレースメトリクス][6]でタグが重複する可能性があります。**
+**トレーサーと Agent に異なる `env` タグを設定しないでください。これを行うと、[トレースメトリクス][5]でタグが重複する可能性があります。**
 
 オプション
 
@@ -69,7 +69,7 @@ Datadog は、トレーサーに `env` を設定することをお勧めしま�
 
 ## Datadog に 2 番目のプライマリタグを追加する
 
-`env:<環境>` 以外のホストタグをトレースに追加した場合は、環境タグとともにプライマリタグとして設定できます。[APM 設定][5]ページに移動して、プライマリタグを定義、変更、または削除します。
+`env:<ENVIRONMENT>` 以外のホストタグをトレースに追加した場合は、環境タグとともにプライマリタグとして設定できます。[APM 設定][6]ページに移動して、プライマリタグを定義、変更、または削除します。
 
 注:
 
@@ -95,5 +95,5 @@ Datadog は、トレーサーに `env` を設定することをお勧めしま�
 [2]: /ja/getting_started/tagging/
 [3]: /ja/getting_started/tagging/unified_service_tagging
 [4]: /ja/getting_started/tagging/assigning_tags/#traces
-[5]: https://app.datadoghq.com/apm/settings
-[6]: /ja/tracing/guide/metrics_namespace/
+[5]: /ja/tracing/guide/metrics_namespace/
+[6]: https://app.datadoghq.com/apm/settings

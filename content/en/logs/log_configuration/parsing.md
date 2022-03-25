@@ -170,7 +170,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 : Parses a user-agent and returns a JSON object that contains the device, OS, and the browser represented by the Agent. [Check the User Agent processor][1].
 
 `querystring`
-: Extracts all the key-value pairs in a matching URL query string (e.g. `?productId=superproduct&promotionCode=superpromo`).
+: Extracts all the key-value pairs in a matching URL query string (for example, `?productId=superproduct&promotionCode=superpromo`).
 
 `decodeuricomponent`
 : Decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.
@@ -264,9 +264,9 @@ Some examples demonstrating how to use parsers:
 This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` where:
 
 * `separatorStr`: defines the separator between key and values. Defaults to `=`.
-* `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
+* `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (for example, `key=@valueStr`).
 * `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
-* `delimiter`: defines the separator between the different key values pairs (e.g.`|`is the delimiter in `key1=value1|key2=value2`). Default to ` ` (normal space), `,` and `;`.
+* `delimiter`: defines the separator between the different key values pairs (for example, `|`is the delimiter in `key1=value1|key2=value2`). Defaults to ` ` (normal space), `,` and `;`.
 
 Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
 
@@ -359,7 +359,7 @@ The key-value always matches inputs without any quoting characters, regardless o
 **Note**:
 
 * Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
-* If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
+* If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (for example, input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 * Defining `""` as `quotingStr` keeps the default configuration for quoting.
 
 ### Parsing dates

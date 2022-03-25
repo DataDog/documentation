@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: datadog-agent
+  name: datadog
   namespace: default
   labels: {}
 type: Opaque
@@ -14,7 +14,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: datadog-agent-installinfo
+  name: datadog-installinfo
   namespace: default
   labels: {}
   annotations: {}
@@ -30,23 +30,23 @@ data:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: datadog-agent
+  name: datadog
   namespace: default
   labels: {}
 spec:
   selector:
     matchLabels:
-      app: datadog-agent
+      app: datadog
   template:
     metadata:
       labels:
-        app: datadog-agent
-      name: datadog-agent
+        app: datadog
+      name: datadog
       annotations: {}
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -61,7 +61,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -69,8 +69,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_DOGSTATSD_PORT
@@ -89,20 +87,26 @@ spec:
               value: "true"
             - name: DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE
               value: "true"
+            - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION
+              value: "false"
             - name: DD_HEALTH_PORT
               value: "5555"
+            - name: DD_EXPVAR_PORT
+              value: "6000"
           volumeMounts:
             - name: config
               mountPath: C:/ProgramData/Datadog
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
             - name: pointerdir
               mountPath: C:/var/log
             - name: logpodpath
               mountPath: C:/var/log/pods
               readOnly: true
             - name: logdockercontainerpath
-              mountPath: C:/ProgramData/docker/containers
+              mountPath: C:/ProgramData
               readOnly: true
           livenessProbe:
             failureThreshold: 6
@@ -125,7 +129,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -141,7 +145,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -149,8 +153,6 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "false"
             - name: DD_LOG_LEVEL
@@ -166,6 +168,8 @@ spec:
               mountPath: C:/ProgramData/Datadog
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
           livenessProbe:
             initialDelaySeconds: 15
             periodSeconds: 15
@@ -173,7 +177,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -184,7 +188,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -192,16 +196,18 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "false"
             - name: DD_PROCESS_AGENT_ENABLED
               value: "true"
+            - name: DD_PROCESS_AGENT_DISCOVERY_ENABLED
+              value: "false"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_SYSTEM_PROBE_ENABLED
-              value: "false"
+              value: "true"
+            - name: DD_SYSTEM_PROBE_NETWORK_ENABLED
+              value: "true"
             - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
               value: "false"
           volumeMounts:
@@ -209,9 +215,11 @@ spec:
               mountPath: C:/ProgramData/Datadog
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -225,7 +233,7 @@ spec:
               mountPath: C:/Temp/install_info
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.34.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -235,6 +243,8 @@ spec:
               mountPath: C:/ProgramData/Datadog
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
           env:
             # Needs to be removed when Agent N-2 is built with Golang 1.17
             - name: GODEBUG
@@ -242,7 +252,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent"
+                  name: "datadog"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -250,18 +260,13 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
-            - name: DD_AC_EXCLUDE
-              value: "name:datadog-agent"
           resources: {}
       volumes:
         - name: installinfo
           configMap:
-            name: datadog-agent-installinfo
+            name: datadog-installinfo
         - name: config
           emptyDir: {}
-        - hostPath:
-            path: \\.\pipe\docker_engine
-          name: runtimesocket
         - hostPath:
             path: C:/var/log
           name: pointerdir
@@ -269,8 +274,17 @@ spec:
             path: C:/var/log/pods
           name: logpodpath
         - hostPath:
-            path: C:/ProgramData/docker/containers
+            path: C:/ProgramData
           name: logdockercontainerpath
+        - hostPath:
+            path: \\.\pipe\docker_engine
+          name: runtimesocket
+        # If the CRI is not provided, try to mount the default containerd pipe.
+        # By default, "datadog.dockerOrCriSocketPath" mounts the Docker pipe.
+        # So with this additional hostPath, by default, both are mounted.
+        - hostPath:
+            path: \\.\pipe\containerd-containerd
+          name: containerdsocket
       tolerations:
         - effect: NoSchedule
           key: node.kubernetes.io/os

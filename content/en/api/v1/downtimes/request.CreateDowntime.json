@@ -1,6 +1,6 @@
 {
   "message": "Example-Schedule_a_downtime_returns_OK_response",
-  "start": 1637679701,
+  "start": 1636629071,
   "timezone": "Etc/UTC",
   "scope": [
     "test:examplescheduleadowntimereturnsokresponse"
@@ -15,6 +15,6 @@
       "Thu",
       "Fri"
     ],
-    "until_date": 1639494101
+    "until_date": 1638443471
   }
 }

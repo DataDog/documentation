@@ -9,7 +9,7 @@ aliases:
 Autodiscovery était autrefois appelé Service Discovery. Il est toujours appelé Service Discovery dans l'ensemble du code de l'Agent et dans certaines options de configuration.
 </div>
 
-Docker connait une [adoption rapide][1]. Les plateformes d'orchestration comme Docker Swarm, Kubernetes et Amazon ECS facilitent l'exécution de services Dockerisés et les rendent plus robustes en gérant l'orchestration et la réplication entre les hosts. L'utilisation de ces plateformes rend toutefois la surveillance plus difficile. Comment surveiller pleinement un service qui passe d'un host à un autre sans prévenir ?
+Docker connaît une [adoption rapide][1]. Les plateformes d'orchestration comme Docker Swarm, Kubernetes et Amazon ECS facilitent l'exécution de services Dockerisés et les rendent plus robustes en gérant l'orchestration et la réplication entre les hosts. L'utilisation de ces plateformes rend toutefois la surveillance plus difficile. Comment surveiller pleinement un service qui passe d'un host à un autre sans prévenir ?
 
 Grâce à sa fonctionnalité Autodiscovery, l'Agent Datadog peut automatiquement suivre l'endroit où chaque service est exécuté. Autodiscovery vous permet de définir des modèles de configuration pour les checks de l'Agent et de spécifier les conteneurs sur lesquels chaque check doit s'appliquer.
 
@@ -19,7 +19,7 @@ Grâce à sa fonctionnalité Autodiscovery, l'Agent Datadog peut automatiquement
 
 Dans un environnement traditionnel sans conteneur, la configuration de l'Agent Datadog est statique, tout comme l'environnement dans lequel il fonctionne. Lorsqu'il démarre, l'Agent analyse les fichiers de configuration des checks. Il exécute ensuite continuellement chaque check configuré aussi longtemps qu'il fonctionne.
 
-Les fichiers de configuration sont statiques, et les options réseau configurées dans ces fichiers servent à identifier les instances spécifiques d'un certain service surveillé (p. ex. une instance Redis sur 10.0.0.61:6379). Lorsqu'un check de l'Agent ne parvient pas à se connecter au service en question, les métriques ne sont pas envoyées jusqu'au dépannage du problème. Le check de l'Agent répète ses tentatives de connexion échouée jusqu'à ce qu'un administrateur rétablisse le service surveillé ou répare la configuration du check.
+Les fichiers de configuration sont statiques, et les options réseau configurées dans ces fichiers servent à identifier les instances spécifiques d'un certain service surveillé, par exemple une instance Redis sur 10.0.0.61:6379. Lorsqu'un check de l'Agent ne parvient pas à se connecter au service en question, les métriques ne sont pas envoyées tant que le problème n'est pas résolu. Le check de l'Agent répète ses tentatives de connexion échouée jusqu'à ce qu'un administrateur rétablisse le service surveillé ou répare la configuration du check.
 
 Une fois la fonctionnalité Autodiscovery activée, l'Agent exécute les checks différemment.
 
@@ -33,7 +33,7 @@ Enfin, Autodiscovery peut charger des modèles de check depuis des emplacements 
 
 ### Différence d'exécution
 
-Lorsque l'Agent démarre avec Autodiscovery activé, il charge les modèles de check à partir de l'ensemble des sources de modèle disponibles, [pas uniquement l'une d'entre elles](#priorite-des-sources-de-modele), ainsi que les identificateurs de conteneur du modèle. Contrairement à la configuration traditionnelle de l'Agent, l'Agent n'exécute pas tous les checks en permanence. Il détermine les checks à activer en examinant les conteneurs en cours d'exécution sur le même host que l'Agent.
+Lorsque l'Agent démarre avec Autodiscovery activé, il charge les modèles de check à partir de l'ensemble des sources de modèle disponibles, [et non uniquement l'une d'entre elles](#priorite-des-sources-de-modele), ainsi que les identificateurs de conteneur du modèle. Contrairement à la configuration traditionnelle de l'Agent, l'Agent n'exécute pas tous les checks en permanence. Il détermine les checks à activer en examinant les conteneurs en cours d'exécution sur le même host que l'Agent.
 
 Lorsque l'Agent inspecte chaque conteneur qui s'exécute, il vérifie si le conteneur correspond à l'un des identificateurs de conteneur de l'un des modèles chargés. Pour chaque correspondance, l'Agent génère une configuration de check statique en remplaçant l'adresse IP et le port du conteneur correspondant. L'Agent active ensuite le check à l'aide de la configuration statique.
 
@@ -70,7 +70,7 @@ Chaque section **Template Source** ci-dessous affiche une façon différente de 
 
 ### Fichiers (auto-conf)
 
-Vous pouvez facilement stocker des modèles en tant que fichiers locaux. Cela ne nécessite aucun service externe ni aucune plateforme d'orchestration spécifique. Vous devrez cependant redémarrer les conteneurs de votre Agent à chaque modification, ajout ou suppression de modèle.
+Vous pouvez stocker des modèles en tant que fichiers locaux sans avoir recours à un service externe ni à une plateforme d'orchestration spécifique. Vous devrez cependant redémarrer les conteneurs de votre Agent à chaque modification, ajout ou suppression de modèle.
 
 L'Agent recherche des modèles Autodiscovery dans son répertoire `conf.d/auto_conf`, qui contient des modèles par défaut pour les checks suivants :
 
@@ -109,11 +109,11 @@ instances:
 
 Cette [configuration de check Apache][21] peut sembler succincte, mais notez l'option `docker_images`. Cette option obligatoire vous permet de spécifier les identifiants de conteneur. Autodiscovery applique ce modèle à tous les conteneurs sur le host qui exécute une image `httpd`.
 
-_N'importe quelle_ image `httpd`. Supposez que vous avez un conteneur qui exécute `library/httpd:latest` et un autre qui exécute `votrenomdecompte/httpd:v2`.  Autodiscovery applique le modèle ci-dessus aux deux conteneurs. Lorsqu'il charge les fichiers de configuration automatique, Autodiscovery n'est pas en mesure de distinguer les images portant le même nom qui sont issues de sources ou associés à des tags différents. Par conséquent, **vous devez spécifier les noms abrégés des images de conteneur**, p. ex. `httpd` au lieu de `library/httpd:latest`.
+_N'importe quelle_ image `httpd`. Supposez que vous avez un conteneur qui exécute `library/httpd:latest` et un autre qui exécute `<VOTRE_NOM_UTILISATEUR>/httpd:v2`. Autodiscovery applique le modèle ci-dessus aux deux conteneurs. Lors du chargement des fichiers de configuration automatique, Autodiscovery n'est pas en mesure de distinguer les images portant le même nom qui sont issues de sources ou associés à des tags différents. Par conséquent, **vous devez spécifier les noms abrégés des images de conteneur**, par exemple `httpd` au lieu de `library/httpd:latest`.
 
 Si cette limite est trop contraignante et que vous souhaitez appliquer des configurations de check différentes à plusieurs conteneurs exécutant la même image, utilisez des étiquettes pour identifier les conteneurs. Appliquez une étiquette différente à chaque conteneur, puis ajoutez chaque étiquette à la liste `docker_images` d'un fichier de modèle (oui, `docker_images` n'est pas seulement fait pour les images : c'est aussi là que doivent figurer les identificateurs de conteneur).
 
-### Stockage key-value
+### Stockage key/value
 
 Autodiscovery peut utiliser Consul, etcd et Zookeeper comme sources de modèle. Pour utiliser un stockage clé/valeur, vous devez le configurer dans `datadog.conf` ou dans les variables d'environnement passées au conteneur docker-dd-agent.
 
@@ -165,7 +165,7 @@ docker service create \
   gcr.io/datadoghq/docker-dd-agent:latest
 ```
 
-Notez que l'option permettant d'activer Autodiscovery est appelée `service_discovery_backend` dans `datadog.conf`, mais simplement `SD_BACKEND` en tant que variable d'environnement.
+**Remarque** : l'option permettant d'activer Autodiscovery est appelée `service_discovery_backend` dans `datadog.conf`, tandis que la variable d'environnement associée est simplement `SD_BACKEND`.
 
 ---
 
@@ -174,14 +174,14 @@ Lorsque le stockage de clé/valeur est activé en tant que source de modèle, l'
 ```text
 /datadog/
   check_configs/
-    docker_image_1/                 # identificateur de conteneur, p. ex. httpd
-      - check_names: [<NOM_CHECK>] # p. ex. apache
+    docker_image_1/                 # identificateur de conteneur, par exemple httpd
+      - check_names: [<NOM_CHECK>] # par exemple, apache
       - init_configs: [<CONFIG_INIT>]
       - instances: [<CONFIG_INSTANCE>]
     ...
 ```
 
-Chaque modèle contient trois éléments : nom du check, `init_config`, et `instances`. L'option `docker_images` de la section précédente, qui fournissait les identificateurs de conteneur à Autodiscovery, n'est pas obligatoire ici. Pour les stockages clé/valeur, les identificateurs de conteneur apparaissent comme clés de premier niveau dans `check_config`. (Notez également que le modèle sous forme de fichier à la section précédente ne nécessitait pas de nom de check, contrairement à cet exemple. L'Agent déduisait le nom du check à partir du nom du fichier.)
+Chaque modèle contient trois éléments : nom du check, `init_config`, et `instances`. L'option `docker_images` de la section précédente, qui fournissait les identificateurs de conteneur à Autodiscovery, n'est pas obligatoire ici. Pour les stockages key/value, les identificateurs de conteneur apparaissent comme clés de premier niveau dans `check_config`. Notez également que le modèle sous forme de fichier à la section précédente ne nécessitait pas de nom de check, contrairement à cet exemple. L'Agent déduisait le nom du check à partir du nom du fichier.
 
 #### Check Apache
 
@@ -196,7 +196,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http
 
 Notez que chacune des trois valeurs est une liste. Autodiscovery assemble les éléments de liste en fonction des index de liste partagée de manière à générer la configuration de check. Dans le cas présent, il assemble la première (et unique) configuration de check à partir de `check_names[0]`, `init_configs[0]` et `instances[0]`.
 
-Contrairement aux fichiers auto-conf, **les stockages clé/valeur peuvent utiliser le nom d'image court OU long comme identificateurs de conteneur**, p. ex. `httpd` OU `library/httpd:latest`. L'exemple qui suit utilise un nom long.
+Contrairement aux fichiers de configuration automatique, **les stockages clé/valeur peuvent utiliser la version courte OU longue du nom d'image comme identificateurs de conteneur**, par exemple `httpd` OU `library/httpd:latest`. L'exemple suivant utilise un nom long.
 
 #### Check Apache avec surveillance de la disponibilité d'un site Web
 
@@ -212,7 +212,7 @@ Là encore, l'ordre de chaque liste est important. Pour que l'Agent soit en mesu
 
 ### Annotations de pod Kubernetes
 
-À partir de la version 5.12 de l'Agent Datadog, vous pouvez stocker les modèles de check dans les annotations de pod Kubernetes. Lorsque Autodiscovery est activé, l'Agent détecte s'il est exécuté sur Kubernetes et examine alors automatiquement toutes les annotations de pod à la recherche de modèles de check. Il n'est pas nécessaire de configurer Kubernetes comme source de modèle (c'est-à-dire via `SD_CONFIG_BACKEND`) comme vous le feriez avec les stockages clé/valeur.
+À partir de la version 5.12 de l'Agent Datadog, vous pouvez stocker les modèles de check dans des annotations de pod Kubernetes. Lorsqu'Autodiscovery est activé, l'Agent détecte s'il est exécuté sur Kubernetes et examine alors automatiquement toutes les annotations de pod à la recherche de modèles de check. Il n'est pas nécessaire de configurer Kubernetes comme source de modèle avec `SD_CONFIG_BACKEND` comme vous le feriez avec les stockages clé/valeur.
 
 Autodiscovery s'attend à des annotations de ce type :
 
@@ -228,7 +228,7 @@ Le format est semblable à celui des stockages clé/valeur. Voici les différenc
 * Les annotations doivent commencer par `service-discovery.datadoghq.com/` (pour les stockages clé/valeur, l'indicateur de début est `/datadog/check_configs/`).
 * Pour les annotations, Autodiscovery identifie les conteneurs via leur _nom_, et non via leur image (comme il le fait pour les fichiers de configuration automatique et les stockages clé/valeur). En d'autres termes, il cherche à faire correspondre `<identificateur de conteneur>` avec `.spec.containers[0].name`, pas avec `.spec.containers[0].image`.
 
-Si vous définissez directement vos pods Kubernetes (c'est-à-dire avec `kind: Pod`), ajoutez les annotations de chaque pod directement dans sa section `metadata` (voir le premier exemple ci-dessous). Si vous définissez _indirectement_ les pods avec des ReplicationControllers, des ReplicaSets ou des Deployments, ajoutez les annotations de pod dans `.spec.templates.metadata` (voir le deuxième exemple ci-dessous).
+Si vous définissez directement vos pods Kubernetes (avec `kind: Pod`), ajoutez les annotations de chaque pod directement dans sa section `metadata` (voir le premier exemple ci-dessous). Si vous définissez _indirectement_ les pods avec des ReplicationControllers, des ReplicaSets ou des Deployments, ajoutez les annotations de pod dans `.spec.templates.metadata` (voir le deuxième exemple ci-dessous).
 
 #### Check Apache avec surveillance de la disponibilité d'un site Web
 
@@ -255,7 +255,7 @@ spec:
 
 #### Checks HTTP et Apache
 
-Si vous définissez vos pods via des Deployments, n'ajoutez pas d'annotations de modèle aux métadonnées du Deployment. L'Agent n'analyse pas ces métadonnées. Ajoutez-les comme suit :
+Si vous définissez vos pods avec des Deployments, n'ajoutez pas d'annotations de modèle aux métadonnées du Deployment : l'Agent n'analyse pas ces métadonnées. Ajoutez-les comme suit :
 
 ```text
 apiVersion: apps/v1beta1
@@ -282,7 +282,7 @@ spec:
 
 ### Annotations d'étiquette Docker
 
-À partir de la version 5.17 de l'Agent Datadog, vous pouvez stocker les modèles de check dans les étiquettes Docker. Lorsque Autodiscovery est activé, l'Agent détecte s'il est exécuté sur Docker et examine alors automatiquement toutes les étiquettes à la recherche de modèles de check. Il n'est pas nécessaire de configurer de source de modèle (c'est-à-dire via `SD_CONFIG_BACKEND`) comme vous le feriez avec les stockages clé/valeur.
+À partir de la version 5.17 de l'Agent Datadog, vous pouvez stocker les modèles de check dans des étiquettes Docker. Lorsqu'Autodiscovery est activé, l'Agent détecte s'il est exécuté sur Docker et examine alors automatiquement toutes les étiquettes à la recherche de modèles de check. Il n'est pas nécessaire de configurer de source de modèle avec `SD_CONFIG_BACKEND` comme vous le feriez avec les stockages clé/valeur.
 
 Selon le type de fichier, Autodiscovery s'attend à des étiquettes de ce type :
 
@@ -331,12 +331,12 @@ Les template variables suivantes sont prises en charge par l'Agent :
 
 - IP conteneur : `host`
   - `%%host%%` : détection automatique du réseau. Renvoie l'IP du réseau `bridge` le cas échéant ; sinon, renvoie la dernière IP du réseau **triée**.
-  - `%%host_<NOM RÉSEAU>%%` : spécifie le nom de réseau à utiliser en cas d'association à plusieurs réseaux (p. ex. `%%host_bridge%%`, `%%host_swarm%%`, etc.) ; se comporte comme `%%host%%` si le nom de réseau spécifié est introuvable.
+  - `%%host_<NOM RÉSEAU>%%` : spécifie le nom de réseau à utiliser en cas d'association à plusieurs réseaux (par exemple, `%%host_bridge%%`, `%%host_swarm%%`, etc.) ; se comporte comme `%%host%%` si le nom de réseau spécifié est introuvable.
 
 - Port de conteneur : `port`
   - `%%port%%` : utilise le port exposé le plus élevé lorsque les ports sont **triés numériquement par ordre croissant** (p. ex. 8443 pour un conteneur qui expose les ports 80, 443, et 8443)
   - `%%port_0%%` : utilise le premier port **trié numériquement en ordre croissant** (pour un même conteneur, `%%port_0%%` correspond au port 80, `%%port_1%%` correspond à 443)
-  - Si votre port cible est fixe, nous vous conseillons de le spécifier directement, sans utiliser la variable `port`
+  - Si votre port cible est fixe, Datadog vous conseille de le spécifier directement, sans utiliser la variable `port`.
 
 - PID de conteneur : `pid` (ajouté dans 5.15.x)
   - `%%pid%%` : récupère l'ID de processus de conteneur renvoyé par `docker inspect --format '{{.State.Pid}}' <CONTENEUR>`.
@@ -352,7 +352,7 @@ Autodiscovery peut uniquement identifier un conteneur par son étiquette OU par 
 
 ### Priorité des sources de modèle
 
-Si vous définissez un modèle pour le même check via plusieurs sources de modèle, l'Agent recherche les modèles dans l'ordre suivant (et utilise le premier trouvé) :
+Si vous définissez un modèle pour le même type de check via plusieurs sources de modèle, l'Agent recherche les modèles dans l'ordre suivant (et utilise le premier trouvé) :
 
 * Annotations Kubernetes
 * Stockages clé/valeur

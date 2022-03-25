@@ -13,7 +13,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -44,7 +44,7 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the `Datadog Agent` mode.
+3. Select the `Datadog Agent` mode. CI Visibility is **not supported** using Datadog API URL and API key.
 4. Configure the `Agent` host.
 5. Configure the `Traces Collection` port (default `8126`).
 6. Click on `Enable CI Visibility` checkbox to activate it.
@@ -268,6 +268,72 @@ pipeline {
 }
 {{< /code-block >}}
 
+## Propagate Git information in pipelines without a Jenkinsfile from SCM.
+
+The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables may not be available if you are not using a `Jenkinsfile` in your repository, and you're configuring the pipeline directly in Jenkins using the `checkout` step.
+
+In this case, you can propagate the Git information to the environment variables in your build. Use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
+
+{{< tabs >}}
+{{% tab "Using Declarative Pipelines" %}}
+If you're using a declarative pipeline to configure your pipeline, propagate Git information using a `script` block as follows:
+
+Using the `checkout` step:
+{{< code-block lang="groovy" >}}
+pipeline {
+  stages {
+    stage('Checkout') {
+        script {
+          checkout(...).each {k,v -> env.setProperty(k,v)}
+        }
+    }
+    ...
+  }
+}
+{{< /code-block >}}
+
+Using the `git` step:
+{{< code-block lang="groovy" >}}
+pipeline {
+  stages {
+    stage('Checkout') {
+      script {
+        git(...).each {k,v -> env.setProperty(k,v)}
+      }
+    }
+    ...
+  }
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Using Scripted Pipelines" %}}
+If you're using a scripted pipeline to configure your pipeline, you can propagate the git information to environment variables directly.
+
+Using the `checkout` step:
+{{< code-block lang="groovy" >}}
+node {
+  stage('Checkout') {
+    checkout(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+{{< /code-block >}}
+
+Using the `git` step:
+{{< code-block lang="groovy" >}}
+node {
+  stage('Checkout') {
+    git(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Set Git information manually
 
 The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables are not always set
@@ -464,6 +530,17 @@ Send pipeline traces.
 Send pipeline traces.
 ...
 {{< /code-block >}}
+
+### The Datadog Plugin cannot write payloads to the server
+
+If the following error message appears in the **Jenkins Log**, make sure that the plugin configuration is correct.
+
+{{< code-block lang="text" >}}
+Error writing to server
+{{< /code-block >}}
+
+1. If you are using `localhost` as the hostname, try to change it to the server hostname instead.
+2. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
 
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 

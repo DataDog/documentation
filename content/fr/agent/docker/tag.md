@@ -18,9 +18,38 @@ L'Agent Datadog peut créer et appliquer des tags à l'ensemble des métriques, 
 
 Si vous exécutez l'Agent en tant que binaire sur un host, configurez l'extraction de vos tags en suivant les instructions de l'onglet [Agent](?tab=agent). Si vous exécutez l'Agent en tant que conteneur, configurez l'extraction de vos tags en suivant les instructions de l'onglet [Agent conteneurisé](?tab=agentconteneurise).
 
+### Fonctionnalité prête à l'emploi de tagging
+
+L'Agent peut découvrir automatiquement des tags et les ajouter à toutes les données générées par des conteneurs. La liste des tags ajoutés dépend de la [configuration de cardinalité][1] de l'Agent.
+
+| Tag                 | Cardinalité  | Prérequis                          |
+|---------------------|--------------|--------------------------------------|
+| `container_name`    | Élevée         | S. O.                                  |
+| `container_id`      | Élevée         | S. O.                                  |
+| `rancher_container` | Élevée         | Environnement Rancher                  |
+| `mesos_task`        | Orchestrateur | Environnement Mesos                    |
+| `docker_image`      | Faible          | S. O.                                  |
+| `image_name`        | Faible          | S. O.                                  |
+| `short_image`       | Faible          | S. O.                                  |
+| `image_tag`         | Faible          | S. O.                                  |
+| `swarm_service`     | Faible          | Environnement Swarm                    |
+| `swarm_namespace`   | Faible          | Environnement Swarm                    |
+| `rancher_stack`     | Faible          | Environnement Rancher                  |
+| `rancher_service`   | Faible          | Environnement Rancher                  |
+| `env`               | Faible          | Fonctionnalité de [tagging de service unifié][2] activée |
+| `version`           | Faible          | Fonctionnalité de [tagging de service unifié][2] activée |
+| `service`           | Faible          | Fonctionnalité de [tagging de service unifié][2] activée |
+| `marathon_app`      | Faible          | Environnement Marathon                 |
+| `chronos_job`       | Faible          | Environnement Mesos                    |
+| `chronos_job_owner` | Faible          | Environnement Mesos                    |
+| `nomad_task`        | Faible          | Environnement Nomad                    |
+| `nomad_job`         | Faible          | Environnement Nomad                    |
+| `nomad_group`       | Faible          | Environnement Nomad                    |
+
+
 ### Tagging de service unifié
 
-Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags dans des environnements conteneurisés. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la documentation dédiée au [tagging de service unifié][1].
+Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags dans des environnements conteneurisés. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la [documentation dédiée][2].
 
 ## Extraire les étiquettes en tant que tags
 
@@ -67,9 +96,9 @@ docker_labels_as_tags:
 
 ## Extraire les variables d'environnement en tant que tags
 
-Datadog recueille automatiquement les tags courants à partir de [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad et Rancher][2]. Pour extraire des tags supplémentaires, utilisez les options suivantes :
+Datadog recueille automatiquement les tags courants à partir de [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad et Rancher][3]. Pour extraire des tags supplémentaires, utilisez les options suivantes :
 
-| Variable d'environnement               | Rôle                                    |
+| Variable d'environnement               | Description                                    |
 |------------------------------------|------------------------------------------------|
 | `DD_DOCKER_LABELS_AS_TAGS`         | Extrait les étiquettes de conteneur Docker                |
 | `DD_DOCKER_ENV_AS_TAGS`            | Extrait les variables d'environnement de conteneur Docker |
@@ -119,6 +148,7 @@ docker_env_as_tags:
   ENVIRONMENT: env
 ```
 
+[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -126,5 +156,6 @@ docker_env_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/getting_started/tagging/unified_service_tagging
-[2]: /fr/agent/docker/?tab=standard#tagging
+[1]: /fr/agent/docker/tag/#extract-environment-variables-as-tags
+[2]: /fr/getting_started/tagging/unified_service_tagging
+[3]: /fr/agent/docker/?tab=standard#tagging

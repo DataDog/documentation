@@ -24,9 +24,9 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your go logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent. To achieve that we suggest the following setup with the open source logging library called [logrus][1]
+To send your go logs to Datadog, log to a file and then tail that file with your Datadog Agent. To achieve that, the following setup with the open source logging library called [logrus][1] is preferred.
 
-We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][2].
+Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][2].
 
 ## Configure your logger
 
@@ -49,7 +49,7 @@ func main() {
 }
 ```
 
-It's very easy to add metas to any log if you provide a JSON object that you want to see in the log event.
+You can add metas to any log if you provide a JSON object that you want to see in the log event.
 
 These metas can be `hostname`, `username`, `customers`, `metric` or any information that help you troubleshoot and understand what happens in your Go application.
 

@@ -12,16 +12,18 @@ assets:
 categories:
   - web
   - orchestration
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
 display_name: OctoPrint
 draft: false
 git_integration_title: octoprint
 guid: 77844a89-7202-4f8b-a0fb-642904eb9513
 integration_id: octoprint
 integration_title: Datadog/OctoPrint
+integration_version: 1.0.0
 is_public: true
 kind: integration
 maintainer: gwaldo@gmail.com
@@ -30,7 +32,7 @@ metric_prefix: octoprint.
 metric_to_check: octoprint.printer_state
 name: octoprint
 public_title: Intégration Datadog/OctoPrint
-short_description: 'Surveiller OctoPrint, une interface Web dédiée à la gestion d''imprimantes 3D'
+short_description: Surveiller OctoPrint, une interface Web dédiée à la gestion d'imprimantes 3D
 support: contrib
 supported_os:
   - linux
@@ -45,12 +47,15 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ### Installation
 
-Pour installer le check OctoPrint sur votre host, procédez comme suit :
+Pour installer le check OctoPrint sur votre host, exécutez ce qui suit :
 
-1. Exécutez `sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>`.
-    - La version actuelle est `1.0.0`. Vous pouvez vérifier la dernière version dans `./datadog_checks/octoprint/__about__.py`.
+```shell
+sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>
+```
 
-#### (Facultatif) Installation depuis les sources
+**Remarque** : la `VERSION` est indiquée en haut de cette page.
+
+#### Installation depuis les sources (facultatif)
 
 1. Installez le [kit de développement][3] sur n'importe quelle machine.
 
@@ -86,9 +91,9 @@ Voici la liste des logs recueillis par défaut (ainsi que leur emplacement par d
 
 L'un ou l'ensemble de ces logs peuvent être changés ou supprimés en modifiant le fichier `conf.yaml` de l'intégration.
 
-#### Traitement des logs
+#### Processing de logs
 
-OctoPrint utilise son propre format de log (et non un format objet). Pour tirer le meilleur parti des logs, il est donc nécessaire de créer un pipeline de traitement de logs avec des règles de parsing. Exemple :
+OctoPrint utilise son propre format de log (et non un format objet). Pour utiliser ces logs, créez un pipeline de traitement de logs avec des règles de parsing. Exemple :
 
 1. Pipeline principal : « OctoPrint »
     1. Sous-pipeline 1 : « OctoPrint Print Job »
@@ -106,17 +111,18 @@ Pour en savoir plus, consultez la [documentation sur le traitement des logs Data
 {{< get-metrics-from-git "octoprint" >}}
 
 
-### Checks de service
-
-OctoPrint n'inclut aucun check de service.
-
 ### Événements
 
 OctoPrint n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "octoprint" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
+
 
 [1]: https://octoprint.org/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
@@ -128,4 +134,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [8]: https://octoprint.org/download/
 [9]: https://docs.datadoghq.com/fr/logs/processing/
 [10]: https://github.com/DataDog/integrations-extras/blob/master/octoprint/metadata.csv
-[11]: https://docs.datadoghq.com/fr/help/
+[11]: https://github.com/DataDog/integrations-extras/blob/master/octoprint/assets/service_checks.json
+[12]: https://docs.datadoghq.com/fr/help/

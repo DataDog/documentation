@@ -79,13 +79,13 @@ The displayed metrics represent, per span:
 `Avg % Exec Time`
 : Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once.
 
-**Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (i.e.: spans without children).
+**Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (in other words, spans without children).
 
 ## Traces
 
 Consult the list of [traces][6] associated with this resource in the [Trace search][7] modal already filtered on your environment, service, operation, and resource name:
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" style="width:90%;">}}
 
 ## Further Reading
 
@@ -94,7 +94,7 @@ Consult the list of [traces][6] associated with this resource in the [Trace sear
 [1]: /tracing/visualization/#services
 [2]: /tracing/visualization/
 [3]: /tracing/visualization/#trace
-[4]: /dashboards/timeboard/
+[4]: /dashboards/#timeboards
 [5]: /tracing/visualization/#spans
 [6]: /tracing/visualization/trace/
 [7]: /tracing/search/

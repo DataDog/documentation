@@ -16,16 +16,8 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 |:-------------------------------------|:-------------------------------------|
 | AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
-| CentOS                               | `/etc/datadog-agent/datadog.yaml`    |
-| Debian                               | `/etc/datadog-agent/datadog.yaml`    |
-| Fedora                               | `/etc/datadog-agent/datadog.yaml`    |
 | macOS                                | `~/.datadog-agent/datadog.yaml`      |
-| RedHat                               | `/etc/datadog-agent/datadog.yaml`    |
-| Source                               | `/etc/datadog-agent/datadog.yaml`    |
-| Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
-| Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
 | Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.yaml` |
-| Windows Server 2003, XP or older     | *unsupported platform*               |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -33,21 +25,14 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | Platform                             | Command                                                                    |
 |:-------------------------------------|:---------------------------------------------------------------------------|
 | Linux                                | `/etc/dd-agent/datadog.conf`                                               |
-| CentOS                               | `/etc/dd-agent/datadog.conf`                                               |
-| Debian                               | `/etc/dd-agent/datadog.conf`                                               |
-| Fedora                               | `/etc/dd-agent/datadog.conf`                                               |
-| macOS                                | `~/.datadog-agent/datadog.conf`                                            |
-| RedHat                               | `/etc/dd-agent/datadog.conf`                                               |
-| Source                               | `/etc/dd-agent/datadog.conf`                                               |
-| Suse                                 | `/etc/dd-agent/datadog.conf`                                               |
-| Ubuntu                               | `/etc/dd-agent/datadog.conf`                                               |
+| macOS                                | `~/.datadog-agent/datadog.conf`                                            |                                       |
 | Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003, XP or older     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: [A full example of the `datadog.yaml` file is available in the `datadog-agent` Github repository][1].
+**Note**: [A full example of the `datadog.yaml` file is available in the `datadog-agent` GitHub repository][1].
 
 ## Agent configuration directory
 
@@ -81,7 +66,7 @@ An example for each Agent check configuration file is found in the `conf.yaml.ex
 └── frontend.yaml
 ```
 
-A special case are YAML files with the suffix `.default`. These files are loaded by the Agent by default and help define the core set of checks that are always enabled (CPU, memory, uptime ...). They are ignored if any other configuration are found for that check, therefore you can safely ignore them. If you want to disable one of the default checks simply remove that file. To configure these checks, `conf.yaml.example` should be use as a base.
+A special case are YAML files with the suffix `.default`. These files are loaded by the Agent by default and help define the core set of checks that are always enabled (CPU, memory, uptime ...). They are ignored if any other configuration are found for that check, therefore you can safely ignore them. If you want to disable one of the default checks, remove that file. To configure these checks, `conf.yaml.example` should be use as a base.
 
 Autodiscovery template files are stored in the configuration folder with the `auto_conf.yaml` file. For example, for the Redis check, here is the configuration in `redisdb.d/`:
 

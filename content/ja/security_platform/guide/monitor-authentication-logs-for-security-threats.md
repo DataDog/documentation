@@ -38,7 +38,7 @@ further_reading:
 
 ### 標準的な、解析可能な形式でログイン
 
-アプリケーションでは、必ず `=` をセパレーターとして使用する key-value 形式でログを作成します。この形式を使用すると、Datadog の [Grok Parser][3] などの key-value パーサーの処理が簡単になります。たとえば、ログが以下の形式の場合:
+アプリケーションでは、必ず `=` をセパレーターとして使用する key-value 形式でログを作成します。この形式を使用すると、Datadog の [Grok Parser][3] などの key-value パーサーが処理できます。たとえば、ログが以下の形式の場合:
 
 {{< code-block lang="bash" >}}
 INFO 2020-01-01 12:00:01 usr.id="John Doe" evt.category=authentication evt.name="google oauth" evt.outcome=success network.client.ip=1.2.3.4
@@ -74,7 +74,7 @@ Datadog で以下の JSON として解析できます。
 
 Datadog でログ属性を適切に使用しログデータを絞り込んだり管理したりできるよう、すべての認証ログには同じ形式を使用します。たとえば、標準属性を使用すると、最も多くログインに失敗した (`evt.outcome:failure`) ユーザー (`usr.id`) を検索できます。
 
-また、key-value 形式を使用することで、ログにカスタム属性を追加しやすくなります。たとえば、[reCAPTCHA v3][9] スコアを追加して、ボットアクティビティの可能性を特定します。スペースを含む属性値を囲むには、引用符を使用します。こうすることで、解析しやすい方法で全値をキャプチャできます。
+また、key-value 形式を使用することで、ログにカスタム属性を追加するプロセスがシンプルになります。たとえば、[reCAPTCHA v3][9] スコアを追加して、ボットアクティビティの可能性を特定できます。スペースを含む属性値を囲むには、引用符を使用します。こうすることで、解析できる方法で全値をキャプチャできます。
 
 ## セキュリティ上の脅威の監視、検出
 
@@ -92,9 +92,9 @@ Datadog では、上記のような一般的な攻撃に対し、収集された
 
 Datadog では、[IP 調査ダッシュボード][16]や[ユーザーアカウント調査ダッシュボード][17]など、すぐに使用できるダッシュボードを提供しています。ここでは、認証ログの重要なデータを環境内の他の関連データと結びつけ、調査に役立てることができます。
 
-たとえば、特定の IP アドレスまたはユーザーが複数のセキュリティシグナルをトリガーしている場合、ダッシュボードのリストまたはグラフでその IP アドレスまたはユーザーをクリックし、**View related Security Signals** を選択します。すると、該当する IP アドレスまたはユーザーにトリガーされたすべてのセキュリティシグナルがセキュリティシグナルエクスプローラーに表示されます。十分なデータがあれば、このビューで IP アドレスをユーザーに、またはその逆を関連付けることができます。そして、各ルールの詳細を確認して攻撃に対処します。ルールをクリックして **Message** タブでトリアージおよび対処に関する情報を確認し、この問題を適切に評価して対処を実行します。
+たとえば、特定の IP アドレスまたはユーザーが複数のセキュリティシグナルをトリガーしている場合、ダッシュボードのリストまたはグラフでその IP アドレスまたはユーザーをクリックし、**View related Security Signals** を選択します。すると、該当する IP アドレスまたはユーザーにトリガーされたすべてのセキュリティシグナルがセキュリティシグナルエクスプローラーに表示されます。十分なデータがあれば、このビューで IP アドレスをユーザーに、またはその逆を関連付けることができます。そして、各ルールを調査・検証して攻撃に対処します。ルールをクリックして **Message** タブでトリアージおよび対処に関する情報を確認し、この問題を適切に評価して対処を実行します。
 
-{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.gif" alt="IP 調査ダッシュボードで、トリガーされたセキュリティシグナルを分析">}}
+{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.mp4" alt="IP 調査ダッシュボードで、トリガーされたセキュリティシグナルを分析" video=true >}}
 
 カスタムダッシュボードを作成して、キーとなる認証データ（ソース別ログイン回数と結果など）を視覚化することも可能です。ユーザーベース全体のアクティビティを高いレベルで確認し、トレンドを理解して調査すべき疑わしいスパイクを検出することができます。
 
@@ -106,7 +106,7 @@ Datadog では、[すべてのログ][18]を取り込み分析し、環境全体
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security_monitoring/
+[1]: /ja/cloud_siem/
 [2]: /ja/logs/log_collection/?tab=http#application-log-collection
 [3]: /ja/logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
@@ -117,8 +117,8 @@ Datadog では、[すべてのログ][18]を取り込み分析し、環境全体
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?query=credential%20stuffing%20attack&sort=rule
-[12]: /ja/security_monitoring/default_rules/
-[13]: /ja/security_monitoring/explorer
+[12]: /ja/cloud_siem/default_rules/
+[13]: /ja/cloud_siem/explorer
 [14]: https://app.datadoghq.com/notebook/credentialstuffingrunbook
 [15]: /ja/notebooks/#commenting
 [16]: https://app.datadoghq.com/screen/integration/security-monitoring-ip-investigation

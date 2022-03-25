@@ -1,9 +1,19 @@
-{{ $codeLangs := split (.Get "langs") "," }}
+{{ $codeLangSplit := split (.Get "langs") "," }}
+{{ $codeLangs := slice }}
 {{ $sort := .Get "sort" }}
 {{ $class := .Get "class" }}
 
-{{ if  not (.Get "langs") }}
+{{ if not (.Get "langs") }}
     {{ errorf "Programming lang wrapper shortcode error: Missing value for param 'langs': %s" .Position }}
+{{ end }}
+
+<!-- Normalize code lang tabs, these are curated manually and may be inconsistent -->
+{{ range $codeLangSplit }}
+    {{ if eq . ".NET" }}
+        {{ $codeLangs = $codeLangs | append "dotnet" }}
+    {{ else }}
+        {{ $codeLangs = $codeLangs | append (lower .) }}
+    {{ end }}
 {{ end }}
 
 <div class="programming-lang-wrapper js-code-snippet-wrapper {{ with $class }}{{ . }}{{ end }}">

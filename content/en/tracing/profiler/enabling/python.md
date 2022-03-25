@@ -16,12 +16,6 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">
-  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
-</div>
-{{< /site-region >}}
-
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
@@ -38,6 +32,8 @@ The following profiling features are available depending on your Python version:
 | Exception profiling  | Python >= 3.7 on POSIX platforms   |
 | Lock profiling       | Python >= 2.7                      |
 | Memory profiling     | Python >= 3.5                      |
+
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
 

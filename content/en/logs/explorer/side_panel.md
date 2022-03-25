@@ -19,7 +19,7 @@ further_reading:
 ## Overview
 Datadog displays individual logs following this general side panel layout:
 
-{{< img src="logs/explorer/side_panel/overview.png" alt="Log Explorer side panel"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/overview.png" alt="Log Explorer side panel" style="width:60%;">}}
 
 - The upper part of the panel displays general **context** information
 - The lower part of the panel displays the actual **content** of the log
@@ -39,13 +39,13 @@ Some standard fields, for instance `error.stack`, `http.method`, or `duration`, 
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log, even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
-Click on the **Metrics** tab and access underlying infrastructure metrics in a 30 minutes timeframe around the log.
+Click on the **Metrics** tab and access underlying infrastructure metrics in a 30 minutes time frame around the log.
 
-Interact with **Host** in the upper reserved attributes section, the related [host dashboard][5], or [network page][6]. Interact with **Container** sections to jump to the [container page][7] scoped with the underlying parameters.
+Interact with **Host** in the upper reserved attributes section, the related [host dashboard][5], or [network page][6]. Interact with **Container** sections to navigate to the [container page][7] scoped with the underlying parameters.
 
-{{< img src="logs/explorer/side_panel/infra.gif" alt="Hub to Infra" style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/infra.mp4" alt="Hub to Infra" video=true style="width:100%;">}}
 
-In case logs comes from a serverless source, the Host Section is replaced with a Serverless section that links jump to the corresponding [serverless page][8].
+When logs come from a serverless source, the Host Section is replaced with a Serverless section that links to the corresponding [serverless page][8].
 
 {{< img src="logs/explorer/side_panel/infra-serverless.png" alt="Hub to Serverless" style="width:80%;">}}
 
@@ -57,7 +57,7 @@ Click on the **Trace tab** and see a log in the context of its entire trace, wit
 
 Interact with the **Service** section to highlight the part of the trace that corresponds with the selected service. Use this information to refocus your query in the Log Explorer and view other logs from the same trace.
 
-{{< img src="logs/explorer/side_panel/trace.gif" alt="Hub to APM" style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/trace.mp4" alt="Hub to APM" video=true style="width:100%;">}}
 
 ## Configure your troubleshooting context
 
@@ -66,11 +66,11 @@ Interact with the attributes names and values in the lower JSON section to:
 - Add or remove a column from the logs table
 - Append the search request with specific values (include or exclude)
 
-{{< img src="logs/explorer/side_panel/context.jpg" alt="Side Panel context"  style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="Side Panel context"  style="width:50%;">}}
+{{< img src="logs/explorer/side_panel/context.jpg" alt="Side Panel context" style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="Side Panel context" style="width:50%;">}}
 
 - Build or edit a facet or measure from an attribute. See [Log Facets][12].
 
-{{< img src="logs/explorer/side_panel/facets.gif" alt="Side Panel Facets"  style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/facets.mp4" alt="Side Panel Facets" video=true style="width:100%;">}}
 
 ## Share a log
 

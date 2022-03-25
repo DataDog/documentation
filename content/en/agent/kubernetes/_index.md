@@ -42,13 +42,13 @@ Run the Datadog Agent in your Kubernetes cluster as a DaemonSet in order to star
 ## Installation
 
 **Notes**:
-- Dedicated documentation and examples for [all major Kubernetes distributions][2] (GKE, EKS, AKS, OpenShift, Rancher, etc.) are available.
+- Dedicated documentation and examples for [all major Kubernetes distributions][2] (GKE, EKS, AKS, OpenShift, Rancher, OKE, etc.) are available.
 - Dedicated documentation and examples for [Kubernetes Control Plane monitoring][3] are also available.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog-agent`):
+To install the chart with a custom release name, `<RELEASE_NAME>` (for example, `datadog-agent`):
 
 1. [Install Helm][1].
 2.  Using the [Datadog `values.yaml` configuration file][2] as a reference, create your `values.yaml`. Datadog recommends that your `values.yaml` only contain values that need to be overridden, as it allows a smooth experience when upgrading chart versions.
@@ -151,19 +151,12 @@ To install the Datadog Agent on your Kubernetes cluster:
 
     **Note**: Those RBAC configurations are set for the `default` namespace by default. If you are in a custom namespace, update the `namespace` parameter before applying them.
 
-2. **Create a secret that contains your Datadog API Key**. Replace the `<DATADOG_API_KEY>` below with [the API key for your organization][2]. This secret is used in the manifest to deploy the Datadog Agent.
 
-    ```shell
-    kubectl create secret generic datadog-agent --from-literal='api-key=<DATADOG_API_KEY>' --namespace="default"
-    ```
-
-     **Note**: This creates a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.
-
-3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
+2. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
     | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Security                       | Linux                   | Windows                 |
     |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i>                         | <i class="icon-check-bold"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
     | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][9]  | [Manifest template][10] |
@@ -174,17 +167,28 @@ To install the Datadog Agent on your Kubernetes cluster:
 
      **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
-4. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
+3. In the `secret-api-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][2] encoded in base64. To get the base64 version of your API key, you can run:
 
-    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadog.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
+    ```shell
+    echo -n '<Your API key>' | base64
+    ```
+4. In the `secret-cluster-agent-token.yaml` manifest, replace `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` with a random string encoded in base64. To get the base64 version of it, you can run:
 
-5. **Deploy the DaemonSet** with the command:
+    ```shell
+    echo -n 'Random string' | base64
+    ```
+
+5. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
+
+    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
+
+6. **Deploy the DaemonSet** with the command:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
 
-6. **Verification**: To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
+7. **Verification**: To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
     ```shell
     kubectl get daemonset
@@ -197,7 +201,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][21] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][22]:
+8. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][21] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][22]:
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -392,7 +396,7 @@ Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery f
 
 ## Environment variables
 
-Find below the list of environment variables available for the Datadog Agent. If you want to setup those with Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][9].
+The following is the list of environment variables available for the Datadog Agent using a DaemonSet. If you are using Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts GitHub repository][9]. If you are using Operator, see the [Operator Configuration][10] documentation.
 
 ### Global options
 
@@ -418,7 +422,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_NO_PROXY`      | A space-separated list of URLs for which no proxy should be used.      |
 | `DD_SKIP_SSL_VALIDATION` | An option to test if the Agent is having issues connecting to Datadog. |
 
-For more information about proxy settings, see the [Agent v6 Proxy documentation][10].
+For more information about proxy settings, see the [Agent v6 Proxy documentation][11].
 
 ### Optional collection Agents
 
@@ -428,14 +432,14 @@ Optional collection Agents are disabled by default for security or performance r
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_ENABLED`                | Enable [trace collection][7] with the Trace Agent.                                                                                                                                                                                                           |
 | `DD_LOGS_ENABLED`               | Enable [log collection][8] with the Logs Agent.                                                                                                                                                                                                              |
-| `DD_PROCESS_AGENT_ENABLED`      | Enable [live process collection][9] with the Process Agent. The [live container view][10] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][9] and the [live container view][10] are disabled. |
+| `DD_PROCESS_AGENT_ENABLED`      | Enable [live process collection][9] with the Process Agent. The [live container view][11] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][9] and the [live container view][11] are disabled. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well.                                                                                                                       |
 
 To enable the Live Container view, make sure you are running the process agent in addition to setting DD_PROCESS_AGENT_ENABLED to `true`.
 
 ### DogStatsD (custom metrics)
 
-Send custom metrics with [the StatsD protocol][11]:
+Send custom metrics with [the StatsD protocol][12]:
 
 | Env Variable                     | Description                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -446,7 +450,7 @@ Send custom metrics with [the StatsD protocol][11]:
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
 
-Learn more about [DogStatsD over Unix Domain Sockets][12].
+Learn more about [DogStatsD over Unix Domain Sockets][13].
 
 ### Tagging
 
@@ -457,11 +461,11 @@ Datadog automatically collects common tags from Kubernetes. To extract even more
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extract pod labels      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extract pod annotations |
 
-See the [Kubernetes Tag Extraction][13] documentation to learn more.
+See the [Kubernetes Tag Extraction][14] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][14].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][15].
 
 ### Ignore containers
 
@@ -478,7 +482,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE`                | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
 | `DD_AC_EXCLUDE`                | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][15] page.
+Additional examples are available on the [Container Discover Management][16] page.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted.
 
@@ -494,7 +498,7 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][16] to discover all the Docker Agent commands.
+See the [Agent Commands guides][17] to discover all the Docker Agent commands.
 
 ## Further Reading
 
@@ -509,10 +513,11 @@ See the [Agent Commands guides][16] to discover all the Docker Agent commands.
 [7]: /infrastructure/livecontainers/?tab=helm#configuration
 [8]: /agent/kubernetes/integrations/
 [9]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
-[10]: /agent/proxy/#agent-v6
-[11]: /developers/dogstatsd/
-[12]: /developers/dogstatsd/unix_socket/
-[13]: /agent/kubernetes/tag/
-[14]: /security/agent/#secrets-management
-[15]: /agent/guide/autodiscovery-management/
-[16]: /agent/guide/agent-commands/
+[10]: /agent/kubernetes/operator_configuration
+[11]: /agent/proxy/#agent-v6
+[12]: /developers/dogstatsd/
+[13]: /developers/dogstatsd/unix_socket/
+[14]: /agent/kubernetes/tag/
+[15]: /security/agent/#secrets-management
+[16]: /agent/guide/autodiscovery-management/
+[17]: /agent/guide/agent-commands/

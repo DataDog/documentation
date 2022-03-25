@@ -2,10 +2,10 @@
 title: Liste de contrôle pour les SLO
 kind: guide
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
+  - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
     tag: Blog
-    text: Surveiller le statut et le budget d'indisponibilité de vos SLO avec Datadog
-  - link: 'https://learn.datadoghq.com/course/view.php?id=34'
+    text: Surveiller le statut et la marge d'erreur de vos SLO avec Datadog
+  - link: https://learn.datadoghq.com/course/view.php?id=34
     tag: Centre d'apprentissage
     text: Présentation des Service Level Objectives (SLO)
 ---
@@ -24,7 +24,7 @@ Cliquez <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">ici</a> 
     * Avec quels éléments de votre infrastructure interagissent-ils durant leur parcours ?
     * Qu'attendent-ils de vos systèmes, et que cherchent-ils à accomplir ?
 
-## Sélectionner les SLI pertinents
+## Sélectionner le SLI pertinent
 
 ### ÉTAPE 1
 
@@ -53,7 +53,7 @@ Cliquez <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">ici</a> 
 
 ### ÉTAPE 2
 
-**Avez-vous besoin d'un SLI basé sur des durées, ou sur des totaux ?**
+**Avez-vous besoin d'un SLI basé sur des durées, ou sur des nombres totaux ?**
 
 **Les SLI basés sur des durées ont recours aux monitors Datadog** :
 
@@ -66,16 +66,16 @@ _Exemple : la latence de toutes les requêtes utilisateur doit être inférieur
 
 Si vous devez créer un nouveau monitor, accédez à la [page dédiée][2].
 
-**Les SLI basés sur des totaux ont recours à des métriques de votre compte Datadog et ne nécessitent pas de monitor** :
+**Les SLI basés sur des nombres totaux ont recours à des métriques de votre compte Datadog et ne nécessitent pas de monitor** :
 
 _Exemple : 99 % des requêtes doivent se terminer en moins de 250 ms sur une période de 30 jours._
 
 ## Mettre en œuvre les SLI
 
-1. [Métriques custom][3] (p. ex., compteurs)
-2. [Métriques d'intégration][4] (p. ex., équilibreur de charge, requêtes HTTP)
-3. [APM Datadog][5] (p. ex., erreurs, latence au niveau des services et ressources)
-4. [Logs Datadog][6] (p. ex., métriques générées à partir de logs pour un total d'occurrences spécifiques)
+1. [Métriques custom][3] (par exemple, compteurs)
+2. [Métriques d'intégration][4] (par exemple, équilibreur de charge, requêtes HTTP)
+3. [APM Datadog][5] (par exemple, erreurs, latence au niveau des services et ressources)
+4. [Logs Datadog][6] (par exemple, métriques générées à partir de logs pour un total d'occurrences spécifiques)
 
 ## Définir l'objectif ciblé et l'intervalle
 

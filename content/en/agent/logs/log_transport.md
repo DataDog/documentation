@@ -89,7 +89,7 @@ logs_config:
 
 ### Configure the batch wait time
 
-The Agent waits up to 5 seconds to fill each batch (either in content size or number of logs). Therefore, in the worst case scenario (when very few logs are generated) switching to HTTPS might add a 5-second latency compared to the TCP transport which sends all logs in real time.
+The Agent waits up to 5 seconds to fill each batch (either in content size or number of logs). Therefore, in the worst case scenario (when few logs are generated) switching to HTTPS might add a 5-second latency compared to the TCP transport which sends all logs in real time.
 
 To change the maximum time the Datadog Agent waits to fill each batch, add the following configuration in the Agent's [main configuration file][1] (`datadog.yaml`):
 

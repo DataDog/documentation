@@ -16,12 +16,6 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-{{< site-region region="us5" >}}
-<div class="alert alert-warning">
-  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">
 Datadog Node.js Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
@@ -32,6 +26,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 The Datadog Profiler requires at least Node.js 12, but Node.js 16 or higher is recommended. **If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.**
 
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+
 ## Installation
 
 To begin profiling applications:
@@ -40,37 +36,44 @@ To begin profiling applications:
 
 2. Run `npm install --save dd-trace@latest` to add a dependency on the `dd-trace` module which includes the profiler.
 
-3. You can enable the profiler with environment variables:
+3. Enable the profiler:
 
-    ```shell
-    export DD_PROFILING_ENABLED=true
-    export DD_ENV=prod
-    export DD_SERVICE=my-web-app
-    export DD_VERSION=1.0.3
-    ```
+   {{< tabs >}}
+{{% tab "Environment variables" %}}
 
-    **Note**: If you’re already using Datadog APM, you are already calling `init` and don’t need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+```shell
+export DD_PROFILING_ENABLED=true
+export DD_ENV=prod
+export DD_SERVICE=my-web-app
+export DD_VERSION=1.0.3
+```
 
-    ```node
-    node -r dd-trace/init app.js
-    ```
+**Note**: If you’re already using Datadog APM, you are already calling `init` and don’t need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
 
-    or
+```node
+node -r dd-trace/init app.js
+```
 
-    ```node
-    const tracer = require('dd-trace/init')
-    ```
+{{% /tab %}}
+{{% tab "In code" %}}
 
-    Or you can enable the profiler in code:
+```js
+const tracer = require('dd-trace').init({
+  profiling: true,
+  env: 'prod',
+  service: 'my-web-app',
+  version: '1.0.3'
+})
+```
 
-    ```js
-    const tracer = require('dd-trace').init({
-      profiling: true,
-      env: 'prod',
-      service: 'my-web-app',
-      version: '1.0.3'
-    })
-    ```
+**Note**: If you’re already using Datadog APM, you are already calling `init` and don’t need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+
+```node
+const tracer = require('dd-trace/init')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 4. A minute or two after starting your Node.js application, your profiles will show up on the [APM > Profiler page][4].
 

@@ -12,7 +12,7 @@ Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent 
 
 `datadog.trace_agent.cpu_percent`
 : **Type**: Gauge<br>
-CPU usage (in cores), e.g. 50 (half a core), 200 (two cores), 250 (2.5 cores)
+CPU usage (in cores), for example, 50 (half a core), 200 (two cores), 250 (2.5 cores)
 
 `datadog.trace_agent.events.max_eps.current_rate`
 : **Type**: Gauge<br>
@@ -49,6 +49,10 @@ Increment by one every time an SQL obfuscation happens.
 `datadog.trace_agent.panic`
 : **Type**: Gauge<br>
 Increment by one on every code panic.
+
+`datadog.trace_agent.profile`
+: **Type**: Count<br>
+Increment by one every time a reverse proxy of profile endpoints is created.
 
 `datadog.trace_agent.ratelimit`
 : **Type**: Gauge<br>

@@ -5,7 +5,7 @@ guides:
     link_text: ガイドを表示
     link: getting_started/agent/
   - title: インテグレーションをセットアップ
-    desc: 450 以上のインテグレーションを利用して、メトリクス、トレース、ログを収集できます。
+    desc: 500 以上のインテグレーションを利用して、メトリクス、トレース、ログを収集できます。
     link_text: ガイドを表示
     link: getting_started/integrations/
   - title: アプリで使用を開始
@@ -89,7 +89,7 @@ nav_sections:
             desc: Datadog API の使用
           - title: アカウントの管理
             link: account_management/
-            icon: cog
+            icon: cog-2
             desc: アカウント設定の管理
           - title: セキュリティ
             link: security/

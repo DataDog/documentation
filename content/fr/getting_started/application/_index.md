@@ -118,11 +118,11 @@ Vous pouvez visualiser les durées de chargement, les erreurs frontend et les d�
 
 L'[informatique sans serveur][22] consiste à écrire du code orienté événement et à l'importer dans un fournisseur de cloud afin qu'il gère toutes les ressources de calcul sous-jacentes. Les fonctionnalités sans serveur Datadog regroupent en une unique vue les métriques, traces et logs de vos fonctions AWS Lambda qui exécutent des applications sans serveur. Vous pouvez ainsi optimiser vos performances en appliquant des filtres basés sur les fonctions caractérisées par des erreurs, une forte latence ou des démarrages à froid.
 
-## Security Monitoring
+## Cloud SIEM
 
 {{< img src="getting_started/security.png" alt="security"  >}}
 
-La solution [Security Monitoring][23] de Datadog détecte automatiquement les menaces concernant votre application ou votre infrastructure. Il peut par exemple s'agir d'une attaque ciblée, d'une adresse IP communiquant avec vos systèmes alors qu'elle fait partie d'une liste noire, ou d'une configuration non sécurisée. Ces menaces sont affichées dans Datadog sous forme de signaux de sécurité et peuvent être mises en corrélation et triées dans le Security Signals Explorer.
+La solution [Cloud SIEM][23] de Datadog détecte automatiquement les menaces concernant votre application ou votre infrastructure. Il peut par exemple s'agir d'une attaque ciblée, d'une adresse IP communiquant avec vos systèmes alors qu'elle fait partie d'une liste noire, ou d'une configuration non sécurisée. Ces menaces sont affichées dans Datadog sous forme de signaux de sécurité et peuvent être mises en corrélation et triées dans le Security Signals Explorer.
 
 ## Pour aller plus loin
 

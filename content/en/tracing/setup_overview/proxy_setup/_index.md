@@ -254,7 +254,7 @@ The following plugins must be installed:
 Commands to download and install these modules:
 
 ```bash
-# Gets the latest release version number from Github.
+# Gets the latest release version number from GitHub.
 get_latest_release() {
   wget -qO- "https://api.github.com/repos/$1/releases/latest" |
     grep '"tag_name":' |
@@ -383,7 +383,7 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 {{% tab "Istio" %}}
 
 Datadog monitors every aspect of your Istio environment, so you can:
-- Drill into distributed traces for applications transacting over the mesh with APM (see below).
+- View individual distributed traces for applications transacting over the mesh with APM (see below).
 - Assess the health of Envoy and the Istio control plane with [logs][1].
 - Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][1].
 - Map network communication between containers, pods, and services over the mesh with [Network Performance Monitoring][2].
@@ -438,17 +438,28 @@ of the higher-level `CronJob`.
 
 ### Environment variables
 
-Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation.
+Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation. This is unique for deployments employing Istio sidecars and is set in addition to the [labels for unified service tagging][9].
 ```yaml
+apiVersion: apps/v1
+...
+kind: Deployment
+...
+spec:
+  template:
     metadata:
       annotations:
-        apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_TRACE_ANALYTICS_ENABLED": "true" }'
+        apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1"}'
 ```
 
-The available [environment variables][9] depend on the version of the C++ tracer embedded in the Istio sidecar's proxy.
+The available [environment variables][10] depend on the version of the C++ tracer embedded in the Istio sidecar's proxy.
 
 | Istio Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.12.x | v1.2.1 |
+| v1.11.x | v1.2.1 |
+| v1.10.x | v1.2.1 |
+| v1.9.x | v1.2.1 |
+| v1.8.x | v1.1.5 |
 | v1.7.x | v1.1.5 |
 | v1.6.x | v1.1.3 |
 | v1.5.x | v1.1.1 |
@@ -490,7 +501,7 @@ spec:
 ```
 
 Automatic Protocol Selection may determine that traffic between the sidecar and Agent is HTTP, and enable tracing.
-This can be disabled using [manual protocol selection][10] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
+This can be disabled using [manual protocol selection][11] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
 If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specification.
 
 
@@ -504,8 +515,9 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [6]: https://istio.io/docs/setup/install/istioctl/
 [7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
 [8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[9]: /tracing/setup/cpp/#environment-variables
-[10]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[9]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
+[10]: /tracing/setup/cpp/#environment-variables
+[11]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 {{% /tab %}}
 {{< /tabs >}}
 

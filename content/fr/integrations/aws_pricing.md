@@ -11,13 +11,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md
 display_name: "AWS\_Pricing"
 draft: false
 git_integration_title: aws_pricing
 guid: fce760ae-979a-4c35-aa4e-5a05c24e2ce3
 integration_id: aws-pricing
 integration_title: "AWS\_Pricing"
+integration_version: 1.0.0
 is_public: true
 kind: Twislock
 maintainer: tsein@brightcove.com
@@ -39,19 +40,29 @@ Ce check envoie les informations relatives au tarif [publiées par AWS][1] afin 
 
 ## Configuration
 
+Le check AWS Pricing n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer.
+
 ### Installation
 
-Le check AWS Pricing n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer en suivant les [instructions d'installation d'une intégration développée par la communauté][3].
+Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check AWS Pricing sur votre host. Consultez la section [Utiliser les intégrations de la communauté][3] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
+
+1. Exécutez la commande suivante pour installer l'intégration de l'Agent :
+
+   ```shell
+   datadog-agent integration install -t datadog-aws_pricing==<INTEGRATION_VERSION>
+   ```
+
+2. Configurez votre intégration comme une [intégration][4] de base.
 
 ### Configuration
 
-1. Modifiez le fichier `aws_pricing.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performances AWS pricing. Consultez le [fichier d'exemple aws_pricing.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `aws_pricing.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performances AWS pricing. Consultez le [fichier d'exemple aws_pricing.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][4].
+2. [Redémarrez l'Agent][6].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `aws_pricing` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][7] et cherchez `aws_pricing` dans la section Checks.
 
 ## Données collectées
 
@@ -59,28 +70,26 @@ Le check AWS Pricing n'est pas inclus avec le package de l'[Agent Datadog][2] 
 {{< get-metrics-from-git "aws_pricing" >}}
 
 
-### Checks de service
-
-`aws_pricing.status` :
-
-Renvoie `CRITICAL` si le check rencontre une erreur durant l'utilisation du client de tarification Boto3 pour la collecte de métriques.
-
-Renvoie `WARNING` si un code tarif défini dans `aws_pricing.d/conf.yaml` n'a pas pu être trouvé à l'aide du client de tarification Boto3.
-
-Renvoie `OK` lorsqu'aucune erreur n'a été détectée et que toutes les données de tarification du service de votre choix ont été recueillies.
-
 ### Événements
 
 AWS Pricing n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "aws_pricing" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
+
 
 [1]: https://aws.amazon.com/pricing/
-[2]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/datadog_checks/aws_pricing/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-information
-[6]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[5]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/datadog_checks/aws_pricing/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-information
+[8]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/assets/service_checks.json
+[10]: https://docs.datadoghq.com/fr/help/

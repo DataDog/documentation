@@ -19,6 +19,7 @@
 "guid": "56e3b585-27b4-4a04-b528-9c1adfecf387"
 "integration_id": "amixr"
 "integration_title": "Amixr"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "ildar@amixr.io"

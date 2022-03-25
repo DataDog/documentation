@@ -2,10 +2,10 @@
 title: Dépannage de l'Agent de cluster
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
+  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
     tag: Blog
     text: Présentation de l'Agent de cluster Datadog
-  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
+  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
     tag: Blog
     text: Mettre à l'échelle vos charges de travail Kubernetes en fonction d'une métrique Datadog
   - link: /agent/cluster_agent/clusterchecks/
@@ -17,7 +17,7 @@ further_reading:
   - link: /agent/kubernetes/integrations/
     tag: Documentation
     text: Intégrations personnalisées
-  - link: 'https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting'
+  - link: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting
     tag: Github
     text: Dépannage de l'Agent de cluster Datadog
 ---
@@ -159,7 +159,7 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 Ou recherchez des logs d'erreur, par exemple :
 
 ```shell
-2018-06-10 08:03:02 UTC | ERROR | Could not initialise the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
+2018-06-10 08:03:02 UTC | ERROR | Could not initialize the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
 ## Serveur de métriques custom

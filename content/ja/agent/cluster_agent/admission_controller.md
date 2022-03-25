@@ -150,7 +150,7 @@ DogStatsD クライアントと APM トレーサーを自動で構成するに�
 - Admission Controller は環境変数 `DD_VERSION, DD_ENV` および `DD_SERVICE` が既に存在する場合は挿入を行いません。
 - Admission Controller の挿入機能を無効化するには、Cluster Agent のコンフィギュレーション: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false` を使用します。
 - Datadog Admission Controller を使用すれば、ユーザーは Downward API ([Kubernetes トレースコレクション設定のステップ 2 ][3]) を利用してアプリケーションポッドの構成をスキップすることができます。
-- プライベートクラスターを使用していて、コンフィギュレーションがポッドに挿入されない場合は、Control Plane のファイアウォールルールを開き Datadog Webhook と通信します、
+- プライベートクラスターを使用していて、コンフィギュレーションがポッドに挿入されない場合は、Control Plane のファイアウォールルールを開き Datadog Webhook と通信します。この場合、[GCP でのファイアウォールルールの追加][4]で説明したように、ファイアウォールルールが 443 番ポートを開放していることを確認してください。
 
 
 ## その他の参考資料
@@ -160,3 +160,4 @@ DogStatsD クライアントと APM トレーサーを自動で構成するに�
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
 [2]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=helm#setup
+[4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules

@@ -66,6 +66,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Amazon Health                 | amazon health                 | health                     |
 | Amazon Inspector              | amazon inspector              | inspector                  |
 | Amazon Iot                    | amazon iot                    | iot                        |
+| Amazon Keyspaces              | amazon keyspaces              | keyspaces                  |
 | Amazon Kinesis                | amazon kinesis                | kinesis                    |
 | Amazon Kms                    | amazon kms                    | kms                        |
 | Amazon Lambda                 | amazon lambda                 | lambda                     |
@@ -79,10 +80,12 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Amazon Ops Works              | amazon ops works              | opsworks                   |
 | Amazon Polly                  | amazon polly                  | polly                      |
 | Amazon Rds                    | amazon rds                    | rds                        |
+| Amazon Rds Proxy              | amazon rds proxy              | rdsproxy                   |
 | Amazon Redshift               | amazon redshift               | redshift                   |
 | Amazon Rekognition            | amazon rekognition            | rekognition                |
 | Amazon Route53                | amazon route53                | route53                    |
 | Amazon S3                     | amazon s3                     | s3                         |
+| Amazon S3 Storage Lens        | amazon s3 storage lens        | s3storagelens              |
 | Amazon Sagemaker              | amazon sagemaker              | sagemaker                  |
 | Amazon Security Hub           | amazon security hub           | awssecurityhub             |
 | Amazon Ses                    | amazon ses                    | ses                        |
@@ -170,6 +173,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Conviva                       | conviva                       | conviva                    |
 | Couchbase                     | couchbase                     | couchbase                  |
 | Couchdb                       | couchdb                       | couchdb                    |
+| Crowdstrike                   | crowdstrike                   | crowdstrike                |
 | Desk                          | desk                          | desk                       |
 | Dingtalk                      | dingtalk                      | dingtalk                   |
 | Docker                        | docker                        | docker                     |
@@ -183,8 +187,9 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Flowdock                      | flowdock                      | flowdock                   |
 | Fluentd                       | fluentd                       | fluentd                    |
 | Git                           | git                           | git                        |
-| Github                        | github                        | github                     |
-| Github Apps                   | github apps                   | githubapps                 |
+| GitHub                        | github                        | github                     |
+| GitHub Apps                   | github apps                   | githubapps                 |
+| GitLab                        | gitlab                        | gitlab                     |
 | G Suite                       | g suite                       | gsuite                     |
 | Go Expvar                     | go expvar                     | goexpvar                   |
 | Google App Engine             | google app engine             | gae                        |
@@ -219,6 +224,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Google Compute Engine         | google compute engine         | gcpcompute                 |
 | Google Container Engine       | google container engine       | gcpcontainer               |
 | Google Hangouts Chat          | google hangouts chat          | hangouts                   |
+| Google Kubernetes Engine      | google kubernetes engine      | gke                        |
 | Google Workspace Alert Center | google workspace alert center | googleworkspacealertcenter |
 | Gunicorn                      | gunicorn                      | gunicorn                   |
 | Haproxy                       | haproxy                       | haproxy                    |
@@ -310,5 +316,6 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Zabbix                        | zabbix                        | zabbix                     |
 | Zendesk                       | zendesk                       | zendesk                    |
 | Zookeeper                     | zookeeper                     | zookeeper                  |
+
 
 [1]: /api/latest/events/

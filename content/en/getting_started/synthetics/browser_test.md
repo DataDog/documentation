@@ -11,7 +11,7 @@ further_reading:
     - link: '/getting_started/synthetics/private_location'
       tag: 'Documentation'
       text: 'Learn about private locations'
-    - link: '/synthetics/cicd_testing'
+    - link: '/synthetics/cicd_integrations'
       tag: 'Documentation'
       text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
     - link: '/synthetics/identify_synthetics_bots'
@@ -22,14 +22,17 @@ further_reading:
 
 ## Overview
 
-[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by the most recent code changes.
+[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. 
+
+{{< img src="getting_started/synthetics/browser-test-overview.png" alt="Overview of a Synthetics Browser Test" style="width:100%;" >}}
+
+These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by recent code changes.
 
 ## Create a browser test
 
 The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
-{{< img src="getting_started/synthetics/browser-test.png" alt="Browser test" style="width:100%;" >}}
-
+{{< img src="getting_started/synthetics/browser-test-1.png" alt="Browser test mapping out a user journey" style="width:100%;" >}}
 ### Configure your test details
 
 1. In the Datadog site, hover over **UX Monitoring** in the left hand menu and select **[Synthetic Tests][2]**.
@@ -37,7 +40,7 @@ The example below demonstrates the creation of a browser test that maps a user's
 3. Define your browser test:
 
     - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
-    - Select **Advanced Options** to use custom request headers, authentication credentials, or cookies. 
+    - Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
       In this example, no specific advanced option is needed.
     - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
     - Choose the browsers and devices you want to test with. 
@@ -128,7 +131,7 @@ Use Datadog's [APM integration with Synthetic Monitoring][13] to view traces gen
 [2]: https://app.datadoghq.com/synthetics/list
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /getting_started/synthetics/private_location
-[5]: /synthetics/cicd_testing
+[5]: /synthetics/cicd_integrations
 [6]: /integrations/#cat-notification
 [7]: https://app.datadoghq.com/account/settings
 [8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa

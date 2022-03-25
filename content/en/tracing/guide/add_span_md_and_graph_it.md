@@ -231,7 +231,7 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Resource Page"  style="width:90%;">}}
 
-The Trace table shows you both the overall latency distribution of all traces in the current scope (service, resource and timeframe) and links to individual traces. You can sort this table by duration or error code to easily identify erroneous operation or opportunities for optimization.
+The Trace table shows you both the overall latency distribution of all traces in the current scope (service, resource, and timeframe) and links to individual traces. You can sort this table by duration or error code to identify erroneous operation or opportunities for optimization.
 
 3) **Click into one of your traces**
 
@@ -245,7 +245,7 @@ The bottom part of the view includes additional information about the trace or a
 
 ## Leverage your custom span tags with Analytics
 
-4) **Navigate to the [Trace Search page][6]**.
+4) **Navigate to the [Trace Explorer page][6]**.
 
 The Trace Search page allows you to identify specific [Traces][1] and Indexed Spans you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][7]).
 
@@ -263,7 +263,7 @@ You should now be able to see the facet you created in the Facet Explorer. The f
 
 6) **Navigate to the [Analytics][8] page**
 
-The Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Search and Analytics overview][9].
+The Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Explorer overview][9].
 
 7) **Choose the service** you’ve been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
 
@@ -289,7 +289,7 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 [4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/#services
 [6]: https://app.datadoghq.com/apm/search
-[7]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[7]: /tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
-[9]: /tracing/trace_search_and_analytics/query_syntax/
+[9]: /tracing/trace_explorer/query_syntax/
 [10]: /tracing/guide/alert_anomalies_p99_database/

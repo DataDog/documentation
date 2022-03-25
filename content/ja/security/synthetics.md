@@ -8,7 +8,7 @@ further_reading:
     tag: Documentation
     text: Datadog に送信されるデータの主要カテゴリを確認する
 ---
-<div class="alert alert-info">このページは Datadog のセキュリティに関するものです。セキュリティ監視製品をお探しの場合は、<a href="/security_monitoring" target="_blank">セキュリティ監視セクション</a>をご覧ください。</div>
+<div class="alert alert-info">このページは Datadog のセキュリティに関するものです。Cloud SIEM 製品をお探しの場合は、<a href="/security_platform/cloud_siem" target="_blank">Cloud SIEM セクション</a>をご覧ください。</div>
 
 この記事は、[データセキュリティに関するドキュメントシリーズ][1]の一部です。
 
@@ -32,7 +32,7 @@ further_reading:
 
 アーティファクトとは、ブラウザテストのスクリーンショット、スナップショット、エラー、リソースのことです。
 
-{{< site-region region="us,us3,gov" >}}
+{{< site-region region="us,us3,us5,gov" >}}
 
 * **Storage**: [AWS S3 バケット][1]の暗号化
 * **Transport**: [S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。
@@ -74,7 +74,7 @@ further_reading:
 
 アーティファクトとは、ブラウザテストのスクリーンショット、スナップショット、エラー、リソースのことです。
 
-{{< site-region region="us,us3,gov" >}}
+{{< site-region region="us,us3,us5,gov" >}}
 
 * **Storage**: [AWS][1]の暗号化。
 * **Transport**: プライベートロケーションと Datadog 間の HTTPS トランスポート（API キーによる認証）、そして Datadog からストレージへの、[S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。

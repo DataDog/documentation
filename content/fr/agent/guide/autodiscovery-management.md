@@ -21,7 +21,7 @@ Excluez des conteneurs du périmètre Autodiscovery de l'Agent avec une règle d
 
 **Remarque** : les règles d'exclusion prennent en charge les expressions régulières. Celles-ci sont définies sous forme de liste de chaînes séparées par des virgules.
 
-**Remarque** : pour exclure tous les conteneurs, vous pouvez utiliser `name:.*`, `image:.*` ou `kube_namespace:.*`. Notez qu'il n'est pas possible de configurer `.*` sans un préfixe `name:`, `image:` ou `kube_namespace:`.
+**Remarque** : pour exclure tous les conteneurs, vous pouvez utiliser `name:.*`, `image:.*` ou `kube_namespace:.*`. Il n'est pas possible de configurer `.*` sans un préfixe `name:`, `image:` ou `kube_namespace:`.
 
 {{< tabs >}}
 {{% tab "Agent conteneurisé" %}}
@@ -52,7 +52,7 @@ Comme auparavant, la configuration suivante indique à l'Agent d'ignorer certain
 DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-Notez que `DD_AC_EXCLUDE` n'est **plus pris en charge dans les versions 7.20+ de l'Agent**.
+**Remarque** : `DD_AC_EXCLUDE` n'est **plus pris en charge depuis les versions 7.20+ de l'Agent**. 
 
 Avec les **versions 7.20+ de l'Agent**, pour supprimer un conteneur Docker donné avec le **nom** `<NOM>` d'Autodiscovery et ainsi exclure ses **logs et métriques**, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
@@ -156,7 +156,7 @@ Avec les **versions <= 7.19+ de l'Agent**, pour inclure un conteneur Docker don
 DD_AC_INCLUDE = "image:<NOM_IMAGE>"
 ```
 
-Notez que `DD_AC_INCLUDE` n'est **plus pris en charge dans les versions 7.20+ de l'Agent**.
+**Remarque** : `DD_AC_INCLUDE` n'est **plus pris en charge depuis les versions 7.20+ de l'Agent**. 
 
 Avec les **versions 7.20+ de l'Agent**, pour inclure un conteneur Docker donné avec le **nom** `<NOM>` d'Autodiscovery, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 

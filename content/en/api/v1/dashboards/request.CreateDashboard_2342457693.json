@@ -1,0 +1,69 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_scatterplot_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "type": "scatterplot",
+        "requests": {
+          "table": {
+            "formulas": [
+              {
+                "formula": "query1",
+                "dimension": "x",
+                "alias": ""
+              },
+              {
+                "formula": "query2",
+                "dimension": "y",
+                "alias": ""
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:system.cpu.user{*} by {service}",
+                "aggregator": "avg"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query2",
+                "query": "avg:system.mem.used{*} by {service}",
+                "aggregator": "avg"
+              }
+            ],
+            "response_format": "scalar"
+          }
+        },
+        "xaxis": {
+          "scale": "linear",
+          "include_zero": true,
+          "min": "auto",
+          "max": "auto"
+        },
+        "yaxis": {
+          "scale": "linear",
+          "include_zero": true,
+          "min": "auto",
+          "max": "auto"
+        },
+        "color_by_groups": []
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

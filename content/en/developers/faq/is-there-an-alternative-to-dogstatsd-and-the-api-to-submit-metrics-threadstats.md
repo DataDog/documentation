@@ -19,7 +19,7 @@ Threadstats is an alternative method to DogStatsD and the API for submitting met
 
 ## Threadstats
 
-Threadstats monitors your application code. It collects metrics with very little overhead and allows flushing metrics in process, in a thread or in a greenlet, depending on your application's needs.
+Threadstats monitors your application code. It collects metrics with little overhead and allows flushing metrics in process, in a thread or in a greenlet, depending on your application's needs.
 
 In a nutshell, Threadstats doesn't slow down your code (contrary to direct API calls which wait for a response from the distant server before resuming the rest of the program) and provides some flexibility and doesn't require the Datadog Agent (contrary to DogStatsD).
 

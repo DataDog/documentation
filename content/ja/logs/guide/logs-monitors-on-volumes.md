@@ -36,8 +36,8 @@ further_reading:
 1. [新規の異常検知モニターを作成します][4]。
 2. `datadog.estimated_usage.logs.ingested_events` メトリクスを選択します。
 3. `from` セクションに `datadog_is_excluded:false` を追加します (取得したログではなく、インデックス化されたログを監視するため)
-4. **group by** に `service` タグと `datadog_index` タグを追加します (インデックスで特定のサービスがスパイクした場合、またはログの送信が停止した場合に通知を受け取るため)
-5. 使用状況に一致するアラート条件を設定します (例: 評価ウィンドウ、予測範囲外の回数など)
+4. **count by** に `service` タグと `datadog_index` タグを追加します (インデックスで特定のサービスがスパイクした場合、またはログの送信が停止した場合に通知を受け取るため)
+5. 使用状況に一致するアラート条件を設定します (例: 評価ウィンドウ、予測範囲外の回数)
 6. 実行可能な指示を記述した通知メッセージを設定します。
 
 {{< img src="logs/guide/anomaly_usage_notification.png" alt=" 異常検知通知の例"  style="width:70%;">}}

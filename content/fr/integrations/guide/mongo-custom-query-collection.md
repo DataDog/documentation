@@ -13,7 +13,7 @@ Pour recueillir des métriques custom avec l'intégration Datadog/Mongo, utilise
 `custom_queries` dispose des options suivantes :
 
 * **`metric_prefix`** : chaque métrique commence par le préfixe défini.
-* **`query`** : il s'agit de la requête [Mongo runCommand][3] à exécuter en tant qu'objet JSON. Notez que l'Agent prend uniquement en charge les requêtes `count`, `find` et `aggregates`.
+* **`query`** : il s'agit de la requête [Mongo runCommand][3] à exécuter en tant qu'objet JSON. **Remarque** : l'Agent prend uniquement en charge les requêtes `count`, `find` et `aggregates`.
 * **`fields`** : option ignorée pour les requêtes `count`. Il s'agit d'une liste représentant chaque champ sans aucun ordre spécifique. Ignore les champs non spécifiés et manquants. Chaque `fields` doit comporter trois informations :
   * `field_name` : le nom du champ à partir duquel récupérer les données.
   * `name` : le suffixe ajouté à la valeur metric_prefix pour former le nom complet de la métrique. Si le `type` est `tag`, cette colonne est traitée en tant que tag et appliquée à chaque métrique recueillie par cette requête spécifique.
@@ -55,7 +55,7 @@ custom_queries:
 
 Cela génère une métrique `gauge` `mongo.users` avec le tag `user:active`.
 
-**Remarque** : le type de métrique défini est `gauge`. Consultez la [documentation relative aux types de métriques][2] pour en savoir plus.
+**Remarque** : le [type de métrique][2] est défini sur `gauge`.
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
 [2]: /fr/metrics/types/
@@ -65,7 +65,7 @@ Cela génère une métrique `gauge` `mongo.users` avec le tag `user:active`.
 Pour surveiller l'âge des utilisateurs, utilisez la [commande find Mongo][1] suivante :
 
 ```text
-db.runCommand( {find: user_colleciton, filter: {active:true} )
+db.runCommand( {find: user_collection, filter: {active:true} )
 ```
 
 Cela correspond à la configuration YAML `custom_queries` suivante dans votre fichier `mongo.d/conf.yaml` :
@@ -73,7 +73,7 @@ Cela correspond à la configuration YAML `custom_queries` suivante dans votre fi
 ```yaml
 custom_queries:
   - metric_prefix: mongo.example2
-    query: {"find": "user_colleciton", "filter": {"active":"true"}}
+    query: {"find": "user_collection", "filter": {"active":"true"}}
     fields:
       - field_name: name
         name: name
@@ -86,7 +86,7 @@ custom_queries:
 
 Cela génère une métrique `gauge` `mongo.example2.user.age` avec deux tags : `name:foo` et `name:foobar`.
 
-**Remarque** : le type de métrique défini est `gauge`. Consultez la [documentation relative aux types de métriques][2] pour en savoir plus.
+**Remarque** : le [type de métrique][2] est défini sur `gauge`.
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
 [2]: /fr/metrics/types/

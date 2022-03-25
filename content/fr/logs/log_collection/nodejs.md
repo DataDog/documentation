@@ -4,16 +4,16 @@ kind: documentation
 aliases:
   - /fr/logs/languages/nodejs
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: En savoir plus sur le parsing
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: '/logs/explorer/#visualiser-les-donnees'
+  - link: /logs/explorer/#visualiser-les-donnees
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -143,7 +143,7 @@ const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
   host: 'http-intake.logs.datadoghq.com',
-  path: '/v1/input/<CLÉ_API>?ddsource=nodejs&service=<NOM_APPLICATION>',
+  path: '/api/v2/logs?dd-api-key=<CLÉ_API_DATADOG>&ddsource=nodejs&service=<NOM_APPLICATION>',
   ssl: true
 };
 
@@ -160,7 +160,7 @@ module.exports = logger;
 
 // Exemples de log
 logger.log('info', 'Voici un log simple !');
-logger.info('Voici un log avec des métadonnées !',{color: 'blue' });
+logger.info('Voici un log avec des métadonnées',{color: 'blue' });
 ```
 
 Remarque : vous pouvez également tester le [transport Datadog][1] créé par la communauté.
@@ -175,7 +175,7 @@ const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
   host: 'http-intake.logs.datadoghq.eu',
-  path: '/v1/input/<CLÉ_API>?ddsource=nodejs&service=<NOM_APPLICATION>',
+  path: '/api/v2/logs?dd-api-key=<CLÉ_API_DATADOG>&ddsource=nodejs&service=<NOM_APPLICATION>',
   ssl: true
 };
 
@@ -192,7 +192,7 @@ module.exports = logger;
 
 // Exemples de log
 logger.log('info', 'Voici un log simple !');
-logger.info('Voici un log avec des métadonnées !',{color: 'blue' });
+logger.info('Voici un log avec des métadonnées',{color: 'blue' });
 ```
 
 [1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport

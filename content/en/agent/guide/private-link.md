@@ -40,14 +40,16 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
 
-| Datadog             | PrivateLink service name                                  | Private DNS name                                   |
-|---------------------| --------------------------------------------------------- | -------------------------------------------------- |
-| Logs (HTTP intake)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` | `agent-http-intake.logs.datadoghq.com`            |
-| API                 | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` | `api.datadoghq.com`                               |
-| Metrics             | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` | `metrics.agent.datadoghq.com`                     |
-| Containers          | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
-| Process             | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
-| Traces              | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` | `trace.agent.datadoghq.com`                       |
+| Datadog                   | PrivateLink service name                                  | Private DNS name                                   |
+|---------------------------| --------------------------------------------------------- | -------------------------------------------------- |
+| Logs (Agent HTTP intake)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` | `agent-http-intake.logs.datadoghq.com`            |
+| Logs (User HTTP intake)   | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` | `http-intake.logs.datadoghq.com`                  |
+| API                       | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` | `api.datadoghq.com`                               |
+| Metrics                   | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` | `metrics.agent.datadoghq.com`                     |
+| Containers                | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
+| Process                   | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
+| Profiling                 | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` | `intake.profile.datadoghq.com`                    |
+| Traces                    | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` | `trace.agent.datadoghq.com`                       |
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
@@ -105,14 +107,16 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
 
-| Datadog             | PrivateLink service name                                  |
-|---------------------| --------------------------------------------------------- |
-| Metrics             | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` |
-| Logs (HTTP intake)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
-| API                 | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` |
-| Process             | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
-| Traces              | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` |
-| Containers          | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` |
+| Datadog                   | PrivateLink service name                                  |
+|---------------------------| --------------------------------------------------------- |
+| Metrics                   | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` |
+| Logs (Agent HTTP intake)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
+| Logs (User HTTP intake)   | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` |
+| API                       | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` |
+| Process                   | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
+| Profiling                 | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` |
+| Traces                    | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` |
+| Containers                | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` |
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 
@@ -122,7 +126,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
     **Note**: **The security group must accept inbound traffic on TCP port `443`**.
 
-7. Hit **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
+7. Click **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
 
 {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:80%;" >}}
 
@@ -139,14 +143,16 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 Use the list below to map service and DNS name to different parts of Datadog:
 
-  | Datadog             | PrivateLink service name                                  | Private DNS name                                   |
-  |---------------------| --------------------------------------------------------- | -------------------------------------------------- |
-  | Metrics             | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` | `metrics.agent.datadoghq.com`                     |
-  | Logs (HTTP intake)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` | `agent-http-intake.logs.datadoghq.com`            |
-  | API                 | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` | `api.datadoghq.com`                               |
-  | Process             | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
-  | Traces              | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` | `trace.agent.datadoghq.com`                       |
-  | Containers          | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
+  | Datadog                   | PrivateLink service name                                  | Private DNS name                                   |
+  |---------------------------| --------------------------------------------------------- | -------------------------------------------------- |
+  | Metrics                   | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` | `metrics.agent.datadoghq.com`                     |
+  | Logs (Agent HTTP intake)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` | `agent-http-intake.logs.datadoghq.com`            |
+  | Logs (User HTTP intake)   | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` | `http-intake.logs.datadoghq.com`                  |
+  | API                       | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` | `api.datadoghq.com`                               |
+  | Process                   | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
+  | Profiling                 | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` | `intake.profile.datadoghq.com`                    |
+  | Traces                    | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` | `trace.agent.datadoghq.com`                       |
+  | Containers                | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
 
   You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following CLI command: `aws ec2 describe-vpc-endpoint-services --service-names <service-name>`.
 

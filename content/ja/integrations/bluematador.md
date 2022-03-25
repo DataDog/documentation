@@ -53,8 +53,6 @@ Blue Matador のイベントを Datadog にインポートするには、[Datado
 
 **注**: 既に存在しているイベントは Datadog にインポートされず、新しいイベントが発生するとインポートされます。
 
-セットアップの詳しい説明については、[Blue Matador の Datadog ドキュメント][5]を参照してください。
-
 ## 収集データ
 
 ### メトリクス
@@ -73,5 +71,4 @@ Blue Matador インテグレーションには、サービスのチェック機�
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bluematador/images/dashboard.png
 [3]: https://www.bluematador.com/monitored-events
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: https://www.bluematador.com/docs/datadog-integration
 
