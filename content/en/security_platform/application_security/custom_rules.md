@@ -14,9 +14,9 @@ further_reading:
 
 Application Security comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts and vulnerability triggers that impact your production systems.
 
-However, there are situations where you may want to customize a rule based on your environment. For example, you may want to customize a rule that catches attack attempts on a service’s route. For instance, a pre-production development route accepting SQL and returning the results. Catching SQL attempts is noisy as the route is restricted to internal developers, therefore you can customize this rule to exclude these patterns.
+However, there are situations where you may want to customize a rule based on your environment. For example, you may want to customize a detection rule that catches attack attempts on a pre-production development route that accepts SQL and returns the results. Catching SQL attempts is noisy, as the route is restricted to internal developers; therefore you can customize this rule to exclude these patterns.
 
-Another example is customizing a rule to exclude an internal security scanner. Application Security detects its activity as expected. However, you may not want to be notified of it’s regularly occurring scan.
+Another example is customizing a rule to exclude an internal security scanner. Application Security detects its activity as expected. However, you may not want to be notified of its regularly occurring scan.
 
 In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for Application Security.
 
@@ -26,35 +26,35 @@ To customize an OOTB detection rule, you must first clone an existing rule. Navi
 
 ### Define AppSec query
 
-Construct an Application Security query. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection @http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
+Construct an Application Security query. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
 
-Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user or IP). The group-by is also used to [join the queries together](#joining-queries).
 
 You can add additional queries with the Add Query button.
 
 ##### Advanced options
 
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a service is triggering a signal, but the actions is benign and you no longer want signals triggered from this service, create a logs query that excludes `Service` under the **Never trigger a signal when:** option.
+Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a service is triggering a signal, but the action is benign and you no longer want signals triggered from this service, create a logs query that excludes `Service` under the **Never trigger a signal when:** option.
 
 ##### Joining queries
 
-Joining queries to span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful attack, both successful and unsuccessful tiggers can be correlated for a service.
+Joining queries to span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful attack, both successful and unsuccessful triggers can be correlated for a service.
 
 Queries are correlated together by using a `group by` value. The `group by` value is typically an entity (for example, `IP address` or `Service`), but can be any attribute.
 
-For example, create opposing queries that searches for the same `sql_injection` activity, but append opposing HTTP path queries for successful and unsuccessful attempts:
+For example, create opposing queries that search for the same `sql_injection` activity, but append opposing HTTP path queries for successful and unsuccessful attempts:
 
 Query 1: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
 
 Query 2: `@appsec.type:sql_injection @http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
 
-In this instance, joined queries technically hold same attribute value because the value must be the same for the case to be met. If a `group by` value doesn’t exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+In this instance, the joined queries technically hold the same attribute value: the value must be the same for the case to be met. If a `group by` value doesn’t exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
 
 ### Set a rule case
 
 #### Trigger
 
-Rule cases, such as `successful trigger > 0`, are evaluated as case statements. Thus, the first case to match generates the signal. Create one or multiple rule cases, and click on the grey area next to them to drag and manipulate their ordering.
+Rule cases, such as `successful trigger > 0`, are evaluated as case statements. Thus, the first case to match generates the signal. Create one or multiple rule cases, and click on the grey area next to them to drag and manipulate their orderings.
 
 A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries.
 
@@ -66,17 +66,17 @@ Provide a **name** for each rule case. This name is appended to the rule name wh
 
 Set the severity of the signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 
-In the “Notify” section, configure zero or more [notification targets][3] for each rule case.
+In the "Notify" section, configure zero or more [notification targets][3] for each rule case.
 
-You can also create [notification rules][4] to eleviate manual edits to notification preferences for individual detection rules.
+You can also create [notification rules][4] to alleviate manual edits to notification preferences for individual detection rules.
 
 ### Time windows
 
-An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real-time.
+An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real time.
 
-Once a signal is generated, the signal will remain “open” if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
+When a signal is generated, it remains "open" if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
 
-A signal will “close” regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
+A signal will "close" regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
 
 Additional cases can be added by clicking the **Add Case** button.
 
@@ -90,7 +90,7 @@ The notification box has the same Markdown and preview features.
 
 #### Template variables
 
-Detection rules support template variables within the markdown notification box. Template variables permit injection of dynamic context from traces directly into a security signal and its associated notifications.
+Detection rules support template variables within the Markdown notification box. Template variables permit injection of dynamic context from traces directly into a security signal and its associated notifications.
 
 Template variables also permit deep linking into Datadog or a partner portal for quick access to next steps for investigation. For example:
 
@@ -131,7 +131,7 @@ This JSON object is an example of event attributes which may be associated with 
 }
 ```
 
-For this attribute, you would use the following attribute in the “say what’s happening” section:
+For this attribute, use the following in the “say what’s happening” section:
 
 ```
 Real routes targeted for {{@service}}.
