@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 This widget displays a map of a service to all of the services that call it, and all of the services that it calls. The node in the center of the widget represents the mapped service. Services that call the mapped service are shown to the left with arrows from the caller to the service. Services that the service calls are displayed to the right, with arrows in the direction of calls.

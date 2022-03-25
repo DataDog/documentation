@@ -15,6 +15,9 @@ further_reading:
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting Application Security Monitoring"
+- link: "/security_platform/guide/how-appsec-works/"
+  tag: "Documentation"
+  text: "How Application Security Works in Datadog"
 ---
 
 <div class="alert alert-warning">
