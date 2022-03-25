@@ -41,11 +41,14 @@ Datadog Read Only Role
 
 ## Custom roles
 
-Manage your custom roles through the Datadog site, the [Datadog Role API][6], or SAML directly. Find instructions below on how to create, update, or delete a role. See[Datadog Role Permissions][7] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
+Manage your custom roles through the Datadog site, the [Datadog Role API][6], or SAML directly. Find instructions below on how to create, update, or delete a role. See [Datadog Role Permissions][7] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
 
 ### Enable custom roles
 
-TODO: Include description and screenshot showing how to enable custom roles through the datadog UI.
+1. Navigate to [Organization Settings][8]. 
+2. On the left side of the page, select **Roles**.
+3. Click the gear in the upper right corner. The Custom Roles popup appears.
+4. In the Custom Roles popup, click **Enable**.
 
 ### Create a custom role
 
@@ -58,9 +61,6 @@ To create a custom role:
 2. Select **New Role** in the upper right corner of the page.
 3. Give a name to your role.
 4. Assign a set of permissions to your role. See [Datadog Role Permissions][2] for more information about available permissions.
-
-TODO: Update screenshot to reflect new roles UI.
-{{< img src="account_management/rbac/create_role.png" alt="Create a custom Role" style="width:90%;">}}
 
 Once a role is created, you can [add the role to existing users][3].
 
@@ -90,8 +90,6 @@ To edit a custom role:
 3. Modify the set of permissions for your role. See [Role Permissions][2] for more information about available permissions.
 4. Save your changes.
 
-TODO: Update screenshot to show clone option in UI.
-{{< img src="account_management/rbac/edit_role.png" alt="Edit a Role" style="width:90%;">}}
 
 Once a role is modified, permissions are updated for all users with the role.
 
@@ -119,9 +117,6 @@ To delete a custom role:
 2. Select the delete button on the role you would like to delete.
 3. Confirm your decision.
 
-{{< img src="account_management/rbac/delete_role.png" alt="Deleting a Role" style="width:90%;">}}
-
-{{< img src="account_management/users/delete_role_confirmation.png" alt="Deleting a Role" style="width:90%;">}}
 
 Once a role is deleted, permissions are updated for all users with the role. Users without any roles cannot use Datadog effectively, but still maintain limited access.
 
@@ -139,7 +134,7 @@ Find an example of how to delete a role in the [Delete Role API reference][1].
 
 ## Restrict access to dashboards and monitors
 
-Once you have RBAC roles set up, you can restrict access to dashboards, monitors, and synthetic tests by user role. For more information, see [Dashboard Permissions][8], [Monitors Permissions][9], and [Synthetics Permissions][10].
+Once you have RBAC roles set up, you can restrict access to dashboards, monitors, and synthetic tests by user role. For more information, see [Dashboard Permissions][9], [Monitors Permissions][10], and [Synthetics Permissions][11].
 
 ## Further Reading
 
@@ -152,6 +147,7 @@ Once you have RBAC roles set up, you can restrict access to dashboards, monitors
 [5]: /notebooks/
 [6]: /api/v2/roles/
 [7]: /account_management/rbac/permissions/
-[8]: /dashboards/#permissions
-[9]: /monitors/notify/#permissions
-[10]: /synthetics/browser_tests/#permissions
+[8]: https://app.datadoghq.com/organization-settings/
+[9]: /dashboards/#permissions
+[10]: /monitors/notify/#permissions
+[11]: /synthetics/browser_tests/#permissions
