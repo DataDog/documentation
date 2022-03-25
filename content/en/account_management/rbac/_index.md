@@ -52,7 +52,7 @@ The custom roles feature gives your organization the ability to create new roles
 
 {{< img src="account_management/rbac/enable_custom_roles.png" alt="Custom Roles popup with Enable button" style="width:90%;">}}
 
-Alternatively, making a POST call to the [Create Role API endpoint][9] automatically enables Custom Roles for your organization.
+Alternatively, making a POST call to the [Create Role API endpoint][9] automatically enables custom roles for your organization.
 
 ### Create a custom role
 
@@ -110,6 +110,32 @@ Find an example of how to update a role in [Update Role API Reference][1].
 {{% /tab %}}
 {{< /tabs >}}
 
+### Clone a role
+
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+To clone an existing role:
+
+1. Go to your [Datadog Roles page][1].
+2. Hover over the role you would like to clone. A series of buttons appears to the right.
+3. Select the clone button on the role you would like to delete.
+4. Optionally modify the name or permissions of the role.
+5. Click the **Save** button at the bottom.
+
+{{< img src="account_management/rbac/clone_role.png" alt="List of two roles with Clone button highlighted" style="width:90%;">}}
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+Find an example of how to clone a role in the [Cloning A Role API reference][1].
+
+[1]: /api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Delete a role
 
 {{< tabs >}}
@@ -137,31 +163,18 @@ Find an example of how to delete a role in the [Delete Role API reference][1].
 {{% /tab %}}
 {{< /tabs >}}
 
-### Clone a role
+### Apply a role template
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
+When creating or updating a role on the Datadog site, use a Datadog role template to apply a prescribed set of permissions to the role.
 
-To clone an existing role:
+1. On the New Role or Edit Role page, click the **Show Role Templates** button on the right.
+2. A dropdown menu populated with role templates appears.
+3. From the menu, select the role template whose permissions you would like to apply to your role.
+4. Click the **Apply** button.
+4. Optionally make additional changes to your role.
+5. Click the **Save** button.
 
-1. Go to your [Datadog Roles page][1].
-2. Hover over the role you would like to clone. A series of buttons appears to the right.
-3. Select the clone button on the role you would like to delete.
-4. If you would like, modify the name or permissions of the role.
-5. Click the **Save** button at the bottom.
-
-{{< img src="account_management/rbac/clone_role.png" alt="List of two roles with Clone button highlighted" style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-Find an example of how to clone a role in the [Cloning A Role API reference][1].
-
-[1]: /api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
-{{% /tab %}}
-{{< /tabs >}}
+{{< img src="account_management/rbac/role_templates.png" alt="Role Templates dropdown menu with Datadog Billing Admin Role selected" style="width:90%;">}}
 
 ## Restrict access to dashboards and monitors
 
