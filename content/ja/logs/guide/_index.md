@@ -1,12 +1,12 @@
 ---
-title: ログガイド
 kind: ガイド
 private: true
+title: ログガイド
 ---
 
-{{< whatsnext desc="Logging Without Limits™" >}}
+{{< whatsnext desc="Logging Without LimitsTM" >}}
     {{< nextlink href="logs/guide/access-your-log-data-programmatically" >}}ログ検索 API を使用してログデータにプログラマティックにアクセスする{{< /nextlink >}}
-    {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ ガイド{{< /nextlink >}}
+    {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without LimitsTM ガイド{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}ログとメトリクスの相関{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-monitors-on-volumes" >}}ログの使用量の監視{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -30,6 +30,7 @@ private: true
 {{< whatsnext desc="ログ処理" >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}ログパースのベストプラクティス{{< /nextlink >}}
     {{< nextlink href="/logs/guide/enrichment-tables/" >}}エンリッチメントテーブルを使用してログにカスタムメタデータを追加する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}よく使われるログ処理ルール{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -51,4 +52,3 @@ private: true
 {{< whatsnext desc="Cross product" >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}クロスプロダクト相関で容易にトラブルシューティング{{< /nextlink >}}
 {{< /whatsnext >}}
-
