@@ -81,12 +81,11 @@ Use this section to send notifications to your team through Email, Slack, PagerD
 
 Removing the `@notification` from either section removes it from both sections.
 
-### Restrict access
+### Permissions
 
-<div class="alert alert-warning">
-RBAC restrict access to monitors is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
-Use this section to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][9] documentation.
+Use this option to restrict the editing of your monitor to its creator and to specific roles in your org. For more information about roles, see [Role Based Access Control][9].
 
 ## View Monitors and Triage Alerts on Mobile
 

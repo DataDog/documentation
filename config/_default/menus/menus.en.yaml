@@ -533,18 +533,6 @@ main:
     pre: dashboard
     identifier: dashboards
     weight: 70000
-  - name: Dashboard Layout
-    url: dashboards/dashboards/
-    parent: dashboards
-    weight: 1
-  - name: Timeboard Layout
-    url: dashboards/timeboards/
-    parent: dashboards
-    weight: 2
-  - name: Screenboard Layout
-    url: dashboards/screenboards/
-    parent: dashboards
-    weight: 3
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
@@ -2202,11 +2190,16 @@ main:
     parent: application_security
     identifier: appsec_configuration
     weight: 403
+  - name: Custom Rules
+    url: security_platform/application_security/custom_rules/
+    parent: application_security
+    identifier: appsec_custom_rules
+    weight: 404
   - name: Troubleshooting
     url: security_platform/application_security/troubleshooting
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 404
+    weight: 405
   - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
@@ -2269,6 +2262,10 @@ main:
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
     weight: 107
+  - name: GRPC Health Checks
+    url: synthetics/api_tests/grpc_tests
+    parent: api_tests
+    weight: 108
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics

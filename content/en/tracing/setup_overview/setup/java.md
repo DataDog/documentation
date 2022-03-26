@@ -711,7 +711,7 @@ Java APM has minimal impact on the overhead of an application:
 [12]: /developers/dogstatsd/#setup
 [13]: /agent/docker/#dogstatsd-custom-metrics
 [14]: /developers/dogstatsd/
-[15]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[15]: /agent/amazon_ecs/#create-an-ecs-task
 [16]: /tracing/compatibility_requirements/java#disabling-integrations
 [17]: /integrations/java/?tab=host#metric-collection
 [18]: https://github.com/openzipkin/b3-propagation

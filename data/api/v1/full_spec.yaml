@@ -5957,10 +5957,12 @@ components:
       description: Data source for event platform-based queries.
       enum:
       - rum
+      - ci_pipelines
       example: rum
       type: string
       x-enum-varnames:
       - RUM
+      - CI_PIPELINES
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:

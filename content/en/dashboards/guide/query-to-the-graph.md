@@ -159,8 +159,8 @@ Syntax: instead of adding a rollup, you can use `.as_count()` or `.as_rate()`.
 For more information, see [Visualize StatsD metrics with Counts Graphing][9].
 Documentation about [StatsD/DogStatsD][10].
 
-[1]: /dashboards/timeboard/
-[2]: /dashboards/screenboard/
+[1]: /dashboards/#timeboards
+[2]: /dashboards/#screenboards
 [3]: /agent/
 [4]: /metrics/custom_metrics/
 [5]: /dashboards/faq/how-is-data-aggregated-in-graphs/

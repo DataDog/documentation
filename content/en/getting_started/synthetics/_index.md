@@ -24,9 +24,7 @@ further_reading:
 
 ## Overview
 
-Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. 
-
-Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `DNS`, `TCP`, `UDP`, `ICMP`, and `WebSocket`) in a controlled and stable way. These tests alert you when faulty behaviors like regressions, broken features, high response times, and unexpected status codes happen.
+Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes.
 
 {{< img src="getting_started/synthetics/synthetic-monitoring-overview.png" alt="Synthetic Monitoring Tests" style="width:100%;" >}}
 

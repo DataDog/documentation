@@ -143,19 +143,21 @@ A notification is sent according to the set of alerting conditions. To configure
 
 Tests can be only recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension for Google Chrome][11].
 
-{{< img src="synthetics/browser_tests/browser_check_record_test2.png" alt="Browser test record test" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="80%" >}}
 
-1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in **Incognito mode** to start recording your test from a fresh browser free of already logged-in sessions, cookies from your existing browser, and more.
-2. Click **Start Recording** to begin recording your browser test.
-3. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][12] within your browser test scenario on the left.
-4. In addition to the automatically recorded steps, you can also use the [steps][12] available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;" >}}
-    **Note**: You should always make sure to **end your browser test with an [assertion][13]** to confirm the journey executed by the browser test resulted in the expected state.
-5. Once you have finished your scenario, click **Save and Launch Test**.
+1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in **Incognito mode** to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
+2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][12]. 
+3. Click **Start Recording** to begin recording your browser test.
+4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][13] within your browser test scenario on the left.
+5. In addition to the automatically recorded steps, you can also use the [steps][13] available in the upper left corner to enrich your scenario:
+    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;">}}
+
+    **Note**: You should always make sure to **end your browser test with an [assertion][14]** to confirm the journey executed by the browser test resulted in the expected state.
+6. Once you have finished your scenario, click **Save and Launch Test**.
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][14] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][14].
+By default, only users with the [Datadog Admin and Datadog Standard roles][15] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][15].
 
 If you are using the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
