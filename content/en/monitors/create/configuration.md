@@ -46,7 +46,7 @@ The alert conditions vary based on the [monitor type][1]. Configure monitors to 
 * the threshold `on average`, `at least once`, `at all times`, or `in total`
 * during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours (1 month for metric monitors)
 
-<h3>Aggregation method</h3>
+### Aggregation method
 
 The query returns a series of points, but a single value is needed to compare to the threshold. The monitor must reduce the data in the evaluation window to a single value.
 
@@ -59,11 +59,15 @@ The query returns a series of points, but a single value is needed to compare to
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
 
-<h3>Evaluation window</h3>
+### Evaluation window
 
-Monitors are evaluated at a certain frequency (every minute most of the time) looking back at the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+Monitors are evaluated at a certain frequency  looking back at the last `5 minutes`, `15 minutes`, `1 hour`, etc.
 
-<h3>Thresholds</h3>
+### Evaluation frequency
+
+The evaluation frequency is how often the monitor query is being performed by Datadog. For most configurations, the evaluation frequency is `1 minute`, which means that every minute, the monitor queries the [selected data](#define-the-search-query) over the [selected evaluation window](#evaluation-window) and compares the aggregated value against the [defined thresholds](#thresholds).
+
+### Thresholds
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
