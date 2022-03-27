@@ -27,7 +27,14 @@ Ensure you completed the installation process, which includes giving read permis
 
 For ARM deployed virtual machines, you must also turn on Diagnostics and select the VM metrics you would like to collect. See **Enable Diagnostics** below for instructions.
 
-For other missing metrics, contact [Datadog support][3].
+For other missing metrics, contact [Datadog support][3] with the following information about the metric:
+- dimensions
+- resource group
+- resource name
+- subscription id or subscription name 
+
+Attach a screenshot of a graph from Azure Monitor that shows a graph of the metric (it is important to graph 1-minute data points in the screenshot).
+
 
 ### Enable diagnostics
 
