@@ -4,9 +4,9 @@ private: true
 title: ログガイド
 ---
 
-{{< whatsnext desc="Logging Without LimitsTM" >}}
+{{< whatsnext desc="Logging Without Limits™" >}}
     {{< nextlink href="logs/guide/access-your-log-data-programmatically" >}}ログ検索 API を使用してログデータにプログラマティックにアクセスする{{< /nextlink >}}
-    {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without LimitsTM ガイド{{< /nextlink >}}
+    {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ ガイド{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}ログとメトリクスの相関{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-monitors-on-volumes" >}}ログの使用量の監視{{< /nextlink >}}
 {{< /whatsnext >}}
