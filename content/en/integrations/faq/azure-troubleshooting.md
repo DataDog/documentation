@@ -31,9 +31,9 @@ For other missing metrics, contact [Datadog support][3] with the following infor
 - dimensions
 - resource group
 - resource name
-- subscription id or subscription name 
+- subscription ID or subscription name 
 
-Attach a screenshot of a graph from Azure Monitor that shows a graph of the metric (it is important to graph 1-minute data points in the screenshot).
+Attach a screenshot of a graph from Azure Monitor that shows a graph of the metric. **Important**: Graph 1-minute data points in the screenshot.
 
 
 ### Enable diagnostics
