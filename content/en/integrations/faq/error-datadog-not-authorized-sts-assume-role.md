@@ -30,12 +30,12 @@ Sometimes you might see the STS AssumeRole error but only limited to one or a fe
 ```
 Datadog is not authorized to perform action sts:AssumeRole Account affected:<account_id> Regions affected: us-east-1, eu-west-1 
 ```
-The source of the issue could be due to an [AWS Service Control Policies][5].
+The source of the issue could be [AWS Service Control Policies][5].
 ```
 Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization. SCPs offer central control over the maximum available permissions for all accounts in your organization. SCPs help you to ensure your accounts stay within your organization’s access control guidelines.
 ```
 
-To get rid of the error in the integration tile you can exclude regions in your AWS integration using our [Update an AWS integration][6] API.
+To get rid of the error in the integration tile you can exclude regions in your AWS integration using the [Update an AWS integration][6] API.
 
 Still need help? Contact [Datadog support][4].
 
