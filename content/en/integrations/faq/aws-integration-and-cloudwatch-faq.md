@@ -9,9 +9,9 @@ aliases:
 
 Yes. Check the **custom metrics** checkbox on the [AWS integration tile][1].
 
-### How to collect metrics from a service for which Datadog doesn’t have an official integration?
+### How do I collect metrics from a service for which Datadog doesn’t have an official integration?
 
-AWS metrics coming from a “AWS/<namespace>” that we don’t yet have an official integration for are also brought in under the custom namespace when the “Collect custom metrics'' option is enabled. You can filter these metrics out and only keep the metrics you’d like to receive by using the filter string under custom namespace via the [Set an AWS tag filter][6] API.
+AWS metrics coming from an `AWS/<namespace>` for which there is no official integration are also brought in under the custom namespace when the `Collect custom metrics` option is enabled. You can filter these metrics out and only keep the metrics you want by using the filter string under custom namespace with the [Set an AWS tag filter][6] API.
 
 ### How does the Datadog AWS integration use CloudWatch?
 
@@ -50,7 +50,7 @@ Some important distinctions to be aware of:
 
 ### How do I adjust my data on Datadog to match the data displayed in CloudWatch?
 
-AWS CloudWatch reports metrics at one-minute granularity normalized to per minute data. Datadog reports metrics at one-minute granularity normalized to per second data. To adjust the data in Datadog, multiply by 60.  Also make sure the statistic of the metric is the same. For example, metric `IntegrationLatency` fetches a number of different statistics - Average, Maximum, Minimum as well as percentiles. In Datadog, we will represent these statistics as their own metric:
+AWS CloudWatch reports metrics at one-minute granularity normalized to per-minute data. Datadog reports metrics at one-minute granularity normalized to per-second data. To adjust the data in Datadog, multiply by 60.  Also make sure the statistic of the metric is the same. For example, the metric `IntegrationLatency` fetches a number of different statistics": Average, Maximum, Minimum, as well as percentiles. In Datadog, these statistics are each represented as their own metrics:
   ```
 aws.apigateway.integration_latency (average)
 aws.apigateway.integration_latency.maximum
@@ -69,4 +69,4 @@ Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, t
 [4]: /help/
 [5]: /metrics/introduction/#space-aggregation
 [6]: https://docs.datadoghq.com/api/latest/aws-integration/#set-an-aws-tag-filter
-[7]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#pagetitle 
+[7]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
