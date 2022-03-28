@@ -444,6 +444,11 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 **Default**: `false`<br>
 Added in version 1.23.0.
 
+`DD_TRACE_METHODS`
+: List of classes and methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is a comma (`,`) separated list of method names. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+**Example**: ```Namespace1.Class1[Method1,GenericMethodOfT,];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync]```<br>
+Added in version 2.5.1
+
 #### Automatic instrumentation integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration.
