@@ -61,7 +61,7 @@ When installing the Agent on an AWS host, you might see duplicated hosts on the 
 
 In your [Agent configuration][5], if the parameter `ec2_prefer_imdsv2`, is set to `true` (defaults to `false`), the Agent requests EC2 metadata using Instance Metadata Service Version 2 (IMDSv2), which offers additional security for accessing metadata. In some situations, additional configuration may be required in AWS, for example: using a containerized Agent on a plain EC2 instance. See the [Transition to using Instance Metadata Service Version 2][6] documentation for details.
 
-In containerised environments the culprit is likely that you have locked down the EC2 metadata endpoint, by way of assigning IAM roles/credentials to pods running in the Kubernetes cluster. `Kube2IAM` and `kiam` are a couple common tools used to do this. To solve this you should update your `Kube2IAM` or `kiam` configuration to allow access to this endpoint.
+In containerized environments the problem might be that you have locked down the EC2 metadata endpoint, by way of assigning IAM roles/credentials to pods running in the Kubernetes cluster. `Kube2IAM` and `kiam` are common tools used to do this. To solve this, update your `Kube2IAM` or `kiam` configuration to allow access to this endpoint.
 
 ## Tags
 
