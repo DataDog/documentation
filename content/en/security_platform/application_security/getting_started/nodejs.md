@@ -16,6 +16,8 @@ further_reading:
       text: "Troubleshooting Application Security Monitoring"
 ---
 
+You can monitor application security for NodeJS apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+
 {{% appsec-getstarted %}}
 
 ## Get started
