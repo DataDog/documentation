@@ -14,7 +14,7 @@ further_reading:
     - link: '/getting_started/synthetics/private_location'
       tag: 'Documentation'
       text: 'Learn about private locations'
-    - link: '/synthetics/cicd_testing/'
+    - link: '/synthetics/cicd_integrations/'
       tag: 'Documentation'
       text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
     - link: '/synthetics/identify_synthetics_bots'
@@ -28,11 +28,15 @@ further_reading:
 
 ## Overview
 
-API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in five different subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `TCP`, `UDP`, `ICMP`, and `WebSocket`). [Multistep API tests][2] enable you to run HTTP tests in sequence to monitor the uptime of key journeys at the API level.
+API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in eight subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`). [Multistep API tests][2] enable you to run HTTP tests in sequence to monitor the uptime of key journeys at the API level.
 
 ## Create a single API test
 
-The example below demonstrates the creation of an [HTTP test][3], a subtype of [single API tests][1]. HTTP tests monitor your API endpoints and alert you when they become too slow or fail to meet any conditions you define, such as expected HTTP status code, headers, or body contents.
+HTTP tests monitor your API endpoints and alert you when response latency is high or fail to meet any conditions you define, such as expected HTTP status code, response headers, or response body content.
+
+{{< img src="getting_started/synthetics/api-test.png" alt="Overview of a Synthetics HTTP Test" style="width:100%;" >}}
+
+The example below demonstrates how to create an [HTTP test][3], a subtype of [single API tests][1].
 
 ### Define request
 
@@ -42,7 +46,7 @@ The example below demonstrates the creation of an [HTTP test][3], a subtype of [
 4. Define your request:
 
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
-    - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.  
+    - You can select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.  
     
       **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.  
     
@@ -103,7 +107,11 @@ When you're ready to run your test, click **Save Test**.
 
 ## Create a multistep API test
 
-[Multistep API tests][2] enable you to **monitor key business transactions at the API level**. Similar to [HTTP tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. Multistep API tests also allow you to create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application.
+[Multistep API tests][2] allow you to monitor key business transactions at the API level. 
+
+{{< img src="getting_started/synthetics/multistep-api-test.png" alt="Overview of a Mulistep Synthetics API Test" style="width:100%;" >}}
+
+Similar to [HTTP tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. You can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application or service.
 
 The example test below demonstrates the creation of a multistep API test that monitors the addition of an item to a cart. This test contains three steps: 
 
@@ -188,7 +196,7 @@ The **API test** and **Multistep API test detail** pages display an overview of 
 
 To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
-{{< img src="getting_started/synthetics/api-test-failure-4.png" alt="API test failure" style="width:100%;">}}
+{{< img src="getting_started/synthetics/api-test-failure-5.png" alt="API test failure" style="width:100%;">}}
 
 With Datadog's [APM integration with Synthetic Monitoring][13], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 

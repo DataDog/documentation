@@ -1,0 +1,38 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_sunburst_widget_and_metrics_data",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "sunburst",
+        "requests": [
+          {
+            "response_format": "scalar",
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "query": "sum:system.mem.used{*} by {service}",
+                "data_source": "metrics",
+                "name": "query1",
+                "aggregator": "sum"
+              }
+            ]
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 4
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

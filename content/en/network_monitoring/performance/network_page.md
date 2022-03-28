@@ -174,7 +174,7 @@ The network table breaks down the _Volume_, _Throughput_, _TCP Retransmits_, _Ro
 
 You can configure the columns in your table using the `Customize` button at the top right of the table.
 
-Congifure the traffic shown with the `Filter Traffic` button.
+Configure the traffic shown with the `Filter Traffic` button.
 
 {{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details"  style="width:80%;">}}
 

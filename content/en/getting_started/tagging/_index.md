@@ -100,7 +100,7 @@ After you have [assigned tags][3] at the host and [integration][9] level, start 
 | [Monitors][13]       | Manage monitors, create monitors, or manage downtime                                             |
 | [Metrics][14]        | Filter and group with the metric explorer                                                        |
 | [Integrations][15]   | Optionally limit metrics for AWS, Google Cloud, and Azure                                        |
-| [APM][16]            | Filter Analytics or jump to other areas with the service map                                 |
+| [APM][16]            | Filter Analytics or navigate to other areas with the service map                                 |
 | [Notebooks][17]      | Filter and group metrics on graphs                                                               |
 | [Logs][18]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
 | [SLOs][19]           | Search for SLOs, grouped metric-based SLOs, grouped monitor-based SLOs                           |

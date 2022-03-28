@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}"
-  data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0">
+  data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
+  class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
 
 <head>
 
@@ -25,7 +26,7 @@
   {{- partial "hreflang.html" . -}}
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
-  
+
   {{ partialCached "css.html" . }}
 
   {{- if ne $.Params.disable_opengraph_meta_tags true -}}

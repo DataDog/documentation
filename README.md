@@ -22,14 +22,14 @@ Built with [hugo][1], a static website generation tool.
 
 Inside `documentation/` folder, create a `Makefile.config` file from the [Makefile.config.example][5]
 
-If you are a Datadog employee, add your [Github personal token][6]
+If you are a Datadog employee, add your [GitHub personal token][6]
 
 To run the documentation site locally, execute:
 
 | Command                   | Description                                                                                                                                                                                                                             |
 |---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                |
-| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a Github personal token setup in your `Makefile.config` or the extra content is available locally. If you are working with local content, the repo must be downloaded to the same folder as the documentation repo. |
+| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a GitHub personal token setup in your `Makefile.config` or the extra content is available locally. If you are working with local content, the repo must be downloaded to the same folder as the documentation repo. |
 
 **Documentation is then available at `http://localhost:1313`**
 
@@ -64,7 +64,7 @@ stop                      Stop wepack watch/hugo server.
 * Name your branch `<SLACK_HANDLE>/<FEATURE_NAME>` if you would like to create a preview site and run tests.
 * When you are ready to commit, create a new pull request to master from your branch.
 * Consult our [contributing guidelines][8], and the [Documentation Build Wiki][7].
-* Use Github's [draft pull request][14] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
+* Use GitHub's [draft pull request][14] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
 
 ### Outside Contributors
 

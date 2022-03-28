@@ -139,7 +139,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Debian][2] with systemd                 | Debian 7 (wheezy)+                                        |
 | [Debian][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                        |
 | [Ubuntu][3]                              | Ubuntu 14.04+                                             |
-| [RedHat/CentOS][4]                       | RedHat/CentOS 6+                                          |
+| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 6+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
 | [Docker][5]                              | Version 1.12+                                             |
 | [Kubernetes][6]                          | Version 1.3+                                              |
 | [SUSE Enterprise Linux][7] with systemd  | SUSE 11 SP4+ in Agent < 6.33.0/7.33.0, SUSE 12+ in Agent 6.33.0+/7.33.0+                     |
@@ -147,7 +147,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [OpenSUSE][7] with systemd               | OpenSUSE 15+ in Agent 6.33.0+/7.33.0+                     |
 | [Fedora][8]                              | Fedora 26+                                                |
 | [macOS][9]                               | macOS 10.12+                                              |
-| [Windows Server][10]                     | Windows Server 2008 R2+ and Server Core (not Nano Server) |
+| [Windows Server][10]                     | Windows Server 2008 R2+ (including Server Core)           |
 | [Windows][10]                            | Windows 7+                                                |
 | [Windows Azure Stack HCI OS][10]         | All Versions                                              |
 
@@ -238,6 +238,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 | `start`           | [Start the Agent][3].                                                       |
 | `start-service`   | Start the Agent within the service control manager.                         |
 | `status`          | [Print the current Agent status][4].                                        |
+| `stream-logs`     | Stream the logs being processed by a running agent.                         |
 | `stop`            | [Stop the Agent][5].                                                        |
 | `stopservice`     | Stop the Agent within the service control manager.                          |
 | `version`         | Print version info.                                                         |

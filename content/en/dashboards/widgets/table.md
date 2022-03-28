@@ -5,12 +5,6 @@ widget_type: "query_table"
 aliases:
     - /graphing/widgets/table/
 further_reading:
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboards"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
@@ -66,8 +60,8 @@ In the following example, the `Average` column calculates a ratio of `Total Ente
 
 [1]: /dashboards/querying/#configuring-a-graph
 [2]: /logs/search_syntax/
-[3]: /tracing/trace_search_and_analytics/query_syntax/
-[4]: /real_user_monitoring/explorer/search/#search-syntax
+[3]: /tracing/trace_explorer/query_syntax/
+[4]: /real_user_monitoring/explorer/search_syntax
 [5]: /tracing/profiler/search_profiles
 [6]: /security_monitoring/explorer/
 [7]: /dashboards/querying/#configuring-an-apm-stats-graph

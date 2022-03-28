@@ -87,14 +87,14 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 {{< img src="mobile/incident_widget.png" alt="Datadog incident mobile widget displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [open incidents][13] from your mobile home screen with Datadog widgets.
+View your [open incidents][12] from your mobile home screen with Datadog widgets.
 
 To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app. 
 
 Also, you can customize your Open Incidents widgets by filtering on:
 
 - Organization
-- Serverity levels
+- Severity levels
 - Customers impacted
 - Ordering
 
@@ -196,7 +196,7 @@ Delete a widget by long pressing, dragging, and dropping the widget to the **Rem
 
 {{< img src="mobile/slo_widget.png" alt="Application Uptime SLO widgets displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [SLOs][14] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
+View your [SLOs][13] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
 
 Timeframe options are:
 - 7 days
@@ -207,7 +207,7 @@ Timeframe options are:
 - Week to date
 - Month to date
 
-You can also specify a dashboard that opens by default when you tap on an SLOs widget, allowing you to quickly dig deeper into your metrics.
+You can also specify a dashboard that opens by default when you tap on an SLOs widget, allowing you to quickly investigate further into your metrics.
 
 **Note**: If you do not specify a dashboard that opens by default, tapping an SLOs widget opens the Datadog app.
 
@@ -306,7 +306,7 @@ Delete a widget by long pressing, dragging, and dropping the widget to the "Remo
 
 {{< img src="mobile/monitor_widget.png" alt="Configured monitor widgets displayed on Android and iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [monitors][15] from your home screen with Datadog widgets. Tap any cell to open the **Monitor Search** screen in the app, with your monitors already filled in.
+View your [monitors][14] from your home screen with Datadog widgets. Tap any cell to open the **Monitor Search** screen in the app, with your monitors already filled in.
 
 **Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
 
@@ -404,7 +404,7 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][16] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
+Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][15] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
 
 ## Search from home screen
 
@@ -426,7 +426,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][17].
+For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][16].
 
 ## Handoff
 
@@ -439,7 +439,7 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information about Handoff, read the [Apple Handoff documentation][18].
+For more information about Handoff, read the [Apple Handoff documentation][17].
 
 ## Account
 
@@ -447,7 +447,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][19]. You can also send a message in the [Datadog public Slack][20] [#mobile-app][21] channel.
+For help with troubleshooting, [contact Datadog support][18]. You can also send a message in the [Datadog public Slack][19] [#mobile-app][20] channel.
 
 ### Further Reading
 
@@ -465,12 +465,11 @@ For help with troubleshooting, [contact Datadog support][19]. You can also send 
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /dashboards/
 [12]: /monitors/incident_management
-[13]: /monitors/incident_management
-[14]: /dashboards/widgets/slo/#setup
-[15]: /logs/explorer/saved_views/
-[16]: https://app.datadoghq.com/dashboard/lists/preset/5
-[17]: https://support.apple.com/en-us/HT209055
-[18]: https://support.apple.com/en-us/HT209455
-[19]: /help/
-[20]: https://chat.datadoghq.com/
-[21]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[13]: /dashboards/widgets/slo/#setup
+[14]: /logs/explorer/saved_views/
+[15]: https://app.datadoghq.com/dashboard/lists/preset/5
+[16]: https://support.apple.com/en-us/HT209055
+[17]: https://support.apple.com/en-us/HT209455
+[18]: /help/
+[19]: https://chat.datadoghq.com/
+[20]: https://datadoghq.slack.com/archives/C0114D5EHNG

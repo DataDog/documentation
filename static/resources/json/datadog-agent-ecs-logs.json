@@ -1,0 +1,78 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "datadog-agent",
+      "image": "public.ecr.aws/datadog/agent:latest",
+      "cpu": 100,
+      "memory": 512,
+      "essential": true,
+      "mountPoints": [
+        {
+          "containerPath": "/var/run/docker.sock",
+          "sourceVolume": "docker_sock",
+          "readOnly": null
+        },
+        {
+          "containerPath": "/host/sys/fs/cgroup",
+          "sourceVolume": "cgroup",
+          "readOnly": null
+        },
+        {
+          "containerPath": "/opt/datadog-agent/run",
+          "sourceVolume": "pointdir",
+          "readOnly": false
+        },
+        {
+          "containerPath": "/host/proc",
+          "sourceVolume": "proc",
+          "readOnly": null
+        }
+      ],
+      "environment": [
+        {
+          "name": "DD_API_KEY",
+          "value": "<YOUR_API_KEY>"
+        },
+        {
+          "name": "DD_LOGS_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
+          "value": "true"
+        },
+        {
+          "name": "SD_BACKEND",
+          "value": "docker"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      },
+      "name": "docker_sock"
+    },
+    {
+      "host": {
+        "sourcePath": "/proc/"
+      },
+      "name": "proc"
+    },
+    {
+      "host": {
+        "sourcePath": "/opt/datadog-agent/run"
+      },
+      "name": "pointdir"
+    },
+    {
+      "host": {
+        "sourcePath": "/sys/fs/cgroup/"
+      },
+      "name": "cgroup"
+    }
+  ],
+  "family": "datadog-agent-task"
+}

@@ -51,7 +51,7 @@ datadogRum.startSessionReplayRecording();
 
 #### CDN
 
-Remplacez l'URL du SDK Browser `https://www.datadoghq-browser-agent.com/datadog-rum.js` par `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. Pour que l'enregistrement Session Replay commence, vous devez non seulement appeler `DD_RUM.init()`, mais également `DD_RUM.startSessionReplayRecording()`.
+Remplacez l'URL du SDK Browser `https://www.datadoghq-browser-agent.com/datadog-rum.js` par `https://www.datadoghq-browser-agent.com/datadog-rum-v4.js`. Pour que l'enregistrement Session Replay commence, vous devez non seulement appeler `DD_RUM.init()`, mais également `DD_RUM.startSessionReplayRecording()`.
 
 *Navigateurs pris en charge* : l'enregistreur Session Replay prend en charge tous les navigateurs compatibles avec le SDK Browser RUM, à l'exception d'IE11. Consultez le [tableau de compatibilité des navigateurs][3] (en anglais).
 

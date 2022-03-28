@@ -32,7 +32,7 @@ requests:
     link: /network_monitoring
     image: int_network.png
   - name: Endpoint
-    description: Utilisez un check HTTP ou la solution Synthetic Monitoring pour vous assurer de la disponibilité de vos URL et vérifier si vos endpoints et URL sont fonctionnels et accessibles. Ces deux alternatives gèrent aussi bien les endpoints publics que privés.
+    description: Utilisez un check HTTP ou la solution Synthetics Monitoring pour vous assurer de la disponibilité de vos URL et vérifier si vos endpoints et URL sont fonctionnels et accessibles. Ces deux alternatives gèrent aussi bien les endpoints publics que privés.
     link: /synthetics
     image: int_endpoint.png
   - name: Processus

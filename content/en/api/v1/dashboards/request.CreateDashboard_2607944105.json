@@ -1,0 +1,28 @@
+{
+  "title": "Example-Create_a_new_dashboard_with_check_status_widget",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 15,
+        "height": 8
+      },
+      "definition": {
+        "title_size": "16",
+        "title_align": "left",
+        "type": "check_status",
+        "check": "datadog.agent.up",
+        "grouping": "check",
+        "tags": [
+          "*"
+        ]
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

@@ -167,4 +167,4 @@ These traces are retained [just like your classical APM traces][18].
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
 [17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
-[18]: /tracing/trace_retention_and_ingestion/
+[18]: /tracing/trace_retention/

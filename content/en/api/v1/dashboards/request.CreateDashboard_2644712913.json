@@ -1,0 +1,41 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Create_a_new_dashboard_with_a_query_value_widget_using_the_percentile_aggregator with QVW Percentile Aggregator",
+  "widgets": [
+    {
+      "definition": {
+        "title_size": "16",
+        "title": "",
+        "title_align": "left",
+        "precision": 2,
+        "time": {},
+        "autoscale": true,
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "response_format": "scalar",
+            "queries": [
+              {
+                "query": "p90:dist.dd.dogweb.latency{*}",
+                "data_source": "metrics",
+                "name": "query1",
+                "aggregator": "percentile"
+              }
+            ]
+          }
+        ],
+        "type": "query_value"
+      },
+      "layout": {
+        "y": 0,
+        "x": 0,
+        "height": 2,
+        "width": 2
+      }
+    }
+  ]
+}

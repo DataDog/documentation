@@ -61,17 +61,17 @@ Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.13</version>
+      <version>1.7.32</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 2. `logback.xml` の JSON レイアウトを使用してファイルアペンダーを構成します。
@@ -117,7 +117,7 @@ Log4j 2 には JSON レイアウトが含まれています。
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.15.0</version>
+        <version>2.17.0</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -162,12 +162,12 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 
@@ -306,17 +306,17 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.13</version>
+      <version>1.7.32</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 2. Logback を構成します。
@@ -337,17 +337,17 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-to-slf4j</artifactId>
-        <version>2.15.0</version>
+        <version>2.17.0</version>
     </dependency>
     <dependency>
         <groupId>net.logstash.logback</groupId>
         <artifactId>logstash-logback-encoder</artifactId>
-        <version>4.5.1</version>
+        <version>6.6</version>
     </dependency>
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.1.3</version>
+        <version>1.2.9</version>
     </dependency>
     ```
 2. Logback を構成します。
@@ -444,12 +444,12 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.3</version>
+      <version>1.2.9</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>4.5.1</version>
+      <version>6.6</version>
     </dependency>
     ```
 

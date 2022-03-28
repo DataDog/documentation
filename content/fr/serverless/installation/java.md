@@ -1,34 +1,126 @@
 ---
-title: Instrumenter des applications Java
+title: Instrumenter des applications Java sans serveur
 kind: documentation
 further_reading:
-  - link: serverless/serverless_tagging/
+  - link: serverless/datadog_lambda_library/java
     tag: Documentation
-    text: Tagging d'applications sans serveur
+    text: Bibliothèque Lambda Datadog pour Java
   - link: serverless/distributed_tracing/
     tag: Documentation
     text: Tracing d'applications sans serveur
   - link: serverless/custom_metrics/
     tag: Documentation
     text: Envoyer des métriques custom depuis des applications sans serveur
+  - link: /serverless/guide/troubleshoot_serverless_monitoring
+    tag: Documentation
+    text: Dépannage de la surveillance sans serveur
+aliases:
+  - /fr/serverless/datadog_lambda_library/java/
 ---
-{{< img src="serverless/java-lambda-tracing.png" alt="Surveiller des fonctions Lambda Java avec Datadog"  style="width:100%;">}}
+{{< img src="serverless/java-lambda-tracing.png" alt="Surveiller des fonctions Lambda Java avec Datadog" style="width:100%;">}}
 
-## Configuration requise
+<div class="alert alert-danger">
+Certaines versions de datadog-lambda-java importent log4j <=2.14.0 en tant que dépendance transitive. Les <a href="#upgrading">instructions de mise à niveau</a> sont indiquées plus loin dans ce guide.
+</div>
 
-Si vous ne l'avez pas encore fait :
+## Prérequis
 
-- Installez [l'intégration AWS][1]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS.
-- Installez la [fonction Lambda du Forwarder Datadog][2], qui est nécessaire pour l'ingestion des traces, des métriques optimisées, des métriques custom et des logs AWS Lambda.
+Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser le runtime Java 8 Corretto (`java8.al2`) ou Java 11 (`java11`).
 
-Après avoir installé l'[intégration AWS][1] et le [Forwarder Datadog][2], suivez les étapes suivantes afin d'instrumenter votre application de façon à envoyer des [métriques Lambda optimisées][3], des logs et des traces à Datadog.
-Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser les runtimes Java 8 Corretto (`java8.al2`) ou Java 11 (`java11`).
+Si vous avez déjà configuré vos fonctions Lambda Java à l'aide du Forwarder Datadog, reportez-vous aux [instructions d'installation][1].
 
 ## Configuration
 
+{{< tabs >}}
+{{% tab "Interface de ligne de commande Datadog" %}}
+L'interface de ligne de commande Datadog permet de modifier les configurations des fonctions Lambda existantes pour instrumenter vos applications sans les redéployer. Il s'agit du moyen le plus rapide de tirer parti de la surveillance sans serveur de Datadog.
+
+Vous pouvez également ajouter la [commande d'instrumentation](#instrumentation) à vos pipelines de CI/CD pour instrumenter toutes vos applications sans serveur. Lancez la commande _après_ le déploiement normal de votre application sans serveur, de sorte que les modifications apportées par l'interface de ligne de commande Datadog ne soient pas écrasées.
+
+### Installation
+
+Installez l'interface de ligne de commande Datadog avec NPM ou Yarn :
+
+```sh
+# NPM
+npm install -g @datadog/datadog-ci
+
+# Yarn
+yarn global add @datadog/datadog-ci
+```
+
+### Configurer les identifiants
+
+Pour un démarrage rapide, configurez vos [identifiants AWS][1] et Datadog à l'aide de la commande suivante. Pour les applications de production, nous vous recommandons de fournir les variables d'environnement ou les identifiants de manière plus sécurisée.
+
+```bash
+export DATADOG_API_KEY="<CLÉ_API_DATADOG>"
+export DATADOG_SITE="<SITE_DD>" # par exemple, datadoghq.com, datadoghq.eu, us3.datadoghq.com ou ddog-gov.com
+export AWS_ACCESS_KEY_ID="<ID_CLÉ_ACCÈS>"
+export AWS_SECRET_ACCESS_KEY="<CLÉ_ACCÈS>"
+```
+
+### Instrumentation
+
+**Remarque** : instrumentez d'abord vos fonctions Lambda dans un environnement de type dev ou staging. Si l'instrumentation doit être annulée, lancez `uninstrument` avec les mêmes arguments que ceux utilisés pour l'instrumentation.
+
+Pour instrumenter vos fonctions Lambda, lancez la commande suivante :
+
+```sh
+datadog-ci lambda instrument -f <nomfonction> -f <autre_nomfonction> -r <région_aws> -e <version_extension>
+```
+
+Renseignez les paramètres fictifs comme suit :
+
+-   Remplacez `<nomfonction>` et `<autre_nomfonction>` par les noms de vos fonctions Lambda.
+-   Remplacez `<région_aws>` par le nom de la région AWS.
+-   Remplacez `<version_extension>` par la version souhaitée de l'extension Lambda Datadog. La dernière version est `{{< latest-lambda-layer-version layer="extension" >}}`.
+
+Par exemple :
+
+```sh
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
+```
+
+Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la section sur l'[interface de ligne de commande Serverless Datadog][2].
+
+[1]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html
+[2]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
+
+{{% /tab %}}
+{{% tab "Configuration personnalisée" %}}
+### Installer l'extension Lambda Datadog
+
+[Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
+
+```
+// Pour une architecture x86
+arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-Extension:<VERSION_EXTENSION>
+// Pour une architecture arm64
+arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-Extension-ARM:<VERSION_EXTENSION>
+```
+
+La dernière `VERSION_EXTENSION` est {{< latest-lambda-layer-version layer="extension" >}}.
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
+
+{{% /tab %}}
+{{< /tabs >}}
+### Installer le client de tracing Datadog
+
+[Configurez les couches][14] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
+
+```
+arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:dd-trace-java:<VERSION>
+```
+
+La dernière `VERSION` est {{< latest-lambda-layer-version layer="dd-trace-java" >}}.
+
 ### Installer la bibliothèque Lambda Datadog
 
-Vous pouvez installer localement la bibliothèque Lambda Datadog en ajoutant l'un des blocs de code suivants dans votre fichier `pom.xml` ou `build.gradle` (selon la configuration de votre projet). Remplacez `VERSION` par le numéro de la dernière version (en ignorant le `v` qui le précède) : ![Bintray][4] {{< tabs >}} {{% tab "Maven" %}}
+Installez localement la bibliothèque Lambda Datadog en ajoutant l'un des blocs de code suivants dans votre fichier `pom.xml` ou `build.gradle` (selon la configuration de votre projet). Remplacez `VERSION` par le numéro de la dernière version (en ignorant le `v` qui le précède) : ![Maven Central][4]
+{{< tabs >}}
+{{% tab "Maven" %}}
 
 Ajoutez la dépendance suivante dans votre fichier `pom.xml` :
 
@@ -53,64 +145,43 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Instrumenter la fonction
+### Configurer des variables d'environnement
 
-1. Installez la couche Lambda Datadog sur votre fonction. Pour `VERSION`, consultez la dernière [version][5] :
+Configurez les variables d'environnement suivantes sur votre fonction :
 
-    ```yaml
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
-    ```
+```yaml
+DD_API_KEY: <CLÉ_API_DATADOG> # Remplacer <CLÉ_API_DATADOG> par votre clé d'API
+JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+DD_LOGS_INJECTION: true
+DD_JMXFETCH_ENABLED: false
+DD_TRACE_ENABLED: true
+```
 
-2. Configurez les variables d'environnement suivantes sur votre fonction :
+### Utiliser un wrapper pour incorporer la fonction Lambda du gestionnaire
 
-    ```yaml
-    JAVA_TOOL_OPTIONS: "-javaagent:\"/opt/java/lib/dd-java-agent.jar\""
-    DD_LOGS_INJECTION: "true"
-    DD_JMXFETCH_ENABLED: "false"
-    DD_TRACE_ENABLED: "true"
-    ```
+Incorporez la fonction Lambda de votre gestionnaire à l'aide du wrapper fourni par la bibliothèque Lambda Datadog :
 
-3. Incorporez la fonction Lambda de votre gestionnaire à l'aide du wrapper fourni par la bibliothèque Lambda Datadog :
+```java
+public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
+    public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
+        DDLambda ddl = new DDLambda(request, context); // Requis pour initialiser le tracing
 
-    ```java
-    public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
-        public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-            DDLambda ddl = new DDLambda(request, context); //Required to initialize the trace
+        do_some_stuff();
+        make_some_http_requests();
 
-            do_some_stuff();
-            make_some_http_requests();
-
-            ddl.finish(); //Required to finish the active span.
-            return new ApiGatewayResponse();
-        }
+        ddl.finish(); // Requis pour mettre fin à la span active.
+        return new ApiGatewayResponse();
     }
-    ```
-
-### Abonner le Forwarder Datadog aux groupes de logs
-
-Pour pouvoir envoyer des métriques, traces et logs à Datadog, vous devez abonner la fonction Lambda du Forwarder Datadog à chaque groupe de logs de votre fonction.
-
-1. [Si ce n'est pas déjà fait, installez le Forwarder Datadog][2].
-2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][6].
-
-### Surveiller les démarrages à froid des fonctions Lambda Java
-
-Des démarrages à froid se produisent lorsque vos applications sans serveur voient tout d'un coup leur trafic augmenter, notamment lorsque la fonction en question était inactive ou lorsqu'elle recevait un nombre relativement constant de requêtes. Aux yeux des utilisateurs, les démarrages à froid entraînent des ralentissements ou des délais de réponse plus importants. Dans le but de réduire au maximum les [démarrages à froid][7], nous vous conseillons fortement de configurer un monitor sur la fonction Lambda Java concernée et d'utiliser les informations exploitables liées à vos applications sans serveur.
-
-{{< img src="serverless/java-monitor-cold-starts.png" alt="Surveiller les démarrages à froid d'une fonction Lambda Java"  style="width:100%;">}}
-
-Pour créer un monitor Datadog sur les démarrages à froid d'une fonction Lambda Java, suivez les [étapes de création d'un monitor][8] avec les paramètres suivants :
-- Nom de la métrique : `aws.lambda.enhanced.invocations`
-- À partir de : `runtime:java*` et `cold_start:true`
-- Groupe d'alertes : alertes multiples, avec le déclenchement d'une alerte distincte pour chaque `function_arn`
+}
+```
 
 ### Tagging de service unifié
 
-Bien qu'ils soient facultatifs, Datadog vous recommande fortement d'ajouter à vos applications sans serveur les tags `env`, `service`, et `version` comme indiqué dans la [documentation relative au tagging de service unifié][9].
+Datadog recommande d'ajouter à vos applications sans serveur les tags `DD_ENV`, `DD_SERVICE`, `DD_VERSION` et `DD_TAGS`. Consultez la [documentation relative à l'extension Lambda][2] pour en savoir plus.
 
-## Explorer la surveillance sans serveur de Datadog
+## Utilisation
 
-Après avoir configuré votre fonction en suivant la procédure ci-dessus, vous devriez pouvoir visualiser vos métriques, logs et traces sur la [page Serverless principale][10].
+Après avoir configuré votre fonction en suivant la procédure ci-dessus, visualisez vos métriques, logs et traces sur la [page Serverless principale][9].
 
 ### Surveiller une logique opérationnelle personnalisée
 
@@ -121,12 +192,12 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
         DDLambda ddl = new DDLambda(request, context);
 
-        Map<String,String> myTags = new HashMap<String, String>();
+        Map<String,Object> myTags = new HashMap<String, Object>();
             myTags.put("product", "latte");
             myTags.put("order","online");
 
         // Envoyer une métrique custom
-        dd.metric(
+        ddl.metric(
             "coffee_house.order_value", // Nom de la métrique
             12.45,                      // Valeur de la métrique
             myTags);                    // Tags associés
@@ -140,25 +211,86 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-Pour en savoir plus sur l'envoi de métriques custom, consultez [la documentation dédiée][11].
+Pour en savoir plus sur l'envoi de métriques custom, consultez [la documentation dédiée][10].
 
 ### Associer vos logs à vos traces
 
-Pour associer automatiquement vos logs de fonction Lambda Java à vos traces, consultez les instructions de la section [Associer vos logs Java à vos traces][12].
+Pour associer automatiquement vos logs de fonction Lambda Java à vos traces, consultez les instructions de la section [Associer vos logs Java à vos traces][11].
+
+<div class="alert alert-info"> Si vous n'utilisez pas le runtime Java approprié, des messages d'erreur, tels que « Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar », peuvent s'afficher. Veillez à utiliser le runtime java8.al2 ou java11, comme indiqué ci-dessus. </div>
+
+## Mise à niveau
+
+L'Apache Foundation a annoncé que log4j, une bibliothèque de journalisation Java couramment utilisée, est [vulnérable à l'exécution de code à distance][12]. Certaines versions de `datadog-lambda-java` comportent une dépendance transitive sur log4j qui peut être impactée par cette vulnérabilité. Voici les versions concernées :
+
+-  `<=0.3.3`
+-  `1.4.0`
+
+La dernière version de datadog-lambda-java est ![Maven Central][4]. Utilisez cette version (en ignorant le `v` qui le précède) lorsque vous suivez les instructions de mise à niveau ci-dessous.
+
+Si vous ne souhaitez pas effectuer de mise à niveau vers `1.4.x`, la version `0.3.x` a également été mise à jour afin d'inclure les derniers patchs de sécurité relatifs à log4j. La dernière version `0.3.x` est disponible dans le [référentiel datadog-lambda-java][13].
+
+La version de la dépendance `datadog-lambda-java` dans votre fonction Lambda est définie dans `pom.xml` (Maven) ou `build.gradle` (Gradle).
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Votre fichier `pom.xml` contient une section qui ressemble à ceci :
+
+```xml
+<dependency>
+  <groupId>com.datadoghq</groupId>
+  <artifactId>datadog-lambda-java</artifactId>
+  <version>VERSION</version>
+</dependency>
+```
+
+Remplacez `VERSION` par la dernière version de `datadog-lambda-java` (disponible ci-dessus). Redéployez ensuite votre fonction Lambda.
+
+{{% /tab %}}
+
+{{% tab "Gradle" %}}
+
+Votre fichier `build.gradle` contient une section qui ressemble à ceci :
+
+```groovy
+dependencies {
+  implementation 'com.datadoghq:datadog-lambda-java:VERSION'
+}
+```
+
+Remplacez `VERSION` par la dernière version de `datadog-lambda-java` (disponible ci-dessus).
+Ensuite, redéployez votre fonction Lambda.
+
+{{% /tab %}}
+{{< /tabs>}}
+
+Si vous effectuez une mise à niveau depuis la version 0.3.x vers la version 1.4.x et que vous souhaitez utiliser le traceur `dd-trace-java`, recherchez la référence à la couche Lambda `dd-trace-java` et remplacez-la par ce qui suit :
+
+```
+arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:dd-trace-java:4
+````
+
+## Dépannage
+
+Si vous avez suivi les instructions ci-dessus, mais que vous ne parvenez pas à recueillir des données de surveillance, consultez le [guide sur le dépannage de la surveillance sans serveur][15].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/integrations/amazon_web_services/
-[2]: /fr/serverless/forwarder/
+[1]: /fr/serverless/guide/datadog_forwarder_java
+[2]: /fr/serverless/libraries_integrations/extension/
 [3]: /fr/serverless/enhanced_lambda_metrics
 [4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
-[5]: https://github.com/DataDog/datadog-lambda-java/releases/
-[6]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: /fr/serverless/insights#cold-starts
-[8]: /fr/monitors/monitor_types/metric/?tab=threshold#overview
-[9]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[10]: https://app.datadoghq.com/functions
-[11]: /fr/serverless/custom_metrics?tab=java
-[12]: /fr/tracing/connect_logs_and_traces/java/
+[5]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: /fr/serverless/insights#cold-starts
+[7]: /fr/monitors/create/types/metric/?tab=threshold#overview
+[8]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[9]: https://app.datadoghq.com/functions
+[10]: /fr/serverless/custom_metrics?tab=java
+[11]: /fr/tracing/connect_logs_and_traces/java/
+[12]: https://www.datadoghq.com/log4j-vulnerability/
+[13]: https://github.com/DataDog/datadog-lambda-java/releases
+[14]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
+[15]: /fr/serverless/guide/troubleshoot_serverless_monitoring/

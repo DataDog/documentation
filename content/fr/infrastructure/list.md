@@ -13,7 +13,7 @@ further_reading:
     text: Container map
   - link: /infrastructure/process/
     tag: Documentation
-    text: Surveillance des Live Processes
+    text: Surveillance des live processes
 ---
 ## Présentation
 
@@ -58,7 +58,7 @@ Datadog Agent
 
 ### Hostname
 
-L'Agent Datadog recueille les hostnames potentiels à partir de plusieurs sources. Pour en savoir plus, consultez la section [Comment Datadog détermine-t-il le hostname de l'Agent ?][1].
+L'Agent Datadog recueille les hostnames potentiels à partir de plusieurs sources différentes. Pour en savoir plus, consultez la section [Comment Datadog détermine-t-il le hostname de l'Agent ?][1].
 
 Les hostnames doivent être uniques au sein d'un même compte Datadog. Si vous ne respectez pas cette règle, vous risquez de rencontrer des incohérences sur les graphiques de votre host.
 
@@ -66,19 +66,19 @@ Les hostnames doivent être uniques au sein d'un même compte Datadog. Si vous n
 
 Cliquez sur un host pour afficher les détails associés, tels que ses [alias](#alias), [tags][2], [métriques][3], [conteneurs][4] et [logs][5] (si activés) :
 
-{{< img src="infrastructure/index/Infra-List.png" alt="Détails des hosts de la liste des infrastructures"  style="width:90%;">}}
+{{< img src="infrastructure/index/Infra-List.png" alt="Détails des hosts de la liste des infrastructures" style="width:90%;">}}
 
 #### Alias
 
 Datadog crée des alias pour les hostnames lorsqu'il existe plusieurs noms uniques identifiables pour un seul host. Les noms recueillis par l'Agent sont ajoutés en tant qu'alias pour le nom canonique choisi. Par exemple, un host unique fonctionnant dans EC2 peut posséder un ID d'instance (`i-abcd1234`), un hostname générique fourni par EC2 basé sur l'adresse IP du host (`ip-192-0-0-1`) et un hostname significatif fourni par un serveur DNS interne ou un fichier hosts géré par config (`myhost.mydomain`).
 
-{{< img src="infrastructure/index/Infra-List-Alias.png" alt="alias de host"  style="width:90%;">}}
+{{< img src="infrastructure/index/Infra-List-Alias.png" alt="Alias de host" style="width:90%;">}}
 
 ### Exporter
 
 Pour obtenir la liste au format JSON des hosts transmettant des données à Datadog, vous pouvez utiliser :
 
-* Le **permalien API JSON** en bas de la liste des infrastructures
+* Le **permalien API JSON** en haut de la liste des infrastructures.
 * L'[endpoint d'API pour la recherche de hosts][6] (référez-vous au [guide de développement][7] pour consulter un exemple).
 
 #### Version de l'Agent

@@ -46,7 +46,7 @@ The following metrics are collected by default after enabling runtime metrics:
 
 {{< get-metrics-from-git "python" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Python Runtime Metrics Dashboard][7] with the `service` and `runtime-id` tags that are applied to these metrics.
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Python Runtime Metrics Dashboard][7].
 
 ## Further Reading
 
@@ -57,5 +57,5 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 [3]: /metrics/dogstatsd_metrics_submission/#setup
 [4]: /agent/docker/#dogstatsd-custom-metrics
 [5]: /developers/dogstatsd/?tab=kubernetes#agent
-[6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[6]: /agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30267/python-runtime-metrics

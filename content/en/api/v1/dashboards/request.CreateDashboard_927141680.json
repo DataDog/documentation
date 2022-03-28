@@ -1,0 +1,21 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Create_a_new_dashboard_with_funnel_widget with funnel widget",
+  "widgets": [
+    {
+      "definition": {
+        "type": "funnel",
+        "requests": [
+          {
+            "query": {
+              "data_source": "rum",
+              "query_string": "",
+              "steps": []
+            },
+            "request_type": "funnel"
+          }
+        ]
+      }
+    }
+  ]
+}

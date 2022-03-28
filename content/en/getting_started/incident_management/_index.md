@@ -270,6 +270,14 @@ To customize Incident Management, go to the [incident settings page][9]. From th
 
 {{< img src="getting_started/incident_management/im_settings_button.png" alt="Settings" responsive="true" style="width:100%;">}}
 
+## Create and Manage Incidents on Mobile
+
+The [Datadog Mobile App][10], available on the [Apple App Store][11] and [Google Play Store][12], enables users to create, view, search, and filter all incidents you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution without opening your laptop.
+
+You can also declare and edit incidents and quickly communicate to your teams through integrations with Slack, Zoom, and many more.
+
+{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
+  
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -283,3 +291,6 @@ To customize Incident Management, go to the [incident settings page][9]. From th
 [7]: /monitors/incident_management/#status-levels
 [8]: /monitors/incident_management/notification_rules
 [9]: https://app.datadoghq.com/incidents/settings
+[10]: /mobile/
+[11]: https://apps.apple.com/app/datadog/id1391380318
+[12]: https://play.google.com/store/apps/details?id=com.datadog.app

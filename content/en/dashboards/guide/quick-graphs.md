@@ -71,7 +71,7 @@ Click **Export** to save your work to a Dashboard or Notebook. You can always co
 [3]: /dashboards/querying/#aggregate-and-rollup
 [4]: /dashboards/querying/#advanced-graphing
 [5]: /logs/explorer/
-[6]: /tracing/trace_search_and_analytics/
+[6]: /tracing/trace_explorer/
 [7]: /real_user_monitoring/explorer/search/
 [8]: /security_platform/explorer/
 [9]: /events/

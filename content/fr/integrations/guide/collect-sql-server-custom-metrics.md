@@ -4,7 +4,7 @@ kind: guide
 aliases:
   - /fr/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/sql-server-metrics/#creer-une-procedure-stockee-pour-generer-et-recueillir-des-metriques'
+  - link: https://www.datadoghq.com/blog/sql-server-metrics/#creer-une-procedure-stockee-pour-generer-et-recueillir-des-metriques
     tag: Blog
     text: Créer une procédure stockée pour générer et recueillir des métriques
   - link: /integrations/mysql/
@@ -60,7 +60,7 @@ Pour recueillir toutes les instances d'un counter associé à plusieurs instance
   tag_by: db
 ```
 
-Les counters sont tirés de la table par défaut `sys.dm_os_performance_counters`. Le check Datadog/SQL Server prend également en charge `sys.dm_os_wait_stats`, `sys.dm_os_memory_clerks` et `sys.dm_io_virtual_file_stats`.
+Les counters sont tirés de la table par défaut `sys.dm_os_performance_counters`. Le check Datadog/SQL Server prend également en charge `sys.dm_os_wait_stats`, `sys.dm_os_memory_clerks` et `sys.dm_io_virtual_file_stats`.
 
 Pour envoyer une métrique tirée de l'une des tables supplémentaires, spécifiez la table dans la définition du counter avec le paramètre `table`, ainsi que les colonnes du counter à envoyer avec le paramètre `columns` :
 

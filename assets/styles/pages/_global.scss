@@ -40,10 +40,10 @@ iframe {
 }
 
 .banner body {
-    padding-top: 159px;
+    //padding-top: 159px;
 
     @include media-breakpoint-between(md, lg) {
-        padding-top: 100px;
+        padding-top: 130px;
     }
 }
 
@@ -985,7 +985,7 @@ dl {
 //@include media-breakpoint-up(md) { ... }
 @media (max-width: 991px) {
     .banner body {
-        padding-top: 95px;
+        padding-top: 60px;
     }
 
     .main {

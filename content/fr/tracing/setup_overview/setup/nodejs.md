@@ -13,32 +13,41 @@ code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-  - link: 'https://github.com/DataDog/dd-trace-js'
+  - link: https://github.com/DataDog/dd-trace-js
     tag: GitHub
     text: Code source
-  - link: 'https://datadog.github.io/dd-trace-js'
+  - link: https://datadog.github.io/dd-trace-js
     tag: Documentation
     text: Documentation sur l'API
   - link: tracing/visualization/
     tag: Utiliser l'UI de l'APM
-    text: 'Explorer vos services, ressources et traces'
+    text: Explorer vos services, ressources et traces
   - link: tracing/
     tag: Utilisation avancée
     text: Utilisation avancée
 ---
 ## Exigences de compatibilité
 
-Le traceur NodeJS prend officiellement en charge les versions `>=8`. Seules les versions paires, telles que 8.x et 10.x, sont officiellement prises en charge. Les versions impaires, telles que 9.x et 11.x, devraient fonctionner, mais cela n'a pas été officiellement confirmé. Pour obtenir la liste complète des bibliothèques prises en charge, consultez la page [Exigences de compatibilité][1].
+La dernière version du traceur Node.js prend officiellement en charge les versions `>=12`. Les versions `8` et `10` sont prises en charge en mode maintenance avec la version majeure `0.x` de la bibliothèque. Pour en savoir plus sur la compatibilité de Node.js et les versions prises en charge, consultez la page relative aux [exigences de compatibilité][1].
 
 ## Installation et démarrage
 
 Pour ajouter la bibliothèque de tracing Datadog à vos applications Node.js, suivez les étapes suivantes :
 
-1. Installez la bibliothèque de tracing Datadog avec npm :
+1. Installez la bibliothèque de tracing Datadog avec npm pour Node.js 12+ :
 
-```sh
-npm install dd-trace --save 
-```
+    ```sh
+    npm install dd-trace --save
+    ```
+    Si vous souhaitez effectuer le tracing des versions 8 ou 10 de Node.js en fin de vie, installez la version 0.x de `dd-trace` en exécutant :
+    ```
+    npm install dd-trace@latest-node10
+    ```
+    ou
+    ```
+    npm install dd-trace@latest-node8
+    ```
+    Pour en savoir plus sur nos tags de distribution et découvrir les versions du runtime Node.js prises en charge, consultez la page relative aux [exigences de compatibilité][1].
 
 2. Importez et initialisez le traceur dans le code ou via des arguments de ligne de commande. La bibliothèque de tracing Node.js doit être importée et initialisée **avant** tous les autres modules.
 
@@ -76,7 +85,7 @@ export default tracer;
 Si la configuration par défaut vous suffit, ou si toutes les configurations sont réalisées à l'aide de variables d'environnement, vous pouvez également utiliser `dd-trace/init` afin d'effectuer le chargement et l'initialisation durant une seule étape.
 
 ```typescript
-import `dd-trace/init`;
+import 'dd-trace/init';
 ```
 
 ### Ajout du traceur via des arguments de ligne de commande
@@ -91,12 +100,12 @@ node --require dd-trace/init app.js
 
 ### Configurer l'Agent Datadog pour l'APM
 
-Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des traces à partir de votre application instrumentée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml`, sous `apm_enabled: true`, et écoute le trafic des traces sur `localhost:8126`. Pour les environnements conteneurisés, suivez les liens ci-dessous afin d'activer la collecte de traces au sein de l'Agent Datadog.
+Installez et configurez l'Agent Datadog pour recevoir des traces de votre application désormais instrumentalisée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml` sous `apm_config` avec `enabled: true` et écoute le trafic de trace à `localhost:8126`. Pour les environnements coneteneurisés, suivez les liens ci-dessous pour activer la collecte de trace dans l'Agent Datadog.
 
 {{< tabs >}}
 {{% tab "Conteneurs" %}}
 
-1. Définissez `apm_non_local_traffic: true` dans votre [fichier de configuration principal `datadog.yaml`][1].
+1. Positionnez `apm_non_local_traffic: true` dans la section `apm_config` de votre [fichier de configuration `datadog.yaml`][1] principal.
 
 2. Consultez les instructions de configuration spécifiques pour vous assurer que l'Agent est configuré de façon à recevoir des traces dans un environnement conteneurisé :
 
@@ -117,7 +126,7 @@ Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des trac
     DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
     ```
 
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. Définissez `DD_SITE` dans l'Agent Datadog sur {{< region-param key="dd_site" code="true" >}} pour vous assurer que l'Agent envoie les données au bon site Datadog.
 
@@ -134,7 +143,7 @@ Pour configurer l'APM Datadog dans AWS Lambda, consultez la documentation dédi
 {{% /tab %}}
 {{% tab "Autres environnements" %}}
 
-Le tracing est disponible pour un certain nombre d'environnements, tels que [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3] et l'[extension Azure App Services][4].
+La trace est disponible pour un certain nombre d'autres environnements, comme [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], et [Azure App Service][4].
 
 Pour les autres environnements, veuillez consulter la documentation relative aux [intégrations][5] pour l'environnement qui vous intéresse. [Contactez l'assistance][6] si vous rencontrez des problèmes de configuration.
 
@@ -152,98 +161,77 @@ Consultez les [paramètres du traceur][3] pour obtenir la liste des options d'in
 
 ## Configuration
 
-Les réglages du traceur peuvent être configurés via les paramètres suivants de la méthode `init()` ou via des variables d'environnement.
+Les paramètres du traceur peuvent être configurés avec les variables d'environnement suivantes :
 
 ### Tags
 
+`DD_ENV`
+: Définit l'environnement de l'application (par exemple, `prod`, `pre-prod` et `stage`). Par défaut, sa valeur correspond à l'environnement configuré dans l'Agent Datadog.
 
-`env`
-: **Variable d'environnement** : `DD_ENV`<br>
-**Valeur par défaut** : `null`<br>
-Définir l'environnement de votre application, par ex. `prod`, `pre-prod`, `stage`, etc. Disponible à partir de la version 0.20
+`DD_SERVICE`
+: Le nom du service utilisé pour ce programme. Par défaut, sa valeur correspond à la valeur du champ name dans `package.json`.
 
-`service`
-: **Variable d'environnement** : `DD_SERVICE`<br>
-**Valeur par défaut** : `null`<br>
-Le nom de service utilisé pour ce programme. Disponible à partir de la version 0.20
+`DD_VERSION`
+: Le numéro de version de l'application. Par défaut, sa valeur correspond à la valeur du champ version dans `package.json`.
 
-`version`
-: **Variable d'environnement** : `DD_VERSION`<br>
-**Valeur par défaut** : `null`<br>
-Le numéro de version de l'application. Par défaut, correspond à la valeur du champ version dans package.json. Disponible à partir de la version 0.20
-
-`tags`
-: **Variable d'environnement** : `DD_TAGS`<br>
-**Valeur par défaut** : `{}`<br>
-Définit des tags globaux qui doivent être appliqués à l'ensemble des spans et métriques runtime. Lorsque ce paramètre est passé en tant que variable d'environnement, son format correspond à `key:value,key:value`. Lorsqu'il est défini dans le code : `tracer.init({ tags: { foo: 'bar' } })`. Disponible à partir de la version 0.20
+`DD_TAGS`
+: Définit les tags globaux qui sont appliqués à l'ensemble des spans et métriques runtime. Si ce paramètre est passé en tant que variable d'environnement, respectez le format `key:value,key:value`. S'il est défini dans le code, respectez le format `tracer.init({ tags: { foo: 'bar' } })`.
 
 Nous vous conseillons d'utiliser `DD_ENV`, `DD_SERVICE` et `DD_VERSION` afin de définir les tags `env`, `service` et `version` pour vos services. Consultez la documentation sur le [tagging de service unifié][2] pour en savoir plus sur la configuration de ces variables d'environnement.
 
 ### Instrumentation
 
-`enabled`
-: **Variable d'environnement** : `DD_TRACE_ENABLED`<br>
-**Valeur par défaut** : `true`<br>
-Permet d'activer ou de désactiver le traceur.
+`DD_TRACE_ENABLED`
+: **Valeur par défaut** : `true`<br>
+Indique si le traceur doit être activé.
 
-`debug`
-: **Variable d'environnement** : `DD_TRACE_DEBUG`<br>
-**Valeur par défaut** : `false`<br>
-Permet d'activer ou de désactiver les logs de debugging dans le traceur.
+`DD_TRACE_DEBUG`
+: **Valeur par défaut** : `false`<br>
+Active les logs de debugging dans le traceur.
 
-`url`
-: **Variable d'environnement** : `DD_TRACE_AGENT_URL`<br>
-**Valeur par défaut** : `null`<br>
+`DD_TRACE_AGENT_URL`
+: **Valeur par défaut** : `http://localhost:8126`<br>
 L'URL de l'Agent de trace auquel le traceur transmet des données. Lorsque ce paramètre est défini, il est utilisé à la place du hostname et du port. Prend en charge les sockets de domaine Unix grâce au paramètre `apm_config.receiver_socket` de votre fichier `datadog.yaml` ou à la variable d'environnement `DD_APM_RECEIVER_SOCKET`.
 
-`hostname`
-: **Variable d'environnement** : `DD_TRACE_AGENT_HOSTNAME`<br>
-**Valeur par défaut** : `localhost`<br>
+`DD_TRACE_AGENT_HOSTNAME`
+: **Valeur par défaut** : `localhost`<br>
 L'adresse de l'Agent auquel le traceur transmet des données.
 
-`port`
-: **Variable d'environnement** : `DD_TRACE_AGENT_PORT`<br>
-**Valeur par défaut** : `8126`<br>
+`DD_TRACE_AGENT_PORT`
+: **Valeur par défaut** : `8126`<br>
 Le port de l'Agent auquel le traceur transmet des données.
 
-`dogstatsd.port` 
-: **Variable d'environnement** : `DD_DOGSTATSD_PORT`<br>
-**Valeur par défaut** : `8125`<br>
+`DD_DOGSTATSD_PORT`
+: **Valeur par défaut** : `8125`<br>
 Le port de l'Agent DogStatsD auquel les métriques sont transmises.
 
-`logInjection`
-: **Variable d'environnement** : `DD_LOGS_INJECTION`<br>
-**Valeur par défaut** : `false`<br>
+`DD_LOGS_INJECTION`
+: **Valeur par défaut** : `false`<br>
 Active l'injection automatique d'ID de trace dans les logs, pour les bibliothèques de journalisation prises en charge.
 
-`sampleRate`
-: **Valeur par défaut** : `1`<br>
-Pourcentage de spans à échantillonner. Valeur flottante comprise entre `0` et `1`.
+`DD_TRACE_SAMPLE_RATE`
+: Le pourcentage de spans à échantillonner. Valeur flottante comprise entre `0` et `1`. Par défaut, sa valeur correspond au débit renvoyé par l'Agent Datadog.
 
-`flushInterval`
-: **Valeur par défaut** : `2000`<br>
-Intervalle (en millisecondes) de transmission par le traceur des traces à l'Agent.
+`DD_TRACE_RATE_LIMIT`
+: Le pourcentage de spans à échantillonner. Valeur flottante comprise entre `0` et `1`. Par défaut, sa valeur correspond à `100` lorsque `DD_TRACE_SAMPLE_RATE` est défini. Si ce n'est pas le cas, c'est l'Agent Datadog qui doit définir les limites de débit.
 
-`runtimeMetrics` 
-: **Variable d'environnement** : `DD_RUNTIME_METRICS_ENABLED`<br>
-**Valeur par défaut** :  `false`<br>
-Indique si l'enregistrement des métriques runtime doit être activé. Le port `8125` (ou le port configuré avec `dogstatsd.port`) doit être ouvert sur l'Agent pour le transport UDP.
+`DD_RUNTIME_METRICS_ENABLED`
+: **Valeur par défaut** :  `false`<br>
+Indique si l'enregistrement des métriques runtime doit être activé. Le port `8125` (ou le port configuré avec `DD_DOGSTATSD_PORT`) doit être ouvert sur l'Agent pour le transport UDP.
 
-`experimental`
-: **Valeur par défaut** : `{}`<br>
-Les fonctionnalités expérimentales peuvent toutes être activées simultanément à l'aide de la valeur booléenne « true », ou individuellement à l'aide de paires key/value. [Contactez l'assistance][4] pour en savoir plus sur les fonctionnalités expérimentales disponibles.
-
-`plugins`
-: **Valeur par défaut** : `true`<br>
-Indique si l'instrumentation automatique des bibliothèques externes à l'aide des plug-ins intégrés doit être activée.
+`DD_SERVICE_MAPPING`
+: **Exemple** : `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
+Indique des noms de service pour chaque plug-in. Valeurs acceptées : paires `plugin:service-name` séparées par des virgules, avec ou sans espaces.
 
 `DD_TRACE_DISABLED_PLUGINS`
-: Une chaîne de noms d'intégration, séparés par des virgules, désactivées automatiquement à l'initialisation du traceur. Variable d'environnement uniquement. Exemple : `DD_TRACE_DISABLED_PLUGINS=express,dns`.
+: Une chaîne de noms d'intégration, séparés par des virgules. Ces intégrations sont automatiquement désactivées à l'initialisation du traceur. Variable d'environnement uniquement. Exemple : `DD_TRACE_DISABLED_PLUGINS=express,dns`.
 
-`logLevel`
-: **Variable d'environnement** : `DD_TRACE_LOG_LEVEL`<br>
-**Valeur par défaut** : `debug`<br>
-Chaîne de caractères indiquant le niveau minimum des logs du traceur à utiliser lorsque les logs de debugging sont activés. Exemple : `error` ou `debug`.
+`DD_TRACE_LOG_LEVEL`
+: **Valeur par défaut** : `debug`<br>
+Une chaîne de caractères indiquant le niveau minimum des logs du traceur à utiliser lorsque les logs de debugging sont activés. Exemple : `error`, `debug`.
+
+
+Pour découvrir d'autres options, y compris l'API de configuration par programmation, consultez la [documentation relative à l'API][4].
 
 ## Pour aller plus loin
 

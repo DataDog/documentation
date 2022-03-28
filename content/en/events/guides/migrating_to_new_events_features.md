@@ -6,46 +6,87 @@ aliases:
 ---
 
 <div class="alert alert-warning">
-  The Events Explorer is in private beta. If you are looking for legacy events information, see the <a href="/events/stream/">Event Stream documentation</a>.</div>
+Datadog's legacy event stream and event monitors retire on <strong>June 30, 2022</strong>. Datadog is migrating all customers to a new and improved events experience. This page contains important information about this migration. Before the retirement date, follow the steps on this page to ensure that your existing event visualizations and monitors continue to work properly.</div>
 
-The Event Stream is one of Datadog’s oldest features. The introduction of the Events Explorer and its associated changes means that Event query syntax, explorer and analytics views, processing pipelines, and other features work the same way they do for other Datadog products such as Logs. See [Events Explorer][1] for more details. 
 
-## What this means for your organization
+## Why change Events features?
 
-* New events (after migration) are visible only in the [Events Explorer][2] or dashboard widgets and event overlays.
+Launched more than 10 years ago, Datadog's event stream is one of its earliest features. The new events experience includes many new features that allow you to get even more value from your events. These include event analytics, the ability to generate metrics from your events, the ability to create pipelines to post-process events, and a much friendlier and more intuitive query syntax that is better aligned with other Datadog products, such as Log Management and APM.
 
-* Older events (before migration) continue to be visible in the [Event Stream][2] for the remainder of their retention period (13 months).
+## What is the migration timeline?
 
-This guide describes how to migrate your organization’s event monitors and dashboard widgets so that you benefit from the new Events features, and so that you're ready when the legacy event stream and storage are sunset. It also provides [a detailed description of what's changed](#details-of-the-changes).
+The following timeline applies to US-based customers:
 
-## Migration process
+<strong>March 5, 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors not managed using the API.
 
-1. **Request early access.** Events Explorer is in private beta. [Contact support][3] to request access for your organization. The support team sends you a notification when Events Explorer is enabled for your organization. You can access the new Explorer and other features through the Events menu in the main navigation, alongside the existing Stream.
+<strong>April 30, 2022</strong> - The event stream is retired in favor of the Event Explorer.
 
-   {{< img src="events/guides/navigation.png" alt="Events navigation" style="width:100%;" >}}
+<strong>May 15, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
 
-   <div class="alert alert-warning">Don't stop here! To create event monitors and dashboard widgets for Events using the new query syntax, Datadog support must enable the new feature for your organization, and you must migrate your existing event monitors and dashboard widgets to the new syntax, as described in the following steps.</div>
+<strong>June 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
 
-2. **Contact Support to enable the new Events feature.** [Ask Support][3] to switch your organization to the new query syntax. Datadog automatically routes queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely. When the switch is enabled, you can no longer create monitors or dashboard widgets with the legacy query syntax, so calls to the legacy API fail with an error, but your existing monitors and dashboards remain reporting.
+## What action do I need to take?
 
-3. **Migrate data stored in Datadog servers.** Because the new events have a new query syntax and different monitor features (see below for detailed changes), event monitors and event dashboard widgets definitions that contain event queries must be updated. Use this [open source migration script][4] that connects to your account using your API key, and converts the data. [Contact Support][3] if you prefer to have Datadog run it for you.
+If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them on June 30, 2022.
 
-4. **Migrate data configured externally (Terraform, API).** If you manage your Datadog configuration with external, API-based scripts or tools such as Terraform, update your dashboard and monitor definitions in your configuration file. Otherwise the old query syntax is applied again at next deployment and overwrites updated queries. Review the syntax changes described below and use the [migration script][4] to see what converted queries look like. [Contact Support][3] for assistance at this stage.
+<strong>If you use Terraform or other API-based scripts</strong> to manage all or some of your <strong>dashboards</strong>, Datadog will migrate queries in your event widgets and overlays to the new syntax, but you will need to update your scripts to keep them in sync before June 30, 2022.
 
-5. **If you have SLOs based on event monitors**, update their definitions to point to the new monitors.
+<strong>If you use Terraform or other API-based scripts</strong> to manage all or some of your <strong>monitors</strong>, you have until June 30, 2022, to update them. After this date, Datadog will create new versions of any non-migrated monitors and mute the existing monitors to ensure that you continue to have alerting.
 
-6. **Contact Support to disable the old pipeline.** [Let Support know][3] that you have finished migrating, and the old pipeline will be turned off. After that, all queries are routed to the new backend, and old-style queries return errors.
+Datadog can also assist you with migrating your monitors by suggesting updates or by applying the updates to your monitors.
 
-## Details of the changes
+## What's new?
 
-### Event API
-The [API endpoint to query events][5] does not use any query syntax. It instead uses parameters to include or exclude tags or sources. So, you don't have to change anything in your scripts that use it, unless they refer to status values, which have changed. See [Status remapping](#status-remapping).
+### Events Explorer
 
-### Event query syntax
-The new events query uses the same search query syntax as other products (Logs, RUM), providing a standardized experience across products. The updated search query syntax provides support for more advanced querying through Boolean operators and wildcards. So, the query syntax of your existing event monitors and dashboard widgets must be modified.
+{{< img src="events/explorer/events-overview.png" alt="Events Explorer" style="width:80%;" >}}
 
-#### Status remapping
+The Events Explorer displays the most recent events generated by your infrastructure and services or monitoring alerts. It replaces the Events Stream and provides a friendlier and more intuitive query syntax. See [Events Explorer][1] to learn more.
 
+### Event Analytics
+
+{{< img src="events/events-analytics.png" alt="Events Analytics" stype="width:40%;" >}}
+
+In addition to viewing and searching events in the Explorer, you can now graph as a timeseries, top list or table and group the number of events for a given query. See [Event Analytics][2] to learn more.
+
+You may also [generate metrics][3] with 15-month retention from any event search query to create and monitor historical events and alerts.
+
+{{< img src="events/generate-metrics.png" alt="Image of metrics with the events search query." >}}
+
+
+### Graph events in dashboards
+
+{{< img src="events/graph-events.png" alt="Events Analytics" stype="width:40%;" >}}
+
+You can now graph events for a given query inside your dashboards as a timeseries graph, query value, top list, table and more.
+
+For example, check out the [Monitor Notifications Overview][4] dashboard, which analyzes monitor alert event trends to help you improve your configuration and reduce alert fatigue.
+
+### New event monitors experience
+
+Event monitors have been ported to use the same standardized set of features as other products (Logs, RUM, APM) and have additional capabilities.
+
+When you create event monitors, the new query search field uses autocomplete, rather than the legacy fill-in-the-blank query.
+
+{{< img src="events/guides/events-migration-monitor-new.png" alt="New UI for monitor query syntax" style="width:100%;" >}}
+
+The new query search allows you to use complex queries in event monitors with new capabilities such as Boolean operators or wildcards.
+
+### Pipelines
+
+With pipelines, events are parsed and enriched by chaining them sequentially through processors. Processors extract meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
+
+## What Changed?
+
+**Note:** The process for sending events remains the same. You can continue sending events using the API, the Agent, or the events via email feature as before.
+
+### Event aggregations are no longer performed or displayed in the UI
+Datadog no longer automatically performs Event aggregation, and no longer groups Events by the `aggregation_key` attribute. The UI no longer displays Event aggregation.
+
+### Event comments are no longer supported or displayed in the UI
+Comments created using the API with the `user_update` event type will be displayed as normal events.
+
+### Status remapping in queries
 Some status values have changed:
 
 | Legacy status | New status |
@@ -55,7 +96,24 @@ Some status values have changed:
 | info          | INFO       |
 | error         | ERROR      |
 
-#### Event query syntax examples before and after 
+### Source remapping in queries
+Many Event source names have changed. See the full list of affected [source names][5].
+
+### The monitor evaluation window is limited to 48 hours.
+Your monitors are not evaluated beyond a 48 hour window. If you need to use a longer evaluation window, you can [generate custom metrics][3] from events and use a metrics monitor, where the evaluation window can be up to one month.
+
+### You can group by only up to 4 facets.
+(Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example N = 30 resulting hosts if 3 facets and one facet is `host`.
+  * One facet results in a limit of 1000 top values.
+  * Two facets results in a limit of 30 top values per facet (at most 900 groups)
+  * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
+  * Four facets results in a limit of five top values per group (at most 625 groups)
+
+If you are using these features, [contact Support][6] to get help finding an alternative solution.
+
+## Examples
+
+### Event query syntax examples before and after
 
 Show events from GitHub or Chef
 : Legacy syntax</br>
@@ -86,27 +144,11 @@ Use wildcards to search for prefixes and suffixes
 Not available
 : New syntax </br>
 `*web` matches all event messages ending with `web`</br>
-`source:amazon*` matches all events that source starts with `amazon` 
+`source:amazon*` matches all events that source starts with `amazon`
 
+### Event monitors API syntax examples before and after
 
-### Event monitors
-Event monitors have also been ported to use the same standardized set of features as other products (logs, RUM, traces) with new capabilities.
-
-#### Event monitors query syntax
-
-When you create event monitors, the new query search field has autocomplete, rather than the legacy fill-in-the-blank query:
-
-**Before:**
-{{< img src="events/guides/events-migration-monitor-legacy.png" alt="Legacy UI for monitor query syntax" style="width:100%;" >}}
-
-**After:**
-{{< img src="events/guides/events-migration-monitor-new.png" alt="New UI for monitor query syntax" style="width:100%;" >}}
-
-This means you can use complex queries in event monitors with all the added capabilities listed above such as Boolean operators or wildcards.
-
-#### Event monitors API syntax examples before and after
-
-The [Event monitors API][6] has a new monitor query syntax (See "Event V2 Alert Query" section), with Average and Cardinality rollup methods and fewer required attributes. 
+The [Event monitors API][7] has a new monitor query syntax (See "Event V2 Alert Query" section), with Average and Cardinality rollup methods and fewer required attributes.
 
 No Slack events in the past 24 hours
 : Legacy syntax </br>
@@ -118,13 +160,13 @@ EC2 Instance marked for maintenance
 : Legacy syntax </br>
 `events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`
 : New syntax </br>
-`events("Upcoming AWS maintenance event").rollup("count").last("2d") >= 1`
+`events('"Upcoming AWS maintenance event"').rollup("count").by("name,host").last("2d") >= 1`
 
 Zabbix or Prometheus has triggered an alert for a service today
 : Legacy syntax </br>
 `events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0`
 : New syntax </br>
-`events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0`
+`events("source:(prometheus OR zabbix) status:error tags:service").rollup("count").last("1d") > 0`
 
 No events received in a datacenter for service `datadog-agent`
 : Legacy syntax </br>
@@ -132,34 +174,10 @@ Legacy Event Monitors do not support cardinality rollup.
 : New syntax </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
 
-
-#### Other event monitor changes
-
-* **The monitor evaluation window is limited to 48 hours.** Your monitors are not evaluated beyond a 48 hour window. If you need to use a longer evaluation window, you can generate custom metrics from events and use a metrics monitor, where the evaluation window can be up to one month.
-
-* **To group results by tag, add the tag as a facet.** Create a facet from any tag. In the Events Explorer:
-  1. Click **Add** at the top of the facet bar.
-  2. Select the tag that you wish to add as a facet. 
-  3. Click **Add**.
-
-* **You can group by up to 4 facets.** (Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example N = 30 resulting hosts if 3 facets and one facet is `host`.
-  * One facet results in a limit of 1000 top values. 
-  * Two facets results in a limit of 30 top values per facet (at most 900 groups)
-  * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
-  * Four facets results in a limit of five top values per group (at most 625 groups)
-
-### Other deprecated events features
-
-* **Event aggregations are no longer displayed in the UI**, but they are still available though the API.
-* **Event comments are no longer supported in the UI.** Comments created using the API with `user_update` event type are displayed as normal events.
-* **You can no longer create new events from the UI**, but you can still use the API for posting new events.
-
-If you are using these features, [contact Support][3] to get help finding an alternative solution.
-
-
-[1]: /events/explorer/
-[2]: https://app.datadoghq.com/event/explorer
-[3]: /help/
-[4]: https://github.com/DataDog/events-v2-migration-script
-[5]: /api/latest/events/#query-the-event-stream
-[6]: /api/latest/monitors/#create-a-monitor
+[1]: /events/explorer
+[2]: /events/explorer/#event-analytics
+[3]: /events/#generate-custom-metrics-from-events
+[4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
+[5]: /events/guides/new_events_sources/
+[6]: /help/
+[7]: /api/latest/monitors/#create-a-monitor

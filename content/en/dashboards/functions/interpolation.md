@@ -36,7 +36,7 @@ The `default_zero()` function is intended to address the following use cases (th
 - Aligning gauges as 0 when performing arithmetic on sparse metrics (note: `COUNT` or `RATE` type metrics queried `as_count()` or `as_rate()` are _always_ aligned as 0, so using `default_zero()` does not change how they are aligned; it only affects `GAUGE` type metrics).
 - Resolving monitors from a no-data condition. This works for both simple and multi-alerts, but the value 0 must not cause the monitor to trigger. For example, this would not work for a monitor with the query `avg(last_10m):avg:system.cpu.idle{*} < 10` because this monitor triggers (instead of resolving) when it evaluates to 0. Avoid using this function for error rate monitors with `as_count()` queries. See the [as_count() in Monitor Evaluations guide][2] for more details.
 - Filling in empty intervals in sparse (but nonempty) series for visual reasons or to affect the min/max/average of a timeseries in a monitor evaluation.
-- Showing the value 0 on the query value widget when there is no data.
+- Showing the value 0 on the timeseries widget when there is no data.
 
 ### Example
 

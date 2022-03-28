@@ -9,7 +9,7 @@ aliases:
 
 [APM & Continuous Profiler][1] powers you to find service bottlenecks, analyze distributed traces and code performance across your microservices architecture.
 
-There are two options available for pricing, depending on whether APM and Profiling are bundled. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to filter and group your application data with spans indexed by [tagged-based custom retention filters][3].
+There are two options available for pricing, depending on whether APM and Profiling are bundled. Control the stream of ingested data with [ingestion controls][2]. Control which spans are kept for the retention period by indexing them with [tagged-based retention filters][3].
 
 | Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -140,7 +140,7 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **6. How is the host billing related to your services?**
 
-APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. Tracing without Limits is billed on the basis of [Indexed and Ingested span][13] count. To estimate how many ingested and indexed spans each of your services is sending, see the [Usage Metrics][14] documentation.
+APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services.  Additionally, over the monthly allocation by host, APM is billed on the basis of Ingested span volume and Indexed span count. To estimate how many ingested and indexed spans each of your services is sending, see the [ingestion][2] and [retention][13] documentation.
 
 **7. What happens to your existing App Analytics filters?**
 
@@ -164,8 +164,8 @@ Yes. Let Datadog know if you are interested in buying the Continuous Profiler wi
 
 
 [1]: /tracing/
-[2]: /tracing/trace_search_and_analytics/
-[3]: /tracing/trace_retention_and_ingestion/#retention-filters
+[2]: /tracing/trace_ingestion/ingestion_controls
+[3]: /tracing/trace_retention/#retention-filters
 [4]: /account_management/billing/pricing/#infrastructure-monitoring
 [5]: /account_management/billing/pricing/#apm
 [6]: /tracing/profiling/
@@ -175,5 +175,5 @@ Yes. Let Datadog know if you are interested in buying the Continuous Profiler wi
 [10]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
 [11]: /account_management/billing/
 [12]: /tracing/setup_overview/setup/java/?tab=containers#configure-the-datadog-agent-for-apm
-[13]: /tracing/trace_retention_and_ingestion/
-[14]: /tracing/trace_retention_and_ingestion/usage_metrics
+[13]: /tracing/trace_retention/
+[14]: /tracing/trace_retention/usage_metrics

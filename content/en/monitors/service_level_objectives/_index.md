@@ -87,6 +87,10 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
 
+**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][15], available on the [Apple App Store][16] and Google Play Store[17].
+
+{{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
+
 ### SLO tags
 
 When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][9].
@@ -173,17 +177,38 @@ When you create a correction window for an SLO, the time period you specify is r
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-Status corrections are in public beta through the [SLO status corrections API][12], [Terraform][13], and the UI.
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][12]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+
+For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
+
+Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that: 
+- If the end time of a one-time correction is before the past 90 days, it does count towards your limit.
+- If the end time of the final repetition of a recurring correction is before the past 90 days, it does not count towards your limit.
+
+The 90 day limits per SLO are as follows:
+
+| Correction Type   | Limit per SLO |
+| ----------------- | ------------- |
+| One-time          | 100           |
+| Daily recurring   | 2             |
+| Weekly recurring  | 3             |
+| Monthly recurring | 5             |
+
+You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][13], or a [Terraform resource][14].
+
+{{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI"  >}}
 
 #### Access in the UI 
 
 To access SLO status corrections in the UI:
 
 1. Create a new SLO or click on an existing one.
-2. Navigate to an SLO’s detailed side panel view.
+2. Navigate to an SLO’s details side panel view.
 3. Under the gear icon, select **Correct Status** to access the **Status Corrections** creation modal.
-4. Select the **Time Correction Window**, **Correction Type**, and add **Notes**.
-5. Click **Apply Correction**.
+4. Choose between `One-Time` and `Recurring` in the **Select the Time Correction Window**, and specify the time period you wish to correct.
+5. Select a **Correction Type**.
+6. Optionally add **Notes**.
+7. Click **Apply Correction**.
 
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view. 
 
@@ -202,5 +227,9 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [9]: /monitors/service_level_objectives/#saved-views
 [10]: /api/v1/events/#query-the-event-stream
 [11]: /monitors/create/types/event/
-[12]: /api/latest/service-level-objective-corrections/
-[13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[12]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[13]: /api/latest/service-level-objective-corrections/
+[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[15]: /mobile
+[16]: https://apps.apple.com/app/datadog/id1391380318
+[17]: https://play.google.com/store/apps/details?id=com.datadog.app

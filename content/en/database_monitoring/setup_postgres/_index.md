@@ -5,7 +5,7 @@ description: Setting up Database Monitoring on a Postgres database
 disable_sidebar: true
 ---
 
-{{< site-region region="us3,us5,gov" >}} 
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -19,7 +19,7 @@ disable_sidebar: true
 | Postgres 12 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 13 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
-For setup instructions, select your hosting type: 
+For setup instructions, select your hosting type:
 
-{{< partial name="dbm/dbm-setup-postgres" >}} 
+{{< partial name="dbm/dbm-setup-postgres" >}}
 

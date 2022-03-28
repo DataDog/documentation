@@ -1,7 +1,15 @@
 {
+  "audit": {
+    "name": "Audit",
+    "description": "Search your Audit Logs events over HTTP."
+  },
+  "authn-mappings": {
+    "name": "AuthN Mappings",
+    "description": "[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers."
+  },
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
-    "description": "Security signals generated based file and process activity in workloads."
+    "description": "Workload activity security rules for generating events using the Datadog security Agent."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
@@ -29,7 +37,7 @@
   },
   "logs-archives": {
     "name": "Logs Archives",
-    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in our UI."
+    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in web UI."
   },
   "logs-metrics": {
     "name": "Logs Metrics",
@@ -46,6 +54,10 @@
   "processes": {
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization."
+  },
+  "rum": {
+    "name": "RUM",
+    "description": "Search your RUM events over HTTP."
   },
   "roles": {
     "name": "Roles",

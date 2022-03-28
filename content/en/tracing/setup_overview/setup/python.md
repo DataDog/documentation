@@ -62,7 +62,7 @@ ddtrace-run python app.py
 
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data by default at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -74,22 +74,56 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
 
-    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples:
 
-    You can also set the hostname and port in code:
+   ```
+   DD_TRACE_AGENT_URL=http://custom-hostname:1234
+   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+   ```
 
-    ```python
-    import os
-    from ddtrace import tracer
+   The connection for traces can also be configured in code:
 
-    tracer.configure(
-        hostname="custom-hostname",
-        port="1234",
-    )
-    ```
-{{< site-region region="us3,us5,eu,gov" >}} 
+   ```python
+   from ddtrace import tracer
+
+   # Network sockets
+   tracer.configure(
+       https=False,
+       hostname="custom-hostname",
+       port="1234",
+   )
+
+   # Unix domain socket configuration
+   tracer.configure(
+       uds_path="/var/run/datadog/apm.socket",
+   )
+   ```
+
+   Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist then stats are sent to `http://localhost:8125`.
+
+   If a different configuration is required, the `DD_DOGSTATSD_URL` environment variable can be used. Some examples:
+   ```
+   DD_DOGSTATSD_URL=http://custom-hostname:1234
+   DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
+   ```
+   The connection for stats can also be configured in code:
+
+   ```python
+   from ddtrace import tracer
+
+   # Network socket
+   tracer.configure(
+     dogstatsd_url="http://localhost:8125",
+   )
+
+   # Unix domain socket configuration
+   tracer.configure(
+     dogstatsd_url="unix:///var/run/datadog/dsd.socket",
+   )
+   ```
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -119,7 +153,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 {{% /tab %}}
 {{< /tabs >}}
 
-Once you've finished setup and are running the tracer with your application, you can run `ddtrace-run --status` to check that configurations are working as expected. Note that the output from this command does not reflect configuration changes made during runtime in code.
+Once you've finished setup and are running the tracer with your application, you can run `ddtrace-run --info` to check that configurations are working as expected. Note that the output from this command does not reflect configuration changes made during runtime in code.
 
 For more advanced usage, configuration, and fine-grain control, see Datadog's [API documentation][3].
 
@@ -147,6 +181,12 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 
 `DD_VERSION`
 : Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
+
+`DD_TRACE_SAMPLE_RATE`
+: Enable trace volume control
+
+`DD_TRACE_RATE_LIMIT`
+: Maximum number of spans to sample per-second, per-Python process. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
 `DD_TAGS`
 : A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.
@@ -180,6 +220,7 @@ Override the port that the default tracer submits DogStatsD metrics to.
 `DD_LOGS_INJECTION`
 : **Default**: `false`<br>
 Enable [connecting logs and trace injection][8].
+
 
 ## Further Reading
 

@@ -136,6 +136,8 @@ The following table presents the list of collected resources and the minimal Age
 | CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
+| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
+| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
@@ -310,7 +312,11 @@ To prevent the leaking of sensitive data, you can scrub sensitive words in conta
 - `credentials`
 - `stripetoken`
 
-You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words. You need to setup this environment variable for the following agents:
+You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words. 
+
+**Note**: The additional sensitive words must be in lowercase, as the Agent compares the text with the pattern in lowercase. This means `password` scrubs `MY_PASSWORD` to `MY_*******`, while `PASSWORD` does not.
+
+You need to setup this environment variable for the following agents:
 
 - process-agent
 - cluster-agent

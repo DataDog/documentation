@@ -7,7 +7,7 @@ further_reading:
     tag: Documentation
     text: アプリケーションのインスツルメンテーション
 ---
-Python Datadog Trace ライブラリはオープンソースです。詳細については、[Github リポジトリ][1]をご覧ください。
+Python Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
 
 トレーサーの最新バージョンでは、Python バージョン `2.7+` と `3.5+` がサポートされています。Python `3.4` は、Python トレーサーのバージョン `0.35.x` 以下でサポートされています。
 

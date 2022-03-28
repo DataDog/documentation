@@ -275,7 +275,11 @@ To collect processes information for all your containers and send it to Datadog:
             "SYS_ADMIN",
             "SYS_RESOURCE",
             "SYS_PTRACE",
-            "NET_ADMIN"
+            "NET_ADMIN",
+            "NET_BROADCAST",
+            "NET_RAW",
+            "IPC_LOCK",
+            "CHOWN"
           ]
         }
       },

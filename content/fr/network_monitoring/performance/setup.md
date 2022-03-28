@@ -307,7 +307,10 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
                                   - SYS_RESOURCE
                                   - SYS_PTRACE
                                   - NET_ADMIN
+                                  - NET_BROADCAST
+                                  - NET_RAW
                                   - IPC_LOCK
+                                  - CHOWN
                       command:
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
@@ -395,7 +398,10 @@ services:
     - SYS_RESOURCE
     - SYS_PTRACE
     - NET_ADMIN
+    - NET_BROADCAST
+    - NET_RAW
     - IPC_LOCK
+    - CHOWN
     security_opt:
     - apparmor:unconfined
 ```

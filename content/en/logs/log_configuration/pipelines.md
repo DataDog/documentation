@@ -146,7 +146,7 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 
 [1]: /tracing/connect_logs_and_traces/
-[2]: /logs/log_configuration/#trace-remapper
+[2]: /logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -158,7 +158,10 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
     **Note**: The pipeline filtering is applied before any of the pipeline's processors. For this reason, you cannot filter on an attribute that is extracted in the pipeline itself.
 
-4. Name your pipeline, and press **Save**.
+4. Name your pipeline.
+5. (Optional) Grant editing access to processors in the pipeline.
+6. (Optional) Add tags and a description to the pipeline. The description can be used to state the pipeline's purpose and which team owns it.
+7. Press **Save**.
 
 An example of a log transformed by a pipeline:
 
@@ -213,6 +216,16 @@ A pipeline can contain nested pipelines and processors whereas a nested pipeline
 It is possible to move a pipeline into another pipeline to transform it into a nested pipeline:
 
 {{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="Drag and drop nested pipelines" video="true"  width="80%" >}}
+
+## Manage your pipelines
+
+Identify when the last change to a pipeline or processor was made and which user made the change using the modification information on the pipeline. Filter your pipelines using this modification information, as well as other faceted properties such as whether the pipeline is enabled or read-only.
+
+{{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="How to manage your pipelines with faceted search, pipeline modificiation information, and the reordering modal" style="width:50%;">}}
+
+Reorder pipelines precisely with the `Move to` option in the sliding option panel. Scroll and click on the exact position to move the selected pipeline to using the `Move to` modal. Pipelines cannot be moved into other read-only pipelines. Pipelines containing nested pipelines can only be moved to other top level positions. They cannot be moved into other pipelines.
+
+{{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="How to reorder your pipelines precisely using the move to modal" style="width:50%;">}}
 
 ## Further Reading
 

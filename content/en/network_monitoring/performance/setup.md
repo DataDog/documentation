@@ -14,6 +14,9 @@ further_reading:
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
+    - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
+      tag: "Blog"
+      text: "Datadog NPM now supports Consul networking"
 ---
 
 Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
@@ -208,7 +211,8 @@ To enable Network Performance Monitoring for Windows hosts:
 To enable Network Performance Monitoring with Kubernetes using Helm, add:
 
   ```yaml
-  networkMonitoring:
+  datadog:
+    networkMonitoring:
       enabled: true
   ```
 to your values.yaml. **Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
@@ -301,7 +305,10 @@ If you already have the [Agent running with a manifest][4]:
                                   - SYS_RESOURCE
                                   - SYS_PTRACE
                                   - NET_ADMIN
+                                  - NET_BROADCAST
+                                  - NET_RAW
                                   - IPC_LOCK
+                                  - CHOWN
                       command:
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
@@ -371,19 +378,23 @@ spec:
 To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```shell
-$ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
+$ docker run --cgroupns host \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
 -e DD_SYSTEM_PROBE_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
-      -v /var/run/docker.sock:/var/run/docker.sock:ro \
-      -v /proc/:/host/proc/:ro \
-      -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
 -v /sys/kernel/debug:/sys/kernel/debug \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
 --cap-add=SYS_RESOURCE \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
+--cap-add=NET_BROADCAST \
+--cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
+--cap-add=CHOWN \
 gcr.io/datadoghq/agent:latest
 ```
 
@@ -411,7 +422,10 @@ services:
     - SYS_RESOURCE
     - SYS_PTRACE
     - NET_ADMIN
+    - NET_BROADCAST
+    - NET_RAW
     - IPC_LOCK
+    - CHOWN
     security_opt:
     - apparmor:unconfined
 ```

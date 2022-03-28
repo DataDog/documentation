@@ -469,7 +469,7 @@ Les tags qui sont définis directement sur des spans spécifiques remplacement l
 
 ### Liens OpenTelemetry
 
-- Consultez [Rubygems][12] ou [Github][13] pour en savoir plus sur l'utilisation de l'exportateur Datadog pour OpenTelemetry dans une application Ruby.
+- Consultez [Rubygems][12] ou [GitHub][13] pour en savoir plus sur l'utilisation de l'exportateur Datadog pour OpenTelemetry dans une application Ruby.
 
 ## Pour aller plus loin
 

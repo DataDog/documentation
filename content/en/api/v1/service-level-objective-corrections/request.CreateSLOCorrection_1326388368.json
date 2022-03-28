@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "category": "Scheduled Maintenance",
+      "description": "Example-Create_an_SLO_correction_with_rrule_returns_OK_response",
+      "slo_id": "string",
+      "start": 1636629071,
+      "duration": 3600,
+      "rrule": "FREQ=DAILY;INTERVAL=10;COUNT=5",
+      "timezone": "UTC"
+    },
+    "type": "correction"
+  }
+}

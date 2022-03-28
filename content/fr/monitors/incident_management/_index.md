@@ -2,10 +2,19 @@
 title: Gestion des incidents
 kind: documentation
 description: Créer et gérer des incidents
+further_reading:
+  - link: dashboards/querying/#incident-management-analytics
+    tag: Documentation
+    text: Incident Management Analytics
+  - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
+    tag: Blog
+    text: Meilleures pratiques pour écrire des postmortems d'incident
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">La fonctionnalité de gestion des incidents n'est pas disponible pour le site gouvernemental de Datadog.</div>
 {{< /site-region >}}
+
+{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="À partir d'un graphique"  style="width:80%;">}}
 
 Tout événement susceptible d'entraîner une interruption des services de votre organisation peut être considéré comme un incident, et il est souvent nécessaire d'avoir un système bien défini pour traiter ce genre d'événements. La fonctionnalité de gestion des incidents de Datadog fournit un système grâce auquel votre organisation peut identifier et réduire les incidents de manière efficace.
 
@@ -18,7 +27,9 @@ Dans Datadog, les situations suivantes justifient la déclaration d'un incident�
 
 ## Utilisation
 
-La gestion des incidents ne nécessite aucune installation. Pour consulter vos incidents, accédez à la page [Incidents][1] où vous trouverez tous les incidents en cours. Vous pouvez configurer des champs supplémentaires pour tous les incidents dans les [Paramètres d'incident][2].
+La gestion des incidents ne nécessite aucune installation. Pour consulter vos incidents, accédez à la page [Incidents][1] où vous trouverez tous les incidents en cours. Vous pouvez configurer des champs supplémentaires pour tous les incidents dans les [paramètres d'incident][2].
+
+**Remarque** : créez et gérez vos incidents avec l'[application mobile Datadog][3], disponible sur l'[Apple App Store][4] et sur le [Google Play Store][5].
 
 ### Créer un incident
 
@@ -40,9 +51,9 @@ Vous pouvez utiliser le presse-papiers Datadog pour rassembler plusieurs monitor
 
 #### À partir d'un monitor
 
-Vous pouvez déclarer un incident directement depuis un monitor, en cliquant sur le bouton d'exportation du graphique, puis sur **Declare incident**. La fenêtre de création d'incident apparaît et le monitor est ajouté en tant que signal à l'incident.
+Vous pouvez déclarer un incident directement depuis un monitor, en cliquant sur **Declare incident**. La fenêtre de création d'incident apparaît et le monitor est ajouté en tant que signal à l'incident.
 
-{{< img src="monitors/incidents/from-a-graph.png" alt="Créer un incident depuis un monitor" style="width:80%;">}}
+{{< img src="monitors/incidents/incident-from-monitor.png" alt="Créer un incident depuis un monitor" style="width:80%;">}}
 
 Vous pouvez également ajouter un monitor à un incident existant.
 
@@ -50,11 +61,17 @@ Vous pouvez également ajouter un monitor à un incident existant.
 
 #### Depuis la page des incidents
 
-Depuis l'[interface des incidents][1], cliquez sur le bouton **New Incident** pour en créer un.
+Sur l'[interface Datadog][1], cliquez sur **New Incident** pour en créer un.
+
+{{< img src="monitors/incidents/incident_declaration_modal.jpeg" alt="Fenêtre de déclaration d'un incident" style="width:80%;">}}
+
+La fenêtre de déclaration d'incident offre aux intervenants un volet latéral optionnel qui affiche des informations d'aide ainsi que les descriptions des différents niveaux de sévérité et statuts utilisés par votre organisation. Les informations d'aide et les descriptions peuvent être personnalisées depuis les [paramètres d'incident][6].
+
+{{< img src="monitors/incidents/incident_information_settings.jpeg" alt="Écran de personnalisation des informations sur les incidents" style="width:80%;">}}
 
 #### Depuis Slack
 
-Une fois l'[intégration Datadog activée sur Slack][3], vous pouvez utiliser la commande `/datadog incident` depuis n'importe quel canal Slack pour déclarer un nouvel incident.
+Une fois l'[intégration Datadog activée sur Slack][7], vous pouvez utiliser la commande `/datadog incident` depuis n'importe quel canal Slack pour déclarer un nouvel incident.
 
 Dans la fenêtre de création, ajoutez un titre descriptif, indiquez si l'incident a eu un impact sur les clients (yes, no, unknown) et sélectionnez un niveau de gravité (1-5, unknown).
 
@@ -68,7 +85,11 @@ Si l'utilisateur qui déclare l'incident est membre de votre compte Datadog, cet
 
 Lorsqu'un incident est déclaré depuis Slack, un canal dédié est créé.
 
-Pour en savoir plus sur l'intégration Datadog/Slack, consultez la [documentation][3].
+Pour en savoir plus sur l'intégration Datadog/Slack, consultez la [documentation dédiée][7].
+
+{{< site-region region="eu" >}}
+Si vous êtes un client {{< region-param key="dd_site_name" >}} et que vous utilisez Slack, restez informé sur l'application Slack en ouvrant un ticket à l'adresse https://help.datadoghq.com/.
+{{< /site-region >}}
 
 ### Description de l'incident
 
@@ -99,9 +120,9 @@ Pour finaliser la création de votre incident, cliquez sur « Declare Incident�
 
 ### Mettre à jour l'incident et sa chronologie
 
-Le statut d'un incident peut être mis à jour directement depuis la [page de présentation][1] de l'incident ou depuis le canal Slack qui lui est dédié. Pour mettre à jour un incident depuis Slack, utilisez la commande suivante pour faire apparaitre la fenêtre de mise à jour : `/datadog incident update`
+Le statut d'un incident peut être mis à jour directement depuis la page de présentation de l'incident ou depuis le canal Slack qui lui est dédié. Pour mettre à jour un incident depuis son canal Slack, utilisez la commande suivante pour faire apparaitre la fenêtre de mise à jour : `/datadog incident update`
 
-Vous pouvez également mettre à jour la partie relative à l'impact afin de spécifier si l'incident a eu un impact sur les clients, sa chronologie, et s'il est toujours en cours ou non. Afin d'être complète, cette section nécessite également une description de l'étendue de l'impact.
+Mettez à jour la partie relative à l'impact afin de spécifier si l'incident a eu un impact sur les clients, les dates de début et de fin de cet impact, et si l'incident est toujours en cours ou non. Une description de l'étendue de l'impact est également nécessaire.
 
 Dans l'en-tête de l'incident, vous pouvez voir l'état, la gravité, le timestamp, l'impact et la durée de l'incident, ainsi que le nom des personnes qui s'en occupent. Vous pouvez également informer les personnes concernées des éventuelles mises à jour. Des liens permettent d'accéder rapidement aux chaînes de discussion (si vous n'utilisez pas l'application Slack pour Datadog), aux vidéoconférences et aux analyses post-mortem liées (le cas échéant).
 
@@ -116,50 +137,6 @@ Les statuts par défaut comprennent **Active**, **Stable** et **Resolved**. **Co
 * Resolved : incident qui n'affecte plus les utilisateurs et dont l'enquête est terminée.
 * Completed : toutes les étapes de remédiation sont terminées.
 
-#### Champs d'évaluation
-
-Les champs d'évaluation correspondent aux métadonnées et au contexte que vous pouvez définir pour chaque incident. Ces champs sont des [tags de métrique key:value][4]. Les clés sont ajoutées dans les paramètres, et les valeurs sont ensuite disponibles lorsque vous évaluez l'impact d'un incident depuis sa page de présentation. Vous pouvez par exemple ajouter un champ Application. Pour chaque incident, les champs suivants peuvent être évalués :
-
-* **Root Cause** : ce champ de texte vous permet de décrire la cause d'origine, les déclencheurs, et les facteurs ayant contribué à cet incident.
-* **Detection Method** : précisez de quelle manière l'incident a été détecté au moyen des options par défaut (customer, employee, monitor, other ou unknown).
-* **Services** : si l'APM est configuré, vos services APM sont disponibles à des fins d'évaluation de l'incident. Pour en savoir plus sur la configuration de vos services dans l'APM, consultez [la documentation][5].
-    * Si vous n'utilisez pas l'APM Datadog, vous pouvez importer les noms de service au format CSV. Les valeurs importées en CSV sont uniquement disponibles dans la Gestion des incidents à des fins d'évaluation de l'incident.
-    * Datadog élimine les doublons sans tenir compte de la casse, ce qui signifie que si vous utilisez "Mon Service" ou "mon service", seul le nom qui a été ajouté manuellement est affiché.
-    * Datadog remplace les noms de service de l'APM par ceux de la liste importée manuellement.
-    * Notez que si le service est un service APM et qu'aucune métrique n'a été transmise durant les 7 derniers jours, il n'apparaît pas dans les résultats de la recherche.
-    * Intégrez les données d'autres fonctionnalités Datadog afin d'évaluer précisément l'impact des services. Pour les clients qui utilisent l'APM Datadog, les services APM sont automatiquement renseignés dans le champ de la propriété Services.
-* **Teams** : importez un fichier CSV pour renseigner ce champ. Les valeurs importées en CSV sont uniquement disponibles dans la Gestion des incidents à des fins d'évaluation de l'incident.
-
-## Exemple de workflow
-
-### Détection d'un problème
-
-Imaginons que vous consultez un dashboard et que vous remarquez qu'un service en particulier affiche un très grand nombre d'erreurs. À l'aide du bouton d'exportation en haut à droite d'un widget, vous pouvez déclarer un incident.
-
-{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="À partir d'un graphique"  style="width:80%;">}}
-
-### Déclaration d'un incident et création de votre équipe
-
-Utilisez la boîte de dialogue New Incident pour composer votre équipe et avertir ses membres. Le graphique à partir duquel vous avez créé l'incident est automatiquement joint en tant que signal. Vous avez la possibilité d'ajouter tout autre signal susceptible d'aider votre équipe à commencer à résoudre le problème. Les intégrations Slack et PagerDuty vous permettent d'envoyer des notifications via ces services.
-
-{{< img src="monitors/incidents/workflow-2-modal-1.png" alt="Boîte de dialogue New Incident"  style="width:60%;">}}
-
-### Communication et dépannage
-
-Si vous avez installé l'[application Slack pour Datadog][3], l'intégration Slack peut créer automatiquement un canal dédié à l'incident, ce qui vous permet de consolider les communications avec votre équipe et de commencer le dépannage.
-
-Pour les clients non européens qui utilisent Slack, [demandez à accéder à la version bêta][6] de l'application Slack pour Datadog. Pour les clients européens qui utilisent Slack, envoyez un e-mail à support@datadoghq.com pour en savoir plus sur l'application Slack.
-
-{{< img src="monitors/incidents/workflow-3-slack-1-1.png" alt="Communiquer"  style="width:80%;">}}
-
-### Mise à jour de l'incident et création d'une analyse post-mortem
-
-Mettez à jour l'incident à mesure que la situation évolue. Définissez le statut sur `Stable` pour indiquer que le problème a été atténué, et remplissez le champ concernant l'impact sur les clients afin que votre organisation sache dans quelle mesure le problème a affecté les clients. Ensuite, définissez le statut sur `Resolved` une fois que l'incident a été complètement résolu. Il existe un quatrième statut facultatif, `Completed`, qui peut être utilisé pour indiquer que toutes les étapes de remédiation ont été réalisées. Ce statut peut être activé dans les [Paramètres d'incident][2].
-
-{{< img src="monitors/incidents/workflow-4-update-2.png" alt="Mise à jour de l'incident"  style="width:60%;">}}
-
-Vous pouvez mettre à jour le statut et la gravité dans la section `Properties` de chaque incident.
-
 À mesure que le statut d'un incident évolue, Datadog suit les délais de résolution de la manière suivante :
 
 | Changement de statut | Date et heure de résolution |
@@ -168,23 +145,63 @@ Vous pouvez mettre à jour le statut et la gravité dans la section `Properties`
 | `Active` à `Resolved` à `Completed`, `Active` à `Completed` à `Resolved` | Date et heure inchangées |
 | `Active` à `Completed` à `Active` à `Resolved` | Date et heure de la dernière transition |
 
-Une fois qu'un incident est classé comme résolu, vous pouvez générer automatiquement l'analyse post-mortem.
+#### Champs d'évaluation
 
-{{< img src="monitors/incidents/postmortem.png" alt="générer automatiquement une analyse post-mortem" style="width:80%;">}}
+Les champs d'évaluation correspondent aux métadonnées et au contexte que vous pouvez définir pour chaque incident. Ces champs sont des [tags de métrique key:value][9]. Les clés sont ajoutées dans les paramètres, et les valeurs sont ensuite disponibles lorsque vous évaluez l'impact d'un incident depuis sa page de présentation. Vous pouvez par exemple ajouter un champ Application. Pour chaque incident, les champs suivants peuvent être évalués :
 
-### Suivi et enseignement
+* **Root Cause** : ce champ de texte vous permet de décrire la cause d'origine, les déclencheurs, et les facteurs ayant contribué à cet incident.
+* **Detection Method** : précisez de quelle manière l'incident a été détecté au moyen des options par défaut (customer, employee, monitor, other ou unknown).
+* **Services** : si l'APM est configuré, vos services APM sont disponibles à des fins d'évaluation de l'incident. Pour en savoir plus sur la configuration de vos services dans l'APM, consultez [la documentation][10].
+    * Si vous n'utilisez pas l'APM Datadog, vous pouvez importer les noms de service au format CSV. Les valeurs importées en CSV sont uniquement disponibles dans la Gestion des incidents à des fins d'évaluation de l'incident.
+    * Datadog élimine les doublons sans tenir compte de la casse, ce qui signifie que si vous utilisez "Mon Service" ou "mon service", seul le nom qui a été ajouté manuellement est affiché.
+    * Datadog remplace les noms de service de l'APM par ceux de la liste importée manuellement.
+    * Notez que si le service est un service APM et qu'aucune métrique n'a été transmise durant les 7 derniers jours, il n'apparaît pas dans les résultats de la recherche.
+    * Intégrez les données d'autres fonctionnalités Datadog afin d'évaluer précisément l'impact des services. Pour les clients qui utilisent l'APM Datadog, les services APM sont automatiquement renseignés dans le champ de la propriété Services.
+* **Teams** : les équipes sont définies dans les [champs de propriété][11] des paramètres d'incident. Importez la liste des équipes depuis un fichier CSV. Les valeurs importées en CSV sont uniquement disponibles dans la Gestion des incidents à des fins d'évaluation de l'incident.
 
-Créez des tâches d'atténuation ou de remédiation post-mortem. Ajoutez les tâches de votre choix dans le champ de texte, définissez une date limite et attribuez-les à un membre d'équipe pour effectuer un suivi de ces tâches. Cochez la case en regard d'une tâche pour indiquer qu'elle est terminée.
+## Données collectées
 
-Associez un document d'analyse post-mortem, réexaminez ce qui a posé problème et ajoutez des tâches de suivi. L'utilisation des [Notebooks][7] Datadog pour créer des post-mortems permet de renforcer la collaboration en temps réel. Pour relier un notebook existant à un incident, cliquez sur le signe plus sous `Other Docs`. Cliquez sur le notebook associé pour le modifier en temps réel avec les membres de votre équipe.
+La solution de gestion des incidents recueilles les données d'analyse suivantes :
 
-{{< img src="monitors/incidents/workflow-5-postmortem-1.png" alt="Analyse post-mortem"  style="width:60%;">}}
+* Nombre d'incidents
+* Durée de l'impact sur les clients
+* Durée sur le statut Active
+* Durée sur le statut Stable
+* Délai avant réparation (heure de fin de l'impact sur les clients - heure de création)
+* Délai avant résolution (heure de résolution - heure de création)
+
+Pour en savoir plus sur les graphiques de gestion des incidents, consultez la section [Incident Management Analytics][12].
+
+## Intégrations
+
+En plus de l'intégration avec [Slack][7], la solution de gestion des incidents prend en charge les intégrations suivantes :
+
+- [PagerDuty][13], pour envoyer des notifications à PagerDuty.
+- [Jira][14], pour créer un ticket Jira dédié à un incident.
+- [Webhooks][15], pour envoyer des notifications relatives à un incident via des webhooks (par exemple, pour [envoyer des SMS via Twilio][16]).
+
+## Prêt à essayer ?
+
+Découvrez un exemple de workflow dans le guide [Débuter avec la Gestion des incidents][17].
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/incidents
 [2]: https://app.datadoghq.com/incidents/settings
-[3]: /fr/integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[4]: /fr/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
-[5]: /fr/tracing/#2-instrument-your-application
-[6]: https://app.datadoghq.com/incidents/ddslackapp
-[7]: https://app.datadoghq.com/notebook/list
-[8]: https://docs.datadoghq.com/fr/integrations/slack/?tab=slackapplicationus
+[3]: /fr/mobile
+[4]: https://apps.apple.com/app/datadog/id1391380318
+[5]: https://play.google.com/store/apps/details?id=com.datadog.app
+[6]: /fr/monitors/incident_management/incident_settings#information
+[7]: /fr/integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
+[8]: /fr/integrations/slack/
+[9]: /fr/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
+[10]: /fr/tracing/#2-instrument-your-application
+[11]: https://app.datadoghq.com/incidents/settings#Property-Fields
+[12]: /fr/monitors/incident_management/analytics/#overview
+[13]: /fr/integrations/pagerduty/
+[14]: /fr/integrations/jira/
+[15]: /fr/integrations/webhooks/
+[16]: /fr/integrations/webhooks/#sending-sms-through-twilio
+[17]: /fr/getting_started/incident_management

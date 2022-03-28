@@ -204,7 +204,7 @@
         dest_path: '/tracing/setup_overview/setup/'
         file_name: 'ruby.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"]
+          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
           title: Tracing Ruby Applications
           kind: documentation
           code_lang: ruby
@@ -274,6 +274,20 @@
             - /serverless/datadog_lambda_library/
             - /serverless/serverless_integrations/cli/
 
+  - repo_name: synthetics-ci-github-action
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/synthetics/cicd_integrations/'
+        file_name: 'github_actions.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
+          title: Synthetics CI GitHub Actions
+          kind: documentation
+
   - repo_name: dd-sdk-android
     contents:
     - action: pull-and-push-file
@@ -292,7 +306,7 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
@@ -310,7 +324,7 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
@@ -328,7 +342,43 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
+              text: "Explore Datadog RUM"
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/rum_mobile_vitals.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'mobile_vitals.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md"]
+          title: Mobile Vitals
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/"
+              tag: "Blog"
+              text: "Monitor Mobile Vitals in Datadog"
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/integrated_libraries_android.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'integrated_libraries.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
+          title: Android Integrated Libraries
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
@@ -346,26 +396,8 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
-              text: "Explore Datadog RUM"
-    - action: pull-and-push-file
-      branch: master
-      globs:
-      - 'docs/integrated_libraries_android.md'
-      options:
-        dest_path: '/real_user_monitoring/android/'
-        file_name: 'integrated_libraries.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
-          title: Android Integrated Libraries
-          kind: documentation
-          further_reading:
-            - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
-              text: "dd-sdk-android Source code"
-            - link: "/real_user_monitoring"
-              tag: "Homepage"
-              text: "Explore Datadog RUM"
+              tag: "Documentation"
+              text: "Explore Real User Monitoring"
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
@@ -570,13 +602,7 @@
     - action: security-rules
       branch: main
       globs:
-        - "security-monitoring/*.json"
-        - "security-monitoring/*.md"
-      options:
-        dest_path: '/security_platform/default_rules/'
-    - action: compliance-rules
-      branch: main
-      globs:
+        # old
         - "configuration/*.json"
         - "configuration/*.yaml"
         - "configuration/*.yml"
@@ -585,6 +611,17 @@
         - "runtime/**/*.yaml"
         - "runtime/**/*.yml"
         - "runtime/**/*.md"
+        # new
+        - "workload-security/backend-rules/*.yaml"
+        - "workload-security/backend-rules/*.md"
+        - "security-monitoring/*.json"
+        - "security-monitoring/*.md"
+        - "posture-management/**/*.json"
+        - "posture-management/**/*.yaml"
+        - "posture-management/**/*.yml"
+        - "posture-management/**/*.md"
+        - "application-security/*.json"
+        - "application-security/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
 

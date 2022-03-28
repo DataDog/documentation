@@ -34,7 +34,7 @@ This page explains the basic usage of these checks, enabling you to import all y
 
 To collect your exposed metrics:
 
-1. Edit the `openmetrics.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][8]. See the [sample openmetrics.d/conf.yaml][9] for all available configuration options. This is the minimum required configuration needed to enable the integration::
+1. Edit the `openmetrics.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][8]. See the [sample openmetrics.d/conf.yaml][9] for all available configuration options. This is the minimum required configuration needed to enable the integration:
 
     ```yaml
     init_config:
@@ -86,6 +86,7 @@ Find below the full list of parameters that can be used for your `instances`:
 | `max_returned_metrics`                  | integer                                 | optional  | 2000          | The check limits itself to 2000 metrics by default. Increase this limit if needed.                                                                                                                                                                                   |
 | `bearer_token_auth`                     | boolean                                 | optional  | false         | Set `bearer_token_auth` to `true` to add a bearer token authentication header. **Note**: If `bearer_token_path` is not set, `/var/run/secrets/kubernetes.io/serviceaccount/token` is used as the default path.                                                       |
 | `bearer_token_path`                     | string                                  | optional  | none          | The path to a Kubernetes service account bearer token file (make sure the file exists and is mounted correctly). **Note**: Set `bearer_token_auth` to `true` to enable adding the token to HTTP headers for authentication.                                          |
+| `collect_counters_with_distributions`   | boolean                                 | optional  | false         | Whether or not to also collect the observation counter metrics ending in `.sum` and `.count` when sending histogram buckets as Datadog distribution metrics. This implicitly enables the `histogram_buckets_as_distributions` option. |
 
 **Note**: All parameters but `send_distribution_buckets` and `send_distribution_counts_as_monotonic` are supported by both OpenMetrics check and Prometheus check.
 

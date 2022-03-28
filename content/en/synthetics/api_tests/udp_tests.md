@@ -31,7 +31,7 @@ After choosing to create an `UDP` Test, define your test's request.
 
 1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
 2. Enter the string you want to send in your test. 
-3. Specify the amount of time in seconds before the test times out.
+3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your UDP test.
 5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
@@ -121,7 +121,7 @@ To create a local variable, click **Create Local Variable** at the top right han
 `{{ timestamp(n, unit) }}` 
 : Generates a timestamp in one of our accepted units with a value corresponding to the timestamp the test is initiated at +/- `n` chosen unit.
 
-When you have entered a name and a value, click **Add Variable**. (standardize this sentence)
+When you have entered a name and a value, click **Add Variable**.
 
 ### Use variables
 
@@ -148,14 +148,23 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 ## Permissions
 
 By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][9].
 
-If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+
+### Restrict access
+
+Access restriction is available for customers using [custom roles][11] on their accounts.
+
+You can restrict access to a UDP test based on the roles in your organization. When creating a UDP test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
@@ -163,7 +172,7 @@ If you have access to the [custom role feature][10], add your user to any custom
 
 [1]: /api/latest/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations/
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [6]: /monitors/notify/#notify-your-team
@@ -171,3 +180,4 @@ If you have access to the [custom role feature][10], add your user to any custom
 [8]: /synthetics/settings/#global-variables
 [9]: /account_management/rbac/
 [10]: /account_management/rbac#custom-roles
+[11]: /account_management/rbac/#create-a-custom-role

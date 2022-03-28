@@ -14,13 +14,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md
 display_name: Cyral
 draft: false
 git_integration_title: cyral
 guid: 2a854a73-b0da-4954-b34e-fc1cd05ba8e8
 integration_id: cyral
 integration_title: Cyral
+integration_version: 0.0.1
 is_public: true
 kind: integration
 maintainer: product@cyral.com
@@ -40,24 +41,23 @@ Ce check permet de surveiller un sidecar MySQL [Cyral[1] avec l'Agent Datadog.
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Le check Cyral n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer.
 
 ### Installation
 
-Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Cyral sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][3] pour installer des checks avec une [version < 6.8 de l'Agent][4] ou avec l'[Agent Docker][5] :
+Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check Cyral sur votre host. Consultez la section [Utiliser les intégrations de la communauté][3] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
 
-1. [Téléchargez et lancez l'Agent Datadog][6].
-2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+1. Exécutez la commande suivante pour installer l'intégration de l'Agent :
 
    ```shell
    datadog-agent integration install -t datadog-cyral==<INTEGRATION_VERSION>
    ```
 
-3. Configurez votre intégration comme [n'importe quelle autre intégration fournie avec l'Agent][7].
+2. Configurez votre intégration comme une [intégration][4] de base.
 
 ### Configuration
 
-1. Modifiez le fichier `cyral.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Cyral. Consultez le [fichier d'exemple cyral.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `cyral.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Vault. Consultez le [fichier d'exemple cyral.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
     ```yaml
     init_config:
@@ -71,7 +71,7 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][9] et cherchez `cyral` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][7] et cherchez `cyral` dans la section Checks.
 
 ## Données collectées
 
@@ -100,16 +100,14 @@ Cyral n'inclut aucun événement.
 
 Vérifiez que le paramètre `url` dans `cyral.yaml` est correctement configuré.
 
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://cyral.com/
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
-[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[5]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[5]: https://github.com/DataDog/integrations-extras/blob/master/cyral/datadog_checks/cyral/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/getting_started/integrations/
-[8]: https://github.com/DataDog/integrations-extras/blob/master/cyral/datadog_checks/cyral/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-extras/blob/master/cyral/metadata.csv
-[11]: https://docs.datadoghq.com/fr/help/
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-extras/blob/master/cyral/metadata.csv
+[9]: https://docs.datadoghq.com/fr/help/

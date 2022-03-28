@@ -9,13 +9,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md
 display_name: Lighthouse
 draft: false
 git_integration_title: lighthouse
 guid: 4e66e6d6-bcb0-4250-b950-95ef11176494
 integration_id: lighthouse
 integration_title: Lighthouse
+integration_version: 2.0.0
 is_public: true
 kind: integration
 maintainer: mustin.eric@gmail.com
@@ -42,23 +43,22 @@ Le check Lighthouse n'est pas inclus avec le package de l'[Agent Datadog][2] : 
 
 ### Installation
 
-Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer votre check Google Chrome Lighthouse sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][3] pour installer des checks avec une [version < 6.8 de l'Agent][4] ou avec l'[Agent Docker][5] :
+Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check Lighthouse sur votre host. Consultez la section [Utiliser les intégrations de la communauté][3] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
 
-1. [Téléchargez et lancez l'Agent Datadog][2].
-2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+1. Exécutez la commande suivante pour installer l'intégration de l'Agent :
 
    ```shell
    datadog-agent integration install -t datadog-lighthouse==<INTEGRATION_VERSION>
    ```
 
-3. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
+2. Configurez votre intégration comme une [intégration][4] de base.
 
 ### Configuration
 
-1. Modifiez le fichier `lighthouse.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos [métriques](#metriques) Lighthouse.
-   Consultez le [fichier d'exemple lighthouse.d/conf.yam][8] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `lighthouse.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] pour commencer à recueillir vos [métriques](#metriques) Lighthouse.
+   Consultez le [fichier d'exemple lighthouse.d/conf.yam][6] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][9].
+2. [Redémarrez l'Agent][7].
 
 ### Prérequis
 
@@ -70,9 +70,9 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
    npm -v
    ```
 
-   - Si ce n'est pas le cas, [installez-les][10].
+   - Si ce n'est pas le cas, [installez-les][8].
 
-2. [Lighthouse][11] :
+2. [Lighthouse][9] :
    - Vérifiez que Lighthouse est installé.
 
    ```shell
@@ -89,7 +89,7 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 
 3. Google Chrome/Chromium ou Puppeteer :
 
-   - [Chromium][12]
+   - [Chromium][10]
       + Debian/Ubuntu
 
       ```shell
@@ -106,8 +106,8 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 
       **Remarque** : cette intégration exécute Chrome/Chromium en mode headless. Il se peut que Chrome/Chromium requiert un kernel 4.4 ou ultérieur sur RHEL/CentOS pour que le mode headless fonctionne correctement.
 
-   - [Puppeteer][13]
-      + Vérifiez que Lighthouse est installé.
+   - [Puppeteer][11]
+      + Vérifiez que Puppeteer est installé.
 
       ```shell
       # example
@@ -129,7 +129,7 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][14] et cherchez `lighthouse` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][12] et cherchez `lighthouse` dans la section Checks.
 
 ## Données collectées
 
@@ -147,21 +147,19 @@ L'intégration Lighthouse n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][16].
+Besoin d'aide ? Contactez [l'assistance Datadog][14].
 
 [1]: https://developers.google.com/web/tools/lighthouse
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
-[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[5]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[6]: https://docs.datadoghq.com/fr/getting_started/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[8]: https://github.com/DataDog/integrations-extras/blob/master/lighthouse/datadog_checks/lighthouse/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://nodejs.org/en/download
-[11]: https://github.com/GoogleChrome/lighthouse
-[12]: https://www.chromium.org/
-[13]: https://github.com/GoogleChrome/puppeteer
-[14]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[15]: https://github.com/DataDog/integrations-extras/blob/master/lighthouse/datadog_checks/lighthouse/metadata.csv
-[16]: https://docs.datadoghq.com/fr/help/
+[3]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[6]: https://github.com/DataDog/integrations-extras/blob/master/lighthouse/datadog_checks/lighthouse/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://nodejs.org/en/download
+[9]: https://github.com/GoogleChrome/lighthouse
+[10]: https://www.chromium.org/
+[11]: https://github.com/GoogleChrome/puppeteer
+[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[13]: https://github.com/DataDog/integrations-extras/blob/master/lighthouse/datadog_checks/lighthouse/metadata.csv
+[14]: https://docs.datadoghq.com/fr/help/

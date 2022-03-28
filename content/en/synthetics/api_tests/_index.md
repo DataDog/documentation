@@ -45,7 +45,7 @@ API tests run from Datadog [managed locations][3] or [private locations][4], all
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[2]: /synthetics/cicd_testing
+[2]: /synthetics/cicd_integrations
 [3]: /api/v1/synthetics/#get-all-locations-public-and-private
 [4]: /synthetics/private_locations
 [5]: /synthetics/multistep/

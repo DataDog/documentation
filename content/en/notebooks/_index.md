@@ -4,15 +4,12 @@ kind: documentation
 aliases:
   - /graphing/notebooks/
 further_reading:
+- link: "https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/"
+  tag: "Blog"
+  text: "Create and navigate a documentation library"
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"
-- link: "/dashboards/screenboard/"
-  tag: "Documentation"
-  text: "Create a Screenboard"
-- link: "/dashboards/timeboard/"
-  tag: "Documentation"
-  text: "Create a Timeboard"
 - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
   tag: 'Blog'
   text: 'Best practices for writing incident postmortems'
@@ -36,7 +33,7 @@ Everyone on your team can open or edit any notebook, but a notebook can only be 
 
 ## Commenting
 
-To add a comment, select some text or hover over a graph. The **Add comment** button will appear to the right of the cell.
+To add a comment, select some text or hover over a graph. The **Add comment** button is displayed to the right of the cell.
 
 {{< img src="notebooks/add_comment.png" alt="add a comment to text" style="width:90%;">}}
 
@@ -93,7 +90,7 @@ Text in a notebook is formatted with [Markdown][9], which enables the use of hea
 
 ### Manipulating cells
 
-To open a cell for editing, mouse over it and use `CMD + Click`, or click **Edit**. To close a cell, click outside it, press `ESC`, or press `CMD + Enter`. Use **Cancel** to discard your changes to the cell. Only one cell may be open at a time.
+To open a cell for editing, mouse over it and use `Cmd + Click` / `Ctrl + Click`, or click **Edit**. To close a cell, click outside it, press `ESC`, or press `Cmd + Enter` / `Ctrl + Enter`. Use **Cancel** to discard your changes to the cell. Only one cell may be open at a time.
 
 To insert cells, use the **+** button that appears to the left of the cell. To share, clone, or delete cells, use the action tray that appears above the cell on hover. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data.
 

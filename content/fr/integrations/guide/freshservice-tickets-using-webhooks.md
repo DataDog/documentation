@@ -1,5 +1,5 @@
 ---
-title: Tickets Freshservice avec Webhooks
+title: Tickets Freshservice avec des webhooks
 kind: guide
 author: Trevor Veralrud
 further_reading:
@@ -7,15 +7,15 @@ further_reading:
     tag: Documentation
     text: Intégration Webhooks
 ---
-Ce guide vous expliquera comment utiliser notre intégration Webhooks pour ouvrir de nouveaux tickets dans Freshservice lorsqu'un monitor envoie une alerte.
+Ce guide vous explique comment utiliser l'intégration Webhooks Datadog pour ouvrir de nouveaux tickets dans Freshservice lorsqu'un monitor envoie une alerte.
 
 ## Implémentation
 
-Pour commencer, ouvrez le [carré d'intégration Webhooks][1], accédez à l'onglet Configuration, puis faites défiler la page vers le bas pour ajouter un nouveau Webhook.
+Pour commencer, ouvrez le [carré d'intégration Webhooks][1], accédez à l'onglet Configuration, puis faites défiler la page vers le bas pour ajouter un nouveau webhook.
 
 ### Nom
 
-Donnez un nom à votre Webhook. Ce nom est utilisé dans le message de votre monitor (consultez la section [Utilisation](#utilisation)) avec `@webhook-<NOM>`. Par exemple, si vous nommez votre webhook freshservice, vous pouvez ouvrir un ticket à partir de votre monitor en mentionnant `@webhook-freshservice` dans le message du monitor.
+Donnez un nom à votre webhook. Ce nom est utilisé dans le message de votre monitor (consultez la section [Utilisation](#utilisation)) avec `@webhook-<NOM>`. Par exemple, si vous nommez votre webhook freshservice, vous pouvez ouvrir un ticket à partir de votre monitor en mentionnant `@webhook-freshservice` dans le message du monitor.
 
 ### URL
 
@@ -41,14 +41,14 @@ Saisissez une nouvelle charge utile de ticket au format JSON. L'exemple suivant 
 
 **Remarques** :
 
-* Les valeurs telles que `$EVENT_TITLE` sont des variables utilisées par notre intégration Webhook. Pour obtenir la liste complète de ces variables ainsi que leur signification, consultez le carré d'intégration Webhook ou notre [documentation sur l'intégration Webhook][3].
-* Entrez manuellement une adresse e-mail pour le champ email au lieu d'utiliser la variable `$EMAIL` : cette dernière est uniquement renseignée lorsque le webhook est mentionné dans un commentaire du *flux d'événements* et ne peut pas être utilisée dans les *alertes de monitor*. 
-* Le champ *description* de la charge utile accepte le HTML. Notre variable `$EVENT_MSG` génère le message de votre monitor au format Markdown, qui n'est pas pris en charge par l'API de Freshservice. Nous utilisons donc `$TEXT_ONLY_MSG` à la place, avec un snapshot de graphique.
+* Les valeurs telles que `$EVENT_TITLE` sont des variables utilisées par l'intégration Webhooks. Pour obtenir la liste complète de ces variables ainsi que leur signification, consultez le carré d'intégration Webhooks ou la [documentation sur l'intégration Webhooks][3].
+* Saisissez manuellement une adresse e-mail dans le champ d'e-mail au lieu d'utiliser la variable `$EMAIL` : cette dernière est uniquement renseignée lorsque le webhook est mentionné dans un commentaire du *flux d'événements* et ne peut pas être utilisée dans les *alertes de monitor*. 
+* Le champ `description` de la charge utile prend en charge le code HTML. La variable `$EVENT_MSG` génère le message de votre monitor au format Markdown, qui n'est pas pris en charge par l'API de Freshservice. Utilisez donc `$TEXT_ONLY_MSG` à la place, avec un snapshot de graphique.
 * Les champs `status` et `priority` sont des nombres mappés à différentes valeurs. Pour afficher ces valeurs, consultez [l'endpoint de ticket de Freshservice][2].
 
 ### Authentification
 
-L'API de Freshservice utilise [l'authentification basique][4]. Vos identifiants chiffrés en Base64 doivent être envoyés dans l'en-tête de requête `Authorization`. Les identifiants acceptés sont votre nom d'utilisateur et votre mot de passe au format `nomutilisateur:motdepasse`, ou votre clé d'API Freshservice.
+L'API de Freshservice utilise [l'authentification basique][4]. Vos identifiants chiffrés en Base64 doivent être envoyés dans l'en-tête de requête `Authorization`. Sont acceptés comme identifiants votre nom d'utilisateur et votre mot de passe au format `nomutilisateur:motdepasse`, ou votre clé d'API Freshservice.
 
 Pour configurer l'authentification dans votre webhook, ajoutez la ligne suivante à votre section **Headers** :
 
@@ -58,13 +58,13 @@ Pour configurer l'authentification dans votre webhook, ajoutez la ligne suivante
 
 ### Pour terminer
 
-Dans le carré d'intégration Webhook, cliquez sur **Install Integration** ou **Update Configuration** (si vous avez déjà ajouté une définition de webhook) pour enregistrer vos modifications.
+Dans le carré d'intégration Webhooks, cliquez sur **Install Integration** ou **Update Configuration** (si vous avez déjà ajouté une définition de webhook) pour enregistrer vos modifications.
 
 ## Utilisation
 
-Vous pouvez maintenant ajouter `@webhook-<NOM>` au message de votre monitor. Le webhook se déclenche lorsque le monitor change d'état.
+Ajoutez `@webhook-<NOM>` au message de votre monitor. Le webhook se déclenche lorsque le monitor change d'état.
 
-Nous vous conseillons d'ajouter votre @mention à l'intérieur de l'expression conditionnelle `{{#is_alert}}` ou `{{#is_warning}}`, par exemple :
+Il est recommandé d'ajouter votre @mention à l'intérieur de l'expression conditionnelle `{{#is_alert}}` ou `{{#is_warning}}`. Exemple :
 
 ```text
 {{#is_alert}}
@@ -83,7 +83,7 @@ L'intégration Webhooks peut uniquement créer des tickets. La mise à jour d'un
 
 ### État et priorité
 
-Les variables `$ALERT_STATUS` et `$PRIORITY` renvoient des chaînes (comme `ALERT` et `NORMAL`) plutôt qu'une valeur numérique, tel qu'attendu par l'API de Freshservice. Pour configurer différents états et niveaux de priorité, créez des webhooks en double avec les champs d'état et de priorité codés en dur. Mentionnez ensuite ces webhooks à l'intérieur d'une expression conditionnelle, par exemple :
+Les variables `$ALERT_STATUS` et `$PRIORITY` renvoient des chaînes (comme `ALERT` et `NORMAL`) plutôt qu'une valeur numérique, tel qu'attendu par l'API de Freshservice. Pour configurer différents états et niveaux de priorité, dupliquez des webhooks avec les champs d'état et de priorité codés en dur. Mentionnez ensuite ces webhooks à l'intérieur d'une expression conditionnelle. Exemple :
 
 ```text
 {{#is_warning}}
@@ -98,11 +98,11 @@ Les variables `$ALERT_STATUS` et `$PRIORITY` renvoient des chaînes (comme `ALER
 
 ### Tagging
 
-Le tagging est pris en charge dans l'API de Freshservice, mais notez ce qui suit :
+Le tagging est pris en charge dans l'API de Freshservice. Veuillez toutefois noter ce qui suit :
 
-* Le paramètre tags de votre charge utile JSON doit être un tableau. Cela signifie que vous ne pouvez pas utiliser la variable de webhook `$TAGS`, qui renvoie une liste de chaînes séparées par des virgules.
+* Le paramètre tags de votre charge utile au format JSON doit être un tableau. Cela signifie que vous ne pouvez pas utiliser la variable de webhook `$TAGS`, qui renvoie une liste de chaînes séparées par des virgules.
 * Les tags ajoutés à votre charge utile JSON ne doivent pas contenir de caractère `:`. Il est donc possible que vous ne puissiez pas mapper tous vos tags Datadog à Freshservice. Si un caractère `:` existe dans vos tags, votre requête échoue.
-* Consultez notre [documentation sur l'intégration Webhook][3] pour découvrir d'autres variables pouvant être utilisées pour les tags Freshservice. Dans l'exemple suivant, on utilise `$HOSTNAME` et `$ORG_ID` :
+* Consultez la [documentation sur l'intégration Webhooks][3] pour découvrir d'autres variables pouvant être utilisées pour les tags Freshservice. Dans l'exemple suivant, les paramètres `$HOSTNAME` et `$ORG_ID` sont utilisés :
 
 ```json
 {
@@ -117,7 +117,7 @@ Le tagging est pris en charge dans l'API de Freshservice, mais notez ce qui suit
 
 ### Dépannage
 
-Si l'envoi de votre webhook échoue après le déclenchement de votre monitor, accédez au flux d'événements et recherchez `sources:webhooks` `status:error`. Cette requête renvoie les événements associés à des webhooks ayant échoué et contenant des informations de dépannage, par exemple :
+Si l'envoi de votre webhook échoue après le déclenchement de votre monitor, accédez au flux d'événements et recherchez `sources:webhooks` `status:error`. Cette requête renvoie les événements associés à des webhooks ayant échoué et contenant des informations de dépannage. Exemple :
 
 ```text
 - Reply status code was: HTTP 401

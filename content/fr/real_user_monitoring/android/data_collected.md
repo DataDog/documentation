@@ -9,7 +9,7 @@ further_reading:
     tag: Page d'accueil
     text: Explorer le service RUM de Datadog
 kind: documentation
-title: Données Android RUM recueillies
+title: Données RUM recueillies (Android)
 ---
 Le SDK Real User Monitoring Datadog génère six types d'événements :
 

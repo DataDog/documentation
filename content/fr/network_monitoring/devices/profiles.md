@@ -57,7 +57,7 @@ Si besoin, vous pouvez définir d'autres métriques dans les instances. Ces mét
 
 Les profils sont interchangeables. Ainsi, les périphériques qui partagent des dépendances MIB peuvent réutiliser les mêmes profils. Par exemple, le [profil Cisco c3850][2] peut être utilisé pour de nombreux switchs Cisco.
 
-Pour en savoir plus sur les profils fournis par Datadog, consultez le [référentiel Github][2].
+Pour en savoir plus sur les profils fournis par Datadog, consultez le [référentiel GitHub][2].
 
 ## Pour aller plus loin
 
