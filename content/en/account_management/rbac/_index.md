@@ -139,7 +139,7 @@ Find an example of how to delete a Role in the [Datadog Create Role API document
 
 ## Restrict access to dashboards and monitors
 
-Once you have RBAC roles set up, you can restrict access to dashboards, monitors, and synthetic tests by user role. For more information, see the [Dashboard Permissions docs][8], the [Monitors Permissions docs][9], and [Synthetics Permissions docs][10].
+Once you have RBAC roles set up, you can restrict access to dashboards, monitors, and synthetic tests by user role. For more information, see [Dashboard Permissions][8], [Monitor Permissions][9], and [Synthetics Permissions][10].
 
 ## Further Reading
 
@@ -152,6 +152,6 @@ Once you have RBAC roles set up, you can restrict access to dashboards, monitors
 [5]: /notebooks/
 [6]: /api/v2/roles/
 [7]: /account_management/rbac/permissions/
-[8]: /dashboards/#restrict-access
-[9]: /getting_started/monitors/#restrict-access
+[8]: /dashboards/#permissions
+[9]: /monitors/notify/#permissions
 [10]: /synthetics/browser_tests/#permissions
