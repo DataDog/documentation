@@ -1,25 +1,25 @@
 ---
-"categories":
+categories:
 - イベント管理
 - アラート設定
 - モニタリング
-"ddtype": "webhook"
-"dependencies": []
-"description": "SolarWinds Orion から Datadog イベントストリームにアラートを取り込みます。"
-"doc_link": "https://docs.datadoghq.com/integrations/solarwinds/"
-"draft": false
-"git_integration_title": "solarwinds"
-"has_logo": true
-"integration_id": ""
-"integration_title": "SolarWinds"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"manifest_version": "1.0"
-"name": "solarwinds"
-"public_title": "Datadog-SolarWinds インテグレーション"
-"short_description": "SolarWinds Orion から Datadog イベントストリームにアラートを取り込みます。"
-"version": "1.0"
+ddtype: webhook
+dependencies: []
+description: SolarWinds Orion から Datadog イベントストリームにアラートを取り込みます。
+doc_link: https://docs.datadoghq.com/integrations/solarwinds/
+draft: false
+git_integration_title: solarwinds
+has_logo: true
+integration_id: ''
+integration_title: SolarWinds
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: '1.0'
+name: solarwinds
+public_title: Datadog-SolarWinds インテグレーション
+short_description: SolarWinds Orion から Datadog イベントストリームにアラートを取り込みます。
+version: '1.0'
 ---
 
 ## 概要
@@ -62,13 +62,21 @@ SolarWinds で新規トリガーアクションを作成します:
 ### 投稿するトリガーアクション本文
 ``` 
 {
+    "acknowledged": "${N=Alerting;M=Acknowledged}",
+    "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
+    "alert_description": "${N=Alerting;M=AlertDescription}",
+    "alert_details_url": "${N=Alerting;M=AlertDetailsUrl}",
+    "alert_id": "${N=Alerting;M=AlertDefID}",
     "alert_message": "${N=Alerting;M=AlertMessage}",
     "alert_name": "${N=Alerting;M=AlertName}",
     "alert_severity": "${N=Alerting;M=Severity}",
-    "alert_details_url": "${N=Alerting;M=AlertDetailsUrl}",
-    "alert_id": "${N=Alerting;M=AlertDefID}",
     "application": "${N=Generic;M=Application}",
-    "alert_description": "${N=Alerting;M=AlertDescription}",
+    "device_type": "${N=SwisEntity;M=Router.Nodes.CustomProperties.Device_Type}",
+    "host": "${N=SWQL;M=SELECT TOP 1 RelatedNodeCaption FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
+    "host_url": "${N=SWQL;M=SELECT TOP 1 RelatedNodeDetailsUrl FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
+    "ip": "${N=SwisEntity;M=IP_Address}",
+    "location": "${N=SwisEntity;M=Router.Nodes.CustomProperties.City}",
+    "object": "${N=SWQL;M=SELECT TOP 1 EntityCaption FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
     "object_type": "${N=Alerting;M=ObjectType}",
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}"
 }
@@ -77,16 +85,24 @@ SolarWinds で新規トリガーアクションを作成します:
 ### 投稿するリセットアクション本文
 ``` 
 {
+    "acknowledged": "${N=Alerting;M=Acknowledged}",
+    "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
+    "alert_description": "${N=Alerting;M=AlertDescription}",
+    "alert_details_url": "${N=Alerting;M=AlertDetailsUrl}",
+    "alert_id": "${N=Alerting;M=AlertDefID}",
     "alert_message": "${N=Alerting;M=AlertMessage}",
     "alert_name": "${N=Alerting;M=AlertName}",
     "alert_severity": "${N=Alerting;M=Severity}",
-    "alert_details_url": "${N=Alerting;M=AlertDetailsUrl}",
-    "alert_id": "${N=Alerting;M=AlertDefID}",
     "application": "${N=Generic;M=Application}",
-    "alert_description": "${N=Alerting;M=AlertDescription}",
+    "device_type": "${N=SwisEntity;M=Router.Nodes.CustomProperties.Device_Type}",
+    "host": "${N=SWQL;M=SELECT TOP 1 RelatedNodeCaption FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
+    "host_url": "${N=SWQL;M=SELECT TOP 1 RelatedNodeDetailsUrl FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
+    "ip": "${N=SwisEntity;M=IP_Address}",
+    "location": "${N=SwisEntity;M=Router.Nodes.CustomProperties.City}",
+    "object": "${N=SWQL;M=SELECT TOP 1 EntityCaption FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
     "object_type": "${N=Alerting;M=ObjectType}",
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}",
-    “reset”: “true”
+    "reset": "true"
 }
 ``` 
 
@@ -107,4 +123,3 @@ SolarWinds のインテグレーションにサービスチェックは含まれ
 ## トラブルシューティング
 
 ご不明な点は、Datadog サポートまでお問い合わせください
-
