@@ -13460,8 +13460,6 @@ components:
       - lambda_functions_percentage
       - lambda_invocations_usage
       - lambda_invocations_percentage
-      - lambda_usage
-      - lambda_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
       type: string
@@ -13486,8 +13484,6 @@ components:
       - LAMBDA_FUNCTIONS_PERCENTAGE
       - LAMBDA_INVOCATIONS_USAGE
       - LAMBDA_INVOCATIONS_PERCENTAGE
-      - LAMBDA_USAGE
-      - LAMBDA_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
     UsageAttributionSupportedMetrics:
@@ -13503,14 +13499,12 @@ components:
       - infra_host_usage
       - custom_timeseries_percentage
       - container_percentage
-      - lambda_usage
       - api_usage
       - apm_host_percentage
       - infra_host_percentage
       - snmp_usage
       - browser_percentage
       - api_percentage
-      - lambda_percentage
       - npm_host_usage
       - lambda_functions_usage
       - lambda_functions_percentage
@@ -13540,14 +13534,12 @@ components:
       - INFRA_HOST_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
       - CONTAINER_PERCENTAGE
-      - LAMBDA_USAGE
       - API_USAGE
       - APM_HOST_PERCENTAGE
       - INFRA_HOST_PERCENTAGE
       - SNMP_USAGE
       - BROWSER_PERCENTAGE
       - API_PERCENTAGE
-      - LAMBDA_PERCENTAGE
       - NPM_HOST_USAGE
       - LAMBDA_FUNCTIONS_USAGE
       - LAMBDA_FUNCTIONS_PERCENTAGE
@@ -13703,20 +13695,6 @@ components:
           type: number
         lambda_invocations_usage:
           description: The Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        lambda_percentage:
-          description: 'The percentage of Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_percentage instead.'
-          format: double
-          type: number
-        lambda_usage:
-          description: 'The Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_usage instead.'
           format: double
           type: number
         npm_host_percentage:
