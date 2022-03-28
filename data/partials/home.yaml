@@ -80,10 +80,10 @@ nav_sections:
         link: mobile/
         icon: mobile
         desc: View Datadog alerts, incidents, and more on your mobile device
-      - title: Datadog Watchdog
+      - title: Watchdog
         link: watchdog/
         icon: watchdog
-        desc: Proactively detect and surface application and infrastructure anomalies
+        desc: Detect and surface application and infrastructure anomalies
       - title: CI Visibility
         link: continuous_integration/
         icon: ci
