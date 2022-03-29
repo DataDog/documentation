@@ -11387,9 +11387,6 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
-      required:
-      - from_ts
-      - to_ts
       type: object
     SyntheticsBrowserTestResultShortResult:
       description: Object with the result of the last browser test run.
