@@ -42,7 +42,7 @@ skip to the next section.
 
 After the GitHub App is created and installed, you must enable CI Visibility on the accounts and/or repositories you want visibility into.
 
-1. Go to the **[Getting Started][4]** page and clik on **GitHub**.
+1. Go to the **[Getting Started][4]** page and click on **GitHub**.
 2. Click on **Enable Account** for the account you want to enable.
 3. Enable CI Visibility for the whole account by clicking **Enable CI Visibility**.
 4. Alternatively you can enable only individual repositories by scrolling through the repository list and clicking the **Enable CI Visibility** toggle.
