@@ -18,10 +18,10 @@ You may use a shadow DOM for the following use cases:
 - Chat pop-up integrations
 
 <div class="alert alert-info">
-Because the shadow DOM is encapsulated from the HTML element, Synthetic browser tests have limited access to elements rendered in the shadow DOM. The full suite of available actions and assertions may not be supported for shadow DOM elements.
+Because the shadow DOM is encapsulated from the HTML element, Synthetic browser tests have limited access to elements rendered in the shadow DOM. This may prevent the [Datadog browser test recorder extension](https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa) from capturing the [full set of locators needed to target the element on test runs](https://docs.datadoghq.com/synthetics/guide/browser-test-self-maintenance/), which, in turn, may prevent the step from successfully executing on test runs. As such, the full suite of available actions and assertions may not be supported for shadow DOM elements.
 </div>
 
-Depending on the [encapsulation mode][2] and the step objective, you can leverage browser test actions to configure a test that interacts with and validates elements rendered within a shadow DOM. 
+This guide highlights the action and assertion types that may not be supported on elements rendered in the Shadow DOM and offers suggestions for how to work around these limitations. Depending on the [encapsulation mode][2] and the step objective, you can leverage browser test actions to configure a test that interacts with and validates elements rendered within a shadow DOM. 
 
 ## Open mode
 
@@ -56,15 +56,19 @@ let shadowDomElement = element.shadowRoot.querySelector("div > h3")
 return shadowDomElement.textContent.includes("TODO")
 ```
 
-### Confirm entered text
+### Enter text into input fields
 
-To enter text into a text `<input>` field rendered in a shadow DOM, locate the `<input>` element and set the `value` field.
+When text input fields are rendered in the main document's DOM tree, the Datadog browser test recorder will automatically record inputted values and create a [Type Text](https://docs.datadoghq.com/synthetics/browser_tests/actions#type-text) test step.
+
+However, when working with input fields rendered in a Shadow DOM, the recorder may not be able to capture a complete set of reference points to the element. Leading the step to fail on test runs.
+
+As a workaround for entering text into a text input field rendered in a Shadow DOM, add a Javascript assertion that locates the respective `<input>` element and sets the `value` field.
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/validate-text-type.png" alt="Validate entered text rendered in a shadow DOM" style="width:90%;" >}}
 
 For example, the following code snippet validates that the text "Item added with JS assertion" is added in the input field:
 
-```
+```js
 // find element to which the Shadow DOM is attached:
 let element = document.querySelector("body > editable-list")
  
