@@ -27,7 +27,7 @@ Even by reducing the ingestion volume for certain services, the **request, error
 
 Then, because trace data is very repetitive, you will have enough trace samples to investigate any issues. For high throughput services, there should not be any need for you to collect every single request - an important enough problem will always show symptoms in multiple traces. Datadog puts the control in your hands, allowing you to have the visibility that you need to solve problems while remaining within budget.
 
-## How to assess the current state of my services` ingestion configuration ?
+## How to assess the current state of my services' ingestion configuration ?
 
 To assess the current state of applications’ instrumentation, leverage the [Trace Ingestion Control page][1] that provides observability over agent and tracing library configuration.
 
