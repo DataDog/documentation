@@ -18,10 +18,10 @@ You may use a shadow DOM for the following use cases:
 - Chat pop-up integrations
 
 <div class="alert alert-info">
-Because the shadow DOM is encapsulated from the HTML element, Synthetic browser tests have limited access to elements rendered in the shadow DOM. This may prevent the [Datadog browser test recorder extension](https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa) from capturing the [full set of locators needed to target the element on test runs](https://docs.datadoghq.com/synthetics/guide/browser-test-self-maintenance/), which, in turn, may prevent the step from successfully executing on test runs. As such, the full suite of available actions and assertions may not be supported for shadow DOM elements.
+Because the shadow DOM is encapsulated from the HTML element, Synthetic browser tests have limited access to elements rendered in the shadow DOM. This may prevent the [Datadog browser test recorder extension][2] from capturing the [full set of locators needed to target the element on test runs][3], which, in turn, may prevent the step from successfully executing on test runs. As such, the full suite of available actions and assertions may not be supported for shadow DOM elements.
 </div>
 
-This guide highlights the action and assertion types that may not be supported on elements rendered in the Shadow DOM and offers suggestions for how to work around these limitations. Depending on the [encapsulation mode][2] and the step objective, you can leverage browser test actions to configure a test that interacts with and validates elements rendered within a shadow DOM. 
+This guide highlights the action and assertion types that may not be supported on elements rendered in the Shadow DOM and offers suggestions for how to work around these limitations. Depending on the [encapsulation mode][4] and the step objective, you can leverage browser test actions to configure a test that interacts with and validates elements rendered within a shadow DOM. 
 
 ## Open mode
 
@@ -58,7 +58,7 @@ return shadowDomElement.textContent.includes("TODO")
 
 ### Enter text into input fields
 
-When text input fields are rendered in the main document's DOM tree, the Datadog browser test recorder will automatically record inputted values and create a [Type Text](https://docs.datadoghq.com/synthetics/browser_tests/actions#type-text) test step.
+When text input fields are rendered in the main document's DOM tree, the Datadog browser test recorder will automatically record inputted values and create a [Type Text][5] test step.
 
 However, when working with input fields rendered in a Shadow DOM, the recorder may not be able to capture a complete set of reference points to the element. Leading the step to fail on test runs.
 
@@ -102,10 +102,6 @@ shadowDomButton.click()
 return true
 ```
 
-### Advanced form submission
-
-TBD
-
 ## Closed mode
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/closed-shadow-dom.png" alt="Closed Shadow DOM" style="width:30%;" >}}
@@ -119,4 +115,7 @@ However, you can use the `Press Key` action to select the appropriate option. Fo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developers.google.com/web/fundamentals/web-components/shadowdom
-[2]: https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#basic_usage
+[2]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[3]: https://docs.datadoghq.com/synthetics/guide/browser-test-self-maintenance/
+[4]: https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#basic_usage
+[5]: https://docs.datadoghq.com/synthetics/browser_tests/actions#type-text
