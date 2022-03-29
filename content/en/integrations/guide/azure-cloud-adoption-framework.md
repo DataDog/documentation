@@ -9,9 +9,7 @@ further_reading:
 
 ## Overview
 
-Migrating your services from on-premises or other cloud environments to a new cloud environment can be risky. 
-
-Azure's Cloud Adoption Framework has a proven strategy for successful migrations and Datadog's monitoring ensures safe, speedy migrations by measuring the health of your new and original environments in the same system of observability and incident response. 
+Using Azure's Cloud Adoption Framework with Datadog can help you ensure safe, speedy migrations to a new cloud environment, whether from on-premises or other cloud enivornments. 
 
 You can:
 
@@ -20,13 +18,13 @@ You can:
 
 This guide documents the migration process for organizations that follow Azure's Cloud Adoption Framework.
 
-If you don't have a Datadog account yet, you can [start a two-week trial][2].
+If you don't have a Datadog account yet, you can [start a two-week trial][1].
 
 ## Planning
 
 When planning your migration, prepare your Datadog account to monitor your new workloads as soon as they are migrated into your Azure account by doing the following:
 
-1. Enable the [Datadog-Azure integration][1] so your new workloads can indicate their performance and health.
+1. Enable the [Datadog-Azure integration][2] so your new workloads can indicate their performance and health.
 2. Document a tagging strategy that your teams can use to describe their workloads as they migrate.
 3. Configure dashboards that stakeholders can use to follow along the migration progress and understand the overall health of the new workloads.
 4. Establish communication channels for incident response.
@@ -35,9 +33,9 @@ When planning your migration, prepare your Datadog account to monitor your new w
 
 Datadog and Azure have partnered together to offer Datadog's services within your Azure account. For each one of your landing zones, you can create a Datadog resource to link your Datadog account with your Azure account and access your observability data in Azure. 
 
-For more information about this process to help you determine what Azure data you want to collect in Datadog, see the [Microsoft Azure documentation][1].
+For more information about this process to help you determine what Azure data you want to collect in Datadog, see the [Microsoft Azure documentation][2].
 
-The Datadog resource streamlines the setup of a large list of Datadog-Azure integrations and significantly increases your teams' visibility on the health and performance of new Azure workloads. Datadog recommends enabling the [Azure DevOps integration][3] so  your teams can correlate workload performance data with build and release events. 
+The Datadog resource streamlines the setup of a large list of Datadog-Azure integrations and significantly increases your teams' visibility on the health and performance of new Azure workloads. Datadog recommends enabling the [Azure DevOps integration][3] so your teams can correlate workload performance data with build and release events. 
 
 For more information about setting up this integration, see [Microsoft Azure DevOps][4].
 
@@ -63,7 +61,7 @@ Add the following tags to your resources whenever applicable:
 | `workload`     | Clarifies what workload a resource relates to, and assists in legacy-to-cloud performance and KPI comparisons.                                                                                                  |
 | `landing-zone` | Identifies what landing zone a resource exists in (if any) and assists in legacy-to-cloud performance and KPI comparisons.                                                                                     |
 
-Azures Cloud Adoption Framework offers a [pre-defined tagging strategy][6] which slightly overlaps with the list above. Review this document and implement the tags that apply to your organization, especially those that are listed in the **Minimum Suggested Tags** section. 
+Azure's Cloud Adoption Framework offers a [pre-defined tagging strategy][6] which slightly overlaps with the list above. Review this document and implement the tags that apply to your organization, especially those that are listed in the **Minimum Suggested Tags** section. 
 
 ### Dashboards
 
@@ -73,13 +71,13 @@ Once you have a tagging strategy that fits well for your organization, Datadog r
 
 With dashboard template variables, Datadog dashboards provide visibility into wide summaries of data and specific subsets of data by tag. For example, if you add a template variable for the `workload` tag to a dashboard, you can use that dashboard as a summary of the performance of many workloads, and filter the entire dashboard into the performance of a specific workload. 
 
-This way, a single dashboard becomes useful for all your dashboards without requiring you to manage separate dashboards for each workload. 
+This way, a single dashboard becomes useful for all your workloads without requiring you to manage separate dashboards for each workload. 
 
 ### Communication channels for incident response
 
 Many organizations choose to set up dedicated communication channels that reflect the ownership hierarchy of their services or workloads. Datadog recommends pairing the naming convention of these communication channels with your tagging strategy. 
 
-For example, if you have standardized on using an `owner` tag, configure the investigative email groups or communication channels whose names are defined by that `owner` tag value. Configuring [dynamic handles][10] enables your teams to ensure that the right alert goes to the appropriate responder. 
+For example, if you have standardized using an `owner` tag, configure the investigative email groups or communication channels whose names are defined by that `owner` tag value. Configuring [dynamic handles][10] enables your teams to ensure that the right alert goes to the appropriate responder. 
 
 ## Migrating
 
@@ -106,7 +104,7 @@ Once you have installed the Datadog Agent, add the following data collection met
   1. [Add integrations to collect data][12] specific to the technologies your services employ.
   2. [Enable Application Performance Monitoring (APM)][13] to measure the request counts, latency, and error rates of your services.
   3. [Capture the logs generated by your environment][14] to gain deeper context into when your metrics and traces behave unexpectedly. If you have a lot of logs, [store only the most critical logs][15].
-  4. [Enable Network Performance Monitoring (NPM)][16] to ensure efficient communication between your services. NPM is crucial in the migration process because your original environment may need to communicate to your new cloud environment.
+  4. [Enable Network Performance Monitoring (NPM)][16] to ensure efficient communication between your services. NPM is crucial in the migration process because your original environment may need to communicate with your new cloud environment.
 
 Before you migrate your new workload, install the Agent, configure complete data collection on your legacy environment, and design your new workloads to include the Datadog Agent with the same complete data collection. 
 
@@ -114,13 +112,13 @@ Follow your organization's tagging standards to ensure that all performance data
 
 ### Workload health and migration dashboards
 
-Once the health data is flowing into your Datadog account, you can view and understand your environment from Datadog's visualization maps including the [host][17], [container][18], [service][19], [network traffic][20], and from any of the [out-of-the-box dashboards][21] that are specific to the technologies you've integrated. 
+Once the health data is flowing into your Datadog account, you can view and understand your environment from Datadog's visualization maps including the [host][17], [container][18], [service][19], and [network traffic][20] maps, and from any of the [out-of-the-box dashboards][21] that are specific to the technologies you've integrated. 
 
 You can clone and customize those dashboards or create custom dashboards to see the data you need for your specific use cases.
 
 In some cases, it may make sense to visualize the performance of your legacy environment and new workloads side-by-side. 
 
-Follow these steps to recreate this example dashboard:
+Follow these steps to create an example dashboard:
 
 1. [Create a dashboard][22] in your Datadog account.
 2. Click the **Settings** icon on the right hand corner.
@@ -155,8 +153,8 @@ For more information about how to configure SLOs and exposing them to stakeholde
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/azure/?tab=link&site=us3
-[2]: https://us3.datadoghq.com/signup
+[1]: https://us3.datadoghq.com/signup
+[2]: /integrations/azure/?tab=link&site=us3
 [3]: /integrations/azure_devops/#overview
 [4]: /integrations/azure_devops/#setup
 [5]: /integrations/#cat-collaboration
