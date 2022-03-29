@@ -170,13 +170,11 @@ link_checks_preview:
   interruptible: true
 
 missing_tms_preview:
-  image:
-    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
-    entrypoint: [ "" ]
-  tags: ["runner:main"]
+  <<: *base_template
   stage: post-deploy
-  cache: {}
   environment: "preview"
+  allow_failure: true
+  cache: {}
   variables:
     GIT_STRATEGY: none
   dependencies:
