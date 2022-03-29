@@ -35,7 +35,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:brian.deutsch_update-manage-translations
   tags:
     - "runner:main"
   except:
@@ -170,17 +170,21 @@ link_checks_preview:
   interruptible: true
 
 missing_tms_preview:
-  <<: *base_template
+  image:
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
+    entrypoint: [ "" ]
+  tags: ["runner:main"]
   stage: post-deploy
-  environment: "preview"
-  allow_failure: true
   cache: {}
+  environment: "preview"
   variables:
     GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
-    - check_missing_tms
+    # remove dirs we don't need to scan
+    - rm -rf ./public/fr ./public/ja ./public/api/v1/ ./public/api/v2/
+    - GOMAXPROCS=$(nproc --all) vale --glob='*.{html}' ./public
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
@@ -386,6 +390,18 @@ evaluate_missing_metrics:
   only:
     - master
 
+# Test
+manage_untracked_translations:manual:
+  <<: *base_template
+  stage: post-deploy
+  cache: {}
+  environment: "preview"
+  only:
+    - brian.deutsch/translation-sync-test
+  script:
+    - echo "Downloading untracked translation source files..."
+    - manage_untracked_translation_files
+  when: manual
 
 manage_translations:on-schedule:
   <<: *base_template
