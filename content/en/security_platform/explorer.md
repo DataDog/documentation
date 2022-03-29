@@ -20,7 +20,6 @@ From the [Security Signals Explorer][1], correlate and triage security signals. 
 
 In this view, you can:
 
-- [Overview](#overview)
 - [Explore your Security Signals](#explore-your-security-signals)
 - [Inspect a Security Signal](#inspect-a-security-signal)
   - [Threat intelligence](#threat-intelligence)
