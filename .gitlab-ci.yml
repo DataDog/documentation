@@ -397,7 +397,7 @@ manage_untracked_translations:manual:
   cache: {}
   environment: "preview"
   only:
-    - brian.deutsch/translation-sync-test
+    - brian.deutsch/untracked
   script:
     - echo "Downloading untracked translation source files..."
     - manage_untracked_translation_files
