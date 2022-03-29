@@ -31,7 +31,7 @@ Supported SQL Server versions
 : 2019, 2017, 2016, 2014, 2012
 
 Supported Agent versions
-: To ensure you have the best Database Monitoring for SQL Server experience please install the latest release `7.35` Datadog Agent release candidate build:
+: To ensure you have the best Database Monitoring for SQL Server experience install the latest release `7.35` Datadog Agent release candidate build:
 : * Docker: https://hub.docker.com/r/datadog/agent/tags?page=1&name=7.35.0-rc.8
 : * Windows MSI: https://dd-agent-mstesting.s3.amazonaws.com/builds/beta/datadog-agent-7.35.0-rc.8-1-x86_64.msi
 : * Deb: https://apt.datad0g.com/pool/d/da/datadog-agent-dbg_7.35.0~rc.8-1_amd64.deb
