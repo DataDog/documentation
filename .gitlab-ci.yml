@@ -170,17 +170,21 @@ link_checks_preview:
   interruptible: true
 
 missing_tms_preview:
-  <<: *base_template
+  image:
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
+    entrypoint: [ "" ]
+  tags: ["runner:main"]
   stage: post-deploy
-  environment: "preview"
-  allow_failure: true
   cache: {}
+  environment: "preview"
   variables:
     GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
-    - check_missing_tms
+    # remove dirs we don't need to scan
+    - rm -rf ./public/api/v1/ ./public/api/v2/
+    - GOMAXPROCS=$(nproc --all) vale --glob='*.{html}' ./public
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
