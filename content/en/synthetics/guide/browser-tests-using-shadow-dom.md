@@ -27,7 +27,7 @@ Depending on the [encapsulation mode][2] and the step objective, you can leverag
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/open-shadow-dom.png" alt="Open Shadow DOM" style="width:50%;" >}}
 
-In `open` mode, you can use JavaScript assertions to interact with and validate elements rendered in a shadow DOM with the `Element.shadowRoot` property. 
+In `open` mode, normal assertions are unavailable. You can use JavaScript assertions to interact with and validate elements rendered in a shadow DOM with the `Element.shadowRoot` property. 
 
 ### Assert text presence
 
@@ -49,7 +49,7 @@ For example, the following code snippet validates the text "TODO" rendered in an
 // find element to which the Shadow DOM is attached:
 let element = document.querySelector("body > editable-list")
  
-// use shadowRoot property to locate the <h3> element in the Shadow DOM:
+// use the shadowRoot property to locate the <h3> element in the Shadow DOM:
 let shadowDomElement = element.shadowRoot.querySelector("div > h3")
  
 // check textContent of the Shadow DOM element:
@@ -70,7 +70,7 @@ For example, the following code snippet validates that the text "Item added with
 // find element to which the Shadow DOM is attached:
 let element = document.querySelector("body > editable-list")
  
-// use shadowRoot property to locate the <input> element in the Shadow DOM:
+// use the shadowRoot property to locate the <input> element in the Shadow DOM:
 let shadowDomInput = element.shadowRoot.querySelector("input")
  
 // set the value property of the <input> element:
@@ -91,7 +91,7 @@ For example, the following code snippet triggers a click on a button element.
 // find element to which the Shadow DOM is attached:
 let element = document.querySelector("body > editable-list")
  
-// use shadowRoot property to locate the <button> element in the Shadow DOM:
+// use the shadowRoot property to locate the <button> element in the Shadow DOM:
 let shadowDomButton = element.shadowRoot.querySelector("button.editable-list-add-item")
  
 // trigger a click on the button:
@@ -104,9 +104,9 @@ return true
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/closed-shadow-dom.png" alt="Closed Shadow DOM" style="width:30%;" >}}
 
-In `closed` mode, the elements rendered in a shadow DOM are not accessible with JavaScript. You cannot use JavaScript assertions in your browser tests.
+In `closed` mode, normal assertions are unavailable. Additionally, elements rendered in a shadow DOM are not accessible with JavaScript, so you cannot use JavaScript assertions in your browser tests.
 
-However, you can use the `Press Key` action to select the appropriate option. For example, to navigate to a different page by selecting an option from a navigation menu and the menu is rendered in a shadow DOM, use the `tab` key to navigate to the respective option and click the `enter` key to select an option.
+You can use the `Press Key` action to select the appropriate options. For example, to navigate to a different page by selecting an option from a navigation menu and the menu is rendered in a shadow DOM, use the `tab` key to navigate to the respective option and click the `enter` key to select an option.
 
 ## Further Reading
 
