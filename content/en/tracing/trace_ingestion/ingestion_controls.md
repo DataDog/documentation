@@ -6,7 +6,8 @@ aliases:
     - /tracing/trace_ingestion/ingestion_control_page
     - /account_management/billing/usage_control_apm/
     - /tracing/app_analytics/
-description: "Learn how to control span ingestion"
+    - /guide/ingestion_control_page
+description: "Learn how to control Ingestion and Indexing rates with APM."
 further_reading:
 - link: "/tracing/trace_ingestion/mechanisms/"
   tag: "Documentation"
