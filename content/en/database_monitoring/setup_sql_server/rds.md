@@ -64,7 +64,7 @@ Since AWS does not grant direct host access, the Datadog Agent must be installed
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the RDS Integration
+## Install the RDS integration
 
 To collect more comprehensive database metrics and logs from AWS, install the [RDS integration][1].
 

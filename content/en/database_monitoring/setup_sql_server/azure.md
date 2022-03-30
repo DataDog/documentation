@@ -93,7 +93,7 @@ For [SQL Server on Windows Azure VM][1] follow the [Self-hosted instructions][2]
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Azure Integration
+## Install the Azure integration
 
 To collect more comprehensive database metrics and logs from Azure, install the [Azure integration][1].
 
