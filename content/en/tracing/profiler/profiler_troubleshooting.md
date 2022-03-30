@@ -240,7 +240,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    6. Check the following field to ensure that the right url is used:
       ```
-      ["_profilesIngestionEndpoint_url"]="https://intake.profile.datadoghq.com/v1/input",
+      ["_profilesIngestionEndpoint_url"]="http://127.0.0.1:8126/profiling/v1/input",
       ```
 
 Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug files and the following information:
