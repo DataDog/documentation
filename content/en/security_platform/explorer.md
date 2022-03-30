@@ -42,24 +42,22 @@ Click on any Security Signal to open the Security Signal Panel and see more deta
 
 {{< img src="security_platform/security_monitoring/explorer/signal_1.png" alt="Security Signal"  >}}
 
-The details you need first when triaging an issue can be found in the top portion of the Security Signal Panel. From here, you can determine the severity of the signal, when it was generated, access the rule settings, and quickly share this signal to a teammate.
+The details and actions you need first when triaging an issue can be found in the top portion of the Security Signal Panel. From here, you can determine the severity of the signal, when it was generated, access the rule settings, change the state of the signal and quickly share or assign this signal to a teammate.
 
-The first seen and last seen date are updated, if new data is made available from the past or the attack continues. In addition, any configured group bys on the detection rule are displayed in this section. This example detection rule is configured with a group by of `usr.name`. Finally, any tags which are set on the detection rule are displayed below the group bys.
+The first seen and last seen date are updated, if new data is made available from the past or the attack continues. For Cloud SIEM and Cloud Workload Security signals, a "What Happened" section is displayed in the Overview tab and any configured group bys or rule customizations related to the detection rule is displayed. This example detection rule is configured with a group by of `usr.name`. Finally, any tags which are set on the detection rule are displayed below the group bys in the header for CSPM findings and in the Context section for Cloud SIEM and Cloud Workload Security signals.
 
-{{< img src="security_platform/security_monitoring/explorer/signal_2.png" alt="Security Signal"  >}}
+To better understand activity, the Security Signal Panel summarizes tags and attributes from all logs that trigger a signal so you can troubleshoot without having to pivot to Log Explorer. For example, in the Context section, you can determine at a glance the list of IPs attempting to log into a user account, or the AWS accounts and availability zones running the authentication service.
 
-To better understand activity, the Security Signal Panel summarizes tags and attributes from all logs that trigger a signal so you can troubleshoot without having to pivot to Log Explorer. For example, you can determine at a glance the list of IPs attempting to log into a user account, or the AWS accounts and availability zones running the authentication service.
+Below the header of Cloud SIEM and Cloud Workload Security signals are tabs with detailed information related to the signal:
 
-Below the overview of the signal are tabs with detailed information related to the signal:
+- `Overview` displays why the rule generated a security signal in the What Happened section, including group by tag and customization based on rule type. In addition, context information and JSON associated to the signal is displayed.
+- `Rule Details` displays rule details, such as the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The users ccan also pivot into rule modification, such as modifying suppression queries for the rule.
+- `Logs` includes a visualization and list of log samples to provide context on why the signal triggered. Click on any of the samples in the table to see the full log.
+- `Related Signals` are displayed as a timeline of other signals which contain the same group by values to assist with triaging the signal.
 
+Below the header of Cloud Security Posture Management signals are tabs with detailed information related to the signal:
 - `Message` displays the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond.
-
-- `Event Attributes` are helpful when triaging and filtering security signals. For example, you may determine that a user or entity triggered a detection rule as part of their benign behavior, or that a compliance control shouldn't apply across all of your environments. Click on any attribute in Event Attributes tab to generate the dropdown menu and select **Never trigger signals for **`<value>`**** to customize what is visible within the Security Signals Explorer. You can also filter by or view logs related to an attribute from this menu.
-
-  {{< img src="security_platform/security_monitoring/explorer/never_trigger_signal_option.png" alt="Option to never trigger a signal for a set value" >}}
-
-- `Samples` includes a list of log samples to provide context on why the signal triggered. Click on any of the samples to see the full log.
-
+- `Findings` includes a list of each resource that has been evaluated by the rule.
 - `Related Issues` includes a list of other signals which contain the same group by values to assist with triaging the signal.
 
 ### Threat intelligence
