@@ -35,7 +35,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:nsollecito_docs-algolia
   tags:
     - "runner:main"
   except:
@@ -198,8 +198,8 @@ index_algolia_preview:
   timeout: 1h 30m
   script:
     - |-
-        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
         export DISPLAY=:99
         Xvfb :99 -ac &
         echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
@@ -218,7 +218,7 @@ replica_algolia_preview:
     policy: pull
   environment: "preview"
   script:
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
   when: manual
