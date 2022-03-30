@@ -12,6 +12,7 @@ Integration Guides:
     {{< nextlink href="integrations/guide/requests" tag="documentation" >}}Request Datadog Integrations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag="AWS" >}}Using Amazon Cloudformation{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-integration-with-terraform.md" tag="AWS" >}}Creating and managing the AWS integration through Terraform{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-portal" tag="Azure" >}}Datadog in the Azure Portal{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag="Azure" >}}Azure Cloud Adoption Framework with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/mongo-custom-query-collection" tag="Mongo" >}}Collect Mongo Custom Metrics{{< /nextlink >}}
