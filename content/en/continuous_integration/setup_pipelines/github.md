@@ -45,7 +45,7 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 
 ## Disabling GitHub Actions tracing
 
-To disable the CI Visibility GitHub Actions integration make sure the GitHub app is no longer subscribed to the
+To disable the CI Visibility GitHub Actions integration, make sure the GitHub app is no longer subscribed to the
 workflow job and workflow run events. To remove the events:
 
 1. Go to the [GitHub Apps][6] page.
