@@ -407,6 +407,13 @@
       "description": "Get all processes returns \"OK\" response"
     }
   ],
+  "AggregateRUMEvents": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Aggregate RUM events returns \"OK\" response"
+    }
+  ],
   "ListRUMEvents": [
     {
       "group": "rum",
