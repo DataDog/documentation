@@ -22,8 +22,8 @@ kind: guide
 - **`renotify_statuses`** the states from which a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**. Without `renotify_states` set, it renotifies from `Alert` and `No Data` states.
 - **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**, it renotifies without a limit.
 - **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification that is allowed elsewhere. Not applicable if `renotify_interval` is `null`. Default: **null**.
-- **`notify_audit`** a Boolean indicating whether tagged users are notified on changes to this monitor. Default: **False**
-- **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True**. Examples:
+- **`notify_audit`** a boolean indicating whether tagged users are notified on changes to this monitor. Default: **False**
+- **`include_tags`** a boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True**. Examples:
 
   - `True`: `[Triggered on {host:h1}] Monitor Title`
   - `False`: `[Triggered] Monitor Title`
