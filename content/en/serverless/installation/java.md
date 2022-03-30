@@ -115,6 +115,77 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
+
+### Install the Datadog tracing client
+
+[Configure the layers][14] for your Lambda function using the ARN in the following format:
+
+```
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
+```
+
+The latest `VERSION` is {{< latest-lambda-layer-version layer="dd-trace-java" >}}.
+
+### Install the Datadog Lambda library
+
+Install the Datadog Lambda Library locally by adding one of the following code blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `VERSION` below with the latest release (omitting the preceeding `v`): ![Maven Cental][4]
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Include the following dependency in your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>com.datadoghq</groupId>
+  <artifactId>datadog-lambda-java</artifactId>
+  <version>VERSION</version>
+</dependency>
+```
+
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+Include the following in your `build.gradle`:
+
+```groovy
+dependencies {
+  implementation 'com.datadoghq:datadog-lambda-java:VERSION'
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Configure environment variables
+
+Configure the following environment variables on your function:
+
+```yaml
+DD_API_KEY: <DATADOG_API_KEY> # Replace <DATADOG_API_KEY> with your Datadog API key
+JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar"
+DD_LOGS_INJECTION: true
+DD_JMXFETCH_ENABLED: false
+DD_TRACE_ENABLED: true
+```
+
+### Wrap your Lambda handler
+
+Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda Library:
+
+```java
+public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
+    public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
+        DDLambda ddl = new DDLambda(request, context); //Required to initialize the trace
+
+        do_some_stuff();
+        make_some_http_requests();
+
+        ddl.finish(); //Required to finish the active span.
+        return new ApiGatewayResponse();
+    }
+}
+```
+
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys

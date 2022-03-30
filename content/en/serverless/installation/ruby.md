@@ -84,7 +84,7 @@ More information and additional parameters can be found in the [CLI documentatio
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
@@ -108,7 +108,49 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
+#### Using the layer
 
+[Configure the layers][1] for your Lambda function using the ARN in the following format.
+
+```
+# For regular regions
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
+
+# For us-gov regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
+```
+
+The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For example:
+
+```
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
+```
+
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][2] before you can add the Datadog Lambda library as a layer.
+
+In your `serverless.yml`, add your layer for each function:
+  ```yaml
+  my-function:
+    layers:
+      - # Your lambda layer goes here.
+  ```
+### Configure the function
+
+Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+
+```ruby
+require 'datadog/lambda'
+
+Datadog::Lambda.configure_apm do |c|
+# Enable the instrumentation
+end
+
+def handler(event:, context:)
+    Datadog::Lambda.wrap(event, context) do
+        return { statusCode: 200, body: 'Hello World' }
+    end
+end
+```
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension

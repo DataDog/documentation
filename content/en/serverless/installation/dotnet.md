@@ -88,7 +88,7 @@ More information and additional parameters can be found in [Datadog Serverless C
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog Serverless Plugin][1] automatically adds the Traceing Layer and environment variables to your functions, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 

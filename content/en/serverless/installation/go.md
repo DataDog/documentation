@@ -84,7 +84,7 @@ More information and additional parameters can be found in the [Datadog Serverle
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
@@ -108,7 +108,61 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
+### Install the Datadog Lambda library
 
+Install the [Datadog Lambda library][3] locally by running the following command:
+
+```
+go get github.com/DataDog/datadog-lambda-go
+```
+### Set up tracing
+1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4].
+2. Set the environment variable `DD_TRACE_ENABLED` to `true`.
+1. Import the required packages in the file declaring your Lambda function handler.
+
+    ```go
+    package main
+
+    import (
+      "github.com/aws/aws-lambda-go/lambda"
+      "github.com/DataDog/datadog-lambda-go"
+      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+    )
+    ```
+1. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
+
+    ```go
+    func main() {
+      // Wrap your lambda handler like this
+      lambda.Start(ddlambda.WrapFunction(myHandler, nil))
+      /* OR with manual configuration options
+      lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
+        BatchInterval: time.Second * 15
+        APIKey: "my-api-key",
+      }))
+      */
+    }
+    ```
+1. Use the included libraries to create additional spans, connect logs and traces, and pass trace context to other services.
+    ```go
+    func myHandler(ctx context.Context, event MyEvent) (string, error) {
+      // Trace an HTTP request
+      req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+      client := http.Client{}
+      client = *httptrace.WrapClient(&client)
+      client.Do(req)
+
+      // Connect your Lambda logs and traces
+      currentSpan, _ := tracer.SpanFromContext(ctx)
+      log.Printf("my log message %v", currentSpan)
+
+      // Create a custom span
+      s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+      time.Sleep(100 * time.Millisecond)
+      s.Finish()
+    }
+    ```
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
