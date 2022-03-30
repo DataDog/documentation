@@ -17,29 +17,29 @@ With the page, you have full visibility and control your span volume. Consequent
 - Control and manage your overall costs
 
 
-## What happens if I decide to reduce my ingested trace volume?
+## What happens if you decide to reduce your ingested trace volume?
 
 Sampling does not mean less value out of Datadog APM
 
 {{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="APM ingestion sampling" style="width:70%;" >}}
 
-Even by reducing the ingestion volume for certain services, the **request, error, and latency metrics** (RED metrics) will remain 100% accurate as they are being calculated based on 100% of the applications’ traffic, regardless of any sampling configuration (i.e. this is done by a different system). These metrics are included when purchasing Datadog APM. In order to make sure you have full visibility into your application’s traffic, you can use these metrics to spot potential errors on a service or a resource, by creating monitors and SLOs.
+Even by reducing the ingestion volume for certain services, the **request, error, and latency metrics** (RED metrics) remain 100% accurate, as they are being calculated based on 100% of the applications’ traffic, regardless of any sampling configuration. These metrics are included when purchasing Datadog APM. In order to make sure you have full visibility into your application’s traffic, you can use these metrics to spot potential errors on a service or a resource, by creating monitors and SLOs.
 
-Then, because trace data is very repetitive, you will have enough trace samples to investigate any issues. For high throughput services, there should not be any need for you to collect every single request - an important enough problem will always show symptoms in multiple traces. Datadog puts the control in your hands, allowing you to have the visibility that you need to solve problems while remaining within budget.
+Then, because trace data is very repetitive, you should have enough trace samples to investigate any issues. For high throughput services, there should not be any need for you to collect every single request - an important enough problem should always show symptoms in multiple traces. Datadog puts the control in your hands, allowing you to have the visibility that you need to solve problems while remaining within budget.
 
-## How to assess the current state of my services' ingestion configuration ?
+## How to assess the current state of your services' ingestion configuration ?
 
 To assess the current state of applications’ instrumentation, leverage the [Trace Ingestion Control page][1] that provides observability over agent and tracing library configuration.
 
 
 
-### How can I tell if I’m within my monthly ingestion allocation?
+### How to tell if you are within your monthly ingestion allocation?
 
 Use the ingestion monthly usage KPI to get an estimation of the magnitude of overage compared to the monthly allocation of 150 GB of ingested spans per APM host (summed across all APM hosts).
 
 {{< img src="/tracing/guide/trace_ingestion_volume_control/ingestion_overage.png" alt="Ingestion Overage KPI" style="width:40%;" >}}
 
-### How to further investigate my APM usage ?
+### How to further investigate your APM usage ?
 
 The ingestion configuration can be investigated for each service. Click on a service row to see the Service Ingestion Summary, which surfaces:
 - `Breakdown by ingestion reason`: which ingestion mechanism is responsible for the ingestion volume
@@ -47,7 +47,7 @@ The ingestion configuration can be investigated for each service. Click on a ser
 
 An [out-of-the-box dashboard][4] is also available to get more insights on historical trends around the ingestion usage and volume. Clone this dashboard to be able to edit widgets and perform further analysis.
 
-## How do I reduce my ingestion volume ?
+## How to reduce your ingestion volume ?
 
 ### 1. Identify services responsible for most of the ingestion volume
 
@@ -66,7 +66,7 @@ If the service has a high Downstream Bytes/s rate and a high sampling rate (blue
 
 To get more details, click on the service and look at the `Ingestion Reasons Breakdown` in the side panel. This gives an overview of the share of ingestion volume attributed to each mechanism.
 
-The main mechanism to sample traces is `head-based sampling`. The decision is taken at the beginning of the trace, and propagated downstream in the context of the requests in order to make sure we keep complete traces. Read more about the [default sampling mechanism][3].
+The main mechanism to sample traces is `head-based sampling`. The decision is taken at the beginning of the trace, and propagated downstream in the context of the requests in order to make sure to keep complete traces. Read more about the [default sampling mechanism][3].
 
 Some additional ingestion reasons, surfaced in the ingestion control page, and as a tag of `datadog.estimated_usage.apm.ingested_bytes` metric may be responsible for your volume
 - `auto`: agent distributed rates to libraries
