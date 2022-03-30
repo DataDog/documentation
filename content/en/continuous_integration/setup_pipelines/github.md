@@ -50,7 +50,7 @@ workflow job and workflow run events. To remove the events:
 
 1. Go to the [GitHub Apps][6] page.
 2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you will have to repeat the process for each).
-3. Scroll down to the **Subscribe Events** and make sure that **Workflow job** and **Workflow run** are not selected.
+3. Scroll to the **Subscribe to events** section, and make sure that **Workflow job** and **Workflow run** are not selected.
 
 
 ## Further reading
