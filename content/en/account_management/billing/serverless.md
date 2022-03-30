@@ -19,7 +19,9 @@ For Serverless pricing information, see the [Datadog pricing page][1].
 
 You can track the number of billable Serverless invocations in your account by checking the [Datadog Usage Page][4]. You can see both the Month-To-Date summary, as well as usage over time.
 
-To control the functions whose invocations Datadog is monitoring, filter out particular functions by sorting by tag with the [UI](#ui) or by using the [API](#api). You may note that it takes some time for the excluded functions to disappear from the [Datadog serverless page][8] and [Datadog usage page][4], but you can verify the filtering rules by checking if the [aws.lambda.invocations][9] metric is still being ingested.
+To control the functions whose invocations Datadog is monitoring, filter out particular functions by sorting by tag with the [UI](#ui) or by using the [API](#api). 
+
+**Note**: It takes some time for the excluded functions to disappear from the [Datadog serverless page][8] and [Datadog usage page][4]. Verify the filtering rules by checking the `[aws.lambda.invocations][9]` metric for the filtered functions. When Datadog stops monitoring a function, the value of `aws.lambda.invocations` falls to 0.
 
 ### UI
 
