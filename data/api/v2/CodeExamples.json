@@ -90,6 +90,44 @@
       "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
+  "CreateDashboardListItems": [
+    {
+      "group": "dashboard_lists",
+      "suffix": "_825696022",
+      "description": "Add custom screenboard dashboard to an existing dashboard list returns \"OK\" response"
+    },
+    {
+      "group": "dashboard_lists",
+      "suffix": "_3995409989",
+      "description": "Add custom timeboard dashboard to an existing dashboard list returns \"OK\" response"
+    }
+  ],
+  "DeleteDashboardListItems": [
+    {
+      "group": "dashboard_lists",
+      "suffix": "_3851624753",
+      "description": "Delete custom screenboard dashboard from an existing dashboard list returns \"OK\" response"
+    },
+    {
+      "group": "dashboard_lists",
+      "suffix": "_2656706656",
+      "description": "Delete custom timeboard dashboard from an existing dashboard list returns \"OK\" response"
+    }
+  ],
+  "GetDashboardListItems": [
+    {
+      "group": "dashboard_lists",
+      "suffix": "",
+      "description": "Get items of a Dashboard List returns \"OK\" response"
+    }
+  ],
+  "UpdateDashboardListItems": [
+    {
+      "group": "dashboard_lists",
+      "suffix": "",
+      "description": "Update items of a dashboard list returns \"OK\" response"
+    }
+  ],
   "CreateIncidentService": [
     {
       "group": "incident_services",

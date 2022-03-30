@@ -17965,6 +17965,11 @@ paths:
           - file: dashboard_payload.json
             name: body
           step: there is a valid "dashboard" in the system
+        screenboard_dashboard:
+          parameters:
+          - file: screenboard_dashboard_payload.json
+            name: body
+          step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteDashboard
