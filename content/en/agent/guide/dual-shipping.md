@@ -12,7 +12,7 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 If you wish to send data to more than one destination such as a second Datadog org or other internal infrastructure - you can configure the Agent to send data to additional endpoints. Most data sent from the Agent supports multiple endpoints or API keys.
 
 
-## Agent Metrics
+## Metrics, APM, Live Processes, Orchestrator
 
 {{< tabs >}}
 
@@ -73,7 +73,7 @@ DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"a
 {{% /tab %}}
 
 <!-- Process Agent -->
-{{% tab "Process Agent" %}}
+{{% tab "Live Processes" %}}
 
 ### YAML configuration
 In `datadog.yaml` 
@@ -122,7 +122,7 @@ DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.
 {{% /tabs %}}
 
 You can add the yaml configuration to your `datadog.yaml` or launch the agent with the appropriate environment variables. 
-## Logs and Events
+## Logs, Database Monitoring, Network Devices, CSPM, Runtime Security
 
 {{< tabs >}}
 
@@ -219,7 +219,7 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 {{% /tab %}}
 
 <!-- Compliance -->
-{{% tab "Compliance" %}}
+{{% tab "CSPM" %}}
 
 ### YAML configuration 
 In `datadog.yaml` 
@@ -244,7 +244,7 @@ DD_​​COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
 {{% /tab %}}
 
 <!-- Runtime Security -->
-{{% tab "Runtime Security" %}}
+{{% tab "CWS" %}}
 
 ### YAML configuration 
 In `datadog.yaml` 
@@ -276,3 +276,9 @@ The `is_reliable` setting tells the agent to treat this endpoint with the same p
 For example: If you are sending logs to two reliable endpoints and one becomes unavailable, logs will continue to flow to the second reliable endpoint. If both endpoints becomes unavailable logs will stop flowing until at least one recovers. 
 
 If `is_reliable` is not specified it defaults to `false`. Unreliable endpoints will only send logs if they successfully send to at least one reliable endpoint. You may define multiple additional endpoints with mixed use of `is_reliable`. 
+
+## Dual Shipping in Kubernetes 
+
+If you are using the [Datadog Agent Helm chart](https://github.com/DataDog/helm-charts) you have to configure these settings with a configmap. In the `values.yaml` first set `useConfigMap: true` 
+and then add the relevant settings to `customAgentConfig`. [Here is an example](https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1223-L1248)
+
