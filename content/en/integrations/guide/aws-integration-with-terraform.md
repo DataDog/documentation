@@ -1,6 +1,8 @@
 ---
 title: The AWS Integration with Terraform
 kind: documentation
+aliases:
+  - /integrations/faq/aws-integration-with-terraform
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
   tag: "Integration"
@@ -17,9 +19,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-ec2-instances-with-datadog/"
   tag: "Blog"
   text: "How to monitor EC2 instances with Datadog"
-- link: 'https://www.datadoghq.com/blog/datadog-serverless-view/'
-  tag: 'Blog'
-  text: 'Monitor your entire serverless stack in the Serverless view'
+- link: "https://www.datadoghq.com/blog/datadog-serverless-view/"
+  tag: "Blog"
+  text: "Monitor your entire serverless stack in the Serverless view"
+- link: "https://www.datadoghq.com/blog/cloud-security-posture-management/"
+  tag: "Blog"
+  text: "Introducing Datadog Cloud Security Posture Management"
+- link: "https://www.datadoghq.com/blog/datadog-workload-security/"
+  tag: "Blog"
+  text: "Secure your infrastructure in real time with Datadog Cloud Workload Security"
+- link: "https://www.datadoghq.com/blog/announcing-cloud-siem/"
+  tag: "Blog"
+  text: "Announcing Datadog Security Monitoring"
 ---
 
 You can use [Terraform][1] to install and manage the AWS integration with Datadog. The sections below detail the requirements, and provide basic templates for creating resources in Datadog.
