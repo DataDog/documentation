@@ -74,9 +74,58 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e 
 
 More information and additional parameters can be found in the [Datadog Serverless CLI][2].
 
+### Set up tracing
+1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][3].
+2. Set the environment variable `DD_TRACE_ENABLED` to `true`.
+3. Import the required packages in the file declaring your Lambda function handler.
+
+    ```go
+    package main
+
+    import (
+      "github.com/aws/aws-lambda-go/lambda"
+      "github.com/DataDog/datadog-lambda-go"
+      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+    )
+    ```
+4. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
+
+    ```go
+    func main() {
+      // Wrap your lambda handler like this
+      lambda.Start(ddlambda.WrapFunction(myHandler, nil))
+      /* OR with manual configuration options
+      lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
+        BatchInterval: time.Second * 15
+        APIKey: "my-api-key",
+      }))
+      */
+    }
+    ```
+5. Use the included libraries to create additional spans, connect logs and traces, and pass trace context to other services.
+    ```go
+    func myHandler(ctx context.Context, event MyEvent) (string, error) {
+      // Trace an HTTP request
+      req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+      client := http.Client{}
+      client = *httptrace.WrapClient(&client)
+      client.Do(req)
+
+      // Connect your Lambda logs and traces
+      currentSpan, _ := tracer.SpanFromContext(ctx)
+      log.Printf("my log message %v", currentSpan)
+
+      // Create a custom span
+      s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+      time.Sleep(100 * time.Millisecond)
+      s.Finish()
+    }
+    ```
 
 [1]: https://aws.github.io/aws-sdk-go-v2/docs/getting-started/#get-your-aws-access-keys
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -103,6 +152,53 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
         apiKey: # Your Datadog API Key goes here.
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
+
+### Set up tracing
+1. Import the required packages in the file declaring your Lambda function handler.
+
+    ```go
+    package main
+
+    import (
+      "github.com/aws/aws-lambda-go/lambda"
+      "github.com/DataDog/datadog-lambda-go"
+      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+    )
+    ```
+2. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
+
+    ```go
+    func main() {
+      // Wrap your lambda handler like this
+      lambda.Start(ddlambda.WrapFunction(myHandler, nil))
+      /* OR with manual configuration options
+      lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
+        BatchInterval: time.Second * 15
+        APIKey: "my-api-key",
+      }))
+      */
+    }
+    ```
+3. Use the included libraries to create additional spans, connect logs and traces, and pass trace context to other services.
+    ```go
+    func myHandler(ctx context.Context, event MyEvent) (string, error) {
+      // Trace an HTTP request
+      req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+      client := http.Client{}
+      client = *httptrace.WrapClient(&client)
+      client.Do(req)
+
+      // Connect your Lambda logs and traces
+      currentSpan, _ := tracer.SpanFromContext(ctx)
+      log.Printf("my log message %v", currentSpan)
+
+      // Create a custom span
+      s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+      time.Sleep(100 * time.Millisecond)
+      s.Finish()
+    }
+    ```
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
@@ -132,19 +228,10 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:<EXT
 
 The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
 
-{{% /tab %}}
-{{< /tabs >}}
-### Install the Datadog Lambda library
-
-Install the [Datadog Lambda library][3] locally by running the following command:
-
-```
-go get github.com/DataDog/datadog-lambda-go
-```
 ### Set up tracing
-1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4].
+1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][1].
 2. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-1. Import the required packages in the file declaring your Lambda function handler.
+3. Import the required packages in the file declaring your Lambda function handler.
 
     ```go
     package main
@@ -156,7 +243,7 @@ go get github.com/DataDog/datadog-lambda-go
       httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
     )
     ```
-1. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
+4. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
 
     ```go
     func main() {
@@ -170,7 +257,7 @@ go get github.com/DataDog/datadog-lambda-go
       */
     }
     ```
-1. Use the included libraries to create additional spans, connect logs and traces, and pass trace context to other services.
+5. Use the included libraries to create additional spans, connect logs and traces, and pass trace context to other services.
     ```go
     func myHandler(ctx context.Context, event MyEvent) (string, error) {
       // Trace an HTTP request
@@ -190,13 +277,25 @@ go get github.com/DataDog/datadog-lambda-go
     }
     ```
 
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{< /tabs >}}
+### Install the Datadog Lambda library
+
+Install the [Datadog Lambda library][3] locally by running the following command:
+
+```
+go get github.com/DataDog/datadog-lambda-go
+```
+
+
 ### Unified service tagging
 
-Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][5] for more details.
+Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][4] for more details.
 
 ## Explore
 
-After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][6].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][5].
 
 ## Monitor custom business logic
 
@@ -233,14 +332,14 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-For more information, see the [Custom Metrics documentation][7].
+For more information, see the [Custom Metrics documentation][6].
 
-If your Lambda function is running in a VPC, follow these [instructions][8] to ensure that the extension can reach Datadog API endpoints.
+If your Lambda function is running in a VPC, follow these [instructions][7] to ensure that the extension can reach Datadog API endpoints.
 
 
 ## Troubleshooting
 
-If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][9].
+If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][8].
 
 ## Further Reading
 
@@ -249,9 +348,8 @@ If you have trouble collecting monitoring data after following the instructions 
 [1]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
 [2]: /serverless/guide/datadog_forwarder_go
 [3]: https://github.com/DataDog/datadog-lambda-go
-[4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /serverless/libraries_integrations/extension/#tagging
-[6]: https://app.datadoghq.com/functions
-[7]: /serverless/custom_metrics?tab=go
-[8]: /serverless/libraries_integrations/extension/#vpc
-[9]: /serverless/guide/troubleshoot_serverless_monitoring/
+[4]: /serverless/libraries_integrations/extension/#tagging
+[5]: https://app.datadoghq.com/functions
+[6]: /serverless/custom_metrics?tab=go
+[7]: /serverless/libraries_integrations/extension/#vpc
+[8]: /serverless/guide/troubleshoot_serverless_monitoring/
