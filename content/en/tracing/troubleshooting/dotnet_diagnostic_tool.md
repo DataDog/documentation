@@ -5,15 +5,18 @@ kind: documentation
 
 If after installing the .NET tracer your application does not produce traces as expected, you can try running the diagnostic tool for basic troubleshooting. It should help you figure out issues with your setup (for example missing environment variables, incomplete installation, unreachable agent...).
 
-The tool can be installed in two different ways:
+The tool can be installed in three different ways:
 
 - Using the .NET SDK by running the command:
 ```
 dotnet tool install -g dd-trace
 ```
-- Or by direct download by picking the right version [from the release page](https://github.com/DataDog/dd-trace-dotnet/releases)
-**TODO: We probably want to setup a short url?**
-
+- By downloading from one of the short links:
+    * Win-x64: * [https://dtdg.co/dd-trace-net-win-x64](https://dtdg.co/dd-trace-net-win-x64)
+    * Linux-x64: * [https://dtdg.co/dd-trace-net-linux-x64](https://dtdg.co/dd-trace-net-linux-x64)
+    * Linux-musl-x64 (Alpine): * [https://dtdg.co/dd-trace-net-linux-musl-x64](https://dtdg.co/dd-trace-net-linux-musl-x64)
+ 
+- Or by downloading [from the github release page](https://github.com/DataDog/dd-trace-dotnet/releases)
 
 ## Process diagnostics 
 
