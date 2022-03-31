@@ -86,13 +86,13 @@ The minor version of the `datadog-lambda` gem always matches the layer version. 
 
 ```
 # For regular regions
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 
 # For us-gov regions
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-The available `RUNTIME` is `Ruby2-7`. For example:
+For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
@@ -141,7 +141,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
 	  ```sh
-    npm install serverless-plugin-datadog
+    npm install serverless-plugin-datadog --save-dev
     ```
 2. In your `serverless.yml`, add the following:
     ```yaml
@@ -224,13 +224,13 @@ The minor version of the `datadog-lambda` gem always matches the layer version. 
 
 ```
 # For regular regions
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 
 # For us-gov regions
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-The available `RUNTIME` is `Ruby2-7`. For example:
+For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}

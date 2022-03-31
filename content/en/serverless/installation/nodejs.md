@@ -94,7 +94,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
     ```
-    npm install serverless-plugin-datadog
+    npm install serverless-plugin-datadog --save-dev
     ```
 2. In your `serverless.yml`, add the following:
     ```
@@ -218,7 +218,7 @@ If you are deploying your Lambda function as a container image, you cannot use t
 **NPM**:
 
 ```sh
-npm install --save datadog-lambda-js dd-trace
+npm install datadog-lambda-js dd-trace
 ```
 
 **Note**: The minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
@@ -376,7 +376,7 @@ If you cannot use the prebuilt Datadog Lambda layer, alternatively you can insta
 **NPM**:
 
 ```
-npm install --save datadog-lambda-js dd-trace
+npm install datadog-lambda-js dd-trace
 ```
 
 See the [latest release][2].

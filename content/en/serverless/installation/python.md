@@ -88,7 +88,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
     ```sh
-    npm install serverless-plugin-datadog
+    npm install serverless-plugin-datadog --save-dev
     ```
 2. In your `serverless.yml`, add the following:
     ```yaml

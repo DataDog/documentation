@@ -81,7 +81,7 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e 
 
 More information and additional parameters can be found in the [Datadog Serverless CLI][2].
 
-### Install the Datadog tracing client
+### Install the Datadog tracing library
 
 [Configure the layers][3] for your Lambda function using the ARN in the following format:
 
@@ -97,13 +97,13 @@ The latest `VERSION` is {{< latest-lambda-layer-version layer="dd-trace-java" >}
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
     ```sh
-    npm install serverless-plugin-datadog
+    npm install serverless-plugin-datadog --save-dev
     ```
 2. In your `serverless.yml`, add the following:
     ```yaml
@@ -121,7 +121,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
-### Install the Datadog tracing client
+### Install the Datadog tracing library
 
 [Configure the layers][4] for your Lambda function using the ARN in the following format:
 
@@ -131,8 +131,12 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
 
 The latest `VERSION` is {{< latest-lambda-layer-version layer="dd-trace-java" >}}.\
 
-add to `serverless.yml`:
-
+In your `serverless.yml`, add your tracing layer for each function:
+  ```yaml
+  my-function:
+    layers:
+      - # Your tracing layer goes here.
+  ```
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
@@ -154,7 +158,7 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_
 
 The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
 
-### Install the Datadog tracing client
+### Install the Datadog tracing library
 
 [Configure the layers][2] for your Lambda function using the ARN in the following format:
 
