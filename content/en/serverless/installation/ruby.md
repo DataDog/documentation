@@ -132,7 +132,6 @@ RUN bundle config set path 'vendor/bundle'
 RUN bundle install
 ```
 
-
 [1]: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
@@ -163,12 +162,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
         apiKey: # Your Datadog API Key goes here.
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
-
-### Install the Lambda Library
-
-The Datadog Lambda Library can be installed as a layer or a gem. For most functions, Datadog recommends installing the library as a layer. If your Lambda function is deployed as a container image, you must install the library as a gem.
-
-The minor version of the `datadog-lambda` gem always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
 
 #### Using the layer
 
