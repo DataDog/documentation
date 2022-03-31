@@ -68,7 +68,7 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 Threshold queries are in public beta.
 </div>
 
-Enabling DDSketch-calculated globally-accurate percentiles on your distribution metrics unlocks threshold queries where you can now count the number of raw distribution metric values if they exceed or fall below a numerical threshold. You can use this functionality to count the number of errors / violations compared to an anomalous numerical threshold on dashboards. Or you can also use threshold queries within our SLOs product to define SLOs for the past 30 days where the p95 request latency is < 10 seconds. 
+Enabling DDSketch-calculated globally-accurate percentiles on your distribution metrics unlocks threshold queries where you can count the number of raw distribution metric values if they exceed or fall below a numerical threshold. You can use this functionality to count the number of errors or violations compared to an anomalous numerical threshold on dashboards. Or you can also use threshold queries within Datadog's SLOs product to define SLOs for the past 30 days where the p95 request latency is < 10 seconds. 
 
 With threshold queries for distributions with percentiles, you do not need to predefine a threshold value prior to metric submission, and have full flexibility to adjust the threshold value in Datadog.
 
