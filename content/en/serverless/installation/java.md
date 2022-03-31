@@ -40,14 +40,10 @@ You can also add the [instrumentation command](#instrument) to your CI/CD pipeli
 
 ### Install
 
-Install the Datadog CLI with NPM or Yarn:
+Install the Datadog CLI with NPM:
 
 ```sh
-# NPM
 npm install -g @datadog/datadog-ci
-
-# Yarn
-yarn global add @datadog/datadog-ci
 ```
 
 ### Configure credentials
@@ -107,7 +103,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
     ```sh
-    yarn add --dev serverless-plugin-datadog
+    npm install serverless-plugin-datadog
     ```
 2. In your `serverless.yml`, add the following:
     ```yaml

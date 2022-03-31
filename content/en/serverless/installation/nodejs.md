@@ -40,14 +40,10 @@ You can also add the command to your CI/CD pipelines to enable instrumentation f
 
 ### Install
 
-Install the Datadog CLI with NPM or Yarn:
+Install the Datadog CLI with NPM:
 
 ```sh
-# NPM
 npm install -g @datadog/datadog-ci
-
-# Yarn
-yarn global add @datadog/datadog-ci
 ```
 
 ### Configure credentials
@@ -98,10 +94,13 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
     ```
-    yarn add --dev serverless-plugin-datadog
+    npm install serverless-plugin-datadog
     ```
 2. In your `serverless.yml`, add the following:
-`plugins: - serverless-plugin-datadog`
+    ```
+    plugins:
+      - serverless-plugin-datadog
+    ```
   <div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a Javascript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/nodejs?tab=custom">custom installation instructions</a>.</div>
 
 3. In your `serverless.yml`, also add the following section:
@@ -173,13 +172,9 @@ The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to 
 
 ### Install the Datadog CDK constructs library
 
-Run the following Yarn or NPM command in your CDK project to install the Datadog CDK constructs library:
+Run the following NPM command in your CDK project to install the Datadog CDK constructs library:
 
 ```sh
-#Yarn
-yarn add --dev datadog-cdk-constructs
-
-#NPM
 npm install datadog-cdk-constructs --save-dev
 ```
 
@@ -224,12 +219,6 @@ If you are deploying your Lambda function as a container image, you cannot use t
 
 ```sh
 npm install --save datadog-lambda-js dd-trace
-```
-
-**Yarn**:
-
-```sh
-yarn add datadog-lambda-js dd-trace
 ```
 
 **Note**: The minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
@@ -388,12 +377,6 @@ If you cannot use the prebuilt Datadog Lambda layer, alternatively you can insta
 
 ```
 npm install --save datadog-lambda-js dd-trace
-```
-
-**Yarn**:
-
-```
-yarn add datadog-lambda-js dd-trace
 ```
 
 See the [latest release][2].

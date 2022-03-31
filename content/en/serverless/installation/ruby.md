@@ -33,14 +33,10 @@ You can also add the [instrumentation command](#instrument) to your CI/CD pipeli
 
 ### Install
 
-Install the Datadog CLI with NPM or Yarn:
+Install the Datadog CLI with NPM:
 
 ```sh
-# NPM
 npm install -g @datadog/datadog-ci
-
-# Yarn
-yarn global add @datadog/datadog-ci
 ```
 
 ### Configure credentials
@@ -96,7 +92,7 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lamb
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For example:
+The available `RUNTIME` is `Ruby2-7`. For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
@@ -145,7 +141,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
 	  ```sh
-    yarn add --dev serverless-plugin-datadog
+    npm install serverless-plugin-datadog
     ```
 2. In your `serverless.yml`, add the following:
     ```yaml
@@ -175,7 +171,7 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lamb
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For example:
+The available `RUNTIME` is `Ruby2-7`. For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
@@ -234,7 +230,7 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lamb
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For example:
+The available `RUNTIME` is `Ruby2-7`. For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}

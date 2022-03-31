@@ -37,14 +37,10 @@ You can also add the [instrumentation command](#instrument) to your CI/CD pipeli
 
 ### Install
 
-Install the Datadog CLI with NPM or Yarn:
+Install the Datadog CLI with NPM:
 
 ```sh
-# NPM
 npm install -g @datadog/datadog-ci
-
-# Yarn
-yarn global add @datadog/datadog-ci
 ```
 
 ### Configure credentials
@@ -88,13 +84,13 @@ More information and additional parameters can be found in [Datadog Serverless C
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Plugin][1] automatically adds the Traceing Layer and environment variables to your functions, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
     ```sh
-    yarn add --dev serverless-plugin-datadog
+    npm install serverless-plugin-datadog
     ```
 2. In your `serverless.yml`, add the following:
     ```yaml
