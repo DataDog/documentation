@@ -21,6 +21,17 @@ aliases:
 ---
 Datadog supports a variety of open standards, including [OpenTelemetry][1] and [OpenTracing][2].
 
+## Options for using OpenTelemetry with Datadog components
+
+If your applications and services are instrumented with OpenTelemetry libraries, you can choose between two paths for getting the tracing data to the Datadog backend:
+
+1. Ingest it with the OpenTelemetry collector, and use the Datadog exporter to send it to Datadog, or
+
+2. Ingest it with the Datadog Agent, which sends it to Datadog.
+
+{{< img src="tracing/setup/open_standards/dd-otel-options.png" alt="Map options for generating tracing data and sending it to observability products.">}}
+
+
 ## OpenTelemetry collector Datadog exporter
 
 The OpenTelemetry Collector is a vendor-agnostic separate agent process for collecting and exporting telemetry data emitted by many processes. Datadog has [an exporter available within the OpenTelemetry Collector][3] to receive traces and metrics data from the OpenTelemetry SDKs, and to forward the data on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs](#connect-opentelemetry-traces-and-logs).
@@ -324,33 +335,33 @@ This configuration ensures consistent host metadata and centralizes the configur
 
 ## OTLP ingest in Datadog Agent
 
-<div class="alert alert-warning">This functionality is beta and its behavior and configuration may change.</div>
-
-Since versions 6.32.0 and 7.32.0, the Datadog Agent supports OTLP traces and metrics ingestion through both gRPC and HTTP.
+<div class="alert alert-warning">OpenTelemetry Metrics is in beta and its behavior and configuration may change.</div>
 
 The OTLP ingestion is configured through the `datadog.yaml` file. The following configuration enables the HTTP and gRPC endpoints on the default ports (4317 for gRPC and 4318 for HTTP):
 
 ```yaml
-experimental:
-  otlp:
-    receiver:
-      protocols:
-        grpc:
-        http:
+otlp_config:
+  receiver:
+    protocols:
+      grpc:
+      http:
 ```
 
-The `receiver` section follows the [OpenTelemetry Collector OTLP receiver configuration schema][18].
-You can also configure the endpoints by providing the port through the `DD_OTLP_GRPC_PORT` and `DD_OTLP_HTTP_PORT` environment variables. These must be passed to both the core Agent and trace Agent. 
+The `receiver` section follows the [OpenTelemetry Collector OTLP receiver configuration schema][18]. You can also enable these with environment variables. For example, enable the gRPC endpoint by using the environment variable setting `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317`. 
 
-Check [the OpenTelemetry instrumentation documentation][19] to understand how to point your instrumentation to the Agent, and [contact Datadog support][20] to get more information on this feature and provide feedback.
+To view all settings and environment variables supported starting Datadog Agent 7.35.0, see the `otlp_config` section in [the configuration template][19]. 
+
+Configuration settings must be passed to both the Core Agent and the Trace Agent if they are running in separate containers.
+
+Check [the OpenTelemetry instrumentation documentation][20] to understand how to point your instrumentation to the Agent, and [contact Datadog support][21] to get more information on this feature and provide feedback.
 
 ## Connect OpenTelemetry traces and logs
 
-To connect OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces, see [Connect OpenTelemetry Traces and Logs][21] for language specific instructions and example code.
+To connect OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces, see [Connect OpenTelemetry Traces and Logs][22] for language specific instructions and example code.
 
 ## Other alternatives
 
-Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you, each of the supported languages also has support for [sending OpenTracing data to Datadog][22].
+Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you, each of the supported languages also has support for [sending OpenTracing data to Datadog][23].
 
 ## Further Reading
 
@@ -374,7 +385,8 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
 [16]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-a-standalone-collector
 [17]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/images/opentelemetry-service-deployment-models.png
 [18]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
-[19]: https://opentelemetry.io/docs/instrumentation/
-[20]: https://docs.datadoghq.com/help/
-[21]: /tracing/connect_logs_and_traces/opentelemetry
-[22]: /tracing/setup_overview/open_standards/java
+[19]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml#L2911-L3054
+[20]: https://opentelemetry.io/docs/instrumentation/
+[21]: https://docs.datadoghq.com/help/
+[22]: /tracing/connect_logs_and_traces/opentelemetry
+[23]: /tracing/setup_overview/open_standards/java
