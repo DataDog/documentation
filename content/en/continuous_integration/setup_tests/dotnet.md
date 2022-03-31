@@ -39,10 +39,10 @@ dotnet tool update -g dd-trace
 
 ## Instrumenting tests
 
-To instrument your test suite, prefix your test command with `dd-trace`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
+To instrument your test suite, prefix your test command with `dd-trace ci run`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
 
 {{< code-block lang="bash" >}}
-dd-trace --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
 All tests are automatically instrumented.
@@ -52,7 +52,7 @@ All tests are automatically instrumented.
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
 
 {{< code-block lang="bash" >}}
-dd-trace --help
+dd-trace ci run --help
 {{< /code-block >}}
 
 The following list shows the default values for key configuration settings:
