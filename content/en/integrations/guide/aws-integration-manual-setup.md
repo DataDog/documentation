@@ -12,9 +12,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-ec2-instances-with-datadog/"
   tag: "Blog"
   text: "How to monitor EC2 instances with Datadog"
-- link: 'https://www.datadoghq.com/blog/datadog-serverless-view/'
-  tag: 'Blog'
-  text: 'Monitor your entire serverless stack in the Serverless view'
+- link: "https://www.datadoghq.com/blog/datadog-serverless-view/"
+  tag: "Blog"
+  text: "Monitor your entire serverless stack in the Serverless view"
+- link: "https://www.datadoghq.com/blog/cloud-security-posture-management/"
+  tag: "Blog"
+  text: "Introducing Datadog Cloud Security Posture Management"
+- link: "https://www.datadoghq.com/blog/datadog-workload-security/"
+  tag: "Blog"
+  text: "Secure your infrastructure in real time with Datadog Cloud Workload Security"
+- link: "https://www.datadoghq.com/blog/announcing-cloud-siem/"
+  tag: "Blog"
+  text: "Announcing Datadog Security Monitoring"
 ---
 
 ## Overview
