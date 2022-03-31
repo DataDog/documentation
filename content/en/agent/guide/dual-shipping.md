@@ -4,24 +4,24 @@ kind: guide
 ---
 
 <div class="alert alert-danger">
-Dual shipping can impact billing if you are sending data to multiple Datadog orgs. For more information about the impact of this configuration, contact <a href="/help/">Datadog Support</a>.
+Dual shipping can impact billing if you are sending data to multiple Datadog organizations. For more information about the impact of this configuration, contact <a href="/help/">Datadog Support</a>.
 </div>
 
 ## Overview
 
-If you wish to send data to more than one destination such as a second Datadog org or other internal infrastructure - you can configure the Agent to send data to additional endpoints. Most data sent from the Agent supports multiple endpoints or API keys.
+If you wish to send data to more than one destination, such as a second Datadog organization or other internal infrastructure, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the following configurations.
 
 
 ## Metrics, APM, Live Processes, Orchestrator
 
-{{< tabs >}}
+You can add the YAML configuration to your `datadog.yaml` or launch the Agent with the appropriate environment variables.
 
-<!-- Metrics -->
+{{< tabs >}}
 
 {{% tab "Metrics & Service checks" %}}
 
 ### YAML configuration
-In `datadog.yaml` 
+In `datadog.yaml`:
 ```yaml
 additional_endpoints:
   "https://mydomain.datadoghq.com":
@@ -31,7 +31,7 @@ additional_endpoints:
   - apikey4
 ```
 
-### Environment Variable configuration
+### Environment variable configuration
 
 ```bash
 DD_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
@@ -39,11 +39,10 @@ DD_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"ap
 
 {{% /tab %}}
 
-<!-- APM -->
 {{% tab "APM" %}}
 
 ### YAML configuration
-In `datadog.yaml` 
+In `datadog.yaml`: 
 ```yaml
 apm_config:
   [...]
@@ -62,7 +61,7 @@ apm_config:
     - apikey4
 ```
 
-### Environment Variable configuration
+### Environment variable configuration
 
 ```bash
 DD_APM_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
@@ -72,11 +71,10 @@ DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"a
 
 {{% /tab %}}
 
-<!-- Process Agent -->
 {{% tab "Live Processes" %}}
 
 ### YAML configuration
-In `datadog.yaml` 
+In `datadog.yaml`: 
 ```yaml
 process_config:
   [...]
@@ -88,7 +86,7 @@ process_config:
     - apikey4
 ```
 
-### Environment Variable configuration
+### Environment variable configuration
 
 ```bash
 DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
@@ -96,11 +94,10 @@ DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2
 
 {{% /tab %}}
 
-<!-- Orchestrator -->
 {{% tab "Orchestrator" %}}
 
 ### YAML configuration
-In `datadog.yaml` 
+In `datadog.yaml`: 
 ```yaml
 orchestrator_explorer:
   [...]
@@ -112,25 +109,31 @@ orchestrator_explorer:
     - apikey4
 ```
 
-### Environment Variable configuration
+### Environment variable configuration
 
 ```bash
 DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
-{{% /tabs %}}
+{{% /tabs %}} 
 
-You can add the yaml configuration to your `datadog.yaml` or launch the agent with the appropriate environment variables. 
 ## Logs, Database Monitoring, Network Devices, CSPM, Runtime Security
+
+For data from these products, when setting up additional endpoints, you must explicitly set `use_http` to tell the Agent which transport to use. The same transport configuration is shared among all additional endpoints.
+
+The `is_reliable` setting tells the Agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. The `is_reliable` setting ensures that logs are not missed if a destination becomes unavailable. 
+
+For example, if you're sending logs to two reliable endpoints and one becomes unavailable, logs continue to flow to the second reliable endpoint. If both endpoints become unavailable, the logs stop flowing until at least one endpoint recovers.
+
+The `is_reliable` setting defaults to `false`. Unreliable endpoints only send logs if they successfully send to at least one reliable endpoint. You may define multiple additional endpoints with mixed use of `is_reliable`. 
 
 {{< tabs >}}
 
-<!-- Logs -->
 {{% tab "Logs" %}}
 
 ### YAML configuration 
-In `datadog.yaml` 
+In `datadog.yaml`: 
 ```yaml
 logs_config:
   use_http: true
@@ -141,7 +144,7 @@ logs_config:
     is_reliable: true
 ```
 
-### Environment Variable configuration
+### Environment variable configuration
 
 ```bash
 DD_LOGS_CONFIG_USE_HTTP=true
@@ -150,11 +153,10 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"htt
 
 {{% /tab %}}
 
-<!-- Database Monitoring -->
 {{% tab "Database Monitoring" %}}
 
 ### YAML configuration 
-In `datadog.yaml` 
+In `datadog.yaml`: 
 ```yaml
 database_monitoring:
   samples:
@@ -180,7 +182,7 @@ database_monitoring:
       is_reliable: true
 ```
 
-### Environment Variable configuration
+### Environment variable configuration
 
 ```bash
 DD_DATABASE_MONITORING_SAMPLES_USE_HTTP=true
@@ -193,11 +195,11 @@ DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\",
 
 {{% /tab %}}
 
-<!-- Network Devices -->
 {{% tab "Network Devices" %}}
 
-### YAML configuration 
-In `datadog.yaml` 
+### YAML configuration
+
+In `datadog.yaml`: 
 ```yaml
 network_devices:
   metadata:
@@ -209,7 +211,7 @@ network_devices:
       is_reliable: true
 ```
 
-### Environment Variable configuration
+### Environment variable configuration
 
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
@@ -218,11 +220,10 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 
 {{% /tab %}}
 
-<!-- Compliance -->
 {{% tab "CSPM" %}}
 
 ### YAML configuration 
-In `datadog.yaml` 
+In `datadog.yaml`: 
 ```yaml
 ​​compliance_config:
   endpoints:
@@ -234,7 +235,7 @@ In `datadog.yaml`
       is_reliable: true
 ```
 
-### Environment Variable configuration
+### Environment variable configuration
 
 ```bash
 DD_​​COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
@@ -243,11 +244,10 @@ DD_​​COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
 
 {{% /tab %}}
 
-<!-- Runtime Security -->
 {{% tab "CWS" %}}
 
 ### YAML configuration 
-In `datadog.yaml` 
+In `datadog.yaml`: 
 ```yaml
 runtime_security_config:
   endpoints:
@@ -259,7 +259,7 @@ runtime_security_config:
       is_reliable: true
 ```
 
-### Environment Variable configuration
+### Environment variable configuration
 
 ```bash
 DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
@@ -269,16 +269,37 @@ DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": 
 {{% /tab %}}
 {{% /tabs %}}
 
-**Note**: When using additional endpoints you have to explicitly set `use_http` to tell the Agent component which transport to use. The same transport configuration is shared among all additional endpoints. 
+## Dual shipping in Kubernetes
 
-The `is_reliable` setting tells the agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. `is_reliable` tries to ensure logs are never missed if a destination becomes unavailable. 
+If you're using the [Datadog Agent Helm chart](https://github.com/DataDog/helm-charts), you must configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true` 
+and add the relevant settings to `customAgentConfig`.
 
-For example: If you are sending logs to two reliable endpoints and one becomes unavailable, logs will continue to flow to the second reliable endpoint. If both endpoints becomes unavailable logs will stop flowing until at least one recovers. 
+```yaml
+# agents.useConfigMap -- Configures a configmap to provide the agent configuration. Use this in combination with the `agents.customAgentConfig` parameter.
+  useConfigMap:  # false
 
-If `is_reliable` is not specified it defaults to `false`. Unreliable endpoints will only send logs if they successfully send to at least one reliable endpoint. You may define multiple additional endpoints with mixed use of `is_reliable`. 
-
-## Dual Shipping in Kubernetes 
-
-If you are using the [Datadog Agent Helm chart](https://github.com/DataDog/helm-charts) you have to configure these settings with a configmap. In the `values.yaml` first set `useConfigMap: true` 
-and then add the relevant settings to `customAgentConfig`. [Here is an example](https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1223-L1248)
+  # agents.customAgentConfig -- Specify custom contents for the datadog agent config (datadog.yaml)
+  ## ref: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6
+  ## ref: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+  ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
+  customAgentConfig: {}
+  #   # Autodiscovery for Kubernetes
+  #   listeners:
+  #     - name: kubelet
+  #   config_providers:
+  #     - name: kubelet
+  #       polling: true
+  #     # needed to support legacy docker label config templates
+  #     - name: docker
+  #       polling: true
+  #
+  #   # Enable java cgroup handling. Only one of those options should be enabled,
+  #   # depending on the agent version you are using along that chart.
+  #
+  #   # agent version < 6.15
+  #   # jmx_use_cgroup_memory_limit: true
+  #
+  #   # agent version >= 6.15
+  #   # jmx_use_container_support: true
+```
 
