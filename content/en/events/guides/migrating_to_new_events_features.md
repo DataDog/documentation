@@ -25,17 +25,6 @@ The following timeline applies to US-based customers:
 
 <strong>June 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
 
-
-The following timeline applies to EU-based customers:
-
-<strong>March 30, 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors not managed using the API.
-
-<strong>May 30, 2022</strong> - The event stream is retired in favor of the Event Explorer.
-
-<strong>June 15, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
-
-<strong>July 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
-
 ## What action do I need to take?
 
 If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them on June 30, 2022.
