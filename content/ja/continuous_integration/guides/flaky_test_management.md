@@ -1,7 +1,8 @@
 ---
 title: 不安定なテストの管理
 kind: ガイド
-aliases: /ja/continuous_integration/guides/find_flaky_tests/
+aliases: 
+    - ja/continuous_integration/guides/find_flaky_tests/
 ---
 
 _不安定なテスト_は、同じコミットの複数のテスト実行で成功と失敗の両方のステータスを示すテストです。コードをコミットして CI を介して実行し、テストが失敗し、CI を介して再度実行してテストが成功した場合、そのテストは品質コードの証明として信頼できません。
