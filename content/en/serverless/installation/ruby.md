@@ -85,7 +85,7 @@ The minor version of the `datadog-lambda` gem always matches the layer version. 
 [Configure the layers][3] for your Lambda function using the ARN in the following format.
 
 ```
-# For regular regions
+# For commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 
 # For us-gov regions
@@ -164,7 +164,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [Configure the layers][4] for your Lambda function using the ARN in the following format.
 
 ```
-# For regular regions
+# For commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 
 # For us-gov regions
@@ -223,7 +223,7 @@ The minor version of the `datadog-lambda` gem always matches the layer version. 
 [Configure the layers][1] for your Lambda function using the ARN in the following format.
 
 ```
-# For regular regions
+# For commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 
 # For us-gov regions
