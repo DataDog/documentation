@@ -85,9 +85,19 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e 
 
 More information and additional parameters can be found in the [Datadog Serverless CLI][2].
 
+### Install the Datadog tracing client
+
+[Configure the layers][3] for your Lambda function using the ARN in the following format:
+
+```
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
+```
+
+The latest `VERSION` is {{< latest-lambda-layer-version layer="dd-trace-java" >}}.
+
 [1]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
-
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -115,6 +125,23 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
+### Install the Datadog tracing client
+
+[Configure the layers][4] for your Lambda function using the ARN in the following format:
+
+```
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
+```
+
+The latest `VERSION` is {{< latest-lambda-layer-version layer="dd-trace-java" >}}.\
+
+add to `serverless.yml`:
+
+
+[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -131,20 +158,20 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_
 
 The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ### Install the Datadog tracing client
 
-[Configure the layers][14] for your Lambda function using the ARN in the following format:
+[Configure the layers][2] for your Lambda function using the ARN in the following format:
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
 ```
 
 The latest `VERSION` is {{< latest-lambda-layer-version layer="dd-trace-java" >}}.
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Install the Datadog Lambda library
 
@@ -307,7 +334,7 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 
 ## Troubleshooting
 
-If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][15].
+If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][14].
 
 ## Further Reading
 
@@ -326,5 +353,4 @@ If you have trouble collecting monitoring data after following the instructions 
 [11]: /tracing/connect_logs_and_traces/java/
 [12]: https://www.datadoghq.com/log4j-vulnerability/
 [13]: https://github.com/DataDog/datadog-lambda-java/releases
-[14]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
-[15]: /serverless/guide/troubleshoot_serverless_monitoring/
+[14]: /serverless/guide/troubleshoot_serverless_monitoring/
