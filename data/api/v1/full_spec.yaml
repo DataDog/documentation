@@ -5783,11 +5783,13 @@ components:
           type: string
         restricted_roles:
           description: A list of unique role identifiers to define which roles are
-            allowed to edit the monitor. Editing a monitor includes any updates to
-            the monitor configuration, monitor deletion, and muting of the monitor
-            for any amount of time. Roles unique identifiers can be pulled from the
-            [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) in
-            the `data.id` field.
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -6726,11 +6728,13 @@ components:
           type: string
         restricted_roles:
           description: A list of unique role identifiers to define which roles are
-            allowed to edit the monitor. Editing a monitor includes any updates to
-            the monitor configuration, monitor deletion, and muting of the monitor
-            for any amount of time. Roles unique identifiers can be pulled from the
-            [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) in
-            the `data.id` field.
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -14318,6 +14322,13 @@ components:
           format: date-time
           type: string
         ingested_events_bytes:
+          deprecated: true
+          description: Use `ingested_spans_billable_bytes` as of 2022-03-01. Contains
+            the total number of bytes ingested during a given hour using an old method
+            of calculating span volume.
+          format: int64
+          type: integer
+        ingested_spans_billable_bytes:
           description: Contains the total number of bytes ingested during a given
             hour.
           format: int64
@@ -14916,6 +14927,11 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        apm_ingested_spans_billable_bytes_sum:
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         audit_logs_lines_indexed_sum:
           description: Shows the sum of audit logs lines indexed over all hours in
             the current date for all organizations.
@@ -15231,6 +15247,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        apm_ingested_spans_billable_bytes_sum:
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         audit_logs_lines_indexed_sum:
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current date for the given org.
@@ -15544,6 +15565,11 @@ components:
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current months for all organizations.
+          format: int64
+          type: integer
+        apm_ingested_spans_billable_bytes_agg_sum:
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         audit_logs_lines_indexed_agg_sum:
@@ -17939,6 +17965,11 @@ paths:
           - file: dashboard_payload.json
             name: body
           step: there is a valid "dashboard" in the system
+        screenboard_dashboard:
+          parameters:
+          - file: screenboard_dashboard_payload.json
+            name: body
+          step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteDashboard
