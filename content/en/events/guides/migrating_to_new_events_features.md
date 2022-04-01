@@ -15,24 +15,11 @@ Launched more than 10 years ago, Datadog's event stream is one of its earliest f
 
 ## What is the migration timeline?
 
-The following timeline applies to US-based customers:
+<strong>March, 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors not managed using the API.
 
-<strong>March 5, 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors not managed using the API.
+<strong>May 5, 2022</strong> - The event stream is retired in favor of the Event Explorer.
 
-<strong>April 30, 2022</strong> - The event stream is retired in favor of the Event Explorer.
-
-<strong>May 15, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
-
-<strong>June 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
-
-
-The following timeline applies to EU-based customers:
-
-<strong>March 30, 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors not managed using the API.
-
-<strong>May 6, 2022</strong> - The event stream is retired in favor of the Event Explorer.
-
-<strong>May 20, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
+<strong>May 19, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
 
 <strong>June 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
 
