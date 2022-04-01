@@ -58,7 +58,7 @@ POST https://api.datadoghq.com/api/unstable/services/definition
 #### Example
 {{< code-block lang="yaml" filename="service_definition.yaml" collapsible="true" >}}
 ---
-schema-version: http://www.datadoghq.com/service/schema/v2.json 
+schema-version: v2
 dd-service: shopping-cart 
 team: e-commerce 
 contacts:

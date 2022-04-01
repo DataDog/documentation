@@ -94,7 +94,7 @@ When you change the value of a template variable, the dashboard URL updates to r
 To include just the value in the query, use the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `env`, use `environment:$env.value`.
 
 #### Associated template variables
-When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated by taking into consideration the other template variable values selected on the page, and seamlessly identifies the related values without any configuration.
+When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated from the other template variable values selected on the page, and seamlessly identify the related values without any configuration.
 
 {{< img src="dashboards/template_variables/associated_template_variables.png" alt="Associated template variables" style="width:75%;">}}
 
@@ -109,7 +109,7 @@ For example, with a template variable named `env`, with tag/attribute `environme
 
 ### Events overlay
 
-Use the [events overlay][4] search with template variables to find events that share certain tags with the metrics in your dashboard. The event overlay search is applied through an individual graph.
+Use the events overlay search with template variables to find events that share certain tags with the metrics in your dashboard. The event overlay search is applied through an individual graph.
 
 Values from dashboard template variables can be directly captured by using the `$<TEMPLATE_VARIABLE_KEY>.value` syntax in the event search field.
 
@@ -150,4 +150,3 @@ For example, enter `tags:$region` in the event overlays search box. This searche
 [1]: /getting_started/tagging/#defining-tags
 [2]: /logs/explorer/facets/
 [3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
-[4]: /dashboards/timeboards/#events
