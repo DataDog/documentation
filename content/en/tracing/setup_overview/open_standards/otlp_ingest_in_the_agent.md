@@ -55,7 +55,7 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-1. Follow the [Datadog Docker Agent setup]. 
+1. Follow the [Datadog Docker Agent setup][1]. 
   
 2. For the Datadog Agent container, set the following endpoint environment variables and expose the corresponding port: 
    - For gPRC: `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` and port `4317`
@@ -67,14 +67,75 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
    OTEL_EXPORTER_OTLP_ENDPOINT=http://<datadog-agent>:4318.
    ```
 
-4. Both containers must be defined in the same bridge network, which is handled automatically if you use Docker Compose. Otherwise, follow the Docker example in [Tracing Docker Applications][1] to set up a bridge network with the correct ports.
+4. Both containers must be defined in the same bridge network, which is handled automatically if you use Docker Compose. Otherwise, follow the Docker example in [Tracing Docker Applications][2] to set up a bridge network with the correct ports.
 
 
-[1]: /agent/docker/apm/#docker-network
+[1]: /agent/docker/
+[2]: /agent/docker/apm/#docker-network
 {{% /tab %}}
 {{% tab "Kubernetes (Daemonset)" %}}
 
+1. Follow the [Kubernetes Agent setup][1].
 
+2. Configure the following environment variables in both the trace Agent container and the core Agent container:
+   
+   For gPRC:
+   ```
+   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT # enables gRPC receiver on port 4317
+   value: "0.0.0.0:4317"
+   ```
+
+   For HTTP:
+   ```
+   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 55681
+   value: "0.0.0.0:55681"
+   ```
+3. Map the container ports 4317 or 55681 to the host port for the trace Agent container:
+
+   For gPRC:
+   ```
+   ports:
+     - containerPort: 4317
+       hostPort: 4317
+       name: traceportgrpc
+       protocol: TCP
+   ```
+
+   For HTTP 
+   ```
+   ports:
+     - containerPort: 55681
+       hostPort: 55681
+       name: traceporthttp
+       protocol: TCP
+   ```
+
+4. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
+
+   For gPRC:
+   ```
+   env:
+    - name: <DD_AGENT_HOST>
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: "http://$<DD_AGENT_HOST>:4317" # sends to gRPC receiver on port 4317
+   ```
+
+   For HTTP:
+   ```
+   env:
+    - name: <DD_AGENT_HOST>
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: "http://$<DD_AGENT_HOST>:55681" # sends to HTTP receiver on port 55681
+   ```
+
+
+[1]: /agent/kubernetes/?tab=daemonset
 {{% /tab %}}
 {{% tab "Kubernetes (Helm)" %}}
 
@@ -84,6 +145,6 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
 
 
 [1]: https://opentelemetry.io/docs/instrumentation/
-[2]: metrics/otlp/
+[2]: /metrics/otlp/
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
