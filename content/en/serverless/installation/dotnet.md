@@ -25,10 +25,6 @@ If you use the Datadog Lambda Extension, you can use Datadog's native .NET APM t
 ## Instrumentation
 ### Using the Datadog Lambda Extension
 
-<div class="alert alert-warning">
-Instrumenting .NET applications with the Datadog Lambda Extension is in beta.
-</div>
-
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs.
 
 {{< tabs >}}
