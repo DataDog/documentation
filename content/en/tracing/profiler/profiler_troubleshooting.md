@@ -61,6 +61,7 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 
 ## Enabling the heap profiler
 <div class="alert alert-info">The Java heap profiler feature is in beta.</div>
+<div class="aler alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
 To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
 
 Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):

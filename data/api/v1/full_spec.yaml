@@ -5783,11 +5783,13 @@ components:
           type: string
         restricted_roles:
           description: A list of unique role identifiers to define which roles are
-            allowed to edit the monitor. Editing a monitor includes any updates to
-            the monitor configuration, monitor deletion, and muting of the monitor
-            for any amount of time. Roles unique identifiers can be pulled from the
-            [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) in
-            the `data.id` field.
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -6726,11 +6728,13 @@ components:
           type: string
         restricted_roles:
           description: A list of unique role identifiers to define which roles are
-            allowed to edit the monitor. Editing a monitor includes any updates to
-            the monitor configuration, monitor deletion, and muting of the monitor
-            for any amount of time. Roles unique identifiers can be pulled from the
-            [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) in
-            the `data.id` field.
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -11387,9 +11391,6 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
-      required:
-      - from_ts
-      - to_ts
       type: object
     SyntheticsBrowserTestResultShortResult:
       description: Object with the result of the last browser test run.
@@ -13460,8 +13461,6 @@ components:
       - lambda_functions_percentage
       - lambda_invocations_usage
       - lambda_invocations_percentage
-      - lambda_usage
-      - lambda_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
       type: string
@@ -13486,8 +13485,6 @@ components:
       - LAMBDA_FUNCTIONS_PERCENTAGE
       - LAMBDA_INVOCATIONS_USAGE
       - LAMBDA_INVOCATIONS_PERCENTAGE
-      - LAMBDA_USAGE
-      - LAMBDA_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
     UsageAttributionSupportedMetrics:
@@ -13503,14 +13500,12 @@ components:
       - infra_host_usage
       - custom_timeseries_percentage
       - container_percentage
-      - lambda_usage
       - api_usage
       - apm_host_percentage
       - infra_host_percentage
       - snmp_usage
       - browser_percentage
       - api_percentage
-      - lambda_percentage
       - npm_host_usage
       - lambda_functions_usage
       - lambda_functions_percentage
@@ -13540,14 +13535,12 @@ components:
       - INFRA_HOST_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
       - CONTAINER_PERCENTAGE
-      - LAMBDA_USAGE
       - API_USAGE
       - APM_HOST_PERCENTAGE
       - INFRA_HOST_PERCENTAGE
       - SNMP_USAGE
       - BROWSER_PERCENTAGE
       - API_PERCENTAGE
-      - LAMBDA_PERCENTAGE
       - NPM_HOST_USAGE
       - LAMBDA_FUNCTIONS_USAGE
       - LAMBDA_FUNCTIONS_PERCENTAGE
@@ -13703,20 +13696,6 @@ components:
           type: number
         lambda_invocations_usage:
           description: The Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        lambda_percentage:
-          description: 'The percentage of Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_percentage instead.'
-          format: double
-          type: number
-        lambda_usage:
-          description: 'The Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_usage instead.'
           format: double
           type: number
         npm_host_percentage:
@@ -14343,8 +14322,8 @@ components:
           format: date-time
           type: string
         ingested_events_bytes:
-          description: Contains the total number of bytes ingested during a given
-            hour.
+          description: Contains the total number of bytes ingested for APM spans during
+            a given hour.
           format: int64
           type: integer
         org_name:
@@ -15227,8 +15206,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15542,8 +15521,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for the given org.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15902,8 +15881,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current months for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         usage:
@@ -17076,7 +17055,7 @@ components:
               an organization. The ability to write monitors is not required to set
               downtimes.
             monitors_read: View monitors.
-            monitors_write: Change, mute, and delete individual monitors.
+            monitors_write: Edit, mute, and delete individual monitors.
             synthetics_global_variable_read: View, search, and use in tests the list
               of global variables available for Synthetics.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -17964,6 +17943,11 @@ paths:
           - file: dashboard_payload.json
             name: body
           step: there is a valid "dashboard" in the system
+        screenboard_dashboard:
+          parameters:
+          - file: screenboard_dashboard_payload.json
+            name: body
+          step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteDashboard

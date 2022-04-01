@@ -4531,6 +4531,184 @@ components:
       x-enum-varnames:
       - ASC
       - DESC
+    RUMAggregateBucketValue:
+      description: A bucket value, can be either a timeseries or a single value.
+      oneOf:
+      - $ref: '#/components/schemas/RUMAggregateBucketValueSingleString'
+      - $ref: '#/components/schemas/RUMAggregateBucketValueSingleNumber'
+      - $ref: '#/components/schemas/RUMAggregateBucketValueTimeseries'
+    RUMAggregateBucketValueSingleNumber:
+      description: A single number value.
+      format: double
+      type: number
+    RUMAggregateBucketValueSingleString:
+      description: A single string value.
+      type: string
+    RUMAggregateBucketValueTimeseries:
+      description: A timeseries array.
+      items:
+        $ref: '#/components/schemas/RUMAggregateBucketValueTimeseriesPoint'
+      type: array
+      x-generate-alias-as-model: true
+    RUMAggregateBucketValueTimeseriesPoint:
+      description: A timeseries point.
+      properties:
+        time:
+          description: The time value for this point.
+          example: '2020-06-08T11:55:00.123Z'
+          format: date-time
+          type: string
+        value:
+          description: The value for this point.
+          example: 19
+          format: double
+          type: number
+      type: object
+    RUMAggregateRequest:
+      description: The object sent with the request to retrieve aggregation buckets
+        of RUM events from your organization.
+      properties:
+        compute:
+          description: The list of metrics or timeseries to compute for the retrieved
+            buckets.
+          items:
+            $ref: '#/components/schemas/RUMCompute'
+          type: array
+        filter:
+          $ref: '#/components/schemas/RUMQueryFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/RUMGroupBy'
+          type: array
+        options:
+          $ref: '#/components/schemas/RUMQueryOptions'
+        page:
+          $ref: '#/components/schemas/RUMQueryPageOptions'
+      type: object
+    RUMAggregateSort:
+      description: A sort rule.
+      example:
+        aggregation: count
+        order: asc
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/RUMAggregationFunction'
+        metric:
+          description: The metric to sort by (only used for `type=measure`).
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/RUMSortOrder'
+        type:
+          $ref: '#/components/schemas/RUMAggregateSortType'
+      type: object
+    RUMAggregateSortType:
+      default: alphabetical
+      description: The type of sorting algorithm.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    RUMAggregationBucketsResponse:
+      description: The query results.
+      properties:
+        buckets:
+          description: The list of matching buckets, one item per bucket.
+          items:
+            $ref: '#/components/schemas/RUMBucketResponse'
+          type: array
+      type: object
+    RUMAggregationFunction:
+      description: An aggregation function.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: pc90
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PERCENTILE_75
+      - PERCENTILE_90
+      - PERCENTILE_95
+      - PERCENTILE_98
+      - PERCENTILE_99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    RUMAnalyticsAggregateResponse:
+      description: The response object for the RUM events aggregate API endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/RUMAggregationBucketsResponse'
+        links:
+          $ref: '#/components/schemas/RUMResponseLinks'
+        meta:
+          $ref: '#/components/schemas/RUMResponseMetadata'
+      type: object
+    RUMBucketResponse:
+      description: Bucket values.
+      properties:
+        by:
+          additionalProperties:
+            description: The values for each group-by.
+            type: string
+          description: The key-value pairs for each group-by.
+          example:
+            '@session.type': user
+            '@type': view
+          type: object
+        computes:
+          additionalProperties:
+            $ref: '#/components/schemas/RUMAggregateBucketValue'
+          description: A map of the metric name to value for regular compute, or a
+            list of values for a timeseries.
+          type: object
+      type: object
+    RUMCompute:
+      description: A compute rule to compute metrics or timeseries.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/RUMAggregationFunction'
+        interval:
+          description: 'The time buckets'' size (only used for type=timeseries)
+
+            Defaults to a resolution of 150 points.'
+          example: 5m
+          type: string
+        metric:
+          description: The metric to use.
+          example: '@duration'
+          type: string
+        type:
+          $ref: '#/components/schemas/RUMComputeType'
+      required:
+      - aggregation
+      type: object
+    RUMComputeType:
+      default: total
+      description: The type of compute.
+      enum:
+      - timeseries
+      - total
+      type: string
+      x-enum-varnames:
+      - TIMESERIES
+      - TOTAL
     RUMEvent:
       description: Object description of a RUM event after being processed and stored
         by Datadog.
@@ -4600,6 +4778,89 @@ components:
         meta:
           $ref: '#/components/schemas/RUMResponseMetadata'
       type: object
+    RUMGroupBy:
+      description: A group-by rule.
+      properties:
+        facet:
+          description: The name of the facet to use (required).
+          example: '@view.time_spent'
+          type: string
+        histogram:
+          $ref: '#/components/schemas/RUMGroupByHistogram'
+        limit:
+          default: 10
+          description: The maximum buckets to return for this group-by.
+          format: int64
+          type: integer
+        missing:
+          $ref: '#/components/schemas/RUMGroupByMissing'
+        sort:
+          $ref: '#/components/schemas/RUMAggregateSort'
+        total:
+          $ref: '#/components/schemas/RUMGroupByTotal'
+      required:
+      - facet
+      type: object
+    RUMGroupByHistogram:
+      description: 'Used to perform a histogram computation (only for measure facets).
+
+        Note: At most 100 buckets are allowed, the number of buckets is (max - min)/interval.'
+      properties:
+        interval:
+          description: The bin size of the histogram buckets.
+          example: 10
+          format: double
+          type: number
+        max:
+          description: 'The maximum value for the measure used in the histogram
+
+            (values greater than this one are filtered out).'
+          example: 100
+          format: double
+          type: number
+        min:
+          description: 'The minimum value for the measure used in the histogram
+
+            (values smaller than this one are filtered out).'
+          example: 50
+          format: double
+          type: number
+      required:
+      - interval
+      - min
+      - max
+      type: object
+    RUMGroupByMissing:
+      description: The value to use for logs that don't have the facet used to group
+        by.
+      oneOf:
+      - $ref: '#/components/schemas/RUMGroupByMissingString'
+      - $ref: '#/components/schemas/RUMGroupByMissingNumber'
+    RUMGroupByMissingNumber:
+      description: The missing value to use if there is a number valued facet.
+      format: double
+      type: number
+    RUMGroupByMissingString:
+      description: The missing value to use if there is string valued facet.
+      type: string
+    RUMGroupByTotal:
+      default: false
+      description: A resulting object to put the given computes in over all the matching
+        records.
+      oneOf:
+      - $ref: '#/components/schemas/RUMGroupByTotalBoolean'
+      - $ref: '#/components/schemas/RUMGroupByTotalString'
+      - $ref: '#/components/schemas/RUMGroupByTotalNumber'
+    RUMGroupByTotalBoolean:
+      description: If set to true, creates an additional bucket labeled "$facet_total".
+      type: boolean
+    RUMGroupByTotalNumber:
+      description: A number to use as the key value for the total bucket.
+      format: double
+      type: number
+    RUMGroupByTotalString:
+      description: A string to use as the key value for the total bucket.
+      type: string
     RUMQueryFilter:
       description: The search and filter query settings.
       properties:
@@ -4730,6 +4991,16 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    RUMSortOrder:
+      description: The order to use, ascending or descending.
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASCENDING
+      - DESCENDING
     RUMWarning:
       description: A warning message indicating something that went wrong with the
         query.
@@ -7745,6 +8016,23 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-given:
+        dashboard_list_dashboard:
+          parameters:
+          - name: dashboard_list_id
+            source: dashboard_list.id
+          - name: body
+            value: "{\n  \"dashboards\": [\n    {\n      \"id\": \"{{ dashboard.id
+              }}\",\n      \"type\": \"custom_timeboard\"\n    }\n  ]\n}"
+          step: the "dashboard_list" has the "dashboard"
+        dashboard_list_screenboard_dashboard:
+          parameters:
+          - name: dashboard_list_id
+            source: dashboard_list.id
+          - name: body
+            value: "{\n  \"dashboards\": [\n    {\n      \"id\": \"{{ screenboard_dashboard.id
+              }}\",\n      \"type\": \"custom_screenboard\"\n    }\n  ]\n}"
+          step: the "dashboard_list" has the "screenboard_dashboard"
       x-menu-order: 2
       x-undo:
         type: safe
@@ -10698,6 +10986,41 @@ paths:
       x-menu-order: 10
       x-undo:
         type: safe
+  /api/v2/rum/analytics/aggregate:
+    post:
+      description: The API endpoint to aggregate RUM events into buckets of computed
+        metrics and timeseries.
+      operationId: AggregateRUMEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMAggregateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMAnalyticsAggregateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Aggregate RUM events
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -10798,7 +11121,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RUMSearchEventsRequest'
-        required: false
+        required: true
       responses:
         '200':
           content:
@@ -12726,7 +13049,7 @@ tags:
   name: Metrics
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
-- description: Search your RUM events over HTTP.
+- description: Search or aggregate your RUM events over HTTP.
   name: RUM
 - description: 'The Roles API is used to create and manage Datadog roles, what
 

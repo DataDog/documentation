@@ -1,7 +1,7 @@
 ---
-title: ログガイド
 kind: ガイド
 private: true
+title: ログガイド
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}
@@ -30,6 +30,7 @@ private: true
 {{< whatsnext desc="ログ処理" >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}ログパースのベストプラクティス{{< /nextlink >}}
     {{< nextlink href="/logs/guide/enrichment-tables/" >}}エンリッチメントテーブルを使用してログにカスタムメタデータを追加する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}よく使われるログ処理ルール{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -51,4 +52,3 @@ private: true
 {{< whatsnext desc="Cross product" >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}クロスプロダクト相関で容易にトラブルシューティング{{< /nextlink >}}
 {{< /whatsnext >}}
-

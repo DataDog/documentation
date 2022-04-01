@@ -24,10 +24,6 @@ Logs might contain **sensitive information** that could either get [scrubbed][1]
 
 This guide provides a methodology in developing customized Datadog roles that allows users to access logs and log features in a compliant manner.
 
-<div class="alert alert-warning">
-Creating and modifying custom roles is an opt-in feature. <a href="/help">Contact Datadog support</a> to get it enabled for your account.
-</div>
-
 ### Multiple teams
 
 Assume that your organization consists of multiple teams. One of these is the **ACME** (Applicative Component Making Errors) team, whose members deal with ACME Logs for troubleshooting and auditing purposes.
@@ -66,15 +62,14 @@ For example, in the context of Docker Log Collection, attach the `team:acme` tag
 
 ### Log in as a Datadog Admin
 
-The actions you have to perform in that guide require you belong to a Datadog Admin role. More specifically, you need:
+To execute the remaining actions in this guide, your user account requires the Datadog Admin role or similar. You need the following permissions:
 
-* Permissions to create roles and assign users to roles (actual privileged access).
+* Permissions to create roles and assign users to roles.
 * Permissions to create [Log Pipelines][4], [Log Indexes][5], and [Log Archives][6].
 * If you wish to perform those operations through the API, permissions to interact through the [Log Configuration API][7].
 
-Check in [Datadog][8] that you have all these permissions. If you are missing any, ask a Datadog Admin user to set them for you.
+Check in the [Users list][8] that you have all these permissions. If you are missing any, ask a Datadog Admin user to set them for you.
 
-{{< img src="logs/guide/rbac/admin_permissions.png" alt="Check your permissions as an admin"  style="width:60%;">}}
 
 ### Get an API key and an app key
 
@@ -123,16 +118,14 @@ This section explains how to create two roles, `ACME Admin` and `ACME User`; how
 {{< tabs >}}
 {{% tab "UI" %}}
 
-In the [Team Section][1] of Datadog, use the Add Role button within the Role tab to create the new `ACME Admin` and `ACME User`roles.
+In the [Groups Section][1] of Datadog Organization Settings, use the Add Role button within the Role tab to create the new `ACME Admin` and `ACME User`roles.
 
-{{< img src="logs/guide/rbac/add_role.png" alt="Add a new role"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/add_role.png" alt="Add a new role" style="width:60%;">}}
 
 When creating a new role:
 
 * Create with Standard Access.
 * Grant Read Index Data and Live Tail permissions—these are [legacy permissions][2] that you can safely enable.
-
-{{< img src="logs/guide/rbac/minimal_permissions.png" alt="Grant minimal permissions"  style="width:60%;">}}
 
 More information on creating roles is available in the [Account Management][3] section.
 
@@ -393,7 +386,7 @@ Assign the [Write Historical View][19] permission to members of `ACME Admin`. Th
 [5]: /account_management/rbac/permissions?tab=ui#logs_modify_indexes
 [6]: /account_management/rbac/permissions?tab=ui#logs_write_archives
 [7]: /account_management/rbac/permissions?tab=ui#logs_public_config_api
-[8]: https://app.datadoghq.com/access/users
+[8]: https://app.datadoghq.com/organization-settings/users
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: /account_management/api-app-keys/
 [11]: /api/v2/roles/#list-permissions

@@ -1,7 +1,6 @@
 ---
 title: RUM によるブラウザテストのインスツルメント
 kind: ガイド
-aliases: /continuous_integration/guides/rum_integration/
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
