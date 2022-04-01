@@ -1,7 +1,7 @@
 ---
 title: Setting Up Database Monitoring for Azure Database for PostgreSQL
 kind: documentation
-description: Install and configure Database Monitoring for Postgres managed on Azure.
+description: Install and configure Database Monitoring for PostgreSQL managed on Azure.
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
@@ -26,6 +26,9 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13
 
+Supported Azure PostgreSQL deployment types
+: Single Server
+
 Supported Agent versions
 : 7.35.0+
 
@@ -41,7 +44,7 @@ Data security considerations
 
 ## Configure Postgres settings
 
-Configure the following [parameters][3] in the [Server parameters][4] and then **restart the server** for the settings to take effect. Note, the `pg_stat_statements` is extension is pre-loaded by default on all Azure managed postgres instances. For more information about these parameters, see the [Postgres documentation][5].
+Configure the following [parameters][3] in the [Server parameters][4] and then **restart the server** for the settings to take effect. Note, the `pg_stat_statements` extension is pre-loaded by default on all Azure managed postgres instances. For more information about these parameters, see the [Postgres documentation][5].
 
 | Parameter | Value | Description |
 | --- | --- | --- |

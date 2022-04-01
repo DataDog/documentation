@@ -27,6 +27,9 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported MySQL versions
 : 5.7, or 8.0+
 
+Supported Azure MySQL deployment types
+: Single Server
+
 Supported Agent versions
 : 7.35.0+
 
