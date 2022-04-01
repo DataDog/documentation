@@ -242,7 +242,10 @@ If you've configured the profiler and don't see profiles in the profile search p
       ```
       ["_profilesIngestionEndpoint_url"]="http://127.0.0.1:8126/profiling/v1/input",
       ```
-      If your configuration specifies a different trace Agent URL using `DD_TRACE_AGENT_URL` or `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables, then this field must match those values. 
+      If your configuration specifies a different trace Agent URL using `DD_TRACE_AGENT_URL` or `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables, then this field must match those values. For example:
+      ```
+      ["_profilesIngestionEndpoint_url"]="http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>/profiling/v1/input",
+      ```
 
 Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug files and the following information:
 - Operating system type and version (for example, Windows Server 2019).
