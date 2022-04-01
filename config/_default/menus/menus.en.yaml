@@ -1663,6 +1663,11 @@ main:
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
     weight: 1706
+  - name: .NET diagnostic tool
+    url: tracing/troubleshooting/dotnet_diagnostic_tool
+    identifier: tracing_troubleshooting_dotnet_diagnostic_tool
+    parent: tracing_troubleshooting
+    weight: 1707
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
