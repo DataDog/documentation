@@ -119,7 +119,7 @@ To clone an existing role:
 
 1. Go to your [Datadog Roles page][1].
 2. Hover over the role you would like to clone. A series of buttons appears to the right.
-3. Select the clone button on the role you would like to delete.
+3. Select the clone button on the role you would like to clone.
 4. Optionally modify the name or permissions of the role.
 5. Click the **Save** button at the bottom.
 
