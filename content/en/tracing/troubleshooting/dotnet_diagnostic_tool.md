@@ -12,9 +12,9 @@ The tool can be installed in three different ways:
 dotnet tool install -g dd-trace
 ```
 - By downloading from one of the short links:
-    * Win-x64: * [https://dtdg.co/dd-trace-net-win-x64](https://dtdg.co/dd-trace-net-win-x64)
-    * Linux-x64: * [https://dtdg.co/dd-trace-net-linux-x64](https://dtdg.co/dd-trace-net-linux-x64)
-    * Linux-musl-x64 (Alpine): * [https://dtdg.co/dd-trace-net-linux-musl-x64](https://dtdg.co/dd-trace-net-linux-musl-x64)
+    * Win-x64: [https://dtdg.co/dd-trace-net-win-x64](https://dtdg.co/dd-trace-net-win-x64)
+    * Linux-x64: [https://dtdg.co/dd-trace-net-linux-x64](https://dtdg.co/dd-trace-net-linux-x64)
+    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-net-linux-musl-x64](https://dtdg.co/dd-trace-net-linux-musl-x64)
  
 - Or by downloading [from the github release page](https://github.com/DataDog/dd-trace-dotnet/releases)
 
