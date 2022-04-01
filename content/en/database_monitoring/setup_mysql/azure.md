@@ -50,9 +50,8 @@ Configure the following in the [server parameters][3] and then **restart the ser
 | Parameter | Value | Description |
 | --- | -- | --- |
 | `performance_schema` | `ON` | Required. Enables the [Performance Schema][1]. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 
-The agent requires the `performance_schema.events_statements_*` consumers to be enabled to collect currently running queries. By default, Azure MySQL Database enables performance schema consumers so no additional configuraiton is required.
+The agent also requires `performance_schema.events_statements_*` consumers to be set to `ON` to collect currently running queries. By default, Azure MySQL Database enables performance schema consumers so no additional configuration is required.
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 
