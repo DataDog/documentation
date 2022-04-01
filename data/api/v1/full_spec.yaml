@@ -14322,15 +14322,8 @@ components:
           format: date-time
           type: string
         ingested_events_bytes:
-          deprecated: true
-          description: Use `ingested_spans_billable_bytes` as of 2022-03-01. Contains
-            the total number of bytes ingested during a given hour using an old method
-            of calculating span volume.
-          format: int64
-          type: integer
-        ingested_spans_billable_bytes:
-          description: Contains the total number of bytes ingested during a given
-            hour.
+          description: Contains the total number of bytes ingested for APM spans during
+            a given hour.
           format: int64
           type: integer
         org_name:
@@ -14927,11 +14920,6 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
-        apm_ingested_spans_billable_bytes_sum:
-          description: Shows the sum of all ingested APM span bytes over all hours
-            in the current date for all organizations.
-          format: int64
-          type: integer
         audit_logs_lines_indexed_sum:
           description: Shows the sum of audit logs lines indexed over all hours in
             the current date for all organizations.
@@ -15218,8 +15206,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15245,11 +15233,6 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
-          format: int64
-          type: integer
-        apm_ingested_spans_billable_bytes_sum:
-          description: Shows the sum of all ingested APM span bytes over all hours
-            in the current date for the given org.
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
@@ -15538,8 +15521,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for the given org.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15565,11 +15548,6 @@ components:
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current months for all organizations.
-          format: int64
-          type: integer
-        apm_ingested_spans_billable_bytes_agg_sum:
-          description: Shows the sum of all ingested APM span bytes over all hours
-            in the current months for all organizations.
           format: int64
           type: integer
         audit_logs_lines_indexed_agg_sum:
@@ -15903,8 +15881,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current months for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         usage:
