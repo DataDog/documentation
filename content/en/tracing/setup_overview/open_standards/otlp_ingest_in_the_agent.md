@@ -7,7 +7,9 @@ aliases:
 ---
 
 
-OTLP Ingest in the Agent is a way to send telemetry data directly from [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through both gRPC and HTTP.
+OTLP Ingest in the Agent is a way to send telemetry data directly from [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP.
+
+OTLP Ingest in the Agent allows you to use trace observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog Tracing Library specific features aren't available for the ingested data including Application Security, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
 
 <div class="alert alert-warning">OpenTelemetry Metrics ingestion is in beta and its behavior and configuration may change.</div>
 
@@ -139,12 +141,93 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
 {{% /tab %}}
 {{% tab "Kubernetes (Helm)" %}}
 
+1. Follow the [Kubernetes Agent setup][1].
 
+2. Set environment variables for the Agent. You can either use `set` commands:
+
+   For gRPC:
+   ```
+   --set 'agents.containers.traceAgent.ports[0].containerPort=4317,agents.containers.traceAgent.ports[0].hostPort=4317,agents.containers.traceAgent.ports[0].name=traceportgrpc,agents.containers.traceAgent.ports[0].protocol=TCP' 
+
+   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT,datadog.env[0].value=0.0.0.0:4317"
+   ```
+   For HTTP:
+   ```
+   --set 'agents.containers.traceAgent.ports[0].containerPort=55681,agents.containers.traceAgent.ports[0].hostPort=55681,agents.containers.traceAgent.ports[0].name=traceporthttp,agents.containers.traceAgent.ports[0].protocol=TCP'
+
+   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:55681"
+
+   ```
+
+   Or in the set them in the `datadog.env` file (a more flexible but less automated way than the `set` commands):
+
+   For gRPC:
+   ```
+   env
+     - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT
+       value: "0.0.0.0:4317"
+   ```
+   
+   For HTTP:
+   ```
+   env: 
+     - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT
+       value: "0.0.0.0:55681"
+   ```
+
+3. Map the container ports (`4317` for gRPC or `55681` for HTTP) to the host port for the trace Agent container:
+
+   For gRPC:
+   ```
+     ports: 
+       - containerPort: 4317
+         hostPort: 4317
+         name: traceportgrpc
+         protocol: TCP
+   ```
+
+   For HTTP:
+   ```
+     ports: 
+       - containerPort: 55681
+         hostPort: 55681
+         name: traceporthttp
+         protocol: TCP
+   ```
+
+4. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
+
+   For gPRC:
+   ```
+   env:
+    - name: <DD_AGENT_HOST>
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: "http://$<DD_AGENT_HOST>:4317" # sends to gRPC receiver on port 4317
+   ```
+
+   For HTTP:
+   ```
+   env:
+    - name: <DD_AGENT_HOST>
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: "http://$<DD_AGENT_HOST>:55681" # sends to HTTP receiver on port 55681
+   ```
+
+
+[1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
 {{< /tabs >}}
 
+There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][5].
 
 [1]: https://opentelemetry.io/docs/instrumentation/
 [2]: /metrics/otlp/
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
+[5]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
