@@ -276,30 +276,27 @@ and add the relevant settings to `customAgentConfig`.
 
 ```yaml
 # agents.useConfigMap -- Configures a configmap to provide the agent configuration. Use this in combination with the `agents.customAgentConfig` parameter.
-  useConfigMap:  # false
+  useConfigMap:  true
 
   # agents.customAgentConfig -- Specify custom contents for the datadog agent config (datadog.yaml)
   ## ref: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6
   ## ref: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
-  customAgentConfig: {}
-  #   # Autodiscovery for Kubernetes
-  #   listeners:
-  #     - name: kubelet
-  #   config_providers:
-  #     - name: kubelet
-  #       polling: true
-  #     # needed to support legacy docker label config templates
-  #     - name: docker
-  #       polling: true
-  #
-  #   # Enable java cgroup handling. Only one of those options should be enabled,
-  #   # depending on the agent version you are using along that chart.
-  #
-  #   # agent version < 6.15
-  #   # jmx_use_cgroup_memory_limit: true
-  #
-  #   # agent version >= 6.15
-  #   # jmx_use_container_support: true
+  customAgentConfig:
+    additional_endpoints:
+      "https://mydomain.datadoghq.com":
+      - apikey2
+      - apikey3
+      "https://mydomain.datadoghq.eu":
+      - apikey4 
+
+    logs_config:
+      use_http: true
+      additional_endpoints:
+      - api_key: "apiKey2"
+        Host: "https://mydomain.datadoghq.com"
+        Port: 443
+        is_reliable: true
 ```
 
+If you're using the [Datadog Agent operator](https://github.com/DataDog/datadog-operator) similarly you can set the `agent.customConfig.configData` key. All configurable keys are documented [here](https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md).
