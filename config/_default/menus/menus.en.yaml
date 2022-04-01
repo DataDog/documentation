@@ -812,89 +812,94 @@ main:
     parent: serverless_installation
     identifier: serverless_installation_dotnet
     weight: 106
+  - name: Configuration
+    url: serverless/configuration
+    parent: serverless
+    identifier: serverless_configuration
+    weight: 2
   - name: Libraries & Integrations
     url: serverless/libraries_integrations
     parent: serverless
     identifier: libraries_integrations
-    weight: 2
+    weight: 3
   - name: Datadog Lambda Extension
     url: serverless/libraries_integrations/extension/
     parent: libraries_integrations
-    weight: 201
+    weight: 301
   - name: Datadog Lambda Library
     url: serverless/libraries_integrations/library/
     parent: libraries_integrations
-    weight: 202
+    weight: 302
   - name: Datadog Forwarder
     url: serverless/libraries_integrations/forwarder/
     parent: libraries_integrations
-    weight: 203
+    weight: 303
   - name: Datadog Serverless Plugin
     url: serverless/libraries_integrations/plugin/
     parent: libraries_integrations
-    weight: 204
+    weight: 304
   - name: Datadog Serverless Macro
     url: serverless/libraries_integrations/macro/
     parent: libraries_integrations
-    weight: 205
+    weight: 305
   - name: Datadog Serverless CLI
     url: serverless/libraries_integrations/cli/
     parent: libraries_integrations
-    weight: 206
+    weight: 306
   - name: Lambda Code Signing
     url: serverless/libraries_integrations/lambda_code_signing/
     parent: libraries_integrations
-    weight: 207
+    weight: 307
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless
-    weight: 3
+    weight: 4
   - name: Collect Lambda Payloads
     url: serverless/distributed_tracing/collect_lambda_payloads
     parent: serverless_distributed_tracing
-    weight: 301
+    weight: 401
   - name: Trace Merging (Advanced)
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
-    weight: 302
+    weight: 402
   - name: Trace Propagation (Advanced)
     url: serverless/distributed_tracing/serverless_trace_propagation
     parent: serverless_distributed_tracing
-    weight: 303
+    weight: 403
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
     identifier: custom_metrics
-    weight: 4
+    weight: 5
   - name: Enhanced Lambda Metrics
     url: serverless/enhanced_lambda_metrics
     parent: serverless
-    weight: 5
+    weight: 6
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless
-    weight: 6
+    weight: 7
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 7
+    weight: 8
   - name: Azure App Service Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 8
+    weight: 9
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 9
+    weight: 10
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 10
+    weight: 11
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level

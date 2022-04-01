@@ -4,25 +4,38 @@ kind: documentation
 aliases:
     - /serverless/installation/installing_the_library/
 further_reading:
-    - link: 'serverless/installation/node'
+    - link: '/serverless/configuration/'
       tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
+      text: 'Configure Serverless Monitoring'
+    - link: "/integrations/amazon_lambda/"
+      tag: "Documentation"
+      text: "AWS Lambda Integration"
 ---
 
 ## Quick start
 
-If you are new to Datadog, you can get started by [signing up for a Datadog account][5], then following the instructions for [installing Datadog's Lambda Extension][6]. Completing these steps will configure your Lambda functions to send real-time metrics, logs, and traces to Datadog:
-
-{{< img src="serverless/aws-fully-managed-services-serverless-monitoring-hero.png" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
+If you are new to Datadog, [sign up for a Datadog account][1], then follow the installation instructions for [AWS Lambda][2]. Completing the steps will configure your Lambda functions to send real-time metrics, logs, and traces to Datadog.
 
 ## Installation instructions
 
-For more detailed installation instructions, select the Lambda runtime below for instructions to instrument your serverless application:
+For more detailed installation instructions, select the Lambda runtime below:
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
-[5]: https://app.datadoghq.com/signup/
-[6]: https://app.datadoghq.com/signup/agent#lambda
+## Advanced Configurations
+
+After the installation and collecting the telemetry, follow the [advanced configurations][3] to:
+
+- connect your metrics, traces, and logs using tags
+- collect metrics, traces, and logs from AWS API Gateway, SQS, etc.
+- collect the request and response payloads for individual Lambda invocations
+- link errors of your Lambda functions to your source code
+- filter or scrub sensitive information from logs or traces
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/signup/
+[2]: https://app.datadoghq.com/signup/agent#lambda
+[3]: /serverless/configuration/
