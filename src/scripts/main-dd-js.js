@@ -2,6 +2,7 @@ import 'bootstrap';
 
 
 import './datadog-docs';
+import './utms';
 
 import './components/copy-code';
 import './components/global-modals';

@@ -15,9 +15,7 @@ further_reading:
 
 ## Generate span-based metrics
 
-With Tracing without Limits™, you can generate metrics from 100% of ingested spans, regardless of whether they are indexed by a [retention filter][1].
-
-You can pair these metrics with retention filters and Analytics monitors, or use them on their own.
+Generate metrics from 100% of ingested spans, regardless of whether they are indexed by a [retention filter][1].
 
 Use custom metrics for specific fixed queries and comparisons, while creating retention filters to allow arbitrary querying and investigation of the retained trace and its flame graph.
 

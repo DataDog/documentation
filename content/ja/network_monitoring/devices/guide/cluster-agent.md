@@ -13,7 +13,7 @@ further_reading:
 ---
 Kubernetes 環境では、Network Device Monitoring (NDM) のオートディスカバリー論理を[クラスターチェック][2]のソースとして使用するよう [Datadog Cluster Agent][1] (DCA) を構成することが可能です。
 
-Agent のオートディスカバリーを DCA と組み合わせると非常にスケーラブルになり、大量のデバイスを監視することができます。
+Agent のオートディスカバリーを DCA と組み合わせるとスケーラブルになり、大量のデバイスを監視することができます。
 
 ## セットアップ
 

@@ -19,6 +19,8 @@ The Datadog Mobile app enables you to view alerts from Datadog on your mobile de
 
 Download the app from the [Apple App Store][1] for your iOS device, or from the [Google Play store][2] for your Android device.
 
+{{< img src="mobile/dd_mobile_app_qr_3.png" style="width:20%; background:none; border:none; box-shadow:none;" alt="Download Datadog mobile app">}}
+
 ### Logging in
 
 You can log in using standard authentication, Google authentication, or [SAML][3] - for both the US and the EU region.
@@ -94,7 +96,7 @@ To dive deeper into issues, tap any open incident displayed in the widget to hav
 Also, you can customize your Open Incidents widgets by filtering on:
 
 - Organization
-- Serverity levels
+- Severity levels
 - Customers impacted
 - Ordering
 

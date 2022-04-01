@@ -135,6 +135,12 @@ Datadog [Cloud SIEM][21] (Security Information and Event Management) automatical
 
 Datadog [Synthetic Monitoring][22] allow you to create and run API and browser tests that proactively simulate user transactions on your applications and monitor all internal and external network endpoints across your system's layers. You can detect errors, identify regressions, and automate rollbacks to prevent issues from surfacing in production. 
 
+## Datadog on Mobile
+
+The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google Play Store][25], gives key data for on-call engineers and business users to follow their service health and triage issues quickly without opening their laptop. Access your organization’s Dashboards, Monitors, Incidents, SLOs and more directly from your mobile device.
+
+{{< img src="getting_started/application/mobile-app-store-screens.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Mobile App on iOS">}}
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -153,10 +159,13 @@ Datadog [Synthetic Monitoring][22] allow you to create and run API and browser t
 [13]: /events/#@-notifications
 [14]: /help/
 [15]: /dashboards/
-[16]: /dashboards/screenboard/
+[16]: /dashboards/#screenboards
 [17]: /dashboards/functions/
 [18]: /real_user_monitoring/
 [19]: /real_user_monitoring/session_replay/
 [20]: /monitors/
 [21]: /security_platform/cloud_siem/
 [22]: /synthetics/
+[23]: /mobile/
+[24]: https://apps.apple.com/app/datadog/id1391380318
+[25]: https://play.google.com/store/apps/details?id=com.datadog.app

@@ -183,7 +183,7 @@ Learn more about [DogStatsD over Unix Domain Sockets][21].
 
 As a best practice, Datadog recommends using [unified service tagging][22] when assigning tags.
 
-Datadog automatically collects common tags from [Docker][23], [Kubernetes][24], [ECS][25], [Swarm, Mesos, Nomad, and Rancher][23]. To extract even more tags, use the following options:
+Datadog automatically collects common tags from Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher. To extract even more tags, use the following options:
 
 | Env Variable               | Description                                               |
 |----------------------------|-----------------------------------------------------------|
@@ -191,11 +191,11 @@ Datadog automatically collects common tags from [Docker][23], [Kubernetes][24], 
 | `DD_DOCKER_ENV_AS_TAGS`    | Extract Docker container environment variables            |
 | `DD_COLLECT_EC2_TAGS`      | Extract custom EC2 tags without using the AWS integration |
 
-See the [Docker Tag Extraction][26] documentation to learn more.
+See the [Docker Tag Extraction][23] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][27].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][24].
 
 ### Ignore containers
 
@@ -212,7 +212,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE`                | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                                                                                                                     |
 | `DD_AC_EXCLUDE`                | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*`                                                                                        |
 
-Additional examples are available on the [Container Discover Management][28] page.
+Additional examples are available on the [Container Discover Management][25] page.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -227,7 +227,7 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][29] to discover all the Docker Agent commands.
+See the [Agent Commands guides][26] to discover all the Docker Agent commands.
 
 ## Data collected
 
@@ -237,16 +237,16 @@ By default, the Docker Agent collects metrics with the following core checks. To
 
 | Check       | Metrics       |
 |-------------|---------------|
-| CPU         | [System][30]  |
-| Disk        | [Disk][31]    |
-| Docker      | [Docker][32]  |
-| File Handle | [System][30]  |
-| IO          | [System][30]  |
-| Load        | [System][30]  |
-| Memory      | [System][30]  |
-| Network     | [Network][33] |
-| NTP         | [NTP][34]     |
-| Uptime      | [System][30]  |
+| CPU         | [System][27]  |
+| Disk        | [Disk][28]    |
+| Docker      | [Docker][29]  |
+| File Handle | [System][27]  |
+| IO          | [System][27]  |
+| Load        | [System][27]  |
+| Memory      | [System][27]  |
+| Network     | [Network][30] |
+| NTP         | [NTP][31]     |
+| Uptime      | [System][27]  |
 
 ### Events
 
@@ -286,15 +286,12 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [20]: /developers/dogstatsd/
 [21]: /developers/dogstatsd/unix_socket/
 [22]: /getting_started/tagging/unified_service_tagging/
-[23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
-[24]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
-[25]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[26]: /agent/docker/tag/
-[27]: /agent/guide/secrets-management/?tab=linux
-[28]: /agent/guide/autodiscovery-management/
-[29]: /agent/guide/agent-commands/
-[30]: /integrations/system/#metrics
-[31]: /integrations/disk/#metrics
-[32]: /agent/docker/data_collected/#metrics
-[33]: /integrations/network/#metrics
-[34]: /integrations/ntp/#metrics
+[23]: /agent/docker/tag/
+[24]: /agent/guide/secrets-management/?tab=linux
+[25]: /agent/guide/autodiscovery-management/
+[26]: /agent/guide/agent-commands/
+[27]: /integrations/system/#metrics
+[28]: /integrations/disk/#metrics
+[29]: /agent/docker/data_collected/#metrics
+[30]: /integrations/network/#metrics
+[31]: /integrations/ntp/#metrics

@@ -97,7 +97,7 @@ components:
 
             For example, `env:production,instance-type:c1.*,!region:us-east-1`'
           example:
-          - <KEY>:<VALUE>
+          - $KEY:$VALUE
           items:
             description: The list of the filter_tags.
             type: string
@@ -107,7 +107,7 @@ components:
 
             and metrics reporting through this integration.'
           example:
-          - <KEY>:<VALUE>
+          - $KEY:$VALUE
           items:
             description: The list of the the host_tags.
             type: string
@@ -755,8 +755,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -780,7 +779,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -2623,7 +2621,7 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
-      description: Timeseries or Scalar response. **This feature is currently in beta.**
+      description: Timeseries or Scalar response.
       enum:
       - timeseries
       - scalar
@@ -2797,11 +2795,11 @@ components:
           example: '123456712345671234567'
           type: string
         client_x509_cert_url:
-          description: 'Should be `https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>`
+          description: 'Should be `https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL`
 
-            where `<CLIENT_EMAIL>` is the email found in your JSON service account
+            where `$CLIENT_EMAIL` is the email found in your JSON service account
             key.'
-          example: https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>
+          example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
         errors:
           description: An array of errors.
@@ -2939,8 +2937,7 @@ components:
       description: An updated geomap widget.
       properties:
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -2951,7 +2948,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -4418,7 +4414,7 @@ components:
       properties:
         date:
           description: The month for the usage.
-          format: datetime
+          format: date-time
           type: string
         usage:
           description: Indexed logs usage for each active retention for the month.
@@ -4875,7 +4871,7 @@ components:
       properties:
         from:
           description: Minimum timestamp for requested logs.
-          example: '2020-02-02T02:02:02Z'
+          example: '2020-02-02T02:02:02.202Z'
           format: date-time
           type: string
         timezone:
@@ -4885,7 +4881,7 @@ components:
           type: string
         to:
           description: Maximum timestamp for requested logs.
-          example: '2020-02-02T20:20:20Z'
+          example: '2020-02-20T02:02:02.202Z'
           format: date-time
           type: string
       required:
@@ -5786,8 +5782,14 @@ components:
           example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
           type: string
         restricted_roles:
-          description: A list of role identifiers that can be pulled from the Roles
-            API. Cannot be used with `locked` option.
+          description: A list of unique role identifiers to define which roles are
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -5957,10 +5959,12 @@ components:
       description: Data source for event platform-based queries.
       enum:
       - rum
+      - ci_pipelines
       example: rum
       type: string
       x-enum-varnames:
       - RUM
+      - CI_PIPELINES
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -6112,8 +6116,9 @@ components:
             - If `False`, `[Triggered] Monitor Title`'
           type: boolean
         locked:
+          deprecated: true
           description: Whether or not the monitor is locked (only editable by creator
-            and admins).
+            and admins). Use `restricted_roles` instead.
           type: boolean
         min_failure_duration:
           default: 0
@@ -6653,6 +6658,7 @@ components:
       - event-v2 alert
       - audit alert
       - ci-pipelines alert
+      - error-tracking alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -6670,6 +6676,7 @@ components:
       - EVENT_V2_ALERT
       - AUDIT_ALERT
       - CI_PIPELINES_ALERT
+      - ERROR_TRACKING_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -6720,8 +6727,14 @@ components:
           description: The monitor query.
           type: string
         restricted_roles:
-          description: A list of role identifiers that can be pulled from the Roles
-            API. Cannot be used with `locked` option.
+          description: A list of unique role identifiers to define which roles are
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -7825,7 +7838,7 @@ components:
         name:
           description: The name of the new child-organization, limited to 32 characters.
           example: New child org
-          maximum: 32
+          maxLength: 32
           type: string
         public_id:
           description: The `public_id` of the organization you are operating within.
@@ -7854,7 +7867,7 @@ components:
         name:
           description: The name of the new child-organization, limited to 32 characters.
           example: New child org
-          maximum: 32
+          maxLength: 32
           type: string
         subscription:
           $ref: '#/components/schemas/OrganizationSubscription'
@@ -8158,8 +8171,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -8176,7 +8188,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -9403,14 +9414,12 @@ components:
       description: Scatterplot request containing formulas and functions.
       properties:
         formulas:
-          description: List of Scatterplot formulas that operate on queries. **This
-            feature is currently in beta.**
+          description: List of Scatterplot formulas that operate on queries.
           items:
             $ref: '#/components/schemas/ScatterplotWidgetFormula'
           type: array
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -10449,8 +10458,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -10467,7 +10475,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -11130,7 +11137,7 @@ components:
         locations:
           description: Array of locations used to run the test.
           example:
-          - example-location
+          - aws:eu-west-3
           items:
             description: A location from which the test was run.
             type: string
@@ -11164,6 +11171,8 @@ components:
           type: array
         tags:
           description: Array of tags attached to the test.
+          example:
+          - env:prod
           items:
             description: A tag attached to the test.
             type: string
@@ -11382,9 +11391,6 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
-      required:
-      - from_ts
-      - to_ts
       type: object
     SyntheticsBrowserTestResultShortResult:
       description: Object with the result of the last browser test run.
@@ -11527,6 +11533,8 @@ components:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
           items:
             description: A location from which the test was run.
             type: string
@@ -12323,6 +12331,8 @@ components:
           $ref: '#/components/schemas/Creator'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
           items:
             description: A location from which the test was run.
             type: string
@@ -12895,8 +12905,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -12920,7 +12929,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13084,8 +13092,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -13110,7 +13117,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13185,8 +13191,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -13203,7 +13208,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13291,8 +13295,7 @@ components:
       description: An updated treemap widget.
       properties:
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -13301,7 +13304,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13459,8 +13461,6 @@ components:
       - lambda_functions_percentage
       - lambda_invocations_usage
       - lambda_invocations_percentage
-      - lambda_usage
-      - lambda_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
       type: string
@@ -13485,8 +13485,6 @@ components:
       - LAMBDA_FUNCTIONS_PERCENTAGE
       - LAMBDA_INVOCATIONS_USAGE
       - LAMBDA_INVOCATIONS_PERCENTAGE
-      - LAMBDA_USAGE
-      - LAMBDA_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
     UsageAttributionSupportedMetrics:
@@ -13502,14 +13500,12 @@ components:
       - infra_host_usage
       - custom_timeseries_percentage
       - container_percentage
-      - lambda_usage
       - api_usage
       - apm_host_percentage
       - infra_host_percentage
       - snmp_usage
       - browser_percentage
       - api_percentage
-      - lambda_percentage
       - npm_host_usage
       - lambda_functions_usage
       - lambda_functions_percentage
@@ -13539,14 +13535,12 @@ components:
       - INFRA_HOST_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
       - CONTAINER_PERCENTAGE
-      - LAMBDA_USAGE
       - API_USAGE
       - APM_HOST_PERCENTAGE
       - INFRA_HOST_PERCENTAGE
       - SNMP_USAGE
       - BROWSER_PERCENTAGE
       - API_PERCENTAGE
-      - LAMBDA_PERCENTAGE
       - NPM_HOST_USAGE
       - LAMBDA_FUNCTIONS_USAGE
       - LAMBDA_FUNCTIONS_PERCENTAGE
@@ -13702,20 +13696,6 @@ components:
           type: number
         lambda_invocations_usage:
           description: The Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        lambda_percentage:
-          description: 'The percentage of Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_percentage instead.'
-          format: double
-          type: number
-        lambda_usage:
-          description: 'The Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_usage instead.'
           format: double
           type: number
         npm_host_percentage:
@@ -13917,6 +13897,41 @@ components:
           description: An array of objects regarding usage of billable summary.
           items:
             $ref: '#/components/schemas/UsageBillableSummaryHour'
+          type: array
+      type: object
+    UsageCIVisibilityHour:
+      description: CI visibility usage in a given hour.
+      properties:
+        ci_pipeline_indexed_spans:
+          description: The number of spans for pipelines in the queried hour.
+          type: integer
+        ci_test_indexed_spans:
+          description: The number of spans for tests in the queried hour.
+          type: integer
+        ci_visibility_pipeline_committers:
+          description: Shows the total count of all active Git committers for Pipelines
+            in the current month. A committer is active if they commit at least 3
+            times in a given month.
+          type: integer
+        ci_visibility_test_committers:
+          description: The total count of all active Git committers for tests in the
+            current month. A committer is active if they commit at least 3 times in
+            a given month.
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageCIVisibilityResponse:
+      description: CI visibility usage response
+      properties:
+        usage:
+          description: Response containing CI visibility usage.
+          items:
+            $ref: '#/components/schemas/UsageCIVisibilityHour'
           type: array
       type: object
     UsageCWSHour:
@@ -14307,8 +14322,8 @@ components:
           format: date-time
           type: string
         ingested_events_bytes:
-          description: Contains the total number of bytes ingested during a given
-            hour.
+          description: Contains the total number of bytes ingested for APM spans during
+            a given hour.
           format: int64
           type: integer
         org_name:
@@ -14590,6 +14605,32 @@ components:
           description: Get hourly usage for NPM hosts.
           items:
             $ref: '#/components/schemas/UsageNetworkHostsHour'
+          type: array
+      type: object
+    UsageOnlineArchiveHour:
+      description: Online Archive usage in a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        online_archive_events_count:
+          description: Total count of online archived events within the hour.
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageOnlineArchiveResponse:
+      description: Online Archive usage response.
+      properties:
+        usage:
+          description: Response containing Online Archive usage.
+          items:
+            $ref: '#/components/schemas/UsageOnlineArchiveHour'
           type: array
       type: object
     UsageProfilingHour:
@@ -14928,6 +14969,26 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        ci_pipeline_indexed_spans_sum:
+          description: Shows the sum of all CI pipeline indexed spans over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        ci_test_indexed_spans_sum:
+          description: Shows the sum of all CI test indexed spans over all hours in
+            the current month for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers_hwm:
+          description: Shows the high-water mark of all CI visibility pipeline committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_test_committers_hwm:
+          description: Shows the high-water mark of all CI visibility test committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -15077,6 +15138,11 @@ components:
             all hours in the current date for all organizations.
           format: int64
           type: integer
+        online_archive_events_count_sum:
+          description: Sum of all online archived events over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -15140,8 +15206,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15216,6 +15282,26 @@ components:
         browser_rum_units_sum:
           description: Shows the sum of all browser RUM units over all hours in the
             current date for the given org.
+          format: int64
+          type: integer
+        ci_pipeline_indexed_spans_sum:
+          description: Shows the sum of all CI pipeline indexed spans over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        ci_test_indexed_spans_sum:
+          description: Shows the sum of all CI test indexed spans over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers_hwm:
+          description: Shows the high-water mark of all CI visibility pipeline committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ci_visibility_test_committers_hwm:
+          description: Shows the high-water mark of all CI visibility test committers
+            over all hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -15369,6 +15455,11 @@ components:
             all hours in the current date for the given org.
           format: int64
           type: integer
+        online_archive_events_count_sum:
+          description: Sum of all online archived events over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -15430,8 +15521,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for the given org.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15512,6 +15603,26 @@ components:
         browser_rum_units_agg_sum:
           description: Shows the sum of all browser RUM units over all hours in the
             current months for all organizations.
+          format: int64
+          type: integer
+        ci_pipeline_indexed_spans_agg_sum:
+          description: Shows the sum of all CI pipeline indexed spans over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        ci_test_indexed_spans_agg_sum:
+          description: Shows the sum of all CI test indexed spans over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_pipeline_committers_hwm_sum:
+          description: Shows the high-water mark of all CI visibility pipeline committers
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_test_committers_hwm_sum:
+          description: Shows the high-water mark of all CI visibility test committers
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         container_avg_sum:
@@ -15685,6 +15796,11 @@ components:
             all hours in the current months for all organizations.
           format: int64
           type: integer
+        online_archive_events_count_agg_sum:
+          description: Sum of all online archived events over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
         opentelemetry_host_top99p_sum:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -15765,8 +15881,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current months for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         usage:
@@ -15935,7 +16051,23 @@ components:
           format: date-time
           type: string
         pagination:
-          $ref: '#/components/schemas/UsageAttributionPagination'
+          $ref: '#/components/schemas/UsageTopAvgMetricsPagination'
+      type: object
+    UsageTopAvgMetricsPagination:
+      description: The metadata for the current pagination.
+      properties:
+        limit:
+          description: Maximum amount of records to be returned.
+          format: int64
+          type: integer
+        next_record_id:
+          description: The cursor to get the next results (if any). To make the next
+            request, use the same parameters and add `next_record_id`.
+          type: string
+        total_number_of_records:
+          description: Total number of records.
+          format: int64
+          type: integer
       type: object
     UsageTopAvgMetricsResponse:
       description: Response containing the number of hourly recorded custom metrics
@@ -16923,7 +17055,7 @@ components:
               an organization. The ability to write monitors is not required to set
               downtimes.
             monitors_read: View monitors.
-            monitors_write: Change, mute, and delete individual monitors.
+            monitors_write: Edit, mute, and delete individual monitors.
             synthetics_global_variable_read: View, search, and use in tests the list
               of global variables available for Synthetics.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -17811,6 +17943,11 @@ paths:
           - file: dashboard_payload.json
             name: body
           step: there is a valid "dashboard" in the system
+        screenboard_dashboard:
+          parameters:
+          - file: screenboard_dashboard_payload.json
+            name: body
+          step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteDashboard
@@ -22444,6 +22581,8 @@ paths:
 
         - audit: `audit alert`
 
+        - error-tracking: `error-tracking alert`
+
 
         #### Query Types
 
@@ -22720,7 +22859,32 @@ paths:
         - **`#`** an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available in closed beta on US1, EU, US3 and US5.'
+        **NOTE** CI Pipeline monitors are in alpha on US1, EU, US3 and US5.
+
+
+        **Error Tracking Alert Query**
+
+
+        Example(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+        Example(APM Traces): `error-tracking-traces(query).rollup(rollup_method[,
+        measure]).last(time_window) operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
+        and `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -23660,10 +23824,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all notebooks
       tags:
       - Notebooks
@@ -23831,10 +23991,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a notebook
       tags:
       - Notebooks
@@ -24286,13 +24442,8 @@ paths:
               dynamic-points:
                 description: "Post time-series data that can be graphed on Datadog\u2019s
                   dashboards."
+                externalValue: examples/metrics/dynamic-points.json.sh
                 summary: Dynamic Points
-                value:
-                  series:
-                  - metric: system.load.1
-                    points:
-                    - - ${NOW}
-                      - 1234.5
                 x-variables:
                   NOW: $(date +%s)
             schema:
@@ -27355,6 +27506,66 @@ paths:
       x-menu-order: 19
       x-undo:
         type: safe
+  /api/v1/usage/ci-app:
+    get:
+      description: Get hourly usage for CI Visibility (Tests, Pipeline, Combo, and
+        Spans).
+      operationId: GetUsageCIApp
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCIVisibilityResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for CI Visibility
+      tags:
+      - Usage Metering
+      x-menu-order: 38
+      x-undo:
+        type: safe
   /api/v1/usage/cspm:
     get:
       description: Get hourly usage for Cloud Security Posture Management (CSPM).
@@ -28339,6 +28550,65 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 14
+      x-undo:
+        type: safe
+  /api/v1/usage/online-archive:
+    get:
+      description: Get hourly usage for Online Archive.
+      operationId: GetUsageOnlineArchive
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageOnlineArchiveResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for Online Archive
+      tags:
+      - Usage Metering
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v1/usage/profiling:

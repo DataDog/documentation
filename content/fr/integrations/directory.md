@@ -19,7 +19,7 @@ git_integration_title: directory
 guid: 0c38c4ef-5266-4667-9fb1-de8f2b73708a
 integration_id: system
 integration_title: Directory
-integration_version: 1.11.1
+integration_version: 1.12.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

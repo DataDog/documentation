@@ -121,7 +121,7 @@ To create a local variable, click **Create Local Variable** at the top right han
 `{{ timestamp(n, unit) }}` 
 : Generates a timestamp in one of our accepted units with a value corresponding to the timestamp the test is initiated at +/- `n` chosen unit.
 
-When you have entered a name and a value, click **Add Variable**. (standardize this sentence)
+When you have entered a name and a value, click **Add Variable**.
 
 ### Use variables
 
@@ -156,12 +156,11 @@ These reasons include the following:
 
 By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][9].
 
-If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their accounts.</div>
+Access restriction is available for customers using [custom roles][11] on their accounts.
 
 You can restrict access to a UDP test based on the roles in your organization. When creating a UDP test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -181,3 +180,4 @@ You can restrict access to a UDP test based on the roles in your organization. W
 [8]: /synthetics/settings/#global-variables
 [9]: /account_management/rbac/
 [10]: /account_management/rbac#custom-roles
+[11]: /account_management/rbac/#create-a-custom-role

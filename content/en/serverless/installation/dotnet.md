@@ -25,10 +25,6 @@ If you use the Datadog Lambda Extension, you can use Datadog's native .NET APM t
 ## Instrumentation
 ### Using the Datadog Lambda Extension
 
-<div class="alert alert-warning">
-Instrumenting .NET applications with the Datadog Lambda Extension is in beta.
-</div>
-
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs.
 
 {{< tabs >}}
@@ -216,7 +212,7 @@ More information and additional parameters can be found in [Datadog Serverless C
 
 2. Add the dd-trace-dotnet layer to your Lambda function:
 
-    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dotnet" >}}`
+    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}`
 
 3. Add your [Datadog API Key][2] to the Lambda function using the environment variable `DD_API_KEY`.
 

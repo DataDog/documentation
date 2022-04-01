@@ -6,6 +6,7 @@
   "CreateAPIKey": {
     "description": "API キーを作成します。",
     "summary": "API キーの作成",
+    "request_description": "",
     "request_schema_description": "API キーの作成に使用されるリクエスト。"
   },
   "DeleteAPIKey": {
@@ -19,6 +20,7 @@
   "UpdateAPIKey": {
     "description": "API キーを更新します。",
     "summary": "API キーの編集",
+    "request_description": "",
     "request_schema_description": "API キーの更新に使用されるリクエスト。"
   },
   "ListApplicationKeys": {
@@ -36,7 +38,42 @@
   "UpdateApplicationKey": {
     "description": "アプリケーションキーの編集",
     "summary": "アプリケーションキーの編集",
+    "request_description": "",
     "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
+  },
+  "ListAuditLogs": {
+    "description": "リストエンドポイントは、監査ログ検索クエリと一致するイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、最新の監査ログイベントを確認します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "監査ログイベントのリストを取得"
+  },
+  "SearchAuditLogs": {
+    "description": "リストエンドポイントは、監査検索クエリと一致する監査ログイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、複雑な監査ログイベントの絞り込みと検索を構築します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "監査ログイベントの検索",
+    "request_description": "",
+    "request_schema_description": "監査ログイベントリストのリクエスト。"
+  },
+  "ListAuthNMappings": {
+    "description": "オーガニゼーション内のすべての AuthN Mappings のリスト。",
+    "summary": "すべての AuthN Mappings のリスト"
+  },
+  "CreateAuthNMapping": {
+    "description": "AuthN Mapping を作成します。",
+    "summary": "AuthN Mapping を作成",
+    "request_description": "",
+    "request_schema_description": "AuthN Mapping の作成リクエスト。"
+  },
+  "DeleteAuthNMapping": {
+    "description": "AuthN Mapping UUID で指定された AuthN Mapping を削除します。",
+    "summary": "AuthN Mapping を削除"
+  },
+  "GetAuthNMapping": {
+    "description": "AuthN Mapping UUID で指定された AuthN Mapping を取得します。",
+    "summary": "AuthN Mapping を取得"
+  },
+  "UpdateAuthNMapping": {
+    "description": "AuthN Mapping を編集します。",
+    "summary": "AuthN Mapping を編集",
+    "request_description": "",
+    "request_schema_description": "AuthN Mapping の更新リクエスト。"
   },
   "ListCurrentUserApplicationKeys": {
     "description": "現在のユーザーが利用できるすべてのアプリケーションキーを一覧表示",
@@ -45,6 +82,7 @@
   "CreateCurrentUserApplicationKey": {
     "description": "現在のユーザーのアプリケーションキーを作成します",
     "summary": "現在のユーザーのアプリケーションキーを作成します",
+    "request_description": "",
     "request_schema_description": "アプリケーションキーの作成に使用されるリクエスト。"
   },
   "DeleteCurrentUserApplicationKey": {
@@ -58,6 +96,7 @@
   "UpdateCurrentUserApplicationKey": {
     "description": "現在のユーザーが所有するアプリケーションキーを編集します",
     "summary": "現在のユーザーが所有するアプリケーションキーを編集します",
+    "request_description": "",
     "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
   },
   "DeleteDashboardListItems": {
@@ -106,9 +145,16 @@
     "request_description": "インシデントのペイロード。",
     "request_schema_description": "インシデントのリクエストを更新します。"
   },
+  "SubmitLog": {
+    "description": "HTTP を使用して Datadog プラットフォームにログを送信します。HTTP リクエストごとの制限は以下のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ (非圧縮) : 5MB\n- 単一ログの最大サイズ : 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ : 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します.\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\n\nHTTP API により回答されるステータスコード :\n- 202: Accepted: 処理リクエストを受信済み\n- 400: Bad request (ペイロードの形式の問題など)- 401: Unauthorized (API キーの不足など)\n\n- 403: Permission issue (無効な API キーの使用など)\n- 408: Request Timeout (しばらくしてからリクエストを再試行)\n- 413: Payload too large (バッチのサイズが非圧縮で 5MB 以上)\n- 429: Too Many Requests (しばらくしてからリクエストを再試行)\n- 500: Internal Server Error (サーバーがリクエストの遂行を阻む予期せぬ状況がサーバーに発生、しばらくしてからリクエストを再試行)\n- 503: Service Unavailable (おそらく過負荷によりサーバーがリクエストに対応できないため、しばらくしてからリクエストを再試行)",
+    "summary": "ログを送信する",
+    "request_description": "送信するログ (JSON 形式) 。",
+    "request_schema_description": "構造化されたログメッセージ。"
+  },
   "AggregateLogs": {
     "description": "イベントをバケットに集約しメトリクスと時系列を計算する API エンドポイント。",
     "summary": "イベントを集計する",
+    "request_description": "",
     "request_schema_description": "オーガニゼーションからログのリストを取得するリクエストと共に送信されたオブジェクト。"
   },
   "GetLogsArchiveOrder": {
@@ -148,6 +194,7 @@
   "RemoveRoleFromArchive": {
     "description": "アーカイブからロールを削除する。([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
     "summary": "アーカイブからロールを取り消す",
+    "request_description": "",
     "request_schema_description": "ロールとの関係。"
   },
   "ListArchiveReadRoles": {
@@ -157,6 +204,7 @@
   "AddReadRoleToArchive": {
     "description": "アーカイブに読み取りロールを追加する。([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
     "summary": "アーカイブにロールを付与する",
+    "request_description": "",
     "request_schema_description": "ロールとの関係。"
   },
   "ListLogsMetrics": {
@@ -190,6 +238,7 @@
   "CreateRestrictionQuery": {
     "description": "オーガニゼーション用に新しい制限クエリを作成します。",
     "summary": "制限クエリを作成する",
+    "request_description": "",
     "request_schema_description": "制限クエリを作成します。"
   },
   "GetRoleRestrictionQuery": {
@@ -211,11 +260,13 @@
   "UpdateRestrictionQuery": {
     "description": "制限クエリを編集します。",
     "summary": "制限クエリを更新する",
+    "request_description": "",
     "request_schema_description": "制限クエリを更新します。"
   },
   "RemoveRoleFromRestrictionQuery": {
     "description": "制限クエリからロールを削除します。",
     "summary": "制限クエリからロールを取り消す",
+    "request_description": "",
     "request_schema_description": "ロールとの関係。"
   },
   "ListRestrictionQueryRoles": {
@@ -225,6 +276,7 @@
   "AddRoleToRestrictionQuery": {
     "description": "制限クエリにロールを追加します。",
     "summary": "制限クエリにロールを付与する",
+    "request_description": "",
     "request_schema_description": "ロールとの関係。"
   },
   "ListLogsGet": {
@@ -234,11 +286,24 @@
   "ListLogs": {
     "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n複雑なログフィルタリングおよび検索を構築するにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
     "summary": "Search logs",
+    "request_description": "",
     "request_schema_description": "ログリストのリクエスト。"
   },
   "ListTagConfigurations": {
     "description": "構成済みの count/gauge/rate/distribution メトリクス名をすべて返します\n(指定された場合は追加のフィルターを適用)。",
     "summary": "タグコンフィギュレーションを一覧表示する"
+  },
+  "DeleteBulkTagsMetricsConfiguration": {
+    "description": "既存の count、gauge、rate、distribution メトリクスについて、クエリが可能なタグキーのすべてのカスタムリストを削除します。\nメトリクスは、メトリクス名のプレフィックスを渡すことで選択できます。\nDatadog ウェブアプリでの操作と同様に、結果はアカウントのメールアドレスに送信できます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみで使用できます。",
+    "summary": "複数のメトリクスにタグを構成",
+    "request_description": "",
+    "request_schema_description": "1 回の一括タグ削除リクエストのラッパーオブジェクト。"
+  },
+  "CreateBulkTagsMetricsConfiguration": {
+    "description": "既存の count、gauge、rate、distribution メトリクスについて、クエリが可能なタグキーの一覧を作成および定義します。\nメトリクスは、メトリクス名のプレフィックスを渡すことで選択できます。タグのコンフィギュレーションを削除するには、この API パスの削除メソッドを使用します。\n Datadog ウェブアプリでの操作と同様に、結果はアカウントのメールアドレスに送信できます。\n複数の呼び出しに同じメトリクスが含まれる場合は、最後に適用されたコンフィギュレーションが使用され（送信した順ではない）ます。\n同時に実行される呼び出しの決定論的順序を期待しないようにしてください。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみで使用できます。",
+    "summary": "複数のメトリクスにタグを構成",
+    "request_description": "",
+    "request_schema_description": "1 回の一括タグコンフィギュレーションリクエストのラッパーオブジェクト。"
   },
   "ListTagsByMetricName": {
     "description": "特定のメトリクス名のインデックス付きタグキーと値ペアを表示します。",
@@ -253,13 +318,15 @@
     "summary": "タグコンフィギュレーションを名前で一覧表示する"
   },
   "UpdateTagConfiguration": {
-    "description": "メトリクスまたは分散型メトリクスのパーセンタイル集計のタグ付けコンフィギュレーションを更新します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
+    "description": "メトリクス、分散型メトリクスのパーセンタイル集計、または既存の count、gauge、rate、distribution メトリクスのカスタム集計のタグ付けコンフィギュレーションを更新します。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみを使用できます。",
     "summary": "タグコンフィギュレーションを更新する",
+    "request_description": "",
     "request_schema_description": "タグ付けコンフィギュレーションを編集したいメトリクスを含むオブジェクトをリクエストします。"
   },
   "CreateTagConfiguration": {
-    "description": "既存の count/gauge/rate/distribution メトリクスについて、クエリが可能なタグキーの一覧を作成および定義します。オプションで任意の分散型メトリクスについてのパーセンタイル集計を含めることもできます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみを使用できます。",
+    "description": "既存の count/gauge/rate/distribution メトリクスについて、クエリが可能なタグキーの一覧を作成および定義します。\nオプションで、任意の分散型メトリクスについてのパーセンタイル集計を含めるか、任意の count、rate、または gauge メトリクスのカスタム集計を構成することができます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみを使用できます。",
     "summary": "タグコンフィギュレーションを作成する",
+    "request_description": "",
     "request_schema_description": "タグを構成したいメトリクスを含むオブジェクトをリクエストします。"
   },
   "ListVolumesByMetricName": {
@@ -275,12 +342,13 @@
     "summary": "すべてのプロセスを取得"
   },
   "ListRoles": {
-    "description": "名前と ID を含むすべてのロールを返します。",
+    "description": "名前とその一意の識別子を含むすべてのロールを返します。",
     "summary": "ロールを一覧表示する"
   },
   "CreateRole": {
     "description": "オーガニゼーション用に新しいロールを作成します。",
     "summary": "ロールを作成する",
+    "request_description": "",
     "request_schema_description": "ロールを作成します。"
   },
   "DeleteRole": {
@@ -294,11 +362,19 @@
   "UpdateRole": {
     "description": "ロールを編集します。この機能は、管理者に属するアプリケーションキーを持つ場合にのみ使用できます。",
     "summary": "ロールを更新する",
+    "request_description": "",
     "request_schema_description": "ロールを更新します。"
+  },
+  "CloneRole": {
+    "description": "既存ロールのクローンを作成",
+    "summary": "既存のロールのクローンを作成して新しいロールを作成",
+    "request_description": "",
+    "request_schema_description": "既存のロールのクローンを作成して新しいロールの作成をリクエストします。"
   },
   "RemovePermissionFromRole": {
     "description": "ロールからアクセス許可を削除。",
     "summary": "アクセス許可の取り消し",
+    "request_description": "",
     "request_schema_description": "アクセス許可オブジェクトとの関係。"
   },
   "ListRolePermissions": {
@@ -308,11 +384,13 @@
   "AddPermissionToRole": {
     "description": "ロールにアクセス許可を追加する。",
     "summary": "ロールにアクセス許可を付与する",
+    "request_description": "",
     "request_schema_description": "アクセス許可オブジェクトとの関係。"
   },
   "RemoveUserFromRole": {
     "description": "ロールからユーザーを削除",
     "summary": "ロールからユーザーを削除",
+    "request_description": "",
     "request_schema_description": "ユーザーとの関係。"
   },
   "ListRoleUsers": {
@@ -322,11 +400,46 @@
   "AddUserToRole": {
     "description": "ロールにユーザーを追加する。",
     "summary": "ロールにユーザーを追加する",
+    "request_description": "",
     "request_schema_description": "ユーザーとの関係。"
+  },
+  "ListRUMEvents": {
+    "description": "リストエンドポイントは、RUM 検索クエリと一致するイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、最新の RUM イベントを確認します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "RUM イベントのリストを取得"
+  },
+  "SearchRUMEvents": {
+    "description": "リストエンドポイントは、RUM 検索クエリと一致する RUM イベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、複雑な RUM イベントの絞り込みと検索を構築します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "RUM イベントの検索",
+    "request_description": "",
+    "request_schema_description": "RUM イベントリストのリクエスト。"
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "ダウンロードエンドポイントは、現在有効なクラウドワークロードセキュリティルールからクラウドワークロードセキュリティポリシーファイルを生成し、\n .policy ファイルとしてダウンロードします。それからこのファイルは　\nAgent にデプロイされ、環境で実行中のポリシーを更新します。",
     "summary": "最新のクラウドワークロードセキュリティポリシーを取得"
+  },
+  "ListCloudWorkloadSecurityAgentRules": {
+    "description": "Agent ルールのリストを取得します。",
+    "summary": "すべての Cloud Workload Security Agent ルールを取得"
+  },
+  "CreateCloudWorkloadSecurityAgentRule": {
+    "description": "指定されたパラメーターで新しい Agent ルールを作成します。",
+    "summary": "Cloud Workload Security Agent ルールを作成",
+    "request_description": "新しい Agent ルールの定義。",
+    "request_schema_description": "作成する Agent ルールを含むオブジェクトをリクエストします。"
+  },
+  "DeleteCloudWorkloadSecurityAgentRule": {
+    "description": "特定の Agent ルールを削除します。",
+    "summary": "Cloud Workload Security Agent ルールを削除"
+  },
+  "GetCloudWorkloadSecurityAgentRule": {
+    "description": "特定の Agent ルールの詳細を取得します。",
+    "summary": "Cloud Workload Security Agent ルールを取得"
+  },
+  "UpdateCloudWorkloadSecurityAgentRule": {
+    "description": "特定の Agent ルールを更新します。\nリクエストが正常に完了すると、Agent ルールオブジェクトを返します。",
+    "summary": "Cloud Workload Security Agent ルールを更新",
+    "request_description": "Agent ルールの新しい定義。",
+    "request_schema_description": "更新する属性のある Agent ルールを含むオブジェクトをリクエストします。"
   },
   "ListSecurityFilters": {
     "description": "構成されたセキュリティフィルターとその定義のリストを取得します。",
@@ -359,6 +472,7 @@
   "CreateSecurityMonitoringRule": {
     "description": "検出ルールを作成します。",
     "summary": "検出ルールを作成する",
+    "request_description": "",
     "request_schema_description": "新しい規則を作成します。"
   },
   "DeleteSecurityMonitoringRule": {
@@ -372,6 +486,7 @@
   "UpdateSecurityMonitoringRule": {
     "description": "既存の規則を更新します。`cases`、`queries`、`options` を更新する場合、フィールド全体を\n含める必要があります。たとえば、クエリを変更する場合、全てのクエリを含める必要があります。\nデフォルトの規則は、有効にして通知を変更する場合にのみ更新できます。",
     "summary": "既存の規則を更新します",
+    "request_description": "",
     "request_schema_description": "既存の規則を更新します。"
   },
   "ListSecurityMonitoringSignals": {
@@ -381,11 +496,13 @@
   "SearchSecurityMonitoringSignals": {
     "description": "検索クエリと一致するセキュリティシグナルを返します。\nこのエンドポイントと GET エンドポイントは、セキュリティシグナルを一覧表示する際に互いに交換して使用できます。",
     "summary": "セキュリティシグナルのリストの取得",
+    "request_description": "",
     "request_schema_description": "セキュリティシグナルのリストをリクエスト"
   },
   "CreateServiceAccount": {
     "description": "オーガニゼーションのサービスアカウントを作成します。",
     "summary": "サービスアカウントを作成する",
+    "request_description": "",
     "request_schema_description": "サービスアカウントを作成します。"
   },
   "ListServiceAccountApplicationKeys": {
@@ -395,6 +512,7 @@
   "CreateServiceAccountApplicationKey": {
     "description": "このサービスアカウントのアプリケーションキーを作成します。",
     "summary": "このサービスアカウントのアプリケーションキーを作成する",
+    "request_description": "",
     "request_schema_description": "アプリケーションキーの作成に使用されるリクエスト。"
   },
   "DeleteServiceAccountApplicationKey": {
@@ -408,6 +526,7 @@
   "UpdateServiceAccountApplicationKey": {
     "description": "このサービスアカウントが所有するアプリケーションキーを編集します。",
     "summary": "このサービスアカウントのアプリケーションキーを編集する",
+    "request_description": "",
     "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
   },
   "ListIncidentServices": {
@@ -461,6 +580,7 @@
   "SendInvitations": {
     "description": "組織への参加を招待するメールを 1 人以上のユーザーに送信します。",
     "summary": "招待メールを送信する",
+    "request_description": "",
     "request_schema_description": "ユーザーを組織に招待するオブジェクト。"
   },
   "GetInvitation": {
@@ -474,6 +594,7 @@
   "CreateUser": {
     "description": "オーガニゼーションのユーザーを作成します。",
     "summary": "ユーザーを作成する",
+    "request_description": "",
     "request_schema_description": "ユーザーを作成します。"
   },
   "DisableUser": {
@@ -487,6 +608,7 @@
   "UpdateUser": {
     "description": "ユーザーを編集します。この機能は、管理者ユーザーに属するアプリケーションキーを持つ場合にのみ使用できます。",
     "summary": "ユーザーを更新する",
+    "request_description": "",
     "request_schema_description": "ユーザーを更新します。"
   },
   "ListUserOrganizations": {

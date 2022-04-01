@@ -31,7 +31,7 @@ Le profileur Datadog nécessite [JDK Flight Recorder][1]. La bibliothèque du pr
 2. Téléchargez `dd-java-agent.jar`, qui contient les fichiers de classe de l'Agent Java :
 
     ```shell
-    wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
+    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
     ```
 
      **Remarque** : le profileur est disponible dans la bibliothèque `dd-java-agent.jar` dans la version 0.55 et les versions ultérieures.
