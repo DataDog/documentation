@@ -83,7 +83,7 @@ return true
 
 To trigger a click on an element rendered in a shadow DOM, locate the respective element and run `.click()` on it.
 
-{{< img src="synthetics/guide/browser-tests-using-shadow-dom/validate-trigger-click.png" alt="Validate triggered click on an element rendered in a shadow DOM" style="width:80%;" >}}
+{{< img src="synthetics/guide/browser-tests-using-shadow-dom/validate-trigger-click.png" alt="Validate triggered click on an element rendered in a shadow DOM" style="width:90%;" >}}
 
 For example, the following code snippet triggers a click on a button element.
 
@@ -107,6 +107,8 @@ return true
 In `closed` mode, normal assertions are unavailable. Additionally, elements rendered in a shadow DOM are not accessible with JavaScript, so you cannot use JavaScript assertions in your browser tests.
 
 You can use the `Press Key` action to select the appropriate options. For example, to navigate to a different page by selecting an option from a navigation menu and the menu is rendered in a shadow DOM, use the `tab` key to navigate to the respective option and click the `enter` key to select an option.
+
+{{< img src="synthetics/guide/browser-tests-using-shadow-dom/using-tab-keys-for-shadow-dom.mp4" alt="Using tab keys to workaround a shadow DOM in a browser test" video=true >}}
 
 ## Further Reading
 
