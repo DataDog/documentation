@@ -4,6 +4,9 @@ kind: documentation
 aliases:
 - /monitors/monitor_types/real_user_monitoring
 further_reading:
+- link: "/real_user_monitoring/explorer/"
+  tag: "Documentation"
+  text: "Explore your RUM data"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -46,7 +49,7 @@ As you expand your search filters, the graph above the search bar updates.
     * **Multiple queries**: Click **Add Query** to analyze multiple different sets of RUM data in relation to each other.
     * **Formulas and functions**: After adding your desired queries, click **Add Formula** to add a mathematical computation. The example below calculates the percentage of sessions that experienced an error using the formula `(b/a)* 100`.
 
-   {{< img src="monitors/monitor_types/rum/rum_multiple_queries.png" alt="Multiple queries in the search filter" style="width:90%;" >}}
+   {{< img src="monitors/monitor_types/rum/rum_multiple_queries_1.png" alt="Multiple queries in the search filter" style="width:80%;" >}}
 
 ### Set alert conditions
 
