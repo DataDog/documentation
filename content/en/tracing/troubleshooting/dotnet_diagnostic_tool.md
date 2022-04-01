@@ -24,9 +24,7 @@ For most applications, you should use the process diagnostics. For that, you nee
 
 To get the pid of a process on Windows, you can open the task manager, activate the "Details" tab, and look for the "PID" column. You can also run the command `tasklist /FI "IMAGENAME eq target.exe"`where `target.exe` is the name of the process.
 
-To get the pid of a process on Linux, you can run the command `ps aux | grep target` where `target` is the name of the process.
-
-The pid is typically `1` when running in a docker container. 
+To get the pid of a process on Linux, you can run the command `ps aux | grep target` where `target` is the name of the process (the pid is typically `1` when running in a docker container).
 
 You can then give the pid to the dd-trace tool:
 ```
