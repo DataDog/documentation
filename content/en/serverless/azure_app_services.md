@@ -247,6 +247,8 @@ Learn more about [custom metrics][10].
 
 ## Programmatic management
 
+<div class="alert alert-warning">This feature is not available for Java.</div>
+
 Datadog provides scripts to update or install the Azure App Service Extension using Powershell. Scripted extension management enables you to [update extensions in bulk by resource group](#powershell-resource-group) and [designate the installation of specific versions of the site extension](#powershell-specific-version). You can also use scripts to programmatically add the extension in CI/CD pipelines, as well as discover and update extensions that are already installed.
 
 ### Prerequisites
@@ -292,36 +294,8 @@ Also, set `DATADOG_SITE` to your [Datadog site][3]. `DATADOG_SITE` defaults to `
 {{% /tab %}}
 {{% tab "Java" %}}
 
-The install script adds the latest version of the extension to an Azure Web App. This occurs on a per-app basis, rather than at a resource group level.
+This feature is not available for Java.
 
-1. Open the Azure CLI or Azure Cloud Shell.
-2. Download the installation script using the following command:
-
-    ```
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"
-    ```
-
-3. Run the following command, passing in required and optional arguments as needed.
-
-    ```
-    .\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -DDSite <DATADOG_SITE> -DDEnv <DATADOG_ENV> -DDService <DATADOG_SERVICE> -DDVersion <DATADOG_VERSION>
-    ```
-
-**Note**: The following arguments are required for the above command:
-
-- `<USERNAME>`: Your Azure user scope username.
-- `<PASSWORD>`: Your Azure user scope password.
-- `<SUBSCRIPTION_ID>`: Your Azure [subscription ID][1].
-- `<RESOURCE_GROUP_NAME>`: Your Azure resource group name.
-- `<SITE_NAME>`: The name of your app.
-- `<DATADOG_API_KEY>`: Your [Datadog API key][2].
-
-Also, set `DATADOG_SITE` to your [Datadog site][3]. `DATADOG_SITE` defaults to `datadoghq.com`. Your site is: {{< region-param key="dd_site" code="true" >}}.
-
-
-[1]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /getting_started/site/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -346,6 +320,11 @@ The update script applies to an entire resource group. This script updates every
     ```
 
 {{% /tab %}}
+{{% tab "Java" %}}
+
+This feature is not available for Java.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install a specific version of the extension {#powershell-specific-version}
@@ -353,6 +332,11 @@ The update script applies to an entire resource group. This script updates every
 {{< tabs >}}
 {{% tab ".NET" %}}
 The Azure App Service UI does not support the ability to install a specific version of an extension. You may do this with the install or update script.
+{{% /tab %}}
+{{% tab "Java" %}}
+
+This feature is not available for Java.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -386,6 +370,11 @@ Many organizations use [Azure Resource Management (ARM) templates][1] to impleme
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
 [2]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
+{{% /tab %}}
+{{% tab "Java" %}}
+
+This feature is not available for Java.
+
 {{% /tab %}}
 {{< /tabs >}}
 
