@@ -346,30 +346,12 @@ The update script applies to an entire resource group. This script updates every
     ```
 
 {{% /tab %}}
-{{% tab "Java" %}}
-
-The update script applies to an entire resource group. This script updates every Web App that has the extension installed. App Service apps that do not have the Datadog extension installed are not affected.
-
-1. Open the Azure CLI or Azure Cloud Shell.
-2. Download the installation script using the following command:
-
-    ```
-    $baseUri="https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension"; Invoke-WebRequest -Uri "$baseUri/update-all-site-extensions.ps1" -OutFile "update-all-site-extensions.ps1"; Invoke-WebRequest -Uri "$baseUri/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"
-    ```
-3. Run the following command. All arguments are required.
-    ```
-    .\update-all-site-extensions.ps1 -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -Username <USERNAME> -Password <PASSWORD>
-    ```
-{{% /tab %}}
 {{< /tabs >}}
 
 ### Install a specific version of the extension {#powershell-specific-version}
 
 {{< tabs >}}
 {{% tab ".NET" %}}
-The Azure App Service UI does not support the ability to install a specific version of an extension. You may do this with the install or update script.
-{{% /tab %}}
-{{% tab "Java" %}}
 The Azure App Service UI does not support the ability to install a specific version of an extension. You may do this with the install or update script.
 {{% /tab %}}
 {{< /tabs >}}
@@ -400,15 +382,6 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 {{% tab ".NET" %}}
 
 Many organizations use [Azure Resource Management (ARM) templates][1] to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template][2] into your deployments to add the extension and configure it alongside your App Service resources.
-
-
-[1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
-[2]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
-{{% /tab %}}
-{{% tab "Java" %}}
-
-Many organizations use [Azure Resource Management (ARM) templates][1] to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template][2] into your deployments to add the extension and configure it alongside your App Service resources.
-
 
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
