@@ -45,7 +45,7 @@ Because it uses UDP, your application can send metrics to DogStatsD and resume i
 
 {{< img src="metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
 
-As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called _the flush interval_ (ten seconds).
+As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called _the flush interval_. DogStatsD uses a flush interval of 10 seconds.
 
 ## Setup
 
