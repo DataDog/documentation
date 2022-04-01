@@ -55,7 +55,22 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
+1. Follow the [Datadog Docker Agent setup]. 
+  
+2. For the Datadog Agent container, set the following endpoint environment variables and expose the corresponding port: 
+   - For gPRC: `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` and port `4317`
+   - For HTTP: `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` and port `4318`
 
+3. For the application container, set `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Datadog Agent container. For example:
+
+   ```
+   OTEL_EXPORTER_OTLP_ENDPOINT=http://<datadog-agent>:4318.
+   ```
+
+4. Both containers must be defined in the same bridge network, which is handled automatically if you use Docker Compose. Otherwise, follow the Docker example in [Tracing Docker Applications][1] to set up a bridge network with the correct ports.
+
+
+[1]: /agent/docker/apm/#docker-network
 {{% /tab %}}
 {{% tab "Kubernetes (Daemonset)" %}}
 
