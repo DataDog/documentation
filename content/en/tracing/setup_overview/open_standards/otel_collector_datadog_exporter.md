@@ -327,4 +327,4 @@ This configuration ensures consistent host metadata and centralizes the configur
 [14]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-an-agent
 [15]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-a-standalone-collector
 [16]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/images/opentelemetry-service-deployment-models.png
-[17]: /tracing/setup/open_standards/otlp_ingest_in_the_agent/
+[17]: /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
