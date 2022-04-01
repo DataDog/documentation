@@ -3,20 +3,20 @@ title: Using the .NET diagnostic tool for troubleshooting
 kind: documentation
 ---
 
-If after installing the .NET tracer your application does not produce traces as expected, you can try running the diagnostic tool for basic troubleshooting. It should help you figure out issues with your setup (for example missing environment variables, incomplete installation, unreachable agent...).
+If after installing the .NET tracer your application does not produce traces as expected, run the diagnostic tool for basic troubleshooting. It can help you figure out issues with your setup such as missing environment variables, incomplete installation, or unreachable Agent.
 
-The tool can be installed in three different ways:
+Install the tool one of the following ways:
 
 - Using the .NET SDK by running the command:
-```
-dotnet tool install -g dd-trace
-```
-- By downloading from one of the short links:
-    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64](https://dtdg.co/dd-trace-dotnet-win-x64)
-    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64](https://dtdg.co/dd-trace-dotnet-linux-x64)
-    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64](https://dtdg.co/dd-trace-dotnet-linux-musl-x64)
+   ```
+   dotnet tool install -g dd-trace
+   ```
+- By downloading the appropriate version:
+    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][1]
+    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][2]
+    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][3]
  
-- Or by downloading [from the github release page](https://github.com/DataDog/dd-trace-dotnet/releases)
+- Or by downloading [from the github release page][4].
 
 ## Process diagnostics 
 
@@ -143,6 +143,11 @@ Error connecting to Agent at http://127.0.0.1:8126/: No connection could be made
 refused it. (127.0.0.1:8126)
 ```
 
-You can [check this page](https://docs.datadoghq.com/tracing/troubleshooting/connection_errors/#troubleshooting-the-connection-problem) to learn how to further document agent connectivity issue.
+You can [check this page][5] to learn how to further document agent connectivity issue.
 
 
+[1]: https://dtdg.co/dd-trace-dotnet-win-x64
+[2]: https://dtdg.co/dd-trace-dotnet-linux-x64
+[3]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases
+[5]: https://docs.datadoghq.com/tracing/troubleshooting/connection_errors/#troubleshooting-the-connection-problem
