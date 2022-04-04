@@ -2323,16 +2323,21 @@ main:
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_configuration
     weight: 501
+  - name: CircleCI Orb
+    url: /synthetics/cicd_integrations/circleci_orb
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_circleci_orb
+    weight: 502
   - name: GitHub Actions
     url: /synthetics/cicd_integrations/github_actions
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_github_actions
-    weight: 502
+    weight: 503
   - name: Jenkins
     url: /synthetics/cicd_integrations/jenkins
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_jenkins
-    weight: 503
+    weight: 504
   - name: CI Results Explorer
     url: /synthetics/ci_results_explorer
     parent: synthetics

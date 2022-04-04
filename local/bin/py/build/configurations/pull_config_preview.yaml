@@ -288,6 +288,20 @@
           title: Synthetics CI GitHub Actions
           kind: documentation
 
+  - repo_name: synthetics-ci-orb
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/synthetics/cicd_integrations/'
+        file_name: 'circleci_orb.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
+          title: Synthetics CI CircleCI Orb
+          kind: documentation
+
   - repo_name: dd-sdk-android
     contents:
     - action: pull-and-push-file
