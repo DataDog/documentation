@@ -17,8 +17,10 @@ You may use a shadow DOM for the following use cases:
 - Embedded content (such as a video or an image)
 - Chat pop-up integrations
 
+The suite of actions and assertions available in Synthetic browser tests may not be supported for shadow DOM elements.
+
 <div class="alert alert-info">
-Because the shadow DOM is encapsulated from the HTML element, Synthetic browser tests have limited access to elements rendered in a shadow DOM. This may prevent the <a href="https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa">Datadog browser test recorder extension</a> from capturing the <a href="https://docs.datadoghq.com/synthetics/guide/browser-test-self-maintenance">full set of locators needed to target the element on test runs</a>, causing the step to fail on test runs. The full suite of available actions and assertions may not be supported for shadow DOM elements.
+Because the shadow DOM is encapsulated from the HTML element, Synthetic browser tests have limited access to elements rendered in a shadow DOM. This may prevent the <a href="https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa">Datadog browser test recorder extension</a> from capturing the <a href="https://docs.datadoghq.com/synthetics/guide/browser-test-self-maintenance">full set of locators needed to target the element on test runs</a>, causing the step to fail on test runs.
 </div>
 
 Depending on the [encapsulation mode][2] and the step objective, you can leverage browser test actions to configure a test that interacts with and validates elements rendered within a shadow DOM. This guide highlights action and assertion types that may not be supported on elements rendered in the shadow DOM and provides workarounds for these limitations.
