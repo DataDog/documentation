@@ -296,10 +296,10 @@
       - 'README.md'
       options:
         dest_path: '/synthetics/cicd_integrations/'
-        file_name: 'circleci_orbs.md'
+        file_name: 'circleci_orb.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
-          title: Synthetics CI CircleCI Orbs
+          title: Synthetics CI CircleCI Orb
           kind: documentation
 
   - repo_name: dd-sdk-android

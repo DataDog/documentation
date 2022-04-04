@@ -2309,10 +2309,10 @@ main:
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_configuration
     weight: 501
-  - name: CircleCI Orbs
-    url: /synthetics/cicd_integrations/circleci_orbs
+  - name: CircleCI Orb
+    url: /synthetics/cicd_integrations/circleci_orb
     parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_circleci_orbs
+    identifier: synthetics_cicd_integrations_circleci_orb
     weight: 502
   - name: GitHub Actions
     url: /synthetics/cicd_integrations/github_actions
