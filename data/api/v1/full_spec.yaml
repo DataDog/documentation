@@ -11023,18 +11023,17 @@ components:
       properties:
         password:
           description: Password to use for the basic authentication.
-          example: ''
+          example: PaSSw0RD!
           type: string
         type:
           $ref: '#/components/schemas/SyntheticsBasicAuthWebType'
         username:
           description: Username to use for the basic authentication.
-          example: ''
+          example: my_username
           type: string
       required:
       - password
       - username
-      - type
       type: object
     SyntheticsBasicAuthWebType:
       default: web
