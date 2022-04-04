@@ -8016,23 +8016,6 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
-      x-given:
-        dashboard_list_dashboard:
-          parameters:
-          - name: dashboard_list_id
-            source: dashboard_list.id
-          - name: body
-            value: "{\n  \"dashboards\": [\n    {\n      \"id\": \"{{ dashboard.id
-              }}\",\n      \"type\": \"custom_timeboard\"\n    }\n  ]\n}"
-          step: the "dashboard_list" has the "dashboard"
-        dashboard_list_screenboard_dashboard:
-          parameters:
-          - name: dashboard_list_id
-            source: dashboard_list.id
-          - name: body
-            value: "{\n  \"dashboards\": [\n    {\n      \"id\": \"{{ screenboard_dashboard.id
-              }}\",\n      \"type\": \"custom_screenboard\"\n    }\n  ]\n}"
-          step: the "dashboard_list" has the "screenboard_dashboard"
       x-menu-order: 2
       x-undo:
         type: safe
