@@ -390,14 +390,14 @@ evaluate_missing_metrics:
   only:
     - master
 
-# Test
+# TODO: update this job from manual to scheduled when we are ready to deprecate old translations job
 manage_untracked_translations:manual:
   <<: *base_template
   stage: post-deploy
   cache: {}
   environment: "preview"
   only:
-    - brian.deutsch/untracked
+    - master
   script:
     - echo "Downloading untracked translation source files..."
     - manage_untracked_translation_files
