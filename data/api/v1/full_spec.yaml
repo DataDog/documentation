@@ -3617,6 +3617,7 @@ components:
         next_record_id:
           description: The cursor to get the next results (if any). To make the next
             request, use the same parameters and add `next_record_id`.
+          nullable: true
           type: string
       type: object
     HourlyUsageAttributionResponse:
@@ -6791,6 +6792,7 @@ components:
         next_record_id:
           description: The cursor to use to get the next results, if any. To make
             the next request, use the same parameters with the addition of the `next_record_id`.
+          nullable: true
           type: string
       type: object
     MonthlyUsageAttributionResponse:
@@ -16062,6 +16064,7 @@ components:
         next_record_id:
           description: The cursor to get the next results (if any). To make the next
             request, use the same parameters and add `next_record_id`.
+          nullable: true
           type: string
         total_number_of_records:
           description: Total number of records.
@@ -27859,7 +27862,13 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: Get Hourly Usage Attribution.
+      description: "Get Hourly Usage Attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetHourlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -27893,8 +27902,12 @@ paths:
         required: false
         schema:
           type: string
-      - description: Comma separated list of tags used to group usage. If no value
+      - description: 'Comma separated list of tags used to group usage. If no value
           is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
         in: query
         name: tag_breakdown_keys
         required: false
@@ -28349,7 +28362,13 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: Get Monthly Usage Attribution.
+      description: "Get Monthly Usage Attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetMonthlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -28389,8 +28408,12 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
-      - description: Comma separated list of tags used to group usage. If no value
-          is provided the usage will not be broken down by tags.
+      - description: 'Comma separated list of tag keys used to group usage. If no
+          value is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
         in: query
         name: tag_breakdown_keys
         required: false
@@ -28430,6 +28453,14 @@ paths:
       summary: Get Monthly Usage Attribution
       tags:
       - Usage Metering
+      x-given:
+        monthly_usage_attribution:
+          parameters:
+          - name: start_month
+            value: '"{{ timeISO(''now - 3d'') }}"'
+          - name: fields
+            value: '"infra_host_usage"'
+          step: there is a valid "monthly_usage_attribution" response
       x-menu-order: 31
       x-undo:
         type: safe
