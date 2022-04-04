@@ -10,7 +10,7 @@ aliases:
 This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/v1/dashboards/">new Dashboard endpoint</a> instead.
 </div>
 
-The `Screenboard` endpoint allows you to programmatically create, update, delete, and query screenboards. [Read more about screenboards][1].
+The `Screenboard` endpoint allows you to programmatically create, update, delete, and query screenboards.
 
 ## Create a screenboard
 
@@ -257,7 +257,7 @@ curl -X PUT -H "Content-type: application/json" \
 
 ## Delete a screenboard
 
-Delete an existing [screenboard][1].
+Delete an existing screenboard.
 *This endpoint takes no JSON arguments.*
 
 ### Signature
@@ -419,7 +419,7 @@ curl -X GET \
 
 ## Get all screenboards
 
-Fetch all of your [screenboards][1]' definitions.
+Fetch all of your screenboards' definitions.
 
 ### Signature
 
@@ -475,5 +475,3 @@ curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY
 
 {{% /tab %}}
 {{< /tabs >}}
-
-[1]: /dashboards/screenboard/

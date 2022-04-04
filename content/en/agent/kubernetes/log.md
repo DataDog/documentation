@@ -270,6 +270,8 @@ These integration templates are meant for basic cases. If you need a custom Data
 1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host and add your custom auto-configuration.
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
 
+**Note**: This is only supported when collecting logs through the Docker Socket, and not when using the Kubernetes log file method. To use the Docker Socket for log collection in a Kubernetes environment, ensure Docker is the runtime and `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` has been set to `false`.
+
 **Example auto-configuration file**:
 
 ```text
@@ -289,6 +291,8 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 {{% tab "ConfigMap" %}}
 
 On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
+
+**Note**: This is only supported when collecting logs through the Docker Socket, and not when using the Kubernetes log file method. To use the Docker Socket for log collection in a Kubernetes environment, ensure Docker is the runtime and `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` has been set to `false`.
 
 ```text
 kind: ConfigMap
@@ -369,6 +373,9 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{% tab "Helm" %}}
 
 You can customize logs collection per integration within `confd`. This method mounts the desired configuration onto the Agent container.
+
+**Note**: This is only supported when collecting logs through the Docker Socket, and not when using the Kubernetes log file method. To use the Docker Socket for log collection in a Kubernetes environment, ensure Docker is the runtime and `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` has been set to `false`.
+
   ```yaml
   confd:
     <INTEGRATION_NAME>.yaml: |-

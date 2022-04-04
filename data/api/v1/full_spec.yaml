@@ -3617,6 +3617,7 @@ components:
         next_record_id:
           description: The cursor to get the next results (if any). To make the next
             request, use the same parameters and add `next_record_id`.
+          nullable: true
           type: string
       type: object
     HourlyUsageAttributionResponse:
@@ -5783,11 +5784,13 @@ components:
           type: string
         restricted_roles:
           description: A list of unique role identifiers to define which roles are
-            allowed to edit the monitor. Editing a monitor includes any updates to
-            the monitor configuration, monitor deletion, and muting of the monitor
-            for any amount of time. Roles unique identifiers can be pulled from the
-            [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) in
-            the `data.id` field.
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -5957,10 +5960,12 @@ components:
       description: Data source for event platform-based queries.
       enum:
       - rum
+      - ci_pipelines
       example: rum
       type: string
       x-enum-varnames:
       - RUM
+      - CI_PIPELINES
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -6724,11 +6729,13 @@ components:
           type: string
         restricted_roles:
           description: A list of unique role identifiers to define which roles are
-            allowed to edit the monitor. Editing a monitor includes any updates to
-            the monitor configuration, monitor deletion, and muting of the monitor
-            for any amount of time. Roles unique identifiers can be pulled from the
-            [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) in
-            the `data.id` field.
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -6785,6 +6792,7 @@ components:
         next_record_id:
           description: The cursor to use to get the next results, if any. To make
             the next request, use the same parameters with the addition of the `next_record_id`.
+          nullable: true
           type: string
       type: object
     MonthlyUsageAttributionResponse:
@@ -11017,18 +11025,17 @@ components:
       properties:
         password:
           description: Password to use for the basic authentication.
-          example: ''
+          example: PaSSw0RD!
           type: string
         type:
           $ref: '#/components/schemas/SyntheticsBasicAuthWebType'
         username:
           description: Username to use for the basic authentication.
-          example: ''
+          example: my_username
           type: string
       required:
       - password
       - username
-      - type
       type: object
     SyntheticsBasicAuthWebType:
       default: web
@@ -11385,9 +11392,6 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
-      required:
-      - from_ts
-      - to_ts
       type: object
     SyntheticsBrowserTestResultShortResult:
       description: Object with the result of the last browser test run.
@@ -13458,8 +13462,6 @@ components:
       - lambda_functions_percentage
       - lambda_invocations_usage
       - lambda_invocations_percentage
-      - lambda_usage
-      - lambda_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
       type: string
@@ -13484,8 +13486,6 @@ components:
       - LAMBDA_FUNCTIONS_PERCENTAGE
       - LAMBDA_INVOCATIONS_USAGE
       - LAMBDA_INVOCATIONS_PERCENTAGE
-      - LAMBDA_USAGE
-      - LAMBDA_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
     UsageAttributionSupportedMetrics:
@@ -13501,14 +13501,12 @@ components:
       - infra_host_usage
       - custom_timeseries_percentage
       - container_percentage
-      - lambda_usage
       - api_usage
       - apm_host_percentage
       - infra_host_percentage
       - snmp_usage
       - browser_percentage
       - api_percentage
-      - lambda_percentage
       - npm_host_usage
       - lambda_functions_usage
       - lambda_functions_percentage
@@ -13538,14 +13536,12 @@ components:
       - INFRA_HOST_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
       - CONTAINER_PERCENTAGE
-      - LAMBDA_USAGE
       - API_USAGE
       - APM_HOST_PERCENTAGE
       - INFRA_HOST_PERCENTAGE
       - SNMP_USAGE
       - BROWSER_PERCENTAGE
       - API_PERCENTAGE
-      - LAMBDA_PERCENTAGE
       - NPM_HOST_USAGE
       - LAMBDA_FUNCTIONS_USAGE
       - LAMBDA_FUNCTIONS_PERCENTAGE
@@ -13701,20 +13697,6 @@ components:
           type: number
         lambda_invocations_usage:
           description: The Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        lambda_percentage:
-          description: 'The percentage of Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_percentage instead.'
-          format: double
-          type: number
-        lambda_usage:
-          description: 'The Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_usage instead.'
           format: double
           type: number
         npm_host_percentage:
@@ -14341,8 +14323,8 @@ components:
           format: date-time
           type: string
         ingested_events_bytes:
-          description: Contains the total number of bytes ingested during a given
-            hour.
+          description: Contains the total number of bytes ingested for APM spans during
+            a given hour.
           format: int64
           type: integer
         org_name:
@@ -15225,8 +15207,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15540,8 +15522,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for the given org.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15900,8 +15882,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current months for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         usage:
@@ -16082,6 +16064,7 @@ components:
         next_record_id:
           description: The cursor to get the next results (if any). To make the next
             request, use the same parameters and add `next_record_id`.
+          nullable: true
           type: string
         total_number_of_records:
           description: Total number of records.
@@ -17074,7 +17057,7 @@ components:
               an organization. The ability to write monitors is not required to set
               downtimes.
             monitors_read: View monitors.
-            monitors_write: Change, mute, and delete individual monitors.
+            monitors_write: Edit, mute, and delete individual monitors.
             synthetics_global_variable_read: View, search, and use in tests the list
               of global variables available for Synthetics.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -17962,6 +17945,11 @@ paths:
           - file: dashboard_payload.json
             name: body
           step: there is a valid "dashboard" in the system
+        screenboard_dashboard:
+          parameters:
+          - file: screenboard_dashboard_payload.json
+            name: body
+          step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteDashboard
@@ -24393,7 +24381,8 @@ paths:
       description: Search for metrics from the last 24 hours in Datadog.
       operationId: ListMetrics
       parameters:
-      - description: Query string to search metrics upon. Must be prefixed with `metrics:`.
+      - description: Query string to search metrics upon. Can optionally be prefixed
+          with `metrics:`.
         in: query
         name: q
         required: true
@@ -27873,7 +27862,13 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: Get Hourly Usage Attribution.
+      description: "Get Hourly Usage Attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetHourlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -27907,8 +27902,12 @@ paths:
         required: false
         schema:
           type: string
-      - description: Comma separated list of tags used to group usage. If no value
+      - description: 'Comma separated list of tags used to group usage. If no value
           is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
         in: query
         name: tag_breakdown_keys
         required: false
@@ -28363,7 +28362,13 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: Get Monthly Usage Attribution.
+      description: "Get Monthly Usage Attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetMonthlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -28403,8 +28408,12 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
-      - description: Comma separated list of tags used to group usage. If no value
-          is provided the usage will not be broken down by tags.
+      - description: 'Comma separated list of tag keys used to group usage. If no
+          value is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
         in: query
         name: tag_breakdown_keys
         required: false
@@ -28444,6 +28453,14 @@ paths:
       summary: Get Monthly Usage Attribution
       tags:
       - Usage Metering
+      x-given:
+        monthly_usage_attribution:
+          parameters:
+          - name: start_month
+            value: '"{{ timeISO(''now - 3d'') }}"'
+          - name: fields
+            value: '"infra_host_usage"'
+          step: there is a valid "monthly_usage_attribution" response
       x-menu-order: 31
       x-undo:
         type: safe

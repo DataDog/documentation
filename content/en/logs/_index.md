@@ -41,7 +41,7 @@ Once your logs are ingested, process and enrich all your logs with pipelines and
 
 {{< img src="/logs/connect.png" alt="Correlate logs with metrics or traces" style="width:80%;">}}
 
-Leverage the pillars of observability by connecting logs your logs to metrics and traces:
+Leverage the pillars of observability by connecting your logs to metrics and traces:
 
 - [Connect your logs and traces][5] to gain observability into your applications.
 - [Correlate logs and metrics][6] to gain context of an issue and map it throughout your service.

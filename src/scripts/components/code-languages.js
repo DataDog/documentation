@@ -68,7 +68,6 @@ function redirectCodeLang(codeLang = '') {
     } else {
         // if cookie is not set, default to python
         newCodeLang = 'python';
-
         Cookies.set('code-lang', newCodeLang, { path: '/' });
 
         toggleCodeBlocks(newCodeLang);
@@ -123,6 +122,7 @@ addCodeBlockVisibilityToggleEventListeners();
 
 function activateCodeLangNav(activeLang) {
     const codeLinks = document.querySelectorAll('.js-code-example-link');
+
     if (codeLinks.length) {
         codeLinks.forEach((codeLink) => {
             codeLink.classList.remove('active');

@@ -8,11 +8,11 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - 開発ツール
+- 開発ツール
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/retool/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/retool/README.md
 display_name: Retool
 draft: false
 git_integration_title: retool
@@ -31,10 +31,13 @@ public_title: Retool
 short_description: Retool は内部ツールを素早く構築する方法です
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 モニタリングと分析は、ミッションクリティカルなインサイトを提供しますが、開発者はインサイトに基づくアクションを実行するために、個別でサイロ化された、多くの場合カスタムツール間を行き来しなければならず、結果、インサイトに対し非効率的または非効果的な対応をすることになります。
 
@@ -43,7 +46,7 @@ Retool により開発者は Datadog ダッシュボードに直接埋め込む�
 ![Screenshot1][1]
 
 ### メトリクス
-Elasticsearch Management 用の Datadog 埋め込み Retool アプリは、主要な Elasticsearch メトリクスとログに対する既存の可視性と、Datadog ダッシュボードから直接クラスターやアカウントなどを管理する力を組み合わせたものです。
+Elasticsearch Management 用の Datadog の埋め込み Retool アプリは、主要な Elasticsearch メトリクスとログに対する既存の可視性と、Datadog ダッシュボードから直接クラスターやアカウントなどを管理する力を組み合わせたものです。
 
 ### ダッシュボード  
 Retool は Elasticsearch Management 用の埋め込みアプリを作成しました。Elasticsearch のメトリクス、トレース、ログは、すでに Datadog で監視できます。埋め込みアプリで、開発者は Datadog ダッシュボードから直接 Datadog の豊富なインサイトにアクションを起こすことができます。そのアクションには以下のものが含まれます。
@@ -57,7 +60,7 @@ Retool インテグレーションにはすぐに使えるダッシュボード�
 
 接続文字列を使い ElasticSearch クラスターに接続するよう促されます。このアプリは自動的にインスタンスに追加されます。次に、ナビゲーションバーのリソースをクリックし、新しく Datadog リソースを作成します（API キーとアプリケーションキーを追加）。最後に、クエリエディターのリソース選択ドロップダウンから選択して、Datadog リソースを 2 つの Datadog クエリに接続します。
 
-これで完了です。Datadog に戻るとダッシュボードでアプリが稼働し始めます。アプリは随時編集でき、DevOps ワークフローに合わせてカスタマイズできます。
+Datadog に戻るとダッシュボードでアプリが稼働しているのがわかります。アプリは随時編集でき、DevOps ワークフローに合わせてカスタマイズできます。
 
 ## 収集データ
 

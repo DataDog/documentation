@@ -414,6 +414,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_3824294658",
+      "description": "Create a ci-pipelines formula and functions monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3790803616",
       "description": "Create a ci-pipelines monitor returns \"OK\" response"
     },

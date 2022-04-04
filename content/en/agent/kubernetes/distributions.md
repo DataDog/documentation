@@ -145,7 +145,7 @@ spec:
 
 **Notes**: 
 
-- In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is **required**. Using the `DD_KUBELET_TLS_VERIFY=false` environment variable also resolves this issue. However, note that this disables SSL authentication.
+- In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is **required**. Using the `DD_KUBELET_TLS_VERIFY=false` environment variable also resolves this issue. Both of these options deactivate verification of the server certificate.
 
   ```
   env:
@@ -237,7 +237,7 @@ providers:
 OpenShift comes with hardened security by default (SELinux, SecurityContextConstraints), thus requiring some specific configuration:
 - Create SCC for Node Agent and Cluster Agent
 - Specific CRI socket path as OpenShift uses CRI-O container runtime
-- Kubelet API certificates may not be signed by cluster CA
+- Kubelet API certificates may not always be signed by cluster CA
 - Tolerations are required to schedule the Node Agent on `master` and `infra` nodes
 - Cluster name should be set as it cannot be retrieved automatically from cloud provider
 

@@ -83,7 +83,7 @@
         "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
         "@babel/preset-env": "^7.5.5",
         "@babel/register": "^7.5.5",
-        "@datadog/datadog-ci": "^0.11.7",
+        "@datadog/datadog-ci": "^1.2.0",
         "acorn": "^7.1.1",
         "babel-eslint": "^10.0.2",
         "babel-loader": "^8.0.6",

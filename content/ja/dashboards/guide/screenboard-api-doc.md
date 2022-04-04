@@ -1,15 +1,16 @@
 ---
-title: スクリーンボード API
-kind: ガイド
 aliases:
-  - /ja/graphing/faq/screenboard-api-doc
-  - /ja/graphing/guide/screenboard-api-doc
+- /ja/graphing/faq/screenboard-api-doc
+- /ja/graphing/guide/screenboard-api-doc
+kind: ガイド
+title: スクリーンボード API
 ---
+
 <div class="alert alert-danger">
 このエンドポイントは旧バージョンです。代わりに、 <a href="https://docs.datadoghq.com/api/v1/dashboards/">新しいダッシュボードエンドポイント</a>を使用してください。
 </div>
 
-`Screenboard` エンドポイントを使用すると、スクリーンボードをプログラムで作成、更新、削除、およびクエリできます。[スクリーンボードの詳細は、こちらを参照してください][1]。
+`Screenboard` エンドポイントを使用すると、スクリーンボードをプログラムで作成、更新、削除、およびクエリできます。
 
 ## スクリーンボードの作成
 
@@ -256,7 +257,7 @@ curl -X PUT -H "Content-type: application/json" \
 
 ## スクリーンボードの削除
 
-既存の[スクリーンボード][1]を削除します。
+既存のスクリーンボードを削除します。
 *このエンドポイントは、JSON 引数を受け取りません。*
 
 ### シグニチャ
@@ -418,7 +419,7 @@ curl -X GET \
 
 ## すべてのスクリーンボードの取得
 
-[スクリーンボード][1]の定義をすべて取得します。
+スクリーンボードの定義をすべて取得します。
 
 ### シグニチャ
 
@@ -474,5 +475,3 @@ curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY
 
 {{% /tab %}}
 {{< /tabs >}}
-
-[1]: /ja/dashboards/screenboard/

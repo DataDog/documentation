@@ -11,13 +11,20 @@ aliases:
 This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_ingestion">ingestion controls</a> and <a href="/tracing/trace_retention">retention filters</a> instead.
 </div>
 
-[App Analytics][1] is used to filter Indexed Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
+##  Migrate to the new configuration options
 
-* Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable App Analytics inside Datadog][1] to begin forwarding these analytics.
+Navigate to the [ingestion control page][1] to see services with legacy configurations. These are flagged with a `Legacy Setup` status.
+
+To migrate to the new configuration options, remove all legacy App Analytics [configuration options](#app-analytics-setup) from the services flagged with `Legacy Setup`. Then, implement the Datadog Agent and tracing libraries' [sampling mechanisms][2] to send traces.
+
+## App Analytics setup
+
+To enable App Analytics, either [automatically](#automatic-configuration) or [manually](#custom-instrumentation), configure your APM tracer to emit the relevant analytics from your services.
+
 
 **Note**: to use App Analytics, you must be using Agent v6.7+.
 
-## Automatic configuration
+### Automatic configuration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,nginx" >}}
 {{< programming-lang lang="java" >}}
@@ -123,11 +130,9 @@ To enable App Analytics for Nginx:
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
+### Configure additional services (optional)
 
-## Configure additional services (optional)
-
-### Configure by integration
+#### Configure by integration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
@@ -342,7 +347,7 @@ Integration names can be found on the [integrations table][1].
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Custom instrumentation
+#### Custom instrumentation
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -471,4 +476,5 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-[1]: https://app.datadoghq.com/apm/analytics
+[1]: /tracing/guide/ingestion_control_page/
+[2]: /tracing/trace_ingestion/mechanisms

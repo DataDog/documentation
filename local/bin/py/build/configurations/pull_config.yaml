@@ -203,7 +203,7 @@
         dest_path: '/tracing/setup_overview/setup/'
         file_name: 'ruby.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"]
+          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
           title: Tracing Ruby Applications
           kind: documentation
           code_lang: ruby

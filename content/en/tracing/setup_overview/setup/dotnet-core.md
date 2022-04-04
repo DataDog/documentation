@@ -377,7 +377,8 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
-Enables or disables automatic injection of correlation identifiers into application logs.
+Enables or disables automatic injection of correlation identifiers into application logs. <br>
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][8].
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
@@ -652,3 +653,4 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
 [6]: /tracing/setup_overview/custom_instrumentation/dotnet/
 [7]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[8]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
