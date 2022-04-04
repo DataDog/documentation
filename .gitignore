@@ -98,7 +98,7 @@ content/en/real_user_monitoring/reactnative.md
 
 # Synthetics
 content/en/synthetics/cicd_integrations/github_actions.md
-content/en/synthetics/cicd_integrations/circleci_orbs.md
+content/en/synthetics/cicd_integrations/circleci_orb.md
 
 # serverless
 content/en/serverless/libraries_integrations/forwarder.md
