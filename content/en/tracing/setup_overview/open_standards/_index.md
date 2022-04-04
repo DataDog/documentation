@@ -51,15 +51,15 @@ On each OpenTelemetry-instrumented application, set the resource attributes `dep
 
 ### Ingesting OpenTelemetry traces with the collector
 
+<div class="alert alert-warning">
+The Datadog exporter for the OpenTelemetry Collector is currently in beta. It may consume high CPU and memory resources. Configuring particularly the pipeline and batch processor may take some iteration before it responds with accurate metrics given your production environment. <a href="/help/">Reach out to support</a> if it doesn't work as you expect.
+</div>
+
 The OpenTelemetry Collector is configured by adding a [pipeline][9] to your `otel-collector-configuration.yml` file. Supply the relative path to this configuration file when you start the collector by passing it in via the `--config=<path/to/configuration_file>` command line argument. For examples of supplying a configuration file, see the [environment specific setup](#environment-specific-setup) section below or the [OpenTelemetry Collector documentation][10].
 
 The exporter assumes you have a pipeline that uses the `datadog` exporter, and includes a [batch processor][11] configured with the following:
   - A required `timeout` setting of `10s` (10 seconds). A batch representing 10 seconds of traces is a constraint of Datadog's API Intake for Trace Related Statistics.
   <div class="alert alert-info"><strong>Important!</strong> Without this <code>timeout</code> setting, trace related metrics including <code>.hits</code>, <code>.errors</code>, and <code>.duration</code> for different services and service resources will be inaccurate over periods of time.</div>
-
-<div class="alert alert-warning">
-The Datadog exporter for the OpenTelemetry Collector is currently in beta. It may consume high CPU and memory resources. Configuring particularly the pipeline and batch processor may take some iteration before it responds with accurate metrics given your production environment. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> if it doesn't work as you expect.
-</div>
 
 Here is an example trace pipeline configured with an `otlp` receiver, `batch` processor, `resourcedetection` processor and `datadog` exporter:
 

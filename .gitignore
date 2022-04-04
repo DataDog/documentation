@@ -166,6 +166,7 @@ Temporary Items
 
 # jetbrains
 .idea
+*.iml
 
 # local dev
 *.js.map

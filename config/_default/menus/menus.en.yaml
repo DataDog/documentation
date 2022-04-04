@@ -1663,6 +1663,11 @@ main:
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
     weight: 1706
+  - name: .NET diagnostic tool
+    url: tracing/troubleshooting/dotnet_diagnostic_tool
+    identifier: tracing_troubleshooting_dotnet_diagnostic_tool
+    parent: tracing_troubleshooting
+    weight: 1707
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
@@ -2190,11 +2195,16 @@ main:
     parent: application_security
     identifier: appsec_configuration
     weight: 403
+  - name: Custom Rules
+    url: security_platform/application_security/custom_rules/
+    parent: application_security
+    identifier: appsec_custom_rules
+    weight: 404
   - name: Troubleshooting
     url: security_platform/application_security/troubleshooting
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 404
+    weight: 405
   - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
@@ -6940,6 +6950,18 @@ api:
         - ListRUMEvents
       unstable: []
       order: 2
+  - name: Aggregate RUM events
+    url: '#aggregate-rum-events'
+    identifier: aggregate-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateRUMEvents
+      unstable: []
+      order: 3
   - name: Roles
     url: /api/latest/roles/
     identifier: roles
