@@ -124,7 +124,7 @@ For data from these products, when setting up additional endpoints, you must exp
 
 The `is_reliable` setting tells the Agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. The `is_reliable` setting ensures that logs are not missed if a destination becomes unavailable. 
 
-For example, if you're sending logs to two reliable endpoints and one becomes unavailable, logs continue to flow to the second reliable endpoint. If both endpoints become unavailable, the logs stop flowing until at least one endpoint recovers.
+For example, if you're sending logs to the main endpoint and an additional endpoint with `is_reliable: true` and one endpoint becomes unavailable, logs continue to flow to the other endpoint. If both endpoints become unavailable, the Agent will stop reading and sending logs until at least one endpoint recovers. This ensures all logs make it to at least one reliable endpoint.
 
 The `is_reliable` setting defaults to `false`. Unreliable endpoints only send logs if they successfully send to at least one reliable endpoint. You may define multiple additional endpoints with mixed use of `is_reliable`. 
 
