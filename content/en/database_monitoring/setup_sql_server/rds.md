@@ -40,10 +40,17 @@ Create a read-only login to connect to your server and grant the required permis
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
-GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
 ```
+
+Create the `datadog` user in each additional application database:
+```SQL
+USE [database_name];
+CREATE USER datadog FOR LOGIN datadog;
+```
+
+This is required because RDS does not permit granting `CONNECT ANY DATABASE`. If the datadog user is not created in a database then it will not be able to collect file I/O statistics for files related to that database.
 
 ## Install the Agent
 
