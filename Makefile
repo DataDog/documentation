@@ -260,10 +260,11 @@ examples/java: examples/datadog-api-client-java clean-java-examples
 	-cp -Rn examples/datadog-api-client-java/examples/v* ./content/en/api/
 
 examples/python: examples/datadog-api-client-python clean-python-examples
-	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
-	@find examples/content -iname \*.py -exec mv {} {}beta \;
+	-cp -Rn examples/datadog-api-client-python/examples/v* ./content/en/api
+	# @cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
+	# @find examples/content -iname \*.py -exec mv {} {}beta \;
 
-	-cp -Rn examples/content ./
+	# -cp -Rn examples/content ./
 
 examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
 	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Ruby code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
