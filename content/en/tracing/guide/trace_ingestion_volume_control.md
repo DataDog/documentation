@@ -73,7 +73,7 @@ Some additional ingestion reasons, surfaced in the ingestion control page, and a
 - `rule`: libraries sampling percentage for specific services
 - `manual`: in-code decision override to keep/drop a span and its children.
 - `analytics`: deprecated ingestion mechanism that samples single spans without the full trace
-- `error`: Sampling of errors uncatched by the head-based sampling
+- `error`: Sampling of errors uncaught by the head-based sampling
 - `rare`: Sampling of rare traces (catching all combinations of a set span tags)
 
 Additionally, other products can be responsible for span volume sampled
