@@ -10,7 +10,7 @@ Security signals can be viewed and managed by navigating to **Security** > **Sec
 
 ## Role-based access control for security signal management
 
-Learn more about Datadog’s default roles [the RBAC docs][1] and granular role-based access control permissions available for the Cloud Security Platform [in the Cloud Security RBAC docs][2].
+Learn more about Datadog’s default roles [in the RBAC docs][1] and granular role-based access control permissions available for the Cloud Security Platform [in the Cloud Security RBAC docs][2].
 
 To modify the signal state, enable the “Security Signals Write” permission for each user. 
 
