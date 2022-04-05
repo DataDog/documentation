@@ -4,7 +4,7 @@ On Linux, the Datadog Agent additionally requires an ODBC SQL Server driver to b
 
 Use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
 
-Create the SQL Server agent conf file `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml`. See the [sample conf file][3] for all available configuration options.
+Create the SQL Server Agent conf file `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml`. See the [sample conf file][3] for all available configuration options.
 
 ```yaml
 init_config:
