@@ -487,6 +487,13 @@
       "description": "Validate a monitor returns \"OK\" response"
     }
   ],
+  "ValidateExistingMonitor": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Validate an existing monitor returns \"OK\" response"
+    }
+  ],
   "CreateNotebook": [
     {
       "group": "notebooks",

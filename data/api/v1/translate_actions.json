@@ -627,6 +627,12 @@
     "description": "Unmute the specified monitor.",
     "summary": "Unmute a monitor"
   },
+  "ValidateExistingMonitor": {
+    "description": "Validate the monitor provided in the request.",
+    "summary": "Validate an existing monitor",
+    "request_description": "Monitor request object",
+    "request_schema_description": "Object describing a monitor."
+  },
   "GetMonthlyCustomReports": {
     "description": "Get monthly custom reports.",
     "summary": "Get the list of available monthly custom reports"
