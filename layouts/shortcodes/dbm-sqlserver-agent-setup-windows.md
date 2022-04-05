@@ -28,7 +28,7 @@ Once all Agent configuration is complete, [Restart the Datadog Agent][6].
 
 ### Validate
 
-[Run the Agent's status subcommand][7] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][8] page in Datadog to get started!
+[Run the Agent's status subcommand][7] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][8] page in Datadog to get started.
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
 [2]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
