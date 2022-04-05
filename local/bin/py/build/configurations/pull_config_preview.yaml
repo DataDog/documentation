@@ -632,7 +632,7 @@
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
               text: "Monitor react-native applications"    
-    - action: pull-and-push-folder
+    - action: pull-and-push-file
       branch: main
       globs:
         - 'docs/rum_mobile_vitals.md'
