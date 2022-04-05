@@ -68,7 +68,7 @@ GRANT VIEW ANY DEFINITION to datadog;
 
 {{% tab "SQL Server on Windows Azure VM" %}}
 
-For [SQL Server on Windows Azure VM][1] follow the [Self-hosted instructions][2] to install the Datadog Agent directly on the Windows Server host VM.
+For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitoring for self-hosted SQL Server][2] documentation to install the Datadog Agent directly on the Windows Server host VM.
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview
 [2]: /database_monitoring/setup_sql_server/selfhosted/
