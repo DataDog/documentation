@@ -153,10 +153,20 @@ dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- do
 
 When the `--api-key` is set, the agentless mode is automatically enabled.
 
+Alternatively, you can provide the [Datadog API key][6] using the following environment variables:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED` (Required)
+: Enables or disables the agentless mode.<br/>
+**Default**: `false`
+
+`DD_API_KEY`
+: The [Datadog API key][6] used to upload the test results.<br/>
+**Default**: `(empty)`
+
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
-: The [Datadog site][2] to upload results to.<br/>
+: The [Datadog site][7] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
@@ -171,3 +181,4 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 [4]: /tracing/setup_overview/custom_instrumentation/dotnet/
 [5]: /continuous_integration/setup_tests/dotnet/#agentless-beta
 [6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /getting_started/site/
