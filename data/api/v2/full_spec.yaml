@@ -2764,6 +2764,7 @@ components:
       - min
       - max
       - avg
+      - median
       example: pc90
       type: string
       x-enum-varnames:
@@ -2778,6 +2779,7 @@ components:
       - MIN
       - MAX
       - AVG
+      - MEDIAN
     LogsArchive:
       description: The logs archive.
       properties:
@@ -4636,6 +4638,7 @@ components:
       - min
       - max
       - avg
+      - median
       example: pc90
       type: string
       x-enum-varnames:
@@ -4650,6 +4653,7 @@ components:
       - MIN
       - MAX
       - AVG
+      - MEDIAN
     RUMAnalyticsAggregateResponse:
       description: The response object for the RUM events aggregate API endpoint.
       properties:
