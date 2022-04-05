@@ -13,6 +13,9 @@ aliases:
     - /agent/kubernetes/helm
     - /agent/autodiscovery
 further_reading:
+    - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
+      tag: "Release Notes"
+      text: "Check out the latest Datadog Containers releases! (App login required)."
     - link: 'agent/kubernetes/log'
       tag: 'Documentation'
       text: 'Collect your application logs'
@@ -156,18 +159,18 @@ To install the Datadog Agent on your Kubernetes cluster:
 
     | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Security                       | Linux                   | Windows                 |
     |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i>                         | <i class="icon-check-bold"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
-    | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][9]  | [Manifest template][10] |
-    |                           |                           |                           |                           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [Manifest template][11] | no template             |
-    | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [Manifest template][12] | [Manifest template][13] |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i>                         | <i class="icon-check-bold"></i> | [Manifest template][2]  | [Manifest template][3] (no security)  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][4]  | [Manifest template][5]  |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [Manifest template][6]  | [Manifest template][7]  |
+    | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][8]  | [Manifest template][9] |
+    |                           |                           |                           |                           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [Manifest template][10] | no template             |
+    | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [Manifest template][11] | [Manifest template][12] |
 
-     To enable trace collection completely, [extra steps are required on your application Pod configuration][14]. Refer also to the [logs][15], [APM][16], [processes][17], and [Network Performance Monitoring][18], and [Security][19] documentation pages to learn how to enable each feature individually.
+     To enable trace collection completely, [extra steps are required on your application Pod configuration][13]. Refer also to the [logs][14], [APM][15], [processes][16], and [Network Performance Monitoring][17], and [Security][18] documentation pages to learn how to enable each feature individually.
 
      **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
-3. In the `secret-api-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][2] encoded in base64. To get the base64 version of your API key, you can run:
+3. In the `secret-api-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][19] encoded in base64. To get the base64 version of your API key, you can run:
 
     ```shell
     echo -n '<Your API key>' | base64
@@ -209,7 +212,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 ### Unprivileged
 
-(Optional) To run an unprivileged installation, add the following to your [pod template][2]:
+(Optional) To run an unprivileged installation, add the following to your [pod template][19]:
 
 ```yaml
   spec:
@@ -222,24 +225,24 @@ To install the Datadog Agent on your Kubernetes cluster:
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /resources/yaml/datadog-agent-all-features.yaml
-[4]: /resources/yaml/datadog-agent-windows-all-features.yaml
-[5]: /resources/yaml/datadog-agent-logs-apm.yaml
-[6]: /resources/yaml/datadog-agent-windows-logs-apm.yaml
-[7]: /resources/yaml/datadog-agent-logs.yaml
-[8]: /resources/yaml/datadog-agent-windows-logs.yaml
-[9]: /resources/yaml/datadog-agent-apm.yaml
-[10]: /resources/yaml/datadog-agent-windows-apm.yaml
-[11]: /resources/yaml/datadog-agent-npm.yaml
-[12]: /resources/yaml/datadog-agent-vanilla.yaml
-[13]: /resources/yaml/datadog-agent-windows-vanilla.yaml
-[14]: /agent/kubernetes/apm/#setup
-[15]: /agent/kubernetes/log/
-[16]: /agent/kubernetes/apm/
-[17]: /infrastructure/process/?tab=kubernetes#installation
-[18]: /network_monitoring/performance/setup/
-[19]: /security/agent/
+[2]: /resources/yaml/datadog-agent-all-features.yaml
+[3]: /resources/yaml/datadog-agent-windows-all-features.yaml
+[4]: /resources/yaml/datadog-agent-logs-apm.yaml
+[5]: /resources/yaml/datadog-agent-windows-logs-apm.yaml
+[6]: /resources/yaml/datadog-agent-logs.yaml
+[7]: /resources/yaml/datadog-agent-windows-logs.yaml
+[8]: /resources/yaml/datadog-agent-apm.yaml
+[9]: /resources/yaml/datadog-agent-windows-apm.yaml
+[10]: /resources/yaml/datadog-agent-npm.yaml
+[11]: /resources/yaml/datadog-agent-vanilla.yaml
+[12]: /resources/yaml/datadog-agent-windows-vanilla.yaml
+[13]: /agent/kubernetes/apm/#setup
+[14]: /agent/kubernetes/log/
+[15]: /agent/kubernetes/apm/
+[16]: /infrastructure/process/?tab=kubernetes#installation
+[17]: /network_monitoring/performance/setup/
+[18]: /security/agent/
+[19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /getting_started/site/
 [21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [22]: /agent/kubernetes/data_collected/#kube-state-metrics

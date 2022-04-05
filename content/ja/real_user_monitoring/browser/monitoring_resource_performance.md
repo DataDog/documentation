@@ -1,20 +1,21 @@
 ---
-title: リソースパフォーマンスの監視
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-    tag: ブログ
-    text: リアルユーザーモニタリング
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Datadog でビューを検索する
-  - link: /real_user_monitoring/explorer/analytics/
-    tag: Documentation
-    text: イベントに関する分析論を組み立てる
-  - link: /real_user_monitoring/dashboards/
-    tag: Documentation
-    text: RUM ダッシュボード
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: リアルユーザーモニタリング
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: イベントへの視覚化の適用
+- link: /real_user_monitoring/dashboards/
+  tag: Documentation
+  text: RUM ダッシュボード
+kind: documentation
+title: リソースパフォーマンスの監視
 ---
+
 RUM SDK は、すべての RUM ビュー (ページの読み込み) のリソースとアセットを収集します。[XMLHttpRequest][1] (XHR) と Fetch リクエストだけでなく、画像、CSS ファイル、JavaScript アセット、フォントファイルも収集します。RUM リソースイベントは、詳細なタイミングとメタデータとともに、それぞれに対して生成されます。
 
 RUM リソースは、収集時にアクティブな RUM ビューに関連するすべてのコンテキストから継承します。
