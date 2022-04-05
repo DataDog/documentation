@@ -1,6 +1,6 @@
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
-On Linux the Datadog Agent additionally requires an ODBC SQL Server driver to be installed, for example the [Microsoft ODBC driver][2]. Once installed, copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+On Linux, the Datadog Agent additionally requires an ODBC SQL Server driver to be installed—for example, the [Microsoft ODBC driver][2]. Once an ODBC SQL Server is installed, copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
 
 Use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
 
