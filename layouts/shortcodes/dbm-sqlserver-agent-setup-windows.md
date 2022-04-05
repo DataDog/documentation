@@ -24,7 +24,7 @@ To use **Windows Authentication** set `connection_string: "Trusted_Connection=ye
 
 The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][5].
 
-Once all agent configuration is complete, [Restart the Datadog Agent][6].
+Once all Agent configuration is complete, [Restart the Datadog Agent][6].
 
 ### Validate
 
