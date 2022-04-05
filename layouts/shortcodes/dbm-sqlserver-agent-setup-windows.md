@@ -4,7 +4,7 @@ On Windows the Datadog Agent can connect to SQL Server using one of the followin
 * **Microsoft ADO**: set `connector: adodbapi` and `adoprovider` to one of the supported drivers. To use the recommended [Microsoft OLE DB Driver][2] set `adoprovider: MSOLEDBSQL` and ensure the driver is installed on the host where the agent is running. The other two drivers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
 * **ODBC**: set `connector: odbc`, `driver: {ODBC Driver 17 for SQL Server}`, and ensure the [Microsoft ODBC Driver][3] is installed on the host where the Agent is running.
 
-Create the SQL Server agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. See the [sample conf file][4] for all available configuration options.
+Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. See the [sample conf file][4] for all available configuration options.
 
 ```yaml
 init_config:
