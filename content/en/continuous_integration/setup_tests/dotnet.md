@@ -159,7 +159,7 @@ Alternatively, you can provide the [Datadog API key][6] using the following envi
 : Enables or disables the agentless mode.<br/>
 **Default**: `false`
 
-`DD_API_KEY`
+`DD_API_KEY` (Required)
 : The [Datadog API key][6] used to upload the test results.<br/>
 **Default**: `(empty)`
 
