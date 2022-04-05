@@ -147,6 +147,8 @@ For more information about how to add spans and tags for custom instrumentation,
 
 ## Agentless (Beta)
 
+...
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -156,4 +158,4 @@ For more information about how to add spans and tags for custom instrumentation,
 [2]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[5]: #agentless-beta
+[5]: /continuous_integration/setup_tests/dotnet/#agentless-beta
