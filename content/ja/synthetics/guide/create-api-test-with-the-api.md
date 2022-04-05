@@ -1,18 +1,17 @@
 ---
-further_reading:
-- link: /api/latest/synthetics/
-  tag: API
-  text: Synthetics API
-- link: /synthetics/
-  tag: ドキュメント
-  text: チェックを管理する
-- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: Terraform
-  text: Terraform による Synthetic API テストの作成と管理
-kind: ガイド
 title: API で API テストを作成する
+kind: ガイド
+further_reading:
+  - link: /api/latest/synthetics/
+    tag: API
+    text: Synthetics API
+  - link: /synthetics/
+    tag: ドキュメント
+    text: チェックを管理する
+  - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
+    tag: Terraform
+    text: Terraform による Synthetic API テストの作成と管理
 ---
-
 ## 概要
 
 このガイドでは、API テストを作成するために使用できるコンフィギュレーションファイルの例を記載しています。
@@ -408,7 +407,8 @@ configuration = Configuration(
     api_key= {"apiKeyAuth": "<YOUR_API_KEY>","appKeyAuth": "<YOUR_APPLICATION_KEY>"}
 )
 
-// ApiClient(configuration) に api_client が設定された API クライアントのインスタンスを持つコンテキストを入力します:
+// API クライアントのインスタンスでコンテキストを入力します
+with ApiClient(configuration) as api_client:
     // API クラスのインスタンスを作成します
     api_instance = synthetics_api.SyntheticsApi(api_client)
     body = SyntheticsAPITest(
