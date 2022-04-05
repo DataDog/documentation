@@ -32,7 +32,7 @@ The `service` and `env` tags allow you to link your database telemetry to other 
 
 ### Validate
 
-[Run the Agent's status subcommand][4] and look for `sqlserver` under the **Checks** section. Or navigate to the [Databases][5] page in Datadog to get started!
+[Run the Agent's status subcommand][4] and look for `sqlserver` under the **Checks** section. Alternatively, navigate to the [Databases][5] page in Datadog to get started.
 
 [1]: /agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
