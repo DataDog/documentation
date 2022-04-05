@@ -54,7 +54,7 @@ This is required because RDS does not permit granting `CONNECT ANY DATABASE`. Th
 
 ## Install the Agent
 
-Since AWS does not grant direct host access, the Datadog Agent must be installed somewhere separately where it has access to the RDS host. There are several options for installing and running the agent.
+Since AWS does not grant direct host access, the Datadog Agent must be installed separately, where it has access to the RDS host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
