@@ -566,7 +566,7 @@
               text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/rum_mobile_vitals.md'
       options:
@@ -577,7 +577,7 @@
           kind: documentation
           beta: true
           description: Discover insights about your iOS application's health and performance.
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_mobile_vitals.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/rum_mobile_vitals.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "GitHub"
@@ -633,7 +633,7 @@
               tag: "Blog"
               text: "Monitor react-native applications"    
     - action: pull-and-push-file
-      branch: main
+      branch: develop
       globs:
         - 'docs/rum_mobile_vitals.md'
       options:
@@ -644,7 +644,7 @@
           kind: documentation
           beta: true
           description: Discover insights about your React Native application's health and performance.
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/rum_mobile_vitals.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/rum_mobile_vitals.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "GitHub"
