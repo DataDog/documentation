@@ -107,43 +107,6 @@ build_preview:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
-# build_preview_legacy:
-#   <<: *base_template
-#   stage: build
-#   environment: "preview"
-#   variables:
-#     URL: ${PREVIEW_DOMAIN}
-#     CONFIG: ${PREVIEW_CONFIG}
-#     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
-#     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
-#     LOCAL: "False"
-#   script:
-#     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-#     - version_static_assets
-#     - touch Makefile.config
-#     - make clean-examples
-#     - make examples
-#     - sync_integration_descriptions
-#     #- sync_integration_descriptions_cached
-#     - placehold_translations
-#     - update_preview_baseurl
-#     - build_hugo_site_new
-#     - in-isolation deploy_preview
-#     - collect_static_assets
-#     # remove service_checks json as we don't need to s3 push that..
-#     - rm -rf data/service_checks
-#     - push_site_to_s3
-#     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-#     #- remove_static_from_repo
-#     #- create_artifact
-#     #- create_artifact_untracked
-#   artifacts:
-#     paths:
-#       - ${ARTIFACT_RESOURCE}
-#       - ./integrations_data
-#   only:
-#     - /.+?\/[a-zA-Z0-9_-]+/
-
 link_checks_preview:
   <<: *base_template
   stage: post-deploy
@@ -386,6 +349,18 @@ evaluate_missing_metrics:
   only:
     - master
 
+# TODO: update job to be scheduled/only run on master deploys when we are ready to deprecate old translations job
+manage_untracked_translations:manual:
+  <<: *base_template
+  stage: post-deploy
+  cache: {}
+  environment: "live"
+  only:
+    - master
+  script:
+    - echo "Downloading untracked translation source files..."
+    - manage_untracked_translation_files
+  when: manual
 
 manage_translations:on-schedule:
   <<: *base_template
