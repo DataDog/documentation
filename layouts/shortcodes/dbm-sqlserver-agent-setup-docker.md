@@ -1,4 +1,4 @@
-To configure the Database Monitoring Agent running in a Docker container you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
+To configure the Database Monitoring Agent running in a Docker container, set the [Autodiscovery Integration Templates][1] as Docker labels on your Agent container.
 
 **Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
