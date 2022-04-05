@@ -1,6 +1,6 @@
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-Follow the instructions to [enable cluster checks][2] if not already enabled in your Kubernetes cluster. You can configure the cluster agent either with static files mounted in the Cluster Agent container or using Kubernetes service annotations:
+If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations:
 
 ### Command line with Helm
 
