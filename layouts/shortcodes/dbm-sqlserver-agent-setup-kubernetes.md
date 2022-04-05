@@ -23,7 +23,7 @@ instances:
     password: '<PASSWORD>'
     connector: 'odbc'
     driver: 'FreeTDS'\
-  datadog/datadog
+  datadog/datadog"
 ```
 
 ### Configure with mounted files
