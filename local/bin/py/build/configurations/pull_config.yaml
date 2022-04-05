@@ -521,9 +521,8 @@
 
   - repo_name: dd-sdk-ios
     contents:
-
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/log_collection.md'
       options:
@@ -533,7 +532,7 @@
           title: iOS Log Collection
           kind: documentation
           description: "Collect logs from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
@@ -554,7 +553,7 @@
           kind: documentation
           beta: true
           description: "Collect traces from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
@@ -571,7 +570,7 @@
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/rum_collection/" ]
 
     - action: pull-and-push-folder
       branch: master
@@ -581,7 +580,7 @@
         dest_dir: '/real_user_monitoring/error_tracking/'
         path_to_remove: 'docs/error_tracking/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/error_tracking/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:
