@@ -96,7 +96,7 @@ Click on the `Manage Ingestion Rate` CTA to configure a sampling rate for the se
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_ingestion/ingestion_controls
-[2]: /tracing/trace_ingestion/ingestion_mechanisms
+[2]: /tracing/trace_ingestion/mechanisms
 [3]: /tracing/trace_ingestion/mechanisms/#head-based-default-mechanism
 [4]: /tracing/trace_retention/usage_metrics/
 [5]: https://app.datadoghq.com/
