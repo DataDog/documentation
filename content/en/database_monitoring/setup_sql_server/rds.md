@@ -50,7 +50,7 @@ USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-This is required because RDS does not permit granting `CONNECT ANY DATABASE`. If the datadog user is not created in a database then it will not be able to collect file I/O statistics for files related to that database.
+This is required because RDS does not permit granting `CONNECT ANY DATABASE`. The datadog agent needs to connect to a database in order to collect database-specific file I/O statistics.
 
 ## Install the Agent
 
