@@ -545,7 +545,7 @@
               text: "Learn how to explore your logs"
 
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/trace_collection.md'
       options:
@@ -587,7 +587,7 @@
               text: "Monitor Mobile Vitals in Datadog"
 
     - action: pull-and-push-folder
-      branch: master
+      branch: develop
       globs:
         - docs/rum_collection/*
       options:
@@ -597,7 +597,7 @@
           dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/rum_collection/" ]
 
     - action: pull-and-push-folder
-      branch: master
+      branch: develop
       globs:
         - docs/error_tracking/*
       options:
