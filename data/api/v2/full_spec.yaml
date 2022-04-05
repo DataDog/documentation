@@ -6941,8 +6941,8 @@ components:
             security_monitoring_signals_read: View Security Signals.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
-            user_access_manage: Disable users, manage user roles, and manage SAML-to-role
-              mappings.
+            user_access_manage: Disable users, manage user roles, manage SAML-to-role
+              mappings, and configure logs restriction queries.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:

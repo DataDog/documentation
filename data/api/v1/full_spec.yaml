@@ -3978,18 +3978,22 @@ components:
       x-enum-varnames:
       - EVENT_LIST
     ListStreamSource:
-      default: issue_stream
+      default: apm_issue_stream
       description: Source from which to query items to display in the stream.
       enum:
       - issue_stream
       - logs_stream
       - audit_stream
-      example: issue_stream
+      - rum_issue_stream
+      - apm_issue_stream
+      example: apm_issue_stream
       type: string
       x-enum-varnames:
       - ISSUE_STREAM
       - LOGS_STREAM
       - AUDIT_STREAM
+      - RUM_ISSUE_STREAM
+      - APM_ISSUE_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -4007,7 +4011,7 @@ components:
             - field: timestamp
               width: auto
             query:
-              data_source: issue_stream
+              data_source: apm_issue_stream
               query_string: '@data_source:APM'
             response_format: event_list
           items:
@@ -17072,8 +17076,8 @@ components:
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
-            user_access_manage: Disable users, manage user roles, and manage SAML-to-role
-              mappings.
+            user_access_manage: Disable users, manage user roles, manage SAML-to-role
+              mappings, and configure logs restriction queries.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
