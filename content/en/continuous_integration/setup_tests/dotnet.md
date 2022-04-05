@@ -29,6 +29,10 @@ Supported test frameworks:
 
 [Install the Datadog Agent to collect tests data][1].
 
+<div class="alert alert-info">
+  <strong>Note:</strong> Agentless mode is currently on beta, if you want to test this feature follow the [instructions][5].
+</div>
+
 ## Installing the .NET tracer
 
 To install or update the `dd-trace` command globally on the machine, run:
@@ -130,7 +134,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Your custom instrumentation setup depends on the `dd-trace` version. To use the custom instrumentation, you must keep the package versions for `dd-trace` and `Datadog.Trace` NuGet packages in sync.
+  <strong>Note:</strong> Your custom instrumentation setup depends on the <code>dd-trace</code> version. To use the custom instrumentation, you must keep the package versions for <code>dd-trace</code> and <code>Datadog.Trace</code> NuGet packages in sync.
 </div>
 
 To use the custom instrumentation in your .NET application:
@@ -141,6 +145,8 @@ To use the custom instrumentation in your .NET application:
 
 For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][4].
 
+## Agentless (Beta)
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -150,3 +156,4 @@ For more information about how to add spans and tags for custom instrumentation,
 [2]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[5]: #agentless-beta
