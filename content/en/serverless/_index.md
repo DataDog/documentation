@@ -9,6 +9,9 @@ aliases:
   - /tracing/serverless_functions/datadog_apm
   - /integrations/amazon_lambda/docs.datadoghq.com/serverless/
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Serverless"
+  tag: "Release Notes"
+  text: "Check out the latest Serverless releases! (App login required)."
 - link: "https://www.datadoghq.com/state-of-serverless"
   tag: "Blog"
   text: "The State of Serverless"
