@@ -257,9 +257,7 @@ examples/go: examples/datadog-api-client-go clean-go-examples
 	-cp -Rn examples/datadog-api-client-go/examples/v* ./content/en/api/
 
 examples/java: examples/datadog-api-client-java clean-java-examples
-	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Java code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
-
-	-cp -Rn examples/content ./
+	-cp -Rn examples/datadog-api-client-java/examples/v* ./content/en/api/
 
 examples/python: examples/datadog-api-client-python clean-python-examples
 	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
