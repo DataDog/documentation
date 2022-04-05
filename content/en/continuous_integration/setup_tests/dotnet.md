@@ -147,7 +147,13 @@ For more information about how to add spans and tags for custom instrumentation,
 
 ## Agentless (Beta)
 
-...
+To instrument your test suite without requiring an agent, prefix your test command with `dd-trace ci run`, providing the Datadog API key][6] as the `--api-key`, the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+{{< /code-block >}}
+
+When the `--api-key` is set, the agentless mode is automatically enabled.
 
 ## Further reading
 
@@ -159,3 +165,4 @@ For more information about how to add spans and tags for custom instrumentation,
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/setup_overview/custom_instrumentation/dotnet/
 [5]: /continuous_integration/setup_tests/dotnet/#agentless-beta
+[6]: https://app.datadoghq.com/organization-settings/api-keys
