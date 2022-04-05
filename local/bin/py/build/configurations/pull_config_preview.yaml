@@ -524,7 +524,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/log_collection.md'
       options:
@@ -534,7 +534,7 @@
           title: iOS Log Collection
           kind: documentation
           description: "Collect logs from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
