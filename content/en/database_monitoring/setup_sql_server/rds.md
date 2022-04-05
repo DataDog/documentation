@@ -33,7 +33,7 @@ Do the following steps to enable Database Monitoring with your database:
 
 ## Grant the Agent access
 
-The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
+The Datadog Agent requires read-only access to the database server to collect statistics and queries.
 
 Create a read-only login to connect to your server and grant the required permissions:
 
