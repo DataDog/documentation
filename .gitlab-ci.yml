@@ -354,7 +354,7 @@ manage_untracked_translations:manual:
   <<: *base_template
   stage: post-deploy
   cache: {}
-  environment: "preview"
+  environment: "live"
   only:
     - master
   script:
