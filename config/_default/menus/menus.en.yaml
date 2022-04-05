@@ -961,6 +961,11 @@ main:
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
     weight: 705
+  - name: Guides
+    url: metrics/custom_metrics/guide
+    parent: metrics_custom_metrics
+    identifier: custom_metrics_guide
+    weight: 706
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
