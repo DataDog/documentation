@@ -368,6 +368,7 @@
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md"]
           title: Mobile Vitals
+          description: Discover insights about your iOS application's health and performance.
           kind: documentation
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
@@ -564,6 +565,27 @@
               tag: "Documentation"
               text: "Explore your services, resources, and traces"
 
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/rum_mobile_vitals.md'
+      options:
+        dest_path: '/real_user_monitoring/ios/'
+        file_name: 'mobile_vitals.md'
+        front_matters:
+          title: Mobile Vitals
+          kind: documentation
+          beta: true
+          description: Discover insights about your iOS application's health and performance.
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_mobile_vitals.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "GitHub"
+              text: "dd-sdk-ios Source code"
+            - link: "https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/"
+              tag: "Blog"
+              text: "Monitor Mobile Vitals in Datadog"
+
     - action: pull-and-push-folder
       branch: master
       globs:
@@ -602,14 +624,34 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-reactnative source code"
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
-              text: "Monitor react-native applications"
+              text: "Monitor react-native applications"    
+    - action: pull-and-push-folder
+      branch: main
+      globs:
+        - 'docs/rum_mobile_vitals.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'mobile_vitals.md'
+        front_matters:
+          title: Mobile Vitals
+          kind: documentation
+          beta: true
+          description: Discover insights about your React Native application's health and performance.
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/rum_mobile_vitals.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "GitHub"
+              text: "dd-sdk-reactnative Source code"
+            - link: "https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/"
+              tag: "Blog"
+              text: "Monitor Mobile Vitals in Datadog"
 
   - repo_name: security-monitoring
     contents:
