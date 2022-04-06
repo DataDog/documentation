@@ -476,6 +476,11 @@ The following configuration variables are for features that are available for us
 `DD_TRACE_LOG_PATH`
 : Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.
 
+`DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
+: Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>
+**Default**: `true`
+
+
 ## Custom instrumentation
 
 Your setup for custom instrumentation depends on your automatic instrumentation and includes additional steps depending on the method:
