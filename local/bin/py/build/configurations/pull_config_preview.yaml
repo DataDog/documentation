@@ -564,7 +564,17 @@
             - link: "tracing/visualization/"
               tag: "Documentation"
               text: "Explore your services, resources, and traces"
-    
+
+    - action: pull-and-push-folder
+      branch: master
+      globs:
+        - docs/rum_collection/*
+      options:
+        dest_dir: '/real_user_monitoring/ios/'
+        path_to_remove: 'docs/rum_collection/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+
     - action: pull-and-push-file
       branch: alai97/mobile-vitals-ios-doc-update
       globs:
@@ -589,16 +599,6 @@
     - action: pull-and-push-folder
       branch: master
       globs:
-        - docs/rum_collection/*
-      options:
-        dest_dir: '/real_user_monitoring/ios/'
-        path_to_remove: 'docs/rum_collection/'
-        front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
-
-    - action: pull-and-push-folder
-      branch: master
-      globs:
         - docs/error_tracking/*
       options:
         dest_dir: '/real_user_monitoring/error_tracking/'
@@ -614,10 +614,10 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/real_user_monitoring/'
-        file_name: 'reactnative.md'
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: '_index.md'
         front_matters:
-          title: React Native RUM Collection
+          title: React Native Monitoring
           kind: documentation
           beta: true
           description: "Collect RUM data from your React Native projects."
