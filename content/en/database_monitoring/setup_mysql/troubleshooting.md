@@ -105,7 +105,7 @@ BEGIN
 END $$
 DELIMITER ;
 ```
-#### Missing explain plan procedure {#explain-plan-fq-procedure-missing}
+#### Missing full qualified explain plan procedure {#explain-plan-fq-procedure-missing}
 The Agent requires the procedure `explain_statement(...)` to exist in **all schemas** the Agent can collect samples from. 
 
 Create this procedure **in every schema** from which you want to collect explain plans. Replace `<YOUR_SCHEMA>` with your database schema:
