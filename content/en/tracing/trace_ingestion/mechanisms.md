@@ -24,8 +24,8 @@ The default sampling mechanism is called _head-based sampling_. The decision of 
 
 Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, the trace is guaranteed to be kept or dropped as a whole.
 
-Sampling rates for head-based sampling can be set up in two places:
-- At the **[Agent](#in-the-agent)** level: this is the default behaviour
+You can set sampling rates for head-based sampling in two places:
+- At the **[Agent](#in-the-agent)** level (default)
 - At the **[Tracing Library](#in-tracing-libraries-user-defined-rules)** level: any tracing library mechanism overrides the Agent setup.
 
 ### In the Agent
@@ -159,7 +159,7 @@ For traces not caught by the head-based sampling, **Agent** mechanisms make sure
 - **Error traces**: Sampling errors is important for providing visibility on potential system failures.
 - **Rare traces**: Sampling rare traces allows you to keep visibility on your system as a whole, by making sure that low-traffic services and resources are still monitored.
 
-**Note**: Error and rare samplers will be ignored for services for which you set [library sampling rules](#in-tracing-libraries-user-defined-rules)
+**Note**: Datadog ignores error and rare samplers for services for which you set [library sampling rules](#in-tracing-libraries-user-defined-rules).
 
 ### Error traces
 `ingestion_reason: error`
