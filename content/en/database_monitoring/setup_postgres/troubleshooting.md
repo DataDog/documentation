@@ -98,7 +98,7 @@ Some or all queries may not have plans available. This can be due to unsupported
 
 ### Query metrics are missing
 
-Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring).
+Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query metrics.
 
 #### pg_stat_statements extension not loaded {#pg-stat-statements-not-loaded}
 The `pg_stat_statements` extension is not loaded. The extension must be loaded through `shared_preload_libraries` in your Postgres configuration (**Note**: A server restart is required to take effect after modifying this variable). For additional details on installing how to load the extension, see the [setup instructions][1].
@@ -148,7 +148,7 @@ To avoid this, raise the `track_activity_query_size` setting to a value large en
 
 ### Queries are missing explain plans
 
-Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup.
+Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup. Below are possible causes for missing explain plans.
 
 #### Missing explain function {#undefined-explain-function}
 
@@ -171,15 +171,23 @@ LANGUAGE 'plpgsql'
 RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
+#### Agent is running an unsupported version
+Ensure that the Agent is running version 7.32.0 or greater. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
 
-| Possible cause                         | Solution                                  |
-|----------------------------------------|-------------------------------------------|
-| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.32.0 or greater. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
-| Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
-| The application client used to execute the query is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][5] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, the Python client [asyncpg][6] and the Go client [pgx][7] use the extended query protocol by default. To work around this limitation, you can configure your database client to use the simple query protocol. For example: set `preferQueryMode = simple` for the [Postgres JDBC Client][8] or set `PreferSimpleProtocol` on the [pgx][7] connection config. |
-| The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][9]. |
-| The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
-| The query is relatively infrequent or executes quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query.
+#### Queries are truncated
+See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text.
+
+#### Application using Postgres extended query protocol or prepared statements
+The application client used to execute the query is using the Postgres extended query protocol or prepared statements. Some client applications using the Postgres [extended query protocol][5] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, the Python client [asyncpg][6] and the Go client [pgx][7] use the extended query protocol by default. To work around this limitation, you can configure your database client to use the simple query protocol. For example: set `preferQueryMode = simple` for the [Postgres JDBC Client][8] or set `PreferSimpleProtocol` on the [pgx][7] connection config.
+
+#### Query is in a database ignored by the Agent instance config
+The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][9]. 
+
+#### Query cannot be explained
+Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans.
+
+#### Query is relatively infrequent or executes quickly
+The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query.
 
 ### Setup fails on `create extension pg_stat_statements`
 
