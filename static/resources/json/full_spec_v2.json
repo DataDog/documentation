@@ -61214,7 +61214,7 @@
               },
               {
                 "name": "body",
-                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\", \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"distribution\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum }}\"\n  }\n}"
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\", \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"gauge\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum }}\"\n  }\n}"
               }
             ],
             "step": "there is a valid \"metric_tag_configuration\" in the system"
