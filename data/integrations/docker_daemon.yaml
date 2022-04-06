@@ -1,5 +1,17 @@
 docker_daemon:
-- description: The percent of time the CPU is executing system calls on behalf of
+- curated_metric: ''
+  description: Limit on CPU available to the container, expressed as percentage of
+    a core
+  integration: docker
+  interval: ''
+  metric_name: docker.cpu.limit
+  metric_type: gauge
+  orientation: '0'
+  per_unit_name: ''
+  short_name: docker.cpu.limit
+  unit_name: percent
+- curated_metric: ''
+  description: The percent of time the CPU is executing system calls on behalf of
     processes of this container, unnormalized
   integration: docker
   interval: ''
@@ -9,7 +21,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu system
   unit_name: percent
-- description: 95th percentile of docker.cpu.system
+- curated_metric: ''
+  description: 95th percentile of docker.cpu.system
   integration: docker
   interval: ''
   metric_name: docker.cpu.system.95percentile
@@ -18,7 +31,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu system 95%
   unit_name: percent
-- description: Average value of docker.cpu.system
+- curated_metric: ''
+  description: Average value of docker.cpu.system
   integration: docker
   interval: ''
   metric_name: docker.cpu.system.avg
@@ -27,7 +41,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu system avg
   unit_name: percent
-- description: The rate that the value of docker.cpu.system was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.cpu.system was sampled
   integration: docker
   interval: ''
   metric_name: docker.cpu.system.count
@@ -36,7 +51,8 @@ docker_daemon:
   per_unit_name: second
   short_name: cpu system count
   unit_name: sample
-- description: Max value of docker.cpu.system
+- curated_metric: ''
+  description: Max value of docker.cpu.system
   integration: docker
   interval: ''
   metric_name: docker.cpu.system.max
@@ -45,7 +61,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu system max
   unit_name: percent
-- description: Median value of docker.cpu.system
+- curated_metric: ''
+  description: Median value of docker.cpu.system
   integration: docker
   interval: ''
   metric_name: docker.cpu.system.median
@@ -54,7 +71,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu system median
   unit_name: percent
-- description: The percent of time the CPU is under direct control of processes of
+- curated_metric: ''
+  description: The percent of time the CPU is under direct control of processes of
     this container, unnormalized
   integration: docker
   interval: ''
@@ -64,7 +82,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu user
   unit_name: percent
-- description: 95th percentile of docker.cpu.user
+- curated_metric: ''
+  description: 95th percentile of docker.cpu.user
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.95percentile
@@ -73,7 +92,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu user 95%
   unit_name: percent
-- description: Average value of docker.cpu.user
+- curated_metric: ''
+  description: Average value of docker.cpu.user
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.avg
@@ -82,7 +102,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu user avg
   unit_name: percent
-- description: The rate that the value of docker.cpu.user was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.cpu.user was sampled
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.count
@@ -91,7 +112,8 @@ docker_daemon:
   per_unit_name: second
   short_name: cpu user count
   unit_name: sample
-- description: Max value of docker.cpu.user
+- curated_metric: ''
+  description: Max value of docker.cpu.user
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.max
@@ -100,7 +122,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu user max
   unit_name: percent
-- description: Median value of docker.cpu.user
+- curated_metric: ''
+  description: Median value of docker.cpu.user
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.median
@@ -109,7 +132,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu user median
   unit_name: percent
-- description: The percent of CPU time obtained by this container
+- curated_metric: ''
+  description: The percent of CPU time obtained by this container
   integration: docker
   interval: ''
   metric_name: docker.cpu.usage
@@ -118,7 +142,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: docker.cpu.usage
   unit_name: percent
-- description: Number of times the cgroup has been throttled
+- curated_metric: ''
+  description: Number of times the cgroup has been throttled
   integration: docker
   interval: ''
   metric_name: docker.cpu.throttled
@@ -127,7 +152,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu throttled
   unit_name: ''
-- description: Shares of CPU usage allocated to the container
+- curated_metric: ''
+  description: Shares of CPU usage allocated to the container
   integration: docker
   interval: ''
   metric_name: docker.cpu.shares
@@ -136,7 +162,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: cpu shares
   unit_name: ''
-- description: The amount of kernel memory that belongs to the container's processes.
+- curated_metric: ''
+  description: The amount of kernel memory that belongs to the container's processes.
   integration: docker
   interval: ''
   metric_name: docker.kmem.usage
@@ -145,7 +172,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: kmem usage
   unit_name: byte
-- description: The amount of memory that is being used to cache data from disk (e.g.
+- curated_metric: ''
+  description: The amount of memory that is being used to cache data from disk (e.g.
     memory contents that can be associated precisely with a block on a block device)
   integration: docker
   interval: ''
@@ -155,7 +183,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem cache
   unit_name: byte
-- description: 95th percentile value of docker.mem.cache
+- curated_metric: ''
+  description: 95th percentile value of docker.mem.cache
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.95percentile
@@ -164,7 +193,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem cache 95%
   unit_name: byte
-- description: Average value of docker.mem.cache
+- curated_metric: ''
+  description: Average value of docker.mem.cache
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.avg
@@ -173,7 +203,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem cache avg
   unit_name: byte
-- description: The rate that the value of docker.mem.cache was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.mem.cache was sampled
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.count
@@ -182,7 +213,8 @@ docker_daemon:
   per_unit_name: second
   short_name: mem cache count
   unit_name: sample
-- description: Max value of docker.mem.cache
+- curated_metric: ''
+  description: Max value of docker.mem.cache
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.max
@@ -191,7 +223,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem cache max
   unit_name: byte
-- description: Median value of docker.mem.cache
+- curated_metric: ''
+  description: Median value of docker.mem.cache
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.median
@@ -200,7 +233,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem cache median
   unit_name: byte
-- description: The amount of non-cache memory that belongs to the container's processes.
+- curated_metric: ''
+  description: The amount of non-cache memory that belongs to the container's processes.
     Used for stacks, heaps, etc.
   integration: docker
   interval: ''
@@ -210,7 +244,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem rss
   unit_name: byte
-- description: 95th percentile value of docker.mem.rss
+- curated_metric: ''
+  description: 95th percentile value of docker.mem.rss
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.95percentile
@@ -219,7 +254,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem rss 95%
   unit_name: byte
-- description: Average value of docker.mem.rss
+- curated_metric: ''
+  description: Average value of docker.mem.rss
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.avg
@@ -228,7 +264,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem rss avg
   unit_name: byte
-- description: The rate that the value of docker.mem.rss was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.mem.rss was sampled
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.count
@@ -237,7 +274,8 @@ docker_daemon:
   per_unit_name: second
   short_name: mem rss count
   unit_name: sample
-- description: Max value of docker.mem.rss
+- curated_metric: ''
+  description: Max value of docker.mem.rss
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.max
@@ -246,7 +284,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem rss max
   unit_name: byte
-- description: Median value of docker.mem.rss
+- curated_metric: ''
+  description: Median value of docker.mem.rss
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.median
@@ -255,7 +294,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem rss median
   unit_name: byte
-- description: The amount of swap currently used by the container
+- curated_metric: ''
+  description: The amount of swap currently used by the container
   integration: docker
   interval: ''
   metric_name: docker.mem.swap
@@ -264,7 +304,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem swap
   unit_name: byte
-- description: 95th percentile value of docker.mem.swap
+- curated_metric: ''
+  description: 95th percentile value of docker.mem.swap
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.95percentile
@@ -273,7 +314,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem swap 95%
   unit_name: byte
-- description: Average value of docker.mem.swap
+- curated_metric: ''
+  description: Average value of docker.mem.swap
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.avg
@@ -282,7 +324,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem swap avg
   unit_name: byte
-- description: The rate that the value of docker.mem.swap was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.mem.swap was sampled
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.count
@@ -291,7 +334,8 @@ docker_daemon:
   per_unit_name: second
   short_name: mem swap count
   unit_name: sample
-- description: Max value of docker.mem.swap
+- curated_metric: ''
+  description: Max value of docker.mem.swap
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.max
@@ -300,7 +344,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem swap max
   unit_name: byte
-- description: Median value of docker.mem.swap
+- curated_metric: ''
+  description: Median value of docker.mem.swap
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.median
@@ -309,7 +354,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem swap median
   unit_name: byte
-- description: The number of open file descriptors
+- curated_metric: ''
+  description: The number of open file descriptors
   integration: docker
   interval: ''
   metric_name: docker.container.open_fds
@@ -318,7 +364,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: open_fds
   unit_name: file
-- description: Total size of all the files in the container which have been created
+- curated_metric: ''
+  description: Total size of all the files in the container which have been created
     or changed by processes running in the container
   integration: docker
   interval: ''
@@ -328,7 +375,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: changed files size
   unit_name: byte
-- description: 95th percentile of docker.container.size_rw
+- curated_metric: ''
+  description: 95th percentile of docker.container.size_rw
   integration: docker
   interval: ''
   metric_name: docker.container.size_rw.95percentile
@@ -337,7 +385,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: changed files size 95%
   unit_name: byte
-- description: Average value of docker.container.size_rw
+- curated_metric: ''
+  description: Average value of docker.container.size_rw
   integration: docker
   interval: ''
   metric_name: docker.container.size_rw.avg
@@ -346,7 +395,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: changed files size avg
   unit_name: byte
-- description: The rate that the value of docker.container.size_rw was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.container.size_rw was sampled
   integration: docker
   interval: ''
   metric_name: docker.container.size_rw.count
@@ -355,7 +405,8 @@ docker_daemon:
   per_unit_name: second
   short_name: changed files size count
   unit_name: sample
-- description: Max value of docker.container.size_rw
+- curated_metric: ''
+  description: Max value of docker.container.size_rw
   integration: docker
   interval: ''
   metric_name: docker.container.size_rw.max
@@ -364,7 +415,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: changed files size max
   unit_name: byte
-- description: Median value of docker.container.size_rw
+- curated_metric: ''
+  description: Median value of docker.container.size_rw
   integration: docker
   interval: ''
   metric_name: docker.container.size_rw.median
@@ -373,7 +425,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: changed files size median
   unit_name: byte
-- description: Total size of all the files in the container
+- curated_metric: ''
+  description: Total size of all the files in the container
   integration: docker
   interval: ''
   metric_name: docker.container.size_rootfs
@@ -382,7 +435,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: filesystem size
   unit_name: byte
-- description: 95th percentile of docker.container.size_rootfs
+- curated_metric: ''
+  description: 95th percentile of docker.container.size_rootfs
   integration: docker
   interval: ''
   metric_name: docker.container.size_rootfs.95percentile
@@ -391,7 +445,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: filesystem size 95%
   unit_name: byte
-- description: Average value of docker.container.size_rootfs
+- curated_metric: ''
+  description: Average value of docker.container.size_rootfs
   integration: docker
   interval: ''
   metric_name: docker.container.size_rootfs.avg
@@ -400,7 +455,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: filesystem size avg
   unit_name: byte
-- description: The rate that the value of docker.container.size_rw was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.container.size_rw was sampled
   integration: docker
   interval: ''
   metric_name: docker.container.size_rootfs.count
@@ -409,7 +465,8 @@ docker_daemon:
   per_unit_name: second
   short_name: filesystem size count
   unit_name: sample
-- description: Max value of docker.container.size_rootfs
+- curated_metric: ''
+  description: Max value of docker.container.size_rootfs
   integration: docker
   interval: ''
   metric_name: docker.container.size_rootfs.max
@@ -418,7 +475,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: filesystem size max
   unit_name: byte
-- description: Median value of docker.container.size_rootfs
+- curated_metric: ''
+  description: Median value of docker.container.size_rootfs
   integration: docker
   interval: ''
   metric_name: docker.container.size_rootfs.median
@@ -427,7 +485,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: filesystem size median
   unit_name: byte
-- description: The number of containers running on this host tagged by image
+- curated_metric: ''
+  description: The number of containers running on this host tagged by image
   integration: docker
   interval: ''
   metric_name: docker.containers.running
@@ -436,7 +495,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: containers running
   unit_name: ''
-- description: The number of containers stopped on this host tagged by image
+- curated_metric: ''
+  description: The number of containers stopped on this host tagged by image
   integration: docker
   interval: ''
   metric_name: docker.containers.stopped
@@ -445,7 +505,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: containers stopped
   unit_name: ''
-- description: The total number of containers running on this host
+- curated_metric: ''
+  description: The total number of containers running on this host
   integration: docker
   interval: ''
   metric_name: docker.containers.running.total
@@ -454,7 +515,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: total containers running
   unit_name: ''
-- description: The total number of containers stopped on this host
+- curated_metric: ''
+  description: The total number of containers stopped on this host
   integration: docker
   interval: ''
   metric_name: docker.containers.stopped.total
@@ -463,7 +525,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: total containers stopped
   unit_name: ''
-- description: The number of top-level images
+- curated_metric: ''
+  description: The number of top-level images
   integration: docker
   interval: ''
   metric_name: docker.images.available
@@ -472,7 +535,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: images avail
   unit_name: ''
-- description: The number of intermediate images, which are intermediate layers that
+- curated_metric: ''
+  description: The number of intermediate images, which are intermediate layers that
     make up other images
   integration: docker
   interval: ''
@@ -482,7 +546,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: images intermediate
   unit_name: ''
-- description: The memory limit for the container, if set
+- curated_metric: ''
+  description: The memory limit for the container, if set
   integration: docker
   interval: ''
   metric_name: docker.mem.limit
@@ -491,7 +556,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem limit
   unit_name: byte
-- description: 95th percentile of docker.mem.limit. Ordinarily this value will not
+- curated_metric: ''
+  description: 95th percentile of docker.mem.limit. Ordinarily this value will not
     change
   integration: docker
   interval: ''
@@ -501,7 +567,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem limit 95%
   unit_name: byte
-- description: Average value of docker.mem.limit. Ordinarily this value will not change
+- curated_metric: ''
+  description: Average value of docker.mem.limit. Ordinarily this value will not change
   integration: docker
   interval: ''
   metric_name: docker.mem.limit.avg
@@ -510,7 +577,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem limit avg
   unit_name: byte
-- description: The rate that the value of docker.mem.limit was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.mem.limit was sampled
   integration: docker
   interval: ''
   metric_name: docker.mem.limit.count
@@ -519,7 +587,8 @@ docker_daemon:
   per_unit_name: second
   short_name: mem limit count
   unit_name: sample
-- description: Max value of docker.mem.limit. Ordinarily this value will not change
+- curated_metric: ''
+  description: Max value of docker.mem.limit. Ordinarily this value will not change
   integration: docker
   interval: ''
   metric_name: docker.mem.limit.max
@@ -528,7 +597,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem limit max
   unit_name: byte
-- description: Median value of docker.mem.limit. Ordinarily this value will not change
+- curated_metric: ''
+  description: Median value of docker.mem.limit. Ordinarily this value will not change
   integration: docker
   interval: ''
   metric_name: docker.mem.limit.median
@@ -537,7 +607,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem limit median
   unit_name: byte
-- description: The swap + memory limit for the container, if set
+- curated_metric: ''
+  description: The swap + memory limit for the container, if set
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_limit
@@ -546,7 +617,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw limit
   unit_name: byte
-- description: 95th percentile of docker.mem.sw_limit. Ordinarily this value will
+- curated_metric: ''
+  description: 95th percentile of docker.mem.sw_limit. Ordinarily this value will
     not change
   integration: docker
   interval: ''
@@ -556,7 +628,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw limit 95%
   unit_name: byte
-- description: Average value of docker.mem.sw_limit. Ordinarily this value will not
+- curated_metric: ''
+  description: Average value of docker.mem.sw_limit. Ordinarily this value will not
     change
   integration: docker
   interval: ''
@@ -566,7 +639,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw limit avg
   unit_name: byte
-- description: The rate that the value of docker.mem.sw_limit was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.mem.sw_limit was sampled
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_limit.count
@@ -575,7 +649,8 @@ docker_daemon:
   per_unit_name: second
   short_name: mem + sw limit count
   unit_name: sample
-- description: Max value of docker.mem.sw_limit. Ordinarily this value will not change
+- curated_metric: ''
+  description: Max value of docker.mem.sw_limit. Ordinarily this value will not change
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_limit.max
@@ -584,7 +659,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw limit max
   unit_name: byte
-- description: Median value of docker.mem.sw_limit. Ordinarily this value will not
+- curated_metric: ''
+  description: Median value of docker.mem.sw_limit. Ordinarily this value will not
     change
   integration: docker
   interval: ''
@@ -594,7 +670,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw limit median
   unit_name: byte
-- description: The memory reservation limit for the container, if set
+- curated_metric: ''
+  description: The memory reservation limit for the container, if set
   integration: docker
   interval: ''
   metric_name: docker.mem.soft_limit
@@ -603,7 +680,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem soft limit
   unit_name: byte
-- description: 95th percentile of docker.mem.soft_limit. Ordinarily this value will
+- curated_metric: ''
+  description: 95th percentile of docker.mem.soft_limit. Ordinarily this value will
     not change
   integration: docker
   interval: ''
@@ -613,7 +691,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: soft limit 95%
   unit_name: byte
-- description: Average value of docker.mem.soft_limit. Ordinarily this value will
+- curated_metric: ''
+  description: Average value of docker.mem.soft_limit. Ordinarily this value will
     not change
   integration: docker
   interval: ''
@@ -623,7 +702,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: soft limit avg
   unit_name: byte
-- description: The rate that the value of docker.mem.soft_limit was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.mem.soft_limit was sampled
   integration: docker
   interval: ''
   metric_name: docker.mem.soft_limit.count
@@ -632,7 +712,8 @@ docker_daemon:
   per_unit_name: second
   short_name: soft limit count
   unit_name: sample
-- description: Max value of docker.mem.soft_limit. Ordinarily this value will not
+- curated_metric: ''
+  description: Max value of docker.mem.soft_limit. Ordinarily this value will not
     change
   integration: docker
   interval: ''
@@ -642,7 +723,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: soft limit max
   unit_name: byte
-- description: Median value of docker.mem.soft_limit. Ordinarily this value will not
+- curated_metric: ''
+  description: Median value of docker.mem.soft_limit. Ordinarily this value will not
     change
   integration: docker
   interval: ''
@@ -652,7 +734,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: soft limit median
   unit_name: byte
-- description: The fraction of used memory to available memory, IF THE LIMIT IS SET
+- curated_metric: ''
+  description: The fraction of used memory to available memory, IF THE LIMIT IS SET
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use
@@ -661,7 +744,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem in use
   unit_name: fraction
-- description: 95th percentile of docker.mem.in_use
+- curated_metric: ''
+  description: 95th percentile of docker.mem.in_use
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.95percentile
@@ -670,7 +754,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem in use 95%
   unit_name: fraction
-- description: Average value of docker.mem.in_use
+- curated_metric: ''
+  description: Average value of docker.mem.in_use
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.avg
@@ -679,7 +764,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem in use avg
   unit_name: fraction
-- description: The rate that the value of docker.mem.in_use was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.mem.in_use was sampled
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.count
@@ -688,7 +774,8 @@ docker_daemon:
   per_unit_name: second
   short_name: mem in use count
   unit_name: sample
-- description: Max value of docker.container.mem.in_use
+- curated_metric: ''
+  description: Max value of docker.container.mem.in_use
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.max
@@ -697,7 +784,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem in use max
   unit_name: fraction
-- description: Median value of docker.container.mem.in_use
+- curated_metric: ''
+  description: Median value of docker.container.mem.in_use
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.median
@@ -706,7 +794,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem in use median
   unit_name: fraction
-- description: The fraction of used swap + memory to available swap + memory, if the
+- curated_metric: ''
+  description: The fraction of used swap + memory to available swap + memory, if the
     limit is set
   integration: docker
   interval: ''
@@ -716,7 +805,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw in use
   unit_name: fraction
-- description: 95th percentile of docker.mem.sw<em>in</em>use
+- curated_metric: ''
+  description: 95th percentile of docker.mem.sw<em>in</em>use
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.95percentile
@@ -725,7 +815,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw in use 95%
   unit_name: fraction
-- description: Average value of docker.mem.sw<em>in</em>use
+- curated_metric: ''
+  description: Average value of docker.mem.sw<em>in</em>use
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.avg
@@ -734,7 +825,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw in use avg
   unit_name: fraction
-- description: The rate that the value of docker.mem.sw<em>in</em>use was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.mem.sw<em>in</em>use was sampled
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.count
@@ -743,7 +835,8 @@ docker_daemon:
   per_unit_name: second
   short_name: mem + sw in use count
   unit_name: sample
-- description: Max value of docker.container.mem.sw<em>in</em>use
+- curated_metric: ''
+  description: Max value of docker.container.mem.sw<em>in</em>use
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.max
@@ -752,7 +845,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw in use max
   unit_name: fraction
-- description: Median value of docker.container.mem.sw<em>in</em>use
+- curated_metric: ''
+  description: Median value of docker.container.mem.sw<em>in</em>use
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.median
@@ -761,7 +855,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: mem + sw in use median
   unit_name: fraction
-- description: Bytes read per second from disk by the processes of the container
+- curated_metric: ''
+  description: Bytes read per second from disk by the processes of the container
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes
@@ -770,7 +865,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io read
   unit_name: byte
-- description: 95th percentile of docker.io.read_bytes
+- curated_metric: ''
+  description: 95th percentile of docker.io.read_bytes
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.95percentile
@@ -779,7 +875,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io read 95%
   unit_name: byte
-- description: Average value of docker.io.read_bytes
+- curated_metric: ''
+  description: Average value of docker.io.read_bytes
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.avg
@@ -788,7 +885,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io read avg
   unit_name: byte
-- description: The rate that the value of docker.io.read_bytes was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.io.read_bytes was sampled
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.count
@@ -797,7 +895,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io read count
   unit_name: sample
-- description: Max value of docker.container.io.read_bytes
+- curated_metric: ''
+  description: Max value of docker.container.io.read_bytes
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.max
@@ -806,7 +905,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io read max
   unit_name: byte
-- description: Median value of docker.container.io.read_bytes
+- curated_metric: ''
+  description: Median value of docker.container.io.read_bytes
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.median
@@ -815,7 +915,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io read median
   unit_name: byte
-- description: Bytes written per second to disk by the processes of the container
+- curated_metric: ''
+  description: Bytes written per second to disk by the processes of the container
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes
@@ -824,7 +925,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io write
   unit_name: byte
-- description: 95th percentile of docker.io.write_bytes
+- curated_metric: ''
+  description: 95th percentile of docker.io.write_bytes
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.95percentile
@@ -833,7 +935,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io write 95%
   unit_name: byte
-- description: Average value of docker.io.write_bytes
+- curated_metric: ''
+  description: Average value of docker.io.write_bytes
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.avg
@@ -842,7 +945,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io write avg
   unit_name: byte
-- description: The rate that the value of docker.io.write_bytes was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.io.write_bytes was sampled
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.count
@@ -851,7 +955,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io write count
   unit_name: sample
-- description: Max value of docker.container.io.write_bytes
+- curated_metric: ''
+  description: Max value of docker.container.io.write_bytes
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.max
@@ -860,7 +965,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io write max
   unit_name: byte
-- description: Median value of docker.container.io.write_bytes
+- curated_metric: ''
+  description: Median value of docker.container.io.write_bytes
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.median
@@ -869,7 +975,8 @@ docker_daemon:
   per_unit_name: second
   short_name: io write median
   unit_name: byte
-- description: Size of all layers of the image on disk
+- curated_metric: ''
+  description: Size of all layers of the image on disk
   integration: docker
   interval: ''
   metric_name: docker.image.virtual_size
@@ -878,7 +985,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: image v size
   unit_name: byte
-- description: Size of all layers of the image on disk
+- curated_metric: ''
+  description: Size of all layers of the image on disk
   integration: docker
   interval: ''
   metric_name: docker.image.size
@@ -887,7 +995,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: image size
   unit_name: byte
-- description: Bytes received per second from the network
+- curated_metric: ''
+  description: Bytes received per second from the network
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd
@@ -896,7 +1005,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net received
   unit_name: byte
-- description: 95th percentile of docker.net.bytes_rcvd
+- curated_metric: ''
+  description: 95th percentile of docker.net.bytes_rcvd
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.95percentile
@@ -905,7 +1015,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net received 95%
   unit_name: byte
-- description: Average value of docker.net.bytes_rcvd
+- curated_metric: ''
+  description: Average value of docker.net.bytes_rcvd
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.avg
@@ -914,7 +1025,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net received avg
   unit_name: byte
-- description: The rate that the value of docker.net.bytes_rcvd was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.net.bytes_rcvd was sampled
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.count
@@ -923,7 +1035,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net received count
   unit_name: sample
-- description: Max value of docker.container.net.bytes_rcvd
+- curated_metric: ''
+  description: Max value of docker.container.net.bytes_rcvd
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.max
@@ -932,7 +1045,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net received max
   unit_name: byte
-- description: Median value of docker.container.net.bytes_rcvd
+- curated_metric: ''
+  description: Median value of docker.container.net.bytes_rcvd
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.median
@@ -941,7 +1055,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net received median
   unit_name: byte
-- description: Bytes sent per second to the network
+- curated_metric: ''
+  description: Bytes sent per second to the network
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent
@@ -950,7 +1065,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net sent
   unit_name: byte
-- description: 95th percentile of docker.net.bytes<em>sent</em>bytes
+- curated_metric: ''
+  description: 95th percentile of docker.net.bytes<em>sent</em>bytes
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.95percentile
@@ -959,7 +1075,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net sent 95%
   unit_name: byte
-- description: Average value of docker.net.bytes<em>sent</em>bytes
+- curated_metric: ''
+  description: Average value of docker.net.bytes<em>sent</em>bytes
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.avg
@@ -968,7 +1085,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net sent avg
   unit_name: byte
-- description: The rate that the value of docker.net.bytes<em>sent</em>bytes was sampled
+- curated_metric: ''
+  description: The rate that the value of docker.net.bytes<em>sent</em>bytes was sampled
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.count
@@ -977,7 +1095,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net sent count
   unit_name: sample
-- description: Max value of docker.container.net.bytes<em>sent</em>bytes
+- curated_metric: ''
+  description: Max value of docker.container.net.bytes<em>sent</em>bytes
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.max
@@ -986,7 +1105,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net sent max
   unit_name: byte
-- description: Median value of docker.container.net.bytes<em>sent</em>bytes
+- curated_metric: ''
+  description: Median value of docker.container.net.bytes<em>sent</em>bytes
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.median
@@ -995,7 +1115,8 @@ docker_daemon:
   per_unit_name: second
   short_name: net sent median
   unit_name: byte
-- description: Storage pool disk space used
+- curated_metric: ''
+  description: Storage pool disk space used
   integration: docker
   interval: ''
   metric_name: docker.data.used
@@ -1004,7 +1125,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: used disk space
   unit_name: byte
-- description: Storage pool disk space free
+- curated_metric: ''
+  description: Storage pool disk space free
   integration: docker
   interval: ''
   metric_name: docker.data.free
@@ -1013,7 +1135,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: free disk space
   unit_name: byte
-- description: Storage pool disk space total
+- curated_metric: ''
+  description: Storage pool disk space total
   integration: docker
   interval: ''
   metric_name: docker.data.total
@@ -1022,7 +1145,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: total disk space
   unit_name: byte
-- description: The percent of storage pool used
+- curated_metric: ''
+  description: The percent of storage pool used
   integration: docker
   interval: ''
   metric_name: docker.data.percent
@@ -1031,7 +1155,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: percent of used disk space
   unit_name: percent
-- description: Storage pool metadata space used
+- curated_metric: ''
+  description: Storage pool metadata space used
   integration: docker
   interval: ''
   metric_name: docker.metadata.used
@@ -1040,7 +1165,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: metadata space used
   unit_name: byte
-- description: Storage pool metadata space free
+- curated_metric: ''
+  description: Storage pool metadata space free
   integration: docker
   interval: ''
   metric_name: docker.metadata.free
@@ -1049,7 +1175,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: metadata space free
   unit_name: byte
-- description: Storage pool metadata space total
+- curated_metric: ''
+  description: Storage pool metadata space total
   integration: docker
   interval: ''
   metric_name: docker.metadata.total
@@ -1058,7 +1185,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: metadata space total
   unit_name: byte
-- description: The percent of storage pool metadata used
+- curated_metric: ''
+  description: The percent of storage pool metadata used
   integration: docker
   interval: ''
   metric_name: docker.metadata.percent
@@ -1067,7 +1195,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: percent of metadata space total
   unit_name: percent
-- description: Current thread count for the container
+- curated_metric: ''
+  description: Current thread count for the container
   integration: docker
   interval: ''
   metric_name: docker.thread.count
@@ -1076,7 +1205,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: thread.count
   unit_name: thread
-- description: Thread count limit for the container, if set
+- curated_metric: ''
+  description: Thread count limit for the container, if set
   integration: docker
   interval: ''
   metric_name: docker.thread.limit
@@ -1085,7 +1215,8 @@ docker_daemon:
   per_unit_name: ''
   short_name: thread.limit
   unit_name: thread
-- description: Time since the container was started
+- curated_metric: ''
+  description: Time since the container was started
   integration: docker
   interval: ''
   metric_name: docker.uptime
