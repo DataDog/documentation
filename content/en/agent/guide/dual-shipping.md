@@ -120,16 +120,6 @@ DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.
 
 ## Logs, Database Monitoring, Network Devices, CSPM, Runtime Security
 
-For data from these products, when setting up additional endpoints, you must explicitly set `use_http` to tell the Agent which transport to use. The same transport configuration is shared among all additional endpoints.
-
-The `is_reliable` setting tells the Agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. The `is_reliable` setting ensures that logs are not missed if a destination becomes unavailable. 
-
-For example, if you're sending logs to the main endpoint and an additional endpoint with `is_reliable: true` and one endpoint becomes unavailable, logs continue to flow to the other endpoint. If both endpoints become unavailable, the Agent stops reading and sending logs until at least one endpoint recovers. This ensures all logs make it to at least one reliable endpoint.
-
-The `is_reliable` setting defaults to `false`, and is recommended to be set to `true`. Unreliable endpoints only send logs if at least one reliable endpoint is available. You may define multiple additional endpoints with mixed use of `is_reliable`.
-
-You can add the YAML configuration to your `datadog.yaml` or launch the Agent with the appropriate environment variables.
-
 {{< tabs >}}
 
 {{% tab "Logs" %}}
@@ -270,6 +260,16 @@ DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": 
 
 {{% /tab %}}
 {{% /tabs %}}
+
+For data from these products, when setting up additional endpoints, you must explicitly set `use_http` to tell the Agent which transport to use. The same transport configuration is shared among all additional endpoints.
+
+The `is_reliable` setting tells the Agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. The `is_reliable` setting ensures that logs are not missed if a destination becomes unavailable. 
+
+For example, if you're sending logs to the main endpoint and an additional endpoint with `is_reliable: true` and one endpoint becomes unavailable, logs continue to flow to the other endpoint. If both endpoints become unavailable, the Agent stops reading and sending logs until at least one endpoint recovers. This ensures all logs make it to at least one reliable endpoint.
+
+The `is_reliable` setting defaults to `false`, and is recommended to be set to `true`. Unreliable endpoints only send logs if at least one reliable endpoint is available. You may define multiple additional endpoints with mixed use of `is_reliable`.
+
+You can add the YAML configuration to your `datadog.yaml` or launch the Agent with the appropriate environment variables.
 
 ## Dual shipping in Kubernetes
 
