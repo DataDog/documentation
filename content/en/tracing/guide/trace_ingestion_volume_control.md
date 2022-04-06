@@ -17,9 +17,8 @@ With the ingestion control page, you have full visibility and complete control o
 - Control and manage your overall costs.
 
 
-## What happens if you decide to reduce your ingested trace volume?
+## Effects of reducing trace ingestion volume
 
-Sampling does not mean less value out of Datadog APM
 
 {{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="APM ingestion sampling displaying 25 percent complete traces ingested" style="width:70%;" >}}
 
@@ -33,7 +32,7 @@ To assess the current state of applications' instrumentation, leverage the [Trac
 
 
 
-### How to tell if you are within your monthly ingestion allocation?
+### Understanding if you are within your monthly ingestion allocation
 
 Use the ingestion monthly usage KPI to get an estimation of your usage compared to the monthly allocation of 150 GB of ingested spans per APM host (summed across all APM hosts).
 
@@ -61,7 +60,7 @@ By configuring sampling rates for a few high-throughput services, most of the â€
 
 The **Traffic Breakdown** column gives a good indication of the service's sampling configuration.
 
-If the service has a high Downstream Bytes/s rate and a high sampling rate (blue section of the traffic breakdown column), reducing the sampling rate for this service is expected to have a high impact on the ingestion volume.
+If the service has a high Downstream Bytes/s rate and a high sampling rate (displayed as the blue filled section of the traffic breakdown column), reducing the sampling rate for this service is expected to have a high impact on the ingestion volume.
 
 {{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_99_percent.png" alt="APM ingestion sampling displaying 99 percent complete traces ingested, meaning no sampling" style="width:70%;" >}}
 
