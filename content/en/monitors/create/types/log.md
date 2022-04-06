@@ -74,7 +74,7 @@ For detailed instructions on the advanced alert options (evaluation delay, new g
 ### Notifications
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.  
-**Note:** If you populate your notifications with tag values, and no logs are present when the monitor renotifies or resolves, these values are empty in the notification.
+**Note:** If you populate your notifications with tag values, these values will be empty if the monitor renotifies or resolves with no logs present.
 
 #### Log samples and breaching values toplist
 
