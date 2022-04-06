@@ -45,11 +45,13 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     ...otherConfig,
+    service: "my-web-application",
     allowedTracingOrigins: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/]
 })
 ```
 
 **Note**: `allowedTracingOrigins` accepts Javascript String and RegExp that should match the origins called by your browser application, with origin defined as: `<scheme> "://" <hostname> [ ":" <port> ]`
+**Note**: `service` is a required field to tie RUM into traces
 
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the browser SDK is initialized. End-to-end tracing of the initial HTML document, and early browser requests, is not supported.</div>
 
