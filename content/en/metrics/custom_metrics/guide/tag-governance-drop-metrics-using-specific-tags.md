@@ -14,7 +14,7 @@ further_reading:
 
 Custom metrics provide visibility into all facets of your business -- from application performance, infrastructure health and business KPIs. In order to govern your custom metric volumes, Datadog offers several tools for cost visibility and control, such as [estimated real-time custom metric usage][1], [usage attribution][2], and [Metrics without Limits][3]™.
 
-These tools use metric tags to provide visibility into metrics that have been ingested into Datadog so you can monitor the number of custom metrics emitted from any tag. For example, you can see how many custom metrics a particular application team is generating. However, custom metrics can be submitted without proper tagging; making it harder to understand your overall volume of custom metrics and attribute them back to the specific team, service, or application that is generating them.
+These tools use metrics tags to provide visibility into metrics that have been ingested into Datadog. This helps you monitor the number of custom metrics associated with any tag. For example, you can use tags to see how many custom metrics a particular application team is generating. However, custom metrics can be submitted without proper tagging; making it harder to understand your overall volume of custom metrics. It’s also harder, without proper tagging, to attribute the metrics back to the specific team, service, or application that is generating them.
 
 ## Prerequisites
 
