@@ -359,7 +359,7 @@
               tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/rum_mobile_vitals.md'
       options:
