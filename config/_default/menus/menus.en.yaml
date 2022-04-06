@@ -2224,11 +2224,16 @@ main:
     parent: security_platform
     identifier: signals_explorer
     weight: 7
+  - name: Security Signal Management
+    url: security_platform/security_signal_management
+    parent: security_platform
+    identifier: security_signal_management
+    weight: 8
   - name: Guides
     url: security_platform/guide/
     parent: security_platform
     identifier: security_platform_guides
-    weight: 8
+    weight: 9
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -2323,16 +2328,21 @@ main:
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_configuration
     weight: 501
+  - name: CircleCI Orb
+    url: /synthetics/cicd_integrations/circleci_orb
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_circleci_orb
+    weight: 502
   - name: GitHub Actions
     url: /synthetics/cicd_integrations/github_actions
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_github_actions
-    weight: 502
+    weight: 503
   - name: Jenkins
     url: /synthetics/cicd_integrations/jenkins
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_jenkins
-    weight: 503
+    weight: 504
   - name: CI Results Explorer
     url: /synthetics/ci_results_explorer
     parent: synthetics
@@ -2544,16 +2554,21 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_events
     weight: 605
+  - name: Export
+    url: real_user_monitoring/explorer/export/
+    parent: rum_explorer
+    identifier: rum_explorer_export
+    weight: 606
   - name: Saved Views
     url: real_user_monitoring/explorer/saved_views/
     parent: rum_explorer
     identifier: rum_explorer_saved_views
-    weight: 606
+    weight: 607
   - name: Watchdog Insights for RUM
     url: real_user_monitoring/explorer/watchdog_insights/
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
-    weight: 607
+    weight: 608
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
@@ -4420,6 +4435,18 @@ api:
         - MuteAllMonitors
       unstable: []
       order: 0
+  - name: Validate an existing monitor
+    url: '#validate-an-existing-monitor'
+    identifier: validate-an-existing-monitor
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ValidateExistingMonitor
+      unstable: []
+      order: 8
   - name: Unmute a monitor
     url: '#unmute-a-monitor'
     identifier: unmute-a-monitor

@@ -431,11 +431,58 @@
       "description": "Configure tags for multiple metrics returns \"Accepted\" response"
     }
   ],
+  "CreateTagConfiguration": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Create a tag configuration returns \"Created\" response"
+    }
+  ],
+  "DeleteTagConfiguration": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Delete a tag configuration returns \"No Content\" response"
+    }
+  ],
+  "ListVolumesByMetricName": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "List distinct metric volumes by metric name returns \"Success\" response"
+    }
+  ],
+  "ListTagConfigurationByName": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "List tag configuration by name returns \"Success\" response"
+    }
+  ],
   "ListTagConfigurations": [
     {
       "group": "metrics",
       "suffix": "_1799362914",
       "description": "List tag configurations with a tag filter returns \"Success\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_103226315",
+      "description": "List tag configurations with configured filter returns \"Success\" response"
+    }
+  ],
+  "ListTagsByMetricName": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "List tags by metric name returns \"Success\" response"
+    }
+  ],
+  "UpdateTagConfiguration": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
   "ListProcesses": [

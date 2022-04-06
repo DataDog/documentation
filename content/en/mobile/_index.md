@@ -83,6 +83,17 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 2. Click the “+” button in the top right corner.
 3. Give your incident a title, severity, and commander.
 
+### Receive push notifications for incidents
+
+1. Navigate to **Account**.
+2. Click **Notifications**.
+3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
+4. Next, in the Datadog web app, navigate to [Incident Notification Rules][21].
+5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
+6. Select your mobile device and click **Save**.
+
+For more information on configuring Incident Notification Rules, see the [Incidents settings docs][22].
+
 ## Widgets
 
 ### Open Incidents widget
@@ -475,3 +486,5 @@ For help with troubleshooting, [contact Datadog support][18]. You can also send 
 [18]: /help/
 [19]: https://chat.datadoghq.com/
 [20]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[21]: https://app.datadoghq.com/incidents/settings#Rules
+[22]: /monitors/incident_management/incident_settings/#rules

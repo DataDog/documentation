@@ -1,0 +1,13 @@
+{
+  "data": {
+    "type": "manage_tags",
+    "id": "ExampleCreateatagconfigurationreturnsCreatedresponse",
+    "attributes": {
+      "tags": [
+        "app",
+        "datacenter"
+      ],
+      "metric_type": "gauge"
+    }
+  }
+}
