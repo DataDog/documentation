@@ -103,7 +103,7 @@ Before following these steps to diagnose missing query metric data, ensure the A
 #### pg_stat_statements extension not loaded {#pg-stat-statements-not-loaded}
 The `pg_stat_statements` extension is not loaded. The extension must be loaded through `shared_preload_libraries` in your Postgres configuration (**Note**: A server restart is required to take effect after modifying this variable). For additional details on installing how to load the extension, see the [setup instructions][1].
 
-#### pg_stat_statements extension not loaded {#pg-stat-statements-not-created}
+#### pg_stat_statements extension not created in database {#pg-stat-statements-not-created}
 The `pg_stat_statements` extension is not installed in the correct database. You must run `CREATE EXTENSION pg_stat_statements` in all databases the Agent connects to. By default, the Agent connects to the `postgres` database. For additional details on configuring this variable in your setup, see the [setup instructions][1].
 
 To verify `pg_stat_statements` is installed and accessible to the `datadog` user, connect to the `postgres` database and attempt to query as the `datadog` user. There should be at least one row returned successfully. For example:
