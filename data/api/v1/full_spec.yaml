@@ -8138,6 +8138,8 @@ components:
           $ref: '#/components/schemas/WidgetTextAlign'
         time:
           $ref: '#/components/schemas/WidgetTime'
+        timeseries_background:
+          $ref: '#/components/schemas/TimeseriesBackground'
         title:
           description: Title of your widget.
           type: string
@@ -12979,6 +12981,27 @@ components:
       - STRING
       - INTEGER
       - DOUBLE
+    TimeseriesBackground:
+      description: Set a timeseries on the widget background.
+      properties:
+        type:
+          $ref: '#/components/schemas/TimeseriesBackgroundType'
+        yaxis:
+          $ref: '#/components/schemas/WidgetAxis'
+      required:
+      - type
+      type: object
+    TimeseriesBackgroundType:
+      default: area
+      description: Timeseries is made using an area or bars.
+      enum:
+      - bars
+      - area
+      example: bars
+      type: string
+      x-enum-varnames:
+      - BARS
+      - AREA
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Indexed Spans over time.
