@@ -29,7 +29,7 @@ Supported test frameworks:
 
 [Install the Datadog Agent to collect tests data][1].
 
-<strong>Note:</strong> Agentless mode is currently on beta, if you want to test this feature follow the [instructions][5].
+<strong>Note:</strong> Agentless mode is currently in beta, if you want to test this feature follow the [instructions][5].
 
 ## Installing the .NET tracer
 
