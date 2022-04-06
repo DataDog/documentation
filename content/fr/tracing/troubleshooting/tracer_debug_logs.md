@@ -227,7 +227,7 @@ Si vous constatez des erreurs que vous ne comprenez pas, ou si les traces sont s
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Pour plus de visibilité, ajoutez `DD_LOGGING_RATE_LIMIT=0`.
+Pour plus de visibilité, ajoutez `DD_TRACE_LOGGING_RAT=0`.
 
 **Des traces ont été générées :**
 
