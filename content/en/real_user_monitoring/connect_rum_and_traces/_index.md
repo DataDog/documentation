@@ -50,8 +50,9 @@ datadogRum.init({
 })
 ```
 
-**Note**: `allowedTracingOrigins` accepts Javascript String and RegExp that should match the origins called by your browser application, with origin defined as: `<scheme> "://" <hostname> [ ":" <port> ]`
-**Note**: `service` is a required field to tie RUM into traces
+To connect RUM to Traces, you need to specify your browser application in the `service` field.
+
+**Note:** `allowedTracingOrigins` accepts Javascript strings and RegExp that matches the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
 
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the browser SDK is initialized. End-to-end tracing of the initial HTML document, and early browser requests, is not supported.</div>
 
