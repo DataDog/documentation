@@ -62,7 +62,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
-| gRPC                            | `Grpc.Net.Client`2.3.0+</br>`Grpc.Core` 2.3.0+                                            | `Grpc`               |
+| gRPC                            | Grpc.Core` 2.3.0+                                            | `Grpc`               |
 | HttpClient / HttpMessageHandler | built-in                                                                                  | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |

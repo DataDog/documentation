@@ -448,6 +448,7 @@ Added in version 1.23.0.
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except id-ish parameters)<br>
 This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
 **Default**: `false`
+Added in version 2.5.1.
 
 #### Automatic instrumentation integration configuration
 
