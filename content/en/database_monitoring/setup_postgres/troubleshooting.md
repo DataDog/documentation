@@ -13,11 +13,11 @@ This page details common issues with setting up and using Database Monitoring wi
 
 ### No data is showing after configuring Database Monitoring
 
-If you do not see any data after following the [setup instructions][1] and configuring the Agent, there is most likely an issue with the Agent configuration or API key. Ensure you are receiving data from the Agent by following the [troubleshooting guide](/agent/troubleshooting/).
+If you do not see any data after following the [setup instructions][1] and configuring the Agent, there is most likely an issue with the Agent configuration or API key. Ensure you are receiving data from the Agent by following the [troubleshooting guide][2].
 
 If you are receiving other data such as system metrics, but not Database Monitoring data (such as query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
 
-To debug, start by running the [Agent status command](/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information) to collect debugging information about data collected and sent to Datadog.
+To debug, start by running the [Agent status command][3] to collect debugging information about data collected and sent to Datadog.
 
 Check the `Config Errors` section to ensure the configuration file is valid. For instance, the following indicates a missing instance configuration or invalid file:
 
@@ -64,7 +64,7 @@ Ensure that these lines are in the output and have values greater than zero:
 Database Monitoring Query Metrics: Last Run: 2, Total: 24,274
 Database Monitoring Query Samples: Last Run: 1, Total: 17,921
 ```
-When you are confident the Agent configuration is correct, [check the Agent logs](/agent/guide/agent-log-files) for warnings or errors attempting to run the database integrations.
+When you are confident the Agent configuration is correct, [check the Agent logs][4] for warnings or errors attempting to run the database integrations.
 
 You can also explicitly execute a check by running the `check` CLI command on the Datadog Agent and inspecting the output for errors:
 
@@ -93,7 +93,7 @@ Some or all queries may not have plans available. This can be due to unsupported
 | The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][9]. |
 | The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
 | The query is relatively infrequent or executes quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query. |
-| The application is relying on [search paths](https://www.postgresql.org/docs/14/ddl-schemas.html#DDL-SCHEMAS-PATH) for specifying which schema to query. | Postgres does not expose the current search path in [pg_stat_activity](https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) so it's not possible for the Datadog Agent to find out which search path is being used for any active Postgres processes. The only way to work around this limitation is to update the application code to use fully qualified queries instead of relying on search paths. For example, do `select * from schema_A.table_B` instead of `SET search_path TO schema_A; select * from table_B`. |
+| The application is relying on [search paths][10] for specifying which schema to query. | Postgres does not expose the current search path in [pg_stat_activity][11] so it's not possible for the Datadog Agent to find out which search path is being used for any active Postgres processes. The only way to work around this limitation is to update the application code to use fully qualified queries instead of relying on search paths. For example, do `select * from schema_A.table_B` instead of `SET search_path TO schema_A; select * from table_B`. |
 
 
 ### Query metrics are missing {#pg-stat-statements-not-created}
@@ -119,10 +119,10 @@ If you have data from some queries, but are expecting to see a particular query 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | For Postgres 9.6, if you only see queries executed by the datadog user, then the instance configuration is likely missing some settings. | For monitoring instances on Postgres 9.6, the Datadog Agent instance config must use the settings `pg_stat_statements_view: datadog.pg_stat_statements()` and `pg_stat_activity_view: datadog.pg_stat_activity()` based on the functions created in the initial setup guide. These functions must be created in all databases. |
-| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | The query may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][10]. The number of top queries tracked can be raised by contacting Datadog Support. |
-| The query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. To collect them, set the Postgres parameter `pg_stat_statements.track_utility` to `true`. See the [Postgres documentation][11] for more information. |
-| The query is executed in a function or stored procedure. | To track queries executed in functions or procedures, set the configuration parameter `pg_stat_statements.track` to `true`. See the [Postgres documentation][11] for more information. |
-| The `pg_stat_statements.max` Postgres configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Increasing this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. **Note**: Queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in `pg_stat_statements`. For more information about tuning this setting, see [Advanced configuration][12]. |
+| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | The query may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][12]. The number of top queries tracked can be raised by contacting Datadog Support. |
+| The query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. To collect them, set the Postgres parameter `pg_stat_statements.track_utility` to `true`. See the [Postgres documentation][13] for more information. |
+| The query is executed in a function or stored procedure. | To track queries executed in functions or procedures, set the configuration parameter `pg_stat_statements.track` to `true`. See the [Postgres documentation][13] for more information. |
+| The `pg_stat_statements.max` Postgres configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Increasing this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. **Note**: Queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in `pg_stat_statements`. For more information about tuning this setting, see [Advanced configuration][14]. |
 | The query has been executed only once since the agent last restarted. | Query metrics are only emitted after having been executed at least once over two separate ten second intervals since the Agent was restarted. |
 
 ### Query samples are truncated
@@ -143,7 +143,7 @@ The resulting normalized query will appear in the app as:
 SELECT DISTINCT address FROM customers WHERE id = ANY(ARRAY[ ?
 ```
 
-To avoid this, raise the `track_activity_query_size` setting to a value large enough to accommodate the largest expected text size of your queries. For further information, see the Postgres documentation on [runtime statistics][13].
+To avoid this, raise the `track_activity_query_size` setting to a value large enough to accommodate the largest expected text size of your queries. For further information, see the Postgres documentation on [runtime statistics][15].
 
 ### Queries are missing explain plans
 
@@ -174,7 +174,7 @@ This error happens when you are missing the `postgresql-contrib` package that in
 sudo apt-get install postgresql-contrib-10
 ```
 
-See the appropriate version of the [Postgres `contrib` documentation](https://www.postgresql.org/docs/12/contrib.html) for more information.
+See the appropriate version of the [Postgres `contrib` documentation][16] for more information.
 
 [1]: /database_monitoring/setup_postgres/
 [2]: /agent/troubleshooting/
@@ -185,8 +185,10 @@ See the appropriate version of the [Postgres `contrib` documentation](https://ww
 [7]: https://github.com/jackc/pgx
 [8]: https://jdbc.postgresql.org/documentation/head/connect.html
 [9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[10]: /database_monitoring/data_collected/#which-queries-are-tracked
-[11]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
-[12]: /database_monitoring/setup_postgres/advanced_configuration
-[13]: https://www.postgresql.org/docs/current/runtime-config-statistics.html
-[14]: https://www.postgresql.org/docs/12/contrib.html
+[10]: https://www.postgresql.org/docs/14/ddl-schemas.html#DDL-SCHEMAS-PATH
+[11]: https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW
+[12]: /database_monitoring/data_collected/#which-queries-are-tracked
+[13]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
+[14]: /database_monitoring/setup_postgres/advanced_configuration
+[15]: https://www.postgresql.org/docs/current/runtime-config-statistics.html
+[16]: https://www.postgresql.org/docs/12/contrib.html
