@@ -12,40 +12,63 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
-## Releases
 
-### Versioning
+## Runtime support policy for Node.js APM
 
-Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here’s an outline of what constitutes each type of semver change:
+Datadog APM for Node.js is built upon dependencies defined in specific versions of the host operating system, Node.js runtime, certain Node.js libraries, and the Datadog Agent/API. When these versions are no longer supported by their maintainers, Datadog APM for Node.js limits its support for these as well.
 
-| Major          | Minor                                                          | Patch    |
-|---------------------------------|-------------------------------------------------------------------------|----------------------|
-| Changes that are incompatible with previous versions.                  | Adding anything that is compatible with previous versions (does not break them). | Security fixes        |
-| API changes incompatible with previous versions.                         | API additions                   | Bug fixes             |
-| Functionality changes incompatible with previous versions. | Functionality additions                                                 | |
-| Dropping support for anything such as Node.js versions, supported libraries, or other features.     | Adding tested support for anything, such as Node.js versions, supported libraries, or other features.   |  |
+## Levels of support
 
-When a release has changes that could go in multiple semver categories, the highest one is chosen.  [Release notes][2] are posted with each GitHub release.
+| **Level**                                              | **Support provided**                                                                                                                                                          |
+|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact our customer support team for special requests.](https://www.datadoghq.com/support/)                                                             |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
+| <span id="support-eol">End-of-life (EOL)</span>        |  Support for bug & security fixes for one year after inital EOL date, after which it becomes [Unsupported](#support-unsupported).|
 
-### Maintenance
+## Package versioning
 
-_Maintenance mode_ is a period during which a release gets only security and bug fixes whenever possible, but not new features except on a case-by-case basis. Major versions of `dd-trace` enter maintenance mode upon the release of the subsequent major version of dd-trace. The maintenance mode period lasts for one year after the release date of that subsequent version.
+Datadog APM for Node.js practices [semantic versioning](https://semver.org/).
 
-For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, security and bug patches will be applied whenever possible.
+As this relates to downgrading runtime support, it implies:
 
-If you have any questions or concerns about our support for a particular version of `dd-trace-js`, [contact Support][3] to discuss.
+  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [GA](#support-ga) to [EOL](#support-eol)
+  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower our level of support for one runtime but may add support for one.
+  - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 
-### Node.js Version Support
+## Supported Node.js runtimes
 
-When the Node.js project drops support for an LTS major release line (when it goes EOL), support for it is dropped in the next major version of `dd-trace`.
-The last major supporting release line of `dd-trace` library supports that EOL version of Node.js for at least another year on a maintenance mode basis.
+| **Node.js version**| **Support level**                       | **Package version** |
+|--------------------|-----------------------------------------|---------------------|
+| v17                | [GA](#support-ga)                       | 1.0.0 - 2           |  
+| v16                | [GA](#support-ga)                       | 1.0.0 - 2           |
+| v14                | [GA](#support-ga)                       | 1.0.0 - 2           |
+| v12                | [GA](#support-ga)                       | 1.0.0 - 2           |
+| v10                | [EOL](#support-eol)                     | 0.14 - 0.36         |
+| v8                 | [Unsupported](#support-unsupported)     | 0.14 - 0.36         |
+| v6                 | [Unsupported](#support-unsupported)     | <= 0.13             |
+| v4                 | [Unsupported](#support-unsupported)     | <= 0.13             |
 
-Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it’s not possible to solve the issue without moving to another non-EOL release.
-Datadog does not make new releases of `dd-trace` to provide specific support for non-LTS Node.js major release lines (odd numbered versions).
+## Supported operating systems
 
-For the best level of support, always run the latest LTS release of Node.js, and the latest major version of `dd-trace`. Whatever release line of Node.js you use, also use the latest version of Node.js on that release line, to ensure you have the latest security fixes.
+| **OS**       | **Support level**     | **Package version** |
+|--------------|-----------------------|---------------------|
+| Linux        | [GA](#support-ga)     | all                 |
+| MacOS        | [GA](#support-ga)     | all                 |
+| Windows      | [GA](#support-ga)     | all                 |
 
-For more information about Node.js release, see the [official Node.js documentation][4].
+## Supported Datadog Agent versions
+
+| **Datadog Agent version**                                                | **Package version** |
+|--------------------------------------------------------------------------|---------------------|
+| [7.x](https://docs.datadoghq.com/agent/basic_agent_usage/?tab=agentv6v7) | Latest              |
+| [6.x](https://docs.datadoghq.com/agent/basic_agent_usage/?tab=agentv6v7) | Latest              |
+| [5.x](https://docs.datadoghq.com/agent/basic_agent_usage/?tab=agentv5)   | Latest              |
+
+## Additional resources
+
+- [Datadog Customer support](https://www.datadoghq.com/support/)
+- [Datadog APM for Node.js Setup Documentation](https://docs.datadoghq.com/tracing/setup_overview/setup/nodejs/)
+- [Datadog APM for Node.js GitHub repository](https://github.com/DataDog/dd-trace-js)
 
 ## Supported integrations
 
