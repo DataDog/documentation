@@ -11,14 +11,14 @@ disable_sidebar: true
 
 ### MySQL versions supported
 
-|  | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL with >26GB RAM |
-|--|------------|---------|------------|------------------|
-| Version | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Version | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Version | {{< X >}} | {{< X >}} |   | {{< X >}} |
+|         | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL with >26GB RAM | Azure |
+|---------|-------------|---------|------------|------------------|---------|
+| Version | {{< X >}} | {{< X >}} |  |  | {{< X >}} |
+| Version |  |  |  |  |  |
 
 For setup instructions, select your hosting type:
 
+{{< partial name="dbm/dbm-setup-sql-server" >}}
 
 <br>
 

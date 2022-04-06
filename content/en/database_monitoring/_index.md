@@ -37,7 +37,7 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 {{< partial name="dbm/dbm-setup-mysql" >}}
 <p></p>
 
-### MySQL
+### SQL Server
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>

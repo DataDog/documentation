@@ -1851,14 +1851,17 @@ main:
   - name: Self-hosted
     url: database_monitoring/setup_sql_server/selfhosted/
     parent: dbm_setup_sql_server
+    identifier: dbm_setup_sql_server_selfhosted
     weight: 101
   - name: RDS
     url: database_monitoring/setup_sql_server/rds/
     parent: dbm_setup_sql_server
+    identifier: dbm_setup_sql_server_rds
     weight: 102
   - name: Azure
     url: database_monitoring/setup_sql_server/azure/
     parent: dbm_setup_sql_server
+    identifier: dbm_setup_sql_server_azure
     weight: 103
   - name: Data Collected
     url: database_monitoring/data_collected
