@@ -204,7 +204,7 @@
         dest_path: '/tracing/setup_overview/setup/'
         file_name: 'ruby.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"]
+          dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
           title: Tracing Ruby Applications
           kind: documentation
           code_lang: ruby
@@ -288,17 +288,31 @@
           title: Synthetics CI GitHub Actions
           kind: documentation
 
+  - repo_name: synthetics-ci-orb
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/synthetics/cicd_integrations/'
+        file_name: 'circleci_orb.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
+          title: Synthetics CI CircleCI Orb
+          kind: documentation
+
   - repo_name: dd-sdk-android
     contents:
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/rum_getting_started.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: '_index.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/develop/docs/rum_getting_started.md"]
           title: RUM Android Monitoring
           kind: documentation
           further_reading:
@@ -306,17 +320,17 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/mobile_data_collected.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'data_collected.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/develop/docs/mobile_data_collected.md"]
           title: RUM Android Data Collected
           kind: documentation
           further_reading:
@@ -324,17 +338,17 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/configure_rum_android_sdk.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'advanced_configuration.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/develop/docs/configure_rum_android_sdk.md"]
           title: RUM Android Advanced Configuration
           kind: documentation
           further_reading:
@@ -342,7 +356,7 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
@@ -352,7 +366,7 @@
         dest_path: '/real_user_monitoring/android/'
         file_name: 'mobile_vitals.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/develop/docs/rum_mobile_vitals.md"]
           title: Mobile Vitals
           kind: documentation
           further_reading:
@@ -363,14 +377,14 @@
               tag: "Blog"
               text: "Monitor Mobile Vitals in Datadog"
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/integrated_libraries_android.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'integrated_libraries.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/develop/docs/integrated_libraries_android.md"]
           title: Android Integrated Libraries
           kind: documentation
           further_reading:
@@ -378,17 +392,17 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
+              tag: "Documentation"
               text: "Explore Datadog RUM"
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/troubleshooting_android.md'
       options:
         dest_path: '/real_user_monitoring/android/'
         file_name: 'troubleshooting.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/develop/docs/troubleshooting_android.md"]
           title: Troubleshooting
           kind: documentation
           further_reading:
@@ -396,8 +410,8 @@
               tag: "Github"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
-              tag: "Homepage"
-              text: "Explore Datadog RUM"
+              tag: "Documentation"
+              text: "Explore Real User Monitoring"
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
@@ -466,7 +480,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/log_collection.md'
       options:
@@ -476,7 +490,7 @@
           title: Android Log Collection
           kind: documentation
           description: "Collect logs from your Android applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/develop/docs/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
               tag: "Github"
@@ -486,7 +500,7 @@
               text: "Learn how to explore your logs"
 
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/trace_collection.md'
       options:
@@ -497,7 +511,7 @@
           kind: documentation
           beta: true
           description: "Collect traces from your Android applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/develop/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
               tag: "Github"
@@ -510,7 +524,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: develop
       globs:
       - 'docs/log_collection.md'
       options:
@@ -520,7 +534,7 @@
           title: iOS Log Collection
           kind: documentation
           description: "Collect logs from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
@@ -541,7 +555,7 @@
           kind: documentation
           beta: true
           description: "Collect traces from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
@@ -558,7 +572,7 @@
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/rum_collection/" ]
 
     - action: pull-and-push-folder
       branch: master
@@ -568,13 +582,13 @@
         dest_dir: '/real_user_monitoring/error_tracking/'
         path_to_remove: 'docs/error_tracking/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/error_tracking/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:
 
     - action: pull-and-push-file
-      branch: main
+      branch: develop
       globs:
       - 'README.md'
       options:
@@ -585,7 +599,7 @@
           kind: documentation
           beta: true
           description: "Collect RUM data from your React Native projects."
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/develop/README.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "Github"

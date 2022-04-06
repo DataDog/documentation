@@ -16,7 +16,7 @@ further_reading:
   text: 'Troubleshoot Serverless Monitoring'
 ---
 
-To instrument your .NET serverless application, you must use **either** the [Datadog Lambda Extension][1] (beta) or the [Datadog Forwarder Lambda function][2].
+To instrument your .NET serverless application, you must use **either** the [Datadog Lambda Extension][1] or the [Datadog Forwarder Lambda function][2].
 
 If you use the Datadog Lambda Extension, you can use Datadog's native .NET APM tracer to instrument your function. If you use the Datadog Forwarder Lambda function, you can use Datadog's integration with AWS X-Ray tracing.
 
@@ -24,10 +24,6 @@ If you use the Datadog Lambda Extension, you can use Datadog's native .NET APM t
 
 ## Instrumentation
 ### Using the Datadog Lambda Extension
-
-<div class="alert alert-warning">
-Instrumenting .NET applications with the Datadog Lambda Extension is in beta.
-</div>
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs.
 

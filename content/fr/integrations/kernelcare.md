@@ -8,12 +8,12 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - security
-  - os & system
+- security
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md
 display_name: Kernelcare
 draft: false
 git_integration_title: kernelcare
@@ -29,13 +29,17 @@ metric_prefix: kernelcare.
 metric_to_check: kernelcare.uptodate
 name: kernelcare
 public_title: Intégration Datadog/Kernelcare
-short_description: Surveillez des métriques Kernelcare concernant l'activité et le statut de vos serveurs.
+short_description: Surveillez des métriques Kernelcare concernant l'activité et le
+  statut de vos serveurs.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 [KernelCare][1] est un système de live patching qui applique automatiquement des patchs de sécurité aux vulnérabilités affectant le kernel Linux, sans aucun redémarrage. Il est utilisé sur plus de 500 000 serveurs et a permis de patcher des serveurs fonctionnant depuis plus de 6 ans pour Dell, Zoom et d'autres grandes entreprises. Il est compatible avec toutes les principales distributions Linux, telles que RHEL, CentOS, Amazon Linux et Ubuntu, ainsi qu'avec les scanners de vulnérabilité, les outils de surveillance Cloud et les solutions de gestion des patchs les plus courants.
@@ -66,7 +70,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `kernelcare` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `kernelcare` dans la section Checks.
 
 ## Données collectées
 
@@ -76,7 +80,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Événements
 
-kernelcare n'inclut aucun événement.
+L'intégration Kernelcare n'inclut aucun événement.
 
 ### Checks de service
 {{< get-service-checks-from-git "kernelcare" >}}

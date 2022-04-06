@@ -21,7 +21,7 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent versioning guides:" >}}
-    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Use Python 3 with Datadog Agent v6{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python version management: Use Python 3 with Datadog Agent v6{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
 {{< /whatsnext >}}
 

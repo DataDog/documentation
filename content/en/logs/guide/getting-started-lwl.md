@@ -60,22 +60,17 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 **To create an exclusion filter**:
 
 1. Click on a pattern from the pattern view list.
-2. Click the **View All** button in the top right corner to automatically generate the search query associated with this pattern.
-3. Select the `</>` option to the right of the search query and copy the search query.
+2. Click the **Add Exclusion Filter** button in the top right corner. This button is disabled if less than half of the logs in this pattern fall into a single index.
+3. The Log Index Configuration page opens in a new tab with a pre-filled exclusion filter for the index where the majority of the logs for that pattern show up.
+4. The exclusion filter is populated with an automatically generated search query associated with the pattern. Input the filter name and set an exclusion percentage and then save the new exclusion filter.
 
-{{< img src="logs/guide/getting-started-lwl/pattern_view.mp4" alt="Pattern View" video=true style="width:100%;">}}
-
-4. Navigate to the **Configuration** page under Logs in the main menu. Select **indexes** and click on your associated index. This will populate the option to add an exclusion filter.
-5. Select **Add an Exclusion Filter**.
-6. Input the filter name, define the exclusion query by pasting the search query you copied, and set an exclusion percentage.
-
-{{< img src="logs/guide/getting-started-lwl/exclusion_filter.mp4" alt="Exclusion Filter" video=true style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/exclusion_filter_new.mp4" alt="Exclusion Filter" video=true style="width:100%;">}}
 
 **Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
-In this example, the service status `INFO` pattern `Updating recommendations with customer_id=* & url=shops/*/*` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer helps you reduce noise and identify issues quicker. However, these logs are **only** removed from the Log Explorer view. They are still ingested, and available to view in [Live Tail][5], sent to [log archives][6], or used to [generate metrics][7].
+In this example, the service `email-api-py`, status `INFO` pattern `response code from ses 200` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer helps you reduce noise and identify issues quicker. However, these logs are **only** excluded from indexing. They are still ingested and available to view in [Live Tail][5] and can be sent to [log archives][6] or used to [generate metrics][7].
 
-{{< img src="logs/guide/getting-started-lwl/live_tail.jpg" alt="Live Tail" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/live_tail.png" alt="The Live Tail page showing a list of logs and the time frame dropdown" style="width:100%;">}}
 
 Exclusion filters can be disabled at any time by toggling the disable option to the right of the filter. They can also be modified and removed by hovering over the filter and selecting the edit or delete option.
 

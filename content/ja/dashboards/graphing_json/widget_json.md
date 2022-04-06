@@ -1,16 +1,17 @@
 ---
-title: ウィジェット JSON スキーマ
-kind: documentation
 aliases:
-  - /ja/graphing/graphing_json/widget_json/
+- /ja/graphing/graphing_json/widget_json/
 further_reading:
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
-  - link: /dashboards/graphing_json/request_json/
-    tag: ドキュメント
-    text: リクエスト JSON スキーマ
+- link: /dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+- link: /dashboards/graphing_json/request_json/
+  tag: ドキュメント
+  text: リクエスト JSON スキーマ
+kind: documentation
+title: ウィジェット JSON スキーマ
 ---
+
 GUI エディターの詳細については、[グラフエディター][1]に関するドキュメントを参照してください。
 
 ## Y 軸スキーマ

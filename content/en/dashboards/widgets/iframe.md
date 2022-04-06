@@ -5,12 +5,9 @@ description: "Include an Iframe in your Datadog dashboards."
 aliases:
     - /graphing/widgets/iframe/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The iframe widget allows you to embed a portion of any other web page on your dashboard.

@@ -16,6 +16,8 @@ further_reading:
       text: "Troubleshooting Application Security Monitoring"
 ---
 
+You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS. 
+
 {{% appsec-getstarted %}}
 - One of the [supported APM tracing integrations][1].
 - [CGO][2] is enabled in your build environment, along with the C library headers and the C toolchain for your compilation target. For detailed instructions, see [Enabling CGO][3]

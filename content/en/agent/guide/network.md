@@ -38,35 +38,113 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
-[Logs][5] & [HIPAA logs][6]
-: TCP: `{{< region-param key="tcp_endpoint" code="true" >}}`<br>
-HTTP: `{{< region-param key="agent_http_endpoint" code="true" >}}`<br>
-Other: See [logs endpoints][7]
+[Network Device Monitoring][10]
+: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[HIPAA logs legacy][6]
-: `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-`lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-`gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-`http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-
-[Orchestrator][8]
+[Orchestrator][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
 
-[Real User Monitoring (RUM)][9]
+[Profiling][7]
+: `intake.profile.`{{< region-param key="dd_site" code="true" >}}
+
+[Real User Monitoring (RUM)][6]
 : `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}<br>
 `session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
-[Profiling][10]
-: `intake.profile.`{{< region-param key="dd_site" code="true" >}}
-
-[Synthetics private location][11]
+[Synthetics private location][8]
 : Worker v>=1.5.0 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint to configure.<br>
 API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
-[Network Device Monitoring][13]
-: `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
+{{< site-region region="us" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: TCP: `agent-intake.logs.datadoghq.com`<br>
+HTTP: `agent-http-intake.logs.datadoghq.com`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `tcp-encrypted-intake.logs.datadoghq.com`<br>
+`lambda-tcp-encrypted-intake.logs.datadoghq.com`<br>
+`gcp-encrypted-intake.logs.datadoghq.com`<br>
+`http-encrypted-intake.logs.datadoghq.com`
+
+[1]: /logs/
+[2]: /security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: TCP: `agent-intake.logs.datadoghq.eu`<br>
+HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `tcp-encrypted-intake.logs.datadoghq.eu`<br>
+`lambda-tcp-encrypted-intake.logs.datadoghq.eu`<br>
+`gcp-encrypted-intake.logs.datadoghq.eu`<br>
+`http-encrypted-intake.logs.datadoghq.eu`
+
+[1]: /logs/
+[2]: /security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `lambda-tcp-encrypted-intake.logs.us3.datadoghq.com`<br>
+`gcp-encrypted-intake.logs.us3.datadoghq.com`<br>
+`http-encrypted-intake.logs.us3.datadoghq.com`
+
+[1]: /logs/
+[2]: /security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
+`gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
+`http-encrypted-intake.logs.us5.datadoghq.com`
+
+[1]: /logs/
+[2]: /security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
+Other: See [logs endpoints][3]
+
+[HIPAA logs legacy][2]
+: `lambda-tcp-encrypted-intake.logs.ddog-gov.com`<br>
+`gcp-encrypted-intake.logs.ddog-gov.com`<br>
+`http-encrypted-intake.logs.ddog-gov.com`
+
+[1]: /logs/
+[2]: /security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
 
 All other Agent data
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -124,6 +202,8 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 #### Outbound
 
+{{< site-region region="us" >}}
+
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
 
@@ -131,7 +211,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
 
-{{< region-param key="tcp_endpoint_port_ssl" >}}/tcp
+10516/tcp
 : Port for log collection over TCP.<br>
 See [logs endpoints][3] for other connection types.
 
@@ -141,32 +221,83 @@ See [logs endpoints][3] for other connection types.
 10250/tcp
 : Port for the [Kubernetes HTTPS Kubelet][4]
 
-#### Inbound
+[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /integrations/ntp/#overview
+[3]: /logs/log_collection/#logging-endpoints
+[4]: /agent/basic_agent_usage/kubernetes/
 
-Used for Agent services communicating with each other locally within the host only.
+{{< /site-region >}}
 
-5000/tcp
-: Port for the [go_expvar server][5]
+{{< site-region region="eu" >}}
 
-5001/tcp
-: Port the IPC API listens to
+443/tcp
+: Port for most Agent data (Metrics, APM, Live Processes/Containers)
 
-5002/tcp
-: Port for the [Agent browser GUI][6]
+123/udp
+: Port for NTP ([more details on the importance of NTP][1]).<br>
+See [default NTP targets][2].
 
-8125/udp
-: Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
+443/tcp
+: Port for log collection over TCP.<br>
+See [logs endpoints][3] for other connection types.
 
-8126/tcp
-: Port for the [APM receiver][7]
+10255/tcp
+: Port for the [Kubernetes HTTP Kubelet][4]
+
+10250/tcp
+: Port for the [Kubernetes HTTPS Kubelet][4]
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /integrations/ntp/#overview
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
-[5]: /integrations/go_expvar/
-[6]: /agent/basic_agent_usage/#gui
-[7]: /tracing/
+
+{{< /site-region >}}
+
+{{< site-region region="us3,us5,gov" >}}
+
+443/tcp
+: Port for most Agent data (Metrics, APM, Live Processes/Containers)
+
+123/udp
+: Port for NTP ([more details on the importance of NTP][1]).<br>
+See [default NTP targets][2].
+
+10255/tcp
+: Port for the [Kubernetes HTTP Kubelet][4]
+
+10250/tcp
+: Port for the [Kubernetes HTTPS Kubelet][4]
+
+[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /integrations/ntp/#overview
+[3]: /logs/log_collection/#logging-endpoints
+[4]: /agent/basic_agent_usage/kubernetes/
+
+{{< /site-region >}}
+
+#### Inbound
+
+Used for Agent services communicating with each other locally within the host only.
+
+5000/tcp
+: Port for the [go_expvar server][1]
+
+5001/tcp
+: Port the IPC API listens to
+
+5002/tcp
+: Port for the [Agent browser GUI][2]
+
+8125/udp
+: Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
+
+8126/tcp
+: Port for the [APM receiver][3]
+
+[1]: /integrations/go_expvar/
+[2]: /agent/basic_agent_usage/#gui
+[3]: /tracing/
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}
 
@@ -200,7 +331,7 @@ See [default NTP targets][2].
 
 ## Using proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][12].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
 
 ## Data buffering
 
@@ -221,12 +352,9 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [2]: /database_monitoring/
 [3]: /infrastructure/livecontainers/
 [4]: /infrastructure/process/
-[5]: /logs/
-[6]: /security/logs/#hipaa-enabled-customers
-[7]: /logs/log_collection/#logging-endpoints
-[8]: /infrastructure/livecontainers/#kubernetes-resources-1
-[9]: /real_user_monitoring/
-[10]: /tracing/profiler/
-[11]: /synthetics/private_locations
-[12]: /agent/proxy/
-[13]: /network_monitoring/devices
+[5]: /infrastructure/livecontainers/#kubernetes-resources-1
+[6]: /real_user_monitoring/
+[7]: /tracing/profiler/
+[8]: /synthetics/private_locations
+[9]: /agent/proxy/
+[10]: /network_monitoring/devices
