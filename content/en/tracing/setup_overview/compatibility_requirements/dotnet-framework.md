@@ -108,6 +108,14 @@ The [latest version of the .NET Tracer][6] can automatically instrument the foll
 
 Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][7] for help.
 
+## Supported Datadog Agent versions
+
+| **Datadog Agent version**   | **Package version** |
+|-----------------------------|---------------------|
+| [7.x][10]                   | Latest              |
+| [6.x][10]                   | Latest              |
+| [5.x][11]                   | Latest              |
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

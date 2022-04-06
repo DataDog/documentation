@@ -114,11 +114,11 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions re
 
 ## Supported Datadog Agent versions
 
-| **Datadog Agent version**                                                | **Package version** |
-|--------------------------------------------------------------------------|---------------------|
-| [7.x][10] | Latest              |
-| [6.x][10] | Latest              |
-| [5.x][11]   | Latest              |
+| **Datadog Agent version**   | **Package version** |
+|-----------------------------|---------------------|
+| [7.x][10]                   | Latest              |
+| [6.x][10]                   | Latest              |
+| [5.x][11]                   | Latest              |
 
 ## Further reading
 
