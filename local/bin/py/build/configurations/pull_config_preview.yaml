@@ -576,7 +576,7 @@
           title: Mobile Vitals
           kind: documentation
           beta: true
-          description: Discover insights about your iOS application's health and performance.
+          description: "Discover insights about your iOS application's health and performance."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/alai97/mobile-vitals-ios-doc-update/docs/rum_mobile_vitals.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
