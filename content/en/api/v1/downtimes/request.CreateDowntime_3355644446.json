@@ -5,5 +5,5 @@
   "scope": [
     "test:examplescheduleamonitordowntimereturnsokresponse"
   ],
-  "monitor_id": 7
+  "monitor_id": 1
 }

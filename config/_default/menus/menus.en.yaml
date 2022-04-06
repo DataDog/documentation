@@ -4430,18 +4430,6 @@ api:
         - MuteAllMonitors
       unstable: []
       order: 0
-  - name: Validate an existing monitor
-    url: '#validate-an-existing-monitor'
-    identifier: validate-an-existing-monitor
-    parent: monitors
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - ValidateExistingMonitor
-      unstable: []
-      order: 8
   - name: Unmute a monitor
     url: '#unmute-a-monitor'
     identifier: unmute-a-monitor
@@ -6972,18 +6960,6 @@ api:
         - ListRUMEvents
       unstable: []
       order: 2
-  - name: Aggregate RUM events
-    url: '#aggregate-rum-events'
-    identifier: aggregate-rum-events
-    parent: rum
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - AggregateRUMEvents
-      unstable: []
-      order: 3
   - name: Roles
     url: /api/latest/roles/
     identifier: roles

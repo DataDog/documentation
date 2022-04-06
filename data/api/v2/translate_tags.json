@@ -57,7 +57,7 @@
   },
   "rum": {
     "name": "RUM",
-    "description": "Search or aggregate your RUM events over HTTP."
+    "description": "Search your RUM events over HTTP."
   },
   "roles": {
     "name": "Roles",
