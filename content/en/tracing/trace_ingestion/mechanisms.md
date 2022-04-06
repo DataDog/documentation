@@ -159,7 +159,7 @@ For traces not caught by the head-based sampling, **Agent** mechanisms make sure
 - **Error traces**: Sampling errors is important for providing visibility on potential system failures.
 - **Rare traces**: Sampling rare traces allows you to keep visibility on your system as a whole, by making sure that low-traffic services and resources are still monitored.
 
-**Note**: Datadog ignores error and rare samplers for services for which you set [library sampling rules](#in-tracing-libraries-user-defined-rules).
+**Note**: Error and rare samplers are ignored for services for which you set [library sampling rules](#in-tracing-libraries-user-defined-rules).
 
 ### Error traces
 `ingestion_reason: error`
