@@ -10,6 +10,11 @@ description: Troubleshoot Database Monitoring setup
 
 This page details database agnostic common issues with setting up and using Database Monitoring, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with agent version releases.
 
+For specific database setup troubleshooting, use the corresponding troubleshooting page:
+
+* [Troubleshooting My_SQL Setup][2]
+* [Troubleshooting Postgres Setup][3]
+
 ## Diagnosing common problems
 ### Query bind parameters cannot be viewed
 
@@ -24,8 +29,10 @@ It is recommended to have a single Datadog Agent monitor at most 10 DBM hosts. I
 
 ## Need more help?
 
-If you are still experiencing problems, contact [Datadog Support][2] for help.
+If you are still experiencing problems, contact [Datadog Support][4] for help.
 
 
 [1]: /database_monitoring/#getting-started
-[2]: /help/
+[2]: /database_monitoring/setup_mysql/troubleshooting/
+[3]: /database_monitoring/setup_postgres/troubleshooting/
+[4]: /help/
