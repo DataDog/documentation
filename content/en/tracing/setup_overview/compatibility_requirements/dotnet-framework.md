@@ -27,15 +27,12 @@ Datadog APM for .NET Framework is built upon dependencies defined in specific ve
 
 ### Levels of support
 
-delner marked this conversation as resolved.
-
 | **Level**                                              | **Support provided**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact our customer support team for special requests.][2]                                                             |
 | <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
-| <span id="support-legacy">Legacy</span>                |  Legacy implementation. May have limited function, but no maintenance provided. [Contact our customer support team for special requests.][2] |
 | <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
 
 ### Package versioning
@@ -43,9 +40,9 @@ delner marked this conversation as resolved.
 Datadog APM for .NET Framework practices [semantic versioning][3].
 As this relates to downgrading runtime support, it implies:
 
-  - **Major version updates** (e.g. `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[Legacy](#support-legacy)/[EOL](#support-eol).
-  - **Minor version updates** (e.g. `1.0.0` to `1.1.0`) will not change support for any runtime.
-  - **Patch version updates** (e.g. `1.0.0` to `1.0.1`) will not change support for any runtime.
+  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[Legacy](#support-legacy)/[EOL](#support-eol).
+  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower our level of support for one runtime but may add support for one.
+  - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 
 ## Supported .NET Framework runtimes
 
@@ -72,8 +69,8 @@ The .NET Tracer supports automatic instrumentation on the following architecture
  
 | Processor architectures                                                 | Support level         | Package version                        |
 | ------------------------------------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | Latest                                 |
-| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | Latest                                 |
+| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | latest                                 |
+| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | latest                                 |
 
 ## Integrations
 
@@ -112,9 +109,9 @@ Don’t see your desired libraries? Datadog is continually adding additional sup
 
 | **Datadog Agent version**   | **Package version** |
 |-----------------------------|---------------------|
-| [7.x][10]                   | Latest              |
-| [6.x][10]                   | Latest              |
-| [5.x][11]                   | Latest              |
+| [7.x][10]                   | latest              |
+| [6.x][10]                   | latest              |
+| [5.x][11]                   | latest              |
 
 ## Further reading
 

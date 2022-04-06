@@ -27,15 +27,12 @@ Datadog APM for .NET Core is built upon dependencies defined in specific version
 
 ### Levels of support
 
-delner marked this conversation as resolved.
-
 | **Level**                                              | **Support provided**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact our customer support team for special requests.][2]                                                             |
 | <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
-| <span id="support-legacy">Legacy</span>                |  Legacy implementation. May have limited function, but no maintenance provided. [Contact our customer support team for special requests.][2] |
 | <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
 
 ### Package versioning
@@ -43,9 +40,9 @@ delner marked this conversation as resolved.
 Datadog APM for .NET Core practices [semantic versioning][3].
 As this relates to downgrading runtime support, it implies:
 
-  - **Major version updates** (e.g. `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[Legacy](#support-legacy)/[EOL](#support-eol).
-  - **Minor version updates** (e.g. `1.0.0` to `1.1.0`) will not change support for any runtime.
-  - **Patch version updates** (e.g. `1.0.0` to `1.0.1`) will not change support for any runtime.
+  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[Legacy](#support-legacy)/[EOL](#support-eol).
+  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower our level of support for one runtime but may add support for one.
+  - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 
 ## Supported .NET Core runtimes
 
@@ -54,7 +51,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | Version              | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET 5               |                       | [GA](#support-ga)    | latest (>= 1.27.0)   |
+| .NET 5               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET Core 3.1        | 12/03/2022            | [GA](#support-ga)    | latest               |
 | .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | latest               |
 
@@ -66,10 +63,10 @@ The .NET Tracer supports automatic instrumentation on the following architecture
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | Latest                                 |
-| Windows x64 (`win-x64`)                   | [GA](#support-ga)     | Latest                                 |
-| Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | Latest                                 |
-| Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     | Latest                                 |
+| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | latest                                 |
+| Windows x64 (`win-x64`)                   | [GA](#support-ga)     | latest                                 |
+| Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | latest                                 |
+| Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     | latest                                 |
 | Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ only, added in version 1.27.0  |
 
 ## Integrations
