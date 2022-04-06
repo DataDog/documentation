@@ -154,11 +154,12 @@ Set the rate in the Agent main configuration file (`datadog.yaml`) or as an envi
 
 ## Error and rare traces
 
-For traces not caught by the head-based sampling, Agent mechanisms make sure that critical and diverse traces are kept and ingested. These two samplers keep a diverse set of traces by catching all combinations of a predetermined set of tags:
+For traces not caught by the head-based sampling, **Agent** mechanisms make sure that critical and diverse traces are kept and ingested. These two samplers keep a diverse set of traces by catching all combinations of a predetermined set of tags:
 
 - **Error traces**: Sampling errors is important for providing visibility on potential system failures.
 - **Rare traces**: Sampling rare traces allows you to keep visibility on your system as a whole, by making sure that low-traffic services and resources are still monitored.
 
+**Note**: Error and rare samplers will be ignored for services for which you set [library sampling rules](#in-tracing-libraries-user-defined-rules)
 
 ### Error traces
 `ingestion_reason: error`
