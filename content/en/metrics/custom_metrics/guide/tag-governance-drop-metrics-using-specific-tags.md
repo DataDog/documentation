@@ -24,7 +24,7 @@ This guide assumes that you already have a Vector pipeline set-up. If you’re n
 
 ## Configure the filter transform
 
-Vector has a wide array of functions that can [transform][7] your data before it is sent to Datadog. The simplest way to filter out a metric by a specific tag is to use the [filter transform][8]. For example, the following component filters out any metrics where `<team_tag>` is not a specific value, ensuring those metrics are dropped in your Vector pipeline.
+Vector has a wide array of functions that can [transform][7] your data before it is sent to Datadog. The simplest way to filter out a metric by a specific tag is to use the [filter transform][8]. For example, the following component filters out any metrics that doesn't have a `team_tag`, ensuring those metrics are dropped in your Vector pipeline.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
