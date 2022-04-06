@@ -89,6 +89,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_4026341408",
+      "description": "Create a new dashboard with apm_issue_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2607944105",
       "description": "Create a new dashboard with check_status widget"
     },
@@ -176,6 +181,11 @@
       "group": "dashboards",
       "suffix": "_2349863258",
       "description": "Create a new dashboard with query_value widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4076476470",
+      "description": "Create a new dashboard with rum_issue_stream list_stream widget"
     },
     {
       "group": "dashboards",
