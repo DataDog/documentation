@@ -9,10 +9,10 @@ disable_sidebar: true
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-### MySQL versions supported
+### SQL Server versions supported
 
 |         | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL with >26GB RAM | Azure |
-|---------|-------------|---------|------------|------------------|---------|
+|---------|-------------|------|-----------|------------|---------|
 | Version | {{< X >}} | {{< X >}} |  |  | {{< X >}} |
 | Version |  |  |  |  |  |
 
