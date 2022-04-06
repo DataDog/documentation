@@ -128,7 +128,7 @@ The MySQL SQL text length visible to the Datadog Agent is determined by the foll
 ```
 max_digest_length=4096
 performance_schema_max_digest_length=4096
-performance_schema=4096
+performance_schema_max_sql_text_length=4096
 ```
 
 Most workloads are able to capture most queries by raising this value to 4096, but you may need to set a higher value for particularly long and complex queries.
