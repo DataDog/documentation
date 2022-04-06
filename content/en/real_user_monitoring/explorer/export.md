@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-You can copy, export, and download your aggregated search query in the [RUM Explorer][1]. 
+You can use your RUM query in dashboards, monitors, and Datadog's RUM API. Copy, export, and download your aggregated search query in the [RUM Explorer][1]. 
 
 {{< img src="real_user_monitoring/explorer/export/rum_explorer_export.png" alt="Export button in the right hand corner of the RUM Explorer" width="80%" >}}
 
