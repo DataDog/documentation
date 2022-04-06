@@ -260,9 +260,11 @@ examples/java: examples/datadog-api-client-java clean-java-examples
 	-cp -Rn examples/datadog-api-client-java/examples/v* ./content/en/api/
 
 examples/python: examples/datadog-api-client-python clean-python-examples
+	-find examples/datadog-api-client-python/examples -iname \*.py -exec mv {} {}beta \;
 	-cp -Rn examples/datadog-api-client-python/examples/v* ./content/en/api
 
 examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
+	-find examples/content -iname \*.rb -exec mv {} {}beta \;
 	-cp -Rn examples/datadog-api-client-ruby/examples/v* ./content/en/api
 
 examples/typescript: examples/datadog-api-client-typescript clean-typescript-examples
