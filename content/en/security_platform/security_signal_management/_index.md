@@ -18,8 +18,8 @@ To modify the signal state, enable the “Security Signals Write” permission f
 
 If Datadog detects a threat based on any rules, it creates a security signal. You can view all security signals in the Signal Explorer, making it easy to search, filter, and correlate them without needing to learn a dedicated query language. You can either monitor signals from the Datadog Cloud Security Platform, or you can configure [Notification Rules][3] to send signals to third-party tools. The status of a signal can be one of the following:
 * **Open**: The Datadog Cloud Security Platform triggered a detection based on a rule, and the resulting signal is not resolved.
-* **Under Review**: During an active investigation, you can switch the signal state to Under Review. You can move the signal state to Resolved or Open from the Under Review state as needed.
-* **Resolved**: When you resolve the detection that caused the signal, you can transition it to the **Resolved** state. If a resolved issue resurfaces, or if further investigation is necessary, a signal can be changed back to an open state within two days of being created.
+* **Under Review**: During an active investigation, you can switch the signal state to Under Review. You can move the signal state to Archived or Open from the Under Review state as needed.
+* **Archived**: When you resolve the detection that caused the signal, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an open state within two days of being created.
 
 When you take action on a signal, a confirmation toast appears that allows you to **Undo** the action. You'll see it in a banner above the signal side panel when you save the action. The banner shows the action taken, by who, and when.
 
@@ -40,8 +40,8 @@ To change signal state, follow the instructions below:
 3. Navigate to the top-right corner of the Signal Side Panel and select your desired status from the dropdown menu. The default status is **Open**.
 
     - **Open**: The Datadog Cloud Security Platform triggered a detection based on a rule, and the resulting signal is not yet resolved.
-    - **Under Review**: During an active investigation, you can switch the signal state to **Under Review**. From the **Under Review** state, you can move the signal state to **Resolved** or **Open** as needed.
-    - **Resolved**: When the detection that caused the signal has been resolved, you can transition it to the **Resolved** state. If a resolved issue resurfaces, or if further investigation is necessary, a signal can be changed back to an open state within two days of being created.
+    - **Under Review**: During an active investigation, you can switch the signal state to **Under Review**. From the **Under Review** state, you can move the signal state to **Archived** or **Open** as needed.
+    - **Archived**: When the detection that caused the signal has been resolved, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an open state within two days of being created.
 
 4. Once you save the status, a confirmation toast appears that states which action was taken with the opportunity to “Undo” the action. You'll see it in a banner above the signal side panel when you save the action. The banner shows the action taken, by who, and when.
 
