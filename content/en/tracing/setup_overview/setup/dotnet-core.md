@@ -445,7 +445,7 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 Added in version 1.23.0.
 
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
-: Expands all route parameters in the application for ASP.NET/ASP.NET Core (except id-ish parameters)<br>
+: Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
 This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
 **Default**: `false`
 Added in version 2.5.1.
