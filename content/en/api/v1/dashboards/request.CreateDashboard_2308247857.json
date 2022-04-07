@@ -15,7 +15,7 @@
         "title_align": "left",
         "time": {},
         "type": "alert_graph",
-        "alert_id": "7",
+        "alert_id": "1",
         "viz_type": "timeseries"
       }
     }

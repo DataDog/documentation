@@ -403,12 +403,6 @@
     "request_description": "",
     "request_schema_description": "Relationship to user."
   },
-  "AggregateRUMEvents": {
-    "description": "The API endpoint to aggregate RUM events into buckets of computed metrics and timeseries.",
-    "summary": "Aggregate RUM events",
-    "request_description": "",
-    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization."
-  },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "Get a list of RUM events"
