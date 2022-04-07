@@ -2,11 +2,7 @@ Supported SQL Server versions
 : 2012, 2014, 2016, 2017, 2019
 
 Supported Agent versions
-: To ensure you have the best Database Monitoring for SQL Server experience install the latest release `7.35` Datadog Agent release candidate build:
-: * Docker: https://hub.docker.com/r/datadog/agent/tags?page=1&name=7.35.0-rc.8
-: * Windows MSI: https://dd-agent-mstesting.s3.amazonaws.com/builds/beta/datadog-agent-7.35.0-rc.8-1-x86_64.msi
-: * Deb: https://apt.datad0g.com/pool/d/da/datadog-agent-dbg_7.35.0~rc.8-1_amd64.deb
-: * Rpm: https://yum.datad0g.com/beta/7/x86_64/datadog-agent-7.35.0~rc.8-1.x86_64.rpm
+: 7.35.0+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
