@@ -502,21 +502,26 @@ main:
     identifier: watchdog_top_level
     pre: watchdog
     weight: 50000
+  - name: Alerts
+    url: watchdog/alerts
+    identifier: watchdog_alerts
+    parent: watchdog_top_level
+    weight: 1
   - name: Impact Analysis
     url: watchdog/impact_analysis/
     identifier: watchdog_impact_analysis
     parent: watchdog_top_level
-    weight: 1
+    weight: 2
   - name: RCA
     url: watchdog/rca/
     identifier: watchdog_rca
     parent: watchdog_top_level
-    weight: 2
+    weight: 3
   - name: Faulty Deployment Detection
     url: watchdog/faulty_deployment_detection/
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
-    weight: 3
+    weight: 4
   - name: Events
     url: events/
     identifier: events_top_level
