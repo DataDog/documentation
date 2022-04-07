@@ -5,73 +5,79 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
-  - link: "/tracing/"
-    tag: "Documentation"
-    text: "APM and Distributed Tracing"
   - link: "https://www.datadoghq.com/blog/modern-frontend-monitoring/"
     tag: "Blog"
     text: "Start monitoring single-page applications"
-  - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
-    tag: 'Guide'
-    text: 'Ease troubleshooting with cross product correlation.'
+  - link: "/logs/guide/ease-troubleshooting-with-cross-product-correlation/"
+    tag: "Guide"
+    text: "Ease troubleshooting with cross-product correlation"
+  - link: "/tracing/"
+    tag: "Documentation"
+    text: "APM and Distributed Tracing"
+  - link: "/real_user_monitoring"
+    tag: "Documentation"
+    text: "RUM & Session Replay"
 ---
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
 
+The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination enables you to see your full frontend and backend data through one lens.
 
-The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination lets you see your full frontend and backend data through one lens.
-
-Use frontend data from RUM, and backend, infrastructure, and log information from trace ID injection to quickly pinpoint issues anywhere in your stack and fully understand what your users are experiencing.
+Use frontend data from RUM, as well as backend, infrastructure, and log information from trace ID injection to pinpoint issues anywhere in your stack and understand what your users are experiencing.
 
 ## Usage
+
 ### Prerequisites
 
--   Set up [APM tracing][1] on the services targeted by your RUM applications.
+-   You have set up [APM tracing][1] on the services targeted by your RUM applications.
 -   Your services use an HTTP server.
 -   Your HTTP servers are using [a library that supports distributed tracing](#supported-libraries).
+-   You have XMLHttpRequest (XHR) or Fetch resources on the RUM Explorer to your `allowedTracingOrigins`.
+-   You have a corresponding trace for requests to `allowedTracingOrigins`.
 
-### RUM set up
+### Setup RUM
+
 {{< tabs >}}
 {{% tab "Browser RUM" %}}
 
-1.  Set up [Browser Real User Monitoring][1].
+1.  Set up [RUM Browser Monitoring][1].
 
-2. Initialize the RUM SDK. Configure the `allowedTracingOrigins` initialization parameter with the list of internal (first party) origins called by your browser application.
+2.  Initialize the RUM SDK. Configure the `allowedTracingOrigins` initialization parameter with the list of internal, first-party origins called by your browser application.
 
-```javascript
-import { datadogRum } from '@datadog/browser-rum'
+    ```javascript
+    import { datadogRum } from '@datadog/browser-rum'
 
-datadogRum.init({
-    applicationId: '<DATADOG_APPLICATION_ID>',
-    clientToken: '<DATADOG_CLIENT_TOKEN>',
-    ...otherConfig,
-    service: "my-web-application",
-    allowedTracingOrigins: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/]
-})
-```
+    datadogRum.init({
+        applicationId: '<DATADOG_APPLICATION_ID>',
+        clientToken: '<DATADOG_CLIENT_TOKEN>',
+        ...otherConfig,
+        service: "my-web-application",
+        allowedTracingOrigins: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/]
+    })
+    ```
 
-To connect RUM to Traces, you need to specify your browser application in the `service` field.
+To connect RUM to Traces, you need to specify your browser application in the `service` field. 
 
 **Note:** `allowedTracingOrigins` accepts Javascript strings and RegExp that matches the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
 
-<div class="alert alert-info">End-to-end tracing is available for requests fired after the browser SDK is initialized. End-to-end tracing of the initial HTML document, and early browser requests, is not supported.</div>
+<div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
 [1]: /real_user_monitoring/browser/
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
-1.  Set up [Android Real User Monitoring][1].
+1.  Set up [RUM Android Monitoring][1].
 
-2.  Configure the `OkHttpClient` interceptor with the list of internal (first party) origins called by your Android application.
-```java
-val tracedHosts =  listOf("example.com", "example.eu")
+2.  Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
+    ```java
+    val tracedHosts =  listOf("example.com", "example.eu")
 
-val okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(DatadogInterceptor(tracedHosts))
-    .addNetworkInterceptor(TracingInterceptor(tracedHosts))
-    .eventListenerFactory(DatadogEventListener.Factory())
-    .build()
-```
+    val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(DatadogInterceptor(tracedHosts))
+        .addNetworkInterceptor(TracingInterceptor(tracedHosts))
+        .eventListenerFactory(DatadogEventListener.Factory())
+       .build()
+    ```
 
 **Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
@@ -79,29 +85,29 @@ val okHttpClient = OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
-1.  Set up [iOS Real User Monitoring][1].
+1.  Set up [RUM iOS Monitoring][1].
 
-2.  Set the `firstPartyHosts` initialization parameter with the list of internal (first party) origins called by your iOS application.
-```swift
-Datadog.initialize(
-appContext: .init(),
-configuration: Datadog.Configuration
-    .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
-    .set(firstPartyHosts: ["example.com", "api.yourdomain.com"])
-    .build()
-)
-```
+2.  Set the `firstPartyHosts` initialization parameter with the list of internal, first-party origins called by your iOS application.
+    ```swift
+    Datadog.initialize(
+    appContext: .init(),
+    configuration: Datadog.Configuration
+        .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
+        .set(firstPartyHosts: ["example.com", "api.yourdomain.com"])
+        .build()
+    )
+    ```
 
-3.  Initialize URLSession as stated in the [set up documentation][1]:
-```swift
-let session =  URLSession(
-    configuration: ...,
-    delegate: DDURLSessionDelegate(),
-    delegateQueue: ...
-)
-```
+3.  Initialize URLSession as stated in [Setup][1]:
+    ```swift
+    let session =  URLSession(
+        configuration: ...,
+        delegate: DDURLSessionDelegate(),
+        delegateQueue: ...
+    )
+    ```
 
-**Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
+**Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
 [1]: /real_user_monitoring/ios/
 {{% /tab %}}
@@ -123,8 +129,8 @@ The following Datadog tracing libraries are supported:
 
 
 ## How are RUM resources linked to traces?
-Datadog uses the distributed tracing protocol and sets up the following HTTP headers:
 
+Datadog uses the distributed tracing protocol and sets up the following HTTP headers:
 
 `x-datadog-trace-id`
 : Generated from the Real User Monitoring SDK. Allows Datadog to link the trace with the RUM resource.
@@ -141,7 +147,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 `x-datadog-sampled: 1`
 : Generated from the Real User Monitoring SDK. Indicates this request is selected for sampling.
 
-**Note**: These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][16] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][17] (OPTIONS requests), which is made by the SDK prior to every request.
+**Note**: These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][16] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][17] (OPTIONS requests), which are made by the SDK prior to every request.
 
 ## How are APM quotas affected?
 
