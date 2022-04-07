@@ -1873,6 +1873,11 @@ main:
     parent: dbm
     identifier: dbm_troubleshooting
     weight: 6
+  - name: Guides
+    url: database_monitoring/guide/
+    parent: dbm
+    identifier: dbm_guides
+    weight: 7
   - name: Log Management
     url: logs/
     pre: log
