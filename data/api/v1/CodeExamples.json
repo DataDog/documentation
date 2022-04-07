@@ -654,6 +654,13 @@
       "description": "Create a browser test returns \"OK - Returns the created test details.\" response"
     }
   ],
+  "CreatePrivateLocation": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Create a private location returns \"OK\" response"
+    }
+  ],
   "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
