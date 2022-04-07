@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting Database Monitoring
+title: Troubleshoot Database Monitoring setup for MySQL
 kind: documentation
 description: Troubleshoot Database Monitoring setup
 ---
