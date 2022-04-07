@@ -28,7 +28,8 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | Framework                 | Supported Version | Automatic | Library Documentation                                              |
 | ------------------------- | ----------------- | --------- |------------------------------------------------------------------ |
 | [asgi][3]                 | >= 2.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
-| [aiohttp][4]              | >= 1.2            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [aiohttp][4] (client)     | >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [aiohttp][4] (server)     | >= 2.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
 | [Bottle][5]               | >= 0.11           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
 | [CherryPy][6]            | >= 11.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
 | [Django][7]               | >= 1.8            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |

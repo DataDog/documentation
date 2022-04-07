@@ -1,7 +1,8 @@
 ---
 title: Flaky Test Management
 kind: guide
-aliases: /continuous_integration/guides/find_flaky_tests/
+aliases: 
+    - /continuous_integration/guides/find_flaky_tests/
 ---
 
 {{< site-region region="gov" >}}

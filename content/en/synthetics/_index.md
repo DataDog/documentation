@@ -6,18 +6,21 @@ disable_sidebar: true
 aliases:
   - /integrations/synthetics/
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
-  tag: "Blog"
-  text: "Introduction to Datadog Synthetic Monitoring"
-- link: 'https://learn.datadoghq.com/course/view.php?id=39'
-  tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
-- link: "/synthetics/guide/"
-  tag: "Documentation"
-  text: "Synthetic Monitoring Guides"
-- link: "https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/"
-  tag: "Blog"
-  text: "Monitor CDN performance within your Synthetic tests"
+  - link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Synthetics Monitoring releases! (App login required)."
+  - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+    tag: "Blog"
+    text: "Introduction to Datadog Synthetic Monitoring"
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+    tag: 'Learning Center'
+    text: 'Introduction to Synthetic Tests'
+  - link: "/synthetics/guide/"
+    tag: "Documentation"
+    text: "Synthetic Monitoring Guides"
+  - link: "https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/"
+    tag: "Blog"
+    text: "Monitor CDN performance within your Synthetic tests"
 
 ---
 

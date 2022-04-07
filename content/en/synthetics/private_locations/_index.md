@@ -252,6 +252,8 @@ To deploy the private locations worker in a secure manner, set up and mount a Ku
     kubectl apply -f private-location-worker-deployment.yaml
     ```
 
+For OpenShift, run the private location with the `anyuid` SCC. This is required for your browser test to run.
+
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}

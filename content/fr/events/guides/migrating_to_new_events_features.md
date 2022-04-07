@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/events/guides/migrating_from_stream_to_explorer
+- /fr/events/guides/migrating_from_stream_to_explorer
 kind: documentation
 title: Migration vers les nouvelles fonctionnalités dédiées aux événements
 ---
@@ -22,6 +22,17 @@ Voici le calendrier de migration pour les clients basés aux États-Unis :
 <strong>30 avril 2022</strong> – Arrêt de la prise en charge du flux d'événements, qui est remplacé par l'Event Explorer.
 
 <strong>15 mai 2022</strong> – Les monitors d'événements qui n'ont pas encore été migrés sont encore évalués par Datadog, mais ils ne peuvent plus être modifiés. Les nouveaux monitors d'événements doivent utiliser la nouvelle syntaxe.
+
+<strong>30 juin 2022</strong> – Arrêt de l'évaluation des monitors d'événements qui n'ont pas été migrés. Les anciens monitors d'événements cessent de fonctionner.
+
+
+Voici le calendrier de migration pour les clients basés dans l'Union européenne :
+
+<strong>30 mars 2022</strong> – Lancement du nouvel Events Explorer et de la nouvelle fonctionnalité d'analyse d'événements. Datadog commence à migrer les dashboards et monitors non gérés des clients à l'aide de l'API.
+
+<strong>6 mai 2022</strong> – Arrêt de la prise en charge du flux d'événements, qui est remplacé par l'Event Explorer.
+
+<strong>20 mai 2022</strong> – Les monitors d'événements qui n'ont pas encore été migrés sont encore évalués par Datadog, mais ils ne peuvent plus être modifiés. Les nouveaux monitors d'événements doivent utiliser la nouvelle syntaxe.
 
 <strong>30 juin 2022</strong> – Arrêt de l'évaluation des monitors d'événements qui n'ont pas été migrés. Les anciens monitors d'événements cessent de fonctionner.
 
@@ -49,7 +60,7 @@ L'Events Explorer affiche les événements les plus récents générés par vot
 
 En plus de visualiser et rechercher des événements dans l'Events Explorer, vous pouvez désormais créer des graphiques sous forme de séries temporelles, de top list ou de tableau et regrouper les événements associés à une requête donnée. Consultez la section sur l'[analyse d'événements][2] pour en savoir plus.
 
-Vous pouvez également [générer des métriques][3] avec une période de rétention de 15 mois à partir de n'importe quelle requête de recherche d'événements et créer des alertes afin de les surveiller.
+Vous pouvez également [générer des métriques][3] avec une période de rétention de 15 mois à partir de n'importe quelle requête de recherche d'événements pour créer des monitors et des alertes en fonction des événements historiques.
 
 {{< img src="events/generate-metrics.png" alt="Image de métriques avec la requête de recherche d'événements." >}}
 
