@@ -11,15 +11,16 @@ disable_sidebar: true
 
 ### SQL Server versions supported
 
-|         | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL with >26GB RAM | Azure |
-|---------|-------------|------|-----------|------------|---------|
-| Version | {{< X >}} | {{< X >}} |  |  | {{< X >}} |
-| Version |  |  |  |  |  |
+|                 | Self-hosted | Azure | AWS RDS | Google Cloud SQL |
+|-----------------|-----------|------|-----------|------------------|
+| SQL Server 2012 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
+| SQL Server 2014 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
+| SQL Server 2016 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
+| SQL Server 2017 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
+| SQL Server 2019 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
 
 For setup instructions, select your hosting type:
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 
 <br>
-
-
