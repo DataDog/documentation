@@ -86,14 +86,14 @@ Some or all queries may not have plans available. This can be due to unsupported
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.32.0 or greater. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
+| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.32.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
 | The Agent is not able to execute a required function in the `datadog` schema of the database. | The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from. Ensure this function was created by the root user according to the [setup instructions][1] and that the `datadog` user has permission to execute it. |
 | Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
 | The application client used to execute the query is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][5] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, the Python client [asyncpg][6] and the Go client [pgx][7] use the extended query protocol by default. To work around this limitation, you can configure your database client to use the simple query protocol. For example: set `preferQueryMode = simple` for the [Postgres JDBC Client][8] or set `PreferSimpleProtocol` on the [pgx][7] connection config. |
-| The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][9]. |
+| The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][9]. |
 | The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
 | The query is relatively infrequent or executes quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query. |
-| The application is relying on [search paths][10] for specifying which schema to query. | Postgres does not expose the current search path in [pg_stat_activity][11] so it's not possible for the Datadog Agent to find out which search path is being used for any active Postgres processes. The only way to work around this limitation is to update the application code to use fully qualified queries instead of relying on search paths. For example, do `select * from schema_A.table_B` instead of `SET search_path TO schema_A; select * from table_B`. |
+| The application is relying on [search paths][10] for specifying which schema to query. | Postgres does not expose the current search path in [`pg_stat_activity`][11], so it's not possible for the Datadog Agent to find out which search path is being used for any active Postgres processes. The only way to work around this limitation is to update the application code to use fully qualified queries instead of relying on search paths. For example, do `select * from schema_A.table_B` instead of `SET search_path TO schema_A; select * from table_B`. |
 
 
 ### Query metrics are missing
@@ -101,7 +101,7 @@ Some or all queries may not have plans available. This can be due to unsupported
 Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query metrics.
 
 #### pg_stat_statements extension not loaded {#pg-stat-statements-not-loaded}
-The `pg_stat_statements` extension is not loaded. The extension must be loaded through `shared_preload_libraries` in your Postgres configuration (**Note**: A server restart is required to take effect after modifying this variable). For additional details on installing how to load the extension, see the [setup instructions][1].
+The `pg_stat_statements` extension is not loaded. The extension must be loaded through `shared_preload_libraries` in your Postgres configuration (**Note**: A server restart is required to take effect after modifying this variable). For additional details on how to load the extension, see the [setup instructions][1].
 
 #### pg_stat_statements extension not created in database {#pg-stat-statements-not-created}
 The `pg_stat_statements` extension is not installed in the correct database. You must run `CREATE EXTENSION pg_stat_statements` in all databases the Agent connects to. By default, the Agent connects to the `postgres` database. For additional details on configuring this variable in your setup, see the [setup instructions][1].
@@ -116,7 +116,7 @@ If you specified a `dbname` other than the default `postgres` in your Agent conf
 
 ### Certain queries are missing
 
-If you have data from some queries, but are expecting to see a particular query or set of queries in Database Monitoring, follow this guide.
+If you have data from some queries, but do not see a particular query or set of queries in Database Monitoring that you're expecting to see , follow this guide.
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | For Postgres 9.6, if you only see queries executed by the datadog user, then the instance configuration is likely missing some settings. | For monitoring instances on Postgres 9.6, the Datadog Agent instance config must use the settings `pg_stat_statements_view: datadog.pg_stat_statements()` and `pg_stat_activity_view: datadog.pg_stat_activity()` based on the functions created in the initial setup guide. These functions must be created in all databases. |
@@ -152,7 +152,9 @@ Some or all queries may not have plans available. This can be due to unsupported
 
 #### Missing explain function {#undefined-explain-function}
 
-The Agent is not able to execute a required function in the `datadog` schema of the database. | The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from. 
+Problem: The Agent is not able to execute a required function in the `datadog` schema of the database. 
+
+Solution: The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from. 
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
@@ -172,7 +174,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 #### Agent is running an unsupported version
-Ensure that the Agent is running version 7.32.0 or greater. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
+Ensure that the Agent is running version 7.32.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
 
 #### Queries are truncated
 See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text.
@@ -181,7 +183,7 @@ See the section on [truncated query samples](#query-samples-are-truncated) for i
 The application client used to execute the query is using the Postgres extended query protocol or prepared statements. Some client applications using the Postgres [extended query protocol][5] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, the Python client [asyncpg][6] and the Go client [pgx][7] use the extended query protocol by default. To work around this limitation, you can configure your database client to use the simple query protocol. For example: set `preferQueryMode = simple` for the [Postgres JDBC Client][8] or set `PreferSimpleProtocol` on the [pgx][7] connection config.
 
 #### Query is in a database ignored by the Agent instance config
-The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][9]. 
+The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][9]. 
 
 #### Query cannot be explained
 Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans.

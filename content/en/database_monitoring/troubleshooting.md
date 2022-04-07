@@ -12,7 +12,7 @@ This page details database agnostic common issues with setting up and using Data
 
 For specific database setup troubleshooting, use the corresponding troubleshooting page:
 
-* [Troubleshooting My_SQL Setup][2]
+* [Troubleshooting MySQL Setup][2]
 * [Troubleshooting Postgres Setup][3]
 
 ## Diagnosing common problems

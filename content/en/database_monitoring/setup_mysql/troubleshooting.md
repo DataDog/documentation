@@ -89,7 +89,7 @@ DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup. Below are possible causes for missing explain plans.
 
 #### Missing explain plan procedure {#explain-plan-procedure-missing}
-The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Refer to the [setup instructions][1] for details on the creation of the `datadog` schema.  
+The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.  
 
 Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
 
@@ -125,19 +125,27 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 #### Agent is running an unsupported version
-Ensure that the Agent is running version 7.32.0 or greater. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
+
+Ensure that the Agent is running version 7.32.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
+
 #### Queries are truncated
+
 See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text.
+
 #### Query cannot be explained
+
 Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans.
+
 #### Query is relatively infrequent or executes quickly
+
 The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][5] to capture the query.
+
 ### Query metrics are missing
 
 Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query metrics.
 
 #### `performance_schema` is not enabled {#performance-schema-not-enabled}
-The Agent requires the `performance_schema` option to be enabled. It is enabled by default by MySQL but may be disabled in configuration or by your cloud provider. Follow the [setup instructions][1] for enabling it.
+The Agent requires the `performance_schema` option to be enabled. It is enabled by default by MySQL, but may be disabled in configuration or by your cloud provider. Follow the [setup instructions][1] for enabling it.
 
 #### Google Cloud SQL limitation
 The host is managed by Google Cloud SQL and does not support `performance_schema`. Due to limitations with Google Cloud SQL, Datadog Database Monitoring is [not supported on instances with less than 26GB of RAM][6].
@@ -150,7 +158,7 @@ If you have data from some queries, but are expecting to see a particular query 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | It may be grouped into the "Other Queries" row. For more information on which queries are tracked, see [Data Collected][7]. The number of top queries tracked can be raised by contacting Datadog Support. |
-| The `events_statements_summary_by_digest` may be full. | The MySQL table `events_statements_summary_by_digest` in `performance_schema` has a maximum limit on the number of digests (normalized queries) it will store. Regular truncation of this table as a maintenance task will ensure all queries are tracked over time. See [Advanced configuration][5] for more information. |
+| The `events_statements_summary_by_digest` may be full. | The MySQL table `events_statements_summary_by_digest` in `performance_schema` has a maximum limit on the number of digests (normalized queries) it stores. Regular truncation of this table as a maintenance task ensures all queries are tracked over time. See [Advanced configuration][5] for more information. |
 | The query has been executed a single time since the agent last restarted. | Query metrics are only emitted after having been executed at least once over two separate ten second intervals since the Agent was restarted. |
 
 ### Query samples are truncated
@@ -176,7 +184,7 @@ Some or all queries may not have plans available. This can be due to unsupported
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.32.0 or greater. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
+| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.32.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
 | The Agent is not able to execute a required function in this schema of the database. | The Agent requires the function `explain_statement(...)` to exist in **all schemas** the Agent can collect samples from. Ensure this function was created by the root user according to the [setup instructions][1] and that the `datadog` user has permission to execute it. |
 | Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
 | The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
