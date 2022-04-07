@@ -2479,16 +2479,26 @@ main:
     parent: rum_ios
     identifier: rum_ios_advanced
     weight: 303
+  - name: Mobile Vitals
+    url: real_user_monitoring/ios/mobile_vitals/
+    parent: rum_ios
+    identifier: rum_ios_mobile_vitals
+    weight: 304
   - name: Troubleshooting
     url: real_user_monitoring/ios/troubleshooting/
     parent: rum_ios
     identifier: rum_troubleshooting_ios
-    weight: 304
+    weight: 305
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
     identifier: rum_reactnative
     weight: 4
+  - name: Mobile Vitals
+    url: real_user_monitoring/reactnative/mobile_vitals/
+    parent: rum_reactnative
+    identifier: rum_reactnative_mobile_vitals
+    weight: 401
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum

@@ -93,8 +93,11 @@ content/en/real_user_monitoring/browser/_index.md
 content/en/logs/log_collection/javascript.md
 content/en/real_user_monitoring/ios.md
 content/en/real_user_monitoring/ios/crash_reporting.md
+content/en/real_user_monitoring/ios/mobile_vitals.md
 content/en/real_user_monitoring/ios/*
-content/en/real_user_monitoring/reactnative.md
+content/en/real_user_monitoring/reactnative/_index.md
+content/en/real_user_monitoring/reactnative/integrated_libraries.md
+content/en/real_user_monitoring/reactnative/mobile_vitals.md
 
 # Synthetics
 content/en/synthetics/cicd_integrations/github_actions.md
