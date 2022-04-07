@@ -1,11 +1,28 @@
 ---
-enabled: true
-enabled_send: true
-enabled_receive: true
-transifex:
-  org: 'datadog'
-  project_slug: 'documentation_loc'
-  user: 'api'
+# New params
+receive_enabled: true
+sync_enabled: true
+
+# if true, no github or transifex api writes will happen.
+# instead logs will be created to simulate results.
+sync_dry_run_enabled: true
+
+# These files will be ignored or deleted when syncing with Transifex.
+ignores:
+  - "content/en/**/faq/!(agent_v6_changes|certificate_verify_failed-error).md"
+  - "content/en/security_platform/default_rules/*.md"
+  - "content/en/security_monitoring/default_rules/*.md"
+  - "content/en/integrations/rapdev_services.md"
+  - "**/*.fr.md"
+  - "**/*.fr.yaml"
+  - "**/*.fr.json"
+  - "**/fr.json"
+  - "**/*.ja.md"
+  - "**/*.ja.yaml"
+  - "**/*.ja.json"
+  - "**/ja.json"
+
+# These files will be uploaded to Transifex for translation when syncing.
 sources:
 - src: "content/en/**/*.md"
   dst: "content/{lang}/**/*.md"
@@ -26,19 +43,16 @@ sources:
 - src: "content/en/agent/faq/certificate_verify_failed-error.md"
   dst: "content/{lang}/agent/faq/certificate_verify_failed-error.md"
 
-ignores:
-  - "content/en/**/faq/!(agent_v6_changes|certificate_verify_failed-error).md"
-  - "content/en/security_platform/default_rules/*.md"
-  - "content/en/security_monitoring/default_rules/*.md"
-  - "content/en/integrations/rapdev_services.md"
-  - "**/*.fr.md"
-  - "**/*.fr.yaml"
-  - "**/*.fr.json"
-  - "**/fr.json"
-  - "**/*.ja.md"
-  - "**/*.ja.yaml"
-  - "**/*.ja.json"
-  - "**/ja.json"
+# Legacy params
+# TODO: remove when old sync job is deprecated. 
+enabled: true
+enabled_send: true
+enabled_receive: true
+transifex:
+  org: 'datadog'
+  project_slug: 'documentation_loc'
+  user: 'api'
+
 filters:
 - src: "data/integrations/*.yaml"
   template: ".translate/templates/integrations.yaml"

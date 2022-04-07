@@ -16176,7 +16176,8 @@
                     "sum",
                     "min",
                     "max",
-                    "avg"
+                    "avg",
+                    "median"
                   ],
                   "example": "pc90",
                   "type": "string",
@@ -16191,7 +16192,8 @@
                     "SUM",
                     "MIN",
                     "MAX",
-                    "AVG"
+                    "AVG",
+                    "MEDIAN"
                   ]
                 },
                 "interval": {
@@ -16343,7 +16345,8 @@
                         "sum",
                         "min",
                         "max",
-                        "avg"
+                        "avg",
+                        "median"
                       ],
                       "example": "pc90",
                       "type": "string",
@@ -16358,7 +16361,8 @@
                         "SUM",
                         "MIN",
                         "MAX",
-                        "AVG"
+                        "AVG",
+                        "MEDIAN"
                       ]
                     },
                     "metric": {
@@ -16705,7 +16709,8 @@
               "sum",
               "min",
               "max",
-              "avg"
+              "avg",
+              "median"
             ],
             "example": "pc90",
             "type": "string",
@@ -16720,7 +16725,8 @@
               "SUM",
               "MIN",
               "MAX",
-              "AVG"
+              "AVG",
+              "MEDIAN"
             ]
           },
           "metric": {
@@ -16783,7 +16789,8 @@
           "sum",
           "min",
           "max",
-          "avg"
+          "avg",
+          "median"
         ],
         "example": "pc90",
         "type": "string",
@@ -16798,7 +16805,8 @@
           "SUM",
           "MIN",
           "MAX",
-          "AVG"
+          "AVG",
+          "MEDIAN"
         ]
       },
       "LogsArchive": {
@@ -19272,7 +19280,8 @@
               "sum",
               "min",
               "max",
-              "avg"
+              "avg",
+              "median"
             ],
             "example": "pc90",
             "type": "string",
@@ -19287,7 +19296,8 @@
               "SUM",
               "MIN",
               "MAX",
-              "AVG"
+              "AVG",
+              "MEDIAN"
             ]
           },
           "interval": {
@@ -19409,7 +19419,8 @@
                   "sum",
                   "min",
                   "max",
-                  "avg"
+                  "avg",
+                  "median"
                 ],
                 "example": "pc90",
                 "type": "string",
@@ -19424,7 +19435,8 @@
                   "SUM",
                   "MIN",
                   "MAX",
-                  "AVG"
+                  "AVG",
+                  "MEDIAN"
                 ]
               },
               "metric": {
@@ -25244,7 +25256,8 @@
                     "sum",
                     "min",
                     "max",
-                    "avg"
+                    "avg",
+                    "median"
                   ],
                   "example": "pc90",
                   "type": "string",
@@ -25259,7 +25272,8 @@
                     "SUM",
                     "MIN",
                     "MAX",
-                    "AVG"
+                    "AVG",
+                    "MEDIAN"
                   ]
                 },
                 "interval": {
@@ -25396,7 +25410,8 @@
                         "sum",
                         "min",
                         "max",
-                        "avg"
+                        "avg",
+                        "median"
                       ],
                       "example": "pc90",
                       "type": "string",
@@ -25411,7 +25426,8 @@
                         "SUM",
                         "MIN",
                         "MAX",
-                        "AVG"
+                        "AVG",
+                        "MEDIAN"
                       ]
                     },
                     "metric": {
@@ -25534,7 +25550,8 @@
               "sum",
               "min",
               "max",
-              "avg"
+              "avg",
+              "median"
             ],
             "example": "pc90",
             "type": "string",
@@ -25549,7 +25566,8 @@
               "SUM",
               "MIN",
               "MAX",
-              "AVG"
+              "AVG",
+              "MEDIAN"
             ]
           },
           "metric": {
@@ -25681,7 +25699,8 @@
           "sum",
           "min",
           "max",
-          "avg"
+          "avg",
+          "median"
         ],
         "example": "pc90",
         "type": "string",
@@ -25696,7 +25715,8 @@
           "SUM",
           "MIN",
           "MAX",
-          "AVG"
+          "AVG",
+          "MEDIAN"
         ]
       },
       "RUMAnalyticsAggregateResponse": {
@@ -25926,7 +25946,8 @@
               "sum",
               "min",
               "max",
-              "avg"
+              "avg",
+              "median"
             ],
             "example": "pc90",
             "type": "string",
@@ -25941,7 +25962,8 @@
               "SUM",
               "MIN",
               "MAX",
-              "AVG"
+              "AVG",
+              "MEDIAN"
             ]
           },
           "interval": {
@@ -26319,7 +26341,8 @@
                   "sum",
                   "min",
                   "max",
-                  "avg"
+                  "avg",
+                  "median"
                 ],
                 "example": "pc90",
                 "type": "string",
@@ -26334,7 +26357,8 @@
                   "SUM",
                   "MIN",
                   "MAX",
-                  "AVG"
+                  "AVG",
+                  "MEDIAN"
                 ]
               },
               "metric": {
@@ -35620,7 +35644,7 @@
               "security_monitoring_signals_read": "View Security Signals.",
               "usage_read": "View your organization's usage and usage attribution.",
               "user_access_invite": "Invite other users to your organization.",
-              "user_access_manage": "Disable users, manage user roles, and manage SAML-to-role mappings."
+              "user_access_manage": "Disable users, manage user roles, manage SAML-to-role mappings, and configure logs restriction queries."
             },
             "tokenUrl": "/oauth2/v1/token"
           }
@@ -51393,7 +51417,8 @@
                             "sum",
                             "min",
                             "max",
-                            "avg"
+                            "avg",
+                            "median"
                           ],
                           "example": "pc90",
                           "type": "string",
@@ -51408,7 +51433,8 @@
                             "SUM",
                             "MIN",
                             "MAX",
-                            "AVG"
+                            "AVG",
+                            "MEDIAN"
                           ]
                         },
                         "interval": {
@@ -51560,7 +51586,8 @@
                                 "sum",
                                 "min",
                                 "max",
-                                "avg"
+                                "avg",
+                                "median"
                               ],
                               "example": "pc90",
                               "type": "string",
@@ -51575,7 +51602,8 @@
                                 "SUM",
                                 "MIN",
                                 "MAX",
-                                "AVG"
+                                "AVG",
+                                "MEDIAN"
                               ]
                             },
                             "metric": {
@@ -61186,7 +61214,7 @@
               },
               {
                 "name": "body",
-                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\", \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"distribution\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum }}\"\n  }\n}"
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\", \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"gauge\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum }}\"\n  }\n}"
               }
             ],
             "step": "there is a valid \"metric_tag_configuration\" in the system"
@@ -66263,7 +66291,8 @@
                             "sum",
                             "min",
                             "max",
-                            "avg"
+                            "avg",
+                            "median"
                           ],
                           "example": "pc90",
                           "type": "string",
@@ -66278,7 +66307,8 @@
                             "SUM",
                             "MIN",
                             "MAX",
-                            "AVG"
+                            "AVG",
+                            "MEDIAN"
                           ]
                         },
                         "interval": {
@@ -66415,7 +66445,8 @@
                                 "sum",
                                 "min",
                                 "max",
-                                "avg"
+                                "avg",
+                                "median"
                               ],
                               "example": "pc90",
                               "type": "string",
@@ -66430,7 +66461,8 @@
                                 "SUM",
                                 "MIN",
                                 "MAX",
-                                "AVG"
+                                "AVG",
+                                "MEDIAN"
                               ]
                             },
                             "metric": {
