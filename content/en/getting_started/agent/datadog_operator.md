@@ -24,6 +24,10 @@ further_reading:
 
 This guide describes how to deploy the Datadog Agent with the Datadog Operator. 
 
+## Why use the Datadog Operator?
+
+TK
+
 ## Prerequisites
 
 - Kubernetes Cluster v1.14.X+
@@ -42,6 +46,7 @@ This guide describes how to deploy the Datadog Agent with the Datadog Operator.
   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
   ```
   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][3].
+
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following is the minimum configuration:
   ```yaml
   apiVersion: datadoghq.com/v1alpha1
