@@ -1813,6 +1813,11 @@ main:
     parent: dbm_setup_postgres
     identifier: dbm_postgres_advanced_configuration
     weight: 105
+  - name: Postgres Setup
+    url: database_monitoring/setup_postgres/troubleshooting/
+    parent: dbm_setup_postgres
+    identifier: dbm_troubleshooting_postgres
+    weight: 106
   - name: Setting Up MySQL
     url: database_monitoring/setup_mysql/
     parent: dbm
@@ -1843,6 +1848,11 @@ main:
     parent: dbm_setup_mysql
     identifier: dbm_mysql_advanced_configuration
     weight: 105
+  - name: MySQL Setup
+    url: database_monitoring/setup_mysql/troubleshooting/
+    parent: dbm_setup_mysql
+    identifier: dbm_troubleshooting_mysql
+    weight: 106
   - name: Data Collected
     url: database_monitoring/data_collected
     parent: dbm
@@ -1863,16 +1873,6 @@ main:
     parent: dbm
     identifier: dbm_troubleshooting
     weight: 6
-  - name: MySQL Setup
-    url: database_monitoring/setup_mysql/troubleshooting/
-    parent: dbm_troubleshooting
-    identifier: dbm_troubleshooting_mysql
-    weight: 100
-  - name: Postgres Setup
-    url: database_monitoring/setup_postgres/troubleshooting/
-    parent: dbm_troubleshooting
-    identifier: dbm_troubleshooting_postgres
-    weight: 101
   - name: Log Management
     url: logs/
     pre: log
