@@ -29,7 +29,9 @@ Supported test frameworks:
 
 [Install the Datadog Agent to collect tests data][1].
 
-<strong>Note:</strong> Agentless mode is currently in beta, if you want to test this feature follow the [instructions][5].
+<div class="alert alert-warning">
+Agentless mode is in beta. To test this feature, follow the <a href="/#agentless-beta">instructions</a> on this page.
+</div>
 
 ## Installing the .NET tracer
 
@@ -145,17 +147,17 @@ For more information about how to add spans and tags for custom instrumentation,
 
 ## Agentless (Beta)
 
-To instrument your test suite without requiring an agent, you need to configure the following environment variables:
+To instrument your test suite without requiring an Agent, configure the following environment variables:
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED` (Required)
-: Enables or disables the agentless mode.<br/>
+: Enables or disables Agentless mode.<br/>
 **Default**: `false`
 
 `DD_API_KEY` (Required)
 : The [Datadog API key][6] used to upload the test results.<br/>
 **Default**: `(empty)`
 
-Then, prefix your test command with `dd-trace ci run`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
+Then, prefix your test command with `dd-trace ci run`. Use the `--dd-service` parameter to provide the name of the service or library. Use the `--dd-env` parameter to provide the environment where tests are being run (`local` when running tests on a developer workstation, `ci` when running them on a CI provider, etc.) For example:
 
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
@@ -167,9 +169,9 @@ Alternatively, you can provide the [Datadog API key][6] using the `--api-key` pa
 dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
-When the `--api-key` is set, the agentless mode is automatically enabled.
+When the `--api-key` is set, Agentless mode is automatically enabled.
 
-Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
+Additionally, configure which [Datadog site][7] to which you want to send data. Your Datadog site is {{< region-param key="dd_site_name" >}}.
 
 `DD_SITE` (Required)
 : The [Datadog site][7] to upload results to.<br/>
