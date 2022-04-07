@@ -61,8 +61,8 @@ If you have opened at least one Datadog support ticket, follow this process to a
 {{< /site-region >}}
 
 ## Error: Refused to connect
-Refused to connect error comes from privacy settings blocking third-party cookies. To solve this issue, make sure the browser allows third-party cookies, at least from Zendesk. 
+**Refused to connect** errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to [Clear, enable, and manage cookies in Chrome][2] in Google Chrome Help.
 
-Find the instructions allow third-party cookies in Chrome in this article from Google Chrome Help: [Clear, enable, and manage cookies in Chrome](https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en#:~:text=Cookies%20are%20files%20created%20by,give%20you%20locally%20relevant%20content). 
+If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add **datadog.zendesk.com** to the allow list.
 
-If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. If that is your case, add **datadog.zendesk.com** to the allow list.
+[2]: https://support.google.com/chrome/answer/95647
