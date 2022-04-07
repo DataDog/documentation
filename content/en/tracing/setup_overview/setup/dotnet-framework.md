@@ -416,7 +416,12 @@ Added in version 1.23.0.
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
 This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
 **Default**: `false`
-Added in version 2.5.1
+Added in version 2.5.2
+
+`DD_TRACE_METHODS`
+: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is a comma (`,`) separated list of method names. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+**Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync]```<br>
+Added in version 2.6.0
 
 #### Automatic instrumentation integration configuration
 
