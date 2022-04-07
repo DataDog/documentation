@@ -1813,7 +1813,7 @@ main:
     parent: dbm_setup_postgres
     identifier: dbm_postgres_advanced_configuration
     weight: 105
-  - name: Postgres Setup
+  - name: Troubleshooting
     url: database_monitoring/setup_postgres/troubleshooting/
     parent: dbm_setup_postgres
     identifier: dbm_troubleshooting_postgres
@@ -1848,7 +1848,7 @@ main:
     parent: dbm_setup_mysql
     identifier: dbm_mysql_advanced_configuration
     weight: 105
-  - name: MySQL Setup
+  - name: Troubleshooting
     url: database_monitoring/setup_mysql/troubleshooting/
     parent: dbm_setup_mysql
     identifier: dbm_troubleshooting_mysql
