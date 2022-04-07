@@ -30,7 +30,7 @@ Supported test frameworks:
 [Install the Datadog Agent to collect tests data][1].
 
 <div class="alert alert-warning">
-Agentless mode is in beta. To test this feature, follow the <a href="/#agentless-beta">instructions</a> on this page.
+Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/dotnet#agentless-beta">instructions</a> on this page.
 </div>
 
 ## Installing the .NET tracer
@@ -171,7 +171,7 @@ dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- do
 
 When the `--api-key` is set, Agentless mode is automatically enabled.
 
-Additionally, configure which [Datadog site][7] to which you want to send data. Your Datadog site is {{< region-param key="dd_site_name" >}}.
+Additionally, configure which [Datadog site][7] to which you want to send data. Your Datadog site is: {{< region-param key="dd_site" >}}.
 
 `DD_SITE` (Required)
 : The [Datadog site][7] to upload results to.<br/>
