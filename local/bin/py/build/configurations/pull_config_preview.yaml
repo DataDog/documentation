@@ -527,6 +527,27 @@
     - action: pull-and-push-file
       branch: master
       globs:
+      - 'docs/rum_collection/_index.md'
+      options:
+        dest_path: '/real_user_monitoring/ios/'
+        file_name: '_index.md'
+        front_matters:
+          title: RUM iOS Monitoring
+          kind: documentation
+          beta: true
+          description: "Collect RUM data from your iOS projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/_index.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "GitHub"
+              text: "dd-sdk-ios Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
       - 'docs/log_collection.md'
       options:
         dest_path: '/logs/log_collection/'
@@ -576,7 +597,7 @@
           title: Mobile Vitals
           kind: documentation
           beta: true
-          description: "Collect RUM data from your React Native projects."
+          description: "Collect RUM data from your iOS projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/alai97/mobile-vitals-doc-update/docs/rum_mobile_vitals.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
