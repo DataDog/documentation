@@ -1,5 +1,5 @@
 ---
-title: Tag Governance - Drop Metrics Using Specific Tags
+title: Custom Metrics Governance - Drop Metrics Missing Specific Tags
 kind: guide
 further_reading:
 - link: "https://vector.dev/docs/setup/going-to-prod/"
@@ -18,7 +18,7 @@ These tools use metrics tags to provide visibility into metrics that have been i
 
 ## Prerequisites
 
-To filter out custom metrics based on tags, use [Vector][4] to drop them before they get ingested into Datadog. Vector, an open source tool optimized for observability pipelines, or its enterprise solution, Datadog Observability Pipelines, lets you control which custom metrics are sent to Datadog.
+To filter out custom metrics that are missing crucial tag keys, like `team`, use [Vector][4] to drop them before they get ingested into Datadog. Vector, an open source tool optimized for observability pipelines, or its enterprise solution, Datadog Observability Pipelines, lets you control which custom metrics are sent to Datadog.
 
 This guide assumes that you already have a Vector pipeline set-up. If you’re not familiar with Vector, see [Setting up Vector][5] and [Vector Remap Language][6] for more information.
 

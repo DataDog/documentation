@@ -4,5 +4,5 @@ kind: guide
 ---
 
 {{< whatsnext desc="General guides:" >}}
-    {{< nextlink href="metrics/custom_metrics/guide/tag-governance-drop-metrics-using-specific-tags" >}}Tag Governance - Drop Metrics Using Specific Tags{{< /nextlink >}}
+    {{< nextlink href="metrics/custom_metrics/guide/tag-governance-drop-metrics-missing-specific-tags" >}}Custom Metrics Governance - Drop Metrics Missing Specific Tags{{< /nextlink >}}
 {{< /whatsnext >}}
