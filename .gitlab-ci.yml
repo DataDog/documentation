@@ -295,7 +295,7 @@ index_algolia:
     <<: *cache
     policy: pull
   environment: "live"
-  timeout: 1h 30m
+  timeout: 1h 55m
   script:
     - |-
       echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
