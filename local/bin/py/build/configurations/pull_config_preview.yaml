@@ -378,6 +378,13 @@
               tag: "Blog"
               text: "Monitor Mobile Vitals in Datadog"
     - action: pull-and-push-file
+      branch: alai97/web-view-tracking-android-doc-update
+      globs:
+      - 'docs/web_view_tracking.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'web_view_tracking.md'
+    - action: pull-and-push-file
       branch: master
       globs:
       - 'docs/integrated_libraries_android.md'
@@ -566,14 +573,14 @@
               text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-folder
-      branch: master
+      branch: alai97/web-view-tracking-ios-doc-update
       globs:
         - docs/rum_collection/*
       options:
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/alai97/web-view-tracking-ios-doc-update/docs/rum_collection/" ]
 
     - action: pull-and-push-folder
       branch: master

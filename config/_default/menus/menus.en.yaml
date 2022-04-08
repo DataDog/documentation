@@ -2464,16 +2464,21 @@ main:
     parent: rum_android
     identifier: rum_android_mobile_vitals
     weight: 203
+  - name: Web View Tracking
+    url: real_user_monitoring/android/web_view_tracking/
+    parent: rum_android
+    identifier: rum_android_web_view_tracking
+    weight: 204
   - name: Integrated Libraries
     url: real_user_monitoring/android/integrated_libraries/
     parent: rum_android
     identifier: rum_android_libraries
-    weight: 204
+    weight: 205
   - name: Troubleshooting
     url: real_user_monitoring/android/troubleshooting/
     parent: rum_android
     identifier: rum_troubleshooting_android
-    weight: 205
+    weight: 206
   - name: iOS Monitoring
     url: real_user_monitoring/ios/
     parent: rum
@@ -2494,11 +2499,16 @@ main:
     parent: rum_ios
     identifier: rum_ios_advanced
     weight: 303
+  - name: Web View Tracking
+    url: real_user_monitoring/ios/web_view_tracking/
+    parent: rum_ios
+    identifier: rum_ios_web_view_tracking
+    weight: 304
   - name: Troubleshooting
     url: real_user_monitoring/ios/troubleshooting/
     parent: rum_ios
     identifier: rum_troubleshooting_ios
-    weight: 304
+    weight: 305
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
