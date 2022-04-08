@@ -95,7 +95,7 @@ content/en/real_user_monitoring/ios.md
 content/en/real_user_monitoring/ios/crash_reporting.md
 content/en/real_user_monitoring/ios/*
 content/en/real_user_monitoring/reactnative.md
-content/en/real_user_monitoring/flutter.md
+content/en/real_user_monitoring/flutter/_index.md
 
 # Synthetics
 content/en/synthetics/cicd_integrations/github_actions.md

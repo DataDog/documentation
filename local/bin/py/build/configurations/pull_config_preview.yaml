@@ -612,18 +612,18 @@
   - repo_name: dd-sdk-flutter
     contents:
     - action: pull-and-push-file
-      branch: alai97/flutter-monitoring-docs-edit
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/README.md'
       options:
-        dest_path: '/real_user_monitoring/'
-        file_name: 'flutter.md'
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: '_index.md'
         front_matters:
           title: Flutter Monitoring
           kind: documentation
           beta: true
           description: "Collect RUM data from your Flutter projects."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/alai97/flutter-monitoring-docs-edit/packages/datadog_flutter_plugin/README.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/README.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-flutter"
               tag: "GitHub"
