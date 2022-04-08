@@ -60,7 +60,7 @@ messages with one value in each. This is useful for HISTOGRAM, TIMING, and DISTR
 ### DogStatsD protocol v1.2
 
 Starting with the Agent `>=v6.35.0` && `<v7.0.0` or `>=v7.35.0`, a new container ID field is supported.
-The Datadog Agent uses the container ID value to enrich DogstatsD metrics with additional container tags.
+The Datadog Agent uses the container ID value to enrich DogStatsD metrics with additional container tags.
 
 The container ID is prefixed by `c:`, for example:
 
