@@ -25,7 +25,7 @@ further_reading:
     text: "Understand user impact scope with Watchdog Impact Analysis"
 ---
 
-{{< img src="watchdog/watchdog_page.png" alt="The Watchdog Alerts page with two ongoing critical alerts for error rates" >}}
+{{< img src="watchdog/watchdog.png" alt="The Watchdog Alerts page with two ongoing critical alerts for error rates" >}}
 
 ## Overview
 
