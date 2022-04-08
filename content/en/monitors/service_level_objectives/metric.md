@@ -22,9 +22,11 @@ On the [SLO status page][1], select **New SLO +**. Then select [**Metric**][2].
 
 ### Define queries
 
-1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use either COUNT or RATE metrics to ensure the SLO calculation behaves correctly.
+1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use COUNT, RATE or percentile-enabled DISTRIBUTION metrics to ensure the SLO calculation behaves correctly.
 2. Use the `FROM` field to include or exclude specific groups using tags.
-3. Optionally, use the `sum by` aggregator to break your SLI out by specific groups (for tracking and visualization).
+3. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. (For more information, see documentation for [Threshold Queries][4])
+4. Optionally, for percentile-enabled DISTRIBUTION metrics, use the dropdown immediately to the right of the `count values..` aggregator to break your SLI out by specific groups.
+5. Optionally, for COUNT or RATE metrics, use the `sum by` aggregator to break your SLI out by specific groups.
 
 **Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx` || `code:3xx` || `code:4xx`. The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events would be `sum:httpservice.hits{!code:3xx}`.
 
@@ -65,3 +67,4 @@ Here you can add contextual information about the purpose of the SLO, including 
 [1]: https://app.datadoghq.com/slo
 [2]: https://app.datadoghq.com/slo/new/metric
 [3]: /monitors/service_level_objectives/monitor/
+[4]: /metrics/distributions/#threshold-queries
