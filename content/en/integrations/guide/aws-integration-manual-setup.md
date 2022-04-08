@@ -48,8 +48,6 @@ Generate an External ID in the [AWS Integration Tile][2] on the integrations pag
 3. Copy this value to your clipboard or notepad.  
   **Note: Do not close the integration tile or the Datadog application page**, as this causes the external ID value to reset.
 
-Let's move the Cloud Security Posture Management call our to the IAM role creation section, and have an explicit optional step to add the SecurityAudit policy to the role as well
-
 ### AWS IAM Policy for Datadog
 Create an IAM policy for the Datadog role in your AWS account with [all permissions][4] to take advantage of every AWS integration offered by Datadog. As other components are added to an integration, these permissions may change. 
 
