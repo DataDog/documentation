@@ -53,10 +53,10 @@ GRANT VIEW ANY DEFINITION to datadog;
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
-{{% dbm-sqlserver-agent-setup-windows %}}
+{{% dbm-sqlserver-agent-setup-windows-local %}}
 {{% /tab %}}
 {{% tab "Linux Host" %}}
-{{% dbm-sqlserver-agent-setup-linux %}}
+{{% dbm-sqlserver-agent-setup-linux-local %}}
 {{% /tab %}}
 {{< /tabs >}}
 
