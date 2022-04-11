@@ -16,7 +16,7 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-To use **Windows Authentication** set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
+To use [Windows Authentication][10] set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
 
 The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][5].
 
@@ -56,3 +56,4 @@ Once all Agent configuration is complete, [Restart the Datadog Agent][6].
 [7]: /agent/guide/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 [9]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
+[10]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
