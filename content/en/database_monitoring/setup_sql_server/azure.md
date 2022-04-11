@@ -78,6 +78,8 @@ For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitori
 
 ## Install the Agent
 
+Since Azure does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
