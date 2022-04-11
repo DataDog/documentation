@@ -46,12 +46,14 @@ GRANT VIEW ANY DEFINITION to datadog;
 
 ## Install the Agent
 
+It's recommended to install the agent directly on the SQL Server host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to SQL Server specific telemetry.
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
-{{% dbm-sqlserver-agent-setup-windows-local %}}
+{{% dbm-sqlserver-agent-setup-windows %}}
 {{% /tab %}}
 {{% tab "Linux Host" %}}
-{{% dbm-sqlserver-agent-setup-linux-local %}}
+{{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -1,9 +1,5 @@
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
-On Windows the Datadog Agent can connect to SQL Server using one of the following connectors:
-* **Microsoft ADO**: set `connector: adodbapi` and `adoprovider` to one of the supported drivers. To use the recommended [Microsoft OLE DB Driver][2] set `adoprovider: MSOLEDBSQL` and ensure the driver is installed on the host where the agent is running. The other two drivers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
-* **ODBC**: set `connector: odbc`, `driver: {ODBC Driver 17 for SQL Server}`, and ensure the [Microsoft ODBC Driver][3] is installed on the host where the Agent is running.
-
 Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. See the [sample conf file][4] for all available configuration options.
 
 ```yaml
@@ -24,6 +20,27 @@ To use **Windows Authentication** set `connection_string: "Trusted_Connection=ye
 
 The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][5].
 
+### Supported Drivers
+
+#### Microsoft ADO
+
+The recommended [ADO][9] provider is [Microsoft OLE DB Driver][2]. Ensure the driver is installed on the host where the agent is running.
+```yaml
+connector: adodbapi
+provider: MSOLEDBSQL
+```
+
+The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
+
+#### ODBC
+
+The recommended ODBC driver is [Microsoft ODBC Driver][3]. Ensure the driver is installed on the host where the Agent is running.
+
+```yaml
+connector: odbc
+driver: {ODBC Driver 17 for SQL Server}
+```
+
 Once all Agent configuration is complete, [Restart the Datadog Agent][6].
 
 ### Validate
@@ -38,3 +55,4 @@ Once all Agent configuration is complete, [Restart the Datadog Agent][6].
 [6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: /agent/guide/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
+[9]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
