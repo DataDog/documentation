@@ -1,7 +1,7 @@
 ---
-title: Setting Up Database Monitoring for self-hosted SQL Server
+title: Setting Up Database Monitoring for SQL Server on Amazon RDS
 kind: documentation
-description: Install and configure Database Monitoring for self-hosted SQL Server
+description: Install and configure Database Monitoring for SQL Server managed on RDS.
 further_reading:
 - link: "/integrations/sqlserver/"
   tag: "Documentation"
@@ -25,6 +25,7 @@ Do the following steps to enable Database Monitoring with your database:
 
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 2. [Install the Agent](#install-the-agent)
+3. [Install the RDS integration](#install-the-rds-integration)
 
 ## Before you begin
 
@@ -32,21 +33,28 @@ Do the following steps to enable Database Monitoring with your database:
 
 ## Grant the Agent access
 
-The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
+The Datadog Agent requires read-only access to the database server to collect statistics and queries.
 
 Create a read-only login to connect to your server and grant the required permissions:
 
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
-GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
 ```
 
+Create the `datadog` user in each additional application database:
+```SQL
+USE [database_name];
+CREATE USER datadog FOR LOGIN datadog;
+```
+
+This is required because RDS does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
+
 ## Install the Agent
 
-It's recommended to install the agent directly on the SQL Server host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to SQL Server specific telemetry.
+Since AWS does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
@@ -55,8 +63,20 @@ It's recommended to install the agent directly on the SQL Server host as that en
 {{% tab "Linux Host" %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
+{{% tab "Docker" %}}
+{{% dbm-sqlserver-agent-setup-docker %}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+{{% dbm-sqlserver-agent-setup-kubernetes %}}
+{{% /tab %}}
 {{< /tabs >}}
+
+## Install the RDS integration
+
+To collect more comprehensive database metrics and logs from AWS, install the [RDS integration][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/amazon_rds
