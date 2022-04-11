@@ -55,7 +55,7 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 
    _“What has the 99.9th percentile request duration for my application been over the past week?”_ 
 
-{{< img src="metrics/distributions/percentile_qvw.jpg" alt="A query value widget displaying a single value (7.33s) for the p95 aggregation of a single metric" style="width:80%;">}}
+{{< img src="metrics/distributions/percentile_qvw.jpg" alt="A query value widget displaying a single value (7.33s) for the 99.99 percentile aggregation of a single metric" style="width:80%;">}}
 
 * **Percentile thresholds on metric monitors**
   _“Alert me when the p99 of my application’s request latency is greater than 200 ms for the last 5 min.”_ 
