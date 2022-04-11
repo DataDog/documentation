@@ -104,7 +104,7 @@ Datadog APM for .NET Framework is built upon dependencies defined in specific ve
 ### Package versioning
 
 Datadog APM for .NET Framework practices [semantic versioning][7].
-As this relates to changing runtime support, it implies:
+Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
   - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower our level of support for one runtime but may add support for one.
