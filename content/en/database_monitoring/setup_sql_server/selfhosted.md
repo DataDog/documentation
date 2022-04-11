@@ -23,17 +23,12 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 
 Do the following steps to enable Database Monitoring with your database:
 
-1. [Configure the database](#configure-sql-server-settings)
-2. [Grant the Agent access to the database](#grant-the-agent-access)
-3. [Install the Agent](#install-the-agent)
+1. [Grant the Agent access to the database](#grant-the-agent-access)
+2. [Install the Agent](#install-the-agent)
 
 ## Before you begin
 
 {{% dbm-sqlserver-before-you-begin %}}
-
-## Configure SQL Server settings
-
-In the server properties for your SQL Server instance, navigate to **Server Properties** -> **Security** -> **SQL Server and Windows Authentication mode** and ensure that your SQL Server instance supports SQL Server authentication by enabling `SQL Server and Windows Authentication mode`.
 
 ## Grant the Agent access
 
