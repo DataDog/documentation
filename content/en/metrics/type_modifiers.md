@@ -76,7 +76,7 @@ Depending on the metric type you applied them to, the behavior differs:
 {{< /tabs >}}
 
 ### The `weighted()` modifier
-High tag churn is seen for tags like `pod name` or `container_name` especially when creating queries for cost management, capacity planning or autoscaling for containerized applications. To ensure mathematical accuracy of queries on gauges regardless of tag churn, there exists a `.weighted()` in-application modifier that guarantees metrics' values are properly weighted based on the lifespan of these frequently churning tags. 
+Tags like `pod name` or `container_name` cause high tag churn, especially when creating queries for cost management, capacity planning or autoscaling for containerized applications. To ensure mathematical accuracy of queries on gauges regardless of tag churn, there exists a `.weighted()` in-application modifier. The `.weighted()` modifier ensures that Datadog properly weights metric values based on the lifespan of these frequently churning tags. 
 
 The `.weighted()` modifier is automatically appended to queries on gauges only if both of the following conditions are met:
 - The gauge metric is submitted regularly, such that there is no interpolation over gaps
