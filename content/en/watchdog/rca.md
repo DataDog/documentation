@@ -5,6 +5,9 @@ further_reading:
 - link: "/watchdog/faq/root-cause-not-showing/"
   tag: "Documentation"
   text: "Root cause not showing"
+- link: "https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/"
+  tag: "Blog"
+  text: "Automated root cause analysis"
 ---
 
 ## Overview
@@ -47,8 +50,9 @@ The critical failure section highlights where and how the root cause first (and 
 
 ### Impact
 
-Watchdog RCA also identifies services indirectly affected by the root cause. Any performance degradation listed in Impact is expected to recover once the Critical Failure is resolved. For RUM users, Watchdog also automatically assesses which view paths and users were affected by the performance anomalies. [screenshot]
+Watchdog RCA also identifies services indirectly affected by the root cause. Any performance degradation listed in Impact is expected to recover once the Critical Failure is resolved. For RUM users, Watchdog also automatically assesses which view paths and users were affected by the performance anomalies.
 
+{{< img src="watchdog/rca/views_impacted.png" alt="Screenshot of Watchdog Root Cause Analysis detail showing Views impacted popup">}}
 
 ## Further reading
 
