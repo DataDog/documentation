@@ -81,7 +81,8 @@ Tags like `pod name` or `container_name` cause high tag churn, especially when c
 The `.weighted()` modifier is automatically appended to queries on gauges only if both of the following conditions are met:
 - The gauge metric is submitted regularly, such that there is no interpolation over gaps
 - The submission interval is correctly defined and set. 
-Submission intervals are a part of a metric's metadata that can be set at intake by either the Datadog Agent or our integrations; however, they can be modified on the [Metrics Summary page][4].
+
+Either the Datadog Agent or an integration sets the submission interval for a metric at time of intake. Modify submission intervals on the [Metrics Summary page][4].
 
 ## Modify a metric's type within Datadog
 
