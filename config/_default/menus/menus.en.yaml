@@ -961,6 +961,11 @@ main:
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
     weight: 705
+  - name: Guides
+    url: metrics/custom_metrics/guide
+    parent: metrics_custom_metrics
+    identifier: custom_metrics_guide
+    weight: 706
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1813,6 +1818,11 @@ main:
     parent: dbm_setup_postgres
     identifier: dbm_postgres_advanced_configuration
     weight: 105
+  - name: Troubleshooting
+    url: database_monitoring/setup_postgres/troubleshooting/
+    parent: dbm_setup_postgres
+    identifier: dbm_troubleshooting_postgres
+    weight: 106
   - name: Setting Up MySQL
     url: database_monitoring/setup_mysql/
     parent: dbm
@@ -1843,6 +1853,11 @@ main:
     parent: dbm_setup_mysql
     identifier: dbm_mysql_advanced_configuration
     weight: 105
+  - name: Troubleshooting
+    url: database_monitoring/setup_mysql/troubleshooting/
+    parent: dbm_setup_mysql
+    identifier: dbm_troubleshooting_mysql
+    weight: 106
   - name: Setting Up SQL Server
     url: database_monitoring/setup_sql_server/
     parent: dbm
@@ -1883,6 +1898,11 @@ main:
     parent: dbm
     identifier: dbm_troubleshooting
     weight: 7
+  - name: Guides
+    url: database_monitoring/guide/
+    parent: dbm
+    identifier: dbm_guides
+    weight: 8
   - name: Log Management
     url: logs/
     pre: log

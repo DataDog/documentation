@@ -1,21 +1,22 @@
 ---
-title: Ruby ランタイムメトリクス
-kind: ドキュメント
 description: Ruby アプリケーションのパフォーマンスに関する詳細情報を、トレースに紐づくランタイムメトリクスと共に取得します。
 further_reading:
-  - link: tracing/connect_logs_and_traces
-    tag: ドキュメント
-    text: ログとトレースの接続
-  - link: tracing/manual_instrumentation
-    tag: ドキュメント
-    text: アプリケーションを手動でインストルメントしてトレースを作成します。
-  - link: tracing/opentracing
-    tag: ドキュメント
-    text: アプリケーション全体に Opentracing を実装します。
-  - link: tracing/visualization/
-    tag: ドキュメント
-    text: サービス、リソース、トレースの詳細
+- link: tracing/connect_logs_and_traces
+  tag: ドキュメント
+  text: ログとトレースの接続
+- link: tracing/manual_instrumentation
+  tag: ドキュメント
+  text: アプリケーションを手動でインストルメントしてトレースを作成します。
+- link: tracing/opentracing
+  tag: ドキュメント
+  text: アプリケーション全体に Opentracing を実装します。
+- link: tracing/visualization/
+  tag: ドキュメント
+  text: サービス、リソース、トレースの詳細
+kind: ドキュメント
+title: Ruby ランタイムメトリクス
 ---
+
 <div class="alert alert-warning">
 この機能はクローズドベータ版です。ご使用のアカウントでこの機能を有効にするには、<a href="https://docs.datadoghq.com/help/">サポートチームまでお問い合わせください。</a>
 </div>
@@ -55,7 +56,7 @@ Kubernetes では、[DogstatsD ポートをホストポートにバインド][5]
 
 {{< get-metrics-from-git "ruby" >}}
 
-Datadog では、APM サービス詳細画面にこれらのメトリクスを表示し、これらのメトリクスに適用された `service` および `runtime-id` タグ付きの[デフォルトの Ruby ランタイムダッシュボード][7]を提供します。
+APM サービス詳細画面にこれらのメトリクスを表示するだけでなく、Datadog は[デフォルトの Ruby ランタイムダッシュボード][7]を提供します。
 
 ## その他の参考資料
 
@@ -66,5 +67,5 @@ Datadog では、APM サービス詳細画面にこれらのメトリクスを�
 [3]: https://app.datadoghq.com/apm/service
 [4]: /ja/agent/docker/#dogstatsd-custom-metrics
 [5]: /ja/developers/dogstatsd/?tab=kubernetes#agent
-[6]: /ja/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[6]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics

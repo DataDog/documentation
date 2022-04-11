@@ -346,7 +346,7 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
-Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][7].
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
@@ -412,17 +412,28 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 **Default**: `false`<br>
 Added in version 1.23.0.
 
+`DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
+: Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
+This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
+**Default**: `false`
+Added in version 2.5.2
+
+`DD_TRACE_METHODS`
+: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is a comma (`,`) separated list of method names. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+**Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync]```<br>
+Added in version 2.6.0
+
 #### Automatic instrumentation integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration.
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings property**: `DisabledIntegrationNames` <br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][5] section.
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][6] section.
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][5] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][6] section.<br>
 **Default**: `true`
 
 #### Experimental features
@@ -473,7 +484,7 @@ To use custom instrumentation in your .NET application:
 
 {{< /tabs >}}
 
-For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][6].
+For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][7].
 
 ## Configuring process environment variables
 
@@ -530,6 +541,6 @@ dotnet.exe example.dll
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
-[6]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[7]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
+[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
+[6]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
+[7]: /tracing/setup_overview/custom_instrumentation/dotnet/
