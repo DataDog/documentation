@@ -48,7 +48,7 @@ However, you can  enable advanced query functionality such as the calculation of
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
 
-{{< img src="metrics/distributions/graph_percentiles.mp4" alt="Distribution metric aggregations" style="width:80%;">}}
+{{< img src="metrics/distributions/graph_percentiles.mp4" alt="Distribution metric aggregations" video=true" >}}
 
 You can use percentile aggregations in a variety of other widgets and for alerting: 
 * **Single percentile value over any timeframe**
