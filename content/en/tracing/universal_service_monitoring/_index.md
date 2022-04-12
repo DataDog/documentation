@@ -51,7 +51,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 ## Enabling Universal Service Monitoring
 
-Enable the Universal Service Monitoring feature in your Agent by using one of the following methods depending on how your service is deployed and your Agent configured:
+Enable Universal Service Monitoring in your Agent by using one of the following methods depending on how your service is deployed and your Agent configured:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
