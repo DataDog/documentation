@@ -220,7 +220,7 @@ If there are errors that you don't understand, or if traces are reported as flus
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
+For more visibility, include `DD_TRACE_LOGGING_RATE=0`.
 
 **Traces were generated:**
 
