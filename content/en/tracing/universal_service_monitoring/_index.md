@@ -286,7 +286,6 @@ After you configure the Agent, wait about five minutes for your service to appea
 
 After enabling Universal Service Monitoring, you can:
 
-- Refine your services, environments, and deployments organization with [Unified Service Tagging][1].
 
 - Navigate to **APM > Service Map** to [visualize your services and their dependencies][2] in one place.
 
