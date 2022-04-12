@@ -35,7 +35,6 @@ Required Agent version
 Supported platforms
 : Linux kernel 4.4 and greater<br/>
 CentOS or RHEL 8.0 and greater<br/>
-Serverless platforms with eBPF <!-- Wasn't sure how to translate "Serverless platforms without eBPF are not supported" into something affirmative -->
 
 Supported application-layer protocols
 : HTTP<br/>
