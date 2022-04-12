@@ -35,7 +35,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Framewo
 | 4.5.1                   | 01/12/2016            | [Maintenance](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
 | 4.5                     | 01/12/2016            | [Maintenance](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
 
-Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3] and in our [Runtime support policy for .NET Framework APM](#runtime-support-policy-for-net-framework-apm).
+Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3] and in [Runtime support policy for .NET Framework APM](#runtime-support-policy-for-net-framework-apm).
 
 ## Supported processor architectures
 
@@ -95,7 +95,7 @@ Datadog APM for .NET Framework depends on the host operating system, .NET Framew
 
 | **Level**                                              | **Support provided**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact our customer support team for special requests.][6]                                                             |
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][6]                                                             |
 | <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
@@ -107,7 +107,7 @@ Datadog APM for .NET Framework practices [semantic versioning][7].
 Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
-  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower our level of support for one runtime but may add support for one.
+  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime but may add support for one.
   - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 
 ## Further reading

@@ -33,7 +33,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommeded       |
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommeded       |
 
- Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions) and in [Runtime support policy for .NET Core APM][13].
+ Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET Core APM](#runtime-support-policy-for-net-core-apm).
 
 ## Supported processor architectures
 
@@ -115,7 +115,7 @@ Datadog APM for .NET Core practices [semantic versioning][11].
 Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
-  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower our level of support for one runtime but may add support for one.
+  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime but may add support for one.
   - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 
 ## Further reading
@@ -129,7 +129,7 @@ Version updates imply the following changes to runtime support:
 [5]: /help/
 [6]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
 [7]: https://github.com/dotnet/runtime/issues/23938
-[8]: https://docs.datadoghq.com/agent/basic_agent_usage/?tab=agentv6v7
-[9]: https://docs.datadoghq.com/agent/basic_agent_usage/?tab=agentv5
+[8]: /agent/basic_agent_usage/?tab=agentv6v7
+[9]: /agent/basic_agent_usage/?tab=agentv5
 [10]: https://www.datadoghq.com/support/
 [11]: https://semver.org/
