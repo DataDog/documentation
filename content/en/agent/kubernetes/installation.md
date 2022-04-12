@@ -31,11 +31,11 @@ This page provides instructions on installing the Datadog Agent in a Kubernetes 
 
 - [Datadog Operator](?tab=operator)
 - [Helm](?tab=helm)
-- [DaemonSet][1]
+- [DaemonSet](?tab=daemonset)
 
-For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see the [Kubernetes distributions][2] documentation.
+For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see the [Kubernetes distributions][1] documentation.
 
-For dedicated documentation and examples for monitoring the Kubernetes control plane, see the [Kubernetes control plane monitoring][3] documentation.
+For dedicated documentation and examples for monitoring the Kubernetes control plane, see the [Kubernetes control plane monitoring][2] documentation.
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -335,21 +335,19 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 
 ## Next steps
 
-To configure Live Containers, see the [Live Containers][3] documentation.
+To configure Live Containers, see the [Live Containers][2] documentation.
 
-To collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, or reference the full list of available environment variables, see [Configure the Datadog Agent on Kubernetes][4].
+To collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, or reference the full list of available environment variables, see [Configure the Datadog Agent on Kubernetes][3].
 
-To configure integrations, see [Integrations & Autodiscovery][5].
+To configure integrations, see [Integrations & Autodiscovery][4].
 
-To set up APM, see [Kubernetes Trace Collection][6].
+To set up APM, see [Kubernetes Trace Collection][5].
 
-To set up log collection, see [Kubernetes Log Collection][7].
+To set up log collection, see [Kubernetes Log Collection][6].
 
-
-[1]: tab=daemonset
-[2]: /agent/kubernetes/control_plane
-[3]: /infrastructure/livecontainers/?tab=helm#configuration
-[4]: /agent/kubernetes/configuration/
-[5]: /agent/kubernetes/integrations/
-[6]: /agent/kubernetes/apm/
-[7]: /agent/kubernetes/log/
+[1]: /agent/kubernetes/control_plane
+[2]: /infrastructure/livecontainers/?tab=helm#configuration
+[3]: /agent/kubernetes/configuration/
+[4]: /agent/kubernetes/integrations/
+[5]: /agent/kubernetes/apm/
+[6]: /agent/kubernetes/log/
