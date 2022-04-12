@@ -504,6 +504,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Get a list of RUM events returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_2680821282",
+      "description": "Get a list of RUM events returns \"OK\" response with pagination"
     }
   ],
   "SearchRUMEvents": [
