@@ -48,19 +48,11 @@ Watchdog looks for irregularities in metrics, like a sudden spike in the hit rat
 
 ## Alert details
 
-Clicking on the alert shows further details about the detected irregularity:
-
-{{< img src="watchdog/watchdog_story.png" alt="The watchdog alert panel showing a line graph with a box around the alert "  >}}
-
-The graph in this alert shows the latency values of the ELB in three different availability zones. Watchdog detected similar anomalies in this metric from a single load balancer enabled in three availability zones, and automatically grouped these findings together in a single alert. After a period of consistently low latency, the metric in all three AZs rises sharply—in the highlighted area of the graph, which indicates the time frame of the anomaly.
-
-### Expected bounds
-
-Selecting *Show expected bounds* in the upper-right corner reveals upper and lower thresholds of expected behavior on the graph.
+Clicking on a Watchdog alert shows further details about the detected irregularity.
 
 ### Archiving alerts
 
-In the Watchdog alert's side panel, click the folder icon in the upper-right corner to archive it. Archiving hides the alert from the feed, as well as other places in the Datadog application, like the home page. If an alert is archived, the pink Watchdog binoculars icon does not show up next to the relevant service or resource.
+In the Watchdog alert's side panel, click the folder icon in the upper-right corner to archive it. Archiving hides the alert from the feed, as well as other places in the Datadog site, like the home page. If an alert is archived, the pink Watchdog binoculars icon does not show up next to the relevant service or resource.
 
 To see archived alerts, select the checkbox option to "Show N archived alerts" in the top left. The option is only available if there is at least one alert archived. You can also see who archived each alert and when it was archived, and restore archived alerts to your feed.
 
@@ -68,13 +60,11 @@ To see archived alerts, select the checkbox option to "Show N archived alerts" i
 
 ### Correlated dashboards
 
-To speed up further investigations, Datadog may suggest some of your dashboards that are related to the alert. In this case, Datadog will highlight which of the dashboard's metrics are related to the insights in the alert. 
+To speed up further investigations, Datadog may suggest some of your dashboards that are related to the alert. In this case, Datadog highlights which of the dashboard's metrics are related to the insights in the alert.
 
 ### Monitors
 
-Monitors associated with your alerts are displayed in the Watchdog alert's side panel. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
-
-{{< img src="watchdog/watchdog_monitors.png" alt="The Watchdog Alert side panel showing a list with five monitors in alert state and two suggested monitors " style="width:65%;">}}
+Monitors associated with your alerts are displayed on the Monitors tab. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
 
 Additionally, Watchdog suggests one or more monitors that are configured to trigger if the alert happens again. Click **Enable Monitor** to enable them for your organization. See [Watchdog Monitor][12] to learn how to create a Watchdog monitor.
 
