@@ -289,7 +289,7 @@ After enabling Universal Service Monitoring, you can:
 
 - Navigate to **APM > Service Map** to [visualize your services and their dependencies][2] in one place.
 
-- Click into specific service pages to see golden signal metrics (requests, errors, and duration), and and correlate these against recent code changes with [Deployment Tracking][3]. 
+- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and and correlate these against recent code changes with [Deployment Tracking][3]. 
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `trace.universal.http.*` metrics.
 
