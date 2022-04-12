@@ -17,7 +17,7 @@ further_reading:
 
 The Python APM Client library follows a [versioning policy][58] that specifies the support level for the different versions of the library and Python runtime. 
 
-Currently, two release branches are supported:
+Two release branches are supported:
 
 | Release    | Support level        |
 |------------|----------------------|
