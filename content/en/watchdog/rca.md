@@ -46,7 +46,7 @@ Watchdog never classifies degraded application performance, such as higher laten
 
 ### Critical failure
 
-The critical failure section highlights where and how the root cause first (and most directly) causes degraded application performance. Critical failures always include a latency or error rate increase.
+The Critical Failure section highlights where and how the root cause first (and most directly) causes degraded application performance. Critical failures always include a latency or error rate increase.
 
 ### Impact
 
