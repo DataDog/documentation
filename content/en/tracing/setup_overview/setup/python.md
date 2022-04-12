@@ -58,11 +58,9 @@ For example, if your application is started with `python app.py` then:
 ddtrace-run python app.py
 ```
 
-### Upgrading
+### Upgrading to v1
 
-Beginning with v1.0.0, incompatible changes will only be released in a major version. Therefore, as long as your application uses the public API of ddtrace, you can upgraded it in your application requirements to the current stable release. The [v1.0.0 Release Notes][10] summarize and detail all the breaking changes.
-
-If your application is set up with `ddtrace<1.0`, we recommend you upgrade to `>0.60.0,<1`. The library provides [Python warnings][11] for deprecations with an additional warning category `ddtrace.DDTraceDeprecationWarning`. See the [Upgrade 0.x][9] guide for more information.
+If you are upgrading to ddtrace v1, review the [upgrade guide][9] and the [release notes][10] in the library documentation for full details.
 
 ### Configure the Datadog Agent for APM
 
@@ -240,4 +238,3 @@ Enable [connecting logs and trace injection][8].
 [8]: /tracing/connect_logs_and_traces/python/
 [9]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 [10]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
-[11]: https://docs.python.org/3/library/warnings.html
