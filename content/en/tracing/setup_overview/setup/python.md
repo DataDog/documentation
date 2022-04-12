@@ -26,7 +26,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The Python library supports CPython versions 2.7 and 3.5-3.10 on Linux, MacOS and Windows. For more information about our Python version support, see the [Compatibility Requirements][1] page.
+The Python library supports CPython versions 2.7 and 3.5-3.10 on Linux, MacOS and Windows. For more information about Datadog's Python version support, see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
