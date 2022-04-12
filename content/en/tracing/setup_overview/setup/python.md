@@ -26,9 +26,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
-
-When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][2] to start receiving profiling data from your app.
+The Python library supports CPython versions 2.7 and 3.5-3.10 on Linux, MacOS and Windows. For more information about our Python version support, see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -59,6 +57,12 @@ For example, if your application is started with `python app.py` then:
 ```shell
 ddtrace-run python app.py
 ```
+
+### Upgrading
+
+Beginning with v1.0.0, incompatible changes will only be released in a major version. Therefore, as long as your application uses the public API of ddtrace, you can upgraded it in your application requirements to the current stable release. The [v1.0.0 Release Notes][10] summarize and detail all the breaking changes.
+
+If your application is set up with `ddtrace<1.0`, we recommend you upgrade to `>0.60.0,<1`. The library provides [Python warnings][11] for deprecations with an additional warning category `ddtrace.DDTraceDeprecationWarning`. See the [Upgrade 0.x][9] guide for more information.
 
 ### Configure the Datadog Agent for APM
 
@@ -234,3 +238,6 @@ Enable [connecting logs and trace injection][8].
 [6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
 [8]: /tracing/connect_logs_and_traces/python/
+[9]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
+[10]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
+[11]: https://docs.python.org/3/library/warnings.html
