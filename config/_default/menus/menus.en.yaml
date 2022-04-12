@@ -492,6 +492,11 @@ main:
     identifier: watchdog_top_level
     pre: watchdog
     weight: 50000
+  - name: RCA
+    url: watchdog/rca/
+    identifier: watchdog_rca
+    parent: watchdog_top_level
+    weight: 2
   - name: Events
     url: events/
     identifier: events_top_level
