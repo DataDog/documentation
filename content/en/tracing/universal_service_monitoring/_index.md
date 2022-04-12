@@ -38,7 +38,7 @@ CentOS or RHEL 8.0 and greater<br/>
 
 Supported application-layer protocols
 : HTTP<br/>
-HTTPS (openSSL)
+HTTPS (OpenSSL)
 
 <div class="alert alert-info">
 If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
