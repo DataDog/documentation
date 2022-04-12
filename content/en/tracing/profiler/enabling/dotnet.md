@@ -55,6 +55,10 @@ Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
    Run the installer with administrator privileges.
 
+<div class="alert alert-warning">
+  <strong>Note:</strong> Below, you will have to set environment variables to enable the profiler. We <strong>do not recommend</strong> setting those environment variables at machine level. If you do that, every .NET application running on the machine will be profiled and this will incur a significant overhead on the CPU and memory of your machine.
+</div>
+
 {{< tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
