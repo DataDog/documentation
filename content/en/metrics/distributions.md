@@ -44,7 +44,7 @@ Like other metric types, such as `gauges` or `histograms`, distributions have th
 
 However, you can  enable advanced query functionality such as the calculation of globally accurate percentile aggregations for all queryable tags on your distribution on the Metrics Summary page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also unlocks threshold queries.
 
-{{< img src="metrics/distributions/advancedquery.mp4" alt="A user enabling advanced query functionality by clicking on edit under the advanced section" video=true >}}
+{{< img src="metrics/distributions/advancedquery.mp4" alt="A user enabling advanced query functionality by clicking on edit under the advanced section" video=true width=65% >}}
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
 
