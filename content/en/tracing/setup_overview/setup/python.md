@@ -26,9 +26,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
-
-When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][2] to start receiving profiling data from your app.
+The Python library supports CPython versions 2.7 and 3.5-3.10 on Linux, MacOS and Windows. For more information about Datadog's Python version support, see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -59,6 +57,10 @@ For example, if your application is started with `python app.py` then:
 ```shell
 ddtrace-run python app.py
 ```
+
+### Upgrading to v1
+
+If you are upgrading to ddtrace v1, review the [upgrade guide][9] and the [release notes][10] in the library documentation for full details.
 
 ### Configure the Datadog Agent for APM
 
@@ -234,3 +236,5 @@ Enable [connecting logs and trace injection][8].
 [6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
 [8]: /tracing/connect_logs_and_traces/python/
+[9]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
+[10]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
