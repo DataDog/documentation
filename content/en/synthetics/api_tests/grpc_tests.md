@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/"
+  tag: "Blog"
+  text: "Monitor your gRPC APIs with Datadog"
 - link: 'https://learn.datadoghq.com/course/view.php?id=39'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'

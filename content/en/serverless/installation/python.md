@@ -2,15 +2,15 @@
 title: Instrumenting Python Serverless Applications
 kind: documentation
 further_reading:
-- link: 'serverless/distributed_tracing/'
-  tag: 'Documentation'
-  text: 'Tracing Serverless Applications'
-- link: 'serverless/custom_metrics/'
-  tag: 'Documentation'
-  text: 'Submitting Custom Metrics from Serverless Applications'
-- link: '/serverless/guide/troubleshoot_serverless_monitoring'
-  tag: 'Documentation'
-  text: 'Troubleshoot Serverless Monitoring'
+    - link: 'serverless/distributed_tracing/'
+      tag: 'Documentation'
+      text: 'Tracing Serverless Applications'
+    - link: 'serverless/custom_metrics/'
+      tag: 'Documentation'
+      text: 'Submitting Custom Metrics from Serverless Applications'
+    - link: '/serverless/guide/troubleshoot_serverless_monitoring'
+      tag: 'Documentation'
+      text: 'Troubleshoot Serverless Monitoring'
 aliases:
     - /serverless/datadog_lambda_library/python/
     - /serverless/guide/python/
@@ -33,7 +33,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     npm install -g @datadog/datadog-ci
     ```
 
-2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in the interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines *after* your normal deployment.
+2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in the interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
 
     ```sh
     datadog-ci lambda instrument -i
@@ -80,6 +80,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     - Replace `<aws_region>` with the AWS region name.
 
     Additional parameters can be found in the [CLI documentation][3].
+
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/getting_started/site/
@@ -236,6 +237,7 @@ The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to 
     - Set the environment variable `DD_SITE` with your [Datadog site][2] to send the telemetry to.
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
     - Set the environment variable `DD_TRACE_ENABLED` to `true`.
+
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://docs.datadoghq.com/getting_started/site/
