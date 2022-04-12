@@ -89,7 +89,7 @@ Don’t see your desired libraries? Datadog is continually adding additional sup
 
 ## Runtime support policy for .NET Framework APM
 
-Datadog APM for .NET Framework is built upon dependencies defined in specific versions of the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. When a version of those dependencies are no longer supported by its maintainers, Datadog APM for .NET Framework limits its support on that version of the library as well.
+Datadog APM for .NET Framework depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, Datadog APM for .NET Framework also limits its support for that version.
 
 ### Levels of support
 
