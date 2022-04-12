@@ -47,7 +47,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 ### Prerequisites
 
 - Datadog Agent 7.32 or higher is installed alongside your service. Installing a tracing library is _not_ required.
-- [Unified Service Tagging][1] tags for environment, service, and version have been applied to your deployment.
+- [Unified Service Tagging][1] tags for `env` and `service` have been applied to your deployment. The `version` tag is optional.
 
 ## Enabling Universal Service Monitoring
 
