@@ -497,6 +497,11 @@ main:
     identifier: watchdog_rca
     parent: watchdog_top_level
     weight: 2
+  - name: Faulty Deployment Detection
+    url: watchdog/faulty_deployment_detection/
+    identifier: watchdog_faulty_deployment_detection
+    parent: watchdog_top_level
+    weight: 3
   - name: Events
     url: events/
     identifier: events_top_level
