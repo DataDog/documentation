@@ -16,30 +16,34 @@ further_reading:
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey: Indexing" >}}
 
-With APM, both the [ingestion of traces to Datadog][1] as well as the retention of those traces for 15 days are fully customizable.
+With APM, both the [ingestion][1] of traces as well as the **retention** of those traces for 15 days are fully customizable.
 
 To track or monitor your volume of ingested and indexed data, see the [Usage Metrics][2] documentation.
 
 ## Retention filters
 
-After spans have been ingested by Datadog, some are kept for 15 days according to the retention filters that have been set on your account. By default, the only retention filter enabled is the [Intelligent Retention Filter](#datadog-intelligent-retention-filter), which retains error traces and traces from different latency distributions.
+After spans have been ingested by Datadog, some are kept for 15 days according to the retention filters that have been set on your account.
+
+By default, two retention filters are enabled for your account:
+- The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query can be configured. For instance to only capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
+- The [Intelligent Retention Filter](#datadog-intelligent-retention-filter) retains diverse error traces and traces from different latency distributions.
 
 You can also create any number of additional [tag-based retention filters](#create-your-own-retention-filter) for your services.
 
 **Note**: Admin rights are required to create, modify, or disable retention filters.
 
-{{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Retention Filters" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filter_page.png" style="width:100%;" alt="Retention Filters Page" >}}
 
-In Datadog, on the [Retention Filters tab][3], you can see the following information:
+In Datadog, on the [Retention Filters tab][3], you can see a list of all retention filters:
 
 Filter Name
-: The name of each filter used to index spans. By default, the only filter is [Datadog Intelligent Retention](#datadog-intelligent-retention-filter).
+: The name of each filter used to index spans. By default, the only filter is [Datadog Intelligent Retention Filter](#datadog-intelligent-retention-filter).
 
 Filter Query
 : The tag-based query for each filter.
 
 Retention Rate
-: A percentage from 0 to 100% of how many matching spans are indexed by Datadog.
+: A percentage from 0 to 100% of how many matching spans are indexed.
 
 Spans Indexed
 : The number of spans indexed by the filter over the selected time period.
@@ -50,15 +54,15 @@ Last Updated
 Enabled toggle
 : Allows filters to be turned on and off.
 
-In addition to the `Spans Indexed` column for each retention filter, there is also the `datadog.estimated_usage.apm.indexed_spans` metric, which you can use to track spans that are indexed by retention filters.
+Retention filters order matters: if a span matches a first retention filter in the list, it will either be kept or dropped (depending on the retention rate) but will never be caught by another matching retention filter lower in the list.
 
-For more information, read the [Usage Metrics][2] documentation, or see the [dashboard][4] available in your account.
+The `Spans Indexed` column for each retention filter is powered by the `datadog.estimated_usage.apm.indexed_spans` metric, which you can use to track your indexed span usage. For more information, read the [Usage Metrics][2] documentation, or see the [dashboard][4] available in your account.
 
 <div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). The only way to change how much tracing data is ingested is through <a href="/tracing/trace_ingestion/mechanisms">ingestion controls</a>.</div>
 
 ### Datadog intelligent retention filter
 
-Intelligent retention is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [service entry spans][5] are indexed for the traces kept by the intelligent retention filter.
+The intelligent retention filter is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [service entry spans][5] are indexed for the traces kept by the intelligent retention filter.
 
 For 30 days, intelligent retention retains:
 
@@ -69,21 +73,24 @@ For 30 days, intelligent retention retains:
 
 **Note**: Because intelligent retention chooses spans intentionally and not randomly, spans that are retained only by the intelligent filter are **not** included in the [Trace explorer timeseries view][6]. Aggregated views (timeseries, toplist, table) are available only for spans retained by [custom retention filters](#create-your-own-retention-filter).
 
-If there are specific tags, facets, or groups of traces that you want to investigate _in detail_, meaning you want to retain more than what Intelligent Retention retains, then [create your own retention filter](#create-your-own-retention-filter). For example, you might want to keep more than a representative selection of errors from your production environment. To ensure _all_ production errors are retained and available for search and analytics for 15 days, create a 100 percent retention filter scoped to `env:prod` and `status:error`. As discussed below, this may have an impact on your bill.
+Spans indexed by the intelligent retention filter are **not counted towards the usage** of indexed spans, and hence **do not impact your bill**.
+
+If there are specific tags, facets, or groups of traces that you want to investigate _in detail_, meaning you want to retain more than what Intelligent Retention retains, then [create your own retention filter](#create-your-own-retention-filter).
 
 ### Create your own retention filter
 
-{{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.mp4" style="width:100%;" alt="Span Indexing" video=true >}}
+Decide which spans are indexed and retained for 15 days by creating, modifying, and disabling additional filters based on tags. Set a percentage of spans matching each filter to be retained. Any span that is retained has its corresponding trace saved as well, and when it is viewed in the [Trace Explorer][7], the complete trace is available.
 
-To customize what spans are indexed and retained for 15 days, you can create, modify, and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained has its corresponding trace saved as well, and when it is viewed, the complete trace is available. In order to be searched by tag in [Explorer][7], however, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
+**Note:** In order to be searched by tag in the Trace Explorer, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
 
-1. Name your filter.
-2. Set the tags you would like to index spans that match **all** of.
-3. Select whether this filter retains any span that matches the criteria, or only [service entry spans][5].
-4. Set a percentage of spans matching these tags to be indexed.
-5. Save your new filter.
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/create_retention_filter.png" style="width:90%;" alt="Create Retention Filter">}}
 
-Selecting "Top-Level Spans for Services Only" means the retention filter retains only the selected proportion of [service entry spans][5] of the service and indexes them. Use this if you want to only index service entry spans with matching tags. If "All Spans" is selected, the retention filter retains the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and indexes them. This may have an impact on your bill, and the visual indicator within the app while setting a retention filter informs you how many matching spans have been detected over the time period.
+1. Define the retention query by adding any span tag. Choose to retain _all spans_ with the defined tags, only _[service entry spans][5]_ (selected by default), or only _[trace root spans][8]_.
+2. Set a percentage of spans matching these tags to be indexed.
+3. Name the filter.
+4. Save the new filter.
+
+When creating a new filter or editing the retention rate of an existing filter, you get an estimation of the global indexing volume impact, as a percentage increase or decrease of the volume.
 
 Filters are retained in a serial order. If you have an upstream filter that retains spans with the `resource:POST /hello_world` tag, those spans do not show up in the **Edit** window of a downstream filter that searches for spans with the same tag because they have been retained by the upstream filter.
 
@@ -103,4 +110,5 @@ For example, you can create filters to keep all traces for:
 [4]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [5]: /tracing/visualization/#service-entry-span
 [6]: /tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
-[7]: /tracing/trace_explorer/#historical-search-mode
+[7]: /tracing/trace_explorer/?tab=listview#indexed-spans-search-with-15-day-retention
+[8]: /tracing/visualization/#trace-root-span
