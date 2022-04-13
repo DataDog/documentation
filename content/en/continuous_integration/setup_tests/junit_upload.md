@@ -117,7 +117,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
 `--logs` **(beta)**
-: Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, `<failure>` will be loaded. Logs from elements inside a `<testcase>` are automatically connected to test.<br/>
+: Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Default**: `false`<br/>
 **Note**: Logs are billed separately from CI Visibility.
 
@@ -146,7 +146,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 `DD_CIVISIBILITY_LOGS_ENABLED` **(beta)**
-: Same as the `--logs` flag: Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, `<failure>` will be loaded. Logs from elements inside a `<testcase>` are automatically connected to test.<br/>
+: Same as the `--logs` flag: Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Default**: `false`
 
 ## Collecting repository and commit metadata
