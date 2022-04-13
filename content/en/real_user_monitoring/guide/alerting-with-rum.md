@@ -9,6 +9,9 @@ further_reading:
     - link: '/monitors/create/types/real_user_monitoring/'
       tag: 'Documentation'
       text: 'RUM Monitor'
+    - link: '/monitors/'
+      tag: 'Documentation'
+      text: 'Alerting'
 ---
 
 ## Overview
