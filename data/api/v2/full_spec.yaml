@@ -1615,6 +1615,15 @@ components:
       required:
       - name
       type: object
+    IdPMetadataFormData:
+      description: The form data submitted to upload IdP metadata
+      properties:
+        idp_file:
+          description: The IdP metadata XML file
+          format: binary
+          type: string
+          x-mimetype: application/xml
+      type: object
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -11189,6 +11198,43 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/saml_configurations/idp_metadata:
+    post:
+      description: 'Endpoint for uploading IdP metadata for SAML setup.
+
+
+        Use this endpoint to upload or replace IdP metadata for SAML login configuration.'
+      operationId: UploadIdPMetadata
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IdPMetadataFormData'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Upload IdP metadata
+      tags:
+      - Organizations
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -13100,6 +13146,12 @@ tags:
     that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
     only be performed by\na user who has the `Manage Tags for Metrics` permission."
   name: Metrics
+- description: Create, edit, and manage your organizations. Read more about [multi-org
+    accounts](https://docs.datadoghq.com/account_management/multi_organization).
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/multi_organization
+  name: Organizations
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
 - description: Search or aggregate your RUM events over HTTP.
