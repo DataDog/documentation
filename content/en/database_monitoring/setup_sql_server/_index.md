@@ -9,6 +9,8 @@ disable_sidebar: true
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
+<div class="alert alert-warning">Database Monitoring for SQL Server is in private beta. Contact your Customer Success Manager to request access to the beta.</div>
+
 ### SQL Server versions supported
 
 |                 | Self-hosted | Azure | AWS RDS | Google Cloud SQL |

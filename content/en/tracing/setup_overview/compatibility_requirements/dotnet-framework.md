@@ -17,34 +17,34 @@ further_reading:
 ---
 
 
-- The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
-
-- The .NET Tracer library for Datadog is open source. For more information, see the [.NET Tracer repository][1].
+The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It is open source. For more information, see the [.NET Tracer repository][1].
 
 ## Supported .NET Framework runtimes
+
 The .NET Tracer supports automatic instrumentation on the following .NET Framework versions. It also supports [.NET Core][2].
 
-| .NET Framework Version  | Microsoft End of Life | APM Supported in 1.x | APM Supported in 2.x |
-| ----------------------- | --------------------- | -------------------- | -------------------- |
-| 4.8                     |                       | Yes                  | Yes                  |
-| 4.7.2                   |                       | Yes                  | Yes                  |
-| 4.7                     |                       | Yes                  | Yes                  |
-| 4.6.2                   |                       | Yes                  | Yes                  |
-| 4.6.1                   | 04/26/2022            | Yes                  | Yes                  |
-| 4.6                     | 04/26/2022            | Yes                  | No                   |
-| 4.5.2                   | 04/26/2022            | Yes                  | No                   |
-| 4.5.1                   | 01/12/2016            | Yes                  | No                   |
-| 4.5                     | 01/12/2016            | Yes                  | No                   |
+| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version | Datadog End of Life |
+| ----------------------- | --------------------- | ----------------------------------- | --------------- | ------------------- |
+| 4.8                     |                       | [GA](#support-ga)                   | latest          |                     |
+| 4.7.2                   |                       | [GA](#support-ga)                   | latest          |                     |
+| 4.7                     |                       | [GA](#support-ga)                   | latest          |                     |
+| 4.6.2                   |                       | [GA](#support-ga)                   | latest          |                     |
+| 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | latest          |                     |
+| 4.6                     | 04/26/2022            | [Maintenance](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
+| 4.5.2                   | 04/26/2022            | [Maintenance](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
+| 4.5.1                   | 01/12/2016            | [Maintenance](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
+| 4.5                     | 01/12/2016            | [Maintenance](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
 
- Additional information on .NET Framework support policy can be found within [Microsoft's .NET Framework Lifecycle Policy][3]. 
+Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3] and in [Runtime support policy for .NET Framework APM](#runtime-support-policy-for-net-framework-apm).
 
 ## Supported processor architectures
-The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                                                 |
-| ------------------------------------------------------------------------|
-| Windows x86 (`win-x86`)                                                 |
-| Windows x64 (`win-x64`)                                                 |
+The .NET Tracer supports automatic instrumentation on the following architectures:
+ 
+| Processor architectures                                                 | Support level         | Package version                        |
+| ------------------------------------------------------------------------|-----------------------|----------------------------------------|
+| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | latest                                 |
+| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | latest                                 |
 
 ## Integrations
 
@@ -80,6 +80,37 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 
 Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
+## Supported Datadog Agent versions
+
+| **Datadog Agent version**   | **Package version** |
+|-----------------------------|---------------------|
+| [7.x][10]                   | latest              |
+| [6.x][10]                   | latest              |
+| [5.x][11]                   | latest              |
+
+## Runtime support policy for .NET Framework APM
+
+Datadog APM for .NET Framework depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, Datadog APM for .NET Framework also limits its support for that version.
+
+### Levels of support
+
+| **Level**                                              | **Support provided**                                                                                                                                                          |
+|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][6]                                                             |
+| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
+| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
+
+### Package versioning
+
+Datadog APM for .NET Framework practices [semantic versioning][7].
+Version updates imply the following changes to runtime support:
+
+  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
+  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime but may add support for one.
+  - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -89,3 +120,5 @@ Don’t see your desired libraries? Datadog is continually adding additional sup
 [3]: https://docs.microsoft.com/en-us/lifecycle/products/microsoft-net-framework
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
 [5]: /help/
+[6]: https://www.datadoghq.com/support/
+[7]: https://semver.org/

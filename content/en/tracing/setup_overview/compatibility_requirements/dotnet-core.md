@@ -17,33 +17,35 @@ further_reading:
 ---
 
 
-- The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
-
-- The .NET Tracer library for Datadog is open source. For more information, see the [.NET Tracer repository][1].
+The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It is open source. For more information, see the [.NET Tracer repository][1].
 
 ## Supported .NET Core runtimes
+
 The .NET Tracer supports automatic instrumentation on the following .NET Core versions. It also supports [.NET Framework][2].
 
-| Version              | Microsoft End of Life | APM Supported in 1.x | APM Supported in 2.x |
+| Version              | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
-| .NET 6               |                       | No                   | Yes                  |
-| .NET 5               |                       | Yes                  | Yes                  |
-| .NET Core 3.1        | 12/03/2022            | Yes                  | Yes                  |
-| .NET Core 2.1        | 08/21/2021            | Yes                  | Yes                  |
+| .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
+| .NET 5               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
+| .NET Core 3.1        | 12/03/2022            | [GA](#support-ga)    | latest               |
+| .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | latest               |
+| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommeded       |
+| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommeded       |
+| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommeded       |
 
- Additional information on .NET Core support policy can be found within [Microsoft's .NET Core Lifecycle Policy][3]. 
+ Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET Core APM](#runtime-support-policy-for-net-core-apm).
 
 ## Supported processor architectures
+
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                                                 |
-| ------------------------------------------------------------------------|
-| Windows x86 (`win-x86`)                                                 |
-| Windows x64 (`win-x64`)                                                 |
-| Linux x64 (`linux-x64`)                                                 |
-| Alpine Linux x64 (`linux-musl-x64`)                                     |
-| Linux ARM64 (`linux-arm64`)<br><br>.NET 5+ only, added in version 1.27.0|
-
+| Processor architectures                   | Support level         | Package version                        |
+| ------------------------------------------|-----------------------|----------------------------------------|
+| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | latest                                 |
+| Windows x64 (`win-x64`)                   | [GA](#support-ga)     | latest                                 |
+| Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | latest                                 |
+| Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     | latest                                 |
+| Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ only, added in version 1.27.0  |
 
 ## Integrations
 
@@ -77,7 +79,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
-## Out of support .NET Core versions
+## End of life .NET Core versions
 
 The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET Core 3.1, .NET 5, or .NET 6. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
@@ -85,6 +87,37 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions re
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
 | JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
 | Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][7]        |
+
+## Supported Datadog Agent versions
+
+| **Datadog Agent version**   | **Package version** |
+|-----------------------------|---------------------|
+| [7.x][8]                    | Latest              |
+| [6.x][8]                    | Latest              |
+| [5.x][9]                    | Latest              |
+
+## Runtime support policy for .NET Core APM
+
+Datadog APM for .NET Core depends on the host operating system, .NET Core runtime, certain .NET Core libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Core. When the external software no longer supports a version of .NET Core, Datadog APM for .NET Core also limits its support for that version.
+
+### Levels of support
+
+| **Level**                                              | **Support provided**                                                                                                                                                          |
+|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][10]                                                             |
+| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
+| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
+
+### Package versioning
+
+Datadog APM for .NET Core practices [semantic versioning][11].
+Version updates imply the following changes to runtime support:
+
+  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
+  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime but may add support for one.
+  - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 
 ## Further reading
 
@@ -97,3 +130,7 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions re
 [5]: /help/
 [6]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
 [7]: https://github.com/dotnet/runtime/issues/23938
+[8]: /agent/basic_agent_usage/?tab=agentv6v7
+[9]: /agent/basic_agent_usage/?tab=agentv5
+[10]: https://www.datadoghq.com/support/
+[11]: https://semver.org/

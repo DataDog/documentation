@@ -39,6 +39,8 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 ### SQL Server
 
+<div class="alert alert-warning">Database Monitoring for SQL Server is in private beta. Contact your Customer Success Manager to request access to the beta.</div>
+
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
 
