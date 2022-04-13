@@ -83,11 +83,15 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
 
+### Web and mobile vitals
+
+View performance scores and metrics for [browser applications][5] such as Core Web Vitals and Mobile Vitals for [iOS][6] and [Android applications][7].
+
 ## Explore Datadog Session Replay
 
 ### Session replays
 
-Watch [browser recordings][5] of real users interacting with your website.
+Watch [browser recordings][8] of real users interacting with your website.
 
 ## Further Reading
 
@@ -97,4 +101,7 @@ Watch [browser recordings][5] of real users interacting with your website.
 [2]: /real_user_monitoring/explorer/visualize/
 [3]: /real_user_monitoring/connect_rum_and_traces/
 [4]: /real_user_monitoring/error_tracking/
-[5]: /real_user_monitoring/session_replay/
+[5]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[6]: /real_user_monitoring/ios/mobile_vitals/
+[7]: /real_user_monitoring/android/mobile_vitals/
+[8]: /real_user_monitoring/session_replay/
