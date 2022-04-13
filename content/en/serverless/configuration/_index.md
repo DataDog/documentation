@@ -418,7 +418,7 @@ If you are using the [Forwarder Lambda function][4] to collect traces and logs, 
     1. obtain the Datadog trace ID using `dd-trace` and add it to your log
     2. clone the default Lambda log pipeline, which is read-only
     3. enable the cloned pipeline while disable the default one
-    4. update the cloned pipeline to [parse][20] the Datadog trace ID into the `dd.trace_id` attribute. For example, `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}` matches `[INFO] dd.trace_id=4887065908816661012`.
+    4. update the [Grok parser][20] rules of the cloned pipeline to parse the Datadog trace ID into the `dd.trace_id` attribute. For example, use rule `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` for logs that look like `[INFO] dd.trace_id=4887065908816661012 My log message`.
 
 ## Link errors to your source code
 
