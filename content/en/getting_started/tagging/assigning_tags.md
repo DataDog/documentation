@@ -21,7 +21,7 @@ Tagging is used throughout Datadog to query the machines and metrics you monitor
 Tags can be configured in several different ways:
 
 - In the Datadog Agent [configuration file](#configuration-file) or each individual integration configuration file
-- Through the the Datadog [UI](#ui)
+- Through the Datadog [UI](#ui)
 - With the Datadog [API](#api)
 - With the [DogStatsD](#dogstatsd)
 
