@@ -16,13 +16,13 @@ further_reading:
 
 ## Overview
 
-Real User Monitoring allows you to create alerts which notify you about anomalous behavior in your applications. You can create RUM monitors with complex conditions, predefined thresholds, and multiple queries to calculate averages, ratios, and performance indicator metrics (such as Apdex).
+Real User Monitoring allows you to create alerts which notify you about atypical behavior in your applications. You can create RUM monitors with complex conditions, predefined thresholds, and multiple queries to calculate averages, ratios, and performance indicator metrics (such as Apdex).
 
 ## Define your search query
 
 To create a RUM monitor, see the [RUM Monitor documentation][1] first. You can add one or many queries to filter through your RUM data in the [RUM Explorer][2]. For each query, you can scope it on an application level or a more granular level like a specific page.
 
-You can use any facets that RUM collects, including [custom facets and measures][3]. Use the `measure by` field to measure view and action-related timings such as load time, time spent, and error count.
+You can use any facets that RUM collects, including [custom facets and measures][3]. Use the `measure by` field to measure view-related counts such as load time, time spent, and error count.
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/high-rum-views-errors.png" alt="Search query for an alert where a view exceeds more than eight errors" style="width:100%;">}}
 
