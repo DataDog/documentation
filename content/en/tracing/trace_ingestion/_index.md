@@ -18,7 +18,7 @@ further_reading:
 
 With APM, both the **ingestion of traces** as well as the [retention][1] of those traces for 15 days are fully customizable.
 
-To track or monitor your volume of ingested and indexed data, see the [Usage Metrics][2] documentation.
+To track or monitor your volume of ingested and indexed data, see [Usage Metrics][2].
 
 ## Ingestion mechanisms
 
