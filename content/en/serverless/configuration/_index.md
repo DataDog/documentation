@@ -11,6 +11,7 @@ further_reading:
 aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
+    - /serverless/guide/forwarder_extension_migration/
 ---
 
 After [installing][1] Datadog serverless monitoring, you should be collecting metrics, traces and logs. Follow the instructions below to configure your installation for the optimal monitoring.
@@ -523,7 +524,62 @@ arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProf
 
 ## Migrate to the Datadog Lambda extension
 
-Datadog can collect the monitoring data from your Lambda functions either using the [Forwarder Lambda function][4] or the [Lambda extension][2]. Datadog recommends the Lambda extension for new installations. For existing installations using the Forwarder, see [Deciding to migrate to the Datadog Lambda extension][26] for why you should [migrate][27].
+Datadog can collect the monitoring data from your Lambda functions either using the [Forwarder Lambda function][4] or the [Lambda extension][2]. Datadog recommends the Lambda extension for new installations. If you are unsure, see [why should you migrate][26].
+
+To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][27]. For your convenience, the key differences are summarized below.
+
+**Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
+
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+1. Upgrade `@datadog/datadog-ci` to the latest version
+2. Update the `--layer-version` argument and set it to the latest version for your runtime.
+3. Set the `--extension-version` argument to the latest extension version {{< latest-lambda-layer-version layer="extension" >}}
+4. Set the required environment variable `DATADOG_SITE` and `DATADOG_API_KEY_SECRET_ARN`.
+5. Remove the `--forwarder` argument.
+6. If you configured the Datadog AWS integration to automatically subscribe the Forwarder to Lambda log groups, disable that after you migrate _all_ the Lambda functions in that region.
+
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
+
+1. Upgrade `serverless-plugin-datadog` to the latest version, which installs the Datadog Lambda Extension by default, unless you set `addExtension` to `false`.
+2. Set the required parameters `site` and `apiKeySecretArn`.
+3. Set the `env`, `service`, and `version` parameters if you previously set them as Lambda resource tags. The plugin will automatically set them through the Datadog reserved environment variables instead, such as `DD_ENV`, when using the extension.
+4. Remove the `forwarderArn` parameter, unless you want to keep the Forwarder for collecting logs from non-Lambda resources, that is, you have `subscribeToApiGatewayLogs`, `subscribeToHttpApiLogs`, or `subscribeToWebsocketLogs` set to `true`.
+5. If you configured the Datadog AWS integration to automatically subscribe the Forwarder to Lambda log groups, disable that after you migrate _all_ the Lambda functions in that region.
+
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+1. Update the `datadog-serverless-macro` CloudFormation stack to pick up the latest version.
+2. Set the `extensionLayerVersion` parameter to the latest extension version {{< latest-lambda-layer-version layer="extension" >}}
+3. Set the required parameters `site` and `apiKeySecretArn`.
+4. Remove the `forwarderArn` parameter.
+5. If you configured the Datadog AWS integration to automatically subscribe the Forwarder to Lambda log groups, disable that after you migrate _all_ the Lambda functions in that region.
+
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+1. Upgrade `datadog-cdk-constructs` or `datadog-cdk-constructs-v2` to the latest version.
+2. Set the `extensionLayerVersion` parameter to the latest extension version {{< latest-lambda-layer-version layer="extension" >}}
+3. Set the required parameters `site` and `apiKeySecretArn`.
+4. Set the `env`, `service`, and `version` parameters if you previously set them as Lambda resource tags. The construct will automatically set them through the Datadog reserved environment variables instead, such as `DD_ENV`, when using the extension.
+5. Remove the `forwarderArn` parameter.
+6. If you configured the Datadog AWS integration to automatically subscribe the Forwarder to Lambda log groups, disable that after you migrate _all_ the Lambda functions in that region.
+
+{{% /tab %}}
+{{% tab "Others" %}}
+
+1. Upgrade the Datadog Lambda library layer for your runtime to the latest version.
+2. Install the latest version of the Datadog Lambda extension.
+3. Set the required environment variables `DD_SITE` and `DD_API_KEY_SECRET_ARN`.
+3. Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables if you previously set them as Lambda resource tags.
+4. Remove the subscription filter that streams logs from your Lambda function's log group to the Datadog Forwarder.
+5. If you configured the Datadog AWS integration to automatically subscribe the Forwarder to Lambda log groups, disable that after you migrate _all_ the Lambda functions in that region.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshoot
 
@@ -532,6 +588,7 @@ If you have trouble configuring your installations, set the environment variable
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 
 [1]: /serverless/installation/
@@ -560,5 +617,5 @@ If you have trouble configuring your installations, set the environment variable
 [24]: /synthetics/
 [25]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
 [26]: /serverless/guide/extension_motivation/
-[27]: /serverless/guide/forwarder_extension_migration
+[27]: /serverless/guide#install-using-the-datadog-forwarder
 [28]: /serverless/guide/troubleshoot_serverless_monitoring/
