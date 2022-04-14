@@ -64,7 +64,7 @@ When working with input fields rendered in a shadow DOM, the recorder may be una
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/validate-text-type.png" alt="Validate entered text rendered in a shadow DOM" style="width:90%;" >}}
 
-For example, the following code snippet validates that the text "Item added with JS assertion" is added in the input field:
+For example, the following code snippet adds the text "Item added with JS assertion" in the input field:
 
 ```js
 // find element to which the Shadow DOM is attached:
