@@ -11090,7 +11090,7 @@ components:
           description: The ID of the result to get.
           type: string
         retries:
-          description: Total duration in millisecond of the test.
+          description: Number of times this result has been retried.
           format: double
           type: number
         status:
