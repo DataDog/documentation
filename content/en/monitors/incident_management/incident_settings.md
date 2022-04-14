@@ -133,7 +133,7 @@ To configure a new notification rule:
 
 1. Click **New Rule**
 2. Select the incident property field `key:value` pairs you want notifications to be sent for. By default, a rule notifies your recipients on any incident.
-3. Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][10].
+3. Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][10]. **Note**: If you want to notify a recipient's mobile device, select the option that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][14] for this option to appear.
 4. Select the desired message template you want the notification rule to use.
 5. Choose whether you want recipients to be renotified when an incident changes its status.
 6. Click **Save**
@@ -178,3 +178,4 @@ To create a postmortem template:
 [11]: /notebooks/
 [12]: /monitors/incident_management/incident_details/#overview-section
 [13]: /dashboards/
+[14]: /mobile/

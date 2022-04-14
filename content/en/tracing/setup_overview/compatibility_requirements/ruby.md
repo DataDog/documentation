@@ -23,16 +23,17 @@ The Ruby Datadog Trace library is open source - view the [GitHub repository][1] 
 
 | Type  | Documentation              | Version | Support type                         | Gem version support |
 | ----- | -------------------------- | -----   | ------------------------------------ | ------------------- |
-| MRI   | https://www.ruby-lang.org/ | 2.7     | Full                                 | Latest              |
+| MRI   | https://www.ruby-lang.org/ | 3.0     | Full                                 | Latest              |
+|       |                            | 2.7     | Full                                 | Latest              |
 |       |                            | 2.6     | Full                                 | Latest              |
 |       |                            | 2.5     | Full                                 | Latest              |
 |       |                            | 2.4     | Full                                 | Latest              |
 |       |                            | 2.3     | Full                                 | Latest              |
 |       |                            | 2.2     | Full                                 | Latest              |
 |       |                            | 2.1     | Full                                 | Latest              |
-|       |                            | 2.0     | Maintenance (until June 7th, 2021)   | < 0.50.0            |
-|       |                            | 1.9.3   | Maintenance (until August 6th, 2020) | < 0.27.0            |
-|       |                            | 1.9.1   | Maintenance (until August 6th, 2020) | < 0.27.0            |
+|       |                            | 2.0     | EOL since June 7th, 2021             | < 0.50.0            |
+|       |                            | 1.9.3   | EOL since August 6th, 2020           | < 0.27.0            |
+|       |                            | 1.9.1   | EOL since August 6th, 2020           | < 0.27.0            |
 | JRuby | https://www.jruby.org      | 9.2     | Full                                 | Latest              |
 
 **Supported web servers**:
@@ -49,13 +50,13 @@ The Ruby Datadog Trace library is open source - view the [GitHub repository][1] 
 | ----------- | ----------------------------------------------- | --------------------- | ------------------- |
 | OpenTracing | https://github.com/opentracing/opentracing-ruby | 0.4.1+ (w/ Ruby 2.1+) | >= 0.16.0           |
 
-*Full* support indicates Datadog supports all tracer features.
+*Full* support indicates all tracer features are available.
 
-*Deprecated* indicates Datadog support will transition to *Maintenance* in a future release.
+*Deprecated* indicates support will transition to *Maintenance* in a future release.
 
-*Maintenance* indicates Datadog will only patch critical bugfixes.
+*Maintenance* indicates only critical bugfixes are backported until EOL.
 
-*EOL* indicates Datadog is no longer providing support.
+*EOL* indicates support is no longer provided.
 
 ## Integration instrumentation
 

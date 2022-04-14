@@ -26,6 +26,17 @@ Check the following points for the AWS account mentioned in the error:
 Note that the error **may** persist in the UI for a few hours whilst the changes propagate.
 If the error persists, repeat steps 2 through 7 of the [AWS Installation instructions][1].
 
+Sometimes you might see the STS AssumeRole error but only limited to one or a few regions:
+```
+Datadog is not authorized to perform action sts:AssumeRole Account affected:<account_id> Regions affected: us-east-1, eu-west-1 
+```
+The source of the issue could be [AWS Service Control Policies][5].
+```
+Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization. SCPs offer central control over the maximum available permissions for all accounts in your organization. SCPs help you to ensure your accounts stay within your organization’s access control guidelines.
+```
+
+To get rid of the error in the integration tile you can exclude regions in your AWS integration using the [Update an AWS integration][6] API.
+
 Still need help? Contact [Datadog support][4].
 
 ## Further Reading
@@ -36,3 +47,5 @@ Still need help? Contact [Datadog support][4].
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 [4]: /help/
+[5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
+[6]: https://docs.datadoghq.com/api/latest/aws-integration/#update-an-aws-integration

@@ -1,7 +1,7 @@
 [
   {
     "client": "datadog-api-client-go",
-    "version": "v1.10.0"
+    "version": "v1.12.0"
   },
   {
     "client": "datadog-api-client-java",

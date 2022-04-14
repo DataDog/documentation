@@ -8,15 +8,15 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - automation
-  - orchestration
-  - notification
-  - collaboration
-  - monitoring
+- automation
+- orchestration
+- notification
+- collaboration
+- monitoring
 creates_events: true
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md
 display_name: StackPulse
 draft: false
 git_integration_title: stackpulse
@@ -32,13 +32,17 @@ metric_prefix: stackpulse.
 metric_to_check: ''
 name: stackpulse
 public_title: Intégration Datadog/StackPulse
-short_description: Automatisez vos réponses aux alertes et suivez les exécutions de playbook depuis votre flux d'événements
+short_description: Automatisez vos réponses aux alertes et suivez les exécutions de
+  playbook depuis votre flux d'événements
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 L'intégration [StackPulse][1] vous permet de déclencher des playbooks automatiquement en réponse à une alerte Datadog afin d'enrichir les alertes, de minimiser l'impact des incidents et d'améliorer la collaboration. Les événements résultant de l'exécution de vos playbooks peuvent ensuite être directement renvoyés vers votre flux d'événements Datadog et vers un dashboard StackPulse dédié.
@@ -104,7 +108,7 @@ Pour configurer cette intégration, vous devez disposer d'un [compte StackPulse]
     }
     ```
 
-5. Choisissez des monitors pour déclencher vos playbooks StackPulse. Dans le champ **Alert Your Team**, ajoutez le nom de l'intégration Webhook que vous venez de créer. Pour en savoir plus, consultez la [documentation de Datadog relative à la gestion des monitors][4].
+5. Choisissez des monitors pour déclencher vos playbooks StackPulse. Dans le champ **Alert Your Team**, ajoutez le nom de l'intégration Webhook que vous venez de créer. Pour en savoir plus, consultez la section [Gérer les monitors][4].
 
 6. Accédez à **Integrations -> APIs** et choisissez la carte **API Keys**. Sous **New API Key**, donnez un nom descriptif à votre nouvelle clé et cliquez sur **Create API Key**. Ensuite, **copiez** la nouvelle clé.
 
@@ -135,7 +139,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [1]: https://stackpulse.com
 [2]: https://stackpulse.com/get-started/
 [3]: https://app.datadoghq.com/account/settings#integrations/webhooks
-[4]: https://docs.datadoghq.com/fr/monitors/manage_monitor/
+[4]: https://docs.datadoghq.com/fr/monitors/manage/
 [5]: https://app.stackpulse.io/integrations/datadog%20api%20keys?create=true
 [6]: https://github.com/stackpulse/steps/tree/master/steps/datadog/post-event
 [7]: https://docs.datadoghq.com/fr/help/
