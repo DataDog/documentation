@@ -4,6 +4,11 @@
       "group": "audit",
       "suffix": "",
       "description": "Get a list of Audit Logs events returns \"OK\" response"
+    },
+    {
+      "group": "audit",
+      "suffix": "_1275402458",
+      "description": "Get a list of Audit Logs events returns \"OK\" response with pagination"
     }
   ],
   "SearchAuditLogs": [
@@ -11,6 +16,11 @@
       "group": "audit",
       "suffix": "",
       "description": "Search Audit Logs events returns \"OK\" response"
+    },
+    {
+      "group": "audit",
+      "suffix": "_3215529662",
+      "description": "Search Audit Logs events returns \"OK\" response with pagination"
     }
   ],
   "CreateAuthNMapping": [
@@ -234,6 +244,11 @@
       "group": "incidents",
       "suffix": "",
       "description": "Get a list of incidents returns \"OK\" response"
+    },
+    {
+      "group": "incidents",
+      "suffix": "_2665616954",
+      "description": "Get a list of incidents returns \"OK\" response with pagination"
     }
   ],
   "GetIncident": [
@@ -366,6 +381,11 @@
   "ListLogsGet": [
     {
       "group": "logs",
+      "suffix": "_738202670",
+      "description": "Get a list of logs returns \"OK\" response with pagination"
+    },
+    {
+      "group": "logs",
       "suffix": "_2034110533",
       "description": "Get a quick list of logs returns \"OK\" response"
     }
@@ -375,6 +395,11 @@
       "group": "logs",
       "suffix": "",
       "description": "Search logs returns \"OK\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "_3138392594",
+      "description": "Search logs returns \"OK\" response with pagination"
     }
   ],
   "SubmitLog": [
@@ -497,6 +522,11 @@
       "group": "processes",
       "suffix": "",
       "description": "Get all processes returns \"OK\" response"
+    },
+    {
+      "group": "processes",
+      "suffix": "_797840471",
+      "description": "Get all processes returns \"OK\" response with pagination"
     }
   ],
   "AggregateRUMEvents": [
@@ -511,6 +541,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Get a list of RUM events returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_2680821282",
+      "description": "Get a list of RUM events returns \"OK\" response with pagination"
     }
   ],
   "SearchRUMEvents": [
@@ -518,6 +553,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Search RUM events returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_574690310",
+      "description": "Search RUM events returns \"OK\" response with pagination"
     }
   ],
   "AddUserToRole": [
@@ -647,6 +687,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Delete an existing rule returns \"OK\" response"
+    }
+  ],
+  "SearchSecurityMonitoringSignals": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_1309350146",
+      "description": "Get a list of security signals returns \"OK\" response with pagination"
+    }
+  ],
+  "ListSecurityMonitoringSignals": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_3960412991",
+      "description": "Get a quick list of security signals returns \"OK\" response with pagination"
     }
   ],
   "GetSecurityFilter": [
