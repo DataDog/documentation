@@ -11,7 +11,7 @@ aliases:
 further_reading:
     - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
       tag: "Release Notes"
-      text: "Check out the latest Datadog Containers releases! (App login required)."
+      text: "Check out the latest Datadog Containers releases (App login required)."
     - link: '/agent/guide/autodiscovery-management'
       tag: 'Documentation'
       text: 'Limit data collection to a subset of containers only'
@@ -24,7 +24,7 @@ further_reading:
 
 Run the Datadog Agent in your Kubernetes cluster to start collecting your cluster and applications metrics, traces, and logs.
 
-**Note**: Agent version 6.0 and above only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, consult the [Legacy Kubernetes versions section][1].
+**Note**: Agent v6.0+ only supports Kubernetes v1.7.6+. For prior versions of Kubernetes, consult the [Legacy Kubernetes versions section][1].
 
 For Agent commands, see the [Agent Commands guides][2].
 
@@ -37,7 +37,7 @@ For Agent commands, see the [Agent Commands guides][2].
   {{< nextlink href="/agent/kubernetes/tag">}}<u>Tag extraction</u>: Configure the Agent to create and assign tags to all metrics, traces, and logs emitted by a container, Pod, or Node, based on Kubernetes labels or annotations.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/integrations">}}<u>Integrations & Autodiscovery</u>: To configure integrations in a Kubernetes environment, use Datadog's Autodiscovery feature.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/prometheus">}}<u>Prometheus & OpenMetrics</u>: Collect your exposed Prometheus and OpenMetrics metrics from your application running inside Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/control_plane">}}<u>Control plane monitoring</u>: Monitor the Kubernetes API server, controller manager, scheduler, and `etcd`.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/control_plane">}}<u>Control plane monitoring</u>: Monitor the Kubernetes API server, controller manager, scheduler, and etcd.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/data_collected">}}<u>Data Collected</u>: See the list of metrics collected by the Agent when deployed on your Kubernetes cluster.{{< /nextlink >}}
 {{< /whatsnext >}}
 
