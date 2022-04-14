@@ -16,8 +16,10 @@ Real User Monitoring [automatically collects actions][1] on your web application
 To create a new RUM action, use the `addAction` API. Give your action a name and then attach context attributes in the form of a JavaScript object. In the following example, a `checkout` action is created with details about the user cart when the user clicks on the checkout button.
 
 ```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
 function onCheckoutButtonClick(cart) {
-    DD_RUM.addAction('checkout', {
+    datadogRum.addAction('checkout', {
         'value': cart.value, // for example, 42.12
         'items': cart.items, // efor example, ['tomato', 'strawberries']
     })
