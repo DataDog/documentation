@@ -100,7 +100,7 @@ Optional collection Agents are disabled by default for security or performance r
 | `DD_APM_ENABLED`                | Enable [trace collection][4] with the Trace Agent.                                                                                                                                                                                                           |
 | `DD_LOGS_ENABLED`               | Enable [log collection][5] with the Logs Agent.                                                                                                                                                                                                              |
 | `DD_PROCESS_AGENT_ENABLED`      | Enable [live process collection][6] with the Process Agent. The [live container view][8] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][6] and the [live container view][8] are disabled. |
-| `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well.                                                                                                                       |
+| `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple instances of the Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well.                                                                                                                       |
 
 To enable the Live Container view, make sure you are running the process agent in addition to setting DD_PROCESS_AGENT_ENABLED to `true`.
 
