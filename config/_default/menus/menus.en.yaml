@@ -846,8 +846,8 @@ main:
     url: serverless/libraries_integrations/cli/
     parent: libraries_integrations
     weight: 306
-  - name: Lambda Code Signing
-    url: serverless/libraries_integrations/lambda_code_signing/
+  - name: Datadog CDK Construct
+    url: serverless/libraries_integrations/cdk/
     parent: libraries_integrations
     weight: 307
   - name: Distributed Tracing

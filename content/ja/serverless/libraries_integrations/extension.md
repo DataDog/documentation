@@ -6,7 +6,7 @@ further_reading:
     tag: ドキュメント
     text: AWS Lambda からのカスタムメトリクスの送信
 aliases:
-  - /ja/serverless/datadog_lambda_library/extension/
+  - /ja/serverless/libraries_integrations/extension/
 ---
 ## 概要
 

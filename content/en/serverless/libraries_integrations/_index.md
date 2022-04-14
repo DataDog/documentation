@@ -22,7 +22,7 @@ aliases:
     {{< nextlink href="/serverless/libraries_integrations/plugin/" >}}Datadog Lambda Plugin{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/macro/" >}}Datadog Lambda Macro{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/cli/" >}}Datadog Lambda CLI{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/lambda_code_signing/" >}}Lambda Code Signing{{< /nextlink >}}
+    {{< nextlink href="/serverless/libraries_integrations/cdk/" >}}Datadog CDK Construct{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## AWS Step Functions

@@ -268,11 +268,42 @@
         file_name: 'cli.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
-          title: Datadog Serverless CLI
+          title: Datadog Lambda Extension
           kind: documentation
           aliases:
             - /serverless/datadog_lambda_library/
             - /serverless/serverless_integrations/cli/
+
+  - repo_name: datadog-cdk-constructs
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/libraries_integrations/'
+        file_name: 'cdk.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md"]
+          title: Datadog CDK Construct
+          kind: documentation
+
+  - repo_name: datadog-lambda-extension
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/libraries_integrations/'
+        file_name: 'extension.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
+          title: Datadog Serverless CLI
+          kind: documentation
+          aliases:
+            - /serverless/datadog_lambda_library/extension
+            - /serverless/libraries_integrations/extension
 
   - repo_name: synthetics-ci-github-action
     contents:

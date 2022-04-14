@@ -12,6 +12,7 @@ aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
     - /serverless/guide/forwarder_extension_migration/
+    - /serverless/guide/extension_private_link/
 ---
 
 After [installing][1] Datadog serverless monitoring, you should be collecting metrics, traces and logs. Follow the instructions below to configure your installation for the optimal monitoring.
@@ -29,6 +30,7 @@ After [installing][1] Datadog serverless monitoring, you should be collecting me
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Create monitors](#create-monitors)
 - [Create synthetic tests](#create-synthetic-tests)
+- [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
 - [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
 - [Troubleshoot](#troubleshoot)
@@ -512,9 +514,16 @@ Datadog has some predefined monitors that you can quickly enable in the [Serverl
 ## Create synthetic tests
 
 If your serverless application powers an API or webpage, consider setting up Datadog [synthetic tests][24].
+
+## Send telemetry over PrivateLink or proxy
+
+The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in VPC without access to public internet, you can [send data over AWS PrivateLink][25] to the US1 (`datadoghq.com`) [Datadog site][26], or [send data over a proxy][27] for all other sites.
+
+If you are using the Datadog Forwarder, follow these [instructions][28].
+
 ## Enable AWS Lambda code signing
 
-[Code signing for AWS Lambda][25] helps to ensure that only trusted code is deployed from your Lambda functions to AWS. When you enable code signing on your functions, AWS validates that all of the code in your deployments is signed by a trusted source, which you define from your code signing configuration.
+[Code signing for AWS Lambda][29] helps to ensure that only trusted code is deployed from your Lambda functions to AWS. When you enable code signing on your functions, AWS validates that all of the code in your deployments is signed by a trusted source, which you define from your code signing configuration.
 
 If your Lambda functions are configured to use code signing, you must add Datadog's Signing Profile ARN below to your function's code signing configuration before you can deploy Lambda functions using Lambda Layers published by Datadog.
 
@@ -524,9 +533,9 @@ arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProf
 
 ## Migrate to the Datadog Lambda extension
 
-Datadog can collect the monitoring data from your Lambda functions either using the [Forwarder Lambda function][4] or the [Lambda extension][2]. Datadog recommends the Lambda extension for new installations. If you are unsure, see [why should you migrate][26].
+Datadog can collect the monitoring data from your Lambda functions either using the [Forwarder Lambda function][4] or the [Lambda extension][2]. Datadog recommends the Lambda extension for new installations. If you are unsure, see [why should you migrate][30].
 
-To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][27]. For your convenience, the key differences are summarized below.
+To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][31]. For your convenience, the key differences are summarized below.
 
 **Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
 
@@ -583,7 +592,7 @@ To migrate, compare the [installation instructions using the Datadog Lambda Exte
 
 ## Troubleshoot
 
-If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][28].
+If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][32].
 
 ## Further Reading
 
@@ -615,7 +624,11 @@ If you have trouble configuring your installations, set the environment variable
 [22]: https://app.datadoghq.com/functions
 [23]: https://github.com/DataDog/serverless-plugin-datadog#serverless-monitors
 [24]: /synthetics/
-[25]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
-[26]: /serverless/guide/extension_motivation/
-[27]: /serverless/guide#install-using-the-datadog-forwarder
-[28]: /serverless/guide/troubleshoot_serverless_monitoring/
+[25]: /agent/guide/private-link/
+[26]: /getting_started/site/
+[27]: /agent/proxy/
+[28]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
+[29]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
+[30]: /serverless/guide/extension_motivation/
+[31]: /serverless/guide#install-using-the-datadog-forwarder
+[32]: /serverless/guide/troubleshoot_serverless_monitoring/
