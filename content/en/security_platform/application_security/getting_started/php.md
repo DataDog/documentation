@@ -27,8 +27,8 @@ You can monitor application security for PHP apps running in Docker, Kubernetes,
 
 1. **Install the latest Datadog PHP library** by downloading and running the installer:
    ```
-   wget https://raw.githubusercontent.com/DataDog/dd-appsec-php/installer/dd-library-php-setup.php
-   php dd-library-php-setup.php --php-bin all --tracer-version latest --appsec-version latest
+   wget https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php -O datadog-setup.php
+   php datadog-setup.php --php-bin all --enable-appsec
    ```
    For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
