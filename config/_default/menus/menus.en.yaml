@@ -826,30 +826,26 @@ main:
     url: serverless/libraries_integrations/extension/
     parent: libraries_integrations
     weight: 301
-  - name: Datadog Lambda Library
-    url: serverless/libraries_integrations/library/
-    parent: libraries_integrations
-    weight: 302
   - name: Datadog Forwarder
     url: serverless/libraries_integrations/forwarder/
     parent: libraries_integrations
-    weight: 303
+    weight: 302
   - name: Datadog Serverless Plugin
     url: serverless/libraries_integrations/plugin/
     parent: libraries_integrations
-    weight: 304
+    weight: 303
   - name: Datadog Serverless Macro
     url: serverless/libraries_integrations/macro/
     parent: libraries_integrations
-    weight: 305
+    weight: 304
   - name: Datadog Serverless CLI
     url: serverless/libraries_integrations/cli/
     parent: libraries_integrations
-    weight: 306
+    weight: 305
   - name: Datadog CDK Construct
     url: serverless/libraries_integrations/cdk/
     parent: libraries_integrations
-    weight: 307
+    weight: 306
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing

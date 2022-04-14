@@ -268,7 +268,7 @@
         file_name: 'cli.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
-          title: Datadog Lambda Extension
+          title: Datadog Serverless CLI
           kind: documentation
           aliases:
             - /serverless/datadog_lambda_library/
@@ -299,7 +299,7 @@
         file_name: 'extension.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
-          title: Datadog Serverless CLI
+          title: Datadog Lambda Extension
           kind: documentation
           aliases:
             - /serverless/datadog_lambda_library/extension
