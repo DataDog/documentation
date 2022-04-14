@@ -62,7 +62,7 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 
 {{< img src="synthetics/settings/variable_fromhttp_3.png" alt="Variable from HTTP Test" style="width:80%;">}}
 
-In addition to extracting a value with a `regex`, you can also:
+In addition to extracting a value with a regex, you can also use a regex to parse the following:
 
   - Match not only the first instance of a pattern, but also all instances of the supplied pattern
   - Ignore the case of the matching pattern
