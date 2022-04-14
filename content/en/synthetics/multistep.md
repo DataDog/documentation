@@ -137,6 +137,10 @@ You can create up to 20 assertions per step by clicking **New Assertion** or by 
 
 {{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
+
 #### Add execution parameters
 
 Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. 
