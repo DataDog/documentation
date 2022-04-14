@@ -74,7 +74,7 @@ If you have followed all the troubleshooting steps above and want help from [Dat
 
 [1]: /serverless/guide/
 [2]: /serverless/glossary/#datadog-serverless-for-aws-lambda-concepts
-[3]: /serverless/libraries_integrations/forwarder/
+[3]: /logs/guide/forwarder/
 [4]: /serverless/libraries_integrations/extension/
 [5]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
 [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html
