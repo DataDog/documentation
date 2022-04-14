@@ -23,6 +23,6 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
   {{< nextlink href="/security_platform/detection_rules">}}Create your own custom detection rules{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security_platform/cloud_siem/security_home/
-[2]: /security_platform/default_rules#cat-log-detection
+[1]: /security_platform/explorer
+[2]: /security_platform/default_rules#cat-cloud-siem
 [3]: /security_platform/detection_rules
