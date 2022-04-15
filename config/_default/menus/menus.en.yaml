@@ -846,31 +846,31 @@ main:
     url: serverless/libraries_integrations/cdk/
     parent: libraries_integrations
     weight: 306
+  - name: Enhanced Lambda Metrics
+    url: serverless/enhanced_lambda_metrics
+    parent: serverless
+    weight: 4
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless
-    weight: 4
+    weight: 5
   - name: Collect Lambda Payloads
     url: serverless/distributed_tracing/collect_lambda_payloads
     parent: serverless_distributed_tracing
-    weight: 401
+    weight: 501
   - name: Trace Merging (Advanced)
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
-    weight: 402
+    weight: 502
   - name: Trace Propagation (Advanced)
     url: serverless/distributed_tracing/serverless_trace_propagation
     parent: serverless_distributed_tracing
-    weight: 403
+    weight: 503
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
     identifier: custom_metrics
-    weight: 5
-  - name: Enhanced Lambda Metrics
-    url: serverless/enhanced_lambda_metrics
-    parent: serverless
     weight: 6
   - name: Deployment Tracking
     url: serverless/deployment_tracking

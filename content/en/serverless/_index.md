@@ -83,7 +83,7 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 ## Getting Started
 
-Getting started to monitor your serverless application is quick and easy. See the [installation instructions][4].
+Getting started to monitor your serverless application is quick and easy. Follow the [installation instructions][4] to collect metrics, traces, and logs from your serverless applications.
 
 ## Other serverless clouds
 

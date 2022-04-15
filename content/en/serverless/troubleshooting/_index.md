@@ -12,10 +12,7 @@ aliases:
   - /serverless/guide/troubleshoot_serverless_monitoring
 ---
 
-
-This guide helps you troubleshoot general data collection issues for serverless monitoring, such as missing metrics, traces, logs, or tags.
-
-<div class="alert alert-info">Check out the additional <a href="/serverless/guide/#troubleshoot-your-installation">troubleshooting guides</a> for common issues such as the function code size is too large or webpack compatibility.</div>
+<div class="alert alert-info">Check out the additional <a href="/serverless/guide/#troubleshoot-your-installation">troubleshooting guides</a> for common issues such as the function code size is too large or webpack compatibility. This guide helps you troubleshoot general telemetry collection issues.</div>
 
 ## Understand the basics
 

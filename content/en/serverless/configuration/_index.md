@@ -15,7 +15,7 @@ aliases:
     - /serverless/guide/extension_private_link/
 ---
 
-After [installing][1] Datadog serverless monitoring, you should be collecting metrics, traces and logs. Follow the instructions below to configure your installation for the optimal monitoring.
+After [installing][1] Datadog serverless monitoring, you should be collecting metrics, traces and logs. Follow the instructions below to configure your installation for the optimal monitoring experience.
 
 ## Table of contents
 

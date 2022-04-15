@@ -14,7 +14,7 @@ further_reading:
 
 ## Quick start
 
-If you are new to Datadog, [sign up for a Datadog account][1], then follow the installation instructions for [AWS Lambda][2]. Completing the steps will configure your Lambda functions to send real-time metrics, logs, and traces to Datadog.
+If you are new to Datadog, [sign up for a Datadog account][1], then follow the Datadog Agent installation instructions for [AWS Lambda][2]. Completing the steps will configure your Lambda functions to send real-time metrics, logs, and traces to Datadog.
 
 ## Installation instructions
 
