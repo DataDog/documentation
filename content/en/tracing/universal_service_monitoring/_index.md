@@ -284,9 +284,9 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 
 ## Exploring your services
 
-After you configure the Agent, wait about five minutes for your service to appear in the APM Services List.  Click the service to see the APM service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring.
+After you configure the Agent, wait about five minutes for your service to appear in the APM Services List. Click the service to see the APM service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring.
 
-The `universal.http.server` operation name captures health metrics for inbound traffic to your service. The corresponding `universal.http.client` represents outbound traffic to other destinations.
+The `universal.http.server` operation name captures health metrics for inbound traffic to your service. The corresponding `universal.http.client` operation name represents outbound traffic to other destinations.
 
 {{< img src="tracing/universal_service_monitoring/select_service_operation.png" alt="The operation drop-down menu on the Services tab shows the available operation names" style="width:100%;" >}}
 
