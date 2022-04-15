@@ -16,16 +16,16 @@ further_reading:
   text: "Learn more about services in Datadog"
 - link: "/tracing/visualization/services_map/"
   tag: "Documentation"
-  text: "Read about the Services Map"
+  text: "Read about the Service Map"
 ---
 
 {{< beta-callout url="http://d-sh.io/universal" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Universal Service Monitoring is in private beta. There is currently no billing impact for enabling and using USM. Let us know if you would like to access it.
-{{< /beta-callout >}} 
+  Universal Service Monitoring (USM) is in private beta. There is currently no billing impact for enabling and using USM. Let us know if you would like to access it.
+{{< /beta-callout >}}
 
-Universal Service Monitoring provides visibility into your service health metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented services into APM views such as the Services List, Service details, and Services Map. USM also works with [Deployment Tracking](https://docs.datadoghq.com/tracing/deployment_tracking/), Monitors, Dashboards, and SLOs.
+Universal Service Monitoring (USM) provides visibility into your service health metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented services into APM views such as the Services List, Service details, and Service Map. USM also works with [Deployment Tracking][2], Monitors, Dashboards, and SLOs.
 
-{{< img src="tracing/universal_service_monitoring/universal-service-monitoring-details.png" alt="Service details page showing requests, errors, latency, and latency distribution graphs for a service that is using Universal Service Monitoring" style="width:100%;" >}}
+{{< img src="tracing/universal_service_monitoring/service_overview.mp4" alt="Video demonstrating Universal Service Monitoring. An overview of a service is accessed by clicking on a service on the Service Map and selecting View service overview." video="true" >}}
 
 ### Supported versions and compatibility
 
@@ -282,18 +282,18 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 
 ## Exploring your services
 
-After you configure the Agent, wait about five minutes for your service to appear in the APM Services List.  Click the service to see the APM service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring. 
+After you configure the Agent, wait about five minutes for your service to appear in the APM Services List.  Click the service to see the APM service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring.
+
+{{< img src="tracing/universal_service_monitoring/select_service_operation.png" alt="The operation drop-down menu on the Services tab shows the available operation names" style="width:100%;" >}}
 
 After enabling Universal Service Monitoring, you can:
 
 
-- Navigate to **APM > Service Map** to [visualize your services and their dependencies][2] in one place.
+- Navigate to **APM > Service Map** to [visualize your services and their dependencies][3] in one place.
 
-- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and and correlate these against recent code changes with [Deployment Tracking][3]. 
+- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][4]. 
 
-- Create [monitors][4], [dashboards][5], and [SLOs][6] using the `trace.universal.http.*` metrics.
-
-{{< img src="tracing/universal_service_monitoring/create-monitor-from-universal-service-metric.png" alt="Context menu showing creating a monitor from a universal service monitoring metric" style="width:60%;" >}}
+- Create [monitors][5], [dashboards][6], and [SLOs][7] using the `trace.universal.http.*` metrics.
 
 
 ## Further Reading
@@ -301,8 +301,9 @@ After enabling Universal Service Monitoring, you can:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging
-[2]: /tracing/visualization/services_map/
-[3]: /tracing/deployment_tracking/
-[4]: /monitors/create/types/apm/?tab=apmmetrics
-[5]: /dashboards/
-[6]: /monitors/service_level_objectives/metric/
+[2]: https://docs.datadoghq.com/tracing/deployment_tracking/
+[3]: /tracing/visualization/services_map/
+[4]: /tracing/deployment_tracking/
+[5]: /monitors/create/types/apm/?tab=apmmetrics
+[6]: /dashboards/
+[7]: /monitors/service_level_objectives/metric/
