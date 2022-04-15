@@ -32,20 +32,13 @@ aliases:
     {{< nextlink href="https://github.com/DataDog/datadog-lambda-rb" >}}Datadog Lambda Library for Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## AWS Step Functions
+## Datadog AWS Integration
 
-Enable the [AWS Step Functions integration][1] for metrics, traces, and logs.
-
-Datadog automatically adds tags `statemachinename`, `statemachinearn`, and `stepname` on your Lambda telemetry to identify which state machines a particular function belongs to. You can use these tags to get an aggregated view of your Lambda functions on the [Serverless view][2].
-
-{{< img src="serverless/step-function-trace.jpeg" alt="AWS Step Function Tracing" >}}
-
-## Lambda@Edge
-
-Enable the [AWS Lambda integration][3] for metrics and logs. Datadog automatically adds tags `at_edge`, `edge_master_name`, and `edge_master_arn` tags on your Lambda metrics to get an aggregated view of your Lambda function metrics and logs as they run in Edge locations.
-
-Distributed tracing is _not_ yet supported for Lambda@Edge functions.
-
-[1]: /integrations/amazon_step_functions/
-[2]: https://app.datadoghq.com/functions
-[3]: /integrations/amazon_lambda/
+{{< whatsnext desc="In addition to collecting telemetry directly from your Lambda functions, Datadog can also collect telemetry through the Datadog AWS integration for resources utilized by your serverless application." >}}
+    {{< nextlink href="/integrations/amazon_lambda/" >}}AWS Lambda Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_step_functions/" >}}AWS Step Functions Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_appsync/" >}}AWS AppSync Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_api_gateway/" >}}AWS API Gateway Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sqs/" >}}AWS SQS Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sns/" >}}AWS SNS Integration{{< /nextlink >}}
+{{< /whatsnext >}}

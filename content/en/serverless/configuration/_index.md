@@ -296,7 +296,11 @@ To scrub or filter other logs before sending them to Datadog, see [Advanced Log 
 
 ### Disable logs collection
 
-Logs collection through the Datadog Lambda extension is enabled by default. If you want to stop collecting logs using the Datadog Forwarder Lambda function, simply remove the subscription filter from your own Lambda function's CloudWatch log group. If you want to stop collecting logs using the Datadog Lambda extension, follow the instructions below for the installation method you use.:
+Logs collection through the Datadog Lambda extension is enabled by default.
+
+If you want to stop collecting logs using the Datadog Forwarder Lambda function, simply remove the subscription filter from your own Lambda function's CloudWatch log group.
+
+If you want to stop collecting logs using the Datadog Lambda extension, follow the instructions below for the installation method you use:
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}

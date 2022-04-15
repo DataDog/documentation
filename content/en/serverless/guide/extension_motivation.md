@@ -2,9 +2,9 @@
 title: Deciding to migrate to the Datadog Lambda extension
 kind: guide
 further_reading:
-  - link: '/serverless/guide/forwarder_extension_migration'
+  - link: '/serverless/configuration/#migrate-to-the-datadog-lambda-extension'
     tag: 'Documentation'
-    text: 'Migrating from the Datadog Forwarder to the Datadog Lambda Extension'
+    text: 'Migrating to the Datadog Lambda Extension'
 ---
 
 ## Should I migrate to the Datadog Lambda extension?
@@ -43,4 +43,4 @@ To migrate from the the Datadog Forwarder to the Datadog Lambda Extension, follo
 [2]: /serverless
 [3]: /serverless/libraries_integrations/forwarder/
 [4]: /serverless/libraries_integrations/extension/#overhead
-[5]: /serverless/guide/forwarder_extension_migration
+[5]: /serverless/configuration/#migrate-to-the-datadog-lambda-extension
