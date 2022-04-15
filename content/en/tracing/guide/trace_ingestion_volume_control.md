@@ -16,9 +16,7 @@ With the ingestion control page, you have full visibility and complete control o
 - Reduce network costs by avoiding sending unused trace data to the Datadog platform.
 - Control and manage your overall costs.
 
-
 ## Effects of reducing trace ingestion volume
-
 
 {{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="APM ingestion sampling displaying 25 percent complete traces ingested" style="width:70%;" >}}
 
@@ -29,8 +27,6 @@ Trace data is very repetitive, which means trace samples to investigate any issu
 ## Assess your services' ingestion configuration
 
 To assess the current state of applications' instrumentation, leverage the [Trace Ingestion Control page][1] that provides detailed information on agent and tracing library configuration.
-
-
 
 ### Understanding if you are within your monthly ingestion allocation
 
@@ -52,11 +48,7 @@ An [out-of-the-box dashboard][4] is also available to get more insights on histo
 
 To identify which services are responsible for most of the ingestion volume, sort the table by **Downstream Bytes/s**. This column allows you to spot which services take most of the sampling decisions, which also impact downstream services.
 
-If the service is starting the span, **Downstream Bytes/s** also encompasses the volume of spans coming from downstream services for which the service took the sampling decision.
-
-By configuring sampling rates for a few high-throughput services, most of the “exceeding” ingestion volume can be lowered.
-
-### Identify which ingestion mechanisms are responsible for most of the ingestion volume
+If the service is starting the trace, **Downstream Bytes/s** also encompasses the volume of spans coming from downstream services for which the service took the sampling decision.
 
 The **Traffic Breakdown** column gives a good indication of the service's sampling configuration.
 
@@ -64,18 +56,50 @@ If the service has a high Downstream Bytes/s rate and a high sampling rate (disp
 
 {{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_99_percent.png" alt="APM ingestion sampling displaying 99 percent complete traces ingested, meaning no sampling" style="width:70%;" >}}
 
-To get more details, click on the service and look at the **Ingestion reasons breakdown** in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
+### Globally configure the ingestion sampling rate at the agent level
 
-The default mechanism to sample traces is _head-based sampling_. The decision whether to sample a trace or not is taken at the beginning of its lifecycle, and propagated downstream in the context of the requests in order to ensure that you can always view and analyze complete traces. Read more about the [default sampling mechanism][3].
+The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally accross services.
+
+To reduce the ingestion volume at the agent level, configure `DD_APM_MAX_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][3].
+
+Additionally, to reduce the volume of [error][5] and [rare][6] traces:
+- Configure `DD_APM_ERROR_TPS` to reduce the share of error sampling.
+- Set `DD_APM_DISABLE_RARE_SAMPLER` to true to stop sampling rare traces.
+
+### Independently configure the ingestion sampling rate for services at the library level
+
+By configuring sampling rates for a few high-throughput services, most of the “exceeding” ingestion volume can be lowered.
+
+Click on a service to view the **Service Ingestion Summary**. Look at the **Ingestion reasons breakdown** in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
+
+If the main reason for most of the ingestion volume is head-based sampling (`auto` or `rule`), the volume can be configured by setting a sampling rule at the tracing library level.
+
+Click the **Manage Ingestion Rate** button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
+
+**Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][7].
+
+## Ingestion reasons glossary
+
+_Know which ingestion mechanisms are responsible for most of the ingestion volume_
+
+The default mechanism to sample traces is head-based sampling. The decision whether to sample a trace or not is taken at the beginning of its lifecycle, and propagated downstream in the context of the requests in order to ensure that you can always view and analyze complete traces.
+
+Head-based sampling is configurable in the tracing libraries or from the Datadog Agent:
+
+| ingestion reason   | Where             | Ingestion Mechanism Description | Default |
+|--------------------|-------------------|-----------------------|---------|
+| `auto`             | Agent             | the Datadog Agent distributes sampling rates to tracing libraries    | 10 traces per second per Agent |
+| `rule`             | Tracing Libraries | Libraries' defined sampling percentage for specific services.   | null                 |
+
 
 Some additional ingestion reasons, surfaced in the ingestion control page, and as a tag of `datadog.estimated_usage.apm.ingested_bytes` metric may be responsible for your ingestion volume:
 
-- `auto`: agent distributed rates to libraries
-- `rule`: libraries' sampling percentage for specific services
-- `manual`: in-code decision override to keep/drop a span and its children
-- `analytics`: deprecated ingestion mechanism that samples single spans without the full trace
-- `error`: sampling of errors uncaught by the head-based sampling
-- `rare`: sampling of rare traces (catching all combinations of a set span tags)
+| ingestion reason   | Where             | Ingestion Mechanism Description | Default |
+|--------------------|-------------------|-----------------------|---------|
+| `error`            | Agent             | Sampling of errors uncaught by the head-based sampling             | 10 traces per second per Agent (null if rules are defined) |
+| `rare`            | Agent             |  Sampling of rare traces (catching all combinations of a set span tags)        | 5 traces per second per Agent (null if rules are defined) |
+| `manual`             | In-code         | In-code decision override to keep/drop a span and its children    | null |
+| `analytics`          | Agent and Tracing Libraries | Deprecated ingestion mechanism that samples single spans without the full trace   | null                 |
 
 Additionally, other products can be responsible for sampled span volume:
 
@@ -83,14 +107,7 @@ Additionally, other products can be responsible for sampled span volume:
 - `rum`: Requests from web and mobile applications are linked to the corresponding backend traces.
 - `lambda` & `xray`: Traces generated from AWS lambda functions instrumented with X-Ray or Datadog libraries.
 
-### Configure the ingestion sampling rate at the library level
-
-If the main reason for most of the ingestion volume is `auto` or `rule`, the volume can be configured by setting a sampling rule at the tracing library level.
-
-Click the **Manage Ingestion Rate** button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
-
-**Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][5].
-
+Read more about ingestion reasons in the [ingestion mechanisms][2] documentation
 
 ## Further Reading
 
@@ -100,4 +117,6 @@ Click the **Manage Ingestion Rate** button to configure a sampling rate for the 
 [2]: /tracing/trace_ingestion/mechanisms
 [3]: /tracing/trace_ingestion/mechanisms/#head-based-default-mechanism
 [4]: /tracing/trace_retention/usage_metrics/
-[5]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[5]: /tracing/trace_ingestion/mechanisms#error-traces
+[6]: /tracing/trace_ingestion/mechanisms#rare-traces
+[7]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
