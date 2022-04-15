@@ -49,7 +49,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 - Datadog Agent 7.32 or higher is installed alongside your service. Installing a tracing library is _not_ required.
 - [Unified Service Tagging][1] tags for `env` and `service` have been applied to your deployment. The `version` tag is optional.
 
-**Note**: For non-container single-tenant setups where one service runs on a host, you must apply Unified Service Tags to the host itself. USM does not currently support monitoring multiple services on a single host without containers, nor on a single host where Unified Service Tags are applied via environment variables.
+**Note**: For non-container single-tenant setups where one service runs on a host, you must apply Unified Service Tags to the host itself. USM does not support monitoring multiple services on a single host without containers, nor on a single host where Unified Service Tags are applied using environment variables.
 
 ## Enabling Universal Service Monitoring
 
