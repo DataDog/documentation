@@ -119,9 +119,30 @@ using (var parentScope =
     }
 }
 ```
+
+### Headers extraction and injection
+
+Datadog APM tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing.
+
+Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
+
+- Datadog: `Datadog`
+- B3: `B3`
+- W3C: `TraceParent`
+- B3 Single Header: `B3SingleHeader` or `B3 single header`
+
+Injection and extraction styles can be configured using:
+
+- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
+- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+
+The values of these environment variables are comma separated lists of header styles that are enabled for injection or extraction. By default only `Datadog` injection style is enabled.
+
+If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][5] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][7] page.
 
 ## Further Reading
 
@@ -132,4 +153,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [2]: /tracing/visualization/#span-tags
 [3]: /tracing/visualization/#spans
 [4]: /tracing/visualization/trace/?tab=spantags#more-information
-[5]: /tracing/security
+[5]: https://github.com/openzipkin/b3-propagation
+[6]: https://www.w3.org/TR/trace-context/#traceparent-header
+[7]: /tracing/security

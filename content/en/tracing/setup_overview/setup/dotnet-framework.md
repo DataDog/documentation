@@ -453,6 +453,26 @@ The following configuration variables are for features that are available for us
 : Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>
 **Default**: `true`
 
+### Headers extraction and injection
+
+Datadog APM tracer supports [B3][8] and [W3C][9] headers extraction and injection for distributed tracing.
+
+Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
+
+- Datadog: `Datadog`
+- B3: `B3`
+- W3C: `TraceParent`
+- B3 Single Header: `B3SingleHeader` or `B3 single header`
+
+Injection and extraction styles can be configured using:
+
+- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
+- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+
+The values of these environment variables are comma separated lists of header styles that are enabled for injection or extraction. By default only `Datadog` injection style is enabled.
+
+If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+
 ## Custom instrumentation
 
 Your setup for custom instrumentation depends on your automatic instrumentation and includes additional steps depending on the method:
@@ -544,3 +564,5 @@ dotnet.exe example.dll
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
 [6]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
 [7]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[8]: https://github.com/openzipkin/b3-propagation
+[9]: https://www.w3.org/TR/trace-context/#traceparent-header
