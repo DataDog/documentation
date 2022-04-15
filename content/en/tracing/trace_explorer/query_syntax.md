@@ -36,19 +36,43 @@ further_reading:
   text: "Dive into your resource performance and traces"
 ---
 
-## Search bar
+## Overview
+
+Use the Trace Explorer to search for **spans**. Trace Explorer search consists of a time range and a search query, mixing `key:value` and full-text search.
+
+Spans can be valuable as individual events visualised as a **list**, but sometimes valuable information lives in an aggregation of events. In order to expose this information, pivot to **timeseries** view, **top list** view or **table** view. Choose which dimension to visualise (count of spans, count of unique values, measure of a quantitative dimension) and group the query by one or multiple dimensions.
+
+## Search query
+
+For example, to filter on spans from a specific service, with a specific status, over the past five minutes, you can create a custom query such as `service:web-store status:error` and set the time range to the `Past 30 minutes`:
+
+[add image]
+
+Pivot to a top list view, and group the query by `resource` to see which specific resources are most affected.
+
+[add image]
+
+{{< site-region region="us,eu,gov,us3,us5" >}}
+**Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
+
+[1]: /tracing/trace_explorer/query_syntax#facets
+{{< /site-region >}}
+
+To begin searching for spans in the Trace Explorer, see the [search syntax](#search-syntax)  and the [time frame](#time-range) documentation.
+
+### Search bar
 
 All search parameters are contained in the url of the page, which can be helpful for sharing your view.
 
-### Search syntax
+#### Search syntax
 
 A query is composed of *terms* and *operators*.
 
 There are two types of *terms*:
 
-* A [**Facet**](#facet-search)
+* **[Span Tags](#span-tags)** (also called span attributes)
 
-* A [**Tag**](#tags-search)
+* **[Infrastructure Tags](#infrastructure-tags)**: Spans inherit tags from hosts and [integrations][1] that generate them.
 
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
@@ -58,17 +82,17 @@ To combine multiple *terms* into a complex query, use any of the following boole
 | `OR`         | **Union**: either terms is contained in the selected events                                            | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
 
-### Facet search
+#### Span Tags search
 
-To search on a specific [facet](#facets) you must [add it as a facet first](#create-a-facet) then add `@` to specify you are searching on a facet.
+You do not need to [create facets](#create-a-facet) to search on attributes and tags anymore.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter:
+To search on a specific **span tag**, prepend an `@` to specify you are searching on an attribute.
 
-`@url:www.datadoghq.com`
+For instance, if your attribute name is **http.method** and you want to filter on the **http.method** value *POST* just enter:
 
-### Tags search
+`@http.method:POST`
 
-Your traces inherit tags from hosts and [integrations][1] that generate them. They can be used in the search and as facets as well:
+To search on a specific **infrastructure tag**, you don't need to prepend
 
 | Query                                                          | Match                                                                       |
 |:---------------------------------------------------------------|:----------------------------------------------------------------------------|
@@ -129,9 +153,9 @@ The time range allows you to display traces within a given time period. Quickly 
 
 {{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Select time frame" >}}
 
-## Trace stream
+## Span stream
 
-The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+The span stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 
 ### Displaying a full trace
 
