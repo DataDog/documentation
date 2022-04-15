@@ -62,4 +62,4 @@ Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the
 [1]: /integrations/amazon_lambda/#metric-collection
 [2]: /metrics/distributions/
 [3]: /serverless/installation/
-[4]: https://app.datadoghq.com/screen/integration/30306
+[4]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
