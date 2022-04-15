@@ -457,7 +457,7 @@ The following configuration variables are for features that are available for us
 
 Datadog APM tracer supports [B3][8] and [W3C][9] headers extraction and injection for distributed tracing.
 
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently four styles are supported:
+Distributed headers injection and extraction is controlled by configuring injection/extraction styles. The .NET Tracer supports four styles:
 
 - Datadog: `Datadog`
 - B3: `B3`
