@@ -2,21 +2,23 @@
 title: Instrumenting Python Serverless Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/distributed_tracing/'
+    - link: '/serverless/configuration'
       tag: 'Documentation'
-      text: 'Tracing Serverless Applications'
-    - link: 'serverless/custom_metrics/'
-      tag: 'Documentation'
-      text: 'Submitting Custom Metrics from Serverless Applications'
+      text: 'Configure Serverless Monitoring'
     - link: '/serverless/guide/troubleshoot_serverless_monitoring'
       tag: 'Documentation'
       text: 'Troubleshoot Serverless Monitoring'
+    - link: 'serverless/custom_metrics/'
+      tag: 'Documentation'
+      text: 'Submitting Custom Metrics from Serverless Applications'
 aliases:
     - /serverless/datadog_lambda_library/python/
     - /serverless/guide/python/
 ---
 
 <div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="http://docs.datadoghq.com/serverless/guide/datadog_forwarder_python">Using the Datadog Forwarder - Python</a> guide.</div>
+
+<div class="alert alert-warning">The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in VPC without access to public internet, you can <a href="/agent/guide/private-link/">send data over AWS PrivateLink</a> to the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">send data over a proxy</a> for all other sites.</div>
 
 ## Installation
 
@@ -88,7 +90,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a JavaScript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/python?tab=custom">custom installation instructions</a>.</div>
+<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a JavaScript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="./?tab=custom">custom installation instructions</a>.</div>
 
 The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
@@ -122,7 +124,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to add the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog to your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 1. Install the Datadog CloudFormation macro
 
@@ -168,7 +170,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
+The [Datadog CDK Construct][1] automatically installs Datadog to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
 
 1. Install the Datadog CDK constructs library
 
@@ -210,7 +212,7 @@ The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to 
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
-1. Install the Datadog Lambda Library for Python
+1. Install the Datadog Lambda Library
 
     If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must install the Datadog Lambda library as a dependency of your function within the image.
 
@@ -331,27 +333,21 @@ The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to 
 {{% /tab %}}
 {{< /tabs >}}
 
-### PrivateLink and Proxy
+## What's next?
 
-The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in VPC without access to public internet, you can [send data over AWS PrivateLink][1] to the US1 (`datadoghq.com`) [Datadog site][2], or [send data over a proxy][3] for all other sites.
-
-## Explore Datadog serverless monitoring
-
-Congratulations! Once you complete all the installation steps above, you can now view metrics, logs, and traces on the [Serverless Homepage][4].
-
-What's next?
+- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
-- See the [troubleshooting guide][5] if you have trouble collecting the telemetry
-- See the [advanced configurations][6] to
+- See the [troubleshooting guide][2] if you have trouble collecting the telemetry
+- See the [advanced configurations][3] to
     - connect your telemetry using tags
     - collect telemetry for AWS API Gateway, SQS, etc.
     - capture the Lambda request and response payloads
     - link errors of your Lambda functions to your source code
     - filter or scrub sensitive information from logs or traces
 
-## Monitor custom business logic
+### Monitor custom business logic
 
-To monitor your custom business logic, submit a custom metric or span using the sample code below. For additional options, see [custom metric submission for serverless applications][7] and the APM guide for [custom instrumentation][8].
+To monitor your custom business logic, submit a custom metric or span using the sample code below. For additional options, see [custom metric submission for serverless applications][4] and the APM guide for [custom instrumentation][5].
 
 ```python
 import time
@@ -391,11 +387,8 @@ def get_message():
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/private-link/
-[2]: /getting_started/site/
-[3]: /agent/proxy/
-[4]: https://app.datadoghq.com/functions
-[5]: /serverless/guide/troubleshoot_serverless_monitoring/
-[6]: /serverless/configuration/
-[7]: /serverless/custom_metrics?tab=python
-[8]: /tracing/custom_instrumentation/python/
+[1]: https://app.datadoghq.com/functions
+[2]: /serverless/guide/troubleshoot_serverless_monitoring/
+[3]: /serverless/configuration/
+[4]: /serverless/custom_metrics?tab=python
+[5]: /tracing/custom_instrumentation/python/

@@ -2,18 +2,15 @@
 title: Instrumenting Ruby Serverless Applications
 kind: documentation
 further_reading:
-- link: 'serverless/datadog_lambda_library/ruby'
-  tag: 'Documentation'
-  text: 'Datadog Lambda Library for Ruby'
-- link: 'serverless/distributed_tracing/'
-  tag: 'Documentation'
-  text: 'Tracing Serverless Applications'
-- link: 'serverless/custom_metrics/'
-  tag: 'Documentation'
-  text: 'Submitting Custom Metrics from Serverless Applications'
-- link: '/serverless/guide/troubleshoot_serverless_monitoring'
-  tag: 'Documentation'
-  text: 'Troubleshoot Serverless Monitoring'
+    - link: '/serverless/configuration'
+      tag: 'Documentation'
+      text: 'Configure Serverless Monitoring'
+    - link: '/serverless/guide/troubleshoot_serverless_monitoring'
+      tag: 'Documentation'
+      text: 'Troubleshoot Serverless Monitoring'
+    - link: 'serverless/custom_metrics/'
+      tag: 'Documentation'
+      text: 'Submitting Custom Metrics from Serverless Applications'
 aliases:
     - /serverless/datadog_lambda_library/ruby/
 ---
@@ -22,116 +19,71 @@ aliases:
 
 The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
-## Configuration
+## Installation
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-You can also add the [instrumentation command](#instrument) to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command _after_ your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
+1. Install the Datadog CLI client
 
-### Install
+    ```sh
+    npm install -g @datadog/datadog-ci
+    ```
 
-Install the Datadog CLI with NPM:
+2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in the interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
 
-```sh
-npm install -g @datadog/datadog-ci
-```
+    ```sh
+    datadog-ci lambda instrument -i
+    ```
 
-### Configure credentials
+3. Configure the AWS credentials
 
-For a quick start, configure Datadog and [AWS credentials][1] using the [instrumentation command](#instrument). For production applications, provide credentials in a more secure manner by using environment variables. For example:
+    Datadog CLI requires access to the AWS Lambda service, and depends on the AWS JavaScript SDK to [resolve the credentials][1]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
 
-```bash
-export DATADOG_API_KEY="<DD_API_KEY>"
-export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu, us3.datadoghq.com or ddog-gov.com
-export AWS_ACCESS_KEY_ID="<ACCESS KEY ID>"
-export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
-```
+4. Configure the Datadog site
 
-### Instrument
+    Specify the [Datadog site][2] where the telemetry should be sent to. The default is `datadoghq.com`.
 
-**Note**: Instrument your Lambda functions in a dev or staging environment first. If the instrumentation needs to be reverted, run `uninstrument` with the same arguments that was used for instrumentation.
+    ```sh
+    export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu or ddog-gov.com
+    ```
 
-To instrument your Lambda functions, run the following command:
+5. Configure the Datadog API key
 
-```sh
-datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -e <extension_version>
-```
+    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string, instead of being inside a json blob. Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
 
-To fill in the placeholders:
+    ```sh
+    export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
+    ```
 
--   Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
--   Replace `<aws_region>` with the AWS region name.
--   Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+    For quick testing purposes, you can also set the Datadog API key in plaintext:
 
-For example:
+    ```sh
+    export DATADOG_API_KEY="<DATADOG_API_KEY>"
+    ```
 
-```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
-```
+6. Instrument your Lambda functions
 
-More information and additional parameters can be found in the [CLI documentation][2].
+    **Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
-### Install the Lambda Library
+    To instrument your Lambda functions, run the following command.
 
-The Datadog Lambda Library can be installed as a layer or a gem. For most functions, Datadog recommends installing the library as a layer. If your Lambda function is deployed as a container image, you must install the library as a gem.
+    ```sh
+    datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
+    ```
 
-The minor version of the `datadog-lambda` gem always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
+    To fill in the placeholders:
+    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
+    - Replace `<aws_region>` with the AWS region name.
 
-#### Using the layer
+    Additional parameters can be found in the [CLI documentation][3].
 
-[Configure the layers][3] for your Lambda function using the ARN in the following format.
 
-```
-# For commercial regions
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
-
-# For us-gov regions
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
-```
-
-For example:
-
-```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
-```
-
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can add the Datadog Lambda library as a layer.
-#### Using the gem
-
-Add the following to your Gemfile:
-
-```Gemfile
-gem 'datadog-lambda'
-```
-
-To use Datadog APM, you must also add `ddtrace` as a second dependency in your Gemfile.
-
-```Gemfile
-gem 'datadog-lambda'
-gem 'ddtrace'
-```
-
-`ddtrace` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
-
-Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function’s Dockerfile to ensure that the native extensions can be successfully compiled.
-
-```dockerfile
-FROM <base image>
-
-# assemble your container image
-
-RUN yum -y install gcc gmp-devel make
-RUN bundle config set path 'vendor/bundle'
-RUN bundle install
-```
-
-[1]: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[2]: https://docs.datadoghq.com/getting_started/site/
+[3]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
