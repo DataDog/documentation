@@ -21,7 +21,7 @@ Tagging is used throughout Datadog to query the machines and metrics you monitor
 Tags can be configured in several different ways:
 
 - In the Datadog Agent [configuration file](#configuration-file) or each individual integration configuration file
-- Through the the Datadog [UI](#ui)
+- Through the Datadog [UI](#ui)
 - With the Datadog [API](#api)
 - With the [DogStatsD](#dogstatsd)
 
@@ -131,7 +131,7 @@ hostname: mymachine.mydomain
 
 ##### Changing the hostname
 
-* The old hostname remains in the UI for 2 hours but does not show new metrics.
+* The old hostname remains in the UI for 2 hours, but does not show new metrics.
 * Any data from hosts with the old hostname can be queried with the API.
 * To graph metrics with the old and new hostname in one graph, use [arithmetic between two metrics][5].
 
@@ -148,7 +148,7 @@ hostname: mymachine.mydomain
 
 The most efficient method for assigning tags is to rely on integration inheritance. Tags you assign to your AWS instances, Chef recipes, and other integrations are automatically inherited by hosts and metrics you send to Datadog.
 
-For containerized environments, it is recommend to follow the [unified service tagging][2] documentation to achieve a single point of configuration across all of your Datadog telemetry.
+For containerized environments, it is recommended to follow the [unified service tagging][2] documentation to achieve a single point of configuration across all of your Datadog telemetry.
 
 ##### Cloud integrations
 

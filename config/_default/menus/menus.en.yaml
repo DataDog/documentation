@@ -246,51 +246,61 @@ main:
     parent: agent
     identifier: agent_kubernetes
     weight: 3
-  - name: Kubernetes distributions
+  - name: Installation
+    url: agent/kubernetes/installation
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_installation
+    weight: 301
+  - name: Configuration
+    url: agent/kubernetes/configuration
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_configuration
+    weight: 302
+  - name: Distributions
     url: agent/kubernetes/distributions
     parent: agent_kubernetes
     identifier: agent_kubernetes_distributions
-    weight: 301
+    weight: 303
   - name: APM
     url: agent/kubernetes/apm/
     parent: agent_kubernetes
     identifier: agent_kubernetes_apm
-    weight: 302
+    weight: 304
   - name: Log collection
     url: agent/kubernetes/log/
     parent: agent_kubernetes
     identifier: agent_kubernetes_log
-    weight: 303
+    weight: 305
   - name: Tag extraction
     url: agent/kubernetes/tag/
     parent: agent_kubernetes
     identifier: agent_kubernetes_tag
-    weight: 304
-  - name: Autodiscovery
+    weight: 306
+  - name: Integrations & Autodiscovery
     url: agent/kubernetes/integrations/
     parent: agent_kubernetes
     identifier: agent_kubernetes_integrations
-    weight: 305
-  - name: Prometheus
+    weight: 307
+  - name: Prometheus & OpenMetrics
     url: agent/kubernetes/prometheus/
     parent: agent_kubernetes
     identifier: agent_kubernetes_prometheus
-    weight: 306
-  - name: Data collected
-    url: agent/kubernetes/data_collected/
-    parent: agent_kubernetes
-    identifier: agent_kubernetes_data_collected
-    weight: 307
+    weight: 308
   - name: Control plane monitoring
     url: agent/kubernetes/control_plane/
     parent: agent_kubernetes
     identifier: agent_kubernetes_control_plane
-    weight: 308
+    weight: 309
+  - name: Data collected
+    url: agent/kubernetes/data_collected/
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_data_collected
+    weight: 310
   - name: Operator configuration
     url: agent/kubernetes/operator_configuration
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
-    weight: 309
+    weight: 311
   - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
@@ -492,6 +502,11 @@ main:
     identifier: watchdog_top_level
     pre: watchdog
     weight: 50000
+  - name: RCA
+    url: watchdog/rca/
+    identifier: watchdog_rca
+    parent: watchdog_top_level
+    weight: 2
   - name: Events
     url: events/
     identifier: events_top_level
@@ -4692,8 +4707,10 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - UploadIdPForOrg
+        - UploadIdPMetadata
       unstable: []
       order: 5
   - name: Update your organization
