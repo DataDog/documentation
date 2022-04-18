@@ -2901,6 +2901,10 @@ main:
     url: account_management/org_settings/sensitive_data_detection
     parent: organization_settings
     weight: 205
+  - name: Custom Landing Page
+    url: account_management/org_settings/custom_landing
+    parent: organization_settings
+    weight: 206
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
