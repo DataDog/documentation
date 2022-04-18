@@ -1858,7 +1858,7 @@ main:
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_gcsql
     weight: 104
-  - name: Advanced Configuration
+  - name: Azure
     url: database_monitoring/setup_mysql/azure
     parent: dbm_setup_mysql
     identifier: dbm_mysql_azure
