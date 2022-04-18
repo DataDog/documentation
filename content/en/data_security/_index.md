@@ -103,7 +103,7 @@ Synthetic testing simulates requests and business transactions from testing loca
 
 You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you’re collecting. Read [Modifying RUM Data and Context][21] for details.
  
-Session Replay privacy options default to protecting end user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][22].
+Session Replay privacy options default to protecting end-user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][22].
 
 ### Database Monitoring
 
@@ -111,7 +111,7 @@ The Database Monitoring Agent obfuscates all query bind parameters sent to the D
 
 ## Other sources of potentially sensitive data 
 
-In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things, and you must consider whether the text you are sending represent private data for you or your customers, and if so avoid sending it. Consider the following (non-exhaustive) list of types of data you send to Datadog during the intended use of the product:
+In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things.  We recommend not including private or personal information in the text you are sending.  Consider the following (non-exhaustive) list of text data you send to Datadog in the intended use of the product:
 
 Metadata and tags
 : Metadata consists primarily of [tags][24] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
