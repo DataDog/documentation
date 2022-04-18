@@ -413,4 +413,4 @@ If you have installed and configured the integrations and Agent as described, an
 [8]: /agent/guide/agent-commands/#agent-status-and-information
 [9]: https://app.datadoghq.com/databases
 [10]: /integrations/azure_db_for_postgresql/
-[11]: /database_monitoring/setup_postres/troubleshooting
+[11]: /database_monitoring/setup_postgres/troubleshooting/
