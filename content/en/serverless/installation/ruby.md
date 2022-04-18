@@ -30,7 +30,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
     The minor version of the `datadog-lambda` gem always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
 
-    - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format.
+    - Option A: [Configure the layers][2] for your Lambda function using the ARN in the following format.
 
       ```
       # For regular regions
@@ -85,7 +85,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
     Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces and logs to Datadog.
 
-    1. [Install the Datadog Forwarder if you haven't][2].
+    1. [Install the Datadog Forwarder if you haven't][1].
     2. [Subscribe the Datadog Forwarder to your function's log groups][3].
 
 
@@ -152,8 +152,8 @@ For more information on custom metric submission, see [here][7]. For additional 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: /serverless/forwarder/
+[1]: /serverless/forwarder/
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [3]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [4]: https://app.datadoghq.com/functions
 [5]: /serverless/guide/troubleshoot_serverless_monitoring/

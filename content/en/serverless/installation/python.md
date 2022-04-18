@@ -16,9 +16,9 @@ aliases:
     - /serverless/guide/python/
 ---
 
-<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="http://docs.datadoghq.com/serverless/guide/datadog_forwarder_python">Using the Datadog Forwarder - Python</a> guide.</div>
+<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="/serverless/guide/datadog_forwarder_python">Using the Datadog Forwarder - Python</a> guide.</div>
 
-<div class="alert alert-warning">The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in VPC without access to public internet, you can <a href="/agent/guide/private-link/">send data over AWS PrivateLink</a> to the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">send data over a proxy</a> for all other sites.</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> to the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 ## Installation
 

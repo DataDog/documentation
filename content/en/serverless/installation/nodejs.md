@@ -19,9 +19,11 @@ aliases:
     - /serverless/guide/nodejs/
 ---
 
-<div class="alert alert-warning">If you previously set up Datadog Serverless using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_node">Using the Datadog Forwarder - Node.js</a>.</div>
+<div class="alert alert-warning">If you previously set up Datadog Serverless using the Datadog Forwarder, see <a href="serverless/guide/datadog_forwarder_node">Using the Datadog Forwarder - Node.js</a>.</div>
 
-<div class="alert alert-warning">The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in VPC without access to public internet, you can <a href="/agent/guide/private-link/">send data over AWS PrivateLink</a> to the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">send data over a proxy</a> for all other sites.</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> to the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
+
+<div class="alert alert-info">If you are bundling using webpack or esbuild, <a href="/serverless/guide/serverless_tracing_and_webpack/">mark the Datadog libraries as external</a>.</div>
 
 ## Installation
 
