@@ -19,7 +19,7 @@ aliases:
     - /serverless/guide/nodejs/
 ---
 
-<div class="alert alert-warning">If you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_node">Using the Datadog Forwarder - Node.js</a> guide.</div>
+<div class="alert alert-warning">If you previously set up Datadog Serverless using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_node">Using the Datadog Forwarder - Node.js</a>.</div>
 
 <div class="alert alert-warning">The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in VPC without access to public internet, you can <a href="/agent/guide/private-link/">send data over AWS PrivateLink</a> to the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">send data over a proxy</a> for all other sites.</div>
 
@@ -260,22 +260,20 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
     - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
       ```sh
-      # AWS commercial regions (x86 and arm64, respectively)
+      # AWS commercial regions
       arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
-      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="node" >}}
 
-      # AWS GovCloud regions (x86 and arm64, respectively)
+      # AWS GovCloud regions
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="node" >}}
       ```
 
       Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Node12-x`, and `Node14-x`.
 
     - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the packages `datadog-lambda-js` and `dd-trace` using your favorite package manager.
 
-    ```
-    npm install datadog-lambda-js dd-trace
-    ```
+      ```
+      npm install datadog-lambda-js dd-trace
+      ```
 
 2. Install the Datadog Lambda Extension
 
@@ -305,10 +303,6 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
-
-### PrivateLink and Proxy
-
-The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in VPC without access to public internet, you can [send data over AWS PrivateLink][1] to the US1 (`datadoghq.com`) [Datadog site][2], or [send data over a proxy][3] for all other sites.
 
 ## What's next?
 
