@@ -23,7 +23,7 @@ aliases:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> to the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
-<div class="alert alert-info">If you are bundling using webpack or esbuild, <a href="/serverless/guide/serverless_tracing_and_webpack/">mark the Datadog libraries as external</a>.</div>
+<div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_webpack/">mark the Datadog libraries as external</a>.</div>
 
 ## Installation
 

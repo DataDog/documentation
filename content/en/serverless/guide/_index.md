@@ -14,10 +14,11 @@ kind: guide
 ## Install using the Datadog Forwarder
 
 {{< whatsnext desc="Installation instructions for applications previously set up to be monitored using the Datadog Forwarder" >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Installing Serverless with the Datadog Forwarder - Node.js{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Installing Serverless with the Datadog Forwarder - Python{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Installing Serverless with the Datadog Forwarder - Java{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Installing Serverless with the Datadog Forwarder - Go{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Instrumenting Node.js Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Instrumenting Python Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Instrumenting Java Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Instrumenting Go Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_dotnet" >}}Instrumenting .NET Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/extension_motivation" >}}Deciding to migrate to the Datadog Lambda Extension{{< /nextlink >}}
 {{< /whatsnext >}}
 

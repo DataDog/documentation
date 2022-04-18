@@ -90,8 +90,6 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a JavaScript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="./?tab=custom">custom installation instructions</a>.</div>
-
 The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
