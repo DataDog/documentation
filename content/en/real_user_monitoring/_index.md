@@ -87,6 +87,8 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS][6] and [Android][7].
 
+{{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="Web Views captured in a user session in the RUM Explorer" >}}
+
 ## Explore Datadog Session Replay
 
 ### Session replays
