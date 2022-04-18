@@ -29,7 +29,7 @@ The service summary displays the graphs of a chosen [service][1] in your screenb
     * Latency
     * Breakdown
     * Distribution
-    * Resource
+    * Resource (NOTE: you will need to select the Large widget size to see this option.)
 4. Choose your display preference by selecting a timeframe and the number of column to display your graphs across.
 5. Enter a title for your graph.
 
