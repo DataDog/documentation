@@ -58,21 +58,13 @@ Enable Universal Service Monitoring in your Agent by using one of the following 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Add the following to your values file:
+Using the Datadog chart version >= 2.26.2, add the following to your values file:
 
 ```
-agents:
+datadog:
   ...
-  containers:
-    ...
-    processAgent:
-      env:
-        - name: DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED
-          value: "true"
-    systemProbe:
-      env:
-        - name: DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED
-          value: "true"
+  serviceMonitoring:
+    enabled: true
 ```
 
 {{% /tab %}}
