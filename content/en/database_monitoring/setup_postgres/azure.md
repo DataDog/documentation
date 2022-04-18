@@ -44,14 +44,14 @@ Data security considerations
 
 ## Configure Postgres settings
 
-Configure the following [parameters][3] in the [Server parameters][4] and then **restart the server** for the settings to take effect.
+Configure the following [parameters][3] in the [Server parameters][4], then **restart the server** for the settings to take effect.
 
 {{< tabs >}}
 {{% tab "Single Server" %}}
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 
@@ -60,8 +60,8 @@ Configure the following [parameters][3] in the [Server parameters][4] and then *
 
 | Parameter            | Value | Description |
 |----------------------| -- | --- |
-| `azure.extensions` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics via the [pg_stat_statements][1] extension. |
-| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
+| `azure.extensions` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][1] extension. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 
@@ -73,7 +73,7 @@ Configure the following [parameters][3] in the [Server parameters][4] and then *
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][5].
+Choose a PostgreSQL database on the database server the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][5].
 
 Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][6] by running:
 
@@ -127,7 +127,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][5] for more information.
+**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See  the explanation of [PostgreSQL custom metric collection][5] for more information.
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
@@ -228,7 +228,7 @@ To configure the Database Monitoring Agent running in a Docker container, you ca
 
 ### Command line
 
-Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+Execute the following command to run the Agent from your command line. Replace the values to match your account and environment:
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -257,7 +257,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 ### Dockerfile
 
-Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
+Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom Agent without changing any infrastructure configuration:
 
 ```Dockerfile
 FROM datadog/agent:7.35.0
@@ -285,7 +285,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
+Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration with static files mounted in the Cluster Agent container, or using service annotations:
 
 ### Command line with Helm
 
@@ -375,7 +375,7 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-The Cluster Agent automatically registers this configuration and begin running the Postgres check.
+The Cluster Agent automatically registers this configuration and begins running the Postgres check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 
@@ -392,7 +392,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ## Install the Azure PostgreSQL Integration
 
-To collect more comprehensive database metrics from AZURE, install the [Azure PostgreSQL integration][10] (optional).
+To collect more comprehensive database metrics from Azure, install the [Azure PostgreSQL integration][10] (optional).
 
 ## Troubleshooting
 
@@ -413,4 +413,4 @@ If you have installed and configured the integrations and Agent as described, an
 [8]: /agent/guide/agent-commands/#agent-status-and-information
 [9]: https://app.datadoghq.com/databases
 [10]: /integrations/azure_db_for_postgresql/
-[11]: /database_monitoring/troubleshooting/?tab=postgres
+[11]: /database_monitoring/setup_postres/troubleshooting

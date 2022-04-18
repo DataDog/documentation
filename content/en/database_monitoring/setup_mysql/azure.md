@@ -15,7 +15,7 @@ further_reading:
 
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
+The Agent collects telemetry directly from the database by logging in as a read-only user. Complete the following steps to enable Database Monitoring with your MySQL database:
 
 1. [Configure database parameters](#configure-mysql-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
@@ -167,7 +167,7 @@ To configure the Database Monitoring Agent running in a Docker container, you ca
 
 ### Command line
 
-Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+Execute the following command to run the agent from your command line. Replace the values to match your account and environment:
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -210,7 +210,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration either with static files mounted in the Cluster Agent container or using service annotations:
+Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration with static files mounted in the Cluster Agent container, or by using service annotations:
 
 ### Command line with Helm
 
@@ -283,7 +283,7 @@ spec:
     name: mysql
 ```
 
-The Cluster Agent automatically registers this configuration and begin running the MySQL check.
+The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 
@@ -296,7 +296,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ### Validate
 
-[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+[Run the Agent's status subcommand][6] and look for `mysql` under the **Checks** section. Or visit the [Databases][7] page to get started.
 
 ## Install the Azure MySQL Integration
 
@@ -318,4 +318,4 @@ If you have installed and configured the integrations and Agent as described, an
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/azure_db_for_mysql
-[9]: /database_monitoring/troubleshooting/?tab=mysql
+[9]: /database_monitoring/setup_mysql/troubleshooting
