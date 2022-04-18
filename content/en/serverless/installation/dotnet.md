@@ -2,7 +2,6 @@
 title: Instrumenting .NET Serverless Applications
 kind: documentation
 further_reading:
-further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'
       text: 'Configure Serverless Monitoring'
@@ -14,7 +13,7 @@ further_reading:
       text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-<div class="alert alert-warning">The Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must <a href="serverless/guide/datadog_forwarder_dotnet">using the Datadog Forwarder</a> instead.</div>
+<div class="alert alert-warning">The Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must instrument <a href="serverless/guide/datadog_forwarder_dotnet">using the Datadog Forwarder</a> instead.</div>
 
 ## Installation
 
@@ -176,7 +175,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
 
     - Replace `<DD_SITE>` with your [Datadog site][2] to send the telemetry to.
-    - Set the environment variable `<DD_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Replace `<DD_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
