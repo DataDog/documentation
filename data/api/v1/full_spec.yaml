@@ -97,7 +97,7 @@ components:
 
             For example, `env:production,instance-type:c1.*,!region:us-east-1`'
           example:
-          - <KEY>:<VALUE>
+          - $KEY:$VALUE
           items:
             description: The list of the filter_tags.
             type: string
@@ -107,7 +107,7 @@ components:
 
             and metrics reporting through this integration.'
           example:
-          - <KEY>:<VALUE>
+          - $KEY:$VALUE
           items:
             description: The list of the the host_tags.
             type: string
@@ -755,8 +755,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -780,7 +779,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -1336,6 +1334,7 @@ components:
       properties:
         deleted_monitor_id:
           description: ID of the deleted monitor.
+          example: 666486743
           format: int64
           type: integer
       readOnly: true
@@ -2623,7 +2622,7 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
-      description: Timeseries or Scalar response. **This feature is currently in beta.**
+      description: Timeseries or Scalar response.
       enum:
       - timeseries
       - scalar
@@ -2797,11 +2796,11 @@ components:
           example: '123456712345671234567'
           type: string
         client_x509_cert_url:
-          description: 'Should be `https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>`
+          description: 'Should be `https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL`
 
-            where `<CLIENT_EMAIL>` is the email found in your JSON service account
+            where `$CLIENT_EMAIL` is the email found in your JSON service account
             key.'
-          example: https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>
+          example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
         errors:
           description: An array of errors.
@@ -2939,8 +2938,7 @@ components:
       description: An updated geomap widget.
       properties:
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -2951,7 +2949,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -3621,6 +3618,7 @@ components:
         next_record_id:
           description: The cursor to get the next results (if any). To make the next
             request, use the same parameters and add `next_record_id`.
+          nullable: true
           type: string
       type: object
     HourlyUsageAttributionResponse:
@@ -3980,18 +3978,22 @@ components:
       x-enum-varnames:
       - EVENT_LIST
     ListStreamSource:
-      default: issue_stream
+      default: apm_issue_stream
       description: Source from which to query items to display in the stream.
       enum:
       - issue_stream
       - logs_stream
       - audit_stream
-      example: issue_stream
+      - rum_issue_stream
+      - apm_issue_stream
+      example: apm_issue_stream
       type: string
       x-enum-varnames:
       - ISSUE_STREAM
       - LOGS_STREAM
       - AUDIT_STREAM
+      - RUM_ISSUE_STREAM
+      - APM_ISSUE_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -4009,7 +4011,7 @@ components:
             - field: timestamp
               width: auto
             query:
-              data_source: issue_stream
+              data_source: apm_issue_stream
               query_string: '@data_source:APM'
             response_format: event_list
           items:
@@ -4875,7 +4877,7 @@ components:
       properties:
         from:
           description: Minimum timestamp for requested logs.
-          example: '2020-02-02T02:02:02Z'
+          example: '2020-02-02T02:02:02.202Z'
           format: date-time
           type: string
         timezone:
@@ -4885,7 +4887,7 @@ components:
           type: string
         to:
           description: Maximum timestamp for requested logs.
-          example: '2020-02-02T20:20:20Z'
+          example: '2020-02-20T02:02:02.202Z'
           format: date-time
           type: string
       required:
@@ -5786,8 +5788,14 @@ components:
           example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
           type: string
         restricted_roles:
-          description: A list of role identifiers that can be pulled from the Roles
-            API. Cannot be used with `locked` option.
+          description: A list of unique role identifiers to define which roles are
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -5957,10 +5965,12 @@ components:
       description: Data source for event platform-based queries.
       enum:
       - rum
+      - ci_pipelines
       example: rum
       type: string
       x-enum-varnames:
       - RUM
+      - CI_PIPELINES
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -6112,8 +6122,9 @@ components:
             - If `False`, `[Triggered] Monitor Title`'
           type: boolean
         locked:
+          deprecated: true
           description: Whether or not the monitor is locked (only editable by creator
-            and admins).
+            and admins). Use `restricted_roles` instead.
           type: boolean
         min_failure_duration:
           default: 0
@@ -6653,6 +6664,7 @@ components:
       - event-v2 alert
       - audit alert
       - ci-pipelines alert
+      - error-tracking alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -6670,6 +6682,7 @@ components:
       - EVENT_V2_ALERT
       - AUDIT_ALERT
       - CI_PIPELINES_ALERT
+      - ERROR_TRACKING_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -6720,8 +6733,14 @@ components:
           description: The monitor query.
           type: string
         restricted_roles:
-          description: A list of role identifiers that can be pulled from the Roles
-            API. Cannot be used with `locked` option.
+          description: A list of unique role identifiers to define which roles are
+            allowed to edit the monitor. The unique identifiers for all roles can
+            be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
+            and are located in the `data.id` field. Editing a monitor includes any
+            updates to the monitor configuration, monitor deletion, and muting of
+            the monitor for any amount of time. `restricted_roles` is the successor
+            of `locked`. For more information about `locked` and `restricted_roles`,
+            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
           items:
             description: A role UUID.
             type: string
@@ -6778,6 +6797,7 @@ components:
         next_record_id:
           description: The cursor to use to get the next results, if any. To make
             the next request, use the same parameters with the addition of the `next_record_id`.
+          nullable: true
           type: string
       type: object
     MonthlyUsageAttributionResponse:
@@ -7825,7 +7845,7 @@ components:
         name:
           description: The name of the new child-organization, limited to 32 characters.
           example: New child org
-          maximum: 32
+          maxLength: 32
           type: string
         public_id:
           description: The `public_id` of the organization you are operating within.
@@ -7854,7 +7874,7 @@ components:
         name:
           description: The name of the new child-organization, limited to 32 characters.
           example: New child org
-          maximum: 32
+          maxLength: 32
           type: string
         subscription:
           $ref: '#/components/schemas/OrganizationSubscription'
@@ -8118,6 +8138,8 @@ components:
           $ref: '#/components/schemas/WidgetTextAlign'
         time:
           $ref: '#/components/schemas/WidgetTime'
+        timeseries_background:
+          $ref: '#/components/schemas/TimeseriesBackground'
         title:
           description: Title of your widget.
           type: string
@@ -8158,8 +8180,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -8176,7 +8197,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -9403,14 +9423,12 @@ components:
       description: Scatterplot request containing formulas and functions.
       properties:
         formulas:
-          description: List of Scatterplot formulas that operate on queries. **This
-            feature is currently in beta.**
+          description: List of Scatterplot formulas that operate on queries.
           items:
             $ref: '#/components/schemas/ScatterplotWidgetFormula'
           type: array
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -10449,8 +10467,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -10467,7 +10484,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -11016,18 +11032,17 @@ components:
       properties:
         password:
           description: Password to use for the basic authentication.
-          example: ''
+          example: PaSSw0RD!
           type: string
         type:
           $ref: '#/components/schemas/SyntheticsBasicAuthWebType'
         username:
           description: Username to use for the basic authentication.
-          example: ''
+          example: my_username
           type: string
       required:
       - password
       - username
-      - type
       type: object
     SyntheticsBasicAuthWebType:
       default: web
@@ -11130,7 +11145,7 @@ components:
         locations:
           description: Array of locations used to run the test.
           example:
-          - example-location
+          - aws:eu-west-3
           items:
             description: A location from which the test was run.
             type: string
@@ -11164,6 +11179,8 @@ components:
           type: array
         tags:
           description: Array of tags attached to the test.
+          example:
+          - env:prod
           items:
             description: A tag attached to the test.
             type: string
@@ -11382,9 +11399,6 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
-      required:
-      - from_ts
-      - to_ts
       type: object
     SyntheticsBrowserTestResultShortResult:
       description: Object with the result of the last browser test run.
@@ -11527,6 +11541,8 @@ components:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
           items:
             description: A location from which the test was run.
             type: string
@@ -11808,12 +11824,7 @@ components:
       description: Attributes of the global variable.
       properties:
         restricted_roles:
-          description: List of role identifiers that can be pulled from the Roles
-            API.
-          items:
-            description: UUID for a role.
-            type: string
-          type: array
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
       type: object
     SyntheticsGlobalVariableParseTestOptions:
       description: Parser options to use for retrieving a Synthetics global variable
@@ -11958,6 +11969,8 @@ components:
           description: Unique identifier of the private location.
           readOnly: true
           type: string
+        metadata:
+          $ref: '#/components/schemas/SyntheticsPrivateLocationMetadata'
         name:
           description: Name of the private location.
           example: New private location
@@ -12001,6 +12014,12 @@ components:
           description: Public key for result encryption.
           type: string
       type: object
+    SyntheticsPrivateLocationMetadata:
+      description: Object containing metadata about the private location.
+      properties:
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+      type: object
     SyntheticsPrivateLocationSecrets:
       description: Secrets for the private location. Only present in the response
         when creating the private location.
@@ -12031,6 +12050,16 @@ components:
           readOnly: true
           type: string
       type: object
+    SyntheticsRestrictedRoles:
+      description: A list of role identifiers that can be pulled from the Roles API,
+        for restricting read and write access.
+      example:
+      - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      items:
+        description: UUID for a role.
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        type: string
+      type: array
     SyntheticsSSLCertificate:
       description: Object describing the SSL certificate used for a Synthetic test.
       properties:
@@ -12323,6 +12352,8 @@ components:
           $ref: '#/components/schemas/Creator'
         locations:
           description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
           items:
             description: A location from which the test was run.
             type: string
@@ -12482,6 +12513,8 @@ components:
         noScreenshot:
           description: Prevents saving screenshots of the steps.
           type: boolean
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         tick_every:
@@ -12895,8 +12928,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -12920,7 +12952,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -12965,6 +12996,27 @@ components:
       - STRING
       - INTEGER
       - DOUBLE
+    TimeseriesBackground:
+      description: Set a timeseries on the widget background.
+      properties:
+        type:
+          $ref: '#/components/schemas/TimeseriesBackgroundType'
+        yaxis:
+          $ref: '#/components/schemas/WidgetAxis'
+      required:
+      - type
+      type: object
+    TimeseriesBackgroundType:
+      default: area
+      description: Timeseries is made using an area or bars.
+      enum:
+      - bars
+      - area
+      example: bars
+      type: string
+      x-enum-varnames:
+      - BARS
+      - AREA
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Indexed Spans over time.
@@ -13084,8 +13136,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -13110,7 +13161,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13185,8 +13235,7 @@ components:
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -13203,7 +13252,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13291,8 +13339,7 @@ components:
       description: An updated treemap widget.
       properties:
         formulas:
-          description: List of formulas that operate on queries. **This feature is
-            currently in beta.**
+          description: List of formulas that operate on queries.
           items:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
@@ -13301,7 +13348,6 @@ components:
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
-            **This feature is currently in beta.**
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
@@ -13459,8 +13505,6 @@ components:
       - lambda_functions_percentage
       - lambda_invocations_usage
       - lambda_invocations_percentage
-      - lambda_usage
-      - lambda_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
       type: string
@@ -13485,8 +13529,6 @@ components:
       - LAMBDA_FUNCTIONS_PERCENTAGE
       - LAMBDA_INVOCATIONS_USAGE
       - LAMBDA_INVOCATIONS_PERCENTAGE
-      - LAMBDA_USAGE
-      - LAMBDA_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
     UsageAttributionSupportedMetrics:
@@ -13502,14 +13544,12 @@ components:
       - infra_host_usage
       - custom_timeseries_percentage
       - container_percentage
-      - lambda_usage
       - api_usage
       - apm_host_percentage
       - infra_host_percentage
       - snmp_usage
       - browser_percentage
       - api_percentage
-      - lambda_percentage
       - npm_host_usage
       - lambda_functions_usage
       - lambda_functions_percentage
@@ -13539,14 +13579,12 @@ components:
       - INFRA_HOST_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
       - CONTAINER_PERCENTAGE
-      - LAMBDA_USAGE
       - API_USAGE
       - APM_HOST_PERCENTAGE
       - INFRA_HOST_PERCENTAGE
       - SNMP_USAGE
       - BROWSER_PERCENTAGE
       - API_PERCENTAGE
-      - LAMBDA_PERCENTAGE
       - NPM_HOST_USAGE
       - LAMBDA_FUNCTIONS_USAGE
       - LAMBDA_FUNCTIONS_PERCENTAGE
@@ -13702,20 +13740,6 @@ components:
           type: number
         lambda_invocations_usage:
           description: The Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        lambda_percentage:
-          description: 'The percentage of Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_percentage instead.'
-          format: double
-          type: number
-        lambda_usage:
-          description: 'The Lambda function usage by tag(s).
-
-
-            **Note** this field is deprecated. Use lambda_functions_usage instead.'
           format: double
           type: number
         npm_host_percentage:
@@ -14342,8 +14366,8 @@ components:
           format: date-time
           type: string
         ingested_events_bytes:
-          description: Contains the total number of bytes ingested during a given
-            hour.
+          description: Contains the total number of bytes ingested for APM spans during
+            a given hour.
           format: int64
           type: integer
         org_name:
@@ -14625,6 +14649,32 @@ components:
           description: Get hourly usage for NPM hosts.
           items:
             $ref: '#/components/schemas/UsageNetworkHostsHour'
+          type: array
+      type: object
+    UsageOnlineArchiveHour:
+      description: Online Archive usage in a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        online_archive_events_count:
+          description: Total count of online archived events within the hour.
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+      type: object
+    UsageOnlineArchiveResponse:
+      description: Online Archive usage response.
+      properties:
+        usage:
+          description: Response containing Online Archive usage.
+          items:
+            $ref: '#/components/schemas/UsageOnlineArchiveHour'
           type: array
       type: object
     UsageProfilingHour:
@@ -15132,6 +15182,11 @@ components:
             all hours in the current date for all organizations.
           format: int64
           type: integer
+        online_archive_events_count_sum:
+          description: Sum of all online archived events over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -15195,8 +15250,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15444,6 +15499,11 @@ components:
             all hours in the current date for the given org.
           format: int64
           type: integer
+        online_archive_events_count_sum:
+          description: Sum of all online archived events over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -15505,8 +15565,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current date for the given org.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -15780,6 +15840,11 @@ components:
             all hours in the current months for all organizations.
           format: int64
           type: integer
+        online_archive_events_count_agg_sum:
+          description: Sum of all online archived events over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
         opentelemetry_host_top99p_sum:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -15860,8 +15925,8 @@ components:
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
-          description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current months for all organizations.
+          description: Shows the sum of all ingested APM span bytes over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         usage:
@@ -16030,7 +16095,24 @@ components:
           format: date-time
           type: string
         pagination:
-          $ref: '#/components/schemas/UsageAttributionPagination'
+          $ref: '#/components/schemas/UsageTopAvgMetricsPagination'
+      type: object
+    UsageTopAvgMetricsPagination:
+      description: The metadata for the current pagination.
+      properties:
+        limit:
+          description: Maximum amount of records to be returned.
+          format: int64
+          type: integer
+        next_record_id:
+          description: The cursor to get the next results (if any). To make the next
+            request, use the same parameters and add `next_record_id`.
+          nullable: true
+          type: string
+        total_number_of_records:
+          description: Total number of records.
+          format: int64
+          type: integer
       type: object
     UsageTopAvgMetricsResponse:
       description: Response containing the number of hourly recorded custom metrics
@@ -17018,7 +17100,7 @@ components:
               an organization. The ability to write monitors is not required to set
               downtimes.
             monitors_read: View monitors.
-            monitors_write: Change, mute, and delete individual monitors.
+            monitors_write: Edit, mute, and delete individual monitors.
             synthetics_global_variable_read: View, search, and use in tests the list
               of global variables available for Synthetics.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -17032,8 +17114,8 @@ components:
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
-            user_access_manage: Disable users, manage user roles, and manage SAML-to-role
-              mappings.
+            user_access_manage: Disable users, manage user roles, manage SAML-to-role
+              mappings, and configure logs restriction queries.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -17906,6 +17988,11 @@ paths:
           - file: dashboard_payload.json
             name: body
           step: there is a valid "dashboard" in the system
+        screenboard_dashboard:
+          parameters:
+          - file: screenboard_dashboard_payload.json
+            name: body
+          step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteDashboard
@@ -22539,6 +22626,8 @@ paths:
 
         - audit: `audit alert`
 
+        - error-tracking: `error-tracking alert`
+
 
         #### Query Types
 
@@ -22815,7 +22904,32 @@ paths:
         - **`#`** an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available in closed beta on US1, EU, US3 and US5.'
+        **NOTE** CI Pipeline monitors are in alpha on US1, EU, US3 and US5.
+
+
+        **Error Tracking Alert Query**
+
+
+        Example(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+        Example(APM Traces): `error-tracking-traces(query).rollup(rollup_method[,
+        measure]).last(time_window) operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
+        and `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -22892,6 +23006,7 @@ paths:
         required: true
         schema:
           items:
+            example: 666486743
             format: int64
             type: integer
           type: array
@@ -23167,6 +23282,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          example: 666486743
           format: int64
           type: integer
       - description: Delete the monitor even if it's referenced by other resources
@@ -23230,6 +23346,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          example: 666486743
           format: int64
           type: integer
       - description: When specified, shows additional information about the group
@@ -23286,6 +23403,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          example: 666486743
           format: int64
           type: integer
       requestBody:
@@ -23515,6 +23633,60 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: safe
+  /api/v1/monitor/{monitor_id}/validate:
+    post:
+      description: Validate the monitor provided in the request.
+      operationId: ValidateExistingMonitor
+      parameters:
+      - description: The ID of the monitor
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          example: 666486743
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Monitor'
+        description: Monitor request object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example: {}
+                type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Invalid JSON
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_write
+      summary: Validate an existing monitor
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
   /api/v1/monthly_custom_reports:
     get:
       description: Get monthly custom reports.
@@ -24310,7 +24482,8 @@ paths:
       description: Search for metrics from the last 24 hours in Datadog.
       operationId: ListMetrics
       parameters:
-      - description: Query string to search metrics upon. Must be prefixed with `metrics:`.
+      - description: Query string to search metrics upon. Can optionally be prefixed
+          with `metrics:`.
         in: query
         name: q
         required: true
@@ -24354,7 +24527,7 @@ paths:
         3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed
         size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting
         metrics directly to the Datadog API without using DogStatsD, expect:\n\n-
-        64 bits for the timestamp\n- 32 bits for the value\n- 20 bytes for the metric
+        64 bits for the timestamp\n- 32 bits for the value\n- 40 bytes for the metric
         names\n- 50 bytes for the timeseries\n- The full payload is approximately
         100 bytes. However, with the DogStatsD API,\ncompression is applied, which
         reduces the payload size."
@@ -24373,13 +24546,8 @@ paths:
               dynamic-points:
                 description: "Post time-series data that can be graphed on Datadog\u2019s
                   dashboards."
+                externalValue: examples/metrics/dynamic-points.json.sh
                 summary: Dynamic Points
-                value:
-                  series:
-                  - metric: system.load.1
-                    points:
-                    - - ${NOW}
-                      - 1234.5
                 x-variables:
                   NOW: $(date +%s)
             schema:
@@ -24424,6 +24592,12 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-given:
+        metric:
+          parameters:
+          - file: metric_payload.json
+            name: body
+          step: there is a valid "metric" in the system
       x-menu-order: 1
       x-undo:
         type: safe
@@ -25434,7 +25608,7 @@ paths:
         operationId: DeletePrivateLocation
         parameters:
         - name: location_id
-          source: private_location
+          source: private_location.id
         type: unsafe
   /api/v1/synthetics/private-locations/{location_id}:
     delete:
@@ -27795,7 +27969,13 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: Get Hourly Usage Attribution.
+      description: "Get Hourly Usage Attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetHourlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -27829,8 +28009,12 @@ paths:
         required: false
         schema:
           type: string
-      - description: Comma separated list of tags used to group usage. If no value
+      - description: 'Comma separated list of tags used to group usage. If no value
           is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
         in: query
         name: tag_breakdown_keys
         required: false
@@ -28285,7 +28469,13 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: Get Monthly Usage Attribution.
+      description: "Get Monthly Usage Attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetMonthlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -28325,8 +28515,12 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
-      - description: Comma separated list of tags used to group usage. If no value
-          is provided the usage will not be broken down by tags.
+      - description: 'Comma separated list of tag keys used to group usage. If no
+          value is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
         in: query
         name: tag_breakdown_keys
         required: false
@@ -28366,6 +28560,14 @@ paths:
       summary: Get Monthly Usage Attribution
       tags:
       - Usage Metering
+      x-given:
+        monthly_usage_attribution:
+          parameters:
+          - name: start_month
+            value: '"{{ timeISO(''now - 3d'') }}"'
+          - name: fields
+            value: '"infra_host_usage"'
+          step: there is a valid "monthly_usage_attribution" response
       x-menu-order: 31
       x-undo:
         type: safe
@@ -28486,6 +28688,65 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 14
+      x-undo:
+        type: safe
+  /api/v1/usage/online-archive:
+    get:
+      description: Get hourly usage for Online Archive.
+      operationId: GetUsageOnlineArchive
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageOnlineArchiveResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for Online Archive
+      tags:
+      - Usage Metering
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v1/usage/profiling:

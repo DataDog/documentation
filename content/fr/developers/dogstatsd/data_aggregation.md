@@ -11,7 +11,7 @@ further_reading:
   - link: developers/libraries
     tag: Documentation
     text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
+  - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
     tag: GitHub
     text: Code source de DogStatsD
 ---

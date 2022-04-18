@@ -7,6 +7,9 @@ aliases:
   - /logs/languages
   - /integrations/windows_event_log/
 further_reading:
+- link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
+  tag: "Blog"
+  text: "How to manage log files using Logrotate"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
@@ -39,7 +42,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 
 1. Install the [Datadog Agent][1].
 2. To enable log collection, change `logs_enabled:false` to `logs_enabled:true` in your Agent’s main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][5] for more information and examples.
-3. **Optional** Once enabled, the Datadog Agent can be configured to [tail log files or listen for logs sent over UDP/TCP][2], [filter out logs or scrub sensitive data][3], and aggregate [multi line logs][4].
+3. Once enabled, the Datadog Agent can be configured to [tail log files or listen for logs sent over UDP/TCP][2], [filter out logs or scrub sensitive data][3], and [aggregate multi-line logs][4].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/logs/#custom-log-collection

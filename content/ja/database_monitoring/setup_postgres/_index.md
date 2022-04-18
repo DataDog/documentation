@@ -5,7 +5,7 @@ description: Postgres データベースでのデータベースモニタリン�
 disable_sidebar: true
 ---
 
-{{< site-region region="us3,gov" >}} 
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -21,5 +21,5 @@ disable_sidebar: true
 
 ホスティングタイプを選択して設定の手順を確認します。
 
-{{< partial name="dbm/dbm-setup-postgres" >}} 
+{{< partial name="dbm/dbm-setup-postgres" >}}
 

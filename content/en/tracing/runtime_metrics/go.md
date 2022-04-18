@@ -50,5 +50,5 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 [2]: /developers/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /developers/dogstatsd/?tab=kubernetes#agent
-[5]: /integrations/amazon_ecs/#create-an-ecs-task
+[5]: /agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30587/go-runtime-metrics

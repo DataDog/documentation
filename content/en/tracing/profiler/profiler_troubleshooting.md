@@ -20,7 +20,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 ## Reduce overhead from default setup
 
-If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings.  Minimal configuration has the following changes compared to the default:
+If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings. Minimal configuration has the following changes compared to the default:
 
 - Increases sampling threshold to 500ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
 - Disables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
@@ -61,6 +61,7 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 
 ## Enabling the heap profiler
 <div class="alert alert-info">The Java heap profiler feature is in beta.</div>
+<div class="aler alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
 To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
 
 Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
@@ -238,9 +239,13 @@ If you've configured the profiler and don't see profiles in the profile search p
       ["response.Error"]="...",
       ```
 
-   6. Check the following field to ensure that the right url is used:
+   6. Check the following field to ensure that the right URL is used. If you use default configuration settings:
       ```
-      ["_profilesIngestionEndpoint_url"]="https://intake.profile.datadoghq.com/v1/input",
+      ["_profilesIngestionEndpoint_url"]="http://127.0.0.1:8126/profiling/v1/input",
+      ```
+      If your configuration specifies a different trace Agent URL using `DD_TRACE_AGENT_URL` or `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables, then this field must match those values. For example:
+      ```
+      ["_profilesIngestionEndpoint_url"]="http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>/profiling/v1/input",
       ```
 
 Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug files and the following information:
@@ -316,10 +321,22 @@ This error usually means that the profiler is unable to connect to the Datadog A
 
 Your profiles may be empty ("No CPU time reported") or contain few frames. Sometimes this is caused when applications have poor symbolization information. This may also be expected--the profiler activates only when the instrumented application is scheduled on the CPU, and applications may be predominately off-CPU for many reasons, such as low user load or high application wait time.
 
-The root of your profile is the frame annotated with the application name in parentheses. If this frame shows a significant amount of CPU time, but no frames, your application may have poor profiling fidelity. Consider the following:
+The root of your profile is the frame annotated with the application name in parentheses. If this frame shows a significant amount of CPU time, but no child frames, your application may have poor profiling fidelity. Consider the following:
 - Stripped binaries do not have symbols available. Try using a non-stripped binary or a non-minified container image.
 - Certain applications and libraries benefit from their debug packages being installed. This is true for services installed through your repo's package manager or similar.
 
+## Error while loading shared libraries
+
+When using the Continuous Profiler for Linux as a dynamic library, your application may fail to launch with the following error:
+
+```
+error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
+```
+
+This happens when your application is built with `libdd_profiling.so` as a dependency, but it cannot be found at runtime during dependency reconciliation. You can fix this by doing one of the following:
+
+- Rebuild your application using the static library. In some build systems the choice between dynamic and static libraries can be ambiguous, so use `ldd` to check whether the resulting binary includes an unwanted dynamic dependency on `libdd_profiling.so`.
+- Copy `libdd_profiling.so` to one of the directories in the search path for the dynamic linker. You can get a list of these directories by running `ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n` on most Linux systems.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/

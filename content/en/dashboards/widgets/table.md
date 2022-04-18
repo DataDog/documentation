@@ -5,12 +5,6 @@ widget_type: "query_table"
 aliases:
     - /graphing/widgets/table/
 further_reading:
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboards"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"

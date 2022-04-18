@@ -3,12 +3,15 @@ title: Incident Management
 kind: documentation
 description: Create and manage incidents
 further_reading:
-- link: "dashboards/querying/#incident-management-analytics"
-  tag: "Documentation"
-  text: "Incident Management Analytics"
-- link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
-  tag: 'Blog'
-  text: 'Best practices for writing incident postmortems'
+  - link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
+    tag: "Release Notes"
+    text: "Check out the latest Incident Management releases! (App login required)."
+  - link: "dashboards/querying/#incident-management-analytics"
+    tag: "Documentation"
+    text: "Incident Management Analytics"
+  - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
+    tag: 'Blog'
+    text: 'Best practices for writing incident postmortems'
 ---
 
 {{< site-region region="gov" >}}

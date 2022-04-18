@@ -5,12 +5,9 @@ description: "Display your Event Stream Timeline in a widget."
 aliases:
     - /graphing/widgets/event_timeline/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view][1]:

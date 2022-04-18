@@ -14,6 +14,9 @@ further_reading:
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting Application Security Monitoring"
+- link: "/security_platform/guide/how-appsec-works/"
+  tag: "Documentation"
+  text: "How Application Security Works in Datadog"
 ---
 
 <div class="alert alert-warning">
@@ -36,12 +39,15 @@ The Datadog library supports Java JRE 1.8 and higher of both Oracle JDK and Open
 
 Datadog does not officially support any early-access versions of Java.
 
+You can monitor application security for Java apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+
 ### Supported frameworks
 
 | Framework Web Server    | Minimum Framework Version   |
 | ----------------------- | --------------------------- |
 | Servlet Compatible      | 2.3+, 3.0+                  |
 | Spring                  | 3.1                         |
+
 **Note**: Many application servers are Servlet compatible and are supported by Application Security, such as WebSphere, WebLogic, and JBoss. Also, frameworks like Spring Boot are supported by virtue of using a supported embedded application server (such as Tomcat, Jetty, or Netty).
 
 
@@ -66,6 +72,8 @@ These are supported on the following architectures:
 - macOS (Darwin) x86, x86-64
 - Windows (msvc) x86, x86-64
 
+You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+
 ### Supported frameworks
 
 The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
@@ -86,6 +94,9 @@ The Datadog Go tracing library supports Go version 1.14 and greater, on the foll
 - Linux (GNU) x86-64
 - Alpine Linux (musl) x86-64
 - macOS (Darwin) x86-64
+
+You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS. 
+
 
 ### Supported frameworks
 
@@ -115,7 +126,7 @@ To install the above requirements:
 | RHEL, CentOS, Fedora | `$ yum install gcc glibc-devel` |
 | macOS                | `$ xcode-select --install`      |
 
-**Note**: The Go toolchain disables CGO when cross-compiling and needs to be explicitly enabled.
+**Note**: The Go toolchain disables CGO when cross-compiling and so, CGO needs to be explicitly enabled.
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
@@ -140,6 +151,8 @@ These are supported on the following architectures:
 - Alpine Linux (musl) x86-64, aarch64
 - macOS (Darwin) x86-64, arm64
 
+You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+
 ### Supported frameworks
 
 | Framework Web Server    | Minimum Framework Version   |
@@ -156,6 +169,8 @@ The Datadog PHP library supports PHP version 7.0 and above on the following arch
 
 - Linux (GNU) x86-64
 - Alpine Linux (musl) x86-64
+
+You can monitor application security for PHP apps running in Docker, Kubernetes, and AWS ECS. 
 
 It supports the use of all PHP frameworks, and also the use no framework.
 
@@ -176,6 +191,8 @@ These are supported on the following architectures:
 - Alpine Linux (musl) x86-64
 - macOS (Darwin) x86-64
 - Windows (msvc) x86, x86-64
+
+You can monitor application security for NodeJS apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
 
 ### Supported frameworks
 

@@ -15,13 +15,16 @@ further_reading:
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting Application Security Monitoring"
+- link: "/security_platform/guide/how-appsec-works/"
+  tag: "Documentation"
+  text: "How Application Security Works in Datadog"
 ---
 
 <div class="alert alert-warning">
 Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
 </div>
 
-Set up your application to [detect threats][1] targeting your production systems, using the Datadog library for your application language. 
+Set up your application to [detect threats][1] targeting your production systems, using the Datadog library for your application language. You can monitor application security for apps running in Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
 {{% appsec-getstarted %}}
 

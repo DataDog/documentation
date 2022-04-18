@@ -44,7 +44,7 @@ get_latest_release() {
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 ```
 
-Si vous obtenez un message de Github indiquant que votre taux est limité, patientez quelques minutes avant de relancer la commande. Une fois la mise à jour terminée, assurez-vous de son bon fonctionnement en vérifiant votre version de C++ :
+Si vous obtenez un message de GitHub indiquant que votre taux est limité, patientez quelques minutes avant de relancer la commande. Une fois le processus terminé, vérifiez votre version C++ pour vous assurer que la mise à jour a bien été installée.
 
 ```shell
 echo $DD_OPENTRACING_CPP_VERSION

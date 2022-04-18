@@ -5,12 +5,9 @@ description: "Display filtered events from the Even Stream."
 aliases:
     - /graphing/widgets/event_stream/
 further_reading:
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 {{< site-region region="us" >}}

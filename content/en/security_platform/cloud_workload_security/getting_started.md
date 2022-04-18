@@ -12,6 +12,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
   tag: "Blog"
   text: "The PwnKit vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/"
+  tag: "Blog"
+  text: "The Dirty Pipe vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
+  tag: "Blog"
+  text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
 ---
 
 ## Overview

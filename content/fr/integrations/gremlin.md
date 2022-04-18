@@ -72,11 +72,13 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Pour aller plus loin
 
-Consultez [notre blog][6] pour en savoir plus sur la surveillance d'infrastructure et sur toutes les autres intégrations disponibles.
+Documentation, liens et articles supplémentaires utiles :
+
+- [Comment Gremlin surveille son propre service de Chaos Engineering avec Datadog][6]
 
 [1]: https://docs.datadoghq.com/fr/getting_started/#events
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gremlin/images/events-overlay.png
 [4]: https://app.gremlin.com/settings/integrations
 [5]: https://docs.datadoghq.com/fr/help/
-[6]: https://www.datadoghq.com/blog
+[6]: https://www.datadoghq.com/blog/gremlin-datadog/

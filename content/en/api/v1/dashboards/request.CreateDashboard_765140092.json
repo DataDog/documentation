@@ -1,0 +1,47 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Create_a_new_dashboard_with_a_query_value_widget_using_timeseries_background with QVW Timeseries Background",
+  "widgets": [
+    {
+      "definition": {
+        "title_size": "16",
+        "title": "",
+        "title_align": "left",
+        "precision": 2,
+        "time": {},
+        "autoscale": true,
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "response_format": "scalar",
+            "queries": [
+              {
+                "query": "sum:my.cool.count.metric{*}",
+                "data_source": "metrics",
+                "name": "query1",
+                "aggregator": "percentile"
+              }
+            ]
+          }
+        ],
+        "type": "query_value",
+        "timeseries_background": {
+          "type": "area",
+          "yaxis": {
+            "include_zero": true
+          }
+        }
+      },
+      "layout": {
+        "y": 0,
+        "x": 0,
+        "height": 2,
+        "width": 2
+      }
+    }
+  ]
+}
