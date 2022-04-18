@@ -63,9 +63,6 @@ processors:
 
 exporters:
   datadog/api:
-    env: prod
-    service: myservice
-    version: myversion
 
     tags:
       - example:tag

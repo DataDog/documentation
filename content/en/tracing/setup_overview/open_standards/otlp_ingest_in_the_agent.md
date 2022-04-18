@@ -7,13 +7,13 @@ aliases:
 ---
 
 
-OTLP Ingest in the Agent is a way to send telemetry data directly from [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP.
+OTLP Ingest in the Agent is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP.
 
 OTLP Ingest in the Agent allows you to use trace observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog Tracing Library specific features aren't available for the ingested data including Application Security, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
 
-<div class="alert alert-warning">OpenTelemetry Metrics ingestion is in beta and its behavior and configuration may change.</div>
+<div class="alert alert-warning">OTLP Metrics ingestion is in beta and its behavior and configuration may change.</div>
 
-To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on this below. 
+To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below.
 
 Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][4].
 
@@ -89,7 +89,7 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
 
    For HTTP:
    ```
-   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 55681
+   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 4318
    value: "0.0.0.0:55681"
    ```
 3. Map the container ports 4317 or 55681 to the host port for the trace Agent container:
@@ -156,10 +156,9 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
    --set 'agents.containers.traceAgent.ports[0].containerPort=55681,agents.containers.traceAgent.ports[0].hostPort=55681,agents.containers.traceAgent.ports[0].name=traceporthttp,agents.containers.traceAgent.ports[0].protocol=TCP'
 
    --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:55681"
-
    ```
 
-   Or in the set them in the `datadog.env` file (a more flexible but less automated way than the `set` commands):
+   Or set them in the `datadog.env` parameter of the `values.yaml` file:
 
    For gRPC:
    ```
