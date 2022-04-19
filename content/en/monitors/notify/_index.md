@@ -124,6 +124,12 @@ See the [list of integrations][15] that can be used to notify your team.
 
 **Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
 
+#### Disable first recovery notification
+
+By default, Datadog sends a recovery notification for monitors that **trigger before** a downtime and end up **recovering during** a downtime. This is useful when using third party integrations, such as PagerDuty, to automatically close opened incidents. Mark the checkbox if you are not interested in receiving these recovery notifications.
+
+**Note**: This options mutes the **first** recovery notification. If a monitor to proceeds to trigger and recovert again during a downtime then the corresponding notifications are always muted anyways.
+
 ### Modifications
 
 An [event][16] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
@@ -134,7 +140,7 @@ All users can read all monitors, regardless of the role they are associated with
 
 By default, only users attached to roles with the [Monitors Write permission][17] can edit monitors. [Datadog Admin Role and Datadog Standard Role][18] have the Monitors Write permission by default. If your organization uses [Custom Roles][19], other custom roles may have the Monitors Write permission.
 
-You can further restrict your monitor by specifying a list of [roles][20] allowed to edit it. The monitor's creator can always edit the monitor. 
+You can further restrict your monitor by specifying a list of [roles][20] allowed to edit it. The monitor's creator can always edit the monitor.
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
