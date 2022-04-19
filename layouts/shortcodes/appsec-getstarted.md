@@ -1,4 +1,4 @@
-In general, setting up Application Security monitoring involves:
+In general, setting up Application Security Monitoring involves:
 
 1. Updating to the latest Datadog library (the most recent APM tracing library).
 2. Enabling the library to collect the application security data from the services and send it to Datadog.

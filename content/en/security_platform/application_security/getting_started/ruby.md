@@ -10,7 +10,7 @@ further_reading:
       text: 'Ruby Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Rules"
+      text: "OOTB Application Security MonitoringRules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Monitoring"
@@ -32,7 +32,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
    For more information about upgrading from a `dd-trace` 0.x version, see [the Ruby tracer upgrade guide][2].
 
-2. **Enable Application Security**, either in your code:
+2. **Enable ASM**, either in your code:
    {{< tabs >}}
 
 {{% tab "Rails" %}}
@@ -156,7 +156,7 @@ Update your ECS task definition JSON file, by adding this in the  environment se
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Initialize Application Security in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
+Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
 ```
 env DD_APPSEC_ENABLED=true rails server
 ```

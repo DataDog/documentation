@@ -4,19 +4,19 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog Application Security"
+  text: "Monitoring Threats with Datadog Application Security Monitoring"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
   text: "Getting Started Enabling Application Security Monitoring for Your Services"
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
-  text: "Out-of-the-Box Application Security Rules"
+  text: "Out-of-the-Box Application Security Monitoring Rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting Application Security Monitoring"
 - link: "/security_platform/guide/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Works in Datadog"
+  text: "How Application Security Monitoring Works in Datadog"
 ---
 
 <div class="alert alert-warning">
@@ -48,7 +48,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 | Servlet Compatible      | 2.3+, 3.0+                  |
 | Spring                  | 3.1                         |
 
-**Note**: Many application servers are Servlet compatible and are supported by Application Security, such as WebSphere, WebLogic, and JBoss. Also, frameworks like Spring Boot are supported by virtue of using a supported embedded application server (such as Tomcat, Jetty, or Netty).
+**Note**: Many application servers are Servlet compatible and are supported by ASM, such as WebSphere, WebLogic, and JBoss. Also, frameworks like Spring Boot are supported by virtue of using a supported embedded application server (such as Tomcat, Jetty, or Netty).
 
 
 {{< /programming-lang >}}
@@ -111,7 +111,7 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 
 ### Enabling CGO
 
-Compiling your code with Application Security enabled involves [CGO][8] and therefore requires:
+Compiling your code with ASM enabled involves [CGO][8] and therefore requires:
 
 - The `gcc` compiler for the target `GOOS` and `GOARCH`.
 - The C library headers.
@@ -208,25 +208,25 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 
 The data that you’re collecting with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, it may contain synthetic traffic that might cause your threat detection be inaccurate, or cause Datadog to not accurately indicate the security of your services.
 
-The Datadog Agent and some tracing libraries have options available to address these situations and modify or discard spans. See [APM Data Security][1] for details that also apply to Application Security.
+The Datadog Agent and some tracing libraries have options available to address these situations and modify or discard spans. See [APM Data Security][1] for details that also apply to ASM.
 
 ## Exclusion filters
 
-There may be a time when an Application Security signal, or a suspicious request, is a false positive. For example, Application Security repeatedly detects
+There may be a time when an ASM signal, or a suspicious request, is a false positive. For example, ASM repeatedly detects
 the same suspicious request and a signal is generated, but the signal has been reviewed and is not a threat.
 
 You can set an exclusion filter, which ignore events from a rule, to eliminate these noisy signal patterns and focus on legitimate suspicious requests.
 
 To create an exclusion filter, do one of the following:
 
-- Click on a signal in [Application Security Signals][2] and click the **Create Exclusion Filter** button in the top left corner. This method automatically generates a filter query for the targeted service.
+- Click on a signal in [ASM Signals][2] and click the **Create Exclusion Filter** button in the top left corner. This method automatically generates a filter query for the targeted service.
 - Navigate to [Exclusion Filters Configuration][3] and manually configure a new exclusion filter based on your own filter query.
 
 **Note**: Requests (traces) matching an exclusion filter are not billed.
 
-## Disable Application Security
+## Disable ASM
 
-To disable Application Security, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once removed, restart your service.
+To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once removed, restart your service.
 
 If you need additional help, contact [Datadog support][4].
 

@@ -4,21 +4,21 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring threats with Datadog Application Security"
+  text: "Monitoring threats with Datadog Application Security Monitoring"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshoot common Datadog Application Security issues"
+  text: "Troubleshoot common Datadog Application Security Monitoring issues"
 ---
 
 ## Overview
 
-Application Security comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts and vulnerability triggers that impact your production systems.
+Application Security Monitoring (ASM) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts and vulnerability triggers that impact your production systems.
 
 However, there are situations where you may want to customize a rule based on your environment. For example, you may want to customize a detection rule that catches attack attempts on a pre-production development route that accepts SQL and returns the results. Catching SQL attempts is noisy, as the route is restricted to internal developers; therefore you can customize this rule to exclude these patterns.
 
-Another example is customizing a rule to exclude an internal security scanner. Application Security detects its activity as expected. However, you may not want to be notified of its regularly occurring scan.
+Another example is customizing a rule to exclude an internal security scanner. ASM detects its activity as expected. However, you may not want to be notified of its regularly occurring scan.
 
-In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for Application Security.
+In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for ASM.
 
 ## Configuration
 
@@ -26,7 +26,7 @@ To customize an OOTB detection rule, you must first clone an existing rule. Navi
 
 ### Define AppSec query
 
-Construct an Application Security query. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
+Construct an ASM query. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user or IP). The group-by is also used to [join the queries together](#joining-queries).
 
