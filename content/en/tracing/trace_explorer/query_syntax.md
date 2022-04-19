@@ -36,43 +36,17 @@ further_reading:
   text: "Dive into your resource performance and traces"
 ---
 
-## Overview
+## Search syntax
 
-Use the Trace Explorer to search for **spans**. Trace Explorer search consists of a time range and a search query, mixing `key:value` and full-text search.
-
-Spans can be valuable as individual events visualised as a **list**, but sometimes valuable information lives in an aggregation of events. In order to expose this information, pivot to **timeseries** view, **top list** view or **table** view. Choose which dimension to visualise (count of spans, count of unique values, measure of a quantitative dimension) and group the query by one or multiple dimensions.
-
-## Search query
-
-For example, to filter on spans from a specific service, with a specific status, over the past five minutes, you can create a custom query such as `service:web-store status:error` and set the time range to the `Past 30 minutes`:
-
-[add image]
-
-Pivot to a top list view, and group the query by `resource` to see which specific resources are most affected.
-
-[add image]
-
-{{< site-region region="us,eu,gov,us3,us5" >}}
-**Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
-
-[1]: /tracing/trace_explorer/query_syntax#facets
-{{< /site-region >}}
-
-To begin searching for spans in the Trace Explorer, see the [search syntax](#search-syntax)  and the [time frame](#time-range) documentation.
-
-### Search bar
-
-All search parameters are contained in the url of the page, which can be helpful for sharing your view.
-
-#### Search syntax
-
-A query is composed of *terms* and *operators*.
+All search parameters are contained in the url of the page, which can be helpful for sharing your view. A query is composed of *terms* and *operators*.
 
 There are two types of *terms*:
 
 * **[Span Tags](#span-tags)** (also called span attributes)
 
 * **[Infrastructure Tags](#infrastructure-tags)**: Spans inherit tags from hosts and [integrations][1] that generate them.
+
+You **do not** need to [create facets](#create-a-facet) to search on attributes and tags anymore.
 
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
@@ -82,38 +56,46 @@ To combine multiple *terms* into a complex query, use any of the following boole
 | `OR`         | **Union**: either terms is contained in the selected events                                            | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
 
-#### Span Tags search
+## Tags search
 
-You do not need to [create facets](#create-a-facet) to search on attributes and tags anymore.
+### Span tags (attributes)
 
 To search on a specific **span tag**, prepend an `@` to specify you are searching on an attribute.
 
-For instance, if your attribute name is **http.method** and you want to filter on the **http.method** value *POST* just enter:
+For instance, if your attribute name is **http.method** and you want to filter on the **http.method** value *POST*, enter `@http.method:POST`.
 
-`@http.method:POST`
+**Notes**:
 
-To search on a specific **infrastructure tag**, you don't need to prepend
+1. Tag searches are case sensitive. Use free text search to get case insensitive results.
+
+2. Searching for a tag value that contains special characters requires escaping or double quotes.
+For example, for a tag `resource_name` with the value `/test/test`, search using: `resource_name:\/test\/test` or `resource_name:"/test/test"`.
+To match a single special character or space, use the `?` wildcard. For example, for a facet `resource` with the value `GET /test`, search using: `resource:GET?\/test`.
+
+### Infrastructure tags
+
+To search on a specific **infrastructure tag** (container tags, host tags), you don't need to prepend an `@` character.
 
 | Query                                                          | Match                                                                       |
 |:---------------------------------------------------------------|:----------------------------------------------------------------------------|
-| `("env:prod" OR test)`                                         | All traces with the tag `#env:prod` or the tag `#test`                      |
-| `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
-| `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
+| `(env:prod OR service:srvA)`                                         | All traces with the tag `env:prod` or the tag `service:srvA`                      |
+| `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `service:srvA` or `service:srvB`.            |
+| `("env:prod" AND -"version:beta")`                             | All traces that contain `env:prod` and that do not contain `version:beta` |
 
 If your tags don't follow [tags best practices][2] and don't use the `key:value` syntax, use this search query:
 
 * `tags:<MY_TAG>`
 
-### Wildcards
+## Wildcards
 
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
 * `service:web*`  matches every trace that has a services starting with `web`
 * `@url:data*`  matches every trace that has a `url` starting with `data`.
 
-### Numerical values
+## Numerical values
 
-Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all traces that have a response time over 100ms with:
+Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all spans that have a response time over 100ms with:
 
 `@http.response_time:>100`
 
@@ -121,37 +103,33 @@ It is also possible to search for numerical attributes within a specific range. 
 
 `@http.status_code:[400 TO 499]`
 
-### Autocomplete
+## Autocomplete
 
-Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
+Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing **keys** and **values**:
 
-{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="search bar autocomplete "  style="width:60%;">}}
+{{< img src="tracing/trace_explorer/search/trace_explorer_autocomplete.png"alt="Trace Explorer autocomplete"  style="width:100%;">}}
 
-### Escaping of special characters
+## Escaping of special characters
 
-The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
+The following characters are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
 For instance, to search traces that contain `user=JaneDoe` in their `url` the following search must be entered:
 
 `@url:*user\=JaneDoe*`
 
-The same logic must be applied to spaces within trace attributes. It is not recommended to have spaces in trace attributes but in such cases, spaces require escaping.
+The same logic must be applied to spaces within span attribute keys. It is not recommended to have spaces in trace attributes but in such cases, spaces require escaping.
 If an attribute is called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
 
-### Saved searches
+## Saved Views
 
-Don't lose time building the same views everyday. Saved searches contain your search query, columns, and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
-
-{{< img src="tracing/app_analytics/search/saved_search.png" alt="Saved Search"  style="width:80%;">}}
-
-To delete a saved search, click on the bin icon under the Trace search drop-down.
+[Saved Views][3] contain your search query, columns, time range and facets.
 
 ## Time range
 
-The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][3]):
+The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][4]):
 
-{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Select time frame" >}}
+{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:40%;" alt="Select time frame" >}}
 
 ## Span stream
 
@@ -190,7 +168,7 @@ A Facet displays all the distinct values of an attribute or a tag as well as pro
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples Facets may include users, services, etc...
 
-{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
+{{< img src="tracing/trace_explorer/facets/facets_panel.png" alt="Facets panel"  style="width:80%;">}}
 
 ### Quantitative (measures)
 
@@ -225,9 +203,9 @@ Use Facets to filter on your Traces. The search bar and url automatically reflec
 
 ## Analytics overview
 
-Use [Analytics][4] to filter application performance metrics and [Indexed Spans][5] by tags. It allows deep exploration of the web requests flowing through your service.
+Use [Analytics][5] to filter application performance metrics and [Indexed Spans][6] by tags. It allows deep exploration of the web requests flowing through your service.
 
-Analytics is automatically enabled for all APM [services][6] with 100% of ingested data for 15 minutes (rolling window). Spans indexed by custom [retention filters][7] and legacy App Analytics are available in Analytics for 15 days.
+Analytics is automatically enabled for all APM [services][7] with 100% of ingested data for 15 minutes (rolling window). Spans indexed by custom [retention filters][8] and legacy App Analytics are available in Analytics for 15 days.
 
 Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
 
@@ -235,7 +213,7 @@ Downstream services like databases and cache layers aren't in the list of availa
 
 Use the query to control what's displayed in your Analytics:
 
-1. Choose the `Duration` metric or a [Facet][8] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
+1. Choose the `Duration` metric or a [Facet][9] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
 
     {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
 
@@ -282,7 +260,7 @@ The following top list analytics shows the top **pc99** **duration** of **Servic
 
 ### Table
 
-Visualize the top values from a facet according to a chosen [measure][9] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top list. Update the search query or investigate logs corresponding to either dimension.
+Visualize the top values from a facet according to a chosen [measure][10] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top list. Update the search query or investigate logs corresponding to either dimension.
 
 * When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
@@ -296,7 +274,7 @@ The following Table Log Analytics shows the evolution of the **top Status Codes*
 
 ## Related traces
 
-Select or click on a section of the graph to either zoom in the graph or see the list of [traces][10] corresponding to your selection:
+Select or click on a section of the graph to either zoom in the graph or see the list of [traces][11] corresponding to your selection:
 
 {{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces"  style="width:40%;">}}
 
@@ -306,16 +284,16 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 Export your Analytics:
 
-* To a new [APM monitor][11]
-* To an existing [Timeboard][12]. This feature is in beta. [Contact the Datadog support team][13] to activate it for your organization.
+* To a new [APM monitor][12]
+* To an existing [Timeboard][13]. This feature is in beta. [Contact the Datadog support team][14] to activate it for your organization.
 
-**Note:** Analytics can be exported only when powered by [indexed spans][14].
+**Note:** Analytics can be exported only when powered by [indexed spans][15].
 
 ## Traces in dashboard
 
-Export [Analytics][4] from the trace search or build them directly in your [Dashboard][15] alongside metrics and logs.
+Export [Analytics][5] from the trace search or build them directly in your [Dashboard][16] alongside metrics and logs.
 
-[Learn more about the timeseries widget][16].
+[Learn more about the timeseries widget][17].
 
 ## Further Reading
 
@@ -323,17 +301,18 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 
 [1]: /tracing/setup/java/#integrations
 [2]: /getting_started/tagging/#tags-best-practices
-[3]: /dashboards/guide/custom_time_frames/
-[4]: /tracing/trace_search_and_analytics/
-[5]: /tracing/visualization/#apm-event
-[6]: /tracing/visualization/#services
-[7]: /tracing/trace_retention/#retention-filters
-[8]: /tracing/trace_search_and_analytics/query_syntax/#facets
-[9]: /tracing/trace_search_and_analytics/query_syntax/#measures
-[10]: /tracing/visualization/#trace
-[11]: /monitors/create/types/apm/
-[12]: /dashboards/#timeboards
-[13]: /help/
-[14]: /tracing/visualization/#indexed-span
-[15]: /dashboards/
-[16]: /dashboards/widgets/timeseries/
+[3]: /tracing/trace_explorer/saved_views/
+[4]: /dashboards/guide/custom_time_frames/
+[5]: /tracing/trace_search_and_analytics/
+[6]: /tracing/visualization/#apm-event
+[7]: /tracing/visualization/#services
+[8]: /tracing/trace_retention/#retention-filters
+[9]: /tracing/trace_search_and_analytics/query_syntax/#facets
+[10]: /tracing/trace_search_and_analytics/query_syntax/#measures
+[11]: /tracing/visualization/#trace
+[12]: /monitors/create/types/apm/
+[13]: /dashboards/#timeboards
+[14]: /help/
+[15]: /tracing/visualization/#indexed-span
+[16]: /dashboards/
+[17]: /dashboards/widgets/timeseries/

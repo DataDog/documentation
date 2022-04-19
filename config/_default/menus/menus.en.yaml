@@ -1401,18 +1401,32 @@ main:
     parent: tracing
     identifier: trace_explorer
     weight: 2
+  - name: Search
+    url: tracing/trace_explorer/search/
+    parent: trace_explorer
+    identifier: spans_search
+    weight: 201
   - name: Query Syntax
     url: tracing/trace_explorer/query_syntax/
+    parent: trace_explorer
+    weight: 202
+  - name: Facets
+    url: tracing/trace_explorer/facets/
     parent: trace_explorer
     weight: 203
   - name: Request Flow Map
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
-    weight: 204
+    weight: 205
   - name: Monitoring Analytics
     url: monitors/create/types/apm/
     parent: trace_explorer
-    weight: 205
+    weight: 206
+  - name: Saved Views
+    url: tracing/trace_explorer/saved_views/
+    parent: trace_explorer
+    identifier: trace_saved_views
+    weight: 207
   - name: Trace Ingestion
     url: tracing/trace_ingestion/
     parent: tracing
