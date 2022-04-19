@@ -15,11 +15,11 @@ disable_sidebar: true
 
 |                 | Self-hosted | Azure | AWS RDS | Google Cloud SQL |
 |-----------------|-----------|------|-----------|------------------|
-| SQL Server 2012 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
-| SQL Server 2014 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
-| SQL Server 2016 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
-| SQL Server 2017 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
-| SQL Server 2019 | {{< X >}} | {{< X >}} | {{< X >}} |                  |
+| SQL Server 2012 | {{< X >}} | {{< X >}} | {{< X >}} |               |
+| SQL Server 2014 | {{< X >}} | {{< X >}} | {{< X >}} |               |
+| SQL Server 2016 | {{< X >}} | {{< X >}} | {{< X >}} |               |
+| SQL Server 2017 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}        |
+| SQL Server 2019 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}        |
 
 For setup instructions, select your hosting type:
 

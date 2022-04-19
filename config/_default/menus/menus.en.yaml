@@ -482,9 +482,9 @@ main:
     identifier: agent_guides
     parent: agent
     weight: 12
-  - name: Security
+  - name: Data Security
     identifier: agent_security
-    url: security/agent/
+    url: data_security/agent/
     parent: agent
     weight: 13
   - name: Integrations
@@ -507,6 +507,11 @@ main:
     identifier: watchdog_rca
     parent: watchdog_top_level
     weight: 2
+  - name: Faulty Deployment Detection
+    url: watchdog/faulty_deployment_detection/
+    identifier: watchdog_faulty_deployment_detection
+    parent: watchdog_top_level
+    weight: 3
   - name: Events
     url: events/
     identifier: events_top_level
@@ -840,26 +845,22 @@ main:
     url: serverless/libraries_integrations/library/
     parent: libraries_integrations
     weight: 202
-  - name: Datadog Forwarder
-    url: serverless/libraries_integrations/forwarder/
-    parent: libraries_integrations
-    weight: 203
   - name: Datadog Serverless Plugin
     url: serverless/libraries_integrations/plugin/
     parent: libraries_integrations
-    weight: 204
+    weight: 203
   - name: Datadog Serverless Macro
     url: serverless/libraries_integrations/macro/
     parent: libraries_integrations
-    weight: 205
+    weight: 204
   - name: Datadog Serverless CLI
     url: serverless/libraries_integrations/cli/
     parent: libraries_integrations
-    weight: 206
+    weight: 205
   - name: Lambda Code Signing
     url: serverless/libraries_integrations/lambda_code_signing/
     parent: libraries_integrations
-    weight: 207
+    weight: 206
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
@@ -1893,6 +1894,11 @@ main:
     parent: dbm_setup_sql_server
     identifier: dbm_setup_sql_server_azure
     weight: 103
+  - name: Google Cloud SQL
+    url: database_monitoring/setup_sql_server/gcsql/
+    parent: dbm_setup_sql_server
+    identifier: dbm_setup_sql_server_gcsql
+    weight: 104
   - name: Data Collected
     url: database_monitoring/data_collected
     parent: dbm
@@ -2081,8 +2087,8 @@ main:
     parent: log_management
     identifier: log_guides
     weight: 6
-  - name: Security
-    url: security/logs/
+  - name: Data Security
+    url: data_security/logs/
     parent: log_management
     identifier: log_security
     weight: 7
@@ -2435,8 +2441,8 @@ main:
     parent: synthetics
     identifier: synthetics_troubleshooting
     weight: 13
-  - name: Security
-    url: security/synthetics/
+  - name: Data Security
+    url: data_security/synthetics/
     parent: synthetics
     weight: 14
   - name: RUM & Session Replay
@@ -2943,31 +2949,27 @@ main:
     url: account_management/multi_organization/
     parent: account_management
     weight: 8
-  - name: Security
-    url: security/
+  - name: Data Security
+    url: data_security/
     pre: security-lock
-    identifier: security
+    identifier: data_security
     weight: 240000
   - name: Agent
-    url: security/agent/
-    parent: security
+    url: data_security/agent/
+    parent: data_security
     weight: 1
-  - name: APM (Tracing)
+  - name: Tracing
     url: /tracing/setup_overview/configure_data_security/
-    parent: security
+    parent: data_security
     weight: 2
   - name: Log Management
-    url: security/logs/
-    parent: security
+    url: data_security/logs/
+    parent: data_security
     weight: 3
   - name: Synthetic Monitoring
-    url: security/synthetics/
-    parent: security
+    url: data_security/synthetics/
+    parent: data_security
     weight: 4
-  - name: Other considerations
-    url: security/other/
-    parent: security
-    weight: 5
   - name: Help
     url: help/
     pre: info-fill
