@@ -55,7 +55,7 @@ This is required because Cloud SQL does not permit granting `CONNECT ANY DATABAS
 
 ## Install the Agent
 
-Since GCP does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
+GCP does not grant direct host access, meaning the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
