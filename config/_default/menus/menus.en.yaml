@@ -1829,16 +1829,21 @@ main:
     parent: dbm_setup_postgres
     identifier: dbm_setup_postgres_gcsql
     weight: 104
+  - name: Azure
+    url: database_monitoring/setup_postgres/azure
+    parent: dbm_setup_postgres
+    identifier: dbm_postgres_azure
+    weight: 105
   - name: Advanced Configuration
     url: database_monitoring/setup_postgres/advanced_configuration
     parent: dbm_setup_postgres
     identifier: dbm_postgres_advanced_configuration
-    weight: 105
+    weight: 106
   - name: Troubleshooting
     url: database_monitoring/setup_postgres/troubleshooting/
     parent: dbm_setup_postgres
     identifier: dbm_troubleshooting_postgres
-    weight: 106
+    weight: 107
   - name: Setting Up MySQL
     url: database_monitoring/setup_mysql/
     parent: dbm
@@ -1864,16 +1869,21 @@ main:
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_gcsql
     weight: 104
+  - name: Azure
+    url: database_monitoring/setup_mysql/azure
+    parent: dbm_setup_mysql
+    identifier: dbm_mysql_azure
+    weight: 105
   - name: Advanced Configuration
     url: database_monitoring/setup_mysql/advanced_configuration
     parent: dbm_setup_mysql
     identifier: dbm_mysql_advanced_configuration
-    weight: 105
+    weight: 106
   - name: Troubleshooting
     url: database_monitoring/setup_mysql/troubleshooting/
     parent: dbm_setup_mysql
     identifier: dbm_troubleshooting_mysql
-    weight: 106
+    weight: 107
   - name: Setting Up SQL Server
     url: database_monitoring/setup_sql_server/
     parent: dbm
