@@ -25,11 +25,11 @@ Datadog supports a variety of open standards, including [OpenTelemetry][1] and [
 
 If your applications and services are instrumented with OpenTelemetry libraries, you can choose between two paths for getting the tracing data to the Datadog backend:
 
-1. [Send traces to the OpenTelemetry collector, and use the Datadog exporter to send it to Datadog][3], or
+1. [Send traces to the OpenTelemetry collector, and use the Datadog exporter to forward them to Datadog][3], or
 
-2. [Ingest traces with the Datadog Agent, which sends it to Datadog][4].
+2. [Ingest traces with the Datadog Agent, which collects them for Datadog][4].
 
-{{< img src="tracing/setup/open_standards/dd-otel-options.png" alt="Map options for generating tracing data and sending it to observability products.">}}
+{{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating tracing data and sending it to observability products.">}}
 
 ## Connect OpenTelemetry traces and logs
 

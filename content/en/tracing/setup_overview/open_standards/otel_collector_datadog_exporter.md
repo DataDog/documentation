@@ -110,7 +110,7 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
       - Jaeger/HTTP on port `14268`
       - Jaeger/Compact on port (UDP) `6831`
       - OTLP/gRPC on port `55680`
-      - OTLP/HTTP on port `55681`
+      - OTLP/HTTP on port `4318`
 
 4. Run the container with the configured ports and an `otel_collector_config.yaml` file. For example:
 

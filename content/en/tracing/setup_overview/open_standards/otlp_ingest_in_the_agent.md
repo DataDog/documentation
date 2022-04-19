@@ -49,9 +49,16 @@ These must be passed to both the core Agent and trace Agent if they are running 
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
-<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The use of `experimental:` for configuring OTLP receiving in `datadog.yaml` and the corresponding environment variables `DD_OTLP_HTTP_PORT` and `DD_OTLP_GRPC_PORT` is now deprecated and will be removed in Agent version `7.37.0`.</div>
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The use of the `experimental:` configuration listed below for configuring OTLP receiving in `datadog.yaml` and the corresponding environment variables `DD_OTLP_HTTP_PORT` and `DD_OTLP_GRPC_PORT` is now deprecated and will be removed in Agent version `7.37.0`.</div>
 
-
+```yaml
+experimental:
+  otlp:
+    receiver:
+      protocols:
+        grpc:
+        http:
+```
 
 [1]: https://gist.github.com/gbbr/4a54dd02d34ad05e694952e0a02e1c67
 {{% /tab %}}
@@ -90,9 +97,9 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
    For HTTP:
    ```
    name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 4318
-   value: "0.0.0.0:55681"
+   value: "0.0.0.0:4318"
    ```
-3. Map the container ports 4317 or 55681 to the host port for the trace Agent container:
+3. Map the container ports 4317 or 4318 to the host port for the trace Agent container:
 
    For gPRC:
    ```
@@ -106,8 +113,8 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
    For HTTP 
    ```
    ports:
-     - containerPort: 55681
-       hostPort: 55681
+     - containerPort: 4318
+       hostPort: 4318
        name: traceporthttp
        protocol: TCP
    ```
@@ -133,7 +140,7 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
         fieldRef:
           fieldPath: status.hostIP
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:55681" # sends to HTTP receiver on port 55681
+      value: "http://$<DD_AGENT_HOST>:4318" # sends to HTTP receiver on port 4318
    ```
 
 
@@ -153,9 +160,9 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
    ```
    For HTTP:
    ```
-   --set 'agents.containers.traceAgent.ports[0].containerPort=55681,agents.containers.traceAgent.ports[0].hostPort=55681,agents.containers.traceAgent.ports[0].name=traceporthttp,agents.containers.traceAgent.ports[0].protocol=TCP'
+   --set 'agents.containers.traceAgent.ports[0].containerPort=4318,agents.containers.traceAgent.ports[0].hostPort=4318,agents.containers.traceAgent.ports[0].name=traceporthttp,agents.containers.traceAgent.ports[0].protocol=TCP'
 
-   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:55681"
+   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:4318"
    ```
 
    Or set them in the `datadog.env` parameter of the `values.yaml` file:
@@ -171,10 +178,10 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
    ```
    env: 
      - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT
-       value: "0.0.0.0:55681"
+       value: "0.0.0.0:4318"
    ```
 
-3. Map the container ports (`4317` for gRPC or `55681` for HTTP) to the host port for the trace Agent container:
+3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the trace Agent container:
 
    For gRPC:
    ```
@@ -188,8 +195,8 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
    For HTTP:
    ```
      ports: 
-       - containerPort: 55681
-         hostPort: 55681
+       - containerPort: 4318
+         hostPort: 4318
          name: traceporthttp
          protocol: TCP
    ```
@@ -215,7 +222,7 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
         fieldRef:
           fieldPath: status.hostIP
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:55681" # sends to HTTP receiver on port 55681
+      value: "http://$<DD_AGENT_HOST>:4318" # sends to HTTP receiver on port 4318
    ```
 
 
