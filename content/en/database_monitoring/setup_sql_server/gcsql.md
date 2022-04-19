@@ -5,7 +5,7 @@ description: Install and configure Database Monitoring for SQL Server managed on
 further_reading:
 - link: "/integrations/sqlserver/"
   tag: "Documentation"
-  text: "Basic SQL Server Integration"
+  text: "SQL Server Integration"
 - link: "/database_monitoring/troubleshooting/?tab=sqlserver"
   tag: "Documentation"
   text: "Troubleshoot Common Issues"
