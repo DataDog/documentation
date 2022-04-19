@@ -476,5 +476,5 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-[1]: /tracing/guide/ingestion_control_page/
+[1]: /tracing/trace_ingestion/
 [2]: /tracing/trace_ingestion/mechanisms

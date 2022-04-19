@@ -7040,6 +7040,18 @@
         ],
         "type": "object"
       },
+      "IdPMetadataFormData": {
+        "description": "The form data submitted to upload IdP metadata",
+        "properties": {
+          "idp_file": {
+            "description": "The IdP metadata XML file",
+            "format": "binary",
+            "type": "string",
+            "x-mimetype": "application/xml"
+          }
+        },
+        "type": "object"
+      },
       "IncidentCreateAttributes": {
         "description": "The incident's attributes for a create request.",
         "properties": {
@@ -16176,7 +16188,8 @@
                     "sum",
                     "min",
                     "max",
-                    "avg"
+                    "avg",
+                    "median"
                   ],
                   "example": "pc90",
                   "type": "string",
@@ -16191,7 +16204,8 @@
                     "SUM",
                     "MIN",
                     "MAX",
-                    "AVG"
+                    "AVG",
+                    "MEDIAN"
                   ]
                 },
                 "interval": {
@@ -16343,7 +16357,8 @@
                         "sum",
                         "min",
                         "max",
-                        "avg"
+                        "avg",
+                        "median"
                       ],
                       "example": "pc90",
                       "type": "string",
@@ -16358,7 +16373,8 @@
                         "SUM",
                         "MIN",
                         "MAX",
-                        "AVG"
+                        "AVG",
+                        "MEDIAN"
                       ]
                     },
                     "metric": {
@@ -16705,7 +16721,8 @@
               "sum",
               "min",
               "max",
-              "avg"
+              "avg",
+              "median"
             ],
             "example": "pc90",
             "type": "string",
@@ -16720,7 +16737,8 @@
               "SUM",
               "MIN",
               "MAX",
-              "AVG"
+              "AVG",
+              "MEDIAN"
             ]
           },
           "metric": {
@@ -16783,7 +16801,8 @@
           "sum",
           "min",
           "max",
-          "avg"
+          "avg",
+          "median"
         ],
         "example": "pc90",
         "type": "string",
@@ -16798,7 +16817,8 @@
           "SUM",
           "MIN",
           "MAX",
-          "AVG"
+          "AVG",
+          "MEDIAN"
         ]
       },
       "LogsArchive": {
@@ -19272,7 +19292,8 @@
               "sum",
               "min",
               "max",
-              "avg"
+              "avg",
+              "median"
             ],
             "example": "pc90",
             "type": "string",
@@ -19287,7 +19308,8 @@
               "SUM",
               "MIN",
               "MAX",
-              "AVG"
+              "AVG",
+              "MEDIAN"
             ]
           },
           "interval": {
@@ -19409,7 +19431,8 @@
                   "sum",
                   "min",
                   "max",
-                  "avg"
+                  "avg",
+                  "median"
                 ],
                 "example": "pc90",
                 "type": "string",
@@ -19424,7 +19447,8 @@
                   "SUM",
                   "MIN",
                   "MAX",
-                  "AVG"
+                  "AVG",
+                  "MEDIAN"
                 ]
               },
               "metric": {
@@ -25244,7 +25268,8 @@
                     "sum",
                     "min",
                     "max",
-                    "avg"
+                    "avg",
+                    "median"
                   ],
                   "example": "pc90",
                   "type": "string",
@@ -25259,7 +25284,8 @@
                     "SUM",
                     "MIN",
                     "MAX",
-                    "AVG"
+                    "AVG",
+                    "MEDIAN"
                   ]
                 },
                 "interval": {
@@ -25396,7 +25422,8 @@
                         "sum",
                         "min",
                         "max",
-                        "avg"
+                        "avg",
+                        "median"
                       ],
                       "example": "pc90",
                       "type": "string",
@@ -25411,7 +25438,8 @@
                         "SUM",
                         "MIN",
                         "MAX",
-                        "AVG"
+                        "AVG",
+                        "MEDIAN"
                       ]
                     },
                     "metric": {
@@ -25534,7 +25562,8 @@
               "sum",
               "min",
               "max",
-              "avg"
+              "avg",
+              "median"
             ],
             "example": "pc90",
             "type": "string",
@@ -25549,7 +25578,8 @@
               "SUM",
               "MIN",
               "MAX",
-              "AVG"
+              "AVG",
+              "MEDIAN"
             ]
           },
           "metric": {
@@ -25681,7 +25711,8 @@
           "sum",
           "min",
           "max",
-          "avg"
+          "avg",
+          "median"
         ],
         "example": "pc90",
         "type": "string",
@@ -25696,7 +25727,8 @@
           "SUM",
           "MIN",
           "MAX",
-          "AVG"
+          "AVG",
+          "MEDIAN"
         ]
       },
       "RUMAnalyticsAggregateResponse": {
@@ -25926,7 +25958,8 @@
               "sum",
               "min",
               "max",
-              "avg"
+              "avg",
+              "median"
             ],
             "example": "pc90",
             "type": "string",
@@ -25941,7 +25974,8 @@
               "SUM",
               "MIN",
               "MAX",
-              "AVG"
+              "AVG",
+              "MEDIAN"
             ]
           },
           "interval": {
@@ -26319,7 +26353,8 @@
                   "sum",
                   "min",
                   "max",
-                  "avg"
+                  "avg",
+                  "median"
                 ],
                 "example": "pc90",
                 "type": "string",
@@ -26334,7 +26369,8 @@
                   "SUM",
                   "MIN",
                   "MAX",
-                  "AVG"
+                  "AVG",
+                  "MEDIAN"
                 ]
               },
               "metric": {
@@ -32658,11 +32694,11 @@
                   "security:attack",
                   "technique:T1110-brute-force"
                 ],
-                "format": "array",
                 "items": {
                   "description": "The tag associated with the security signal.",
                   "type": "string"
-                }
+                },
+                "type": "array"
               },
               "timestamp": {
                 "description": "The timestamp of the security signal.",
@@ -32723,11 +32759,11 @@
               "security:attack",
               "technique:T1110-brute-force"
             ],
-            "format": "array",
             "items": {
               "description": "The tag associated with the security signal.",
               "type": "string"
-            }
+            },
+            "type": "array"
           },
           "timestamp": {
             "description": "The timestamp of the security signal.",
@@ -32890,11 +32926,11 @@
                         "security:attack",
                         "technique:T1110-brute-force"
                       ],
-                      "format": "array",
                       "items": {
                         "description": "The tag associated with the security signal.",
                         "type": "string"
-                      }
+                      },
+                      "type": "array"
                     },
                     "timestamp": {
                       "description": "The timestamp of the security signal.",
@@ -35620,7 +35656,7 @@
               "security_monitoring_signals_read": "View Security Signals.",
               "usage_read": "View your organization's usage and usage attribution.",
               "user_access_invite": "Invite other users to your organization.",
-              "user_access_manage": "Disable users, manage user roles, and manage SAML-to-role mappings."
+              "user_access_manage": "Disable users, manage user roles, manage SAML-to-role mappings, and configure logs restriction queries."
             },
             "tokenUrl": "/oauth2/v1/token"
           }
@@ -40304,6 +40340,12 @@
           "Audit"
         ],
         "x-menu-order": 2,
+        "x-pagination": {
+          "cursorParam": "page[cursor]",
+          "cursorPath": "meta.page.after",
+          "limitParam": "page[limit]",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -40635,6 +40677,12 @@
         ],
         "x-codegen-request-body-name": "body",
         "x-menu-order": 1,
+        "x-pagination": {
+          "cursorParam": "body.page.cursor",
+          "cursorPath": "meta.page.after",
+          "limitParam": "body.page.limit",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -47378,6 +47426,11 @@
         "tags": [
           "Incidents"
         ],
+        "x-pagination": {
+          "limitParam": "page[size]",
+          "pageOffsetParam": "page[offset]",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
         },
@@ -51393,7 +51446,8 @@
                             "sum",
                             "min",
                             "max",
-                            "avg"
+                            "avg",
+                            "median"
                           ],
                           "example": "pc90",
                           "type": "string",
@@ -51408,7 +51462,8 @@
                             "SUM",
                             "MIN",
                             "MAX",
-                            "AVG"
+                            "AVG",
+                            "MEDIAN"
                           ]
                         },
                         "interval": {
@@ -51560,7 +51615,8 @@
                                 "sum",
                                 "min",
                                 "max",
-                                "avg"
+                                "avg",
+                                "median"
                               ],
                               "example": "pc90",
                               "type": "string",
@@ -51575,7 +51631,8 @@
                                 "SUM",
                                 "MIN",
                                 "MAX",
-                                "AVG"
+                                "AVG",
+                                "MEDIAN"
                               ]
                             },
                             "metric": {
@@ -58405,6 +58462,12 @@
           "Logs"
         ],
         "x-menu-order": 3,
+        "x-pagination": {
+          "cursorParam": "page[cursor]",
+          "cursorPath": "meta.page.after",
+          "limitParam": "page[limit]",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -58766,6 +58829,12 @@
         ],
         "x-codegen-request-body-name": "body",
         "x-menu-order": 2,
+        "x-pagination": {
+          "cursorParam": "body.page.cursor",
+          "cursorPath": "meta.page.after",
+          "limitParam": "body.page.limit",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -61186,7 +61255,7 @@
               },
               {
                 "name": "body",
-                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\", \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"distribution\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum }}\"\n  }\n}"
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\", \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"gauge\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum }}\"\n  }\n}"
               }
             ],
             "step": "there is a valid \"metric_tag_configuration\" in the system"
@@ -61887,6 +61956,12 @@
           "Processes"
         ],
         "x-menu-order": 1,
+        "x-pagination": {
+          "cursorParam": "page[cursor]",
+          "cursorPath": "meta.page.after",
+          "limitParam": "page[limit]",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -66263,7 +66338,8 @@
                             "sum",
                             "min",
                             "max",
-                            "avg"
+                            "avg",
+                            "median"
                           ],
                           "example": "pc90",
                           "type": "string",
@@ -66278,7 +66354,8 @@
                             "SUM",
                             "MIN",
                             "MAX",
-                            "AVG"
+                            "AVG",
+                            "MEDIAN"
                           ]
                         },
                         "interval": {
@@ -66415,7 +66492,8 @@
                                 "sum",
                                 "min",
                                 "max",
-                                "avg"
+                                "avg",
+                                "median"
                               ],
                               "example": "pc90",
                               "type": "string",
@@ -66430,7 +66508,8 @@
                                 "SUM",
                                 "MIN",
                                 "MAX",
-                                "AVG"
+                                "AVG",
+                                "MEDIAN"
                               ]
                             },
                             "metric": {
@@ -67117,6 +67196,12 @@
           "RUM"
         ],
         "x-menu-order": 2,
+        "x-pagination": {
+          "cursorParam": "page[cursor]",
+          "cursorPath": "meta.page.after",
+          "limitParam": "page[limit]",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -67457,8 +67542,128 @@
         ],
         "x-codegen-request-body-name": "body",
         "x-menu-order": 1,
+        "x-pagination": {
+          "cursorParam": "body.page.cursor",
+          "cursorPath": "meta.page.after",
+          "limitParam": "body.page.limit",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
+        }
+      }
+    },
+    "/api/v2/saml_configurations/idp_metadata": {
+      "post": {
+        "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
+        "operationId": "UploadIdPMetadata",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "description": "The form data submitted to upload IdP metadata",
+                "properties": {
+                  "idp_file": {
+                    "description": "The IdP metadata XML file",
+                    "format": "binary",
+                    "type": "string",
+                    "x-mimetype": "application/xml"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Upload IdP metadata",
+        "tags": [
+          "Organizations"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 1,
+        "x-undo": {
+          "type": "idempotent"
         }
       }
     },
@@ -72941,11 +73146,11 @@
                                   "security:attack",
                                   "technique:T1110-brute-force"
                                 ],
-                                "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
                                   "type": "string"
-                                }
+                                },
+                                "type": "array"
                               },
                               "timestamp": {
                                 "description": "The timestamp of the security signal.",
@@ -73105,6 +73310,12 @@
           "Security Monitoring"
         ],
         "x-menu-order": 7,
+        "x-pagination": {
+          "cursorParam": "page[cursor]",
+          "cursorPath": "meta.page.after",
+          "limitParam": "page[limit]",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
         },
@@ -73224,11 +73435,11 @@
                                   "security:attack",
                                   "technique:T1110-brute-force"
                                 ],
-                                "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
                                   "type": "string"
-                                }
+                                },
+                                "type": "array"
                               },
                               "timestamp": {
                                 "description": "The timestamp of the security signal.",
@@ -73389,6 +73600,12 @@
         ],
         "x-codegen-request-body-name": "body",
         "x-menu-order": 6,
+        "x-pagination": {
+          "cursorParam": "body.page.cursor",
+          "cursorPath": "meta.page.after",
+          "limitParam": "body.page.limit",
+          "resultsPath": "data"
+        },
         "x-undo": {
           "type": "safe"
         },
@@ -86294,6 +86511,14 @@
     {
       "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.",
       "name": "Metrics"
+    },
+    {
+      "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization).",
+      "externalDocs": {
+        "description": "Find out more at",
+        "url": "https://docs.datadoghq.com/account_management/multi_organization"
+      },
+      "name": "Organizations"
     },
     {
       "description": "The processes API allows you to query processes data for your organization.",

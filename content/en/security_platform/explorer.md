@@ -50,7 +50,7 @@ To better understand activity, the Security Signal Panel summarizes tags and att
 Below the header of Cloud SIEM and Cloud Workload Security signals are tabs with detailed information related to the signal:
 
 - `Overview` displays why the rule generated a security signal in the What Happened section, including group by tag and customization based on rule type. In addition, context information and JSON associated to the signal is displayed.
-- `Rule Details` displays rule details, such as the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The users ccan also pivot into rule modification, such as modifying suppression queries for the rule.
+- `Rule Details` displays rule details, such as the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The users can also pivot into rule modification, such as modifying suppression queries for the rule.
 - `Logs` includes a visualization and list of log samples to provide context on why the signal triggered. Click on any of the samples in the table to see the full log.
 - `Related Signals` are displayed as a timeline of other signals which contain the same group by values to assist with triaging the signal.
 

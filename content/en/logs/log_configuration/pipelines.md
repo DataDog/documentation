@@ -227,6 +227,8 @@ Reorder pipelines precisely with the `Move to` option in the sliding option pane
 
 {{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="How to reorder your pipelines precisely using the move to modal" style="width:50%;">}}
 
+## Estimated usage metrics
+
 Estimated usage metrics are displayed per pipeline - specifically, the volume and count of logs being ingested and modified by each pipeline. There is also a link to the out-of-the-box [Logs Estimated Usage Dashboard][9] from every pipeline where you can view that pipeline's usage metrics in more detailed charts.
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="How to get a quick view of your pipelines' usage metrics" style="width:50%;">}}

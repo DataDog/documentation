@@ -17,8 +17,9 @@ For Datadog Application Security to be compatible with your Datadog configuratio
 
 ### Performance
 
-Datadog Application Security uses processes already contained in the Agent and APM, so there are no performance implications when using it. When APM is enabled, the Datadog Library generates distributed traces. Datadog Application Security flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
+Datadog Application Security uses processes already contained in the Agent and APM, so there are negligible performance implications when using it. When APM is enabled, the Datadog Library generates distributed traces. Datadog Application Security flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
 
+{{< img src="security_platform/guide/How_Application_Security_Works_d1.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
 
 ### Data privacy
 
@@ -31,7 +32,7 @@ Contact Support to delete sensitive data that may have been indexed.
 
 ## Threat detection methods
 
-Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][6] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][7], a security signal is generated in Datadog.
+Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][5] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][6], a security signal is generated in Datadog.
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
@@ -43,7 +44,7 @@ Datadog Application Security categorizes attack attempts into different threat t
 * **Contextualized attacks** correlate the attack attempts performed on the service with a matching business-logic. For example, SQL injection patterns on a service performing SQL statements.
 * A **Vulnerability is triggered** when an attack attempt gives evidence that a vulnerability has been successfully exploited, after matching known attack patterns.
 
-Datadog Application Security includes over 100 attack patterns that help protect against [many different kinds of attacks][8], including the following vulnerabilities:
+Datadog Application Security includes over 100 attack patterns that help protect against [many different kinds of attacks][7], including the following vulnerabilities:
 
 * SQL injections
 * Code injections
@@ -54,14 +55,13 @@ Datadog Application Security includes over 100 attack patterns that help protect
 
 ### How Datadog Application Security protects against Log4Shell
 
- Datadog Application Security identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][9], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
+ Datadog Application Security identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][8], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
 
 [1]: /tracing/setup_overview/
 [2]: /security_platform/application_security/getting_started/#prerequisites
 [3]: /tracing/setup_overview/configure_data_security/?tab=http
 [4]: /security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api/
-[5]: /account_management/org_settings/sensitive_data_detection/
-[6]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[7]: /security_platform/default_rules/#cat-application-security
-[8]: https://app.datadoghq.com/security/appsec/event-rules
-[9]: /security_platform/cloud_siem/
+[5]: https://owasp.org/www-project-modsecurity-core-rule-set/
+[6]: /security_platform/default_rules/#cat-application-security
+[7]: https://app.datadoghq.com/security/appsec/event-rules
+[8]: /security_platform/cloud_siem/

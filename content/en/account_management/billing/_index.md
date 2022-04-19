@@ -52,7 +52,7 @@ To change your payment method, contact your [Customer Success][12] Manager.
 
 ### Billing emails
 
-You can set specific email addresses to receive invoices on the [Biling history][13] page under **Manage Billing Emails**:
+You can set specific email addresses to receive invoices on the [Billing history][13] page under **Manage Billing Emails**:
 
 {{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
 

@@ -1615,6 +1615,15 @@ components:
       required:
       - name
       type: object
+    IdPMetadataFormData:
+      description: The form data submitted to upload IdP metadata
+      properties:
+        idp_file:
+          description: The IdP metadata XML file
+          format: binary
+          type: string
+          x-mimetype: application/xml
+      type: object
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -2764,6 +2773,7 @@ components:
       - min
       - max
       - avg
+      - median
       example: pc90
       type: string
       x-enum-varnames:
@@ -2778,6 +2788,7 @@ components:
       - MIN
       - MAX
       - AVG
+      - MEDIAN
     LogsArchive:
       description: The logs archive.
       properties:
@@ -4636,6 +4647,7 @@ components:
       - min
       - max
       - avg
+      - median
       example: pc90
       type: string
       x-enum-varnames:
@@ -4650,6 +4662,7 @@ components:
       - MIN
       - MAX
       - AVG
+      - MEDIAN
     RUMAnalyticsAggregateResponse:
       description: The response object for the RUM events aggregate API endpoint.
       properties:
@@ -6484,10 +6497,10 @@ components:
           example:
           - security:attack
           - technique:T1110-brute-force
-          format: array
           items:
             description: The tag associated with the security signal.
             type: string
+          type: array
         timestamp:
           description: The timestamp of the security signal.
           example: '2019-01-02T09:42:36.320Z'
@@ -6937,8 +6950,8 @@ components:
             security_monitoring_signals_read: View Security Signals.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
-            user_access_manage: Disable users, manage user roles, and manage SAML-to-role
-              mappings.
+            user_access_manage: Disable users, manage user roles, manage SAML-to-role
+              mappings, and configure logs restriction queries.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -7385,6 +7398,11 @@ paths:
       tags:
       - Audit
       x-menu-order: 2
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/audit/events/search:
@@ -7424,6 +7442,11 @@ paths:
       - Audit
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/authn_mappings:
@@ -8121,6 +8144,10 @@ paths:
       summary: Get a list of incidents
       tags:
       - Incidents
+      x-pagination:
+        limitParam: page[size]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -9657,6 +9684,11 @@ paths:
       tags:
       - Logs
       x-menu-order: 3
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/logs/events/search:
@@ -9704,6 +9736,11 @@ paths:
       - Logs
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/metrics:
@@ -10174,7 +10211,7 @@ paths:
             value: '"{{ unique_alnum }}"'
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\",
-              \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"distribution\"\n
+              \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"gauge\"\n
               \    },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum
               }}\"\n  }\n}"
           step: there is a valid "metric_tag_configuration" in the system
@@ -10377,6 +10414,11 @@ paths:
       tags:
       - Processes
       x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/roles:
@@ -11102,6 +11144,11 @@ paths:
       tags:
       - RUM
       x-menu-order: 2
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/rum/events/search:
@@ -11144,8 +11191,50 @@ paths:
       - RUM
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
       x-undo:
         type: safe
+  /api/v2/saml_configurations/idp_metadata:
+    post:
+      description: 'Endpoint for uploading IdP metadata for SAML setup.
+
+
+        Use this endpoint to upload or replace IdP metadata for SAML login configuration.'
+      operationId: UploadIdPMetadata
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IdPMetadataFormData'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Upload IdP metadata
+      tags:
+      - Organizations
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -11767,6 +11856,11 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 7
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -11809,6 +11903,11 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -13047,6 +13146,12 @@ tags:
     that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
     only be performed by\na user who has the `Manage Tags for Metrics` permission."
   name: Metrics
+- description: Create, edit, and manage your organizations. Read more about [multi-org
+    accounts](https://docs.datadoghq.com/account_management/multi_organization).
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/multi_organization
+  name: Organizations
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
 - description: Search or aggregate your RUM events over HTTP.

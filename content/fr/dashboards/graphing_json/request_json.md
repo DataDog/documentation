@@ -1,16 +1,17 @@
 ---
-title: Schéma JSON des requêtes
-kind: documentation
 aliases:
-  - /fr/graphing/graphing_json/request_json/
+- /fr/graphing/graphing_json/request_json/
 further_reading:
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
-  - link: /dashboards/graphing_json/widget_json/
-    tag: Documentation
-    text: Schéma JSON des widgets
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/widget_json/
+  tag: Documentation
+  text: Schéma JSON des widgets
+kind: documentation
+title: Schéma JSON des requêtes
 ---
+
 Le format global du `REQUEST_SCHEMA` est un array composé d'une ou de plusieurs `requests` :
 
 ```text

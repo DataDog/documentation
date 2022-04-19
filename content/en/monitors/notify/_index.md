@@ -130,7 +130,9 @@ An [event][16] is created anytime a monitor is created, modified, silenced, or d
 
 ### Permissions
 
-By default, only users attached to roles with [Monitors Write permissions][17] can edit monitors. [Datadog Admin Role and Datadog Standard Role][18] have Monitors Write permission by default. If your organization uses [Custom Roles][19], other custom roles may have the Monitors Write permission.
+All users can read all monitors, regardless of the role they are associated with.
+
+By default, only users attached to roles with the [Monitors Write permission][17] can edit monitors. [Datadog Admin Role and Datadog Standard Role][18] have the Monitors Write permission by default. If your organization uses [Custom Roles][19], other custom roles may have the Monitors Write permission.
 
 You can further restrict your monitor by specifying a list of [roles][20] allowed to edit it. The monitor's creator can always edit the monitor. 
 

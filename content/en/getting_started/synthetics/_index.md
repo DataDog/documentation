@@ -19,7 +19,7 @@ further_reading:
       text: 'Learn more about Private locations'
     - link: '/synthetics/cicd_integrations'
       tag: 'Documentation'
-      text: 'Learn about running synthetic tests from CI/CD'
+      text: 'Learn about running Synthetic tests from CI/CD'
 ---
 
 ## Overview

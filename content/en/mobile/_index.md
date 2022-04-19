@@ -19,8 +19,6 @@ The Datadog Mobile app enables you to view alerts from Datadog on your mobile de
 
 Download the app from the [Apple App Store][1] for your iOS device, or from the [Google Play store][2] for your Android device.
 
-{{< img src="mobile/dd_mobile_app_qr_3.png" style="width:20%; background:none; border:none; box-shadow:none;" alt="Download Datadog mobile app">}}
-
 ### Logging in
 
 You can log in using standard authentication, Google authentication, or [SAML][3] - for both the US and the EU region.
@@ -82,6 +80,17 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
 2. Click the “+” button in the top right corner.
 3. Give your incident a title, severity, and commander.
+
+### Receive push notifications for incidents
+
+1. Navigate to **Account**.
+2. Click **Notifications**.
+3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
+4. Next, in the Datadog web app, navigate to [Incident Notification Rules][21].
+5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
+6. Select your mobile device and click **Save**.
+
+For more information on configuring Incident Notification Rules, see the [Incidents settings docs][22].
 
 ## Widgets
 
@@ -475,3 +484,5 @@ For help with troubleshooting, [contact Datadog support][18]. You can also send 
 [18]: /help/
 [19]: https://chat.datadoghq.com/
 [20]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[21]: https://app.datadoghq.com/incidents/settings#Rules
+[22]: /monitors/incident_management/incident_settings/#rules

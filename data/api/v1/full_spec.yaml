@@ -1334,6 +1334,7 @@ components:
       properties:
         deleted_monitor_id:
           description: ID of the deleted monitor.
+          example: 666486743
           format: int64
           type: integer
       readOnly: true
@@ -1910,7 +1911,7 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (that
             is no quotes).
 
-            Limited to events no older than 7 days.'
+            Limited to events no older than 18 hours.'
           format: int64
           type: integer
         device_name:
@@ -3617,6 +3618,7 @@ components:
         next_record_id:
           description: The cursor to get the next results (if any). To make the next
             request, use the same parameters and add `next_record_id`.
+          nullable: true
           type: string
       type: object
     HourlyUsageAttributionResponse:
@@ -3976,18 +3978,20 @@ components:
       x-enum-varnames:
       - EVENT_LIST
     ListStreamSource:
-      default: issue_stream
+      default: apm_issue_stream
       description: Source from which to query items to display in the stream.
       enum:
-      - issue_stream
       - logs_stream
       - audit_stream
-      example: issue_stream
+      - rum_issue_stream
+      - apm_issue_stream
+      example: apm_issue_stream
       type: string
       x-enum-varnames:
-      - ISSUE_STREAM
       - LOGS_STREAM
       - AUDIT_STREAM
+      - RUM_ISSUE_STREAM
+      - APM_ISSUE_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -4005,7 +4009,7 @@ components:
             - field: timestamp
               width: auto
             query:
-              data_source: issue_stream
+              data_source: apm_issue_stream
               query_string: '@data_source:APM'
             response_format: event_list
           items:
@@ -4111,10 +4115,10 @@ components:
           description: Array of tags associated with your log.
           example:
           - team:A
-          format: array
           items:
             description: Tag associated with your log.
-            format: string
+            type: string
+          type: array
         timestamp:
           description: Timestamp of your log.
           example: '2020-05-26T13:36:14Z'
@@ -6791,6 +6795,7 @@ components:
         next_record_id:
           description: The cursor to use to get the next results, if any. To make
             the next request, use the same parameters with the addition of the `next_record_id`.
+          nullable: true
           type: string
       type: object
     MonthlyUsageAttributionResponse:
@@ -8131,6 +8136,8 @@ components:
           $ref: '#/components/schemas/WidgetTextAlign'
         time:
           $ref: '#/components/schemas/WidgetTime'
+        timeseries_background:
+          $ref: '#/components/schemas/TimeseriesBackground'
         title:
           description: Title of your widget.
           type: string
@@ -11023,18 +11030,17 @@ components:
       properties:
         password:
           description: Password to use for the basic authentication.
-          example: ''
+          example: PaSSw0RD!
           type: string
         type:
           $ref: '#/components/schemas/SyntheticsBasicAuthWebType'
         username:
           description: Username to use for the basic authentication.
-          example: ''
+          example: my_username
           type: string
       required:
       - password
       - username
-      - type
       type: object
     SyntheticsBasicAuthWebType:
       default: web
@@ -11082,7 +11088,7 @@ components:
           description: The ID of the result to get.
           type: string
         retries:
-          description: Total duration in millisecond of the test.
+          description: Number of times this result has been retried.
           format: double
           type: number
         status:
@@ -11816,12 +11822,7 @@ components:
       description: Attributes of the global variable.
       properties:
         restricted_roles:
-          description: List of role identifiers that can be pulled from the Roles
-            API.
-          items:
-            description: UUID for a role.
-            type: string
-          type: array
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
       type: object
     SyntheticsGlobalVariableParseTestOptions:
       description: Parser options to use for retrieving a Synthetics global variable
@@ -11966,6 +11967,8 @@ components:
           description: Unique identifier of the private location.
           readOnly: true
           type: string
+        metadata:
+          $ref: '#/components/schemas/SyntheticsPrivateLocationMetadata'
         name:
           description: Name of the private location.
           example: New private location
@@ -12009,6 +12012,12 @@ components:
           description: Public key for result encryption.
           type: string
       type: object
+    SyntheticsPrivateLocationMetadata:
+      description: Object containing metadata about the private location.
+      properties:
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+      type: object
     SyntheticsPrivateLocationSecrets:
       description: Secrets for the private location. Only present in the response
         when creating the private location.
@@ -12039,6 +12048,16 @@ components:
           readOnly: true
           type: string
       type: object
+    SyntheticsRestrictedRoles:
+      description: A list of role identifiers that can be pulled from the Roles API,
+        for restricting read and write access.
+      example:
+      - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      items:
+        description: UUID for a role.
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        type: string
+      type: array
     SyntheticsSSLCertificate:
       description: Object describing the SSL certificate used for a Synthetic test.
       properties:
@@ -12492,6 +12511,8 @@ components:
         noScreenshot:
           description: Prevents saving screenshots of the steps.
           type: boolean
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         tick_every:
@@ -12973,6 +12994,27 @@ components:
       - STRING
       - INTEGER
       - DOUBLE
+    TimeseriesBackground:
+      description: Set a timeseries on the widget background.
+      properties:
+        type:
+          $ref: '#/components/schemas/TimeseriesBackgroundType'
+        yaxis:
+          $ref: '#/components/schemas/WidgetAxis'
+      required:
+      - type
+      type: object
+    TimeseriesBackgroundType:
+      default: area
+      description: Timeseries is made using an area or bars.
+      enum:
+      - bars
+      - area
+      example: bars
+      type: string
+      x-enum-varnames:
+      - BARS
+      - AREA
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Indexed Spans over time.
@@ -16063,6 +16105,7 @@ components:
         next_record_id:
           description: The cursor to get the next results (if any). To make the next
             request, use the same parameters and add `next_record_id`.
+          nullable: true
           type: string
         total_number_of_records:
           description: Total number of records.
@@ -17069,8 +17112,8 @@ components:
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
-            user_access_manage: Disable users, manage user roles, and manage SAML-to-role
-              mappings.
+            user_access_manage: Disable users, manage user roles, manage SAML-to-role
+              mappings, and configure logs restriction queries.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -22961,6 +23004,7 @@ paths:
         required: true
         schema:
           items:
+            example: 666486743
             format: int64
             type: integer
           type: array
@@ -23236,6 +23280,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          example: 666486743
           format: int64
           type: integer
       - description: Delete the monitor even if it's referenced by other resources
@@ -23299,6 +23344,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          example: 666486743
           format: int64
           type: integer
       - description: When specified, shows additional information about the group
@@ -23355,6 +23401,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          example: 666486743
           format: int64
           type: integer
       requestBody:
@@ -23584,6 +23631,60 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: safe
+  /api/v1/monitor/{monitor_id}/validate:
+    post:
+      description: Validate the monitor provided in the request.
+      operationId: ValidateExistingMonitor
+      parameters:
+      - description: The ID of the monitor
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          example: 666486743
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Monitor'
+        description: Monitor request object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example: {}
+                type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Invalid JSON
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_write
+      summary: Validate an existing monitor
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
   /api/v1/monthly_custom_reports:
     get:
       description: Get monthly custom reports.
@@ -24379,7 +24480,8 @@ paths:
       description: Search for metrics from the last 24 hours in Datadog.
       operationId: ListMetrics
       parameters:
-      - description: Query string to search metrics upon. Must be prefixed with `metrics:`.
+      - description: Query string to search metrics upon. Can optionally be prefixed
+          with `metrics:`.
         in: query
         name: q
         required: true
@@ -24423,7 +24525,7 @@ paths:
         3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed
         size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting
         metrics directly to the Datadog API without using DogStatsD, expect:\n\n-
-        64 bits for the timestamp\n- 32 bits for the value\n- 20 bytes for the metric
+        64 bits for the timestamp\n- 32 bits for the value\n- 40 bytes for the metric
         names\n- 50 bytes for the timeseries\n- The full payload is approximately
         100 bytes. However, with the DogStatsD API,\ncompression is applied, which
         reduces the payload size."
@@ -24488,6 +24590,12 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-given:
+        metric:
+          parameters:
+          - file: metric_payload.json
+            name: body
+          step: there is a valid "metric" in the system
       x-menu-order: 1
       x-undo:
         type: safe
@@ -25498,7 +25606,7 @@ paths:
         operationId: DeletePrivateLocation
         parameters:
         - name: location_id
-          source: private_location
+          source: private_location.id
         type: unsafe
   /api/v1/synthetics/private-locations/{location_id}:
     delete:
@@ -27859,7 +27967,13 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: Get Hourly Usage Attribution.
+      description: "Get Hourly Usage Attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetHourlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -27893,8 +28007,12 @@ paths:
         required: false
         schema:
           type: string
-      - description: Comma separated list of tags used to group usage. If no value
+      - description: 'Comma separated list of tags used to group usage. If no value
           is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
         in: query
         name: tag_breakdown_keys
         required: false
@@ -28349,7 +28467,13 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: Get Monthly Usage Attribution.
+      description: "Get Monthly Usage Attribution.\n\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
+        := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
+        \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month,
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetMonthlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -28389,8 +28513,12 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/MonthlyUsageAttributionSupportedMetrics'
-      - description: Comma separated list of tags used to group usage. If no value
-          is provided the usage will not be broken down by tags.
+      - description: 'Comma separated list of tag keys used to group usage. If no
+          value is provided the usage will not be broken down by tags.
+
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
         in: query
         name: tag_breakdown_keys
         required: false
@@ -28430,6 +28558,14 @@ paths:
       summary: Get Monthly Usage Attribution
       tags:
       - Usage Metering
+      x-given:
+        monthly_usage_attribution:
+          parameters:
+          - name: start_month
+            value: '"{{ timeISO(''now - 3d'') }}"'
+          - name: fields
+            value: '"infra_host_usage"'
+          step: there is a valid "monthly_usage_attribution" response
       x-menu-order: 31
       x-undo:
         type: safe

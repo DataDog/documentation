@@ -13,9 +13,24 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 
-The Python Datadog Trace library is open source. View the [GitHub repository][1] for more information.
+## Releases
 
-Python versions `2.7+` and `3.5+` are supported in the latest version of the tracer. Python `3.4` is supported in versions `0.35.x` and below of the Python tracer.
+The Python APM Client library follows a [versioning policy][58] that specifies the support level for the different versions of the library and Python runtime. 
+
+Two release branches are supported:
+
+| Release    | Support level        |
+|------------|----------------------|
+| `<1`       | Maintenace           |
+| `>=1.0,<2` | General Availability |
+
+And the library supports the following runtimes:
+
+| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
+|---------|-----------------------|---------|-----------------|--------------------------|
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.10   | `<2`                     |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.10   | `<2`                     |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.10   | `<2`                     |
 
 ## Integrations
 
@@ -28,7 +43,8 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | Framework                 | Supported Version | Automatic | Library Documentation                                              |
 | ------------------------- | ----------------- | --------- |------------------------------------------------------------------ |
 | [asgi][3]                 | >= 2.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
-| [aiohttp][4]              | >= 1.2            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [aiohttp][4] (client)     | >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [aiohttp][4] (server)     | >= 2.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
 | [Bottle][5]               | >= 0.11           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
 | [CherryPy][6]            | >= 11.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
 | [Django][7]               | >= 1.8            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
@@ -157,3 +173,4 @@ The `ddtrace` library includes support for the following libraries:
 [55]: https://www.makotemplates.org
 [56]: https://requests.readthedocs.io/en/master/
 [57]: https://urllib3.readthedocs.io/en/stable/
+[58]: https://ddtrace.readthedocs.io/en/stable/versioning.html
