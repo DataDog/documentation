@@ -40,7 +40,7 @@ The new child-organization inherits the parent-organization's plan and is added 
 
 ### Content
 
-Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][5] and tools such as Terraform, see [Managing Datadog with Terraform][6]. Additionally, scripts can be used to backup existing [dashboards][7] and [monitors][8] as code.
+Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][5] and tools such as Terraform, see [Managing Datadog with Terraform][6]. Additionally, scripts can be used to backup existing dashboards and [monitors][7] as code.
 
 ### Custom sub-domains
 
@@ -54,13 +54,29 @@ For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated 
 
 ## Set up SAML
 
-SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually. 
+SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually.
 
 To configure SAML for multi-organizations:
 
 1. Create a new organization as a different user, with a different username/password.
 2. Invite SAML users.
 3. Login as a SAML user and set SAML.
+
+### SAML strict parent organizations
+
+Under some circumstances, you may be unable to access a newly created child organization. When an organization requires users to log in using SAML, its user accounts may lack passwords. Since child organizations do not inherit SAML settings from their parents, logging into the child organization requires a password that does not exist.
+
+To ensure that you can log into a child organization created from a SAML strict parent organization, take the following steps in the parent organization:
+1. Click **Organization Settings** from the account menu in the bottom of the left side navigation, or select **Organization Settings** from the header dropdown at the top of the Personal Settings page.
+2. In the left page menu, select **Users**.
+3. Select your user profile.
+4. Set the **Override Default Login Methods** toggle to the on position.
+5. Under **Select user's login methods**, place a checkmark in the **Password** checkbox.
+6. Ensure your account has a password. If you need help setting a password, contact [Datadog support][2].
+
+Following the steps above ensures that you can log into the parent account using an email and password combination. After creating your child organization, you can also log into it using your email and password.
+
+If you already created the child organization and are locked out, following the procedure allows you to log in.
 
 ## Multi-org usage
 
@@ -105,11 +121,11 @@ On the **Individual Organizations** usage tab, you can view the usage of your ch
 
 The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
-To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name. 
+To view the [Usage Details][8] of a child-organization, you can click on the child-organization's name.
 
 ## Usage attribution
 
-The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
+The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][9] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 
 When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
@@ -127,9 +143,7 @@ Note: the following usage types are not supported in this tool:
 
 * Indexed Log Events
 * Ingested Logs
-* Indexed Spans
-
-**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
+* Indexed Spans (retained with retention filters)
 
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 
@@ -143,7 +157,6 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [4]: mailto:success@datadoghq.com
 [5]: /api/
 [6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
-[7]: /dashboards/screenboards/#backup-my-screenboard
-[8]: /monitors/manage/
-[9]: /account_management/billing/usage_details/
-[10]: /account_management/billing/usage_attribution/
+[7]: /monitors/manage/
+[8]: /account_management/billing/usage_details/
+[9]: /account_management/billing/usage_attribution/

@@ -104,6 +104,40 @@ To enable the Agent DogStatsD UDS:
         **Note**: Remove `readOnly: true` if your application containers need write access to the socket.
 
 {{% /tab %}}
+{{% tab "EKS Fargate" %}}
+
+1. Set the socket path with the `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` environment variable on the Agent container (example: `/var/run/datadog/dsd.socket`).
+
+2. Make the socket file accessible to the application containers by mounting an empty directory on both sides (read-only in your application containers and read-write in the Agent container). Mounting the parent folder instead of the individual socket enables socket communication to persist across DogStatsD restarts.
+
+    - Mount the empty folder in your pod spec:
+
+        ```yaml
+        volumes:
+            - emptyDir: {}
+              name: dsdsocket
+        ```
+
+    - Mount the socket folder in your `datadog-agent` container:
+
+        ```yaml
+        volumeMounts:
+            - name: dsdsocket
+              mountPath: /var/run/datadog
+        ```
+
+    - Expose the same folder in your application containers:
+
+        ```yaml
+        volumeMounts:
+            - name: dsdsocket
+              mountPath: /var/run/datadog
+              readOnly: true
+        ```
+
+        **Note**: Remove `readOnly: true` if your application containers need write access to the socket.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Test with netcat
@@ -202,6 +236,38 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
           value: 'low'
     ```
 
+[1]: /getting_started/tagging/assigning_tags/#environment-variables
+{{% /tab %}}
+{{% tab "EKS Fargate" %}}
+
+1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION` environment variable to true for the Agent container:
+
+    ```yaml
+    # (...)
+    env:
+        # (...)
+        - name: DD_DOGSTATSD_ORIGIN_DETECTION
+          value: 'true'
+    ```
+
+2. Set `shareProcessNamespace: true` in the pod template spec:
+
+    ```yaml
+    # (...)
+    spec:
+        # (...)
+        shareProcessNamespace: true
+    ```
+
+3. Optional - To configure [tag cardinality][1] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to `low` (default), `orchestrator`, or `high`:
+
+    ```yaml
+    # (...)
+    env:
+        # (...)
+        - name: DD_DOGSTATSD_TAG_CARDINALITY
+          value: 'low'
+    ```
 
 [1]: /getting_started/tagging/assigning_tags/#environment-variables
 {{% /tab %}}

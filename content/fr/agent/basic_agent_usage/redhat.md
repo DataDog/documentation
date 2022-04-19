@@ -70,15 +70,18 @@ Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 | Afficher l'utilisation des commandes              | `sudo service datadog-agent`                      |
 | Exécuter un check                        | `sudo -u dd-agent -- dd-agent check <NOM_CHECK>` |
 
+{{% /tab %}}
+{{< /tabs >}}
+
 **Remarque** : si le wrapper de `service` n'est pas disponible sur votre système, utilisez :
 
 * Sur les systèmes basés sur `upstart` : `sudo start/stop/restart/status datadog-agent`
 * Sur les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart/status datadog-agent`
+* Sur les systèmes basés sur `initctl` : `sudo initctl start/stop/restart/status datadog-agent`
 
 [En savoir plus sur les commandes de cycle de vie du service][2]
 
-{{% /tab %}}
-{{< /tabs >}}
+
 
 ## Configuration
 

@@ -40,6 +40,7 @@ The following metrics are collected by default after enabling Go metrics.
 
 {{< get-metrics-from-git "go" >}}
 
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Go Runtime Dashboard][6].
 
 ## Further Reading
 
@@ -49,4 +50,5 @@ The following metrics are collected by default after enabling Go metrics.
 [2]: /developers/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /developers/dogstatsd/?tab=kubernetes#agent
-[5]: /integrations/amazon_ecs/#create-an-ecs-task
+[5]: /agent/amazon_ecs/#create-an-ecs-task
+[6]: https://app.datadoghq.com/dash/integration/30587/go-runtime-metrics

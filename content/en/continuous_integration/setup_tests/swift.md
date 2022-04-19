@@ -31,7 +31,7 @@ Supported platforms:
 
 ## Installing the Swift testing SDK
 
-There are two ways of installing the testing framework:
+There are three ways you can install the testing framework:
 
 {{< tabs >}}
 {{% tab "Swift Package Manager" %}}
@@ -99,13 +99,11 @@ Set all these variables in your test target:
 `DD_TEST_RUNNER`
 : Enables or disables the instrumentation of tests. Set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
 **Default**: `false`<br/>
-**Recommended**: `$(DD_TEST_RUNNER)`<br/>
-**Example**: `true`
+**Recommended**: `$(DD_TEST_RUNNER)`
 
-`DATADOG_CLIENT_TOKEN`
-: Use the [Datadog Client Token][1] to report test results. Alternatively, use an API key.<br/>
-**Default**: `(empty)`<br/>
-**Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
+`DD_API_KEY`
+: The [Datadog API key][1] used to upload the test results.<br/>
+**Default**: `(empty)`
 
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
@@ -647,7 +645,7 @@ enum DDTestStatus {
   // The test passed.
   case pass
   //
-  //Test test failed.
+  //The test failed.
   case fail
   //
   //The test was skipped.
@@ -682,6 +680,6 @@ Always call `session.end()` at the end so that all the test info is flushed to D
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/organization-settings/client-tokens
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
 [3]: https://opentelemetry.io/

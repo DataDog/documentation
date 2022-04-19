@@ -4,24 +4,27 @@ title: APM & Continuous Profiler
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:
-- link: "/tracing/guide/setting_primary_tags_to_scope/"
-  tag: "Documentation"
-  text: "Add primary and secondary tags to your traces"
-- link: "/tracing/guide/add_span_md_and_graph_it/"
-  tag: "Documentation"
-  text: "Add custom tags to your spans to filter and group performance"
-- link: "/tracing/guide/security/"
-  tag: "Documentation"
-  text: "Automatically scrub PII from your traces"
-- link: "/tracing/guide/metrics_namespace/"
-  tag: "Documentation"
-  text: "Learn about trace metrics and their tags"
-- link: "/tracing/visualization/"
-  tag: "Documentation"
-  text: "Learn to use the APM UI"
-- link: "https://www.datadoghq.com/blog/span-based-metrics/"
-  tag: "Blog"
-  text: "Generate span-based metrics to track historical trends in application performance"
+  - link: "https://app.datadoghq.com/release-notes?category=APM"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog APM releases! (App login required)."
+  - link: "/tracing/guide/setting_primary_tags_to_scope/"
+    tag: "Documentation"
+    text: "Add primary and secondary tags to your traces"
+  - link: "/tracing/guide/add_span_md_and_graph_it/"
+    tag: "Documentation"
+    text: "Add custom tags to your spans to filter and group performance"
+  - link: "/tracing/guide/security/"
+    tag: "Documentation"
+    text: "Automatically scrub PII from your traces"
+  - link: "/tracing/guide/metrics_namespace/"
+    tag: "Documentation"
+    text: "Learn about trace metrics and their tags"
+  - link: "/tracing/visualization/"
+    tag: "Documentation"
+    text: "Learn to use the APM UI"
+  - link: "https://www.datadoghq.com/blog/span-based-metrics/"
+    tag: "Blog"
+    text: "Generate span-based metrics to track historical trends in application performance"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
@@ -37,7 +40,7 @@ aliases:
 
 Datadog APM & Continuous Profiler gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues, and databases to monitor requests, errors, and latency. Distributed traces **seamlessly correlate** to browser sessions, logs, profiles, synthetic checks, network, processes, and infrastructure metrics across hosts, containers, proxies, and serverless functions. Navigate directly from investigating a slow trace to **identifying the specific line of code** causing performance bottlenecks with code hotspots.
 
-#### Tracing Without Limits: journey of a trace
+#### Journey of a trace
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 

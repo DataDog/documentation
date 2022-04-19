@@ -64,6 +64,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_765140092",
+      "description": "Create a new dashboard with a query value widget using timeseries background"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2308247857",
       "description": "Create a new dashboard with alert_graph widget"
     },
@@ -86,6 +91,11 @@
       "group": "dashboards",
       "suffix": "_145494973",
       "description": "Create a new dashboard with apm resource stats widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4026341408",
+      "description": "Create a new dashboard with apm_issue_stream list_stream widget"
     },
     {
       "group": "dashboards",
@@ -179,6 +189,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_4076476470",
+      "description": "Create a new dashboard with rum_issue_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2342457693",
       "description": "Create a new dashboard with scatterplot widget"
     },
@@ -213,6 +228,13 @@
       "description": "Create a new dashboard with trace_service widget"
     }
   ],
+  "DeleteDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Delete a dashboard returns \"OK\" response"
+    }
+  ],
   "DeleteDashboards": [
     {
       "group": "dashboards",
@@ -221,6 +243,11 @@
     }
   ],
   "GetDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Get a dashboard returns \"OK\" response"
+    },
     {
       "group": "dashboards",
       "suffix": "_4262333854",
@@ -237,6 +264,20 @@
       "group": "dashboards",
       "suffix": "_1773932563",
       "description": "Get deleted dashboards returns \"OK\" response"
+    }
+  ],
+  "RestoreDashboards": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Restore deleted dashboards returns \"No Content\" response"
+    }
+  ],
+  "UpdateDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Update a dashboard returns \"OK\" response"
     }
   ],
   "CancelDowntime": [
@@ -330,6 +371,13 @@
       "description": "List IP Ranges returns \"OK\" response"
     }
   ],
+  "ListLogs": [
+    {
+      "group": "logs",
+      "suffix": "_235998668",
+      "description": "Search test logs returns \"OK\" response"
+    }
+  ],
   "SubmitLog": [
     {
       "group": "logs",
@@ -381,6 +429,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_3824294658",
+      "description": "Create a ci-pipelines formula and functions monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3790803616",
       "description": "Create a ci-pipelines monitor returns \"OK\" response"
     },
@@ -388,6 +441,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_440013737",
+      "description": "Create an Error Tracking monitor returns \"OK\" response"
     }
   ],
   "DeleteMonitor": [
@@ -442,6 +500,13 @@
       "group": "monitors",
       "suffix": "",
       "description": "Validate a monitor returns \"OK\" response"
+    }
+  ],
+  "ValidateExistingMonitor": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Validate an existing monitor returns \"OK\" response"
     }
   ],
   "CreateNotebook": [
@@ -540,6 +605,34 @@
       "description": "Get Corrections For an SLO returns \"OK\" response"
     }
   ],
+  "ListSLOs": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Get all SLOs returns \"OK\" response"
+    }
+  ],
+  "GetSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Get an SLO's details returns \"OK\" response"
+    }
+  ],
+  "GetSLOHistory": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Get an SLO's history returns \"OK\" response"
+    }
+  ],
+  "UpdateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Update an SLO returns \"OK\" response"
+    }
+  ],
   "GetGraphSnapshot": [
     {
       "group": "snapshots",
@@ -561,11 +654,23 @@
       "description": "Create a browser test returns \"OK - Returns the created test details.\" response"
     }
   ],
-  "CreateSyntheticsAPITest": [
+  "CreatePrivateLocation": [
     {
       "group": "synthetics",
       "suffix": "",
-      "description": "Create an API test returns \"OK - Returns the created test details.\" response"
+      "description": "Create a private location returns \"OK\" response"
+    }
+  ],
+  "CreateSyntheticsAPITest": [
+    {
+      "group": "synthetics",
+      "suffix": "_1487281163",
+      "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1072503741",
+      "description": "Create an API SSL test returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",
@@ -625,11 +730,53 @@
       "description": "Get Usage Attribution returns \"OK\" response"
     }
   ],
+  "GetUsageTopAvgMetrics": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get all custom metrics by hourly average returns \"OK\" response"
+    }
+  ],
+  "GetUsageLogsByRetention": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly logs usage by retention returns \"OK\" response"
+    }
+  ],
+  "GetUsageCIApp": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for CI Visibility returns \"OK\" response"
+    }
+  ],
   "GetUsageCloudSecurityPostureManagement": [
     {
       "group": "usage_metering",
       "suffix": "",
       "description": "Get hourly usage for CSPM returns \"OK\" response"
+    }
+  ],
+  "GetUsageCWS": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Cloud Workload Security returns \"OK\" response"
+    }
+  ],
+  "GetUsageDBM": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Database Monitoring returns \"OK\" response"
+    }
+  ],
+  "GetUsageFargate": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Fargate returns \"OK\" response"
     }
   ],
   "GetUsageInternetOfThings": [
@@ -639,6 +786,62 @@
       "description": "Get hourly usage for IoT returns \"OK\" response"
     }
   ],
+  "GetUsageLambda": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Lambda returns \"OK\" response"
+    }
+  ],
+  "GetUsageLogsByIndex": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Logs by Index returns \"OK\" response"
+    }
+  ],
+  "GetUsageLogs": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Logs returns \"OK\" response"
+    }
+  ],
+  "GetUsageNetworkFlows": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Network Flows returns \"OK\" response"
+    }
+  ],
+  "GetUsageNetworkHosts": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Network Hosts returns \"OK\" response"
+    }
+  ],
+  "GetUsageOnlineArchive": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Online Archive returns \"OK\" response"
+    }
+  ],
+  "GetUsageRumSessions": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for RUM Sessions returns \"OK\" response"
+    }
+  ],
+  "GetUsageRumUnits": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for RUM Units returns \"OK\" response"
+    }
+  ],
   "GetUsageSNMP": [
     {
       "group": "usage_metering",
@@ -646,11 +849,53 @@
       "description": "Get hourly usage for SNMP devices returns \"OK\" response"
     }
   ],
+  "GetUsageSDS": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Sensitive Data Scanner returns \"OK\" response"
+    }
+  ],
+  "GetUsageSyntheticsAPI": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Synthetics API Checks returns \"OK\" response"
+    }
+  ],
+  "GetUsageSyntheticsBrowser": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Synthetics Browser Checks returns \"OK\" response"
+    }
+  ],
   "GetUsageAnalyzedLogs": [
     {
       "group": "usage_metering",
       "suffix": "",
       "description": "Get hourly usage for analyzed logs returns \"OK\" response"
+    }
+  ],
+  "GetUsageAuditLogs": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for audit logs returns \"OK\" response"
+    }
+  ],
+  "GetUsageTimeseries": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for custom metrics returns \"OK\" response"
+    }
+  ],
+  "GetUsageHosts": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for hosts and containers returns \"OK\" response"
     }
   ],
   "GetIncidentManagement": [
@@ -679,6 +924,34 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get hourly usage for profiled hosts returns \"OK\" response"
+    }
+  ],
+  "GetSpecifiedDailyCustomReports": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get specified daily custom reports returns \"OK\" response"
+    }
+  ],
+  "GetSpecifiedMonthlyCustomReports": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get specified monthly custom reports returns \"OK\" response"
+    }
+  ],
+  "GetDailyCustomReports": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get the list of available daily custom reports returns \"OK\" response"
+    }
+  ],
+  "GetMonthlyCustomReports": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get the list of available monthly custom reports returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [

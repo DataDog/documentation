@@ -49,15 +49,16 @@ AWS Lambda is the FaaS platform provided by Amazon Web Services. See the [AWS La
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Enhanced Lambda metrics][3] | Enhanced Lambda metrics give you a view above and beyond the default Lambda metrics enabled with the AWS Lambda integration. These metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace, and are Datadog’s best practice for setting real-time monitors on your serverless application health.|
-| [Lambda library][4]       | The Datadog Lambda library collects data (enhanced Lambda metrics, traces, etc.) from your Lambda function runtime. The Lambda library then submits this data either to logs (for the [Forwarder][5] to pick up) or to the [Lambda extension][6].                         |
-| [Forwarder][5]          | An AWS Lambda function that parses and ships serverless monitoring data from CloudWatch logs to Datadog.                                |
-| [Lambda extension][6]          | A lightweight Datadog Agent that runs within the Lambda execution environment and ships serverless monitoring data to Datadog with minimal performance overhead. |
-| [Serverless CLI][7]         | The CLI enables instrumentation by modifying existing Lambda functions' configuration. It is the quickest way to get started with Datadog serverless monitoring.                             |
-| [Serverless Insights][8] | Datadog automatically generates suggestions to resolve errors and performance problems and optimizes cost for your serverless applications.|
-| [Serverless Macro][1] | The Datadog Serverless CloudFormation macro automatically configures ingestion of metrics, traces, and logs.|
-| [Serverless Plugin][11] | Automatically enables instrumentation for your Python and Node.js applications. The plugin installs the [Lambda library][4] and [Lambda extension][6] as Lambda layers. |
-| [Trace merging][9]        | Serverless trace merging is required to see a single, connected trace when you configure both Datadog’s tracing libraries (`dd-trace`) and AWS X-Ray tracing libraries in your application.                         |
-| [Trace propagation][10]        | Additional instrumentation is sometimes required to see a single, connected trace in Node and Python serverless applications asynchronously triggering Lambda functions.                        |
+| [Lambda library][4]       | The Datadog Lambda library collects data (such as enhanced Lambda metrics and traces) from your Lambda function runtime. The Lambda library then submits this data either to logs (for the [Forwarder][5] to pick up) or to the [Lambda extension][6]. The Datadog Lambda library is often bundled together with the Datadog tracing library into a [Lambda layer][7] for easy installation.                          |
+| [Forwarder][5]          | An AWS Lambda function that parses and ships serverless monitoring data from CloudWatch logs to Datadog.                             |
+| [Lambda extension][6] | A lightweight Datadog Agent that runs within the Lambda execution environment and ships serverless monitoring data to Datadog with minimal performance overhead. The extension is distributed as a [Lambda layer][7] for easy installation. |
+| [Serverless CLI][8] | The CLI enables instrumentation by modifying existing Lambda functions' configuration. It is the quickest way to get started with Datadog serverless monitoring. |
+| [Serverless Macro][9] | The Datadog Serverless CloudFormation macro automatically enables instrumentation for serverless applications by transforming the CloudFormation template.|
+| [Serverless Plugin][10] | The Serverless plugin automatically enables instrumentation for your applications managed by the [Serverless Framework][11] by modifying the Lambda functions' configuration. |
+| [Serverless CDK Construct][12] | The Serverless plugin automatically enables instrumentation for your applications managed by the [AWS CDK][13] by modifying the Lambda functions' configuration. |
+| [Trace merging][14] | Serverless trace merging is required to see a single, connected trace when you configure both Datadog’s tracing libraries (`dd-trace`) and AWS X-Ray tracing libraries in your application. |
+| [Trace propagation][15] | The Datadog trace context needs to be propagated over AWS managed services, such as SQS, Kinesis and Lambda functions, to generate a single, connected trace for serverless applications. |
+| [Serverless Insights][16] | Datadog automatically generates suggestions to resolve errors and performance problems and optimizes cost for your serverless applications. |
 
 
 
@@ -65,16 +66,22 @@ AWS Lambda is the FaaS platform provided by Amazon Web Services. See the [AWS La
 [2]: https://opencontainers.org/
 [3]: /serverless/enhanced_lambda_metrics
 [4]: /serverless/libraries_integrations/library/
-[5]: /serverless/libraries_integrations/forwarder/
+[5]: /logs/guide/forwarder/
 [6]: /serverless/libraries_integrations/extension/
-[7]: /serverless/libraries_integrations/cli
-[8]: /serverless/troubleshooting/insights/
-[9]: /serverless/distributed_tracing/serverless_trace_merging
-[10]: /serverless/distributed_tracing/serverless_trace_propagation
+[7]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[8]: /serverless/libraries_integrations/cli
+[9]: /serverless/libraries_integrations/macro/
+[10]: /serverless/libraries_integrations/plugin/
+[11]: https://www.serverless.com/
+[12]: https://github.com/DataDog/datadog-cdk-constructs
+[13]: https://aws.amazon.com/cdk/
+[14]: /serverless/distributed_tracing/serverless_trace_merging
+[15]: /serverless/distributed_tracing/serverless_trace_propagation
+[16]: /serverless/troubleshooting/insights/
 {{% /tab %}}
 {{% tab "Azure Functions" %}}
 
-Azure Functions is the FaaS platform provided by Microsoft Azure. See the [Microsoft Azure Functions documentation][11] for more details.
+Azure Functions is the FaaS platform provided by Microsoft Azure. See the [Microsoft Azure Functions documentation][1] for more details.
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -87,20 +94,20 @@ Azure Functions is the FaaS platform provided by Microsoft Azure. See the [Micro
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Azure App Service view][12]      | Datadog's offering for monitoring Azure App Services resources.                            |
+| [Azure App Service view][2]      | Datadog's offering for monitoring Azure App Services resources.                            |
 
 
-[11]: https://docs.microsoft.com/en-us/azure/azure-functions/
-[12]: https://app.datadoghq.com/functions
+[1]: https://docs.microsoft.com/en-us/azure/azure-functions/
+[2]: https://app.datadoghq.com/functions
 {{% /tab %}}
 {{% tab "Google Cloud Functions" %}}
 
-Cloud Functions is Google's serverless execution environment. See the [Google Cloud Functions documentation][13] for more details.
+Cloud Functions is Google's serverless execution environment. See the [Google Cloud Functions documentation][1] for more details.
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Cloud Functions          | Google's FaaS offering.                          |
 
-[13]: https://cloud.google.com/functions/docs
+[1]: https://cloud.google.com/functions/docs
 {{% /tab %}}
 {{< /tabs >}}

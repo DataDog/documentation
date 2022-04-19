@@ -1,0 +1,36 @@
+// Spacer half-sizes 0.3125 rem : 5px
+$spacer-halved: 0.3125rem !default;
+
+// Multiply a given unit value
+@function multiplyunit($value, $multiplier) {
+    $result: $value * $multiplier;
+
+    @return $result;
+}
+
+// Create helper classes for 5px increments
+@for $i from 1 through 9 {
+    .mt-half-#{$i} {
+        margin-top: multiplyunit($spacer-halved, $i) !important;
+    }
+    .ml-half-#{$i} {
+        margin-left: multiplyunit($spacer-halved, $i) !important;
+    }
+
+    @media (min-width: $screen-md) {
+        .ml-md-half-#{$i} {
+            margin-left: multiplyunit($spacer-halved, $i) !important;
+        }
+
+        .ml-md-half-n#{$i} {
+            margin-left: -1 * multiplyunit($spacer-halved, $i) !important;
+        }
+    }
+
+    .mr-half-#{$i} {
+        margin-right: multiplyunit($spacer-halved, $i) !important;
+    }
+    .mb-half-#{$i} {
+        margin-bottom: multiplyunit($spacer-halved, $i) !important;
+    }
+}

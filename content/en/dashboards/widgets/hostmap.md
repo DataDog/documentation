@@ -5,15 +5,9 @@ description: "Display the Datadog host map in your dashboards."
 aliases:
     - /graphing/widgets/hostmap/
 further_reading:
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The host map widget graphs any metric across your hosts using the same visualization available from the main [Host Map][1] page:

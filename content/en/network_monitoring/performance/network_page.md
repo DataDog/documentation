@@ -79,7 +79,7 @@ Your network metrics are displayed through the graphs and the associated table. 
 
 Values displayed might be different for `sent_metric(source to destination)` and `received_metric(destination to source)` if there is a large number of packet drops. In this case, if the `destination` sends a lot of bytes to the `source`, the aggregate connections that originate at `destination` include those bytes, but the aggregate connections that originate at `source` do not see them as received.
 
-**Note**: The default collection interval is five minutes and retention is seven days.
+**Note:** Data is collected every 30 seconds, aggregated in five minute buckets, and retained for 14 days.
 
 ### Metrics
 
@@ -174,7 +174,7 @@ The network table breaks down the _Volume_, _Throughput_, _TCP Retransmits_, _Ro
 
 You can configure the columns in your table using the `Customize` button at the top right of the table.
 
-Congifure the traffic shown with the `Filter Traffic` button.
+Configure the traffic shown with the `Filter Traffic` button.
 
 {{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details"  style="width:80%;">}}
 

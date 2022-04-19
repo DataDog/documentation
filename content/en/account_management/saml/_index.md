@@ -103,7 +103,7 @@ It’s important to understand what is sent in an assertion before turning on ma
 
 1. [Cross-reference][23] and [validate][24] your SAML assertion to understand your IdP's attributes.
 
-2. Go to Teams and click the **Mappings** tab.
+2. Go to **Organization Settings** and click the **SAML Group Mappings** tab.
 
 3. Click **New Mapping**.
 

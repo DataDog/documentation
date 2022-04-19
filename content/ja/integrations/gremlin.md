@@ -72,11 +72,13 @@ Gremlin インテグレーションには、サービスのチェック機能は
 
 ## その他の参考資料
 
-インフラストラクチャーの監視の詳細および Datadog の全インテグレーションについては、[ブログ記事][6]を参照してください。
+お役に立つドキュメント、リンクや記事:
+
+- [Gremlin が Datadog を使用して自社の Chaos Engineering サービスを監視する方法][6]
 
 [1]: https://docs.datadoghq.com/ja/getting_started/#events
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gremlin/images/events-overlay.png
 [4]: https://app.gremlin.com/settings/integrations
 [5]: https://docs.datadoghq.com/ja/help/
-[6]: https://www.datadoghq.com/blog
+[6]: https://www.datadoghq.com/blog/gremlin-datadog/

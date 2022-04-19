@@ -50,7 +50,7 @@ further_reading:
 ### Supported .NET Framework runtimes
 The .NET Tracer supports instrumentation on .NET Framework 4.6.1 and above.
 
-For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
+For a full list of supported libraries and processor architectures (including older versions of .NET Framework), see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
@@ -100,7 +100,7 @@ To install the .NET Tracer per-application:
 
 ### Enable the tracer for your service
 
-To enable the .NET Tracer for your service, set the required environment variables and restart the application. 
+To enable the .NET Tracer for your service, set the required environment variables and restart the application.
 
 For information about the different methods for setting environment variables, see [Configuring process environment variables](#configuring-process-environment-variables).
 
@@ -120,7 +120,7 @@ For information about the different methods for setting environment variables, s
    ```
 
    <div class="alert alert-warning">
-     <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
+     <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
@@ -163,7 +163,7 @@ For information about the different methods for setting environment variables, s
 
 ### Configure the Datadog Agent for APM
 
-[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. 
+[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`.
 
 For containerized, serverless, and cloud environments:
 
@@ -180,7 +180,7 @@ For containerized, serverless, and cloud environments:
 
 3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on how to set these variables, see [Configuration](#configuration).
 
-{{< site-region region="us3,us5,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. To ensure the Agent sends data to the right Datadog location, set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}}.
 
@@ -345,15 +345,17 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
-Enables or disables automatic injection of correlation identifiers into application logs.
+Enables or disables automatic injection of correlation identifiers into application logs. <br>
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
-Enables [Tracing without Limits][5].
+Enables ingestion rate control.
 
-`DD_MAX_TRACES_PER_SECOND`
+`DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
-The number of traces allowed to be submitted per second.
+The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent. <br>
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
@@ -410,6 +412,17 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 **Default**: `false`<br>
 Added in version 1.23.0.
 
+`DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
+: Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
+This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
+**Default**: `false`
+Added in version 2.5.2
+
+`DD_TRACE_METHODS`
+: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is a comma (`,`) separated list of method names. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+**Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync]```<br>
+Added in version 2.6.0
+
 #### Automatic instrumentation integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration.
@@ -434,7 +447,7 @@ The following configuration variables are for features that are available for us
 #### Deprecated settings
 
 `DD_TRACE_LOG_PATH`
-: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set. 
+: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.
 
 `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
 : Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>
@@ -528,6 +541,6 @@ dotnet.exe example.dll
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /tracing/trace_ingestion/
+[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
 [6]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
 [7]: /tracing/setup_overview/custom_instrumentation/dotnet/

@@ -11,7 +11,12 @@ further_reading:
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Rules"
+    - link: "/security_platform/application_security/troubleshooting"
+      tag: "Documentation"
+      text: "Troubleshooting Application Security Monitoring"
 ---
+
+You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS. 
 
 {{% appsec-getstarted %}}
 - One of the [supported APM tracing integrations][1].

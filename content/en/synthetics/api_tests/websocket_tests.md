@@ -175,12 +175,11 @@ These reasons include the following:
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic WebSocket tests. To get create, edit, and delete access to Synthetic WebSocket tests, upgrade your user to one of those two [default roles][10].
 
-If you have access to the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their accounts.</div>
+Access restriction is available for customers using [custom roles][12] on their accounts.
 
 You can restrict access to a WebSocket test based on the roles in your organization. When creating a WebSocket test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -201,3 +200,4 @@ You can restrict access to a WebSocket test based on the roles in your organizat
 [9]: /synthetics/api_tests/errors/#ssl-errors
 [10]: /account_management/rbac/
 [11]: /account_management/rbac#custom-roles
+[12]: /account_management/rbac/#create-a-custom-role

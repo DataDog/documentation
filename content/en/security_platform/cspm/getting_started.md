@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not currently available in this site.
 </div>
@@ -44,5 +44,5 @@ Evaluate the security posture of your hosts and containers. This section guides 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration?config_k9_configuration=true&detect-threats=apache&secure-cloud-environment=amazon-web-services&secure-hosts-and-containers=kubernetes&selected-products=compliance_monitoring
-[2]: /security_platform/default_rules#cat-cloud-configuration
+[2]: /security_platform/default_rules#cat-posture-management-cloud
 [3]: /security_platform/default_rules#cat-infrastructure-configuration

@@ -92,7 +92,10 @@ Define the configuration of your browser test.
 
 3. **Name**: The name of your browser test.
 4. **Select tags**: The `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`, and `Edge`) and devices (`Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
+5. **Browsers & Devices**: The browsers (such as `Chrome`, `Firefox`, `Edge`, and `Internet Explorer 11`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
+   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels. 
+   - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
+   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.  
 6. **Select locations**: The Datadog managed locations to run your test from. Many AWS locations from around the world are available for each site. You can also set up [private locations][1] to run your browser test from custom locations or from inside private networks. See a full list of locations in the [Datadog app][2] or use the [API][3]. {{< site-region region="gov" >}}**Note**: The West US (AWS GovCloud) location is supported on the Datadog for Government site.{{< /site-region >}}
 7. **Select test frequency**: The intervals vary from every five minutes to once per week. [Contact Support][4] for one-minute frequency.
 
@@ -140,26 +143,27 @@ A notification is sent according to the set of alerting conditions. To configure
 
 Tests can be only recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension for Google Chrome][11].
 
-{{< img src="synthetics/browser_tests/browser_check_record_test2.png" alt="Browser test record test" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="80%" >}}
 
-1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in **Incognito mode** to start recording your test from a fresh browser free of already logged-in sessions, cookies from your existing browser, and more.
-2. Click **Start Recording** to begin recording your browser test.
-3. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][12] within your browser test scenario on the left.
-4. In addition to the automatically recorded steps, you can also use the [steps][12] available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;" >}}
-    **Note**: You should always make sure to **end your browser test with an [assertion][13]** to confirm the journey executed by the browser test resulted in the expected state.
-5. Once you have finished your scenario, click **Save and Launch Test**.
+1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in **Incognito mode** to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
+2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][12]. 
+3. Click **Start Recording** to begin recording your browser test.
+4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][13] within your browser test scenario on the left.
+5. In addition to the automatically recorded steps, you can also use the [steps][13] available in the upper left corner to enrich your scenario:
+    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;">}}
+
+    **Note**: You should always make sure to **end your browser test with an [assertion][14]** to confirm the journey executed by the browser test resulted in the expected state.
+6. Once you have finished your scenario, click **Save and Launch Test**.
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][14] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][14].
+By default, only users with the [Datadog Admin and Datadog Standard roles][15] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][15].
 
-If you have access to the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-<div class="alert alert-warning">
-Access restriction is available for customers with <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">custom roles</a> enabled on their accounts.</div>
+Access restriction is available for customers using [custom roles][16] on their accounts.
 
 You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -184,3 +188,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [13]: /synthetics/browser_tests/actions/#assertion
 [14]: /account_management/rbac/
 [15]: /account_management/rbac#custom-roles
+[16]: /account_management/rbac/#create-a-custom-role

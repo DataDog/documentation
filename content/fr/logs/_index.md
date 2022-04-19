@@ -1,44 +1,61 @@
 ---
 title: Log Management
 kind: Documentation
-description: 'Configurez votre Agent Datadog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
+description: Configurez votre Agent Datadog pour rassembler les logs de votre host, de vos conteneurs et de vos services.
 disable_sidebar: true
 aliases:
   - /fr/guides/logs/
   - /fr/logs/logging_without_limits
 further_reading:
-  - link: /logs/guide
-    tag: Guide
-    text: Articles supplémentaires utiles sur le processing et la collecte de logs.
-  - link: 'https://learn.datadoghq.com'
+  - link: /logs/log_collection/
+    tag: Documentation
+    text: Commencer à recueillir vos logs
+  - link: https://learn.datadoghq.com
     tag: Centre d'apprentissage
-    text: Présentation des logs dans Datadog
+    text: "Découvrir le fonctionnement de la solution Log\_Management de Datadog"
 ---
+## Présentation
+
+Pour veiller à l'intégrité de votre infrastructure, il est crucial d'enregistrer des logs à propos des principales opérations de votre système. Les infrastructures modernes peuvent générer toutes les minutes des milliers d'événements. Vous devez donc déterminer les types de logs à envoyer à une solution de gestion de logs, et les types de logs à archiver. Tout filtrage de vos logs peut entraîner un traitement non exhaustif ou la perte de données importantes.
+
+La solution Log Management de Datadog (également désignée par les termes « logs Datadog » ou « journalisation Datadog ») met fin à ces problèmes en séparant le processus d'ingestion des logs du processus d'indexation. Vous pouvez ainsi recueillir, traiter, explorer et surveiller tous vos logs de façon rentable et sans aucune limite, grâce à Logging without Limits\*.
+
+La solution Logging without Limits\* simplifie vos processus de dépannage dans le [Log Explorer][1]. Vos équipes et vous-même pouvez accéder rapidement aux problèmes concernant votre infrastructure et les corriger au plus vite. Les fonctionnalités intuitives d'archivage facilitent le travail d'audit et d'évaluation des équipes IT et de sécurité. Logging without Limits\* alimente également la solution [Cloud SIEM Datadog][2], qui détecte les menaces de sécurité dans votre environnement sans nécessiter l'indexation de vos logs.
+
 {{< vimeo 293195142 >}}
 
-Votre infrastructure peut parfois générer un volume d'événements de log trop important, ou avec des fluctuations importantes. Dans ce cas, vous devrez peut-être déterminer les types de logs à envoyer à une solution de gestion de logs, et les types de logs à archiver. En revanche, en filtrant vos logs, il se peut que vous effectuiez un traitement non exhaustif ou ignoriez certaines données importantes.
+</br>
 
-La solution Log Management de Datadog met fin à ces problèmes en séparant le processus d'ingestion des logs du processus d'indexation. Vous pouvez ainsi recueillir, traiter, archiver, explorer et surveiller tous vos logs de façon rentable, sans la moindre limite. Cette fonctionnalité s'intitule Logging without Limits*. C'est sur celle-ci que repose la fonction [Cloud SIEM][1] de Datadog. En effet, elle vous permet de détecter les menaces de sécurité de votre environnement sans avoir à indexer vos logs.
+## Recueillir les logs
 
-{{< whatsnext desc="Grâce à Logging without Limits*, vous bénéficiez des fonctionnalités suivantes :">}}
-  {{< nextlink href="/logs/log_collection">}}Collecte de logs et intégrations : ingérez tous vos logs depuis vos hosts, conteneurs et fournisseurs de cloud.{{< /nextlink >}}
-  {{< nextlink href="/logs/processing">}}Traitement : traitez et enrichissez tous vos logs avec des pipelines et des processeurs. {{< /nextlink >}}
-  {{< nextlink href="/logs/live_tail">}}Live Tail : visualisez vos logs ingérés en temps réel sur l'ensemble de vos environnements.{{< /nextlink >}}
-  {{< nextlink href="/logs/logs_to_metrics">}}Création de métriques : générez des métriques à partir des logs ingérés.{{< /nextlink >}}
-  {{< nextlink href="/logs/archives">}}Archives : archivez tous les logs enrichis dans des compartiments S3.{{< /nextlink >}}
-  {{< nextlink href="/logs/indexes">}}Index : déterminez de façon dynamique les éléments à inclure et à exclure de vos index afin de maîtriser vos coûts.{{< /nextlink >}}
-{{< /whatsnext >}}
-{{< whatsnext desc="Une fois vos logs indexés, plongez au cœur de leurs données grâce à la vue Log Explorer :">}}
-  {{< nextlink href="/logs/explorer/">}}Log Explorer : découvrez la vue Log Explorer et apprenez à ajouter des facettes et des mesures.{{< /nextlink >}}
-  {{< nextlink href="/logs/explorer">}}Recherche : effectuez des recherches sur l'ensemble de vos logs indexés.{{< /nextlink >}}
-  {{< nextlink href="/logs/explorer/analytics">}}Analyse : effectuez des analyses de logs sur vos logs indexés.{{< /nextlink >}}
-  {{< nextlink href="/logs/explorer/patterns">}}Patterns : identifiez des patterns de logs en regroupant vos logs indexés dans un cluster.{{< /nextlink >}}
-  {{< nextlink href="/logs/explorer/saved_views/">}}Vues enregistrées : utilisez des vues enregistrées pour configurer automatiquement votre Log Explorer.{{< /nextlink >}}
-{{< /whatsnext >}}
-{{< whatsnext desc="Enfin, exploitez les concepts clés de la surveillance à l'aide de métriques et de traces :">}}
-  {{< nextlink href="/tracing/connect_logs_and_traces/">}}Association de logs et de traces : affichez la trace associée au log observé.{{< /nextlink >}}
-  {{< nextlink href="/dashboards/timeboards/#graph-menu">}}Corrélation de logs avec des métriques : affichez la métrique associée au log observé.{{< /nextlink >}}
-{{< /whatsnext >}}
+Pour commencer à utiliser Log Management, commencez à [ingérer des logs][3] depuis vos hosts, conteneurs, fournisseurs cloud et autres sources.
+
+## Configurer les logs
+
+{{< img src="/logs/configure.png" alt="Configurer vos logs depuis une vue unique" style="width:80%;">}}
+
+Une fois vos logs ingérés, traitez et enrichissez l'ensemble d'entre eux avec des pipelines et des processeurs, contrôlez précisément votre budget de gestion des logs avec des index, générez des métriques à partir des logs générés ou gérez vos logs dans des archives optimisées pour le stockage grâce aux [paramètres de configuration des logs][4].
+
+## Associer les logs
+
+{{< img src="/logs/connect.png" alt="Corréler les logs aux métriques ou traces" style="width:80%;">}}
+
+Tirez profit des trois piliers de l'observabilité en associant vos logs à vos métriques et traces :
+
+- [Associez vos logs à vos traces][5] pour gagner en visibilité sur vos applications.
+- [Corrélez vos logs à vos métriques][6] pour contextualiser un problème et le mapper dans l'ensemble de votre service.
+
+## Explorer les logs
+
+Commencez à explorer vos logs ingérés dans le [Log Explorer][1].
+
+{{< img src="/logs/explore.jpg" alt="Explorer vos logs ingérés" style="width:80%;">}}
+
+- [Recherche][7] : effectuez des recherches dans l'ensemble de vos logs.
+- [Live Tailing][8] : visualisez en temps réel vos logs ingérés dans l'ensemble de vos environnements.
+- [Analyse][9] : analysez vos logs indexés.
+- [Patterns][10] : identifiez des patterns de log en rassemblant vos logs indexés au sein d'un cluster.
+- [Vues enregistrées][11] : servez-vous des vues enregistrées pour configurer automatiquement votre vue Log Explorer.
 
 ## Pour aller plus loin
 
@@ -47,4 +64,14 @@ La solution Log Management de Datadog met fin à ces problèmes en séparant le
 
 \*Logging without Limits est une marque déposée de Datadog, Inc.
 
-[1]: /fr/security_monitoring
+[1]: /fr/logs/explorer/
+[2]: /fr/security_platform/cloud_siem/
+[3]: /fr/logs/log_collection/
+[4]: /fr/logs/log_configuration/
+[5]: /fr/tracing/connect_logs_and_traces/
+[6]: /fr/logs/guide/correlate-logs-with-metrics/
+[7]: /fr/logs/explorer/search_syntax/
+[8]: /fr/logs/live_tail/
+[9]: /fr/logs/explorer/analytics/
+[10]: /fr/logs/explorer/patterns/
+[11]: /fr/logs/explorer/saved_views/

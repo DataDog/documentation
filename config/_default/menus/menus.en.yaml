@@ -29,6 +29,11 @@ main:
     url: getting_started/integrations/
     parent: getting_started
     weight: 4
+  - name: AWS
+    identifier: getting_started_with_aws
+    url: getting_started/integrations/aws/
+    weight: 401
+    parent: getting_started_integrations
   - name: Dashboards
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
@@ -241,51 +246,61 @@ main:
     parent: agent
     identifier: agent_kubernetes
     weight: 3
-  - name: Kubernetes distributions
+  - name: Installation
+    url: agent/kubernetes/installation
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_installation
+    weight: 301
+  - name: Configuration
+    url: agent/kubernetes/configuration
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_configuration
+    weight: 302
+  - name: Distributions
     url: agent/kubernetes/distributions
     parent: agent_kubernetes
     identifier: agent_kubernetes_distributions
-    weight: 301
+    weight: 303
   - name: APM
     url: agent/kubernetes/apm/
     parent: agent_kubernetes
     identifier: agent_kubernetes_apm
-    weight: 302
+    weight: 304
   - name: Log collection
     url: agent/kubernetes/log/
     parent: agent_kubernetes
     identifier: agent_kubernetes_log
-    weight: 303
+    weight: 305
   - name: Tag extraction
     url: agent/kubernetes/tag/
     parent: agent_kubernetes
     identifier: agent_kubernetes_tag
-    weight: 304
-  - name: Autodiscovery
+    weight: 306
+  - name: Integrations & Autodiscovery
     url: agent/kubernetes/integrations/
     parent: agent_kubernetes
     identifier: agent_kubernetes_integrations
-    weight: 305
-  - name: Prometheus
+    weight: 307
+  - name: Prometheus & OpenMetrics
     url: agent/kubernetes/prometheus/
     parent: agent_kubernetes
     identifier: agent_kubernetes_prometheus
-    weight: 306
-  - name: Data collected
-    url: agent/kubernetes/data_collected/
-    parent: agent_kubernetes
-    identifier: agent_kubernetes_data_collected
-    weight: 307
+    weight: 308
   - name: Control plane monitoring
     url: agent/kubernetes/control_plane/
     parent: agent_kubernetes
     identifier: agent_kubernetes_control_plane
-    weight: 308
+    weight: 309
+  - name: Data collected
+    url: agent/kubernetes/data_collected/
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_data_collected
+    weight: 310
   - name: Operator configuration
     url: agent/kubernetes/operator_configuration
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
-    weight: 309
+    weight: 311
   - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
@@ -413,6 +428,10 @@ main:
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
     weight: 1002
+  - name: Upgrade Between Agent Minor Versions
+    url: agent/versions/upgrade_between_agent_minor_versions
+    parent: agent_versions
+    weight: 1003
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
@@ -483,6 +502,16 @@ main:
     identifier: watchdog_top_level
     pre: watchdog
     weight: 50000
+  - name: RCA
+    url: watchdog/rca/
+    identifier: watchdog_rca
+    parent: watchdog_top_level
+    weight: 2
+  - name: Faulty Deployment Detection
+    url: watchdog/faulty_deployment_detection/
+    identifier: watchdog_faulty_deployment_detection
+    parent: watchdog_top_level
+    weight: 3
   - name: Events
     url: events/
     identifier: events_top_level
@@ -524,18 +553,6 @@ main:
     pre: dashboard
     identifier: dashboards
     weight: 70000
-  - name: Dashboard Layout
-    url: dashboards/dashboards/
-    parent: dashboards
-    weight: 1
-  - name: Timeboard Layout
-    url: dashboards/timeboards/
-    parent: dashboards
-    weight: 2
-  - name: Screenboard Layout
-    url: dashboards/screenboards/
-    parent: dashboards
-    weight: 3
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
@@ -828,26 +845,22 @@ main:
     url: serverless/libraries_integrations/library/
     parent: libraries_integrations
     weight: 202
-  - name: Datadog Forwarder
-    url: serverless/libraries_integrations/forwarder/
-    parent: libraries_integrations
-    weight: 203
   - name: Datadog Serverless Plugin
     url: serverless/libraries_integrations/plugin/
     parent: libraries_integrations
-    weight: 204
+    weight: 203
   - name: Datadog Serverless Macro
     url: serverless/libraries_integrations/macro/
     parent: libraries_integrations
-    weight: 205
+    weight: 204
   - name: Datadog Serverless CLI
     url: serverless/libraries_integrations/cli/
     parent: libraries_integrations
-    weight: 206
+    weight: 205
   - name: Lambda Code Signing
     url: serverless/libraries_integrations/lambda_code_signing/
     parent: libraries_integrations
-    weight: 207
+    weight: 206
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
@@ -883,18 +896,6 @@ main:
     parent: serverless
     identifier: serverless_troubleshooting
     weight: 7
-  - name: Insights
-    url: serverless/troubleshooting/insights
-    parent: serverless_troubleshooting
-    weight: 701
-  - name: Serverless Tagging
-    url: serverless/troubleshooting/serverless_tagging
-    parent: serverless_troubleshooting
-    weight: 702
-  - name: Visualizing Managed Resources
-    url: serverless/troubleshooting/connect_invoking_resources
-    parent: serverless_troubleshooting
-    weight: 703
   - name: Azure App Service Extension
     url: serverless/azure_app_services
     parent: serverless
@@ -976,6 +977,11 @@ main:
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
     weight: 705
+  - name: Guides
+    url: metrics/custom_metrics/guide
+    parent: metrics_custom_metrics
+    identifier: custom_metrics_guide
+    weight: 706
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1081,6 +1087,11 @@ main:
     parent: monitor_types
     identifier: monitor_types_composite
     weight: 1036
+  - name: CI Pipelines
+    url: monitors/create/types/ci_pipelines/
+    parent: monitor_types
+    identifier: monitor_types_cipipelines
+    weight: 1037
   - name: Notifications
     url: monitors/notify/
     parent: alerting
@@ -1673,6 +1684,11 @@ main:
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
     weight: 1706
+  - name: .NET diagnostic tool
+    url: tracing/troubleshooting/dotnet_diagnostic_tool
+    identifier: tracing_troubleshooting_dotnet_diagnostic_tool
+    parent: tracing_troubleshooting
+    weight: 1707
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
@@ -1818,6 +1834,11 @@ main:
     parent: dbm_setup_postgres
     identifier: dbm_postgres_advanced_configuration
     weight: 105
+  - name: Troubleshooting
+    url: database_monitoring/setup_postgres/troubleshooting/
+    parent: dbm_setup_postgres
+    identifier: dbm_troubleshooting_postgres
+    weight: 106
   - name: Setting Up MySQL
     url: database_monitoring/setup_mysql/
     parent: dbm
@@ -1848,26 +1869,56 @@ main:
     parent: dbm_setup_mysql
     identifier: dbm_mysql_advanced_configuration
     weight: 105
+  - name: Troubleshooting
+    url: database_monitoring/setup_mysql/troubleshooting/
+    parent: dbm_setup_mysql
+    identifier: dbm_troubleshooting_mysql
+    weight: 106
+  - name: Setting Up SQL Server
+    url: database_monitoring/setup_sql_server/
+    parent: dbm
+    identifier: dbm_setup_sql_server
+    weight: 3
+  - name: Self-hosted
+    url: database_monitoring/setup_sql_server/selfhosted/
+    parent: dbm_setup_sql_server
+    identifier: dbm_setup_sql_server_selfhosted
+    weight: 101
+  - name: RDS
+    url: database_monitoring/setup_sql_server/rds/
+    parent: dbm_setup_sql_server
+    identifier: dbm_setup_sql_server_rds
+    weight: 102
+  - name: Azure
+    url: database_monitoring/setup_sql_server/azure/
+    parent: dbm_setup_sql_server
+    identifier: dbm_setup_sql_server_azure
+    weight: 103
   - name: Data Collected
     url: database_monitoring/data_collected
     parent: dbm
     identifier: dbm_data_collected
-    weight: 3
+    weight: 4
   - name: Exploring Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm
     identifier: dbm_query_metrics
-    weight: 4
+    weight: 5
   - name: Exploring Query Samples
     url: database_monitoring/query_samples/
     parent: dbm
     identifier: dbm_query_samples
-    weight: 5
+    weight: 6
   - name: Troubleshooting
     url: database_monitoring/troubleshooting/
     parent: dbm
     identifier: dbm_troubleshooting
-    weight: 6
+    weight: 7
+  - name: Guides
+    url: database_monitoring/guide/
+    parent: dbm
+    identifier: dbm_guides
+    weight: 8
   - name: Log Management
     url: logs/
     pre: log
@@ -2018,6 +2069,10 @@ main:
     url: logs/explorer/export/
     parent: log_explorer
     weight: 508
+  - name: Watchdog Insights for Logs
+    url: logs/explorer/watchdog_insights/
+    parent: log_explorer
+    weight: 509
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
@@ -2196,6 +2251,16 @@ main:
     parent: application_security
     identifier: appsec_configuration
     weight: 403
+  - name: Custom Rules
+    url: security_platform/application_security/custom_rules/
+    parent: application_security
+    identifier: appsec_custom_rules
+    weight: 404
+  - name: Troubleshooting
+    url: security_platform/application_security/troubleshooting
+    parent: application_security
+    identifier: appsec_troubleshooting
+    weight: 405
   - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
@@ -2215,11 +2280,16 @@ main:
     parent: security_platform
     identifier: signals_explorer
     weight: 7
+  - name: Security Signal Management
+    url: security_platform/security_signal_management
+    parent: security_platform
+    identifier: security_signal_management
+    weight: 8
   - name: Guides
     url: security_platform/guide/
     parent: security_platform
     identifier: security_platform_guides
-    weight: 8
+    weight: 9
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -2258,6 +2328,10 @@ main:
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
     weight: 107
+  - name: GRPC Health Checks
+    url: synthetics/api_tests/grpc_tests
+    parent: api_tests
+    weight: 108
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics
@@ -2310,16 +2384,21 @@ main:
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_configuration
     weight: 501
+  - name: CircleCI Orb
+    url: /synthetics/cicd_integrations/circleci_orb
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_circleci_orb
+    weight: 502
   - name: GitHub Actions
     url: /synthetics/cicd_integrations/github_actions
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_github_actions
-    weight: 502
+    weight: 503
   - name: Jenkins
     url: /synthetics/cicd_integrations/jenkins
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_jenkins
-    weight: 503
+    weight: 504
   - name: CI Results Explorer
     url: /synthetics/ci_results_explorer
     parent: synthetics
@@ -2511,16 +2590,41 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_search
     weight: 601
-  - name: Analytics
-    url: real_user_monitoring/explorer/analytics/
+  - name: Search Syntax
+    url: real_user_monitoring/explorer/search_syntax/
     parent: rum_explorer
-    identifier: rum_explorer_analytics
+    identifier: rum_explorer_search_syntax
     weight: 602
-  - name: Watchdog Insights
+  - name: Group
+    url: real_user_monitoring/explorer/group/
+    parent: rum_explorer
+    identifier: rum_explorer_group
+    weight: 603
+  - name: Visualize
+    url: real_user_monitoring/explorer/visualize/
+    parent: rum_explorer
+    identifier: rum_explorer_visualize
+    weight: 604
+  - name: Events
+    url: real_user_monitoring/explorer/events/
+    parent: rum_explorer
+    identifier: rum_explorer_events
+    weight: 605
+  - name: Export
+    url: real_user_monitoring/explorer/export/
+    parent: rum_explorer
+    identifier: rum_explorer_export
+    weight: 606
+  - name: Saved Views
+    url: real_user_monitoring/explorer/saved_views/
+    parent: rum_explorer
+    identifier: rum_explorer_saved_views
+    weight: 607
+  - name: Watchdog Insights for RUM
     url: real_user_monitoring/explorer/watchdog_insights/
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
-    weight: 603
+    weight: 608
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
@@ -4387,6 +4491,18 @@ api:
         - MuteAllMonitors
       unstable: []
       order: 0
+  - name: Validate an existing monitor
+    url: '#validate-an-existing-monitor'
+    identifier: validate-an-existing-monitor
+    parent: monitors
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ValidateExistingMonitor
+      unstable: []
+      order: 8
   - name: Unmute a monitor
     url: '#unmute-a-monitor'
     identifier: unmute-a-monitor
@@ -4595,8 +4711,10 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - UploadIdPForOrg
+        - UploadIdPMetadata
       unstable: []
       order: 5
   - name: Update your organization
@@ -5616,6 +5734,18 @@ api:
         - GetUsageProfiling
       unstable: []
       order: 24
+  - name: Get hourly usage for Online Archive
+    url: '#get-hourly-usage-for-online-archive'
+    identifier: get-hourly-usage-for-online-archive
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageOnlineArchive
+      unstable: []
+      order: 38
   - name: Get hourly usage for Network Hosts
     url: '#get-hourly-usage-for-network-hosts'
     identifier: get-hourly-usage-for-network-hosts
@@ -5810,6 +5940,18 @@ api:
         - GetUsageCloudSecurityPostureManagement
       unstable: []
       order: 32
+  - name: Get hourly usage for CI Visibility
+    url: '#get-hourly-usage-for-ci-visibility'
+    identifier: get-hourly-usage-for-ci-visibility
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageCIApp
+      unstable: []
+      order: 38
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: get-billable-usage-across-your-account
@@ -6152,6 +6294,34 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: Audit
+    url: /api/latest/audit/
+    identifier: audit
+    generated: true
+  - name: Search Audit Logs events
+    url: '#search-audit-logs-events'
+    identifier: search-audit-logs-events
+    parent: audit
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchAuditLogs
+      unstable: []
+      order: 1
+  - name: Get a list of Audit Logs events
+    url: '#get-a-list-of-audit-logs-events'
+    identifier: get-a-list-of-audit-logs-events
+    parent: audit
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListAuditLogs
+      unstable: []
+      order: 2
   - name: AuthN Mappings
     url: /api/latest/authn-mappings/
     identifier: authn-mappings
@@ -6837,6 +7007,46 @@ api:
         - ListProcesses
       unstable: []
       order: 1
+  - name: RUM
+    url: /api/latest/rum/
+    identifier: rum
+    generated: true
+  - name: Search RUM events
+    url: '#search-rum-events'
+    identifier: search-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchRUMEvents
+      unstable: []
+      order: 1
+  - name: Get a list of RUM events
+    url: '#get-a-list-of-rum-events'
+    identifier: get-a-list-of-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRUMEvents
+      unstable: []
+      order: 2
+  - name: Aggregate RUM events
+    url: '#aggregate-rum-events'
+    identifier: aggregate-rum-events
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateRUMEvents
+      unstable: []
+      order: 3
   - name: Roles
     url: /api/latest/roles/
     identifier: roles

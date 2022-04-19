@@ -4,8 +4,8 @@ meta_title: Datadogを始めてみましょう
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 announcement_banner:
-  desktop_message: Dash バーチャルカンファレンスにご参加ください！10 月 26〜27 日
-  mobile_message: Dash に登録！10 月 26〜27 日
-  external_link: https://www.dashcon.io/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=Organic-TopBannerDash
+  desktop_message: 大規模なデータ保護を実現する Sensitive Data Scanner を発表！
+  mobile_message: Datadog Sensitive Data Scanner を発表！
+  external_link: https://www.datadoghq.com/product/sensitive-data-scanner/
 exclude: []
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。

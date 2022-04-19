@@ -41,6 +41,16 @@
     "request_description": "",
     "request_schema_description": "Request used to update an application key."
   },
+  "ListAuditLogs": {
+    "description": "List endpoint returns events that match a Audit Logs search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest Audit Logs events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Get a list of Audit Logs events"
+  },
+  "SearchAuditLogs": {
+    "description": "List endpoint returns Audit Logs events that match an Audit search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex Audit Logs events filtering and search.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Search Audit Logs events",
+    "request_description": "",
+    "request_schema_description": "The request for a Audit Logs events list."
+  },
   "ListAuthNMappings": {
     "description": "List all AuthN Mappings in the org.",
     "summary": "List all AuthN Mappings"
@@ -332,7 +342,7 @@
     "summary": "Get all processes"
   },
   "ListRoles": {
-    "description": "Returns all roles, including their names and IDs.",
+    "description": "Returns all roles, including their names and their unique identifiers.",
     "summary": "List roles"
   },
   "CreateRole": {
@@ -392,6 +402,27 @@
     "summary": "Add a user to a role",
     "request_description": "",
     "request_schema_description": "Relationship to user."
+  },
+  "AggregateRUMEvents": {
+    "description": "The API endpoint to aggregate RUM events into buckets of computed metrics and timeseries.",
+    "summary": "Aggregate RUM events",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization."
+  },
+  "ListRUMEvents": {
+    "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Get a list of RUM events"
+  },
+  "SearchRUMEvents": {
+    "description": "List endpoint returns RUM events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex RUM events filtering and search.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Search RUM events",
+    "request_description": "",
+    "request_schema_description": "The request for a RUM events list."
+  },
+  "UploadIdPMetadata": {
+    "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
+    "summary": "Upload IdP metadata",
+    "request_description": ""
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour agents to update the policy running in your environment.",

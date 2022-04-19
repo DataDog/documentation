@@ -28,6 +28,8 @@ Install the [Datadog Agent][1] on the Jenkins controller instance.
 
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
 
+<div class="alert alert-info"><strong>Note</strong>: Unix domain sockets are not yet supported for sending CI Visibility traces.</div>
+
 ## Install the Datadog Jenkins plugin
 
 Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
@@ -44,7 +46,7 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the `Datadog Agent` mode.
+3. Select the `Datadog Agent` mode. CI Visibility is **not supported** using Datadog API URL and API key.
 4. Configure the `Agent` host.
 5. Configure the `Traces Collection` port (default `8126`).
 6. Click on `Enable CI Visibility` checkbox to activate it.
@@ -267,6 +269,72 @@ pipeline {
     }
 }
 {{< /code-block >}}
+
+## Propagate Git information in pipelines without a Jenkinsfile from SCM.
+
+The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables may not be available if you are not using a `Jenkinsfile` in your repository, and you're configuring the pipeline directly in Jenkins using the `checkout` step.
+
+In this case, you can propagate the Git information to the environment variables in your build. Use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
+
+{{< tabs >}}
+{{% tab "Using Declarative Pipelines" %}}
+If you're using a declarative pipeline to configure your pipeline, propagate Git information using a `script` block as follows:
+
+Using the `checkout` step:
+{{< code-block lang="groovy" >}}
+pipeline {
+  stages {
+    stage('Checkout') {
+        script {
+          checkout(...).each {k,v -> env.setProperty(k,v)}
+        }
+    }
+    ...
+  }
+}
+{{< /code-block >}}
+
+Using the `git` step:
+{{< code-block lang="groovy" >}}
+pipeline {
+  stages {
+    stage('Checkout') {
+      script {
+        git(...).each {k,v -> env.setProperty(k,v)}
+      }
+    }
+    ...
+  }
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Using Scripted Pipelines" %}}
+If you're using a scripted pipeline to configure your pipeline, you can propagate the git information to environment variables directly.
+
+Using the `checkout` step:
+{{< code-block lang="groovy" >}}
+node {
+  stage('Checkout') {
+    checkout(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+{{< /code-block >}}
+
+Using the `git` step:
+{{< code-block lang="groovy" >}}
+node {
+  stage('Checkout') {
+    git(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Set Git information manually
 

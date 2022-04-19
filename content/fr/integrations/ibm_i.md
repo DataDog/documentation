@@ -10,18 +10,18 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/ibm_i/README.md
-display_name: "IBM\_i"
+- https://github.com/DataDog/integrations-core/blob/master/ibm_i/README.md
+display_name: IBM i
 draft: false
 git_integration_title: ibm_i
 guid: da389374-7541-47e5-bcd1-87cf3b88a469
 integration_id: ibm-i
-integration_title: "IBM\_i"
-integration_version: 1.1.1
+integration_title: IBM i
+integration_version: 1.3.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -29,14 +29,18 @@ manifest_version: 1.0.0
 metric_prefix: ibm_i.
 metric_to_check: ibm_i.system.cpu_usage
 name: ibm_i
-public_title: "IBM\_i"
-short_description: "Surveillez à distance vos systèmes IBM\_i, y compris les tâches, files d'attente de tâches, ASP et plus encore."
+public_title: IBM i
+short_description: Surveillez à distance vos systèmes IBM i, y compris les tâches,
+  files d'attente de tâches, ASP et plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller à distance [IBM i][1] avec l'Agent Datadog.

@@ -1,22 +1,23 @@
 ---
-title: プライマリタグをスコープに設定
-kind: documentation
 aliases:
-  - /ja/tracing/advanced/setting_primary_tags_to_scope/
+- /ja/tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
-  - link: /tracing/connect_logs_and_traces/
-    tags: トレースの加工
-    text: ログとトレースの接続
-  - link: /tracing/manual_instrumentation/
-    tags: トレースの加工
-    text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
-  - link: /tracing/opentracing/
-    tags: トレースの加工
-    text: アプリケーション全体に Opentracing を実装します。
-  - link: /tracing/visualization/
-    tag: APM の UI を利用する
-    text: サービス、リソース、トレースの詳細
+- link: /tracing/connect_logs_and_traces/
+  tags: トレースの加工
+  text: ログとトレースの接続
+- link: /tracing/manual_instrumentation/
+  tags: トレースの加工
+  text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
+- link: /tracing/opentracing/
+  tags: トレースの加工
+  text: アプリケーション全体に Opentracing を実装します。
+- link: /tracing/visualization/
+  tag: APM の UI を利用する
+  text: サービス、リソース、トレースの詳細
+kind: documentation
+title: プライマリタグをスコープに設定
 ---
+
 ## 定義
 
 Datadog APM アプリケーション全体をスコープに設定するために使用できるディメンションが複数あります。これには、集計統計（リクエスト/秒、レイテンシー、エラー率、Apdex スコアなど）および表示可能な[トレース][1]が含まれます。こうしたディメンションは、アプリケーションの動作をさらに詳細に把握できるプライマリタグを介して設定されます。プライマリタグのユースケースには、環境、アベイラビリティゾーン、データセンターなどがあります。
@@ -40,7 +41,7 @@ Datadog は、トレーサーに `env` を設定することをお勧めしま�
 #### Agent 環境
 
 `env` タグは、Agent コンフィギュレーションで設定できます。
-**トレーサーと Agent に異なる `env` タグを設定しないでください。これを行うと、[トレースメトリクス][6]でタグが重複する可能性があります。**
+**トレーサーと Agent に異なる `env` タグを設定しないでください。これを行うと、[トレースメトリクス][5]でタグが重複する可能性があります。**
 
 オプション
 
@@ -69,7 +70,7 @@ Datadog は、トレーサーに `env` を設定することをお勧めしま�
 
 ## Datadog に 2 番目のプライマリタグを追加する
 
-`env:<環境>` 以外のホストタグをトレースに追加した場合は、環境タグとともにプライマリタグとして設定できます。[APM 設定][5]ページに移動して、プライマリタグを定義、変更、または削除します。
+`env:<ENVIRONMENT>` 以外のホストタグをトレースに追加した場合は、環境タグとともにプライマリタグとして設定できます。[APM 設定][6]ページに移動して、プライマリタグを定義、変更、または削除します。
 
 注:
 
@@ -87,6 +88,9 @@ Datadog は、トレーサーに `env` を設定することをお勧めしま�
 
 プライマリタグは、APM ページの上部に表示されます。これらのセレクターを使用して、現在のページに表示されるデータを分類します。プライマリタグに依存しないすべてのデータを表示するには、ドロップダウンから `<タグ名>:*` を選択します。
 
+{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="2 番目のプライマリタグを持つスコープを選択するためのオプションを示すドロップダウンメニュー"  style="width:90%;">}}
+
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -95,5 +99,5 @@ Datadog は、トレーサーに `env` を設定することをお勧めしま�
 [2]: /ja/getting_started/tagging/
 [3]: /ja/getting_started/tagging/unified_service_tagging
 [4]: /ja/getting_started/tagging/assigning_tags/#traces
-[5]: https://app.datadoghq.com/apm/settings
-[6]: /ja/tracing/guide/metrics_namespace/
+[5]: /ja/tracing/guide/metrics_namespace/
+[6]: https://app.datadoghq.com/apm/settings

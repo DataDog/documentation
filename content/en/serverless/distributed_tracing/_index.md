@@ -21,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/"
   tag: "Blog"
   text: "Datadog Serverless Monitoring for AWS fully managed services"
+- link: "https://www.datadoghq.com/blog/dotnet-lambda-functions-distributed-tracing/"
+  tag: "Blog"
+  text: "Real-time distributed tracing for .NET Lambda functions"
 ---
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
@@ -42,7 +45,7 @@ To start using Datadog APM with your serverless application, you can choose betw
 | Uses Datadog APM's integration libraries for end-to-end tracing.  | Pulls traces from AWS X-Ray. |
 | Visualize your traces in Datadog in real-time. | Trace data available in Datadog after a few minutes. |
 | Tail-based sampling and fully customizable tag-based retention filters. | Sampling rate cannot be configured. |
-| Support for Python, Node.js, Ruby, Go, Java, and .NET. |  Support for all Lambda runtimes. |
+| Support for all Lambda runtimes. |  Support for all Lambda runtimes. |
 
 ### Runtime recommendations
 
