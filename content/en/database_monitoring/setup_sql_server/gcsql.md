@@ -72,7 +72,7 @@ GCP does not grant direct host access, meaning the Datadog Agent must be install
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Cloud SQL integration
+## Install the Google Cloud SQL integration
 
 To collect more comprehensive database metrics from Google Cloud SQL, install the [Google Cloud SQL integration][2].
 
