@@ -6,9 +6,6 @@ further_reading:
 - link: "/integrations/sqlserver/"
   tag: "Documentation"
   text: "SQL Server Integration"
-- link: "/database_monitoring/troubleshooting/?tab=sqlserver"
-  tag: "Documentation"
-  text: "Troubleshoot Common Issues"
 
 
 ---
