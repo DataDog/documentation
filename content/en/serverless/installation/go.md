@@ -28,24 +28,24 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 ### Install the Datadog Serverless Plugin:
 
-    ```sh
-    serverless plugin install --name serverless-plugin-datadog
-    ```
+```sh
+serverless plugin install --name serverless-plugin-datadog
+```
 
 ### Update your `serverless.yml`:
 
-    ```yaml
-    custom:
-      datadog:
-        site: <DATADOG_SITE>
-        apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
-    ```
+```yaml
+custom:
+  datadog:
+    site: <DATADOG_SITE>
+    apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
+```
 
-    To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can instead use `apiKey` and set the Datadog API key in plaintext.
+To fill in the placeholders:
+- Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
+- Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can instead use `apiKey` and set the Datadog API key in plaintext.
 
-    For more information and additional settings, see the [plugin documentation][1].
+For more information and additional settings, see the [plugin documentation][1].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
@@ -58,12 +58,16 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
 ```sh
-# AWS commercial regions (x86 and arm64, respectively)
+# Use this format for x86-based Lambda deployed in AWS commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Use this format for arm64-based Lambda deployed in AWS commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 
-# AWS GovCloud regions (x86 and arm64, respectively)
+# Use this format for x86-based Lambda deployed in AWS GovCloud regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Use this format for arm64-based Lambda deployed in AWS GovCloud regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 ```
 
@@ -88,41 +92,41 @@ go get github.com/DataDog/datadog-lambda-go
 
 ### Update your Lambda function code
 
-    ```go
-    package main
+```go
+package main
 
-    import (
-      "github.com/aws/aws-lambda-go/lambda"
-      "github.com/DataDog/datadog-lambda-go"
-      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-    )
+import (
+  "github.com/aws/aws-lambda-go/lambda"
+  "github.com/DataDog/datadog-lambda-go"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+)
 
-    func main() {
-      // Wrap your lambda handler
-      lambda.Start(ddlambda.WrapFunction(myHandler, nil))
-    }
+func main() {
+  // Wrap your lambda handler
+  lambda.Start(ddlambda.WrapFunction(myHandler, nil))
+}
 
-    func myHandler(ctx context.Context, event MyEvent) (string, error) {
-      // Trace an HTTP request
-      req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
-      client := http.Client{}
-      client = *httptrace.WrapClient(&client)
-      client.Do(req)
+func myHandler(ctx context.Context, event MyEvent) (string, error) {
+  // Trace an HTTP request
+  req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+  client := http.Client{}
+  client = *httptrace.WrapClient(&client)
+  client.Do(req)
 
-      // Submit a custom metric
-      ddlambda.Metric(
-        "coffee_house.order_value", // Metric name
-        12.45, // Metric value
-        "product:latte", "order:online" // Associated tags
-      )
+  // Submit a custom metric
+  ddlambda.Metric(
+    "coffee_house.order_value", // Metric name
+    12.45, // Metric value
+    "product:latte", "order:online" // Associated tags
+  )
 
-      // Create a custom span
-      s, _ := tracer.StartSpanFromContext(ctx, "child.span")
-      time.Sleep(100 * time.Millisecond)
-      s.Finish()
-    }
-    ```
+  // Create a custom span
+  s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+  time.Sleep(100 * time.Millisecond)
+  s.Finish()
+}
+```
 
 ## What's next?
 
