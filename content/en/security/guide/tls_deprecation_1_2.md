@@ -14,7 +14,7 @@ These protocols are being deprecated to ensure that customers connect to Datadog
 
 ## Client compatibility
 
-Follow [How's my SSL? API check][9] instructions to check the client of your choice.
+Follow [How's my SSL? API][9] instructions to check the client of your choice.
 
 ## Browser support
 
