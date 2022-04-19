@@ -515,11 +515,15 @@ class Integrations:
 
     @staticmethod
     def remove_h3_markdown_section(markdown_string, h3_header_string):
+        """
+        Removes markdown content from integration readme file starting with the h3 markdown string provided
+        """
         if not h3_header_string.startswith('###'):
             return markdown_string
 
         h3_markdown_regex = r"(^|\n)(#{3}) (\w+)"
         h3_list = re.finditer(h3_markdown_regex, markdown_string)
+        indexes = []
         replaced_result = ''
 
         for match in h3_list:
@@ -534,12 +538,16 @@ class Integrations:
                     end_index = len(markdown_string)
 
                 content_to_remove = markdown_string[start_index:end_index]
-                replaced_result = markdown_string.replace(content_to_remove, '')
+                indexes.append([start_index, end_index])
 
-        if replaced_result:
-            return replaced_result
-        else:
-            return markdown_string
+        # In case there are multiple h3 headers with the same name.
+        # There are multiple "Pricing" headers in some integrations currently,
+        # TODO: revisit this function once that is fixed.
+        if len(indexes) > 0:
+            for indices in reversed(indexes):
+                markdown_string = markdown_string[:indices[0]] + markdown_string[indices[1]:]
+
+        return markdown_string
 
     @staticmethod
     def remove_markdown_section(markdown_string, h2_header_string):
@@ -665,7 +673,6 @@ class Integrations:
                 markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
                 markdown_setup_removed = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
                 updated_markdown = self.remove_h3_markdown_section(markdown_setup_removed, '### Pricing')
-                print(updated_markdown)
                 is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
 
                 if not is_marketplace_integration_markdown_valid:
