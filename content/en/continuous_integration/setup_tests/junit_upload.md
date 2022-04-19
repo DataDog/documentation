@@ -117,7 +117,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
 `--logs` **(beta)**
-: Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
+: Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **Default**: `false`<br/>
 **Note**: Logs are billed separately from CI Visibility.
