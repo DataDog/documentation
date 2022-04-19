@@ -21,7 +21,7 @@ further_reading:
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-Do the following steps to enable Database Monitoring with your database:
+Complete the following steps to enable Database Monitoring with your database:
 
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 2. [Install the Agent](#install-the-agent)
