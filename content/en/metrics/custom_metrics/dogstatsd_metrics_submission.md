@@ -7,6 +7,7 @@ aliases:
   - /developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /developers/faq/dog-statsd-sample-rate-parameter-explained
   - /developers/metrics/dogstatsd_metrics_submission/
+  - /metrics/dogstatsd_metrics_submission
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
