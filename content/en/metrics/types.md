@@ -335,7 +335,7 @@ Below is a summary of all available metric submission sources and methods. This 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/type_modifiers/
+[1]: /metrics/custom_metrics/type_modifiers/
 [2]: /dashboards/functions/
 [3]: /metrics/summary/
 [4]: https://statsd.readthedocs.io/en/v3.2.2/types.html#sets
