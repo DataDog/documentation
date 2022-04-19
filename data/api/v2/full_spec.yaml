@@ -6497,10 +6497,10 @@ components:
           example:
           - security:attack
           - technique:T1110-brute-force
-          format: array
           items:
             description: The tag associated with the security signal.
             type: string
+          type: array
         timestamp:
           description: The timestamp of the security signal.
           example: '2019-01-02T09:42:36.320Z'

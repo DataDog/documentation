@@ -4115,10 +4115,10 @@ components:
           description: Array of tags associated with your log.
           example:
           - team:A
-          format: array
           items:
             description: Tag associated with your log.
-            format: string
+            type: string
+          type: array
         timestamp:
           description: Timestamp of your log.
           example: '2020-05-26T13:36:14Z'
