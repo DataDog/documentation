@@ -3981,7 +3981,6 @@ components:
       default: apm_issue_stream
       description: Source from which to query items to display in the stream.
       enum:
-      - issue_stream
       - logs_stream
       - audit_stream
       - rum_issue_stream
@@ -3989,7 +3988,6 @@ components:
       example: apm_issue_stream
       type: string
       x-enum-varnames:
-      - ISSUE_STREAM
       - LOGS_STREAM
       - AUDIT_STREAM
       - RUM_ISSUE_STREAM
