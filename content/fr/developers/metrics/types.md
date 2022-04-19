@@ -311,7 +311,7 @@ Vous trouverez ci-dessous une synthèse de l'ensemble des sources et des méthod
 [1]: /fr/metrics/type_modifiers/
 [2]: /fr/dashboards/functions/
 [3]: /fr/metrics/summary/
-[4]: https://statsd.readthedocs.io/en/v3.2.1/types.html#sets
+[4]: https://statsd.readthedocs.io/en/v3.2.2/types.html#sets
 [5]: /fr/metrics/agent_metrics_submission/
 [6]: /fr/metrics/dogstatsd_metrics_submission/
 [7]: /fr/api/v1/metrics/#submit-metrics

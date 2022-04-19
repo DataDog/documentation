@@ -15,10 +15,13 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run gRPC healthchecks on internal endpoints"
+- link: "https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/"
+  tag: "Blog"
+  text: "Monitor gRPC APIs with Datadog Synthetic Monitoring"
 ---
 ## Overview
 
-gRPC health checks is a standard for reporting the health of gRPC services. It allows you to determine whether or not your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs). 
+gRPC health checks is a standard for reporting the health of gRPC services. It allows you to determine whether or not your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).
 
 You can implement the health checking mechanism as a gRPC service on a gRPC server. To access the health checks proto file example shared by the gRPC community, see the [open-source gRPC repository][1].
 
@@ -41,7 +44,7 @@ After choosing to create a `gRPC` health check test, define your test's request.
 
 4. Add `env` **Tags** as well as any other tag to your gRPC health check test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
 
-{{< img src="synthetics/api_tests/grpc_test_config.png" alt="Define gRPC request" style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/grpc_test_config.png" alt="Define gRPC request" style="width:90%;" >}}
 
 Click **Test Service** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
@@ -124,7 +127,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 `{{ date(n, format) }}`
 : Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
 
-`{{ timestamp(n, unit) }}` 
+`{{ timestamp(n, unit) }}`
 : Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
 
 ### Use variables
@@ -137,7 +140,7 @@ To display your list of variables, type `{{` in your desired field:
 
 ## Test failure
 
-A health check test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the health check test can fail without testing the assertions against the endpoint. 
+A health check test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the health check test can fail without testing the assertions against the endpoint.
 
 These reasons include the following:
 
@@ -150,7 +153,7 @@ These reasons include the following:
 `DNS`
 : DNS entry not found for the test URL. Possible causes include a misconfigured test URL or the wrong configuration of your DNS entries.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
@@ -158,7 +161,7 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60 seconds). 
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60 seconds).
   For each request, only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request and assertions) hits the maximum duration of 60.5 seconds.
 
@@ -170,9 +173,9 @@ If you are using the [custom role feature][13], add your user to any custom role
 
 ## Restrict access
 
-Access restriction is available for customers using [custom roles][14] on their accounts. 
+Access restriction is available for customers using [custom roles][14] on their accounts.
 
-You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
+You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
 
 {{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 

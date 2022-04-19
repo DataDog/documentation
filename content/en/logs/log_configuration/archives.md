@@ -57,8 +57,11 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
+**NOTE:** Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][3], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
+
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
+[3]: /integrations/azure/?tab=azurecliv20
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
