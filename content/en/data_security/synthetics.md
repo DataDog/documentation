@@ -1,17 +1,16 @@
 ---
-title: Synthetic Monitoring Security
+title: Synthetic Monitoring Data Security
 kind: documentation
 aliases:
     - /synthetics/security/
+    - /security/synthetics/
 further_reading:
-- link: "/security/"
+- link: "/data_security/"
   tag: "Documentation"
   text: "Review the main categories of data submitted to Datadog"
 ---
 
-<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Cloud SIEM product, see the <a href="/security_platform/cloud_siem" target="_blank">Cloud SIEM section</a>.</div>
-
-This article is part of a [series on data security][1].
+<div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security_platform/" target="_blank">Security Platform</a> section.</div>
 
 The [Synthetic Monitoring product][2] allows you to proactively monitor how your systems and applications are performing using simulated requests and business transactions. Synthetic tests can be initiated from all around the globe, from either managed or private locations.  
 
@@ -112,7 +111,7 @@ Use the [API][6], [Multistep API][7] and [Browser tests' privacy options][8] to 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/
+[1]: /data_security/
 [2]: /synthetics/
 [3]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
