@@ -514,48 +514,57 @@ class Integrations:
             return markdown_string
 
     @staticmethod
-    def remove_markdown_section(markdown_string, h2_header_string, h3_header_string):
+    def remove_h3_markdown_section(markdown_string, h3_header_string):
+        if not h3_header_string.startswith('###'):
+            return markdown_string
+
+        h3_markdown_regex = r"(^|\n)(#{3}) (\w+)"
+        h3_list = re.finditer(h3_markdown_regex, markdown_string)
+        replaced_result = ''
+
+        for match in h3_list:
+            group = match.group(0)
+            start = match.start()
+
+            if h3_header_string in group:
+                start_index = start
+                end_index = markdown_string.find('\n##', start_index + 3)
+
+                if end_index == -1:
+                    end_index = len(markdown_string)
+
+                content_to_remove = markdown_string[start_index:end_index]
+                replaced_result = markdown_string.replace(content_to_remove, '')
+
+        if replaced_result:
+            return replaced_result
+        else:
+            return markdown_string
+
+    @staticmethod
+    def remove_markdown_section(markdown_string, h2_header_string):
         """
         Removes a section from markdown by deleting all content starting from provided h2_header_string argument and ending one index before the next h2 header.
         h2_header_string argument is expected in markdown format; e.g. '## Steps'
         """
+
+        if not h2_header_string.startswith('##'):
+            return markdown_string
+
+        h2_markdown_regex = r"(^|\n)(#{2}) (\w+)"
+        h2_list = re.finditer(h2_markdown_regex, markdown_string)
         replaced_result = ''
 
-        if h2_header_string:
-            if not h2_header_string.startswith('##'):
-                return markdown_string
+        for match in h2_list:
+            group = match.group(0)
+            start = match.start()
+            end = match.end() - 1
 
-            h2_markdown_regex = r"(^|\n)(#{2}) (\w+)"
-            h2_list = re.finditer(h2_markdown_regex, markdown_string)
-
-            for match in h2_list:
-                group = match.group(0)
-                start = match.start()
-                end = match.end() - 1
-
-                if h2_header_string in group:
-                    start_index = start
-                    end_index = next(h2_list).start()
-                    content_to_remove = markdown_string[start_index:end_index]
-                    replaced_result = markdown_string.replace(content_to_remove, '')
-
-        if h3_header_string:
-            if not h3_header_string.startswith('###'):
-                return markdown_string
-
-            h3_markdown_regex = r"(^|\n)(#{3}) (\w+)"
-            h3_list = re.finditer(h3_markdown_regex, markdown_string)
-
-            for match in h3_list:
-                group = match.group(0)
-                start = match.start()
-                end = match.end() - 1
-
-                if h3_header_string in group:
-                    start_index = start
-                    end_index = next(h3_list).start()
-                    content_to_remove = markdown_string[start_index:end_index]
-                    replaced_result = markdown_string.replace(content_to_remove, '')
+            if h2_header_string in group:
+                start_index = start
+                end_index = next(h2_list).start()
+                content_to_remove = markdown_string[start_index:end_index]
+                replaced_result = markdown_string.replace(content_to_remove, '')
 
         if replaced_result:
             return replaced_result
@@ -654,8 +663,9 @@ class Integrations:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
                 markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
-                updated_markdown = self.remove_markdown_section(markdown_with_replaced_images, '## Setup', '')
-                updated_markdown = self.remove_markdown_section(updated_markdown, '', '### Pricing')
+                markdown_setup_removed = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
+                updated_markdown = self.remove_h3_markdown_section(markdown_setup_removed, '### Pricing')
+                print(updated_markdown)
                 is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
 
                 if not is_marketplace_integration_markdown_valid:
