@@ -1893,6 +1893,11 @@ main:
     parent: dbm_setup_sql_server
     identifier: dbm_setup_sql_server_azure
     weight: 103
+  - name: Google Cloud SQL
+    url: database_monitoring/setup_sql_server/gcsql/
+    parent: dbm_setup_sql_server
+    identifier: dbm_setup_sql_server_gcsql
+    weight: 104
   - name: Data Collected
     url: database_monitoring/data_collected
     parent: dbm
