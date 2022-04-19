@@ -1,5 +1,5 @@
 ---
-title: Trace Facets
+title: Span Facets
 kind: documentation
 description: 'Trace Facets and Facet Panel'
 aliases:

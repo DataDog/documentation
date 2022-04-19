@@ -162,44 +162,6 @@ Choose to display one, three, or ten lines from your traces. 3 and 10 lines disp
 * With ten lines displayed:
 {{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display"  style="width:80%;">}}
 
-## Facets
-
-A Facet displays all the distinct values of an attribute or a tag as well as provides some basic analytics such as the amount of traces represented. This is also a switch to filter your data.
-
-Facets allow you to pivot or filter your datasets based on a given attribute. Examples Facets may include users, services, etc...
-
-{{< img src="tracing/trace_explorer/facets/facets_panel.png" alt="Facets panel"  style="width:80%;">}}
-
-### Quantitative (measures)
-
-**Use measures when you need to:**
-* Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
-* Numerically compute the highest latency services for shopping cart values over $1000.
-* Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.
-
-**Types**
-
-Measures come with either a (long) integer or double value, for equivalent capabilities.
-
-**Units**
-
-Measures support units (time in seconds or size in bytes) for handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. For example, consider a duration measure in nanoseconds: you have a span tag from `service:A` where `duration:1000` stands for `1000 milliseconds`, and another span tags from `service:B` where `duration:500` stands for `500 microseconds`:
-Scale duration into nanoseconds for all span tags flowing in with the arithmetic processor. Use a `*1000000` multiplier on span tags from `service:A`, and a `*1000` multiplier on span tags from `service:B`.
-Use `duration:>20ms` (see search syntax for reference) to consistently query span tags from both services at once, and see an aggregated result of max one minute.
-
-### Create a facet
-
-To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
-
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:50%;">}}
-
-Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the Trace graph query.
-
-### Facet panel
-
-Use Facets to filter on your Traces. The search bar and url automatically reflect your selections.
-
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel"  style="width:30%;">}}
 
 ## Analytics overview
 
