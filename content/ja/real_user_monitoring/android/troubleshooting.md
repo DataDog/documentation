@@ -1,13 +1,13 @@
 ---
 dependencies:
-  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md
+- https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-android
-    tag: Github
-    text: dd-sdk-android ソースコード
-  - link: /real_user_monitoring
-    tag: ホームページ
-    text: Datadog RUM を探索する
+- link: https://github.com/DataDog/dd-sdk-android
+  tag: Github
+  text: dd-sdk-android ソースコード
+- link: /real_user_monitoring
+  tag: ホームページ
+  text: Datadog RUM を探索する
 kind: documentation
 title: トラブルシューティング
 ---

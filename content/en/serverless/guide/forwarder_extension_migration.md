@@ -73,5 +73,5 @@ You may also wish to keep using the Datadog Forwarder for existing functions whi
 1. Ensure that the Forwarder [does not attach automatically](#prevent-forwarder) to new functions.
 2. For each new function you deploy, [set up the Extension](#extension-setup)
 
-[1]: /serverless/libraries_integrations/forwarder/
+[1]: /logs/guide/forwarder/
 [2]: /serverless/libraries_integrations/extension/

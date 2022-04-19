@@ -32694,11 +32694,11 @@
                   "security:attack",
                   "technique:T1110-brute-force"
                 ],
-                "format": "array",
                 "items": {
                   "description": "The tag associated with the security signal.",
                   "type": "string"
-                }
+                },
+                "type": "array"
               },
               "timestamp": {
                 "description": "The timestamp of the security signal.",
@@ -32759,11 +32759,11 @@
               "security:attack",
               "technique:T1110-brute-force"
             ],
-            "format": "array",
             "items": {
               "description": "The tag associated with the security signal.",
               "type": "string"
-            }
+            },
+            "type": "array"
           },
           "timestamp": {
             "description": "The timestamp of the security signal.",
@@ -32926,11 +32926,11 @@
                         "security:attack",
                         "technique:T1110-brute-force"
                       ],
-                      "format": "array",
                       "items": {
                         "description": "The tag associated with the security signal.",
                         "type": "string"
-                      }
+                      },
+                      "type": "array"
                     },
                     "timestamp": {
                       "description": "The timestamp of the security signal.",
@@ -73146,11 +73146,11 @@
                                   "security:attack",
                                   "technique:T1110-brute-force"
                                 ],
-                                "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
                                   "type": "string"
-                                }
+                                },
+                                "type": "array"
                               },
                               "timestamp": {
                                 "description": "The timestamp of the security signal.",
@@ -73435,11 +73435,11 @@
                                   "security:attack",
                                   "technique:T1110-brute-force"
                                 ],
-                                "format": "array",
                                 "items": {
                                   "description": "The tag associated with the security signal.",
                                   "type": "string"
-                                }
+                                },
+                                "type": "array"
                               },
                               "timestamp": {
                                 "description": "The timestamp of the security signal.",
