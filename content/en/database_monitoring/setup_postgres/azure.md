@@ -1,7 +1,8 @@
 ---
-title: Setting Up Database Monitoring for Amazon RDS managed Postgres
+title: Setting Up Database Monitoring for Azure Database for PostgreSQL
 kind: documentation
-description: Install and configure Database Monitoring for Postgres on Amazon RDS.
+description: Install and configure Database Monitoring for PostgreSQL managed on Azure.
+beta: true
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
@@ -26,8 +27,11 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13
 
+Supported Azure PostgreSQL deployment types
+: Single Server, Flexible Server
+
 Supported Agent versions
-: 7.33.0+
+: 7.35.0+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -41,23 +45,38 @@ Data security considerations
 
 ## Configure Postgres settings
 
-Configure the following [parameters][3] in the [DB parameter group][4] and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][5].
+Configure the following [parameters][3] in the [Server parameters][4], then **restart the server** for the settings to take effect.
+
+{{< tabs >}}
+{{% tab "Single Server" %}}
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][5] extension. |
-| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 
+{{% /tab %}}
+{{% tab "Flexible Server" %}}
+
+| Parameter            | Value | Description |
+|----------------------| -- | --- |
+| `azure.extensions` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][1] extension. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
+| `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
+| `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+
+[1]: https://www.postgresql.org/docs/current/pgstatstatements.html
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Grant the Agent access
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
+Choose a PostgreSQL database on the database server the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][5].
 
-Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
+Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][6] by running:
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
@@ -79,7 +98,6 @@ CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
 {{% /tab %}}
@@ -92,7 +110,6 @@ CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
 GRANT SELECT ON pg_stat_database TO datadog;
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
 Create functions **in every database** to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
@@ -111,7 +128,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
+**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See  the explanation of [PostgreSQL custom metric collection][5] for more information.
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
@@ -138,15 +155,15 @@ To verify the permissions are correct, run the following commands to confirm the
 {{% tab "Postgres ≥ 10" %}}
 
 ```shell
-psql -h localhost -U datadog postgres -A \
+psql -h mydb.example.com -U datadog postgres -A \
   -c "select * from pg_stat_database limit 1;" \
   && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
   || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
+psql -h mydb.example.com -U datadog postgres -A \
   -c "select * from pg_stat_activity limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
+psql -h mydb.example.com -U datadog postgres -A \
   -c "select * from pg_stat_statements limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
@@ -155,15 +172,15 @@ psql -h localhost -U datadog postgres -A \
 {{% tab "Postgres 9.6" %}}
 
 ```shell
-psql -h localhost -U datadog postgres -A \
+psql -h mydb.example.com -U datadog postgres -A \
   -c "select * from pg_stat_database limit 1;" \
   && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
   || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
+psql -h mydb.example.com -U datadog postgres -A \
   -c "select * from pg_stat_activity limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
+psql -h mydb.example.com -U datadog postgres -A \
   -c "select * from pg_stat_statements limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
@@ -176,19 +193,19 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-To monitor RDS hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
+To monitor Azure Postgres databases, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][7].
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
+To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small virtual machine for the Agent to collect from an Azure database:
 
 1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
    ```yaml
    init_config:
    instances:
      - dbm: true
-       host: '<AWS_INSTANCE_ENDPOINT>'
+       host: '<AZURE_INSTANCE_ENDPOINT>'
        port: 5432
        username: datadog
        password: '<PASSWORD>'
@@ -206,17 +223,17 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To configure the Database Monitoring Agent running in a Docker container such as in ECS or Fargate, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
+To configure the Database Monitoring Agent running in a Docker container, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
 **Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
 ### Command line
 
-Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+Execute the following command to run the Agent from your command line. Replace the values to match your account and environment:
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.32.0
+export DD_AGENT_VERSION=7.35.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -224,12 +241,12 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -l com.datadoghq.ad.init_configs='[{}]' \
   -l com.datadoghq.ad.instances='[{
     "dbm": true,
-    "host": "<AWS_INSTANCE_ENDPOINT>",
+    "host": "<AZURE_INSTANCE_ENDPOINT>",
     "port": 5432,
     "username": "datadog",
     "password": "<UNIQUEPASSWORD>"
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  datadog/agent:${DD_AGENT_VERSION}
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -241,14 +258,14 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 ### Dockerfile
 
-Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
+Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom Agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.32.0
+FROM datadog/agent:7.35.0
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -269,7 +286,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
+Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration with static files mounted in the Cluster Agent container, or using service annotations:
 
 ### Command line with Helm
 
@@ -286,7 +303,7 @@ helm install <RELEASE_NAME> \
 init_config:
 instances:
   - dbm: true
-    host: <INSTANCE_ADDRESS>
+    host: <AZURE_INSTANCE_ENDPOINT>
     port: 5432
     username: datadog
     password: <UNIQUEPASSWORD" \
@@ -309,7 +326,7 @@ cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
-    host: '<AWS_INSTANCE_ENDPOINT>'
+    host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 5432
     username: datadog
     password: '<PASSWORD>'
@@ -338,7 +355,7 @@ metadata:
       [
         {
           "dbm": true,
-          "host": "<AWS_INSTANCE_ENDPOINT>",
+          "host": "<AZURE_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
           "password": "<UNIQUEPASSWORD>"
@@ -359,7 +376,7 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-The Cluster Agent automatically registers this configuration and begin running the Postgres check.
+The Cluster Agent automatically registers this configuration and begins running the Postgres check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 
@@ -372,15 +389,15 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ### Validate
 
-[Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
+[Run the Agent's status subcommand][8] and look for `postgres` under the Checks section. Or visit the [Databases][9] page to get started!
 
-## Install the RDS Integration
+## Install the Azure PostgreSQL Integration
 
-To collect more comprehensive database metrics from AWS, install the [RDS integration][11] (optional).
+To collect more comprehensive database metrics from Azure, install the [Azure PostgreSQL integration][10] (optional).
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][12]
+If you have installed and configured the integrations and Agent as described, and it is not working as expected, see [Troubleshooting][11]
 
 ## Further reading
 
@@ -390,12 +407,11 @@ If you have installed and configured the integrations and Agent as described and
 [1]: /agent/basic_agent_usage#agent-overhead
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
-[4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
-[5]: https://www.postgresql.org/docs/current/pgstatstatements.html
-[6]: /integrations/faq/postgres-custom-metric-collection-explained/
-[7]: https://www.postgresql.org/docs/current/app-psql.html
-[8]: https://app.datadoghq.com/account/settings#agent
-[9]: /agent/guide/agent-commands/#agent-status-and-information
-[10]: https://app.datadoghq.com/databases
-[11]: /integrations/amazon_rds
-[12]: /database_monitoring/troubleshooting/?tab=postgres
+[4]: https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal
+[5]: /integrations/faq/postgres-custom-metric-collection-explained/
+[6]: https://www.postgresql.org/docs/current/app-psql.html
+[7]: https://app.datadoghq.com/account/settings#agent
+[8]: /agent/guide/agent-commands/#agent-status-and-information
+[9]: https://app.datadoghq.com/databases
+[10]: /integrations/azure_db_for_postgresql/
+[11]: /database_monitoring/setup_postgres/troubleshooting/
