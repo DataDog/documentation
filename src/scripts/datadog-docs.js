@@ -132,6 +132,8 @@ function getPathElement(event = null) {
     const domain = window.location.origin;
     let path = window.location.pathname;
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
+    console.log('Active menus:')
+    console.log(activeMenus)
 
     for (let i = 0; i < activeMenus.length; i++) {
         activeMenus[i].classList.remove('active');
@@ -139,12 +141,14 @@ function getPathElement(event = null) {
 
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
+    console.log(`Path: ${path}`)
 
     let sideNavPathElement = document.querySelector(`.side [data-path="${path}"]`);
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
     // Select sidenav/mobile links by data-path attribute to ensure active class is set correctly on specific sub-pages
     if (path.includes('/guide')) {
+        console.log('Path includes guide.')
         const docsActiveSection = path.substr(0, path.indexOf('/guide'));
         const dataPathString = `${docsActiveSection}/guide`;
 
@@ -161,6 +165,8 @@ function getPathElement(event = null) {
         );
     }
 
+    console.log(`Replacing URL with domain and path = ${replaceURL(domain)}/${replacePath(path)}`)
+
     // if url is domain + /integrations/**
     if (
         `${replaceURL(domain)}/${replacePath(path)}`.includes(
@@ -169,12 +175,17 @@ function getPathElement(event = null) {
             `${replaceURL(domain)}/integrations/guide`
         )
     ) {
+        console.log('Path includes integrations.')
+
         sideNavPathElement = document.querySelector(
             '.side .nav-top-level > [data-path*="integrations"]'
         );
         mobileNavPathElement = document.querySelector(
             'header .nav-top-level > [data-path*="integrations"]'
         );
+
+        console.log('side nav path element:')
+        console.log(sideNavPathElement)
     }
 
     // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
