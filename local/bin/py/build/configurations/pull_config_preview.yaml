@@ -224,7 +224,7 @@
       globs:
       - 'aws/logs_monitoring/README.md'
       options:
-        dest_path: '/serverless/libraries_integrations/'
+        dest_path: '/logs/guide/'
         file_name: 'forwarder.md'
         # front_matters:
         #   dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
