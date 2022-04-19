@@ -845,26 +845,22 @@ main:
     url: serverless/libraries_integrations/library/
     parent: libraries_integrations
     weight: 202
-  - name: Datadog Forwarder
-    url: serverless/libraries_integrations/forwarder/
-    parent: libraries_integrations
-    weight: 203
   - name: Datadog Serverless Plugin
     url: serverless/libraries_integrations/plugin/
     parent: libraries_integrations
-    weight: 204
+    weight: 203
   - name: Datadog Serverless Macro
     url: serverless/libraries_integrations/macro/
     parent: libraries_integrations
-    weight: 205
+    weight: 204
   - name: Datadog Serverless CLI
     url: serverless/libraries_integrations/cli/
     parent: libraries_integrations
-    weight: 206
+    weight: 205
   - name: Lambda Code Signing
     url: serverless/libraries_integrations/lambda_code_signing/
     parent: libraries_integrations
-    weight: 207
+    weight: 206
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
