@@ -118,6 +118,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 
 `--logs` **(beta)**
 : Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
+**Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **Default**: `false`<br/>
 **Note**: Logs are billed separately from CI Visibility.
 
@@ -144,10 +145,6 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 : The [Datadog site][5] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-`DD_CIVISIBILITY_LOGS_ENABLED` **(beta)**
-: Same as the `--logs` flag: Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
-**Default**: `false`
 
 ## Collecting repository and commit metadata
 
