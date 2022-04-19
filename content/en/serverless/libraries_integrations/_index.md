@@ -18,7 +18,6 @@ aliases:
 {{< whatsnext desc="Serverless Libraries & Integrations:" >}}
     {{< nextlink href="/serverless/libraries_integrations/extension/" >}}Datadog Lambda Extension{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/library/" >}}Datadog Lambda Library{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/forwarder/" >}}Datadog Lambda Forwarder{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/plugin/" >}}Datadog Lambda Plugin{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/macro/" >}}Datadog Lambda Macro{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/cli/" >}}Datadog Lambda CLI{{< /nextlink >}}
