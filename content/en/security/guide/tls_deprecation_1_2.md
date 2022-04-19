@@ -14,7 +14,8 @@ These protocols are being deprecated to ensure that customers connect to Datadog
 
 ## Client compatibility
 
-Using your client of choice, go to [`https://www.howsmyssl.com/s/api.html`][9] and look at the `tls_version` key to determine the most recent supported version.
+Follow [How's my SSL? API check][9] instructions to check the client of your choice.
+
 ## Browser support
 
 Modern browsers have had support for TLS v1.2 for a while. See the "Can I use..." [compatibility matrix][2] to determine if your specific browser and version are affected.
