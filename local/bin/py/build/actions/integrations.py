@@ -532,7 +532,14 @@ class Integrations:
 
             if h3_header_string in group:
                 start_index = start
-                end_index = markdown_string.find('\n##', start_index + 3)
+                h2_h3_regex = r"(^|\n)(#{2,3}) (\w+)"
+                h2_h3_regex_matches = re.finditer(h2_h3_regex, markdown_string)
+                end_index = -1
+
+                for match in h2_h3_regex_matches:
+                    if match.start() > start_index + 3:
+                        end_index = match.start()
+                        break
 
                 if end_index == -1:
                     end_index = len(markdown_string)
@@ -541,8 +548,7 @@ class Integrations:
                 indexes.append([start_index, end_index])
 
         # In case there are multiple h3 headers with the same name.
-        # There are multiple "Pricing" headers in some integrations currently,
-        # TODO: revisit this function once that is fixed.
+        # There are multiple "Pricing" headers in some integrations.
         if len(indexes) > 0:
             for indices in reversed(indexes):
                 markdown_string = markdown_string[:indices[0]] + markdown_string[indices[1]:]
