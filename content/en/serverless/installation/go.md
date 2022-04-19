@@ -55,7 +55,7 @@ For more information and additional settings, see the [plugin documentation][1].
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
 
-[Configure the layers][1] for your Lambda function using the ARN in the following format:
+[Add the Lambda layer][1] of Datadog Lambda Extension to your Lambda functions, using the ARN format based on your AWS region and architecture:
 
 ```sh
 # Use this format for x86-based Lambda deployed in AWS commercial regions

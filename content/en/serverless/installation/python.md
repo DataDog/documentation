@@ -256,12 +256,16 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
     - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
       ```sh
-      # AWS commercial regions (x86 and arm64, respectively)
+      # Use this format for x86-based Lambda deployed in AWS commercial regions
       arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS commercial regions
       arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
 
-      # AWS GovCloud regions (x86 and arm64, respectively)
+      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
       ```
 
@@ -282,12 +286,16 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
     [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
     ```sh
-    # AWS commercial regions (x86 and arm64, respectively)
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 
-    # AWS GovCloud regions (x86 and arm64, respectively)
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
     ```
 
