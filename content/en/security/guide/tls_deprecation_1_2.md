@@ -14,7 +14,7 @@ These protocols are being deprecated to ensure that customers connect to Datadog
 
 ## Client compatibility
 
-Using your client of choice, go to (`https://www.howsmyssl.com/s/api.html`[8]) and look at the `tls_version` key to determine the most recent supported version.
+Using your client of choice, go to [`https://www.howsmyssl.com/s/api.html`][9] and look at the `tls_version` key to determine the most recent supported version.
 ## Browser support
 
 Modern browsers have had support for TLS v1.2 for a while. See the "Can I use..." [compatibility matrix][2] to determine if your specific browser and version are affected.
@@ -119,3 +119,4 @@ On a 64 bit .Net Framework (version 4 and above):
 [6]: https://docs.microsoft.com/en-us/dotnet/framework/network-programming/tls
 [7]: https://github.com/markekraus/BetterTls
 [8]: https://docs.microsoft.com/en-us/officeonlineserver/enable-tls-1-1-and-tls-1-2-support-in-office-online-server
+[9]: https://www.howsmyssl.com/s/api.html
