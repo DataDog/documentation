@@ -51,7 +51,7 @@ USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-This is required because Cloud SQL does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
+This is required because Google Cloud SQL does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
 
 ## Install the Agent
 
