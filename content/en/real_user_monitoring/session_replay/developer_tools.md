@@ -1,5 +1,5 @@
 ---
-title: Session Replay Developer Tools
+title: Session Replay Browser Developer Tools
 kind: documentation
 description: Describes the developer tools available in Session Replay
 aliases:
@@ -9,15 +9,13 @@ further_reading:
       text: Session Replay
 ---
 
-<div class="alert alert-warning">Developer Tools is in public beta.</div>  
-
 ## Overview
 
-Session Replay's Developer Tools are built-in debugging tools that can help you troubleshoot issues in your applications. There is no configuration needed for Dev Tools. 
+Session Replay's Browser Dev Tools are built-in debugging tools that can help you troubleshoot issues in your applications. There is no additional configuration needed for Dev Tools. 
 
-## Dev Tools
+## Browser Dev Tools
 
-To access Dev Tools, either click the **Jump to Replay** button to the left of a session in the **Sessions** tab or click on a session and click **Replay Session** on the top right corner in the [RUM Explorer][1]. 
+To access Browser Dev Tools, either click the **Jump to Replay** button to the left of a session in the **Sessions** tab or click on a session and click **Replay Session** on the top right corner in the [RUM Explorer][1]. 
 
 {{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-beta.png" alt="Dev Tools button" style="width:80%;">}}
 
