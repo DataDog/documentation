@@ -200,7 +200,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 #### Media
 
 * Store all images used in your `README.md` file in the `images` folder. 
-* For Marketplace listings, you may add one video to your listing. Listings on the Integrations page do not currently support videos. See [Marketplace specific requirements](#marketplace-specific-requirements) for details.  
+* For Marketplace listings, and any [offering using manifest version 2](https://docs.datadoghq.com/developers/integrations/check_references/?tab=manifestversion2#manifest-file), you may add one video to your listing. See [Media Carousel Requirements](#media-carousel-requirements) for details.  
 * **Note:** Don't include spaces in the name of image files.
 * **Note:** If you are listing on the Marketplace, do not place images in the "Overview" section of your `README.md` file. Instead, these images should be placed in the media carousel by adding them to the `media` object in your `manifest.json` file. 
 
