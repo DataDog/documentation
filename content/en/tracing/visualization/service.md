@@ -165,7 +165,7 @@ You'll see a Profiling tab if the [Continuous Profiler][14] is set up for your s
 {{< img src="tracing/visualization/service/profiler.jpg" alt="Profiling"  style="width:90%;">}}
 
 ### Traces
-VIew the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
+View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
 
 {{< img src="tracing/visualization/service/traces.png" alt="Traces"  style="width:90%;">}}
 
