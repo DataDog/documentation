@@ -43,12 +43,12 @@ Sensitive Data Scanner can be found under [Organization Settings][1].
 - **Process matching values:** Optionally, specify whether you want to redact, partially redact, or hash matching values. When redacting, specify placeholder text to replace the matching values with. When partially redacting, specify the position and length of portions to redact within matching values. Redaction, partial redaction, and hashing are all irreversible.
 - **Name the rule:** Provide a human-readable name for the rule.
 
-{{< img src="logs/sensitive_data_scanner/scanner_custom_rule2.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sds_rule_apr_22.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
 
 ### Out-of-the-box Scanning Rules
 
 The Scanning Rule Library is an evergrowing collection of predefined rules maintained by Datadog for commonly detected patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. From the Library, select an out-of-the-box scanning rule and click **Add** to start customizing the rule.
-{{< img src="logs/sensitive_data_scanner/scanner_library.png" alt="Scanner Library"  style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sds_library_apr_22.png" alt="Scanner Library"  style="width:90%;">}}
 
 ### Permissions
 
