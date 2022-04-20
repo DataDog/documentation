@@ -134,4 +134,4 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [7]: /tracing/trace_ingestion/mechanisms#error-traces
 [8]: /tracing/trace_ingestion/mechanisms#rare-traces
 [9]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
-[10]: 
+[10]: /monitors/create/types/apm/?tab=analytics
