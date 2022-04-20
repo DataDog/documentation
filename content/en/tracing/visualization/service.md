@@ -38,7 +38,7 @@ Consult on this page:
 
 Datadog proposes a list of monitors depending on your service type:
 
-{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors"  style="width:90%;">}}
+{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors"  style="width:100%;">}}
 
 Enable them directly or create your own [APM monitors][3].
 
@@ -52,7 +52,7 @@ The service page features summary cards with highlights on your service health. 
 
 Our [Service Level Objectives (SLOs)][10] and [Incidents][11] summaries allow you to monitor the status of SLOs and ongoing incidents, so you can keep performance goals and top of mind. Click the cards to create a new SLO on the service or declare an incident.
 
-{{< img src="tracing/visualization/service/watchdog_insights.png" alt="Watchdog Insights"  style="width:50%;">}}
+{{< img src="tracing/visualization/service/watchdog_insights.png" alt="Watchdog Insights"  style="width:70%;">}}
 
 The [Watchdog Insights][8] carousel surfaces anomalies detected on specific tags, enabling you to drill down straight to the root cause of an issue. 
 
@@ -86,7 +86,7 @@ Datadog provides out-of-the-box graphs for any given Service:
 
 On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [dashboard][5]:
 
-{{< img src="tracing/visualization/service/save_to_dashboard.png" alt="Save to dashboard" style="width:80%;">}}
+{{< img src="tracing/visualization/service/save_to_dashboard.png" alt="Save to dashboard" style="width:60%;">}}
 
 ## Resources
 
@@ -109,7 +109,7 @@ Choose what to display in your resources list:
 * **Errors**: Absolute amount of error for a given resource
 * **Error Rate**: Percent of error for a given resource
 
-{{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns"  style="width:50%;">}}
+{{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns"  style="width:40%;">}}
 
 ## Additional Tabs
 
@@ -172,7 +172,7 @@ VIew the list of traces associated with the service in the traces tab, which is 
 ### Logs
 View common patterns in your service’s logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][17].
 
-{{< img src="tracing/visualization/service/log_patterns.jpg" alt="Log patterns"  style="width:90%;">}}
+{{< img src="tracing/visualization/service/log_patterns.png" alt="Log patterns"  style="width:90%;">}}
 
 ## Further Reading
 
