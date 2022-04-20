@@ -19,10 +19,6 @@ further_reading:
   text: "How Application Security Works in Datadog"
 ---
 
-<div class="alert alert-warning">
-Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
-</div>
-
 ## Compatibility
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}

@@ -14,11 +14,10 @@ further_reading:
 - link: "/security_platform/guide/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Works in Datadog"
+- link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
+  tag: "Product Page"
+  text: "Datadog Application Security Monitoring"
 ---
-
-<div class="alert alert-warning">
-Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
-</div>
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
