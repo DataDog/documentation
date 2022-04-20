@@ -200,27 +200,27 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 #### Media
 
 * Store all images used in your `README.md` file in the `images` folder. 
-* For Marketplace listings, you may add one video to your listing. Listings on the Integrations page do not currently support videos. See [Marketplace specific requirements](#marketplace-specific-requirements) for details.  
+* For Marketplace listings, and any [offering using manifest version 2][28], you may add one video to your listing. See [Media Carousel Requirements](#media-carousel-requirements) for details.  
 * **Note:** Don't include spaces in the name of image files.
 * **Note:** If you are listing on the Marketplace, do not place images in the "Overview" section of your `README.md` file. Instead, these images should be placed in the media carousel by adding them to the `media` object in your `manifest.json` file. 
 
 #### Manifest
 
 * JSON object including elements for `display_name`, `public_title`, `author`, and more.
-* More information about `manifest.json` fields can be found in the [Integrations Assets Reference][28].
-* Details on the pricing object are described in the private [Marketplace README][29].
+* More information about `manifest.json` fields can be found in the [Integrations Assets Reference][29].
+* Details on the pricing object are described in the private [Marketplace README][30].
 
 #### Metadata
 
 * Contains a list of the out-of-the-box metrics included in a data integration, such as the metric name, type, interval, and unit. 
-* More information about `metadata.csv` fields can be found in the [Integrations Assets Reference][28].
+* More information about `metadata.csv` fields can be found in the [Integrations Assets Reference][29].
 * **Note:** All Marketplace metrics count as custom metrics. 
 
 #### Dashboards and monitors
 
 * Contains the out-of-the-box dashboards and monitors (alerts) for your data integration. 
 * You can create dashboards and monitors directly in your sandbox account and export them as JSON files. 
-* See [Dashboarding Best Practices][30] for details.
+* See [Dashboarding Best Practices][31] for details.
 
 #### Logos
 
@@ -233,7 +233,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### Code owners
 
-* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See GitHub's documentation [About code owners][31] for help with syntax.
+* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See GitHub's documentation [About code owners][32] for help with syntax.
 
 #### Additional Marketplace files
 * The Technology Partner's own End User License Agreement (EULA) is required for all Marketplace offerings.
@@ -280,7 +280,7 @@ When the Datadog Engineering and Product teams approve your pull-request, the ti
 Once a Marketplace tile is live, Technology Partners have the option of meeting with Datadog's Partner Marketing Team to coordinate a joint go-to-market strategy, including:
 
 * A Datadog quote for partner press releases
-* A Blog Post in the [Datadog Monitor][32]
+* A Blog Post in the [Datadog Monitor][33]
 * Amplification of social media posts
 
 ## Contact
@@ -319,8 +319,9 @@ Email techpartners@datadoghq.com if you have any questions.
 [25]: /api/latest/security-monitoring/
 [26]: https://www.python.org/downloads/
 [27]: https://pypi.org/project/datadog-checks-dev/
-[28]: /developers/integrations/check_references/#manifest-file
-[29]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
-[30]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
-[31]: https://help.github.com/articles/about-codeowners/
-[32]: https://www.datadoghq.com/blog/
+[28]: /developers/integrations/check_references/?tab=manifestversion2#manifest-file
+[29]: /developers/integrations/check_references/#manifest-file
+[30]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
+[31]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
+[32]: https://help.github.com/articles/about-codeowners/
+[33]: https://www.datadoghq.com/blog/
