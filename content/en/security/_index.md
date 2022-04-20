@@ -1,4 +1,8 @@
 ---
+# don't render so to allow alias to render here
 title: Security
-external_redirect: "/data_security/"
+headless: true
+_build:
+  list: false
+  render: false
 ---
