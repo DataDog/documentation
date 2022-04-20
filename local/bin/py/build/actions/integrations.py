@@ -516,7 +516,7 @@ class Integrations:
     @staticmethod
     def remove_h3_markdown_section(markdown_string, h3_header_string):
         """
-        Removes markdown content from integration readme file starting with the h3 markdown string provided
+        Removes markdown content from integration readme file starting with h3 markdown string provided
         """
         if not h3_header_string.startswith('###'):
             return markdown_string
@@ -542,13 +542,20 @@ class Integrations:
                         break
 
                 if end_index == -1:
-                    end_index = len(markdown_string)
+                    # Check for footer
+                    horiz_line = markdown_string.find('\n---', start_index)
+
+                    if horiz_line != -1:
+                        end_index = horiz_line
+                    else:
+                        end_index = len(markdown_string)
 
                 content_to_remove = markdown_string[start_index:end_index]
                 indexes.append([start_index, end_index])
 
         # In case there are multiple h3 headers with the same name.
-        # There are multiple "Pricing" headers in some integrations.
+        # There are multiple "Pricing" headers in some integrations currently,
+        # TODO: revisit this function once that is fixed.
         if len(indexes) > 0:
             for indices in reversed(indexes):
                 markdown_string = markdown_string[:indices[0]] + markdown_string[indices[1]:]
