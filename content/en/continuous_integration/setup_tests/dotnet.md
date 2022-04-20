@@ -29,6 +29,10 @@ Supported test frameworks:
 
 [Install the Datadog Agent to collect tests data][1].
 
+<div class="alert alert-warning">
+Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/dotnet#agentless-beta">instructions</a> on this page.
+</div>
+
 ## Installing the .NET tracer
 
 To install or update the `dd-trace` command globally on the machine, run:
@@ -130,7 +134,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Your custom instrumentation setup depends on the `dd-trace` version. To use the custom instrumentation, you must keep the package versions for `dd-trace` and `Datadog.Trace` NuGet packages in sync.
+  <strong>Note:</strong> Your custom instrumentation setup depends on the <code>dd-trace</code> version. To use the custom instrumentation, you must keep the package versions for <code>dd-trace</code> and <code>Datadog.Trace</code> NuGet packages in sync.
 </div>
 
 To use the custom instrumentation in your .NET application:
@@ -141,6 +145,39 @@ To use the custom instrumentation in your .NET application:
 
 For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][4].
 
+## Agentless (Beta)
+
+To instrument your test suite without requiring an Agent, configure the following environment variables:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED` (Required)
+: Enables or disables Agentless mode.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][6] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+Then, prefix your test command with `dd-trace ci run`. Use the `--dd-service` parameter to provide the name of the service or library. Use the `--dd-env` parameter to provide the environment where tests are being run (`local` when running tests on a developer workstation, `ci` when running them on a CI provider, etc.) For example:
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+{{< /code-block >}}
+
+Alternatively, you can provide the [Datadog API key][6] using the `--api-key` parameter, for example:
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+{{< /code-block >}}
+
+When the `--api-key` is set, Agentless mode is automatically enabled.
+
+Additionally, configure which [Datadog site][7] to which you want to send data. Your Datadog site is: {{< region-param key="dd_site" >}}.
+
+`DD_SITE` (Required)
+: The [Datadog site][7] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -150,3 +187,6 @@ For more information about how to add spans and tags for custom instrumentation,
 [2]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[5]: /continuous_integration/setup_tests/dotnet/#agentless-beta
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /getting_started/site/

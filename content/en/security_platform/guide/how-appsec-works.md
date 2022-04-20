@@ -17,8 +17,9 @@ For Datadog Application Security to be compatible with your Datadog configuratio
 
 ### Performance
 
-Datadog Application Security uses processes already contained in the Agent and APM, so there are no performance implications when using it. When APM is enabled, the Datadog Library generates distributed traces. Datadog Application Security flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
+Datadog Application Security uses processes already contained in the Agent and APM, so there are negligible performance implications when using it. When APM is enabled, the Datadog Library generates distributed traces. Datadog Application Security flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
 
+{{< img src="security_platform/guide/How_Application_Security_Works_d1.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
 
 ### Data privacy
 

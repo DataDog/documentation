@@ -279,25 +279,25 @@ The log files are available in the following directories:
 
 For PHP, to start troubleshooting issues with the Datadog Application Security extension, enable debug logs in the Application Security extension’s `.ini` file.
 
-The extension's `ini` file is usually found in `/etc/php/<version>/xxx/conf.d/98-ddappsec.ini`, but the location may differ depending on your installation. Look at the beginning of the `phpinfo()` output to identify the directory that is scanned for `.ini` files, if any. In the `.ini` file, set the following configuration options with the following: 
+The extension's `ini` file is usually found in `/etc/php/<version>/xxx/conf.d/98-ddtrace.ini`, but the location may differ depending on your installation. Look at the beginning of the `phpinfo()` output to identify the directory that is scanned for `.ini` files, if any. In the `.ini` file, set the following configuration options with the following: 
 
 ```php
-ddappsec.log_level=‘debug’
-ddappsec.helper_extra_args=‘--log_level=debug’
-ddappsec.helper_log_file=‘/tmp/helper.log’
+datadog.appsec.log_level=‘debug’
+datadog.appsec.helper_extra_args=‘--log_level=debug’
+datadog.appsec.helper_log_file=‘/tmp/helper.log’
 ```
 
 The extension outputs logs to the default `php_error` log file. If there are no logs in the file, add the following to the `.ini` file:
 
 ```php
-ddappsec.log_file=’tmp/extension.log’
+datadog.appsec.log_file=’tmp/extension.log’
 ```
 
 ### Installation fails to find PHP
 If the installation script is unable to find the correct PHP version, you can set the `--php-bin` to the PHP binary location, for example:
 
 ```
-$ php dd-library-php-setup.php --php-bin /usr/bin/php7.4 --tracer-version=latest --appsec-version=latest
+$ php datadog-setup.php --php-bin /usr/bin/php7.4 --enable-appsec
 ```
 ### Connection to helper failed
 If the Application Security extension is unable to communicate with the helper process, the following warning occurs:
@@ -325,8 +325,7 @@ If the lock file or socket file has invalid permissions, you can either delete t
 If the user doesn’t have write access to the tmp directory, you can change the location of the lock file and socket file by modifying the following settings in the extension’s `.ini` file:
 
 ```
-ddappsec.helper_socket_path = /<directory with compatible permissions>/ddappsec.sock
-ddappsec.helper_lock_path = /<directory with compatible permissions>/ddappsec.lock
+datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 ```
 
 {{< /programming-lang >}}

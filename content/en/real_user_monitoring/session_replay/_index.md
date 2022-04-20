@@ -136,6 +136,8 @@ Session Replay follows the same 30 days retention policy as normal RUM sessions.
 - Remove startSessionReplayRecording() to stop session recordings.
 - Set `replaySampleRate` to `0` to stop collecting the RUM Session Replay plan which includes resources and long tasks.
 
+In order to apply these configurations, upgrade the Browser RUM SDK to a version >= 3.6.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

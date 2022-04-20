@@ -109,8 +109,6 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
 	@if [ content/en/serverless/libraries_integrations/plugin.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/plugin.md ;fi
-	@if [ content/en/serverless/libraries_integrations/forwarder.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/forwarder.md ;fi
 	@if [ content/en/serverless/libraries_integrations/macro.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
 	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
@@ -155,6 +153,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/ios.md ;fi
 	@if [ content/en/logs/log_collection/javascript.md ]; then \
 	rm -f content/en/logs/log_collection/javascript.md ;fi
+	@if [ content/en/logs/guide/forwarder.md ]; then \
+	rm -f content/en/logs/guide/forwarder.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
 	@if [ content/en/security_platform/cloud_workload_security/agent_expressions.md ]; then \
@@ -257,12 +257,15 @@ examples/go: examples/datadog-api-client-go clean-go-examples
 	-cp -Rn examples/datadog-api-client-go/examples/v* ./content/en/api/
 
 examples/java: examples/datadog-api-client-java clean-java-examples
+	-cd examples/datadog-api-client-java; ./extract-code-blocks.sh || true
 	-cp -Rn examples/datadog-api-client-java/examples/v* ./content/en/api/
 
 examples/python: examples/datadog-api-client-python clean-python-examples
+	-find examples/datadog-api-client-python/examples -iname \*.py -exec mv {} {}beta \;
 	-cp -Rn examples/datadog-api-client-python/examples/v* ./content/en/api
 
 examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
+	-find examples/datadog-api-client-ruby/examples -iname \*.rb -exec mv {} {}beta \;
 	-cp -Rn examples/datadog-api-client-ruby/examples/v* ./content/en/api
 
 examples/typescript: examples/datadog-api-client-typescript clean-typescript-examples
