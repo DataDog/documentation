@@ -122,27 +122,56 @@ using (var parentScope =
 
 ### Headers extraction and injection
 
-Datadog APM tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing.
+Datadog APM tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing. You can find more details on this in the [setup documentation][7].
 
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. The .NET Tracer supports four styles:
+Headers extraction and injection will be transparent in most cases.
+Though, in some rare cases the span context can be lost and only a custom implementation will be able to fix it.
 
-- Datadog: `Datadog`
-- B3: `B3`
-- W3C: `TraceParent`
-- B3 Single Header: `B3SingleHeader` or `B3 single header`
+To do so, please do the following:
 
-Injection and extraction styles can be configured using:
+```csharp
+var spanContextExtractor = new SpanContextExtractor();
+var parentContext = spanContextExtractor.Extract(headers, (headers, key) => GetHeaderValues(headers, key));
+var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext }; 
+using var scope = Tracer.Instance.StartActive("operation", spanCreationSettings);
+```
 
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+Where `GetHeaderValues` will depend on the underlying system you are using. Here are a few examples:
 
-The values of these environment variables are comma separated lists of header styles that are enabled for injection or extraction. By default only `Datadog` injection style is enabled.
+```csharp
+// Confluent.Kafka
+IEnumerable<string> GetHeaderValues(Headers headers, string name)
+{
+    if (headers.TryGetLastBytes(name, out var bytes))
+    {
+        try
+        {
+            return new[] { Encoding.UTF8.GetString(bytes) };
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+    }
 
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+    return Enumerable.Empty<string>();
+}
+
+// RabbitMQ
+IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string name)
+{
+    if (headers.TryGetValue(name, out object value) && value is byte[] bytes)
+    {
+        return new[] { Encoding.UTF8.GetString(bytes) };
+    }
+
+    return Enumerable.Empty<string>();
+}
+```
 
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][7] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][8] page.
 
 ## Further Reading
 
@@ -155,4 +184,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: /tracing/visualization/trace/?tab=spantags#more-information
 [5]: https://github.com/openzipkin/b3-propagation
 [6]: https://www.w3.org/TR/trace-context/#traceparent-header
-[7]: /tracing/security
+[7]: /tracing/setup_overview/setup/dotnet-core?tab=windows#custom-instrumentation
+[8]: /tracing/security
