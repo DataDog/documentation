@@ -1935,6 +1935,12 @@ components:
             accuracy.'
           readOnly: true
           type: string
+        monitor_id:
+          description: 'Integer ID of the monitor.
+
+            The `monitor_id` is only available if the event has an associated monitor.'
+          format: int64
+          type: integer
         payload:
           description: Payload of the event.
           example: '{}'
