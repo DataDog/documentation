@@ -7040,6 +7040,17 @@
         ],
         "type": "object"
       },
+      "HourlyUsageType": {
+        "description": "Usage type that is being measured.",
+        "enum": [
+          "observability_pipelines_bytes_processed"
+        ],
+        "example": "observability_pipelines_bytes_processed",
+        "type": "string",
+        "x-enum-varnames": [
+          "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+        ]
+      },
       "IdPMetadataFormData": {
         "description": "The form data submitted to upload IdP metadata",
         "properties": {
@@ -33259,6 +33270,239 @@
           "data"
         ],
         "type": "object"
+      },
+      "UsageAttributesObject": {
+        "description": "Usage attributes data.",
+        "properties": {
+          "org_name": {
+            "description": "The organization name.",
+            "type": "string"
+          },
+          "product_family": {
+            "description": "The product for which usage is being reported.",
+            "type": "string"
+          },
+          "public_id": {
+            "description": "The organization public ID.",
+            "type": "string"
+          },
+          "timeseries": {
+            "description": "List of usage data reported for each requested hour.",
+            "items": {
+              "description": "Usage timeseries data.",
+              "properties": {
+                "timestamp": {
+                  "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Contains the number measured for the given usage_type during the hour.",
+                  "format": "int64",
+                  "nullable": true,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "usage_type": {
+            "description": "Usage type that is being measured.",
+            "enum": [
+              "observability_pipelines_bytes_processed"
+            ],
+            "example": "observability_pipelines_bytes_processed",
+            "type": "string",
+            "x-enum-varnames": [
+              "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "UsageDataObject": {
+        "description": "Usage data.",
+        "properties": {
+          "attributes": {
+            "description": "Usage attributes data.",
+            "properties": {
+              "org_name": {
+                "description": "The organization name.",
+                "type": "string"
+              },
+              "product_family": {
+                "description": "The product for which usage is being reported.",
+                "type": "string"
+              },
+              "public_id": {
+                "description": "The organization public ID.",
+                "type": "string"
+              },
+              "timeseries": {
+                "description": "List of usage data reported for each requested hour.",
+                "items": {
+                  "description": "Usage timeseries data.",
+                  "properties": {
+                    "timestamp": {
+                      "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "Contains the number measured for the given usage_type during the hour.",
+                      "format": "int64",
+                      "nullable": true,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "usage_type": {
+                "description": "Usage type that is being measured.",
+                "enum": [
+                  "observability_pipelines_bytes_processed"
+                ],
+                "example": "observability_pipelines_bytes_processed",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "Unique ID of the response.",
+            "type": "string"
+          },
+          "type": {
+            "default": "usage_timeseries",
+            "description": "Type of usage data.",
+            "enum": [
+              "usage_timeseries"
+            ],
+            "example": "usage_timeseries",
+            "type": "string",
+            "x-enum-varnames": [
+              "USAGE_TIMESERIES"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "UsageObservabilityPipelinesResponse": {
+        "description": "Observability Pipelines usage response.",
+        "properties": {
+          "data": {
+            "description": "Response containing Observability Pipelines usage.",
+            "items": {
+              "description": "Usage data.",
+              "properties": {
+                "attributes": {
+                  "description": "Usage attributes data.",
+                  "properties": {
+                    "org_name": {
+                      "description": "The organization name.",
+                      "type": "string"
+                    },
+                    "product_family": {
+                      "description": "The product for which usage is being reported.",
+                      "type": "string"
+                    },
+                    "public_id": {
+                      "description": "The organization public ID.",
+                      "type": "string"
+                    },
+                    "timeseries": {
+                      "description": "List of usage data reported for each requested hour.",
+                      "items": {
+                        "description": "Usage timeseries data.",
+                        "properties": {
+                          "timestamp": {
+                            "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "value": {
+                            "description": "Contains the number measured for the given usage_type during the hour.",
+                            "format": "int64",
+                            "nullable": true,
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "usage_type": {
+                      "description": "Usage type that is being measured.",
+                      "enum": [
+                        "observability_pipelines_bytes_processed"
+                      ],
+                      "example": "observability_pipelines_bytes_processed",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "Unique ID of the response.",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "usage_timeseries",
+                  "description": "Type of usage data.",
+                  "enum": [
+                    "usage_timeseries"
+                  ],
+                  "example": "usage_timeseries",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "USAGE_TIMESERIES"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "UsageTimeSeriesObject": {
+        "description": "Usage timeseries data.",
+        "properties": {
+          "timestamp": {
+            "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "value": {
+            "description": "Contains the number measured for the given usage_type during the hour.",
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "UsageTimeSeriesType": {
+        "default": "usage_timeseries",
+        "description": "Type of usage data.",
+        "enum": [
+          "usage_timeseries"
+        ],
+        "example": "usage_timeseries",
+        "type": "string",
+        "x-enum-varnames": [
+          "USAGE_TIMESERIES"
+        ]
       },
       "User": {
         "description": "User object returned by the API.",
@@ -82414,6 +82658,219 @@
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
+    "/api/v2/usage/observability_pipelines": {
+      "get": {
+        "description": "Get hourly usage for Observability Pipelines.",
+        "operationId": "GetUsageObservabilityPipelines",
+        "parameters": [
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.",
+            "in": "query",
+            "name": "start_hr",
+            "required": true,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending\n**before** this hour.",
+            "in": "query",
+            "name": "end_hr",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "Observability Pipelines usage response.",
+                  "properties": {
+                    "data": {
+                      "description": "Response containing Observability Pipelines usage.",
+                      "items": {
+                        "description": "Usage data.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Usage attributes data.",
+                            "properties": {
+                              "org_name": {
+                                "description": "The organization name.",
+                                "type": "string"
+                              },
+                              "product_family": {
+                                "description": "The product for which usage is being reported.",
+                                "type": "string"
+                              },
+                              "public_id": {
+                                "description": "The organization public ID.",
+                                "type": "string"
+                              },
+                              "timeseries": {
+                                "description": "List of usage data reported for each requested hour.",
+                                "items": {
+                                  "description": "Usage timeseries data.",
+                                  "properties": {
+                                    "timestamp": {
+                                      "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+                                      "format": "date-time",
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "description": "Contains the number measured for the given usage_type during the hour.",
+                                      "format": "int64",
+                                      "nullable": true,
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "usage_type": {
+                                "description": "Usage type that is being measured.",
+                                "enum": [
+                                  "observability_pipelines_bytes_processed"
+                                ],
+                                "example": "observability_pipelines_bytes_processed",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the response.",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "usage_timeseries",
+                            "description": "Type of usage data.",
+                            "enum": [
+                              "usage_timeseries"
+                            ],
+                            "example": "usage_timeseries",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "USAGE_TIMESERIES"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden - User is not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "usage_read"
+            ]
+          }
+        ],
+        "summary": "Get hourly usage for Observability Pipelines",
+        "tags": [
+          "Usage Metering"
+        ],
+        "x-menu-order": 38,
+        "x-undo": {
+          "type": "safe"
+        }
+      }
+    },
     "/api/v2/user_invitations": {
       "post": {
         "description": "Sends emails to one or more users inviting them to join the organization.",
@@ -86539,6 +86996,14 @@
     {
       "description": "Create, edit, and disable service accounts.",
       "name": "Service Accounts"
+    },
+    {
+      "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.",
+      "externalDocs": {
+        "description": "Find out more at",
+        "url": "https://docs.datadoghq.com/account_management/billing/usage_details/"
+      },
+      "name": "Usage Metering"
     },
     {
       "description": "Create, edit, and disable users.",

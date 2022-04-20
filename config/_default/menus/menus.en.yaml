@@ -5603,6 +5603,18 @@ api:
     url: /api/latest/usage-metering/
     identifier: usage-metering
     generated: true
+  - name: Get hourly usage for Observability Pipelines
+    url: '#get-hourly-usage-for-observability-pipelines'
+    identifier: get-hourly-usage-for-observability-pipelines
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUsageObservabilityPipelines
+      unstable: []
+      order: 38
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: get-all-custom-metrics-by-hourly-average

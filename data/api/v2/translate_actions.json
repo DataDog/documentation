@@ -588,6 +588,10 @@
     "request_description": "Incident Team Payload.",
     "request_schema_description": "Update request with an incident team payload."
   },
+  "GetUsageObservabilityPipelines": {
+    "description": "Get hourly usage for Observability Pipelines.",
+    "summary": "Get hourly usage for Observability Pipelines"
+  },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",
     "summary": "Send invitation emails",
