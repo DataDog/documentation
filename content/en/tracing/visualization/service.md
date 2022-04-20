@@ -50,7 +50,7 @@ The service page features summary cards with highlights on your service health. 
 
 {{< img src="tracing/visualization/service/summary_cards.jpg" alt="Summary cards"  style="width:100%;">}}
 
-Our [Service Level Objectives (SLOs)][10] and [Incidents][11] summaries allow you to monitor the status of SLOs and ongoing incidents, so you can keep performance goals and top of mind. Click the cards to create a new SLO on the service or declare an incident.
+Our [Service Level Objectives (SLOs)][10] and [Incidents][11] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident.
 
 {{< img src="tracing/visualization/service/watchdog_insights.png" alt="Watchdog Insights"  style="width:70%;">}}
 
