@@ -688,4 +688,4 @@ Always call `session.end()` at the end so that all the test info is flushed to D
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
 [3]: https://opentelemetry.io/
-[4]: /continuous_integration/guides/rum_swift_integration/
+[4]: /continuous_integration/guides/rum_swift_integration
