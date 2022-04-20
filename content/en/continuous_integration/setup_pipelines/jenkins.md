@@ -20,7 +20,7 @@ further_reading:
 ## Compatibility
 
 Supported Jenkins versions:
-* Jenkins >= 2.164.1
+* Jenkins >= 2.303.3
 
 ## Prerequisite
 
@@ -32,7 +32,7 @@ If the Jenkins controller and the Datadog Agent have been deployed to a Kubernet
 
 ## Install the Datadog Jenkins plugin
 
-Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
+Install and enable the [Datadog Jenkins plugin][3] v4.0.0 or newer:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
 2. In the [Update Center][4] on the **Available** tab, search for `Datadog Plugin`.
