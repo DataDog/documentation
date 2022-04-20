@@ -19,9 +19,9 @@ aliases:
     - /serverless/guide/nodejs/
 ---
 
-<div class="alert alert-warning">If you previously set up Datadog Serverless using the Datadog Forwarder, see <a href="serverless/guide/datadog_forwarder_node">Using the Datadog Forwarder - Node.js</a>.</div>
+<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="serverless/guide/datadog_forwarder_node">instrumenting using the Datadog Forwarder</a>.</div>
 
-<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> to the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 <div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_webpack/">mark the Datadog libraries as external</a>.</div>
 
@@ -237,17 +237,23 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 
     Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
-3. Configure your Lambda functions
+3. Redirect the handler function
 
     - Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-    - Set the environment variable `DD_SITE` with your [Datadog site][2] to send the telemetry to.
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+
+    **Note**: If you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
+
+4. Configure the Datadog site and API key
+
+    - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
+[3]: https://docs.datadoghq.com/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -297,16 +303,22 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 
     Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
-3. Configure your Lambda functions
+3. Redirect the handler function
 
     - Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-    - Set the environment variable `DD_SITE` with your [Datadog site][2] to send the telemetry to.
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+
+    **Note**: If you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
+
+4. Configure Datadog site and API key
+
+    - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
+[3]: https://docs.datadoghq.com/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 

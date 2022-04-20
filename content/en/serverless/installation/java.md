@@ -17,7 +17,9 @@ aliases:
 
 <div class="alert alert-warning">To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes.</div>
 
-<div class="alert alert-warning">If your Java Lambda functions were previously set up using the Datadog Forwarder, see the <a href="serverless/guide/datadog_forwarder_java">installation instructions</a>.</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
+
+<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="serverless/guide/datadog_forwarder_java">instrumenting using the Datadog Forwarder</a>.</div>
 
 ## Installation
 
@@ -137,7 +139,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 3. Set the required environment variables
 
-    - Set `JAVA_TOOL_OPTIONS` to `-javaagent:“/opt/dd-java-agent.jar” -XX:+TieredCompilation -XX:TieredStopAtLevel=1`
     - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
@@ -161,7 +162,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 3. Set the required environment variables
 
-    - Set `JAVA_TOOL_OPTIONS` to `-javaagent:“/opt/dd-java-agent.jar” -XX:+TieredCompilation -XX:TieredStopAtLevel=1`
     - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 

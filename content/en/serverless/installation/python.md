@@ -16,9 +16,9 @@ aliases:
     - /serverless/guide/python/
 ---
 
-<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up Datadog Serverless using the Datadog Forwarder, see the <a href="/serverless/guide/datadog_forwarder_python">Using the Datadog Forwarder - Python</a> guide.</div>
+<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up your Lambda functions using the Datadog Forwarder, see <a href="/serverless/guide/datadog_forwarder_python">instrumenting using the Datadog Forwarder</a>.</div>
 
-<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> to the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 ## Installation
 
@@ -230,18 +230,24 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 
     Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
-3. Configure your Lambda functions
+3. Redirect the handler function
 
     - Set your image's `CMD` value to `datadog_lambda.handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-    - Set the environment variable `DD_SITE` with your [Datadog site][2] to send the telemetry to.
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+
+    **Note**: If you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
+
+4. Configure the Datadog site, API key, and tracing
+
+    - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
     - Set the environment variable `DD_TRACE_ENABLED` to `true`.
 
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
+[3]: https://docs.datadoghq.com/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -301,17 +307,22 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 
     Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
-3. Configure your Lambda functions
+3. Redirect the handler function
 
     - Set your function's handler to `datadog_lambda.handler.handler`.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-    - Set the environment variable `DD_SITE` with your [Datadog site][6] to send the telemetry to.
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][7] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+
+    **Note**: If you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][6] instead.
+
+4. Configure the Datadog site, API key, and tracing
+
+    - Set the environment variable `DD_SITE` with your [Datadog site][7] to send the telemetry to.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][8] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
     - Set the environment variable `DD_TRACE_ENABLED` to `true`.
 
-4. (AWS Chalice only) Register the middleware
+5. (AWS Chalice only) Register the middleware
 
-    If you are using [AWS Chalice][8], you must install `datadog-lambda` using `pip`, and register `datadog_lambda_wrapper` as a [middleware][9] in your `app.py`:
+    If you are using [AWS Chalice][9], you must install `datadog-lambda` using `pip`, and register `datadog_lambda_wrapper` as a [middleware][10] in your `app.py`:
     
     ```python
     from chalice import Chalice, ConvertToMiddleware
@@ -332,10 +343,11 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 [3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [5]: https://pypi.org/project/datadog-lambda/
-[6]: https://docs.datadoghq.com/getting_started/site/
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: https://aws.github.io/chalice/
-[9]: https://aws.github.io/chalice/topics/middleware.html
+[6]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
+[7]: https://docs.datadoghq.com/getting_started/site/
+[8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: https://aws.github.io/chalice/
+[10]: https://aws.github.io/chalice/topics/middleware.html
 {{% /tab %}}
 {{< /tabs >}}
 

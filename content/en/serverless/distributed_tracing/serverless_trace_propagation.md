@@ -126,7 +126,41 @@ exports.json = (payload) => {
     };
 };
 ```
+{{% /tab %}}
+{{% tab "Go" %}}
+```go
+var exampleSQSExtractor = func(ctx context.Context, ev json.RawMessage) map[string]string {
+	eh := events.SQSEvent{}
 
+	headers := map[string]string{}
+
+	if err := json.Unmarshal(ev, &eh); err != nil {
+		return headers
+	}
+
+	// Using SQS as a trigger with a batchSize=1 so it's important we check
+  // for this as a single SQS message will drive the execution of the handler.
+	if len(eh.Records) != 1 {
+		return headers
+	}
+
+	record := eh.Records[0]
+
+	lowercaseHeaders := map[string]string{}
+	for k, v := range record.MessageAttributes {
+		if v.StringValue != nil {
+			lowercaseHeaders[strings.ToLower(k)] = *v.StringValue
+		}
+	}
+
+	return lowercaseHeaders
+}
+
+cfg := &ddlambda.Config{
+    TraceContextExtractor: exampleSQSExtractor,
+}
+ddlambda.WrapFunction(handler, cfg)
+```
 {{% /tab %}}
 {{< /tabs >}}
 
