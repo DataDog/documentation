@@ -1,8 +1,8 @@
 ---
-title: モニターガイド
+disable_sidebar: true
 kind: ガイド
 private: true
-disable_sidebar: true
+title: モニターガイド
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}
@@ -15,4 +15,5 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}値に変化がないことを警告するようにメトリクスモニターを構成{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}メトリクスモニターのクラスターアラートを作成{{< /nextlink >}}
     {{< nextlink href="monitors/guide/slo-checklist" >}}SLO チェックリスト{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}モニターに RBAC を設定する方法{{< /nextlink >}}
 {{< /whatsnext >}}
