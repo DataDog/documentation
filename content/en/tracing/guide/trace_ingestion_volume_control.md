@@ -24,6 +24,18 @@ If you decide to reduce the ingestion volume for certain services, the **request
 
 Trace data is very repetitive, which means trace samples to investigate any issues are still available with ingestion sampling. For high throughput services, there's usually no need for you to collect every single request - an important enough problem should always show symptoms in multiple traces. Ingestion controls helps you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
+#### Metrics from spans
+
+[Metrics from spans][4] are based on ingested spans.
+
+Reducing ingestion sampling rates will impact any **count** type metric. **Distribution** type metrics, for instance `duration` measures, are not impacted as the sampling is mostly uniform, the distribution of latencies remains representative of the traffic.
+
+#### Monitors
+
+Any **metric** monitor using [metrics from spans](#metrics-from-spans) is impacted by ingestion volume reduction. Metric monitors based on **trace.__** metrics will remain accurate, because these metrics are calculated based on 100% of the traffic.
+
+Count-based [**Trace analytics**][10] monitors are impacted as well. Check if you have trace analytics monitors created by looking for `type:trace-analytics` monitors in the manage monitors page.
+
 ## Assess your services' ingestion configuration
 
 To assess the current state of applications' instrumentation, leverage the [Trace Ingestion Control page][1] that provides detailed information on agent and tracing library configuration.
@@ -38,9 +50,9 @@ Use the ingestion monthly usage KPI to get an estimation of your usage compared 
 
 The ingestion configuration can be investigated for each service. Click on a service row to see the Service Ingestion Summary, which surfaces:
 - **Ingestion reason breakdown**: which [ingestion mechanism][2] is responsible for the ingestion volume
-- **Top sampling decision makers**: which upstream services are taking sampling decisions for the spans ingested in regards to the [default ingestion mechanism][4]
+- **Top sampling decision makers**: which upstream services are taking sampling decisions for the spans ingested in regards to the [default ingestion mechanism][5]
 
-An [out-of-the-box dashboard][5] is also available to get more insights on historical trends related to your ingestion usage and volume. Clone this dashboard to be able to edit widgets and perform further analysis.
+An [out-of-the-box dashboard][6] is also available to get more insights on historical trends related to your ingestion usage and volume. Clone this dashboard to be able to edit widgets and perform further analysis.
 
 ## Reduce your ingestion volume
 
@@ -60,9 +72,9 @@ If the service has a high Downstream Bytes/s rate and a high sampling rate (disp
 
 The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally accross services.
 
-To reduce the ingestion volume at the Agent level, configure `DD_APM_MAX_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][4].
+To reduce the ingestion volume at the Agent level, configure `DD_APM_MAX_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][5].
 
-Additionally, to reduce the volume of [error][6] and [rare][7] traces:
+Additionally, to reduce the volume of [error][7] and [rare][8] traces:
 - Configure `DD_APM_ERROR_TPS` to reduce the share of error sampling.
 - Set `DD_APM_DISABLE_RARE_SAMPLER` to true to stop sampling rare traces.
 
@@ -76,7 +88,7 @@ If the main reason for most of the ingestion volume is head-based sampling (`aut
 
 Click the **Manage Ingestion Rate** button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
 
-**Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][8].
+**Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][9].
 
 ## Ingestion reasons glossary
 
@@ -116,8 +128,10 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [1]: /tracing/trace_ingestion/ingestion_controls
 [2]: /tracing/trace_ingestion/mechanisms
 [3]: /tracing/guide/metrics_namespace/
-[4]: /tracing/trace_ingestion/mechanisms/#head-based-default-mechanism
-[5]: /tracing/trace_retention/usage_metrics/
-[6]: /tracing/trace_ingestion/mechanisms#error-traces
-[7]: /tracing/trace_ingestion/mechanisms#rare-traces
-[8]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[4]: /tracing/generate_metrics/
+[5]: /tracing/trace_ingestion/mechanisms/#head-based-default-mechanism
+[6]: /tracing/trace_retention/usage_metrics/
+[7]: /tracing/trace_ingestion/mechanisms#error-traces
+[8]: /tracing/trace_ingestion/mechanisms#rare-traces
+[9]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[10]: 
