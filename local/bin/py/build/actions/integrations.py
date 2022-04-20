@@ -516,7 +516,8 @@ class Integrations:
     @staticmethod
     def remove_h3_markdown_section(markdown_string, h3_header_string):
         """
-        Removes markdown content from integration readme file starting with h3 markdown string provided
+        Removes markdown content from integration readme file starting with h3 markdown string provided,
+        ending with the next h2 or h3 header or horizontal line break found in the markdown.
         """
         if not h3_header_string.startswith('###'):
             return markdown_string
@@ -536,18 +537,21 @@ class Integrations:
                 h2_h3_regex_matches = re.finditer(h2_h3_regex, markdown_string)
                 end_index = -1
 
+                # Find the string index of the next h2 or h3 header in markdown 
+                # so we can strip out all of the unwanted content
                 for match in h2_h3_regex_matches:
                     if match.start() > start_index + 3:
                         end_index = match.start()
                         break
 
                 if end_index == -1:
-                    # Check for footer
+                    # Check to ensure footer is preserved
                     horiz_line = markdown_string.find('\n---', start_index)
 
                     if horiz_line != -1:
                         end_index = horiz_line
                     else:
+                        # If there isn't another h2, h3, or horizontal line break 
                         end_index = len(markdown_string)
 
                 content_to_remove = markdown_string[start_index:end_index]
