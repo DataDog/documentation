@@ -24,30 +24,30 @@ Often businesses are required to identify, remediate, and prevent the exposure o
 
 ## Sensitive Data Scanner
 
-Sensitive data scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization.
+Sensitive Data Scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization.
 
-Sensitive data scanner can be found under [Organization Settings][1]. The Scanner Library offers a wide variety of rules for commonly detected patterns such as email addresses, credit card numbers, API keys, authorization tokens, and others.
+Sensitive Data Scanner can be found under [Organization Settings][1].
 
 {{< img src="logs/sensitive_data_scanner/sensitive_data_scanner3.png" alt="Sensitive Data Scanner in Organization Settings" style="width:90%;">}}
 
-### Setting up scanning groups
+### Setting up Scanning Groups
 
 - **Define Scanning Groups:** Customize what data must be scanned using Pipelines. Define a query to indicate which logs must be included in the rule scope. See the [Logs search syntax page][2] for syntax on building searches.
 - **Define Scanning Rule:** Create a new rule using predefined regex patterns from Datadog’s Scanner Library or create a custom rule.
 
-### Custom rules
+### Custom Scanning Rules
 
 - **Define rule:** Specify the regex pattern to be used for matching against log events. Use sample data to verify that your regex pattern is valid.
 - **Define scope:** Specify whether you want to scan the entire log event or just specific log attributes. You can also choose to skip specific attributes from the scan.
-- **Add tags:** Specify the tags you want to associate with log events where the values match the specified regex pattern. Datadog recommends using the tag `sensitive_data`. These tags can then be used in searches, dashboards, and monitors.
-- **Process matching values:** Optionally, specify whether you want to redact or hash the matching values. If you choose the redaction option, specify the placeholder text that you would like to replace the matching values so that data is redacted or hashed before it gets stored in Datadog or sent to your archive.
+- **Add tags:** Specify the tags you want to associate with log events where the values match the specified regex pattern. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags. These tags can then be used in searches, dashboards, and monitors.
+- **Process matching values:** Optionally, specify whether you want to redact, partially redact, or hash matching values. When redacting, specify placeholder text to replace the matching values with. When partially redacting, specify the position and length of portions to redact within matching values. Redaction, partial redaction, and hashing are all irreversible.
 - **Name the rule:** Provide a human-readable name for the rule.
 
 {{< img src="logs/sensitive_data_scanner/scanner_custom_rule2.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
 
-### Scanner library
+### Out-of-the-box Scanning Rules
 
-Select the rule that you want from the Scanner Library and click **Add** to start customizing the rule.
+The Scanning Rule Library is an evergrowing collection of predefined rules maintained by Datadog for commonly detected patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. From the Library, select an out-of-the-box scanning rule and click **Add** to start customizing the rule.
 {{< img src="logs/sensitive_data_scanner/scanner_library.png" alt="Scanner Library"  style="width:90%;">}}
 
 ### Permissions
