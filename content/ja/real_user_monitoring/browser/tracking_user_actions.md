@@ -1,23 +1,25 @@
 ---
-title: ユーザーアクションの追跡
-kind: documentation
 further_reading:
-  - link: /real_user_monitoring/guide/send-rum-custom-actions/
-    tag: ガイド
-    text: RUM カスタムアクションをコードから送信
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-    tag: ブログ
-    text: リアルユーザーモニタリング
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Datadog でビューを検索する
-  - link: /real_user_monitoring/explorer/analytics/
-    tag: Documentation
-    text: イベントに関する分析論を組み立てる
-  - link: /real_user_monitoring/dashboards/
-    tag: Documentation
-    text: RUM ダッシュボード
+- link: /real_user_monitoring/guide/send-rum-custom-actions/
+  tag: ガイド
+  text: RUM カスタムアクションをコードから送信
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: リアルユーザーモニタリング
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: イベントへの視覚化の適用
+- link: /real_user_monitoring/dashboards/
+  tag: Documentation
+  text: RUM ダッシュボード
+kind: documentation
+title: ユーザーアクションの追跡
 ---
+
+
 Real User Monitoring (RUM) Browser SDK は、ユーザージャーニー中に実行されるユーザーアクションを自動的に検出します。
 
 ユーザーアクションを自動収集することで、アプリケーション内のすべてのクリックに手動でインスツルメントしなくても、ユーザー行動のインサイトを得ることが可能になるため、以下の目的を達成できます。
@@ -157,7 +159,6 @@ window.DD_RUM &&
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /ja/real_user_monitoring/browser/modifying_data_and_context/
 [2]: /ja/real_user_monitoring/browser/data_collected/#default-attributes

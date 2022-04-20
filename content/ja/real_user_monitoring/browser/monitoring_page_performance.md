@@ -1,23 +1,24 @@
 ---
-title: ページのパフォーマンスの監視
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-    tag: ブログ
-    text: リアルユーザーモニタリング
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Datadog でビューを検索する
-  - link: /real_user_monitoring/explorer/analytics/
-    tag: Documentation
-    text: イベントに関する分析論を組み立てる
-  - link: /real_user_monitoring/dashboards/
-    tag: Documentation
-    text: RUM ダッシュボード
-  - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
-    tag: ブログ
-    text: Datadog RUM および Synthetic モニタリングでウェブに関する主な指標を監視
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: リアルユーザーモニタリング
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: イベントへの視覚化の適用
+- link: /real_user_monitoring/dashboards/
+  tag: Documentation
+  text: RUM ダッシュボード
+- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
+  tag: ブログ
+  text: Datadog RUM および Synthetic モニタリングでウェブに関する主な指標を監視
+kind: documentation
+title: ページのパフォーマンスの監視
 ---
+
 {{< img src="real_user_monitoring/browser/waterfall.png" alt="リアルユーザーモニタリングのページ読み込みウォーターフォール" style="width:75%;" >}}
 
 ## ビューのパフォーマンスメトリクス

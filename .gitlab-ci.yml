@@ -35,7 +35,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_update-golang
   tags:
     - "runner:main"
   except:
@@ -88,6 +88,7 @@ build_preview:
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
+    - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -106,43 +107,6 @@ build_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
-
-# build_preview_legacy:
-#   <<: *base_template
-#   stage: build
-#   environment: "preview"
-#   variables:
-#     URL: ${PREVIEW_DOMAIN}
-#     CONFIG: ${PREVIEW_CONFIG}
-#     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
-#     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
-#     LOCAL: "False"
-#   script:
-#     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-#     - version_static_assets
-#     - touch Makefile.config
-#     - make clean-examples
-#     - make examples
-#     - sync_integration_descriptions
-#     #- sync_integration_descriptions_cached
-#     - placehold_translations
-#     - update_preview_baseurl
-#     - build_hugo_site_new
-#     - in-isolation deploy_preview
-#     - collect_static_assets
-#     # remove service_checks json as we don't need to s3 push that..
-#     - rm -rf data/service_checks
-#     - push_site_to_s3
-#     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-#     #- remove_static_from_repo
-#     #- create_artifact
-#     #- create_artifact_untracked
-#   artifacts:
-#     paths:
-#       - ${ARTIFACT_RESOURCE}
-#       - ./integrations_data
-#   only:
-#     - /.+?\/[a-zA-Z0-9_-]+/
 
 link_checks_preview:
   <<: *base_template
@@ -170,21 +134,17 @@ link_checks_preview:
   interruptible: true
 
 missing_tms_preview:
-  image:
-    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
-    entrypoint: [ "" ]
-  tags: ["runner:main"]
+  <<: *base_template
   stage: post-deploy
-  cache: {}
   environment: "preview"
+  allow_failure: true
+  cache: {}
   variables:
     GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
-    # remove dirs we don't need to scan
-    - rm -rf ./public/fr ./public/ja ./public/api/v1/ ./public/api/v2/
-    - GOMAXPROCS=$(nproc --all) vale --glob='*.{html}' ./public
+    - check_missing_tms
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
@@ -202,8 +162,8 @@ index_algolia_preview:
   timeout: 1h 30m
   script:
     - |-
-        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
         export DISPLAY=:99
         Xvfb :99 -ac &
         echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
@@ -222,7 +182,7 @@ replica_algolia_preview:
     policy: pull
   environment: "preview"
   script:
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
   when: manual
@@ -271,6 +231,7 @@ build_live:
     - sync_integration_metrics
     - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
     - placehold_translations
+    - yarn run prebuild
     - yarn run build:live
     - in-isolation deploy_live
     - create_artifact
@@ -390,6 +351,18 @@ evaluate_missing_metrics:
   only:
     - master
 
+# TODO: update job to be scheduled/only run on master deploys when we are ready to deprecate old translations job
+manage_untracked_translations:manual:
+  <<: *base_template
+  stage: post-deploy
+  cache: {}
+  environment: "live"
+  only:
+    - master
+  script:
+    - echo "Downloading untracked translation source files..."
+    - manage_untracked_translation_files
+  when: manual
 
 manage_translations:on-schedule:
   <<: *base_template

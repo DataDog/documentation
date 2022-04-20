@@ -1,21 +1,22 @@
 ---
-title: Java ランタイムメトリクス
-kind: ドキュメント
 description: Java アプリケーションのパフォーマンスに関する詳細情報を、トレースに紐づくランタイムメトリクスと共に取得します。
 further_reading:
-  - link: tracing/connect_logs_and_traces
-    tag: ドキュメント
-    text: ログとトレースの接続
-  - link: tracing/manual_instrumentation
-    tag: ドキュメント
-    text: アプリケーションを手動でインストルメントしてトレースを作成します。
-  - link: tracing/opentracing
-    tag: ドキュメント
-    text: アプリケーション全体に Opentracing を実装します。
-  - link: tracing/visualization/
-    tag: ドキュメント
-    text: サービス、リソース、トレースの詳細
+- link: tracing/connect_logs_and_traces
+  tag: ドキュメント
+  text: ログとトレースの接続
+- link: tracing/manual_instrumentation
+  tag: ドキュメント
+  text: アプリケーションを手動でインストルメントしてトレースを作成します。
+- link: tracing/opentracing
+  tag: ドキュメント
+  text: アプリケーション全体に Opentracing を実装します。
+- link: tracing/visualization/
+  tag: ドキュメント
+  text: サービス、リソース、トレースの詳細
+kind: ドキュメント
+title: Java ランタイムメトリクス
 ---
+
 ## 自動コンフィギュレーション
 
 JVM メトリクス収集は、初期設定で Java トレーサー v0.29.0+ に有効になっています。トレースクライアントの設定パラメーターで、システムプロパティ `-Ddd.jmxfetch.enabled=false` または環境変数 `DD_JMXFETCH_ENABLED=false` を使用して無効にすることも可能です。v0.64.0+ では、`DD_RUNTIME_METRICS_ENABLED=false` 環境変数を使用して無効にすることもできます。
@@ -39,11 +40,11 @@ Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LO
 
 ## 収集データ
 
-以下のメトリクスは JVM メトリクスを有効にした後、デフォルトで収集されます。
+以下のメトリクスは JVM メトリクスを有効にした後、デフォルトで JVM プロセスごとに収集されます。
 
 {{< get-metrics-from-git "java" >}}
 
-Datadog では、APM サービス詳細画面にこれらのメトリクスを表示し、これらのメトリクスに適用された `service` および `runtime-id` タグ付きの[デフォルトの JVM ランタイムダッシュボード][7]を提供します。
+APM サービス詳細画面にこれらのメトリクスを表示するだけでなく、Datadog は[デフォルトの JVM ランタイムダッシュボード][7]を提供します。
 
 `dd.jmxfetch.config.dir` と `dd.jmxfetch.config` を使用して引き継がれる設定ファイルを使用すると、さらに JMX メトリクスを追加できます。`dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` パラメータを使用して、既存の Datadog JMX インテグレーションを個別に有効にすることもできます。これにより、Datadog の[既存の JMX 設定ファイル] [8]からコンフィギュレーションが自動的に埋め込まれます。設定の詳細については、[JMX インテグレーション][9]を参照してください。
 
@@ -55,7 +56,7 @@ Datadog では、APM サービス詳細画面にこれらのメトリクスを�
 [2]: /ja/developers/dogstatsd/#setup
 [3]: /ja/agent/docker/#dogstatsd-custom-metrics
 [4]: /ja/developers/dogstatsd/?tab=kubernetes#agent
-[5]: /ja/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[5]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
 [7]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
 [8]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics

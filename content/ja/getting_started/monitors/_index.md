@@ -1,19 +1,20 @@
 ---
-title: モニターの概要
-kind: documentation
 aliases:
-  - /ja/getting_started/application/monitors
+- /ja/getting_started/application/monitors
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
-    tag: ブログ
-    text: モニター入門 重要事項をアラート
-  - link: /monitors/create/types/metric/
-    tag: ドキュメント
-    text: メトリクスモニター
-  - link: /monitors/notify/
-    tag: ドキュメント
-    text: モニター通知
+- link: https://www.datadoghq.com/blog/monitoring-101-alerting/
+  tag: ブログ
+  text: モニター入門 重要事項をアラート
+- link: /monitors/create/types/metric/
+  tag: ドキュメント
+  text: メトリクスモニター
+- link: /monitors/notify/
+  tag: ドキュメント
+  text: モニター通知
+kind: documentation
+title: モニターの概要
 ---
+
 ## 概要
 
 [メトリクスモニター][1]は、メトリクスがしきい値を超えた、あるいは下回ったときにアラートと通知を行います。このページでは、ディスク容量不足のアラートが発生するようにメトリクスモニターをセットアップする手順を説明します。
@@ -80,12 +81,17 @@ Steps to free up disk space:
 
 片方のセクションから `@notification` を削除すると、両方のセクションから削除されます。
 
-### アクセス制限
+### アクセス許可
 
-<div class="alert alert-warning">
-RBAC のモニターアクセス制限はベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。</div>
+{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="RBAC 制限付きモニター" style="width:90%;" >}}
 
-このセクションを使用して、あなた、あなたのロールを持つ組織内の全員、または組織の特定のロールへのアクセスを制限します。ロールに関する詳細は、[RBAC][9] ドキュメントを参照してください。
+このオプションを使用して、モニターの編集をその作成者と組織内の特定のロールに制限します。ロールの詳細については、[ロールベースアクセスコントロール][9]を参照してください。
+
+## モバイルでモニターとトリアージアラートを見る
+
+[Apple App Store][11] および [Google Play Store][12] で入手できる [Datadog モバイルアプリ][10]をダウンロードすれば、モバイルのホーム画面からモニター保存ビューを閲覧したり、モニターの表示やミュートを行うことができます。これは、ラップトップやデスクトップから離れているときのトリアージに役立ちます。
+
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのインシデント">}}
 
 ## その他の参考資料
 
@@ -100,3 +106,6 @@ RBAC のモニターアクセス制限はベータ版です。アクセスをリ
 [7]: /ja/monitors/create/types/metric/?tab=threshold#set-alert-conditions
 [8]: /ja/monitors/notify/#conditional-variables
 [9]: /ja/account_management/rbac/
+[10]: /ja/mobile/
+[11]: https://apps.apple.com/app/datadog/id1391380318
+[12]: https://play.google.com/store/apps/details?id=com.datadog.app

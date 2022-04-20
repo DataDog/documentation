@@ -5,11 +5,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
+- web
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md
 display_name: Lighthouse
 draft: false
 git_integration_title: lighthouse
@@ -25,11 +25,14 @@ metric_prefix: lighthouse.
 metric_to_check: lighthouse.performance
 name: lighthouse
 public_title: Intégration Datadog/Lighthouse
-short_description: "Statistiques d'audit de Google\_Lighthouse"
+short_description: Statistiques d'audit de Google Lighthouse
 support: contrib
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Recueillez les métriques de [Google Chrome Lighthouse][1] en temps réel pour :
@@ -104,7 +107,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
       sudo yum install -y chromium
       ```
 
-      **Remarque** : cette intégration exécute Chrome/Chromium en mode headless. Il se peut que Chrome/Chromium requiert un kernel 4.4 ou ultérieur sur RHEL/CentOS pour que le mode headless fonctionne correctement.
+      **Remarque** : cette intégration exécute Chrome/Chromium en mode headless. Il se peut que Chrome/Chromium requière un kernel 4.4 ou ultérieur sur RHEL/CentOS pour que le mode headless fonctionne correctement.
 
    - [Puppeteer][11]
       + Vérifiez que Puppeteer est installé.
