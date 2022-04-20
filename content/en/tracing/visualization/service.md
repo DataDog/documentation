@@ -46,7 +46,7 @@ Enable them directly or create your own [APM monitors][3].
 
 ## Summary Cards
 
-The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, and click the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][9], where errors are automatically aggregated into issues.
+The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, click into the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][9], where errors are automatically aggregated into issues.
 
 {{< img src="tracing/visualization/service/summary_cards.jpg" alt="Summary cards"  style="width:100%;">}}
 
