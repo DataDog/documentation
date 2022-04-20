@@ -18,37 +18,37 @@ further_reading:
 
 ## Overview
 
-Sensitive data, such as credit card numbers, bank routing numbers, API keys, OAuth tokens etc., are often exposed unintentionally in application logs and trace events, which can expose your organization to financial and privacy risks.
+Sensitive data, such as credit card numbers, bank routing numbers, and API keys are often exposed unintentionally in application logs and trace events, which can expose your organization to financial and privacy risks.
 
-Often businesses are required to identify, remediate, and prevent the exposure of such sensitive data within their logs due to organizational policies, compliance requirements, industry regulations, and privacy concerns. This is especially true for industries such as banking, financial services, healthcare, and insurance among others.
+Often, businesses are required to identify, remediate, and prevent the exposure of such sensitive data within their logs due to organizational policies, compliance requirements, industry regulations, and privacy concerns. This is especially true within industries such as banking, financial services, healthcare, and insurance.
 
 ## Sensitive Data Scanner
 
-Sensitive Data Scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization.
+Sensitive Data Scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. Security and compliance teams can implement Sensitive Data Scanner as a new line of defense, helping prevent against sensitive data leaks and limiting non-compliance risks.
 
 Sensitive Data Scanner can be found under [Organization Settings][1].
 
-{{< img src="logs/sensitive_data_scanner/sensitive_data_scanner3.png" alt="Sensitive Data Scanner in Organization Settings" style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sds_main_apr_22.png" alt="Sensitive Data Scanner in Organization Settings" style="width:90%;">}}
 
-### Setting up Scanning Groups
+### Setup
 
-- **Define Scanning Groups:** Customize what data must be scanned using Pipelines. Define a query to indicate which logs must be included in the rule scope. See the [Logs search syntax page][2] for syntax on building searches.
-- **Define Scanning Rule:** Create a new rule using predefined regex patterns from Datadog’s Scanner Library or create a custom rule.
+- **Define Scanning Groups:** A scanning group consists of a filter query indicating which kinds of logs to scan, and a set of scanning rules indicating specific types of sensitive data to scan for within those logs. See the [Log Search Syntax][2] documentation to learn more about filter queries.
+- **Define Scanning Rules:** Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
 
 ### Custom Scanning Rules
 
-- **Define rule:** Specify the regex pattern to be used for matching against log events. Use sample data to verify that your regex pattern is valid.
-- **Define scope:** Specify whether you want to scan the entire log event or just specific log attributes. You can also choose to skip specific attributes from the scan.
+- **Define pattern:** Specify the regex pattern to be used for matching against log events. Test with sample data to verify that your regex pattern is valid.
+- **Define scope:** Specify whether you want to scan the entire log event or just specific log attributes. You can also choose to exclude specific attributes from the scan.
 - **Add tags:** Specify the tags you want to associate with log events where the values match the specified regex pattern. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags. These tags can then be used in searches, dashboards, and monitors.
-- **Process matching values:** Optionally, specify whether you want to redact, partially redact, or hash matching values. When redacting, specify placeholder text to replace the matching values with. When partially redacting, specify the position and length of portions to redact within matching values. Redaction, partial redaction, and hashing are all irreversible.
+- **Process matching values:** Optionally, specify whether you want to redact, partially redact, or hash matching values. When redacting, specify placeholder text to replace the matching values with. When partially redacting, specify the position (start/end) and length (# of characters) to redact within matching values. Redaction, partial redaction, and hashing are all irreversible actions.
 - **Name the rule:** Provide a human-readable name for the rule.
 
 {{< img src="logs/sensitive_data_scanner/sds_rule_apr_22.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
 
 ### Out-of-the-box Scanning Rules
 
-The Scanning Rule Library is an evergrowing collection of predefined rules maintained by Datadog for commonly detected patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. From the Library, select an out-of-the-box scanning rule and click **Add** to start customizing the rule.
-{{< img src="logs/sensitive_data_scanner/sds_library_apr_22.png" alt="Scanner Library"  style="width:90%;">}}
+The Scanning Rule Library contains an evergrowing collection of predefined rules maintained by Datadog for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
+{{< img src="logs/sensitive_data_scanner/sds_library_apr_22.png" alt="Scanning Rule Library"  style="width:90%;">}}
 
 ### Permissions
 
@@ -71,7 +71,6 @@ To access this dashboard, go to **Dashboards > Dashboards List** and search for 
 **Note:**
 - Any rules that you add or update only affect data coming into Datadog after the rule was defined.
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
-- Scrubbing and hashing of attributes in log events are irreversible changes. Verify your rules on test data before enabling on production data.
 - To turn off Sensitive Data Scanner entirely, disable each Scanning Group and Scanning Rule by setting the toggle to the **off** state.
 
 ## Further Reading
