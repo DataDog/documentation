@@ -19,7 +19,7 @@ further_reading:
   text: "Add an APM service page url to your clipboard"
 ---
 
-{{< img src="tracing/visualization/service/overview_service_page.png" alt="Detailed service page" style="width:90%;">}}
+{{< img src="tracing/visualization/service/overview_service_page.png" alt="Detailed service page" style="width:100%;">}}
 
 ## Overview
 
@@ -38,7 +38,7 @@ Consult on this page:
 
 Datadog proposes a list of monitors depending on your service type:
 
-{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors"  style="width:100%;">}}
+{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors"  style="width:90%;">}}
 
 Enable them directly or create your own [APM monitors][3].
 
@@ -48,7 +48,7 @@ Enable them directly or create your own [APM monitors][3].
 
 The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, and click the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][9], where errors are automatically aggregated into issues.
 
-{{< img src="tracing/visualization/service/summary_cards.jpg" alt="Summary cards"  style="width:90%;">}}
+{{< img src="tracing/visualization/service/summary_cards.jpg" alt="Summary cards"  style="width:100%;">}}
 
 Our [Service Level Objectives (SLOs)][10] and [Incidents][11] summaries allow you to monitor the status of SLOs and ongoing incidents, so you can keep performance goals and top of mind. Click the cards to create a new SLO on the service or declare an incident.
 
@@ -80,7 +80,7 @@ Datadog provides out-of-the-box graphs for any given Service:
     **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 [Watchdog][8] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If there is an anomaly detected, there will be an overlay on the graph and a Watchdog icon you can click for more details in a side panel.
 
-{{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs"  style="width:90%;">}}
+{{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs"  style="width:10%;">}}
 
 ### Export
 
@@ -94,7 +94,7 @@ See Requests, Latency, and Error graphs broken down by resource to identify prob
 
 Below, there’s a list of [resources][6] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
 
-{{< img src="tracing/visualization/service/resources_tab.jpg" alt="Resources"  style="width:90%;">}}
+{{< img src="tracing/visualization/service/resources_tab.jpg" alt="Resources"  style="width:100%;">}}
 
 [Refer to the dedicated resource documentation to learn more][2].
 
