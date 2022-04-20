@@ -10,18 +10,18 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - containers
+- containers
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md
+- https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md
 display_name: Agent de cluster Datadog
 draft: false
 git_integration_title: datadog_cluster_agent
 guid: 275fd66d-2440-44e5-ac30-461062cd2825
 integration_id: datadog-cluster-agent
 integration_title: Agent de cluster Datadog
-integration_version: 2.0.0
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -33,10 +33,13 @@ public_title: Intégration Agent de cluster Datadog
 short_description: Surveillez les métriques de l'Agent de cluster Datadog
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller l'[Agent de cluster Datadog][1] avec l'Agent Datadog.

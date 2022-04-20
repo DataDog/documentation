@@ -296,12 +296,6 @@ datadog:
 `kubernetes_state.container.status_report.count.terminated`
 : Describes the reason the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
-`kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
-
-`kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
-
 `kubernetes_state.pod.ready`
 : Describes whether the pod is ready to serve requests. Tags:`kube_namespace` `pod_name` `condition` (`env` `service` `version` from standard labels).
 

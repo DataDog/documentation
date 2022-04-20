@@ -66,7 +66,7 @@ AWS Lambda is the FaaS platform provided by Amazon Web Services. See the [AWS La
 [2]: https://opencontainers.org/
 [3]: /serverless/enhanced_lambda_metrics
 [4]: /serverless/libraries_integrations/library/
-[5]: /serverless/libraries_integrations/forwarder/
+[5]: /logs/guide/forwarder/
 [6]: /serverless/libraries_integrations/extension/
 [7]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [8]: /serverless/libraries_integrations/cli

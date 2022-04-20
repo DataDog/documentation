@@ -1911,7 +1911,7 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (that
             is no quotes).
 
-            Limited to events no older than 7 days.'
+            Limited to events no older than 18 hours.'
           format: int64
           type: integer
         device_name:
@@ -2017,7 +2017,7 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (that
             is no quotes).
 
-            Limited to events no older than 7 days.'
+            Limited to events no older than 18 hours'
           format: int64
           type: integer
         device_name:
@@ -3981,7 +3981,6 @@ components:
       default: apm_issue_stream
       description: Source from which to query items to display in the stream.
       enum:
-      - issue_stream
       - logs_stream
       - audit_stream
       - rum_issue_stream
@@ -3989,7 +3988,6 @@ components:
       example: apm_issue_stream
       type: string
       x-enum-varnames:
-      - ISSUE_STREAM
       - LOGS_STREAM
       - AUDIT_STREAM
       - RUM_ISSUE_STREAM
@@ -4117,10 +4115,10 @@ components:
           description: Array of tags associated with your log.
           example:
           - team:A
-          format: array
           items:
             description: Tag associated with your log.
-            format: string
+            type: string
+          type: array
         timestamp:
           description: Timestamp of your log.
           example: '2020-05-26T13:36:14Z'
@@ -11090,7 +11088,7 @@ components:
           description: The ID of the result to get.
           type: string
         retries:
-          description: Total duration in millisecond of the test.
+          description: Number of times this result has been retried.
           format: double
           type: number
         status:

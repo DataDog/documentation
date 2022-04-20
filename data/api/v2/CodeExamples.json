@@ -485,6 +485,13 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
+  "UploadIdPMetadata": [
+    {
+      "group": "organizations",
+      "suffix": "",
+      "description": "Upload IdP metadata returns \"OK\" response"
+    }
+  ],
   "ListProcesses": [
     {
       "group": "processes",
