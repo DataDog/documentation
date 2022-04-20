@@ -72,7 +72,7 @@ Datadog provides out-of-the-box graphs for any given Service:
     * The amount of **Errors per second**
     * The **% Error Rate**
 * Dependency Map:
-    * The **Dependency Map** showing upstream and downstream services
+    * The **Dependency Map** showing upstream and downstream services.
 * **Sub-services**: When there are multiple services involved, a fourth graph is available (in the same toggle option as the Dependency Map) that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. 
     
     This represents the total/relative/average time spent by traces in downstream services from the current service to the other *services* or *type*.
