@@ -201,7 +201,7 @@ For UITests, both the test target and the application running from the UITests m
 
 ### RUM Integration
 
-If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Monitoring][4] guide. An iOS RUM version >= 1.10 is needed.
+If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][4] guide. An iOS RUM version >= 1.10 is needed.
 
 
 ## Additional optional configuration
@@ -688,4 +688,4 @@ Always call `session.end()` at the end so that all the test info is flushed to D
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
 [3]: https://opentelemetry.io/
-[4]: /real_user_monitoring/ios/
+[4]: /continuous_integration/guides/rum_swift_integration/
