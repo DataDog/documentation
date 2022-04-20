@@ -139,7 +139,7 @@ You can add columns to or remove columns from this overview table and your selec
 Read more about Deployments on the service page [here][12].
 
 ### Error Tracking
-View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues, and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][9])
+View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][9])
 
 This tab has overview graphs that show which resources have the most issues, and a list of the most common issues occurring in your service. Click on an issue in the list to see details in a side panel, including its stack trace, related code versions, and total error occurrences since inception.
 
