@@ -58,7 +58,7 @@ The following custom metric naming convention must be followed:
 
 {{< whatsnext desc="There are multiple ways to send metrics to Datadog:">}}
     {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}Custom Agent check{{< /nextlink >}}
-    {{< nextlink href="/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
@@ -79,7 +79,7 @@ You can also use one of the [Datadog official and community contributed API and 
 
 [1]: /integrations/
 [2]: /account_management/billing/custom_metrics/#standard-integrations
-[3]: /metrics/dogstatsd_metrics_submission/
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [4]: /metrics/custom_metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /account_management/billing/custom_metrics/#counting-custom-metrics

@@ -249,7 +249,7 @@ Submit your COUNT type metrics from one of the following sources:
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#count
 [2]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
 [3]: /api/v1/metrics/#submit-metrics
-[4]: /metrics/dogstatsd_metrics_submission/#count
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#count
 {{% /tab %}}
 {{% tab "RATE" %}}
 
@@ -279,7 +279,7 @@ Submit your GAUGE type metrics from one of the following sources:
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=gauge
 [2]: /api/v1/metrics/#submit-metrics
-[3]: /metrics/dogstatsd_metrics_submission/#gauge
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/#gauge
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
@@ -294,8 +294,8 @@ Submitting a TIMER metric to the Datadog Agent is equivalent to submitting a HIS
 
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=histogram
-[2]: /metrics/dogstatsd_metrics_submission/#histogram
-[3]: /metrics/dogstatsd_metrics_submission/#timer
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#histogram
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/#timer
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
@@ -306,7 +306,7 @@ Submit your DISTRIBUTION type metrics from the following source:
 | [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, COUNT         |
 
 
-[1]: /metrics/dogstatsd_metrics_submission/#distribution
+[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#distribution
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -340,7 +340,7 @@ Below is a summary of all available metric submission sources and methods. This 
 [3]: /metrics/summary/
 [4]: https://statsd.readthedocs.io/en/v3.2.2/types.html#sets
 [5]: /metrics/custom_metrics/agent_metrics_submission/
-[6]: /metrics/dogstatsd_metrics_submission/
+[6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [7]: /api/v1/metrics/#submit-metrics
 [8]: /developers/dogstatsd/#how-it-works
 [9]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#count
@@ -348,8 +348,8 @@ Below is a summary of all available metric submission sources and methods. This 
 [11]: /metrics/custom_metrics/agent_metrics_submission/?tab=gauge
 [12]: /metrics/custom_metrics/agent_metrics_submission/?tab=histogram
 [13]: /metrics/custom_metrics/agent_metrics_submission/?tab=rate
-[14]: /metrics/dogstatsd_metrics_submission/#gauge
-[15]: /metrics/dogstatsd_metrics_submission/#distribution
-[16]: /metrics/dogstatsd_metrics_submission/#count
-[17]: /metrics/dogstatsd_metrics_submission/#set
-[18]: /metrics/dogstatsd_metrics_submission/#histogram
+[14]: /metrics/custom_metrics/dogstatsd_metrics_submission/#gauge
+[15]: /metrics/custom_metrics/dogstatsd_metrics_submission/#distribution
+[16]: /metrics/custom_metrics/dogstatsd_metrics_submission/#count
+[17]: /metrics/custom_metrics/dogstatsd_metrics_submission/#set
+[18]: /metrics/custom_metrics/dogstatsd_metrics_submission/#histogram
