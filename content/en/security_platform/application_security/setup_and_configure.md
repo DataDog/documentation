@@ -95,7 +95,7 @@ The Datadog Go tracing library supports Go version 1.14 and greater, on the foll
 - Alpine Linux (musl) x86-64
 - macOS (Darwin) x86-64
 
-You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS. 
+You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
 
 
 ### Supported frameworks
@@ -151,7 +151,7 @@ These are supported on the following architectures:
 - Alpine Linux (musl) x86-64, aarch64
 - macOS (Darwin) x86-64, arm64
 
-You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 ### Supported frameworks
 
@@ -170,7 +170,7 @@ The Datadog PHP library supports PHP version 7.0 and above on the following arch
 - Linux (GNU) x86-64
 - Alpine Linux (musl) x86-64
 
-You can monitor application security for PHP apps running in Docker, Kubernetes, and AWS ECS. 
+You can monitor application security for PHP apps running in Docker, Kubernetes, and AWS ECS.
 
 It supports the use of all PHP frameworks, and also the use no framework.
 
@@ -192,7 +192,7 @@ These are supported on the following architectures:
 - macOS (Darwin) x86-64
 - Windows (msvc) x86, x86-64
 
-You can monitor application security for NodeJS apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+You can monitor application security for NodeJS apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 ### Supported frameworks
 
@@ -208,7 +208,14 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 
 The data that you’re collecting with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, it may contain synthetic traffic that might cause your threat detection be inaccurate, or cause Datadog to not accurately indicate the security of your services.
 
-The Datadog Agent and some tracing libraries have options available to address these situations and modify or discard spans. See [APM Data Security][1] for details that also apply to Application Security.
+By default Application Security will collect from suspicious requests to help users understand why the request was flagged as suspicious. Before sending, Application Security will automatically scan the data for patterns and keywords that might mean the data is sensitive. If the data is deemed sensitive, it will be replaced with a `<redacted>` flag, so users will understand that although the request was suspicious, the request data could not be collected because of data security concerns.
+
+To protect user's data, sensitive data scanning is activated by default in Application Security. I can be customized using two environment variables. The scanning is based on the [RE2 syntax](https://github.com/google/re2/wiki/Syntax), so to customize scanning these environment variables should be set to a valid RE2 patten:
+
+* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - this pattern will be used to scan for key values that commonly contain suspicious data. If found, both the key and all child values will be redacted.
+* `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - this pattern will be used to scan for values patterns that could indicate suspicious data. If found, value and all child nodes it contains will be redacted.
+
+See [APM Data Security][1] for other mechanisms in the Datadog agent and libraries details that can also be used to remove sensitive data.
 
 ## Exclusion filters
 
