@@ -162,7 +162,8 @@ Use the list below to map service and DNS name to different parts of Datadog:
   aws ec2 describe-vpc-endpoint-services --service-names com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8 | jq '.ServiceDetails[0].PrivateDnsName'
   ```
 
-  This returns `metrics.agent.datadoghq.com`, the private hosted zone name that you need in order to create and associate with the VPC which the Agent traffic originates in. Overriding this record grabs all existing dynamic Agent-versioned hostnames.
+  This returns `metrics.agent.datadoghq.com`, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all existing dynamic Agent-versioned hostnames.  
+  **Note:** Agent-versioned hostnames are created by default if you do not specify a hostname in the Agent's configuration file.
 
 2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **us-east-1**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
