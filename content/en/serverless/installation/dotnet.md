@@ -139,6 +139,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 3. Set the required environment variables
 
+    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
     - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
@@ -161,16 +162,11 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}`
 
-3. Configure your Lambda function with the following environment variables:
+3. Set the required environment variables
 
-    ```
-    DD_SITE = <DD_SITE>
-    DD_API_KEY_SECRET_ARN = <DD_API_KEY_SECRET_ARN>
-    ```
-
-    - Replace `<DD_SITE>` with your [Datadog site][2] to send the telemetry to.
-    - Replace `<DD_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
-
+    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
+    - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/getting_started/site/

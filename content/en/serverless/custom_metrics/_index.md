@@ -133,7 +133,7 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
-[Install][14] the DogStatsD client for your runtime and follow the [sample code][15] to submit your custom metrics. Note: For accurate results, you must use [**distribution**](#understanding-distribution-metrics).
+[Install][12] the DogStatsD client for your runtime and follow the [sample code][13] to submit your custom metrics. Note: For accurate results, you must use [**distribution**](#understanding-distribution-metrics).
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}

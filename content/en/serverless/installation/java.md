@@ -139,6 +139,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 3. Set the required environment variables
 
+    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
     - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
@@ -162,6 +163,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 3. Set the required environment variables
 
+    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
     - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
