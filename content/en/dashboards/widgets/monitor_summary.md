@@ -57,7 +57,7 @@ Therefore in the widget you have to do `scope:$service` to then apply the templa
 To leverage `group` in the manage or triggered monitor page, you have to do `group:env:prod`.
 Therefore in the widget you have to do `group:$env` to then apply the template variable value to the widget.
 
-    {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-scope.png" alt="Scope Template variable" style="width:80%;">}}
+    {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-group.png" alt="Group Template variable" style="width:80%;">}}
 
 ## Options
 
