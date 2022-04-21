@@ -4,23 +4,23 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog ASM"
+  text: "Monitoring Threats with Datadog Application Security Monitoring"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
-  text: "Getting Started Enabling ASM Monitoring for Your Services"
+  text: "Getting Started Enabling ASM for Your Services"
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
   text: "Out-of-the-Box ASM Rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting ASM Monitoring"
+  text: "Troubleshooting ASM"
 - link: "/security_platform/guide/how-appsec-works/"
   tag: "Documentation"
-  text: "How ASM Works in Datadog"
+  text: "How Application Security Monitoring Works in Datadog"
 ---
 
 <div class="alert alert-warning">
-ASM is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
+Application Security Monitoring is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
 </div>
 
 ## Compatibility
@@ -39,7 +39,7 @@ The Datadog library supports Java JRE 1.8 and higher of both Oracle JDK and Open
 
 Datadog does not officially support any early-access versions of Java.
 
-You can monitor ASM for Java apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for Java apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 ### Supported frameworks
 
@@ -72,7 +72,7 @@ These are supported on the following architectures:
 - macOS (Darwin) x86, x86-64
 - Windows (msvc) x86, x86-64
 
-You can monitor ASM for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 ### Supported frameworks
 
@@ -95,7 +95,7 @@ The Datadog Go tracing library supports Go version 1.14 and greater, on the foll
 - Alpine Linux (musl) x86-64
 - macOS (Darwin) x86-64
 
-You can monitor ASM for Go apps running in Docker, Kubernetes, and AWS ECS.
+You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
 
 
 ### Supported frameworks
@@ -151,7 +151,7 @@ These are supported on the following architectures:
 - Alpine Linux (musl) x86-64, aarch64
 - macOS (Darwin) x86-64, arm64
 
-You can monitor ASM for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 ### Supported frameworks
 
@@ -170,7 +170,7 @@ The Datadog PHP library supports PHP version 7.0 and above on the following arch
 - Linux (GNU) x86-64
 - Alpine Linux (musl) x86-64
 
-You can monitor ASM for PHP apps running in Docker, Kubernetes, and AWS ECS.
+You can monitor application security for PHP apps running in Docker, Kubernetes, and AWS ECS.
 
 It supports the use of all PHP frameworks, and also the use no framework.
 
@@ -192,7 +192,7 @@ These are supported on the following architectures:
 - macOS (Darwin) x86-64
 - Windows (msvc) x86, x86-64
 
-You can monitor ASM for NodeJS apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for NodeJS apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 ### Supported frameworks
 
@@ -206,29 +206,29 @@ You can monitor ASM for NodeJS apps running in Docker, Kubernetes, AWS ECS, and 
 
 ## Data security considerations
 
-The data that you’re collecting with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, it may contain synthetic traffic that might cause your threat detection be inaccurate, or cause Datadog to not accurately indicate the security of your services.
+The data that you collect with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, it may contain synthetic traffic that might cause your threat detection be inaccurate, or cause Datadog to not accurately indicate the security of your services.
 
-By default ASM will collect from suspicious requests to help users understand why the request was flagged as suspicious. Before sending, ASM will automatically scan the data for patterns and keywords that might mean the data is sensitive. If the data is deemed sensitive, it will be replaced with a `<redacted>` flag, so users will understand that although the request was suspicious, the request data could not be collected because of data security concerns.
+By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans the data for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag, so you observe that although the request was suspicious, the request data could not be collected because of data security concerns.
 
-To protect user's data, sensitive data scanning is activated by default in ASM. I can be customized using two environment variables. The scanning is based on the [RE2 syntax](https://github.com/google/re2/wiki/Syntax), so to customize scanning these environment variables should be set to a valid RE2 patten:
+To protect users' data, sensitive data scanning is activated by default in ASM. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][1], so to customize scanning, set the value of these environment variables to a valid RE2 patten:
 
-* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - this pattern will be used to scan for key values that commonly contain suspicious data. If found, both the key and all child values will be redacted.
-* `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - this pattern will be used to scan for values patterns that could indicate suspicious data. If found, value and all child nodes it contains will be redacted.
+* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain suspicious data. If found, the key, all corresponding values, and any child nodes are redacted.
+* `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate suspicious data. If found, the value and all its child nodes are redacted.
 
-The following are examples of data that would be flagged as sensitive:
+The following are examples of data that are flagged as sensitive:
 
-* pwd, password, ipassword or pass_phrase
-* secret
-* key, api_key private_key or public_key
-* token
-* consumer_id, consumer_key or consumer_secret
-* sign, signed or signature
-* bearer
-* authorization
-* BEGIN PRIVATE KEY
-* ssh-rsa
+* `pwd`, `password`, `ipassword`, `pass_phrase`
+* `secret`
+* `key`, `api_key`, `private_key`, `public_key`
+* `token`
+* `consumer_id`, `consumer_key`, `consumer_secret`
+* `sign`, `signed`, `signature`
+* `bearer`
+* `authorization`
+* `BEGIN PRIVATE KEY`
+* `ssh-rsa`
 
-See [APM Data Security][1] for other mechanisms in the Datadog agent and libraries details that can also be used to remove sensitive data.
+See [APM Data Security][2] for other mechanisms in the Datadog agent and libraries details that can also be used to remove sensitive data.
 
 ## Exclusion filters
 
@@ -239,22 +239,23 @@ You can set an exclusion filter, which ignore events from a rule, to eliminate t
 
 To create an exclusion filter, do one of the following:
 
-- Click on a signal in [ASM Signals][2] and click the **Create Exclusion Filter** button in the top left corner. This method automatically generates a filter query for the targeted service.
-- Navigate to [Exclusion Filters Configuration][3] and manually configure a new exclusion filter based on your own filter query.
+- Click on a signal in [ASM Signals][3] and click the **Create Exclusion Filter** button in the top left corner. This method automatically generates a filter query for the targeted service.
+- Navigate to [Exclusion Filters Configuration][4] and manually configure a new exclusion filter based on your own filter query.
 
 **Note**: Requests (traces) matching an exclusion filter are not billed.
 
-## Disable ASM
+## Disabling Application Security Monitoring
 
-To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once removed, restart your service.
+To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once it's removed, restart your service.
 
-If you need additional help, contact [Datadog support][4].
+If you need additional help, contact [Datadog support][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/configure_data_security/
-[2]: https://app.datadoghq.com/security/appsec/signals
-[3]: https://app.datadoghq.com/security/appsec/exclusions
-[4]: /help/
+[1]: https://github.com/google/re2/wiki/Syntax
+[2]: /tracing/setup_overview/configure_data_security/
+[3]: https://app.datadoghq.com/security/appsec/signals
+[4]: https://app.datadoghq.com/security/appsec/exclusions
+[5]: /help/
