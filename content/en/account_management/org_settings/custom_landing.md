@@ -9,7 +9,7 @@ The Datadog organization landing page is the first page your users see when they
 
 As an alternative to the default page, Datadog allows administrators to set a dashboard as the landing page for the organization. A custom landing page helps a large or small organization control the narrative for their users.
 
-You can customize a dashboard with the information you want your users to see when they first log on to Datadog. Use Organization settings to set that dashboard as the custom landing page for your organization.
+You can customize a dashboard with the information you want your users to see when they first log on to Datadog. Use [Organization settings][1] to set that dashboard as the custom landing page for your organization.
 
 ## Set a custom landing page
 
