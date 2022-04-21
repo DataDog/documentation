@@ -66,3 +66,4 @@ Si vous avez besoin d'une instrumentation personnalisée pour une application sp
 [6]: http://gems.datadoghq.com/trace/docs/#Processing_Pipeline
 [7]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
 [8]: /fr/api/v1/tracing/
+
