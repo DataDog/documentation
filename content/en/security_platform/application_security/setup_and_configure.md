@@ -215,6 +215,19 @@ To protect user's data, sensitive data scanning is activated by default in ASM. 
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - this pattern will be used to scan for key values that commonly contain suspicious data. If found, both the key and all child values will be redacted.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - this pattern will be used to scan for values patterns that could indicate suspicious data. If found, value and all child nodes it contains will be redacted.
 
+The following are examples of data that would be flagged as sensitive:
+
+* pwd, password, ipassword or pass_phrase
+* secret
+* key, api_key private_key or public_key
+* token
+* consumer_id, consumer_key or consumer_secret
+* sign, signed or signature
+* bearer
+* authorization
+* BEGIN PRIVATE KEY
+* ssh-rsa
+
 See [APM Data Security][1] for other mechanisms in the Datadog agent and libraries details that can also be used to remove sensitive data.
 
 ## Exclusion filters
