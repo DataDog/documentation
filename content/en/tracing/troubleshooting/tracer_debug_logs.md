@@ -21,7 +21,7 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 
 **Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file: 
 ```
--Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>
 ```
 
 

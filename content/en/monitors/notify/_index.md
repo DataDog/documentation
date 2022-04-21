@@ -126,7 +126,7 @@ See the [list of integrations][15] that can be used to notify your team.
 
 ### Modifications
 
-An [event][16] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
+An [event][16] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
 
 ### Permissions
 

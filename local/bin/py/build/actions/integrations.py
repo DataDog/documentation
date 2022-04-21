@@ -514,6 +514,59 @@ class Integrations:
             return markdown_string
 
     @staticmethod
+    def remove_h3_markdown_section(markdown_string, h3_header_string):
+        """
+        Removes markdown content from integration readme file starting with h3 markdown string provided,
+        ending with the next h2 or h3 header or horizontal line break found in the markdown.
+        """
+        if not h3_header_string.startswith('###'):
+            return markdown_string
+
+        h3_markdown_regex = r"(^|\n)(#{3}) (\w+)"
+        h3_list = re.finditer(h3_markdown_regex, markdown_string)
+        indexes = []
+        replaced_result = ''
+
+        for match in h3_list:
+            group = match.group(0)
+            start = match.start()
+
+            if h3_header_string in group:
+                start_index = start
+                h2_h3_regex = r"(^|\n)(#{2,3}) (\w+)"
+                h2_h3_regex_matches = re.finditer(h2_h3_regex, markdown_string)
+                end_index = -1
+
+                # Find the string index of the next h2 or h3 header in markdown 
+                # so we can strip out all of the unwanted content
+                for match in h2_h3_regex_matches:
+                    if match.start() > start_index + 3:
+                        end_index = match.start()
+                        break
+
+                if end_index == -1:
+                    # Check to ensure footer is preserved
+                    horiz_line = markdown_string.find('\n---', start_index)
+
+                    if horiz_line != -1:
+                        end_index = horiz_line
+                    else:
+                        # If there isn't another h2, h3, or horizontal line break 
+                        end_index = len(markdown_string)
+
+                content_to_remove = markdown_string[start_index:end_index]
+                indexes.append([start_index, end_index])
+
+        # In case there are multiple h3 headers with the same name.
+        # There are multiple "Pricing" headers in some integrations currently,
+        # TODO: revisit this function once that is fixed.
+        if len(indexes) > 0:
+            for indices in reversed(indexes):
+                markdown_string = markdown_string[:indices[0]] + markdown_string[indices[1]:]
+
+        return markdown_string
+
+    @staticmethod
     def remove_markdown_section(markdown_string, h2_header_string):
         """
         Removes a section from markdown by deleting all content starting from provided h2_header_string argument and ending one index before the next h2 header.
@@ -635,15 +688,14 @@ class Integrations:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
                 markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
-                updated_markdown = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
-                result = updated_markdown
+                markdown_setup_removed = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
+                updated_markdown = self.remove_h3_markdown_section(markdown_setup_removed, '### Pricing')
+                is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
 
-                # is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
-
-                # if not is_marketplace_integration_markdown_valid:
-                #     raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
-                # else:
-                #     result = updated_markdown
+                if not is_marketplace_integration_markdown_valid:
+                    raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
+                else:
+                    result = updated_markdown
 
         ## Check if there is a integration tab logic in the integration file:
         if "<!-- xxx tabs xxx -->" in result:

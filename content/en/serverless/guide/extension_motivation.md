@@ -41,6 +41,6 @@ To migrate from the the Datadog Forwarder to the Datadog Lambda Extension, follo
 
 [1]: /serverless/libraries_integrations/extension/
 [2]: /serverless
-[3]: /serverless/libraries_integrations/forwarder/
+[3]: /logs/guide/forwarder/
 [4]: /serverless/libraries_integrations/extension/#overhead
 [5]: /serverless/configuration/#migrate-to-the-datadog-lambda-extension
