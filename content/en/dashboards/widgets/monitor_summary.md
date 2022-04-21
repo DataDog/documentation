@@ -35,9 +35,29 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
     {{< img src="dashboards/widgets/monitor_summary/combined_summary_type.png" alt="combined summary type" style="width:80%;">}}
 
 2. Enter a monitor query to display the monitor summary widget over a subset of your monitors.
-    - If you have template variables created in your dashboard and wish to include them in your monitor query, type the dollar sign `$` in the search bar followed by the name of the template variable. When `$` is typed in the search bar, an autocomplete list of the template variables available in your current dashboard appears for you to select your desired template variable.
 
     **Note** In addition to the facets listed in the link above, the `Group` and `Combined` summary types also support the `group` and `group_status` facets for group-level searching, similar to the [Triggered Monitors][2] page.
+    
+#### Template variables
+
+To use template variables created in your dashboard in the monitor summary search query, follow the same query format as the Manage Monitor page.
+
+**Example**
+
+1. Filtering on Monitor `scope` with a `$service` template variable.
+
+To leverage `scope` in the manage or triggered monitor page, you have to do `scope:service:web-store`.
+Therefore in the widget you have to do `scope:$service` to then apply the template variable value to the widget.
+
+    {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-scope.png" alt="Scope Template variable" style="width:80%;">}}
+
+
+2. Filtering on Monitor `group` with a `$env` template variable.
+
+To leverage `group` in the manage or triggered monitor page, you have to do `group:env:prod`.
+Therefore in the widget you have to do `group:$env` to then apply the template variable value to the widget.
+
+    {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-scope.png" alt="Scope Template variable" style="width:80%;">}}
 
 ## Options
 
