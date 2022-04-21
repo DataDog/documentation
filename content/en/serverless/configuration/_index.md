@@ -19,23 +19,28 @@ After [installing][1] Datadog serverless monitoring, you should be collecting me
 
 ## Table of contents
 
-- [Connect telemetry using tags](#connect-telemetry-using-tags)
-- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
+### Metrics
 - [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
-- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
-- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
-- [Configure logs collection](#configure-logs-collection)
-- [Configure trace collection](#configure-trace-collection)
-- [Connect logs and traces](#connect-logs-and-traces)
-- [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics](#submit-custom-metrics)
-- [Monitor your applications](#monitor-your-applications)
+
+### Logs
+- [Configure logs collection](#configure-logs-collection)
+- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
+- [Connect logs and traces](#connect-logs-and-traces)
+
+### APM
+- [Configure trace collection](#configure-trace-collection)
+- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
+- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
+- [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
+- [Link errors to your source code](#link-errors-to-your-source-code)
+
+### Others
+- [Connect telemetry using tags](#connect-telemetry-using-tags)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
-- [Propagate trace context over AWS resources
-](#propagate-trace-context-over-AWS-resources)
-- [Merge X-Ray and Datadog traces](#merge-xray-and-datadog-traces)
-- [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
 - [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
 - [Troubleshoot](#troubleshoot)
 
 ## Connect telemetry using tags
@@ -516,29 +521,23 @@ export class ExampleStack extends cdk.Stack {
 
 You can monitor your custom business logic by [submitting custom metrics][21].
 
-## Monitor your applications
-
-Datadog has some predefined monitors that you can quickly enable in the [Serverless Homepage][22]. If you are using the Datadog serverless plugin, you can also [enable default and custom monitors in serverless.yml][23].
-
-If your serverless application powers an API or webpage, you can also set up [synthetic tests][24].
-
 ## Send telemetry over PrivateLink or proxy
 
-The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in VPC without access to public internet, you can [send data over AWS PrivateLink][25] to the US1 (`datadoghq.com`) [Datadog site][26], or [send data over a proxy][27] for all other sites.
+The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in VPC without access to public internet, you can [send data over AWS PrivateLink][22] to the US1 (`datadoghq.com`) [Datadog site][23], or [send data over a proxy][24] for all other sites.
 
-If you are using the Datadog Forwarder, follow these [instructions][28].
+If you are using the Datadog Forwarder, follow these [instructions][25].
 
 ## Propagate trace context over AWS resources
 
-Datadog automatically injects the trace context into outgoing AWS SDK requests and extract the trace context from the Lambda event, in order to trace a request or transaction over distributed services. See [additional information][29].
+Datadog automatically injects the trace context into outgoing AWS SDK requests and extract the trace context from the Lambda event, in order to trace a request or transaction over distributed services. See [additional information][26].
 
 ## Merge X-Ray and Datadog traces
 
-AWS X-Ray supports tracing through certain AWS managed services such as AppSync and Step Functions, which isn't yet supported by Datadog APM natively. You can enable the [Datadog X-Ray integration][30], and merge the X-Ray traces with the Datadog native traces. See [additional details][31].
+AWS X-Ray supports tracing through certain AWS managed services such as AppSync and Step Functions, which isn't yet supported by Datadog APM natively. You can enable the [Datadog X-Ray integration][27], and merge the X-Ray traces with the Datadog native traces. See [additional details][28].
 
 ## Enable AWS Lambda code signing
 
-[Code signing for AWS Lambda][32] helps to ensure that only trusted code is deployed from your Lambda functions to AWS. When you enable code signing on your functions, AWS validates that all of the code in your deployments is signed by a trusted source, which you define from your code signing configuration.
+[Code signing for AWS Lambda][29] helps to ensure that only trusted code is deployed from your Lambda functions to AWS. When you enable code signing on your functions, AWS validates that all of the code in your deployments is signed by a trusted source, which you define from your code signing configuration.
 
 If your Lambda functions are configured to use code signing, you must add Datadog's Signing Profile ARN below to your function's code signing configuration before you can deploy Lambda functions using Lambda Layers published by Datadog.
 
@@ -548,9 +547,9 @@ arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProf
 
 ## Migrate to the Datadog Lambda extension
 
-Datadog can collect the monitoring data from your Lambda functions either using the [Forwarder Lambda function][4] or the [Lambda extension][2]. Datadog recommends the Lambda extension for new installations. If you are unsure, see [why should you migrate][33].
+Datadog can collect the monitoring data from your Lambda functions either using the [Forwarder Lambda function][4] or the [Lambda extension][2]. Datadog recommends the Lambda extension for new installations. If you are unsure, see [why should you migrate][30].
 
-To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][34]. For your convenience, the key differences are summarized below.
+To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][31]. For your convenience, the key differences are summarized below.
 
 **Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
 
@@ -607,7 +606,7 @@ To migrate, compare the [installation instructions using the Datadog Lambda Exte
 
 ## Troubleshoot
 
-If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][35].
+If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][32].
 
 ## Further Reading
 
@@ -636,17 +635,14 @@ If you have trouble configuring your installations, set the environment variable
 [19]: /logs/log_configuration/parsing/
 [20]: /integrations/guide/source-code-integration
 [21]: /serverless/custom_metrics
-[22]: https://app.datadoghq.com/functions
-[23]: https://github.com/DataDog/serverless-plugin-datadog#serverless-monitors
-[24]: /synthetics/
-[25]: /agent/guide/private-link/
-[26]: /getting_started/site/
-[27]: /agent/proxy/
-[28]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
-[29]: /serverless/distributed_tracing/serverless_trace_propagation/
-[30]: /integrations/amazon_xray/
-[31]: /serverless/distributed_tracing/serverless_trace_merging
-[32]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
-[33]: /serverless/guide/extension_motivation/
-[34]: /serverless/guide#install-using-the-datadog-forwarder
-[35]: /serverless/guide/troubleshoot_serverless_monitoring/
+[22]: /agent/guide/private-link/
+[23]: /getting_started/site/
+[24]: /agent/proxy/
+[25]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
+[26]: /serverless/distributed_tracing/serverless_trace_propagation/
+[27]: /integrations/amazon_xray/
+[28]: /serverless/distributed_tracing/serverless_trace_merging
+[29]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
+[30]: /serverless/guide/extension_motivation/
+[31]: /serverless/guide#install-using-the-datadog-forwarder
+[32]: /serverless/guide/troubleshoot_serverless_monitoring/

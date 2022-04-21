@@ -832,7 +832,7 @@ main:
     parent: serverless_installation
     identifier: serverless_installation_dotnet
     weight: 106
-  - name: Configuration
+  - name: Advanced Configurations
     url: serverless/configuration
     parent: serverless
     identifier: serverless_configuration
