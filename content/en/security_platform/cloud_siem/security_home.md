@@ -24,11 +24,9 @@ Get an overview of analyzed logs across all sources for a quick audit, or select
 
 Analyze the number of signals generated and the number of detection rules that are triggering signals, or select **Signals** to filter by log detection rules in the [Signals Explorer][7].
 
-In the Signals Explorer, click on any rule with a generated signal to inspect the signal further. Select the **Rule Details** tab to see the rule's goals and strategies, and how to triage and respond to the [security signal][8], or click on any of the event attributes listed at the top of the panel or in the **Event Attributes** tab to [filter signals by attributes][8].
-
 ## Detect threats
 
-With [real-time threat detection][9], if a rule is matched, Datadog evaluates the severity and whether anyone should be notified. See how many threats have been detected across all entities in your environment from the Security Home page. Select **High/Critical Signals** to see malicious entities in the Signals Explorer. Select any entity to analyze its generated signal for remediation and more details.
+With [real-time threat detection][8], if a rule is matched, Datadog evaluates the severity and whether anyone should be notified. See how many threats have been detected across all entities in your environment from the Security Home page. Select **High/Critical Signals** to see malicious entities in the Signals Explorer. Select any entity to analyze its generated signal for remediation and more details.
 
 ## Analyze sources
 
@@ -50,5 +48,4 @@ You can also configure new sources in this table. Click on the **Configure Sourc
 [5]: /logs/explorer/facets/#overview
 [6]: /logs/explorer/group/
 [7]: /security_platform/explorer
-[8]: /security_platform/explorer#inspect-a-security-signal
-[9]: https://www.datadoghq.com/blog/announcing-security-monitoring/#real-time-threat-detection
+[8]: https://www.datadoghq.com/blog/announcing-security-monitoring/#real-time-threat-detection
