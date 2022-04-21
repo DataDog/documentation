@@ -46,18 +46,18 @@ To use template variables created in your dashboard in the monitor summary searc
 
 1. Filtering on Monitor `scope` with a `$service` template variable.
 
-To leverage `scope` in the manage or triggered monitor page, you have to do `scope:service:web-store`.
-Therefore in the widget you have to do `scope:$service` to then apply the template variable value to the widget.
+   To leverage `scope` in the manage or triggered monitor page, you have to do `scope:service:web-store`.
+   Therefore in the widget you have to do `scope:$service` to then apply the template variable value to the widget.
 
-    {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-scope.png" alt="Scope Template variable" style="width:80%;">}}
+   {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-scope.png" alt="Scope Template variable" style="width:80%;">}}
 
 
 2. Filtering on Monitor `group` with a `$env` template variable.
 
-To leverage `group` in the manage or triggered monitor page, you have to do `group:env:prod`.
-Therefore in the widget you have to do `group:$env` to then apply the template variable value to the widget.
+   To leverage `group` in the manage or triggered monitor page, you have to do `group:env:prod`.
+   Therefore in the widget you have to do `group:$env` to then apply the template variable value to the widget.
 
-    {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-group.png" alt="Group Template variable" style="width:80%;">}}
+   {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-group.png" alt="Group Template variable" style="width:80%;">}}
 
 ## Options
 
