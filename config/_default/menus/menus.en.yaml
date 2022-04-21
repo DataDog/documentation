@@ -953,17 +953,17 @@ main:
     identifier: metrics_custom_metrics
     weight: 7
   - name: Metric Type Modifiers
-    url: metrics/custom_metrics/type_modifiers
+    url: metrics/custom_metrics/type_modifiers/
     parent: metrics_custom_metrics
     identifier: metrics_modifiers
     weight: 701
   - name: 'Submission - Agent Check '
-    url: metrics/custom_metrics/agent_metrics_submission
+    url: metrics/custom_metrics/agent_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_agent
     weight: 702
   - name: Submission - DogStatsD
-    url: metrics/custom_metrics/dogstatsd_metrics_submission
+    url: metrics/custom_metrics/dogstatsd_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_dogstatsd
     weight: 703
