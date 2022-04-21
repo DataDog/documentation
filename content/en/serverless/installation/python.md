@@ -637,7 +637,7 @@ If you have trouble collecting monitoring data after following the instructions 
 
 [1]: https://app.datadoghq.com/functions
 [2]: /serverless/libraries_integrations/extension/#tagging
-[3]: /serverless/libraries_integrations/forwarder
+[3]: /logs/guide/forwarder/
 [4]: /serverless/custom_metrics?tab=python
 [5]: /tracing/custom_instrumentation/python/
 [6]: /serverless/libraries_integrations/extension/#vpc
