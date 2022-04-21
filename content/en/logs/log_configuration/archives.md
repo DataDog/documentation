@@ -119,11 +119,11 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-Add the following two permission statements to your IAM policies attached to the role for the AWS Integration. Edit the bucket names and, if desired, specify the paths that contain your log archives. 
+[Create a policy][1] with the following two permission statements, and attach it to the role for the AWS Integration. Edit the bucket names and, if desired, specify the paths that contain your log archives.
 
 **Notes**:
 
-* The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][1].
+* The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
 * The `PutObject` permission is sufficient for uploading archives.
 
 
@@ -153,7 +153,18 @@ Add the following two permission statements to your IAM policies attached to the
 }
 ```
 
-[1]: /logs/archives/rehydrating/
+#### Attach the policy to the Datadog integration role
+ 
+Attach the new policy to the Datadog integration role.
+ 
+1. Navigate to **Roles** in the AWS IAM console.
+2. Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.
+3. Click **Attach policies**.
+4. Enter the name of the policy created above.
+5. Click **Attach policy**.
+ 
+[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[2]: /logs/archives/rehydrating/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
