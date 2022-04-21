@@ -58,28 +58,94 @@ Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metr
 1. Follow the general [serverless installation instructions][8] appropriate for your Lambda runtime.
 1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false`.
 1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
-1. Import and use the helper function from the Datadog Lambda Library, such as `lambda_metric` or `sendDistributionMetric`, to submit your custom metrics following the [sample code](#custom-metrics-sample-code).
+1. Follow the sample code or instructions belows to submit your custom metric. 
 
-If your Lambda function is running in a VPC, ensure that your function can reach Datadog API endpoints either through the public internet, [PrivateLink][9] or a [proxy][10].
+{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,other" >}}
+{{< programming-lang lang="python" >}}
+
+```python
+from datadog_lambda.metric import lambda_metric
+
+def lambda_handler(event, context):
+    lambda_metric(
+        "coffee_house.order_value",             # Metric name
+        12.45,                                  # Metric value
+        tags=['product:latte', 'order:online']  # Associated tags
+    )
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="nodeJS" >}}
+
+```javascript
+const { sendDistributionMetric } = require('datadog-lambda-js');
+
+async function myHandler(event, context) {
+    sendDistributionMetric(
+        'coffee_house.order_value', // Metric name
+        12.45,                      // Metric value
+        'product:latte',            // First tag
+        'order:online'              // Second tag
+    );
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+```go
+package main
+
+import (
+  "github.com/aws/aws-lambda-go/lambda"
+  "github.com/DataDog/datadog-lambda-go"
+)
+
+func main() {
+  lambda.Start(ddlambda.WrapFunction(myHandler, nil))
+}
+
+func myHandler(ctx context.Context, event MyEvent) (string, error) {
+  ddlambda.Distribution(
+    "coffee_house.order_value",     // Metric name
+    12.45,                          // Metric value
+    "product:latte", "order:online" // Associated tags
+  )
+}
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+```ruby
+require 'datadog/lambda'
+
+def handler(event:, context:)
+    # You only need to wrap your function handler (Not helper functions).
+    Datadog::Lambda.wrap(event, context) do
+        Datadog::Lambda.metric(
+          'coffee_house.order_value',         # Metric name
+          12.45,                              # Metric value
+          "product":"latte", "order":"online" # Associated tags
+        )
+    end
+end
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="other" >}}
+
+[Install][14] the DogStatsD client for your runtime and follow the [sample code][15] to submit your custom metrics. Note: For accurate results, you must use [**distribution**](#understanding-distribution-metrics).
+
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## With the Datadog Forwarder
 
-Datadog recommends using the [Datadog Forwarder Lambda][11] to submit custom metrics from Lambda runtimes that are not yet supported by the Datadog Lambda Extension.
+Datadog recommends using the [Datadog Forwarder Lambda][9] to submit custom metrics from Lambda runtimes that are not yet supported by the Datadog Lambda Extension.
 
-1. Follow the general [serverless installation instructions][8] to configure your Lambda function, install the Datadog Lambda Library and the Datadog Forwarder Lambda function, and subscribe the Forwarder to your function's log group.
+1. Follow the general [serverless installation instructions][8] to instrument your Lambda function using the Datadog Forwarder Lambda function.
 1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false` on your own Lambda function.
 1. If you are not interested in collecting logs from your Lambda function, set the Forwarder's CloudFormation stack parameter `DdForwardLog` to `false`.
-1. Import and use the helper function from the Datadog Lambda Library, such as `lambda_metric` or `sendDistributionMetric`, to submit your custom metrics following the [sample code](#custom-metrics-sample-code).
-
-If the Datadog Lambda Library is not available for your runtime, you can print metrics to CloudWatch logs in the expected JSON format on your own. Select the "Other" tab from the [sample code](#custom-metrics-sample-code) section.
-
-## Custom metrics sample code
-
-**Note:** The arguments to the custom metrics reporting methods have the following requirements:
-
-- `<METRIC_NAME>` uniquely identifies your metric and follows the [metric naming policy][12].
-- `<METRIC_VALUE>` MUST be a number (that is, integer or float).
-- `<TAG_LIST>` is optional and formatted, for example: `['owner:Datadog', 'env:demo', 'cooltag']`.
+1. Import and use the helper function from the Datadog Lambda Library, such as `lambda_metric` or `sendDistributionMetric`, to submit your custom metrics following the sample code below.
 
 {{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,other" >}}
 {{< programming-lang lang="python" >}}
@@ -94,8 +160,7 @@ def lambda_handler(event, context):
         tags=['product:latte', 'order:online']  # Associated tags
     )
 
-    # Submit a metric with a timestamp that is within the last 20 minutes,
-    # only supported when using the Forwarder Lambda
+    # Submit a metric with a timestamp that is within the last 20 minutes
     lambda_metric(
         "coffee_house.order_value",             # Metric name
         12.45,                                  # Metric value
@@ -117,8 +182,7 @@ async function myHandler(event, context) {
         'order:online'              // Second tag
     );
 
-    // Submit a metric with a timestamp that is within the last 20 minutes,
-    // only supported when using the Forwarder Lambda
+    // Submit a metric with a timestamp that is within the last 20 minutes
     sendDistributionMetricWithDate(
         'coffee_house.order_value', // Metric name
         12.45,                      // Metric value
@@ -126,10 +190,6 @@ async function myHandler(event, context) {
         'order:online'              // Second tag
         new Date(Date.now()),       // date
     );
-    return {
-        statusCode: 200,
-        body: 'hello, dog!'
-    };
 }
 ```
 {{< /programming-lang >}}
@@ -144,14 +204,7 @@ import (
 )
 
 func main() {
-  // You only need to wrap your function handler (Not helper functions).
   lambda.Start(ddlambda.WrapFunction(myHandler, nil))
-  /* OR with manual configuration options
-  lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
-    BatchInterval: time.Second * 15
-    APIKey: "my-api-key",
-  }))
-  */
 }
 
 func myHandler(ctx context.Context, event MyEvent) (string, error) {
@@ -161,8 +214,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
     "product:latte", "order:online" // Associated tags
   )
 
-  // Submit a metric with a timestamp that is within the last 20 minutes,
-  // only supported when using the Forwarder Lambda
+  // Submit a metric with a timestamp that is within the last 20 minutes
   ddlambda.MetricWithTimestamp(
     "coffee_house.order_value",     // Metric name
     12.45,                          // Metric value
@@ -187,15 +239,13 @@ def handler(event:, context:)
           "product":"latte", "order":"online" # Associated tags
         )
 
-        # Submit a metric with a timestamp that is within the last 20 minutes,
-        # only supported when using the Forwarder Lambda
+        # Submit a metric with a timestamp that is within the last 20 minutes
         Datadog::Lambda.metric(
           'coffee_house.order_value',         # Metric name
           12.45,                              # Metric value
           time: Time.now.utc,                 # Timestamp
           "product":"latte", "order":"online" # Associated tags
         )
-        return { statusCode: 200, body: 'Hello World' }
     end
 end
 ```
@@ -254,7 +304,7 @@ For example:
 
 **Note**: If you are migrating to one of the recommended solutions, you'll need to start instrumenting your custom metrics under **new metric names** when submitting them to Datadog. The same metric name cannot simultaneously exist as both distribution and non-distribution metric types.
 
-This requires the following AWS permissions in your [Datadog IAM policy][13].
+This requires the following AWS permissions in your [Datadog IAM policy][10].
 
 | AWS Permission            | Description                                                 |
 | ------------------------- | ----------------------------------------------------------- |
@@ -274,7 +324,7 @@ Where:
 - `<UNIX_EPOCH_TIMESTAMP>` is in seconds, not milliseconds.
 - `<METRIC_VALUE>` MUST be a number (that is, integer or float).
 - `<METRIC_TYPE>` is `count`, `gauge`, `histogram`, or `check`.
-- `<METRIC_NAME>` uniquely identifies your metric and follows the [metric naming policy][12].
+- `<METRIC_NAME>` uniquely identifies your metric and follows the [metric naming policy][11].
 - `<TAG_LIST>` is optional, comma separated, and must be preceded by `#`. The tag `function_name:<name_of_the_function>` is automatically applied to custom metrics.
 
 **Note**: The sum for each timestamp is used for counts and the last value for a given timestamp is used for gauges. It is not recommended to print a log statement every time you increment a metric, as this increases the time it takes to parse your logs. Continually update the value of the metric in your code, and print one log statement for that metric before the function finishes.
@@ -287,8 +337,6 @@ Where:
 [6]: /logs/logs_to_metrics/
 [7]: /tracing/generate_metrics/
 [8]: /serverless/installation/
-[9]: /agent/guide/private-link/
-[10]: /agent/proxy/
-[11]: /serverless/forwarder/
-[12]: /metrics/
-[13]: /integrations/amazon_web_services/?tab=roledelegation#datadog-aws-iam-policy
+[9]: /serverless/forwarder/
+[10]: /integrations/amazon_web_services/?tab=roledelegation#datadog-aws-iam-policy
+[11]: /metrics/
