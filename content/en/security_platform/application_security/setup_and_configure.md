@@ -208,14 +208,14 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 
 The data that you collect with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, it may contain synthetic traffic that might cause your threat detection be inaccurate, or cause Datadog to not accurately indicate the security of your services.
 
-By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans the data for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag, so you observe that although the request was suspicious, the request data could not be collected because of data security concerns.
+By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag, so you observe that although the request was suspicious, the request data could not be collected because of data security concerns.
 
 To protect users' data, sensitive data scanning is activated by default in ASM. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][1], so to customize scanning, set the value of these environment variables to a valid RE2 patten:
 
-* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain suspicious data. If found, the key, all corresponding values, and any child nodes are redacted.
-* `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate suspicious data. If found, the value and all its child nodes are redacted.
+* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the key, all corresponding values, and any child nodes are redacted.
+* `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
 
-The following are examples of data that are flagged as sensitive:
+The following are examples of data that are flagged as sensitive by default:
 
 * `pwd`, `password`, `ipassword`, `pass_phrase`
 * `secret`
@@ -228,7 +228,7 @@ The following are examples of data that are flagged as sensitive:
 * `BEGIN PRIVATE KEY`
 * `ssh-rsa`
 
-See [APM Data Security][2] for other mechanisms in the Datadog agent and libraries details that can also be used to remove sensitive data.
+See [APM Data Security][2] for information about other mechanisms in the Datadog Agent and libraries that can also be used to remove sensitive data.
 
 ## Exclusion filters
 
