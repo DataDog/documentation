@@ -2970,6 +2970,10 @@ main:
     url: data_security/synthetics/
     parent: data_security
     weight: 4
+  - name: Guides
+    url: data_security/guide/
+    parent: data_security
+    weight: 5
   - name: Help
     url: help/
     pre: info-fill
