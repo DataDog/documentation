@@ -3985,6 +3985,7 @@ components:
       - audit_stream
       - rum_issue_stream
       - apm_issue_stream
+      - trace_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -3992,6 +3993,7 @@ components:
       - AUDIT_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - TRACE_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -22775,6 +22777,10 @@ paths:
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
         - **`#`** an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Only available on US1-FED, US3, US5 and in closed beta on EU and
+        US1.
 
 
         **Process Alert Query**

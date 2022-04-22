@@ -226,6 +226,11 @@
       "group": "dashboards",
       "suffix": "_2921337351",
       "description": "Create a new dashboard with trace_service widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2618036642",
+      "description": "Create a new dashboard with trace_stream widget"
     }
   ],
   "DeleteDashboard": [
