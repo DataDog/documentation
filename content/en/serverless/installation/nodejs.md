@@ -242,7 +242,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
     - Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 
-    **Note**: If you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
+    **Note**: If your Lambda function runs on `arm64`, you must either build your container image in an arm64-based Amazon Linux environment or [apply the Datadog wrapper in your function code][2] instead. You may also need to do that if you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection.
 
 4. Configure the Datadog site and API key
 
@@ -308,7 +308,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
     - Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 
-    **Note**: If you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
+    **Note**: If your Lambda function runs on `arm64` and the `datadog-lambda-js` library is installed as a NPM package (option B of step 1), you must [apply the Datadog wrapper in your function code][2] instead. You may also need to do that if you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection.
 
 4. Configure Datadog site and API key
 

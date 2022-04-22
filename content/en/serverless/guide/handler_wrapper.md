@@ -5,7 +5,7 @@ kind: documentation
 
 For Python and Node.js Lambda functions, in order to instrument individual invocations, the Datadog Lambda library needs to wrap around your Lambda handler function. This is achieved by setting your function's handler to the Datadog handler function, such as `datadog_lambda.handler.handler`, and setting the environment variable `DD_LAMBDA_HANDLER` with your original handler function to be called by the Datadog handler.
 
-If you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can apply the Datadog wrapper in your function code instead.
+If your Lambda function configuration is incompatible with the Datadog handler redirection, you can apply the Datadog wrapper in your function code instead.
 
 1. Follow the "Custom" installation instructions for [Python][1] or [Node.js][2] to install the Datadog serverless monitoring
 2. Skip the step to configure the handler function
@@ -23,10 +23,15 @@ If you are using a 3rd-party security or monitoring tool that is incompatible wi
     ```js
     // for node.js
     const { datadog } = require("datadog-lambda-js");
-    const tracer = require("dd-trace").init({});
+    const tracer = require("dd-trace").init({
+      // optional tracer options
+    });
 
     module.exports.myHandler = datadog(myHandler, {
       // my function code
+    }, {
+      // optional datadog config, e.g., custom trace context extractor
+      traceExtractor: () => {},
     });
     ```
     
