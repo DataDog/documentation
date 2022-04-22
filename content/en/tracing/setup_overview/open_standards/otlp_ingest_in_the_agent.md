@@ -154,14 +154,10 @@ experimental:
 
    For gRPC:
    ```
-   --set 'agents.containers.agent.ports[0].containerPort=4317,agents.containers.agent.ports[0].hostPort=4317,agents.containers.agent.ports[0].name=traceportgrpc,agents.containers.agent.ports[0].protocol=TCP' 
-
    --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT,datadog.env[0].value=0.0.0.0:4317"
    ```
    For HTTP:
    ```
-   --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
-
    --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:4318"
    ```
 
@@ -181,7 +177,18 @@ experimental:
        value: "0.0.0.0:4318"
    ```
 
-3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the core Agent container:
+3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the core Agent container. You can either use `set` commands:
+
+   For gRPC:
+   ```
+   --set 'agents.containers.agent.ports[0].containerPort=4317,agents.containers.agent.ports[0].hostPort=4317,agents.containers.agent.ports[0].name=traceportgrpc,agents.containers.agent.ports[0].protocol=TCP' 
+   ```
+   For HTTP:
+   ```
+   --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
+   ```
+
+   Or set them in the `agents.containers.agent.ports` parameter of the `values.yaml` file:
 
    For gRPC:
    ```
