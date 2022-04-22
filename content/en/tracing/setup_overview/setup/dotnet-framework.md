@@ -455,23 +455,25 @@ The following configuration variables are for features that are available for us
 
 ### Headers extraction and injection
 
-Datadog APM tracer supports [B3][8] and [W3C][9] headers extraction and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][8] and [W3C][9] headers extraction and injection for distributed tracing.
 
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. The .NET Tracer supports four styles:
+You can configure injection and extraction styles for distributed headers. 
+
+The .NET Tracer supports the following styles:
 
 - Datadog: `Datadog`
 - B3: `B3`
 - W3C: `TraceParent`
 - B3 Single Header: `B3SingleHeader` or `B3 single header`
 
-Injection and extraction styles can be configured using:
+You can use the following environment variables to configure injection and extraction styles:
 
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+- `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
+- `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
 
-The values of these environment variables are comma separated lists of header styles that are enabled for injection or extraction. By default only `Datadog` injection style is enabled.
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `Datadog` injection style is enabled.
 
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+If multiple extraction styles are enabled, the extraction attempt is completed in order of configured styles, and uses the first successful extracted value.
 
 ## Custom instrumentation
 

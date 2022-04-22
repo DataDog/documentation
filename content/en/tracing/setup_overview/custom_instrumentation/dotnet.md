@@ -122,7 +122,7 @@ using (var parentScope =
 
 ### Headers extraction and injection
 
-Datadog APM tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing. You can find more details on this in the [setup documentation][7].
+The Datadog APM Tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing. For more information, see the [setup documentation][7].
 
 Headers extraction and injection will be transparent in most cases.
 Though, in some rare cases the span context can be lost and only a custom implementation will be able to fix it.
@@ -171,7 +171,7 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
 
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][8] page.
+You can exclude traces based on the resource name to remove Synthetics traffic such as health checks. For more information about security and additional configurations, see [Configure the Datadog Agent or Tracer for Data Security][8].
 
 ## Further Reading
 
