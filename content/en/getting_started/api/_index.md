@@ -32,7 +32,8 @@ Start by [logging into Postman][4]. Datadog recommends [downloading the Postman 
 <div class="postman-run-button"
 data-postman-action="collection/fork"
 data-postman-var-1="7274195-5d3dff85-334d-45f5-a5cc-68c1f4908095"
-data-postman-collection-url="entityId=7274195-5d3dff85-334d-45f5-a5cc-68c1f4908095&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"></div>
+data-postman-collection-url="entityId=7274195-5d3dff85-334d-45f5-a5cc-68c1f4908095&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
