@@ -247,7 +247,7 @@ if ((span instanceof MutableSpan)) {
 {{< programming-lang lang="dotnet" >}}
 
 The .NET tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For information and options, read [the .NET tracer documentation][1].
-
+<p></p>
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace#user-identification
 {{< /programming-lang >}}
@@ -255,7 +255,7 @@ The .NET tracer package provides the `SetUser()` function, which allows you to m
 {{< programming-lang lang="go" >}}
 
 The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For information and options, read [the Go tracer documentation][1].
-
+<p></p>
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
 {{< /programming-lang >}}
