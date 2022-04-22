@@ -30,6 +30,10 @@ Supported test frameworks:
 
 [Install the Datadog Agent to collect tests data][4].
 
+<div class="alert alert-warning">
+Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/javascript#agentless-beta">Agentless instructions</a> on this page.
+</div>
+
 ## Installing the JavaScript tracer
 
 To install the [JavaScript tracer][5], run:
@@ -250,16 +254,34 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
+## Agentless (Beta)
+
+To instrument your test suite without requiring an Agent, configure the following environment variables:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED` (Required)
+: Enables or disables Agentless mode.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][8] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+Additionally, configure which [Datadog site][7] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
+
+`DD_SITE` (Required)
+: The [Datadog site][9] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][9].
+[Mocha >=9.0.0][10] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][11].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
 
-If you want visibility into the browser process, consider using [Real User Monitoring][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][11] guide.
+If you want visibility into the browser process, consider using [RUM & Session Replay][12]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][13] guide.
 
 ## Best practices
 
@@ -278,14 +300,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][12] instead:
+And use [`test.each`][14] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][13]:
+For `mocha`, use [`mocha-each`][15]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -311,9 +333,11 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [5]: https://github.com/DataDog/dd-trace-js
 [6]: /tracing/setup_overview/setup/nodejs
 [7]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
-[8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: /real_user_monitoring/browser/
-[11]: /continuous_integration/guides/rum_integration/
-[12]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[13]: https://github.com/ryym/mocha-each
+[8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: /getting_started/site/
+[10]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[11]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[12]: /real_user_monitoring/browser/
+[13]: /continuous_integration/guides/rum_integration/
+[14]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[15]: https://github.com/ryym/mocha-each
