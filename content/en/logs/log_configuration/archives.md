@@ -159,7 +159,7 @@ Attach the new policy to the Datadog integration role.
  
 1. Navigate to **Roles** in the AWS IAM console.
 2. Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.
-3. Click **Attach policies**.
+3. Click **Add permissions**, and then **Attach policies**.
 4. Enter the name of the policy created above.
 5. Click **Attach policy**.
  
