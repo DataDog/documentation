@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Session Replay's Browser Dev Tools are built-in debugging tools that can help you troubleshoot issues in your applications. There is no additional configuration needed for Dev Tools. 
+Session Replay's Browser Dev Tools are built-in debugging tools that can help you troubleshoot issues in your applications. You do not need to configure anything to use Browser Dev Tools. 
 
 ## Browser Dev Tools
 
