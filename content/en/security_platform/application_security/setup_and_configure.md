@@ -287,18 +287,42 @@ trace.set_tag('usr.role', 'admin')
 trace.set_tag('usr.scope', 'read:message, write:files')
 ```
 
-
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
 
+Use the the PHP tracer's API for adding custom tags to a root span, and add user information so that you can monitor authenticated requests in the application.
+
+User monitoring tags are applied to the `meta` section of the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+
+The example below shows how to obtain the root span and add the relevant user monitoring tags:
+
+```php
+<?php
+$rootSpan = \DDTrace\root_span();
+
+ // Required unique identifier of the user.
+$rootSpan->meta['usr.id'] = ‘123456789’;
+
+// All other fields are optional.
+$rootSpan->meta['usr.name'] = ‘Jean Example’;
+$rootSpan->meta['usr.email'] = ‘jean.example@example.com’;
+$rootSpan->meta['usr.session_id'] = ‘987654321’;
+$rootSpan->meta['usr.role'] = ‘admin’;
+$rootSpan->meta['usr.scope'] = ‘read:message, write:files’;
+?>
+```
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
 
+The Node tracer package provides the `tracer.setUser(user)` function, which allows you to monitor authenticated requests by adding user information to the trace. For information and options, read [the NodeJS tracer documentation][1].
 
+<p></p>
+
+
+[1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
