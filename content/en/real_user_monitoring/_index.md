@@ -92,6 +92,10 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 Watch [browser recordings][5] of real users interacting with your website.
 
+### Developer tools
+
+Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][6].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -101,3 +105,4 @@ Watch [browser recordings][5] of real users interacting with your website.
 [3]: /real_user_monitoring/connect_rum_and_traces/
 [4]: /real_user_monitoring/error_tracking/
 [5]: /real_user_monitoring/session_replay/
+[6]: /real_user_monitoring/session_replay/developer_tools/
