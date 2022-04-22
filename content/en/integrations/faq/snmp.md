@@ -5,7 +5,7 @@ private: true
 ---
 
 <div class="alert alert-danger">
-This version of the SNMP check works with Agent versions < 6.15. For the latest version, see the <a href="/integrations/snmp">SNMP integration documentation</a>.
+This version of the SNMP check works with Agent versions < 6.15. For the latest version, see the <a href="/network_monitoring/devices">Network Device Monitoring documentation</a>.
 </div>
 
 ## Overview

@@ -187,7 +187,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/libraries_integrations/forwarder/
+[1]: /logs/guide/forwarder/
 [2]: https://aws.amazon.com/cloudtrail/
 [3]: /api/latest/aws-integration/#create-an-aws-integration
 [4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/index.html
