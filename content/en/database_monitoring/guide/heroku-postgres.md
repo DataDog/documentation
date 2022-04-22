@@ -65,10 +65,10 @@ Finally, we configure the Datadog agent to enable the Postgres check using the n
 ```shell
 # Ensure that you are in the root directory of your application
 # Create the folder for the integrations configuration in your application code
-mkdir -p datadog/conf.d/
+mkdir -p datadog/conf.d/postgres.d
 ```
 
-Create a configuration file called `postgres.yaml` with the following contents (do not replace with your credentials, as this is done as part of the prerun script):
+Create a configuration file called `datadog/conf.d/postgres.d/conf.yaml` with the following contents (do not replace with your credentials, as this is done as part of the prerun script):
 
 ```yaml
 init_config:
