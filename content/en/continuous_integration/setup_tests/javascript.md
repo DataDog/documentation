@@ -31,7 +31,7 @@ Supported test frameworks:
 [Install the Datadog Agent to collect tests data][4].
 
 <div class="alert alert-warning">
-Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/javascript#agentless-beta">instructions</a> on this page.
+Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/javascript#agentless-beta">Agentless instructions</a> on this page.
 </div>
 
 ## Installing the JavaScript tracer
@@ -266,7 +266,7 @@ To instrument your test suite without requiring an Agent, configure the followin
 : The [Datadog API key][8] used to upload the test results.<br/>
 **Default**: `(empty)`
 
-Additionally, configure which [Datadog site][7] to which you want to send data. Your Datadog site is: {{< region-param key="dd_site" >}}.
+Additionally, configure which [Datadog site][7] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
 
 `DD_SITE` (Required)
 : The [Datadog site][9] to upload results to.<br/>
@@ -281,7 +281,7 @@ Additionally, configure which [Datadog site][7] to which you want to send data. 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
 
-If you want visibility into the browser process, consider using [Real User Monitoring][12]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][13] guide.
+If you want visibility into the browser process, consider using [RUM & Session Replay][12]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][13] guide.
 
 ## Best practices
 
