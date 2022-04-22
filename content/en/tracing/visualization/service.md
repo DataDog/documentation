@@ -58,7 +58,7 @@ The [Watchdog Insights][8] carousel surfaces anomalies detected on specific tags
 
 ## Out-of-the-box graphs
 
-Datadog provides out-of-the-box graphs for any given Service:
+Datadog provides [out-of-the-box graphs][18] for any given Service:
 
 * Requests - Choose to display:
     *  The **Total amount of requests and errors**
@@ -80,7 +80,7 @@ Datadog provides out-of-the-box graphs for any given Service:
     **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 [Watchdog][8] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If there is an anomaly detected, there will be an overlay on the graph and a Watchdog icon you can click for more details in a side panel.
 
-{{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs"  style="width:10%;">}}
+{{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs"  style="width:100%;">}}
 
 ### Export
 
@@ -195,3 +195,4 @@ View common patterns in your service’s logs, and use facets like status in the
 [15]: /tracing/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
+[18]: /tracing/guide/metrics_namespace/
