@@ -10,7 +10,7 @@ further_reading:
   text: 'Java Datadog Library source code'
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
-  text: "OOTB  Monitoring Rules"
+  text: "OOTB Application Security Monitoring Rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting Application Security Monitoring"

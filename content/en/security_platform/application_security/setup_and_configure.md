@@ -224,7 +224,7 @@ To create an exclusion filter, do one of the following:
 
 **Note**: Requests (traces) matching an exclusion filter are not billed.
 
-## Disable ASM
+## Disabling Application Security Monitoring
 
 To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once removed, restart your service.
 

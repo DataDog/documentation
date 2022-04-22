@@ -26,7 +26,7 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-2. **Enable ASM Monitoring** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
+2. **Enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
    ```
    $target=[System.EnvironmentVariableTarget]::Process
    [System.Environment]::SetEnvironmentVariable("DD_APPSEC_ENABLED","true",$target)
