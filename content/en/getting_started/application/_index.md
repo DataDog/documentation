@@ -97,7 +97,7 @@ In the Event Explorer, filter your events by facets or search queries. Group or 
 
 ## Monitors
 
-[Monitors][14] provide alerts and notifications based on metric thresholds, integration availability, network endpoints, and more.
+[Monitors][16] provide alerts and notifications based on metric thresholds, integration availability, network endpoints, and more.
 
 - Use any metric reporting to Datadog
 - Set up multi-alerts by device, host, and more
@@ -110,33 +110,33 @@ In the Event Explorer, filter your events by facets or search queries. Group or 
 
 {{< img src="getting_started/npm.png" alt="NPM" >}}
 
-Datadog [Network Performance Monitoring][15] (NPM) gives you visibility into your network traffic across any tagged object in Datadog: from containers to hosts, services, and availability zones. Group by anything—from datacenters to teams to individual containers. Use tags to filter traffic by source and destination. The filters then aggregate into flows, each showing traffic between one source and one destination, through a customizable network page and network map. Each flow contains network metrics such as throughput, bandwidth, retransmit count, and source/destination information down to the IP, port, and PID levels. It then reports key metrics such as traffic volume and TCP retransmits.
+Datadog [Network Performance Monitoring][17] (NPM) gives you visibility into your network traffic across any tagged object in Datadog: from containers to hosts, services, and availability zones. Group by anything—from datacenters to teams to individual containers. Use tags to filter traffic by source and destination. The filters then aggregate into flows, each showing traffic between one source and one destination, through a customizable network page and network map. Each flow contains network metrics such as throughput, bandwidth, retransmit count, and source/destination information down to the IP, port, and PID levels. It then reports key metrics such as traffic volume and TCP retransmits.
 
 ## RUM & Session Replay
 
 {{< img src="getting_started/rum.png" alt="RUM" >}}
 
-Datadog [Real User Monitoring][16] (RUM) allows you to visualize and analyze real-time user activities and experiences. With [Session Replay][17], you can capture and view the web browsing sessions of your users to better understand their behavior. In the RUM Explorer, you can not only visualize load times, frontend errors, and page dependencies, but also you can correlate business and application metrics to troubleshoot issues with application, infrastructure, and business metrics in one dashboard. 
+Datadog [Real User Monitoring][18] (RUM) allows you to visualize and analyze real-time user activities and experiences. With [Session Replay][19], you can capture and view the web browsing sessions of your users to better understand their behavior. In the RUM Explorer, you can not only visualize load times, frontend errors, and page dependencies, but also you can correlate business and application metrics to troubleshoot issues with application, infrastructure, and business metrics in one dashboard. 
 
 ## Serverless
 
-[Serverless][18] lets you write event-driven code and upload it to a cloud provider, which manages all of the underlying compute resources. Datadog Serverless brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view, so that you can optimize performance by filtering to functions that are generating errors, high latency, or cold starts.
+[Serverless][20] lets you write event-driven code and upload it to a cloud provider, which manages all of the underlying compute resources. Datadog Serverless brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view, so that you can optimize performance by filtering to functions that are generating errors, high latency, or cold starts.
 
 ## Cloud SIEM
 
 {{< img src="getting_started/security.png" alt="security" >}}
 
-Datadog [Cloud SIEM][19] (Security Information and Event Management) automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
+Datadog [Cloud SIEM][21] (Security Information and Event Management) automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
 
 ## Synthetic Monitoring
 
 {{< img src="getting_started/synthetics.png" alt="Synthetics" >}}
 
-Datadog [Synthetic Monitoring][20] allow you to create and run API and browser tests that proactively simulate user transactions on your applications and monitor all internal and external network endpoints across your system's layers. You can detect errors, identify regressions, and automate rollbacks to prevent issues from surfacing in production. 
+Datadog [Synthetic Monitoring][22] allow you to create and run API and browser tests that proactively simulate user transactions on your applications and monitor all internal and external network endpoints across your system's layers. You can detect errors, identify regressions, and automate rollbacks to prevent issues from surfacing in production. 
 
 ## Datadog on Mobile
 
-The [Datadog Mobile App][21], available on the [Apple App Store][22] and [Google Play Store][23], gives key data for on-call engineers and business users to follow their service health and triage issues quickly without opening their laptop. Access your organization’s Dashboards, Monitors, Incidents, SLOs and more directly from your mobile device.
+The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google Play Store][25], gives key data for on-call engineers and business users to follow their service health and triage issues quickly without opening their laptop. Access your organization’s Dashboards, Monitors, Incidents, SLOs and more directly from your mobile device.
 
 {{< img src="getting_started/application/mobile-app-store-screens.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Mobile App on iOS">}}
 
@@ -158,11 +158,13 @@ The [Datadog Mobile App][21], available on the [Apple App Store][22] and [Google
 [13]: /dashboards/#screenboards
 [14]: /dashboards/functions/arithmetic/
 [15]: /dashboards/functions/
-[16]: /real_user_monitoring/
-[17]: /real_user_monitoring/session_replay/
-[18]: /monitors/
-[19]: /security_platform/cloud_siem/
-[20]: /synthetics/
-[21]: /mobile/
-[22]: https://apps.apple.com/app/datadog/id1391380318
-[23]: https://play.google.com/store/apps/details?id=com.datadog.app
+[16]: /monitors/
+[17]: /network_monitoring/performance/
+[18]: /real_user_monitoring/
+[19]: /real_user_monitoring/session_replay/
+[20]: /serverless
+[21]: /security_platform/cloud_siem/
+[22]: /synthetics/
+[23]: /mobile/
+[24]: https://apps.apple.com/app/datadog/id1391380318
+[25]: https://play.google.com/store/apps/details?id=com.datadog.app
