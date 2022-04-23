@@ -136,7 +136,9 @@ var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext }
 using var scope = Tracer.Instance.StartActive("operation", spanCreationSettings);
 ```
 
-Where `GetHeaderValues` will depend on the underlying system you are using. Here are a few examples:
+Provide the `GetHeaderValues` method. The way this method is implemented depends on the structure that carries `SpanContext`.
+
+Here are some examples:
 
 ```csharp
 // Confluent.Kafka
