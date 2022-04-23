@@ -124,10 +124,7 @@ using (var parentScope =
 
 The Datadog APM Tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing. For more information, see the [setup documentation][7].
 
-Headers extraction and injection will be transparent in most cases.
-Though, in some rare cases the span context can be lost and only a custom implementation will be able to fix it.
-
-To do so, please do the following:
+In most cases, headers extraction and injection are transparent. Though, there are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. In that case, you can add a custom trace using the following code:
 
 ```csharp
 var spanContextExtractor = new SpanContextExtractor();
