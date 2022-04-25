@@ -27,3 +27,14 @@ ERROR | (pkg/trace/logutil/throttled.go:38 in log) | http.Server: http: Accept e
 ```
 
 To increase the APM connection limit for the Agent, configure the `connection_limit` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (for example, Docker or Kubernetes), use the `DD_APM_CONNECTION_LIMIT` environment variable.
+
+## Max memory limit
+
+If you encounter the following error message in your Agent logs, the max memory usage of Agent has been exceeded by 150%:
+
+```
+CRITICAL | (pkg/trace/api/api.go:703 in watchdog) | Killing process. Memory threshold exceeded: 8238.08M / 715.26M
+CRITICAL | (pkg/trace/osutil/file.go:39 in Exitf) | OOM
+```
+
+To increase the max memory limit for the Agent, configure the `max_memory` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (for example, Docker or Kubernetes), use the `DD_APM_MAX_MEMORY` environment variable.
