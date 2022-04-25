@@ -37,7 +37,7 @@ Add events from related systems to add more context to your graph. For example, 
 
 | Query                     | Description                                                      |
 |---------------------------|------------------------------------------------------------------|
-| `source:(github OR chef)` | Show events from GitHub OR Chef.                                 |
+| `source:(github OR chef)` | Show events from GitHub or Chef.                                 |
 | `env:staging`             | Show events with the tag `env:staging`.                          |
 | `container_id:foo*`       | Show events from all containers with an ID beginning with `foo`. |
 
