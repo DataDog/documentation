@@ -30,7 +30,7 @@ To increase the APM connection limit for the Agent, configure the `connection_li
 
 ## Max memory limit
 
-If you encounter the following error message in your Agent logs, the max memory usage of Agent has been exceeded by 150%:
+If you encounter the following error message in your Agent logs, it means the Agent has exceeded the max memory usage by 150%:
 
 ```
 CRITICAL | (pkg/trace/api/api.go:703 in watchdog) | Killing process. Memory threshold exceeded: 8238.08M / 715.26M
