@@ -37,4 +37,4 @@ CRITICAL | (pkg/trace/api/api.go:703 in watchdog) | Killing process. Memory thre
 CRITICAL | (pkg/trace/osutil/file.go:39 in Exitf) | OOM
 ```
 
-To increase the max memory limit for the Agent, configure the `max_memory` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (for example, Docker or Kubernetes), use the `DD_APM_MAX_MEMORY` environment variable.
+To increase the max memory limit for the Agent, configure the `max_memory` attribute in the `apm_config` section of the Agent's configuration file. For containerized deployments (for example, Docker or Kubernetes), use the `DD_APM_MAX_MEMORY` environment variable.
