@@ -263,11 +263,12 @@ DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": 
 
 For data from these products, when setting up additional endpoints, you must explicitly set `use_http` to tell the Agent which transport to use. The same transport configuration is shared among all additional endpoints.
 
-The `is_reliable` setting tells the Agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. This ensures that logs are not missed if a destination becomes unavailable. 
+The `is_reliable` setting tells the Agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. This ensures that data is not missed if a destination becomes unavailable. 
 
-For example, if you're sending logs to the main endpoint and an additional endpoint with `is_reliable: true` and one endpoint becomes unavailable, logs continue to flow to the other endpoint. If both endpoints become unavailable, the Agent stops reading and sending logs until at least one endpoint recovers. This ensures all logs make it to at least one reliable endpoint.
 
-The `is_reliable` setting defaults to `false`. We recommended you set `is_reliable` to `true`. Unreliable endpoints only send logs if at least one reliable endpoint is available. You may define multiple additional endpoints with mixed use of `is_reliable`.
+For example, if you're sending data to the main endpoint and an additional endpoint with `is_reliable: true` and one endpoint becomes unavailable, data continue to flow to the other endpoint. If both endpoints become unavailable, the Agent stops reading and sending data until at least one endpoint recovers. This ensures all data makes it to at least one reliable endpoint.
+
+The `is_reliable` setting defaults to `false`. We recommended you set `is_reliable` to `true`. Unreliable endpoints only send data if at least one reliable endpoint is available. You may define multiple additional endpoints with mixed use of `is_reliable`.
 
 You can add the YAML configuration to your `datadog.yaml` or launch the Agent with the appropriate environment variables.
 
