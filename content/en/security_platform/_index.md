@@ -44,7 +44,7 @@ The Datadog Security Platform includes [Application Security Monitoring](#applic
 ## Application Security Monitoring
 
 <div class="alert alert-warning">
-Application Security is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
+Application Security Monitoring is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
 </div>
 
 [Application Security Monitoring][1] (ASM) monitors application-level attacks aiming to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages Datadog [APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment.

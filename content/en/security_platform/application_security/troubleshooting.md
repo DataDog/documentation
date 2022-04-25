@@ -331,7 +331,7 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-#### Confirm AppSec is enabled in the running application
+#### Confirm ASM is enabled in the running application
 
 [Tracer startup logs][1] show the tracer configuration and whether ASM is enabled or not. If `appsec` is `true`, then ASM is enabled and running.
 
@@ -402,7 +402,7 @@ end
 
 Debug logs are verbose but useful. If you open up a ticket with [Datadog support][1], forward the logs with your request.
 
-#### Is AppSec correctly enabled?
+#### Is ASM correctly enabled?
 
 ASM has been correctly enabled if you see logs such as:
 
