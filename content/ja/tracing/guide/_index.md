@@ -1,10 +1,12 @@
 ---
-title: トレースガイド
+aliases:
+- /ja/tracing/getting_further/
 kind: ガイド
 private: true
-aliases:
-  - /ja/tracing/getting_further/
+title: トレースガイド
 ---
+
+
 {{< whatsnext desc="APM の概要" >}}
     {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}1. データベースサービスの異常な p99 レイテンシーに関するアラート [3 分]{{< /nextlink >}}
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}2. サービスの p50 レイテンシーを前週と比較する [2 分]{{< /nextlink >}}
@@ -25,6 +27,6 @@ aliases:
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープへのプライマリタグの設定{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray をいつ使用するかの決定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/ingestion_control_page/" >}}Ingestion Control ページ v2{{< /nextlink >}}
+     {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}取り込みメカニズムによる取り込み量の制御{{< /nextlink >}}
 
 {{< /whatsnext >}}

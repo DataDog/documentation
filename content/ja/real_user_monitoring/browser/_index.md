@@ -1,8 +1,8 @@
 ---
 aliases:
-  - /ja/real_user_monitoring/setup
+- /ja/real_user_monitoring/setup
 dependencies:
-  - https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md
+- https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md
 kind: ドキュメント
 title: RUM ブラウザモニタリング
 ---
@@ -50,6 +50,7 @@ datadogRum.init({
   //  env: 'production',
   //  version: '1.0.0',
   sampleRate: 100,
+  replaySampleRate: 100, // 含まれない場合 - デフォルト 100
   trackInteractions: true,
 })
 ```
@@ -77,6 +78,7 @@ datadogRum.init({
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
+      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     })
   })
@@ -104,6 +106,7 @@ datadogRum.init({
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
+      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     })
 </script>
@@ -116,7 +119,7 @@ datadogRum.init({
 
 ### TypeScript
 
-タイプは TypeScript >= 3.0 と互換性があります。以前のバージョンの場合は、JS ソースをインポートし、グローバル変数を使用してコンパイルの問題を回避します。
+タイプは TypeScript >= 3.8.2 と互換性があります。以前のバージョンの場合は、JS ソースをインポートし、グローバル変数を使用してコンパイルの問題を回避します。
 
 ```javascript
 import '@datadog/browser-rum/bundle/datadog-rum'
@@ -129,7 +132,7 @@ window.DD_RUM.init({
 })
 ```
 
-## コンフィギュレーション
+## 構成
 
 ### 初期化パラメーター
 
@@ -137,34 +140,34 @@ window.DD_RUM.init({
 
 `applicationId`
 : 必須<br/>
-**種類**: 文字列<br/>
+**タイプ**: 文字列<br/>
 RUM アプリケーションの ID。
 
 `clientToken`
 : 必須<br/>
-**種類**: 文字列<br/>
+**タイプ**: 文字列<br/>
 [Datadog クライアントトークン][5]。
 
 `site`
 : 必須<br/>
-**種類**: 文字列<br/>
+**タイプ**: 文字列<br/>
 **デフォルト**: `datadoghq.com`<br/>
-組織の Datadog サイト。US: `datadoghq.com`、EU: `datadoghq.eu`
+組織の Datadog のサイト、[Agent サイト構成][14]と同じ値です。
 
 `service`
-: 任意<br/>
-**種類**: 文字列<br/>
-アプリケーションのサービス名。
+: オプション<br/>
+**タイプ**: 文字列<br/>
+アプリケーションのサービス名。[タグの構文要件][15]に従っている必要があります。
 
 `env`
-: 任意<br/>
-**種類**: 文字列<br/>
-アプリケーションの環境 (例: prod、pre-prod、staging)。
+: オプション<br/>
+**タイプ**: 文字列<br/>
+アプリケーションの環境 (例: prod、pre-prod、staging など)。[タグの構文要件][15]に従っている必要があります。
 
 `version`
-: 任意<br/>
-**種類**: 文字列<br/>
-アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)。
+: オプション<br/>
+**タイプ**: 文字列<br/>
+アプリケーションのバージョン。例: 1.2.3、6c44da20、2020.02.13 など。[タグの構文要件][15]に従っている必要があります。
 
 `trackViewsManually`
 : オプション<br/>
@@ -173,56 +176,68 @@ RUM アプリケーションの ID。
 RUM ビューの作成を制御します。[デフォルトの RUM ビュー名をオーバーライドする][10]を参照してください。
 
 `trackInteractions`
-: 任意<br/>
-**種類**: Boolean<br/>
+: オプション<br/>
+**タイプ**: Boolean<br/>
 **デフォルト**: `false` <br/>
 [ユーザーアクションの自動収集][6]を有効にします。
 
+`defaultPrivacyLevel`
+: オプション<br/>
+**タイプ**: 文字列<br/>
+**デフォルト**: `mask-user-input` <br/>
+[セッションリプレイプライバシーオプション][13]を参照してください。
+
 `actionNameAttribute`
-: オプション <br/>
-**種類**: 文字列<br/>
- [アクションに名前を付ける][9]ために使用する独自の属性を指定できます。
+: オプション<br/>
+**タイプ**: 文字列<br/>
+[アクションに名前を付ける][9]ために使用する独自の属性を指定できます。
 
 `sampleRate`
-: 任意<br/>
-**種類**: 数字<br/>
+: オプション<br/>
+**タイプ**: 数値<br/>
 **デフォルト**: `100`<br/>
-追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみが RUM イベントを送信します。
+追跡するセッションの割合。`100` で全て、`0` でなし。追跡されたセッションのみが RUM イベントを送信します。`sampleRate` の詳細については、[サンプリング構成](#browser-and-session-replay-sampling-configuration)を参照してください。
+
+`replaySampleRate`
+: オプション<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `100`<br/>
+[セッションリプレイ料金][11]の機能を持つ追跡されたセッションの割合。`100` で全て、`0` でなし。`replaySampleRate` の詳細については、[サンプリング構成](#browser-and-session-replay-sampling-configuration) を参照してください。
 
 `silentMultipleInit`
-: 任意<br/>
-**種類**: ブール値 <br/>
+: オプション<br/>
+**タイプ**: Boolean <br/>
 **デフォルト**: `false`<br/>
 Datadog の RUM がページ上ですでに初期化されている場合、初期化が暗黙に失敗します。
 
 `proxyUrl`
-: 任意<br/>
-**種類**: 文字列<br/>
+: オプション<br/>
+**タイプ**: 文字列<br/>
 オプションのプロキシ URL (例: https://www.proxy.com/path)。詳細については、完全な[プロキシ設定ガイド][7]を参照してください。
 
 `allowedTracingOrigins`
-: 任意<br/>
-**種類**: リスト<br/>
-トレースヘッダーを挿入するために使用されるリクエスト元のリスト。
+: オプション<br/>
+**タイプ**: List<br/>
+トレースヘッダを注入するために使用されるリクエスト起源のリスト。[RUM とトレースの接続][12]を参照してください。
 
 `logs` SDK も使用する場合、一致するコンフィギュレーションが必要なオプション:
 
 `trackSessionAcrossSubdomains`
-: 任意<br/>
-**種類**: ブール値<br/>
+: オプション<br/>
+**タイプ**: Boolean<br/>
 **デフォルト**: `false`<br/>
-同じサイトのサブドメイン間でセッションを保持します。　
+同じサイトのサブドメイン間でセッションを保持します。
 
 `useSecureSessionCookie`
-: 任意<br/>
-**種類**: ブール値<br/>
+: オプション<br/>
+**タイプ**: Boolean<br/>
 **デフォルト**: `false`<br/>
 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信される RUM イベントが無効になります。
 
 `useCrossSiteSessionCookie`
-: 任意<br/>
-**種類**: ブール値<br/>
-**デフォルト**: `false`<br/>
+: オプション<br/>
+**タイプ**: Boolean<br/>
+**デフォルト**:`false`<br/>
 安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、RUM SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。
 
 #### 例
@@ -247,6 +262,57 @@ init(configuration: {
 })
 ```
 
+### ブラウザとセッションリプレイのサンプリング構成
+
+**注**: この機能を使用するには、SDK v3.6.0+ が必要です。
+
+新しいセッションが作成されると、次のいずれかとして追跡できます。
+
+- [**ブラウザ RUM**][11]: _セッション_、_ビュー_、_アクション_、および_エラー_**のみ**が収集されます。`startSessionReplayRecording()` への呼び出しは無視されます。
+- [**セッションリプレイ RUM**][11]: ブラウザ RUM のすべてと、_リソース_、_ロングタスク_、_リプレイ_の記録が収集されます。_リプレイ_の記録を収集するには、`startSessionReplayRecording()` の呼び出しが必要です。
+
+セッションの追跡方法を制御するために、2 つの初期化パラメーターが利用可能です。
+
+- `sampleRate` は、追跡されるセッション全体の割合を制御します。デフォルトは `100%` で、すべてのセッションが追跡されます。
+
+- `replaySampleRate` は、全体のサンプルレートの**後に**適用され、セッションリプレイ RUM として追跡されるセッションの割合を制御します。デフォルトは `100%` で、すべてのセッションがセッションリプレイ RUM として追跡されます。
+
+例えば、セッションの 100% をブラウザ RUM として追跡する場合
+
+```
+datadogRum.init({
+    ....
+    sampleRate: 100,
+    replaySampleRate: 0
+});
+```
+
+例えば、セッションの 100% をセッションリプレイ RUM として追跡する場合
+
+```
+datadogRum.init({
+    ....
+    sampleRate: 100,
+    replaySampleRate: 100
+});
+```
+
+例えば、全体のセッションの 50% のみを追跡し、半分はブラウザ RUM として、残りの半分はセッションリプレイ RUM としてトラッキングする場合、`sampleRate` と `replaySampleRate` を 50 に設定します。
+
+```
+datadogRum.init({
+    ....
+    sampleRate: 50,
+    replaySampleRate: 50
+});
+```
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+<!-- 注: URL はすべて絶対値でなければなりません -->
+
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://docs.datadoghq.com/ja/real_user_monitoring/data_collected/
 [3]: https://docs.datadoghq.com/ja/real_user_monitoring/dashboards/
@@ -257,3 +323,8 @@ init(configuration: {
 [8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [9]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/tracking_user_actions#declaring-a-name-for-click-actions
 [10]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#real-user-monitoring
+[12]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[13]: https://docs.datadoghq.com/ja/real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
+[14]: https://docs.datadoghq.com/ja/agent/basic_agent_usage#datadog-site
+[15]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags

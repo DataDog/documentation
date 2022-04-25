@@ -15,13 +15,13 @@ further_reading:
 
 ## Releases
 
-The Python APM Client library follows a [versioning policy][58] that specifies the support level for the different versions of the library and Python runtime. 
+The Python APM Client library follows a [versioning policy][1] that specifies the support level for the different versions of the library and Python runtime. 
 
 Two release branches are supported:
 
 | Release    | Support level        |
 |------------|----------------------|
-| `<1`       | Maintenace           |
+| `<1`       | Maintenance           |
 | `>=1.0,<2` | General Availability |
 
 And the library supports the following runtimes:
@@ -116,7 +116,7 @@ The `ddtrace` library includes support for the following libraries:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-py
+[1]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [2]: /help
 [3]: http://asgi.readthedocs.io/
 [4]: https://aiohttp.readthedocs.io
@@ -173,4 +173,3 @@ The `ddtrace` library includes support for the following libraries:
 [55]: https://www.makotemplates.org
 [56]: https://requests.readthedocs.io/en/master/
 [57]: https://urllib3.readthedocs.io/en/stable/
-[58]: https://ddtrace.readthedocs.io/en/stable/versioning.html

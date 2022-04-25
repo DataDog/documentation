@@ -2970,6 +2970,10 @@ main:
     url: data_security/synthetics/
     parent: data_security
     weight: 4
+  - name: Guides
+    url: data_security/guide/
+    parent: data_security
+    weight: 5
   - name: Help
     url: help/
     pre: info-fill
@@ -5603,6 +5607,18 @@ api:
     url: /api/latest/usage-metering/
     identifier: usage-metering
     generated: true
+  - name: Get hourly usage for Observability Pipelines
+    url: '#get-hourly-usage-for-observability-pipelines'
+    identifier: get-hourly-usage-for-observability-pipelines
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUsageObservabilityPipelines
+      unstable: []
+      order: 38
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: get-all-custom-metrics-by-hourly-average

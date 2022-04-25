@@ -1,13 +1,13 @@
 ---
-title: Datadog Apps
-kind: documentation
 further_reading:
-  - link: "https://github.com/DataDog/apps/blob/master/docs/en/ui-extensions-design-guidelines.md"
-    tag: Github
-    text: デザインガイドライン
-  - link: "https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md"
-    tag: Github
-    text: プログラミングモデル
+- link: https://github.com/DataDog/apps/blob/master/docs/en/ui-extensions-design-guidelines.md
+  tag: Github
+  text: デザインガイドライン
+- link: https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md
+  tag: Github
+  text: プログラミングモデル
+kind: documentation
+title: Datadog Apps
 ---
 
 ## ベータ版に参加しよう 
@@ -55,14 +55,14 @@ $ `yarn start`
 
 6. すると、新しいアプリケーションのダッシュボードが表示されます。ここでさらにアプリ名を変更したり、アプリに詳細な説明を加えたり、アイコンを変更したりすることができます。
 
-<img style="max-width:80%" alt="App Settings Dashboard" src="https://user-images.githubusercontent.com/228230/137548724-0487c169-9b65-4b31-bfa6-f8da3bbd2785.png">
+<img style="max-width:80%" alt="App Edit Basic Information" src="https://user-images.githubusercontent.com/17037651/163401812-d21a9d3a-e73f-49b0-bda4-e7c447295784.png">
 
 
 ### ダッシュボードにアプリを追加する
 
 1. アプリをダッシュボードに追加する前に、左側の **UI Extensions** をクリックして、アプリを有効にする必要があります。
 
-<img style="max-width:80%" alt="Enable UI Extensions" src="https://user-images.githubusercontent.com/228230/137548823-0ad7f1ae-512f-44a4-93ca-c2aa3c47b992.png">
+<img style="max-width:80%" alt="App Edit Enable UI Extensions" src="https://user-images.githubusercontent.com/17037651/163401958-153f6c80-d7ba-4b47-a40d-1cf08913602d.png">
 
 このビューがロードされたら、**Enable UI Extensions** ボタンをクリックします。
 
@@ -71,9 +71,9 @@ $ `yarn start`
 実行中のウィジェットのローカルホスト版に合わせて、ルート URL とデバッグモードルート URL を変更することを確認します。メインコントローラーのパスは `/widget` です。これらの URL の値は、アプリケーションを構築し、独自のインフラストラクチャーでホストし始めると、変更されます。
 
 3. ’Dashboard Custom Widget’
-のトグルを ON にします。これで右側に JSON が生成されます。
+のトグルをオンにします (中央のパネルを少し下にスクロールしないと見えないかもしれません)。これにより、右側に JSON が生成されます。
 
-<img style="max-width:80%" alt="Dashboard Custom Widget" src="https://user-images.githubusercontent.com/228230/137549275-f901e4c1-16ad-4c82-95f3-9ba7f346c9ba.png">
+<img style="max-width:80%" alt="App Edit UI Extensions" src="https://user-images.githubusercontent.com/17037651/163402086-a3afbecd-c9c0-4608-bb91-6cb5391fec93.png">
 
 
 この JSON には、`Your first widget` という値が含まれていることに注意してください。これは、ダッシュボードに追加するメニューに表示される、ウィジェットの名前です。
