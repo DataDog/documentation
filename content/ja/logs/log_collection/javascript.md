@@ -1,8 +1,8 @@
 ---
 aliases:
-  - /ja/logs/log_collection/web_browser
+- /ja/logs/log_collection/web_browser
 dependencies:
-  - 'https://github.com/DataDog/browser-sdk/blob/main/packages/logs/README.md'
+- https://github.com/DataDog/browser-sdk/blob/main/packages/logs/README.md
 kind: documentation
 title: ブラウザログ収集
 ---
@@ -104,7 +104,7 @@ datadogLogs.init({
 
 ### TypeScript
 
-タイプは TypeScript >= 3.0 と互換性があります。以前のバージョンの場合は、JS ソースをインポートし、グローバル変数を使用してコンパイルの問題を回避します。
+タイプは TypeScript >= 3.8.2 と互換性があります。以前のバージョンの場合は、JS ソースをインポートし、グローバル変数を使用してコンパイルの問題を回避します。
 
 ```typescript
 import '@datadog/browser-logs/bundle/datadog-logs'
@@ -117,30 +117,33 @@ window.DD_LOGS.init({
 })
 ```
 
-## コンフィギュレーション
+## 構成
 
 ### 初期化パラメーター
 
 以下のパラメーターを使用して、Datadog にログを送信するように Datadog ブラウザログ SDK を構成できます。
 
-| パラメーター             | タイプ    | 必須 | デフォルト         | 説明                                                                                              |
-| --------------------- | ------- | -------- | --------------- | -------------------------------------------------------------------------------------------------------- |
-| `clientToken`         | 文字列  | 〇      |                 | [Datadog クライアントトークン][2]。                                                                             |
-| `site`                | 文字列  | 〇      | `datadoghq.com` | 組織の Datadog サイト。US: `datadoghq.com`、EU: `datadoghq.eu`                           |
-| `service`             | 文字列  | ✕       |                 | アプリケーションのサービス名。                                                                   |
-| `env`                 | 文字列  | ✕       |                 | アプリケーションの環境 (例: prod、pre-prod、staging)                                |
-| `version`             | 文字列  | ✕       |                 | アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)                                |
-| `forwardErrorsToLogs` | Boolean | ✕       | `true`          | `false` に設定すると、console.error ログ、キャッチされない例外、ネットワークエラーは Datadog へ送信されません。 |
-| `sampleRate`          | 数値  | ✕       | `100`           | 追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみがログを送信します。       |
-| `silentMultipleInit`  | Boolean | ✕       |                 | 複数の init を使用しながらログエラーを防ぎます。                                                       |
+| パラメーター             | タイプ                                                                      | 必須 | デフォルト         | 説明                                                                                                                                     |
+| --------------------- | ------------------------------------------------------------------------- | -------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientToken`         | 文字列                                                                    | はい      |                 | [Datadog クライアントトークン][2]。                                                                                                                    |
+| `site`                | 文字列                                                                    | はい      | `datadoghq.com` | 組織の Datadog サイト。US: `datadoghq.com`、EU: `datadoghq.eu`                                                                  |
+| `service`             | 文字列                                                                    | いいえ       |                 | アプリケーションのサービス名。[タグの構文要件][7]に従っている必要があります。                                                       |
+| `env`                 | 文字列                                                                    | いいえ       |                 | アプリケーションの環境 (例: prod、pre-prod、staging など)。[タグの構文要件][7]に従っている必要があります。                    |
+| `version`             | 文字列                                                                    | いいえ       |                 | アプリケーションのバージョン。例: 1.2.3、6c44da20、2020.02.13 など。[タグの構文要件][7]に従っている必要があります。                    |
+| `forwardErrorsToLogs` | Boolean                                                                   | いいえ       | `true`          | `false` に設定すると、console.error ログ、キャッチされない例外、ネットワークエラーは Datadog へ送信されません。                                        |
+| `forwardConsoleLogs`  | `"all"` または `"log"` `"debug"` `"info"` `"warn"` `"error"` の配列      | いいえ       | `[]`            | `console.*` から Datadog にログを転送します。すべてを転送するには `"all”` を、サブセットのみを転送するにはコンソール API 名の配列を使用します。          |
+| `forwardReports`      | `"all"` または `"intervention"` `"deprecation"` `"csp_violation"` の配列 | いいえ       | `[]`            | [Reporting API][8] から Datadog にレポートを転送します。すべてを転送するには `"all”` を、サブセットのみを転送するにはレポートタイプの配列を使用します。 |
+| `sampleRate`          | 数値                                                                    | いいえ       | `100`           | 追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみがログを送信します。                                              |
+| `silentMultipleInit`  | Boolean                                                                   | いいえ       |                 | 複数の init を使用しながらログエラーを防ぎます。                                                                                              |
+| `proxyUrl`            | 文字列                                                                    | いいえ       |                 | オプションのプロキシ URL (例: https://www.proxy.com/path)。詳細については、完全な[プロキシ設定ガイド][6]を参照してください。                                  |
 
 `RUM` SDK を使用するときに一致するコンフィギュレーションが必要なオプション:
 
 | パラメーター                      | タイプ    | 必須 | デフォルト | 説明                                                                                                                                                  |
 | ------------------------------ | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `trackSessionAcrossSubdomains` | Boolean | ✕       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                    |
-| `useSecureSessionCookie`       | Boolean | ✕       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信されるログが無効になります。                                                                    |
-| `useCrossSiteSessionCookie`    | Boolean | ✕       | `false` | 安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、logs SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。 |
+| `trackSessionAcrossSubdomains` | Boolean | いいえ       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                    |
+| `useSecureSessionCookie`       | Boolean | いいえ       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信されるログが無効になります。                                                                    |
+| `useCrossSiteSessionCookie`    | Boolean | いいえ       | `false` | 安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、logs SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。 |
 
 ## 使用方法
 
@@ -185,22 +188,37 @@ window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id
 ```json
 {
   "status": "info",
-  "session_id": "1234",
+  "session_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "name": "buttonName",
   "id": 123,
   "message": "Button clicked",
+  "date": 1234567890000,
+  "origin": "logger",
   "http": {
-    "url": "...",
-    "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36"
+    "useragent": "Mozilla/5.0 ...",
   },
-  "network": { "client": { "ip": "109.30.xx.xxx" } }
+  "view": {
+    "url": "https://...",
+    "referrer": "https://...",
+  },
+  "network": {
+    "client": {
+      "geoip": {...}
+      "ip": "xxx.xxx.xxx.xxx"
+    }
+  }
 }
 ```
 
-ロガーは、デフォルトで次の情報を追加します。
+Logs SDK は、デフォルトで以下の情報を追加します (RUM SDK が存在する場合は、さらに多くのフィールドを追加できます)。
 
+- `date`
 - `view.url`
-- `session_id`
+- `view.referrer`
+- `session_id` (セッションが使用される場合のみ)
+
+Datadog のバックエンドでは、さらに次のようなフィールドが追加されます。
+
 - `http.useragent`
 - `network.client.ip`
 
@@ -254,13 +272,13 @@ window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
 
 ## 高度な使用方法
 
-### Browser ログの機密データのスクラビング
+### ブラウザログの機密データのスクラビング
 
-Browser ログに編集が必要な機密情報が含まれている場合は、Browser Log Collector を初期化するときに `beforeSend` コールバックを使用して、機密シーケンスをスクラブするように Browser SDK を構成します。
+ブラウザログに編集が必要な機密情報が含まれている場合は、ブラウザログコレクターを初期化するときに `beforeSend` コールバックを使用して、機密シーケンスをスクラブするように Browser SDK を構成します。
 
-`beforeSend` コールバック関数を使用すると、Datadog に送信される前に Browser SDK によって収集された各イベントにアクセスでき、一般的に編集されたプロパティを更新できます。
+`beforeSend` コールバック関数を使用すると、Datadog に送信される前に Browser SDK によって収集された各ログにアクセスでき、プロパティを更新できます。
 
-たとえば、Web アプリケーションの URL からメールアドレスを編集するには
+Web アプリケーションの URL からメールアドレスを編集するには
 
 #### NPM
 
@@ -269,9 +287,9 @@ import { datadogLogs } from '@datadog/browser-logs'
 
 datadogLogs.init({
     ...,
-    beforeSend: (event) => {
-        // ビューの URL からメールを削除します
-        event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+    beforeSend: (log) => {
+        // ビューの URL からメールを削除します 
+        log.view.url = log.view.url.replace(/email=[^&]*/, "email=REDACTED")
     },
     ...
 });
@@ -283,9 +301,9 @@ datadogLogs.init({
 DD_LOGS.onReady(function() {
     DD_LOGS.init({
         ...,
-        beforeSend: (event) => {
+        beforeSend: (log) => {
             // ビューの URL からメールを削除します
-            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+            log.view.url = log.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
     })
@@ -298,15 +316,15 @@ DD_LOGS.onReady(function() {
 window.DD_LOGS &&
     window.DD_LOGS.init({
         ...,
-        beforeSend: (event) => {
+        beforeSend: (log) => {
             // ビューの URL からメールを削除します
-            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+            log.view.url = log.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
     });
 ```
 
-次のイベントプロパティを更新できます。
+次のプロパティは SDK によって自動的に収集され、機密データが含まれる可能性があります。
 
 | 属性       | タイプ   | 説明                                                                                      |
 | --------------- | ------ | ------------------------------------------------------------------------------------------------ |
@@ -316,7 +334,61 @@ window.DD_LOGS &&
 | `error.stack`   | 文字列 | スタックトレースまたはエラーに関する補足情報。                                    |
 | `http.url`      | 文字列 | HTTP URL。                                                                                    |
 
-**注**: Browser SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。イベントプロパティの詳細については、[Browser SDK リポジトリ][5]を参照してください。
+### 特定のログを破棄する
+
+`beforeSend` コールバック関数を使用すると、Datadog に送信される前にログを破棄することもできます。
+
+ステータスが 404 の場合にネットワークエラーを破棄するには
+
+#### NPM
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs'
+
+datadogLogs.init({
+    ...,
+    beforeSend: (log) => {
+        // 404 ネットワークエラーを破棄します
+        if (log.http && log.http.status_code === 404) {
+          return false
+        }
+    },
+    ...
+});
+```
+
+#### CDN 非同期
+
+```javascript
+DD_LOGS.onReady(function() {
+    DD_LOGS.init({
+        ...,
+        beforeSend: (log) => {
+          // 404 ネットワークエラーを破棄します
+          if (log.http && log.http.status_code === 404) {
+            return false
+          }
+        },
+        ...
+    })
+})
+```
+
+#### CDN 同期
+
+```javascript
+window.DD_LOGS &&
+    window.DD_LOGS.init({
+        ...,
+        beforeSend: (log) => {
+          // 404 ネットワークエラーを破棄します
+          if (log.http && log.http.status_code === 404) {
+            return false
+          }
+        },
+        ...
+    });
+```
 
 ### 複数のロガーの定義
 
@@ -413,7 +485,7 @@ Datadog ブラウザログ SDK を初期化すると、以下のことが可能�
 
 - `setLoggerGlobalContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
 - `addLoggerGlobalContext (key: string, value: any)` API を使用して、あなたのすべてのロガーにコンテキストを追加。
-- Get the entire global context with `getLoggerGlobalContext ()` API を使用して、グローバルコンテキスト全体を取得。
+- `getLoggerGlobalContext ()` API を使用して、グローバルコンテキスト全体を取得。
 
 ##### NPM
 
@@ -599,8 +671,13 @@ window.DD_LOGS && DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 
 **注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
-[1]: /ja/account_management/api-app-keys/#api-keys
-[2]: /ja/account_management/api-app-keys/#client-tokens
+<!-- 注: URL はすべて絶対値でなければなりません -->
+
+[1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
 [4]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/BROWSER_SUPPORT.md
-[5]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/src/logsEvent.types.ts
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/enrich-and-control-rum-data/
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/faq/proxy_rum_data/
+[7]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags
+[8]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
