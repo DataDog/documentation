@@ -9,7 +9,7 @@ aliases:
 
 OTLP Ingest in the Agent is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP.
 
-OTLP Ingest in the Agent allows you to use trace observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog Tracing Library specific features aren't available for the ingested data including Application Security, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
+OTLP Ingest in the Agent allows you to use trace observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog Tracing Library specific features aren't available for the ingested data including Application Security Monitoring, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
 
 <div class="alert alert-warning">OTLP Metrics ingestion is in beta and its behavior and configuration may change.</div>
 

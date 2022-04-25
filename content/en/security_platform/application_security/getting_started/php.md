@@ -13,7 +13,7 @@ further_reading:
       text: 'PHP Datadog Tracer Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Rules"
+      text: "OOTB Application Security Monitoring Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Monitoring"
@@ -32,7 +32,7 @@ You can monitor application security for PHP apps running in Docker, Kubernetes,
    ```
    For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
-2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling Application Security, you can optionally enable it after by setting the following environment variable:
+2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling ASM, you can optionally enable it after by setting the following environment variable:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 

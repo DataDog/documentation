@@ -46,19 +46,19 @@ Enable them directly or create your own [APM monitors][3].
 
 ## Summary Cards
 
-The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, click into the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][9], where errors are automatically aggregated into issues.
+The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, click into the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][4], where errors are automatically aggregated into issues.
 
 {{< img src="tracing/visualization/service/summary_cards.jpg" alt="Summary cards"  style="width:100%;">}}
 
-Our [Service Level Objectives (SLOs)][10] and [Incidents][11] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident.
+Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident.
 
 {{< img src="tracing/visualization/service/watchdog_insights.png" alt="Watchdog Insights"  style="width:70%;">}}
 
-The [Watchdog Insights][8] carousel surfaces anomalies detected on specific tags, enabling you to drill down straight to the root cause of an issue. 
+The [Watchdog Insights][7] carousel surfaces anomalies detected on specific tags, enabling you to drill down straight to the root cause of an issue. 
 
 ## Out-of-the-box graphs
 
-Datadog provides [out-of-the-box graphs][18] for any given Service:
+Datadog provides [out-of-the-box graphs][8] for any given Service:
 
 * Requests - Choose to display:
     *  The **Total amount of requests and errors**
@@ -66,7 +66,7 @@ Datadog provides [out-of-the-box graphs][18] for any given Service:
 * Latency -  Choose to display:
     *  The Avg/p75/p90/p95/p99/Max latency of your traced requests
     *  The **Latency distribution**	
-    *  The **Apdex score** for web services; [learn more about Apdex][4]
+    *  The **Apdex score** for web services; [learn more about Apdex][9]
 * Error - Choose to display:
     * The **Total amount of errors**
     * The amount of **Errors per second**
@@ -78,13 +78,13 @@ Datadog provides [out-of-the-box graphs][18] for any given Service:
     This represents the total, relative, and average time spent by traces in downstream services from the current service to the other *services* or *type*.
     
     **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
-[Watchdog][8] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If there is an anomaly detected, there will be an overlay on the graph and a Watchdog icon you can click for more details in a side panel.
+[Watchdog][7] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If there is an anomaly detected, there will be an overlay on the graph and a Watchdog icon you can click for more details in a side panel.
 
 {{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs"  style="width:100%;">}}
 
 ### Export
 
-On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [dashboard][5]:
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [dashboard][10]:
 
 {{< img src="tracing/visualization/service/save_to_dashboard.png" alt="Save to dashboard" style="width:60%;">}}
 
@@ -92,7 +92,7 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). Read more in [Getting Started with APM][1]. 
 
-Below, there’s a list of [resources][6] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
+Below, there’s a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
 
 {{< img src="tracing/visualization/service/resources_tab.jpg" alt="Resources"  style="width:100%;">}}
 
@@ -139,7 +139,7 @@ You can add columns to or remove columns from this overview table and your selec
 Read more about Deployments on the service page [here][12].
 
 ### Error Tracking
-View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][9])
+View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][4])
 
 This tab has overview graphs that show which resources have the most issues and a list of the most common issues occurring in your service. Click on an issue in the list to see details in a side panel, including its stack trace, related code versions, and total error occurrences since inception.
 
@@ -181,18 +181,17 @@ View common patterns in your service’s logs, and use facets like status in the
 [1]: /tracing/visualization/
 [2]: /tracing/visualization/resource/
 [3]: /monitors/create/types/apm/
-[4]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[5]: /dashboards/
-[6]: /tracing/visualization/#resources
-[7]: https://app.datadoghq.com/apm/services
-[8]: /watchdog/
-[9]: /tracing/error_tracking/
-[10]: /monitors/service_level_objectives/
-[11]: /monitors/incident_management/
+[4]: /tracing/error_tracking/
+[5]: /monitors/service_level_objectives/
+[6]: /monitors/incident_management/
+[7]: /watchdog/
+[8]: /tracing/guide/metrics_namespace/
+[9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[10]: /dashboards/
+[11]: /tracing/visualization/#resources
 [12]: /tracing/deployment_tracking/#versions-deployed
 [13]: /tracing/runtime_metrics/
 [14]: /tracing/profiler/
 [15]: /tracing/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
-[18]: /tracing/guide/metrics_namespace/

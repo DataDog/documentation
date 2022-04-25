@@ -10,7 +10,7 @@ further_reading:
   text: "Getting Started Enabling ASM for Your Services"
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
-  text: "Out-of-the-Box ASM Rules"
+  text: "Out-of-the-Box Application Security Monitoring Rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting ASM"

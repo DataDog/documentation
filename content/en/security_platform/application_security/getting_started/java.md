@@ -10,7 +10,7 @@ further_reading:
   text: 'Java Datadog Library source code'
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
-  text: "OOTB Application Security Rules"
+  text: "OOTB Application Security Monitoring Rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting Application Security Monitoring"
@@ -30,7 +30,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-2. **Run your Java application with Application Security enabled.** From the command line:
+2. **Run your Java application with ASM enabled.** From the command line:
    ```
    java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
@@ -58,7 +58,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the Application Security environment variable:
+Update your deployment configuration file for APM and add the ASM environment variable:
 
 ```
 spec:
