@@ -32,6 +32,13 @@ markup:
   highlight:
     guessSyntax: true
 
+# Workaround for issue downloading private go module
+# See: https://github.com/gohugoio/hugo/issues/9333
+security:
+  exec:
+    osEnv:
+      - .*
+
 module:
   imports:
    - path: github.com/DataDog/websites-modules
