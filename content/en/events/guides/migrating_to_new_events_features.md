@@ -3,6 +3,10 @@ title: Migrating to the New Events Features
 kind: documentation
 aliases:
   /events/guides/migrating_from_stream_to_explorer
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-events/"
+  tag: "Blog"
+  text: "Troubleshoot faster with improved Datadog Events"
 ---
 
 <div class="alert alert-warning">
@@ -171,6 +175,11 @@ No events received in a datacenter for service `datadog-agent`
 Legacy Event Monitors do not support cardinality rollup.
 : New syntax </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /events/explorer
 [2]: /events/explorer/#event-analytics

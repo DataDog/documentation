@@ -35,7 +35,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_update-golang
   tags:
     - "runner:main"
   except:
@@ -88,6 +88,7 @@ build_preview:
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
+    - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -230,6 +231,7 @@ build_live:
     - sync_integration_metrics
     - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
     - placehold_translations
+    - yarn run prebuild
     - yarn run build:live
     - in-isolation deploy_live
     - create_artifact

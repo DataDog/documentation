@@ -175,7 +175,7 @@ For [.NET][1], the ASP.NET integration is required.
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-The are no required integrations for [PHP][1].
+There are no required integrations for [PHP][1].
 
 
 [1]: /security_platform/application_security/setup_and_configure/
@@ -431,7 +431,7 @@ D, [2022-01-19T21:25:50.581061 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloek
 If you don’t see those logs, try the following:
 
 - Check that another upstream security system is not filtering requests based on the test header value, which would prevent the request from reaching the application. 
-- Send another [test attack](#send-a-test-attack-to-your-application) using another user's agent values in the curl command to see if the threat information is successfully sent.
+- Send another [test attack](#send-a-test-attack-to-your-application) using another user agent value in the curl command to see if the threat information is successfully sent.
 - Look in the application logs for the exact request you ran to confirm the request reached the application, and was not responded to by another upstream system.
 
 If the Rack integration was configured manually, sometimes a known issue prevents Application Security from working. For example:

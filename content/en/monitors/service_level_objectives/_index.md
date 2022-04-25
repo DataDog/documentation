@@ -12,6 +12,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/course/view.php?id=34"
   tag: "Learning Center"
   text: "Introduction to Service Level Objectives (SLOs)"
+- link: "https://www.datadoghq.com/blog/service-page/"
+  tag: "Blog"
+  text: "Service Telemetry, Error Tracking, SLOs and more"
 ---
 
 {{< vimeo 382481078 >}}
@@ -52,14 +55,14 @@ After you set up the SLO, select it from the [Service Level Objectives list view
 
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, the status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking are displayed.
 
-**Note:** The remaining error budget is displayed as a percentage and is calculated using the following formula: 
+**Note:** The remaining error budget is displayed as a percentage and is calculated using the following formula:
 {{< img src="monitors/service_level_objectives/error_budget_remaining.jpeg" alt="Remaining error budget formula" >}}
 
 ### Setting SLO targets
 
 To leverage the benefits of error budgets and error budget alerts, you must set SLO target values strictly below 100%.
- 
-Setting a 100% target means having an error budget of 0% since error budget is equal to 100%—SLO target. Without error budget representing acceptable risk, you face difficulty finding alignment between the conflicting priorities of maintaining customer-facing reliability and investing in feature development. In addition, SLOs with target values of 100% lead to division by zero errors in SLO alert evaluation. 
+
+Setting a 100% target means having an error budget of 0% since error budget is equal to 100%—SLO target. Without error budget representing acceptable risk, you face difficulty finding alignment between the conflicting priorities of maintaining customer-facing reliability and investing in feature development. In addition, SLOs with target values of 100% lead to division by zero errors in SLO alert evaluation.
 
 **Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
 
@@ -171,17 +174,17 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 
 ## SLO status corrections
 
-Status corrections allow you to specify time periods such as planned maintenance that an SLO excludes from its status and error budget calculations. 
+Status corrections allow you to specify time periods such as planned maintenance that an SLO excludes from its status and error budget calculations.
 
-When you create a correction window for an SLO, the time period you specify is removed from the SLO’s calculation. 
+When you create a correction window for an SLO, the time period you specify is removed from the SLO’s calculation.
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][12]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][12]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
-Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that: 
+Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that:
 - If the end time of a one-time correction is before the past 90 days, it does count towards your limit.
 - If the end time of the final repetition of a recurring correction is before the past 90 days, it does not count towards your limit.
 
@@ -198,7 +201,7 @@ You may configure status corrections through the UI by selecting `Correct Status
 
 {{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI"  >}}
 
-#### Access in the UI 
+#### Access in the UI
 
 To access SLO status corrections in the UI:
 
@@ -210,7 +213,7 @@ To access SLO status corrections in the UI:
 6. Optionally add **Notes**.
 7. Click **Apply Correction**.
 
-To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view. 
+To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view.
 
 ## Further Reading
 

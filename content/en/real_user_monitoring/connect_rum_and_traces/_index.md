@@ -17,6 +17,9 @@ further_reading:
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "RUM & Session Replay"
+  - link: "https://www.datadoghq.com/blog/troubleshoot-with-session-replay-developer-tools/"
+    tag: "Blog"
+    text: "Troubleshoot with Session Replay browser dev tools"
 ---
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
@@ -56,7 +59,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
     })
     ```
 
-To connect RUM to Traces, you need to specify your browser application in the `service` field. 
+To connect RUM to Traces, you need to specify your browser application in the `service` field.
 
 **Note:** `allowedTracingOrigins` accepts Javascript strings and RegExp that matches the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
 
