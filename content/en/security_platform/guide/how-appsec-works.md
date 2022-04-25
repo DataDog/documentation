@@ -1,11 +1,11 @@
 ---
-title: How ASM Monitoring Works in Datadog
+title: How Application Security Monitoring Works in Datadog
 kind: guide
 ---
 
 ## Overview
 
-Datadog ASM Monitoring (ASM) monitors application-level attacks aiming to exploit code-level vulnerabilities.
+Datadog Application Security Monitoring (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities.
 
 APM records information about each HTTP request, referred to as traces. Datadog ASM uses the information APM is already collecting, and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are an aggregation of suspicious requests. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
