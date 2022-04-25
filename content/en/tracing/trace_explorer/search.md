@@ -32,10 +32,12 @@ Pivot to a top list view, and group the query by `resource` to see which specifi
 
 ## Query Syntax
 
-To begin searching for spans in the Trace Explorer, see the [query syntax][2] documentation.
+To begin searching for spans in the Trace Explorer, see the [query syntax][2] documentation and the [time frame][3] documentation for more details on custom time frames.
 
 {{< /site-region >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tracing/trace_explorer/query_syntax#facets
 [2]: /tracing/trace_explorer/query_syntax
+[3]: /dashboards/guide/custom_time_frames

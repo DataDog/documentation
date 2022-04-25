@@ -1421,6 +1421,11 @@ main:
     parent: trace_explorer
     identifier: visualize_spans
     weight: 203
+  - name: Trace Panel
+    url: tracing/trace_explorer/trace_panel/
+    parent: trace_explorer
+    identifier: trace_panel
+    weight: 204
   - name: Request Flow Map
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer

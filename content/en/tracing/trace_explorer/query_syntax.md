@@ -129,11 +129,11 @@ If an attribute is called `user.first name`, perform a search on this attribute 
 
 The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][4]):
 
-{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:40%;" alt="Select time frame" >}}
+{{< img src="tracing/trace_explorer/query_syntax/time_frame_selector.png" style="width:40%;" alt="Select time frame" >}}
 
-## Span stream
+**Note**: Select the **Live Explorer** view (`15 minutes`) to view all [ingested][5] spans. For longer time frames, view spans that are [indexed][6] by retention filters.
 
-The span stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+
 
 ### Displaying a full trace
 
@@ -146,22 +146,6 @@ Click on any trace to see more details about it:
 To add more Trace details to the list, click the **Options** button and select any Facets you want to see:
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns"  style="width:80%;">}}
-
-### Multi-line display
-
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display"  style="width:30%;">}}
-
-Choose to display one, three, or ten lines from your traces. 3 and 10 lines display are here to give you more insights on the `error.stack` attribute.
-
-* With one line displayed:
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display"  style="width:80%;">}}
-
-* With three lines displayed:
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display"  style="width:80%;">}}
-
-* With ten lines displayed:
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display"  style="width:80%;">}}
-
 
 ## Analytics overview
 
@@ -265,6 +249,9 @@ Export [Analytics][5] from the trace search or build them directly in your [Dash
 [2]: /getting_started/tagging/#tags-best-practices
 [3]: /tracing/trace_explorer/saved_views/
 [4]: /dashboards/guide/custom_time_frames/
+[5]: /tracing/trace_explorer/#live-search-for-15-minutes
+[6]: /tracing/trace_explorer/#indexed-spans-search-with-15-day-retention
+
 [5]: /tracing/trace_search_and_analytics/
 [6]: /tracing/visualization/#apm-event
 [7]: /tracing/visualization/#services
