@@ -92,7 +92,7 @@
           {{ with (index $codeExampleLookup $operationid) }}
             {{ $fileCount = len . }}
             <div class="example-accordion" id="accordion-{{ $lang.name }}">
-              {{ range $i, $item := . }}
+              {{ range $i, $item := . | first 3 }}
                 {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
                   {{ $body := "" }}
                   {{ range . }}
@@ -221,7 +221,7 @@
       <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
         {{ $numOfCodeExamples := (index ($s.Get "itemCounts") $lang.name) }}
         {{ if gt $numOfCodeExamples 1 }}<div class="example-accordion" id="accordion-{{ $lang.name }}">{{ end }}
-          {{ range $i, $item := $items }}
+          {{ range $i, $item := $items | first 3 }}
               {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}
               {{ with $resourcePage.Resources.Match $fileStr }}
                   {{ range . }}

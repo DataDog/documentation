@@ -105,7 +105,7 @@
                                           {{ $fileCount = len . }}
                                           <div id="accordion">
 
-                                        {{ range $i, $item := . }}
+                                        {{ range $i, $item := . | first 3 }}
 
                                             {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
                                             <div class="card">
