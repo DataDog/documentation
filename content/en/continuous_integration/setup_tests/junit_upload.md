@@ -117,7 +117,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
 `--logs` **(beta)**
-: Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
+: Enable forwarding content from the XML reports as [Logs][5]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **Default**: `false`<br/>
 **Note**: Logs are billed separately from CI Visibility.
@@ -142,13 +142,13 @@ The following environment variables are supported:
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
-: The [Datadog site][5] to upload results to.<br/>
+: The [Datadog site][6] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ## Collecting repository and commit metadata
 
-Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][6] binary is required.
+Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][7] binary is required.
 
 If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
 
@@ -292,6 +292,6 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/DataDog/datadog-ci/releases
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /getting_started/site/
-[6]: https://git-scm.com/downloads
-[7]: /logs/
+[5]: /logs/
+[6]: /getting_started/site/
+[7]: https://git-scm.com/downloads

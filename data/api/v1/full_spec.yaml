@@ -15180,6 +15180,11 @@ components:
             all hours in the current date for all organizations.
           format: int64
           type: integer
+        observability_pipelines_bytes_processed_sum:
+          description: Sum of all observability pipelines bytes processed over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
             date for all organizations.
@@ -15495,6 +15500,11 @@ components:
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Networks hosts over
             all hours in the current date for the given org.
+          format: int64
+          type: integer
+        observability_pipelines_bytes_processed_sum:
+          description: Sum of all observability pipelines bytes processed over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -15836,6 +15846,11 @@ components:
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Networks hosts over
             all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        observability_pipelines_bytes_processed_agg_sum:
+          description: Sum of all observability pipelines bytes processed over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         online_archive_events_count_agg_sum:
@@ -22760,10 +22775,6 @@ paths:
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
         - **`#`** an integer or decimal number used to set the threshold.
-
-
-        **NOTE** Only available on US1-FED, US3, US5 and in closed beta on EU and
-        US1.
 
 
         **Process Alert Query**
@@ -30228,7 +30239,7 @@ tags:
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.
 
-    It is retained for the past 15 months.
+    It is retained for 15 months.
 
 
     You can retrieve up to 24 hours of hourly usage data for multiple organizations,

@@ -1,10 +1,10 @@
 ---
-title: .NET オープン標準
-kind: documentation
 code_lang: dotnet
-type: multi-code-lang
 code_lang_weight: 70
-description: '.NET のオープン標準'
+description: .NET のオープン標準
+kind: documentation
+title: .NET オープン標準
+type: multi-code-lang
 ---
 
 ## OpenTracing
@@ -12,7 +12,7 @@ description: '.NET のオープン標準'
 Datadog では、OpenTracing 標準もサポートしています。詳細は、[OpenTracing API][1] をご参照ください。
 
 ### セットアップ
-OpenTracing のサポートには、[`Datadog.Trace.OpenTracing`][2] NuGet パッケージをアプリケーションに追加します。アプリケーションの起動時に、OpenTracing ライブラリを初期化します。
+OpenTracing のサポートには、[`Datadog.Trace.OpenTracing`][2] NuGet パッケージをアプリケーションに追加します。アプリケーションの起動時に、OpenTracing SDK を初期化します。
 
 ```csharp
 using Datadog.Trace.OpenTracing;
