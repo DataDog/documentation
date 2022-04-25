@@ -2,7 +2,6 @@
 title: Application Security Monitoring
 kind: documentation
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
-is_beta: true
 disable_sidebar: true
 further_reading:
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
