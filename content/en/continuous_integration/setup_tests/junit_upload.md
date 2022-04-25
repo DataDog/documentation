@@ -77,8 +77,6 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 
 {{< /tabs >}}
 
-
-
 ## Uploading test reports
 
 To upload your JUnit XML test reports to Datadog, run the following command, specifying the name of the service or library that was tested using the `--service` parameter, and one or more file paths to either the XML report files directly or directories containing them:
@@ -117,6 +115,12 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Default**: (none)<br/>
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
+
+`--logs` **(beta)**
+: Enable forwarding content from the XML reports as [Logs][7]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
+**Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
+**Default**: `false`<br/>
+**Note**: Logs are billed separately from CI Visibility.
 
 `--max-concurrency`
 : The number of concurrent uploads to the API.<br/>
@@ -290,3 +294,4 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /getting_started/site/
 [6]: https://git-scm.com/downloads
+[7]: /logs/

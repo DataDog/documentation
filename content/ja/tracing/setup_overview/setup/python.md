@@ -127,8 +127,8 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 : **デフォルト**: `false`<br>
 トレーサーでデバッグロギングを有効化します。
 
-`DATADOG_PATCH_MODULES`
-: このアプリケーションの実行のためにパッチされたモジュールをオーバーライドします。次のような形式になります。 `DATADOG_PATCH_MODULES=module:patch,module:patch...`
+`DD_PATCH_MODULES`
+: このアプリケーションの実行のためにパッチされたモジュールをオーバーライドします。次のような形式になります。 `DD_PATCH_MODULES=module:patch,module:patch...`
 
 サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することをおすすめします。このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][5]のドキュメントをご参照ください。
 
@@ -155,7 +155,7 @@ Web フレームワークとライブラリインスツルメンテーション�
 : **デフォルト**: `localhost`<br>
 デフォルトのトレーサーがトレースの送信を試みるトレースエージェントホストの宛先アドレスをオーバーライドします。
 
-`DATADOG_TRACE_AGENT_PORT`
+`DD_TRACE_AGENT_PORT`
 : **デフォルト**: `8126`<br>
 デフォルトのトレーサーがトレースを送信する宛先ポートをオーバーライドします。
 

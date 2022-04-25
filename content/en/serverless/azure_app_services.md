@@ -54,7 +54,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - Azure App Service Web Apps
     - Function Apps hosted on Basic, Standard, Premium, or Isolated App Service plans. 
 
-    <div class="alert alert-warning">Support for .NET Function Apps is in beta for extension v2.2+. Function Apps on consumption plans and out-of-process functions are not supported. There are no billing implications for tracing functions during this period.<br/><br/>Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Support for .NET Function Apps is in beta for extension v2.2+. Function Apps on consumption plans are not supported. Out-of-process (also known as Isolated) functions do not yet support Distributed Tracing either. There are no billing implications for tracing functions during this period.<br/><br/>Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
 3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
@@ -64,7 +64,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - .NET Core 3.0 (Microsoft support ended 2020-03-03)
     - .NET Core 3.1
     - .NET 5
-    - .NET 6 (Web apps only. Functions running .NET 6 are not supported.)
+    - .NET 6
 
 4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 

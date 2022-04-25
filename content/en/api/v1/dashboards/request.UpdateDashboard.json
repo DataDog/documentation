@@ -15,7 +15,7 @@
               }
             ],
             "query": {
-              "data_source": "issue_stream",
+              "data_source": "apm_issue_stream",
               "query_string": ""
             },
             "response_format": "event_list"

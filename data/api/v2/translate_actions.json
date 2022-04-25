@@ -419,6 +419,11 @@
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
   },
+  "UploadIdPMetadata": {
+    "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
+    "summary": "Upload IdP metadata",
+    "request_description": ""
+  },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
     "summary": "Get the latest Cloud Workload Security policy"
@@ -582,6 +587,10 @@
     "summary": "Update an existing incident team",
     "request_description": "Incident Team Payload.",
     "request_schema_description": "Update request with an incident team payload."
+  },
+  "GetUsageObservabilityPipelines": {
+    "description": "Get hourly usage for Observability Pipelines.",
+    "summary": "Get hourly usage for Observability Pipelines"
   },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",

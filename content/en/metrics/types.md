@@ -338,7 +338,7 @@ Below is a summary of all available metric submission sources and methods. This 
 [1]: /metrics/type_modifiers/
 [2]: /dashboards/functions/
 [3]: /metrics/summary/
-[4]: https://statsd.readthedocs.io/en/v3.2.1/types.html#sets
+[4]: https://statsd.readthedocs.io/en/v3.2.2/types.html#sets
 [5]: /metrics/agent_metrics_submission/
 [6]: /metrics/dogstatsd_metrics_submission/
 [7]: /api/v1/metrics/#submit-metrics
