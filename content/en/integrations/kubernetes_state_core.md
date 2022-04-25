@@ -133,6 +133,9 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 `kubernetes_state.container.waiting` and `kubernetes_state.container.status_report.count.waiting`
 : These metrics no longer emit a 0 value if no pods are waiting. They only report non-zero values.
 
+`kube_job`
+: The `kube_job` tag in `kubernetes_state` contained the `CronJob` name if the `Job` had that as an owner, and otherwise it contained the `Job` name itself. In `kubernetes_state_core`, `kube_job` always contains the `Job` name itself, and a new `kube_cronjob` tag contains the `CronJob` name. When migrating to `kubernetes_state_core`, it's recommended to use the new tag, or by using `kube_job:foo*` (where `foo` is the `CronJob` name) in queries for filtering.
+
 {{< tabs >}}
 {{% tab "Helm" %}}
 
