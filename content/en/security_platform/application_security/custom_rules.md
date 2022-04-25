@@ -24,7 +24,7 @@ In these situations, a custom detection rule can be created to exclude such even
 
 To customize an OOTB detection rule, you must first clone an existing rule. Navigate to your [Detection Rules][2] and select a rule. Scroll to the bottom of the rule and click the Clone Rule button. This now enables you to edit the existing rule.
 
-### Define AppSec query
+### Define an ASM query
 
 Construct an ASM query. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
 
