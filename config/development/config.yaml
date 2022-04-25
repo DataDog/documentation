@@ -7,4 +7,4 @@ enableGitInfo: true
 security:
   exec:
     osEnv:
-      - .*
+      - ['(?i)^(Path|USERPROFILE)$']
