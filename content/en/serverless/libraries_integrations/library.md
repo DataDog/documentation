@@ -20,6 +20,9 @@ further_reading:
 - link: "https://github.com/DataDog/datadog-lambda-java/blob/master/README.md"
   tag: "Github"
   text: "Datadog Lambda Library for Java"
+- link: "https://www.datadoghq.com/blog/function-urls-monitoring/"
+  tag: "Blog"
+  text: "Monitoring AWS Lambda Function URLs with Datadog"
 aliases:
     - /serverless/datadog_lambda_library/
 ---
