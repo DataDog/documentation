@@ -38,7 +38,9 @@ Add custom [span tags][3] to your [spans][4] to customize your observability wit
 
 ### Add custom span tags
 
-> Note: This requires adding the `Datadog.Trace` NuGet package to your application.
+<div class="alert alert-warning">
+  <strong>Note:</strong> This requires adding the `Datadog.Trace` NuGet package to your application.
+</div>
 
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
@@ -79,7 +81,9 @@ DD_TAGS=datacenter:njc,key2:value2
 
 ### Set errors on a span
 
-> Note: This requires adding the `Datadog.Trace` NuGet package to your application.
+<div class="alert alert-warning">
+  <strong>Note:</strong> This requires adding the `Datadog.Trace` NuGet package to your application.
+</div>
 
 To mark errors that occur in your code, utilize the `Span.SetException(Exception)` method. The method marks the span as an error and adds [related span metadata][5] to provide insight into the exception.
 
@@ -106,7 +110,9 @@ If you have existing `[Trace]` or similar attributes, or prefer to use attribute
 
 ### Datadog trace methods
 
-> Note: This requires enabling automatic instrumentation for your application.
+<div class="alert alert-warning">
+  <strong>Note:</strong> This requires enabling automatic instrumentation for your application.
+</div>
 
 Using the `DD_TRACE_METHOD` environment variable, you can get visibility into unsupported frameworks without changing application code.
 
@@ -118,7 +124,9 @@ The only difference between this approach and using `[Trace]` attributes is the 
 
 ### Trace annotations
 
-> Note: This requires adding the `Datadog.Trace.Annotations` NuGet package and enabling automatic instrumentation for your application.
+<div class="alert alert-warning">
+  <strong>Note:</strong> This requires adding the `Datadog.Trace.Annotations` NuGet package and enabling automatic instrumentation for your application.
+</div>
 
 Add `[Trace]` to methods to have them be traced when running with automatic instrumentation. If automatic instrumentation is not enabled, this attribute has no effect on your application.
 
@@ -139,7 +147,9 @@ public class SessionManager
 
 ### Manually creating a new span
 
-> Note: This requires adding the `Datadog.Trace` NuGet package to your application.
+<div class="alert alert-warning">
+  <strong>Note:</strong> This requires adding the `Datadog.Trace` NuGet package to your application.
+</div>
 
 In addition to automatic instrumentation, the `[Trace]` attribute, and `DD_TRACE_METHODS` configurations, you can customize your observability by programmatically creating spans around any block of code. Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span has its caller as its parent span. Similarly, any traced methods called from the wrapped block of code have the manual span as its parent.
 
