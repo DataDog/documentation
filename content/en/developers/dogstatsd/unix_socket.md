@@ -115,7 +115,7 @@ To enable the Agent DogStatsD UDS:
         ```yaml
         volumes:
             - emptyDir: {}
-            name: dsdsocket
+              name: dsdsocket
         ```
 
     - Mount the socket folder in your `datadog-agent` container:

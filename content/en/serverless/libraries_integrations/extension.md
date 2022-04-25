@@ -33,14 +33,14 @@ To install the Datadog Lambda Extension, instrument your AWS serverless applicat
 
 To disable submission of your AWS Lambda logs to Datadog using the extension, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false` in your Lambda function.
 
-To exclude the `START` and `END` logs, set the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId\\s"}]`. Alternatively, you can add a `datadog.yaml` file in your project root directory with the following content:
+To exclude the `START` and `END` logs, set the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]`. Alternatively, you can add a `datadog.yaml` file in your project root directory with the following content:
 
 ```yaml
 logs_config:
   processing_rules:
     - type: exclude_at_match
       name: exclude_start_and_end_logs
-      pattern: (START|END) RequestId\s
+      pattern: (START|END) RequestId
 ```
 
 Datadog recommends keeping the `REPORT` logs, as they are used to populate the invocations list in the serverless function views.

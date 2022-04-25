@@ -485,6 +485,13 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
+  "UploadIdPMetadata": [
+    {
+      "group": "organizations",
+      "suffix": "",
+      "description": "Upload IdP metadata returns \"OK\" response"
+    }
+  ],
   "ListProcesses": [
     {
       "group": "processes",
@@ -701,6 +708,13 @@
       "group": "service_accounts",
       "suffix": "_819075131",
       "description": "Get one app key owned by this service account returns \"OK\" response"
+    }
+  ],
+  "GetUsageObservabilityPipelines": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Observability Pipelines returns \"OK\" response"
     }
   ],
   "CreateServiceAccount": [

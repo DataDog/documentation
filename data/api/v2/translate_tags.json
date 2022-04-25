@@ -51,6 +51,10 @@
     "name": "Metrics",
     "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
   },
+  "organizations": {
+    "name": "Organizations",
+    "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization)."
+  },
   "processes": {
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization."
@@ -70,6 +74,10 @@
   "service-accounts": {
     "name": "Service Accounts",
     "description": "Create, edit, and disable service accounts."
+  },
+  "usage-metering": {
+    "name": "Usage Metering",
+    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request."
   },
   "users": {
     "name": "Users",

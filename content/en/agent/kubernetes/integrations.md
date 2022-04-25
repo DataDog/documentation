@@ -369,7 +369,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 The following configuration defines the integration template for Redis containers with a custom password parameter:
 ```yaml
-  confd
+  confd:
     redisdb.yaml: |-
       ad_identifiers:
         - redis

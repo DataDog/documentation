@@ -30,6 +30,9 @@ further_reading:
   - link: "/real_user_monitoring/browser/data_collected/"
     tag: "Documentation"
     text: "RUM Browser Data Collected"
+  - link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
+    tag: "Blog"
+    text: "Monitor your hybrid mobile applications with Datadog"
 ---
 
 {{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
@@ -45,9 +48,9 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 
 ## What is Session Replay?
 
-Datadog's *Session Replay* allows you to capture and visually replay the web browsing experience of your users. 
+Datadog's *Session Replay* allows you to capture and visually replay the web browsing experience of your users.
 
-Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application’s usage patterns and design pitfalls. 
+Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application’s usage patterns and design pitfalls.
 
 ## Get started
 
@@ -89,6 +92,10 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 Watch [browser recordings][5] of real users interacting with your website.
 
+### Developer tools
+
+Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][6].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +105,4 @@ Watch [browser recordings][5] of real users interacting with your website.
 [3]: /real_user_monitoring/connect_rum_and_traces/
 [4]: /real_user_monitoring/error_tracking/
 [5]: /real_user_monitoring/session_replay/
+[6]: /real_user_monitoring/session_replay/developer_tools/
