@@ -133,60 +133,9 @@ The time range allows you to display traces within a given time period. Quickly 
 
 **Note**: Select the **Live Explorer** view (`15 minutes`) to view all [ingested][5] spans. For longer time frames, view spans that are [indexed][6] by retention filters.
 
-
-
 ### Displaying a full trace
 
-Click on any trace to see more details about it:
-
-{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream"  style="width:80%;">}}
-
-### Columns
-
-To add more Trace details to the list, click the **Options** button and select any Facets you want to see:
-
-{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns"  style="width:80%;">}}
-
-## Analytics overview
-
-Use [Analytics][5] to filter application performance metrics and [Indexed Spans][6] by tags. It allows deep exploration of the web requests flowing through your service.
-
-Analytics is automatically enabled for all APM [services][7] with 100% of ingested data for 15 minutes (rolling window). Spans indexed by custom [retention filters][8] and legacy App Analytics are available in Analytics for 15 days.
-
-Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
-
-## Analytics query
-
-Use the query to control what's displayed in your Analytics:
-
-1. Choose the `Duration` metric or a [Facet][9] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
-
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
-
-2. Select the aggregation function for the `Duration` metric:
-
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function"  style="width:50%;">}}
-
-3. Use a tag or facet to split your Analytic.
-
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by"  style="width:50%;">}}
-
-4. Choose to display either the *X* **top** or **bottom** values according to the selected facet or `Duration`.
-
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button"  style="width:20%;">}}
-
-5. Choose the Analytic Timesteps.
- Changing the global timeframe changes the list of available Timesteps values.
-
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep"  style="width:30%;">}}
-
-## Visualizations
-
-Select an Analytics visualization type using the Analytic selector:
-
-* [Timeseries](#timeseries)
-* [Top List](#top-list)
-* [Table](#table)
+Click on any span to see open the [Trace Panel][7] and access the request context
 
 ### Timeseries
 
@@ -251,6 +200,7 @@ Export [Analytics][5] from the trace search or build them directly in your [Dash
 [4]: /dashboards/guide/custom_time_frames/
 [5]: /tracing/trace_explorer/#live-search-for-15-minutes
 [6]: /tracing/trace_explorer/#indexed-spans-search-with-15-day-retention
+[7]: /tracing/trace_explorer/trace_panel
 
 [5]: /tracing/trace_search_and_analytics/
 [6]: /tracing/visualization/#apm-event

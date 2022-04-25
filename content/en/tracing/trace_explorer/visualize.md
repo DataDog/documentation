@@ -36,7 +36,29 @@ Visualize the evolution of a [measure][4] (or a tag unique count of values) over
 
 **Note**: The [Live Explorer][5] (15 minutes) only allows to group by one single dimension.
 
-The following Trace Explorer timeseries view shows the evolution of the **top 10 resource names** of service **shopist-web-ui** according to the 95th percentile of **duration** over the past 4 hours.
+Aggregated views use additional query options, to define the **measured tag dimension**, the dimensions to **group** the query by, and the **aggregation period**. For instance:
+
+1. Choose to view the `Duration` measure.
+
+    {{< img src="tracing/trace_explorer/visualize/group_by_measured_dimension.png" alt="Measured Dimension"  style="width:100%;">}}
+
+2. Select the aggregation function for the `Duration` measure. Selecting the any measure lets you choose the aggregation function whereas selecting a qualitative attribute displays the unique count.
+
+    {{< img src="tracing/trace_explorer/visualize/group_by_aggregation_function.png" alt="Aggregation Function"  style="width:100%;">}}
+
+3. Group the query by any dimension, for instance `Resource`.
+
+    {{< img src="tracing/trace_explorer/visualize/group_by_dimension.png" alt="Split Dimension"  style="width:100%;">}}
+
+4. Choose to display either the `X` top or bottom values according to the selected tag.
+
+    {{< img src="tracing/trace_explorer/visualize/group_by_top_bottom.png" alt="Top Bottom X values"  style="width:100%;">}}
+
+5. Choose the rollup period, for instance `10min`.
+
+    {{< img src="tracing/trace_explorer/visualize/group_by_rollup_period.png" alt="Rollup Period"  style="width:100%;">}}
+
+The following Trace Explorer timeseries view shows the evolution of the **top 10 resource names** of service **shopist-web-ui** according to the 95th percentile of **Duration** over the past 4 hours.
 
 {{< img src="tracing/trace_explorer/visualize/timeseries_view.png" alt="Timeseries view" style="width:100%;">}}
 

@@ -59,6 +59,30 @@ The waterfall view is currently in private beta. Contact <a href="http://localho
 
 ## Hub to other data sources
 
+### Infrastructure Data
+
+[To complete]
+
+### Service and resource level metrics
+
+[To complete]
+
+### Connect Traces and Profiles
+
+[To complete]
+
+### Connect Traces and Logs
+
+[To complete]
+
+### Connect Traces and Network Flows
+
+[To complete]
+
+### Conntect Traces and Processes
+
+[To complete]
+
 [1]: /tracing/trace_explorer/visualize/#list-view
 [2]: span-list
 [3]: /tracing/setup_overview/custom_instrumentation/java/
