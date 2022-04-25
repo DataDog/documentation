@@ -55,7 +55,78 @@ To set up integrations that are not compatible with standard Autodiscovery, you 
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+
+Integration templates can be stored in your Kubernetes pod annotations. With Autodiscovery, the Agent detects if it's running on Kubernetes and automatically searches all pod annotations for integration templates.
+
+To apply a specific configuration to a given container, Autodiscovery identifies containers by **name**, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`. To configure your Datadog integration Autodiscovery on a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod:
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+      {
+        "<INTEGRATION_NAME>": {
+          "init_config": <INIT_CONFIG>,
+          "instances": [<INSTANCE_CONFIG>]
+        }
+      }
+    # (...)
+spec:
+  containers:
+    - name: '<CONTAINER_IDENTIFIER>'
+# (...)
+```
+
+`init_config` is usually an empty `{}`, and with AD Annotations v2 it became optional.
+
+To apply two different integration templates to two different containers: `<CONTAINER_IDENTIFIER_1>` and `<CONTAINER_IDENTIFIER_2>` within your pod, add the following annotations to your pod:
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.checks: |
+      {
+        "<INTEGRATION_NAME_1>": {
+          "init_config": <INIT_CONFIG_1>,
+          "instances": [<INSTANCE_CONFIG_1>]
+        }
+      }
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.checks: |
+      {
+        "<INTEGRATION_NAME_2>": {
+          "init_config": <INIT_CONFIG_2>,
+          "instances": [<INSTANCE_CONFIG_2>]
+        }
+      }
+spec:
+  containers:
+    - name: '<CONTAINER_IDENTIFIER_1>'
+    # (...)
+    - name: '<CONTAINER_IDENTIFIER_2>'
+# (...)
+```
+
+If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, replica sets, or deployments, add pod annotations under `.spec.template.metadata`.
+
+**Note:** As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
+
+
+
+[1]: /getting_started/tagging/unified_service_tagging
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
 
 Integration templates can be stored in your Kubernetes pod annotations. With Autodiscovery, the Agent detects if it's running on Kubernetes and automatically searches all pod annotations for integration templates.
 
@@ -105,22 +176,6 @@ spec:
 If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, replica sets, or deployments, add pod annotations under `.spec.template.metadata`.
 
 **Note:** As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
-
-
-### Tolerate unready pods
-
-By default, `unready` pods are ignored when the Datadog Agent schedules checks, so metrics, service checks, and logs are not collected from these pods. To override this behavior, set the annotation `ad.datadoghq.com/tolerate-unready` to `"true"`. For example:
-
-```yaml
-apiVersion: v1
-kind: Pod
-# (...)
-metadata:
-  name: '<POD_NAME>'
-  annotations:
-    ad.datadoghq.com/tolerate-unready: "true"
-  ...
-```
 
 
 [1]: /getting_started/tagging/unified_service_tagging
@@ -266,12 +321,66 @@ See [Autodiscovery Container Identifiers][2] for information on the `<INTEGRATIO
 {{% /tab %}}
 {{< /tabs >}}
 
+### Tolerate unready pods
+
+By default, `unready` pods are ignored when the Datadog Agent schedules checks, so metrics, service checks, and logs are not collected from these pods. To override this behavior, set the annotation `ad.datadoghq.com/tolerate-unready` to `"true"`. For example:
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/tolerate-unready: "true"
+  ...
+```
+
 ## Examples
 
 ### Datadog Redis integration
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+
+The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis
+  annotations:
+    ad.datadoghq.com/redis.checks: |
+      {
+        "redisdb": {
+          "instances": [
+            {
+              "host": "%%host%%",
+              "port":"6379",
+              "password":"%%env_REDIS_PASSWORD%%"
+            }
+          ]
+        }
+      }
+  labels:
+    name: redis
+spec:
+  containers:
+    - name: redis
+      image: redis:latest
+      ports:
+        - containerPort: 6379
+```
+
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
+
+[1]: /agent/faq/template_variables/
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
 
 The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter:
 
@@ -394,7 +503,53 @@ Configurations below apply to an Apache container image with the `<CONTAINER_IDE
 Check names are `apache`, `http_check`, their `<INIT_CONFIG>`, and `<INSTANCE_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][10], [Datadog-HTTP check integration][11].
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apache
+  annotations:
+    ad.datadoghq.com/apache.checks: |
+      {
+        "apache": {
+          "instances": [
+            {
+              "apache_status_url": "http://%%host%%/server-status?auto"
+            }
+          ]
+        },
+        "http_check": {
+          "instances": [
+            {
+              "name": "<WEBSITE_1>",
+              "url": "http://%%host%%/website_1",
+              "timeout": 1
+            },
+            {
+              "name": "<WEBSITE_2>",
+              "url": "http://%%host%%/website_2",
+              "timeout": 1
+            }
+          ]
+        }
+      }
+  labels:
+    name: apache
+spec:
+  containers:
+    - name: apache
+      image: httpd
+      ports:
+        - containerPort: 80
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
 
 ```yaml
 apiVersion: v1
