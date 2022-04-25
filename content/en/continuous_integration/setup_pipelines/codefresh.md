@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on Codefresh pipelines
+title: Set up Tracing on Codefresh Pipelines
 kind: documentation
 further_reading:
     - link: "/continuous_integration/explore_pipelines"
