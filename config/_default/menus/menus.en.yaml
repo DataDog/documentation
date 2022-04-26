@@ -5624,6 +5624,18 @@ api:
         - GetUsageObservabilityPipelines
       unstable: []
       order: 38
+  - name: Get Cost Across Multi-Org Account
+    url: '#get-cost-across-multi-org-account'
+    identifier: get-cost-across-multi-org-account
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCostByOrg
+      unstable: []
+      order: 39
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: get-all-custom-metrics-by-hourly-average
