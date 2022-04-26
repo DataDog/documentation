@@ -19,7 +19,7 @@ To migrate to the new configuration options, remove all legacy App Analytics [co
 
 ## App Analytics setup
 
-App Analytics configuration options are located in the tracing libraries and in the Datadog Agent. In the libraries, analytics spans from your services are generated either [automatically](#automatic-configuration) or [manually](#custom-instrumentation).
+App Analytics configuration options are located in the Tracing Libraries and in the Datadog Agent. In the libraries, analytics spans from your services are generated either [automatically](#automatic-configuration) or [manually](#custom-instrumentation).
 
 ### In Tracing Libraries
 
