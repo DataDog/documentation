@@ -100,7 +100,7 @@ The following table log analytics show the evolution of the **Top 10 Availabilit
 
 A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, countries, etc. within your log data.
 
-The following pie chart shows the percentage breakdown by service.
+The following pie chart shows the percentage breakdown by **service**.
 
 {{< img src="logs/explorer/doc_pie_chart.png" alt="Pie chart example" style="width:90%;">}}
 
@@ -108,7 +108,7 @@ The following pie chart shows the percentage breakdown by service.
 
 A tree map helps you organize and show data as a percentage of a whole in a visually appealing format. Tree maps display data in nested rectangles. Compare different dimensions using both size and colors of the rectangles. You can also select multiple attributes to view a hierarchy of rectangles.
 
-The following tree map shows the percentage breakdown by service.
+The following tree map shows the percentage breakdown by **service**.
 
 {{< img src="logs/explorer/doc_tree_map.png" alt="Tree map example" style="width:90%;">}}
 
