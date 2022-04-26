@@ -114,10 +114,10 @@ If you have existing `[Trace]` or similar attributes, or prefer to use attribute
   <strong>Note:</strong> This requires enabling automatic instrumentation for your application.
 </div>
 
-Using the `DD_TRACE_METHOD` environment variable, you can get visibility into unsupported frameworks without changing application code.
+Using the `DD_TRACE_METHOD` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format, see the [.NET Framework setup instructions][9] or the [.NET Core setup instructions][10]. For the following example, assume that the desired method to instrument is named `SaveSession` and the method is defined on the `Store.Managers.SessionManager` type:
 
 ```ini
-DD_TRACE_METHODS=Store.SessionManager[SaveSession]
+DD_TRACE_METHODS=Store.Managers.SessionManager[SaveSession]
 ```
 
 The only difference between this approach and using `[Trace]` attributes is the customization options for the operation and resource names.  With DD Trace Methods, `operationName` is `trace.annotation` and `resourceName` is `SaveSession`.
@@ -135,12 +135,15 @@ Add `[Trace]` to methods to have them be traced when running with automatic inst
 ```csharp
 using Datadog.Trace.Annotations;
 
-public class SessionManager
+namespace Store.Managers
 {
-    [Trace(OperationName = "database.persist", ResourceName = "SessionManager.SaveSession")]
-    public static void SaveSession()
+    public class SessionManager
     {
-        // your method implementation here
+        [Trace(OperationName = "database.persist", ResourceName = "SessionManager.SaveSession")]
+        public static void SaveSession()
+        {
+            // your method implementation here
+        }
     }
 }
 ```
@@ -169,7 +172,7 @@ using (var parentScope =
 ```
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page or in [Ignoring Unwanted Resources][10].
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][11] page or in [Ignoring Unwanted Resources][12].
 
 ## Further Reading
 
@@ -184,5 +187,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [6]: /tracing/setup_overview/compatibility_requirements/dotnet-framework
 [7]: /tracing/setup_overview/compatibility_requirements/dotnet-core
 [8]: /tracing/visualization/#trace
-[9]: /tracing/security
-[10]: /tracing/guide/ignoring_apm_resources/
+[9]: /tracing/setup_overview/setup/dotnet-framework
+[10]: /tracing/setup_overview/setup/dotnet-core
+[11]: /tracing/security
+[12]: /tracing/guide/ignoring_apm_resources/
