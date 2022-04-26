@@ -19,12 +19,11 @@ To migrate to the new configuration options, remove all legacy App Analytics [co
 
 ## App Analytics setup
 
-To enable App Analytics, either [automatically](#automatic-configuration) or [manually](#custom-instrumentation), configure your APM tracer to emit the relevant analytics from your services.
+App Analytics configuration options are located in the tracing libraries and in the Datadog Agent. In the libraries, analytics spans from your services are generated either [automatically](#automatic-configuration) or [manually](#custom-instrumentation).
 
+### In Tracing Libraries
 
-**Note**: to use App Analytics, you must be using Agent v6.7+.
-
-### Automatic configuration
+#### Automatic configuration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,nginx" >}}
 {{< programming-lang lang="java" >}}
@@ -130,9 +129,9 @@ To enable App Analytics for Nginx:
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Configure additional services (optional)
+#### Configure additional services (optional)
 
-#### Configure by integration
+##### Configure by integration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
@@ -265,7 +264,7 @@ Integration names can be found on the [integrations table][1].
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Database services
+#### Database services
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
@@ -347,7 +346,7 @@ Integration names can be found on the [integrations table][1].
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### Custom instrumentation
+##### Custom instrumentation
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -475,6 +474,31 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
+
+### In the Datadog Agent
+
+<div class="alert alert-danger">
+This section describes deprecated features with configuration information relevant to legacy App Analytics.
+</div>
+
+To configure a rate of spans to analyze by service, setup the following in the `datadog.yaml` file:
+```
+apm_config:
+  analyzed_rate_by_service:
+    service_A: 1
+    service_B: 0.2
+    service_C: 0.05
+```
+
+To configure a rate of spans to analyze by service and operation name, setup the following in the `datadog.yaml` file:
+
+```
+apm_config:
+  analyzed_spans:
+    service_A|operation_name_X: 1
+    service_A|operation_name_Y: 0.25
+    service_B|operation_name_Z: 0.01
+```
 
 [1]: /tracing/trace_ingestion/
 [2]: /tracing/trace_ingestion/mechanisms
