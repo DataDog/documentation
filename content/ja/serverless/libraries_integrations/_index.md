@@ -1,23 +1,23 @@
 ---
-title: サーバーレスライブラリとインテグレーション
-kind: documentation
-further_reading:
-  - link: /serverless/serverless_integrations/plugin/
-    tag: Datadog サーバーレスプラグイン
-    text: ドキュメント
-  - link: /serverless/serverless_integrations/macro/
-    tag: ドキュメント
-    text: Datadog のサーバーレスマクロ
-  - link: /serverless/serverless_integrations/cli/
-    tag: ドキュメント
-    text: Datadog サーバーレス CLI
 aliases:
-  - /ja/serverless/serverless_integrations
+- /ja/serverless/serverless_integrations
+further_reading:
+- link: /serverless/serverless_integrations/plugin/
+  tag: Datadog サーバーレスプラグイン
+  text: ドキュメント
+- link: /serverless/serverless_integrations/macro/
+  tag: ドキュメント
+  text: Datadog のサーバーレスマクロ
+- link: /serverless/serverless_integrations/cli/
+  tag: ドキュメント
+  text: Datadog サーバーレス CLI
+kind: documentation
+title: サーバーレスライブラリとインテグレーション
 ---
+
 {{< whatsnext desc="サーバーレスライブラリとインテグレーション:" >}}
     {{< nextlink href="/serverless/libraries_integrations/extension/" >}}Datadog Lambda 拡張機能{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/library/" >}}Datadog Lambda ライブラリ{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/forwarder/" >}}Datadog Lambda Forwarder{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/plugin/" >}}Datadog Lambda プラグイン{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/macro/" >}}Datadog Lambda マクロ{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/cli/" >}}Datadog Lambda CLI{{< /nextlink >}}
