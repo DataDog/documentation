@@ -1759,21 +1759,26 @@ main:
     parent: setup_pipelines
     identifier: ci_circleci
     weight: 202
+  - name: Codefresh
+    url: continuous_integration/setup_pipelines/codefresh/
+    parent: setup_pipelines
+    identifier: ci_codefresh
+    weight: 203
   - name: GitHub Actions
     url: continuous_integration/setup_pipelines/github/
     parent: setup_pipelines
     identifier: ci_github
-    weight: 203
+    weight: 204
   - name: GitLab
     url: continuous_integration/setup_pipelines/gitlab/
     parent: setup_pipelines
     identifier: ci_gitlab
-    weight: 204
+    weight: 205
   - name: Jenkins
     url: continuous_integration/setup_pipelines/jenkins/
     parent: setup_pipelines
     identifier: ci_jenkins
-    weight: 205
+    weight: 206
   - name: Custom Commands
     url: continuous_integration/setup_pipelines/custom_commands/
     parent: setup_pipelines
