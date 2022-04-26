@@ -17,6 +17,8 @@ further_reading:
   text: "Use Datadog's GitHub Action to add Synthetic testing to workflows"
 ---
 
+<div class="alert alert-info">This page is about configuring Synthetic tests for your continuous integration (CI) pipelines. If you want to bring your CI metrics and data into Datadog dashboards, see the <a href="/continuous_integration/" target="_blank">Continuous Integration Visibility</a> section.</div>
+
 ## Overview
 
 Use the `@datadog-ci` NPM package to run Synthetic tests directly within your CI/CD pipeline. You can automatically halt a build, block a deployment, and roll back a deployment when a Synthetics test detects a regression. 
