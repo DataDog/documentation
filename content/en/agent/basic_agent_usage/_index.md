@@ -254,32 +254,13 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 An example of the Datadog Agent resource consumption is below. Tests were made on an AWS EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM) and comparable performance was seen for ARM64-based instances with similar resourcing. The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
 Enabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
-* Agent Test version: 6.7.0
-* CPU: ~ 0.12% of the CPU used on average
-* Memory: ~ 60MB of RAM used (RSS memory)
-* Network bandwidth: ~ 86 B/s ▼ | 260 B/s ▲
+* Agent Test version: 7.34.0
+* CPU: ~ 0.08% of the CPU used on average
+* Memory: ~ 130MB of RAM used (RSS memory)
+* Network bandwidth: ~ 140 B/s ▼ | 800 B/s ▲
 * Disk:
-  * Linux 350MB to 400MB depending on the distribution
-  * Windows: 260MB
-
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-* Agent Test version: 5.24.0
-* CPU: ~ 0.35% of the CPU used on average
-* Memory: ~ 115MB of RAM used.
-* Network bandwidth: ~ 1900 B/s ▼ | 800 B/s ▲
-* Disk:
-  * Linux 312MB
-  * Windows: 295MB
-
-**Note**: Since v5.15 of the container Agent, it is recommended to set container resources to at least 256MB due to an added memory cache -- upping the limit is not to account for baseline usage but rather to accommodate temporary spikes. Agent 6 has a much more limited memory footprint.
-
-{{% /tab %}}
-{{< /tabs >}}
+  * Linux 830MB to 880MB depending on the distribution
+  * Windows: 870MB
 
 **Log Collection**:
 
@@ -292,9 +273,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 * CPU: ~ 1.5% of the CPU used on average
 * Memory: ~ 95MB of RAM used.
 * Network bandwidth: ~ 14 KB/s ▲
-* Disk:
-  * Linux 350MB to 400MB depending on the distribution
-  * Windows: 260MB
 
 {{% /tab %}}
 {{% tab "HTTP compression level 1" %}}
@@ -303,9 +281,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 * CPU: ~ 1% of the CPU used on average
 * Memory: ~ 95MB of RAM used.
 * Network bandwidth: ~ 20 KB/s ▲
-* Disk:
-  * Linux 350MB to 400MB depending on the distribution
-  * Windows: 260MB
 
 {{% /tab %}}
 {{% tab "HTTP Uncompressed" %}}
@@ -314,9 +289,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 * CPU: ~ 0.7% of the CPU used on average
 * Memory: ~ 90MB of RAM used (RSS memory)
 * Network bandwidth: ~ 200 KB/s ▲
-* Disk:
-  * Linux 350MB to 400MB depending on the distribution
-  * Windows: 260MB
 
 {{% /tab %}}
 {{< /tabs >}}

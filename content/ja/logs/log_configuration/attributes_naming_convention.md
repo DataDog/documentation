@@ -182,7 +182,7 @@ further_reading:
 | **完全名**   | **型** | **説明**                                                                                                                       |
 | :------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------ |
 | `db.instance`  | `string` | データベースインスタンス名。たとえば、Java で `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"` の場合、インスタンス名は `customers` です。       |
-| `db.statement` | `string` | 指定されたデータベースタイプのデータベースステートメント。たとえば、mySQL の場合は `"SELECT * FROM wuser_table"、Redis の場合は `"SET mykey 'WuValue'"` です。 |
+| `db.statement` | `string` | 指定されたデータベースタイプのデータベースステートメント。たとえば、mySQL の場合は `"SELECT * FROM wuser_table";`、Redis の場合は `"SET mykey 'WuValue'"` です。 |
 | `db.operation` | `string` | 実行された処理 ("query"、"update"、"delete" など)。                                                                   |
 | `db.user`      | `string` | 処理を実行するユーザー。                                                                                                     |
 
@@ -220,7 +220,7 @@ Datadog ではこの属性を[トレース検索][20]のデフォルトの[メ�
 | `syslog.timestamp` | `string` | ログのタイムスタンプ。通常は、予約済み属性 `date` に再マップされます。       |
 | `syslog.env`       | `string` | ログのソースが由来する環境名。                      |
 
-これらに依存するインテグレーションには、[Rsyslog][21]、[NxLog][22]、[Syslog-ng][23]、[Fluentd][24]、[Logstash][25] などがあります。
+これらに依存するインテグレーションには、[Rsyslog][21]、[NxLog][22]、[Syslog-ng][23]、[Fluentd][24]、[Logstash][25] があります。
 
 #### DNS
 
@@ -231,7 +231,7 @@ Datadog ではこの属性を[トレース検索][20]のデフォルトの[メ�
 | `dns.id`             | `string` | DNS のクエリ識別子。                                                 |
 | `dns.question.name`  | `string` | クエリ対象のドメイン名。                                                  |
 | `dns.question.type`  | `string` | DNS の質問の種類を指定する [2 オクテットのコード][26]。             |
-| `dns.question.class` | `string` | DNS の質問で検索されるクラス (インターネットを使用する場合は IN など) 。 |
+| `dns.question.class` | `string` | DNS の質問で検索されるクラス (インターネットを使用する場合は IP など) 。 |
 | `dns.question.size`  | `number` | DNS 質問のバイトサイズ。                                           |
 | `dns.answer.name`    | `string` | DNS で回答する際の IP アドレス。                                 |
 | `dns.answer.type`    | `string` | DNS の回答の種類を指定する [2 オクテットのコード][26]。               |

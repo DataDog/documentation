@@ -8,24 +8,27 @@ aliases:
   - /integrations/docker_daemon/
   - /docker/
 further_reading:
-- link: "/agent/docker/log/"
-  tag: "Documentation"
-  text: "Collect your application logs"
-- link: "/agent/docker/apm/"
-  tag: "Documentation"
-  text: "Collect your application traces"
-- link: "/agent/docker/prometheus/"
-  tag: "Documentation"
-  text: "Collect your Prometheus metrics"
-- link: "/agent/docker/integrations/"
-  tag: "Documentation"
-  text: "Collect automatically your applications metrics and logs"
-- link: "/agent/guide/autodiscovery-management/"
-  tag: "Documentation"
-  text: "Limit data collection to a subset of containers only"
-- link: "/agent/docker/tag/"
-  tag: "Documentation"
-  text: "Assign tags to all data emitted by a container"
+  - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Containers releases! (App login required)."
+  - link: "/agent/docker/log/"
+    tag: "Documentation"
+    text: "Collect your application logs"
+  - link: "/agent/docker/apm/"
+    tag: "Documentation"
+    text: "Collect your application traces"
+  - link: "/agent/docker/prometheus/"
+    tag: "Documentation"
+    text: "Collect your Prometheus metrics"
+  - link: "/agent/docker/integrations/"
+    tag: "Documentation"
+    text: "Collect automatically your applications metrics and logs"
+  - link: "/agent/guide/autodiscovery-management/"
+    tag: "Documentation"
+    text: "Limit data collection to a subset of containers only"
+  - link: "/agent/docker/tag/"
+    tag: "Documentation"
+    text: "Assign tags to all data emitted by a container"
 ---
 
 ## Overview
@@ -140,6 +143,7 @@ The Agent's [main configuration file][13] is `datadog.yaml`. For the Docker Agen
 | `DD_SITE`          | Destination site for your metrics, traces, and logs. Set your Datadog site to: `{{< region-param key="dd_site" >}}`. Defaults to `datadoghq.com`.                                                                                                                                                                                                |
 | `DD_DD_URL`        | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
 | `DD_CHECK_RUNNERS` | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
+| `DD_APM_ENABLED`           | Enables trace collection. Defaults to `true`. Read about additional trace collection environment variables in [Tracing Docker Applications][14].   |
 
 ### Proxy settings
 
@@ -151,7 +155,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_HTTPS`    | An HTTPS URL to use as a proxy for `https` requests.              |
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
 
-For more information about proxy settings, see the [Agent v6 Proxy documentation][14].
+For more information about proxy settings, see the [Agent v6 Proxy documentation][15].
 
 ### Optional collection Agents
 
@@ -159,7 +163,6 @@ Optional collection Agents are disabled by default for security or performance r
 
 | Env Variable               | Description                                                                                                                                                                                                                                                      |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_ENABLED`           | Enable trace collection. Read about additional trace collection environment variables in [Tracing Docker Applications][15].   |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers][16].       |
 | `DD_LOGS_ENABLED`          | Enable [log collection][17] with the Logs Agent.                                                                                                                                                                                                                 |
 | `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][18] and the [live container view][19] are disabled. |
@@ -277,8 +280,8 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [11]: /integrations/faq/compose-and-the-datadog-agent/
 [12]: /agent/docker/integrations/
 [13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[14]: /agent/proxy/#agent-v6
-[15]: /agent/docker/apm/
+[14]: /agent/docker/apm/
+[15]: /agent/proxy/#agent-v6
 [16]: /agent/docker/apm/#tracing-from-other-containers
 [17]: /agent/docker/log/
 [18]: /infrastructure/process/

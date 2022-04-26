@@ -1,23 +1,24 @@
 ---
-title: Cluster Agent のコマンドとオプション
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
-    tag: ブログ
-    text: Datadog Cluster Agent のご紹介
-  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
-    tag: ブログ
-    text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
-  - link: /agent/cluster_agent/clusterchecks/
-    tag: ドキュメント
-    text: Autodiscovery によるクラスターチェックの実行
-  - link: /agent/kubernetes/daemonset_setup/
-    tag: ドキュメント
-    text: Kubernetes DaemonSet のセットアップ
-  - link: /agent/cluster_agent/troubleshooting/
-    tag: ドキュメント
-    text: Datadog Cluster Agent のトラブルシューティング
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
+  tag: ブログ
+  text: Datadog Cluster Agent のご紹介
+- link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
+  tag: ブログ
+  text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
+- link: /agent/cluster_agent/clusterchecks/
+  tag: ドキュメント
+  text: Autodiscovery によるクラスターチェックの実行
+- link: /agent/kubernetes/daemonset_setup/
+  tag: ドキュメント
+  text: Kubernetes DaemonSet のセットアップ
+- link: /agent/cluster_agent/troubleshooting/
+  tag: ドキュメント
+  text: Datadog Cluster Agent のトラブルシューティング
+kind: documentation
+title: Cluster Agent のコマンドとオプション
 ---
+
 ## Cluster Agent のコマンド
 
 Datadog Cluster Agent には次のコマンドがあります。
@@ -51,14 +52,13 @@ Datadog Cluster Agent がサービスを提供するポート。デフォルト�
 クラスターレベルのメタデータマッピングを有効にします。デフォルトは `true` です。
 
 `DD_COLLECT_KUBERNETES_EVENTS`
-Kubernetes イベントを収集するように Agent を構成します。デフォルトは `false` です。詳細については、[イベント収集のドキュメント][2]を参照してください。
+Kubernetes イベントを収集するように Agent を構成します。デフォルトは `false` です。詳細については、[Cluster Agent イベント収集のドキュメント][2]を参照してください。
 
 `DD_LEADER_ELECTION`
 「リーダー選出」を有効にします。この機能を有効にするには、 `DD_COLLECT_KUBERNETES_EVENTS` を `true` に設定します。デフォルトは `false` です。
 
-
-`DD_LEADER_LEASE_DURATION`
-リーダー選出が有効になっている場合にのみ使用されます。詳細は[リーダー選出セクション][3]を参照してください。値は秒単位で、デフォルトは 60 です。
+`DD_LEADER_LEASE_DURATION`                    
+: リーダー選出が有効な場合のみ使用されます。リーダー選出についての詳細は、[Cluster Agent イベント収集のドキュメント][2]を参照してください。値は秒数で、デフォルトでは 60 です。
 
 `DD_CLUSTER_AGENT_AUTH_TOKEN`
 ノード Agent と Datadog Cluster Agent の間で共有される 32 文字のトークン。

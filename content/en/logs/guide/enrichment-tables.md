@@ -31,7 +31,7 @@ Click **New Enrichment Table +**, then upload a CSV file, name the appropriate c
 
 {{< img src="logs/guide/enrichment-tables/configure-enrichment-table.png" alt="Create an Enrichment Table" style="width:100%;">}}
 
-**Note**: The manual CSV upload method supports files up to 5MB.
+**Note**: The manual CSV upload method supports files up to 4MB.
 
 {{% /tab %}}
 

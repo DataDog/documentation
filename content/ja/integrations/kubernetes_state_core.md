@@ -239,12 +239,6 @@ datadog:
 `kubernetes_state.container.status_report.count.terminated`
 : コンテナが現在終了状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
 
-`kubernetes_state.container.status_report.count.waiting`
-: コンテナが現在待機状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
-
-`kubernetes_state.container.status_report.count.terminated`
-: コンテナが現在終了状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
-
 `kubernetes_state.pod.ready`
 : ポッドがリクエストを処理する準備ができているかどうかを説明します。 タグ: `kube_namespace` `pod_name` `condition` (標準ラベルの `env` `service` `version`)。
 

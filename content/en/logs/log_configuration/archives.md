@@ -57,8 +57,11 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
+**NOTE:** Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][3], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
+
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
+[3]: /integrations/azure/?tab=azurecliv20
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
@@ -132,9 +135,6 @@ Add the following two permission statements to your IAM policies attached to the
       "Sid": "DatadogUploadAndRehydrateLogArchives",
       "Effect": "Allow",
       "Action": ["s3:PutObject", "s3:GetObject"],
-       "Principal": {
-          "AWS": "arn:aws:iam::MY_AWS_ACCOUNTID:role/<MY_ROLE_NAME>"
-       },
       "Resource": [
         "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
         "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
@@ -144,9 +144,6 @@ Add the following two permission statements to your IAM policies attached to the
       "Sid": "DatadogRehydrateLogArchivesListBucket",
       "Effect": "Allow",
       "Action": "s3:ListBucket",
-      "Principal": {
-          "AWS": "arn:aws:iam::MY_AWS_ACCOUNTID:role/<MY_ROLE_NAME>"
-       },
       "Resource": [
         "arn:aws:s3:::<MY_BUCKET_NAME_1>",
         "arn:aws:s3:::<MY_BUCKET_NAME_2>"
@@ -263,7 +260,7 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive (Glacier Instant Retrieval is an exception). If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /logs/archives/rehydrating/

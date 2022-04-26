@@ -13,11 +13,13 @@ further_reading:
       text: 'PHP Datadog Tracer Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Rules"
+      text: "OOTB Application Security Monitoring Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Monitoring"
 ---
+
+You can monitor application security for PHP apps running in Docker, Kubernetes, and AWS ECS. 
 
 {{% appsec-getstarted %}}
 
@@ -25,12 +27,12 @@ further_reading:
 
 1. **Install the latest Datadog PHP library** by downloading and running the installer:
    ```
-   wget https://raw.githubusercontent.com/DataDog/dd-appsec-php/installer/dd-library-php-setup.php
-   php dd-library-php-setup.php --php-bin all --tracer-version latest --appsec-version latest
+   wget https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php -O datadog-setup.php
+   php datadog-setup.php --php-bin all --enable-appsec
    ```
    For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
-2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling Application Security, you can optionally enable it after by setting the following environment variable:
+2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling ASM, you can optionally enable it after by setting the following environment variable:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 

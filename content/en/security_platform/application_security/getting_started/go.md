@@ -10,11 +10,13 @@ further_reading:
       text: 'Go Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Rules"
+      text: "OOTB Application Security Monitoring Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Monitoring"
 ---
+
+You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS. 
 
 {{% appsec-getstarted %}}
 - One of the [supported APM tracing integrations][1].
@@ -29,12 +31,12 @@ further_reading:
    ```
    For information about which language and framework versions are supported by the library, see [Compatibility][4].
 
-2. **Recompile your program** and enable Application Security and CGO:
+2. **Recompile your program** and enable ASM and CGO:
    ```console
    $ env CGO_ENABLED=1 go build -v -tags appsec my-program
    ```
 
-3. **Redeploy your Go service and enable Application Security** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+3. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
    ```console
    $ env DD_APPSEC_ENABLED=true ./my-program
    ```
@@ -61,7 +63,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the Application Security environment variable:
+Update your deployment configuration file for APM and add the ASM environment variable:
 
 ```
 spec:

@@ -10,11 +10,13 @@ further_reading:
       text: '.NET Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Rules"
+      text: "OOTB Application Security Monitoring Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Monitoring"
 ---
+
+You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
 
 {{% appsec-getstarted %}}
 
@@ -24,7 +26,7 @@ further_reading:
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-2. **Enable Application Security Monitoring** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
+2. **Enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
    ```
    $target=[System.EnvironmentVariableTarget]::Process
    [System.Environment]::SetEnvironmentVariable("DD_APPSEC_ENABLED","true",$target)
@@ -134,7 +136,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the Application Security environment variable:
+Update your deployment configuration file for APM and add the ASM environment variable:
 
 ```
 spec:
