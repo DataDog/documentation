@@ -89,7 +89,7 @@ Either the Datadog Agent or an integration sets the submission interval for a me
 
 While it is not normally required, it is possible to change a metric's type in the [Metrics Summary page][4]:
 
-{{< img src="metrics/type_modifiers/metric_type.png" alt="Metric Type" style="width:70%;">}}
+{{< img src="metrics/custom_metrics/type_modifiers/metric_type.png" alt="Metric Type" style="width:70%;">}}
 
 Example use case:
 
