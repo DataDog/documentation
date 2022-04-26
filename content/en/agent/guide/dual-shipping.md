@@ -268,7 +268,7 @@ The `is_reliable` setting tells the Agent to treat this endpoint with the same p
 
 For example, if you're sending data to the main endpoint and an additional endpoint with `is_reliable: true`, and one endpoint becomes unavailable, data continues to flow to the other endpoint. If both endpoints become unavailable, the Agent stops reading and sending data until at least one endpoint recovers. This ensures all data makes it to at least one reliable endpoint.
 
-The `is_reliable` setting defaults to `false`. Datadog recommends that you set `is_reliable` to `true`. Unreliable endpoints only send data if at least one reliable endpoint is available. You may define multiple additional endpoints with mixed use of `is_reliable`.
+The `is_reliable` setting defaults to `false`. Datadog recommends that you set `is_reliable` to `true`. Unreliable endpoints only send data if at least one reliable endpoint is available. You may define multiple additional endpoints with a mixed usage of `is_reliable` values.
 
 You can add the YAML configuration to your `datadog.yaml` or launch the Agent with the appropriate environment variables.
 
