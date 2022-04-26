@@ -102,7 +102,7 @@ A pie chart helps you organize and show data as a percentage of a whole. It is u
 
 The following pie chart shows the percentage breakdown by **service**.
 
-{{< img src="logs/explorer/doc_pie_chart.png" alt="Pie chart example" style="width:90%;">}}
+{{< img src="logs/explorer/doc_pie_chart.png" alt="Pie chart example showing percentage breakdown by service" style="width:90%;">}}
 
 ## Tree map
 
@@ -110,7 +110,7 @@ A tree map helps you organize and show data as a percentage of a whole in a visu
 
 The following tree map shows the percentage breakdown by **service**.
 
-{{< img src="logs/explorer/doc_tree_map.png" alt="Tree map example" style="width:90%;">}}
+{{< img src="logs/explorer/doc_tree_map.png" alt="Tree map example showing percentage breakdown by service" style="width:90%;">}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
