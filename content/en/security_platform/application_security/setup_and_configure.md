@@ -264,7 +264,6 @@ if span, ok := tracer.SpanFromContext(request.Context()); ok {
     // Record user information in the trace the span belongs to
     tracer.SetUser(span, usr.id, tracer.WithUserEmail(usr.email), tracer.WithUserName(usr.name))
 ```
-<p></p>
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
 {{< /programming-lang >}}
