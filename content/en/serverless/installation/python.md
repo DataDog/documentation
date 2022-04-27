@@ -18,7 +18,7 @@ aliases:
 
 <div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up your Lambda functions using the Datadog Forwarder, see <a href="/serverless/guide/datadog_forwarder_python">instrumenting using the Datadog Forwarder</a>.</div>
 
-<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 ## Installation
 
@@ -55,7 +55,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 5. Configure the Datadog API key
 
-    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string, instead of being inside a json blob. Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
+    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
 
     ```sh
     export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
@@ -69,7 +69,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 6. Instrument your Lambda functions
 
-    **Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+    **Note**: Instrument your Lambda functions in a dev or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
     To instrument your Lambda functions, run the following command.
 
@@ -111,7 +111,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can instead use `apiKey` and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
 
     For more information and additional settings, see the [plugin documentation][1].
 
@@ -122,7 +122,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog to your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog on your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 1. Install the Datadog CloudFormation macro
 
@@ -155,7 +155,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with your [Datadog site][4] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][5] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][5] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found in the [macro documentation][1].
 
@@ -168,7 +168,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-The [Datadog CDK Construct][1] automatically installs Datadog to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
+The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
 
 1. Install the Datadog CDK constructs library
 
@@ -200,7 +200,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with your [Datadog site][2] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
 
@@ -235,12 +235,12 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
     - Set your image's `CMD` value to `datadog_lambda.handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 
-    **Note**: If you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
+    **Note**: If you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
 
 4. Configure the Datadog site, API key, and tracing
 
     - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
     - Set the environment variable `DD_TRACE_ENABLED` to `true`.
 
 
@@ -277,13 +277,13 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 
       Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38` and `Python39`.
 
-    - Option B: If you cannot use the prebuilt Datadog Lambda layer for some reason, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`.
+    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`.
 
       ```sh
       pip install datadog-lambda -t ./
       ```
 
-      **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore they must be installed and compiled in a Linux environment on the right architecture (`x86_64` or `arm64`). For example, you can use [dockerizePip][2] for the Serverless Framework and [--use-container][3] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][4].
+      **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore it must be installed and compiled in a Linux environment on the right architecture (`x86_64` or `arm64`). For example, you can use [dockerizePip][2] for the Serverless Framework and [--use-container][3] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][4].
 
       See the [latest release][5].
 
@@ -312,7 +312,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
     - Set your function's handler to `datadog_lambda.handler.handler`.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 
-    **Note**: If you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][6] instead.
+    **Note**: If you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][6] instead.
 
 4. Configure the Datadog site, API key, and tracing
 
@@ -353,7 +353,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to
