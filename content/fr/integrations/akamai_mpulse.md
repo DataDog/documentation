@@ -1,9 +1,9 @@
 ---
 categories:
-  - cloud
+- cloud
 ddtype: crawler
 dependencies: []
-description: "Intégrez Akamai\_mPulse à Datadog."
+description: Intégrez Akamai mPulse à Datadog.
 doc_link: https://docs.datadoghq.com/integrations/akamai_mpulse/
 draft: false
 git_integration_title: akamai_mpulse
@@ -16,9 +16,11 @@ kind: integration
 manifest_version: '1.0'
 name: akamai_mpulse
 public_title: Datadog/Akamai mPulse
-short_description: "Intégrez Akamai\_mPulse à Datadog."
+short_description: Intégrez Akamai mPulse à Datadog.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Connectez Datadog à Akamai mPulse pour recueillir des métriques RUM (Real-User Monitoring) et bénéficier d'une visibilité sur la manière dont les utilisateurs finaux perçoivent les performances d'un site Web.
@@ -29,7 +31,7 @@ Connectez Datadog à Akamai mPulse pour recueillir des métriques RUM (Real-Use
 
 Installez l'intégration avec le [carré d'intégration Akamai mPulse][1] de Datadog.
 
-### Configuration
+### Procédure à suivre
 
 Pour configurer l'intégration Akamai mPulse, une `apiKey` et un `apiToken` sont requis.
 
