@@ -306,7 +306,7 @@ The message renders the `error.message` attribute of a chosen log matching the q
 
 <div class="alert alert-info"><strong>Note</strong>: If the selected event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, do not use these variables for routing notification with <code>{{#is_match}}</code> handles.</div>
 
-<div class="alert alert-info"><strong>Note</strong>: If the monitor uses Formulas & Functions in their queries, the values will be resolved using events extracted from the first query.</div>
+If a monitor uses Formulas & Functions in its queries, the values are resolved with events that are extracted from the first query.
 
 #### Reserved attributes
 
