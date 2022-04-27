@@ -49,7 +49,7 @@ vector:
   # Adjust protocol to https if TLS/SSL is enabled on the Vector side
   logs.url: "http://<VECTOR_HOST>:<VECTOR_PORT>"
 # Uncomment the following line if you use a version of Vector before v0.17.0
-# logs_config.use_v2_api: false 
+# logs_config.use_v2_api: false
 ```
 
 For metrics, update the following values in the `datadog.yaml` file:
@@ -119,7 +119,7 @@ sinks:
     encoding:
       codec: json
   metrics_to_datadog:
-    type: datadog_logs
+    type: datadog_metrics
     inputs:
        - tag_metrics
     default_api_key: "${DATADOG_API_KEY_ENV_VAR}"
