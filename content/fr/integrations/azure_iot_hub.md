@@ -1,16 +1,17 @@
 ---
 categories:
-  - cloud
-  - azure
+- cloud
+- azure
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure IoT Hub.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_iot_hub/'
+doc_link: https://docs.datadoghq.com/integrations/azure_iot_hub/
 draft: false
 git_integration_title: azure_iot_hub
 has_logo: true
 integration_id: azure-iot-hub
 integration_title: Microsoft Azure IoT Hub
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -19,6 +20,7 @@ public_title: Intégration Datadog/Microsoft Azure IoT Hub
 short_description: Surveillez des métriques clés d'Azure IoT Hub.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure IoT Hub est un service entièrement géré qui permet d'établir des communications fiables, sécurisées et bidirectionnelles entre des millions d'appareils IoT.
