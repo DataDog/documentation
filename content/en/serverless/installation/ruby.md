@@ -42,7 +42,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
       Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
-    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can add the following to your Gemfile:
+    - Option B: If you cannot use the prebuilt Datadog Lambda layer, you can add the following to your Gemfile as an alternative:
 
       ```Gemfile
       gem 'datadog-lambda'
@@ -91,7 +91,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][4].
+- You can now view metrics, logs, and traces on the [Serverless Homepage][4].
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][5] if you have trouble collecting the telemetry
 - See the [advanced configurations][6] to
@@ -146,7 +146,7 @@ def some_operation()
 end
 ```
 
-For more information on custom metric submission, see [here][7]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][8].
+For more information on custom metric submission, see [Serverless Custom Metrics][7]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][8].
 
 ## Further Reading
 
