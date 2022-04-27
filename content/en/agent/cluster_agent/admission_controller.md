@@ -166,6 +166,8 @@ Possible options:
 | `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable |
 | `socket`           | Inject volume definition to access the Datadog socket path                      |
 
+*Note*: Pod-specific mode takes precedence over global mode defined at the Admission controller level.
+
 #### Notes
 
 - The admission controller needs to be deployed and configured before the creation of new application pods. It cannot update pods that already exist.
