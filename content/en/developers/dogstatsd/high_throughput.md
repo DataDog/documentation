@@ -338,7 +338,7 @@ dogstatsd_so_rcvbuf: 4194304
 
 If you are using Kubernetes to deploy the Agent and/or DogStatsD and you want to configure the sysctls as mentioned above, set their value per container. If the `net.*` sysctls is namespaced, you can set them per pod. See the Kubernetes documentation on [Using sysctls in a Kubernetes Cluster][6].
 
-### Ensure proper packet sizes
+## Ensure proper packet sizes
 
 Avoid extra CPU usage by sending packets with an adequate size to the DogStatsD server in the Datadog Agent. The latest versions of the official DogStatsD clients send packets with a size optimized for performance.
 
@@ -356,7 +356,7 @@ The Datadog Agent performs most optimally if the DogStatsD clients send packets 
   <strong>Note for UDS</strong>: for the best performances, the UDS packet size should be 8192 bytes.
 </div>
 
-### Limit the maximum memory usage of the Agent
+## Limit the maximum memory usage of the Agent
 
 The Agent tries to absorb the burst of metrics sent by the DogStatsD clients, but to do so, it needs to use memory. Even if this is for a short amount of time and even if this memory is quickly released to the OS, a spike happens and that could be an issue in containerized environments where limit on memory usage could evict pods or containers.
 
@@ -376,7 +376,7 @@ dogstatsd_queue_size: 512
 
 See the next section on burst detection to help you detect bursts of metrics from your applications.
 
-### Enable metrics processing stats and burst detection
+## Enable metrics processing stats and burst detection
 
 DogStatsD has a stats mode in which you can see which metrics are the most processed.
 
@@ -397,6 +397,16 @@ While running in this mode, the DogStatsD server runs a burst detection mechanis
 ```text
 A burst of metrics has been detected by DogStatSd: here is the last 5 seconds count of metrics: [250 230 93899 233 218]
 ```
+
+## Run multiple metrics processing pipeline to limit packet drops
+
+If you observe that your DogStatsD server using UDS is dropping packets at a high throughput, configuring it to use more CPU could help processing packets faster, and more of them.
+
+Symptoms are the client-side telemetry indicating that the client is dropping packets in its queue and the DogStatsD server not using more than 2 CPUs/2 cores while the server has more available.
+
+In order to reduce the amount of drops:
+- increase the client queue size to `8192`, please refer to the client library configuration to proceed. Once done, you should already observe the drops amount decrease, but your application may use slightly more RAM.
+- if first step is not enough, you can enable the feature `dogstatsd_pipeline_autoadjust: true` in your Datadog Agent configuration: if available, multiple cores will be used to process the custom metrics, leading to a higher CPU usage but the packet drops should be lower.
 
 ## Client-side telemetry
 
