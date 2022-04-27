@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ## Overview
-The Datadog admission controller is a component of the Datadog Cluster Agent. The main benefit of the admission controller is to simplify the user's application pod configuration. For that, It has two main functionalities:
+The Datadog admission controller is a component of the Datadog Cluster Agent. The main benefit of the admission controller is to simplify the user's application pod configuration. For that, it has two main functionalities:
 
 - Inject environment variables (`DD_AGENT_HOST` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's application containers.
 - Inject Datadog standard tags (`env`, `service`, `version`) from application labels into the container environment variables.
@@ -127,7 +127,7 @@ Finally, run the following commands:
 
 ### APM and DogStatsD
 
-To configure DogstatsD clients and APM tracers automatically, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
+To configure DogstatsD clients and APM tracers automatically, inject the environment variables `DD_AGENT_HOST`, `DD_TRACE_AGENT_URL` and `DD_ENTITY_ID` by using one of the following:
 
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
@@ -145,10 +145,30 @@ Possible options:
 | `false`          | `admission.datadoghq.com/enabled=true`  | Yes       |
 | `false`          | `admission.datadoghq.com/enabled=false` | No        |
 
+
+#### Order of priority
+The Datadog admission controller does not inject the environment variables `DD_VERSION`, `DD_ENV`, and `DD_SERVICE` if they already exist.
+
+When these environment variables are not set, the admission controller will use standard tags value in the following order (highest first):
+- Annotation on the pod
+- Annotation on the ownerReference (ReplicaSets, DaemonSets, Deployments...)
+- `DD_VERSION`, `DD_ENV`, and `DD_SERVICE` set in the container (dockerfile)
+
+#### Configure APM and DogstatsD communication mode
+Starting from Datadog Cluster Agent v1.20.0, the Datadog Admission Controller can be configured to inject different mode of communication between the application and Datadog agent.
+
+This feature can be configured by setting `admission_controller.inject_config.mode` or by defining a pod-specific mode using the `admission.datadoghq.com/config.mode` pod label.
+
+Possible options:
+| Mode               | Description                                                                     |
+|--------------------|---------------------------------------------------------------------------------|
+| `hostip` (Default) | Inject the host IP in `DD_AGENT_HOST` environment variable                      |
+| `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable |
+| `socket`           | Inject volume definition to access the Datadog socket path                      |
+
 #### Notes
 
 - The admission controller needs to be deployed and configured before the creation of new application pods. It cannot update pods that already exist.
-- The admission controller doesn't inject the environment variables `DD_VERSION`, `DD_ENV`, and `DD_SERVICE` if they already exist.
 - To disable the admission controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
 - By using the Datadog admission controller, users can skip configuring the application pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
 - In a Google Kubernetes Engine (GKE) Private Cluster, you need to [add a Firewall Rule for the control plane][4]. The webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000`. By default, in the Network for the cluster there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
