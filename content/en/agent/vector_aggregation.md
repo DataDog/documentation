@@ -38,8 +38,10 @@ it to Datadog and other destinations. Vector capabilities include:
 ## Configuration
 
 ### Agent configuration
+
+This configuration requires Datadog Agent version >= 6.35 or 7.35.
+
 To send logs to Vector, update the Agent configuration file, `datadog.yaml`.
-For logs, update the following values in the `datadog.yaml` file:
 
 ```yaml
 vector:
