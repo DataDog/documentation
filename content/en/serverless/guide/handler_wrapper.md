@@ -7,9 +7,9 @@ For Python and Node.js Lambda functions, in order to instrument individual invoc
 
 If your Lambda function configuration is incompatible with the Datadog handler redirection, you can apply the Datadog wrapper in your function code instead.
 
-1. Follow the "Custom" installation instructions for [Python][1] or [Node.js][2] to install the Datadog serverless monitoring
-2. Skip the step to configure the handler function
-3. Skip the step to set the environment variable `DD_LAMBDA_HANDLER`
+1. Follow the **Custom** installation instructions for [Python][1] or [Node.js][2] to install the Datadog serverless monitoring.
+2. Skip the step to configure the handler function.
+3. Skip the step to set the environment variable `DD_LAMBDA_HANDLER`.
 4. Apply the Datadog wrapper in your function code like below:
     ```python
     # for python
