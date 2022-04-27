@@ -91,10 +91,10 @@ exports.handler = async event => {
 
 ## Extracting trace context
 
-To extract the above trace context from the consumer Lambda function, you need to define an extractor function that runs captures trace context before the execution of your Lambda function handler. To do this, configure the `DD_TRACE_EXTRACTOR` environment variable to point to the location of your extractor function (format is `<FILE NAME>.<FUNCTION NAME>`, for example, `extractors.json` if the `json` extractor is in the `extractors.js` file). Datadog recommends you place your extractor methods all in one file, as extractors can be re-used across multiple Lambda functions. These extractors are completely customizable to fit any use case.
+To extract the above trace context from the consumer Lambda function, you need to define an extractor function that runs captures trace context before the execution of your Lambda function handler. To do this, configure the `DD_TRACE_EXTRACTOR` environment variable to point to the location of your extractor function. The format for this is `<FILE NAME>.<FUNCTION NAME>`. For example, `extractors.json` if the `json` extractor is in the `extractors.js` file. Datadog recommends you place your extractor methods all in one file, as extractors can be re-used across multiple Lambda functions. These extractors are completely customizable to fit any use case.
 
 **Notes**:
-- If you are using typescript or a bundler like webpack, you must `import` or `require` your node.js module where the extractors are defined, to ensure the module gets compiled and bundled into your Lambda deployment package.
+- If you are using TypeScript or a bundler like webpack, you must `import` or `require` your Node.js module where the extractors are defined. This ensures the module gets compiled and bundled into your Lambda deployment package.
 - If your Node.js Lambda function runs on `arm64`, you must [define the extractor in your function code][6] instead of using the `DD_TRACE_EXTRACTOR` environment variable.
 
 ### Sample extractors

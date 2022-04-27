@@ -5,7 +5,7 @@ kind: guide
 ## Overview
 
 <div class="alert alert-warning">
-If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/dotnet">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
+If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/dotnet">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have already set up Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 
 ## Prerequisites
@@ -23,9 +23,9 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda enha
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][5].
-- See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
-- See the [troubleshooting guide][6] if you have trouble collecting the telemetry
+- You can now view metrics, logs, and traces on the [Serverless Homepage][5].
+- See the sample code to [monitor custom business logic](#monitor-custom-business-logic).
+- See the [troubleshooting guide][6] if you have trouble collecting the telemetry.
 
 ## Monitor custom business logic
 

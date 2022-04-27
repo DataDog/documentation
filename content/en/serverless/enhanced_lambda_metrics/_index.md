@@ -53,7 +53,7 @@ The following real-time enhanced Lambda metrics are available, and they are tagg
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Enhanced Metrics from AWS Lambda" >}}
 
-Follow the [installation instructions][3] to set up instrumentation of your serverless applications, and the enhanced Lambda metrics are enabled by default.
+Follow the [installation instructions][3] to set up instrumentation of your serverless applications. Enhanced Lambda metrics are enabled by default.
 
 ## Viewing your dashboard
 

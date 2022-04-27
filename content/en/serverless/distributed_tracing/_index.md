@@ -38,7 +38,7 @@ The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support 
 
 <div class="alert alert-info"> New to serverless monitoring? Follow the installation steps <a href="/serverless/installation/">here</a> to get started.</div>
 
-To start using Datadog APM with your serverless application, you can choose between generating traces using the Datadog's tracing client (`dd-trace`) or pulling X-Ray traces from AWS.
+To start using Datadog APM with your serverless application, you can choose between generating traces using Datadog's tracing client (`dd-trace`) or pulling X-Ray traces from AWS.
 
 | [Datadog APM with dd-trace][1]          | [Datadog APM with AWS X-Ray][2]           |
 |---------------------------------|-------------------------------------------------------------------------|
