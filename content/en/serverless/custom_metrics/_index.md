@@ -58,7 +58,7 @@ Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metr
 1. Follow the general [serverless installation instructions][8] appropriate for your Lambda runtime.
 1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false`.
 1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
-1. Follow the sample code or instructions belows to submit your custom metric. 
+1. Follow the sample code or instructions below to submit your custom metric. 
 
 {{< programming-lang-wrapper langs="python,nodeJS,go,ruby,other" >}}
 {{< programming-lang lang="python" >}}
