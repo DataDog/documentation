@@ -1,26 +1,28 @@
 ---
 categories:
-  - cloud
-  - data store
-  - google cloud
-  - log collection
+- cloud
+- data store
+- google cloud
+- log collection
 ddtype: crawler
 dependencies: []
-description: "Surveillez des métriques clés de Google\_Cloud\_Storage."
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_storage/'
+description: Surveillez des métriques clés de Google Cloud Storage.
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_storage/
 draft: false
 git_integration_title: google_cloud_storage
 has_logo: true
 integration_id: google-cloud-storage
 integration_title: Google Storage
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_storage
-public_title: "Intégration Datadog/Google\_Storage"
-short_description: "Surveillez des métriques clés de Google\_Cloud\_Storage."
+public_title: Intégration Datadog/Google Storage
+short_description: Surveillez des métriques clés de Google Cloud Storage.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud Storage est une solution unifiée de stockage d'objets destinée aux développeurs et aux entreprises. Elle associe des fonctionnalités de diffusion de données en temps réel, d'analyse et de machine learning, d'archivage, etc.
@@ -42,11 +44,11 @@ Pour recueillir des étiquettes Cloud Storage personnalisées sous forme de tags
 
 ### Collecte de logs
 
-Les logs Google Cloud Storage sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
+Les logs Google Cloud Storage sont recueillis avec Google Cloud Logging et envoyés à un Cloud Pub/Sub via un forwarder Push HTTP. Si vous ne l'avez pas déjà fait, configurez un [Cloud Pub/Sub à l'aide d'un forwarder Push HTTP][2].
 
-Une fois cette opération effectuée, exportez vos logs Google Cloud Storage depuis Stackdriver vers le Pub/Sub :
+Une fois cette opération effectuée, exportez vos logs Google Cloud Storage depuis Google Cloud Logging vers le Pub/Sub :
 
-1. Accédez à la [page Stackdriver][3] et filtrez les logs Google Cloud Storage.
+1. Accédez à la [page Google Cloud Logging][3] et filtrez les logs Google Cloud Storage.
 2. Cliquez sur **Create Export** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
