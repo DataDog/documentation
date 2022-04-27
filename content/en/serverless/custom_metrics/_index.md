@@ -140,7 +140,7 @@ end
 
 ## With the Datadog Forwarder
 
-Datadog recommends using the [Datadog Forwarder Lambda][9] to submit custom metrics from Lambda runtimes that are not yet supported by the Datadog Lambda Extension.
+Datadog recommends using the [Datadog Forwarder Lambda][9] to submit custom metrics from Lambda runtimes that are not supported by the Datadog Lambda Extension.
 
 1. Follow the general [serverless installation instructions][8] to instrument your Lambda function using the Datadog Forwarder Lambda function.
 1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false` on your own Lambda function.
