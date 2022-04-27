@@ -1,19 +1,20 @@
 ---
-title: Débuter avec le tracing
-kind: documentation
 aliases:
-  - /fr/getting_started/tracing/distributed-tracing
+- /fr/getting_started/tracing/distributed-tracing
 further_reading:
-  - link: /tracing/setup/
-    tag: Documentation
-    text: Sélectionner le langage de votre application
-  - link: /tracing/visualization/
-    tag: Documentation
-    text: Utiliser l'UI de l'APM
-  - link: 'https://learn.datadoghq.com/enrol/index.php?id=4'
-    tag: Centre d'apprentissage
-    text: Découvrir la solution Application Performance Monitoring avec Docker
+- link: /tracing/setup/
+  tag: Documentation
+  text: Sélectionner le langage de votre application
+- link: /tracing/visualization/
+  tag: Documentation
+  text: Utiliser l'UI de l'APM
+- link: https://learn.datadoghq.com/enrol/index.php?id=4
+  tag: Centre d'apprentissage
+  text: Découvrir la solution Application Performance Monitoring avec Docker
+kind: documentation
+title: Débuter avec le tracing
 ---
+
 ## Présentation
 
 La solution Application Performance Monitoring (APM ou tracing) Datadog sert à recueillir des [traces][1] à partir de votre code d'application en backend. Ce guide de prise en main vous explique comment obtenir votre première trace dans Datadog.
@@ -37,7 +38,7 @@ vagrant ssh
 Pour installer l'Agent Datadog sur un host, utilisez la [commande d'installation d'une ligne][6] en indiquant votre [clé d'API Datadog][7] :
 
 ```shell
-DD_API_KEY=<CLÉ_API_DATADOG> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
 ### Validation
@@ -52,9 +53,9 @@ Attendez quelques minutes et vérifiez que l'Agent est connecté à votre compte
 
 ## APM Datadog
 
-### Suivre la documentation intégrée à l'application (conseillé)
+### Suivre la documentation dans l'application (conseillé)
 
-Pour les étapes restantes, suivez les [instructions de démarrage rapide][10] fournies dans l'application Datadog pour profiter d'une expérience optimale, et notamment :
+Pour les étapes restantes, suivez les [instructions de démarrage rapide][10] fournies sur le site Datadog pour profiter d'une expérience optimale, et notamment :
 
 - Obtenir des instructions détaillées en fonction de la configuration de votre déploiement (dans cet exemple, un déploiement basé sur un host) ;
 - Définir les tags `service`, `env` et `version` de façon dynamique ;
@@ -67,7 +68,7 @@ Avec les dernières versions de l'Agent 6 et 7, l'APM est activée par défaut.
 
 ```yaml
 # apm_config:
-#   Spécifie si l'Agent APM doit être exécuté ou non
+##   Spécifie si l'Agent APM doit être exécuté ou non
 #   enabled: true
 ```
 
@@ -85,7 +86,7 @@ Et `trace-agent.log` :
 
 Pour une expérience optimale, nous vous conseillons d'utiliser la variable d'environnement `DD_ENV` pour configurer `env` via le traceur de votre service.
 
-En outre, si l'injection de logs est activée pour votre traceur, le tag `env` sera cohérent dans les différents logs et traces. Pour en savoir plus, consultez la section [Tagging de service unifié][12].
+En outre, si l'injection de logs est activée pour votre traceur, le tag `env` est cohérent dans les différents logs et traces. Pour en savoir plus, consultez la section [Tagging de service unifié][12].
 
 Sinon, nommez votre environnement en mettant à jour `datadog.yaml` de façon à définir `env` sous `apm_config`. Pour savoir comment définir `env` pour l'APM, consultez le [guide de configuration des tags primaires][13].
 
@@ -163,7 +164,7 @@ Après quelques minutes, votre trace s'affiche dans Datadog sous le service `hel
 [4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
 [5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[7]: https://app.datadoghq.com/account/settings#api
+[7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /fr/agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://app.datadoghq.com/apm/docs
