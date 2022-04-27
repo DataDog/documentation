@@ -15,9 +15,9 @@ aliases:
     - /serverless/datadog_lambda_library/go/
 ---
 
-<div class="alert alert-warning">If your Go Lambda functions are still using runtime `go1.x` and you cannot migrate to the `provided.al2` runtime, you must <a href="serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a> instead.</div>
+<div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a> instead.</div>
 
-<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 ## Installation
 
@@ -45,7 +45,7 @@ custom:
 
 To fill in the placeholders:
 - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
-- Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can instead use `apiKey` and set the Datadog API key in plaintext.
+- Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
 
 For more information and additional settings, see the [plugin documentation][1].
 
@@ -78,7 +78,7 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 ### Configure the required environment variables
 
 - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
-- Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+- Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/getting_started/site/

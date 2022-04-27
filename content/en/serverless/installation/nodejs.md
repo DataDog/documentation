@@ -21,7 +21,7 @@ aliases:
 
 <div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="serverless/guide/datadog_forwarder_node">instrumenting using the Datadog Forwarder</a>.</div>
 
-<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 <div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_webpack/">mark the Datadog libraries as external</a>.</div>
 
@@ -60,7 +60,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 5. Configure the Datadog API key
 
-    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string, instead of being inside a json blob. Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
+    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
 
     ```sh
     export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
@@ -118,7 +118,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can instead use `apiKey` and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
 
     For more information and additional settings, see the [plugin documentation][1].
 
@@ -129,7 +129,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog to your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog on your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 1. Install the Datadog CloudFormation macro
 
@@ -162,7 +162,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with your [Datadog site][4] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][5] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][5] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found in the [macro documentation][1].
 
@@ -175,7 +175,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-The [Datadog CDK Construct][1] automatically installs Datadog to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
+The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
 
 1. Install the Datadog CDK constructs library
 
@@ -207,7 +207,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with your [Datadog site][2] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob).The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
 
@@ -242,12 +242,12 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
     - Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 
-    **Note**: If your Lambda function runs on `arm64`, you must either build your container image in an arm64-based Amazon Linux environment or [apply the Datadog wrapper in your function code][2] instead. You may also need to do that if you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection.
+    **Note**: If your Lambda function runs on `arm64`, you must either build your container image in an arm64-based Amazon Linux environment or [apply the Datadog wrapper in your function code][2] instead. You may also need to do that if you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection.
 
 4. Configure the Datadog site and API key
 
     - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
@@ -308,12 +308,12 @@ The [Datadog CDK Construct][1] automatically installs Datadog to your functions 
     - Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 
-    **Note**: If your Lambda function runs on `arm64` and the `datadog-lambda-js` library is installed as a NPM package (option B of step 1), you must [apply the Datadog wrapper in your function code][2] instead. You may also need to do that if you are using a 3rd-party security or monitoring tool that is incompatible with the Datadog handler redirection.
+    **Note**: If your Lambda function runs on `arm64` and the `datadog-lambda-js` library is installed as a NPM package (option B of step 1), you must [apply the Datadog wrapper in your function code][2] instead. You may also need to do that if you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection.
 
 4. Configure Datadog site and API key
 
     - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper

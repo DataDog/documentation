@@ -15,9 +15,9 @@ aliases:
     - /serverless/datadog_lambda_library/java/
 ---
 
-<div class="alert alert-warning">To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes.</div>
+<div class="alert alert-warning">To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (<code>java8.al2</code>) or Java 11 (<code>java11</code>) runtimes.</div>
 
-<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the US1 (`datadoghq.com`) <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 <div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="serverless/guide/datadog_forwarder_java">instrumenting using the Datadog Forwarder</a>.</div>
 
@@ -56,7 +56,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 5. Configure the Datadog API key
 
-    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string, instead of being inside a json blob. Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
+    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
 
     ```sh
     export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
@@ -70,7 +70,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 6. Instrument your Lambda functions
 
-    **Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+    **Note**: Instrument your Lambda functions in a dev or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
     To instrument your Lambda functions, run the following command.
 
@@ -111,7 +111,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can instead use `apiKey` and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
 
     For more information and additional settings, see the [plugin documentation][1].
 
@@ -141,7 +141,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
     - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
-    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://docs.datadoghq.com/getting_started/site/
@@ -165,7 +165,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
     - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
-    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string, instead of being inside a json blob. The `secretsmanager:GetSecretValue` permission is required. For quick testings, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/getting_started/site/
@@ -175,7 +175,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry
 - See the [advanced configurations][5] to
