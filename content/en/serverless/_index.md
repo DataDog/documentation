@@ -51,7 +51,9 @@ further_reading:
 
 The following section outlines Datadog's solution for monitoring AWS serverless applications and Lambda functions. You can also learn more about support for monitoring [Azure serverless][2] and [Google serverless][3] applications.
 
-## Explore Datadog Serverless Monitoring
+## Explore Datadog Serverless Monitoring for AWS Lambda
+
+To get started, follow the [installation instructions][4] to collect metrics, traces, and logs from your serverless applications.
 
 ### Monitor your entire serverless stack in the Serverless view
 
@@ -81,11 +83,7 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 {{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
 
-## Getting Started
-
-Getting started to monitor your serverless application is quick and easy. Follow the [installation instructions][4] to collect metrics, traces, and logs from your serverless applications.
-
-## Other serverless clouds
+## Datadog Serverless Monitoring for other serverless clouds
 
 ### Azure App Service
 
