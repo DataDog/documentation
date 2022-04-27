@@ -135,7 +135,7 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
-{{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
 
 #### Add execution parameters
 

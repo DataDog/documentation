@@ -55,7 +55,7 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions_dns.png" alt="Define assertions for your DNS test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_dns.png" alt="Define assertions for your DNS test to succeed or fail on" style="width:90%;" >}}
 
 ### Select locations
 
