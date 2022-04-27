@@ -1,18 +1,19 @@
 ---
-title: Envoyer des quantités importantes de métriques
-kind: documentation
 description: Optimiser DogStatsD pour un débit élevé
 further_reading:
-  - link: developers/dogstatsd
-    tag: Documentation
-    text: Présentation de DogStatsD
-  - link: developers/libraries
-    tag: Documentation
-    text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
-    tag: GitHub
-    text: Code source de DogStatsD
+- link: developers/dogstatsd
+  tag: Documentation
+  text: Présentation de DogStatsD
+- link: developers/libraries
+  tag: Documentation
+  text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
+- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
+  tag: GitHub
+  text: Code source de DogStatsD
+kind: documentation
+title: Envoyer des quantités importantes de métriques
 ---
+
 DogStatsD transmet des métriques générées à partir de votre application à l'[Agent][1] via un protocole de transport, à savoir UDP (User Datagram Protocol) ou UDS (Unix Domain Socket).
 
 Lorsque DogStatsD est utilisé pour transmettre un volume important de métriques à un seul Agent, si vous ne prenez pas les mesures appropriées, il est courant de rencontrer les problèmes suivants :
@@ -27,13 +28,15 @@ Dans la plupart des cas, ces inconvénients peuvent être atténués en ajustant
 
 ### Utiliser des clients officiels Datadog
 
-Nous vous conseillons d'utiliser la dernière version des [clients DogStatsD officiels][3] fournis par Datadog pour chaque langage de programmation important.
+Datadog recommande d'utiliser la dernière version des [clients DogStatsD officiels][3] pour chaque langage de programmation important.
 
 ### Activer la mise en mémoire tampon sur votre client
 
 Certaines clients StatsD et DogStatsD envoient par défaut une métrique par datagramme. Cela ajoute une charge importante au niveau du client, du système d'exploitation et de l'Agent. Si votre client prend en charge la mise en mémoire tampon de plusieurs métriques dans un datagramme, activez cette option pour réduire considérablement les volumes d'échange.
 
-Si vous utilisez un client DogStatsD créé par la communauté et prenant en charge la mise en mémoire tampon, veillez à configurer pour les datagrammes une taille limite inférieure à la taille du tampon par datagramme de l'Agent (8 Ko par défaut, modifiable avec le paramètre `dogstatsd_buffer_size` de l'Agent) et à la taille limite de datagramme du réseau ou du système d'exploitation.
+<div class="alert alert-info">
+  Si vous utilisez un client DogStatsD créé par la communauté et prenant en charge la mise en mémoire tampon, veillez à configurer pour les datagrammes une taille limite inférieure à la taille du buffer pour chaque datagramme de l'Agent (8 Ko par défaut, modifiable avec le paramètre <code>dogstatsd_buffer_size</code> de l'Agent) et à la taille limite de datagramme du réseau ou du système d'exploitation.
+</div>
 
 Voici quelques exemples de [clients DogStatsD officiels pris en charge][3] :
 
@@ -47,7 +50,7 @@ package main
 
 import (
         "log"
-        "github.com/DataDog/datadog-go/statsd"
+        "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -65,15 +68,28 @@ func main() {
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-À l'aide de la bibliothèque Python officielle de Datadog, [datadogpy][1], l'exemple ci-dessous crée une instance du client DogStatsD en mémoire tampon qui envoie jusqu'à 25 métriques au sein d'un paquet à la fin du bloc :
+L'exemple ci-dessous repose sur la bibliothèque Python officielle de Datadog [datadogpy][1], ainsi que sur un client DogStatsD en mémoire tampon qui envoie les métriques par l'intermédiaire d'un nombre restreint de paquets. Pour la mise en mémoire tampon, un vidage automatique est effectué dès que la limite de taille des paquets est atteinte, ainsi que toutes les 300 ms (valeur configurable).
 
 ```python
 from datadog import DogStatsd
 
-with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
-    batch.gauge('exemple_métrique.gauge_1', 123, tags=["environment:dev"])
-    batch.gauge('exemple_métrique.gauge_2', 1001, tags=["environment:dev"])
+
+# Pour un client v0.43.0+
+dsd = DogStatsd(host="127.0.0.1", port=8125, disable_buffering=False)
+dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
+dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
+dsd.flush()  # Vidage manuel facultatif
+
+# Pour une version du client antérieure à la 0.43.0, un gestionnaire de contexte est requis pour la mise en mémoire tampon
+dsd = DogStatsd(host="127.0.0.1", port=8125)
+with dsd:
+    dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
+    dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
+
+<div class="alert alert-warning">
+  Par défaut, les instances de client DogStatsD Python (y compris l'instance globale <code>statsd</code>) ne peuvent pas être partagées entre des processus, mais sont thread-safe. De ce fait, le processus parent et chaque processus enfant doivent créer leurs propres instances du client ou la mise en mémoire tampon doit être explicitement désactivée en définissant <code>disable_buffering</code> sur <code>True</code>. Consultez la documentation sur <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> pour en savoir plus.
+</div>
 
 
 [1]: https://github.com/DataDog/datadogpy
@@ -94,8 +110,10 @@ statsd.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
 statsd.flush(sync: true)
 ```
 
+<div class="alert alert-warning">
+  Par défaut, les instances de client DogStatsD Ruby ne peuvent pas être partagées entre les processus, mais sont thread-safe. De ce fait, le processus parent et chaque processus enfant doivent créer leurs propres instances du client ou la mise en mémoire tampon doit être explicitement désactivée en définissant <code>single_thread</code> sur <code>true</code>. Consultez le <a href="https://github.com/DataDog/dogstatsd-ruby">référentiel dogstatsd-ruby</a> sur GitHub pour en savoir plus.
+</div>
 
-[1]: https://github.com/DataDog/dogstatsd-ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -194,22 +212,74 @@ Pour en savoir plus et obtenir des exemples de code, consultez le paragraphe [Sa
 
 UDS est un protocole de communication inter-processus utilisé pour [transporter les charges utiles DogStatsD][2]. Comparé au protocole UDP, il sollicite peu de ressources et réduit l'empreinte globale de DogStatsD sur votre système.
 
-## Mémoires tampon du kernel des systèmes d'exploitation
+### Agrégation côté client
 
-La plupart des systèmes d'exploitation ajoutent des datagrammes UDP et UDS entrants, qui contiennent vos métriques, dans une mémoire tampon avec une taille limitée. Une fois cette limite atteinte, les datagrammes comprenant vos métriques sont perdues. Vous pouvez ajuster certaines valeurs afin d'accorder davantage de temps à l'Agent pour le traitement des métriques entrantes :
+Les bibliothèques client peuvent agréger des métriques côté client. Cela a pour effet de limiter le nombre de messages devant être transmis à l'Agent Datadog, d'améliorer les performances d'E/S et d'optimiser le débit.
+
+{{< programming-lang-wrapper langs="go,java,.NET" >}}
+{{< programming-lang lang="go" >}}
+
+L'agrégation côté client est uniquement disponible pour les clients Go à partir de la v5.0.0.
+
+Consultez la rubrique [Agrégation côté client][1] (en anglais) pour en savoir plus.
+
+[1]: https://github.com/DataDog/datadog-go#client-side-aggregation
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+L'agrégation côté client est disponible pour la version 2.11.0 et les versions ultérieures de java-dogstatsd-client, et est activée par défaut depuis la version 3.0.0.
+
+```java
+StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+    // configuration habituelle
+    .enableAggregation(true)
+    .build();
+```
+
+L'agrégation côté client est disponible pour les métriques GAUGE, COUNT et SET.
+
+Consultez la rubrique [Agrégation côté client][1] (en anglais) pour en savoir plus.
+
+[1]: https://github.com/DataDog/java-dogstatsd-client#aggregation
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
+L'agrégation côté client est disponible à partir de la version 7.0.0 du client C# DogStatsD et est activée par défaut. Elle est disponible pour les métriques GAUGE, COUNT et SET.
+
+```csharp
+var dogstatsdConfig = new StatsdConfig
+{
+    StatsdServerName = "127.0.0.1",
+    StatsdPort = 8125,
+    ClientSideAggregation = new ClientSideAggregationConfig()
+};
+```
+
+
+Pour en savoir plus, consultez le [référentiel C# de DogStatsD][1].
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client#client-side-aggregation
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
+## Buffers kernel des systèmes d'opération
+
+La plupart des systèmes d'exploitation ajoutent des datagrammes UDP et UDS entrants, qui contiennent vos métriques, dans un buffer avec une taille limitée. Une fois cette limite atteinte, les datagrammes comprenant vos métriques sont perdues. Vous pouvez ajuster certaines valeurs afin d'accorder davantage de temps à l'Agent pour le traitement des métriques entrantes :
 
 ### Via UDP (User Datagram Protocol)
 
 #### Linux
 
-Sur la plupart des distributions Linux, la taille maximale de la mémoire tampon du kernel est par défaut définie sur `212992` (208 KiB). Pour vous en assurer, utilisez la commande suivante :
+Sur la plupart des distributions Linux, la taille maximale du buffer kernel est par défaut définie sur `212992` (208 KiB). Pour vous en assurer, utilisez la commande suivante :
 
 ```bash
 $ sysctl net.core.rmem_max
 net.core.rmem_max = 212992
 ```
 
-Pour définir la taille maximale de la mémoire tampon du socket DogStatsD sur 25 MiB, exécutez :
+Pour définir la taille maximale du buffer du socket DogStatsD sur 25 MiB, exécutez :
 
 ```bash
 sysctl -w net.core.rmem_max=26214400
@@ -233,7 +303,7 @@ Consultez la section [Remarque sur sysctl dans Kubernetes][5] si vous déployez 
 
 #### Linux
 
-Pour les sockets UDS, Linux met en interne les datagrammes dans une file d'attente en mémoire tampon si le lecteur est plus lent que l'enregistreur. La taille de cette file d'attente représente le nombre maximal de datagrammes que Linux met en mémoire tampon par socket. Cette valeur peut être obtenue avec la commande suivante :
+Pour les sockets UDS, si le lecteur est plus lent que l'enregistreur, Linux effectue en interne la mise en mémoire tampon des datagrammes avec une liste d'attente. La taille de cette file d'attente représente le nombre maximal de datagrammes que Linux met en mémoire tampon par socket. Cette valeur peut être obtenue avec la commande suivante :
 
 ```bash
 sysctl net.unix.max_dgram_qlen
@@ -265,7 +335,7 @@ dogstatsd_so_rcvbuf: 4194304
 
 #### Remarque sur sysctl dans Kubernetes
 
-Si vous utilisez Kubernetes pour déployer l'Agent et/ou DogStatsD et que vous souhaitez configurer les sysctls comme mentionné ci-dessus, vous devez configurer leur valeur au niveau de chaque conteneur. Étant donné que les sysctl `net.*` sont dotés d'un espace de nommage, vous pouvez les configurer au niveau des pods. Consultez [la documentation Kubernetes officielle][6] (en anglais) pour découvrir comment autoriser l'accès aux sysctrls dans les conteneurs et comment définir leur valeur.
+Si vous utilisez Kubernetes pour déployer l'Agent et/ou DogStatsD et que vous souhaitez configurer les sysctls comme mentionné ci-dessus, configurez leur valeur au niveau de chaque conteneur. Si les sysctl `net.*` sont dotés d'un espace de nommage, vous pouvez les configurer au niveau des pods. Consultez la section [Utilisation de sysctls dans un cluster Kubernetes][6] de la documentation Kubernetes officielle (en anglais) pour en savoir plus.
 
 ### Vérifier la conformité des tailles des paquets
 
@@ -275,11 +345,15 @@ Vous pouvez ignorer cette section si vous utilisez l'un des derniers clients Dat
 
 Si les paquets envoyés sont trop petits, l'Agent Datadog en regroupe plusieurs afin de les traiter par lots par la suite dans le pipeline. Les clients DogStatsD officiels sont capables de regrouper des métriques afin d'optimiser le nombre de métriques par paquet.
 
-Pour optimiser les performances de l'Agent, les clients DogStatsD doivent envoyer des paquets d'une taille correspondant à `dogstatsd_buffer_size`. La taille des paquets ne doit pas dépasser celle du buffer. Le cas contraire, l'Agent ne peut pas les charger entièrement dans le buffer, ce qui entraîne des anomalies pour certaines métriques. Utilisez le champ de configuration correspondant dans vos clients DogStatsD.
+Pour optimiser les performances de l'Agent Datadog, les clients DogStatsD doivent envoyer des paquets d'une taille correspondant à `dogstatsd_buffer_size`. La taille des paquets ne doit pas dépasser celle du buffer. Le cas contraire, l'Agent ne peut pas les charger entièrement dans le buffer sans entraîner des anomalies pour certaines métriques. Utilisez le champ de configuration correspondant dans vos clients DogStatsD.
 
-Remarque pour le protocole UDP : étant donné que les paquets UDP passent généralement par la couche Ethernet et IP, évitez de fragmenter les paquets IP en limitant la taille des paquets à une valeur inférieure à une seule trame Ethernet sur votre réseau. La plupart du temps, les réseaux IPv4 sont configurés avec une MTU de 1 500 octets. Dans ce cas, la taille des paquets envoyés ne doit pas dépasser 1 472 octets.
+<div class="alert alert-info">
+  <strong>Remarque pour le protocole UDP</strong> : étant donné que les paquets UDP passent généralement par la couche Ethernet et IP, vous pouvez éviter de fragmenter les paquets IP en limitant la taille des paquets à une valeur inférieure à une seule trame Ethernet sur votre réseau. La plupart du temps, les réseaux IPv4 sont configurés avec une MTU de 1 500 octets. Dans ce cas, la taille des paquets envoyés ne doit pas dépasser 1 472 octets.
+</div>
 
-Remarque pour le protocole UDS : pour maximiser les performances, les paquets UDS doivent avoir une taille de 8 192 octets.
+<div class="alert alert-info">
+  <strong>Remarque pour le protocole UDS</strong> : pour optimiser les performances, les paquets UDS doivent être composés de 8 192 octets.
+</div>
 
 ### Limiter l'utilisation maximale de la mémoire de l'Agent
 
@@ -289,7 +363,9 @@ Pour éviter que l'Agent Datadog atteigne son seuil d'utilisation de la mémoire
 
 Pour limiter l'utilisation maximale de la mémoire, pensez également à réduire la mise en mémoire tampon. Le buffer principal du serveur DogStatsD dans l'Agent peut être configuré avec le champ `dogstatsd_queue_size` (depuis l'Agent Datadog 6.1.0). Sa valeur par défaut `1024` limite l'utilisation maximale de la mémoire à environ 768 Mo.
 
-**Remarque** : la réduction de ce buffer peut entraîner une augmentation du nombre de paquets perdus.
+<div class="alert alert-warning">
+  <strong>Remarque</strong> : la réduction de la taille du buffer peut entraîner une augmentation du nombre de paquets perdus.
+</div>
 
 Cet exemple réduit l'utilisation maximale de la mémoire de DogStatsD à environ 384 Mo :
 
@@ -301,9 +377,11 @@ Consultez la section suivante dédiée à la détection des salves pour découvr
 
 ### Activer les statistiques de traitement des métriques et la détection des salves
 
-DogStatsD possède un mode statistique qui permet de savoir quelles métriques sont les plus traitées.
+DogStatsD possède un mode statistique vous permettant de visualiser les métriques les plus traitées.
 
-**Remarque** : l'activation de ce mode peut nuire aux performances de DogStatsD.
+<div class="alert alert-warning">
+  <strong>Remarque</strong> : l'activation du mode statistique pour les métriques peut nuire aux performances de DogStatsD.
+</div>
 
 Pour activer le mode statistique, vous pouvez :
 
@@ -311,9 +389,9 @@ Pour activer le mode statistique, vous pouvez :
 - Définir la variable d'environnement `DD_DOGSTATSD_STATS_ENABLE` sur `true`
 - Utilisez la commande `datadog-agent config set dogstatsd_stats true` pour activer le mode lors de l'exécution. Vous pouvez le désactiver lors de l'exécution avec la commande `datadog-agent config set dogstatsd_stats false`.
 
-Lorsque ce mode est activé, exécutez la commande `datadog-agent dogstatsd-stats`. Cela envoie la liste des métriques traitées. Les métriques les plus reçues apparaissent en premier.
+Lorsque ce mode est activé, exécutez la commande `datadog-agent dogstatsd-stats` pour obtenir la liste des métriques traitées. Les métriques les plus souvent reçues apparaissent en premier.
 
-Lors de l'exécution de ce mode, le serveur DogStatsD utilise un mécanisme de détection de salves. Si une salve est détectée, un log d'avertissement est généré. Par exemple :
+Lors de l'exécution de ce mode, le serveur DogStatsD utilise un mécanisme de détection de pics d'utilisation. Si un pic est détecté, un log d'avertissement est généré. Exemple :
 
 ```text
 A burst of metrics has been detected by DogStatSd: here is the last 5 seconds count of metrics: [250 230 93899 233 218]
@@ -331,7 +409,7 @@ Chaque client partage un ensemble de tags communs.
 | `client_version`   | La version du client.                         | `client_version:1.2.3` |
 | `client_transport` | Le protocole de transport utilisé par le client (`udp` ou `uds`). | `client_transport:uds` |
 
-**Remarque** : lorsque vous utilisez le protocole UDP, le client ne peut pas détecter les erreurs réseau et les métriques correspondantes ne tiennent pas compte des octets/paquets perdus.
+**Remarque** : lorsque vous utilisez le protocole UDP, le client ne peut pas détecter les erreurs réseau, et les métriques correspondantes ne tiennent pas compte des octets ou paquets perdus.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
 {{< programming-lang lang="python" >}}
@@ -356,7 +434,7 @@ Le nombre d'octets envoyés à l'Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Type de métrique** : count<br>
-Le nombre d'octets non envoyés par le client DogStatsD.
+Le nombre d'octets perdus par le client DogStatsD.
 
 `datadog.dogstatsd.client.packets_sent`
 : **Type de métrique** : count<br>
@@ -364,7 +442,7 @@ Le nombre de datagrammes envoyés à l'Agent.
 
 `datadog.dogstatsd.client.packets_dropped` 
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés par le client DogStatsD.
+Le nombre de datagrammes perdus par le client DogStatsD.
 
 Pour désactiver la télémétrie, utilisez la méthode `disable_telemetry` :
 
@@ -399,7 +477,7 @@ Le nombre d'octets envoyés à l'Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Type de métrique** : count<br>
-Le nombre d'octets non envoyés par le client DogStatsD.
+Le nombre d'octets perdus par le client DogStatsD.
 
 `datadog.dogstatsd.client.packets_sent`
 : **Type de métrique** : count<br>
@@ -407,7 +485,7 @@ Le nombre de datagrammes envoyés à l'Agent.
 
 `datadog.dogstatsd.client.packets_dropped` 
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés par le client DogStatsD.
+Le nombre de datagrammes perdus par le client DogStatsD.
 
 Pour désactiver la télémétrie, définissez le paramètre `disable_telemetry` sur `true` :
 
@@ -426,7 +504,12 @@ La télémétrie a été ajoutée avec la version `3.4.0` du client Go.
 
 `datadog.dogstatsd.client.metrics`
 : **Type de métrique** : count<br>
-Le nombre de `metrics` envoyées au client DogStatsD par votre application (avant l'échantillonnage).
+Le nombre de `metrics` envoyées au client DogStatsD par votre application (avant l'échantillonnage et l'agrégation).
+
+`datadog.dogstatsd.client.metrics_by_type`
+: **Type de métrique** : count<br>
+Le nombre de `metrics` envoyées par le client DogStatsD, avant l'échantillonnage et l'agrégation, et taguées par type de métrique (`gauge`,
+`set`, `count`, `timing`, `histogram` ou `distribution`). Proposé depuis la version 5.0.0 de l'Agent Go.
 
 `datadog.dogstatsd.client.events`
 : **Type de métrique** : count<br>
@@ -442,15 +525,16 @@ Le nombre d'octets envoyés à l'Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Type de métrique** : count<br>
-Le nombre d'octets non envoyés par le client DogStatsD.
+Le nombre d'octets perdus par le client DogStatsD (inclut `datadog.dogstatsd.client.bytes_dropped_queue` et
+`datadog.dogstatsd.client.bytes_dropped_writer`).
 
 `datadog.dogstatsd.client.bytes_dropped_queue`
 : **Type de métrique** : count<br>
-Le nombre d'octets non envoyés car la liste d'attente du client DogStatsD était pleine.
+Le nombre d'octets perdus car la liste d'attente du client DogStatsD était pleine.
 
 `datadog.dogstatsd.client.bytes_dropped_writer`
 : **Type de métrique** : count<br>
-Le nombre d'octets non envoyés en raison d'une erreur lors de l'écriture sur Datadog.
+Le nombre d'octets perdus en raison d'une erreur lors de l'écriture sur Datadog causée par une expiration ou un problème réseau.
 
 `datadog.dogstatsd.client.packets_sent`
 : **Type de métrique** : count<br>
@@ -458,19 +542,28 @@ Le nombre de datagrammes envoyés à l'Agent.
 
 `datadog.dogstatsd.client.packets_dropped`
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés par le client DogStatsD.
+Le nombre de datagrammes perdus par le client DogStatsD (inclut `datadog.dogstatsd.client.packets_dropped_queue`
+et `datadog.dogstatsd.client.packets_dropped_writer`).
 
 `datadog.dogstatsd.client.packets_dropped_queue`
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés car la liste d'attente du client DogStatsD était pleine.
+Le nombre de datagrammes perdus car la liste d'attente du client DogStatsD était pleine.
 
 `datadog.dogstatsd.client.packets_dropped_writer`
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés en raison d'une erreur lors de l'écriture sur Datadog.
+Le nombre de datagrammes perdus en raison d'une erreur lors de l'écriture sur Datadog causée par une expiration ou un problème réseau.
 
 `datadog.dogstatsd.client.metric_dropped_on_receive` 
 : **Type de métrique** : count<br>
-Le nombre de métriques non envoyées car le canal de réception interne était plein (uniquement lors de l'utilisation de `WithChannelMode()`). À partir de la version `3.6.0` du client Go.
+Le nombre de métriques perdues car le canal de réception interne était plein (lors de l'utilisation de `WithChannelMode()`). Proposé depuis la version 3.6.0 du client Go lorsque `WithChannelMode()` est activé.
+
+`datadog.dogstatsd.client.aggregated_context`
+: **Type de métrique** : count<br>
+Le nombre de contextes vidés par le client lorsque l'agrégation côté client est activée. Proposé depuis la version 5.0.0 du client Go. Cette métrique est uniquement transmise lorsque l'agrégation est activée (comportement par défaut).
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Type de métrique** : count<br>
+Le nombre total de contextes vidés par le client, lorsque l'agrégation côté client est activée, et tagués par type de métrique (`gauge`, `set`, `count`, `timing`, `histogram` ou `distribution`). Proposé depuis la version 5.0.0 du client Go. Cette métrique est uniquement transmise lorsque l'agrégation est activée (comportement par défaut).
 
 Pour désactiver la télémétrie, utilisez le paramètre `WithoutTelemetry` :
 
@@ -505,7 +598,7 @@ Le nombre d'octets envoyés à l'Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Type de métrique** : count<br>
-Le nombre d'octets non envoyés par le client DogStatsD.
+Le nombre d'octets perdus par le client DogStatsD.
 
 `datadog.dogstatsd.client.packets_sent`
 : **Type de métrique** : count<br>
@@ -513,11 +606,23 @@ Le nombre de datagrammes envoyés à l'Agent.
 
 `datadog.dogstatsd.client.packets_dropped`
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés par le client DogStatsD.
+Le nombre de datagrammes perdus par le client DogStatsD.
 
 `datadog.dogstatsd.client.packets_dropped_queue` 
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés car la liste d'attente du client DogStatsD était pleine.
+Le nombre de datagrammes perdus car la liste d'attente du client DogStatsD était pleine.
+
+`datadog.dogstatsd.client.aggregated_context`
+: **Type de métrique** : count<br>
+Le nombre de contextes agrégés lorsque l'agrégation côté client est activée. Proposé depuis la version `2.11.0`.
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Type de métrique** : count<br>
+Le nombre de contextes agrégés par type lorsque l'agrégation côté client est activée. Proposé depuis la version `2.13.0`. Cette métrique est activée par défaut depuis la version `3.0.0`, mais requiert `enableDevMode(true)` pour la version `2.13.0`. Elle est taguée par `metrics_type`.
+
+`datadog.dogstatsd.client.metrics_by_type`
+: **Type de métrique** : count<br>
+Le nombre de métriques envoyées au client DogStatsD par votre application et taguées par type (avant l'échantillonnage). Proposé depuis la version `2.13.0` lorsque `enableDevMode(true)` est utilisé, et par défaut depuis la version `3.0.0`. La métrique est taguée par `metrics_type`.
 
 Pour désactiver la télémétrie, utilisez l'option builder `enableTelemetry(false)` :
 
@@ -556,7 +661,7 @@ Le nombre d'octets envoyés à l'Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Type de métrique** : count<br>
-Le nombre d'octets non envoyés par le client DogStatsD.
+Le nombre d'octets perdus par le client DogStatsD.
 
 `datadog.dogstatsd.client.packets_sent`
 : **Type de métrique** : count<br>
@@ -564,9 +669,9 @@ Le nombre de datagrammes envoyés à l'Agent.
 
 `datadog.dogstatsd.client.packets_dropped` 
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés par le client DogStatsD.
+Le nombre de datagrammes perdus par le client DogStatsD.
 
-Pour activer ou désactiver la télémétrie, utilisez l'argument `disable_telemetry`. Cependant, sachez que l'utilisation de la télémétrie avec le client `DogStatsd` entraîne une augmentation considérable de l'utilisation du réseau. Il est recommandé d'utiliser `BatchedDogStatsd` lors de l'utilisation de la télémétrie.
+Pour activer ou désactiver la télémétrie, utilisez l'argument `disable_telemetry`. Cependant, sachez que l'utilisation de la télémétrie avec le client `DogStatsd` entraîne une augmentation considérable de l'utilisation du réseau. Il est recommandé d'utiliser `BatchedDogStatsd` pour la télémétrie.
 
 Pour l'activer sur le client `DogStatsd` :
 
@@ -620,7 +725,7 @@ Le nombre d'octets envoyés à l'Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Type de métrique** : count<br>
-Le nombre d'octets non envoyés par le client DogStatsD.
+Le nombre d'octets perdus par le client DogStatsD.
 
 `datadog.dogstatsd.client.packets_sent`
 : **Type de métrique** : count<br>
@@ -628,11 +733,15 @@ Le nombre de datagrammes envoyés à l'Agent.
 
 `datadog.dogstatsd.client.packets_dropped`
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés par le client DogStatsD.
+Le nombre de datagrammes perdus par le client DogStatsD.
 
 `datadog.dogstatsd.client.packets_dropped_queue`
 : **Type de métrique** : count<br>
-Le nombre de datagrammes non envoyés car la liste d'attente du client DogStatsD était pleine.
+Le nombre de datagrammes perdus car la liste d'attente du client DogStatsD était pleine.
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Metric type**: count<br>
+Le nombre de contextes agrégés par type lorsque l'agrégation côté client est activée. Proposé depuis la version `7.0.0`.
 
 Pour désactiver la télémétrie, définissez `TelemetryFlushInterval` sur `null` :
 
