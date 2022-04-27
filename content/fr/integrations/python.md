@@ -1,31 +1,35 @@
 ---
 categories:
-  - languages
-  - log collection
+- languages
+- log collection
 ddtype: library
 dependencies: []
-description: 'Recueillez des métriques, des traces et des logs à partir de vos applications Python.'
-doc_link: 'https://docs.datadoghq.com/integrations/python/'
+description: Recueillez des métriques, des traces et des logs à partir de vos applications
+  Python.
+doc_link: https://docs.datadoghq.com/integrations/python/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/tracing-async-python-code/'
-    tag: Blog
-    text: Tracer du code Python asynchrone avec l'APM Datadog
-  - link: 'https://www.datadoghq.com/blog/python-logging-best-practices/'
-    tag: Blog
-    text: 'Comment recueillir, personnaliser et centraliser des logs Python'
+- link: https://www.datadoghq.com/blog/tracing-async-python-code/
+  tag: Blog
+  text: Tracer du code Python asynchrone avec l'APM Datadog
+- link: https://www.datadoghq.com/blog/python-logging-best-practices/
+  tag: Blog
+  text: Comment recueillir, personnaliser et centraliser des logs Python
 git_integration_title: python
 has_logo: true
 integration_id: python
 integration_title: Python
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: python
 public_title: Intégration Datadog/Python
-short_description: 'Recueillez des métriques, des traces et des logs à partir de vos applications Python.'
+short_description: Recueillez des métriques, des traces et des logs à partir de vos
+  applications Python.
 version: '1.0'
 ---
+
 ## Présentation
 
 L'intégration Python vous permet de recueillir et de surveiller les logs, les traces et les métriques custom de vos applications Python.
