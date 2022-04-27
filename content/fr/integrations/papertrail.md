@@ -1,23 +1,28 @@
 ---
 categories:
-  - monitoring
+- monitoring
 ddtype: crawler
 dependencies: []
-description: 'Affichez, recherchez et échangez sur des logs Papertrail dans votre flux d''événements Datadog.'
-doc_link: 'https://docs.datadoghq.com/integrations/papertrail/'
+description: Affichez, recherchez et échangez sur des logs Papertrail dans votre flux
+  d'événements Datadog.
+doc_link: https://docs.datadoghq.com/integrations/papertrail/
 draft: false
 git_integration_title: papertrail
 has_logo: true
 integration_id: papertrail
 integration_title: PaperTrail
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: papertrail
 public_title: Intégration Datadog/PaperTrail
-short_description: 'Affichez, recherchez et échangez sur des logs Papertrail dans votre flux d''événements Datadog.'
+short_description: Affichez, recherchez et échangez sur des logs Papertrail dans votre
+  flux d'événements Datadog.
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/papertrail/papertrailexample.png" alt="Exemple Papertrail" popup="true">}}
 
 ## Présentation
@@ -44,9 +49,9 @@ Pour enregistrer des métriques depuis Papertrail :
 
 6. Cliquez sur le bouton **Create Alert**.
 
-Papertrail transmettra les informations à Datadog à la fréquence choisie.
+Papertrail transmet les informations à Datadog à la fréquence choisie.
 
-### Configuration
+### Procédure à suivre
 
 Aucune étape de configuration n'est requise pour cette intégration.
 
