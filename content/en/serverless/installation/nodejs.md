@@ -496,7 +496,7 @@ If your Lambda function is running in a VPC, follow the [Datadog Lambda Extensio
 
 [1]: https://app.datadoghq.com/functions
 [2]: /serverless/libraries_integrations/extension/#tagging
-[3]: /serverless/libraries_integrations/forwarder
+[3]: /logs/guide/forwarder/
 [4]: /serverless/custom_metrics?tab=nodejs
 [5]: /tracing/custom_instrumentation/nodejs/
 [6]: /serverless/guide/extension_private_link/

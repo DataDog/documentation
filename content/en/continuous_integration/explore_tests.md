@@ -11,6 +11,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
+    - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
+      tag: "Blog"
+      text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
 ---
 
 {{< site-region region="gov" >}}

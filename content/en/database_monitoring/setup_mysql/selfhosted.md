@@ -47,7 +47,7 @@ To collect query metrics, samples, and explain plans, enable the [MySQL Performa
 {{% tab "MySQL 5.6" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema_max_sql_text_length` | `ON` | Required. Enables the Performance Schema. |
+| `performance_schema` | `ON` | Required. Enables the Performance Schema. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
@@ -59,7 +59,7 @@ To collect query metrics, samples, and explain plans, enable the [MySQL Performa
 {{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema_max_sql_text_length` | `ON` | Required. Enables the Performance Schema. |
+| `performance_schema` | `ON` | Required. Enables the Performance Schema. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |

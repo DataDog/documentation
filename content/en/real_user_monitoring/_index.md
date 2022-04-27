@@ -15,6 +15,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
     tag: "Blog"
     text: "Improve mobile user experience with Datadog Mobile Real User Monitoring"
+  - link: "https://www.datadoghq.com/blog/mobile-monitoring-best-practices/"
+    tag: "Blog"
+    text: "Best practices for monitoring mobile app performance"
   - link: "https://www.datadoghq.com/blog/error-tracking/"
     tag: "Blog"
     text: "Make sense of application issues with Datadog Error Tracking"
@@ -92,6 +95,10 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 Watch [browser recordings][5] of real users interacting with your website.
 
+### Developer tools
+
+Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][6].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -101,3 +108,4 @@ Watch [browser recordings][5] of real users interacting with your website.
 [3]: /real_user_monitoring/connect_rum_and_traces/
 [4]: /real_user_monitoring/error_tracking/
 [5]: /real_user_monitoring/session_replay/
+[6]: /real_user_monitoring/session_replay/developer_tools/
