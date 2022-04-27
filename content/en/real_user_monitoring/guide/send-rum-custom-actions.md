@@ -36,26 +36,30 @@ function onCheckoutButtonClick(cart) {
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
-})
 
+Ensure that you wrap the API call with the `onReady` callback:
+
+```javascript
 function onCheckoutButtonClick(cart) {
-    DD_RUM.addAction('checkout', {
-        'value': cart.value, // for example, 42.12
-        'items': cart.items, // for example, ['tomato', 'strawberries']
-    })
+    DD_RUM.onReady(function() {
+        DD_RUM.addAction('checkout', {
+            'value': cart.value, // for example, 42.12
+            'items': cart.items, // for example, ['tomato', 'strawberries']
+        })
+    })    
 }
 ```
+
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
+Ensure that you check for `DD_RUM` before the API call:
 
 ```javascript
 window.DD_RUM && DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
 
 function onCheckoutButtonClick(cart) {
-    DD_RUM.addAction('checkout', {
+    window.DD_RUM && DD_RUM.addAction('checkout', {
         'value': cart.value, // for example, 42.12
         'items': cart.items, // for example, ['tomato', 'strawberries']
     })
