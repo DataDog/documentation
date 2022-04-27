@@ -50,12 +50,12 @@ Assertions define what an expected test result is. After you click **Test URL**,
 | Type                | Record type                                                     | Operator                                           | Value type                 |
 |---------------------|-----------------------------------------------------------------|----------------------------------------------------|----------------------------|
 | response time       |                                                                 | `is less than`                                     | _Integer (ms)_             |
-| every record        | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
-| at least one record | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
+| every available record        | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
+| at least one record | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your DNS test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_dns.png" alt="Define assertions for your DNS test" style="width:90%;" >}}
 
 ### Select locations
 
