@@ -18,76 +18,71 @@ further_reading:
 
 ## Overview
 
+The steps required for setting up Database Monitoring in Datadog varies based on the type of Database you're using (Postgres, MySQL, SQL Server), and the host provider (self-hosted, AWS, Google Cloud SQL, or Azure). No matter which your database or host you choose, to be able to use Database Monitoring for your Databases, you need the following:
 
-## Requirements
-
-To be able to use Database Monitoring for any of your DBs, you will need to have the following:
-* A Datadog Agent
+* [A Datadog Agent][1]
 * Host for your Datadog Agent
 * Read-only access for your DBs
 
 ### Agent
 
-* The Agent is lightweight software that installing directly on to the host that’s hosting your Database is recommended.
-* The Agent monitors system metrics such as CPU, Memory, and Network. It also connects to the database as a SQL user
-* For cloud-hosted databases such as AWS RDS and Azure SQL, the Agent should be configured to connect to these databases remotely.
+The Datadog Agent is lightweight software that monitors system metrics such as CPU, Memory, and Network. It also connects to the database as a SQL user. In most cases, you install directly onto the host that’s hosting your Database. For cloud-hosted databases such as AWS RDS and Azure SQL, the Agent should be configured to connect to these databases remotely.
 
-#### Self-Hosted
+### Host
 
-Diagram of Host/Agent/DB
+#### Self-hosted
 
-The Datadog agent is used to collect system metrics from the OS host, database metrics directly from the database as well as database logs.
+_Diagram of Host/Agent/DB_
 
-[Datadog Agent Installation Documentation][]
+In a self-hosted setup, the Datadog Agent is used to collect system metrics from the OS host, database metrics directly from the database, as well as database logs.
 
+For self-hosted setups, you should install the Agent directly onto the database host so that you have full visibility into the health of your system running the database process.
 
-[Postgres Integration Documentation][]
-[MySQL Integration Documentation][]
-
-We recommend installing the Agent directly onto the database host so that you have full visibility into the health of your system running the database process.
-
-You’ll need to grant the Agent read-only access to your database as well as set up the integration configurations. More specifically, the agent will need to login as a user to be able to run read-only queries on your DB.
+You need to grant the Agent read-only access to your database, as well as set up the integration configurations. The Agent needs to be able to login as a user to be able to run read-only queries on your database.
 
 Instructions on DBM:
+
 * Postgres DBM Documentation
 * Postgres Metrics Collected
 * MySQL DBM Documentation
 * MySQL Metrics Collected
 
-#### Cloud Hosted
-If you’re using AWS RDS/Aurora, Google Cloud SQL, or Azure, the Agent must be installed remotely on a separate host and configured to connect to each managed instance
+#### Cloud-hosted
 
-We crawl system metrics like CPU, Memory, Disk Usage, Logs, and related telemetry directly from the cloud provider.
-* RDS Integration Docs
-* Diagram of RDS/Host/Agent
+If your setup is cloud-hosted, and you are using [AWS RDS][2] or Aurora, Google Cloud SQL, or Azure, the Agent must be installed remotely on a separate host and configured to connect to each managed instance.
 
-You can install the Agent on any cloud VM (e.g. EC2) as long as traffic can reach your database instance.
+Database monitoring collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider.
 
-If you are not running your own Kubernetes cluster already, it is recommended to use your cloud provider’s orchestration tools such as AWS ECS to be able to host the Datadog agent since the agent already exists as a docker container.
+_Diagram of RDS/Host/Agent_
 
-* AWS ECS Documentation
-* Docker Agent
+You can install the Agent on any cloud VM (for example, EC2) as long as traffic can reach your database instance.
 
-If you’re already running your apps on Kubernetes, then we would recommend using the Datadog Cluster Agent as this allows you to run cluster checks across your pods.
+If you are not already running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. You can use [AWS ECS][3] to host the Datadog Agent, as [the Agent already exists as a Docker container][4].
 
-Diagram of Cluster Agent, RDS, DBs, K8s
 
-https://www.datadoghq.com/blog/datadog-cluster-agent/
+If you’re already running your apps on [Kubernetes][5], Datadog recommends using the [Datadog Cluster Agent with Database Monitoring][6], as this allows you to run [cluster checks][7] across your pods.
 
-#### Why is cluster agent preferred?
-* You do not need to figure out how to distribute the RDS instances across a pool of agents. The cluster agent does this for you. This ensures that only one instance of each check runs as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of RDS instances so that the cluster agent can spread out the cluster checks across the different nodes.
-* Cluster Checks Documentation
+* Diagram of Cluster Agent, RDS, DBs, K8s
 
-#### Cluster Agent Setup
-* K8s Integrations Autodiscovery
-* DBM with Kubernetes/Cluster Agent
+Using the [Cluster Agent][8] is preferred because it distributes the RDS instances across a pool of agents for you. This ensures that only one instance of each check runs as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of RDS instances so that the Cluster Agent can spread out the cluster checks across the different nodes.
+
+_Diagram of DBM with Kubernetes/Cluster Agent_
 
 
 #### Aurora
-If you’re using Aurora, the Agent will need to be connected to the individual Aurora instance (not the cluster endpoint) because…
+
+If you’re using Aurora, the Agent needs to be connected to the individual Aurora instance (not the cluster endpoint) because…
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /agent/basic_agent_usage/
+[2]: /integrations/amazon_rds/
+[3]: /agent/amazon_ecs/
+[4]: /agent/docker/
+[5]: /agent/kubernetes/integrations/
+[6]: /database_monitoring/setup_postgres/rds/?tab=kubernetes
+[7]: /agent/cluster_agent/clusterchecks/
+[8]: https://www.datadoghq.com/blog/datadog-cluster-agent/
