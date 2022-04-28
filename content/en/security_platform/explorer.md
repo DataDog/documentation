@@ -39,7 +39,7 @@ Filter the contents of the table with the list of available facets. Configure th
 
 Click on any Security Signal to open the Security Signal Panel and see more details about it.
 
-{{< img src="security_platform/security_monitoring/explorer/signal_panel.png" alt="The Security Signal panel showing a critical signal" style="width:80%;" >}}
+{{< img src="security_platform/security_monitoring/explorer/signal_panel.png" alt="The Security Signal panel showing a critical AWS S3 Public access block removed signal" style="width:80%;" >}}
 
 The details and actions you need first when triaging an issue can be found in the top portion of the Security Signal Panel. From here, you can determine the severity of the signal, when it was generated, access the rule settings, change the state of the signal and quickly share or assign this signal to a teammate.
 
