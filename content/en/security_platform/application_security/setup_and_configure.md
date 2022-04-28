@@ -369,7 +369,6 @@ function handle () {
 
 For information and options, read [the NodeJS tracer documentation][1].
 
-<p></p>
 
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
