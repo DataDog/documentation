@@ -27,14 +27,14 @@ further_reading:
 For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-framework/">.NET Framework setup instructions</a> or the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-core/">.NET Core setup instructions</a>.
 </div>
 
-This page details common use cases for adding and customizing observability with Datadog APM. Custom instrumentation is supported on **.NET Framework 4.6.1+** for Windows, on **.NET Core 2.0+** for Windows and Linux, and on **.NET 5** and **.NET 6** for Windows and Linux. To perform the steps outlined below, you may need to add NuGet package references to one or more of the following libraries:
+This page details common use cases for adding and customizing observability with Datadog APM. For a list of supported runtimes, see the [.NET Framework Compatibility Requirements][1] or the [.NET Core Compatibility Requirements][2]. To perform the steps outlined below, you may need to add NuGet package references to one or more of the following libraries:
 
-- `Datadog.Trace` [NuGet package][1]: This library provides an API to directly access the Tracer and the active span. **Note:** When simultaneously using the `Datadog.Trace` NuGet package and automatic instrumentation, it is important to keep the versions in sync.
-- `Datadog.Trace.Annotations` [NuGet package][2]: This library provides .NET attributes that can be applied to your code to enable additional automatic instrumentation features.
+- `Datadog.Trace` [NuGet package][3]: This library provides an API to directly access the Tracer and the active span. **Note:** When simultaneously using the `Datadog.Trace` NuGet package and automatic instrumentation, it is important to keep the versions in sync.
+- `Datadog.Trace.Annotations` [NuGet package][4]: This library provides .NET attributes that can be applied to your code to enable additional automatic instrumentation features.
 
 ## Adding tags
 
-Add custom [span tags][3] to your [spans][4] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][5] to your [spans][6] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 ### Add custom span tags
 
@@ -85,7 +85,7 @@ DD_TAGS=datacenter:njc,key2:value2
   <strong>Note:</strong> This requires adding the `Datadog.Trace` NuGet package to your application.
 </div>
 
-To mark errors that occur in your code, utilize the `Span.SetException(Exception)` method. The method marks the span as an error and adds [related span metadata][5] to provide insight into the exception.
+To mark errors that occur in your code, utilize the `Span.SetException(Exception)` method. The method marks the span as an error and adds [related span metadata][7] to provide insight into the exception.
 
 ```csharp
 try
@@ -102,7 +102,7 @@ This sets three tags on the span: `"error.msg":exception.Message`,  `"error.stac
 
 ## Adding spans
 
-If you aren’t using a supported framework instrumentation for [.NET Framework][6] or [.NET Core][7], or you would like additional depth in your application's [traces][8], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
+If you aren’t using a supported framework instrumentation for [.NET Framework][1] or [.NET Core][2], or you would like additional depth in your application's [traces][8], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
 
 If modifying application code is not possible, use the environment variable `DD_TRACE_METHODS` to detail these methods.
 
@@ -179,13 +179,13 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://www.nuget.org/packages/Datadog.Trace
-[2]: https://www.nuget.org/packages/Datadog.Trace.Annotations
-[3]: /tracing/visualization/#span-tags
-[4]: /tracing/visualization/#spans
+[1]: /tracing/setup_overview/compatibility_requirements/dotnet-framework
+[2]: /tracing/setup_overview/compatibility_requirements/dotnet-core
+[3]: https://www.nuget.org/packages/Datadog.Trace
+[4]: https://www.nuget.org/packages/Datadog.Trace.Annotations
 [5]: /tracing/visualization/#span-tags
-[6]: /tracing/setup_overview/compatibility_requirements/dotnet-framework
-[7]: /tracing/setup_overview/compatibility_requirements/dotnet-core
+[6]: /tracing/visualization/#spans
+[7]: /tracing/visualization/#span-tags
 [8]: /tracing/visualization/#trace
 [9]: /tracing/setup_overview/setup/dotnet-framework
 [10]: /tracing/setup_overview/setup/dotnet-core
