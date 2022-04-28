@@ -1,17 +1,18 @@
 ---
-title: Hostmap
-kind: documentation
 aliases:
-  - /fr/graphing/infrastructure/hostmap/
-  - /fr/guides/hostmap
+- /fr/graphing/infrastructure/hostmap/
+- /fr/guides/hostmap
 further_reading:
-  - link: /infrastructure/livecontainers/
-    tag: Graphiques
-    text: Consulter en temps réel tous les conteneurs de votre environnement
-  - link: /infrastructure/process/
-    tag: Graphiques
-    text: Découvrir ce qui se passe à tous les niveaux de votre système
+- link: /infrastructure/livecontainers/
+  tag: Graphiques
+  text: Consulter en temps réel tous les conteneurs de votre environnement
+- link: /infrastructure/process/
+  tag: Graphiques
+  text: Découvrir ce qui se passe à tous les niveaux de votre système
+kind: documentation
+title: Hostmap
 ---
+
 ## Présentation
 
 Les hostmaps affichent une vue d'ensemble de plusieurs hosts sur un seul écran, en utilisant des formes et des couleurs pour faciliter la compréhension des métriques.
@@ -40,7 +41,7 @@ Pour illustrer cela, imaginons que vous regroupez vos hosts en fonction de leur 
 
 Des [tags][1] peuvent être appliqués automatiquement par des [intégrations Datadog][2] ou manuellement. Vous pouvez les utiliser pour filtrer vos hosts.
 
-Par exemple, si certains de vos hosts utilisent AWS, vous pouvez dès à présent utiliser les tags suivants spécifiques à AWS :
+Par exemple, si certains de vos hosts s'exécutent sur AWS, vous pouvez utiliser les tags suivants spécifiques à AWS :
 
 * `availability-zone`
 * `region`
@@ -63,17 +64,13 @@ Lorsque vous avez identifié un host que vous souhaitez étudier, cliquez dessus
 
 Cliquez sur le nom d'une intégration pour afficher un dashboard condensé des métriques de cette intégration. Sur la capture d'écran ci-dessous, nous avons cliqué sur « system » pour obtenir des métriques système, comme l'utilisation du processeur et de la mémoire, la latence du disque, etc.
 
-{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="Hostmaps Datadog agrandies" style="width:75%;" >}}
+{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="Agrandissement - hostmaps Datadog" style="width:75%;" >}}
 
 ### Formes et couleurs
 
-Par défaut, la couleur de chaque host est définie de façon à représenter le pourcentage d'utilisation du processeur sur ce host. Elle varie du vert (0 % d'utilisation) au orange (100 % d'utilisation). Vous pouvez sélectionner différentes métriques à partir du sélecteur `Color by`.  
+Par défaut, la couleur de chaque host est définie de façon à représenter le pourcentage d'utilisation du CPU sur ce host. Elle varie du vert (0 % d'utilisation) au orange (100 % d'utilisation). Vous pouvez sélectionner différentes métriques à partir du sélecteur `Fill by`.  
 
 Les hostmaps peuvent également communiquer d'autres métriques facultatives avec la taille de l'hexagone. Pour ce faire, utilisez le sélecteur `Size by`. 
-
-Sur la capture d'écran ci-dessous, la taille des hexagones représente le chargement moyen de 15 minutes, normalisé pour que les charges de travail des machines puissent être comparées même si leur nombre de noyaux diffère.
-
-{{< img src="infrastructure/hostmap/hostmappart2image4.png" alt="Hostmaps Datadog avec couleurs et tailles" style="width:80%;">}}
 
 **Remarque** : la métrique « % CPU utilized » utilise la mesure la plus fiable et récente de l'utilisation du processeur, qu'elle soit évaluée par l'Agent Datadog ou directement par AWS ou vSphere.
 
@@ -83,7 +80,7 @@ Par défaut, la hostmap ne présente que les hosts qui transmettent la métrique
 
 Si un host ne transmet pas la métrique sélectionnée, il peut tout de même figurer dans la hostmap : cliquez sur l'icône en forme d'engrenage en haut à droite de la hostmap et activez « Show hosts with no metrics » dans ses paramètres :
 
-{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="host sans Agent" style="width:50%;">}}
+{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="Host sans Agent" style="width:50%;">}}
 
 ### Pertinence et signification des données
 
@@ -98,11 +95,11 @@ Si vous souhaitez réduire vos dépenses AWS, vous pouvez commencer par détermi
 
 Vous trouverez ci-dessous un sous-ensemble de l'infrastructure de Datadog. Comme vous pouvez le constater, les instances **c3.2xlarge** présentent une charge particulièrement élevée.
 
-{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="hostmap partie 1" style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="Hostmap partie 1" style="width:80%;">}}
 
 Comme vous pouvez le voir ci-dessous, si vous cliquez sur le groupe c3.2xlarge et que vous créez des sous-groupes par rôle, vous pouvez remarquer que seulement certains rôles sont chargés, tandis que d'autres sont presque inactifs. Si vous rétrogradez ces 7 nœuds verts sur c3.xlarge, vous pouvez économiser quasiment 13 000 $ par an (0,21 $ d'économie par heure et par host x 24 h/jour * 365 jours/an * 7 hosts = 12 877,20 $/an).
 
-{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="Groupes rôles/instances hostmaps Datadog" style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="Groupes rôles/instances - hostmaps Dadadog" style="width:80%;">}}
 
 ### Placement des zones de disponibilité
 
@@ -110,7 +107,7 @@ Les hostmaps vous permettent de visualiser les distributions de machines dans ch
 
 Dans l'exemple ci-dessous, la distribution des hosts est inégale avec `role:daniels` sur l'ensemble des zones de disponibilité (Daniels est le nom d'une application interne).
 
-{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Équilibre AZ hostmaps Datadog" style="width:80%;" >}}
+{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Distribution des zones de disponibilité - hostmaps Datadog" style="width:80%;" >}}
 
 ### Résolution de problèmes
 
@@ -119,9 +116,9 @@ Ainsi, vous pouvez procéder à un regroupement selon une zone de disponibilité
 
 La capture d'écran ci-dessous illustre un problème récent rencontré par Datadog. Certains hosts disposent de beaucoup moins de mémoire utilisable que d'autres, bien qu'ils fassent partie du même cluster. Le regroupement par image de machine nous montre que deux images différentes ont été utilisées, et que l'une d'entre elles est surchargée.
 
-{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Deux bandes d'utilisation de la mémoire hostmaps Datadog" style="width:80%;" >}}
+{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Deux bandes d'utilisation de la mémoire - hostmaps Datadog" style="width:80%;" >}}
 
-{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Deux groupes d'images hostmaps Datadog" style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Deux groupes d'images - hostmaps Datadog" style="width:80%;">}}
 
 ## Pour aller plus loin
 

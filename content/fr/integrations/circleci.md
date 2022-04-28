@@ -1,7 +1,7 @@
 ---
 categories:
-  - cloud
-  - configuration & deployment
+- cloud
+- configuration & deployment
 ddtype: crawler
 dependencies: []
 description: Visualisez le nombre de builds terminés ou la durée moyenne des builds.
@@ -17,9 +17,12 @@ kind: integration
 manifest_version: '1.0'
 name: circleci
 public_title: '"Intégration Datadog/CircleCI"'
-short_description: Visualisez le nombre de builds terminés ou la durée moyenne des builds.
+short_description: Visualisez le nombre de builds terminés ou la durée moyenne des
+  builds.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Associez CircleCI pour :
@@ -27,13 +30,13 @@ Associez CircleCI pour :
 - Visualiser des métriques clés de CircleCI, telles que le nombre de builds terminés ou la durée moyenne des builds
 - Analyser des données (comme la répartition des builds par nom de tâche ou référentiel) à l'aide du système de tags de Datadog
 
-## Implémentation
+## Configuration
 
 ### Installation
 
 Vous pouvez installer l'intégration CircleCI avec son [carré d'intégration][1].
 
-### Configuration
+### Procédure à suivre
 
 1. Dans vos paramètres CircleCI, accédez à Personal API Tokens et saisissez la clé générée dans le formulaire. Le nom n'a pas besoin d'être identique à l'étiquette CircleCI, mais il doit être unique.
 2. Filtrez les référentiels grâce à une expression, telle que « Organisation/nom*référentiel », « Organisation/référentiel*_\* » ou « Organisation/\* ». **Le filtrage est effectué sur la liste des projets suivis, qui doit être définie dans CircleCI.**

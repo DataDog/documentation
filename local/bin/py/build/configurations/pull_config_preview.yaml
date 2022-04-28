@@ -380,6 +380,13 @@
     - action: pull-and-push-file
       branch: master
       globs:
+      - 'docs/web_view_tracking.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'web_view_tracking.md'
+    - action: pull-and-push-file
+      branch: master
+      globs:
       - 'docs/integrated_libraries_android.md'
       options:
         dest_path: '/real_user_monitoring/android/'

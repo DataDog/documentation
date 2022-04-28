@@ -1,24 +1,28 @@
 ---
 categories:
-  - cloud
+- cloud
 ddtype: agent
 dependencies: []
-description: Surveillez les événements relatifs aux acteurs et au répartiteur pour les applications basées sur Akka
-doc_link: 'https://docs.datadoghq.com/integrations/lightbendrp/'
+description: Surveillez les événements relatifs aux acteurs et au répartiteur pour
+  les applications basées sur Akka
+doc_link: https://docs.datadoghq.com/integrations/lightbendrp/
 draft: false
 git_integration_title: lightbendrp
 has_logo: true
 integration_id: lightbendrp
 integration_title: Lightbend
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: lightbendrp
 public_title: Intégration Datadog/Lightbend
-short_description: Surveillez les événements relatifs aux acteurs et au répartiteur pour les applications basées sur Akka
+short_description: Surveillez les événements relatifs aux acteurs et au répartiteur
+  pour les applications basées sur Akka
 version: '1.0'
 ---
-{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="Dashboard Lightbendrp" popup="true">}}
+
+{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="Dashboard Lightbend Reactive Platform" popup="true">}}
 
 ## Présentation
 
@@ -37,7 +41,7 @@ Cette intégration utilise Lightbend Monitoring, qui nécessite un [abonnement]
 
 Utilisez le [plug-in Datadog][3] afin d'intégrer Lightbend Monitoring à Datadog en toute simplicité.
 
-Par défaut, Lightbend Monitoring envoie toutes les métriques sur le réseau, mais il est possible de limiter les champs transmis via la configuration (consultez l'exemple ci-dessous).
+Par défaut, Lightbend Monitoring envoie toutes les métriques sur le réseau, mais il est possible de limiter les champs transmis à l'aide de la configuration (consultez l'exemple ci-dessous).
 
 Le plug-in Datadog utiliser une configuration par défaut, qui peut être ignorée :
 
@@ -60,9 +64,9 @@ Voici la description des valeurs de configuration :
 - `cinnamon.datadog.statsd.host` : adresse IP de votre instance DogStatsD.
 - `cinnamon.datadog.statsd.port` : numéro de port de votre instance DogStatsD.
 - `cinnamon.datadog.statsd.frequency` : fréquence à laquelle les données sont envoyées depuis Cinnamon à l'instance DogStatsD.
-- `cinnamon.datadog.report.histogram` : instruction décrivant comment filtrer les données histogram envoyées à DogStatsD. Dans l'exemple ci-dessus, seules les valeurs `max` et `p99` seront envoyées.
+- `cinnamon.datadog.report.histogram` : instruction décrivant comment filtrer les données histogram envoyées à DogStatsD. Dans l'exemple ci-dessus, seules les valeurs `max` et `p99` sont envoyées.
 
-Consultez la [documentation relative à Lightbend Monitoring][4] pour obtenir plus d'informations sur la configuration.
+Consultez la [documentation Lightbend Monitoring][4] (en anglais) pour en savoir plus sur la configuration.
 
 ## Données collectées
 

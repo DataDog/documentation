@@ -19,10 +19,6 @@ further_reading:
   text: "How Application Security Monitoring Works in Datadog"
 ---
 
-<div class="alert alert-warning">
-Application Security Monitoring is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
-</div>
-
 ## Compatibility
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
@@ -246,16 +242,50 @@ if ((span instanceof MutableSpan)) {
 
 {{< programming-lang lang="dotnet" >}}
 
-The .NET tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For information and options, read [the .NET tracer documentation][1].
-<p></p>
+The .NET tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace.
+
+The example below shows how to add the relevant user monitoring tags:
+
+```csharp
+
+using Datadog.Trace;
+
+// ...
+
+    var userDetails = new UserDetails()
+    {
+        // the systems internal identifier for the users
+        Id = "d41452f2-483d-4082-8728-171a3570e930",
+        // the email address of the user
+        Email = "test@adventure-works.com",
+        // the user's name, as displayed by the system
+        Name = "Jane Doh",
+        // the user's session id
+        SessionId = "d0632156-132b-4baa-95b2-a492c5f9cb16",
+        // the role the user is making the request under
+        Role = "standard",
+    };
+    Tracer.Instance.ActiveScope?.Span.SetUser(userDetails);
+```
+
+For information and options, read [the .NET tracer documentation][1].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace#user-identification
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
 
-The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For information and options, read [the Go tracer documentation][1].
-<p></p>
+The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1]. 
+
+This example shows how to retrieve the current tracer span and use it to set user monitoring tags:
+
+```go
+// Retrieve the current tracer span from an HTTP request's context
+if span, ok := tracer.SpanFromContext(request.Context()); ok {
+    // Record user information in the trace the span belongs to
+    tracer.SetUser(span, usr.id, tracer.WithUserEmail(usr.email), tracer.WithUserName(usr.name))
+```
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
 {{< /programming-lang >}}
@@ -317,9 +347,32 @@ $rootSpan->meta['usr.scope'] = ‘read:message, write:files’;
 
 {{< programming-lang lang="nodejs" >}}
 
-The Node tracer package provides the `tracer.setUser(user)` function, which allows you to monitor authenticated requests by adding user information to the trace. For information and options, read [the NodeJS tracer documentation][1].
+The Node tracer package provides the `tracer.setUser(user)` function, which allows you to monitor authenticated requests by adding user information to the trace.
 
-<p></p>
+The example below shows how to add relevant user monitoring tags:
+
+```javascript
+const tracer = require('dd-trace').init()
+
+function handle () {
+  tracer.setUser({
+    id: '123456789', // *REQUIRED* Unique identifier of the user.
+
+    // All other fields are optional.
+    email: 'jane.doe@example.com', // Email of the user.
+    name: 'Jane Doe', // User-friendly name of the user.
+    session_id: '987654321', // Session ID of the user.
+    role: 'admin', // Role the user is making the request under.
+    scope: 'read:message, write:files', // Scopes or granted authorizations the user currently possesses.
+
+    // Arbitrary fields are also accepted to attach custom data to the user (RBAC, Oauth, etc…)
+    custom_tag: 'custom data'
+  })
+}
+```
+
+For information and options, read [the NodeJS tracer documentation][1].
+
 
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
