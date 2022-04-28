@@ -40,7 +40,9 @@ For hosts running older versions of the install methods listed above or older ve
 
 ## What happens if I don't trust the new key before it is rotated?
 
-Trying to install or upgrade Agent packages using `apt`, `yum`, `dnf` or `zypper` from `apt.datadoghq.com`/`yum.datadoghq.com` without trusting the new key will result in an error. Possible errors include:
+Trying to install or upgrade Agent packages using `apt`, `yum`, `dnf` or `zypper` from `apt.datadoghq.com`/`yum.datadoghq.com` without trusting the new key results in an error. 
+
+Possible errors include:
 
 ```
 E: The repository 'https://apt.datadoghq.com stable Release' is not signed.
@@ -64,7 +66,7 @@ Error: GPG check FAILED
 
 For `apt`, this applies to both newly released and existing versions of the Agent. For `yum`, `dnf` or `zypper`, existing versions of the Agent can still be installed as long as `repo_gpgcheck=0` is set in the `datadog.repo` file.
 
-This key rotation does not affect installations done by manually downloading the packages and installing them with `dpkg` or `rpm` (note it can still cause a warning for `rpm`).
+This key rotation does not affect installations done by manually downloading the packages and installing them with `dpkg` or `rpm`. This may cause a warning for `rpm`.
 
 ## Manual update
 
