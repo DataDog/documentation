@@ -26,7 +26,7 @@ For the detailed installation instructions, select the Lambda runtime below:
 
 ## Advanced Configurations
 
-After the installation and collecting the telemetry, follow the [advanced configurations][3] to:
+After you're done with installation and you've set up telemetry collection, you can use [advanced configurations][3] to:
 
 - connect your metrics, traces, and logs using tags
 - collect telemetry from AWS resources such as API Gateway, AppSync, and Step Functions

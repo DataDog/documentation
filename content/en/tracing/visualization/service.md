@@ -136,7 +136,7 @@ You can add columns to or remove columns from this overview table and your selec
 
 {{< img src="tracing/visualization/service/deployments.png" alt="Deployments"  style="width:90%;">}}
 
-Read more about Deployments on the service page [here][11].
+Read more about Deployments [on the service page][11].
 
 ### Error Tracking
 View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][4])
@@ -160,7 +160,7 @@ If runtime metrics are enabled in the tracing client, you’ll see a Runtime met
 {{< img src="tracing/visualization/service/runtime_metrics.png" alt="Runtime Metrics"  style="width:90%;">}}
 
 ### Profiling
-You'll see a Profiling tab if the [Continuous Profiler][13] is set up for your service. Summary details like versions available and runtime language are at the top. Below are out-of-the-box profiling metrics by version, endpoint, and method to help you identify and debug resource-intensive methods. Click on any graph to view related traces, logs, and other data, or open a flame graph to inspect the code profile. Learn more about APM and the Continuous Profiler [here][14]. 
+You'll see a Profiling tab if the [Continuous Profiler][13] is set up for your service. Summary details like versions available and runtime language are at the top. Below are out-of-the-box profiling metrics by version, endpoint, and method to help you identify and debug resource-intensive methods. Click on any graph to view related traces, logs, and other data, or open a flame graph to inspect the code profile. [Learn more about APM and the Continuous Profiler][14]. 
 
 {{< img src="tracing/visualization/service/profiler.jpg" alt="Profiling"  style="width:90%;">}}
 

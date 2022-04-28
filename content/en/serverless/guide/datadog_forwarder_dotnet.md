@@ -40,9 +40,6 @@ myMetric.Add("t", new string[] {"product:latte", "order:online"});
 LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 ```
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/forwarder
 [2]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html

@@ -10,7 +10,7 @@ If your Lambda function configuration is incompatible with the Datadog handler r
 1. Follow the **Custom** installation instructions for [Python][1] or [Node.js][2] to install the Datadog serverless monitoring.
 2. Skip the step to configure the handler function.
 3. Skip the step to set the environment variable `DD_LAMBDA_HANDLER`.
-4. Apply the Datadog wrapper in your function code like below:
+4. Apply the Datadog wrapper in your function code:
     ```python
     # for python
     from datadog_lambda.wrapper import datadog_lambda_wrapper

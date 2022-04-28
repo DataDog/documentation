@@ -340,3 +340,5 @@ Where:
 [9]: /serverless/forwarder/
 [10]: /integrations/amazon_web_services/?tab=roledelegation#datadog-aws-iam-policy
 [11]: /metrics/
+[12]: /developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
+[13]: /developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
