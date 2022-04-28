@@ -130,7 +130,7 @@ _どの取り込みメカニズムが取り込み量の大部分を担ってい�
 [3]: /ja/tracing/guide/metrics_namespace/
 [4]: /ja/tracing/generate_metrics/
 [5]: /ja/monitors/create/types/apm/?tab=analytics
-[6]: /ja/tracing/trace_ingestion/mechanisms/#head-based-default-mechanism
+[6]: /ja/tracing/trace_ingestion/mechanisms/#head-based-sampling
 [7]: /ja/tracing/trace_retention/usage_metrics/
 [8]: /ja/tracing/trace_ingestion/mechanisms#error-traces
 [9]: /ja/tracing/trace_ingestion/mechanisms#rare-traces
