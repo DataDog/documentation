@@ -6,7 +6,7 @@
     "scripts": {
         "algolia:config": "node ./local/bin/js/algolia-config.js",
         "preinstall": "bash local/bin/sh/preinstall.sh",
-        "prestart": "HUGO_SECURITY_EXEC_OSENV=\".*\" && rimraf public && npx hugo mod clean",
+        "prestart": "rimraf public && npx hugo mod clean",
         "start": "run-p start:**",
         "start:webpack": "webpack --config webpack.dev.js --progress",
         "start:hugo": "./node_modules/.bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache",
