@@ -31,10 +31,6 @@ Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can
 
 The following are key differences between using CloudWatch Metric Streams and API polling.
 
-- **CloudWatch percentiles**: CloudWatch metrics for [percentile statistics][1] (`aws.*.pXX`) are not supported by streaming. This leads some differences in the specific metric names collected. Examples of metrics not supported are: `aws.elb.latency.p95`, `aws.applicationelb.target_response_time.p99`, and `aws.applicationelb.target_response_time.p50`. 
-
-  (**Note**: These metrics are different from Datadog's [Distribution Metrics][2].)
-
 - **Namespace filtering on AWS**: Per-namespace defaults and account-level settings in the AWS Integration tile only apply to the API polling approach. Manage all rules for including and excluding namespaces in the streams using the CloudWatch Metric Streams configuration in your AWS accounts.
 
 - **Metrics that report with more than a two hour delay**: API polling continues to collect metrics like `aws.s3.bucket_size_bytes` and `aws.billing.estimated_charges` after metric streaming is enabled, since these cannot be sent through CloudWatch Metric Stream.
@@ -120,9 +116,11 @@ If you want to set up metric streams using the AWS Console, follow these steps f
  2. Select the Firehose you created in Step 1 to use for sending the metrics to Datadog.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/firehose.png" alt="Firehose" responsive="true" style="width:60%;">}}
  3. Create a new service role to put records in Kinesis Data Firehose.
- 4. Choose OpenTelemetry 0.7 as the output format.
- 5. Name your metric stream.
- 6. Click **Create metric stream**.
+ 4. **Change the output format to be OpenTelemetry 0.7**.
+ 5. Add additional statistics to include the AWS percentile metrics you would like to send to Datadog. See our [CloudFormation template][4] for a list of the percentile metrics Datadog supports via polling.
+   {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="Percentiles" responsive="true" style="width:60%;">}}
+ 6. Name your metric stream.
+ 7. Click **Create metric stream**.
  
 ### Results
  
@@ -135,6 +133,7 @@ Once you see the Metric Stream resource has been successfully created, wait five
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[4]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
 {{% /tab %}}
 {{< /tabs >}}
 
