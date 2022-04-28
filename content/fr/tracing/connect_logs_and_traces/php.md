@@ -1,27 +1,33 @@
 ---
-title: Associer des logs PHP à des traces
-kind: documentation
-description: Associez vos logs PHP à vos traces pour les mettre en corrélation dans Datadog.
+description: Associez vos logs PHP à vos traces pour les mettre en corrélation dans
+  Datadog.
 further_reading:
-  - link: tracing/manual_instrumentation
-    tag: Documentation
-    text: Instrumenter vos applications manuellement pour créer des traces
-  - link: tracing/opentracing
-    tag: Documentation
-    text: Implémenter Opentracing dans vos applications
-  - link: tracing/visualization/
-    tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
-  - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
-    tag: Blog
-    text: Corréler automatiquement des logs de requête avec des traces
+- link: tracing/manual_instrumentation
+  tag: Documentation
+  text: Instrumenter vos applications manuellement pour créer des traces
+- link: tracing/opentracing
+  tag: Documentation
+  text: Implémenter Opentracing dans vos applications
+- link: tracing/visualization/
+  tag: Documentation
+  text: Explorer vos services, ressources et traces
+- link: https://www.datadoghq.com/blog/request-log-correlation/
+  tag: Blog
+  text: Corréler automatiquement des logs de requête avec des traces
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre
+    produits.
+kind: documentation
+title: Associer des logs PHP à des traces
 ---
-## Injecter automatiquement les ID de trace et de span
+
+## Injection automatique
 
 Compte tenu des nombreuses méthodes de logging pouvant être utilisées dans PHP<span class="x x-first x-last">,</span> dont certaines contournent complètement l'API de logging d'erreurs intégrée de PHP, la bibliothèque de tracing PHP de Datadog ne peut pas injecter d'<span class="x x-first x-last">ID</span> de trace et de span de manière fiable et automatique dans les logs.
 Consultez la section ci-dessous pour savoir comment associer vos logs PHP et vos traces manuellement.
 
-## Injecter manuellement des ID de trace et de span
+## Injection manuelle
 
 <div class="alert alert-warning">
 Veuillez noter que la fonction <code>\DDTrace\current_context()</code> a été ajoutée avec la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
@@ -41,7 +47,7 @@ Par exemple, ces deux attributs seront ajoutés à vos logs de la manière suiva
       $context['trace_id'],
       $context['span_id']
   );
-  my_error_logger('Error message.' . $append);
+  my_error_logger('Message d'erreur.' . $append);
 ?>
 ```
 
@@ -49,8 +55,8 @@ Si le logger implémente la [bibliothèque **monolog/monolog**][4], utilisez `Lo
 
 ```php
 <?php
-  $context = \DDTrace\current_context();
   $logger->pushProcessor(function ($record) {
+      $context = \DDTrace\current_context();
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
           $context['trace_id'],
@@ -82,6 +88,6 @@ Si votre application utilise des logs au format json, au lieu d'ajouter les ID t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/logs/log_collection/php/
-[2]: /fr/logs/processing/processors/#trace-remapper
+[2]: /fr/logs/log_configuration/processors/#trace-remapper
 [3]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog

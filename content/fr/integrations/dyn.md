@@ -1,24 +1,29 @@
 ---
 categories:
-  - network
-  - web
+- network
+- web
 ddtype: crawler
 dependencies: []
-description: 'Surveillez les changements de zone et mesurez le nombre de requêtes par seconde, selon une zone ou un enregistrement.'
-doc_link: 'https://docs.datadoghq.com/integrations/dyn/'
+description: Surveillez les changements de zone et mesurez le nombre de requêtes par
+  seconde, selon une zone ou un enregistrement.
+doc_link: https://docs.datadoghq.com/integrations/dyn/
 draft: false
 git_integration_title: dyn
 has_logo: true
 integration_id: ''
 integration_title: Dyn
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: dyn
 public_title: Intégration Datadog/Dyn
-short_description: 'Surveillez les changements de zone et mesurez le nombre de requêtes par seconde, selon une zone ou un enregistrement.'
+short_description: Surveillez les changements de zone et mesurez le nombre de requêtes
+  par seconde, selon une zone ou un enregistrement.
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/dyn/dyn_overview.png" alt="Présentation Dyn" popup="true">}}
 
 ## Présentation
@@ -30,7 +35,7 @@ Surveillez vos zones grâce aux événements et graphiques avancés.
 
 ## Configuration
 
-### Configuration
+### Procédure à suivre
 
 Si vous n'avez pas encore créé un utilisateur `datadog` en lecture seule sur Dyn, [connectez-vous à Dyn][1] et suivez les instructions suivantes :
 
@@ -44,7 +49,7 @@ Si vous n'avez pas encore créé un utilisateur `datadog` en lecture seule sur D
 
 Une fois votre utilisateur Datadog en lecture seule créé :
 
-1. Configurez votre [intégration Dyn][2] dans l'app Datadog :
+1. Configurez l'intégration [Datadog/Dyn][2] à l'aide du carré d'intégration :
    {{< img src="integrations/dyn/dyn_integration.png" alt="Intégration Dyn" style="width:75%;" popup="true">}}
 
 2. Sélectionnez les zones (_Zone notes_) à partir desquelles vous souhaitez recueillir des événements et des métriques `dyn.changes` :<br>

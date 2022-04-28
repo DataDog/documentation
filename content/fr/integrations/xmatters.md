@@ -1,24 +1,29 @@
 ---
 categories:
-  - notification
+- notification
 ddtype: crawler
 dependencies: []
-description: Utilisez xMatters comme canal de notification pour les alertes et les événements Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/xmatters/'
+description: Utilisez xMatters comme canal de notification pour les alertes et les
+  événements Datadog.
+doc_link: https://docs.datadoghq.com/integrations/xmatters/
 draft: false
 git_integration_title: xmatters
 has_logo: true
 integration_id: xmatters
 integration_title: xMatters
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: xmatters
 public_title: Intégration Datadog/xMatters
-short_description: Utilisez xMatters comme canal de notification pour les alertes et les événements Datadog.
+short_description: Utilisez xMatters comme canal de notification pour les alertes
+  et les événements Datadog.
+team: web-integrations
 version: '1.0'
 ---
-{{< img src="integrations/xmatters/xmatters.png" alt="Présentation de Xmatters" popup="true">}}
+
+{{< img src="integrations/xmatters/xmatters.png" alt="Présentation de xMatters" popup="true">}}
 
 ## Présentation
 
@@ -60,7 +65,7 @@ L'intégration xMatters n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://help.xmatters.com/integrations/#cshid=DATADOG
 [3]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [4]: https://docs.datadoghq.com/fr/help/

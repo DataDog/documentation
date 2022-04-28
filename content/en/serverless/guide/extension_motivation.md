@@ -44,5 +44,5 @@ The extension [adds overhead to your Lambda functions][4], compared to functions
 
 [1]: /serverless/libraries_integrations/extension/
 [2]: /serverless
-[3]: /serverless/libraries_integrations/forwarder/
+[3]: /logs/guide/forwarder/
 [4]: /serverless/libraries_integrations/extension/#overhead

@@ -224,7 +224,7 @@
       globs:
       - 'aws/logs_monitoring/README.md'
       options:
-        dest_path: '/serverless/libraries_integrations/'
+        dest_path: '/logs/guide/'
         file_name: 'forwarder.md'
         # front_matters:
         #   dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
@@ -377,6 +377,13 @@
             - link: "https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/"
               tag: "Blog"
               text: "Monitor Mobile Vitals in Datadog"
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/web_view_tracking.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'web_view_tracking.md'
     - action: pull-and-push-file
       branch: master
       globs:

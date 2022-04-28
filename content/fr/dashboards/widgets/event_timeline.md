@@ -1,17 +1,15 @@
 ---
-title: Widget Chronologie des événements
-kind: documentation
-description: Affichez votre flux d'événements sous forme de chronologie dans un widget.
 aliases:
-  - /fr/graphing/widgets/event_timeline/
+- /fr/graphing/widgets/event_timeline/
+description: Affichez votre flux d'événements sous forme de chronologie dans un widget.
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: Documentation
-    text: Screenboard
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+kind: documentation
+title: Widget Chronologie des événements
 ---
+
 La chronologie des événements est une version widget de la chronologie qui apparaît en haut de la [vue Chronologie des événements[1] :
 
 {{< img src="dashboards/widgets/event_timeline/event_timeline.png" alt="Exemple de chronologie des événements" >}}

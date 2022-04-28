@@ -1,25 +1,26 @@
 ---
 categories:
-  - collaboration
-  - notification
+- collaboration
+- notification
 ddtype: crawler
 dependencies: []
-description: "Soyez informé des événements et des alertes Datadog dans Microsoft\_Teams."
+description: Soyez informé des événements et des alertes Datadog dans Microsoft Teams.
 doc_link: https://docs.datadoghq.com/integrations/microsoft_teams/
 draft: false
 git_integration_title: microsoft_teams
 has_logo: true
 integration_id: ''
-integration_title: "Microsoft\_Teams"
+integration_title: Microsoft Teams
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: microsoft_teams
-public_title: "Intégration Datadog/Microsoft\_Teams"
-short_description: "Soyez informé des événements et des alertes Datadog dans Microsoft\_Teams."
+public_title: Intégration Datadog/Microsoft Teams
+short_description: Soyez informé des événements et des alertes Datadog dans Microsoft Teams.
 version: '1.0'
 ---
+
 ## Présentation
 
 Intégrez Microsoft Teams pour :
@@ -40,11 +41,13 @@ Pour intégrer Datadog à un canal Microsoft Teams :
     {{< img src="integrations/microsoft_teams/microsoft_team_step_2.png" alt="Microsoft Teams (étape 2)" >}}
 
 3. Sur la page `Configure`, copiez l'URL du webhook.
-4. Dans l'app Datadog, accédez à [Integrations > Microsoft teams][1].
+4. Dans Datadog, accédez à [Integrations > Microsoft teams][1].
 5. Dans l'onglet Configuration, cliquez sur **Add Channel**, nommez votre canal, puis collez l'URL du webhook.
 6. Depuis la page `Configure` de Microsoft, cliquez sur **Save**.
 
-Vous pouvez maintenant utiliser la [syntaxe `@-notification`][2] avec le nom de votre équipe Microsoft.
+## Utilisation
+
+Envoyez une notification à Microsoft Teams à partir d'un monitor Datadog à l'aide de la [fonctionnalité `@-notification`][2]. Utilisez la syntaxe `@teams-<CANAL>` pour définir le destinataire de la notification, en prenant soin de remplacer `<CHANNEL>` par le nom de votre canal Microsoft Teams.
 
 ## Données collectées
 

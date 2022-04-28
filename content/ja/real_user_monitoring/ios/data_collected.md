@@ -1,21 +1,35 @@
 ---
-title: 収集された RUM iOS データ
-kind: documentation
+dependencies:
+- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/data_collected.md
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-ios'
-    tag: Github
-    text: dd-sdk-ios ソースコード
-  - link: /real_user_monitoring
-    tag: ドキュメント
-    text: Datadog Real User Monitoring
+- link: https://github.com/DataDog/dd-sdk-ios
+  tag: Github
+  text: dd-sdk-ios ソースコード
+- link: /real_user_monitoring/
+  tag: ドキュメント
+  text: Datadog Real User Monitoring
+kind: documentation
+title: 収集された RUM iOS データ
 ---
-RUM SDK は、メトリクスと属性が関連付けられたイベントを生成します。メトリクスとは、イベント関連の計測に使用される定量化可能な値のことです。属性は、分析でメトリクスデータをスライス（グループ化）するために使用する定量化できない値です。
+## 概要
+
+RUM iOS SDK は、メトリクスと属性が関連付けられたイベントを生成します。メトリクスとは、イベント関連の計測に使用される定量化可能な値のことです。属性は、分析でメトリクスデータをスライス（グループ化）するために使用する定量化できない値です。
 
 RUM SDK は、メトリクスと属性が関連付けられたイベントを生成します。すべての RUM イベントには、すべての[デフォルト属性](#default-attributes)があります。例: デバイスタイプ (`device.type`)、名前 (`usr.name`) や 国 (`geo.country`) などのユーザー情報。
 
 追加の[特定のイベントタイプに固有のメトリクスと属性](#event-specific-metrics-and-attributes)があります。たとえば、メトリクス `view.time_spent` は "view" イベントに関連付けられ、属性 `resource.method` は "resource" イベントに関連付けられます。
 
-このページでは、収集された各メトリクスと属性について説明します。
+| イベントタイプ | 保存期間 | 説明                         |
+|------------|-----------|-------------------------------------|
+| セッション    | 30 日   | セッションは、モバイルアプリケーションでの実際のユーザージャーニーを表します。セッションはユーザーがアプリケーションを起動したときに開始され、ユーザーがアクティブである限りライブのままになります。ユーザージャーニー中、セッションの一部として生成されたすべての RUM イベントは、同じ `session.id` 属性を共有します。**注:** セッションは、15 分間操作されないとリセットされます。アプリケーションが OS によって強制終了された場合、アプリケーションがバックグラウンドにある間にセッションをリセットすることができます。|
+| ビュー       | 30 日   | ビューとは、モバイルアプリケーションの一意の画面（または画面の一部）のことです。`UIViewController` クラスの `viewDidAppear(animated:)` と `viewDidDisappear(animated:)` コールバックが通知されると、ビューが起動・停止します。個々の `UIViewControllers` は異なるビューとして分類されます。ユーザーがビューを維持している間、RUM イベント属性（エラー、リソース、アクション）が一意の `view.id` と共にビューにアタッチされます。                           |
+| Resource   | 15 日   | リソースとは、モバイルアプリケーションのファーストパーティホスト、API、サードパーティプロバイダーへのネットワークリクエストのことです。ユーザーセッション中に生成されるすべてのリクエストは、一意の `resource.id` と共にビューにアタッチされます。                                                                       |
+| エラー      | 30 日   | エラーとは、モバイルアプリケーションにより送信される例外またはクラッシュで、それが生成されたビューにアタッチされます。                                                                                                                                                                                        |
+| アクション     | 30 日   | アクションとは、モバイルアプリケーションでのユーザーアクティビティ（例えば、アプリケーションの起動、タップ、スワイプ、または戻る）のことです。各アクションは、一意の `action.id` と共に、それが生成されたビューにアタッチされます。                                                                                                      |
+
+次の図は、RUM イベント階層を示しています。
+
+{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM イベント階層" style="width:50%;border:none" >}}
 
 ## デフォルト属性
 
@@ -26,7 +40,7 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 
 | 属性名   | タイプ    | 説明                                                                        |
 |------------------|---------|------------------------------------------------------------------------------------|
-| `date`           | 整数 | Epoch からのイベント開始時間 (ms)                                               |
+| `date`           | 整数 | Epoch からのイベント開始時間 (ミリ秒)                                               |
 | `type`           | 文字列  | イベントのタイプ (`view` や `resource` など)。                         |
 | `service`        | 文字列  | ユーザーセッションを関連付けるために使用した、このアプリケーションの[統合サービス名][2]。 |
 | `application.id` | 文字列  | Datadog アプリケーション ID。                                                        |
@@ -42,9 +56,9 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 | `device.model`                       | 文字列 | デバイスにより報告されたデバイスモデル (System User-Agent)。                                           |
 | `device.name`                        | 文字列 | デバイスにより報告されたデバイス名 (System User-Agent)。                                            |
 | `connectivity.status`                | 文字列 | デバイスのネットワーク到達可能性の状態 (`connected`、`not connected`、`maybe`)。                           |
-| `connectivity.interfaces`            | 文字列 | 利用可能なネットワークインターフェースのリスト (`bluetooth`、`cellular`、`ethernet`、`wifi` など)。 |
-| `connectivity.cellular.technology`   | 文字列 | 携帯電話の接続に使用される無線技術のタイプ                                              |
-| `connectivity.cellular.carrier_name` | 文字列 | SIM を取り扱う事業者名                                                                              |
+| `connectivity.interfaces`            | 文字列 | 利用可能なネットワークインターフェースのリスト (`bluetooth`、`cellular`、`ethernet`、または `wifi` など)。 |
+| `connectivity.cellular.technology`   | 文字列 | 携帯電話の接続に使用される無線技術のタイプ。                                              |
+| `connectivity.cellular.carrier_name` | 文字列 | SIMを取り扱う事業者名。                                                                              |
 
 
 ### オペレーティングシステム
@@ -53,9 +67,9 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 
 | 属性名     | タイプ   | 説明                                                               |
 |--------------------|--------|---------------------------------------------------------------------------|
-| `os.name`          | 文字列 | デバイスにより報告される OS 名 (System User-Agent)          |
-| `os.version`       | 文字列 | デバイスにより報告される OS バージョン (System User-Agent)       |
-| `os.version_major` | 文字列 | デバイスにより報告される OS バージョンメジャー (System User-Agent) |
+| `os.name`          | 文字列 | デバイスにより報告された OS 名 (System User-Agent)。          |
+| `os.version`       | 文字列 | デバイスにより報告される OS バージョン (System User-Agent)。       |
+| `os.version_major` | 文字列 | デバイスにより報告される OS バージョンメジャー (System User-Agent)。 |
 
 
 ### 地理的位置
@@ -69,8 +83,8 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 | `geo.country_subdivision`          | 文字列 | その国で最大規模の地方区分 (米国は `California` 州、フランスは `Sarthe` 県など)。 |
 | `geo.country_subdivision_iso_code` | 文字列 | その国で最大規模の地方区分の ISO コード (米国は `CA`、フランスは `SA` など)。    |
 | `geo.continent_code`               | 文字列 | 大陸の ISO コード (`EU`、`AS`、`NA`、`AF`、`AN`、`SA`、`OC`)。                                                                     |
-| `geo.continent`                    | 文字列 | 大陸名 (`Europe`、`Australia`、`North America`、`Africa`、`Antartica`、`South America`、`Oceania`)。                        |
-| `geo.city`                         | 文字列 | 都市名 (`Paris`、`New York` など)。                                                                                       |
+| `geo.continent`                    | 文字列 | 大陸名 (`Europe`、`Australia`、`North America`、`Africa`、`Antarctica`、`South America`、`Oceania`)。                        |
+| `geo.city`                         | 文字列 | 都市名 (`San Francisco`、`Paris`、`New York` など)。                                                                                       |
 
 
 ### グローバルユーザー属性
@@ -79,26 +93,12 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 
 | 属性名 | タイプ   | 説明             |
 |----------------|--------|-------------------------|
-| `user.id`      | 文字列 | ユーザーの識別子。 |
+| `usr.id`      | 文字列 | ユーザーの識別子。 |
 | `usr.name`     | 文字列 | ユーザーの名前。       |
 | `usr.email`    | 文字列 | ユーザーのメールアドレス。      |
 
 
 ## イベント固有のメトリクスと属性
-
-Datadog リアルユーザーモニタリング SDK は、次の 6 種類のイベントを生成します。
-
-| イベントタイプ | 保存期間 | 説明                         |
-|------------|-----------|-------------------------------------|
-| セッション    | 30 日   | セッションは、モバイルアプリケーションでの実際のユーザージャーニーを表します。セッションはユーザーがアプリケーションを起動したときに開始され、ユーザーがアクティブである限りライブのままになります。ユーザージャーニー中、セッションの一部として生成されたすべての RUM イベントは、同じ `session.id` 属性を共有します。 |
-| ビュー       | 30 日   | ビューとは、モバイルアプリケーションの一意の画面（または画面の一部）のことです。個々の `UIViewControllers` は異なるビューとして分類されます。ユーザーがビューを維持している間、RUM イベント属性（エラー、リソース、アクション）が一意の `view.id` と共にビューにアタッチされます。                           |
-| Resource   | 15 日   | リソースとは、モバイルアプリケーションのファーストパーティホスト、API、サードパーティプロバイダー、ライブラリへのネットワークリクエストのことです。ユーザーセッション中に生成されるすべてのリクエストは、一意の `resource.id` と共にビューにアタッチされます。                                                                       |
-| エラー      | 30 日   | エラーとは、モバイルアプリケーションにより送信される例外で、それが生成されたビューにアタッチされます。                                                                                                                                                                                        |
-| アクション     | 30 日   | アクションとは、モバイルアプリケーションでのユーザーアクティビティ（アプリケーションの起動、タップ、スワイプ、戻るなど）のことです。各アクションは、一意の `action.id` と共に、それが生成されたビューにアタッチされます。                                                                                                      |
-
-次の図は、RUM イベント階層を示しています。
-
-{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM イベント階層" style="width:50%;border:none" >}}
 
 ### セッションメトリクス
 
@@ -118,13 +118,13 @@ Datadog リアルユーザーモニタリング SDK は、次の 6 種類のイ�
 |------------------------------|--------|----------------------------------------------------------------------------|
 | `session.id`                 | 文字列 | セッションのユニーク ID。                                                  |
 | `session.type`               | 文字列 | セッションのタイプ (`user`)。                                              |
-| `session.is_active`          | 文字列 | セッションが現在アクティブかどうかを示します                               |
-| `session.initial_view.url`   | 文字列 | セッションの初期ビューの URL                                     |
-| `ssession.initial_view.name` | 文字列 | セッションの初期ビューの名前                                    |
-| `session.last_view.url`      | 文字列 | セッションの最後のビューの URL                                        |
-| `session.last_view.name`     | 文字列 | セッションの最後のビューの名前                                       |
-| `session.ip`                 | 文字列 | インテークの TCP 接続から抽出されたセッションの IP アドレス |
-| `session.useragent`          | 文字列 | デバイスの情報を解釈するためのシステムユーザーエージェントの情報                            |
+| `session.is_active`          | boolean | セッションが現在アクティブであるかどうかを示します。セッションは、ユーザーがアプリケーションから移動したり、ブラウザウィンドウを閉じたりすると終了し、4 時間の活動または 15 分の非活動時間が経過すると失効します。                               |
+| `session.initial_view.url`   | 文字列 | セッションの初期ビューの URL。                                     |
+| `ssession.initial_view.name` | 文字列 | セッションの初期ビューの名前。                                    |
+| `session.last_view.url`      | 文字列 | セッションの最後のビューの URL。                                        |
+| `session.last_view.name`     | 文字列 | セッションの最後のビューの名前。                                       |
+| `session.ip`                 | 文字列 | インテークの TCP 接続から抽出されたセッションの IP アドレス。 |
+| `session.useragent`          | 文字列 | デバイスの情報を解釈するためのシステムユーザーエージェントの情報。                            |
 
 
 ### ビューのメトリクス
@@ -133,17 +133,19 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 
 | メトリクス                | タイプ        | 説明                                                                  |
 |-----------------------|-------------|------------------------------------------------------------------------------|
-| `view.time_spent`     | 数値（ns） | このビューに費やされた時間。                                                 |
+| `view.time_spent`     | 数値（ns） | このビューに費やされた時間。                                                     |
+| `view.loading_time`                             | 数値（ns） | このビューのロード時間。                        |
+| `view.long_task.count`        | 数値      | このビューについて収集されたすべてのロングタスクの数。                     |
 | `view.error.count`    | 数値      | このビューについて収集されたすべてのエラーの数。                                 |
 | `view.resource.count` | 数値      | このビューについて収集されたすべてのリソースの数。                              |
 | `view.action.count`   | 数値      | このビューについて収集されたすべてのアクションの数。                                |
 | `view.is_active`      | boolean     | このイベントに対応するビューがアクティブであるとみなされるかどうかを示します。 |
 
-### ビューの属性
+### ビュー属性
 
 | 属性名 | タイプ   | 説明                                                     |
 |----------------|--------|-----------------------------------------------------------------|
-| `view.id`      | 文字列 | event.view に対応する初期ビューのユニーク ID。  |
+| `view.id`      | 文字列 | イベントに対応する初期ビューのユニーク ID。  |
 | `view.url`     | 文字列 | イベントに対応する `UIViewController` クラスの URL。 |
 | `view.name`    | 文字列 | イベントに対応する、カスタマイズ可能なビューの名前。       |
 
@@ -152,27 +154,27 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 
 | メトリクス                         | タイプ           | 説明                                                                                     |
 |--------------------------------|----------------|-------------------------------------------------------------------------------------------------|
-| `duration`                     | 数値         | リソースのロードにかかった全時間。                                                         |
+| `resource.duration`            | 数値         | リソースのロードにかかった全時間。                                                         |
 | `resource.size`                | 数値（バイト） | リソースのサイズ。                                                                                  |
-| `resource.connect.duration`    | 数値（ns）    | サーバーへの接続が確立されるまでにかかった時間（connectEnd - connectStart）。                  |
+| `resource.connect.duration`    | 数値（ns）    | サーバーへの接続が確立されるまでにかかった時間 (connectEnd - connectStart)。                  |
 | `resource.ssl.duration`        | 数値（ns）    | TLS ハンドシェイクに費やされた時間。                                                               |
-| `resource.dns.duration`        | 数値（ns）    | 最後のリクエストの DNS 名が解決されるまでにかかった時間（domainLookupEnd - domainLookupStart）。     |
-| `resource.redirect.duration`   | 数値（ns）    | 後続の HTTP リクエストにかかった時間（redirectEnd - redirectStart）。                            |
-| `resource.first_byte.duration` | 数値（ns）    | 応答の最初のバイトを受信するまでにかかった時間（responseStart - requestStart） |
-| `resource.download.duration`   | 数値（ns）    | 応答のダウンロードにかかった時間（responseEnd - responseStart）。                               |
+| `resource.dns.duration`        | 数値（ns）    | 最後のリクエストの DNS 名が解決されるまでにかかった時間 (domainLookupEnd - domainLookupStart)。     |
+| `resource.redirect.duration`   | 数値（ns）    | 後続の HTTP リクエストにかかった時間 (redirectEnd - redirectStart)。                            |
+| `resource.first_byte.duration` | 数値（ns）    | 応答の最初のバイトを受信するまでにかかった時間 (responseStart -requestStart)。 |
+| `resource.download.duration`   | 数値（ns）    | 応答のダウンロードにかかった時間 (responseEnd - responseStart)。                               |
 
 ### リソースの属性
 
 | 属性                  | タイプ   | 説明                                                                              |
 |----------------------------|--------|------------------------------------------------------------------------------------------|
 | `resource.id`              | 文字列 | リソースの一意の識別子。                                                       |
-| `resource.type`            | 文字列 | 収集されるリソースのタイプ (`xhr`、`image`、`font`、`css`、`js` など)。 |
-| `resource.method`          | 文字列 | HTTP メソッド (`POST`、`GET` `PATCH`、`DELETE` など)。                       |
+| `resource.type`            | 文字列 | 収集されるリソースのタイプ (`xhr`、`image`、`font`、`css`、または `js` など)。 |
+| `resource.method`          | 文字列 | HTTP メソッド (`POST`、`GET` `PATCH`、または `DELETE` など)。                       |
 | `resource.status_code`     | 数値 | 応答ステータスコード。                                                                |
 | `resource.url`             | 文字列 | リソースの URL。                                                                        |
 | `resource.provider.name`   | 文字列 | リソースプロバイダー名。デフォルトは `unknown` となります。                                        |
 | `resource.provider.domain` | 文字列 | リソースプロバイダーのドメイン。                                                            |
-| `resource.provider.type`   | 文字列 | リソースプロバイダーのタイプ (`first-party`、`cdn`、`ad`、`analytics` など)。        |
+| `resource.provider.type`   | 文字列 | リソースプロバイダーのタイプ (`first-party`、`cdn`、`ad`、または `analytics` など)。        |
 
 
 ### エラー属性
@@ -187,18 +189,18 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 | `error.stack`    | 文字列 | スタックトレースまたはエラーに関する補足情報。                    |
 | `error.issue_id` | 文字列 | スタックトレースまたはエラーに関する補足情報。                    |
 
-#### ネットワークエラー
+### ネットワークエラー
 
 ネットワークエラーには失敗した HTTP リクエストに関する情報が含まれます。次のファセットも収集されます。
 
 | 属性                        | タイプ   | 説明                                                                       |
 |----------------------------------|--------|-----------------------------------------------------------------------------------|
 | `error.resource.status_code`     | 数値 | 応答ステータスコード。                                                         |
-| `error.resource.method`          | 文字列 | HTTP メソッド (`POST`、`GET` など)。                                      |
+| `error.resource.method`          | 文字列 | HTTP メソッド (`POST` または `GET` など)。                                      |
 | `error.resource.url`             | 文字列 | リソースの URL。                                                                 |
 | `error.resource.provider.name`   | 文字列 | リソースプロバイダー名。デフォルトは `unknown` となります。                                 |
 | `error.resource.provider.domain` | 文字列 | リソースプロバイダーのドメイン。                                                     |
-| `error.resource.provider.type`   | 文字列 | リソースプロバイダーのタイプ (`first-party`、`cdn`、`ad`、`analytics` など)。 |
+| `error.resource.provider.type`   | 文字列 | リソースプロバイダーのタイプ (`first-party`、`cdn`、`ad`、または `analytics` など)。 |
 
 
 ### アクションメトリクス
@@ -206,6 +208,7 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 | メトリクス                  | タイプ        | 説明                                   |
 |-------------------------|-------------|-----------------------------------------------|
 | `action.loading_time`   | 数値（ns） | アクションのロード時間。               |
+| `action.long_task.count`        | 数値      | このアクションについて収集されたすべてのロングタスクの数。 |
 | `action.resource.count` | 数値      | このアクションにより発生したすべてのリソースの数。 |
 | `action.error.count`    | 数値      | このアクションにより発生したすべてのエラーの数。    |
 
@@ -214,15 +217,18 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 | 属性            | タイプ   | 説明                                                                     |
 |----------------------|--------|---------------------------------------------------------------------------------|
 | `action.id`          | 文字列 | ユーザーアクションの UUID。                                                        |
-| `action.type`        | 文字列 | ユーザーアクションのタイプ (`tap`、`application_start`)。                           |
+| `action.type`        | 文字列 | ユーザーアクションのタイプ (`tap` または `application_start` など)。                           |
 | `action.name`        | 文字列 | ユーザーアクションの名前。                                                        |
-| `action.target.name` | 文字列 | ユーザーが操作したエレメント。自動収集されたアクションのみ対象 |
+| `action.target.name` | 文字列 | ユーザーが操作したエレメント。自動収集されたアクションのみ対象。 |
 
+## データストレージ
 
+データは Datadog にアップロードされる前に、[アプリケーションサンドボックス][3]のキャッシュディレクトリ (`Library/Caches`) に平文で保存され、デバイスにインストールされた他のアプリからは読み取ることができません。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/ios/advanced_configuration/#enrich-user-sessions
-[2]: /ja/real_user_monitoring/ios/advanced_configuration/#track-user-sessions
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/advanced_configuration/#enrich-user-sessions
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/advanced_configuration/#track-user-sessions
+[3]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web

@@ -32,6 +32,10 @@ Add custom [span tags][1] to your [spans][2] to customize your observability wit
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
 ```java
+import org.apache.cxf.transport.servlet.AbstractHTTPServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 
@@ -72,7 +76,7 @@ To customize an error associated with one of your spans, set the error tag on th
 import io.opentracing.Span;
 import io.opentracing.tag.Tags;
 import io.opentracing.util.GlobalTracer;
-import io.opentracing.log.Fields
+import io.opentracing.log.Fields;
 ...
     // Get active span if not available in current method
     final Span span = GlobalTracer.get().activeSpan();
@@ -113,6 +117,15 @@ import java.io.StringWriter;
 When an event or condition happens downstream, you may want that behavior or value reflected as a tag on the top level or root span. This can be useful to count an error or for measuring performance, or setting a dynamic tag for observability.
 
 ```java
+import java.util.Collections;
+import io.opentracing.Span;
+import io.opentracing.Scope;
+import datadog.trace.api.interceptor.MutableSpan;
+import io.opentracing.log.Fields;
+import io.opentracing.util.GlobalTracer;
+import io.opentracing.util.Tracer;
+
+Tracer tracer = GlobalTracer.get();
 final Span span = tracer.buildSpan("<OPERATION_NAME>").start();
 try (final Scope scope = tracer.activateSpan(span)) {
     // exception thrown here
@@ -135,6 +148,12 @@ try (final Scope scope = tracer.activateSpan(span)) {
 If you are not manually creating a span, you can still access the root span through the `GlobalTracer`:
 
 ```java
+import io.opentracing.Span;
+import io.opentracing.util.GlobalTracer;
+import datadog.trace.api.interceptor.MutableSpan;
+
+...
+
 final Span span = GlobalTracer.get().activeSpan();
 if (span != null && (span instanceof MutableSpan)) {
     MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
@@ -193,6 +212,7 @@ In addition to automatic instrumentation, the `@Trace` annotation, and `dd.trace
 ```java
 import datadog.trace.api.DDTags;
 import io.opentracing.Scope;
+import io.opentracing.Span;
 import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 
@@ -226,6 +246,13 @@ class SomeClass {
 The tracing libraries are designed to be extensible. Customers may consider writing a custom post-processor called a `TraceInterceptor` to intercept Spans then adjust or discard them accordingly (for example, based on regular expressions). The following example implements two interceptors to achieve complex post-processing logic.
 
 ```java
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import datadog.trace.api.interceptor.TraceInterceptor;
+import datadog.trace.api.interceptor.MutableSpan;
+
 class FilteringInterceptor implements TraceInterceptor {
     @Override
     public Collection<? extends MutableSpan> onTraceComplete(

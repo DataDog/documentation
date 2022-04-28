@@ -1,14 +1,15 @@
 ---
-title: Requêtes
-kind: documentation
 aliases:
-  - /fr/graphing/using_graphs/
+- /fr/graphing/using_graphs/
 description: Interroger vos données pour mieux les comprendre
 further_reading:
-  - link: https://learn.datadoghq.com/course/view.php?id=8
-    tag: Centre d'apprentissage
-    text: Améliorer vos dashboards
+- link: https://learn.datadoghq.com/course/view.php?id=8
+  tag: Centre d'apprentissage
+  text: Améliorer vos dashboards
+kind: documentation
+title: Requêtes
 ---
+
 ## Présentation
 
 Que vous utilisiez les métriques, les logs, les traces, les monitors, les dashboards ou encore les notebooks, tous les graphiques Datadog offrent les mêmes fonctionnalités de base. Cette page décrit comment créer des requêtes avec l'éditeur de graphiques. Les utilisateurs avancés peuvent également créer et modifier des graphiques avec JSON. Pour en savoir plus, consultez la section [Graphiques JSON][1].
@@ -203,39 +204,6 @@ Choisissez le niveau de détail pour lequel vous souhaitez visualiser des statis
 Sélectionnez les paramètres suivants depuis l'éditeur de graphiques : Environnement (`env`), Tag primaire (`primary_tag`), Service (`service`) et Nom de l'opération (`name`).
 
 Si le niveau de détail choisi correspond à une ressource ou à une span, vous devrez également sélectionner un Nom de ressource (`resource`) pour certains types de widget afin d'affiner le contexte de votre requête.
-
-## Données d'analyse de la gestion des incidents
-
-Les widgets suivants prennent en charge les données d'analyse de la gestion des incidents :
-
-* Série temporelle
-* Top List 
-* Valeur de requête
-
-### Configuration d'un graphique
-
-Pour configurer votre graphique à l'aide de données d'analyses de la gestion des incidents, suivez ces étapes :
-
-1. [Sélectionnez votre visualisation](#selectionner-votre-visualisation) (procédure identique à celle des métriques).
-2. Sélectionnez `Incidents` dans le menu déroulant des sources de données.
-3. Sélectionnez une mesure dans le menu déroulant jaune.
-     - **Statistique par défaut :** nombre d'incidents.
-5. Sélectionnez une agrégation pour la mesure.
-6. (Facultatif) Sélectionnez un cumul pour la mesure.
-7. (Facultatif) Utilisez la barre de recherche pour limiter la statistique à un sous-ensemble d'incidents.
-8. (Facultatif) Sélectionnez une facette dans le menu déroulant rose pour répartir la mesure par groupe et sélectionner un nombre limité de groupes à afficher.
-9. [Donnez un titre au graphique](#creer-un-titre) (procédure identique à celle des métriques).
-10. Enregistrez votre widget.
-
-**Exemple :** Durée hebdomadaire de l'impact client des pannes par service
-
-1. Widget : graphique linéaire de série temporelle
-2. Source de données : `Incidents`
-3. Mesure : `Customer Impact Duration`
-4. Agrégation : `avg`
-5. Cumul : `1w`
-6. Filtre : `severity:(“SEV-1” OR “SEV-2”)`
-7. Groupe : `Services`, limité aux 5 premiers
 
 ## Options supplémentaires
 
