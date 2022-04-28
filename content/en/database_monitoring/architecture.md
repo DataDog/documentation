@@ -71,7 +71,10 @@ _Diagram of DBM with Kubernetes/Cluster Agent_
 
 #### Aurora
 
-If you’re using Aurora, the Agent needs to be connected to the individual Aurora instance (not the cluster endpoint) because…
+If you’re using Aurora, the Agent needs to be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred.
+
+The Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the Aurora cluster endpoint. While this can be an anti-pattern for client applications, each Datadog Agent must have knowledge of the underlying hostname and should be a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics become incorrect. This is because the values depend on the state of the previous snapshot. The Agent takes snapshots at different points in time, if it takes snapshots from two different hosts, then the stats can be wildly different.
+
 
 
 ## Further Reading
