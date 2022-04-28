@@ -1,14 +1,18 @@
 ---
+further_reading:
+- link: /api/latest/using-the-api/
+  tag: Documentation
+  text: API の使用
+- link: /api/latest/scopes/
+  tag: Documentation
+  text: 認証スコープ
+- link: /api/latest/rate-limits/
+  tag: ドキュメント
+  text: レート制限
 title: API リファレンス
 type: api
-further_reading:
-  - link: /api/latest/using-the-api/
-    tag: Documentation
-    text: API の使用
-  - link: /api/latest/rate-limits/
-    tag: Documentation
-    text: レート制限
 ---
+
 {{< h2 >}}API リファレンス{{< /h2 >}}
 
 Datadog では HTTP REST API を採用しており、リソース指向 URL を使用して API を呼び出します。リクエストの成否はステータスコードで示し、すべてのリクエストに対して JSON オブジェクトを返します。この場合には標準 HTTP 応答コードが使用されます。Datadog API を使用すると、プログラムを通じて Datadog のプラットフォームにアクセスすることができます。
@@ -17,7 +21,7 @@ Datadog では HTTP REST API を採用しており、リソース指向 URL を�
 
 [API キー][1]で API を認証します。これはエンドポイントと[アプリケーションキー][2]によって異なります。
 
-API を実行するには、[![Postman で実行][3]](https://app.getpostman.com/run-collection/7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189?action=collection%2Ffork&collection-url=entityId%3D7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhcHBsaWNhdGlvbl9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ==)
+API を実行するには、[![Postman で実行][3]](https://app.getpostman.com/run-collection/7274195-5d3dff85-334d-45f5-a5cc-68c1f4908095?action=collection%2Ffork&collection-url=entityId%3D7274195-5d3dff85-334d-45f5-a5cc-68c1f4908095%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
 
 [API の使用][4]でエンドポイントについて説明しています。
 
