@@ -1,11 +1,12 @@
 ---
 categories:
-  - monitoring
-  - notification
-  - cloud
+- monitoring
+- notification
+- cloud
 ddtype: crawler
 dependencies: []
-description: L'intégration Segment permet de recueillir des métriques de diffusion d'événements pour les destinations de votre espace de travail.
+description: L'intégration Segment permet de recueillir des métriques de diffusion
+  d'événements pour les destinations de votre espace de travail.
 doc_link: https://docs.datadoghq.com/integrations/segment/
 draft: false
 git_integration_title: segment
@@ -19,8 +20,10 @@ manifest_version: '1.0'
 name: segment
 public_title: Intégration Datadog/Segment
 short_description: Recueille les métriques de diffusion d'événements de Segment.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Associez Segment pour :

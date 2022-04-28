@@ -1,33 +1,37 @@
 ---
 aliases:
-  - /fr/integrations/nodejs/
+- /fr/integrations/nodejs/
 categories:
-  - languages
-  - log collection
+- languages
+- log collection
 ddtype: library
 dependencies: []
-description: Envoyez des métriques custom à partir de vos services Node.js via DogStatsD ou notre API.
-doc_link: 'https://docs.datadoghq.com/integrations/nodejs/'
+description: Envoyez des métriques custom à partir de vos services Node.js via DogStatsD
+  ou notre API.
+doc_link: https://docs.datadoghq.com/integrations/nodejs/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/node-logging-best-practices/'
-    tag: Blog
-    text: 'Comment recueillir, personnaliser et centraliser des Node.js'
-  - link: 'https://www.datadoghq.com/blog/node-monitoring-apm/'
-    tag: Blog
-    text: Surveillance Node.js avec l'APM et le tracing distribué de Datadog
+- link: https://www.datadoghq.com/blog/node-logging-best-practices/
+  tag: Blog
+  text: Comment recueillir, personnaliser et centraliser des Node.js
+- link: https://www.datadoghq.com/blog/node-monitoring-apm/
+  tag: Blog
+  text: Surveillance Node.js avec l'APM et le tracing distribué de Datadog
 git_integration_title: node
 has_logo: true
 integration_id: node
 integration_title: NodeJS
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: node
 public_title: Intégration Datadog/NodeJS
-short_description: Envoyez des métriques custom à partir de vos services Node.js via DogStatsD ou notre API.
+short_description: Envoyez des métriques custom à partir de vos services Node.js via
+  DogStatsD ou notre API.
 version: '1.0'
 ---
+
 ## Présentation
 
 L'intégration Node.js vous permet de recueillir et de surveiller les logs, les traces et les métriques custom de vos applications Node.js.
@@ -77,7 +81,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/brightcove/hot-shots
-[2]: https://docs.datadoghq.com/fr/metrics/
+[2]: https://docs.datadoghq.com/fr/developers/metrics/
 [3]: https://docs.datadoghq.com/fr/tracing/setup/nodejs/
 [4]: https://docs.datadoghq.com/fr/logs/log_collection/nodejs/
 [5]: https://docs.datadoghq.com/fr/help/

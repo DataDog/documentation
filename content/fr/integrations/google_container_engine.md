@@ -1,56 +1,33 @@
 ---
 categories:
-  - cloud
-  - containers
-  - google cloud
-  - log collection
+- cloud
+- containers
+- google cloud
+- log collection
 ddtype: crawler
 dependencies: []
 description: Surveillez l'utilisation des ressources de vos conteneurs GCE.
-doc_link: 'https://docs.datadoghq.com/integrations/google_container_engine/'
+doc_link: https://docs.datadoghq.com/integrations/google_container_engine/
 draft: false
 git_integration_title: google_container_engine
 has_logo: true
 integration_id: google-container-engine
 integration_title: Google Container Engine
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_container_engine
-public_title: "Intégration Datadog/Google\_Container\_Engine"
+public_title: Intégration Datadog/Google Container Engine
 short_description: Surveillez l'utilisation des ressources de vos conteneurs GCE.
 version: '1.0'
 ---
+
 ## Présentation
 
-Google Container Engine est un puissant gestionnaire de clusters et un système d'orchestration pour l'exécution de conteneurs Docker.
-
-Recueillez des métriques de Google Container Engine pour :
-
-- Visualiser les performances de vos conteneurs Container Engine
-- Corréler les performances de vos conteneurs Container Engine avec vos applications
-
-## Configuration
-
-### Collecte de métriques
-
-#### Installation
-
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
-
-### Collecte de logs
-
-Les logs Google Container Engine sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
-
-Une fois cette opération effectuée, exportez vos logs Google Container Engine depuis Stackdriver vers le Pub/Sub :
-
-1. Accédez à la [page Stackdriver][3] et filtrez les logs de Google Container Engine.
-2. Cliquez sur **Create Sink** et nommez le récepteur.
-3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
-
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
-
-4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
+<div class="alert alert-warning">
+Cette intégration est obsolète. Consultez plutôt la <a href="https://docs.datadoghq.com/integrations/google_kubernetes_engine">documentation relative à l'intégration Google Kubernetes Engine</a>. Pour en savoir plus sur les métriques obsolètes, consultez la documentation Google sur les <a href="https://cloud.google.com/monitoring/api/metrics_gcp#gcp-container">métriques Google Cloud</a> (en anglais).
+</div>
 
 ## Données collectées
 
@@ -68,10 +45,7 @@ L'intégration Google Container Engine n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/?tab=datadogussite#log-collection
-[3]: https://console.cloud.google.com/logs/viewer
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_container_engine/google_container_engine_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
+[1]: https://github.com/DataDog/dogweb/blob/prod/integration/google_container_engine/google_container_engine_metadata.csv
+[2]: https://docs.datadoghq.com/fr/help/

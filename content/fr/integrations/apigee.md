@@ -1,62 +1,93 @@
 ---
-title: Apigee
-name: apigee
-kind: integration
-description: 'Recueillez des logs sur les proxies Apigee afin de surveiller les erreurs, les délais de réponse des requêtes, les durées, la latence ainsi que les performances et les problèmes des proxies depuis un unique outil.'
-short_description: 'Recueillez des logs Apigee afin de surveiller les erreurs, les délais de réponse des requêtes, et plus encore.'
-dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/apigee.md'
-categories:
-  - log collection
-doc_link: /integrations/apigee/
 aliases:
-  - /fr/logs/log_collection/apigee
+- /fr/logs/log_collection/apigee
+categories:
+- log collection
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/apigee.md
+description: Recueillez des logs sur les proxies Apigee afin de surveiller les erreurs,
+  les délais de réponse des requêtes, les durées, la latence ainsi que les performances
+  et les problèmes des proxies depuis un unique outil.
+doc_link: /integrations/apigee/
+further_reading:
+- link: logs/
+  tag: Documentation
+  text: Log Management
 has_logo: true
+integration_id: apigee
 integration_title: Apigee
 is_public: true
+kind: integration
+name: apigee
 public_title: Datadog/Apigee
-further_reading:
-  - link: logs/
-    tag: Documentation
-    text: Log Management
+short_description: Recueillez des logs Apigee afin de surveiller les erreurs, les
+  délais de réponse des requêtes, et plus encore.
+title: Apigee
 ---
+
+{{< site-region region="us3" >}}
+<div class="alert alert-warning">L'intégration Apigee n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Présentation
 
-Recueillez des logs sur les proxies Apigee afin de surveiller les erreurs, les délais de réponse, les durées, la latence ainsi que les performances et les problèmes des proxies depuis un unique outil.
+Recueillez des logs sur les proxies Apigee afin de surveiller les erreurs, les délais de réponse, les durées, la latence ainsi que les performances des monitors et les problèmes des proxies depuis un seul outil.
 
 ## Configuration
 
 #### Collecte de logs
 
+Vous pouvez recueillir les logs Apigee de deux façons différentes :
+
+1. Utilisez la [stratégie JavaScript][1] d'Apigee pour envoyer des logs à Datadog.
+2. Si vous disposez d'un serveur syslog, utilisez le type de [stratégie MessageLogging][2] d'Apigee pour enregistrer vos logs sur un compte syslog.
+
+##### Paramètre syslog
+
+Utilisez le type de stratégie MessageLogging avec un paramètre syslog sur votre API pour enregistrer des messages personnalisés dans syslog. Indiquez l'endpoint d'entrée des logs Datadog ({{< region-param key="web_integrations_endpoint" code="true" >}}), le port ({{< region-param key="web_integrations_port" code="true" >}}) et le protocole de votre région. Exemple :
+
+```json
+<MessageLogging name="LogToSyslog">
+    <DisplayName>datadog-logging</DisplayName>
+    <Syslog>
+        <Message><VOTRE_CLÉ_API> test</Message>
+        <Host>intake.logs.datadoghq.com</Host>
+        <Port>10516</Port>
+        <Protocol>TCP</Protocol>
+    </Syslog>
+</MessageLogging>
+```
+
+##### Stratégie JavaScript
 
 Envoyer des logs sur les proxies Apigee à Datadog en exploitant la [stratégie JavaScript][1] d'Apigee.
 
-JavaScript a été configuré de façon à enregistrer les variables de flux importantes en tant qu'attributs de logs dans Datadog. Les noms des attributs correspondent à la [liste d'attributs standards][2].
+JavaScript a été configuré de façon à enregistrer les variables de flux importantes en tant qu'attributs de log dans Datadog. Les noms des attributs correspondent à la [liste d'attributs standards][3].
 
-##### Configurer la stratégie JavaScript pour envoyer des logs Apigee à Datadog
 1. Sélectionnez le proxy Apigee à partir duquel vous souhaitez envoyer des logs à Datadog.
-2. Sur la page de présentation du proxy de votre choix, cliquez sur l'onglet 'DEVELOP' en haut à droite.
+2. Sur la page de présentation du proxy de votre choix, cliquez sur l'onglet DEVELOP en haut à droite.
 
-{{< img src="integrations/apigee/apigee_develop.png" alt="Develop"  style="width:75%;">}}
+{{< img src="integrations/apigee/apigee_develop.png" alt="Develop" style="width:75%;">}}
 
 3. Sous 'Navigator', ajoutez une nouvelle stratégie JavaScript. Modifiez ensuite le fichier JavaScript créé, accessible depuis la liste déroulante 'Resources --> jsc'.
 4. Ajoutez-y l'extrait de code JavaScript suivant. Assurez-vous de configurer votre **CLÉ_API** dans la variable `dd_api_url`.
 
 ```
-// Définissez ici l'URL de l'API Datadog.
-// Remarque : si vous êtes sur le site européen Datadog (app.datadoghq.eu), l'endpoint des logs HTTP est http-intake.logs.datadoghq.eu.
-var dd_api_url = "https://http-intake.logs.datadoghq.com/v1/input/<CLÉ_API>?ddsource=apigee";
+// Définir ici l'URL de l'API Datadog
+// Remarque : si vous êtes sur le site européen de Datadog (app.datadoghq.eu), l'endpoint de log HTTP est http-intake.logs.datadoghq.eu.
+var dd_api_url = "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=<CLÉ_API_DATADOG>&ddsource=apigee";
 
 // Debugging
 // print(dd_api_url);
 // print('Name of the flow: ' + context.flow);
 
-// Calculer les temps de réponse pour le client, la cible et le total
+// Calculer les délais de réponse pour le client, la cible et le total
 var request_start_time = context.getVariable('client.received.start.timestamp');
 var request_end_time = context.getVariable('client.received.end.timestamp');
+var system_timestamp = context.getVariable('system.timestamp');
 var target_start_time = context.getVariable('target.sent.start.timestamp');
 var target_end_time = context.getVariable('target.received.end.timestamp');
-var total_request_time = request_end_time - request_start_time;
+var total_request_time = system_timestamp - request_start_time;
 var total_target_time = target_end_time - target_start_time;
 var total_client_time = total_request_time - total_target_time;
 
@@ -80,7 +111,7 @@ var userAgent = context.getVariable('request.header.User-Agent');
 var messageContent = context.getVariable('message.content');
 
 
-// Attributs des logs Datadog
+// Attributs de log Datadog
 var logObject = {
     "timestamp": timestamp,
     "organization": organization,
@@ -119,17 +150,19 @@ var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(l
 httpClient.send(myLoggingRequest);
 ```
 
-**Remarque** : pour ajouter de nouvelles variables de flux à JavaScript, consultez la [section dédiée][3] de la documentation Apigee officielle (en anglais).
+**Remarque** : pour ajouter de nouvelles variables de flux à JavaScript, consultez la [référence sur les variables de flux][4] de la documentation Apigee officielle (en anglais).
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
-[2]: https://docs.datadoghq.com/fr/logs/processing/attributes_naming_convention/#naming-conventions
-[3]: https://docs.apigee.com/api-platform/reference/variables-reference
-[4]: /fr/help/
+[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
+[3]: /fr/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[4]: https://docs.apigee.com/api-platform/reference/variables-reference
+[5]: /fr/help/

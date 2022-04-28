@@ -1,8 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
+- cloud
+- google cloud
+- log collection
 ddtype: crawler
 dependencies: []
 description: Surveillez les temps d'exécution de fonctions min, max et moyenne.
@@ -17,10 +17,11 @@ is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_functions
-public_title: "Intégration Datadog/Google\_Cloud\_Functions"
+public_title: Intégration Datadog/Google Cloud Functions
 short_description: Surveillez les temps d'exécution de fonctions min, max et moyenne.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud Functions est une solution de calcul asynchrone, légère et basée sur des événements qui vous permet de créer de petites fonctions à usage unique.
@@ -47,9 +48,6 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Function 
 1. Accédez à la [page Google Cloud Logging][3] et filtrez les logs Google Cloud Function.
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
-
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
-
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ## Données collectées

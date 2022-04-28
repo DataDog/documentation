@@ -8,18 +8,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - network
+- web
+- network
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/network/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/network/README.md
 display_name: Network
 draft: false
 git_integration_title: network
 guid: 43631795-8a1f-404d-83ae-397639a84050
 integration_id: system
 integration_title: Network
+integration_version: 2.7.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -28,13 +29,17 @@ metric_prefix: system.
 metric_to_check: system.net.bytes_rcvd
 name: network
 public_title: Intégration Datadog/Network
-short_description: 'Surveillez les débits binaires et de paquets d''entrée et de sortie, les états de connexion, les durées d''aller-retour, et plus encore.'
+short_description: Surveillez les débits binaires et de paquets d'entrée et de sortie,
+  les états de connexion, les durées d'aller-retour, et plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard Network][1]
 
 ## Présentation
@@ -62,27 +67,6 @@ sudo modprobe nf_conntrack_ipv6
 ### Configuration
 
 1. L'Agent active le check Network par défaut. Si toutefois vous souhaitez le configurer vous-même, modifiez le fichier `network.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple network.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
-
-   ```yaml
-   init_config:
-
-   instances:
-     ## @param collect_connection_state - boolean - required
-     ## Set to true to collect connection states for your interfaces
-     ## Note: this will require either the command `ss` from system package `iproute2` or
-     ## the command `netstat` from the system package `net-tools` to be installed
-     #
-     - collect_connection_state: false
-
-     ## @param collect_connection_queues - boolean - optional
-     ## Set to true to enable connection queues collection
-     ## Note: connection queues collections require both
-     ## `collect_connection_state` and `collect_connection_queues` to be true
-     ## because it also requires the command `ss` from system package `iproute2` or
-     ## the command `netstat` from the system package `net-tools` to be installed
-     #
-     - collect_connection_queues: false
-   ```
 
 2. [Redémarrez l'Agent][5] pour prendre en compte le changement de configuration.
 
@@ -120,7 +104,7 @@ Le check Network n'inclut aucun check de service.
 
 ## Dépannage
 
-- [Comment envoyer des métriques de host TCP/UDP via l'API Datadog][9]
+- [Envoyer des métriques de host TCP/UDP via l'API Datadog][9]
 
 ## Pour aller plus loin
 
