@@ -39,7 +39,7 @@ To change signal state, follow the instructions below:
 
 1. In Datadog, select Security from the main navigation menu on the left, and select Security Signals from the menu.
 2. Select a Log Detection or Workload Security Signal from the table.
-3. To assign a signal to yourself or another Datadog user, navigate to the user profile icon with the plus sign in the top-right corner of the Signal Side Panel.
+3. To assign a signal to yourself or another Datadog user, navigate to the user profile icon with the plus sign in the top right corner of the Signal side panel.
 4. Navigate to the top-right corner of the Signal Side Panel and select your desired status from the dropdown menu. The default status is **Open**.
 
     - **Open**: The Datadog Cloud Security Platform triggered a detection based on a rule, and the resulting signal is not yet resolved.
