@@ -1,25 +1,29 @@
 ---
-title: App Analytics
-kind: ドキュメント
 aliases:
-  - /ja/tracing/visualization/search/
-  - /ja/tracing/trace_search_and_analytics/
-  - /ja/tracing/advanced_usage/
+- /ja/tracing/visualization/search/
+- /ja/tracing/trace_search_and_analytics/
+- /ja/tracing/advanced_usage/
+kind: ドキュメント
+title: App Analytics
 ---
-<div class="alert alert-danger">
-2020 年 10 月 20 日、App Analytics は Tracing without Limits に移行しました。このページに掲載されているレガシー版 App Analytics のコンフィギュレーション情報は非推奨となるため、トラブルシューティングまたは古い設定の修正のみに利用してください。今後は、Tracing without Limits™ を利用して、<a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">データの取り込みとトレースの保存</a>をサンプリングなしで管理することができます。
-<br>
-この新機能を利用するには、<a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion</a> への移行が必要です。
 
+<div class="alert alert-danger">
+このページは、レガシー版 App Analytics に関するコンフィギュレーション情報を伴う非推奨機能について説明します。トラブルシューティングまたは古い設定の修正に利用可能です。トレース全体を完全に制御するには、<a href="/tracing/trace_ingestion">取り込みコントロール</a>および<a href="/tracing/trace_retention">保持フィルター</a>を使用してください。
 </div>
 
-[App Analytics][1] を使うと、`customer_id`、`error_type`、`app_name` などのユーザー定義タグで Indexed Span を絞り込み、リクエストのトラブルシューティングやフィルタリングを行うことができます。次の方法で有効にできます。
+##  新しいコンフィギュレーションオプションへの移行
 
-* サービスから関連する分析を出力するように APM トレーサーを構成します。これは[自動](#自動コンフィギュレーション)または[手動](#カスタムインスツルメンテーション)で設定できます。次に、[Datadog 内で App Analytics を有効にして][1]、これらの分析の転送を開始します。
+[取り込みコントロールページ][1]へ移動し、レガシー版コンフィギュレーションを使用しているサービスを確認します。`Legacy Setup` のステータスでフラグが立てられています。
 
-**注**: App Analytics を使用するには、Agent v6.7 以上を使用してください。
+新しいコンフィギュレーションオプションへ移行するには、`Legacy Setup` のフラグ付きのサービスから、すべてのレガシー版 App Analytics [コンフィギュレーションオプション](#app-analytics-setup)を削除します。次に、Datadog Agent およびトレーシングライブラリの[サンプリングメカニズム][2]を実装してトレースを送信します。
 
-## 自動コンフィギュレーション
+## App Analytics のセットアップ
+
+App Analytics の構成オプションは、トレーシングライブラリと Datadog Agent に配置されています。ライブラリでは、サービスからの分析スパンは、[自動](#automatic-configuration)または[手動](#custom-instrumentation)のいずれかで生成されます。
+
+### トレーシングライブラリで
+
+#### 自動コンフィギュレーション
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,nginx" >}}
 {{< programming-lang lang="java" >}}
@@ -125,11 +129,9 @@ Nginx で App Analytics を有効にするには
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-有効にすると、App Analytics UI に結果が表示されます。[App Analytics ページ][1]にアクセスして使用を開始します。
+#### その他のサービスの構成 (オプション)
 
-## その他のサービスの構成 (オプション)
-
-### インテグレーションごとの構成
+##### インテグレーションごとの構成
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
@@ -262,7 +264,7 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### データベースサービス
+#### データベースサービス
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
@@ -343,7 +345,7 @@ Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### カスタムインスツルメンテーション
+##### カスタムインスツルメンテーション
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -472,4 +474,30 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-[1]: https://app.datadoghq.com/apm/analytics
+### Datadog Agent で
+
+<div class="alert alert-danger">
+このセクションでは、レガシー App Analytics に関連する構成情報とともに、非推奨の機能について説明します。
+</div>
+
+サービスごとに解析するスパンの割合を構成するには、`datadog.yaml` ファイルに以下のように設定します。
+```
+apm_config:
+  analyzed_rate_by_service:
+    service_A: 1
+    service_B: 0.2
+    service_C: 0.05
+```
+
+サービスおよび操作名ごとに解析するスパンの割合を構成するには、`datadog.yaml` ファイルに以下のように設定します。
+
+```
+apm_config:
+  analyzed_spans:
+    service_A|operation_name_X: 1
+    service_A|operation_name_Y: 0.25
+    service_B|operation_name_Z: 0.01
+```
+
+[1]: /ja/tracing/trace_ingestion/
+[2]: /ja/tracing/trace_ingestion/mechanisms
