@@ -108,7 +108,7 @@ If modifying application code is not possible, use the environment variable `DD_
 
 If you have existing `[Trace]` or similar attributes, or prefer to use attributes to complete any incomplete traces within Datadog, use Trace Annotations.
 
-### Datadog trace methods
+### Instrument methods via configuration
 
 <div class="alert alert-warning">
   <strong>Note:</strong> This requires enabling automatic instrumentation for your application.
@@ -120,9 +120,9 @@ Using the `DD_TRACE_METHOD` environment variable, you can get visibility into un
 DD_TRACE_METHODS=Store.Managers.SessionManager[SaveSession]
 ```
 
-The only difference between this approach and using `[Trace]` attributes is the customization options for the operation and resource names.  With DD Trace Methods, `operationName` is `trace.annotation` and `resourceName` is `SaveSession`.
+The resulting span has an `operationName` set to `trace.annotation` and `resourceName` set to `SaveSession`. If you would like to customize the span's attributes and you have the ability to modify the source code, you can [instrument methods via attributes][10] instead.
 
-### Trace annotations
+### Instrument methods via attributes
 
 <div class="alert alert-warning">
   <strong>Note:</strong> This requires adding the `Datadog.Trace.Annotations` NuGet package and enabling automatic instrumentation for your application.
@@ -130,7 +130,7 @@ The only difference between this approach and using `[Trace]` attributes is the 
 
 Add `[Trace]` to methods to have them be traced when running with automatic instrumentation. If automatic instrumentation is not enabled, this attribute has no effect on your application.
 
-`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. These can be set as arguments of the `[Trace]` attribute to better reflect what is being instrumented.  These are the only possible arguments that can be set for the `[Trace]` attribute.
+`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. These can be set as named arguments of the `[Trace]` attribute to better reflect what is being instrumented.  These are the only possible arguments that can be set for the `[Trace]` attribute.
 
 ```csharp
 using Datadog.Trace.Annotations;
@@ -172,7 +172,7 @@ using (var parentScope =
 ```
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][10] page or in [Ignoring Unwanted Resources][11].
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][11] page or in [Ignoring Unwanted Resources][12].
 
 ## Further Reading
 
@@ -188,5 +188,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [7]: /tracing/visualization/#trace
 [8]: /tracing/setup_overview/setup/dotnet-framework
 [9]: /tracing/setup_overview/setup/dotnet-core
-[10]: /tracing/security
-[11]: /tracing/guide/ignoring_apm_resources/
+[10]: #instrument-methods-via-attributes
+[11]: /tracing/security
+[12]: /tracing/guide/ignoring_apm_resources/
