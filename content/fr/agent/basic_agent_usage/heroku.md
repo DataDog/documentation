@@ -1,8 +1,8 @@
 ---
 aliases:
-  - /fr/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+- /fr/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 dependencies:
-  - https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
+- https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
 kind: documentation
 title: Buildpack Heroku Datadog
 ---
@@ -182,6 +182,8 @@ instances:
 
 **Remarque** : consultez le fichier d'exemple [redisdb.d/conf.yaml][19] pour découvrir toutes les options de configuration disponibles.
 
+### Intégrations de la communauté
+
 Si l'intégration que vous activez fait partie des [intégrations de la communauté][20], installez le package au sein du [script de pré-exécution](#script-de-pre-execution).
 
 ```
@@ -192,6 +194,36 @@ Par exemple, pour installer l'[intégration ping][21], créez le fichier de conf
 
 ```
 agent-wrapper integration install -t datadog-ping==1.0.0
+```
+
+### Désactiver des intégrations en fonction de dynos
+
+Puisque le système de fichiers d'une application Heroku est partagé avec tous les dynos, si vous activez une intégration, elle est exécutée sur chaque dyno, y compris les dynos `run` et `worker`. Pour limiter les exécutions d'intégration en fonction du nom ou du type de vos dynos, vous pouvez ajouter un petit extrait de code au [script de pré-exécution](#script-de-pre-execution).
+
+Par exemple, pour que l'intégration Gunicorn s'exécute uniquement sur les dynos de type `web`, ajoutez ce qui suit à votre script de pré-exécution :
+
+```
+if [ "$DYNOTYPE" != "web" ]; then
+  rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
+fi
+```
+
+## Activer des checks custom
+
+Pour activer vos propres [checks d'Agent custom][22], créez un dossier `checks.d` dans le dossier de configuration Datadog de votre application. Collez-y tous les fichiers `.py` et `.yaml` de vos checks custom. Lors du lancement des dynos, vos fichiers seront copiés vers les répertoires de configuration appropriés de l'Agent Datadog.
+
+Par exemple, voici un exemple d'arborescence pour deux checks custom `foo` et `bar` :
+
+```
+.
+└── app
+    └── datadog
+        └── checks.d
+            ├── foo.py
+            ├── foo.yaml
+            ├── bar.py
+            └── bar.yaml
+
 ```
 
 ## Script de pré-exécution
@@ -208,12 +240,17 @@ if [ "$DYNOTYPE" == "run" ]; then
   DISABLE_DATADOG_AGENT="true"
 fi
 
+# Désactiver des intégrations en fonction du type de dyno
+if [ "$DYNOTYPE" != "web" ]; then
+  rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
+fi
+
 # Définir la version de l'application en fonction de HEROKU_SLUG_COMMIT
 if [ -n "$HEROKU_SLUG_COMMIT" ]; then
   DD_VERSION=$HEROKU_SLUG_COMMIT
 fi
 
-# Mettre à jour la configuration Postgres ci-dessus à l'aide des variables d'environnement de l'application Heroku
+# Mettre à jour la configuration Postgres ci-dessus à l'aide des variables d'environnements de l'application Heroku
 if [ -n "$DATABASE_URL" ]; then
   POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
   if [[ $DATABASE_URL =~ $POSTGREGEX ]]; then
@@ -247,7 +284,7 @@ Pour réduire la taille de votre slug, assurez-vous que `DD_APM_ENABLED` est dé
 
 ## Debugging
 
-Pour exécuter les [commandes de debugging/d'information][22], utilisez la commande `agent-wrapper`.
+Pour exécuter les [commandes de debugging ou d'information][23], utilisez la commande `agent-wrapper`.
 
 Par exemple, pour afficher le statut de votre Agent Datadog et des intégrations activées, exécutez :
 
@@ -267,7 +304,7 @@ Le buildpack Datadog ne recueille pas de logs à partir de la plateforme Heroku.
 
 ## Utiliser Heroku avec des images Docker
 
-Ce buildpack ne fonctionne que pour les déploiements de Heroku qui utilisent le [compilateur de slug de Heroku][23]. Si vous déployez votre application dans Heroku en utilisant des conteneurs Docker, intégrez l'Agent Datadog à votre image Docker et lancez l'Agent en tant que processus distinct dans votre conteneur.
+Ce buildpack ne fonctionne que pour les déploiements de Heroku qui utilisent le [compilateur de slug de Heroku][24]. Si vous déployez votre application dans Heroku en utilisant des conteneurs Docker, intégrez l'Agent Datadog à votre image Docker et lancez l'Agent en tant que processus distinct dans votre conteneur.
 
 Par exemple, si vous créez votre image Docker depuis un système d'exploitation basé sur Debian, ajoutez les lignes suivantes à votre `Dockerfile` :
 
@@ -314,15 +351,15 @@ datadog-agent run &
 /opt/datadog-agent/embedded/bin/process-agent --config=/etc/datadog-agent/datadog.yaml
 ```
 
-Pour utiliser des options plus avancées dans l'image Docker, consultez les [fichiers Docker de l'Agent Datadog][24].
+Pour utiliser des options plus avancées dans l'image Docker, consultez les [fichiers Docker de l'Agent Datadog][25].
 
 ## Contributions
 
-Consultez les [règles de contribution][25] pour découvrir comment créer un ticket ou une pull request dans le [référentiel Heroku-buildpack-datadog][26].
+Consultez les [règles de contribution][26] pour découvrir comment créer un ticket ou une pull request dans le [référentiel Heroku-buildpack-datadog][27].
 
 ## History
 
-Plusieurs forks ont été créés à partir d'anciennes versions du [projet heroku-buildpack-datadog de miketheman][27]. Ce dernier a été presque entièrement réécrit pour la version 6 de l'Agent Datadog. La liste des changements ainsi que d'autres informations sont disponibles dans le [changelog][28].
+Plusieurs forks ont été créés à partir d'anciennes versions du [projet heroku-buildpack-datadog de miketheman][28]. Ce dernier a été presque entièrement réécrit pour la version 6 de l'Agent Datadog. La liste des changements ainsi que d'autres informations sont disponibles dans le [changelog][29].
 
 ## Dépannage
 
@@ -464,10 +501,11 @@ Une fois le buildpack ou l'Agent mis à niveau, vous devez recompiler le slug de
 [19]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
 [20]: https://github.com/DataDog/integrations-extras/
 [21]: https://github.com/DataDog/integrations-extras/tree/master/ping
-[22]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[23]: https://devcenter.heroku.com/articles/slug-compiler
-[24]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
-[25]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
-[26]: https://github.com/DataDog/heroku-buildpack-datadog
-[27]: https://github.com/miketheman/heroku-buildpack-datadog
-[28]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[22]: https://docs.datadoghq.com/fr/developers/custom_checks/
+[23]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[24]: https://devcenter.heroku.com/articles/slug-compiler
+[25]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
+[26]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
+[27]: https://github.com/DataDog/heroku-buildpack-datadog
+[28]: https://github.com/miketheman/heroku-buildpack-datadog
+[29]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md

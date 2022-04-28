@@ -1,7 +1,12 @@
 ---
-title: Tests au sein de conteneurs
 kind: documentation
+title: Tests au sein de conteneurs
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">À l'heure actuelle, la solution CI Visibility n'est pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Si vous exécutez vos tests à l'intérieur d'un conteneur que vous lancez vous-même dans le build (par exemple, en utilisant [`docker run`][1] ou [`docker-compose`][2]), transmettez les variables d'environnement suivantes au conteneur en fonction de votre fournisseur de CI. Le traceur Datadog pourra ainsi détecter automatiquement les informations sur le build.
 
 En outre, vous devez passer les variables d'environnement requises pour configurer le traceur telles que décrites dans les [instructions d'instrumentation de test pour chaque langage][3] (telles que `DD_SERVICE`, `DD_ENV` et une `DD_TRACE_AGENT_URL` valide qui est accessible au sein du conteneur).
@@ -102,7 +107,7 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 [1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 {{% /tab %}}
-{{% tab "Actions GitHub" %}}
+{{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
 - `GITHUB_RUN_ID`

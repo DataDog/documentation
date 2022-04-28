@@ -1,15 +1,16 @@
 ---
-title: Commandes de l'Agent
-kind: guide
 aliases:
-  - /fr/agent/faq/agent-status-and-information
-  - /fr/agent/faq/start-stop-restart-the-datadog-agent
-  - /fr/agent/faq/agent-commands
+- /fr/agent/faq/agent-status-and-information
+- /fr/agent/faq/start-stop-restart-the-datadog-agent
+- /fr/agent/faq/agent-commands
 further_reading:
-  - link: /agent/troubleshooting/
-    tag: Documentation
-    text: Dépannage de l'Agent
+- link: /agent/troubleshooting/
+  tag: Documentation
+  text: Dépannage de l'Agent
+kind: guide
+title: Commandes de l'Agent
 ---
+
 <div class="alert alert-warning">
 Pour les systèmes basés sur Linux où la commande <code>service</code> wrapper n'est pas disponible, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consultez la liste des alternatives</a>.
 </div>
@@ -270,6 +271,7 @@ Certaines options disposent de flags et d'options détaillées que vous pouvez c
 | `remove-service`  | Supprime l'Agent du gestionnaire de contrôle des services. Windows uniquement.            |
 | `restart-service` | Redémarre l'Agent dans le gestionnaire de contrôle des services. Windows uniquement.         |
 | `start-service`   | Démarre l'Agent dans le gestionnaire de contrôle des services. Windows uniquement.           |
+| `stream-logs`     | Diffuse les logs en cours de traitement par un Agent exécuté.                         |
 | `stopservice`     | Arrête l'Agent dans le gestionnaire de contrôle des services. Windows uniquement.            |
 | `version`         | Affiche les informations sur la version.                                                         |
 

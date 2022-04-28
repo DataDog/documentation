@@ -38,8 +38,10 @@ it to Datadog and other destinations. Vector capabilities include:
 ## Configuration
 
 ### Agent configuration
+
+This configuration requires Datadog Agent version >= 6.35 or 7.35.
+
 To send logs to Vector, update the Agent configuration file, `datadog.yaml`.
-For logs, update the following values in the `datadog.yaml` file:
 
 ```yaml
 vector:
@@ -47,7 +49,7 @@ vector:
   # Adjust protocol to https if TLS/SSL is enabled on the Vector side
   logs.url: "http://<VECTOR_HOST>:<VECTOR_PORT>"
 # Uncomment the following line if you use a version of Vector before v0.17.0
-# logs_config.use_v2_api: false 
+# logs_config.use_v2_api: false
 ```
 
 For metrics, update the following values in the `datadog.yaml` file:
@@ -117,7 +119,7 @@ sinks:
     encoding:
       codec: json
   metrics_to_datadog:
-    type: datadog_logs
+    type: datadog_metrics
     inputs:
        - tag_metrics
     default_api_key: "${DATADOG_API_KEY_ENV_VAR}"

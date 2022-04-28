@@ -1759,21 +1759,26 @@ main:
     parent: setup_pipelines
     identifier: ci_circleci
     weight: 202
+  - name: Codefresh
+    url: continuous_integration/setup_pipelines/codefresh/
+    parent: setup_pipelines
+    identifier: ci_codefresh
+    weight: 203
   - name: GitHub Actions
     url: continuous_integration/setup_pipelines/github/
     parent: setup_pipelines
     identifier: ci_github
-    weight: 203
+    weight: 204
   - name: GitLab
     url: continuous_integration/setup_pipelines/gitlab/
     parent: setup_pipelines
     identifier: ci_gitlab
-    weight: 204
+    weight: 205
   - name: Jenkins
     url: continuous_integration/setup_pipelines/jenkins/
     parent: setup_pipelines
     identifier: ci_jenkins
-    weight: 205
+    weight: 206
   - name: Custom Commands
     url: continuous_integration/setup_pipelines/custom_commands/
     parent: setup_pipelines
@@ -2206,7 +2211,7 @@ main:
     parent: cloud_workload_security
     identifier: cws_troubleshooting
     weight: 307
-  - name: Application Security
+  - name: Application Security Monitoring
     url: security_platform/application_security/
     parent: security_platform
     identifier: application_security
@@ -5629,6 +5634,18 @@ api:
         - GetUsageObservabilityPipelines
       unstable: []
       order: 38
+  - name: Get Cost Across Multi-Org Account
+    url: '#get-cost-across-multi-org-account'
+    identifier: get-cost-across-multi-org-account
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCostByOrg
+      unstable: []
+      order: 39
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: get-all-custom-metrics-by-hourly-average

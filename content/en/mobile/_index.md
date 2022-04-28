@@ -19,6 +19,8 @@ The Datadog Mobile app enables you to view alerts from Datadog on your mobile de
 
 Download the app from the [Apple App Store][1] for your iOS device, or from the [Google Play store][2] for your Android device.
 
+{{< img src="mobile/mobile_app_qr_code.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Download Datadog mobile app">}}
+
 ### Logging in
 
 You can log in using standard authentication, Google authentication, or [SAML][3] - for both the US and the EU region.

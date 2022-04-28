@@ -4,46 +4,46 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog Application Security"
+  text: "Monitoring Threats with Datadog Application Security Monitoring"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
-  text: "Get Started Using Application Security to Detect Threats"
+  text: "Get Started Using Application Security Monitoring to Detect Threats"
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
 - link: "/security_platform/guide/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Works in Datadog"
+  text: "How Application Security Monitoring Works in Datadog"
 ---
 
 
 ## Overview
 
-If you experience unexpected behavior with Datadog Application Security, there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. 
+If you experience unexpected behavior with Datadog Application Security Monitoring (ASM), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. 
 
-## Application Security rate limits
+## ASM rate limits
 
-Application Security traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
+ASM traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
 
-## No Suspicious Requests detected by Application Security
+## No Suspicious Requests detected by ASM
 
-There are a series of steps that must run successfully for threat information to appear in the Application Security [Trace and Signals Explorer][2]. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
+There are a series of steps that must run successfully for threat information to appear in the ASM [Trace and Signals Explorer][2]. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
 
-### Confirm Application Security is enabled
+### Confirm ASM is enabled
 
-You can use the metric `datadog.apm.appsec_host` to check if Application Security is running.
+You can use the metric `datadog.apm.appsec_host` to check if ASM is running.
 
 1. Go to **Metrics > Summary** in Datadog.
-2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn’t exist, then there are no services running Application Security. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running Application Security.
+2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn’t exist, then there are no services running ASM. If the metric exists, the services are reported with the metric tags `host` and `service`.
+3. Select the metric, and in the **Tags** section, search for `service` to see which services are running ASM.
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-Application Security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
 ### Send a test attack to your application
 
- To test your Application Security setup, trigger the [Security Scanner Detected][7] rule by running a file that contains the following curl script: 
+ To test your ASM setup, trigger the [Security Scanner Detected][7] rule by running a file that contains the following curl script: 
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
 {{< programming-lang lang="java" >}}
@@ -139,7 +139,7 @@ A few minutes after you enable your application and exercise it, and if it's suc
 
 ### Check if required tracer integrations are deactivated
 
-Application Security relies on certain tracer integrations. If they are deactivated, Application Security won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][8].
+ASM relies on certain tracer integrations. If they are deactivated, ASM won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][8].
 
 The required integrations vary by language.
 
@@ -168,7 +168,7 @@ For [Java][1], if you are using any of the following technologies, the respectiv
 
 For [.NET][1], the ASP.NET integration is required.
 
-**Note:** If ASP.NET Core is disabled, Application Security should still work with this framework.
+**Note:** If ASP.NET Core is disabled, ASM should still work with this framework.
 
 
 [1]: /security_platform/application_security/setup_and_configure/
@@ -232,7 +232,7 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 
 ### Check if spans are successfully transmitted to Datadog
 
-Application Security data is sent over [spans][9]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
+ASM data is sent over [spans][9]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
 
 ```
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
@@ -277,7 +277,7 @@ The log files are available in the following directories:
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-For PHP, to start troubleshooting issues with the Datadog Application Security extension, enable debug logs in the Application Security extension’s `.ini` file.
+For PHP, to start troubleshooting issues with the Datadog ASM extension, enable debug logs in the ASM extension’s `.ini` file.
 
 The extension's `ini` file is usually found in `/etc/php/<version>/xxx/conf.d/98-ddtrace.ini`, but the location may differ depending on your installation. Look at the beginning of the `phpinfo()` output to identify the directory that is scanned for `.ini` files, if any. In the `.ini` file, set the following configuration options with the following: 
 
@@ -300,7 +300,7 @@ If the installation script is unable to find the correct PHP version, you can se
 $ php datadog-setup.php --php-bin /usr/bin/php7.4 --enable-appsec
 ```
 ### Connection to helper failed
-If the Application Security extension is unable to communicate with the helper process, the following warning occurs:
+If the ASM extension is unable to communicate with the helper process, the following warning occurs:
 
 ```
 PHP Warning:  Unknown: [ddappsec] Connection to helper failed and we are not going to attempt to launch it: dd_error
@@ -331,11 +331,11 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-#### Confirm AppSec is enabled in the running application
+#### Confirm ASM is enabled in the running application
 
-[Tracer startup logs][1] show the tracer configuration and whether Application Security is enabled or not. If `appsec` is `true`, then Application Security is enabled and running.
+[Tracer startup logs][1] show the tracer configuration and whether ASM is enabled or not. If `appsec` is `true`, then ASM is enabled and running.
 
-For example, the following startup log shows that Application Security is disabled:
+For example, the following startup log shows that ASM is disabled:
 
 ```
 2022/02/17 14:49:00 Datadog Tracer v1.36.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2022-02-17T14:49:00+01:00","os_name":"Linux (Unknown Distribution)","os_version":"5.13.0","version":"v1.36.0","lang":"Go","lang_version":"go1.17.1","env":"prod","service":"grpcserver","agent_url":"http://localhost:8126/v0.4/traces","debug":false,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","service_mappings":null,"tags":{"runtime-id":"69d99219-b68f-4718-9419-fa173a79351e"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"profiler_code_hotspots_enabled":false,"profiler_endpoints_enabled":false,"dd_version":"","architecture":"amd64","global_service":"","lambda_mode":"false","appsec":false,"agent_features":{"DropP0s":false,"Stats":false,"StatsdPort":0}}
@@ -343,9 +343,9 @@ For example, the following startup log shows that Application Security is disabl
 
 #### Enable debug logs
 
-Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The Application Security library will log to the standard error output.
+Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The ASM library will log to the standard error output.
 
-**Note:** Application Security only outputs logs when it is enabled. Use the environment variable `DD_APPSEC_ENABLED=1` to enable Application Security.
+**Note:** ASM only outputs logs when it is enabled. Use the environment variable `DD_APPSEC_ENABLED=1` to enable ASM.
 
 
 [1]: /tracing/troubleshooting/tracer_startup_logs/
@@ -354,19 +354,19 @@ Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The Applicat
 
 Use this [migration guide][1] to assess any breaking changes if you upgraded your NodeJS library from 1.x to 2.x.
 
-If you don’t see Application Security threat information in the [Trace and Signals Explorer][2] for your NodeJS application, follow these steps to troubleshoot the issue:
+If you don’t see ASM threat information in the [Trace and Signals Explorer][2] for your NodeJS application, follow these steps to troubleshoot the issue:
 
-1. Confirm the latest version of Application Security is running by checking that `appsec_enabled` is `true` in the [startup logs][3]
+1. Confirm the latest version of ASM is running by checking that `appsec_enabled` is `true` in the [startup logs][3]
 
     a. If you don’t see startup logs after a request has been sent, add the environment variable `DD_TRACE_STARTUP_LOGS=true` to enable startup logs. Check the startup logs for `appsec_enabled` is `true`.
 
-    b. If `appsec_enabled` is `false`, then Application Security was not enabled correctly. See [installation instructions][4].
+    b. If `appsec_enabled` is `false`, then ASM was not enabled correctly. See [installation instructions][4].
 
-    c. If `appsec_enabled` is not in the startup logs, the latest Application Security version needs to be installed. See [installation instructions][4].
+    c. If `appsec_enabled` is not in the startup logs, the latest ASM version needs to be installed. See [installation instructions][4].
 
 2. Is the tracer working? Can you see relevant traces on the APM dashboard? 
 
-    Application Security relies on the tracer so if you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][5].
+    ASM relies on the tracer so if you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][5].
 
 3. In your application directory, run the command `npm explore @datadog/native-appsec -- npm run install` and restart your app.
 
@@ -391,7 +391,7 @@ If you don’t see Application Security threat information in the [Trace and Sig
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For Ruby, if you don’t see Application Security threat information in the [Trace and Signals Explorer][1] after a few minutes, enable tracer diagnostics for [debug logs][2]. For example:
+For Ruby, if you don’t see ASM threat information in the [Trace and Signals Explorer][1] after a few minutes, enable tracer diagnostics for [debug logs][2]. For example:
 
 ```ruby
 Datadog.configure do |c|
@@ -402,9 +402,9 @@ end
 
 Debug logs are verbose but useful. If you open up a ticket with [Datadog support][1], forward the logs with your request.
 
-#### Is AppSec correctly enabled?
+#### Is ASM correctly enabled?
 
-Application Security has been correctly enabled if you see logs such as:
+ASM has been correctly enabled if you see logs such as:
 
 ```
 D, [2021-12-14T11:03:32.167125 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_info, :func=> "ddwaf_set_log_cb", :file=>"PowerWAFInterface.cpp", :message=>"Sending log messages to binding, min level trace"}
@@ -413,13 +413,13 @@ D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib
 
 If you do not see those logs, check the following:
 
-- If the correct Application Security environment variables are set for your application process. 
+- If the correct ASM environment variables are set for your application process. 
 - The latest gem version is installed.
 - The tracer is configured correctly and sending APM traces to your APM dashboard.
 
-#### Is Application Security called for each HTTP request?
+#### Is ASM called for each HTTP request?
 
-To confirm that Application Security is called for each HTTP request, trigger a [test attack](#send-a-test-attack-to-your-application) and look for these logs:
+To confirm that ASM is called for each HTTP request, trigger a [test attack](#send-a-test-attack-to-your-application) and look for these logs:
 
 ```
 D, [2022-01-19T21:25:50.579745 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/reactive/operation.rb:14:in `initialize') operation: rack.request initialize
@@ -434,7 +434,7 @@ If you don’t see those logs, try the following:
 - Send another [test attack](#send-a-test-attack-to-your-application) using another user agent value in the curl command to see if the threat information is successfully sent.
 - Look in the application logs for the exact request you ran to confirm the request reached the application, and was not responded to by another upstream system.
 
-If the Rack integration was configured manually, sometimes a known issue prevents Application Security from working. For example:
+If the Rack integration was configured manually, sometimes a known issue prevents ASM from working. For example:
 
 ```
 Datadog.configure do |c|
@@ -445,9 +445,9 @@ Datadog.configure do |c|
 
 If `c.instrument :rack` is present, remove it to see if the check passes.
 
-#### Is Application Security detecting HTTP request security threats?
+#### Is ASM detecting HTTP request security threats?
 
-To confirm that Application Security is detecting security threats, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
+To confirm that ASM is detecting security threats, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
 
 ```
 D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/appsec/contrib/rack/reactive/request.rb:63:in `block in subscribe') WAF: #<struct Datadog::AppSec::WAF::Result action=:monitor, data=[{"rule"=>{"id"=>"ua0-600-10x", "name"=>"Nessus", "tags"=>{"type"=>"security_scanner", "category"=>"attack_attempt"}}, "rule_matches"=>[{"operator"=>"match_regex", "operator_value"=>"(?i)^Nessus(/|([ :]+SOAP))", "parameters"=>[{"address"=>"server.request.headers.no_cookies", "key_path"=>["user-agent"], "value"=>"Nessus SOAP", "highlight"=>["Nessus SOAP"]}]}]}], perf_data=nil, perf_total_runtime=20519>
@@ -455,7 +455,7 @@ D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib
 If you don’t see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value. 
 
 #### Is the tracer sending traces with security data?
-Application Security data is sent with APM traces. To confirm that Application Security correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
+ASM data is sent with APM traces. To confirm that ASM correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
 
 ```
 Tags: [
@@ -484,14 +484,14 @@ Metrics: [
    _sampling_priority_v1 => 2.0]]
 ```
 
-Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as suspicious requests in the Application Security [Trace and Signals Explorer][1].
+Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as suspicious requests in the ASM [Trace and Signals Explorer][1].
 
 [1]: https://app.datadoghq.com/security/appsec/
 [2]: /tracing/troubleshooting/#tracer-debug-logs
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-If you continue to have issues with Application Security, contact [Datadog support][1] with the following information: 
+If you continue to have issues with ASM, contact [Datadog support][1] with the following information: 
 
 - Confirmation that the [test attack](#send-a-test-attack-to-your-application) was successfully sent 
 - Tracer [startup][8] or [debug][10] logs

@@ -45,14 +45,14 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 | Type          | Aggregation    |Operator                                                                               | Value Type       |
 |-----------------|----------------|------------------------------------------------------------------------|------------------|
-| latency         | `avg`, `max`, `min` or `stddev` (aka `jitter`) |`is less than`, `is less than or equal`, <br> `is`, `is more than`, `is more than or equal` | _integer (ms)_    |
+| latency         | `avg`, `max`, `min`, or `stddev` (aka `jitter`) |`is less than`, `is less than or equal`, <br> `is`, `is more than`, `is more than or equal` | _integer (ms)_    |
 | packet loss     | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _percentage (%)_ |
 | packet received | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 | network hops    | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 
 You can create up to 20 assertions per API test by selecting **New Assertion** or by selecting the response preview directly:
 
-{{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test to succeed or fail on" style="width:90%;" >}}
 
 ### Select locations
 
