@@ -32,7 +32,7 @@ The Datadog Agent is lightweight software that monitors system metrics such as C
 
 #### Self-hosted
 
-_Diagram of Host/Agent/DB_
+{{< img src="database_monitoring/dbm_architecture_self-hosted.png" alt="Some really good alt text" style="width:70%;">}}
 
 In a self-hosted setup, the Datadog Agent is used to collect system metrics from the OS host, database metrics directly from the database, as well as database logs.
 
@@ -53,7 +53,7 @@ If your setup is cloud-hosted, and you are using [AWS RDS][2] or Aurora, Google 
 
 Database monitoring collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider.
 
-_Diagram of RDS/Host/Agent_
+{{< img src="database_monitoring/dbm_architecture_cloud-hosted.png" alt="Some really good alt text" style="width:70%;">}}
 
 You can install the Agent on any cloud VM (for example, EC2) as long as traffic can reach your database instance.
 
@@ -62,11 +62,11 @@ If you are not already running your own Kubernetes cluster, Datadog recommends u
 
 If you’re already running your apps on [Kubernetes][5], Datadog recommends using the [Datadog Cluster Agent with Database Monitoring][6], as this allows you to run [cluster checks][7] across your pods.
 
-* Diagram of Cluster Agent, RDS, DBs, K8s
+{{< img src="database_monitoring/dbm_architecture_self-hosted.png" alt="Some really good alt text" style="width:70%;">}}
 
 Using the [Cluster Agent][8] is preferred because it distributes the RDS instances across a pool of agents for you. This ensures that only one instance of each check runs as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of RDS instances so that the Cluster Agent can spread out the cluster checks across the different nodes.
 
-_Diagram of DBM with Kubernetes/Cluster Agent_
+{{< img src="database_monitoring/dbm_architecture_clusters.png" alt="Some really good alt text" style="width:70%;">}}
 
 
 #### Aurora
