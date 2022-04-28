@@ -85,7 +85,7 @@ DD_TAGS=datacenter:njc,key2:value2
   <strong>Note:</strong> This requires adding the `Datadog.Trace` NuGet package to your application.
 </div>
 
-To mark errors that occur in your code, utilize the `Span.SetException(Exception)` method. The method marks the span as an error and adds [related span metadata][7] to provide insight into the exception.
+To mark errors that occur in your code, utilize the `Span.SetException(Exception)` method. The method marks the span as an error and adds [related span metadata][5] to provide insight into the exception.
 
 ```csharp
 try
@@ -102,7 +102,7 @@ This sets three tags on the span: `"error.msg":exception.Message`,  `"error.stac
 
 ## Adding spans
 
-If you aren’t using a supported framework instrumentation for [.NET Framework][1] or [.NET Core][2], or you would like additional depth in your application's [traces][8], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
+If you aren’t using a supported framework instrumentation for [.NET Framework][1] or [.NET Core][2], or you would like additional depth in your application's [traces][7], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
 
 If modifying application code is not possible, use the environment variable `DD_TRACE_METHODS` to detail these methods.
 
@@ -114,7 +114,7 @@ If you have existing `[Trace]` or similar attributes, or prefer to use attribute
   <strong>Note:</strong> This requires enabling automatic instrumentation for your application.
 </div>
 
-Using the `DD_TRACE_METHOD` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format, see the [.NET Framework setup instructions][9] or the [.NET Core setup instructions][10]. For the following example, assume that the desired method to instrument is named `SaveSession` and the method is defined on the `Store.Managers.SessionManager` type:
+Using the `DD_TRACE_METHOD` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format, see the [.NET Framework setup instructions][8] or the [.NET Core setup instructions][9]. For the following example, assume that the desired method to instrument is named `SaveSession` and the method is defined on the `Store.Managers.SessionManager` type:
 
 ```ini
 DD_TRACE_METHODS=Store.Managers.SessionManager[SaveSession]
@@ -172,7 +172,7 @@ using (var parentScope =
 ```
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][11] page or in [Ignoring Unwanted Resources][12].
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][10] page or in [Ignoring Unwanted Resources][11].
 
 ## Further Reading
 
@@ -185,9 +185,8 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: https://www.nuget.org/packages/Datadog.Trace.Annotations
 [5]: /tracing/visualization/#span-tags
 [6]: /tracing/visualization/#spans
-[7]: /tracing/visualization/#span-tags
-[8]: /tracing/visualization/#trace
-[9]: /tracing/setup_overview/setup/dotnet-framework
-[10]: /tracing/setup_overview/setup/dotnet-core
-[11]: /tracing/security
-[12]: /tracing/guide/ignoring_apm_resources/
+[7]: /tracing/visualization/#trace
+[8]: /tracing/setup_overview/setup/dotnet-framework
+[9]: /tracing/setup_overview/setup/dotnet-core
+[10]: /tracing/security
+[11]: /tracing/guide/ignoring_apm_resources/
