@@ -127,7 +127,7 @@ Finally, run the following commands:
 
 ### APM and DogStatsD
 
-To configure DogstatsD clients and APM tracers automatically, inject the environment variables `DD_AGENT_HOST`, `DD_TRACE_AGENT_URL` and `DD_ENTITY_ID` by using one of the following:
+To configure DogstatsD clients and APM tracers automatically, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
 
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
@@ -150,8 +150,8 @@ Possible options:
 The Datadog admission controller does not inject the environment variables `DD_VERSION`, `DD_ENV`, and `DD_SERVICE` if they already exist.
 
 When these environment variables are not set, the admission controller will use standard tags value in the following order (highest first):
-- Annotation on the pod
-- Annotation on the ownerReference (ReplicaSets, DaemonSets, Deployments...)
+- Labels on the pod
+- Labels on the ownerReference (ReplicaSets, DaemonSets, Deployments...)
 - `DD_VERSION`, `DD_ENV`, and `DD_SERVICE` set in the container (dockerfile)
 
 #### Configure APM and DogstatsD communication mode
@@ -166,7 +166,7 @@ Possible options:
 | `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable |
 | `socket`           | Inject volume definition to access the Datadog socket path                      |
 
-*Note*: Pod-specific mode takes precedence over global mode defined at the Admission controller level.
+**Note**: Pod-specific mode takes precedence over global mode defined at the Admission controller level.
 
 #### Notes
 

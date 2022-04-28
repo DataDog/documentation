@@ -146,6 +146,7 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
 {{% /tab %}}
+{{< /tabs >}}
 
 **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
