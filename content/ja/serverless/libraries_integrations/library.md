@@ -20,6 +20,9 @@ further_reading:
 - link: https://github.com/DataDog/datadog-lambda-java/blob/master/README.md
   tag: Github
   text: Datadog Lambda Library for Java
+- link: https://www.datadoghq.com/blog/function-urls-monitoring/
+  tag: ブログ
+  text: Datadog を使用した AWS Lambda 関数 URL の監視
 kind: documentation
 title: Datadog Lambda ライブラリ
 ---
