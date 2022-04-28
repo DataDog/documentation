@@ -16,7 +16,7 @@ To modify the signal state, enable the “Security Signals Write” permission f
 
 ## View and respond to Security Signals
 
-If Datadog detects a threat based on any rules, it creates a security signal. You can view all security signals in the Signal Explorer, making it easy to search, filter, and correlate them without needing to learn a dedicated query language. You can either monitor signals from the Datadog Cloud Security Platform, or you can configure [Notification Rules][3] to send signals to third-party tools. Signals can be assigned to yourself or to another user in the Datadog platform.
+A Security Signal is created when Datadog detects a threat based on a security rule. View, search, filter, and correlate security signals in the Signal Explorer without needing to learn a dedicated query language. You can either monitor signals from the Datadog Cloud Security Platform, or configure [Notification Rules][3] to send signals to third-party tools. Signals can be assigned to yourself or another user in the Datadog platform.
 
 The status of a signal can be one of the following:
 * **Open**: The Datadog Cloud Security Platform triggered a detection based on a rule, and the resulting signal is not resolved.
