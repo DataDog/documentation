@@ -40,30 +40,31 @@ For hosts running older versions of the install methods listed above or older ve
 
 ## What happens if I don't trust the new key before it is rotated?
 
-{{< tabs >}}
-{{% tab "Debian/Ubuntu" %}}
+Trying to install or upgrade Agent packages using `apt`, `yum`, `dnf` or `zypper` from `apt.datadoghq.com`/`yum.datadoghq.com` without trusting the new key will result in an error. Possible errors include:
 
-Trying to install or upgrade Agent packages by `apt` from `apt.datadoghq.com` without trusting the new key results in `NO_PUBKEY` errors. This applies to both newly released and existing versions of the Agent.
-
+```
+E: The repository 'https://apt.datadoghq.com stable Release' is not signed.
+```
+```
+E: Package 'datadog-agent' has no installation candidate
+```
 ```
 The following signatures couldn't be verified because the public key is not available: NO_PUBKEY
 ```
-
-
-This key rotation does not affect installations done from sources other than `apt.datadoghq.com` or those done by manually downloading the package from `apt.datadoghq.com` and installing it.
-
-{{% /tab %}}
-{{% tab "RedHat/CentOS/SUSE" %}}
-
-Installing new versions of the Agent released since April 2022 causes `NOKEY` errors. Older versions of the Agent can still be installed.
-
 ```
 The GPG keys listed for the "Datadog, Inc." repository are already installed but they are not correct for this package.
 Check that the correct key URLs are configured for this repository.
 ```
+```
+Public key for datadog-agent-7.35.1-1.x86_64.rpm is not installed. Failing package is: datadog-agent-1:7.35.1-1.x86_64
+```
+```
+Error: GPG check FAILED
+```
 
-{{% /tab %}}
-{{< /tabs >}}
+For `apt`, this applies to both newly released and existing versions of the Agent. For `yum`, `dnf` or `zypper`, existing versions of the Agent can still be installed as long as `repo_gpgcheck=0` is set in the `datadog.repo` file.
+
+This key rotation does not affect installations done by manually downloading the packages and installing them with `dpkg` or `rpm` (note it can still cause a warning for `rpm`).
 
 ## Manual update
 
