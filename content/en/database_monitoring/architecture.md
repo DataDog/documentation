@@ -65,11 +65,10 @@ If you are not already running your own Kubernetes cluster, Datadog recommends u
 
 If you’re already running your apps on [Kubernetes][9], Datadog recommends using the [Datadog Cluster Agent with Database Monitoring][10], as this allows you to run [cluster checks][11] across your pods.
 
-{{< img src="database_monitoring/dbm_architecture_self-hosted.png" alt="Some really good alt text" style="width:70%;">}}
+{{< img src="database_monitoring/dbm_architecture_clusters.png" alt="Some really good alt text" style="width:70%;">}}
 
 Using the [Cluster Agent][12] is preferred because it distributes the RDS instances across a pool of agents for you. This ensures that only one instance of each check runs as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of RDS instances so that the Cluster Agent can spread out the cluster checks across the different nodes.
 
-{{< img src="database_monitoring/dbm_architecture_clusters.png" alt="Some really good alt text" style="width:70%;">}}
 
 
 ##### Aurora
