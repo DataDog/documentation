@@ -71,7 +71,7 @@ Using the [Cluster Agent][8] is preferred because it distributes the RDS instanc
 
 #### Aurora
 
-If you’re using Aurora, the Agent needs to be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred.
+If you’re using [Aurora][9], the Agent needs to be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred.
 
 The Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the Aurora cluster endpoint. While this can be an anti-pattern for client applications, each Datadog Agent must have knowledge of the underlying hostname and should be a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics become incorrect. This is because the values depend on the state of the previous snapshot. The Agent takes snapshots at different points in time, if it takes snapshots from two different hosts, then the stats can be wildly different.
 
@@ -89,3 +89,4 @@ The Agent should not connect to the database through a proxy, load balancer, con
 [6]: /database_monitoring/setup_postgres/rds/?tab=kubernetes
 [7]: /agent/cluster_agent/clusterchecks/
 [8]: https://www.datadoghq.com/blog/datadog-cluster-agent/
+[9]: /database_monitoring/setup_postgres/aurora/
