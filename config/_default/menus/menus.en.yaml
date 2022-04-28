@@ -1809,6 +1809,11 @@ main:
     pre: database-2
     identifier: dbm
     weight: 160000
+  - name: Architecture
+    url: database_monitoring/architecture/
+    parent: dbm
+    identifier: dbm_setup_architecture
+    weight: 1
   - name: Setting Up Postgres
     url: database_monitoring/setup_postgres/
     parent: dbm
