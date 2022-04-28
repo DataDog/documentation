@@ -73,7 +73,8 @@ module.exports = require('jest-environment-node')
 ```
 
 ### Jest@28
-If you are using `jest@28` and `jest-environment-node` you need to update the way the environment is required to follow [`jest` documentation][1]:
+
+If you are using `jest@28` and `jest-environment-node`, update your environment following the [`jest` documentation][1]:
 
 ```javascript
 
@@ -84,10 +85,8 @@ if (process.env.DD_ENV === 'ci') {
 module.exports = require('jest-environment-node').default
 ```
 
-
+Since `jest-environment-jsdom` is not included in `jest@28`, you need to install it separately.
 <div class="alert alert-warning"><strong>Note</strong>: <code>jest-environment-node</code>, <code>jest-environment-jsdom</code>, <code>jest-jasmine2</code>, and <code>jest-circus</code> (as of Jest 27) are installed together with <code>jest</code>, so they do not normally appear in your <code>package.json</code>. If you've extracted any of these libraries in your <code>package.json</code>, make sure the installed versions are the same as the one of <code>jest</code>.</div>
-
-<div class="alert alert-warning"><strong>Note</strong>: <code>jest-environment-jsdom</code> is no longer included in <code>jest@28</code>, so it must be installed separately.</div>
 
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
