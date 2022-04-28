@@ -111,16 +111,16 @@ If you want to set up metric streams using the AWS Console, follow these steps f
  - For S3 compression, choose `GZIP`.
  - Enable error logging.
 2. Create your [CloudWatch Metric Stream][2] with the following steps:
- 1. Choose whether you want to stream all CloudWatch metrics, or choose specific namespaces with “Include” or “Exclude” lists.
+3. Choose whether you want to stream all CloudWatch metrics, or choose specific namespaces with “Include” or “Exclude” lists.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/cloudwatch-metric-stream.png" alt="Cloudwatch metric stream" responsive="true" style="width:60%;">}}
- 2. Select the Firehose you created in Step 1 to use for sending the metrics to Datadog.
+4. Select the Firehose you created in Step 1 to use for sending the metrics to Datadog.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/firehose.png" alt="Firehose" responsive="true" style="width:60%;">}}
- 3. Create a new service role to put records in Kinesis Data Firehose.
- 4. **Change the output format to be OpenTelemetry 0.7**.
- 5. Add additional statistics to include the AWS percentile metrics you would like to send to Datadog. See our [CloudFormation template][4] for a list of the percentile metrics Datadog supports via polling.
+5. Create a new service role to put records in Kinesis Data Firehose.
+6. **Change the output format to be OpenTelemetry 0.7**.
+7. Add additional statistics to include the AWS percentile metrics you would like to send to Datadog. See our [CloudFormation template][4] for a list of the percentile metrics Datadog supports via polling.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="Percentiles" responsive="true" style="width:60%;">}}
- 6. Name your metric stream.
- 7. Click **Create metric stream**.
+8. Name your metric stream.
+9. Click **Create metric stream**.
  
 ### Results
  
