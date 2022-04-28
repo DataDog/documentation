@@ -36,7 +36,7 @@ To begin profiling applications:
 2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '>= 0.53.0'
+    gem 'ddtrace', '~> 1'
     gem 'google-protobuf', '~> 3.0'
     ```
 
