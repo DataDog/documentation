@@ -16,7 +16,9 @@ To modify the signal state, enable the “Security Signals Write” permission f
 
 ## View and respond to Security Signals
 
-If Datadog detects a threat based on any rules, it creates a security signal. You can view all security signals in the Signal Explorer, making it easy to search, filter, and correlate them without needing to learn a dedicated query language. You can either monitor signals from the Datadog Cloud Security Platform, or you can configure [Notification Rules][3] to send signals to third-party tools. The status of a signal can be one of the following:
+If Datadog detects a threat based on any rules, it creates a security signal. You can view all security signals in the Signal Explorer, making it easy to search, filter, and correlate them without needing to learn a dedicated query language. You can either monitor signals from the Datadog Cloud Security Platform, or you can configure [Notification Rules][3] to send signals to third-party tools. Signals can be assigned to yourself or to another user in the Datadog platform.
+
+The status of a signal can be one of the following:
 * **Open**: The Datadog Cloud Security Platform triggered a detection based on a rule, and the resulting signal is not resolved.
 * **Under Review**: During an active investigation, you can switch the signal state to Under Review. You can move the signal state to Archived or Open from the Under Review state as needed.
 * **Archived**: When you resolve the detection that caused the signal, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an open state within two days of being created.
@@ -37,7 +39,8 @@ To change signal state, follow the instructions below:
 
 1. In Datadog, select Security from the main navigation menu on the left, and select Security Signals from the menu.
 2. Select a Log Detection or Workload Security Signal from the table.
-3. Navigate to the top-right corner of the Signal Side Panel and select your desired status from the dropdown menu. The default status is **Open**.
+3. To assign a signal to yourself or another Datadog user, navigate to the user profile icon with the plus sign in the top-right corner of the Signal Side Panel.
+4. Navigate to the top-right corner of the Signal Side Panel and select your desired status from the dropdown menu. The default status is **Open**.
 
     - **Open**: The Datadog Cloud Security Platform triggered a detection based on a rule, and the resulting signal is not yet resolved.
     - **Under Review**: During an active investigation, you can switch the signal state to **Under Review**. From the **Under Review** state, you can move the signal state to **Archived** or **Open** as needed.
