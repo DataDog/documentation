@@ -61,16 +61,16 @@ require 'datadog/ci'
 
 Datadog.configure do |c|
   # Only activates test instrumentation on CI
-  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
+  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
 
   # Configures the tracer to ensure results delivery
-  c.ci_mode.enabled = true
+  c.ci.enabled = true
 
   # The name of the service or library under test
   c.service = 'my-ruby-app'
 
   # Enables the Cucumber instrumentation
-  c.use :cucumber
+  c.ci.instrument :cucumber
 end
 ```
 
@@ -93,16 +93,16 @@ require 'datadog/ci'
 
 Datadog.configure do |c|
   # Only activates test instrumentation on CI
-  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
+  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
 
   # Configures the tracer to ensure results delivery
-  c.ci_mode.enabled = true
+  c.ci.enabled = true
 
   # The name of the service or library under test
   c.service = 'my-ruby-app'
 
   # Enables the RSpec instrumentation
-  c.use :rspec
+  c.ci.instrument :rspec
 end
 ```
 

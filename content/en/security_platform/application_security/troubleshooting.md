@@ -438,12 +438,12 @@ If the Rack integration was configured manually, sometimes a known issue prevent
 
 ```
 Datadog.configure do |c|
-  c.instrument :rails
+  c.tracing.instrument :rails
   ...
-  c.instrument :rack, web_service_name: "something", request_queuing: true
+  c.tracing.instrument :rack, web_service_name: "something", request_queuing: true
 ```
 
-If `c.instrument :rack` is present, remove it to see if the check passes.
+If `c.tracing.instrument :rack` is present, remove it to see if the check passes.
 
 #### Is ASM detecting HTTP request security threats?
 

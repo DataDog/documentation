@@ -172,7 +172,7 @@ def handler():
 Manually keep a trace:
 
 ```ruby
-Datadog.tracer.trace(name, options) do |span|
+Datadog::Tracing.trace(name, options) do |span|
 
   # Always Keep the Trace
   span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP, true)
@@ -183,7 +183,7 @@ end
 Manually drop a trace:
 
 ```ruby
-Datadog.tracer.trace(name, options) do |span|
+Datadog::Tracing.trace(name, options) do |span|
   # Always Drop the Trace
   span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP, true)
   # method impl follows

@@ -88,7 +88,7 @@ end
     If starting the application via `ddtracerb exec` is not an option (eg. when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point such as `config.ru` for a web application:
 
     ```ruby
-    require 'ddtrace/profiling/preload'
+    require 'datadog/profiling/preload'
     ```
 
 

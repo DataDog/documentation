@@ -42,10 +42,8 @@ require 'ddtrace'
 class ShoppingCartController < ApplicationController
   # GET /shopping_cart
   def index
-    # Get the active span
-    current_span = Datadog.tracer.active_span
-    # customer_id -> 254889
-    current_span&.set_tag('customer.id', params.permit([:customer_id]))
+    # Get the active span and set customer_id -> 254889
+    Datadog::Tracing.active_span&.set_tag('customer.id', params.permit([:customer_id]))
 
     # [...]
   end
@@ -68,7 +66,7 @@ Add [tags][1] directly to `Datadog::Span` objects by calling `#set_tag`:
 # An example of a Sinatra endpoint,
 # with Datadog tracing around the request.
 get '/posts' do
-  Datadog.tracer.trace('web.request') do |span|
+  Datadog::Tracing.trace('web.request') do |span|
     span.set_tag('http.url', request.path)
     span.set_tag('<TAG_KEY>', '<TAG_VALUE>')
   end
@@ -103,13 +101,12 @@ require 'ddtrace'
 require 'timeout'
 
 def example_method
-  span = Datadog.tracer.trace('example.trace')
+  span = Datadog::Tracing.trace('example.trace')
   puts 'some work'
   sleep(1)
   raise StandardError.new "This is an exception"
 rescue StandardError => error
-  span = Datadog.tracer.active_span
-  span.set_error(error) unless span.nil?
+  Datadog::Tracing.active_span&.set_error(error)
   raise error
 ensure
   span.finish
@@ -135,7 +132,7 @@ def example_method
   raise StandardError.new "This is an exception"
 end
 
-Datadog.tracer.trace('example.trace') do |span|
+Datadog::Tracing.trace('example.trace') do |span|
   example_method()
 end
 ```
@@ -157,19 +154,19 @@ custom_error_handler = proc do |span, error|
   span.set_error(error) unless error.message.include?("a special exception")
 end
 
-Datadog.tracer.trace('example.trace', on_error: custom_error_handler) do |span|
+Datadog::Tracing.trace('example.trace', on_error: custom_error_handler) do |span|
   example_method()
 end
 ```
 
 ## Adding spans
 
-If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code:
+If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog::Tracing.trace` method, which you can wrap around any Ruby code:
 
-To trace any Ruby code, you can use the `Datadog.tracer.trace` method:
+To trace any Ruby code, you can use the `Datadog::Tracing.trace` method:
 
 ```ruby
-Datadog.tracer.trace(name, options) do |span|
+Datadog::Tracing.trace(name, options) do |span|
   # Wrap this block around the code you want to instrument
   # Additionally, you can modify the span here.
   # for example, change the resource name, or set tags
@@ -227,9 +224,9 @@ Programmatically create spans around any block of code.  Spans created in this m
 # with Datadog tracing around the request,
 # database query, and rendering steps.
 get '/posts' do
-  Datadog.tracer.trace('web.request', service: '<SERVICE_NAME>', resource: 'GET /posts') do |span|
+  Datadog::Tracing.trace('web.request', service: '<SERVICE_NAME>', resource: 'GET /posts') do |span|
     # Trace the activerecord call
-    Datadog.tracer.trace('posts.fetch') do
+    Datadog::Tracing.trace('posts.fetch') do
       @posts = Posts.order(created_at: :desc).limit(10)
     end
 
@@ -238,7 +235,7 @@ get '/posts' do
     span.set_tag('posts.count', @posts.length)
 
     # Trace the template rendering
-    Datadog.tracer.trace('template.render') do
+    Datadog::Tracing.trace('template.render') do
       erb :index
     end
   end

@@ -50,10 +50,10 @@ You can override the default logger and replace it with a custom one by using th
 ```ruby
 f = File.new("<FILENAME>.log", "w+")           # Log messages should go there
 Datadog.configure do |c|
-  c.tracer log: Logger.new(f)                 # Overriding the default tracer
+  c.logger.instance = Logger.new(f)                 # Overriding the default tracer
 end
 
-Datadog::Tracer.log.info { "this is typically called by tracing code" }
+Datadog::Tracing.logger.info { "this is typically called by tracing code" }
 ```
 
 See [the API documentation][1] for more details.
