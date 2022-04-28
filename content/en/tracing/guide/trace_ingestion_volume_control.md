@@ -130,7 +130,7 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [3]: /tracing/guide/metrics_namespace/
 [4]: /tracing/generate_metrics/
 [5]: /monitors/create/types/apm/?tab=analytics
-[6]: /tracing/trace_ingestion/mechanisms/#head-based-default-mechanism
+[6]: /tracing/trace_ingestion/mechanisms/#head-based-sampling
 [7]: /tracing/trace_retention/usage_metrics/
 [8]: /tracing/trace_ingestion/mechanisms#error-traces
 [9]: /tracing/trace_ingestion/mechanisms#rare-traces

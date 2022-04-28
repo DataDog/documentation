@@ -45,7 +45,7 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 `ingestion_reason: rule`
 
 At the library level, more specific sampling configuration is available:
-- Set a specific sampling rate to apply to all root services, overriding the Agent's [default mechanism](#head-based-default-mechanism).
+- Set a specific sampling rate to apply to all root services, overriding the Agent's [default mechanism](#head-based-sampling).
 - Set a sampling rate for a specific root service.
 - Set a limit on the number of ingested traces per second.
 
@@ -104,7 +104,7 @@ span.SetTag(ext.ManualDrop, true)
 `ingestion_reason: analytic`
 
 <div class="alert alert-warning">
-On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Instead, use new configuration options <a href="#head-based-default-mechanism">head-based sampling</a> to have full control over your data ingestion.
+On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Instead, use new configuration options <a href="#head-based-sampling">head-based sampling</a> to have full control over your data ingestion.
 </div>
 
 If you need to sample a specific span, but don't need the full trace to be available, tracers allow a sampling rate to be configured for a single span. This span will be ingested at no less than the configured rate, even when the enclosing trace is dropped.
