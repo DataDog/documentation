@@ -60,7 +60,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: bryce/update-azure-us3-instructions
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
