@@ -2261,16 +2261,21 @@ main:
     parent: application_security
     identifier: appsec_configuration
     weight: 403
-  - name: Custom Rules
+  - name: Custom Detection Rules
     url: security_platform/application_security/custom_rules/
     parent: application_security
     identifier: appsec_custom_rules
     weight: 404
+  - name: Event Rules
+    url: security_platform/application_security/event_rules/
+    parent: application_security
+    identifier: appsec_event_rules
+    weight: 405
   - name: Troubleshooting
     url: security_platform/application_security/troubleshooting
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 405
+    weight: 406
   - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
