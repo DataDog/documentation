@@ -29,7 +29,7 @@ Launched more than 10 years ago, Datadog's event stream is one of its earliest f
 
 ## What action do I need to take?
 
-If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them on June 30, 2022.
+If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them by June 30, 2022 at the latest.
 
 <strong>If you use Terraform or other API-based scripts</strong> to manage all or some of your <strong>dashboards</strong>, Datadog will migrate queries in your event widgets and overlays to the new syntax, but you will need to update your scripts to keep them in sync before June 30, 2022.
 
