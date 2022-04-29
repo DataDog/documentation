@@ -104,10 +104,10 @@ def example_method
   span = Datadog::Tracing.trace('example.trace')
   puts 'some work'
   sleep(1)
-  raise StandardError.new "This is an exception"
+  raise StandardError, "This is an exception"
 rescue StandardError => error
   Datadog::Tracing.active_span&.set_error(error)
-  raise error
+  raise
 ensure
   span.finish
 end
@@ -129,7 +129,7 @@ require 'timeout'
 def example_method
   puts 'some work'
   sleep(1)
-  raise StandardError.new "This is an exception"
+  raise StandardError, "This is an exception"
 end
 
 Datadog::Tracing.trace('example.trace') do |span|
