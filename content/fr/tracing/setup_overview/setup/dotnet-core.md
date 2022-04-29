@@ -79,7 +79,7 @@ Pour installer le traceur .NET à l'échelle d'une machine, procédez comme suit
 
 {{% tab "Linux" %}}
 
-Pour installer le traceur .NET à l'échelle de la machine, procédez comme suit :
+Pour installer le traceur .NET à l'échelle d'une machine, procédez comme suit :
 
 1. Téléchargez le dernier [package du traceur .NET][1] compatible avec votre système d'exploitation et votre architecture.
 
@@ -104,7 +104,7 @@ Pour installer le traceur .NET à l'échelle de la machine, procédez comme suit
 {{% tab "NuGet" %}}
 
 <div class="alert alert-warning">
-  <strong>Remarque :</strong> cette installation n'instrumente pas les applications s'exécutant dans IIS. Pour ces applications, suivez le processus d'installation Windows à l'échelle de la machine.
+  <strong>Remarque :</strong> cette installation n'instrumente pas les applications s'exécutant dans IIS. Pour ces applications, suivez le processus d'installation Windows à l'échelle d'une machine.
 </div>
 
 Pour installer le traceur .NET pour certaines applications, procédez comme suit :
