@@ -91,7 +91,7 @@ sources:
     type: datadog_agent
     # The <VECTOR_PORT> mentioned above should be set to the port value used here
     address: "[::]:8080"
-    mutiple_outputs: true # To automatically separate metrics and logs
+    multiple_outputs: true # To automatically separate metrics and logs
 
 transforms:
   tag_logs:
