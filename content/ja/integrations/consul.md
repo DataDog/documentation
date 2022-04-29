@@ -12,22 +12,23 @@ assets:
     consul_processes: assets/saved_views/consul_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - containers
-  - orchestration
-  - configuration & deployment
-  - notification
-  - log collection
-  - autodiscovery
+- containers
+- orchestration
+- configuration & deployment
+- notification
+- log collection
+- autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/consul/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/consul/README.md
 display_name: Consul
 draft: false
 git_integration_title: consul
 guid: ec1e9fac-a339-49a3-b501-60656d2a5671
 integration_id: consul
 integration_title: Consul
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -36,17 +37,20 @@ metric_prefix: consul.
 metric_to_check: consul.peers
 name: consul
 process_signatures:
-  - consul agent
-  - consul_agent
-  - consul-agent
+- consul agent
+- consul_agent
+- consul-agent
 public_title: Datadog-Consul インテグレーション
 short_description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Consul ダッシュ][1]
 
 ## 概要
@@ -58,7 +62,7 @@ Datadog Agent は、以下のような多くのメトリクスを Consul ノー�
 - ノード健全性 - 特定のノードに対して、UP、PASSING、WARNING、CRITICAL なサービスの数
 - ネットワーク座標系 - データセンター間およびデータセンター内のレイテンシー
 
-_Consul_ Agent は DogStatsD 経由でさらに多くのメトリクスを提供できます。これらは、Consul に依存するサービスではなく、Consul 自体の内部健全性に関連するメトリクスです。以下のメトリクスがあります。
+_Consul_ Agent は DogStatsD を使ってさらに多くのメトリクスを提供できます。これらは、Consul に依存するサービスではなく、Consul 自体の内部健全性に関連するメトリクスです。以下のメトリクスがあります。
 
 - Serf のイベントとメンバーフラップ
 - Raft プロトコル
@@ -227,7 +231,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |
@@ -243,7 +247,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `consul` を探します。
 
-**注**: Consul ノードでデバッグログが有効になっている場合は、Datadog Agent の通常のポーリングが Consul ログに表示されます。
+**注**: Consul ノードでデバッグログが有効になっている場合は、Datadog Agent の通常のポーリングが Consul ログに以下を表示します。
 
 ```text
 2017/03/27 21:38:12 [DEBUG] http: Request GET /v1/status/leader (59.344us) from=127.0.0.1:53768
@@ -289,8 +293,15 @@ Datadog Agent は、Consul クラスターが新しいリーダーを選出す�
 
 ## その他の参考資料
 
-- [Datadog を使用した Consul の健全性とパフォーマンスの監視][7]
-- [Datadog と Consul][8]
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog を使用した HCP Consul の監視][7]
+- [Datadog を使用した Consul の健全性とパフォーマンスの監視][8]
+- [Datadog と Consul][9]
+- [Consul 監視のためのキーメトリクス][10]
+- [Consul 監視ツール][11]
+- [Datadog を使用した Consul の監視方法][12]
+- [Datadog NPM が Consul ネットワーキングに対応][13]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png
@@ -299,5 +310,10 @@ Datadog Agent は、Consul クラスターが新しいリーダーを選出す�
 [4]: https://www.consul.io/docs/agent/telemetry.html
 [5]: https://www.consul.io/docs/internals/coordinates.html
 [6]: https://docs.datadoghq.com/ja/help/
-[7]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
-[8]: https://engineering.datadoghq.com/consul-at-datadog
+[7]: https://docs.datadoghq.com/ja/integrations/guide/hcp-consul
+[8]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
+[9]: https://engineering.datadoghq.com/consul-at-datadog
+[10]: https://www.datadoghq.com/blog/consul-metrics/
+[11]: https://www.datadoghq.com/blog/consul-monitoring-tools/
+[12]: https://www.datadoghq.com/blog/consul-datadog/
+[13]: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
