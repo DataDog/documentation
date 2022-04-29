@@ -11,9 +11,15 @@ further_reading:
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
+- link: "/synthetics/private_locations/"
+  tag: "Documentation"
+  text: "Create a Private Location"
 - link: "/synthetics/identify_synthetics_bots/"
   tag: "Documentation"
   text: "Identify Synthetic Bots"
+- link: "/synthetics/guide/explore-rum-through-synthetics/"
+  tag: "Documentation"
+  text: "Explore RUM & Session Replay in Synthetics"
 - link: "/synthetics/guide/browser-tests-totp"
   tag: "Documentation"
   text: "TOTPs For Multi-Factor Authentication (MFA) in Browser Test"
@@ -22,11 +28,18 @@ further_reading:
   text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
-On the [Synthetic Monitoring Settings page][1], you can adjust the following settings:
+## Overview
 
+On the [Synthetic Monitoring Settings page][1], you can access and control the following topics:
+
+* [Private Locations](#private-locations)
 * [Global Variables](#global-variables)
-* [Private Locations][2]
 * [Default Settings](#default-settings)
+* [Integration Settings](#integration-settings)
+
+## Private locations
+
+For more information, see [Run Synthetic Tests from Private Locations][2].
 
 ## Global variables
 
@@ -108,35 +121,35 @@ You can restrict access to a global variable based on the roles in your organiza
 
 ## Default settings
 
+{{< img src="synthetics/settings/default_settings.png" alt="Default Settings page" style="width:100%;">}}
+
+### Enforced tags
+
+<div class="alert alert-warning">
+Tag enforcement is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
+
+Allow selected tags on your Synthetics tests to be enforced by clicking **Enforce tags for usage attributions on all tests**. 
+
+You can break down cost and usage attributes by services, applications, or teams. Usage attribution tags can take up to fifteen minutes to propagate. For more information, see [Usage Attribution][14].
+
+When you are done enforcing tags, click **Save Enforced Tags**.
+
 ### Default locations
 
 Choose the default locations for your [API test][3], [multistep API test][4], or [browser test][5] details. 
 
 Your options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
-### APM integration for browser tests
+When you are done selecting locations, click **Save Default Locations**.
 
-Allow URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. 
+### Default browsers and devices
 
-Define which endpoints should be sent the APM headers by adding a URL into this section.
+Choose the default browser and device types for your [browser test][5] details.
 
-Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
+Your options for browsers include Google Chrome, Firefox, Microsoft Edge, and Internet Explorer 11. Your options for devices include a large laptop, a tablet, and a small mobile device.
 
-If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
-
-### Tag enforcement
-
-<div class="alert alert-warning">
-Tag enforcement is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-</div>
-
-Allows you to enforce selected tags on Synthetics tests. You can break down cost and usage by services, applications, or teams.
-
-To enable tag enforcement, click **Enforce tags for usage attributions on all tests**.  
-
-{{< img src="synthetics/settings/tag_enforcement.png" alt="Enforce tags for usage attributions on all tests" style="width:100%;">}}
-
-For more information, see [Usage Attribution][14].
+When you are done selecting browsers and devices, click **Save Default Browsers & Devices**.
 
 ### Permissions
 
@@ -144,6 +157,33 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][11] c
 
 If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
+## Integration settings
+
+{{< img src="synthetics/settings/integration_settings.png" alt="Integration Settings page" style="width:100%;">}}
+
+### APM integration for browser tests
+
+Allow URLs to add APM integration headers to those URLs. Datadog's APM integration headers allow Datadog to link browser tests with APM. 
+
+Define which endpoints you want to send the APM headers to by entering a URL in the **Value** field. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
+
+Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
+
+When you are done adding URLs, click **Save APM Integration Settings**.
+
+### Synthetic data collection and RUM applications
+
+To allow Datadog to collect RUM data from your test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit the RUM setting in the browser test recorder. When you are done enabling data collection, click **Save RUM Data Collection**.
+
+Select a RUM application from the **Default Application** dropdown menu that collects browser test data. When you are done specifying a default application, click **Save RUM Data Applications**.
+
+For more information, see [Explore RUM & Session Replay][15].
+
+### Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Integration Settings** page. To get access to the **Integration Settings** page, upgrade your user to one of those two [default roles][11]. 
+
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -162,3 +202,4 @@ If you are using the [custom role feature][12], add your user to any custom role
 [12]: /account_management/rbac/?tab=datadogapplication#custom-role
 [13]: /account_management/rbac/#create-a-custom-role
 [14]: /account_management/billing/usage_attribution
+[15]: /synthetics/guide/explore-rum-through-synthetics/
