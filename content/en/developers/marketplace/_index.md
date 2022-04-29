@@ -58,8 +58,8 @@ In addition to this documentation, you can learn more about developing Datadog i
 ### Choose an offering type 
 
 There are a few different types of offerings that you can list on the Datadog Integrations or Marketplace pages:
-1. Data integration (can be a [Datadog Agent-based integration](#datadog-agent-based-integration14) or a [REST API integration](#datadog-rest-api-integration18))
-2. [Datadog App](#datadog-app12)
+1. Data integration (can be a [Datadog Agent-based integration](#datadog-agent-based-integration) or a [REST API integration](#datadog-rest-api-integration))
+2. [Datadog App](#datadog-app)
 3. SaaS license or subscription (Marketplace only)
 4. Professional services (Marketplace only)
 
@@ -67,35 +67,37 @@ Depending on the use case, choose the approach that makes the most sense for you
 
 If you're developing an offering that does not use the Datadog Agent, such as a Datadog App, SaaS license, professional service, or an API-based integration, you will need to create a [tile-only listing](#tile-only-listing).
 
-#### [Datadog Agent-based integration][14]
+#### Datadog Agent-based integration
 
-##### [OpenMetrics check][15]
+For general information, read [Introduction to Agent-based Integrations][14].
 
-* A OpenMetrics check is suitable for gathering telemetry data from existing applications that expose metrics using the Open Metrics standard.
+##### OpenMetrics check
 
-##### [Python check][16]
+* An [OpenMetrics check][15] is suitable for gathering telemetry data from existing applications that expose metrics using the Open Metrics standard.
 
-* A Python check is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
+##### Python check
 
-##### [DogStatsD][17]
+* A [Python check][16] is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
 
-* DogStatsD is suitable for applications that already emit telemetry using the StatsD protocol. Datadog adds additional Datadog-specific extensions to the StatsD protocol including:
+##### DogStatsD
+
+* [DogStatsD][17] is suitable for applications that already emit telemetry using the StatsD protocol. Datadog adds additional Datadog-specific extensions to the StatsD protocol including:
     * Histogram Metric Type
     * Service Checks
     * Events
     * Tagging
 
-#### [Datadog REST API integration][18]
+#### Datadog REST API integration
 
-An API integration fits well for enriching and submitting data from your backend, or pulling data directly out of Datadog. API integrations also work well for building a connector between Datadog and another SaaS platform. 
+An [API integration][18] fits well for enriching and submitting data from your backend, or pulling data directly out of Datadog. API integrations also work well for building a connector between Datadog and another SaaS platform. 
 
 Since API integrations do not use the Datadog Agent to collect data, you will need to create a [tile only listing](#tile-only-listing) once your development work is complete. 
 
 **Note**: A Datadog API key is required to submit data to a Datadog API endpoint, while an application key is required for querying data from Datadog, or for creating resources within the Datadog site.
 
-#### [Datadog App][12]
+#### Datadog App
 
-Datadog Apps are custom dashboard widgets that are developed in the [Datadog Developer Platform][19]. Once your Datadog App is ready to publish, you will need to create a [tile only listing](#tile-only-listing) on either the Marketplace or Integrations page.
+[Datadog Apps][12] are custom dashboard widgets that are developed in the [Datadog Developer Platform][19]. Once your Datadog App is ready to publish, you will need to create a [tile only listing](#tile-only-listing) on either the Marketplace or Integrations page.
 
 #### Tile only listing
 
