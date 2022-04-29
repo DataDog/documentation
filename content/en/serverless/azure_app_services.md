@@ -54,7 +54,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - Azure App Service Web Apps
     - Function Apps hosted on Basic, Standard, Premium, or Isolated App Service plans. 
 
-    <div class="alert alert-warning">Support for .NET Function Apps is in beta for extension v2.2+. Function Apps on consumption plans are not supported. Out-of-process (also known as Isolated) functions do not yet support Distributed Tracing either. There are no billing implications for tracing functions during this period.<br/><br/>Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
 3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
@@ -94,14 +94,14 @@ For example:
 5. Configure optional application settings:
     - Set the `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
     - Set `DD_ENV` to group your traces and custom statistics.
-    - Set `DD_SERVICE` to specify a service name (defaults to your web app name).
-    - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your web app.
+    - Set `DD_SERVICE` to specify a service name (defaults to your app name).
+    - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your app.
     - See a full list of [optional configuration variables][5].
 6. Click **Save** (this restarts your application).
 7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>
 8. Go to the Azure extensions page and select the Datadog APM extension.
     {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Datadog extension" >}}
-9. Accept the legal terms, click **OK**, and wait for the installation to complete. **Note**: the web app must be in a stopped state for this step to complete successfully.
+9. Accept the legal terms, click **OK**, and wait for the installation to complete. **Note**: the app must be in a stopped state for this step to complete successfully.
 10. Start the main application, click **Start**:
     {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Start" >}}
 
