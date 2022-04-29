@@ -1429,16 +1429,16 @@ main:
     parent: trace_ingestion
     identifier: ingestion_control_page
     weight: 402
+  - name: Usage Metrics
+    url: tracing/trace_ingestion/usage_metrics/
+    parent: trace_ingestion
+    identifier: trace_ingestion_retention_usage_metrics
+    weight: 403
   - name: Trace Retention
     url: tracing/trace_retention/
     parent: tracing
     identifier: trace_retention
     weight: 5
-  - name: Usage Metrics
-    url: tracing/trace_retention/usage_metrics/
-    parent: trace_retention
-    identifier: trace_retention_and_ingestion_usage_metrics
-    weight: 501
   - name: Generate Metrics from Spans
     url: tracing/generate_metrics/
     parent: tracing
