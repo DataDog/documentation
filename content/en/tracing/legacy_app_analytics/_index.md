@@ -49,7 +49,7 @@ App Analytics is available starting in version 0.19.0 of the Ruby tracing client
 To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
 
 ```ruby
-Datadog.configure { |c| c.analytics_enabled = true }
+Datadog.configure { |c| c.tracing.analytics.enabled = true }
 ```
 
 * `true` enables analytics for all web frameworks.
@@ -394,12 +394,12 @@ def my_method():
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on a span:
+Applications with custom instrumentation can enable App Analytics by setting the `Analytics::TAG_ENABLED` tag on a span:
 
 ```ruby
 Datadog::Tracing.trace('my.task') do |span|
   # Set the analytics sample rate to 1.0
-  span.set_tag(Datadog::Ext::Analytics::TAG_ENABLED, true)
+  span.set_tag(Datadog::Tracing::Metadata::Ext::Analytics::TAG_ENABLED, true)
 end
 ```
 

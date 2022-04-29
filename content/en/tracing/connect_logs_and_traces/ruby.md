@@ -33,9 +33,9 @@ To properly correlate with Datadog logging, be sure the following is present in 
  - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog::Tracing.correlation.trace_id` or `0` if no trace is active during logging.
  - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog::Tracing.correlation.span_id` or `0` if no trace is active during logging.
 
-By default, `Datadog::Correlation::Identifier#to_s` will return `dd.env=<ENV> dd.service=<SERVICE> dd.version=<VERSION> dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
+By default, `Datadog::Tracing.log_correlation` will return `dd.env=<ENV> dd.service=<SERVICE> dd.version=<VERSION> dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
 
-If a trace is not active and the application environment & version is not configured, it will return `dd.trace_id=0 dd.span_id=0 dd.env= dd.version=`.
+If a trace is not active and the application environment & version is not configured, it will return `dd.service= dd.trace_id=0 dd.span_id=0`.
 
 An example of this in practice:
 
@@ -43,9 +43,11 @@ An example of this in practice:
 require 'ddtrace'
 require 'logger'
 
-ENV['DD_ENV'] = 'production'
-ENV['DD_SERVICE'] = 'billing-api'
-ENV['DD_VERSION'] = '2.5.17'
+Datadog.configure do |c|
+  c.env = 'production'
+  c.service = 'billing-api'
+  c.version = '2.5.17'
+end
 
 logger = Logger.new(STDOUT)
 logger.progname = 'my_app'

@@ -209,7 +209,7 @@ For [NodeJS][1], the HTTP integration is required.
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0.beta1` or higher is also required. See information on [migrating from 0.x to 1.x][3]. 
+For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0` or higher is also required. See information on [migrating from 0.x to 1.x][3].
 
 **Note:** Rack can be manually added or automatically added with the [Rails][4] or [Sinatra][5] integration. If manually added, the tracer middleware must appear before the security middleware in the Rack stack.
 
@@ -436,7 +436,7 @@ If you don’t see those logs, try the following:
 
 If the Rack integration was configured manually, sometimes a known issue prevents ASM from working. For example:
 
-```
+```ruby
 Datadog.configure do |c|
   c.tracing.instrument :rails
   ...

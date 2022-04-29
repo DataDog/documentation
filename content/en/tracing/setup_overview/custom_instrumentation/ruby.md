@@ -166,54 +166,18 @@ If you aren't using supported library instrumentation (see [library compatibilit
 To trace any Ruby code, you can use the `Datadog::Tracing.trace` method:
 
 ```ruby
-Datadog::Tracing.trace(name, options) do |span|
+Datadog::Tracing.trace(name, resource: resource, **options) do |span|
   # Wrap this block around the code you want to instrument
   # Additionally, you can modify the span here.
   # for example, change the resource name, or set tags
 end
 ```
 
-Where `name` is a `String` that describes the generic kind of operation being done (for example `'web.request'`, or `'request.parse'`), and `options` is an optional `Hash` that accepts the following parameters:
+Where `name` is a `String` that describes the generic kind of operation being done (for example `'web.request'`, or `'request.parse'`).
 
-`service`
-: **Type**: `String`<br>
-The service name which this span belongs.<br>
-**Example**: `'my-web-service'`<br>
-**Default**: Tracer `default-service`, `$PROGRAM_NAME`, or `'ruby'`
+`resource` is a `String` with the name of the action being operated on. Traces with the same resource value will be grouped together for the purpose of metrics. Resources are usually domain specific, such as a URL, query, request, etc. (e.g. 'Article#submit', http://example.com/articles/list.)
 
-`resource`
-: **Type**: `String`<br>
-Name of the resource or action being operated on. Traces with the same resource value will be grouped together for the purpose of metrics (but still independently viewable.) Usually domain specific, such as a URL, query, request, etc.<br> 
-**Examples**: `'Article#submit'`, `http://example.com/articles/list`<br>
-**Default**: `name` of Span.
-
-`span_type`
-: **Type**: `String`<br>
-The type of the span.<br>
-**Examples**: `'http'`, `'db'`<br>
-**Default**: `nil`
-
-`child_of`
-: **Type**: `Datadog::Span` / `Datadog::Context`<br>
-Parent for this span. If not provided, will automatically become current active span. <br>
-**Default**: `nil`
-
-`start_time`  
-: **Type**: `Integer`<br>
-When the span actually starts. Useful when tracing events that have already happened. <br>
-**Default**: `Time.now.utc`
-
-`tags`
-: **Type**: `Hash`<br>
-Extra tags which should be added to the span. <br>
-**Default**: `{}`
-
-`on_error`
-: **Type**: `Proc`<br>
-Handler invoked when a block is provided to trace, and it raises an error. Provided `span` and `error` as arguments. Sets error on the span by default. <br>
-**Default**: `proc { |span, error| span.set_error(error) unless span.nil? }`
-
-It's recommended you set both `service` and `resource` at a minimum. Spans without a `service` or `resource` as `nil` are discarded by the Datadog agent.
+For all the available `**options`, see the [reference guide][7].
 
 ### Manually creating a new span
 
@@ -340,3 +304,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: /tracing/compatibility_requirements/ruby/
 [5]: https://github.com/openzipkin/b3-propagation
 [6]: /tracing/security
+[7]: /tracing/setup_overview/setup/ruby/#manual-instrumentation
