@@ -58,8 +58,8 @@ In addition to this documentation, you can learn more about developing Datadog i
 ### Choose an offering type 
 
 There are a few different types of offerings that you can list on the Datadog Integrations or Marketplace pages:
-1. Data integration (can be a [Datadog Agent-based integration](#datadog-agent-based-integration) or a [REST API integration](#datadog-rest-api-integration))
-2. [Datadog App](#datadog-app)
+1. Data integration (can be a [Datadog Agent-based integration](#datadog-agent-based-integration14) or a [REST API integration](#datadog-rest-api-integration18))
+2. [Datadog App](#datadog-app12)
 3. SaaS license or subscription (Marketplace only)
 4. Professional services (Marketplace only)
 
