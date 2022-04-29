@@ -1,8 +1,12 @@
 ---
-aliases:
-- /ja/events/guides/migrating_from_stream_to_explorer
-kind: documentation
 title: 新イベント機能への移行
+kind: documentation
+aliases:
+  /events/guides/migrating_from_stream_to_explorer
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-events/"
+  tag: ブログ
+  text: Datadog イベントの改善によるトラブルシューティングの迅速化
 ---
 
 <div class="alert alert-warning">
@@ -15,13 +19,11 @@ Datadog のレガシーイベントストリームとイベントモニターは
 
 ## 移行スケジュールを教えてください。
 
-以下のスケジュールは、米国にお住まいのお客様に適用されます。
+<strong>2022 年 3 月</strong> - 新しいイベントエクスプローラーと分析にアクセスできるようになります。Datadog は、API で管理されていないお客様のダッシュボードやモニターの移行を開始します。
 
-<strong>2022 年 3 月 5 日</strong> - 新しいイベントエクスプローラーと分析にアクセスできるようになります。Datadog は、API を使用して管理されていないお客様のダッシュボードやモニターの移行を開始します。
+<strong>2022 年 5 月 5 日</strong> - イベントストリームは廃止し、イベントエクスプローラーに移行します。
 
-<strong>2022 年 4 月 30 日</strong> - イベントストリームは廃止し、イベントエクスプローラーに移行します。
-
-<strong>2022 年 5 月 15 日</strong> - Datadog は移行されていないイベントモニターの評価は続けますが、この日からその編集はできなくなります。新しいイベントモニターは、新しい構文を使用する必要があります。
+<strong>2022 年 5 月 19 日</strong> - Datadog は移行されていないイベントモニターの評価は続けますが、この日からその編集はできなくなります。新しいイベントモニターは、新しい構文を使用する必要があります。
 
 <strong>2022 年 6 月 30 日</strong> - Datadog は、移行されていないイベントモニターの評価を停止します。レガシーイベントモニターが動作しなくなります。
 
@@ -49,7 +51,7 @@ Datadog のレガシーイベントストリームとイベントモニターは
 
 エクスプローラーでのイベントの表示や検索に加え、時系列、トップリスト、テーブルとしてグラフ化し、指定したクエリのイベント数をグループ化することができるようになりました。詳しくは、[イベントアナリティクス][2]をご覧ください。
 
-また、イベント検索クエリから 15 ヶ月間保持される[メトリクスを生成][3]し、過去のイベントやアラートを作成、監視することができます。
+また、イベント検索クエリから 15 ヶ月間保持される[メトリクスを生成][3]し、過去のイベントに基づきモニターやアラートを作成できます。
 
 {{< img src="events/generate-metrics.png" alt="イベント検索クエリによるメトリクスのイメージ。" >}}
 
@@ -174,10 +176,15 @@ GitHub または Chef からのイベントを表示する
 : 新しい構文 </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
 
-[1]: /ja/events/explorer
-[2]: /ja/events/explorer/#event-analytics
-[3]: /ja/events/#generate-custom-metrics-from-events
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /events/explorer
+[2]: /events/explorer/#event-analytics
+[3]: /events/#generate-custom-metrics-from-events
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
-[5]: /ja/events/guides/new_events_sources/
-[6]: /ja/help/
-[7]: /ja/api/latest/monitors/#create-a-monitor
+[5]: /events/guides/new_events_sources/
+[6]: /help/
+[7]: /api/latest/monitors/#create-a-monitor
