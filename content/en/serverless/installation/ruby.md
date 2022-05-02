@@ -320,12 +320,12 @@ def handler(event:, context:)
     Datadog::Lambda::wrap(event, context) do
         # Add custom tags to the lambda function span,
         # does NOT work when X-Ray tracing is enabled
-        current_span = Datadog.tracer.active_span
+        current_span = Datadog::Tracing.active_span
         current_span.set_tag('customer.id', '123456')
 
         some_operation()
 
-        Datadog.tracer.trace('hello.world') do |span|
+        Datadog::Tracing.trace('hello.world') do |span|
           puts "Hello, World!"
         end
 
@@ -342,7 +342,7 @@ end
 
 # Instrument the function
 def some_operation()
-    Datadog.tracer.trace('some_operation') do |span|
+    Datadog::Tracing.trace('some_operation') do |span|
         # Do something here
     end
 end

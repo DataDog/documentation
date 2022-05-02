@@ -42,10 +42,8 @@ require 'ddtrace'
 class ShoppingCartController < ApplicationController
   # GET /shopping_cart
   def index
-    # Get the active span
-    current_span = Datadog.tracer.active_span
-    # customer_id -> 254889
-    current_span&.set_tag('customer.id', params.permit([:customer_id]))
+    # Get the active span and set customer_id -> 254889
+    Datadog::Tracing.active_span&.set_tag('customer.id', params.permit([:customer_id]))
 
     # [...]
   end
@@ -68,7 +66,7 @@ Add [tags][1] directly to `Datadog::Span` objects by calling `#set_tag`:
 # An example of a Sinatra endpoint,
 # with Datadog tracing around the request.
 get '/posts' do
-  Datadog.tracer.trace('web.request') do |span|
+  Datadog::Tracing.trace('web.request') do |span|
     span.set_tag('http.url', request.path)
     span.set_tag('<TAG_KEY>', '<TAG_VALUE>')
   end
@@ -103,14 +101,13 @@ require 'ddtrace'
 require 'timeout'
 
 def example_method
-  span = Datadog.tracer.trace('example.trace')
+  span = Datadog::Tracing.trace('example.trace')
   puts 'some work'
   sleep(1)
-  raise StandardError.new "This is an exception"
+  raise StandardError, "This is an exception"
 rescue StandardError => error
-  span = Datadog.tracer.active_span
-  span.set_error(error) unless span.nil?
-  raise error
+  Datadog::Tracing.active_span&.set_error(error)
+  raise
 ensure
   span.finish
 end
@@ -132,10 +129,10 @@ require 'timeout'
 def example_method
   puts 'some work'
   sleep(1)
-  raise StandardError.new "This is an exception"
+  raise StandardError, "This is an exception"
 end
 
-Datadog.tracer.trace('example.trace') do |span|
+Datadog::Tracing.trace('example.trace') do |span|
   example_method()
 end
 ```
@@ -157,66 +154,30 @@ custom_error_handler = proc do |span, error|
   span.set_error(error) unless error.message.include?("a special exception")
 end
 
-Datadog.tracer.trace('example.trace', on_error: custom_error_handler) do |span|
+Datadog::Tracing.trace('example.trace', on_error: custom_error_handler) do |span|
   example_method()
 end
 ```
 
 ## Adding spans
 
-If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code:
+If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog::Tracing.trace` method, which you can wrap around any Ruby code:
 
-To trace any Ruby code, you can use the `Datadog.tracer.trace` method:
+To trace any Ruby code, you can use the `Datadog::Tracing.trace` method:
 
 ```ruby
-Datadog.tracer.trace(name, options) do |span|
+Datadog::Tracing.trace(name, resource: resource, **options) do |span|
   # Wrap this block around the code you want to instrument
   # Additionally, you can modify the span here.
   # for example, change the resource name, or set tags
 end
 ```
 
-Where `name` is a `String` that describes the generic kind of operation being done (for example `'web.request'`, or `'request.parse'`), and `options` is an optional `Hash` that accepts the following parameters:
+Where `name` is a `String` that describes the generic kind of operation being done (for example `'web.request'`, or `'request.parse'`).
 
-`service`
-: **Type**: `String`<br>
-The service name which this span belongs.<br>
-**Example**: `'my-web-service'`<br>
-**Default**: Tracer `default-service`, `$PROGRAM_NAME`, or `'ruby'`
+`resource` is a `String` with the name of the action being operated on. Traces with the same resource value will be grouped together for the purpose of metrics. Resources are usually domain specific, such as a URL, query, request, etc. (e.g. 'Article#submit', http://example.com/articles/list.)
 
-`resource`
-: **Type**: `String`<br>
-Name of the resource or action being operated on. Traces with the same resource value will be grouped together for the purpose of metrics (but still independently viewable.) Usually domain specific, such as a URL, query, request, etc.<br> 
-**Examples**: `'Article#submit'`, `http://example.com/articles/list`<br>
-**Default**: `name` of Span.
-
-`span_type`
-: **Type**: `String`<br>
-The type of the span.<br>
-**Examples**: `'http'`, `'db'`<br>
-**Default**: `nil`
-
-`child_of`
-: **Type**: `Datadog::Span` / `Datadog::Context`<br>
-Parent for this span. If not provided, will automatically become current active span. <br>
-**Default**: `nil`
-
-`start_time`  
-: **Type**: `Integer`<br>
-When the span actually starts. Useful when tracing events that have already happened. <br>
-**Default**: `Time.now.utc`
-
-`tags`
-: **Type**: `Hash`<br>
-Extra tags which should be added to the span. <br>
-**Default**: `{}`
-
-`on_error`
-: **Type**: `Proc`<br>
-Handler invoked when a block is provided to trace, and it raises an error. Provided `span` and `error` as arguments. Sets error on the span by default. <br>
-**Default**: `proc { |span, error| span.set_error(error) unless span.nil? }`
-
-It's recommended you set both `service` and `resource` at a minimum. Spans without a `service` or `resource` as `nil` are discarded by the Datadog agent.
+For all the available `**options`, see the [reference guide][7].
 
 ### Manually creating a new span
 
@@ -227,9 +188,9 @@ Programmatically create spans around any block of code.  Spans created in this m
 # with Datadog tracing around the request,
 # database query, and rendering steps.
 get '/posts' do
-  Datadog.tracer.trace('web.request', service: '<SERVICE_NAME>', resource: 'GET /posts') do |span|
+  Datadog::Tracing.trace('web.request', service: '<SERVICE_NAME>', resource: 'GET /posts') do |span|
     # Trace the activerecord call
-    Datadog.tracer.trace('posts.fetch') do
+    Datadog::Tracing.trace('posts.fetch') do
       @posts = Posts.order(created_at: :desc).limit(10)
     end
 
@@ -238,7 +199,7 @@ get '/posts' do
     span.set_tag('posts.count', @posts.length)
 
     # Trace the template rendering
-    Datadog.tracer.trace('template.render') do
+    Datadog::Tracing.trace('template.render') do
       erb :index
     end
   end
@@ -247,66 +208,60 @@ end
 
 ### Post-processing traces
 
-Some applications might require that traces be altered or filtered out before they are sent upstream. The processing pipeline allows users to create *processors* to define such behavior.
+Some applications might require that traces be altered or filtered out before they are sent to Datadog. The processing pipeline allows you to create *processors* to define such behavior.
+
+#### Filtering
+
+You can use the `Datadog::Tracing::Pipeline::SpanFilter` processor to remove spans, when the block evaluates as truthy:
+
+```ruby
+Datadog::Tracing.before_flush(
+  # Remove spans that match a particular resource
+  Datadog::Tracing::Pipeline::SpanFilter.new { |span| span.resource =~ /PingController/ },
+  # Remove spans that are trafficked to localhost
+  Datadog::Tracing::Pipeline::SpanFilter.new { |span| span.get_tag('host') == 'localhost' }
+)
+```
+
+#### Processing
+
+You can use the `Datadog::Tracing::Pipeline::SpanProcessor` processor to modify spans:
+
+```ruby
+Datadog::Tracing.before_flush(
+  # Strip matching text from the resource field
+  Datadog::Tracing::Pipeline::SpanProcessor.new { |span| span.resource.gsub!(/password=.*/, '') }
+)
+```
+
+#### Custom processor
 
 Processors can be any object that responds to `#call` accepting `trace` as an argument (which is an `Array` of `Datadog::Span`s.)
 
-For example:
+For example, using the short-hand block syntax:
 
 ```ruby
-lambda_processor = ->(trace) do
-  # Processing logic...
-  trace
+Datadog::Tracing.before_flush do |trace|
+   # Processing logic...
+   trace
 end
+```
 
+For a custom processor class:
+
+```ruby
 class MyCustomProcessor
   def call(trace)
     # Processing logic...
     trace
   end
 end
-custom_processor = MyFancyProcessor.new
+
+Datadog::Tracing.before_flush(MyCustomProcessor.new)
 ```
 
-`#call` blocks of processors *must* return the `trace` object; this return value will be passed to the next processor in the pipeline.
+In both cases, the processor method *must* return the `trace` object; this return value will be passed to the next processor in the pipeline.
 
-These processors must then be added to the pipeline via `Datadog::Pipeline.before_flush`:
-
-```ruby
-Datadog::Pipeline.before_flush(lambda_processor, custom_processor)
-```
-
-You can also define processors using the short-hand block syntax for `Datadog::Pipeline.before_flush`:
-
-```ruby
-Datadog::Pipeline.before_flush do |trace|
-  trace.delete_if { |span| span.name =~ /forbidden/ }
-end
-```
-
-#### Filtering
-
-You can use the `Datadog::Pipeline::SpanFilter` processor to remove spans, when the block evaluates as truthy:
-
-```ruby
-Datadog::Pipeline.before_flush(
-  # Remove spans that match a particular resource
-  Datadog::Pipeline::SpanFilter.new { |span| span.resource =~ /PingController/ },
-  # Remove spans that are trafficked to localhost
-  Datadog::Pipeline::SpanFilter.new { |span| span.get_tag('host') == 'localhost' }
-)
-```
-
-#### Processing
-
-You can use the `Datadog::Pipeline::SpanProcessor` processor to modify spans:
-
-```ruby
-Datadog::Pipeline.before_flush(
-  # Strip matching text from the resource field
-  Datadog::Pipeline::SpanProcessor.new { |span| span.resource.gsub!(/password=.*/, '') }
-)
-```
 
 ## Trace client and Agent configuration
 
@@ -349,3 +304,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: /tracing/compatibility_requirements/ruby/
 [5]: https://github.com/openzipkin/b3-propagation
 [6]: /tracing/security
+[7]: /tracing/setup_overview/setup/ruby/#manual-instrumentation
