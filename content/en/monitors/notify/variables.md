@@ -159,6 +159,22 @@ To notify your dev team if a triggering host has the name `production`, use the 
 {{/is_exact_match}}
 ```
 
+The `is_exact_match` conditional variable also supports [`{{value}}` template variables](#template-variables):
+
+```text
+{{#is_exact_match "value" "<VALUE>"}}
+  This displays if the value that breached the threshold of the monitor is exactly <VALUE>.
+{{/is_exact_match}}
+```
+
+To notify your dev team if the value that breached the threshold of your monitor is 5, use the following:
+
+```text
+{{#is_exact_match "value" "5"}}
+  This displays if the value that breached the threshold of the monitor is 5. @dev-team@company.com
+{{/is_exact_match}}
+```
+
 {{% /tab %}}
 {{% tab "is_renotify" %}}
 
@@ -281,8 +297,6 @@ If your facet has periods, use brackets around the facet, for example:
 
 _Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI Pipeline monitors][5]_
 
-<div class="alert alert-info"><strong>Note</strong>: This feature is only available for monitors that do not use Formulas & Functions in their queries.</div>
-
 To include **any** attribute or tag from a log, a trace span, a RUM event, or a CI Pipeline event matching the monitor query, use the following variables:
 
 | Monitor type    | Variable syntax                                         |
@@ -307,6 +321,8 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
 <div class="alert alert-info"><strong>Note</strong>: If the selected event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, do not use these variables for routing notification with <code>{{#is_match}}</code> handles.</div>
+
+If a monitor uses Formulas & Functions in its queries, the values are resolved with events that are extracted from the first query.
 
 #### Reserved attributes
 

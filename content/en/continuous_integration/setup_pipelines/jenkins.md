@@ -20,7 +20,8 @@ further_reading:
 ## Compatibility
 
 Supported Jenkins versions:
-* Jenkins >= 2.164.1
+* For 3.x versions of the plugin: Jenkins >= 2.164.1
+* For 4.x versions of the plugin: Jenkins >= 2.303.3
 
 ## Prerequisite
 

@@ -1,0 +1,84 @@
+---
+title: Usage Metrics
+kind: documentation
+aliases:
+    - /tracing/trace_retention_and_ingestion/usage_metrics/
+    - /tracing/trace_retention/usage_metrics/
+description: "Learn how to monitor your APM usage."
+further_reading:
+- link: "/tracing/trace_ingestion/"
+  tag: "Documentation"
+  text: "Trace Ingestion"
+- link: "/tracing/trace_retention/"
+  tag: "Documentation"
+  text: "Trace Retention"
+---
+
+## Overview
+
+The following in-app configuration pages allow you to set ingested and indexed volumes for APM:
+- Use the **[Ingestion Control Page][1]** to control ingested span volume.
+- Use the **[Retention Filters page][2]** to control the number of indexed spans.
+
+Both pages are powered by **usage metrics**. 
+
+The following metrics are available in your account:
+
+ - `datadog.estimated_usage.apm.ingested_bytes` (billed dimension)
+ - `datadog.estimated_usage.apm.ingested_spans`
+ - `datadog.estimated_usage.apm.ingested_traces`
+ - `datadog.estimated_usage.apm.indexed_spans` (billed dimension)
+
+
+Leverage these metrics in dashboards and monitors to visualize and control your usage. Two out-of-the box dashboards are built with these metrics. These dashboards help 
+ monitor your APM usage as well as your ingested and indexed span volumes.
+
+Datadog APM plans come with indexed and ingested spans included. For more information, see the [Pricing page][3] or some [pricing example scenarios][4].
+
+## Usage Metrics
+
+### Ingested spans volume
+
+The following metrics are associated with ingested spans usage:
+
+ - `datadog.estimated_usage.apm.ingested_bytes`
+ - `datadog.estimated_usage.apm.ingested_spans`
+ - `datadog.estimated_usage.apm.ingested_traces`
+
+Control the usage with `datadog.estimated_usage.apm.ingested_bytes`. Ingestion is metered as a volume, not as a number of spans or traces. This metric is tagged by `env` and `service` so you can spot which environments and services are contributing to the ingestion volume.
+
+This metric is also tagged by `ingestion_reason`, reflecting which [ingestion mechanisms][5] are responsible for sending spans to Datadog. These mechanisms are nested in the tracing libraries of the Datadog Agent. For more information about this dimension, see the [Ingestion Reason dashboard][6].
+
+The `datadog.estimated_usage.apm.ingested_traces` metric measures the number of requests sampled per second, and only counts traces sampled by [head-based sampling][7]. This metric is also tagged by `env` and `service` so you can spot which services are starting the most traces.
+
+### Indexed spans
+
+Use the `datadog.estimated_usage.apm.indexed_spans` metric to control the number of spans indexed by [tag-based retention filters][2].
+
+This metric is tagged by `env` and `service` so you can spot which environments and services are contributing to the indexing usage.
+
+## APM Traces Estimated Usage dashboard
+
+The [APM Traces Usage dashboard][8] contains several widget groups displaying high-level KPIs and additional  usage information.
+
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
+
+In this dashboard, you can find information about:
+
+- Global usage metrics
+- Infrastructure with APM enabled, including hosts, Fargate, and AWS Lambda
+- Ingestion volumes separated by `service`, `env`, and `ingestion_reason`
+- Indexing volumes separated by `service` and `env`
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_ingestion/ingestion_controls
+[2]: /tracing/trace_retention/#retention-filters
+[3]: https://www.datadoghq.com/pricing/?product=apm#apm
+[4]: /account_management/billing/apm_tracing_profiler/
+[5]: /tracing/trace_ingestion/mechanisms
+[6]: https://app.datadoghq.com/dash/integration/apm-ingestion-reason-overview
+[7]: /tracing/trace_ingestion/mechanisms/#head-based-sampling
+[8]: https://app.datadoghq.com/dash/integration/apm-estimated-usage

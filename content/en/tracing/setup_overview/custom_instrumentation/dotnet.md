@@ -170,9 +170,58 @@ using (var parentScope =
     }
 }
 ```
+
+### Headers extraction and injection
+
+The Datadog APM Tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing. For more information, see the [setup documentation][7].
+
+In most cases, headers extraction and injection are transparent. Though, there are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. In that case, you can add a custom trace using the following code:
+
+```csharp
+var spanContextExtractor = new SpanContextExtractor();
+var parentContext = spanContextExtractor.Extract(headers, (headers, key) => GetHeaderValues(headers, key));
+var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext }; 
+using var scope = Tracer.Instance.StartActive("operation", spanCreationSettings);
+```
+
+Provide the `GetHeaderValues` method. The way this method is implemented depends on the structure that carries `SpanContext`.
+
+Here are some examples:
+
+```csharp
+// Confluent.Kafka
+IEnumerable<string> GetHeaderValues(Headers headers, string name)
+{
+    if (headers.TryGetLastBytes(name, out var bytes))
+    {
+        try
+        {
+            return new[] { Encoding.UTF8.GetString(bytes) };
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+    }
+
+    return Enumerable.Empty<string>();
+}
+
+// RabbitMQ
+IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string name)
+{
+    if (headers.TryGetValue(name, out object value) && value is byte[] bytes)
+    {
+        return new[] { Encoding.UTF8.GetString(bytes) };
+    }
+
+    return Enumerable.Empty<string>();
+}
+```
+
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][11] page or in [Ignoring Unwanted Resources][12].
+You can exclude traces based on the resource name to remove Synthetics traffic such as health checks. For more information about security and additional configurations, see [Configure the Datadog Agent or Tracer for Data Security][11].
 
 ## Further Reading
 
@@ -190,4 +239,3 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [9]: /tracing/setup_overview/setup/dotnet-core
 [10]: #instrument-methods-via-attributes
 [11]: /tracing/security
-[12]: /tracing/guide/ignoring_apm_resources/

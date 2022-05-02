@@ -1,30 +1,33 @@
 ---
 aliases:
-  - /fr/integrations/awsmq/
+- /fr/integrations/awsmq/
 categories:
-  - cloud
-  - aws
-  - log collection
+- cloud
+- aws
+- log collection
 ddtype: crawler
 dependencies: []
-description: "Surveillez des métriques clés d'AWS Amazon\_MQ."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_mq/'
+description: Surveillez des métriques clés d'AWS Amazon MQ.
+doc_link: https://docs.datadoghq.com/integrations/amazon_mq/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog'
-    tag: Blog
-    text: "Surveiller les métriques d'Amazon\_MQ avec Datadog"
+- link: https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog
+  tag: Blog
+  text: Surveiller les métriques d'Amazon MQ avec Datadog
 git_integration_title: amazon_mq
 has_logo: true
+integration_id: amazon-mq
 integration_title: Amazon MQ
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_mq
-public_title: "Intégration Datadog/Amazon\_MQ"
-short_description: "Surveillez des métriques clés d'AWS Amazon\_MQ."
+public_title: Intégration Datadog/Amazon MQ
+short_description: Surveillez des métriques clés d'AWS Amazon MQ.
 version: '1.0'
 ---
+
 ## Présentation
 
 Amazon MQ est un service d'agent de messages géré pour Apache ActiveMQ qui facilite la configuration et l'utilisation des agents de messages dans le cloud.
@@ -47,17 +50,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon MQ de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez Amazon MQ de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_mq` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon MQ dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon MQ dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][5]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][6]
 
 ## Données collectées
 
@@ -65,7 +68,7 @@ Configurez Amazon MQ de façon à ce que ses logs soient envoyés vers un compar
 {{< get-metrics-from-git "amazon_mq" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se verra assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
+Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
 

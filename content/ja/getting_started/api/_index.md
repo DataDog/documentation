@@ -1,11 +1,12 @@
 ---
-title: Datadog API と Postman の使用
-kind: documentation
 aliases:
-  - /ja/developers/faq/using-postman-with-datadog-apis
-  - /ja/getting_started/using-postman-with-datadog-apis
-  - /ja/developers/guide/using-postman-with-datadog-apis
+- /ja/developers/faq/using-postman-with-datadog-apis
+- /ja/getting_started/using-postman-with-datadog-apis
+- /ja/developers/guide/using-postman-with-datadog-apis
+kind: documentation
+title: Datadog API と Postman の使用
 ---
+
 ## 概要
 
 Datadog API を使用すると、Datadog との間でデータをやり取りできます。Datadog API は、リソース指向の URL とステータスコードを使用してリクエストの成功または失敗を示し、すべてのリクエストから JSON を返します。
@@ -30,9 +31,9 @@ Datadog API を使用すると、Datadog との間でデータをやり取りで
 </br>
 <div class="postman-run-button"
 data-postman-action="collection/fork"
-data-postman-var-1="7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189"
-data-postman-collection-url="entityId=7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
-data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhcHBsaWNhdGlvbl9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="></div>
+data-postman-var-1="7274195-5d3dff85-334d-45f5-a5cc-68c1f4908095"
+data-postman-collection-url="entityId=7274195-5d3dff85-334d-45f5-a5cc-68c1f4908095&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
@@ -61,25 +62,19 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 3. **Datadog Authentication** 環境を編集して Datadog [API キー][2]を `api_key` 変数の初期値および現在値として追加し、お使いの Datadog [アプリケーションキー][2]を `application_key` 変数の初期値および現在値として追加します。
 
-{{< site-region region="eu" >}}
+#### API エンドポイントに切り替える
 
-#### EU API エンドポイントに切り替える
+`https://api.datadoghq.com` 以外の Datadog サイトにアクセスしている場合、別のエンドポイント URL にアクセスするには Postman コレクションに切り替える必要があります。
 
-デフォルトエンドポイントの URL ではなく、EU リージョンの Datadog サイトにアクセスしている場合は、EU エンドポイント URL `https://api.datadoghq.eu` からアクセスするように Postman コレクションを切り替える必要があります。
-
-以下の手順に従って、EU インスタンスを更新します。
+選択したサイト ({{< region-param key="dd_site_name" >}}) へのインスタンスを更新するには、以下の手順に従います。
 
 1. 左ペインの Datadog API コレクションフォルダーで、メニュー (3 点リーダー) をクリックし、**Edit** を選択します。
 
-{{< img src="getting_started/postman/view-more-actions.png" alt="他のアクションを表示">}}
+    {{< img src="getting_started/postman/view-more-actions.png" alt="他のアクションを表示">}}
 
-2. **Variables** タブで、`datadoghq.com` の値を持つ `site` 変数の選択を解除し、`datadoghq.eu` の変数を持つ `site` を選択します。
-
-{{< img src="getting_started/postman/variables.png" alt="サイト変数の更新">}}
+2. **Variables** タブで、`datadoghq.com` の値を持つ `site` 変数の選択を解除し、{{< region-param key="dd_site" code="true" >}} の値を持つ `site` を選択します。
 
 3. **Update** をクリックします。
-
-{{< /site-region >}}
 
 ## コレクションの使用
 

@@ -1,23 +1,28 @@
 ---
-title: Kubernetes State Metrics Core
-name: kubernetes_state_core
-kind: インテグレーション
-description: Kubernetes クラスターで実行されているワークロードの状態を監視します。Kubernetes オブジェクトのステータスを追跡し、マイクロサービスメトリクスを相互に関連付けます。
-short_description: Kubernetes オブジェクトのステータスを追跡し、マイクロサービスメトリクスを相互に関連付けます。
 categories:
-  - cloud
-  - 構成 & デプロイ
-  - containers
-  - orchestration
-doc_link: /integrations/kubernetes_state_core/
+- cloud
+- 構成 & デプロイ
+- containers
+- orchestration
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_state_core.md'
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_state_core.md
+description: Kubernetes クラスターで実行されているワークロードの状態を監視します。Kubernetes オブジェクトのステータスを追跡し、マイクロサービスメトリクスを相互に関連付けます。
+doc_link: /integrations/kubernetes_state_core/
+further_reading:
+- link: https://www.datadoghq.com/blog/engineering/our-journey-taking-kubernetes-state-metrics-to-the-next-level/
+  tag: ブログ
+  text: Kubernetes のステートメトリクスを次のレベルへ進化させる旅
 has_logo: true
+integration_id: kubernetes_state_core
 integration_title: Kubernetes State Metrics Core
 is_public: true
+kind: インテグレーション
+name: kubernetes_state_core
 public_title: Datadog-Kubernetes State Metrics Core インテグレーション
-integration_id: kubernetes_state_core
+short_description: Kubernetes オブジェクトのステータスを追跡し、マイクロサービスメトリクスを相互に関連付けます。
+title: Kubernetes State Metrics Core
 ---
+
 ## 概要
 
 Kubernetes サービスからメトリクスをリアルタイムに取得すると、以下のことが可能になります。
@@ -58,9 +63,56 @@ datadog:
 ```
 
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+`kubernetes_state_core` のチェックを有効にするには、DatadogAgent リソースの設定 `spec.features.kubeStateMetricsCore.enabled` を `true` に設定する必要があります。
+
+```
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+  features:
+    kubeStateMetricsCore:
+      enabled: true
+  # ...
+```
+
+注: Datadog Operator v0.7.0 以降が必要です。
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## kubernetes_state から kubernetes_state_core への移行
+
+### タグの削除
+
+元の `kubernetes_state` のチェックでは、いくつかのタグが非推奨とフラグが立てられ、新しいタグに置き換えられています。移行経路を決定するために、どのタグがメトリクスで送信されるかを確認します。
+
+`kubernetes_state_core` のチェックでは、非推奨のタグのみが提出されます。`kubernetes_state` から `kubernetes_state_core` に移行する前に、モニターやダッシュボードで公式タグのみが使用されているか確認します。
+
+以下は、非推奨タグとそれに代わる公式タグの対応表です。
+
+| 非推奨タグ        | 公式タグ                |
+|-----------------------|-----------------------------|
+| cluster_name          | kube_cluster_name           |
+| コンテナ             | kube_container_name         |
+| cronjob               | kube_cronjob                |
+| daemonset             | kube_daemon_set             |
+| deployment            | kube_deployment             |
+| image                 | image_name                  |
+| job                   | kube_job                    |
+| job_name              | kube_job                    |
+| namespace             | kube_namespace              |
+| phase                 | pod_phase                   |
+| ポッド                   | pod_name                    |
+| replicaset            | kube_replica_set            |
+| replicationcontroller | kube_replication_controller |
+| statefulset           | kube_stateful_set           |
 
 ### 後方の非互換性の変更
 
@@ -73,8 +125,16 @@ Kubernetes State Metrics Core チェックには後方互換性がありませ�
 : 永続ボリューム名の粒度を備えた新しいメトリクス。`kubernetes_state.persistentvolumes.by_phase` を置き換えます。
 
 `kubernetes_state.pod.status_phase`
-: メトリクスは、`pod_name` のようにポッドレベルのタグでタグ付けされるようになりました。
+: メトリクスは、`pod_name` のようにポッドレベルのタグでタグ付けされます。
 
+`kubernetes_state.node.count`
+: このメトリクスには、もう `host` というタグは付いていません。このメトリクスは、ノード数を `kernel_version` `os_image` `container_runtime_version` `kubelet_version` によって集計します。
+
+`kubernetes_state.container.waiting` と `kubernetes_state.container.status_report.count.waiting`
+: これらのメトリクスは、ポッドが待機していない場合、0 値を出力しなくなりました。0 以外の値のみを報告します。
+
+`kube_job`
+: `kubernetes_state` では、`Job` が `CronJob` をオーナーとしていた場合は `kube_job` タグの値が `CronJob` 名となり、それ以外の場合は `Job` 名となります。`kubernetes_state_core` では、`kube_job` タグの値は常に `Job` 名となり、新たに `kube_cronjob` タグキーが追加されて `CronJob` 名をタグ値として持つようになります。`kubernetes_state_core` に移行する場合、クエリフィルターには新しいタグか `kube_job:foo*` (`foo` は `CronJob` 名) を使用することが推奨されます。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -83,7 +143,7 @@ Helm の `values.yaml` で `kubeStateMetricsCore` を有効にすると、レガ
 
 それでも移行フェーズで両方のチェックを同時に有効にする場合は、`values.yaml` の `ignoreLegacyKSMCheck` フィールドを無効にします。
 
-`ignoreLegacyKSMCheck` は、Agent がレガシーの `kubernetes_state` チェックの自動コンフィギュレーションのみを無視するようにすることに注意してください。カスタムの `kubernetes_state` コンフィギュレーションは手動で削除する必要があります。
+**注**: `ignoreLegacyKSMCheck` は、Agent がレガシーの `kubernetes_state` チェックの自動コンフィギュレーションのみを無視するようにします。カスタムの `kubernetes_state` コンフィギュレーションは手動で削除する必要があります。
 
 Kubernetes State Metrics Core チェックでは、クラスターに `kube-state-metrics` をデプロイする必要がなくなりました。Datadog Helm Chart の一部として `kube-state-metrics` のデプロイを無効にできます。これを行うには、Helm の `values.yaml` に以下を追加します。
 
@@ -171,7 +231,7 @@ datadog:
 : ネームスペースの数。タグ: `phase`。
 
 `kubernetes_state.node.count`
-: クラスターノードに関する情報。タグ: `node` `kernel_version` `os_image` `container_runtime_version` `kubelet_version` `kubeproxy_version` `provider_id` `pod_cidr`。
+: ノードの数。タグ: `kernel_version` `os_image` `container_runtime_version` `kubelet_version`。
 
 `kubernetes_state.node.cpu_allocatable`
 : スケジューリングに使用できるノードの割り当て可能な CPU。タグ: `node` `resource` `unit`。
@@ -207,7 +267,7 @@ datadog:
 : ノードが新しいポッドをスケジュールできるかどうか。タグ: `node`。
 
 `kubernetes_state.container.terminated`
-: コンテナが現在終了状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
+: コンテナが終了状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.cpu_limit`
 : コンテナによる CPU 制限の値。タグ: `kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (標準ラベルの `env` `service` `version`)。
@@ -228,16 +288,16 @@ datadog:
 : コンテナごとのコンテナー再起動の数。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.running`
-: コンテナが現在実行状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
+: コンテナが実行状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.waiting`
-: コンテナが現在待機状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
+: コンテナが待機状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.status_report.count.waiting`
-: コンテナが現在待機状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
+: コンテナが待機状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.status_report.count.terminated`
-: コンテナが現在終了状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
+: コンテナが終了状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.ready`
 : ポッドがリクエストを処理する準備ができているかどうかを説明します。 タグ: `kube_namespace` `pod_name` `condition` (標準ラベルの `env` `service` `version`)。
@@ -252,16 +312,19 @@ datadog:
 : ポッドのスケジュール不可能なステータスについて説明します。 タグ: `kube_namespace` `pod_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.status_phase`
-: ポッドの現在のフェーズ。タグ: `kube_namespace` `pod_name` `phase` (標準ラベルの `env` `service` `version`)。
+: ポッドの現在のフェーズ。タグ: `kube_namespace` `pod_name` `pod_phase` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.age`
-: ポッドが作成されてからの秒単位の時間。タグ: `kube_namespace` `pod_name` `phase` (標準ラベルの `env` `service` `version`)。
+: ポッドが作成されてからの秒単位の時間。タグ: `kube_namespace` `pod_name` `pod_phase` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.uptime`
-: ポッドが Kubelet によってスケジュールされ、確認されてからの秒単位の時間。タグ: `kube_namespace` `pod_name` `phase` (標準ラベルの `env` `service` `version`)。
+: ポッドが Kubelet によってスケジュールされ、確認されてからの秒単位の時間。タグ: `kube_namespace` `pod_name` `pod_phase` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.pod.count`
+: ポッドの数。タグ: `kube_namespace` `kube_<owner kind>`。
 
 `kubernetes_state.persistentvolumeclaim.status`
-: 永続ボリュームクレームが現在進行中のフェーズ。タグ: `kube_namespace` `persistentvolumeclaim` `phase` `storageclass`。
+: 永続ボリュームクレームが進行中のフェーズ。タグ: `kube_namespace` `persistentvolumeclaim` `phase` `storageclass`。
 
 `kubernetes_state.persistentvolumeclaim.access_mode`
 : 永続ボリュームクレームで指定されたアクセスモード。タグ: `kube_namespace` `persistentvolumeclaim` `access_mode` `storageclass`。
@@ -282,7 +345,7 @@ datadog:
 : 正常なポッドの最小希望数。タグ: `kube_namespace` `poddisruptionbudget`。
 
 `kubernetes_state.pdb.disruptions_allowed`
-: 現在許可されているポッドの中断の数。タグ: `kube_namespace` `poddisruptionbudget`。
+: 許可されているポッドの中断の数。タグ: `kube_namespace` `poddisruptionbudget`。
 
 `kubernetes_state.pdb.pods_total`
 : この停止状態の予算によってカウントされたポッドの総数。タグ: `kube_namespace` `poddisruptionbudget`。
@@ -291,7 +354,7 @@ datadog:
 : シークレットに関するタイプ。タグ:`kube_namespace` `secret` `type`。
 
 `kubernetes_state.replicaset.count`
-: ReplicaSet の数。タグ: `kube_namespace` `owner_name` `owner_kind`。
+: ReplicaSet の数。タグ: `kube_namespace` `kube_deployment`。
 
 `kubernetes_state.replicaset.replicas_desired`
 : ReplicaSet に必要なポッドの数。タグ: `kube_namespace` `kube_replica_set` (標準ラベルの `env` `service` `version`)。
@@ -393,13 +456,19 @@ datadog:
 : cronjob が最後にスケジュールされてからの期間。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.job.count`
-: ジョブの数。タグ: `kube_namespace` `owner_name` `owner_kind`。
+: ジョブの数。タグ: `kube_namespace` `kube_cronjob`。
 
 `kubernetes_state.job.failed`
-: フェーズ失敗に達したポッドの数。タグ: `kube_job` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: フェーズ失敗に達したポッドの数。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.job.succeeded`
-: フェーズ成功に達したポッドの数。タグ: `kube_job` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: フェーズ成功に達したポッドの数。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.job.completion.succeeded`
+: ジョブの実行が終了しました。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.job.completion.failed`
+: ジョブの実行に失敗しました。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.resourcequota.<resource>.limit`
 : リソースごとのリソース割り当て制限に関する情報。タグ: `kube_namespace` `resourcequota`。
@@ -455,7 +524,7 @@ Kubernetes State Metrics Core チェックには、イベントは含まれま�
 : cronjob の次のスケジュールが過去である場合に警告します。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.job.complete`
-: ジョブが失敗したかどうか。タグ: `kube_job` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: ジョブが失敗したかどうか。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.node.ready`
 : ノードの準備ができているかどうか。タグ: `node` `condition` `status`。
@@ -479,6 +548,11 @@ Cluster Agent コンテナ内で [Cluster Agent の `status` サブコマンド�
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://kubernetes.io/blog/2021/04/13/kube-state-metrics-v-2-0/
 [2]: /ja/integrations/kubernetes_state_core/#migration-from-kubernetes_state-to-kubernetes_state_core

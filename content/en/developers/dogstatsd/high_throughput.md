@@ -780,6 +780,6 @@ See [DataDog/dogstatsd-csharp-client][1] for more information about the client c
 [1]: /agent/
 [2]: /developers/dogstatsd/unix_socket/
 [3]: /developers/dogstatsd/#code
-[4]: /metrics/dogstatsd_metrics_submission/#sample-rates
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/

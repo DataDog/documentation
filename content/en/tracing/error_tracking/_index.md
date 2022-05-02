@@ -8,6 +8,9 @@ further_reading:
 - link: "https://app.datadoghq.com/apm/error-tracking"
   tag: "UI"
   text: "Error tracking"
+- link: "https://www.datadoghq.com/blog/service-page/"
+  tag: "Blog"
+  text: "Service Telemetry, Error Tracking, SLOs and more"
 ---
 
 {{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="Error Tracking Page"  >}}

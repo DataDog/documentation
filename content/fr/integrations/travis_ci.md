@@ -1,36 +1,40 @@
 ---
 categories:
-  - cloud
-  - configuration & deployment
+- cloud
+- configuration & deployment
 ddtype: crawler
 dependencies: []
-description: "Connectez-vous à Travis\_CI pour visualiser des métriques sur les durées et les statuts des builds, les tâches, etc."
+description: Connectez-vous à Travis CI pour visualiser des métriques sur les durées
+  et les statuts des builds, les tâches, etc.
 doc_link: https://docs.datadoghq.com/integrations/travis_ci/
 draft: false
 git_integration_title: travis_ci
 has_logo: true
 integration_id: ''
-integration_title: "Travis\_CI"
+integration_title: Travis CI
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: travis_ci
-public_title: "Intégration Datadog/Travis\_CI"
-short_description: "Connectez-vous à Travis\_CI pour visualiser des métriques sur les durées et les statuts des builds."
+public_title: Intégration Datadog/Travis CI
+short_description: Connectez-vous à Travis CI pour visualiser des métriques sur les
+  durées et les statuts des builds.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Connectez-vous à Travis CI pour visualiser des métriques sur les durées et les statuts des builds, les tâches, etc.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
 Vous pouvez installer l'intégration Travis CI avec son [carré d'intégration][1].
 
-### Configuration
+### Procédure à suivre
 
 1. Ajoutez le nom de votre compte, le token d'API (disponible dans l'onglet de profil de Travis CI) et le type de projet. Les types de projets sont définis comme suit :
 

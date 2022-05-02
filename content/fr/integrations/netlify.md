@@ -1,16 +1,15 @@
 ---
 categories:
-  - web
-  - log collection
-ddtype: crawler
+- web
+- log collection
 dependencies: []
 description: Effectuez un suivi des logs Netlify.
 doc_link: https://docs.datadoghq.com/integrations/netlify/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-netlify-with-datadog/
-    tag: Blog
-    text: Surveiller vos sites Netlify avec Datadog
+- link: https://www.datadoghq.com/blog/monitor-netlify-with-datadog/
+  tag: Blog
+  text: Surveiller vos sites Netlify avec Datadog
 git_integration_title: netlify
 has_logo: true
 integration_id: netlify
@@ -22,8 +21,11 @@ manifest_version: '1.0'
 name: netlify
 public_title: Intégration Datadog/Netlify
 short_description: Effectuez un suivi des logs Netlify.
+team: web-integrations
+type: ''
 version: '1.0'
 ---
+
 ## Présentation
 
 [Netlify][1] est une plateforme de développement Web Jamstack qui vous permet de développer et de déployer des applications Web dynamiques et extrêmement performantes.

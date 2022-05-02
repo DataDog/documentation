@@ -3,6 +3,10 @@ title: Migrating to the New Events Features
 kind: documentation
 aliases:
   /events/guides/migrating_from_stream_to_explorer
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-events/"
+  tag: "Blog"
+  text: "Troubleshoot faster with improved Datadog Events"
 ---
 
 <div class="alert alert-warning">
@@ -25,7 +29,7 @@ Launched more than 10 years ago, Datadog's event stream is one of its earliest f
 
 ## What action do I need to take?
 
-If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them on June 30, 2022.
+If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them by June 30, 2022 at the latest.
 
 <strong>If you use Terraform or other API-based scripts</strong> to manage all or some of your <strong>dashboards</strong>, Datadog will migrate queries in your event widgets and overlays to the new syntax, but you will need to update your scripts to keep them in sync before June 30, 2022.
 
@@ -171,6 +175,11 @@ No events received in a datacenter for service `datadog-agent`
 Legacy Event Monitors do not support cardinality rollup.
 : New syntax </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /events/explorer
 [2]: /events/explorer/#event-analytics

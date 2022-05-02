@@ -1,16 +1,15 @@
 ---
-title: Exclusion
-kind: documentation
 aliases:
-  - /fr/graphing/functions/exclusion/
+- /fr/graphing/functions/exclusion/
+kind: documentation
+title: Exclusion
 ---
+
 ## Exclude null
 
 | Fonction         | Description                                                    | Exemple                                        |
 | ---------------- | -------------------------------------------------------------- | ---------------------------------------------- |
 | `exclude_null()` | Supprime de votre graphique ou de votre Top List tous les groupes qui possèdent un tag avec la valeur N/A. | `exclude_null(avg:system.load.1{*} by {host})` |
-
-Exemple :
 
 Imaginons que vous disposez d'une métrique avec deux tags : `account` et `region`. `account` peut prendre trois valeurs différentes (`prod`, `build` et `N/A`), et `region` quatre valeurs différentes (`us-east-1`, `us-west-1`, `eu-central-1` et `N/A`).
 
@@ -37,8 +36,8 @@ Les fonctions `clamp_min()` et `clamp_max()` comprennent un paramètre :
 
 Les fonctions `cutoff_min()` et `cutoff_max()` comprennent un paramètre :
 
--   `THRESHOLD` : la valeur du seuil que vous spécifiez.
-    -   `cutoff_min()` supprime du graphique toutes les valeurs de métrique inférieures au seuil, tandis que `cutoff_max()` supprime toutes les valeurs de métrique supérieures au seuil.
+- `THRESHOLD` : la valeur du seuil que vous spécifiez.
+    - `cutoff_min()` supprime du graphique toutes les valeurs de métrique inférieures au seuil, tandis que `cutoff_max()` supprime toutes les valeurs de métrique supérieures au seuil.
 
 Les fonctions Cutoff ne suppriment pas les valeurs égales au seuil.
 
@@ -51,7 +50,7 @@ De plus, les fonctions ne suppriment pas définitivement les points de données 
 {{< whatsnext desc="Consultez les autres fonctions disponibles :" >}}
 {{< nextlink href="/dashboards/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques sur votre métrique. {{< /nextlink >}}
 {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmes : mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
-{{< nextlink href="/dashboards/functions/count" >}}Total : comptez les valeurs différentes de zéro ou de null de votre métrique. {{< /nextlink >}}
+{{< nextlink href="/dashboards/functions/count" >}}Nombre de valeurs : comptez les valeurs différentes de zéro ou de null de votre métrique. {{< /nextlink >}}
 {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut pour votre métrique.{{< /nextlink >}}
 {{< nextlink href="/dashboards/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}
 {{< nextlink href="/dashboards/functions/rate" >}}Taux : calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}

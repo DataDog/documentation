@@ -710,6 +710,20 @@
       "description": "Get one app key owned by this service account returns \"OK\" response"
     }
   ],
+  "GetCostByOrg": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get Cost Across Multi-Org Account returns \"OK\" response"
+    }
+  ],
+  "GetUsageObservabilityPipelines": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Observability Pipelines returns \"OK\" response"
+    }
+  ],
   "CreateServiceAccount": [
     {
       "group": "users",
