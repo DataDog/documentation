@@ -124,6 +124,21 @@ See the [list of integrations][15] that can be used to notify your team.
 
 **Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
 
+### Alert grouping
+
+Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If no group is specified, grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping defaults to `Multi Alert`.
+
+`Simple Alert` mode aggregate over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
+
+`Multi Alert` mode apply the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
+
+| Group by                       | Simple alert mode | Multi alert mode |
+|-------------------------------------|------------------------|-----------------------|
+| _(everything)_                      | One single group triggering one notification | N/A |
+| 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
+
+
 ### Modifications
 
 An [event][16] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
@@ -134,7 +149,7 @@ All users can read all monitors, regardless of the role they are associated with
 
 By default, only users attached to roles with the [Monitors Write permission][17] can edit monitors. [Datadog Admin Role and Datadog Standard Role][18] have the Monitors Write permission by default. If your organization uses [Custom Roles][19], other custom roles may have the Monitors Write permission.
 
-You can further restrict your monitor by specifying a list of [roles][20] allowed to edit it. The monitor's creator can always edit the monitor. 
+You can further restrict your monitor by specifying a list of [roles][20] allowed to edit it. The monitor's creator can always edit the monitor.
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 

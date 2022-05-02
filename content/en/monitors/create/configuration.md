@@ -21,20 +21,6 @@ To learn how to construct the search query, see the individual [monitor types][1
 
 {{< img src="/monitors/create/preview_graph_monitor.mp4" alt="Preview Graph" video=true style="width:90%;">}}
 
-### Alert grouping
-
-Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If no group is specified, grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping defaults to `Multi Alert`.
-
-`Simple Alert` mode aggregate over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
-
-`Multi Alert` mode apply the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
-
-| Group by                       | Simple alert mode | Multi alert mode |
-|-------------------------------------|------------------------|-----------------------|
-| _(everything)_                      | One single group triggering one notification | N/A |
-| 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
-
 ## Set alert conditions
 
 The alert conditions vary based on the [monitor type][1]. Configure monitors to trigger if the query value crosses a threshold, or if a certain number of consecutive checks failed.
