@@ -31,46 +31,24 @@ Conditions define when an incoming request is tagged by the rule. The conditions
 #### Inputs
 An input represents which part of the request the operator is applied to. The following inputs are used in the event rules:
 
-Name
-Description
-Example
-server.request.uri.raw
-The full request URI received by the application service
-https://my.api.com/users/1234/roles?clientId=234
-server.request.path_params
-The parsed path parameters (key/value map)
-E.g. userId => 1234
-server.request.query
-The parsed query parameters (key/value map)
-E.g. clientId => 234
-server.request.headers.no_cookies
-The incoming http requests headers, excluding the cookie header (key/value map)
-user-agent => Zgrab,
-referer => google.com
-grpc.server.request.message
-The parsed gRPC message (key/value map)
-data.items[0] => value0,
-data.items[1] => value1
-server.request.body
-The parsed HTTP body (key/value map)
-data.items[0] => value0,
-data.items[1] => value1
-server.response.status
-The http status code
-200
+| Name | Description | Example |
+|------|-------------|---------|
+| server.request.uri.raw | The full request URI received by the application service | https://my.api.com/users/1234/roles?clientId=234 |
+| server.request.path_params | The parsed path parameters (key/value map) | E.g. userId => 1234 |
+| server.request.query | The parsed query parameters (key/value map) | E.g. clientId => 234 |
+| server.request.headers.no_cookies | The incoming http requests headers, excluding the cookie header (key/value map) | user-agent => Zgrab, referer => google.com |
+| grpc.server.request.message | The parsed gRPC message (key/value map) | data.items[0] => value0, data.items[1] => value1 |
+| server.request.body | The parsed HTTP body (key/value map) | data.items[0] => value0, data.items[1] => value1 |
+| server.response.status | The http status code | 200 |
 
 #### Operators 
 
-name
-Description
-match_regex
-Perform regular expression match on the inputs
-phrase_match
-Perform a fast keyword list matching
-is_xss
-Special operator to check for Cross-site scripting (XSS) payloads
-is_sqli
-Special operator to check for SQL-Injection (SQLI) payloads
+| name | Description |
+|------|-------------|
+| match_regex | Perform regular expression match on the inputs |
+| phrase_match | Perform a fast keyword list matching |
+| is_xss | Special operator to check for Cross-site scripting (XSS) payloads |
+| is_sqli | Special operator to check for SQL-Injection (SQLI) payloads |
 
 ### Configure an ASM event rule in your service
 
