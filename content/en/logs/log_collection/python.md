@@ -108,31 +108,16 @@ logger.setLevel(logging.INFO)
 logger.info('Sign up', extra={'referral_code': '52d6ce'})
 ```
 
-Once the [handler is configured][2], the log file contains the following log record (inline):
+The log file contains the following log record (inline):
 
 ```json
 {
-  "threadName": "MainThread",
-  "name": "root",
-  "thread": 140735202359648,
-  "created": 1336281068.506248,
-  "process": 41937,
-  "processName": "MainProcess",
-  "relativeCreated": 9.100914001464844,
-  "module": "tests",
-  "funcName": "testFormatKeys",
-  "levelno": 20,
-  "msecs": 506.24799728393555,
-  "pathname": "tests/tests.py",
-  "lineno": 60,
-  "asctime": ["12-05-05 22:11:08,506248"],
-  "message": "testing logging format",
-  "filename": "tests.py",
-  "levelname": "INFO",
-  "special": "value",
-  "run": 12
+  "message": "Sign up",
+  "referral_code": "52d6ce"
 }
 ```
+
+For information on configuring the handler, see the [Python-json-logger][2] documentation.
 
 [1]: https://github.com/madzak/python-json-logger
 [2]: https://github.com/madzak/python-json-logger#customizing-fields
