@@ -159,6 +159,22 @@ To notify your dev team if a triggering host has the name `production`, use the 
 {{/is_exact_match}}
 ```
 
+The `is_exact_match` conditional variable also supports [`{{value}}` template variable](#template-variables):
+
+```text
+{{#is_exact_match "value" "<VALUE>"}}
+  This displays if the value that breached the threshold of the monitor is exactly <VALUE>.
+{{/is_exact_match}}
+```
+
+To customize the content of your notification  if the value that breached the threshold of your monitor is 5, use the following:
+
+```text
+{{#is_exact_match "value" "5"}}
+  This displays if the value that breached the threshold of the monitor is 5.
+{{/is_exact_match}}
+```
+
 {{% /tab %}}
 {{% tab "is_renotify" %}}
 
