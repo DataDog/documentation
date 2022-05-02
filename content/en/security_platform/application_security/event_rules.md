@@ -106,5 +106,5 @@ Next, [configure detection rules to create security signals][1] based on those s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_platform/application_security/custom_rules/
-[2]: ​​https://app.datadoghq.com/security/appsec/event-rules
+[2]: https://app.datadoghq.com/security/appsec/event-rules
 [3]: /security_platform/application_security/getting_started/
