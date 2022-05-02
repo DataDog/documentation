@@ -25,7 +25,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 1. **Update your Gemfile to include the Datadog library**:
 
    ```
-   gem 'ddtrace', '~> 1.0.0.beta1'
+   gem 'ddtrace', '~> 1.0'
    ```
 
    For information about which language and framework versions are supported by the library, see [Compatibility][1].
@@ -39,7 +39,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    Either enable the tracer through auto-instrumentation by updating your Gemfile:
 
    ```
-   gem 'ddtrace', '~> 1.0.0.beta1', require: 'ddtrace/auto_instrument'
+   gem 'ddtrace', '~> 1.0', require: 'ddtrace/auto_instrument'
    ```
 
    Or enable the tracer by adding an initializer in your application code:

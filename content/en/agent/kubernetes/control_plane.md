@@ -944,7 +944,7 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [2]: https://docs.datadoghq.com/integrations/etcd/?tab=containerized
 [3]: https://docs.datadoghq.com/integrations/kube_controller_manager/
 [4]: https://docs.datadoghq.com/integrations/kube_scheduler/
-[5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane.html#monitor-control-plane-metrics
+[5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane/#monitor-control-plane-metrics
 [6]: https://docs.datadoghq.com/agent/cluster_agent/setup
 [7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
 [8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/

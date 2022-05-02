@@ -11,5 +11,5 @@ title: セキュリティプラットフォームガイド
     {{< nextlink href="/security_platform/guide/aws-config-guide-for-cloud-siem" >}}Cloud SIEM のための AWS 構成ガイド{{< /nextlink >}}
     {{< nextlink href="security_platform/guide/monitor-authentication-logs-for-security-threats" >}}モニター認証ログによるセキュリティ対策{{< /nextlink >}}
     {{< nextlink href="/security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api" >}}Cloud SIEM API を使用したセキュリティフィルター{{< /nextlink >}}
-    {{< nextlink href="/security_platform/guide/how-appsec-works/" >}}Datadog におけるアプリケーションセキュリティの仕組み{{< /nextlink >}}
+    {{< nextlink href="/security_platform/guide/how-appsec-works/" >}}Datadog におけるアプリケーションセキュリティモニタリングの仕組み{{< /nextlink >}}
 {{< /whatsnext >}}

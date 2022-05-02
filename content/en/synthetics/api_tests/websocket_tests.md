@@ -68,7 +68,7 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per WebSocket test.
 
-{{< img src="synthetics/api_tests/websocket_assertions.png" alt="Define assertions for your WebSocket test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/websocket_assertions.png" alt="Define assertions for your WebSocket test to succeed or fail on" style="width:90%;" >}}
 
 ### Select locations
 

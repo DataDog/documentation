@@ -1,23 +1,27 @@
 ---
 categories:
-  - orchestration
+- orchestration
 ddtype: crawler
 dependencies: []
-description: Consultez et recherchez des tâches Fabric depuis votre flux d'événements Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/fabric/'
+description: Consultez et recherchez des tâches Fabric depuis votre flux d'événements
+  Datadog.
+doc_link: https://docs.datadoghq.com/integrations/fabric/
 draft: false
 git_integration_title: fabric
 has_logo: true
 integration_id: fabric
 integration_title: Fabric
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: fabric
 public_title: Intégration Datadog/Fabric
-short_description: Consultez et recherchez des tâches Fabric depuis votre flux d'événements Datadog.
+short_description: Consultez et recherchez des tâches Fabric depuis votre flux d'événements
+  Datadog.
 version: '1.0'
 ---
+
 ## Présentation
 
 **Attention** : cette intégration est obsolète et n'est plus activement développée.

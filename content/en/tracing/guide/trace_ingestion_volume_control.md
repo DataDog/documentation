@@ -100,18 +100,18 @@ Head-based sampling is configurable in the tracing libraries or from the Datadog
 
 | ingestion reason   | Where             | Ingestion Mechanism Description | Default |
 |--------------------|-------------------|-----------------------|---------|
-| `auto`             | Agent             | The Datadog Agent distributes sampling rates to tracing libraries.    | 10 traces per second per Agent |
-| `rule`             | Tracing Libraries | The libraries' defined sampling percentage for specific services.   | null                 |
+| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | The Datadog Agent distributes sampling rates to tracing libraries.    | 10 traces per second per Agent |
+| `rule`             | [Tracing Libraries](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | The libraries' defined sampling percentage for specific services.   | null                 |
 
 
 Several other ingestion reasons are surfaced in the Ingestion Control page and as a tag on the `datadog.estimated_usage.apm.ingested_bytes` metric. These ingestion reasons may be responsible for your ingestion volume:
 
 | ingestion reason   | Where             | Ingestion Mechanism Description | Default |
 |--------------------|-------------------|-----------------------|---------|
-| `error`            | Agent             | Sampling of errors uncaught by the head-based sampling.             | 10 traces per second per Agent (null, if rules are defined) |
-| `rare`            | Agent             |  Sampling of rare traces (catching all combinations of a set of span tags).        | 5 traces per second per Agent (null, if rules are defined) |
+| `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Sampling of errors uncaught by the head-based sampling.             | 10 traces per second per Agent (null, if rules are defined) |
+| `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Sampling of rare traces (catching all combinations of a set of span tags).        | 5 traces per second per Agent (null, if rules are defined) |
 | `manual`             | In-code         | In-code decision override to keep/drop a span and its children.    | null |
-| `analytics`          | Agent and Tracing Libraries | Deprecated ingestion mechanism that samples single spans without the full trace.   | null                 |
+| `analytics`          | Agent and Tracing Libraries | [Deprecated ingestion mechanism][11] that samples single spans without the full trace.   | null                 |
 
 Additionally, other products can be responsible for sampled span volume:
 
@@ -130,8 +130,9 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [3]: /tracing/guide/metrics_namespace/
 [4]: /tracing/generate_metrics/
 [5]: /monitors/create/types/apm/?tab=analytics
-[6]: /tracing/trace_ingestion/mechanisms/#head-based-default-mechanism
+[6]: /tracing/trace_ingestion/mechanisms/#head-based-sampling
 [7]: /tracing/trace_retention/usage_metrics/
 [8]: /tracing/trace_ingestion/mechanisms#error-traces
 [9]: /tracing/trace_ingestion/mechanisms#rare-traces
 [10]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[11]: /tracing/legacy_app_analytics

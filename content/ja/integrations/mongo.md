@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/mongodb
+- /ja/integrations/mongodb
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -19,19 +19,20 @@ assets:
     slow_queries: assets/saved_views/slow_queries.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/mongo/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
 display_name: MongoDB
 draft: false
 git_integration_title: mongo
 guid: d51c342e-7a02-4611-a47f-1e8eade5735c
 integration_id: mongodb
 integration_title: MongoDB
+integration_version: 3.2.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -40,15 +41,18 @@ metric_prefix: mongodb.
 metric_to_check: mongodb.connections.available
 name: mongo
 process_signatures:
-  - mongod
+- mongod
 public_title: Datadog-MongoDB インテグレーション
 short_description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![MongoDB ダッシュボード][1]
 
 ## 概要
@@ -134,7 +138,7 @@ db.createUser({
 
 ##### Agent の構成
 メンバーごとに 1 つの Agent を構成する必要があります。コンフィギュレーションオプションについては、以下を参照してください。
-注: [MongoDB ドキュメント][1]に記載されているように、アービターノードのモニタリングはリモートではサポートされていません。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
+**注**: [MongoDB ドキュメント][1]に記載されているように、アービターノードのモニタリングはリモートではサポートされていません。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
 
 [1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
 {{% /tab %}}
@@ -173,7 +177,7 @@ db.createUser({
 2. コンフィギュレーションサーバーのメンバーごとに 1 つの Agent を構成します。
 3. mongos プロキシを介してクラスターに接続するように 1 つの追加 Agent を構成します。この mongos プロキシは、監視目的専用の新しい mongos プロキシでも、既存の mongos プロキシでもかまいません。
 
-**注**: アービターノードの監視はサポートされていません (詳細については、[MongoDB ドキュメント][1]を参照してください)。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
+**注**: アービターノードの監視はサポートされていません (詳細については、[MongoDB Replica Set Arbiter][1] を参照してください)。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
 
 [1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
 {{% /tab %}}
@@ -182,7 +186,7 @@ db.createUser({
 
 ### コンフィギュレーション
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -283,12 +287,12 @@ _Agent バージョン 6.0 以降で利用可能_
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mongo"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"hosts": ["%%host%%:%%port%%""], "username": "datadog", "password" : "<UNIQUEPASSWORD>", "database": "<DATABASE>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"hosts": ["%%host%%:%%port%%"], "username": "datadog", "password" : "<UNIQUEPASSWORD>", "database": "<DATABASE>"}]'
 ```
 
 ##### ログの収集
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
 次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
@@ -353,7 +357,7 @@ spec:
 
 ##### ログの収集
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
 
@@ -422,7 +426,7 @@ Agent コンテナで必要な環境変数
 
 _Agent バージョン 6.0 以降で利用可能_
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[ECS ログ収集ドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
 次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
@@ -509,7 +513,7 @@ Agent コンテナで必要な環境変数
 
 ## その他の参考資料
 
-Datadog を使用して MongoDB からメトリクスを収集する方法については、Datadog の一連のブログ記事を参照してください。
+お役に立つドキュメント、リンクや記事:
 
 - [MongoDB パフォーマンスメトリクスの監視 (WiredTiger)][6]
 - [MongoDB パフォーマンスメトリクスの監視 (MMAP)][7]
