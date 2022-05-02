@@ -167,7 +167,7 @@ The `is_exact_match` conditional variable also supports [`{{value}}` template va
 {{/is_exact_match}}
 ```
 
-To customize the content of your notification  if the value that breached the threshold of your monitor is 5, use the following:
+To customize the content of your notification if the value that breached the threshold of your monitor is 5, use the following:
 
 ```text
 {{#is_exact_match "value" "5"}}
