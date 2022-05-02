@@ -1,54 +1,65 @@
 ---
 aliases:
-  - /fr/integrations/postgresql
+- /fr/integrations/postgresql
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    postgresql: assets/dashboards/postgresql_dashboard.json
+    postgresql_screenboard: assets/dashboards/postgresql_screenboard_dashboard.json
   logs:
     source: postgresql
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    percent_usage_connections: assets/monitors/percent_usage_connections.json
+    replication_delay: assets/monitors/replication_delay.json
   saved_views:
     operations: assets/saved_views/operations.json
     postgres_pattern: assets/saved_views/postgres_pattern.json
+    postgres_processes: assets/saved_views/postgres_processes.json
     sessions_by_host: assets/saved_views/sessions_by_host.json
     slow_operations: assets/saved_views/slow_operations.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/postgres/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
 display_name: Postgres
+draft: false
 git_integration_title: postgres
 guid: e9ca29d5-5b4f-4478-8989-20d89afda0c9
 integration_id: postgres
 integration_title: Postgres
+integration_version: 12.3.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: postgresql.
 metric_to_check:
-  - postgresql.connections
-  - postgresql.max_connections
+- postgresql.connections
+- postgresql.max_connections
 name: postgres
 process_signatures:
-  - postgres -D
-  - pg_ctl start -l logfile
-  - postgres -c 'pg_ctl start -D -l
+- postgres -D
+- pg_ctl start -l logfile
+- postgres -c 'pg_ctl start -D -l
 public_title: Intégration Datadog/Postgres
-short_description: Recueillez une multitude de métriques relatives aux performances et à la santé de vos bases de données.
+short_description: Recueillez une multitude de métriques relatives aux performances
+  et à la santé de vos bases de données.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Graphique PostgreSQL][1]
 
 ## Présentation
@@ -59,6 +70,8 @@ Recueillez des métriques de PostgreSQL en temps réel pour :
 - Être informé des failovers et des événements PostgreSQL.
 
 ## Configuration
+
+<div class="alert alert-info">Cette page décrit le fonctionnement de l'intégration d'Agent Postgres. Si vous souhaitez obtenir des informations sur la solution Database Monitoring pour Postgres, consultez la section <a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Database Monitoring</a>.</div>
 
 ### Installation
 
@@ -85,8 +98,6 @@ create user datadog with password '<MOTDEPASSE>';
 grant SELECT ON pg_stat_database to datadog;
 ```
 
-**Remarque** : si vous souhaitez générer des métriques custom qui nécessitent d'interroger des tables supplémentaires, vous devrez peut-être accorder l'autorisation `CONNECT` à l'utilisateur `datadog` pour les tables concernées.
-
 Pour vérifier que les autorisations sont bien configurées, exécutez la commande suivante :
 
 ```shell
@@ -111,6 +122,8 @@ grant SELECT ON pg_stat_activity_dd to datadog;
 
 {{< tabs >}}
 {{% tab "Host" %}}
+
+**Remarque** : pour créer des métriques custom nécessitant d'interroger des tables supplémentaires, vous devrez peut-être accorder à l'utilisateur `datadog` l'autorisation `SELECT` pour ces tables. Exemple de commande : `grant SELECT on <NOM_TABLE> to datadog;`. Consultez la [rubrique FAQ](#faq) pour en savoir plus.
 
 #### Host
 
@@ -151,6 +164,10 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
        ## Note: If omitted, the default system postgres database is queried.
        #
        dbname: "<DB_NAME>"
+
+       # @param disable_generic_tags - boolean - optional - default: false
+       # The integration will stop sending server tag as is reduntant with host tag
+       disable_generic_tags: true
    ```
 
 2. [Redémarrez l'Agent][2].
@@ -164,11 +181,11 @@ L'APM Datadog s'intègre à Postgres pour vous permettre de visualiser les trace
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucune information détaillée. Il est conseillé d'enregistrer les logs dans un fichier en ajoutant des détails supplémentaires spécifiés en tant que préfixe dans la ligne de log. Consultez la [documentation PostgresSQL][5] à ce sujet pour en savoir plus.
+Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucune information détaillée. Il est conseillé d'enregistrer les logs dans un fichier en ajoutant des détails supplémentaires spécifiés en tant que préfixe dans la ligne de log. Pour en savoir plus, consultez la section [Rapports d'erreur et journalisation][5] de la documentation PostgreSQL (en anglais).
 
-1. La configuration du logging se fait depuis le fichier `/etc/postgresql/<VERSION>/main/postgresql.conf`. Pour recueillir des logs standard, y compris les sorties des déclarations, supprimez la mise en commentaire des paramètres suivants dans la section dédiée aux logs :
+1. La configuration de la journalisation se fait depuis le fichier `/etc/postgresql/<VERSION>/main/postgresql.conf`. Pour recueillir des logs standard, y compris les sorties des déclarations, supprimez la mise en commentaire des paramètres suivants dans la section dédiée aux logs :
 
    ```conf
      logging_collector = on
@@ -183,9 +200,9 @@ Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucun
      #log_destination = 'eventlog'
    ```
 
-2. Pour recueillir des métriques de durée détaillées et les rechercher depuis l'interface Datadog, vous devez les configurer directement au sein des déclarations. Comparez la configuration recommandée qui suit avec celle ci-dessus : vous noterez que dans les deux cas, les options `log_statement` et `log_duration` ont été mises en commentaire. Pour en savoir plus à ce sujet, consultez [cette discussion][6].
+2. Pour recueillir des métriques de durée détaillées et les rechercher depuis l'interface Datadog, vous devez les configurer directement au sein des déclarations. Comparez la configuration recommandée qui suit avec celle ci-dessus. **Remarque** : les options `log_statement` et `log_duration` ont été mises en commentaire. Pour en savoir plus à ce sujet, consultez la discussion [Déclaration de journalisation et durée sur la même ligne][6] (en anglais).
 
-    Cette configuration enregistre toutes les déclarations dans les logs, mais vous avez la possibilité d'enregistrer uniquement les déclarations qui dépassent une certaine durée en définissant la valeur `log_min_duration_statement` sur la durée minimum souhaitée (en millisecondes) :
+    Cette configuration enregistre toutes les déclarations dans les logs. Pour réduire le volume de la sortie à l'aide d'un critère de durée, définissez la valeur `log_min_duration_statement` sur la durée minimum souhaitée (en millisecondes) :
 
    ```conf
      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
@@ -228,19 +245,105 @@ Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucun
 [5]: https://www.postgresql.org/docs/11/runtime-config-logging.html
 [6]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
 {{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{% tab "Docker" %}}
 
-#### Environnement conteneurisé
+#### Docker
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Pour configurer ce check lorsque l'Agent est exécuté sur un conteneur :
 
 ##### Collecte de métriques
 
-| Paramètre            | Valeur                                                                           |
-| -------------------- | ------------------------------------------------------------------------------- |
-| `<NOM_INTÉGRATION>` | `postgres`                                                                      |
-| `<CONFIG_INIT>`      | vide ou `{}`                                                                   |
-| `<CONFIG_INSTANCE>`  | `{"host":"%%host%%", "port":5432,"username":"datadog","password":"<MOTDEPASSE>"}` |
+Définissez des [modèles d'intégration Autodiscovery][1] en tant qu'étiquettes Docker sur votre conteneur d'application :
+
+```yaml
+LABEL "com.datadoghq.ad.check_names"='["postgres"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"host":"%%host%%", "port":5432,"username":"datadog","password":"<MOT_DE_PASSE>"}]'
+```
+
+##### Collecte de logs
+
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][2].
+
+Définissez ensuite des [intégrations de logs][5] en tant qu'étiquettes Docker :
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source":"postgresql","service":"postgresql"}]'
+```
+
+##### Collecte de traces
+
+L'APM dédié aux applications conteneurisées est pris en charge sur les versions 6 et ultérieures de l'Agent, mais nécessite une configuration supplémentaire pour recueillir des traces.
+
+Variables d'environnement requises sur le conteneur de l'Agent :
+
+| Paramètre            | Valeur                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<DD_API_KEY>` | `api_key`                                                                  |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+
+Consultez la section [Tracer des applications Docker][4] pour voir la liste complète des variables d'environnement et configurations disponibles.
+
+Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à Postgres][3] et définissez `DD_AGENT_HOST` sur le nom du conteneur de votre Agent.
+
+
+[1]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/fr/agent/amazon_ecs/logs/?tab=linux
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+#### Kubernetes
+
+Pour configurer ce check lorsque l'Agent est exécuté sur Kubernetes :
+
+##### Collecte de métriques
+
+Définissez des [modèles d'intégration Autodiscovery][1] en tant qu'annotations de pod sur votre conteneur d'application. Cette configuration peut également être réalisée avec [un fichier, une configmap ou une paire key/value][2].
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  annotations:
+    ad.datadoghq.com/postgresql.check_names: '["postgres"]'
+    ad.datadoghq.com/postgresql.init_configs: '[{}]'
+    ad.datadoghq.com/postgresql.instances: |
+      [
+        {
+          "host": "%%host%%",
+          "port":"5432",
+          "username":"datadog",
+          "password":"<MOT_DE_PASSE>"
+        }
+      ]
+spec:
+  containers:
+    - name: postgres
+```
+
+##### Collecte de logs
+
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
+
+Définissez ensuite des [intégrations de logs][4] en tant qu'annotations de pod. Cette configuration peut également être réalisée avec [un fichier, une configmap ou une paire key/value][5].
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  annotations:
+    ad.datadoghq.com/postgres.logs: '[{"source":"postgresql","service":"<NOM_SERVICE>"}]'
+spec:
+  containers:
+    - name: postgres
+```
 
 ##### Collecte de traces
 
@@ -254,25 +357,82 @@ Variables d'environnement requises sur le conteneur de l'Agent :
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-Consultez les sections [Tracing d'applications Kubernetes][2] et [Configuration de DaemonSet Kubernetes][3] pour consulter la liste complète des variables d'environnement et configurations disponibles.
+Consultez les sections relatives au [tracing d'applications Kubernetes][6] et à la [configuration de DaemonSet Kubernetes][7] pour voir la liste complète des variables d'environnement et configurations disponibles.
 
-Ensuite, [instrumentez votre conteneur d'application][4] et définissez `DD_AGENT_HOST` sur le nom du conteneur de votre Agent.
+Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à Postgres][4].
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=daemonset#configuration
+[6]: https://docs.datadoghq.com/fr/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
+[7]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/service_checks.json
+{{% /tab %}}
+{{% tab "ECS" %}}
+
+#### ECS
+
+Pour configurer ce check lorsque l'Agent est exécuté sur ECS :
+
+##### Collecte de métriques
+
+Définissez des [modèles d'intégration Autodiscovery][1] en tant qu'étiquettes Docker sur votre conteneur d'application :
+
+```json
+{
+  "containerDefinitions": [{
+    "name": "postgres",
+    "image": "postgres:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.check_names": "[\"postgres\"]",
+      "com.datadoghq.ad.init_configs": "[{}]",
+      "com.datadoghq.ad.instances": "[{\"host\":\"%%host%%\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<MOT_DE_PASSE>\"}]"
+    }
+  }]
+}
+```
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][5].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Amazon ECS][2].
 
-| Paramètre      | Valeur                                               |
-| -------------- | --------------------------------------------------- |
-| `<CONFIG_LOG>` | `{"source": "postgresql", "service": "postgresql"}` |
+Définissez ensuite des [intégrations de logs][5] en tant qu'étiquettes Docker :
 
-[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/apm/?tab=java
-[3]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[4]: https://docs.datadoghq.com/fr/tracing/setup/
-[5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+```json
+{
+  "containerDefinitions": [{
+    "name": "postgres",
+    "image": "postgres:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.logs": "[{\"source\":\"postgresql\",\"service\":\"postgresql\"}]"
+    }
+  }]
+}
+```
+
+##### Collecte de traces
+
+L'APM dédié aux applications conteneurisées est pris en charge sur les versions 6 et ultérieures de l'Agent, mais nécessite une configuration supplémentaire pour recueillir des traces.
+
+Variables d'environnement requises sur le conteneur de l'Agent :
+
+| Paramètre            | Valeur                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<DD_API_KEY>` | `api_key`                                                                  |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+
+Consultez la section [Tracer des applications Docker][4] pour voir la liste complète des variables d'environnement et configurations disponibles.
+
+Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à Postgres][3] et définissez `DD_AGENT_HOST` sur l'[adresse IP privée EC2][5].
+
+[1]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/fr/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/fr/agent/docker/apm/
+[5]: https://docs.datadoghq.com/fr/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -288,14 +448,19 @@ Certaines des métriques répertoriées ci-dessous nécessitent une configuratio
 {{< get-metrics-from-git "postgres" >}}
 
 
+Avec la version `7.32.0` et les versions ultérieures de l'Agent, si vous avez activé Database Monitoring, les tags `state`, `app`, `db` et `user` sont appliqués à la métrique `postgresql.connections`.
+
 ### Événements
 
 Le check PostgreSQL n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "postgres" >}}
 
-**postgres.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance PostgreSQL qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
+
+## Dépannage
+
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Pour aller plus loin
 
@@ -303,22 +468,23 @@ Documentation, liens et articles supplémentaires utiles :
 
 ### FAQ
 
-- [Comment recueillir des métriques custom avec PostgreSQL][5]
+- [Comment recueillir des métriques custom avec PostgreSQL][6]
 
 ### Articles de blog
 
-- [Réduire les délais d'exécution des requêtes Postgres par 100 en modifiant une simple ligne][6]
-- [Métriques clés pour la surveillance PostgreSQL][7]
-- [Recueillir des métriques avec les outils de surveillance PostgreSQL][8]
-- [Comment recueillir et surveiller les données PostgreSQL avec Datadog][9]
+- [Réduire les délais d'exécution des requêtes Postgres par 100 en modifiant une simple ligne][7]
+- [Métriques clés pour la surveillance PostgreSQL][8]
+- [Recueillir des métriques avec les outils de surveillance PostgreSQL][9]
+- [Comment recueillir et surveiller les données PostgreSQL avec Datadog][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/integrations/faq/postgres-custom-metric-collection-explained/
-[6]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
-[7]: https://www.datadoghq.com/blog/postgresql-monitoring
-[8]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
-[9]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
+[5]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/integrations/faq/postgres-custom-metric-collection-explained/
+[7]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
+[8]: https://www.datadoghq.com/blog/postgresql-monitoring
+[9]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
+[10]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
