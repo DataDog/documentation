@@ -159,7 +159,7 @@ To notify your dev team if a triggering host has the name `production`, use the 
 {{/is_exact_match}}
 ```
 
-The `is_exact_match` conditional variable also supports [`{{value}}` template variable](#template-variables):
+The `is_exact_match` conditional variable also supports [`{{value}}` template variables](#template-variables):
 
 ```text
 {{#is_exact_match "value" "<VALUE>"}}
