@@ -171,7 +171,7 @@ To notify your dev team if the value that breached the threshold of your monitor
 
 ```text
 {{#is_exact_match "value" "5"}}
-  This displays if the value that breached the threshold of the monitor is 5. @slack-example
+  This displays if the value that breached the threshold of the monitor is 5. @dev-team@company.com
 {{/is_exact_match}}
 ```
 
