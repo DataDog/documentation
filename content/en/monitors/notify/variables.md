@@ -171,7 +171,7 @@ To customize the content of your notification if the value that breached the thr
 
 ```text
 {{#is_exact_match "value" "5"}}
-  This displays if the value that breached the threshold of the monitor is 5.
+  This displays if the value that breached the threshold of the monitor is 5. @slack-example
 {{/is_exact_match}}
 ```
 
