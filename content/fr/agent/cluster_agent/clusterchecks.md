@@ -1,55 +1,79 @@
 ---
-title: Exécuter des checks de cluster avec Autodiscovery
-kind: documentation
 aliases:
-  - /fr/agent/autodiscovery/clusterchecks
+- /fr/agent/autodiscovery/clusterchecks
 further_reading:
-  - link: /agent/kubernetes/cluster/
-    tag: Documentation
-    text: Documentation sur l'Agent de cluster
+- link: /agent/kubernetes/cluster/
+  tag: Documentation
+  text: Documentation sur l'Agent de cluster
+kind: documentation
+title: Exécuter des checks de cluster avec Autodiscovery
 ---
+
 ## Présentation
 
-L'Agent Datadog est capable d'identifier automatiquement vos conteneurs et de créer des configurations de check via [le système Autodiscovery][1].
+L'Agent Datadog peut découvrir automatiquement vos conteneurs et créer des configurations de check basées sur ces workloads via [le mécanisme Autodiscovery][1].
 
-Grâce aux checks de cluster, il est possible d'utiliser ce mécanisme pour surveiller des charges de travail non conteneurisées, y compris les suivantes :
+Grâce aux checks de cluster, il est possible d'utiliser ce mécanisme pour surveiller des workloads non conteneurisés, notamment :
 
-- Datastores et endpoints hors cluster (par exemple, RDS ou CloudSQL).
-- Services de cluster à équilibrage de charge (par exemple, les services Kubernetes).
+- Des datastores et des endpoints exécutés en dehors de votre cluster (par exemple, RDS ou CloudSQL)
+- Des services de cluster à équilibrage de charge (par exemple, les services Kubernetes)
 
-Pour vérifier qu'une seule instance de chaque check s'exécute, [l'Agent de cluster][2] récupère les configurations et les distribue de façon dynamique aux Agents de nœud. Les Agents se connectent à l'Agent de cluster toutes les 10 secondes et récupèrent les configurations à exécuter. Si un Agent cesse d'envoyer des informations, l'Agent de cluster le supprime du pool actif et distribue les configurations aux autres Agents. De cette façon, seule une instance s'exécute en permanence, même lorsque des nœuds sont ajoutés ou supprimés du cluster.
+Cette approche permet de vérifier qu'**une seule** instance de chaque check s'exécute, et ainsi d'éviter que **chaque** pod d'Agent de nœud exécute le check en question. L'[Agent de cluster][2] récupère les configurations et les distribue de façon dynamique aux Agents de nœud. Les Agents se connectent à l'Agent de cluster toutes les 10 secondes et récupèrent les configurations à exécuter. Si un Agent cesse d'envoyer des informations, l'Agent de cluster le supprime du pool actif et distribue les configurations aux autres Agents. De cette façon, seule une instance s'exécute en permanence, même lorsque des nœuds sont ajoutés ou supprimés du cluster.
 
 Les métriques, les événements et les checks de service recueillis par les checks de cluster sont envoyés sans hostname, car cette information n'est pas utile. Un tag `cluster_name` est ajouté pour vous permettre de filtrer vos données et de les visualiser dans un contexte spécifique.
 
-Cette fonction est prise en charge par Kubernetes pour les versions 6.9.0 et ultérieures de l'Agent et les versions 1.2.0 et ultérieures de l'Agent de cluster.
+Vous pouvez adopter cette approche si votre infrastructure est configurée de façon à être hautement disponible.
 
-## Configurer des checks de cluster
+## Configurer la distribution des checks de cluster
+Pour configurer la distribution des checks de cluster, vous devez d'abord activer la fonction de distribution de l'Agent de cluster, puis vérifier que les Agents sont prêts de recevoir les configurations provenant du fournisseur `clusterchecks`. Les configurations peuvent alors être transmises à l'Agent de cluster via les fichiers de configuration montés ou les annotations de service Kubernetes.
 
+{{< tabs >}}
+{{% tab "Helm" %}}
+La distribution des checks de cluster est activée par défaut dans le déploiement Helm de l'Agent de cluster, via la clé de configuration `datadog.clusterChecks.enabled` :
+```yaml
+datadog:
+  clusterChecks:
+    enabled: true
+  # (...)
+clusterAgent:
+  enabled: true
+  # (...)
+```
+
+L'Agent de cluster peut ainsi gérer les checks de cluster et traiter les configurations fournies par les annotations de service Kubernetes (`kube_services`).
+{{% /tab %}}
+{{% tab "Operator" %}}
+Pour activer la distribution des checks de cluster dans le déploiement de l'Operator de l'Agent de cluster, utilisez la clé de configuration `clusterAgent.config.clusterChecksEnabled` :
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  # (...)
+  clusterAgent:
+    config:
+      clusterChecksEnabled: true
+```
+
+L'Agent de cluster peut ainsi gérer les checks de cluster et traiter les configurations fournies par les annotations de service Kubernetes (`kube_services`).
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 ### Agent de cluster
 
-Cette fonction requiert un [Agent de cluster][3] en cours d'exécution.
+Pour bénéficier de cette fonctionnalité, vous devez exécuter l'[Agent de cluster][1]. Une fois l'Agent de cluster exécuté, apportez les modifications suivantes à son déploiement :
 
-Ensuite, activez la fonction Check de cluster :
-
-Depuis la version 1.2.0 de l'Agent de cluster Datadog, il est possible d'utiliser le système Autodiscovery sur des ressources de cluster non conteneurisées. Pour activer cette fonction, effectuez les modifications suivantes sur le déploiement de l'Agent de cluster :
-
-1. Définissez `DD_CLUSTER_CHECKS_ENABLED` sur `true`.
+1. Définissez la variable d'environnement `DD_CLUSTER_CHECKS_ENABLED` sur `true`.
 2. Transmettez le nom de votre cluster avec `DD_CLUSTER_NAME`. Datadog injecte ce nom sous forme d'un tag d'instance `cluster_name` dans toutes les configurations pour vous permettre de filtrer vos métriques.
-3. La durée du bail d'élection conseillée est de 15 secondes. Définissez-la avec la variable d'environnement `DD_LEADER_LEASE_DURATION`.
-4. Si le nom du service n'est pas identique à la valeur par défaut `datadog-cluster-agent`, assurez-vous que la variable d'environnement `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` tient compte de ce nom de service.
-
-Les deux sources de configuration suivantes sont prises en charge. [Elles sont décrites dans la documentation relative à Autodiscovery][1] :
-
-- Vous pouvez monter les fichiers YAML à partir d'une ConfigMap dans le dossier `/conf.d`. Ils seront automatiquement importés par le point d'entrée de l'image.
-- Pour annoter les services Kubernetes, vous devez définir les variables d'environnement `DD_EXTRA_CONFIG_PROVIDERS` et `DD_EXTRA_LISTENERS` sur `kube_services`.
-
-Notez que les hostnames ne sont pas liés aux métriques de checks de cluster, ce qui limite l'utilisation des tags de host et de la variable d'environnement `DD_TAGS`. Pour ajouter des tags aux métriques de checks de cluster, utilisez la variable d'environnement `DD_CLUSTER_CHECKS_EXTRA_TAGS`.
+3. Si le nom du service n'est pas identique à la valeur par défaut `datadog-cluster-agent`, assurez-vous que la variable d'environnement `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` tient compte de ce nom de service.
+4. Pour que l'Agent de cluster puisse traiter les configurations fournies par les annotations de service Kubernetes, définissez les **deux** variables d'environnement `DD_EXTRA_CONFIG_PROVIDERS` et `DD_EXTRA_LISTENERS` sur `kube_services`.
 
 ### Agent
 
 Activez le fournisseur de configuration `clusterchecks` dans l'Agent Datadog exécuté sur le **Node**. Pour ce faire, deux solutions s'offrent à vous :
 
-- Vous pouvez définir la variable d'environnement `DD_EXTRA_CONFIG_PROVIDERS`. Si plusieurs valeurs doivent être définies, séparez-les par des espaces dans la chaîne :
+- **Recommandé** : vous pouvez définir la variable d'environnement `DD_EXTRA_CONFIG_PROVIDERS` dans le DaemonSet de votre Agent. Si plusieurs valeurs doivent être définies, séparez-les par des espaces dans la chaîne :
 
     ```text
     DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
@@ -63,16 +87,14 @@ Activez le fournisseur de configuration `clusterchecks` dans l'Agent Datadog ex�
           polling: true
     ```
 
-[Redémarrez l'Agent][11] pour prendre en compte le changement de configuration.
+[1]: /fr/agent/cluster_agent/setup/
+{{% /tab %}}
+{{< /tabs >}}
 
-**Remarque** : le [chart Helm Datadog][4] offre la possibilité de déployer, via le champ `clusterChecksRunner`, un ensemble d'Agents Datadog configurés pour exécuter des checks de cluster uniquement.
 
-### Checks custom
+**Remarque** : avec les checks de cluster, les métriques transmises par l'Agent ne sont pas associées à un hostname. En effet, elles servent à fournir des informations sur un cluster, et non sur un host. Ainsi, ces métriques n'héritent d'aucun tag associé au host concerné, même ceux généralement fournis par un fournisseur cloud ou ajoutés par la variable d'environnement `DD_TAGS` de l'Agent. Pour ajouter des tags à des métriques de check de cluster, utilisez la variable d'environnement `DD_CLUSTER_CHECKS_EXTRA_TAGS`.
 
-L'exécution de [checks custom de l'Agent][5] en tant que checks de cluster est prise en charge, tant que tous les Agents de nœud sont en mesure de les exécuter. Cela signifie que le code de vos checks :
-
-- Doit être installé sur tous les Agents de nœud où le fournisseur de configuration `clusterchecks` est activé.
-- Ne doit **pas** dépendre de ressources locales qui ne sont pas accessibles par tous les Agents.
+Le [chart Helm Datadog][3] et l'[Operator Datadog][4] vous permettent également de déployer des exécuteurs de checks de cluster. Cet ensemble limité d'Agents Datadog est spécifiquement configuré de façon à exécuter uniquement les checks de cluster distribués. Ils permettent d'éviter la distribution des checks aux Agents de nœud.
 
 ### Distribution avancée
 
@@ -80,13 +102,13 @@ L'Agent de cluster peut être configuré pour utiliser une logique de distributi
 
 #### Configuration de l'Agent de cluster
 
-En plus des étapes mentionnées dans la section [Configuration de l'Agent de cluster][3], vous devez définir `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` sur `true`.
+En plus des étapes indiquées dans la section relative à la configuration de l'Agent de cluster, vous devez définir la variable d'environnement `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` sur `true`.
 
-#### Configuration de l'exécuteur de checks de cluster
+#### Configuration de l'Agent
 
-Les variables d'environnement suivantes sont requises pour configurer les exécuteurs de checks de cluster (ou Agents de nœud) de façon à ce qu'ils exposent les statistiques de leurs checks. Les statistiques sont utilisées par l'Agent de cluster et permettent d'optimiser la logique de distribution des checks.
+Les variables d'environnement suivantes sont requises pour configurer les Agents de nœud (ou les exécuteurs de checks de cluster) de façon à ce qu'ils exposent les statistiques de leurs checks. Les statistiques sont utilisées par l'Agent de cluster et permettent d'optimiser la logique de distribution des checks de cluster.
 
-```
+```yaml
   env:
     - name: DD_CLC_RUNNER_ENABLED
       value: "true"
@@ -95,30 +117,100 @@ Les variables d'environnement suivantes sont requises pour configurer les exécu
         fieldRef:
           fieldPath: status.podIP
 ```
+### Checks custom
+L'exécution de [checks custom de l'Agent][5] en tant que checks de cluster est prise en charge, tant que tous les Agents de nœud sont en mesure de les exécuter. Cela signifie que le code de vos checks custom :
+
+- doit être installé sur tous les Agents de nœud où le fournisseur de configuration `clusterchecks` est activé ;
+- ne doit **pas** dépendre de ressources locales qui ne sont pas accessibles par tous les Agents.
 
 ## Configuration des checks
 
-### Configuration statique dans un fichier
+### Configuration à partir de fichiers de configuration statiques
+Lorsque l'URL ou l'IP d'une ressource donnée est fixe (par exemple, un endpoint de service externe ou une URL publique), une configuration statique peut être passée à l'Agent de cluster sous la forme de fichiers YAML. La syntaxe et la convention de nommage des fichiers sont identiques à celles des configurations statiques sur les Agents de nœud. Vous devez toutefois **impérativement** ajouter la ligne `cluster_check: true`.
 
-Lorsque l'IP d'une ressource donnée est fixe (endpoint de service externe, URL publique, etc.), une configuration statique peut être passée à l'Agent de cluster sous la forme d'un fichier YAML. La syntaxe et la convention de nommage des fichiers sont les mêmes que pour les configurations statiques sur les Agents de nœud, avec l'ajout de la ligne `cluster_check: true`.
+{{< tabs >}}
+{{% tab "Helm" %}}
+Pour Helm, ces fichiers de configuration peuvent être créés au sein de la section `clusterAgent.confd`. **Remarque** : ne confondez pas cette section avec la section `datadog.confd` où les fichiers sont créés dans les Agents de nœud. Remplacez le placeholder `<NOM_INTÉGRATION>` par le nom précis du check d'intégration que vous souhaitez exécuter.
 
-#### Check MySQL sur une base de données CloudSQL
+```yaml
+#(...)
+clusterAgent:
+  confd:
+    <NOM_INTÉGRATION>.yaml: |-
+      cluster_check: true
+      init_config:
+        - <CONFIG_INIT>
+      instances:
+        - <CONFIG_INSTANCES>
+```
+{{% /tab %}}
+{{% tab "Daemonset" %}}
+Pour cette approche manuelle, vous devez créer une `ConfigMap` afin de stocker les fichiers de configuration statiques de votre choix, puis la monter sur le fichier `/conf.d` correspondant du conteneur de l'Agent de cluster. Il s'agit de la même logique que pour le [montage de ConfigMaps sur l'Agent de conteneur][1]. Exemple :
 
-Après avoir configuré une instance CloudSQL et un [utilisateur Datadog][6], montez un fichier `/conf.d/mysql.yaml` dans le conteneur de l'Agent de cluster avec le contenu suivant :
+```yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: "<NOM>-config-map"
+data:
+  <NOM_INTÉGRATION>-config: |-
+    cluster_check: true
+    init_config:
+      <CONFIG_INIT>
+    instances:
+      <CONFIG_INSTANCES>
+```
+
+Définissez ensuite dans le manifeste du déploiement de l'Agent de cluster les paramètres `volumeMounts` et `volumes` s'appliquant à votre `ConfigMap`, ainsi que la clé correspondant à vos données.
+
+```yaml
+        volumeMounts:
+          - name: <NOM>-config-map
+            mountPath: /conf.d/
+            # (...)
+      volumes:
+        - name: <NOM>-config-map
+          configMap:
+            name: <NOM>-config-map
+            items:
+              - key: <NOM_INTÉGRATION>-config
+                path: <NOM_INTÉGRATION>.yaml
+          #(...)
+```
+Cela entraîne la création d'un fichier dans le répertoire `/conf.d/` de l'Agent de cluster correspondant à l'intégration. Exemples : `/conf.d/mysql.yaml` ou `/conf.d/http_check.yaml`.
+
+
+[1]: /fr/agent/kubernetes/integrations/?tab=configmap#configuration
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Exemple : check MySQL sur une base de données hébergée en externe
+
+Configure une base de données hébergée en externe, comme CloudSQL ou RDS, ainsi qu'un [utilisateur Datadog][6] pouvant y accéder. Montez ensuite un fichier `/conf.d/mysql.yaml` dans le conteneur de l'Agent de cluster avec le contenu suivant :
 
 ```yaml
 cluster_check: true
 init_config:
 instances:
-    - server: '<ADRESSE_IP_PRIVÉE>'
+    - server: "<ADRESSE_IP_PRIVÉE>"
       port: 3306
       user: datadog
-      pass: '<MOT_DE_PASSE>'
+      pass: "<VOTRE_MOT_DE_PASSE>"
 ```
 
-Le champ `cluster_check` informe l'Agent de cluster qu'il doit déléguer ce check à un Agent de nœud.
+#### Exemple : check HTTP sur une URL externe
 
-### Source du modèle : annotations de service Kubernetes
+Si vous souhaitez exécuter une fois par cluster un [check HTTP][7] sur une URL, montez un fichier `/conf.d/http_check.yaml` dans le conteneur de l'Agent de cluster avec le contenu suivant :
+
+```yaml
+cluster_check: true
+init_config:
+instances:
+    - name: "<NOM_EXEMPLE>"
+      url: "<URL_EXEMPLE>"
+```
+
+### Configuration à partir d'annotations de service Kubernetes
 
 Vous pouvez annoter des services avec la syntaxe suivante, similaire à celle utilisée pour l'[annotation de pods Kubernetes][1] :
 
@@ -128,22 +220,11 @@ ad.datadoghq.com/service.init_configs: '[<CONFIG_INIT>]'
 ad.datadoghq.com/service.instances: '[<CONFIG_INSTANCE>]'
 ```
 
-La [template variable][7] `%%host%%` est prise en charge et remplacée par l'IP du service. Les tags `kube_namespace` et `kube_service` sont automatiquement ajoutés à l'instance.
-
-### Source du modèle : étiquettes standard
-
-```yaml
-tags.datadoghq.com/env: "<ENV>"
-tags.datadoghq.com/service: "<SERVICE>"
-tags.datadoghq.com/version: "<VERSION>"
-```
-
-Les étiquettes `tags.datadoghq.com` définissent `env`, `service` et même `version` en tant que tags sur les données générées par le check.
-Ces étiquettes standard font partie du [tagging de service unifié][8].
+La [template variable][8] `%%host%%` est prise en charge et remplacée par l'IP du service. Les tags `kube_namespace` et `kube_service` sont automatiquement ajoutés à l'instance.
 
 #### Exemple : check HTTP sur un service basé sur NGINX
 
-La définition de service suivante expose les pods du déploiement `my-nginx` et exécute un [check HTTP][9] pour mesurer la latence du service à équilibrage de charge :
+La définition de service suivante expose les pods du déploiement `my-nginx` et exécute un [check HTTP][7] pour mesurer la latence du service à équilibrage de charge :
 
 ```yaml
 apiVersion: v1
@@ -174,7 +255,7 @@ spec:
         run: my-nginx
 ```
 
-De plus, chaque pod doit être surveillé avec le [check NGINX][10] pour permettre la surveillance de chaque worker ainsi que du service agrégé.
+De plus, chaque pod doit être surveillé avec le [check NGINX][9] pour permettre la surveillance de chaque worker ainsi que du service agrégé.
 
 ## Dépannage
 
@@ -182,7 +263,7 @@ Les checks de cluster étant distribués par nature, leur dépannage est un peu 
 
 ### Kubernetes : trouver l'Agent de cluster leader
 
-Lorsque l'élection de leader est activée, seul le leader distribue les configurations de check de cluster aux Agents de nœud. Le nom du leader est disponible dans la ConfigMap `datadog-leader-election` :
+Lorsque l'élection de leader est activée, seul le leader distribue les configurations de check de cluster aux Agents de nœud. Si un seul réplica du pod de l'Agent de cluster est exécuté, il s'agit du leader. Si vous exécutez plusieurs réplicas, vous pouvez identifier le nom du leader dans la `ConfigMap` de `datadog-leader-election` :
 
 ```yaml
 # kubectl get cm datadog-leader-election -o yaml
@@ -227,7 +308,7 @@ La commande `clusterchecks` vous permet d'inspecter l'état de la logique de dis
 - les checks qui sont distribués sur chaque nœud.
 
 ```text
-# kubectl exec <NOM_POD_AGENT_CLUSTER> agent clusterchecks
+# kubectl exec <NOM_POD_CLUSTER_AGENT> agent clusterchecks
 
 === 3 node-agents reporting ===
 Name                                            Running checks
@@ -246,7 +327,7 @@ name: My service
 tags:
 - kube_namespace:default
 - kube_service:my-nginx
-- cluster_name:ccheck_testing
+- cluster_name:example
 timeout: 1
 url: http://10.15.246.109
 ~
@@ -257,14 +338,14 @@ Init Config:
 
 **Remarque** : l'ID d'instance est différent de celui de la commande `configcheck`, car l'instance est modifiée pour ajouter des tags et des options.
 
-Dans le cas présent, cette configuration est distribuée au nœud `default-pool-bce5cd34-ttw6`. Le dépannage peut continuer à partir de là.
+Dans le cas présent, cette configuration est distribuée au nœud `default-pool-bce5cd34-ttw6`. Le dépannage du pod de l'Agent se poursuit sur le nœud correspondant.
 
 ### Autodiscovery dans l'Agent de nœud
 
 La commande `configcheck` de l'Agent doit afficher l'instance, avec la source `cluster-checks` :
 
 ```text
-# kubectl exec <NOM_POD_AGENT_NOEUD> agent configcheck
+# kubectl exec <NOM_POD_AGENT_NŒUD> agent configcheck
 ...
 === http_check check ===
 Source: cluster-checks
@@ -274,7 +355,7 @@ name: My service
 tags:
 - kube_namespace:default
 - kube_service:my-nginx
-- cluster_name:ccheck_testing
+- cluster_name:example
 timeout: 1
 url: http://10.15.246.109
 ~
@@ -285,7 +366,7 @@ Init Config:
 
 L'ID d'instance correspond à l'ID précédent.
 
-### Commande status de l'Agent
+### Agent status
 
 La commande `status` de l'Agent devrait indiquer que l'instance de check est en cours d'exécution et qu'elle envoie correctement des informations.
 
@@ -308,11 +389,10 @@ La commande `status` de l'Agent devrait indiquer que l'instance de check est en 
 
 [1]: /fr/agent/kubernetes/integrations/
 [2]: /fr/agent/cluster_agent/
-[3]: /fr/agent/cluster_agent/setup/
-[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
+[3]: /fr/agent/cluster_agent/clusterchecksrunner?tab=helm
+[4]: /fr/agent/cluster_agent/clusterchecksrunner?tab=operator
 [5]: /fr/developers/custom_checks/write_agent_check/
 [6]: /fr/integrations/mysql/
-[7]: /fr/agent/faq/template_variables/
-[8]: /fr/getting_started/tagging/unified_service_tagging
-[9]: /fr/integrations/http_check/
-[10]: /fr/integrations/nginx/
+[7]: /fr/integrations/http_check/
+[8]: /fr/agent/faq/template_variables/
+[9]: /fr/integrations/nginx/
