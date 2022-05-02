@@ -124,16 +124,18 @@ See the [list of integrations][15] that can be used to notify your team.
 
 **Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
 
-### Alert grouping
+### Notification Grouping
 
-Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If no group is specified, grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping defaults to `Multi Alert`.
+As a user, depending on your use case, having control over the granularity on which you receive notifications is crucial to avoid creating alerting noise during incidents. With the Notification Grouping section, it is possible to control when a notification should be sent, without compromising your alert query.
 
-`Simple Alert` mode aggregate over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
+Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If no group is specified, grouping defaults to `Single Notification`. If the query is grouped by any dimension, grouping defaults to `Separate Notification`.
 
-`Multi Alert` mode apply the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
+`Single Notification` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
+
+`Separate Notification` mode applies the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
 Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
 
-| Group by                       | Simple alert mode | Multi alert mode |
+| Group by                       | Single Notification mode | Separate Notification mode |
 |-------------------------------------|------------------------|-----------------------|
 | _(everything)_                      | One single group triggering one notification | N/A |
 | 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
