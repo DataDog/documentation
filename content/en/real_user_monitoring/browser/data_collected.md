@@ -104,7 +104,6 @@ The following attributes are related to the geo-location of IP addresses:
 | `geo.country`         | string | Name of the country.                                                                                                                  |
 | `geo.country_iso_code`     | string | [ISO Code][2] of the country (for example, `US` for the United States or `FR` for France).                                                  |
 | `geo.country_subdivision`     | string | Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France). |
-| `geo.country_subdivision_iso_code` | string | [ISO Code][2] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
 | `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).                                                                 |
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (for example, `Paris` or `New York`).                                                                                   |
