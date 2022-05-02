@@ -171,6 +171,10 @@ using (var parentScope =
 }
 ```
 
+## Trace client and Agent configuration
+
+There are additional configurations possible for both the tracing client and Datadog Agent for context propagation and for excluding specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
+
 ### Headers extraction and injection
 
 The Datadog APM Tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing. For more information, see the [setup documentation][7].
@@ -219,7 +223,7 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
 }
 ```
 
-## Resource filtering
+### Resource filtering
 
 You can exclude traces based on the resource name to remove Synthetics traffic such as health checks. For more information about security and additional configurations, see [Configure the Datadog Agent or Tracer for Data Security][11].
 
