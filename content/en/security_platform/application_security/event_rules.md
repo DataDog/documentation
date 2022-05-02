@@ -50,7 +50,7 @@ An input represents which part of the request the operator is applied to. The fo
 | `is_xss` | Special operator to check for cross-site scripting (XSS) payloads |
 | `is_sqli` | Special operator to check for SQL injection (SQLI) payloads |
 
-### Configure an ASM event rule in your service
+## Configure an ASM event rule in your service
 
 1. In Datadog, navigate to the [Event Rules page under ASM Configuration][2].
 
@@ -97,7 +97,7 @@ An input represents which part of the request the operator is applied to. The fo
 
 5. Restart your service.
 
-### What to do next
+## What to do next
 
 Next, [configure detection rules to create security signals][1] based on those suspicious requests defined by the event rules you created. You can modify the provided out-of-the-box ASM detection rules or create new ones. 
 
