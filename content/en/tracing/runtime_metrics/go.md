@@ -31,8 +31,8 @@ By default, runtime metrics from your application are sent every 10 seconds to t
 
 If `WithDogstatsdAddress` is not used, the Tracer attempts to determine the address of the statsd service according to the following rules:
   1. Look for /var/run/datadog/dsd.socket and use it if present. IF NOT, continue to #2.
-  2. The host is determined by DD_AGENT_HOST, and defaults to "localhost"
-  3. The port is retrieved from the agent. If not present, it is determined by DD_DOGSTATSD_PORT, and defaults to 8125
+  2. The host is determined by DD_AGENT_HOST, and defaults to "localhost".
+  3. The port is retrieved from the agent. If not present, it is determined by DD_DOGSTATSD_PORT, and defaults to 8125.
 
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent. Additionally, for:
 
