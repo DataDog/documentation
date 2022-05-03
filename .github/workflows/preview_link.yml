@@ -1,0 +1,46 @@
+name: Post preview link
+on:
+  pull_request:
+    paths:
+      - 'content/en/**.md'
+
+jobs:
+  preview-link:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Find changed files
+      id: changed_files
+      uses: jitterbit/get-changed-files@v1
+      continue-on-error: true
+    - name: Generate links
+      id: comment_body
+      run: |
+        for file in ${{ steps.changed_files.outputs.added_modified }}; do
+          echo "Checking file ${file}..."
+          if [[ "$file" =~ ^content/en/(.*).md$ ]]; then
+            body="${body}https://docs-staging.datadoghq.com/${{ github.head_ref }}/${BASH_REMATCH[1]}\n"
+          fi
+        done
+        printf "Preview links:\n$body"
+        # This terrible syntax is so we can pass a multi-line body to the "post comment" action
+        printf "COMMENT_BODY<<EOF\n" >> $GITHUB_ENV
+        printf "$body" >> $GITHUB_ENV
+        printf "EOF\n" >> $GITHUB_ENV
+    - name: Find existing comment
+      uses: peter-evans/find-comment@v2.0.0
+      id: find_comment
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: 'github-actions[bot]'
+        body-includes: "Preview links:"
+    - name: Post comment
+      uses: peter-evans/create-or-update-comment@v2.0.0
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-id: ${{ steps.find_comment.outputs.comment-id }}
+        edit-mode: replace
+        body: |
+          Preview links:
+          ${{ env.COMMENT_BODY }}
