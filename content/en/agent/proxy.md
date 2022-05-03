@@ -397,7 +397,7 @@ apm_config:
     apm_dd_url: http://haproxy.example.com:3835
     profiling_dd_url: http://haproxy.example.com:3836
     telemetry:
-        dd_url: http://haproxy.example.com:3841
+        dd_url: http://haproxy.example.com:3843
 
 process_config:
     process_dd_url: http://haproxy.example.com:3837
@@ -409,19 +409,15 @@ logs_config:
 
 database_monitoring:
     metrics:
-        logs_dd_url: haproxy.example.com:3839
-        logs_no_ssl: true
+        dd_url: haproxy.example.com:3839
     activity:
-        logs_dd_url: haproxy.example.com:3839
-        logs_no_ssl: true
+        dd_url: haproxy.example.com:3839
     samples:
-        logs_dd_url: haproxy.example.com:3840
-        logs_no_ssl: true
+        dd_url: haproxy.example.com:3840
 
 network_devices:
     metadata:
-        logs_dd_url: haproxy.example.com:3841
-        logs_no_ssl: true
+        dd_url: haproxy.example.com:3841
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate ({{< region-param key="dd_full_site" code="true" >}}) and your HAProxy hostname:
@@ -568,25 +564,39 @@ stream {
 
 #### Datadog Agent configuration
 
+Edit each Agent to point to Nginx by setting its `dd_url` to the address of Nginx, for example: `nginx.example.com`.
+This `dd_url` setting can be found in the `datadog.yaml` file.
+
+dd_url: http://nginx.example.com:3834
+
 To use the Datadog Agent v6/7.16+ as the logs collector, instruct the Agent to use the newly created proxy instead of establishing a connection directly with the logs intake by updating `datadog.yaml`:
 
 ```yaml
+apm_config:
+    apm_dd_url: http://nginx.example.com:3835
+    profiling_dd_url: http://nginx.example.com:3836
+    telemetry:
+        dd_url: http://nginx.example.com:3843
+
+process_config:
+    process_dd_url: http://nginx.example.com:3837
+
 logs_config:
-  use_http: true
-  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3838"
-  logs_no_ssl: true
+    use_http: true
+    logs_dd_url: nginx.example.com:3838
+    logs_no_ssl: true
 
 database_monitoring:
     metrics:
-        dd_url: "<PROXY_SERVER_DOMAIN>:3839"
+        dd_url: nginx.example.com:3839
     activity:
-        dd_url: "<PROXY_SERVER_DOMAIN>:3839"
+        dd_url: nginx.example.com:3839
     samples:
-        dd_url: "<PROXY_SERVER_DOMAIN>:3840"
+        dd_url: nginx.example.com:3840
 
 network_devices:
     metadata:
-        dd_url: "<PROXY_SERVER_DOMAIN>:3841"
+        dd_url: nginx.example.com:3841
 ```
 
 When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
