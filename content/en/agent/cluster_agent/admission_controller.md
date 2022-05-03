@@ -13,7 +13,7 @@ further_reading:
 ## Overview
 The Datadog admission controller is a component of the Datadog Cluster Agent. The main benefit of the admission controller is to simplify the user's application pod configuration. For that, it has two main functionalities:
 
-- Inject environment variables (`DD_AGENT_HOST` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's application containers.
+- Inject environment variables (`DD_AGENT_HOST`, `DD_TRACE_AGENT_URL` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's application containers.
 - Inject Datadog standard tags (`env`, `service`, `version`) from application labels into the container environment variables.
 
 Datadog's admission controller is `MutatingAdmissionWebhook` type. For more details on admission controllers, see the [Kubernetes guide][1].
@@ -152,7 +152,6 @@ The Datadog admission controller does not inject the environment variables `DD_V
 When these environment variables are not set, the admission controller will use standard tags value in the following order (highest first):
 - Labels on the pod
 - Labels on the ownerReference (ReplicaSets, DaemonSets, Deployments...)
-- `DD_VERSION`, `DD_ENV`, and `DD_SERVICE` set in the container (dockerfile)
 
 #### Configure APM and DogstatsD communication mode
 Starting from Datadog Cluster Agent v1.20.0, the Datadog Admission Controller can be configured to inject different mode of communication between the application and Datadog agent.
@@ -160,11 +159,11 @@ Starting from Datadog Cluster Agent v1.20.0, the Datadog Admission Controller ca
 This feature can be configured by setting `admission_controller.inject_config.mode` or by defining a pod-specific mode using the `admission.datadoghq.com/config.mode` pod label.
 
 Possible options:
-| Mode               | Description                                                                     |
-|--------------------|---------------------------------------------------------------------------------|
-| `hostip` (Default) | Inject the host IP in `DD_AGENT_HOST` environment variable                      |
-| `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable |
-| `socket`           | Inject volume definition to access the Datadog socket path                      |
+| Mode               | Description                                                                                                       |
+|--------------------|-------------------------------------------------------------------------------------------------------------------|
+| `hostip` (Default) | Inject the host IP in `DD_AGENT_HOST` environment variable                                                        |
+| `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable                                   |
+| `socket`           | Inject Unix Domain Socket path in `DD_TRACE_AGENT_URL` environment variable and the volume definition to access the corresponding path |
 
 **Note**: Pod-specific mode takes precedence over global mode defined at the Admission controller level.
 
