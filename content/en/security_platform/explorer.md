@@ -77,7 +77,7 @@ The query to see all threat intelligence matches in the Security Signals Explore
 
 ### Search by network IP attributes
 
-When Datadog Cloud SIEM detects suspicious activity from your logs, determine whether the suspicious actor has interacted with your systems by searching for the network IP. Use the following query to search by IP attributes in the Log Explorer: `@network.ip.list:<IP address>`. The query searches within the logs, including the tags, attributes, error, and message fields. 
+When Datadog Cloud SIEM detects suspicious activity from your logs, determine whether the suspicious actor has interacted with your systems by searching for its network IP. Use the following query to search by IP attributes in the Log Explorer: `@network.ip.list:<IP address>`. The query searches IPs anywhere within the logs, including the tags, attributes, error, and message fields. 
 
 {{< img src="security_platform/security_monitoring/explorer/network_ip_list.png" alt="The log explorer showing the result of a search using the network.ip.list attribute" style="width:80%;" >}}
 
