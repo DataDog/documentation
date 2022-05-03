@@ -27,12 +27,12 @@ tracer.Start(tracer.WithRuntimeMetrics())
 
 View runtime metrics in correlation with your Go services on the [Service page][1] in Datadog.
 
-By default, runtime metrics from your application are sent every 10 seconds to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2]. If your Datadog Agent DogStatsD address differs from the default `localhost:8125`, use the `WithDogstatsdAddress` option or the environment variables `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`.
+By default, runtime metrics from your application are sent every 10 seconds to the Datadog Agent with DogStatsD. Make sure that [DogStatsD is enabled for the Agent][2]. If your Datadog Agent DogStatsD address differs from the default `localhost:8125`, use the `WithDogstatsdAddress` option or the environment variables `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`. See the `WithDogstatsdAddress` documentation for information on how to configure the connection to [DogStatsD][3]
 
-If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port `8125` is open on the Agent. Additionally, for:
+If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent. Additionally, for:
 
-- **Kubernetes**: You _must_ [bind the DogstatsD port to a host port][4].
-- **ECS**: [Set the appropriate flags in your task definition][5].
+- **Kubernetes**: You _must_ [bind the DogstatsD port to a host port][5].
+- **ECS**: [Set the appropriate flags in your task definition][6].
 
 ## Data Collected
 
@@ -40,7 +40,7 @@ The following metrics are collected by default after enabling Go metrics.
 
 {{< get-metrics-from-git "go" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Go Runtime Dashboard][6].
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Go Runtime Dashboard][7].
 
 ## Further Reading
 
@@ -48,7 +48,8 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: /developers/dogstatsd/#setup
-[3]: /agent/docker/#dogstatsd-custom-metrics
-[4]: /developers/dogstatsd/?tab=kubernetes#agent
-[5]: /agent/amazon_ecs/#create-an-ecs-task
-[6]: https://app.datadoghq.com/dash/integration/30587/go-runtime-metrics
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
+[4]: /agent/docker/#dogstatsd-custom-metrics
+[5]: /developers/dogstatsd/?tab=kubernetes#agent
+[6]: /agent/amazon_ecs/#create-an-ecs-task
+[7]: https://app.datadoghq.com/dash/integration/30587/go-runtime-metrics
