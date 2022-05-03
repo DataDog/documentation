@@ -264,15 +264,16 @@ For more information, see the [DogStatsD for C# repository][1].
 
 {{< /programming-lang-wrapper >}}
 
-### Run multiple metrics processing pipeline to limit packet drops
+### Run multiple metrics processing pipelines to limit packet drops
 
 If you observe that your DogStatsD server using UDS is dropping packets at a high throughput, configuring it to use more CPU could help processing packets faster, and more of them.
 
 Symptoms are the client-side telemetry indicating that the client is dropping packets in its queue and the DogStatsD server not using more than 2 CPUs/2 cores while the server has more available.
 
-In order to reduce the amount of drops:
-- increase the client queue size to `8192`, please refer to the client library configuration to proceed. Once done, you should already observe the drops amount decrease, but your application may use slightly more RAM.
-- if first step is not enough, you can enable the feature `dogstatsd_pipeline_autoadjust: true` in your Datadog Agent configuration: if available, multiple cores will be used to process the custom metrics, leading to a higher CPU usage but the packet drops should be lower.
+To reduce the amount of packet drops:
+
+1. Increase the client queue size to `8192`. For more information, see the client library configuration. You may see the amount of drops decrease, and your application may use more RAM.
+2. Additionally, you can enable the `dogstatsd_pipeline_autoadjust: true` feature in your Datadog Agent configuration. The Agent uses multiple cores to process custom metrics, which may lead to higher CPU usage but lowers packet drops.
 
 ## Operating system kernel buffers
 
