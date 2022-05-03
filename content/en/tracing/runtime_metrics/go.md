@@ -27,12 +27,12 @@ tracer.Start(tracer.WithRuntimeMetrics())
 
 View runtime metrics in correlation with your Go services on the [Service page][1] in Datadog.
 
-By default, runtime metrics from your application are sent every 10 seconds to the Datadog Agent with DogStatsD. Make sure that [DogStatsD is enabled for the Agent][2]. If your Datadog Agent DogStatsD address differs from the default `localhost:8125`, use the [`WithDogstatsdAddress`][3] option (available starting in 1.18.0) or the environment variables `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`.
+By default, runtime metrics from your application are sent every 10 seconds to the Datadog Agent with DogStatsD. Make sure that [DogStatsD is enabled for the Agent][2]. If your Datadog Agent's DogStatsD address differs from the default `localhost:8125`, use the [`WithDogstatsdAddress`][3] option (available starting in 1.18.0) or the environment variables `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`.
 
 If `WithDogstatsdAddress` is not used, the Tracer attempts to determine the address of the statsd service according to the following rules:
   1. Look for `/var/run/datadog/dsd.socket` and use it if present. IF NOT, continue to #2.
   2. The host is determined by **DD_AGENT_HOST**, and defaults to "localhost".
-  3. The port is retrieved from the agent. If not present, it is determined by **DD_DOGSTATSD_PORT**, and defaults to 8125.
+  3. The port is retrieved from the agent. If not present, it is determined by **DD_DOGSTATSD_PORT**, and defaults to `8125`.
 
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent. Additionally, for:
 
