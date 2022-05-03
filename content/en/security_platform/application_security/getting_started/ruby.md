@@ -24,7 +24,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
 1. **Update your Gemfile to include the Datadog library**:
 
-   ```
+   ```ruby
    gem 'ddtrace', '~> 1.0'
    ```
 
@@ -38,13 +38,13 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 {{% tab "Rails" %}}
    Either enable the tracer through auto-instrumentation by updating your Gemfile:
 
-   ```
+   ```ruby
    gem 'ddtrace', '~> 1.0', require: 'ddtrace/auto_instrument'
    ```
 
    Or enable the tracer by adding an initializer in your application code:
 
-   ```
+   ```ruby
    # config/initializers/datadog.rb
 
    require 'datadog/appsec'
@@ -63,7 +63,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 {{% tab "Sinatra" %}}
    Enable the tracer by adding the following to your application's startup:
 
-   ```
+   ```ruby
    require 'ddtrace'
    require 'datadog/appsec'
 
@@ -81,7 +81,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 {{% tab "Rack" %}}
    Enable the tracer by adding the following to your `config.ru` file:
 
-   ```
+   ```ruby
    require 'ddtrace'
    require 'datadog/appsec'
 
@@ -108,7 +108,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
 Update your configuration container for APM by adding the following argument in your `docker run` command:
 
-```
+```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
@@ -117,7 +117,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```
+```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 
@@ -126,7 +126,7 @@ ENV DD_APPSEC_ENABLED=true
 
 Update your configuration yaml file container for APM and add the AppSec env variable:
 
-```
+```yaml
 spec:
   template:
     spec:
@@ -143,7 +143,7 @@ spec:
 
 Update your ECS task definition JSON file, by adding this in the  environment section:
 
-```
+```json
 "environment": [
   ...,
   {
@@ -157,7 +157,7 @@ Update your ECS task definition JSON file, by adding this in the  environment se
 {{% tab "AWS Fargate" %}}
 
 Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
-```
+```shell
 env DD_APPSEC_ENABLED=true rails server
 ```
 
