@@ -5650,6 +5650,18 @@ api:
         - GetCostByOrg
       unstable: []
       order: 39
+  - name: Get hourly usage for Application Security
+    url: '#get-hourly-usage-for-application-security'
+    identifier: get-hourly-usage-for-application-security
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUsageApplicationSecurityMonitoring
+      unstable: []
+      order: 38
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: get-all-custom-metrics-by-hourly-average
