@@ -625,6 +625,9 @@
           description: "Collect RUM data from your Flutter projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/README.md"]
           further_reading:
+            - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+              tag: "Blog"
+              text: "Monitor Flutter application performance with Datadog Mobile RUM"
             - link: "https://github.com/DataDog/dd-sdk-flutter"
               tag: "GitHub"
               text: "dd-sdk-flutter Source code"
