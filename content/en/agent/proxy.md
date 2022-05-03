@@ -564,7 +564,7 @@ stream {
 
 #### Datadog Agent configuration
 
-Edit each Agent to point to Nginx by setting its `dd_url` to the address of Nginx, for example: `nginx.example.com`.
+Edit each Agent configuration file to point to Nginx by setting its `dd_url` to the address of Nginx, for example: `nginx.example.com`.
 This `dd_url` setting can be found in the `datadog.yaml` file.
 
 dd_url: http://nginx.example.com:3834
