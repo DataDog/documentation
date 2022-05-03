@@ -88,7 +88,7 @@ net start w3svc
 ```
 
 **Or**, to avoid editing registry keys, edit the application settings in the `web.config` file of your application: 
-```
+```xml
 <configuration>
   <appSettings>
         <add key="DD_APPSEC_ENABLED" value="true"/>
@@ -97,7 +97,7 @@ net start w3svc
 ```
 
 This can also be done at the IIS application pools level in the `applicationHost.config` file, usually in `C:\Windows\System32\inetsrv\config\`: 
-```
+```xml
 <system.applicationHost>
 
     <applicationPools>
@@ -112,7 +112,7 @@ This can also be done at the IIS application pools level in the `applicationHost
 {{% tab "Linux" %}}
 
 Add the following to your application configuration: 
-```
+```shell
 DD_APPSEC_ENABLED=true
 ```
 {{% /tab %}}
@@ -120,7 +120,7 @@ DD_APPSEC_ENABLED=true
 
 Update your configuration container for APM by adding the following argument in your `docker run` command: 
 
-```
+```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
@@ -129,7 +129,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```
+```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 
@@ -138,7 +138,7 @@ ENV DD_APPSEC_ENABLED=true
 
 Update your deployment configuration file for APM and add the ASM environment variable:
 
-```
+```yaml
 spec:
   template:
     spec:
@@ -155,7 +155,7 @@ spec:
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
-```
+```json
 "environment": [
   ...,
   {
@@ -169,7 +169,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% tab "AWS Fargate" %}}
 
 Add the following line to your container Dockerfile:
-```
+```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 

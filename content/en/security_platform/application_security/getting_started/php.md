@@ -26,7 +26,7 @@ You can monitor application security for PHP apps running in Docker, Kubernetes,
 ## Get started
 
 1. **Install the latest Datadog PHP library** by downloading and running the installer:
-   ```
+   ```shell
    wget https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php -O datadog-setup.php
    php datadog-setup.php --php-bin all --enable-appsec
    ```
@@ -38,7 +38,7 @@ You can monitor application security for PHP apps running in Docker, Kubernetes,
 
 Update your configuration container for APM by adding the following argument in your `docker run` command: 
 
-```
+```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
@@ -47,7 +47,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```
+```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 
@@ -56,7 +56,7 @@ ENV DD_APPSEC_ENABLED=true
 
 Update your configuration yaml file container for APM and add the AppSec env variable:
 
-```
+```yaml
 spec:
   template:
     spec:
@@ -73,7 +73,7 @@ spec:
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
-```
+```json
 "environment": [
   ...,
   {

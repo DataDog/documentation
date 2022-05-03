@@ -24,14 +24,14 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 ## Get started
 
 1. **Update your [Datadog Java library][1]** to at least version 0.94.0:
-   ```
+   ```shell
    wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
    ```
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
 2. **Run your Java application with ASM enabled.** From the command line:
-   ```
+   ```shell
    java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
 
@@ -42,7 +42,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 Update your configuration container for APM by adding the following argument in your `docker run` command: 
 
-```
+```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
@@ -51,7 +51,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```
+```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 
@@ -60,7 +60,7 @@ ENV DD_APPSEC_ENABLED=true
 
 Update your deployment configuration file for APM and add the ASM environment variable:
 
-```
+```yaml
 spec:
   template:
     spec:
@@ -77,7 +77,7 @@ spec:
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
-```
+```json
 "environment": [
   ...,
   {
@@ -92,7 +92,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 Set the `-Ddd.appsec.enabled` flag or the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
 
-```
+```shell
 java -javaagent:dd-java-agent.jar \
      -Ddd.appsec.enabled=true \
      -jar <YOUR_SERVICE>.jar \

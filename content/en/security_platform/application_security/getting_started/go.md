@@ -56,7 +56,7 @@ $ docker run -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```
+```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 
@@ -65,7 +65,7 @@ ENV DD_APPSEC_ENABLED=true
 
 Update your deployment configuration file for APM and add the ASM environment variable:
 
-```
+```yaml
 spec:
   template:
     spec:
@@ -82,7 +82,7 @@ spec:
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
-```
+```json
 "environment": [
   ...,
   {
