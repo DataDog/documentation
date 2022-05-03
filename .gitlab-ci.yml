@@ -35,7 +35,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_update-golang
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:brian.deutsch_ignored_artifact
   tags:
     - "runner:main"
   except:
@@ -358,7 +358,7 @@ manage_untracked_translations:manual:
   cache: {}
   environment: "live"
   only:
-    - master
+    - brian.deutsch/gitignored_artifact
   script:
     - echo "Downloading untracked translation source files..."
     - manage_untracked_translation_files
