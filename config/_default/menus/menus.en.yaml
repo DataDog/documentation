@@ -506,7 +506,7 @@ main:
     url: watchdog/impact_analysis/
     identifier: watchdog_impact_analysis
     parent: watchdog_top_level
-    weight: 1 
+    weight: 1
   - name: RCA
     url: watchdog/rca/
     identifier: watchdog_rca

@@ -17270,6 +17270,13 @@
                     "example": "source:nginx",
                     "type": "string"
                   },
+                  "rehydration_max_scan_size_in_gb": {
+                    "description": "Maximum scan size for rehydration from this archive.",
+                    "example": 100,
+                    "format": "int64",
+                    "nullable": true,
+                    "type": "integer"
+                  },
                   "rehydration_tags": {
                     "description": "An array of tags to add to rehydrated logs from an archive.",
                     "example": [
@@ -17525,6 +17532,13 @@
             "example": "source:nginx",
             "type": "string"
           },
+          "rehydration_max_scan_size_in_gb": {
+            "description": "Maximum scan size for rehydration from this archive.",
+            "example": 100,
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
           "rehydration_tags": {
             "description": "An array of tags to add to rehydrated logs from an archive.",
             "example": [
@@ -17763,6 +17777,13 @@
                     "example": "source:nginx",
                     "type": "string"
                   },
+                  "rehydration_max_scan_size_in_gb": {
+                    "description": "Maximum scan size for rehydration from this archive.",
+                    "example": 100,
+                    "format": "int64",
+                    "nullable": true,
+                    "type": "integer"
+                  },
                   "rehydration_tags": {
                     "description": "An array of tags to add to rehydrated logs from an archive.",
                     "example": [
@@ -17993,6 +18014,13 @@
             "example": "source:nginx",
             "type": "string"
           },
+          "rehydration_max_scan_size_in_gb": {
+            "description": "Maximum scan size for rehydration from this archive.",
+            "example": 100,
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
           "rehydration_tags": {
             "description": "An array of tags to add to rehydrated logs from an archive.",
             "example": [
@@ -18210,6 +18238,13 @@
                 "description": "The archive query/filter. Logs matching this query are included in the archive.",
                 "example": "source:nginx",
                 "type": "string"
+              },
+              "rehydration_max_scan_size_in_gb": {
+                "description": "Maximum scan size for rehydration from this archive.",
+                "example": 100,
+                "format": "int64",
+                "nullable": true,
+                "type": "integer"
               },
               "rehydration_tags": {
                 "description": "An array of tags to add to rehydrated logs from an archive.",
@@ -18617,6 +18652,13 @@
                 "description": "The archive query/filter. Logs matching this query are included in the archive.",
                 "example": "source:nginx",
                 "type": "string"
+              },
+              "rehydration_max_scan_size_in_gb": {
+                "description": "Maximum scan size for rehydration from this archive.",
+                "example": 100,
+                "format": "int64",
+                "nullable": true,
+                "type": "integer"
               },
               "rehydration_tags": {
                 "description": "An array of tags to add to rehydrated logs from an archive.",
@@ -19461,6 +19503,13 @@
                       "description": "The archive query/filter. Logs matching this query are included in the archive.",
                       "example": "source:nginx",
                       "type": "string"
+                    },
+                    "rehydration_max_scan_size_in_gb": {
+                      "description": "Maximum scan size for rehydration from this archive.",
+                      "example": 100,
+                      "format": "int64",
+                      "nullable": true,
+                      "type": "integer"
                     },
                     "rehydration_tags": {
                       "description": "An array of tags to add to rehydrated logs from an archive.",
@@ -53110,6 +53159,13 @@
                                 "example": "source:nginx",
                                 "type": "string"
                               },
+                              "rehydration_max_scan_size_in_gb": {
+                                "description": "Maximum scan size for rehydration from this archive.",
+                                "example": 100,
+                                "format": "int64",
+                                "nullable": true,
+                                "type": "integer"
+                              },
                               "rehydration_tags": {
                                 "description": "An array of tags to add to rehydrated logs from an archive.",
                                 "example": [
@@ -53451,6 +53507,13 @@
                             "example": "source:nginx",
                             "type": "string"
                           },
+                          "rehydration_max_scan_size_in_gb": {
+                            "description": "Maximum scan size for rehydration from this archive.",
+                            "example": 100,
+                            "format": "int64",
+                            "nullable": true,
+                            "type": "integer"
+                          },
                           "rehydration_tags": {
                             "description": "An array of tags to add to rehydrated logs from an archive.",
                             "example": [
@@ -53696,6 +53759,13 @@
                               "description": "The archive query/filter. Logs matching this query are included in the archive.",
                               "example": "source:nginx",
                               "type": "string"
+                            },
+                            "rehydration_max_scan_size_in_gb": {
+                              "description": "Maximum scan size for rehydration from this archive.",
+                              "example": 100,
+                              "format": "int64",
+                              "nullable": true,
+                              "type": "integer"
                             },
                             "rehydration_tags": {
                               "description": "An array of tags to add to rehydrated logs from an archive.",
@@ -54203,6 +54273,13 @@
                               "example": "source:nginx",
                               "type": "string"
                             },
+                            "rehydration_max_scan_size_in_gb": {
+                              "description": "Maximum scan size for rehydration from this archive.",
+                              "example": 100,
+                              "format": "int64",
+                              "nullable": true,
+                              "type": "integer"
+                            },
                             "rehydration_tags": {
                               "description": "An array of tags to add to rehydrated logs from an archive.",
                               "example": [
@@ -54603,6 +54680,13 @@
                             "example": "source:nginx",
                             "type": "string"
                           },
+                          "rehydration_max_scan_size_in_gb": {
+                            "description": "Maximum scan size for rehydration from this archive.",
+                            "example": 100,
+                            "format": "int64",
+                            "nullable": true,
+                            "type": "integer"
+                          },
                           "rehydration_tags": {
                             "description": "An array of tags to add to rehydrated logs from an archive.",
                             "example": [
@@ -54848,6 +54932,13 @@
                               "description": "The archive query/filter. Logs matching this query are included in the archive.",
                               "example": "source:nginx",
                               "type": "string"
+                            },
+                            "rehydration_max_scan_size_in_gb": {
+                              "description": "Maximum scan size for rehydration from this archive.",
+                              "example": 100,
+                              "format": "int64",
+                              "nullable": true,
+                              "type": "integer"
                             },
                             "rehydration_tags": {
                               "description": "An array of tags to add to rehydrated logs from an archive.",
