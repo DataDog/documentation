@@ -41,7 +41,7 @@ Configure the [Datadog Terraform provider][2] with your Datadog [API and Applica
 
 ## Setup Datadog integration IAM role
 
-Configure permissions for the IAM role used by Datadog to query AWS APIs on your behalf. Use [All Permissions][4] to take advantage of every AWS integration offered by Datadog. As other components are added to an integration, these permissions may change. If you would like to use Datadog’s Cloud Security Posture Management product, you must also add additional permissions by attaching the AWS [SecurityAudit Policy][5] to the role. 
+Configure permissions for the IAM role used by Datadog to query AWS APIs on your behalf. Use [All Permissions][4] to take advantage of every AWS integration offered by Datadog. As other components are added to an integration, these permissions may change. To use Datadog’s Cloud Security Posture Management product, you must also add additional permissions by attaching the AWS [SecurityAudit Policy][5] to the role. 
 
 The script below creates the Datadog IAM policy inside your AWS account. Update these parameters before running the script:
 
