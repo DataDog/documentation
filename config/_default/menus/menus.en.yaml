@@ -2609,7 +2609,7 @@ main:
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 7
+    weight: 6
   - name: Search
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
@@ -2650,6 +2650,11 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
     weight: 608
+  - name: Generate Metrics
+    url: real_user_monitoring/generate_metrics
+    parent: rum
+    identifier: rum_generate_metrics
+    weight: 7
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
