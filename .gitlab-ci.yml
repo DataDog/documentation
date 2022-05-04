@@ -361,8 +361,7 @@ manage_untracked_translations:manual:
   only:
     - brian.deutsch/gitignored_artifact
   script:
-    - echo "Downloading untracked translation source files..."
-    - create_artifact_ignored
+    - manage_ignored_translation_files
   when: manual
 
 manage_translations:on-schedule:
