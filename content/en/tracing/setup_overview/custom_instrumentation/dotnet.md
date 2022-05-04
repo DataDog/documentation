@@ -27,7 +27,9 @@ further_reading:
 For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-framework/">.NET Framework setup instructions</a> or the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-core/">.NET Core setup instructions</a>.
 </div>
 
-This page details common use cases for adding and customizing observability with Datadog APM. For a list of supported runtimes, see the [.NET Framework Compatibility Requirements][1] or the [.NET Core Compatibility Requirements][2]. To perform the steps outlined below, you may need to add NuGet package references to one or more of the following libraries:
+This page details common use cases for adding and customizing observability with Datadog APM. For a list of supported runtimes, see the [.NET Framework Compatibility Requirements][1] or the [.NET Core Compatibility Requirements][2].
+
+To perform the steps outlined below, you may need to add NuGet package references to one or more of the following libraries:
 
 - `Datadog.Trace` [NuGet package][3]: This library provides an API to directly access the Tracer and the active span. **Note:** When simultaneously using the `Datadog.Trace` NuGet package and automatic instrumentation, it is important to keep the versions in sync.
 - `Datadog.Trace.Annotations` [NuGet package][4]: This library provides .NET attributes that can be applied to your code to enable additional automatic instrumentation features.
@@ -128,9 +130,9 @@ The resulting span has an `operationName` set to `trace.annotation` and `resourc
   <strong>Note:</strong> This requires adding the `Datadog.Trace.Annotations` NuGet package and enabling automatic instrumentation for your application.
 </div>
 
-Add `[Trace]` to methods to have them be traced when running with automatic instrumentation. If automatic instrumentation is not enabled, this attribute has no effect on your application.
+Add `[Trace]` to methods for Datadog to trace them when running with automatic instrumentation. If automatic instrumentation is not enabled, this attribute has no effect on your application.
 
-`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. These can be set as named arguments of the `[Trace]` attribute to better reflect what is being instrumented.  These are the only possible arguments that can be set for the `[Trace]` attribute.
+`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. These can be set as named arguments of the `[Trace]` attribute to better reflect what is being instrumented.  Operation name and resource name are the only possible arguments that can be set for the `[Trace]` attribute.
 
 ```csharp
 using Datadog.Trace.Annotations;
