@@ -328,7 +328,7 @@ func convertTraceID(id string) string {
 
 {{< programming-lang lang="dotnet" >}}
 
-To manually correlate traces with logs, convert the OpenTelemetry `TraceId` and `SpanId` into the format used by Datadog. Add those IDs to your logs under the `dd_trace_id` and `dd_span_id` attributes. The example below shows how to convert the OTel (`System.DiagnosticSource.Activity`) trace and span IDs into Datadog's required format. The following example uses the [Serilog library][1].
+To manually correlate traces with logs, convert the OpenTelemetry `TraceId` and `SpanId` into the format used by Datadog. Add those IDs to your logs under the `dd_trace_id` and `dd_span_id` attributes. The following example uses the [Serilog library][1], and shows how to convert the OTel (`System.DiagnosticSource.Activity`) trace and span IDs into Datadog's required format:
 
 ```csharp
 var stringTraceId = Activity.Current.TraceId.ToString();
