@@ -27,14 +27,14 @@ further_reading:
 To send your C# logs to Datadog, use one of the following approaches:
 
 - Log to a file and then tail that file with your Datadog Agent. 
-- Enable agentless logging.
+- Enable Agentless logging.
 - Use the Serilog sink.
 
 This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Microsoft.Extensions.Logging` logging libraries, for each of the above approaches.
 
 ## File-tail logging with the Datadog Agent
 
-The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent, as the Datadog Agent enriches the logs with additional metadata
+The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
 
 Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
@@ -313,16 +313,16 @@ It does not require modifying your application code, or installing additional de
 
 ### Configure the APM library
 
-Agentless logging is only available when using APM with automatic instrumentation. To get started, instrument your application as described in the following documents
+Agentless logging is only available when using APM with automatic instrumentation. To get started, instrument your application as described in the following documents:
 
 - [.NET Core/.NET 5+ applications][5]
 - [.NET Framework applications][6]
 
 After installing, verify you are receiving traces correctly.
 
-### Enable agentless logging
+### Enable Agentless logging
 
-To enable agentless logging, set the following environment variables:
+To enable Agentless logging, set the following environment variables:
 
 `DD_API_KEY`
 : Your [Datadog API Key][7] for sending your logs to Datadog.
@@ -349,18 +349,18 @@ Restart your application after setting these environment variables.
 
 ### Additional configuration
 
-You can further customise some aspects of agentless log collection using the following environment variables:
+You can further customize some aspects of Agentless log collection using the following environment variables:
 
 `DD_LOGS_DIRECT_SUBMISSION_MINIMUM_LEVEL`
 : Allows filtering logs by level _before_ they're sent to Datadog. Set to one of the following values: `Verbose`, `Debug`, `Information`, `Warning`, `Error`, `Critical`. These correspond to the equivalent levels in the supported logging frameworks.<br>
 **Default**: `Information`
 
 `DD_LOGS_DIRECT_SUBMISSION_HOST`
-: Set the name of the host machine associated with logs. If not provided, the host name will attempt to be found automatically<br>
+: Set the name of the host machine associated with logs. If not provided, the host name will attempt to be found automatically.<br>
 **Default**: Determined automatically
 
 `DD_LOGS_DIRECT_SUBMISSION_TAGS`
-: If specified, adds all of the specified tags to all generated spans. If not provided, will use `DD_TAGS` instead<br>
+: If specified, adds all of the specified tags to all generated spans. If not provided, will use `DD_TAGS` instead.<br>
 **Example**: `layer:api, team:intake` 
 Note that the delimiter is a comma and a whitespace: `, `.
 
@@ -411,18 +411,18 @@ The following configuration values should generally not be modified, but may be 
 **Default**: `csharp`
 
 `DD_LOGS_DIRECT_SUBMISSION_MAX_BATCH_SIZE`
-: Sets the maximum number of logs to send at one time. Takes into account the [limits in place for the API][9]<br>
+: Sets the maximum number of logs to send at one time. Takes into account the [limits in place for the API][9].<br>
 **Default**: `1000`
 
 `DD_LOGS_DIRECT_SUBMISSION_MAX_QUEUE_SIZE`
-: Sets the maximum number of logs to hold in the internal queue at any one time before dropping log messages<br>
+: Sets the maximum number of logs to hold in the internal queue at any one time before dropping log messages.<br>
 **Default**: `100000`
 
 `DD_LOGS_DIRECT_SUBMISSION_BATCH_PERIOD_SECONDS`
-: Sets the time to wait (in seconds) before checking for new logs to send<br>
+: Sets the time to wait (in seconds) before checking for new logs to send.<br>
 **Default**: `1`
 
-## Agentless logging with Serilog Sink
+## Agentless logging with Serilog sink
 
 If it is not possible to use file-tail logging or APM agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][10] to send logs directly to Datadog.
 
@@ -433,7 +433,7 @@ Run the following command in the Package Manager Console:
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][11].
+Then, initialize the logger directly in your application. Ensure that you [add your `<API_KEY>`][11].
 
 {{< site-region region="us" >}}
 
@@ -501,7 +501,7 @@ using (var log = new LoggerConfiguration()
 {{< /site-region >}}
 
 
-You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. [Optionally, specify the `source`, `service`, `host`, and custom tags.][12]
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][12]
 
 {{< site-region region="us" >}}
 
