@@ -1,5 +1,5 @@
 ---
-title: Ruby - ASM Get Started
+title: Ruby Getting Started with ASM
 kind: documentation
 code_lang: ruby
 type: multi-code-lang

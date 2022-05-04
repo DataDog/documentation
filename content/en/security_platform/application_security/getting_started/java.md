@@ -1,5 +1,5 @@
 ---
-title: Java - ASM Get Started
+title: Java Getting Started with ASM
 kind: documentation
 code_lang: java
 type: multi-code-lang
