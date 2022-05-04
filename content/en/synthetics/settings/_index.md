@@ -62,7 +62,19 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 
 {{< img src="synthetics/settings/variable_fromhttp_3.png" alt="Variable from HTTP Test" style="width:80%;">}}
 
-**Note:** Variable values are updated whenever the test they are extracted from runs.
+In addition to extracting a value with a regex, you can also use a [regex][2] to parse the following:
+
+  - Match not only the first instance of a pattern, but also all instances of the supplied pattern
+  - Ignore the case of the matching pattern
+  - Match strings over multiple lines
+  - Treat the passed regex pattern as unicode
+  - Allow period symbols to identify new lines
+  - Match from a given index within a regex pattern
+  - Substitute the matching pattern with a supplied value
+
+{{< img src="synthetics/settings/parsing_regex_field.png" alt="Parse the response body from an HTTP Test with a regular expression" style="width:80%;">}}
+
+Variable values are updated whenever the test they are extracted from runs.
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

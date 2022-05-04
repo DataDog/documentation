@@ -57,11 +57,8 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
-**NOTE:** Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][3], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
-
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
-[3]: /integrations/azure/?tab=azurecliv20
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
@@ -121,7 +118,7 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 
 Add the following two permission statements to your IAM policies attached to the role for the AWS Integration. Edit the bucket names and, if desired, specify the paths that contain your log archives. 
 
-**Notes**:
+**Notes:**
 
 * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][1].
 * The `PutObject` permission is sufficient for uploading archives.
@@ -185,7 +182,9 @@ Add the role under **Storage** called **Storage Object Admin**.
 
 Go to the [Archives page][4] in the Datadog app and select the **Add a new archive** option at the bottom.
 
-**Note**: Only Datadog users with [logs_write_archive permission][3] can complete this and the following step.
+**Notes:** 
+* Only Datadog users with [logs_write_archive permission][3] can complete this and the following step.  
+* Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][5], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -230,9 +229,9 @@ By default:
 
 Use this optional configuration step to assign roles on that archive and restrict who can:
 
-* Edit that archive configuration. See the [logs_write_archive][5] permission.
-* Rehydrate from that archive. See the [logs_read_archives][6] and [logs_write_historical_view][7].
-* Access rehydrated logs in case you use the legacy [read_index_data permission][8].
+* Edit that archive configuration. See the [logs_write_archive][6] permission.
+* Rehydrate from that archive. See the [logs_read_archives][7] and [logs_write_historical_view][8].
+* Access rehydrated logs in case you use the legacy [read_index_data permission][9].
 
 {{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs"  style="width:75%;">}}
 
@@ -241,7 +240,7 @@ Use this optional configuration step to assign roles on that archive and restric
 Use this optional configuration step to:
 
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
-* Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
+* Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][10] permission.
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
 
@@ -260,7 +259,7 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive (Glacier Instant Retrieval is an exception). If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /logs/archives/rehydrating/
@@ -352,7 +351,7 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all logs ingested into Datadog. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][10].
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][11].
 
 If Datadog detects a broken configuration, the corresponding archive is highlighted in the configuration page. Click on the error icon to see the actions to take to resolve the issue.
 
@@ -408,9 +407,10 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 [2]: /logs/archives/rehydrating/
 [3]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
 [4]: https://app.datadoghq.com/logs/pipelines/archives
-[5]: /account_management/rbac/permissions#logs_write_archives
-[6]: /account_management/rbac/permissions#logs_read_archives
-[7]: /account_management/rbac/permissions#logs_write_historical_view
-[8]: /account_management/rbac/permissions#logs_read_index_data
-[9]: /account_management/rbac/permissions#logs_read_data
-[10]: /logs/explorer/live_tail/
+[5]: /integrations/azure/
+[6]: /account_management/rbac/permissions#logs_write_archives
+[7]: /account_management/rbac/permissions#logs_read_archives
+[8]: /account_management/rbac/permissions#logs_write_historical_view
+[9]: /account_management/rbac/permissions#logs_read_index_data
+[10]: /account_management/rbac/permissions#logs_read_data
+[11]: /logs/explorer/live_tail/

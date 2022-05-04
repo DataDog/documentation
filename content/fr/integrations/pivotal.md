@@ -1,24 +1,28 @@
 ---
 categories:
-  - Collaboration
-  - issue tracking
+- Collaboration
+- issue tracking
 ddtype: crawler
 dependencies: []
 description: Consultez et commentez des stories dans votre flux d'événements Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/pivotal/'
+doc_link: https://docs.datadoghq.com/integrations/pivotal/
 draft: false
 git_integration_title: pivotal
 has_logo: true
 integration_id: pivotal
-integration_title: "Pivotal\_Tracker"
+integration_title: Pivotal Tracker
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: pivotal
-public_title: "Intégration Datadog/Pivotal\_Tracker"
-short_description: Consultez et commentez des stories dans votre flux d'événements Datadog.
+public_title: Intégration Datadog/Pivotal Tracker
+short_description: Consultez et commentez des stories dans votre flux d'événements
+  Datadog.
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/pivotal/pivotal_event.png" alt="événement Pivotal" popup="true">}}
 
 ## Présentation

@@ -58,7 +58,7 @@ The [Watchdog Insights][7] carousel surfaces anomalies detected on specific tags
 
 ## Out-of-the-box graphs
 
-Datadog provides out-of-the-box graphs for any given Service:
+Datadog provides [out-of-the-box graphs][8] for any given Service:
 
 * Requests - Choose to display:
     *  The **Total amount of requests and errors**
@@ -66,7 +66,7 @@ Datadog provides out-of-the-box graphs for any given Service:
 * Latency -  Choose to display:
     *  The Avg/p75/p90/p95/p99/Max latency of your traced requests
     *  The **Latency distribution**	
-    *  The **Apdex score** for web services; [learn more about Apdex][8]
+    *  The **Apdex score** for web services; [learn more about Apdex][9]
 * Error - Choose to display:
     * The **Total amount of errors**
     * The amount of **Errors per second**
@@ -80,11 +80,11 @@ Datadog provides out-of-the-box graphs for any given Service:
     **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 [Watchdog][7] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If there is an anomaly detected, there will be an overlay on the graph and a Watchdog icon you can click for more details in a side panel.
 
-{{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs"  style="width:10%;">}}
+{{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs"  style="width:100%;">}}
 
 ### Export
 
-On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [dashboard][9]:
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [dashboard][10]:
 
 {{< img src="tracing/visualization/service/save_to_dashboard.png" alt="Save to dashboard" style="width:60%;">}}
 
@@ -92,7 +92,7 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). Read more in [Getting Started with APM][1]. 
 
-Below, there’s a list of [resources][10] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
+Below, there’s a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
 
 {{< img src="tracing/visualization/service/resources_tab.jpg" alt="Resources"  style="width:100%;">}}
 
@@ -136,7 +136,7 @@ You can add columns to or remove columns from this overview table and your selec
 
 {{< img src="tracing/visualization/service/deployments.png" alt="Deployments"  style="width:90%;">}}
 
-Read more about Deployments [on the service page][11].
+Read more about Deployments [on the service page][12].
 
 ### Error Tracking
 View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][4])
@@ -155,22 +155,22 @@ The Kubernetes metrics below show you a high level summary of your infrastructur
 {{< img src="tracing/visualization/service/infra_metrics.png" alt="Kubernetes Metrics"  style="width:90%;">}}
 
 ### Runtime Metrics
-If runtime metrics are enabled in the tracing client, you’ll see a Runtime metrics tab corresponding to the runtime language of your service. Read more in [Runtime Metrics][12].
+If runtime metrics are enabled in the tracing client, you’ll see a Runtime metrics tab corresponding to the runtime language of your service. Read more in [Runtime Metrics][13].
 
 {{< img src="tracing/visualization/service/runtime_metrics.png" alt="Runtime Metrics"  style="width:90%;">}}
 
 ### Profiling
-You'll see a Profiling tab if the [Continuous Profiler][13] is set up for your service. Summary details like versions available and runtime language are at the top. Below are out-of-the-box profiling metrics by version, endpoint, and method to help you identify and debug resource-intensive methods. Click on any graph to view related traces, logs, and other data, or open a flame graph to inspect the code profile. [Learn more about APM and the Continuous Profiler][14]. 
+You'll see a Profiling tab if the [Continuous Profiler][14] is set up for your service. Summary details like versions available and runtime language are at the top. Below are out-of-the-box profiling metrics by version, endpoint, and method to help you identify and debug resource-intensive methods. Click on any graph to view related traces, logs, and other data, or open a flame graph to inspect the code profile. [Learn more about APM and the Continuous Profiler][14]. 
 
 {{< img src="tracing/visualization/service/profiler.jpg" alt="Profiling"  style="width:90%;">}}
 
 ### Traces
-View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][15] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
+View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
 
 {{< img src="tracing/visualization/service/traces.png" alt="Traces"  style="width:90%;">}}
 
 ### Logs
-View common patterns in your service’s logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][16].
+View common patterns in your service’s logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][17].
 
 {{< img src="tracing/visualization/service/log_patterns.png" alt="Log patterns"  style="width:90%;">}}
 
@@ -185,12 +185,13 @@ View common patterns in your service’s logs, and use facets like status in the
 [5]: /monitors/service_level_objectives/
 [6]: /monitors/incident_management/
 [7]: /watchdog/
-[8]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[9]: /dashboards/
-[10]: /tracing/visualization/#resources
-[11]: /tracing/deployment_tracking/#versions-deployed
-[12]: /tracing/runtime_metrics/
-[13]: /tracing/profiler/
-[14]: /tracing/
-[15]: /tracing/trace_explorer/query_syntax/#facets
-[16]: https://www.datadoghq.com/blog/log-patterns/
+[8]: /tracing/guide/metrics_namespace/
+[9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[10]: /dashboards/
+[11]: /tracing/visualization/#resources
+[12]: /tracing/deployment_tracking/#versions-deployed
+[13]: /tracing/runtime_metrics/
+[14]: /tracing/profiler/
+[15]: /tracing/
+[16]: /tracing/trace_explorer/query_syntax/#facets
+[17]: https://www.datadoghq.com/blog/log-patterns/

@@ -24,7 +24,7 @@ To set up the Datadog Cluster Agent on your Kubernetes cluster, follow these ste
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-The Cluster Agent is enabeld by default since Helm Chart `2.7.0`.
+The Cluster Agent is enabled by default since Helm Chart `2.7.0`.
 
 To activate it on older versions or if you use a custom [datadog-values.yaml][1] overriding the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration, then upgrade your Datadog Helm chart:
 

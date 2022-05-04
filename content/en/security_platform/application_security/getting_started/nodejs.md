@@ -1,5 +1,5 @@
 ---
-title: NodeJS Applications
+title: NodeJS Getting Started with ASM
 kind: documentation
 code_lang: nodejs
 type: multi-code-lang
@@ -10,7 +10,7 @@ further_reading:
       text: 'NodeJS Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Rules"
+      text: "OOTB Application Security Monitoring Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Monitoring"
@@ -23,18 +23,18 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 ## Get started
 
 1. **Update your Datadog NodeJS library package** to at least version 2.0.0, by running:
-   ```
+   ```shell
    npm install dd-trace
    ```
    or to update from a previously installed 1.x version:
-   ```
+   ```shell
    npm install dd-trace@2
    ```
    Use this [migration guide][1] to assess any breaking changes if you upgraded your library from 1.x to 2.x.
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-2. **Where you import and initialize the NodeJS library for APM, also enable Application Security.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
+2. **Where you import and initialize the NodeJS library for APM, also enable ASM.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
 {{% tab "In JavaScript code" %}}
 
@@ -69,11 +69,11 @@ import `dd-trace/init`;
 {{< /tabs >}}
 
    **Or** if you initialize the APM library on the command line using the `--require` option to Node.js:
-   ```sh
+   ```shell
    node --require dd-trace/init app.js
    ```
-   Then use environment variables to enable Application Security:
-   ```
+   Then use environment variables to enable ASM:
+   ```shell
    DD_APPSEC_ENABLED=true node app.js
    ```
    How you do this varies depending on where your service runs:
@@ -82,7 +82,7 @@ import `dd-trace/init`;
 
 Update your configuration container for APM by adding the following argument in your `docker run` command: 
 
-```
+```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
@@ -91,7 +91,7 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```
+```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 
@@ -100,7 +100,7 @@ ENV DD_APPSEC_ENABLED=true
 
 Update your configuration yaml file container for APM and add the AppSec env variable:
 
-```
+```yaml
 spec:
   template:
     spec:
@@ -117,7 +117,7 @@ spec:
 
 Update your ECS task definition JSON file, by adding this in the  environment section:
 
-```
+```json
 "environment": [
   ...,
   {
@@ -130,8 +130,8 @@ Update your ECS task definition JSON file, by adding this in the  environment se
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Initialize Application Security in your code or set `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
-```
+Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
+```shell
 DD_APPSEC_ENABLED=true node app.js
 ```
 

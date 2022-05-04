@@ -588,6 +588,14 @@
     "request_description": "Incident Team Payload.",
     "request_schema_description": "Update request with an incident team payload."
   },
+  "GetUsageApplicationSecurityMonitoring": {
+    "description": "Get hourly usage for Application Security .",
+    "summary": "Get hourly usage for Application Security"
+  },
+  "GetCostByOrg": {
+    "description": "Get Cost Across Multi-Org Account.",
+    "summary": "Get Cost Across Multi-Org Account"
+  },
   "GetUsageObservabilityPipelines": {
     "description": "Get hourly usage for Observability Pipelines.",
     "summary": "Get hourly usage for Observability Pipelines"

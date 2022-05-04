@@ -15,6 +15,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
     tag: "Blog"
     text: "Improve mobile user experience with Datadog Mobile Real User Monitoring"
+  - link: "https://www.datadoghq.com/blog/mobile-monitoring-best-practices/"
+    tag: "Blog"
+    text: "Best practices for monitoring mobile app performance"
   - link: "https://www.datadoghq.com/blog/error-tracking/"
     tag: "Blog"
     text: "Make sense of application issues with Datadog Error Tracking"
@@ -70,27 +73,37 @@ Analyze information about your user journeys, performance, network requests, and
 
 ### RUM Explorer and visualizations
 
-View user sessions in segments, such as checking when latency impacts your premium customers, with [visualizations][2]. Explore data, save views, and create monitors on your customized searches.
+View user sessions in segments, such as checking when latency impacts your premium customers, with [visualizations][2]. Explore data, save views, and create [monitors][3] on your customized searches.
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_analytics.mp4" alt="RUM Analytics" video=true >}}
 
 ### Integration with logs, APM, and profiler
 
-View your [backend traces, logs, and infrastructure metrics][3] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
+View your [backend traces, logs, and infrastructure metrics][4] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM" >}}
 
 ### Error tracking and crash reporting
 
-Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][4].
+Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][5].
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
+
+### Web view tracking
+
+Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS][6] and [Android][7].
+
+{{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="Web Views captured in a user session in the RUM Explorer" >}}
 
 ## Explore Datadog Session Replay
 
 ### Session replays
 
-Watch [browser recordings][5] of real users interacting with your website.
+Watch [browser recordings][8] of real users interacting with your website and set [privacy controls][9] for your organization.
+
+### Developer tools
+
+Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][6].
 
 ## Further Reading
 
@@ -98,6 +111,10 @@ Watch [browser recordings][5] of real users interacting with your website.
 
 [1]: /real_user_monitoring/dashboards/
 [2]: /real_user_monitoring/explorer/visualize/
-[3]: /real_user_monitoring/connect_rum_and_traces/
-[4]: /real_user_monitoring/error_tracking/
-[5]: /real_user_monitoring/session_replay/
+[3]: /monitors/create/types/real_user_monitoring/
+[4]: /real_user_monitoring/connect_rum_and_traces/
+[5]: /real_user_monitoring/error_tracking/
+[6]: /real_user_monitoring/ios/web_view_tracking/
+[7]: /real_user_monitoring/android/web_view_tracking/
+[8]: /real_user_monitoring/session_replay/
+[9]: /real_user_monitoring/session_replay/privacy_options/

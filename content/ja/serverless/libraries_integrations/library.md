@@ -1,28 +1,32 @@
 ---
-title: Datadog Lambda ライブラリ
-kind: documentation
-further_reading:
-  - link: /serverless/libraries_integrations/extension/
-    tag: ドキュメント
-    text: Datadog Lambda 拡張機能
-  - link: https://github.com/DataDog/datadog-lambda-python/blob/master/README.md
-    tag: Github
-    text: Datadog Lambda Library for Python
-  - link: https://github.com/DataDog/datadog-lambda-js/blob/master/README.md
-    tag: Github
-    text: Datadog Lambda Library for Node.js
-  - link: https://github.com/DataDog/datadog-lambda-rb/blob/master/README.md
-    tag: Github
-    text: Ruby 向け Datadog Lambda ライブラリ
-  - link: https://github.com/DataDog/datadog-lambda-go/blob/master/README.md
-    tag: Github
-    text: Go 向け Datadog Lambda ライブラリ
-  - link: https://github.com/DataDog/datadog-lambda-java/blob/master/README.md
-    tag: Github
-    text: Datadog Lambda Library for Java
 aliases:
-  - /ja/serverless/datadog_lambda_library/
+- /ja/serverless/datadog_lambda_library/
+further_reading:
+- link: /serverless/libraries_integrations/extension/
+  tag: ドキュメント
+  text: Datadog Lambda 拡張機能
+- link: https://github.com/DataDog/datadog-lambda-python/blob/master/README.md
+  tag: Github
+  text: Datadog Lambda Library for Python
+- link: https://github.com/DataDog/datadog-lambda-js/blob/master/README.md
+  tag: Github
+  text: Datadog Lambda Library for Node.js
+- link: https://github.com/DataDog/datadog-lambda-rb/blob/master/README.md
+  tag: Github
+  text: Ruby 向け Datadog Lambda ライブラリ
+- link: https://github.com/DataDog/datadog-lambda-go/blob/master/README.md
+  tag: Github
+  text: Go 向け Datadog Lambda ライブラリ
+- link: https://github.com/DataDog/datadog-lambda-java/blob/master/README.md
+  tag: Github
+  text: Datadog Lambda Library for Java
+- link: https://www.datadoghq.com/blog/function-urls-monitoring/
+  tag: ブログ
+  text: Datadog を使用した AWS Lambda 関数 URL の監視
+kind: documentation
+title: Datadog Lambda ライブラリ
 ---
+
 {{< img src="serverless/datadog_lambda_library.png" alt="Datadog Lambda ライブラリ"  style="width:100%;">}}
 
 Datadog Lambda ライブラリでは以下を実行します。
@@ -32,7 +36,7 @@ Datadog Lambda ライブラリでは以下を実行します。
 - Node.js、Python、Ruby 向けに [Datadog APM および分散型トレース][3]を有効化します。
 
 **Ruby** 用の Datadog Lambda ライブラリを使用している場合は、Datadog Forwarder をインストールして構成し、Lambda 関数からトレース、拡張 Lambda メトリクス、またはカスタムメトリクスを (非同期で) 取り込む必要があります。
-**Python**、**Node**、**Go**、または **Java** 用の Datadog Lambda ライブラリを使用している場合は、[Datadog Lambda 拡張機能][4]を使用して、トレース、拡張 Lambda メトリクス、またはカスタムメトリクスを取り込むことができます。または、Datadog Forwarder を引き続き使用できます。
+**Python**、**Node**、**Go**、**Java**、または **.NET** 用の Datadog Lambda ライブラリを使用している場合は、[Datadog Lambda 拡張機能][4]を使用して、トレース、拡張 Lambda メトリクス、またはカスタムメトリクスを取り込むことができます。または、Datadog Forwarder を引き続き使用できます。
 
 Datadog Lambda ライブラリは以下の収集には**対応していません**。
 

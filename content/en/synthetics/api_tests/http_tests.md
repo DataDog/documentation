@@ -126,7 +126,7 @@ HTTP tests can decompress bodies with the following `content-encoding` headers: 
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your HTTP test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_http.png" alt="Define assertions for your HTTP test to succeed or fail on" style="width:90%;" >}}
 
 ### Select locations
 

@@ -502,6 +502,11 @@ main:
     identifier: watchdog_top_level
     pre: watchdog
     weight: 50000
+  - name: Impact Analysis
+    url: watchdog/impact_analysis/
+    identifier: watchdog_impact_analysis
+    parent: watchdog_top_level
+    weight: 1
   - name: RCA
     url: watchdog/rca/
     identifier: watchdog_rca
@@ -950,22 +955,22 @@ main:
     identifier: metrics_custom_metrics
     weight: 7
   - name: Metric Type Modifiers
-    url: metrics/type_modifiers/
+    url: metrics/custom_metrics/type_modifiers/
     parent: metrics_custom_metrics
     identifier: metrics_modifiers
     weight: 701
   - name: 'Submission - Agent Check '
-    url: metrics/agent_metrics_submission/
+    url: metrics/custom_metrics/agent_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_agent
     weight: 702
   - name: Submission - DogStatsD
-    url: metrics/dogstatsd_metrics_submission/
+    url: metrics/custom_metrics/dogstatsd_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_dogstatsd
     weight: 703
   - name: Submission - Powershell
-    url: metrics/powershell_metrics_submission
+    url: metrics/custom_metrics/powershell_metrics_submission
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_powershell
     weight: 704
@@ -1426,16 +1431,16 @@ main:
     parent: trace_ingestion
     identifier: ingestion_control_page
     weight: 402
+  - name: Usage Metrics
+    url: tracing/trace_ingestion/usage_metrics/
+    parent: trace_ingestion
+    identifier: trace_ingestion_retention_usage_metrics
+    weight: 403
   - name: Trace Retention
     url: tracing/trace_retention/
     parent: tracing
     identifier: trace_retention
     weight: 5
-  - name: Usage Metrics
-    url: tracing/trace_retention/usage_metrics/
-    parent: trace_retention
-    identifier: trace_retention_and_ingestion_usage_metrics
-    weight: 501
   - name: Generate Metrics from Spans
     url: tracing/generate_metrics/
     parent: tracing
@@ -1756,21 +1761,26 @@ main:
     parent: setup_pipelines
     identifier: ci_circleci
     weight: 202
+  - name: Codefresh
+    url: continuous_integration/setup_pipelines/codefresh/
+    parent: setup_pipelines
+    identifier: ci_codefresh
+    weight: 203
   - name: GitHub Actions
     url: continuous_integration/setup_pipelines/github/
     parent: setup_pipelines
     identifier: ci_github
-    weight: 203
+    weight: 204
   - name: GitLab
     url: continuous_integration/setup_pipelines/gitlab/
     parent: setup_pipelines
     identifier: ci_gitlab
-    weight: 204
+    weight: 205
   - name: Jenkins
     url: continuous_integration/setup_pipelines/jenkins/
     parent: setup_pipelines
     identifier: ci_jenkins
-    weight: 205
+    weight: 206
   - name: Custom Commands
     url: continuous_integration/setup_pipelines/custom_commands/
     parent: setup_pipelines
@@ -2203,7 +2213,7 @@ main:
     parent: cloud_workload_security
     identifier: cws_troubleshooting
     weight: 307
-  - name: Application Security
+  - name: Application Security Monitoring
     url: security_platform/application_security/
     parent: security_platform
     identifier: application_security
@@ -2507,16 +2517,21 @@ main:
     parent: rum_android
     identifier: rum_android_mobile_vitals
     weight: 203
+  - name: Web View Tracking
+    url: real_user_monitoring/android/web_view_tracking/
+    parent: rum_android
+    identifier: rum_android_web_view_tracking
+    weight: 204
   - name: Integrated Libraries
     url: real_user_monitoring/android/integrated_libraries/
     parent: rum_android
     identifier: rum_android_libraries
-    weight: 204
+    weight: 205
   - name: Troubleshooting
     url: real_user_monitoring/android/troubleshooting/
     parent: rum_android
     identifier: rum_troubleshooting_android
-    weight: 205
+    weight: 206
   - name: iOS Monitoring
     url: real_user_monitoring/ios/
     parent: rum
@@ -2537,11 +2552,16 @@ main:
     parent: rum_ios
     identifier: rum_ios_advanced
     weight: 303
+  - name: Web View Tracking
+    url: real_user_monitoring/ios/web_view_tracking/
+    parent: rum_ios
+    identifier: rum_ios_web_view_tracking
+    weight: 304
   - name: Troubleshooting
     url: real_user_monitoring/ios/troubleshooting/
     parent: rum_ios
     identifier: rum_troubleshooting_ios
-    weight: 304
+    weight: 305
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
@@ -2883,6 +2903,10 @@ main:
     url: account_management/org_settings/sensitive_data_detection
     parent: organization_settings
     weight: 205
+  - name: Custom Organization Landing Page
+    url: account_management/org_settings/custom_landing
+    parent: organization_settings
+    weight: 206
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -2967,6 +2991,10 @@ main:
     url: data_security/synthetics/
     parent: data_security
     weight: 4
+  - name: Guides
+    url: data_security/guide/
+    parent: data_security
+    weight: 5
   - name: Help
     url: help/
     pre: info-fill
@@ -5610,6 +5638,30 @@ api:
         - v2
       operationids:
         - GetUsageObservabilityPipelines
+      unstable: []
+      order: 38
+  - name: Get Cost Across Multi-Org Account
+    url: '#get-cost-across-multi-org-account'
+    identifier: get-cost-across-multi-org-account
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCostByOrg
+      unstable: []
+      order: 39
+  - name: Get hourly usage for Application Security
+    url: '#get-hourly-usage-for-application-security'
+    identifier: get-hourly-usage-for-application-security
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUsageApplicationSecurityMonitoring
       unstable: []
       order: 38
   - name: Get all custom metrics by hourly average

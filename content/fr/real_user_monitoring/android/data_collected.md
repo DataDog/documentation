@@ -1,16 +1,18 @@
 ---
 dependencies:
-  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md
+- https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-android
-    tag: Github
-    text: Code source dd-sdk-android
-  - link: /real_user_monitoring
-    tag: Page d'accueil
-    text: Explorer le service RUM de Datadog
+- link: https://github.com/DataDog/dd-sdk-android
+  tag: Github
+  text: Code source dd-sdk-android
+- link: /real_user_monitoring
+  tag: Page d'accueil
+  text: Explorer le service RUM de Datadog
 kind: documentation
 title: Données RUM recueillies (Android)
 ---
+## Présentation
+
 Le SDK Real User Monitoring Datadog génère six types d'événements :
 
 | Type d'événement     | Rétention | Description                                                                                                                                                                                                                                                   |
@@ -18,7 +20,7 @@ Le SDK Real User Monitoring Datadog génère six types d'événements :
 | Session  | 30 jours   | Une session représente le parcours d'un utilisateur réel sur votre application mobile. Elle débute lorsque l'utilisateur lance l'application et se poursuit tant qu'il reste actif. Lors du parcours de l'utilisateur, tous les événements RUM générés au sein de la session partagent le même attribut `session.id`.  |
 | Vue     | 30 jours   | Une vue représente un écran unique (ou un segment d'écran) de votre application mobile. Les `ViewControllers` individuels sont considérés comme des vues distinctes. Tant qu'un utilisateur reste sur une vue, des attributs d'événement RUM (Erreurs, Ressources, Actions) sont joints à la vue, avec un `view.id` unique.                     |
 | Ressource  | 15 jours   | Une ressource représente les requêtes réseau envoyées par votre application mobile à des hosts internes, des API, des fournisseurs tiers et des bibliothèques. Toutes les requêtes générées lors d'une session utilisateur sont jointes à la vue, avec un `resource.id` unique.                                                                                           |
-| Erreur     | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                            |
+| Error     | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                            |
 | Action    | 30 jours   | Une action représente l'activité utilisateur dans votre application mobile (lancement de l'application, toucher, balayage, retour, etc.). Chaque action possède un `action.id` unique associé à la vue à son origine.                                                                                                                                              |
 | Tâche longue | 15 jours | Un événement de tâche longue est généré lorsqu'une tâche bloque dans l'application le thread principal pendant une durée supérieure au seuil défini. |
 
@@ -241,15 +243,12 @@ Les erreurs réseau comprennent des informations sur la requête HTTP ayant éch
 {{% /tab %}}
 {{< /tabs >}}
 
-
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /fr/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[2]: /fr/real_user_monitoring/android/advanced_configuration/#enrich-user-sessions
-[3]: /fr/real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
-[4]: /fr/getting_started/tagging/unified_service_tagging/
-[5]: /fr/real_user_monitoring/android/advanced_configuration/#track-user-sessions
+[1]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[2]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#enrich-user-sessions
+[3]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
+[4]: https://docs.datadoghq.com/fr/getting_started/tagging/unified_service_tagging/
+[5]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#track-user-sessions

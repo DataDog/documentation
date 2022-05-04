@@ -97,7 +97,7 @@ hostname: mymachine.mydomain
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
 [3]: /getting_started/tagging/#defining-tags
-[4]: /metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -139,7 +139,7 @@ hostname: mymachine.mydomain
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
 [3]: /getting_started/tagging/#defining-tags
-[4]: /metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}

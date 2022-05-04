@@ -110,10 +110,6 @@ statsd.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
 statsd.flush(sync: true)
 ```
 
-<div class="alert alert-warning">
-  By default, Ruby DogStatsD client instances cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>single_thread</code> to <code>true</code>. See the <a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby repo</a> on GitHub for more details.
-</div>
-
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -780,6 +776,6 @@ See [DataDog/dogstatsd-csharp-client][1] for more information about the client c
 [1]: /agent/
 [2]: /developers/dogstatsd/unix_socket/
 [3]: /developers/dogstatsd/#code
-[4]: /metrics/dogstatsd_metrics_submission/#sample-rates
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/

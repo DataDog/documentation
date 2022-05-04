@@ -12,6 +12,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/course/view.php?id=34"
   tag: "Learning Center"
   text: "Introduction to Service Level Objectives (SLOs)"
+- link: "https://www.datadoghq.com/blog/service-page/"
+  tag: "Blog"
+  text: "Service Telemetry, Error Tracking, SLOs and more"
 ---
 
 {{< vimeo 382481078 >}}
@@ -52,14 +55,14 @@ After you set up the SLO, select it from the [Service Level Objectives list view
 
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, the status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking are displayed.
 
-**Note:** The remaining error budget is displayed as a percentage and is calculated using the following formula: 
+**Note:** The remaining error budget is displayed as a percentage and is calculated using the following formula:
 {{< img src="monitors/service_level_objectives/error_budget_remaining.jpeg" alt="Remaining error budget formula" >}}
 
 ### Setting SLO targets
 
 To leverage the benefits of error budgets and error budget alerts, you must set SLO target values strictly below 100%.
- 
-Setting a 100% target means having an error budget of 0% since error budget is equal to 100%—SLO target. Without error budget representing acceptable risk, you face difficulty finding alignment between the conflicting priorities of maintaining customer-facing reliability and investing in feature development. In addition, SLOs with target values of 100% lead to division by zero errors in SLO alert evaluation. 
+
+Setting a 100% target means having an error budget of 0% since error budget is equal to 100%—SLO target. Without error budget representing acceptable risk, you face difficulty finding alignment between the conflicting priorities of maintaining customer-facing reliability and investing in feature development. In addition, SLOs with target values of 100% lead to division by zero errors in SLO alert evaluation.
 
 **Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
 
@@ -87,13 +90,13 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
 
-**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][15], available on the [Apple App Store][16] and Google Play Store[17].
+**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][9], available on the [Apple App Store][10] and Google Play Store[17].
 
 {{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
 
 ### SLO tags
 
-When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][9].
+When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][11].
 
 ### SLO default view
 
@@ -153,13 +156,13 @@ Three types of SLO audit events appear in the Event Stream:
 
 To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
 
-You can also query the Event Stream programmatically using the [Datadog Events API][10].
+You can also query the Event Stream programmatically using the [Datadog Events API][12].
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Stream to a longer period, for example, the past 7 days.
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
 
-To proactively manage the configurations of your SLOs, set an [Event Monitor][11] to notify you when events corresponding to certain tags occur.
+To proactively manage the configurations of your SLOs, set an [Event Monitor][13] to notify you when events corresponding to certain tags occur.
 
 For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
@@ -171,17 +174,17 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 
 ## SLO status corrections
 
-Status corrections allow you to specify time periods such as planned maintenance that an SLO excludes from its status and error budget calculations. 
+Status corrections allow you to specify time periods such as planned maintenance that an SLO excludes from its status and error budget calculations.
 
-When you create a correction window for an SLO, the time period you specify is removed from the SLO’s calculation. 
+When you create a correction window for an SLO, the time period you specify is removed from the SLO’s calculation.
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][12]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][14]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
-Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that: 
+Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that:
 - If the end time of a one-time correction is before the past 90 days, it does count towards your limit.
 - If the end time of the final repetition of a recurring correction is before the past 90 days, it does not count towards your limit.
 
@@ -194,11 +197,11 @@ The 90 day limits per SLO are as follows:
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][13], or a [Terraform resource][14].
+You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][15], or a [Terraform resource][16].
 
 {{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI"  >}}
 
-#### Access in the UI 
+#### Access in the UI
 
 To access SLO status corrections in the UI:
 
@@ -210,7 +213,7 @@ To access SLO status corrections in the UI:
 6. Optionally add **Notes**.
 7. Click **Apply Correction**.
 
-To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view. 
+To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view.
 
 ## Further Reading
 
@@ -224,12 +227,11 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [6]: /monitors/service_level_objectives/metric/#define-queries
 [7]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
 [8]: /monitors/service_level_objectives/metric/#set-your-slo-targets
-[9]: /monitors/service_level_objectives/#saved-views
-[10]: /api/v1/events/#query-the-event-stream
-[11]: /monitors/create/types/event/
-[12]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
-[13]: /api/latest/service-level-objective-corrections/
-[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
-[15]: /mobile
-[16]: https://apps.apple.com/app/datadog/id1391380318
-[17]: https://play.google.com/store/apps/details?id=com.datadog.app
+[9]: /mobile
+[10]: https://apps.apple.com/app/datadog/id1391380318
+[11]: /monitors/service_level_objectives/#saved-views
+[12]: /api/v1/events/#query-the-event-stream
+[13]: /monitors/create/types/event/
+[14]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[15]: /api/latest/service-level-objective-corrections/
+[16]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
