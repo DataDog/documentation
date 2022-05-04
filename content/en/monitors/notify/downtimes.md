@@ -46,6 +46,8 @@ When constraining a downtime to a simple alert monitor, the `Group scope` field 
 
 If a multi-alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi-alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
 
+If you would like to include all groups in the scope of a Downtime which applies to multi-alert monitors, you select `All` for the `Group scope`.
+
 The examples below show how `Group scope` may be applied to multi-alert monitors.
 
 {{< tabs >}}
