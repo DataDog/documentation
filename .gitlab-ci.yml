@@ -95,6 +95,7 @@ build_preview:
     - in-isolation deploy_preview > logs/deploy.txt
     # remove static images so we can skip from artifact passed in gitlab
     - remove_static_from_repo
+    - create_artifact_ignored
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
   artifacts:
     paths:
