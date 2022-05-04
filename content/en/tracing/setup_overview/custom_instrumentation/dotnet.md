@@ -175,8 +175,6 @@ using (var parentScope =
 
 ## Trace client and Agent configuration
 
-There are additional configurations possible for both the tracing client and Datadog Agent for context propagation and for excluding specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
-
 ### Headers extraction and injection
 
 The Datadog APM Tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing. For more information, see the [setup documentation][7].
