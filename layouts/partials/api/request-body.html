@@ -102,13 +102,14 @@
                                       {{ $fileNonExistCount := 0 }}
                                       {{ $fileCount := 0 }}
                                       {{ with (index $codeExampleLookup $operationid) }}
-                                          {{ $fileCount = len . }}
-                                          <div id="accordion">
+                                        {{ $fileCount = len . }}
+                                        <div id="accordion">
 
                                         {{ range $i, $item := . | first 3 }}
 
                                             {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
                                             <div class="card">
+                                              {{ if gt $fileCount 1 }}
                                               <div class="card-header p-0">
                                                 <h5 class="m-0">
                                                   <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-toggle="collapse" data-target="#{{ $operationid }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
@@ -116,6 +117,7 @@
                                                   </button>
                                                 </h5>
                                               </div>
+                                              {{ end }}
                                               <div id="{{ $operationid }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-parent="#accordion">
                                                 <div class="card-body p-0 code-snippet">
                                                     <div class="code-button-wrapper position-absolute">
@@ -131,6 +133,8 @@
                                               {{ $fileNonExistCount = add $fileNonExistCount 1 }}
                                             {{ end }}
                                         {{ end }}
+
+                                        </div>
                                       {{ end }}
 
                                       {{ if or (eq $fileNonExistCount $fileCount) (not (index $codeExampleLookup $operationid)) }}
