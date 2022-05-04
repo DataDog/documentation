@@ -44,3 +44,5 @@ jobs:
         body: |
           Preview links:
           ${{ env.COMMENT_BODY }}
+
+          Links are active after the `build_preview` check completes.
