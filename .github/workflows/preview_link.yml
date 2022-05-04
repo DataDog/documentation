@@ -42,5 +42,6 @@ jobs:
         comment-id: ${{ steps.find_comment.outputs.comment-id }}
         edit-mode: replace
         body: |
-          Preview links:
+          Preview links (active after the `build_preview` check completes):
           ${{ env.COMMENT_BODY }}
+
