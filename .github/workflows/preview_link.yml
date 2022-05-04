@@ -6,6 +6,7 @@ on:
 
 jobs:
   preview-link:
+    if: contains(${{ github.head_ref }}, "/")
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
