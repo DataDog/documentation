@@ -1,5 +1,5 @@
 ---
-title: Java Applications
+title: Java - ASM Get Started
 kind: documentation
 code_lang: java
 type: multi-code-lang
