@@ -20,10 +20,10 @@ This is due to the limitations on how soon this metric is available from Cloudwa
 
 {{< img src="monitors/faq/require_full_window.png" alt="Require a Full Window of Data"  >}}
 
-3. Delay Evaluation option.
+2. Delay Evaluation option.
 Since Monitors perform an evaluation every minute, it is looking back on the past X minutes of data. For backfilled metrics, like those coming from AWS, the monitor may be looking at a period of time when the data is not in Datadog. This causes false No Data alerts. Setting this field allows you to have the monitor wait, 900 seconds, so that the AWS metrics have 900 seconds to be available within Datadog before the monitor begins evaluation.
 
-2. This option is the [Require a Full Window of Data][3] (or the ability to not require).
+3. This option is the [Require a Full Window of Data][3] (or the ability to not require).
 This option is typically recommended for metrics being reported by the Datadog Agent and ones that are coming in with the current timestamp. For slightly backfilled metrics, this option can cause No Data events or have the Monitor skip the current evaluation period due to the values not being present at the time the monitor evaluates. For this reason all sparse metrics or metrics that don't report at the same frequency should keep the default option "Do Not [Require a Full Window of Data][3]".
 
 Lastly, when building effective monitors, it is important to understand these limitations. [Cloud Metric delays][4] are different for each cloud provider. To receive metrics with significant smaller delay, install the Datadog Agent on your cloud hosts when possible. Refer to the documentation on [installing the Datadog Agent on your cloud instances][5].
