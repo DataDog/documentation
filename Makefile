@@ -113,6 +113,10 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
 	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/cli.md ;fi
+	@if [ content/en/serverless/libraries_integrations/extension.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/extension.md ;fi
+	@if [ content/en/serverless/libraries_integrations/cdk.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/cdk.md ;fi
 	@if [ content/en/synthetics/cicd_integrations/circleci_orb.md ]; then \
 	rm -f content/en/synthetics/cicd_integrations/circleci_orb.md ;fi
 	@if [ content/en/synthetics/cicd_integrations/github_actions.md ]; then \

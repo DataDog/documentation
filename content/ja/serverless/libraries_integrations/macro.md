@@ -151,4 +151,4 @@ Resources:
 [5]: https://github.com/DataDog/datadog-lambda-python/releases
 [6]: https://github.com/DataDog/datadog-lambda-js/releases
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
-[8]: https://docs.datadoghq.com/ja/serverless/datadog_lambda_library/extension/
+[8]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension/

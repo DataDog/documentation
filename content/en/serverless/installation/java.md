@@ -2,110 +2,91 @@
 title: Instrumenting Java Serverless Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/datadog_lambda_library/java'
+    - link: '/serverless/configuration'
       tag: 'Documentation'
-      text: 'Datadog Lambda Library for Java'
-    - link: 'serverless/distributed_tracing/'
-      tag: 'Documentation'
-      text: 'Tracing Serverless Applications'
-    - link: 'serverless/custom_metrics/'
-      tag: 'Documentation'
-      text: 'Submitting Custom Metrics from Serverless Applications'
+      text: 'Configure Serverless Monitoring'
     - link: '/serverless/guide/troubleshoot_serverless_monitoring'
       tag: 'Documentation'
       text: 'Troubleshoot Serverless Monitoring'
+    - link: 'serverless/custom_metrics/'
+      tag: 'Documentation'
+      text: 'Submitting Custom Metrics from Serverless Applications'
 aliases:
     - /serverless/datadog_lambda_library/java/
 ---
 
-{{< img src="serverless/java-lambda-tracing.png" alt="Monitor Java Lambda Functions with Datadog" style="width:100%;">}}
+<div class="alert alert-warning">To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (<code>java8.al2</code>) or Java 11 (<code>java11</code>) runtimes.</div>
 
-<div class="alert alert-danger">
-There are versions of datadog-lambda-java that import log4j <=2.14.0 as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below.
-</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
-## Prerequisites
+<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_java">instrumenting using the Datadog Forwarder</a>.</div>
 
-To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes.
+## Installation
 
-If your Java Lambda functions were previously set up using the Datadog Forwarder, see the [installation instructions][1].
-
-## Configuration
+Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
+
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-You can also add the [instrumentation command](#instrument) to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command _after_ your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
+1. Install the Datadog CLI client
 
-### Install
+    ```sh
+    npm install -g @datadog/datadog-ci
+    ```
 
-Install the Datadog CLI with NPM:
+2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in the interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
 
-```sh
-npm install -g @datadog/datadog-ci
-```
+    ```sh
+    datadog-ci lambda instrument -i
+    ```
 
-### Configure credentials
+3. Configure the AWS credentials
 
-For a quick start, configure Datadog and [AWS credentials][1] using the following command. For production applications, consider supplying the environment variables or credentials in a more secure manner.
+    Datadog CLI requires access to the AWS Lambda service, and depends on the AWS JavaScript SDK to [resolve the credentials][1]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
 
-```bash
-export DATADOG_API_KEY="<DD_API_KEY>"
-export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu, us3.datadoghq.com or ddog-gov.com
-export AWS_ACCESS_KEY_ID="<ACCESS KEY ID>"
-export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
-```
+4. Configure the Datadog site
 
-### Instrument
+    Specify the [Datadog site][2] where the telemetry should be sent to. The default is `datadoghq.com`.
 
-**Note**: Instrument your Lambda functions in a dev or staging environment first. If the instrumentation needs to be reverted, run `uninstrument` with the same arguments that was used for instrumentation.
+    ```sh
+    export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu or ddog-gov.com
+    ```
 
-To instrument your Lambda functions, run the following command:
+5. Configure the Datadog API key
 
-```sh
-datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -e <extension_version>
-```
+    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
 
-To fill in the placeholders:
+    ```sh
+    export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
+    ```
 
--   Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
--   Replace `<aws_region>` with the AWS region name.
--   Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+    For quick testing purposes, you can also set the Datadog API key in plaintext:
 
-For example:
+    ```sh
+    export DATADOG_API_KEY="<DATADOG_API_KEY>"
+    ```
 
-```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
-```
+6. Instrument your Lambda functions
 
-More information and additional parameters can be found in the [Datadog Serverless CLI][2].
+    **Note**: Instrument your Lambda functions in a dev or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
-### Install the Datadog tracing library
+    To instrument your Lambda functions, run the following command.
 
-[Configure the layers][3] for your Lambda function using the ARN in the following format:
+    ```sh
+    datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="dd-trace-dotnet" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
+    ```
 
-```
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
-```
+    To fill in the placeholders:
+    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
+    - Replace `<aws_region>` with the AWS region name.
 
-The latest `VERSION` is {{< latest-lambda-layer-version layer="dd-trace-java" >}}.
+    Additional parameters can be found in the [CLI documentation][3].
 
-### Configure environment variables
-
-Configure the following environment variables on your function:
-
-```yaml
-DD_API_KEY: <DATADOG_API_KEY> # Replace <DATADOG_API_KEY> with your Datadog API key
-JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-DD_LOGS_INJECTION: true
-DD_JMXFETCH_ENABLED: false
-DD_TRACE_ENABLED: true
-```
-
-[1]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
+[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[2]: https://docs.datadoghq.com/getting_started/site/
+[3]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -114,238 +95,102 @@ The [Datadog Serverless Plugin][1] automatically configures your functions to se
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
+
     ```sh
-    npm install serverless-plugin-datadog --save-dev
-    ```
-2. In your `serverless.yml`, add the following:
-    ```yaml
-    plugins:
-        - serverless-plugin-datadog
+    serverless plugin install --name serverless-plugin-datadog
     ```
 
-<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a JavaScript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/java?tab=custom">custom installation instructions</a>.</div>
+2. Update your `serverless.yml`:
 
-3. In your `serverless.yml`, also add the following section:
     ```yaml
     custom:
-        datadog:
-            apiKey: # Your Datadog API Key goes here.
+      datadog:
+        site: <DATADOG_SITE>
+        apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
     ```
-    Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
+    To fill in the placeholders:
+    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
+
+    For more information and additional settings, see the [plugin documentation][1].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[3]: https://docs.datadoghq.com/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{% tab "Container image" %}}
+
+1. Install the Datadog Lambda Extension
+
+    ```dockerfile
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+    ```
+
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+
+2. Install the Datadog Java APM client
+
+    ```dockerfile
+    RUN yum -y install tar wget gzip
+    RUN wget -O /opt/dd-java-agent.jar https://dtdg.co/latest-java-tracer
+    ```
+
+3. Set the required environment variables
+
+    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
+    - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+
+[1]: https://gallery.ecr.aws/datadog/lambda-extension
+[2]: https://docs.datadoghq.com/getting_started/site/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install the Datadog Lambda Extension
+1. Install the Datadog Lambda Extension
 
-[Configure the layers][1] for your Lambda function using the ARN in the following format:
+    [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-```
-// For x86 architecture
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
-// For arm64 architecture
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
-```
+    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
 
-The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
+2. Install the Datadog Java APM client
 
-### Install the Datadog tracing library
+    [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-[Configure the layers][2] for your Lambda function using the ARN in the following format:
+    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}`
 
-```
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
-```
+3. Set the required environment variables
 
-The latest `VERSION` is {{< latest-lambda-layer-version layer="dd-trace-java" >}}.
+    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
+    - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
-### Configure environment variables
-
-Configure the following environment variables on your function:
-
-```yaml
-DD_API_KEY: <DATADOG_API_KEY> # Replace <DATADOG_API_KEY> with your Datadog API key
-JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-DD_LOGS_INJECTION: true
-DD_JMXFETCH_ENABLED: false
-DD_TRACE_ENABLED: true
-```
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
-[2]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://docs.datadoghq.com/getting_started/site/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
-### Install the Datadog Lambda library
+## What's next?
 
-Install the Datadog Lambda Library locally by adding one of the following code blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `VERSION` below with the latest release (omitting the preceeding `v`): ![Maven Cental][4]
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-Include the following dependency in your `pom.xml`:
-
-```xml
-<dependency>
-  <groupId>com.datadoghq</groupId>
-  <artifactId>datadog-lambda-java</artifactId>
-  <version>VERSION</version>
-</dependency>
-```
-
-{{% /tab %}}
-{{% tab "Gradle" %}}
-
-Include the following in your `build.gradle`:
-
-```groovy
-dependencies {
-  implementation 'com.datadoghq:datadog-lambda-java:VERSION'
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Wrap your Lambda handler
-
-Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda Library:
-
-```java
-public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
-    public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda ddl = new DDLambda(request, context); //Required to initialize the trace
-
-        do_some_stuff();
-        make_some_http_requests();
-
-        ddl.finish(); //Required to finish the active span.
-        return new ApiGatewayResponse();
-    }
-}
-```
-
-### Unified service tagging
-
-Datadog recommends tagging your serverless applications with `DD_ENV`, `DD_SERVICE`, `DD_VERSION`, and `DD_TAGS`. See the [Lambda extension documentation][2] for more details.
-
-## Explore
-
-After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][9].
-
-### Monitor custom business logic
-
-If you would like to submit a custom metric, see the sample code below:
-
-```java
-public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
-    public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda ddl = new DDLambda(request, context);
-
-        Map<String,Object> myTags = new HashMap<String, Object>();
-            myTags.put("product", "latte");
-            myTags.put("order","online");
-
-        // Submit a custom metric
-        ddl.metric(
-            "coffee_house.order_value", // Metric name
-            12.45,                      // Metric value
-            myTags);                    // Associated tags
-
-        URL url = new URL("https://example.com");
-        HttpURLConnection hc = (HttpURLConnection)url.openConnection();
-        hc.connect();
-
-        ddl.finish();
-    }
-}
-```
-
-See the [custom metrics documentation][10] for more information on custom metric submission.
-
-### Connect logs and traces
-
-To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][11] for instructions.
-
-<div class="alert alert-info"> Failing to use the correct Java runtime can result in errors like, "Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" Make sure to use java8.al2 or java11 as runtime as described above. </div>
-
-## Upgrading
-
-Apache Foundation has announced that log4j, a popular Java logging library, is [vulnerable to remote code execution][12].
-Some versions of `datadog-lambda-java` include a transitive dependency on log4j that may be vulnerable. The vulnerable versions are:
-
--   `<=0.3.3`
--   `1.4.0`
-
-The latest version of datadog-lambda java is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
-
-If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well.
-You may find the latest version of `0.3.x` in the [datadog-lambda-java repository][13].
-
-The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` or `build.gradle` depending on whether you are using Maven or Gradle, respectively.
-
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-Your `pom.xml` file contains a section similar to the following:
-
-```xml
-<dependency>
-  <groupId>com.datadoghq</groupId>
-  <artifactId>datadog-lambda-java</artifactId>
-  <version>VERSION</version>
-</dependency>
-```
-
-Replace `VERSION` with the latest version of `datadog-lambda-java` (available above).
-Then redeploy your lambda function.
-
-{{% /tab %}}
-
-{{% tab "Gradle" %}}
-
-Your `build.gradle` file contains a section similar to the following:
-
-```groovy
-dependencies {
-  implementation 'com.datadoghq:datadog-lambda-java:VERSION'
-}
-```
-
-Replace `VERSION` with the latest version of `datadog-lambda-java` (available above).
-Then redeploy your lambda function.
-
-{{% /tab %}}
-{{< /tabs>}}
-
-If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` lambda layer and change it to:
-
-```
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
-```
-
-## Troubleshooting
-
-If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][14].
+- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
+- See the [troubleshooting guide][4] if you have trouble collecting the telemetry
+- See the [advanced configurations][5] to
+    - connect your telemetry using tags
+    - collect telemetry for AWS API Gateway, SQS, etc.
+    - capture the Lambda request and response payloads
+    - link errors of your Lambda functions to your source code
+    - filter or scrub sensitive information from logs or traces
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/guide/datadog_forwarder_java
-[2]: /serverless/libraries_integrations/extension/
-[3]: /serverless/enhanced_lambda_metrics
-[4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
-[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /serverless/insights#cold-starts
-[7]: /monitors/create/types/metric/?tab=threshold#overview
-[8]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[9]: https://app.datadoghq.com/functions
-[10]: /serverless/custom_metrics?tab=java
-[11]: /tracing/connect_logs_and_traces/java/
-[12]: https://www.datadoghq.com/log4j-vulnerability/
-[13]: https://github.com/DataDog/datadog-lambda-java/releases
-[14]: /serverless/guide/troubleshoot_serverless_monitoring/
+[1]: https://app.datadoghq.com/functions
+[2]: https://docs.datadoghq.com/metrics/dogstatsd_metrics_submission/
+[3]: /tracing/custom_instrumentation/java/
+[4]: /serverless/guide/troubleshoot_serverless_monitoring/
+[5]: /serverless/configuration/
