@@ -234,7 +234,9 @@
               {{ end }}
           {{ end }}
         {{ if gt $numOfCodeExamples 1 }}</div>{{ end }}
-        {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes) }}
+        {{ if ne $lang.extension "sh" }}
+            {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes) }}
+        {{ end }}
       </div>
     {{ end }}
 {{ else }}
