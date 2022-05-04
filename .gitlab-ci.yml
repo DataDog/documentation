@@ -356,7 +356,7 @@ manage_untracked_translations:manual:
   <<: *base_template
   stage: post-deploy
   cache: {}
-  environment: "live"
+  environment: "preview"
   only:
     - brian.deutsch/gitignored_artifact
   script:
