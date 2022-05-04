@@ -5,9 +5,6 @@ code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
 further_reading:
-    - link: 'https://github.com/DataDog/dd-appsec-php'
-      tag: 'GitHub' 
-      text: 'PHP Datadog AppSec Library source code'
     - link: 'https://github.com/DataDog/dd-trace-php'
       tag: 'GitHub'
       text: 'PHP Datadog Tracer Library source code'
