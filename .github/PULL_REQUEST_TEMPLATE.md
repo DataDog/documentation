@@ -6,13 +6,8 @@
 ### Motivation
 <!-- What inspired you to submit this pull request?-->
 
-### Preview
-<!-- Impacted pages preview links-->
-
-<!-- This only works if you are part of the Datadog organization and working off of a branch - it will not work with a fork.
-
-Replace the branch name and add the complete path: -->
-https://docs-staging.datadoghq.com/<BRANCH_NAME>/<PATH>
+<!-- ### Preview -->
+<!-- Assuming you are a Datadog employee and named your branch `<yourname>/<description>`, a preview build will run and links to the preview output will be auto-generated and posted in the PR comments. The links will 404 until the preview build is finished running -->
 
 ### Additional Notes
 <!-- Anything else we should know when reviewing?-->
