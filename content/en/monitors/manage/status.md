@@ -93,9 +93,9 @@ The evaluation graph represents the exact query behavior within the timeframe br
 
 {{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true"  width="80%" >}}
 
-The Status & History visualization changes when the monitor has [Notification Grouping][10] configured. In that case, the monitor status page shows the status of the parent group first and allows you to expand on it by selecting the group or selecting the "View all .." button. You will see a side panel opening up, showing the sub groups of the parent. In here, you can perform the same actions as mentioned above, e.g., filtering on groups, state, zoom in and out of the time frame.
+The Status & History visualization changes when the monitor has [Notification Grouping][10] configured. In that case, the monitor status page shows the status of the parent group first and allows you to expand on it by selecting the "View all .." button. You will see a side panel opening up, showing the sub groups of the parent. In here, you can perform the same actions as mentioned above, e.g., filtering on groups, state, zoom in and out of the time frame.
 
-{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true"  width="80%" >}}
+{{< img src="monitors/monitor_status/notification_grouping_status_history.mp4" alt="status monitor history" video="true"  width="80%" >}}
 
 For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][6] with a formatted graph of the monitor query.
 
