@@ -34,7 +34,7 @@ jobs:
       with:
         issue-number: ${{ github.event.pull_request.number }}
         comment-author: 'github-actions[bot]'
-        body-includes: "Preview links:"
+        body-includes: "Preview links ("
     - name: Post comment
       uses: peter-evans/create-or-update-comment@v2.0.0
       with:
