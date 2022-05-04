@@ -18,7 +18,7 @@ jobs:
     - name: Generate links
       id: comment_body
       run: |
-        for file in ${{ steps.changed_files.outputs.added_modified }}; do
+        for file in ${{ steps.changed_files.outputs.all }}; do
           echo "Checking file ${file}..."
           if [[ "$file" =~ ^content/en/(.*).md$ ]]; then
             fname = $( echo ${BASH_REMATCH[1]} | sed "s/_index//")
