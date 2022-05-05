@@ -1,14 +1,15 @@
 ---
-title: ECS アプリケーションのトレース
-kind: Documentation
 further_reading:
-  - link: /agent/amazon_ecs/logs/
-    tag: Documentation
-    text: アプリケーションログの収集
-  - link: /agent/amazon_ecs/tags/
-    tag: Documentation
-    text: コンテナから送信された全データにタグを割り当て
+- link: /agent/amazon_ecs/logs/
+  tag: Documentation
+  text: アプリケーションログの収集
+- link: /agent/amazon_ecs/tags/
+  tag: Documentation
+  text: コンテナから送信された全データにタグを割り当て
+kind: Documentation
+title: ECS アプリケーションのトレース
 ---
+
 ## セットアップ
 
 [Amazon ECS エージェントのインストール手順][1]でインストールした後、以下の手順に従いトレースの収集を有効にします。
@@ -33,37 +34,36 @@ containerDefinitions": [
     ...
   {{< /code-block >}}
 
-    {{< site-region region="us3,eu,gov" >}} 
-  Agent が正しい Datadog ロケーションにデータを送信できるよう、`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} の場合に以下の環境変数を設定します。
+   Agent が正しい Datadog ロケーションにデータを送信できるよう、`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} の場合に以下の環境変数を設定します。
 
-  ```json
-  "environment": [
-       ...
-     {
-       "name": "DD_SITE",
-       "value": "<DATADOG_SITE>"
-     },
-     ...
-     ]
-   ...
-  ```
-  {{< /site-region >}}
-  **Agent v7.17 以下**の場合、以下の環境変数を追加します。
-   ```json
-   "environment": [
+    ```json
+    "environment": [
         ...
       {
-        "name": "DD_APM_ENABLED",
-        "value": "true"
-      },
-      {
-        "name": "DD_APM_NON_LOCAL_TRAFFIC",
-        "value": "true"
+        "name": "DD_SITE",
+        "value": "<DATADOG_SITE>"
       },
       ...
       ]
-   ...
-   ```
+    ...
+    ```
+
+    **Agent v7.17 以下**の場合、以下の環境変数を追加します。
+    ```json
+    "environment": [
+          ...
+        {
+          "name": "DD_APM_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_APM_NON_LOCAL_TRAFFIC",
+          "value": "true"
+        },
+        ...
+        ]
+    ...
+    ```
 
    [Agent のトレースコレクションで利用可能なすべての環境変数はこちらをご覧ください][1]。
 
@@ -86,7 +86,7 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4
 [Amazon の ECS コンテナメタデータファイル][1]を使用すると、プライベート IP アドレスを検出できます。各ホストのプライベート IP アドレスを取得するには、次のコマンドを実行します。
 
 {{< code-block lang="curl" >}}
-cat $ECS_CONTAINER_METADATA_FILE | jq .HostPrivateIPv4Address
+cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{< /code-block >}}
 
 
@@ -125,7 +125,6 @@ tracer.configure(hostname=get_aws_ip())
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
 
-
 [1]: https://docs.datadoghq.com/ja/tracing/setup/python/#change-agent-hostname
 {{< /programming-lang >}}
 
@@ -141,7 +140,7 @@ const axios = require('axios');
 })();
 ```
 
-他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
+他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更][1]を参照してください。
 
 
 [1]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/#change-agent-hostname
@@ -154,7 +153,7 @@ require 'ddtrace'
 require 'net/http'
 
 Datadog.configure do |c|
-  c.tracer hostname: Net::HTTP.get(URI('http://169.254.169.254/latest/meta-data/local-ipv4'))
+  c.agent.host = Net::HTTP.get(URI('http://169.254.169.254/latest/meta-data/local-ipv4'))
 end
 ```
 
@@ -196,7 +195,7 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 ]
 ```
 
-他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
+他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更][1]を参照してください。
 
 
 [1]: https://docs.datadoghq.com/ja/tracing/setup/java/#change-agent-hostname

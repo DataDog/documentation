@@ -47,18 +47,14 @@ Datadog クライアントのログメッセージは、他のメッセージと
 
 トレーサーの `log` 属性を使用し、デフォルトロガーを上書きしてカスタムロガーに置き換えることができます。
 
-<mrk mid="45" mtype="seg">
-
 ```ruby
-f = File.new(&quot;&lt;FILENAME&gt;.log&quot;, &quot;w+&quot;)           # ログメッセージが書き込まれる場所
+f = File.new("<FILENAME>.log", "w+")           # ログメッセージが書き込まれる場所
 Datadog.configure do |c|
-  c.tracer log:</mrk> <mrk mid="46" mtype="seg">Logger.new(f)                 # デフォルトのトレーサーの上書き
+  c.logger.instance = Logger.new(f)                 # デフォルトのトレーサーのオーバーライド
 end
 
-Datadog::Tracer.log.info { &quot;this is typically called by tracing code&quot; }
+Datadog::Tracing.logger.info { "this is typically called by tracing code" }
 ```
-
-</mrk>
 
 詳細については、[API に関するドキュメント][1]を参照してください。
 
