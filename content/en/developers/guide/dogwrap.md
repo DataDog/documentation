@@ -14,6 +14,8 @@ To install from pip:
 pip install datadog
 ```
 
+Adds paragraph.
+
 To install from source:
 
 1. Clone the [DataDog/datadogpy][1] repository.
