@@ -133,13 +133,16 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     RUN wget https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
     RUN mkdir /opt/datadog
     RUN tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
+    ENV CORECLR_ENABLE_PROFILING=1
+    ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+    ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+    ENV DD_DOTNET_TRACER_HOME=/opt/datadog
     ```
 
     Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you would like to use (for example, `2.3.0`). The minimum supported version is `2.3.0`. You can see the latest versions of `dd-trace-dotnet` in [GitHub][2].
 
 3. Set the required environment variables
 
-    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
     - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
@@ -164,7 +167,10 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 3. Set the required environment variables
 
-    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
+    - Set `CORECLR_ENABLE_PROFILING` to `1`.
+    - Set `CORECLR_PROFILER` to `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`.
+    - Set `CORECLR_PROFILER_PATH` to `/opt/datadog/Datadog.Trace.ClrProfiler.Native.so`.
+    - Set `DD_DOTNET_TRACER_HOME` to `/opt/datadog`.
     - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 

@@ -26,100 +26,6 @@ aliases:
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI.
 
 {{< tabs >}}
-{{% tab "Datadog CLI" %}}
-
-The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
-
-1. Install the Datadog CLI client
-
-    ```sh
-    npm install -g @datadog/datadog-ci
-    ```
-
-2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in the interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
-
-    ```sh
-    datadog-ci lambda instrument -i
-    ```
-
-3. Configure the AWS credentials
-
-    Datadog CLI requires access to the AWS Lambda service, and depends on the AWS JavaScript SDK to [resolve the credentials][1]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
-
-4. Configure the Datadog site
-
-    Specify the [Datadog site][2] where the telemetry should be sent to. The default is `datadoghq.com`.
-
-    ```sh
-    export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu or ddog-gov.com
-    ```
-
-5. Configure the Datadog API key
-
-    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
-
-    ```sh
-    export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
-    ```
-
-    For quick testing purposes, you can also set the Datadog API key in plaintext:
-
-    ```sh
-    export DATADOG_API_KEY="<DATADOG_API_KEY>"
-    ```
-
-6. Instrument your Lambda functions
-
-    **Note**: Instrument your Lambda functions in a dev or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
-
-    To instrument your Lambda functions, run the following command.
-
-    ```sh
-    datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="dd-trace-dotnet" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
-    ```
-
-    To fill in the placeholders:
-    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
-    - Replace `<aws_region>` with the AWS region name.
-
-    Additional parameters can be found in the [CLI documentation][3].
-
-[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
-
-The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
-
-To install and configure the Datadog Serverless Plugin, follow these steps:
-
-1. Install the Datadog Serverless Plugin:
-
-    ```sh
-    serverless plugin install --name serverless-plugin-datadog
-    ```
-
-2. Update your `serverless.yml`:
-
-    ```yaml
-    custom:
-      datadog:
-        site: <DATADOG_SITE>
-        apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
-    ```
-
-    To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
-
-    For more information and additional settings, see the [plugin documentation][1].
-
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
-[3]: https://docs.datadoghq.com/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
 {{% tab "Container image" %}}
 
 1. Install the Datadog Lambda Extension
@@ -137,15 +43,38 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     RUN wget -O /opt/dd-java-agent.jar https://dtdg.co/latest-java-tracer
     ```
 
-3. Set the required environment variables
+3. Install the Datadog Lambda library
+    
+    If you are using Maven, include the following dependency in your `pom.xml`, and replace `VERSION` with the latest release (omitting the preceeding `v`): ![Maven Cental][2]:
 
-    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
-    - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
-    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    ```xml
+    <dependency>
+      <groupId>com.datadoghq</groupId>
+      <artifactId>datadog-lambda-java</artifactId>
+      <version>VERSION</version>
+    </dependency>
+    ```
+    
+    If you are using Gradle, include the following dependency in your `build.gradle`, and replace `VERSION` with the latest release (omitting the preceeding `v`): ![Maven Cental][2]:
+
+    ```groovy
+    dependencies {
+      implementation 'com.datadoghq:datadog-lambda-java:VERSION'
+    }
+    ```
+
+4. Set the required environment variables
+
+    - Set `JAVA_TOOL_OPTIONS` to `-javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1`
+    - Set `DD_JMXFETCH_ENABLED` to `false`
+    - Set `DD_TRACE_ENABLED` to `true`
+    - Set `DD_SITE` to your [Datadog site][3] to send the telemetry to.
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
+[3]: https://docs.datadoghq.com/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -161,15 +90,38 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}`
 
-3. Set the required environment variables
+3. Install the Datadog Lambda library
+    
+    If you are using Maven, include the following dependency in your `pom.xml`, and replace `VERSION` with the latest release (omitting the preceeding `v`): ![Maven Cental][2]:
 
-    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
-    - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
-    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    ```xml
+    <dependency>
+      <groupId>com.datadoghq</groupId>
+      <artifactId>datadog-lambda-java</artifactId>
+      <version>VERSION</version>
+    </dependency>
+    ```
+    
+    If you are using Gradle, include the following dependency in your `build.gradle`, and replace `VERSION` with the latest release (omitting the preceeding `v`): ![Maven Cental][2]:
+
+    ```groovy
+    dependencies {
+      implementation 'com.datadoghq:datadog-lambda-java:VERSION'
+    }
+    ```
+
+4. Set the required environment variables
+
+    - Set `JAVA_TOOL_OPTIONS` to `-javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1`
+    - Set `DD_JMXFETCH_ENABLED` to `false`
+    - Set `DD_TRACE_ENABLED` to `true`
+    - Set `DD_SITE` to your [Datadog site][3] to send the telemetry to.
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
+[3]: https://docs.datadoghq.com/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
