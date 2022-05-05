@@ -3,22 +3,22 @@ on:
   pull_request:
     paths:
       - 'content/en/**.md'
+      - .github/workflows/preview_link.yml
 
 jobs:
   preview-link:
-    if: contains(${{ github.head_ref }}, "/")
+    if: contains(github.head_ref, '/')
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Find changed files
       id: changed_files
-      uses: jitterbit/get-changed-files@v1
-      continue-on-error: true
+      uses: tj-actions/changed-files@v19
     - name: Generate links
       id: comment_body
       run: |
-        for file in ${{ steps.changed_files.outputs.all }}; do
+        for file in ${{ steps.changed_files.outputs.all_modified_files }}; do
           echo "Checking file ${file}..."
           if [[ "$file" =~ ^content/en/(.*).md$ ]]; then
             fname=$( echo ${BASH_REMATCH[1]} | sed "s/_index//")
