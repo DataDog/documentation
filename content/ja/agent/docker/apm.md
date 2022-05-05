@@ -200,8 +200,8 @@ tracer.configure(
 
 ```ruby
 Datadog.configure do |c|
-  c.tracer hostname: 'datadog-agent',
-           port: 8126
+  c.agent.host = 'datadog-agent'
+  c.agent.port = 8126
 end
 ```
 
