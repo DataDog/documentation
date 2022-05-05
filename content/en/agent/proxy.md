@@ -567,7 +567,7 @@ stream {
 Edit each Agent configuration file to point to Nginx by setting its `dd_url` to the address of Nginx, for example: `nginx.example.com`.
 This `dd_url` setting can be found in the `datadog.yaml` file.
 
-dd_url: http://nginx.example.com:3834
+`dd_url: http://nginx.example.com:3834`
 
 To use the Datadog Agent v6/7.16+ as the logs collector, instruct the Agent to use the newly created proxy instead of establishing a connection directly with the logs intake by updating `datadog.yaml`:
 
