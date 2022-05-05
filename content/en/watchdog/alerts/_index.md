@@ -29,7 +29,7 @@ An alert overview card contains the sections below:
 3. Message: Describes the anomaly.
 4. Graph: Visually represents the anomaly.
 5. Tags: Shows the scope of the anomaly.
-6. Impact (when available): Describes which users, views, or services the anomaly affects.
+6. [Impact][4] (when available): Describes which users, views, or services the anomaly affects.
 
 To hide an irrelevant alert, hover over it. Click the folder icon that appears in the upper right corner.
 
@@ -66,9 +66,9 @@ The left side of the Watchdog alerts feed contains the search facets below. Chec
 |-----------------|-----------------------------------------------------------------------------------|
 | Alert Category  | Display all `apm` or all `infrastructure` alerts.                                 |
 | Alert Type      | Select alerts using metrics from APM or infrastructure integrations.              |
-| APM Environment | The [APM Environment][4] to display alerts from.                                  |
-| APM Primary Tag | The [defined APM primary tag][5] to display alerts from.                          |
-| APM Service     | The [APM Service][6] to display alerts from.                                      |
+| APM Environment | The [APM Environment][5] to display alerts from.                                  |
+| APM Primary Tag | The [defined APM primary tag][6] to display alerts from.                          |
+| APM Service     | The [APM Service][7] to display alerts from.                                      |
 
 
 ## Manage archived alerts
@@ -82,6 +82,7 @@ To see archived alerts, select the checkbox option to "Show N archived alerts" i
 [1]: https://app.datadoghq.com/watchdog
 [2]: https://app.datadoghq.com/apm/home
 [3]: /tracing/visualization/service/
-[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[5]: /tracing/guide/setting_primary_tags_to_scope/
-[6]: /tracing/visualization/#services
+[4]: /watchdog/impact_analysis/
+[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[6]: /tracing/guide/setting_primary_tags_to_scope/
+[7]: /tracing/visualization/#services
