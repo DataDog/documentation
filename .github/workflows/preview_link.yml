@@ -6,6 +6,7 @@ on:
 
 jobs:
   preview-link:
+    if: contains(${{ github.head_ref }}, "/")
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -17,10 +18,11 @@ jobs:
     - name: Generate links
       id: comment_body
       run: |
-        for file in ${{ steps.changed_files.outputs.added_modified }}; do
+        for file in ${{ steps.changed_files.outputs.all }}; do
           echo "Checking file ${file}..."
           if [[ "$file" =~ ^content/en/(.*).md$ ]]; then
-            body="${body}https://docs-staging.datadoghq.com/${{ github.head_ref }}/${BASH_REMATCH[1]}\n"
+            fname = $( echo ${BASH_REMATCH[1]} | sed "s/_index//")
+            body="${body}https://docs-staging.datadoghq.com/${{ github.head_ref }}/${fname}\n"
           fi
         done
         printf "Preview links:\n$body"
