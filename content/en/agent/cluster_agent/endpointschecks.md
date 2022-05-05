@@ -15,16 +15,16 @@ further_reading:
 
 ## Overview
 
-The cluster check feature provides the ability to Autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services). The [service based cluster checks][1] can be used to schedule one instance of the desired check with respect to the service and its IP address. In comparison Endpoint Checks extend this mechanism to monitor *each* endpoint managed by the Kubernetes service.
+The Cluster Check feature provides the ability to Autodiscover and perform checks on load-balanced cluster services, such as Kubernetes services. [Service-based Cluster Checks][1] can be used to schedule one instance of a desired check with respect to the service and its IP address. Endpoints Checks extend this mechanism to monitor *each* endpoint managed by the Kubernetes service.
 
-The [Cluster Agent][2] discovers the Endpoint Check configurations based on Autodiscovery Annotations on the Kubernetes services, then dispatches them to node-based Agents to individually run. The Endpoint Checks are dispatched to Agents that run on the same node as the pod(s) that back the endpoint(s) of the monitored Kubernetes service. This dispatching logic allows the Agent to add the pod and container tags it has already automatically collected for the respective pod(s).
+The [Cluster Agent][2] discovers Endpoints Check configurations based on Autodiscovery annotations on the Kubernetes services. The Cluster Agent then dispatches these configurations to node-based Agents to individually run. Endpoints Checks are dispatched to Agents that run on the same node as the pod(s) that back the endpoint(s) of the monitored Kubernetes service. This dispatching logic allows the Agent to add the pod and container tags it has already automatically collected for the respective pod(s).
 
-The Agents connect to the Cluster Agent every 10 seconds and retrieve the check configurations to run. Metrics coming from endpoints checks are submitted with service tags, [kubernetes tags][3], host tags, and the `kube_endpoint_ip` tag based on the evaluated IP Address.
+The Agents connect to the Cluster Agent every ten seconds and retrieve the check configurations to run. Metrics coming from Endpoints Checks are submitted with service tags, [Kubernetes tags][3], host tags, and the `kube_endpoint_ip` tag based on the evaluated IP address.
 
-This feature is supported on Kubernetes for versions 6.12.0+ of the Agent, and versions 1.3.0+ of the Cluster Agent. Starting with version 1.4.0, the Cluster Agent converts every endpoints check of a non-pod-backed endpoint into a regular cluster check. Enable the [cluster check][4] feature alongside endpoints checks to take advantage of this functionality.
+This feature is supported on Kubernetes for Agent v6.12.0+ and Cluster Agent v1.3.0+. Starting with v1.4.0, the Cluster Agent converts every Endpoints Check of a non-pod-backed endpoint into a regular Cluster Check. Enable the [Cluster Check][4] feature alongside Endpoints Checks to take advantage of this functionality.
 
-### Example: Service with Endpoints
-In this example below a Kubernetes deployment for nginx was created with 3 pods.
+### Example: Service with endpoints
+In the example below, a Kubernetes deployment for NGINX was created with three pods.
 
 ```shell
 # kubectl get pods --selector app=nginx -o wide
@@ -34,7 +34,8 @@ nginx-66d557f4cf-smsxv   1/1     Running   0          3d    10.0.1.209   gke-clu
 nginx-66d557f4cf-x2wzq   1/1     Running   0          3d    10.0.1.210   gke-cluster-default-pool-4658d5d4-p39c
 ```
 
-A service was also created, linking up this service to the pods through these 3 endpoints.
+A service was also created. It links to the pods through these three endpoints.
+
 ```shell
 # kubectl get service nginx -o wide
 NAME    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE   SELECTOR
@@ -64,27 +65,17 @@ nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
       name: nginx-66d557f4cf-x2wzq
       ...
 ```
-So while a Service based cluster check tests the Service's single IP Address, the Endpoint Checks are scheduled for *each* of these three endpoints associated with this Service. By design too, the Endpoint Checks are dispatched to Agents that run on the same node as the pods that back the endpoints of this `nginx` service. So in this example the Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` run the checks against these `nginx` pods.
 
-## Set up Endpoint Check dispatching
+While a service-based Cluster Check tests the service's single IP address,  Endpoints Checks are scheduled for *each* of the three endpoints associated with this service. 
+
+By design, Endpoints Checks are dispatched to Agents that run on the same node as the pods that back the endpoints of this `nginx` service. In this example, the Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` run the checks against these `nginx` pods.
+
+## Set up Endpoints Check dispatching
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-This is enabled by default in the Helm deployment of the Cluster Agent through the `datadog.clusterChecks.enabled` configuration key:
-```yaml
-datadog:
-  clusterChecks:
-    enabled: true
-  # (...)
-clusterAgent:
-  enabled: true
-  # (...)
-```
-This configuration enables both cluster check and Endpoint Check dispatching, between the Cluster Agent and the Agents.
-
-{{% /tab %}}
 {{% tab "Operator" %}}
-Cluster check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `clusterAgent.config.clusterChecksEnabled` configuration key:
+
+Cluster Check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `clusterAgent.config.clusterChecksEnabled` configuration key:
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
@@ -97,9 +88,26 @@ spec:
       clusterChecksEnabled: true
 ```
 
-This configuration enables both cluster check and Endpoint Check dispatching, between the Cluster Agent and the Agents.
+This configuration enables both Cluster Check and Endpoints Check dispatching between the Cluster Agent and the Agents.
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+This is enabled by default in the Helm deployment of the Cluster Agent through the `datadog.clusterChecks.enabled` configuration key:
+```yaml
+datadog:
+  clusterChecks:
+    enabled: true
+  # (...)
+clusterAgent:
+  enabled: true
+  # (...)
+```
+
+This configuration enables both Cluster Check and Endpoints Check dispatching between the Cluster Agent and the Agents.
+
+{{% /tab %}}
+
 {{% tab "Daemonset" %}}
 ### Cluster Agent setup
 
@@ -110,7 +118,7 @@ DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints"
 DD_EXTRA_LISTENERS="kube_endpoints"
 ```
 
-**Note**: If the monitored endpoints are not backed by pods, you must [enable cluster checks][1]. This can be done by adding the `kube_services` configuration provider and listener:
+**Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][1]. This can be done by adding the `kube_services` configuration provider and listener:
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints kube_services"
@@ -137,7 +145,7 @@ Enable the `endpointschecks` configuration providers on the Datadog **Node** Age
           polling: true
     ```
 
-**Note**: If the monitored endpoints are not backed by pods, you must [enable cluster checks][1]. This can be done by adding the `clusterchecks` configuration provider:
+**Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][1]. This can be done by adding the `clusterchecks` configuration provider:
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
@@ -153,7 +161,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 ## Setting up check configurations with Kubernetes service annotations
 
-Similar to [annotating Kubernetes Pods][5], services can be annotated with the following syntax:
+Similar to how [Kubernetes Pods][5] are annotated, services can be annotated with the following syntax:
 
 ```yaml
 ad.datadoghq.com/endpoints.check_names: '[<INTEGRATION_NAME>]'
@@ -164,10 +172,10 @@ ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 
 The `%%host%%` [template variable][6] is supported and is replaced by the endpoints' IPs. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip` tags are automatically added to the instances.
 
-**Note:** The custom endpoints logs configuration is only supported during Docker socket log collection and not Kubernetes log file collection.
+**Note**: Custom endpoints log configuration is only supported during Docker socket log collection, and not Kubernetes log file collection.
 
 ### Unified Service Tagging
-You can optionally add the standard labels to the Kubernetes service for [Unified Service Tagging][7] to set the `env`, `service`, and `version` tags on data generated by these checks.
+Optionally, to leverage [Unified Service Tagging][7], set the `env`, `service`, and `version` tags on data generated by these checks.
 ```yaml
 tags.datadoghq.com/env: "<ENV>"
 tags.datadoghq.com/service: "<SERVICE>"
@@ -176,10 +184,11 @@ tags.datadoghq.com/version: "<VERSION>"
 
 #### Example: HTTP check on an NGINX-backed service with NGINX check on the service's endpoints
 
-The example below takes advantage of all these options. This Service is associated to the pods of the `nginx` deployment. Based on this configuration:
-- An [`nginx`][8] based endpoint check will be dispatched for each Nginx pod backing this Service, this `nginx` check will be ran by the Agents on the same respective nodes as the Nginx pods using the Pod IP as the `%%host%%`.
-- An [`http_check`][9] based cluster check will be dispatched to a single Agent in the cluster, this `http_check` will use the IP of the Service as the `%%host%%` automatically getting load balanced to the respective endpoints
-- The checks will be dispatched out with the tags `env:prod`, `service:my-nginx`, and `version:1.19.0` corresponding to the Unified Service Tagging labels
+The example below takes advantage of all these options. This service is associated with the pods of the `nginx` deployment. Based on this configuration:
+
+- An [`nginx`][8]-based Endpoints Check is dispatched for each NGINX pod backing this service. This check is run by Agents on the same respective nodes as the NGINX pods (using the pod IP as `%%host%%`).
+- An [`http_check`][9]-based Cluster Check is dispatched to a single Agent in the cluster. This check uses the IP of the service as `%%host%%` , automatically getting load balanced to the respective endpoints.
+- The checks are dispatched with the tags `env:prod`, `service:my-nginx`, and `version:1.19.0`, corresponding to Unified Service Tagging labels.
 
 ```yaml
 apiVersion: v1
@@ -221,13 +230,13 @@ spec:
 
 ## Troubleshooting
 
-Troubleshooting endpoints checks is similar to [troubleshooting cluster checks][10]—the only difference is on the node-based Agents, where scheduled endpoints checks appear alongside the cluster check.
+Troubleshooting Endpoints Checks is similar to [troubleshooting Cluster Checks][10]. The only difference is on Node-based Agents, where scheduled Endpoints Checks appear alongside Cluster Checks.
 
-**Note**: Endpoints checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the service. If an endpoint is not backed by a pod, the Cluster Agent converts the check into a cluster check. This cluster check can be run by any node Agent.
+**Note**: Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the service. If an endpoint is not backed by a pod, the Cluster Agent converts the check into a Cluster Check. This Cluster Check can be run by any Node Agent.
 
-### Autodiscovery in the node-based Agent
+### Autodiscovery in the Node-based Agent
 
-The Agent `configcheck` command should show the instance, with the `endpoints-checks` source:
+The Agent `configcheck` command shows the instance, with the `endpoints-checks` source:
 
 ```shell
 # kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
@@ -274,7 +283,7 @@ The Agent `status` command should show the check instance running and reporting 
 
 ### Autodiscovery in the Cluster Agent
 
-The Cluster Agent `clusterchecks` command should show the instance(s), with the `kubernetes-endpoints` source:
+The Cluster Agent `clusterchecks` command shows the instance(s), with the `kubernetes-endpoints` source:
 
 ```shell
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
