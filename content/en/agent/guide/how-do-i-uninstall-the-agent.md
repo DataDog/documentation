@@ -1,6 +1,8 @@
 ---
-title: How do I uninstall the Agent?
-kind: faq
+title: Uninstalling the Agent
+kind: guide
+aliases:
+  - /agent/faq/how-do-i-uninstall-the-agent/
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

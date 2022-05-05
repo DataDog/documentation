@@ -1,6 +1,8 @@
 ---
 title: Datadog-Heroku Buildpack troubleshooting
-kind: faq
+kind: guide
+aliases:
+  - /agent/faq/heroku-troubleshooting/
 ---
 
 To start debugging Heroku, use the `agent-wrapper` command with the information/debugging commands listed in the [Agent documentation][1].

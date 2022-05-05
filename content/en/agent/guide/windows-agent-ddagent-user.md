@@ -1,6 +1,8 @@
 ---
 title: Datadog Windows Agent User
-kind: faq
+kind: guide
+aliases:
+  - /agent/faq/windows-agent-ddagent-user/
 ---
 
 Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under a dedicated user account, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
