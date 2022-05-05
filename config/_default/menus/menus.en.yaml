@@ -5219,7 +5219,7 @@ api:
       operationids:
         - EditGlobalVariable
       unstable: []
-      order: 18
+      order: 20
   - name: Get a global variable
     url: '#get-a-global-variable'
     identifier: get-a-global-variable
@@ -5243,7 +5243,7 @@ api:
       operationids:
         - DeleteGlobalVariable
       unstable: []
-      order: 20
+      order: 21
   - name: Create a global variable
     url: '#create-a-global-variable'
     identifier: create-a-global-variable
@@ -5255,7 +5255,7 @@ api:
       operationids:
         - CreateGlobalVariable
       unstable: []
-      order: 17
+      order: 18
   - name: Get all global variables
     url: '#get-all-global-variables'
     identifier: get-all-global-variables
@@ -5267,7 +5267,7 @@ api:
       operationids:
         - ListGlobalVariables
       unstable: []
-      order: 16
+      order: 17
   - name: Pause or start a test
     url: '#pause-or-start-a-test'
     identifier: pause-or-start-a-test
@@ -5327,7 +5327,7 @@ api:
       operationids:
         - GetTest
       unstable: []
-      order: 26
+      order: 27
   - name: Trigger tests from CI/CD pipelines
     url: '#trigger-tests-from-ci/cd-pipelines'
     identifier: trigger-tests-from-ci/cd-pipelines
@@ -5363,7 +5363,7 @@ api:
       operationids:
         - DeleteTests
       unstable: []
-      order: 15
+      order: 16
   - name: Get a browser test result
     url: '#get-a-browser-test-result'
     identifier: get-a-browser-test-result
@@ -5495,7 +5495,7 @@ api:
       operationids:
         - UpdatePrivateLocation
       unstable: []
-      order: 23
+      order: 24
   - name: Get a private location
     url: '#get-a-private-location'
     identifier: get-a-private-location
@@ -5507,7 +5507,7 @@ api:
       operationids:
         - GetPrivateLocation
       unstable: []
-      order: 22
+      order: 23
   - name: Delete a private location
     url: '#delete-a-private-location'
     identifier: delete-a-private-location
@@ -5519,7 +5519,7 @@ api:
       operationids:
         - DeletePrivateLocation
       unstable: []
-      order: 25
+      order: 26
   - name: Create a private location
     url: '#create-a-private-location'
     identifier: create-a-private-location
@@ -5531,7 +5531,7 @@ api:
       operationids:
         - CreatePrivateLocation
       unstable: []
-      order: 21
+      order: 22
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
     identifier: get-all-locations-public-and-private
@@ -5543,7 +5543,7 @@ api:
       operationids:
         - ListLocations
       unstable: []
-      order: 24
+      order: 25
   - name: Get details of batch
     url: '#get-details-of-batch'
     identifier: get-details-of-batch
@@ -5555,7 +5555,7 @@ api:
       operationids:
         - GetSyntheticsCIBatch
       unstable: []
-      order: 27
+      order: 15
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
