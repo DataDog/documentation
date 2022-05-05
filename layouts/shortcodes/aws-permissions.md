@@ -1,10 +1,10 @@
 ## Datadog Permissions
 
-These IAM permissions enable Datadog to collect metrics, tags, CloudWatch events, and other data necessary to monitor your AWS environment. The permissions listed below are included in the policy document using wild cards such as `List*` and `Get*`. If you require strict policies, use the complete action names as listed and reference the Amazon API documentation for the services you require.
+IAM permissions allow Datadog to collect metrics, tags, CloudWatch events, and data that are necessary to monitor your AWS environment. The following permissions included in the policy document use wild cards such as `List*` and `Get*`. If you require strict policies, use the complete action names as listed and reference the Amazon API documentation for your respective services.
 
 ### AWS Integration IAM Policy
 
-If you are not comfortable with granting this list of permissions, at the very least use the existing policies named **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess**.
+If you are not comfortable granting this list of permissions, use the existing **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess** policies.
 
 ```json
 {
@@ -93,4 +93,4 @@ If you are not comfortable with granting this list of permissions, at the very l
 ```
 ### AWS Security Audit Policy
 
-You must attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to your Datadog IAM role if you would like to use <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection" target="_blank">Cloud Security Posture Management</a>.
+To use <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection" target="_blank">Cloud Security Posture Management</a>, attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to your Datadog IAM role.
