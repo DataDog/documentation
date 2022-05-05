@@ -16,7 +16,7 @@ further_reading:
       text: "Troubleshooting Application Security Monitoring"
 ---
 
-You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
+You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
@@ -25,7 +25,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 1. **Update your Gemfile to include the Datadog library**:
 
    ```ruby
-   gem 'ddtrace', '~> 1.0'
+   gem 'ddtrace', '~> 1.1'
    ```
 
    For information about which language and framework versions are supported by the library, see [Compatibility][1].
@@ -33,16 +33,13 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    For more information about upgrading from a `dd-trace` 0.x version, see [the Ruby tracer upgrade guide][2].
 
 2. **Enable ASM**, either in your code:
+
+   Note: ASM currently requires the APM tracer to be enabled; a quick setup covering the most common cases is described below, see [the Ruby tracer documentation][3] for more details.
+
    {{< tabs >}}
 
 {{% tab "Rails" %}}
-   Either enable the tracer through auto-instrumentation by updating your Gemfile:
-
-   ```ruby
-   gem 'ddtrace', '~> 1.0', require: 'ddtrace/auto_instrument'
-   ```
-
-   Or enable the tracer by adding an initializer in your application code:
+   Enable the APM tracer manually by adding an initializer in your application code:
 
    ```ruby
    # config/initializers/datadog.rb
@@ -51,19 +48,43 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
    Datadog.configure do |c|
      # enable the APM tracer
-     # not needed if `gem 'ddtrace', require: 'ddtrace/auto_instrument' is used
      c.tracing.instrument :rails
 
+     # enable ASM
      c.appsec.enabled = true
      c.appsec.instrument :rails
    end
    ```
+
+   Or enable the APM tracer through auto-instrumentation by updating your Gemfile to auto-instrument:
+
+   ```ruby
+   gem 'ddtrace', '~> 1.1', require: 'ddtrace/auto_instrument'
+   ```
+
+   And also enable AppSec:
+
+   ```ruby
+   # config/initializers/datadog.rb
+
+   require 'datadog/appsec'
+
+   Datadog.configure do |c|
+     # the APM tracer is enabled by auto-instrumentation
+
+     # enable ASM
+     c.appsec.enabled = true
+     c.appsec.instrument :rails
+   end
+   ```
+
 {{% /tab %}}
 
 {{% tab "Sinatra" %}}
-   Enable the tracer by adding the following to your application's startup:
+   Enable the APM tracer by adding the following to your application's startup:
 
    ```ruby
+   require 'sinatra'
    require 'ddtrace'
    require 'datadog/appsec'
 
@@ -71,7 +92,22 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
      # enable the APM tracer
      c.tracing.instrument :sinatra
 
-     # enable appsec for Sinatra
+     # enable ASM for Sinatra
+     c.appsec.enabled = true
+     c.appsec.instrument :sinatra
+   end
+   ```
+
+   Or enable the APM tracer through auto-instrumentation:
+
+   ```ruby
+   require 'sinatra'
+   require 'ddtrace/auto_instrument'
+
+   Datadog.configure do |c|
+     # the APM tracer is enabled by auto-instrumentation
+
+     # enable ASM for Sinatra
      c.appsec.enabled = true
      c.appsec.instrument :sinatra
    end
@@ -79,7 +115,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 {{% /tab %}}
 
 {{% tab "Rack" %}}
-   Enable the tracer by adding the following to your `config.ru` file:
+   Enable the APM tracer by adding the following to your `config.ru` file:
 
    ```ruby
    require 'ddtrace'
@@ -89,7 +125,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
      # enable the APM tracer
      c.tracing.instrument :rack
 
-     # enable appsec for Rack
+     # enable ASM for Rack
      c.appsec.enabled = true
      c.appsec.instrument :rack
    end
@@ -141,7 +177,7 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the  environment section:
+Update your ECS task definition JSON file, by adding this in the environment section:
 
 ```json
 "environment": [
@@ -175,3 +211,4 @@ env DD_APPSEC_ENABLED=true rails server
 
 [1]: /security_platform/application_security/setup_and_configure/?code-lang=ruby#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
+[3]: /tracing/setup_overview/setup/ruby/
