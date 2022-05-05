@@ -6,7 +6,7 @@ on:
 
 jobs:
   preview-link:
-    if: contains(${{ github.head_ref }}, "/")
+    if: contains(github.head_ref, "/")
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -18,6 +18,7 @@ jobs:
     - name: Generate links
       id: comment_body
       run: |
+        echo ${{ github.head_ref }}
         for file in ${{ steps.changed_files.outputs.all }}; do
           echo "Checking file ${file}..."
           if [[ "$file" =~ ^content/en/(.*).md$ ]]; then
