@@ -15,39 +15,43 @@ assets:
     activemq_processes: assets/saved_views/activemq_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - log collection
-  - processing
-  - messaging
-  - autodiscovery
+- log collection
+- processing
+- messaging
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/activemq/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
 display_name: ActiveMQ
 draft: false
 git_integration_title: activemq
 guid: 496df16d-5ad0-438c-aa2a-b8ba8ee3ae05
 integration_id: activemq
 integration_title: ActiveMQ
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: activemq.
 metric_to_check:
-  - activemq.queue.size
-  - activemq.artemis.queue.message_count
+- activemq.queue.size
+- activemq.artemis.queue.message_count
 name: activemq
 process_signatures:
-  - activemq
+- activemq
 public_title: Datadog-ActiveMQ インテグレーション
 short_description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 ActiveMQ チェックは、ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集します。
@@ -62,7 +66,7 @@ ActiveMQ チェックは、ブローカーとキュー、プロデューサー�
 
 Agent の ActiveMQ チェックは [Datadog Agent][3] パッケージに含まれています。ActiveMQ ノードに追加でインストールする必要はありません。
 
-このチェックは、メトリクスを JMX 経由で収集するため、Agent が [jmxfetch][4] をフォークできるように、各ノード上に JVM が必要です。Oracle 提供の JVM を使用することをお勧めします。
+このチェックは、メトリクスを JMX 経由で収集するため、Agent が [jmxfetch][4] をフォークできるように、各ノード上に JVM が必要です。Datadog は、Oracle 提供の JVM を使用することをお勧めします。
 
 ### コンフィギュレーション
 
@@ -141,14 +145,14 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "activemq", "service": "<YOUR_APP_NAME>"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -160,7 +164,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### メトリクス
 {{< get-metrics-from-git "activemq" >}}
-  ActiveMQ Artemis フレーバーに関連付けられたメトリクスは、メトリクス名に `artemis` が含まれています。その他すべては ActiveMQ "classic" に報告されます。
+ActiveMQ Artemis フレーバーに関連付けられたメトリクスは、メトリクス名に `artemis` が含まれています。その他すべては ActiveMQ "classic" に報告されます。
 
 ### イベント
 
@@ -287,7 +291,7 @@ ActiveMQ XML チェックには、サービスのチェック機能は含まれ�
 [8]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [10]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
-[11]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
+[11]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [12]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [14]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
