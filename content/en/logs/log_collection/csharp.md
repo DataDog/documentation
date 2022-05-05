@@ -335,10 +335,10 @@ To enable Agentless logging, set the following environment variables:
 `DD_LOGS_INJECTION`
 : Enables [connecting logs and traces][5]:<br>
 **Default**: `true` <br>
-Enabled by default when using agentless logging from Tracer version 2.7.0.
+Enabled by default when using Agentless logging from Tracer version 2.7.0.
 
 `DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS`
-: Enables agentless logging. Enable for your logging framework by setting to `Serilog`, `NLog`, `Log4Net`, or `ILogger` (for `Microsoft.Extensions.Logging`). If you are using multiple logging frameworks, use a semicolon separated list of variables.<br>
+: Enables Agentless logging. Enable for your logging framework by setting to `Serilog`, `NLog`, `Log4Net`, or `ILogger` (for `Microsoft.Extensions.Logging`). If you are using multiple logging frameworks, use a semicolon separated list of variables.<br>
 **Example**: `Serilog;Log4Net;NLog`
 
 <div class="alert alert-warning">
@@ -424,7 +424,7 @@ The following configuration values should generally not be modified, but may be 
 
 ## Agentless logging with Serilog sink
 
-If it is not possible to use file-tail logging or APM agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][15] to send logs directly to Datadog.
+If it is not possible to use file-tail logging or APM Agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][15] to send logs directly to Datadog.
 
 Install the Datadog [Serilog sink][15] into your application, which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
 Run the following command in the Package Manager Console:
@@ -591,7 +591,7 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [8]: /account_management/org_settings/sensitive_data_detection/#overview
 [9]: /tracing/setup_overview/setup/dotnet-core
 [10]: /tracing/setup_overview/setup/dotnet-framework
-[11]: /organization-settings/api-keys
+[11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: /getting_started/site/
 [13]: /logs/log_configuration/pipelines/?tab=source
 [14]: /api/latest/logs/#send-logs
