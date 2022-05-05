@@ -52,10 +52,9 @@ def handler(event, context):
 
 You can [see your sample app functions in Serverless View][11].
 
-## Serverless View
-You can also access Serverless View through Datadog’s left nav: **Infrastructure > Serverless**.
-
 {{< img src="getting_started/serverless/dd_serverless_view.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
+
+## Serverless View
 
 The Serverless View displays telemetry from all serverless resources in your AWS environment. You can use this page as a starting point for monitoring, debugging, and optimizing your applications.
 
@@ -81,7 +80,9 @@ You can intentionally cause an error by editing the `datadog-sample-entry-functi
 
 Deploy this change and invoke your sample app again to see how you can investigate this error in Datadog.
 
-{{< img src="getting_started/serverless/dd_serverless_view.png" alt="Close-up of two functions" style="width:80%;">}}
+{{< img src="getting_started/serverless/dd_serverless_view_error.png" alt="Close-up of two functions" style="width:80%;">}}
+
+Notice that `datadog-sample-entry-function` has five errors.
 
 ## Function details
 Click on your function to see more details regarding invocations and recent deployments.
@@ -91,8 +92,6 @@ Click on your function to see more details regarding invocations and recent depl
 The detailed view, as shown above, contains three graphs. You can set these to display any available metric; by default, they show three [enhanced Lambda metrics][7]: invocations, errors, and duration. 
 
 Datadog generates enhanced Lambda metrics out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags. You can also view the default [enhanced Lambda metrics dashboard][8].
-
-Note the appearance of several errors in the image.
 
 
 ### Invocations
