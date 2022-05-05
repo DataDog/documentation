@@ -16,7 +16,7 @@ further_reading:
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
 - link: https://www.datadoghq.com/blog/metrics-without-limits/
   tag: ブログ
-  text: Metrics without LimitsTM でカスタムメトリクスのボリュームをダイナミックにコントロール
+  text: Metrics without Limits™ でカスタムメトリクスのボリュームをダイナミックにコントロール
 kind: documentation
 title: カスタムメトリクス
 ---
