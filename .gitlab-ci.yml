@@ -35,7 +35,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:brian.deutsch_ignored_artifact
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
   except:
@@ -353,7 +353,7 @@ evaluate_missing_metrics:
     - master
 
 # TODO: update job to be scheduled/only run on master deploys when we are ready to deprecate old translations job
-manage_untracked_translations:manual:
+manage_ignored_translations:
   <<: *base_template
   stage: post-deploy
   cache: {}
@@ -362,7 +362,6 @@ manage_untracked_translations:manual:
     - brian.deutsch/gitignored_artifact
   script:
     - manage_ignored_translation_files
-  when: manual
 
 manage_translations:on-schedule:
   <<: *base_template
