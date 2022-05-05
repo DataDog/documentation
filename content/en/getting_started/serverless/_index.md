@@ -10,21 +10,33 @@ further_reading:
 
 ## Overview
 
-This guide makes use of a serverless [sample app][1] that you can launch with one click. This app has Datadog Serverless Monitoring preconfigured.
+_Serverless_ is a model where developers build and run applications and services using a cloud provider, rather than managing infrastructure themselves. Datadog [Serverless Monitoring][10] collects metrics, logs, and traces from your serverless infrastructure, enabling you to monitor your application's health and performance.
 
-### Installation
+{{< img src="getting_started/serverless/serverless_view.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
 
-1. [Launch Stack][9].
-2. Enter your Datadog API key and Datadog site ({{< region-param key="dd_site" code="true" >}}). Then, acknowledge IAM capabilities and click **Create Stack**.
+This guide makes use of a serverless [sample app][1] that you can launch with one click. This app has Serverless Monitoring preconfigured. Follow this guide to see how you might troubleshoot a problem in your sample app, and what kinds of visibility Serverless Monitoring can provide.
+
+### Install the sample app
+
+1. [Launch the CloudFormation Stack][9]. This link brings you to a **Create stack** page in CloudFormation.
+2. Enter your Datadog API key and Datadog site ({{< region-param key="dd_site" code="true" >}}). 
+
+  {{< img src="getting_started/serverless/aws_create_stack.png" alt="Close-up of two functions" style="width:80%;">}}
+
+  Then, acknowledge IAM capabilities and click **Create Stack**.
+
 3. After the stack has been created, open the Outputs tab.
-4. Invoke your stack a few times by visiting the `ApiGatewayInvokeURL`.
 
-Then, visit your `DatadogFunctionLink` to see your functions in Serverless View.
+  {{< img src="getting_started/serverless/aws_outputs.png" alt="Close-up of two functions" style="width:80%;">}}
+
+4. Invoke your stack a few times by visiting the `ApiGatewayInvokeURL`. This displays a "Sent message to SNS" success message.
+
+You can then [see your sample app functions in Serverless View][11].
 
 ## Serverless View
 You can also access Serverless View through Datadog’s left nav: **Infrastructure > Serverless**.
 
-{{< img src="getting_started/serverless/serverless_view.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
+{{< img src="getting_started/serverless/dd_serverless_view.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
 
 The Serverless View displays telemetry from all serverless resources in your AWS environment. You can use this page as a starting point for monitoring, debugging, and optimizing your applications.
 
@@ -91,3 +103,5 @@ You can also view the default [enhanced Lambda metrics dashboard][8].
 [7]: https://docs.datadoghq.com/serverless/enhanced_lambda_metrics
 [8]: https://app.datadoghq.com/screen/integration/30306?_gl=1*19700i3*_ga*OTk0Mjg4Njg4LjE2NDIwOTM2OTY.*_ga_KN80RDFSQK*MTY0OTI3NzAyMC4xNTAuMS4xNjQ5MjgzMjI1LjA.
 [9]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-serverless-sample-app&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-sample-app/latest.yaml
+[10]: /serverless
+[11]: https://app.datadoghq.com/functions?cloud=aws&text_search=datadog-serverless-sample-app
