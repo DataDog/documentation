@@ -17,10 +17,9 @@ further_reading:
 
 The Go Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
-To begin tracing your Go applications, your environment must first meet the following requirements:
+The Go Datadog Trace Library has a [version support policy](https://github.com/DataDog/dd-trace-go#support-policy) defined for Go versions. The latest two releases of Go are fully supported while the third newest release is considered in maintenance. Older versions may function, but no support is provided by default, you can [reach out to support](https://www.datadoghq.com/support/) for special requests. 
 
-* Running the Datadog Agent `>= 5.21.1`
-* Using Go `1.12+`
+You must be Running the Datadog Agent `>= 5.21.1`
 
 ### Integrations
 
