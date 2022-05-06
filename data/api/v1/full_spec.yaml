@@ -1563,6 +1563,11 @@ components:
             description: A monitor tag.
             type: string
           type: array
+        mute_first_recovery_notification:
+          description: If the first recovery notification during a downtime should
+            be muted.
+          example: false
+          type: boolean
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -1692,6 +1697,11 @@ components:
             description: A monitor tag.
             type: string
           type: array
+        mute_first_recovery_notification:
+          description: If the first recovery notification during a downtime should
+            be muted.
+          example: false
+          type: boolean
         parent_id:
           description: ID of the parent Downtime.
           example: 123
