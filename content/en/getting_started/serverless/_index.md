@@ -78,6 +78,9 @@ You can intentionally cause an error by editing the `datadog-sample-entry-functi
     raise Exception('Throw an error.')
 ```
 
+{{< img src="getting_started/serverless/aws_error.png" alt="Close-up of two functions" style="width:80%;">}}
+
+
 Deploy this change and invoke your sample app again to see how you can investigate this error in Datadog.
 
 {{< img src="getting_started/serverless/dd_serverless_view_error.png" alt="Close-up of two functions" style="width:80%;">}}
@@ -101,9 +104,24 @@ Each invocation is associated with a trace. Click on **Open Trace** to see the t
 
 {{< img src="getting_started/serverless/dd_flame_graph.png" alt="Close-up of two functions" style="width:80%;">}}
 
-The above flame graph shows exactly what happened during the duration of this invocation, including which services had the highest percentage of the total execution time. Underneath, you can also examine your Lambda request and response payloads. From here, you can also pivot to metrics and logs.
+The **Flame Graph** tab shows exactly what happened during the duration of this invocation, including which services had the highest percentage of the total execution time. The flame graph displays the request as it travels from APIGateway, through your `datadog-sample-entry-function`, through SNS, SQS, and finally your `datadog-sample-sqs-function`.
 
 {{< img src="getting_started/serverless/trace_map.png" alt="Close-up of two functions" style="width:80%;">}}
+
+The **Trace Map** tab visualizes the flow of your services and how they connect to each other.
+
+The lower half of the detailed trace view displays a stack trace, which reveals the line of code responsible for throwing the error:
+
+```
+Traceback (most recent call last):
+  File /opt/python/lib/python3.9/site-packages/datadog_lambda/wrapper.py, line 142, in __call__
+    self.response = self.func(event, context, **kwargs)
+File /var/task/index.py, line 17, in handler
+    raise Exception('Throw an error.')
+Exception: Throw an error.
+```
+
+Underneath, you can also examine your Lambda request and response payloads. Datadog collects event payloads for every Lambda invocation.
 
 ### Logs
 
