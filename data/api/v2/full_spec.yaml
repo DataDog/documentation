@@ -8404,6 +8404,97 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/events:
+    get:
+      description: "The event stream can be queried and filtered by time, priority,
+          sources and tags.\n\n**Notes**:\n- If the event you\u2019re querying contains
+          markdown formatting of any kind,\nyou may see characters such as `%`,`\\`,`n`
+          in your output.\n\n- This endpoint returns a maximum of `1000` most recent
+          results. To return additional results,\nidentify the last timestamp of the
+          last result and set that as the `end` query time to\npaginate the results.
+          You can also use the page parameter to specify which set of `1000` results
+          to return."
+      operationId: ListEvents
+      parameters:
+      - description: Search query following query syntax.
+        example: '@datacenter:us @role:db'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested events.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Maximum timestamp for requested events.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Order of events in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/EventsSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of events in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Query the event stream
+      tags:
+        - Events
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-undo:
+        type: safe
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -13495,97 +13586,6 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
-  /api/v2/events:
-    get:
-      description: "The event stream can be queried and filtered by time, priority,
-        sources and tags.\n\n**Notes**:\n- If the event you\u2019re querying contains
-        markdown formatting of any kind,\nyou may see characters such as `%`,`\\`,`n`
-        in your output.\n\n- This endpoint returns a maximum of `1000` most recent
-        results. To return additional results,\nidentify the last timestamp of the
-        last result and set that as the `end` query time to\npaginate the results.
-        You can also use the page parameter to specify which set of `1000` results
-        to return."
-      operationId: ListEvents
-      parameters:
-      - description: Search query following query syntax.
-        example: '@datacenter:us @role:db'
-        in: query
-        name: filter[query]
-        required: false
-        schema:
-          type: string
-      - description: Minimum timestamp for requested events.
-        example: '2019-01-02T09:42:36.320Z'
-        in: query
-        name: filter[from]
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: Maximum timestamp for requested events.
-        example: '2019-01-03T09:42:36.320Z'
-        in: query
-        name: filter[to]
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: Order of events in results.
-        in: query
-        name: sort
-        required: false
-        schema:
-          $ref: '#/components/schemas/EventsSort'
-      - description: List following results with a cursor provided in the previous
-          query.
-        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-        in: query
-        name: page[cursor]
-        required: false
-        schema:
-          type: string
-      - description: Maximum number of events in the response.
-        example: 25
-        in: query
-        name: page[limit]
-        required: false
-        schema:
-          default: 10
-          format: int32
-          maximum: 1000
-          type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EventListResponse'
-          description: OK
-          '400':
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/APIErrorResponse'
-            description: Bad Request
-          '403':
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/APIErrorResponse'
-            description: Authentication Error
-          '429':
-            $ref: '#/components/responses/TooManyRequestsResponse'
-        summary: Query the event stream
-        tags:
-        - Events
-        x-menu-order: 1
-        x-pagination:
-          cursorParam: page[cursor]
-          cursorPath: meta.page.after
-          limitParam: page[limit]
-          resultsPath: data
-        x-undo:
-          type: safe
 security:
 - apiKeyAuth: []
   appKeyAuth: []
