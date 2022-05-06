@@ -39,7 +39,7 @@ To create a metric from a search query in the [RUM Explorer][5], click the **Exp
 
 ### Add a custom RUM metric
 
-{{< img src="real_user_monitoring/generate_metrics/generate_metric.png" alt="Generate a custom RUM metric" width="80%" >}}
+{{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="Generate a custom RUM metric" width="80%" >}}
 
 1. Select an event type you want to create a metric for, such as `Actions`. Your options include **Actions**, **Errors**, **Resources**, and **Long Tasks**. For more information, see [Search RUM Events][6].
 2. Create a search query that filters your RUM events using the RUM Explorer's [search syntax][7]. Events that contain a timestamp within the past hour and 15 minutes are included in the metric aggregation. 
