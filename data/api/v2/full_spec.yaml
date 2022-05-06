@@ -7091,6 +7091,136 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    Event:
+      description: Object representing an event.
+      properties:
+        alert_type:
+          $ref: '#/components/schemas/EventAlertType'
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (that
+                is no quotes).
+
+                Limited to events no older than 18 hours.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        host:
+          description: 'Host name to associate with the event.
+
+                Any tags associated with the host are also applied to this event.'
+          type: string
+        id:
+          description: Integer ID of the event.
+          format: int64
+          readOnly: true
+          type: integer
+        id_str:
+          description: 'Handling IDs as large 64-bit numbers can cause loss of accuracy
+                issues with some programming languages.
+
+                Instead, use the string representation of the Event ID to avoid losing
+                accuracy.'
+          readOnly: true
+          type: string
+        payload:
+          description: Payload of the event.
+          example: '{}'
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        source_type_name:
+          description: 'The type of event being posted. Option examples include nagios,
+                hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
+
+                A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+            - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        text:
+          description: 'The body of the event. Limited to 4000 characters. The text
+                supports markdown.
+
+                To use markdown in the event text, start the text block with `%%% \n`
+                and end the text block with `\n %%%`.
+
+                Use `msg_text` with the Datadog Ruby library.'
+          example: Oh boy!
+          maxLength: 4000
+          type: string
+        title:
+          description: The event title.
+          example: Did you hear the news today?
+          type: string
+        url:
+          description: URL of the event.
+          readOnly: true
+          type: string
+      type: object
+    EventAlertType:
+      description: 'If an alert event is enabled, set its type.
+
+            For example, `error`, `warning`, `info`, `success`, `user_update`,
+
+            `recommendation`, and `snapshot`.'
+      enum:
+        - error
+        - warning
+        - info
+        - success
+        - user_update
+        - recommendation
+        - snapshot
+      example: info
+      type: string
+      x-enum-varnames:
+        - ERROR
+        - WARNING
+        - INFO
+        - SUCCESS
+        - USER_UPDATE
+        - RECOMMENDATION
+        - SNAPSHOT
+    EventListResponse:
+      description: An event list response.
+      properties:
+        events:
+          description: An array of events.
+          items:
+            $ref: '#/components/schemas/Event'
+          type: array
+        status:
+          description: A status.
+          type: string
+      type: object
+    EventPriority:
+      description: The priority of the event. For example, `normal` or `low`.
+      enum:
+        - normal
+        - low
+      example: normal
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - NORMAL
+        - LOW
+    EventsSort:
+      description: Sort parameters when querying events.
+      enum:
+        - timestamp
+        - -timestamp
+      type: string
+      x-enum-varnames:
+        - TIMESTAMP_ASCENDING
+        - TIMESTAMP_DESCENDING
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -13365,6 +13495,97 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
+  /api/v2/events:
+    get:
+      description: "The event stream can be queried and filtered by time, priority,
+        sources and tags.\n\n**Notes**:\n- If the event you\u2019re querying contains
+        markdown formatting of any kind,\nyou may see characters such as `%`,`\\`,`n`
+        in your output.\n\n- This endpoint returns a maximum of `1000` most recent
+        results. To return additional results,\nidentify the last timestamp of the
+        last result and set that as the `end` query time to\npaginate the results.
+        You can also use the page parameter to specify which set of `1000` results
+        to return."
+      operationId: ListEvents
+      parameters:
+      - description: Search query following query syntax.
+        example: '@datacenter:us @role:db'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested events.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Maximum timestamp for requested events.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Order of events in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/EventsSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of events in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventListResponse'
+          description: OK
+          '400':
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/APIErrorResponse'
+            description: Bad Request
+          '403':
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/APIErrorResponse'
+            description: Authentication Error
+          '429':
+            $ref: '#/components/responses/TooManyRequestsResponse'
+        summary: Query the event stream
+        tags:
+        - Events
+        x-menu-order: 1
+        x-pagination:
+          cursorParam: page[cursor]
+          cursorPath: meta.page.after
+          limitParam: page[limit]
+          resultsPath: data
+        x-undo:
+          type: safe
 security:
 - apiKeyAuth: []
   appKeyAuth: []
