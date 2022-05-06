@@ -19,7 +19,7 @@ Facets are user-defined tags and attributes from your spans. They are meant for 
 
 Facets also allow you to manipulate your spans in your [trace analytics monitors][3], and APM queries in [dashboards][4] and [notebooks][5].
 
-{{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="Facets panel"  style="width:80%;">}}
+{{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="Facets panel" style="width:80%;">}}
 
 {{< site-region region="us,eu,gov,us3,us5" >}}
 
