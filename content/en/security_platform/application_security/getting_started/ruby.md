@@ -32,9 +32,9 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
    For more information about upgrading from a `dd-trace` 0.x version, see [the Ruby tracer upgrade guide][2].
 
-2. **Enable ASM**, either in your code:
+2. **Enable ASM** by enabling the APM tracer. The following options describe a quick setup that covers the most common cases. Read [the Ruby tracer documentation][3] for more details.
 
-   Note: ASM currently requires the APM tracer to be enabled; a quick setup covering the most common cases is described below, see [the Ruby tracer documentation][3] for more details.
+   You can enable ASM either in your code:
 
    {{< tabs >}}
 
@@ -62,7 +62,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    gem 'ddtrace', '~> 1.1', require: 'ddtrace/auto_instrument'
    ```
 
-   And also enable AppSec:
+   And also enable `appsec`:
 
    ```ruby
    # config/initializers/datadog.rb

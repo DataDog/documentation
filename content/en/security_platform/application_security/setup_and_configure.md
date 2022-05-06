@@ -292,13 +292,13 @@ if span, ok := tracer.SpanFromContext(request.Context()); ok {
 
 {{< programming-lang lang="ruby" >}}
 
-Use either API to add user information to a trace so that you can monitor authenticated requests in the application.
+Use one of the following APIs to add user information to a trace so that you can monitor authenticated requests in the application:
 
 {{< tabs >}}
 
-{{% tab "Using `Datadog::Kit::Identity.set_user` %}}
+{{% tab "set_user" %}}
 
-Starting with `ddtrace` 1.1.0, a convenience `set_user` method is available:
+Starting with `ddtrace` 1.1.0, the `Datadog::Kit::Identity.set_user` method is available. This is the recommended API for adding user information to traces:
 
 ```ruby
 # Get the active trace
@@ -328,11 +328,9 @@ Datadog::Kit::Identity.set_user(
 
 {{% /tab %}}
 
-{{% tab "Using trace `set_tag`" %}}
+{{% tab "set_tag" %}}
 
-Note: `Datadog::Kit::Identity.set_user` is the recommended way to set user information.
-
-Use the the Ruby tracer's API for adding custom tags to a trace, and add user information so that you can monitor authenticated requests in the application.
+If `Datadog::Kit::Identity.set_user` does not meet your needs, you can use `set_tag` instead.
 
 User monitoring tags are applied on the trace and start with the prefix `usr.` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
 
@@ -438,11 +436,9 @@ To protect users' data, sensitive data scanning is activated by default in ASM. 
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the values and any child nodes associated with the key are redacted.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
 
-{{< programming-lang-wrapper langs="ruby" >}}
+<div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong> 
 
-{{< programming-lang lang="ruby" >}}
-
-It is also possible to configure these patterns from code:
+<p>You can also configure scanning patterns in code:</p>
 
 ```ruby
 Datadog.configure do |c|
@@ -454,11 +450,7 @@ Datadog.configure do |c|
 end
 ```
 
-Note: this feature is available starting with `ddtrace` 1.1.0.
-
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
+</div>
 
 
 The following are examples of data that are flagged as sensitive by default:
