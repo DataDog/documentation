@@ -38,14 +38,14 @@ The following usage types are not supported in this tool:
 
 To start receiving daily data, an administrator needs to create a new report with the user interface.
 
-{{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Getting Started with Usage Attribution in Datadog" style="width:100%;">}}
+{{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Getting Started with Usage Attribution in Datadog" style="width:100%;" >}}
 
 The **Applied Tags** section enables the following:
 
 - Entering up to three tag keys from a dropdown. The dropdown is pre-populated with existing tags on both the root account and any child organizations under the account.
 - Deleting and editing existing tags.
 
-{{< img src="account_management/billing/usage_attribution/total-usage.png" alt="Applied tags in Datadog" style="width:100%;" >}}
+{{< img src="account_management/billing/advanced-usage-reporting-02.png" alt="Applied tags in Datadog" style="width:100%;" >}}
 
 - Once the tags are configured, it takes a full 24-hour period for the first report to be generated.
 - The reports are generated on an ongoing basis.
