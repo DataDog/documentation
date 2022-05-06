@@ -1,10 +1,10 @@
 ## Datadog Permissions
 
-IAM permissions allow Datadog to collect metrics, tags, CloudWatch events, and data that are necessary to monitor your AWS environment. The following permissions included in the policy document use wild cards such as `List*` and `Get*`. If you require strict policies, use the complete action names as listed and reference the Amazon API documentation for your respective services.
+IAM permissions allow Datadog to collect metrics, tags, CloudWatch events, and data that are necessary to monitor your AWS environment. The following permissions included in the policy document use wild cards such as `List*` and `Get*`. If you require strict policies, use the complete action names as listed and reference the Amazon API documentation for your respective services. Attach this policy to the IAM role you have configured for the Datadog AWS integration.
 
 ### AWS Integration IAM Policy
 
-If you are not comfortable granting this list of permissions, use the existing **AmazonEC2ReadOnlyAccess** and **CloudWatchReadOnlyAccess** policies.
+The set of permissions necessary to use all the integrations for individual AWS services.
 
 ```json
 {
