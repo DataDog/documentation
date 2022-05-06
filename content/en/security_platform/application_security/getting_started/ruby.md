@@ -39,7 +39,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    {{< tabs >}}
 
 {{% tab "Rails" %}}
-   Enable the APM tracer manually by adding an initializer in your application code:
+   Enable the APM tracer by adding an initializer in your application code:
 
    ```ruby
    # config/initializers/datadog.rb
