@@ -1,25 +1,27 @@
 ---
-title: Datadog Forwarder を使用する - Go
 kind: ガイド
+title: Datadog Forwarder を使用した Go サーバーレスアプリケーションのインスツルメンテーション
 ---
 ## 概要
 
-Datadog Serverless の新規ユーザーには、Datadog で[すぐに使用可能な Lambda 機能][1]を使用することをおすすめします。ただし、Lambda で提供される機能の前に Datadog Forwarder を使用して Datadog Serverless をセットアップしてある場合は、インスタンスを維持するためこのガイドをご利用ください。
+<div class="alert alert-warning">
+Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/go">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
+</div>
 
 ## 必須セットアップ
 
 未構成の場合:
 
-- [AWS インテグレーション][2]をインストールします。これにより、Datadog は AWS から Lambda メトリクスを取り込むことができます。
-- AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][3]をインストールします。
+- [AWS インテグレーション][1]をインストールします。これにより、Datadog は AWS から Lambda メトリクスを取り込むことができます。
+- AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][2]をインストールします。
 
-[AWS インテグレーション][2]と [Datadog Forwarder][3] をインストールしたら、手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
 
 ## コンフィギュレーション
 
 ### Install
 
-次のコマンドを実行して、[Datadog Lambda ライブラリ][4]をローカルにインストールします。
+次のコマンドを実行して、[Datadog Lambda ライブラリ][3]をローカルにインストールします。
 
 ```
 go get github.com/DataDog/datadog-lambda-go
@@ -80,16 +82,16 @@ go get github.com/DataDog/datadog-lambda-go
 
 メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
 
-1. [まだの場合は、Datadog Forwarder をインストールします][3]。
-2. [Datadog Forwarder を関数のロググループにサブスクライブします][5]。
+1. [まだの場合は、Datadog Forwarder をインストールします][2]。
+2. [Datadog Forwarder を関数のロググループにサブスクライブします][4]。
 
 ### タグ
 
-これはオプションですが、Datadog は、[統合サービスタグ付け][6]向けに、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
+これはオプションですが、Datadog は、[統合サービスタグ付け][5]向けに、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることをお勧めします。
 
 ## 確認
 
-以上の方法で関数を構成すると、[Serverless Homepage][67 でメトリクス、ログ、トレースを確認できるようになります。
+以上の方法で関数を構成すると、[Serverless Homepage][6] でメトリクス、ログ、トレースを確認できるようになります。
 
 ## カスタムビジネスロジックの監視
 
@@ -134,17 +136,16 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-[カスタムメトリクスの送信][8]に関する詳細を参照してください。
+[カスタムメトリクスの送信][7]に関する詳細を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/serverless/installation
-[2]: /ja/integrations/amazon_web_services/
-[3]: /ja/serverless/forwarder/
-[4]: https://github.com/DataDog/datadog-lambda-go
-[5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[7]: https://app.datadoghq.com/functions
-[8]: /ja/serverless/custom_metrics?tab=go
+[1]: /ja/integrations/amazon_web_services/
+[2]: /ja/serverless/forwarder/
+[3]: https://github.com/DataDog/datadog-lambda-go
+[4]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[6]: https://app.datadoghq.com/functions
+[7]: /ja/serverless/custom_metrics?tab=go
