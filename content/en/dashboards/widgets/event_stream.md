@@ -10,108 +10,25 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-{{< site-region region="us" >}}
+The event stream is a widget version of the stream of events on the [Event Explorer view][1].
 
-The event stream is a widget version of the stream of events on the [Event Stream view][1].
-
-Note: **this widget displays only the 100 most recent events**.
-
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="event stream" >}}
-
-## Setup
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="event stream setup" style="width:80%;">}}
-
-### Configuration
-
-1. Enter a [search query][1] to filter the event stream.
-2. On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
-3. Use the size parameter to choose to display either only the events title or the full event body.
-
-### Options
-
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
-
-## API
-
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
-
-The dedicated [widget JSON schema definition][3] for the event stream widget is:
-
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-The event stream is a widget version of the stream of events on the [Event Stream view][1].
-
-Note: **this widget displays only the 100 most recent events**.
-
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="event stream" >}}
-
-## Setup
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="event stream setup" style="width:80%;">}}
-
-### Configuration
-
-1. Enter a [search query][1] to filter the event stream.
-2. On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
-3. Use the size parameter to choose to display either only the events title or the full event body.
-
-### Options
-
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
-
-## API
-
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
-
-The dedicated [widget JSON schema definition][3] for the event stream widget is:
-
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-The event stream is a widget version of the stream of events on the [Event Explorer view][4].
+**Note:** This widget displays only the 100 most recent events.
 
 ## Setup
 
 ### Configuration
 
-1. Enter a [search query][4] to filter the event stream.
-2. On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
+1. Enter a [search query][2] to filter the event stream.
+2. On screenboards only, choose whether your widget has a custom time frame or the screenboard's global time frame.
 3. Use the size parameter to choose to display either only the events title or the full event body.
-
-### Options
-
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box.
-
-Optionally define its size and alignment.
+4. Give the graph a title.
+5. Click the **Done** button.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
+This widget can be used with the **Dashboards API**. See [Dashboards API][3] for additional reference.
 
-The dedicated [widget JSON schema definition][3] for the event stream widget is:
-
-
-{{< /site-region >}}
+The dedicated [widget JSON schema definition][4] for the event stream widget follows:
 
 {{< dashboards-widgets-api >}}
 
@@ -120,6 +37,6 @@ The dedicated [widget JSON schema definition][3] for the event stream widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events/
-[2]: /api/v1/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
-[4]: /events/#event-explorer
+[2]: /events/explorer/#search-syntax
+[3]: /api/latest/dashboards/
+[4]: /dashboards/graphing_json/widget_json/

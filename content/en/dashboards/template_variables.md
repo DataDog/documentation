@@ -117,17 +117,15 @@ Values from dashboard template variables can be directly captured by using the `
 
 #### Dashboard
 
-From your dashboard, search the event stream with template variables using the format:
+From your dashboard, search events with template variables using the format:
 
 ```text
-tags:<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
+<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
 ```
 
-For example, searching for `tags:region:$region.value` with a value of `us-east1` for the `region` template variable displays events tagged with `region:us-east1`. Additionally, the timing of the events are marked by pink bars in the graphs.
+For example, searching for `region:$region.value` with a value of `us-east1` for the `region` template variable displays events tagged with `region:us-east1`. Additionally, the timing of the events are marked by pink bars in the graphs.
 
-{{< img src="dashboards/template_variables/search_dashboard.png" alt="Search dashboard" style="width:85%;">}}
-
-Use commas to search using multiple template variables, for example: `tags:role:$role.value,env:$env.value`
+Use commas to search using multiple template variables, for example: `role:$role.value,env:$env.value`
 
 **Note**: Once you press *enter* to search, `$region.value` updates to the value in the template variable drop-down.
 
@@ -136,12 +134,10 @@ Use commas to search using multiple template variables, for example: `tags:role:
 From your widgets, overlay the timing of the events using template variables with the format:
 
 ```text
-tags:$<TEMPLATE_VARIABLE_NAME>
+$<TEMPLATE_VARIABLE_NAME>
 ```
 
-For example, enter `tags:$region` in the event overlays search box. This searches for events with the value in the `region` template variable drop-down:
-
-{{< img src="dashboards/template_variables/search_widget.png" alt="Search widget" style="width:85%;">}}
+For example, enter `$region` in the event overlays search box. This searches for events with the value in the `region` template variable drop-down:
 
 ## Further Reading
 
