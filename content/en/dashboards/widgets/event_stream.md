@@ -26,7 +26,7 @@ The event stream is a widget version of the stream of events on the [Event Explo
 
 ## API
 
-This widget can be used with the **Dashboards API**. See [Dashboards API][3] for additional reference.
+This widget can be used with the [Dashboards API][3].
 
 The dedicated [widget JSON schema definition][4] for the event stream widget follows:
 
