@@ -173,10 +173,10 @@ def security_rules(content, content_dir):
                             page_data["control"] = data.get('control', '')
                             page_data["scope"] = tech
 
-                        is_hardcoded = data.get('options', {}).get('detectionMethod', '') == 'hardcoded'
+                        # Hardcoded rules which can span several different log sources do not include a source tag
+                        is_hardcoded = not page_data.get("source", None)
                         if is_hardcoded:
-                            page_data["source"] = "Multi Log Sources"
-                            page_data["scope"] = "Multi Log Sources"
+                            page_data["source"] = "multi Log Sources"
 
                         # lowercase them
                         if page_data.get("source", None):
