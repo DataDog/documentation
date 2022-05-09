@@ -9,7 +9,7 @@ aliases:
 
 OTLP Ingest in the Agent is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP.
 
-OTLP Ingest in the Agent allows you to use trace observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog Tracing Library specific features aren't available for the ingested data including Application Security, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
+OTLP Ingest in the Agent allows you to use trace observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog Tracing Library specific features aren't available for the ingested data including Application Security Monitoring, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
 
 <div class="alert alert-warning">OTLP Metrics ingestion is in beta and its behavior and configuration may change.</div>
 
@@ -154,14 +154,10 @@ experimental:
 
    For gRPC:
    ```
-   --set 'agents.containers.agent.ports[0].containerPort=4317,agents.containers.agent.ports[0].hostPort=4317,agents.containers.agent.ports[0].name=traceportgrpc,agents.containers.agent.ports[0].protocol=TCP' 
-
    --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT,datadog.env[0].value=0.0.0.0:4317"
    ```
    For HTTP:
    ```
-   --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
-
    --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:4318"
    ```
 
@@ -181,7 +177,18 @@ experimental:
        value: "0.0.0.0:4318"
    ```
 
-3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the core Agent container:
+3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the core Agent container. You can either use `set` commands:
+
+   For gRPC:
+   ```
+   --set 'agents.containers.agent.ports[0].containerPort=4317,agents.containers.agent.ports[0].hostPort=4317,agents.containers.agent.ports[0].name=traceportgrpc,agents.containers.agent.ports[0].protocol=TCP' 
+   ```
+   For HTTP:
+   ```
+   --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
+   ```
+
+   Or set them in the `agents.containers.agent.ports` parameter of the `values.yaml` file:
 
    For gRPC:
    ```

@@ -40,7 +40,7 @@ Agent のメインコンフィギュレーションファイル (`datadog.yaml`)
 `ingestion_reason: rule`
 
 ライブラリレベルでは、より具体的なサンプリング構成が可能です。
-- Agent の[デフォルトメカニズム](#head-based-default-mechanism)をオーバーライドし、すべてのルートサービスに適用する特定のサンプリングレートを設定します。
+- Agent の[デフォルトメカニズム](#head-based-sampling)をオーバーライドし、すべてのルートサービスに適用する特定のサンプリングレートを設定します。
 - 特定のルートサービスのサンプリングレートを設定します。
 - 1 秒間に取り込まれるトレース数の上限を設定します。
 
@@ -99,7 +99,7 @@ span.SetTag(ext.ManualDrop, true)
 `ingestion_reason: analytic`
 
 <div class="alert alert-warning">
-2020 年 10 月 20 日、App Analytics は Tracing without Limits に置き換わりました。これは、レガシーの App Analytics に関連する構成情報を持つ非推奨のメカニズムです。代わりに、新しい構成オプションの<a href="#head-based-default-mechanism">ヘッドベースサンプリング</a>を使用して、データ取り込みを完全に制御します。
+2020 年 10 月 20 日、App Analytics は Tracing without Limits に置き換わりました。これは、レガシーの App Analytics に関連する構成情報を持つ非推奨のメカニズムです。代わりに、新しい構成オプションの<a href="#head-based-sampling">ヘッドベースサンプリング</a>を使用して、データ取り込みを完全に制御します。
 </div>
 
 特定のスパンをサンプリングする必要があるが、トレース全体を利用する必要がない場合、トレーサーでは、単一のスパンに対してサンプリングレートを構成することが可能です。このスパンは、包含するトレースが削除された場合でも、構成されたレートを下回ることなく取り込まれます。

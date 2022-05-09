@@ -177,7 +177,7 @@ Read the [metrics summary documentation][21] for more details.
 [9]: /logs/logs_to_metrics/
 [10]: /metrics/custom_metrics/
 [11]: /agent/
-[12]: /metrics/dogstatsd_metrics_submission/
+[12]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [13]: /api/
 [14]: https://docs.datadoghq.com/agent/basic_agent_usage/
 [15]: /metrics/types/

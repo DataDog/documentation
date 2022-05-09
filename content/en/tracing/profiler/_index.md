@@ -13,12 +13,15 @@ further_reading:
     - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
+    - link: '/developers/guide/data-collection-resolution-retention/'
+      tag: 'Documentation'
+      text: 'Data collection, resolution, and retention'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
-      text: 'Introducing always-on production profiling in Datadog.'
+      text: 'Introducing always-on production profiling in Datadog'
     - link: 'https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/'
       tag: 'Blog'
-      text: 'Datadog GitHub Action for continuous vulnerability analysis.'
+      text: 'Datadog GitHub Action for continuous vulnerability analysis'
     - link: 'https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/'
       tag: 'Blog'
       text: 'Compare and optimize your code with Datadog Profile Comparison.'
@@ -60,7 +63,7 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 ## Explore Datadog profiler
 
-After you've configured your application to send profiles to Datadog, start getting insights into your code performance:
+After you've configured your application to send profiles to Datadog, start getting insights into your code performance. By default, profiles are retained for 7 days, and metrics generated from profile data are retained for 1 month.
 
 ### Search profiles by tags
 

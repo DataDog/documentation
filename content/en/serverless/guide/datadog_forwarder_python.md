@@ -1,5 +1,5 @@
 ---
-title: Using the Datadog Forwarder - Python
+title: Instrumenting Python Serverless Applications Using the Datadog Forwarder
 kind: guide
 ---
 ## Overview

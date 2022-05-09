@@ -1,13 +1,13 @@
 ---
 dependencies:
-  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
+- https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-android
-    tag: Github
-    text: Code source dd-sdk-android
-  - link: /real_user_monitoring
-    tag: Page d'accueil
-    text: Explorer le service RUM de Datadog
+- link: https://github.com/DataDog/dd-sdk-android
+  tag: Github
+  text: Code source dd-sdk-android
+- link: /real_user_monitoring
+  tag: Page d'accueil
+  text: Explorer le service RUM de Datadog
 kind: documentation
 title: Configuration avancée du RUM sur Android
 ---
@@ -23,25 +23,50 @@ Le service RUM pour Android effectue automatiquement le suivi d'attributs tels q
 En plus du [suivi automatique des vues][4], vous pouvez effectuer le suivi de vues distinctes spécifiques (activités, fragments, etc.) lorsque ces dernières deviennent visibles et interactives dans le cycle de vie `onResume()`. Arrêtez le suivi lorsque la vue n'est plus visible. Le plus souvent, cette méthode doit être appelée dans la première `Activity` ou le premier `Fragment` :
 
 
+{{< tabs >}}
+{{% tab "Kotlin" %}}
    ```kotlin
-      fun onResume() {
-        GlobalRum.get().startView(viewKey, viewName, viewAttributes)        
-      }
+       fun onResume() {
+         GlobalRum.get().startView(viewKey, viewName, viewAttributes)
+       }
 
-      fun onPause() {
-        GlobalRum.get().stopView(viewKey, viewAttributes)        
-      }
+       fun onPause() {
+         GlobalRum.get().stopView(viewKey, viewAttributes)
+       }
    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       public void onResume() {
+            GlobalRum.get().startView(viewKey, viewName, viewAttributes);
+       }
+
+       public void onPause() {
+            GlobalRum.get().stopView(viewKey, viewAttributes);
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Ajouter vos propres durées de performance
 
 En plus des attributs RUM par défaut, vous pouvez tirer profit de l'API `addTiming` pour découvrir combien de temps votre application consacre à chaque tâche. Les mesures de temps sont exprimées en fonction du début de la vue RUM actuelle. Par exemple, vous pouvez mesurer le temps nécessaire pour afficher votre bannière :
-
+{{< tabs >}}
+{{% tab "Kotlin" %}}
    ```kotlin
-       fun onHeroImageLoaded() {
-           GlobalRum.get().addTiming("hero_image")
-       } 
+      fun onHeroImageLoaded() {
+            GlobalRum.get().addTiming("hero_image")
+      } 
    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       public void onHeroImageLoaded() {
+            GlobalRum.get().addTiming("hero_image");
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 Une fois la durée envoyée, elle est accessible via `@view.custom_timings.<nom_durée>` (p. ex., `@view.custom_timings.hero_image`). Vous devez [créer une mesure](https://docs.datadoghq.com/real_user_monitoring/explorer/?tab=measures#configurer-des-facettes-et-des-mesures) avant de pouvoir la représenter dans des analyses RUM ou dans des dashboards.
 
@@ -49,28 +74,55 @@ Une fois la durée envoyée, elle est accessible via `@view.custom_timings.<nom_
 
 En plus du [suivi automatique des actions][5], vous pouvez effectuer le suivi d'actions utilisateur personnalisées spécifiques (appuis sur l'écran, clics, défilements, etc.) avec `RumMonitor#addUserAction`. Pour effectuer le suivi d'actions continues (par exemple, le défilement d'une liste par l'utilisateur), utilisez `RumMonitor#startUserAction` et `RumMonitor#stopUserAction`.
 
+{{< tabs >}}
+{{% tab "Kotlin" %}}
    ```kotlin
-      fun onUserInteraction() {
-        GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
-      }
+       fun onUserInteraction() { 
+            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
+       }
    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       public void onUserInteraction() {
+            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes);
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Ressources personnalisées
 
 En plus du [suivi automatique des ressources][6], vous pouvez effectuer le suivi de ressources personnalisées spécifiques (requêtes réseau, API de fournisseur tiers, etc.) avec des méthodes (`GET`, `POST`, etc.), et charger la ressource avec `RumMonitor#startResource`. Arrêtez le suivi avec `RumMonitor#stopResource` une fois le chargement terminé ou avec `RumMonitor#stopResourceWithError` si une erreur survient lors du chargement de la ressource.
 
-
+{{< tabs >}} 
+{{% tab "Kotlin" %}}
    ```kotlin
-      fun loadResource() {
-        GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes)
-        try {
-          // charger la ressource
-          GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes)
-        } catch (e: Exception) {
-          GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e)
-        }
-      }
+       fun loadResource() {
+            GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes)
+            try {
+              // charger la ressource
+              GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes)
+            } catch (e: Exception) {
+              GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e)
+            } 
+       }
    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       public void loadResource() {
+            GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes);
+            try {
+                // charger la ressource
+                GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes);
+            } catch (Exception e) {
+                GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e);
+            }
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Erreurs personnalisées
 
@@ -183,11 +235,23 @@ Pour effectuer un suivi automatique de vos vues (activités, fragments, etc.), s
 
 Par exemple, pour définir chaque fragment comme une vue distincte, utilisez la configuration suivante dans vos [paramètres][1] :
 
-```kotlin
-val configuration = Configuration.Builder(rumEnabled = true, ...)
-                 .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
-                 .build()
-```
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val configuration = Configuration.Builder(true, true, true, true)
+        .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
+        .build()
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       final Configuration configuration = new Configuration.Builder(true, true, true, true)
+        .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
+        .build();
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 **Conseil** : pour `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy` ou `MixedViewTrackingStrategy`, vous pouvez filtrer les éléments `Fragment` ou `Activity` qui doivent être suivis en tant que vues RUM en spécifiant une implémentation `ComponentPredicate` dans le constructeur.
 
@@ -198,38 +262,97 @@ val configuration = Configuration.Builder(rumEnabled = true, ...)
 
 Pour récupérer des mesures de temps dans les ressources (fournisseurs tiers, requêtes réseau) comme le time to first byte ou la résolution DNS, personnalisez `okHttpClient` de façon à ajouter la fabrique [EventListener][8] :
 
-```kotlin
-val okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(DatadogInterceptor())
-    .eventListenerFactory(DatadogEventListener.Factory())
-    .build()
-```
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(DatadogInterceptor())
+        .eventListenerFactory(DatadogEventListener.Factory())
+        .build()
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+        .addInterceptor(new DatadogInterceptor())
+        .eventListenerFactory(new DatadogEventListener.Factory())
+        .build();
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Suivi automatique des tâches longues
 
 Les opérations longues effectuées sur le thread principal peuvent avoir un impact sur les performances visuelles et la réactivité de votre application. Pour effectuer le suivi de ces opérations, définissez le seuil de durée au-delà duquel une tâche est considérée comme trop longue.
 
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val config = Configuration.Builder(true, true, true, true)
+        .trackLongTasks(durationThreshold)
+        .build()
+   ```
 
-```kotlin
-val config = Configuration.Builder(rumEnabled = true, ...)
-                    .trackLongTasks(durationThreshold)
-                    .build()
-```
+Par exemple, pour remplacer la durée par défaut (`100 ms`), définissez un seuil personnalisé dans votre configuration.
+
+   ```kotlin
+      val configuration = Configuration.Builder(...)
+        // ...
+        .trackLongTasks(250L) // surveiller les tâches qui durent plus de 250 ms en tant que tâches longues
+        .build()
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+  ```java
+      Configuration configuration = new Configuration.Builder(true, true, true, true)
+        .trackLongTasks(durationThreshold)
+        .build();
+   ```
+
+Par exemple, pour remplacer la durée par défaut (`100 ms`), définissez un seuil personnalisé dans votre configuration.
+
+   ```java
+      Configuration configuration = new Configuration.Builder(...)
+        // ...
+        .trackLongTasks(250L) // surveiller les tâches qui durent plus de 250 ms en tant que tâches longues
+        .build();
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Modifier ou ignorer des événements RUM
 
 Pour modifier certains attributs dans vos événements RUM ou pour ignorer complètement certains événements avant de les rassembler, spécifiez une implémentation de `EventMapper<T>` lors du lancement du SDK :
 
-```kotlin
-val config = Configuration.Builder(rumEnabled = true, ...)
-              ...
-              .setRumErrorEventMapper(rumErrorEventMapper)
-              .setRumActionEventMapper(rumActionEventMapper)
-              .setRumResourceEventMapper(rumResourceEventMapper)
-              .setRumViewEventMapper(rumViewEventMapper)
-              .setRumLongTaskEventMapper(rumLongTaskEventMapper)
-              .build()
-```
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val config = Configuration.Builder(true, true, true, true)
+        ...
+        .setRumErrorEventMapper(rumErrorEventMapper)
+        .setRumActionEventMapper(rumActionEventMapper)
+        .setRumResourceEventMapper(rumResourceEventMapper)
+        .setRumViewEventMapper(rumViewEventMapper)
+        .setRumLongTaskEventMapper(rumLongTaskEventMapper)
+        .build()
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+  ```java
+      Configuration config = new Configuration.Builder(true, true, true, true)
+        ...
+        .setRumErrorEventMapper(rumErrorEventMapper)
+        .setRumActionEventMapper(rumActionEventMapper)
+        .setRumResourceEventMapper(rumResourceEventMapper)
+        .setRumViewEventMapper(rumViewEventMapper)
+        .setRumLongTaskEventMapper(rumLongTaskEventMapper)
+        .build();
+
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
    Si vous implémentez l'interface `EventMapper<T>`, vous verrez que seuls certains attributs sont modifiables pour chaque type d'événement :
 
    | Type d'événement    | Clé d'attribut      | Description                                     |
@@ -266,11 +389,11 @@ val config = Configuration.Builder(rumEnabled = true, ...)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /fr/real_user_monitoring/android
-[3]: /fr/real_user_monitoring/android/data_collected
-[4]: /fr/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[5]: /fr/real_user_monitoring/android/advanced_configuration/#initialization-parameters
-[6]: /fr/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[2]: https://docs.datadoghq.com/fr/real_user_monitoring/android
+[3]: https://docs.datadoghq.com/fr/real_user_monitoring/android/data_collected
+[4]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[5]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#initialization-parameters
+[6]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/events/
-[9]: /fr/real_user_monitoring/android/data_collected/?tab=error#event-specific-attributes
+[9]: https://docs.datadoghq.com/fr/real_user_monitoring/android/data_collected/?tab=error#event-specific-attributes

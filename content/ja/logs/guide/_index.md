@@ -16,6 +16,8 @@ title: ログガイド
 {{< whatsnext desc="Log Collection" >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Datadog Kinesis Firehose Destination を使用して AWS サービスログを送信する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Amazon EventBridge API Destination を使用して Datadog にイベントとログを送信する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/forwarder/" >}}Datadog Lambda Forwarder を設定する{{< /nextlink >}}
+    {{< nextlink href="logs/guide/collect-heroku-logs" >}}Heroku ログを収集する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Datadog Lambda 関数を使用して AWS サービスログを送信する{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Heroku ログを収集する{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}ログ収集のトラブルシューティングガイド{{< /nextlink >}}

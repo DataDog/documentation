@@ -163,4 +163,4 @@ custom:
 [5]: https://www.npmjs.com/package/datadog-lambda-js
 [6]: https://webpack.js.org/configuration/externals/
 [7]: https://docs.datadoghq.com/ja/serverless/forwarder/
-[8]: https://docs.datadoghq.com/ja/serverless/datadog_lambda_library/extension/
+[8]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension/

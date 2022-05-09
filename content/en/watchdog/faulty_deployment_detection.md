@@ -19,6 +19,8 @@ Whenever a faulty deployment is detected, Watchdog adds this as an event in the 
 
 You can also enable the monitor by clicking the **Suggested Monitors** button, and then **Enable**. The Suggested Monitors button is only available if the service does not yet have a monitor configured. If the button is not available, follow the instruction above to create the monitor from the [New Monitors][3] page.
 
+Each deployment is repeatedly analyzed. To prevent re-alerting of the same faulty deployment, Datadog recommends setting a recovery time of 60 min for the monitor.
+
 {{< img src="watchdog/faulty_deployment_suggested_monitors.png" alt="The APM services page with the Suggested Monitors button" >}}
 
 ### Why did a new deployment not get flagged as faulty, despite having errors?

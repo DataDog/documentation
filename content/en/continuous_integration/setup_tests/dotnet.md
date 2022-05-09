@@ -154,7 +154,7 @@ To instrument your test suite without requiring an Agent, configure the followin
 **Default**: `false`
 
 `DD_API_KEY` (Required)
-: The [Datadog API key][6] used to upload the test results.<br/>
+: The [Datadog API key][5] used to upload the test results.<br/>
 **Default**: `(empty)`
 
 Then, prefix your test command with `dd-trace ci run`. Use the `--dd-service` parameter to provide the name of the service or library. Use the `--dd-env` parameter to provide the environment where tests are being run (`local` when running tests on a developer workstation, `ci` when running them on a CI provider, etc.) For example:
@@ -163,7 +163,7 @@ Then, prefix your test command with `dd-trace ci run`. Use the `--dd-service` pa
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
-Alternatively, you can provide the [Datadog API key][6] using the `--api-key` parameter, for example:
+Alternatively, you can provide the [Datadog API key][5] using the `--api-key` parameter, for example:
 
 {{< code-block lang="bash" >}}
 dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
@@ -171,10 +171,10 @@ dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- do
 
 When the `--api-key` is set, Agentless mode is automatically enabled.
 
-Additionally, configure which [Datadog site][7] to which you want to send data. Your Datadog site is: {{< region-param key="dd_site" >}}.
+Additionally, configure which [Datadog site][6] to which you want to send data. Your Datadog site is: {{< region-param key="dd_site" >}}.
 
 `DD_SITE` (Required)
-: The [Datadog site][7] to upload results to.<br/>
+: The [Datadog site][6] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
@@ -187,6 +187,5 @@ Additionally, configure which [Datadog site][7] to which you want to send data. 
 [2]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[5]: /continuous_integration/setup_tests/dotnet/#agentless-beta
-[6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /getting_started/site/
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: /getting_started/site/

@@ -1,28 +1,29 @@
 ---
-title: Collecte de logs avec PHP
-kind: documentation
 aliases:
-  - /fr/logs/languages/php
+- /fr/logs/languages/php
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/php-logging-guide'
-    tag: Blog
-    text: 'Comment recueillir, personnaliser et analyser des logs PHP'
-  - link: /logs/processing/
-    tag: Documentation
-    text: Apprendre à traiter vos logs
-  - link: /logs/processing/parsing/
-    tag: Documentation
-    text: En savoir plus sur le parsing
-  - link: /logs/explorer/
-    tag: Documentation
-    text: Apprendre à explorer vos logs
-  - link: /logs/explorer/analytics/
-    tag: Documentation
-    text: Effectuer des analyses de logs
-  - link: /logs/faq/log-collection-troubleshooting-guide
-    tag: FAQ
-    text: Dépannage pour la collecte de logs
+- link: https://www.datadoghq.com/blog/php-logging-guide
+  tag: Blog
+  text: Comment recueillir, personnaliser et analyser des logs PHP
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Apprendre à traiter vos logs
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: En savoir plus sur le parsing
+- link: /logs/explorer/
+  tag: Documentation
+  text: Apprendre à explorer vos logs
+- link: /logs/explorer/#visualiser-les-donnees
+  tag: Documentation
+  text: Effectuer des analyses de logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: FAQ
+  text: Dépannage pour la collecte de logs
+kind: documentation
+title: Collecte de logs avec PHP
 ---
+
 ## Présentation
 
 Rédigez vos logs PHP dans un fichier, puis [utilisez l'Agent][1] pour les transmettre à Datadog. Vous avez la possibilité de choisir parmi les bibliothèques de journalisation suivantes : Monolog, Zend-Log ou Symfony.
@@ -208,7 +209,7 @@ L'ajout de données de contexte à vos logs et événements est particulièremen
   $logger->info('Ajout d'un nouvel utilisateur', array('username' => 'Seldaek'));
 ```
 
-Monolog intègre un préprocesseur. Il s'agit d'un rappel simple qui enrichit vos événements en ajoutant les métadonnées de votre choix (ID de la session, ID de la requête, etc.) :
+Monolog intègre un préprocesseur. Il s'agit d'un rappel simple qui enrichit vos événements en ajoutant les métadonnées de votre choix (par exemple, l'ID de session, ou l'ID de requête) :
 
 ```php
  <?php
@@ -235,7 +236,7 @@ Monolog intègre un préprocesseur. Il s'agit d'un rappel simple qui enrichit vo
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
-La majorité des informations utiles proviennent des données de contexte supplémentaire que vous pouvez ajouter à vos logs et événements. Zend-Log rend cette opération simple en proposant différents moyens de définir des données de contexte propres à chaque thread, qui sont ensuite automatiquement envoyées avec chaque événement. À tout moment, il vous est possible de loguer un événement accompagné de données de contexte :
+Ce sont les données de contexte supplémentaire que vous pouvez ajouter à vos logs et événements qui vous dévoilent des insights pertinents. Zend-Log simplifie ce processus en proposant différents moyens de définir des données de contexte propres à chaque thread. Ces données sont ensuite automatiquement envoyées avec chaque événement. À tout moment, il vous est possible de loguer un événement accompagné de données de contexte :
 
 ```php
 <?php
@@ -366,7 +367,6 @@ Monolog est intégré aux frameworks suivants :
 * [Laravel][5]
 * [Silex][6]
 * [Lumen][7]
-* [CakePHP][8]
 
 Intégrez Monolog à votre framework, puis configurez votre logger :
 
@@ -445,6 +445,10 @@ monolog:
 
 ### Laravel
 
+<div class="alert alert-warning">
+Veuillez noter que la fonction <code>\DDTrace\current_context()</code> a été ajoutée avec la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
+</div>
+
 ```php
 <?php
 
@@ -455,7 +459,7 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Enregistrer des services d'application
+     * Enregistrer des services d'application.
      *
      * @return void
      */
@@ -467,7 +471,7 @@ class AppServiceProvider extends ServiceProvider
             return;
         }
 
-        // Faculatif : utiliser une mise en forme JSON
+        // Facultatif : utiliser le format JSON
         $useJson = false;
         foreach ($monolog->getHandlers() as $handler) {
             if (method_exists($handler, 'setFormatter')) {
@@ -476,22 +480,19 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
-        // Injecter l'ID de trace et de span afin d'associer l'entrée de log à la trace APM
+        // Injecter l'ID de trace et de span pour associer l'entrée de log à la trace APM
         $monolog->pushProcessor(function ($record) use ($useJson) {
-            $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-            if (null === $span) {
-                return $record;
-            }
+            $context = \DDTrace\current_context();
             if ($useJson === true) {
                 $record['dd'] = [
-                    'trace_id' => $span->getTraceId(),
-                    'span_id'  => \dd_trace_peek_span_id(),
+                    'trace_id' => $context['trace_id'],
+                    'span_id'  => $context['span_id'],
                 ];
             } else {
                 $record['message'] .= sprintf(
                     ' [dd.trace_id=%d dd.span_id=%d]',
-                    $span->getTraceId(),
-                    \dd_trace_peek_span_id()
+                    $context['trace_id'],
+                    $context['span_id']
                 );
             }
             return $record;
@@ -499,7 +500,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap des services d'application
+     * Bootstrap des services d'application.
      *
      * @return void
      */
@@ -535,45 +536,6 @@ class AppServiceProvider extends ServiceProvider
   return $app;
 ```
 
-### CakePHP
-
-Commencez par ajouter la dépendance suivante au fichier `composer.json`,
-puis exécutez `composer update`.
-
-```json
-{"require": {"cakephp/monolog": "*"}}
-```
-
-Créez ensuite un fichier de configuration de journalisation (p. ex., `app/Config/log.php`) et ajoutez-y votre `app/Config/bootstrap.php` :
-
-```php
-<?php
-  include 'log.php';
-```
-
-Voici un exemple de configuration basique permettant de reproduire les fonctionnalités de Cake avec Monolog :
-
-```text
-CakePlugin::load('Monolog');
-```
-
-Enfin, enregistrez les logs dans un fichier :
-
-```text
-CakeLog::config('debug', array(
-  'engine' => 'Monolog.Monolog',
-  'channel' => 'app',
-  'handlers' => array(
-    'Stream' => array(
-      LOGS . 'application-json.log',
-      'formatters' => array(
-        'Json' => array("")
-      )
-    )
-  )
-));
-```
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -585,4 +547,3 @@ CakeLog::config('debug', array(
 [5]: /fr/logs/log_collection/php/#laravel
 [6]: /fr/logs/log_collection/php/#silex
 [7]: /fr/logs/log_collection/php/#lumen
-[8]: /fr/logs/log_collection/php/#cakephp

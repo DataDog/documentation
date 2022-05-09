@@ -23,7 +23,11 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available for users on every platform (including macOS and Windows), but CPU time profiles are currently only available on Linux platforms**.
+The Datadog Profiler requires MRI Ruby 2.1+.
+
+The following operating systems and architectures are supported:
+- Linux (GNU libc) x86-64, aarch64
+- Alpine Linux (musl libc) x86-64, aarch64
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -36,7 +40,7 @@ To begin profiling applications:
 2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '>= 0.53.0'
+    gem 'ddtrace', '~> 1.0'
     gem 'google-protobuf', '~> 3.0'
     ```
 
@@ -88,7 +92,7 @@ end
     If starting the application via `ddtracerb exec` is not an option (eg. when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point such as `config.ru` for a web application:
 
     ```ruby
-    require 'ddtrace/profiling/preload'
+    require 'datadog/profiling/preload'
     ```
 
 

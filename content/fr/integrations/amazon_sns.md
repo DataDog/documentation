@@ -1,27 +1,31 @@
 ---
 aliases:
-  - /fr/integrations/awssns/
+- /fr/integrations/awssns/
 categories:
-  - cloud
-  - notification
-  - aws
-  - log collection
+- cloud
+- notification
+- aws
+- log collection
 ddtype: crawler
 dependencies: []
-description: "Envoyez des messages Amazon\_SNS à Datadog ou des alertes Datadog à SNS."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_sns/'
+description: Envoyez des messages Amazon SNS à Datadog ou des alertes Datadog à SNS.
+doc_link: https://docs.datadoghq.com/integrations/amazon_sns/
 draft: false
 git_integration_title: amazon_sns
 has_logo: true
+integration_id: amazon-sns
 integration_title: Amazon SNS
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_sns
-public_title: "Intégration Datadog/Amazon\_SNS"
-short_description: "Envoyez des messages Amazon\_SNS à Datadog ou des alertes Datadog à SNS."
+public_title: Intégration Datadog/Amazon SNS
+short_description: Envoyez des messages Amazon SNS à Datadog ou des alertes Datadog
+  à SNS.
 version: '1.0'
 ---
+
 {{< img src="integrations/amazon_sns/snsdashboard.png" alt="Dashboard SNS" popup="true">}}
 
 ## Présentation
@@ -41,7 +45,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `SNS` est cochée dans la section concernant la collecte des métriques.
 
-2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon SNS. Pour en savoir plus sur les stratégies SNS, consultez [la documentation du site Web d'AWS][4].
+2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon SNS. Pour en savoir plus, consultez la section relative aux [stratégies SNS][4] de la documentation AWS.
 
     | Autorisation AWS   | Description                                             |
     | ---------------- | ------------------------------------------------------- |
@@ -52,9 +56,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte d'événements
 
-#### Recevoir des messages d'Amazon SNS dans le flux d'événements
+#### Recevoir les messages de SNS
 
-1. Dans la section Topics de la console de gestion SNS, sélectionnez la rubrique souhaitée et cliquez sur Create subscription.
+Pour recevoir les messages de SNS dans le flux d'événements Datadog :
+
+1. Dans la section Topics de la console de gestion SNS, sélectionnez la rubrique souhaitée et cliquez sur **Create subscription**.
 2. Sélectionnez https et saisissez l'URL Webhook suivante :
 
     ```text
@@ -65,13 +71,15 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
     https://app.datadoghq.eu/intake/webhook/sns?api_key=<API KEY>
     ```
 
-3. N'activez pas « raw message delivery ».
+3. N'activez pas l'option « raw message delivery ».
 
-#### Envoyer des notifications SNS depuis Datadog
+#### Envoyer des notifications SNS
+
+Pour envoyer des notifications SNS depuis Datadog :
 
 1. Configurez le compte AWS associé à un service SNS sur le carré d'intégration AWS.
 2. [Installez l'intégration SNS][5].
-3. Datadog détecte alors vos rubriques SNS configurées et met en évidence les notifications « @ » (par ex., « @nom-rubrique-sns »).
+3. Datadog détecte alors vos rubriques SNS configurées et active les @notifications, par exemple : `@sns-topic-name`.
 
 ### Collecte de logs
 
@@ -107,18 +115,14 @@ L'intégration AWS SNS n'inclut aucun check de service.
 
 ## Dépannage
 
-### AWS GovCloud et AWS Chine
-
-Nous ne prenons actuellement pas en charge les notifications SNS envoyés depuis Datadog vers des rubriques dans GovCloud ou Chine.
-
-### Autres problèmes
+Datadog ne prend pas en charge les notifications SNS envoyées depuis Datadog vers des rubriques dans les régions GovCloud ou Chine.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html
+[4]: https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_sns
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sns/amazon_sns_metadata.csv
 [7]: https://docs.datadoghq.com/fr/help/

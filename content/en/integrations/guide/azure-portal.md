@@ -93,7 +93,44 @@ The portal retrieves all the available Datadog plans for your tenant, this inclu
 ## Datadog org configurations
 ### Metrics and logs
 
-Select "Metrics and logs" in the left sidebar to change the configuration rules for metrics and logs. See the Azure documentation to [Configure metrics and logs][3].
+Select “Metrics and logs” in the left sidebar to change the configuration rules for metrics and logs. All rules are applied dynamically across the entire subscription as resources are added or tags change.
+
+Changes to metric or log configuration settings should take effect within a few minutes.
+
+#### Metric collection
+By default, Datadog automatically collects metrics for all Azure resources within the subscription.
+
+Optionally, limit metric collection for Azure VMs and App Service Plans using Azure tags attached to your resources. 
+
+##### Tag rules for sending metrics
+ 
+ * Virtual machines, virtual machine scale sets, and App Service Plans with `include` tags send metrics to Datadog.  
+ * Virtual machines, virtual machine scale sets, and App Service Plans with `exclude` tags don’t send metrics to Datadog.  
+ * If there’s a conflict between inclusion and exclusion rules, exclusion takes priority.  
+ * There is no option to limit metric collection for other resource types.
+
+#### Log collection
+There are two types of logs that can be emitted from Azure to Datadog: Subscription level logs and Azure resource logs.
+
+**Subscription level logs** provide insight into the operations on your resources at the [control plane][3]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (PUT, POST, DELETE).
+
+To send subscription level logs to Datadog, select “Send subscription activity logs”. If this option is left unchecked, none of the subscription level logs are sent to Datadog.
+
+**Azure resource logs** provide insight into operations taken on Azure resources at the [data plane][3]. For example, getting a secret from a key vault or making a request to a database are data plane operations. The content of resource logs varies by the Azure service and resource type.
+
+To send Azure resource logs to Datadog, select “Send Azure resource logs for all defined resources”. The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][4]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
+
+You can optionally filter the set of Azure resources sending logs to Datadog using Azure resource tags.
+
+##### Tag rules for sending logs
+
+* Azure resources with `include` tags send logs to Datadog.
+* Azure resources with `exclude` tags don’t send logs to Datadog.
+* If there’s a conflict between inclusion and exclusion rules, exclusion takes priority.
+
+For example, the screenshot below shows a tag rule where only virtual machines, virtual machine scale sets, and app service plans tagged with `Datadog = True` send metrics to Datadog. Resources (of all types) tagged with `Datadog = True` send logs to Datadog.
+
+{{< img src="integrations/guide/azure_portal/metrics-and-logs-tag-rules.png" alt="A screenshot showing a metric tag rule of Datadog=true set for virtual machines, virtual machine scale sets, and app service plans. The logs section is also configured with tag rule of Datadog=true" responsive="true" style="width:100%;">}}
 
 ### Monitored resources
 
@@ -106,7 +143,7 @@ The "Logs to Datadog" column displays `Sending` if the resource is sending logs 
 | Reason                                    | Description                                                                                                             |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | Resource doesn't support sending logs     | Only resource types with monitoring log categories can be configured to send logs to Datadog.                           |
-| Limit of five diagnostic settings reached | Each Azure resource can have a maximum of five diagnostic settings. For more information, see [diagnostic settings][4]. |
+| Limit of five diagnostic settings reached | Each Azure resource can have a maximum of five diagnostic settings. For more information, see [diagnostic settings][5]. |
 | Error                                     | The resource is configured to send logs to Datadog, but is blocked by an error.                                         |
 | Logs not configured                       | Only Azure resources with appropriate resource tags are configured to send logs to Datadog.                             |
 | Region not supported                      | The Azure resource is in a region that doesn't support sending logs to Datadog.                                         |
@@ -153,7 +190,7 @@ For each app service, the following information is displayed:
 
 #### Install
 
-To install the [Datadog extension][5], select the appropriate app, then click "Install Extension". The portal asks for confirmation to install the extension. Select "OK" to begin installation. This restarts your app and adds the following settings:
+To install the [Datadog extension][6], select the appropriate app, then click "Install Extension". The portal asks for confirmation to install the extension. Select "OK" to begin installation. This restarts your app and adds the following settings:
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
@@ -161,7 +198,7 @@ To install the [Datadog extension][5], select the appropriate app, then click "I
 
 Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
-**Note**: Ensure you are adding the extension to apps with [supported runtimes][6]. The Datadog resource does not limit or filter the list of apps.
+**Note**: Ensure you are adding the extension to apps with [supported runtimes][7]. The Datadog resource does not limit or filter the list of apps.
 
 #### Uninstall
 
@@ -193,7 +230,8 @@ The Azure Datadog integration allows you to install the Datadog Agent on a VM or
 
 [1]: /integrations/azure/#create-datadog-resource
 [2]: https://docs.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
-[3]: /integrations/azure/#metrics-and-logs
-[4]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
-[5]: /serverless/azure_app_services
-[6]: /serverless/azure_app_services/#requirements
+[3]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
+[4]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
+[5]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+[6]: /serverless/azure_app_services
+[7]: /serverless/azure_app_services/#requirements

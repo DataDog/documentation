@@ -24,7 +24,7 @@ On the [SLO status page][1], select **New SLO +**. Then select [**Metric**][2].
 
 1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use COUNT, RATE, or percentile-enabled DISTRIBUTION metrics to ensure the SLO calculation behaves correctly.
 2. Use the `FROM` field to include or exclude specific groups using tags.
-3. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. For more information, see [Threshold Queries][4].
+3. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. For more information, see [Threshold Queries][3].
 4. Optionally, for percentile-enabled DISTRIBUTION metrics, use the dropdown immediately to the right of the `count values..` aggregator to break your SLI out by specific groups.
 5. Optionally, for COUNT or RATE metrics, use the `sum by` aggregator to break your SLI out by specific groups.
 
@@ -44,7 +44,7 @@ By grouping these SLIs you can visualize each individual group’s status, good 
 
 By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph. 
 
-**Note**: If you are using monitor-based SLIs, you can also [view monitor groups][3].
+**Note**: If you are using monitor-based SLIs, you can also [view monitor groups][4].
 
 ### Set your SLO targets
 
@@ -66,5 +66,5 @@ Here you can add contextual information about the purpose of the SLO, including 
 
 [1]: https://app.datadoghq.com/slo
 [2]: https://app.datadoghq.com/slo/new/metric
-[3]: /monitors/service_level_objectives/monitor/
-[4]: /metrics/distributions/#threshold-queries
+[3]: /metrics/distributions/#threshold-queries
+[4]: /monitors/service_level_objectives/monitor/

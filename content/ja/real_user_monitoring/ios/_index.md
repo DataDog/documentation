@@ -1,17 +1,19 @@
 ---
-title: RUM iOS モニタリング
-kind: documentation
-beta: true
-description: iOS アプリケーションから RUM データを収集します。
 aliases:
-  - /ja/real_user_monitoring/ios/getting_started
+- /ja/real_user_monitoring/ios/getting_started
+beta: true
+dependencies:
+- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/_index.md
+description: iOS および tvOS アプリケーションから RUM データを収集します。
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-ios'
-    tag: Github
-    text: dd-sdk-ios ソースコード
-  - link: /real_user_monitoring
-    tag: ドキュメント
-    text: RUM データの調査方法
+- link: https://github.com/DataDog/dd-sdk-ios
+  tag: Github
+  text: dd-sdk-ios ソースコード
+- link: /real_user_monitoring
+  tag: ドキュメント
+  text: RUM データの調査方法
+kind: documentation
+title: RUM iOS モニタリング
 ---
 Datadog Real User Monitoring (RUM) を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
 
@@ -22,7 +24,7 @@ Datadog Real User Monitoring (RUM) を使用すると、アプリケーション
 3. ライブラリを初期化します。
 4. RUM モニター、`DDURLSessionDelegate` を初期化してデータ送信を開始します。
 
-**注:** Datadog iOS SDK に対応するバージョンは iOS v11 以降です。
+**注:** Datadog iOS SDK に対応するバージョンは iOS v11 以降です。iOS SDK は、tvOS にも対応しています。
 
 ### SDK を依存関係として宣言
 
@@ -48,9 +50,9 @@ Datadog Real User Monitoring (RUM) を使用すると、アプリケーション
 
 ### ライブラリの初期化
 
-
+{{< site-region region="us" >}}
 {{< tabs >}}
-{{% tab "US" %}}
+{{% tab "Swift" %}}
 
 ```swift
 Datadog.initialize(
@@ -63,37 +65,196 @@ Datadog.initialize(
             environment: "<environment_name>"
         )
         .set(serviceName: "app-name")
+        .set(endpoint: .us1)
         .trackUIKitRUMViews()
         .trackUIKitActions()
         .trackURLSession()
         .build()
 )
 ```
-
 {{% /tab %}}
-{{% tab "EU" %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<rum_application_id>"
+                                                                   clientToken:@"<client_token>"
+                                                                   environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint us1]];
+[builder trackUIKitRUMViews];
+[builder trackUIKitRUMActions];
+[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
 
-```swift
-Datadog.initialize(
-    appContext: .init(),
-    trackingConsent: trackingConsent,
-    configuration: Datadog.Configuration
-        .builderUsing(
-            rumApplicationID: "<rum_application_id>",
-            clientToken: "<client_token>",
-            environment: "<environment_name>"
-        )
-        .set(serviceName: "app-name")
-        .set(endpoint: .eu)
-        .trackUIKitRUMViews()
-        .trackUIKitActions()
-        .trackURLSession()
-        .build()
-)
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+Datadog.initialize(
+    appContext: .init(),
+    trackingConsent: trackingConsent,
+    configuration: Datadog.Configuration
+        .builderUsing(
+            rumApplicationID: "<rum_application_id>",
+            clientToken: "<client_token>",
+            environment: "<environment_name>"
+        )
+        .set(serviceName: "app-name")
+        .set(endpoint: .eu1)
+        .trackUIKitRUMViews()
+        .trackUIKitActions()
+        .trackURLSession()
+        .build()
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<rum_application_id>"
+                                                                   clientToken:@"<client_token>"
+                                                                   environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint eu1]];
+[builder trackUIKitRUMViews];
+[builder trackUIKitRUMActions];
+[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
+
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+Datadog.initialize(
+    appContext: .init(),
+    trackingConsent: trackingConsent,
+    configuration: Datadog.Configuration
+        .builderUsing(
+            rumApplicationID: "<rum_application_id>",
+            clientToken: "<client_token>",
+            environment: "<environment_name>"
+        )
+        .set(serviceName: "app-name")
+        .set(endpoint: .us3)
+        .trackUIKitRUMViews()
+        .trackUIKitActions()
+        .trackURLSession()
+        .build()
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<rum_application_id>"
+                                                                   clientToken:@"<client_token>"
+                                                                   environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint us3]];
+[builder trackUIKitRUMViews];
+[builder trackUIKitRUMActions];
+[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
+
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+Datadog.initialize(
+    appContext: .init(),
+    trackingConsent: trackingConsent,
+    configuration: Datadog.Configuration
+        .builderUsing(
+            rumApplicationID: "<rum_application_id>",
+            clientToken: "<client_token>",
+            environment: "<environment_name>"
+        )
+        .set(serviceName: "app-name")
+        .set(endpoint: .us5)
+        .trackUIKitRUMViews()
+        .trackUIKitActions()
+        .trackURLSession()
+        .build()
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<rum_application_id>"
+                                                                   clientToken:@"<client_token>"
+                                                                   environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint us5]];
+[builder trackUIKitRUMViews];
+[builder trackUIKitRUMActions];
+[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
+
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+Datadog.initialize(
+    appContext: .init(),
+    trackingConsent: trackingConsent,
+    configuration: Datadog.Configuration
+        .builderUsing(
+            rumApplicationID: "<rum_application_id>",
+            clientToken: "<client_token>",
+            environment: "<environment_name>"
+        )
+        .set(serviceName: "app-name")
+        .set(endpoint: .us1_fed)
+        .trackUIKitRUMViews()
+        .trackUIKitActions()
+        .trackURLSession()
+        .build()
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<rum_application_id>"
+                                                                   clientToken:@"<client_token>"
+                                                                   environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint us1_fed]];
+[builder trackUIKitRUMViews];
+[builder trackUIKitRUMActions];
+[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
+
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
 
 RUM SDK は、SDK の初期化時に提供されたオプションに従いユーザーセッションを自動的に追跡します。EU ユーザーに対する GDPR コンプライアンスおよびその他の[初期化パラメーター][9]を SDK コンフィギュレーションに追加するには、[トラッキングに関する同意の設定ドキュメント][8]を参照してください。
 
@@ -101,21 +262,50 @@ RUM SDK は、SDK の初期化時に提供されたオプションに従いユ�
 
 RUM Monitor を構成して登録します。通常は `AppDelegate` コードで、一度だけ実行する必要があります。
 
+{{< tabs >}}
+{{% tab "Swift" %}}
 ```swift
 import Datadog
 
 Global.rum = RUMMonitor.initialize()
 ```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogObjc;
+
+DDGlobal.rum = [[DDRUMMonitor alloc] init];
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 `URLSession` インスタンスからリソースとして送信されるリクエストを監視するには、`DDURLSessionDelegate()` をその `URLSession` の `delegate` として割り当てます。
 
+{{< tabs >}}
+{{% tab "Swift" %}}
 ```swift
 let session = URLSession(
     configuration: .default,
     delegate: DDURLSessionDelegate(),
     delegateQueue: nil
 )
-``` 
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                                      delegate:[[DDNSURLSessionDelegate alloc] init]
+                                                 delegateQueue:nil];
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## iOS のクラッシュレポートとエラー追跡
+
+iOS のクラッシュレポートとエラー追跡では、問題と最新の利用可能なエラーが表示されます。エラーの詳細と JSON を含む属性を RUM エクスプローラーで表示できます。
+
+<div class="alert alert-info"><p>クラッシュレポートとエラー追跡はベータ版で利用できます。サインアップするには、<a href="https://docs.datadoghq.com/real_user_monitoring/ios/crash_reporting">クラッシュレポート (ベータ版)</a> をご覧ください。</p>
+</div>
 
 ## その他の参考資料
 
@@ -129,6 +319,5 @@ let session = URLSession(
 [5]: https://app.datadoghq.com/rum/create
 [6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
-[8]: /ja/real_user_monitoring/ios/advanced_configuration/#set-tracking-consent-gdpr-compliance
-[9]: /ja/real_user_monitoring/ios/advanced_configuration/#initialization-parameters
-[10]: /ja/real_user_monitoring/ios/view_tracking/custom_views
+[8]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/advanced_configuration/#set-tracking-consent-gdpr-compliance
+[9]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/advanced_configuration/#initialization-parameters

@@ -1,5 +1,5 @@
 ---
-title: Using the Datadog Forwarder - Node
+title: Instrumenting Node.js Serverless Applications Using the Datadog Forwarder
 kind: guide
 ---
 

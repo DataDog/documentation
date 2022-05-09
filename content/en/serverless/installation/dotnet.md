@@ -2,85 +2,87 @@
 title: Instrumenting .NET Serverless Applications
 kind: documentation
 further_reading:
-    - link: '/serverless/troubleshooting/serverless_tagging/'
+    - link: '/serverless/configuration'
       tag: 'Documentation'
-      text: 'Tagging Serverless Applications'
-    - link: 'serverless/distributed_tracing/'
-      tag: 'Documentation'
-      text: 'Tracing Serverless Applications'
-    - link: 'serverless/custom_metrics/'
-      tag: 'Documentation'
-      text: 'Submitting Custom Metrics from Serverless Applications'
+      text: 'Configure Serverless Monitoring'
     - link: '/serverless/guide/troubleshoot_serverless_monitoring'
       tag: 'Documentation'
       text: 'Troubleshoot Serverless Monitoring'
+    - link: 'serverless/custom_metrics/'
+      tag: 'Documentation'
+      text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-To instrument your .NET serverless application, you must use **either** the [Datadog Lambda Extension][1] or the [Datadog Forwarder Lambda function][2].
+<div class="alert alert-warning">The Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_dotnet">instrument using the Datadog Forwarder</a> instead.</div>
 
-If you use the Datadog Lambda Extension, you can use Datadog's native .NET APM tracer to instrument your function. If you use the Datadog Forwarder Lambda function, you can use Datadog's integration with AWS X-Ray tracing.
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
-**Note**: The Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
+## Installation
 
-## Instrumentation
-
-### Using the Datadog Lambda Extension
-
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs.
+Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-You can also add the [instrumentation command](#instrument) to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command _after_ your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
+1. Install the Datadog CLI client
 
-### Install
+    ```sh
+    npm install -g @datadog/datadog-ci
+    ```
 
-Install the Datadog CLI with NPM:
+2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
 
-```sh
-npm install -g @datadog/datadog-ci
-```
+    ```sh
+    datadog-ci lambda instrument -i
+    ```
 
-### Configure credentials
+3. Configure the AWS credentials
 
-For a quick start, configure Datadog and [AWS credentials][1] using the [instrumentation command](#instrument). For production applications, provide credentials in a more secure manner by using environment variables. For example:
+    The Datadog CLI requires access to the AWS Lambda service and depends on the AWS JavaScript SDK to [resolve the credentials][1]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
 
-```bash
-export DATADOG_API_KEY="<DD_API_KEY>"
-export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu, us3.datadoghq.com or ddog-gov.com
-export AWS_ACCESS_KEY_ID="<ACCESS KEY ID>"
-export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
-```
+4. Configure the Datadog site
 
-### Instrument
+    Specify the [Datadog site][2] where the telemetry should be sent to. The default is `datadoghq.com`.
 
-**Note**: Instrument your Lambda functions in a dev or staging environment first. If the instrumentation needs to be reverted, run `uninstrument` with the same arguments that was used for instrumentation.
+    ```sh
+    export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu or ddog-gov.com
+    ```
 
-To instrument your Lambda functions, run the following command:
+5. Configure the Datadog API key
 
-```sh
-datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -e <extension_version>
-```
+    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
 
-To fill in the placeholders:
+    ```sh
+    export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
+    ```
 
--   Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
--   Replace `<aws_region>` with the AWS region name.
--   Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+    For quick testing purposes, you can also set the Datadog API key in plaintext:
 
-For example:
+    ```sh
+    export DATADOG_API_KEY="<DATADOG_API_KEY>"
+    ```
 
-```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -e {{< latest-lambda-layer-version layer="extension" >}}
-```
+6. Instrument your Lambda functions
 
-More information and additional parameters can be found in [Datadog Serverless CLI][2].
+    **Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
+    To instrument your Lambda functions, run the following command.
 
-[1]: https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-creds.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+    ```sh
+    datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="dd-trace-dotnet" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+    To fill in the placeholders:
+    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
+    - Replace `<aws_region>` with the AWS region name.
+
+    Additional parameters can be found in the [CLI documentation][3].
+
+[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[2]: https://docs.datadoghq.com/getting_started/site/
+[3]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -89,90 +91,34 @@ The [Datadog Serverless Plugin][1] automatically configures your functions to se
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin:
+
     ```sh
-    npm install serverless-plugin-datadog --save-dev
-    ```
-2. In your `serverless.yml`, add the following:
-    ```yaml
-    plugins:
-        - serverless-plugin-datadog
+    serverless plugin install --name serverless-plugin-datadog
     ```
 
-<div class="alert alert-info">If you are instead deploying your Serverless Framework app <a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">by natively exporting a JSON object from a JavaScript file</a> (for example, by using a <code>serverless.ts</code> file), follow the <a href="https://docs.datadoghq.com/serverless/installation/dotnet?tab=custom">custom installation instructions</a>.</div>
+2. Update your `serverless.yml`:
 
-3. In your `serverless.yml`, also add the following section:
     ```yaml
     custom:
-        datadog:
-            apiKey: # Your Datadog API Key goes here.
+      datadog:
+        site: <DATADOG_SITE>
+        apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
     ```
-    Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
+    To fill in the placeholders:
+    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
+
+    For more information and additional settings, see the [plugin documentation][1].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
-
-1. Add the following layers and environment variables to each .NET Lambda function you wish to instrument:
-
-    ```yml
-    Type: AWS::Serverless::Function
-    Properties:
-        Environment:
-            Variables:
-                DD_TRACE_ENABLED: true
-                DD_API_KEY: '<YOUR_DD_API_KEY>'
-                CORECLR_ENABLE_PROFILING: 1
-                CORECLR_PROFILER: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}'
-                CORECLR_PROFILER_PATH: '/opt/datadog/Datadog.Trace.ClrProfiler.Native.so'
-                DD_DOTNET_TRACER_HOME: '/opt/datadog'
-        Layers:
-            - arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-            - arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-    ```
-
-    Replace `<YOUR_DD_API_KEY>` with your Datadog API key, found on the [API Management page][1].
-
-2. Optionally add `service` and `env` tags with appropriate values to your function.
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-1. Add the following layers and environment variables to each .NET Lambda function you wish to instrument:
-
-    ```typescript
-    const fn = new lambda.Function(this, 'MyFunc', {
-      // ...
-      environment: {
-        DD_TRACE_ENABLED: true
-        DD_API_KEY: '<YOUR_DD_API_KEY>'
-        CORECLR_ENABLE_PROFILING: 1
-        CORECLR_PROFILER: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}'
-        CORECLR_PROFILER_PATH: '/opt/datadog/Datadog.Trace.ClrProfiler.Native.so'
-        DD_DOTNET_TRACER_HOME: '/opt/datadog'
-      }
-    });
-
-    fn.addLayers(
-        lambda.LayerVersion.fromLayerVersionArn(this, 'extension', 'arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}'),
-        lambda.LayerVersion.fromLayerVersionArn(this, 'dd-trace-dotnet', 'arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}'),
-    )
-    ```
-
-    Replace `<YOUR_DD_API_KEY>` with your Datadog API key, found on the [API Management page][1].
-
-2. Optionally add `service` and `env` tags with appropriate values to your function.
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://docs.datadoghq.com/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container image" %}}
 
-1. Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
+1. Install the Datadog Lambda Extension
 
     ```dockerfile
     COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
@@ -180,7 +126,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
-2. Add the Datadog .NET APM tracer to your container image and configure it with the required environment variables by adding the following to your Dockerfile:
+2. Install the Datadog .NET APM client
 
     ```dockerfile
     RUN yum -y install tar wget gzip
@@ -195,104 +141,64 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you would like to use (for example, `2.3.0`). The minimum supported version is `2.3.0`. You can see the latest versions of `dd-trace-dotnet` in [GitHub][2].
 
-3. Set the following environment variables in AWS:
-    - Set `DD_TRACE_ENABLED` to `true`.
-    - Set `DD_API_KEY` with your Datadog API key, found on the [API Management page][3].
-4. Optionally add `service` and `env` tags with appropriate values to your function.
+3. Set the required environment variables
 
+    - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://github.com/DataDog/dd-trace-dotnet/releases
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://docs.datadoghq.com/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-1. Add the [Datadog Lambda Extension][1] layer to your Lambda function:
+1. Install the Datadog Lambda Extension
+
+    [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
     `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
 
-    Note that only the `x86_64` version of the Datadog Lambda Extension is supported for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must use the Datadog Forwarder for instrumentation.
+2. Install the Datadog .NET APM client
 
-2. Add the dd-trace-dotnet layer to your Lambda function:
+    [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
     `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}`
 
-3. Add your [Datadog API Key][2] to the Lambda function using the environment variable `DD_API_KEY`.
+3. Set the required environment variables
 
-4. Configure your Lambda function with the following additional environment variables:
+    - Set `CORECLR_ENABLE_PROFILING` to `1`.
+    - Set `CORECLR_PROFILER` to `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`.
+    - Set `CORECLR_PROFILER_PATH` to `/opt/datadog/Datadog.Trace.ClrProfiler.Native.so`.
+    - Set `DD_DOTNET_TRACER_HOME` to `/opt/datadog`.
+    - Set `DD_SITE` to your [Datadog site][2] to send the telemetry to.
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
-    ```
-    DD_TRACE_ENABLED = true
-    CORECLR_ENABLE_PROFILING = 1
-    CORECLR_PROFILER = {846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-    CORECLR_PROFILER_PATH = /opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-    DD_DOTNET_TRACER_HOME = /opt/datadog
-    ```
-
-
-[1]: /serverless/libraries_integrations/extension/
-[2]: https://app.datadoghq.com/organization-settings/api-keys
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://docs.datadoghq.com/getting_started/site/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
-### Using the Datadog Forwarder
+## What's next?
 
-As an alternative to the [Datadog Lambda Extension][1], you can use the [Datadog Forwarder Lambda function][2].
-
-#### Install
-
-1. Enable [AWS X-Ray active tracing][3] for your Lambda function.
-2. Install the [AWS X-Ray SDK for .NET][4].
-
-#### Subscribe
-
-Subscribe the Datadog Forwarder Lambda function to each of your function's log groups to send metrics, traces, and logs to Datadog.
-
-1. [Install the Datadog Forwarder if you haven't][2].
-2. [Subscribe the Datadog Forwarder to your function's log groups][5].
-
-#### Monitor custom business logic
-
-If you would like to submit a custom metric using the Datadog Forwarder, see the sample code below:
-
-```csharp
-var myMetric = new Dictionary<string, object>();
-myMetric.Add("m", "coffee_house.order_value");
-myMetric.Add("v", 12.45);
-myMetric.Add("e", (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds);
-myMetric.Add("t", new string[] {"product:latte", "order:online"});
-LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
-```
-
-For more information on custom metric submission, see the [Serverless Custom Metrics documentation][6].
-
-#### Tagging
-
-Although it's optional, Datadog recommends tagging your serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][7].
-
-## Collect logs from AWS serverless resources
-
-Serverless logs generated by managed resources besides AWS Lambda functions can be valuable in helping identify the root cause of issues in your serverless applications. Datadog recommends you forward logs from the following managed resources in your environment:
-
--   APIs: API Gateway, AppSync, Application Load Balancer (ALB)
--   Queues and streams: SQS, SNS, Kinesis
--   Data stores: DynamoDB, S3, RDS, etc.
-
-To collect logs from non-Lambda AWS resources, install and configure the [Datadog Forwarder][2] to subscribe to each of your managed resource CloudWatch log groups.
-
-## Troubleshooting
-
-If you have trouble collecting monitoring data after following the instructions above, see the [serverless monitoring troubleshooting guide][8].
+- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
+- See the [troubleshooting guide][4] if you have trouble collecting the telemetry
+- See the [advanced configurations][5] to
+    - connect your telemetry using tags
+    - collect telemetry for AWS API Gateway, SQS, etc.
+    - capture the Lambda request and response payloads
+    - link errors of your Lambda functions to your source code
+    - filter or scrub sensitive information from logs or traces
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/libraries_integrations/extension/
-[2]: /serverless/forwarder/
-[3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
-[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[6]: /serverless/custom_metrics?tab=otherruntimes
-[7]: /serverless/troubleshooting/serverless_tagging/
-[8]: /serverless/guide/troubleshoot_serverless_monitoring/
+
+[1]: https://app.datadoghq.com/functions
+[2]: https://docs.datadoghq.com/metrics/dogstatsd_metrics_submission/
+[3]: /tracing/custom_instrumentation/dotnet/
+[4]: /serverless/guide/troubleshoot_serverless_monitoring/
+[5]: /serverless/configuration/

@@ -1,121 +1,144 @@
 ---
-title: HTTP テスト
-kind: documentation
-description: HTTP リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します
 aliases:
-  - /ja/synthetics/http_test
-  - /ja/synthetics/http_check
+- /ja/synthetics/http_test
+- /ja/synthetics/http_check
+description: HTTP リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
-    tag: ブログ
-    text: Datadog Synthetic モニタリングの紹介
-  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
-    tag: ラーニングセンター
-    text: Synthetic テストの紹介
-  - link: /getting_started/synthetics/api_test
-    tag: Documentation
-    text: HTTP テストの概要
-  - link: /synthetics/private_locations
-    tag: Documentation
-    text: 内部エンドポイントで HTTP テストを実行する
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  tag: ブログ
+  text: Datadog Synthetic モニタリングの紹介
+- link: https://learn.datadoghq.com/course/view.php?id=39
+  tag: ラーニングセンター
+  text: Synthetic テストの紹介
+- link: /getting_started/synthetics/api_test
+  tag: Documentation
+  text: HTTP テストの概要
+- link: /synthetics/private_locations
+  tag: Documentation
+  text: 内部エンドポイントで HTTP テストを実行する
+- link: /synthetics/multistep
+  tag: ドキュメント
+  text: マルチステップ HTTP テスト
+kind: documentation
+title: HTTP テスト
 ---
 ## 概要
 
-HTTP テストを使用すると、**アプリケーションの API エンドポイントに HTTP リクエストを送信**して、リクエストに応答していること、および全体的な応答時間、ステータスコード、ヘッダーまたは本文のコンテンツなどの定義した条件を満たしていることを確認できます。
+HTTP テストでは、アプリケーションの API エンドポイントに HTTP リクエストを送信し、応答時間、ステータスコード、ヘッダー、本文のコンテンツなど、定義された条件と応答を確認することができます。
 
-HTTP テストは、ネットワークの外部または内部のどちらからエンドポイントを監視するかによって、[**管理ロケーション**][1]および[**プライベートロケーション**][2]から実行できます。HTTP テストは、**スケジュール**、**オンデマンド**、または **[CI/CD パイプライン][3]**内で直接実行できます。
+HTTP テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション][1]と[プライベートロケーション][2]の両方から実行することができます。HTTP テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][3]内で直接実行することができます。
 
 ## コンフィギュレーション
 
-作成するテストのタイプを選択した後 ([`HTTP`][4]、[`SSL`][5]、[`TCP`][6]、[`DNS`][7]、または [`ICMP` テスト][8])、テストのリクエストを定義できます。
+`HTTP` テストの作成を選択した後、テストのリクエストを定義します。
 
 ### リクエストを定義する
-
-{{< img src="synthetics/api_tests/http_test_config.png" alt="HTTP リクエストを定義する" style="width:90%;" >}}
 
 1. **HTTP Method** を選択し、クエリする **URL** を指定します。使用可能なメソッドは、`GET`、`POST`、`PATCH`、`PUT`、`HEAD`、`DELETE`、`OPTIONS` です。`http` と `https` の両方の URL がサポートされています。
 2. **Advanced Options** を使用して HTTP リクエストを加工します (オプション)。
 
-  {{< tabs >}}
+   {{< tabs >}}
 
-  {{% tab "リクエストオプション" %}}
+   {{% tab "リクエストオプション" %}}
 
-  * **Follow redirects**: 選択すると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
-  * **Request headers**: HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
-  * **Cookies**: HTTP リクエストに追加するクッキーを定義します。`<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` の形式を使用して複数のクッキーを設定します。
-  * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
+   * **Follow redirects**: 選択すると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
+   * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
+   * **Request headers**: HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
+   * **Cookies**: HTTP リクエストに追加するクッキーを定義します。`<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` の形式を使用して複数のクッキーを設定します。
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "リクエスト本文" %}}
+   {{% tab "認証" %}}
 
-  * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、または `None`) を選択します。
-  * **Request body**: HTTP リクエスト本文のコンテンツを追加します。**注**: リクエスト本文は最大サイズ 50 キロバイトに制限されています。
+   * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
+   * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
+   * **NTLM v1**: NTLM 認証の資格情報を追加します。
+   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名は実装されていません。
 
-  {{% /tab %}}
+  </br>オプションで、**Additional configuration** のセクションにドメインとワークステーションを指定することができます。 
 
-  {{% tab "証明書" %}}
+   {{% /tab %}}
 
-  * **Ignore server certificate error**: 選択すると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
-  * **クライアント証明書**: クライアント証明書 (`.crt`) と関連する秘密キー (`.key`) を `PEM` 形式でアップロードして、mTLS を介して認証します。`openssl` ライブラリを使用して証明書を変換することができます。たとえば、`PKCS12` 証明書を `PEM` 形式の秘密キーと証明書に変換できます。
+   {{% tab "クエリパラメーター" %}}
 
-  ```
-  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-  ```
+   * **Encode parameters**: エンコーディングが必要なクエリパラメーターの名前と値を追加します。
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "プロキシ" %}}
+   {{% tab "リクエスト本文" %}}
 
-  * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
-  * **Proxy Header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
+   * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、または `None`) を選択します。
+   * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "Privacy" %}}
+   {{% tab "証明書" %}}
 
-  * **Do not save response body**: レスポンスの本文が実行時に保存されないようにするには、このオプションを選択します。テスト結果に機密データを含めたくない場合に有用です。障害発生時のトラブルシューティングに影響を及ぼす可能性があるため、慎重に使用してください。セキュリティに関する詳細は、[こちら][1]でご確認ください。
+   * **Ignore server certificate error**: 選択すると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
+   * **クライアント証明書**: クライアント証明書 (`.crt`) と関連する秘密キー (`.key`) を `PEM` 形式でアップロードして、mTLS を介して認証します。`openssl` ライブラリを使用して証明書を変換することができます。たとえば、`PKCS12` 証明書を `PEM` 形式の秘密キーと証明書に変換できます。
+
+     ```
+     openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+     openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+     ```
+
+   {{% /tab %}}
+
+   {{% tab "プロキシ" %}}
+
+   * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
+   * **Proxy header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
+
+   {{% /tab %}}
+
+   {{% tab "Privacy" %}}
+
+   * **Do not save response body**: 応答の本文が実行時に保存されないようにするには、このオプションを選択します。テスト結果に機密データを含めたくない場合に有用です。障害発生時のトラブルシューティングに影響を及ぼす可能性があるため、慎重に使用してください。セキュリティに関する推奨の詳細は、[Synthetic Monitoring Security][1] をご確認ください。
 
 
 [1]: /ja/security/synthetics
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{< /tabs >}}
+   {{< /tabs >}}
+
+<br/>
 
 3. HTTP テストに**名前**を付けます。
-4. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][9]で Synthetic テストをすばやくフィルタリングできます。
-6. HTTP テストを実行する**ロケーション**を選択します。HTTP テストは、ネットワークの外部または内部のどちらからエンドポイントを監視するかによって、[管理ロケーション][1]と[プライベートロケーション][2]から実行できます。
+
+4. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][4]で Synthetic テストをすばやくフィルタリングできます。
+
+{{< img src="synthetics/api_tests/http_test_config.png" alt="HTTP リクエストを定義する" style="width:90%;" >}}
 
 **Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+
+### アサーションを定義する
+
+アサーションは、期待されるテスト結果が何であるかを定義します。**Test URL** をクリックすると、`response time`、`status code`、`header`、`content-type` の基本的なアサーションが、取得された応答に基づいて追加されます。テストで監視するには、少なくとも 1 つのアサーションを定義する必要があります。
+
+| タイプ          | 演算子                                                                                               | 値の型                                                      |
+|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][5]、[`xpath`][6] | _String_ <br> _[Regex][7]_ <br> _String_, _[Regex][7]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | 文字列 <br> [Regex][7]                                      |
+| response time | `is less than`                                                                                         | 整数 (ms)                                                  |
+| ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
+
+HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文を解凍することが可能です。
+
+**New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
+
+{{< img src="synthetics/api_tests/assertions_http.png" alt="HTTP テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
+
+### ロケーションを選択する
+
+HTTP テストを実行する**ロケーション**を選択します。HTTP テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、[管理ロケーション][1]と[プライベートロケーション][2]の両方から実行できます。
 
 ### テストの頻度を指定する
 
 HTTP テストは次の頻度で実行できます。
 
 * **On a schedule**: 最も重要なエンドポイントにユーザーが常にアクセスできるようにします。Datadog で HTTP テストを実行する頻度を選択します。
-
-{{< img src="synthetics/api_tests/schedule.png" alt="スケジュールどおりに API テストを実行する"  style="width:90%;" >}}
-
 * [**Within your CI/CD pipelines**][3]: 欠陥のあるコードがカスタマーエクスペリエンスに影響を与える可能性があることを恐れずに出荷を開始します。
 * **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
-
-### アサーションを定義する
-
-アサーションは、期待されるテスト結果が何であるかを定義します。`Test URL` を押すと、`response time`、`status code`、`header`、`content-type` の基本的なアサーションが、取得された応答に基づいて追加されます。テストで監視するには、少なくとも 1 つのアサーションを定義する必要があります。
-
-| タイプ          | 演算子                                                                                               | 値の型                                                      |
-|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][11]                                      |
-| response time | `is less than`                                                                                         | 整数 (ms)                                                  |
-| ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
-
-**注**: HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文の圧縮を解除することが可能です。
-
-**New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
-
-{{< img src="synthetics/api_tests/assertions.png" alt="HTTP テストのアサーションを定義する" style="width:90%;" >}}
 
 ### アラート条件を定義する
 
@@ -123,14 +146,14 @@ HTTP テストは次の頻度で実行できます。
 
 #### アラート設定規則
 
-アラートの条件を `An alert is triggered if any assertion fails for X minutes from any n of N locations` に設定すると、次の 2 つの条件が当てはまる場合にのみアラートがトリガーされます。
+アラートの条件を `An alert is triggered if your test fails for X minutes from any n of N locations` に設定すると、次の 2 つの条件が当てはまる場合にのみアラートがトリガーされます。
 
 * 直近 *X* 分間に、最低 1 個のロケーションで失敗 (最低 1 つのアサーションが失敗)、
 * 直近 *X* 分間に、ある時点で最低 *n* 個のロケーションで失敗。
 
 #### 高速再試行
 
-テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][12] を介して構成できます。
+テストが失敗した場合、`Y` ミリ秒後に `X` 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
@@ -138,9 +161,9 @@ HTTP テストは次の頻度で実行できます。
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
-1. [モニターと同様][13]、メッセージに`@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
+1. [モニターの構成方法と同様][8]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
 
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][14]のほか、以下の[条件付き変数][15]を使用できます。
+2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][9]のほか、以下の[条件付き変数][10]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -151,12 +174,7 @@ HTTP テストは次の頻度で実行できます。
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
-メール通知には、このセクションで定義されているメッセージと、失敗したアサーションの要約が含まれます。
-通知の例:
-
-{{< img src="synthetics/api_tests/notifications-example.png" alt="API テスト通知"  style="width:90%;" >}}
-
-**Save** をクリックしてテストを保存し、Datadog にテストの実行を開始させます。
+**Save** をクリックすると、保存され、テストが開始されます。
 
 ## 変数
 
@@ -181,33 +199,55 @@ HTTP テストは次の頻度で実行できます。
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][16]と[ローカルで定義された変数](#create-local-variables)を使用できます。 
+HTTP テストの URL、高度なオプション、およびアサーションで、[`Settings` で定義されたグローバル変数][11]と[ローカルで定義された変数](#create-local-variables)を使用できます。
+
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="API テストでの変数の使用" video="true" width="90%" >}}
 
 ## テストの失敗
 
-テストが 1 つまたは複数のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストできずにテストが実際に失敗することがあります。これらの理由には次のものがあります。
+テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
 
+これらの理由には以下が含まれます。
 
+`CONNREFUSED`
+: ターゲットマシーンが積極的に拒否したため、接続できませんでした。
 
 `CONNRESET`
 : 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
 
 `DNS`
-: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤り、DNS エントリの構成の誤りなどの原因が考えられます。
+: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
 
 `INVALID_REQUEST` 
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
-: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][17]。
+: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][12]。
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` は、タイムアウトが TCP ソケットの接続レベルで発生したことを示します。
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` は、タイムアウトがリクエストの実行全体 (TCP ソケット接続、データ転送、アサーション) で発生したことを示します。
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
+  各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
+
+`MALFORMED_RESPONSE` 
+: リモートサーバーが HTTP 仕様に準拠していないペイロードで応答しました。
+
+## アクセス許可
+
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][13]を持つユーザーのみが、Synthetic HTTP テストを作成、編集、削除できます。Synthetic HTTP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][13]のいずれかにアップグレードします。
+
+[カスタムロール機能][14]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+
+### アクセス制限
+
+アカウントに[カスタムロール][15]を使用しているお客様は、アクセス制限が利用可能です。
+
+組織内の役割に基づいて、HTTP テストへのアクセスを制限することができます。HTTP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
+
+{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
 
 ## その他の参考資料
 
@@ -215,18 +255,16 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 
 [1]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /ja/synthetics/private_locations
-[3]: /ja/synthetics/ci
-[4]: /ja/synthetics/api_tests/http_tests
-[5]: /ja/synthetics/api_tests/ssl_tests
-[6]: /ja/synthetics/api_tests/tcp_tests
-[7]: /ja/synthetics/api_tests/dns_tests
-[8]: /ja/synthetics/api_tests/icmp_tests
-[9]: /ja/synthetics/search/#search
-[10]: https://restfulapi.net/json-jsonpath/
-[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[12]: /ja/api/v1/synthetics/#create-a-test
-[13]: /ja/monitors/notifications/?tab=is_alert#notification
-[14]: https://www.markdownguide.org/basic-syntax/
-[15]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[16]: /ja/synthetics/settings/#global-variables
-[17]: /ja/synthetics/api_tests/errors/#ssl-errors
+[3]: /ja/synthetics/cicd_integrations
+[4]: /ja/synthetics/search/#search
+[5]: https://restfulapi.net/json-jsonpath/
+[6]: https://www.w3schools.com/xml/xpath_syntax.asp
+[7]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[8]: /ja/monitors/notify/#notify-your-team
+[9]: https://www.markdownguide.org/basic-syntax/
+[10]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[11]: /ja/synthetics/settings/#global-variables
+[12]: /ja/synthetics/api_tests/errors/#ssl-errors
+[13]: /ja/account_management/rbac/
+[14]: /ja/account_management/rbac#custom-roles
+[15]: /ja/account_management/rbac/#create-a-custom-role

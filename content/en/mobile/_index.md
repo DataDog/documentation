@@ -19,6 +19,8 @@ The Datadog Mobile app enables you to view alerts from Datadog on your mobile de
 
 Download the app from the [Apple App Store][1] for your iOS device, or from the [Google Play store][2] for your Android device.
 
+{{< img src="mobile/mobile_app_qr_code.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Download Datadog mobile app">}}
+
 ### Logging in
 
 You can log in using standard authentication, Google authentication, or [SAML][3] - for both the US and the EU region.
@@ -86,11 +88,11 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 1. Navigate to **Account**.
 2. Click **Notifications**.
 3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
-4. Next, in the Datadog web app, navigate to [Incident Notification Rules][21].
+4. Next, in the Datadog web app, navigate to [Incident Notification Rules][13].
 5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
 6. Select your mobile device and click **Save**.
 
-For more information on configuring Incident Notification Rules, see the [Incidents settings docs][22].
+For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
 
 ## Widgets
 
@@ -207,7 +209,7 @@ Delete a widget by long pressing, dragging, and dropping the widget to the **Rem
 
 {{< img src="mobile/slo_widget.png" alt="Application Uptime SLO widgets displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [SLOs][13] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
+View your [SLOs][15] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
 
 Timeframe options are:
 - 7 days
@@ -317,7 +319,7 @@ Delete a widget by long pressing, dragging, and dropping the widget to the "Remo
 
 {{< img src="mobile/monitor_widget.png" alt="Configured monitor widgets displayed on Android and iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [monitors][14] from your home screen with Datadog widgets. Tap any cell to open the **Monitor Search** screen in the app, with your monitors already filled in.
+View your [monitors][16] from your home screen with Datadog widgets. Tap any cell to open the **Monitor Search** screen in the app, with your monitors already filled in.
 
 **Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
 
@@ -415,7 +417,7 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][15] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
+Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][17] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
 
 ## Search from home screen
 
@@ -437,7 +439,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][16].
+For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][18].
 
 ## Handoff
 
@@ -450,7 +452,7 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information about Handoff, read the [Apple Handoff documentation][17].
+For more information about Handoff, read the [Apple Handoff documentation][19].
 
 ## Account
 
@@ -458,7 +460,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][18]. You can also send a message in the [Datadog public Slack][19] [#mobile-app][20] channel.
+For help with troubleshooting, [contact Datadog support][20]. You can also send a message in the [Datadog public Slack][21] [#mobile-app][22] channel.
 
 ### Further Reading
 
@@ -476,13 +478,13 @@ For help with troubleshooting, [contact Datadog support][18]. You can also send 
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /dashboards/
 [12]: /monitors/incident_management
-[13]: /dashboards/widgets/slo/#setup
-[14]: /logs/explorer/saved_views/
-[15]: https://app.datadoghq.com/dashboard/lists/preset/5
-[16]: https://support.apple.com/en-us/HT209055
-[17]: https://support.apple.com/en-us/HT209455
-[18]: /help/
-[19]: https://chat.datadoghq.com/
-[20]: https://datadoghq.slack.com/archives/C0114D5EHNG
-[21]: https://app.datadoghq.com/incidents/settings#Rules
-[22]: /monitors/incident_management/incident_settings/#rules
+[13]: https://app.datadoghq.com/incidents/settings#Rules
+[14]: /monitors/incident_management/incident_settings/#rules
+[15]: /dashboards/widgets/slo/#setup
+[16]: /logs/explorer/saved_views/
+[17]: https://app.datadoghq.com/dashboard/lists/preset/5
+[18]: https://support.apple.com/en-us/HT209055
+[19]: https://support.apple.com/en-us/HT209455
+[20]: /help/
+[21]: https://chat.datadoghq.com/
+[22]: https://datadoghq.slack.com/archives/C0114D5EHNG

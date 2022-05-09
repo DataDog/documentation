@@ -44,7 +44,7 @@ However, if the parameter `send_monotonic_counter` is `false`, then this metric 
 
 For [Prometheus/OpenMetrics `histogram`][6], the `_count` and `_sum` values of the histogram are each mapped to Datadog's `gauge`.
 
-If the parameter `send_histograms_buckets` is `true`, each `_bucket` value is also mapped to Datadog's `gauge`.
+If the parameter `collect_histogram_buckets` is `true`, each `_bucket` value is also mapped to Datadog's `gauge`.
 
 If the parameter `send_distribution_buckets` is `true`, each `_bucket` is mapped to Datadog's `distribution`. Prometheus/OpenMetrics histogram data is converted to Datadog distribution metrics to allow for monitoring Kubernetes metrics as percentiles in Datadog. Datadog distribution metrics are based on the [DDSketch algorithm][7]. For more information, see the relevant Datadog [blog post on OpenMetrics and distribution metrics][8].
 
@@ -61,7 +61,7 @@ If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric 
 [1]: /agent/kubernetes/prometheus/
 [2]: /metrics/types/
 [3]: https://prometheus.io/docs/concepts/metric_types/#counter
-[4]: /metrics/agent_metrics_submission/?tab=count#monotonic-count
+[4]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
 [5]: https://prometheus.io/docs/concepts/metric_types/#gauge
 [6]: https://prometheus.io/docs/concepts/metric_types/#histogram
 [7]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
