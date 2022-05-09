@@ -98,7 +98,7 @@ Select “Metrics and logs” in the left sidebar to change the configuration ru
 Any changes to metric or log configuration settings should take effect within a few minutes.
 
 #### Metric collection
-By default, metrics for all Azure resources within the subscription are collected automatically. To send all metrics to Datadog, there is no action needed.
+By default, Datadog automatically collects metrics for all Azure resources within the subscription.
 
 Optionally, limit metric collection for Azure VMs and App Service Plans using Azure tags attached to your resources. 
 
