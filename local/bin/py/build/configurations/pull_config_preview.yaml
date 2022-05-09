@@ -60,7 +60,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: ava.silver/azi-756/frontdoor-metadata
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
