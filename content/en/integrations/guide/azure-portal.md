@@ -93,7 +93,7 @@ The portal retrieves all the available Datadog plans for your tenant, this inclu
 ## Datadog org configurations
 ### Metrics and logs
 
-Select “Metrics and logs” in the left sidebar to change the configuration rules for metrics and logs. All rules  will be applied dynamically across the entire subscription as resources are added or tags change.
+Select “Metrics and logs” in the left sidebar to change the configuration rules for metrics and logs. All rules are applied dynamically across the entire subscription as resources are added or tags change.
 
 Any changes to metric or log configuration settings should take effect within a few minutes.
 
