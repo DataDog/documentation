@@ -352,7 +352,7 @@ evaluate_missing_metrics:
   only:
     - master
 
-# TODO: update job to be scheduled/only run on master deploys when we are ready to deprecate old translations job
+# TODO: update job to run on master deploys when we are ready to deprecate old translations job
 manage_ignored_translations:
   <<: *base_template
   stage: post-deploy
