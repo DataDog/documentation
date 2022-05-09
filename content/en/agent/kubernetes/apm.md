@@ -25,7 +25,7 @@ In order to start collecting your application traces you must be [running the Da
 
 ## Setup
 
-You can configure the Agent to intake traces by using either `IP:Port`, Unix Domain Socket (UDS), or both. The Agent can receive traces from both setups at the same time if needed.
+You can configure the Agent to intake traces by using either TCP (`IP:Port`), Unix Domain Socket (UDS), or both. The Agent can receive traces from both setups at the same time if needed.
 
 {{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The tracer sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}
 
@@ -34,6 +34,15 @@ You can configure the Agent to intake traces by using either `IP:Port`, Unix Dom
 {{% tab "Helm" %}}
 
 - If you haven't already, [install][1] the Helm chart.
+
+The default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values. 
+
+This feature can be disabled with `datadog.apm.socketEnabled`.
+
+#### Optional - Configure the Datadog Agent to accept traces over TCP
+
+Datadog agent can also be configured to receive traces over TCP. To enable this feature:
+
 - Update your `values.yaml` file with the following APM configuration:
     ```yaml
     datadog:
@@ -46,24 +55,7 @@ You can configure the Agent to intake traces by using either `IP:Port`, Unix Dom
 
 Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog`. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
 
-[1]: /agent/kubernetes/?tab=helm
-{{% /tab %}}
-{{% tab "Helm (UDS)" %}}
-
-- If you haven't already, [install][1] the Helm chart.
-- Update your `values.yaml` file with the following APM configuration:
-    ```yaml
-    datadog:
-      ## Enable apm agent and provide custom configs
-      apm:
-        # datadog.apm.socketEnabled -- Enable APM over Socket (Unix Socket or windows named pipe)
-        ## ref: https://docs.datadoghq.com/agent/kubernetes/apm/
-        socketEnabled: true
-    ```
-
-This configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values.
-
-Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog`. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
+**Warning**: The `datadog.apm.portEnabled` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. If your network plugin doesn’t support `hostPorts`, so add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod does not start. Some Kubernetes installations do not allow this.
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
@@ -100,6 +92,9 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
           # (...)
   ```
 
+**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. If your network plugin doesn’t support `hostPorts`, so add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod does not start. Some Kubernetes installations do not allow this.
+
+
 {{% /tab %}}
 {{% tab "DaemonSet (UDS)" %}}
 
@@ -127,8 +122,14 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
   ```
 
 This configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file in that directory with the `DD_APM_RECEIVER_SOCKET` value of `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket.
+
 {{% /tab %}}
 {{% tab "Operator" %}}
+
+The default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `agent.apm.hostSocketPath` and `agent.apm.socketPath` configuration values.
+
+#### Optional - Configure the Datadog Agent to accept traces over TCP
+Datadog agent can also be configured to receive traces over TCP. To enable this feature:
 
 Update your `datadog-agent.yaml` manifest with the following:
 
@@ -151,61 +152,17 @@ Then apply the new configuration:
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
+**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. If your network plugin doesn’t support `hostPorts`, so add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod does not start. Some Kubernetes installations do not allow this.
+
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
-{{% /tab %}}
-{{% tab "Operator (UDS)" %}}
-
-Update your `datadog-agent.yaml` manifest with the following:
-
-```yaml
-agent:
-  image:
-    name: "gcr.io/datadoghq/agent:latest"
-  apm:
-    enabled: true
-    unixDomainSocket:
-      enabled: true
-site: <DATADOG_SITE>
-```
-Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
-
-See the sample [manifest with APM and metrics collection enabled][1] for a complete example.
-
-Then apply the new configuration:
-
-```shell
-$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
-```
-
-[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-unix-socket.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
 **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
-### Configure your application pods in order to communicate with the Datadog Agent
+### Configure your application pods to submit traces to Datadog Agent
 
 {{< tabs >}}
-{{% tab "IP:Port" %}}
-If you are sending traces to the Agent by using (`<IP_ADDRESS>:8126`) supply this IP address to your application pods—either automatically with the [Datadog Admission Controller][1], or manually using the downward API to pull the host IP. The application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-#(...)
-    spec:
-      containers:
-      - name: "<CONTAINER_NAME>"
-        image: "<CONTAINER_IMAGE>/<TAG>"
-        env:
-          - name: DD_AGENT_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-```
-
-[1]: /agent/cluster_agent/admission_controller/
-{{% /tab %}}
 {{% tab "UDS" %}}
 If you are sending traces to the Agent by using Unix Domain Socket (UDS), mount the host directory the socket is in (that the Agent created) to the application container and specify the path to the socket with `DD_TRACE_AGENT_URL`:
 
@@ -231,6 +188,27 @@ kind: Deployment
 ```
 
 {{% /tab %}}
+
+{{% tab TCP %}}
+If you are sending traces to the Agent by using TCP (`<IP_ADDRESS>:8126`) supply this IP address to your application pods—either automatically with the [Datadog Admission Controller][1], or manually using the downward API to pull the host IP. The application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+#(...)
+    spec:
+      containers:
+      - name: "<CONTAINER_NAME>"
+        image: "<CONTAINER_IMAGE>/<TAG>"
+        env:
+          - name: DD_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+```
+
+[1]: /agent/cluster_agent/admission_controller/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configure your application tracers to emit traces:
@@ -238,7 +216,7 @@ After configuring your Datadog Agent to collect traces and giving your applicati
 
 Refer to the [language-specific APM instrumentation docs][1] for more examples.
 
-**Note:** The .NET and PHP tracers do not currently support sending traces over Unix Domain Socket (UDS). For updates on UDS for PHP and .NET, contact support.
+**Note:** The PHP tracer does not currently support sending traces over Unix Domain Socket (UDS). For updates on UDS for PHP, contact support.
 
 [1]: /tracing/setup/
 
