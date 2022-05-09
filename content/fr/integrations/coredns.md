@@ -13,20 +13,21 @@ assets:
     '[CoreDNS] Request duration high': assets/monitors/coredns_request_duration_high.json
   service_checks: assets/service_checks.json
 categories:
-  - containers
-  - network
-  - autodiscovery
-  - log collection
+- containers
+- network
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/coredns/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
 display_name: CoreDNS
 draft: false
 git_integration_title: coredns
 guid: 9b316155-fc8e-4cb0-8bd5-8af270759cfb
 integration_id: coredns
 integration_title: CoreDNS
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -38,8 +39,11 @@ public_title: Intégration Datadog/CoreDNS
 short_description: CoreDNS recueille des métriques relatives au DNS dans Kubernetes.
 support: core
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques de CoreDNS en temps réel pour visualiser et surveiller les échecs de DNS et les hits et miss de cache.
@@ -50,7 +54,11 @@ Recueillez des métriques de CoreDNS en temps réel pour visualiser et surveille
 
 Le check CoreDNS est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
-### Configuration
+**Note** : la version actuelle du check (1.11.0+) utilise [OpenMetrics][2] (OpenMetricsBaseCheckV2) pour la collecte de métriques, ce qui nécessite Python 3. Si votre host ne peut pas utiliser Python 3, ou si vous souhaitez utiliser l'ancienne version de ce check (OpenMetricsBaseCheckV1), consultez la [configuration][3] suivante. Les utilisateurs d'Autodiscovery se servant du fichier `coredns.d/auto_conf.yaml` n'ont toutefois pas besoin d'utiliser cette configuration, car ce fichier active par défaut l'option `prometheus_url` pour la version OpenMetricsBaseCheckV1 du check. Consultez le fichier d'exemple [coredns.d/auto_conf.yaml][4] pour découvrir les options de configuration par défaut et le fichier d'exemple [coredns.d/conf.yaml.example][20] pour découvrir toutes les options de configuration disponibles.
+
+**Remarque** : la version OpenMetricsBaseCheckV2 du check CoreDNS envoie désormais les métriques `.bucket` et les échantillons d'histogramme `.sum` et `.count` sous la forme de counts monotones. Ces métriques étaient auparavant transmises sous la forme de gauges avec le check OpenMetricsBaseCheckV1. Consultez le fichier [metadata.csv][5] pour consulter la liste des métriques disponibles pour chaque version.
+
+### Procédure à suivre
 {{< tabs >}}
 {{% tab "Docker" %}}
 #### Docker
@@ -64,11 +72,18 @@ Définissez des [modèles d'intégration Autodiscovery][1] en tant qu'étiquette
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["coredns"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]'
+LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]'
+```
+
+Pour activer l'ancienne version du check (OpenMetricsBaseCheckV1), remplacez `openmetrics_endpoint` par `prometheus_url` :
+
+```yaml
+LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]' 
 ```
 
 **Remarques** :
 
+- Le fichier `coredns.d/auto_conf.yaml` transmis active par défaut l'option de l'ancien check OpenMetricsBaseCheckV1, à savoir `prometheus_url`.
 - Le tag `dns-pod` surveille l'IP du pod DNS cible. Les autres tags sont associés au dd-agent qui interroge les informations à l'aide de la découverte de services.
 - Les annotations de découverte de services doivent être effectuées sur le pod. En cas de déploiement, ajoutez les annotations aux métadonnées des spécifications du modèle. Ne les ajoutez pas au niveau des spécifications extérieures.
 
@@ -107,7 +122,7 @@ metadata:
     ad.datadoghq.com/coredns.instances: |
       [
         {
-          "prometheus_url": "http://%%host%%:9153/metrics", 
+          "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
           "tags": ["dns-pod:%%host%%"]
         }
       ]
@@ -118,8 +133,21 @@ spec:
     - name: coredns
 ```
 
+Pour activer l'ancienne version du check (OpenMetricsBaseCheckV1), remplacez `openmetrics_endpoint` par `prometheus_url` :
+
+```yaml
+    ad.datadoghq.com/coredns.instances: |
+      [
+        {
+          "prometheus_url": "http://%%host%%:9153/metrics", 
+          "tags": ["dns-pod:%%host%%"]
+        }
+      ]
+```
+
 **Remarques** :
 
+- Le fichier `coredns.d/auto_conf.yaml` transmis active par défaut l'option de l'ancien check OpenMetricsBaseCheckV1, à savoir `prometheus_url`.
 - Le tag `dns-pod` correspond à l'IP du pod DNS cible. Les autres tags sont associés à l'Agent Datadog qui interroge les informations à l'aide de la découverte de services.
 - Les annotations de découverte de services doivent être effectuées sur le pod. En cas de déploiement, ajoutez les annotations aux métadonnées des spécifications du modèle. Ne les ajoutez pas au niveau des spécifications extérieures.
 
@@ -140,8 +168,8 @@ metadata:
     name: coredns
 ```
 
-[1]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes#configuration
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=daemonset
 [4]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=kubernetes#examples---datadog-redis-integration
 [5]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=file
@@ -164,20 +192,27 @@ Définissez des [modèles d'intégration Autodiscovery][1] en tant qu'étiquette
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"coredns\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"prometheus_url\":\"http://%%host%%:9153/metrics\", \"tags\":[\"dns-pod:%%host%%\"]}]"
+      "com.datadoghq.ad.instances": "[{\"openmetrics_endpoint\":\"http://%%host%%:9153/metrics\", \"tags\":[\"dns-pod:%%host%%\"]}]"
     }
   }]
 }
 ```
 
+Pour activer l'ancienne version du check (OpenMetricsBaseCheckV1), remplacez `openmetrics_endpoint` par `prometheus_url` :
+
+```json
+      "com.datadoghq.ad.instances": "[{\"prometheus_url\":\"http://%%host%%:9153/metrics\", \"tags\":[\"dns-pod:%%host%%\"]}]"
+```
+
 **Remarques** :
 
+- Le fichier `coredns.d/auto_conf.yaml` transmis active par défaut l'option de l'ancien check OpenMetricsBaseCheckV1, à savoir `prometheus_url`.
 - Le tag `dns-pod` correspond à l'IP du pod DNS cible. Les autres tags sont associés à l'Agent Datadog qui interroge les informations à l'aide de la découverte de services.
 - Les annotations de découverte de services doivent être effectuées sur le pod. En cas de déploiement, ajoutez les annotations aux métadonnées des spécifications du modèle. Ne les ajoutez pas au niveau des spécifications extérieures.
 
 ##### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec ECS][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Amazon ECS][2].
 
 Définissez ensuite des [intégrations de logs][5] en tant qu'étiquettes Docker :
 
@@ -200,7 +235,7 @@ Définissez ensuite des [intégrations de logs][5] en tant qu'étiquettes Docker
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][2] et cherchez `coredns` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][6] et cherchez `coredns` dans la section Checks.
 
 ## Données collectées
 
@@ -213,20 +248,20 @@ Définissez ensuite des [intégrations de logs][5] en tant qu'étiquettes Docker
 Le check CoreDNS n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "coredns" >}}
 
-**coredns.prometheus.health** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de métriques.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-## Développement
 
-Consultez la [documentation sur les outils de développement][4] pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
-
+[20]:https://github.com/DataDog/integrations-core/blob/master/coredns/datadog_checks/coredns/data/conf.yaml.example
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: http://docs.datadoghq.com/help
-[4]: https://docs.datadoghq.com/fr/developers/
+[2]: https://docs.datadoghq.com/fr/integrations/openmetrics
+[3]: https://github.com/DataDog/integrations-core/blob/7.32.x/coredns/datadog_checks/coredns/data/conf.yaml.example
+[4]: https://github.com/DataDog/integrations-core/blob/master/coredns/datadog_checks/coredns/data/auto_conf.yaml
+[5]: https://github.com/DataDog/integrations-core/blob/master/coredns/metadata.csv
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: http://docs.datadoghq.com/help
