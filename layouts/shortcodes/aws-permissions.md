@@ -4,7 +4,7 @@ IAM permissions allow Datadog to collect metrics, tags, CloudWatch events, and d
 
 ### AWS Integration IAM Policy
 
-The set of permissions necessary to use all the integrations for individual AWS services.
+The set of permissions necessary to use all the integrations for individual AWS services:
 
 ```json
 {
