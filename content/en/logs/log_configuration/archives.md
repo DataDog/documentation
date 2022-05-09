@@ -121,33 +121,33 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 
 1. [Create a policy][1] with the following two permission statements:  
 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "DatadogUploadAndRehydrateLogArchives",
-      "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
-      "Resource": [
-        "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-        "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
-      ]
-    },
-    {
-      "Sid": "DatadogRehydrateLogArchivesListBucket",
-      "Effect": "Allow",
-      "Action": "s3:ListBucket",
-      "Resource": [
-        "arn:aws:s3:::<MY_BUCKET_NAME_1>",
-        "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-      ]
-    }
-  ]
-}
-```
-   * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
-   * The `PutObject` permission is sufficient for uploading archives.
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "DatadogUploadAndRehydrateLogArchives",
+         "Effect": "Allow",
+         "Action": ["s3:PutObject", "s3:GetObject"],
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+         ]
+       },
+       {
+         "Sid": "DatadogRehydrateLogArchivesListBucket",
+         "Effect": "Allow",
+         "Action": "s3:ListBucket",
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+         ]
+       }
+     ]
+   }
+   ```
+     * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
+     * The `PutObject` permission is sufficient for uploading archives.
 
 2. Edit the bucket names.
 3. Optionally, specify the paths that contain your log archives.
