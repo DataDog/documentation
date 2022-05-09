@@ -260,6 +260,17 @@ For more information, see the [DogStatsD for C# repository][1].
 
 {{< /programming-lang-wrapper >}}
 
+### Run multiple metrics processing pipelines to limit packet drops
+
+If your DogStatsD server uses UDS and is dropping packets at a high throughput, configuring the server to use more CPU may improve processing speed and decrease packet drops.
+
+You may also configure your DogStatsD server if the client telemetry server indicates packet drops and the server does not use more than 2 CPUs or 2 cores even if they are available.
+
+To reduce the amount of packet drops:
+
+1. Increase the client queue size to `8192`. For more information, see the client library configuration. You may see the amount of drops decrease, and your application may use more RAM.
+2. Additionally, you can enable the `dogstatsd_pipeline_autoadjust: true` feature in your Datadog Agent configuration. The Agent uses multiple cores to process custom metrics, which may lead to higher CPU usage but lowers packet drops.
+
 ## Operating system kernel buffers
 
 Most operating systems add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once the max is reached, datagrams containing your metrics start getting dropped. It is possible to adjust the values to give the Agent more time to process incoming metrics:
@@ -334,7 +345,7 @@ dogstatsd_so_rcvbuf: 4194304
 
 If you are using Kubernetes to deploy the Agent and/or DogStatsD and you want to configure the sysctls as mentioned above, set their value per container. If the `net.*` sysctls is namespaced, you can set them per pod. See the Kubernetes documentation on [Using sysctls in a Kubernetes Cluster][6].
 
-### Ensure proper packet sizes
+## Ensure proper packet sizes
 
 Avoid extra CPU usage by sending packets with an adequate size to the DogStatsD server in the Datadog Agent. The latest versions of the official DogStatsD clients send packets with a size optimized for performance.
 
@@ -352,7 +363,7 @@ The Datadog Agent performs most optimally if the DogStatsD clients send packets 
   <strong>Note for UDS</strong>: for the best performances, the UDS packet size should be 8192 bytes.
 </div>
 
-### Limit the maximum memory usage of the Agent
+## Limit the maximum memory usage of the Agent
 
 The Agent tries to absorb the burst of metrics sent by the DogStatsD clients, but to do so, it needs to use memory. Even if this is for a short amount of time and even if this memory is quickly released to the OS, a spike happens and that could be an issue in containerized environments where limit on memory usage could evict pods or containers.
 
@@ -372,7 +383,7 @@ dogstatsd_queue_size: 512
 
 See the next section on burst detection to help you detect bursts of metrics from your applications.
 
-### Enable metrics processing stats and burst detection
+## Enable metrics processing stats and burst detection
 
 DogStatsD has a stats mode in which you can see which metrics are the most processed.
 

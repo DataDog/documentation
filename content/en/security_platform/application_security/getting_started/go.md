@@ -1,5 +1,5 @@
 ---
-title: Go Applications
+title: Go Getting Started with ASM
 kind: documentation
 code_lang: go
 type: multi-code-lang

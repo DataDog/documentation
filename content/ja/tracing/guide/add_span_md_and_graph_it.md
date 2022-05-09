@@ -1,23 +1,24 @@
 ---
-title: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
-kind: ガイド
 further_reading:
-  - link: /tracing/guide/alert_anomalies_p99_database/
-    tag: 3 分
-    text: データベースサービスの異常な p99 レイテンシーに関するアラート
-  - link: /tracing/guide/week_over_week_p50_comparison/
-    tag: 2 分
-    text: サービスのレイテンシーを前週と比較する
-  - link: /tracing/guide/apm_dashboard/
-    tag: 4 分
-    text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
-  - link: /tracing/guide/slowest_request_daily/
-    tag: 3 分
-    text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-  - link: /tracing/guide/
-    tag: ''
-    text: すべてのガイド
+- link: /tracing/guide/alert_anomalies_p99_database/
+  tag: 3 分
+  text: データベースサービスの異常な p99 レイテンシーに関するアラート
+- link: /tracing/guide/week_over_week_p50_comparison/
+  tag: 2 分
+  text: サービスのレイテンシーを前週と比較する
+- link: /tracing/guide/apm_dashboard/
+  tag: 4 分
+  text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
+- link: /tracing/guide/slowest_request_daily/
+  tag: 3 分
+  text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
+- link: /tracing/guide/
+  tag: ''
+  text: すべてのガイド
+kind: ガイド
+title: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
 ---
+
 _所要時間 7 分_
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="分析ビュー" video="true"  style="width:90%;">}}
@@ -91,10 +92,8 @@ require 'ddtrace'
 class ShoppingCartController < ApplicationController
   # GET /shopping_cart
   def index
-    # アクティブスパンを取得
-    current_span = Datadog.tracer.active_span
-    # customer_id -> 254889
-    current_span.set_tag('customer.id', params.permit([:customer_id])) unless current_span.nil?
+    #アクティブスパンを取得し、customer_id -> 254889 を設定します
+    Datadog::Tracing.active_span&.set_tag('customer.id', params.permit([:customer_id]))
 
     # [...]
   end

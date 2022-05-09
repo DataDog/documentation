@@ -273,6 +273,37 @@
             - /serverless/datadog_lambda_library/
             - /serverless/serverless_integrations/cli/
 
+  - repo_name: datadog-cdk-constructs
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/libraries_integrations/'
+        file_name: 'cdk.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md"]
+          title: Datadog CDK Construct
+          kind: documentation
+
+  - repo_name: datadog-lambda-extension
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/libraries_integrations/'
+        file_name: 'extension.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
+          title: Datadog Lambda Extension
+          kind: documentation
+          aliases:
+            - /serverless/datadog_lambda_library/extension
+            - /serverless/libraries_integrations/extension
+
   - repo_name: synthetics-ci-github-action
     contents:
     - action: pull-and-push-file
@@ -591,7 +622,6 @@
 
   - repo_name: dd-sdk-reactnative
     contents:
-
     - action: pull-and-push-file
       branch: main
       globs:
@@ -600,7 +630,7 @@
         dest_path: '/real_user_monitoring/'
         file_name: 'reactnative.md'
         front_matters:
-          title: React Native RUM Collection
+          title: React Native Monitoring
           kind: documentation
           beta: true
           description: "Collect RUM data from your React Native projects."
@@ -608,13 +638,39 @@
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "Github"
-              text: "dd-sdk-reactnative source code"
+              text: "dd-sdk-reactnative Source code"
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
-              text: "Monitor react-native applications"
+              text: "Monitor React Native applications"
+
+  - repo_name: dd-sdk-flutter
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'packages/datadog_flutter_plugin/README.md'
+      options:
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: '_index.md'
+        front_matters:
+          title: Flutter Monitoring
+          kind: documentation
+          beta: true
+          description: "Collect RUM data from your Flutter projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/README.md"]
+          further_reading:
+            - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+              tag: "Blog"
+              text: "Monitor Flutter application performance with Datadog Mobile RUM"
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
 
   - repo_name: security-monitoring
     contents:

@@ -717,6 +717,13 @@
       "description": "Get Cost Across Multi-Org Account returns \"OK\" response"
     }
   ],
+  "GetUsageApplicationSecurityMonitoring": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Application Security returns \"OK\" response"
+    }
+  ],
   "GetUsageObservabilityPipelines": [
     {
       "group": "usage_metering",

@@ -1563,6 +1563,11 @@ components:
             description: A monitor tag.
             type: string
           type: array
+        mute_first_recovery_notification:
+          description: If the first recovery notification during a downtime should
+            be muted.
+          example: false
+          type: boolean
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -1692,6 +1697,11 @@ components:
             description: A monitor tag.
             type: string
           type: array
+        mute_first_recovery_notification:
+          description: If the first recovery notification during a downtime should
+            be muted.
+          example: false
+          type: boolean
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -1946,7 +1956,7 @@ components:
           description: 'The type of event being posted. Option examples include nagios,
             hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
 
-            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+            The list of standard source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
           type: string
         tags:
           description: A list of tags to apply to the event.
@@ -8359,7 +8369,7 @@ components:
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
-          description: ID of the SLO that this correction will be applied to.
+          description: ID of the SLO that this correction applies to.
           example: sloId
           type: string
         start:
@@ -8400,7 +8410,7 @@ components:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
         created_at:
-          description: The epoch timestamp of when the correction was created at
+          description: The epoch timestamp of when the correction was created at.
           format: int64
           type: integer
         creator:
@@ -8420,7 +8430,7 @@ components:
           format: int64
           type: integer
         modified_at:
-          description: The epoch timestamp of when the correction was modified at
+          description: The epoch timestamp of when the correction was modified at.
           format: int64
           type: integer
         modifier:
@@ -8429,12 +8439,12 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           nullable: true
           type: string
         slo_id:
-          description: ID of the SLO that this correction will be applied to.
+          description: ID of the SLO that this correction applies to.
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -8505,7 +8515,7 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         start:
@@ -25159,7 +25169,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
-      description: Update the specified SLO correction object object.
+      description: Update the specified SLO correction object.
       operationId: UpdateSLOCorrection
       parameters:
       - description: The ID of the SLO correction object.
@@ -25543,7 +25553,7 @@ paths:
       summary: Get details of batch
       tags:
       - Synthetics
-      x-menu-order: 27
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/synthetics/locations:
@@ -25569,7 +25579,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -25613,7 +25623,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 21
+      x-menu-order: 22
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -25652,7 +25662,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: idempotent
     get:
@@ -25690,7 +25700,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         type: safe
     put:
@@ -25736,7 +25746,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests:
@@ -26469,7 +26479,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -26597,7 +26607,7 @@ paths:
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         type: safe
     put:
@@ -26870,7 +26880,7 @@ paths:
       summary: Get all global variables
       tags:
       - Synthetics
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         type: safe
     post:
@@ -26913,7 +26923,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -26962,7 +26972,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
-      x-menu-order: 20
+      x-menu-order: 21
       x-undo:
         type: idempotent
     get:
@@ -27054,7 +27064,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 18
+      x-menu-order: 20
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -27628,8 +27638,7 @@ paths:
         type: safe
   /api/v1/usage/ci-app:
     get:
-      description: Get hourly usage for CI Visibility (Tests, Pipeline, Combo, and
-        Spans).
+      description: Get hourly usage for CI Visibility (Tests, Pipeline, and Spans).
       operationId: GetUsageCIApp
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`

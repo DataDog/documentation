@@ -751,7 +751,7 @@
     "summary": "Get an SLO correction for an SLO"
   },
   "UpdateSLOCorrection": {
-    "description": "Update the specified SLO correction object object.",
+    "description": "Update the specified SLO correction object.",
     "summary": "Update an SLO correction",
     "request_description": "The edited SLO correction object.",
     "request_schema_description": "An object that defines a correction to be applied to an SLO."
@@ -967,7 +967,7 @@
     "summary": "Get billable usage across your account"
   },
   "GetUsageCIApp": {
-    "description": "Get hourly usage for CI Visibility (Tests, Pipeline, Combo, and Spans).",
+    "description": "Get hourly usage for CI Visibility (Tests, Pipeline, and Spans).",
     "summary": "Get hourly usage for CI Visibility"
   },
   "GetUsageCloudSecurityPostureManagement": {
