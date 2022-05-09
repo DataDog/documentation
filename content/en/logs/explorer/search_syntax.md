@@ -188,7 +188,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 **Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
 
-In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`. You cannot create a facet on array of JSON objects but search using the following syntax.
+In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`. You cannot create a facet on array of JSON objects but you can search using the following syntax.
 
 * `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
 
