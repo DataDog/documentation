@@ -759,19 +759,20 @@
           kind: documentation
           description: "Datadog Operator Configuration v1."
           dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md"]
-    - action: pull-and-push-file
-      branch: main
-      globs:
-        - "configuration.v2alpha1.md"
-      options:
-        dest_path: 'agent/operator/'
-        path_to_remove: 'docs/'
-        file_name: 'configuration.v2alpha1.md'
-        front_matters:
-          title: Configuration v2
-          kind: documentation
-          description: "Datadog Operator Configuration v2."
-          dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md"]
+          
+    # - action: pull-and-push-file
+    #   branch: main
+    #   globs:
+    #     - "configuration.v2alpha1.md"
+    #   options:
+    #     dest_path: 'agent/operator/'
+    #     path_to_remove: 'docs/'
+    #     file_name: 'configuration.v2alpha1.md'
+    #     front_matters:
+    #       title: Configuration v2
+    #       kind: documentation
+    #       description: "Datadog Operator Configuration v2."
+    #       dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md"]
 
     - action: pull-and-push-file
       branch: main
