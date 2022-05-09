@@ -150,7 +150,7 @@ Add the following two permission statements to your IAM policies attached to the
 }
 ```
 
-Note: The Resource under the `s3:PutObject` and `s3:GetObject` actions should end with `/*` because these permissions get applied to objects within the buckets. 
+**Note**: Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets. 
 
 [1]: /logs/archives/rehydrating/
 {{% /tab %}}
