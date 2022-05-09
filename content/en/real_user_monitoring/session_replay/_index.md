@@ -112,7 +112,7 @@ Additionally, authorize the `example.com` domain in the `assets.example.com`. Th
 
 ### How does it work?
 
-The Session Replay Recorder, which is part of the RUM Browser SDK, takes a snapshot of the DOM and CSS. It tails and records events happening on the web page (such as DOM modification, mouse move, clicks, and input events) along with their timestamp.
+The Session Replay Recorder, which is part of the RUM Browser SDK, takes a snapshot of the DOM and CSS. It tails and records events happening on the web page (such as DOM modification, mouse move, clicks, and input events) along with their timestamps.
 
 On the Datadog replay view, the page is rebuilt and the recorded events are re-applied at the right time.
 

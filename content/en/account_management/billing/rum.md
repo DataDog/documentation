@@ -44,7 +44,7 @@ Yes. Datadog uses cookies to stitch together the various steps of your users int
 The Session Replay Plan includes session recordings (replays), resources, and long tasks. 
 
 - If you are collecting any of the three in your sessions, you are billed for the sessions under the Replay Plan.
-- If you want to disable sessions recordings from being captured, see the [Session Replay documentation][1].
+- If you want to disable session recordings from being captured, see the [Session Replay documentation][1].
 - If you want to disable resources and long tasks from being captured, see the [Browser Monitoring documentation][2].
 
 ## Further Reading
