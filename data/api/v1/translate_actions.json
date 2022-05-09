@@ -967,7 +967,7 @@
     "summary": "Get billable usage across your account"
   },
   "GetUsageCIApp": {
-    "description": "Get hourly usage for CI Visibility (Tests, Pipeline, Combo, and Spans).",
+    "description": "Get hourly usage for CI Visibility (Tests, Pipeline, and Spans).",
     "summary": "Get hourly usage for CI Visibility"
   },
   "GetUsageCloudSecurityPostureManagement": {
