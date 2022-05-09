@@ -180,8 +180,6 @@ If your tags don't follow [tags best practices][5] and don't use the `key:value`
 
 ## Arrays
 
-You can add facets on arrays of strings or numbers. All values included in the array become listed in the facet and can be used to search the logs.
-
 In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
 
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets" style="width:80%;">}}
@@ -190,7 +188,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 **Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
 
-In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`.
+In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`. You cannot create a facet on array of JSON objects but search using the following syntax.
 
 * `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
 
