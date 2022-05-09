@@ -4,8 +4,7 @@
 {{ $scratch := .Scratch }}
 
 <!-- From data file -->
-{{ $list := (where (sort .Pages) ".Params.is_hardcoded" "!=" true) }}
-{{ $hardcodedList := (where (sort .Pages) ".Params.is_hardcoded" "==" true) }}
+{{ $list := sort .Pages }}
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
@@ -67,32 +66,6 @@
                             {{ else }}
                                 <img height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}" alt="{{ $v.Key }}" />
                             {{ end }}
-                            <span class="pl-1">{{ .Title }}</span><br />
-                        </a>
-                    {{ end }}
-                </div>
-            </div>
-        {{ end }}
-    </div>
-
-    <!-- Hardcoded -->
-    <div class="list-group">
-      <div class="js-empty-results d-none font-semibold"></div>
-        {{ range $i, $v := $hardcodedList.GroupByParam "source" }}
-            <div class="js-group js-group-{{ $i }}">
-                <div class="js-group-header mb-1 active">
-                    <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
-                        <img height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
-                    </div>
-                    <div class="d-inline font-semibold ml-1">
-                        Multi Log Sources
-                    </div>
-                    <div class="js-group-header__arrow">></div>
-                </div>
-                <div class="group-{{ .Key }} mb-2 ml-4 d-none">
-                    {{ range $v.Pages }}
-                        <a class="mb-1 font-semibold mix js-single-rule {{ range $i, $e := .Params.rule_category }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
-                            <img height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}" alt="{{ $v.Key }}" />
                             <span class="pl-1">{{ .Title }}</span><br />
                         </a>
                     {{ end }}

@@ -123,8 +123,7 @@ def security_rules(content, content_dir):
                                 f"/security_monitoring/default_rules/{p.stem}"
                             ],
                             "rule_category": [],
-                            "integration_id": "",
-                            "is_hardcoded": data.get('options', {}).get('detectionMethod', '') == 'hardcoded'
+                            "integration_id": ""
                         }
 
                         # we need to get the path relative to the repo root for comparisons
@@ -173,6 +172,11 @@ def security_rules(content, content_dir):
                             page_data["framework"] = data.get('framework', {}).get('name', '')
                             page_data["control"] = data.get('control', '')
                             page_data["scope"] = tech
+
+                        is_hardcoded = data.get('options', {}).get('detectionMethod', '') == 'hardcoded'
+                        if is_hardcoded:
+                            page_data["source"] = "Multi Log Sources"
+                            page_data["scope"] = "Multi Log Sources"
 
                         # lowercase them
                         if page_data.get("source", None):
