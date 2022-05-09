@@ -173,10 +173,11 @@ def security_rules(content, content_dir):
                             page_data["control"] = data.get('control', '')
                             page_data["scope"] = tech
 
-                        # Hardcoded rules which can span several different log sources do not include a source tag
-                        is_hardcoded = not page_data.get("source", None)
-                        if is_hardcoded:
-                            page_data["source"] = "multi Log Sources"
+                        # Hardcoded rules in cloud siem which can span several different log sources do not include a source tag
+                        if 'security-monitoring' in relative_path:
+                            is_hardcoded = not page_data.get("source", None)
+                            if is_hardcoded:
+                                page_data["source"] = "multi Log Sources"
 
                         # lowercase them
                         if page_data.get("source", None):
