@@ -358,135 +358,175 @@ main:
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
     weight: 411
+  - name: Operator
+    url: agent/operator
+    parent: agent
+    identifier: agent_operator
+    weight: 5
+  - name: Installation
+    url: agent/operator/installation
+    parent: agent_operator
+    identifier: agent_operator_installation
+    weight: 501
+  - name: Configuration v1
+    url: agent/operator/configuration.v1alpha1
+    parent: agent_operator
+    identifier: agent_operator_configuration_v1
+    weight: 502
+  - name: Configuration v2
+    url: agent/operator/configuration.v2alpha1
+    parent: agent_operator
+    identifier: agent_operator_configuration_v2
+    weight: 503
+  - name: Cluster Agent
+    url: agent/operator/cluster_agent_setup
+    parent: agent_operator
+    identifier: agent_operator_cluster_agent
+    weight: 504
+  - name: Custom Checks
+    url: agent/operator/custom_check
+    parent: agent_operator
+    identifier: agent_operator_custom_check
+    weight: 505
+  - name: kubectl Plugin
+    url: agent/operator/kubectl-plugin
+    parent: agent_operator
+    identifier: agent_operator_kubectl_plugin
+    weight: 506
+  - name: Secret Management
+    url: agent/operator/secret_management
+    parent: agent_operator
+    identifier: agent_operator_secret_management
+    weight: 507
   - name: Amazon ECS
     url: agent/amazon_ecs/
     parent: agent
     identifier: agent_amazon_ecs
-    weight: 5
+    weight: 6
   - name: APM
     url: agent/amazon_ecs/apm/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_apm
-    weight: 501
+    weight: 601
   - name: Log collection
     url: agent/amazon_ecs/logs/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_logs
-    weight: 502
+    weight: 602
   - name: Tag extraction
     url: agent/amazon_ecs/tags/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_tags
-    weight: 503
+    weight: 603
   - name: Data collected
     url: agent/amazon_ecs/data_collected/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_data_collected
-    weight: 504
+    weight: 604
   - name: AWS Fargate
     url: integrations/ecs_fargate/
     parent: agent
     identifier: ecs_fargate
-    weight: 6
+    weight: 7
   - name: IoT
     url: agent/iot/
     parent: agent
     identifier: agent_iot
-    weight: 7
+    weight: 8
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 8
+    weight: 9
   - name: Advanced Log Collection
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 801
+    weight: 901
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 802
+    weight: 902
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 803
+    weight: 903
   - name: Proxy
     url: agent/proxy/
     parent: agent
     identifier: agent_proxy
-    weight: 9
+    weight: 10
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 10
+    weight: 11
   - name: Upgrade to Agent v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 1001
+    weight: 1101
   - name: Upgrade to Agent v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 1002
+    weight: 1102
   - name: Upgrade Between Agent Minor Versions
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
-    weight: 1003
+    weight: 1103
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 11
+    weight: 12
     identifier: agent_troubleshooting
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1101
+    weight: 1201
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1102
+    weight: 1202
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1103
+    weight: 1203
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1104
+    weight: 1204
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1105
+    weight: 1205
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1106
+    weight: 1206
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1107
+    weight: 1207
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1108
+    weight: 1208
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1109
+    weight: 1209
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1110
+    weight: 1210
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 12
+    weight: 13
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 13
+    weight: 14
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level

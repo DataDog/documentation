@@ -730,3 +730,95 @@
       options:
         dest_dir: '/security_platform/cloud_workload_security/'
         path_to_remove: 'docs/cloud-workload-security/'
+
+  - repo_name: datadog-operator
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "docs/installation.md"
+      options:
+        dest_path: 'agent/operator/'
+        path_to_remove: 'docs/'
+        front_matters:
+          title: Installing the Datadog Operator
+          kind: documentation
+          description: "Install the Datadog Operator."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md"]
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "docs/configuration.v1alpha1.md"
+      options:
+        dest_path: 'agent/operator/'
+        path_to_remove: 'docs/'
+        front_matters:
+          title: Configuration v1
+          kind: documentation
+          description: "Datadog Operator Configuration v1."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md"]
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "configuration.v2alpha1.md"
+      options:
+        dest_path: 'agent/operator/'
+        path_to_remove: 'docs/'
+        front_matters:
+          title: Configuration v2
+          kind: documentation
+          description: "Datadog Operator Configuration v2."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md"]
+
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "docs/cluster_agent_setup.md"
+      options:
+        dest_path: '/agent/operator/'
+        path_to_remove: 'docs/'
+        front_matters:
+          title: Cluster Agent with the Datadog Operator
+          kind: documentation
+          description: "Use the Datadog Operator to deploy the Cluster Agent."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/cluster_agent_setup.md"]
+
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "docs/custom_check.md"
+      options:
+        dest_path: '/agent/operator/'
+        path_to_remove: 'docs/'
+        front_matters:
+          title: Custom Checks with the Datadog Operator
+          kind: documentation
+          description: "Create custom checks for the Datadog Operator."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/custom_check.md"]
+
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "docs/kubectl-plugin.md"
+      options:
+        dest_path: '/agent/operator/'
+        path_to_remove: 'docs/'
+        front_matters:
+          title: Datadog Operator kubectl plugin
+          kind: documentation
+          description: "Install and use the kubectl plugin with the Datadog Operator."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/kubectl-plugin.md"]
+
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "docs/secret_management.md"
+      options:
+        dest_path: '/agent/operator/'
+        path_to_remove: 'docs/'
+        front_matters:
+          title: Secrets Management with the Datadog Operator
+          kind: documentation
+          description: "Configure the Datadog Operator to retrieve credentials using secrets."
+          dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/secrets_management.md"]
+
