@@ -18,11 +18,7 @@ further_reading:
 
 注: **このウィジェットには、直近の 100 イベントだけが表示されます**。
 
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="イベントストリーム" >}}
-
 ## セットアップ
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="イベントストリームのセットアップ"  style="width:80%;">}}
 
 ### コンフィギュレーション
 
@@ -59,11 +55,7 @@ further_reading:
 
 注: **このウィジェットには、直近の 100 イベントだけが表示されます**。
 
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="イベントストリーム" >}}
-
 ## セットアップ
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="イベントストリームのセットアップ"  style="width:80%;">}}
 
 ### コンフィギュレーション
 

@@ -137,7 +137,7 @@ From your widgets, overlay the timing of the events using template variables wit
 $<TEMPLATE_VARIABLE_NAME>
 ```
 
-For example, enter `$region` in the event overlays search box. This searches for events with the value in the `region` template variable drop-down:
+For example, enter `$region` in the event overlays search box. This searches for events with the value in the `region` template variable drop-down.
 
 ## Further Reading
 
