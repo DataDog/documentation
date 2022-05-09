@@ -1,6 +1,8 @@
 ---
 title: Why am I getting so many "No Data" Alerts for my Metric Monitor
 kind: faq
+aliases:
+  - /monitors/faq/why-am-i-getting-so-many-no-data-alerts/
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
