@@ -110,7 +110,7 @@ Optionally, limit metric collection for Azure VMs and App Service Plans using Az
  * There is no option to limit metric collection for other resource types.
 
 #### Log collection
-There are two types of logs that can be emitted from Azure to Datadog.
+There are two types of logs that can be emitted from Azure to Datadog: Subscription level logs and Azure resource logs.
 
 **Subscription level logs** provide insight into the operations on your resources at the [control plane][3]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (PUT, POST, DELETE).
 
