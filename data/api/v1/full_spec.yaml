@@ -27638,8 +27638,7 @@ paths:
         type: safe
   /api/v1/usage/ci-app:
     get:
-      description: Get hourly usage for CI Visibility (Tests, Pipeline, Combo, and
-        Spans).
+      description: Get hourly usage for CI Visibility (Tests, Pipeline, and Spans).
       operationId: GetUsageCIApp
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
