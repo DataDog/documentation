@@ -1084,21 +1084,26 @@ main:
     parent: monitor_types
     identifier: monitor_types_rum
     weight: 1034
+  - name: Error Tracking
+    url: monitors/create/types/error_tracking/
+    parent: monitor_types
+    identifier: monitor_types_error_tracking
+    weight: 1035
   - name: Watchdog
     url: monitors/create/types/watchdog/
     parent: monitor_types
     identifier: monitor_types_watchdog
-    weight: 1035
+    weight: 1036
   - name: Composite
     url: monitors/create/types/composite/
     parent: monitor_types
     identifier: monitor_types_composite
-    weight: 1036
+    weight: 1037
   - name: CI Pipelines
     url: monitors/create/types/ci_pipelines/
     parent: monitor_types
     identifier: monitor_types_cipipelines
-    weight: 1037
+    weight: 1038
   - name: Notifications
     url: monitors/notify/
     parent: alerting

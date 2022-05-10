@@ -23,5 +23,6 @@ description: "List the monitor types"
 {{< nextlink href="/monitors/create/types/outlier" >}}<u>Outlier</u>: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/process_check" >}}<u>Process Check</u>: Watch the status produced by the process.up service check.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/real_user_monitoring" >}}<u>Real User Monitoring</u>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/error_tracking" >}}<u>Error Tracking</u>: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/watchdog" >}}<u>Watchdog</u>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< /whatsnext >}}
