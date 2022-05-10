@@ -1,48 +1,97 @@
 ---
-title: RUM カスタムアクションの送信
-kind: ガイド
-further_reading:
-  - link: /real_user_monitoring/explorer
-    tag: Documentation
-    text: RUM データを Explorer で確認
 aliases:
-  - /ja/real_user_monitoring/guide/send-custom-user-actions/
+- /ja/real_user_monitoring/guide/send-custom-user-actions/
+further_reading:
+- link: /real_user_monitoring/explorer
+  tag: Documentation
+  text: RUM エクスプローラーで RUM データを視覚化する
+kind: ガイド
+title: RUM カスタムアクションの送信
 ---
 ## 概要
 
-Real User Monitoring は、Webアプリケーションで[アクションを自動的に収集します][1]。また、フォームの入力やビジネストランザクションなど、追加のイベントやタイミングを収集することもできます。カスタム RUM アクションを使用して、関連するすべてのコンテキストをアタッチして、興味深いイベントを監視します。このガイド全体の例として、e コマース Web サイトからユーザーのチェックアウト情報が収集されます。
+リアルユーザーモニタリングは、Web アプリケーション上のアクションを[自動的に収集][1]します。フォームの完了やビジネストランザクションなど、追加のイベントやタイミングを収集することができます。
+
+カスタム RUM アクションを使用すると、関連するすべてのコンテキストがアタッチされた興味深いイベントを監視することができます。例えば、e コマースサイトでユーザーのチェックアウト情報を収集することができます。
 
 ## コードのインスツルメンテーション
-新しい RUM アクションを作成するには、`addAction` API を使用します。アクションに名前を付けてから、JavaScript オブジェクトの形式でコンテキスト属性をアタッチします。次の例では、ユーザーがチェックアウトボタンをクリックしたときに、ユーザーカートの詳細を含む「チェックアウト」アクションが作成されます。
+
+`addAction` API を使用して RUM アクションを作成します。アクションに名前を付け、JavaScript オブジェクトの形でコンテキスト属性をアタッチします。
+
+次の例では、ユーザーがチェックアウトボタンをクリックすると、ユーザーカートの詳細を表示する `checkout` アクションを作成します。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
 function onCheckoutButtonClick(cart) {
-    DD_RUM.addAction('checkout', {
+    datadogRum.addAction('checkout', {
         'value': cart.value, // 例: 42.12
         'items': cart.items, // 例: ['tomato', 'strawberries']
     })
 }
 ```
 
-[Global Context API][2] で提供される追加の属性とともに、すべての RUM コンテキスト (現在のページビュー情報、geoIP データ、ブラウザ情報など) が自動的にアタッチされます。
+{{% /tab %}}
+{{% tab "CDN async" %}}
 
-## 新しい属性にファセットとメジャーを作成
-カスタムアクションを作成するコードをデプロイした後、[RUM Explorer][3] の **Actions** タブにアクションが表示されます。
+API コールを `onReady` コールバックでラップしていることを確認します。
 
-新しいカスタムアクションを絞り込むには、次のように `Action Target Name` 属性を使用します: `@action.target.name:<ACTION_NAME>`。この例では、次のフィルターを使用します: `@action.target.name:checkout`
+```javascript
+function onCheckoutButtonClick(cart) {
+    DD_RUM.onReady(function() {
+        DD_RUM.addAction('checkout', {
+            'value': cart.value, // 例: 42.12
+            'items': cart.items, // 例: ['tomato', 'strawberries']
+        })
+    })    
+}
+```
 
-アクションをクリックすると、すべてのメタデータがサイドパネルで利用可能になります。アクション属性は、Custom Attributes セクションにあります。次のステップは、これらの属性をクリックしてファセットまたはメジャーを作成することです。たとえば、カートアイテムのファセットとカート値のメジャーを作成します。
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+API コールの前に `DD_RUM` をチェックすることを確認します。
+
+```javascript
+window.DD_RUM && DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
+
+function onCheckoutButtonClick(cart) {
+    window.DD_RUM && DD_RUM.addAction('checkout', {
+        'value': cart.value, // 例: 42.12
+        'items': cart.items, // 例: ['tomato', 'strawberries']
+    })
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+現在のページビュー情報、geoIP データ、ブラウザ情報などのすべての RUM コンテキストは、[Global Context API][2]で提供される追加属性とともに自動的にアタッチされます。
+
+## 属性にファセットとメジャーを作成する
+
+カスタムアクションを作成するコードをデプロイすると、[RUM エクスプローラー][3]の **Actions** タブに表示されます。
+
+カスタムアクションにフィルターをかけるには、`Action Target Name` 属性を使用します: `@action.target.name:<ACTION_NAME>`
+
+以下の例では、`@action.target.name:checkout`というフィルターを使用しています。
 
 {{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="カスタム RUM アクションのファセットを作成する" video=true style="width:100%;">}}
 
-**注**: 一意性のある値 (ID など) にはファセットを、質量的な値 (タイミングやレイテンシーなど) にはメジャーを使用します。
+アクションをクリックすると、メタデータを含むサイドパネルが表示されます。**Custom Attributes** セクションでアクション属性を見つけ、クリックすることでこれらの属性のファセットまたはメジャーを作成できます。
 
-## 属性をエクスプローラー、ダッシュボード、モニターで使用
-ファセットとメジャーを作成したら、RUM のクエリでアクション属性を使用できます。つまり、[RUM Explorer/Analytics][3] でダッシュボードウィジェット、モニター、高度なクエリを構築できます。
+特徴的な値 (ID) にはファセットを、タイミングやレイテンシーなどの定量的な値にはメジャーを使用します。例えば、カートアイテム用のファセットと、カート値用のメジャーを作成します。
 
-下記のスクリーンショットは、前日のカートの国別平均値を示した例です。右上のドロップダウンメニューを使用して、このクエリをダッシュボードウィジェットまたはモニターとしてエクスポートできます。
+## RUM エクスプローラーで属性を使用する
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics.png" alt="Analytics で RUM アクションを使用する" style="width:100%;">}}
+[RUM エクスプローラー][3]でファセットやメジャーとともにアクション属性を使用して、ダッシュボードウィジェット、モニター、高度なクエリを構築できます。
+
+次の例では、過去 2 日間の国ごとの平均カート価額が表示されます。検索クエリをダッシュボードウィジェットまたはモニターにエクスポートするには、**Export** ボタンをクリックします。
+
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics.png" alt="RUM エクスプローラーで RUM アクションを使用する" style="width:100%;">}}
 
 ## その他の参考資料
 
