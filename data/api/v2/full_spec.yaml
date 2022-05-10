@@ -7636,14 +7636,6 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/AuthNMappingsSort'
-      - description: Include additional information in the response.
-        in: query
-        name: include
-        required: false
-        schema:
-          items:
-            type: string
-          type: array
       - description: Filter all mappings by the given string.
         in: query
         name: filter
