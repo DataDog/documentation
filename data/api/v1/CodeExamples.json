@@ -833,6 +833,11 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get hourly usage for RUM Sessions returns \"OK\" response"
+    },
+    {
+      "group": "usage_metering",
+      "suffix": "_3271366243",
+      "description": "Get mobile hourly usage for RUM Sessions returns \"OK\" response"
     }
   ],
   "GetUsageRumUnits": [
