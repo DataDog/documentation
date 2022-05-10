@@ -95,7 +95,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </code>
 </pre>
 
-**Note:** Reports larger than 250 MiB may not be process completely resulting in missing tests. For the best experience ensure that the reports are under 250 MiB.
+**Note:** Reports larger than 250 MiB may not be process completely resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
 
 ## Configuration settings
 
