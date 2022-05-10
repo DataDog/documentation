@@ -1,7 +1,6 @@
 title: "Docs"
 metadataformat: "yaml"
 # enableGitInfo so lastmod in sitemap.xml is based off git
-enableGitInfo: false
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
@@ -31,6 +30,21 @@ markup:
       unsafe: true
   highlight:
     guessSyntax: true
+
+# Specify order of getting page's last modified variable.
+# This is so we can properly access the last mod time for gitignored content.
+# 1. front-matter variable
+# 2. author date from the last revision of the content in Git.
+# 3. date from content's last modified timestamp
+# 4. publish date hugo page variable
+# 5. date hugo page variable
+frontmatter:
+  lastmod:
+  - lastmod
+  - :git
+  - :fileModTime
+  - publishDate
+  - date
 
 module:
   imports:
