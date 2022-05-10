@@ -75,7 +75,7 @@ To create an HTTP request step, click **Create Your First Step**.
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
-   * **NTLM v1**: Add NTLM authentication credentials.
+   * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
    * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
 
    {{% /tab %}}
