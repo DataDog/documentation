@@ -14749,16 +14749,25 @@ components:
         session_count:
           description: Contains the number of browser RUM Lite Sessions.
           format: int64
+          nullable: true
           type: integer
         session_count_android:
           description: Contains the number of mobile RUM Sessions on Android (data
             available beginning December 1, 2020).
           format: int64
+          nullable: true
           type: integer
         session_count_ios:
           description: Contains the number of mobile RUM Sessions on iOS (data available
             beginning December 1, 2020).
           format: int64
+          nullable: true
+          type: integer
+        session_count_reactnative:
+          description: Contains the number of mobile RUM Sessions on React Native
+            (data available beginning May 1, 2022).
+          format: int64
+          nullable: true
           type: integer
       type: object
     UsageRumSessionsResponse:
@@ -15171,6 +15180,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for all organizations
@@ -15488,6 +15502,11 @@ components:
         mobile_rum_session_count_ios_sum:
           description: Shows the sum of all mobile RUM Sessions on iOS over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         mobile_rum_session_count_sum:
@@ -15842,6 +15861,11 @@ components:
         mobile_rum_session_count_ios_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on iOS over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current months for all organizations.
           format: int64
           type: integer
         mobile_rum_units_agg_sum:
