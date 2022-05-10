@@ -5650,6 +5650,18 @@ api:
         - GetUsageObservabilityPipelines
       unstable: []
       order: 38
+  - name: Get hourly usage for Lambda Traced Invocations
+    url: '#get-hourly-usage-for-lambda-traced-invocations'
+    identifier: get-hourly-usage-for-lambda-traced-invocations
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUsageLambdaTracedInvocations
+      unstable: []
+      order: 38
   - name: Get Cost Across Multi-Org Account
     url: '#get-cost-across-multi-org-account'
     identifier: get-cost-across-multi-org-account

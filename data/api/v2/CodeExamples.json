@@ -724,6 +724,13 @@
       "description": "Get hourly usage for Application Security returns \"OK\" response"
     }
   ],
+  "GetUsageLambdaTracedInvocations": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Lambda Traced Invocations returns \"OK\" response"
+    }
+  ],
   "GetUsageObservabilityPipelines": [
     {
       "group": "usage_metering",

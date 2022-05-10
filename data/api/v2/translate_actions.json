@@ -596,6 +596,10 @@
     "description": "Get Cost Across Multi-Org Account.",
     "summary": "Get Cost Across Multi-Org Account"
   },
+  "GetUsageLambdaTracedInvocations": {
+    "description": "Get hourly usage for Lambda Traced Invocations.",
+    "summary": "Get hourly usage for Lambda Traced Invocations"
+  },
   "GetUsageObservabilityPipelines": {
     "description": "Get hourly usage for Observability Pipelines.",
     "summary": "Get hourly usage for Observability Pipelines"
