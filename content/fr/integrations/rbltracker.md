@@ -5,17 +5,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
+- monitoring
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md
 display_name: RBLTracker
 draft: false
 git_integration_title: rbltracker
 guid: 94218bd0-8cc3-4686-8b67-ea9110b77092
 integration_id: rbltracker
 integration_title: RBLTracker
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -24,13 +25,15 @@ metric_prefix: ''
 metric_to_check: ''
 name: rbltracker
 public_title: Intégration Datadog/RBLTracker
-short_description: RBLTracker permet la surveillance simple et en temps réel de listes noires.
+short_description: RBLTracker permet la surveillance simple et en temps réel de listes
+  noires.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
 ## Présentation
 
 RBLTracker permet la surveillance simple et en temps réel de listes noires pour votre boîte de messagerie, votre site Web et vos réseaux sociaux.
@@ -49,7 +52,7 @@ Pour configurer RBLTracker à l'aide de Webhooks :
 3. Collez la **clé d'API** Datadog.
 4. (Facultatif) ajustez la fréquence de contact pour ce nouveau contact.
 
-RBLTracker enverra les alertes d'ajout à une liste et de suppression d'une liste vers votre dashboard d'événements Datadog. Cliquez [ici][3] pour consulter le guide d'intégration complet (en anglais).
+RBLTracker envoie les alertes d'ajout à une liste et de suppression d'une liste vers votre dashboard d'événements Datadog. Consultez la section [Ajout d'un type de contact Datadog][3] (en anglais) pour obtenir des instructions complètes sur l'intégration.
 
 ## Données collectées
 
@@ -70,7 +73,7 @@ Le check RBLTracker n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://rbltracker.com
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://rbltracker.com/docs/adding-a-datadog-contact-type
 [4]: https://docs.datadoghq.com/fr/events/
 [5]: https://docs.datadoghq.com/fr/help/

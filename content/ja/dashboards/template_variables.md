@@ -113,8 +113,6 @@ tags:<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
 
 例えば、`tags:region:$region.value` を、`region` テンプレート変数についての `us-east1` の値で検索すると、`region:us-east1` でタグ付けされたイベントが表示されます。さらに、イベントのタイミングがグラフ上にピンクのバーで示されます。
 
-{{< img src="dashboards/template_variables/search_dashboard.png" alt="検索ダッシュボード" style="width:85%;">}}
-
 複数のテンプレート変数で検索するには、コンマを入れます（例: `tags:role:$role.value,env:$env.value`）
 
 **注**: 検索を実行する際に *enter* を押すと、`$region.value` がテンプレート変数ドロップダウンの値に更新されます。
@@ -128,8 +126,6 @@ tags:$<TEMPLATE_VARIABLE_NAME>
 ```
 
 例えば、イベントオーバーレイ検索ボックスに `tags:$region` と入力して、`region` テンプレート変数ドロップダウンにある値のイベントを検索します。
-
-{{< img src="dashboards/template_variables/search_widget.png" alt="検索ウィジェット" style="width:85%;">}}
 
 ## その他の参考資料
 
