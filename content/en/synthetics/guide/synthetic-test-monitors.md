@@ -25,11 +25,11 @@ Create a monitor in the **Configure the monitor for this test** section to send 
 
 {{< img src="synthetics/guide/synthetics_test_monitors/configure_the_monitor_for_this_test.png" alt="Creating a monitor in your Synthetic test" style="width:90%;">}}
 
-Customize the monitor name to search for it on the [**Manage Monitors**][1] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can also use [conditional variables][2] to characterize the notification message based on test state.
+Customize the monitor name to search for it on the [**Manage Monitors**][1] page. You can use [conditional variables][2] to characterize the notification message based on test state. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar.
 
 The Synthetic test monitor integrates with notification channels such as email, Slack, Pagerduty, and Microsoft Teams. For more information, see [Notifications][3].
 
-Synthetic test monitors do not support `{{#is_warning}}`, `{{^is_warning}}`, `{{#is_warning_recovery}}`, and `{{^is_warning_recovery}}` conditional variables. Datadog recommends enabling [renotification][4] on your monitors.
+Synthetic test monitors do not support the `{{#is_warning}}`, `{{^is_warning}}`, `{{#is_warning_recovery}}`, and `{{^is_warning_recovery}}` conditional variables in the the monitor name. If you have multiple layers of notifications (for example, with warning thresholds), Datadog recommends enabling [renotification][4] on your monitors.
 
 ## Notify multiple teams with renotifications
 
