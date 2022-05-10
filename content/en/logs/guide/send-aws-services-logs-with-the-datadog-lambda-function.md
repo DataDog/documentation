@@ -106,10 +106,13 @@ If you are collecting logs from a CloudWatch log group, configure the trigger to
 {{< tabs >}}
 {{% tab "AWS console" %}}
 
-
-
-1. Select the corresponding CloudWatch Log Group, add the trigger, and optionally add a filter name.
-2. Once done, go into your [Datadog Log section][1] to start exploring your logs.
+1. In the AWS console, go to **Lambda**. 
+2. Click **Functions**, then select the Datadog Forwarder.
+3. Click **Add trigger**, then select **CloudWatch Logs**.
+4. Select the log group from the drop-down menu.
+5. Enter a name for your filter, and optionally specify a filter pattern.
+6. Click **Add**.
+7. Go to the [Datadog Log section][1] to explore any new log events sent to your log group.
 
 [1]: https://app.datadoghq.com/logs
 {{% /tab %}}
