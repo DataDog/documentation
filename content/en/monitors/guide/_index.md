@@ -16,4 +16,5 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}Create Cluster alerts for Metrics monitor{{< /nextlink >}}
     {{< nextlink href="monitors/guide/slo-checklist" >}}SLO Checklist{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}How to set up RBAC for Monitors{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create Monitors in Synthetic Tests{{< /nextlink >}}
 {{< /whatsnext >}}
