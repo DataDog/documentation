@@ -101,7 +101,7 @@ Create the `datadog` user and grant basic permissions:
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema_max_sql_text_length.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
 {{% /tab %}}
