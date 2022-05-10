@@ -2,5 +2,6 @@
     <h1 id="pagetitle">{{ if .Params.integration_title }}{{ .Params.integration_title }}{{ else }}{{.Title}}{{ end }}</h1>
     {{ partial "integration-labels/integration-labels.html" . }}
     {{ partial "integration-breadcrumbs/integration-breadcrumbs.html" . }}
+    {{ partial "translate_status_banner/translate_status_banner.html" . }}
     {{ .Content }}
 {{ end }}
