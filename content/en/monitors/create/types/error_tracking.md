@@ -99,11 +99,7 @@ Triggers when the number of impacted session IDs is `above` or `above or equal t
 #### New Issue
 
 {{< tabs >}}
-{{% tab "Error Occurrences" %}}
 
-An alert is triggered whenever a metric crosses a threshold.
-
-{{% /tab %}} 
 {{% tab "Web and Mobile Apps" %}}
 
 Triggers when the number of impacted session IDs is `above` or `above or equal to`.
@@ -115,6 +111,8 @@ Triggers when the metric is `above` or `above or equal to`.
 
 {{% /tab %}} 
 {{< /tabs >}}
+
+An alert is triggered whenever a metric crosses a threshold.
 
 - The threshold during the last `5 minutes`, `15 minutes`. `1 hour`, or `custom` to set a value between 5 minutes and 48 hours. 
 - Alerting threshold `<NUMBER>`.
