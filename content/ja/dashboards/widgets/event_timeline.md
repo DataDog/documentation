@@ -1,24 +1,22 @@
 ---
-title: イベントタイムラインウィジェット
-kind: documentation
-description: イベントストリームのタイムラインをウィジェットに表示する
 aliases:
-  - /ja/graphing/widgets/event_timeline/
+- /ja/graphing/widgets/event_timeline/
+description: イベントストリームのタイムラインをウィジェットに表示する
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: イベントタイムラインウィジェット
 ---
-イベントタイムラインは、[イベントストリームビュー][1]の上部に表示されるタイムラインのウィジェット版です。
+
+イベントタイムラインは、[イベントエクスプローラービュー][1]の上部に表示されるタイムラインのウィジェット版です。
 
 {{< img src="dashboards/widgets/event_timeline/event_timeline.png" alt="イベントのタイムラインの例"  >}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/event_timeline/event_timeline_setup.png" alt="イベントのタイムラインの例"  style="width:80%;">}}
+{{< img src="dashboards/widgets/event_timeline/event_timeline_setup.png" alt="イベントのタイムラインの例" style="width:80%;">}}
 
 ### コンフィギュレーション
 
@@ -31,13 +29,13 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル" style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
+このウィジェットは、[Dashboards API][2] で使用することができます。
 
 イベントタイムラインウィジェット専用の[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
@@ -48,5 +46,5 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/events/
-[2]: /ja/api/v1/dashboards/
+[2]: /ja/api/latest/dashboards/
 [3]: /ja/dashboards/graphing_json/widget_json/
