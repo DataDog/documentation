@@ -99,7 +99,7 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 
 {{< /site-region >}}
 
-Azure Datadog インテグレーションをセットアップするには、Azure サブスクリプションの **Owner** 権限が必要です。セットアップを開始する前に、適切な権限を所有していることをご確認ください。
+{{< site-region region="us3" >}}
 
 [ログ][1] & [HIPAA ログ][2]
 : HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
