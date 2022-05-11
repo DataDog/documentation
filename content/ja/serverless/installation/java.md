@@ -1,172 +1,148 @@
 ---
-title: Java アプリケーションのインスツルメンテーション
-kind: ドキュメント
-further_reading:
-  - link: serverless/serverless_tagging/
-    tag: Documentation
-    text: サーバーレスアプリケーションのタグ付け
-  - link: serverless/distributed_tracing/
-    tag: Documentation
-    text: サーバーレスアプリケーションのトレース
-  - link: serverless/custom_metrics/
-    tag: Documentation
-    text: サーバーレスアプリケーションからのカスタムメトリクスの送信
 aliases:
-  - /ja/serverless/datadog_lambda_library/java/
+- /ja/serverless/datadog_lambda_library/java/
+further_reading:
+- link: /serverless/configuration
+  tag: Documentation
+  text: サーバーレスモニタリングの構成
+- link: /serverless/guide/troubleshoot_serverless_monitoring
+  tag: Documentation
+  text: サーバーレスモニタリングのトラブルシューティング
+- link: serverless/custom_metrics/
+  tag: Documentation
+  text: サーバーレスアプリケーションからのカスタムメトリクスの送信
+kind: ドキュメント
+title: Java サーバーレスアプリケーションのインスツルメンテーション
 ---
-{{< img src="serverless/java-lambda-tracing.png" alt="Datadog で Java Lambda 関数を監視"  style="width:100%;">}}
 
-## 必須セットアップ
+<div class="alert alert-warning">分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (<code>java8.al2</code>) または Java 11 (<code>java11</code>) ランタイムを使用している必要があります。</div>
 
-未構成の場合:
+<div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
 
-- [AWS インテグレーション][1]をインストールします。これにより、Datadog は AWS から Lambda メトリクスを取り込むことができます。
-- AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][2]をインストールします。
+<div class="alert alert-warning">以前に Datadog Forwarder を使用して Lambda 関数をセットアップした場合は、<a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_java">Datadog Forwarder を使用したインスツルメント</a>を参照してください。</div>
 
-[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、手順に従いアプリケーションをインスツルメントし、Datadog に[拡張 Lambda メトリクス][3]、ログ、トレースを送信します。
-分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数で Java 8 Corretto (`java8.al2`) または Java 11 (`java11`) ランタイムを使用している必要があります。
+## インストール
 
-## コンフィギュレーション
+Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。
 
-### Install
-
-プロジェクトのコンフィギュレーションに基づいて、以下のコードブロックのいずれかを `pom.xml` または `build.gradle` に適宜追加し、Datadog Lambda ライブラリをローカルにインストールします。以下の `VERSION` を最新のリリースで置き換えてください (先行する `v` を削除します): ![Maven Cental][4]
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{% tab "コンテナイメージ" %}}
 
-`pom.xml` に以下の依存関係を含めます。
+1. Datadog Lambda 拡張機能のインストール
 
-```xml
-<dependency>
-  <groupId>com.datadoghq</groupId>
-  <artifactId>datadog-lambda-java</artifactId>
-  <version>VERSION</version>
-</dependency>
-```
+    ```dockerfile
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+    ```
 
+   `<TAG>` を特定のバージョン番号 (たとえば `{{< latest-lambda-layer-version layer="extension" >}}`) または `latest` に置き換えます。利用可能なタグのリストは、[Amazon ECR リポジトリ][1]で確認できます。
+
+2. Datadog Java APM クライアントをインストールする
+
+    ```dockerfile
+    RUN yum -y install tar wget gzip
+    RUN wget -O /opt/dd-java-agent.jar https://dtdg.co/latest-java-tracer
+    ```
+
+3. Datadog Lambda ライブラリのインストール
+
+   Maven を使用している場合は、以下の依存関係を `pom.xml` に含め、`VERSION` を最新のリリースに置き換えます (前の `v` は省きます): ![Maven Cental][2]:
+
+    ```xml
+    <dependency>
+      <groupId>com.datadoghq</groupId>
+      <artifactId>datadog-lambda-java</artifactId>
+      <version>VERSION</version>
+    </dependency>
+    ```
+
+   Gradle を使用している場合は、以下の依存関係を `build.gradle` に含め、`VERSION` を最新のリリースに置き換えます (前の `v` は省きます): ![Maven Cental][2]:
+
+    ```groovy
+    dependencies {
+      implementation 'com.datadoghq:datadog-lambda-java:VERSION'
+    }
+    ```
+
+4. 必要な環境変数を設定する
+
+    - `JAVA_TOOL_OPTIONS` を `-javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1` に設定します
+    - `DD_JMXFETCH_ENABLED` を `false` に設定します
+    - `DD_TRACE_ENABLED` を `true` に設定します。
+    - `DD_SITE` を、テレメトリーの送信先となる [Datadog サイト][3]に設定します。
+    - `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+
+[1]: https://gallery.ecr.aws/datadog/lambda-extension
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
-{{% tab "Gradle" %}}
+{{% tab "Custom" %}}
 
-`build.gradle` に以下を含めます。
+1. Datadog Lambda 拡張機能のインストール
 
-```groovy
-dependencies {
-  implementation 'com.datadoghq:datadog-lambda-java:VERSION'
-}
-```
+   以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+
+    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
+
+2. Datadog Java APM クライアントをインストールする
+
+   以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+
+    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}`
+
+3. Datadog Lambda ライブラリのインストール
+
+   Maven を使用している場合は、以下の依存関係を `pom.xml` に含め、`VERSION` を最新のリリースに置き換えます (前の `v` は省きます): ![Maven Cental][2]:
+
+    ```xml
+    <dependency>
+      <groupId>com.datadoghq</groupId>
+      <artifactId>datadog-lambda-java</artifactId>
+      <version>VERSION</version>
+    </dependency>
+    ```
+
+   Gradle を使用している場合は、以下の依存関係を `build.gradle` に含め、`VERSION` を最新のリリースに置き換えます (前の `v` は省きます): ![Maven Cental][2]:
+
+    ```groovy
+    dependencies {
+      implementation 'com.datadoghq:datadog-lambda-java:VERSION'
+    }
+    ```
+
+4. 必要な環境変数を設定する
+
+    - `JAVA_TOOL_OPTIONS` を `-javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1` に設定します
+    - `DD_JMXFETCH_ENABLED` を `false` に設定します
+    - `DD_TRACE_ENABLED` を `true` に設定します。
+    - `DD_SITE` を、テレメトリーの送信先となる [Datadog サイト][3]に設定します。
+    - `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
-### インスツルメントする
+## 次のステップ
 
-関数をインスツルメントするには、次の手順に従います。
-
-1. 関数に Datadog Lambda レイヤーをインストールします。最新の `VERSION` は `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` です。
-
-    ```yaml
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
-    ```
-
-2. 関数に以下の環境変数を構成します。
-
-    ```yaml
-    JAVA_TOOL_OPTIONS: "-javaagent:\"/opt/java/lib/dd-java-agent.jar\""
-    DD_LOGS_INJECTION: "true"
-    DD_JMXFETCH_ENABLED: "false"
-    DD_TRACE_ENABLED: "true"
-    ```
-
-3. Datadog Lambda ライブラリが提供するラッパーを使用して、Lambda ハンドラー関数をラップします。
-
-    ```java
-    public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
-        public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-            DDLambda ddl = new DDLambda(request, context); //Required to initialize the trace
-
-            do_some_stuff();
-            make_some_http_requests();
-
-            ddl.finish(); //Required to finish the active span.
-            return new ApiGatewayResponse();
-        }
-    }
-    ```
-
-### サブスクライブ
-
-メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
-
-1. [まだの場合は、Datadog Forwarder をインストールします][2]。
-2. [Datadog Forwarder を関数のロググループにサブスクライブします][6]。
-
-### Java Lambda 関数のコールドスタートの監視
-
-コールドスタートは、関数が以前に非アクティブだったときや比較的一定数のリクエストを受信していたときなどを含め、サーバーレスアプリケーションで受信するトラフィックが突然増加したときに発生します。ユーザーには、コールドスタートは遅い応答時間または遅延として認識されることがあります。Datadog では、モニターに Java Lambda 関数コールドスタートを構成し、Datadog Serverless Insights を使用して[コールドスタートを最低限に保つ][7]ことを強くおすすめしています。
-
-{{< img src="serverless/java-monitor-cold-starts.png" alt="Java Lambda 関数コールドスタートの監視"  style="width:100%;">}}
-
-Java Lambda 関数コールドスタートに Datadog モニターを作成するには、以下の条件を使用して[モニター作成手順][8]を実行します。
-- メトリクス名: `aws.lambda.enhanced.invocations`
-- ソース: `runtime:java*` および `cold_start:true`
-- アラートグループ: 各 `function_arn` に対し個別のアラートをトリガーするマルチアラート
-
-### タグ
-
-オプションではありますが、Datadog では以下の[統合サービスタグ付けのドキュメント][9]に従いサーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
-
-## 確認
-
-以上の方法で関数を構成すると、[Serverless Homepage][10] でメトリクス、ログ、トレースを確認できるようになります。
-
-### カスタムビジネスロジックの監視
-
-カスタムメトリクスの送信をご希望の場合は、以下のコード例をご参照ください。
-
-```java
-public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
-    public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda ddl = new DDLambda(request, context);
-
-        Map<String,Object> myTags = new HashMap<String, Object>();
-            myTags.put("product", "latte");
-            myTags.put("order","online");
-
-        // カスタムメトリクスを送信
-        ddl.metric(
-            "coffee_house.order_value", // メトリクス名
-            12.45,                      // メトリクス値
-            myTags);                    // 関連タグ
-
-        URL url = new URL("https://example.com");
-        HttpURLConnection hc = (HttpURLConnection)url.openConnection();
-        hc.connect();
-
-        ddl.finish();
-    }
-}
-```
-
-カスタムメトリクスの送信について、詳しくは[カスタムメトリクスのドキュメント][11]を参照してください。
-
-### ログとトレースの接続
-
-Java Lambda 関数ログとトレースを自動接続する方法については、[Java ログとトレースの接続][12]を参照してください。
-
-<div class="alert alert-info">正しい Java ランタイムを使用しないと、"Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" (zip ファイルを開くときのエラーまたは JAR マニフェストがありません : /opt/java/lib/dd-java-agent.jar) などのエラーが発生する可能性があります。上記のとおり、ランタイムとして java8.al2 または java11 を使用してください。</div>
+- [Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができるようになりました。
+- [カスタムメトリクス][2]または [APM スパン][3]を送信して、ビジネスロジックを監視します。
+- テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][4]を参照してください
+- [高度な構成][5]を参照して以下のことを行ってください。
+    - タグを使ったテレメトリー接続
+    - AWS API Gateway、SQS などのテレメトリーを収集する
+    - Lambda のリクエストとレスポンスのペイロードを取得する
+    - Lambda 関数のエラーをソースコードにリンクする
+    - ログまたはトレースから機密情報をフィルタリングまたはスクラブする
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/amazon_web_services/
-[2]: /ja/serverless/forwarder/
-[3]: /ja/serverless/enhanced_lambda_metrics
-[4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
-[5]: https://github.com/DataDog/datadog-lambda-java/releases/
-[6]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: /ja/serverless/insights#cold-starts
-[8]: /ja/monitors/monitor_types/metric/?tab=threshold#overview
-[9]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[10]: https://app.datadoghq.com/functions
-[11]: /ja/serverless/custom_metrics?tab=java
-[12]: /ja/tracing/connect_logs_and_traces/java/
+[1]: https://app.datadoghq.com/functions
+[2]: https://docs.datadoghq.com/ja/metrics/dogstatsd_metrics_submission/
+[3]: /ja/tracing/custom_instrumentation/java/
+[4]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[5]: /ja/serverless/configuration/

@@ -9,19 +9,21 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - aws
-  - containers
-  - orchestration
+- aws
+- containers
+- log collection
+- orchestration
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/README.md
 display_name: Amazon Fargate
 draft: false
 git_integration_title: ecs_fargate
 guid: 7484e55c-99ec-45ad-92f8-28e798796411
 integration_id: aws-fargate
-integration_title: Amazon Fargate
+integration_title: Amazon ECS on AWS Fargate
+integration_version: 3.1.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -29,24 +31,29 @@ manifest_version: 1.0.0
 metric_prefix: ecs.
 metric_to_check: ecs.fargate.cpu.user
 name: ecs_fargate
-public_title: Datadog-Amazon Fargate インテグレーション
+public_title: Datadog-Amazon ECS on AWS Fargate インテグレーション
 short_description: ECS Fargate を使用して実行中のコンテナのメトリクスを追跡する
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
+
+**注**: このページでは、ECS Fargate インテグレーションについて説明します。EKS Fargate については、Datadog の[EKS Fargate インテグレーション][1]のドキュメントを参照してください。
 
 ECS Fargate で実行されているすべてのコンテナからメトリクスを取得します。
 
 - CPU/メモリ使用量および制限のメトリクス
 - Datadog インテグレーションまたはカスタムメトリクスを使用して、Fargate で実行されているアプリケーションを監視
 
-Datadog Agent は、ECS のタスクメタデータエンドポイントからタスク定義のコンテナのメトリクスを取得します。このエンドポイントに関する [ECS のドキュメント][1]には、以下のように記載されています。
+Datadog Agent は、ECS のタスクメタデータエンドポイントでタスク定義のコンテナのメトリクスを取得します。このエンドポイントに関する [ECS のドキュメント][2]には、以下のように記載されています。
 
-このエンドポイントは、タスクに関連付けられたすべてのコンテナの Docker 統計 JSON を返します。返される統計の詳細については、Docker API ドキュメント内の [ContainerStats][2] を参照してください。
+このエンドポイントは、タスクに関連付けられたすべてのコンテナの Docker 統計 JSON を返します。返される統計の詳細については、Docker API ドキュメント内の [ContainerStats][3] を参照してください。
 
 タスクメタデータエンドポイントは、タスク定義自体の内部からのみ使用できます。このため、Datadog Agent をタスク定義内の追加コンテナとして実行する必要があります。
 
@@ -56,25 +63,25 @@ Datadog Agent は、ECS のタスクメタデータエンドポイントから�
 
 以下の手順では、AWS ECS Fargate 内で Datadog Container Agent をセットアップします。**注**: Fargate インテグレーションを最大限活用するには、Datadog Agent バージョン 6.1.1 以降が必要です。
 
-Datadog Agent を持たないタスクも Cloudwatch からメトリクスを報告しますが、Autodiscovery、詳細なコンテナメトリクス、トレーシングなどの機能には Agent が必要です。さらに、Cloudwatch メトリクスは粒度が低く、Datadog Agent から直接発送されるメトリクスより報告のレイテンシーが高くなります。
+Datadog Agent を持たないタスクも Cloudwatch でメトリクスを報告しますが、Autodiscovery、詳細なコンテナメトリクス、トレーシングなどの機能には Agent が必要です。さらに、Cloudwatch メトリクスは粒度が低く、Datadog Agent を通じて直接発送されるメトリクスより報告のレイテンシーが高くなります。
 
 ### インストール
 
 Datadog で ECS Fargate タスクを監視するには、アプリケーションと同じタスク定義内のコンテナとして Agent を実行します。Datadog でメトリクスを収集するには、各タスク定義にアプリケーションコンテナのほかに Datadog Agent コンテナを含める必要があります。以下のセットアップ手順を実行します。
 
-1. **ECS Fargate タスクの追加**
+1. **ECS Fargate タスクの作成**
 2. **IAM ポリシーの作成と修正**
-3. **Replica サービスとしてのタスクの実行**
+3. **レプリカサービスとしてのタスクの実行**
 
 #### ECS Fargate タスクの作成
 
 Fargate の主要な作業単位はタスクで、これはタスク定義内で設定されます。タスク定義は、Kubernetes のポッドに相当します。タスク定義には 1 つ以上のコンテナが含まれる必要があります。Datadog Agent を実行するには、アプリケーションコンテナおよび Datadog Agent コンテナを実行するためのタスク定義を作成します。
 
-以下の手順は、[AWS CLI ツール][3]または [Amazon Web Console][4] を使用したタスクの構成方法を示します。
+以下の手順は、[AWS CLI ツール][4]または [Amazon Web Console][5] を使用したタスクの構成方法を示します。
 
 ##### Web UI
 
-1. [AWS Web Console][4] にログインし、ECS セクションに移動します。
+1. [AWS Web Console][5] にログインし、ECS セクションに移動します。
 2. 左メニューの **Task Definitions** をクリックし、**Create new Task Definition** ボタンをクリックします。
 3. 起動タイプとして **Fargate** を選択し、**Next step** ボタンをクリックします。
 4. **Task Definition Name** にタスク定義名を入力します (`my-app-and-datadog` など)。
@@ -82,20 +89,21 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 6. ニーズに合わせて **Task memory** と **Task CPU** を選択します。
 7. **Add container** ボタンをクリックします。
 8. **Container name** に `datadog-agent` と入力します。
-9. **Image** に `gcr.io/datadoghq/agent:latest` と入力します。
+9. **Image** に `datadog/agent:latest` と入力します。
 10. **Memory Limits** に、ソフト制限として `256` を入力します。
 11. **Advanced container configuration** セクションまでスクロールし、**CPU units** に `10` と入力します。
-12. **Env Variables** に**キー** `DD_API_KEY` を追加し、[Datadog API キー][5]を値として入力します。_シークレットを s3 に保存する場合は、[ECS 構成ガイド][6]を参照してください_。
+12. **Env Variables** に**キー** `DD_API_KEY` を追加し、[Datadog API キー][6]を値として入力します。_シークレットを s3 に保存する場合は、[ECS 構成ガイド][7]を参照してください_。
 13. **キー** `ECS_FARGATE` と値 `true` を使用して、もう 1 つ環境変数を追加します。**Add** をクリックしてコンテナを追加します。
-14. (任意) datadog.eu をご利用の場合は、**キー** `DD_SITE` と値 `datadoghq.eu` を使用して別の環境変数を追加します。
-15. アプリなどの他のコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][7]を参照してください。
-16. **Create** をクリックしてタスク定義を作成します。
+14. **Key** `DD_SITE` と値 {{< region-param key="dd_site" code="true" >}} を使用して、別の環境変数を追加します。設定しない場合、これはデフォルトで `datadoghq.com` になります。
+15. (Windows のみ) 作業ディレクトリとして `C:\` を選択します。
+16. アプリなどの他のコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][8]を参照してください。
+17. **Create** をクリックしてタスク定義を作成します。
 
 ##### AWS CLI
 
-1. [datadog-agent-ecs-fargate][8] をダウンロードします。**注**: IE をお使いの場合は、以下に記載の JSON ファイルを含む gzip ファイルとしてダウンロードされる場合があります。
-2. **TASK_NAME** とご使用の [Datadog API キー][5]で JSON を更新します。環境変数 `ECS_FARGATE` は既に `"true"` に設定されています。
-3. アプリなどの他のコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][7]を参照してください。
+1. [datadog-agent-ecs-fargate][9] をダウンロードします。**注**: Internet Explorer をお使いの場合は、以下に記載の JSON ファイルを含む gzip ファイルとしてダウンロードされる場合があります。
+2. JSON を `TASK_NAME`、[Datadog API キー][6]、および適切な `DD_SITE` ({{< region-param key="dd_site" code="true" >}}) で更新します。**注**: 環境変数 `ECS_FARGATE` はすでに `"true"` に設定されています。
+3. アプリなどの他のコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][8]を参照してください。
 4. 次のコマンドを実行して ECS タスク定義を登録します。
 
 ```bash
@@ -104,7 +112,9 @@ aws ecs register-task-definition --cli-input-json file://<ファイルへのパ�
 
 ##### AWS CloudFormation
 
- [AWS CloudFormation][9] テンプレートを使用して Fargate コンテナを構成することができます。CloudFormation テンプレート内で `AWS::ECS::TaskDefinition` リソースを使用して Amazon ECS タスクを設定し、そのタスクで必要な起動タイプとして `FARGATE` を指定します。以下の例のように、ログ管理の構成に `Datadog` オプションを使用することも可能です。
+ [AWS CloudFormation][10] テンプレートを使用して Fargate コンテナを構成することができます。CloudFormation テンプレート内で `AWS::ECS::TaskDefinition` リソースを使用して Amazon ECS タスクを設定し、そのタスクで必要な起動タイプとして `FARGATE` を指定します。
+
+例:
 
 ```yaml
 Resources:
@@ -117,35 +127,17 @@ Resources:
       Cpu: 256
       Memory: 1GB
       ContainerDefinitions:
-        - Name: tomcat-test
-          Image: 'tomcat:jdk8-adoptopenjdk-openj9'
-          LogConfiguration:
-            LogDriver: awsfirelens
-            Options:
-              Name: datadog
-              Host: http-intake.logs.datadoghq.com
-              TLS: 'on'
-              dd_service: test-service
-              dd_source: test-source
-              provider: ecs
-              apikey: <API_KEY>
-          MemoryReservation: 500
-        - Name: log_router
-          Image: 'amazon/aws-for-fluent-bit:latest'
-          Essential: true
-          FirelensConfiguration:
-            Type: fluentbit
-            Options:
-              enable-ecs-log-metadata: true
-          MemoryReservation: 50
+        - Name: datadog-agent
+          Image: 'gcr.io/datadoghq/agent:latest'
+          Cpu: 100
+          Memory: 256MB
 ```
-**注**: プレーンテキストで `apikey` を公開しないようにするには、[TaskDefinition シークレット][10]を使用します。
 
 CloudFormation のテンプレートと統語法に関する詳細は、[AWS CloudFormation ドキュメント][11]をご参照ください。
 
 #### IAM ポリシーの作成と修正
 
-ECS Fargate のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][12]に追加します。ECS ポリシーの詳細については、[AWS Web サイトのガイドを参照][13]してください。
+ECS Fargate のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][12]に追加します。詳細については、AWS ウェブサイト上の [ECS ポリシー][13]を参照してください。
 
 | AWS アクセス許可                   | 説明                                                       |
 | -------------------------------- | ----------------------------------------------------------------- |
@@ -153,13 +145,13 @@ ECS Fargate のメトリクスを収集するには、次のアクセス許可�
 | `ecs:ListContainerInstances`     | クラスターのインスタンスをリストします。                                      |
 | `ecs:DescribeContainerInstances` | リソースおよび実行中のタスクに関するメトリクスを追加するためのインスタンスを記述します。 |
 
-#### Replica サービスとしてのタスクの実行
+#### レプリカサービスとしてのタスクの実行
 
 ECS Fargate では、タスクを [Replica サービス][14]として実行するオプションしかありません。Datadog Agent は、アプリケーションやインテグレーションコンテナと同じタスク定義内で実行されます。
 
 ##### AWS CLI
 
-[AWS CLI ツール][3]を使用して次のコマンドを実行します。
+[AWS CLI ツール][4]を使用して次のコマンドを実行します。
 
 **注**: Fargate バージョン 1.1.0 以降が必要です。したがって、以下のコマンドでは、プラットフォームバージョンを指定します。
 
@@ -172,15 +164,15 @@ aws ecs create-cluster --cluster-name "<クラスター名>"
 クラスターのサービスとしてタスクを実行します。
 
 ```bash
-aws ecs run-task --cluster <クラスター名> \
---network-configuration "awsvpcConfiguration={subnets=["<プライベート_サブネット>"],securityGroups=["<セキュリティ_グループ>"]}" \
---task-definition arn:aws:ecs:us-east-1:<AWS_アカウント番号>:task-definition/<タスク名>:1 \
---region <AWS_リージョン> --launch-type FARGATE --platform-version 1.1.0
+aws ecs run-task --cluster <CLUSTER_NAME> \
+--network-configuration "awsvpcConfiguration={subnets=["<PRIVATE_SUBNET>"],securityGroups=["<SECURITY_GROUP>"]}" \
+--task-definition arn:aws:ecs:us-east-1:<AWS_ACCOUNT_NUMBER>:task-definition/<TASK_NAME>:1 \
+--region <AWS_REGION> --launch-type FARGATE --platform-version 1.4.0
 ```
 
 ##### Web UI
 
-1. [AWS Web Console][4] にログインし、ECS セクションに移動します。必要に応じて、**Networking only** クラスターテンプレートを使用してクラスターを作成します。
+1. [AWS Web Console][5] にログインし、ECS セクションに移動します。必要に応じて、**Networking only** クラスターテンプレートを使用してクラスターを作成します。
 2. Datadog Agent を実行するクラスターを選択します。
 3. **Services** タブで、**Create** ボタンをクリックします。
 4. **Launch type** で、**FARGATE** を選択します。
@@ -197,7 +189,7 @@ aws ecs run-task --cluster <クラスター名> \
 
 上述のように Datadog Agent をセットアップすると、オートディスカバリーを有効にした状態で [ecs_fargate チェック][15]がメトリクスを収集します。その他のメトリクスを収集するには、同じタスク内の他のコンテナに Docker ラベルを追加します。
 
-インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][7]を参照してください。
+インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][8]を参照してください。
 
 #### DogStatsD
 
@@ -209,14 +201,25 @@ aws ecs run-task --cluster <クラスター名> \
 
 Docker Agent コンテナと共に使用できる環境変数については、[Docker Agent][17] ページを参照してください。**注**: 一部の変数は Fargate では使用できません。
 
-グローバルなタグ付けには、`DD_DOCKER_LABELS_AS_TAGS` の使用をお勧めします。Agent は、この方法を使用して、Docker コンテナラベルからタグを取得します。それには、他の Docker コンテナに適切なラベルを追加する必要があります。ラベルは、[タスク定義][18]で直接追加できます。
+
+| 環境変数               | 説明                                    |
+|------------------------------------|------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS`         | docker コンテナラベルを抽出します                |
+| `DD_CONTAINER_LABELS_AS_TAGS`      | コンテナラベルを抽出する                       |
+| `DD_DOCKER_ENV_AS_TAGS`            | docker コンテナー環境変数を抽出します |
+| `DD_CONTAINER_ENV_AS_TAGS`         | コンテナ環境変数を抽出する        |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | ポッドラベルを抽出します                             |
+| `DD_CHECKS_TAG_CARDINALITY`        | タグをチェックメトリクスに追加します                      |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | タグをカスタムメトリクスに追加します                     |
+
+グローバルなタグ付けには、`DD_CONTAINER_LABELS_AS_TAGS` の使用をお勧めします。Agent は、この方法を使用して、コンテナラベルからタグを取得します。それには、他のコンテナに適切なラベルを追加する必要があります。ラベルは、[タスク定義][18]で直接追加できます。
 
 Agent コンテナのフォーマット
 
 ```json
 {
-  "name": "DD_DOCKER_LABELS_AS_TAGS",
-  "value": "{\"<収集するラベル名>\":\"<DATADOG_用タグキー>\"}"
+  "name": "DD_CONTAINER_LABELS_AS_TAGS",
+  "value": "{\"<LABEL_NAME_TO_COLLECT>\":\"<TAG_KEY_FOR_DATADOG>\"}"
 }
 ```
 
@@ -224,9 +227,19 @@ Agent コンテナの例
 
 ```json
 {
-  "name": "DD_DOCKER_LABELS_AS_TAGS",
+  "name": "DD_CONTAINER_LABELS_AS_TAGS",
   "value": "{\"com.docker.compose.service\":\"service_name\"}"
 }
+```
+
+CloudFormation 例 (YAML):
+
+```yaml
+      ContainerDefinitions:
+        - 
+          Environment:
+            - Name: DD_CONTAINER_LABELS_AS_TAGS
+              Value: "{\"com.docker.compose.service\":\"service_name\"}"
 ```
 
 **注**: `DD_HOSTNAME` を使用しないでください。Fargate には、ユーザーに対するホストという概念がないからです。従来からホストタグを割り当てるために `DD_TAGS` が使用されていますが、Datadog Agent バージョン 6.13.0 では、環境変数を使用してインテグレーションメトリクスにグローバルタグを設定することもできます。
@@ -239,15 +252,15 @@ Datadog Agent によって収集されるメトリクスのほかに、Datadog �
 
 使用できるメトリクスは、クラスター内のタスクとサービスの起動タイプによって異なります。サービスに Fargate 起動タイプを使用している場合は、サービスの監視に役立つように、CPU とメモリの使用率メトリクスが提供されます。
 
-この方法は Datadog Agent を使用しないため、インテグレーションタイルで **ECS** をチェックすることで、Datadog の AWS インテグレーションを構成する必要があります。これで、自動的に Datadog アプリケーションが CloudWatch メトリクス (Datadog 内の `aws.ecs.*` ネームスペースを使用) を取得します。ドキュメントの[収集データ][20]セクションを参照してください。
+この方法は Datadog Agent を使用しないため、インテグレーションタイルで **ECS** をチェックすることで、AWS インテグレーションを構成する必要があります。これで、自動的に Datadog が CloudWatch メトリクス (Datadog 内の `aws.ecs.*` ネームスペースを使用) を取得します。ドキュメントの[収集データ][20]セクションを参照してください。
 
-必要なメトリクスがこれだけの場合は、このインテグレーションに依存して CloudWatch メトリクスを収集できます。**注**: CloudWatch データは粒度が低く (有効にした監視の種類に応じて 1-5 分)、Datadog への報告にも遅延があります。これは、Agent を使用して Datadog にデータをプッシュするのではなく、AWS の API 制限の範囲内で CloudWatch からデータを収集する必要があるためです。
+必要なメトリクスがこれだけの場合は、このインテグレーションに依存して CloudWatch メトリクスを使用して収集できます。**注**: CloudWatch データは粒度が低く (有効にした監視の種類に応じて 1-5 分)、Datadog への報告にも遅延があります。これは、Agent を使用して Datadog にデータをプッシュするのではなく、AWS の API 制限の範囲内で CloudWatch からデータを収集する必要があるためです。
 
 Datadog のデフォルトの CloudWatch クローラーは、10 分ごとにメトリクスをポーリングします。クローリングスケジュールを速くする必要がある場合は、それが可能かどうかを [Datadog のサポートチーム][21]にお問い合わせください。**注**: CloudWatch の API 呼び出しは課金対象なので、AWS 側のコストが増大します。
 
 ### ログの収集
 
-Datadogs Fluentbit アウトプットプラグインに構築されている AWS FireLens インテグレーションを使用してログを Datadog に送信したり、`awslogs` ログドライバーと Lambda 関数を使用してログをルーティングしたりすることで、Fargate ログを監視できます。AWS FireLens を使用すると Fluent Bit を Fargate タスクで直接構成できるため、Datadog では AWS FireLens の使用をお勧めしています。
+Datadog の Fluentbit アウトプットプラグインに構築されている AWS FireLens インテグレーションを使用してログを Datadog に送信したり、`awslogs` ログドライバーと Lambda 関数を使用してログをルーティングしたりすることで、Fargate ログを監視できます。AWS FireLens を使用すると Fluent Bit を Fargate タスクで直接構成できるため、Datadog では AWS FireLens の使用をお勧めしています。
 
 {{< tabs >}}
 {{% tab "Fluent Bit and Firelens" %}}
@@ -260,7 +273,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
    ```json
    {
      "essential": true,
-     "image": "amazon/aws-for-fluent-bit:latest",
+     "image": "amazon/aws-for-fluent-bit:stable",
      "name": "log_router",
      "firelensConfiguration": {
        "type": "fluentbit",
@@ -274,7 +287,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
    ```json
    {
      "essential": true,
-     "image": "amazon/aws-for-fluent-bit:latest",
+     "image": "amazon/aws-for-fluent-bit:stable",
      "name": "log_router",
      "firelensConfiguration": {
        "type": "fluentbit",
@@ -290,7 +303,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
     これにより、シリアル化された JSON が `log:` フィールドから上位レベルのフィールドに変換されます。詳細については、[JSON がシリアル化されたコンテナの stdout ログをパースしている][4] AWS サンプルを参照してください。
 
 2. 次に、同じ Fargate タスクで、AWS FireLens をログドライバーとして使用し、Fluent Bit にデータが出力されるようにログコンフィギュレーションを定義します。下記に、ログドライバーに FireLens が使用され、Fluent Bit にデータを出力しているタスク定義の例を示します。
-
+{{< site-region region="us" >}}
    ```json
    {
      "logConfiguration": {
@@ -309,11 +322,95 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
      }
    }
    ```
+{{< /site-region >}}
 
-    **注**: Datadog EU サイトのオーガニゼーションをご利用の場合は、代わりに `Host` オプションとして `http-intake.logs.datadoghq.eu` を使用してください。ご利用可能なパラメーターの全リストは [Datadog Fluentbit ドキュメント][5]に記載されています。
+{{< site-region region="us3" >}}
+   ```json
+   {
+     "logConfiguration": {
+       "logDriver": "awsfirelens",
+       "options": {
+         "Name": "datadog",
+         "apikey": "<DATADOG_API_KEY>",
+         "Host": "http-intake.logs.us3.datadoghq.com",
+         "dd_service": "firelens-test",
+         "dd_source": "redis",
+         "dd_message_key": "log",
+         "dd_tags": "project:fluentbit",
+         "TLS": "on",
+         "provider": "ecs"
+       }
+     }
+   }
+   ```
+{{< /site-region >}}
 
-3. これで、Fargate タスクの実行中は常に、Fargate タスクが管理するコンテナの情報を監視しながら、Fluent Bit から Datadog にコンテナログが送信されるようになります。[Log Explorer ページ][6]で生ログを確認したり、ログ用の[モニターを作成][7]し [Live Container ビュー][8]で確認したりすることが可能です。
+{{< site-region region="us5" >}}
+   ```json
+   {
+     "logConfiguration": {
+       "logDriver": "awsfirelens",
+       "options": {
+         "Name": "datadog",
+         "apikey": "<DATADOG_API_KEY>",
+         "Host": "http-intake.logs.us5.datadoghq.com",
+         "dd_service": "firelens-test",
+         "dd_source": "redis",
+         "dd_message_key": "log",
+         "dd_tags": "project:fluentbit",
+         "TLS": "on",
+         "provider": "ecs"
+       }
+     }
+   }
+   ```
+{{< /site-region >}}
 
+{{< site-region region="eu" >}}
+   ```json
+   {
+     "logConfiguration": {
+       "logDriver": "awsfirelens",
+       "options": {
+         "Name": "datadog",
+         "apikey": "<DATADOG_API_KEY>",
+         "Host": "http-intake.logs.datadoghq.eu",
+         "dd_service": "firelens-test",
+         "dd_source": "redis",
+         "dd_message_key": "log",
+         "dd_tags": "project:fluentbit",
+         "TLS": "on",
+         "provider": "ecs"
+       }
+     }
+   }
+   ```  
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+   ```json
+   {
+     "logConfiguration": {
+       "logDriver": "awsfirelens",
+       "options": {
+         "Name": "datadog",
+         "apikey": "<DATADOG_API_KEY>",
+         "Host": "http-intake.logs.ddog-gov.datadoghq.com",
+         "dd_service": "firelens-test",
+         "dd_source": "redis",
+         "dd_message_key": "log",
+         "dd_tags": "project:fluentbit",
+         "TLS": "on",
+         "provider": "ecs"
+       }
+     }
+   }
+   ```  
+{{< /site-region >}}
+
+  **注**: Datadog EU サイトのオーガニゼーションをご利用の場合は、代わりに `Host` オプションとして `http-intake.logs.datadoghq.eu` を使用してください。ご利用可能なパラメーターの全リストは [Datadog Fluentbit ドキュメント][5]に記載されています。
+
+3. Fargate タスクの実行中は常に、Fargate タスクが管理するコンテナの情報を監視しながら、Fluent Bit から Datadog にコンテナログが送信されるようになります。[Log Explorer ページ][6]で生ログを確認したり、ログ用の[モニターを作成][7]し [Live Container ビュー][8]で確認したりすることが可能です。
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definitions
@@ -326,7 +423,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
 {{% /tab %}}
 {{% tab "logDriver" %}}
 
-#### AWS LogDriver
+#### AWS ログドライバー
 
 `awslogs` ログドライバーと Lambda 関数を使用して Fargate ログを監視し、Datadog にルーティングします。
 
@@ -358,28 +455,239 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### AWS CloudFormation
+
+[AWS CloudFormation][10] のテンプレートを使用するには、`AWS::ECS::TaskDefinition` リソースを使用し、`Datadog` オプションを設定して、ログ管理を構成する必要があります。
+
+例えば、Fluent Bit が Datadog にログを送信するように構成する場合
+
+{{< site-region region="us" >}}
+```yaml
+Resources:
+  ECSTDNJH3:
+    Type: 'AWS::ECS::TaskDefinition'
+    Properties:
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+          - FARGATE
+      Cpu: 256
+      Memory: 1GB
+      ContainerDefinitions:
+        - Name: tomcat-test
+          Image: 'tomcat:jdk8-adoptopenjdk-openj9'
+          LogConfiguration:
+            LogDriver: awsfirelens
+            Options:
+              Name: datadog
+              Host: http-intake.logs.datadoghq.com
+              TLS: 'on'
+              dd_service: test-service
+              dd_source: test-source
+              provider: ecs
+              apikey: <API_KEY>
+          MemoryReservation: 500
+        - Name: log_router
+          Image: 'amazon/aws-for-fluent-bit:stable'
+          Essential: true
+          FirelensConfiguration:
+            Type: fluentbit
+            Options:
+              enable-ecs-log-metadata: true
+          MemoryReservation: 50
+```
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+```yaml
+Resources:
+  ECSTDNJH3:
+    Type: 'AWS::ECS::TaskDefinition'
+    Properties:
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+          - FARGATE
+      Cpu: 256
+      Memory: 1GB
+      ContainerDefinitions:
+        - Name: tomcat-test
+          Image: 'tomcat:jdk8-adoptopenjdk-openj9'
+          LogConfiguration:
+            LogDriver: awsfirelens
+            Options:
+              Name: datadog
+              Host: http-intake.logs.us3.datadoghq.com
+              TLS: 'on'
+              dd_service: test-service
+              dd_source: test-source
+              provider: ecs
+              apikey: <API_KEY>
+          MemoryReservation: 500
+        - Name: log_router
+          Image: 'amazon/aws-for-fluent-bit:stable'
+          Essential: true
+          FirelensConfiguration:
+            Type: fluentbit
+            Options:
+              enable-ecs-log-metadata: true
+          MemoryReservation: 50
+```
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+```yaml
+Resources:
+  ECSTDNJH3:
+    Type: 'AWS::ECS::TaskDefinition'
+    Properties:
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+          - FARGATE
+      Cpu: 256
+      Memory: 1GB
+      ContainerDefinitions:
+        - Name: tomcat-test
+          Image: 'tomcat:jdk8-adoptopenjdk-openj9'
+          LogConfiguration:
+            LogDriver: awsfirelens
+            Options:
+              Name: datadog
+              Host: http-intake.logs.us5.datadoghq.com
+              TLS: 'on'
+              dd_service: test-service
+              dd_source: test-source
+              provider: ecs
+              apikey: <API_KEY>
+          MemoryReservation: 500
+        - Name: log_router
+          Image: 'amazon/aws-for-fluent-bit:stable'
+          Essential: true
+          FirelensConfiguration:
+            Type: fluentbit
+            Options:
+              enable-ecs-log-metadata: true
+          MemoryReservation: 50
+```
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+```yaml
+Resources:
+  ECSTDNJH3:
+    Type: 'AWS::ECS::TaskDefinition'
+    Properties:
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+          - FARGATE
+      Cpu: 256
+      Memory: 1GB
+      ContainerDefinitions:
+        - Name: tomcat-test
+          Image: 'tomcat:jdk8-adoptopenjdk-openj9'
+          LogConfiguration:
+            LogDriver: awsfirelens
+            Options:
+              Name: datadog
+              Host: http-intake.logs.datadoghq.eu
+              TLS: 'on'
+              dd_service: test-service
+              dd_source: test-source
+              provider: ecs
+              apikey: <API_KEY>
+          MemoryReservation: 500
+        - Name: log_router
+          Image: 'amazon/aws-for-fluent-bit:stable'
+          Essential: true
+          FirelensConfiguration:
+            Type: fluentbit
+            Options:
+              enable-ecs-log-metadata: true
+          MemoryReservation: 50
+```
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+```yaml
+Resources:
+  ECSTDNJH3:
+    Type: 'AWS::ECS::TaskDefinition'
+    Properties:
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+          - FARGATE
+      Cpu: 256
+      Memory: 1GB
+      ContainerDefinitions:
+        - Name: tomcat-test
+          Image: 'tomcat:jdk8-adoptopenjdk-openj9'
+          LogConfiguration:
+            LogDriver: awsfirelens
+            Options:
+              Name: datadog
+              Host: http-intake.logs.ddog-gov.datadoghq.com
+              TLS: 'on'
+              dd_service: test-service
+              dd_source: test-source
+              provider: ecs
+              apikey: <API_KEY>
+          MemoryReservation: 500
+        - Name: log_router
+          Image: 'amazon/aws-for-fluent-bit:stable'
+          Essential: true
+          FirelensConfiguration:
+            Type: fluentbit
+            Options:
+              enable-ecs-log-metadata: true
+          MemoryReservation: 50
+```
+{{< /site-region >}}
+
+**注**: プレーンテキストで `apikey` を公開しないようにするには、[TaskDefinition シークレット][22]を使用します。
+
+CloudFormation のテンプレートと統語法に関する詳細は、[AWS CloudFormation ドキュメント][11]をご参照ください。
+
 ### トレースの収集
 
-1. [上の手順](#installation)に従ってタスク定義に Datadog Agent コンテナを追加し、追加の環境変数 `DD_APM_ENABLED` を `true` に設定し、ポートマッピングでホストポート（**8126** と **tcp** プロトコルを使用）を設定します。
+1. [上の手順](#installation)に従ってタスク定義に Datadog Agent コンテナを追加し、追加の環境変数 `DD_APM_ENABLED` を `true` に設定し、ポートマッピングでホストポート（**8126** と **tcp** プロトコルを使用）を設定します。`DD_SITE` 変数を {{< region-param key="dd_site" code="true" >}} に設定します。設定しない場合、デフォルトで `datadoghq.com` になります。
 
-2. 現在のセットアップに基づいて[アプリケーションをインスツルメント][22]します。
+2. 現在のセットアップに基づいて[アプリケーションをインスツルメントします][23]。
 
 3. アプリケーションが Datadog Agent コンテナと同じタスク定義内で実行されていることを確認します。
+
+## すぐに使えるタグ
+
+Agent は、タグを自動検出して、タスク全体またはこのタスク内の個別のコンテナにより送信されたすべてのデータにアタッチします。自動的にアタッチされるタグのリストは、Agent の[カーディナリティコンフィギュレーション][24]に基づきます。
+
+  | タグ                           | カーディナリティ  | ソース               |
+  |-------------------------------|--------------|----------------------|
+  | `container_name`              | 大         | ECS API              |
+  | `container_id`                | 大         | ECS API              |
+  | `docker_image`                | 小          | ECS API              |
+  | `image_name`                  | 小          | ECS API              |
+  | `short_image`                 | 小          | ECS API              |
+  | `image_tag`                   | 小          | ECS API              |
+  | `ecs_cluster_name`            | 小          | ECS API              |
+  | `ecs_container_name`          | 小          | ECS API              |
+  | `task_arn`                    | オーケストレーター | ECS API              |
+  | `task_family`                 | 小          | ECS API              |
+  | `task_name`                   | 小          | ECS API              |
+  | `task_version`                | 小          | ECS API              |
+  | `availability_zone`           | 小          | ECS API              |
+  | `region`                      | 小          | ECS API              |
 
 ## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "ecs_fargate" >}}
-
+ また、どれが Linux 専用なのかも明記されています。
 
 ### イベント
 
 ECS Fargate チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "ecs_fargate" >}}
 
-**fargate_check**:<br>
-Agent が Fargate に接続できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 
@@ -387,21 +695,27 @@ Agent が Fargate に接続できない場合は `CRITICAL` を返します。�
 
 ## その他の参考資料
 
-- ブログ記事: [Datadog を使用した AWS Fargate アプリケーションの監視][23]
-- よくあるご質問: [ECS Fargate のインテグレーションセットアップ][7]
-- ブログ記事: [FireLens と Datadog を使用した Fargate コンテナログの監視][24]
+- ブログ記事: [Datadog を使用した AWS Fargate アプリケーションの監視][25]
+- よくあるご質問: [ECS Fargate のインテグレーションセットアップ][8]
+- ブログ記事: [FireLens と Datadog を使用した Fargate コンテナログの監視][26]
+- ブログ記事: [AWS Fargate 監視のための主要メトリクス][27]
+- ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][28]
+- ブログ記事: [Datadog を使用した AWS Fargate モニタリング][29]
+- ブログ記事: [Graviton2 による AWS Fargate のデプロイ][30]
+- ブログ記事: [Windows コンテナ型アプリ向けに AWS Fargate を監視する][31]
 
 
-[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html
-[2]: https://docs.docker.com/engine/api/v1.30/#operation/ContainerStats
-[3]: https://aws.amazon.com/cli
-[4]: https://aws.amazon.com/console
-[5]: https://app.datadoghq.com/account/settings#api
-[6]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
-[7]: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
-[8]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-fargate.json
-[9]: https://aws.amazon.com/cloudformation/
-[10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-secret.html
+
+[1]: http://docs.datadoghq.com/integrations/eks_fargate
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html
+[3]: https://docs.docker.com/engine/api/v1.30/#operation/ContainerStats
+[4]: https://aws.amazon.com/cli
+[5]: https://aws.amazon.com/console
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
+[8]: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
+[9]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-fargate.json
+[10]: https://aws.amazon.com/cloudformation/
 [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html
 [12]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [13]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
@@ -413,6 +727,13 @@ Agent が Fargate に接続できない場合は `CRITICAL` を返します。�
 [19]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-metrics.html
 [20]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#data-collected
 [21]: https://docs.datadoghq.com/ja/help/
-[22]: https://docs.datadoghq.com/ja/tracing/setup/
-[23]: https://www.datadoghq.com/blog/monitor-aws-fargate
-[24]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
+[22]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-secret.html
+[23]: https://docs.datadoghq.com/ja/tracing/setup/
+[24]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
+[25]: https://www.datadoghq.com/blog/monitor-aws-fargate
+[26]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
+[27]: https://www.datadoghq.com/blog/aws-fargate-metrics/
+[28]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
+[29]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
+[30]: https://www.datadoghq.com/blog/aws-fargate-on-graviton2-monitoring/
+[31]: https://www.datadoghq.com/blog/aws-fargate-windows-containers-support/

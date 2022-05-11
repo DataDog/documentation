@@ -81,7 +81,6 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 | `geo.country`                      | 文字列 | 国の名前。                                                                                                                       |
 | `geo.country_iso_code`             | 文字列 | 国の ISO コード (米国は `US`、フランスは `FR` など)。                                                  |
 | `geo.country_subdivision`          | 文字列 | その国で最大規模の地方区分 (米国は `California` 州、フランスは `Sarthe` 県など)。 |
-| `geo.country_subdivision_iso_code` | 文字列 | その国で最大規模の地方区分の ISO コード (米国は `CA`、フランスは `SA` など)。    |
 | `geo.continent_code`               | 文字列 | 大陸の ISO コード (`EU`、`AS`、`NA`、`AF`、`AN`、`SA`、`OC`)。                                                                     |
 | `geo.continent`                    | 文字列 | 大陸名 (`Europe`、`Australia`、`North America`、`Africa`、`Antarctica`、`South America`、`Oceania`)。                        |
 | `geo.city`                         | 文字列 | 都市名 (`San Francisco`、`Paris`、`New York` など)。                                                                                       |

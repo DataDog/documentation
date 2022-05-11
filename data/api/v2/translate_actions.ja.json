@@ -403,6 +403,12 @@
     "request_description": "",
     "request_schema_description": "ユーザーとの関係。"
   },
+  "AggregateRUMEvents": {
+    "description": "RUM イベントを、計算されたメトリクスとタイムシリーズのバケットに集約する API エンドポイント。",
+    "summary": "Aggregate RUM events",
+    "request_description": "",
+    "request_schema_description": "オーガニゼーションから RUM イベントの集約バケットを取得するリクエストと共に送信されたオブジェクト。"
+  },
   "ListRUMEvents": {
     "description": "リストエンドポイントは、RUM 検索クエリと一致するイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、最新の RUM イベントを確認します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "RUM イベントのリストを取得"
@@ -412,6 +418,11 @@
     "summary": "RUM イベントの検索",
     "request_description": "",
     "request_schema_description": "RUM イベントリストのリクエスト。"
+  },
+  "UploadIdPMetadata": {
+    "description": "SAML 設定用の IdP メタデータをアップロードするためのエンドポイントです。\n\nこのエンドポイントを使用して、SAML ログイン構成用の IdP メタデータをアップロードまたは置き換えます。",
+    "summary": "IdP メタデータをアップロード",
+    "request_description": ""
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "ダウンロードエンドポイントは、現在有効なクラウドワークロードセキュリティルールからクラウドワークロードセキュリティポリシーファイルを生成し、\n .policy ファイルとしてダウンロードします。それからこのファイルは　\nAgent にデプロイされ、環境で実行中のポリシーを更新します。",
@@ -576,6 +587,18 @@
     "summary": "既存のインシデントチームを更新する",
     "request_description": "インシデントチームのペイロード。",
     "request_schema_description": "インシデントチームペイロードを使用してリクエストを更新します。"
+  },
+  "GetUsageApplicationSecurityMonitoring": {
+    "description": "アプリケーションセキュリティの 1 時間あたり使用量を取得します。",
+    "summary": "アプリケーションセキュリティの 1 時間あたり使用量の取得"
+  },
+  "GetCostByOrg": {
+    "description": "マルチオーガニゼーションのアカウントのコストを取得します。",
+    "summary": "マルチオーガニゼーションのアカウントのコストを取得"
+  },
+  "GetUsageObservabilityPipelines": {
+    "description": "観測可能性パイプラインの 1 時間あたりの使用量を取得します。",
+    "summary": "Get hourly usage for Observability Pipelines"
   },
   "SendInvitations": {
     "description": "組織への参加を招待するメールを 1 人以上のユーザーに送信します。",

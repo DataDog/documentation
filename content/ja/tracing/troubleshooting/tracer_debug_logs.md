@@ -30,8 +30,13 @@ Datadog Java トレーサーのデバッグモードを有効にするには、J
 
 {{< programming-lang lang="python" >}}
 
-Datadog Python トレーサーのデバッグモードを有効にするには、`ddtrace-run` を使用するときに環境変数 `DD_TRACE_DEBUG=true` を設定します。
-<p></p>
+Datadog Python トレーサーのデバッグモードを有効にするには、`ddtrace-run` を使用するときに環境変数 `DD_TRACE_DEBUG=true` と `DD_CALL_BASIC_CONFIG=true` を設定します。
+
+既存のログ構成がある場合は、アプリケーションコードでデバッグログを有効にしてください。
+```
+log = logging.getLogger("ddtrace.tracer")
+log.setLevel(logging.DEBUG)
+```
 
 {{< /programming-lang >}}
 

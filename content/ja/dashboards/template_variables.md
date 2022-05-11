@@ -1,27 +1,31 @@
 ---
-title: テンプレート変数
-kind: documentation
 aliases:
-  - /ja/graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
-  - /ja/graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
-  - /ja/graphing/dashboards/template_variables/
+- /ja/graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
+- /ja/graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
+- /ja/graphing/dashboards/template_variables/
 further_reading:
-  - link: https://www.datadoghq.com/blog/template-variable-associated-values/
-    tag: ブログ
-    text: 関連するテンプレート変数を使用してダッシュボードを調整
-  - link: https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/
-    tag: ブログ
-    text: 動的テンプレート変数構文でダッシュボードのワークフローを高速化
-  - link: /dashboards/
-    tag: ドキュメント
-    text: Datadog でダッシュボードを作成
-  - link: /dashboards/sharing/
-    tag: Documentation
-    text: Datadogの外部でグラフを共有
-  - link: /dashboards/widgets/
-    tag: ドキュメント
-    text: ダッシュボードのウィジェットについて
+- link: https://www.datadoghq.com/blog/template-variable-associated-values/
+  tag: ブログ
+  text: 関連するテンプレート変数を使用してダッシュボードを調整
+- link: https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/
+  tag: ブログ
+  text: 動的テンプレート変数構文でダッシュボードのワークフローを高速化
+- link: https://www.datadoghq.com/blog/template-variable-available-values/
+  tag: ブログ
+  text: テンプレート変数で利用可能な値でダッシュボードのフィルタリングを高速化
+- link: /dashboards/
+  tag: Documentation
+  text: Datadog でダッシュボードを作成
+- link: /dashboards/sharing/
+  tag: ドキュメント
+  text: Datadogの外部でグラフを共有
+- link: /dashboards/widgets/
+  tag: ドキュメント
+  text: ダッシュボードのウィジェットについて
+kind: documentation
+title: テンプレート変数
 ---
+
 テンプレート変数により、ダッシュボード内の 1 つ以上のウィジェットを動的にフィルタリングすることができます。
 
 ## 作成
@@ -30,16 +34,16 @@ further_reading:
 
 テンプレート変数は、以下のように定義されます。
 
-* **Name**: テンプレート変数固有の名前です。この名前はダッシュボードの内容をフィルタリングするのに使用されます。
 * **Tag or Attribute**:
     * Tag: 推奨される[タグ付けフォーマット][1] (`<KEY>:<VALUE>`) に従う場合、*Tag* は `<KEY>` となります。
     * Attribute: [テンプレート変数のファセットまたはメジャー](#logs-apm-and-rum-queries)を使用します。
-* **Default Value**:
-    テンプレート変数のタグまたは属性のデフォルト値。
+* **Name**: ダッシュボード上のクエリに表示されるテンプレート変数の一意の名前です。テンプレート変数は、選択されたタグまたは属性の後に自動的に名前が付けられます。
+* **Default Value**: ダッシュボードが読み込まれたときに自動的に表示されるタグまたは属性の値です。デフォルトは `*` です。
+* **Available Values**: ドロップダウンで選択可能なタグまたは属性の値です。デフォルトは `(all)` です。利用可能な値のリストには、常に `*` が含まれており、タグや属性の全ての値をクエリすることができます。
 
-テンプレート変数を作成後、その変数を使用しているソースの数がDatadog に表示されます。下の例では、2 つのグラフの内の 1 つでテンプレート変数が使用されています。
+テンプレート変数を作成すると、Datadog はその変数を使用しているソースの数を表示します。以下の例では、テンプレート変数 `team` がダッシュボード上の 2 つのグラフで使用されています。
 
-{{< img src="dashboards/template_variables/stats_tv.png" alt="統計的 TV" style="width:85%;">}}
+{{< img src="dashboards/template_variables/stats_tv_modal.png" alt="複数の変数が設定されたテンプレート変数" style="width:90%;">}}
 
 個々のウィジェットで[テンプレート変数を使用](#use) するか、**Add to All** オプションをクリックします。すべてのウィジェットからテンプレート変数を削除するには、**Remove From All** オプションをクリックします。
 
@@ -47,6 +51,8 @@ further_reading:
 
 テンプレート変数はログ、APM、RUM ウィジェットと連動しています。これはメトリクス、ログ、APM、および RUM が同じタグを共有しているためです。
 ログ、APM、RUM のテンプレート変数は[ログ][2]、APM、[RUM][3] ファセットに基づいて定義することができます。これらの変数は `@http.status_code` のように `@` から始まる値となります。
+
+ログ、APM、および RUM ウィジェットでは、値の途中でワイルドカードを使用したり (たとえば、`eng*@example.com`)、値の中で複数のワイルドカードを使用したり (たとえば、`*prod*`) することが可能です。
 
 **注**: このタイプのテンプレート変数に **Add to all** を適用すると、すべてのログ、APM、RUM ウィジェットに変数が追加されます。
 
@@ -81,23 +87,29 @@ further_reading:
 
 {{< img src="dashboards/template_variables/selecting_template_variables.png" alt="テンプレート変数を選択" style="width:75%;">}}
 
+接頭辞や接尾辞だけをもとにクエリするには、テンプレート変数の値の最初か最後にワイルドカード文字 (`*`) を使用します。例えば、 `us*` を使って `us` で始まるすべての地域を検索したり、 `*@example.com` を使って `example.com` ドメインに属するすべてのメールを検索したりできます。
+
 テンプレート変数の値を変更する場合、ダッシュボード URL はそのテンプレート変数の値を反映するよう、`&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>` というフォーマットで更新されます。たとえば、テンプレート変数が `$env` のダッシュボードで値が `prod` に変更された場合、URL のパラメーターは `&tpl_var_env=prod` となります。
 
+値だけをクエリに含めるには、`{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.value` という構文を使用します。例えば、`env` という名前のテンプレート変数では、 `environment:$env.value` を使用します。
+
 #### 関連するテンプレート変数
-テンプレート変数の値を選択するときに、**Associated Values** および **Other Values** セクションが表示されます。Associated Values はページで選択されたその他のテンプレート変数の値を考慮して計算され、コンフィギュレーションなしで関連する値をシームレスに示します。
+テンプレート変数の値を選択するときに、**Associated Values** および **Other Values** セクションが表示されます。Associated Values はページで選択されたその他のテンプレート変数の値から計算され、コンフィギュレーションなしで関連する値をシームレスに示します。
 
 {{< img src="dashboards/template_variables/associated_template_variables.png" alt="関連するテンプレート変数" style="width:75%;">}}
 
 #### テキスト
 
-テキストベースのウィジェットには、テンプレート変数の名前と値を `$<テンプレート変数名>` と共に、または値だけを `$<テンプレート変数名>` と共に表示できます。例として、名前が `env`、選択された値が `dev` のテンプレート変数の場合、
+テキストベースのウィジェットでは、テンプレート変数のタグ/属性と値を `{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>` で、キーだけを `{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.key` で、または値だけを `{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.value` で表示させることができます。これは、英数字でない任意の文字の後に来ることができ、空白や以下の文字のいずれかが続くことができます: `#`、`{TX-PL-LABEL}#x60;、`%`、`=`、`;`、`"`、`(`、`)`、`[`、`]`、`{`、`}`、`^`、`*`、`+`、`|`、`?`
 
-* `$env` には `env:dev` と表示されます
+例えば、テンプレート変数が `env` で、タグ/属性が `environment` で、選択値が `dev` である場合:
+* `$env` には `environment:dev` と表示されます
+* `$env.key` には `environment` と表示されます
 * `$env.value` には `dev` が表示されます
 
 ### イベントオーバーレイ
 
-ダッシュボードで特定のタグとメトリクスに紐付くイベントを検索するには、テンプレート変数の[イベントオーバーレイ][4]検索が便利です。イベントオーバーレイ検索は個別のグラフに適用されます。
+ダッシュボードで特定のタグとメトリクスに紐付くイベントを検索するには、テンプレート変数のイベントオーバーレイ検索が便利です。イベントオーバーレイ検索は個別のグラフに適用されます。
 
 イベント検索フィールドで `$<TEMPLATE_VARIABLE_KEY>.value` 構文を使用すると、ダッシュボードテンプレート変数の値を直接キャプチャできます。
 
@@ -105,15 +117,15 @@ further_reading:
 
 #### ダッシュボード  
 
-ダッシュボードから、以下のフォーマットを用いたテンプレート変数のイベントストリームを検索します。
+ダッシュボードから、以下のフォーマットを使用してテンプレート変数を持つイベントを検索します。
 
 ```text
-tags:<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
+<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
 ```
 
-例えば、`tags:region:$region.value` を、`region` テンプレート変数についての `us-east1` の値で検索すると、`region:us-east1` でタグ付けされたイベントが表示されます。さらに、イベントのタイミングがグラフ上にピンクのバーで示されます。
+例えば、`region:$region.value` を、`region` テンプレート変数についての `us-east1` の値で検索すると、`region:us-east1` でタグ付けされたイベントが表示されます。さらに、イベントのタイミングがグラフ上にピンクのバーで示されます。
 
-複数のテンプレート変数で検索するには、コンマを入れます（例: `tags:role:$role.value,env:$env.value`）
+複数のテンプレート変数で検索するには、コンマを入れます（例: `role:$role.value,env:$env.value`）
 
 **注**: 検索を実行する際に *enter* を押すと、`$region.value` がテンプレート変数ドロップダウンの値に更新されます。
 
@@ -122,10 +134,10 @@ tags:<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
 以下のフォーマットで、ウィジェットからテンプレート変数を使用したイベントのタイミングをオーバーレイします。
 
 ```text
-tags:$<TEMPLATE_VARIABLE_NAME>
+$<TEMPLATE_VARIABLE_NAME>
 ```
 
-例えば、イベントオーバーレイ検索ボックスに `tags:$region` と入力して、`region` テンプレート変数ドロップダウンにある値のイベントを検索します。
+例えば、イベントオーバーレイ検索ボックスに `$region` と入力して、`region` テンプレート変数ドロップダウンにある値のイベントを検索します。
 
 ## その他の参考資料
 
@@ -134,4 +146,3 @@ tags:$<TEMPLATE_VARIABLE_NAME>
 [1]: /ja/getting_started/tagging/#defining-tags
 [2]: /ja/logs/explorer/facets/
 [3]: /ja/real_user_monitoring/explorer/?tab=facets#setup-facets-measures
-[4]: /ja/dashboards/timeboards/#events
