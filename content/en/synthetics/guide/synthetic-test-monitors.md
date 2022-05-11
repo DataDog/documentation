@@ -29,7 +29,9 @@ Customize the monitor name to search for it on the [**Manage Monitors**][1] page
 
 The Synthetic test monitor integrates with notification channels such as email, Slack, Pagerduty, and Microsoft Teams. For more information, see [Notifications][3].
 
-Synthetic test monitors do not support the `{{#is_warning}}`, `{{^is_warning}}`, `{{#is_warning_recovery}}`, and `{{^is_warning_recovery}}` conditional variables in the the monitor name. If you have multiple layers of notifications (for example, with warning thresholds), Datadog recommends enabling [renotification][4] on your monitors.
+Synthetic test monitors do not support tag and attribute variables or the `{{#is_warning}}`, `{{^is_warning}}`, `{{#is_warning_recovery}}`, and `{{^is_warning_recovery}}` conditional variables in the the monitor name. To use tag and attribute variables, create a [metric monitor][4].
+
+If you have multiple layers of notifications (for example, with warning thresholds), Datadog recommends enabling [renotification][5] on your monitors.
 
 ## Notify multiple teams with renotifications
 
@@ -41,21 +43,17 @@ To enable the alerting monitor to renotify, click the toggle left of `If this mo
 
 ## Integrate your Synthetic test monitor with Statuspage
 
-If you use [Atlassian Statuspage][5] for visibility into your applications' and services' uptime, you can update the status of your systems with  Synthetic test monitor notifications.
+If you use [Atlassian Statuspage][6] for visibility into your applications' and services' uptime, you can update the status of your systems with  Synthetic test monitor notifications.
 
-1. See the [Statuspage documentation][6] to generate a component-specific email address.
+1. See the [Statuspage documentation][7] to generate a component-specific email address.
 2. Add the generated email address into your test's notification message.
 3. Customize the monitor name to return `UP` or `DOWN` depending on the test state.
 
 {{< img src="synthetics/guide/synthetics_test_monitors/statuspage_monitor_setup.png" alt="Add a Statuspage email address and status to the monitor name in your Synthetic test" style="width:95%;">}}
 
-## Use Synthetic test metrics
-
-You may want to group monitor notifications based on test run status or team. Use [Synthetic Monitoring Metrics][7] to expand your notification capabilities by creating additional [metric monitors][8].
-
 ## Export Synthetic test uptime
 
-In order to export the uptime for a Synthetic test, you need the `monitor_id` for the respective test. Use the [Monitors API][9] to query the [`Get an API test`][10] or [`Get a browser test` endpoint][11].
+In order to export the uptime for a Synthetic test, you need the `monitor_id` for the respective test. Use the [Monitors API][8] to query the [`Get an API test`][9] or [`Get a browser test` endpoint][10].
 
 ## Further Reading
 
@@ -64,11 +62,10 @@ In order to export the uptime for a Synthetic test, you need the `monitor_id` fo
 [1]: /monitors/manage/
 [2]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [3]: /monitors/notify/#integrations/
-[4]: /monitors/notify/#renotify
-[5]: https://support.atlassian.com/statuspage/
-[6]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
-[7]: /synthetics/metrics/
-[8]: /monitors/create/types/metric/
-[9]: /api/latest/monitors/
-[10]: /api/latest/synthetics/#get-an-api-test
-[11]: /api/latest/synthetics/#get-a-browser-test
+[4]: /monitors/create/types/metric/
+[5]: /monitors/notify/#renotify
+[6]: https://support.atlassian.com/statuspage/
+[7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
+[8]: /api/latest/monitors/
+[9]: /api/latest/synthetics/#get-an-api-test
+[10]: /api/latest/synthetics/#get-a-browser-test
