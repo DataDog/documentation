@@ -1,22 +1,23 @@
 ---
-title: ログアーカイブ
-kind: documentation
-description: 収集されたログをすべて長期的なストレージへ転送します。
 aliases:
-  - /ja/logs/s3/
-  - /ja/logs/gcs/
-  - /ja/logs/archives/s3/
-  - /ja/logs/archives/gcs/
-  - /ja/logs/archives/gcp/
-  - /ja/logs/archives/
+- /ja/logs/s3/
+- /ja/logs/gcs/
+- /ja/logs/archives/s3/
+- /ja/logs/archives/gcs/
+- /ja/logs/archives/gcp/
+- /ja/logs/archives/
+description: 収集されたログをすべて長期的なストレージへ転送します。
 further_reading:
-  - link: /logs/explorer/
-    tag: ドキュメント
-    text: ログエクスプローラー
-  - link: /logs/logging_without_limits/
-    tag: ドキュメント
-    text: Logging without Limits*
+- link: /logs/explorer/
+  tag: ドキュメント
+  text: ログエクスプローラー
+- link: /logs/logging_without_limits/
+  tag: ドキュメント
+  text: Logging without Limits*
+kind: documentation
+title: ログアーカイブ
 ---
+
 ## 概要
 
 Datadog アカウントを構成して、独自のクラウドストレージシステムへ収集されたすべてのログ（[インデックス化][1]の有無にかかわらず）を転送します。ストレージに最適化されたアーカイブにログを長期間保管し、コンプライアンス要件を満たすことができると同時に、アドホック調査のための監査適合性を[リハイドレート][2]で維持できます。
@@ -115,9 +116,9 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-次の 2 つのアクセス許可ステートメントを IAM ポリシーに追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。
+次の 2 つのアクセス許可ステートメントを AWS インテグレーションのロールにアタッチされている IAM ポリシーに追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。
 
-**注**:
+**注:**
 
 * `GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][1]を可能にします。
 * アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
@@ -148,6 +149,8 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
   ]
 }
 ```
+
+**注**: `s3:PutObject` と `s3:GetObject` アクションのリソース値は `/*` で終わっていることを確認してください。これらの権限はバケット内のオブジェクトに適用されるからです。
 
 [1]: /ja/logs/archives/rehydrating/
 {{% /tab %}}
@@ -181,7 +184,9 @@ Datadog GCP サービスアカウントに、バケットへアーカイブを�
 
 Datadog アプリの[アーカイブページ][4]に移動し、下にある **Add a new archive** オプションを選択します。
 
-**注**: [logs_write_archive 権限][3]のある Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
+**注:** 
+* [logs_write_archive 権限][3]のある Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
+* Azure Blob Storage へのログのアーカイブには、App Registration が必要です。[Azure インテグレーションページ][5]の手順を参照し、ドキュメントページの右側にある「サイト」を「US」に設定してください。アーカイブ目的で作成された App Registration は、"Storage Blob Data Contributor" ロールのみが必要です。ストレージバケットが Datadog Resource を通じて監視されているサブスクリプションにある場合、App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -226,20 +231,28 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 オプションで、コンフィギュレーションステップを使用し、アーカイブにロールを割り当て、以下を実行できるユーザーを設定できます。
 
-* アーカイブのコンフィギュレーションを編集（[logs_write_archive][5] 権限を参照）。
-* アーカイブからのリハイドレーション（[logs_read_archives][6] および [logs_write_historical_view][7] を参照）。
-* レガシーを使用する場合に、リハイドレートされたログへアクセス（[read_index_data 権限][8]を参照）。
+* アーカイブのコンフィギュレーションを編集（[logs_write_archive][6] 権限を参照）。
+* アーカイブからのリハイドレーション（[logs_read_archives][7] および [logs_write_historical_view][8] を参照）。
+* レガシーを使用する場合に、リハイドレートされたログへアクセス（[read_index_data 権限][9]を参照）。
 
 {{< img src="logs/archives/archive_restriction.png" alt="アーカイブおよびリハイドレート済みログへのアクセスを制限"  style="width:75%;">}}
 
 #### Datadog タグ
 
-このコンフィギュレーションのオプション手順を使用すると、以下が可能です。
+以下のためにこのオプションの構成ステップを使用します。
 
 * アーカイブ内のすべてのログタグを含める (デフォルトでは、すべての新規アーカイブに有効化されています)。**注**: 結果のアーカイブサイズが増大します。
-* リハイドレート済みのログのタグを制限クエリポリシーに追加（[logs_read_data][9] 権限を参照）。
+* リハイドレート済みのログのタグを制限クエリポリシーに追加（[logs_read_data][10] 権限を参照）。
 
 {{< img src="logs/archives/tags_in_out.png" alt="アーカイブタグの構成"  style="width:75%;">}}
+
+#### 最大スキャンサイズを定義する
+
+このオプションの構成ステップを使用して、ログアーカイブでリハイドレートのためにスキャンできるログデータの最大量 (GB 単位) を定義します。
+
+最大スキャンサイズが定義されているアーカイブの場合、すべてのユーザーは、リハイドレートを開始する前にスキャンサイズを推定する必要があります。推定されたスキャンサイズがそのアーカイブで許可されているものより大きい場合、ユーザーはリハイドレートを要求する時間範囲を狭めなければなりません。時間範囲を減らすと、スキャンサイズが小さくなり、ユーザーがリハイドレートを開始できるようになります。
+
+{{< img src="logs/archives/max_scan_size.png" alt="アーカイブの最大スキャンサイズを設定する" style="width:75%;">}}
 
 #### ストレージクラス
 
@@ -248,7 +261,7 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 [S3 バケットにライフサイクルコンフィギュレーションを設定][1]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。
 
-[リハイドレート][2]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
+[リハイドレート][2]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています (Glacier Instant Retrieval は例外です)。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /ja/logs/archives/rehydrating/
@@ -340,7 +353,7 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 Datadog アカウントでアーカイブ設定が正常に構成された時点から、処理パイプラインは Datadog が収集したすべてのログを加工し始めます。その後アーカイブに転送されます。
 
-ただし、アーカイブ構成を作成または更新してから次にアーカイブのアップロードが試行されるまで、数分かかることがあります。ログは15分ごとにアーカイブにアップロードされるので、**15 分待ってストレージバケットをチェックし**、Datadog アカウントからアーカイブが正常にアップロードされたことを確認してください。その後、アーカイブが依然として保留中の場合は、包含フィルターをチェックしクエリが有効であることと、[live tail][10] でログイベントが一致することを確認します。
+ただし、アーカイブ構成を作成または更新してから次にアーカイブのアップロードが試行されるまで、数分かかることがあります。ログは15分ごとにアーカイブにアップロードされるので、**15 分待ってストレージバケットをチェックし**、Datadog アカウントからアーカイブが正常にアップロードされたことを確認してください。その後、アーカイブが依然として保留中の場合は、包含フィルターをチェックしクエリが有効であることと、[live tail][11] でログイベントが一致することを確認します。
 
 Datadog でコンフィギュレーションの問題が検出された場合、該当するアーカイブがコンフィギュレーションページでハイライトされます。エラーアイコンをチェックして、問題を修正するためにとるべきアクションを確認します。
 
@@ -381,8 +394,6 @@ Datadog がストレージバケットに転送するログアーカイブは、
 }
 ```
 
-**注**: アーカイブへのタグの追加はオプトイン機能です。アーカイブに有効にする方法については、[Datadog タグのセクション](#datadog-tags)を参照してください。
-
 ## その他の参考資料
 
 {{< whatsnext desc="次に、Datadog からアーカイブされたログコンテンツにアクセスする方法を説明します。" >}}
@@ -398,9 +409,10 @@ Datadog がストレージバケットに転送するログアーカイブは、
 [2]: /ja/logs/archives/rehydrating/
 [3]: /ja/account_management/rbac/permissions/?tab=ui#logs_write_archives
 [4]: https://app.datadoghq.com/logs/pipelines/archives
-[5]: /ja/account_management/rbac/permissions#logs_write_archives
-[6]: /ja/account_management/rbac/permissions#logs_read_archives
-[7]: /ja/account_management/rbac/permissions#logs_write_historical_view
-[8]: /ja/account_management/rbac/permissions#logs_read_index_data
-[9]: /ja/account_management/rbac/permissions#logs_read_data
-[10]: /ja/logs/explorer/live_tail/
+[5]: /ja/integrations/azure/
+[6]: /ja/account_management/rbac/permissions#logs_write_archives
+[7]: /ja/account_management/rbac/permissions#logs_read_archives
+[8]: /ja/account_management/rbac/permissions#logs_write_historical_view
+[9]: /ja/account_management/rbac/permissions#logs_read_index_data
+[10]: /ja/account_management/rbac/permissions#logs_read_data
+[11]: /ja/logs/explorer/live_tail/
