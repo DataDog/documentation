@@ -63,7 +63,7 @@ There are a few different types of offerings that you can list on the Datadog In
 3. SaaS license or subscription (Marketplace only)
 4. Professional services (Marketplace only)
 
-Regardless of the type of offering that you are developing, you will build out a tile on the Marktplace or Integrations page that represents your listing. You can see an example of a Marketplace tile below:
+Regardless of the type of offering that you are developing, a tile that represents your listing needs to be created for either the Marktplace or Integrations page. You can see an example of a Marketplace tile below:
 
 {{< img src="marketplace-tile-example.png" alt="Example Marketplace tile"  >}}
 
