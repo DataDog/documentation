@@ -216,7 +216,7 @@ To do so, inject the `@session.ip` in a filter based on `@network.client.ip`, an
 
 For a RUM dashboard widget displaying insights per session IP and for specific countries, follow this link configuration.
 
-{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Example URL configuration for saved views="width:70%;">}}
+{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Example URL configuration for saved views" style="width:70%;">}}
 
 #### Result
 
