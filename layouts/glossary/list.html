@@ -1,0 +1,21 @@
+{{ define "main" }}
+    {{ $definition_pages := sort .Pages }}
+
+    <h1>{{ .Title }}</h1>
+
+    {{ range $definition_pages }}
+        {{ $all_related_terms := union .Params.synonyms .Params.related_terms }}
+
+        <h4 class="font-24-28">
+            {{ if .Params.linked }}
+                <a href="/glossary/{{ .Params.Title | urlize }}">{{ .Params.Title }}</a>
+            {{ else }}
+                {{ .Params.Title }}
+            {{ end }}
+        </h4>
+        <p class="font-italic">
+            {{ delimit $all_related_terms ", " }}
+        </p>
+        <p>{{ .Params.definition }}</p>
+    {{ end }}
+{{ end }}

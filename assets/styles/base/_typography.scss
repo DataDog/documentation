@@ -89,3 +89,8 @@ small,
 p + blockquote {
   margin-top: 1rem;
 }
+
+// commonly used font-size and line-height combinations
+.font-24-28 {
+  @include font-size-line-height(24px, 28px);
+}
