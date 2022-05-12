@@ -1,28 +1,39 @@
 {{ define "main" }}
     {{ $terms_pages := sort .Pages }}
+    {{ $letters := split "ACD" "" }}
 
-    <h1>{{ .Title }}</h1>
+    <h1 class="pb-0">{{ .Title }}</h1>
+    
+    <div class="row">
+        <div class="col-10 col-md-12 order-md-1 mt-4">
+            {{ range .Pages.ByTitle }}
+                {{ $first_char := substr .Title 0 1 | upper }}
+                {{ $curr_letter := $.Scratch.Get "curr_letter" }}
+                {{ $all_related_terms := union .Params.synonyms .Params.related_terms }}
 
-    {{ range .Pages.ByTitle }}
-        {{ $first_char := substr .Title 0 1 | upper }}
-        {{ $curr_letter := $.Scratch.Get "curr_letter" }}
-        {{ $all_related_terms := union .Params.synonyms .Params.related_terms }}
+                {{ if ne $first_char $curr_letter }}
+                    {{ $.Scratch.Set "curr_letter" $first_char }}
+                    <h2 id="{{ $first_char | anchorize }}" class="mb-3">{{ $first_char }}</h2>
+                {{ end }}
 
-        {{ if ne $first_char $curr_letter }}
-            {{ $.Scratch.Set "curr_letter" $first_char }}
-            <h2 id="{{ $first_char | anchorize }}">{{ $first_char }}</h2>
-        {{ end }}
-
-        <h4 class="font-24-28">
-            {{ if .Params.linked }}
-                <a href="/glossary/{{ .Params.Title | urlize }}">{{ .Params.Title }}</a>
-            {{ else }}
-                {{ .Params.Title }}
+                <h4 class="font-24-28">
+                    {{ if .Params.linked }}
+                        <a href="/glossary/{{ .Params.Title | urlize }}">{{ .Params.Title }}</a>
+                    {{ else }}
+                        {{ .Params.Title }}
+                    {{ end }}
+                </h4>
+                <p class="font-italic">
+                    {{ delimit $all_related_terms ", " }}
+                </p>
+                <p>{{ .Params.description | default .Content }}</p>
             {{ end }}
-        </h4>
-        <p class="font-italic">
-            {{ delimit $all_related_terms ", " }}
-        </p>
-        <p>{{ .Params.description | default .Content }}</p>
-    {{ end }}
+        </div>
+
+        <div class="js-glossary-nav col-2 col-md-12">
+            {{ range $letters }}
+                <a class="btn" role="button" href="#{{ . | lower }}">{{ . }}</a>
+            {{ end }}
+        </div>
+    </div>
 {{ end }}

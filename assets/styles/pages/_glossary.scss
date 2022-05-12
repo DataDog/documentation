@@ -1,0 +1,14 @@
+.glossary {
+    .btn {
+        border-radius: 4px;
+        
+        .active {
+            background: $brand-primary;
+            color: white;
+        }
+        &:hover {
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+            color: $brand-primary;
+        }
+    }
+}
