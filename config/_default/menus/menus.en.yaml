@@ -2877,11 +2877,16 @@ main:
     pre: api
     identifier: api
     weight: 220000
+  - name: Glossary
+    url: glossary/
+    pre: cog-2
+    identifier: glossary
+    weight: 230000
   - name: Account Management
     url: account_management/
     pre: cog-2
     identifier: account_management
-    weight: 230000
+    weight: 240000
   - name: Switching Between Orgs
     url: account_management/org_switching/
     parent: account_management
