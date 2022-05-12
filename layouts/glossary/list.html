@@ -1,9 +1,17 @@
 {{ define "main" }}
-    {{ $definition_pages := sort .Pages }}
+    {{ $terms_pages := sort .Pages }}
 
     <h1>{{ .Title }}</h1>
 
-    {{ range $definition_pages }}
+    {{ range .Pages.ByTitle }}
+        {{ $first_char := substr .Title 0 1 | upper }}
+        {{ $curr_letter := $.Scratch.Get "curr_letter" }}
+
+        {{ if ne $first_char $curr_letter }}
+            {{ $.Scratch.Set "curr_letter" $first_char }}
+            <h2>{{ $first_char }}</h2>
+        {{ end }}
+
         {{ $all_related_terms := union .Params.synonyms .Params.related_terms }}
 
         <h4 class="font-24-28">
