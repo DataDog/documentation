@@ -56,6 +56,8 @@ To instrument your test suite, prefix your test command with `dd-trace ci run`, 
 
 {{% tab "dotnet test" %}}
 
+By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>
+
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
@@ -64,7 +66,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 
 {{% tab "VSTest.Console" %}}
 
-By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options?view=vs-2022">VSTest.Console.exe</a>
+By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>
 
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
