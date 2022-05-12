@@ -596,6 +596,10 @@
     "description": "マルチオーガニゼーションのアカウントのコストを取得します。",
     "summary": "マルチオーガニゼーションのアカウントのコストを取得"
   },
+  "GetUsageLambdaTracedInvocations": {
+    "description": "Lambda Traced Invocations の 1 時間あたり使用量を取得します。",
+    "summary": "Lambda Traced Invocations の 1 時間あたり使用量を取得"
+  },
   "GetUsageObservabilityPipelines": {
     "description": "観測可能性パイプラインの 1 時間あたりの使用量を取得します。",
     "summary": "Get hourly usage for Observability Pipelines"
