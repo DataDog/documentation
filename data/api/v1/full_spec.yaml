@@ -1956,7 +1956,7 @@ components:
           description: 'The type of event being posted. Option examples include nagios,
             hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
 
-            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+            The list of standard source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
           type: string
         tags:
           description: A list of tags to apply to the event.
@@ -8369,7 +8369,7 @@ components:
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
-          description: ID of the SLO that this correction will be applied to.
+          description: ID of the SLO that this correction applies to.
           example: sloId
           type: string
         start:
@@ -8410,7 +8410,7 @@ components:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
         created_at:
-          description: The epoch timestamp of when the correction was created at
+          description: The epoch timestamp of when the correction was created at.
           format: int64
           type: integer
         creator:
@@ -8430,7 +8430,7 @@ components:
           format: int64
           type: integer
         modified_at:
-          description: The epoch timestamp of when the correction was modified at
+          description: The epoch timestamp of when the correction was modified at.
           format: int64
           type: integer
         modifier:
@@ -8439,12 +8439,12 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           nullable: true
           type: string
         slo_id:
-          description: ID of the SLO that this correction will be applied to.
+          description: ID of the SLO that this correction applies to.
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -8515,7 +8515,7 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         start:
@@ -14749,16 +14749,25 @@ components:
         session_count:
           description: Contains the number of browser RUM Lite Sessions.
           format: int64
+          nullable: true
           type: integer
         session_count_android:
           description: Contains the number of mobile RUM Sessions on Android (data
             available beginning December 1, 2020).
           format: int64
+          nullable: true
           type: integer
         session_count_ios:
           description: Contains the number of mobile RUM Sessions on iOS (data available
             beginning December 1, 2020).
           format: int64
+          nullable: true
+          type: integer
+        session_count_reactnative:
+          description: Contains the number of mobile RUM Sessions on React Native
+            (data available beginning May 1, 2022).
+          format: int64
+          nullable: true
           type: integer
       type: object
     UsageRumSessionsResponse:
@@ -15171,6 +15180,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for all organizations
@@ -15488,6 +15502,11 @@ components:
         mobile_rum_session_count_ios_sum:
           description: Shows the sum of all mobile RUM Sessions on iOS over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         mobile_rum_session_count_sum:
@@ -15842,6 +15861,11 @@ components:
         mobile_rum_session_count_ios_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on iOS over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current months for all organizations.
           format: int64
           type: integer
         mobile_rum_units_agg_sum:
@@ -17688,6 +17712,7 @@ paths:
         type: safe
   /api/v1/daily_custom_reports:
     get:
+      deprecated: true
       description: Get daily custom reports.
       operationId: GetDailyCustomReports
       parameters:
@@ -17753,6 +17778,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/daily_custom_reports/{report_id}:
     get:
+      deprecated: true
       description: Get specified daily custom reports.
       operationId: GetSpecifiedDailyCustomReports
       parameters:
@@ -23709,6 +23735,7 @@ paths:
         type: idempotent
   /api/v1/monthly_custom_reports:
     get:
+      deprecated: true
       description: Get monthly custom reports.
       operationId: GetMonthlyCustomReports
       parameters:
@@ -23774,6 +23801,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/monthly_custom_reports/{report_id}:
     get:
+      deprecated: true
       description: Get specified monthly custom reports.
       operationId: GetSpecifiedMonthlyCustomReports
       parameters:
@@ -25169,7 +25197,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
-      description: Update the specified SLO correction object object.
+      description: Update the specified SLO correction object.
       operationId: UpdateSLOCorrection
       parameters:
       - description: The ID of the SLO correction object.
@@ -27379,6 +27407,7 @@ paths:
         type: safe
   /api/v1/usage/attribution:
     get:
+      deprecated: true
       description: Get Usage Attribution.
       operationId: GetUsageAttribution
       parameters:
@@ -27638,8 +27667,7 @@ paths:
         type: safe
   /api/v1/usage/ci-app:
     get:
-      description: Get hourly usage for CI Visibility (Tests, Pipeline, Combo, and
-        Spans).
+      description: Get hourly usage for CI Visibility (Tests, Pipeline, and Spans).
       operationId: GetUsageCIApp
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`

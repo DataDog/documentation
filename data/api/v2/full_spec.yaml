@@ -1689,11 +1689,13 @@ components:
       enum:
       - app_sec_host_count
       - observability_pipelines_bytes_processed
+      - lambda_traced_invocations_count
       example: observability_pipelines_bytes_processed
       type: string
       x-enum-varnames:
       - APP_SEC_HOST_COUNT
       - OBSERVABILITY_PIPELINES_BYTES_PROCESSSED
+      - LAMBDA_TRACED_INVOCATIONS_COUNT
     IdPMetadataFormData:
       description: The form data submitted to upload IdP metadata
       properties:
@@ -6785,6 +6787,15 @@ components:
         type:
           $ref: '#/components/schemas/UsageTimeSeriesType'
       type: object
+    UsageLambdaTracedInvocationsResponse:
+      description: Lambda Traced Invocations usage response.
+      properties:
+        data:
+          description: Response containing Lambda Traced Invocations usage.
+          items:
+            $ref: '#/components/schemas/UsageDataObject'
+          type: array
+      type: object
     UsageObservabilityPipelinesResponse:
       description: Observability Pipelines usage response.
       properties:
@@ -7625,14 +7636,6 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/AuthNMappingsSort'
-      - description: Include additional information in the response.
-        in: query
-        name: include
-        required: false
-        schema:
-          items:
-            type: string
-          type: array
       - description: Filter all mappings by the given string.
         in: query
         name: filter
@@ -12862,6 +12865,65 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 39
+      x-undo:
+        type: safe
+  /api/v2/usage/lambda_traced_invocations:
+    get:
+      description: Get hourly usage for Lambda Traced Invocations.
+      operationId: GetUsageLambdaTracedInvocations
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageLambdaTracedInvocationsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for Lambda Traced Invocations
+      tags:
+      - Usage Metering
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v2/usage/observability_pipelines:

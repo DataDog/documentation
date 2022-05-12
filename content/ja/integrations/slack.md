@@ -262,7 +262,7 @@ Datadog Slack アプリは、以下の OAuth Scope を必要とします。詳�
 | `reactions:write`        | インシデントタイムラインにメッセージが追加されたことを示します。                                        |
 | `team:read`              | Datadog の Slack インテグレーションタイルで、ワークスペースの状態を常に最新に保つことができます。 |
 | `users:read`             | タイムゾーンに合わせてカスタマイズされたレスポンス。                                                  |
-| `users:read.email`       | Slack 以外で作成されたインシデントのメッセージング/ユーザーを追加します。                          |
+| `users:read.email`       | Slack 以外で作成されたインシデントのメッセージ/ユーザーを追加します。                           |
 | `workflow.steps:execute` | ワークフローのステップからウィジェットを共有します。                                                     |
 
 ### ユーザトークンのスコープ

@@ -7278,13 +7278,15 @@
         "description": "Usage type that is being measured.",
         "enum": [
           "app_sec_host_count",
-          "observability_pipelines_bytes_processed"
+          "observability_pipelines_bytes_processed",
+          "lambda_traced_invocations_count"
         ],
         "example": "observability_pipelines_bytes_processed",
         "type": "string",
         "x-enum-varnames": [
           "APP_SEC_HOST_COUNT",
-          "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+          "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED",
+          "LAMBDA_TRACED_INVOCATIONS_COUNT"
         ]
       },
       "IdPMetadataFormData": {
@@ -33604,13 +33606,15 @@
                       "description": "Usage type that is being measured.",
                       "enum": [
                         "app_sec_host_count",
-                        "observability_pipelines_bytes_processed"
+                        "observability_pipelines_bytes_processed",
+                        "lambda_traced_invocations_count"
                       ],
                       "example": "observability_pipelines_bytes_processed",
                       "type": "string",
                       "x-enum-varnames": [
                         "APP_SEC_HOST_COUNT",
-                        "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+                        "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED",
+                        "LAMBDA_TRACED_INVOCATIONS_COUNT"
                       ]
                     }
                   },
@@ -33680,13 +33684,15 @@
             "description": "Usage type that is being measured.",
             "enum": [
               "app_sec_host_count",
-              "observability_pipelines_bytes_processed"
+              "observability_pipelines_bytes_processed",
+              "lambda_traced_invocations_count"
             ],
             "example": "observability_pipelines_bytes_processed",
             "type": "string",
             "x-enum-varnames": [
               "APP_SEC_HOST_COUNT",
-              "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+              "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED",
+              "LAMBDA_TRACED_INVOCATIONS_COUNT"
             ]
           }
         },
@@ -33735,13 +33741,15 @@
                 "description": "Usage type that is being measured.",
                 "enum": [
                   "app_sec_host_count",
-                  "observability_pipelines_bytes_processed"
+                  "observability_pipelines_bytes_processed",
+                  "lambda_traced_invocations_count"
                 ],
                 "example": "observability_pipelines_bytes_processed",
                 "type": "string",
                 "x-enum-varnames": [
                   "APP_SEC_HOST_COUNT",
-                  "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+                  "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED",
+                  "LAMBDA_TRACED_INVOCATIONS_COUNT"
                 ]
               }
             },
@@ -33762,6 +33770,92 @@
             "x-enum-varnames": [
               "USAGE_TIMESERIES"
             ]
+          }
+        },
+        "type": "object"
+      },
+      "UsageLambdaTracedInvocationsResponse": {
+        "description": "Lambda Traced Invocations usage response.",
+        "properties": {
+          "data": {
+            "description": "Response containing Lambda Traced Invocations usage.",
+            "items": {
+              "description": "Usage data.",
+              "properties": {
+                "attributes": {
+                  "description": "Usage attributes data.",
+                  "properties": {
+                    "org_name": {
+                      "description": "The organization name.",
+                      "type": "string"
+                    },
+                    "product_family": {
+                      "description": "The product for which usage is being reported.",
+                      "type": "string"
+                    },
+                    "public_id": {
+                      "description": "The organization public ID.",
+                      "type": "string"
+                    },
+                    "timeseries": {
+                      "description": "List of usage data reported for each requested hour.",
+                      "items": {
+                        "description": "Usage timeseries data.",
+                        "properties": {
+                          "timestamp": {
+                            "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "value": {
+                            "description": "Contains the number measured for the given usage_type during the hour.",
+                            "format": "int64",
+                            "nullable": true,
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "usage_type": {
+                      "description": "Usage type that is being measured.",
+                      "enum": [
+                        "app_sec_host_count",
+                        "observability_pipelines_bytes_processed",
+                        "lambda_traced_invocations_count"
+                      ],
+                      "example": "observability_pipelines_bytes_processed",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "APP_SEC_HOST_COUNT",
+                        "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED",
+                        "LAMBDA_TRACED_INVOCATIONS_COUNT"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "Unique ID of the response.",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "usage_timeseries",
+                  "description": "Type of usage data.",
+                  "enum": [
+                    "usage_timeseries"
+                  ],
+                  "example": "usage_timeseries",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "USAGE_TIMESERIES"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -33814,13 +33908,15 @@
                       "description": "Usage type that is being measured.",
                       "enum": [
                         "app_sec_host_count",
-                        "observability_pipelines_bytes_processed"
+                        "observability_pipelines_bytes_processed",
+                        "lambda_traced_invocations_count"
                       ],
                       "example": "observability_pipelines_bytes_processed",
                       "type": "string",
                       "x-enum-varnames": [
                         "APP_SEC_HOST_COUNT",
-                        "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+                        "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED",
+                        "LAMBDA_TRACED_INVOCATIONS_COUNT"
                       ]
                     }
                   },
@@ -41372,18 +41468,6 @@
                 "SAML_ASSERTION_ATTRIBUTE_VALUE_ASCENDING",
                 "SAML_ASSERTION_ATTRIBUTE_VALUE_DESCENDING"
               ]
-            }
-          },
-          {
-            "description": "Include additional information in the response.",
-            "in": "query",
-            "name": "include",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
             }
           },
           {
@@ -83153,13 +83237,15 @@
                                 "description": "Usage type that is being measured.",
                                 "enum": [
                                   "app_sec_host_count",
-                                  "observability_pipelines_bytes_processed"
+                                  "observability_pipelines_bytes_processed",
+                                  "lambda_traced_invocations_count"
                                 ],
                                 "example": "observability_pipelines_bytes_processed",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "APP_SEC_HOST_COUNT",
-                                  "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+                                  "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED",
+                                  "LAMBDA_TRACED_INVOCATIONS_COUNT"
                                 ]
                               }
                             },
@@ -83502,6 +83588,223 @@
         }
       }
     },
+    "/api/v2/usage/lambda_traced_invocations": {
+      "get": {
+        "description": "Get hourly usage for Lambda Traced Invocations.",
+        "operationId": "GetUsageLambdaTracedInvocations",
+        "parameters": [
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.",
+            "in": "query",
+            "name": "start_hr",
+            "required": true,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending\n**before** this hour.",
+            "in": "query",
+            "name": "end_hr",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "Lambda Traced Invocations usage response.",
+                  "properties": {
+                    "data": {
+                      "description": "Response containing Lambda Traced Invocations usage.",
+                      "items": {
+                        "description": "Usage data.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Usage attributes data.",
+                            "properties": {
+                              "org_name": {
+                                "description": "The organization name.",
+                                "type": "string"
+                              },
+                              "product_family": {
+                                "description": "The product for which usage is being reported.",
+                                "type": "string"
+                              },
+                              "public_id": {
+                                "description": "The organization public ID.",
+                                "type": "string"
+                              },
+                              "timeseries": {
+                                "description": "List of usage data reported for each requested hour.",
+                                "items": {
+                                  "description": "Usage timeseries data.",
+                                  "properties": {
+                                    "timestamp": {
+                                      "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+                                      "format": "date-time",
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "description": "Contains the number measured for the given usage_type during the hour.",
+                                      "format": "int64",
+                                      "nullable": true,
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "usage_type": {
+                                "description": "Usage type that is being measured.",
+                                "enum": [
+                                  "app_sec_host_count",
+                                  "observability_pipelines_bytes_processed",
+                                  "lambda_traced_invocations_count"
+                                ],
+                                "example": "observability_pipelines_bytes_processed",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "APP_SEC_HOST_COUNT",
+                                  "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED",
+                                  "LAMBDA_TRACED_INVOCATIONS_COUNT"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the response.",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "usage_timeseries",
+                            "description": "Type of usage data.",
+                            "enum": [
+                              "usage_timeseries"
+                            ],
+                            "example": "usage_timeseries",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "USAGE_TIMESERIES"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden - User is not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "usage_read"
+            ]
+          }
+        ],
+        "summary": "Get hourly usage for Lambda Traced Invocations",
+        "tags": [
+          "Usage Metering"
+        ],
+        "x-menu-order": 38,
+        "x-undo": {
+          "type": "safe"
+        }
+      }
+    },
     "/api/v2/usage/observability_pipelines": {
       "get": {
         "description": "Get hourly usage for Observability Pipelines.",
@@ -83580,13 +83883,15 @@
                                 "description": "Usage type that is being measured.",
                                 "enum": [
                                   "app_sec_host_count",
-                                  "observability_pipelines_bytes_processed"
+                                  "observability_pipelines_bytes_processed",
+                                  "lambda_traced_invocations_count"
                                 ],
                                 "example": "observability_pipelines_bytes_processed",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "APP_SEC_HOST_COUNT",
-                                  "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED"
+                                  "OBSERVABILITY_PIPELINES_BYTES_PROCESSSED",
+                                  "LAMBDA_TRACED_INVOCATIONS_COUNT"
                                 ]
                               }
                             },
