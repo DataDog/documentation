@@ -63,7 +63,7 @@ As you expand your search filter, the issue details list above **Select the aler
 2. Select **Web and Mobile Apps** or **Backend Services** and choose to monitor over a count or [measure][1]. 
    - Monitor over a unique count based on the issue ID. 
    - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-3. Construct a search query using the same logic as a [RUM Explorer search][2] for the issues’ error occurrences.
+3. Construct a search query using the same logic as a [RUM Explorer search][2] or [APM Explorer search][3] for the issues’ error occurrences.
 4. Configure the alerting grouping strategy (optional).
    - Simple-Alert: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. If the query has a `group by` and you select **Simple-Alert**, you get one alert when one or multiple groups’ values breach the threshold. You may use this strategy to reduce notification noise.
    - Multi-Alert: Multiple alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you can group a query by `@browser.name` to receive a separate alert for each browser when the number of errors is high.
@@ -71,6 +71,7 @@ As you expand your search filter, the issue details list above **Select the aler
 
 [1]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
 [2]: /real_user_monitoring/explorer/search/
+[3]: /tracing/trace_explorer/?tab=listview#filtering
 {{% /tab %}} 
 {{< /tabs >}}
 
