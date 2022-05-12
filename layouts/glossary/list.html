@@ -6,13 +6,12 @@
     {{ range .Pages.ByTitle }}
         {{ $first_char := substr .Title 0 1 | upper }}
         {{ $curr_letter := $.Scratch.Get "curr_letter" }}
+        {{ $all_related_terms := union .Params.synonyms .Params.related_terms }}
 
         {{ if ne $first_char $curr_letter }}
             {{ $.Scratch.Set "curr_letter" $first_char }}
-            <h2>{{ $first_char }}</h2>
+            <h2 id="{{ $first_char | anchorize }}">{{ $first_char }}</h2>
         {{ end }}
-
-        {{ $all_related_terms := union .Params.synonyms .Params.related_terms }}
 
         <h4 class="font-24-28">
             {{ if .Params.linked }}
@@ -24,6 +23,6 @@
         <p class="font-italic">
             {{ delimit $all_related_terms ", " }}
         </p>
-        <p>{{ .Params.definition }}</p>
+        <p>{{ .Params.description | default .Content }}</p>
     {{ end }}
 {{ end }}

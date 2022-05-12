@@ -1,4 +1,5 @@
 ---
 title: Glossary
-disable_toc: true
+cascade:
+    disable_toc: true
 ---
