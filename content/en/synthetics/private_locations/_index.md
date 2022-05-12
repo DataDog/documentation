@@ -24,7 +24,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-If you would like to be added to the Windows Private Location beta, which also allows you to run IE11 browser tests, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+If you would like to be added to the Windows Private Location beta, which allows you to run IE11 browser tests, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 </div>
 
 ## Overview
