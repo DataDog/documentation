@@ -2,7 +2,6 @@
 
 RUN_SERVER=${RUN_SERVER:=false}
 GITHUB_TOKEN=${GITHUB_TOKEN:=false}
-RUN_WEBPACK=${RUN_WEBPACK:=true}
 RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 LOCAL=${LOCAL:=False}
@@ -36,16 +35,13 @@ if [ ${RUN_SERVER} = true ]; then
 		placehold_translations.py -c "config/_default/languages.yaml"
 	fi
 
-	# webpack
-	if [ ${RUN_WEBPACK} = true ]; then
-		echo "Checking that node modules are installed and up-to-date."
-    npm --global install yarn && \
-    npm cache clean --force && yarn install --frozen-lockfile
-    echo "Starting webpack and hugo build."
+  echo "Checking that node modules are installed and up-to-date."
+  npm --global install yarn && \
+  npm cache clean --force && yarn install --frozen-lockfile
+  echo "Starting webpack and hugo build."
 	yarn run start
 
-    sleep 5
-	fi
+  sleep 5
 
 else
 	exit 0
