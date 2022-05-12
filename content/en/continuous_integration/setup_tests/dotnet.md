@@ -64,7 +64,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 
 {{% tab "VSTest.Console" %}}
 
-By using [VSTest.Console.exe][11]
+By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options?view=vs-2022">VSTest.Console.exe</a>
 
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
@@ -218,4 +218,3 @@ Additionally, configure which [Datadog site][6] to which you want to send data. 
 [8]: https://dtdg.co/dd-trace-dotnet-linux-x64
 [9]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
 [10]: https://github.com/DataDog/dd-trace-dotnet/releases
-[11]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options?view=vs-2022
