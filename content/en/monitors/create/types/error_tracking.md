@@ -57,9 +57,9 @@ As you expand your search filter, the Count graph above **Select the alerting co
 
 {{% tab "New Issue" %}}
 
-As you expand your search filter, the issue details list above **Select the alerting condition** updates.
+As you expand your search filter, the issue details list above **Select the alerting condition** updates. The list displays older issues that are considered new in larger time frames such as the past 24 hours or the past week. 
 
-1. Select or input a custom time period for an issue to be considered new after its first occurrence.
+1. Select or input a custom time period for the monitor to consider an issue as new after its first occurrence. The selected threshold is evaluated in the given time frame. After the specific time period, the monitor stops alerting and turns green.
 2. Select **Web and Mobile Apps** or **Backend Services** and choose to monitor over a count or [measure][1]. 
    - Monitor over a unique count based on the issue ID. 
    - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
@@ -76,12 +76,14 @@ As you expand your search filter, the issue details list above **Select the aler
 
 ### Set alert conditions
 
+For **Web and Mobile Apps**, select between **Count** and **New Issue**.
+
 #### Count
 
 {{< tabs >}}
 {{% tab "Error Occurrences" %}}
 
-Triggers when the metric is `above` or `above or equal to`.
+Triggers when the error count is `above` or `above or equal to`.
 
 {{% /tab %}}
 {{% tab "Impacted Users" %}}
@@ -98,21 +100,13 @@ Triggers when the number of impacted session IDs is `above` or `above or equal t
 
 #### New Issue
 
-{{< tabs >}}
+Triggers when the number of impacted session IDs is `above` or `above or equal to`. An alert is triggered whenever a metric crosses a threshold.
 
-{{% tab "Web and Mobile Apps" %}}
+For **Backend Services**, select **New Issue**.
 
-Triggers when the number of impacted session IDs is `above` or `above or equal to`.
+#### New Issue
 
-{{% /tab %}}
-{{% tab "Backend Services" %}}
-
-Triggers when the metric is `above` or `above or equal to`.
-
-{{% /tab %}} 
-{{< /tabs >}}
-
-An alert is triggered whenever a metric crosses a threshold.
+Triggers when the error count is `above` or `above or equal to`. An alert is triggered whenever a metric crosses a threshold.
 
 - The threshold during the last `5 minutes`, `15 minutes`. `1 hour`, or `custom` to set a value between 5 minutes and 48 hours. 
 - Alerting threshold `<NUMBER>`.
