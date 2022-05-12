@@ -97,6 +97,15 @@ For example, setting `service` in your config file is the recommended [Agent set
 
 To better unify your environment, it is also recommended to configure the `env` tag in the Agent. To learn more, see [Unified Service Tagging][27].
 
+By default, the metrics reported by integrations include tags autodiscovered from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags that refer to the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`:
+```yaml
+init_config:
+
+ignore_autodiscovery_tags: true
+
+# Rest of the config here
+```
+
 ### Validation
 
 To validate your Agent and integrations configuration, [run the Agent's `status` subcommand][28], and look for new configuration under the Checks section.
@@ -164,7 +173,7 @@ metrics
 : The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
 
 parameters
-: Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed. 
+: Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed.
 
 service check
 : Service checks are a type of monitor used to track the uptime status of the service. For more information, see the [Service checks guide][44].
