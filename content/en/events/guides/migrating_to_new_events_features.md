@@ -121,7 +121,7 @@ Show events from GitHub or Chef
 : Legacy syntax</br>
 `sources:github,chef`
 : New syntax </br>
-`source:(github OR chef)`
+`source:(github AND chef)`
 
 Show events tagged with `env-prod`
 : Legacy syntax</br>
@@ -131,7 +131,7 @@ Show events tagged with `env-prod`
 
 Show events tagged with `#env-prod` or `#db`
 : Legacy syntax</br>
-`tags:env-prod,db`, `tags:env-prod OR db`
+`tags:env-prod OR db`
 : New syntax </br>
 `tags:(env-prod OR db)`
 
