@@ -8,7 +8,8 @@ To search your monitors, construct a query using the facet panel on the left and
 
 ## Search bar
 
-Use simple text to search across all monitor titles and notification messages. For example, a search of `postgresql` returns all monitors with `postgresql` anywhere in the title or notification message.
+Use simple text to search across all monitor titles and notification messages. For example, a search of `*postgresql*` returns all monitors with `postgresql` anywhere in the title or 
+notification message.
 
 To limit the search, specify the field name:
 
