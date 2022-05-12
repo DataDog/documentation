@@ -1,6 +1,5 @@
 {{ define "main" }}
-    {{ $terms_pages := sort .Pages }}
-    {{ $letters := split "ACD" "" }}
+    {{ $letters := slice }}
 
     <h1 class="pb-0">{{ .Title }}</h1>
     
@@ -13,6 +12,7 @@
 
                 {{ if ne $first_char $curr_letter }}
                     {{ $.Scratch.Set "curr_letter" $first_char }}
+                    {{ $letters = $letters | append $first_char }}
                     <h2 id="{{ $first_char | anchorize }}" class="mb-3">{{ $first_char }}</h2>
                 {{ end }}
 
