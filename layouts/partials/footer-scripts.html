@@ -2,6 +2,10 @@
     <script src="{{ (index $.Site.Data.manifest "search.js") | relURL}}"></script>
 {{ end }}
 
+{{ if and (eq .File.BaseFileName "_index") (eq .File.ContentBaseName "glossary") }}
+    <script src="{{ (index $.Site.Data.manifest "glossary.js") | relURL}}"></script>
+{{ end }}
+
 {{ if .Params.footer_scripts }}
     {{ range $k, $v := .Params.footer_scripts }}
 
