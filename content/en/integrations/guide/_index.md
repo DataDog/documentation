@@ -5,8 +5,6 @@ disable_sidebar: true
 private: true
 ---
 
-Integration Guides:
-
 {{< whatsnext desc="General guides:" >}}
     {{< nextlink href="integrations/guide/requests" tag="documentation" >}}Request Datadog Integrations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-portal" tag="Azure" >}}Datadog in the Azure Portal{{< /nextlink >}}
