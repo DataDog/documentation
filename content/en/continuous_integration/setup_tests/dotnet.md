@@ -52,9 +52,27 @@ Install or update the `dd-trace` command using one of the following ways:
 
 To instrument your test suite, prefix your test command with `dd-trace ci run`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
 
+{{< tabs >}}
+
+{{% tab "dotnet test" %}}
+
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "VSTest.Console" %}}
+
+By using [VSTest.Console.exe][11]
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 All tests are automatically instrumented.
 
@@ -200,3 +218,4 @@ Additionally, configure which [Datadog site][6] to which you want to send data. 
 [8]: https://dtdg.co/dd-trace-dotnet-linux-x64
 [9]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
 [10]: https://github.com/DataDog/dd-trace-dotnet/releases
+[11]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options?view=vs-2022
