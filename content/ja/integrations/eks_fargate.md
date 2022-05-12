@@ -152,6 +152,9 @@ metadata:
  name: "<APPLICATION_NAME>"
  namespace: default
 spec:
+ selector:
+   matchLabels:
+     app: "<APPLICATION_NAME>"
  replicas: 1
  template:
    metadata:
@@ -252,30 +255,33 @@ clusterAgent:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: "<アプリケーション名>"
+ name: "<APPLICATION_NAME>"
  namespace: default
 spec:
  replicas: 1
+ selector:
+   matchLabels:
+     app: "<APPLICATION_NAME>"
  template:
    metadata:
      labels:
-       app: "<アプリケーション名>"
-     name: "<ポッド名>"
+       app: "<APPLICATION_NAME>"
+     name: "<POD_NAME>"
      annotations:
-      ad.datadoghq.com/<CONTAINER_NAME>.check_names: '[<チェック名>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_コンフィグ>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<インスタンス_コンフィグ>]'
+      ad.datadoghq.com/<CONTAINER_NAME>.check_names: '[<CHECK_NAME>]'
+      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
+      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
    spec:
      serviceAccountName: datadog-agent
      containers:
-     - name: "<アプリケーション名>"
-       image: "<アプリケーションイメージ>"
+     - name: "<APPLICATION_NAME>"
+       image: "<APPLICATION_IMAGE>"
      ## Agent をサイドカーとして実行
      - image: datadog/agent
        name: datadog-agent
        env:
        - name: DD_API_KEY
-         value: "<DATADOG_API_キー>"
+         value: "<YOUR_DATADOG_API_KEY>"
          ## DD_SITE を "datadoghq.eu" に設定して
          ## Agent データを Datadog EU サイトに送信
        - name: DD_SITE
@@ -309,20 +315,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: "<アプリケーション名>"
+ name: "<APPLICATION_NAME>"
  namespace: default
 spec:
  replicas: 1
+ selector:
+   matchLabels:
+     app: "<APPLICATION_NAME>"
  template:
    metadata:
      labels:
-       app: "<アプリケーション名>"
-     name: "<ポッド名>"
+       app: "<APPLICATION_NAME>"
+     name: "<POD_NAME>"
    spec:
      serviceAccountName: datadog-agent
      containers:
-     - name: "<アプリケーション名>"
-       image: "<アプリケーションイメージ>"
+     - name: "<APPLICATION_NAME>"
+       image: "<APPLICATION_IMAGE>"
      ## Agent をサイドカーとして実行
      - image: datadog/agent
        name: datadog-agent
@@ -333,7 +342,7 @@ spec:
           protocol: UDP
        env:
        - name: DD_API_KEY
-         value: "<DATADOG_API_キー>"
+         value: "<YOUR_DATADOG_API_KEY>"
          ## DD_SITE を "datadoghq.eu" に設定して
          ## Agent データを Datadog EU サイトに送信
        - name: DD_SITE
@@ -402,20 +411,23 @@ Agent コンテナにコンテナポート `8126` をセットアップして、
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: "<アプリケーション名>"
+ name: "<APPLICATION_NAME>"
  namespace: default
 spec:
  replicas: 1
+ selector:
+   matchLabels:
+     app: "<APPLICATION_NAME>"
  template:
    metadata:
      labels:
-       app: "<アプリケーション名>"
-     name: "<ポッド名>"
+       app: "<APPLICATION_NAME>"
+     name: "<POD_NAME>"
    spec:
      serviceAccountName: datadog-agent
      containers:
-     - name: "<アプリケーション名>"
-       image: "<アプリケーションイメージ>"
+     - name: "<APPLICATION_NAME>"
+       image: "<APPLICATION_IMAGE>"
      ## Agent をサイドカーとして実行
      - image: datadog/agent
        name: datadog-agent
@@ -426,7 +438,7 @@ spec:
           protocol: TCP
        env:
        - name: DD_API_KEY
-         value: "<DATADOG_API_キー>"
+         value: "<YOUR_DATADOG_API_KEY>"
          ## DD_SITE を "datadoghq.eu" に設定して
          ## Agent データを Datadog EU サイトに送信
        - name: DD_SITE
