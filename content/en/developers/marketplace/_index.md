@@ -65,7 +65,7 @@ There are a few different types of offerings that you can list on the Datadog In
 
 Regardless of the type of offering that you are developing, a tile that represents your listing needs to be created for either the Marktplace or Integrations page. You can see an example of a Marketplace tile below:
 
-{{< img src="marketplace-tile-example.png" alt="Example Marketplace tile"  >}}
+{{< img src="developers/marketplace/marketplace-tile-example.png" alt="Example Marketplace tile"  >}}
 
 Depending on the use case, choose the approach that makes the most sense for your offering. 
 
