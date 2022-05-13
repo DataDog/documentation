@@ -259,7 +259,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     ```shell
     echo -n '<Your API key>' | base64
     ```
-4. In the `secret-cluster-agent-token.yaml` manifest, replace `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` with a random string encoded in base64. Length of this string must be 32 or more. To get the base64 version of it, you can run:
+4. In the `secret-cluster-agent-token.yaml` manifest, replace `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` with a random string encoded in base64. This string must be 32 or more chars long. To get the base64 version of it, you can run:
 
     ```shell
     echo -n 'Random string' | base64
