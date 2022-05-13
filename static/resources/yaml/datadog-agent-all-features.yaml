@@ -5,7 +5,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: "datadog"
-    chart: "datadog-2.30.16"
+    chart: "datadog-2.33.5"
     heritage: "Helm"
     release: "datadog"
   name: datadog-cluster-agent
@@ -70,6 +70,7 @@ data:
       max_tracked_connections: 131072
       conntrack_max_state_size: 131072
       enable_runtime_compiler: false
+      enable_kernel_header_download: false
       runtime_compiler_output_dir: /var/tmp/datadog-agent/system-probe/build
       kernel_header_download_dir: /var/tmp/datadog-agent/system-probe/kernel-headers
       apt_config_dir: /host/etc/apt
@@ -232,6 +233,7 @@ data:
             "setgid32",
             "setgroups",
             "setgroups32",
+            "setitimer",
             "setns",
             "setrlimit",
             "setsid",
@@ -278,6 +280,22 @@ data:
             }
           ],
           "comment": "",
+          "includes": {},
+          "excludes": {}
+        },
+        {
+          "names": [
+            "kill"
+          ],
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 1,
+              "value": 0,
+              "op": "SCMP_CMP_EQ"
+            }
+          ],
+          "comment": "allow process detection via kill",
           "includes": {},
           "excludes": {}
         }
@@ -332,6 +350,7 @@ rules:
       - configmaps
     resourceNames:
       - datadogtoken # Kubernetes event collection state
+      - datadogtoken # Kept for backward compatibility with agent <7.37.0
     verbs:
       - get
       - update
@@ -341,6 +360,7 @@ rules:
       - configmaps
     resourceNames:
       - datadog-leader-election # Leader election token
+      - datadog-leader-election # Kept for backward compatibility with agent <7.37.0
     verbs:
       - get
       - update
@@ -508,6 +528,7 @@ metadata:
   namespace: default
   labels: {}
 spec:
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: datadog
@@ -520,10 +541,12 @@ spec:
         container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
         container.seccomp.security.alpha.kubernetes.io/system-probe: localhost/system-probe
     spec:
+      securityContext:
+        runAsUser: 0
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -647,7 +670,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -713,7 +736,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -788,7 +811,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -858,7 +881,7 @@ spec:
               mountPropagation: None
               readOnly: true
         - name: security-agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -945,7 +968,7 @@ spec:
               subPath: system-probe.yaml
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -955,7 +978,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -993,7 +1016,7 @@ spec:
               value: "yes"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -1100,6 +1123,7 @@ metadata:
   labels: {}
 spec:
   replicas: 1
+  revisionHistoryLimit: 10
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -1118,7 +1142,7 @@ spec:
       serviceAccountName: datadog-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:1.18.0"
+          image: "gcr.io/datadoghq/cluster-agent:1.19.0"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:
@@ -1147,6 +1171,10 @@ spec:
               value: "INFO"
             - name: DD_LEADER_ELECTION
               value: "true"
+            - name: DD_LEADER_LEASE_NAME
+              value: datadog-leader-election
+            - name: DD_CLUSTER_AGENT_TOKEN_NAME
+              value: datadogtoken
             - name: DD_COLLECT_KUBERNETES_EVENTS
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
