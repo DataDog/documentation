@@ -31,7 +31,7 @@ To create an Error Tracking monitor in Datadog, navigate to [**Monitors** > **Ne
 
 Alerts are grouped by issue ID and are based on error volume.
 
-Choose **Count** to alert on issues with a high number of errors and **New Issue** to detect additional issues.
+Choose **Count** to alert on issues with a high number of errors and **New Issue** to alert on issues that occur for the first time.
 
 ### Define the search query
 
@@ -57,12 +57,12 @@ As you expand your search filter, the Count graph above **Select the alerting co
 
 {{% tab "New Issue" %}}
 
-As you expand your search filter, the issue details list above **Select the alerting condition** updates. The list displays older issues that are considered new in larger time frames such as the past 24 hours or the past week. 
+As you expand your search filter, the issue details list above **Select the alerting condition** updates. The list displays older issues that were considered new in historic time frames such as the past 24 hours or the past week. 
 
 1. Select or input a custom time period for the monitor to consider an issue as new after its first occurrence. The selected threshold is evaluated in the given time frame. After the specific time period, the monitor stops alerting and turns green.
 2. Select **Web and Mobile Apps** or **Backend Services** and choose to monitor over a count or [measure][1]. 
    - Monitor over a unique count based on the issue ID. 
-   - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+   - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM or APM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Construct a search query using the same logic as a [RUM Explorer search][2] or [APM Explorer search][3] for the issues’ error occurrences.
 4. Configure the alerting grouping strategy (optional).
    - Simple-Alert: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. If the query has a `group by` and you select **Simple-Alert**, you get one alert when one or multiple groups’ values breach the threshold. You may use this strategy to reduce notification noise.
