@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/tracing/getting_further/
+- /ja/tracing/guide/ecommerce_and_retail_use_cases/
 kind: ガイド
 private: true
 title: トレースガイド

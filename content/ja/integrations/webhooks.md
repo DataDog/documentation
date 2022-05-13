@@ -1,22 +1,23 @@
 ---
-"categories":
-- "notification"
-"ddtype": "crawler"
-"dependencies": []
-"description": 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
-"doc_link": "https://docs.datadoghq.com/integrations/webhooks/"
-"draft": false
-"git_integration_title": "Webhooks"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Webhooks"
-"is_public": true
-"kind": "インテグレーション"
-"manifest_version": "1.0"
-"name": "Webhooks"
-"public_title": 「Datadog-Webhooks インテグレーション」
-"short_description": 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
-"version": "1.0"
+categories:
+- notification
+ddtype: crawler
+dependencies: []
+description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
+doc_link: https://docs.datadoghq.com/integrations/webhooks/
+draft: false
+git_integration_title: Webhooks
+has_logo: true
+integration_id: ''
+integration_title: Webhooks
+integration_version: ''
+is_public: true
+kind: インテグレーション
+manifest_version: '1.0'
+name: Webhooks
+public_title: 「Datadog-Webhooks インテグレーション」
+short_description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
+version: '1.0'
 ---
 
 ## 概要
@@ -36,7 +37,9 @@ Webhook を使用するには、Webhook をトリガーするメトリクスア�
 
 **注**: カスタムヘッダーは JSON フォーマットである必要があります。
 
-ペイロードフィールドに独自のペイロードを指定して、リクエストに独自のカスタムフィールドを追加することもできます。ペイロードを URL エンコードする場合は、**Encode as form** をオンにし、JSON 形式でペイロードを指定します。以下の変数を使用できます。
+ペイロードフィールドに独自のペイロードを指定して、リクエストに独自のカスタムフィールドを追加することもできます。ペイロードを URL エンコードする場合は、**Encode as form** をオンにし、JSON 形式でペイロードを指定します。以下のセクションの変数を使用できます。
+
+### 変数
 
 $AGGREG_KEY
 : 一緒に属するイベントを集約するための ID。<br />
@@ -126,6 +129,12 @@ $INCIDENT_PUBLIC_ID
 $INCIDENT_TITLE
 : インシデントのタイトル。
 
+$INCIDENT_SEVERITY
+: インシデントの重大度。
+
+$INCIDENT_STATUS
+: インシデントのステータス。
+
 $INCIDENT_URL
 : インシデントの URL。<br />
 **例**: `https://app.datadoghq.com/incidents/1`
@@ -205,6 +214,31 @@ $SYNTHETICS_TEST_NAME
 $SYNTHETICS_FIRST_FAILING_STEP_NAME 
 : Synthetics テストの最初の失敗したステップの名前。
 
+$SYNTHETICS_SUMMARY
+: Synthetic テストの詳細の概要<br />
+**例**:
+```
+{
+  "result_id": "1871796423670117676",
+  "test_type": "browser",
+  "test_name": "Test name",
+  "date": "Nov 05, 2021, 09:49AM UTC",
+  "test_url": "https://app.datadoghq.com/synthetics/edit/apc-ki3-jwx",
+  "result_url": "https://app.datadoghq.com/synthetics/details/anc-ki2-jwx?resultId=1871796423670117676",
+  "location": "Frankfurt (AWS)",
+  "browser": "Chrome",
+  "device": "Laptop Large"
+  "failing_steps": [
+    {
+      "error_message": "Error: Element's content should contain given value.",
+      "name": "Test span #title content",
+      "is_critical": true,
+      "number": "3.1"
+    }
+  ],
+}
+```
+
 $TAGS
 : イベントタグのカンマ区切りリスト。<br />
 **例**: `monitor, name:myService, role:computing-node`
@@ -273,4 +307,3 @@ $USERNAME
 "Encode as form" チェックボックスはオンにしないでください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/webhooks
-

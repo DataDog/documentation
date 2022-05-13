@@ -1,8 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
+- cloud
+- aws
+- ログの収集
 ddtype: crawler
 dependencies: []
 description: Amazon Step Functions のキーメトリクスを追跡
@@ -21,6 +21,7 @@ public_title: Datadog-Amazon Step Functions インテグレーション
 short_description: Amazon Step Functions のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Step Functions (States) では、ビジュアルなワークフローを使用して、分散アプリケーションおよびマイクロサービスのコンポーネントを調整できます。
@@ -45,23 +46,12 @@ states:DescribeStateMachine
 
 #### AWS Lambda メトリクスの増強
 
-Step Functions ステートが Lambda 関数である場合、このインテグレーションをインストールすると、Lambda メトリクスに[タグ][4]が追加されます。これにより、Lambda 関数がどのステートマシンに属しているかを確認でき、[サーバーレスページ][5]でこれを視覚化できます。
+Step Functions ステートが Lambda 関数である場合、このインテグレーションをインストールすると、Lambda メトリクスに[タグ][4] `statemachinename`、`statemachinearn`、`stepname` が追加されます。これにより、Lambda 関数がどのステートマシンに属しているかを確認でき、[サーバーレスページ][5]でこれを視覚化できます。
 
 ### ログの収集
 
-#### ログの有効化
-
-ログを S3 バケットまたは CloudWatch に送信するように Amazon Step Functions を構成します。
-
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_step_functions` に設定されているかを確認してください。
-
-#### ログを Datadog に送信する方法
-
-1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
-2. lambda 関数がインストールされたら、AWS コンソールから手動で、ログを含む CloudWatch ロググループにトリガーを追加します。
-
-    - [S3 バケットに手動トリガーを追加][7]
-    - [CloudWatch ロググループに手動トリガーを追加][8]
+1. Amazon Step Functions を [CloudWatch にログを送信する][6]ように構成します。**注**: Datadog がログのソースを識別し、自動的にパースするために、CloudWatch のロググループのデフォルトのプレフィックス `/aws/vendedlogs/states` を使用します。
+2. [Datadog にログを送信します][7]。
 
 ### トレースの収集
 
@@ -69,12 +59,12 @@ Step Functions ステートが Lambda 関数である場合、このインテグ
 
 AWS Step Functions の分散型トレーシングを有効にするには
 
-1. [Datadog AWS X-Ray インテグレーション][9]を有効にします。
+1. [Datadog AWS X-Ray インテグレーション][8]を有効にします。
 1. AWS コンソールにログインします。
 2. **Step Functions** にアクセスします。
 3. Step Functions の 1 つを選択して、**Edit** をクリックします。
 4. ページの下部にある **Tracing** セクションまでスクロールし、**Enable X-Ray tracing** チェックボックスをオンにします。
-5. 推奨: より詳細なトレースを行うには、関数に [AWS X-Ray トレーシングライブラリをインストール][10]してください。
+5. 推奨: より詳細なトレースを行うには、関数に [AWS X-Ray トレーシングライブラリをインストール][9]してください。
 
 ## 収集データ
 
@@ -92,17 +82,16 @@ Amazon Step Functions インテグレーションには、サービスのチェ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: /ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-step-functions
 [4]: /ja/tagging/
-[5]: /ja/graphing/infrastructure/serverless/
-[6]: /ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[7]: /ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: /ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[9]: /ja/tracing/serverless_functions/enable_aws_xray
-[10]: /ja/integrations/amazon_xray/#installing-the-x-ray-client-libraries
-[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_step_functions/amazon_step_functions_metadata.csv
-[12]: /ja/help/
+[5]: /ja/serverless/
+[6]: https://docs.aws.amazon.com/step-functions/latest/dg/cw-logs.html
+[7]: /ja/integrations/amazon_web_services/?tab=roledelegation#log-collection
+[8]: /ja/tracing/serverless_functions/enable_aws_xray
+[9]: /ja/integrations/amazon_xray/#installing-the-x-ray-client-libraries
+[10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_step_functions/amazon_step_functions_metadata.csv
+[11]: /ja/help/

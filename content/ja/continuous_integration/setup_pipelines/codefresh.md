@@ -14,8 +14,6 @@ title: Codefresh パイプラインでトレースを設定する
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Codefresh インテグレーションはベータ版です。この期間中に Codefresh インテグレーションを有効化しても、課金への影響はありません。</div>
-
 ## Datadog インテグレーションの構成
 
 [Codefresh][1] の Datadog インテグレーションを有効にする手順は以下の通りです。

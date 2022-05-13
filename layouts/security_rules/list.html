@@ -29,7 +29,7 @@
     </div>
     <div class="list-group">
         <div class="js-empty-results d-none font-semibold"></div>
-        {{ range $i, $v := .Pages.GroupByParam "source" }}
+        {{ range $i, $v := $list.GroupByParam "source" }}
             <div class="js-group js-group-{{ $i }}">
                 <div class="js-group-header mb-1 active">
                     <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">

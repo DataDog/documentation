@@ -1,17 +1,18 @@
 ---
-title: Docker タグの抽出
-kind: ドキュメント
 further_reading:
-  - link: /getting_started/tagging/
-    tag: ドキュメント
-    text: タグの概要
-  - link: /getting_started/tagging/using_tags/
-    tag: ドキュメント
-    text: Datadog でタグを使用する
-  - link: /agent/guide/autodiscovery-management/
-    tag: ドキュメント
-    text: データ収集をコンテナのサブセットのみに制限
+- link: /getting_started/tagging/
+  tag: ドキュメント
+  text: タグの概要
+- link: /getting_started/tagging/using_tags/
+  tag: ドキュメント
+  text: Datadog でタグを使用する
+- link: /agent/guide/autodiscovery-management/
+  tag: ドキュメント
+  text: データ収集をコンテナのサブセットのみに制限
+kind: ドキュメント
+title: Docker タグの抽出
 ---
+
 ## 概要
 
 Datadog Agent は、タグを作成し、ラベルまたは環境変数に基づいてコンテナが発行するすべてのメトリクス、トレース、ログに割り当てることができます。
@@ -22,30 +23,31 @@ Datadog Agent は、タグを作成し、ラベルまたは環境変数に基づ
 
 Agent は、タグを自動検出し、コンテナにより送信されたすべてのデータにアタッチします。アタッチされるタグのリストは、Agent の[カーディナリティコンフィギュレーション][1]に基づきます。
 
-| タグ                 | カーディナリティ  | 要件                          |
-|---------------------|--------------|--------------------------------------|
-| `container_name`    | 大         | N/A                                  |
-| `container_id`      | 大         | N/A                                  |
-| `rancher_container` | 大         | Rancher 環境                  |
-| `mesos_task`        | オーケストレーター | Mesos 環境                    |
-| `docker_image`      | 小          | N/A                                  |
-| `image_name`        | 小          | N/A                                  |
-| `short_image`       | 小          | N/A                                  |
-| `image_tag`         | 小          | N/A                                  |
-| `swarm_service`     | 小          | Swarm 環境                    |
-| `swarm_namespace`   | 小          | Swarm 環境                    |
-| `rancher_stack`     | 小          | Rancher 環境                  |
-| `rancher_service`   | 小          | Rancher 環境                  |
-| `env`               | 小          | [統合サービスタグ付け][2]有効 |
-| `version`           | 小          | [統合サービスタグ付け][2]有効 |
-| `service`           | 小          | [統合サービスタグ付け][2]有効 |
-| `marathon_app`      | 小          | Marathon 環境                 |
-| `chronos_job`       | 小          | Mesos 環境                    |
-| `chronos_job_owner` | 小          | Mesos 環境                    |
-| `nomad_task`        | 小          | Nomad 環境                    |
-| `nomad_job`         | 小          | Nomad 環境                    |
-| `nomad_group`       | 小          | Nomad 環境                    |
-
+| タグ                 | カーディナリティ  | 要件                                 |
+|----------------------|--------------|---------------------------------------------|
+| `container_name`     | 大         | N/A                                         |
+| `container_id`       | 大         | N/A                                         |
+| `rancher_container`  | 大         | Rancher 環境                         |
+| `mesos_task`         | オーケストレーター | Mesos 環境                           |
+| `docker_image`       | 小          | N/A                                         |
+| `image_name`         | 小          | N/A                                         |
+| `short_image`        | 小          | N/A                                         |
+| `image_tag`          | 小          | N/A                                         |
+| `swarm_service`      | 小          | Swarm 環境                           |
+| `swarm_namespace`    | 小          | Swarm 環境                           |
+| `rancher_stack`      | 小          | Rancher 環境                         |
+| `rancher_service`    | 小          | Rancher 環境                         |
+| `env`                | 小          | [統合サービスタグ付け][2]有効        |
+| `version`            | 小          | [統合サービスタグ付け][2]有効        |
+| `service`            | 小          | [統合サービスタグ付け][2]有効        |
+| `marathon_app`       | 小          | Marathon 環境                        |
+| `chronos_job`        | 小          | Mesos 環境                           |
+| `chronos_job_owner`  | 小          | Mesos 環境                           |
+| `nomad_task`         | 小          | Nomad 環境                           |
+| `nomad_job`          | 小          | Nomad 環境                           |
+| `nomad_group`        | 小          | Nomad 環境                           |
+| `git.commit.sha`     | 小          | [org.opencontainers.image.revision][3] の使用 |
+| `git.repository_url` | 小          | [org.opencontainers.image.source][3] の使用   |
 
 ### 統合サービスタグ付け
 
@@ -96,7 +98,7 @@ docker_labels_as_tags:
 
 ## 環境変数をタグとして抽出
 
-Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][3] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
+Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][4] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
 | 環境変数               | 説明                                    |
 |------------------------------------|------------------------------------------------|
@@ -158,4 +160,5 @@ docker_env_as_tags:
 
 [1]: /ja/agent/docker/tag/#extract-environment-variables-as-tags
 [2]: /ja/getting_started/tagging/unified_service_tagging
-[3]: /ja/agent/docker/?tab=standard#tagging
+[3]: https://github.com/opencontainers/image-spec/blob/02efb9a75ee11e05937b535cc5f228f9343ab2f5/annotations.md#pre-defined-annotation-keys
+[4]: /ja/agent/docker/?tab=standard#tagging

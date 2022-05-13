@@ -1,6 +1,10 @@
 ---
 aliases:
 - /fr/events/guides/migrating_from_stream_to_explorer
+further_reading:
+- link: https://www.datadoghq.com/blog/datadog-events/
+  tag: Blog
+  text: Dépannage plus rapide grâce aux événements Datadog améliorés
 kind: documentation
 title: Migration vers les nouvelles fonctionnalités dédiées aux événements
 ---
@@ -15,30 +19,17 @@ Lancé il y a plus de 10 ans, le flux d'événements est l'une des plus ancienn
 
 ## Calendrier de migration
 
-Voici le calendrier de migration pour les clients basés aux États-Unis :
+<strong>Mars 2022</strong> – Lancement du nouvel Events Explorer et de la nouvelle fonctionnalité d'analyse d'événements. Datadog commence à migrer les dashboards et monitors qui ne sont pas gérés avec les API.
 
-<strong>5 mars 2022</strong> – Lancement du nouvel Events Explorer et de la nouvelle fonctionnalité d'analyse d'événements. Datadog commence à migrer les dashboards et monitors non gérés des clients à l'aide de l'API.
+<strong>5 mai 2022</strong> – Arrêt de la prise en charge du flux d'événements, qui est remplacé par l'Event Explorer.
 
-<strong>30 avril 2022</strong> – Arrêt de la prise en charge du flux d'événements, qui est remplacé par l'Event Explorer.
-
-<strong>15 mai 2022</strong> – Les monitors d'événements qui n'ont pas encore été migrés sont encore évalués par Datadog, mais ils ne peuvent plus être modifiés. Les nouveaux monitors d'événements doivent utiliser la nouvelle syntaxe.
-
-<strong>30 juin 2022</strong> – Arrêt de l'évaluation des monitors d'événements qui n'ont pas été migrés. Les anciens monitors d'événements cessent de fonctionner.
-
-
-Voici le calendrier de migration pour les clients basés dans l'Union européenne :
-
-<strong>30 mars 2022</strong> – Lancement du nouvel Events Explorer et de la nouvelle fonctionnalité d'analyse d'événements. Datadog commence à migrer les dashboards et monitors non gérés des clients à l'aide de l'API.
-
-<strong>6 mai 2022</strong> – Arrêt de la prise en charge du flux d'événements, qui est remplacé par l'Event Explorer.
-
-<strong>20 mai 2022</strong> – Les monitors d'événements qui n'ont pas encore été migrés sont encore évalués par Datadog, mais ils ne peuvent plus être modifiés. Les nouveaux monitors d'événements doivent utiliser la nouvelle syntaxe.
+<strong>19 mai 2022</strong> – Les monitors d'événements qui n'ont pas encore été migrés sont encore évalués par Datadog, mais ils ne peuvent plus être modifiés. Les nouveaux monitors d'événements doivent utiliser la nouvelle syntaxe.
 
 <strong>30 juin 2022</strong> – Arrêt de l'évaluation des monitors d'événements qui n'ont pas été migrés. Les anciens monitors d'événements cessent de fonctionner.
 
 ## Mesures à prendre
 
-Si vous ne gérez <strong>pas</strong> votre dashboard ou vos monitors à l'aide d'outils basés sur une API externe (comme Terraform ou des scripts), <strong>aucune mesure n'est requise de votre part</strong>. Datadog procèdera à la migration de vos dashboards et monitors avant le 30 avril 2022. Vos anciens monitors ne seront pas supprimés, mais ils seront désactivés et Datadog cessera de les évaluer le 30 juin 2022.
+Si vous ne gérez <strong>pas</strong> votre dashboard ou vos monitors à l'aide d'outils basés sur une API externe (comme Terraform ou des scripts), <strong>aucune mesure n'est requise de votre part</strong>. Datadog procédera à la migration de vos dashboards et monitors avant le 30 avril 2022. Vos anciens monitors ne seront pas supprimés, mais ils seront désactivés et Datadog cessera de les évaluer au plus tard le 30 juin 2022.
 
 <strong>Si vous utilisez Terraform ou d'autres scripts basés sur une API</strong> pour gérer une partie ou l'intégralité de vos <strong>dashboards</strong>, Datadog procèdera à la migration des requêtes dans vos widgets et superpositions d'événements vers la nouvelle syntaxe. Vous devrez toutefois mettre à jour vos scripts afin qu'ils reflètent ces changements avant le 30 juin 2022.
 
@@ -184,6 +175,11 @@ Aucun événement reçu dans un centre de données pour le service `datadog-agen
 Les anciens monitors d'événement ne prennent pas en charge la méthode de rollup « cardinality ».
 : Nouvelle syntaxe </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /fr/events/explorer
 [2]: /fr/events/explorer/#event-analytics

@@ -4,6 +4,7 @@ kind: guide
 private: true
 aliases:
 - /tracing/getting_further/
+- /tracing/guide/ecommerce_and_retail_use_cases/
 ---
 
 

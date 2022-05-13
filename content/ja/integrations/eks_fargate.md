@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/amazon_eks_fargate/
+- /ja/integrations/amazon_eks_fargate/
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -10,13 +10,13 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - cloud
-  - AWS
-  - ログの収集
+- cloud
+- AWS
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md
 description: Amazon EKS のメトリクス、トレース、およびログを収集します。
 display_name: EKS Fargate
 draft: false
@@ -24,6 +24,7 @@ git_integration_title: eks_fargate
 guid: e9e58fb9-696b-4e3c-9058-c144a1d9a737
 integration_id: eks-fargate
 integration_title: Amazon EKS on AWS Fargate
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -35,10 +36,13 @@ public_title: '"Datadog-Amazon EKS on AWS Fargate インテグレーション"'
 short_description: Amazon EKS のメトリクス、トレース、およびログを収集します。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 **注**: このページでは、EKS Fargate インテグレーションについて説明します。ECS Fargate については、Datadog の [ECS Fargate インテグレーション][1]のドキュメントを参照してください。
@@ -58,7 +62,7 @@ AWS Fargate ポッドは物理的なポッドではありません。つまり�
 
 ### EC2 ノード
 
-[AWS Fargate プロファイル][5]でポッドを fargate 上で実行するように指定しない場合、ポッドは従来の EC2 マシンを使用できます。その場合は、[Datadog-Amazon EKS インテグレーションセットアップ][6]を参照して、インテグレーションからデータを収集してください。これを機能させるには、Agent を EC2 型のワークロードとして実行します。Agent のセットアップは、[Kuberenetes エージェントのセットアップ][7]と同じで、すべてのオプションが利用可能です。EC2 ノード上に Agent をデプロイするには、[Datadog Agent の DaemonSet セットアップ][8]を使用します。
+[AWS Fargate プロファイル][5]でポッドを fargate 上で実行するように指定しない場合、ポッドは従来の EC2 マシンを使用できます。その場合は、[Datadog-Amazon EKS インテグレーションセットアップ][6]を参照して、インテグレーションからデータを収集してください。これを機能させるには、Agent を EC2 型のワークロードとして実行します。Agent のセットアップは、[Kubernetes エージェントのセットアップ][7]と同じで、すべてのオプションが利用可能です。EC2 ノード上に Agent をデプロイするには、[Datadog Agent の DaemonSet セットアップ][8]を使用します。
 
 ### インストール
 
@@ -82,7 +86,7 @@ Agent がサイドカーとして実行されている場合、同じポッド�
 Fargate ノード上の AWS EKS Fargate で実行しているアプリケーションからデータを収集するには、次のセットアップ手順に従います。
 
 - [AWS EKS Fargate RBAC ルールをセットアップ](#aws-eks-fargate-rbac)。
-- [Agent をサイドカーとしてデプロイ](#Agent をサイドカーとして実行)。
+- [Agent をサイドカーとしてデプロイ](#running-the-agent-as-a-sidecar)。
 - Datadog の[メトリクス](#metrics-collection)、[ログ](#log-collection)、[イベント](#events-collection)、[トレース](#traces-collection) の収集をセットアップします。
 
 Datadog Live Container View に EKS Fargate コンテナを表示するには、ポッド仕様で `shareProcessNamespace` を有効にします。[プロセス収集](#process-collection)を参照してください。
@@ -97,6 +101,14 @@ kind: ClusterRole
 metadata:
   name: datadog-agent
 rules:
+  - apiGroups:
+    - ""
+    resources:
+    - nodes
+    - namespaces
+    verbs:
+    - get
+    - list
   - apiGroups:
       - ""
     resources:
@@ -137,32 +149,37 @@ Fargate 型のポッドからデータの収集を開始するには、Datadog A
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: "<アプリケーション名>"
+ name: "<APPLICATION_NAME>"
  namespace: default
 spec:
+ selector:
+   matchLabels:
+     app: "<APPLICATION_NAME>"
  replicas: 1
  template:
    metadata:
      labels:
-       app: "<アプリケーション名>"
-     name: "<ポッド名>"
+       app: "<APPLICATION_NAME>"
+     name: "<POD_NAME>"
    spec:
      serviceAccountName: datadog-agent
      containers:
-     - name: "<アプリケーション名>"
-       image: "<アプリケーションイメージ>"
+     - name: "<APPLICATION_NAME>"
+       image: "<APPLICATION_IMAGE>"
      ## Agent をサイドカーとして実行
      - image: datadog/agent
        name: datadog-agent
        env:
        - name: DD_API_KEY
-         value: "<DATADOG_API_キー>"
+         value: "<YOUR_DATADOG_API_KEY>"
          ## DD_SITE を "datadoghq.eu" に設定して
          ## Agent データを Datadog EU サイトに送信
        - name: DD_SITE
          value: "datadoghq.com"
        - name: DD_EKS_FARGATE
          value: "true"
+       - name: DD_CLUSTER_NAME
+         value: "<CLUSTER_NAME>"
        - name: DD_KUBERNETES_KUBELET_NODENAME
          valueFrom:
            fieldRef:
@@ -179,40 +196,92 @@ spec:
 
 **注**: `<YOUR_DATADOG_API_KEY>` を[組織の Datadog API キー][14]に置き換えることを忘れないでください。
 
+**注**: メトリクスが目的のクラスターでタグ付けされるように、`DD_TAGS` のリストに希望の `kube_cluster_name:<CLUSTER_NAME>` を追加してください。ここで、スペースで区切られた `<KEY>:<VALUE>` タグを追加することができます。Agent が `7.34+` と `6.34+` の場合は、これは必要ありません。代わりに、`DD_CLUSTER_NAME` 環境変数を設定します。
+
+#### Cluster Agent または Cluster Checks Runner の実行
+
+Datadog では、[イベント収集][15]、[Kubernetes リソースビュー][16]、[クラスターチェック][17]などの機能を利用するために、Cluster Agent を実行することを推奨しています。
+
+EKS Fargate を使用する場合、EKS クラスターが混合ワークロード (Fargate/非 Fargate) を実行しているかどうかによって、2 つのシナリオが考えられます。
+
+EKS クラスターが Fargate と非 Fargate のワークロードを実行し、Node Agent DaemonSet を介して非 Fargate ワークロードを監視する場合は、このデプロイに Cluster Agent/Cluster Checks Runner を追加します。詳細については、[Cluster Agent の設定][18]を参照してください。
+
+Cluster Agent トークンは、監視したい Fargate タスクから到達可能でなければなりません。Helm Chart や Datadog Operator を使用している場合、対象のネームスペースにシークレットが作成されるため、デフォルトでは到達不可能です。
+
+これを正しく動作させるためには、2 つの選択肢があります。
+
+* ハードコードされたトークン値 (Helm では `clusterAgent.token`、Datadog Operator では `credentials.token`) を使用する。便利だが、安全性は低い。
+* 手動で作成したシークレット (Helm では `clusterAgent.tokenExistingSecret`、Datadog Operator では利用不可) を使用し、Fargate タスクを監視する必要があるすべてのネームスペースに複製する。
+
+EKS クラスターが Fargate ワークロードのみを実行する場合、スタンドアロンの Cluster Agent のデプロイが必要です。そして、上記のように、トークンを到達可能にするための 2 つのオプションのうち 1 つを選択します。
+
+以下の Helm の `values.yaml` を使用します。
+
+```yaml
+datadog:
+  apiKey: <YOUR_DATADOG_API_KEY>
+  clusterName: <CLUSTER_NAME>
+agents:
+  enabled: false
+clusterAgent:
+  enabled: true
+  replicas: 2
+```
+
+
+どちらの場合も、Cluster Agent との通信を可能にするために、Datadog Agent のサイドカーマニフェストを変更する必要があります。
+
+```yaml
+       env:
+        - name: DD_CLUSTER_AGENT_ENABLED
+          value: "true"
+        - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+          value: <hardcoded token value> # シークレットを使用する場合は、valueFrom: を使用します
+        - name: DD_CLUSTER_AGENT_URL
+          value: https://<CLUSTER_AGENT_SERVICE_NAME>.<CLUSTER_AGENT_SERVICE_NAMESPACE>.svc.cluster.local:5005
+        - name: DD_ORCHESTRATOR_EXPLORER_ENABLED # Kubernetes リソースビューを取得するために必要です
+          value: "true"
+        - name: DD_CLUSTER_NAME
+          value: <CLUSTER_NAME>
+```
+
 ## メトリクスの収集
 
 ### インテグレーションのメトリクス
 
-[アプリケーションコンテナでオートディスカバリーラベル][15]を使用して、[サポートされている Agent インテグレーション][16]のメトリクス収集を開始します。
+[アプリケーションコンテナでオートディスカバリーラベル][19]を使用して、[サポートされている Agent インテグレーション][20]のメトリクス収集を開始します。
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: "<アプリケーション名>"
+ name: "<APPLICATION_NAME>"
  namespace: default
 spec:
  replicas: 1
+ selector:
+   matchLabels:
+     app: "<APPLICATION_NAME>"
  template:
    metadata:
      labels:
-       app: "<アプリケーション名>"
-     name: "<ポッド名>"
+       app: "<APPLICATION_NAME>"
+     name: "<POD_NAME>"
      annotations:
-      ad.datadoghq.com/<CONTAINER_NAME>.check_names: '[<チェック名>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_コンフィグ>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<インスタンス_コンフィグ>]'
+      ad.datadoghq.com/<CONTAINER_NAME>.check_names: '[<CHECK_NAME>]'
+      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
+      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
    spec:
      serviceAccountName: datadog-agent
      containers:
-     - name: "<アプリケーション名>"
-       image: "<アプリケーションイメージ>"
+     - name: "<APPLICATION_NAME>"
+       image: "<APPLICATION_IMAGE>"
      ## Agent をサイドカーとして実行
      - image: datadog/agent
        name: datadog-agent
        env:
        - name: DD_API_KEY
-         value: "<DATADOG_API_キー>"
+         value: "<YOUR_DATADOG_API_KEY>"
          ## DD_SITE を "datadoghq.eu" に設定して
          ## Agent データを Datadog EU サイトに送信
        - name: DD_SITE
@@ -236,30 +305,33 @@ spec:
 **注**:
 
 - `<YOUR_DATADOG_API_KEY>` を[組織の Datadog API キー][14]に置き換えることを忘れないでください。
-- ホストからの `cgroups` ボリュームを Agent にマウントできないため、Fargate ではコンテナメトリクスを使用できません。[Live Containers][17] ビューは、CPU およびメモリに 0 を報告します。
+- ホストからの `cgroups` ボリュームを Agent にマウントできないため、Fargate ではコンテナメトリクスを使用できません。[Live Containers][21] ビューは、CPU およびメモリに 0 を報告します。
 
 ### DogStatsD
 
-アプリケーションコンテナから [DogStatsD メトリクス][18]を Datadog に転送するように、Agent コンテナのコンテナポート `8125` を設定します。
+アプリケーションコンテナから [DogStatsD メトリクス][22]を Datadog に転送するように、Agent コンテナのコンテナポート `8125` を設定します。
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: "<アプリケーション名>"
+ name: "<APPLICATION_NAME>"
  namespace: default
 spec:
  replicas: 1
+ selector:
+   matchLabels:
+     app: "<APPLICATION_NAME>"
  template:
    metadata:
      labels:
-       app: "<アプリケーション名>"
-     name: "<ポッド名>"
+       app: "<APPLICATION_NAME>"
+     name: "<POD_NAME>"
    spec:
      serviceAccountName: datadog-agent
      containers:
-     - name: "<アプリケーション名>"
-       image: "<アプリケーションイメージ>"
+     - name: "<APPLICATION_NAME>"
+       image: "<APPLICATION_IMAGE>"
      ## Agent をサイドカーとして実行
      - image: datadog/agent
        name: datadog-agent
@@ -270,7 +342,7 @@ spec:
           protocol: UDP
        env:
        - name: DD_API_KEY
-         value: "<DATADOG_API_キー>"
+         value: "<YOUR_DATADOG_API_KEY>"
          ## DD_SITE を "datadoghq.eu" に設定して
          ## Agent データを Datadog EU サイトに送信
        - name: DD_SITE
@@ -295,17 +367,21 @@ spec:
 
 ### ライブコンテナ
 
-Datadog Agent v6.19+ は、EKS Fargate インテグレーションのライブコンテナをサポートします。ライブコンテナは、[Containers][19] ページに表示されます。
+Datadog Agent v6.19+ は、EKS Fargate インテグレーションのライブコンテナをサポートします。ライブコンテナは、[Containers][21] ページに表示されます。
 
 ### ライブプロセス
 
-Datadog Agent v6.19+ は、EKS Fargate インテグレーションのライブプロセスをサポートします。ライブプロセスは、[Processes][1] ページに表示されます。ライブプロセスを有効にするには、[ポッドの仕様で shareProcessNamespace を有効にします][20]。
+Datadog Agent v6.19+ は、EKS Fargate インテグレーションのライブプロセスをサポートします。ライブプロセスは、[Processes][23] ページに表示されます。ライブプロセスを有効にするには、[ポッドの仕様で shareProcessNamespace を有効にします][24]。
+
+### Kubernetes リソースビュー
+
+Kubernetes のリソースビューを収集するには、[Cluster Agent の設定](#running-the-cluster-agent-or-the-cluster-checks-runner)が必要です。
 
 ## ログの収集
 
 ### Fluent Bit で EKS on Fargate からログを収集。
 
-[Fluent Bit][21] を使用して、EKS ログを CloudWatch Logs へ転送できます。
+EKS のログを CloudWatch Logs にルーティングする [Fluent Bit][25] と Datadog にログをルーティングする [Datadog Forwarder][26] で EKS Fargate ログを監視することができます。
 
 1. CloudWatch へログを送信するよう Fluent Bit を構成するには、 CloudWatch Logs を出力先として指定する Kubernetes ConfigMap を作成します。ConfigMap は、ロググループ、リージョン、プレフィックス、文字列、そしてロググループの自動作成の有無を指定します。
 
@@ -323,31 +399,35 @@ Datadog Agent v6.19+ は、EKS Fargate インテグレーションのライブ�
             region us-east-1
             log_group_name awslogs-https
             log_stream_prefix awslogs-firelens-example
-            auto_create_group On
+            auto_create_group true
    ```
+2. [Datadog Forwarder][26] を使用して、Cloudwatch からログを収集し、Datadog に送信します。
 
 ## トレースの収集
 
-Agent コンテナにコンテナポート `8126` をセットアップして、アプリケーションコンテナからトレースを収集します。[トレーシングのセットアップ方法について、ご確認ください][22]。
+Agent コンテナにコンテナポート `8126` をセットアップして、アプリケーションコンテナからトレースを収集します。[トレーシングのセットアップ方法について、ご確認ください][27]。
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: "<アプリケーション名>"
+ name: "<APPLICATION_NAME>"
  namespace: default
 spec:
  replicas: 1
+ selector:
+   matchLabels:
+     app: "<APPLICATION_NAME>"
  template:
    metadata:
      labels:
-       app: "<アプリケーション名>"
-     name: "<ポッド名>"
+       app: "<APPLICATION_NAME>"
+     name: "<POD_NAME>"
    spec:
      serviceAccountName: datadog-agent
      containers:
-     - name: "<アプリケーション名>"
-       image: "<アプリケーションイメージ>"
+     - name: "<APPLICATION_NAME>"
+       image: "<APPLICATION_IMAGE>"
      ## Agent をサイドカーとして実行
      - image: datadog/agent
        name: datadog-agent
@@ -358,7 +438,7 @@ spec:
           protocol: TCP
        env:
        - name: DD_API_KEY
-         value: "<DATADOG_API_キー>"
+         value: "<YOUR_DATADOG_API_KEY>"
          ## DD_SITE を "datadoghq.eu" に設定して
          ## Agent データを Datadog EU サイトに送信
        - name: DD_SITE
@@ -385,10 +465,7 @@ spec:
 
 ## イベント収集
 
-AWS EKS Fargate API サーバーからイベントを収集するには、Kubernetes クラスター内の AWS EKS EC2 ポッド上で Datadog Cluster Agent を実行します。
-
-1. [Datadog Cluster Agent をセットアップ][23]。
-2. [Cluster Agent のイベント収集を有効にする][19]。
+AWS EKS Fargate API サーバーからイベントを収集するには、[EKS クラスター内の Datadog Cluster Agent](#running-the-cluster-agent-or-the-cluster-checks-runner) を実行し、[Cluster Agent のイベント収集を有効にします][21]。
 
 または、Datadog Cluster Agent をセットアップしてクラスターチェックを有効にするだけでなく、クラスターチェックランナーをデプロイすることもできます。
 
@@ -396,7 +473,7 @@ AWS EKS Fargate API サーバーからイベントを収集するには、Kubern
 
 ## プロセスの収集
 
-Agent 6.19+/7.19+ の場合、[プロセス収集][24]を使用できます。ポッド仕様で `shareProcessNamespace` を有効にして、Fargate ポッドで実行されているすべてのプロセスを収集します。例:
+Agent 6.19+/7.19+ の場合、[プロセス収集][28]を使用できます。ポッド仕様で `shareProcessNamespace` を有効にして、Fargate ポッドで実行されているすべてのプロセスを収集します。例:
 
 ```
 apiVersion: v1
@@ -426,16 +503,15 @@ eks_fargate にはイベントが含まれていません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][23]までお問合せください。
 
 ## その他の参考資料
 
-- ブログ記事: [AWS Fargate 監視のための主要メトリクス][24]
-- ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][25]
-- ブログ記事: [Datadog を使用した AWS Fargate モニタリング][26]
+- ブログ記事: [AWS Fargate 監視のための主要メトリクス][28]
+- ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][29]
+- ブログ記事: [Datadog を使用した AWS Fargate モニタリング][30]
 
-
-[1]: https://app.datadoghq.com/process
+[1]: http://docs.datadoghq.com/integrations/ecs_fargate/
 [2]: http://docs.datadoghq.com/integrations/amazon_eks/
 [3]: http://docs.datadoghq.com/integrations/system
 [4]: https://docs.datadoghq.com/ja/getting_started/agent/autodiscovery/
@@ -448,16 +524,20 @@ eks_fargate にはイベントが含まれていません。
 [11]: https://app.datadoghq.com/account/settings#integrations/amazon-eks
 [12]: https://app.datadoghq.com/account/settings#integrations/amazon-ec2
 [13]: http://docs.datadoghq.com/integrations/kubernetes
-[14]: https://app.datadoghq.com/account/settings#api
-[15]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[16]: https://docs.datadoghq.com/ja/integrations/#cat-autodiscovery
-[17]: https://docs.datadoghq.com/ja/developers/dogstatsd/
-[18]: http://docs.datadoghq.com/tracing/setup
-[19]: https://app.datadoghq.com/containers
-[20]: https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
-[21]: https://aws.amazon.com/blogs/containers/fluent-bit-for-amazon-eks-on-aws-fargate-is-here/
-[22]: http://docs.datadoghq.com/agent/cluster_agent/event_collection
-[23]: /ja/agent/cluster_agent/setup/
-[24]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#process-collection
-[25]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
-[26]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
+[14]: https://app.datadoghq.com/organization-settings/api-keys
+[15]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=helm#event-collection
+[16]: https://docs.datadoghq.com/ja/infrastructure/livecontainers/#kubernetes-resources-view
+[17]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/#overview
+[18]: http://docs.datadoghq.com/agent/cluster_agent/setup/
+[19]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[20]: https://docs.datadoghq.com/ja/integrations/#cat-autodiscovery
+[21]: https://app.datadoghq.com/containers
+[22]: http://docs.datadoghq.com/tracing/setup
+[23]: https://app.datadoghq.com/process
+[24]: https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
+[25]: https://aws.amazon.com/blogs/containers/fluent-bit-for-amazon-eks-on-aws-fargate-is-here/
+[26]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/forwarder/
+[27]: http://docs.datadoghq.com/tracing/#send-traces-to-datadog
+[28]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#process-collection
+[29]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
+[30]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/

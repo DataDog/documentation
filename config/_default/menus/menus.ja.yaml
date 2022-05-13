@@ -4980,7 +4980,7 @@ main:
   weight: 3
 - identifier: events_top_level
   name: イベント
-  pre: イベント
+  pre: events
   url: events/
   weight: 60000
 - identifier: event_stream
@@ -5016,7 +5016,7 @@ main:
   weight: 303
 - identifier: dashboards
   name: 'ダッシュボード  '
-  pre: ダッシュボード
+  pre: dashboard
   url: dashboards/
   weight: 70000
 - identifier: dashboards_widgets
@@ -5215,7 +5215,7 @@ main:
   weight: 11
 - identifier: モバイル
   name: モバイルアプリケーション
-  pre: モバイル
+  pre: mobile
   url: mobile/
   weight: 80000
 - identifier: infrastructure
@@ -5260,8 +5260,8 @@ main:
   weight: 6
 - identifier: サーバーレス
   name: サーバーレス
-  pre: サーバーレス
-  url: サーバーレス
+  pre: serverless
+  url: serverless
   weight: 100000
 - identifier: serverless_installation
   name: インストール
@@ -5379,7 +5379,7 @@ main:
   weight: 10
 - identifier: metrics_top_level
   name: メトリクス
-  pre: メトリクス
+  pre: metric
   url: metrics/
   weight: 110000
 - identifier: metrics_explorer
@@ -5450,7 +5450,7 @@ main:
   weight: 706
 - identifier: ノートブック
   name: ノートブック
-  pre: ノートブック
+  pre: notebook
   url: notebooks/
   weight: 120000
 - identifier: アラート設定
@@ -6768,7 +6768,7 @@ main:
   weight: 9
 - identifier: 外形監視
   name: Synthetic モニタリング
-  pre: 外形監視
+  pre: synthetics
   url: synthetics/
   weight: 190000
 - identifier: api_tests
@@ -7138,7 +7138,7 @@ main:
   weight: 10
 - identifier: nm_parent
   name: ネットワークモニタリング
-  pre: ネットワーク
+  pre: network
   url: network_monitoring/
   weight: 200000
 - identifier: npm

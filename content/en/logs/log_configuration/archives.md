@@ -116,41 +116,50 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-Add the following two permission statements to your IAM policies attached to the role for the AWS Integration. Edit the bucket names and, if desired, specify the paths that contain your log archives. 
+1. [Create a policy][1] with the following two permission statements:  
 
-**Notes:**
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "DatadogUploadAndRehydrateLogArchives",
+         "Effect": "Allow",
+         "Action": ["s3:PutObject", "s3:GetObject"],
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+         ]
+       },
+       {
+         "Sid": "DatadogRehydrateLogArchivesListBucket",
+         "Effect": "Allow",
+         "Action": "s3:ListBucket",
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+         ]
+       }
+     ]
+   }
+   ```
+     * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
+     * The `PutObject` permission is sufficient for uploading archives.
 
-* The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][1].
-* The `PutObject` permission is sufficient for uploading archives.
+2. Edit the bucket names.
+3. Optionally, specify the paths that contain your log archives.
+4. Attach the new policy to the Datadog integration role.  
+    a. Navigate to **Roles** in the AWS IAM console.  
+    b. Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.  
+    c. Click **Add permissions**, and then **Attach policies**.  
+    d. Enter the name of the policy created above.  
+    e. Click **Attach policies**.  
 
+**Note**: Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets. 
+ 
+[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[2]: /logs/archives/rehydrating/
 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "DatadogUploadAndRehydrateLogArchives",
-      "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
-      "Resource": [
-        "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-        "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
-      ]
-    },
-    {
-      "Sid": "DatadogRehydrateLogArchivesListBucket",
-      "Effect": "Allow",
-      "Action": "s3:ListBucket",
-      "Resource": [
-        "arn:aws:s3:::<MY_BUCKET_NAME_1>",
-        "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-      ]
-    }
-  ]
-}
-```
-
-[1]: /logs/archives/rehydrating/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 

@@ -201,6 +201,14 @@ network_devices:
       Host: "https://mydomain.datadoghq.com"
       Port: 443
       is_reliable: true
+  snmp_traps:
+    forwarder:
+      use_http: true
+      additional_endpoints:
+      - api_key: "apiKey2"
+        Host: "https://mydomain.datadoghq.com"
+        Port: 443
+        is_reliable: true
 ```
 
 ### 環境変数コンフィギュレーション

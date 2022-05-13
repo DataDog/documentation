@@ -19,6 +19,8 @@ Watchdog が現在アクティブなバージョンに不具合があること�
 
 また、**Suggested Monitors** ボタンをクリックし、次に **Enable** をクリックすることでもモニターを有効にすることができます。Suggested Monitors ボタンは、サービスにまだモニターが構成されていない場合のみ利用可能です。このボタンがない場合は、上記の手順で [New Monitors][3] のページからモニターを作成してください。
 
+各デプロイは繰り返し分析されます。同じ欠陥のあるデプロイの再アラートを防ぐために、Datadog ではモニターの回復時間を 60 分に設定することを推奨しています。
+
 {{< img src="watchdog/faulty_deployment_suggested_monitors.png" alt="APM サービスページと Suggested Monitors ボタン" >}}
 
 ### エラーがあるにもかかわらず、新しいデプロイメントに欠陥のフラグが立たないのはなぜですか？

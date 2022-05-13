@@ -61,7 +61,18 @@ sudo yum remove datadog-agent
 * user-created files in the `/etc/datadog-agent` configuration folder,
 * user-created files in the `/opt/datadog-agent` folder,
 * the `dd-agent` user.
+
+> If you also want to remove these elements and your Datadog log files, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
 ---
+
+
 **Agent v5**
 
 ```shell
@@ -74,6 +85,15 @@ sudo yum remove datadog-agent
 * user-created files in the `/etc/dd-agent` configuration folder,
 * user-created files in the `/opt/datadog-agent` folder,
 * the `dd-agent` user.
+
+> If you also want to remove these elements and your Datadog log files, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
 ---
 
 ## openSUSE and SLES
@@ -88,6 +108,15 @@ sudo zypper remove datadog-agent
 * user-created files in the `/etc/datadog-agent` configuration folder,
 * user-created files in the `/opt/datadog-agent` folder,
 * the `dd-agent` user.
+
+> If you also want to remove these elements and your Datadog log files, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
 ---
 **Agent v5**
 
@@ -100,6 +129,15 @@ sudo zypper remove datadog-agent
 * user-created files in the `/etc/dd-agent` configuration folder,
 * user-created files in the `/opt/datadog-agent` folder,
 * the `dd-agent` user.
+
+> If you also want to remove these elements and your Datadog log files, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
 ---
 
 ## macOS

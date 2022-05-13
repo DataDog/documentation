@@ -145,6 +145,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	find ./content/en/real_user_monitoring/ios -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/real_user_monitoring/reactnative.md ]; then \
 	rm -f content/en/real_user_monitoring/reactnative.md ;fi
+	@if [ content/en/real_user_monitoring/flutter/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/flutter/_index.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
@@ -261,7 +263,6 @@ examples/go: examples/datadog-api-client-go clean-go-examples
 	-cp -Rn examples/datadog-api-client-go/examples/v* ./content/en/api/
 
 examples/java: examples/datadog-api-client-java clean-java-examples
-	-cd examples/datadog-api-client-java; ./extract-code-blocks.sh || true
 	-cp -Rn examples/datadog-api-client-java/examples/v* ./content/en/api/
 
 examples/python: examples/datadog-api-client-python clean-python-examples
