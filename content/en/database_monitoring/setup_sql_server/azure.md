@@ -47,7 +47,7 @@ ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
 ```
 
-Grant the agent access to each additional Azure SQL Database on this server:
+Grant the Agent access to each additional Azure SQL Database on this server:
 
 ```SQL
 CREATE USER datadog FOR LOGIN datadog;
