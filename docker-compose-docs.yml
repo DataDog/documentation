@@ -1,0 +1,9 @@
+version: '3'
+services:
+  docs:
+    image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
+    command: "./startup.sh ${GITHUB_TOKEN} ${IGNORE_LANG}"
+    volumes:
+      - "/Users/colin.cole/guac/projects/documentation:/src"
+    ports:
+      - "1313:1313"
