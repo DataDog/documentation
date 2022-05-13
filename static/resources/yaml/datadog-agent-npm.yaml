@@ -47,6 +47,7 @@ data:
       max_tracked_connections: 131072
       conntrack_max_state_size: 131072
       enable_runtime_compiler: false
+      enable_kernel_header_download: false
       runtime_compiler_output_dir: /var/tmp/datadog-agent/system-probe/build
       kernel_header_download_dir: /var/tmp/datadog-agent/system-probe/kernel-headers
       apt_config_dir: /host/etc/apt
@@ -209,6 +210,7 @@ data:
             "setgid32",
             "setgroups",
             "setgroups32",
+            "setitimer",
             "setns",
             "setrlimit",
             "setsid",
@@ -257,6 +259,22 @@ data:
           "comment": "",
           "includes": {},
           "excludes": {}
+        },
+        {
+          "names": [
+            "kill"
+          ],
+          "action": "SCMP_ACT_ALLOW",
+          "args": [
+            {
+              "index": 1,
+              "value": 0,
+              "op": "SCMP_CMP_EQ"
+            }
+          ],
+          "comment": "allow process detection via kill",
+          "includes": {},
+          "excludes": {}
         }
       ]
     }
@@ -269,6 +287,7 @@ metadata:
   namespace: default
   labels: {}
 spec:
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: datadog
@@ -281,9 +300,11 @@ spec:
         container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
         container.seccomp.security.alpha.kubernetes.io/system-probe: localhost/system-probe
     spec:
+      securityContext:
+        runAsUser: 0
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -385,7 +406,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -451,7 +472,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -522,7 +543,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -532,7 +553,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -572,7 +593,7 @@ spec:
               value: "true"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
