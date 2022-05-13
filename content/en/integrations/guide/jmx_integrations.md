@@ -2,7 +2,7 @@
 title: Which Integrations use Jmxfetch?
 kind: guide
 aliases:
-  - /agent/faq/jmx_integrations/
+  - /integrations/guide/jmx_integrations/
 further_reading:
 - link: "/agent/faq/log4j_mitigation/"
   tag: "Documentation"

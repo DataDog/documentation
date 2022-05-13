@@ -2,7 +2,7 @@
 title: Mitigating the Risk of Remote Code Execution Due to Log4Shell
 kind: faq
 further_reading:
-- link: "/agent/faq/jmx_integrations/"
+- link: "/integrations/guide/jmx_integrations/"
   tag: "Documentation"
   text: "Which Integrations use Jmxfetch?"
 ---
