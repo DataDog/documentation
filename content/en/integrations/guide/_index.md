@@ -21,4 +21,5 @@ Integration Guides:
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Freshservice Tickets using Webhooks{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Monitoring HCP Consul with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/source-code-integration" tag="GitHub Apps" >}}Datadog Source Code Integration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/jmx_integrations/" >}}Which Integrations use Jmxfetch?{{< /nextlink >}}
 {{< /whatsnext >}}

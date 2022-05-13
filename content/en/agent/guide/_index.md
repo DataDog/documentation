@@ -21,16 +21,14 @@ private: true
     {{< nextlink href="agent/guide/private-link" >}}Forward your telemetry securely to Datadog over AWS PrivateLink{{< /nextlink >}}
     {{< nextlink href="agent/guide/why-should-i-install-the-agent-on-my-cloud-instances" >}}Why should I install the Datadog Agent on my cloud instances?{{< /nextlink >}}
     {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
-    {{< nextlink href="agent/guide/jmx_integrations/" >}}Which Integrations use Jmxfetch?{{< /nextlink >}}
-    {{< nextlink href="agent/guide/how-is-the-system-mem-used-metric-calculated" >}}Calculating the 'system.mem.used' metric{{< /nextlink >}}
     {{< nextlink href="agent/guide/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/" >}}Can I set up the dd-agent mysql check on my Google CloudSQL?{{< /nextlink >}}
-    {{< nextlink href="agent/guide/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql" >}}Datadog-Heroku Buildpack troubleshooting{{< /nextlink >}}
+    {{< nextlink href="agent/guide/heroku-troubleshooting/" >}}Datadog-Heroku Buildpack troubleshooting{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent versioning guides:" >}}
     {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python version management: Use Python 3 with Datadog Agent v6{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
-    {{< nextlink href="agent/guide/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity" >}}How do I install the Agent on a server with limited internet connectivity?{{< /nextlink >}}
+    {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Installing the Agent on a server with limited internet connectivity{{< /nextlink >}}
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}How do I uninstall the Agent?{{< /nextlink >}}
 {{< /whatsnext >}}
 
