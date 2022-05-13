@@ -2884,7 +2884,7 @@ main:
     weight: 220000
   - name: Glossary
     url: glossary/
-    pre: cog-2
+    pre: books
     identifier: glossary
     weight: 230000
   - name: Account Management
