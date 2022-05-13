@@ -43,11 +43,15 @@ Create a read-only login to connect to your server and grant the required [Azure
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
-GRANT CONNECT ANY DATABASE to datadog;
 ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
 ```
 
+Grant the agent access to each additional Azure SQL Database on this server:
+
+```SQL
+CREATE USER datadog FOR LOGIN datadog;
+```
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
 {{% /tab %}}
