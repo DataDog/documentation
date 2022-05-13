@@ -15,6 +15,7 @@ description: "List the monitor types"
 {{< nextlink href="/monitors/create/types/composite" >}}<u>Composite</u>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/custom_check" >}}<u>Custom Check</u>: Monitor the status of arbitrary custom checks.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/event" >}}<u>Event</u>: Monitor events gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/error_tracking" >}}<u>Error Tracking</u>: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/forecasts" >}}<u>Forecast</u>: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/integration" >}}<u>Integration</u>: Monitor metric values or health status from a specific integration.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/process" >}}<u>Live Process</u>: Check if one or more processes are running on a host.{{< /nextlink >}}
@@ -23,6 +24,5 @@ description: "List the monitor types"
 {{< nextlink href="/monitors/create/types/outlier" >}}<u>Outlier</u>: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/process_check" >}}<u>Process Check</u>: Watch the status produced by the process.up service check.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/real_user_monitoring" >}}<u>Real User Monitoring</u>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
-{{< nextlink href="/monitors/create/types/error_tracking" >}}<u>Error Tracking</u>: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/watchdog" >}}<u>Watchdog</u>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< /whatsnext >}}
