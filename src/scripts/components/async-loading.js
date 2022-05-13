@@ -3,6 +3,7 @@ import codeTabs from './codetabs';
 import { redirectToRegion } from '../region-redirects';
 import { initializeIntegrations } from './integrations';
 import { initializeSecurityRules } from './security-rules';
+import { initGlossaryJS } from './glossary';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
@@ -200,6 +201,11 @@ function loadPage(newUrl) {
             activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
             toggleMultiCodeLangNav(pageCodeLang);
+
+            // init glossary if needed
+            if (document.body.classList.contains('glossary')) {
+                initGlossaryJS();
+            }
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });

@@ -1,7 +1,6 @@
 .glossary {
     .btn {
-        border-radius: 4px;
-        padding: 0px 5px;
+        padding: 0 5px;
 
         &.active {
             background: $brand-primary;
@@ -12,9 +11,18 @@
             box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
             color: $brand-primary;
         }
+
+        @include media-breakpoint-up(md) {
+            @include font-size-line-height(18px, 24px);
+            padding: 0px 8px 2px 8px;
+        }
     }
 
     .glossary-nav {
         margin-top: -55px;
+
+        @include media-breakpoint-up(md) {
+            margin-top: 3px;
+        }
     }
 }

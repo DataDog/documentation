@@ -4,7 +4,7 @@
     <h1 class="pb-0">{{ .Title }}</h1>
     
     <div class="row">
-        <div class="col-10 col-md-12 order-md-1 mt-4">
+        <div class="col-10 col-md-12 order-md-1 mt-5">
             {{ range .Pages.ByTitle }}
                 {{ $first_char := substr .Title 0 1 | upper }}
                 {{ $curr_letter := $.Scratch.Get "curr_letter" }}
@@ -30,7 +30,7 @@
             {{ end }}
         </div>
 
-        <div class="glossary-nav col-2 col-md-12 d-flex flex-column">
+        <div class="glossary-nav col-2 col-md-12 d-flex d-md-block flex-column align-items-end">
             {{ range $letters }}
                 <a class="btn font-14-18" role="button" href="#{{ . | lower }}">{{ . }}</a>
             {{ end }}

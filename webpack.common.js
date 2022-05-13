@@ -40,7 +40,7 @@ const commonConfig = env => {
             'dd-browser-logs-rum': './scripts/components/dd-browser-logs-rum.js',
             'search': './scripts/components/search.js',
             'jqmath-vanilla': './scripts/jqmath-vanilla.js',
-            'glossary': './scripts/glossary.js'
+            'glossary': './scripts/components/glossary.js'
         },
         output: {
             path: path.join(__dirname, 'public', 'static'),
