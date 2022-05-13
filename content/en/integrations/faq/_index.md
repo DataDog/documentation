@@ -88,58 +88,57 @@ aliases:
 * [Connection Issues with the SQL Server Integration][36]
 * [MySQL Localhost Error - Localhost VS 127.0.0.1][37]
 * [Can I use a named instance in the SQL Server integration?][38]
-* [Can I set up the dd-agent MySQL check on my Google CloudSQL?][39]
-* [MySQL Custom Queries][40]
-* [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table?][41]
-* [How can I collect more metrics from my SQL Server integration?][42]
-* [Database user lacks privileges][43]
+* [MySQL Custom Queries][39]
+* [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table?][40]
+* [How can I collect more metrics from my SQL Server integration?][41]
+* [Database user lacks privileges][42]
 
 ## Network
 
-* [How to send TCP/UDP host metrics via the Datadog API ?][44]
+* [How to send TCP/UDP host metrics via the Datadog API ?][43]
 
 ## Postgres
 
-* [Postgres custom metric collection explained][45]
+* [Postgres custom metric collection explained][44]
 
 ## RabbitMQ
 
-* [Tagging RabbitMQ queues by tag family][46]
+* [Tagging RabbitMQ queues by tag family][45]
 
 ## Redis
 
-* [Redis Integration Error: "unknown command 'CONFIG'"][47]
+* [Redis Integration Error: "unknown command 'CONFIG'"][46]
 
 ## SNMP
 
-* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][48]
+* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][47]
 
 ## Terraform
 
-* [How to import datadog resources into Terraform][49]
+* [How to import datadog resources into Terraform][48]
 
 ## Unix
 
-* [How can I gather metrics from the UNIX shell?][50]
+* [How can I gather metrics from the UNIX shell?][49]
 
 ## Vertica
 
-* [How to collect metrics from custom Vertica queries][51]
+* [How to collect metrics from custom Vertica queries][50]
 
 ## VSphere
 
-* [Troubleshooting duplicated hosts with vSphere][52]
+* [Troubleshooting duplicated hosts with vSphere][51]
 
 ## Webhooks
 
-* [How to make a Trello Card using Webhooks][53]
+* [How to make a Trello Card using Webhooks][52]
 
 ## Windows
 
-* [How to add event log files to the `Win32_NTLogEvent` WMI class][54]
-* [Collect Custom Windows Performance Counters over WMI][55]
-* [Windows Status Based Check][56]
-* [How to retrieve WMI metrics][57]
+* [How to add event log files to the `Win32_NTLogEvent` WMI class][53]
+* [Collect Custom Windows Performance Counters over WMI][54]
+* [Windows Status Based Check][55]
+* [How to retrieve WMI metrics][56]
 
 [1]: /integrations/faq/aws-integration-and-cloudwatch-faq/
 [2]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration/
@@ -179,22 +178,21 @@ aliases:
 [36]: /integrations/faq/connection-issues-with-the-sql-server-integration/
 [37]: /integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
 [38]: /integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
-[39]: /integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
-[40]: /integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
-[41]: /integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi/
-[42]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
-[43]: /integrations/faq/database-user-lacks-privileges/
-[44]: /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api/
-[45]: /integrations/faq/postgres-custom-metric-collection-explained/
-[46]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family/
-[47]: /integrations/faq/redis-integration-error-unknown-command-config/
-[48]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids/
-[49]: /integrations/faq/how-to-import-datadog-resources-into-terraform/
-[50]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
-[51]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
-[52]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
-[53]: /integrations/faq/how-to-make-trello-card-using-webhooks/
-[54]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
-[55]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
-[56]: /integrations/faq/windows-status-based-check/
-[57]: /integrations/faq/how-to-retrieve-wmi-metrics/
+[39]: /integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
+[40]: /integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi/
+[41]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
+[42]: /integrations/faq/database-user-lacks-privileges/
+[43]: /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api/
+[44]: /integrations/faq/postgres-custom-metric-collection-explained/
+[45]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family/
+[46]: /integrations/faq/redis-integration-error-unknown-command-config/
+[47]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids/
+[48]: /integrations/faq/how-to-import-datadog-resources-into-terraform/
+[49]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
+[50]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
+[51]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
+[52]: /integrations/faq/how-to-make-trello-card-using-webhooks/
+[53]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
+[54]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
+[55]: /integrations/faq/windows-status-based-check/
+[56]: /integrations/faq/how-to-retrieve-wmi-metrics/
