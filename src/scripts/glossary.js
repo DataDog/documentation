@@ -2,7 +2,7 @@ const setActiveLetter = () => {
     const hash = window.location.hash.toLowerCase()
 
     if (hash) {
-        const navButtonContainer = document.querySelector('.js-glossary-nav')
+        const navButtonContainer = document.querySelector('.glossary-nav')
         const navButton = navButtonContainer.querySelector(`a[href="${hash}"`)
 
         if (navButton) {
@@ -12,7 +12,7 @@ const setActiveLetter = () => {
 }
 
 const handleNavClick = (event) => {
-    const navButtons = document.querySelectorAll('.js-glossary-nav .btn')
+    const navButtons = document.querySelectorAll('.glossary-nav .btn')
 
     navButtons.forEach(btn => {
         btn.classList.remove('active')
@@ -22,7 +22,7 @@ const handleNavClick = (event) => {
 }
 
 const registerEventListeners = () => {
-    const navButtons = document.querySelectorAll('.js-glossary-nav .btn')
+    const navButtons = document.querySelectorAll('.glossary-nav .btn')
 
     navButtons.forEach(btn => {
         btn.addEventListener('click', handleNavClick)

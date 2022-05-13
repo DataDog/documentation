@@ -91,6 +91,10 @@ p + blockquote {
 }
 
 // commonly used font-size and line-height combinations
+.font-14-18 {
+  @include font-size-line-height(14px, 18px);
+}
+
 .font-24-28 {
   @include font-size-line-height(24px, 28px);
 }

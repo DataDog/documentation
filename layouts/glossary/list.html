@@ -30,9 +30,9 @@
             {{ end }}
         </div>
 
-        <div class="js-glossary-nav col-2 col-md-12">
+        <div class="glossary-nav col-2 col-md-12 d-flex flex-column">
             {{ range $letters }}
-                <a class="btn" role="button" href="#{{ . | lower }}">{{ . }}</a>
+                <a class="btn font-14-18" role="button" href="#{{ . | lower }}">{{ . }}</a>
             {{ end }}
         </div>
     </div>
