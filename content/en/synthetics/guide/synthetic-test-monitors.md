@@ -45,15 +45,13 @@ To enable the alerting monitor to renotify, click the toggle left of `If this mo
 
 If you use [Atlassian Statuspage][6] for visibility into your applications' and services' uptime, you can update the status of your systems with  Synthetic test monitor notifications.
 
-1. See the [Statuspage documentation][7] to generate a component-specific email address.
-2. Add the generated email address into your test's notification message.
-3. Customize the monitor name to return `UP` or `DOWN` depending on the test state.
-
 {{< img src="synthetics/guide/synthetics_test_monitors/statuspage_monitor_setup.png" alt="Add a Statuspage email address and status to the monitor name in your Synthetic test" style="width:95%;">}}
 
-## Export Synthetic test uptime
-
-In order to export the uptime for a Synthetic test, you need the `monitor_id` for the respective test. Use the [Monitors API][8] to query the [`Get an API test`][9] or [`Get a browser test` endpoint][10].
+1. See the [Statuspage documentation][7] to generate a component-specific email address.
+2. Add the generated email address into your test's notification message. For example, `@custom-statuspage-email@notifications.statuspage.io`.
+3. Customize the monitor name to return `UP` or `DOWN` depending on the test state. For example, `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`.
+4. Fill out the monitor notification section and add a summary in the monitor name. For eaxmple, `Shopist Checkout Functionality`.
+5. Once you have configured your monitor, click **Save & Exit**.
 
 ## Further Reading
 
@@ -66,6 +64,3 @@ In order to export the uptime for a Synthetic test, you need the `monitor_id` fo
 [5]: /monitors/notify/#renotify
 [6]: https://support.atlassian.com/statuspage/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
-[8]: /api/latest/monitors/
-[9]: /api/latest/synthetics/#get-an-api-test
-[10]: /api/latest/synthetics/#get-a-browser-test
