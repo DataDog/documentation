@@ -31007,14 +31007,16 @@
                         "threshold",
                         "new_value",
                         "anomaly_detection",
-                        "impossible_travel"
+                        "impossible_travel",
+                        "hardcoded"
                       ],
                       "type": "string",
                       "x-enum-varnames": [
                         "THRESHOLD",
                         "NEW_VALUE",
                         "ANOMALY_DETECTION",
-                        "IMPOSSIBLE_TRAVEL"
+                        "IMPOSSIBLE_TRAVEL",
+                        "HARDCODED"
                       ]
                     },
                     "evaluationWindow": {
@@ -31040,6 +31042,16 @@
                         "THIRTY_MINUTES",
                         "ONE_HOUR",
                         "TWO_HOURS"
+                      ]
+                    },
+                    "hardcodedEvaluatorType": {
+                      "description": "Hardcoded evaluator type.",
+                      "enum": [
+                        "log4shell"
+                      ],
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "LOG4SHELL"
                       ]
                     },
                     "impossibleTravelOptions": {
@@ -31473,14 +31485,16 @@
                   "threshold",
                   "new_value",
                   "anomaly_detection",
-                  "impossible_travel"
+                  "impossible_travel",
+                  "hardcoded"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
                   "NEW_VALUE",
                   "ANOMALY_DETECTION",
-                  "IMPOSSIBLE_TRAVEL"
+                  "IMPOSSIBLE_TRAVEL",
+                  "HARDCODED"
                 ]
               },
               "evaluationWindow": {
@@ -31506,6 +31520,16 @@
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
                   "TWO_HOURS"
+                ]
+              },
+              "hardcodedEvaluatorType": {
+                "description": "Hardcoded evaluator type.",
+                "enum": [
+                  "log4shell"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOG4SHELL"
                 ]
               },
               "impossibleTravelOptions": {
@@ -31730,14 +31754,16 @@
           "threshold",
           "new_value",
           "anomaly_detection",
-          "impossible_travel"
+          "impossible_travel",
+          "hardcoded"
         ],
         "type": "string",
         "x-enum-varnames": [
           "THRESHOLD",
           "NEW_VALUE",
           "ANOMALY_DETECTION",
-          "IMPOSSIBLE_TRAVEL"
+          "IMPOSSIBLE_TRAVEL",
+          "HARDCODED"
         ]
       },
       "SecurityMonitoringRuleEvaluationWindow": {
@@ -31763,6 +31789,16 @@
           "THIRTY_MINUTES",
           "ONE_HOUR",
           "TWO_HOURS"
+        ]
+      },
+      "SecurityMonitoringRuleHardcodedEvaluatorType": {
+        "description": "Hardcoded evaluator type.",
+        "enum": [
+          "log4shell"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "LOG4SHELL"
         ]
       },
       "SecurityMonitoringRuleImpossibleTravelOptions": {
@@ -31930,14 +31966,16 @@
               "threshold",
               "new_value",
               "anomaly_detection",
-              "impossible_travel"
+              "impossible_travel",
+              "hardcoded"
             ],
             "type": "string",
             "x-enum-varnames": [
               "THRESHOLD",
               "NEW_VALUE",
               "ANOMALY_DETECTION",
-              "IMPOSSIBLE_TRAVEL"
+              "IMPOSSIBLE_TRAVEL",
+              "HARDCODED"
             ]
           },
           "evaluationWindow": {
@@ -31963,6 +32001,16 @@
               "THIRTY_MINUTES",
               "ONE_HOUR",
               "TWO_HOURS"
+            ]
+          },
+          "hardcodedEvaluatorType": {
+            "description": "Hardcoded evaluator type.",
+            "enum": [
+              "log4shell"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "LOG4SHELL"
             ]
           },
           "impossibleTravelOptions": {
@@ -32336,14 +32384,16 @@
                   "threshold",
                   "new_value",
                   "anomaly_detection",
-                  "impossible_travel"
+                  "impossible_travel",
+                  "hardcoded"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
                   "NEW_VALUE",
                   "ANOMALY_DETECTION",
-                  "IMPOSSIBLE_TRAVEL"
+                  "IMPOSSIBLE_TRAVEL",
+                  "HARDCODED"
                 ]
               },
               "evaluationWindow": {
@@ -32369,6 +32419,16 @@
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
                   "TWO_HOURS"
+                ]
+              },
+              "hardcodedEvaluatorType": {
+                "description": "Hardcoded evaluator type.",
+                "enum": [
+                  "log4shell"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOG4SHELL"
                 ]
               },
               "impossibleTravelOptions": {
@@ -32730,14 +32790,16 @@
                   "threshold",
                   "new_value",
                   "anomaly_detection",
-                  "impossible_travel"
+                  "impossible_travel",
+                  "hardcoded"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
                   "NEW_VALUE",
                   "ANOMALY_DETECTION",
-                  "IMPOSSIBLE_TRAVEL"
+                  "IMPOSSIBLE_TRAVEL",
+                  "HARDCODED"
                 ]
               },
               "evaluationWindow": {
@@ -32763,6 +32825,16 @@
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
                   "TWO_HOURS"
+                ]
+              },
+              "hardcodedEvaluatorType": {
+                "description": "Hardcoded evaluator type.",
+                "enum": [
+                  "log4shell"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOG4SHELL"
                 ]
               },
               "impossibleTravelOptions": {
@@ -71111,14 +71183,16 @@
                                   "threshold",
                                   "new_value",
                                   "anomaly_detection",
-                                  "impossible_travel"
+                                  "impossible_travel",
+                                  "hardcoded"
                                 ],
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "THRESHOLD",
                                   "NEW_VALUE",
                                   "ANOMALY_DETECTION",
-                                  "IMPOSSIBLE_TRAVEL"
+                                  "IMPOSSIBLE_TRAVEL",
+                                  "HARDCODED"
                                 ]
                               },
                               "evaluationWindow": {
@@ -71144,6 +71218,16 @@
                                   "THIRTY_MINUTES",
                                   "ONE_HOUR",
                                   "TWO_HOURS"
+                                ]
+                              },
+                              "hardcodedEvaluatorType": {
+                                "description": "Hardcoded evaluator type.",
+                                "enum": [
+                                  "log4shell"
+                                ],
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "LOG4SHELL"
                                 ]
                               },
                               "impossibleTravelOptions": {
@@ -71573,14 +71657,16 @@
                           "threshold",
                           "new_value",
                           "anomaly_detection",
-                          "impossible_travel"
+                          "impossible_travel",
+                          "hardcoded"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
                           "NEW_VALUE",
                           "ANOMALY_DETECTION",
-                          "IMPOSSIBLE_TRAVEL"
+                          "IMPOSSIBLE_TRAVEL",
+                          "HARDCODED"
                         ]
                       },
                       "evaluationWindow": {
@@ -71606,6 +71692,16 @@
                           "THIRTY_MINUTES",
                           "ONE_HOUR",
                           "TWO_HOURS"
+                        ]
+                      },
+                      "hardcodedEvaluatorType": {
+                        "description": "Hardcoded evaluator type.",
+                        "enum": [
+                          "log4shell"
+                        ],
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "LOG4SHELL"
                         ]
                       },
                       "impossibleTravelOptions": {
@@ -71953,14 +72049,16 @@
                             "threshold",
                             "new_value",
                             "anomaly_detection",
-                            "impossible_travel"
+                            "impossible_travel",
+                            "hardcoded"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
                             "NEW_VALUE",
                             "ANOMALY_DETECTION",
-                            "IMPOSSIBLE_TRAVEL"
+                            "IMPOSSIBLE_TRAVEL",
+                            "HARDCODED"
                           ]
                         },
                         "evaluationWindow": {
@@ -71986,6 +72084,16 @@
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
                             "TWO_HOURS"
+                          ]
+                        },
+                        "hardcodedEvaluatorType": {
+                          "description": "Hardcoded evaluator type.",
+                          "enum": [
+                            "log4shell"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "LOG4SHELL"
                           ]
                         },
                         "impossibleTravelOptions": {
@@ -72574,14 +72682,16 @@
                             "threshold",
                             "new_value",
                             "anomaly_detection",
-                            "impossible_travel"
+                            "impossible_travel",
+                            "hardcoded"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
                             "NEW_VALUE",
                             "ANOMALY_DETECTION",
-                            "IMPOSSIBLE_TRAVEL"
+                            "IMPOSSIBLE_TRAVEL",
+                            "HARDCODED"
                           ]
                         },
                         "evaluationWindow": {
@@ -72607,6 +72717,16 @@
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
                             "TWO_HOURS"
+                          ]
+                        },
+                        "hardcodedEvaluatorType": {
+                          "description": "Hardcoded evaluator type.",
+                          "enum": [
+                            "log4shell"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "LOG4SHELL"
                           ]
                         },
                         "impossibleTravelOptions": {
@@ -73013,14 +73133,16 @@
                           "threshold",
                           "new_value",
                           "anomaly_detection",
-                          "impossible_travel"
+                          "impossible_travel",
+                          "hardcoded"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
                           "NEW_VALUE",
                           "ANOMALY_DETECTION",
-                          "IMPOSSIBLE_TRAVEL"
+                          "IMPOSSIBLE_TRAVEL",
+                          "HARDCODED"
                         ]
                       },
                       "evaluationWindow": {
@@ -73046,6 +73168,16 @@
                           "THIRTY_MINUTES",
                           "ONE_HOUR",
                           "TWO_HOURS"
+                        ]
+                      },
+                      "hardcodedEvaluatorType": {
+                        "description": "Hardcoded evaluator type.",
+                        "enum": [
+                          "log4shell"
+                        ],
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "LOG4SHELL"
                         ]
                       },
                       "impossibleTravelOptions": {
@@ -73371,14 +73503,16 @@
                             "threshold",
                             "new_value",
                             "anomaly_detection",
-                            "impossible_travel"
+                            "impossible_travel",
+                            "hardcoded"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
                             "NEW_VALUE",
                             "ANOMALY_DETECTION",
-                            "IMPOSSIBLE_TRAVEL"
+                            "IMPOSSIBLE_TRAVEL",
+                            "HARDCODED"
                           ]
                         },
                         "evaluationWindow": {
@@ -73404,6 +73538,16 @@
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
                             "TWO_HOURS"
+                          ]
+                        },
+                        "hardcodedEvaluatorType": {
+                          "description": "Hardcoded evaluator type.",
+                          "enum": [
+                            "log4shell"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "LOG4SHELL"
                           ]
                         },
                         "impossibleTravelOptions": {

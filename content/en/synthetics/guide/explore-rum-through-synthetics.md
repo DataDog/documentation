@@ -7,6 +7,9 @@ further_reading:
 - link: "https://docs.datadoghq.com/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
+- link: "/synthetics/settings/"
+  tag: "Documentation"
+  text: "Synthetic Monitoring Settings"
 ---
 
 ## Overview
@@ -15,24 +18,28 @@ further_reading:
 
 Synthetic browser tests embed the Real User Monitoring SDK, allowing you to explore:
 
-- [Session Replay][1] for all tests. This provides additional context beyond the screenshots available for each step and includes [Dev Tools][2].
+- [Session Replay][1] for all tests. You can access additional context beyond screenshots available for each step and [Browser Dev Tools][2].
 - The session in the [RUM Explorer][3].
-- Aggregated errors across your different steps, tests, and test runs with [Error Tracking][4]. This allows you to scope the error impact and prioritize fixing the most severe issues. 
+- Aggregated errors across your different steps, tests, and test runs with [Error Tracking][4]. You can scope the error impact and prioritize fixing the most severe issues. 
 - Extra resources and timing information from RUM including additional search and monitor capabilities.
 
 ## Allow Synthetic data on RUM applications
 
 In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs. 
 
-Optionally, click `Synthetic Tests Default` and select another RUM application from the dropdown menu. This application is displayed in the browser test recording:
-
 1. Navigate to [**UX Monitoring** > **Settings** > **Integration Settings**][5].
-2. Under **Synthetic Data RUM Applications**, select a default RUM application suggested in the Browser Test Recorder from the dropdown menu. 
-3. Click **Save RUM Preview Settings**.
+2. Under **Synthetic Data RUM Collection**, click **Enable Synthetic RUM data collection** to enable Datadog to collect RUM data from your test runs.
+3. Click **Save RUM Data Collection**.
+4. Under **Synthetic Data RUM Applications**, select a default RUM application suggested in the Browser Test Recorder from the dropdown menu. 
+5. Click **Save RUM Data Applications**.
+
+Optionally, click `Synthetic Tests Default` and select another RUM application from the dropdown menu. This application is displayed in the browser test recording.
+
+For more information, see [Synthetic Monitoring Settings][6].
 
 ## Synthetics to RUM Explorer
 
-Navigate to your [list of browser tests][6] and click on a sample test run. 
+Navigate to your [list of browser tests][7] and click on a sample test run. 
 
 {{< img src="synthetics/guide/rum_in_synthetics/browser_test_step_side_panel.png" alt="Test Step Details Side Panel" style="width:100%;" >}}
 
@@ -44,7 +51,7 @@ To see this test step's errors, resources, and performance data in the [RUM Expl
 
 ## RUM Explorer to Synthetics
 
-In the RUM Explorer, navigate to your [list of sessions][7] and click on a session with a replay available. 
+In the RUM Explorer, navigate to your [list of sessions][8] and click on a session with a replay available. 
 
 {{< img src="synthetics/guide/rum_in_synthetics/sessions_details_panel.png" alt="Sessions Details Side Panel" style="width:100%;" >}}
 
@@ -63,5 +70,6 @@ To navigate back to Synthetics and your test’s results, click **View Synthetic
 [3]: /real_user_monitoring/explorer/
 [4]: /real_user_monitoring/error_tracking/
 [5]: https://app.datadoghq.com/synthetics/settings/integrations
-[6]: https://app.datadoghq.com/synthetics/tests?query=type%3A%28browser%29
-[7]: https://app.datadoghq.com/rum/explorer
+[6]: /synthetics/settings
+[7]: https://app.datadoghq.com/synthetics/tests?query=type%3A%28browser%29
+[8]: https://app.datadoghq.com/rum/explorer

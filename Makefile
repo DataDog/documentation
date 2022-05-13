@@ -263,7 +263,6 @@ examples/go: examples/datadog-api-client-go clean-go-examples
 	-cp -Rn examples/datadog-api-client-go/examples/v* ./content/en/api/
 
 examples/java: examples/datadog-api-client-java clean-java-examples
-	-cd examples/datadog-api-client-java; ./extract-code-blocks.sh || true
 	-cp -Rn examples/datadog-api-client-java/examples/v* ./content/en/api/
 
 examples/python: examples/datadog-api-client-python clean-python-examples

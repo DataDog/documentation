@@ -228,7 +228,7 @@ The Azure Datadog integration allows you to install the Datadog Agent on a VM or
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /integrations/azure/#create-datadog-resource
+[1]: https://docs.datadoghq.com/integrations/azure/?tab=link&site=us3#create-datadog-resource
 [2]: https://docs.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
 [3]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
 [4]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories

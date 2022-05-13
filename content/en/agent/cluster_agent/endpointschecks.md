@@ -159,7 +159,58 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 {{< /tabs >}}
 
 
-## Setting up check configurations with Kubernetes service annotations
+## Setting up check configurations
+
+### Configuration from static configuration files
+
+Starting Datadog Agent 1.18.0 you can use `advanced_ad_identifiers` and [Autodiscovery template variables][11] in you check configuration to target Kubernetes endpoints ([see example][12]).
+
+#### Example: HTTP_Check on Kubernetes endpoints
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+If there is a Kubernetes service you would like the to perform an [HTTP check][1] against its endpoints, use the `clusterAgent.confd` field to define your check configuration:
+
+```yaml
+#(...)
+clusterAgent:
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      advanced_ad_identifiers:
+        - kube_endpoints:
+            name: "<ENDPOINTS_NAME>"
+            namespace: "<ENDPOINTS_NAMESPACE>"
+      cluster_check: true
+      init_config:
+      instances:
+        - url: "http://%%host%%"
+          name: "<EXAMPLE_NAME>"
+```
+
+[1]: /integrations/http_check/
+{{% /tab %}}
+{{% tab "Daemonset" %}}
+If there is a Kubernetes service you would like the to perform an [HTTP check][1] against against its endpoints, mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
+
+```yaml
+advanced_ad_identifiers:
+  - kube_endpoints:
+      name: "<ENDPOINTS_NAME>"
+      namespace: "<ENDPOINTS_NAMESPACE>"
+cluster_check: true
+init_config:
+instances:
+  - url: "http://%%host%%"
+    name: "<EXAMPLE_NAME>"
+```
+
+[1]: /integrations/http_check/
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note:** The field `advanced_ad_identifiers` is supported starting Datadog Cluster Agent 1.18+.
+
+### Configuration from Kubernetes service annotations
 
 Similar to how [Kubernetes Pods][5] are annotated, services can be annotated with the following syntax:
 
@@ -326,3 +377,5 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 [8]: /integrations/nginx/
 [9]: /integrations/http_check/
 [10]: /agent/cluster_agent/troubleshooting/
+[11]: /agent/guide/template_variables/
+[12]: /agent/cluster_agent/endpointschecks/#example-http_check-on-kubernetes-endpoints
