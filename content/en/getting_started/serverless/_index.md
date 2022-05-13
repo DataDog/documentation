@@ -12,18 +12,16 @@ further_reading:
 
 _Serverless_ is a model where developers build and run applications and services using a cloud provider, rather than managing infrastructure themselves. Datadog [Serverless Monitoring][10] collects metrics, logs, and traces from your serverless infrastructure, enabling you to monitor your application's health and performance.
 
-{{< img src="getting_started/serverless/serverless_view.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
-
 This guide makes use of a serverless [sample app][1] that you can launch with one click. This app has Serverless Monitoring preconfigured. Follow this guide to see how you might troubleshoot a problem in your sample app, and what kinds of visibility Serverless Monitoring can provide.
 
 ### Install the sample app
 
 1. [Launch the CloudFormation Stack][9]. This link brings you to a **Create stack** page in CloudFormation.
-2. Enter your Datadog API key and Datadog site ({{< region-param key="dd_site" code="true" >}}). 
+2. Enter your [Datadog API key][12] and [Datadog site][13] ({{< region-param key="dd_site" code="true" >}}). 
 
   {{< img src="getting_started/serverless/aws_create_stack.png" alt="Close-up of two functions" style="width:80%;">}}
 
-  Then, acknowledge IAM capabilities and click **Create Stack**.
+   Then, acknowledge IAM capabilities and click **Create Stack**.
 
 3. After the stack has been created, open the Outputs tab.
 
@@ -143,3 +141,5 @@ You can filter these logs to only see errors, or view them in the [Log Explorer]
 [9]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-serverless-sample-app&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-sample-app/latest.yaml
 [10]: /serverless
 [11]: https://app.datadoghq.com/functions?cloud=aws&text_search=datadog-serverless-sample-app
+[12]: https://app.datadoghq.com/organization-settings/api-keys
+[13]: https://docs.datadoghq.com/getting_started/site
