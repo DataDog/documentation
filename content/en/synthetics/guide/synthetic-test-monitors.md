@@ -21,25 +21,23 @@ When you create a Synthetic test, Datadog automatically creates an associated mo
 
 <div class="alert alert-info">You cannot create or import a Synthetic test monitor in <a href="/monitors/create/">Monitors</a>.</div>
 
-Create a monitor in the **Configure the monitor for this test** section to send notifications when a Synthetic test is failing. Monitors are associated with the Synthetic test you create and contain the alerting conditions set in your Synthetic test configuration. 
+Create a monitor in the **Configure the monitor for this test** section to send notifications when a Synthetic test is failing. Monitors are associated with the Synthetic test you create and contain the alerting conditions set in your Synthetic test configuration. To use monitor attribute and tag variables, create a [metric monitor][1].
 
 {{< img src="synthetics/guide/synthetics_test_monitors/configure_the_monitor_for_this_test.png" alt="Creating a monitor in your Synthetic test" style="width:90%;">}}
 
-Customize the monitor name to search for it on the [**Manage Monitors**][1] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][2] to characterize the notification message based on test state. 
+Customize the monitor name to search for it on the [**Manage Monitors**][2] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][3] to characterize the notification message based on test state. 
 
-The Synthetic test monitor integrates with notification channels such as email, Slack, Pagerduty, and Microsoft Teams. For more information, see [Notifications][3].
-
-To use monitor attribute and tag variables, create a [metric monitor][4].
+The Synthetic test monitor integrates with notification channels such as email, Slack, Pagerduty, and Microsoft Teams. For more information, see [Notifications][4].
 
 If you have multiple layers of notifications (for example, notifying more teams the longer a Synthetic test is alerting), Datadog recommends enabling [renotification][5] on your Synthetic monitors.
 
-## Notify multiple teams with renotifications
+## Tailor monitor notifications
 
-Depending on your incident management strategy, you may want to involve multiple teams when a Synthetic test alerts. Add `{{#is_renotify}}` and `{{/is_renotify}` in the escalation message to notify Team A first, and Team B if the issue still occurs. You can use conditional variables to characterize the notification message based on team. 
+Depending on your incident management strategy, you may want to involve multiple teams when a Synthetic test alerts. Add `{{#is_renotify}}` and `{{/is_renotify}` in the escalation message to notify Team A first, and Team B if the issue still occurs. Use [conditional variables][3] to characterize the notification message based on team. 
 
 {{< img src="synthetics/guide/synthetics_test_monitors/renotification_toggle.png" alt="Select the amount of time for the alerting monitor to renotify" style="width:90%;">}}
 
-To enable the alerting monitor to renotify, click the toggle left of `If this monitor stays in alert status renotify every` and select a time option from the dropdown menu.
+To enable the alerting monitor to renotify, click the toggle left of `If this monitor stays in alert status renotify every` and select a time option from the dropdown menu. Optionally, use [conditional variables][3] such as `{{#is_renotify}}` and `{{/is_renotify}}` to send an escalation message to a different team or organization.
 
 ## Integrate your Synthetic test monitor with Statuspage
 
@@ -57,10 +55,10 @@ If you use [Atlassian Statuspage][6] for visibility into your applications' and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/manage/
-[2]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[3]: /monitors/notify/#integrations/
-[4]: /monitors/create/types/metric/
+[1]: /monitors/create/types/metric/
+[2]: /monitors/manage/
+[3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
+[4]: /monitors/notify/#integrations/
 [5]: /monitors/notify/#renotify
 [6]: https://support.atlassian.com/statuspage/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
