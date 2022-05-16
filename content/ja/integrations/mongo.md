@@ -32,7 +32,7 @@ git_integration_title: mongo
 guid: d51c342e-7a02-4611-a47f-1e8eade5735c
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 3.2.1
+integration_version: 3.2.2
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
