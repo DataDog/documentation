@@ -38,7 +38,6 @@ aliases:
 ## Docker
 
 * [Compose and the Datadog Agent][15]
-* [Container Integration Events][16]
 
 ## Elasticsearch
 

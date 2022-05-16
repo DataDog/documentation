@@ -9,6 +9,8 @@ aliases:
     - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
     - /agent/autodiscovery
     - /integrations/faq/can-i-install-the-agent-on-my-Kubernetes-master-node-s/
+    - /integrations/faq/docker-ecs-kubernetes-events/
+    - /integrations/faq/container-integration-event/
 further_reading:
     - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
       tag: "Release Notes"
