@@ -3,6 +3,9 @@ title: OTLP Trace Ingestion by the Datadog Agent
 kind: documentation
 description: 'Ingest OTLP trace data through the Datadog Agent'
 further_reading:
+- link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
+  tag: "Blog"
+  text: "OTLP ingestion in the Agent"
 aliases:
 ---
 
@@ -238,6 +241,10 @@ experimental:
 {{< /tabs >}}
 
 There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][5].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/
 [2]: /metrics/otlp/
