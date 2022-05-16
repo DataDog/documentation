@@ -64,7 +64,7 @@ Consultez la section [Hostmap][9] pour en savoir plus.
 
 {{< img src="events/explorer/events-overview.png" alt="Events Explorer" style="width:100%;" >}}
 
-La vue [Event Explorer][10] affiche les événements les plus récents générés par votre infrastructure et vos services.
+La vue [Events Explorer][10] affiche les événements les plus récents générés par votre infrastructure et vos services.
 
 Des événements peuvent être générés pour :
 
@@ -73,11 +73,11 @@ Des événements peuvent être générés pour :
 - Les changements de configuration
 - Les alertes de surveillance
 
-L'Event Explorer rassemble automatiquement les événements recueillis par l'Agent et les intégrations installées.
+L'Events Explorer rassemble automatiquement les événements recueillis par l'Agent et les intégrations installées.
 
 Vous pouvez également envoyer vos propres événements personnalisés à l'aide de l'API Datadog, des checks d'Agent custom, de DogStatsD ou de l'API d'e-mail pour les événements.
 
-Dans l'Event Explorer, vous pouvez filtrer vos événements en fonction de facettes ou de requêtes de recherche. Il est également possible de regrouper ou de filtrer les événements par attribut, et de les représenter graphiquement avec des [analyses d'événements][11].
+Dans l'Events Explorer, vous pouvez filtrer vos événements en fonction de facettes ou de requêtes de recherche. Il est également possible de regrouper ou de filtrer les événements par attribut, et de les représenter graphiquement avec des [analyses d'événements][11].
 
 ## Dashboards
 
