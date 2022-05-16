@@ -111,10 +111,6 @@ aliases:
 
 * [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][48]
 
-## Terraform
-
-* [How to import datadog resources into Terraform][49]
-
 ## Unix
 
 * [How can I gather metrics from the UNIX shell?][50]
