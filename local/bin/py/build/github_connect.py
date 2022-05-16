@@ -109,6 +109,7 @@ class GitHub:
                 org, repo, branch
             )
             sha_response = requests.get(url, headers=headers)
+            
             if sha_response.status_code == requests.codes.ok:
                 sha = (
                     sha_response.json()
@@ -139,12 +140,24 @@ class GitHub:
                     )
                 )
 
+        # # TEST
         if globs:
             filtered_listing = []
+
             for item in listing:
                 path = item.get("path", "")
+
                 for glob_string in globs:
                     if fnmatch.fnmatch(path, glob_string):
+                        # test_url = f'https://api.github.com/repos/{org}/{repo}/commits?path={path}'
+                        test_url = f'https://api.github.com/repos/{org}/{repo}/commits'
+
+                        response = requests.get(url, headers=headers)
+                        response_json = response.json()
+
+                        print('**** COMMIT_DATA ****')
+                        print(response_json)
+
                         filtered_listing.append(item)
             return filtered_listing
         else:

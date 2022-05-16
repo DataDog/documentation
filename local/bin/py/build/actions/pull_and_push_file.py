@@ -23,6 +23,8 @@ def pull_and_push_file(content, content_dir):
     :param content_dir: The directory where content should be put
     """
     with open("".join(content["globs"]), mode="r+") as f:
+        print(f'In pull and push file.  Content:')
+        print(content)
         file_content = f.read()
         # If options include front params, then the H1 title of the source file is striped
         # and the options front params are inlined
