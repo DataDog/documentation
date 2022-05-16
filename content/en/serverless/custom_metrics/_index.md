@@ -7,9 +7,9 @@ kind: documentation
 
 There are a few different ways to submit custom metrics to Datadog from a Lambda function.
 
-- **Creating custom metrics from logs or traces**: If your Lambda functions are already sending trace or log data to Datadog, and the data you want to query is captured in an existing log or trace, you can [generate custom metrics from logs and traces](#creating-custom-metrics-from-logs-or-traces) without re-deploying or making any changes to your application code.
-- **Submitting custom metrics using the Datadog Lambda extension**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension). [Check whether the Datadog Lambda extension is supported][1] in your Lambda function runtime.
-- **Submitting custom metrics using the Datadog Forwarder Lambda**: If you want to submit custom metrics from a runtime that is not yet supported by the Datadog Lambda Extension, you can use the [Datadog Forwarder Lambda](#with-the-datadog-forwarder).
+- **[Creating custom metrics from logs or traces](#creating-custom-metrics-from-logs-or-traces)**: If your Lambda functions are already sending trace or log data to Datadog, and the data you want to query is captured in an existing log or trace, you can generate custom metrics from logs and traces without re-deploying or making any changes to your application code.
+- **[Submitting custom metrics using the Datadog Lambda extension](#with-the-datadog-lambda-extension)**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda extension][1].
+- **[Submitting custom metrics using the Datadog Forwarder Lambda](#with-the-datadog-forwarder)**: If you are sending telemetry from your Lambda function over the Datadog Forwarder Lambda, you can submit customer metrics over logs using the Datadog-provided helper functions.
 - **(Deprecated) Submitting custom metrics using the Datadog Lambda library**: The Datadog Lambda library for Python, Node.js and Go support sending custom metrics synchronously from the runtime to Datadog by blocking the invocation when `DD_FLUSH_TO_LOG` is set to `false`. Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension) instead.
 - **(Deprecated) Submitting custom metrics from CloudWatch logs**: The method to submit custom metrics by printing a log formatted as `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` has been [deprecated](#deprecated-cloudwatch-logs). Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension) instead.
 - **(Not recommended) Using a third-party library**: Most third-party libraries do not submit metrics as distributions and can lead to under-counted results.
@@ -53,7 +53,7 @@ You can also generate metrics from all ingested spans, regardless of whether the
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Custom Metrics from AWS Lambda" >}}
 
-Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metrics from supported Lambda runtimes.
+Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metrics as [**distribution**](#understanding-distribution-metrics) from the supported Lambda runtimes.
 
 1. Follow the general [serverless installation instructions][8] appropriate for your Lambda runtime.
 1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false`.
@@ -133,7 +133,10 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
-[Install][12] the DogStatsD client for your runtime and follow the [sample code][13] to submit your custom metrics. Note: For accurate results, you must use [**distribution**](#understanding-distribution-metrics).
+[Install][1] the DogStatsD client for your runtime and follow the [sample code][2] to submit your custom metrics. Note: For accurate results, you must use [**distribution**](#understanding-distribution-metrics).
+
+[1]: /developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
+[2]: /developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -340,5 +343,3 @@ Where:
 [9]: /serverless/forwarder/
 [10]: /integrations/amazon_web_services/?tab=roledelegation#datadog-aws-iam-policy
 [11]: /metrics/
-[12]: /developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
-[13]: /developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
