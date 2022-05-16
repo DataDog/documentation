@@ -33,7 +33,7 @@ git_integration_title: iis
 guid: 6ad932f0-8816-467a-8860-72af44d4f3ba
 integration_id: iis
 integration_title: IIS
-integration_version: 2.16.1
+integration_version: 2.16.2
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
