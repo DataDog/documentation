@@ -15,19 +15,20 @@ assets:
     user_overview: assets/saved_views/user_overview.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
 display_name: PGBouncer
 draft: false
 git_integration_title: pgbouncer
 guid: 51386802-4502-4991-b592-27eff1ca111c
 integration_id: pgbouncer
 integration_title: PGBouncer
+integration_version: 4.2.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -36,14 +37,17 @@ metric_prefix: pgbouncer.
 metric_to_check: pgbouncer.pools.sv_idle
 name: pgbouncer
 process_signatures:
-  - pgbouncer
+- pgbouncer
 public_title: Datadog-PGBouncer インテグレーション
 short_description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
 support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ## 概要
 
 PgBouncer チェックは、接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックの監視を可能にします。
@@ -102,7 +106,7 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
      - database_url: "postgresql://datadog:<PASSWORD>@<HOSTNAME>:<PORT>/<DATABASE_URL>?sslmode=require"
    ```
 
-   **注**: PgBouncer のインスタンスに SSL サポートがない場合は、`sslmode=require` を `sslmode=allow` と置換してサーバーエラーを防ぎます。SSL サポートに関する詳細は、[Postgres ドキュメント][3]を参照してください。
+   **注**: PgBouncer のインスタンスに SSL サポートがない場合は、`sslmode=require` を `sslmode=allow` と置換してサーバーエラーを防ぎます。詳細は、[SSL サポート][3]の Postgres ドキュメントを参照してください。
 
 2. [Agent を再起動します][4]。
 
@@ -154,7 +158,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                           |
 | -------------- | ----------------------------------------------- |
@@ -182,13 +186,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 PgBouncer チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "pgbouncer" >}}
 
-**pgbouncer.can_connect**:<br>
-Agent が PgBouncer に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
