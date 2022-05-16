@@ -5,11 +5,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - collaboration
+- collaboration
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md
 display_name: Nextcloud
 draft: false
 git_integration_title: nextcloud
@@ -28,10 +28,13 @@ public_title: Intégration Datadog/Nextcloud
 short_description: Surveillez les statistiques générales de votre instance Nextcloud.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Nextcloud][1].
@@ -60,7 +63,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][8] et recherchez `nextcloud` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][8] et cherchez `nextcloud` dans la section Checks.
 
 ## Données collectées
 
