@@ -6,14 +6,14 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - orchestration
-  - notification
-  - compliance
-  - automation
+- orchestration
+- notification
+- compliance
+- automation
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
 display_name: Pliant
 draft: false
 git_integration_title: pliant
@@ -32,10 +32,13 @@ public_title: Intégration Datadog/Pliant
 short_description: Automatisation de processus informatiques avec Pliant.io
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Pliant.io renforce le système de notifications de Datadog en intégrant des workflows automatisés nécessitant peu de code. Cette approche permet de tirer profit d'une véritable solution d'automatisation à circuit fermé, afin de faciliter l'identification des erreurs, le dépannage et les corrections automatiques.
@@ -63,7 +66,7 @@ Créez un ou plusieurs workflows à déclencher à partir d'une notification Dat
 
 ![Étape 1 menu API Keys][2]
 
-2. Depuis l'écran API Keys, cliquez sur « + Create » en haut à droite de l'écran, puis nommez votre nouvelle clé d'API. Cliquez sur Save. La clé d'API est alors ajoutée à la table.
+2. Depuis l'écran API Keys, cliquez sur « + Create » en haut à droite de l'écran, puis nommez votre nouvelle clé d'API. Cliquez sur Save et notez votre clé d'API. Cette dernière est ajoutée à la table.
 
 ![Étape 2 Créer une clé d'API][3]
 
@@ -77,18 +80,20 @@ Créez un ou plusieurs workflows à déclencher à partir d'une notification Dat
 
 Dans cet exemple, le workflow s'intitule « RestartHost ». Il redémarre un host à partir des informations avec lesquelles Datadog le déclenche.
 
-Ce workflow s'exécute avec ses variables d'entrée qui sont initialement attribuées en fonction du corps de requête utilisé pour le déclencher. Le workflow peut déclencher/exécuter n'importe quelle action d'automatisation d'infrastructure de votre choix à l'aide des informations fournies par son entrée. Dans cet exemple, un host est redémarré via SSH dans certaines conditions lorsque Datadog déclenche notre workflow d'automatisation avec certains paramètres.
+Ce workflow s'exécute avec ses variables d'entrée qui sont initialement attribuées en fonction du corps de requête utilisé pour le déclencher. Le workflow peut déclencher/exécuter n'importe quelle action d'automatisation d'infrastructure de votre choix à l'aide des informations fournies par son entrée. Dans cet exemple, un host est redémarré via SSH dans certaines conditions lorsque Datadog déclenche le workflow d'automatisation avec certains paramètres.
 
   - Pour ajouter des variables d'entrée ayant pour valeur les données envoyées par Datadog, cliquez sur l'icône « Expand » au démarrage du workflow pour ouvrir le volet Variable. Pour créer des variables d'**entrée** correspondantes, définissez la valeur de toutes ces variables d'entrée sur des guillemets vides : `""`. Par défaut, Datadog transmet des données pour les champs suivants :
-`body`
-`last_updated`
-`event_type`
-`title`
-`date`
-`org`
-`id`
+    ```
+    body
+    last_updated
+    event_type
+    title
+    date
+    org
+    id
+    ```
 
-Certaines variables de sortie (`host`, `meta` et `ip`) sont également initialisées. Le workflow attribue ces variables de sortie et renvoie les valeurs résultantes à la fin de l'action. Il est également possible de spécifier des variables qui ne sont ni d'entrée ni de sortie de façon à les utiliser en interne dans la logique du workflow.
+Certaines variables supplémentaires de sortie (`host`, `meta` et `ip`) sont également initialisées. Le workflow attribue ces variables de sortie et renvoie les valeurs résultantes à la fin de l'action. Il est également possible de spécifier des variables qui ne sont ni d'entrée ni de sortie de façon à les utiliser en interne dans la logique du workflow.
 
 ![Expand][5]
 
@@ -117,9 +122,11 @@ Copiez l'URL complète entre guillemets (comprenant éventuellement des paramèt
 3. Faites défiler jusqu'à atteindre la section « webhooks ». Cliquez sur **New** pour ajouter un webhook associé au workflow Plant. Commencez par nommer votre webhook en remplissant le champ « name ». Dans cet exemple, le nom du workflow est « RestartHost ».
 ![Configuration webhooks 2][11]
 
-Collez ensuite l'URL copiée à l'étape 4. Exemple :
+Collez l'URL copiée à l'étape 4. Exemple :
 
-***https://<VOTRE_INSTANCE_PLIANT>/api/v1/trigger/<VOTRE_NOM_UTILISATEUR_PLIANT>/User/<CHEMIN_WORKFLOW>/<WORKFLOW_ACTUEL>?sync=true&api_key=<VOTRE_CLÉ_API>***
+```
+https://<VOTRE_INSTANCE_PLIANT>/api/v1/trigger/<VOTRE_NOM_UTILISATEUR_PLIANT>/User/<CHEMIN_WORKFLOW>/<WORKFLOW_ACTUEL>?sync=true&api_key=<VOTRE_CLÉ_API>
+```
 
 Collez cette URL dans le champ ***URL*** du formulaire du webhook.
 
