@@ -188,11 +188,11 @@ As a best practice, Datadog recommends using [unified service tagging][22] when 
 
 Datadog automatically collects common tags from Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher. To extract even more tags, use the following options:
 
-| Env Variable               | Description                                               |
-|----------------------------|-----------------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS` | Extract Docker container labels                           |
-| `DD_DOCKER_ENV_AS_TAGS`    | Extract Docker container environment variables            |
-| `DD_COLLECT_EC2_TAGS`      | Extract custom EC2 tags without using the AWS integration |
+| Env Variable                  | Description                                                                                             |
+|-------------------------------|---------------------------------------------------------------------------------------------------------|
+| `DD_CONTAINER_LABELS_AS_TAGS` | Extract container labels. This env is equivalent to the old `DD_DOCKER_LABELS_AS_TAGS` env.             |
+| `DD_CONTAINER_ENV_AS_TAGS`    | Extract container environment variables. This env is equivalent to the old `DD_DOCKER_ENV_AS_TAGS` env. |
+| `DD_COLLECT_EC2_TAGS`         | Extract custom EC2 tags without using the AWS integration.                                              |
 
 See the [Docker Tag Extraction][23] documentation to learn more.
 
