@@ -11,6 +11,7 @@ aliases:
     - /integrations/faq/can-i-install-the-agent-on-my-Kubernetes-master-node-s/
     - /integrations/faq/docker-ecs-kubernetes-events/
     - /integrations/faq/container-integration-event/
+    - /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
 further_reading:
     - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
       tag: "Release Notes"

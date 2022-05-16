@@ -79,7 +79,6 @@ aliases:
 ## Kubernetes
 
 * [Client Authentication against the apiserver and kubelet][34]
-* [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][35]
 
 ## MySQL & SQL
 
