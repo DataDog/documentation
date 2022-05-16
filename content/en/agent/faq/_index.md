@@ -20,7 +20,6 @@ aliases:
     {{< nextlink href="agent/faq/how-is-the-system-mem-used-metric-calculated" >}}How is the 'system.mem.used' metric calculated?{{< /nextlink >}}
     {{< nextlink href="agent/faq/why-should-i-install-the-agent-on-my-cloud-instances" >}}Why should I install the Datadog Agent on my cloud instances?{{< /nextlink >}}
     {{< nextlink href="agent/faq/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
-    {{< nextlink href="agent/faq/kubernetes-state-cluster-check" >}}How do I run the kubernetes_state check as a cluster check?{{< /nextlink >}}
     {{< nextlink href="agent/faq/rpm-gpg-key-rotation-agent-6" >}}RPM GPG Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/faq/agent-v6-changes" >}}Datadog Agent v6 Changes{{< /nextlink >}}
     {{< nextlink href="agent/faq/ec2-use-win-prefix-detection" >}}Windows EC2 hostnames starting with EC2AMAZ-{{< /nextlink >}}

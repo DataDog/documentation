@@ -3,6 +3,7 @@ title: Running Cluster Checks with Autodiscovery
 kind: documentation
 aliases:
     - /agent/autodiscovery/clusterchecks
+    - /agent/faq/kubernetes-state-cluster-check
 further_reading:
     - link: '/agent/kubernetes/cluster/'
       tag: 'Documentation'
