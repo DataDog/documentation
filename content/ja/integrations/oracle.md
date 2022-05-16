@@ -9,18 +9,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - autodiscovery
+- data store
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
+- https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
 display_name: Oracle Database
 draft: false
 git_integration_title: oracle
 guid: 6c4ddc46-2763-4c56-8b71-c838b7f82d7b
 integration_id: oracle
 integration_title: Oracle
+integration_version: 3.9.4
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -32,10 +33,13 @@ public_title: Datadog-Oracle インテグレーション
 short_description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Oracle ダッシュボード][1]
 
 ## 概要
@@ -48,7 +52,7 @@ Oracle Database サーバーからメトリクスをリアルタイムに取得�
 
 #### 前提条件
 
-Oracle インテグレーションを使用するには、Oracle Instant Client ライブラリをインストールするか、Oracle JDBC Driver をダウンロードする必要があります (Linux のみ)。
+Oracle インテグレーションを使用するには、Oracle Instant Client ライブラリをインストールするか、Oracle JDBC ドライバーをダウンロードする必要があります (Linux のみ)。
 ライセンスの制約により、これらのライブラリは Datadog Agent に含まれていませんが、Oracle から直接ダウンロードできます。
 
 ##### Oracle Instant Client
@@ -120,7 +124,7 @@ Java 8 以降は、JDBC Driver を使用するときに Agent が使用するラ
 {{< tabs >}}
 {{% tab "スタンドアロン" %}}
 
-Oracle Database サーバーへの適切なアクセス権を持つ、読み取り専用の `datadog` ユーザーを作成します。管理者ユーザー (SYSDBA` または `SYSOPER`) で Oracle Database に接続し、以下を実行します。
+Oracle Database サーバーへの適切なアクセス権を持つ、読み取り専用の `datadog` ユーザーを作成します。`SYSDBA` や `SYSOPER` などの管理者ユーザーで Oracle Database に接続し、以下を実行します。
 
 ```text
 -- Oracle Script を有効にします。
@@ -240,9 +244,89 @@ instances:
     only_custom_queries: true
 ```
 
+#### TCPS による Oracle への接続
+
+1. TCPS (TCP with SSL) を使って Oracle に接続するには、`protocol` 構成オプションのコメントを解除して、`TCPS` を選択します。`server` オプションを更新して、監視する TCPS サーバーを設定します。
+
+    ```yaml
+    init_config:
+
+    instances:
+      ## @param server - string - required
+      ## The IP address or hostname of the Oracle Database Server.
+      #
+      - server: localhost:1522
+
+        ## @param service_name - string - required
+        ## The Oracle Database service name. To view the services available on your server,
+        ## run the following query:
+        ## `SELECT value FROM v$parameter WHERE name='service_names'`
+        #
+        service_name: "<SERVICE_NAME>"
+
+        ## @param user - string - required
+        ## The username for the user account.
+        #
+        user: <USER>
+
+        ## @param password - string - required
+        ## The password for the user account.
+        #
+        password: "<PASSWORD>"
+
+        ## @param protocol - string - optional - default: TCP
+        ## The protocol to connect to the Oracle Database Server. Valid protocols include TCP and TCPS.
+        ##
+        ## When connecting to Oracle Database via JDBC, `jdbc_truststore` and `jdbc_truststore_type` are required.
+        ## More information can be found from Oracle Database's whitepaper:
+        ##
+        ## https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
+        #
+        protocol: TCPS
+    ```
+
+2. Oracle Database で TCPS 接続を許可するために、`sqlnet.ora`、`listener.ora`、`tnsnames.ora` を更新します。
+
+##### Oracle Instant Client による TCPS
+
+Oracle Instant Client を使用して Oracle Database に接続している場合、Datadog Agent がデータベースに接続できることを確認します。構成オプションに入力された情報を使って、`sqlplus` コマンドラインツールを使用します。
+
+```shell
+sqlplus <USER>/<PASSWORD>@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCPS)(HOST=<HOST>)(PORT=<PORT>))(SERVICE_NAME=<SERVICE_NAME>)))
+```
+
+##### JDBC による TCPS
+
+JDBC を使用して Oracle Database に接続している場合は、`jdbc_truststore_path`、`jdbc_truststore_type`、および Truststore にパスワードがある場合は `jdbc_truststore_password` (オプション) も指定する必要があります。
+
+**注**: SSO のトラストストアはパスワードを必要としません。
+
+```yaml
+    # `instances:` セクションで
+    ...
+
+    ## @param jdbc_truststore_path - 文字列 - オプション
+    ## JDBC トラストストアのファイルパス。
+    #
+    jdbc_truststore_path: /path/to/truststore
+
+    ## @param jdbc_truststore_type - 文字列 - オプション
+    ## JDBC トラストストアのファイルタイプ。サポートされているトラストストアのタイプには、JKS、SSO、および PKCS12 があります。
+    #
+    jdbc_truststore_type: SSO
+
+    ## @param jdbc_truststore_password - 文字列 - オプション
+    ## JDBC で接続する際のトラストストアのパスワード。
+    #
+    # jdbc_truststore_password: <JDBC_TRUSTSTORE_PASSWORD>
+```
+
+TCPS on JDBC による Oracle Database への接続の詳細については、公式の [Oracle ホワイトペーパー][4]を参照してください。
+
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -429,7 +513,7 @@ Oracle Database チェックには、イベントは含まれません。
 - [Oracle][6] の Linux インストールドキュメントを参照してください。
 
 ##### Windows
-- ご使用のバージョンで Microsoft Visual Studio <YEAR> 再頒布可能パッケージの要件が満たされていることを確認します。詳細については、[Windows ダウンロードページ][7]を参照してください。
+- ご使用のバージョンで Microsoft Visual Studio `<YEAR>` 再頒布可能パッケージの要件が満たされていることを確認します。詳細については、[Windows ダウンロードページ][7]を参照してください。
 - [Oracle][8] の詳細な Windows インストールドキュメントを参照してください。
 
 
@@ -455,7 +539,7 @@ Oracle Database チェックには、イベントは含まれません。
 表示された出力が正しい値と一致することを確認してください。
 
     ```shell script
-      sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/python -c "import os; print("JAVA_HOME:{}".format(os.environ.get("JAVA_HOME")))"
+      sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/python -c "import os; print(\"JAVA_HOME:{}\".format(os.environ.get(\"JAVA_HOME\")))"
     ```
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
