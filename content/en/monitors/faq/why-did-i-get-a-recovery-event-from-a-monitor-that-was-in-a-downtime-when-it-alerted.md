@@ -2,7 +2,7 @@
 title: Why did I get a recovery event from a Monitor that was in a Downtime when it alerted?
 kind: faq
 further_reading:
-- link: "/monitors/create/types/"
+- link: "/monitors/create/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"

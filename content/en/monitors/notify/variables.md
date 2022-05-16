@@ -472,7 +472,7 @@ The monitors link is customizable with additional parameters. The most common ar
 
 
 
-[1]: /monitors/create/types/
+[1]: /monitors/create/#monitor-types
 {{% /tab %}}
 {{% tab "Logs" %}}
 

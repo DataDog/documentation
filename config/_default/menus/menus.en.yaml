@@ -1004,101 +1004,101 @@ main:
     parent: alerting
     identifier: monitors_create
     weight: 1
-  - name: Monitor Configuration
+  - name: Configure Monitors
     url: monitors/create/configuration/
     parent: monitors_create
     identifier: monitor_configuration
     weight: 101
-  - name: Monitor Types
-    url: monitors/create/types/
-    parent: monitors_create
-    identifier: monitor_types
-    weight: 102
   - name: Host
     url: monitors/create/types/host/
-    parent: monitor_types
+    parent: monitors_create
     identifier: monitor_types_host
-    weight: 1021
+    weight: 102
   - name: Metric
     url: monitors/create/types/metric/
-    parent: monitor_types
+    parent: monitors_create
     identifier: monitor_types_metrics
-    weight: 1022
+    weight: 103
   - name: Anomaly
     url: monitors/create/types/anomaly/
-    parent: monitor_types
+    parent: monitors_create
     identifier: monitor_types_anomaly
-    weight: 1023
-  - name: Outlier
-    url: monitors/create/types/outlier/
-    parent: monitor_types
-    identifier: monitor_types_outlier
-    weight: 1024
-  - name: Forecast
-    url: monitors/create/types/forecasts/
-    parent: monitor_types
-    identifier: monitor_types_forecasts
-    weight: 1025
-  - name: Integration
-    url: monitors/create/types/integration/
-    parent: monitor_types
-    identifier: monitor_types_integration
-    weight: 1026
-  - name: Live Process
-    url: monitors/create/types/process/
-    parent: monitor_types
-    identifier: monitor_types_process
-    weight: 1027
-  - name: Process Check
-    url: monitors/create/types/process_check/
-    parent: monitor_types
-    identifier: monitor_types_process_check
-    weight: 1028
-  - name: Network
-    url: monitors/create/types/network/
-    parent: monitor_types
-    identifier: monitor_types_network
-    weight: 1029
-  - name: Custom Check
-    url: monitors/create/types/custom_check/
-    parent: monitor_types
-    identifier: monitor_types_custom_check
-    weight: 1030
-  - name: Event
-    url: monitors/create/types/event/
-    parent: monitor_types
-    identifier: monitor_types_event
-    weight: 1031
-  - name: Logs
-    url: monitors/create/types/log/
-    parent: monitor_types
-    identifier: monitor_types_log
-    weight: 1032
+    weight: 104
   - name: APM
     url: monitors/create/types/apm/
-    parent: monitor_types
+    parent: monitors_create
     identifier: monitor_types_apm
-    weight: 1033
-  - name: Real User Monitoring
-    url: monitors/create/types/real_user_monitoring/
-    parent: monitor_types
-    identifier: monitor_types_rum
-    weight: 1034
-  - name: Watchdog
-    url: monitors/create/types/watchdog/
-    parent: monitor_types
-    identifier: monitor_types_watchdog
-    weight: 1035
-  - name: Composite
-    url: monitors/create/types/composite/
-    parent: monitor_types
-    identifier: monitor_types_composite
-    weight: 1036
+    weight: 105
+  - name: Audit logs
+    url: monitors/create/types/audit_logs/
+    parent: monitors_create
+    identifier: monitor_types_auditlogs
+    weight: 106
   - name: CI Pipelines
     url: monitors/create/types/ci_pipelines/
-    parent: monitor_types
+    parent: monitors_create
     identifier: monitor_types_cipipelines
-    weight: 1037
+    weight: 107
+  - name: Composite
+    url: monitors/create/types/composite/
+    parent: monitors_create
+    identifier: monitor_types_composite
+    weight: 108
+  - name: Custom Check
+    url: monitors/create/types/custom_check/
+    parent: monitors_create
+    identifier: monitor_types_custom_check
+    weight: 109
+  - name: Event
+    url: monitors/create/types/event/
+    parent: monitors_create
+    identifier: monitor_types_event
+    weight: 110
+  - name: Forecast
+    url: monitors/create/types/forecasts/
+    parent: monitors_create
+    identifier: monitor_types_forecasts
+    weight: 111
+  - name: Integration
+    url: monitors/create/types/integration/
+    parent: monitors_create
+    identifier: monitor_types_integration
+    weight: 112
+  - name: Live Process
+    url: monitors/create/types/process/
+    parent: monitors_create
+    identifier: monitor_types_process
+    weight: 113
+  - name: Logs
+    url: monitors/create/types/log/
+    parent: monitors_create
+    identifier: monitor_types_log
+    weight: 114
+  - name: Network
+    url: monitors/create/types/network/
+    parent: monitors_create
+    identifier: monitor_types_network
+    weight: 115
+  - name: Outlier
+    url: monitors/create/types/outlier/
+    parent: monitors_create
+    identifier: monitor_types_outlier
+    weight: 116
+  - name: Process Check
+    url: monitors/create/types/process_check/
+    parent: monitors_create
+    identifier: monitor_types_process_check
+    weight: 117
+  - name: Real User Monitoring
+    url: monitors/create/types/real_user_monitoring/
+    parent: monitors_create
+    identifier: monitor_types_rum
+    weight: 118
+  - name: Watchdog
+    url: monitors/create/types/watchdog/
+    parent: monitors_create
+    identifier: monitor_types_watchdog
+    weight: 119
   - name: Notifications
     url: monitors/notify/
     parent: alerting

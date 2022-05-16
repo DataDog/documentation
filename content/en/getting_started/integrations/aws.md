@@ -225,7 +225,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [36]: /dashboards/#overview
 [37]: /dashboards/functions/
 [38]: /dashboards/correlations/
-[39]: /monitors/create/types/
+[39]: /monitors/create/#monitor-types
 [40]: /monitors/notify/
 [41]: /integrations/#cat-notification
 [42]: /serverless
