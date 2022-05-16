@@ -54,13 +54,13 @@ To enable log collection with your DaemonSet:
 
     **Note**: Setting `DD_CONTAINER_EXCLUDE_LOGS` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [environment variable for ignoring containers][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE_LOGS` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
 
-2. Mount the `pointdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
+2. Mount the `pointerdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
 
     ```yaml
       # (...)
         volumeMounts:
         #  (...)
-          - name: pointdir
+          - name: pointerdir
             mountPath: /opt/datadog-agent/run
          - name: logpodpath
            mountPath: /var/log/pods
@@ -75,7 +75,7 @@ To enable log collection with your DaemonSet:
        # (...)
         - hostPath:
             path: /opt/datadog-agent/run
-          name: pointdir
+          name: pointerdir
         - hostPath:
             path: /var/log/pods
           name: logpodpath
@@ -89,7 +89,7 @@ To enable log collection with your DaemonSet:
         # (...)
     ```
 
-    The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
+    The `pointerdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
 ### Unprivileged
 
