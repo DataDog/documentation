@@ -20,7 +20,7 @@ The table visualization is available on dashboards. It displays columns of aggre
 
 ### Configuration
 
-* Choose the data to graph (add additional columns as needed):
+* Choose the data to graph (add additional columns by using the **+ Add Query** and **+ Add Formula** buttons as needed):
   * Metric: See the [Main graphing documentation][1] to configure a metric query.
   * Log Events: See the [Log search documentation][2] to configure a log event query.
   * Indexed Spans: See the [Indexed spans documentation][3] to configure a indexed span query.
