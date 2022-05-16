@@ -19,7 +19,6 @@ aliases:
     {{< nextlink href="agent/faq/error-restarting-agent-already-listening-on-a-configured-port" >}}Error Restarting Agent: Already Listening on a Configured Port{{< /nextlink >}}
     {{< nextlink href="agent/faq/how-is-the-system-mem-used-metric-calculated" >}}How is the 'system.mem.used' metric calculated?{{< /nextlink >}}
     {{< nextlink href="agent/faq/why-should-i-install-the-agent-on-my-cloud-instances" >}}Why should I install the Datadog Agent on my cloud instances?{{< /nextlink >}}
-    {{< nextlink href="agent/faq/kubernetes-secrets" >}}How do I use Kubernetes secrets to set my API key?{{< /nextlink >}}
     {{< nextlink href="agent/faq/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
     {{< nextlink href="agent/faq/kubernetes-state-cluster-check" >}}How do I run the kubernetes_state check as a cluster check?{{< /nextlink >}}
     {{< nextlink href="agent/faq/rpm-gpg-key-rotation-agent-6" >}}RPM GPG Key Rotation{{< /nextlink >}}
