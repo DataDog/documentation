@@ -1,36 +1,37 @@
 ---
-"assets":
-  "dashboards":
-    "Postman API Dashboard": assets/dashboards/overview.json
-  "logs": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"categories":
-- ""
-"creates_events": true
-"ddtype": "check"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/postman/README.md"
-"display_name": "Postman"
-"draft": false
-"git_integration_title": "postman"
-"guid": "c678faae-1fc2-420b-83af-e973441b99de"
-"integration_id": "postman"
-"integration_title": "Postman"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"maintainer": "integrations-partnerships@postman.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "postman"
-"metric_to_check": "postman.monitor.run.total_latency"
-"name": "postman"
-"public_title": "Postman"
-"short_description": "Analysez vos métriques et générez des événements dans Datadog à partir de vos exécutins de Postman."
-"support": "contrib"
-"supported_os":
+assets:
+  dashboards:
+    Postman API Dashboard: assets/dashboards/overview.json
+  logs: {}
+  metrics_metadata: metadata.csv
+  monitors: {}
+  saved_views: {}
+  service_checks: assets/service_checks.json
+categories:
+- ''
+creates_events: true
+ddtype: check
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/postman/README.md
+display_name: Postman
+draft: false
+git_integration_title: postman
+guid: c678faae-1fc2-420b-83af-e973441b99de
+integration_id: postman
+integration_title: Postman
+integration_version: ''
+is_public: true
+kind: integration
+maintainer: integrations-partnerships@postman.com
+manifest_version: 1.0.0
+metric_prefix: postman
+metric_to_check: postman.monitor.run.total_latency
+name: postman
+public_title: Postman
+short_description: Analysez vos métriques et générez des événements dans Datadog à
+  partir de vos exécutins de Postman.
+support: contrib
+supported_os:
 - linux
 - mac_os
 - windows
@@ -47,6 +48,7 @@ L'intégration vous permet de surveiller en permanence la santé de vos monitors
 - Analyser les métriques associées aux exécutions de Postman Monitoring dans Datadog
 
 - Générer des événements en cas de réussite ou d'échec d'une exécution
+
 ## Configuration
 
 Vous trouverez des instructions détaillées dans la [documentation de Postman][2] (en anglais). Les intégrations Postman nécessitent une offre [Team, Business ou Enterprise][3] Postman.
@@ -66,10 +68,6 @@ Vous trouverez des instructions détaillées dans la [documentation de Postman][
 
 ![Configurer l'intégration][6]
 
-### Validation
-
-
-
 ## Données collectées
 
 ### Métriques
@@ -82,7 +80,12 @@ Postman n'inclut aucun check de service.
 
 ### Événements
 
-Un événement est généré à chaque fois qu'un monitor est exécuté dans Postman. La sévérité de l'événement est définie sur Low si tous les tests ont réussi, et sur Normal si une partie des tests ont échoué ou si une erreur a été détectée lors de l'exécution d'un événement.
+Un événement est généré chaque fois qu'un monitor s'exécute dans Postman. La gravité de l'événement dépend des tests du monitor Postman :
+
+| Gravité | Description                                                           |
+|----------|-----------------------------------------------------------------------|
+| `Low`    | Aucun test n'a échoué                                                 |
+| `Normal` | Certains tests ont échoué ou une erreur est survenue lors de l'exécution d'un événement. |
 
 ## Dépannage
 
@@ -96,4 +99,3 @@ Besoin d'aide ? Contactez l'[assistance Postman][8].
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/postman/images/add-integration-datadog.jpeg
 [7]: https://github.com/DataDog/integrations-extras/blob/master/postman/metadata.csv
 [8]: https://www.postman.com/support/
-
