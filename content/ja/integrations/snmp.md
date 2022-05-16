@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/agent/faq/how-to-monitor-snmp-devices/
+- /ja/agent/faq/how-to-monitor-snmp-devices/
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -9,23 +9,25 @@ assets:
     Interface Performance: assets/dashboards/interface_performance.json
   logs: {}
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[SNMP] Device Down Alert': assets/monitors/device_down.json
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
-  - notification
-  - network
-  - autodiscovery
+- monitoring
+- notification
+- network
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/snmp/README.md
+- https://github.com/DataDog/integrations-core/blob/master/snmp/README.md
 display_name: SNMP
 draft: false
 git_integration_title: snmp
 guid: 080bb566-d1c8-428c-9d85-71cc2cdf393c
 integration_id: snmp
 integration_title: SNMP
+integration_version: 5.8.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -36,10 +38,13 @@ public_title: Datadog-SNMP インテグレーション
 short_description: ネットワークデバイスから SNMP メトリクスを収集。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 Simple Network Management Protocol (SNMP) は、ルーター、スイッチ、サーバー、ファイアウォールなど、ネットワークに接続されたデバイスの監視に使用される標準のプロトコルです。このチェックは、ネットワークデバイスから SNMP メトリクスを収集します。
@@ -60,6 +65,8 @@ SNMP インテグレーションをインストールして構成するには、
 お役に立つドキュメント、リンクや記事:
 
 * [Datadog での SNMP モニタリング][2]
+* [SNMP 入門][3]
 
 [1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
 [2]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+[3]: https://datadoghq.dev/integrations-core/tutorials/snmp/introduction/
