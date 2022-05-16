@@ -4017,6 +4017,63 @@ components:
       type: string
       x-enum-varnames:
       - DISTINCT_METRIC_VOLUMES
+    MetricEstimate:
+      description: Object for a metric cardinality estimate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricEstimateAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricEstimateResourceType'
+      type: object
+    MetricEstimateAttributes:
+      description: Object containing the definition of a metric estimate attribute.
+      properties:
+        estimate_type:
+          $ref: '#/components/schemas/MetricEstimateType'
+        estimated_at:
+          description: Timestamp when the cardinality estimate was requested.
+          example: '2022-04-27T09:48:37.463835Z'
+          format: date-time
+          type: string
+        estimated_output_series:
+          description: Estimated cardinality of the metric based on the queried configuration.
+          example: 50
+          format: int64
+          type: integer
+      type: object
+    MetricEstimateResourceType:
+      default: metric_cardinality_estimate
+      description: The metric estimate resource type.
+      enum:
+      - metric_cardinality_estimate
+      example: metric_cardinality_estimate
+      type: string
+      x-enum-varnames:
+      - METRIC_CARDINALITY_ESTIMATE
+    MetricEstimateResponse:
+      description: Response object that includes metric cardinality estimates.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricEstimate'
+      type: object
+    MetricEstimateType:
+      default: count_or_gauge
+      description: Estimate type based on the queried configuration. By default, `count_or_gauge`
+        is returned. `distribution` is returned for distribution metrics without percentiles
+        enabled. Lastly, `percentile` is returned if `filter[pct]=true` is queried
+        with a distribution metric.
+      enum:
+      - count_or_gauge
+      - distribution
+      - percentile
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - COUNT_OR_GAUGE
+      - DISTRIBUTION
+      - PERCENTILE
     MetricIngestedIndexedVolume:
       description: Object for a single metric's ingested and indexed volume.
       properties:
@@ -10186,6 +10243,106 @@ paths:
       tags:
       - Metrics
       x-menu-order: 6
+      x-undo:
+        type: safe
+  /api/v2/metrics/{metric_name}/estimate:
+    get:
+      description: Returns a cardinality estimate for a metric with a given tag, percentile,
+        and number of aggregations configuration.
+      operationId: EstimateMetricsOutputSeries
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      - description: Filtered tag groups that the metric is configured to query with.
+        example: app,host
+        in: query
+        name: filter[groups]
+        required: false
+        schema:
+          type: string
+      - description: The number of hours of look back (from now) to estimate cardinality
+          with.
+        example: 49
+        in: query
+        name: filter[hours_ago]
+        required: false
+        schema:
+          type: integer
+      - description: The number of aggregations that a `count`, `rate`, or `gauge`
+          metric is configured to use. Max number of aggregation combos is 9.
+        example: 1
+        in: query
+        name: filter[num_aggregations]
+        required: false
+        schema:
+          type: integer
+      - description: A boolean, for distribution metrics only, to estimate cardinality
+          if the metric includes additional percentile aggregators.
+        example: true
+        in: query
+        name: filter[pct]
+        required: false
+        schema:
+          type: boolean
+      - description: A window, in hours, from the look back to estimate cardinality
+          with.
+        example: 6
+        in: query
+        name: filter[timespan_h]
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricEstimateResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Estimate Output Series - Public v2 API
+      tags:
+      - Metrics
+      x-dd-ownership:
+        notification_configuration:
+          manual_escalation_policy: '[Points Aggregation] Primary'
+          prod_high_urgency: '@pagerduty-Points-Aggregation @slack-points-aggr-ops'
+          prod_low_urgency: '@slack-points-aggr-ops'
+          slack_support_channel: '#points-aggregation'
+          staging_high_urgency: '@slack-points-aggr-stg-ops'
+          staging_low_urgency: '@slack-points-aggr-stg-ops'
+        team: points-aggregation
+        team_escalation: '[Points Aggregation] Primary'
+      x-menu-order: 10
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/tags:
