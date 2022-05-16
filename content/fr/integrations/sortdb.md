@@ -5,11 +5,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
+- data store
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md
 display_name: Sortdb
 draft: false
 git_integration_title: sortdb
@@ -28,10 +28,13 @@ public_title: Intégration Datadog/Sortdb
 short_description: Prise en charge de la surveillance avec sortdb dans Datadog
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques du service [Sortdb][1] en temps réel pour :
@@ -82,7 +85,7 @@ Consultez le fichier [metadata.csv][9] pour découvrir la liste des métriques f
 
 ## Dépannage
 
-Le check SortDB n'inclut aucun événement pour le moment.
+Le check SortDB n'inclut aucun événement.
 
 
 [1]: https://github.com/jehiah/sortdb
