@@ -10,18 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - ログの収集
+- data store
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
+- https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
 display_name: Vertica
 draft: false
 git_integration_title: vertica
 guid: 884d1895-6791-487c-ac8e-7ccaad45db0b
 integration_id: vertica
 integration_title: Vertica
+integration_version: 3.3.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -33,10 +34,13 @@ public_title: Datadog-Vertica インテグレーション
 short_description: Vertica のプロジェクションストレージやライセンスの使用状況などを監視します。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Vertica][1] を監視します。
@@ -71,7 +75,7 @@ CREATE USER datadog IDENTIFIED BY '<パスワード>';
 GRANT SYSMONITOR TO datadog WITH ADMIN OPTION;
 ```
 
-さらに、現在のライセンス使用のメトリクスは最新の[監査][6]の値を使用するため、Datadog は監査をできるだけ頻繁にスケジュールすることをお勧めします。詳細については、[Vertica 監査ライセンスガイド][7]を参照してください。
+現在のライセンス使用のメトリクスは最新の[監査][6]の値を使用するため、Datadog は監査をできるだけ頻繁にスケジュールすることをお勧めします。詳細については、[Vertica 監査ライセンスガイド][7]を参照してください。
 
 [Agent を再起動][8]すると、Datadog への Vertica メトリクスの送信が開始されます。
 
@@ -121,7 +125,7 @@ Vertica には、イベントは含まれません。
 
 
 [1]: https://www.vertica.com
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/vertica/datadog_checks/vertica/data/conf.yaml.example
 [4]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/Glossary/vsql.htm
 [5]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/AdministratorsGuide/DBUsersAndPrivileges/Roles/SYSMONITORROLE.htm
