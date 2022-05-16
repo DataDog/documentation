@@ -51,12 +51,12 @@ In general, use the following rules:
 
 * The nesting of config options with **user-defined** keys must be JSON-formatted:
    ```yaml
-      docker_env_as_tags:
+      container_env_as_tags:
         ENVVAR_NAME: tag_name
-      # DD_DOCKER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
+      # DD_CONTAINER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details. 
+**Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
 
 ### Exceptions
 
