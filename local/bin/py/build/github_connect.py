@@ -149,14 +149,13 @@ class GitHub:
 
                 for glob_string in globs:
                     if fnmatch.fnmatch(path, glob_string):
-                        # test_url = f'https://api.github.com/repos/{org}/{repo}/commits?path={path}'
-                        test_url = f'https://api.github.com/repos/{org}/{repo}/commits'
-
+                        url = f'https://api.github.com/repos/{org}/{repo}/commits?path={path}'
                         response = requests.get(url, headers=headers)
                         response_json = response.json()
+                        commit_data = response_json[0].get('commit', {})
+                        commit_date = commit_data.get('author', {}).get('date', '')
 
-                        print('**** COMMIT_DATA ****')
-                        print(response_json)
+                        print(item)
 
                         filtered_listing.append(item)
             return filtered_listing
