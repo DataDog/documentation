@@ -34,7 +34,7 @@ git_integration_title: postgres
 guid: e9ca29d5-5b4f-4478-8989-20d89afda0c9
 integration_id: postgres
 integration_title: Postgres
-integration_version: 12.3.2
+integration_version: 12.4.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
