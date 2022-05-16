@@ -309,6 +309,10 @@
     "description": "View indexed tag key-value pairs for a given metric name.",
     "summary": "List tags by metric name"
   },
+  "EstimateMetricsOutputSeries": {
+    "description": "Returns a cardinality estimate for a metric with a given tag, percentile, and number of aggregations configuration.",
+    "summary": "Estimate Output Series - Public v2 API"
+  },
   "DeleteTagConfiguration": {
     "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
     "summary": "Delete a tag configuration"
