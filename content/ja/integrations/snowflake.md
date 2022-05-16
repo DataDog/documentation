@@ -23,7 +23,7 @@ git_integration_title: snowflake
 guid: 4813a514-e9a4-4f28-9b83-b4221b51b18b
 integration_id: snowflake
 integration_title: Snowflake
-integration_version: 4.3.0
+integration_version: 4.3.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
