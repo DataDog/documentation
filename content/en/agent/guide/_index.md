@@ -39,6 +39,7 @@ private: true
     {{< nextlink href="/agent/guide/template_variables" >}}Autodiscovery Template Variables{{< /nextlink >}}
     {{< nextlink href="/agent/guide/auto_conf" >}}Autodiscovery Auto-Configuration{{< /nextlink >}}
     {{< nextlink href="/agent/guide/how-to-import-datadog-resources-into-terraform/" >}}How to Import Datadog Resources into Terraform{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/kubernetes-cluster-name-detection/" >}}Kubernetes Cluster Name Detection{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent v5 guides:" >}}
