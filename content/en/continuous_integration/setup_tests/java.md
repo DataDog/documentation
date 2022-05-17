@@ -25,9 +25,13 @@ Supported test frameworks:
 
 [Install the Datadog Agent to collect tests data][1].
 
+<div class="alert alert-warning">
+Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/java#agentless-beta">instructions</a> on this page.
+</div>
+
 ## Installing the Java tracer
 
-Install and enable the Java tracer v0.91.0 or newer.
+Install and enable the Java tracer v0.101.0 or newer.
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -226,6 +230,29 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
+## Agentless (Beta)
+
+To instrument your test suite without requiring an Agent, configure the following system properties:
+
+`dd.civisibility.agentless.enabled` (Required)
+: Enables or disables Agentless mode.<br/>
+**Environment variable**: `DD_CIVISIBILITY_AGENTLESS_ENABLED`<br/>
+**Default**: `false`
+
+Additionally, configure which [Datadog site][5] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
+
+`dd.site` (Required)
+: The [Datadog site][5] to upload results to.<br/>
+**Environment variable**: `DD_SITE`<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+Finally, configure the API key using the following environment variable:
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][4] used to upload the test results. The API key can only be provided via environment variables.<br/>
+**Default**: `(empty)`
+
 ## Troubleshooting
 
 ### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
@@ -245,3 +272,5 @@ If you need to use a previous version of the tracer, you can configure CI Visibi
 [1]: /continuous_integration/setup_tests/agent/
 [2]: /tracing/setup_overview/setup/java/?tab=containers#configuration
 [3]: /tracing/setup_overview/compatibility_requirements/java
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /getting_started/site/
