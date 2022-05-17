@@ -109,7 +109,7 @@ class GitHub:
                 org, repo, branch
             )
             sha_response = requests.get(url, headers=headers)
-            
+
             if sha_response.status_code == requests.codes.ok:
                 sha = (
                     sha_response.json()
@@ -154,9 +154,7 @@ class GitHub:
                         response_json = response.json()
                         commit_data = response_json[0].get('commit', {})
                         commit_date = commit_data.get('author', {}).get('date', '')
-
-                        print(item)
-
+                        item['commit_date'] = commit_date
                         filtered_listing.append(item)
             return filtered_listing
         else:
