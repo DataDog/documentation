@@ -1,0 +1,14 @@
+{
+  "series": [
+    {
+      "metric": "system.load.1",
+      "type": 0,
+      "points": [
+        {
+          "timestamp": 1636629071,
+          "value": 0.7
+        }
+      ]
+    }
+  ]
+}

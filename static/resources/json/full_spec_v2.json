@@ -15695,6 +15695,17 @@
         ],
         "type": "object"
       },
+      "IntakePayloadAccepted": {
+        "description": "The payload accepted for intake.",
+        "properties": {
+          "status": {
+            "description": "The status of the intake payload.",
+            "example": "ok",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "ListApplicationKeysResponse": {
         "description": "Response for a list of application keys.",
         "properties": {
@@ -21955,6 +21966,17 @@
         },
         "type": "array"
       },
+      "MetricContentEncoding": {
+        "default": "deflate",
+        "description": "HTTP header used to compress the media-type.",
+        "enum": [
+          "deflate"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "DEFLATE"
+        ]
+      },
       "MetricCustomAggregation": {
         "description": "A time and space aggregation combination for use in query.",
         "example": {
@@ -22417,10 +22439,419 @@
           "METRIC_VOLUMES"
         ]
       },
+      "MetricIntakeType": {
+        "description": "The type of metric.",
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          15
+        ],
+        "format": "int32",
+        "type": "integer",
+        "x-enum-varnames": [
+          "UNSPECIFIED",
+          "COUNT",
+          "RATE",
+          "GAUGE",
+          "UNSPECIFIED_LEGACY"
+        ]
+      },
+      "MetricMetadata": {
+        "description": "Metadata for the metric.",
+        "properties": {
+          "origin": {
+            "description": "Metric origin information.",
+            "properties": {
+              "metric_type": {
+                "default": 0,
+                "description": "The origin metric type code",
+                "format": "int32",
+                "maximum": 1000,
+                "type": "integer"
+              },
+              "product": {
+                "default": 0,
+                "description": "The origin product code",
+                "format": "int32",
+                "maximum": 1000,
+                "type": "integer"
+              },
+              "service": {
+                "default": 0,
+                "description": "The origin service code",
+                "format": "int32",
+                "maximum": 1000,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "MetricName": {
         "description": "The metric name for this resource.",
         "example": "test.metric.latency",
         "type": "string"
+      },
+      "MetricOrigin": {
+        "description": "Metric origin information.",
+        "properties": {
+          "metric_type": {
+            "default": 0,
+            "description": "The origin metric type code",
+            "format": "int32",
+            "maximum": 1000,
+            "type": "integer"
+          },
+          "product": {
+            "default": 0,
+            "description": "The origin product code",
+            "format": "int32",
+            "maximum": 1000,
+            "type": "integer"
+          },
+          "service": {
+            "default": 0,
+            "description": "The origin service code",
+            "format": "int32",
+            "maximum": 1000,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "MetricPayload": {
+        "description": "The metrics' payload.",
+        "properties": {
+          "series": {
+            "description": "A list of time series to submit to Datadog.",
+            "example": [
+              {
+                "metric": "system.load.1",
+                "points": [
+                  {
+                    "timestamp": 1475317847,
+                    "value": 0.7
+                  }
+                ]
+              }
+            ],
+            "items": {
+              "description": "A metric to submit to Datadog.\nSee [Datadog metrics](https://docs.datadoghq.com/developers/metrics/#custom-metrics-properties).",
+              "properties": {
+                "interval": {
+                  "description": "If the type of the metric is rate or count, define the corresponding interval.",
+                  "example": 20,
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "metadata": {
+                  "description": "Metadata for the metric.",
+                  "properties": {
+                    "origin": {
+                      "description": "Metric origin information.",
+                      "properties": {
+                        "metric_type": {
+                          "default": 0,
+                          "description": "The origin metric type code",
+                          "format": "int32",
+                          "maximum": 1000,
+                          "type": "integer"
+                        },
+                        "product": {
+                          "default": 0,
+                          "description": "The origin product code",
+                          "format": "int32",
+                          "maximum": 1000,
+                          "type": "integer"
+                        },
+                        "service": {
+                          "default": 0,
+                          "description": "The origin service code",
+                          "format": "int32",
+                          "maximum": 1000,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "metric": {
+                  "description": "The name of the timeseries.",
+                  "example": "system.load.1",
+                  "type": "string"
+                },
+                "points": {
+                  "description": "Points relating to a metric. All points must be objects with timestamp and a scalar value (cannot be a string). Timestamps should be in POSIX time in seconds, and cannot be more than ten minutes in the future or more than one hour in the past.",
+                  "items": {
+                    "description": "A point object is of the form `{POSIX_timestamp, numeric_value}`.",
+                    "example": {
+                      "timestamp": 1575317847,
+                      "value": 0.5
+                    },
+                    "properties": {
+                      "timestamp": {
+                        "description": "The timestamp should be in seconds and current.\nCurrent is defined as not more than 10 minutes in the future or more than 1 hour in the past.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "value": {
+                        "description": "The numeric value format should be a 64bit float gauge-type value.",
+                        "format": "double",
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "resources": {
+                  "description": "A list of resources to associate with this metric.",
+                  "items": {
+                    "description": "Metric resource.",
+                    "properties": {
+                      "name": {
+                        "description": "The name of the metric.",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "The type of metric.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "source_type_name": {
+                  "description": "The source type name.",
+                  "example": "datadog",
+                  "type": "string"
+                },
+                "tags": {
+                  "description": "A list of tags associated with the metric.",
+                  "example": [
+                    "environment:test"
+                  ],
+                  "items": {
+                    "description": "Individual tags.",
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "type": {
+                  "description": "The type of metric.",
+                  "enum": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    15
+                  ],
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-varnames": [
+                    "UNSPECIFIED",
+                    "COUNT",
+                    "RATE",
+                    "GAUGE",
+                    "UNSPECIFIED_LEGACY"
+                  ]
+                },
+                "unit": {
+                  "description": "The unit of point value.",
+                  "example": "second",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "metric",
+                "points"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "series"
+        ],
+        "type": "object"
+      },
+      "MetricPoint": {
+        "description": "A point object is of the form `{POSIX_timestamp, numeric_value}`.",
+        "example": {
+          "timestamp": 1575317847,
+          "value": 0.5
+        },
+        "properties": {
+          "timestamp": {
+            "description": "The timestamp should be in seconds and current.\nCurrent is defined as not more than 10 minutes in the future or more than 1 hour in the past.",
+            "format": "int64",
+            "type": "integer"
+          },
+          "value": {
+            "description": "The numeric value format should be a 64bit float gauge-type value.",
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "MetricResource": {
+        "description": "Metric resource.",
+        "properties": {
+          "name": {
+            "description": "The name of the metric.",
+            "type": "string"
+          },
+          "type": {
+            "description": "The type of metric.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "MetricSeries": {
+        "description": "A metric to submit to Datadog.\nSee [Datadog metrics](https://docs.datadoghq.com/developers/metrics/#custom-metrics-properties).",
+        "properties": {
+          "interval": {
+            "description": "If the type of the metric is rate or count, define the corresponding interval.",
+            "example": 20,
+            "format": "int64",
+            "type": "integer"
+          },
+          "metadata": {
+            "description": "Metadata for the metric.",
+            "properties": {
+              "origin": {
+                "description": "Metric origin information.",
+                "properties": {
+                  "metric_type": {
+                    "default": 0,
+                    "description": "The origin metric type code",
+                    "format": "int32",
+                    "maximum": 1000,
+                    "type": "integer"
+                  },
+                  "product": {
+                    "default": 0,
+                    "description": "The origin product code",
+                    "format": "int32",
+                    "maximum": 1000,
+                    "type": "integer"
+                  },
+                  "service": {
+                    "default": 0,
+                    "description": "The origin service code",
+                    "format": "int32",
+                    "maximum": 1000,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "metric": {
+            "description": "The name of the timeseries.",
+            "example": "system.load.1",
+            "type": "string"
+          },
+          "points": {
+            "description": "Points relating to a metric. All points must be objects with timestamp and a scalar value (cannot be a string). Timestamps should be in POSIX time in seconds, and cannot be more than ten minutes in the future or more than one hour in the past.",
+            "items": {
+              "description": "A point object is of the form `{POSIX_timestamp, numeric_value}`.",
+              "example": {
+                "timestamp": 1575317847,
+                "value": 0.5
+              },
+              "properties": {
+                "timestamp": {
+                  "description": "The timestamp should be in seconds and current.\nCurrent is defined as not more than 10 minutes in the future or more than 1 hour in the past.",
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "value": {
+                  "description": "The numeric value format should be a 64bit float gauge-type value.",
+                  "format": "double",
+                  "type": "number"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "resources": {
+            "description": "A list of resources to associate with this metric.",
+            "items": {
+              "description": "Metric resource.",
+              "properties": {
+                "name": {
+                  "description": "The name of the metric.",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "The type of metric.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "source_type_name": {
+            "description": "The source type name.",
+            "example": "datadog",
+            "type": "string"
+          },
+          "tags": {
+            "description": "A list of tags associated with the metric.",
+            "example": [
+              "environment:test"
+            ],
+            "items": {
+              "description": "Individual tags.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": {
+            "description": "The type of metric.",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              15
+            ],
+            "format": "int32",
+            "type": "integer",
+            "x-enum-varnames": [
+              "UNSPECIFIED",
+              "COUNT",
+              "RATE",
+              "GAUGE",
+              "UNSPECIFIED_LEGACY"
+            ]
+          },
+          "unit": {
+            "description": "The unit of point value.",
+            "example": "second",
+            "type": "string"
+          }
+        },
+        "required": [
+          "metric",
+          "points"
+        ],
+        "type": "object"
       },
       "MetricTagConfiguration": {
         "description": "Object for a single metric tag configuration.",
@@ -74966,6 +75397,367 @@
           "type": "safe"
         },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+      }
+    },
+    "/api/v2/series": {
+      "post": {
+        "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.",
+        "operationId": "SubmitMetrics",
+        "parameters": [
+          {
+            "description": "HTTP header used to compress the media-type.",
+            "in": "header",
+            "name": "Content-Encoding",
+            "required": false,
+            "schema": {
+              "default": "deflate",
+              "description": "HTTP header used to compress the media-type.",
+              "enum": [
+                "deflate"
+              ],
+              "type": "string",
+              "x-enum-varnames": [
+                "DEFLATE"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "dynamic-points": {
+                  "description": "Post time-series data that can be graphed on Datadog’s dashboards.",
+                  "externalValue": "examples/metrics/dynamic-points.json.sh",
+                  "summary": "Dynamic Points",
+                  "x-variables": {
+                    "NOW": "$(date +%s)"
+                  }
+                }
+              },
+              "schema": {
+                "description": "The metrics' payload.",
+                "properties": {
+                  "series": {
+                    "description": "A list of time series to submit to Datadog.",
+                    "example": [
+                      {
+                        "metric": "system.load.1",
+                        "points": [
+                          {
+                            "timestamp": 1475317847,
+                            "value": 0.7
+                          }
+                        ]
+                      }
+                    ],
+                    "items": {
+                      "description": "A metric to submit to Datadog.\nSee [Datadog metrics](https://docs.datadoghq.com/developers/metrics/#custom-metrics-properties).",
+                      "properties": {
+                        "interval": {
+                          "description": "If the type of the metric is rate or count, define the corresponding interval.",
+                          "example": 20,
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "metadata": {
+                          "description": "Metadata for the metric.",
+                          "properties": {
+                            "origin": {
+                              "description": "Metric origin information.",
+                              "properties": {
+                                "metric_type": {
+                                  "default": 0,
+                                  "description": "The origin metric type code",
+                                  "format": "int32",
+                                  "maximum": 1000,
+                                  "type": "integer"
+                                },
+                                "product": {
+                                  "default": 0,
+                                  "description": "The origin product code",
+                                  "format": "int32",
+                                  "maximum": 1000,
+                                  "type": "integer"
+                                },
+                                "service": {
+                                  "default": 0,
+                                  "description": "The origin service code",
+                                  "format": "int32",
+                                  "maximum": 1000,
+                                  "type": "integer"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "metric": {
+                          "description": "The name of the timeseries.",
+                          "example": "system.load.1",
+                          "type": "string"
+                        },
+                        "points": {
+                          "description": "Points relating to a metric. All points must be objects with timestamp and a scalar value (cannot be a string). Timestamps should be in POSIX time in seconds, and cannot be more than ten minutes in the future or more than one hour in the past.",
+                          "items": {
+                            "description": "A point object is of the form `{POSIX_timestamp, numeric_value}`.",
+                            "example": {
+                              "timestamp": 1575317847,
+                              "value": 0.5
+                            },
+                            "properties": {
+                              "timestamp": {
+                                "description": "The timestamp should be in seconds and current.\nCurrent is defined as not more than 10 minutes in the future or more than 1 hour in the past.",
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "value": {
+                                "description": "The numeric value format should be a 64bit float gauge-type value.",
+                                "format": "double",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "resources": {
+                          "description": "A list of resources to associate with this metric.",
+                          "items": {
+                            "description": "Metric resource.",
+                            "properties": {
+                              "name": {
+                                "description": "The name of the metric.",
+                                "type": "string"
+                              },
+                              "type": {
+                                "description": "The type of metric.",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "source_type_name": {
+                          "description": "The source type name.",
+                          "example": "datadog",
+                          "type": "string"
+                        },
+                        "tags": {
+                          "description": "A list of tags associated with the metric.",
+                          "example": [
+                            "environment:test"
+                          ],
+                          "items": {
+                            "description": "Individual tags.",
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "type": {
+                          "description": "The type of metric.",
+                          "enum": [
+                            0,
+                            1,
+                            2,
+                            3,
+                            15
+                          ],
+                          "format": "int32",
+                          "type": "integer",
+                          "x-enum-varnames": [
+                            "UNSPECIFIED",
+                            "COUNT",
+                            "RATE",
+                            "GAUGE",
+                            "UNSPECIFIED_LEGACY"
+                          ]
+                        },
+                        "unit": {
+                          "description": "The unit of point value.",
+                          "example": "second",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "metric",
+                        "points"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "series"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The payload accepted for intake.",
+                  "properties": {
+                    "status": {
+                      "description": "The status of the intake payload.",
+                      "example": "ok",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Payload accepted"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication error"
+          },
+          "408": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Request timeout"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Payload too large"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "summary": "Submit metrics",
+        "tags": [
+          "Metrics"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 1,
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/service_accounts": {
