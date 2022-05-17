@@ -3060,6 +3060,9 @@ components:
       - message
       type: object
     HTTPLogItem:
+      additionalProperties:
+        description: Additional log attributes.
+        type: string
       description: Logs that are sent over HTTP.
       properties:
         ddsource:

@@ -387,6 +387,11 @@
       "group": "logs",
       "suffix": "_3496222707",
       "description": "Send gzip logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "",
+      "description": "Send logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
     }
   ],
   "CreateLogsMetric": [

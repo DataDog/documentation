@@ -7153,6 +7153,10 @@
       "HTTPLog": {
         "description": "Structured log message.",
         "items": {
+          "additionalProperties": {
+            "description": "Additional log attributes.",
+            "type": "string"
+          },
           "description": "Logs that are sent over HTTP.",
           "properties": {
             "ddsource": {
@@ -7182,7 +7186,7 @@
             }
           },
           "required": [
-            "name"
+            "message"
           ],
           "type": "object"
         },
@@ -7241,6 +7245,10 @@
         "type": "object"
       },
       "HTTPLogItem": {
+        "additionalProperties": {
+          "description": "Additional log attributes.",
+          "type": "string"
+        },
         "description": "Logs that are sent over HTTP.",
         "properties": {
           "ddsource": {
@@ -7270,7 +7278,7 @@
           }
         },
         "required": [
-          "name"
+          "message"
         ],
         "type": "object"
       },
@@ -51921,6 +51929,10 @@
               "schema": {
                 "description": "Structured log message.",
                 "items": {
+                  "additionalProperties": {
+                    "description": "Additional log attributes.",
+                    "type": "string"
+                  },
                   "description": "Logs that are sent over HTTP.",
                   "properties": {
                     "ddsource": {
@@ -51950,7 +51962,7 @@
                     }
                   },
                   "required": [
-                    "name"
+                    "message"
                   ],
                   "type": "object"
                 },
