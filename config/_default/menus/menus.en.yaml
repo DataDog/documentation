@@ -1049,15 +1049,15 @@ main:
     parent: monitors_create
     identifier: monitor_types_custom_check
     weight: 109
+  - name: Error Tracking
+    url: monitors/create/types/error_tracking/
+    parent: monitors_create
+    identifier: monitor_types_error_tracking
+    weight: 110
   - name: Event
     url: monitors/create/types/event/
     parent: monitors_create
     identifier: monitor_types_event
-    weight: 110
-  - name: Error Tracking
-    url: monitors/create/types/error_tracking/
-    parent: monitor_types
-    identifier: monitor_types_error_tracking
     weight: 111
   - name: Forecast
     url: monitors/create/types/forecasts/
