@@ -536,7 +536,7 @@ If you are using the Datadog Forwarder, follow these [instructions][25].
 
 ## Send telemetry to multiple Datadog organizations
 
-If you wish to send data to more than one Datadog organizations, follow the instructions for [dual shipping][33] and include the file `datadog.yaml` in the root directory of your project.
+If you wish to send data to more than one Datadog organization, follow the instructions for [dual shipping][33] and include the file `datadog.yaml` in the root directory of your project.
 
 ## Propagate trace context over AWS resources
 
