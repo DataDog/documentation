@@ -25,7 +25,7 @@ further_reading:
 Datadog automatically parses JSON-formatted logs. For other formats, Datadog allows you to enrich your logs with the help of Grok Parser.
 The Grok syntax provides an easier way to parse logs than pure regular expressions. The Grok Parser enables you to extract attributes from semi-structured text messages.
 
-Grok comes with reusable patterns to parse integers, IP addresses, hostnames, etc. Note: These values must be sent into the Grok Parser as strings.
+Grok comes with reusable patterns to parse integers, IP addresses, hostnames, etc. These values must be sent into the grok parser as strings.
 
 You can write parsing rules with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 
