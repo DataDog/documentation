@@ -166,8 +166,6 @@ def prepare_content(configuration, github_token, extract_dir):
     try:
         list_of_contents = local_or_upstream(
             github_token, extract_dir, extract_config(configuration))
-        print('** List of Contents **')
-        print(list_of_contents)
     except:
         if getenv("LOCAL") == 'True':
             print(

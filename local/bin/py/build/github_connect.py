@@ -153,8 +153,8 @@ class GitHub:
                         response = requests.get(url, headers=headers)
                         response_json = response.json()
                         commit_data = response_json[0].get('commit', {})
-                        commit_date = commit_data.get('author', {}).get('date', '')
-                        item['commit_date'] = commit_date
+                        latest_commit_date = commit_data.get('author', {}).get('date', '')
+                        item['lastmod'] = latest_commit_date
                         filtered_listing.append(item)
             return filtered_listing
         else:
