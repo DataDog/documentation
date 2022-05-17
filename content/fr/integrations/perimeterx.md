@@ -7,17 +7,18 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - security
+- security
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md
 display_name: PerimeterX
 draft: false
 git_integration_title: perimeterx
 guid: 6e3a9bc2-6766-4b24-9edf-12811d821d41
 integration_id: perimeterx
 integration_title: PerimeterX
+integration_version: ''
 is_beta: false
 is_public: true
 kind: integration
@@ -30,17 +31,20 @@ public_title: Intégration Datadog/PerimeterX
 short_description: Intégrez les logs et métriques de PerimeterX à Datadog
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
-Cette intégration permet aux clients de [PerimeterX][https://www.perimeterx.com/] d'envoyer leurs logs et événements PerimeterX à Datadog.
+Cette intégration permet aux clients de [PerimeterX][1] d'envoyer leurs logs et événements PerimeterX à Datadog.
 
 ## Configuration
 
-Toute la configuration est prise en charge par PerimeterX. Consultez la [documentation de PerimeterX][1] relative aux intégrations tierces.
+Toute la configuration est prise en charge par PerimeterX. Consultez la [documentation PerimeterX][2] relative aux intégrations tierces (en anglais).
 
 ### Installation
 
@@ -48,8 +52,8 @@ Aucune installation n'est requise sur votre host.
 
 ### Configuration
 
-1. Générez une nouvelle clé d'API d'intégration depuis votre [portail Datadog][2]
-2. Ouvrez un ticket d'assistance auprès de [PerimeterX][3] et demandez l'intégration de l'exportation des logs Datadog. L'assistance aura besoin des informations suivantes :
+1. Générez une nouvelle clé d'API d'intégration depuis votre [portail Datadog][3].
+2. Ouvrez un ticket d'assistance auprès de [PerimeterX][4] et demandez l'intégration de l'exportation des logs Datadog. L'assistance aura besoin des informations suivantes :
    - Votre clé d'API d'intégration Datadog
    - Une précision des éléments à envoyer (métriques et/ou logs)
    - Les ID d'application PerimeterX à envoyer à Datadog
@@ -67,7 +71,7 @@ Après confirmation par l'assistance de PerimeterX que l'intégration avec Datad
 
 ### Métriques
 
-PerimeterX n'inclut aucune métrique pour les [requêtes][4].
+PerimeterX n'inclut aucune métrique pour les [requêtes][5].
 
 ### Checks de service
 
@@ -79,10 +83,11 @@ PerimeterX n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://docs.perimeterx.com/pxconsole/docs/data-integration-to-third-party-apps
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: mailto:support@perimeterx.com
-[4]: https://docs.perimeterx.com/pxconsole/docs/data-schema-metrics
-[5]: https://docs.datadoghq.com/fr/help/
+[1]: https://www.perimeterx.com/
+[2]: https://docs.perimeterx.com/pxconsole/docs/data-integration-to-third-party-apps
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: mailto:support@perimeterx.com
+[5]: https://docs.perimeterx.com/pxconsole/docs/data-schema-metrics
+[6]: https://docs.datadoghq.com/fr/help/

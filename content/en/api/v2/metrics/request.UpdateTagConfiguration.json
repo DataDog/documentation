@@ -1,0 +1,11 @@
+{
+  "data": {
+    "type": "manage_tags",
+    "id": "test.metric.latency",
+    "attributes": {
+      "tags": [
+        "app"
+      ]
+    }
+  }
+}

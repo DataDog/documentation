@@ -49,7 +49,7 @@ In addition to this documentation, you can learn more about developing Datadog i
 
 1. [Choose the type of offering you would like to list](#choose-an-offering-type)
 2. [Build a bi-directional data integration](#build-a-bi-directional-data-integration)
-3. [Clone the Marketplace repository or fork the Integrations Extras repository](#clone-either-the-marketplace-or-the-integrations-extras-repository)
+3. [Clone the Marketplace repository or fork the Integrations Extras repository](#clone-the-marketplace-repository-or-fork-the-integrations-extras-repository)
 4. [Install the Datadog Development Toolkit](#install-and-run-the-datadog-development-toolkit)
 5. [Populate the tile scaffolding with metadata and out-of-the-box assets (like dashboards and monitors)](#populate-the-tile-scaffolding)
 6. [Submit a pull-request](#submit-a-pull-request)
@@ -63,39 +63,45 @@ There are a few different types of offerings that you can list on the Datadog In
 3. SaaS license or subscription (Marketplace only)
 4. Professional services (Marketplace only)
 
+Regardless of the type of offering that you are developing, a tile that represents your listing needs to be created for either the Marktplace or Integrations page. You can see an example of a Marketplace tile below:
+
+{{< img src="developers/marketplace/marketplace-tile-example.png" alt="Example Marketplace tile"  >}}
+
 Depending on the use case, choose the approach that makes the most sense for your offering. 
 
 If you're developing an offering that does not use the Datadog Agent, such as a Datadog App, SaaS license, professional service, or an API-based integration, you will need to create a [tile-only listing](#tile-only-listing).
 
-#### [Datadog Agent-based integration][14]
+#### Datadog Agent-based integration
 
-##### [OpenMetrics check][15]
+For general information, read [Introduction to Agent-based Integrations][14].
 
-* A OpenMetrics check is suitable for gathering telemetry data from existing applications that expose metrics using the Open Metrics standard.
+##### OpenMetrics check
 
-##### [Python check][16]
+* An [OpenMetrics check][15] is suitable for gathering telemetry data from existing applications that expose metrics using the Open Metrics standard.
 
-* A Python check is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
+##### Python check
 
-##### [DogStatsD][17]
+* A [Python check][16] is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
 
-* DogStatsD is suitable for applications that already emit telemetry using the StatsD protocol. Datadog adds additional Datadog-specific extensions to the StatsD protocol including:
+##### DogStatsD
+
+* [DogStatsD][17] is suitable for applications that already emit telemetry using the StatsD protocol. Datadog adds additional Datadog-specific extensions to the StatsD protocol including:
     * Histogram Metric Type
     * Service Checks
     * Events
     * Tagging
 
-#### [Datadog REST API integration][18]
+#### Datadog REST API integration
 
-An API integration fits well for enriching and submitting data from your backend, or pulling data directly out of Datadog. API integrations also work well for building a connector between Datadog and another SaaS platform. 
+An [API integration][18] fits well for enriching and submitting data from your backend, or pulling data directly out of Datadog. API integrations also work well for building a connector between Datadog and another SaaS platform. 
 
 Since API integrations do not use the Datadog Agent to collect data, you will need to create a [tile only listing](#tile-only-listing) once your development work is complete. 
 
 **Note**: A Datadog API key is required to submit data to a Datadog API endpoint, while an application key is required for querying data from Datadog, or for creating resources within the Datadog site.
 
-#### [Datadog App][12]
+#### Datadog App
 
-Datadog Apps are custom dashboard widgets that are developed in the [Datadog Developer Platform][19]. Once your Datadog App is ready to publish, you will need to create a [tile only listing](#tile-only-listing) on either the Marketplace or Integrations page.
+[Datadog Apps][12] are custom dashboard widgets that are developed in the [Datadog Developer Platform][19]. Once your Datadog App is ready to publish, you will need to create a [tile only listing](#tile-only-listing) on either the Marketplace or Integrations page.
 
 #### Tile only listing
 
@@ -111,12 +117,12 @@ While pulling information from Datadog may be useful, integrations must be bi-di
 Integrations can send the following data to Datadog:
 
 1. [Metrics][20]
-2. [Logs][18]
-3. [Events][21]
-4. [Service Checks][22]
-5. [Traces][23]
-6. [Incidents][24]
-7. [Security Events][25]
+2. [Logs][21]
+3. [Events][22]
+4. [Service Checks][23]
+5. [Traces][24]
+6. [Incidents][25]
+7. [Security Events][26]
 
 **Note:** A bi-directional data integration is not required for Marketplace tile-only listings, such as standalone SaaS licenses and professional services offerings. 
 
@@ -132,7 +138,7 @@ Technology Partners can request access to the private Marketplace repository by 
 
 The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are first developing your data integration, by spinning up a skeleton of all the assets and metadata for your tile.
 
-Ensure that [Python 3.8 or higher][26] is installed.	
+Ensure that [Python 3.8 or higher][27] is installed.	
 
 To avoid potential environment conflicts, in the directory where you cloned the repository, create a virtual environment by running: 
 
@@ -140,7 +146,7 @@ To avoid potential environment conflicts, in the directory where you cloned the 
 python3 -m pip install virtualenv --user
 ```
 
-Install the latest released version of the Datadog Development Toolkit from [PyPI][27] by running:
+Install the latest released version of the Datadog Development Toolkit from [PyPI][28] by running:
 
 ```
 python -m pip install --upgrade "datadog-checks-dev[cli]"
@@ -200,27 +206,27 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 #### Media
 
 * Store all images used in your `README.md` file in the `images` folder. 
-* For Marketplace listings, you may add one video to your listing. Listings on the Integrations page do not currently support videos. See [Marketplace specific requirements](#marketplace-specific-requirements) for details.  
+* For Marketplace listings, and any [offering using manifest version 2][29], you may add one video to your listing. See [Media Carousel Requirements](#media-carousel-requirements) for details.  
 * **Note:** Don't include spaces in the name of image files.
 * **Note:** If you are listing on the Marketplace, do not place images in the "Overview" section of your `README.md` file. Instead, these images should be placed in the media carousel by adding them to the `media` object in your `manifest.json` file. 
 
 #### Manifest
 
 * JSON object including elements for `display_name`, `public_title`, `author`, and more.
-* More information about `manifest.json` fields can be found in the [Integrations Assets Reference][28].
-* Details on the pricing object are described in the private [Marketplace README][29].
+* More information about `manifest.json` fields can be found in the [Integrations Assets Reference][30].
+* Details on the pricing object are described in the private [Marketplace README][31].
 
 #### Metadata
 
 * Contains a list of the out-of-the-box metrics included in a data integration, such as the metric name, type, interval, and unit. 
-* More information about `metadata.csv` fields can be found in the [Integrations Assets Reference][28].
+* More information about `metadata.csv` fields can be found in the [Integrations Assets Reference][30].
 * **Note:** All Marketplace metrics count as custom metrics. 
 
 #### Dashboards and monitors
 
 * Contains the out-of-the-box dashboards and monitors (alerts) for your data integration. 
 * You can create dashboards and monitors directly in your sandbox account and export them as JSON files. 
-* See [Dashboarding Best Practices][30] for details.
+* See [Dashboarding Best Practices][32] for details.
 
 #### Logos
 
@@ -233,7 +239,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### Code owners
 
-* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See GitHub's documentation [About code owners][31] for help with syntax.
+* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See GitHub's documentation [About code owners][33] for help with syntax.
 
 #### Additional Marketplace files
 * The Technology Partner's own End User License Agreement (EULA) is required for all Marketplace offerings.
@@ -280,12 +286,12 @@ When the Datadog Engineering and Product teams approve your pull-request, the ti
 Once a Marketplace tile is live, Technology Partners have the option of meeting with Datadog's Partner Marketing Team to coordinate a joint go-to-market strategy, including:
 
 * A Datadog quote for partner press releases
-* A Blog Post in the [Datadog Monitor][32]
+* A Blog Post in the [Datadog Monitor][34]
 * Amplification of social media posts
 
 ## Contact
 
-Email techpartners@datadoghq.com if you have any questions.
+Email marketplace@datadog.com if you have any questions.
 
 ## Further Reading
 
@@ -309,18 +315,20 @@ Email techpartners@datadoghq.com if you have any questions.
 [15]: /developers/custom_checks/prometheus/
 [16]: /developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
 [17]: /developers/dogstatsd/?tab=hostagent
-[18]: /api/latest/logs/
+[18]: /api/latest/
 [19]: https://app.datadoghq.com/apps
 [20]: /api/latest/metrics/
-[21]: /api/latest/events/
-[22]: /api/latest/service-checks/
-[23]: /api/latest/tracing/
-[24]: /api/latest/incidents/
-[25]: /api/latest/security-monitoring/
-[26]: https://www.python.org/downloads/
-[27]: https://pypi.org/project/datadog-checks-dev/
-[28]: /developers/integrations/check_references/#manifest-file
-[29]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
-[30]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
-[31]: https://help.github.com/articles/about-codeowners/
-[32]: https://www.datadoghq.com/blog/
+[21]: /api/latest/logs/
+[22]: /api/latest/events/
+[23]: /api/latest/service-checks/
+[24]: /api/latest/tracing/
+[25]: /api/latest/incidents/
+[26]: /api/latest/security-monitoring/
+[27]: https://www.python.org/downloads/
+[28]: https://pypi.org/project/datadog-checks-dev/
+[29]: /developers/integrations/check_references/?tab=manifestversion2#manifest-file
+[30]: /developers/integrations/check_references/#manifest-file
+[31]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
+[32]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
+[33]: https://help.github.com/articles/about-codeowners/
+[34]: https://www.datadoghq.com/blog/

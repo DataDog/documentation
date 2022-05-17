@@ -670,7 +670,7 @@ Rails.application.configure do
 
   config.lograge.custom_options = lambda do |event|
     # Retrieves trace information for current thread
-    correlation = Datadog.tracer.active_correlation
+    correlation = Datadog::Tracing.correlation
 
     {
       # Adds IDs as tags to log output
@@ -707,7 +707,7 @@ Rails.application.configure do
 
   config.lograge.custom_options = lambda do |event|
     # Retrieves trace information for current thread
-    correlation = Datadog.tracer.active_correlation
+    correlation = Datadog::Tracing.correlation
 
     {
       # Adds IDs as tags to log output

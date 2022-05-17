@@ -16,18 +16,19 @@ assets:
     SQLServer high processes blocked: assets/recommended_monitors/sqlserver_high_processes_blocked.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
+- data store
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md
+- https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md
 display_name: SQL Server
 draft: false
 git_integration_title: sqlserver
 guid: 635cb962-ee9f-4788-aa55-a7ffb9661498
 integration_id: sql-server
 integration_title: SQL Server
+integration_version: 7.6.2
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -39,10 +40,13 @@ public_title: Datadog-SQL Server インテグレーション
 short_description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![SQL Server のグラフ][1]
 
 ## 概要
@@ -65,7 +69,7 @@ _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode
 
 1. 読み取り専用ログインを作成してサーバーに接続します。
 
-    ```text
+    ```SQL
         CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
         CREATE USER datadog FOR LOGIN datadog;
         GRANT SELECT on sys.dm_os_performance_counters to datadog;
@@ -74,7 +78,7 @@ _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode
 
    データベースごとにファイルサイズのメトリクスを収集するには、以下を実行して、作成したユーザー (`datadog`) にデータベースに[接続権限アクセス][3]があることを確認します。
 
-   ```text
+   ```SQL
        GRANT CONNECT ANY DATABASE to datadog; 
    ```
 
@@ -82,7 +86,7 @@ _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode
 
 3. (AlwaysOn および `sys.master_files` メトリクスの場合に必要metrics) AlwaysOn および `sys.master_files` メトリクスを収集するには、以下の追加権限を付与します。
 
-    ```text
+    ```SQL
         GRANT VIEW ANY DEFINITION to datadog;
     ```
 
@@ -122,9 +126,9 @@ _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode
 
 Linux ホスト上で SQL Server インテグレーションを実行するには、以下のような追加の構成設定が必要です。
 
-1. ODBC SQL Server ドライバー ([Microsoft ODBC ドライバー][5]など) をインストールします。
+1. ODBC SQL Server ドライバー ([Microsoft ODBC ドライバー][5]または [FreeTDS ドライバー][6]) をインストールします。
 2. `odbc.ini` ファイルと `odbcinst.ini` ファイルを `/opt/datadog-agent/embedded/etc` フォルダーにコピーします。
-3. `odbc` コネクターを使用し、`odbcinst.ini ファイル` で指定された正しいドライバーを指定するように `conf.yaml` ファイルを構成します。
+3. `odbc` コネクターを使用し、`odbcinst.ini` ファイルで指定された正しいドライバーを指定するように `conf.yaml` ファイルを構成します。
 
 ##### ログの収集
 
@@ -151,15 +155,12 @@ _Agent バージョン 6.0 以降で利用可能_
 
 3. [Agent を再起動します][4]。
 
-Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][6]を参照してください。
-
-
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-2017
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[6]: http://www.freetds.org/
 {{% /tab %}}
 {{% tab "Containerized" %}}
 

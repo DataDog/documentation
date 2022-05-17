@@ -1,17 +1,17 @@
 ---
-title: Datadog Forwarder を使用する - ノード
 kind: ガイド
+title: Datadog Forwarder を使用した Node.js サーバーレスアプリケーションのインスツルメンテーション
 ---
-Datadog Serverless の新規ユーザーには、Datadog で[すぐに使用可能な Lambda 機能][1]を使用することをおすすめします。ただし、Lambda で提供される機能の前に Datadog Forwarder を使用して Datadog Serverless をセットアップしてある場合は、インスタンスを維持するためこのガイドをご利用ください。
 
-## 必須セットアップ
+## 概要
 
-未構成の場合:
+<div class="alert alert-warning">
+Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/nodejs">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
+</div>
 
-- [AWS インテグレーション][2]をインストールします。これにより、Datadog は AWS から Lambda メトリクスを取り込むことができます。
-- AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][3]をインストールします。
+## 前提条件
 
-[AWS インテグレーション][2]と [Datadog Forwarder][3] をインストールしたら、手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+[Datadog Forwarder Lambda 関数][1]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
 ## コンフィギュレーション
 
@@ -94,7 +94,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[4]: /ja/serverless/troubleshooting/serverless_tracing_and_webpack/
+[4]: /ja/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -247,7 +247,7 @@ yarn add datadog-lambda-js dd-trace
 
 Datadog Lambda ライブラリは、レイヤーまたは JavaScript パッケージとしてインポートすることができます。
 
-`datadog-lambda-js` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。例: datadog-lambda-js v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致。
+`datadog-lambda-js` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。たとえば、datadog-lambda-js v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致します。
 
 #### レイヤーの使用
 
@@ -308,7 +308,7 @@ yarn add datadog-lambda-js
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
-[4]: /ja/serverless/troubleshooting/serverless_tracing_and_webpack/
+[4]: /ja/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
@@ -317,11 +317,11 @@ yarn add datadog-lambda-js
 
 ### タグ
 
-これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][4]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
+オプションではありますが、Datadog では以下の[統合サービスタグ付けのドキュメント][5]に従いサーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることをお勧めします。
 
 ## 確認
 
-以上の方法で関数を構成すると、[Serverless Homepage][5] でメトリクス、ログ、トレースを確認できるようになります。
+以上の方法で関数を構成すると、[Serverless Homepage][3] でメトリクス、ログ、トレースを確認できるようになります。
 
 ## カスタムビジネスロジックの監視
 
@@ -374,17 +374,15 @@ exports.handler = async (event) => {
 };
 ```
 
-カスタムメトリクス送信の詳細については、[ここ][6]を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][7]の Datadog APM ドキュメントを参照してください。
+カスタムメトリクス送信の詳細については、[Serverless Custom Metrics][4] を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][5]の Datadog APM ドキュメントを参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/serverless/installation
-[2]: /ja/integrations/amazon_web_services/
-[3]: /ja/serverless/forwarder
-[4]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[5]: https://app.datadoghq.com/functions
-[6]: /ja/serverless/custom_metrics?tab=nodejs
-[7]: /ja/tracing/custom_instrumentation/nodejs/
+[1]: /ja/serverless/forwarder
+[2]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[3]: https://app.datadoghq.com/functions
+[4]: /ja/serverless/custom_metrics?tab=nodejs
+[5]: /ja/tracing/custom_instrumentation/nodejs/

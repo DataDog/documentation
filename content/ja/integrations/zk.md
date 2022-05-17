@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/zookeeper
+- /ja/integrations/zookeeper
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -14,20 +14,21 @@ assets:
     zookeeper_processes: assets/saved_views/zookeeper_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - orchestration
-  - notification
-  - log collection
-  - autodiscovery
+- orchestration
+- notification
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/zk/README.md
+- https://github.com/DataDog/integrations-core/blob/master/zk/README.md
 display_name: ZooKeeper
 draft: false
 git_integration_title: zk
 guid: 5519c110-5183-438e-85ad-63678c072ac7
 integration_id: zookeeper
 integration_title: ZooKeeper
+integration_version: 4.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -36,15 +37,18 @@ metric_prefix: zookeeper.
 metric_to_check: zookeeper.connections
 name: zk
 process_signatures:
-  - zkServer.sh start
-  - java zoo.cfg
+- zkServer.sh start
+- java zoo.cfg
 public_title: Datadog-ZooKeeper インテグレーション
 short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
 support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ![ZooKeeper ダッシュボード][1]
 
 ## 概要
@@ -59,9 +63,9 @@ ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 ### コンフィギュレーション
 
-#### ZooKeeper のホワイトリスト
+#### 包含リスト
 
-バージョン 3.5 以降、ZooKeeper で [4 文字コマンド][4]をホワイトリストに登録する `4lw.commands.whitelist` パラメーターを利用できるようになりました ([ZooKeeper のドキュメント][3]を参照してください)。デフォルトでは、`srvr` だけがホワイトリストに登録されています。このインテグレーションは `stat` および `mntr` コマンドに基づいているため、これらのコマンドを ホワイトリストに登録してください。
+バージョン 3.5 以降、ZooKeeper には `4lw.commands.whitelist` パラメーターが追加されました。[4 文字コマンド][4]を許可する例については、[ZooKeeper クラスターオプション][3]を参照してください。デフォルトでは、`srvr` だけがホワイトリストに登録されています。インテグレーションはこれらのコマンドに基づいて行われるので、`stat` と `mntr` をホワイトリストに追加してください。
 
 #### SSL の有効化
 
@@ -76,7 +80,7 @@ ZooKeeper で SSL の設定が完了すると、SSL を使用して Datadog Agen
 - `client_truststore.jks`
 - `client_keystore.jks`
 
-次の手順もまた、両サイドの `keystore` ファイルと `truststore` ファイルが、互いの証明書およびエイリアスの `server_cert` と `client_cert` を持っていると仮定しています。つまり、Java ZooKeeper クライアントがすでに ZooKeeper サーバーに接続できる状態です。
+また、両サイドの `keystore` ファイルと `truststore` ファイルが、互いの証明書およびエイリアスの `server_cert` と `client_cert` を持っているとします。つまり、Java ZooKeeper クライアントがすでに ZooKeeper サーバーに接続できる状態です。
 秘密キーにパスワードが設定されている場合は、コンフィグオプション `tls_private_key_password` の `config.yaml` ファイルにこのパスワードが含まれていることを確認してください。
 
 JKS ファイルを PEM ファイルに変換するには
@@ -179,7 +183,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                           |
 | -------------- | ----------------------------------------------- |

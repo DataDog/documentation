@@ -1,21 +1,22 @@
 ---
-title: Ruby ランタイムメトリクス
-kind: ドキュメント
 description: Ruby アプリケーションのパフォーマンスに関する詳細情報を、トレースに紐づくランタイムメトリクスと共に取得します。
 further_reading:
-  - link: tracing/connect_logs_and_traces
-    tag: ドキュメント
-    text: ログとトレースの接続
-  - link: tracing/manual_instrumentation
-    tag: ドキュメント
-    text: アプリケーションを手動でインストルメントしてトレースを作成します。
-  - link: tracing/opentracing
-    tag: ドキュメント
-    text: アプリケーション全体に Opentracing を実装します。
-  - link: tracing/visualization/
-    tag: ドキュメント
-    text: サービス、リソース、トレースの詳細
+- link: tracing/connect_logs_and_traces
+  tag: ドキュメント
+  text: ログとトレースの接続
+- link: tracing/manual_instrumentation
+  tag: ドキュメント
+  text: アプリケーションを手動でインストルメントしてトレースを作成します。
+- link: tracing/opentracing
+  tag: ドキュメント
+  text: アプリケーション全体に Opentracing を実装します。
+- link: tracing/visualization/
+  tag: ドキュメント
+  text: サービス、リソース、トレースの詳細
+kind: ドキュメント
+title: Ruby ランタイムメトリクス
 ---
+
 <div class="alert alert-warning">
 この機能はクローズドベータ版です。ご使用のアカウントでこの機能を有効にするには、<a href="https://docs.datadoghq.com/help/">サポートチームまでお問い合わせください。</a>
 </div>
@@ -39,7 +40,7 @@ Datadog.configure do |c|
   # 必要に応じて、ランタイムメトリクスの送信に使用される DogStatsD インスタンスを構成できます。
   # `dogstatsd-ruby` が利用可能な場合、DogStatsD は自動的にデフォルト設定になります。
   # Datadog Agent のホストとポートを使用して構成できます。デフォルトは 'localhost:8125' です。
-  c.runtime_metrics statsd: Datadog::Statsd.new
+ c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
 
@@ -55,16 +56,16 @@ Kubernetes では、[DogstatsD ポートをホストポートにバインド][5]
 
 {{< get-metrics-from-git "ruby" >}}
 
-Datadog では、APM サービス詳細画面にこれらのメトリクスを表示し、これらのメトリクスに適用された `service` および `runtime-id` タグ付きの[デフォルトの Ruby ランタイムダッシュボード][7]を提供します。
+APM サービス詳細画面にこれらのメトリクスを表示するだけでなく、Datadog は[デフォルトの Ruby ランタイムダッシュボード][7]を提供します。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
-[2]: /ja/metrics/dogstatsd_metrics_submission/#setup
+[2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
 [4]: /ja/agent/docker/#dogstatsd-custom-metrics
 [5]: /ja/developers/dogstatsd/?tab=kubernetes#agent
-[6]: /ja/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[6]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics

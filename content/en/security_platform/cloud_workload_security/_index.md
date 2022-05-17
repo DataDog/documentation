@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Datadog Workload Security detects threats to your production workloads in real-time. With Workload Security, you can monitor file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, docker containers, or Kubernetes clusters, in real-time at the kernel level. Use **File Integrity Monitoring (FIM)** to watch for changes to key files and directories. Use **Process Execution Monitoring** to monitor process executions for suspicious, malicious, or anomalous activity.
+Datadog Workload Security detects threats to your production workloads in real-time. With Workload Security, you can monitor file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, docker containers, or Kubernetes clusters, in real-time at the kernel level. Use **File Integrity Monitoring (FIM)** to watch for changes to key files and directories. Use **Process Execution Monitoring** to watch process executions for suspicious, malicious, or anomalous activity.
 
 {{< img src="security_platform/cws/workload_security_rules.png" alt="Cloud Workload Security detection rules in the Datadog app" width="100%">}}
 

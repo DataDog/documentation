@@ -11,6 +11,8 @@ Post events for specific integrations using the [Events API][1] and the `source_
 
 Search for events in the event stream using `sources:<SEARCH_TERM>`.
 
+**Note**: This list includes sources from core Datadog integrations only. Additional sources may come from [community][2] and [Marketplace][3] integrations. 
+
 
 ## Parameters
 
@@ -29,6 +31,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Amazon Auto Scaling           | amazon auto scaling           | autoscaling                |
 | Bigpanda                      | bigpanda                      | bigpanda                   |
 | Amazon App Runner             | amazon app runner             | awsapprunner               |
+| Amazon Backup                 | amazon backup                 | awsbackup                  |
 | Amazon Billing                | amazon billing                | billing                    |
 | Amazon Certificate Manager    | amazon certificate manager    | awscertificatemanager      |
 | Amazon Cloudfront             | amazon cloudfront             | cloudfront                 |
@@ -67,12 +70,14 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Amazon Inspector              | amazon inspector              | inspector                  |
 | Amazon Iot                    | amazon iot                    | iot                        |
 | Amazon Keyspaces              | amazon keyspaces              | keyspaces                  |
+| Amazon Kinesis Data Analytics | amazon kinesis data analytics | kinesisanalytics           |
 | Amazon Kinesis                | amazon kinesis                | kinesis                    |
 | Amazon Kms                    | amazon kms                    | kms                        |
 | Amazon Lambda                 | amazon lambda                 | lambda                     |
 | Amazon Lex                    | amazon lex                    | awslex                     |
 | Amazon App Mesh               | amazon app mesh               | amazonappmesh              |
 | Amazon Machine Learning       | amazon machine learning       | machinelearning            |
+| Amazon Mwaa                   | amazon mwaa                   | mwaa                       |
 | Amazon Mq                     | amazon mq                     | mq                         |
 | Amazon Msk                    | amazon msk                    | msk                        |
 | Amazon Nat Gateway            | amazon nat gateway            | natgateway                 |
@@ -187,10 +192,11 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Flowdock                      | flowdock                      | flowdock                   |
 | Fluentd                       | fluentd                       | fluentd                    |
 | Git                           | git                           | git                        |
-| GitHub                        | github                        | github                     |
-| GitHub Apps                   | github apps                   | githubapps                 |
+| Github                        | github                        | github                     |
+| Github Apps                   | github apps                   | githubapps                 |
 | GitLab                        | gitlab                        | gitlab                     |
 | G Suite                       | g suite                       | gsuite                     |
+| Go                            | go                            | go                         |
 | Go Expvar                     | go expvar                     | goexpvar                   |
 | Google App Engine             | google app engine             | gae                        |
 | Google Cloud Apis             | google cloud apis             | gcpapis                    |
@@ -215,6 +221,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Google Cloud Redis            | google cloud redis            | gcpredis                   |
 | Google Cloud Router           | google cloud router           | gcprouter                  |
 | Google Cloud Run              | google cloud run              | gcpcloudrun                |
+| Google Cloud Run For Anthos   | google cloud run for anthos   | gcpcloudrunforanthos       |
 | Google Cloud Spanner          | google cloud spanner          | gcpspanner                 |
 | Google Cloud Storage          | google cloud storage          | gcpstorage                 |
 | Google Cloud Tasks            | google cloud tasks            | gcptasks                   |
@@ -236,6 +243,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Java                          | java                          | java                       |
 | Jenkins                       | jenkins                       | jenkins                    |
 | Jira                          | jira                          | jira                       |
+| Jumpcloud                     | jumpcloud                     | jumpcloud                  |
 | Kafka                         | kafka                         | kafka                      |
 | Kong                          | kong                          | kong                       |
 | Kubernetes                    | kubernetes                    | kubernetes                 |
@@ -269,7 +277,7 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 | Pgbouncer                     | pgbouncer                     | pgbouncer                  |
 | Php                           | php                           | php                        |
 | Phpfpm                        | phpfpm                        | phpfpm                     |
-| Pingdom                       | pingdom                       | pingdom                    |
+| Pingdom                       | pingdom                       | pingdomv3                  |
 | Pivotal                       | pivotal                       | pivotal                    |
 | Postfix                       | postfix                       | postfix                    |
 | Postgres                      | postgres                      | postgres                   |
@@ -319,3 +327,5 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 
 
 [1]: /api/latest/events/
+[2]: https://docs.datadoghq.com/integrations/
+[3]: https://app.datadoghq.com/marketplace/

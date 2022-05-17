@@ -1,119 +1,107 @@
 ---
-title: Ruby アプリケーションのインスツルメント
-kind: ドキュメント
-further_reading:
-  - link: serverless/serverless_tagging/
-    tag: Documentation
-    text: サーバーレスアプリケーションのタグ付け
-  - link: serverless/distributed_tracing/
-    tag: Documentation
-    text: サーバーレスアプリケーションのトレース
-  - link: serverless/custom_metrics/
-    tag: Documentation
-    text: サーバーレスアプリケーションからのカスタムメトリクスの送信
 aliases:
-  - /ja/serverless/datadog_lambda_library/ruby/
+- /ja/serverless/datadog_lambda_library/ruby/
+further_reading:
+- link: serverless/datadog_lambda_library/ruby
+  tag: Documentation
+  text: Ruby 向け Datadog Lambda ライブラリ
+- link: serverless/distributed_tracing/
+  tag: Documentation
+  text: サーバーレスアプリケーションのトレース
+- link: serverless/custom_metrics/
+  tag: Documentation
+  text: サーバーレスアプリケーションからのカスタムメトリクスの送信
+- link: /serverless/guide/troubleshoot_serverless_monitoring
+  tag: ドキュメント
+  text: サーバーレスモニタリングのトラブルシューティング
+kind: ドキュメント
+title: Ruby サーバーレスアプリケーションのインスツルメンテーション
 ---
-## 必須セットアップ
 
-未構成の場合:
+## 前提条件
 
-- [AWS インテグレーション][1]をインストールします。これにより、Datadog は AWS から Lambda メトリクスを取り込むことができます。
-- AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][2]をインストールします。
+[Datadog Forwarder Lambda 関数][1]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
-[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+## インストール
 
-## コンフィギュレーション
+1. Datadog Lambda ライブラリのインストール
 
-### Install
+   Datadog Lambda ライブラリは、レイヤーまたは gem としてインストールできます。Datadog では、ほとんどの関数でライブラリをレイヤーとしてインストールすることを推奨しています。お使いの Lambda 関数がコンテナイメージとしてデプロイされている場合は、ライブラリを gem としてインストールする必要があります。
 
-Datadog Lambda ライブラリは、レイヤーまたは gem としてインストールできます。Datadog では、ほとんどの関数でライブラリをレイヤーとしてインストールすることを推奨しています。お使いの Lambda 関数がコンテナイメージとしてデプロイされている場合は、ライブラリを gem としてインストールする必要があります。
+   `datadog-lambda` gem のマイナーバージョンは、常にレイヤーのバージョンに一致します。たとえば、datadog-lambda v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致します。
 
-`datadog-lambda` gem のマイナーバージョンは、常にレイヤーのバージョンに一致します。例: datadog-lambda v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致。
+    - オプション A: 以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][2]します。
 
-#### レイヤーの使用
+      ```
+      # For regular regions
+      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 
-以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][3]します。
+      # For us-gov regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
+      ```
 
-```
-# 通常のリージョンの場合
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
+      `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
 
-# 米国政府リージョンの場合
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
-```
+    - オプション B: 構築済みの Datadog Lambda レイヤーを使用できない場合、代替として以下を Gemfile に追加することができます。
 
-使用できる `RUNTIME` オプションは、`Ruby2-5` と `Ruby2-7` です。例:
+      ```Gemfile
+      gem 'datadog-lambda'
+      gem 'ddtrace'
+      ```
 
-```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
-```
+      `ddtrace` には、AWS Lambda で動作するよう Amazon Linux 用にコンパイルする必要のあるネイティブ拡張機能が含まれています。そのため、Datadog では Lambda をコンテナイメージとして構築しデプロイすることを推奨しています。AWS Lambda を使用するが関数をコンテナイメージとしてデプロイできない、という場合は、Lambda ライブラリを gem ではなくレイヤーとしてインストールすることをおすすめします。
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][4]に追加する必要があります。
+      お使いの関数の Dockerfile で `bundle install` を実行する前に、`gcc`、`gmp-devel`、`make` をインストールし、ネイティブ拡張機能を正常にコンパイルします。
 
-#### Gem の使用
+      ```dockerfile
+      FROM <base image>
 
-Gemfile に下記を追加します。
+      # assemble your container image
 
-```Gemfile
-gem 'datadog-lambda'
-```
+      RUN yum -y install gcc gmp-devel make
+      RUN bundle config set path 'vendor/bundle'
+      RUN bundle install
+      ```
 
-Datadog APM を使用するには、Gemfile で `ddtrace` を 2 番目の依存関係として追加する必要があります。
+2. Lambda 関数を構成する
 
-```Gemfile
-gem 'datadog-lambda'
-gem 'ddtrace'
-```
+   Datadog APM を有効にし、Datadog Lambda ライブラリが提供するラッパーを使用して Lambda ハンドラー関数をラップします。
 
-`ddtrace` には、AWS Lambda で動作するよう Amazon Linux 用にコンパイルする必要のあるネイティブ拡張機能が含まれています。そのため、Datadog では Lambda をコンテナイメージとして構築しデプロイすることを推奨しています。AWS Lambda を使用するが関数をコンテナイメージとしてデプロイできない、という場合は、Lambda ライブラリを gem ではなくレイヤーとしてインストールすることをおすすめします。
+    ```ruby
+    require 'datadog/lambda'
 
-お使いの関数の Dockerfile で `bundle install` を実行する前に、`gcc`、`gmp-devel`、`make` をインストールし、ネイティブ拡張機能を正常にコンパイルします。
-
-```dockerfile
-FROM <base image>
-
-# コンテナイメージをアセンブル
-
-RUN yum -y install gcc gmp-devel make
-RUN bundle config set path 'vendor/bundle'
-RUN bundle install
-```
-
-### 関数の構成
-
-Datadog APM を有効にし、Datadog Lambda ライブラリが提供するラッパーを使用して Lambda ハンドラー関数をラップします。
-
-```ruby
-require 'datadog/lambda'
-
-Datadog::Lambda.configure_apm do |c|
-# インスツルメンテーションを有効にします
-end
-
-def handler(event:, context:)
-    Datadog::Lambda.wrap(event, context) do
-        return { statusCode: 200, body: 'Hello World' }
+    Datadog::Lambda.configure_apm do |c|
+    # Enable the instrumentation
     end
-end
-```
 
-### サブスクライブ
+    def handler(event:, context:)
+        Datadog::Lambda.wrap(event, context) do
+            return { statusCode: 200, body: 'Hello World' }
+        end
+    end
+    ```
 
-メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
+3. Datadog Forwarder をロググループにサブスクライブ
 
-1. [まだの場合は、Datadog Forwarder をインストールします][2]。
-2. [Datadog Forwarder を関数のロググループにサブスクライブします][5]。
+   メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
 
-### タグ
+    1. [まだの場合は、Datadog Forwarder をインストールします][1]。
+    2. [Datadog Forwarder を関数のロググループにサブスクライブします][3]。
 
-これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][6]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
 
-## 確認
+## 次のステップ
 
-以上の方法で関数を構成すると、[Serverless Homepage][7] でメトリクス、ログ、トレースを確認できるようになります。
+- [Serverless Homepage][4] でメトリクス、ログ、トレースを見ることができるようになりました。
+- [カスタムビジネスロジックの監視](#monitor-custom-business-logic)のサンプルコードを参照してください。
+- テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][5]を参照してください
+- [高度な構成][6]を参照して以下のことを行ってください。
+    - タグを使ったテレメトリー接続
+    - AWS API Gateway、SQS などのテレメトリーを収集する
+    - Lambda のリクエストとレスポンスのペイロードを取得する
+    - Lambda 関数のエラーをソースコードにリンクする
+    - ログまたはトレースから機密情報をフィルタリングまたはスクラブする
 
-## カスタムビジネスロジックの監視
+### カスタムビジネスロジックの監視
 
 カスタムメトリクスまたはスパンの送信をご希望の場合は、以下のコード例をご参照ください。
 
@@ -130,12 +118,12 @@ def handler(event:, context:)
     Datadog::Lambda::wrap(event, context) do
         # Lambda 関数スパンにカスタムタグを追加します
         # X-Ray トレーシングが有効になっている場合は機能しません
-        current_span = Datadog.tracer.active_span
+        current_span = Datadog::Tracing.active_span
         current_span.set_tag('customer.id', '123456')
 
         some_operation()
 
-        Datadog.tracer.trace('hello.world') do |span|
+        Datadog::Tracing.trace('hello.world') do |span|
           puts "Hello, World!"
         end
 
@@ -152,24 +140,23 @@ end
 
 # 関数をインスツルメントします
 def some_operation()
-    Datadog.tracer.trace('some_operation') do |span|
+    Datadog::Tracing.trace('some_operation') do |span|
         # ここで何かをします
     end
 end
 ```
 
-カスタムメトリクス送信の詳細については、[ここ][8]を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][9]の Datadog APM ドキュメントを参照してください。
+カスタムメトリクス送信の詳細については、[Serverless Custom Metrics][7] を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][8]の Datadog APM ドキュメントを参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/amazon_web_services/
-[2]: /ja/serverless/forwarder/
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[7]: https://app.datadoghq.com/functions
-[8]: /ja/serverless/custom_metrics?tab=ruby
-[9]: /ja/tracing/custom_instrumentation/ruby/
+[1]: /ja/serverless/forwarder/
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[3]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[4]: https://app.datadoghq.com/functions
+[5]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[6]: /ja/serverless/configuration
+[7]: /ja/serverless/custom_metrics?tab=ruby
+[8]: /ja/tracing/custom_instrumentation/ruby/

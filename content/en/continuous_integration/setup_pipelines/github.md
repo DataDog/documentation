@@ -68,6 +68,16 @@ The [Pipelines][7] and [Pipeline Executions][8] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+## Disabling GitHub Actions tracing
+
+To disable the CI Visibility GitHub Actions integration, make sure the GitHub app is no longer subscribed to the
+workflow job and workflow run events. To remove the events:
+
+1. Go to the [GitHub Apps][9] page.
+2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you will have to repeat the process for each).
+3. Scroll to the **Subscribe to events** section, and make sure that **Workflow job** and **Workflow run** are not selected.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -80,3 +90,4 @@ The [Pipelines][7] and [Pipeline Executions][8] pages populate with data after t
 [6]: https://app.datadoghq.com/ci/settings
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
+[9]: https://github.com/settings/apps

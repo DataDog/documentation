@@ -61,6 +61,7 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 
 ## Enabling the heap profiler
 <div class="alert alert-info">The Java heap profiler feature is in beta.</div>
+<div class="aler alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
 To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
 
 Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
@@ -188,8 +189,11 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 ## Application triggers "stack level too deep (SystemStackError)" errors
 
-The profiler instruments the Ruby VM to track thread creation.
-This instrumentation is compatible with most other Ruby gems that also instrument thread creation, with a few exceptions.
+This issue is not expected to happen since [`dd-trace-rb` version `0.54.0`][3].
+If you're still running into it, [open a support ticket][2] taking care to include the full backtrace leading to the error.
+
+Prior to version `0.54.0`, the profiler needed to instrument the Ruby VM to track thread creation, which clashed
+with similar instrumentation from other gems.
 
 If you're using any of the below gems:
 
@@ -197,22 +201,20 @@ If you're using any of the below gems:
 * `logging`: Disable `logging`'s thread context inheritance by setting the `LOGGING_INHERIT_CONTEXT` environment
   variable to `false`.
 
-If you're still experiencing `SystemStackError` errors after following the above instructions,
-[open a support ticket][2] taking care to include the full backtrace leading to the error.
-
 ## Missing profiles for Resque jobs
 
-When profiling [Resque][3] jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
+When profiling [Resque][4] jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
 variable to `1`, as described in the
-[Resque documentation][4].
+[Resque documentation][5].
 
 Without this flag, profiles for short-lived Resque jobs will be unavailable.
 
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-[3]: https://github.com/resque/resque
-[4]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
+[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
+[4]: https://github.com/resque/resque
+[5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -238,9 +240,13 @@ If you've configured the profiler and don't see profiles in the profile search p
       ["response.Error"]="...",
       ```
 
-   6. Check the following field to ensure that the right url is used:
+   6. Check the following field to ensure that the right URL is used. If you use default configuration settings:
       ```
-      ["_profilesIngestionEndpoint_url"]="https://intake.profile.datadoghq.com/v1/input",
+      ["_profilesIngestionEndpoint_url"]="http://127.0.0.1:8126/profiling/v1/input",
+      ```
+      If your configuration specifies a different trace Agent URL using `DD_TRACE_AGENT_URL` or `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables, then this field must match those values. For example:
+      ```
+      ["_profilesIngestionEndpoint_url"]="http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>/profiling/v1/input",
       ```
 
 Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug files and the following information:

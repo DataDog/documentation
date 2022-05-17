@@ -5,11 +5,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md
 display_name: UPSC
 draft: false
 git_integration_title: upsc
@@ -25,11 +25,15 @@ metric_prefix: upsc.
 metric_to_check: upsc.battery.charge
 name: upsc
 public_title: Intégration Datadog/UPSC
-short_description: Collecteur de statistiques UPSC pour les batteries d'onduleurs (UPS)
+short_description: Collecteur de statistiques UPSC pour les batteries d'onduleurs
+  (UPS)
 support: contrib
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques du service UPSD via UPSC en temps réel pour :
@@ -61,7 +65,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `upsc` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `upsc` dans la section Checks.
 
 ## Données collectées
 

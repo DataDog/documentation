@@ -19,12 +19,11 @@ To migrate to the new configuration options, remove all legacy App Analytics [co
 
 ## App Analytics setup
 
-To enable App Analytics, either [automatically](#automatic-configuration) or [manually](#custom-instrumentation), configure your APM tracer to emit the relevant analytics from your services.
+App Analytics configuration options are located in the Tracing Libraries and in the Datadog Agent. In the libraries, analytics spans from your services are generated either [automatically](#automatic-configuration) or [manually](#custom-instrumentation).
 
+### In Tracing Libraries
 
-**Note**: to use App Analytics, you must be using Agent v6.7+.
-
-### Automatic configuration
+#### Automatic configuration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,nginx" >}}
 {{< programming-lang lang="java" >}}
@@ -50,7 +49,7 @@ App Analytics is available starting in version 0.19.0 of the Ruby tracing client
 To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
 
 ```ruby
-Datadog.configure { |c| c.analytics_enabled = true }
+Datadog.configure { |c| c.tracing.analytics.enabled = true }
 ```
 
 * `true` enables analytics for all web frameworks.
@@ -130,9 +129,9 @@ To enable App Analytics for Nginx:
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Configure additional services (optional)
+#### Configure additional services (optional)
 
-#### Configure by integration
+##### Configure by integration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
@@ -174,7 +173,7 @@ App Analytics can be enabled for specific integrations.
 To do so, set either `DD_<INTEGRATION>_ANALYTICS_ENABLED=true` in your environment, or configure with:
 
 ```ruby
-Datadog.configure { |c| c.use :integration, analytics_enabled: true }
+Datadog.configure { |c| c.tracing.instrument :integration, analytics_enabled: true }
 ```
 
 Where `integration` is the name of the integration. See the [list of available integrations][1] for options.
@@ -265,7 +264,7 @@ Integration names can be found on the [integrations table][1].
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Database services
+#### Database services
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
@@ -290,7 +289,7 @@ Database tracing is not captured by App Analytics by default and you must enable
 Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example:
 
 ```ruby
-Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
+Datadog.configure { |c| c.tracing.instrument :mongo, analytics_enabled: true }
 ```
 
 {{< /programming-lang >}}
@@ -347,7 +346,7 @@ Integration names can be found on the [integrations table][1].
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### Custom instrumentation
+##### Custom instrumentation
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -395,12 +394,12 @@ def my_method():
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on a span:
+Applications with custom instrumentation can enable App Analytics by setting the `Analytics::TAG_ENABLED` tag on a span:
 
 ```ruby
-Datadog.tracer.trace('my.task') do |span|
+Datadog::Tracing.trace('my.task') do |span|
   # Set the analytics sample rate to 1.0
-  span.set_tag(Datadog::Ext::Analytics::TAG_ENABLED, true)
+  span.set_tag(Datadog::Tracing::Metadata::Ext::Analytics::TAG_ENABLED, true)
 end
 ```
 
@@ -476,5 +475,30 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-[1]: /tracing/guide/ingestion_control_page/
+### In the Datadog Agent
+
+<div class="alert alert-danger">
+This section describes deprecated features with configuration information relevant to legacy App Analytics.
+</div>
+
+To configure a rate of spans to analyze by service, setup the following in the `datadog.yaml` file:
+```
+apm_config:
+  analyzed_rate_by_service:
+    service_A: 1
+    service_B: 0.2
+    service_C: 0.05
+```
+
+To configure a rate of spans to analyze by service and operation name, setup the following in the `datadog.yaml` file:
+
+```
+apm_config:
+  analyzed_spans:
+    service_A|operation_name_X: 1
+    service_A|operation_name_Y: 0.25
+    service_B|operation_name_Z: 0.01
+```
+
+[1]: /tracing/trace_ingestion/
 [2]: /tracing/trace_ingestion/mechanisms

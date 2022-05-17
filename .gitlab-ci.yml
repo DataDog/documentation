@@ -35,7 +35,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_update-golang
   tags:
     - "runner:main"
   except:
@@ -84,10 +84,11 @@ build_preview:
     - touch Makefile.config
     - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
+    - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -106,43 +107,6 @@ build_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
-
-# build_preview_legacy:
-#   <<: *base_template
-#   stage: build
-#   environment: "preview"
-#   variables:
-#     URL: ${PREVIEW_DOMAIN}
-#     CONFIG: ${PREVIEW_CONFIG}
-#     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
-#     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
-#     LOCAL: "False"
-#   script:
-#     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-#     - version_static_assets
-#     - touch Makefile.config
-#     - make clean-examples
-#     - make examples
-#     - sync_integration_descriptions
-#     #- sync_integration_descriptions_cached
-#     - placehold_translations
-#     - update_preview_baseurl
-#     - build_hugo_site_new
-#     - in-isolation deploy_preview
-#     - collect_static_assets
-#     # remove service_checks json as we don't need to s3 push that..
-#     - rm -rf data/service_checks
-#     - push_site_to_s3
-#     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-#     #- remove_static_from_repo
-#     #- create_artifact
-#     #- create_artifact_untracked
-#   artifacts:
-#     paths:
-#       - ${ARTIFACT_RESOURCE}
-#       - ./integrations_data
-#   only:
-#     - /.+?\/[a-zA-Z0-9_-]+/
 
 link_checks_preview:
   <<: *base_template
@@ -170,21 +134,17 @@ link_checks_preview:
   interruptible: true
 
 missing_tms_preview:
-  image:
-    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
-    entrypoint: [ "" ]
-  tags: ["runner:main"]
+  <<: *base_template
   stage: post-deploy
-  cache: {}
   environment: "preview"
+  allow_failure: true
+  cache: {}
   variables:
     GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
-    # remove dirs we don't need to scan
-    - rm -rf ./public/fr ./public/ja ./public/api/v1/ ./public/api/v2/
-    - GOMAXPROCS=$(nproc --all) vale --glob='*.{html}' ./public
+    - check_missing_tms
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
@@ -202,8 +162,8 @@ index_algolia_preview:
   timeout: 1h 30m
   script:
     - |-
-        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
         export DISPLAY=:99
         Xvfb :99 -ac &
         echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
@@ -222,7 +182,7 @@ replica_algolia_preview:
     policy: pull
   environment: "preview"
   script:
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
   when: manual
@@ -239,7 +199,7 @@ sourcemaps_preview:
   environment: "preview"
   script:
     - yarn run build:webpack:preview -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
   allow_failure: true
@@ -269,8 +229,9 @@ build_live:
     - make examples
     - sync_integration_descriptions
     - sync_integration_metrics
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
     - placehold_translations
+    - yarn run prebuild
     - yarn run build:live
     - in-isolation deploy_live
     - create_artifact
@@ -372,7 +333,7 @@ sourcemaps_live:
   environment: "live"
   script:
     - yarn run build:webpack -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_live
   allow_failure: true
@@ -385,11 +346,23 @@ evaluate_missing_metrics:
   cache: {}
   environment: "live"
   script:
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd-api-key') -b $(get_secret 'dd-app-key')
   when: manual
   only:
     - master
 
+# TODO: update job to be scheduled/only run on master deploys when we are ready to deprecate old translations job
+manage_untracked_translations:manual:
+  <<: *base_template
+  stage: post-deploy
+  cache: {}
+  environment: "live"
+  only:
+    - master
+  script:
+    - echo "Downloading untracked translation source files..."
+    - manage_untracked_translation_files
+  when: manual
 
 manage_translations:on-schedule:
   <<: *base_template
@@ -405,9 +378,9 @@ manage_translations:on-schedule:
         nodenv shell 14.16.0
         [ -d ./node_modules ] && rm -rf ./node_modules
         yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
-        DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
+        DATADOG_API_KEY="$(get_secret 'dd-api-key')" manage_translations "${APIKEY}";
       fi
-      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd-api-key')
   artifacts:
     paths:
       - translate-debug.log
@@ -452,7 +425,7 @@ test_pa11y:
   dependencies:
     - build_live
   script:
-    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
   only:
     - schedules
 

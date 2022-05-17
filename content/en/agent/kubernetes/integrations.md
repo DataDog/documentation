@@ -255,13 +255,14 @@ The `values.yaml` file contains a `confd` section to define both static and Auto
       instances:
         - <INSTANCES_CONFIG>
 ```
-See the [Autodiscovery Container Identifiers][1] documentation for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
+See [Autodiscovery Container Identifiers][2] for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
 
-**Note**: The Helm chart has two `confd` sections: one for Agent checks, and a second for cluster checks. If you are using the Cluster Agent and looking to configure Autodiscovery for a cluster check, follow the [cluster check configuration example][2] and make sure to include `cluster_check: true`. See the [Cluster Check documentation][3] for more context. 
+**Note**: The Helm chart has two `confd` sections: one for Agent checks, and a second for cluster checks. If you are using the Cluster Agent and looking to configure Autodiscovery for a cluster check, follow the [cluster check configuration example][3] and make sure to include `cluster_check: true`. See [Cluster Check][4] for more context.
 
 [1]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L315-L330
-[2]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
-[3]: /agent/cluster_agent/clusterchecks
+[2]: /agent/guide/ad_identifiers/
+[3]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
+[4]: /agent/cluster_agent/clusterchecks
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -369,7 +370,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 The following configuration defines the integration template for Redis containers with a custom password parameter:
 ```yaml
-  confd
+  confd:
     redisdb.yaml: |-
       ad_identifiers:
         - redis
@@ -379,7 +380,7 @@ The following configuration defines the integration template for Redis container
           port: 6379
           password: %%env_REDIS_PASSWORD%%
 ```
-As a result, the Agent now contains a `redis.yaml` file with the above configuration in the `/confd` directory.
+As a result, the Agent contains a `redis.yaml` file with the above configuration in the `/confd` directory.
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text. Hence, you must pass the `REDIS_PASSWORD` environment variable to the Agent. See the [Autodiscovery template variable documentation][1].
 
 [1]: /agent/faq/template_variables/

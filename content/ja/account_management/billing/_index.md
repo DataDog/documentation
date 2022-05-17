@@ -1,7 +1,8 @@
 ---
-title: 課金
 kind: documentation
+title: 課金
 ---
+
 ## 概要
 
 課金サイクルは、いつサインアップしたかに関係なく月初から始まります。最初の月は、実際のサインアップ日に基づいて日割り計算されます。
@@ -22,7 +23,6 @@ Datadog は、ホストとカスタムメトリクスの数を毎時間測定し
 
 Datadog では、すべてのアカウントでご利用の当月の AWS Lambda 呼び出しの合計に基づきご請求が発生します。Pro および Enterprise プランには、100 万件の呼び出しごとに 150,000 件の Indexed Span と 5 個のカスタムメトリクスが含まれます。サーバーレス APM の請求は、Datadog APM サービスに送信された [Indexed Span][4] のうち、バンドルされた数量を超過した総数に基づき、月末に課金されます。サーバーレス使用時は、請求可能な [APM ホスト][4]はありません。
 
-**注** Analyzed Span は、2020 年 10 月 20 日の Tracing Without Limits のローンチに伴い、Indexed Span と改名しました。
 
 詳細については、[サーバーレス請求ページ][5]および[Datadog 料金ページ][6]を参照してください。
 
@@ -52,7 +52,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ### 請求メール
 
-[Biling history][13] ページの **Manage Billing Emails** で、請求書の受信用メールアドレスを設定できます。
+[Billing history][13] ページの **Manage Billing Emails** で、請求書の受信用メールアドレスを設定できます。
 
 {{< img src="account_management/billing/billing01.png" alt="請求メールの管理" >}}
 
@@ -79,7 +79,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
     {{< nextlink href="account_management/billing/log_management/" >}}ログ管理{{< /nextlink >}}
     {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (分散型トレーシング & 継続的プロファイリング){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}サーバーレス{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/rum/" >}}リアルユーザーモニタリングに関するよくあるご質問{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}RUM とセッションリプレイ{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba インテグレーション{{< /nextlink >}}

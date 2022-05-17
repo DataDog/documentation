@@ -1,11 +1,12 @@
 ---
-title: プロファイラのトラブルシューティング
-kind: ドキュメント
 further_reading:
-  - link: /tracing/troubleshooting
-    tag: Documentation
-    text: APM トラブルシューティング
+- link: /tracing/troubleshooting
+  tag: Documentation
+  text: APM トラブルシューティング
+kind: ドキュメント
+title: プロファイラのトラブルシューティング
 ---
+
 {{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,linux" >}}
 {{< programming-lang lang="java" >}}
 
@@ -60,6 +61,7 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 
 ## ヒーププロファイラーの有効化
 <div class="alert alert-info">Java ヒーププロファイラー機能はベータ版です。</div>
+<div class="aler alert-info">この機能には、Java 11.0.12、15.0.4、16.0.2、17.0.3、または 18 以降が必要です</div>
 ヒーププロファイラーを有効にするには、`-Ddd.profiling.heap.enabled=true` JVM 設定または `DD_PROFILING_HEAP_ENABLED=true` 環境変数を使用してアプリケーションを起動します。
 
 または、`jfp` [オーバーライドテンプレートファイル](#creating-and-using-a-jfr-template-override-file)で次のイベントを有効にすることもできます。
@@ -187,8 +189,10 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 
 ## アプリケーションが「スタックレベルが深すぎます (SystemStackError)」エラーをトリガーします
 
-プロファイラーは、スレッドの作成を追跡するために Ruby VM をインスツルメントします。
-このインスツルメンテーションは、いくつかの例外を除いて、スレッド作成もインスツルメントする他のほとんどの Ruby gem と互換性があります。
+この問題は [`dd-trace-rb` バージョン `0.54.0`][3] からは発生しないと思われます。
+それでも問題が解決しない場合は、エラーに至るまでのバックトレースを添えて、[サポートチケットを作成][2]してください。
+
+`0.54.0` より前のバージョンでは、プロファイラーはスレッド生成を追跡するために Ruby VM をインスツルメントする必要があり、他の gem による同様のインスツルメンテーションと衝突していました。
 
 以下の gem のいずれかを使用している場合
 
@@ -196,19 +200,18 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 * `logging`: `LOGGING_INHERIT_CONTEXT` 環境変数を `false` に設定して、 `logging` のスレッドコンテキストの継承を
   無効にします。
 
-上記の手順を実行しても `SystemStackError` エラーが引き続き発生する場合は、エラーにつながる完全なバックトレースが含まれるように注意して[サポートチケットを開きます][2]。
-
 ## レスキュージョブのプロファイルがありません
 
-[Resque][3] のジョブをプロファイリングする場合、[Resque のドキュメント][4]にあるように、`RUN_AT_EXIT_HOOKS` 環境変数を `1` に設定する必要があります。
+[Resque][4] のジョブをプロファイリングする場合、[Resque のドキュメント][5]にあるように、`RUN_AT_EXIT_HOOKS` 環境変数を `1` に設定する必要があります。
 
 このフラグがないと、短期間の Resque ジョブのプロファイルは使用できなくなります。
 
 
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/
-[3]: https://github.com/resque/resque
-[4]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
+[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
+[4]: https://github.com/resque/resque
+[5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -234,9 +237,13 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
       ["response.Error"]="...",
       ```
 
-   6. 次のフィールドをチェックして、正しい URL が使用されていることを確認します。
+   6. 以下のフィールドに、適切な URL が使用されていることをご確認ください。デフォルトのコンフィギュレーション設定を使用する場合は:
       ```
-      ["_profilesIngestionEndpoint_url"]="https://intake.profile.datadoghq.com/v1/input",
+      ["_profilesIngestionEndpoint_url"]="http://127.0.0.1:8126/profiling/v1/input",
+      ```
+      コンフィギュレーションで、 `DD_TRACE_AGENT_URL` または `DD_AGENT_HOST` および `DD_TRACE_AGENT_PORT` 環境変数を使用する別のトレース Agent URL を特定する場合、このフィールドはその値と一致する必要があります。たとえば、
+      ```
+      ["_profilesIngestionEndpoint_url"]="http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>/profiling/v1/input",
       ```
 
 正しくない場合は、[デバッグモード][1]をオンにして、デバッグファイルと以下の情報を添えて[サポートチケットの発行][2]を行います。
@@ -316,6 +323,18 @@ echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 - ストリップされたバイナリはシンボルが使用できません。ストリップされていないバイナリや、縮小されていないコンテナイメージを使ってみてください。
 - 特定のアプリケーションやライブラリは、そのデバッグパッケージがインストールされていると便利です。これは、リポジトリのパッケージマネージャーなどでインストールされたサービスにも当てはまります。
 
+## 共有ライブラリのロード中のエラー
+
+Continuous Profiler for Linux を動的ライブラリとして使用している場合、以下のエラーでアプリケーションが起動しないことがあります。
+
+```
+error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
+```
+
+これは、アプリケーションが `libdd_profiling.so` の依存関係で構築されている場合に発生しますが、依存関係の調整中のランタイムでは見られません。以下のいずれかを実行することで修正できます。
+
+- 静的ライブラリを使用してアプリケーションを再構築。一部の構築システムでは、動的ライブラリと静的ライブラリの選択があいまいなため、`ldd` を使用して `libdd_profiling.so` で結果のバイナリに不要な動的依存関係が含まれるかどうかを確認します。
+- 動的リンカーの検索パスでディレクトリの 1 つに `libdd_profiling.so` をコピー。ほとんどの Linux システムで、`ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n` を実行することでこのディレクトリのリストを獲得できます。
 
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/

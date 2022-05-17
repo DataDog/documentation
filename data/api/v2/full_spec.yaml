@@ -1069,6 +1069,23 @@ components:
       type: string
       x-enum-varnames:
       - AUTHN_MAPPINGS
+    ChargebackBreakdown:
+      description: Charges breakdown.
+      properties:
+        charge_type:
+          description: The type of charge for a particular product.
+          example: on_demand
+          type: string
+        cost:
+          description: The cost for a particular product and charge type during a
+            given month.
+          format: double
+          type: number
+        product_name:
+          description: The product for which cost is being reported.
+          example: infra_host
+          type: string
+      type: object
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
@@ -1263,6 +1280,58 @@ components:
       x-enum-varnames:
       - GZIP
       - DEFLATE
+    CostByOrg:
+      description: Cost data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CostByOrgAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/CostByOrgType'
+      type: object
+    CostByOrgAttributes:
+      description: Cost attributes data.
+      properties:
+        charges:
+          description: List of charges data reported for the requested month.
+          items:
+            $ref: '#/components/schemas/ChargebackBreakdown'
+          type: array
+        date:
+          description: The month requested.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        total_cost:
+          description: The total cost of products for the month.
+          format: double
+          type: number
+      type: object
+    CostByOrgResponse:
+      description: Chargeback Summary response.
+      properties:
+        data:
+          description: Response containing Chargeback Summary.
+          items:
+            $ref: '#/components/schemas/CostByOrg'
+          type: array
+      type: object
+    CostByOrgType:
+      default: cost_by_org
+      description: Type of cost data.
+      enum:
+      - cost_by_org
+      example: cost_by_org
+      type: string
+      x-enum-varnames:
+      - COST_BY_ORG
     Creator:
       description: Creator of the object.
       properties:
@@ -1614,6 +1683,27 @@ components:
           type: string
       required:
       - name
+      type: object
+    HourlyUsageType:
+      description: Usage type that is being measured.
+      enum:
+      - app_sec_host_count
+      - observability_pipelines_bytes_processed
+      - lambda_traced_invocations_count
+      example: observability_pipelines_bytes_processed
+      type: string
+      x-enum-varnames:
+      - APP_SEC_HOST_COUNT
+      - OBSERVABILITY_PIPELINES_BYTES_PROCESSSED
+      - LAMBDA_TRACED_INVOCATIONS_COUNT
+    IdPMetadataFormData:
+      description: The form data submitted to upload IdP metadata
+      properties:
+        idp_file:
+          description: The IdP metadata XML file
+          format: binary
+          type: string
+          x-mimetype: application/xml
       type: object
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
@@ -2764,6 +2854,7 @@ components:
       - min
       - max
       - avg
+      - median
       example: pc90
       type: string
       x-enum-varnames:
@@ -2778,6 +2869,7 @@ components:
       - MIN
       - MAX
       - AVG
+      - MEDIAN
     LogsArchive:
       description: The logs archive.
       properties:
@@ -2806,6 +2898,12 @@ components:
             in the archive.
           example: source:nginx
           type: string
+        rehydration_max_scan_size_in_gb:
+          description: Maximum scan size for rehydration from this archive.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
         rehydration_tags:
           description: An array of tags to add to rehydrated logs from an archive.
           example:
@@ -2850,6 +2948,12 @@ components:
             in the archive.
           example: source:nginx
           type: string
+        rehydration_max_scan_size_in_gb:
+          description: Maximum scan size for rehydration from this archive.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
         rehydration_tags:
           description: An array of tags to add to rehydrated logs from an archive.
           example:
@@ -3913,6 +4017,63 @@ components:
       type: string
       x-enum-varnames:
       - DISTINCT_METRIC_VOLUMES
+    MetricEstimate:
+      description: Object for a metric cardinality estimate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricEstimateAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricEstimateResourceType'
+      type: object
+    MetricEstimateAttributes:
+      description: Object containing the definition of a metric estimate attribute.
+      properties:
+        estimate_type:
+          $ref: '#/components/schemas/MetricEstimateType'
+        estimated_at:
+          description: Timestamp when the cardinality estimate was requested.
+          example: '2022-04-27T09:48:37.463835Z'
+          format: date-time
+          type: string
+        estimated_output_series:
+          description: Estimated cardinality of the metric based on the queried configuration.
+          example: 50
+          format: int64
+          type: integer
+      type: object
+    MetricEstimateResourceType:
+      default: metric_cardinality_estimate
+      description: The metric estimate resource type.
+      enum:
+      - metric_cardinality_estimate
+      example: metric_cardinality_estimate
+      type: string
+      x-enum-varnames:
+      - METRIC_CARDINALITY_ESTIMATE
+    MetricEstimateResponse:
+      description: Response object that includes metric cardinality estimates.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricEstimate'
+      type: object
+    MetricEstimateType:
+      default: count_or_gauge
+      description: Estimate type based on the queried configuration. By default, `count_or_gauge`
+        is returned. `distribution` is returned for distribution metrics without percentiles
+        enabled. Lastly, `percentile` is returned if `filter[pct]=true` is queried
+        with a distribution metric.
+      enum:
+      - count_or_gauge
+      - distribution
+      - percentile
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - COUNT_OR_GAUGE
+      - DISTRIBUTION
+      - PERCENTILE
     MetricIngestedIndexedVolume:
       description: Object for a single metric's ingested and indexed volume.
       properties:
@@ -4531,6 +4692,186 @@ components:
       x-enum-varnames:
       - ASC
       - DESC
+    RUMAggregateBucketValue:
+      description: A bucket value, can be either a timeseries or a single value.
+      oneOf:
+      - $ref: '#/components/schemas/RUMAggregateBucketValueSingleString'
+      - $ref: '#/components/schemas/RUMAggregateBucketValueSingleNumber'
+      - $ref: '#/components/schemas/RUMAggregateBucketValueTimeseries'
+    RUMAggregateBucketValueSingleNumber:
+      description: A single number value.
+      format: double
+      type: number
+    RUMAggregateBucketValueSingleString:
+      description: A single string value.
+      type: string
+    RUMAggregateBucketValueTimeseries:
+      description: A timeseries array.
+      items:
+        $ref: '#/components/schemas/RUMAggregateBucketValueTimeseriesPoint'
+      type: array
+      x-generate-alias-as-model: true
+    RUMAggregateBucketValueTimeseriesPoint:
+      description: A timeseries point.
+      properties:
+        time:
+          description: The time value for this point.
+          example: '2020-06-08T11:55:00.123Z'
+          format: date-time
+          type: string
+        value:
+          description: The value for this point.
+          example: 19
+          format: double
+          type: number
+      type: object
+    RUMAggregateRequest:
+      description: The object sent with the request to retrieve aggregation buckets
+        of RUM events from your organization.
+      properties:
+        compute:
+          description: The list of metrics or timeseries to compute for the retrieved
+            buckets.
+          items:
+            $ref: '#/components/schemas/RUMCompute'
+          type: array
+        filter:
+          $ref: '#/components/schemas/RUMQueryFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/RUMGroupBy'
+          type: array
+        options:
+          $ref: '#/components/schemas/RUMQueryOptions'
+        page:
+          $ref: '#/components/schemas/RUMQueryPageOptions'
+      type: object
+    RUMAggregateSort:
+      description: A sort rule.
+      example:
+        aggregation: count
+        order: asc
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/RUMAggregationFunction'
+        metric:
+          description: The metric to sort by (only used for `type=measure`).
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/RUMSortOrder'
+        type:
+          $ref: '#/components/schemas/RUMAggregateSortType'
+      type: object
+    RUMAggregateSortType:
+      default: alphabetical
+      description: The type of sorting algorithm.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    RUMAggregationBucketsResponse:
+      description: The query results.
+      properties:
+        buckets:
+          description: The list of matching buckets, one item per bucket.
+          items:
+            $ref: '#/components/schemas/RUMBucketResponse'
+          type: array
+      type: object
+    RUMAggregationFunction:
+      description: An aggregation function.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      - median
+      example: pc90
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PERCENTILE_75
+      - PERCENTILE_90
+      - PERCENTILE_95
+      - PERCENTILE_98
+      - PERCENTILE_99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+      - MEDIAN
+    RUMAnalyticsAggregateResponse:
+      description: The response object for the RUM events aggregate API endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/RUMAggregationBucketsResponse'
+        links:
+          $ref: '#/components/schemas/RUMResponseLinks'
+        meta:
+          $ref: '#/components/schemas/RUMResponseMetadata'
+      type: object
+    RUMBucketResponse:
+      description: Bucket values.
+      properties:
+        by:
+          additionalProperties:
+            description: The values for each group-by.
+            type: string
+          description: The key-value pairs for each group-by.
+          example:
+            '@session.type': user
+            '@type': view
+          type: object
+        computes:
+          additionalProperties:
+            $ref: '#/components/schemas/RUMAggregateBucketValue'
+          description: A map of the metric name to value for regular compute, or a
+            list of values for a timeseries.
+          type: object
+      type: object
+    RUMCompute:
+      description: A compute rule to compute metrics or timeseries.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/RUMAggregationFunction'
+        interval:
+          description: 'The time buckets'' size (only used for type=timeseries)
+
+            Defaults to a resolution of 150 points.'
+          example: 5m
+          type: string
+        metric:
+          description: The metric to use.
+          example: '@duration'
+          type: string
+        type:
+          $ref: '#/components/schemas/RUMComputeType'
+      required:
+      - aggregation
+      type: object
+    RUMComputeType:
+      default: total
+      description: The type of compute.
+      enum:
+      - timeseries
+      - total
+      type: string
+      x-enum-varnames:
+      - TIMESERIES
+      - TOTAL
     RUMEvent:
       description: Object description of a RUM event after being processed and stored
         by Datadog.
@@ -4600,6 +4941,89 @@ components:
         meta:
           $ref: '#/components/schemas/RUMResponseMetadata'
       type: object
+    RUMGroupBy:
+      description: A group-by rule.
+      properties:
+        facet:
+          description: The name of the facet to use (required).
+          example: '@view.time_spent'
+          type: string
+        histogram:
+          $ref: '#/components/schemas/RUMGroupByHistogram'
+        limit:
+          default: 10
+          description: The maximum buckets to return for this group-by.
+          format: int64
+          type: integer
+        missing:
+          $ref: '#/components/schemas/RUMGroupByMissing'
+        sort:
+          $ref: '#/components/schemas/RUMAggregateSort'
+        total:
+          $ref: '#/components/schemas/RUMGroupByTotal'
+      required:
+      - facet
+      type: object
+    RUMGroupByHistogram:
+      description: 'Used to perform a histogram computation (only for measure facets).
+
+        Note: At most 100 buckets are allowed, the number of buckets is (max - min)/interval.'
+      properties:
+        interval:
+          description: The bin size of the histogram buckets.
+          example: 10
+          format: double
+          type: number
+        max:
+          description: 'The maximum value for the measure used in the histogram
+
+            (values greater than this one are filtered out).'
+          example: 100
+          format: double
+          type: number
+        min:
+          description: 'The minimum value for the measure used in the histogram
+
+            (values smaller than this one are filtered out).'
+          example: 50
+          format: double
+          type: number
+      required:
+      - interval
+      - min
+      - max
+      type: object
+    RUMGroupByMissing:
+      description: The value to use for logs that don't have the facet used to group
+        by.
+      oneOf:
+      - $ref: '#/components/schemas/RUMGroupByMissingString'
+      - $ref: '#/components/schemas/RUMGroupByMissingNumber'
+    RUMGroupByMissingNumber:
+      description: The missing value to use if there is a number valued facet.
+      format: double
+      type: number
+    RUMGroupByMissingString:
+      description: The missing value to use if there is string valued facet.
+      type: string
+    RUMGroupByTotal:
+      default: false
+      description: A resulting object to put the given computes in over all the matching
+        records.
+      oneOf:
+      - $ref: '#/components/schemas/RUMGroupByTotalBoolean'
+      - $ref: '#/components/schemas/RUMGroupByTotalString'
+      - $ref: '#/components/schemas/RUMGroupByTotalNumber'
+    RUMGroupByTotalBoolean:
+      description: If set to true, creates an additional bucket labeled "$facet_total".
+      type: boolean
+    RUMGroupByTotalNumber:
+      description: A number to use as the key value for the total bucket.
+      format: double
+      type: number
+    RUMGroupByTotalString:
+      description: A string to use as the key value for the total bucket.
+      type: string
     RUMQueryFilter:
       description: The search and filter query settings.
       properties:
@@ -4730,6 +5154,16 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    RUMSortOrder:
+      description: The order to use, ascending or descending.
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASCENDING
+      - DESCENDING
     RUMWarning:
       description: A warning message indicating something that went wrong with the
         query.
@@ -5781,12 +6215,14 @@ components:
       - new_value
       - anomaly_detection
       - impossible_travel
+      - hardcoded
       type: string
       x-enum-varnames:
       - THRESHOLD
       - NEW_VALUE
       - ANOMALY_DETECTION
       - IMPOSSIBLE_TRAVEL
+      - HARDCODED
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -5812,6 +6248,13 @@ components:
       - THIRTY_MINUTES
       - ONE_HOUR
       - TWO_HOURS
+    SecurityMonitoringRuleHardcodedEvaluatorType:
+      description: Hardcoded evaluator type.
+      enum:
+      - log4shell
+      type: string
+      x-enum-varnames:
+      - LOG4SHELL
     SecurityMonitoringRuleImpossibleTravelOptions:
       description: Options on impossible travel rules.
       properties:
@@ -5934,6 +6377,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
         evaluationWindow:
           $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        hardcodedEvaluatorType:
+          $ref: '#/components/schemas/SecurityMonitoringRuleHardcodedEvaluatorType'
         impossibleTravelOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions'
         keepAlive:
@@ -6213,10 +6658,10 @@ components:
           example:
           - security:attack
           - technique:T1110-brute-force
-          format: array
           items:
             description: The tag associated with the security signal.
             type: string
+          type: array
         timestamp:
           description: The timestamp of the security signal.
           example: '2019-01-02T09:42:36.320Z'
@@ -6370,6 +6815,87 @@ components:
       required:
       - data
       type: object
+    UsageApplicationSecurityMonitoringResponse:
+      description: Application Security Monitoring usage response.
+      properties:
+        data:
+          description: Response containing Application Security Monitoring usage.
+          items:
+            $ref: '#/components/schemas/UsageDataObject'
+          type: array
+      type: object
+    UsageAttributesObject:
+      description: Usage attributes data.
+      properties:
+        org_name:
+          description: The organization name.
+          type: string
+        product_family:
+          description: The product for which usage is being reported.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        timeseries:
+          description: List of usage data reported for each requested hour.
+          items:
+            $ref: '#/components/schemas/UsageTimeSeriesObject'
+          type: array
+        usage_type:
+          $ref: '#/components/schemas/HourlyUsageType'
+      type: object
+    UsageDataObject:
+      description: Usage data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UsageAttributesObject'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageTimeSeriesType'
+      type: object
+    UsageLambdaTracedInvocationsResponse:
+      description: Lambda Traced Invocations usage response.
+      properties:
+        data:
+          description: Response containing Lambda Traced Invocations usage.
+          items:
+            $ref: '#/components/schemas/UsageDataObject'
+          type: array
+      type: object
+    UsageObservabilityPipelinesResponse:
+      description: Observability Pipelines usage response.
+      properties:
+        data:
+          description: Response containing Observability Pipelines usage.
+          items:
+            $ref: '#/components/schemas/UsageDataObject'
+          type: array
+      type: object
+    UsageTimeSeriesObject:
+      description: Usage timeseries data.
+      properties:
+        timestamp:
+          description: Datetime in ISO-8601 format, UTC. The hour for the usage.
+          format: date-time
+          type: string
+        value:
+          description: Contains the number measured for the given usage_type during
+            the hour.
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    UsageTimeSeriesType:
+      default: usage_timeseries
+      description: Type of usage data.
+      enum:
+      - usage_timeseries
+      example: usage_timeseries
+      type: string
+      x-enum-varnames:
+      - USAGE_TIMESERIES
     User:
       description: User object returned by the API.
       properties:
@@ -6666,8 +7192,8 @@ components:
             security_monitoring_signals_read: View Security Signals.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
-            user_access_manage: Disable users, manage user roles, and manage SAML-to-role
-              mappings.
+            user_access_manage: Disable users, manage user roles, manage SAML-to-role
+              mappings, and configure logs restriction queries.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -7114,6 +7640,11 @@ paths:
       tags:
       - Audit
       x-menu-order: 2
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/audit/events/search:
@@ -7153,6 +7684,11 @@ paths:
       - Audit
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/authn_mappings:
@@ -7168,14 +7704,6 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/AuthNMappingsSort'
-      - description: Include additional information in the response.
-        in: query
-        name: include
-        required: false
-        schema:
-          items:
-            type: string
-          type: array
       - description: Filter all mappings by the given string.
         in: query
         name: filter
@@ -7745,6 +8273,23 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-given:
+        dashboard_list_dashboard:
+          parameters:
+          - name: dashboard_list_id
+            source: dashboard_list.id
+          - name: body
+            value: "{\n  \"dashboards\": [\n    {\n      \"id\": \"{{ dashboard.id
+              }}\",\n      \"type\": \"custom_timeboard\"\n    }\n  ]\n}"
+          step: the "dashboard_list" has the "dashboard"
+        dashboard_list_screenboard_dashboard:
+          parameters:
+          - name: dashboard_list_id
+            source: dashboard_list.id
+          - name: body
+            value: "{\n  \"dashboards\": [\n    {\n      \"id\": \"{{ screenboard_dashboard.id
+              }}\",\n      \"type\": \"custom_screenboard\"\n    }\n  ]\n}"
+          step: the "dashboard_list" has the "screenboard_dashboard"
       x-menu-order: 2
       x-undo:
         type: safe
@@ -7833,6 +8378,10 @@ paths:
       summary: Get a list of incidents
       tags:
       - Incidents
+      x-pagination:
+        limitParam: page[size]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -9369,6 +9918,11 @@ paths:
       tags:
       - Logs
       x-menu-order: 3
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/logs/events/search:
@@ -9416,6 +9970,11 @@ paths:
       - Logs
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/metrics:
@@ -9686,6 +10245,106 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
+  /api/v2/metrics/{metric_name}/estimate:
+    get:
+      description: Returns a cardinality estimate for a metric with a given tag, percentile,
+        and number of aggregations configuration.
+      operationId: EstimateMetricsOutputSeries
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      - description: Filtered tag groups that the metric is configured to query with.
+        example: app,host
+        in: query
+        name: filter[groups]
+        required: false
+        schema:
+          type: string
+      - description: The number of hours of look back (from now) to estimate cardinality
+          with.
+        example: 49
+        in: query
+        name: filter[hours_ago]
+        required: false
+        schema:
+          type: integer
+      - description: The number of aggregations that a `count`, `rate`, or `gauge`
+          metric is configured to use. Max number of aggregation combos is 9.
+        example: 1
+        in: query
+        name: filter[num_aggregations]
+        required: false
+        schema:
+          type: integer
+      - description: A boolean, for distribution metrics only, to estimate cardinality
+          if the metric includes additional percentile aggregators.
+        example: true
+        in: query
+        name: filter[pct]
+        required: false
+        schema:
+          type: boolean
+      - description: A window, in hours, from the look back to estimate cardinality
+          with.
+        example: 6
+        in: query
+        name: filter[timespan_h]
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricEstimateResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Estimate Output Series - Public v2 API
+      tags:
+      - Metrics
+      x-dd-ownership:
+        notification_configuration:
+          manual_escalation_policy: '[Points Aggregation] Primary'
+          prod_high_urgency: '@pagerduty-Points-Aggregation @slack-points-aggr-ops'
+          prod_low_urgency: '@slack-points-aggr-ops'
+          slack_support_channel: '#points-aggregation'
+          staging_high_urgency: '@slack-points-aggr-stg-ops'
+          staging_low_urgency: '@slack-points-aggr-stg-ops'
+        team: points-aggregation
+        team_escalation: '[Points Aggregation] Primary'
+      x-menu-order: 10
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        type: safe
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: 'Deletes a metric''s tag configuration. Can only be used with application
@@ -9886,7 +10545,7 @@ paths:
             value: '"{{ unique_alnum }}"'
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\",
-              \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"distribution\"\n
+              \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"gauge\"\n
               \    },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum
               }}\"\n  }\n}"
           step: there is a valid "metric_tag_configuration" in the system
@@ -10089,6 +10748,11 @@ paths:
       tags:
       - Processes
       x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/roles:
@@ -10698,6 +11362,41 @@ paths:
       x-menu-order: 10
       x-undo:
         type: safe
+  /api/v2/rum/analytics/aggregate:
+    post:
+      description: The API endpoint to aggregate RUM events into buckets of computed
+        metrics and timeseries.
+      operationId: AggregateRUMEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMAggregateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMAnalyticsAggregateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Aggregate RUM events
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -10779,6 +11478,11 @@ paths:
       tags:
       - RUM
       x-menu-order: 2
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/rum/events/search:
@@ -10798,7 +11502,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RUMSearchEventsRequest'
-        required: false
+        required: true
       responses:
         '200':
           content:
@@ -10821,8 +11525,50 @@ paths:
       - RUM
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
       x-undo:
         type: safe
+  /api/v2/saml_configurations/idp_metadata:
+    post:
+      description: 'Endpoint for uploading IdP metadata for SAML setup.
+
+
+        Use this endpoint to upload or replace IdP metadata for SAML login configuration.'
+      operationId: UploadIdPMetadata
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IdPMetadataFormData'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Upload IdP metadata
+      tags:
+      - Organizations
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -11444,6 +12190,11 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 7
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -11486,6 +12237,11 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -12163,6 +12919,240 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/usage/application_security:
+    get:
+      description: Get hourly usage for Application Security .
+      operationId: GetUsageApplicationSecurityMonitoring
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageApplicationSecurityMonitoringResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for Application Security
+      tags:
+      - Usage Metering
+      x-menu-order: 38
+      x-undo:
+        type: safe
+  /api/v2/usage/cost_by_org:
+    get:
+      description: Get Cost Across Multi-Org Account.
+      operationId: GetCostByOrg
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost beginning this month.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/CostByOrgResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get Cost Across Multi-Org Account
+      tags:
+      - Usage Metering
+      x-menu-order: 39
+      x-undo:
+        type: safe
+  /api/v2/usage/lambda_traced_invocations:
+    get:
+      description: Get hourly usage for Lambda Traced Invocations.
+      operationId: GetUsageLambdaTracedInvocations
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageLambdaTracedInvocationsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for Lambda Traced Invocations
+      tags:
+      - Usage Metering
+      x-menu-order: 38
+      x-undo:
+        type: safe
+  /api/v2/usage/observability_pipelines:
+    get:
+      description: Get hourly usage for Observability Pipelines.
+      operationId: GetUsageObservabilityPipelines
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageObservabilityPipelinesResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for Observability Pipelines
+      tags:
+      - Usage Metering
+      x-menu-order: 38
+      x-undo:
+        type: safe
   /api/v2/user_invitations:
     post:
       description: Sends emails to one or more users inviting them to join the organization.
@@ -12724,9 +13714,15 @@ tags:
     that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
     only be performed by\na user who has the `Manage Tags for Metrics` permission."
   name: Metrics
+- description: Create, edit, and manage your organizations. Read more about [multi-org
+    accounts](https://docs.datadoghq.com/account_management/multi_organization).
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/multi_organization
+  name: Organizations
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
-- description: Search your RUM events over HTTP.
+- description: Search or aggregate your RUM events over HTTP.
   name: RUM
 - description: 'The Roles API is used to create and manage Datadog roles, what
 
@@ -12749,6 +13745,27 @@ tags:
   name: Security Monitoring
 - description: Create, edit, and disable service accounts.
   name: Service Accounts
+- description: 'The usage metering API allows you to get hourly, daily, and
+
+    monthly usage across multiple facets of Datadog.
+
+    This API is available to all Pro and Enterprise customers.
+
+    Usage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+
+
+    **Note**: Usage data is delayed by up to 72 hours from when it was incurred.
+
+    It is retained for 15 months.
+
+
+    You can retrieve up to 24 hours of hourly usage data for multiple organizations,
+
+    and up to two months of hourly usage data for a single organization in one request.'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/billing/usage_details/
+  name: Usage Metering
 - description: Create, edit, and disable users.
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users

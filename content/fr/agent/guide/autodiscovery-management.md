@@ -1,14 +1,15 @@
 ---
-title: Gestion de la découverte de conteneurs
-kind: guide
 aliases:
-  - /fr/agent/autodiscovery/management
-  - /fr/agent/kubernetes/management
+- /fr/agent/autodiscovery/management
+- /fr/agent/kubernetes/management
 further_reading:
-  - link: /agent/kubernetes/integrations/
-    tag: Documentation
-    text: Créer et charger un modèle d'intégration Autodiscovery
+- link: /agent/kubernetes/integrations/
+  tag: Documentation
+  text: Créer et charger un modèle d'intégration Autodiscovery
+kind: guide
+title: Gestion de la découverte de conteneurs
 ---
+
 Par défaut, l'Agent Datadog découvre automatiquement tous les conteneurs disponibles. Pour restreindre son périmètre de découverte et limiter la collecte de données uniquement à un sous-ensemble de conteneurs, utilisez une configuration dédiée pour inclure ou exclure des conteneurs.
 
 **Remarque**: ces paramètres n'ont aucun effet sur les métriques `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` et `.stopped.total`, qui prennent en compte l'ensemble des conteneurs.
@@ -19,7 +20,7 @@ Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre pér
 
 Excluez des conteneurs du périmètre Autodiscovery de l'Agent avec une règle d'exclusion basée sur leur paramètre `name`, `image` ou `kube_namespace`. Cela vous permet de ne recueillir **AUCUNE DONNÉE** de ces conteneurs. Si un conteneur correspond à l'expression de la règle d'exclusion, il n'est pas inclus, à moins qu'il ne corresponde d'abord à l'expression de la règle d'inclusion.
 
-**Remarque** : les règles d'exclusion prennent en charge les expressions régulières. Celles-ci sont définies sous forme de liste de chaînes séparées par des virgules.
+**Remarque** : les règles d'exclusion prennent en charge les expressions régulières. Celles-ci sont définies sous forme de liste de chaînes séparées par des espaces.
 
 **Remarque** : pour exclure tous les conteneurs, vous pouvez utiliser `name:.*`, `image:.*` ou `kube_namespace:.*`. Il n'est pas possible de configurer `.*` sans un préfixe `name:`, `image:` ou `kube_namespace:`.
 
@@ -139,7 +140,7 @@ container_exclude: [kube_namespace:<ESPACEDENOMMAGE>]
 
 Incluez des conteneurs au périmètre Autodiscovery de l'Agent avec une règle d'inclusion basée sur le paramètre `name` ou `image`. Cela vous permet de recueillir **UNIQUEMENT** les données de ces conteneurs. Si un conteneur correspond à l'expression de la règle d'inclusion, il est toujours inclus au périmètre Autodiscovery.
 
-**Remarque** : les règles d'inclusion prennent en charge les expressions régulières et sont définies sous forme de liste de chaînes séparées par des virgules.
+**Remarque** : les règles d'inclusion prennent en charge les expressions régulières. Celles-ci sont définies sous forme de liste de chaînes séparées par des espaces.
 
 {{< tabs >}}
 {{% tab "Agent conteneurisé" %}}

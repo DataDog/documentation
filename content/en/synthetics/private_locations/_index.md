@@ -23,8 +23,8 @@ further_reading:
       text: 'Create and manage Synthetic Private Locations with Terraform'
 ---
 
-<div class="alert alert-warning">
-The access to this feature is restricted. For access to this feature, or if you would like to be added to the Windows Private Location beta allowing you to run IE11 browser tests, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+<div class="alert alert-info">
+If you would like to be added to the Windows Private Location beta, which allows you to run IE11 browser tests, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 </div>
 
 ## Overview
@@ -251,6 +251,8 @@ To deploy the private locations worker in a secure manner, set up and mount a Ku
     ```shell
     kubectl apply -f private-location-worker-deployment.yaml
     ```
+
+For OpenShift, run the private location with the `anyuid` SCC. This is required for your browser test to run.
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 

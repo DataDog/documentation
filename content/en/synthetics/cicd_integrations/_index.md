@@ -27,6 +27,8 @@ further_reading:
 
 ---
 
+<div class="alert alert-info">This page is about running Synthetic tests in your continuous integration (CI) pipelines. If you want to bring your CI metrics and data into Datadog dashboards, see the <a href="/continuous_integration/" target="_blank">Continuous Integration Visibility</a> section.</div>
+
 ## Overview
 
 In addition to running tests at predefined intervals, you can run Datadog Synthetic tests on-demand by using the `@datadog/datadog-ci` package or the API. Run Datadog Synthetic tests in your continuous integration (CI) pipelines to block branches from being deployed and breaking your application in production.
@@ -40,6 +42,7 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 ## Integrations
 
 {{< whatsnext desc="With Synthetics and CI/CD, you can run Synthetic tests in the CI platform provider of your choice:" >}}
+    {{< nextlink href="synthetics/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
 {{< /whatsnext >}}

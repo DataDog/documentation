@@ -36,7 +36,7 @@ You can also choose to never resolve, or to automatically resolve, an event from
 
 ### Say what's happening
 
-Create a notification name. For example, `API requests threshold met for {{@usr.id}}`. You can use [template variables][3] to automatically populate a username, email, etc. in the title to quickly gain insight into which account or user is triggering an alert.
+Create a notification name. For example, `API requests threshold met for {{[@usr.id].name}}`. You can use [variables][3] to automatically populate a username, email, etc. in the title to quickly gain insight into which account or user is triggering an alert.
 
 Create a monitor message. This can include the steps required for team members to resolve an incident if one is occurring.
 
@@ -54,4 +54,4 @@ You can also select if you want to notify a service or team when an alert is mod
 
 [1]: https://app.datadoghq.com/monitors/create/audit
 [2]: /logs/explorer/search_syntax/
-[3]: /getting_started/monitors/#say-whats-happening
+[3]: /monitors/notify/variables/

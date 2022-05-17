@@ -52,7 +52,7 @@ To change your payment method, contact your [Customer Success][12] Manager.
 
 ### Billing emails
 
-You can set specific email addresses to receive invoices on the [Biling history][13] page under **Manage Billing Emails**:
+You can set specific email addresses to receive invoices on the [Billing history][13] page under **Manage Billing Emails**:
 
 {{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
 
@@ -79,7 +79,7 @@ You can set specific email addresses to receive invoices on the [Biling history]
     {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
     {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (Distributed Tracing & Continuous Profiler){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring FAQ{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}RUM & Session Replay{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}

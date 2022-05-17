@@ -5,17 +5,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md
 display_name: Uptime
 draft: false
 git_integration_title: uptime
 guid: 5da2ddb8-ecf7-4971-a3ee-e42752efc1f5
 integration_id: uptime
 integration_title: Uptime
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: jeremy-lq
@@ -27,10 +28,13 @@ public_title: Intégration Datadog/Uptime
 short_description: Surveillez l'uptime et les performances en toute simplicité
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Recueillez des événements et des métriques depuis votre application en temps réel pour :
@@ -44,7 +48,7 @@ Recueillez des événements et des métriques depuis votre application en temps 
 
 ### Configuration
 
-Pour activer l'intégration de Datadog dans votre compte Uptime, accédez à [Notifications > Integrations][2] puis choisissez Datadog comme type de fournisseur lors de l'ajout d'un nouveau profil de notifications push.
+Pour activer l'intégration Datadog dans votre compte Uptime, accédez à [Notifications > Integrations][2], puis choisissez Datadog comme type de fournisseur lors de l'ajout d'un nouveau profil de notifications push.
 
 Description des champs affichés lors de la configuration de Datadog dans votre compte Uptime :
 shell
@@ -54,7 +58,7 @@ shell
 
 - Application Key : <span class="app_key" data-name="uptime"></span>
 
-Une fois votre profil Datadog configuré, vous devrez l'assigner à un groupe de contacts depuis Alerting>Contacts. Pour assigner le profil, utilisez le champ Push Notifications dans le groupe de contacts.
+Une fois votre profil Datadog configuré, assignez-le à un groupe de contacts depuis _Alerting > Contacts_. Pour assigner le profil, utilisez le champ **Push Notifications** dans le groupe de contacts.
 
 ## Données collectées
 

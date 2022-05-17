@@ -20,13 +20,16 @@ further_reading:
 ## Compatibility
 
 Supported Jenkins versions:
-* Jenkins >= 2.164.1
+* For 3.x versions of the plugin: Jenkins >= 2.164.1
+* For 4.x versions of the plugin: Jenkins >= 2.303.3
 
 ## Prerequisite
 
 Install the [Datadog Agent][1] on the Jenkins controller instance.
 
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
+
+<div class="alert alert-info"><strong>Note</strong>: Unix domain sockets are not yet supported for sending CI Visibility traces.</div>
 
 ## Install the Datadog Jenkins plugin
 

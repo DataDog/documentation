@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md
+- https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md
 kind: documentation
 title: Synthetics と CI GitHub アクション
 ---
@@ -30,7 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run Datadog Synthetics tests
-        uses: DataDog/synthetics-ci-github-action@v0.2.2
+        uses: DataDog/synthetics-ci-github-action@v0.3.1
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -48,7 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run Datadog Synthetics tests
-        uses: DataDog/synthetics-ci-github-action@v0.2.2
+        uses: DataDog/synthetics-ci-github-action@v0.3.1
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -69,7 +69,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run Datadog Synthetics tests
-        uses: DataDog/synthetics-ci-github-action@v0.2.2
+        uses: DataDog/synthetics-ci-github-action@v0.3.1
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -87,7 +87,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run Datadog Synthetics tests
-        uses: DataDog/synthetics-ci-github-action@v0.2.2
+        uses: DataDog/synthetics-ci-github-action@v0.3.1
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -107,22 +107,10 @@ jobs:
 | `datadog_site`      | 文字列 | _オプション_  | Datadog のサイト。EU のユーザーは `datadoghq.eu` に設定します。例: `datadoghq.com` または `datadoghq.eu`。**デフォルト:** `datadoghq.com`。                                                              |
 | `config_path`       | 文字列 | _オプション_  | グローバル JSON 構成は、テストを起動するときに使用されます。詳細は[構成例][4]を参照してください。**デフォルト:** `datadog-ci.json`。                                                         |
 
-## その他の参考資料
-
-お役に立つドキュメント、リンクや記事:
-
-- [CI/CD インテグレーションコンフィギュレーション][6]
-
-[1]: https://github.com/DataDog/datadog-ci
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
-[3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-[4]: https://docs.datadoghq.com/ja/synthetics/cicd_integrations/configuration/?tab=npm#setup-a-client
-[5]: https://docs.datadoghq.com/ja/synthetics/search/#search
-[6]: https://docs.datadoghq.com/ja/synthetics/cicd_integrations/configuration
-
 ## 開発
 
 ```bash
+
 
 yarn jest
 
@@ -135,17 +123,30 @@ yarn package
 
 ### プロセスのリリース
 
-新しいバージョンの `synthetics-ci-github-action` のリリースは、以下のように行われます。
+新しいバージョンの `synthetics-ci-github-action` をリリースするには:
 
 1. バージョンアップのための新しいブランチを作成します。
-2. パッケージのバージョンを更新するには、導入された変更の性質に応じて `yarn version [--patch|--minor|--major]` を使用します。
-   どちらをインクリメントするかは、[Semantic Versioning](https://semver.org/#summary) を参照するとよいでしょう。
-   リリース前にプロジェクトを再構築してパッケージ化し、`README.md` のサンプルバージョンを更新します。
-3. ブランチをリリースタグ (`git push --tags`) と一緒に上流 (Github) にプッシュします。
-   説明で詳しく紹介した変更内容で Pull Request を作成し、少なくとも 1 つの承認を得てください。
-4. Pull Request をマージします。
-5. [タグページ](https://github.com/DataDog/synthetics-ci-github-action/tags)から Github Release を作成し、導入した変更点を記述します。
+2. パッケージのバージョンを更新するには、変更の性質に応じて `yarn version [--patch|--minor|--major]` を使用します。
+   - 何をインクリメントする必要があるかは、[Semantic Versioning](https://semver.org/#summary) を参照してください。
+   - リリース前にプロジェクトを再構築してパッケージ化します。`README.md` のサンプルバージョンを更新するのを忘れないでください。
+3. ブランチをリリースタグ (`git push --tags`) と一緒に上流 (GitHub) にプッシュします。
+   - 説明で紹介した変更点を含むプルリクエストを作成します。このプルリクエストには少なくとも 1 つの承認が必要です。
+4. プルリクエストをマージします。
+5. [タグページ](https://github.com/DataDog/synthetics-ci-github-action/tags)から GitHub Release を作成し、変更点を記述します。
 
-   ⚠️ リリースバージョンが期待される形式 `vX.X.X` に従っていることを確認します。
+⚠️ リリースバージョンが期待される形式 `vX.X.X` に従っていることを確認します。
 
 リリースが作成されると、新しいバージョンの Github Action がワークフローとして利用できるようになります。
+
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [CI/CD インテグレーションコンフィギュレーション][6]
+
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[3]: https://docs.github.com/en/actions/reference/encrypted-secrets
+[4]: https://docs.datadoghq.com/ja/synthetics/cicd_integrations/configuration/?tab=npm#setup-a-client
+[5]: https://docs.datadoghq.com/ja/synthetics/search/#search
+[6]: https://docs.datadoghq.com/ja/synthetics/cicd_integrations/configuration

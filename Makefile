@@ -109,12 +109,16 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
 	@if [ content/en/serverless/libraries_integrations/plugin.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/plugin.md ;fi
-	@if [ content/en/serverless/libraries_integrations/forwarder.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/forwarder.md ;fi
 	@if [ content/en/serverless/libraries_integrations/macro.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
 	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/cli.md ;fi
+	@if [ content/en/serverless/libraries_integrations/extension.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/extension.md ;fi
+	@if [ content/en/serverless/libraries_integrations/cdk.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/cdk.md ;fi
+	@if [ content/en/synthetics/cicd_integrations/circleci_orb.md ]; then \
+	rm -f content/en/synthetics/cicd_integrations/circleci_orb.md ;fi
 	@if [ content/en/synthetics/cicd_integrations/github_actions.md ]; then \
 	rm -f content/en/synthetics/cicd_integrations/github_actions.md ;fi
 	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
@@ -141,6 +145,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	find ./content/en/real_user_monitoring/ios -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/real_user_monitoring/reactnative.md ]; then \
 	rm -f content/en/real_user_monitoring/reactnative.md ;fi
+	@if [ content/en/real_user_monitoring/flutter/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/flutter/_index.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
@@ -153,6 +159,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/ios.md ;fi
 	@if [ content/en/logs/log_collection/javascript.md ]; then \
 	rm -f content/en/logs/log_collection/javascript.md ;fi
+	@if [ content/en/logs/guide/forwarder.md ]; then \
+	rm -f content/en/logs/guide/forwarder.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
 	@if [ content/en/security_platform/cloud_workload_security/agent_expressions.md ]; then \
@@ -255,26 +263,17 @@ examples/go: examples/datadog-api-client-go clean-go-examples
 	-cp -Rn examples/datadog-api-client-go/examples/v* ./content/en/api/
 
 examples/java: examples/datadog-api-client-java clean-java-examples
-	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Java code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
-
-	-cp -Rn examples/content ./
+	-cp -Rn examples/datadog-api-client-java/examples/v* ./content/en/api/
 
 examples/python: examples/datadog-api-client-python clean-python-examples
-	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
-	@find examples/content -iname \*.py -exec mv {} {}beta \;
-
-	-cp -Rn examples/content ./
+	-find examples/datadog-api-client-python/examples -iname \*.py -exec mv {} {}beta \;
+	-cp -Rn examples/datadog-api-client-python/examples/v* ./content/en/api
 
 examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
-	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Ruby code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
-	@find examples/content -iname \*.rb -exec mv {} {}beta \;
-
-	-cp -Rn examples/content ./
+	-find examples/datadog-api-client-ruby/examples -iname \*.rb -exec mv {} {}beta \;
+	-cp -Rn examples/datadog-api-client-ruby/examples/v* ./content/en/api
 
 examples/typescript: examples/datadog-api-client-typescript clean-typescript-examples
-	@cd examples/datadog-api-client-typescript; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Typescript code examples, aborting build."; exit 1); if [ -d examples ]; then cp -R examples/* $(EXAMPLES_DIR)/; fi
-
-	-cp -Rn examples/content ./
-
+	-cp -Rn examples/datadog-api-client-typescript/examples/v* ./content/en/api
 
 examples: examples/go examples/java examples/python examples/ruby examples/typescript

@@ -93,7 +93,7 @@ Define the configuration of your browser test.
 3. **Name**: The name of your browser test.
 4. **Select tags**: The `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
 5. **Browsers & Devices**: The browsers (such as `Chrome`, `Firefox`, `Edge`, and `Internet Explorer 11`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
-   - For a large laptop device, the dimensions are 1440 x 1100 pixels. 
+   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels. 
    - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
    - For a small mobile device, the dimensions are 320 pixels x 550 pixels.  
 6. **Select locations**: The Datadog managed locations to run your test from. Many AWS locations from around the world are available for each site. You can also set up [private locations][1] to run your browser test from custom locations or from inside private networks. See a full list of locations in the [Datadog app][2] or use the [API][3]. {{< site-region region="gov" >}}**Note**: The West US (AWS GovCloud) location is supported on the Datadog for Government site.{{< /site-region >}}
@@ -184,7 +184,7 @@ You can restrict access to a browser test based on the roles in your organizatio
 [9]: /integrations/#cat-notification
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[12]: /synthetics/browser_tests/actions/
+[12]: /synthetics/guide/explore-rum-through-synthetics/
 [13]: /synthetics/browser_tests/actions/#assertion
 [14]: /account_management/rbac/
 [15]: /account_management/rbac#custom-roles

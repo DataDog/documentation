@@ -224,7 +224,7 @@
       globs:
       - 'aws/logs_monitoring/README.md'
       options:
-        dest_path: '/serverless/libraries_integrations/'
+        dest_path: '/logs/guide/'
         file_name: 'forwarder.md'
         # front_matters:
         #   dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
@@ -238,8 +238,12 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'plugin.md'
-        # front_matters:
-        #   dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
+        front_matters:
+          dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
+          title: Datadog Serverless Framework Plugin
+          kind: documentation
+          aliases:
+          - /serverless/serverless_integrations/plugin
 
   - repo_name: datadog-cloudformation-macro
     contents:
@@ -274,6 +278,37 @@
             - /serverless/datadog_lambda_library/
             - /serverless/serverless_integrations/cli/
 
+  - repo_name: datadog-cdk-constructs
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/libraries_integrations/'
+        file_name: 'cdk.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md"]
+          title: Datadog CDK Construct
+          kind: documentation
+
+  - repo_name: datadog-lambda-extension
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/libraries_integrations/'
+        file_name: 'extension.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
+          title: Datadog Lambda Extension
+          kind: documentation
+          aliases:
+            - /serverless/datadog_lambda_library/extension
+            - /serverless/libraries_integrations/extension
+
   - repo_name: synthetics-ci-github-action
     contents:
     - action: pull-and-push-file
@@ -286,6 +321,20 @@
         front_matters:
           dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
           title: Synthetics CI GitHub Actions
+          kind: documentation
+
+  - repo_name: synthetics-ci-orb
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/synthetics/cicd_integrations/'
+        file_name: 'circleci_orb.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
+          title: Synthetics CI CircleCI Orb
           kind: documentation
 
   - repo_name: dd-sdk-android
@@ -321,7 +370,7 @@
           kind: documentation
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
               tag: "Documentation"
@@ -339,7 +388,7 @@
           kind: documentation
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
               tag: "Documentation"
@@ -354,14 +403,22 @@
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md"]
           title: Mobile Vitals
+          description: Discover insights about your iOS application's health and performance.
           kind: documentation
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-android Source code"
             - link: "https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/"
               tag: "Blog"
               text: "Monitor Mobile Vitals in Datadog"
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/web_view_tracking.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'web_view_tracking.md'
     - action: pull-and-push-file
       branch: master
       globs:
@@ -375,7 +432,7 @@
           kind: documentation
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
               tag: "Documentation"
@@ -393,7 +450,7 @@
           kind: documentation
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-android Source code"
             - link: "/real_user_monitoring"
               tag: "Documentation"
@@ -464,7 +521,6 @@
 
   - repo_name: dd-sdk-android
     contents:
-
     - action: pull-and-push-file
       branch: master
       globs:
@@ -479,7 +535,7 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-android Source code"
             - link: "logs/explorer"
               tag: "Documentation"
@@ -500,15 +556,14 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-android Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
-              text: "Explore your services, resources and traces"
+              text: "Explore your services, resources, and traces"
 
   - repo_name: dd-sdk-ios
     contents:
-
     - action: pull-and-push-file
       branch: master
       globs:
@@ -523,7 +578,7 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-ios Source code"
             - link: "logs/explorer"
               tag: "Documentation"
@@ -544,7 +599,7 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-ios Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
@@ -572,7 +627,6 @@
 
   - repo_name: dd-sdk-reactnative
     contents:
-
     - action: pull-and-push-file
       branch: main
       globs:
@@ -581,21 +635,47 @@
         dest_path: '/real_user_monitoring/'
         file_name: 'reactnative.md'
         front_matters:
-          title: React Native RUM Collection
+          title: React Native Monitoring
           kind: documentation
           beta: true
           description: "Collect RUM data from your React Native projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
-              tag: "Github"
-              text: "dd-sdk-reactnative source code"
+              tag: "GitHub"
+              text: "dd-sdk-reactnative Source code"
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
-              text: "Monitor react-native applications"
+              text: "Monitor React Native applications"
+  
+  - repo_name: dd-sdk-flutter
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'packages/datadog_flutter_plugin/README.md'
+      options:
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: '_index.md'
+        front_matters:
+          title: Flutter Monitoring
+          kind: documentation
+          beta: true
+          description: "Collect RUM data from your Flutter projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/README.md"]
+          further_reading:
+            - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+              tag: "Blog"
+              text: "Monitor Flutter application performance with Datadog Mobile RUM"
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
 
   - repo_name: security-monitoring
     contents:

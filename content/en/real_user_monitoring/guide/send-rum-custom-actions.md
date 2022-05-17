@@ -4,45 +4,94 @@ kind: guide
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
-  text: 'Visualize your RUM data in the Explorer'
+  text: 'Visualize your RUM data in the RUM Explorer'
 aliases:
   - /real_user_monitoring/guide/send-custom-user-actions/
 ---
 ## Overview
 
-Real User Monitoring [automatically collects actions][1] on your web application. You may also want to collect additional events and timings such as form completions and business transactions. With custom RUM actions, monitor any interesting event with all the relevant context attached. As an example throughout this guide, user checkouts information from an e-commerce website is collected.
+Real User Monitoring [automatically collects actions][1] on your web application. You can collect additional events and timings such as form completions and business transactions. 
+
+Custom RUM actions allow you to monitor interesting events with all the relevant context attached. For example, collecting a user's checkout information on an e-commerce website.
 
 ## Instrument your code
-To create a new RUM action, use the `addAction` API. Give your action a name and then attach context attributes in the form of a JavaScript object. In the following example, a `checkout` action is created with details about the user cart when the user clicks on the checkout button.
+
+Create a RUM action using the `addAction` API. Give your action a name and attach context attributes in the form of a JavaScript object. 
+
+The following example creates a `checkout` action with details about the user cart when the user clicks on the checkout button.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
 function onCheckoutButtonClick(cart) {
-    DD_RUM.addAction('checkout', {
+    datadogRum.addAction('checkout', {
         'value': cart.value, // for example, 42.12
-        'items': cart.items, // efor example, ['tomato', 'strawberries']
+        'items': cart.items, // for example, ['tomato', 'strawberries']
     })
 }
 ```
 
-All RUM context is automatically attached (such as current page view information, geoIP data, or browser information) along with extra attributes provided with the [Global Context API][2].
+{{% /tab %}}
+{{% tab "CDN async" %}}
 
-## Create facets and measures on your new attributes
-After you have deployed the code that creates your custom actions, actions appear in the [RUM Explorer][3], in the **Actions** tab.
+Ensure that you wrap the API call with the `onReady` callback:
 
-To filter on your new custom Actions, use the `Action Target Name` attribute as follow: `@action.target.name:<ACTION_NAME>`. The example uses the following filter: `@action.target.name:checkout`
+```javascript
+function onCheckoutButtonClick(cart) {
+    DD_RUM.onReady(function() {
+        DD_RUM.addAction('checkout', {
+            'value': cart.value, // for example, 42.12
+            'items': cart.items, // for example, ['tomato', 'strawberries']
+        })
+    })    
+}
+```
 
-Once you click on the action, all metadata is available in the side panel. You can find your action attributes in the Custom Attributes sections. The next step is to create facets or measures for these attributes by clicking on them. For example, create a facet for the cart items and a measure for the cart value.
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+Ensure that you check for `DD_RUM` before the API call:
+
+```javascript
+window.DD_RUM && DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
+
+function onCheckoutButtonClick(cart) {
+    window.DD_RUM && DD_RUM.addAction('checkout', {
+        'value': cart.value, // for example, 42.12
+        'items': cart.items, // for example, ['tomato', 'strawberries']
+    })
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+All RUM context such as current page view information, geoIP data, and browser information, is automatically attached along with extra attributes provided with the [Global Context API][2].
+
+## Create facets and measures on attributes
+
+After deploying the code that creates your custom actions, they appear in the **Actions** tab of the [RUM Explorer][3].
+
+To filter on your custom actions, use the `Action Target Name` attribute: `@action.target.name:<ACTION_NAME>`. 
+
+The example below uses the following filter: `@action.target.name:checkout`.
 
 {{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="Create a facet for custom RUM actions" video=true style="width:100%;">}}
 
-**Note**: Use facets for distinctive values (IDs) and measures for quantitative values (timings, latency, etc.).
+After clicking on an action, a side panel with metadata appears. You can find your action attributes in the **Custom Attributes** section and create facets or measures for these attributes by clicking on them. 
 
-## Use your attributes in the explorer, dashboards, and monitors
-Now that facets and measures have been created, you can use your action attributes in RUM queries. This means you can build dashboards widgets, monitors and advanced queries in [RUM Explorer/Analytics][3].
+Use facets for distinctive values (IDs) and measures for quantitative values such as timings and latency. For example, create a facet for the cart items and a measure for the cart value.
 
-As an example, the following screenshot shows the average cart value per country for the last day. Using the dropdown menu on the top right corner, you can export this query as a dashboard widget or as a monitor.
+## Use attributes in the RUM Explorer
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics.png" alt="Use RUM actions in Analytics" style="width:100%;">}}
+You can use action attributes along with facets and measures in the [RUM Explorer][3] to build dashboard widgets, monitors, and advanced queries.
+
+The following example displays the average cart value per country in the last two days. Click the **Export** button to export the search query into a dashboard widget or monitor.
+
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics.png" alt="Use RUM actions in the RUM Explorer" style="width:100%;">}}
 
 ## Further Reading
 
