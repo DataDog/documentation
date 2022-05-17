@@ -157,6 +157,6 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 **Note**: A 15 minute delay is recommended for cloud metrics which are backfilled by service providers. Additionally, when using a division formula, a 60 second delay is helpful to ensure your monitor evaluates on complete values.
 
 
-[1]: /monitors/create/types
+[1]: /monitors/create/#monitor-types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
