@@ -35,6 +35,9 @@ You can set the timeframe over which traffic is aggregated using the time select
 
 {{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}} 
 
+Tags from Datadog integrations are unified service tagging can be used for aggregating  and filtering automatically. See "Custom Facets" below for other tags. You can also select "Popular Tags" to  aggregate using based on a combination of 
+`service`, `kube_service`, `short_image`, and `container_name`. 
+
 ### Facet panels
 
 Facet panels mirror the tags in your search bar query. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
