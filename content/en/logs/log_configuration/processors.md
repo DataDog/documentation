@@ -668,9 +668,9 @@ The lookup processor performs the following actions:
   * If it does, creates the target attribute with the corresponding value in the table.
   * Optionally, if it does not find the value in the mapping table, creates a target attribute with the filled default value.
 
-You can fill the mapping table by selecting a reference table or manually by entering a list of `source_key,target_value` pairs, or uploading a CSV file.
+You can fill the mapping table by selecting a Reference Table, by manually entering a list of `source_key,target_value` pairs, or by uploading a CSV file.
 
-The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform, however, Reference tables support larger file sizes.
+The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform, however, Reference Tables support larger file sizes.
 
 {{% /tab %}}
 {{% tab "API" %}}

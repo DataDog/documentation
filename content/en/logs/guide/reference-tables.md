@@ -14,8 +14,8 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The Reference Tables feature is currently in public beta. There are no billing implications for defining and querying reference tables. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
-During the beta, there is a limit of 100 reference tables per account.
+The Reference Tables feature is currently in public beta. There are no billing implications for defining and querying Reference Tables. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+During the beta, there is a limit of 100 Reference Tables per account.
 </div>
 
 ## Overview
@@ -24,7 +24,7 @@ Define new entities in Datadog like customer details, service names and informat
 
 {{< img src="logs/guide/enrichment-tables/overview.png" alt="Reference Tables" style="width:100%;">}}
 
-## Create a reference table
+## Create a Reference Table
 
 {{< tabs >}}
 {{% tab "Manual upload" %}}
@@ -39,9 +39,9 @@ Click **New Reference Table +**, then upload a CSV file, name the appropriate co
 
 {{% tab "AWS S3 upload" %}}
 
-Reference tables can automatically pull a CSV file from an AWS S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the reference table with the new data. This also enables API updating with the S3 API once the initial reference table is configured.
+Reference Tables can automatically pull a CSV file from an AWS S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
 
-To update reference tables from S3, Datadog uses the IAM role in your AWS account that you configured for the [AWS integration][1]. If you have not yet created that role, [follow these steps][2] to do so. To allow that role to update your reference tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names to match your environment.
+To update Reference Tables from S3, Datadog uses the IAM role in your AWS account that you configured for the [AWS integration][1]. If you have not yet created that role, [follow these steps][2] to do so. To allow that role to update your Reference Tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names to match your environment.
 
 
 ```json
@@ -76,11 +76,11 @@ Click **New Reference Table +**, then add a name, select AWS S3, fill out all fi
 {{% /tab %}}
 {{< /tabs >}}
 
-This reference table can now be used to add additional attributes to logs with the [Lookup Processor][1].
+This Reference Table can be used to add additional attributes to logs with the [Lookup Processor][1].
 
-## Modify an reference table
+## Modify a Reference Table
 
-To modify an existing reference table with new data, select a table then click **Update Data +** in the top right corner.
+To modify an existing Reference Table with new data, select a table then click **Update Data +** in the top right corner.
 The selected CSV is upserted into the table, meaning that:
 
 * All existing rows with the same primary key are updated
