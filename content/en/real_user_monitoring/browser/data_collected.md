@@ -30,7 +30,7 @@ further_reading:
 
 The RUM Browser SDK generates events that have associated metrics and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.loading_time` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
+There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the `view.loading_time` metric is associated with view events and the `resource.method` attribute is associated with resource events.
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -220,7 +220,7 @@ Detailed network timing data for the loading of an application’s resources are
 
 #### Source errors
 
-Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][13].
+Source errors include code-level information about the error. For more information about different error types, see the [MDN documentation][13].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -246,6 +246,15 @@ Source errors include code-level information about the error. More information a
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 | `action.name` | string | User-friendly name created (for example, `Click on #checkout`). For [Custom User Actions][15], the action name given in the API call. |
 
+### Frustration signals fields
+
+| Field                | Type   | Description                                                   |
+|-------------------------------|--------|---------------------------------------------------------------|
+| `session.frustration.count`     | number | Count of all frustration signals associated with one session. |
+| `view.frustration.count`        | number | Count of all frustration signals associated with one view.    |
+| `action.frustration.type:dead`  | string | The dead clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:rage`  | string | The rage clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:error` | string | The error clicks detected by the RUM Browser SDK.             |
 
 ## Further Reading
 

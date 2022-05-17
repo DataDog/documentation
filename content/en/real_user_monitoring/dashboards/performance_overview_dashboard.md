@@ -1,11 +1,13 @@
 ---
-title: RUM Performance overview Dashboard
+title: RUM Performance Overview Dashboard
 kind: documentation
 further_reading:
     - link: '/real_user_monitoring/explorer'
       tag: 'Documentation'
-      text: 'Explore your views within Datadog'
+      text: 'Learn about the RUM Explorer'
 ---
+
+## Overview
 
 The performance overview dashboard offers a bird’s-eye view of RUM applications. It is separated into three sections:
 
@@ -18,7 +20,7 @@ The performance overview dashboard offers a bird’s-eye view of RUM application
 
 {{< img src="real_user_monitoring/dashboards/performance_overview.png" alt="Performance overview Dashboard" >}}
 
-For more information about the information displayed, check the [RUM Data Collected documentation][1]
+For more information about the information displayed, see [RUM Browser Data Collected][1].
 
 ## Further Reading
 
