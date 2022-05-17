@@ -1,10 +1,11 @@
 ---
-title: Dogstream
+aliases:
+- /fr/agent/faq/dogstream
 kind: guide
 private: true
-aliases:
-  - /fr/agent/faq/dogstream
+title: Dogstream
 ---
+
 <div class="alert alert-danger">
 Dogstream est une fonctionnalité de l'Agent 5 dorénavant obsolète. Elle ne fait plus l'objet d'aucune mise à jour.
 <br>
@@ -234,7 +235,7 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Dépannage
 
-Personne n'étant à l'abri d'un bug, il est très important de pouvoir visualiser le traceback de vos parsers de logs. Cela est possible si le niveau des [logs de votre Agent][6] est défini sur « DEBUG ». Le niveau de log de l'Agent peut être défini dans `datadog.conf` en supprimant la mise en commentaire de [cette ligne][7] et en la modifiant, puis en [redémarrant l'Agent][8]. Une fois ces modifications effectuées, le traceback associé aux erreurs dans votre parser de logs personnalisé se trouve dans le fichier `collector.log`. Il comprend généralement la chaîne « checks.collector(datadog.py:278) | Error while parsing line in them » (voir le [code de l'Agent][9] dans lequel l'erreur est susceptible d'être générée).
+Personne n'étant à l'abri d'un bug, il est important de pouvoir visualiser le traceback de vos parsers de logs. Cela est possible si le niveau des [logs de votre Agent][6] est défini sur « DEBUG ». Le niveau de log de l'Agent peut être défini dans `datadog.conf` en supprimant la mise en commentaire de [cette ligne][7] et en la modifiant, puis en [redémarrant l'Agent][8]. Une fois ces modifications effectuées, le traceback associé aux erreurs dans votre parser de logs personnalisé se trouve dans le fichier `collector.log`. Il comprend généralement la chaîne « checks.collector(datadog.py:278) | Error while parsing line  » (voir le [code de l'Agent][9] dans lequel l'erreur est susceptible d'être générée).
 
 **Remarque** : lorsque vous modifiez votre parser de logs personnalisé, vous devez [redémarrer l'Agent][8] pour appliquer vos modifications.
 
