@@ -146,7 +146,7 @@ Notify your team by specifying team members or send the message to a service [in
 
 #### Disable first recovery notification
 
-By default, Datadog sends a recovery notification for monitors that trigger **before** a downtime and end up recovering **during** a downtime. This is useful when using third party integrations (such as PagerDuty) to automatically close opened incidents. Selecting the checkbox will mute these notifications.
+By default, Datadog sends a recovery notification for monitors that trigger **before** a downtime and end up recovering **during** a downtime. This is useful when using third party integrations to automatically close opened incidents. Selecting the checkbox will mute these notifications.
 
 {{< img src="monitors/downtimes/downtime_first_recovery.png" alt="mute first recovery notification" style="width:100%;">}}
 
