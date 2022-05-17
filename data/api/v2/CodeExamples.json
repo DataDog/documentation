@@ -490,6 +490,13 @@
       "description": "List tags by metric name returns \"Success\" response"
     }
   ],
+  "SubmitMetrics": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Submit metrics returns \"Payload accepted\" response"
+    }
+  ],
   "UpdateTagConfiguration": [
     {
       "group": "metrics",
