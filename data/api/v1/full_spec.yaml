@@ -3060,6 +3060,9 @@ components:
       - message
       type: object
     HTTPLogItem:
+      additionalProperties:
+        description: Additional log attributes.
+        type: string
       description: Logs that are sent over HTTP.
       properties:
         ddsource:
@@ -9536,8 +9539,9 @@ components:
             type: string
           type: array
         type:
-          default: gauge
-          description: The type of the metric either `count`, `gauge`, or `rate`.
+          default: ''
+          description: The type of the metric. Valid types are "",`count`, `gauge`,
+            and `rate`.
           example: rate
           type: string
       required:
@@ -17712,6 +17716,7 @@ paths:
         type: safe
   /api/v1/daily_custom_reports:
     get:
+      deprecated: true
       description: Get daily custom reports.
       operationId: GetDailyCustomReports
       parameters:
@@ -17777,6 +17782,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/daily_custom_reports/{report_id}:
     get:
+      deprecated: true
       description: Get specified daily custom reports.
       operationId: GetSpecifiedDailyCustomReports
       parameters:
@@ -23733,6 +23739,7 @@ paths:
         type: idempotent
   /api/v1/monthly_custom_reports:
     get:
+      deprecated: true
       description: Get monthly custom reports.
       operationId: GetMonthlyCustomReports
       parameters:
@@ -23798,6 +23805,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/monthly_custom_reports/{report_id}:
     get:
+      deprecated: true
       description: Get specified monthly custom reports.
       operationId: GetSpecifiedMonthlyCustomReports
       parameters:
@@ -24571,7 +24579,7 @@ paths:
         3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed
         size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting
         metrics directly to the Datadog API without using DogStatsD, expect:\n\n-
-        64 bits for the timestamp\n- 32 bits for the value\n- 40 bytes for the metric
+        64 bits for the timestamp\n- 64 bits for the value\n- 40 bytes for the metric
         names\n- 50 bytes for the timeseries\n- The full payload is approximately
         100 bytes. However, with the DogStatsD API,\ncompression is applied, which
         reduces the payload size."
@@ -27403,6 +27411,7 @@ paths:
         type: safe
   /api/v1/usage/attribution:
     get:
+      deprecated: true
       description: Get Usage Attribution.
       operationId: GetUsageAttribution
       parameters:

@@ -20,10 +20,6 @@ title: はじめに
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
-アプリケーションセキュリティモニタリングは非公開ベータ版です。開始するには、<a href="https://app.datadoghq.com/security/appsec?instructions=all">アプリ内の説明</a>をご覧ください。
-</div>
-
 アプリケーション言語用の Datadog ライブラリを使用して、本番システムを標的とした[脅威の検出][1]を行うように設定します。Docker、Kubernetes、AWS ECS、(対応言語) AWS Fargate で動作するアプリケーションのセキュリティを監視することができます。
 
 {{% appsec-getstarted %}}

@@ -1,86 +1,56 @@
 ---
-title: Datadog Lambda 拡張機能
-kind: documentation
-further_reading:
-  - link: serverless/custom_metrics
-    tag: ドキュメント
-    text: AWS Lambda からのカスタムメトリクスの送信
 aliases:
-  - /ja/serverless/libraries_integrations/extension/
+- /ja/serverless/datadog_lambda_library/extension
+- /ja/serverless/libraries_integrations/extension
+dependencies:
+- https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md
+kind: documentation
+title: Datadog Lambda 拡張機能
 ---
-## 概要
+[![Slack](https://chat.datadoghq.com/badge.svg?bg=632CA6)](https://chat.datadoghq.com/)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-agent/blob/master/LICENSE)
 
-AWS Lambda 拡張機能は、Lambda 関数を拡張できるコンパニオンプロセスです。Lambda の実行環境内で、Lambda 関数コードとともに動作します。Datadog 拡張機能は、最低限のパフォーマンスオーバーヘッドでコードと一緒に実行するよう構築された、Datadog Agent の軽量バージョンです。
+**注:** このリポジトリには、Datadog Lambda 拡張機能に関連するリリースノート、問題、説明、スクリプトが含まれています。この拡張機能は、Datadog Agent の特別なビルドです。ソースコードは[ここ](https://github.com/DataDog/datadog-agent/tree/main/cmd/serverless)にあります。
 
-{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="AWS サーバーレスアプリケーションをインスツルメントする"  style="width:100%;">}}
+Datadog Lambda 拡張機能は、AWS Lambda 関数の実行中に非同期にカスタムメトリクス、トレース、ログを送信することをサポートする AWS Lambda 拡張機能です。
 
-Datadog Lambda 拡張機能は以下を担当します。
-- Datadog Lambda ライブラリから Datadog へのリアルタイムの[強化された Lambda メトリクス][1]、[カスタムメトリクス][2]、および[トレース][3]のプッシュ。
-- ログの Lambda 関数から Datadog への転送。
+## インストール
 
-Datadog 拡張機能は、カスタムメトリクス、拡張メトリクス、トレース、およびログを[非同期的に][4]送信します。拡張機能を使用した Lambda ログの送信は、すべての Lambda ランタイムでサポートされています。カスタム メトリクス、強化されたメトリクス、およびトレースの送信は、Node.js および Python Lambda ランタイムでサポートされています。
+[インストール手順](https://docs.datadoghq.com/serverless/installation)に従って、Datadog で関数の拡張メトリクス、トレース、ログを表示します。
 
-## Datadog Lambda 拡張機能
+## 構成
 
-AWS サーバーレスアプリケーションをインスツルメントするには、[サーバーレスインストール手順][5]を参照してください。
+[構成手順](https://docs.datadoghq.com/serverless/configuration)に従って、テレメトリーにタグを付け、リクエスト/レスポンスペイロードをキャプチャし、ログやトレースから機密情報をフィルタリングまたはスクラブする、などの操作を行います。
 
-### Lambda レイヤーとして
+## オーバーヘッド
 
-Datadog Lambda 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda ライブラリ][6]とは別) として配布されます。 
+Datadog Lambda 拡張機能を初期化する際には、Lambda 関数のコールドスタート (init の実行時間が増加) に多少のオーバーヘッドが発生します。Datadog は Lambda 拡張機能のパフォーマンスを継続的に最適化しているため、常に最新のリリースを使用することをお勧めします。
 
-1. Datadog Lambda ライブラリをインストールして、[Python][7] または [Node.js][8] アプリケーションをインスツルメントします。
+Lambda 関数の報告期間が長くなっていることに気づくかもしれません。これは、Datadog Lambda 拡張機能が Datadog API にデータをフラッシュバックする必要があるためです。拡張機能がデータをフラッシュするのに費やした時間は、期間の一部として報告されますが、それは AWS が関数の応答をクライアントに返した*後*に行われます。言い換えれば、追加された期間は、Lambda 関数を遅くすることはありません。技術的な情報については、こちらの [AWS ブログポスト](https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/)を参照してください。Datadog 拡張機能によって追加された期間を除外して関数の実際のパフォーマンスを監視するには、 `aws.lambda.enhanced.runtime_duration` というメトリクスを使用します。
 
-2. Datadog 拡張機能用 Lambda レイヤーを次の ARN で AWS Lambda 関数に追加します。
+デフォルトでは、拡張機能は各呼び出しの最後にデータを Datadog に送り返します。これにより、トラフィックの少ないアプリケーション、cron ジョブ、および手動テストからの散発的な呼び出しに対するデータ到着の遅延を回避できます。拡張機能が安定した頻繁な呼び出しパターン (1 分に 1 回以上) を検出すると、複数の呼び出しからデータをバッチ処理し、期限が来た呼び出しの最初に定期的にフラッシュを行います。これは、*関数が頻繁に呼び出されるようになるほど、呼び出しごとの平均実行時間のオーバーヘッドが低くなる*ことを意味します。
 
-    ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
-    ```
+Datadog サイトから遠い地域にデプロイされた Lambda 関数では、例えば、US1 Datadog サイトにデータを報告する eu-west-1 にデプロイされた Lambda 関数は、ネットワークのレイテンシーにより高い期間のオーバーヘッドが見られる場合があります。
 
-    ARN のプレイスホルダーの値を次のように置き換えます。
-    - Replace `<AWS_REGION>` を Lambda 関数と同じ AWS リージョンに置き換えます。例、 `us-east-1`
-    - `<EXTENSION_VERSION>` を使用したい Datadog Lambda 拡張機能のバージョンに置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="extension" >}} です。
+## 問題を開く
 
-    **注**: このレイヤーは Datadog Lambda ライブラリとは別のものです。Datadog Lambda ライブラリを Lambda レイヤーとしてインストールした場合、
-    関数には 2 つの Lambda レイヤーがアタッチされることになります。
+このパッケージでバグが発生した場合は、お知らせください。新しい問題を開く前に、重複を避けるために既存の問題を検索してください。
 
-3. 環境変数 `DD_API_KEY` を追加し、[API 管理ページ][10]で Datadog API キーに値を設定します。
+問題を開くときは、拡張機能のバージョン、および取得できる場合はスタックトレースを含めてください。さらに、必要に応じて再現手順を含めてください。
 
-4. カスタムメトリクスを送信するには、[サンプルコード][11]を参照します。
+機能リクエストの問題を開くこともできます。
 
-### コンテナイメージとして
 
-関数をコンテナイメージとしてデプロイする場合は、関数に Lambda レイヤーを追加することはできません。代わりに、Datadog Lambda ライブラリとDatadog Lambda 拡張機能を、関数イメージに直接インストールする必要があります。
+## 寄稿
 
-1. [Node.js][8] または [Python][7] のインストール手順に従い、Datadog Lambda ライブラリをインストールします。コンテナイメージとしてデプロイされる機能に特化したインストレーション手順を使用してください。
+このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/datadog-agent/blob/master/docs/dev/contributing.md)に従ってプルリクエストを開いてください。
 
-2. Dockerfile に以下を追加して、Datadog Lambda 拡張機能をコンテナイメージに追加します。
+## コミュニティ
 
-```
-COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
-```
+製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 
-`<TAG>` を特定のバージョン番号 (たとえば `{{< latest-lambda-layer-version layer="python" >}}`) または `latest` に置き換えます。利用可能なタグのリストは、[Amazon ECR リポジトリ][9]で確認できます。
+## ライセンス
 
-3. 環境変数 `DD_API_KEY` を追加し、[API 管理ページ][10]で Datadog API キーに値を設定します。
+特に明記されていない限り、このリポジトリ内のすべてのファイルは、Apache License Version 2.0 の下でライセンスされます。
 
-4. カスタムメトリクスを送信するには、[サンプルコード][11]を参照します。
-
-## ログの収集
-
-拡張機能を使用した AWS Lambda ログの Datadog への送信を無効にするには、Lambda 関数で環境変数 `DD_SERVERLESS_LOGS_ENABLED` を `false` に設定します。
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /ja/serverless/enhanced_lambda_metrics
-[2]: /ja/serverless/custom_metrics
-[3]: /ja/serverless/distributed_tracing
-[4]: /ja/serverless/custom_metrics?tab=python#synchronous-vs-asynchronous-custom-metrics
-[5]: /ja/serverless/installation
-[6]: /ja/serverless/datadog_lambda_library
-[7]: /ja/serverless/installation/python
-[8]: /ja/serverless/installation/nodejs
-[9]: https://gallery.ecr.aws/datadog/lambda-extension
-[10]: https://app.datadoghq.com/account/settings#api
-[11]: /ja/serverless/custom_metrics#custom-metrics-sample-code
+この製品には、Datadog(https://www.datadoghq.com/) で開発されたソフトウェアが含まれています。Copyright 2021 Datadog, Inc.

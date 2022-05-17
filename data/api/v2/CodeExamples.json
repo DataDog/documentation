@@ -387,6 +387,11 @@
       "group": "logs",
       "suffix": "_3496222707",
       "description": "Send gzip logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "",
+      "description": "Send logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
     }
   ],
   "CreateLogsMetric": [
@@ -445,6 +450,13 @@
       "description": "Delete a tag configuration returns \"No Content\" response"
     }
   ],
+  "EstimateMetricsOutputSeries": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Estimate Output Series - Public v2 API returns \"Success\" response"
+    }
+  ],
   "ListVolumesByMetricName": [
     {
       "group": "metrics",
@@ -476,6 +488,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "List tags by metric name returns \"Success\" response"
+    }
+  ],
+  "SubmitMetrics": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Submit metrics returns \"Payload accepted\" response"
     }
   ],
   "UpdateTagConfiguration": [

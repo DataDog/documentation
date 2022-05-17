@@ -451,9 +451,11 @@ Cette variable se révèle particulièrement utile si vous utilisez des noms de 
 Ajouté avec la version 2.5.1.
 
 `DD_TRACE_METHODS`
-: Liste des méthodes à tracer. Accepte une liste de valeurs séparées par des points-virgules (`;`), où chaque entrée respecte le format `NomType[NomsMéthodes]` et où `NomsMéthodes` correspond à une liste de noms de méthode séparés par des virgules (`,`). Pour les types génériques, remplacez les crochets et les noms des paramètres de type par un backtick (`` ` ``) suivi du nombre de paramètres de type génériques. Par exemple, pour `Dictionary<TKey, TValue>`, indiquez `` Dictionary`2 ``. Pour les méthodes génériques, seul le nom de la méthode doit être indiqué. <br>
-**Exemple** : ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync]```<br>
+: Liste des méthodes à tracer. Accepte une liste de valeurs séparées par des points-virgules (`;`), où chaque entrée respecte le format `NomType[NomsMéthodes]` et où `NomsMéthodes` correspond soit à une liste de noms de méthode séparés par des virgules (`,`), soit au wildcard `*`. Pour les types génériques, remplacez les crochets et les noms des paramètres de type par un backtick (`` ` ``) suivi du nombre de paramètres de types génériques. Par exemple, pour `Dictionary<TKey, TValue>`, indiquez `` Dictionary`2 ``. Pour les méthodes génériques, seul le nom de la méthode doit être indiqué. <br>
+**Exemple** : ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
+**Remarque** : le wildcard (`[*]`) permet de sélectionner toutes les méthodes d'un type, à l'exception des constructors, getters et setters de propriétés, et des méthodes `Equals`, `Finalize`, `GetHashCode` et `ToString`. <br>
 Ajouté avec la version 2.6.0.
+Prise en charge du wildcard `[*]` ajoutée avec la version 2.7.0.
 
 #### Configuration de l'intégration d'instrumentation automatique
 

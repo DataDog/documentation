@@ -136,6 +136,10 @@ Perform verifications on files downloaded in previous steps. You can check that 
 
 **Note**: You can find out more on how to test downloads on [this dedicated guide][6].
 
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
+
 ### Navigation
 
 {{< img src="synthetics/browser_tests/navigation_step.png" alt="Browser Test Navigation Step" style="width:60%;">}}

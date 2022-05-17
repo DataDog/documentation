@@ -1,12 +1,16 @@
 ---
-title: ブラウザテストのステップ
-kind: ドキュメント
 description: Synthetic ブラウザテストのステップの記録
 further_reading:
-  - link: /synthetics/browser_tests/advanced_options/
-    tag: ドキュメント
-    text: ステップの高度なオプションを構成する方法を学ぶ
+- link: /synthetics/browser_tests/advanced_options/
+  tag: ドキュメント
+  text: ブラウザテストの高度なオプションを構成する方法を学ぶ
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
+  tag: Terraform
+  text: Terraform による Synthetic グローバル変数の作成と管理
+kind: ドキュメント
+title: ブラウザテストのステップ
 ---
+
 ## 概要
 
 ステップは、ブラウザテスト用に記録できる一連のアクションで、これは編集または作成できます。 Datadog テストレコーダー拡張機能を使用して直接記録するか、目的のステップを手動で追加することにより、ブラウザテストで実行するステップを定義できます。すべてのステップには、構成可能な[高度なオプション][1]のセットが付属しています。
@@ -39,7 +43,7 @@ further_reading:
 
 [Datadog ブラウザテストレコーダー拡張機能][3]は、`select` ドロップダウンメニューから選択されているオプションを自動的に記録します。
 
-{{< img src="synthetics/browser_tests/select_options.png" alt="オプション選択ステップ"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/select_options.png" alt="オプション選択ステップ" style="width:60%;">}}
 
 ### ファイルをアップロードする
 
@@ -48,7 +52,7 @@ further_reading:
 * ブラウザからデスクトップを開くか、
 * または、ファイルを記録する iframe にドラッグアンドドロップします。
 
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="ファイルのアップロードステップを作成する"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="ファイルのアップロードステップを作成する" style="width:60%;">}}
 
 ファイル数は 10 個、ファイルあたりのサイズは 5MB に制限されています。
 
@@ -58,7 +62,7 @@ further_reading:
 
 ### アサーション
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="ブラウザテストアサーション"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="ブラウザテストアサーション" style="width:60%;">}}
 
 アサーションを使用すると、シミュレートされたユーザージャーニーの任意の時点で、ブラウザテストが想定した状態にあることを検証できます。これが、ブラウザテストを**アサーション**で終了して、予期した状態になったことを確認する必要がある理由です。
 
@@ -134,7 +138,7 @@ return jQuery().jquery.startsWith('3.5.1')
 
 ### ナビゲーション
 
-{{< img src="synthetics/browser_tests/navigation_step.png" alt="ブラウザテストナビゲーションステップ"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/navigation_step.png" alt="ブラウザテストナビゲーションステップ" style="width:60%;">}}
 
 #### ページを更新する
 
@@ -172,7 +176,7 @@ return jQuery().jquery.startsWith('3.5.1')
 
 自動的に記録されないキーを押すには、特別なステップ **Press Key** の値ボックスで、どの値を押す必要があるかを指定します。
 
-{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="ブラウザテストのキーの押下"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="ブラウザテストのキーの押下" style="width:60%;">}}
 
 以下の修飾キーは、入力された値にも適用できます。
 
@@ -185,7 +189,7 @@ return jQuery().jquery.startsWith('3.5.1')
 
 ブラウザテストは、操作する必要のある要素まで自動的にスクロールします。したがって、ほとんどの場合、手動でスクロールステップを追加する必要はありません。スクロールステップは、無限スクロールなど、追加のネットワークリクエストをトリガーする必要がある場合にのみ追加する必要があります。
 
-{{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="ブラウザテストのスクロールステップ"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="ブラウザテストのスクロールステップ" style="width:60%;">}}
 
 ブラウザテストで縦または横にスクロールするピクセル数を指定する必要があります。
 
@@ -199,7 +203,7 @@ return jQuery().jquery.startsWith('3.5.1')
 
 ### 変数
 
-{{< img src="synthetics/browser_tests/variables.png" alt="ブラウザテスト変数"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/variables.png" alt="ブラウザテスト変数" style="width:60%;">}}
 
 変数を作成するには、最初に変数に名前を付けてから、以下のいずれかの方法を使用してその値を定義します。ステップ内で変数を使用する方法については、[変数の使用](#using-variables)を参照してください。
 
@@ -264,17 +268,25 @@ return jQuery().jquery.startsWith('3.5.1')
 
 [Synthetic Monitoring Settings][7] で定義されたグローバル変数を選択します。
 
+#### グローバル変数 - MFA
+
+[Synthetic Monitoring Settings][7] で定義された MFA グローバル変数を選択します。
+
+このタイプのグローバル変数にはタイムベースのワンタイムパスワード (TOTP) のシークレットキーが格納されており、MFA モジュールや MFA で保護されたワークフローのテストが可能になります。
+
+ブラウザテストにおける TOTP ベースの MFA については、こちらの [TOTP ガイド][8]をご覧ください。
+
 #### Email
 
-テストステップで使用できるランダムな Synthetic メールアドレスを生成して、[メールが正しく送信されたかどうかをアサート][8]したり、[メールに含まれるリンクに移動][9] (たとえば、確認用のリンクをクリック) したりします。テスト実行間の競合を回避するために、テスト実行ごとに一意のメールボックスが生成されます。
+テストステップで使用できるランダムな Synthetic メールアドレスを生成して、[メールが正しく送信されたかどうかをアサート][9]したり、[メールに含まれるリンクに移動][10] (たとえば、確認用のリンクをクリック) したりします。テスト実行間の競合を回避するために、テスト実行ごとに一意のメールボックスが生成されます。
 
 ### サブテスト
 
-{{< img src="synthetics/browser_tests/subtest.png" alt="ブラウザテストサブテスト"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/subtest.png" alt="ブラウザテストサブテスト" style="width:60%;">}}
 
-既存のワークフローを再利用するために、他のブラウザテスト内でブラウザテストを実行できます（最大 2 レベルのネスト）。サブテストを使用する理由と例については、[専用ガイド][10]をご参照ください。
+既存のワークフローを再利用するために、他のブラウザテスト内でブラウザテストを実行できます（最大 2 レベルのネスト）。サブテストを使用する理由と例については、[専用ガイド][11]をご参照ください。
 
-親テストのレベルで作成された変数が、サブテストで表示される変数と同じ名前である場合、サブテストの変数を親テストで上書きできます。デフォルトで、サブテストは親テストの前の手順に続いて実行されますが、[**Subtest Advanced オプション**][11]を使用すると、これを変更できます。
+親テストのレベルで作成された変数が、サブテストで表示される変数と同じ名前である場合、サブテストの変数を親テストで上書きできます。デフォルトで、サブテストは親テストの前の手順に続いて実行されますが、[**Subtest Advanced オプション**][12]を使用すると、これを変更できます。
 
 **注**: サブテストを個別に実行しても意味がない場合は、一時停止できます。メインテストの一部として引き続き呼び出されますが、個別に実行されることはありません。
 
@@ -282,23 +294,23 @@ return jQuery().jquery.startsWith('3.5.1')
 
 ブラウザテストの一環として HTTP リクエストを実行できます。
 
-{{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="HTTP リクエストの手順"  style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/recorder_http_requests2.png" alt="HTTP リクエストの手順" style="width:70%;" >}}
 
 #### セットアップ
 
 HTTP リクエストを定義するには、
 
-1. <mrk mid="31" mtype="seg"/><mrk mid="32" mtype="seg"/><mrk mid="33" mtype="seg"/>
+1. クエリする **Method** と **URL** を選択します。使用可能なメソッドには、`GET`、`POST`、`PATCH`、`PUT`、`HEAD`、`DELETE`、`OPTIONS` が含まれます。
 2. **Advanced Options** を指定します（オプション）
      * Follow redirects: トグルボタンで、監視しているエンドポイントが最大 10 個のリダイレクトをフォローするよう設定します。
      * Allow insecure certificates: トグルボタンで、証明書の検証中にエラーが発生しても、HTTP の接続テストを続行するよう設定できます。
      * Headers: 定義されたヘッダーは、デフォルトのブラウザヘッダをオーバーライドします。
      * <mrk mid="41" mtype="seg"/><mrk mid="42" mtype="seg"/>
-     * Body: リクエストの本文と本文のタイプ（`text/plain`、`application/json`、`text/xml`、`text/html` または `None`）。**注**: リクエスト本文の最大サイズは 50 キロバイトに制限されています。
+     * Body: リクエストの本文と本文のタイプ（`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded` または `None`）。**注**: リクエスト本文の最大サイズは 50 キロバイトに制限されています。
      * Cookies: 定義したクッキーをデフォルトのブラウザクッキーに追加します。複数のクッキーを設定するには、次の書式を使用します `<クッキー名1>=<クッキーの値1>; <クッキー名2>=<クッキーの値2>`。
 3. **Test URL** をクリックし、リクエストのコンフィギュレーションをテストします。これにより、反応データのプレビューが表示されます。
 
-{{< img src="synthetics/browser_tests/http_request.png" alt="HTTP リクエストの作成"  style="width:60%;" >}}
+{{< img src="synthetics/browser_tests/http_request2.png" alt="HTTP リクエストの作成" style="width:80%;" >}}
 
 #### アサーションの追加
 
@@ -306,16 +318,18 @@ HTTP リクエストを定義するには、
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][13]                                      |
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][13]、[`xpath`][14] | _String_ <br> _[Regex][15]_ <br> _String_, _[Regex][15]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][15]_                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
 | ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
-**注**: **Test URL** をクリックすると、基本のアサーションが自動的に入力されます。
+**Test URL** をクリックすると、基本のアサーションが自動的に入力されます。
 
-- `Response time` _lessThan_ 2000 ms
+- `Response time` _is less than_ 2000 ms
 - `Header content-type` _is_ "戻り値"
 - `Status code` _is_ "戻り値"
+
+{{< img src="synthetics/browser_tests/assertions.png" alt="アサーション" style="width:80%;" >}}
 
 #### 応答から変数を抽出する
 
@@ -326,12 +340,12 @@ HTTP リクエストを定義するには、
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。また、3 文字以上にする必要があります。
 2. 変数を応答ヘッダーから抽出するか、本文から抽出するか決定します。
 
-    * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[正規表現][13]によりパースします。
-    * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[正規表現][13]または [JSONPath][12] によりパースします。
+    * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[`正規表現`][15] によりパースします。
+    * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[`正規表現`][15]、[`JSONPath`][13] または [`XPath`][14] によりパースします。
 
-{{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="ブラウザテストで HTTP リクエストから変数を作成する" video="true"  width="80%" >}}
+{{< img src="synthetics/browser_tests/extracted_variable.png" alt="応答から抽出された変数" style="width:80%;">}}
 
-作成されたこの変数は、ブラウザテストの次の手順で使用できます。
+作成されたこの変数は、ブラウザテストの[次の手順](#using-variables)で使用できます。
 
 ## 変数の使用
 
@@ -367,9 +381,11 @@ HTTP リクエストを定義するには、
 [5]: /ja/synthetics/browser_tests/actions#use-variables-in-javascript-steps
 [6]: /ja/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 [7]: /ja/synthetics/settings/
-[8]: /ja/synthetics/browser_tests/actions#test-that-an-email-was-received
-[9]: /ja/synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
-[10]: /ja/synthetics/guide/reusing-browser-test-journeys
-[11]: /ja/synthetics/browser_tests/advanced_options/#subtests
-[12]: https://restfulapi.net/json-jsonpath/
-[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[8]: /ja/synthetics/guide/browser-tests-totp
+[9]: /ja/synthetics/browser_tests/actions#test-that-an-email-was-received
+[10]: /ja/synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
+[11]: /ja/synthetics/guide/reusing-browser-test-journeys
+[12]: /ja/synthetics/browser_tests/advanced_options/#subtests
+[13]: https://restfulapi.net/json-jsonpath/
+[14]: https://www.w3schools.com/xml/xpath_syntax.asp
+[15]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

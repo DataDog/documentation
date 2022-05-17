@@ -52,7 +52,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
    * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
-   * **NTLM v1**: NTLM 認証の資格情報を追加します。
+   * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
    * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名は実装されていません。
 
   </br>オプションで、**Additional configuration** のセクションにドメインとワークステーションを指定することができます。 

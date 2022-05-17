@@ -27,24 +27,20 @@ title: Security Platform
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management は、現在 US1-FED ではご利用いただけません。
+クラウドセキュリティポスチャ管理は、現在 US1-FED では利用できません。
 </div>
 {{< /site-region >}}
 
 ## 概要
 
-本番環境のセキュリティ運用にスピードとスケールをもたらす。Datadog のセキュリティプラットフォームは、アプリケーション、ホスト、コンテナ、クラウドインフラストラクチャーにわたって、リアルタイムの脅威検出と継続的な構成監査を実現します。Datadog の観測可能なプラットフォームと組み合わせることで、セキュリティとオペレーションをかつてないほど統合し、組織の共通の目標に合わせます。
+実稼働セキュリティ運用にスピードとスケールを。Datadog のセキュリティプラットフォームは、リアルタイムの脅威検出と、アプリケーション、ホスト、コンテナ、クラウドインフラストラクチャー全体にわたる継続的なコンフィギュレーション監査を提供します。Datadog の可観測性プラットフォームと組み合わせることで、Datadog セキュリティプラットフォームは、組織の共有目標に沿ったセキュリティと運用の間にかつてないインテグレーションをもたらします。
 
-Datadog セキュリティプラットフォームには、[アプリケーションセキュリティモニタリング](#application-security-monitoring)、[Cloud SIEM](#security-monitoring)、[Cloud Security Posture Management (CSPM)](#cloud-security-posture-management)、[Cloud Workload Security (CWS)](#cloud-workload-security) などがあります。
+Datadog セキュリティプラットフォームは、[アプリケーションセキュリティモニタリング](#application-security-monitoring)、[Cloud SIEM](#security-monitoring)、[Cloud Security Posture Management (CSPM)](#cloud-security-posture-management)、[クラウドワークロードセキュリティ (CWS)](#cloud-workload-security) を含んでいます。
 
 {{< vimeo 669874306 >}}
 </br>
 
 ## アプリケーションセキュリティモニタリング
-
-<div class="alert alert-warning">
-アプリケーションセキュリティモニタリングは公開ベータ版です。始めるには、<a href="https://app.datadoghq.com/security/appsec?instructions=all">アプリ内手順</a>を参照してください。
-</div>
 
 [アプリケーションセキュリティモニタリング][1] (ASM) は、SSRF (Server-Side-Request-Forgery) や SQL インジェクション、Log4Shell、XSS (Reflected Cross-Site-Scripting) など、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する観測可能性を提供します。ASM は、Datadog [APM][2]、[Datadog Agent][3]、およびアプリ内検出ルールを活用して、アプリケーション環境における脅威を検出します。
 

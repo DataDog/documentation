@@ -188,11 +188,11 @@ As a best practice, Datadog recommends using [unified service tagging][22] when 
 
 Datadog automatically collects common tags from Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher. To extract even more tags, use the following options:
 
-| Env Variable               | Description                                               |
-|----------------------------|-----------------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS` | Extract Docker container labels                           |
-| `DD_DOCKER_ENV_AS_TAGS`    | Extract Docker container environment variables            |
-| `DD_COLLECT_EC2_TAGS`      | Extract custom EC2 tags without using the AWS integration |
+| Env Variable                  | Description                                                                                             |
+|-------------------------------|---------------------------------------------------------------------------------------------------------|
+| `DD_CONTAINER_LABELS_AS_TAGS` | Extract container labels. This env is equivalent to the old `DD_DOCKER_LABELS_AS_TAGS` env.             |
+| `DD_CONTAINER_ENV_AS_TAGS`    | Extract container environment variables. This env is equivalent to the old `DD_DOCKER_ENV_AS_TAGS` env. |
+| `DD_COLLECT_EC2_TAGS`         | Extract custom EC2 tags without using the AWS integration.                                              |
 
 See the [Docker Tag Extraction][23] documentation to learn more.
 
@@ -221,10 +221,10 @@ Additional examples are available on the [Container Discover Management][25] pag
 
 ### Misc
 
-| Env Variable                        | Description                                                                                                      |
-|-------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"` |
-| `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                              |
+| Env Variable                        | Description                                                                                                                                                     |
+|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"`. This is no longer needed since Agent v7.35.0. |
+| `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                                                                             |
 
 You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS` environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers` section of the `datadog.yaml` configuration file.
 

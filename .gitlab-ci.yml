@@ -84,7 +84,7 @@ build_preview:
     - touch Makefile.config
     - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
@@ -199,7 +199,7 @@ sourcemaps_preview:
   environment: "preview"
   script:
     - yarn run build:webpack:preview -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
   allow_failure: true
@@ -229,7 +229,7 @@ build_live:
     - make examples
     - sync_integration_descriptions
     - sync_integration_metrics
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
     - placehold_translations
     - yarn run prebuild
     - yarn run build:live
@@ -333,7 +333,7 @@ sourcemaps_live:
   environment: "live"
   script:
     - yarn run build:webpack -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_live
   allow_failure: true
@@ -346,7 +346,7 @@ evaluate_missing_metrics:
   cache: {}
   environment: "live"
   script:
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd-api-key') -b $(get_secret 'dd-app-key')
   when: manual
   only:
     - master
@@ -378,9 +378,9 @@ manage_translations:on-schedule:
         nodenv shell 14.16.0
         [ -d ./node_modules ] && rm -rf ./node_modules
         yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
-        DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
+        DATADOG_API_KEY="$(get_secret 'dd-api-key')" manage_translations "${APIKEY}";
       fi
-      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd-api-key')
   artifacts:
     paths:
       - translate-debug.log
@@ -425,7 +425,7 @@ test_pa11y:
   dependencies:
     - build_live
   script:
-    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
   only:
     - schedules
 
