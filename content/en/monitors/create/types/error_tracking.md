@@ -5,7 +5,10 @@ description: Learn about the Error Tracking monitor type.
 further_reading:
 - link: "/real_user_monitoring/error_tracking/"
   tag: "Documentation"
-  text: "Learn more about Error Tracking"
+  text: "Learn more about RUM Error Tracking"
+- link: "/tracing/error_tracking/"
+  tag: "Documentation"
+  text: "Learn more about APM Error Tracking"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -19,13 +22,13 @@ further_reading:
 
 ## Overview
 
-Once [Real User Monitoring][1] or [APM][2] is enabled for your organization, you can create an [Error Tracking][3] monitor to alert you when an issue starts, when it has a high impact, and when it starts regressing.
+When [Real User Monitoring][1] or [APM][2] is enabled for your organization, you can create an Error Tracking monitor to alert you when an issue starts, when it has a high impact, and when it starts regressing.
 
 ## Create an Error Tracking monitor
 
 To create an Error Tracking monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Error Tracking**][4].
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1,000 Error Tracking monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Error Tracking monitors per account. <a href="/help/">Contact Support</a> to increase this limit for your account.</div>
 
 ### Select the alerting condition
 
@@ -38,10 +41,9 @@ Choose **Count** to alert on issues with a high number of errors and **New Issue
 {{< tabs >}}
 {{% tab "Count" %}}
 
-For **Web and Mobile Apps**, select **Count**. As you expand your search filter, the Count graph above **Select the alerting condition** updates.
-
+Select **Web and Mobile Apps** from the dropdown menu.
 1. Optionally, select a query suggestion such as **Error Occurrences**, **Impacted Users**, and **Impacted Sessions** to alert on. 
-2. Select **Web and Mobile Apps** or **Backend Services** and choose to monitor over a count, facet, or measure.
+2. Choose what metric you want to monitor: a count, facet, or measure.
    - For error occurrences, monitor over an overall count based on the issue ID.
    - For impacted users, monitor over a unique count of user emails based on the issue ID or over a measure. 
    - For impacted sessions, monitor over a unique count of session IDs based on the issue ID. 
@@ -65,7 +67,7 @@ Triggers when the error count is `above` or `above or equal to`. An alert is tri
 
 {{% tab "New Issue" %}}
 
-For **Web and Mobile Apps** or **Backend Services**, select **New Issue**. As you expand your search filter, the issue details list above **Select the alerting condition** updates. The list displays older issues that were considered new in historic time frames such as the past 24 hours or the past week. 
+The list of new issues might display older issues that are considered new in the selected time frame, such as the past 24 hours or the past week. 
 
 1. Select or input a custom time period for the monitor to consider an issue as new after its first occurrence. The selected threshold is evaluated in the given time frame. After the specific time period, the monitor stops alerting and turns green.
 2. Select **Web and Mobile Apps** or **Backend Services** and choose to monitor over a count or [measure][1]. 
@@ -100,13 +102,10 @@ For more information about the **Notify your team** and **Say what’s happening
 
 #### Breaching Values Toplist
 
-When an Error Tracking monitor is triggered, values can be added to the notification message. 
+When an Error Tracking monitor is triggered, the facet or measure values that triggered the alert can be added to the notification message. To display breaching facets and measure values, click **Include a table of the top 10 breaching values**. Facets and measures can be grouped and ungrouped in the notification message.
 
-| Monitor Over     | Can be added to notification message                                                               |
-|------------------|----------------------------------------------------------------------------------------------------|
-| Facet or measure | Grouped: The top 10 facet or measure values.<br>Ungrouped: The top 10 facet or measure values. |
 
-This monitor integrates with [platforms][7] such as Slack, Jira, Webhooks, Microsoft Teams, Pagerduty, and email. To display breaching facets and measure values, click **Include a table of the top 10 breaching values**.
+This monitor integrates with platforms such as Slack, Jira, Webhooks, Microsoft Teams, Pagerduty, and email. For more information, read the [documentation about notification integrations][7].
 
 #### Examples
 
