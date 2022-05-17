@@ -27,7 +27,7 @@ GitHub Enterprise is not supported.
 
 ### Configuring a GitHub App
 
-The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. If you already have an app you can
+The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. If you already have an app, you can
 skip to the next section.
 
 1. Go to the [GitHub Apps Integration tile][3].
@@ -38,29 +38,28 @@ skip to the next section.
 6. Give the app a name, for example, `Datadog CI Visibility`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
 
-### Configuring Tracing for GitHub Action
+### Configure tracing for GitHub Actions
 
-After the GitHub App is created and installed, you must enable CI Visibility on the accounts and/or repositories you want visibility into.
+After the GitHub App is created and installed, enable CI Visibility on the accounts and/or repositories you want visibility into.
 
 1. Go to the **[Getting Started][4]** page and click on **GitHub**.
 2. Click on **Enable Account** for the account you want to enable.
 3. Enable CI Visibility for the whole account by clicking **Enable CI Visibility**.
-4. Alternatively you can enable only individual repositories by scrolling through the repository list and clicking the **Enable CI Visibility** toggle.
+4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable CI Visibility** toggle.
 
-Pipelines will start showing immediately after enabling CI Visibility for any account or repository.
+Pipelines appear immediately after enabling CI Visibility for any account or repository.
 
-### Enabling log collection
+### Enable log collection
 
 The GitHub Actions CI Visibility integration also allows automatically forwarding workflow job logs to the [Logs Product][5].
-To enable logs you can follow the following:
+To enable logs, follow these steps:
 
 1. Go to the **[CI Visibility settings][6]** page.
 2. Click on any account that is enabled or has enabled repositories.
 3. Click **Enable Job Logs Collection** to enable logs for the whole account.
-4. Alternatively you can enable only individual repositories by scrolling through the repository list and clicking the **Enable Job Logs Collection** toggle.
+4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable Job Logs Collection** toggle.
 
-Immediately after toggling logs collection workflow job logs will be forwarded to the Logs Product. Note logs will be charged separately from CI Visibility and
-retention, exclusion and indexes are configured via the Logs Product settings as any other logs.
+Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Note that logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings.
 
 ## Visualize pipeline data in Datadog
 
