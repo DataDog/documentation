@@ -70,13 +70,13 @@ In this dashboard, you can find information about:
 - Ingestion volumes separated by `service`, `env`, and `ingestion_reason`
 - Indexing volumes separated by `service` and `env`
 
-## APM Ingestion reasons overview dashboard
+## APM Ingestion Reasons dashboard
 
-The [APM Ingestion Reasons dashboard][6] gives insights on each source of ingestion volume. Thanks to the `ingestion_reason` dimension that is tagged on ingestion usage metrics, get visibility on which configurations options (Datadog Agent configuration, tracing library configuration) and products (RUM, Synthetics, etc) are generating the most APM data.
+The [APM Ingestion Reasons dashboard][6] provides insights on each source of ingestion volume. Each ingestion usage metric is tagged with an `ingestion_reason` dimension, so you can see which configuration options (Datadog Agent configuration or tracing library configuration) and products (such as RUM or Synthetic Testing) are generating the most APM data.
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_ingestion_reasons.png" style="width:100%;" alt="APM Ingestion Reasons Dashboard" >}}
 
-For each individual ingestion reason, find out which environments and services are contributing the most to the overall volume.
+For each ingestion reason, you can find out which environments and services are contributing the most to the overall volume.
 
 ## Further Reading
 
