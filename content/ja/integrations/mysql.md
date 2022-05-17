@@ -31,7 +31,7 @@ git_integration_title: mysql
 guid: 056bfc7f-4775-4581-9442-502078593d10
 integration_id: mysql
 integration_title: MySQL
-integration_version: 8.2.2
+integration_version: 8.3.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
