@@ -38,6 +38,7 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 | [chi][10]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][11] |
 | [echo v4][12]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4][13]           |
 | [echo v3][12]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][14]              |
+| [Fiber][74]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2][73]              |
 
 #### Library compatibility
 
@@ -157,3 +158,5 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [70]: https://github.com/DataDog/dd-trace-go#support-policy
 [71]: https://github.com/DataDog/dd-trace-go#support-maintenance
 [72]: https://www.datadoghq.com/support/
+[73]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2
+[74]: https://github.com/gofiber/fiber
