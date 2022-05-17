@@ -1,10 +1,10 @@
 ---
 categories:
-  - exceptions
-  - notification
+- exceptions
+- notification
 ddtype: crawler
 dependencies: []
-description: Surveillez de manière centralisée l'évolution des taux d'erreur au sein de l'ensemble de vos applications
+description: Surveillez de manière centralisée les taux d'erreur au sein de vos applications.
 doc_link: https://docs.datadoghq.com/integrations/bugsnag/
 draft: false
 git_integration_title: bugsnag
@@ -17,9 +17,12 @@ kind: integration
 manifest_version: '1.0'
 name: bugsnag
 public_title: Intégration Datadog/Bugsnag
-short_description: Surveillez de manière centralisée l'évolution des taux d'erreur au sein de vos applications.
+short_description: Surveillez de manière centralisée l'évolution des taux d'erreur
+  au sein de vos applications.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Bugsnag fournit aux équipes logicielles une plateforme de détection automatisée des crashs pour leurs applications Web et mobiles. Bugsnag enregistre automatiquement les erreurs en temps réel et envoie des alertes à leur sujet. Intégrez Bugsnag à Datadog pour recevoir des notifications d'erreur dans votre flux d'événements Datadog.
@@ -36,7 +39,7 @@ Utilisez cette intégration pour :
 
 Aucune installation n'est requise.
 
-### Configuration
+### Procédure à suivre
 
 Pour intégrer Bugsnag à Datadog :
 
