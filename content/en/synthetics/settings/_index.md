@@ -60,19 +60,19 @@ Choose the type of variable you want to create:
 
 {{% /tab %}}
 
-{{% tab "Create From HTTP Test" %}}
+{{% tab "Create From Test" %}}
 
-You can create variables from your existing [HTTP tests][1] by parsing their associated response headers and body:
+you can create variables from your existing [HTTP tests][1] by parsing their associated response headers and body or by using extracted variables from your Multistep API tests”
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Enter a **Description** for your variable (optional).
 3. Select **Tags** to associate with your variable (optional).
-4. Pick the **[HTTP test][1]** you want to extract your variable from.
+4. Pick the **test** you want to extract your variable from.
 5. Enable obfuscation of your variable to hide its value on test results (optional).
-6. Decide whether to extract your variable from the response headers or from the response body.
+6. If using Multistep API tests you can extract your local variables from within the test.   
+7. If using a HTTP test, decide whether to extract your variable from the response headers or from the response body.
     * Extract the value from **Response Header**: use the full response header for your variable or parse it with a [`regex`][2].
     * Extract the value from **Response Body**: parse the response body of the request with a [`regex`][2], a [`jsonpath`][3], an [`xpath`][4], or use the full response body.
-
 {{< img src="synthetics/settings/variable_fromhttp_3.png" alt="Variable from HTTP Test" style="width:80%;">}}
 
 In addition to extracting a value with a regex, you can also use a [regex][2] to parse the following:
