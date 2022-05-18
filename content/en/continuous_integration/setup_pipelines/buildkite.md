@@ -8,7 +8,7 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/custom_tags_and_metrics/"
+    - link: "/continuous_integration/setup_pipelines/custom_tags_and_metrics/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and metrics"
 ---
