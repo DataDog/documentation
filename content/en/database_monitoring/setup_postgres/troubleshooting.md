@@ -154,7 +154,7 @@ Some or all queries may not have plans available. This can be due to unsupported
 
 Problem: The Agent is unable to execute a required function in the `datadog` schema of the database.
 
-Solution: The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from.
+Solution: The Agent requires the `datadog.explain_statement(...)` function to exist in **all databases** the Agent can collect queries from.
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
