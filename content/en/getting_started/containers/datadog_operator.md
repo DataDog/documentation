@@ -26,9 +26,9 @@ This guide describes the Datadog Operator, how to install it, and how to use it 
 
 ## What is the Datadog Operator? 
 
-The Datadog Operator is an open source [Kubernetes Operator][4] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. By using the Operator, you can use a single Custom Resource Definition (CRD) to deploy the node-based Agent, Cluster Agent, and Cluster Checks Runners. The Operator reports deployment status, health, and errors in the Operator's CRD status. Because the Operator uses higher-level configuration options, it limits the risk of misconfiguration.
+The Datadog Operator is an open source [Kubernetes Operator][4] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. By using the Operator, you can use a single Custom Resource Definition (CRD) to deploy the node-based Agent, Cluster Agent, and Cluster Checks Runner. The Operator reports deployment status, health, and errors in the Operator's CRD status. Because the Operator uses higher-level configuration options, it limits the risk of misconfiguration.
 
-Once you have deployed the Agent, the Datadog Operator provides:
+Once you have deployed the Agent, the Datadog Operator provides the following benefits:
 
 - Validation for your Agent configurations
 - Keeping all Agents up to date with your configuration
@@ -51,7 +51,7 @@ Datadog fully supports using a DaemonSet to deploy the Agent, but manual DaemonS
 
 ## Prerequisites
 
-- Kubernetes Cluster v1.14.X+
+- Kubernetes v1.14.X+
 - [Helm][1] for deploying the Datadog Operator
 - The Kubernetes command-line tool, [kubectl][2], for installing the Datadog Agent
 
