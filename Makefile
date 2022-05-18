@@ -212,7 +212,6 @@ start-no-pre-build: clean source-helpers ## Build the documentation without auto
 
 stop:  ## Stop wepack watch/hugo server.
 	@echo "stopping previous..."
-	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true
 
 clean-go-examples:
