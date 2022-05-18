@@ -44,6 +44,7 @@ First, [install][1] Datadog serverless monitoring to begin collecting metrics, t
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
 - [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
+- [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
 
 ## Connect telemetry using tags
@@ -616,6 +617,10 @@ To migrate, compare the [installation instructions using the Datadog Lambda Exte
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Configure the Datadog Lambda extension for local testing
+
+If you test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_LOCAL_TEST` to `true` in your local testing environment, otherwise the extension waits for responses from the AWS Extensions API and blocks the invocation.
 
 ## Troubleshoot
 
