@@ -95,11 +95,11 @@ window.DD_RUM && window.DD_RUM.startView('checkout')
 {{% /tab %}}
 {{< /tabs >}}
 
-If you are using React, Angular, Vue or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
+If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
 
 ## Enrich and control RUM data
 
-The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog. 
+The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before it is sent to Datadog. 
 
 Intercepting the RUM events allows you to:
 
