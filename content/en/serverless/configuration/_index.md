@@ -22,12 +22,16 @@ First, [install][1] Datadog serverless monitoring to begin collecting metrics, t
 - [Submit custom metrics](#submit-custom-metrics)
 
 ### Logs
-- [Configure logs collection](#configure-logs-collection)
+- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
+- [Disable logs collection](#disable-logs-collection)
 - [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
+- [Parse and transform logs](#parse-and-transform-logs)
 - [Connect logs and traces](#connect-logs-and-traces)
 
 ### APM
-- [Configure trace collection](#configure-trace-collection)
+- [Configure the Datadog tracer](#configure-the-datadog-tracer)
+- [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
+- [Disable trace collection](#disable-trace-collection)
 - [Collect the request and response payloads](#collect-the-request-and-response-payloads)
 - [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
@@ -37,8 +41,10 @@ First, [install][1] Datadog serverless monitoring to begin collecting metrics, t
 ### Others
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
 - [Send telemetry over AWS PrivateLink or a proxy](#send-telemetry-over-privatelink-or-proxy)
+- [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
 - [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
+- [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
 
 ## Connect telemetry using tags
@@ -129,9 +135,9 @@ If you are collecting telemetry from your Lambda functions using the [Datadog Fo
 {{% /tab %}}
 {{< /tabs >}}
 
-Datadog can also enrich the collected telemetry with existing AWS resource tags defined on your Lambda functions.
+Datadog can also enrich the collected telemetry with existing AWS resource tags defined on your Lambda functions with a delay of a few minutes.
 
-- If you are collecting telemetry from your Lambda functions using the [Datadog Lambda extension][2], enable the [Datadog AWS integration][3].
+- If you are collecting telemetry from your Lambda functions using the [Datadog Lambda extension][2], enable the [Datadog AWS integration][3]. This feature is meant to enrich your telemetry with **custom** tags. Datadog reserved tags  (`env`, `service`, and `version`) must be set through the corresponding environment variables (`DD_ENV`, `DD_SERVICE`, and `DD_VERSION` respectively). Reserved tags can also be set with the parameters provided by the Datadog integrations with the serverless developer tools. This feature does not work for Lambda functions deployed with container images.
 
 - If you are collecting telemetry from your Lambda functions using the [Datadog Forwarder Lambda function][4], set the `DdFetchLambdaTags` option to `true` on the CloudFormation stack for your Datadog Forwarder. This option defaults to true since version 3.19.0.
 
@@ -280,9 +286,7 @@ The following resources are currently supported:
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
-## Configure logs collection
-
-### Filter or scrub information from logs
+## Filter or scrub information from logs
 
 To exclude the `START` and `END` logs, set the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]`. Alternatively, you can add a `datadog.yaml` file in your project root directory with the following content:
 
@@ -298,7 +302,7 @@ Datadog recommends keeping the `REPORT` logs, as they are used to populate the i
 
 To scrub or filter other logs before sending them to Datadog, see [Advanced Log Collection][13].
 
-### Disable logs collection
+## Disable logs collection
 
 Logs collection through the Datadog Lambda extension is enabled by default.
 
@@ -347,17 +351,21 @@ Set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false` on your Lam
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configure trace collection
+## Parse and transform logs
+
+To parse and transform your logs in Datadog, see documentation for [Datadog log pipelines][34].
+
+## Configure the Datadog tracer
 
 To see what libraries and frameworks are automatically instrumented by the Datadog APM client, see [Compatibility Requirements for APM][14]. To instrument custom applications, see Datadog's APM guide for [custom instrumentation][15].
 
-### Filter or scrub sensitive information from traces
+## Filter or scrub sensitive information from traces
 
 To filter traces before sending them to Datadog, see [Ignoring Unwanted Resources in APM][16].
 
 To scrub trace attributes for data security, see [Configure the Datadog Agent or Tracer for Data Security][17].
 
-### Disable trace collection
+## Disable trace collection
 
 Trace collection through the Datadog Lambda extension is enabled by default. If you want to stop collecting traces from your Lambda functions, follow the instructions below:
 
@@ -527,6 +535,10 @@ The Datadog Lambda Extension needs access to the public internet to send data to
 
 If you are using the Datadog Forwarder, follow these [instructions][25].
 
+## Send telemetry to multiple Datadog organizations
+
+If you wish to send data to more than one Datadog organization, follow the instructions for [dual shipping][33] and include the file `datadog.yaml` in the root directory of your project.
+
 ## Propagate trace context over AWS resources
 
 Datadog automatically injects the trace context into outgoing AWS SDK requests and extracts the trace context from the Lambda event. This enables Datadog to trace a request or transaction over distributed services. See [Serverless Trace Propagation][26].
@@ -606,6 +618,10 @@ To migrate, compare the [installation instructions using the Datadog Lambda Exte
 {{% /tab %}}
 {{< /tabs >}}
 
+## Configure the Datadog Lambda extension for local testing
+
+To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_LOCAL_TEST` to `true` in your local testing environment. Otherwise, the extension waits for responses from the AWS Extensions API and blocks the invocation.
+
 ## Troubleshoot
 
 If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][32].
@@ -648,3 +664,5 @@ If you have trouble configuring your installations, set the environment variable
 [30]: /serverless/guide/extension_motivation/
 [31]: /serverless/guide#install-using-the-datadog-forwarder
 [32]: /serverless/guide/troubleshoot_serverless_monitoring/
+[33]: /agent/guide/dual-shipping/
+[34]: /logs/log_configuration/pipelines/
