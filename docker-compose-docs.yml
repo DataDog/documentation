@@ -1,9 +1,9 @@
 version: '3'
 services:
   docs:
-    image: my-webops-build:v6
+    image: public.ecr.aws/x2b9z2t7/webops/site-build:main
     command: "./startup.sh ${GITHUB_TOKEN} '${LANGS_TO_IGNORE}'"
     volumes:
-      - "/Users/colin.cole/guac/projects/documentation:/src"
+      - "/Users/colin.cole/guac/projects/documentation:/src:cached"
     ports:
       - "1313:1313"
