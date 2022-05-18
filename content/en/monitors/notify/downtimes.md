@@ -152,7 +152,7 @@ By default, Datadog sends a recovery notification for monitors that trigger **be
 
 The option to disable the first recovery notification is additive between multiple downtimes. Consequently, if multiple downtimes overlap and mute the same monitor, the first recovery notification will be muted if at least one downtime checked the option to disable it.
 
-**Note**: This option mutes the **first** recovery notification. If a monitor proceeds to trigger and recover again during a downtime, then the corresponding notifications are always muted regardless of this option's settings.
+**Note**: This option mutes the **first** recovery notification. If a monitor proceeds to trigger and recover again during a downtime, then the corresponding notifications are always muted, regardless of this option's settings.
 
 ## Manage
 
