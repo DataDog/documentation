@@ -1,6 +1,8 @@
 ---
 title: Kubernetes cluster name auto detection
-kind: faq
+kind: documentation
+aliases:
+  - /agent/faq/kubernetes-cluster-name-detection
 further_reading:
 - link: "/agent/autodiscovery/"
   tag: "documentation"

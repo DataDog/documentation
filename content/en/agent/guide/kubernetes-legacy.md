@@ -1,8 +1,9 @@
 ---
 title: Legacy Kubernetes versions
-kind: faq
+kind: guide
 aliases:
     - /agent/kubernetes/legacy
+    - /agent/faq/kubernetes-legacy
 further_reading:
 - link: "/agent/kubernetes/daemonset_setup/"
   tag: "documentation"
