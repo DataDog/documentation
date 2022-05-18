@@ -38,7 +38,7 @@ You can download a JSON file containing the definition of a monitor from the mon
 {{< nextlink href="/monitors/create/types/anomaly" >}}<u>Anomaly</u>: Detect anomalous behavior for a metric based on historical data.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/apm" >}}<u>APM</u>: Compare an APM metric to a user-defined threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/audit_logs" >}}<u>Audit Logs</u>: Alert when a specified type of audit log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
-{{< nextlink href="/monitors/create/types/ci_pipelines" >}}<u>CI Pipelines</u>: Monitor CI pipelines data gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/ci" >}}<u>CI</u>: Monitor CI pipelines and tests data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/composite" >}}<u>Composite</u>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/custom_check" >}}<u>Custom Check</u>: Monitor the status of arbitrary custom checks.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/event" >}}<u>Event</u>: Monitor events gathered by Datadog.{{< /nextlink >}}

@@ -1,8 +1,8 @@
 ---
-title: CI Pipeline Monitor
+title: CI Monitor
 kind: documentation
 aliases:
-- /monitors/monitor_types/ci_pipelines
+- /monitors/monitor_types/ci
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
@@ -19,18 +19,25 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">CI Pipeline monitors are in alpha.
+<div class="alert alert-info">CI monitors are in alpha.
 </div>
 
 ## Overview
 
-Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline monitor to alert you when a specified type of CI Pipeline event exceeds a user-defined threshold over a given period of time.
+Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline monitor or a CI Test monitor.
+
+CI monitors allow you to visualize CI data and set up alerts on it. For example, use a CI Pipeline monitor to receive alerts on a failed pipeline, and use a CI Test monitor to receive alerts on failed tests or slow tests.
 
 ## Monitor creation
 
-To create a [CI Pipeline monitor][2] in Datadog, use the main navigation: **Monitors -> New Monitor --> CI Pipelines**.
+To create a [CI Pipeline monitor][2] or [CI Test monitor][3] in Datadog, use the main navigation: *Monitors -> New Monitor --> CI*.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 CI Pipeline monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 CI monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+
+Choose between a **Pipelines** or **Tests** monitor:
+
+{{< tabs >}}
+{{% tab "Pipelines" %}}
 
 ### Define the search query
 
@@ -39,7 +46,7 @@ To create a [CI Pipeline monitor][2] in Datadog, use the main navigation: **Moni
     * **Monitor over the `Pipeline` level**: If the `Pipeline` level is selected, the monitor will only include pipeline events for evaluation, which represent the execution of an entire pipeline, usually composed of one or more jobs.
     * **Monitor over the `Stage` level**: If the `Stage` level is selected, the monitor will only include stage events for evaluation, which represent the execution of a group of one or more jobs in CI providers that support it.
     * **Monitor over the `Job` level**: If the `Job` level is selected, the monitor will only include job events for evaluation, which represent the execution of a group of commands.
-    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][5] events for evaluation, which represent individual commands being executed in a job.
+    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][6] events for evaluation, which represent individual commands being executed in a job.
     * **Monitor over all levels**: If the `All` level is selected, the monitor will include all types of events for evaluation.
 
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
@@ -63,6 +70,63 @@ The following example is of a pipeline error rate monitor using a formula that c
 
 <div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
 
+{{% /tab %}}
+{{% tab "Tests" %}}
+
+### Define the search query
+
+1. Construct a search query using the same logic as a CI Test explorer search. For example, we can search failed tests for `main` branch using the following query: `@test.status:fail @git.branch:main`
+2. Choose to monitor over a CI Test event count, facet, or measure:
+    * **Monitor over a CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Test events over a selected time frame, then compares it to the threshold conditions.
+    * **Monitor over a dimension**: If a dimension (qualitative facet) is selected, the monitor alerts over the `Unique value count` of the facet.
+    * **Monitor over a measure**: If a measure (quantitative facet) is selected, the monitor alerts over the numerical value of the CI Test facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+3. Group CI Test events by multiple dimensions (optional):
+   All CI Test events matching the query are aggregated into groups based on the value of up to four facets.
+4. Configure the alerting grouping strategy (optional):
+   * If the query has a `group by`, you will receive an alert for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` (a combination of test bundle, test suite and test name, e.g. `MyBundle.MySuite.myTest`) to receive a separate alert for each CI Test full name when the number of errors is high.
+
+{{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:80%;" >}}
+
+#### Test runs with different parameters or configurations
+If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way alerts will trigger for test runs with specific test parameters or configurations.
+
+For example, if a test with the same full name failed on Chrome browser, but it didn't fail on Firefox, the alert will be triggered for the test run on Chrome.
+Using `@test.full_name` in case if you have different test parameters or configurations might lead to incorrect behaviour.
+
+Test fingerpint is a hash value calculated using the following attributes:
+```
+Test service name: test.service
+Test full name:
+  test.suite
+  test.name
+  test.bundle
+Test parameters: test.parameters
+Test configuration:
+  os.platform
+  os.version
+  os.arch
+  runtime.name
+  runtime.version
+  runtime.vendor
+  runtime.architecture
+  device.model
+  device.name
+  ui.localization
+  ui.orientation
+  ui.appearance
+```
+
+#### Formulas and functions
+
+You can create CI Test monitors using formulas and functions. For example, this can be used to create monitors on the **rate** of an event happening, such as the rate of a test failing (error rate).
+
+The following example is a test error rate monitor using a formula that calculates the ratio of "number of failed test events" (`@test.status:fail`) over "number of total test events" (no filter), grouped by `@test.full_name` (to be alerted once per test).
+
+{{< img src="monitors/monitor_types/ci_tests/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:80%;" >}}
+
+<div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
+{{% /tab %}}
+{{< /tabs >}}
 ### Set alert conditions
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
@@ -72,11 +136,11 @@ The following example is of a pipeline error rate monitor using a formula that c
 
 #### Advanced alert conditions
 
-For detailed instructions on the advanced alert options (such as evaluation delay), see the [Monitor configuration][3] page.
+For detailed instructions on the advanced alert options (such as evaluation delay), see the [Monitor configuration][4] page.
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
 #### Notifications behavior when there is no data
 
@@ -96,9 +160,9 @@ This notification will only be sent for monitor alerts!
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /continuous_integration/
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
-[3]: /monitors/create/configuration/#advanced-alert-conditions
-[4]: /monitors/notify/
-[5]: /continuous_integration/setup_pipelines/custom_commands/
-
+[3]: https://app.datadoghq.com/monitors/create/ci-tests
+[4]: /monitors/create/configuration/#advanced-alert-conditions
+[5]: /monitors/notify/
