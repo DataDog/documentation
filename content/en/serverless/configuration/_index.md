@@ -134,9 +134,9 @@ If you are collecting telemetry from your Lambda functions using the [Datadog Fo
 {{% /tab %}}
 {{< /tabs >}}
 
-Datadog can also enrich the collected telemetry with existing AWS resource tags defined on your Lambda functions.
+Datadog can also enrich the collected telemetry with existing AWS resource tags defined on your Lambda functions with a delay of a few minutes.
 
-- If you are collecting telemetry from your Lambda functions using the [Datadog Lambda extension][2], enable the [Datadog AWS integration][3].
+- If you are collecting telemetry from your Lambda functions using the [Datadog Lambda extension][2], enable the [Datadog AWS integration][3]. This feature is meant to enrich your telemetry with custom tags, while the Datadog reserved `env`, `service`, and `version` tags must be set through the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables (or using the parameters provided by the Datadog integrations with the serverless developer tools). This feature does not currently work for Lambda functions deployed with container images.
 
 - If you are collecting telemetry from your Lambda functions using the [Datadog Forwarder Lambda function][4], set the `DdFetchLambdaTags` option to `true` on the CloudFormation stack for your Datadog Forwarder. This option defaults to true since version 3.19.0.
 
