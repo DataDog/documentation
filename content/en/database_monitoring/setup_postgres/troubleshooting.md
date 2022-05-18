@@ -181,7 +181,7 @@ See the section on [truncated query samples](#query-samples-are-truncated) for i
 
 #### Postgres extended query protocol
 
-If a client is using the Postgres [extended query protocol][13] or prepared statements then the Datadog Agent is not able to collect explain plans due to the separation of the parsed query and raw bind parameters. If the client provides an option to force using the simple query protocol then turning that on will enable the Datadog Agent to collect execution plans.
+If a client is using the Postgres [extended query protocol][13] or prepared statements, the Datadog Agent is unable to collect explain plans due to the separation of the parsed query and raw bind parameters. If the client provides an option to force using the simple query protocol, then turning that on enables the Datadog Agent to collect execution plans.
 
 | Language | Client                    | Configuration for simple query protocol                                                                                                                                                                                                                                                                                                                                                      |
 |----------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
