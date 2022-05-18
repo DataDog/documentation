@@ -52,13 +52,13 @@ When Watchdog detects an irregularity in an APM metric, the pink Watchdog binocu
 
 {{< img src="watchdog/service_list.png" alt="Screenshot of the APM services list page, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
 
-You can see greater detail about a metric anomaly by navigating to the [service page][13]. On the top of the service page is the Watchdog Insights box. Watchdog Insights helps you discover tag values that are associated with anomalous behaviors, such as higher error rate or latency. 
+You can see greater detail about a metric anomaly by navigating to the [Services page][13]. On the top of the page is the Watchdog Insights box. Watchdog Insights helps you discover tag values that are associated with anomalous behaviors, such as higher error rate or latency. 
 
-Scrolling down on the service page, you may find the Watchdog icon on metric graphs.
+You can also find the Watchdog icon on metric graphs.
 
 {{< img src="watchdog/latency_graph.png" alt="A graph showing service latency, in seconds, on the y-axis and the time of day on the x-axis. The entire graph is highlighted in pink, and the words May 2: 13:31 Ongoing appear at the top" style="width:75%;" >}}
 
-Clicking on the binoculars icon brings up a [Watchdog alert][14] card with additional details.
+Click on the binoculars icon to see a [Watchdog alert][14] card with more details.
 
 ## Troubleshooting
 
