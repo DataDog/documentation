@@ -36,7 +36,6 @@ The RUM SDK automatically generates a [view event][2] for each new page visited 
 Starting with [version 2.17.0][3], you may specify your own view names by tracking view events manually with the `trackViewsManually` option:
 
 1. Set `trackViewsManually` to true when initializing RUM.
-2. 
 {{< tabs >}}
 {{% tab "NPM" %}}
 
