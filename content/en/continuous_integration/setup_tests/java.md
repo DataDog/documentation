@@ -10,6 +10,10 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+<div class="alert alert-info">
+Agentless mode for Cloud CI providers is currently in beta.
+</div>
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
@@ -23,20 +27,53 @@ Supported test frameworks:
 
 ## Prerequisites
 
-[Install the Datadog Agent to collect tests data][1].
+{{< tabs >}}
+{{% tab "Cloud" %}}
+To send test data without using a Datadog Agent for Cloud CI providers, you need to have connectivity to Datadog.
+{{% /tab %}}
+{{% tab "On-Premises" %}}
+To send test data using a Datadog Agent for on-premise CI providers you need to [install the Datadog Agent][1].
 
-<div class="alert alert-warning">
-Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/java#agentless-beta">instructions</a> on this page.
-</div>
+[1]: /agent/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Installing the Java tracer
 
 Install and enable the Java tracer v0.101.0 or newer.
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{% tab "Maven on Cloud" %}}
 
-Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][3] (without the preceding `v`): ![Maven Central][4]
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<profile>
+  <id>dd-civisibility</id>
+  <activation>
+    <activeByDefault>false</activeByDefault>
+  </activation>
+  <properties>
+    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.civisibility.enabled=true -Ddd.civisibility.agentless.enabled=true</dd.java.agent.arg>
+  </properties>
+  <dependencies>
+    <dependency>
+        <groupId>com.datadoghq</groupId>
+        <artifactId>dd-java-agent</artifactId>
+        <version>$VERSION</version>
+        <scope>provided</scope>
+    </dependency>
+  </dependencies>
+</profile>
+{{< /code-block >}}
+
+
+[3]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[4]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+{{% /tab %}}
+{{% tab "Maven On-Premises" %}}
+
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][3] (without the preceding `v`): ![Maven Central][4]
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <profile>
@@ -59,12 +96,12 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 {{< /code-block >}}
 
 
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+[3]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[4]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
 {{% /tab %}}
-{{% tab "Gradle" %}}
+{{% tab "Gradle on Cloud" %}}
 
-Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][3] (without the preceding `v`): ![Maven Central][4]
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 configurations {
@@ -76,15 +113,92 @@ dependencies {
 {{< /code-block >}}
 
 
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+[3]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[4]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+{{% /tab %}}
+{{% tab "Gradle On-Premises" %}}
+
+Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][3] (without the preceding `v`): ![Maven Central][4]
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+configurations {
+    ddTracerAgent
+}
+dependencies {
+    ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
+}
+{{< /code-block >}}
+
+[3]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[4]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Instrumenting your tests
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{% tab "Maven on Cloud" %}}
+
+Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or both if you use both) to use Datadog Java agent, specifying the name of the service or library under test with the `-Ddd.service` property:
+
+* If using the [Maven Surefire Plugin][1]:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-surefire-plugin</artifactId>
+  <configuration>
+      <argLine>${dd.java.agent.arg}</argLine>
+  </configuration>
+</plugin>
+{{< /code-block >}}
+
+* If using the [Maven Failsafe Plugin][2]:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-failsafe-plugin</artifactId>
+  <configuration>
+      <argLine>${dd.java.agent.arg}</argLine>
+  </configuration>
+  <executions>
+      <execution>
+        <goals>
+           <goal>integration-test</goal>
+           <goal>verify</goal>
+        </goals>
+      </execution>
+  </executions>
+</plugin>
+{{< /code-block >}}
+
+To send test data without using a Datadog Agent, you need to configure the following environment variables:
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][3] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+Additionally, configure which [Datadog site][4] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
+
+`DD_SITE` (Required)
+: The [Datadog site][4] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+Run your tests as you normally do, specifying the api key, the site and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+{{< code-block lang="bash" >}}
+DD_API_KEY=<api_key> DD_SITE=<datadog_site> DD_ENV=ci mvn clean verify -Pdd-civisibility
+{{< /code-block >}}
+
+
+[1]: https://maven.apache.org/surefire/maven-surefire-plugin/
+[2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /getting_started/site/
+{{% /tab %}}
+{{% tab "Maven On-Premises" %}}
 
 Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or both if you use both) to use Datadog Java agent, specifying the name of the service or library under test with the `-Ddd.service` property:
 
@@ -107,15 +221,15 @@ Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or b
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-failsafe-plugin</artifactId>
   <configuration>
-     <argLine>${dd.java.agent.arg}</argLine>
+    <argLine>${dd.java.agent.arg}</argLine>
   </configuration>
   <executions>
-      <execution>
-        <goals>
-           <goal>integration-test</goal>
-           <goal>verify</goal>
-        </goals>
-      </execution>
+    <execution>
+      <goals>
+        <goal>integration-test</goal>
+        <goal>verify</goal>
+      </goals>
+    </execution>
   </executions>
 </plugin>
 {{< /code-block >}}
@@ -126,11 +240,47 @@ Run your tests as you normally do, specifying the environment where tests are be
 DD_ENV=ci mvn clean verify -Pdd-civisibility
 {{< /code-block >}}
 
-
 [1]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
 {{% /tab %}}
-{{% tab "Gradle" %}}
+{{% tab "Gradle on Cloud" %}}
+
+Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifying the name of the service or library under test with the `-Ddd.service` property:
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+test {
+  if(project.hasProperty("dd-civisibility")) {
+    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.civisibility.enabled=true", "-Ddd.civisibility.agentless.enabled=true"]
+  }
+}
+{{< /code-block >}}
+
+To send test data without using a Datadog Agent, you need to configure the following environment variables:
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][3] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+Additionally, configure which [Datadog site][4] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
+
+`DD_SITE` (Required)
+: The [Datadog site][4] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+Run your tests as you normally do, specifying the api key, the site and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+{{< code-block lang="bash" >}}
+DD_API_KEY=<api_key> DD_SITE=<datadog_site> DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
+{{< /code-block >}}
+
+**Note:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
+
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /getting_started/site/
+
+{{% /tab %}}
+{{% tab "Gradle On-Premises" %}}
 
 Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifying the name of the service or library under test with the `-Ddd.service` property:
 
@@ -169,14 +319,9 @@ The following system properties set configuration options and have environment v
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`dd.trace.agent.url`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
-**Environment variable**: `DD_TRACE_AGENT_URL`<br/>
-**Default**: `http://localhost:8126`
+All other [Datadog Tracer configuration][6] options can also be used.
 
-All other [Datadog Tracer configuration][2] options can also be used.
-
-**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][3] table to create your custom setup for your integration tests.
+**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][7] table to create your custom setup for your integration tests.
 
 For example, to enable `OkHttp3` client request integration, add `-Ddd.integration.okhttp-3.enabled=true` to your setup.
 
@@ -230,29 +375,6 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
-## Agentless (Beta)
-
-To instrument your test suite without requiring an Agent, configure the following system properties:
-
-`dd.civisibility.agentless.enabled` (Required)
-: Enables or disables Agentless mode.<br/>
-**Environment variable**: `DD_CIVISIBILITY_AGENTLESS_ENABLED`<br/>
-**Default**: `false`
-
-Additionally, configure which [Datadog site][5] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
-
-`dd.site` (Required)
-: The [Datadog site][5] to upload results to.<br/>
-**Environment variable**: `DD_SITE`<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-Finally, configure the API key using the following environment variable:
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][4] used to upload the test results. The API key can only be provided via environment variables.<br/>
-**Default**: `(empty)`
-
 ## Troubleshooting
 
 ### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
@@ -269,8 +391,5 @@ If you need to use a previous version of the tracer, you can configure CI Visibi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/setup_tests/agent/
-[2]: /tracing/setup_overview/setup/java/?tab=containers#configuration
-[3]: /tracing/setup_overview/compatibility_requirements/java
-[4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /getting_started/site/
+[6]: /tracing/setup_overview/setup/java/?tab=containers#configuration
+[7]: /tracing/setup_overview/compatibility_requirements/java
