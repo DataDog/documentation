@@ -152,7 +152,7 @@ Some or all queries may not have plans available. This can be due to unsupported
 
 #### Missing explain function {#undefined-explain-function}
 
-Problem: The Agent is not able to execute a required function in the `datadog` schema of the database.
+Problem: The Agent is unable to execute a required function in the `datadog` schema of the database.
 
 Solution: The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from.
 
