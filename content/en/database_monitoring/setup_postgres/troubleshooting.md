@@ -185,11 +185,11 @@ If a client is using the Postgres [extended query protocol][13] or prepared stat
 
 | Language | Client                    | Configuration for simple query protocol                                                                                                                                                                                                                                                                                                                                                      |
 |----------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Go       | [pgx][6]                  | Set `PreferSimpleProtocol` to switch to the simple query protocol ([Docs](https://pkg.go.dev/github.com/jackc/pgx#ConnConfig)).                                                                                                                                                                                                                                                                                                                           |
-| Java     | [Postgres JDBC Client][14] | Set `preferQueryMode = simple` to switch to the simple query protocol ([Docs](https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/jdbc/PreferQueryMode.html)).                                                                                                                                                                                                                                                                                                                       |
-| Python   | [asyncpg][15]              | Uses the extended query protocol and it's not possible to disable it. Disabling prepared statements does not solve the problem.                                                                                                                                                                                                                                                              |
-| Python   | [psycopg][16]             | `psycopg2` does not use the extended query protocol so execution plans should be collected without issue. <br/> `psycopg3` uses the extended query protocol by default and there is no way to disable it. Disabling prepared statements does not solve the problem. Format SQL Queries using [psycopg sql][17] before passing them to the DB client to enable collection of execution plans. |
-| Node     | [node-postgres][18]       | Uses the extended query protocol and it's not possible to disable it. Use [pg-format][19] to format SQL Queries before passing them to [node-postgres][18] to enable the Datadog Agent to collect execution plans.                                                                                                                                                                           |
+| Go       | [pgx][6]                  | Set `PreferSimpleProtocol` to switch to the simple query protocol ([Docs][14]).                                                                                                                                                                                                                                                                                                              |
+| Java     | [Postgres JDBC Client][15] | Set `preferQueryMode = simple` to switch to the simple query protocol ([Docs][16]).                                                                                                                                                                                                                                                                                                          |
+| Python   | [asyncpg][17]              | Uses the extended query protocol and it's not possible to disable it. Disabling prepared statements does not solve the problem.                                                                                                                                                                                                                                                              |
+| Python   | [psycopg][18]             | `psycopg2` does not use the extended query protocol so execution plans should be collected without issue. <br/> `psycopg3` uses the extended query protocol by default and there is no way to disable it. Disabling prepared statements does not solve the problem. Format SQL Queries using [psycopg sql][19] before passing them to the DB client to enable collection of execution plans. |
+| Node     | [node-postgres][20]       | Uses the extended query protocol and it's not possible to disable it. Use [pg-format][21] to format SQL Queries before passing them to [node-postgres][20] to enable the Datadog Agent to collect execution plans.                                                                                                                                                                           |
 
 #### Query is in a database ignored by the Agent instance config
 The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][5].
@@ -215,7 +215,7 @@ This error happens when you are missing the `postgresql-contrib` package that in
 sudo apt-get install postgresql-contrib-10
 ```
 
-See the appropriate version of the [Postgres `contrib` documentation][20] for more information.
+See the appropriate version of the [Postgres `contrib` documentation][22] for more information.
 
 [1]: /database_monitoring/setup_postgres/
 [2]: /agent/troubleshooting/
@@ -230,10 +230,12 @@ See the appropriate version of the [Postgres `contrib` documentation][20] for mo
 [11]: /database_monitoring/setup_postgres/advanced_configuration
 [12]: https://www.postgresql.org/docs/current/runtime-config-statistics.html
 [13]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
-[14]: https://jdbc.postgresql.org/documentation/head/connect.html
-[15]: https://github.com/MagicStack/asyncpg
-[16]: https://www.psycopg.org/
-[17]: https://www.psycopg.org/docs/sql.html
-[18]: https://node-postgres.com/
-[19]: https://www.npmjs.com/package/pg-format
-[20]: https://www.postgresql.org/docs/12/contrib.html
+[14]: https://pkg.go.dev/github.com/jackc/pgx#ConnConfig
+[15]: https://jdbc.postgresql.org/documentation/head/connect.html
+[16]: https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/jdbc/PreferQueryMode.html
+[17]: https://github.com/MagicStack/asyncpg
+[18]: https://www.psycopg.org/
+[19]: https://www.psycopg.org/docs/sql.html
+[20]: https://node-postgres.com/
+[21]: https://www.npmjs.com/package/pg-format
+[22]: https://www.postgresql.org/docs/12/contrib.html
