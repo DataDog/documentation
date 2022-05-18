@@ -25,6 +25,32 @@ This feature is currently in private beta. <a href="https://docs.datadoghq.com/h
 
 Runtime metrics collection can be enabled with one configuration parameter in the tracing client either through the tracer option: `tracer.init({ runtimeMetrics: true })` or through the environment variable: `DD_RUNTIME_METRICS_ENABLED=true`
 
+
+   {{< tabs >}}
+{{% tab "Environment variables" %}}
+
+```shell
+export DD_RUNTIME_METRICS_ENABLED=true
+export DD_ENV=prod
+export DD_SERVICE=my-web-app
+export DD_VERSION=1.0.3
+```
+
+{{% /tab %}}
+{{% tab "In code" %}}
+
+```js
+const tracer = require('dd-trace').init({
+  env: 'prod',
+  service: 'my-web-app',
+  version: '1.0.3',
+  runtimeMetrics: true
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 Runtime metrics can be viewed in correlation with your Node services. See the [Service page][1] in Datadog.
 
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
