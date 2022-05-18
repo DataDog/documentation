@@ -215,7 +215,7 @@ This error happens when you are missing the `postgresql-contrib` package that in
 sudo apt-get install postgresql-contrib-10
 ```
 
-See the appropriate version of the [Postgres `contrib` documentation][22] for more information.
+For more information, see the appropriate version of the [Postgres `contrib` documentation][22].
 
 [1]: /database_monitoring/setup_postgres/
 [2]: /agent/troubleshooting/
