@@ -2,7 +2,7 @@
 title: Adding Custom Tags and Metrics to Pipeline Traces
 kind: documentation
 further_reading:
-  - link: "/continuous_integration/setup_pipelines/troubleshooting/"
+  - link: "/continuous_integration/troubleshooting/"
     tag: "Documentation"
     text: "Troubleshooting CI"
 ---
