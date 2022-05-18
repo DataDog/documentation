@@ -21,9 +21,9 @@ Supported test frameworks:
   * Also includes any test framework based on JUnit, such as Spock Framework and Cucumber-Junit
 * TestNG >= 6.4
 
-## Prerequisites
-
-[Install the Datadog Agent to collect tests data][1].
+## Enabling CI Visibility for the runner
+{{< tabs >}}
+{{% tab "Cloud" %}}
 
 <div class="alert alert-warning">
 Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/java#agentless-beta">instructions</a> on this page.
@@ -40,21 +40,21 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <profile>
-  <id>dd-civisibility</id>
-  <activation>
-    <activeByDefault>false</activeByDefault>
-  </activation>
-  <properties>
-    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.civisibility.enabled=true</dd.java.agent.arg>
-  </properties>
-  <dependencies>
-    <dependency>
-        <groupId>com.datadoghq</groupId>
-        <artifactId>dd-java-agent</artifactId>
-        <version>$VERSION</version>
-        <scope>provided</scope>
-    </dependency>
-  </dependencies>
+<id>dd-civisibility</id>
+<activation>
+<activeByDefault>false</activeByDefault>
+</activation>
+<properties>
+<dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.civisibility.enabled=true -Ddd.civisibility.agentless.enabled=true</dd.java.agent.arg>
+</properties>
+<dependencies>
+<dependency>
+<groupId>com.datadoghq</groupId>
+<artifactId>dd-java-agent</artifactId>
+<version>$VERSION</version>
+<scope>provided</scope>
+</dependency>
+</dependencies>
 </profile>
 {{< /code-block >}}
 
@@ -68,10 +68,10 @@ Add the `ddTracerAgent` entry to the `configurations` task block, and add the Da
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 configurations {
-    ddTracerAgent
+ddTracerAgent
 }
 dependencies {
-    ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
+ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
 }
 {{< /code-block >}}
 
@@ -92,11 +92,11 @@ Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or b
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-surefire-plugin</artifactId>
-  <configuration>
-    <argLine>${dd.java.agent.arg}</argLine>
-  </configuration>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-surefire-plugin</artifactId>
+<configuration>
+<argLine>${dd.java.agent.arg}</argLine>
+</configuration>
 </plugin>
 {{< /code-block >}}
 
@@ -104,19 +104,19 @@ Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or b
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-failsafe-plugin</artifactId>
-  <configuration>
-     <argLine>${dd.java.agent.arg}</argLine>
-  </configuration>
-  <executions>
-      <execution>
-        <goals>
-           <goal>integration-test</goal>
-           <goal>verify</goal>
-        </goals>
-      </execution>
-  </executions>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-failsafe-plugin</artifactId>
+<configuration>
+<argLine>${dd.java.agent.arg}</argLine>
+</configuration>
+<executions>
+<execution>
+<goals>
+<goal>integration-test</goal>
+<goal>verify</goal>
+</goals>
+</execution>
+</executions>
 </plugin>
 {{< /code-block >}}
 
@@ -136,9 +136,9 @@ Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-java
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 test {
-  if(project.hasProperty("dd-civisibility")) {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.civisibility.enabled=true"]
-  }
+if(project.hasProperty("dd-civisibility")) {
+jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.civisibility.enabled=true", "-Ddd.civisibility.agentless.enabled=true"]
+}
 }
 {{< /code-block >}}
 
@@ -152,6 +152,145 @@ DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 
 {{% /tab %}}
 {{< /tabs >}}
+
+
+{{% /tab %}}
+{{% tab "On-Premises" %}}
+## Prerequisites
+
+[Install the Datadog Agent to collect tests data][1].
+
+<div class="alert alert-warning">
+Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/java#agentless-beta">instructions</a> on this page.
+</div>
+
+## Installing the Java tracer
+
+Install and enable the Java tracer v0.101.0 or newer.
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<profile>
+<id>dd-civisibility</id>
+<activation>
+<activeByDefault>false</activeByDefault>
+</activation>
+<properties>
+<dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.civisibility.enabled=true</dd.java.agent.arg>
+</properties>
+<dependencies>
+<dependency>
+<groupId>com.datadoghq</groupId>
+<artifactId>dd-java-agent</artifactId>
+<version>$VERSION</version>
+<scope>provided</scope>
+</dependency>
+</dependencies>
+</profile>
+{{< /code-block >}}
+
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+configurations {
+ddTracerAgent
+}
+dependencies {
+ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
+}
+{{< /code-block >}}
+
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+{{% /tab %}}
+{{< /tabs >}}
+
+## Instrumenting your tests
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or both if you use both) to use Datadog Java agent, specifying the name of the service or library under test with the `-Ddd.service` property:
+
+* If using the [Maven Surefire Plugin][1]:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-surefire-plugin</artifactId>
+<configuration>
+<argLine>${dd.java.agent.arg}</argLine>
+</configuration>
+</plugin>
+{{< /code-block >}}
+
+* If using the [Maven Failsafe Plugin][2]:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-failsafe-plugin</artifactId>
+<configuration>
+<argLine>${dd.java.agent.arg}</argLine>
+</configuration>
+<executions>
+<execution>
+<goals>
+<goal>integration-test</goal>
+<goal>verify</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+{{< /code-block >}}
+
+Run your tests as you normally do, specifying the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+{{< code-block lang="bash" >}}
+DD_ENV=ci mvn clean verify -Pdd-civisibility
+{{< /code-block >}}
+
+
+[1]: https://maven.apache.org/surefire/maven-surefire-plugin/
+[2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifying the name of the service or library under test with the `-Ddd.service` property:
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+test {
+if(project.hasProperty("dd-civisibility")) {
+jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.civisibility.enabled=true"]
+}
+}
+{{< /code-block >}}
+
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+{{< code-block lang="bash" >}}
+DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
+{{< /code-block >}}
+
+**Note:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Configuration settings
 
