@@ -1,36 +1,41 @@
 ---
 categories:
-  - cloud
-  - orchestration
-  - google cloud
-  - log collection
+- cloud
+- orchestration
+- google cloud
+- log collection
 ddtype: crawler
 dependencies: []
-description: 'Recueillez des métriques, des traces et des logs provenant de l''ensemble de vos clusters et analysez-les dans Datadog.'
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_run/'
+description: Recueillez des métriques, des traces et des logs provenant de l'ensemble
+  de vos clusters et analysez-les dans Datadog.
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_run/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-google-cloud-run-with-datadog/'
-    tag: Blog
-    text: "Surveiller Google\_Cloud\_Run avec Datadog"
+- link: https://www.datadoghq.com/blog/monitor-google-cloud-run-with-datadog/
+  tag: Blog
+  text: Surveiller Google Cloud Run avec Datadog
 git_integration_title: google_cloud_run
 has_logo: true
-integration_title: "Google\_Cloud\_Run"
+integration_id: google-cloud-run
+integration_title: Google Cloud Run
+integration_version: ''
 is_public: true
 kind: intégration
 manifest_version: '1.0'
 name: google_cloud_run
-public_title: "Intégration Datadog/Google\_Cloud\_Run"
-short_description: 'Recueillez des métriques, des traces et des logs en provenance de l''ensemble de vos clusters et analysez-les dans Datadog.'
+public_title: Intégration Datadog/Google Cloud Run
+short_description: Recueillez des métriques, des traces et des logs en provenance
+  de l'ensemble de vos clusters et analysez-les dans Datadog.
 version: '1.0'
 ---
+
 ## Présentation
 
 Cloud Run est une plateforme de calcul gérée qui vous permet d'exécuter des conteneurs sans état accessibles via des requêtes HTTP.
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques et traces ainsi que tous vos logs Cloud Run.
 
-## Implémentation
+## Configuration
 
 ### Collecte de métriques
 
@@ -44,18 +49,17 @@ Si vous configurez Cloud Run sur GKE, activez [l'intégration Google Cloud Pl
 
 ### Collecte de logs
 
-Google Cloud Run expose également des [logs d'audit][3].
-Les logs Google Cloud Run sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][4].
+Google Cloud Run expose également des [logs d'audit][3]. Les logs Google Cloud Run sont recueillis avec Google Cloud Logging et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][4].
 
-Une fois cette opération effectuée, exportez vos logs Google Cloud Run depuis Stackdriver vers le Pub/Sub :
+Une fois cette opération effectuée, exportez vos logs Google Cloud Run depuis Google Cloud Logging vers le Pub/Sub :
 
-1. Accédez à la [page Stackdriver][5] et filtrez les logs Google Cloud Run.
+1. Accédez à la [page Google Cloud Logging][5] et filtrez les logs Google Cloud Run.
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
-4. Cliquez sur **Create** et patientez jusqu'à ce que le message de confirmation apparaisse.
+4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ### APM et DogStatsD
 

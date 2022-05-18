@@ -1,10 +1,11 @@
 ---
-title: Attribution de l'utilisation
-kind: documentation
 aliases:
-  - /fr/account_management/billing/advanced_usage_reporting/
-  - /fr/account_management/billing/custom_usage_reporitng/
+- /fr/account_management/billing/advanced_usage_reporting/
+- /fr/account_management/billing/custom_usage_reporitng/
+kind: documentation
+title: Attribution de l'utilisation
 ---
+
 ## Présentation
 
 <div class="alert alert-warning">
@@ -28,8 +29,6 @@ Les administrateurs peuvent accéder à l'onglet Usage Attribution à partir de 
 - Spans ingérées
 - Network Flows
 - Real User Monitoring
-
-**Remarque : les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.**
 
 ### Prise en main
 

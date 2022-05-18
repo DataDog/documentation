@@ -1,12 +1,13 @@
 ---
-title: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
 kind: ガイド
 private: true
+title: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
 ---
 
 {{< whatsnext desc="一般 RUM:" >}}
 
 {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}RUM データによる Apdex とカスタムパフォーマンス指標の算出{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}RUM データでアラートを作成{{< /nextlink >}}
 
 {{< /whatsnext >}}
 

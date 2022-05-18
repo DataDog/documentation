@@ -125,8 +125,11 @@ Running [custom Agent checks][5] as cluster checks is supported, as long as all 
 
 ## Setting up check configurations
 
-### Configuration from static configuration files
+### Configuration from configuration files
+
 When the URL or IP of a given resource is constant (for example, an external service endpoint or a public URL), a static configuration can be passed to the Cluster Agent as YAML files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the **required** addition of the `cluster_check: true` line.
+
+In addition, starting Datadog Agent 1.18.0 you can use `advanced_ad_identifiers` and [Autodiscovery template variables][10] in you check configuration to target Kubernetes services ([see example][11]).
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -209,6 +212,51 @@ instances:
     - name: "<EXAMPLE_NAME>"
       url: "<EXAMPLE_URL>"
 ```
+
+#### Example: HTTP_Check on a Kubernetes service
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+If there is a Kubernetes service you would like the to perform an [HTTP check][1] against once per cluster, use the `clusterAgent.confd` field to define your check configuration:
+
+```yaml
+#(...)
+clusterAgent:
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      advanced_ad_identifiers:
+        - kube_service:
+            name: "<SERVICE_NAME>"
+            namespace: "<SERVICE_NAMESPACE>"
+      cluster_check: true
+      init_config:
+      instances:
+        - url: "http://%%host%%"
+          name: "<EXAMPLE_NAME>"
+```
+
+[1]: /integrations/http_check/
+{{% /tab %}}
+{{% tab "Daemonset" %}}
+If there is a Kubernetes service you would like the to perform an [HTTP check][1] against once per cluster, mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
+
+```yaml
+advanced_ad_identifiers:
+  - kube_service:
+      name: "<SERVICE_NAME>"
+      namespace: "<SERVICE_NAMESPACE>"
+cluster_check: true
+init_config:
+instances:
+  - url: "http://%%host%%"
+    name: "<EXAMPLE_NAME>"
+```
+
+[1]: /integrations/http_check/
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note:** The field `advanced_ad_identifiers` is supported starting Datadog Cluster Agent 1.18+.
 
 ### Configuration from Kubernetes service annotations
 
@@ -396,3 +444,5 @@ The Agent `status` command should show the check instance running and reporting 
 [7]: /integrations/http_check/
 [8]: /agent/faq/template_variables/
 [9]: /integrations/nginx/
+[10]: /agent/guide/template_variables/
+[11]: /agent/cluster_agent/clusterchecks/#example-http_check-on-a-kubernetes-service

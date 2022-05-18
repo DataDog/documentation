@@ -112,11 +112,11 @@ Additionally, authorize the `example.com` domain in the `assets.example.com`. Th
 
 ### How does it work?
 
-The Session Replay Recorder, part of the RUM Browser SDK, takes a snapshot of the DOM + CSS. It then tails & records events happening on the web page (DOM modification, mouse move, clicks, input events, …) along with their timestamp.
+The Session Replay Recorder, which is part of the RUM Browser SDK, takes a snapshot of the DOM and CSS. It tails and records events happening on the web page (such as DOM modification, mouse move, clicks, and input events) along with their timestamps.
 
 On the Datadog replay view, the page is rebuilt and the recorded events are re-applied at the right time.
 
-The browser SDK is [open source][9], and leverages the open source project [rrweb][10].
+The browser SDK is [open source][9] and leverages the open source project [rrweb][10].
 
 ### What is the performance impact?
 
@@ -125,7 +125,7 @@ To ensure minimal impact of the Session Replay recorder on the application's per
 -   Reduces network impact of Session Replay by compressing the data prior to sending it to Datadog.
 -   Reduces load on the browser’s UI thread by delegating most of the CPU intensive work (such as compression) to a background service worker.
 
-Expected Network bandwidth impact is less than 100Kb/min. Refined estimates will be available after more data is received from Early Adopters.
+The expected network bandwidth impact is less than 100Kb/min. 
 
 ### How long is a Session Replay available?
 
@@ -133,10 +133,10 @@ Session Replay follows the same 30 days retention policy as normal RUM sessions.
 
 ### How do you disable Session Replay?
 
-- Remove startSessionReplayRecording() to stop session recordings.
-- Set `replaySampleRate` to `0` to stop collecting the RUM Session Replay plan which includes resources and long tasks.
+- Remove `startSessionReplayRecording()` to stop session recordings.
+- Set `replaySampleRate` to `0` to stop collecting the RUM Session Replay plan which includes replays, resources, and long tasks.
 
-In order to apply these configurations, upgrade the Browser RUM SDK to a version >= 3.6.
+In order to apply these configurations, upgrade the [Browser RUM SDK][2] to a version >= 3.6.
 
 ## Further Reading
 

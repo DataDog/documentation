@@ -6,18 +6,16 @@ further_reading:
   tag: Documentation
   text: Session Replay
 kind: documentation
-title: Outils de développement de Session Replay
+title: Outils de développement Browser de Session Replay
 ---
-
-<div class="alert alert-warning">Les outils de développement sont disponibles en version bêta publique.</div>  
 
 ## Présentation
 
-Les outils de développement de Session Replay sont intégrés à la solution et vous permettent de diagnostiquer des problèmes concernant vos applications. Ils ne nécessitent aucune configuration.
+Les outils de développement Browser de Session Replay sont intégrés à la solution et vous permettent de diagnostiquer des problèmes concernant vos applications. Ils ne nécessitent aucune configuration.
 
-## Outils de développement
+## Outils de développement Browser
 
-Pour accéder aux outils de développement, depuis l'onglet **Sessions**, cliquez sur le bouton **Jump to Replay** situé à gauche d'une session. Vous pouvez également cliquer sur une session, puis sur **Replay Session** en haut à droite du [RUM Explorer][1]. 
+Pour accéder aux outils de développement Browser, depuis l'onglet **Sessions**, cliquez sur le bouton **Jump to Replay** situé à gauche d'une session. Vous pouvez également cliquer sur une session, puis sur **Replay Session** en haut à droite du [RUM Explorer][1]. 
 
 {{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-beta.png" alt="Bouton Dev Tools" style="width:80%;">}}
 

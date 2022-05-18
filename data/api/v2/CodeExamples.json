@@ -387,6 +387,11 @@
       "group": "logs",
       "suffix": "_3496222707",
       "description": "Send gzip logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "",
+      "description": "Send logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
     }
   ],
   "CreateLogsMetric": [
@@ -445,6 +450,13 @@
       "description": "Delete a tag configuration returns \"No Content\" response"
     }
   ],
+  "EstimateMetricsOutputSeries": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Estimate Output Series - Public v2 API returns \"Success\" response"
+    }
+  ],
   "ListVolumesByMetricName": [
     {
       "group": "metrics",
@@ -476,6 +488,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "List tags by metric name returns \"Success\" response"
+    }
+  ],
+  "SubmitMetrics": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Submit metrics returns \"Payload accepted\" response"
     }
   ],
   "UpdateTagConfiguration": [
@@ -708,6 +727,27 @@
       "group": "service_accounts",
       "suffix": "_819075131",
       "description": "Get one app key owned by this service account returns \"OK\" response"
+    }
+  ],
+  "GetCostByOrg": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get Cost Across Multi-Org Account returns \"OK\" response"
+    }
+  ],
+  "GetUsageApplicationSecurityMonitoring": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Application Security returns \"OK\" response"
+    }
+  ],
+  "GetUsageLambdaTracedInvocations": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Lambda Traced Invocations returns \"OK\" response"
     }
   ],
   "GetUsageObservabilityPipelines": [

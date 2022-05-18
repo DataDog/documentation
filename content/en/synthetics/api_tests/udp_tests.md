@@ -50,7 +50,11 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per UDP test.
 
-{{< img src="synthetics/api_tests/udp_assertions.png" alt="Define assertions for your UDP test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/udp_assertions.png" alt="Define assertions for your UDP test to succeed or fail on" style="width:90%;" >}}
+
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
 ### Select locations
 

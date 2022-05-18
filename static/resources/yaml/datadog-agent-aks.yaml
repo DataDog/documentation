@@ -5,7 +5,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: "datadog"
-    chart: "datadog-2.30.16"
+    chart: "datadog-2.33.5"
     heritage: "Helm"
     release: "datadog"
   name: datadog-cluster-agent
@@ -97,6 +97,7 @@ rules:
       - configmaps
     resourceNames:
       - datadogtoken # Kubernetes event collection state
+      - datadogtoken # Kept for backward compatibility with agent <7.37.0
     verbs:
       - get
       - update
@@ -106,6 +107,7 @@ rules:
       - configmaps
     resourceNames:
       - datadog-leader-election # Leader election token
+      - datadog-leader-election # Kept for backward compatibility with agent <7.37.0
     verbs:
       - get
       - update
@@ -245,6 +247,7 @@ metadata:
   namespace: default
   labels: {}
 spec:
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: datadog
@@ -255,9 +258,11 @@ spec:
       name: datadog
       annotations: {}
     spec:
+      securityContext:
+        runAsUser: 0
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -365,7 +370,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -433,7 +438,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -502,7 +507,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -512,7 +517,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -600,6 +605,7 @@ metadata:
   labels: {}
 spec:
   replicas: 1
+  revisionHistoryLimit: 10
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -618,7 +624,7 @@ spec:
       serviceAccountName: datadog-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:1.18.0"
+          image: "gcr.io/datadoghq/cluster-agent:1.19.0"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:
@@ -647,6 +653,10 @@ spec:
               value: "INFO"
             - name: DD_LEADER_ELECTION
               value: "true"
+            - name: DD_LEADER_LEASE_NAME
+              value: datadog-leader-election
+            - name: DD_CLUSTER_AGENT_TOKEN_NAME
+              value: datadogtoken
             - name: DD_COLLECT_KUBERNETES_EVENTS
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME

@@ -9,7 +9,7 @@ further_reading:
     tag: Blog
     text: Fonctions AWS Lambda exécutées sur des processeurs AWS Graviton2
 aliases:
-  - /fr/serverless/datadog_lambda_library/extension/
+  - /fr/serverless/libraries_integrations/extension/
 ---
 ## Présentation
 

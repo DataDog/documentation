@@ -1,31 +1,32 @@
 ---
-title: Kubernetes Prometheus および OpenMetrics メトリクスの収集
-kind: ドキュメント
 aliases:
-  - /ja/getting_started/prometheus
-  - /ja/getting_started/integrations/prometheus
-  - /ja/agent/openmetrics
-  - /ja/agent/prometheus
+- /ja/getting_started/prometheus
+- /ja/getting_started/integrations/prometheus
+- /ja/agent/openmetrics
+- /ja/agent/prometheus
 further_reading:
-  - link: /agent/kubernetes/log/
-    tag: ドキュメント
-    text: アプリケーションログの収集
-  - link: /agent/kubernetes/apm/
-    tag: ドキュメント
-    text: アプリケーショントレースの収集
-  - link: /agent/kubernetes/integrations/
-    tag: ドキュメント
-    text: アプリケーションのメトリクスとログを自動で収集
-  - link: /agent/guide/autodiscovery-management/
-    tag: ドキュメント
-    text: データ収集をコンテナのサブセットのみに制限
-  - link: /agent/kubernetes/tag/
-    tag: ドキュメント
-    text: コンテナから送信された全データにタグを割り当て
-  - link: /integrations/guide/prometheus-metrics/
-    tag: Documentation
-    text: Datadog メトリクスにおける Prometheus メトリクスのマッピング
+- link: /agent/kubernetes/log/
+  tag: ドキュメント
+  text: アプリケーションログの収集
+- link: /agent/kubernetes/apm/
+  tag: ドキュメント
+  text: アプリケーショントレースの収集
+- link: /agent/kubernetes/integrations/
+  tag: ドキュメント
+  text: アプリケーションのメトリクスとログを自動で収集
+- link: /agent/guide/autodiscovery-management/
+  tag: ドキュメント
+  text: データ収集をコンテナのサブセットのみに制限
+- link: /agent/kubernetes/tag/
+  tag: ドキュメント
+  text: コンテナから送信された全データにタグを割り当て
+- link: /integrations/guide/prometheus-metrics/
+  tag: Documentation
+  text: Datadog メトリクスにおける Prometheus メトリクスのマッピング
+kind: ドキュメント
+title: Kubernetes Prometheus および OpenMetrics メトリクスの収集
 ---
+
 Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] インテグレーションを併用して、Kubernetes 内で実行されているアプリケーションから、公開されている Prometheus および OpenMetrics メトリクスを収集します。
 
 ## 概要
@@ -181,9 +182,9 @@ Openmetrics によりサポートされるすべての[コンフィギュレー�
 ```yaml
 kubernetes_annotations:
   include:
-    - prometheus.io/scrape: "true"
+     prometheus.io/scrape: "true"
   exclude:
-    - prometheus.io/scrape: "false"
+     prometheus.io/scrape: "false"
 ```
 
 **例:**

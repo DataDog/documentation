@@ -7,12 +7,12 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - log collection
+- web
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
 display_name: Resin
 draft: false
 git_integration_title: resin
@@ -28,13 +28,17 @@ metric_prefix: resin.
 metric_to_check: resin.thread_pool.thread_count
 name: resin
 public_title: Intégration Datadog/Resin
-short_description: Surveillez les paramètres de pool de threads et de connexions dans Resin
+short_description: Surveillez les paramètres de pool de threads et de connexions dans
+  Resin
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Resin][1] avec l'Agent Datadog.
@@ -43,7 +47,7 @@ Ce check permet de surveiller [Resin][1] avec l'Agent Datadog.
 
 ### Installation
 
-Le check Resin n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer séparément.
+Le check Resin n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer.
 
 ### Configuration
 
@@ -100,7 +104,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 
 [1]: https://caucho.com/
-[2]: https://github.com/DataDog/integrations-core/blob/master/resin/datadog_checks/resin/data/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-extras/blob/master/resin/datadog_checks/resin/data/conf.yaml.example
 [3]: https://www.caucho.com/resin-4.0/admin/cluster-server.xtp#JVMparameters:settingtheJVMcommandline
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information

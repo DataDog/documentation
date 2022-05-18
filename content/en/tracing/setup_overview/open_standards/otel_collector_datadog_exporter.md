@@ -64,8 +64,9 @@ processors:
 exporters:
   datadog/api:
 
-    tags:
-      - example:tag
+    host_metadata:
+      tags:
+        - example:tag
 
     api:
       key: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

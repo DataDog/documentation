@@ -1,18 +1,19 @@
 ---
-title: タグの付け方
-kind: ドキュメント
 aliases:
-  - /ja/agent/tagging
-  - /ja/getting_started/tagging/assigning_tags
-  - /ja/tagging/assigning_tags/
+- /ja/agent/tagging
+- /ja/getting_started/tagging/assigning_tags
+- /ja/tagging/assigning_tags/
 further_reading:
-  - link: /getting_started/tagging/
-    tag: Documentation
-    text: タグの概要
-  - link: /getting_started/tagging/using_tags/
-    tag: Documentation
-    text: Datadog でのタグの使用方法
+- link: /getting_started/tagging/
+  tag: Documentation
+  text: タグの概要
+- link: /getting_started/tagging/using_tags/
+  tag: Documentation
+  text: Datadog でのタグの使用方法
+kind: ドキュメント
+title: タグの付け方
 ---
+
 ## 概要
 
 タグ付けは、監視するマシンとメトリクスにクエリを実行するために Datadog 全体で使用されます。タグに基づく割り当てと絞り込みの機能がないと、環境内の問題を発見し、絞り込んで根本的な原因を見つけることが難しくなります。先に進む前に、Datadog での[タグの定義][1]方法を学習してください。

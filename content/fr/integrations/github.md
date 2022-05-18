@@ -1,24 +1,29 @@
 ---
 categories:
-  - Source Control
-  - Collaboration
-  - issue tracking
+- Source Control
+- Collaboration
+- issue tracking
 dependencies: []
-description: Identifiez les commits et pull requests qui affectent les performances de vos services.
-doc_link: 'https://docs.datadoghq.com/integrations/github/'
+description: Identifiez les commits et pull requests qui affectent les performances
+  de vos services.
+doc_link: https://docs.datadoghq.com/integrations/github/
 draft: false
 git_integration_title: github
 has_logo: true
 integration_id: github
 integration_title: GitHub
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: github
 public_title: Intégration Datadog/GitHub
-short_description: Identifiez les commits et pull requests qui affectent les performances de vos services.
+short_description: Identifiez les commits et pull requests qui affectent les performances
+  de vos services.
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/github/git_integration_screen.png" alt="Événement Git" popup="true">}}
 
 ## Présentation
@@ -35,7 +40,7 @@ Enregistrez vos commits GitHub dans Datadog pour :
 
 #### GitHub
 
-1. Accédez à la page _Settings_ de votre projet GitHub.
+1. Accédez à la page _Settings_ de votre projet Github.
 2. Sélectionnez l'option _Webhooks_ dans le menu de navigation sur la gauche.
 3. Cliquez sur le bouton _Add Webhook_.
 
@@ -82,12 +87,12 @@ Enregistrez vos commits GitHub dans Datadog pour :
 
 ## Données collectées
 
-Une fois l'intégration terminée, les événements sélectionnés seront ajoutés à votre flux d'événements Datadog. Saisissez `sources:github` dans la barre de recherche en haut à gauche d'un dashboard pour superposer des événements GitHub sur les graphiques.
+Une fois l'intégration terminée, les événements sélectionnés s'affichent dans votre flux d'événements Datadog. Saisissez `sources:github` dans la barre de recherche en haut à gauche d'un dashboard pour superposer des événements GitHub sur les graphiques.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/account/settings#integrations/github
 [3]: https://docs.datadoghq.com/fr/help/

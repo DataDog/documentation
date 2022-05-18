@@ -1,8 +1,8 @@
 ---
 categories:
-  - network
-  - log collection
-  - security
+- network
+- log collection
+- security
 ddtype: crawler
 dependencies: []
 description: L'intégration Meraki permet de recueillir des logs d'événement réseau.
@@ -19,13 +19,15 @@ manifest_version: '1.0'
 name: meraki
 public_title: Intégration Datadog/Meraki
 short_description: Recueillez des logs d'événement de Meraki.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Connectez-vous à Meraki pour intégrer vos logs d'événement réseau Meraki au système de gestion de logs Datadog.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
