@@ -18,9 +18,11 @@ title: 取り込みのメカニズム
 
 取り込まれた各スパンには、このページで説明されているメカニズムのいずれかを参照する一意の**取り込み理由**が付加されています。使用量メトリクス `datadog.estimated_usage.apm.ingested_bytes` と `datadog.estimated_usage.apm.ingested_spans` は `ingestion_reason` によってタグ付けされています。
 
+[取り込み理由ダッシュボード][2]を使って、それぞれの取り込み理由を確認することができます。各メカニズムに起因するボリュームの概要を把握し、どの構成オプションに焦点を当てるべきかを迅速に知ることができます。
+
 ## ヘッドベースサンプリング
 
-デフォルトのサンプリングメカニズムは_ヘッドベースサンプリング_と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、[ルートスパン][2]の開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。
+デフォルトのサンプリングメカニズムは_ヘッドベースサンプリング_と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、[ルートスパン][3]の開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。
 
 この判断はトレースの最初に行われ、その後トレースのすべての部分に伝えられるため、トレースは全体として保持または削除されることが保証されます。
 
@@ -83,7 +85,7 @@ tracer.configure(sampler=DatadogSampler(
 
 取り込みの構成については、[トレーシングライブラリ][1]のドキュメントを参照してください。
 
-**注**: ユーザー定義ルールで構成されたサービスは、[Ingestion Control Page][3] Configuration 列に `Configured` と表示されます。デフォルトのメカニズムを使用するように構成されたサービスは、`Automatic` と表示されます。
+**注**: ユーザー定義ルールで構成されたサービスは、[Ingestion Control Page][4] Configuration 列に `Configured` と表示されます。デフォルトのメカニズムを使用するように構成されたサービスは、`Automatic` と表示されます。
 
 ## 強制維持と削除
 `ingestion_reason: manual`
@@ -194,10 +196,10 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 
 | 製品    | 取り込み理由                    | 取り込みのメカニズムの説明 |
 |------------|-------------------------------------|---------------------------------|
-| Synthetic モニタリング | `synthetics` と `synthetics-browser` | HTTP テストやブラウザテストでは、バックエンドのサービスがインスツルメントされると、トレースが生成されます。[Synthetic テスト][4]の実行からバックエンドトレースを見つけます。
-| リアルユーザーモニタリング (RUM)        | `RUM`                               | ウェブアプリケーションやモバイルアプリケーションからのブラウザリクエストは、バックエンドサービスがインスツルメントされると、トレースを生成します。[RUM ブラウザセッション][5]とリソースからバックエンドトレースを見つけます。 |
-| サーバーレス | `lambda` と `xray`                   | Datadog トレーシングライブラリまたは AWS X-Ray インテグレーションでトレースした[サーバーレスアプリケーション][6]から受信したトレース。 |
-| アプリケーションセキュリティモニタリング     | `appsec`                            | Datadog トレーシングライブラリから取り込まれたトレースで、[ASM][7] によって脅威としてフラグが立てられたもの。 |
+| Synthetic モニタリング | `synthetics` と `synthetics-browser` | HTTP テストやブラウザテストでは、バックエンドのサービスがインスツルメントされると、トレースが生成されます。[Synthetic テスト][5]の実行からバックエンドトレースを見つけます。
+| リアルユーザーモニタリング (RUM)        | `RUM`                               | ウェブアプリケーションやモバイルアプリケーションからのブラウザリクエストは、バックエンドサービスがインスツルメントされると、トレースを生成します。[RUM ブラウザセッション][6]とリソースからバックエンドトレースを見つけます。 |
+| サーバーレス | `lambda` と `xray`                   | Datadog トレーシングライブラリまたは AWS X-Ray インテグレーションでトレースした[サーバーレスアプリケーション][7]から受信したトレース。 |
+| アプリケーション セキュリティ モニタリング     | `appsec`                            | Datadog トレーシングライブラリから取り込まれたトレースで、[ASM][8] によって脅威としてフラグが立てられたもの。 |
 
 
 ## その他の参考資料
@@ -205,9 +207,10 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/setup_overview/setup/
-[2]: /ja/tracing/visualization/#trace-root-span
-[3]: /ja/tracing/trace_ingestion/control_page
-[4]: /ja/synthetics/apm/
-[5]: /ja/real_user_monitoring/connect_rum_and_traces/
-[6]: /ja/serverless/distributed_tracing/
-[7]: /ja/security_platform/application_security/
+[2]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
+[3]: /ja/tracing/visualization/#trace-root-span
+[4]: /ja/tracing/trace_ingestion/control_page
+[5]: /ja/synthetics/apm/
+[6]: /ja/real_user_monitoring/connect_rum_and_traces/
+[7]: /ja/serverless/distributed_tracing/
+[8]: /ja/security_platform/application_security/

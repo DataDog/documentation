@@ -136,6 +136,10 @@ return jQuery().jquery.startsWith('3.5.1')
 
 **注**: ダウンロードのテスト方法の詳細については、[この専用ガイド][6]をご覧ください。
 
+テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+
+テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
+
 ### ナビゲーション
 
 {{< img src="synthetics/browser_tests/navigation_step.png" alt="ブラウザテストナビゲーションステップ" style="width:60%;">}}

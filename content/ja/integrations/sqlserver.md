@@ -28,7 +28,7 @@ git_integration_title: sqlserver
 guid: 635cb962-ee9f-4788-aa55-a7ffb9661498
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 7.6.2
+integration_version: 8.0.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

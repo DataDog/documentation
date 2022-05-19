@@ -27,7 +27,7 @@ git_integration_title: coredns
 guid: 9b316155-fc8e-4cb0-8bd5-8af270759cfb
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

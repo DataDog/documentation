@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Kubernetes Metrics Server - Overview: assets/dashboards/overview.json
   logs: {}
@@ -7,18 +9,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - orchestration
-  - コンテナ
+- orchestration
+- コンテナ
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
+- https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_name: Kube メトリクスサーバー
 draft: false
 git_integration_title: kube_metrics_server
 guid: 7a477937-4db8-4277-bd58-9e56ac064185
 integration_id: kube-metrics-server
 integration_title: Kubernetes Metrics Server
+integration_version: 2.2.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -30,10 +33,13 @@ public_title: Datadog-Kubernetes Metrics Server インテグレーション
 short_description: Kubernetes Metrics Server の監視
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Kubernetes Control Plane によって使用されるコンポーネントである [Kube_metrics_server][1] v0.3.0+ を監視します。
@@ -111,7 +117,7 @@ kube_metrics_server には、イベントは含まれません。
 
 
 [1]: https://github.com/kubernetes-incubator/metrics-server
-[2]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

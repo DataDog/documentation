@@ -1,11 +1,12 @@
 ---
-title: Utiliser l'Agent Datadog pour la collecte de logs ou de traces uniquement
 aliases:
-  - /fr/logs/faq/how-to-set-up-only-logs
+- /fr/logs/faq/how-to-set-up-only-logs
 kind: documentation
+title: Utiliser l'Agent Datadog pour la collecte de logs uniquement
 ---
+
 <div class="alert alert-danger">
-Pour configurer la collecte de logs et/ou de traces sans métriques, vous devez désactiver certaines charges utiles. Cette opération pour entraîner la perte de métadonnées et de tags pour les logs et traces que vous recueillez. Nous vous déconseillons d'appliquer cette configuration. Pour en savoir plus sur ses répercussions, contactez <a href="/help/">l'assistance Datadog</a>.
+Pour configurer la collecte de logs sans métriques d'infrastructure, vous devez désactiver certaines charges utiles. Cette opération peut entraîner la perte de métadonnées et de tags pour les logs que vous recueillez. Datadog vous déconseille d'appliquer cette configuration. Pour en savoir plus sur ses répercussions, contactez <a href="/help/">l'assistance Datadog</a>.
 </div>
 
 Pour désactiver des charges utiles, vous devez exécuter la version 6.4 de l'Agent ou une version ultérieure. Les étapes suivantes vous permettent de désactiver l'envoi de données des métriques afin de ne plus afficher les hosts dans Datadog :
@@ -37,6 +38,7 @@ Si vous utilisez l'Agent de conteneur, définissez les variables d'environnement
 
 ```shell
 docker run -d --name datadog-agent \
+           --cgroupns host \
            -e DD_API_KEY=<CLÉ_API_DATADOG> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -91,7 +93,7 @@ spec:
     spec:
       serviceAccountName: datadog-agent
       containers:
-      - image: gcr.io/datadog/agent:latest
+      - image: gcr.io/datadoghq/agent:latest
         imagePullPolicy: Always
         name: datadog-agent
         ports:
@@ -100,15 +102,9 @@ spec:
             ## la collecte de métriques custom.
             ## Définir DD_DOGSTATSD_NON_LOCAL_TRAFFIC sur « true » pour recueillir les métriques StatsD
             ## issues d'autres conteneurs.
-            #
-            # hostPort: 8125
+            ## hostPort: 8125
             name: dogstatsdport
             protocol: UDP
-          - containerPort: 8126
-            ## Collecte de traces (APM) - retirer la mise en commentaire de cette section pour activer l'APM
-            # hostPort: 8126
-            name: traceport
-            protocol: TCP
         env:
           ## Configurer la clé d'API Datadog associée à votre organisation
           ## En cas d'utilisation du secret Kubernetes, utiliser la variable d'environnement suivante :
@@ -119,8 +115,8 @@ spec:
           - {name: DD_SITE, value: "<VOTRE_SITE_DD>"}
 
           ## Chemin vers le socket Docker
-           - {name: DD_CRI_SOCKET_PATH, value:/host/var/run/docker/sock}
-           - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
+          - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
+          - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
 
           ## Définir DD_DOGSTATSD_NON_LOCAL_TRAFFIC sur true pour activer la collecte StatsD.
           - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
@@ -130,14 +126,15 @@ spec:
           - {name: DD_LEADER_ELECTION, value: "true" }
           - {name: DD_APM_ENABLED, value: "true" }
 
-           ## Activer la collecte de logs
+          ## Activer la collecte de logs
           - {name: DD_LOGS_ENABLED, value: "true"}
           - {name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL, value: "true"}
-           - {name: DD_CONTAINER_EXCLUDE, value: "name:datadog-agent"}
+          - {name: DD_CONTAINER_EXCLUDE, value: "name:datadog-agent"}
+
           ## Envoyer uniquement des logs
           - {name: DD_ENABLE_PAYLOADS_EVENTS, value: "false"}
           - {name: DD_ENABLE_PAYLOADS_SERIES, value: "false"}
-          - {name: DD_ENABLE_PAYLOADS_SERVICES_CHECKS, value: "false"}
+          - {name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS, value: "false"}
           - {name: DD_ENABLE_PAYLOADS_SKETCHES, value: "false"}
 
           - name: DD_KUBERNETES_KUBELET_HOST
@@ -158,13 +155,12 @@ spec:
             memory: "256Mi"
             cpu: "200m"
         volumeMounts:
-          - {name: dockersocketdir, mountPath: /host/var/run/docker.sock}
+          - {name: dockersocketdir, mountPath: /host/var/run}
           - {name: procdir, mountPath: /host/proc, readOnly: true}
           - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
           - {name: s6-run, mountPath: /var/run/s6}
           - {name: logpodpath, mountPath: /var/log/pods}
           - {name: pointdir, mountPath: /opt/datadog-agent/run}
-
           ## Répertoire du runtime Docker : remplacer ce chemin par celui du répertoire de vos logs
           ## de runtime de conteneur, ou supprimer cette configuration si `/var/log/pods`
           ## n'est pas un lien symbolique vers un autre répertoire.
