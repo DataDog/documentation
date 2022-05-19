@@ -2,6 +2,9 @@
 # Create a new file called Makefile.config using this file as a template for your local config
 
 GITHUB_TOKEN := ${github_personal_token}
+LANGS_TO_IGNORE := "ja fr"
+DD_API_KEY := ${datadog_api_key}
+DD_APP_KEY := ${datadog_application_key}
 CREATE_I18N_PLACEHOLDERS:= false
 PULL_RBAC_PERMISSIONS := true
 DD_API_KEY := ${datadog_api_key}
