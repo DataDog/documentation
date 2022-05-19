@@ -61404,7 +61404,7 @@
     },
     "/api/v2/metrics/{metric_name}/estimate": {
       "get": {
-        "description": "Returns a cardinality estimate for a metric with a given tag, percentile, and number of aggregations configuration.",
+        "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
         "operationId": "EstimateMetricsOutputSeries",
         "parameters": [
           {
@@ -61418,7 +61418,7 @@
             }
           },
           {
-            "description": "Filtered tag groups that the metric is configured to query with.",
+            "description": "Filtered tag keys that the metric is configured to query with.",
             "example": "app,host",
             "in": "query",
             "name": "filter[groups]",
@@ -61649,7 +61649,7 @@
             "AuthZ": []
           }
         ],
-        "summary": "Estimate Output Series - Public v2 API",
+        "summary": "Tag Configuration Cardinality Estimator",
         "tags": [
           "Metrics"
         ],

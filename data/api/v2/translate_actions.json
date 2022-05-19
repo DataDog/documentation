@@ -310,8 +310,8 @@
     "summary": "List tags by metric name"
   },
   "EstimateMetricsOutputSeries": {
-    "description": "Returns a cardinality estimate for a metric with a given tag, percentile, and number of aggregations configuration.",
-    "summary": "Estimate Output Series - Public v2 API"
+    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
+    "summary": "Tag Configuration Cardinality Estimator"
   },
   "DeleteTagConfiguration": {
     "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",

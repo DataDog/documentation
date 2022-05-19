@@ -450,13 +450,6 @@
       "description": "Delete a tag configuration returns \"No Content\" response"
     }
   ],
-  "EstimateMetricsOutputSeries": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "Estimate Output Series - Public v2 API returns \"Success\" response"
-    }
-  ],
   "ListVolumesByMetricName": [
     {
       "group": "metrics",
@@ -495,6 +488,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "Submit metrics returns \"Payload accepted\" response"
+    }
+  ],
+  "EstimateMetricsOutputSeries": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Tag Configuration Cardinality Estimator returns \"Success\" response"
     }
   ],
   "UpdateTagConfiguration": [
