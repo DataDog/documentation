@@ -1,4 +1,11 @@
 {
+  "UpdateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Update an AWS integration returns \"OK\" response"
+    }
+  ],
   "Validate": [
     {
       "group": "authentication",
