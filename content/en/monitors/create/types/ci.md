@@ -26,7 +26,7 @@ further_reading:
 
 Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline monitor or a CI Test monitor.
 
-CI monitors allow you to visualize CI data and set up alerts on it. For example, use a CI Pipeline monitor to receive alerts on a failed pipeline, and use a CI Test monitor to receive alerts on failed tests or slow tests.
+CI monitors allow you to visualize CI data and set up alerts on it. For example, use a CI Pipeline monitor to receive alerts on a failed pipeline or a job, and use a CI Test monitor to receive alerts on failed tests or slow tests.
 
 ## Monitor creation
 
@@ -83,7 +83,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 3. Group CI Test events by multiple dimensions (optional):
    All CI Test events matching the query are aggregated into groups based on the value of up to four facets.
 4. Configure the alerting grouping strategy (optional):
-   * If the query has a `group by`, you will receive an alert for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` (a combination of test bundle, test suite and test name, e.g. `MyBundle.MySuite.myTest`) to receive a separate alert for each CI Test full name when the number of errors is high.
+   * If the query has a `group by`, you will receive an alert for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` (which is a combination of a test bundle, test suite and test name, e.g. `MyBundle.MySuite.myTest`) to receive a separate alert for each CI Test full name when the number of errors is high.
 
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:80%;" >}}
 
@@ -91,7 +91,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way alerts will trigger for test runs with specific test parameters or configurations.
 
 For example, if a test with the same full name failed on Chrome browser, but it didn't fail on Firefox, the alert will be triggered for the test run on Chrome.
-Using `@test.full_name` in case if you have different test parameters or configurations might lead to incorrect behaviour.
+Using `@test.full_name` in this case might lead to incorrect behaviour.
 
 Test fingerpint is a hash value calculated using the following attributes:
 ```
