@@ -24,9 +24,9 @@ further_reading:
 
 ## Overview
 
-Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline monitor or a CI Test monitor.
+Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline or Test monitor.
 
-CI monitors allow you to visualize CI data and set up alerts on it. For example, use a CI Pipeline monitor to receive alerts on a failed pipeline or a job, and use a CI Test monitor to receive alerts on failed tests or slow tests.
+CI monitors allow you to visualize CI data and set up alerts on it. For example, use a CI Pipeline monitor to receive alerts on a failed pipeline or a job, and use a CI Test monitor to receive alerts on failed or slow tests.
 
 ## Monitor creation
 
@@ -75,7 +75,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 
 ### Define the search query
 
-1. Construct a search query using the same logic as a CI Test explorer search. For example, we can search failed tests for `main` branch using the following query: `@test.status:fail @git.branch:main`
+1. Construct a search query using the same logic as a CI Test explorer search. For example, we can search failed tests for a branch `main` using the following query: `@test.status:fail @git.branch:main`
 2. Choose to monitor over a CI Test event count, facet, or measure:
     * **Monitor over a CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Test events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a dimension**: If a dimension (qualitative facet) is selected, the monitor alerts over the `Unique value count` of the facet.
@@ -90,7 +90,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 #### Test runs with different parameters or configurations
 If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way alerts will trigger for test runs with specific test parameters or configurations.
 
-For example, if a test with the same full name failed on Chrome browser, but it didn't fail on Firefox, the alert will be triggered for the test run on Chrome.
+For example, if a test with the same full name failed on Chrome, but passed on Firefox, then using the fingerprint will only trigger the alert on the Chrome test run.
 Using `@test.full_name` in this case might lead to incorrect behaviour.
 
 Test fingerpint is a hash value calculated using the following attributes:
