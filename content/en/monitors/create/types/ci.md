@@ -26,11 +26,11 @@ further_reading:
 
 Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline or Test monitor.
 
-CI monitors allow you to visualize CI data and set up alerts on it. For example, use a CI Pipeline monitor to receive alerts on a failed pipeline or a job, and use a CI Test monitor to receive alerts on failed or slow tests.
+CI monitors allow you to visualize CI data and set up alerts on it. For example, create a CI Pipeline monitor to receive alerts on a failed pipeline or a job. Create a CI Test monitor to receive alerts on failed or slow tests.
 
 ## Monitor creation
 
-To create a [CI Pipeline monitor][2] or [CI Test monitor][3] in Datadog, use the main navigation: *Monitors -> New Monitor --> CI*.
+To create a [CI monitor][2] in Datadog, use the main navigation: *Monitors -> New Monitor --> CI*.
 
 <div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 CI monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
@@ -46,7 +46,7 @@ Choose between a **Pipelines** or **Tests** monitor:
     * **Monitor over the `Pipeline` level**: If the `Pipeline` level is selected, the monitor will only include pipeline events for evaluation, which represent the execution of an entire pipeline, usually composed of one or more jobs.
     * **Monitor over the `Stage` level**: If the `Stage` level is selected, the monitor will only include stage events for evaluation, which represent the execution of a group of one or more jobs in CI providers that support it.
     * **Monitor over the `Job` level**: If the `Job` level is selected, the monitor will only include job events for evaluation, which represent the execution of a group of commands.
-    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][6] events for evaluation, which represent individual commands being executed in a job.
+    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][5] events for evaluation, which represent individual commands being executed in a job.
     * **Monitor over all levels**: If the `All` level is selected, the monitor will include all types of events for evaluation.
 
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
@@ -88,33 +88,10 @@ The following example is of a pipeline error rate monitor using a formula that c
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:80%;" >}}
 
 #### Test runs with different parameters or configurations
-If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way alerts will trigger for test runs with specific test parameters or configurations.
+If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way alerts will trigger for test runs with specific test parameters or configurations. Using `@test.fignerpint` provides the same granularity level as the Test Stats, Failed and Flaky Tests section on the Commit Overview page.
 
 For example, if a test with the same full name failed on Chrome, but passed on Firefox, then using the fingerprint will only trigger the alert on the Chrome test run.
 Using `@test.full_name` in this case might lead to incorrect behaviour.
-
-Test fingerpint is a hash value calculated using the following attributes:
-```
-Test service name: test.service
-Test full name:
-  test.suite
-  test.name
-  test.bundle
-Test parameters: test.parameters
-Test configuration:
-  os.platform
-  os.version
-  os.arch
-  runtime.name
-  runtime.version
-  runtime.vendor
-  runtime.architecture
-  device.model
-  device.name
-  ui.localization
-  ui.orientation
-  ui.appearance
-```
 
 #### Formulas and functions
 
@@ -136,11 +113,11 @@ The following example is a test error rate monitor using a formula that calculat
 
 #### Advanced alert conditions
 
-For detailed instructions on the advanced alert options (such as evaluation delay), see the [Monitor configuration][4] page.
+For detailed instructions on the advanced alert options (such as evaluation delay), see the [Monitor configuration][3] page.
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
 #### Notifications behavior when there is no data
 
@@ -163,6 +140,5 @@ This notification will only be sent for monitor alerts!
 
 [1]: /continuous_integration/
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
-[3]: https://app.datadoghq.com/monitors/create/ci-tests
-[4]: /monitors/create/configuration/#advanced-alert-conditions
-[5]: /monitors/notify/
+[3]: /monitors/create/configuration/#advanced-alert-conditions
+[4]: /monitors/notify/
