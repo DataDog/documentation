@@ -111,6 +111,9 @@ Your monitors are not evaluated beyond a 48 hour window. If you need to use a lo
   * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
   * Four facets results in a limit of five top values per group (at most 625 groups)
 
+### Recovery thresholds in monitors are no longer supported
+Event monitor thresholds no longer support the `warning_recovery` and `critical_recovery` threshold types. Recovery thresholds need to be removed in new Event monitors.
+
 If you are using these features, [contact Support][6] to get help finding an alternative solution.
 
 ## Examples
