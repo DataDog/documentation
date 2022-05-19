@@ -23,7 +23,18 @@ Supported test frameworks:
 
 ## Prerequisites
 
-[Install the Datadog Agent to collect tests data][1].
+{{< tabs >}}
+{{% tab "Cloud" %}}
+[Use the Agentless mode to collect tests data][1]
+
+[1]:/continuous_integration/setup_tests/agentless/
+{{% /tab %}}
+{{% tab "On-Premises" %}}
+[Install the Datadog Agent to collect tests data][1]
+
+[1]: /continuous_integration/setup_tests/agent/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Installing the Java tracer
 
@@ -242,6 +253,5 @@ If you need to use a previous version of the tracer, you can configure CI Visibi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/setup_tests/agent/
 [2]: /tracing/setup_overview/setup/java/?tab=containers#configuration
 [3]: /tracing/setup_overview/compatibility_requirements/java
