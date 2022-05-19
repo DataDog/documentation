@@ -1,7 +1,10 @@
 ---
 aliases: null
 description: Datadog Agent による OTLP トレースデータの取り込み
-further_reading: null
+further_reading:
+- link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/
+  tag: ブログ
+  text: Agent における OTLP の取り込み
 kind: documentation
 title: Datadog Agent による OTLP トレースの取り込み
 ---
@@ -238,6 +241,10 @@ experimental:
 {{< /tabs >}}
 
 Datadog Agent でサポートされている環境変数や設定は、他にも多数あります。それらすべての概要を知るには、[構成テンプレート][5]を参照してください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/
 [2]: /ja/metrics/otlp/
