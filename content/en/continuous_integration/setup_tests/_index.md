@@ -7,6 +7,7 @@ To gather test suite results, performance, and reliability data, first set up th
 
 {{< whatsnext desc="1. Setting up and configuring the Agent:" >}}
     {{< nextlink href="continuous_integration/setup_tests/agent" >}}Installing the Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/agentless" >}}Collecting Test data using the Agentless mode{{< /nextlink >}}
     {{< nextlink href="continuous_integration/setup_tests/containers" >}}Forwarding Environment Variables for Tests in Containers{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="2. Setting up test instrumentation in these languages:" >}}
