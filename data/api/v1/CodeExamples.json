@@ -439,6 +439,16 @@
     },
     {
       "group": "monitors",
+      "suffix": "_1969035628",
+      "description": "Create a ci-tests formula and functions monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2520912138",
+      "description": "Create a ci-tests monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
     },
