@@ -107,7 +107,7 @@ Override the default trace Agent port for DogStatsD metric submission.
 
 `DD_TRACE_AGENT_PORT`
 : **Default**: `8126` <br>
-Override the default trace Agent port for datadog trace submission.
+Override the default trace Agent port for Datadog trace submission.
 
 `DD_TRACE_SAMPLE_RATE`
 : Enable ingestion rate control.
