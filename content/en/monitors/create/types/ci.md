@@ -46,7 +46,7 @@ Choose between a **Pipelines** or **Tests** monitor:
     * **Monitor over the `Pipeline` level**: If the `Pipeline` level is selected, the monitor will only include pipeline events for evaluation, which represent the execution of an entire pipeline, usually composed of one or more jobs.
     * **Monitor over the `Stage` level**: If the `Stage` level is selected, the monitor will only include stage events for evaluation, which represent the execution of a group of one or more jobs in CI providers that support it.
     * **Monitor over the `Job` level**: If the `Job` level is selected, the monitor will only include job events for evaluation, which represent the execution of a group of commands.
-    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][5] events for evaluation, which represent individual commands being executed in a job.
+    * **Monitor over the `Command` level**: If the `Command` level is selected, the monitor will only include manually instrumented [custom command][1] events for evaluation, which represent individual commands being executed in a job.
     * **Monitor over all levels**: If the `All` level is selected, the monitor will include all types of events for evaluation.
 
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
@@ -70,6 +70,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 
 <div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
 
+[1]: /continuous_integration/setup_pipelines/custom_commands/
 {{% /tab %}}
 {{% tab "Tests" %}}
 
