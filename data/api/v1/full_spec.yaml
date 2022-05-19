@@ -11439,6 +11439,50 @@ components:
           format: int64
           type: integer
       type: object
+    SyntheticsBrowserTestRumSettings:
+      description: 'The RUM data collection settings for the Synthetic browser test.
+
+        **Note:** There are 3 ways to format RUM settings:
+
+
+        `{ isEnabled: false }`
+
+        RUM data is not collected.
+
+
+        `{ isEnabled: true }`
+
+        RUM data is collected from the Synthetic test''s default application.
+
+
+        `{ isEnabled: true, applicationId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        clientTokenId: 12345 }`
+
+        RUM data is collected using the specified application.'
+      example:
+        applicationId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        clientTokenId: 12345
+        isEnabled: true
+      properties:
+        applicationId:
+          description: RUM application ID used to collect RUM data for the browser
+            test.
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          type: string
+        clientTokenId:
+          description: RUM application API key ID used to collect RUM data for the
+            browser test.
+          example: 12345
+          format: int64
+          type: integer
+          x-secret: true
+        isEnabled:
+          description: Determines whether RUM data is collected during test runs.
+          example: true
+          type: boolean
+      required:
+      - isEnabled
+      type: object
     SyntheticsBrowserTestType:
       default: browser
       description: Type of the Synthetic test, `browser`.
@@ -12534,6 +12578,8 @@ components:
           $ref: '#/components/schemas/SyntheticsRestrictedRoles'
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        rumSettings:
+          $ref: '#/components/schemas/SyntheticsBrowserTestRumSettings'
         tick_every:
           description: The frequency at which to run the Synthetic test (in seconds).
           format: int64

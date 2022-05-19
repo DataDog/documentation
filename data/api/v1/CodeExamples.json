@@ -667,6 +667,11 @@
   "CreateSyntheticsBrowserTest": [
     {
       "group": "synthetics",
+      "suffix": "_2932742688",
+      "description": "Create a browser test returns \"OK - Returns saved rumSettings.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "",
       "description": "Create a browser test returns \"OK - Returns the created test details.\" response"
     }
