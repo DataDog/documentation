@@ -1721,7 +1721,7 @@ main:
     parent: setup_tests
     identifier: ci_agent
     weight: 101
-  - name: Using the Agentless mode
+  - name: Agentless Mode for Cloud Providers
     url: continuous_integration/setup_tests/agentless/
     parent: setup_tests
     identifier: ci_agentless
