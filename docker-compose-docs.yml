@@ -4,6 +4,6 @@ services:
     image: public.ecr.aws/x2b9z2t7/webops/site-build:main
     command: "./startup.sh ${GITHUB_TOKEN} '${LANGS_TO_IGNORE}'"
     volumes:
-      - "/Users/colin.cole/guac/projects/documentation:/src:cached"
+      - "/Users/colin.cole/guac/projects/documentation:/src:delegated"
     ports:
       - "1313:1313"
