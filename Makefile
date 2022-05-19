@@ -276,3 +276,13 @@ examples/typescript: examples/datadog-api-client-typescript clean-typescript-exa
 	-cp -Rn examples/datadog-api-client-typescript/examples/v* ./content/en/api
 
 examples: examples/go examples/java examples/python examples/ruby examples/typescript
+
+.PHONY: start
+start-docker: clean
+	GITHUB_TOKEN=${GITHUB_TOKEN} \
+  LANGS_TO_IGNORE=${LANGS_TO_IGNORE} \
+	docker-compose -f ./docker-compose-docs.yml up
+
+.PHONY: stop
+stop-docker:
+	docker-compose -f ./docker-compose-docs.yml down

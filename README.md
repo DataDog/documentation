@@ -125,5 +125,7 @@ Prerequsites:
 1. Go to project root
 2. Make a copy of `Makefile.config.example` called `Makefile.config`
 3. Enter value for `GITHUB_TOKEN`
-4. Run `make -f ./Makefile.docker start`
+4. Run `make start-docker`
+
+To stop the app, hit Ctrl-C or run `make stop-docker`
 
