@@ -84,7 +84,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 3. Group CI Test events by multiple dimensions (optional):
    All CI Test events matching the query are aggregated into groups based on the value of up to four facets.
 4. Configure the alerting grouping strategy (optional):
-   * If the query has a `group by`, you will receive an alert for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` (which is a combination of a test bundle, test suite and test name, e.g. `MyBundle.MySuite.myTest`) to receive a separate alert for each CI Test full name when the number of errors is high.
+   * If the query has a `group by`, you will receive an alert for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` to receive a separate alert for each CI Test full name when the number of errors is high. Test full name is a combination of a test suite and test name, e.g. `MySuite.myTest`. In Swift test full name is a combination of a test bundle, suite and name, e.g. `MyBundle.MySuite.myTest`.
 
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:80%;" >}}
 
