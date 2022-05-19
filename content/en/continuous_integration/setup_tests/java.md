@@ -32,7 +32,7 @@ Supported test frameworks:
 {{% tab "On-Premises" %}}
 [Install the Datadog Agent to collect tests data][1]
 
-[1]: /continuous_integration/setup_tests/agent/
+[1]:/continuous_integration/setup_tests/agent/
 {{% /tab %}}
 {{< /tabs >}}
 
