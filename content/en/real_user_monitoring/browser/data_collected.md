@@ -256,7 +256,7 @@ Source errors include code-level information about the error. More information a
 [3]: /help/
 [4]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
 [5]: /synthetics/browser_tests/
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#how-is-loading-time-calculated
+[6]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [7]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
