@@ -90,7 +90,7 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
 
-**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][9], available on the [Apple App Store][10] and Google Play Store[17].
+**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][9], available on the [Apple App Store][10] and [Google Play Store][17].
 
 {{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
 
