@@ -17,4 +17,9 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/slo-checklist" >}}SLO Checklist{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}How to set up RBAC for Monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create Monitors in Synthetic Tests{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}Create monitor dependencies{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/anomaly-monitor" >}}Anomaly Monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}Export Monitor Alerts to CSV{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting" >}}Set up an alert for when a specific tag stops reporting{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
 {{< /whatsnext >}}

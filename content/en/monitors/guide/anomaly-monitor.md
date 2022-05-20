@@ -1,6 +1,8 @@
 ---
-title: Anomaly Monitor FAQ
-kind: faq
+title: Anomaly Monitors
+kind: guide
+aliases:
+- /monitors/faq/anomaly-monitor.md
 ---
 
 ### Should I use anomaly detection for everything?
