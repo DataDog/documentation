@@ -61,6 +61,10 @@ Synthetic テストの gRPC のユースケースについて、<a href="https:/
 
 {{< img src="synthetics/api_tests/assertions_grpc.png" alt="gRPC テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
 
+テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+
+テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
+
 ### ロケーションを選択する
 
 gRPC ヘルスチェックテストを実行する **Locations** を選択します。gRPC ヘルスチェックテストは、ヘルスチェックテストをネットワークの外部から実行するか内部から実行するかに応じて、[管理ロケーション][2]と[プライベートロケーション][3]の両方から実行することができます。

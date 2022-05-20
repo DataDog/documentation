@@ -125,6 +125,6 @@ Each color block represents a unique tag value for each tag.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-the-list-of-available-monthly-custom-reports
-[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-the-list-of-available-daily-custom-reports
+[1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
+[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags

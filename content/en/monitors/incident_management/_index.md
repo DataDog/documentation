@@ -65,6 +65,14 @@ You can also add a monitor to an existing incident.
 
 {{< img src="monitors/incidents/existing.png" alt="Add a monitor to an existing incident" style="width:80%;">}}
 
+#### From a Security Signal
+
+Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
+
+Declare an incident from an Application Security Monitoring signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
+
+{{< img src="monitors/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
+
 #### From the Incidents page
 
 In the [Datadog UI][1], click **New Incident** to create an incident.

@@ -15,21 +15,22 @@ assets:
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
-  - オーケストレーション
-  - コンテナ
-  - ログの収集
-  - web
-  - ネットワーク
+- オーケストレーション
+- コンテナ
+- ログの収集
+- web
+- ネットワーク
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_name: nginx-ingress-controller
 draft: false
 git_integration_title: nginx_ingress_controller
 guid: 27f6a498-6b3e-41b0-bec4-68db4d3322c3
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -41,19 +42,23 @@ public_title: Datadog-nginx-ingress-controller インテグレーション
 short_description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
-このチェックは、Kubernetes の [NGINX Ingress Controller][1] を監視します。
+このチェックでは、Kubernetes の [NGINX Ingress Controller][1] を監視します。F5 NGINX Ingress Controller を監視するには、[NGINX Prometheus Exporter][3] が提供するリストから目的のメトリクスを監視するように [Datadog Prometheus インテグレーション][2]をセットアップしてください。
+
 
 ## セットアップ
 
 ### インストール
 
-`nginx-ingress-controller` チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
+`nginx-ingress-controller` チェックは [Datadog Agent][4] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
@@ -62,7 +67,7 @@ supported_os:
 
 #### ホスト
 
-Agent がホストで実行されている場合に NGINX Ingress Controller のメトリクスの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `nginx_ingress_controller.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nginx_ingress_controller.d/conf.yaml][1] を参照してください。次に、[Agent を起動][2]します。
+Agent がホストで実行されている場合は、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `nginx_ingress_controller.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nginx_ingress_controller.d/conf.yaml][1] を参照してください。次に、[Agent を再起動][2]します。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
@@ -91,7 +96,7 @@ Agent がホストで実行されている場合に NGINX Ingress Controller の
 | `<初期コンフィギュレーション>`      | `[{},{}]`                                                                                                          |
 | `<インスタンスコンフィギュレーション>`  | `[{"nginx_status_url": "http://%%host%%:18080/nginx_status"},{"prometheus_url": "http://%%host%%:10254/metrics"}]` |
 
-使用可能なすべての構成オプションの詳細については、[sample nginx_ingress_controller.d/conf.yaml][2] を参照してください。
+使用可能なすべての構成オプションの詳細については、[sample nginx_ingress_controller.d/conf.yaml][5] を参照してください。
 
 **注**: `nginx-ingress-controller` の 0.23.0 以降のバージョンでは、ポート`18080` でリッスンしている `nginx` サーバーは削除されました。構成 ConfigMap に次の `http-snippet` を追加することで復元できます。
 
@@ -115,7 +120,7 @@ Agent がホストで実行されている場合に NGINX Ingress Controller の
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][6]を参照してください。
 
 | パラメーター      | 値                                                              |
 | -------------- | ------------------------------------------------------------------ |
@@ -123,7 +128,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][4]し、Checks セクションで `nginx_ingress_controller` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `nginx_ingress_controller` を探します。
 
 ## 収集データ
 
@@ -141,11 +146,14 @@ NGINX Ingress Controller には、サービスのチェック機能は含まれ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://kubernetes.github.io/ingress-nginx
-[2]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/prometheus/
+[3]: https://github.com/nginxinc/nginx-prometheus-exporter#exported-metrics
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/help/

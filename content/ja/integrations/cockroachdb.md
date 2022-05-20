@@ -10,20 +10,21 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - cloud
-  - data store
-  - オートディスカバリー
-  - ログの収集
+- cloud
+- data store
+- オートディスカバリー
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md
 display_name: CockroachDB
 draft: false
 git_integration_title: cockroachdb
 guid: d66151ed-2e98-4037-ad89-bf4400e45f34
 integration_id: cockroachdb
 integration_title: CockroachDB
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -35,10 +36,13 @@ public_title: Datadog-CockroachDB インテグレーション
 short_description: CockroachDB クラスターの全体的な健全性とパフォーマンスを監視
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 CockroachDB チェックは、[CockroachDB][1] クラスターの全体的な健全性とパフォーマンスを監視します。
@@ -59,9 +63,24 @@ CockroachDB チェックは [Datadog Agent][2] パッケージに含まれてい
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
+##### メトリクスの収集
+
 1. CockroachDB のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `cockroachdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cockroachdb.d/conf.yaml][2] を参照してください。
 
+   ```yaml
+   init_config:
+
+   instances:
+       ## @param openmetrics_endpoint - string - required
+       ## The URL exposing metrics in the OpenMetrics format.
+       #
+     - openmetrics_endpoint: http://localhost:8080/_status/vars
+   ```
+
 2. [Agent を再起動します][3]。
+
+**注**: 現在のバージョンのチェック (1.9.0+) は、メトリクスの収集に [OpenMetrics][4] の新しい実装を使用しており、これは Python 3 を必要とします。Python 3 を使用できないホスト、またはこのチェックのレガシーバージョンを使用する場合は、次の[構成][5]を参照してください。
+
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
@@ -93,6 +112,8 @@ _Agent バージョン 6.0 以降で利用可能_
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 [2]: https://github.com/DataDog/integrations-core/blob/master/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/integrations/openmetrics/
+[5]: https://github.com/DataDog/integrations-core/blob/7.33.x/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -108,7 +129,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ##### ログの収集
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
 次に、[ログインテグレーション][2]を Docker ラベルとして設定します。
 
