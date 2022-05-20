@@ -26,7 +26,7 @@ This guide describes the Datadog Operator, how to install it, and how to use it 
 
 ## What is the Datadog Operator? 
 
-The Datadog Operator is an open source [Kubernetes Operator][4] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. By using the Operator, you can use a single Custom Resource Definition (CRD) to deploy the node-based Agent, Cluster Agent, and Cluster Checks Runner. The Operator reports deployment status, health, and errors in the Operator's CRD status. Because the Operator uses higher-level configuration options, it limits the risk of misconfiguration.
+The Datadog Operator is an open source [Kubernetes Operator][1] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. By using the Operator, you can use a single Custom Resource Definition (CRD) to deploy the node-based Agent, Cluster Agent, and Cluster Checks Runner. The Operator reports deployment status, health, and errors in the Operator's CRD status. Because the Operator uses higher-level configuration options, it limits the risk of misconfiguration.
 
 Once you have deployed the Agent, the Datadog Operator provides the following benefits:
 
@@ -34,7 +34,7 @@ Once you have deployed the Agent, the Datadog Operator provides the following be
 - Keeping all Agents up to date with your configuration
 - Orchestration for creating and updating Agent resources
 - Reporting of Agent configuration status in the Operator's CRD status
-- Optionally, use of an advanced DaemonSet deployment by using Datadog's [ExtendedDaemonSet][5].
+- Optionally, use of an advanced DaemonSet deployment by using Datadog's [ExtendedDaemonSet][2].
 
 <div class="alert alert-warning">The Datadog Operator is in beta.</div>
 
@@ -44,7 +44,7 @@ You can also use a Helm chart or a DaemonSet to install the Datadog Agent on Kub
 
 - The Operator has built-in defaults based on Datadog best practices.
 - Operator configuration is more flexible for future enhancements.
-- As a [Kubernetes Operator][4], the Datadog Operator is treated as a first-class resource by the Kubernetes API.
+- As a [Kubernetes Operator][1], the Datadog Operator is treated as a first-class resource by the Kubernetes API.
 - Unlike the Helm chart, the Operator is included in the Kubernetes reconciliation loop.
 
 Datadog fully supports using a DaemonSet to deploy the Agent, but manual DaemonSet configuration leaves significant room for error. Therefore, using a DaemonSet is not highly recommended.
@@ -52,8 +52,8 @@ Datadog fully supports using a DaemonSet to deploy the Agent, but manual DaemonS
 ## Prerequisites
 
 - Kubernetes v1.14.X+
-- [Helm][1] for deploying the Datadog Operator
-- The Kubernetes command-line tool, [kubectl][2], for installing the Datadog Agent
+- [Helm][3] for deploying the Datadog Operator
+- The Kubernetes command-line tool, [kubectl][4], for installing the Datadog Agent
 
 ## Deployment
 
@@ -66,7 +66,7 @@ Datadog fully supports using a DaemonSet to deploy the Agent, but manual DaemonS
   ```bash
   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
   ```
-  Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][3].
+  Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][5].
 
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following sample configuration enables metrics, logs, and APM:
   ```yaml
@@ -121,8 +121,8 @@ kubectl delete datadogagent datadog
 helm delete my-datadog-operator
 ```
 
-[1]: https://helm.sh/
-[2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
-[5]: https://github.com/DataDog/extendeddaemonset
+[1]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
+[2]: https://github.com/DataDog/extendeddaemonset
+[3]: https://helm.sh/
+[4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[5]: https://app.datadoghq.com/account/settings#api

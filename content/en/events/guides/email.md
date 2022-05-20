@@ -17,7 +17,7 @@ Before you can send events with email, you need a dedicated email address from D
 3. Click the **Events API emails** tab.
 4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON`).
 5. Click the **Create API email** button.
-6. See the [APIs page][5] for your results.
+6. See the [APIs page][4] for your results.
 
 The **Events API emails** section displays all the emails available for your applications and who created them.
 
@@ -82,7 +82,7 @@ The subject of the email becomes the title of the event and the body of the emai
 
 ### Markdown
 
-Datadog event text supports [Markdown][4] but embedding HTML in Markdown is not supported. To use Markdown in the event text, start the text block with `%%% \n` and end the text block with `\n %%%`:
+Datadog event text supports [Markdown][5] but embedding HTML in Markdown is not supported. To use Markdown in the event text, start the text block with `%%% \n` and end the text block with `\n %%%`:
 
 ```json
 {
@@ -107,5 +107,5 @@ http://example.com/session_id%3A123456
 [1]: /integrations/
 [2]: /agent/agent_checks/
 [3]: https://app.datadoghq.com
-[4]: http://daringfireball.net/projects/markdown/syntax#lin
-[5]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: http://daringfireball.net/projects/markdown/syntax#lin
