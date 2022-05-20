@@ -51,7 +51,7 @@ For information about the default attributes for all RUM event types, see [Data 
 
 ### How action loading time is calculated
 
-The RUM Browser SDK watches the page activity following every click. The action is considered finished when the page has no more activity. See [How page activity is calculated][4] for details.
+The Browser RUM SDK watches the page activity following every click. The action is considered finished when the page has no more activity. See [How page activity is calculated][4] for details.
 
 ## Action attributes
 
