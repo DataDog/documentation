@@ -92,4 +92,4 @@ Datadog allows you to configure a timezone for each anomaly detection monitor th
 [2]: /monitors/create/types/metric/
 [3]: /monitors/create/types/composite/
 [4]: /monitors/faq/what-are-recovery-thresholds/
-[5]: /monitors/faq/how-to-update-anomaly-monitor-timezone/
+[5]: /monitors/guide/how-to-update-anomaly-monitor-timezone/

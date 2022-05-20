@@ -22,4 +22,5 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}Export Monitor Alerts to CSV{{< /nextlink >}}
     {{< nextlink href="monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting" >}}Set up an alert for when a specific tag stops reporting{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone?{{< /nextlink >}}
 {{< /whatsnext >}}
