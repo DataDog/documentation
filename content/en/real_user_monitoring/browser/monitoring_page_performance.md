@@ -88,7 +88,7 @@ To account for modern web applications, loading time watches for network request
 
 Whenever a navigation or a click occurs, the RUM SDK tracks the page activity to estimate the time until the interface is stable again. The page is deemed to have activity by looking at network requests and DOM mutations. The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
 
-This approach works fine most of the time, but sometimes requests made by the application do not reflect actual activity as they don't have impact on the interface. In particular, we identified two problematic use cases:
+The criteria of 100ms since last request or DOM mutation might not be an accurate determination of activity in the following scenarios:
 
 - The application collects analytics by sending requests to an API periodically or after every click.
 
