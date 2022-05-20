@@ -73,7 +73,7 @@ For single page applications (SPAs), the RUM SDK differentiates between `initial
 
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
 
-### How is loading time calculated?
+### How loading time is calculated
 
 To account for modern web applications, loading time watches for network requests and DOM mutations.
 
@@ -92,7 +92,7 @@ The criteria of 100ms since last request or DOM mutation might not be an accurat
 
 - The application collects analytics by sending requests to an API periodically or after every click.
 
-- The application uses "[comet][17]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
+- The application uses "[comet][16])" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
 To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM SDK to exclude when computing the page activity:
 
@@ -134,7 +134,7 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-Once the timing is sent, the timing will be accessible as `@view.custom_timings.<timing_name>` (For example, `@view.custom_timings.first_scroll`). You must [create a measure][16] before graphing it in RUM analytics or in dashboards.
+Once the timing is sent, the timing will be accessible as `@view.custom_timings.<timing_name>` (For example, `@view.custom_timings.first_scroll`). You must [create a measure][17] before graphing it in RUM analytics or in dashboards.
 
 **Note**: For Single Page Applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing will equal 8-5 = 3 seconds.
 
@@ -150,12 +150,12 @@ Once the timing is sent, the timing will be accessible as `@view.custom_timings.
 [6]: https://web.dev/fid/
 [7]: https://web.dev/cls/
 [8]: /synthetics/browser_tests/
-[9]: /real_user_monitoring/browser/monitoring_page_performance/#how-is-loading-time-calculated
+[9]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [10]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[16]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
-[17]: https://en.wikipedia.org/wiki/Comet_(programming)
+[16]: https://en.wikipedia.org/wiki/Comet_(programming
+[17]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
