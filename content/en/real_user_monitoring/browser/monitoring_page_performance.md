@@ -28,7 +28,7 @@ RUM view events collect extensive performance metrics for every single page view
 - **RUM waterfall**: accessible for every single RUM view event in the [RUM Explorer][3], it lets you troubleshoot the performance of a specific page view. It shows how your website assets and resources, long tasks, and frontend errors affect performance for your end users, at the page level.
 
 ### Core web vitals
-<div class="alert alert-warning"> 
+<div class="alert alert-warning">
   <strong>Note:</strong>The core web vitals metrics are available in Datadog from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.0.0+.
 </div>
 
@@ -80,9 +80,34 @@ To account for modern web applications, loading time watches for network request
 - **Initial Load**: Loading Time is equal to _whichever is longer_:
 
   - The difference between `navigationStart` and `loadEventEnd`.
-  - Or the difference between `navigationStart` and the first time the page has no activity for more than 100ms (activity defined as ongoing network requests or a DOM mutation).
+  - Or the difference between `navigationStart` and the first time the page has no activity (see [next section][18] for details).
 
-- **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity for more than 100ms (activity defined as ongoing network requests or a DOM mutation).
+- **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity (see [next section][18] for details).
+
+### How is page activity calculated?
+
+Whenever a navigation or a click occurs, we start tracking the page activity to estimate the time until the interface is stable again. We consider that a page has activity by looking at network requests and DOM mutations. The page activity stops when there is no ongoing requests and no DOM mutation for more than 100ms. We consider that there was no activity if no requests or DOM mutation occurred in 100ms.
+
+This approach works fine most of the time, but sometimes requests made by the application do not reflect actual activity as they don't have impact on the interface. In particular, we identified two problematic use cases:
+
+- When the application is collecting analytics by sending requests to an API periodically or following every click.
+
+- When the application is using "[comet][17]" techniques (that is, streaming or long polling), the request stays on hold for an indefinite time.
+
+Such request have a negative impact on the page activity computed by RUM. To improve its accuracy, the RUM Browser SDK allows to provide a list of URLs of resources to exclude when computing the page activity. Example:
+
+```javascript
+DD_RUM.init({
+    ...
+    excludedActivityUrls: [
+        // Exclude exact URLs
+        'https://third-party-analytics-provider.com/endpoint',
+
+        // Exclude any URL ending with /comet
+        /\/comet$/
+    ]
+})
+```
 
 ### Hash SPA navigation
 
@@ -133,3 +158,5 @@ Once the timing is sent, the timing will be accessible as `@view.custom_timings.
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [16]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[17]: https://en.wikipedia.org/wiki/Comet_(programming)
+[18]: #how-is-page-activity-calculated
