@@ -80,21 +80,21 @@ To account for modern web applications, loading time watches for network request
 - **Initial Load**: Loading Time is equal to _whichever is longer_:
 
   - The difference between `navigationStart` and `loadEventEnd`.
-  - Or the difference between `navigationStart` and the first time the page has no activity (see [next section][18] for details).
+  - Or the difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
-- **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity (see [next section][18] for details).
+- **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
-### How is page activity calculated?
+### How page activity is calculated
 
-Whenever a navigation or a click occurs, we start tracking the page activity to estimate the time until the interface is stable again. We consider that a page has activity by looking at network requests and DOM mutations. The page activity stops when there is no ongoing requests and no DOM mutation for more than 100ms. We consider that there was no activity if no requests or DOM mutation occurred in 100ms.
+Whenever a navigation or a click occurs, the RUM SDK tracks the page activity to estimate the time until the interface is stable again. The page is deemed to have activity by looking at network requests and DOM mutations. The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
 
 This approach works fine most of the time, but sometimes requests made by the application do not reflect actual activity as they don't have impact on the interface. In particular, we identified two problematic use cases:
 
-- When the application is collecting analytics by sending requests to an API periodically or following every click.
+- The application collects analytics by sending requests to an API periodically or after every click.
 
-- When the application is using "[comet][17]" techniques (that is, streaming or long polling), the request stays on hold for an indefinite time.
+- The application uses "[comet][17]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
-Such request have a negative impact on the page activity computed by RUM. To improve its accuracy, the RUM Browser SDK allows to provide a list of URLs of resources to exclude when computing the page activity. Example:
+To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM SDK to exclude when computing the page activity:
 
 ```javascript
 DD_RUM.init({
@@ -159,4 +159,3 @@ Once the timing is sent, the timing will be accessible as `@view.custom_timings.
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [16]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [17]: https://en.wikipedia.org/wiki/Comet_(programming)
-[18]: #how-is-page-activity-calculated

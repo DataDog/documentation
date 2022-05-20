@@ -34,7 +34,7 @@ You can extend the collection of user interactions by [sending your own custom a
 ## What interactions are being tracked?
 
 The Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
-* Activity following the click is detected. See [How is page activity calculated?][4] for details.
+* Activity following the click is detected. See [How page activity is calculated][4] for details.
 * The click does not lead to a new page being loaded, in which case the Browser SDK generates a new RUM View event.
 * A name can be computed for the action. ([Learn more about action naming](#declaring-a-name-for-click-actions))
 
@@ -51,7 +51,7 @@ For information about the default attributes for all RUM event types, see [Data 
 
 ### How action loading time is calculated
 
-The RUM Browser SDK is watching the page activity following every clicks. The action is considered finished once the page has no more activity. See [How is page activity calculated?][4] for details.
+The RUM Browser SDK watches the page activity following every click. The action is considered finished when the page has no more activity. See [How page activity is calculated][4] for details.
 
 ## Action attributes
 
@@ -163,4 +163,4 @@ window.DD_RUM &&
 [1]: /real_user_monitoring/browser/modifying_data_and_context/
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#how-is-page-activity-calculated
+[4]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
