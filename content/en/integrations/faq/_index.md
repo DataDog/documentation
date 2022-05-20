@@ -38,7 +38,6 @@ aliases:
 ## Docker
 
 * [Compose and the Datadog Agent][15]
-* [Container Integration Events][16]
 
 ## Elasticsearch
 
@@ -79,9 +78,7 @@ aliases:
 
 ## Kubernetes
 
-* [Can I install the Agent on my Kubernetes master node(s)][33]
 * [Client Authentication against the apiserver and kubelet][34]
-* [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][35]
 
 ## MySQL & SQL
 

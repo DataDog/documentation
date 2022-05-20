@@ -24,7 +24,7 @@ git_integration_title: ibm_mq
 guid: 873153b6-5184-438a-8a32-1e2d2e490dde
 integration_id: ibm-mq
 integration_title: IBM MQ
-integration_version: 3.21.0
+integration_version: 3.22.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

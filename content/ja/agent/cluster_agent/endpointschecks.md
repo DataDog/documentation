@@ -159,7 +159,58 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 {{< /tabs >}}
 
 
-## Kubernetes サービスのアノテーションでチェックコンフィギュレーションを設定
+## チェック構成の設定
+
+### 静的なコンフィギュレーションファイルからの構成
+
+Datadog Agent 1.18.0 からは、Kubernetes エンドポイントを対象としたチェック構成で、`advanced_ad_identifiers` と[オートディスカバリーテンプレート変数][11]を使用できます ([例をご参照ください][12])。
+
+#### 例: Kubernetes エンドポイントでの HTTP_Check
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+そのエンドポイントに対して  [HTTP チェック][1]を行いたい Kubernetes サービスがある場合は、`clusterAgent.confd` フィールドを使ってチェック構成を定義してください。
+
+```yaml
+#(...)
+clusterAgent:
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      advanced_ad_identifiers:
+        - kube_endpoints:
+            name: "<ENDPOINTS_NAME>"
+            namespace: "<ENDPOINTS_NAMESPACE>"
+      cluster_check: true
+      init_config:
+      instances:
+        - url: "http://%%host%%"
+          name: "<EXAMPLE_NAME>"
+```
+
+[1]: /ja/integrations/http_check/
+{{% /tab %}}
+{{% tab "Daemonset" %}}
+そのエンドポイントに対して [HTTP チェック][1]を行いたい Kubernetes サービスがある場合は、Cluster Agent コンテナに以下の内容で `/conf.d/http_check.yaml` ファイルをマウントしてください。
+
+```yaml
+advanced_ad_identifiers:
+  - kube_endpoints:
+      name: "<ENDPOINTS_NAME>"
+      namespace: "<ENDPOINTS_NAMESPACE>"
+cluster_check: true
+init_config:
+instances:
+  - url: "http://%%host%%"
+    name: "<EXAMPLE_NAME>"
+```
+
+[1]: /ja/integrations/http_check/
+{{% /tab %}}
+{{< /tabs >}}
+
+**注:** フィールド `advanced_ad_identifiers` は、Datadog Cluster Agent 1.18+ からサポートされるようになりました。
+
+### Kubernetes のサービスアノテーションからの構成
 
 [Kubernetes ポッド][5]のアノテーション方法と同様に、サービスにも以下のような構文でアノテーションを付けることができます。
 
@@ -326,3 +377,5 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 [8]: /ja/integrations/nginx/
 [9]: /ja/integrations/http_check/
 [10]: /ja/agent/cluster_agent/troubleshooting/
+[11]: /ja/agent/guide/template_variables/
+[12]: /ja/agent/cluster_agent/endpointschecks/#example-http_check-on-kubernetes-endpoints

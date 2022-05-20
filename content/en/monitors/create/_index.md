@@ -4,6 +4,7 @@ kind: documentation
 description: "Create monitors"
 aliases:
 - /monitors/monitor_types/
+- /monitors/create/types/
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
@@ -15,11 +16,21 @@ further_reading:
 
 ## Overview
 
-To [create a monitor][1] in Datadog, hover over **Monitors** in the main menu and click [**New Monitor**][2] in the sub-menu. To create a monitor programmatically, see the [Datadog API][3] or [community maintained libraries][4].
+To create a monitor in Datadog:
+
+1. In the main navigation, select *Monitors --> New Monitor*. 
+2. Select a [monitor type](#monitor-types) corresponding to the kind of telemetry you want to alert on.
+3. [Configure the monitor][1].
+
+To create a monitor programmatically, see the [Datadog API][2] or [community maintained libraries][3].
+
+## Exporting and importing monitors
+
+You can download a JSON file containing the definition of a monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
+
+[Import a JSON monitor definition][4] into Datadog by selecting *Monitors --> New Monitor --> Import* in the main navigation.
 
 ## Monitor types
-
-Select a [monitor type][5] from the list.
 
 {{< whatsnext desc="Choose your monitor type:">}}
 {{< nextlink href="/monitors/create/types/host" >}}<u>Host</u>: Check if one or more hosts are reporting to Datadog.{{< /nextlink >}}
@@ -42,19 +53,12 @@ Select a [monitor type][5] from the list.
 {{< nextlink href="/monitors/create/types/watchdog" >}}<u>Watchdog</u>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Import a monitor
-
-[Import a monitor][6] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
-
-You can obtain a JSON export of any monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/create/configuration
-[2]: https://app.datadoghq.com/monitors#/create
-[3]: /api/v1/monitors/
-[4]: /developers/community/libraries/#managing-monitors
-[5]: /monitors/create/types
-[6]: https://app.datadoghq.com/monitors#create/import
+[2]: /api/v1/monitors/
+[3]: /developers/community/libraries/#managing-monitors
+[4]: https://app.datadoghq.com/monitors#create/import

@@ -20,7 +20,7 @@ The table visualization is available on dashboards. It displays columns of aggre
 
 ### Configuration
 
-* Choose the data to graph (add additional columns as needed):
+* Choose the data to graph (add additional columns by using the **+ Add Query** and **+ Add Formula** buttons as needed):
   * Metric: See the [Main graphing documentation][1] to configure a metric query.
   * Log Events: See the [Log search documentation][2] to configure a log event query.
   * Indexed Spans: See the [Indexed spans documentation][3] to configure a indexed span query.
@@ -32,11 +32,10 @@ The table visualization is available on dashboards. It displays columns of aggre
 * For the **Rows**, choose the tag key to **Group by**. The example below displays `service` rows.
 * Choose a limit for the number results (defaults to 10).
 * Choose a metric for sorting the table (defaults to the first column).
-* Optional: 
+* Optional:
   * Configure conditional formatting (both **bar/number** and **color**) depending on the cell values for each column.
   * Configure whether or not the search bar displays. **Auto** is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
 
-{{< img src="dashboards/widgets/table/table_setup_1.png" alt="Table setup" style="width:80%;">}}
 
 ## API
 
@@ -48,7 +47,7 @@ The dedicated [widget JSON schema definition][9] for the table widget is:
 
 ## Formulas and functions
 
-You can use table widgets with formulas and functions for different data sources. 
+You can use table widgets with formulas and functions for different data sources.
 
 In the following example, the `Average` column calculates a ratio of `Total Enterprise Customers` / `Total Revenue Enterprises` for the `cart_value` in log events of enterprise customer tier data.
 

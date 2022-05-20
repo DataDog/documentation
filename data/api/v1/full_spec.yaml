@@ -3060,6 +3060,9 @@ components:
       - message
       type: object
     HTTPLogItem:
+      additionalProperties:
+        description: Additional log attributes.
+        type: string
       description: Logs that are sent over HTTP.
       properties:
         ddsource:
@@ -5974,11 +5977,13 @@ components:
       enum:
       - rum
       - ci_pipelines
+      - ci_tests
       example: rum
       type: string
       x-enum-varnames:
       - RUM
       - CI_PIPELINES
+      - CI_TESTS
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -6673,6 +6678,7 @@ components:
       - event-v2 alert
       - audit alert
       - ci-pipelines alert
+      - ci-tests alert
       - error-tracking alert
       example: query alert
       type: string
@@ -6691,6 +6697,7 @@ components:
       - EVENT_V2_ALERT
       - AUDIT_ALERT
       - CI_PIPELINES_ALERT
+      - CI_TESTS_ALERT
       - ERROR_TRACKING_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
@@ -9536,8 +9543,9 @@ components:
             type: string
           type: array
         type:
-          default: gauge
-          description: The type of the metric either `count`, `gauge`, or `rate`.
+          default: ''
+          description: The type of the metric. Valid types are "",`count`, `gauge`,
+            and `rate`.
           example: rate
           type: string
       required:
@@ -22953,6 +22961,32 @@ paths:
         **NOTE** CI Pipeline monitors are in alpha on US1, EU, US3 and US5.
 
 
+        **CI Tests Alert Query**
+
+
+        Example: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
+        and `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.
+
+
+        **NOTE** CI Test monitors are available only in closed beta on US1, EU, US3
+        and US5.
+
+
         **Error Tracking Alert Query**
 
 
@@ -24575,7 +24609,7 @@ paths:
         3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed
         size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting
         metrics directly to the Datadog API without using DogStatsD, expect:\n\n-
-        64 bits for the timestamp\n- 32 bits for the value\n- 40 bytes for the metric
+        64 bits for the timestamp\n- 64 bits for the value\n- 40 bytes for the metric
         names\n- 50 bytes for the timeseries\n- The full payload is approximately
         100 bytes. However, with the DogStatsD API,\ncompression is applied, which
         reduces the payload size."

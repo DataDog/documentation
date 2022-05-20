@@ -94,6 +94,8 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </code>
 </pre>
 
+**注:** 250 MiB より大きいレポートは欠落したテストかログに終って完全に処理されないかもしれません。最高の体験を得るために、レポートは 250 MiB 以下であることを確認してください。
+
 ## コンフィギュレーション設定
 
 これは、`datadog-ci junit upload` コマンドを使用するときに使用できるオプションの完全なリストです。

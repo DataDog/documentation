@@ -387,6 +387,11 @@
       "group": "logs",
       "suffix": "_3496222707",
       "description": "Send gzip logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "",
+      "description": "Send logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
     }
   ],
   "CreateLogsMetric": [
@@ -476,6 +481,20 @@
       "group": "metrics",
       "suffix": "",
       "description": "List tags by metric name returns \"Success\" response"
+    }
+  ],
+  "SubmitMetrics": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Submit metrics returns \"Payload accepted\" response"
+    }
+  ],
+  "EstimateMetricsOutputSeries": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Tag Configuration Cardinality Estimator returns \"Success\" response"
     }
   ],
   "UpdateTagConfiguration": [

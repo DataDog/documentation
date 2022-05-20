@@ -87,7 +87,7 @@ Datadog event text supports [Markdown][4] but embedding HTML in Markdown is not 
 ```json
 {
   "title": "Did you hear the news today?",
-  "text": "%%% \n [an example link](http://catchpoint.com/session_id \"Title\") \n %%%",
+  "text": "%%% \n [an example link](http://example.com/session_id \"Title\") \n %%%",
   "priority": "normal",
   "tags": ["environment:test"],
   "alert_type": "info"
@@ -98,10 +98,10 @@ If you are embedding a link in a Markdown block, make sure the URL is encoded pr
 
 ```text
 # Not encoded
-http://catchpoint.com/session_id:123456
+http://example.com/session_id:123456
 
 # Encoded
-http://catchpoint.com/session_id%3A123456
+http://example.com/session_id%3A123456
 ```
 
 [1]: /integrations/

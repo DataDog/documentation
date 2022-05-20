@@ -13,12 +13,12 @@ assets:
     '[Active Directory] Elevated LDAP binding duration for host {{host.name}}': assets/monitors/ldap_binding.json
   service_checks: assets/service_checks.json
 categories:
-  - os & system
-  - log collection
+- os & system
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md
 description: Microsoft Active Directory のメトリクスを収集してグラフ化
 display_name: Active Directory
 draft: false
@@ -26,6 +26,7 @@ git_integration_title: active_directory
 guid: ba667ff3-cf6a-458c-aa4b-1172f33de562
 integration_id: active-directory
 integration_title: Active Directory
+integration_version: 1.15.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -37,8 +38,11 @@ public_title: Datadog-Active Directory インテグレーション
 short_description: Microsoft Active Directory のメトリクスを収集してグラフ化
 support: コア
 supported_os:
-  - windows
+- windows
 ---
+
+
+
 ## 概要
 
 Microsoft Active Directory からメトリクスとログを取得して、パフォーマンスを視覚化および監視します。
@@ -58,6 +62,8 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 1. Active Directory のパフォーマンスデータの収集を開始するには、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `active_directory.d/conf.yaml` ファイルを編集します。デフォルトのセットアップでは、ローカルホストのメトリクスが収集されます。使用可能なすべての構成オプションについては、[サンプル active_directory.d/conf.yaml][4] を参照してください。
 
 2. [Agent を再起動します][5]。
+
+**注**: このチェックのバージョン 1.13.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][6]を参照してください。
 
 #### ログの収集
 
@@ -82,13 +88,13 @@ _Agent バージョン 6.0 以降で利用可能_
    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
    使用可能なすべての構成オプションについては、[サンプル active_directory.d/conf.yaml][4] を参照してください。
 
-3. このインテグレーションは、[Active Directory Module for Ruby][6] を対象としています。この Ruby モジュールを使用していない場合は、`source` の値を `active_directory` に変更し、`path` を環境に合わせて構成してください。
+3. このインテグレーションは、[Active Directory Module for Ruby][7] を対象としています。この Ruby モジュールを使用していない場合は、`source` の値を `active_directory` に変更し、`path` を環境に合わせて構成してください。
 
 4. [Agent を再起動します][5]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションの `active_directory` を探します。
+[Agent の status サブコマンドを実行][8]し、Checks セクションの `active_directory` を探します。
 
 ## 収集データ
 
@@ -106,14 +112,15 @@ Active Directory チェックには、サービスのチェック機能は含ま
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/active_directory/datadog_checks/active_directory/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://www.rubydoc.info/gems/activedirectory/0.9.3
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/active_directory/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[6]: https://github.com/DataDog/integrations-core/blob/7.33.x/active_directory/datadog_checks/active_directory/data/conf.yaml.example
+[7]: https://www.rubydoc.info/gems/activedirectory/0.9.3
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/active_directory/metadata.csv
+[10]: https://docs.datadoghq.com/ja/help/
