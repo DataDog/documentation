@@ -561,6 +561,27 @@
       "description": "Update a notebook returns \"OK\" response"
     }
   ],
+  "AddSecurityMonitoringSignalToIncident": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Add a security signal to an incident returns \"OK\" response"
+    }
+  ],
+  "EditSecurityMonitoringSignalState": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Change the triage state of a security signal returns \"OK\" response"
+    }
+  ],
+  "EditSecurityMonitoringSignalAssignee": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Modify the triage assignee of a security signal returns \"OK\" response"
+    }
+  ],
   "SubmitServiceCheck": [
     {
       "group": "service_checks",
