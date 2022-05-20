@@ -19,8 +19,9 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="AWS guides:" >}}
-    {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag="documentation" >}}Troubleshooting the AWS integration{{< /nextlink >}}
+    {{< nextlink href="getting_started/integrations/aws/" tag="AWS" >}}AWS integration automatic setup with CloudFormation{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-manual-setup" tag="AWS" >}}AWS Integration manual setup{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag="AWS" >}}Troubleshooting the AWS integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag="AWS" >}}Using Amazon Cloudformation{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/aws-manual-setup" tag="AWS" >}}AWS Integration Manual Setup{{< /nextlink >}}
 {{< /whatsnext >}}
