@@ -23,10 +23,10 @@ You can add to the event rules without upgrading the tracing library.
 
 ## Structure of an ASM event rule
 
-An event rule is a JSON object composed of a category, a name, tags, and conditions. Tags from the rules are propagated onto the suspicious request when detected, and can be used to build [detection rules][1].
+An event rule is a JSON object composed of a category, a name, tags, and conditions. When a suspicious request is detected, tags from the rules are propagated onto the suspicious request, and can be used to build [detection rules][1].
 
 ### Conditions
-Conditions define when an incoming request is tagged by the rule. The conditions are composed of _inputs_ and _operators_.
+Conditions define when the rule tags an incoming request. The conditions are composed of _inputs_ and _operators_.
 
 #### Inputs
 An input represents which part of the request the operator is applied to. The following inputs are used in the event rules:
@@ -88,14 +88,14 @@ An input represents which part of the request the operator is applied to. The fo
     },
    {{< /code-block >}}
 
-3. Using a utility such as SCP or FTP, copy the `appsec-rules.json` file to your application server, for example `/home/asm/appsec-rules.json`.
+4. Using a utility such as SCP or FTP, copy the `appsec-rules.json` file to your application server, for example, `/home/asm/appsec-rules.json`.
 
-4. Following the instructions in [the ASM Getting Started][3] for adding application variables in your environment, add the `DD_APPSEC_RULES` environment variable to your service with the full path to the file: 
+5. Following the instructions in [the ASM Getting Started][3] for adding application variables in your environment, add the `DD_APPSEC_RULES` environment variable to your service with the full path to the file: 
    ```
    DD_APPSEC_RULES=/home/asm/appsec-rules.json
    ```
 
-5. Restart your service.
+6. Restart your service.
 
 ## What to do next
 
