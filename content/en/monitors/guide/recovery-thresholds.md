@@ -1,10 +1,12 @@
 ---
-title: What are recovery thresholds?
-kind: faq
+title: Recovery thresholds
+kind: guide
 further_reading:
 - link: "/monitors/create/types/metric/"
   tag: "Documentation"
   text: "Metric monitor"
+aliases:
+- monitors/faq/what-are-recovery-thresholds
 ---
 
 ## Definition
