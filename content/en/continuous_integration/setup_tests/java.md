@@ -23,18 +23,10 @@ Supported test frameworks:
 
 ## Prerequisites
 
-{{< tabs >}}
-{{% tab "Cloud" %}}
-[Use the Agentless mode to collect tests data][1]
+To report test results to Datadog, you have the following options:
 
-[1]:/continuous_integration/setup_tests/agentless/
-{{% /tab %}}
-{{% tab "On-Premises" %}}
-[Install the Datadog Agent to collect tests data][1]
-
-[1]:/continuous_integration/setup_tests/agent/
-{{% /tab %}}
-{{< /tabs >}}
+* If you run your tests in SaaS CI providers, Datadog recommends using the [Agentless mode][4] of the Datadog Libraries. This mode allows sending data without running an ephemeral instance of the Agent as a service container on each build.
+* If you run your tests in On-Premises CI providers, Datadog recommends sending the data through the [Datadog Agent][1].
 
 ## Installing the Java tracer
 
@@ -253,5 +245,7 @@ If you need to use a previous version of the tracer, you can configure CI Visibi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]:/continuous_integration/setup_tests/agent/
 [2]: /tracing/setup_overview/setup/java/?tab=containers#configuration
 [3]: /tracing/setup_overview/compatibility_requirements/java
+[4]:/continuous_integration/setup_tests/agentless/
