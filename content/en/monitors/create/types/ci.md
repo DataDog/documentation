@@ -93,7 +93,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way alerts will trigger for test runs with specific test parameters or configurations. Using `@test.fignerpint` provides the same granularity level as the Test Stats, Failed and Flaky Tests section on the Commit Overview page.
 
 For example, if a test with the same full name failed on Chrome, but passed on Firefox, then using the fingerprint will only trigger the alert on the Chrome test run.
-Using `@test.full_name` in this case might lead to incorrect behaviour.
+Using `@test.full_name` in this case will trigger the alert, even though the test passed on Firefox.
 
 #### Formulas and functions
 
