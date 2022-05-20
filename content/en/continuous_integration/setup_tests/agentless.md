@@ -41,7 +41,7 @@ Additionally, configure which [Datadog site][3] to which you want to send data. 
 |-----------------|-----------------|---------|
 | [.NET][4]       | Beta            | x.x.x   |
 | [Java][5]       | Not supported   | x.x.x   |
-| [JavaScript][6] | Beta            | x.x.x   |
+| [JavaScript][6] | Beta            | 2.5.0   |
 | [Python][7]     | Not supported   | x.x.x   |
 | [Ruby][8]       | Not supported   | x.x.x   |
 | [Swift][9]      | Fully supported | x.x.x   |
