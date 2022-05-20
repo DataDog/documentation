@@ -48,9 +48,11 @@ To change signal state, follow the instructions below:
 
 4. Once you save the status, a confirmation toast appears that states which action was taken with the opportunity to “Undo” the action. You'll see it in a banner above the signal side panel when you save the action. The banner shows the action taken, by who, and when.
 
-Any security signal that may lead to a disruption in your organization’s services can be described as an incident, and it is often necessary to have a set framework for handling these threats. [Incident Management][6] provides a system through which your organization can effectively identify and mitigate incidents.
+Any security signal warning of a possible disruption to your organization’s services can be considered an incident. It is often necessary to have a set framework for handling these threats. [Incident Management][6] provides a system to effectively identify and mitigate incidents.
 
-You can declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button in the top-right of the side panel, or by selecting the export button in the Application Security Monitoring side panel, and clicking **Declare incident**. The incident creation modal appears, and the security signal is added to the incident as a signal.
+Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
+
+Declare an incident from an Application Security Monitoring signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
 
 {{< img src="monitors/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
 
