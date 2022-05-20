@@ -81,6 +81,7 @@ The following example is of a pipeline error rate monitor using a formula that c
     * **Monitor over a CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Test events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a dimension**: If a dimension (qualitative facet) is selected, the monitor alerts over the `Unique value count` of the facet.
     * **Monitor over a measure**: If a measure (quantitative facet) is selected, the monitor alerts over the numerical value of the CI Test facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+
 3. Group CI Test events by multiple dimensions (optional):
    All CI Test events matching the query are aggregated into groups based on the value of up to four facets.
 4. Configure the alerting grouping strategy (optional):
