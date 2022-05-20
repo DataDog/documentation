@@ -20,6 +20,7 @@ PHP APM supports the following PHP versions:
 
 | Version    | Support type                          |
 |:-----------|:--------------------------------------|
+| 8.1.x      | Fully Supported (tracer `0.66.0+`)    |
 | 8.0.x      | Fully Supported (tracer `0.52.0+`)    |
 | 7.4.x      | Fully Supported                       |
 | 7.3.x      | Fully Supported                       |

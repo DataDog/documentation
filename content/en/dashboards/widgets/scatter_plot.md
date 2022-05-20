@@ -6,12 +6,9 @@ widget_type: "scatterplot"
 aliases:
     - /graphing/widgets/scatter_plot/
 further_reading:
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 ---
 
 The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregation:

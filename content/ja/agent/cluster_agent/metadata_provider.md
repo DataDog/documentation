@@ -25,7 +25,7 @@ further_reading:
 3. [Agent の間で auth_token が適切に共有されていることを確認します][1]。
 4. [RBAC ルールが適切に設定されていることを確認します][1]。
 5. Node Agent で、環境変数 `DD_CLUSTER_AGENT_ENABLED` を `true` に設定します。
-6. *任意* - 環境変数 `DD_KUBERNETES_METADATA_TAG_UPDATE_FREQ` を設定すると、Node Agent が Datadog Cluster Agent をヒットする頻度を指定できます。
+6. *任意* - 環境変数 `DD_KUBERNETES_METADATA_TAG_UPDATE_FREQ` を設定すると、Node Agent が Datadog Cluster Agent に ping する頻度を指定できます。
 7. *任意* - ``DD_KUBERNETES_COLLECT_METADATA_TAGS=false` で、Kubernetes メタデータタグの収集を無効にします。
 
 ## その他の参考資料

@@ -1,60 +1,134 @@
 ---
-"assets":
-  "dashboards":
-    "Insights Overview": assets/dashboards/overview.json
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"author":
-  "homepage": "https://www.fairwinds.com"
-  "name": Fairwinds
-"categories":
+app_id: fairwinds-insights
+app_uuid: a488d774-fd45-4765-b947-e48792c6ab32
+assets:
+  dashboards:
+    Insights Overview: assets/dashboards/overview.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: fairwinds.insights.action_items
+      metadata_path: metadata.csv
+      prefix: fairwinds.insights.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Fairwinds Insights
+author:
+  homepage: https://www.fairwinds.com
+  name: Fairwinds
+  sales_email: datadog-marketplace@fairwinds.com
+  support_email: insights@fairwinds.com
+  vendor_id: fairwinds
+categories:
 - marketplace
 - containers
 - gestion des coûts
 - security
-"creates_events": true
-"ddtype": "crawler"
-"dependencies": []
-"display_name": "Fairwinds Insights"
-"draft": false
-"git_integration_title": "fairwinds_insights"
-"guid": "fd4bd190-d57d-449b-9880-76cbf8325a3e"
-"integration_id": "fairwinds-insights"
-"integration_title": "Fairwinds Insights"
-"is_public": true
-"kind": "integration"
-"maintainer": "insights@fairwinds.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "fairwinds.insights."
-"metric_to_check": "fairwinds.insights.action_items"
-"name": "fairwinds_insights"
-"pricing":
-- "billing_type": tag_count
-  "metric": datadog.marketplace.fairwinds.insights
-  "tag": insights_cluster
-  "unit_label": Cluster Kubernetes
-  "unit_price": !!int "699"
-"public_title": "Fairwinds Insights"
-"short_description": "Protège et optimise vos applications Kubernetes critiques."
-"support": "partner"
-"supported_os":
+classifier_tags:
+- Supported OS::Linux
+- Supported OS::Mac OS
+- Supported OS::Windows
+- Category::Marketplace
+- Category::Containers
+- Category::Cost Management
+- Category::Security
+- Offering::Software License
+- Offering::Integration
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: fairwinds_insights
+integration_id: fairwinds-insights
+integration_title: Fairwinds Insights
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: fairwinds_insights
+oauth: {}
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.fairwinds.insights
+  product_id: insights
+  short_description: Logiciel de gouvernance et de sécurité pour Kubernetes
+  tag: insights_node
+  unit_label: Nœud Kubernetes
+  unit_price: 100
+public_title: Fairwinds Insights
+short_description: Protège et optimise vos applications Kubernetes critiques
+supported_os:
 - linux
-- mac_os
+- mac os
 - windows
-"terms":
-  "eula": assets/eula.pdf
-  "legal_email": datadog-marketplace@fairwinds.com
+tile:
+  changelog: CHANGELOG.md
+  configuration: README.md#Setup
+  description: Protège et optimise vos applications Kubernetes critiques
+  media:
+  - caption: Fairwinds Insights est un logiciel de gouvernance et de sécurité pour
+      Kubernetes qui vous permet de définir des alertes de sécurité, de mettre en
+      place des garde-fous, d'analyser la conformité et de suivre des recommandations
+      pour optimiser vos coûts. Fairwinds Insights s'intègre à Datadog afin que vous
+      puissiez consulter tous vos rapports depuis une interface unique.
+    image_url: images/Video_Front_Cover.png
+    media_type: video
+    vimeo_id: 619368230
+  - caption: Le contrôleur d'admission Fairwinds Insights s'exécute chaque fois qu'une
+      nouvelle ressource est ajoutée au cluster. Si cette ressource va à l'encontre
+      des stratégies de votre organisation, le contrôleur d'admission la rejette et
+      prévient le client.
+    image_url: images/Fairwinds_Insights_Admission_Controller_Image_v1.png
+    media_type: image
+  - caption: Fairwinds Insights vérifie constamment que vos clusters respectent les
+      configurations de sécurité, afin d'atténuer les risques et de veiller à l'application
+      des bonnes pratiques. Cette solution identifie les risques liés à Kubernetes
+      et à vos conteneurs, les hiérarchise, fournit des conseils pour la résolution
+      de vos problèmes et offre un suivi des différents statuts.
+    image_url: images/Fairwinds_Insights_Automate_Kubernetes_Policies_Image_v1.png
+    media_type: image
+  - caption: Vos équipes peuvent concevoir et appliquer des stratégies personnalisées
+      via OPA et les intégrer à chaque composant de Fairwinds Insights, y compris
+      les pipelines de CI/CD, le contrôleur d'admission et l'Agent dans le cluster.
+      Fairwinds Inisghts comprend une bibliothèque de modèles OPA.
+    image_url: images/Fairwinds_Insights_Customize_Open_Policy_Agent_Image_v1.png
+    media_type: image
+  - caption: Fairwinds Insights surveille l'utilisation du CPU et de la mémoire, afin
+      d'émettre des recommandations à propos des requêtes et des limites des ressources.
+      Vous pouvez ainsi optimiser votre utilisation du CPU et de la mémoire pour vos
+      workloads Kubernetes.
+    image_url: images/Fairwinds_Insights_Optimize_Kubernetes_Resources_Image_v1.png
+    media_type: image
+  - caption: Fairwinds Insights s'intègre parfaitement à vos pipelines de CI/CD, afin
+      que la sécurité soit plus en amont. Les équipes DevOps peuvent éviter les erreurs
+      de configuration par le biais du CI/CD et fournir des conseils aux développeurs
+      afin de résoudre plus facilement les problèmes, sans nécessiter d'intervention
+      manuelle. Grâce aux protections mises en place, les développeurs disposent de
+      toute la liberté dont ils ont besoin pour travailler efficacement.
+    image_url: images/Fairwinds_Insights_Shift_Left_Security_Image_v1.png
+    media_type: image
+  - caption: Fairwinds Insights propose des fonctionnalités de surveillance du runtime
+      des conteneurs et s'intègre au processus de CI/CD. La solution surveille les
+      vulnérabilités connues dans les conteneurs, hiérarchise les découvertes en fonction
+      de la gravité du problème et propose des options de résolution. Elle s'intègre
+      aux workflows de gestion de tickets et d'attribution, pour un meilleur suivi
+      des statuts de résolution.
+    image_url: images/Fairwinds_Insights_VulnerabilityScanning_Image_v1.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Fairwinds Insights
 ---
 
 
 
 ## Présentation
 
-{{< img src="marketplace/fairwinds_insights/images/dashboard.png" alt="Dashboard" >}}
-
-### Conçu pour protéger et optimiser vos applications Kubernetes critiques
+Conçu pour protéger et optimiser vos applications Kubernetes critiques
 
 #### Simplifiez les transferts entre les équipes Dev et Ops
 
@@ -139,5 +213,4 @@ Fairwinds Insights offre des intégrations pour un large éventail d'outils open
 
 Politique d'annulation et de remboursement d'Insights :
 
-Fairwinds Insights est proposé sous forme d'abonnement mensuel que vous, le client, pouvez interrompre à tout moment par les moyens mis à votre disposition via votre compte DataDog Marketplace. Si vous choisissez de mettre fin à votre abonnement, seul le reste de la période de facturation mensuelle en cours vous sera facturé. Insights n'émettra aucun remboursement pour les frais déjà payés.
-
+Fairwinds Insights est proposé sous forme d'abonnement mensuel que vous, le client, pouvez interrompre à tout moment par les moyens mis à votre disposition via votre compte Marketplace Datadog. Si vous choisissez de mettre fin à votre abonnement, seul le reste de la période de facturation mensuelle en cours vous sera facturé. Insights n'émettra aucun remboursement pour les frais déjà payés.

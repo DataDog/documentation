@@ -65,7 +65,7 @@ logs_enabled: true
 
 詳細については、次を参照してください:
 - [Datadog ログのドキュメント][4]
-- [ダッシュボードの作成に関する Datadog API ドキュメント][5]
+- [Datadog ダッシュボード API][5]
 
 ## 収集データ
 
@@ -85,5 +85,5 @@ Contrast インテグレーションには、サービス チェック機能は�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 [2]: https://docs.contrastsecurity.com/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/ja/logs/log_collection/#getting-started-with-the-agent
+[4]: https://docs.datadoghq.com/ja/logs/log_collection/
 [5]: https://docs.datadoghq.com/ja/api/#create-a-dashboard

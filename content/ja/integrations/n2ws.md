@@ -3,21 +3,21 @@ assets:
   configuration: {}
   dashboards:
     N2WSBackup&Recovery-EntitiesSpecificDashboard: assets/dashboards/N2WSBackup&Recovery-EntityTypesDetails.json
-    N2WSBackup&Recovery-EntitiesSpecificDashboardV4.0: assets/dashboards/N2WSBackup&RecoveryV4.0-EntityTypesDetails.json
+    N2WSBackup&Recovery-EntitiesSpecificDashboardV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-EntityTypesDetails.json
     N2WSBackup&Recovery-GraphicalVersion: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(ColumnGraphs).json
     N2WSBackup&Recovery-GraphicalVersion-Areas: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(AreasGraphs).json
-    N2WSBackup&Recovery-GraphicalVersionV4.0: assets/dashboards/N2WSBackup&RecoveryV4.0-BackupSuccessRates(ColumnGraphs).json
+    N2WSBackup&Recovery-GraphicalVersionV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-BackupSuccessRates(ColumnGraphs).json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - cloud
+- cloud
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
 display_name: N2WS Backup & Recovery
 doc_link: https://docs.datadoghq.com/integrations/n2ws/
 draft: false
@@ -38,10 +38,13 @@ public_title: Datadog-N2WS インテグレーション
 short_description: 接続されているすべての N2WS Backup & Recovery ホストからの要約データを表示する
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 
@@ -54,9 +57,9 @@ N2WS Backup and Recovery インスタンスは、Datadog モニタリングサ�
 
 ### インストール
 
-1.  ##### [Python インテグレーション][1]をインストールします
+1.  [Python インテグレーション][1]をインストールします。
 
-2.  ##### N2WS インスタンスで Datadog のサポートを有効にします。
+2.  N2WS インスタンスで Datadog のサポートを有効にします。
     - SSH を使用して N2WS Backup and Recovery インスタンスに接続します。
     - 下記の行を `/cpmdata/conf/cpmserver.cfg` に追加します。このアクションを実行するには、`sudo` 権限が必要になる場合があります。
         ```
@@ -65,27 +68,28 @@ N2WS Backup and Recovery インスタンスは、Datadog モニタリングサ�
         ```
     - `service apache2 restart` を実行します
 
-3.  ##### N2WS インスタンスに Datadog Agent をインストールします。
-    Datadog にログインし、Integrations -> Agent -> Ubuntu に移動します
-    Agent の ‘easy one-step install’ コマンドをコピーします
-    SSH を使用して N2WS Backup and Recovery インスタンスに接続します。このアクションを実行するには、`sudo` 権限が必要になる場合があります。
+3.  N2WS インスタンスに Datadog Agent をインストールします。
+    - Datadog にログインし、Integrations -> Agent -> Ubuntu に移動します
+    - Agent の `easy one-step install` コマンドをコピーします。
+    - SSH を使用して N2WS Backup and Recovery インスタンスに接続します。このアクションを実行するには、`sudo` 権限が必要になる場合があります。
 
-4.  ##### Datadog ダッシュボードメトリクスを設定します
-    [‘Metrics-> Explorer’][2] に移動します
+4.  Datadog ダッシュボードメトリクスを設定します。
+    - ['Metrics-> Explorer'][2] に移動します
 
-    **Graph**: リストからメトリクスを選択します。すべての N2WS メトリクスは、文字列 ‘cpm_metric’ で始まります。
+    **Graph**: リストからメトリクスを選択します。すべての N2WS メトリクスは、文字列 'cpm_metric' で始まります。
 
-    **Over**: リストからデータを選択します。すべての N2WS ユーザーデータは、文字列 ‘cpm:user:<user-name>’ で始まります。
+    **Over**: リストからデータを選択します。すべての N2WS ユーザーデータは、文字列 'cpm:user:<user-name>' で始まります。
               特定のユーザーまたは N2WS インスタンス全体を選択できます。
 
 
-5.  ##### N2WS ダッシュボードを取得します
-    [Datadog インテグレーション][3]で、'N2WS' タイルを検索してインストールします。
-    アカウントには次の 5 種類のダッシュボードが表示されます。N2WS Backup & Recovery v3.2.1 (AWS のみ対応) 用の 3 種類および N2WS Backup & Recovery v4.0 (Azure を含む) 用の 2 種類。
-    'N2WSBackup&Recovery-Graphicalversion'、'N2WSBackup&Recovery-Graphicalversion-areas'、'N2WSBackup&Recovery-EntitiesSpecificDashboard'（バージョン 3.2.1）
-    'N2WSBackup&Recovery-EntitiesSpecificDashboardV4.0'、'N2WSBackup&Recovery-GraphicalVersionV4.0'（バージョン 4.0）
+5.  N2WS ダッシュボードを取得します
+    - [Datadog インテグレーション][3]で、`N2WS` タイルを検索してインストールします。
+    - 5 つのダッシュボードがアカウントにインストールされます。
+    'N2WSBackup&Recovery-Graphicalversion'、'N2WSBackup&Recovery-Graphicalversion-areas'、'N2WSBackup&Recovery-EntitiesSpecificDashboard' (N2WS Backup & Recovery v3.2.1 用)
+    **注**: これらのダッシュボードは、AWS ユーザーのみ利用可能です。
+    'N2WSBackup&Recovery-EntitiesSpecificDashboardV4.1'、'N2WSBackup&Recovery-GraphicalVersionV4.1' (N2WS Backup & Recovery v4.1 用)
 
-    または、ユーザーは [N2WS から JSON テンプレートをインポート][4]することもできます。
+    また、[N2WS から JSON テンプレートをインポートする][4]ことでダッシュボードを作成することも可能です。
 
 ## 収集データ
 

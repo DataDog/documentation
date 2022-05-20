@@ -70,7 +70,7 @@ Docker Swarm を使用する場合は、マネージャーノードのいずれ�
 
 ### ファイル (Auto-conf)
 
-テンプレートをローカルファイルとして保存する方法はわかりやすく、外部サービスやオーケストレーションプラットフォームを必要としません。この方法の欠点は、テンプレートを変更、追加、または削除するたびに、Agent コンテナを再起動する必要がある点です。
+テンプレートをローカルファイルとして保存するには、外部サービスやオーケストレーションプラットフォームを必要としません。この方法の欠点は、テンプレートを変更、追加、または削除するたびに、Agent コンテナを再起動する必要がある点です。
 
 Agent は、自分の `conf.d/auto_conf` ディレクトリでオートディスカバリーテンプレートを探します。以下のチェックのデフォルトテンプレートはここに置かれます。
 
@@ -174,8 +174,8 @@ key-value ストアがテンプレートソースとして有効になってい�
 ```text
 /datadog/
   check_configs/
-    docker_image_1/                 # container identifier, e.g. httpd
-      - check_names: [<CHECK_NAME>] # e.g. apache
+    docker_image_1/                 # コンテナ識別子 (httpd など)
+      - check_names: [<CHECK_NAME>] # apache など
       - init_configs: [<INIT_CONFIG>]
       - instances: [<INSTANCE_CONFIG>]
     ...

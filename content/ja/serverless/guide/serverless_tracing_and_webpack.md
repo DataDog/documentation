@@ -1,0 +1,63 @@
+---
+aliases:
+- /ja/serverless/troubleshooting/serverless_tracing_and_webpack
+further_reading:
+- link: /serverless/installation/nodejs
+  tag: ドキュメント
+  text: Node.js アプリケーションのインスツルメンテーション
+kind: documentation
+title: Node.js Lambda トレースと Webpack の互換性
+---
+
+# 互換性
+
+Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きインポートの使用やその他の問題により、[Webpack][1] と互換性がないことが知られています。Webpack は `dd-trace` をビルドできませんが、アプリケーションは、ビルド済みの Datadog Lambda レイヤーによって提供される `dd-trace` および `datadog-lambda-js` ライブラリを引き続き使用できます。以下の手順に従ってください。
+
+1. [Node.js のインストール手順][2]に従い、Datadog Lambda レイヤーが Lambda 関数に追加されていることを確認します。
+2. Webpack の [externals][3] として `datadog-lambda-js` と `dd-trace` をマークします。これは、Datadog Lambda レイヤーによって提供される Lambda ランタイムですでに利用可能であるため、依存関係としてのビルドをスキップするように Webpack に指示します。
+
+    **webpack.config.js**
+
+    ```
+    var nodeExternals = require("webpack-node-externals");
+
+    module.exports = {
+      // use webpack-node-externals to exclude all node dependencies.
+      // You can manually set the externals too.
+      externals: [nodeExternals(), "dd-trace", "datadog-lambda-js"],
+    };
+    ```
+
+3. `package.json` とビルドプロセスから `datadog-lambda-js` と `dd-trace` を削除します。
+4. `serverless-webpack` または `serverless-esbuild` プラグインを Serverless Framework に使用している場合は、`serverless.yml` から `datadog-lambda-js` と `dd-trace` を除外します。
+
+    **serverless.yml**
+
+    ```
+    custom:
+      webpack: # for webpack
+        includeModules:
+          forceExclude:
+            - dd-trace
+            - datadog-lambda-js
+      esbuild: # for esbuild
+        exclude: ["dd-trace", "datadog-lambda-js"]
+    ```
+
+    **注:** `datadog-lambda-js` や `dd-trace` に過渡的な依存関係がある場合、この除外は十分ではないかもしれません。このような場合、**forceExclude** はこれらのライブラリのいずれかを含めることを回避できません。このような場合は、以下のような方法で手動でライブラリを削除してください。
+
+    ```
+    custom:
+      webpack:
+        packagerOptions:
+          scripts:
+            - rm -rf node_modules/datadog-lambda-js node_modules/dd-trace
+    ```
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://webpack.js.org
+[2]: /ja/serverless/installation/nodejs
+[3]: https://webpack.js.org/configuration/externals/

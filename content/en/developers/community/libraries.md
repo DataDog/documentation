@@ -169,7 +169,7 @@ A Winston Datadog [transport][62].
 
 If you've written a Datadog library and would like to add it to this page, send an email to [opensource@datadoghq.com][65].
 
-[1]: /metrics/dogstatsd_metrics_submission/
+[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [2]: /tracing/
 [3]: /serverless/
 [4]: /api/

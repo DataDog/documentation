@@ -1,13 +1,14 @@
 ---
-title: Google Cloud SQL マネージド MySQL のデータベースモニタリングの設定
-kind: documentation
 description: Google Cloud SQL で管理される MySQL のデータベースモニタリングをインストールして構成します。
 further_reading:
-  - link: /integrations/mysql/
-    tag: ドキュメント
-    text: 基本的な MySQL インテグレーション
+- link: /integrations/mysql/
+  tag: ドキュメント
+  text: 基本的な MySQL インテグレーション
+kind: documentation
+title: Google Cloud SQL マネージド MySQL のデータベースモニタリングの設定
 ---
-{{< site-region region="us3,us5,gov" >}}
+
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -27,7 +28,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 5.6、5.7、または 8.0+
 
 サポート対象の Agent バージョン
-: 7.30.0+
+: 7.33.0+
 
 パフォーマンスへの影響
 : データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。
@@ -216,7 +217,7 @@ Google Cloud Run などの Docker コンテナで動作するデータベース�
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.30.0
+export DD_AGENT_VERSION=7.32.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -237,7 +238,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 `Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.30.0
+FROM gcr.io/datadoghq/agent:7.32.0
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'

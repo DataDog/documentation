@@ -262,6 +262,22 @@ frontend database_monitoring_samples_frontend
     option tcplog
     default_backend datadog-database-monitoring-samples
 
+# This declares the endpoint where your Agents connects for
+# sending Network Devices Monitoring metadata (e.g the value of "network_devices.metadata.dd_url")
+frontend network_devices_metadata_frontend
+    bind *:3841
+    mode http
+    option tcplog
+    default_backend datadog-network-devices-metadata
+
+# This declares the endpoint where your Agents connect for
+# sending Instrumentations Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
+frontend instrumentation_telemetry_data_frontend
+    bind *:3843
+    mode tcp
+    option tcplog
+    default_backend datadog-instrumentations-telemetry
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -335,6 +351,21 @@ backend datadog-database-monitoring-samples
     # Uncomment the following configuration for older HAProxy versions
     # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
+backend datadog-network-devices-metadata
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 ndm-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
+backend datadog-instrumentations-telemetry
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 ```
 
 **Note**: Download the certificate with one of the following commands:
@@ -365,6 +396,8 @@ To send traces, profiles, processes, and logs through the proxy, setup the follo
 apm_config:
     apm_dd_url: http://haproxy.example.com:3835
     profiling_dd_url: http://haproxy.example.com:3836
+    telemetry:
+        dd_url: http://haproxy.example.com:3843
 
 process_config:
     process_dd_url: http://haproxy.example.com:3837
@@ -376,14 +409,15 @@ logs_config:
 
 database_monitoring:
     metrics:
-        logs_dd_url: haproxy.example.com:3839
-        logs_no_ssl: true
+        dd_url: haproxy.example.com:3839
     activity:
-        logs_dd_url: haproxy.example.com:3839
-        logs_no_ssl: true
+        dd_url: haproxy.example.com:3839
     samples:
-        logs_dd_url: haproxy.example.com:3840
-        logs_no_ssl: true
+        dd_url: haproxy.example.com:3840
+
+network_devices:
+    metadata:
+        dd_url: haproxy.example.com:3841
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate ({{< region-param key="dd_full_site" code="true" >}}) and your HAProxy hostname:
@@ -515,26 +549,54 @@ stream {
         proxy_ssl on;
         proxy_pass dbquery-intake.{{< region-param key="dd_site" >}}:443;
     }
+    server {
+        listen 3841; #listen for network devices metadata
+        proxy_ssl on;
+        proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3843; #listen for instrumentations telemetry data
+        proxy_ssl on;
+        proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
+    }
 }
 ```
 
 #### Datadog Agent configuration
 
+Edit each Agent configuration file to point to Nginx by setting its `dd_url` to the address of Nginx, for example: `nginx.example.com`.
+This `dd_url` setting can be found in the `datadog.yaml` file.
+
+`dd_url: http://nginx.example.com:3834`
+
 To use the Datadog Agent v6/7.16+ as the logs collector, instruct the Agent to use the newly created proxy instead of establishing a connection directly with the logs intake by updating `datadog.yaml`:
 
 ```yaml
+apm_config:
+    apm_dd_url: http://nginx.example.com:3835
+    profiling_dd_url: http://nginx.example.com:3836
+    telemetry:
+        dd_url: http://nginx.example.com:3843
+
+process_config:
+    process_dd_url: http://nginx.example.com:3837
+
 logs_config:
-  use_http: true
-  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3838"
-  logs_no_ssl: true
+    use_http: true
+    logs_dd_url: nginx.example.com:3838
+    logs_no_ssl: true
 
 database_monitoring:
     metrics:
-        dd_url: "<PROXY_SERVER_DOMAIN>:3839"
+        dd_url: nginx.example.com:3839
     activity:
-        dd_url: "<PROXY_SERVER_DOMAIN>:3839"
+        dd_url: nginx.example.com:3839
     samples:
-        dd_url: "<PROXY_SERVER_DOMAIN>:3840"
+        dd_url: nginx.example.com:3840
+
+network_devices:
+    metadata:
+        dd_url: nginx.example.com:3841
 ```
 
 When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.

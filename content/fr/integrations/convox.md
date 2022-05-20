@@ -5,30 +5,35 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - cloud
+- cloud
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/convox/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/convox/README.md
 display_name: Convox
 draft: false
 git_integration_title: convox
 guid: e8b1f8a7-8859-4c85-81bd-044400854e59
 integration_id: convox
 integration_title: Convox
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
-manifest_version: 1.0.1
+manifest_version: 1.0.0
 name: convox
 public_title: Intégration Datadog/Convox
-short_description: Convox est une plate-forme en tant que service open source conçue pour garantir une confidentialité totale sans le moindre besoin de maintenance.
+short_description: Convox est une plate-forme en tant que service open source conçue
+  pour garantir une confidentialité totale sans le moindre besoin de maintenance.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques de Convox en temps réel pour visualiser les performances de vos conteneurs :
@@ -37,7 +42,7 @@ Recueillez des métriques de Convox en temps réel pour visualiser les performan
 
 ## Configuration
 
-Consultez la [documentation relative à la configuration de Convox][2].
+Consultez la documentation Convox pour [configurer Datadog][2] (en anglais).
 
 ### Déployer l'Agent Datadog
 

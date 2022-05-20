@@ -39,7 +39,7 @@ Datadog vous permet de configurer des monitors pour surveiller la santé de vos 
 
 4. **Définissez le champ *Alert when* sur 100%**.
 
-    Cela signifie que l'alerte se déclenchera uniquement si tous les événements de la période sélectionnée sont anormaux, ce qui est préférable lorsque vous débutez avec la détection d'anomalie. Plus tard, vous pourrez définir une valeur mieux adaptée à votre situation. Consultez la [FAQ][6] pour en savoir plus sur les monitors de détection d'anomalie.
+    Cela signifie que l'alerte se déclenchera uniquement si tous les événements de la période sélectionnée sont anormaux, ce qui est préférable lorsque vous débutez avec la détection d'anomalies. Plus tard, vous pourrez définir une valeur mieux adaptée à votre situation. Consultez la [FAQ][6] pour en savoir plus sur les monitors de détection d'anomalies.
 
 5. **Changez la notification d'alerte**.
 

@@ -30,6 +30,53 @@ Install the [`datadog-ci`][2] CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
+### Standalone binary (beta)
+
+<div class="alert alert-warning"><strong>Note</strong>: The standalone binaries are in <strong>beta</strong> and their stability is not guaranteed.</div>
+
+If installing NodeJS in the CI is an issue, standalone binaries are provided with [Datadog CI releases][3]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+{{< code-block lang="bash" >}}
+curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
+{{< /code-block >}}
+
+Then run any command with `datadog-ci`:
+{{< code-block lang="bash" >}}
+datadog-ci version
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "MacOS" %}}
+{{< code-block lang="bash" >}}
+curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
+{{< /code-block >}}
+
+Then run any command with `datadog-ci`:
+{{< code-block lang="bash" >}}
+datadog-ci version
+{{< /code-block >}}
+
+{{% /tab %}}
+
+
+
+{{% tab "Windows" %}}
+{{< code-block lang="powershell" >}}
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+{{< /code-block >}}
+
+Then run any command with `Start-Process -FilePath "datadog-ci.exe"`:
+{{< code-block lang="powershell" >}}
+Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Uploading test reports
 
 To upload your JUnit XML test reports to Datadog, run the following command, specifying the name of the service or library that was tested using the `--service` parameter, and one or more file paths to either the XML report files directly or directories containing them:
@@ -38,7 +85,7 @@ To upload your JUnit XML test reports to Datadog, run the following command, spe
 datadog-ci junit upload --service <service_name> <path> [<path> ...]
 {{< /code-block >}}
 
-Specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
+Specify a valid [Datadog API key][4] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
 <pre>
 <code>
@@ -47,6 +94,8 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
   unit-tests/junit-reports e2e-tests/single-report.xml
 </code>
 </pre>
+
+**Note:** Reports larger than 250 MiB may not be process completely resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
 
 ## Configuration settings
 
@@ -69,6 +118,12 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
+`--logs` **(beta)**
+: Enable forwarding content from the XML reports as [Logs][5]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
+**Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
+**Default**: `false`<br/>
+**Note**: Logs are billed separately from CI Visibility.
+
 `--max-concurrency`
 : The number of concurrent uploads to the API.<br/>
 **Default**: `20`
@@ -83,19 +138,19 @@ Positional arguments
 The following environment variables are supported:
 
 `DATADOG_API_KEY` (Required)
-: [Datadog API key][3] used to authenticate the requests.<br/>
+: [Datadog API key][4] used to authenticate the requests.<br/>
 **Default**: (none)
 
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
-: The [Datadog site][4] to upload results to.<br/>
+: The [Datadog site][6] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ## Collecting repository and commit metadata
 
-Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][5] binary is required.
+Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][7] binary is required.
 
 If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
 
@@ -237,6 +292,8 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 
 [1]: https://junit.org/junit5/
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /getting_started/site/
-[5]: https://git-scm.com/downloads
+[3]: https://github.com/DataDog/datadog-ci/releases
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /logs/
+[6]: /getting_started/site/
+[7]: https://git-scm.com/downloads

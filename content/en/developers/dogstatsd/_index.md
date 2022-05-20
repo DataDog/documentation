@@ -43,9 +43,9 @@ DogStatsD accepts [custom metrics][5], [events][6], and [service checks][7] over
 
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application doesn't experience an interruption.
 
-{{< img src="metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd" >}}
 
-As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called _the flush interval_ (ten seconds, by default).
+As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called _the flush interval_. DogStatsD uses a flush interval of 10 seconds.
 
 ## Setup
 
@@ -85,7 +85,8 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 By default, DogStatsD listens on UDP port **8125**, so you need to bind this port to your host port when running the Agent in a container. If your StatsD metrics come from outside of `localhost`you must set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` to allow metric collection. In order to run the Agent with the DogStatsd server up, execute the following command:
 
 ```shell
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+docker run -d --cgroupns host \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -214,7 +215,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 
      With this, any pod running your application is able to send DogStatsD metrics through port `8125` on `$DD_AGENT_HOST`.
 
-[1]: /metrics/dogstatsd_metrics_submission/
+[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
@@ -330,10 +331,6 @@ require 'datadog/statsd'
 # Create a DogStatsD client instance.
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
-
-<div class="alert alert-warning">
-  By default, Ruby DogStatsD client instances cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>single_thread</code> to <code>true</code>. See the <a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby repo</a> on GitHub for more details.
-</div>
 
 {{< /programming-lang >}}
 
@@ -488,7 +485,7 @@ For all available options, see [Datadog's GoDoc][1].
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-As of v2.10.0 the recommended way to instantiate the client is via the NonBlockingStatsDClientBuilder. You
+As of v2.10.0 the recommended way to instantiate the client is with the NonBlockingStatsDClientBuilder. You
 can use the following builder methods to define the client parameters.
 
 | Builder Method                               | Type           | Default   | Description                                                                         |
@@ -500,23 +497,19 @@ can use the following builder methods to define the client parameters.
 | `blocking(boolean val)`                      | Boolean        | false     | The type of client to instantiate: blocking vs non-blocking.                        |
 | `socketBufferSize(int val)`                  | Integer        | -1        | The size of the underlying socket buffer.                                           |
 | `enableTelemetry(boolean val)`               | Boolean        | false     | Client telemetry reporting.                                                         |
-| `entityID(String val)`                       | String         | null      | Entitity ID for origin detection.                                                   |
+| `entityID(String val)`                       | String         | null      | Entity ID for origin detection.                                                   |
 | `errorHandler(StatsDClientErrorHandler val)` | Integer        | null      | Error handler in case of an internal client error.                                  |
-| `maxPacketSizeBytes(int val)`                | Integer        | 8192/1432 | The maxumum packet size; 8192 over UDS, 1432 for UDP.                               |
+| `maxPacketSizeBytes(int val)`                | Integer        | 8192/1432 | The maximum packet size; 8192 over UDS, 1432 for UDP.                               |
 | `processorWorkers(int val)`                  | Integer        | 1         | The number of processor worker threads assembling buffers for submission.           |
 | `senderWorkers(int val)`                     | Integer        | 1         | The number of sender worker threads submitting buffers to the socket.               |
 | `poolSize(int val)`                          | Integer        | 512       | Network packet buffer pool size.                                                    |
 | `queueSize(int val)`                         | Integer        | 4096      | Maximum number of unprocessed messages in the queue.                                |
 | `timeout(int val)`                           | Integer        | 100       | the timeout in milliseconds for blocking operations. Applies to unix sockets only.  |
 
-For more information, see the [NonBlockingStatsDClient Class][1] and [NonBlockingStatsDClientBuilder Class][2] documentation.
-
-If you are on an older client release, please see the deprecated constructor documentation [here][3].
+For more information, search the Java DogStatsD [package][1] for the NonBlockingStatsDClient Class and NonBlockingStatsDClientBuilder Class. Make sure you view the version that matches your client release.
 
 
-[1]: https://jar-download.com/javaDoc/com.datadoghq/java-dogstatsd-client/2.13.0/com/timgroup/statsd/NonBlockingStatsDClient.html
-[2]: https://jar-download.com/javaDoc/com.datadoghq/java-dogstatsd-client/2.13.0/com/timgroup/statsd/NonBlockingStatsDClientBuilder.html
-[3]: https://javadoc.io/static/com.datadoghq/java-dogstatsd-client/2.9.0/com/timgroup/statsd/NonBlockingStatsDClient.html
+[1]: https://javadoc.io/doc/com.datadoghq/java-dogstatsd-client/latest/index.html
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
@@ -545,7 +538,7 @@ If you are on an older client release, please see the deprecated constructor doc
 DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced features which are specific to Datadog, including available data types, events, service checks, and tags:
 
 {{< whatsnext desc="">}}
-{{< nextlink href="/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -553,7 +546,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][9] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
-[2]: /metrics/dogstatsd_metrics_submission/
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /metrics/custom_metrics/

@@ -20,13 +20,16 @@ further_reading:
 ## Compatibility
 
 Supported Jenkins versions:
-* Jenkins >= 2.164.1
+* For 3.x versions of the plugin: Jenkins >= 2.164.1
+* For 4.x versions of the plugin: Jenkins >= 2.303.3
 
 ## Prerequisite
 
 Install the [Datadog Agent][1] on the Jenkins controller instance.
 
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
+
+<div class="alert alert-info"><strong>Note</strong>: Unix domain sockets are not yet supported for sending CI Visibility traces.</div>
 
 ## Install the Datadog Jenkins plugin
 
@@ -44,7 +47,7 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the `Datadog Agent` mode.
+3. Select the `Datadog Agent` mode. CI Visibility is **not supported** using Datadog API URL and API key.
 4. Configure the `Agent` host.
 5. Configure the `Traces Collection` port (default `8126`).
 6. Click on `Enable CI Visibility` checkbox to activate it.

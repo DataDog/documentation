@@ -49,7 +49,7 @@ The following Datadog tracing libraries are supported:
 
 | Library                             | Minimum Version                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][5]                  | [0.22.0][6]                |
+| [Python][5]                  | [0.50.4][6]                |
 | [Go][7]                  | [1.10.0][8]                |
 | [Java][9]                  | [0.24.1][10]                |
 | [Ruby][11]                  | [0.20.0][12]                |
@@ -95,7 +95,7 @@ These traces are retained [just like your classical APM traces][19].
 [3]: /tracing/
 [4]: https://app.datadoghq.com/synthetics/settings/default
 [5]: /tracing/setup_overview/setup/python/
-[6]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
+[6]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.50.4
 [7]: /tracing/setup_overview/setup/go/
 [8]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
 [9]: /tracing/setup_overview/setup/java/

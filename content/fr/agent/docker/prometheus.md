@@ -36,7 +36,8 @@ Lancez l'Agent Docker à côté de vos autres conteneurs en remplaçant `<CLÉ_A
 {{% tab "Standard" %}}
 
 ```shell
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+docker run -d --cgroupns host \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \
@@ -138,7 +139,8 @@ Pour commencer à recueillir des métriques exposées par un déploiement Promet
     {{% tab "Configuration standard" %}}
 
 ```shell
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+docker run -d --cgroupns host \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \

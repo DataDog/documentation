@@ -23,7 +23,6 @@ It is recommended that containers are monitored with a single containerized Agen
 
 Datadog bills based on the sum of AWS Lambda invocations across the month for your accounts. Pro and Enterprise plans include 150,000 Indexed Spans and 5 custom metrics per million invocations. Billing for serverless APM depends on the total number of [Indexed Spans][4] exceeding the bundled quantity submitted to the Datadog APM service at the end of the month. There are no billable [APM Hosts][4] when using serverless.
 
-**Note** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
 For more information, see the [Serverless billing page][5] and the [Datadog Pricing page][6].
 
@@ -53,7 +52,7 @@ To change your payment method, contact your [Customer Success][12] Manager.
 
 ### Billing emails
 
-You can set specific email addresses to receive invoices on the [Biling history][13] page under **Manage Billing Emails**:
+You can set specific email addresses to receive invoices on the [Billing history][13] page under **Manage Billing Emails**:
 
 {{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
 
@@ -80,7 +79,7 @@ You can set specific email addresses to receive invoices on the [Biling history]
     {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
     {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (Distributed Tracing & Continuous Profiler){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring FAQ{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}RUM & Session Replay{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}

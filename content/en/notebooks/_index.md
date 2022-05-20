@@ -4,15 +4,12 @@ kind: documentation
 aliases:
   - /graphing/notebooks/
 further_reading:
+- link: "https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/"
+  tag: "Blog"
+  text: "Create and navigate a documentation library"
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"
-- link: "/dashboards/screenboard/"
-  tag: "Documentation"
-  text: "Create a Screenboard"
-- link: "/dashboards/timeboard/"
-  tag: "Documentation"
-  text: "Create a Timeboard"
 - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
   tag: 'Blog'
   text: 'Best practices for writing incident postmortems'
@@ -36,7 +33,7 @@ Everyone on your team can open or edit any notebook, but a notebook can only be 
 
 ## Commenting
 
-To add a comment, select some text or hover over a graph. The **Add comment** button will appear to the right of the cell.
+To add a comment, select some text or hover over a graph. The **Add comment** button is displayed to the right of the cell.
 
 {{< img src="notebooks/add_comment.png" alt="add a comment to text" style="width:90%;">}}
 

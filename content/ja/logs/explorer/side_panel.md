@@ -18,7 +18,7 @@ further_reading:
 ## 概要
 Datadog は次の一般的なサイドパネルレイアウトに従い、個々のログを表示します。
 
-{{< img src="logs/explorer/side_panel/overview.png" alt="ログエクスプローラーのサイドパネル"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/overview.png" alt="ログエクスプローラーのサイドパネル" style="width:60%;">}}
 
 - パネルの上部には、一般的な**コンテキスト**情報が表示されます
 - パネルの下部には、ログの実際の**コンテンツ**が表示されます
@@ -40,11 +40,11 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 
 **Metrics** タブをクリックして、ログの周囲の 30 分の時間枠で基底のインフラストラクチャーメトリクスにアクセスします。
 
-上部の予約済み属性セクション、関連する[ホストダッシュボード][5]、または[ネットワークページ][6]で**ホスト**を操作します。**Container** セクションを操作して、基底のパラメーターでスコープされた[コンテナページ][7]にジャンプします。
+上部の予約済み属性セクション、関連する[ホストダッシュボード][5]、または[ネットワークページ][6]で**ホスト**を操作します。**Container** セクションを操作して、基底のパラメーターでスコープされた[コンテナページ][7]に移動します。
 
-{{< img src="logs/explorer/side_panel/infra.gif" alt="インフラへのハブ" style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/infra.mp4" alt="インフラへのハブ" video=true style="width:100%;">}}
 
-ログがサーバーレスソースからのものである場合、ホストセクションは、対応する[サーバーレスページ][8]にリンクするサーバーレスセクションに置き換えられます。
+ログがサーバーレスソースからのものであるとき、ホストセクションは、対応する[サーバーレスページ][8]にリンクするサーバーレスセクションに置き換えられます。
 
 {{< img src="logs/explorer/side_panel/infra-serverless.png" alt="サーバーレスへのハブ" style="width:80%;">}}
 
@@ -52,11 +52,11 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 
 [ログへのトレースの挿入][9]を有効にし、[統合サービスタグ付け][10]のベストプラクティスに従って、ログと APM の相関のすべての機能を活用してください。
 
-**APM タブ**をクリックして、アップストリームサービスとダウンストリームサービスが実行されている、トレース全体のコンテキストでログを表示します。APM データの詳細と [APM のトレース][11]機能を確認します。
+**Trace タブ**をクリックし、アップストリームおよびダウンストリームのサービスが実行されている状態で、トレース全体のコンテキストでログを確認します。[View Trace Details][11] をクリックして、対応する APM データを深く掘り下げます。
 
-**Service** セクションを操作して、ログエクスプローラーでの検索に再度焦点を合わせ、同じトレースからの他のすべてのログを表示します。
+**Service** セクションを操作して、選択したサービスに対応するトレース部をハイライトします。この情報を使用して、ログエクスプローラーのクエリに再度フォーカスしたり、同じトレースからの他のログを確認したりできます。
 
-{{< img src="logs/explorer/side_panel/infra.gif" alt="APM へのハブ" style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/trace.mp4" alt="APM へのハブ" video=true style="width:100%;">}}
 
 ## トラブルシューティングのコンテキストを構成
 
@@ -65,11 +65,11 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 - ログテーブルに列を追加または削除する
 - 検索リクエストに特定の値 (include または exclude) を付加します。
 
-{{< img src="logs/explorer/side_panel/context.gif" alt="サイドパネルのコンテキスト"  style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/context.jpg" alt="サイドパネルコンテキスト" style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="サイドパネルコンテキスト" style="width:50%;">}}
 
 - 属性からファセットまたはメジャーを作成または編集します。[ログファセット][12]を参照してください。
 
-{{< img src="logs/explorer/side_panel/facets.gif" alt="サイドパネルファセット"  style="width:100%;">}}
+{{< img src="logs/explorer/side_panel/facets.mp4" alt="サイドパネルファセット" video=true style="width:100%;">}}
 
 ## ログの共有
 
@@ -77,8 +77,6 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 
 - **Copy to clipboard** または `Ctrl+C` / `Cmd+C` を使用して、ログの JSON をクリップボードにコピーします。
 - **Share Event** は、メールや Slack などを介して、ログを (基底のビューとともに) チームメイトと共有します。利用可能なすべての [Datadog 通知インテグレーション][13]を参照してください。
-
-{{< img src="logs/explorer/side_panel/upper_log_panel.png" alt="上部ログパネル"  style="width:80%;">}}
 
 ## その他の参考資料
 

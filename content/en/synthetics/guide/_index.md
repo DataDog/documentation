@@ -22,7 +22,7 @@ private: true
 {{< whatsnext desc="Browser Tests:" >}}
     {{< nextlink href="synthetics/guide/browser-test-self-maintenance/" >}}Why are browser tests self-maintaining?{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}TOTPs For Multi-Factor Authentication (MFA) in Browser Test{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}TOTPs For Multi-Factor Authentication (MFA) in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Reusing browser tests journeys across your test suite{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation" >}}Email validation with browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Test file upload and download{{< /nextlink >}}
@@ -31,4 +31,6 @@ private: true
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manage-browser-tests-through-the-api/" >}}Manage your browser tests programmatically{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Using a shadow DOM in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of the RUM Explorer in Synthetics{{< /nextlink >}}
 {{< /whatsnext >}}

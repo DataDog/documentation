@@ -47,7 +47,7 @@ snmp_listener:
   workers: 100              # デバイスの検出に同時に使用されるワーカー数
   discovery_interval: 3600  # 秒数
   configs:
-    - network: 1.2.3.4/24   # CIDR 表記。/24 ブロック以下を推奨
+    - network: 1.2.3.4/24   # CIDR 表記。Datadog は /24 ブロック以下を推奨
       version: 2
       port: 161
       community: ***
@@ -74,7 +74,7 @@ snmp_listener:
   workers: 100              # デバイスの検出に同時に使用されるワーカー数
   discovery_interval: 3600  # 各オートディスカバリー間のインターバル（秒）
   configs:
-    - network: 1.2.3.4/24   # CIDR 表記。/24 ブロック以下を推奨
+    - network: 1.2.3.4/24   # CIDR 表記。Datadog は /24 ブロック以下を推奨
       snmp_version: 3
       user: "user"
       authProtocol: "fakeAuth"

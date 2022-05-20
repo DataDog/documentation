@@ -1,43 +1,46 @@
 ---
-title: Kubernetes インテグレーションオートディスカバリー
 aliases:
-  - /ja/agent/autodiscovery/integrations
-  - /ja/guides/servicediscovery/
-  - /ja/guides/autodiscovery/
-kind: documentation
+- /ja/agent/autodiscovery/integrations
+- /ja/guides/servicediscovery/
+- /ja/guides/autodiscovery/
 further_reading:
-  - link: /agent/kubernetes/log/
-    tag: ドキュメント
-    text: アプリケーションログの収集
-  - link: /agent/kubernetes/apm/
-    tag: ドキュメント
-    text: アプリケーショントレースの収集
-  - link: /agent/kubernetes/prometheus/
-    tag: ドキュメント
-    text: Prometheus メトリクスの収集
-  - link: /agent/guide/autodiscovery-management/
-    tag: ドキュメント
-    text: データ収集をコンテナのサブセットのみに制限
-  - link: /agent/kubernetes/tag/
-    tag: ドキュメント
-    text: コンテナから送信された全データにタグを割り当て
+- link: /agent/kubernetes/log/
+  tag: ドキュメント
+  text: アプリケーションログの収集
+- link: /agent/kubernetes/apm/
+  tag: ドキュメント
+  text: アプリケーショントレースの収集
+- link: /agent/kubernetes/prometheus/
+  tag: ドキュメント
+  text: Prometheus メトリクスの収集
+- link: /agent/guide/autodiscovery-management/
+  tag: ドキュメント
+  text: データ収集をコンテナのサブセットのみに制限
+- link: /agent/kubernetes/tag/
+  tag: ドキュメント
+  text: コンテナから送信された全データにタグを割り当て
+kind: documentation
+title: Kubernetes インテグレーションオートディスカバリー
 ---
+
 <div class="alert alert-info">
 <a href="/getting_started/agent/autodiscovery">この機能の背後にある概念については、オートディスカバリーの概要ドキュメントを参照してください</a>。
 </div>
 
 このページでは、インテグレーションオートディスカバリーと Kubernetes を構成する方法について説明します。Docker または Amazon ECS を使用している場合は、[Docker インテグレーションオートディスカバリーのドキュメント][1]を参照してください。オートディスカバリーの目的は、特定のコンテナに対して Agent チェックを実行するときに、Datadog インテグレーションコンフィギュレーションを適用することです。このロジックのより詳細な内容については、ホストで Agent を実行している場合の [Agent インテグレーションの構成方法][2]のドキュメントを参照してください。
 
+パスワードなど、平文で保存したくないコンフィギュレーション値がある場合は、[秘密管理][3]を参照してください。
+
 オートディスカバリーを使用してインテグレーションを構成するには、以下のパラメーターを使用します。
 
 | パラメーター            | 必須 | 説明                                                                                       |
 |----------------------|----------|---------------------------------------------------------------------------------------------------|
-| `<INTEGRATION_NAME>` | 〇      | Datadog インテグレーションの名前                                                                   |
-| `<INIT_CONFIG>`      | 〇      | `conf.yaml` の `init_config:` の下にリストされ、有効にするインテグレーションに必要なコンフィギュレーションパラメーター。         |
-| `<INSTANCE_CONFIG>`  | 〇      | `<初期コンフィギュレーション>` の一部であるこれらは、`conf.yaml` の `instances:` の下にリストされ、有効にするインテグレーションに必要なコンフィギュレーションパラメーターです。         |
+| `<インテグレーション名>` | 〇      | Datadog インテグレーションの名前                                                                   |
+| `<初期コンフィギュレーション>`      | 〇      | `conf.yaml` の `init_config:` の下にリストされ、有効にするインテグレーションに必要なコンフィギュレーションパラメーター。         |
+| `<インスタンスコンフィギュレーション>`  | 〇      | `<初期コンフィギュレーション>` の一部であるこれらは、`conf.yaml` の `instances:` の下にリストされ、有効にするインテグレーションに必要なコンフィギュレーションパラメーターです。         |
 | `<LOG_CONFIG>`  | 〇      | `<初期コンフィギュレーション>` の一部であるこれらは、`conf.yaml` の `logs:` の下にリストされているコンフィギュレーションパラメーターで、Datadog に送信するログを定義します。        |
 
-[**オートディスカバリー対応の Agent インテグレーションの完全なリストとそれらのパラメーターの例をご覧ください**][3]
+[**オートディスカバリー対応の Agent インテグレーションの完全なリストとそれらのパラメーターの例をご覧ください**][4]
 
 以下の各セクションのタブで、特定のコンテナにインテグレーションテンプレートを適用するそれぞれの方法を示します。次の方法があります。
 
@@ -46,7 +49,7 @@ further_reading:
 * [Key-Value ストア](?tab=keyvaluestore#configuration)
 * [Helm チャート](?tab=helm#configuration)
 
-**注**: サポートされているインテグレーションの一部 ([Ceph][4]、[Varnish][5]、[Postfix][6]、[Cassandra Nodetools][7]、[Gunicorn][8]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。
+**注**: サポートされているインテグレーションの一部 ([Ceph][5]、[Varnish][6]、[Postfix][7]、[Cassandra Nodetools][8]、[Gunicorn][9]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。
 標準のオートディスカバリーと互換性のないインテグレーションを設定するには、ポッドで公式の Prometheus エクスポーターを使用し、次に Agent で OpenMetrics チェックとオートディスカバリーを使用してポッドを見つけ、エンドポイントをクエリします。たとえば、Kubernetes の標準パターンは、ノードレベルまたはクラスターレベルのコレクターを持つサイドカーアダプターです。この設定によってエクスポーターはデータにアクセスでき、HTTP エンドポイントを使用してそのデータを公開します。これにより、OpenMetrics チェックと Datadog オートディスカバリーはこのデータにアクセスできます。
 
 ## コンフィギュレーション
@@ -154,7 +157,7 @@ instances:
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-Kubernetes では、[ConfigMaps][1] を使用できます。以下のテンプレートと[Kubernetes カスタムインテグレーションに関するドキュメント][2]を参照してください。
+Kubernetes では、[ConfigMaps][1] を使用して外部でコンフィギュレーションを定義し、その後マニフェストを使用してマウントすることができます。以下のテンプレートと [Kubernetes カスタムインテグレーション][2]のドキュメントを参照してください。
 
 ```text
 kind: ConfigMap
@@ -252,13 +255,14 @@ key-value ストアがテンプレートソースとして有効になってい�
       instances:
         - <INSTANCES_CONFIG>
 ```
-`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` の詳細については、[オートディスカバリーコンテナ識別子][1]のドキュメントを参照してください。
+`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` の詳細については、[オートディスカバリーコンテナ識別子][2]を参照してください。
 
-**注**: Helm チャートには 2 つの `confd` セクション（Agent チェック用とクラスターチェック用）があります。Cluster Agent を使用しクラスターチェックにオートディスカバリーを構成する場合は、[クラスターチェックのコンフィギュレーション例][2]に従い、必ず `cluster_check: true` を含めます。詳しいコンテキストについては、[クラスターチェックのドキュメント][3]を参照してください。
+**注**: Helm チャートには 2 つの `confd` セクション（Agent チェック用とクラスターチェック用）があります。Cluster Agent を使用しクラスターチェックにオートディスカバリーを構成する場合は、[クラスターチェックのコンフィギュレーション例][3]に従い、必ず `cluster_check: true` を含めます。詳しいコンテキストについては、[クラスターチェック][4]を参照してください。
 
-[1]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L244-L261
-[2]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L426-L438
-[3]: /ja/agent/cluster_agent/clusterchecks
+[1]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L315-L330
+[2]: /ja/agent/guide/ad_identifiers/
+[3]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
+[4]: /ja/agent/cluster_agent/clusterchecks
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -366,7 +370,7 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 
 以下のコンフィギュレーションは、カスタムパスワードパラメーターを使用して Redis コンテナのインテグレーションテンプレートを定義します。
 ```yaml
-  confd
+  confd:
     redisdb.yaml: |-
       ad_identifiers:
         - redis
@@ -387,7 +391,7 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 
 以下の構成は、`<CONTAINER_IDENTIFIER>` : `apache` を持つ Apache コンテナイメージに適用されます。オートディスカバリーテンプレートは、Apache コンテナからメトリクスを収集し、2 つのエンドポイントをテストするためのインスタンスで Datadog-HTTP チェックをセットアップするように構成されます。
 
-チェック名は、`apache`、`http_check`、これらの `<初期コンフィギュレーション>`、および `<インスタンスコンフィギュレーション>` です。完全な構成は、それぞれのドキュメントの [Datadog-Apache インテグレーション][9]と [Datadog-HTTP チェックインテグレーション][10]のページにあります。
+チェック名は、`apache`、`http_check`、これらの `<初期コンフィギュレーション>`、および `<インスタンスコンフィギュレーション>` です。完全な構成は、それぞれのドキュメントの [Datadog-Apache インテグレーション][10]と [Datadog-HTTP チェックインテグレーション][11]のページにあります。
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -550,11 +554,12 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 
 [1]: /ja/agent/docker/integrations/
 [2]: /ja/getting_started/integrations/#configuring-agent-integrations
-[3]: /ja/integrations/#cat-autodiscovery
-[4]: /ja/integrations/ceph/
-[5]: /ja/integrations/varnish/#autodiscovery
-[6]: /ja/integrations/postfix/
-[7]: /ja/integrations/cassandra/#agent-check-cassandra-nodetool
-[8]: /ja/integrations/gunicorn/
-[9]: /ja/integrations/apache/#setup
-[10]: /ja/integrations/http_check/#setup
+[3]: /ja/agent/guide/secrets-management/
+[4]: /ja/integrations/#cat-autodiscovery
+[5]: /ja/integrations/ceph/
+[6]: /ja/integrations/varnish/#autodiscovery
+[7]: /ja/integrations/postfix/
+[8]: /ja/integrations/cassandra/#agent-check-cassandra-nodetool
+[9]: /ja/integrations/gunicorn/
+[10]: /ja/integrations/apache/#setup
+[11]: /ja/integrations/http_check/#setup

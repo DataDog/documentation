@@ -25,7 +25,7 @@ further_reading:
     text: Pratiques recommandées pour la création de post-mortems d'incident
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La fonctionnalité de gestion des incidents n'est pas disponible pour le site gouvernemental de Datadog.</div>
+<div class="alert alert-warning">La fonctionnalité de gestion des incidents n'est pas disponible le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Présentation
@@ -105,7 +105,7 @@ Ce guide décrit l'utilisation du [presse-papiers Datadog][2] pour déclarer un 
 
 La page d'un incident comprend quatre sections principales : _Overview_, _Timeline_, _Remediation_ et _Communication_. Mettez à jour ces sections à mesure que l'incident évolue pour tenir l'équipe informée.
 
-#### Overview
+#### Présentation
 
 **Scénario :** Après une première enquête, vous découvrez que le problème est causé par un host qui arrive à court de mémoire. Vous avez également été informé qu'une petite partie des clients est impactée, avec un chargement des pages ralenti. Le premier signalement client est arrivé il y a 15 minutes. Il s'agit d'un incident de sévérité 3.
 
@@ -173,7 +173,7 @@ La _Timeline_ affiche les modifications des champs et des informations de l'inci
 
     {{< img src="getting_started/incident_management/add_from_slack.png" alt="Ajouter depuis Slack" responsive="true" style="width:40%;">}}
 
-    Vous pouvez ajouter n'importe quel commentaire publié sur le canal Slack de l'incident à la timeline afin de consolider facilement les communications importantes relatives aux phases d'enquête et de remédiation.
+    Vous pouvez ajouter n'importe quel commentaire publié sur le canal Slack de l'incident à la timeline afin de consolider les communications importantes relatives aux phases d'enquête et de remédiation.
 
 #### Remediation
 

@@ -8,9 +8,9 @@ further_reading:
   - link: /real_user_monitoring/explorer/
     tag: Documentation
     text: Explorer vos vues dans Datadog
-  - link: /real_user_monitoring/explorer/analytics/
+  - link: /real_user_monitoring/explorer/visualize/
     tag: Documentation
-    text: Générer des analyses à partir de vos événements
+    text: Appliquer des visualisations sur vos événements
   - link: /real_user_monitoring/dashboards/
     tag: Documentation
     text: Dashboards RUM
@@ -38,7 +38,7 @@ Les [signaux Web essentiels de Google][4] désignent trois métriques visant à 
 
 | Métrique                   | Caractéristique            | Description                                                                                           | Valeur cible |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
-| [Largest Contentful Paint][5] | Performances de chargement | Temps nécessaire lors du chargement de la page pour afficher le plus grand objet DOM dans la fenêtre d'affichage.         | < 2,5 s       |
+| [Largest Contentful Paint][5] | Performances de chargement | Moment où l'objet DOM le plus volumineux est affiché dans la fenêtre d'affichage (à savoir, visible à l'écran) lors du chargement de la page.         | < 2,5 s       |
 | [First Input Delay][6]        | Interactivité    | Délai entre le moment où l'utilisateur interagit pour la première fois avec la page et le moment où le navigateur répond à cette interaction.             | < 100 ms      |
 | [Cumulative Layout Shift][7]  | Stabilité visuelle | Nombre de mouvements de page inattendus causés par le chargement dynamique de contenu (par exemple, des publicités tierces). Lorsqu'aucun décalage ne se produit, cette métrique a pour valeur 0. | < 0,1        |
 
@@ -52,7 +52,7 @@ Les [signaux Web essentiels de Google][4] désignent trois métriques visant à 
 | Attribut                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | nombre (ns) | Temps passé sur la vue actuelle.                                                                                                                                                                                       |
-| `view.largest_contentful_paint` | nombre (ns) | Temps nécessaire lors du chargement de la page pour afficher le plus grand objet DOM dans la fenêtre d'affichage.                                                                                                |
+| `view.largest_contentful_paint` | nombre (ns) | Moment où l'objet DOM le plus volumineux est affiché dans la fenêtre d'affichage (à savoir, visible à l'écran) lors du chargement de la page.                                                                                                |
 | `view.first_input_delay`        | nombre (ns) | Délai entre le moment où l'utilisateur interagit pour la première fois avec la page et le moment où le navigateur répond à cette interaction.                                                                                                                             |
 | `view.cumulative_layout_shift`  | nombre      | Nombre de mouvements de page inattendus causés par le chargement dynamique de contenu (par exemple, des publicités tierces). Lorsqu'aucun décalage ne se produit, cette métrique a pour valeur 0.                                                                               |
 | `view.loading_time`             | nombre (ns) | Temps écoulé avant que la page ne soit prête et que toutes les requêtes réseau ou mutations DOM soient terminées. [En savoir plus][9].                                                                             |

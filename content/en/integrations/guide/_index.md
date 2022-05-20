@@ -8,6 +8,7 @@ private: true
 Integration Guides:
 
 {{< whatsnext desc=" " >}}
+    {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag="documentation" >}}Troubleshooting the AWS integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/requests" tag="documentation" >}}Request Datadog Integrations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag="AWS" >}}Using Amazon Cloudformation{{< /nextlink >}}

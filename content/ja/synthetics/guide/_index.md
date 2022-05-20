@@ -1,7 +1,7 @@
 ---
-title: Synthetic モニタリングガイド
 kind: ガイド
 private: true
+title: Synthetic モニタリングガイド
 ---
 
 {{< whatsnext desc="一般的なガイド:" >}}
@@ -13,8 +13,10 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API テスト:" >}}
-    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}API テストのタイミングと各バリエーションのトラブルシューティングを理解する{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/or-logic-api-tests-assertions" >}}API テストのアサーションで OR ロジックを実行する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}API テストのタイミングを理解し、ばらつきのトラブルシューティングを行う{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/or-logic-api-tests-assertions" >}}API テストアサーションで OR ロジックを実行する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/monitor-https-redirection" >}}HTTP リクエストが HTTPS にリダイレクトされることを監視する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/create-api-test-with-the-api" >}}API を使用して API テストを作成する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="ブラウザテスト:" >}}
@@ -28,4 +30,7 @@ private: true
     {{< nextlink href="synthetics/guide/browser-tests-switch-tabs/" >}}ブラウザのテストでタブを切り替えることはできますか？{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}カスタムユーザーエージェントでステップを記録する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}ブラウザテスト Chrome 拡張機能を手動で追加する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/manage-browser-tests-through-the-api/" >}}ブラウザテストをプログラムで管理する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}ブラウザテストで Shadow DOM を使用する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Synthetics で RUM エクスプローラーのプレビューを見る{{< /nextlink >}}
 {{< /whatsnext >}}

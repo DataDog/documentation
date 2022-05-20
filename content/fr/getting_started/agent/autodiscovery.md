@@ -150,7 +150,7 @@ ECS_FARGATE=true
 
 Une fois la fonction Autodiscovery activée, l'Agent Datadog essaie automatiquement de l'utiliser pour plusieurs [services][4], notamment Apache et Redis, en se basant sur les fichiers de configuration Autodiscovery par défaut.
 
-Vous pouvez définir un modèle d'intégration de plusieurs façons : avec des annotations de pod Kubernetes, des étiquettes Docker, un fichier de configuration monté sur l'Agent, une ConfigMap ou encore des stockages key-value.
+Vous pouvez définir un modèle d'intégration de plusieurs façons : avec des annotations de pod Kubernetes, des étiquettes Docker, un fichier de configuration monté sur l'Agent, une ConfigMap ou encore des stockages key/value.
 
 Dans l'exemple suivant, les étiquettes Kubernetes `tags.datadoghq.com` sont utilisées pour appliquer les valeurs `env`, `service` et `version` sous forme de tags aux données du pod.
 

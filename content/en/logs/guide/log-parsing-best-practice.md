@@ -45,7 +45,7 @@ This article walks through parsing a log from the Datadog Agent's collector log:
     * word: matches all coming alphanumeric characters
     * integer: matches a decimal integer number and parses it as an integer number
 
-    Most of the rules can be written with those 4 matchers. You can see the the full list of available matchers [in the parsing documentation][2].
+    Most of the rules can be written with those four matchers. You can see the the full list of available matchers [in the parsing documentation][2].
 
 4. **KeyValue**:
     Note that there is a key-value filter than can automatically extract all your attributes.

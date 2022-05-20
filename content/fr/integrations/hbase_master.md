@@ -68,15 +68,15 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
     ```yaml
       - include:
-         domain: Hadoop
-         bean:
-         - Hadoop:service=HBase,name=Master,sub=Server
-         attribute:
-         # Is Active Master
-         tag.isActiveMaster:
-            metric_type: gauge
-            alias: hbase.master.server.tag.is_active_master
-            values: {"true": 1, "false": 0, default: 0}
+          domain: Hadoop
+          bean:
+            - Hadoop:service=HBase,name=Master,sub=Server
+          attribute:
+            # Is Active Master
+            tag.isActiveMaster:
+               metric_type: gauge
+               alias: hbase.master.server.tag.is_active_master
+               values: {"true": 1, "false": 0, default: 0}
     ```
 
 2. [Redémarrez l'Agent][7].
@@ -105,7 +105,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][8] et cherchez `hbase_master` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][8] et cherchez `hbase_master` dans la section Checks.
 
 ## Données collectées
 
@@ -183,7 +183,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][8] et cherchez `hbase_regionserver` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][8] et cherchez `hbase_regionserver` dans la section Checks.
 
 ## Données collectées
 

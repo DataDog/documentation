@@ -1,23 +1,24 @@
 ---
-title: ブラウザエラーの収集
-kind: documentation
 further_reading:
-  - link: /real_user_monitoring/error_tracking/
-    tag: Documentation
-    text: Error Tracking
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-    tag: ブログ
-    text: リアルユーザーの監視
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Datadog でビューを検索する
-  - link: /real_user_monitoring/explorer/analytics/
-    tag: Documentation
-    text: イベントに関する分析論を組み立てる
-  - link: /real_user_monitoring/dashboards/
-    tag: Documentation
-    text: RUM ダッシュボード
+- link: /real_user_monitoring/error_tracking/
+  tag: Documentation
+  text: Error Tracking
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: リアルユーザーの監視
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: イベントへの視覚化の適用
+- link: /real_user_monitoring/dashboards/
+  tag: Documentation
+  text: RUM ダッシュボード
+kind: documentation
+title: ブラウザエラーの収集
 ---
+
 フロントエンドのエラーはリアルタイムモニタリング (RUM) で収集されます。エラーメッセージとスタックトレースが利用できる場合は含まれます。
 
 ## エラーの原因

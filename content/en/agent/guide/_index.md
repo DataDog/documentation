@@ -10,7 +10,9 @@ private: true
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent Log Files{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-status-page" >}}Agent v6 Status Page{{< /nextlink >}}
+    {{< nextlink href="agent/guide/dual-shipping" >}}Dual Shipping{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}
+    {{< nextlink href="agent/guide/linux-agent-2022-key-rotation" >}}Linux Agent 2022 Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}
     {{< nextlink href="agent/guide/secrets-management" >}}Secrets Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/use-community-integrations" >}}Use Community Integrations{{< /nextlink >}}
@@ -20,7 +22,7 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent versioning guides:" >}}
-    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Use Python 3 with Datadog Agent v6{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python version management: Use Python 3 with Datadog Agent v6{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -36,6 +38,9 @@ private: true
     {{< nextlink href="/agent/guide/changing_container_registry" >}}Changing Your Container Registry{{< /nextlink >}}
     {{< nextlink href="/agent/guide/template_variables" >}}Autodiscovery Template Variables{{< /nextlink >}}
     {{< nextlink href="/agent/guide/auto_conf" >}}Autodiscovery Auto-Configuration{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/how-to-import-datadog-resources-into-terraform/" >}}How to Import Datadog Resources into Terraform{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/kubernetes-cluster-name-detection/" >}}Kubernetes Cluster Name Detection{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/kubernetes-legacy/" >}}Kubernetes Legacy{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent v5 guides:" >}}

@@ -1,11 +1,11 @@
 ---
-title: Datadog Agent をログまたはトレースの収集のみに使用
+title: Datadog Agent をログ収集のみに使用
 aliases:
-  - /ja/logs/faq/how-to-set-up-only-logs
+  - /logs/faq/how-to-set-up-only-logs
 kind: documentation
 ---
 <div class="alert alert-danger">
-メトリクスなしのログまたはトレース（または両方）の収集をセットアップするには、一部のペイロードを無効にする必要があります。結果として、収集しているログおよびトレースのメタデータおよびタグが失われる場合があるため、Datadog ではこれを推奨しません。このコンフィギュレーションについて、詳しくは <a href="/help/">Datadog サポート</a>までお問い合わせください。
+インフラストラクチャーメトリクスなしのログ収集をセットアップするには、一部のペイロードを無効にする必要があります。結果として、収集しているログのメタデータおよびタグが失われる場合があるため、Datadog ではこれを推奨しません。このコンフィギュレーションについて、詳しくは <a href="/help/">Datadog サポート</a>までお問い合わせください。
 </div>
 
 ペイロードを無効にするには、Agent v6.4 以降を実行している必要があります。これにより、メトリクスデータの送信が無効になり、ホストが Datadog に表示されなくなります。以下のステップを実行してください。
@@ -37,6 +37,7 @@ kind: documentation
 
 ```shell
 docker run -d --name datadog-agent \
+           --cgroupns host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -104,11 +105,6 @@ spec:
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
-          - containerPort: 8126
-            ## トレース収集（APM）- このセクションのコメントを解除して、APM を有効にします
-            # hostPort: 8126
-            name: traceport
-            protocol: TCP
         env:
           ## 組織に関連する Datadog API キーを設定します
           ## Kubernetes Secret を使用する場合、次の環境変数を使用します:
@@ -117,7 +113,7 @@ spec:
           ## DD_SITE を Datadog サイトに設定します
           - {name: DD_SITE, value: "<YOUR_DD_SITE>"}
 
-          ## Docker ソケットへのパス - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock} - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
+          ## Docker ソケットへのパス - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock} - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock} 
 
           ## StatsD の収集を許可するには、DD_DOGSTATSD_NON_LOCAL_TRAFFIC を true に設定します。
           - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }

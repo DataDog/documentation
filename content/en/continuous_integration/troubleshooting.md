@@ -96,7 +96,7 @@ This is done using the following algorithm:
 1. Compute a hash based on CI information to group the tests.
   a. If the tests include `ci.job.url`, use this tag to calculate the hash.
   b. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
-2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is the time difference between the start of the first test in the earliest job and the end of the last test in the latest job.
+2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is calculated for each job, and the maximum from all calculated wall times is shown.
 
 #### Possible issues with wall time calculation
 If you're using a library for testing time-dependent code, like [timecop][7] for Ruby or [FreezeGun][8] for Python, it is possible that test timestamps are wrong, and therefore calculated wall times. If this is the case, make sure that modifications to time are rolled back before finishing your tests.

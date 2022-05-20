@@ -38,11 +38,11 @@ However, additional instrumentation provided by Datadog can be activated alongsi
 
 ## OpenTelemetry
 
-OpenTelemetry support is available by using the `opentelemetry-exporters-datadog` gem to export traces from OpenTelemetry to Datadog.
-
 <div class="alert alert-warning">
-This feature is currently in beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> if it doesn't work as you expect.
+This exporter is deprecated. To export your OTLP traces from OpenTelemetry SDK directly to Datadog Agent, see <a href="/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent">OTLP Ingest in the Agent</a>. <a href="/help/">Reach out to support</a> for questions.
 </div>
+
+OpenTelemetry support is available by using the `opentelemetry-exporters-datadog` gem to export traces from OpenTelemetry to Datadog.
 
 ### Installation
 

@@ -1,7 +1,8 @@
 ---
 title: Flaky Test Management
 kind: guide
-aliases: /continuous_integration/guides/find_flaky_tests/
+aliases: 
+    - /continuous_integration/guides/find_flaky_tests/
 ---
 
 {{< site-region region="gov" >}}
@@ -26,6 +27,8 @@ The app helps you prioritize flaky tests by providing the following information 
 
 Once you identify a flaky test you want to fix, click on the test to see links to view the most recent failed test run or the first flaky test run.
 
+<div class="alert alert-info"><strong>Note</strong>: The table is limited to the 1000 flaky tests with the highest number of commits flaked for the selected time frame.</div>
+
 ## Remediation
 
 If a flaky test has not failed in the past 30 days, it is automatically removed from the table. You can also manually remove a flaky test by clicking on the trash icon that appears when you hover over the test row. It is added again if it re-exhibits flaky behavior.
@@ -37,4 +40,12 @@ If a flaky test has not failed in the past 30 days, it is automatically removed 
 2. Filter the table to see branches, services, or commits of interest to you.
 
 3. Look at the **New Flaky** column to see the number of new flaky tests that were introduced by the latest commit. These are tests that exhibit flaky behavior and didn’t previously exist in the Flaky Tests table.
+
+### Ignore new flaky tests detected by mistake
+
+You can ignore new flaky tests for a particular commit if you determine that those flaky tests were detected by mistake. The tests reappear if the commit exhibits flakiness again.
+
+Click on the **New Flaky** number and then click **Ignore flaky tests**.
+
+{{< img src="ci/ignore-new-flaky-tests.png" alt="Ignore all new flaky tests for a commit" style="width:100%;">}}
 

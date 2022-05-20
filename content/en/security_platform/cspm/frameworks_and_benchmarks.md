@@ -10,18 +10,21 @@ further_reading:
   text: "Search and explore CSPM findings"
 ---
 
-{{< site-region region="us3,us5,gov,eu" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
+
+{{< img src="security_platform/cspm/frameworks_and_benchmarks/report.png" alt="Set a findings time window using the dropdown" style="width:80%;">}}
 
 ## Overview
 
 Each [OOTB rule][1] maps to one or more controls within a compliance standard or industry benchmark. Datadog OOTB rules currently map to controls and requirements for the following frameworks and benchmarks:
 
 - [CIS AWS Foundations Benchmark v1.3.0*][2]
-- [CIS Docker Benchmark v1.2.0][2]
+- [CIS Azure Foundations Benchmark v1.3.0][18]
+- [CIS Docker Benchmark v1.2.0][17]
 - [CIS Kubernetes Benchmark v1.5.1**][3]
 - [PCI DSS v3.2.1][4]
 - [AICPA SOC 2][5]
@@ -79,3 +82,5 @@ In the “Notify” section, configure zero or more [notification targets][7] fo
 [14]: /integrations/servicenow/
 [15]: /integrations/microsoft_teams/
 [16]: /integrations/webhooks/
+[17]: https://www.cisecurity.org/benchmark/docker
+[18]: https://www.cisecurity.org/benchmark/azure

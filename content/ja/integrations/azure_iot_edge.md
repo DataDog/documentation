@@ -15,18 +15,19 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - azure
-  - ログの収集
+- azure
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md
 display_name: Azure IoT Edge
 draft: false
 git_integration_title: azure_iot_edge
 guid: 9eafeab9-daf4-4f54-befc-fcc623ec9c1b
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -38,13 +39,16 @@ public_title: Datadog-Azure IoT Edge インテグレーション
 short_description: Azure IoT Edge デバイスとモジュールの健全性とパフォーマンスを監視。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
-[Azure IoT Edge][1] は、クラウドのワークロードをデプロイして、標準コンテナを介して Internet of Things (IoT) Edge デバイスで実行するためのフルマネージド型サービスです。
+[Azure IoT Edge][1] は、クラウドのワークロードをデプロイして、標準コンテナを使って Internet of Things (IoT) Edge デバイスで実行するためのフルマネージド型サービスです。
 
 Datadog-Azure IoT Edge インテグレーションを使用すると IoT Edge デバイスからメトリクスや健全性の状態を収集できます。
 
@@ -90,7 +94,7 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
 
 3. Datadog Agent を**カスタムモジュール**としてインストールし、構成します。
     - モジュール名を設定します。(例: `datadog-agent`)
-    - Agent のイメージ URI を設定します。(例: `gcr.io/datadoghq/agent:7`)
+    - Agent のイメージ URI を設定します。(例: `datadog/agent:7`)
     - "Environment Variables" で `DD_API_KEY` を構成します。ここで、追加の Agent コンフィギュレーションを設定することも可能です ([Agent の環境変数][6]参照)。
     - "Container Create Options" で、デバイスの OS に基づき以下のコンフィギュレーションを入力します。**注**: `NetworkId` は、デバイスの `config.yaml` ファイルに設定されたネットワーク名と一致する必要があります。
 
@@ -170,7 +174,7 @@ Azure IoT Edge には、イベントは含まれません。
 - [Datadog を使用した Azure IoT Edge の監視][11]
 
 [1]: https://azure.microsoft.com/en-us/services/iot-edge/
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-deploy-modules-portal
 [4]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/datadog_checks/azure_iot_edge/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/docker/integrations/

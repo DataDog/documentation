@@ -21,7 +21,7 @@ git_integration_title: windows_service
 guid: 2289acf0-e413-4384-83f7-88157b430805
 integration_id: windows-service
 integration_title: Windows Services
-integration_version: 3.3.0
+integration_version: 4.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

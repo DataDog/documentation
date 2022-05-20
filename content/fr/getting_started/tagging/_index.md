@@ -99,7 +99,7 @@ Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous ass
 | [Monitors][13]       | Créer et gérer des monitors ou gérer des downtimes                                             |
 | [Métriques][14]        | Filtrer et regrouper des données avec le Metrics Explorer                                                        |
 | [Intégrations][15]   | Définir des limites facultatives pour AWS, Google Cloud et Azure                                        |
-| [APM][16]            | Filtrer les données Analytics ou accéder facilement à d'autres sections avec la Service map                                 |
+| [APM][16]            | Filtrer les données Analytics ou accéder à d'autres sections avec la Service Map                                 |
 | [Notebooks][17]      | Filtrer et regrouper des métriques sur des graphiques                                                               |
 | [Logs][18]           | Filtrer la recherche de logs, les analyses, les patterns, le live tailing et les pipelines                                |
 | [SLO][19]           | Rechercher des SLO ainsi que des SLO groupés basés sur des métriques ou sur des monitors.                           |

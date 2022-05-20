@@ -3,7 +3,7 @@ title: OOTB Rules
 kind: documentation
 ---
 
-{{< site-region region="us3,us5,gov,eu" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not currently available in this site.
 </div>

@@ -13,7 +13,7 @@ Datadog recommends gathering instance tags through the EC2 Instance Metadata Ser
 This mechanism is available in the Datadog Agent v7.35.0.
 
 1. Ensure that the EC2 instance is configured to allow access to tags in the instance metadata. See the [AWS documentation][1].
-2. In the `datadog.yaml` file, set `collect_ec2_tags: true` and `ec2_collect_tags_use_imds: true`.
+2. In the `datadog.yaml` file, set `collect_ec2_tags: true` and `collect_ec2_tags_use_imds: true`.
 3. [Restart the Agent][2].
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#allow-access-to-tags-in-IMDS

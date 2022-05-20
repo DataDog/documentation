@@ -1,10 +1,10 @@
 ---
-title: NodeJS オープン標準
-kind: documentation
-description: 'NodeJS のオープン標準'
 code_lang: nodejs
-type: multi-code-lang
 code_lang_weight: 40
+description: NodeJS のオープン標準
+kind: documentation
+title: NodeJS オープン標準
+type: multi-code-lang
 ---
 
 ## OpenTracing
@@ -30,11 +30,11 @@ OpenTracing NodeJS の使用については、[opentracing.io][1] を参照し�
 
 ## OpenTelemetry
 
-OpenTelemetry のサポートは、`opentelemetry-exporter-datadog` パッケージを使用してトレースを OpenTelemetry から Datadog にエクスポートすることで利用できます。
-
 <div class="alert alert-warning">
-現在、この機能はベータ版です。期待どおりに機能しない場合は、<a href="https://docs.datadoghq.com/help/">サポートにお問い合わせください。</a>。
+このエクスポーターは非推奨です。OpenTelemetry SDK から Datadog Agent に直接 OTLP トレースをエクスポートするには、<a href="/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent">Agent における OTLP の取り込み</a>をご覧ください。ご質問は、<a href="/help/">サポートまでご連絡ください</a>。
 </div>
+
+OpenTelemetry のサポートは、`opentelemetry-exporter-datadog` パッケージを使用してトレースを OpenTelemetry から Datadog にエクスポートすることで利用できます。
 
 ### インストール
 

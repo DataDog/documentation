@@ -14,7 +14,7 @@ Podman は、Docker と互換性のある CLI インターフェイスとソケ�
 
 ## podman コンテナとしての Agent のデプロイ
 
-Agent を Podman コンテナとしてデプロイするために実行するコマンドは、[Docker][3] で使用されるコマンドと非常によく似ています。
+Agent を Podman コンテナとしてデプロイするために実行するコマンドは、[Docker][3] で使用されるコマンドと似ています。
 
 ```
 $ podman run -d --name dd-agent \

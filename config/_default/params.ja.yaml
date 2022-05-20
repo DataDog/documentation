@@ -4,8 +4,8 @@ meta_title: Datadogを始めてみましょう
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 announcement_banner:
-  desktop_message: 毎週水曜15時開催! Datadog入門LiveデモWebセミナー
-  mobile_message: 毎週水曜15時開催! Datadog入門LiveデモWebセミナー
-  external_link: https://www.datadoghq.com/ja/live-datadog-demo/?utm_source=organic&utm_medium=display&utm_campaign=dg-organic-websites-japan-docs-announcement-demo-live
+  desktop_message: 大規模なデータ保護を実現する Sensitive Data Scanner を発表！
+  mobile_message: Datadog Sensitive Data Scanner を発表！
+  external_link: https://www.datadoghq.com/product/sensitive-data-scanner/
 exclude: []
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。

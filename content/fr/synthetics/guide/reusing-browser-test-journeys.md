@@ -56,7 +56,7 @@ Pour créer un test de connexion et l'utiliser en tant que sous-test dans le res
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_recording.mp4" alt="Enregistrement du test parent" video="true"  width="100%">}}
 
- L'exemple ci-dessus vérifie que les utilisateurs, une fois connectés à un compte de test Datadog, peuvent créer un timeboard, et que ce timeboard est associé à l'utilisateur qui l'a créé.
+ Dans l'exemple ci-dessus, le sous-test de connexion vérifie qu'un utilisateur, une fois connecté à un compte test Datadog, peut créer un timeboard. Ce timeboard est alors associé à l'utilisateur.
 
 ## Pour aller plus loin
 

@@ -40,11 +40,11 @@ supported_os:
 
 ### インストール
 
-CRI はコア Agent 6 チェックです。`datadog.yaml` と `cri.d/conf.yaml` の両方で構成する必要があります。
+CRI は [Datadog Agent][1] の中核となるチェックで、`datadog.yaml` に `cri.d/conf.yaml` と共に構成する必要があります。
 
-`datadog.yaml` で、Agent が現在の CRI への問い合わせに使用する `cri_socket_path` を構成する必要があります (デフォルトのタイムアウトも構成できます)。CRI (`containerd` など) がディスク使用状況メトリクスを報告する場合は、`cri.d/conf.yaml` で、`collect_disk` などのチェックインスタンス設定を構成できます。
+`datadog.yaml` で、Agent が現在の CRI への問い合わせに使用する `cri_socket_path` を構成します (デフォルトのタイムアウトも構成できます)。CRI (`containerd` など) がディスク使用状況メトリクスを報告する場合は、`cri.d/conf.yaml` で、`collect_disk` などのチェックインスタンス設定を構成します。
 
-コンテナで Agent を使用している場合は、`DD_CRI_SOCKET_PATH` 環境変数を設定すると、デフォルト構成の `CRI` チェックが自動的に有効になります。
+**注**: コンテナで Agent を使用している場合は、`DD_CRI_SOCKET_PATH` 環境変数を設定すると、デフォルト構成の `CRI` チェックが自動的に有効になります。
 
 #### コンテナへのインストール
 
@@ -85,13 +85,13 @@ spec:
 
 ### コンフィギュレーション
 
-1. CRI-O のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cri.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル cri.d/conf.yaml][1] を参照してください。
+1. CRI-O のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cri.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル cri.d/conf.yaml][2] を参照してください。
 
-2. [Agent を再起動します][2]
+2. [Agent を再起動します][3]。
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `cri` を探します。
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `cri` を探します。
 
 ## 収集データ
 
@@ -109,9 +109,10 @@ CRI には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
-[4]: https://docs.datadoghq.com/ja/help/
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
+[5]: https://docs.datadoghq.com/ja/help/

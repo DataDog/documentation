@@ -5,12 +5,15 @@ aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/
 further_reading:
-- link: "cloud_siem/default_rules"
+- link: "/cloud_siem/default_rules"
   tag: "Documentation"
   text: "Explore default detection rules"
 - link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
   tag: "Blog"
   text: "Detect Abuse of Functionality with Datadog"
+- link: "https://www.datadoghq.com/blog/impossible-travel-detection-rules/"
+  tag: "Blog"
+  text: "Detect suspicious login activity with impossible travel detection rules"
 ---
 
 ## Overview
@@ -25,7 +28,7 @@ For each of monitoring option, there are [default detection rules][1] that work 
 
 - With [Cloud Workload Security][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
 
-- [Application Security][6] leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
+- [Application Security Monitoring][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
 ## Creating and managing detection rules
 

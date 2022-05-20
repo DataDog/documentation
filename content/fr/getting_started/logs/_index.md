@@ -20,7 +20,7 @@ Cette page vous montre comment débuter avec la solution Log Management dans Dat
 
 ## Configurer une source de journalisation
 
-Avec la solution Log Management, vous pouvez analyser et explorer vos données dans le Log Explorer, associer vos [traces][2] à vos [métriques][3] pour mettre en corrélation des données importantes sur Datadog, et utiliser les logs ingérés pour la solution [Security Monitoring][4] de Datadog. Le cycle de vie d'un log dans Datadog commence lorsqu'il est ingéré à partir d'une source de journalisation.
+Avec la solution Log Management, vous pouvez analyser et explorer vos données dans le Log Explorer, associer vos [traces][2] à vos [métriques][3] pour mettre en corrélation des données importantes sur toute la plateforme Datadog, et utiliser les logs ingérés pour la solution [Cloud SIEM][4] de Datadog. Le cycle de vie d'un log dans Datadog commence lorsqu'il est ingéré à partir d'une source de journalisation.
 
 {{< img src="/getting_started/logs/getting-started-overview.png" alt="Différents types de configurations de logs">}}
 
@@ -127,7 +127,7 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 [1]: https://www.datadoghq.com
 [2]: /fr/tracing/connect_logs_and_traces/
 [3]: /fr/logs/guide/correlate-logs-with-metrics/
-[4]: /fr/security_platform/security_monitoring/
+[4]: /fr/security_platform/cloud_siem/
 [5]: /fr/getting_started/integrations/
 [6]: /fr/agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli

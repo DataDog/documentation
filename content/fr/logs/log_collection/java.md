@@ -1,31 +1,32 @@
 ---
-title: Collecte de logs avec Java
-kind: documentation
 aliases:
-  - /fr/logs/languages/java
+- /fr/logs/languages/java
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: Apprendre à traiter vos logs
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: En savoir plus sur le parsing
-  - link: /logs/explorer/
-    tag: Documentation
-    text: Apprendre à explorer vos logs
-  - link: /logs/explorer/#visualiser-les-donnees
-    tag: Documentation
-    text: Effectuer des analyses de logs
-  - link: /tracing/connect_logs_and_traces/java/
-    tag: Documentation
-    text: Associer vos logs à vos traces
-  - link: /logs/faq/log-collection-troubleshooting-guide/
-    tag: FAQ
-    text: Dépannage pour la collecte de logs
-  - link: https://www.datadoghq.com/blog/java-logging-guide/
-    tag: Blog
-    text: Comment recueillir, personnaliser et standardiser des logs Java
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Apprendre à traiter vos logs
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: En savoir plus sur le parsing
+- link: /logs/explorer/
+  tag: Documentation
+  text: Apprendre à explorer vos logs
+- link: /logs/explorer/#visualiser-les-donnees
+  tag: Documentation
+  text: Effectuer des analyses de logs
+- link: /tracing/connect_logs_and_traces/java/
+  tag: Documentation
+  text: Associer vos logs à vos traces
+- link: /logs/faq/log-collection-troubleshooting-guide/
+  tag: FAQ
+  text: Dépannage pour la collecte de logs
+- link: https://www.datadoghq.com/blog/java-logging-guide/
+  tag: Blog
+  text: Comment recueillir, personnaliser et standardiser des logs Java
+kind: documentation
+title: Collecte de logs avec Java
 ---
+
 Les stack traces liées aux logs Java types sont divisées en plusieurs lignes, ce qui les rend difficiles à associer à l'événement de log d'origine :
 
 ```java
@@ -38,10 +39,10 @@ Exception in thread "main" java.lang.NullPointerException
 
 Pour remédier à ce problème, configurez votre bibliothèque de journalisation de façon à ce que vos logs soient générés au format JSON. L'enregistrement des logs au format JSON offre les avantages suivants :
 
-* La stack trace est correctement associée à l'événement de log correspondant
-* Tous les attributs d'un événement de log (gravité, nom du logger, nom du thread, etc.) sont correctement extraits
-* Vous avez accès aux attributs du [MDC (Mapped Diagnostic Context)][1], que vous pouvez associer à n'importe quel événement de log
-* Vous n'avez pas besoin de créer de [règles de parsing personnalisées][2]
+* La stack trace est correctement associée à l'événement de log.
+* Tous les attributs d'un événement de log (gravité, nom du logger, nom du thread, etc.) sont correctement extraits.
+* Vous avez accès aux attributs du [MDC (Mapped Diagnostic Context)][1], que vous pouvez associer à n'importe quel événement de log.
+* Vous n'avez pas besoin de créer de [règles de parsing personnalisées][2].
 
 **Pour envoyer vos logs à Datadog, activez la journalisation au sein d'un fichier et suivez ce fichier avec l'Agent Datadog.**
 

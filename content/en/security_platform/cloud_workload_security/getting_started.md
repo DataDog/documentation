@@ -12,6 +12,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
   tag: "Blog"
   text: "The PwnKit vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/"
+  tag: "Blog"
+  text: "The Dirty Pipe vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
+  tag: "Blog"
+  text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
 ---
 
 ## Overview
@@ -19,7 +25,7 @@ further_reading:
 There are two types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
 1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-2. **Process Execution Monitoring** to monitor process executions for malicious activity on hosts or containers in real-time.
+2. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
 
 ## Requirements
 
@@ -67,6 +73,7 @@ The following command can be used to start the Runtime Security Agent and `syste
 {{< code-block lang="bash" filename="docker-runtime-security.sh" >}}
 
 docker run -d --name dd-agent \
+  --cgroupns host \
   --security-opt apparmor:unconfined \
   --cap-add SYS_ADMIN \
   --cap-add SYS_RESOURCE \

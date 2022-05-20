@@ -85,7 +85,7 @@ The displayed metrics represent, per span:
 
 Consult the list of [traces][6] associated with this resource in the [Trace search][7] modal already filtered on your environment, service, operation, and resource name:
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" style="width:90%;">}}
 
 ## Further Reading
 
@@ -94,7 +94,7 @@ Consult the list of [traces][6] associated with this resource in the [Trace sear
 [1]: /tracing/visualization/#services
 [2]: /tracing/visualization/
 [3]: /tracing/visualization/#trace
-[4]: /dashboards/timeboard/
+[4]: /dashboards/#timeboards
 [5]: /tracing/visualization/#spans
 [6]: /tracing/visualization/trace/
 [7]: /tracing/search/

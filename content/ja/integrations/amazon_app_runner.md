@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: 主要な AWS App Runner メトリクスを追跡します。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_app_runner/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
 draft: false
 git_integration_title: amazon_app_runner
 has_logo: true
 integration_id: amazon-app-runner
 integration_title: AWS App Runner
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -54,8 +55,8 @@ AWS App Runner によって管理されるアプリケーションから Datadog
 AWS App Runner は、サービスとオペレーションのステータス変更イベントの両方を EventBridge に送信します。これを Datadog に転送して [Event Stream][6] で表示できます。これらのイベントを Datadog に送信するには、次の手順を実行します。
 
 1. [Datadog イベントの EventBridge API 宛先][7]を作成します。
-2. AWS の[ドキュメント][8]に従って、AWS App Runner イベントで動作する EventBridge ルールを作成します。ターゲットとして API 宛先を選択します。
-3. Datadog イベントストリームで新しいステータスチャンスイベントの表示を開始します。
+2. AWS App Runner のイベントに対応する EventBridge ルールを作成します ([EventBridge で App Runner のイベントを処理する][8]を参照)。ターゲットとして API Destination を選択します。
+3. Datadog イベントストリームで新しいステータス変更イベントの表示を開始します。
 
 ## 収集データ
 

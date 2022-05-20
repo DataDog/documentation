@@ -52,7 +52,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    tracer.Start(tracer.WithServiceName("<SERVICE_NAME>"))
+    tracer.Start(tracer.WithService("<SERVICE_NAME>"))
     defer tracer.Stop()
     http.HandleFunc("/posts", handler)
     log.Fatal(http.ListenAndServe(":8080", nil))

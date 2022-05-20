@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/riak/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/riak/README.md
 display_name: Riak
 draft: false
 git_integration_title: riak
 guid: e1ed642c-8a15-420c-954b-6fb894905956
 integration_id: riak
 integration_title: Riak
+integration_version: 3.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,13 +32,17 @@ metric_prefix: riak.
 metric_to_check: riak.memory_processes
 name: riak
 public_title: Intégration Datadog/Riak
-short_description: 'Suivez les métriques de performance node, vnode et ring de RiakKV ou RiakTS.'
+short_description: Suivez les métriques de performance node, vnode et ring de RiakKV
+  ou RiakTS.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Graphique Riak][1]
 
 ## Présentation
@@ -77,7 +82,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -135,7 +140,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
@@ -163,13 +168,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Le check Riak n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "riak" >}}
 
-**riak.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint de statistiques Riak pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riak/images/riak_graph.png
