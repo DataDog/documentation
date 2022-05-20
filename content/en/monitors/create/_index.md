@@ -41,6 +41,7 @@ You can download a JSON file containing the definition of a monitor from the mon
 {{< nextlink href="/monitors/create/types/ci_pipelines" >}}<u>CI Pipelines</u>: Monitor CI pipelines data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/composite" >}}<u>Composite</u>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/custom_check" >}}<u>Custom Check</u>: Monitor the status of arbitrary custom checks.{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/error_tracking" >}}<u>Error Tracking</u>: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/event" >}}<u>Event</u>: Monitor events gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/forecasts" >}}<u>Forecast</u>: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/integration" >}}<u>Integration</u>: Monitor metric values or health status from a specific integration.{{< /nextlink >}}
