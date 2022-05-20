@@ -22,7 +22,7 @@ Here is an example of a monitor before it is set to account for a local timezone
 
 Here is an example of a monitor when daylight savings time is being taken into account:
 
-{{< img src="monitors/guide/dst-on.png" alt="DST tracking turned on" >} }
+{{< img src="monitors/guide/dst-on.png" alt="DST tracking turned on" >}}
 
 ## UI
 
