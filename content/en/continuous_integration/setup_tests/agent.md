@@ -16,7 +16,7 @@ further_reading:
 
 To report test result to Datadog, you can do it through the [Datadog Agent][1] (recommended for on-premises installations).
 
-For SaaS CI providers, Datadog recommends using the [Agentless mode][7] of the Test Instrumentation Libraries. This mode allows sending data without the need of running an ephemeral instance of the Agent as a service container on each build.
+For SaaS CI providers, Datadog recommends using the [Agentless mode][7] of the Datadog Libraries. This mode allows sending data without running an ephemeral instance of the Agent as a service container on each build.
 
 ## Installing the Agent on each CI worker node
 

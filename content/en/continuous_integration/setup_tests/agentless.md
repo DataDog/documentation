@@ -14,7 +14,7 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-If you are using a SaaS CI provider with no access to the underlying worker nodes, you can send the collected data by the Test instrumentation libraries using the Agentless mode.
+If you are using a SaaS CI provider without access to the underlying worker nodes, you can send the collected data by the Test instrumentation using the Agentless mode.
 
 For On-Premises CI providers, Datadog recommends sending data through the [Datadog Agent][1].
 
