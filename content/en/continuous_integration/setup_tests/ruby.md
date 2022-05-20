@@ -39,7 +39,7 @@ To install the Ruby tracer:
 
     {{< code-block lang="ruby" filename="Gemfile" >}}
 source 'https://rubygems.org'
-gem 'ddtrace', ">=0.53.0"
+gem 'ddtrace', "~> 1.0"
 {{< /code-block >}}
 
 2. Install the gem by running `bundle install`
@@ -55,22 +55,29 @@ The Cucumber integration traces executions of scenarios and steps when using the
 
 To activate your integration, add the following code to your application:
 
+<!-- TODO: Explicitly setting `c.tracing.enabled` overrides any existing value, including the environment
+variable `DD_TRACE_ENABLED`. This prevents production environments from being able to disable the tracer
+using `DD_TRACE_ENABLED`.
+This snippet should be adapted to work correctly with the production tracer configuration or
+instruct clients to only include this code in a CI environment.
+This affects all code snippets in this file.
+-->
 ```ruby
 require 'cucumber'
 require 'datadog/ci'
 
 Datadog.configure do |c|
   # Only activates test instrumentation on CI
-  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
+  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
 
   # Configures the tracer to ensure results delivery
-  c.ci_mode.enabled = true
+  c.ci.enabled = true
 
   # The name of the service or library under test
   c.service = 'my-ruby-app'
 
   # Enables the Cucumber instrumentation
-  c.use :cucumber
+  c.ci.instrument :cucumber
 end
 ```
 
@@ -93,16 +100,16 @@ require 'datadog/ci'
 
 Datadog.configure do |c|
   # Only activates test instrumentation on CI
-  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
+  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
 
   # Configures the tracer to ensure results delivery
-  c.ci_mode.enabled = true
+  c.ci.enabled = true
 
   # The name of the service or library under test
   c.service = 'my-ruby-app'
 
   # Enables the RSpec instrumentation
-  c.use :rspec
+  c.ci.instrument :rspec
 end
 ```
 

@@ -75,7 +75,7 @@ To create an HTTP request step, click **Create Your First Step**.
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
-   * **NTLM v1**: Add NTLM authentication credentials.
+   * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
    * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
 
    {{% /tab %}}
@@ -136,6 +136,10 @@ Assertions define what an expected test result is. After you click **Test URL**,
 You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
 {{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
+
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
 #### Add execution parameters
 

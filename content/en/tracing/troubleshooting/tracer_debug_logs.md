@@ -30,8 +30,13 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 
 {{< programming-lang lang="python" >}}
 
-To enable debug mode for the Datadog Python Tracer, set the environment variable `DD_TRACE_DEBUG=true` when using `ddtrace-run`.
-<p></p>
+To enable debug mode for the Datadog Python Tracer, set the environment variables `DD_TRACE_DEBUG=true` and `DD_CALL_BASIC_CONFIG=true` when using `ddtrace-run`.
+
+If you have an existing logging configuration, enable debug logging in your application code.
+```
+log = logging.getLogger("ddtrace.tracer")
+log.setLevel(logging.DEBUG)
+```
 
 {{< /programming-lang >}}
 
@@ -50,10 +55,10 @@ You can override the default logger and replace it with a custom one by using th
 ```ruby
 f = File.new("<FILENAME>.log", "w+")           # Log messages should go there
 Datadog.configure do |c|
-  c.tracer log: Logger.new(f)                 # Overriding the default tracer
+  c.logger.instance = Logger.new(f)                 # Overriding the default tracer
 end
 
-Datadog::Tracer.log.info { "this is typically called by tracing code" }
+Datadog::Tracing.logger.info { "this is typically called by tracing code" }
 ```
 
 See [the API documentation][1] for more details.

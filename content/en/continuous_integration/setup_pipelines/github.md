@@ -25,7 +25,10 @@ GitHub Enterprise is not supported.
 
 ## Configuring the Datadog integration
 
-The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. To create the app:
+### Configuring a GitHub App
+
+The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. If you already have an app, you can
+skip to the next section.
 
 1. Go to the [GitHub Apps Integration tile][3].
 2. Click **Link GitHub Account**.
@@ -35,11 +38,32 @@ The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect wo
 6. Give the app a name, for example, `Datadog CI Visibility`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
 
-After the GitHub App is created and installed, recently finished GitHub Actions workflows appear in CI Visibility pages.
+### Configure tracing for GitHub Actions
+
+After the GitHub App is created and installed, enable CI Visibility on the accounts and/or repositories you want visibility into.
+
+1. Go to the **[Getting Started][4]** page and click on **GitHub**.
+2. Click on **Enable Account** for the account you want to enable.
+3. Enable CI Visibility for the whole account by clicking **Enable CI Visibility**.
+4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable CI Visibility** toggle.
+
+Pipelines appear immediately after enabling CI Visibility for any account or repository.
+
+### Enable log collection
+
+The GitHub Actions CI Visibility integration also allows automatically forwarding workflow job logs to the [Logs Product][5].
+To enable logs, follow these steps:
+
+1. Go to the **[CI Visibility settings][6]** page.
+2. Click on any account that is enabled or has enabled repositories.
+3. Click **Enable Job Logs Collection** to enable logs for the whole account.
+4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable Job Logs Collection** toggle.
+
+Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Note that logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings.
 
 ## Visualize pipeline data in Datadog
 
-The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the pipelines finish.
+The [Pipelines][7] and [Pipeline Executions][8] pages populate with data after the pipelines finish.
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
@@ -48,7 +72,7 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 To disable the CI Visibility GitHub Actions integration, make sure the GitHub app is no longer subscribed to the
 workflow job and workflow run events. To remove the events:
 
-1. Go to the [GitHub Apps][6] page.
+1. Go to the [GitHub Apps][9] page.
 2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you will have to repeat the process for each).
 3. Scroll to the **Subscribe to events** section, and make sure that **Workflow job** and **Workflow run** are not selected.
 
@@ -60,6 +84,9 @@ workflow job and workflow run events. To remove the events:
 [1]: https://docs.github.com/actions
 [2]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
 [3]: https://app.datadoghq.com/account/settings#integrations/github-apps
-[4]: https://app.datadoghq.com/ci/pipelines
-[5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://github.com/settings/apps
+[4]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
+[5]: https://docs.datadoghq.com/logs/
+[6]: https://app.datadoghq.com/ci/settings
+[7]: https://app.datadoghq.com/ci/pipelines
+[8]: https://app.datadoghq.com/ci/pipeline-executions
+[9]: https://github.com/settings/apps

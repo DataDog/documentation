@@ -16,19 +16,20 @@ assets:
     varnish_processes: assets/saved_views/varnish_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - caching
-  - log collection
+- web
+- caching
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/varnish/README.md
+- https://github.com/DataDog/integrations-core/blob/master/varnish/README.md
 display_name: Varnish
 draft: false
 git_integration_title: varnish
 guid: d2052eae-89b8-4cb1-b631-f373010da4b8
 integration_id: varnish
 integration_title: Varnish
+integration_version: 1.14.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -37,16 +38,19 @@ metric_prefix: varnish.
 metric_to_check: varnish.n_backend
 name: varnish
 process_signatures:
-  - service varnish start
-  - varnishd
+- service varnish start
+- varnishd
 public_title: Datadog-Varnish インテグレーション
 short_description: クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Varnish のデフォルトのダッシュボード][1]
 
 ## 概要
@@ -82,6 +86,8 @@ Varnish 4.1 以上を実行している場合は、以下を使用して、`dd-a
 ```text
 sudo usermod -G varnish -a dd-agent
 ```
+
+もし `secretfile` を使用する場合は、`dd-agent` ユーザーが読めるようにする必要があります。
 
 ##### メトリクスの収集
 
@@ -163,7 +169,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `varnish` を探します。
+[Agent の status サブコマンド][3]を実行し、Checks セクションで `varnish` を探します。
 
 ## 収集データ
 

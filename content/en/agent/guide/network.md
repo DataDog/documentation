@@ -31,10 +31,6 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}
 
-[Database Monitoring][2]
-: `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
-`dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
-
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
@@ -56,6 +52,14 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
+
+{{< site-region region="us,eu,us3" >}}
+[Database Monitoring][2]
+: `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
+
+[2]: /database_monitoring/
+{{< /site-region >}}
 
 {{< site-region region="us" >}}
 

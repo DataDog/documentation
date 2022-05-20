@@ -1,26 +1,28 @@
 ---
-title: Paramètres de la surveillance Synthetic
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-    tag: Blog
-    text: Présentation de la surveillance Synthetic Datadog
-  - link: /synthetics/api_tests/
-    tag: Documentation
-    text: Configurer un test API
-  - link: /synthetics/browser_tests/
-    tag: Documentation
-    text: Configurer un test Browser
-  - link: /synthetics/identify_synthetics_bots/
-    tag: Documentation
-    text: Identifier les bots Synthetic
-  - link: /synthetics/guide/browser-tests-totp
-    tag: Documentation
-    text: Mots de passe à usage unique basés sur le temps (TOTP) pour l'authentification multifacteur dans des tests Browser
-  - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
-    tag: Terraform
-    text: Créer et gérer des variables globales Synthetic avec Terraform
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  tag: Blog
+  text: Présentation de la surveillance Synthetic Datadog
+- link: /synthetics/api_tests/
+  tag: Documentation
+  text: Configurer un test API
+- link: /synthetics/browser_tests/
+  tag: Documentation
+  text: Configurer un test Browser
+- link: /synthetics/identify_synthetics_bots/
+  tag: Documentation
+  text: Identifier les bots Synthetic
+- link: /synthetics/guide/browser-tests-totp
+  tag: Documentation
+  text: Mots de passe à usage unique basés sur le temps (TOTP) pour l'authentification
+    multifacteur dans des tests Browser
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
+  tag: Terraform
+  text: Créer et gérer des variables globales Synthetic avec Terraform
+kind: documentation
+title: Paramètres de la surveillance Synthetic
 ---
+
 La [page des paramètres de la surveillance Synthetic][1] vous permet de définir les paramètres suivants :
 
 * [Variables globales](#variables-globales)
@@ -36,7 +38,7 @@ Choisissez le type de variable que vous souhaitez créer :
 {{< tabs >}}
 {{% tab "Valeur spécifiée" %}}
 
-1. Donnez un nom à votre variable en renseignant le champ **Variable Name**. Ce nom peut uniquement contenir des lettres majuscules, des chiffres et des tirets bas.
+1. Donnez un nom à votre variable en renseignant le champ **Variable Name**. Ce nom peut uniquement contenir des lettres majuscules, des chiffres et des underscores. Aucune autre variable globale ne doit utiliser ce nom.
 2. Saisissez une **description** pour votre variable (facultatif).
 3. Sélectionnez les **tags** à associer à votre variable (facultatif).
 4. Saisissez la  **valeur** que vous souhaitez attribuer à votre variable.
@@ -93,18 +95,17 @@ Une fois les variables globales créées, elles peuvent être utilisées dans to
 
 ### Autorisations
 
-Par défaut, seuls les utilisateurs disposant des [rôles Admin Datadog et Standard Datadog][11] peuvent accéder à la page **Variables globales** de la surveillance Synthetic. Pour que votre utilisateur puisse consulter la page **Variables globales**, vous devez donc lui accorder l'un de ces deux [rôles par défaut][11]. 
+Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][11] peuvent accéder à la page **Variables globales** de la surveillance Synthetic. Pour que votre utilisateur puisse consulter la page **Variables globales**, vous devez donc lui accorder l'un de ces deux [rôles par défaut][11]. 
 
-Si vous avez accès aux [rôles personnalisés][12], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_global_variable_read` et `synthetics_global_variable_write`.
+Si vous utilisez des [rôles personnalisés][12], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_global_variable_read` et `synthetics_global_variable_write`.
 
 #### Restreindre l'accès
 
-<div class="alert alert-warning">
-La restriction d'accès est réservée aux clients qui disposent de la fonctionnalité <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#create-a-custom-role">Rôles personnalisés</a>.</div>
+Les clients qui ont configuré des [rôles personnalisés][13] sur leur compte peuvent utiliser la fonctionnalité de restriction d'accès.
 
 Vous pouvez faire en sorte que certaines rôles au sein de votre organisation ne puissent pas accéder à une variable globale. Lors de la création d'une variable globale, choisissez les rôles (en plus des utilisateurs) disposant des autorisations de lecture/écriture sur votre variable globale dans **Permissions settings**. 
 
-{{< img src="synthetics/settings/restrict-access2.png" alt="Restreindre l'accès à une variable globale" style="width:100%;" >}}
+{{< img src="synthetics/settings/restrict_access.png" alt="Restreindre l'accès à une variable globale" style="width:100%;" >}}
 
 ## Paramètres par défaut
 
@@ -136,13 +137,13 @@ Pour appliquer des tags, cliquez sur **Enforce tags for usage attributions on al
 
 {{< img src="synthetics/settings/tag_enforcement.png" alt="Appliquer des tags pour les attributions d'utilisation sur tous les tests" style="width:100%;">}}
 
-Pour en savoir plus, consultez la ressource [Attribution de l'utilisation][13].
+Pour en savoir plus, consultez la section [Attribution de l'utilisation][14].
 
 ### Autorisations
 
-Par défaut, seuls les utilisateurs disposant des [rôles Admin Datadog et Standard Datadog][11] peuvent accéder à la page **Paramètres par défaut** de la surveillance Synthetic. Pour que votre utilisateur puisse consulter la page **Paramètres par défaut**, vous devez donc lui accorder l'un de ces deux [rôles par défaut][11]. 
+Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][11] peuvent accéder à la page **Paramètres par défaut** de la surveillance Synthetic. Pour que votre utilisateur puisse consulter la page **Paramètres par défaut**, vous devez donc lui accorder l'un de ces deux [rôles par défaut][11]. 
 
-Si vous avez accès aux [rôles personnalisés][12], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_default_settings_read` et `synthetics_default_settings_write`.
+Si vous utilisez des [rôles personnalisés][12], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_default_settings_read` et `synthetics_default_settings_write`.
 
 ## Pour aller plus loin
 
@@ -160,4 +161,5 @@ Si vous avez accès aux [rôles personnalisés][12], ajoutez votre utilisateur �
 [10]: /fr/synthetics/browser_tests/actions#using-variables
 [11]: /fr/account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /fr/account_management/rbac/?tab=datadogapplication#custom-role
-[13]: /fr/account_management/billing/usage_attribution
+[13]: /fr/account_management/rbac/#create-a-custom-role
+[14]: /fr/account_management/billing/usage_attribution

@@ -1,3 +1,4 @@
 {
-  "message": "Example-Update_a_downtime_returns_OK_response-updated"
+  "message": "Example-Update_a_downtime_returns_OK_response-updated",
+  "mute_first_recovery_notification": true
 }

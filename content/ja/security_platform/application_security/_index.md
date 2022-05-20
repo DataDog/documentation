@@ -11,14 +11,12 @@ further_reading:
 - link: /security_platform/guide/how-appsec-works/
   tag: ドキュメント
   text: Datadog におけるアプリケーションセキュリティモニタリングの仕組み
-is_beta: true
+- link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
+  tag: 製品ページ
+  text: Datadog Application Security Monitoring
 kind: documentation
 title: アプリケーションセキュリティモニタリング
 ---
-
-<div class="alert alert-warning">
-アプリケーションセキュリティモニタリングは非公開ベータ版です。開始するには、<a href="https://app.datadoghq.com/security/appsec?instructions=all">アプリ内の説明</a>をご覧ください。
-</div>
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="攻撃のフローおよびフレームグラフを表示する、Datadog のセキュリティシグナルパネル" width="75%">}}
 

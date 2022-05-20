@@ -17,13 +17,13 @@ further_reading:
 ## Compatibility
 
 Supported .NET versions:
-* .NET Core >= 2.1 and >= 3.0
-* .NET >= 5.0
+* .NET Framework 4.6.1 and above
+* .NET Core 2.1, 3.1, .NET 5, and .NET 6
 
 Supported test frameworks:
-* xUnit >= 2.2
-* NUnit >= 3.0
-* MsTest V2 >= 14
+* xUnit 2.2 and above
+* NUnit 3.0 and above
+* MsTestV2 14 and above
 
 ## Prerequisites
 
@@ -33,21 +33,48 @@ Supported test frameworks:
 Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/dotnet#agentless-beta">instructions</a> on this page.
 </div>
 
-## Installing the .NET tracer
+## Installing the .NET tracer CLI
 
-To install or update the `dd-trace` command globally on the machine, run:
+Install or update the `dd-trace` command using one of the following ways:
 
-{{< code-block lang="bash" >}}
-dotnet tool update -g dd-trace
-{{< /code-block >}}
+- Using the .NET SDK by running the command:
+   ```
+   dotnet tool update -g dd-trace
+   ```
+- By downloading the appropriate version:
+    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][7]
+    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][8]
+    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][9]
+ 
+- Or by downloading [from the github release page][10].
 
 ## Instrumenting tests
 
 To instrument your test suite, prefix your test command with `dd-trace ci run`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
 
+{{< tabs >}}
+
+{{% tab "dotnet test" %}}
+
+By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>
+
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "VSTest.Console" %}}
+
+By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 All tests are automatically instrumented.
 
@@ -154,7 +181,7 @@ To instrument your test suite without requiring an Agent, configure the followin
 **Default**: `false`
 
 `DD_API_KEY` (Required)
-: The [Datadog API key][6] used to upload the test results.<br/>
+: The [Datadog API key][5] used to upload the test results.<br/>
 **Default**: `(empty)`
 
 Then, prefix your test command with `dd-trace ci run`. Use the `--dd-service` parameter to provide the name of the service or library. Use the `--dd-env` parameter to provide the environment where tests are being run (`local` when running tests on a developer workstation, `ci` when running them on a CI provider, etc.) For example:
@@ -163,7 +190,7 @@ Then, prefix your test command with `dd-trace ci run`. Use the `--dd-service` pa
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
-Alternatively, you can provide the [Datadog API key][6] using the `--api-key` parameter, for example:
+Alternatively, you can provide the [Datadog API key][5] using the `--api-key` parameter, for example:
 
 {{< code-block lang="bash" >}}
 dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
@@ -171,10 +198,10 @@ dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- do
 
 When the `--api-key` is set, Agentless mode is automatically enabled.
 
-Additionally, configure which [Datadog site][7] to which you want to send data. Your Datadog site is: {{< region-param key="dd_site" >}}.
+Additionally, configure which [Datadog site][6] to which you want to send data. Your Datadog site is: {{< region-param key="dd_site" >}}.
 
 `DD_SITE` (Required)
-: The [Datadog site][7] to upload results to.<br/>
+: The [Datadog site][6] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
@@ -187,6 +214,9 @@ Additionally, configure which [Datadog site][7] to which you want to send data. 
 [2]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[5]: /continuous_integration/setup_tests/dotnet/#agentless-beta
-[6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /getting_started/site/
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: /getting_started/site/
+[7]: https://dtdg.co/dd-trace-dotnet-win-x64
+[8]: https://dtdg.co/dd-trace-dotnet-linux-x64
+[9]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
+[10]: https://github.com/DataDog/dd-trace-dotnet/releases

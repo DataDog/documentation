@@ -100,18 +100,18 @@ _どの取り込みメカニズムが取り込み量の大部分を担ってい�
 
 | 取り込み理由   | 場所             | 取り込みのメカニズムの説明 | デフォルト |
 |--------------------|-------------------|-----------------------|---------|
-| `auto`             | エージェント             | Datadog Agent は、サンプリングレートをトレーシングライブラリに配布します。    | 10 トレース/秒/Agent |
-| `rule`             | トレーシングライブラリ | 特定のサービスに対してライブラリが定めたサンプリング率。   | null                 |
+| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Datadog Agent は、サンプリングレートをトレーシングライブラリに配布します。    | 10 トレース/秒/Agent |
+| `rule`             | [トレーシングライブラリ](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | 特定のサービスに対してライブラリが定めたサンプリング率。   | null                 |
 
 
 その他のいくつかの取り込み理由は、Ingestion Control ページと `datadog.estimated_usage.apm.ingested_bytes` メトリクスのタグとして表示されます。これらの取り込み理由は、取り込み量の原因になっている可能性があります。
 
 | 取り込み理由   | 場所             | 取り込みのメカニズムの説明 | デフォルト |
 |--------------------|-------------------|-----------------------|---------|
-| `error`            | エージェント             | ヘッドベースサンプリングで捕捉できないエラーのサンプリング。             | 10 トレース/秒/Agent (ルールが定義されている場合は null) |
-| `rare`            | エージェント             |  レアトレースのサンプリング (一連のスパンタグのすべての組み合わせを捕捉)。        | 5 トレース/秒/Agent (ルールが定義されている場合は null) |
+| `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | ヘッドベースサンプリングで捕捉できないエラーのサンプリング。             | 10 トレース/秒/Agent (ルールが定義されている場合は null) |
+| `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  レアトレースのサンプリング (一連のスパンタグのすべての組み合わせを捕捉)。        | 5 トレース/秒/Agent (ルールが定義されている場合は null) |
 | `manual`             | コード内         | スパンとその子を保持/削除するための、コード内決定のオーバーライド。    | null |
-| `analytics`          | Agent とトレーシングライブラリ | フルトレースなしで単一スパンをサンプリングする非推奨の取り込みメカニズム。   | null                 |
+| `analytics`          | Agent とトレーシングライブラリ | フルトレースなしで単一スパンをサンプリングする[非推奨の取り込みメカニズム][11]。   | null                 |
 
 さらに、サンプリングされたスパン量には、他の製品が関与している可能性があります。
 
@@ -135,3 +135,4 @@ _どの取り込みメカニズムが取り込み量の大部分を担ってい�
 [8]: /ja/tracing/trace_ingestion/mechanisms#error-traces
 [9]: /ja/tracing/trace_ingestion/mechanisms#rare-traces
 [10]: /ja/tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[11]: /ja/tracing/legacy_app_analytics

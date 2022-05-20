@@ -20,6 +20,7 @@ Supported test frameworks:
 * Jest >= 24.8.0
   * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
   * Only [`jest-circus`][1] and [`jest-jasmine2`][2] are supported as [`testRunner`][3].
+  * Jest >= 28 is only supported from `dd-trace>=2.7.0`
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 has [partial support](#known-limitations).
 * Cucumber-js >= 7.0.0
@@ -68,12 +69,27 @@ module.exports = {
 if (process.env.DD_ENV === 'ci') {
   require('dd-trace/ci/jest/env')
 }
-
 // jest-environment-jsdom is an option too
 module.exports = require('jest-environment-node')
 ```
 
+### Jest@28
+
+If you are using `jest@28` and `jest-environment-node`, update your environment following the [`jest` documentation][1]:
+
+```javascript
+
+if (process.env.DD_ENV === 'ci') {
+  require('dd-trace/ci/jest/env')
+}
+
+module.exports = require('jest-environment-node').default
+```
+
+Since `jest-environment-jsdom` is not included in `jest@28`, you need to install it separately. Also, `jest>=28` is only supported from `dd-trace>=2.7.0`.
+
 <div class="alert alert-warning"><strong>Note</strong>: <code>jest-environment-node</code>, <code>jest-environment-jsdom</code>, <code>jest-jasmine2</code>, and <code>jest-circus</code> (as of Jest 27) are installed together with <code>jest</code>, so they do not normally appear in your <code>package.json</code>. If you've extracted any of these libraries in your <code>package.json</code>, make sure the installed versions are the same as the one of <code>jest</code>.</div>
+
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 

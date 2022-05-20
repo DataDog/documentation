@@ -1,4 +1,11 @@
 {
+  "UpdateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Update an AWS integration returns \"OK\" response"
+    }
+  ],
   "Validate": [
     {
       "group": "authentication",
@@ -439,6 +446,16 @@
     },
     {
       "group": "monitors",
+      "suffix": "_1969035628",
+      "description": "Create a ci-tests formula and functions monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2520912138",
+      "description": "Create a ci-tests monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
     },
@@ -833,6 +850,11 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get hourly usage for RUM Sessions returns \"OK\" response"
+    },
+    {
+      "group": "usage_metering",
+      "suffix": "_3271366243",
+      "description": "Get mobile hourly usage for RUM Sessions returns \"OK\" response"
     }
   ],
   "GetUsageRumUnits": [

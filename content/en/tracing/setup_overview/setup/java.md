@@ -434,13 +434,13 @@ Enable collection of JMX metrics by Java Tracing Agent.
 `dd.jmxfetch.config.dir`
 : **Environment Variable**: `DD_JMXFETCH_CONFIG_DIR`<br>
 **Default**: `null`<br>
-**Example**: `/opt/datadog-agent/etc/conf.d`<br>
+**Example**: `/path/to/directory/etc/conf.d`<br>
 Additional configuration directory for JMX metrics collection. The Java Agent looks for `jvm_direct:true` in the `instance` section in the `yaml` file to change configuration.
 
 `dd.jmxfetch.config`
 : **Environment Variable**: `DD_JMXFETCH_CONFIG`<br>
 **Default**: `null`<br>
-**Example**: `activemq.d/conf.yaml,jmx.d/conf.yaml`<br>
+**Example**: `path/to/file/conf.yaml,other/path/to/file/conf.yaml`<br>
 Additional metrics configuration file for JMX metrics collection. The Java Agent looks for `jvm_direct:true` in the `instance` section in the `yaml` file to change configuration.
 
 `dd.jmxfetch.check-period`

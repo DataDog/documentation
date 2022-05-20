@@ -64,8 +64,6 @@ For logs to be forwarded, the forwarder Lambda function needs to have triggers (
 
 4. Set triggers [automatically][7] or [manually][8].
 
-Note, AWS doesn't allow for more than one resource to be subscribed to a log source. If your log source is already subscribed by a different resource, you need to remove that subscription first.
-
 For CloudWatch log group, you can use the following metrics within the Datadog platform to confirm whether logs are delivered from the log group to the forwarder Lambda function. Use the `log_group` tag to filter the data when viewing the metrics.
 
 | Metric                          | Description                                                                                        |

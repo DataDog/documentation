@@ -55,6 +55,10 @@ Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
    Run the installer with administrator privileges.
 
+<div class="alert alert-warning">
+  <strong>Note:</strong> The following steps include setting environment variables to enable the profiler. Datadog <strong>does not recommend</strong> setting those environment variables at machine-level. If set at machine-level, every .NET application running on the machine is profiled and this incurs a significant overhead on the CPU and memory of your machine.
+</div>
+
 {{< tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}

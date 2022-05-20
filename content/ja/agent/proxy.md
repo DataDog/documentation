@@ -1,19 +1,20 @@
 ---
-title: Agent プロキシのコンフィギュレーション
-kind: documentation
 aliases:
-  - /ja/account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
+- /ja/account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: プロセスの収集
-  - link: /tracing/
-    tag: Documentation
-    text: トレースの収集
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースとプロファイルを収集する
+kind: documentation
+title: Agent プロキシのコンフィギュレーション
 ---
+
 ## 概要
 
 ご使用のネットワーク構成がアウトバウンドトラフィックを制限している場合は、より許容度の高いアウトバウンドポリシーを持つ 1 つ以上のホストを経由して、すべての Agent トラフィックをプロキシ転送します。
@@ -153,16 +154,14 @@ proxy_password: my_password
 
 Datadog への接続があるホストに HAProxy をインストールする必要があります。次の構成ファイルを使用します (まだ構成していない場合)。
 
-{{< site-region region="us" >}}
-
 ```conf
-# 基本的なコンフィギュレーション
+# 基本構成
 global
     log 127.0.0.1 local0
     maxconn 4096
     stats socket /tmp/haproxy
 
-# 妥当なデフォルト値
+# まともなデフォルト値
 defaults
     log     global
     option  dontlognull
@@ -171,8 +170,9 @@ defaults
     timeout client 5s
     timeout server 5s
     timeout connect 5s
-# これは、ポート 3833 での HAProxy 統計の表示を宣言します
-# このページを表示するために資格情報は必要ありません。
+
+# HAProxy の統計情報をポート 3833 で表示することを宣言しています
+# このページを表示するために認証情報は必要ありません。また、
 # セットアップが完了したら、このページをオフにすることができます。
 listen stats
     bind *:3833
@@ -180,8 +180,8 @@ listen stats
     stats enable
     stats uri /
 
-# このセクションでは、DNS レコードを再読み込みします
-# <DNS_SERVER_IP> と <DNS_SECONDARY_SERVER_IP> を DNS サーバーの IP アドレスに置き換えます。
+# DNS レコードを再読み込みするセクションです
+#  <DNS_SERVER_IP> と <DNS_SECONDARY_SERVER_IP> を DNS Server IP アドレスに置き換えます
 # HAProxy 1.8 以降の場合
 resolvers my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
@@ -193,8 +193,8 @@ resolvers my-dns
     hold valid 10s
     hold obsolete 60s
 
-# メトリクスを送信するために Agent が接続するエンドポイントを
-# 宣言します (例: "dd_url" の値)。
+# これは、Agent がメトリクスを送信するために接続する
+# エンドポイントを宣言します (例えば、"dd_url “ の値です)。
 frontend metrics-forwarder
     bind *:3834
     mode http
@@ -204,29 +204,37 @@ frontend metrics-forwarder
     use_backend datadog-api if { path_beg -i  /api/v1/validate }
     use_backend datadog-flare if { path_beg -i  /support/flare/ }
 
-# トレースを送信するために Agent が接続する
-# エンドポイントを宣言します
-# (例: APM コンフィギュレーションセクションの "endpoint" の値)。
+# これは、Agent がトレースを送信するために接続する
+# エンドポイントを宣言します (例えば、APM 構成
+# セクションの "endpoint "の値です)。
 frontend traces-forwarder
     bind *:3835
     mode tcp
     option tcplog
     default_backend datadog-traces
 
-# プロセスを送信するために Agent が接続する
-# エンドポイントを宣言します
-# (例: プロセスコンフィギュレーションセクションの "url" の値)
-frontend processes-forwarder
+# これは、Agent がプロファイルを送信するために接続する
+# エンドポイントを宣言します (例えば、"apm_config.profiling_dd_url" の値です)。
+frontend profiles-forwarder
     bind *:3836
+    mode tcp
+    option tcplog
+    default_backend datadog-profiles
+
+# これは、Agent がプロセスを送信するために接続する
+# エンドポイントを宣言します (例えば、プロセス構成
+# セクションの “url" の値です)。
+frontend processes-forwarder
+    bind *:3837
     mode tcp
     option tcplog
     default_backend datadog-processes
 
-# ログを送信するために Agent が接続する
-# エンドポイントを宣言します (例: "logs.config.logs_dd_url" の値)
+# これは、Agent がログを送信するために接続する
+# エンドポイントを宣言します (例えば、"logs.config.logs_dd_url" の値です)
 # use_http: true でログを送信する場合
 frontend logs_http_frontend
-    bind *:3837
+    bind *:3838
     mode http
     option tcplog
     default_backend datadog-logs-http
@@ -238,202 +246,139 @@ frontend logs_http_frontend
 #    option tcplog
 #    default_backend datadog-logs
 
+# これは、Agent がデータベースモニタリングのメトリクスと
+# アクティビティを送信するために接続するエンドポイントを宣言します (例えば、"database_monitoring.metrics.dd_url "と "database_monitoring.activity.dd_url" の値です)。
+frontend database_monitoring_metrics_frontend
+    bind *:3839
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-metrics
 
-# これは Datadog サーバーです。実際、上記で定義された
-# フォワーダーのフロントエンドに着信する TCP リクエストは、
+# これは、Agent がデータベースモニタリングサンプルを
+# 送信するために接続するエンドポイントを宣言します (例えば、"database_monitoring.samples.dd_url" の値です)
+frontend database_monitoring_samples_frontend
+    bind *:3840
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-samples
+
+# これは、Agent がネットワークデバイスモニタリングの
+# メタデータを送信するために接続するエンドポイントを宣言します (例えば、"network_devices.metadata.dd_url" の値です)
+frontend network_devices_metadata_frontend
+    bind *:3841
+    mode http
+    option tcplog
+    default_backend datadog-network-devices-metadata
+
+# これは、Agent が Instrumentations Telemetry データを
+# 送信するために接続するエンドポイントを宣言します (例えば、"apm_config.telemetry.dd_url" の値です)
+frontend instrumentation_telemetry_data_frontend
+    bind *:3843
+    mode tcp
+    option tcplog
+    default_backend datadog-instrumentations-telemetry
+
+# これは Datadog のサーバーです。事実上、上記で定義した
+# フォワーダーフロントエンドに来る全ての TCP リクエストは、
 # Datadog のパブリックエンドポイントにプロキシされます。
 backend datadog-metrics
     balance roundrobin
     mode http
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です
-    server-template mothership 5 haproxy-app.agent.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership haproxy-app.agent.datadoghq.com:443 check port 443 ssl verify none
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
 backend datadog-api
     mode http
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です
-    server-template mothership 5 api.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership api.datadoghq.com:443 check port 443 ssl verify none
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 api.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership api.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
 backend datadog-flare
     mode http
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です
-    server-template mothership 5 flare.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership flare.datadoghq.com:443 check port 443 ssl verify none
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 flare.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership flare.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
 backend datadog-traces
     balance roundrobin
     mode tcp
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です
-    server-template mothership 5 trace.agent.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership trace.agent.datadoghq.com:443 check port 443 ssl verify none
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
+backend datadog-profiles
+    balance roundrobin
+    mode tcp
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 intake.profile.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership profile.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
 backend datadog-processes
     balance roundrobin
     mode tcp
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です
-    server-template mothership 5 process.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership process.datadoghq.com:443 check port 443 ssl verify none
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 process.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership process.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
 backend datadog-logs-http
     balance roundrobin
     mode http
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です
-    server-template mothership 5 agent-http-intake.logs.datadoghq.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server datadog agent-http-intake.logs.datadoghq.com:443 check port 443 ssl verify none
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 agent-http-intake.logs.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
-```
-
-**注**: 次のコマンドで証明書をダウンロードしてください:
-        * `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-        * `yum install ca-certificates` (CentOS、Red Hat)
-CentOS、Red Hat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
-
-HAProxy 1.8 以降のバージョンでは、DNS サービスディスカバリーを利用してサーバーの変更点を検出し、それらを現行のコンフィギュレーションに自動で適用することができます。
-古いバージョンの HAProxy をお使いの場合は、HAProxy の再読み込みまたは再起動が必要です。`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```conf
-# 基本的なコンフィギュレーション
-global
-    log 127.0.0.1 local0
-    maxconn 4096
-    stats socket /tmp/haproxy
-
-# 妥当なデフォルト値
-defaults
-    log     global
-    option  dontlognull
-    retries 3
-    option  redispatch
-    timeout client 5s
-    timeout server 5s
-    timeout connect 5s
-
-# これは、ポート 3833 での HAProxy 統計の表示を宣言します
-# このページを表示するために資格情報は必要ありません。
-# セットアップが完了したら、このページをオフにすることができます。
-listen stats
-    bind *:3833
+backend datadog-database-monitoring-metrics
+    balance roundrobin
     mode http
-    stats enable
-    stats uri /
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 dbm-metrics-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
-# このセクションでは、DNS レコードを再読み込みします
-# <DNS_サーバー_IP> と <DNS_セカンダリサーバー_IP> を DNS サーバーの IP アドレスに置き換えます。
-# HAProxy 1.8 以降の場合
-resolvers my-dns
-    nameserver dns1 <DNS_サーバー_IP>:53
-    nameserver dns2 <DNS_セカンダリサーバー_IP>:53
-    resolve_retries 3
-    timeout resolve 2s
-    timeout retry 1s
-    accepted_payload_size 8192
-    hold valid 10s
-    hold obsolete 60s
-
-# これは、メトリクスを送信するために Agent が接続するエンドポイントを
-# 宣言します (例: "dd_url" の値)。
-frontend metrics-forwarder
-    bind *:3834
+backend datadog-database-monitoring-samples
+    balance roundrobin
     mode http
-    option tcplog
-    default_backend datadog-metrics
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 dbquery-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
-    use_backend datadog-api if { path_beg -i  /api/v1/validate }
-    use_backend datadog-flare if { path_beg -i  /support/flare/ }
+backend datadog-network-devices-metadata
+    balance roundrobin
+    mode http
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 ndm-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
-# これは、トレースを送信するために Agent が接続する
-# エンドポイントを宣言します
-# (例: APM コンフィギュレーションセクションの "endpoint" の値)。
-frontend traces-forwarder
-    bind *:3835
+backend datadog-instrumentations-telemetry
+    balance roundrobin
     mode tcp
-    option tcplog
-    default_backend datadog-traces
-
-# これは、プロセスを送信するために Agent が接続する
-# エンドポイントを宣言します
-# (例: プロセスコンフィギュレーションセクションの "url" の値)。
-frontend processes-forwarder
-    bind *:3836
-    mode tcp
-    option tcplog
-    default_backend datadog-processes
-
-# これは、ログを送信するために Agent が接続する
-# エンドポイントを宣言します (例: "logs.config.logs_dd_url" の値)
-# use_http: true でログを送信する場合
-frontend logs_http_frontend
-    bind *:3837
-    mode http
-    option tcplog
-    default_backend datadog-logs-http
-
-# これは Datadog サーバーです。実際、上記で定義された
-# フォワーダーのフロントエンドに着信する TCP リクエストは、
-# Datadog のパブリックエンドポイントにプロキシされます。
-backend datadog-metrics
-    balance roundrobin
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です。
-    server-template mothership 5 haproxy-app.agent.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership haproxy-app.agent.datadoghq.eu:443 check port 443 ssl verify none
-
-backend datadog-api
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です。
-    server-template mothership 5 api.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership api.datadoghq.eu:443 check port 443 ssl verify none
-
-backend datadog-flare
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です。
-    server-template mothership 5 flare.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership flare.datadoghq.eu:443 check port 443 ssl verify none
-
-backend datadog-traces
-    balance roundrobin
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です。
-    server-template mothership 5 trace.agent.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership trace.agent.datadoghq.eu:443 check port 443 ssl verify none
-
-backend datadog-processes
-    balance roundrobin
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です。
-    server-template mothership 5 process.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server mothership process.datadoghq.eu:443 check port 443 ssl verify none
-
-backend datadog-logs-http
-    balance roundrobin
-    # 次のコンフィギュレーションは、HAProxy 1.8 以降用です。
-    server-template mothership 5 agent-http-intake.logs.datadoghq.eu:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
-    # これより古いバージョンの HAProxy の場合、次のコンフィギュレーションのコメントを外します
-    # server datadog agent-http-intake.logs.datadoghq.eu:443 check port 443 ssl verify none
-
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 ```
 
 **注**: 次のコマンドで証明書をダウンロードしてください:
 
-* `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-* `yum install ca-certificates` (CentOS、Red Hat)
+```shell
+sudo apt-get install ca-certificates # (Debian, Ubuntu)
+yum install ca-certificates # (CentOS, Red Hat)
+```
 
 CentOS、Red Hat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
 
-HAProxy 1.8 以降のバージョンでは、DNS サービスディスカバリーを利用してサーバーの変更点を検出し、それらを現行のコンフィギュレーションに自動で適用することができます。
-古いバージョンの HAProxy をお使いの場合は、HAProxy の再読み込みまたは再起動が必要です。`app.datadoghq.eu` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
-
-{{< /site-region >}}
+HAProxy 1.8 以降では、DNS サービスの検出によりサーバーの変更を検出し、構成に自動的に適用することができます。
+古いバージョンの HAProxy を使用している場合は、HAProxy を再読み込みまたは再起動する必要があります。もし {{< region-param key="dd_full_site" code="true" >}} が別の IP にフェイルオーバーした場合、HAProxy の DNS キャッシュをリフレッシュするために、`cron` **ジョブで 10 分毎に HAProxy をリロードさせることが推奨されています** (`service haproxy reload` など)。
 
 #### Datadog Agent 構成
 
@@ -444,22 +389,37 @@ HAProxy 1.8 以降のバージョンでは、DNS サービスディスカバリ�
 
 `dd_url: http://haproxy.example.com:3834`
 
-プロキシ経由でトレース、プロセス、ログを送信するには、`datadog.yaml` ファイルで次のように設定します。
+プロキシ経由でトレース、プロファイル、プロセス、ログを送信するには、`datadog.yaml` ファイルで次のように設定します。
 
 ```yaml
 apm_config:
     apm_dd_url: http://haproxy.example.com:3835
+    profiling_dd_url: http://haproxy.example.com:3836
+    telemetry:
+        dd_url: http://haproxy.example.com:3843
 
 process_config:
-    process_dd_url: http://haproxy.example.com:3836
+    process_dd_url: http://haproxy.example.com:3837
 
 logs_config:
     use_http: true
-    logs_dd_url: haproxy.example.com:3837
+    logs_dd_url: haproxy.example.com:3838
     logs_no_ssl: true
+
+database_monitoring:
+    metrics:
+        dd_url: haproxy.example.com:3839
+    activity:
+        dd_url: haproxy.example.com:3839
+    samples:
+        dd_url: haproxy.example.com:3840
+
+network_devices:
+    metadata:
+        dd_url: haproxy.example.com:3841
 ```
 
-次に、`datadog.yaml` Agent 構成ファイルを編集して、`skip_ssl_validation` を `true` に設定します。これは、SSL 証明書 (`app.datadoghq.com` または `app.datadoghq.eu`) のホスト名と HAProxy のホスト名の不一致を Agent が無視するようにするために必要です。
+次に、`datadog.yaml` Agent コンフィギュレーションファイルを編集して、`skip_ssl_validation` を `true` に設定します。これは、SSL 証明書のホスト名 ({{< region-param key="dd_full_site" code="true" >}}) と HAProxy のホスト名との間の不一致を Agent が無視できるようにするために必要な設定です。
 
 ```yaml
 skip_ssl_validation: true
@@ -485,7 +445,7 @@ skip_ssl_validation: true
 endpoint = http://haproxy.example.com:3835
 
 [process.api]
-endpoint = http://haproxy.example.com:3836
+endpoint = http://haproxy.example.com:3837
 ```
 
 Supervisor コンフィギュレーションを編集して SSL 証明書の検証を無効にします。これは、SSL 証明書 (`app.datadoghq.com`) のホスト名と HAProxy のホスト名の不一致を Python が訴えることを避けるために必要です。Supervisor コンフィギュレーションは次の場所にあります:
@@ -529,9 +489,6 @@ skip_ssl_validation: yes
 
 この例 `nginx.conf` を使用して、Agent のトラフィックを Datadog にプロキシ転送できます。このコンフィギュレーションにおける最後のサーバーブロックで TLS ラップを行うことで、プロキシと Datadog のログインテーク API エンドポイントとの間で内部的なプレーンテキストログを暗号化します。
 
-{{< site-region region="us" >}}
-
-
 ```conf
 user nginx;
 worker_processes auto;
@@ -544,101 +501,100 @@ events {
 # Datadog Agent の HTTP プロキシ
 http {
     server {
-        listen 3834; #メトリクスのリッスン
+        listen 3834; #listen for metrics
         access_log off;
 
         location /api/v1/validate {
-            proxy_pass https://api.datadoghq.com:443/api/v1/validate;
+            proxy_pass https://api.{{< region-param key="dd_site" >}}:443/api/v1/validate;
         }
         location /support/flare/ {
-            proxy_pass https://flare.datadoghq.com:443/support/flare/;
+            proxy_pass https://flare.{{< region-param key="dd_site" >}}:443/support/flare/;
         }
         location / {
-            proxy_pass https://haproxy-app.agent.datadoghq.com:443/;
+            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }
 # Datadog Agent の TCP プロキシ
 stream {
     server {
-        listen 3835; #トレースのリッスン
+        listen 3835; #listen for traces
         proxy_ssl on;
-        proxy_pass trace.agent.datadoghq.com:443;
+        proxy_pass trace.agent.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3836; #プロセスのリッスン
+        listen 3836; #listen for profiles
         proxy_ssl on;
-        proxy_pass process.datadoghq.com:443;
+        proxy_pass profile.agent.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3837; #use_http: true があるログのリッスン
+        listen 3837; #listen for processes
         proxy_ssl on;
-        proxy_pass agent-http-intake.logs.datadoghq.com:443;
+        proxy_pass process.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3838; #listen for logs with use_http: true
+        proxy_ssl on;
+        proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3839; #listen for database monitoring metrics
+        proxy_ssl on;
+        proxy_pass dbm-metrics-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3840; #listen for database monitoring samples
+        proxy_ssl on;
+        proxy_pass dbquery-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3841; #listen for network devices metadata
+        proxy_ssl on;
+        proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3843; #listen for instrumentations telemetry data
+        proxy_ssl on;
+        proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-
-```conf
-user nginx;
-worker_processes auto;
-error_log /var/log/nginx/error.log;
-pid /run/nginx.pid;
-
-events {
-    worker_connections 1024;
-}
-# Datadog Agent の HTTP プロキシ
-http {
-    server {
-        listen 3834; #メトリクスのリッスン
-        access_log off;
-
-        location /api/v1/validate {
-            proxy_pass https://api.datadoghq.eu:443/api/v1/validate;
-        }
-        location /support/flare/ {
-            proxy_pass https://flare.datadoghq.eu:443/support/flare/;
-        }
-        location / {
-            proxy_pass https://haproxy-app.agent.datadoghq.eu:443/;
-        }
-    }
-}
-# Datadog Agent の TCP プロキシ
-stream {
-    server {
-        listen 3835; #トレースのリッスン
-        proxy_ssl on;
-        proxy_pass trace.agent.datadoghq.eu:443;
-    }
-    server {
-        listen 3836; #プロセスのリッスン
-        proxy_ssl on;
-        proxy_pass process.datadoghq.eu:443;
-    }
-    server {
-        listen 3837; #use_http: true があるログのリッスン
-        proxy_ssl on;
-        proxy_pass agent-http-intake.logs.datadoghq.eu:443;
-    }
-}
-```
-
-{{< /site-region >}}
 
 #### Datadog Agent 構成
+
+各 Agent のコンフィギュレーションファイルを編集し、`dd_url` に Nginx のアドレス、例えば `nginx.example.com` を設定し、Nginx を指すようにします。
+この `dd_url` 設定は `datadog.yaml` ファイルに記述されています。
+
+`dd_url: http://nginx.example.com:3834`
 
 Datadog Agent v6/7.16 以降をログコレクターとして使用するには、`datadog.yaml` を更新して、ログインテークと直接接続を確立する代わりに、新しく作成されたプロキシを使用するように Agent に指示します。
 
 ```yaml
+apm_config:
+    apm_dd_url: http://nginx.example.com:3835
+    profiling_dd_url: http://nginx.example.com:3836
+    telemetry:
+        dd_url: http://nginx.example.com:3843
+
+process_config:
+    process_dd_url: http://nginx.example.com:3837
+
 logs_config:
-  use_http: true
-  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
-  logs_no_ssl: true
+    use_http: true
+    logs_dd_url: nginx.example.com:3838
+    logs_no_ssl: true
+
+database_monitoring:
+    metrics:
+        dd_url: nginx.example.com:3839
+    activity:
+        dd_url: nginx.example.com:3839
+    samples:
+        dd_url: nginx.example.com:3840
+
+network_devices:
+    metadata:
+        dd_url: nginx.example.com:3841
 ```
 
 TCP 経由でログを送信する場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>を参照してください。
@@ -646,9 +602,15 @@ TCP 経由でログを送信する場合は、<a href="/agent/logs/proxy">ログ
 
 ## Datadog Agent
 
-**この機能は、Agent v5 でのみ使用できます**
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
 
-トラフィックを Datadog に転送するには、実際のプロキシ (Web プロキシまたは HAProxy) を使用することをお勧めしますが、これらのオプションを使用できない場合は、Agent v5 のインスタンスをプロキシとして機能するように構成できます。
+**この機能は、Agent v5 でのみ使用できます**。
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+トラフィックを Datadog に転送するには、実際のプロキシ (Web プロキシまたは HAProxy) を使用することをお勧めしますが、これらのオプションを使用できない場合は、**Agent v5** のインスタンスをプロキシとして機能するように構成できます。
 
 1. **datadog-agent を実行している** 1 つノードをプロキシとして指定します。
     この例では、プロキシ名が `proxy-node` であるとします。このノードは、`https://app.datadoghq.com` に到達できる**必要**があります。
@@ -672,7 +634,12 @@ TCP 経由でログを送信する場合は、<a href="/agent/logs/proxy">ログ
    の行を
     `dd_url: http://proxy-node:17123` のように変更します。
 
-6. [インフラストラクチャーページ][4] で、すべてのノードがデータを Datadog に報告していることを確認します。
+6. [インフラストラクチャーページ][1]で、すべてのノードがデータを Datadog に報告していることを確認します。
+
+
+[1]: https://app.datadoghq.com/infrastructure#overview
+{{% /tab %}}
+{{< /tabs >}}
 
 ## その他の参考資料
 
@@ -681,4 +648,3 @@ TCP 経由でログを送信する場合は、<a href="/agent/logs/proxy">ログ
 [1]: http://haproxy.1wt.eu
 [2]: http://www.haproxy.org/#perf
 [3]: https://www.nginx.com
-[4]: https://app.datadoghq.com/infrastructure#overview

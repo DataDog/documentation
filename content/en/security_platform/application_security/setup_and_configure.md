@@ -140,7 +140,7 @@ To install the above requirements:
 
 The Datadog Ruby library supports the latest gem for the following Ruby interpreters:
 
-- MRI (https://www.ruby-lang.org/) versions 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1
+- MRI (https://www.ruby-lang.org/) versions 2.1 to 3.1
 
 These are supported on the following architectures:
 - Linux (GNU) x86-64, aarch64
@@ -276,7 +276,7 @@ For information and options, read [the .NET tracer documentation][1].
 
 {{< programming-lang lang="go" >}}
 
-The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1]. 
+The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1].
 
 This example shows how to retrieve the current tracer span and use it to set user monitoring tags:
 
