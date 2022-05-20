@@ -536,6 +536,6 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [2]: /monitors/create/types/log/
 [3]: /monitors/create/types/apm/?tab=analytics
 [4]: /monitors/create/types/real_user_monitoring/
-[5]: /monitors/create/types/ci_pipelines/
+[5]: /monitors/create/types/ci/
 [6]: /monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
