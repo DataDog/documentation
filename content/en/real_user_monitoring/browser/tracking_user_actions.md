@@ -29,18 +29,18 @@ The automatic collection of user actions provides insights into user behavior, w
 
 You can extend the collection of user interactions by [sending your own custom actions](#custom-actions).
 
-**Note**: The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with. You can control which information is sent to Datadog by [manually setting an action name](#declaring-a-name-for-click-actions), or by [implementing global scrubbing rules in the Browser SDK][1].
+**Note**: The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with. You can control which information is sent to Datadog by [manually setting an action name](#declaring-a-name-for-click-actions), or by [implementing global scrubbing rules in the RUM Browser SDK][1].
 
 ## What interactions are being tracked?
 
-The Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
-* Activity following the click is detected. See [How page activity is calculated][4] for details.
-* The click does not lead to a new page being loaded, in which case the Browser SDK generates a new RUM View event.
+The RUM Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
+* Activity following the click is detected. See [How page activity is calculated][2] for details.
+* The click does not lead to a new page being loaded, in which case the RUM Browser SDK generates a new RUM View event.
 * A name can be computed for the action. ([Learn more about action naming](#declaring-a-name-for-click-actions))
 
 ## Action timing metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][1].
+For information about the default attributes for all RUM event types, see [Data Collected][3]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][1].
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -51,7 +51,7 @@ For information about the default attributes for all RUM event types, see [Data 
 
 ### How action loading time is calculated
 
-The Browser RUM SDK watches the page activity following every click. The action is considered finished when the page has no more activity. See [How page activity is calculated][4] for details.
+The RUM Browser SDK watches the page activity following every click. The action is considered finished when the page has no more activity. See [How page activity is calculated][2] for details.
 
 ## Action attributes
 
@@ -76,7 +76,7 @@ The RUM library uses various strategies to get a name for click actions. If you 
 </div>
 ```
 
-Starting with [version 2.16.0][3], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action. For example:
+Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action. For example:
 
 ```html
 <script>
@@ -95,7 +95,7 @@ Starting with [version 2.16.0][3], with the `actionNameAttribute` initialization
 
 ## Custom actions
 
-Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM SDK collects a visitor's cart data when they click the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
+Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM Browser SDK collects a visitor's cart data when they click the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -161,6 +161,6 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/modifying_data_and_context/
-[2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[2]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[3]: /real_user_monitoring/browser/data_collected/#default-attributes
+[4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

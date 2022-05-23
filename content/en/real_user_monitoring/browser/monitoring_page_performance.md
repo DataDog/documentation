@@ -69,7 +69,7 @@ RUM view events collect extensive performance metrics for every single page view
 
 ## Monitoring single page applications (SPA)
 
-For single page applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][15].
+For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][15].
 
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
 
@@ -86,7 +86,7 @@ To account for modern web applications, loading time watches for network request
 
 ### How page activity is calculated
 
-Whenever a navigation or a click occurs, the Browser RUM SDK tracks the page activity to estimate the time until the interface is stable again. The page is deemed to have activity by looking at network requests and DOM mutations. The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
+Whenever a navigation or a click occurs, the RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is deemed to have activity by looking at network requests and DOM mutations. The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
 
 The criteria of 100ms since last request or DOM mutation might not be an accurate determination of activity in the following scenarios:
 
@@ -94,7 +94,7 @@ The criteria of 100ms since last request or DOM mutation might not be an accurat
 
 - The application uses "[comet][16])" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
-To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the Browser RUM SDK to exclude when computing the page activity:
+To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
 ```javascript
 DD_RUM.init({
@@ -136,7 +136,7 @@ document.addEventListener("scroll", function handler() {
 
 Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][17] before graphing it in RUM Analytics or in dashboards.
 
-**Note**: For Single Page Applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing will equal 8-5 = 3 seconds.
+**Note**: For single page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
 ## Further Reading
 
