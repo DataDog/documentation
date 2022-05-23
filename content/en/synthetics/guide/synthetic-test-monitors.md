@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-When you create a Synthetic test, Datadog automatically creates an associated monitor. You can setup notifications when the Synthetic test monitor alerts.
+When you create a Synthetic test, Datadog automatically creates an associated monitor. You can set up notifications when the Synthetic test monitor alerts.
 
 {{< img src="synthetics/guide/synthetics_test_monitors/synthetic_test_monitor.png" alt="Synthetic test monitor" style="width:100%;">}}
 
@@ -33,11 +33,11 @@ If you have multiple layers of notifications (for example, notifying more teams 
 
 ## Tailor monitor notifications
 
-Depending on your incident management strategy, you may want to involve multiple teams when a Synthetic test alerts. Add `{{#is_renotify}}` and `{{/is_renotify}` in the escalation message to notify Team A first, and Team B if the issue still occurs. Use [conditional variables][3] to characterize the notification message based on team. 
+Depending on your incident management strategy, you may want to involve multiple teams when a Synthetic test alerts. To notify Team B only on subsequent alerts after the first alert, surround the notification to Team B with `{{#is_renotify}}` and `{{/is_renotify}`. Use [conditional variables][3] to further characterize the notification message based on monitor attributes. 
 
 {{< img src="synthetics/guide/synthetics_test_monitors/renotification_toggle.png" alt="Select the amount of time for the alerting monitor to renotify" style="width:90%;">}}
 
-To enable the alerting monitor to renotify, click the toggle left of `If this monitor stays in alert status renotify every` and select a time option from the dropdown menu. Optionally, use [conditional variables][3] such as `{{#is_renotify}}` and `{{/is_renotify}}` to send an escalation message to a different team or organization.
+To enable the alerting monitor to renotify, click the toggle left of `If this monitor stays in alert status renotify every` and select a time option from the dropdown menu.
 
 ## Integrate your Synthetic test monitor with Statuspage
 
