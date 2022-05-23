@@ -45,14 +45,14 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 {{< tabs >}}
 {{% tab "Role delegation" %}}
 
-Setting up the AWS integration manually involves creating an IAM policy and IAM role in your AWS account, and configuring the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
+Setting up the AWS integration manually involves creating an IAM policy and IAM role in your AWS account and configuring the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf and pull data into your Datadog account. The sections below detail the steps for creating each of these components and then completing the setup in your Datadog account.
 
 ## Setup
 
 ### Generate an external ID
 Generate an External ID in the <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services" target="_blank">AWS integration tile</a> on the integrations page. This is used in the trust policy of the AWS IAM role you create for Datadog.
 1. Select the `Configuration` tab, then `Role Delegation`.
-2. Click `Manually`. This creates an AWS External ID which is used for configuration of the AWS IAM role. For more information about the External ID, see the [IAM User Guide][2].
+2. Click `Manually`. This creates an AWS External ID, which is used for configuration of the AWS IAM role. For more information about the External ID, see the [IAM User Guide][2].
 3. Copy this value to your clipboard or notepad.  
   **Note: Do not close the integration tile or the Datadog application page**, as this causes the external ID value to reset.
 
@@ -82,7 +82,7 @@ Ensure to leave **Require MFA** disabled.
 
 ### Complete the setup in Datadog
 
-19. Returning to the AWS integration tile page in your Datadog account that you had open in another tab, enter your AWS Account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
+19. Return to the AWS integration tile page in your Datadog account that you had open in another tab, enter your AWS Account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
 20. Enter the name of the created role.  
 **Note:** The role name you enter in the integration tile is case sensitive and must exactly match the role name created on the AWS side.
 21. If there is a [Datadog is not authorized to perform sts:AssumeRole][6] error, make sure your AWS trust policy's `sts:ExternalId:` matches the `AWS External ID` previously created in the integration tile.
