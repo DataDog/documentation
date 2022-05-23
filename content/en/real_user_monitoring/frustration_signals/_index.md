@@ -15,7 +15,9 @@ further_reading:
 
 ## Overview
 
-Frustration signals identify the highest points of user friction in your application by surfacing moments where users exhibit moments of frustration. RUM collects three types of frustration signals:
+Frustration signals identify the highest points of user friction in your application by surfacing moments where users exhibit moments of frustration. The [RUM Explorer][1] displays a count of frustration signals as a column in the **List** visualization. Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. 
+
+RUM collects three types of frustration signals:
 
 Rage Clicks
 : A user clicks on an element more than three times in a one-second rolling window.
@@ -26,7 +28,7 @@ Dead Clicks
 Error Clicks
 : A user clicks on an element right before a JavaScript error occurs.
 
-## Collect frustration signals
+## Requirements
 
 First, you need the Browser RUM SDK version >= 4.9.0.
 
@@ -41,15 +43,15 @@ DD_RUM.init({
 
 Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackInteractions`.
 
-## Use frustration signals
+## Usage
 
-Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. Click **Frustrated Sessions** to access sessions with a frustration signal in the [RUM Explorer][2]. 
+Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][2]. Click **Frustrated Sessions** to access sessions with a frustration signal in the [RUM Explorer][1]. 
 
 Click **Application Overview** to explore a dashboard with additional data about your application such as performance metrics, error metrics, user analytics, and errors. The **Frustration Signals** widget displays a graph correlating frustration signals with contextual user analytics data.
 
 ### Explore the frustration signals dashboard
 
-Datadog provides an out-of-the-box dashboard that visualizes trends on points of user frustration in your application. The **Frustration Signals** dashboard contains graphs that shows how users get frustrated by interacting with page elements.
+The **Frustration Signals** dashboard provides an overview of frustration levels across your application, showing you topics like the most frustrated users and pages with the highest amount of frustration signals.
 
 You can clone this dashboard and customize it to fit your needs. For more information, see [Frustration Signals Dashboard][3].
 
@@ -57,13 +59,13 @@ You can clone this dashboard and customize it to fit your needs. For more inform
 
 Search through all the data collected by RUM in the [RUM Explorer][4] to surface trends on frustration signals, analyze patterns with greater context, or export them into [dashboards][5] and [monitors][6].
 
-Enter a facet in the search query to start your search. The two facets include:
+Enter a facet in the search query to start your search. The three facets include:
 
 Frustration Type
-: Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration_type:rage` to the search query.
+: Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration_type:rage_click` to the search query.
 
 Frustration Count
-: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions that had at least one frustration signal occur, add `session.frustration.count>0` to the search query.
+: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions that had at least one frustration signal occur, add `session.frustration.count>0` or `view.frustration.count>0` to the search query.
 
 #### Sessions
 
@@ -99,8 +101,8 @@ You can set alerts on frustration signals to notify you or your team if any frus
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/list
-[2]: /real_user_monitoring/explorer/
+[1]: /real_user_monitoring/explorer/
+[2]: https://app.datadoghq.com/rum/list
 [3]: /real_user_monitoring/dashboards/frustration_signals_dashboard/
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /dashboards/
