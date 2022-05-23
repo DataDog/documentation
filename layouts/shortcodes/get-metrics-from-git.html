@@ -52,13 +52,15 @@
             {{ $description := replace $v.description "<error_type>" "&#60;error_type&#62;" }}
               <tr>
                 <td>
-                  <strong>{{ $v.metric_name | safeHTML }}</strong><br>
+                  <strong>{{ $v.metric_name }}</strong>
+                  <br>
                   ({{ $v.metric_type }})
                 </td>
                 <td>
                   {{ $description | safeHTML }}
                   {{ with $v.unit_name }}
-                    <br><em>Shown as {{ . }}</em>
+                    <br>
+                    <em>Shown as {{ . }}</em>
                   {{ end }}
                 </td>
               </tr>
@@ -83,13 +85,15 @@
       {{ $description := replace $v.description "<error_type>" "&#60;error_type&#62;" }}
         <tr>
           <td>
-            <strong>{{ $v.metric_name | safeHTML }}</strong><br>
+            <strong>{{ $v.metric_name }}</strong>
+            <br>
             ({{ $v.metric_type }})
           </td>
           <td>
             {{ $description | safeHTML }}
             {{ with $v.unit_name }}
-              <br><em>Shown as {{ . }}</em>
+              <br>
+              <em>Shown as {{ . }}</em>
             {{ end }}
           </td>
         </tr>
