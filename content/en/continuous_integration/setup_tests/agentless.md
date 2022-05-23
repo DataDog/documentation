@@ -39,12 +39,13 @@ Additionally, configure which [Datadog site][3] to which you want to send data. 
 
 | Library         | Support type    | Version |
 |-----------------|-----------------|---------|
-| [.NET][4]       | Beta            | x.x.x   |
-| [Java][5]       | Not supported   | x.x.x   |
+| [.NET][4]       | Beta            | 2.5.1   |
+| [Java][5]       | Beta            | 0.101.0 |
 | [JavaScript][6] | Beta            | 2.5.0   |
-| [Python][7]     | Not supported   | x.x.x   |
-| [Ruby][8]       | Not supported   | x.x.x   |
-| [Swift][9]      | Fully supported | x.x.x   |
+| [Python][7]     | Not supported   | N/A     |
+| [Ruby][8]       | Not supported   | N/A     |
+
+For other languages like [Swift][9] or other ways of reporting test data such as [JUnit Report Upload][10], there is nothing additional to do as the only supported mode for them is agentless.
 
 [1]: /continuous_integration/setup_tests/agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -55,3 +56,4 @@ Additionally, configure which [Datadog site][3] to which you want to send data. 
 [7]: /continuous_integration/setup_tests/python
 [8]: /continuous_integration/setup_tests/ruby
 [9]: /continuous_integration/setup_tests/swift
+[10]: /continuous_integration/setup_tests/junit_upload
