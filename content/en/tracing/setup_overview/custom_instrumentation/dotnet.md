@@ -116,7 +116,7 @@ If you have existing `[Trace]` or similar attributes, or prefer to use attribute
   <strong>Note:</strong> This feature requires enabling automatic instrumentation for your application.
 </div>
 
-Using the `DD_TRACE_METHOD` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format, see the [.NET Framework setup instructions][8] or the [.NET Core setup instructions][9]. For the following example, assume that the desired method to instrument is named `SaveSession` and the method is defined on the `Store.Managers.SessionManager` type:
+Using the `DD_TRACE_METHODS` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format, see the [.NET Framework setup instructions][8] or the [.NET Core setup instructions][9]. For the following example, assume that the desired method to instrument is named `SaveSession` and the method is defined on the `Store.Managers.SessionManager` type:
 
 ```ini
 DD_TRACE_METHODS=Store.Managers.SessionManager[SaveSession]
