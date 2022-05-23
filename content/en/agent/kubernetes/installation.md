@@ -265,6 +265,8 @@ To install the Datadog Agent on your Kubernetes cluster:
     echo -n 'Random string' | base64
     ```
 
+    **Note**: The random string must contain at least 32 alphanumeric characters to secure Cluster Agent to Agent communication.
+
 5. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
 
     **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
