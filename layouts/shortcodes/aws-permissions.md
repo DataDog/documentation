@@ -47,6 +47,7 @@ The following permissions included in the policy document use wild cards such as
                 "es:ListTags",
                 "es:ListDomainNames",
                 "es:DescribeElasticsearchDomains",
+                "events:CreateEventBus",
                 "fsx:DescribeFileSystems",
                 "fsx:ListTagsForResource",
                 "health:DescribeEvents",
