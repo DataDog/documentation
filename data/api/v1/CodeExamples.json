@@ -752,27 +752,6 @@
       "description": "Trigger Synthetics tests returns \"OK\" response"
     }
   ],
-  "GetHourlyUsageAttribution": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get Hourly Usage Attribution returns \"OK\" response"
-    }
-  ],
-  "GetMonthlyUsageAttribution": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get Monthly Usage Attribution returns \"OK\" response"
-    }
-  ],
-  "GetUsageAttribution": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get Usage Attribution returns \"OK\" response"
-    }
-  ],
   "GetUsageTopAvgMetrics": [
     {
       "group": "usage_metering",
@@ -785,6 +764,13 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get hourly logs usage by retention returns \"OK\" response"
+    }
+  ],
+  "GetHourlyUsageAttribution": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage attribution returns \"OK\" response"
     }
   ],
   "GetUsageCIApp": [
@@ -974,6 +960,13 @@
       "description": "Get hourly usage for profiled hosts returns \"OK\" response"
     }
   ],
+  "GetMonthlyUsageAttribution": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get monthly usage attribution returns \"OK\" response"
+    }
+  ],
   "GetSpecifiedDailyCustomReports": [
     {
       "group": "usage_metering",
@@ -1000,6 +993,13 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get the list of available monthly custom reports returns \"OK\" response"
+    }
+  ],
+  "GetUsageAttribution": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get usage attribution returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [
