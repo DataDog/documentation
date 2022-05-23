@@ -183,20 +183,20 @@ Examples:
 
 1. Composite with different new group delays on child monitors:
 
-* monitor A: new_group_delay=120s
-* monitor B: new_group_delay=60s
-* composite: `A&&B`
+    * monitor A: new_group_delay=120s
+    * monitor B: new_group_delay=60s
+    * composite: `A&&B`
 
-When a new group appears, immediately, the composite monitor has this new group in OK state. After `60s`, the new group has the state from B in the composite monitor. After `120s`, the new group has its worst status among A and B in the composite. 
+    When a new group appears, immediately, the composite monitor has this new group in OK state. After `60s`, the new group has the state from B in the composite monitor. After `120s`, the new group has its worst status among A and B in the composite. 
 
 2. Composite with new group delay
 
-* monitor A: new_group_delay=120s
-* monitor B: new_group_delay=60s
-* composite: new_group_delay=200s
-* composite: `A&&B`
+    * monitor A: new_group_delay=120s
+    * monitor B: new_group_delay=60s
+    * composite: new_group_delay=200s
+    * composite: `A&&B`
 
-When a new group appears, immediately, the composite monitor has this new group in OK state. After `200s`, the new group has its worst status among A and B in the composite. 
+    When a new group appears, immediately, the composite monitor has this new group in OK state. After `200s`, the new group has its worst status among A and B in the composite. 
 
 
 ## Further Reading
