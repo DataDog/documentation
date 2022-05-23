@@ -30,7 +30,7 @@ Supported test frameworks:
 To report test results to Datadog, you have the following options:
 
 * If you run your tests in SaaS CI providers, Datadog recommends using the [Agentless mode][11] of the Datadog Libraries. This mode allows sending data without running an ephemeral instance of the Agent as a service container on each build.
-* If you run your tests in On-Premises CI providers, Datadog recommends sending the data through the [Datadog Agent][1].
+* If you run your tests in On-Premise CI providers, Datadog recommends sending the data through the [Datadog Agent][1].
 
 ## Installing the .NET tracer CLI
 

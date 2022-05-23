@@ -14,9 +14,9 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-If you are using a SaaS CI provider without access to the underlying worker nodes, you can send the collected data by the Test instrumentation using the Agentless mode.
+If you are using a SaaS CI provider without access to the underlying worker nodes, you can send the collected data by the test instrumentation using the Agentless mode.
 
-For On-Premises CI providers, Datadog recommends sending data through the [Datadog Agent][1].
+For On-Premise CI providers, Datadog recommends sending data through the [Datadog Agent][1].
 
 To run the library using the Agentless mode, you need to configure the following environment variables:
 
@@ -45,7 +45,7 @@ Additionally, configure which [Datadog site][3] to which you want to send data. 
 | [Python][7]     | Not supported   | N/A     |
 | [Ruby][8]       | Not supported   | N/A     |
 
-For other languages like [Swift][9] or other ways of reporting test data such as [JUnit Report Upload][10], there is nothing additional to do as the only supported mode for them is agentless.
+For other languages like [Swift][9] or other ways of reporting test data such as [JUnit Report Upload][10], there is nothing additional to do as the only supported mode for them is Agentless.
 
 [1]: /continuous_integration/setup_tests/agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
