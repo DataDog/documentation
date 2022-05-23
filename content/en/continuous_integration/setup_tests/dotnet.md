@@ -27,11 +27,10 @@ Supported test frameworks:
 
 ## Prerequisites
 
-[Install the Datadog Agent to collect tests data][1].
+To report test results to Datadog, you have the following options:
 
-<div class="alert alert-warning">
-Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/dotnet#agentless-beta">instructions</a> on this page.
-</div>
+* If you run your tests in SaaS CI providers, Datadog recommends using the [Agentless mode][11] of the Datadog Libraries. This mode allows sending data without running an ephemeral instance of the Agent as a service container on each build.
+* If you run your tests in On-Premises CI providers, Datadog recommends sending the data through the [Datadog Agent][1].
 
 ## Installing the .NET tracer CLI
 
@@ -45,7 +44,7 @@ Install or update the `dd-trace` command using one of the following ways:
     * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][7]
     * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][8]
     * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][9]
- 
+
 - Or by downloading [from the github release page][10].
 
 ## Instrumenting tests
@@ -220,3 +219,4 @@ Additionally, configure which [Datadog site][6] to which you want to send data. 
 [8]: https://dtdg.co/dd-trace-dotnet-linux-x64
 [9]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
 [10]: https://github.com/DataDog/dd-trace-dotnet/releases
+[11]: /continuous_integration/setup_tests/agentless/

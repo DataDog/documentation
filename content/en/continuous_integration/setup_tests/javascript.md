@@ -29,11 +29,10 @@ Supported test frameworks:
 
 ## Prerequisites
 
-[Install the Datadog Agent to collect tests data][4].
+To report test results to Datadog, you have the following options:
 
-<div class="alert alert-warning">
-Agentless mode is in beta. To test this feature, follow the <a href="/continuous_integration/setup_tests/javascript#agentless-beta">Agentless instructions</a> on this page.
-</div>
+* If you run your tests in SaaS CI providers, Datadog recommends using the [Agentless mode][16] of the Datadog Libraries. This mode allows sending data without running an ephemeral instance of the Agent as a service container on each build.
+* If you run your tests in On-Premises CI providers, Datadog recommends sending the data through the [Datadog Agent][4].
 
 ## Installing the JavaScript tracer
 
@@ -357,3 +356,4 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [13]: /continuous_integration/guides/rum_integration/
 [14]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [15]: https://github.com/ryym/mocha-each
+[16]: /continuous_integration/setup_tests/agentless/

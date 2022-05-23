@@ -30,7 +30,7 @@ To report test results to Datadog, you have the following options:
 
 ## Installing the Java tracer
 
-Install and enable the Java tracer v0.91.0 or newer.
+Install and enable the Java tracer v0.101.0 or newer.
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -245,7 +245,7 @@ If you need to use a previous version of the tracer, you can configure CI Visibi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/continuous_integration/setup_tests/agent/
+[1]: /continuous_integration/setup_tests/agent/
 [2]: /tracing/setup_overview/setup/java/?tab=containers#configuration
 [3]: /tracing/setup_overview/compatibility_requirements/java
-[4]:/continuous_integration/setup_tests/agentless/
+[4]: /continuous_integration/setup_tests/agentless/
