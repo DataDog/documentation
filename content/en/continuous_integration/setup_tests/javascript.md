@@ -27,22 +27,62 @@ Supported test frameworks:
 * Cypress >= 6.7.0
   * From `dd-trace>=1.4.0`
 
-## Prerequisites
+## Configuring reporting method
 
-To report test results to Datadog, you have the following options:
+To report test results to Datadog, you need to configure the Datadog JavaScript library to report test results to Datadog.
 
-* If you run your tests in SaaS CI providers, Datadog recommends using the [Agentless mode][16] of the Datadog Libraries. This mode allows sending data without running an ephemeral instance of the Agent as a service container on each build.
-* If you run your tests in On-Premises CI providers, Datadog recommends sending the data through the [Datadog Agent][4].
+{{< tabs >}}
+
+{{% tab "On-Premises CI provider (via Datadog Agent)" %}}
+
+If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results will automatically be linked to the underlying host metrics.
+
+If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, as `localhost` inside the build references the container itself and not the underlying worker node where the Datadog Agent is running.
+
+If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
+
+
+[1]: /agent/
+[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
+{{% /tab %}}
+
+{{% tab "Cloud CI provider (Agentless)" %}}
+
+<div class="alert alert-info">Agentless mode is available in Datadog JavaScript library version >= 2.5.0</div>
+
+If you are using a cloud CI provider without access to the underlying worker nodes, such as GitHub Actions or CircleCI, configure the library to use the Agentless mode. For this, set the following environment variables:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
+: Enables or disables Agentless mode.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][1] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+Additionally, configure which [Datadog site][2] to which you want to send data.
+
+`DD_SITE` (Required)
+: The [Datadog site][2] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site/
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Installing the JavaScript tracer
 
-To install the [JavaScript tracer][5], run:
+To install the [JavaScript tracer][4], run:
 
 {{< code-block lang="bash" >}}
 yarn add --dev dd-trace
 {{< /code-block >}}
 
-For more information, see the [JavaScript tracer installation docs][6].
+For more information, see the [JavaScript tracer installation docs][5].
 
 ## Instrument your tests
 
@@ -217,7 +257,7 @@ The following is a list of the most important configuration settings that can be
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][7] options can also be used.
+All other [Datadog Tracer configuration][6] options can also be used.
 
 ### Collecting Git metadata
 
@@ -278,25 +318,25 @@ To instrument your test suite without requiring an Agent, configure the followin
 **Default**: `false`
 
 `DD_API_KEY` (Required)
-: The [Datadog API key][8] used to upload the test results.<br/>
+: The [Datadog API key][7] used to upload the test results.<br/>
 **Default**: `(empty)`
 
-Additionally, configure which [Datadog site][7] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
+Additionally, configure which [Datadog site][6] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
 
 `DD_SITE` (Required)
-: The [Datadog site][9] to upload results to.<br/>
+: The [Datadog site][8] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][10] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][11].
+[Mocha >=9.0.0][9] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][10].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][12]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][13] guide.
+If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][12] guide.
 
 ## Best practices
 
@@ -315,14 +355,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][14] instead:
+And use [`test.each`][13] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][15]:
+For `mocha`, use [`mocha-each`][14]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -344,16 +384,14 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [1]: https://github.com/facebook/jest/tree/master/packages/jest-circus
 [2]: https://github.com/facebook/jest/tree/master/packages/jest-jasmine2
 [3]: https://jestjs.io/docs/configuration#testrunner-string
-[4]: /continuous_integration/setup_tests/agent/
-[5]: https://github.com/DataDog/dd-trace-js
-[6]: /tracing/setup_overview/setup/nodejs
-[7]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
-[8]: https://app.datadoghq.com/organization-settings/api-keys
-[9]: /getting_started/site/
-[10]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[11]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[12]: /real_user_monitoring/browser/
-[13]: /continuous_integration/guides/rum_integration/
-[14]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[15]: https://github.com/ryym/mocha-each
-[16]: /continuous_integration/setup_tests/agentless/
+[4]: https://github.com/DataDog/dd-trace-js
+[5]: /tracing/setup_overview/setup/nodejs
+[6]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
+[7]: https://app.datadoghq.com/organization-settings/api-keys
+[8]: /getting_started/site/
+[9]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[11]: /real_user_monitoring/browser/
+[12]: /continuous_integration/guides/rum_integration/
+[13]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[14]: https://github.com/ryym/mocha-each
