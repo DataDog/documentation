@@ -206,37 +206,10 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 To use the custom instrumentation in your .NET application:
 
 1. Execute `dd-trace --version` to get the version of the tool.
-1. Add the `Datadog.Trace` [NuGet package][6] with the same version to your application.
-2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+2. Add the `Datadog.Trace` [NuGet package][6] with the same version to your application.
+3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][7].
-=======
-1. Add the `Datadog.Trace` [NuGet package][7] with the same version to your application.
-2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
-**Default**: `(empty)`
-
-Then, prefix your test command with `dd-trace ci run`. Use the `--dd-service` parameter to provide the name of the service or library. Use the `--dd-env` parameter to provide the environment where tests are being run (`local` when running tests on a developer workstation, `ci` when running them on a CI provider, etc.) For example:
-
-{{< code-block lang="bash" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
-{{< /code-block >}}
-
-Alternatively, you can provide the [Datadog API key][8] using the `--api-key` parameter, for example:
-
-{{< code-block lang="bash" >}}
-dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
-{{< /code-block >}}
-
-When the `--api-key` is set, Agentless mode is automatically enabled.
-
-Additionally, configure which [Datadog site][9] to which you want to send data. Your Datadog site is: {{< region-param key="dd_site" >}}.
-
-`DD_SITE` (Required)
-: The [Datadog site][9] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ## Further reading
 
@@ -250,5 +223,3 @@ Additionally, configure which [Datadog site][9] to which you want to send data. 
 [5]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
 [6]: https://www.nuget.org/packages/Datadog.Trace
 [7]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[8]: https://app.datadoghq.com/organization-settings/api-keys
-[9]: /getting_started/site/
