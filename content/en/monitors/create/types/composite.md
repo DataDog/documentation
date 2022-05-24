@@ -178,8 +178,9 @@ However, consider monitor `3`, a multi-alert per `host,url`. Monitor `1` and mon
 
 ### New Group Delay and composite
 
-Setting [new_group_delay][4] is possible in composite monitors and it then overrides the value set on the child monitors.
-Examples:
+Setting [new_group_delay][4] is possible in composite monitors and if set and bigger than the value on the child monitors, it then overrides the value set on the child monitors.
+
+**Examples:**
 
 1. Composite with different new group delays on child monitors:
 
