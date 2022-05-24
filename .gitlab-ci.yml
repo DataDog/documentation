@@ -364,8 +364,8 @@ manage_ignored_translations:on-schedule:
   only:
     - master
   script:
-    - echo "Downloading untracked translation source files..."
-    - manage_untracked_translation_files
+    - echo "Downloading ignored translation source files..."
+    - manage_ignored_translation_files
   when: manual
 
 # Legacy translations nightly job
