@@ -13,10 +13,10 @@ further_reading:
 
 <div class="alert alert-info">Custom tags and metrics is a beta feature and the API is still open to changes.</div>
 
-The custom tags and metrics commands provide a way to add user defined text and numerical tags to the CI Visibility
+The custom tags and metrics commands provide a way to add user-defined text and numerical tags to your CI Visibility
 pipeline traces.
 These tags can be used to create facets (string value tags) or measures (numerical value tags). Facets and measures
-can, in turn, be used to search, graph, or monitor the pipelines.
+can then be used to search, graph, or monitor the pipelines.
 
 ## Compatibility
 
@@ -24,8 +24,8 @@ Custom tags and metrics work with the following CI providers:
 
 - Buildkite
 - CircleCI
-- GitLab (SaaS or self-hoster >= 14.1)
-- GitHub.com (SaaS). **Note:** For GitHub tags and metrics can only be added to the pipeline span
+- GitLab (SaaS or self-hosted >= 14.1)
+- GitHub.com (SaaS) **Note:** For GitHub, tags and metrics can only be added to the pipeline span.
 
 ## Installing the Datadog CI CLI
 
@@ -35,7 +35,7 @@ Install the [`datadog-ci`][1] (>=v1.15.0) CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
-Alternatively you can try and use the beta [standalone binary][2] if you don't want to use `npm`
+Alternatively, you can try and use the beta [standalone binary][2] if you don't want to use `npm`.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -65,66 +65,66 @@ Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/do
 
 ## Adding tags to pipeline traces
 
-Tags can be added to the pipeline span or to the job span. To do this run:
+Tags can be added to the pipeline span or to the job span. To do this, run:
 
 {{< code-block lang="bash" >}}
 datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
-A valid [Datadog API key][3] has to be specified using the environment variable `DATADOG_API_KEY`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`.
 
 {{< site-region region="us5,us3,eu" >}}
-The [Datadog site][1] has to be specified using the environment variable `DATADOG_SITE`.
+You must specify the [Datadog site][1] using the environment variable `DATADOG_SITE`.
 
 [1]: /getting_started/site/
 {{< /site-region >}}
 
-The example below adds the tag `team` to the pipeline span.
+The following example adds the tag `team` to the pipeline span:
 
 {{< code-block lang="bash" >}}
 datadog-ci tag --level pipeline --tags team:backend
 {{< /code-block >}}
 
-The example below adds the tag `go.version` to the span for the current job.
+The following example adds the tag `go.version` to the span for the current job:
 
 {{< code-block lang="bash" >}}
 datadog-ci tag --level job --tags "go.version:`go version`"
 {{< /code-block >}}
 
-You can then create facets from the tags by click on the gear next to the tag name in the [pipeline executions page][4]
-and then clicking on the `create facet` option.
+To create facets from the tags, click the gear icon next to the tag name in the [pipeline executions page][4],
+and then click the **create facet** option.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
 ## Adding metrics to pipeline traces
 
-Numerical tags can be added to the pipeline span or the job span. To do this run:
+To add numerical tags to the pipeline span or the job span, run:
 
 {{< code-block lang="bash" >}}
 datadog-ci metric [--level <pipeline|job>] [--metrics <metrics>]
 {{< /code-block >}}
 
-A valid [Datadog API key][3] has to be specified using the environment variable `DATADOG_API_KEY`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`.
 {{< site-region region="us5,us3,eu" >}}
-The [Datadog site][1] has to be specified using the environment variable `DATADOG_SITE`.
+You must specify the [Datadog site][1] using the environment variable `DATADOG_SITE`.
 
 [1]: /getting_started/site/
 {{< /site-region >}}
 
-The example below adds the metric `error_rate` to the pipeline span.
+The following example adds the metric `error_rate` to the pipeline span:
 
 {{< code-block lang="bash" >}}
 datadog-ci metric --level pipeline --metrics "error_rate:0.56"
 {{< /code-block >}}
 
-The example below adds a metric `binary.size` to the span for the currently running job.
+The following example adds a metric `binary.size` to the span for the currently running job:
 
 {{< code-block lang="bash" >}}
 datadog-ci metric --level job --metric "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
 {{< /code-block >}}
 
-You can create a measure by clicking on the gear next to the metrics name in the [pipeline executions page][4]
-and then clicking on the `create measure` option.
+To create a measure, click the gear icon next to the metrics name in the [pipeline executions page][4]
+and then click the **create measure** option.
 
 ## Further reading
 
