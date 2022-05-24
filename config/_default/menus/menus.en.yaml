@@ -1716,56 +1716,46 @@ main:
     parent: ci
     identifier: setup_tests
     weight: 1
-  - name: Installing the Agent
-    url: continuous_integration/setup_tests/agent/
-    parent: setup_tests
-    identifier: ci_agent
-    weight: 101
-  - name: Agentless Mode
-    url: continuous_integration/setup_tests/agentless/
-    parent: setup_tests
-    identifier: ci_agentless
-    weight: 102
   - name: Tests in Containers
     url: continuous_integration/setup_tests/containers/
     parent: setup_tests
     identifier: ci_containers
-    weight: 103
+    weight: 101
   - name: .NET
     url: continuous_integration/setup_tests/dotnet/
     parent: setup_tests
     identifier: ci_dotnet
-    weight: 104
+    weight: 102
   - name: Java
     url: continuous_integration/setup_tests/java/
     parent: setup_tests
     identifier: ci_java
-    weight: 105
+    weight: 103
   - name: JavaScript
     url: continuous_integration/setup_tests/javascript/
     parent: setup_tests
     identifier: ci_javascript
-    weight: 106
+    weight: 104
   - name: Python
     url: continuous_integration/setup_tests/python/
     parent: setup_tests
     identifier: ci_python
-    weight: 107
+    weight: 105
   - name: Ruby
     url: continuous_integration/setup_tests/ruby/
     parent: setup_tests
     identifier: ci_ruby
-    weight: 108
+    weight: 106
   - name: Swift
     url: continuous_integration/setup_tests/swift/
     parent: setup_tests
     identifier: ci_swift
-    weight: 109
+    weight: 107
   - name: JUnit Report Uploads
     url: continuous_integration/setup_tests/junit_upload/
     parent: setup_tests
     identifier: ci_junit
-    weight: 110
+    weight: 108
   - name: Tracing Pipelines
     url: continuous_integration/setup_pipelines/
     parent: ci
