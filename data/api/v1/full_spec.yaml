@@ -11020,6 +11020,7 @@ components:
       - packetsReceived
       - networkHop
       - receivedMessage
+      - connection
       example: statusCode
       type: string
       x-enum-varnames:
@@ -11038,6 +11039,7 @@ components:
       - PACKETS_RECEIVED
       - NETWORK_HOP
       - RECEIVED_MESSAGE
+      - CONNECTION
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       oneOf:
