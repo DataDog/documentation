@@ -16,11 +16,7 @@ Le flux d'événements affiche les événements de la [vue Flux d'événements][
 
 Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="flux d'événements" >}}
-
 ## Configuration
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements" style="width:80%;">}}
 
 ### Configuration
 
@@ -53,11 +49,7 @@ Le flux d'événements affiche les événements de la [vue Flux d'événements][
 
 Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="flux d'événements" >}}
-
 ## Configuration
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements" style="width:80%;">}}
 
 ### Configuration
 

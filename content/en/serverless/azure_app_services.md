@@ -107,24 +107,26 @@ For example:
 
 ### Application logging
 
-Sending logs from your application in Azure App Service to Datadog requires the use of Serilog. Submitting logs with this method allows for trace ID injection, which makes it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
+You can send logs from your application in Azure App Service to Datadog in one of the following ways:
+1. [Agentless logging with automatic instrumentation][6]
+2. [Agentless logging with the Serilog sink][7]
+
+Both methods allow trace ID injection, making it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
 
 **Note**: Since this occurs inside your application, any Azure Platform logs you submit with diagnostic settings do not include the trace ID.
 
-See documentation on [setting up agentless logging with Serilog][6] for detailed instructions.
-
 ### Custom metrics with DogStatsD
 
-The Azure App Service extension includes an instance of [DogStatsD][7] (Datadog's metrics aggregation service). This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
+The Azure App Service extension includes an instance of [DogStatsD][8] (Datadog's metrics aggregation service). This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
 
 Writing custom metrics and checks in Azure App Service is similar to the process for doing so with an application on a host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Service using the extension:
 
-1. Add the [DogStatsD NuGet package][8] to your Visual Studio project.
+1. Add the [DogStatsD NuGet package][9] to your Visual Studio project.
 2. Initialize DogStatdD and write custom metrics in your application.
 3. Deploy your code to Azure App Service.
 4. Install the Datadog App Service extension.
 
-**Note**: Unlike the [standard DogStatsD config process][9], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
+**Note**: Unlike the [standard DogStatsD config process][10], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
 
 To send metrics use this code:
 
@@ -149,7 +151,7 @@ DogStatsd.Increment("sample.startup");
 **Note**: To send only custom metrics (while disabling tracing) set the following variables in your application's config:
   - Set `DD_TRACE_ENABLED` to `false`.
   - Set `DD_AAS_ENABLE_CUSTOM_METRICS` to `true`.
-Learn more about [custom metrics][10].
+Learn more about [custom metrics][11].
 
 
 [1]: /integrations/azure
@@ -157,11 +159,12 @@ Learn more about [custom metrics][10].
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
-[6]: /logs/log_collection/csharp/?tab=serilog#agentless-logging
-[7]: /developers/dogstatsd
-[8]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
-[9]: /developers/dogstatsd/?tab=net#code
-[10]: /metrics/
+[6]: /logs/log_collection/csharp/#agentless-logging-with-apm
+[7]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
+[8]: /developers/dogstatsd
+[9]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
+[10]: /developers/dogstatsd/?tab=net#code
+[11]: /metrics/
 {{% /tab %}}
 {{< /tabs >}}
 

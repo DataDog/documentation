@@ -89,7 +89,7 @@ CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWOR
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema_max_sql_text_length.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
 {{% /tab %}}
@@ -101,7 +101,7 @@ Create the `datadog` user and grant basic permissions:
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema_max_sql_text_length.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
 {{% /tab %}}
@@ -147,14 +147,14 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema_max_sql_text_length.events_statements_*` consumers at runtime.
+Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
 CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
-    UPDATE performance_schema_max_sql_text_length.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';

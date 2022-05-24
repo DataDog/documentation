@@ -84,7 +84,7 @@ build_preview:
     - touch Makefile.config
     - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
@@ -199,8 +199,9 @@ sourcemaps_preview:
     policy: pull
   environment: "preview"
   script:
-    - yarn run build:webpack:preview -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    # Rename any js.map files to include SHA if correlating JS file is fingerprinted.  Hugo's asset build system seems to lose the fingerprint value when generating source maps.
+    - find ./public -type f -name "*.*.js" -exec bash -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/.js/.$hash.js}' \;
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
   allow_failure: true
@@ -230,7 +231,7 @@ build_live:
     - make examples
     - sync_integration_descriptions
     - sync_integration_metrics
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
     - placehold_translations
     - yarn run prebuild
     - yarn run build:live
@@ -333,8 +334,9 @@ sourcemaps_live:
     policy: pull
   environment: "live"
   script:
-    - yarn run build:webpack -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    # Rename any js.map files to include SHA if correlating JS file is fingerprinted. Hugo's asset build system seems to lose the fingerprint value when generating source maps.
+    - find ./public -type f -name "*.*.js" -exec bash -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/.js/.$hash.js}' \;
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_live
   allow_failure: true
@@ -347,7 +349,7 @@ evaluate_missing_metrics:
   cache: {}
   environment: "live"
   script:
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd-api-key') -b $(get_secret 'dd-app-key')
   when: manual
   only:
     - master
@@ -361,9 +363,11 @@ manage_ignored_translations:on-schedule:
   cache: {}
   environment: "live"
   only:
-    - schedules
+    - master
   script:
-    - manage_ignored_translation_files
+    - echo "Downloading untracked translation source files..."
+    - manage_untracked_translation_files
+  when: manual
 
 # Legacy translations nightly job
 # manage_translations:on-schedule:
@@ -413,7 +417,7 @@ test_pa11y:
   dependencies:
     - build_live
   script:
-    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
   only:
     - schedules
 

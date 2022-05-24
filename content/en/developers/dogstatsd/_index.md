@@ -332,10 +332,6 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
 
-<div class="alert alert-warning">
-  By default, Ruby DogStatsD client instances cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>single_thread</code> to <code>true</code>. See the <a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby repo</a> on GitHub for more details.
-</div>
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}

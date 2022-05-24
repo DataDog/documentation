@@ -446,6 +446,30 @@ func main() {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="java" >}}
+```java
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+import java.util.Random;
+
+public class DogStatsdClient {
+
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
+        for (int i = 0; i < 10; i++) {
+            Statsd.recordSetValue("example_metric.set", i, new String[]{"environment:dev"});
+            Thread.sleep(random.NextInt(10000));
+        }
+    }
+}
+```
+{{< /programming-lang >}}
+
 {{< programming-lang lang=".NET" >}}
 ```csharp
 using StatsdClient;

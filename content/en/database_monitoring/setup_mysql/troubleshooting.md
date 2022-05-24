@@ -177,19 +177,6 @@ Most workloads are able to capture most queries by raising this value to 4096, b
 
 <!-- TODO: add a custom query recipe for getting the max sql text length -->
 
-
-### Queries are missing explain plans
-
-Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup.
-
-| Possible cause                         | Solution                                  |
-|----------------------------------------|-------------------------------------------|
-| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.32.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
-| The Agent is not able to execute a required function in this schema of the database. | The Agent requires the function `explain_statement(...)` to exist in **all schemas** the Agent can collect samples from. Ensure this function was created by the root user according to the [setup instructions][1] and that the `datadog` user has permission to execute it. |
-| Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
-| The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
-| The query is relatively infrequent or executes quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][5] to capture the query. |
-
 ### Schema or Database missing on MySQL Query Metrics & Samples
 
 The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][9] on an already existing connection.

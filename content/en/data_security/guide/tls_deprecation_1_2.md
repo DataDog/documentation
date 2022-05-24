@@ -119,7 +119,7 @@ On a 64 bit .Net Framework (version 4 and above):
 [3]: https://caniuse.com/tls1-2
 [4]: https://github.com/DataDog/dd-agent/blob/5.32.8/packaging/datadog-agent/source/setup_agent.sh
 [5]: https://www.openssl.org/news/changelog.html#openssl-101.
-[6]: https://docs.microsoft.com/en-us/dotnet/framework/network-programming/tls#%23configuring-security-via-appcontext-switches-for-net-framework-46-or-later-versions
+[6]: https://docs.microsoft.com/en-us/dotnet/framework/network-programming/tls#configuring-security-via-appcontext-switches-for-net-framework-46-or-later-versions
 [7]: https://docs.microsoft.com/en-us/dotnet/framework/network-programming/tls
 [8]: https://github.com/markekraus/BetterTls
 [9]: https://docs.microsoft.com/en-us/officeonlineserver/enable-tls-1-1-and-tls-1-2-support-in-office-online-server

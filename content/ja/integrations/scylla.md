@@ -12,18 +12,19 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - ログの収集
+- data store
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/scylla/README.md
+- https://github.com/DataDog/integrations-core/blob/master/scylla/README.md
 display_name: Scylla
 draft: false
 git_integration_title: Scylla
 guid: 875e4d62-831b-4929-bea1-57e5c7016d65
 integration_id: Scylla
 integration_title: Scylla
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -35,10 +36,13 @@ public_title: Datadog-Scylla インテグレーション
 short_description: クラスターのリソース、レイテンシー、健全性などを追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 Datadog-[Scylla][1] のインテグレーションは、デフォルトで公開されたメトリクスの大部分を収集します。その際、ユーザー特有のニーズを基づいて追加のグループをカスタマイズすることもできます。
@@ -86,7 +90,7 @@ Scylla には複数の出力モードがあり、実行中の環境に応じて�
 
 3. [Agent を再起動します][4]。
 
-Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][6]を参照してください。
+Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][6]を参照してください。
 
 ### 検証
 
@@ -112,7 +116,7 @@ Scylla チェックには、イベントは含まれません。
 
 
 [1]: https://scylladb.com
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/scylla/datadog_checks/scylla/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.scylladb.com/getting-started/logging/

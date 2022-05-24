@@ -1,30 +1,37 @@
 ---
-title: 取り込みのメカニズム
-kind: documentation
 description: トレース取り込みを制御するトレーサーと Agent のメカニズムの概要。
 further_reading:
-  - link: /tracing/trace_ingestion/ingestion_controls/
-    tag: ドキュメント
-    text: Ingestion Controls
-  - link: /tracing/trace_retention/
-    tag: ドキュメント
-    text: トレースの保持
-  - link: /tracing/trace_retention/usage_metrics/
-    tag: ドキュメント
-    text: 使用量メトリクス
+- link: /tracing/trace_ingestion/ingestion_controls/
+  tag: ドキュメント
+  text: Ingestion Controls
+- link: /tracing/trace_retention/
+  tag: ドキュメント
+  text: トレースの保持
+- link: /tracing/trace_retention/usage_metrics/
+  tag: ドキュメント
+  text: 使用量メトリクス
+kind: documentation
+title: 取り込みのメカニズム
 ---
+
 アプリケーションで生成されたスパンを Datadog に送信する (_取り込む_) かどうかは、複数のメカニズムによって決定されます。これらのメカニズムの背後にあるロジックは、[トレーシングライブラリ][1]と Datadog Agent の中にあります。構成によっては、インスツルメントされたサービスによって生成されたトラフィックの全てまたは一部が取り込まれます。
 
 取り込まれた各スパンには、このページで説明されているメカニズムのいずれかを参照する一意の**取り込み理由**が付加されています。使用量メトリクス `datadog.estimated_usage.apm.ingested_bytes` と `datadog.estimated_usage.apm.ingested_spans` は `ingestion_reason` によってタグ付けされています。
 
-## ヘッドベースのデフォルトメカニズム
-`ingestion_reason: auto`
+[取り込み理由ダッシュボード][2]を使って、それぞれの取り込み理由を確認することができます。各メカニズムに起因するボリュームの概要を把握し、どの構成オプションに焦点を当てるべきかを迅速に知ることができます。
 
-デフォルトのサンプリングメカニズムは_ヘッドベースサンプリング_と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、[ルートスパン][2]の開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。
+## ヘッドベースサンプリング
+
+デフォルトのサンプリングメカニズムは_ヘッドベースサンプリング_と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、[ルートスパン][3]の開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。
 
 この判断はトレースの最初に行われ、その後トレースのすべての部分に伝えられるため、トレースは全体として保持または削除されることが保証されます。
 
+ヘッドベースサンプリングのサンプリングレートは、以下の 2 か所で設定できます。
+- **[Agent](#in-the-agent)** レベル (デフォルト)
+- [トレースライブラリ](#in-tracing-libraries-user-defined-rules)**レベル: 任意のトレースライブラリのメカニズムが Agent の設定をオーバーライドします。
+
 ### Agent で
+`ingestion_reason: auto`
 
 Datadog Agent は、トレーシングライブラリにサンプリングレートを継続的に送信し、トレースのルートで適用させます。Agent は、1 秒間に 10 個のトレースを目標にレートを調整し、トラフィックに応じて各サービスに分配します。
 
@@ -78,7 +85,7 @@ tracer.configure(sampler=DatadogSampler(
 
 取り込みの構成については、[トレーシングライブラリ][1]のドキュメントを参照してください。
 
-**注**: ユーザー定義ルールで構成されたサービスは、[Ingestion Control Page][3] Configuration 列に `Configured` と表示されます。デフォルトのメカニズムを使用するように構成されたサービスは、`Automatic` と表示されます。
+**注**: ユーザー定義ルールで構成されたサービスは、[Ingestion Control Page][4] Configuration 列に `Configured` と表示されます。デフォルトのメカニズムを使用するように構成されたサービスは、`Automatic` と表示されます。
 
 ## 強制維持と削除
 `ingestion_reason: manual`
@@ -149,11 +156,12 @@ Agent のメインコンフィギュレーションファイル (`datadog.yaml`)
 
 ## エラーとレアトレース
 
-ヘッドベースサンプリングで捕捉できなかったトレースについては、Agent メカニズムにより、重要かつ多様なトレースが保持され、取り込まれるようにします。この 2 つのサンプラーは、あらかじめ決められたタグの組み合わせをすべてキャッチすることで、多様なトレースセットを保持します。
+ヘッドベースサンプリングで捕捉できなかったトレースについては、**Agent** メカニズムにより、重要かつ多様なトレースが保持され、取り込まれるようにします。この 2 つのサンプラーは、あらかじめ決められたタグの組み合わせをすべてキャッチすることで、多様なトレースセットを保持します。
 
 - **Error traces**: サンプリングエラーは、システムの潜在的な不具合を可視化するために重要です。
 - **Rare traces**: レアトレースをサンプリングすることで、トラフィックの少ないサービスやリソースを確実に監視し、システム全体の可視性を維持することができます。
 
+**注**: [ライブラリサンプリングルール](#in-tracing-libraries-user-defined-rules)を設定したサービスでは、エラーサンプリングとレアサンプリングは無視されます。
 
 ### エラートレース
 `ingestion_reason: error`
@@ -186,12 +194,12 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 
 いくつかの追加の取り込み理由は、特定の Datadog 製品によって生成されるスパンに起因します。
 
-| 製品    | `ingestion_reason`                    |
-|------------|-------------------------------------|
-| Synthetic モニタリング | `synthetics` と `synthetics-browser` |
-| リアルユーザーモニタリング (RUM)        | `RUM`                               |
-| サーバーレス | `lambda` と `xray`                   |
-| アプリケーションセキュリティ     | `appsec`                            |
+| 製品    | 取り込み理由                    | 取り込みのメカニズムの説明 |
+|------------|-------------------------------------|---------------------------------|
+| Synthetic モニタリング | `synthetics` と `synthetics-browser` | HTTP テストやブラウザテストでは、バックエンドのサービスがインスツルメントされると、トレースが生成されます。[Synthetic テスト][5]の実行からバックエンドトレースを見つけます。
+| リアルユーザーモニタリング (RUM)        | `RUM`                               | ウェブアプリケーションやモバイルアプリケーションからのブラウザリクエストは、バックエンドサービスがインスツルメントされると、トレースを生成します。[RUM ブラウザセッション][6]とリソースからバックエンドトレースを見つけます。 |
+| サーバーレス | `lambda` と `xray`                   | Datadog トレーシングライブラリまたは AWS X-Ray インテグレーションでトレースした[サーバーレスアプリケーション][7]から受信したトレース。 |
+| アプリケーション セキュリティ モニタリング     | `appsec`                            | Datadog トレーシングライブラリから取り込まれたトレースで、[ASM][8] によって脅威としてフラグが立てられたもの。 |
 
 
 ## その他の参考資料
@@ -199,5 +207,10 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/setup_overview/setup/
-[2]: /ja/tracing/visualization/#trace-root-span
-[3]: /ja/tracing/trace_ingestion/control_page
+[2]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
+[3]: /ja/tracing/visualization/#trace-root-span
+[4]: /ja/tracing/trace_ingestion/control_page
+[5]: /ja/synthetics/apm/
+[6]: /ja/real_user_monitoring/connect_rum_and_traces/
+[7]: /ja/serverless/distributed_tracing/
+[8]: /ja/security_platform/application_security/

@@ -1,18 +1,19 @@
 ---
-title: 大量のメトリクスの送信
-kind: documentation
 description: DogStatsD を高スループットに最適化
 further_reading:
-  - link: developers/dogstatsd
-    tag: ドキュメント
-    text: DogStatsD 入門
-  - link: developers/libraries
-    tag: ドキュメント
-    text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
-    tag: GitHub
-    text: DogStatsD ソースコード
+- link: developers/dogstatsd
+  tag: ドキュメント
+  text: DogStatsD 入門
+- link: developers/libraries
+  tag: ドキュメント
+  text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
+  tag: GitHub
+  text: DogStatsD ソースコード
+kind: documentation
+title: 大量のメトリクスの送信
 ---
+
 DogStatsD には、アプリケーションから生成されるメトリクスを、転送プロトコルを介して [Agent][1] に送信するという機能があります。このプロトコルには UDP (User Datagram Protocol) または [UDS (Unix Domain Socket)][2] が使用されます。
 
 DogStatsD を使用して大量のメトリクスを 1 つの Agent に送信する際、適切な措置を講じずに実行すると以下のような問題が発生する場合があります。
@@ -49,7 +50,7 @@ package main
 
 import (
         "log"
-        "github.com/DataDog/datadog-go/statsd"
+        "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -67,19 +68,20 @@ func main() {
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-以下の例では、Datadog の公式 Python ライブラリ [datadogpy][1] を使用して、最小限のパケット数でメトリクスを送信するバッファリングされた DogStatsD クライアントを使用しています。クライアントバージョン v0.43.0 以降では、バッファリングはデフォルトで有効になっており、自動フラッシュはパケットサイズ制限および 300ms (構成可能) ごとに実行されます。
+以下の例では、Datadog の公式 Python ライブラリ [datadogpy][1] を使用して、最小限のパケット数でメトリクスを送信するバッファリングされた DogStatsD クライアントを使用しています。バッファリング機能では、自動フラッシュはパケットサイズ制限および 300ms (構成可能) ごとに実行されます。
 
 ```python
 from datadog import DogStatsd
 
-dsd = DogStatsd(host="127.0.0.1", port=8125)
 
-# クライアント v0.43.0 を使用している場合、バッファリングはデフォルトで有効になっており、300 ミリ秒ごとに自動フラッシュされます。
+# クライアント v0.43.0 以降を使用している場合
+dsd = DogStatsd(host="127.0.0.1", port=8125, disable_buffering=False)
 dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
 dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 dsd.flush()  # Optional manual flush
 
-# v0.43.0 より前のクライアントを使用している場合、バッファリングを使用するにはコンテキストマネージャーが必要です
+# v0.43.0 より前のクライアントを使用している場合、バッファリングを使用するためにコンテキストマネージャーが必要です
+dsd = DogStatsd(host="127.0.0.1", port=8125)
 with dsd:
     dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
@@ -107,10 +109,6 @@ statsd.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
 # synchronous flush
 statsd.flush(sync: true)
 ```
-
-<div class="alert alert-warning">
-  デフォルトでは、Ruby DogStatsD クライアントインスタンスはプロセス間で共有できませんが、スレッドセーフです。このため、親プロセスと各子プロセスは、クライアントの独自のインスタンスを作成するか、<code>single_thread</code> を <code>true</code> に設定してバッファリングを明示的に無効にする必要があります。詳細については、GitHub の <a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby リポジトリ</a>を参照してください。
-</div>
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
@@ -208,7 +206,70 @@ $client->increment('example_metric.increment', $sampleRate->0.5 , array('environ
 
 ### UDS (Unix Domain Socket) を介した DogStatsD の使用
 
-UDS は [DogStatsD ペイロードの転送][2]に使用される、プロセス間通信プロトコルです。UDP と比べてオーバーヘッドが非常に小さく、多くのシステムで DogStatsD のフットプリントを減らすことができます。
+UDS は [DogStatsD ペイロードの転送][2]に使用される、プロセス間通信プロトコルです。UDP と比べてオーバーヘッドが小さく、多くのシステムで DogStatsD のフットプリントを減らすことができます。
+
+### クライアント側の集計
+
+クライアントライブラリは、クライアント側でメトリクスを集計し、Datadog Agent に送信しなければならないメッセージの数を減らし、IO パフォーマンスとスループットを向上させることができます。
+
+{{< programming-lang-wrapper langs="go,java,.NET" >}}
+{{< programming-lang lang="go" >}}
+
+クライアント側の集計は、v5.0.0 以降の Go クライアントでのみ利用可能です。
+
+詳しくは、[クライアント側の集計][1]を参照してください。
+
+[1]: https://github.com/DataDog/datadog-go#client-side-aggregation
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+クライアント側の集計は、java-dogstatsd-client version 2.11.0 以降で利用でき、version 3.0.0 以降ではデフォルトで有効になっています。
+
+```java
+StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+    // 通常設定
+    .enableAggregation(true)
+    .build();
+```
+
+クライアント側の集計は、ゲージ、カウンター、セットに対して可能です。
+
+詳しくは、[クライアント側の集計][1]を参照してください。
+
+[1]: https://github.com/DataDog/java-dogstatsd-client#aggregation
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
+クライアント側の集計は DogStatsD C# クライアント v7.0.0 以降で利用可能で、デフォルトで有効になっています。クライアント側の集計はゲージ、カウンター、セットで利用可能です。
+
+```csharp
+var dogstatsdConfig = new StatsdConfig
+{
+    StatsdServerName = "127.0.0.1",
+    StatsdPort = 8125,
+    ClientSideAggregation = new ClientSideAggregationConfig()
+};
+```
+
+
+詳しくは、[DogStatsD for C# リポジトリ][1]をご覧ください。
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client#client-side-aggregation
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
+### 複数のメトリクス処理パイプラインを実行し、パケットドロップを制限する
+
+DogStatsD サーバーが UDS を使用しており、高いスループットでパケットをドロップしている場合、CPU をより多く使用するように構成することで処理速度を改善し、パケットドロップを減少させることができる場合があります。
+
+また、クライアントテレメトリーサーバーがパケットドロップを示し、サーバーが 2 CPU または 2 コア以上使用可能であっても使用しない場合は、DogStatsD サーバーを構成することができます。
+
+パケットドロップを減らすには
+
+1. クライアントキューのサイズを `8192` に増やします。詳細については、クライアントライブラリの構成を参照してください。ドロップの量が減少し、アプリケーションがより多くの RAM を使用するようになるかもしれません。
+2. さらに、Datadog Agent の構成で、`dogstatsd_pipeline_autoadjust: true` 機能を有効にすることができます。Agent はカスタムメトリクスの処理に複数のコアを使用するため、CPU 使用率が高くなることがありますが、パケットドロップは少なくなります。
 
 ## オペレーティングシステムのカーネルバッファ
 
@@ -283,7 +344,7 @@ dogstatsd_so_rcvbuf: 4194304
 
 Kubernetes を使用して Agent や DogStatsD をデプロイしていて、上記のように sysctl を構成する場合は、コンテナごとに値を設定します。`net.*` sysctl にネームスペースが設定されている場合は、ポッドごとに設定できます。[Kubernetes クラスターでの sysctl の使用][6]に関する Kubernetes のドキュメントを参照してください。
 
-### 適切なパケットサイズを確保する
+## 適切なパケットサイズを確保する
 
 適切なサイズのパケットを Datadog Agent の DogStatsD サーバーに送信することにより、余分な CPU 使用を回避します。公式 DogStatsD クライアントの最新バージョンは、パフォーマンスに最適化されたサイズのパケットを送信します。
 
@@ -301,7 +362,7 @@ DogStatsD クライアントが `dogstatsd_buffer_size` のサイズのパケッ
   <strong>UDS に関する注意</strong>: 最高のパフォーマンスを得るには、UDS パケットサイズを 8192 バイトにする必要があります。
 </div>
 
-### Agent の最大メモリ使用量を制限する
+## Agent の最大メモリ使用量を制限する
 
 Agent は、DogStatsD クライアントから送信されたメトリクスのバーストを吸収しようとしますが、そのためには、メモリを使用する必要があります。これが短時間であり、このメモリが OS にすぐに解放された場合でも、スパイクが発生し、メモリ使用量の制限によりポッドまたはコンテナがエビクションされる可能性があるコンテナ化された環境で問題になる可能性があります。
 
@@ -321,7 +382,7 @@ dogstatsd_queue_size: 512
 
 バースト検知を使用してアプリケーションからメトリクスのバーストを検知するには、次のセクションを参照してください。
 
-### メトリクスの処理統計とバースト検知を有効にする
+## メトリクスの処理統計とバースト検知を有効にする
 
 DogStatsD には、どのメトリクスが最も多く処理されたかを把握するのに役立つ統計モードが搭載されています。
 
@@ -450,7 +511,11 @@ Datadog::Statsd.new('localhost', 8125, disable_telemetry: true)
 
 `datadog.dogstatsd.client.metrics`
 : **メトリクスタイプ**: カウント<br>
-アプリケーションによって DogStatsD クライアントに送信された `metrics` の数 (サンプリング前)。
+アプリケーションによって DogStatsD クライアントに送信された `metrics` の数 (サンプリングおよび集計前)。
+
+`datadog.dogstatsd.client.metrics_by_type`
+: **メトリクスタイプ**: カウント<br>
+DogStatsD クライアントが送信した、サンプリングと集計前の `metrics` の数で、メトリクスタイプ (`gauge`、`set`、`count`、`timing`、`histogram` または `distribution`) によってタグ付けされています。Go クライアントの v5.0.0 から搭載されています。
 
 `datadog.dogstatsd.client.events`
 : **メトリクスタイプ**: カウント<br>
@@ -466,7 +531,7 @@ Agent に正常に送信されたバイト数。
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **メトリクスタイプ**: カウント<br>
-DogStatsD クライアントによってドロップされたバイト数。
+DogStatsD クライアントがドロップしたバイト数 (これには `datadog.dogstatsd.client.bytes_dropped_queue` と `datadog.dogstatsd.client.bytes_dropped_writer` が含まれます)。
 
 `datadog.dogstatsd.client.bytes_dropped_queue`
 : **メトリクスタイプ**: カウント<br>
@@ -474,7 +539,7 @@ DogStatsD クライアントのキューが一杯だったためにドロップ�
 
 `datadog.dogstatsd.client.bytes_dropped_writer`
 : **メトリクスタイプ**: カウント<br>
-Datadog への書き込みでエラーが起きたためにドロップされたバイト数。
+Datadog への書き込み時に、ネットワークのタイムアウトやエラーによりドロップされたバイト数。
 
 `datadog.dogstatsd.client.packets_sent`
 : **メトリクスタイプ**: カウント<br>
@@ -482,7 +547,7 @@ Agent に正常に送信されたデータグラムの数。
 
 `datadog.dogstatsd.client.packets_dropped`
 : **メトリクスタイプ**: カウント<br>
-DogStatsD クライアントによってドロップされたデータグラムの数。
+DogStatsD クライアントがドロップしたデータグラム数 (これには `datadog.dogstatsd.client.packets_dropped_queue` と `datadog.dogstatsd.client.packets_dropped_writer` が含まれます)。
 
 `datadog.dogstatsd.client.packets_dropped_queue`
 : **メトリクスタイプ**: カウント<br>
@@ -490,11 +555,19 @@ DogStatsD クライアントのキューが一杯だったためにドロップ�
 
 `datadog.dogstatsd.client.packets_dropped_writer`
 : **メトリクスタイプ**: カウント<br>
-Datadog への書き込みでエラーが起きたためにドロップされたデータグラムの数。
+Datadog への書き込み時に、ネットワークのタイムアウトやエラーによりドロップされたデータグラム数。
 
 `datadog.dogstatsd.client.metric_dropped_on_receive` 
 : **メトリクスタイプ**: カウント<br>
-内部受信チャンネルがいっぱいであるためにドロップされたメトリクスの数 (`WithChannelMode()` を使用している場合のみ)。バージョン `3.6.0` 以降の Go クライアントが必要です。
+内部の受信チャンネルが満杯であるためにドロップされたメトリクスの数 (`WithChannelMode()` 使用時)。`WithChannelMode()` が有効な場合の Go クライアントの v3.6.0 以降。
+
+`datadog.dogstatsd.client.aggregated_context`
+: **メトリクスタイプ**: カウント<br>
+クライアント側の集計が有効な場合に、クライアントによってフラッシュされるコンテキストの総数。Go クライアントの v5.0.0 以降。このメトリクスは、集計が有効な場合 (デフォルト) にのみ報告されます。
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **メトリクスタイプ**: カウント<br>
+クライアント側の集計が有効な場合に、クライアントによってフラッシュされるコンテキストの総数で、メトリクスタイプ (`gauge`、`set`、`count`、`timing`、`histogram` または `distribution`) によってタグ付けされています。Go クライアントの v5.0.0 以降。このメトリクスは、集計が有効な場合 (デフォルト) にのみ報告されます。
 
 テレメトリーを無効にするには、`WithoutTelemetry` を次のように設定します。
 
@@ -542,6 +615,18 @@ DogStatsD クライアントによってドロップされたデータグラム�
 `datadog.dogstatsd.client.packets_dropped_queue` 
 : **メトリクスタイプ**: カウント<br>
 DogStatsD クライアントのキューが一杯だったためにドロップされたデータグラムの数。
+
+`datadog.dogstatsd.client.aggregated_context`
+: **メトリクスタイプ**: カウント<br>
+クライアント側の集計が有効な場合に、集計されるコンテキストの数。バージョン `v2.11.0` 以降。
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **メトリクスタイプ**: カウント<br>
+クライアント側の集計が有効な場合に、タイプ別に集計されるコンテキストの数。バージョン `v2.13.0` 以降。このメトリクスは `v3.0.0` からはデフォルトで有効ですが、`v2.13.0` では `enableDevMode(true)` が必要です。このメトリクスは `metrics_type` によってタグ付けされています。
+
+`datadog.dogstatsd.client.metrics_by_type`
+: **メトリクスタイプ**: カウント<br>
+アプリケーションから DogStatsD クライアントに送信されたメトリクスの数で、タイプ別にタグ付けされています (サンプリング前)。`enableDevMode(true)` が使われたバージョン `v2.13.0` 以降で、`v3.0.0` 以降はデフォルトです。このメトリクスは `metrics_type` によってタグ付けされています。
 
 テレメトリーを無効にするには、`enableTelemetry(false)` ビルダーオプションを使用します。
 
@@ -658,6 +743,10 @@ DogStatsD クライアントによってドロップされたデータグラム�
 : **メトリクスタイプ**: カウント<br>
 DogStatsD クライアントのキューが一杯だったためにドロップされたデータグラムの数。
 
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **メトリクスタイプ**: カウント<br>
+クライアント側の集計が有効な場合に、タイプ別に集計されるコンテキストの数。バージョン `7.0.0` 以降。
+
 テレメトリーを無効にするには、`TelemetryFlushInterval` を `null` に設定します。
 
 ```csharp
@@ -686,6 +775,6 @@ dogstatsdConfig.Advanced.TelemetryFlushInterval = null;
 [1]: /ja/agent/
 [2]: /ja/developers/dogstatsd/unix_socket/
 [3]: /ja/developers/dogstatsd/#code
-[4]: /ja/metrics/dogstatsd_metrics_submission/#sample-rates
+[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /ja/developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/

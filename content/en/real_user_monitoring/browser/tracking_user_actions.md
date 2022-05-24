@@ -34,13 +34,13 @@ You can extend the collection of user interactions by [sending your own custom a
 ## What interactions are being tracked?
 
 The Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
-* Activity is detected within 100ms of click being handled (activity being defined as the start of a network request or a DOM mutation).
+* Activity following the click is detected. See [How page activity is calculated][2] for details.
 * The click does not lead to a new page being loaded, in which case the Browser SDK generates a new RUM View event.
 * A name can be computed for the action. ([Learn more about action naming](#declaring-a-name-for-click-actions))
 
 ## Action timing metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][1].
+For information about the default attributes for all RUM event types, see [Data Collected][3]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][1].
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -51,7 +51,7 @@ For information about the default attributes for all RUM event types, see [Data 
 
 ### How action loading time is calculated
 
-Once an interaction is detected, the RUM SDK watches for network requests and DOM mutations. The action is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
+The Browser RUM SDK watches the page activity following every click. The action is considered finished when the page has no more activity. See [How page activity is calculated][2] for details.
 
 ## Action attributes
 
@@ -76,7 +76,7 @@ The RUM library uses various strategies to get a name for click actions. If you 
 </div>
 ```
 
-Starting with [version 2.16.0][3], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action. For example:
+Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action. For example:
 
 ```html
 <script>
@@ -161,5 +161,6 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/modifying_data_and_context/
-[2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
+[2]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[3]: /real_user_monitoring/browser/data_collected/#default-attributes
+[4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

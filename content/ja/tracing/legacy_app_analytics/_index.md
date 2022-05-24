@@ -49,7 +49,7 @@ App Analyticsは、Ruby トレースクライアントのバージョン 0.19.0 
 これを行うには、環境で `DD_TRACE_ANALYTICS_ENABLED=true` を設定するか、次のように構成します。
 
 ```ruby
-Datadog.configure { |c| c.analytics_enabled = true }
+Datadog.configure { |c| c.tracing.analytics.enabled = true }
 ```
 
 * `true` は、すべての Web フレームワークで分析を有効にします。
@@ -173,7 +173,7 @@ Nginx で App Analytics を有効にするには
 それには、環境で `DD_<INTEGRATION>_ANALYTICS_ENABLED=true` を設定するか、以下の構成を使用します。
 
 ```ruby
-Datadog.configure { |c| c.use :integration, analytics_enabled: true }
+Datadog.configure { |c| c.tracing.instrument :integration, analytics_enabled: true }
 ```
 
 `integration` は、インテグレーションの名前です。オプションについては、[インテグレーションのリスト][1]を参照してください。
@@ -289,7 +289,7 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
 ```ruby
-Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
+Datadog.configure { |c| c.tracing.instrument :mongo, analytics_enabled: true }
 ```
 
 {{< /programming-lang >}}
@@ -393,12 +393,12 @@ def my_method():
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS_KEY` タグを設定することで App Analytics を有効にできます。
+カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `Analytics::TAG_ENABLED` タグを設定することで App Analytics を有効にできます。
 
 ```ruby
-Datadog.tracer.trace('my.task') do |span|
-  #  分析サンプリングレートを 1.0 に設定します
-  span.set_tag(Datadog::Ext::Analytics::TAG_ENABLED, true)
+Datadog::Tracing.trace('my.task') do |span|
+  # 分析サンプリングレートを 1.0 に設定します
+  span.set_tag(Datadog::Tracing::Metadata::Ext::Analytics::TAG_ENABLED, true)
 end
 ```
 

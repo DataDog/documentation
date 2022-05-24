@@ -40,7 +40,7 @@ Datadog.configure do |c|
   # 必要に応じて、ランタイムメトリクスの送信に使用される DogStatsD インスタンスを構成できます。
   # `dogstatsd-ruby` が利用可能な場合、DogStatsD は自動的にデフォルト設定になります。
   # Datadog Agent のホストとポートを使用して構成できます。デフォルトは 'localhost:8125' です。
-  c.runtime_metrics statsd: Datadog::Statsd.new
+ c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
 
@@ -63,7 +63,7 @@ APM サービス詳細画面にこれらのメトリクスを表示するだけ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
-[2]: /ja/metrics/dogstatsd_metrics_submission/#setup
+[2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
 [4]: /ja/agent/docker/#dogstatsd-custom-metrics
 [5]: /ja/developers/dogstatsd/?tab=kubernetes#agent

@@ -52,7 +52,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
    * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
-   * **NTLM v1**: NTLM 認証の資格情報を追加します。
+   * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
    * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名は実装されていません。
 
   </br>オプションで、**Additional configuration** のセクションにドメインとワークステーションを指定することができます。 
@@ -127,6 +127,10 @@ HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encod
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="HTTP テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
+
+テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+
+テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
 
 ### ロケーションを選択する
 

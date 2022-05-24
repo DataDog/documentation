@@ -967,7 +967,7 @@
     "summary": "アカウント全体の請求対象使用量を取得します"
   },
   "GetUsageCIApp": {
-    "description": "CI Visibility (Tests、Pipeline、Combo、Spans) の 1 時間ごとの使用量を取得します。",
+    "description": "CI Visibility (Tests、Pipeline、Spans) の 1 時間ごとの使用量を取得します。",
     "summary": "CI Visibility の 1 時間ごとの使用量を取得する"
   },
   "GetUsageCloudSecurityPostureManagement": {

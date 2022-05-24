@@ -136,7 +136,7 @@ You can add columns to or remove columns from this overview table and your selec
 
 {{< img src="tracing/visualization/service/deployments.png" alt="Deployments"  style="width:90%;">}}
 
-Read more about Deployments on the service page [here][12].
+Read more about Deployments [on the service page][12].
 
 ### Error Tracking
 View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][4])
@@ -160,17 +160,17 @@ If runtime metrics are enabled in the tracing client, you’ll see a Runtime met
 {{< img src="tracing/visualization/service/runtime_metrics.png" alt="Runtime Metrics"  style="width:90%;">}}
 
 ### Profiling
-You'll see a Profiling tab if the [Continuous Profiler][14] is set up for your service. Summary details like versions available and runtime language are at the top. Below are out-of-the-box profiling metrics by version, endpoint, and method to help you identify and debug resource-intensive methods. Click on any graph to view related traces, logs, and other data, or open a flame graph to inspect the code profile. Learn more about APM and the Continuous Profiler [here][15]. 
+You'll see a Profiling tab if the [Continuous Profiler][14] is set up for your service. Summary details like versions available and runtime language are at the top. Below are out-of-the-box profiling metrics by version, endpoint, and method to help you identify and debug resource-intensive methods. Click on any graph to view related traces, logs, and other data, or open a flame graph to inspect the code profile. [Learn more about APM and the Continuous Profiler][14]. 
 
 {{< img src="tracing/visualization/service/profiler.jpg" alt="Profiling"  style="width:90%;">}}
 
 ### Traces
-View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
+View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][15] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
 
 {{< img src="tracing/visualization/service/traces.png" alt="Traces"  style="width:90%;">}}
 
 ### Logs
-View common patterns in your service’s logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][17].
+View common patterns in your service’s logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][16].
 
 {{< img src="tracing/visualization/service/log_patterns.png" alt="Log patterns"  style="width:90%;">}}
 
@@ -192,6 +192,5 @@ View common patterns in your service’s logs, and use facets like status in the
 [12]: /tracing/deployment_tracking/#versions-deployed
 [13]: /tracing/runtime_metrics/
 [14]: /tracing/profiler/
-[15]: /tracing/
-[16]: /tracing/trace_explorer/query_syntax/#facets
-[17]: https://www.datadoghq.com/blog/log-patterns/
+[15]: /tracing/trace_explorer/query_syntax/#facets
+[16]: https://www.datadoghq.com/blog/log-patterns/

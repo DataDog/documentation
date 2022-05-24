@@ -8,7 +8,7 @@ Pour rechercher des monitors, créez une requête à l'aide du volet des facette
 
 ## Barre de recherche
 
-Saisissez du texte simple pour effectuer une recherche parmi les titres et les messages de notification de vos monitors. Par exemple, le texte `postgresql` renvoie tous les monitors dont le titre ou le message de notification contient `postgresql`.
+Saisissez du texte simple pour effectuer une recherche parmi les titres et les messages de notification de vos monitors. Par exemple, le texte `*postgresql*` renvoie tous les monitors dont le titre ou le message de notification contient `postgresql`.
 
 Pour limiter votre recherche, spécifiez le nom du champ :
 

@@ -44,7 +44,7 @@ However, if the parameter `send_monotonic_counter` is `false`, then this metric 
 
 For [Prometheus/OpenMetrics `histogram`][6], the `_count` and `_sum` values of the histogram are each mapped to Datadog's `gauge`.
 
-If the parameter `send_histograms_buckets` is `true`, each `_bucket` value is also mapped to Datadog's `gauge`.
+If the parameter `collect_histogram_buckets` is `true`, each `_bucket` value is also mapped to Datadog's `gauge`.
 
 If the parameter `send_distribution_buckets` is `true`, each `_bucket` is mapped to Datadog's `distribution`. Prometheus/OpenMetrics histogram data is converted to Datadog distribution metrics to allow for monitoring Kubernetes metrics as percentiles in Datadog. Datadog distribution metrics are based on the [DDSketch algorithm][7]. For more information, see the relevant Datadog [blog post on OpenMetrics and distribution metrics][8].
 

@@ -2,7 +2,7 @@
 title: How can I setup an alert for when a specific tag stops reporting?
 kind: faq
 further_reading:
-- link: "/monitors/create/types/"
+- link: "/monitors/create/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"
