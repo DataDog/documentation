@@ -352,6 +352,9 @@ evaluate_missing_metrics:
   only:
     - master
 
+# Uploads git ignored source (EN) files to Transifex as part of the nightly build.
+# The translation syncing pipeline is triggered by github webhook, but these files are not in git.
+# This allows some dynamically built content (such as integrations) to be localized automatically.
 manage_ignored_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
@@ -362,6 +365,7 @@ manage_ignored_translations:on-schedule:
   script:
     - manage_ignored_translation_files
 
+# Legacy translations nightly job
 # manage_translations:on-schedule:
 #   <<: *base_template
 #   stage: post-deploy
