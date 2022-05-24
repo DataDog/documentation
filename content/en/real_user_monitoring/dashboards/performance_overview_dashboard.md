@@ -18,7 +18,7 @@ The performance overview dashboard offers a bird’s-eye view of RUM application
 - **Page views breakdown**:
     Analyze the nature of your traffic and the associated loading time for each segment.
 
-{{< img src="real_user_monitoring/dashboards/performance_overview.png" alt="Performance overview Dashboard" >}}
+{{< img src="real_user_monitoring/dashboards/performance_overview.png" alt="Out-of-the-box RUM Performance Overview Dashboard" style="width:100%" >}}
 
 For more information about the information displayed, see [RUM Browser Data Collected][1].
 
