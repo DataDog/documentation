@@ -84582,7 +84582,7 @@
     },
     "/api/v2/usage/cost_by_org": {
       "get": {
-        "description": "Get Cost Across Multi-Org Account.",
+        "description": "Get cost across multi-org account.",
         "operationId": "GetCostByOrg",
         "parameters": [
           {
@@ -84782,7 +84782,7 @@
             ]
           }
         ],
-        "summary": "Get Cost Across Multi-Org Account",
+        "summary": "Get cost across multi-org account",
         "tags": [
           "Usage Metering"
         ],

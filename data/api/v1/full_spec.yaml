@@ -6846,7 +6846,7 @@ components:
         metadata:
           $ref: '#/components/schemas/MonthlyUsageAttributionMetadata'
         usage:
-          description: Get Usage Summary by tag(s).
+          description: Get usage summary by tag(s).
           items:
             $ref: '#/components/schemas/MonthlyUsageAttributionBody'
           type: array
@@ -13623,7 +13623,7 @@ components:
         metadata:
           $ref: '#/components/schemas/UsageAttributionMetadata'
         usage:
-          description: Get Usage Summary by tag(s).
+          description: Get usage summary by tag(s).
           items:
             $ref: '#/components/schemas/UsageAttributionBody'
           type: array
@@ -27734,7 +27734,7 @@ paths:
   /api/v1/usage/attribution:
     get:
       deprecated: true
-      description: Get Usage Attribution.
+      description: Get usage attribution.
       operationId: GetUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -27817,7 +27817,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get Usage Attribution
+      summary: Get usage attribution
       tags:
       - Usage Metering
       x-menu-order: 29
@@ -28343,7 +28343,7 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: "Get Hourly Usage Attribution.\n\nThis API endpoint is paginated.
+      description: "Get hourly usage attribution.\n\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
@@ -28418,7 +28418,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get Hourly Usage Attribution
+      summary: Get hourly usage attribution
       tags:
       - Usage Metering
       x-menu-order: 30
@@ -28843,7 +28843,7 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: "Get Monthly Usage Attribution.\n\nThis API endpoint is paginated.
+      description: "Get monthly usage attribution.\n\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
@@ -28931,7 +28931,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get Monthly Usage Attribution
+      summary: Get monthly usage attribution
       tags:
       - Usage Metering
       x-given:
