@@ -27,7 +27,7 @@ Supported test frameworks:
 
 ## Configuring reporting method
 
-To report test results to Datadog, you need to configure the Datadog .NET library to report test results to Datadog.
+To report test results to Datadog, you need to configure the Datadog .NET library:
 
 {{< tabs >}}
 
