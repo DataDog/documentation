@@ -1,8 +1,12 @@
 ---
-title: Service Definition API
+title: Registering Services through Datadog Service Definition API
 kind: faq
 is_beta: true
 ---
+
+## What is a service?
+Generally speaking, a service is an independently deployable unit of software. Datadog’s [Unified Service Tagging] [4] makes it easy for you to manage and monitor services consistently across multiple telemetry types (e.g., infrastructure metrics, logs, and traces). However, we understand that you may disagree with us on what a service is. In Datadog Service Catalog, you can customize your service definition easily to fit your architectural style. 
+
 
 <div class="alert alert-warning">This feature is in private beta and the endpoints are likely to change.</div>
 
@@ -278,3 +282,4 @@ curl --request DELETE 'https://api.datadoghq.com/api/unstable/services/definitio
 [1]: /account_management/api-app-keys/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
+[4]: https://www.datadoghq.com/blog/unified-service-tagging/
