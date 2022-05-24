@@ -29,7 +29,7 @@ git_integration_title: etcd
 guid: a1cfafdb-5d88-4ae1-acdc-6356df755b73
 integration_id: etcd
 integration_title: etcd
-integration_version: 3.1.0
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

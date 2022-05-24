@@ -4,6 +4,7 @@ kind: faq
 aliases:
     - /agent/faq/why-should-i-install-the-agent-on-my-aws-instances/
     - /integrations/faq/why-is-my-aws-error-count-metric-orders-of-magnitude-lower-in-datadog-than-cloudwatch/
+    - /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 further_reading:
 - link: "/integrations/faq/cloud-metric-delay/"
   tag: "FAQ"
@@ -20,7 +21,7 @@ If you use AWS, Azure, GCP, or another cloud-based metrics provider, installing 
 
 * **Custom metrics with DogStatsD** - With the Datadog Agent on board, use the built-in StatsD client to send custom metrics from your application, allowing you to correlate what's happening with your application, your users, and your system.
 
-  {{< img src="agent/faq/Agent_VS_AWSA.jpg" alt="Agent vs AWSA" style="width:70%;">}}
+  {{< img src="agent/guide/Agent_VS_AWSA.jpg" alt="Agent vs AWSA" style="width:70%;">}}
 
 The Datadog Agent is lightweight and fully open source, so you can review the code and even contribute by making a pull request.
 

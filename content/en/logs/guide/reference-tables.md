@@ -67,7 +67,7 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 
 Click **New Reference Table +**, then add a name, select AWS S3, fill out all fields, click import, and define the primary key for lookups.
 
-{{< img src="logs/guide/enrichment-tables/configure-s3-enrichment-table.png" alt="Create an Reference Table" style="width:100%;">}}
+{{< img src="logs/guide/enrichment-tables/configure-s3-reference-table.png" alt="Create an Reference Table" style="width:100%;">}}
 
 **Note**: The upload from an S3 bucket method supports files up to 200MB.
 

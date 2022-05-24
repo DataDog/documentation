@@ -16,15 +16,15 @@ further_reading:
 kind: documentation
 title: Flutter モニタリング
 ---
+<div class="alert alert-info"><p>Flutter モニタリングはベータ版です。</p>
+</div>
+
+
 ## 概要
 
 Datadog Real User Monitoring (RUM) を使用すると、Flutter アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
 
-## プラットフォーム対応
-
-| Android | iOS |  Web | MacOS | Linux | Windows |
-| :-----: | :-: | :---: | :-: | :---: | :----: |
-|   ✅    | ✅  |  🚧   | ❌  |  ❌   |   ❌   |
+RUM は、モバイル Flutter の Android および iOS アプリケーションの監視をサポートしています。
 
 ## 現在の Datadog SDK のバージョン
 
@@ -36,7 +36,6 @@ Datadog Real User Monitoring (RUM) を使用すると、Flutter アプリケー�
 
 [//]: # (End SDK Table)
 
-
 ### iOS
 
 iOS の Podfile は `use_frameworks!` (Flutter のデフォルトでは true) で、iOS のバージョン >= 11.0 をターゲットにしている必要があります。
@@ -47,19 +46,17 @@ Android では、`minSdkVersion` が >= 19 である必要があり、Kotlin を
 
 ## セットアップ
 
-Logs と Tracing には、Datadog のクライアントトークンが必要です。RUM を使用している場合は、アプリケーション ID が必要です。
-
 ### UI でアプリケーションの詳細を指定
 
-1. [**UX Monitoring** > **RUM Applications** > **New Application**][1] へ移動します。
-2. アプリケーションタイプとして `flutter` を選択し、新しいアプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
-3. **+ Create New RUM Application** をクリックします。
+1. [Datadog アプリ][1]で、**UX Monitoring** > **RUM Applications** > **New Application** へ移動します。
+2. アプリケーションタイプとして `Flutter` を選択します。
+3. アプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
 
-データの安全性を確保するため、クライアントトークンを使用する必要があります。`@datadog/mobile-react-native` ライブラリの構成に [Datadog API キー][2]のみを使用した場合、クライアント側で React Native アプリケーションのコード内で公開されます。
+{{< img src="real_user_monitoring/flutter/image_flutter.png" alt="Datadog ワークフローで RUM アプリケーションを作成" style="width:90%;">}}
 
-クライアントトークンのセットアップについて、詳しくは[クライアントトークンに関するドキュメント][3]を参照してください。
+データの安全性を確保するために、クライアントトークンを使用する必要があります。クライアントトークンの設定方法については、[クライアントトークンのドキュメント][4]を参照してください。
 
-### Datadog の構成
+### コンフィギュレーションオブジェクトの作成
 
 以下のスニペットで、Datadog の各機能 (Logging、Tracing、RUM など) のコンフィグレーションオブジェクトを作成します。ある機能に対してコンフィギュレーションを渡さないことで、その機能は無効化されます。
 
@@ -80,16 +77,16 @@ final configuration = DdSdkConfiguration(
     sendNetworkInfo: true,
   ),
   rumConfiguration: RumConfiguration(
-    applicationId: '<RUM_APPLICATION_ID',
+    applicationId: '<RUM_APPLICATION_ID>',
   )
 );
 ```
 
 ### ライブラリの初期化
 
-Datadog の初期化は、`main.dart` ファイル内の 2 つのメソッドのうちの 1 つを使用して行うことができます。
+RUM の初期化は、`main.dart` ファイル内の 2 つのメソッドのうちの 1 つを使用して行うことができます。
 
-1. エラーレポートとリソーストレースを自動的にセットアップする `DatadogSdk.runApp` を使用します。これは、Datadog を初期化する最もシンプルな方法です。
+1. エラーレポートとリソーストレースを自動的にセットアップする `DatadogSdk.runApp` を使用します。
 
    ```dart
    await DatadogSdk.runApp(configuration, () async {
@@ -134,7 +131,7 @@ MaterialApp(
 );
 ```
 
-これは名前付きルートを使用している場合、または `PageRoute` の `settings` パラメーターに名前を指定した場合のみ動作します。
+これは名前付きルートを使用している場合、または `PageRoute` の `settings` パラメーターに名前を指定した場合に動作します。
 
 また、`DatadogRouteAwareMixin` プロパティと `DatadogNavigationObserverProvider` プロパティを組み合わせて使用すると、RUM ビューを自動的に起動したり停止したりすることができます。`DatadogRouteAwareMixin` を使って、`initState` から `didPush` へとロジックを移動させます。
 
@@ -145,10 +142,11 @@ MaterialApp(
 ```dart
 final configuration = DdSdkConfiguration(
   // 構成
+  firstPartyHosts: ['example.com'],
 )..enableHttpTracking()
 ```
 
-Datadog の分散型トレーシングを有効にしたい場合は、`DdSdkConfiguration.firstPartyHosts` コンフィギュレーションオプションも設定する必要があります。
+Datadog 分散型トレーシングを有効にするには、コンフィギュレーションオブジェクトの `DdSdkConfiguration.firstPartyHosts` プロパティを分散型トレーシングをサポートしているドメインに設定する必要があります。
 
 ## データストレージ
 

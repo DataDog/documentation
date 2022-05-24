@@ -1373,6 +1373,18 @@ api:
   parent: metrics
   url: '#delete-a-tag-configuration'
 - generated: true
+  identifier: estimate-output-series-public-v2-api
+  name: Estimate Output Series - Public v2 API
+  params:
+    operationids:
+    - EstimateMetricsOutputSeries
+    order: 10
+    unstable: []
+    versions:
+    - v2
+  parent: metrics
+  url: '#estimate-output-series-public-v2-api'
+- generated: true
   identifier: list-tags-by-metric-name
   name: メトリクス名でタグを一覧表示する
   params:
@@ -1420,6 +1432,7 @@ api:
     unstable: []
     versions:
     - v1
+    - v2
   parent: metrics
   url: '#submit-metrics'
 - generated: true
@@ -1432,7 +1445,7 @@ api:
     unstable: []
     versions:
     - v1
-  parent: metrics
+  parent: メトリクス
   url: '#search-metrics'
 - generated: true
   identifier: query-timeseries-points
@@ -2207,7 +2220,7 @@ api:
   params:
     operationids:
     - EditGlobalVariable
-    order: 18
+    order: 20
     unstable: []
     versions:
     - v1
@@ -2231,7 +2244,7 @@ api:
   params:
     operationids:
     - DeleteGlobalVariable
-    order: 20
+    order: 21
     unstable: []
     versions:
     - v1
@@ -2243,7 +2256,7 @@ api:
   params:
     operationids:
     - CreateGlobalVariable
-    order: 17
+    order: 18
     unstable: []
     versions:
     - v1
@@ -2255,7 +2268,7 @@ api:
   params:
     operationids:
     - ListGlobalVariables
-    order: 16
+    order: 17
     unstable: []
     versions:
     - v1
@@ -2315,7 +2328,7 @@ api:
   params:
     operationids:
     - GetTest
-    order: 26
+    order: 27
     unstable: []
     versions:
     - v1
@@ -2351,7 +2364,7 @@ api:
   params:
     operationids:
     - DeleteTests
-    order: 15
+    order: 16
     unstable: []
     versions:
     - v1
@@ -2483,7 +2496,7 @@ api:
   params:
     operationids:
     - UpdatePrivateLocation
-    order: 23
+    order: 24
     unstable: []
     versions:
     - v1
@@ -2495,7 +2508,7 @@ api:
   params:
     operationids:
     - GetPrivateLocation
-    order: 22
+    order: 23
     unstable: []
     versions:
     - v1
@@ -2507,7 +2520,7 @@ api:
   params:
     operationids:
     - DeletePrivateLocation
-    order: 25
+    order: 26
     unstable: []
     versions:
     - v1
@@ -2519,11 +2532,11 @@ api:
   params:
     operationids:
     - CreatePrivateLocation
-    order: 21
+    order: 22
     unstable: []
     versions:
     - v1
-  parent: synthetics
+  parent: 外形監視
   url: '#create-a-private-location'
 - generated: true
   identifier: get-all-locations-public-and-private
@@ -2531,7 +2544,7 @@ api:
   params:
     operationids:
     - ListLocations
-    order: 24
+    order: 25
     unstable: []
     versions:
     - v1
@@ -2543,7 +2556,7 @@ api:
   params:
     operationids:
     - GetSyntheticsCIBatch
-    order: 27
+    order: 15
     unstable: []
     versions:
     - v1
@@ -2634,6 +2647,18 @@ api:
   parent: usage-metering
   url: '#get-hourly-usage-for-observability-pipelines'
 - generated: true
+  identifier: get-hourly-usage-for-lambda-traced-invocations
+  name: Lambda Traced Invocations の 1 時間あたり使用量を取得
+  params:
+    operationids:
+    - GetUsageLambdaTracedInvocations
+    order: 38
+    unstable: []
+    versions:
+    - v2
+  parent: usage-metering
+  url: '#get-hourly-usage-for-lambda-traced-invocations'
+- generated: true
   identifier: get-cost-across-multi-org-account
   name: マルチオーガニゼーションのアカウントのコストを取得
   params:
@@ -2645,6 +2670,18 @@ api:
     - v2
   parent: usage-metering
   url: '#get-cost-across-multi-org-account'
+- generated: true
+  identifier: get-hourly-usage-for-application-security
+  name: アプリケーションセキュリティの 1 時間あたり使用量の取得
+  params:
+    operationids:
+    - GetUsageApplicationSecurityMonitoring
+    order: 38
+    unstable: []
+    versions:
+    - v2
+  parent: usage-metering
+  url: '#get-hourly-usage-for-application-security'
 - generated: true
   identifier: get-all-custom-metrics-by-hourly-average
   name: 時間平均に基づくすべてのカスタムメトリクスを取得
@@ -4968,19 +5005,29 @@ main:
   pre: watchdog
   url: watchdog/
   weight: 50000
+- identifier: watchdog_alerts
+  name: アラート
+  parent: watchdog_top_level
+  url: watchdog/alerts
+  weight: 1
+- identifier: watchdog_impact_analysis
+  name: Impact Analysis
+  parent: watchdog_top_level
+  url: watchdog/impact_analysis/
+  weight: 2
 - identifier: watchdog_rca
   name: RCA
   parent: watchdog_top_level
   url: watchdog/rca/
-  weight: 2
+  weight: 3
 - identifier: watchdog_faulty_deployment_detection
   name: デプロイメント不良検出
   parent: watchdog_top_level
   url: watchdog/faulty_deployment_detection/
-  weight: 3
+  weight: 4
 - identifier: events_top_level
   name: イベント
-  pre: events
+  pre: イベント
   url: events/
   weight: 60000
 - identifier: event_stream
@@ -5016,7 +5063,7 @@ main:
   weight: 303
 - identifier: dashboards
   name: 'ダッシュボード  '
-  pre: dashboard
+  pre: ダッシュボード
   url: dashboards/
   weight: 70000
 - identifier: dashboards_widgets
@@ -5215,7 +5262,7 @@ main:
   weight: 11
 - identifier: モバイル
   name: モバイルアプリケーション
-  pre: mobile
+  pre: モバイル
   url: mobile/
   weight: 80000
 - identifier: infrastructure
@@ -5260,8 +5307,8 @@ main:
   weight: 6
 - identifier: サーバーレス
   name: サーバーレス
-  pre: serverless
-  url: serverless
+  pre: サーバーレス
+  url: サーバーレス
   weight: 100000
 - identifier: serverless_installation
   name: インストール
@@ -5298,88 +5345,85 @@ main:
   parent: serverless_installation
   url: serverless/installation/dotnet
   weight: 106
+- identifier: serverless_configuration
+  name: 高度なコンフィギュレーション
+  parent: サーバーレス
+  url: serverless/configuration
+  weight: 2
 - identifier: libraries_integrations
   name: ライブラリとインテグレーション
   parent: サーバーレス
   url: serverless/libraries_integrations
-  weight: 2
+  weight: 3
 - name: Datadog Lambda 拡張機能
   parent: libraries_integrations
   url: serverless/libraries_integrations/extension/
-  weight: 201
-- name: Datadog Lambda ライブラリ
-  parent: libraries_integrations
-  url: serverless/libraries_integrations/library/
-  weight: 202
+  weight: 301
 - name: Datadog サーバーレスプラグイン
   parent: libraries_integrations
   url: serverless/libraries_integrations/plugin/
-  weight: 203
+  weight: 302
 - name: Datadog のサーバーレスマクロ
   parent: libraries_integrations
   url: serverless/libraries_integrations/macro/
-  weight: 204
+  weight: 303
 - name: Datadog サーバーレス CLI
   parent: libraries_integrations
   url: serverless/libraries_integrations/cli/
-  weight: 205
-- name: Lambda コード署名
+  weight: 304
+- name: Datadog CDK コンストラクト
   parent: libraries_integrations
-  url: serverless/libraries_integrations/lambda_code_signing/
-  weight: 206
+  url: serverless/libraries_integrations/cdk/
+  weight: 305
+- name: 拡張 Lambda メトリクス
+  parent: サーバーレス
+  url: serverless/enhanced_lambda_metrics
+  weight: 4
 - identifier: serverless_distributed_tracing
   name: 分散型トレーシング
   parent: サーバーレス
   url: serverless/distributed_tracing
-  weight: 3
-- name: Lambda ペイロードの収集
-  parent: serverless_distributed_tracing
-  url: serverless/distributed_tracing/collect_lambda_payloads
-  weight: 301
+  weight: 5
 - name: トレースのマージ（詳細）
   parent: serverless_distributed_tracing
   url: serverless/distributed_tracing/serverless_trace_merging
-  weight: 302
+  weight: 502
 - name: トレース伝搬 (高度)
   parent: serverless_distributed_tracing
   url: serverless/distributed_tracing/serverless_trace_propagation
-  weight: 303
+  weight: 503
 - identifier: custom_metrics
   name: カスタムメトリクス
-  parent: serverless
+  parent: サーバーレス
   url: serverless/custom_metrics
-  weight: 4
-- name: 拡張 Lambda メトリクス
-  parent: serverless
-  url: serverless/enhanced_lambda_metrics
-  weight: 5
+  weight: 6
 - name: デプロイ追跡
   parent: サーバーレス
   url: serverless/deployment_tracking
-  weight: 6
+  weight: 7
 - identifier: serverless_troubleshooting
   name: トラブルシューティング
   parent: サーバーレス
   url: serverless/troubleshooting
-  weight: 7
+  weight: 8
 - identifier: serverless_app_services
   name: Azure App Service 拡張機能
   parent: サーバーレス
   url: serverless/azure_app_services
-  weight: 8
+  weight: 9
 - identifier: serverless_glossary
   name: 用語集
   parent: サーバーレス
   url: serverless/glossary
-  weight: 9
+  weight: 10
 - identifier: serverless_guides
   name: ガイド
   parent: サーバーレス
   url: serverless/guide/
-  weight: 10
+  weight: 11
 - identifier: metrics_top_level
   name: メトリクス
-  pre: metric
+  pre: メトリクス
   url: metrics/
   weight: 110000
 - identifier: metrics_explorer
@@ -5421,22 +5465,22 @@ main:
 - identifier: metrics_modifiers
   name: メトリクスタイプのモディファイアー
   parent: metrics_custom_metrics
-  url: metrics/type_modifiers/
+  url: metrics/custom_metrics/type_modifiers/
   weight: 701
 - identifier: dev_tools_metrics_agent
   name: 送信 - Agent チェック
   parent: metrics_custom_metrics
-  url: metrics/agent_metrics_submission/
+  url: metrics/custom_metrics/agent_metrics_submission/
   weight: 702
 - identifier: dev_tools_metrics_dogstatsd
   name: 送信 - DogStatsD
   parent: metrics_custom_metrics
-  url: metrics/dogstatsd_metrics_submission/
+  url: metrics/custom_metrics/dogstatsd_metrics_submission/
   weight: 703
 - identifier: dev_tools_metrics_powershell
   name: 送信 - Powershell
   parent: metrics_custom_metrics
-  url: metrics/powershell_metrics_submission
+  url: metrics/custom_metrics/powershell_metrics_submission
   weight: 704
 - identifier: dev_tools_metrics_api
   name: '送信 - API '
@@ -5450,7 +5494,7 @@ main:
   weight: 706
 - identifier: ノートブック
   name: ノートブック
-  pre: notebook
+  pre: ノートブック
   url: notebooks/
   weight: 120000
 - identifier: アラート設定
@@ -5464,100 +5508,100 @@ main:
   url: monitors/create/
   weight: 1
 - identifier: monitor_configuration
-  name: モニターコンフィギュレーション
+  name: モニターの構成
   parent: monitors_create
   url: monitors/create/configuration/
   weight: 101
-- identifier: monitor_types
-  name: モニターの種類
-  parent: monitors_create
-  url: monitors/create/types/
-  weight: 102
 - identifier: monitor_types_host
   name: ホスト
-  parent: monitor_types
+  parent: monitors_create
   url: monitors/create/types/host/
-  weight: 1021
+  weight: 102
 - identifier: monitor_types_metrics
   name: メトリクス
-  parent: monitor_types
+  parent: monitors_create
   url: monitors/create/types/metric/
-  weight: 1022
+  weight: 103
 - identifier: monitor_types_anomaly
   name: 異常検知
-  parent: monitor_types
+  parent: monitors_create
   url: monitors/create/types/anomaly/
-  weight: 1023
-- identifier: monitor_types_outlier
-  name: 外れ値
-  parent: monitor_types
-  url: monitors/create/types/outlier/
-  weight: 1024
-- identifier: monitor_types_forecasts
-  name: 予測値
-  parent: monitor_types
-  url: monitors/create/types/forecasts/
-  weight: 1025
-- identifier: monitor_types_integration
-  name: インテグレーション
-  parent: monitor_types
-  url: monitors/create/types/integration/
-  weight: 1026
-- identifier: monitor_types_process
-  name: ライブプロセス
-  parent: monitor_types
-  url: monitors/create/types/process/
-  weight: 1027
-- identifier: monitor_types_process_check
-  name: プロセスチェック
-  parent: monitor_types
-  url: monitors/create/types/process_check/
-  weight: 1028
-- identifier: monitor_types_network
-  name: ネットワーク
-  parent: monitor_types
-  url: monitors/create/types/network/
-  weight: 1029
-- identifier: monitor_types_custom_check
-  name: カスタムチェック
-  parent: monitor_types
-  url: monitors/create/types/custom_check/
-  weight: 1030
-- identifier: monitor_types_event
-  name: イベント
-  parent: monitor_types
-  url: monitors/create/types/event/
-  weight: 1031
-- identifier: monitor_types_log
-  name: ログ管理
-  parent: monitor_types
-  url: monitors/create/types/log/
-  weight: 1032
+  weight: 104
 - identifier: monitor_types_apm
   name: APM
-  parent: monitor_types
+  parent: monitors_create
   url: monitors/create/types/apm/
-  weight: 1033
-- identifier: monitor_types_rum
-  name: リアルユーザーモニタリング (RUM)
-  parent: monitor_types
-  url: monitors/create/types/real_user_monitoring/
-  weight: 1034
-- identifier: monitor_types_watchdog
-  name: Watchdog
-  parent: monitor_types
-  url: monitors/create/types/watchdog/
-  weight: 1035
-- identifier: monitor_types_composite
-  name: 複合条件
-  parent: monitor_types
-  url: monitors/create/types/composite/
-  weight: 1036
+  weight: 105
+- identifier: monitor_types_auditlogs
+  name: 監査ログ
+  parent: monitors_create
+  url: monitors/create/types/audit_logs/
+  weight: 106
 - identifier: monitor_types_cipipelines
   name: CI パイプライン
-  parent: monitor_types
+  parent: monitors_create
   url: monitors/create/types/ci_pipelines/
-  weight: 1037
+  weight: 107
+- identifier: monitor_types_composite
+  name: 複合条件
+  parent: monitors_create
+  url: monitors/create/types/composite/
+  weight: 108
+- identifier: monitor_types_custom_check
+  name: カスタムチェック
+  parent: monitors_create
+  url: monitors/create/types/custom_check/
+  weight: 109
+- identifier: monitor_types_event
+  name: イベント
+  parent: monitors_create
+  url: monitors/create/types/event/
+  weight: 110
+- identifier: monitor_types_forecasts
+  name: 予測値
+  parent: monitors_create
+  url: monitors/create/types/forecasts/
+  weight: 111
+- identifier: monitor_types_integration
+  name: インテグレーション
+  parent: monitors_create
+  url: monitors/create/types/integration/
+  weight: 112
+- identifier: monitor_types_process
+  name: ライブプロセス
+  parent: monitors_create
+  url: monitors/create/types/process/
+  weight: 113
+- identifier: monitor_types_log
+  name: ログ管理
+  parent: monitors_create
+  url: monitors/create/types/log/
+  weight: 114
+- identifier: monitor_types_network
+  name: ネットワーク
+  parent: monitors_create
+  url: monitors/create/types/network/
+  weight: 115
+- identifier: monitor_types_outlier
+  name: 外れ値
+  parent: monitors_create
+  url: monitors/create/types/outlier/
+  weight: 116
+- identifier: monitor_types_process_check
+  name: プロセスチェック
+  parent: monitors_create
+  url: monitors/create/types/process_check/
+  weight: 117
+- identifier: monitor_types_rum
+  name: リアルユーザーモニタリング (RUM)
+  parent: monitors_create
+  url: monitors/create/types/real_user_monitoring/
+  weight: 118
+- identifier: monitor_types_watchdog
+  name: Watchdog
+  parent: monitors_create
+  url: monitors/create/types/watchdog/
+  weight: 119
 - identifier: monitors_notify
   name: 通知
   parent: アラート設定
@@ -5895,16 +5939,16 @@ main:
   parent: trace_ingestion
   url: tracing/trace_ingestion/ingestion_controls
   weight: 402
+- identifier: trace_ingestion_retention_usage_metrics
+  name: 使用量メトリクス
+  parent: trace_ingestion
+  url: tracing/trace_ingestion/usage_metrics/
+  weight: 403
 - identifier: trace_retention
   name: トレースの保持
   parent: トレーシング
   url: tracing/trace_retention/
   weight: 5
-- identifier: trace_retention_and_ingestion_usage_metrics
-  name: 使用量メトリクス
-  parent: trace_retention
-  url: tracing/trace_retention/usage_metrics/
-  weight: 501
 - identifier: generate_metrics
   name: スパンからメトリクスを生成する
   parent: トレーシング
@@ -6768,7 +6812,7 @@ main:
   weight: 9
 - identifier: 外形監視
   name: Synthetic モニタリング
-  pre: synthetics
+  pre: 外形監視
   url: synthetics/
   weight: 190000
 - identifier: api_tests
@@ -6981,16 +7025,21 @@ main:
   parent: rum_android
   url: real_user_monitoring/android/mobile_vitals/
   weight: 203
+- identifier: rum_android_web_view_tracking
+  name: Web ビュー追跡
+  parent: rum_android
+  url: real_user_monitoring/android/web_view_tracking/
+  weight: 204
 - identifier: rum_android_libraries
   name: 統合ライブラリ
   parent: rum_android
   url: real_user_monitoring/android/integrated_libraries/
-  weight: 204
+  weight: 205
 - identifier: rum_troubleshooting_android
   name: トラブルシューティング
   parent: rum_android
   url: real_user_monitoring/android/troubleshooting/
-  weight: 205
+  weight: 206
 - identifier: rum_ios
   name: iOS モニタリング
   parent: rum
@@ -7011,134 +7060,149 @@ main:
   parent: rum_ios
   url: real_user_monitoring/ios/advanced_configuration/
   weight: 303
+- identifier: rum_ios_web_view_tracking
+  name: Web ビュー追跡
+  parent: rum_ios
+  url: real_user_monitoring/ios/web_view_tracking/
+  weight: 304
 - identifier: rum_troubleshooting_ios
   name: トラブルシューティング
   parent: rum_ios
   url: real_user_monitoring/ios/troubleshooting/
-  weight: 304
+  weight: 305
 - identifier: rum_reactnative
   name: React Native のモニタリング
   parent: rum
   url: real_user_monitoring/reactnative/
   weight: 4
+- identifier: rum_flutter
+  name: Flutter モニタリング
+  parent: rum
+  url: real_user_monitoring/flutter/
+  weight: 5
 - identifier: rum_session_replay
   name: セッション リプレイ
   parent: rum
   url: real_user_monitoring/session_replay/
-  weight: 5
+  weight: 6
 - identifier: rum_session_replay_privacy_options
   name: プライバシーオプション
   parent: rum_session_replay
   url: real_user_monitoring/session_replay/privacy_options
-  weight: 501
+  weight: 601
 - identifier: rum_session_replay_developer_tools
   name: 開発ツール
   parent: rum_session_replay
   url: real_user_monitoring/session_replay/developer_tools
-  weight: 502
+  weight: 602
 - identifier: rum_dashboards
   name: 'ダッシュボード  '
   parent: rum
   url: real_user_monitoring/dashboards/
-  weight: 6
+  weight: 7
 - identifier: rum_dashboards_performance
   name: パフォーマンス概要
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/performance_overview_dashboard
-  weight: 501
+  weight: 701
 - identifier: rum_dashboards_resources
   name: リソース
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/resources_dashboard
-  weight: 502
+  weight: 702
 - identifier: rum_dashboards_errors
   name: Errors
   parent: rum_dashboards
   url: real_user_monitoring/dashboards/errors_dashboard
-  weight: 503
+  weight: 703
 - identifier: rum_explorer
   name: エクスプローラー
   parent: rum
   url: real_user_monitoring/explorer/
-  weight: 7
+  weight: 8
 - identifier: rum_explorer_search
   name: 検索
   parent: rum_explorer
   url: real_user_monitoring/explorer/search/
-  weight: 601
+  weight: 801
 - identifier: rum_explorer_search_syntax
   name: 検索構文
   parent: rum_explorer
   url: real_user_monitoring/explorer/search_syntax/
-  weight: 602
+  weight: 802
 - identifier: rum_explorer_group
   name: グループ
   parent: rum_explorer
   url: real_user_monitoring/explorer/group/
-  weight: 603
+  weight: 803
 - identifier: rum_explorer_visualize
   name: 視覚化
   parent: rum_explorer
   url: real_user_monitoring/explorer/visualize/
-  weight: 604
+  weight: 804
 - identifier: rum_explorer_events
   name: イベント
   parent: rum_explorer
   url: real_user_monitoring/explorer/events/
-  weight: 605
+  weight: 805
 - identifier: rum_explorer_export
   name: エクスポート
   parent: rum_explorer
   url: real_user_monitoring/explorer/export/
-  weight: 606
+  weight: 806
 - identifier: rum_explorer_saved_views
   name: 保存ビュー
   parent: rum_explorer
   url: real_user_monitoring/explorer/saved_views/
-  weight: 607
+  weight: 807
 - identifier: rum_explorer_watchdog_insights
   name: RUMのWatchdog Insights
   parent: rum_explorer
   url: real_user_monitoring/explorer/watchdog_insights/
-  weight: 608
+  weight: 808
+- identifier: rum_generate_metrics
+  name: メトリクスの生成
+  parent: rum
+  url: real_user_monitoring/generate_metrics
+  weight: 9
 - identifier: rum_connect_rum_and_traces
   name: RUM とトレースの接続
   parent: rum
   url: real_user_monitoring/connect_rum_and_traces
-  weight: 8
+  weight: 10
 - identifier: rum_error_tracking
   name: エラー トラッキング
   parent: rum
   url: real_user_monitoring/error_tracking/
-  weight: 9
+  weight: 11
 - identifier: rum_error_tracking_explorer
   name: エクスプローラー
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/explorer
-  weight: 801
+  weight: 1101
 - identifier: rum_error_tracking_browser
   name: ブラウザエラーの追跡
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/browser_errors
-  weight: 802
+  weight: 1102
 - identifier: rum_error_tracking_android
   name: Android エラーの追跡
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/android
-  weight: 803
+  weight: 1103
 - identifier: rum_error_tracking_ios
   name: iOS エラーの追跡
   parent: rum_error_tracking
   url: real_user_monitoring/ios/crash_reporting/
-  weight: 804
+  weight: 1104
 - identifier: rum_guides
   name: ガイド
   parent: rum
   url: real_user_monitoring/guide/
-  weight: 10
+  weight: 12
 - identifier: nm_parent
   name: ネットワークモニタリング
-  pre: network
+  pre: ネットワーク
   url: network_monitoring/
   weight: 200000
 - identifier: npm
@@ -7357,6 +7421,10 @@ main:
   parent: organization_settings
   url: account_management/org_settings/sensitive_data_detection
   weight: 205
+- name: カスタム組織ランディングページ
+  parent: organization_settings
+  url: account_management/org_settings/custom_landing
+  weight: 206
 - identifier: account_management_rbac
   name: RBAC
   parent: account_management

@@ -210,17 +210,11 @@ To use the custom instrumentation in your .NET application:
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][7].
+=======
+1. Add the `Datadog.Trace` [NuGet package][7] with the same version to your application.
+2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-## Agentless (Beta)
-
-To instrument your test suite without requiring an Agent, configure the following environment variables:
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED` (Required)
-: Enables or disables Agentless mode.<br/>
-**Default**: `false`
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][8] used to upload the test results.<br/>
+For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
 **Default**: `(empty)`
 
 Then, prefix your test command with `dd-trace ci run`. Use the `--dd-service` parameter to provide the name of the service or library. Use the `--dd-env` parameter to provide the environment where tests are being run (`local` when running tests on a developer workstation, `ci` when running them on a CI provider, etc.) For example:

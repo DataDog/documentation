@@ -38,7 +38,7 @@ To map telemetry data with your source code:
 
 ### Tag your telemetry
 
-To link data to a specific commit, tag your telemetry with a `git.commit.sha` tag.
+To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags.
 
 {{< tabs >}}
 {{% tab "Docker Runtime" %}}

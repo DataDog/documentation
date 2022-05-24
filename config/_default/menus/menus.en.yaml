@@ -1059,56 +1059,61 @@ main:
     parent: monitors_create
     identifier: monitor_types_custom_check
     weight: 109
+  - name: Error Tracking
+    url: monitors/create/types/error_tracking/
+    parent: monitors_create
+    identifier: monitor_types_error_tracking
+    weight: 110
   - name: Event
     url: monitors/create/types/event/
     parent: monitors_create
     identifier: monitor_types_event
-    weight: 110
+    weight: 111
   - name: Forecast
     url: monitors/create/types/forecasts/
     parent: monitors_create
     identifier: monitor_types_forecasts
-    weight: 111
+    weight: 112
   - name: Integration
     url: monitors/create/types/integration/
     parent: monitors_create
     identifier: monitor_types_integration
-    weight: 112
+    weight: 113
   - name: Live Process
     url: monitors/create/types/process/
     parent: monitors_create
     identifier: monitor_types_process
-    weight: 113
+    weight: 114
   - name: Logs
     url: monitors/create/types/log/
     parent: monitors_create
     identifier: monitor_types_log
-    weight: 114
+    weight: 115
   - name: Network
     url: monitors/create/types/network/
     parent: monitors_create
     identifier: monitor_types_network
-    weight: 115
+    weight: 116
   - name: Outlier
     url: monitors/create/types/outlier/
     parent: monitors_create
     identifier: monitor_types_outlier
-    weight: 116
+    weight: 117
   - name: Process Check
     url: monitors/create/types/process_check/
     parent: monitors_create
     identifier: monitor_types_process_check
-    weight: 117
+    weight: 118
   - name: Real User Monitoring
     url: monitors/create/types/real_user_monitoring/
     parent: monitors_create
     identifier: monitor_types_rum
-    weight: 118
+    weight: 119
   - name: Watchdog
     url: monitors/create/types/watchdog/
     parent: monitors_create
     identifier: monitor_types_watchdog
-    weight: 119
+    weight: 120
   - name: Notifications
     url: monitors/notify/
     parent: alerting
@@ -2273,16 +2278,21 @@ main:
     parent: application_security
     identifier: appsec_configuration
     weight: 403
-  - name: Custom Rules
+  - name: Custom Detection Rules
     url: security_platform/application_security/custom_rules/
     parent: application_security
     identifier: appsec_custom_rules
     weight: 404
+  - name: Event Rules
+    url: security_platform/application_security/event_rules/
+    parent: application_security
+    identifier: appsec_event_rules
+    weight: 405
   - name: Troubleshooting
     url: security_platform/application_security/troubleshooting
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 405
+    weight: 406
   - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
@@ -4880,6 +4890,192 @@ api:
     url: /api/latest/screenboards/
     identifier: screenboards
     generated: true
+  - name: Security Monitoring
+    url: /api/latest/security-monitoring/
+    identifier: security-monitoring
+    generated: true
+  - name: Get a list of security signals
+    url: '#get-a-list-of-security-signals'
+    identifier: get-a-list-of-security-signals
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchSecurityMonitoringSignals
+      unstable:
+        - v2
+      order: 6
+  - name: Get a quick list of security signals
+    url: '#get-a-quick-list-of-security-signals'
+    identifier: get-a-quick-list-of-security-signals
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringSignals
+      unstable:
+        - v2
+      order: 7
+  - name: Update an existing rule
+    url: '#update-an-existing-rule'
+    identifier: update-an-existing-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityMonitoringRule
+      unstable: []
+      order: 4
+  - name: Get a rule's details
+    url: '#get-a-rules-details'
+    identifier: get-a-rules-details
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityMonitoringRule
+      unstable: []
+      order: 3
+  - name: Delete an existing rule
+    url: '#delete-an-existing-rule'
+    identifier: delete-an-existing-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityMonitoringRule
+      unstable: []
+      order: 5
+  - name: Create a detection rule
+    url: '#create-a-detection-rule'
+    identifier: create-a-detection-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityMonitoringRule
+      unstable: []
+      order: 2
+  - name: List rules
+    url: '#list-rules'
+    identifier: list-rules
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringRules
+      unstable: []
+      order: 1
+  - name: Update a security filter
+    url: '#update-a-security-filter'
+    identifier: update-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get a security filter
+    url: '#get-a-security-filter'
+    identifier: get-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityFilter
+      unstable: []
+      order: 0
+  - name: Delete a security filter
+    url: '#delete-a-security-filter'
+    identifier: delete-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityFilter
+      unstable: []
+      order: 0
+  - name: Create a security filter
+    url: '#create-a-security-filter'
+    identifier: create-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get all security filters
+    url: '#get-all-security-filters'
+    identifier: get-all-security-filters
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityFilters
+      unstable: []
+      order: 0
+  - name: Change the triage state of a security signal
+    url: '#change-the-triage-state-of-a-security-signal'
+    identifier: change-the-triage-state-of-a-security-signal
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - EditSecurityMonitoringSignalState
+      unstable: []
+      order: 0
+  - name: Modify the triage assignee of a security signal
+    url: '#modify-the-triage-assignee-of-a-security-signal'
+    identifier: modify-the-triage-assignee-of-a-security-signal
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - EditSecurityMonitoringSignalAssignee
+      unstable: []
+      order: 0
+  - name: Add a security signal to an incident
+    url: '#add-a-security-signal-to-an-incident'
+    identifier: add-a-security-signal-to-an-incident
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - AddSecurityMonitoringSignalToIncident
+      unstable: []
+      order: 0
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
@@ -5685,7 +5881,7 @@ api:
         - GetUsageLambdaTracedInvocations
       unstable: []
       order: 38
-  - name: Get Cost Across Multi-Org Account
+  - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
     identifier: get-cost-across-multi-org-account
     parent: usage-metering
@@ -5877,7 +6073,7 @@ api:
         - GetUsageNetworkFlows
       unstable: []
       order: 15
-  - name: Get Monthly Usage Attribution
+  - name: Get monthly usage attribution
     url: '#get-monthly-usage-attribution'
     identifier: get-monthly-usage-attribution
     parent: usage-metering
@@ -5974,7 +6170,7 @@ api:
         - GetIncidentManagement
       unstable: []
       order: 27
-  - name: Get Hourly Usage Attribution
+  - name: Get hourly usage attribution
     url: '#get-hourly-usage-attribution'
     identifier: get-hourly-usage-attribution
     parent: usage-metering
@@ -6095,7 +6291,7 @@ api:
         - GetUsageAuditLogs
       unstable: []
       order: 33
-  - name: Get Usage Attribution
+  - name: Get usage attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution
     parent: usage-metering
@@ -7314,156 +7510,6 @@ api:
         - ListPermissions
       unstable: []
       order: 1
-  - name: Security Monitoring
-    url: /api/latest/security-monitoring/
-    identifier: security-monitoring
-    generated: true
-  - name: Get a list of security signals
-    url: '#get-a-list-of-security-signals'
-    identifier: get-a-list-of-security-signals
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - SearchSecurityMonitoringSignals
-      unstable:
-        - v2
-      order: 6
-  - name: Get a quick list of security signals
-    url: '#get-a-quick-list-of-security-signals'
-    identifier: get-a-quick-list-of-security-signals
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListSecurityMonitoringSignals
-      unstable:
-        - v2
-      order: 7
-  - name: Update an existing rule
-    url: '#update-an-existing-rule'
-    identifier: update-an-existing-rule
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateSecurityMonitoringRule
-      unstable: []
-      order: 4
-  - name: Get a rule's details
-    url: '#get-a-rules-details'
-    identifier: get-a-rules-details
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetSecurityMonitoringRule
-      unstable: []
-      order: 3
-  - name: Delete an existing rule
-    url: '#delete-an-existing-rule'
-    identifier: delete-an-existing-rule
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteSecurityMonitoringRule
-      unstable: []
-      order: 5
-  - name: Create a detection rule
-    url: '#create-a-detection-rule'
-    identifier: create-a-detection-rule
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateSecurityMonitoringRule
-      unstable: []
-      order: 2
-  - name: List rules
-    url: '#list-rules'
-    identifier: list-rules
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListSecurityMonitoringRules
-      unstable: []
-      order: 1
-  - name: Update a security filter
-    url: '#update-a-security-filter'
-    identifier: update-a-security-filter
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateSecurityFilter
-      unstable: []
-      order: 0
-  - name: Get a security filter
-    url: '#get-a-security-filter'
-    identifier: get-a-security-filter
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetSecurityFilter
-      unstable: []
-      order: 0
-  - name: Delete a security filter
-    url: '#delete-a-security-filter'
-    identifier: delete-a-security-filter
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteSecurityFilter
-      unstable: []
-      order: 0
-  - name: Create a security filter
-    url: '#create-a-security-filter'
-    identifier: create-a-security-filter
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateSecurityFilter
-      unstable: []
-      order: 0
-  - name: Get all security filters
-    url: '#get-all-security-filters'
-    identifier: get-all-security-filters
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListSecurityFilters
-      unstable: []
-      order: 0
   - name: Service Accounts
     url: /api/latest/service-accounts/
     identifier: service-accounts
