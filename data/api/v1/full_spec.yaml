@@ -11020,6 +11020,7 @@ components:
       - packetsReceived
       - networkHop
       - receivedMessage
+      - grpcHealthcheckStatus
       - connection
       example: statusCode
       type: string
@@ -11039,6 +11040,7 @@ components:
       - PACKETS_RECEIVED
       - NETWORK_HOP
       - RECEIVED_MESSAGE
+      - GRPC_HEALTHCHECK_STATUS
       - CONNECTION
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
@@ -12543,7 +12545,7 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`, `icmp`, `udp`, `websocket` or `multi`.'
+        `dns`, `icmp`, `udp`, `websocket`, `grpc` or `multi`.'
       enum:
       - http
       - ssl
@@ -12553,6 +12555,7 @@ components:
       - icmp
       - udp
       - websocket
+      - grpc
       example: http
       type: string
       x-enum-varnames:
@@ -12564,6 +12567,7 @@ components:
       - ICMP
       - UDP
       - WEBSOCKET
+      - GRPC
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -12589,6 +12593,12 @@ components:
         description: A single Header.
         type: string
       description: Headers to include when performing the test.
+      type: object
+    SyntheticsTestMetadata:
+      additionalProperties:
+        description: A single Metadatum.
+        type: string
+      description: Metadata to include when performing the gRPC test.
       type: object
     SyntheticsTestMonitorStatus:
       description: 'The status of your Synthetic monitor.
@@ -12767,6 +12777,8 @@ components:
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
+        metadata:
+          $ref: '#/components/schemas/SyntheticsTestMetadata'
         method:
           $ref: '#/components/schemas/HTTPMethod'
         noSavingResponseBody:
@@ -12794,6 +12806,9 @@ components:
             allowing the server to present one of multiple possible certificates on
 
             the same IP address and TCP port number.'
+          type: string
+        service:
+          description: gRPC service on which you want to perform the healthcheck.
           type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
