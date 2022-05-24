@@ -182,9 +182,9 @@ The autodiscovery configuration can be based on container names or kubernetes an
 ```yaml
 kubernetes_annotations:
   include:
-    - prometheus.io/scrape: "true"
+     prometheus.io/scrape: "true"
   exclude:
-    - prometheus.io/scrape: "false"
+     prometheus.io/scrape: "false"
 ```
 
 **Example:**

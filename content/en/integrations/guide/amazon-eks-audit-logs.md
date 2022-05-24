@@ -72,7 +72,7 @@ To create a rule, navigate to the in-app [Rule Setup and Configuration][13] page
 [1]: /security_platform/cloud_siem/
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
 [3]: /integrations/amazon_web_services/?tab=roledelegation#setup
-[4]: /serverless/libraries_integrations/forwarder/
+[4]: /logs/guide/forwarder/
 [5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs

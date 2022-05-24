@@ -49,7 +49,7 @@ Among all values received during the same flush interval, the aggregated value s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd/
-[2]: /metrics/dogstatsd_metrics_submission/
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: /metrics/types/?tab=count#metric-types
 [4]: /metrics/types/
 [5]: /metrics/types/?tab=gauge#metric-types

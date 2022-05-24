@@ -54,7 +54,7 @@ You can record the uploading of files as a step. To record an **Upload** step yo
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:60%;">}}
 
-This is limited to 10 files with a limit of 5MB each. The Upload step is supported by browser tests running from managed locations.
+This is limited to 10 files with a limit of 5MB each.
 
 ## Manually added steps
 
@@ -135,6 +135,10 @@ return jQuery().jquery.startsWith('3.5.1')
 Perform verifications on files downloaded in previous steps. You can check that a file was correctly downloaded and assert on: the file name, size, and MD5 value.
 
 **Note**: You can find out more on how to test downloads on [this dedicated guide][6].
+
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
 ### Navigation
 

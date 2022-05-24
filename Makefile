@@ -109,12 +109,14 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
 	@if [ content/en/serverless/libraries_integrations/plugin.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/plugin.md ;fi
-	@if [ content/en/serverless/libraries_integrations/forwarder.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/forwarder.md ;fi
 	@if [ content/en/serverless/libraries_integrations/macro.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
 	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/cli.md ;fi
+	@if [ content/en/serverless/libraries_integrations/extension.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/extension.md ;fi
+	@if [ content/en/serverless/libraries_integrations/cdk.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/cdk.md ;fi
 	@if [ content/en/synthetics/cicd_integrations/circleci_orb.md ]; then \
 	rm -f content/en/synthetics/cicd_integrations/circleci_orb.md ;fi
 	@if [ content/en/synthetics/cicd_integrations/github_actions.md ]; then \
@@ -143,6 +145,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	find ./content/en/real_user_monitoring/ios -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/real_user_monitoring/reactnative.md ]; then \
 	rm -f content/en/real_user_monitoring/reactnative.md ;fi
+	@if [ content/en/real_user_monitoring/flutter/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/flutter/_index.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
@@ -155,6 +159,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/ios.md ;fi
 	@if [ content/en/logs/log_collection/javascript.md ]; then \
 	rm -f content/en/logs/log_collection/javascript.md ;fi
+	@if [ content/en/logs/guide/forwarder.md ]; then \
+	rm -f content/en/logs/guide/forwarder.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
 	@if [ content/en/security_platform/cloud_workload_security/agent_expressions.md ]; then \
@@ -206,7 +212,6 @@ start-no-pre-build: clean source-helpers ## Build the documentation without auto
 
 stop:  ## Stop wepack watch/hugo server.
 	@echo "stopping previous..."
-	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true
 
 clean-go-examples:
@@ -257,7 +262,6 @@ examples/go: examples/datadog-api-client-go clean-go-examples
 	-cp -Rn examples/datadog-api-client-go/examples/v* ./content/en/api/
 
 examples/java: examples/datadog-api-client-java clean-java-examples
-	-cd examples/datadog-api-client-java; ./extract-code-blocks.sh || true
 	-cp -Rn examples/datadog-api-client-java/examples/v* ./content/en/api/
 
 examples/python: examples/datadog-api-client-python clean-python-examples

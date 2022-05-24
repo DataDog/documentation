@@ -11,37 +11,40 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - network
+- network
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/avi_vantage/README.md
-display_name: "Avi\_Vantage"
+- https://github.com/DataDog/integrations-core/blob/master/avi_vantage/README.md
+display_name: Avi Vantage
 draft: false
 git_integration_title: avi_vantage
 guid: 9c3b3e3f-5e3d-49a4-8d35-4192b135a654
 integration_id: avi-vantage
-integration_title: "Avi\_Vantage"
-integration_version: 2.1.1
+integration_title: Avi Vantage
+integration_version: 3.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: avi_vantage.
 metric_to_check:
-  - avi_vantage.controller_stats.avg_cpu_usage
-  - avi_vantage.pool_healthscore
-  - avi_vantage.service_engine_healthscore
-  - avi_vantage.virtual_service_healthscore
+- avi_vantage.controller_stats.avg_cpu_usage
+- avi_vantage.pool_healthscore
+- avi_vantage.service_engine_healthscore
+- avi_vantage.virtual_service_healthscore
 name: avi_vantage
-public_title: "Avi\_Vantage"
-short_description: "Surveillez les performances et la santé de vos instances Avi\_Vantage."
+public_title: Avi Vantage
+short_description: Surveillez les performances et la santé de vos instances Avi Vantage.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Avi Vantage][1] avec l'Agent Datadog.

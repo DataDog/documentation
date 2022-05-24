@@ -16,6 +16,9 @@ further_reading:
   - link: "https://learn.datadoghq.com"
     tag: "Learning Center"
     text: "Learn more about Datadog Log Management"
+  - link: "https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/"
+    tag: "Blog"
+    text: "Accelerate Incident Investigations with Log Anomaly Detection"
 ---
 
 ## Overview

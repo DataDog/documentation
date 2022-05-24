@@ -5,11 +5,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - network
+- network
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/ping/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/ping/README.md
 display_name: Ping
 draft: false
 git_integration_title: ping
@@ -28,10 +28,13 @@ public_title: Intégration Datadog/Ping
 short_description: Surveillez la connectivité vers les hosts à distance.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check utilise la commande [ping][1] système pour tester l'accessibilité d'un host.
@@ -40,7 +43,7 @@ Il peut également mesurer la durée des aller-retour des messages envoyés par 
 La commande ping envoie des paquets de demande d'écho du protocole Internet Control Message Protocol (ICMP)
 au host cible. Elle attend ensuite une réponse d'écho ICMP.
 
-Ce check utilise la commande ping système au lieu de générer la demande d'écho du protocole ICMP. En effet, la création d'un paquet ICMP nécessitant un socket brut, ce qui requiert des privilèges root que l'Agent ne détient pas. La commande ping utilise le flag d'accès `setuid` pour s'exécuter avec des privilèges élevés afin d'éviter ce problème.
+Ce check utilise la commande ping système au lieu de générer la demande d'écho du protocole ICMP. En effet, la création d'un paquet ICMP nécessite un socket brut, ce qui requiert des privilèges root que l'Agent ne détient pas. La commande ping utilise le flag d'accès `setuid` pour s'exécuter avec une élévation des privilèges afin d'éviter ce problème.
 
 ## Configuration
 
@@ -70,7 +73,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `ping` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `ping` dans la section Checks.
 
 ## Données collectées
 

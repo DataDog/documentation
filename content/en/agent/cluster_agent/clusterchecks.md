@@ -3,6 +3,7 @@ title: Running Cluster Checks with Autodiscovery
 kind: documentation
 aliases:
     - /agent/autodiscovery/clusterchecks
+    - /agent/faq/kubernetes-state-cluster-check
 further_reading:
     - link: '/agent/kubernetes/cluster/'
       tag: 'Documentation'
@@ -125,8 +126,11 @@ Running [custom Agent checks][5] as cluster checks is supported, as long as all 
 
 ## Setting up check configurations
 
-### Configuration from static configuration files
+### Configuration from configuration files
+
 When the URL or IP of a given resource is constant (for example, an external service endpoint or a public URL), a static configuration can be passed to the Cluster Agent as YAML files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the **required** addition of the `cluster_check: true` line.
+
+In addition, starting Datadog Agent 1.18.0 you can use `advanced_ad_identifiers` and [Autodiscovery template variables][6] in you check configuration to target Kubernetes services ([see example][7]).
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -186,7 +190,7 @@ This creates a file in the `/conf.d/` directory of the Cluster Agent correspondi
 
 #### Example: MySQL check on an externally hosted database
 
-After you set up an externally hosted database, such as CloudSQL or RDS, and a corresponding [Datadog user][6] to access the database, mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
+After you set up an externally hosted database, such as CloudSQL or RDS, and a corresponding [Datadog user][8] to access the database, mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 cluster_check: true
@@ -200,7 +204,7 @@ instances:
 
 #### Example: HTTP_Check on an external URL
 
-If there is a URL you would like the to perform an [HTTP check][7] against once per cluster, mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
+If there is a URL you would like the to perform an [HTTP check][9] against once per cluster, mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 cluster_check: true
@@ -209,6 +213,51 @@ instances:
     - name: "<EXAMPLE_NAME>"
       url: "<EXAMPLE_URL>"
 ```
+
+#### Example: HTTP_Check on a Kubernetes service
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+If there is a Kubernetes service you would like the to perform an [HTTP check][1] against once per cluster, use the `clusterAgent.confd` field to define your check configuration:
+
+```yaml
+#(...)
+clusterAgent:
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      advanced_ad_identifiers:
+        - kube_service:
+            name: "<SERVICE_NAME>"
+            namespace: "<SERVICE_NAMESPACE>"
+      cluster_check: true
+      init_config:
+      instances:
+        - url: "http://%%host%%"
+          name: "<EXAMPLE_NAME>"
+```
+
+[1]: /integrations/http_check/
+{{% /tab %}}
+{{% tab "Daemonset" %}}
+If there is a Kubernetes service you would like the to perform an [HTTP check][1] against once per cluster, mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
+
+```yaml
+advanced_ad_identifiers:
+  - kube_service:
+      name: "<SERVICE_NAME>"
+      namespace: "<SERVICE_NAMESPACE>"
+cluster_check: true
+init_config:
+instances:
+  - url: "http://%%host%%"
+    name: "<EXAMPLE_NAME>"
+```
+
+[1]: /integrations/http_check/
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note:** The field `advanced_ad_identifiers` is supported starting Datadog Cluster Agent 1.18+.
 
 ### Configuration from Kubernetes service annotations
 
@@ -220,11 +269,11 @@ ad.datadoghq.com/service.init_configs: '[<INIT_CONFIG>]'
 ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][8] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
+The `%%host%%` [template variable][10] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
 #### Example: HTTP check on an NGINX-backed service
 
-The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][7] to measure the latency of the load balanced service:
+The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][9] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -255,7 +304,7 @@ spec:
         run: my-nginx
 ```
 
-In addition, each pod should be monitored with the [NGINX check][9], as it enables the monitoring of each worker as well as the aggregated service.
+In addition, each pod should be monitored with the [NGINX check][11], as it enables the monitoring of each worker as well as the aggregated service.
 
 ## Troubleshooting
 
@@ -392,7 +441,9 @@ The Agent `status` command should show the check instance running and reporting 
 [3]: /agent/cluster_agent/clusterchecksrunner?tab=helm
 [4]: /agent/cluster_agent/clusterchecksrunner?tab=operator
 [5]: /developers/custom_checks/write_agent_check/
-[6]: /integrations/mysql/
-[7]: /integrations/http_check/
-[8]: /agent/faq/template_variables/
-[9]: /integrations/nginx/
+[6]: /agent/guide/template_variables/
+[7]: /agent/cluster_agent/clusterchecks/#example-http_check-on-a-kubernetes-service
+[8]: /integrations/mysql/
+[9]: /integrations/http_check/
+[10]: /agent/faq/template_variables/
+[11]: /integrations/nginx/

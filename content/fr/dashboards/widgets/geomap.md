@@ -1,22 +1,17 @@
 ---
-title: Widget Geomap
-kind: documentation
 aliases:
-  - /fr/graphing/widgets/geomap/
+- /fr/graphing/widgets/geomap/
 further_reading:
-  - link: /dashboards/timeboards/
-    tag: Documentation
-    text: Timeboards
-  - link: /dashboards/screenboards/
-    tag: Documentation
-    text: Screenboards
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
-  - link: /notebooks/
-    tag: Documentation
-    text: Notebooks
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+- link: /notebooks/
+  tag: Documentation
+  text: Notebooks
+kind: documentation
+title: Widget Geomap
 ---
+
 Le widget Geomap représente dans un graphique n'importe quelle métrique avec un tag ou une facette de pays.
 
 {{< img src="dashboards/widgets/geomap/geomap.png" alt="Geomap" >}}

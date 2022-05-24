@@ -7,16 +7,16 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - orchestration
-  - aws
-  - azure
-  - cloud
-  - google cloud
-  - configuration & deployment
+- orchestration
+- aws
+- azure
+- cloud
+- google cloud
+- configuration & deployment
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md
 display_name: Pulumi
 draft: false
 git_integration_title: pulumi
@@ -32,13 +32,17 @@ metric_prefix: pulumi.
 metric_to_check: ''
 name: pulumi
 public_title: Pulumi
-short_description: Infrastructure en tant que code (IaC) reposant sur vos langages préférés pour n'importe quel cloud
+short_description: Infrastructure en tant que code (IaC) reposant sur vos langages
+  préférés pour n'importe quel cloud
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 [Pulumi][1] est une plateforme d'Infrastructure en tant que code (IaC) moderne qui permet aux équipes d'ingénierie cloud de définir, déployer et gérer dans leurs langages préférés des ressources cloud sur n'importe quel cloud.

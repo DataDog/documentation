@@ -1,27 +1,26 @@
 ---
-title: Tunnel de test Synthetic
-kind: documentation
-description: Exécutez des tests CI/CD en local et à distance avec le tunnel de test Synthetic de Datadog.
+description: Exécutez des tests CI/CD en local et à distance avec le tunnel de test
+  Synthetic de Datadog.
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
-    tag: Blog
-    text: Intégrer des tests Datadog Synthetic dans votre pipeline de CI/CD.
-  - link: https://learn.datadoghq.com/enrol/index.php?id=37
-    tag: Centre d'apprentissage
-    text: Découvrir comment exécuter des tests Synthetic dans des pipelines de CI/CD
-  - link: https://www.datadoghq.com/blog/internal-application-testing-with-datadog/
-    tag: Blog
-    text: Tester des applications internes avec le tunnel de test et les emplacements privés de Datadog
-  - link: /synthetics/browser_tests/
-    tag: Documentation
-    text: Configurer un test Browser
-  - link: /synthetics/api_tests/
-    tag: Documentation
-    text: Configurer un test API
+- link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
+  tag: Blog
+  text: Intégrer des tests Datadog Synthetic dans votre pipeline de CI/CD.
+- link: https://learn.datadoghq.com/enrol/index.php?id=37
+  tag: Centre d'apprentissage
+  text: Découvrir comment exécuter des tests Synthetic dans des pipelines de CI/CD
+- link: https://www.datadoghq.com/blog/internal-application-testing-with-datadog/
+  tag: Blog
+  text: Tester des applications internes avec le tunnel de test et les emplacements
+    privés de Datadog
+- link: /synthetics/browser_tests/
+  tag: Documentation
+  text: Configurer un test Browser
+- link: /synthetics/api_tests/
+  tag: Documentation
+  text: Configurer un test API
+kind: documentation
+title: Tunnel de test Synthetic
 ---
-<div class="alert alert-warning">
-Cette fonctionnalité est en version bêta publique.
-</div>
 
 Le tunnel de test Synthetic vous permet de créer des connexions sécurisées de courte durée entre vos environnements internes et l'infrastructure de Datadog afin de déclencher des tests Synthetic rapidement sur vos applications privées.
 

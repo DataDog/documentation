@@ -24,11 +24,21 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your C# logs to Datadog, log to a file and then tail that file with your Datadog Agent. This page details setup examples for the `Serilog`, `NLog`, and `log4net` logging libraries.
+To send your C# logs to Datadog, use one of the following approaches:
 
-Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
+- [Log to a file and then tail that file with your Datadog Agent][1].
+- [Enable Agentless logging][2].
+- [Use the Serilog sink][3].
 
-## Configure your logger
+This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Microsoft.Extensions.Logging` logging libraries, for each of the above approaches.
+
+## File-tail logging with the Datadog Agent
+
+The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
+
+Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][4].
+
+### Configure your logger
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
@@ -91,9 +101,9 @@ Then check the `log.json` file to see the following event:
 }
 ```
 
-[Monitor now your log file with your Agent][1] to send your logs to your Datadog application
+[Now monitor your log file with your Agent][1] to send your logs to your Datadog application
 
-[1]: /logs/#tail-existing-files
+[1]: /agent/logs/?tab=tailfiles
 {{% /tab %}}
 {{% tab "NLog" %}}
 
@@ -138,33 +148,29 @@ Once the library is in your classpath, attach the following layout to any target
 To fire and log your first events, add this to your code:
 
 ```csharp
-
 using NLog;
 
 namespace Datadog
 {
     class Program
     {
-
         // Initialize a logger
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
         {
-
             // Log a simple debug message
             logger.Debug("This is my first step");
 
             // your code continues here ...
-
         }
     }
 }
 ```
 
-[Monitor now your log file with your Agent][1] to send your logs to your Datadog application.
+[Now monitor your log file with your Agent][1] to send your logs to your Datadog application.
 
-[1]: /logs/#tail-existing-files
+[1]: /agent/logs/?tab=tailfiles
 {{% /tab %}}
 {{% tab "Log4Net" %}}
 Log4Net is a logging platform for .NET inspired from Log4j with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
@@ -176,7 +182,7 @@ PM> Install-Package log4net
 PM> Install-Package log4net.Ext.Json
 ```
 
-Once the library is in your classpath, attach the following layout to any target. Edit the `App.config` of your project and add the following section:
+Once the library is installed, attach the following layout to any target. Edit the `App.config` of your project and add the following section:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -260,14 +266,14 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect your service across logs and traces
+### Connect your service across logs and traces
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM .NET instructions][2]
+`env`, `service`, and `version` to your logs by [following the APM .NET instructions][5]
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
-## Configure your Datadog Agent
+### Configure your Datadog Agent
 
 Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -293,20 +299,141 @@ logs:
 
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
 
-## Agentless logging
+## Agentless logging with APM
 
-It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
-{{< tabs >}}
-{{% tab "Serilog" %}}
+It is possible to stream logs from your application to Datadog directly, without making any code changes, using the .NET APM automatic instrumentation library. This approach sends logs directly to Datadog, so it does not benefit from [features such as sensitive data scrubbing][6] which are provided by the Datadog Agent. For that reason, we recommend using file tail logging where possible, but it is useful in environments where this is not possible (when using [Azure App Service][7] for example). It is worth noting that you will still be able to rely on server-side scrubbing capabilities performed by [Sensitive Data Scanner][8].
 
-Install the Datadog [Serilog sink][1], which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
+Agentless logging (also known as "direct log submission") supports the following frameworks:
+- Serilog (v1.0+)
+- NLog (v2.1+)
+- log4net (v1.0+)
+- Microsoft.Extensions.Logging (2.0+)
+
+It does not require modifying your application code, or installing additional dependencies into your application.
+
+### Configure the APM library
+
+Agentless logging is only available when using APM with automatic instrumentation. To get started, instrument your application as described in the following documents:
+
+- [.NET Core/.NET 5+ applications][9]
+- [.NET Framework applications][10]
+
+After installing, verify you are receiving traces correctly.
+
+### Enable Agentless logging
+
+To enable Agentless logging, set the following environment variables:
+
+`DD_API_KEY`
+: Your [Datadog API Key][11] for sending your logs to Datadog.
+
+`DD_SITE`
+: The name of [your Datadog site][12]. Choose from one of the following examples:<br>
+**Example**: `datadoghq.com` (US1), `datadoghq.eu` (EU), `us3.datadoghq.com` (US3), `us5.datadoghq.com` (US5), `ddog-gov.com` (US1-FED) <br>
+**Default**: `datadoghq.com` (US1)
+
+`DD_LOGS_INJECTION`
+: Enables [connecting logs and traces][5]:<br>
+**Default**: `true` <br>
+Enabled by default when using Agentless logging from Tracer version 2.7.0.
+
+`DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS`
+: Enables Agentless logging. Enable for your logging framework by setting to `Serilog`, `NLog`, `Log4Net`, or `ILogger` (for `Microsoft.Extensions.Logging`). If you are using multiple logging frameworks, use a semicolon separated list of variables.<br>
+**Example**: `Serilog;Log4Net;NLog`
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> If you are using a logging framework in conjunction with <code>Microsoft.Extensions.Logging</code>, you will generally need to use the framework name. For example, if you are using <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>, you should set <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>.
+</div>
+
+Restart your application after setting these environment variables.
+
+### Additional configuration
+
+You can further customize some aspects of Agentless log collection using the following environment variables:
+
+`DD_LOGS_DIRECT_SUBMISSION_MINIMUM_LEVEL`
+: Allows filtering logs by level _before_ they're sent to Datadog. Set to one of the following values: `Verbose`, `Debug`, `Information`, `Warning`, `Error`, `Critical`. These correspond to the equivalent levels in the supported logging frameworks.<br>
+**Default**: `Information`
+
+`DD_LOGS_DIRECT_SUBMISSION_HOST`
+: Set the name of the host machine associated with logs. If not provided, the host name will attempt to be found automatically.<br>
+**Default**: Determined automatically
+
+`DD_LOGS_DIRECT_SUBMISSION_TAGS`
+: If specified, adds all of the specified tags to all generated spans. If not provided, will use `DD_TAGS` instead.<br>
+**Example**: `layer:api, team:intake` 
+Note that the delimiter is a comma and a whitespace: `, `.
+
+The following configuration values should generally not be modified, but may be set if required.
+
+{{< site-region region="us" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.us3.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.us5.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.datadoghq.eu:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
+{{< site-region region="us1-fed" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ddog-gov.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_SOURCE`
+: Sets the parsing rule for submitted logs. Should always be set to `csharp`, unless you have a [custom pipeline][13].<br>
+**Default**: `csharp`
+
+`DD_LOGS_DIRECT_SUBMISSION_MAX_BATCH_SIZE`
+: Sets the maximum number of logs to send at one time. Takes into account the [limits in place for the API][14].<br>
+**Default**: `1000`
+
+`DD_LOGS_DIRECT_SUBMISSION_MAX_QUEUE_SIZE`
+: Sets the maximum number of logs to hold in the internal queue at any one time before dropping log messages.<br>
+**Default**: `100000`
+
+`DD_LOGS_DIRECT_SUBMISSION_BATCH_PERIOD_SECONDS`
+: Sets the time to wait (in seconds) before checking for new logs to send.<br>
+**Default**: `1`
+
+## Agentless logging with Serilog sink
+
+If it is not possible to use file-tail logging or APM Agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][15] to send logs directly to Datadog.
+
+Install the Datadog [Serilog sink][15] into your application, which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
 Run the following command in the Package Manager Console:
 
 ```text
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][2].
+Then, initialize the logger directly in your application. Ensure that you [add your `<API_KEY>`][11].
 
 {{< site-region region="us" >}}
 
@@ -334,6 +461,19 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
+{{< site-region region="us5" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us5.datadoghq.com" })
+    .CreateLogger())
+{
+    // Some code
+}
+```
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 ```csharp
@@ -347,7 +487,21 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. [Optionally, specify the `source`, `service`, `host`, and custom tags.][3]
+{{< site-region region="us1-fed" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ddog-gov.com" })
+    .CreateLogger())
+{
+    // Some code
+}
+```
+
+{{< /site-region >}}
+
+
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][16]
 
 {{< site-region region="us" >}}
 
@@ -423,15 +577,23 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 }
 ```
 
-[1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/parsing
-[2]: /tracing/connect_logs_and_traces/dotnet/
+[1]: #file-tail-logging-with-the-datadog-agent
+[2]: #agentless-logging-with-apm
+[3]: #agentless-logging-with-serilog-sink
+[4]: /logs/log_configuration/parsing
+[5]: /tracing/connect_logs_and_traces/dotnet/
+[6]: /agent/logs/advanced_log_collection
+[7]: /serverless/azure_app_services
+[8]: /account_management/org_settings/sensitive_data_detection/#overview
+[9]: /tracing/setup_overview/setup/dotnet-core
+[10]: /tracing/setup_overview/setup/dotnet-framework
+[11]: https://app.datadoghq.com/organization-settings/api-keys
+[12]: /getting_started/site/
+[13]: /logs/log_configuration/pipelines/?tab=source
+[14]: /api/latest/logs/#send-logs
+[15]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[16]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes

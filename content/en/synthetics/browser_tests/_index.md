@@ -184,7 +184,7 @@ You can restrict access to a browser test based on the roles in your organizatio
 [9]: /integrations/#cat-notification
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[12]: /synthetics/browser_tests/actions/
+[12]: /synthetics/guide/explore-rum-through-synthetics/
 [13]: /synthetics/browser_tests/actions/#assertion
 [14]: /account_management/rbac/
 [15]: /account_management/rbac#custom-roles
