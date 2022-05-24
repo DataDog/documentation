@@ -707,6 +707,11 @@
   "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
+      "suffix": "_1402674167",
+      "description": "Create an API GRPC test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1487281163",
       "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
     },
