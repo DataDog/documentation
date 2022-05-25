@@ -28,11 +28,12 @@ The following profiling features are available:
 | Wall time profiling  | Always enabled                     |
 | CPU time profiling   | DD_PROFILING_CPU_ENABLED           |
 | Exception profiling  | DD_PROFILING_EXCEPTION_ENABLED     |
-<br>
 
+<br>
 ## Requirements
 
 **Supported operating systems:**
+<br>
 .NET Framework
 - Windows 10
 - Windows Server starting from version 2012
@@ -74,7 +75,7 @@ To install the .NET Profiler machine-wide:
 
 1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
 
-2. Run one of the following commands to install the package and create the .NET tracer log directory `/var/log/datadog/dotnet` with the appropriate permissions:
+2. Run one of the following commands to install the package and create the .NET log directory `/var/log/datadog/dotnet` with the appropriate permissions:
 
    Debian or Ubuntu
    : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
@@ -101,7 +102,7 @@ Install or upgrade to the latest version, using the [.NET Monitoring MSI install
 
 {{< /tabs >}}
 
-
+<br>
 <div class="alert alert-warning">
   <strong>Note:</strong> The following steps include setting environment variables to enable the profiler. Datadog <strong>does not recommend</strong> setting those environment variables at machine-level. If set at machine-level, every .NET application running on the machine is profiled and this incurs a significant overhead on the CPU and memory of your machine.
 </div>
@@ -109,7 +110,17 @@ Install or upgrade to the latest version, using the [.NET Monitoring MSI install
 {{< tabs >}}
 
 {{% tab "Linux" %}}
-TODO
+1. Set the following required environment variables for automatic instrumentation to attach to your application:
+
+   ```
+   CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+   DD_DOTNET_TRACER_HOME=/opt/datadog
+   LD_PRELOAD=/opt/datadog/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
+   ```
+
+2. For standalone applications, manually restart the application as you normally would.
 {{< /tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
