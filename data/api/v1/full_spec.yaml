@@ -4498,7 +4498,7 @@ components:
         categories:
           description: 'Array of filters to match or not a log and their
 
-            corresponding `name`to assign a custom value to the log.'
+            corresponding `name` to assign a custom value to the log.'
           example: []
           items:
             $ref: '#/components/schemas/LogsCategoryProcessorCategory'
@@ -5284,7 +5284,7 @@ components:
       x-enum-varnames:
       - SERVICE_REMAPPER
     LogsSort:
-      description: Time-ascending `asc` or time-descending `desc`results.
+      description: Time-ascending `asc` or time-descending `desc` results.
       enum:
       - asc
       - desc
