@@ -47,6 +47,12 @@ If multiple indexes is activated, use the "New Index" button to create a new ind
 
 **Note**: Index names must start with a letter and can only contain lowercase letters, numbers, or the '-' character.
 
+### Delete indexes
+
+To delete an index from your organization, use the "Delete icon" in the index action tray.
+
+**Note:** The deleted index will no longer accept new incoming logs. Your log data will not be dropped immediately, instead it will age out by retention period. After the retention period is reached, the index will no longer show up in Index page.
+
 ## Indexes filters
 
 Index filters allow dynamic control over which logs flow into which indexes.  For example, if you create a first index filtered on the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your `status:notice` logs would go to the first index, all your `status:error` logs to the second index, and the rest would go to the final one.
