@@ -89,7 +89,7 @@ DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup. Below are possible causes for missing explain plans.
 
 #### Missing explain plan procedure {#explain-plan-procedure-missing}
-The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.  
+The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.
 
 Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
 
@@ -106,7 +106,7 @@ END $$
 DELIMITER ;
 ```
 #### Missing full qualified explain plan procedure {#explain-plan-fq-procedure-missing}
-The Agent requires the procedure `explain_statement(...)` to exist in **all schemas** the Agent can collect samples from. 
+The Agent requires the procedure `explain_statement(...)` to exist in **all schemas** the Agent can collect samples from.
 
 Create this procedure **in every schema** from which you want to collect explain plans. Replace `<YOUR_SCHEMA>` with your database schema:
 
@@ -126,7 +126,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 
 #### Agent is running an unsupported version
 
-Ensure that the Agent is running version 7.32.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
+Ensure that the Agent is running version 7.36.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
 
 #### Queries are truncated
 
