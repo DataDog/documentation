@@ -21,15 +21,29 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 </div>
 
 <br>
+The following profiling features are available:
+
+|      Feature         | since version                      |
+|----------------------|------------------------------------|
+| Wall time profiling  | Alpha                              |
+| CPU time profiling   | Beta                               |
+| Exception profiling  | Beta                               |
+<br>
 
 ## Requirements
 
 **Supported operating systems:**
+.NET Framework
+- Windows 10
+- Windows Server starting from version 2012
 
+.NET Core and .NET 5+
+- Linux
 - Windows 10
 - Windows Server starting from version 2012
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+
 
 **Supported .NET runtimes:**
 
@@ -51,15 +65,50 @@ Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
-2. The profiler ships together with the tracer. Install or upgrade to the latest version, using the [.NET Monitoring MSI installer][3]. Continuous Profiler supports 64-bit Windows, so you need the file like `datadog-dotnet-apm-<VERSION>-x64.msi`.
+2. The profiler ships together with the tracer.
+
+{{< tabs >}}
+
+{{% tab "Linux" %}}
+To install the .NET Profiler machine-wide:
+
+1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
+
+2. Run one of the following commands to install the package and create the .NET tracer log directory `/var/log/datadog/dotnet` with the appropriate permissions:
+
+   Debian or Ubuntu
+   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
+
+   CentOS or Fedora
+   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
+
+   Alpine or other musl-based distributions
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
+
+   Other distributions
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
+
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases{{% /tab %}}
+
+{{% tab "Windows" %}}
+Install or upgrade to the latest version, using the [.NET Monitoring MSI installer][1]. Continuous Profiler supports 64-bit Windows, so you need the file like `datadog-dotnet-apm-<VERSION>-x64.msi`.
 
    Run the installer with administrator privileges.
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases{{% /tab %}}
+
+{{< /tabs >}}
+
 
 <div class="alert alert-warning">
   <strong>Note:</strong> The following steps include setting environment variables to enable the profiler. Datadog <strong>does not recommend</strong> setting those environment variables at machine-level. If set at machine-level, every .NET application running on the machine is profiled and this incurs a significant overhead on the CPU and memory of your machine.
 </div>
 
 {{< tabs >}}
+
+{{% tab "Linux" %}}
+TODO
+{{< /tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
 1. Set needed environment variables to configure and enable Profiler. To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables in the Registry under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes.
@@ -169,7 +218,7 @@ Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 
-{{% tab "Standalone applications" %}}
+{{% tab "Windows Standalone applications" %}}
 1. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables. The recommended approach is to create a batch file that sets these and starts the application, and run your application using the batch file.
 
    For .NET Core and .NET 5+:
