@@ -23,11 +23,11 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 <br>
 The following profiling features are available:
 
-|      Feature         | since version                      |
+|      Feature         | Environment variable to set to 1   |
 |----------------------|------------------------------------|
-| Wall time profiling  | Alpha                              |
-| CPU time profiling   | Beta                               |
-| Exception profiling  | Beta                               |
+| Wall time profiling  | Always enabled                     |
+| CPU time profiling   | DD_PROFILING_CPU_ENABLED           |
+| Exception profiling  | DD_PROFILING_EXCEPTION_ENABLED     |
 <br>
 
 ## Requirements
