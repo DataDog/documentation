@@ -5886,7 +5886,7 @@ api:
         - GetUsageLambdaTracedInvocations
       unstable: []
       order: 38
-  - name: Get Cost Across Multi-Org Account
+  - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
     identifier: get-cost-across-multi-org-account
     parent: usage-metering
@@ -6078,7 +6078,7 @@ api:
         - GetUsageNetworkFlows
       unstable: []
       order: 15
-  - name: Get Monthly Usage Attribution
+  - name: Get monthly usage attribution
     url: '#get-monthly-usage-attribution'
     identifier: get-monthly-usage-attribution
     parent: usage-metering
@@ -6175,7 +6175,7 @@ api:
         - GetIncidentManagement
       unstable: []
       order: 27
-  - name: Get Hourly Usage Attribution
+  - name: Get hourly usage attribution
     url: '#get-hourly-usage-attribution'
     identifier: get-hourly-usage-attribution
     parent: usage-metering
@@ -6296,7 +6296,7 @@ api:
         - GetUsageAuditLogs
       unstable: []
       order: 33
-  - name: Get Usage Attribution
+  - name: Get usage attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution
     parent: usage-metering

@@ -4498,7 +4498,7 @@ components:
         categories:
           description: 'Array of filters to match or not a log and their
 
-            corresponding `name`to assign a custom value to the log.'
+            corresponding `name` to assign a custom value to the log.'
           example: []
           items:
             $ref: '#/components/schemas/LogsCategoryProcessorCategory'
@@ -5284,7 +5284,7 @@ components:
       x-enum-varnames:
       - SERVICE_REMAPPER
     LogsSort:
-      description: Time-ascending `asc` or time-descending `desc`results.
+      description: Time-ascending `asc` or time-descending `desc` results.
       enum:
       - asc
       - desc
@@ -6846,7 +6846,7 @@ components:
         metadata:
           $ref: '#/components/schemas/MonthlyUsageAttributionMetadata'
         usage:
-          description: Get Usage Summary by tag(s).
+          description: Get usage summary by tag(s).
           items:
             $ref: '#/components/schemas/MonthlyUsageAttributionBody'
           type: array
@@ -11020,6 +11020,8 @@ components:
       - packetsReceived
       - networkHop
       - receivedMessage
+      - grpcHealthcheckStatus
+      - connection
       example: statusCode
       type: string
       x-enum-varnames:
@@ -11038,6 +11040,8 @@ components:
       - PACKETS_RECEIVED
       - NETWORK_HOP
       - RECEIVED_MESSAGE
+      - GRPC_HEALTHCHECK_STATUS
+      - CONNECTION
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       oneOf:
@@ -12541,7 +12545,7 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`, `icmp`, `udp`, `websocket` or `multi`.'
+        `dns`, `icmp`, `udp`, `websocket`, `grpc` or `multi`.'
       enum:
       - http
       - ssl
@@ -12551,6 +12555,7 @@ components:
       - icmp
       - udp
       - websocket
+      - grpc
       example: http
       type: string
       x-enum-varnames:
@@ -12562,6 +12567,7 @@ components:
       - ICMP
       - UDP
       - WEBSOCKET
+      - GRPC
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -12587,6 +12593,12 @@ components:
         description: A single Header.
         type: string
       description: Headers to include when performing the test.
+      type: object
+    SyntheticsTestMetadata:
+      additionalProperties:
+        description: A single Metadatum.
+        type: string
+      description: Metadata to include when performing the gRPC test.
       type: object
     SyntheticsTestMonitorStatus:
       description: 'The status of your Synthetic monitor.
@@ -12765,6 +12777,8 @@ components:
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
+        metadata:
+          $ref: '#/components/schemas/SyntheticsTestMetadata'
         method:
           $ref: '#/components/schemas/HTTPMethod'
         noSavingResponseBody:
@@ -12792,6 +12806,9 @@ components:
             allowing the server to present one of multiple possible certificates on
 
             the same IP address and TCP port number.'
+          type: string
+        service:
+          description: gRPC service on which you want to perform the healthcheck.
           type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
@@ -13623,7 +13640,7 @@ components:
         metadata:
           $ref: '#/components/schemas/UsageAttributionMetadata'
         usage:
-          description: Get Usage Summary by tag(s).
+          description: Get usage summary by tag(s).
           items:
             $ref: '#/components/schemas/UsageAttributionBody'
           type: array
@@ -22881,19 +22898,19 @@ paths:
         Example: `"check".over(tags).last(count).by(group).count_by_status()`
 
 
-        - **`check`** name of the check, for example `datadog.agent.up`
+        - `check` name of the check, for example `datadog.agent.up`
 
-        - **`tags`** one or more quoted tags (comma-separated), or "*". for example:
-        `.over("env:prod", "role:db")`; **`over`** cannot be blank.
+        - `tags` one or more quoted tags (comma-separated), or "*". for example: `.over("env:prod",
+        "role:db")`; `over` cannot be blank.
 
-        - **`count`** must be at greater than or equal to your max threshold (defined
+        - `count` must be at greater than or equal to your max threshold (defined
         in the `options`). It is limited to 100.
 
         For example, if you''ve specified to notify on 1 critical, 3 ok, and 2 warn
         statuses, `count` should be at least 3.
 
-        - **`group`** must be specified for check monitors. Per-check grouping is
-        already explicitly known for some service checks.
+        - `group` must be specified for check monitors. Per-check grouping is already
+        explicitly known for some service checks.
 
         For example, Postgres integration monitors are tagged by `db`, `host`, and
         `port`, and Network monitors by `host`, `instance`, and `url`. See [Service
@@ -22908,28 +22925,28 @@ paths:
         "string query"'').rollup("count").last("1h")"`
 
 
-        - **`event`**, the event query string:
+        - `event`, the event query string:
 
-        - **`string_query`** free text query to match against event title and text.
+        - `string_query` free text query to match against event title and text.
 
-        - **`sources`** event sources (comma-separated).
+        - `sources` event sources (comma-separated).
 
-        - **`status`** event statuses (comma-separated). Valid options: error, warn,
-        and info.
+        - `status` event statuses (comma-separated). Valid options: error, warn, and
+        info.
 
-        - **`priority`** event priorities (comma-separated). Valid options: low, normal,
+        - `priority` event priorities (comma-separated). Valid options: low, normal,
         all.
 
-        - **`host`** event reporting host (comma-separated).
+        - `host` event reporting host (comma-separated).
 
-        - **`tags`** event tags (comma-separated).
+        - `tags` event tags (comma-separated).
 
-        - **`excluded_tags`** excluded event tags (comma-separated).
+        - `excluded_tags` excluded event tags (comma-separated).
 
-        - **`rollup`** the stats roll-up method. `count` is the only supported method
+        - `rollup` the stats roll-up method. `count` is the only supported method
         now.
 
-        - **`last`** the timeframe to roll up the counts. Examples: 45m, 4h. Supported
+        - `last` the timeframe to roll up the counts. Examples: 45m, 4h. Supported
         timeframes: m, h and d. This value should not exceed 48 hours.
 
 
@@ -22944,19 +22961,18 @@ paths:
         operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
-        `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.
+        - `#` an integer or decimal number used to set the threshold.
 
 
         **Process Alert Query**
@@ -22966,19 +22982,19 @@ paths:
         #`
 
 
-        - **`search`** free text search string for querying processes.
+        - `search` free text search string for querying processes.
 
         Matching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows)
         page.
 
-        - **`tags`** one or more tags (comma-separated)
+        - `tags` one or more tags (comma-separated)
 
-        - **`timeframe`** the timeframe to roll up the counts. Examples: 10m, 4h.
-        Supported timeframes: s, m, h and d
+        - `timeframe` the timeframe to roll up the counts. Examples: 10m, 4h. Supported
+        timeframes: s, m, h and d
 
-        - **`operator`** <, <=, >, >=, ==, or !=
+        - `operator` <, <=, >, >=, ==, or !=
 
-        - **`#`** an integer or decimal number used to set the threshold
+        - `#` an integer or decimal number used to set the threshold
 
 
         **Logs Alert Query**
@@ -22988,22 +23004,21 @@ paths:
         operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`index_name`** For multi-index organizations, the log index in which the
-        request is performed.
+        - `index_name` For multi-index organizations, the log index in which the request
+        is performed.
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
-        `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.
+        - `#` an integer or decimal number used to set the threshold.
 
 
         **Composite Query**
@@ -23013,16 +23028,16 @@ paths:
         monitors
 
 
-        * **`name`** [*required*, *default* = **dynamic, based on query**]: The name
-        of the alert.
+        * `name` [*required*, *default* = **dynamic, based on query**]: The name of
+        the alert.
 
-        * **`message`** [*required*, *default* = **dynamic, based on query**]: A message
+        * `message` [*required*, *default* = **dynamic, based on query**]: A message
         to include with notifications for this monitor.
 
         Email notifications can be sent to specific users by using the same ''@username''
         notation as events.
 
-        * **`tags`** [*optional*, *default* = **empty list**]: A list of tags to associate
+        * `tags` [*optional*, *default* = **empty list**]: A list of tags to associate
         with your monitor.
 
         When getting all monitor details via the API, use the `monitor_tags` argument
@@ -23038,13 +23053,13 @@ paths:
         Example: `error_budget("slo_id").over("time_window") operator #`
 
 
-        - **`slo_id`**: The alphanumeric SLO ID of the SLO you are configuring the
-        alert for.
+        - `slo_id`: The alphanumeric SLO ID of the SLO you are configuring the alert
+        for.
 
-        - **`time_window`**: The time window of the SLO target you wish to alert on.
-        Valid options: `7d`, `30d`, `90d`.
+        - `time_window`: The time window of the SLO target you wish to alert on. Valid
+        options: `7d`, `30d`, `90d`.
 
-        - **`operator`**: `>=` or `>`
+        - `operator`: `>=` or `>`
 
 
         **Audit Alert Query**
@@ -23054,19 +23069,18 @@ paths:
         operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
-        `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.
+        - `#` an integer or decimal number used to set the threshold.
 
 
         **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
@@ -23080,19 +23094,19 @@ paths:
         operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
-        and `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.
+        - `#` an integer or decimal number used to set the threshold.
 
 
         **NOTE** CI Pipeline monitors are in alpha on US1, EU, US3 and US5.
@@ -23105,19 +23119,19 @@ paths:
         operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
-        and `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.
+        - `#` an integer or decimal number used to set the threshold.
 
 
         **NOTE** CI Test monitors are available only in closed beta on US1, EU, US3
@@ -23134,19 +23148,19 @@ paths:
         measure]).last(time_window) operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
-        and `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.'
+        - `#` an integer or decimal number used to set the threshold.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -27734,7 +27748,7 @@ paths:
   /api/v1/usage/attribution:
     get:
       deprecated: true
-      description: Get Usage Attribution.
+      description: Get usage attribution.
       operationId: GetUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -27817,7 +27831,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get Usage Attribution
+      summary: Get usage attribution
       tags:
       - Usage Metering
       x-menu-order: 29
@@ -28343,7 +28357,7 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: "Get Hourly Usage Attribution.\n\nThis API endpoint is paginated.
+      description: "Get hourly usage attribution.\n\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
@@ -28418,7 +28432,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get Hourly Usage Attribution
+      summary: Get hourly usage attribution
       tags:
       - Usage Metering
       x-menu-order: 30
@@ -28843,7 +28857,7 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: "Get Monthly Usage Attribution.\n\nThis API endpoint is paginated.
+      description: "Get monthly usage attribution.\n\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
@@ -28931,7 +28945,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get Monthly Usage Attribution
+      summary: Get monthly usage attribution
       tags:
       - Usage Metering
       x-given:

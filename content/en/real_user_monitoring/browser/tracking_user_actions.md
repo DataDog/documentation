@@ -29,14 +29,15 @@ The automatic collection of user actions provides insights into user behavior, w
 
 You can extend the collection of user interactions by [sending your own custom actions](#custom-actions).
 
-**Note**: The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with. You can control which information is sent to Datadog by [manually setting an action name](#declaring-a-name-for-click-actions), or by [implementing global scrubbing rules in the RUM Browser SDK][1].
+The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with. You can control which information is sent to Datadog by [manually setting an action name](#declaring-a-name-for-click-actions), or by [implementing global scrubbing rules in the RUM Browser SDK][1].
 
 ## What interactions are being tracked?
 
 The RUM Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
+
 * Activity following the click is detected. See [How page activity is calculated][2] for details.
-* The click does not lead to a new page being loaded, in which case the RUM Browser SDK generates a new RUM View event.
-* A name can be computed for the action. ([Learn more about action naming](#declaring-a-name-for-click-actions))
+* The click does not lead to a new page being loaded, in which case, the RUM Browser SDK generates another RUM View event.
+* A name can be computed for the action. See [Declaring a name for click actions](#declaring-a-name-for-click-actions) for details.
 
 ## Action timing metrics
 
@@ -64,7 +65,7 @@ The RUM Browser SDK watches the page activity following every click. The action 
 
 ## Declaring a name for click actions
 
-The RUM library uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that will be used to name the action. For example:
+The RUM library uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that is used to name the action. For example:
 
 ```html
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Try it out!</a>
