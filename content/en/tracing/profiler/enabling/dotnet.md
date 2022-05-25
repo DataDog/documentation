@@ -89,13 +89,15 @@ To install the .NET Profiler machine-wide:
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases{{% /tab %}}
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+{{% /tab %}}
 
 {{% tab "Windows" %}}
 Install or upgrade to the latest version, using the [.NET Monitoring MSI installer][1]. Continuous Profiler supports 64-bit Windows, so you need the file like `datadog-dotnet-apm-<VERSION>-x64.msi`.
 
    Run the installer with administrator privileges.
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases{{% /tab %}}
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+{{% /tab %}}
 
 {{< /tabs >}}
 
