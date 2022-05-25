@@ -603,8 +603,8 @@
     "summary": "Get hourly usage for Application Security"
   },
   "GetCostByOrg": {
-    "description": "Get cost across multi-org account. Cost by org data for a given month becomes available no later than the 16th of the following month.",
-    "summary": "Get cost across multi-org account"
+    "description": "Get Cost Across Multi-Org Account.",
+    "summary": "Get Cost Across Multi-Org Account"
   },
   "GetUsageLambdaTracedInvocations": {
     "description": "Get hourly usage for Lambda Traced Invocations.",

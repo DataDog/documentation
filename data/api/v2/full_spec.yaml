@@ -871,6 +871,11 @@ components:
           description: ID of the AuthN Mapping.
           example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
           type: string
+        included:
+          description: Included data in the AuthN Mapping response.
+          items:
+            $ref: '#/components/schemas/AuthNMappingIncluded'
+          type: array
         relationships:
           $ref: '#/components/schemas/AuthNMappingRelationships'
         type:
@@ -904,8 +909,10 @@ components:
           type: string
         saml_assertion_attribute_id:
           description: The ID of the SAML assertion attribute.
-          example: '0'
-          type: string
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
       type: object
     AuthNMappingCreateAttributes:
       description: Key/Value pair of attributes used for create request.
@@ -967,11 +974,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/AuthNMapping'
-        included:
-          description: Included data in the AuthN Mapping response.
-          items:
-            $ref: '#/components/schemas/AuthNMappingIncluded'
-          type: array
       type: object
     AuthNMappingUpdateAttributes:
       description: Key/Value pair of attributes used for update request.
@@ -1025,11 +1027,6 @@ components:
           description: Array of returned AuthN Mappings.
           items:
             $ref: '#/components/schemas/AuthNMapping'
-          type: array
-        included:
-          description: Included data in the AuthN Mapping response.
-          items:
-            $ref: '#/components/schemas/AuthNMappingIncluded'
           type: array
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
@@ -5506,8 +5503,10 @@ components:
       properties:
         id:
           description: The ID of the SAML assertion attribute.
-          example: '0'
-          type: string
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
         type:
           $ref: '#/components/schemas/SAMLAssertionAttributesType'
       required:
@@ -5979,8 +5978,10 @@ components:
           $ref: '#/components/schemas/SAMLAssertionAttributeAttributes'
         id:
           description: The ID of the SAML assertion attribute.
-          example: '0'
-          type: string
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
         type:
           $ref: '#/components/schemas/SAMLAssertionAttributesType'
       required:
@@ -13214,8 +13215,7 @@ paths:
         type: safe
   /api/v2/usage/cost_by_org:
     get:
-      description: Get cost across multi-org account. Cost by org data for a given
-        month becomes available no later than the 16th of the following month.
+      description: Get Cost Across Multi-Org Account.
       operationId: GetCostByOrg
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -13264,7 +13264,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get cost across multi-org account
+      summary: Get Cost Across Multi-Org Account
       tags:
       - Usage Metering
       x-menu-order: 39

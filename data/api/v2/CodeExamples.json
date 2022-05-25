@@ -733,7 +733,7 @@
     {
       "group": "usage_metering",
       "suffix": "",
-      "description": "Get cost across multi-org account returns \"OK\" response"
+      "description": "Get Cost Across Multi-Org Account returns \"OK\" response"
     }
   ],
   "GetUsageApplicationSecurityMonitoring": [

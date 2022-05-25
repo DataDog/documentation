@@ -409,6 +409,18 @@
       "description": "Query timeseries points returns \"OK\" response"
     }
   ],
+  "SubmitDistributionPoints": [
+    {
+      "group": "metrics",
+      "suffix": "_3109558960",
+      "description": "Submit deflate distribution points returns \"Payload accepted\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Submit distribution points returns \"Payload accepted\" response"
+    }
+  ],
   "SubmitMetrics": [
     {
       "group": "metrics",
@@ -561,27 +573,6 @@
       "description": "Update a notebook returns \"OK\" response"
     }
   ],
-  "AddSecurityMonitoringSignalToIncident": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Add a security signal to an incident returns \"OK\" response"
-    }
-  ],
-  "EditSecurityMonitoringSignalState": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Change the triage state of a security signal returns \"OK\" response"
-    }
-  ],
-  "EditSecurityMonitoringSignalAssignee": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Modify the triage assignee of a security signal returns \"OK\" response"
-    }
-  ],
   "SubmitServiceCheck": [
     {
       "group": "service_checks",
@@ -707,11 +698,6 @@
   "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
-      "suffix": "_1402674167",
-      "description": "Create an API GRPC test returns \"OK - Returns the created test details.\" response"
-    },
-    {
-      "group": "synthetics",
       "suffix": "_1487281163",
       "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
     },
@@ -757,6 +743,27 @@
       "description": "Trigger Synthetics tests returns \"OK\" response"
     }
   ],
+  "GetHourlyUsageAttribution": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get Hourly Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetMonthlyUsageAttribution": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get Monthly Usage Attribution returns \"OK\" response"
+    }
+  ],
+  "GetUsageAttribution": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get Usage Attribution returns \"OK\" response"
+    }
+  ],
   "GetUsageTopAvgMetrics": [
     {
       "group": "usage_metering",
@@ -769,13 +776,6 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get hourly logs usage by retention returns \"OK\" response"
-    }
-  ],
-  "GetHourlyUsageAttribution": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get hourly usage attribution returns \"OK\" response"
     }
   ],
   "GetUsageCIApp": [
@@ -965,13 +965,6 @@
       "description": "Get hourly usage for profiled hosts returns \"OK\" response"
     }
   ],
-  "GetMonthlyUsageAttribution": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get monthly usage attribution returns \"OK\" response"
-    }
-  ],
   "GetSpecifiedDailyCustomReports": [
     {
       "group": "usage_metering",
@@ -998,13 +991,6 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get the list of available monthly custom reports returns \"OK\" response"
-    }
-  ],
-  "GetUsageAttribution": [
-    {
-      "group": "usage_metering",
-      "suffix": "",
-      "description": "Get usage attribution returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [

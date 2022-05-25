@@ -4,13 +4,6 @@ components:
   headers: {}
   links: {}
   parameters:
-    SignalID:
-      description: The ID of the signal.
-      in: path
-      name: signal_id
-      required: true
-      schema:
-        type: string
     SlackAccountNamePathParameter:
       description: Your Slack account name.
       in: path
@@ -367,23 +360,6 @@ components:
       - ADMIN
       - READ_ONLY
       - ERROR
-    AddSignalToIncidentRequest:
-      description: Attributes describing which incident to add the signal to.
-      properties:
-        add_to_signal_timeline:
-          description: Whether to post the signal on the incident timeline.
-          type: boolean
-        incident_id:
-          description: Public ID attribute of the incident to which the signal will
-            be added.
-          example: 2066
-          format: int64
-          type: integer
-        version:
-          $ref: '#/components/schemas/Version'
-      required:
-      - incident_id
-      type: object
     AgentCheck:
       description: Array of strings.
       example:
@@ -1363,6 +1339,96 @@ components:
           type: integer
       readOnly: true
       type: object
+    DistributionPoint:
+      description: Array of distribution points.
+      example:
+      - 1575317847.0
+      - - 0.5
+        - 1.0
+      items:
+        description: List of distribution point.
+        oneOf:
+        - $ref: '#/components/schemas/DistributionPointTimestamp'
+        - $ref: '#/components/schemas/DistributionPointData'
+      maxItems: 2
+      minItems: 2
+      type: array
+    DistributionPointData:
+      description: Distribution point data.
+      items:
+        description: List of distribution point data.
+        format: double
+        type: number
+      type: array
+    DistributionPointTimestamp:
+      description: Distribution point timestamp. It should be in seconds and current.
+      format: double
+      type: number
+    DistributionPointsContentEncoding:
+      description: HTTP header used to compress the media-type.
+      enum:
+      - deflate
+      type: string
+      x-enum-varnames:
+      - DEFLATE
+    DistributionPointsPayload:
+      description: The distribution points payload.
+      properties:
+        series:
+          description: A list of distribution points series to submit to Datadog.
+          example:
+          - metric: system.load.1
+            points:
+            - - 1475317847.0
+              - - 1.0
+                - 2.0
+          items:
+            $ref: '#/components/schemas/DistributionPointsSeries'
+          type: array
+      required:
+      - series
+      type: object
+    DistributionPointsSeries:
+      description: A distribution points metric to submit to Datadog.
+      properties:
+        host:
+          description: The name of the host that produced the distribution point metric.
+          example: test.example.com
+          type: string
+        metric:
+          description: The name of the distribution points metric.
+          example: system.load.1
+          type: string
+        points:
+          description: Points relating to the distribution point metric. All points
+            must be tuples with timestamp and a list of values (cannot be a string).
+            Timestamps should be in POSIX time in seconds.
+          items:
+            $ref: '#/components/schemas/DistributionPoint'
+          type: array
+        tags:
+          description: A list of tags associated with  the distribution point metric.
+          example:
+          - environment:test
+          items:
+            description: Individual tags.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/DistributionPointsType'
+      required:
+      - metric
+      - points
+      type: object
+    DistributionPointsType:
+      default: distribution
+      description: The type of the distribution point.
+      enum:
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - DISTRIBUTION
     DistributionWidgetDefinition:
       description: "The Distribution visualization is another way of showing metrics\naggregated
         across one or several tags, such as hosts.\nUnlike the heat map, a distribution
@@ -4498,7 +4564,7 @@ components:
         categories:
           description: 'Array of filters to match or not a log and their
 
-            corresponding `name` to assign a custom value to the log.'
+            corresponding `name`to assign a custom value to the log.'
           example: []
           items:
             $ref: '#/components/schemas/LogsCategoryProcessorCategory'
@@ -5284,7 +5350,7 @@ components:
       x-enum-varnames:
       - SERVICE_REMAPPER
     LogsSort:
-      description: Time-ascending `asc` or time-descending `desc` results.
+      description: Time-ascending `asc` or time-descending `desc`results.
       enum:
       - asc
       - desc
@@ -6846,7 +6912,7 @@ components:
         metadata:
           $ref: '#/components/schemas/MonthlyUsageAttributionMetadata'
         usage:
-          description: Get usage summary by tag(s).
+          description: Get Usage Summary by tag(s).
           items:
             $ref: '#/components/schemas/MonthlyUsageAttributionBody'
           type: array
@@ -10259,59 +10325,6 @@ components:
         live_span:
           $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
       type: object
-    SignalArchiveReason:
-      description: Reason why a signal has been archived.
-      enum:
-      - none
-      - false_positive
-      - testing_or_maintenance
-      - other
-      type: string
-      x-enum-varnames:
-      - NONE
-      - FALSE_POSITIVE
-      - TESTING_OR_MAINTENANCE
-      - OTHER
-    SignalAssigneeUpdateRequest:
-      description: Attributes describing an assignee update operation over a security
-        signal.
-      properties:
-        assignee:
-          description: The UUID of the user being assigned. Use empty string to return
-            signal to unassigned.
-          example: 773b045d-ccf8-4808-bd3b-955ef6a8c940
-          type: string
-        version:
-          $ref: '#/components/schemas/Version'
-      required:
-      - assignee
-      type: object
-    SignalStateUpdateRequest:
-      description: Attributes describing the change of state for a given state.
-      properties:
-        archiveComment:
-          description: Optional comment to explain why a signal is being archived.
-          type: string
-        archiveReason:
-          $ref: '#/components/schemas/SignalArchiveReason'
-        state:
-          $ref: '#/components/schemas/SignalTriageState'
-        version:
-          $ref: '#/components/schemas/Version'
-      required:
-      - state
-      type: object
-    SignalTriageState:
-      description: The new triage state of the signal.
-      enum:
-      - open
-      - archived
-      - under_review
-      type: string
-      x-enum-varnames:
-      - OPEN
-      - ARCHIVED
-      - UNDER_REVIEW
     SingleServiceDependencies:
       description: An object with information on APM services that call, and are called
         by a given service.
@@ -10457,13 +10470,6 @@ components:
       required:
       - account
       - url
-      type: object
-    SuccessfulSignalUpdateResponse:
-      description: Updated signal data following a successfully performed update.
-      properties:
-        status:
-          description: Status of the response.
-          type: string
       type: object
     SunburstWidgetDefinition:
       description: Sunbursts are spot on to highlight how groups contribute to the
@@ -11020,8 +11026,6 @@ components:
       - packetsReceived
       - networkHop
       - receivedMessage
-      - grpcHealthcheckStatus
-      - connection
       example: statusCode
       type: string
       x-enum-varnames:
@@ -11040,8 +11044,6 @@ components:
       - PACKETS_RECEIVED
       - NETWORK_HOP
       - RECEIVED_MESSAGE
-      - GRPC_HEALTHCHECK_STATUS
-      - CONNECTION
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       oneOf:
@@ -12545,7 +12547,7 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`, `icmp`, `udp`, `websocket`, `grpc` or `multi`.'
+        `dns`, `icmp`, `udp`, `websocket` or `multi`.'
       enum:
       - http
       - ssl
@@ -12555,7 +12557,6 @@ components:
       - icmp
       - udp
       - websocket
-      - grpc
       example: http
       type: string
       x-enum-varnames:
@@ -12567,7 +12568,6 @@ components:
       - ICMP
       - UDP
       - WEBSOCKET
-      - GRPC
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -12593,12 +12593,6 @@ components:
         description: A single Header.
         type: string
       description: Headers to include when performing the test.
-      type: object
-    SyntheticsTestMetadata:
-      additionalProperties:
-        description: A single Metadatum.
-        type: string
-      description: Metadata to include when performing the gRPC test.
       type: object
     SyntheticsTestMonitorStatus:
       description: 'The status of your Synthetic monitor.
@@ -12777,8 +12771,6 @@ components:
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
-        metadata:
-          $ref: '#/components/schemas/SyntheticsTestMetadata'
         method:
           $ref: '#/components/schemas/HTTPMethod'
         noSavingResponseBody:
@@ -12806,9 +12798,6 @@ components:
             allowing the server to present one of multiple possible certificates on
 
             the same IP address and TCP port number.'
-          type: string
-        service:
-          description: gRPC service on which you want to perform the healthcheck.
           type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
@@ -13640,7 +13629,7 @@ components:
         metadata:
           $ref: '#/components/schemas/UsageAttributionMetadata'
         usage:
-          description: Get usage summary by tag(s).
+          description: Get Usage Summary by tag(s).
           items:
             $ref: '#/components/schemas/UsageAttributionBody'
           type: array
@@ -16385,11 +16374,6 @@ components:
         user:
           $ref: '#/components/schemas/User'
       type: object
-    Version:
-      description: Version of the updated signal. If server side version is higher,
-        update will be rejected.
-      format: int64
-      type: integer
     WebhooksIntegration:
       description: Datadog-Webhooks integration.
       properties:
@@ -17309,8 +17293,6 @@ components:
               downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, mute, and delete individual monitors.
-            security_monitoring_signals_read: View Security Signals.
-            security_monitoring_signals_write: Modify Security Signals.
             synthetics_global_variable_read: View, search, and use in tests the list
               of global variables available for Synthetics.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -18988,6 +18970,74 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v1/distribution_points:
+    post:
+      description: "The distribution points end-point allows you to post distribution
+        data that can be graphed on Datadog\u2019s dashboards."
+      operationId: SubmitDistributionPoints
+      parameters:
+      - description: HTTP header used to compress the media-type.
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/DistributionPointsContentEncoding'
+      requestBody:
+        content:
+          text/json:
+            examples:
+              dynamic-points:
+                description: "Post time-series data that can be graphed on Datadog\u2019s
+                  dashboards."
+                externalValue: examples/metrics/distribution-points.json.sh
+                summary: Dynamic Points
+                x-variables:
+                  NOW: $(date +%s)
+            schema:
+              $ref: '#/components/schemas/DistributionPointsPayload'
+        required: true
+      responses:
+        '202':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/IntakePayloadAccepted'
+          description: Payload accepted
+        '400':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '408':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Request timeout
+        '413':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Payload too large
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Submit distribution points
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: safe
   /api/v1/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -22898,19 +22948,19 @@ paths:
         Example: `"check".over(tags).last(count).by(group).count_by_status()`
 
 
-        - `check` name of the check, for example `datadog.agent.up`
+        - **`check`** name of the check, for example `datadog.agent.up`
 
-        - `tags` one or more quoted tags (comma-separated), or "*". for example: `.over("env:prod",
-        "role:db")`; `over` cannot be blank.
+        - **`tags`** one or more quoted tags (comma-separated), or "*". for example:
+        `.over("env:prod", "role:db")`; **`over`** cannot be blank.
 
-        - `count` must be at greater than or equal to your max threshold (defined
+        - **`count`** must be at greater than or equal to your max threshold (defined
         in the `options`). It is limited to 100.
 
         For example, if you''ve specified to notify on 1 critical, 3 ok, and 2 warn
         statuses, `count` should be at least 3.
 
-        - `group` must be specified for check monitors. Per-check grouping is already
-        explicitly known for some service checks.
+        - **`group`** must be specified for check monitors. Per-check grouping is
+        already explicitly known for some service checks.
 
         For example, Postgres integration monitors are tagged by `db`, `host`, and
         `port`, and Network monitors by `host`, `instance`, and `url`. See [Service
@@ -22925,28 +22975,28 @@ paths:
         "string query"'').rollup("count").last("1h")"`
 
 
-        - `event`, the event query string:
+        - **`event`**, the event query string:
 
-        - `string_query` free text query to match against event title and text.
+        - **`string_query`** free text query to match against event title and text.
 
-        - `sources` event sources (comma-separated).
+        - **`sources`** event sources (comma-separated).
 
-        - `status` event statuses (comma-separated). Valid options: error, warn, and
-        info.
+        - **`status`** event statuses (comma-separated). Valid options: error, warn,
+        and info.
 
-        - `priority` event priorities (comma-separated). Valid options: low, normal,
+        - **`priority`** event priorities (comma-separated). Valid options: low, normal,
         all.
 
-        - `host` event reporting host (comma-separated).
+        - **`host`** event reporting host (comma-separated).
 
-        - `tags` event tags (comma-separated).
+        - **`tags`** event tags (comma-separated).
 
-        - `excluded_tags` excluded event tags (comma-separated).
+        - **`excluded_tags`** excluded event tags (comma-separated).
 
-        - `rollup` the stats roll-up method. `count` is the only supported method
+        - **`rollup`** the stats roll-up method. `count` is the only supported method
         now.
 
-        - `last` the timeframe to roll up the counts. Examples: 45m, 4h. Supported
+        - **`last`** the timeframe to roll up the counts. Examples: 45m, 4h. Supported
         timeframes: m, h and d. This value should not exceed 48 hours.
 
 
@@ -22961,18 +23011,19 @@ paths:
         operator #`
 
 
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
+        `cardinality`.
 
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.
+        - **`#`** an integer or decimal number used to set the threshold.
 
 
         **Process Alert Query**
@@ -22982,19 +23033,19 @@ paths:
         #`
 
 
-        - `search` free text search string for querying processes.
+        - **`search`** free text search string for querying processes.
 
         Matching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows)
         page.
 
-        - `tags` one or more tags (comma-separated)
+        - **`tags`** one or more tags (comma-separated)
 
-        - `timeframe` the timeframe to roll up the counts. Examples: 10m, 4h. Supported
-        timeframes: s, m, h and d
+        - **`timeframe`** the timeframe to roll up the counts. Examples: 10m, 4h.
+        Supported timeframes: s, m, h and d
 
-        - `operator` <, <=, >, >=, ==, or !=
+        - **`operator`** <, <=, >, >=, ==, or !=
 
-        - `#` an integer or decimal number used to set the threshold
+        - **`#`** an integer or decimal number used to set the threshold
 
 
         **Logs Alert Query**
@@ -23004,21 +23055,22 @@ paths:
         operator #`
 
 
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - `index_name` For multi-index organizations, the log index in which the request
-        is performed.
+        - **`index_name`** For multi-index organizations, the log index in which the
+        request is performed.
 
-        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
+        `cardinality`.
 
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.
+        - **`#`** an integer or decimal number used to set the threshold.
 
 
         **Composite Query**
@@ -23028,16 +23080,16 @@ paths:
         monitors
 
 
-        * `name` [*required*, *default* = **dynamic, based on query**]: The name of
-        the alert.
+        * **`name`** [*required*, *default* = **dynamic, based on query**]: The name
+        of the alert.
 
-        * `message` [*required*, *default* = **dynamic, based on query**]: A message
+        * **`message`** [*required*, *default* = **dynamic, based on query**]: A message
         to include with notifications for this monitor.
 
         Email notifications can be sent to specific users by using the same ''@username''
         notation as events.
 
-        * `tags` [*optional*, *default* = **empty list**]: A list of tags to associate
+        * **`tags`** [*optional*, *default* = **empty list**]: A list of tags to associate
         with your monitor.
 
         When getting all monitor details via the API, use the `monitor_tags` argument
@@ -23053,13 +23105,13 @@ paths:
         Example: `error_budget("slo_id").over("time_window") operator #`
 
 
-        - `slo_id`: The alphanumeric SLO ID of the SLO you are configuring the alert
-        for.
+        - **`slo_id`**: The alphanumeric SLO ID of the SLO you are configuring the
+        alert for.
 
-        - `time_window`: The time window of the SLO target you wish to alert on. Valid
-        options: `7d`, `30d`, `90d`.
+        - **`time_window`**: The time window of the SLO target you wish to alert on.
+        Valid options: `7d`, `30d`, `90d`.
 
-        - `operator`: `>=` or `>`
+        - **`operator`**: `>=` or `>`
 
 
         **Audit Alert Query**
@@ -23069,18 +23121,19 @@ paths:
         operator #`
 
 
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
+        `cardinality`.
 
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.
+        - **`#`** an integer or decimal number used to set the threshold.
 
 
         **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
@@ -23094,19 +23147,19 @@ paths:
         operator #`
 
 
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
+        and `cardinality`.
 
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.
+        - **`#`** an integer or decimal number used to set the threshold.
 
 
         **NOTE** CI Pipeline monitors are in alpha on US1, EU, US3 and US5.
@@ -23119,19 +23172,19 @@ paths:
         operator #`
 
 
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
+        and `cardinality`.
 
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.
+        - **`#`** an integer or decimal number used to set the threshold.
 
 
         **NOTE** CI Test monitors are available only in closed beta on US1, EU, US3
@@ -23148,19 +23201,19 @@ paths:
         measure]).last(time_window) operator #`
 
 
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
+        and `cardinality`.
 
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.'
+        - **`#`** an integer or decimal number used to set the threshold.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -24753,161 +24806,6 @@ paths:
       x-menu-order: 4
       x-undo:
         type: safe
-  /api/v1/security_analytics/signals/{signal_id}/add_to_incident:
-    patch:
-      description: Add a security signal to an incident. This makes it possible to
-        search for signals by incident within the signal explorer and to view the
-        signals on the incident timeline.
-      operationId: AddSecurityMonitoringSignalToIncident
-      parameters:
-      - $ref: '#/components/parameters/SignalID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AddSignalToIncidentRequest'
-        description: Attributes describing the signal update.
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SuccessfulSignalUpdateResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Not Found
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - AuthZ:
-        - security_monitoring_signals_write
-        apiKeyAuth: []
-        appKeyAuth: []
-      summary: Add a security signal to an incident
-      tags:
-      - Security Monitoring
-      x-codegen-request-body-name: body
-      x-undo:
-        type: idempotent
-  /api/v1/security_analytics/signals/{signal_id}/assignee:
-    patch:
-      description: Modify the triage assignee of a security signal.
-      operationId: EditSecurityMonitoringSignalAssignee
-      parameters:
-      - $ref: '#/components/parameters/SignalID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SignalAssigneeUpdateRequest'
-        description: Attributes describing the signal update.
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SuccessfulSignalUpdateResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Not Found
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - AuthZ:
-        - security_monitoring_signals_write
-        apiKeyAuth: []
-        appKeyAuth: []
-      summary: Modify the triage assignee of a security signal
-      tags:
-      - Security Monitoring
-      x-codegen-request-body-name: body
-      x-undo:
-        type: idempotent
-  /api/v1/security_analytics/signals/{signal_id}/state:
-    patch:
-      description: Change the triage state of a security signal.
-      operationId: EditSecurityMonitoringSignalState
-      parameters:
-      - $ref: '#/components/parameters/SignalID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SignalStateUpdateRequest'
-        description: Attributes describing the signal update.
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SuccessfulSignalUpdateResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Not Found
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - AuthZ:
-        - security_monitoring_signals_write
-        apiKeyAuth: []
-        appKeyAuth: []
-      summary: Change the triage state of a security signal
-      tags:
-      - Security Monitoring
-      x-codegen-request-body-name: body
-      x-undo:
-        type: idempotent
   /api/v1/series:
     post:
       description: "The metrics end-point allows you to post time-series data that
@@ -27748,7 +27646,7 @@ paths:
   /api/v1/usage/attribution:
     get:
       deprecated: true
-      description: Get usage attribution.
+      description: Get Usage Attribution.
       operationId: GetUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -27831,7 +27729,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get usage attribution
+      summary: Get Usage Attribution
       tags:
       - Usage Metering
       x-menu-order: 29
@@ -28357,7 +28255,7 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: "Get hourly usage attribution.\n\nThis API endpoint is paginated.
+      description: "Get Hourly Usage Attribution.\n\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
@@ -28432,7 +28330,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage attribution
+      summary: Get Hourly Usage Attribution
       tags:
       - Usage Metering
       x-menu-order: 30
@@ -28857,7 +28755,7 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: "Get monthly usage attribution.\n\nThis API endpoint is paginated.
+      description: "Get Monthly Usage Attribution.\n\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
@@ -28945,7 +28843,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get monthly usage attribution
+      summary: Get Monthly Usage Attribution
       tags:
       - Usage Metering
       x-given:
@@ -30501,10 +30399,6 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
   name: Screenboards
   x-deprecated: true
-- description: 'Detection rules for generating signals and listing of generated
-
-    signals.'
-  name: Security Monitoring
 - description: 'The service check endpoint allows you to post check statuses for use
     with monitors.
 
