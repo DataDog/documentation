@@ -53,7 +53,7 @@ To delete an index from your organization, use the "Delete icon" in the index ac
 
 {{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
-**Note:** The deleted index will no longer accept new incoming logs. Your log data will not be dropped immediately, instead it will age out by retention period. After the retention period is reached, the index will no longer show up in Index page.
+**Note:** The deleted index will no longer accept new incoming logs. The logs already in the deleted index will age out based on the retention period, so they are not dropped immediately. After the retention period is reached, the index will no longer show up in the Index page.
 
 ## Indexes filters
 
