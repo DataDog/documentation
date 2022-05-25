@@ -157,9 +157,9 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 
 **Note**: Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets. 
  
+
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [2]: /logs/archives/rehydrating/
-
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 

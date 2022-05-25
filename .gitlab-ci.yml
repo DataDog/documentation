@@ -35,7 +35,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_update-golang
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
   except:
@@ -236,7 +236,7 @@ build_live:
     - yarn run build:live
     - in-isolation deploy_live
     - create_artifact
-    - create_artifact_untracked
+    - create_artifact_ignored
     - remove_static_from_repo
   artifacts:
     when: on_success
@@ -353,8 +353,10 @@ evaluate_missing_metrics:
   only:
     - master
 
-# TODO: update job to be scheduled/only run on master deploys when we are ready to deprecate old translations job
-manage_untracked_translations:manual:
+# Uploads git ignored source (EN) files to Transifex as part of the nightly build.
+# The translation syncing pipeline is triggered by github webhook, but these files are not in git.
+# This allows some dynamically built content (such as integrations) to be localized automatically.
+manage_ignored_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
   cache: {}
@@ -362,46 +364,35 @@ manage_untracked_translations:manual:
   only:
     - master
   script:
-    - echo "Downloading untracked translation source files..."
-    - manage_untracked_translation_files
+    - echo "Downloading ignored translation source files..."
+    - manage_ignored_translation_files
   when: manual
 
-manage_translations:on-schedule:
-  <<: *base_template
-  stage: post-deploy
-  cache: {}
-  environment: "live"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-    CONFIG: ${PREVIEW_CONFIG}
-  script:
-    - |-
-      if [[ $(date +%u) -lt 6 ]]; then
-        nodenv shell 14.16.0
-        [ -d ./node_modules ] && rm -rf ./node_modules
-        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
-        DATADOG_API_KEY="$(get_secret 'dd-api-key')" manage_translations "${APIKEY}";
-      fi
-      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd-api-key')
-  artifacts:
-    paths:
-      - translate-debug.log
-  only:
-    - schedules
-
-
-
-#push_translations:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  script:
-#    - push_changed_translations
-#  only:
-#    - master
-#  except:
-#    - triggers
-#    - schedules
+# Legacy translations nightly job
+# manage_translations:on-schedule:
+#   <<: *base_template
+#   stage: post-deploy
+#   cache:
+#     <<: *cache
+#     policy: pull
+#   environment: "live"
+#   variables:
+#     URL: ${PREVIEW_DOMAIN}
+#     CONFIG: ${PREVIEW_CONFIG}
+#   script:
+#     - |-
+#       if [[ $(date +%u) -lt 6 ]]; then
+#         nodenv shell 14.16.0
+#         [ -d ./node_modules ] && rm -rf ./node_modules
+#         yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
+#         DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
+#       fi
+#       chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+#   artifacts:
+#     paths:
+#       - translate-debug.log
+#   only:
+#     - schedules
 
 test_missing_tms_live:
   <<: *base_template

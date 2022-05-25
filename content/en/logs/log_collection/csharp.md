@@ -26,9 +26,9 @@ further_reading:
 
 To send your C# logs to Datadog, use one of the following approaches:
 
-- [Log to a file and then tail that file with your Datadog Agent][1].
-- [Enable Agentless logging][2].
-- [Use the Serilog sink][3].
+- [Log to a file and then tail that file with your Datadog Agent](#file-tail-logging-with-the-datadog-agent).
+- [Enable Agentless logging](#agentless-logging-with-apm).
+- [Use the Serilog sink](#agentless-logging-with-serilog-sink).
 
 This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Microsoft.Extensions.Logging` logging libraries, for each of the above approaches.
 
@@ -36,7 +36,7 @@ This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Micr
 
 The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
 
-Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][4].
+Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
 ### Configure your logger
 
@@ -269,7 +269,7 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 ### Connect your service across logs and traces
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM .NET instructions][5]
+`env`, `service`, and `version` to your logs by [following the APM .NET instructions][2]
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
@@ -301,7 +301,7 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 
 ## Agentless logging with APM
 
-It is possible to stream logs from your application to Datadog directly, without making any code changes, using the .NET APM automatic instrumentation library. This approach sends logs directly to Datadog, so it does not benefit from [features such as sensitive data scrubbing][6] which are provided by the Datadog Agent. For that reason, we recommend using file tail logging where possible, but it is useful in environments where this is not possible (when using [Azure App Service][7] for example). It is worth noting that you will still be able to rely on server-side scrubbing capabilities performed by [Sensitive Data Scanner][8].
+It is possible to stream logs from your application to Datadog directly, without making any code changes, using the .NET APM automatic instrumentation library. This approach sends logs directly to Datadog, so it does not benefit from [features such as sensitive data scrubbing][3] which are provided by the Datadog Agent. For that reason, we recommend using file tail logging where possible, but it is useful in environments where this is not possible (when using [Azure App Service][4] for example). It is worth noting that you will still be able to rely on server-side scrubbing capabilities performed by [Sensitive Data Scanner][5].
 
 Agentless logging (also known as "direct log submission") supports the following frameworks:
 - Serilog (v1.0+)
@@ -315,8 +315,8 @@ It does not require modifying your application code, or installing additional de
 
 Agentless logging is only available when using APM with automatic instrumentation. To get started, instrument your application as described in the following documents:
 
-- [.NET Core/.NET 5+ applications][9]
-- [.NET Framework applications][10]
+- [.NET Core/.NET 5+ applications][6]
+- [.NET Framework applications][7]
 
 After installing, verify you are receiving traces correctly.
 
@@ -325,15 +325,15 @@ After installing, verify you are receiving traces correctly.
 To enable Agentless logging, set the following environment variables:
 
 `DD_API_KEY`
-: Your [Datadog API Key][11] for sending your logs to Datadog.
+: Your [Datadog API Key][8] for sending your logs to Datadog.
 
 `DD_SITE`
-: The name of [your Datadog site][12]. Choose from one of the following examples:<br>
+: The name of [your Datadog site][9]. Choose from one of the following examples:<br>
 **Example**: `datadoghq.com` (US1), `datadoghq.eu` (EU), `us3.datadoghq.com` (US3), `us5.datadoghq.com` (US5), `ddog-gov.com` (US1-FED) <br>
 **Default**: `datadoghq.com` (US1)
 
 `DD_LOGS_INJECTION`
-: Enables [connecting logs and traces][5]:<br>
+: Enables [connecting logs and traces][2]:<br>
 **Default**: `true` <br>
 Enabled by default when using Agentless logging from Tracer version 2.7.0.
 
@@ -407,11 +407,11 @@ The following configuration values should generally not be modified, but may be 
 {{< /site-region >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_SOURCE`
-: Sets the parsing rule for submitted logs. Should always be set to `csharp`, unless you have a [custom pipeline][13].<br>
+: Sets the parsing rule for submitted logs. Should always be set to `csharp`, unless you have a [custom pipeline][10].<br>
 **Default**: `csharp`
 
 `DD_LOGS_DIRECT_SUBMISSION_MAX_BATCH_SIZE`
-: Sets the maximum number of logs to send at one time. Takes into account the [limits in place for the API][14].<br>
+: Sets the maximum number of logs to send at one time. Takes into account the [limits in place for the API][11].<br>
 **Default**: `1000`
 
 `DD_LOGS_DIRECT_SUBMISSION_MAX_QUEUE_SIZE`
@@ -424,16 +424,16 @@ The following configuration values should generally not be modified, but may be 
 
 ## Agentless logging with Serilog sink
 
-If it is not possible to use file-tail logging or APM Agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][15] to send logs directly to Datadog.
+If it is not possible to use file-tail logging or APM Agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][12] to send logs directly to Datadog.
 
-Install the Datadog [Serilog sink][15] into your application, which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
+Install the Datadog [Serilog sink][12] into your application, which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
 Run the following command in the Package Manager Console:
 
 ```text
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-Then, initialize the logger directly in your application. Ensure that you [add your `<API_KEY>`][11].
+Then, initialize the logger directly in your application. Ensure that you [add your `<API_KEY>`][8].
 
 {{< site-region region="us" >}}
 
@@ -501,7 +501,7 @@ using (var log = new LoggerConfiguration()
 {{< /site-region >}}
 
 
-You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][16]
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][13]
 
 {{< site-region region="us" >}}
 
@@ -581,19 +581,16 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: #file-tail-logging-with-the-datadog-agent
-[2]: #agentless-logging-with-apm
-[3]: #agentless-logging-with-serilog-sink
-[4]: /logs/log_configuration/parsing
-[5]: /tracing/connect_logs_and_traces/dotnet/
-[6]: /agent/logs/advanced_log_collection
-[7]: /serverless/azure_app_services
-[8]: /account_management/org_settings/sensitive_data_detection/#overview
-[9]: /tracing/setup_overview/setup/dotnet-core
-[10]: /tracing/setup_overview/setup/dotnet-framework
-[11]: https://app.datadoghq.com/organization-settings/api-keys
-[12]: /getting_started/site/
-[13]: /logs/log_configuration/pipelines/?tab=source
-[14]: /api/latest/logs/#send-logs
-[15]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[16]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[1]: /logs/log_configuration/parsing
+[2]: /tracing/connect_logs_and_traces/dotnet/
+[3]: /agent/logs/advanced_log_collection
+[4]: /serverless/azure_app_services
+[5]: /account_management/org_settings/sensitive_data_detection/#overview
+[6]: /tracing/setup_overview/setup/dotnet-core
+[7]: /tracing/setup_overview/setup/dotnet-framework
+[8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: /getting_started/site/
+[10]: /logs/log_configuration/pipelines/?tab=source
+[11]: /api/latest/logs/#send-logs
+[12]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[13]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
