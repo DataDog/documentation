@@ -122,7 +122,7 @@ The Azure App Service extension includes an instance of [DogStatsD][8] (Datadog'
 Writing custom metrics and checks in Azure App Service is similar to the process for doing so with an application on a host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Service using the extension:
 
 1. Add the [DogStatsD NuGet package][9] to your Visual Studio project.
-2. Initialize DogStatdD and write custom metrics in your application.
+2. Initialize DogStatsD and write custom metrics in your application.
 3. Deploy your code to Azure App Service.
 4. Install the Datadog App Service extension.
 
