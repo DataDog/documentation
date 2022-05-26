@@ -299,10 +299,10 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 5432
     username: datadog
-    password: <UNIQUEPASSWORD"
+    password: "<UNIQUEPASSWORD>"
     gcp:
-      project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_NAME>' \
+      project_id: "<PROJECT_ID>"
+      instance_id: "<INSTANCE_NAME>" \
   datadog/datadog
 ```
 

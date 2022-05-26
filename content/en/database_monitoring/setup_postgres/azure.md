@@ -315,7 +315,7 @@ instances:
     host: <AZURE_INSTANCE_ENDPOINT>
     port: 5432
     username: datadog
-    password: "<UNIQUEPASSWORD"
+    password: "<UNIQUEPASSWORD>"
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
       name: "<YOUR_INSTANCE_NAME>" \
