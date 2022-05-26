@@ -55,7 +55,8 @@ Each of these event types has the following attributes attached by default, so y
 | Attribute name   | Type   | Description                 |
 |------------------|--------|-----------------------------|
 | `type`     | string | The type of the event (for example, `view` or `resource`).             |
-| `application.id` | string | The Datadog application ID. |
+| `application.id` | string | The Datadog application ID generated when you create a RUM application. |
+| `service`     | string | A service is an independent, deployable unit of code that maintains a set of pages in your browser application.             |
 
 ### View attributes
 
