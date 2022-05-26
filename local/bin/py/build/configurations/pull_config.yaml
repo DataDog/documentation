@@ -468,6 +468,13 @@
           kind: documentation
           aliases:
             - /real_user_monitoring/setup
+          further_reading:
+            - link: '/real_user_monitoring/explorer/'
+              tag: 'Documentation'
+              text: 'Learn about the RUM Explorer'
+            - link: '/logs/log_collection/javascript/'
+              tag: 'Documentation'
+              text: 'Learn about the Browser Logs SDK'
     - action: pull-and-push-file
       branch: main
       globs:

@@ -29,14 +29,15 @@ The automatic collection of user actions provides insights into user behavior, w
 
 You can extend the collection of user interactions by [sending your own custom actions](#custom-actions).
 
-**Note**: The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with. You can control which information is sent to Datadog by [manually setting an action name](#declaring-a-name-for-click-actions), or by [implementing global scrubbing rules in the Browser SDK][1].
+The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with. You can control which information is sent to Datadog by [manually setting an action name](#declaring-a-name-for-click-actions), or by [implementing global scrubbing rules in the RUM Browser SDK][1].
 
 ## What interactions are being tracked?
 
-The Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
+The RUM Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
+
 * Activity following the click is detected. See [How page activity is calculated][2] for details.
-* The click does not lead to a new page being loaded, in which case the Browser SDK generates a new RUM View event.
-* A name can be computed for the action. ([Learn more about action naming](#declaring-a-name-for-click-actions))
+* The click does not lead to a new page being loaded, in which case, the RUM Browser SDK generates another RUM View event.
+* A name can be computed for the action. See [Declaring a name for click actions](#declaring-a-name-for-click-actions) for details.
 
 ## Action timing metrics
 
@@ -51,7 +52,7 @@ For information about the default attributes for all RUM event types, see [Data 
 
 ### How action loading time is calculated
 
-The Browser RUM SDK watches the page activity following every click. The action is considered finished when the page has no more activity. See [How page activity is calculated][2] for details.
+The RUM Browser SDK watches the page activity following every click. The action is considered finished when the page has no more activity. See [How page activity is calculated][2] for details.
 
 ## Action attributes
 
@@ -64,7 +65,7 @@ The Browser RUM SDK watches the page activity following every click. The action 
 
 ## Declaring a name for click actions
 
-The RUM library uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that will be used to name the action. For example:
+The RUM library uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that is used to name the action. For example:
 
 ```html
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Try it out!</a>
@@ -95,7 +96,7 @@ Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization
 
 ## Custom actions
 
-Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM SDK collects a visitor's cart data when they click the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
+Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM Browser SDK collects a visitor's cart data when they click the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
