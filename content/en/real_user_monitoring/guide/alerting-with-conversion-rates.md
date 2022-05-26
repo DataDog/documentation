@@ -24,7 +24,7 @@ Create some steps from your views and actions. You can click on the bar graphs t
 
 ## Export conversion rate graph
 
-The funnel displays the overall conversion and dropoff rates, number of converted or dropoff sessions, and percentage of converted or dropoff sessions.  
+The funnel displays the overall conversion and dropoff rates, the number of converted or dropoff sessions, and the percentage of converted or dropoff sessions.  
 
 {{< img src="real_user_monitoring/guide/alerting-with-conversion-rates/funnel-widget-export.mp4" alt="Export the funnel widget into an existing dashboard or a new dashboard" video=true >}}
 
