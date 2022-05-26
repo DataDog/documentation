@@ -58,13 +58,26 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
           enabled: true
     ```
 
-3. **For [Datadog Agent][1] version 7.36 only, to access DNS events in CWS** Add the following to the `runtime_security_config` section of the `system-probe.yaml` file
+3. **For [Datadog Agent][1] version 7.36 only, to access DNS events in CWS** 
 
+    Pass these additional values to your Helm chart
+
+    ```yaml
+    agents:
+      containers:
+        systemProbe:
+          env:
+            name: DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED
+            value: true
+    ```
+    OR Add the following to the `runtime_security_config` section of the `system-probe.yaml` file
+    
     ```yaml
     runtime_security_config:
       network:
         enabled: true
     ```
+    
 
 4. Restart the Agent.
 5. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
