@@ -28,5 +28,5 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Adjusting "No Data" alerts for metric Monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Prevent alerts from monitors that were in downtime{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Why did my monitor settings change not take effect?{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/how-do-i-reduce-alert-flapping-noise" >}}How do I reduce alert flapping / noise?{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
 {{< /whatsnext >}}
