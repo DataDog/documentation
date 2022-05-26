@@ -2,6 +2,10 @@
 title: Registering Services through the Datadog Service Definition API
 kind: faq
 is_beta: true
+further_reading:
+- link: "/tracing/faq/service_catalog/"
+  tag: "Documentation"
+  text: "Datadog Service Catalog"
 ---
 
 ## Services
@@ -288,6 +292,10 @@ curl --request DELETE 'https://api.datadoghq.com/api/unstable/services/definitio
 --header 'DD-API-KEY: {API_KEY}' \
 --header 'DD-APPLICATION-KEY: {APPLICATION_KEY}'
 {{< /code-block >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/unified-service-tagging/
 [2]: /tracing/faq/service_catalog/
