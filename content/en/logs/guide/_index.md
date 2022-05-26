@@ -31,6 +31,7 @@ private: true
     {{< nextlink href="/logs/guide/log-collection-is-the-datadog-agent-losing-logs" >}}Is the Datadog Agent losing logs?{{< /nextlink >}}
     {{< nextlink href="/logs/guide/why-do-my-logs-not-have-the-expected-timestamp" >}}Why do my logs not have the expected timestamp?{{< /nextlink >}}
     {{< nextlink href="/logs/guide/i-have-a-custom-log-file-with-heightened-read-permissions" >}}I have a custom log file with heightened read-permissions; how do I send it to Datadog?{{< /nextlink >}}
+    {{< nextlink href="logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors" >}}Why do my logs show up with an Info status even for Warnings or Errors?{{< /nextlink >}}    
 {{< /whatsnext >}}
 
 <br>
