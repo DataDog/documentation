@@ -20,7 +20,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
-1. [Install the RDS integration](#install-the-rds-integration)
+1. [Install the Azure PostgreSQL integration](#install-the-azure-postgresql-integration)
 
 ## Before you begin
 
@@ -214,6 +214,11 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # pg_stat_activity_view: datadog.pg_stat_activity()
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
+
+       # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+       azure:
+        deployment_type: '<DEPLOYMENT_TYPE>'
+        name: '<YOUR_INSTANCE_NAME>'
    ```
 2. [Restart the Agent][2].
 
@@ -244,7 +249,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<AZURE_INSTANCE_ENDPOINT>",
     "port": 5432,
     "username": "datadog",
-    "password": "<UNIQUEPASSWORD>"
+    "password": "<UNIQUEPASSWORD>",
+    "azure": {
+      "deployment_type": "<DEPLOYMENT_TYPE>",
+      "name": "<YOUR_INSTANCE_NAME>"
+    }
   }]' \
   datadog/agent:${DD_AGENT_VERSION}
 ```
@@ -265,7 +274,7 @@ FROM datadog/agent:7.36.0
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -306,7 +315,10 @@ instances:
     host: <AZURE_INSTANCE_ENDPOINT>
     port: 5432
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: "<UNIQUEPASSWORD"
+    azure:
+      deployment_type: "<DEPLOYMENT_TYPE>"
+      name: "<YOUR_INSTANCE_NAME>" \
   datadog/datadog
 ```
 
@@ -330,6 +342,11 @@ instances:
     port: 5432
     username: datadog
     password: '<PASSWORD>'
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    azure:
+      deployment_type: '<DEPLOYMENT_TYPE>'
+      name: '<YOUR_INSTANCE_NAME>'
+
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
     # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -358,7 +375,11 @@ metadata:
           "host": "<AZURE_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "<UNIQUEPASSWORD>",
+          "azure": {
+            "deployment_type": "<DEPLOYMENT_TYPE>",
+            "name": "<YOUR_INSTANCE_NAME>"
+          }
         }
       ]
 spec:
