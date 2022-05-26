@@ -1,6 +1,8 @@
 ---
 title: How to tail logs from host using the Container Agent
 kind: faq
+aliases:
+  - /logs/faq/how-to-tail-logs-from-host-using-a-container-agent
 further_reading:
 - link: "/docker/log"
   tag: "Documentation"

@@ -25,6 +25,11 @@ private: true
     {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Lambda Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Setting File Permissions for Rotating Logs (Linux){{< /nextlink >}}
     {{< nextlink href="/logs/guide/how-to-set-up-only-logs" >}}Use the Datadog Agent for Log Collection Only{{< /nextlink >}}
+    {{< nextlink href="logs/guide/how-to-increase-the-number-of-log-files-tailed-by-the-agent" >}}How to increase the number of log files tailed by the Agent files?{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/how-to-remap-custom-severity-values-to-the-official-log-status" >}}How to remap custom severity values to the official log status{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/how-to-tail-logs-from-host-using-a-container-agent" >}}How to tail logs from host using a Container Agent{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/log-collection-is-the-datadog-agent-losing-logs" >}}Is the Datadog Agent losing logs?{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/why-do-my-logs-not-have-the-expected-timestamp" >}}Why do my logs not have the expected timestamp?{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

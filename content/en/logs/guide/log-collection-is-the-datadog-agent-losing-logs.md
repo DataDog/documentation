@@ -1,6 +1,8 @@
 ---
 title: Is the Datadog Agent losing logs?
 kind: faq
+aliases:
+  - /logs/faq/log-collection-is-the-datadog-agent-losing-logs
 further_reading:
 - link: "/logs/log_collection/"
   tag: "Documentation"

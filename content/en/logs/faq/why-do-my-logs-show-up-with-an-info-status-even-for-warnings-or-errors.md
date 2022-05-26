@@ -2,8 +2,8 @@
 title: Why do my logs show up with an Info status even for Warnings or Errors?
 kind: faq
 further_reading:
-- link: "/logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status/"
-  tag: "FAQ"
+- link: "/logs/guide/how-to-remap-custom-severity-values-to-the-official-log-status/"
+  tag: "Guide"
   text: "Learn how to remap custom severity values to the official log status"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"

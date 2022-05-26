@@ -1,6 +1,8 @@
 ---
 title: How to remap custom severity values to the official log status?
 kind: faq
+aliases:
+  - /logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status
 further_reading:
 - link: "logs/log_collection/#custom-log-collection"
   tag: "Documentation"
