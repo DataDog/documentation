@@ -58,8 +58,16 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
           enabled: true
     ```
 
-3. Restart the Agent.
-4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
+3. **For [Datadog Agent][1] version 7.36 only** Add the following to the `runtime_security_config` section of the `system-probe.yaml` file
+
+    ```yaml
+    runtime_security_config:
+      network:
+        enabled: true
+    ```
+
+4. Restart the Agent.
+5. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
