@@ -22,6 +22,8 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
+## Overview
+
 There are various ways you can modify the [data collected][1] by RUM, to support your needs for:
 
 - Protecting sensitive data like personally identifiable information.
