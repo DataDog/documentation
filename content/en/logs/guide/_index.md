@@ -30,6 +30,7 @@ private: true
     {{< nextlink href="/logs/guide/how-to-tail-logs-from-host-using-a-container-agent" >}}How to tail logs from host using a Container Agent{{< /nextlink >}}
     {{< nextlink href="/logs/guide/log-collection-is-the-datadog-agent-losing-logs" >}}Is the Datadog Agent losing logs?{{< /nextlink >}}
     {{< nextlink href="/logs/guide/why-do-my-logs-not-have-the-expected-timestamp" >}}Why do my logs not have the expected timestamp?{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/i-have-a-custom-log-file-with-heightened-read-permissions" >}}I have a custom log file with heightened read-permissions; how do I send it to Datadog?{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
