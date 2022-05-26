@@ -183,7 +183,7 @@ php_value datadog.service my-app
 ### NGINX and PHP-FPM
 
 <div class="alert alert-warning">
-<strong>Note:</strong> PHP-FPM does not support the value <code>false</code> in <code>env[...]</code> directives. Use <code>1</code> in place of <code>true</code> and <code>0</code> in place of false.
+<strong>Note:</strong> PHP-FPM does not support the value <code>false</code> in <code>env[...]</code> directives. Use <code>1</code> in place of <code>true</code> and <code>0</code> in place of <code>false</code>.
 </div>
 
 For NGINX, use the `env` directive in the php-fpm's `www.conf` file, for example:
