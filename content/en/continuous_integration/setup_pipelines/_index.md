@@ -13,4 +13,5 @@ disable_sidebar: true
     {{< nextlink href="continuous_integration/setup_pipelines/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="continuous_integration/setup_pipelines/jenkins" >}}Jenkins{{< /nextlink >}}
     {{< nextlink href="continuous_integration/setup_pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/custom_tags_and_metrics" >}}Custom Tags and Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
