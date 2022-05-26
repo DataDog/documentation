@@ -415,13 +415,17 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 {{< /tabs >}}
 
-#### Set up healthchecks
+#### Set up health checks
 
-Add a [healthcheck][10] mechanism so your orchestrator can ensure the workers are running correctly.
+Add a [health check][10] mechanism so your orchestrator can ensure the workers are running correctly.
+
+If your container orchestrator of choice requires a health check endpoint, enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configuration][15].
+
+#### Additional health check configurations
 
 The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (2s by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
 
-Use the configuration below to set up healthchecks on your containers with:
+Use the configuration below to set up health checks on your containers with `livenessProbe`:
 
 {{< tabs >}}
 
@@ -524,10 +528,6 @@ livenessProbe:
 {{% /tab %}}
 
 {{< /tabs >}}
-
-#### Additional health check configurations
-
-If your container orchestrator of choice requires a health check endpoint, enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configurations][15].
 
 ### Test your internal endpoint
 
