@@ -13,6 +13,15 @@ Generally speaking, a service is an independently deployable unit of software. D
 
 Before you begin, you need a [Datadog API and app key][2].
 
+## Enriching an existing APM service 
+If you are using APM to trace your applications today, you would likely start here. When you land on the Service Catalog page the first time, you will see a ‘UNDEFINED’ pill next to all your existing APM services. 
+
+To add service ownership information like team name, slack channels, source code repos, you can push a YAML file via the POST endpoint below.
+
+## Registering a new service without any Datadog telemetry
+You can manage your service ownership information with Service Catalog even if those services are not emitting any kinds of Datadog telemetry. You can specify service ownership, on-call info, and custom tags in YAML files, and the information will be reflected in the Service Catalog UI. 
+
+
 ## Post a service definition
 
 ```
