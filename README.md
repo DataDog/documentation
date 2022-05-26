@@ -110,7 +110,7 @@ Within 10 minutes of merging to master, it deploys automatically.
 Prerequsites:
 - Running Monterey OSX
 - Docker Desktop >= 4.7.1 is installed
-- At least 6GB of RAM is deciated towards Docker for Mac
+- At least 6GB of RAM is dedicated towards Docker for Mac
   1. Open the Docker for Mac app dashboard
   2. Click the gear icon
   3. Click Resources
