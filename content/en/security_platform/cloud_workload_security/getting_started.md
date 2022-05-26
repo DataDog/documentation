@@ -58,7 +58,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
           enabled: true
     ```
 
-3. **For [Datadog Agent][1] version 7.36 only** Add the following to the `runtime_security_config` section of the `system-probe.yaml` file
+3. **For [Datadog Agent][1] version 7.36 only, to access DNS events in CWS** Add the following to the `runtime_security_config` section of the `system-probe.yaml` file
 
     ```yaml
     runtime_security_config:
