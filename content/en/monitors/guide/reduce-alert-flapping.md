@@ -1,13 +1,15 @@
 ---
-title: How do I reduce alert flapping / noise?
-kind: faq
+title: Reduce alert flapping
+kind: guide
 further_reading:
 - link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
+aliases:
+- /monitors/faq/how-do-i-reduce-alert-flapping-noise
 ---
 
-A frequent issue or pain point can be alert fatigue, or when alerts 'flap' (rapidly switching from an 'ok' to an 'alert' status).  
+A frequent issue or pain point can be alert fatigue, or when alerts 'flap' (rapidly switching from an 'ok' to an 'alert' status).
 
 Your individual Datadog alerts with groups [have notification][1] rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
 
@@ -31,12 +33,12 @@ Your individual Datadog alerts with groups [have notification][1] rollups on by 
     * [Outlier Detection][3] uses other data streams of the same context to issue an alert when a stream behaves in a way different compared with its peers
     * Both can also be used in conjunction with Composite alerts.
 
-If the issue is alert routing, [template variables][5] and the separation of **warning** or **alert** states with [conditional variables][4] will be of interest!
+If the issue is alert routing, [template variables][4] and the separation of **warning** or **alert** states with [conditional variables][5] will be of interest!
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/alert-rollup
 [2]: /monitors/create/types/anomaly/
 [3]: /monitors/create/types/outlier/
-[4]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[5]: /monitors/notify/variables/?tab=is_alert#template-variables
+[4]: /monitors/notify/variables/?tab=is_alert#template-variables
+[5]: /monitors/notify/variables/?tab=is_alert#conditional-variables
