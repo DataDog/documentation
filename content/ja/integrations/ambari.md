@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - 処理
-  - ログの収集
-  - オートディスカバリー
+- 処理
+- ログの収集
+- オートディスカバリー
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ambari/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
 display_name: Ambari
 draft: false
 git_integration_title: ambari
 guid: 4f518f2c-cfa7-4763-ac33-b1c8846eb738
 integration_id: ambari
 integration_title: Ambari
+integration_version: 3.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -34,9 +35,12 @@ public_title: Datadog-Ambari インテグレーション
 short_description: Ambari で管理されているすべてのクラスターのメトリクスをホストまたはサービス別に取得
 support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Ambari][1] を監視します。
@@ -121,7 +125,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                                                                                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -145,10 +149,10 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 - disk
 - memory
 - load
-- ネットワーク
+- network
 - process
 
-`collect_service_metrics` を使用してサービスメトリクスの収集が有効にされている場合、このインテグレーションは、ホワイトリストされたサービスコンポーネントごとに、ホワイトリスト内のヘッダーを持つメトリクスを収集します。
+`collect_service_metrics` を使用してサービスメトリクスの収集が有効にされている場合、このインテグレーションは、含まれるサービスコンポーネントごとに、インクルードリスト内のヘッダーを持つメトリクスを収集します。
 
 ### メトリクス
 {{< get-metrics-from-git "ambari" >}}
@@ -169,6 +173,6 @@ Ambari には、イベントは含まれません。
 
 
 [1]: https://ambari.apache.org
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

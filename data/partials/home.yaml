@@ -83,7 +83,7 @@ nav_sections:
       - title: Datadog Watchdog
         link: watchdog/
         icon: watchdog
-        desc: Proactively detect and surface application and infrastructure anomalies
+        desc: Detect and surface application and infrastructure anomalies
       - title: CI Visibility
         link: continuous_integration/
         icon: ci
@@ -103,8 +103,8 @@ nav_sections:
         link: account_management/
         icon: cog-2
         desc: Access org-based settings and billing
-      - title: Security
-        link: security/
+      - title: Data Security
+        link: data_security/
         icon: security-lock
         desc: Learn how Datadog protects your data
       - title: Developers

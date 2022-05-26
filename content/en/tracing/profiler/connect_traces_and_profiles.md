@@ -65,7 +65,7 @@ Requires tracing library version 0.49.0 or greater.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Code Hotspots identification for Go is disabled by default. To enable it, [turn on profiling for your service][1] and ensure that:
+To enable Code Hotspots identification for Go, [turn on profiling for your service][1] and ensure that:
 
 - You are using [dd-trace-go][2] version 1.35.0 or later.
 - [`DD_PROFILING_CODE_HOTSPOTS_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerCodeHotspots(true)`][3] option is passed to [`tracer.Start()`][4]. This option is enabled by default in [dd-trace-go][2] versions 1.37.0+.

@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - https://github.com/DataDog/ansible-datadog/blob/master/README.md
+- https://github.com/DataDog/ansible-datadog/blob/main/README.md
 kind: ドキュメント
 title: Ansible
 ---
@@ -11,7 +11,7 @@ Ansible Datadog のロールは、Datadog Agent とインテグレーション�
 ### 要件
 
 - Ansible v2.6 以上。
-- Debian と RHEL ベースの Linux ディストリビューション、および Windows のほとんどをサポートしていること。
+- Debian と RHEL ベースの Linux ディストリビューション、macOS および Windows のほとんどをサポートしていること。
 - Windows で Ansible 2.10+ を使うには、`ansible.windows` コレクションをインストールする必要があります。
 
   ```shell
@@ -38,42 +38,45 @@ Datadog Agent をホストにデプロイするには、Datadog のロールと 
 
 #### ロールの変数
 
-| 変数                                   | 説明                                                                                                                                                                                                                                                                                               |
-|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `datadog_api_key`                          | Datadog API キー。                                                                                                                                                                                                                                                                                     |
-| `datadog_site`                             | Agent データの送信先である Datadog インテークのサイト。デフォルトでは `datadoghq.com` ですが、`datadoghq.eu` に設定すると、EU サイトにデータが送信されます。このオプションは、バージョン 6.6.0 以上の Agent でのみ使用可能です。                                                                                                          |
-| `datadog_agent_flavor`                     | RPI 上の IOT インストールに対するデフォルトの Debian / RedHat パッケージをオーバーライドします。デフォルトが "datadog-agent" の場合、RPI には "datadog-iot-agent" を使用します。
-| `datadog_agent_version`                    | インストールする Agent のバージョンを固定します（例: `7.16.0`）。設定は任意ですが、推奨されています。`datadog_agent_version` を使用する場合、`datadog_agent_major_version` の設定は不要です。**注**: ダウングレードは、Windows プラットフォームではサポートされていません。                                                       |
-| `datadog_agent_major_version`              | インストールする Agent のメジャーバージョン。5、6、または 7（デフォルト）を設定できます。`datadog_agent_version` を設定している場合はそれが優先されますが、そうでなければ、指定されたメジャーバージョンの中で最新のバージョンがインストールされます。`datadog_agent_version` を使用する場合、`datadog_agent_major_version` の設定は不要です。 |
-| `datadog_checks`                           | Agent チェックのために追加する YAML コンフィギュレーション。<br> - Agent v6 および v7 では `/etc/datadog-agent/conf.d/<check_name>.d/conf.yaml` <br> - Agent v5 では `/etc/dd-agent/conf.d`                                                                                                                            |
-| `datadog_disable_untracked_checks` | `datadog_checks` および `datadog_additional_checks` に存在しないすべてのチェックを削除するには `true` に設定します。 |
-| `datadog_additional_checks` | `datadog_disable_untracked_checks` が `true` に設定されている場合に削除されない、その他のチェックの一覧。 |
-| `datadog_disable_default_checks` | すべてのデフォルトチェックを削除するには、`true` に設定します。 |
-| `datadog_config`                           | メインの Agent コンフィギュレーションの設定。<br> - Agent v6 および v7 では `/etc/datadog-agent/datadog.yaml` <br> - Agent v5 では `/etc/dd-agent/datadog.conf`（`[Main]` セクションの下）                                                                                                               |
-| `datadog_config_ex`                        | （任意）`/etc/dd-agent/datadog.conf` に追加する INI セクション（Agent v5 のみ）。                                                                                                                                                                                                                      |
-| `datadog_apt_repo`                         | デフォルトの Datadog `apt` リポジトリをオーバーライドします。リポジトリのメタデータが Datadog の署名キーで署名されている場合は、`signed-by` オプションを使用してください: `deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://yourrepo`                                                                 |
-| `datadog_apt_cache_valid_time`             | デフォルトの apt キャッシュの有効期限を上書きします（デフォルトでは 1 時間）。                                                                                                                                                                                                                                      |
-| `datadog_apt_key_url_new`                  | Datadog `apt` キーを取得する場所をオーバーライドします (非推奨の `datadog_apt_key_url` 変数は、ロールから削除されて期限切れとなったキーを参照します)。URL は通常、 キー `382E94DE` および `F14F620E` を含む GPG 鍵束となります。                            |
-| `datadog_yum_repo`                         | デフォルトの Datadog `yum` レポジトリを上書きします。                                                                                                                                                                                                                                                            |
-| `datadog_yum_repo_gpgcheck`                | デフォルトの `repo_gpgcheck` 値 (空白) をオーバーライドします。値が空白、かつカスタム `datadog_yum_repo` が使用されておらずシステムが RHEL/CentOS 8.1 でない場合 (dnf の[バグ](https://bugzilla.redhat.com/show_bug.cgi?id=1792506)の関係)、値は動的に `yes` に設定されます。そうでない場合は `no` が設定されます。**注**: Agent 5 では、repodata 署名認証は常にオフになっています。                                                                         |
-| `datadog_yum_gpgcheck`                     | デフォルトの `gpgcheck` の値 (`yes`) を上書き - パッケージ GPG 署名証明をオフにするには `no` を使用します。                                                                                                                                                                                                  |
-| `datadog_yum_gpgkey`                       | Agent v5 および v6（6.13 以下）のパッケージの検証に使用される Datadog `yum` キー（キー ID : `4172A230`）へのデフォルト URL を上書きします。                                                                                                                                                                               |
-| `datadog_yum_gpgkey_e09422b3`              | Agent 6.14 以上のパッケージの検証に使用される Datadog `yum` キー（キー ID : `E09422B3`）へのデフォルト URL を上書きします。                                                                                                                                                                                               |
-| `datadog_yum_gpgkey_e09422b3_sha256sum`    | `datadog_yum_gpgkey_e09422b3` キーの、デフォルトのチェックサムを上書きします。                                                                                                                                                                                                                                   |
-| `datadog_zypper_repo`                      | デフォルトの Datadog `zypper` レポジトリを上書きします。                                                                                                                                                                                                                                                         |
-| `datadog_zypper_repo_gpgcheck`             | デフォルトの `repo_gpgcheck` 値 (空白) をオーバーライドします。値が空白、かつカスタム `datadog_zypper_repo` が使用されていない場合、値は動的に `yes` に設定されます。そうでない場合は `no` が設定されます。**注**: Agent 5 では、repodata 署名認証は常にオフになっています。                                                    |
-| `datadog_zypper_gpgcheck`                  | デフォルトの `gpgcheck` の値 (`yes`) を上書き - パッケージ GPG 署名証明をオフにするには `no` を使用します。                                                                                                                                                                                                  |
-| `datadog_zypper_gpgkey`                    | Agent v5 および v6（6.13 以下）のパッケージの検証に使用される Datadog `zypper` キー（キー ID : `4172A230`）へのデフォルト URL を上書きします。                                                                                                                                                                            |
-| `datadog_zypper_gpgkey_sha256sum`          | `datadog_zypper_gpgkey` キーの、デフォルトのチェックサムを上書きします。                                                                                                                                                                                                                                         |
-| `datadog_zypper_gpgkey_e09422b3`           | Agent 6.14 以上のパッケージの検証に使用される Datadog `zypper` キー（キー ID : `E09422B3`）へのデフォルト URL を上書きします。                                                                                                                                                                                            |
-| `datadog_zypper_gpgkey_e09422b3_sha256sum` | `datadog_zypper_gpgkey_e09422b3` キーの、デフォルトのチェックサムを上書きします。                                                                                                                                                                                                                                |
-| `datadog_agent_allow_downgrade`            | `yes` に設定すると、apt ベースのプラットフォームで Agent のダウングレードが可能になります（注意事項あり。詳しくは `defaults/main.yml` を確認してください）。**注**: CentOS では、Ansible 2.4 以上でのみ可能になります。                                                                                                                             |
-| `datadog_enabled`                          | `false` に設定すると、`datadog-agent` のサービスが開始されなくなります（デフォルトでは `true`）。                                                                                                                                                                                                                     |
-| `datadog_additional_groups`                | `datadog_user` に追加するグループのリスト、またはグループをコンマで区切ったリストの文字列（Linux のみ）。                                                                                                                                                                                    |
-| `datadog_windows_ddagentuser_name`         | 作成または使用する Windows ユーザーの名前。`<domain>\<user>` の形式で指定します（Windows のみ）。                                                                                                                                                                                                                   |
-| `datadog_windows_ddagentuser_password`     | ユーザーの作成、あるいはサービスの登録に使用するパスワード（Windows のみ）。                                                                                                                                                                                                                          |
+| 変数                                   | 説明                                                                                                                                                                                                                                                                                                                                                        |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `datadog_api_key`                          | Datadog API キー。                                                                                                                                                                                                                                                                                                                                              |
+| `datadog_site`                             | Agent データの送信先である Datadog インテークのサイト。デフォルトでは `datadoghq.com` ですが、`datadoghq.eu` に設定すると、EU サイトにデータが送信されます。このオプションは、バージョン 6.6.0 以上の Agent でのみ使用可能です。                                                                                                                                                                   |
+| `datadog_agent_flavor`                     | RPI 上の IOT インストールに対するデフォルトの Debian / RedHat パッケージをオーバーライドします。デフォルトが "datadog-agent" の場合、RPI には "datadog-iot-agent" を使用します。                                                                                                                                                                                                                          |
+| `datadog_agent_version`                    | インストールする Agent のバージョンを固定します（例: `7.16.0`）。設定は任意ですが、推奨されています。`datadog_agent_version` を使用する場合、`datadog_agent_major_version` の設定は不要です。**注**: ダウングレードは、Windows プラットフォームではサポートされていません。                                                                                                                |
+| `datadog_agent_major_version`              | インストールする Agent のメジャーバージョン。5、6、または 7（デフォルト）を設定できます。`datadog_agent_version` を設定している場合はそれが優先されますが、そうでなければ、指定されたメジャーバージョンの中で最新のバージョンがインストールされます。`datadog_agent_version` を使用する場合、`datadog_agent_major_version` の設定は不要です。                                                          |
+| `datadog_checks`                           | Agent チェックのために追加する YAML コンフィギュレーション。<br> - Agent v6 および v7 では `/etc/datadog-agent/conf.d/<check_name>.d/conf.yaml` <br> - Agent v5 では `/etc/dd-agent/conf.d`                                                                                                                                                                                     |
+| `datadog_disable_untracked_checks`         | `datadog_checks` および `datadog_additional_checks` に存在しないすべてのチェックを削除するには `true` に設定します。                                                                                                                                                                                                                                                                |
+| `datadog_additional_checks`                | `datadog_disable_untracked_checks` が `true` に設定されている場合に削除されない、その他のチェックの一覧。                                                                                                                                                                                                                                                             |
+| `datadog_disable_default_checks`           | すべてのデフォルトチェックを削除するには、`true` に設定します。                                                                                                                                                                                                                                                                                                                        |
+| `datadog_config`                           | メインの Agent コンフィギュレーションの設定。<br> - Agent v6 および v7 では `/etc/datadog-agent/datadog.yaml` <br> - Agent v5 では `/etc/dd-agent/datadog.conf`（`[Main]` セクションの下）                                                                                                                                                                        |
+| `datadog_config_ex`                        | （任意）`/etc/dd-agent/datadog.conf` に追加する INI セクション（Agent v5 のみ）。                                                                                                                                                                                                                                                                               |
+| `datadog_apt_repo`                         | デフォルトの Datadog `apt` リポジトリをオーバーライドします。リポジトリのメタデータが Datadog の署名キーで署名されている場合は、`signed-by` オプションを使用してください: `deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://yourrepo`                                                                                                                          |
+| `datadog_apt_cache_valid_time`             | デフォルトの apt キャッシュの有効期限を上書きします（デフォルトでは 1 時間）。                                                                                                                                                                                                                                                                                               |
+| `datadog_apt_key_url_new`                  | Datadog `apt` キーを取得する場所をオーバーライドします (非推奨の `datadog_apt_key_url` 変数は、ロールから削除されて期限切れとなったキーを参照します)。URL は通常、 キー `382E94DE` および `F14F620E` を含む GPG 鍵束となります。                                                                                                        |
+| `datadog_yum_repo`                         | デフォルトの Datadog `yum` レポジトリを上書きします。                                                                                                                                                                                                                                                                                                                     |
+| `datadog_yum_repo_gpgcheck`                | デフォルトの `repo_gpgcheck` 値 (空白) をオーバーライドします。値が空白、かつカスタム `datadog_yum_repo` が使用されておらずシステムが RHEL/CentOS 8.1 でない場合 (dnf の[バグ](https://bugzilla.redhat.com/show_bug.cgi?id=1792506)の関係)、値は動的に `yes` に設定されます。そうでない場合は `no` が設定されます。**注**: Agent 5 では、repodata 署名認証は常にオフになっています。 |
+| `datadog_yum_gpgcheck`                     | デフォルトの `gpgcheck` の値 (`yes`) を上書き - パッケージ GPG 署名証明をオフにするには `no` を使用します。                                                                                                                                                                                                                                                           |
+| `datadog_yum_gpgkey`                       | Agent v5 および v6（6.13 以下）のパッケージの検証に使用される Datadog `yum` キー（キー ID : `4172A230`）へのデフォルト URL を上書きします。                                                                                                                                                                                                                                        |
+| `datadog_yum_gpgkey_e09422b3`              | Agent 6.14 以上のパッケージの検証に使用される Datadog `yum` キー（キー ID : `E09422B3`）へのデフォルト URL を上書きします。                                                                                                                                                                                                                                                        |
+| `datadog_yum_gpgkey_e09422b3_sha256sum`    | `datadog_yum_gpgkey_e09422b3` キーの、デフォルトのチェックサムを上書きします。                                                                                                                                                                                                                                                                                            |
+| `datadog_zypper_repo`                      | デフォルトの Datadog `zypper` レポジトリを上書きします。                                                                                                                                                                                                                                                                                                                  |
+| `datadog_zypper_repo_gpgcheck`             | デフォルトの `repo_gpgcheck` 値 (空白) をオーバーライドします。値が空白、かつカスタム `datadog_zypper_repo` が使用されていない場合、値は動的に `yes` に設定されます。そうでない場合は `no` が設定されます。**注**: Agent 5 では、repodata 署名認証は常にオフになっています。                                                                                                             |
+| `datadog_zypper_gpgcheck`                  | デフォルトの `gpgcheck` の値 (`yes`) を上書き - パッケージ GPG 署名証明をオフにするには `no` を使用します。                                                                                                                                                                                                                                                           |
+| `datadog_zypper_gpgkey`                    | Agent v5 および v6（6.13 以下）のパッケージの検証に使用される Datadog `zypper` キー（キー ID : `4172A230`）へのデフォルト URL を上書きします。                                                                                                                                                                                                                                     |
+| `datadog_zypper_gpgkey_sha256sum`          | `datadog_zypper_gpgkey` キーの、デフォルトのチェックサムを上書きします。                                                                                                                                                                                                                                                                                                  |
+| `datadog_zypper_gpgkey_e09422b3`           | Agent 6.14 以上のパッケージの検証に使用される Datadog `zypper` キー（キー ID : `E09422B3`）へのデフォルト URL を上書きします。                                                                                                                                                                                                                                                     |
+| `datadog_zypper_gpgkey_e09422b3_sha256sum` | `datadog_zypper_gpgkey_e09422b3` キーの、デフォルトのチェックサムを上書きします。                                                                                                                                                                                                                                                                                         |
+| `datadog_agent_allow_downgrade`            | `yes` に設定すると、apt ベースのプラットフォームで Agent のダウングレードが可能になります（注意事項あり。詳しくは `defaults/main.yml` を確認してください）。**注**: CentOS では、Ansible 2.4 以上でのみ可能になります。                                                                                                                                                                                      |
+| `datadog_enabled`                          | `false` に設定すると、`datadog-agent` のサービスが開始されなくなります（デフォルトでは `true`）。                                                                                                                                                                                                                                                                              |
+| `datadog_additional_groups`                | `datadog_user` に追加するグループのリスト、またはグループをコンマで区切ったリストの文字列（Linux のみ）。                                                                                                                                                                                                                                             |
+| `datadog_windows_ddagentuser_name`         | 作成または使用する Windows ユーザーの名前。`<domain>\<user>` の形式で指定します（Windows のみ）。                                                                                                                                                                                                                                                                            |
+| `datadog_windows_ddagentuser_password`     | ユーザーの作成、あるいはサービスの登録に使用するパスワード（Windows のみ）。                                                                                                                                                                                                                                                                                   |
+| `datadog_apply_windows_614_fix`            | `datadog_windows_614_fix_script_url` で参照されるファイルをダウンロードして適用するかどうか (Windowsのみ)。詳しくは https://dtdg.co/win-614-fix を参照してください。Datadog Agent 6.14.\* が動作していないホストでは、`false` に設定することができます。                                                                                                               |
+| `datadog_macos_user`                       | Agent を実行するユーザー名。ユーザーは存在しなければならず、自動的に作成されることはありません。デフォルトは `ansible_user` (macOS のみ) です。                                                                                                                                                                                                                        |
+| `datadog_macos_download_url`               | DMG インストーラーのダウンロード元 URL をオーバーライドします (macOS のみ)。                                                                                                                                                                                                                                                                                                  |
 
-### 統合
+### インテグレーション
 
 Datadog インテグレーション（チェック）を構成するには、`datadog_checks` セクションにエントリを追加します。第 1 レベルのキーにチェックの名前を入力し、値にはコンフィギュレーションファイルに記載する YAML ペイロードを入力します。以下にその例を示します。
 
@@ -111,6 +114,26 @@ Datadog インテグレーション（チェック）を構成するには、`da
         init_config:
         instances:
           - some_data: true
+```
+
+##### カスタム Python チェック
+
+Python チェックをプレイブックに渡すには、以下の構成を使用します。
+
+この構成では、Datadog の[プレイとロール][12]が、[Linux][13] または [Windows][14] のための実際のタスクへの相対ファイルパスとして渡される大きなプレイブックの一部であることが要求されます。
+
+これは Agent v6+ でのみ利用可能です。
+
+キーはチェックディレクトリ `checks.d/{{ item }}.py` に作成されるファイル名である必要があります。
+
+```yml
+    datadog_checks:
+      my_custom_check:
+        init_config:
+        instances:
+          - some_data: true
+    datadog_custom_checks:
+      my_custom_check: '../../../custom_checks/my_custom_check.py'
 ```
 
 #### オートディスカバリー
@@ -179,7 +202,7 @@ datadog_config:
 
 [Cloud Workload Security][8] は `runtime_security_config` 変数の下で構成されます。その下にネストされる変数はすべて、`runtime_security_config` セクションの `system-probe.yaml` および `security-agent.yaml` に書き込まれます。
 
-**注**: システムプローブは、Agent v6 以上の Linux でサポートされています。NPM は Agent v6.27 以降および v7.27 以降を搭載した Windows でサポートされています。Cloud Workload Security は、Agent 6.27+/7.27+ を搭載した Linux でサポートされています。
+**Windows をご利用の方へのご注意**: NPM は Agent v6.27+ と v7.27+ で Windows 上でサポートされています。NPM はオプションコンポーネントとして出荷され、Agent のインストールまたはアップグレード時に `network_config.enabled` が true に設定された場合にのみインストールされます。このため、Agent を同時にアップグレードしない限り、既存のインストールでは NPM コンポーネントをインストールするために一旦 Agent をアンインストールして再インストールする必要があるかもしれません。
 
 #### 構成サンプル
 
@@ -228,6 +251,7 @@ datadog_config_ex:
 
 - Debian および SUSE ベースの場合は `1:7.16.0-1`
 - RedHat ベースの場合は `7.16.0-1`
+- macOS の場合 `7.16.0-1`
 - Windows の場合は `7.16.0`
 
 これにより、ホストが複数の OS で稼働している場合に、バージョンを指定することが可能になります。以下に例を示します。
@@ -236,6 +260,7 @@ datadog_config_ex:
 |-------------------------------------|--------------|-----------------------|
 | `datadog_agent_version: 7.16.0`     | `1:7.16.0-1` | Debian および SUSE ベース |
 | `datadog_agent_version: 7.16.0`     | `7.16.0-1`   | RedHat ベース          |
+| `datadog_agent_version: 7.16.0`     | `7.16.0-1`   | macOS                 |
 | `datadog_agent_version: 7.16.0`     | `7.16.0`     | Windows               |
 | `datadog_agent_version: 1:7.16.0-1` | `1:7.16.0-1` | Debian および SUSE ベース |
 | `datadog_agent_version: 1:7.16.0-1` | `7.16.0-1`   | RedHat ベース          |
@@ -275,10 +300,21 @@ Datadog Ansible ロールは、Linux のみを対象として、Datadog Agent v5
 
 `datadog_windows_download_url` 変数が設定されていない場合は、`datadog_agent_major_version` に対応する Windows 公式 MSI パッケージが使用されます。
 
-| # | デフォルトの Windows MSI パッケージ URL                                                  |
-|---|----------------------------------------------------------------------------------|
-| 6 | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi |
-| 7 | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi |
+| Agent バージョン | デフォルトの Windows MSI パッケージ URL                                                  |
+|---------------|----------------------------------------------------------------------------------|
+| 6             | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi |
+| 7             | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi |
+
+デフォルトの動作を上書きするには、この変数に空の文字列ではなく、何か別の値を設定してください。
+
+#### macOS
+
+`datadog_macos_download_url` 変数が設定されていない場合は、`datadog_agent_major_version` に対応する macOS 公式 DMG パッケージが使用されます。
+
+| Agent バージョン | macOS DMG パッケージのデフォルトの URL                                |
+|---------------|--------------------------------------------------------------|
+| 6             | https://s3.amazonaws.com/dd-agent/datadog-agent-6-latest.dmg |
+| 7             | https://s3.amazonaws.com/dd-agent/datadog-agent-7-latest.dmg |
 
 デフォルトの動作を上書きするには、この変数に空の文字列ではなく、何か別の値を設定してください。
 
@@ -299,7 +335,7 @@ Datadog インテグレーションを、バージョンを指定してインス
 
 ##### Datadog Marketplace
 
-[Datadog Marketplace](https://www.datadoghq.com/blog/datadog-marketplace/)  インテグレーションは `datadog_integration` リソースでインストールすることができます。**注**: Marketplace のインテグレーションは「サードパーティ」にあたるため、`third_party: true` の設定が必要です。次の例を参照してください。
+[Datadog Marketplace][15] インテグレーションは `datadog_integration` リソースでインストールすることができます。**注**: Marketplace のインテグレーションは「サードパーティ」にあたるため、`third_party: true` の設定が必要です。次の例を参照してください。
 
 ##### 構文
 
@@ -496,6 +532,38 @@ ansible_become=no
 
 **注**: このコンフィギュレーションは、Linux ホストではエラーになります。プレイブックを Windows ホストでのみ実行する場合に使用するか、そうでない場合は、[インベントリファイルの方法](#inventory-file)を使用してください。
 
+### アンインストール
+
+Windows では、Ansible のロール内で以下のコードを使用することで、Agent をアンインストールすることが可能です。
+
+```yml
+- name: Check If Datadog Agent is installed
+  win_shell: |
+    (get-wmiobject win32_product -Filter "Name LIKE '%datadog%'").IdentifyingNumber
+  register: agent_installed_result
+- name: Set Datadog Agent installed fact
+  set_fact:
+    agent_installed: "{{ agent_installed_result.stdout | trim }}"
+- name: Uninstall the Datadog Agent
+  win_package:
+    product_id: "{{ agent_installed }}"
+    state: absent
+  when: agent_installed != ""
+```
+
+しかし、アンインストールのパラメーターをより詳細に制御するために、次のコードを使用することができます。
+この例では、'/norestart' フラグが追加され、アンインストールログのカスタムロケーションが指定されています。
+
+```yml
+- name: Check If Datadog Agent is installed
+  win_stat:
+  path: 'c:\Program Files\Datadog\Datadog Agent\bin\agent.exe'
+  register: stat_file
+- name: Uninstall the Datadog Agent
+  win_shell: start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/norestart', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
+  when: stat_file.stat.exists == True
+```
+
 ## トラブルシューティング
 
 ### Debian stretch
@@ -519,11 +587,13 @@ Debian Stretch では、ロールが `apt_key` モジュールを使用する際
     datadog_api_key: "<YOUR_DD_API_KEY>"
 ```
 
-### Python 3 インタープリターを備えた CentOS 6/7 
+### CentOS 6/7 と Python 3 インタプリター、Ansible 2.10.x またはそれ以下
 
-このロールで CentOS ベースのホストに Agent をインストールするために使用される `yum` Python モジュールは、Python 2 でのみ使用できます。ターゲットホストで Python 3 インタープリターが検出された場合、`dnf` パッケージマネージャーと `dnf` Python モジュールが使用されます。
+CentOS ベースのホストに Agent をインストールするためにこのロールで使用される `yum` Python モジュールは、Ansible 2.10.x 以下を使用する場合のみ Python 2 で利用可能です。そのような場合は、代わりに `dnf` パッケージマネージャーを使用する必要があります。
 
-ただし、CentOS 8 以前の CentOS ベースのホストでは、`dnf` と `dnf` Python モジュールはデフォルトではインストールされてはいません。この場合、Python 3 インタープリターが使用されていると Agent をインストールできません。この状況が検出されるとこのロールは早期に失敗し、CentOS / RHEL 8 以降に Agent をインストールする際に Python 2 インタープリターが必要であることを示します。
+ただし、CentOS 8 以前の CentOS ベースのホストでは、`dnf` および `dnf` Python モジュールはデフォルトではインストールされません。このため、Python 3 インタプリターを使用する場合、Agent をインストールすることができません。
+
+このロールは、CentOS / RHEL < 8 に Agent をインストールする際に、Ansible 2.11+ または Python 2 インタプリターが必要であることを示すために、この状況が検出されると早期に失敗します。
 
 この早期の障害検出を回避するには（たとえば、`dnf` と `python3-dnf` パッケージがホストで利用可能な場合）、`datadog_ignore_old_centos_python3_error` 変数を `true` に設定します。
 
@@ -551,3 +621,7 @@ Agent バージョン `6.14.0` と `6.14.1` には、Windows における重大�
 [9]: https://docs.datadoghq.com/ja/network_performance_monitoring/installation/?tab=agent#setup
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 [11]: https://app.datadoghq.com/help/agent_fix
+[12]: https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html#playbook-keywords
+[13]: https://github.com/DataDog/ansible-datadog/blob/main/tasks/agent-linux.yml
+[14]: https://github.com/DataDog/ansible-datadog/blob/main/tasks/agent-win.yml
+[15]: https://www.datadoghq.com/blog/datadog-marketplace/

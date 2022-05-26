@@ -138,7 +138,7 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 
 ## ダッシュボードおよびモニターへのアクセスを制限
 
-RBAC ロールをセットアップしたら、ユーザーロール別にダッシュボードおよびモニターへのアクセスを制限できます。詳しくは、[ダッシュボードのアクセス許可ドキュメント][8]および[モニターのアクセス許可ドキュメント][9]を参照してください。
+RBAC ロールをセットアップしたら、ユーザーロール別にダッシュボード、モニター、Synthetic テストへのアクセスを制限できます。詳しくは、[ダッシュボードのアクセス許可ドキュメント][8]、[モニターのアクセス許可ドキュメント][9]、[Synthetics のアクセス許可ドキュメント][10]を参照してください。
 
 ## その他の参考資料
 
@@ -153,3 +153,4 @@ RBAC ロールをセットアップしたら、ユーザーロール別にダッ
 [7]: /ja/account_management/rbac/permissions/
 [8]: /ja/dashboards/#restrict-access
 [9]: /ja/getting_started/monitors/#restrict-access
+[10]: /ja/synthetics/browser_tests/#permissions

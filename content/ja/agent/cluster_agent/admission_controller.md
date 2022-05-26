@@ -1,14 +1,15 @@
 ---
-title: Datadog Admission Controller
-kind: ドキュメント
 further_reading:
-  - link: /agent/cluster_agent/clusterchecks/
-    tag: Documentation
-    text: Autodiscovery によるクラスターチェックの実行
-  - link: /agent/cluster_agent/troubleshooting/
-    tag: Documentation
-    text: Datadog Cluster Agent のトラブルシューティング
+- link: /agent/cluster_agent/clusterchecks/
+  tag: Documentation
+  text: Autodiscovery によるクラスターチェックの実行
+- link: /agent/cluster_agent/troubleshooting/
+  tag: Documentation
+  text: Datadog Cluster Agent のトラブルシューティング
+kind: ドキュメント
+title: Datadog Admission Controller
 ---
+
 ## 概要
 Datadog Admission Controller は Datadog Cluster Agent のコンポーネントで、ユーザーが利用するアプリケーションポッドのコンフィギュレーションを簡略化できる便利なツールです。Admission Controller には以下の 2 つの機能が備わっています。
 
@@ -147,10 +148,10 @@ DogStatsD クライアントと APM トレーサーを自動で構成するに�
 #### 注
 
 - 新しいアプリケーションポッドを作成する前に、Admission Controller のデプロイと構成が必要です。既に存在するポッドは更新できません。
-- Admission Controller は環境変数 `DD_VERSION, DD_ENV` および `DD_SERVICE` が既に存在する場合は挿入を行いません。
+- Admission Controller は環境変数 `DD_VERSION`、`DD_ENV` および `DD_SERVICE` が既に存在する場合は挿入を行いません。
 - Admission Controller の挿入機能を無効化するには、Cluster Agent のコンフィギュレーション: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false` を使用します。
 - Datadog Admission Controller を使用すれば、ユーザーは Downward API ([Kubernetes トレースコレクション設定のステップ 2 ][3]) を利用してアプリケーションポッドの構成をスキップすることができます。
-- プライベートクラスターを使用していて、コンフィギュレーションがポッドに挿入されない場合は、Control Plane のファイアウォールルールを開き Datadog Webhook と通信します。この場合、[GCP でのファイアウォールルールの追加][4]で説明したように、ファイアウォールルールが 443 番ポートを開放していることを確認してください。
+- Google Kubernetes Engine (GKE) Private Cluster では、[コントロールプレーン用のファイアーウォールルールを追加する][4]必要があります。着信接続を処理する Webhook は、ポート `443` でリクエストを受け取り、ポート `8000` に実装されたサービスに誘導します。デフォルトでは、クラスターのネットワークに `gke-<CLUSTER_NAME>-master` という名前のファイアーウォールルールが存在するはずです。ルールの "ソースフィルター" は、クラスターの "コントロールプレーンのアドレス範囲" と一致します。このファイアーウォールルールを編集して、TCP ポート `8000` へのイングレッションを許可するようにします。
 
 
 ## その他の参考資料

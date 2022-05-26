@@ -4,15 +4,9 @@ kind: documentation
 aliases:
     - /graphing/widgets/geomap/
 further_reading:
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboards"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 - link: "/notebooks/"
   tag: "Documentation"
   text: "Notebooks"

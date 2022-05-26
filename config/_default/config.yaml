@@ -94,3 +94,9 @@ module:
       target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
+
+security:
+  funcs:
+    getenv:
+      # allow os.Getenv to read gitlab CI_ prefixed os environment vars
+      - ^(HUGO_|CI_)

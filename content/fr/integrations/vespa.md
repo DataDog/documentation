@@ -5,11 +5,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
+- data store
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md
 display_name: Vespa
 draft: false
 git_integration_title: vespa
@@ -25,11 +25,15 @@ metric_prefix: vespa.
 metric_to_check: vespa.mem.heap.free.average
 name: vespa
 public_title: Intégration Datadog/Vespa
-short_description: Surveillance de l'état et des performances du moteur de traitement big data Vespa
+short_description: Surveillance de l'état et des performances du moteur de traitement
+  big data Vespa
 support: contrib
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques de votre système [Vespa][1] en temps réel pour :
@@ -67,7 +71,7 @@ Pour configurer le check Vespa :
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][9] et cherchez `vespa` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][9] et cherchez `vespa` dans la section Checks.
 
 ## Données collectées
 

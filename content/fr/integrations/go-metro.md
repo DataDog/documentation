@@ -8,17 +8,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - languages
+- languages
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md
 display_name: Go-Metro
 draft: false
 git_integration_title: go-metro
 guid: 6d00688b-32b1-4755-98cd-44bd1bd40428
 integration_id: go-metro
 integration_title: Go-Metro
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -27,16 +28,20 @@ metric_prefix: system.
 metric_to_check: system.net.tcp.rtt
 name: go-metro
 public_title: Intégration Datadog/Go-Metro
-short_description: Calculer de manière passive les durées RTT des connexions TCP entre les hosts
+short_description: Calculer de manière passive les durées RTT des connexions TCP entre
+  les hosts
 support: core
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Le check TCP RTT transmet les durées d'aller-retour entre le host sur lequel l'Agent s'exécute et tout host avec lequel il communique. Ce check est passif et ne transmet que les durées RTT pour les paquets envoyés et reçus à l'extérieur du check. Le check n'envoie aucun paquet.
 
-Ce check est uniquement fourni avec les paquets 64 bits DEB et RPM de l'Agent v5 de Datadog. Il n'est actuellement _pas_ disponible pour l'Agent v6 de Datadog.
+Ce check est uniquement fourni avec les packages 64 bits DEB et RPM de l'Agent v5 de Datadog. Il n'est _pas_ disponible pour l'Agent v6 de Datadog.
 
 ## Configuration
 
@@ -68,8 +73,7 @@ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ### Configuration
 
-Modifiez le fichier `go-metro.yaml` dans le répertoire `conf.d` de votre Agent. Consultez [le fichier d'exemple go-metro.yaml][3] pour découvrir toutes les options de configuration disponibles.
-Voici un exemple de fichier qui affichera les durées TCP RTT pour app.datadoghq.com et 192.168.0.22 :
+Modifiez le fichier `go-metro.yaml` dans le répertoire `conf.d` de votre Agent. Consultez [le fichier d'exemple go-metro.yaml][3] pour découvrir toutes les options de configuration disponibles. Voici un exemple de fichier qui affiche les durées TCP RTT pour app.datadoghq.com et 192.168.0.22 :
 
 ```yaml
 init_config:
@@ -90,7 +94,7 @@ instances:
       - app.datadoghq.com
 ```
 
-*REMARQUE* : pour que go-metro s'exécute sans privilèges, vous devez définir les capacités CAP_NET_RAW sur le binaire :
+**Remarque** : pour que go-metro s'exécute sans privilèges, vous devez définir les capacités `CAP_NET_RAW` sur le binaire.
 ```
 # Installer les bibliothèques requises
 $ sudo apt-get install libcap  # debian
@@ -102,16 +106,15 @@ $ sudo yum install compat-libcap1  # autre bibliothèque redhat
 $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
-Étant donné que les noms des packages varient selon les distributions, si les instructions ci-dessus ne fonctionnent pas dans votre environnement, exécutez `apt-cache search libcap` ou `yum search libcap` pour afficher une sélection des packages qui peuvent fournir le binaire. N'hésitez pas à nous contacter si vous avez besoin d'aide.
+Étant donné que les noms des packages varient selon les distributions, si les instructions ci-dessus ne fonctionnent pas dans votre environnement, exécutez `apt-cache search libcap` ou `yum search libcap` pour afficher une sélection des packages qui fournissent le binaire. Contactez l'[assistance Datadog][4] si vous avez besoin d'aide.
 
-Veuillez également noter que go-metro enregistre ses entrées dans son propre fichier de log, qui se trouve à l'emplacement `/var/log/datadog/go-metro.log`.
-De plus, go-metro s'exécute indépendamment. Il ne s'affiche donc *PAS* dans la page d'informations de l'Agent.
+**Remarque** : go-metro enregistre ses entrées dans son propre fichier de log, qui se trouve à l'emplacement `/var/log/datadog/go-metro.log`. De plus, go-metro s'exécute indépendamment. Il ne s'affiche donc pas sur la page d'informations de l'Agent.
 
-Enfin, puisque le binaire go-metro est inclus avec les distributions RPM et DEB 64 bits de l'Agent Datadog, il est uniquement disponible pour ces versions. Ainsi, il n'est actuellement pas disponible avec l'installation depuis les sources ou les packages 32 bits.
+Enfin, puisque le binaire go-metro est seulement inclus avec les distributions RPM et DEB 64 bits de l'Agent Datadog, il est uniquement disponible pour ces versions, et non pour les versions installées depuis les sources ou les packages 32 bits.
 
 ### Validation
 
-Pour vérifier que le check fonctionne correctement, consultez les métriques `system.net.tcp.rtt` dans l'interface Datadog. En outre, si vous [lancez la sous-commande `status` de l'Agent][4], vous devriez voir des lignes de code similaires à ce qui suit :
+Pour vérifier que le check fonctionne correctement, assurez-vous que les métriques `system.net.tcp.rtt` s'affichent dans l'interface Datadog. En outre, si vous [lancez la sous-commande `status` de l'Agent][5], vous devriez obtenir une sortie similaire à ce qui suit :
 
 ```text
  datadog-agent.service - "Datadog Agent"
@@ -148,11 +151,11 @@ Le check Go-metro n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/go-metro
 [3]: https://github.com/DataDog/integrations-core/blob/master/go-metro/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/go-metro/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.datadoghq.com/fr/help/
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/go-metro/metadata.csv

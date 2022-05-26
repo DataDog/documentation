@@ -1,26 +1,27 @@
 ---
-title: RUM データとコンテキストの変更
-kind: documentation
 aliases:
-  - /ja/real_user_monitoring/installation/advanced_configuration/
-  - /ja/real_user_monitoring/browser/advanced_configuration/
+- /ja/real_user_monitoring/installation/advanced_configuration/
+- /ja/real_user_monitoring/browser/advanced_configuration/
 further_reading:
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-    tag: ブログ
-    text: Real User Monitoring
-  - link: /real_user_monitoring/browser/data_collected/
-    tag: ドキュメント
-    text: 収集された RUM ブラウザデータ
-  - link: /real_user_monitoring/explorer/
-    tag: ドキュメント
-    text: Datadog でビューを検索する
-  - link: /real_user_monitoring/explorer/analytics/
-    tag: ドキュメント
-    text: イベントに関する分析論を組み立てる
-  - link: /logs/log_configuration/attributes_naming_convention
-    tag: ドキュメント
-    text: Datadog 標準属性
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: Real User Monitoring
+- link: /real_user_monitoring/browser/data_collected/
+  tag: ドキュメント
+  text: 収集された RUM ブラウザデータ
+- link: /real_user_monitoring/explorer/
+  tag: ドキュメント
+  text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer/visualize/
+  tag: ドキュメント
+  text: イベントへの視覚化の適用
+- link: /logs/log_configuration/attributes_naming_convention
+  tag: ドキュメント
+  text: Datadog 標準属性
+kind: documentation
+title: RUM データとコンテキストの変更
 ---
+
 RUM によって[収集されたデータ][1]を変更して、次のニーズをサポートするには、さまざまな方法があります。
 
 - 個人を特定できる情報などの機密データを保護します。
@@ -310,7 +311,7 @@ window.DD_RUM &&
 
 ## ユーザーセッションを特定する
 
-RUM セッションにユーザー情報を追加すると、次のことが簡単になります。
+RUM セッションにユーザー情報を追加すると、次の役に立ちます。
 * 特定のユーザーのジャーニーをたどる
 * エラーの影響を最も受けているユーザーを把握する
 * 最も重要なユーザーのパフォーマンスを監視する
@@ -587,12 +588,9 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{% /tab %}}
 {{< /tabs >}}
 
-
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /ja/real_user_monitoring/browser/data_collected/
 [2]: /ja/real_user_monitoring/browser/monitoring_page_performance/

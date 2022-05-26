@@ -24,7 +24,7 @@ Kubernetes resources for Live Containers requires [Agent version >= 7.27.0][2] a
 If you are using the official [Datadog Helm Chart][1]:
 
 - Use chart version 2.10.0 or above
-  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your helm chart [values.yaml][2] file.
+  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your Helm chart [values.yaml][2] file.
 - Make sure the Process Agent is enabled. You can do this by modifying your `datadog-values.yaml` file to include:
 
     ```yaml
@@ -336,7 +336,7 @@ password: <MY_PASSWORD>
 password::::== <MY_PASSWORD>
 ```
 
-However it does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/secret/******` even though `secret` is a sensitive word.
+However it does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
 
 ## Further reading
 

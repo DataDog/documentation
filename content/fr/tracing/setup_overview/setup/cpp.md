@@ -1,27 +1,27 @@
 ---
-title: Tracer des applications C++
-kind: documentation
 aliases:
-  - /fr/tracing/cpp/
-  - /fr/tracing/languages/cpp/
-  - /fr/agent/apm/cpp/
-  - /fr/tracing/setup/cpp
-  - /fr/tracing/setup_overview/cpp
+- /fr/tracing/cpp/
+- /fr/tracing/languages/cpp/
+- /fr/agent/apm/cpp/
+- /fr/tracing/setup/cpp
+- /fr/tracing/setup_overview/cpp
 code_lang: cpp
-type: multi-code-lang
 code_lang_weight: 50
 further_reading:
-  - link: 'https://github.com/DataDog/dd-opentracing-cpp'
-    tag: Github
-    text: Code source
-  - link: /tracing/visualization/
-    tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
-  - link: /tracing/
-    tag: Utilisation avancée
-    text: Utilisation avancée
+- link: https://github.com/DataDog/dd-opentracing-cpp
+  tag: Github
+  text: Code source
+- link: /tracing/visualization/
+  tag: Documentation
+  text: Explorer vos services, ressources et traces
+- link: /tracing/
+  tag: Utilisation avancée
+  text: Utilisation avancée
+kind: documentation
+title: Tracer des applications C++
+type: multi-code-lang
 ---
-**Remarque** : le C++ ne fournit pas d'intégrations pour une instrumentation par défaut, mais il est utilisé pour le tracing en passant par un proxy comme [Envoy][1] et [Nginx][2]. Pour en savoir plus sur les exigences de compatibilité du traceur C++, consultez la [page dédiée][3].
+**Remarque** : le C++ ne fournit pas d'intégrations pour une instrumentation par défaut, mais il est utilisé pour le tracing en passant par un proxy comme [Envoy][1] et [Nginx][2]. Pour en savoir plus sur les exigences de compatibilité du traceur C++, consultez la [page dédiée][3]. 
 
 ## Prise en main
 
@@ -47,9 +47,9 @@ get_latest_release() {
     grep '"tag_name":' |
     sed -E 's/.*"([^"]+)".*/\1/';
 }
-VERSION_CPP_OPENTRACING_DD="$(get_latest_release DataDog/dd-opentracing-cpp)"
+DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 # Télécharger et installer la bibliothèque dd-opentracing-cpp.
-wget https://github.com/DataDog/dd-opentracing-cpp/archive/${VERSION_CPP_OPENTRACING_DD}.tar.gz -O dd-opentracing-cpp.tar.gz
+wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
 mkdir -p dd-opentracing-cpp/.build
 tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
 cd dd-opentracing-cpp/.build
@@ -173,12 +173,12 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 ## Configurer l'Agent Datadog pour l'APM
 
-Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des traces à partir de votre application instrumentée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml`, sous `apm_enabled: true`, et écoute le trafic des traces sur `localhost:8126`. Pour les environnements conteneurisés, suivez les liens ci-dessous afin d'activer la collecte de traces au sein de l'Agent Datadog.
+Installez et configurez l'Agent Datadog pour recevoir des traces de votre application désormais instrumentalisée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml` sous `apm_config` avec `enabled: true` et écoute le trafic de trace à `localhost:8126`. Pour les environnements coneteneurisés, suivez les liens ci-dessous pour activer la collecte de trace dans l'Agent Datadog.
 
 {{< tabs >}}
 {{% tab "Conteneurs" %}}
 
-1. Définissez `apm_non_local_traffic: true` dans votre [fichier de configuration principal `datadog.yaml`][1].
+1. Positionnez `apm_non_local_traffic: true` dans la section `apm_config` de votre [fichier de configuration `datadog.yaml`][1] principal.
 
 2. Consultez les instructions de configuration spécifiques pour vous assurer que l'Agent est configuré de façon à recevoir des traces dans un environnement conteneurisé :
 
@@ -203,7 +203,7 @@ Pour configurer l'APM Datadog dans AWS Lambda, consultez la documentation dédi
 {{% /tab %}}
 {{% tab "Autres environnements" %}}
 
-Le tracing est disponible pour un certain nombre d'environnements, tels que [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3] et l'[extension Azure App Services][4].
+La trace est disponible pour un certain nombre d'autres environnements, comme [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], et [Azure App Service][4].
 
 Pour les autres environnements, veuillez consulter la documentation relative aux [intégrations][5] pour l'environnement qui vous intéresse. [Contactez l'assistance][6] si vous rencontrez des problèmes de configuration.
 
@@ -218,20 +218,59 @@ Pour les autres environnements, veuillez consulter la documentation relative aux
 
 ### Variables d'environnement
 
-| Variable | Version | Valeur par défaut | Remarque |
-|----------|---------|---------|------|
-| `DD_AGENT_HOST` | v0.3.6 | `localhost` | Définit le host vers lequel les traces sont envoyées (le host qui exécute l'Agent). Il peut s'agir d'un hostname ou d'une adresse IP. Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini. |
-| `DD_TRACE_AGENT_PORT` | v0.3.6 | `8126` | Définit le port sur lequel les traces sont envoyées (le port où l'Agent écoute les connexions). Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini. |
-| `DD_TRACE_AGENT_URL` | v1.1.4 | | Définit l'URL d'endpoint où les traces sont envoyées. Utilisé à la place de `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` si défini. Cette URL prend en charge les schémas d'adresse HTTP, HTTPS et Unix. |
-| `DD_ENV` | v1.0.0 | | Lorsqu'il est défini, ce paramètre ajoute le tag `env` avec la valeur spécifiée à toutes les spans générées. |
-| `DD_SERVICE` | v1.1.4 | | Lorsqu'il est défini, ce paramètre définit le nom de service par défaut. Si ce n'est pas le cas, le nom de service doit être fourni via TracerOptions ou par la configuration JSON. |
-| `DD_TRACE_ANALYTICS_ENABLED` | v1.1.3 | `false` | Active App Analytics pour l'ensemble de l'application. |
-| `DD_TRACE_ANALYTICS_SAMPLE_RATE` | v1.1.3 | | Définit le taux d'échantillonnage App Analytics. Utilisé à la place de `DD_TRACE_ANALYTICS_ENABLED` si défini. Doit être un nombre flottant compris entre `0.0` et `1.0`. |
-| `DD_TRACE_SAMPLING_RULES` | v1.1.4 | `[{"sample_rate": 1.0}]` | Un tableau JSON d'objets. Chaque objet doit avoir un « sample_rate ». Les champs « name » et « service » sont facultatifs. La valeur de « sample_rate » doit être comprise entre 0.0 et 1.0 (inclus). Pour déterminer le taux d'échantillonnage de la trace, les règles sont appliquées dans l'ordre configuré. |
-| `DD_VERSION` | v1.1.4 | | Lorsqu'il est défini, ce paramètre ajoute le tag `version` avec la valeur spécifiée à toutes les spans générées. |
-| `DD_TAGS` | v1.1.4 | | Lorsqu'il est défini, ce paramètre ajoute des tags à l'ensemble des spans générées. Les tags doivent être inclus dans une liste de paires `key:value` séparées par des virgules. |
-| `DD_PROPAGATION_STYLE_INJECT` | v0.4.1 | `Datadog` | Le ou les styles de propagation à utiliser lors de l'injection des en-têtes de tracing. `Datadog`, `B3` ou `Datadog B3`. |
-| `DD_PROPAGATION_STYLE_EXTRACT` | v0.4.1 | `Datadog` | Le ou les styles de propagation à utiliser lors de l'extraction des en-têtes de tracing. `Datadog`, `B3` ou `Datadog B3`. |
+`DD_AGENT_HOST` 
+: **Version** : 0.3.6 <br>
+**Valeur par défaut** : `localhost` <br>
+Définit le host vers lequel les traces sont envoyées (le host qui exécute l'Agent). Il peut s'agir d'un hostname ou d'une adresse IP. Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini.
+
+`DD_TRACE_AGENT_PORT` 
+: **Version** : 0.3.6 <br>
+**Valeur par défaut** : `8126` <br>
+Définit le port vers lequel les traces sont envoyées (le port où l'Agent écoute les connexions). Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini.
+
+`DD_TRACE_AGENT_URL` 
+: **Version** : 1.1.4 <br>
+Définit l'URL d'endpoint où les traces sont envoyées. Lorsqu'il est défini, ce paramètre est utilisé à la place de `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`. Cette URL prend en charge les schémas d'adresse HTTP, HTTPS et Unix.
+
+`DD_ENV` 
+: **Version** : 1.0.0 <br>
+Lorsqu'il est défini, ce paramètre ajoute le tag `env` avec la valeur spécifiée à toutes les spans générées.
+
+`DD_SERVICE` 
+: **Version** : 1.1.4 <br>
+Lorsqu'il est défini, ce paramètre définit le nom de service par défaut. Si ce n'est pas le cas, le nom de service doit être fourni via TracerOptions ou par la configuration JSON.
+
+`DD_TRACE_ANALYTICS_ENABLED` 
+: **Version** : 1.1.3 <br>
+**Valeur par défault** : `false` <br>
+Active App Analytics pour l'ensemble de l'application.
+
+`DD_TRACE_ANALYTICS_SAMPLE_RATE` 
+: **Version** : 1.1.3 <br>
+Définit le taux d'échantillonnage App Analytics. Lorsqu'il est défini, ce paramètre est utilisé à la place de `DD_TRACE_ANALYTICS_ENABLED`. Doit être un nombre flottant compris entre `0.0` et `1.0`.
+
+`DD_TRACE_SAMPLING_RULES` 
+: **Version** : 1.1.4 <br>
+**Valeur par défaut** : `[{"sample_rate": 1.0}]` <br>
+Un tableau JSON d'objets. Chaque objet doit avoir un « sample_rate ». Les champs « name » et « service » sont facultatifs. La valeur de « sample_rate » doit être comprise entre 0.0 et 1.0 (inclus). Pour déterminer le taux d'échantillonnage de la trace, les règles sont appliquées dans l'ordre configuré.
+
+`DD_VERSION` 
+: **Version** : 1.1.4 <br>
+Lorsqu'il est défini, ce paramètre ajoute le tag `version` avec la valeur spécifiée à toutes les spans générées.
+
+`DD_TAGS` 
+: **Version** : 1.1.4 <br>
+Lorsqu'il est défini, ce paramètre ajoute des tags à l'ensemble des spans générées. Les tags doivent être inclus dans une liste de paires `key:value` séparées par des virgules.
+
+`DD_PROPAGATION_STYLE_INJECT` 
+: **Version** : 0.4.1 <br>
+**Valeur par défaut** : `Datadog` <br>
+Le ou les styles de propagation à utiliser lors de l'injection des en-têtes de tracing. `Datadog`, `B3` ou `Datadog B3`.
+
+`DD_PROPAGATION_STYLE_EXTRACT` 
+: **Version** : 0.4.1 <br>
+**Valeur par défaut** : `Datadog` <br>
+Le ou les styles de propagation à utiliser lors de l'extraction des en-têtes de tracing. `Datadog`, `B3` ou `Datadog B3`.
 
 ## Pour aller plus loin
 

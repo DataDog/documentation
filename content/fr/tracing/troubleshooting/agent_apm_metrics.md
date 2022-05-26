@@ -1,10 +1,11 @@
 ---
-title: Métriques APM envoyées par l'Agent Datadog
-kind: Documentation
 aliases:
-  - /fr/agent/faq/agent-apm-metrics/
-  - /fr/tracing/send_traces/agent-apm-metrics/
+- /fr/agent/faq/agent-apm-metrics/
+- /fr/tracing/send_traces/agent-apm-metrics/
+kind: Documentation
+title: Métriques APM envoyées par l'Agent Datadog
 ---
+
 Vous trouverez ci-dessous la liste des métriques de tracing fournies par défaut et envoyées par l'Agent Datadog lorsque l'[APM est activée][1]. Importez le [dashboard de surveillance APM][2] dans votre compte Datadog afin de bénéficier d'un dashboard prêt à l'emploi reprenant la plupart de ces métriques.
 
 
@@ -48,6 +49,10 @@ Augmente d'une unité à chaque obfuscation de déclaration SQL.
 `datadog.trace_agent.panic`
 : **Type** : gauge<br>
 Augmente d'une unité à chaque panique du code.
+
+`datadog.trace_agent.profile`
+: **Type** : count<br>
+Augmente d'une unité à chaque création d'un proxy inverse pour les endpoints de profils.
 
 `datadog.trace_agent.ratelimit`
 : **Type** : gauge<br>

@@ -199,6 +199,11 @@ DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild
 
 For UITests, both the test target and the application running from the UITests must link with the framework. Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
+### RUM Integration
+
+If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][3] guide. An iOS RUM version >= 1.10 is needed.
+
+
 ## Additional optional configuration
 
 For the following configuration settings:
@@ -220,8 +225,8 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
 : Disables all network instrumentation (Boolean)
 
-`DD_DISABLE_SDKIOS_INTEGRATION`
-: Disables integration with `dd-sdk-ios` logs and traces (Boolean)
+`DD_DISABLE_RUM_INTEGRATION`
+: Disables integration with RUM Sessions (Boolean)
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
@@ -279,7 +284,7 @@ DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 
 **Note**: Using OpenTelemetry is only supported for Swift.
 
-Datadog Swift testing framework uses [OpenTelemetry][3] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
+Datadog Swift testing framework uses [OpenTelemetry][4] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -682,4 +687,5 @@ Always call `session.end()` at the end so that all the test info is flushed to D
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
-[3]: https://opentelemetry.io/
+[3]: /continuous_integration/guides/rum_swift_integration
+[4]: https://opentelemetry.io/

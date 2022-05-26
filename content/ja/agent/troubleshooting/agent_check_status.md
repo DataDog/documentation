@@ -1,14 +1,15 @@
 ---
-title: Agent チェックのステータス
-kind: documentation
 further_reading:
-  - link: /agent/troubleshooting/debug_mode/
-    tag: Agent のトラブルシューティング
-    text: Agent デバッグモード
-  - link: /agent/troubleshooting/send_a_flare/
-    tag: Agent のトラブルシューティング
-    text: Agent フレアの送信
+- link: /agent/troubleshooting/debug_mode/
+  tag: Agent のトラブルシューティング
+  text: Agent デバッグモード
+- link: /agent/troubleshooting/send_a_flare/
+  tag: Agent のトラブルシューティング
+  text: Agent フレアの送信
+kind: documentation
+title: Agent チェックのステータス
 ---
+
 特定の Agent チェックで問題が発生している場合は、OS で次のコマンドを使用してトラブルシューティング情報を取得してください。
 
 - [Linux](#linux)
@@ -42,7 +43,7 @@ sudo -u dd-agent datadog-agent check <チェック名> --check-rate
 sudo -u dd-agent dd-agent check <チェック名>
 ```
 
-`<CHECK_NAME>` を Agent チェックに置き換えます。例: `activemq`、`ceph`、または `elastic`。[インテグレーションのドキュメント][1]を確認して、Agent チェック名を確認します。
+`<CHECK_NAME>` を Agent チェックに置き換えます。例: `activemq`、`ceph`、または `elastic`。[インテグレーションのドキュメント][4]を確認して、Agent チェック名を確認します。
 
 レートメトリクスを含める場合は、コマンドに `--check-rate` を追加します。Agent v6.x の場合は、次を実行します。
 
@@ -144,3 +145,4 @@ sudo journalctl -u dd-agent.service
 [1]: /ja/help/
 [2]: /ja/agent/troubleshooting/send_a_flare/
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[4]: /ja/integrations/

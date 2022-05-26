@@ -87,6 +87,10 @@
     "name": "Screenboards",
     "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
   },
+  "security-monitoring": {
+    "name": "Security Monitoring",
+    "description": "Detection rules for generating signals and listing of generated\nsignals."
+  },
   "service-checks": {
     "name": "Service Checks",
     "description": "The service check endpoint allows you to post check statuses for use with monitors.\nService check messages are limited to 500 characters. If a check is posted with a message\ncontaining more than 500 characters, only the first 500 characters are displayed. Messages\nare limited for checks with a Critical or Warning status, they are dropped for checks with\nan OK status.\n\n- [Read more about Service Check monitors.][1]\n- [Read more about Process Check monitors.][2]\n- [Read more about Network Check monitors.][3]\n- [Read more about Custom Check monitors.][4]\n- [Read more about Service Check and status codes.][5]\n\n[1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
@@ -125,7 +129,7 @@
   },
   "usage-metering": {
     "name": "Usage Metering",
-    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for the past 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request."
+    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request."
   },
   "users": {
     "name": "Users",

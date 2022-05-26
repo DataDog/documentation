@@ -1,51 +1,43 @@
 ---
-title: Associer vos logs Ruby à vos traces
-kind: documentation
-description: Associez vos logs Ruby à vos traces pour les mettre en corrélation dans Datadog.
+description: Associez vos logs Ruby à vos traces pour les mettre en corrélation dans
+  Datadog.
 further_reading:
-  - link: tracing/manual_instrumentation
-    tags: Enrichir vos traces
-    text: Instrumenter vos applications manuellement pour créer des traces
-  - link: tracing/opentracing
-    tags: Enrichir vos traces
-    text: Implémenter Opentracing dans vos applications
-  - link: tracing/visualization/
-    tag: Utiliser l'UI de l'APM
-    text: 'Explorer vos services, ressources et traces'
-  - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
-    tag: Blog
-    text: Corréler automatiquement des logs de requête avec des traces
+- link: https://www.datadoghq.com/blog/request-log-correlation/
+  tag: Blog
+  text: Corréler automatiquement vos logs de requête avec vos traces
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre
+    produits.
+kind: documentation
+title: Associer vos logs Ruby à vos traces
 ---
-## Injecter manuellement les ID des traces et des spans
 
-Dans de nombreux cas, par exemple pour le logging, il peut s'avérer utile de mettre en corrélation les ID de trace à d'autres événements ou flux de données afin de comparer ces différentes sources plus facilement. Le traceur peut générer un identifiant de corrélation pour la trace active via `active_correlation`, et cet identifiant peut ensuite être utilisé pour décorer les autres sources de données.
+## Mise en corrélation des traces
+
+Dans de nombreux cas, par exemple pour le logging, il peut s'avérer utile de mettre en corrélation les ID de trace à d'autres événements ou flux de données afin de comparer ces différentes sources plus facilement.
+
+### Journalisation dans les applications Rails
+
+#### Injection automatique
+
+Pour les applications Rails qui utilisent le logger par défaut (`ActiveSupport::TaggedLogging`) ou `lograge`, vous pouvez activer automatiquement l'injection des informations de mise en corrélation des traces en définissant l'option de configuration de l'instrumentation `rails` intitulée `log_injection` sur `true` ou en définissant la variable d'environnement `DD_LOGS_INJECTION=true`:
 
 ```ruby
-# Lorsqu'une trace est active…
-Datadog.tracer.trace('correlation.example') do
-  # Renvoie #<Datadog::Correlation::Identifier>
-  correlation = Datadog.tracer.active_correlation
-  correlation.trace_id # => 5963550561812073440
-  correlation.span_id # => 2232727802607726424
-  correlation.env # => 'production' (récupéré à partir de DD_ENV)
-  correlation.service # => 'billing-api' (récupéré à partir de DD_SERVICE)
-  correlation.version # => '2.5.17' (récupérée à partir de DD_VERSION)
-end
+# config/initializers/datadog.rb
+require 'ddtrace'
 
-# Lorsqu'une trace n'est pas active…
-correlation = Datadog.tracer.active_correlation
-# Renvoie #<Datadog::Correlation::Identifier>
-correlation = Datadog.tracer.active_correlation
-correlation.trace_id # => 0
-correlation.span_id # => 0
-correlation.env # => 'production' (récupéré à partir de DD_ENV)
-correlation.service # => 'billing-api' (récupéré à partir de DD_SERVICE)
-correlation.version # => '2.5.17' (récupérée à partir de DD_VERSION)
+Datadog.configure do |c|
+  c.use :rails, log_injection: true
+end
 ```
 
-#### Logging dans les applications Rails avec Lograge (méthode conseillée)
+**Remarque** : Rails charge les initialiseurs dans l'ordre alphabétique. Ainsi, pour les utilisateurs `lograge` qui ont également défini `lograge.custom_options` dans un fichier de configuration `initializers/lograge.rb`, il est possible que la corrélation automatique des traces ne soit pas appliquée. En effet, `initializers/datadog.rb` serait écrasé par l'initialiseur `initializers/lograge.rb`. Pour activer la corrélation automatique des traces avec un paramètre `lograge.custom_options` _existant_, utilisez la configuration [manuelle de Lograge](#Lograge) ci-dessous.
 
-Après avoir [configuré Lograge dans une application Rails][1], modifiez le bloc `custom_options` dans le fichier de configuration de votre environnement (p. ex., `config/environments/production.rb`) pour ajouter les ID de trace :
+#### Injection manuelle
+##### Lograge
+
+Après avoir [configuré Lograge dans une application Rails][1], modifiez manuellement le bloc `custom_options` dans le fichier de configuration de votre environnement (par exemple, `config/environments/production.rb`) pour ajouter les ID de trace.
 
 ```ruby
 config.lograge.custom_options = lambda do |event|
@@ -68,11 +60,9 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-#### Logging dans les applications Rails
+##### `ActiveSupport::TaggedLogging`
 
-Les applications Rails qui sont configurées avec un logger `ActiveSupport::TaggedLogging` peuvent ajouter des ID de corrélation en tant que tags aux logs générés. Le logger Rails par défaut applique ce logging avec tags, ce qui simplifie l'ajout de tags de corrélation.
-
-Ajoutez ce qui suit au fichier de configuration de votre environnement Rails :
+Les applications Rails configurées avec le logger `ActiveSupport::TaggedLogging` par défaut peuvent ajouter des ID de corrélation en tant que tags aux logs générés. Pour activer la mise en corrélation des traces avec `ActiveSupport::TaggedLogging`, ajoutez ce qui suit dans le fichier de configuration de votre environnement Rails :
 
 ```ruby
 Rails.application.configure do
@@ -91,7 +81,7 @@ end
 # [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-#### Logging dans les applications Ruby
+### Journalisation dans les applications Ruby
 
 Pour ajouter des ID de corrélation à votre logger, ajoutez un formateur de log qui récupère les ID de corrélation avec `Datadog.tracer.active_correlation`, puis ajoutez les ID au message.
 
@@ -131,15 +121,8 @@ logger.warn('This is an untraced operation.')
 Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.') }
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
-
-**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][2] pour analyser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `dd.trace_id` et  `dd.span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][3].
-
-Consultez la [documentation relative à la journalisation Ruby][2] pour vérifier que l'intégration de log Ruby est bien configurée et que vos logs Ruby sont automatiquement analysés.
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/logs/log_collection/ruby/
-[2]: /fr/logs/log_collection/ruby/#configure-the-datadog-agent
-[3]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[1]: /fr/logs/log_collection/ruby/

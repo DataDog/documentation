@@ -172,21 +172,20 @@ def handler():
 Manually keep a trace:
 
 ```ruby
-Datadog.tracer.trace(name, options) do |span|
+Datadog::Tracing.trace(name, options) do |span|
+  Datadog::Tracing.keep! # Affects the active span
 
-  # Always Keep the Trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP, true)
-  # method impl follows
+  # Method implementation follows
 end
 ```
 
 Manually drop a trace:
 
 ```ruby
-Datadog.tracer.trace(name, options) do |span|
-  # Always Drop the Trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP, true)
-  # method impl follows
+Datadog::Tracing.trace(name, options) do |span|
+  Datadog::Tracing.reject! # Affects the active span
+
+  # Method implementation follows
 end
 ```
 

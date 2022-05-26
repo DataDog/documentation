@@ -2,8 +2,11 @@
 integration_title: HDFS
 is_public: true
 kind: integration
-short_description: 'Surveillez l''utilisation des disques du cluster, les échecs de volume, les DataNodes morts, etc. more.'
+short_description: Surveillez l'utilisation des disques du cluster, les échecs de
+  volume, les DataNodes morts, etc. more.
 ---
+
+
 ## Intégration DataNode HDFS
 
 ![Dashboard HDFS][1]
@@ -24,22 +27,9 @@ Le check HDFS DataNode est inclus avec le package de l'[Agent Datadog][3] : vou
 
 ### Configuration
 
-#### Préparer le DataNode
-
-1. L'Agent recueille des métriques à partir de l'interface distante JMX de DataNode. L'interface est désactivée par défaut. Activez-la en définissant l'option suivante dans `hadoop-env.sh` (qui se trouve généralement dans $HADOOP_HOME/conf) :
-
-   ```conf
-   export HADOOP_DATANODE_OPTS="-Dcom.sun.management.jmxremote
-     -Dcom.sun.management.jmxremote.authenticate=false
-     -Dcom.sun.management.jmxremote.ssl=false
-     -Dcom.sun.management.jmxremote.port=50075 $HADOOP_DATANODE_OPTS"
-   ```
-
-2. Redémarrez le processus DataNode pour activer l'interface JMX.
-
 #### Associer l'Agent
 
-##<!-- xxx tabs xxx -->
+<!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
 #### Host
@@ -59,9 +49,9 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
      ##
      ## The hostname and port can be found in the hdfs-site.xml conf file under
      ## the property dfs.datanode.http.address
-     ## https://hadoop.apache.org/docs/r2.7.1/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml
+     ## https://hadoop.apache.org/docs/r3.1.3/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml
      #
-     - hdfs_datanode_jmx_uri: http://localhost:50075
+     - hdfs_datanode_jmx_uri: http://localhost:9864
    ```
 
 2. [Redémarrez l'Agent][6].
@@ -73,17 +63,17 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
-| Paramètre            | Valeur                                                |
-| -------------------- | ---------------------------------------------------- |
-| `<NOM_INTÉGRATION>` | `hdfs_datanode`                                      |
-| `<CONFIG_INIT>`      | vide ou `{}`                                        |
-| `<CONFIG_INSTANCE>`  | `{"hdfs_datanode_jmx_uri": "http://%%host%%:50075"}` |
+| Paramètre            | Valeur                                               |
+| -------------------- | --------------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `hdfs_datanode`                                     |
+| `<CONFIG_INIT>`      | vide ou `{}`                                       |
+| `<CONFIG_INSTANCE>`  | `{"hdfs_datanode_jmx_uri": "http://%%host%%:9864"}` |
 
 #### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans le fichier `datadog.yaml` avec :
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans le fichier `datadog.yaml` :
 
     ```yaml
       logs_enabled: true
@@ -121,9 +111,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check HDFS DataNode n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "hdfs_datanode" >}}
 
-**hdfs.datanode.jmx.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'interface JMX de DataNode pour une raison quelconque (p. ex, mauvais port fourni, délai d'expiration dépassé, parsing de la réponse JSON impossible).
 
 ## Dépannage
 
@@ -151,30 +140,17 @@ Utilisez ce check (hdfs_namenode) et son check complémentaire (hdfs_datanode), 
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
 
 ### Installation
 
 Le check HDFS NameNode est inclus avec le package de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos NameNodes.
 
-### Configuration
-
-#### Préparer le NameNode
-
-1. L'Agent recueille des métriques à partir de l'interface distante JMX de NameNode. L'interface est désactivée par défaut. Activez-la en définissant l'option suivante dans `hadoop-env.sh` (qui se trouve généralement dans \$HADOOP_HOME/conf) :
-
-    ```conf
-    export HADOOP_NAMENODE_OPTS="-Dcom.sun.management.jmxremote
-      -Dcom.sun.management.jmxremote.authenticate=false
-      -Dcom.sun.management.jmxremote.ssl=false
-      -Dcom.sun.management.jmxremote.port=50070 $HADOOP_NAMENODE_OPTS"
-    ```
-
-2. Redémarrez le processus NameNode pour activer l'interface JMX.
+### Procédure à suivre
 
 #### Associer l'Agent
 
-##<!-- xxx tabs xxx -->
+<!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
 #### Host
@@ -194,9 +170,9 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
      ##
      ## The hostname and port can be found in the hdfs-site.xml conf file under
      ## the property dfs.namenode.http-address
-     ## https://hadoop.apache.org/docs/r2.7.1/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml
+     ## https://hadoop.apache.org/docs/r3.1.3/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml
      #
-     - hdfs_namenode_jmx_uri: http://localhost:50070
+     - hdfs_namenode_jmx_uri: http://localhost:9870
    ```
 
 2. [Redémarrez l'Agent][6].
@@ -208,11 +184,11 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
-| Paramètre            | Valeur                                                 |
-| -------------------- | ----------------------------------------------------- |
-| `<NOM_INTÉGRATION>` | `hdfs_namenode`                                       |
-| `<CONFIG_INIT>`      | vide ou `{}`                                         |
-| `<CONFIG_INSTANCE>`  | `{"hdfs_namenode_jmx_uri": "https://%%host%%:50070"}` |
+| Paramètre            | Valeur                                                |
+| -------------------- | ---------------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `hdfs_namenode`                                      |
+| `<CONFIG_INIT>`      | vide ou `{}`                                        |
+| `<CONFIG_INSTANCE>`  | `{"hdfs_namenode_jmx_uri": "https://%%host%%:9870"}` |
 
 #### Collecte de logs
 
@@ -256,9 +232,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check HDFS NameNode n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "hdfs_namenode" >}}
 
-**hdfs.namenode.jmx.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'interface JMX de NameNode pour une raison quelconque (p. ex, mauvais port fourni, délai d'expiration dépassé, parsing de la réponse JSON impossible).
 
 ## Dépannage
 
