@@ -1,5 +1,5 @@
 ---
-title: Why Did My Monitor Settings Change Not Take Effect?
+title: Monitor settings changes not taking effect
 kind: guide
 aliases:
 - monitors/faq/why-did-my-monitor-settings-change-not-take-effect

@@ -24,9 +24,9 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone?{{< /nextlink >}}
     {{< nextlink href="monitors/guide/schedule-downtime-on-a-subset-of-hosts" >}}Schedule downtime on a subset of hosts{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/recovery-thresholds" >}}What are recovery thresholds?{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/recovery-thresholds" >}}Recovery thresholds{{< /nextlink >}}
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Adjusting "No Data" alerts for metric Monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Prevent alerts from monitors that were in downtime{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Why did my monitor settings change not take effect?{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Monitor settings changes not taking effect{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
 {{< /whatsnext >}}
