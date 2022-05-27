@@ -1,10 +1,10 @@
 ---
-title: Logs Showing an Info Status for Warnings or Errors
+title: Logs Show Info Status for Warnings or Errors
 kind: faq
 aliases:
   - /logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors.md
 further_reading:
-- link: "/logs/guide/how-to-remap-custom-severity-values-to-the-official-log-status/"
+- link: "/logs/guide/remap-custom-severity-to-official-log-status/"
   tag: "Guide"
   text: "Learn how to remap custom severity values to the official log status"
 - link: "/logs/log_configuration/processors"

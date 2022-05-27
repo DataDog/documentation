@@ -10,10 +10,10 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/guide/why-do-my-logs-not-have-the-expected-timestamp/"
+- link: "/logs/guide//logs-not-showing-expected-timestamp/"
   tag: "Guide"
   text: "Why do my logs not have the expected timestamp?"
-- link: "/logs/guide/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors/"
+- link: "/logs/guide/logs-show-info-status-for-warnings-or-errors/"
   tag: "Guide"
   text: "Why do my logs show up with an Info status even for Warnings or Errors?"
 ---

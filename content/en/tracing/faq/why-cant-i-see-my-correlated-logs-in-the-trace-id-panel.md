@@ -96,6 +96,6 @@ Once the IDs are properly injected and remapped into your logs, you can make a d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#trace
-[2]: /logs/guide/why-do-my-logs-not-have-the-expected-timestamp/
+[2]: /logs/guide/logs-not-showing-expected-timestamp/
 [3]: /tracing/visualization/#services
 [4]: /tracing/connect_logs_and_traces/
