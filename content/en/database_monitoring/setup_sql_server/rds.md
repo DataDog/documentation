@@ -29,6 +29,9 @@ Do the following steps to enable Database Monitoring with your database:
 
 ## Before you begin
 
+Supported SQL Server versions
+: 2014, 2016, 2017, 2019
+
 {{% dbm-sqlserver-before-you-begin %}}
 
 ## Grant the Agent access
@@ -38,10 +41,18 @@ The Datadog Agent requires read-only access to the database server to collect st
 Create a read-only login to connect to your server and grant the required permissions:
 
 ```SQL
+USE [master];
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
+GO
+--Set context to msdb database and create datadog user
+USE [msdb];
 CREATE USER datadog FOR LOGIN datadog;
+GO
+--Switch back to master and grant datadog user server permissions
+USE [master];
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+GO
 ```
 
 Create the `datadog` user in each additional application database:
