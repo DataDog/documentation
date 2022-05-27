@@ -1,5 +1,5 @@
 ---
-title: I have a custom log file with heightened read-permissions; how do I send it to Datadog?
+title: Send Logs from a Custom Log File with Heightened Read Permissions
 kind: faq
 aliases:
   - /logs/faq/i-have-a-custom-log-file-with-heightened-read-permissions

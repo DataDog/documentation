@@ -1,5 +1,5 @@
 ---
-title: How to tail logs from host using the Container Agent
+title: Use the Container Agent to Tail Logs from the Host
 kind: faq
 aliases:
   - /logs/faq/how-to-tail-logs-from-host-using-a-container-agent

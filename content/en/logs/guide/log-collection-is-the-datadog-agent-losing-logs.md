@@ -1,6 +1,6 @@
 ---
-title: Is the Datadog Agent losing logs?
-kind: faq
+title: Mechanisms to Ensure Logs are Not Lost
+kind: guide
 aliases:
   - /logs/faq/log-collection-is-the-datadog-agent-losing-logs
 further_reading:
