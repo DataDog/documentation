@@ -45,9 +45,9 @@ Datadog provides out-of-the-box graphs for any given resource:
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs"  style="width:90%;">}}
 
-### Export to timeboard
+### Export to dashboard
 
-On the upper-right corner of each graph, click on the up arrow in order to export your graph into a pre-existing [Timeboard][4].
+On the upper-right corner of each graph, click on the up arrow in order to export your graph into a pre-existing [Dashboard][4].
 
 ### Latency distribution
 
