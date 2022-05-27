@@ -1,6 +1,6 @@
 ---
 title: Logs Show Info Status for Warnings or Errors
-kind: faq
+kind: guide
 aliases:
   - /logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors.md
 further_reading:
