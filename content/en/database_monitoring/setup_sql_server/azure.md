@@ -80,10 +80,8 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
-```
 
-Create the `datadog` user in each additional application database:
-```SQL
+-- Create the `datadog` user in each additional application database:
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
