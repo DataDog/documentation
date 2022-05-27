@@ -13,8 +13,8 @@ further_reading:
 - link: "/logs/guide/why-do-my-logs-not-have-the-expected-timestamp/"
   tag: "Guide"
   text: "Why do my logs not have the expected timestamp?"
-- link: "/logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors/"
-  tag: "FAQ"
+- link: "/logs/guide/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors/"
+  tag: "Guide"
   text: "Why do my logs show up with an Info status even for Warnings or Errors?"
 ---
 
