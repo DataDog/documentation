@@ -8,13 +8,13 @@ further_reading:
   text: "Service Definition API"
 ---
 
-{{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
-
 <div class="alert alert-warning">This feature is in private beta and the endpoints are likely to change.</div>
+
+{{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
 
 ## Overview
 
-Datadog Service Catalog is a centralized place to access important information about all services in your organization. Achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. Pivot quickly into team communications tools (Slack), source control (Github), dashboards, and Datadog views that receive and monitor telemetry data for each service.
+Datadog Service Catalog is a centralized place to access important information about all services in your organization. Achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. Access team communications tools such as Slack, source control such as Github, dashboards, and Datadog views that receive and monitor telemetry data for each service.
 
 In contrast to the current APM Service List, Service Catalog includes services that are not actively emitting trace metrics, meaning your service needn't be instrumented to be listed in the catalog, and also that you can quickly spot instrumentation issues for services that should have trace data.
 
