@@ -63,12 +63,29 @@ CREATE USER datadog FOR LOGIN datadog;
 
 Create a read-only login to connect to your server and grant the required permissions:
 
+#### For SQL Server versions 2014+
+
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+```
+
+#### For SQL Server 2012
+
+```SQL
+CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
+CREATE USER datadog FOR LOGIN datadog;
+GRANT VIEW SERVER STATE to datadog;
+GRANT VIEW ANY DEFINITION to datadog;
+```
+
+Create the `datadog` user in each additional application database:
+```SQL
+USE [database_name];
+CREATE USER datadog FOR LOGIN datadog;
 ```
 
 {{% /tab %}}
