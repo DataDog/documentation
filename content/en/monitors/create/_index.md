@@ -51,6 +51,7 @@ You can download a JSON file containing the definition of a monitor from the mon
 {{< nextlink href="/monitors/create/types/outlier" >}}<u>Outlier</u>: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/process_check" >}}<u>Process Check</u>: Watch the status produced by the process.up service check.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/real_user_monitoring" >}}<u>Real User Monitoring</u>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/synthetics/guide/synthetic-test-monitors" >}}<u>Synthetic Monitoring</u>: Monitor metric values or test status from Synthetic test runs.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/watchdog" >}}<u>Watchdog</u>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< /whatsnext >}}
 
