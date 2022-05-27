@@ -16,7 +16,7 @@ further_reading:
 
 Datadog Service Catalog is a centralized place to access important information about all services in your organization. Achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. Access team communications tools such as Slack, source control such as Github, dashboards, and Datadog views that receive and monitor telemetry data for each service.
 
-In contrast to the current APM Service List, Service Catalog includes services that are not actively emitting trace metrics, meaning your service needn't be instrumented to be listed in the catalog, and also that you can quickly spot instrumentation issues for services that should have trace data.
+Compared to the APM Service List, the Service Catalog includes services that do not actively emit trace metrics, which means you do not need to instrument your service for it to appear. You can also examine instrumentation issues for services that should have trace data.
 
 The Service Catalog is useful for:
 - Training new developers and site reliability engineers by providing a clear view of all services, their structures, and links to more information.
@@ -30,17 +30,17 @@ The Service Catalog is useful for:
 
 ## Browse the Service Catalog
 
-On the [Service Catalog page][1], see the list of services in your Datadog organization, either detected from collected data, or defined by someone [registering the service](#registering-a-new-service). To find a particular service, search by its name. To filter the list, select one or more facets. For example, to see detected services that don't yet have a service definition, click the **Ownership Info > Telemetry Only** facet. You might find it helpful to filter by your team name. Or scope the metrics shown to particular environments and clusters to see only matching services in the list.
+On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or defined by someone [registering the service](#registering-a-new-service). To find a particular service, search by its name. To filter the list, select one or more facets. For example, to see detected services without a service definition yet, click the **Ownership Info > Telemetry Only** facet. You may find it helpful to filter by your team name or scope the metrics displayed to particular environments and clusters in order to see only matching services in the list.
 
 The list of services in the catalog is sortable service type, service name, as well as many of the other columns, making it quick to find specific or missing details (for example owning team on the Ownership view), and to sort by urgency (for example, number of triggered monitors on the Reliability view).
 
-Useful information about the service provided either by the service definition or by Datadog products collecting observability data from the service, is organized into three views: Ownership, Reliability, and Performance.
+Information about the service provided by the service definition or by Datadog products collecting observability data is organized into three views: Ownership, Reliability, and Performance.
 
 ### Ownership view
 
 Clicking the icons in the Contact and Source code columns take you directly to the tools and projects specified in the service's definition. For example, you can access the owning team's Slack channel, or click directly into the Github repository that contains the service code.
 
-The Telemetry column instantly shows you what types of telemetry data Datadog is collecting for the service, and clicking the icons takes you into the corresponding Datadog product view for the service. For example, the Agent has sent traces to Datadog, click the Traces icon to view them in APM.
+The **Telemetry** column displays what types of telemetry data Datadog is collecting for the service. Clicking on the icons directs you into the corresponding Datadog product view. For example, the Agent sends traces to Datadog, and you can click the **Traces** icon to view them in APM.
 
 Clicking the three-dot menu lets you edit the service definition, if it exists, or link to one if the service hasn't yet been defined. You might have to first [set up an integration with your source code system][2] if you haven't yet.
 
