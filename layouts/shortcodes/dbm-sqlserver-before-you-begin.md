@@ -1,6 +1,3 @@
-Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019
-
 Supported Agent versions
 : 7.35.0+
 
