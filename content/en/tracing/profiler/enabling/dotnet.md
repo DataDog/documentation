@@ -21,13 +21,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 </div>
 
 The following profiling features are available:
-
-|      Feature         | Set this environment variable to 1   |
-|----------------------|--------------------------------------|
-| Wall time profiling  | Always enabled                       |
-| CPU time profiling   | DD_PROFILING_CPU_ENABLED             |
-| Exception profiling  | DD_PROFILING_EXCEPTION_ENABLED       |
-
+- **Method durations** shows the overall time taken by each method from your code.
+- **CPU** shows the time taken executing CPU tasks (see Configuration section to enable it).
 
 ## Requirements
 
@@ -113,6 +108,9 @@ To install the .NET Profiler machine-wide:
    CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
    DD_DOTNET_TRACER_HOME=/opt/datadog
    LD_PRELOAD=/opt/datadog/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
    ```
 
 4. For standalone applications, manually restart the application as you normally would.
