@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline or Test monitor.
+Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline or CI Test monitor.
 
 CI monitors allow you to visualize CI data and set up alerts on it. For example, create a CI Pipeline monitor to receive alerts on a failed pipeline or a job. Create a CI Test monitor to receive alerts on failed or slow tests.
 
@@ -35,11 +35,11 @@ To create a [CI monitor][2] in Datadog, use the main navigation: *Monitors -> Ne
 
 <div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 CI monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
-Choose between a **Pipelines** or **Tests** monitor:
 
 {{< tabs >}}
 {{% tab "Pipelines" %}}
 
+To create a CI Pipeline monitor:
 ### Define the search query
 
 1. Construct a search query using the same logic as a CI Pipeline explorer search.
@@ -75,26 +75,28 @@ The following example is of a pipeline error rate monitor using a formula that c
 {{% /tab %}}
 {{% tab "Tests" %}}
 
+To create a CI Test monitor:
 ### Define the search query
 
-1. Construct a search query using the same logic as a CI Test explorer search. For example, we can search failed tests for a branch `main` using the following query: `@test.status:fail @git.branch:main`
+1. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for a branch `main` using the following query: `@test.status:fail @git.branch:main`
 2. Choose to monitor over a CI Test event count, facet, or measure:
     * **Monitor over a CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Test events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a dimension**: If a dimension (qualitative facet) is selected, the monitor alerts over the `Unique value count` of the facet.
-    * **Monitor over a measure**: If a measure (quantitative facet) is selected, the monitor alerts over the numerical value of the CI Test facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * **Monitor over a measure**: If a measure (quantitative facet) is selected, the monitor alerts over the numerical value of the CI Test facet (similar to a metric monitor) and an aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 
 3. Group CI Test events by multiple dimensions (optional):
    All CI Test events matching the query are aggregated into groups based on the value of up to four facets.
 4. Configure the alerting grouping strategy (optional):
-   * If the query has a `group by`, you will receive an alert for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` to receive a separate alert for each CI Test full name when the number of errors is high. Test full name is a combination of a test suite and test name, e.g. `MySuite.myTest`. In Swift test full name is a combination of a test bundle, suite and name, e.g. `MyBundle.MySuite.myTest`.
+   * If the query has a `group by`, an alert is sent for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` to receive a separate alert for each CI Test full name when the number of errors is high. Test full name is a combination of a test suite and test name, for example: `MySuite.myTest`. In Swift, test full name is a combination of a test bundle, and suite and name, for example: `MyBundle.MySuite.myTest`.
 
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:80%;" >}}
 
 #### Test runs with different parameters or configurations
-If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way alerts will trigger for test runs with specific test parameters or configurations. Using `@test.fignerpint` provides the same granularity level as the Test Stats, Failed and Flaky Tests section on the Commit Overview page.
+If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way, alerts trigger for test runs with specific test parameters or configurations. Using `@test.fignerpint` provides the same granularity level as the Test Stats, Failed and Flaky Tests section on the **Commit Overview** page.
 
-For example, if a test with the same full name failed on Chrome, but passed on Firefox, then using the fingerprint will only trigger the alert on the Chrome test run.
-Using `@test.full_name` in this case will trigger the alert, even though the test passed on Firefox.
+For example, if a test with the same full name failed on Chrome, but passed on Firefox, then using the fingerprint only triggers the alert on the Chrome test run.
+
+Using `@test.full_name` in this case triggers the alert, even though the test passed on Firefox.
 
 #### Formulas and functions
 
@@ -104,7 +106,7 @@ The following example is a test error rate monitor using a formula that calculat
 
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:80%;" >}}
 
-<div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
+<div class="alert alert-info"><strong>Note</strong>: A maximum of two queries can be used to build the evaluation formula per monitor.</div>
 {{% /tab %}}
 {{< /tabs >}}
 ### Set alert conditions
