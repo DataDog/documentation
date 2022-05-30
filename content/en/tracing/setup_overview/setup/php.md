@@ -103,7 +103,7 @@ curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datado
 Run the installer
 
 ```shell
-# Full installation - APM + ASM = Profiling (Beta)
+# Full installation: APM + ASM + Profiling (Beta)
 php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 
 # APM only
@@ -112,7 +112,7 @@ php datadog-setup.php --php-bin=all
 # APM + ASM
 php datadog-setup.php --php-bin=all --enable-appsec
 
-# APM + profiling (Beta)
+# APM + Profiling (Beta)
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
@@ -127,7 +127,7 @@ It might take a few minutes before traces appear in the UI. If traces still do n
 
 <div class="alert alert-warning">
 <strong>Apache ZTS:</strong>
-If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, it is required that you manually change the extension to be loaded for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example from <code>ddtrace-20210902.so</code> to <code>ddtrace-20210902-zts.so</code>.
+If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, it is required that you manually change the extension to be loaded for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
 If you can't use the PHP installer, we provide [alternative installation methods][6].

@@ -5,7 +5,7 @@ kind: faq
 
 ## Before you start
 
-Datadog strongly encourages you to install the PHP extension through the [official installer][1]. If you still prefer to use alternarnative installation methods, follow the steps below.
+Datadog strongly encourages you to install the PHP extension through the [official installer][1]. If you still prefer to use alternative installation methods, follow the steps below.
 
 <div class="alert alert-info">
 <strong>Note:</strong>
