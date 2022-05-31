@@ -104,7 +104,6 @@ The following attributes are related to the geo-location of IP addresses:
 | `geo.country`         | string | Name of the country.                                                                                                                  |
 | `geo.country_iso_code`     | string | [ISO Code][2] of the country (for example, `US` for the United States or `FR` for France).                                                  |
 | `geo.country_subdivision`     | string | Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France). |
-| `geo.country_subdivision_iso_code` | string | [ISO Code][2] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
 | `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).                                                                 |
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (for example, `Paris` or `New York`).                                                                                   |
@@ -257,7 +256,7 @@ Source errors include code-level information about the error. More information a
 [3]: /help/
 [4]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
 [5]: /synthetics/browser_tests/
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#how-is-loading-time-calculated
+[6]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [7]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event

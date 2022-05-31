@@ -1,21 +1,22 @@
 ---
-title: OpenTelemetry トレースとログに接続
-kind: documentation
 description: アプリケーションログと OpenTelemetry トレースを接続して Datadog で関連付けます
 further_reading:
-  - link: /tracing/setup_overview/open_standards/
-    tag: Documentation
-    text: OpenTelemetry トレースを Datadog へ送信
-  - link: https://opentelemetry.io/docs/collector/
-    tag: OpenTelemetry
-    text: Collectorドキュメント
-  - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
-    tag: ブログ
-    text: Datadog と OpenTelemetry のパートナーシップ
-  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-    tag: ガイド
-    text: クロスプロダクト相関で容易にトラブルシューティング。
+- link: /tracing/setup_overview/open_standards/
+  tag: Documentation
+  text: OpenTelemetry トレースを Datadog へ送信
+- link: https://opentelemetry.io/docs/collector/
+  tag: OpenTelemetry
+  text: Collectorドキュメント
+- link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
+  tag: ブログ
+  text: Datadog と OpenTelemetry のパートナーシップ
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: ガイド
+  text: クロスプロダクト相関で容易にトラブルシューティング。
+kind: documentation
+title: OpenTelemetry トレースとログに接続
 ---
+
 OpenTelemetry 言語の SDK ログおよびトレースの Datadog 内での接続は、[Datadog SDK ログおよびトレース][1]の接続とほぼ同じですが、さらに以下の手順が必要です。
 
 1. OpenTelemetry `TraceId` および `SpanId` プロパティは、Datadog のルールセットと異なります。そのため、`TraceId` と `SpanId` を OpenTelemetry の形式 ([符号なし 128bit 整数および符号なし 64bit 整数は、それぞれ 32 Hex 文字列および 16 Hex 文字列 (小文字)][2]) を Datadog 形式 ([符号なし 64bit 整数][3]) に変換する必要があります。
@@ -327,13 +328,23 @@ func convertTraceID(id string) string {
 
 {{< programming-lang lang="dotnet" >}}
 
-.NET のトレースとログの相関では、[Datadog SDK .NET 例][1]を変更して上記で説明した追加ステップを含めます。
+トレースとログを手動で相関付けるには、OpenTelemetry の `TraceId` と `SpanId` を Datadog が使用するフォーマットに変換します。これらの ID をログに `dd_trace_id` と `dd_span_id` 属性で追加してください。次の例では、[Serilog ライブラリ][1]を使用して、OTel (`System.DiagnosticSource.Activity`) のトレースとスパン ID を Datadog の要求するフォーマットに変換する方法を示しています。
 
-ご質問は、[Datadog サポートまでお問い合わせ][2]ください。
+```csharp
+var stringTraceId = Activity.Current.TraceId.ToString();
+var stringSpanId = Activity.Current.SpanId.ToString();
 
+var ddTraceId = Convert.ToUInt64(stringTraceId.Substring(16), 16).ToString();
+var ddSpanId = Convert.ToUInt64(stringSpanId, 16).ToString();
 
-[1]: /ja/tracing/connect_logs_and_traces/dotnet/
-[2]: /ja/help/
+using (LogContext.PushProperty("dd_trace_id", ddTraceId))
+using (LogContext.PushProperty("dd_span_id", ddSpanId))
+{
+    Serilog.Log.Logger.Information("Example log line with trace correlation info");
+}
+```
+
+[1]: https://serilog.net/
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

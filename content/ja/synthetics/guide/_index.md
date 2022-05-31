@@ -1,13 +1,15 @@
 ---
-title: Synthetic モニタリングガイド
+disable_sidebar: true
 kind: ガイド
 private: true
+title: Synthetic モニタリングガイド
 ---
 
 {{< whatsnext desc="一般的なガイド:" >}}
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}SLO による Web サイトのアップタイムの監視{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Synthetic ボットを特定する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-usage/" >}}Synthetics の使用量を監視する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Synthetic テストでモニターを使用する{{< /nextlink >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}クロス積相関によるトラブルシューティングの容易化{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Synthetic テストのキャッシュの問題の回避{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -31,4 +33,6 @@ private: true
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}カスタムユーザーエージェントでステップを記録する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}ブラウザテスト Chrome 拡張機能を手動で追加する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manage-browser-tests-through-the-api/" >}}ブラウザテストをプログラムで管理する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}ブラウザテストで Shadow DOM を使用する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Synthetics で RUM エクスプローラーのプレビューを見る{{< /nextlink >}}
 {{< /whatsnext >}}

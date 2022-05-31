@@ -1,16 +1,17 @@
 ---
-title: Schéma JSON des widgets
-kind: documentation
 aliases:
-  - /fr/graphing/graphing_json/widget_json/
+- /fr/graphing/graphing_json/widget_json/
 further_reading:
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
-  - link: /dashboards/graphing_json/request_json/
-    tag: Documentation
-    text: Schéma JSON des requêtes
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/request_json/
+  tag: Documentation
+  text: Schéma JSON des requêtes
+kind: documentation
+title: Schéma JSON des widgets
 ---
+
 Pour en savoir plus sur l'éditeur visuel, consultez la documentation sur l'[éditeur de graphiques][1].
 
 ## Schéma de l'axe des ordonnées

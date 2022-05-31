@@ -100,7 +100,7 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
-[3]: /agent/faq/heroku-troubleshooting/#send-a-flare
+[3]: /agent/guide/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 {{% /tab %}}

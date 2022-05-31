@@ -1,17 +1,19 @@
 ---
-title: エンリッチメントテーブルを含むログにカスタムメタデータを追加する
-kind: ガイド
 beta: true
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法について
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: パースの詳細
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: ログの処理方法について
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: パースの詳細
+kind: ガイド
+title: エンリッチメントテーブルを含むログにカスタムメタデータを追加する
 ---
+
 <div class="alert alert-warning">
-エンリッチメントテーブル機能は現在非公開ベータ版です。詳細については、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください。
+エンリッチメントテーブル機能は現在公開ベータ版です。エンリッチメントテーブルを定義したりクエリを作成したりしても、請求内容には影響しません。詳細については、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください。
+ベータ版期間中は、1 アカウントにつき 100 個のエンリッチメントテーブルという制限があります。
 </div>
 
 ## 概要
@@ -28,6 +30,9 @@ further_reading:
 **New Enrichment Table +** をクリックしてから、CSV ファイルをアップロードし、適切な列に名前を付けて、ルックアップのプライマリキーを定義します。
 
 {{< img src="logs/guide/enrichment-tables/configure-enrichment-table.png" alt="エンリッチメントテーブルを作成する" style="width:100%;">}}
+
+**注**: CSV の手動アップロードは、4MB までのファイルをサポートしています。
+
 {{% /tab %}}
 
 {{% tab "AWS S3 アップロード" %}}
@@ -62,6 +67,8 @@ S3 からエンリッチメントテーブルを更新するために、Datadog 
 
 {{< img src="logs/guide/enrichment-tables/configure-s3-enrichment-table.png" alt="エンリッチメントテーブルを作成する" style="width:100%;">}}
 
+**注**: S3 バケットからのアップロードは、200MB までのファイルをサポートしています。
+
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#installation
 {{% /tab %}}
@@ -71,7 +78,14 @@ S3 からエンリッチメントテーブルを更新するために、Datadog 
 
 ## エンリッチメントテーブルを変更する
 
-既存のエンリッチメントテーブルを新しいデータで変更するには、テーブルを選択してから右上隅にある **Update Data +** をクリックします。選択した CSV がテーブルにアップサートされます。つまり、同じプライマリキーを持つ既存のすべての行が更新され、すべての新しい行が追加されます。テーブルが保存されると、アップサートされた行は非同期で処理され、プレビューで更新されます。更新された行が影響を受けるログに表示されるまで、最大 10 分かかる場合があります。
+既存のエンリッチメントテーブルを新しいデータで変更するには、テーブルを選択し、右上の **Update Data +** をクリックします。
+選択した CSV がテーブルにアップサートされます。つまり、
+
+* 同じ主キーを持つ既存の行はすべて更新される
+* すべての新しい行が追加される
+* 新しいファイルに含まれない古い行はすべて削除される
+
+テーブルが保存されると、アップサートされた行は非同期で処理され、プレビューで更新されます。更新が完了するまでには、最大で 10 分かかる場合があります。
 
 ## その他の参考資料
 

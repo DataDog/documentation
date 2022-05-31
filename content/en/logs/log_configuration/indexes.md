@@ -43,9 +43,17 @@ The Log Explorer supports [queries across multiple indexes][7].
 
 If multiple indexes is activated, use the "New Index" button to create a new index.
 
-{{< img src="logs/indexes/add-index.png" alt="Add index"  style="width:70%;">}}
+{{< img src="logs/indexes/add-index.png" alt="Add index" style="width:70%;">}}
 
 **Note**: Index names must start with a letter and can only contain lowercase letters, numbers, or the '-' character.
+
+### Delete indexes
+
+To delete an index from your organization, use the "Delete icon" in the index action tray.
+
+{{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
+
+**Note:** The deleted index will no longer accept new incoming logs. The logs already in the deleted index will age out based on the retention period, so they are not dropped immediately. After the retention period is reached, the index will no longer show up in the Index page.
 
 ## Indexes filters
 

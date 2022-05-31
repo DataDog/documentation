@@ -1,43 +1,37 @@
 ---
-title: Python ログとトレースの接続
-kind: ドキュメント
 description: Python ログとトレースを接続して Datadog で関連付けます。
 further_reading:
-  - link: /tracing/manual_instrumentation/
-    tag: ドキュメント
-    text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
-  - link: /tracing/opentracing/
-    tag: ドキュメント
-    text: アプリケーション全体に Opentracing を実装します。
-  - link: /tracing/visualization/
-    tag: ドキュメント
-    text: サービス、リソース、トレースの詳細
-  - link: https://www.datadoghq.com/blog/request-log-correlation/
-    tag: ブログ
-    text: 自動的にリクエストログとトレースに相関性を持たせる
-  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-    tag: ガイド
-    text: クロスプロダクト相関で容易にトラブルシューティング。
+- link: /tracing/manual_instrumentation/
+  tag: ドキュメント
+  text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
+- link: /tracing/opentracing/
+  tag: ドキュメント
+  text: アプリケーション全体に Opentracing を実装します。
+- link: /tracing/visualization/
+  tag: ドキュメント
+  text: サービス、リソース、トレースの詳細
+- link: https://www.datadoghq.com/blog/request-log-correlation/
+  tag: ブログ
+  text: 自動的にリクエストログとトレースに相関性を持たせる
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: ガイド
+  text: クロスプロダクト相関で容易にトラブルシューティング。
+kind: ドキュメント
+title: Python ログとトレースの接続
 ---
-## 自動挿入
 
-`ddtrace-run` を使用する場合は、環境変数 `DD_LOGS_INJECTION=true` を使用して挿入を有効にします。
-トレーサーを `DD_ENV`、`DD_SERVICE`、`DD_VERSION` で構成した場合、`env`、`service`、`version` も自動的に追加されます。[統合サービスタグ付け][1]の詳細をご覧ください。
-
-**注**: 自動挿入に対しては標準ライブラリ `logging` がサポートされています。また、標準ライブラリモジュールを拡張する `json_log_formatter` などのライブラリも自動挿入に対してサポートされています。`ddtrace-run` はアプリケーションの実行前に `logging.basicConfig` を呼び出します。ルートロガーにハンドラーが構成されている場合、アプリケーションはルートロガーとハンドラーを直接変更する必要があります。
-
-## 手動挿入
+## 挿入可否
 
 ### 標準ライブラリロギング
 
-手動で[トレース][2]とログに相関性を持たせたい場合は、ログフォーマッタを更新して `logging` モジュールにパッチを適用し、ログレコードの ``dd.trace_id`` と ``dd.span_id`` 属性を含めます。
+[トレース][2]とログを相関付けるには、ログレコードから必要な属性を含むようにログフォーマットを更新し、`ddtrace.patch(logging=True)` を呼び出します。
 
-同様に、ログレコードの属性として ``dd.env``、``dd.service``、``dd.version`` を含めます。
+ログレコードの ``dd.env``、``dd.service``、``dd.version``、``dd.trace_id``、``dd.span_id`` 属性を、フォーマット文字列に含めます。
 
-以下のコンフィギュレーションは自動挿入メソッドによって使用され、Python ログインテグレーションでデフォルトでサポートされています:
+以下は、`logging.basicConfig` を使用して、ログ挿入の構成を行う例です。
 
 ``` python
-from ddtrace import patch_all; patch_all(logging=True)
+from ddtrace import patch; patch(logging=True)
 import logging
 from ddtrace import tracer
 

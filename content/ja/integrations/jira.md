@@ -1,147 +1,120 @@
 ---
-"categories":
-- "collaboration"
-- "issue tracking"
-- "notification"
-"ddtype": "crawler"
-"dependencies": []
-"description": "このインテグレーションを使用して、Datadog でトリガーされたアラートからチケットを作成したり、既存のチケットを新しい情報で更新したりすることができます。Additionally, you can see JIRA ticket creations as events within Datadog to overlay with all of your metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/jira/"
-"draft": false
-"git_integration_title": "jira"
-"has_logo": true
-"integration_id": "jira"
-"integration_title": "Jira"
-"is_public": true
-"kind": "インテグレーション"
-"manifest_version": "1.0"
-"name": "jira"
-"public_title": "Datadog-Jira インテグレーション"
-"short_description": "Datadog でアラートを自動生成し、その後 JIRA チケットを更新。"
-"version": "1.0"
+categories:
+- collaboration
+- issue tracking
+- notification
+ddtype: crawler
+dependencies: []
+description: このインテグレーションにより、Datadog でトリガーされたアラートからチケットを作成し、新しい情報が発生すると既存のチケットを更新することができます。さらに、Jira
+  チケットの作成を Datadog 内のイベントとして表示し、すべてのメトリクスと重ね合わせることができます。
+doc_link: https://docs.datadoghq.com/integrations/jira/
+draft: false
+git_integration_title: jira
+has_logo: true
+integration_id: ''
+integration_title: Jira
+integration_version: ''
+is_public: true
+kind: インテグレーション
+manifest_version: '1.0'
+name: jira
+public_title: Datadog-Jira インテグレーション
+short_description: Datadog でアラートを自動生成し、その後 Jira チケットを更新。
+version: '1.0'
 ---
 
 ## 概要
 
-JIRA は、ソフトウェアチームのための課題およびプロジェクト追跡システムです。このインテグレーションを使用すると、Datadog でトリガーされたアラートから課題を作成し、新しい情報が得られるたびに既存の課題を更新します。さらに、JIRA の課題の作成は、イベントとして Datadog に追加され、メトリクスに重ねて表示されます。
+Jira は、ソフトウェアチーム向けの課題およびプロジェクト追跡システムです。Datadog Jira インテグレーションにより、Datadog でトリガーされたアラートから課題を作成し、Jira で作成された課題を Datadog のイベントとして表示することができます。
 
 ## セットアップ
 
-### インストール
+### Jira でアプリケーションリンクを作成する
 
-1. Jira アカウントに移動します。
-2. 設定の歯車アイコン（画面右上）から **Products**をクリックします。
-3. 左側のメニューで、INTEGRATIONS から **Application links** を選択します。
-4. URL `https://app.datadoghq.com/` を入力し、**Create new link** をクリックします。**注**: _No response was received from the URL you entered_ という警告が表示されても、無視して **Continue** をクリックしてください。
-5. 下記のようにフォームに入力し、**Continue** をクリックします。
+1. Jira に移動します。
+2. 右端の歯車アイコンをクリックし、** Products** を選択します。
+3. 左メニューの **Integrations** の下にある **Application links** をクリックします。
+4. URL `https://app.datadoghq.com/` を入力し、**Create new link** をクリックします。
+5. "No response was received from the URL you entered” (入力した URL から応答がありません) という警告を無視して、**Continue** をクリックします。
+6. 下記のようにフォームに入力し、**Continue** をクリックします。
 
-    | フィールド                 | 入力                              |
-    |-----------------------|------------------------------------|
-    | Application Name      | 任意の名前 (識別に使用) |
-    | Application Type      | 一般的なアプリケーション                |
-    | Service Provider Name | `[leave blank]`                    |
-    | Consumer key          | `[leave blank]`                    |
-    | Shared secret         | `[leave blank]`                    |
-    | Request Token URL     | `[leave blank]`                    |
-    | Access token URL      | `[leave blank]`                    |
-    | Authorize URL         | `[leave blank]`                    |
-    | Create incoming link  | ボックスをチェック                      |
+    | フィールド                 | 入力                          |
+    |-----------------------|--------------------------------|
+    | Application Name      | `{Enter a name (e.g. Datadog)}`|
+    | Application Type      | 一般的なアプリケーション            |
+    | Service Provider Name | `{leave blank}`                |
+    | Consumer key          | `{leave blank}`                |
+    | Shared secret         | `{leave blank}`                |
+    | Request Token URL     | `{leave blank}`                |
+    | Access token URL      | `{leave blank}`                |
+    | Authorize URL         | `{leave blank}`                |
+    | Create incoming link  | ボックスをチェック                  |
 
-6.  次のフォームに [Datadog Jira インテグレーションタイル][1]の情報を入力し、**Continue** をクリックします。
+7. 次のフォームに以下のように入力し、**Continue** をクリックします。[Datadog Jira インテグレーションタイル][1]で公開鍵を見つけるには、**Add Account** をクリックします。
 
-    | フィールド         | 入力                                       |
-    |---------------|---------------------------------------------|
-    | Consumer Key  | datadog                                     |
-    | Consumer Name | Datadog                                     |
-    | Public Key    | [Datadog Jira インテグレーションタイル][1]を参照。 |
+    | フィールド         | 入力                                                      |
+    |---------------|------------------------------------------------------------|
+    | Consumer Key  | `{キー名を入力 (例: datadog)}`                        |
+    | Consumer Name | Datadog                                                    |
+    | Public Key    | `{Datadog Jira インテグレーションタイルから公開鍵を入力}`|
 
-### コンフィギュレーション
+### Datadog を Jira インスタンスに接続する
 
-1. [Datadog Jira インテグレーションタイル][1]の手順 2 で、Jira アカウントの URL を入力します。例:
-    ```text
-    https://your-jira.atlassian.net
-    ```
-2. 次に、**Setup OAuth1** ボタンをクリックします。
+1. [Datadog Jira インテグレーションタイル][1]に移動し、**Add Account** をクリックします。
+2. Jira インスタンスの URL と、以前に作成したアプリケーションリンクのコンシューマーキーを入力します。
+3. **Connect** をクリックし、Jira 認証ページの指示に従います。
 
-#### 課題の追加
+### IP フィルタリング
 
-JIRA インテグレーションをインストールしたら、Datadog でカスタム課題を作成します。
+Jira インスタンスが IP アドレスによってトラフィックをフィルタリングする場合、インテグレーションが機能するためには、Datadog に属する **Webhooks** IP プレフィックスからの接続を許可する必要があります。お住まいの地域の **Webhooks** IP プレフィックスのリストについては、[Datadog IP 範囲][2]を参照してください。
 
-1. まず、**Add Issue** ボタンをクリックします。
-2. 課題の Project key と Issue type を入力します。**注**: 各課題は、一意のプロジェクト ID – 課題タイプの組み合わせを持ちます。
-3. オプションで、Datadog タグを `<KEY:VALUE>` 形式で追加します。
-4. この課題の **Required fields** が表示されたら、これらのフィールドにすべて入力する必要があります。
-5. Other fields はオプションです。
-6. **Save** ボタンをクリックします。
 
-{{< img src="integrations/jira/jira-issue.png" alt="Jira の課題" >}}
+## 課題テンプレートを構成する
 
-**注**: 上のように、必須のフィールド **Severity** がある場合、使用できる値は以下に制限されます。
 
-- 1 - クリティカル
-- 2 - メジャー
-- 3 - マイナー
+課題テンプレートは、Datadog のアラートイベントから Jira で課題がどのように作成されるかを定義します。
 
-課題フィールドの入力には、値とアラートイベントに含まれる変数を使用できます。以下にすべての変数を示します。
+課題テンプレートを作成するには
 
-| 変数           | 説明                                                                                                  |
-|--------------------|--------------------------------------------------------------------------------------------------------------|
-| \$ID               | イベントの ID _(例: 1234567)_                                                                              |
-| \$EVENT_TITLE      | イベントのタイトル _(例: \[Triggered] \[Memory Alert])_                                                      |
-| \$EVENT_MSG        | イベントのテキスト _(例: @webhook-url Sending to the webhook)_                                                |
-| \$EVENT_TYPE       | イベントの種類 _(例: metric_alert_monitor)_                                                               |
-| \$LAST_UPDATED     | イベントが最後に更新された日付                                                                         |
-| \$DATE             | イベントが発生した日付 (Epoch) _(例: 1406662672000)_                                                  |
-| \$AGGREG_KEY       | 所属が同じイベントを集約するための ID _(例: 9bd4ac313a4d1e8fae2482df7b77628)_                            |
-| \$ORG_ID           | オーガニゼーションの ID _(例: 11023)_                                                                        |
-| \$ORG_NAME         | オーガニゼーションの名前 _(例: Datadog)_                                                                    |
-| \$USER             | Webhook をトリガーしたイベントをポストしたユーザー _(例: rudy)_                                               |
-| \$SNAPSHOT         | イベントにスナップショットが含まれている場合は、そのイメージの URL _(例: `https://url.to.snpashot.com/`)_                     |
-| \$LINK             | イベントの URL _(例: `https://app.datadoghq.com/event/jump_to?event_id=123456`)_                           |
-| \$PRIORITY         | イベントの優先度 _(例: normal)_                                                                         |
-| \$TAGS             | イベントタグのカンマ区切りリスト _(例: monitor, name:myService, role:computing-node)_                  |
-| \$TEXT_ONLY_MSG    | マークダウン書式設定なしのイベントのテキスト                                                                |
-| \$ALERT_ID         | アラートの ID _(例: 1234)_                                                                                     |
-| \$ALERT_METRIC     | メトリクスがアラートの場合は、メトリクスの名前 _(例: system.load.1)_                                                    |
-| \$ALERT_QUERY      | Webhook をトリガーしたモニターのクエリ                                                              |
-| \$ALERT_STATUS     | アラートステータスのサマリー _(例: system.load.1 over host:my-host was > 0 at least once during the last 1m)_ |
-| \$ALERT_TRANSITION | アラート通知の種類 _(例: Triggered)_                                                                 |
-| \$HOSTNAME         | イベントに関連付けられたサーバーのホスト名 (ある場合)                                      |
-| \$ALERT_CYCLE_KEY  | アラートがトリガーした時点から解決するまでイベントにリンクする ID                                         |
-| \$LOGS_SAMPLE      | ログモニターアラートからのログサンプル                                                                         |
+1. **New Issue Template** をクリックします。
+2. 課題テンプレートの名前を入力します。この名前の前に `jira-` を付けると、モニターで通知を送るためのハンドルになります (`jira-my-issue-template-name` のように)。
+3. Jira アカウントを選択します。
+4. プロジェクトと課題の種類 (**Story**、*Epic**、*Task**、*Bug**など) を選択します。
+5. 構成可能なフィールドのリストが表示されます。必要な項目に値を入力し、** Save** をクリックします。
 
-### ユースケース
+### 課題のフィールドを構成する
+
+課題テンプレートフィールドは、Jira で課題を作成する際に含まれるデータを定義します。たとえば、特定の優先度やデフォルトの担当者で課題を作成するようにテンプレートを構成することができます。
+
+`${EVENT_TITLE}` などのテンプレート変数を使用すると、アラートイベントのデータを使用して、課題フィールドに値を入力することができます。使用可能な変数の一覧は、[Datadog Webhooks インテグレーション][3]を参照してください。
+
+## 使用方法
 
 #### Datadog アラートから自動的に課題を作成する
 
-Datadog アラート内で自動的に JIRA の課題を作成するには、新しいモニター作成プロセスの "Say what's happening" セクションで `@jira-<PROJECT_NAME>-<ISSUE_TYPE>` コマンドを使用します。
+Datadog のアラートイベントから Jira 課題を作成するには、**Notify your team** または **Say what's happening** セクションでモニターを作成する際に `@jira-my-issue-template` などの 1 つまたは複数の課題テンプレートの通知ハンドルを入力する必要があります。
 
-このアラートがトリガーされると、新しい課題が作成されます。
-
-`@jira-update` コマンドを使用して、既存の課題を更新できます。このコマンドは、`@jira-update` コマンドに続くテキストを使用して、JIRA 課題にコメントを追加します。
-
-ヒント – `@jira` コマンドを #is_alert または #is_warning 変数内で使用すると便利です。
-
-{{< img src="integrations/jira/JiraInstallation8.png" alt="モニターの設定" >}}
+課題は、モニターがトリガーされたときに作成されます。モニターが解決されるまで、モニターによって新しい課題が作成されることはありません。
 
 ## 収集データ
 
 ### メトリクス
 
-JIRA インテグレーションには、メトリクスは含まれません。
+Jira インテグレーションには、メトリクスは含まれません。
 
 ### イベント
 
-作成されたすべての JIRA の課題は、Datadog 内にイベントとして表示されます。
+作成されたすべての Jira の課題は、Datadog 内にイベントとして表示されます。
 
 ### サービスのチェック
 
-JIRA インテグレーションには、サービスのチェック機能は含まれません。
+Jira インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/jira
-[2]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
+[3]: https://docs.datadoghq.com/ja/integrations/webhooks/
+[4]: https://docs.datadoghq.com/ja/help/

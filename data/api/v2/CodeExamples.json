@@ -387,6 +387,11 @@
       "group": "logs",
       "suffix": "_3496222707",
       "description": "Send gzip logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "",
+      "description": "Send logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
     }
   ],
   "CreateLogsMetric": [
@@ -478,11 +483,32 @@
       "description": "List tags by metric name returns \"Success\" response"
     }
   ],
+  "SubmitMetrics": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Submit metrics returns \"Payload accepted\" response"
+    }
+  ],
+  "EstimateMetricsOutputSeries": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Tag Configuration Cardinality Estimator returns \"Success\" response"
+    }
+  ],
   "UpdateTagConfiguration": [
     {
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag configuration returns \"OK\" response"
+    }
+  ],
+  "UploadIdPMetadata": [
+    {
+      "group": "organizations",
+      "suffix": "",
+      "description": "Upload IdP metadata returns \"OK\" response"
     }
   ],
   "ListProcesses": [
@@ -701,6 +727,34 @@
       "group": "service_accounts",
       "suffix": "_819075131",
       "description": "Get one app key owned by this service account returns \"OK\" response"
+    }
+  ],
+  "GetCostByOrg": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get cost across multi-org account returns \"OK\" response"
+    }
+  ],
+  "GetUsageApplicationSecurityMonitoring": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Application Security returns \"OK\" response"
+    }
+  ],
+  "GetUsageLambdaTracedInvocations": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Lambda Traced Invocations returns \"OK\" response"
+    }
+  ],
+  "GetUsageObservabilityPipelines": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage for Observability Pipelines returns \"OK\" response"
     }
   ],
   "CreateServiceAccount": [

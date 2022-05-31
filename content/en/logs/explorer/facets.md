@@ -185,7 +185,7 @@ You may wish to keep the non-standard _aliased_ version of the facet if you are 
 
 ### Out-of-the-box facets
 
-Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
+Most common facets such as `Host` and `Service` come out-of-the-box, so you can start troubleshooting right away once your logs are flowing into log indexes.
 
 Facets on [Reserved Attributes][25] and most [Standard Attributes][26] are available by default.
 

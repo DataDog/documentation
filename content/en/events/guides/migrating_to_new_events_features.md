@@ -3,6 +3,10 @@ title: Migrating to the New Events Features
 kind: documentation
 aliases:
   /events/guides/migrating_from_stream_to_explorer
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-events/"
+  tag: "Blog"
+  text: "Troubleshoot faster with improved Datadog Events"
 ---
 
 <div class="alert alert-warning">
@@ -15,30 +19,17 @@ Launched more than 10 years ago, Datadog's event stream is one of its earliest f
 
 ## What is the migration timeline?
 
-The following timeline applies to US-based customers:
+<strong>March 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors that are not managed with APIs.
 
-<strong>March 5, 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors not managed using the API.
+<strong>May 5, 2022</strong> - The event stream is retired in favor of the Event Explorer.
 
-<strong>April 30, 2022</strong> - The event stream is retired in favor of the Event Explorer.
-
-<strong>May 15, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
-
-<strong>June 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
-
-
-The following timeline applies to EU-based customers:
-
-<strong>March 30, 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors not managed using the API.
-
-<strong>May 6, 2022</strong> - The event stream is retired in favor of the Event Explorer.
-
-<strong>May 20, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
+<strong>May 19, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
 
 <strong>June 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
 
 ## What action do I need to take?
 
-If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them on June 30, 2022.
+If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them by June 30, 2022 at the latest.
 
 <strong>If you use Terraform or other API-based scripts</strong> to manage all or some of your <strong>dashboards</strong>, Datadog will migrate queries in your event widgets and overlays to the new syntax, but you will need to update your scripts to keep them in sync before June 30, 2022.
 
@@ -120,6 +111,9 @@ Your monitors are not evaluated beyond a 48 hour window. If you need to use a lo
   * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
   * Four facets results in a limit of five top values per group (at most 625 groups)
 
+### Recovery thresholds in monitors are no longer supported
+Event monitor thresholds no longer support the `warning_recovery` and `critical_recovery` threshold types. Recovery thresholds need to be removed in new Event monitors.
+
 If you are using these features, [contact Support][6] to get help finding an alternative solution.
 
 ## Examples
@@ -171,7 +165,7 @@ EC2 Instance marked for maintenance
 : Legacy syntax </br>
 `events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`
 : New syntax </br>
-`events('"Upcoming AWS maintenance event"').rollup("count").by("name,host").last("2d") >= 1`
+`events("Upcoming AWS maintenance event").rollup("count").by("name,host").last("2d") >= 1`
 
 Zabbix or Prometheus has triggered an alert for a service today
 : Legacy syntax </br>
@@ -184,6 +178,11 @@ No events received in a datacenter for service `datadog-agent`
 Legacy Event Monitors do not support cardinality rollup.
 : New syntax </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /events/explorer
 [2]: /events/explorer/#event-analytics

@@ -20,25 +20,20 @@ further_reading:
   text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-## Automatic injection
-
-Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
-If you have configured your tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then `env`, `service`, and `version` will also be added automatically. Learn more about [unified service tagging][1].
-
-**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
-
-## Manual injection
+## Injection
 
 ### Standard library logging
 
-If you prefer to manually correlate your [traces][2] with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
+To correlate your [traces][1] with your logs, update your log format to include
+the required attributes from the log record and call `ddtrace.patch(logging=True)`.
 
-Similarly, include ``dd.env``, ``dd.service``, and ``dd.version`` as attributes for your log record.
+Include the ``dd.env``, ``dd.service``, ``dd.version``, ``dd.trace_id`` and
+``dd.span_id`` attributes for your log record in the format string.
 
-The configuration below is used by the automatic injection method and is supported by default in the Python Log Integration:
+Here is an example using `logging.basicConfig` to configure the log injection:
 
 ``` python
-from ddtrace import patch_all; patch_all(logging=True)
+from ddtrace import patch; patch(logging=True)
 import logging
 from ddtrace import tracer
 
@@ -106,16 +101,15 @@ Once the logger is configured, executing a traced function that logs an event yi
 {"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped using the [Trace Remapper][4]. For more information, see [Why can’t I see my correlated logs in the Trace ID panel?][5].
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped using the [Trace Remapper][3]. For more information, see [Why can’t I see my correlated logs in the Trace ID panel?][4].
 
-[See the Python logging documentation][3] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
+[See the Python logging documentation][2] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
-[2]: /tracing/visualization/#trace
-[3]: /logs/log_collection/python/#configure-the-datadog-agent
-[4]: /logs/log_configuration/processors/#trace-remapper
-[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[1]: /tracing/visualization/#trace
+[2]: /logs/log_collection/python/#configure-the-datadog-agent
+[3]: /logs/log_configuration/processors/#trace-remapper
+[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

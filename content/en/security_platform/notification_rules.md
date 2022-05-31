@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Security Notification Rules play a key role in Cloud SIEM by keeping your team informed of issues without you having to manually edit notification preferences for individual security detection rules.
+Security Notification Rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual security detection rules.
 
 Create and modify notification preferences within a notification rule to span across multiple security detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 

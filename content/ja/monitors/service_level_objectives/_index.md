@@ -1,18 +1,22 @@
 ---
-title: サービスレベル目標
-kind: documentation
-description: SLO のステータスを追跡する
 aliases:
-  - /ja/monitors/monitor_uptime_widget/
-  - /ja/monitors/slos/
+- /ja/monitors/monitor_uptime_widget/
+- /ja/monitors/slos/
+description: SLO のステータスを追跡する
 further_reading:
-  - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
-    tag: ブログ
-    text: Datadog で SLO のステータスとエラーバジェットを追跡する
-  - link: https://learn.datadoghq.com/course/view.php?id=34
-    tag: ラーニングセンター
-    text: サービスレベル目標 (SLO) について
+- link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
+  tag: ブログ
+  text: Datadog で SLO のステータスとエラーバジェットを追跡する
+- link: https://learn.datadoghq.com/course/view.php?id=34
+  tag: ラーニングセンター
+  text: サービスレベル目標 (SLO) について
+- link: https://www.datadoghq.com/blog/service-page/
+  tag: ブログ
+  text: サービステレメトリー、エラー追跡、SLO など
+kind: documentation
+title: サービスレベル目標
 ---
+
 {{< vimeo 382481078 >}}
 
 <br />
@@ -39,7 +43,7 @@ further_reading:
 
 Datadog の[サービスレベル目標ステータスページ][1]を使用して、新しい SLO を作成したり、既存の SLO を表示して管理することができます。また、[SLO サマリーウィジェット][2]をダッシュボードに追加すると、SLO のステータスを一目で確認できます。
 
-### 構成
+### コンフィギュレーション
 
 1. [SLO ステータスページ][1]で **New SLO +** を選択します。
 2. SLO のソースを定義します。SLO の種類には、[メトリクスベース][3]と[モニターベース][4]があります。
@@ -49,6 +53,9 @@ Datadog の[サービスレベル目標ステータスページ][1]を使用し�
 SLO を設定したら、[サービスレベル目標リストビュー][1]から SLO を選択して、詳細サイドパネルを開きます。サイドパネルには、SLO の各ターゲットの全体的なステータスのパーセンテージと残りのエラーバジェット、および SLI の履歴のステータスバー (モニターベースの SLO) または棒グラフ (メトリクスベースの SLO) が表示されます。1 つの[マルチアラートモニター][5]を使用してグループ化されたモニターベースの SLO を作成した場合、または [`sum by` 句][6]を使用してグループ化されたメトリクスベースの SLO を作成した場合、全体的なステータスのパーセンテージと残りのエラーバジェットに加えて、個々のグループのステータスのパーセンテージと残りのエラーバジェットが表示されます。
 
 **例:** アベイラビリティーゾーンごとにレイテンシを追跡するためにモニターベースの SLO 作成すると、全体的な SLO と SLO が追跡している個々のアベイラビリティーゾーンのステータス割合とエラーバジェットの残量が表示されます。
+
+**注:** エラーバジェットの残りはパーセンテージで表示され、次の式で計算されます。
+{{< img src="monitors/service_level_objectives/error_budget_remaining.jpeg" alt="エラーバジェットの残りの式" >}}
 
 ### SLO ターゲットの設定
 
@@ -82,9 +89,13 @@ SLO を編集するには、リストビューで SLO の行にカーソルを�
 
 個々の SLO を編集するには、SLO の上にカーソルを置き、その行の右側に表示される **Edit**、**Clone**、**Delete** ボタンを使用します。SLO の内容を詳しく確認するには、その行をクリックしてサイドパネルを開きます。
 
+**注**: [Apple App Store][10] および [Google Play Store][17] で入手できる [Datadog モバイルアプリ][9]をダウンロードすれば、モバイルデバイスのホーム画面から SLO を表示することが可能です。
+
+{{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS と Android 上の SLO">}}
+
 ### SLO タグ
 
-SLO の作成時や変更時に、[SLO ステータスページ][1]でフィルタリングに必要なタグや[SLO の保存済みビュー][9]の作成に必要なタグを追加することができます。
+SLO の作成時や変更時に、[SLO ステータスページ][1]でフィルタリングに必要なタグや[SLO の保存済みビュー][11]の作成に必要なタグを追加することができます。
 
 ### SLO のデフォルトビュー
 
@@ -144,13 +155,13 @@ SLO 監査イベントでは、イベントストリームを使用して SLO �
 
 SLO 監査イベントの全リストを取得するには、イベントストリームに検索クエリ `tags:audit,slo` を入力します。特定の SLO に関する監査イベントのリストを表示するには、`tags:audit,slo_id:<SLO ID>` (対象とする SLO の ID を使用) を入力します。
 
-また、[Datadog イベント API][10] を使って、プログラムでイベントストリームのクエリを作成することもできます。
+また、[Datadog イベント API][12] を使って、プログラムでイベントストリームのクエリを作成することもできます。
 
 **注:** UI にイベントが表示されない場合は、イベントストリームの時間枠を長くしてみてください（過去 7 日間など）。
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO 監査イベント"  >}}
 
-SLO のコンフィギュレーションをプロアクティブに管理するには、特定のタグに対応するイベントが発生したときに通知するよう[イベントモニター][11]を設定します。
+SLO のコンフィギュレーションをプロアクティブに管理するには、特定のタグに対応するイベントが発生したときに通知するよう[イベントモニター][13]を設定します。
 
 たとえば、特定の SLO コンフィギュレーションが変更されたときに通知を受信するには、タグ `audit,slo_id:<SLO ID>` に対して `[SLO Modified]` テキストを追跡するようイベントモニターをセットします。
 
@@ -168,7 +179,26 @@ SLO の修正ウィンドウを作成すると、指定した期間が SLO の�
 - モニターベースの SLO の場合、修正ウィンドウの時間はカウントされません。
 - メトリクスベースの SLO の場合、修正ウィンドウ内のすべての良好イベントと不良イベントはカウントされません。
 
-ステータス修正は、[SLO ステータス修正 API][12]、[Terraform][13]、UI 経由の公開ベータ版です。
+臨機応変に対応するための 1 回限りの修正と、定期的に発生する予測可能な修正を作成するオプションがあります。1 回限りの修正には開始時刻と終了時刻が必要であり、定期的な修正には開始時刻、期間、間隔が必要です。定期的な修正は、[iCalender RFC 5545 の RRULE 仕様][14]に基づいています。定期的な修正の終了日の指定は、修正を無期限に繰り返す必要がある場合にオプションで指定できます。
+
+どちらのタイプの修正でも、修正を行う理由を示す修正カテゴリーを選択する必要があります。選択可能なカテゴリーは、`Scheduled Maintenance` (定期メンテナンス)、`Outside Business Hours` (営業時間外)、`Deployment` (デプロイ)、`Other`(その他)です。必要であれば、説明文を追加することができます。
+
+各 SLO には、クエリのパフォーマンスを確保するために構成可能な修正数の上限が設定されています。これらの制限は、SLO ごとに過去 90 日間にのみ適用されるため、過去 90 日間より前の期間の修正 は、制限に含まれません。つまり、以下の通りです。
+- 1 回限りの修正の終了時刻が過去 90 日以前である場合、制限にカウントされます。
+- 定期的な修正の最後の繰り返しの終了時刻が過去 90 日以前である場合、制限にカウントされません。
+
+SLO ごとの 90 日制限は、以下の通りです。
+
+| 修正タイプ   | SLO ごとの制限 |
+| ----------------- | ------------- |
+| 1 回限り          | 100           |
+| 毎日繰り返し   | 2             |
+| 毎週繰り返し  | 3             |
+| 毎月繰り返し | 5             |
+
+SLO のサイドパネルで `Correct Status` を選択するか、[SLO ステータス修正 API][15] または [Terraform リソース][16]を使用して、UI からステータス修正を構成することができます。
+
+{{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO 修正 UI"  >}}
 
 #### UI でのアクセス
 
@@ -177,8 +207,10 @@ UI で SLO ステータス修正にアクセスするには
 1. 新しい SLO を作成するか、既存の SLO をクリックします。
 2. SLO の詳細サイドパネルビューに移動します。
 3. 歯車アイコンの下で、**Correct Status** を選択して、**Status Corrections** 作成モーダルにアクセスします。
-4. **Time Correction Window**、**Correction Type** を選択し、**Notes** を追加します。
-5. **Apply Correction** をクリックします。
+4. **Select the Time Correction Window** で `One-Time` と `Recurring` のいずれかを選択し、修正したい期間を指定します。
+5. **Correction Type** を選択します。
+6. オプションで **Notes** を追加します。
+7. **Apply Correction** をクリックします。
 
 既存のステータス修正を表示、編集、削除するには、SLO の詳細サイドパネルビューの上部にある **Corrections** タブをクリックします。
 
@@ -194,8 +226,11 @@ UI で SLO ステータス修正にアクセスするには
 [6]: /ja/monitors/service_level_objectives/metric/#define-queries
 [7]: /ja/monitors/service_level_objectives/monitor/#set-your-slo-targets
 [8]: /ja/monitors/service_level_objectives/metric/#set-your-slo-targets
-[9]: /ja/monitors/service_level_objectives/#saved-views
-[10]: /ja/api/v1/events/#query-the-event-stream
-[11]: /ja/monitors/create/types/event/
-[12]: /ja/api/latest/service-level-objective-corrections/
-[13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[9]: /ja/mobile
+[10]: https://apps.apple.com/app/datadog/id1391380318
+[11]: /ja/monitors/service_level_objectives/#saved-views
+[12]: /ja/api/v1/events/#query-the-event-stream
+[13]: /ja/monitors/create/types/event/
+[14]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[15]: /ja/api/latest/service-level-objective-corrections/
+[16]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

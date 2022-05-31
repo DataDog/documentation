@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - オーケストレーション
-  - コンテナ
-  - ログの収集
+- オーケストレーション
+- コンテナ
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
 display_name: Kube_scheduler
 draft: false
 git_integration_title: kube_scheduler
 guid: ec7c029f-86c2-4202-9368-1904998a646c
 integration_id: kube-scheduler
 integration_title: Kubernetes Scheduler
+integration_version: 4.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -34,10 +35,13 @@ public_title: Datadog-Kubernetes Scheduler インテグレーション
 short_description: Kubernetes Scheduler の監視
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Kubernetes Control Plane の一部である [Kubernetes Scheduler][1] を監視します。
@@ -57,13 +61,13 @@ Kubernetes Scheduler チェックは [Datadog Agent][2] パッケージに含ま
 
 #### メトリクスの収集
 
-1. kube_scheduler のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `kube_scheduler.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル kube_scheduler.d/conf.yaml][2] を参照してください。
+1. kube_scheduler のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `kube_scheduler.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル kube_scheduler.d/conf.yaml][4] を参照してください。
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][5]。
 
 #### ログの収集
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][5]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][6].
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
@@ -71,7 +75,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `kube_scheduler` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `kube_scheduler` を探します。
 
 ## 収集データ
 
@@ -84,20 +88,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Kube Scheduler には、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "kube_scheduler" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler
-[2]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/conf.yaml.example
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/metadata.csv
-[8]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/assets/service_checks.json
-[9]: https://docs.datadoghq.com/ja/help/
+[4]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/metadata.csv
+[9]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/

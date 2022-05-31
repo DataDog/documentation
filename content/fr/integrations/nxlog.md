@@ -1,23 +1,27 @@
 ---
-title: NxLog
-name: nxlog
-kind: integration
-description: 'Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
-short_description: 'Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
-categories:
-  - log collection
-doc_link: /integrations/nxlog/
 aliases:
-  - /fr/logs/log_collection/nxlog
+- /fr/logs/log_collection/nxlog
+categories:
+- log collection
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md
+description: Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs
+  et de vos services.
+doc_link: /integrations/nxlog/
 has_logo: true
+integration_id: nxlog
 integration_title: nxlog
 is_public: true
-dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md'
+kind: integration
+name: nxlog
 public_title: Intégration Datadog/NxLog
+short_description: Configurez NxLog pour rassembler les logs de votre host, de vos
+  conteneurs et de vos services.
 supported_os:
-  - windows
+- windows
+title: NxLog
 ---
+
 ## Présentation
 
 Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de vos services.

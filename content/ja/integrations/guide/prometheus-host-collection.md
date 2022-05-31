@@ -1,20 +1,21 @@
 ---
-title: ホストからの Prometheus および OpenMetrics メトリクスの収集
-kind: ドキュメント
 further_reading:
-  - link: logs/log_collection
-    tag: ドキュメント
-    text: ログの収集
-  - link: /infrastructure/process
-    tag: ドキュメント
-    text: プロセスの収集
-  - link: トレーシング
-    tag: ドキュメント
-    text: トレースの収集
-  - link: developers/prometheus
-    tag: ドキュメント
-    text: カスタム Prometheus チェックの記述
+- link: logs/log_collection
+  tag: ドキュメント
+  text: ログの収集
+- link: /infrastructure/process
+  tag: ドキュメント
+  text: プロセスの収集
+- link: トレーシング
+  tag: ドキュメント
+  text: トレースの収集
+- link: developers/prometheus
+  tag: ドキュメント
+  text: カスタム Prometheus チェックの記述
+kind: ドキュメント
+title: ホストからの Prometheus および OpenMetrics メトリクスの収集
 ---
+
 Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] インテグレーションを併用して、ホストで実行されているアプリケーションから、公開されている Prometheus および OpenMetrics メトリクスを収集します。
 
 ## 概要
@@ -73,9 +74,9 @@ Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] イ
 | `labels_mapper`                         | key:value 要素のリスト               | オプション  | なし          | labels_mapper を使用すると、一部のラベルの名前を変更できます。形式: `<名前を変更するラベル>: <新しいラベル名>`                                                                                                                                                                    |
 | `type_overrides`                        | key:value 要素のリスト               | オプション  | なし          | type_overrides を使用すると、Prometheus ペイロードのタイプを上書きするか、またはタイプが指定されていないメトリクスにタイプを適用できます (デフォルトでは無視されます)。<br> サポートされている `<メトリクスタイプ>` は、`gauge`、`monotonic_count`、`histogram`、および `summary` です。                                             |
 | `tags`                                  | key:value 要素のリスト               | オプション  | なし          | このインテグレーションによって送信されるすべてのメトリクス、イベント、およびサービスチェックにアタッチされるタグのリスト。<br> [タグ付けについての詳細][5]。                                                                                                                                     |
-| `send_distribution_buckets`             | boolean                                 | オプション  | false         | `send_distribution_buckets` を `true` に設定すると、OpenMetrics ヒストグラムを送信して[ディストリビューションメトリクス][8]に変換できます。<br>`send_histograms_buckets` は `true` に設定する必要があります (デフォルト値)。                                                                              |
+| `send_distribution_buckets`             | boolean                                 | オプション  | false         | `send_distribution_buckets` を `true` に設定すると、OpenMetrics ヒストグラムを送信して[ディストリビューションメトリクス][8]に変換できます。<br>`collect_histogram_buckets` は `true` に設定する必要があります (デフォルト値)。                                                                              |
 | `send_distribution_counts_as_monotonic` | boolean                                 | オプション  | false         | `send_distribution_counts_as_monotonic` を `true` に設定し、OpenMetrics のヒストグラム/サマリーカウントを単調カウントとして送信します。                                                                                                                                              |
-| `send_histograms_buckets`               | boolean                                 | オプション  | true          | `send_histograms_buckets` を `true` に設定すると、ヒストグラムバケットを送信できます。                                                                                                                                                                                               |
+| `collect_histogram_buckets`               | boolean                                 | オプション  | true          | `collect_histogram_buckets` を `true` に設定すると、ヒストグラムバケットを送信できます。                                                                                                                                                                                               |
 | `send_monotonic_counter`                | boolean                                 | オプション  | true          | カウントを単調カウントとして送信する方法については、[GitHub の関連事項][9]を参照してください。                                                                                                                                                                                             |
 | `exclude_labels`                        | 文字列のリスト                          | オプション  | なし          | 除外されるラベルのリスト。                                                                                                                                                                                                                                       |
 | `ssl_cert`                              | 文字列                                  | オプション  | なし          | Prometheus エンドポイントがセキュリティ保護されている場合、構成するための設定は以下のとおりです。<br> 設定は、証明書へのパス (秘密キーを指定する必要あり)、または証明書と秘密キーの両方を含むファイルへのパスのいずれかです。 |
@@ -85,6 +86,7 @@ Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] イ
 | `max_returned_metrics`                  | 整数                                 | オプション  | 2000          | デフォルトで、メトリクスのチェックは 2000 個に制限されます。必要な場合は、この制限を引き上げてください。                                                                                                                                                                                   |
 | `bearer_token_auth`                     | boolean                                 | オプション  | false         | `bearer_token_auth` を `true` に設定して、ベアラートークン認証のヘッダーに追加します。**注**: `bearer_token_path` が設定されていない場合は、`/var/run/secrets/kubernetes.io/serviceaccount/token` がデフォルトのパスとして使われます。                                                       |
 | `bearer_token_path`                     | 文字列                                  | オプション  | なし          | Kubernetes サービスアカウントのベアラートークンファイルへのパス（ファイルが存在し正しくマウントされていることを確認してください）。**注**: `bearer_token_auth` を `true` に設定し、認証のために HTTP ヘッダにトークンを追加できるようにします。                                          |
+| `collect_counters_with_distributions`   | boolean                                 | オプション  | false         | Datadog のディストリビューションメトリクスとしてヒストグラムバケットを送信する際に、`.sum` と `.count` で終わる観測カウンターメトリクスも収集するかどうかを指定します。これは暗黙のうちに `histogram_buckets_as_distributions` オプションを有効にしています。 |
 
 **注**: `send_distribution_buckets` および `send_distribution_counts_as_monotonic` 以外のすべてのパラメーターは、OpenMetrics チェックと Prometheus チェックの両方でサポートされています。
 

@@ -26,7 +26,7 @@ Customize your log collection configuration:
 * [Aggregate multi-line logs](#multi-line-aggregation)
 * [Copy commonly used examples](#commonly-used-log-processing-rules)
 * [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
-* [Specify log file encodings](#logfile-encodings)
+* [Specify log file encodings](#log-file-encodings)
 * [Define global processing rules](#global-processing-rules)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.

@@ -16,10 +16,6 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-<div class="alert alert-warning">
-Datadog Node.js Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
-</div>
-
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements

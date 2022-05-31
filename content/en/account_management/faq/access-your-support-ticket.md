@@ -59,3 +59,10 @@ If you have opened at least one Datadog support ticket, follow this process to a
 
 [1]: https://help.ddog-gov.com
 {{< /site-region >}}
+
+## Error: Refused to connect
+**Refused to connect** errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to [Clear, enable, and manage cookies in Chrome][2] in Google Chrome Help.
+
+If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add **datadog.zendesk.com** to the allow list.
+
+[2]: https://support.google.com/chrome/answer/95647

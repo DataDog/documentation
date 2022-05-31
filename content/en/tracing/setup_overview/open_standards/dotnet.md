@@ -12,7 +12,7 @@ description: 'Open Standards for .NET'
 Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][1].
 
 ### Setup
-For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][2] to your application. During application start-up, initialize the OpenTracing library:
+For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][2] to your application. During application start-up, initialize the OpenTracing SDK:
 
 ```csharp
 using Datadog.Trace.OpenTracing;

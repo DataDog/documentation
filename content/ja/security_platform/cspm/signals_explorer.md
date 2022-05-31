@@ -1,15 +1,16 @@
 ---
-title: シグナルエクスプローラー
-kind: documentation
 further_reading:
-  - link: security_platform/default_rules
-    tag: ドキュメント
-    text: デフォルトのクラウドコンフィギュレーションルールについて
-  - link: security_platform/cspm/frameworks_and_benchmarks
-    tag: ドキュメント
-    text: サポートされているフレームワークおよび業界のベンチマークの詳細
+- link: security_platform/default_rules
+  tag: ドキュメント
+  text: デフォルトのクラウドコンフィギュレーション検出ルールについて
+- link: security_platform/cspm/frameworks_and_benchmarks
+  tag: ドキュメント
+  text: サポートされているフレームワークおよび業界のベンチマークの詳細
+kind: documentation
+title: シグナルエクスプローラー
 ---
-{{< site-region region="us3,us5,gov,eu" >}}
+
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 このサイトでは、クラウドセキュリティポスチャ管理は利用できません。
 </div>
@@ -17,13 +18,13 @@ further_reading:
 
 ## 概要
 
-[診断結果][1]ページでクラウドの構成ミスを直接確認して修正するだけでなく、失敗した診断結果の通知を設定し、[Security Monitoring][2] と [Cloud Workload Security][3] によって生成されるリアルタイムの脅威と同じ場所で構成ミスを関連付けて優先順位を付けるようにシグナルを構成できます。
+[診断結果][1]ページでクラウドの構成ミスを直接確認して修正するだけでなく、失敗した診断結果の通知を設定し、[Cloud SIEM][2] と [Cloud Workload Security][3] によって生成されるリアルタイムの脅威と同じ場所で構成ミスを関連付けて優先順位を付けるようにシグナルを構成できます。
 
 ## セキュリティポスチャシグナルで無駄なアラートを削減
 
 シグナルは、Datadog が生成して [Signals Explorer][4] に表示するセキュリティアラートです。セキュリティポスチャシグナルは、Datadog がクラウドまたはインフラストラクチャーコンフィギュレーションルールの診断結果 `evaluation:fail` を生成したときにトリガーされます。
 
-「高」または「クリティカル」の重大度レベルを持つルールの選択は、デフォルトでシグナルを生成するために有効になっています。重大度の低いルールの場合は、*Trigger a security signal* トグルを選択してシグナルの生成を開始します。このトグルを使用して、ルールが任意の時点でシグナルを生成しないようにすることもできます。
+「高」または「クリティカル」の重大度レベルを持つルールの選択は、デフォルトでシグナルを生成するために有効になっています。重大度の低い検出ルールの場合は、*Trigger a security signal* トグルを選択してシグナルの生成を開始します。このトグルを使用して、検出ルールが任意の時点でシグナルを生成しないようにすることもできます。
 
 {{< img src="security_platform/cspm/signals_explorer/Notifications.png" style="width:100%;">}}
 
@@ -49,7 +50,7 @@ further_reading:
 
 **注**: リソース ID 以外のグループ化を使用している場合、シグナルは、診断結果がグループ化基準を初めて満たしたときにトリガーされ、この同じグループ内の新しいリソース (たとえば、同じサービスまたはアカウント) がこのルールに失敗するたびに再トリガーされることはありません。これは、新しいクラウドリソースがルールに失敗するたびにシグナルが再トリガーされないようにするために、意図的に行われます。クラウドリソースがルールに失敗するたびにアラートを受信する場合は、ルールの *group by* を `@resource_type` に変更します。
 
-関連する問題のタブには、同じロジックグループ (同じリソース、サービス、またはクラウドアカウント) とリソースタイプ (セキュリティグループなど) でシグナルをトリガーした他のルールが表示されます。
+関連する問題のタブには、同じロジックグループ (同じリソース、サービス、またはクラウドアカウント) とリソースタイプ (セキュリティグループなど) でシグナルをトリガーした他の検出ルールが表示されます。
 
 {{< img src="security_platform/cspm/signals_explorer/Related.png" style="width:100%;">}}
 
@@ -62,6 +63,6 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/security_platform/cspm/findings/
-[2]: https://docs.datadoghq.com/ja/security_platform/security_monitoring/
+[2]: https://docs.datadoghq.com/ja/security_platform/cloud_siem/
 [3]: https://docs.datadoghq.com/ja/security_platform/cloud_workload_security/
 [4]: https://docs.datadoghq.com/ja/security_platform/explorer
