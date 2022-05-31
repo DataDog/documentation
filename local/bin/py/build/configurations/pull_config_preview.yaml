@@ -634,7 +634,7 @@
               text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-file
-      branch: alai97/mobile-vitals-ios-doc-update
+      branch: master
       globs:
       - 'docs/rum_mobile_vitals.md'
       options:
@@ -645,7 +645,7 @@
           kind: documentation
           beta: true
           description: "Collect RUM data from your iOS projects."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/alai97/mobile-vitals-doc-update/docs/rum_mobile_vitals.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_mobile_vitals.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "GitHub"
