@@ -60,17 +60,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
 
 3. **For [Datadog Agent][1] version 7.36 only, to access DNS events in CWS** 
 
-    Pass these additional values to your Helm chart
-
-    ```yaml
-    agents:
-      containers:
-        systemProbe:
-          env:
-            name: DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED
-            value: true
-    ```
-    OR Add the following to the `runtime_security_config` section of the `system-probe.yaml` file
+    Add the following to the `runtime_security_config` section of the `system-probe.yaml` file
     
     ```yaml
     runtime_security_config:
@@ -113,6 +103,7 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
+  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
   gcr.io/datadoghq/agent:7
@@ -131,6 +122,8 @@ By default Runtime Security is disabled. To enable it, both the datadog.yaml and
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+  
+# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
 echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
@@ -149,6 +142,8 @@ For a package-based deployment, the Datadog package has to be deployed: run `yum
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+  
+# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
 echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
   
 systemctl restart datadog-agent
