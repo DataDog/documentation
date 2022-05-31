@@ -38,8 +38,8 @@ if [ ${RUN_SERVER} = true ]; then
   echo "Checking that node modules are installed and up-to-date."
   npm --global install yarn && \
   npm cache clean --force && yarn install --frozen-lockfile
-  echo "Starting webpack and hugo build."
-	yarn run start
+  echo "Starting Hugo build via Docker....."
+	yarn run docker:start
 
   sleep 5
 
