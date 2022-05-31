@@ -117,7 +117,6 @@ echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agen
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 # to enable the collection of CWS network events
-
 echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
@@ -138,7 +137,6 @@ echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agen
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 # to enable the collection of CWS network events
-
 echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
