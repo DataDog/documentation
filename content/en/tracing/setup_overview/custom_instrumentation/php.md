@@ -27,27 +27,218 @@ If you have not yet read the instructions for auto-instrumentation and setup, st
 
 Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][1] for more details.
 
-## Creating spans
+## Write your own custom instrumentation
 
-To manually instrument code to [trace][2] specific custom methods in your application or add tags to your spans, use `DDTrace\trace_function()` or `DDTrace\trace_method()`.
+To show how to write custom instrumentations, we use a basic web application containing a number of interesting use cases.
 
-<div class="alert alert-info">If you are using a version of ddtrace prior to 0.47.0, use <code>dd_trace_function()</code> instead of <code>DDTrace\trace_function()</code> and <code>dd_trace_method()</code> instead of <code>DDTrace\trace_method()</code> or upgrade to the latest tracer version.</div>
+### A sample application to be instrumented
 
-### Trace a custom function or method
+Assume the following directory structure:
+
+```
+.
+|-- composer.json
+|-- docker-compose.yml
+|-- index.php
+`-- src
+    |-- Exceptions
+    |   `-- NotFound.php
+    |-- Services
+    |   `-- SampleRegistry.php
+    `-- utils
+        `-- functions.php
+```
+The most relevant files are `src/utils/functions.php`
+
+```
+namespace App;
+
+function some_utility_function($someArg)
+{
+    return 'result';
+}
+```
+
+and `src/Services/SampleRegistry.php`
+
+```
+namespace App\Services;
+
+use App\Exceptions\NotFound;
+use Exception;
+
+class SampleRegistry
+{
+    public function put($key, $value)
+    {
+        \App\some_utility_function('some argument');
+        // Return the id of the item inserted
+        return 456;
+    }
+
+    public function faultyMethod()
+    {
+        throw new Exception('Generated at runtime');
+    }
+
+    public function get($key)
+    {
+        // The service uses an exception to report a key not found.
+        throw new NotFound('The key was not found');
+    }
+
+    public function compact()
+    {
+        // This function execute some operations on the registry and
+        // returns nothing. In the middle of the function, we have an
+        // interesting value that is not returned but can be related
+        // to the slowness of the function
+
+        $numberOfItemsProcessed = 123;
+
+        // ...
+    }
+}
+```
+
+### Writing the custom instrumentation
+
+<div class="alert alert-info">
+In order to write custom instrumentations you do not need any additional composer package. There is only a specific use case that is not covered by the current version of the api and that requires the legacy API provided by a composer package. This use case is presented later in the page.
+</div>
+
+The recommended approach to instrument an application or a service is to write the required code in a separate file, with the result that the application business logic is not mixed with instrumentation code.
+
+Create a file `datadog/instrumentation.php` and add it to the composer autoloader. Do not forget to dump the autoloader after you have added the file definition, for example running `composer update`.
+
+In `composer.json`
+
+```
+{
+    ...
+    "autoload": {
+        ...
+        "files": [
+            ...
+            "datadog/instrumentation.php"
+        ]
+    },
+    ...
+}
+
+```
+
+<div class="alert alert-info">
+Note that the file where the custom code to perform manual instrumentation lies and the actual classes that are instrumented are not required to be in the same code base and package. With this approach you can publish an open source composer package, for example on github, containing only the code you wrote to instrument a specific library that others might find useful. Registering the instrumentation entry point, as described below, in the <code>composer.json</code>'s <code>autoload.files</code> array ensures that this file will always be executed when the composer autoloader is required.
+</div>
+
+#### The `datadog/instrumentation.php` file
+
+The first thing to check is if the extension is loaded. If the extension is not loaded then all the functions used in this file do not exist.
+
+```
+if (!extension_loaded('ddtrace')) {
+    return;
+}
+```
+
+Then we instrument the function `\App\some_utility_function`, if you are not interested in any specific aspect of the function other than the execution time, then this is all that is required
+
+```
+\DDTrace\trace_function('App\some_utility_function', function (\DDTrace\SpanData $span, $args, $ret, $exception) {});
+```
+
+For the `SampleRegistry` class's `put` method we are interested not only generating a span, but we also want to add a tag with the value of the returned item identifier and a tag for the key. Since this is a method, we use `\DDTrace\trace_method`:
+
+```
+\DDTrace\trace_method(
+    'App\Services\SampleRegistry',
+    'put',
+    function (\DDTrace\SpanData $span, $args, $ret, $exception) {
+        $span->meta['app.cache.key'] = $args[0];
+        $span->meta['app.cache.item_id'] = $ret;
+    }
+);
+```
+
+<div class="alert alert-warning">
+When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy do <code>$span->meta['my'] = 'tag'</code> otherwise you might overwrite existing tags automatically added by our core instrumentations.
+</div>
+
+`SampleRegistry::faultyMethod` generated an exception. There is nothing to do with regards to custom instrumentation, as if the method is instrumented, the default exception reporting mechanism will take care of attaching the exception message and the stack trace.
+
+```
+\DDTrace\trace_method(
+    'App\Services\SampleRegistry',
+    'faultyMethod',
+    function (\DDTrace\SpanData $span, $args, $ret, $exception) {
+    }
+);
+```
+
+`SampleRegistry::get` has a behavior that we are interested instrumenting properly. Specifically, if the item is not found, it will throw a `NotFound` exception. This exception is expected and we do not want to mark the span as errored. We just want to change the resource name in order to add it to a pool of `not_found` operations. In order to achieve this goal, we `unset` the exception for the span.
+
+```
+\DDTrace\trace_method(
+    'App\Services\SampleRegistry',
+    'get',
+    function (\DDTrace\SpanData $span, $args, $ret, $exception) {
+        if ($exception instanceof \App\Exceptions\NotFound) {
+            unset($span->exception);
+            $span->resource = 'cache.get.not_found';
+        }
+    }
+);
+```
+
+The method `SampleRegistry::compact` presents an interesting use case. We are interested in adding a tag with a value that is neither an argument nor the value returned by the function. In order to achieve this, we need to edit both files `datadog/instrumentation.php` and the actual class file `src/Services/SampleRegistry.php`.
+
+In `datadog/instrumentation.php` add
+
+```
+\DDTrace\trace_method(
+    'App\Services\SampleRegistry',
+    'compact',
+    function (\DDTrace\SpanData $span, $args, $ret, $exception) {
+    }
+);
+```
+
+In `src/Services/SampleRegistry.php` edit the body of the method
+
+```
+    public function compact()
+    {
+        // This function execute some operations on the registry and
+        // returns nothing. In the middle of the function, we have an
+        // interesting value that is not returned but can be related
+        // to the slowness of the function
+
+        $numberOfItemsProcessed = 123;
+
+        // Add instrumenting code in your business logic
+        if (\function_exists('\DDTrace\active_span') && $span = \DDTrace\active_span()) {
+            $span->meta['registry.compact.items_processed'] = $numberOfItemsProcessed;
+        }
+
+        // ...
+    }
+```
+
+## `trace_function()` and `trace_method()` in depth
 
 The `DDTrace\trace_function()` and `DDTrace\trace_method()` functions instrument (trace) specific function and method calls. These functions automatically handle the following tasks:
 
-- Open a [span][3] before the code executes
+- Open a [span][2] before the code executes
 - Set any errors from the instrumented call on the span
 - Close the span when the instrumented call is done
 
-Additional [tags][4] are set on the span from the closure (called a tracing closure).
+Additional [tags][3] are set on the span from the closure (called a tracing closure).
 
 For example, the following snippet traces the `CustomDriver::doWork()` method and adds custom tags. Exceptions are automatically tracked on the span.
 
 ```php
 <?php
-// For ddtrace < v0.47.0 use dd_trace_method()
 \DDTrace\trace_method(
     'CustomDriver',
     'doWork',
@@ -55,9 +246,9 @@ For example, the following snippet traces the `CustomDriver::doWork()` method an
         // This closure runs after the instrumented call
         // Span was automatically created before the instrumented call
 
-        // SpanData::$name defaults to 'ClassName.methodName' if not set (>= v0.47.0)
+        // SpanData::$name defaults to 'ClassName.methodName' if not set
         $span->name = 'CustomDriver.doWork';
-        // SpanData::$resource defaults to SpanData::$name if not set (>= v0.47.0)
+        // SpanData::$resource defaults to SpanData::$name if not set
         $span->resource = 'CustomDriver.doWork';
         $span->service = 'php';
 
@@ -80,70 +271,6 @@ For example, the following snippet traces the `CustomDriver::doWork()` method an
 );
 ?>
 ```
-
-{{< tabs >}}
-{{% tab "Tracing function calls" %}}
-
-Function calls are instrumented with `DDTrace\trace_function()` and the tracing closure is executed after the instrumented call is made.
-
-```php
-<?php
-
-use DDTrace\SpanData;
-
-function addNums($a, $b) {
-    $sum = $a + $b;
-    printf("%d + %d = %d\n", $a, $b, $sum);
-    return $sum;
-}
-
-\DDTrace\trace_function(
-    'addNums',
-    function(SpanData $span, $args, $retval) {
-        echo "Traced" . PHP_EOL;
-    }
-);
-
-var_dump(addNums(2, 8));
-// 2 + 8 = 10
-// Traced
-// int(10)
-```
-
-{{% /tab %}}
-{{% tab "Tracing method calls" %}}
-
-Methods are instrumented with `DDTrace\trace_method()` which provides the same functionality as `DDTrace\trace_function()`. One key difference is that the tracing closure is bound to the instrumented class which exposes an instance of the instrumented class via `$this`.
-
-```php
-<?php
-
-use DDTrace\SpanData;
-
-class Calc {
-    public $foo = 'bar';
-    public function addNums($a, $b) {
-        $sum = $a + $b;
-        printf("%d + %d = %d\n", $a, $b, $sum);
-        return $sum;
-    }
-}
-
-\DDTrace\trace_method(
-    'Calc', 'addNums',
-    function(SpanData $span, $args, $retval) {
-        echo '$this->foo: ' . $this->foo . PHP_EOL;
-    }
-);
-
-$calc = new Calc();
-var_dump($calc->addNums(2, 8));
-// 2 + 8 = 10
-// $this->foo: bar
-// int(10)
-```
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Accessing active spans
 
@@ -262,7 +389,7 @@ When a new PHP script is launched, the tracer automatically checks for the prese
 - `x-datadog-origin` (environment variable: `HTTP_X_DATADOG_ORIGIN`)
 - `x-datadog-tags` (environment variable: `HTTP_X_DATADOG_TAGS`)
 
-To manually set this information in a CLI script on new traces or an existing trace a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided. 
+To manually set this information in a CLI script on new traces or an existing trace a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided.
 
 ```php
 <?php
@@ -281,7 +408,7 @@ function processIncomingQueueMessage($message) {
 
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][5] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][4] page.
 
 ## API reference
 
@@ -305,7 +432,7 @@ function(
 
 #### Parameter 1: `DDTrace\SpanData $span`
 
-The `DDTrace\SpanData` instance contains [the same span information that the Agent expects][6]. A few exceptions are `trace_id`, `span_id`, `parent_id`, `start`, and `duration` which are set at the C level and not exposed to userland via `DDTrace\SpanData`. Exceptions from the instrumented call are automatically attached to the span and the `error` field is managed automatically.
+The `DDTrace\SpanData` instance contains [the same span information that the Agent expects][5]. A few exceptions are `trace_id`, `span_id`, `parent_id`, `start`, and `duration` which are set at the C level and not exposed to userland via `DDTrace\SpanData`. Exceptions from the instrumented call are automatically attached to the span and the `error` field is managed automatically.
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -346,7 +473,7 @@ function myRandFunc($min, $max) {
 
 #### Parameter 2: `array $args`
 
-The second parameter to the tracing closure is an array of arguments from the instrumented call. It functions similarly to [`func_get_args()`][7].
+The second parameter to the tracing closure is an array of arguments from the instrumented call. It functions similarly to [`func_get_args()`][6].
 
 By default the tracing closure is executed _after_ the instrumented call which means any arguments passed by reference could be a different value when they reach the tracing closure.
 
@@ -559,7 +686,7 @@ Done.
 
 Zend framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
 
-First, [download the latest source code from the releases page][8]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
+First, [download the latest source code from the releases page][7]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
 
 ```ini
 autoloaderNamespaces[] = "DDTrace_"
@@ -571,94 +698,18 @@ resources.ddtrace = true
 
 Prior to PHP 7, some frameworks provided ways to compile PHP classes (for example, through the Laravel's `php artisan optimize` command).
 
-While this [has been deprecated][9] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][10] API instead of adding `datadog/dd-trace` to your Composer file.
-
-## Legacy API upgrade guide
-
-Datadog recommends that you update custom instrumentations implemented using the legacy `dd_trace()` API.
-
-There is an important paradigm distinction to understand between the legacy API and the "sandbox" API. The legacy API forwards the instrumented call from inside the tracing closure using `dd_trace_forward_call()`.
-
-{{< img src="tracing/manual_instrumentation/php_legacy_api.png" alt="Legacy API" style="width:100%;">}}
-
-The sandbox API runs the tracing closure after the instrumented call so there is no need to forward the original call along with `dd_trace_forward_call()`.
-
-{{< img src="tracing/manual_instrumentation/php_sandbox_api.png" alt="Sandbox API" style="width:100%;">}}
-
-Contrary to the legacy API, the sandbox API handles the following tasks automatically:
-
-1. Creating the span
-2. Forwarding the original call
-3. Attaching exceptions to the span
-
-### Upgrading example
-
-The sandbox API reduces the amount of boilerplate required to instrument a call. Below is a side-by-side comparison of a full legacy API example and the sandbox API equivalent.
-
-```php
-# Legacy API
-dd_trace('CustomDriver', 'doWork', function (...$args) {
-    // Start a new span
-    $scope = \DDTrace\GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
-    $span = $scope->getSpan();
-
-    // Access object members via $this
-    $span->setTag(\DDTrace\Tag::RESOURCE_NAME, $this->workToDo);
-
-    try {
-        // Execute the original method. Note: dd_trace_forward_call() - handles any parameters automatically
-        $result = dd_trace_forward_call();
-        // Set a tag based on the return value
-        $span->setTag('doWork.size', count($result));
-        return $result;
-    } catch (Exception $e) {
-        // Inform the tracer that there was an exception thrown
-        $span->setError($e);
-        // Bubble up the exception
-        throw $e;
-    } finally {
-        // Close the span
-        $span->finish();
-    }
-});
-
-# Sandbox API
-\DDTrace\trace_method(
-    'CustomDriver',
-    'doWork',
-    function (\DDTrace\SpanData $span, array $args, $retval, $exception) {
-        // This closure runs after the instrumented call
-        // Span was automatically created before the instrumented call
-
-        // SpanData::$name defaults to 'ClassName.methodName' if not set (>= v0.47.0)
-        $span->name = 'CustomDriver.doWork';
-        // SpanData::$resource defaults to SpanData::$name if not set (>= v0.47.0)
-        $span->resource = 'CustomDriver.doWork';
-        $span->service = 'php';
-
-        // If an exception was thrown from the instrumented call, return value is null
-        $span->meta['doWork.size'] = $exception ? 0 : count($retval);
-        // Access object members via $this
-        $span->meta['doWork.thing'] = $this->workToDo;
-
-        // No need to explicitly forward the call with dd_trace_forward_call()
-        // No need to explicitly catch/attach exceptions
-        // The span will automatically close
-    }
-);
-```
+While this [has been deprecated][8] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][9] API instead of adding `datadog/dd-trace` to your Composer file.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/php/#automatic-instrumentation
-[2]: /tracing/visualization/#trace
-[3]: /tracing/visualization/#spans
-[4]: /tracing/visualization/#span-tags
-[5]: /tracing/security
-[6]: /tracing/guide/send_traces_to_agent_by_api/
-[7]: https://www.php.net/func_get_args
-[8]: https://github.com/DataDog/dd-trace-php/releases/latest
-[9]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[10]: /tracing/setup_overview/open_standards/php#opentracing
+[2]: /tracing/visualization/#spans
+[3]: /tracing/visualization/#span-tags
+[4]: /tracing/security
+[5]: /tracing/guide/send_traces_to_agent_by_api/
+[6]: https://www.php.net/func_get_args
+[7]: https://github.com/DataDog/dd-trace-php/releases/latest
+[8]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
+[9]: /tracing/setup_overview/open_standards/php#opentracing
