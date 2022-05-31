@@ -116,6 +116,10 @@ By default Runtime Security is disabled. To enable it, both the datadog.yaml and
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
+# to enable the collection of CWS network events
+
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+
 systemctl restart datadog-agent
 
 {{< /code-block >}}
@@ -132,6 +136,10 @@ For a package-based deployment, the Datadog package has to be deployed: run `yum
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+
+# to enable the collection of CWS network events
+
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 
