@@ -5,11 +5,39 @@ kind: faq
 
 ## Before you start
 
-Datadog strongly encourages you to install the PHP extension through the [pre-built packages][1]. If you still prefer to manually install the PHP tracer, follow the steps below.
+Datadog recommends installing the PHP extension through the [official installer][1]. If you prefer using an alternative installation method, follow the steps below.
+
+<div class="alert alert-info">
+<strong>Note:</strong>
+It may take a few minutes before traces appear in the UI. If traces do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
+</div>
+
+### Install from .deb, .rpm, .apk
+
+Download one of the [precompiled packages for supported distributions][2].
+
+Install the package with one of the commands below.
+
+```shell
+# using RPM package (RHEL/Centos 6+, Fedora 20+)
+rpm -ivh datadog-php-tracer.rpm
+
+# using DEB package (Debian Jessie+ , Ubuntu 14.04+ on supported PHP versions)
+dpkg -i datadog-php-tracer.deb
+
+# using APK package (Alpine)
+apk add datadog-php-tracer.apk --allow-untrusted
+```
+
+The extension installs the default PHP version. To install the extension for a specific PHP version, use the `DD_TRACE_PHP_BIN` environment variable to set the location of the target PHP binary before installing.
+
+```shell
+export DD_TRACE_PHP_BIN=$(which php-fpm7)
+```
 
 ### Install from the .tar.gz archive
 
-Download the latest `.tar.gz` from the [release page][2].
+Download the latest `.tar.gz` from the [release page][3].
 
 From the location you downloaded the package:
 
@@ -72,10 +100,11 @@ The correct value for `PHP_EXTENSION_VERSION` depends on the PHP version.
 | `7.3`       | `20180731`            |
 | `7.4`       | `20190902`            |
 | `8.0`       | `20200930`            |
+| `8.1`       | `20210902`            |
 
 ### Install from source
 
-[Download the source code `tar.gz` or `.zip` file][3] from the releases page and unzip the file. Then compile and install the extension with the commands below.
+[Download the source code `tar.gz` or `.zip` file][2] from the releases page and unzip the file. Then compile and install the extension with the commands below.
 
 ```bash
 $ cd /path/to/dd-trace-php
@@ -129,7 +158,7 @@ Visit a tracing-enabled endpoint of your application and view the [APM UI][4] to
 **Note**: It might take a few minutes before traces appear in the UI.
 
 [1]: /tracing/setup/php/#install-the-extension
-[2]: https://github.com/DataDog/dd-trace-php/releases
-[3]: https://github.com/DataDog/dd-trace-php/releases/latest
+[2]: https://github.com/DataDog/dd-trace-php/releases/latest
+[3]: https://github.com/DataDog/dd-trace-php/releases
 [4]: https://app.datadoghq.com/apm/services
 [5]: /tracing/visualization/#trace
