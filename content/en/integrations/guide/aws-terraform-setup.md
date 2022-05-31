@@ -66,9 +66,11 @@ resource "datadog_integration_aws" "sandbox" {
   role_name   = "DatadogAWSIntegrationRole"
 }
 ```
+Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][4] to see metrics sent by your AWS services and infrastructure.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.terraform.io
 [2]: /integrations/amazon_web_services/?tab=manual#aws-iam-permissions
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
+[4]: https://app.datadoghq.com/screen/integration/7/aws-overview
