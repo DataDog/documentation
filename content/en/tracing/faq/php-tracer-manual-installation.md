@@ -5,11 +5,11 @@ kind: faq
 
 ## Before you start
 
-Datadog strongly encourages you to install the PHP extension through the [official installer][1]. If you still prefer to use alternative installation methods, follow the steps below.
+Datadog recommends installing the PHP extension through the [official installer][1]. If you prefer using an alternative installation method, follow the steps below.
 
 <div class="alert alert-info">
 <strong>Note:</strong>
-It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the "ddtrace" section. Failed diagnostic checks will appear here to help identify any issues.
+It may take a few minutes before traces appear in the UI. If traces do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
 </div>
 
 ### Install from .deb, .rpm, .apk
@@ -29,7 +29,7 @@ dpkg -i datadog-php-tracer.deb
 apk add datadog-php-tracer.apk --allow-untrusted
 ```
 
-The extension will be installed for the default PHP version. To install the extension for a specific PHP version, use the `DD_TRACE_PHP_BIN` environment variable to set the location of the target PHP binary before installing.
+The extension installs the default PHP version. To install the extension for a specific PHP version, use the `DD_TRACE_PHP_BIN` environment variable to set the location of the target PHP binary before installing.
 
 ```shell
 export DD_TRACE_PHP_BIN=$(which php-fpm7)

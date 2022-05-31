@@ -94,13 +94,13 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ### Install the extension
 
-Download the latest installer
+Download the official installer: 
 
 ```shell
 curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
 ```
 
-Run the installer
+Run the installer:
 
 ```shell
 # Full installation: APM + ASM + Profiling (Beta)
@@ -116,21 +116,22 @@ php datadog-setup.php --php-bin=all --enable-appsec
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
-This command will install the extension to all the PHP binaries found in the host or container. If `--php-bin` is omitted then the installer runs in interactive mode asking the user to select the binaries for installation. The value of `--php-bin` can be a path to a specific binary in case `dd-trace-php` should be installed only to such binary.
+This command installs the extension to all the PHP binaries found in the host or container. If `--php-bin` is omitted, the installer runs in interactive mode and asks the user to select the binaries for installation. The value of `--php-bin` can be a path to a specific binary in case `dd-trace-php` should be installed only to such binary.
 
-Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][5] to see the traces.
+Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. For traces, see the [APM Service List][5].
 
 <div class="alert alert-info">
 <strong>Note:</strong>
-It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the "ddtrace" section. Failed diagnostic checks will appear here to help identify any issues.
+It may take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
 </div>
 
 <div class="alert alert-warning">
 <strong>Apache ZTS:</strong>
-If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, it is required that you manually change the extension to be loaded for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
+If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, you need to manually change the extension load for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where Datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example, from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
-If you can't use the PHP installer, we provide [alternative installation methods][6].
+
+If you are unable to use the PHP installer, see the [additional installation options][6].
 
 ## Automatic instrumentation
 
