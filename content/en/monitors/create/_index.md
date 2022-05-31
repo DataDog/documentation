@@ -18,7 +18,7 @@ further_reading:
 
 To create a monitor in Datadog:
 
-1. In the main navigation, select *Monitors --> New Monitor*.
+1. Navigate to **Monitors** > **New Monitor**.
 2. Select a [monitor type](#monitor-types) corresponding to the kind of telemetry you want to alert on.
 3. [Configure the monitor][1].
 
