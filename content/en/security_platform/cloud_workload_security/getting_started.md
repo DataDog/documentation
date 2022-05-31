@@ -56,6 +56,10 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
       securityAgent:
         runtime:
           enabled: true
+
+    # Add this to enable the collection of CWS network events
+          network:
+            enabled: true
     ```
 
 3. Restart the Agent.
