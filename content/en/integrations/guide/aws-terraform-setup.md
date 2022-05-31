@@ -1,0 +1,74 @@
+---
+title: The AWS Integration with Terraform
+kind: guide
+aliases:
+    - /integrations/faq/aws-integration-with-terraform/
+disable_toc: true
+further_reading:
+- link: "https://www.datadoghq.com/blog/managing-datadog-with-terraform/"
+  tag: "Blog"
+  text: "Managing Datadog with Terraform"
+---
+
+Using [Terraform][1], you can create the Datadog IAM role, policy document, and the Datadog-AWS integration with a single `terraform apply` command. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
+
+* `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][2] documentation.
+* `AWS_ACCOUNT_ID`: Your AWS account ID.
+
+See the [Terraform Registry][3] for further example usage and the full list of optional parameters, as well as additional Datadog resources. 
+
+```hcl
+data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type = "AWS"
+      identifiers = ["arn:aws:iam::464622532012:root"]
+    }
+    condition {
+      test = "StringEquals"
+      variable = "sts:ExternalId"
+
+      values = [
+        "${datadog_integration_aws.sandbox.external_id}"
+      ]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "datadog_aws_integration" {
+  statement {
+    actions = [<AWS_PERMISSIONS_LIST>]
+
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "datadog_aws_integration" {
+  name = "DatadogAWSIntegrationPolicy"
+  policy = "${data.aws_iam_policy_document.datadog_aws_integration.json}"
+}
+
+resource "aws_iam_role" "datadog_aws_integration" {
+  name = "DatadogAWSIntegrationRole"
+  description = "Role for Datadog AWS Integration"
+  assume_role_policy = "${data.aws_iam_policy_document.datadog_aws_integration_assume_role.json}"
+}
+
+resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
+  role = "${aws_iam_role.datadog_aws_integration.name}"
+  policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
+}
+
+resource "datadog_integration_aws" "sandbox" {
+  account_id  = "<AWS_ACCOUNT_ID>"
+  role_name   = "DatadogAWSIntegrationRole"
+}
+```
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.terraform.io
+[2]: /integrations/amazon_web_services/?tab=manual#aws-iam-permissions
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
