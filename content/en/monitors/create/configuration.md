@@ -61,11 +61,11 @@ The query returns a series of points, but a single value is needed to compare to
 
 ### Evaluation window
 
-Monitors are evaluated at a certain frequency looking back at the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+Monitors are evaluated at a certain frequency, looking back at the last `5 minutes`, `15 minutes`, `1 hour`, and more.
 
 ### Evaluation frequency
 
-The evaluation frequency is how often the monitor query is being performed by Datadog. For most configurations, the evaluation frequency is `1 minute`, which means that every minute, the monitor queries the [selected data](#define-the-search-query) over the [selected evaluation window](#evaluation-window) and compares the aggregated value against the [defined thresholds](#thresholds).
+The evaluation frequency defines how often Datadog performs the monitor query. For most configurations, the evaluation frequency is `1 minute`, which means that every minute, the monitor queries the [selected data](#define-the-search-query) over the [selected evaluation window](#evaluation-window) and compares the aggregated value against the [defined thresholds](#thresholds).
 
 ### Thresholds
 
