@@ -136,8 +136,8 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | Platform                                 | Supported versions                                        |
 |------------------------------------------|-----------------------------------------------------------|
 | [Amazon Linux][1]                        | Amazon Linux 2                                            |
-| [Debian][2] with systemd                 | Debian 7 (wheezy)+                                        |
-| [Debian][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                        |
+| [Debian][2] with systemd                 | Debian 7 (wheezy)+ in Agent < 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
+| [Debian][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0 - 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
 | [Ubuntu][3]                              | Ubuntu 14.04+                                             |
 | [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 6+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
 | [Docker][5]                              | Version 1.12+                                             |
