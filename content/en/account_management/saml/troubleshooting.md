@@ -28,7 +28,7 @@ To resolve, see the section below for the specific error.
 
 ### SAML is not enabled for this org
 
-SAML is turned off for your account. Navigate to [Login Methods][1]. Ensure that **Enabled by Default** is set to **On**.
+SAML is turned off for your account. Navigate to [Login Methods][1]. In the SAML section, ensure that **Enabled by Default** is set to **On**.
 
 **Note:** Configuring SAML requires the Datadog Admin Role or the Org Management (`org_management`) permission.
 
