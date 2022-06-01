@@ -2141,14 +2141,8 @@ components:
           description: The query being made on the event.
           example: ''
           type: string
-        tags_execution:
-          description: The execution method for multi-value filters. Can be either
-            and or or.
-          example: ''
-          type: string
       required:
       - search
-      - tags_execution
       type: object
     EventResponse:
       description: Object containing an event response.
@@ -2169,10 +2163,6 @@ components:
         query:
           description: Query to filter the event stream with.
           example: ''
-          type: string
-        tags_execution:
-          description: The execution method for multi-value filters. Can be either
-            and or or.
           type: string
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -2206,10 +2196,6 @@ components:
         query:
           description: Query to filter the event timeline with.
           example: ''
-          type: string
-        tags_execution:
-          description: The execution method for multi-value filters. Can be either
-            and or or.
           type: string
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -16763,9 +16749,6 @@ components:
         q:
           description: Query definition.
           example: ''
-          type: string
-        tags_execution:
-          description: The execution method for multi-value filters.
           type: string
       required:
       - q
