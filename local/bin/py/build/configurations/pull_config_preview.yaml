@@ -94,7 +94,7 @@
     contents:
 
     - action: integrations
-      branch: master
+      branch: ofek/ct
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
@@ -106,7 +106,7 @@
     contents:
 
     - action: marketplace-integrations
-      branch: master
+      branch: ofek/ct
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
