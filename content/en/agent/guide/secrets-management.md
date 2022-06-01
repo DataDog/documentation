@@ -1,6 +1,8 @@
 ---
 title: Secrets Management
 kind: documentation
+aliases:
+  - /agent/faq/kubernetes-secrets
 further_reading:
 - link: "/agent/autodiscovery/"
   tag: "Documentation"

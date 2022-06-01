@@ -1,26 +1,29 @@
 ---
-title: 検索構文
-kind: documentation
-description: すべてのログを検索する
 aliases:
-  - /ja/logs/search
-  - /ja/logs/search-syntax
-  - /ja/logs/explorer/search/
-  - /ja/logs/search_syntax/
+- /ja/logs/search
+- /ja/logs/search-syntax
+- /ja/logs/explorer/search/
+- /ja/logs/search_syntax/
+description: すべてのログを検索する
 further_reading:
-  - link: /logs/explorer/#visualize
-    tag: ドキュメント
-    text: ログ分析の実行
-  - link: /logs/explorer/#patterns
-    tag: ドキュメント
-    text: ログ内のパターン検出
-  - link: /logs/log_configuration/processors
-    tag: ドキュメント
-    text: ログの処理方法
-  - link: /logs/explorer/saved_views/
-    tag: ドキュメント
-    text: ログエクスプローラーの自動構成
+- link: /logs/explorer/#visualize
+  tag: ドキュメント
+  text: ログ分析の実行
+- link: /logs/explorer/#patterns
+  tag: ドキュメント
+  text: ログ内のパターン検出
+- link: /logs/log_configuration/processors
+  tag: ドキュメント
+  text: ログの処理方法
+- link: /logs/explorer/saved_views/
+  tag: ドキュメント
+  text: ログエクスプローラーの自動構成
+kind: documentation
+title: ログ検索構文
 ---
+
+## 概要
+
 クエリフィルターは条件と演算子で構成されます。
 
 条件には 2 種類あります。
@@ -42,27 +45,16 @@ further_reading:
 
 検索バーのオートコンプリート機能を使用すると、既存の値を使用してクエリを完成させることができます。
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="検索バーのオートコンプリート"  style="width:80%;">}}
+{{< img src="logs/explorer/search/search_bar_autocomplete.jpg" alt="検索バーのオートコンプリート " style="width:80%;">}}
 
 ## 特殊文字のエスケープ
 
-`+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`、および `/` は特殊文字と見なされ、`\` 文字を使用してエスケープする必要があります。
+次の文字は特殊文字とみなされます:  `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `/` は、`\` 文字でエスケープすることが必要です。ログメッセージから特殊文字を検索することはできません。しかし、特殊文字が属性の中にある場合は、検索することができます。特殊文字を検索するには、[grok parser][1] で特殊文字を属性にパースし、その属性を含むログを検索してください。
 
-**注**: これらの文字はエスケープできますが、ログ検索の結果には表示されません。特殊文字を検索する場合は、対象の文字の属性値を [Grok パーサー][1]でパースし、その属性を含むログを検索します。
 
 ## 属性検索
 
-### メッセージ属性検索
-
-メッセージ属性に `user=JaneDoe` を含むログを見つけるには、次の検索を使用します。
-
-```
-user\=JaneDoe
-```
-
-### 属性検索
-
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 特定の属性を検索するには、まず[それをファセットとして追加][1]し、次に `@` を追加してファセット検索を指定します。
 
 たとえば、属性名が **url** で、**url** の値 `www.datadoghq.com` で絞り込む場合は、次のように入力します。
@@ -70,7 +62,6 @@ user\=JaneDoe
 ```
 @url:www.datadoghq.com
 ```
-
 
 **注**:
 
@@ -122,7 +113,9 @@ user\=JaneDoe
 * `web*` は、`web` で始まるすべてのログメッセージに一致します。
 * `*web` は、`web` で終わるすべてのログメッセージに一致します。
 
-{{< site-region region="gov,us3" >}}
+**注**: ワイルドカードは、二重引用符の外側にあるワイルドカードとしてのみ機能します。例えば、`”*test*”` は、メッセージの中に `*test*` という文字列があるログにマッチします。`*test*` は、メッセージのどこかに test という文字列を持つログにマッチします。
+
+{{< site-region region="gov,us3,us5" >}}
 ワイルドカード検索は、この構文を使用してファセット内で機能します。次のクエリは、文字列 `mongo` で終わるすべてのサービスを返します。
 <p> </p>
 {{< /site-region >}}
@@ -147,8 +140,8 @@ service:*mongo
 
 ### ワイルドカードを検索
 
-{{< site-region region="gov,us3" >}}
-特殊文字を含むファセット値を検索する場合、またはエスケープまたは二重引用符を必要とする場合は、`?` ワイルドカードを使用して単一の特殊文字またはスペースに一致させます。たとえば、値が  のファセット `hello world` を検索するには `@my_facet:hello?world` を使用します。
+{{< site-region region="gov,us3,us5" >}}
+特殊文字を含むファセット値を検索する場合、またはエスケープまたは二重引用符を必要とする場合は、`?` ワイルドカードを使用して単一の特殊文字またはスペースに一致させます。たとえば、値が `hello world` のファセット `my_facet` を検索するには `@my_facet:hello?world` を使用します。
 <p> </p>
 {{< /site-region >}}
 
@@ -187,21 +180,19 @@ service:*mongo
 
 ## 配列
 
-文字列または数字の配列にファセットを追加できます。配列に含まれるすべての値がこのファセット内にリストされ、ログの検索に使用できます。
-
 次の例では、ファセットで `Peter` 値をクリックすると、`users.names` 属性の値が `Peter` であるか、`Peter` を含む配列であるすべてのログが返されます。
 
-{{< img src="logs/explorer/search/array_search.png" alt="配列とファセット"  style="width:80%;">}}
+{{< img src="logs/explorer/search/array_search.png" alt="配列とファセット" style="width:80%;">}}
 
 {{< site-region region="us,eu" >}}
 
 **注**: 同等の構文を使用して、検索をファセットではない配列属性にも使用することができます。
 
-次の例では、Windows 用 CloudWatch ログの `@Event.EventData.Data` 下に JSON オブジェクトの配列が含まれています。
+以下の例では、Windows 用の CloudWatch ログは、`@Event.EventData.Data` の下に JSON オブジェクトの配列が含まれています。JSON オブジェクトの配列にファセットを作成することはできませんが、以下の構文で検索することができます。
 
 * `@Event.EventData.Data.Name:ObjectServer` はキー`Name` と値 `ObjectServer` ですべてのログに一致します。
 
-{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="JSON オブジェクト配列上のファセットなしクエリ"  style="width:80%;">}}
+{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="JSON オブジェクト配列上のファセットなしクエリ" style="width:80%;">}}
 <p> </p>
 {{< /site-region >}}
 

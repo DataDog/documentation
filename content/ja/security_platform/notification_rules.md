@@ -1,17 +1,18 @@
 ---
-title: 通知ルール
-kind: documentation
-description: 通知ルールを作成し、セキュリティ検出ルールがトリガーされたときに、チームとインテグレーションに自動的に通知します。
 aliases:
-  - /ja/security_platform/notification_profiles/
+- /ja/security_platform/notification_profiles/
+description: 通知ルールを作成し、セキュリティ検出ルールがトリガーされたときに、チームとインテグレーションに自動的に通知します。
 further_reading:
-  - link: /security_platform/detection_rules/
-    tag: ドキュメント
-    text: セキュリティ検出ルールについて
+- link: /security_platform/detection_rules/
+  tag: ドキュメント
+  text: セキュリティ検出ルールについて
+kind: documentation
+title: 通知ルール
 ---
+
 ## 概要
 
-セキュリティ通知ルールは、個々のセキュリティ検出ルールの通知設定を手動で編集することなく、チームに問題を通知することで、クラウド SIEM の重要な役割を果たします。
+セキュリティ通知ルールは、個々のセキュリティ検出ルールの通知設定を手動で編集することなく、チームに問題を通知する重要な役割を果たします。
 
 重大度、ルールタイプ、ルールタグ、シグナル属性、シグナルタグなどのパラメーターに基づいて、複数のセキュリティ検出ルールとシグナルにまたがる通知プリファレンスを通知ルール内で作成および変更することができます。
 

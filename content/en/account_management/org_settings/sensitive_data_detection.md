@@ -5,15 +5,18 @@ beta: true
 aliases:
     - /logs/log_configuration/sensitive_data_detection
 further_reading:
-- link: "/security/logs/"
-  tag: "Documentation"
-  text: "Security"
-- link: "/logs/explorer/"
-  tag: "Documentation"
-  text: "Log Explorer"
-- link: "https://www.datadoghq.com/blog/sensitive-data-scanner/"
-  tag: "Blog"
-  text: "Build a modern data compliance strategy with Datadog's Sensitive Data Scanner"
+    - link: "/security/logs/"
+      tag: "Documentation"
+      text: "Security"
+    - link: "/logs/explorer/"
+      tag: "Documentation"
+      text: "Log Explorer"
+    - link: "https://www.datadoghq.com/blog/sensitive-data-scanner/"
+      tag: "Blog"
+      text: "Build a modern data compliance strategy with Datadog's Sensitive Data Scanner"
+    - link: "https://www.datadoghq.com/blog/sensitive-data-management-best-practices/"
+      tag: "Blog"
+      text: "Best practices for sensitive data management"
 ---
 
 ## Overview

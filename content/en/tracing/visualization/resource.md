@@ -45,9 +45,9 @@ Datadog provides out-of-the-box graphs for any given resource:
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs"  style="width:90%;">}}
 
-### Export to timeboard
+### Export to dashboard
 
-On the upper-right corner of each graph, click on the up arrow in order to export your graph into a pre-existing [Timeboard][4].
+On the upper-right corner of each graph, click on the up arrow in order to export your graph into a pre-existing [Dashboard][4].
 
 ### Latency distribution
 
@@ -85,7 +85,7 @@ The displayed metrics represent, per span:
 
 Consult the list of [traces][6] associated with this resource in the [Trace search][7] modal already filtered on your environment, service, operation, and resource name:
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list"  style="width:90%;">}}
 
 ## Further Reading
 
@@ -94,7 +94,7 @@ Consult the list of [traces][6] associated with this resource in the [Trace sear
 [1]: /tracing/visualization/#services
 [2]: /tracing/visualization/
 [3]: /tracing/visualization/#trace
-[4]: /dashboards/#timeboards
+[4]: /dashboards/
 [5]: /tracing/visualization/#spans
 [6]: /tracing/visualization/trace/
 [7]: /tracing/search/

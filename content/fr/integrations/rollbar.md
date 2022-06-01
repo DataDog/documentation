@@ -1,30 +1,35 @@
 ---
 categories:
-  - notification
-  - issue tracking
-  - exceptions
+- notification
+- issue tracking
+- exceptions
 ddtype: crawler
 dependencies: []
-description: 'Envoyez les exceptions, erreurs et déploiements de code vers votre flux d''événements Datadog.'
-doc_link: 'https://docs.datadoghq.com/integrations/rollbar/'
+description: Envoyez les exceptions, erreurs et déploiements de code vers votre flux
+  d'événements Datadog.
+doc_link: https://docs.datadoghq.com/integrations/rollbar/
 draft: false
 git_integration_title: rollbar
 has_logo: true
 integration_id: rollbar
 integration_title: Rollbar
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: rollbar
 public_title: Intégration Datadog/Rollbar
-short_description: 'Envoyez les exceptions, erreurs et déploiements de code vers votre flux d''événements Datadog.'
+short_description: Envoyez les exceptions, erreurs et déploiements de code vers votre
+  flux d'événements Datadog.
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/rollbar/rollbar_error.png" alt="Événement d'erreur Rollbar" popup="true">}}
 
 ## Présentation
 
-Rollbar aide les développeurs à concevoir de meilleurs logiciels, plus rapidement. Avec Rollbar, les développeurs peuvent consulter les exceptions de l'ensemble de leurs frameworks, plates-formes et environnements depuis un endroit unique.
+Rollbar aide les développeurs à concevoir plus rapidement de meilleurs logiciels. Avec Rollbar, les développeurs peuvent consulter les exceptions de l'ensemble de leurs frameworks, plateformes et environnements depuis une interface unique.
 
 Connecter Rollbar à Datadog pour :
 
@@ -40,7 +45,7 @@ Connecter Rollbar à Datadog pour :
 
 Aucune installation n'est requise.
 
-### Configuration
+### Procédure à suivre
 
 La configuration s'effectue par projet dans Rollbar.
 
@@ -49,7 +54,7 @@ La configuration s'effectue par projet dans Rollbar.
 3. Ajoutez votre clé d'API Datadog dans Rollbar.
 4. Cliquez sur [Enable Datadog Integration][2].
 
-Votre configuration est terminée. Lorsqu'une exception se produit, elle apparaît désormais dans votre flux d'événements.
+Lorsqu'une exception se produit, elle apparaît désormais dans votre flux d'événements.
 
 ## Données collectées
 
@@ -69,6 +74,6 @@ L'intégration Rollbar n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/account/settings#integrations/rollbar
 [3]: https://docs.datadoghq.com/fr/help/

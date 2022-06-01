@@ -3,15 +3,16 @@ title: OTLP Trace Ingestion by the Datadog Agent
 kind: documentation
 description: 'Ingest OTLP trace data through the Datadog Agent'
 further_reading:
+- link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
+  tag: "Blog"
+  text: "OTLP ingestion in the Agent"
 aliases:
 ---
 
 
 OTLP Ingest in the Agent is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP.
 
-OTLP Ingest in the Agent allows you to use trace observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog Tracing Library specific features aren't available for the ingested data including Application Security, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
-
-<div class="alert alert-warning">OTLP Metrics ingestion is in beta and its behavior and configuration may change.</div>
+OTLP Ingest in the Agent allows you to use trace observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog Tracing Library specific features aren't available for the ingested data including Application Security Monitoring, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
 
 To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below.
 
@@ -238,6 +239,10 @@ experimental:
 {{< /tabs >}}
 
 There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][5].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/
 [2]: /metrics/otlp/

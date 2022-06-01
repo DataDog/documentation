@@ -11,6 +11,8 @@ Post events for specific integrations using the [Events API][1] and the `source_
 
 Search for events in the event stream using `sources:<SEARCH_TERM>`.
 
+**Note**: This list includes sources from core Datadog integrations only. Additional sources may come from [community][2] and [Marketplace][3] integrations. 
+
 
 ## Parameters
 
@@ -325,3 +327,5 @@ Search for events in the event stream using `sources:<SEARCH_TERM>`.
 
 
 [1]: /api/latest/events/
+[2]: https://docs.datadoghq.com/integrations/
+[3]: https://app.datadoghq.com/marketplace/

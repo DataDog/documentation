@@ -16,7 +16,7 @@ git_integration_title: lighthouse
 guid: 4e66e6d6-bcb0-4250-b950-95ef11176494
 integration_id: lighthouse
 integration_title: Lighthouse
-integration_version: 2.0.0
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: mustin.eric@gmail.com

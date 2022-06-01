@@ -1,31 +1,35 @@
 ---
 categories:
-  - languages
-  - log collection
+- languages
+- log collection
 ddtype: library
 dependencies: []
-description: 'Recueillez des métriques, des traces et des logs à partir de vos applications PHP.'
-doc_link: 'https://docs.datadoghq.com/integrations/php/'
+description: Recueillez des métriques, des traces et des logs à partir de vos applications
+  PHP.
+doc_link: https://docs.datadoghq.com/integrations/php/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-php-performance/'
-    tag: Blog
-    text: Surveillance PHP avec l'APM et le tracing distribué de Datadog
-  - link: 'https://www.datadoghq.com/blog/php-logging-guide/'
-    tag: Blog
-    text: 'Comment recueillir, personnaliser et analyser des logs PHP'
+- link: https://www.datadoghq.com/blog/monitor-php-performance/
+  tag: Blog
+  text: Surveillance PHP avec l'APM et le tracing distribué de Datadog
+- link: https://www.datadoghq.com/blog/php-logging-guide/
+  tag: Blog
+  text: Comment recueillir, personnaliser et analyser des logs PHP
 git_integration_title: php
 has_logo: true
 integration_id: php
 integration_title: PHP
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: php
 public_title: Intégration Datadog/PHP
-short_description: 'Recueillez des métriques, des traces et des logs à partir de vos applications PHP.'
+short_description: Recueillez des métriques, des traces et des logs à partir de vos
+  applications PHP.
 version: '1.0'
 ---
+
 ## Présentation
 
 L'intégration Datadog/PHP vous permet de recueillir et de surveiller les logs, les traces et les métriques custom de vos applications PHP.

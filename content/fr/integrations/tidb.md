@@ -4,7 +4,6 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     TiDB Overview: assets/dashboards/overview.json
-    overview: assets/dashboards/one-screen-overview.json
   logs:
     service: tidb
   metrics_metadata: metadata.csv
@@ -12,21 +11,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
-  - cloud
+- data store
+- cloud
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
 display_name: TiDB
 draft: false
 git_integration_title: tidb
 guid: 4b34acac-39ce-4ec4-9329-c68cc4e61279
 integration_id: tidb
 integration_title: TiDB
-integration_version: 2.0.0
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: xuyifan02@pingcap.com
@@ -38,10 +36,13 @@ public_title: TiDB
 short_description: Intégration pour cluster TiDB
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Associez le cluster [TiDB][1] à Datadog pour :
@@ -50,30 +51,28 @@ Associez le cluster [TiDB][1] à Datadog pour :
 - Recueillir les logs de votre cluster, notamment les logs TiDB/TiKV/TiFlash et les logs sur les requêtes lentes
 - Visualiser les performances de votre cluster dans le dashboard fourni
 
-> **Remarque :** 
+> **Remarque** :
 >
 > - Pour que cette intégration fonctionne, TiDB 4.0 ou ultérieur est requis. 
-> - TiDB Cloud ne peut actuellement pas être intégré à Datadog.
+> - Pour intégrer TiDB Cloud, consultez la [documentation à ce sujet][2].
 
 ## Configuration
 
 ### Installation
 
-Commencez par [télécharger et lancer l'Agent Datadog][2].
+Commencez par [télécharger et lancer l'Agent Datadog][3].
 
-Installez ensuite manuellement le check TiDB. [Les instructions varient en fonction de votre environnement][3].
-
-#### Host
+Installez ensuite manuellement le check TiDB. [Les instructions varient en fonction de votre environnement][4].
 
 Exécutez `datadog-agent integration install -t datadog-tidb==<VERSION_INTÉGRATION>`.
 
-### Configuration
+### Procédure à suivre
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `tidb.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance TiDB. Consultez le [fichier d'exemple tidb.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `tidb.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance TiDB. Consultez le [fichier d'exemple tidb.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-  L'[exemple de fichier tidb.d/conf.yaml][4] configure uniquement l'instance PD. Les autres instances au sein du cluster TiDB doivent être configurées manuellement, comme suit :
+  L'[exemple de fichier tidb.d/conf.yaml][5] configure uniquement l'instance PD. Les autres instances au sein du cluster TiDB doivent être configurées manuellement, comme suit :
 
   ```yaml
   init_config:
@@ -81,37 +80,32 @@ Exécutez `datadog-agent integration install -t datadog-tidb==<VERSION_INTÉGRAT
   instances:
 
     - pd_metric_url: http://localhost:2379/metrics
-      max_returned_metrics: 10000
       send_distribution_buckets: true
       tags:
-        - tidb_cluster_name:cluster01
+        - cluster_name:cluster01
 
     - tidb_metric_url: http://localhost:10080/metrics
-      max_returned_metrics: 10000
       send_distribution_buckets: true
       tags:
-        - tidb_cluster_name:cluster01
+        - cluster_name:cluster01
 
     - tikv_metric_url: http://localhost:20180/metrics
-      max_returned_metrics: 10000
       send_distribution_buckets: true
       tags:
-        - tidb_cluster_name:cluster01
+        - cluster_name:cluster01
 
     - tiflash_metric_url: http://localhost:8234/metrics
-      max_returned_metrics: 10000
       send_distribution_buckets: true
       tags:
-        - tidb_cluster_name:cluster01
+        - cluster_name:cluster01
 
     - tiflash_proxy_metric_url: http://localhost:20292/metrics
-      max_returned_metrics: 10000
       send_distribution_buckets: true
       tags:
-        - tidb_cluster_name:cluster01
+        - cluster_name:cluster01
   ```
 
-3. [Redémarrez l'Agent][5].
+3. [Redémarrez l'Agent][6].
 
 ##### Collecte de logs
 
@@ -175,17 +169,19 @@ _Disponible à partir des versions > 6.0 de l'Agent_
    ps -fwwp <TIDB_PROCESS_PID/PD_PROCESS_PID/etc.>
    ```
 
-3. [Redémarrez l'Agent][5].
+3. [Redémarrez l'Agent][6].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][6] et cherchez `tidb` dans la section Checks.
+Lancez [la sous-commande status de l'Agent][7] et cherchez `tidb` dans la section Checks.
 
 ## Données collectées
 
 ### Métriques
 {{< get-metrics-from-git "tidb" >}}
 
+
+> Il est possible d'utiliser l'option de configuration `metrics` pour recueillir des métriques supplémentaires depuis un cluster TiDB.
 
 ### Événements
 
@@ -197,6 +193,13 @@ Le check TiDB n'inclut aucun événement.
 
 ## Dépannage
 
+### Métriques manquantes sur le processeur et la mémoire pour les instances TiKB et TiFlash sous macOS
+
+Les métriques sur le processeur et la mémoire ne sont pas fournies pour les instances TiKV et TiFlash dans les configurations suivantes :
+
+- Les instances TiKV ou TiFlash sont exécutées avec le [playground tiup][10] sous macOS.
+- Les instances TiKV ou TiFlash sont exécutées avec [docker-compose up][11] sur une nouvelle machine dotée d'une puce M1 Apple.
+
 ### Trop de métriques
 
 Le check TiDB active les métriques `distribution` de Datadog par défaut. Cette partie des données est très volumineuse et peut consommer une grande quantité de ressources. Ce comportement peut être modifié dans le fichier `tidb.yml` :
@@ -207,14 +210,17 @@ Le check TiDB active les métriques `distribution` de Datadog par défaut. Cette
 
 - `max_returned_metrics: 1000`
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://docs.pingcap.com/tidb/stable
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
-[4]: https://github.com/DataDog/integrations-extras/blob/master/tidb/datadog_checks/tidb/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-extras/blob/master/tidb/metadata.csv
-[8]: https://github.com/DataDog/integrations-extras/blob/master/tidb/assets/service_checks.json
-[9]: https://docs.datadoghq.com/fr/help/
+[2]: https://docs.datadoghq.com/fr/integrations/tidb_cloud/
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[5]: https://github.com/DataDog/integrations-extras/blob/master/tidb/datadog_checks/tidb/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-extras/blob/master/tidb/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/tidb/assets/service_checks.json
+[10]: https://docs.pingcap.com/tidb/stable/tiup-playground
+[11]: https://github.com/DataDog/integrations-extras/tree/master/tidb/tests/compose
+[12]: https://docs.datadoghq.com/fr/help/

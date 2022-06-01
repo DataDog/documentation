@@ -11,18 +11,19 @@ assets:
     tokumx_processes: assets/saved_views/tokumx_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - autodiscovery
+- data store
+- autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
+- https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
 display_name: TokuMX
 draft: false
 git_integration_title: tokumx
 guid: 7785939b-bfb6-4d3e-acc2-94c1f5fb33e7
 integration_id: tokumx
 integration_title: TokuMX
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -35,10 +36,13 @@ public_title: Datadog-TokuMX インテグレーション
 short_description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、以下を含む TokuMX メトリクスを収集します。
@@ -51,7 +55,7 @@ supported_os:
 
 ### インストール
 
-TokuMX チェックは、Agent バージョン 6.x 以前の [Datadog Agent][1] パッケージに含まれています。TokuMX サーバーに追加でインストールする必要はありません。
+TokuMX チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
@@ -90,7 +94,7 @@ TokuMX チェックは、Agent バージョン 6.x 以前の [Datadog Agent][1] 
    echo -e "\033[0;31mdatadog user - Missing\033[0m"
    ```
 
-MongoDB でのユーザーの作成と管理の詳細については、[MongoDB のドキュメント][2]を参照してください。
+MongoDB でのユーザーの作成と管理の詳細については、[MongoDB Security のドキュメント][2]を参照してください。
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -161,7 +165,7 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://www.mongodb.org/display/DOCS/Security+and+Authentication
+[2]: https://docs.mongodb.com/manual/security/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-key-tokumx-metrics-mongodb-applications
