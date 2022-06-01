@@ -104,7 +104,7 @@ class SampleRegistry
 ### Writing the custom instrumentation
 
 <div class="alert alert-info">
-In order to write custom instrumentations you do not need any additional composer package. There is only a specific use case that is not covered by the current version of the api and that requires the legacy API provided by a composer package. This use case is presented later in the page.
+In order to write custom instrumentations you do not need any additional composer package.
 </div>
 
 The recommended approach to instrument an application or a service is to write the required code in a separate file, with the result that the application business logic is not mixed with instrumentation code.
@@ -148,15 +148,15 @@ Then we instrument the function `\App\some_utility_function`, if you are not int
 \DDTrace\trace_function('App\some_utility_function', function (\DDTrace\SpanData $span, $args, $ret, $exception) {});
 ```
 
-For the `SampleRegistry` class's `put` method we are interested not only generating a span, but we also want to add a tag with the value of the returned item identifier and a tag for the key. Since this is a method, we use `\DDTrace\trace_method`:
+For `SampleRegistry::put` method we are interested not only in generating a span, but we also want to add a tag with the value of the returned item identifier and a tag for the key. Since this is a method, we use `\DDTrace\trace_method`:
 
 ```
 \DDTrace\trace_method(
     'App\Services\SampleRegistry',
     'put',
     function (\DDTrace\SpanData $span, $args, $ret, $exception) {
-        $span->meta['app.cache.key'] = $args[0];
-        $span->meta['app.cache.item_id'] = $ret;
+        $span->meta['app.cache.key'] = $args[0]; // The first argument is the 'key'
+        $span->meta['app.cache.item_id'] = $ret; // The returned value
     }
 );
 ```
@@ -165,7 +165,7 @@ For the `SampleRegistry` class's `put` method we are interested not only generat
 When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy do <code>$span->meta['my'] = 'tag'</code> otherwise you might overwrite existing tags automatically added by our core instrumentations.
 </div>
 
-`SampleRegistry::faultyMethod` generated an exception. There is nothing to do with regards to custom instrumentation, as if the method is instrumented, the default exception reporting mechanism will take care of attaching the exception message and the stack trace.
+`SampleRegistry::faultyMethod` generates an exception. There is nothing your have to do with regards to custom instrumentation. If the method is instrumented, the default exception reporting mechanism will take care of attaching the exception message and the stack trace.
 
 ```
 \DDTrace\trace_method(
@@ -176,7 +176,7 @@ When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy d
 );
 ```
 
-`SampleRegistry::get` has a behavior that we are interested instrumenting properly. Specifically, if the item is not found, it will throw a `NotFound` exception. This exception is expected and we do not want to mark the span as errored. We just want to change the resource name in order to add it to a pool of `not_found` operations. In order to achieve this goal, we `unset` the exception for the span.
+`SampleRegistry::get` uses a `NotFound` exception to notify that an item was not found. This exception is an expected part of the businees logic and we do not want to mark the span as errored. We just want to change the resource name in order to add it to a pool of `not_found` operations. In order to achieve this goal, we `unset` the exception for the span.
 
 ```
 \DDTrace\trace_method(
