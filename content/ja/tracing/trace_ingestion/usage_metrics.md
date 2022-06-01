@@ -46,7 +46,7 @@ Datadog APM のプランには、インデックス化されたスパンと取�
 
 使用量は `datadog.estimated_usage.apm.ingested_bytes` で制御します。取り込みはスパンやトレース数ではなく、量として計測されます。このメトリクスは `env` と `service` によってタグ付けされているので、どの環境とサービスが取り込み量に寄与しているかを特定することができます。
 
-このメトリクスはまた、`ingestion_reason` によってタグ付けされ、Datadog にスパンを送信する責任がある[取り込みメカニズム][5]を反映させることができます。これらのメカニズムは、Datadog Agent のトレーシングライブラリの中にネストされています。このディメンションの詳細については、[Ingestion Reason ダッシュボード][6]を参照してください。
+このメトリクスはまた、`ingestion_reason` によってタグ付けされ、Datadog にスパンを送信する責任がある[取り込みメカニズム][5]を反映させることができます。これらのメカニズムは、Datadog Agent のトレーシングライブラリの中にネストされています。このディメンションの詳細については、[取り込み理由ダッシュボード][6]を参照してください。
 
 `datadog.estimated_usage.apm.ingested_traces` メトリクスは、1 秒間にサンプリングされるリクエスト数を計測し、[ヘッドベースサンプリング][7]によってサンプリングされたトレースのみをカウントします。このメトリクスは `env` と `service` によってタグ付けされているので、どのサービスが最も多くのトレースを開始しているのかを特定することもできます。
 
@@ -69,6 +69,14 @@ Datadog APM のプランには、インデックス化されたスパンと取�
 - `service`、`env`、`ingestion_reason` で区切られた取り込み量
 - `service` と `env` で区切られたインデックス化量
 
+## APM 取り込み理由ダッシュボード
+
+[APM 取り込み理由ダッシュボード][6]は、取り込み量の各ソースに関する洞察を提供します。各取り込み使用量メトリクスには、`ingestion_reason` ディメンションが付与されており、どの構成オプション (Datadog Agent 構成やトレーシングライブラリ構成) や製品 (RUM や Synthetic Testing など) が、最も多くの APM データを生成しているかを確認することができます。
+
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_ingestion_reasons.png" style="width:100%;" alt="APM 取り込み理由ダッシュボード" >}}
+
+取り込みの理由ごとに、どの環境やサービスが全体のボリュームに最も影響を与えているかを知ることができます。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -78,6 +86,6 @@ Datadog APM のプランには、インデックス化されたスパンと取�
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
 [4]: /ja/account_management/billing/apm_tracing_profiler/
 [5]: /ja/tracing/trace_ingestion/mechanisms
-[6]: https://app.datadoghq.com/dash/integration/apm-ingestion-reason-overview
+[6]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
 [7]: /ja/tracing/trace_ingestion/mechanisms/#head-based-sampling
-[8]: https://app.datadoghq.com/dash/integration/apm-estimated-usage
+[8]: https://app.datadoghq.com/dash/integration/apm_estimated_usage

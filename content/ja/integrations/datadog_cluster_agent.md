@@ -2,24 +2,26 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Datadog Cluster Agent - Overview: assets/dashboards/datadog_cluster_agent_overview.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - containers
+- containers
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md
 display_name: Datadog Cluster Agent
 draft: false
 git_integration_title: datadog_cluster_agent
 guid: 275fd66d-2440-44e5-ac30-461062cd2825
 integration_id: datadog-cluster-agent
 integration_title: Datadog Cluster Agent
+integration_version: 2.2.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,10 +33,13 @@ public_title: Datadog Cluster Agent インテグレーション
 short_description: Datadog Cluster Agent のメトリクスを追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Datadog Cluster Agent][1] を監視します。

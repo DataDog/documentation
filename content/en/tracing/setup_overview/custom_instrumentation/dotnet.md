@@ -116,13 +116,13 @@ If you have existing `[Trace]` or similar attributes, or prefer to use attribute
   <strong>Note:</strong> This feature requires enabling automatic instrumentation for your application.
 </div>
 
-Using the `DD_TRACE_METHOD` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format, see the [.NET Framework setup instructions][8] or the [.NET Core setup instructions][9]. For the following example, assume that the desired method to instrument is named `SaveSession` and the method is defined on the `Store.Managers.SessionManager` type:
+Using the `DD_TRACE_METHODS` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format, see the [.NET Framework setup instructions][8] or the [.NET Core setup instructions][9]. For the following example, assume that the desired method to instrument is named `SaveSession` and the method is defined on the `Store.Managers.SessionManager` type:
 
 ```ini
 DD_TRACE_METHODS=Store.Managers.SessionManager[SaveSession]
 ```
 
-The resulting span has an `operationName` set to `trace.annotation` and `resourceName` set to `SaveSession`. If you would like to customize the span's attributes and you have the ability to modify the source code, you can [instrument methods via attributes][10] instead.
+The resulting span has an `operationName` set to `trace.annotation` and `resourceName` set to `SaveSession`. If you would like to customize the span's attributes and you have the ability to modify the source code, you can [instrument methods via attributes](#instrument-methods-via-attributes) instead.
 
 ### Instrument methods via attributes
 
@@ -225,7 +225,7 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
 
 ### Resource filtering
 
-You can exclude traces based on the resource name to remove Synthetics traffic such as health checks. For more information about security and additional configurations, see [Configure the Datadog Agent or Tracer for Data Security][11].
+You can exclude traces based on the resource name to remove Synthetics traffic such as health checks. For more information about security and additional configurations, see [Configure the Datadog Agent or Tracer for Data Security][10].
 
 ## Further Reading
 
@@ -241,5 +241,4 @@ You can exclude traces based on the resource name to remove Synthetics traffic s
 [7]: /tracing/visualization/#trace
 [8]: /tracing/setup_overview/setup/dotnet-framework
 [9]: /tracing/setup_overview/setup/dotnet-core
-[10]: #instrument-methods-via-attributes
-[11]: /tracing/security
+[10]: /tracing/security

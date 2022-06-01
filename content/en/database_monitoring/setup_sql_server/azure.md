@@ -29,6 +29,9 @@ Do the following steps to enable Database Monitoring with your database:
 
 ## Before you begin
 
+Supported SQL Server versions
+: 2012, 2014, 2016, 2017, 2019
+
 {{% dbm-sqlserver-before-you-begin %}}
 
 ## Grant the Agent access
@@ -43,11 +46,15 @@ Create a read-only login to connect to your server and grant the required [Azure
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
-GRANT CONNECT ANY DATABASE to datadog;
 ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
 ```
 
+Grant the Agent access to each additional Azure SQL Database on this server:
+
+```SQL
+CREATE USER datadog FOR LOGIN datadog;
+```
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
 {{% /tab %}}
@@ -56,12 +63,27 @@ ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
 
 Create a read-only login to connect to your server and grant the required permissions:
 
+#### For SQL Server versions 2014+
+
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+```
+
+#### For SQL Server 2012
+
+```SQL
+CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
+CREATE USER datadog FOR LOGIN datadog;
+GRANT VIEW SERVER STATE to datadog;
+GRANT VIEW ANY DEFINITION to datadog;
+
+-- Create the `datadog` user in each additional application database:
+USE [database_name];
+CREATE USER datadog FOR LOGIN datadog;
 ```
 
 {{% /tab %}}

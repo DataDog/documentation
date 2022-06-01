@@ -23,7 +23,7 @@ git_integration_title: aerospike
 guid: 582de9e7-0c99-4037-9cc5-bc34612ce039
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 1.15.0
+integration_version: 1.16.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

@@ -157,9 +157,9 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 
 **Note**: Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets. 
  
+
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [2]: /logs/archives/rehydrating/
-
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
@@ -268,7 +268,7 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive (Glacier Instant Retrieval is an exception). If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive (Glacier Instant Retrieval and S3 Intelligent-Tiering are exceptions). If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /logs/archives/rehydrating/

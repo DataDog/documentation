@@ -15,20 +15,21 @@ assets:
     vault_patern: assets/saved_views/vault_patern.json
   service_checks: assets/service_checks.json
 categories:
-  - security
-  - 構成 & デプロイ
-  - ログの収集
-  - オートディスカバリー
+- security
+- 構成 & デプロイ
+- ログの収集
+- オートディスカバリー
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/vault/README.md
+- https://github.com/DataDog/integrations-core/blob/master/vault/README.md
 display_name: Vault
 draft: false
 git_integration_title: vault
 guid: d65af827-c818-44ce-9ec3-cd7ead3ac4ce
 integration_id: vault
 integration_title: Vault
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -40,10 +41,13 @@ public_title: Datadog-Vault インテグレーション
 short_description: Vault は機密情報管理サービスアプリケーション
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、[Vault][1] クラスターの健全性とリーダーの変更を監視します。
@@ -233,7 +237,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `vault` を探します。
+[Agent の status サブコマンド][6]を実行し、Checks セクションで `vault` を探します。
 
 ## 収集データ
 

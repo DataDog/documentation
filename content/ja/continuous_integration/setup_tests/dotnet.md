@@ -17,13 +17,13 @@ title: .NET テスト
 ## 互換性
 
 対応する .NET バージョン:
-* .NET Core >= 2.1 と >= 3.0
-* .NET >= 5.0
+* .NET Framework 4.6.1 以上
+* .NET Core 2.1、3.1、.NET 5、および .NET 6
 
 対応するテストフレームワーク:
-* xUnit >= 2.2
-* NUnit >= 3.0
-* MsTest V2 >= 14
+* xUnit 2.2 以上
+* NUnit 3.0 以上
+* MsTestV2 14 以上
 
 ## 前提条件
 
@@ -33,21 +33,48 @@ title: .NET テスト
 Agentless モードはベータ版です。この機能を試すには、このページの<a href="/continuous_integration/setup_tests/dotnet#agentless-beta">指示</a>に従ってください。
 </div>
 
-## .NET トレーサーのインストール
+## .NET トレーサー CLI のインストール
 
-`dd-trace` コマンドをマシンにグローバルにインストールまたは更新するには、次のコマンドを実行します。
+以下のいずれかの方法で `dd-trace` コマンドをインストールまたは更新してください。
 
-{{< code-block lang="bash" >}}
-dotnet tool update -g dd-trace
-{{< /code-block >}}
+- 以下のコマンドを実行して、.NET SDK を使用する。
+   ```
+   dotnet tool update -g dd-trace
+   ```
+- 適切なバージョンをダウンロードする。
+    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][7]
+    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][8]
+    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][9]
+
+- または、[github のリリースページより][10]ダウンロードする。
 
 ## テストのインスツルメンテーション
 
 テストスイートをインスツルメントするには、テストコマンドの前に `dd-trace ci run` を付け、テスト中のサービスまたはライブラリの名前を `--dd-service` パラメーターとして指定し、テストが実行されている環境 (たとえば、 開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を `--dd-env` パラメーターとして使用します。例:
 
+{{< tabs >}}
+
+{{% tab "dotnet テスト" %}}
+
+<a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a> の使用によって
+
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "VSTest.Console" %}}
+
+<a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a> の使用によって
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 すべてのテストは自動的にインスツルメントされます。
 
@@ -189,3 +216,7 @@ dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- do
 [4]: /ja/tracing/setup_overview/custom_instrumentation/dotnet/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /ja/getting_started/site/
+[7]: https://dtdg.co/dd-trace-dotnet-win-x64
+[8]: https://dtdg.co/dd-trace-dotnet-linux-x64
+[9]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
+[10]: https://github.com/DataDog/dd-trace-dotnet/releases

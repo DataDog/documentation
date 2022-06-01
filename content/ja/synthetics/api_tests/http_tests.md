@@ -128,6 +128,10 @@ HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encod
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="HTTP テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
 
+テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+
+テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
+
 ### ロケーションを選択する
 
 HTTP テストを実行する**ロケーション**を選択します。HTTP テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、[管理ロケーション][1]と[プライベートロケーション][2]の両方から実行できます。

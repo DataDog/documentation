@@ -165,12 +165,12 @@ You'll see a Profiling tab if the [Continuous Profiler][14] is set up for your s
 {{< img src="tracing/visualization/service/profiler.jpg" alt="Profiling"  style="width:90%;">}}
 
 ### Traces
-View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
+View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][15] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
 
 {{< img src="tracing/visualization/service/traces.png" alt="Traces"  style="width:90%;">}}
 
 ### Logs
-View common patterns in your service’s logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][17].
+View common patterns in your service’s logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][16].
 
 {{< img src="tracing/visualization/service/log_patterns.png" alt="Log patterns"  style="width:90%;">}}
 
@@ -192,6 +192,5 @@ View common patterns in your service’s logs, and use facets like status in the
 [12]: /tracing/deployment_tracking/#versions-deployed
 [13]: /tracing/runtime_metrics/
 [14]: /tracing/profiler/
-[15]: /tracing/
-[16]: /tracing/trace_explorer/query_syntax/#facets
-[17]: https://www.datadoghq.com/blog/log-patterns/
+[15]: /tracing/trace_explorer/query_syntax/#facets
+[16]: https://www.datadoghq.com/blog/log-patterns/
