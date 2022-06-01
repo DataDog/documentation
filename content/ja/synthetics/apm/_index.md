@@ -26,7 +26,7 @@ Synthetic モニタリングとの APM インテグレーションを使用す�
 
 ## 使用方法
 
-このページの内容は、どちらかに限定して説明する場合を除き、[API][1] と [ブラウザテスト][2]の両方に当てはまります。
+本ページの記述は、APM の [HTTP API テスト][20]、[Multistep API テスト][21]、[ブラウザテスト][2]に適用されます。
 
 ### 前提条件
 
@@ -108,3 +108,5 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 [17]: /ja/tracing/setup_overview/setup/dotnet-core/
 [18]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [19]: /ja/tracing/trace_retention/
+[20]: /ja/synthetics/api_tests/http_tests/?tab=requestoptions
+[21]: /ja/synthetics/multistep?tab=requestoptions
