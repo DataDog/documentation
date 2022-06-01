@@ -13,7 +13,7 @@ further_reading:
 
 As an administrator or security team member, you can use [Audit Trail][1] to see who is using Datadog within your organization and the context in which they are using Datadog. As an individual, you can see a stream of your own actions, too.
 
-There are two types of events that can occur within an audit log: **request events**, which translate all requests made to Datadog’s API into customer records, or **product-specific events**.
+There are two types of events that can occur within an audit trail: **request events**, which translate all requests made to Datadog’s API into customer records, or **product-specific events**.
 
 For example, track **request events** so you can see what API calls led up to the event. Or, if you're an enterprise or billing admin, use audit trail events to track user events that change the state of your infrastructure.
 
@@ -65,7 +65,7 @@ To explore an audit trail event, navigate to the [Audit Trail][1] section, also 
 
 {{< img src="account_management/audit_logs/explore-audit-logs.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
-Audit Trail events have the same functionality as logs within the Datadog [Logs Explorer][4]:
+Audit Trail events have the same functionality as logs within the Datadog [Logs Explorer][3]:
 
 - Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, etc), Authentication Attributes (Actor, API Key ID, User email, etc), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
 
@@ -75,15 +75,15 @@ Audit Trail events have the same functionality as logs within the Datadog [Logs 
 
 ## Create a monitor
 
-To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][5]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
+To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][4]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
 
 ## Create a dashboard
 
 Give more visual context to your audit trail events with dashboards. To create an Audit Trail Events dashboard:
 
-1. Create a [New Dashboard][6] in Datadog.
-2. Select your visualization. You can visualize an Audit event as [top lists][7], [timeseries][8], and [log streams][9].
-3. [Graph your data][10]: Under edit, select *Audit Events* as the data source, and create a query. Audit events are filtered by count and can be grouped by different facets. Select a facet and limit.
+1. Create a [New Dashboard][5] in Datadog.
+2. Select your visualization. You can visualize an Audit event as [top lists][6], [timeseries][7], and [log streams][8].
+3. [Graph your data][9]: Under edit, select *Audit Events* as the data source, and create a query. Audit events are filtered by count and can be grouped by different facets. Select a facet and limit.
 {{< img src="account_management/audit_logs/graph-your-data.png" alt="Set Audit Logs as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
@@ -95,11 +95,10 @@ Give more visual context to your audit trail events with dashboards. To create a
 
 [1]: https://app.datadoghq.com/audit/logs
 [2]: https://app.datadoghq.com/organization-settings/
-[3]: https://www.datadoghq.com/pricing/
-[4]: /logs/explorer/
-[5]: /monitors/create/types/audit_logs/
-[6]: /dashboards/
-[7]: /dashboards/widgets/top_list/
-[8]: /dashboards/widgets/timeseries/
-[9]: /dashboards/widgets/log_stream/
-[10]: /dashboards/querying/#choose-the-metric-to-graph/
+[3]: /logs/explorer/
+[4]: /monitors/create/types/audit_logs/
+[5]: /dashboards/
+[6]: /dashboards/widgets/top_list/
+[7]: /dashboards/widgets/timeseries/
+[8]: /dashboards/widgets/log_stream/
+[9]: /dashboards/querying/#choose-the-metric-to-graph/
