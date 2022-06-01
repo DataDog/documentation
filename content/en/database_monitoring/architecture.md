@@ -22,11 +22,11 @@ The steps required for setting up Database Monitoring in Datadog varies based on
 
 * [A Datadog Agent][1]
 * Host for your Datadog Agent
-* Read-only access for your DBs
+* Read-only access for your Databases
 
 ### Agent
 
-The Datadog Agent is lightweight software that monitors system metrics such as CPU, Memory, and Network. It also connects to the database as a SQL user. In most cases, you install directly onto the host that’s hosting your Database. For cloud-hosted databases such as AWS RDS and Azure SQL, the Agent should be configured to connect to these databases remotely.
+The Datadog Agent is lightweight software that monitors system metrics such as CPU, Memory, and Network. It also connects to the Database as a SQL user. For self-hosted Databases, you can install the agent directly onto the host that’s hosting your Database. For cloud-managed databases such as AWS RDS and Azure SQL, the Agent should be configured to connect to these databases remotely.
 
 ### Host
 
@@ -50,32 +50,33 @@ Instructions for setting up Database Monitoring with a self-hosted provider:
 * [MySQL][5]
 
 
-#### Cloud-hosted
+#### Cloud-managed
 
-If your setup is cloud-hosted, and you are using [AWS RDS][6] or Aurora, Google Cloud SQL, or Azure, the Agent must be installed remotely on a separate host and configured to connect to each managed instance.
+If your setup is cloud-managed (i.e. [AWS RDS][6] or Aurora, Google Cloud SQL, or Azure), the Agent must be installed remotely on a separate host and configured to connect to each managed instance.
 
-Database monitoring collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider.
+Database monitoring collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider using our integration.
 
 {{< img src="database_monitoring/dbm_architecture_cloud-hosted.png" alt="Some really good alt text" style="width:70%;">}}
 
-You can install the Agent on any cloud VM (for example, EC2) as long as traffic can reach your database instance.
+You can install the Agent on any cloud VM (for example, EC2) as long as it can connect to your database instance(s).
 
-If you are not already running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. You can use [AWS ECS][7] to host the Datadog Agent, as [the Agent already exists as a Docker container][8].
+If you are not already running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. For example, you can use [AWS ECS][7] to host the Datadog Agent, as [the Agent already exists as a Docker container][8].
 
+##### Kubernetes
 
 If you’re already running your apps on [Kubernetes][9], Datadog recommends using the [Datadog Cluster Agent with Database Monitoring][10], as this allows you to run [cluster checks][11] across your pods.
 
 {{< img src="database_monitoring/dbm_architecture_clusters.png" alt="Some really good alt text" style="width:70%;">}}
 
-Using the [Cluster Agent][12] is preferred because it distributes the RDS instances across a pool of agents for you. This ensures that only one instance of each check runs as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of RDS instances so that the Cluster Agent can spread out the cluster checks across the different nodes.
+Using the [Cluster Agent][12] is preferred because it distributes the Database instances across a pool of agents for you. This ensures that only one instance of each check runs as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of Database instances so that the Cluster Agent can spread out the cluster checks across the different nodes.
 
 
 
 ##### Aurora
 
-If you’re using [Aurora][13], the Agent needs to be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred.
+If you’re using [Aurora][13], the Agent needs to be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored.
 
-The Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the Aurora cluster endpoint. While this can be an anti-pattern for client applications, each Datadog Agent must have knowledge of the underlying hostname and should be a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics become incorrect. This is because the values depend on the state of the previous snapshot. The Agent takes snapshots at different points in time, if it takes snapshots from two different hosts, then the stats can be wildly different.
+The Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the Aurora cluster endpoint. While this can be an anti-pattern for client applications, each Datadog Agent must have knowledge of the underlying hostname and should be a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics become incorrect. This is because the values depend on the state of the previous snapshot. The Agent takes snapshots at different points in time and if it takes snapshots from two different hosts, then the stats may be inaccurate.
 
 
 
