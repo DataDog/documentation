@@ -342,7 +342,7 @@ sudo service datadog-agent restart
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_msk/#pagetitle
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-and-deep-dive-for-kafka/
-[10]: https://docs.datadoghq.com/ja/integrations/faq/agent-failed-to-retrieve-rmierver-stub/
+[10]: https://docs.datadoghq.com/ja/integrations/guide/agent-failed-to-retrieve-rmiserver-stub/
 [11]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
 [12]: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics
 [13]: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
