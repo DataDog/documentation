@@ -229,7 +229,9 @@ $ddpurple: #632ca6;
     }
 
     #accordion .btn,
-    .example-accordion .btn {
+    .example-accordion .btn,
+    .code-snippet-wrapper button:disabled,
+    .code-snippet-wrapper button[disabled] {
       font-weight: bold;
       color: #632ca6;
     }
@@ -240,6 +242,10 @@ $ddpurple: #632ca6;
     #accordion pre,
     .example-accordion pre {
       border-bottom: 3px solid rgba(119,0,255,.3);
+    }
+    .code-snippet-wrapper button:disabled,
+    .code-snippet-wrapper button[disabled], {
+      opacity:1;
     }
 
 }
