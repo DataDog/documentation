@@ -626,7 +626,7 @@ Navigate to the [Service list][20] to see all your application services and your
 
 ## Logs
 
-Next, enable logs by setting up a Heroku log drain.
+Next, enable logs by setting up Heroku log drain.
 
 **Note**: When using log drain, all logs arrive in Datadog from the same `ddsource`, usually `heroku`, so automatic parsing of logs using integrations (other than Heroku) doesn't happen.
 
@@ -697,7 +697,7 @@ git commit -m "Add lograge"
 git push heroku main
 ```
 
-### Setting up a Heroku log drain
+### Setting up Heroku log drain
 
 Heroku has a native log router called log drain that collects logs from all the dynos running in your application and sends them to Heroku. The logs include your application logs, the Heroku router logs, and the Heroku system dyno logs. You can set the log drain to route these logs to Datadog. The log drain sends Heroku system logs to Datadog from `ddsource=heroku`. 
 
