@@ -86,10 +86,10 @@ Give more visual context to your audit trail events with dashboards. To create a
 1. Create a [New Dashboard][5] in Datadog.
 2. Select your visualization. You can visualize an Audit event as [top lists][6], [timeseries][7], and [log streams][8].
 3. [Graph your data][9]: Under edit, select *Audit Events* as the data source, and create a query. Audit events are filtered by count and can be grouped by different facets. Select a facet and limit.
-{{< img src="account_management/audit_logs/graph-your-data.png" alt="Set Audit Logs as a data source to graph your data" style="width:100%;">}}
+{{< img src="account_management/audit_logs/graph-your-data.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-{{< img src="account_management/audit_logs/dashboard.png" alt="An Audit Logs dashboard" style="width:100%;">}}
+{{< img src="account_management/audit_logs/dashboard.png" alt="An Audit Trail dashboard" style="width:100%;">}}
 
 ## Further Reading
 
