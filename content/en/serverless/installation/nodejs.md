@@ -197,7 +197,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     import { Datadog } from "datadog-cdk-constructs-v2";
 
     const datadog = new Datadog(this, "Datadog", {
-        nodeLayerVersion: {{< latest-lambda-layer-version layer="python" >}},
+        nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
         extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}},
         site: "<DATADOG_SITE>",
         apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
