@@ -26,11 +26,9 @@ Once configured, if an AWS user creates a poorly configured resource (for exampl
 
 A sign-in from an unrecognized IP address might represent an attacker manipulating a trusted user’s credentials, with which they can then access your data and gain persistence in your environment.
 
-To combat this type of attack, you can use the [new term detection method][4], which analyzes your account’s historical data over a chosen period of time and alerts on previously unseen values in your cloud logs.
+To combat this type of attack, you can use the [New Value detection method][4], which analyzes your account’s historical data over a chosen period of time and alerts on previously unseen values in your cloud logs.
 
-First, set up a [new term–based Detection Rule][5].
-
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/new-term-rule.png" alt="A new term-based detection rule" >}}
+First, set up a [new Detection Rule][5] using the New Value detection method.
 
 Then, set up a [webhook][2] that sends a payload to your cloud’s identity and access management (IAM) service to ban the unknown IP when this rule is triggered.
 
