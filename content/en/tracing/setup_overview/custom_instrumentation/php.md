@@ -279,11 +279,13 @@ The built-in instrumentation and your own custom instrumentation will create spa
 {{< tabs >}}
 {{% tab "Current span" %}}
 
+The following method returns a `DDTrace\SpanData` object. When tracing is disabled, `null is returned.
+
 ```php
 <?php
-$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+$span = \DDTrace\active_span();
 if ($span) {
-    $span->setTag('customer.id', get_customer_id());
+    $span->meta['customer.id'] = get_customer_id();
 }
 ?>
 ```
@@ -291,13 +293,13 @@ if ($span) {
 {{% /tab %}}
 {{% tab "Root span" %}}
 
-The root span of the trace can be accessed later directly from the global tracer via `Tracer::getRootScope()`. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
+The following method returns a `DDTrace\SpanData` object. When tracing is disabled, `null is returned. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
 
 ```php
 <?php
-$scope = \DDTrace\GlobalTracer::get()->getRootScope();
+$scope = \DDTrace\root_span();
 if ($scope) {
-    $scope->getSpan()->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
+    $span->meta['customer.id'] = get_customer_id();
 }
 ?>
 ```
@@ -626,6 +628,8 @@ use DDTrace\SpanData;
     }
 );
 ```
+
+In order to manually remove an exception from a span, you can `unset($span->exception)`.
 
 ## Advanced configurations
 
