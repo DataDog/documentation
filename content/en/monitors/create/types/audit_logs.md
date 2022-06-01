@@ -5,7 +5,7 @@ description: "Alert when a specified type of audit log exceeds a threshold."
 further_reading:
 - link: "/account_management/audit_trail/"
   tag: "Documentation"
-  text: "Learn more about Audit Logs"
+  text: "Learn more about Audit Trail"
 - link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
