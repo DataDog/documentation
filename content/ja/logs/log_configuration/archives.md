@@ -157,9 +157,9 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 
 **注**: `s3:PutObject` と `s3:GetObject` アクションのリソース値は `/*` で終わっていることを確認してください。これらの権限はバケット内のオブジェクトに適用されるからです。
 
+
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [2]: /ja/logs/archives/rehydrating/
-
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
@@ -268,7 +268,7 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 [S3 バケットにライフサイクルコンフィギュレーションを設定][1]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。
 
-[リハイドレート][2]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています (Glacier Instant Retrieval は例外です)。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
+[リハイドレート][2]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています (Glacier Instant Retrieval と S3 Intelligent-Tiering は例外です)。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /ja/logs/archives/rehydrating/
