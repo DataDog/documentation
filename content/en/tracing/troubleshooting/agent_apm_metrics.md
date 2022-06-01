@@ -110,10 +110,6 @@ Number of traces received and accepted.
 : **Type**: Count<br>
 Total bytes of payloads accepted by the Agent.
 
-`datadog.trace_agent.receiver.traces_dropped`
-: **Type**: Count<br>
-Traces dropped due to normalization errors.
-
 `datadog.trace_agent.receiver.traces_filtered`
 : **Type**: Count<br>
 Traces filtered by ignored resources (as defined in `datadog.yaml` file).

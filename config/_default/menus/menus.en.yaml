@@ -1801,6 +1801,11 @@ main:
     parent: setup_pipelines
     identifier: ci_custom_commands
     weight: 210
+  - name: Custom Tags and Metrics
+    url: continuous_integration/setup_pipelines/custom_tags_and_metrics/
+    parent: setup_pipelines
+    identifier: ci_custom_tags_and_metrics
+    weight: 211
   - name: Exploring Tests
     url: continuous_integration/explore_tests/
     parent: ci
@@ -5136,8 +5141,7 @@ api:
         - v1
       operationids:
         - UpdateSLOCorrection
-      unstable:
-        - v1
+      unstable: []
       order: 4
   - name: Get an SLO correction for an SLO
     url: '#get-an-slo-correction-for-an-slo'
@@ -5149,8 +5153,7 @@ api:
         - v1
       operationids:
         - GetSLOCorrection
-      unstable:
-        - v1
+      unstable: []
       order: 3
   - name: Delete an SLO correction
     url: '#delete-an-slo-correction'
@@ -5162,8 +5165,7 @@ api:
         - v1
       operationids:
         - DeleteSLOCorrection
-      unstable:
-        - v1
+      unstable: []
       order: 5
   - name: Create an SLO correction
     url: '#create-an-slo-correction'
@@ -5175,8 +5177,7 @@ api:
         - v1
       operationids:
         - CreateSLOCorrection
-      unstable:
-        - v1
+      unstable: []
       order: 1
   - name: Get all SLO corrections
     url: '#get-all-slo-corrections'
@@ -5188,8 +5189,7 @@ api:
         - v1
       operationids:
         - ListSLOCorrection
-      unstable:
-        - v1
+      unstable: []
       order: 2
   - name: Service Level Objectives
     url: /api/latest/service-level-objectives/
@@ -5218,8 +5218,7 @@ api:
         - v1
       operationids:
         - GetSLOCorrections
-      unstable:
-        - v1
+      unstable: []
       order: 6
   - name: Update an SLO
     url: '#update-an-slo'

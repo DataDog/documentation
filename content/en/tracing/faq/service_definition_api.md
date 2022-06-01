@@ -1,12 +1,26 @@
 ---
-title: Service Definition API
+title: Registering Services through the Datadog Service Definition API
 kind: faq
 is_beta: true
 ---
 
+## Services
+
+Generally speaking, a service is an independently deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor services consistently across multiple telemetry types, including infrastructure metrics, logs, and traces. If you want to define a service using other criteria, you can customize your service definition to fit your architectural style in the Datadog Service Catalog.
+
+
 <div class="alert alert-warning">This feature is in private beta and the endpoints are likely to change.</div>
 
-Before you begin, you need a [Datadog API and app key][1].
+Before you begin, you need a [Datadog API and app key][2].
+
+## Enriching an existing APM service 
+If you already use APM to trace your applications, add information about those services. Initially, APM monitored services listed on the Service Catalog page have an `UNDEFINED` label on them. 
+
+Add service ownership information such as team name, Slack channels, and source code repositories, by pushing a YAML file using the POST endpoint, described below.
+
+## Registering a new service without any Datadog telemetry
+You can manage your service ownership information with Service Catalog even if those services are not emitting any of Datadog telemetry (such as APM traces). Specify service ownership, on-call info, and custom tags in YAML files, and the information is reflected in the Service Catalog UI. 
+
 
 ## Post a service definition
 
@@ -20,8 +34,8 @@ POST https://api.datadoghq.com/api/unstable/services/definition
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][2]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][3]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][3]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][4]. |
 
 ### Request
 
@@ -136,8 +150,8 @@ GET https://api.datadoghq.com/api/unstable/services/definition/{service_name}?sc
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][2]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][3]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][3]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][4]. |
 
 ### Response
 
@@ -229,8 +243,8 @@ GET https://api.datadoghq.com/api/unstable/services/definition
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][2]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][3]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][3]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][4]. |
 
 ### Response
 
@@ -260,8 +274,8 @@ DELETE https://api.datadoghq.com/api/unstable/services/definition/{service_name}
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][2]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][3]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][3]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][4]. |
 
 ### Response
 
@@ -275,6 +289,7 @@ curl --request DELETE 'https://api.datadoghq.com/api/unstable/services/definitio
 --header 'DD-APPLICATION-KEY: {APPLICATION_KEY}'
 {{< /code-block >}}
 
-[1]: /account_management/api-app-keys/
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://app.datadoghq.com/organization-settings/application-keys
+[1]: https://www.datadoghq.com/blog/unified-service-tagging/
+[2]: /account_management/api-app-keys/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/organization-settings/application-keys
