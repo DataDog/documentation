@@ -262,7 +262,6 @@ For example, the following snippet traces the `CustomDriver::doWork()` method an
 );
 
 // For functions
-// For ddtrace < v0.47.0 use dd_trace_function()
 \DDTrace\trace_function(
     'doCustomDriverWork',
     function (\DDTrace\SpanData $span, array $args, $retval, $exception) {
