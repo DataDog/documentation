@@ -23,6 +23,8 @@ Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating
 The following profiling features are available:
 - **Method durations** shows the overall time taken by each method from your code.
 - **CPU** shows the time taken executing CPU tasks (see Configuration section to enable it).
+- **Exceptions** shows the type and messages of thrown exceptions (see Configuration section to enable it).
+
 
 ## Requirements
 
@@ -31,7 +33,7 @@ Supported operating systems for .NET Framework
 Windows Server starting from version 2012
 
 Supported operating systems for .NET Core and .NET 5+
-: Linux<br/>
+: Linux with glibc 2.18+ (for example CentOS 7 is not supported)<br/>
 Windows 10<br/>
 Windows Server starting from version 2012
 
@@ -67,7 +69,7 @@ To install the .NET Profiler machine-wide:
    Debian or Ubuntu
    : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
 
-   CentOS or Fedora
+   CentOS 8+ or Fedora
    : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
 
    Alpine or other musl-based distributions
