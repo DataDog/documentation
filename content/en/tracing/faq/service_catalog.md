@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Datadog Service Catalog is a centralized place to access important information about all services in your organization. Achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. Access team communications tools such as Slack, source control such as Github, dashboards, and Datadog views that receive and monitor telemetry data for each service.
+Datadog Service Catalog is a centralized place to access important information about all services in your organization. Achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. Access team communications tools such as Slack, source control such as GitHub, Datadog dashboards, and Datadog views that receive and monitor telemetry data for each service.
 
 Compared to the APM Service List, the Service Catalog includes services that do not actively emit trace metrics, which means you do not need to instrument your service for it to appear. You can also examine instrumentation issues for services that should have trace data.
 
