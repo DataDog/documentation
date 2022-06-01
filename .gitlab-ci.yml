@@ -18,6 +18,8 @@ variables:
   # gitlab checkout
   DOCS_REPO_NAME: documentation
   REPO_URL: "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ddbuild.io/DataDog/${DOCS_REPO_NAME}.git"
+  # yarn/node cache dirs
+  YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
 
 # ================== copy scripts =============== #
 before_script:
@@ -27,11 +29,27 @@ before_script:
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
   - mkdir -p logs
 
-cache: &cache
-  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-  paths:
-    - node_modules/
-    - tmp/.htmltest/
+# set policy for the common case
+# yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
+.yarn_cache: &yarn_cache
+  - key:
+      files:
+        - yarn.lock
+    paths:
+      - package.json
+      - yarn.lock
+      - ${YARN_CACHE_FOLDER}
+    policy: pull
+
+.yarn_cache_pull_push: &yarn_cache_pull_push
+  - key:
+      files:
+        - yarn.lock
+    paths:
+      - package.json
+      - yarn.lock
+      - ${YARN_CACHE_FOLDER}
+    policy: pull-push
 
 # ================== templates ================== #
 .base_template: &base_template
@@ -43,35 +61,13 @@ cache: &cache
   only:
     - branches
 
-# ================== Install Node Dependencies ================== #
-install_dependencies:
-  <<: *base_template
-  stage: bootstrap
-  cache:
-    <<: *cache
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - git version
-    - git clone --branch $CI_COMMIT_REF_NAME --depth 1 --filter=blob:none --no-checkout $REPO_URL sparse-docs
-    - cd sparse-docs && git sparse-checkout init --cone && git sparse-checkout set local && git checkout $CI_COMMIT_REF_NAME && cd ..
-    - mkdir -p ./local/bin/sh && cp --remove-destination ./sparse-docs/local/bin/sh/preinstall.sh ./local/bin/sh/preinstall.sh
-    - cp --remove-destination ./sparse-docs/package.json ./package.json
-    - cp --remove-destination ./sparse-docs/yarn.lock ./yarn.lock
-    - yarn install --link-duplicates --frozen-lockfile --cache-folder .yarn
-    - rm -rf ./sparse-docs # cleanup runner
-  only:
-    changes:
-      - yarn.lock
-
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
   stage: build
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache_pull_push
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -81,6 +77,7 @@ build_preview:
     LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - yarn install --immutable
     - touch Makefile.config
     - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
@@ -156,11 +153,11 @@ index_algolia_preview:
   tags: ["runner:main"]
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "preview"
   timeout: 1h 30m
   script:
+    - yarn install --immutable
     - |-
         echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
         echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
@@ -178,10 +175,10 @@ replica_algolia_preview:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "preview"
   script:
+    - yarn install --immutable
     - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
@@ -194,10 +191,10 @@ sourcemaps_preview:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "preview"
   script:
+    - yarn install --immutable
     # Rename any js.map files to include SHA if correlating JS file is fingerprinted.  Hugo's asset build system seems to lose the fingerprint value when generating source maps.
     - find ./public -type f -name "*.*.js" -exec bash -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/.js/.$hash.js}' \;
     - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
@@ -213,8 +210,7 @@ build_live:
   <<: *base_template
   stage: build
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache_pull_push
   environment: "live"
   variables:
     CONFIG: ${LIVE_CONFIG}
@@ -225,6 +221,7 @@ build_live:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
+    - yarn install --immutable
     - touch Makefile.config
     - make clean-examples
     - make examples
@@ -295,11 +292,11 @@ index_algolia:
   tags: ["runner:main"]
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   timeout: 1h 30m
   script:
+    - yarn install --immutable
     - |-
       echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
       echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
@@ -315,10 +312,10 @@ replica_algolia:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   script:
+    - yarn install --immutable
     - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
@@ -329,10 +326,10 @@ sourcemaps_live:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   script:
+    - yarn install --immutable
     # Rename any js.map files to include SHA if correlating JS file is fingerprinted. Hugo's asset build system seems to lose the fingerprint value when generating source maps.
     - find ./public -type f -name "*.*.js" -exec bash -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/.js/.$hash.js}' \;
     - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
@@ -412,12 +409,12 @@ test_pa11y:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   dependencies:
     - build_live
   script:
+    - yarn install --immutable
     - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
   only:
     - schedules
