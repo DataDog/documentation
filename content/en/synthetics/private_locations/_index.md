@@ -415,11 +415,11 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 {{< /tabs >}}
 
-#### Set up health checks, liveness and readiness probes
+#### Set up health checks, liveness, and readiness probes
 
 Add a [health check][10] mechanism so your orchestrator can ensure the workers are running correctly.
 
-For readiness probes, you first need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configuration][15].
+For readiness probes, you need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configuration][15].
 
 {{< tabs >}}
 
@@ -429,7 +429,7 @@ For readiness probes, you first need to enable private location status probes on
 healthcheck:
   retries: 3
   test: [
-    "CMD", "curl", "-f", "http://localhost:8080"
+    "CMD", "wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
   ]
   timeout: 2s
   interval: 10s
@@ -442,20 +442,19 @@ healthcheck:
 
 ```yaml
 livenessProbe:
-  exec:
-    command:
-      - /bin/sh
-      - -c
-      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  httpGet:
+    path: /liveness
+    port: 8080
   initialDelaySeconds: 30
   periodSeconds: 10
   timeoutSeconds: 2
-  failureThreshold: 3
 readinessProbe:
-  tcpSocket:
-    port: 8080
-  initialDelaySeconds: 5
+  initialDelaySeconds: 30
   periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
 ```
 
 {{% /tab %}}
@@ -464,20 +463,19 @@ readinessProbe:
 
 ```yaml
 livenessProbe:
-  exec:
-    command:
-      - /bin/sh
-      - -c
-      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  httpGet:
+    path: /liveness
+    port: 8080
   initialDelaySeconds: 30
   periodSeconds: 10
   timeoutSeconds: 2
-  failureThreshold: 3
 readinessProbe:
-  tcpSocket:
-    port: 8080
-  initialDelaySeconds: 5
+  initialDelaySeconds: 30
   periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
 ```
 
 {{% /tab %}}
@@ -488,7 +486,7 @@ readinessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "CMD-SHELL", "/bin/sh -c '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+    "CMD-SHELL", "/usr/bin/wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
   ],
   "timeout": 2,
   "interval": 10,
@@ -504,7 +502,7 @@ readinessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "CMD-SHELL", "curl -f http://localhost/8080 || exit 1"
+    "CMD-SHELL", "wget -O /dev/null -q http://localhost:8080/liveness || exit 1"
   ],
   "timeout": 2,
   "interval": 10,
@@ -518,20 +516,19 @@ readinessProbe:
 
 ```yaml
 livenessProbe:
-  exec:
-    command:
-      - /bin/sh
-      - -c
-      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  httpGet:
+    path: /liveness
+    port: 8080
   initialDelaySeconds: 30
   periodSeconds: 10
   timeoutSeconds: 2
-  failureThreshold: 3
 readinessProbe:
-  tcpSocket:
-    port: 8080
-  initialDelaySeconds: 5
+  initialDelaySeconds: 30
   periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
 ```
 
 {{% /tab %}}
