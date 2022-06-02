@@ -1,29 +1,30 @@
 ---
-title: Debian 用 Agent の基本的な使用方法
+aliases:
+- /ja/guides/basic_agent_usage/deb/
+- /ja/agent/basic_agent_usage/install_debian_5/
+- /ja/agent/basic_agent_usage/debian
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
 kind: documentation
 platform: Debian
-aliases:
-  - /ja/guides/basic_agent_usage/deb/
-  - /ja/agent/basic_agent_usage/install_debian_5/
-  - /ja/agent/basic_agent_usage/debian
-further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: プロセスの収集
-  - link: /tracing/
-    tag: Documentation
-    text: トレースの収集
+title: Debian 用 Agent の基本的な使用方法
 ---
+
 ## 概要
 
 このページでは、Debian 用 Datadog Agent の基本的な機能について説明します。Agent をまだインストールしていない場合は、[Datadog Agent インテグレーションに関するドキュメント][1]で手順を参照してください。
 
 64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
 
-**注**: Debian 7 (wheezy) 以上がサポートされます。Agent v6.6.0 以降では、SysVinit もサポートされます。
+**注**: Debian 7 (wheezy) 以上は、Agent < 6.36.0/7.36.0 でサポートされています。Debian 8 (jessie) 以上は、Agent >= 6.36.0/7.36.0 でサポートされています。SysVinit は Agent v6.6.0+ でサポートされています。
 
 ## コマンド
 
