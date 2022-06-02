@@ -1721,45 +1721,45 @@ main:
     parent: ci
     identifier: setup_tests
     weight: 1
-  - name: Tests in Containers
-    url: continuous_integration/setup_tests/containers/
-    parent: setup_tests
-    identifier: ci_containers
-    weight: 101
   - name: .NET
     url: continuous_integration/setup_tests/dotnet/
     parent: setup_tests
     identifier: ci_dotnet
-    weight: 102
+    weight: 101
   - name: Java
     url: continuous_integration/setup_tests/java/
     parent: setup_tests
     identifier: ci_java
-    weight: 103
+    weight: 102
   - name: JavaScript
     url: continuous_integration/setup_tests/javascript/
     parent: setup_tests
     identifier: ci_javascript
-    weight: 104
+    weight: 103
   - name: Python
     url: continuous_integration/setup_tests/python/
     parent: setup_tests
     identifier: ci_python
-    weight: 105
+    weight: 104
   - name: Ruby
     url: continuous_integration/setup_tests/ruby/
     parent: setup_tests
     identifier: ci_ruby
-    weight: 106
+    weight: 105
   - name: Swift
     url: continuous_integration/setup_tests/swift/
     parent: setup_tests
     identifier: ci_swift
-    weight: 107
+    weight: 106
   - name: JUnit Report Uploads
     url: continuous_integration/setup_tests/junit_upload/
     parent: setup_tests
     identifier: ci_junit
+    weight: 107
+  - name: Tests in Containers
+    url: continuous_integration/setup_tests/containers/
+    parent: setup_tests
+    identifier: ci_containers
     weight: 108
   - name: Tracing Pipelines
     url: continuous_integration/setup_pipelines/
