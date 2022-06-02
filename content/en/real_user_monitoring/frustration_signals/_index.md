@@ -59,43 +59,73 @@ You can clone this dashboard and customize it to fit your needs. For more inform
 
 Search through all the data collected by RUM in the [RUM Explorer][4] to surface trends on frustration signals, analyze patterns with greater context, or export them into [dashboards][5] and [monitors][6].
 
-Enter a facet in the search query to start your search. The three facets include:
+Enter a facet in the search query to start your search. Available search fields include:
 
 Frustration Type
 : Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration_type:rage_click` to the search query.
 
 Frustration Count
-: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions that had at least one frustration signal occur, add `session.frustration.count>0` or `view.frustration.count>0` to the search query.
+: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views that had at least one frustration signal occur, add `session.frustration.count>0` or `view.frustration.count>0` to the search query.
 
 #### Sessions
 
-Click on a session to see if user frustration was detected. You can see the type of signal ranging from `rage`, `dead`, or `error`, and the event timeline that shows what occurred during the session.
+Click on a session with a value in the **Frustration Count** column to examine the user frustration detected. You can see the type of signal (ranging from `rage`, `dead`, or `error`) and the event timeline that shows what occurred during the session.
 
 #### Views
 
-Click on a view to identify if a user was frustrated with the `frustrated user` tag.
+Click on a view to identify if a user was frustrated with the `frustration detected` tag.
 
-{{< img src="real_user_monitoring/frustration_signals/frustration_signals_in_performance_tab.png" alt="Frustration Signals Actions in the Events dropdown menu in the performance waterfall graph" style="width:100%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/frustration_signals_in_performance_tab.png" alt="Frustration Signals Actions in the Events dropdown menu in the performance waterfall graph" style="width:90%;" >}}
 
-In the performance waterfall, filter the view down into a specific action and filter again by frustration signal type in the **Events** dropdown menu.
+The action waterfall contains actions with frustration signals.
+
+{{< img src="real_user_monitoring/frustration_signals/actions_frustration_signal.png" alt="Frustration signals detected as an action" style="width:90%;" >}}
 
 #### Actions
 
-The Actions tab displays the `frustrated user` tag if the selected action contains a frustration signal.
+The Actions tab displays the `frustration detected` tag if the selected action contains a frustration signal.
 
-If multiple frustration signals occur in an action, they are displayed in a `What Happened` box.
+If multiple frustration signals occur in an action, they are displayed under **What Happened** in the action panel.
+
+{{< img src="real_user_monitoring/frustration_signals/actions_panel_multiple_frustration_signals.png" alt="Multiple frustration signal types detected in the action under What Happened" style="width:90%;" >}}
+
+#### Errors
+
+Click on an error in the **Errors** tab to open a side panel with error details. Under the **Parent hierarchy**, you can see if a frustration signal occurred next to the action.
+
+{{< img src="real_user_monitoring/frustration_signals/error_details_panel.png" alt="Error Details side panel" style="width:90%;" >}}
 
 ## Watch frustration signals in Session Replay
 
-In [Session Replay][7], you can observe a replication of real user activity. Replays provide video evidence of the actions users take when they exhibit signs of frustration. For more information, see the [Session Replay documentation][8].
+In [Session Replay][7], you can observe a replication of real user activity. Replays provide video evidence of the actions users take when they exhibit signs of frustration.
 
-A session replay's user journey details the events that occur in chronological order. Hover over an event to move to that point in time in the replay.
+A session replay's user journey details the events that occur in chronological order. Hover over an event to move to that point in time in the replay, for example, when a dead click occurred.
+
+{{< img src="real_user_monitoring/frustration_signals/session_replay_frustration_signals.png" alt="Frustration signals appear in a browser recording" style="width:90%;" >}}
+
+ For more information, see the [Session Replay documentation][8].
 
 ## Create alerts for frustration signals
 
-You can set alerts on frustration signals to notify you or your team if any frustration signals occur on an important page in your application.
+You can create monitors and set alerts on frustration signals to notify you or your team if any frustration signals occur on an important page in your application.
 
-// Add screenshot here
+{{< img src="real_user_monitoring/frustration_signals/rum_monitor_frustration_count.png" alt="Create a RUM Monitor that alerts on the count of frustration signals" style="width:90%;" >}}
+
+For more information, see the [Real User Monitoring Monitor documentation][9].
+
+## Frequently asked questions
+
+### Why is a rage click not created when a user presses a key (like Delete) on the keyboard?
+
+Frustration signals are generated from mouse clicks, not keyboard strokes. 
+
+<div class="alert alert-warning">
+To provide feedback or submit a feature request, contact <a href="/help/">Datadog Support</a>.
+</div>
+
+###  Why does the side panel show a session has a different number of frustration signals that in the event timeline?
+
+To be answered.
 
 ## Further Reading
 
@@ -109,3 +139,4 @@ You can set alerts on frustration signals to notify you or your team if any frus
 [6]: /monitors/create/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
 [8]: /real_user_monitoring/session_replay/
+[9]: /monitors/create/types/real_user_monitoring/
