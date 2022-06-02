@@ -36,17 +36,14 @@ You can customize settings for both [ingestion][6] and [retention][7] to send an
 
 #### Ingestion
 
-You can set fine-grained [ingestion controls][2] per service instrumented with Datadog APM. Services that generate up to 50 traces per second send all traces by default. To configure all services to send all of their traffic, set the following environment variable in the tracer configuration:
+Control your volume globally with [Datadog Agent configuration options][8] or set fine-grained [ingestion rules][9] per service instrumented with Datadog APM.
 
-```
-DD_TRACE_SAMPLE_RATE=1.0
-```
 
 #### Indexing
 
 After you instrument your services and ingest traces, set tag-based [retention filters][3] within the Datadog app so that Datadog retains spans that are relevant to you.
 
-**Note:** Both ingested and indexed spans may impact your bill. For more information, see [APM Billing][8].
+**Note:** Both ingested and indexed spans may impact your bill. For more information, see [APM Billing][10].
 
 ## Live Search for 15 minutes
 
@@ -100,7 +97,7 @@ In addition to showing timeseries for requests that match your queries, you can 
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across **any span** and **any tag**, and not just the indexed ones.
 
-You can choose to query the [service entry spans][9], the [root spans][10], or all spans by changing the selection to the box above the trace table. Use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services or the entry point of the trace. Selecting this box only filters the spans shown in the list; the others are still shown in the flame graph when clicking on a span to view the trace details.
+You can choose to query the [service entry spans][11], the [root spans][12], or all spans by changing the selection to the box above the trace table. Use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services or the entry point of the trace. Selecting this box only filters the spans shown in the list; the others are still shown in the flame graph when clicking on a span to view the trace details.
 
 You can also filter on attributes that are not defined as facets. For example, to filter on the `cart.value` attribute, there are two options:
 
@@ -138,7 +135,8 @@ From the timeseries view, export your query to a [dashboard][1], a [monitor][2] 
 
 ### Retention configuration
 
-You can customize which spans are retained and at what retention rates. By default, [the Datadog intelligent retention filter][4] is applied, which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default intelligent retention filter and how to create your own additional filters, see the [retention filters documentation][3]. Go to the [Retention Filters page][11] within the Datadog app to create or modify your own filters.
+You can customize which spans are retained and at what retention rates. By default, [the Datadog intelligent retention filter][4] is applied, which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default intelligent retention filter and how to create your own additional filters, see the [retention filters documentation][3]. Go to the [Retention Filters page][13] within the Datadog app to create or modify your own filters.
+
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/trace_ingestion/ingestion_controls
@@ -147,7 +145,9 @@ You can customize which spans are retained and at what retention rates. By defau
 [5]: /tracing/visualization/#indexed-span
 [6]: /tracing/trace_ingestion/
 [7]: /tracing/trace_retention/
-[8]: /account_management/billing/apm_distributed_tracing/
-[9]: /tracing/visualization/#service-entry-span
-[10]: /tracing/visualization/#trace-root-span
-[11]: https://app.datadoghq.com/apm/traces/retention-filters
+[8]: /tracing/trace_ingestion/mechanisms#in-the-agent
+[9]: /tracing/trace_ingestion/mechanisms#in-tracing-libraries-user-defined-rules
+[10]: /account_management/billing/apm_distributed_tracing/
+[11]: /tracing/visualization/#service-entry-span
+[12]: /tracing/visualization/#trace-root-span
+[13]: https://app.datadoghq.com/apm/traces/retention-filters
