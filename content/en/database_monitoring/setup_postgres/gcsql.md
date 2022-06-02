@@ -302,7 +302,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     gcp:
       project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_NAME>" \
+      instance_id: "<INSTANCE_ID>" \
   datadog/datadog
 ```
 
@@ -329,7 +329,7 @@ instances:
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_NAME>'
+      instance_id: '<INSTANCE_ID>'
 
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
@@ -361,7 +361,7 @@ metadata:
           "password": "<UNIQUEPASSWORD>",
           "gcp": {
             "project_id": "<PROJECT_ID>",
-            "instance_id": "<INSTANCE_NAME>"
+            "instance_id": "<INSTANCE_ID>"
           }
         }
       ]

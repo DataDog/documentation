@@ -59,16 +59,16 @@ GCP does not grant direct host access, meaning the Datadog Agent must be install
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
-{{% dbm-sqlserver-agent-setup-windows %}}
+{{% dbm-sqlserver-agent-setup-windows-gcp %}}
 {{% /tab %}}
 {{% tab "Linux Host" %}}
-{{% dbm-sqlserver-agent-setup-linux %}}
+{{% dbm-sqlserver-agent-setup-linux-gcp %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
-{{% dbm-sqlserver-agent-setup-docker %}}
+{{% dbm-sqlserver-agent-setup-docker-gcp %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-{{% dbm-sqlserver-agent-setup-kubernetes %}}
+{{% dbm-sqlserver-agent-setup-kubernetes-gcp %}}
 {{% /tab %}}
 {{< /tabs >}}
 

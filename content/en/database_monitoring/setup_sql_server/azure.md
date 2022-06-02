@@ -104,16 +104,16 @@ Since Azure does not grant direct host access, the Datadog Agent must be install
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
-{{% dbm-sqlserver-agent-setup-windows %}}
+{{% dbm-sqlserver-agent-setup-windows-azure %}}
 {{% /tab %}}
 {{% tab "Linux Host" %}}
-{{% dbm-sqlserver-agent-setup-linux %}}
+{{% dbm-sqlserver-agent-setup-linux-azure %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
-{{% dbm-sqlserver-agent-setup-docker %}}
+{{% dbm-sqlserver-agent-setup-docker-azure %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-{{% dbm-sqlserver-agent-setup-kubernetes %}}
+{{% dbm-sqlserver-agent-setup-kubernetes-azure %}}
 {{% /tab %}}
 {{< /tabs >}}
 
