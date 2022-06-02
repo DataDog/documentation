@@ -21,57 +21,57 @@ aliases:
 * [Why is there a delay in receiving my data?][5]
 * [Integration Setup for ECS Fargate][6]
 * [Error: Datadog is not authorized to perform sts:AssumeRole][7]
-* [The AWS Integration with Terraform][8]
 
 ## Apache
 
-* [Issues with Apache Integration][9]
-* [Apache SSL certificate issues][10]
+* [Issues with Apache Integration][8]
+* [Apache SSL certificate issues][9]
 
 ## Azure
 
-* [My Azure VM is powered down. Why is it still listed in my infrastructure list?][11]
-* [Azure VMs are showing up in the App but not reporting metrics][12]
-* [Azure Status and Count Metrics][13]
-* [Azure Troubleshooting][14]
+* [My Azure VM is powered down. Why is it still listed in my infrastructure list?][10]
+* [Azure VMs are showing up in the App but not reporting metrics][11]
+* [Azure Status and Count Metrics][12]
+* [Azure Troubleshooting][13]
 
 ## Docker
 
-* [Compose and the Datadog Agent][15]
+* [Compose and the Datadog Agent][14]
 
 ## Elasticsearch
 
-* [Why isn't Elasticsearch sending all my metrics?][16]
-* [Agent can't connect][17]
+* [Why isn't Elasticsearch sending all my metrics?][15]
+* [Agent can't connect][16]
 
 ## Git & GitHub
 
-* [Why events don't appear to be showing up in the event stream with my github integration ?][18]
+* [Why events don't appear to be showing up in the event stream with my github integration ?][17]
 
 ## Hadoop
 
-* [Hadoop Distributed File System (HDFS) Integration Error][19]
+* [Hadoop Distributed File System (HDFS) Integration Error][18]
 
 ## HAProxy
 
-* [HAProxy in multi-process mode][20]
+* [HAProxy in multi-process mode][19]
 
 ## Jira
 
-* [I've set up the JIRA integration, now how do I get events and tickets created?][21]
+* [I've set up the JIRA integration, now how do I get events and tickets created?][20]
 
 ## JMX
 
-* [I Have a Matching Bean for my JMX integration but nothing on Collect !][22]
-* [Collecting Composite type JMX attributes][23]
-* [How to run JMX commands in Windows?][24]
-* [jmx.yaml error: Include Section][25]
-* [Troubleshooting JMX Integrations][26]
-* [View jmx data in jConsole and set up your jmx.yaml to collect them][27]
-* [Both my JMX and AWS integrations use "name" tags. What do I do?][28]
-* [JBoss EAP 7 & Datadog monitoring via JMX][29]
+* [I Have a Matching Bean for my JMX integration but nothing on Collect !][21]
+* [Collecting Composite type JMX attributes][22]
+* [How to run JMX commands in Windows?][23]
+* [jmx.yaml error: Include Section][24]
+* [Troubleshooting JMX Integrations][25]
+* [View jmx data in jConsole and set up your jmx.yaml to collect them][26]
+* [Both my JMX and AWS integrations use "name" tags. What do I do?][27]
+* [JBoss EAP 7 & Datadog monitoring via JMX][28]
 
 ## Kafka
+
 
 * [Troubleshooting and Deep Dive for Kafka][30]
 
