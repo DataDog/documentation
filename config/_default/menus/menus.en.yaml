@@ -2582,21 +2582,31 @@ main:
     parent: rum_ios
     identifier: rum_ios_advanced
     weight: 303
+  - name: Mobile Vitals
+    url: real_user_monitoring/ios/mobile_vitals/
+    parent: rum_ios
+    identifier: rum_ios_mobile_vitals
+    weight: 304
   - name: Web View Tracking
     url: real_user_monitoring/ios/web_view_tracking/
     parent: rum_ios
     identifier: rum_ios_web_view_tracking
-    weight: 304
+    weight: 305
   - name: Troubleshooting
     url: real_user_monitoring/ios/troubleshooting/
     parent: rum_ios
     identifier: rum_troubleshooting_ios
-    weight: 305
+    weight: 306
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
     identifier: rum_reactnative
     weight: 4
+  - name: Mobile Vitals
+    url: real_user_monitoring/reactnative/mobile_vitals/
+    parent: rum_reactnative
+    identifier: rum_reactnative_mobile_vitals
+    weight: 401
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum
