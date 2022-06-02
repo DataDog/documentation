@@ -166,9 +166,9 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{< tabs >}}
 
 {{% tab "Datadog Admission Controller" %}}
-[Datadog Admission Controller][1] is able to inject environment variables and mount the necessary volumes on new application-pods in order to configure pod/agent trace communication automatically.
+[Datadog Admission Controller][1] is able to inject environment variables and mount the necessary volumes on new application-pods in order to configure pod and agent trace communication automatically.
 
-To learn more on how to automatically configure you application to submit traces to Datadog Agent refer to [Datadog Admission Controller][1].
+To learn more on how to automatically configure you application to submit traces to Datadog Agent read the [Datadog Admission Controller][1] documentation.
 
 [1]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}
