@@ -49,7 +49,7 @@ If multiple indexes is activated, use the "New Index" button to create a new ind
 
 ### Delete indexes
 
-To delete an index from your organization, use the "Delete icon" in the index action tray.
+To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with both `Modify index` and `User manage access` permissions can use this option. 
 
 {{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
@@ -57,7 +57,8 @@ To delete an index from your organization, use the "Delete icon" in the index ac
 You cannot recreate an index with the same name as the deleted one. 
 </div>
 
-**Note:** The deleted index will no longer accept new incoming logs. The logs already in the deleted index will age out based on the retention period, so they are not dropped immediately. After the retention period is reached, the index will no longer show up in the Index page.
+**Note:** The deleted index will no longer accept new incoming logs. The logs in the deleted index are no longer available for querying. After the retention period is reached, the index will no longer show up in the Index page.
+
 
 ## Indexes filters
 
