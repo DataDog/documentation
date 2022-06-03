@@ -294,7 +294,7 @@ metadata:
           "driver": "FreeTDS",
           "gcp": {
             "project_id": "<PROJECT_ID>",
-            "instance_id": "<INSTANCE_NAME>"
+            "instance_id": "<INSTANCE_ID>"
           }
         }
       ]
