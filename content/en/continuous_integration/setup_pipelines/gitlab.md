@@ -142,14 +142,14 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 ## Enable job log collection (beta)
 
-Supported GitLab versions for job logs:
+Supported GitLab versions for job logs, only when using [object storage for job logs][6]:
 * GitLab.com (SaaS)
 * GitLab >= 14.8 (self-hosted)
 
-To enable collection of job logs the [feature flag][6] `datadog_integration_logs_collection` must be enabled in your GitLab self-hosted or GitLab.com account.
+To enable collection of job logs the [feature flag][7] `datadog_integration_logs_collection` must be enabled in your GitLab self-hosted or GitLab.com account.
 After enabling it a new option appears in the settings of the integration: `Enable logs collection`. Check this option and save the settings.
 
-Job logs are now available in [Logs][7] and connected to the GitLab pipelines within CI Visibility.
+Job logs are now available in [Logs][8] and connected to the GitLab pipelines within CI Visibility.
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. </br>
 Retention filters might be needed to ensure the job logs are not sampled out.</div>
@@ -163,6 +163,6 @@ Retention filters might be needed to ensure the job logs are not sampled out.</d
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[7]: /logs/
-
+[6]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
+[7]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[8]: /logs/
