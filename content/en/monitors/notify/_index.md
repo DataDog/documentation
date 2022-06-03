@@ -56,7 +56,8 @@ Configure the renotify interval, the monitor states from which the monitor renot
 
 For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
 
-If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
+If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.  
+**Note:** Variables in the renotification are populated with the data available to the monitor in the time period of the renotification.
 
 The escalation message can be added in the following ways:
 
