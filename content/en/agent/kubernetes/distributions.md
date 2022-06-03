@@ -105,7 +105,7 @@ datadog:
         fieldRef:
           fieldPath: spec.nodeName
     hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-    tlsVerify: false # Since Agent 7.35, tlsVerify: false is currently required as Kubelet certificates in AKS do not have any SAN (Subject Alternative Name) set
+    tlsVerify: false # Required as of Agent 7.35. See Notes.
 ```
 
 {{% /tab %}}
@@ -129,7 +129,7 @@ spec:
           fieldRef:
             fieldPath: spec.nodeName
         hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-        tlsVerify: false # Since Agent 7.35, tlsVerify: false is currently required as Kubelet certificates in AKS do not have any SAN (Subject Alternative Name) set
+        tlsVerify: false # Required as of Agent 7.35. See Notes.
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
@@ -145,7 +145,7 @@ spec:
 
 **Notes**:
 
-- Since Agent 7.35, tlsVerify: false is currently required as Kubelet certificates in AKS do not have any SAN (Subject Alternative Name) set.
+- As of Agent 7.35, `tlsVerify: false` is required because Kubelet certificates in AKS do not have a Subject Alternative Name (SAN) set.
 
 - In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is **required**. Using the `DD_KUBELET_TLS_VERIFY=false` environment variable also resolves this issue. Both of these options deactivate verification of the server certificate.
 
