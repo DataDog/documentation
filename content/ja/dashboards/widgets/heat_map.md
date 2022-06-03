@@ -1,21 +1,16 @@
 ---
-title: ヒートマップウィジェット
-kind: documentation
-description: 特定のメトリクスの時系列ヒートマップを構築する
-widget_type: ヒートマップ
 aliases:
-  - /ja/graphing/widgets/heat_map/
+- /ja/graphing/widgets/heat_map/
+description: 特定のメトリクスの時系列ヒートマップを構築する
 further_reading:
-  - link: /dashboards/timeboards/
-    tag: ドキュメント
-    text: Timeboards
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: ヒートマップウィジェット
+widget_type: ヒートマップ
 ---
+
 ヒートマップ可視化機能は、多数のタグ (hosts など) に対して集計されたメトリクスを表示します。特定の値を持つホストが多いほど、四角形の色が濃く表示されます。
 
 この可視化機能は、1 つのメトリクスクエリのみを表示します。追加のクエリは無視されます。
@@ -26,11 +21,11 @@ further_reading:
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/heat_map/heat_map_setup.png" alt="ヒートマップの設定"  style="width:80%;">}}
+{{< img src="dashboards/widgets/heat_map/heat_map_setup.png" alt="ヒートマップの設定" style="width:80%;">}}
 
 ### コンフィギュレーション
 
-通常どおりにメトリクスクエリを構成します。この可視化タイプは、メトリクスが `host` ごとなどの複数のタグキーに対して集計される場合にのみ有用です。
+通常どおりにメトリクスクエリを構成します。**注**: この可視化タイプは、メトリクスが `host` ごとなどの複数のタグキーに対して集計される場合にのみ有用です。
 
 `avg`/`max`/`min`/`sum by` のコントロールで選択を行い、関連付けられているタグのデータを表示します。
 
@@ -38,17 +33,19 @@ further_reading:
 
 #### イベントオーバーレイ
 
-関連するシステムからイベントを追加して、グラフにさらにコンテキストを追加できます。たとえば、GitHub のコミットイベント、Jenkins のデプロイイベント、Docker の作成イベントなどを追加できます。**Event Overlays** セクションを展開して、イベントを表示するためのクエリを入力します。[イベントストリーム][1]と同じクエリ書式を使用してください。以下に例を示します。
+関連するシステムからのイベントを追加して、グラフにさらにコンテキストを追加します。たとえば、GitHub のコミット、ステージング環境のイベント、またはプレフィックスに一致するコンテナのイベントを追加できます。**Event Overlays** セクションを展開し、これらのイベントを表示するためのクエリを入力します。[イベントエクスプローラー][1]と同じクエリ形式を使用します。以下の表の例を参照してください。
 
-| クエリ                       | 説明                                                |
-|-----------------------------|------------------------------------------------------------|
-| `sources:jenkins`           | Jenkins ソースから取得されたすべてのイベントを表示します。                  |
-| `tag:role:web`              | タグ `role:web` が付いたすべてのイベントを表示します。                  |
-| `tags:$<TEMPLATE_VARIABLE>` | 選択された[テンプレート変数][2]から取得されたすべてのイベントを表示します。 |
+| クエリ                     | 説明                                                      |
+|---------------------------|------------------------------------------------------------------|
+| `source:(github OR chef)` | GitHub または Chef からのイベントを表示します。                                 |
+| `env:staging`             | `env:staging` というタグのついたイベントを表示します。                          |
+| `container_id:foo*`       | ID が `foo` で始まるすべてのコンテナからのイベントを表示します。 |
 
 #### Y 軸コントロール
 
-Y 軸コントロールは、UI または JSON エディターから使用できます。以下を実行できます。
+Y 軸の制御は、UI または JSON エディターから使用できます。
+
+以下を実行できます。
 
 * Y 軸を特定の範囲にクリップできます。
 * パーセンテージしきい値または絶対しきい値に基づいて Y 軸の境界を自動的に変更できます。このしきい値をグラフの両端 (下側と上側) の一方に適用することで、「外れ値」系列を除外できます。
@@ -68,9 +65,9 @@ Y 軸の目盛を変更するには、Y-Axis Controls ボタンを展開しま�
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][3] ドキュメントをご参照ください。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] を参照してください。
 
-ヒートマップウィジェットの[ウィジェット JSON スキーマ定義][4]は次のとおりです。
+ヒートマップウィジェットの[ウィジェット JSON スキーマ定義][3]は、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
@@ -78,7 +75,6 @@ Y 軸の目盛を変更するには、Y-Axis Controls ボタンを展開しま�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/events/
-[2]: /ja/dashboards/template_variables/
-[3]: /ja/api/v1/dashboards/
-[4]: /ja/dashboards/graphing_json/widget_json/
+[1]: /ja/events/explorer/#search-syntax
+[2]: /ja/api/v1/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

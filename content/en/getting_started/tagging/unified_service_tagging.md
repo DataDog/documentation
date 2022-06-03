@@ -379,120 +379,7 @@ instances:
 
 #### AWS Lambda functions
 
-Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to metrics, traces and logs.
-
-*Note*: These tags are specified through AWS resource tags instead of environment variables.
-
-{{< tabs >}}
-
-{{% tab "Serverless Framework" %}}
-
-Tag your Lambda functions using the [tags][1] option:
-
-```yaml
-# serverless.yml
-service: service-name
-provider:
-  name: aws
-  # to apply the tags to all functions
-  tags:
-    env: "<ENV>"
-    service: "<SERVICE>"
-    version: "<VERSION>"
-
-functions:
-  hello:
-    # this function will inherit the service level tags config above
-    handler: handler.hello
-  world:
-    # this function will overwrite the tags
-    handler: handler.users
-    tags:
-      env: "<ENV>"
-      service: "<SERVICE>"
-      version: "<VERSION>"
-```
-
-If you have installed the [Datadog serverless plugin][2], the plugin automatically tags the Lambda functions with the `service` and `env` tags using the `service` and `stage` values from the serverless application definition, unless a `service` or `env` tag already exists.
-
-[1]: https://www.serverless.com/framework/docs/providers/aws/guide/functions#tags
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-{{% /tab %}}
-
-{{% tab "AWS SAM" %}}
-
-Tag your Lambda functions using the [Tags][1] option:
-
-```yaml
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Resources:
-  MyLambdaFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Tags:
-        env: "<ENV>"
-        service: "<SERVICE>"
-        version: "<VERSION>"
-```
-
-If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
-
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      service: "<SERVICE>"
-      env: "<ENV>"
-```
-
-
-[1]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-tags
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "AWS CDK" %}}
-
-Tag your app, stack, or individual Lambda functions using the [Tags class][1]. If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
-
-```javascript
-import * as cdk from "@aws-cdk/core";
-
-class CdkStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
-    this.addTransform("DatadogServerless");
-
-    new cdk.CfnMapping(this, "Datadog", {
-      mapping: {
-        Parameters: {
-          service: "<SERVICE>",
-          env: "<ENV>",
-        },
-      },
-    });
-  }
-}
-```
-
-
-[1]: https://docs.aws.amazon.com/cdk/latest/guide/tagging.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "Custom" %}}
-
-Apply the `env`, `service` and `version` tags following the AWS instructions for [Tagging Lambda Functions][1].
-
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
-{{% /tab %}}
-
-{{< /tabs >}}
-
-Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation stack for your [Datadog Forwarder][13]. This option defaults to `true` since version `3.19.0`.
-
+See [how to connect your Lambda telemetry using tags][13].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -510,4 +397,4 @@ Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation sta
 [10]: /integrations/statsd/
 [11]: https://www.chef.io/
 [12]: https://www.ansible.com/
-[13]: /serverless/forwarder/
+[13]: /serverless/configuration/#connect-telemetry-using-tags

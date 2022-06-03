@@ -8,18 +8,19 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - ネットワーク
-  - モニタリング
+- ネットワーク
+- モニタリング
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_name: Zabbix
 draft: false
 git_integration_title: zabbix
 guid: bf1fa08e-3df3-40b7-ab1d-1ba685c3057d
 integration_id: zabbix
 integration_title: zabbix
+integration_version: 1.1.0
 is_public: true
 kind: integration
 maintainer: KosukeKamiya@users.noreply.github.com
@@ -31,10 +32,13 @@ public_title: zabbix
 short_description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 Zabbix に接続して
@@ -44,33 +48,49 @@ Zabbix に接続して
 
 ## セットアップ
 
-以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
+Zabbix チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
 ### インストール
 
-Agent v6.8 以降を使用している場合は、以下の手順に従ってホストに Zabbix チェックをインストールしてください。[バージョン 6.8 以前の Agent][3] または [Docker Agent][4] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][2]に関する Agent のガイドを参照してください。
+Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
-1. [Datadog Agent をダウンロードして起動][5]します。
-2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
+1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
    datadog-agent integration install -t datadog-zabbix==<INTEGRATION_VERSION>
    ```
-3. [他のパッケージ化されたインテグレーション][5]と同様にインテグレーションを構成します。
 
+2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
-1. Zabbix のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `zabbix.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル zabbix.d/conf.yaml][6] を参照してください。
+1. Zabbix サーバーのタイムゾーンが UTC に設定されていることを確認してください。Zabbix のタイムゾーンの詳細については、[Zabbix ドキュメント][5]を参照してください。
 
-2. [Agent を再起動します][7]。
+2. Zabbix のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `zabbix.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル zabbix.d/conf.yaml][6] を参照してください。
+
+3. [Agent を再起動します][7]。
 
 #### イベント収集
 
 ##### Datadog メディアタイプを作成する
 
 1. *Administration > Media Types > Create Media Type* に移動します。
-2. Datadog api_key をパラメーターとして追加します。そして、次の Zabbix テンプレート変数をパラメーターとして追加します: {ALERT.MESSAGE}、{ALERT.SUBJECT}、{EVENT.DATE}、{EVENT.NAME}、{EVENT.NSEVERITY}、{EVENT.TAGSJSON}、{EVENT.TIME}、{EVENT.VALUE}、{ITEM.NAME}
+2. Zabbix テンプレート変数を使用して、Webhook にパラメータを追加します。Datadog の api_key と以下の Zabbix テンプレート変数をパラメータとして追加します。
+
+| パラメーター            | 値                                |
+| -------------------- | ------------------------------------ |
+| `api_key`            | `Your Datadog API key`               |
+| `event_date`         | `{EVENT.DATE}`                       |
+| `event_name`         | `{EVENT.NAME}`                       |
+| `event_nseverity`    | `{EVENT.NSEVERITY}`                  |
+| `event_tags`         | `{EVENT.TAGSJSON}`                   |
+| `event_time`         | `{EVENT.TIME}`                       |
+| `event_value`        | `{EVENT.VALUE}`                      |
+| `item_name`          | `{ITEM.NAME}`                        |
+| `alert_message`      | `{ALERT.MESSAGE}`                    |
+| `alert_subject`      | `{ALERT.SUBJECT}`                    |
+
+
 3. **Name** を `Datadog` に、**Type** を `Webhook` に設定し、次のコードを **Script** として入力します。
 ``` 
     try {
@@ -112,7 +132,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 
 ### 検証
 
-[Agent のステータスサブコマンドを実行][8]し、Checks セクションで `zabbix` を探します。
+[Agent のステータスサブコマンド][8]を実行し、Checks セクションで `zabbix` を探します。
 
 ## 収集データ
 
@@ -134,10 +154,10 @@ Zabbix アラートは Datadog イベントストリームのイベントとし�
 
 
 [1]: https://www.zabbix.com/
-[2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
-[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[5]: https://www.zabbix.com/documentation/current/en/manual/web_interface/time_zone
 [6]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/datadog_checks/zabbix/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

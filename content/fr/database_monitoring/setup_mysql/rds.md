@@ -1,19 +1,21 @@
 ---
-title: "Configuration de la surveillance de bases de données pour MySQL avec une gestion sur Amazon\_RDS"
-kind: documentation
-description: "Installez et configurez la surveillance de bases de données pour MySQL avec une gestion sur Amazon\_RDS."
+description: Installez et configurez Database Monitoring pour MySQL avec une gestion
+  sur Amazon RDS.
 further_reading:
-  - link: /integrations/mysql/
-    tag: Documentation
-    text: Intégration MySQL basique
+- link: /integrations/mysql/
+  tag: Documentation
+  text: Intégration MySQL basique
+kind: documentation
+title: Configuration de Database Monitoring pour MySQL avec une gestion sur Amazon RDS
 ---
-{{< site-region region="us3,us5,gov" >}}
-<div class="alert alert-warning">La surveillance de bases de données n'est pas prise en charge pour ce site.</div>
+
+{{< site-region region="us5,gov" >}}
+<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
 {{< /site-region >}}
 
-La surveillance des bases de données vous permet de bénéficier d'une visibilité complète sur vos bases de données MySQL, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des données sur les connexions, des métriques système et des données de télémétrie à propos du moteur de stockage InnoDB.
+La solution Database Monitoring vous permet de bénéficier d'une visibilité complète sur vos bases de données MySQL, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des données sur les connexions, des métriques système et des données de télémétrie à propos du moteur de stockage InnoDB.
 
-L'Agent recueille la télémétrie directement depuis la base de données, en se connectant en tant qu'utilisateur en lecture seule. Suivez les étapes ci-dessous pour activer la surveillance de bases de données avec votre base de données MySQL :
+L'Agent recueille la télémétrie directement depuis la base de données, en se connectant en tant qu'utilisateur en lecture seule. Suivez les étapes ci-dessous pour activer la solution Database Monitoring avec votre base de données MySQL :
 
 1. [Configurer les paramètres de base de données](#configurer-les-parametres-mysql)
 1. [Autoriser l'Agent à accéder à la base de données](#accorder-un-acces-a-l-agent)
@@ -26,11 +28,11 @@ Versions de MySQL prises en charge
 : 5.6, 5.7 et 8.0+
 
 Versions de l'Agent prises en charge
-: 7.30.0+
+: 7.33.0+
 
 Incidence sur les performances
-: La configuration par défaut de l'Agent pour la surveillance de bases de données est relativement souple. Néanmoins, vous pouvez ajuster certains paramètres comme l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des workloads, l'Agent monopolise moins d'un pour cent du temps d'exécution des requêtes sur la base de données, et moins d'un pour cent du CPU. <br/><br/>
-La surveillance de base de données Datadog fonctionne comme une intégration et vient compléter l'Agent de base ([voir les benchmarks][1]).
+: La configuration par défaut de l'Agent pour Database Monitoring est relativement souple. Néanmoins, vous pouvez ajuster certains paramètres comme l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des workloads, l'Agent monopolise moins d'un pour cent du temps d'exécution des requêtes sur la base de données, et moins d'un pour cent du CPU. <br/><br/>
+La solution Database Monitoring de Datadog fonctionne comme une intégration et vient compléter l'Agent de base ([voir les benchmarks][1]).
 
 Proxies, répartiteurs de charge et outils de regroupement de connexions
 : L'Agent doit se connecter directement au host surveillé, si possible via l'endpoint d'instance. L'Agent ne doit pas se connecter aux bases de données via un proxy, un répartiteur de charge ni un outil de groupement de connexions. Bien qu'il puisse s'agir d'un antipattern pour des applications client, chaque Agent doit connaître le hostname sous-jacent et rester sur un seul host pendant toute sa durée de vie, même en cas de failover. Si l'Agent Datadog se connecte à plusieurs hosts pendant son exécution, les valeurs des métriques seront incorrectes.
@@ -172,9 +174,9 @@ init_config:
 instances:
   - dbm: true
     host: '<ENDPOINT_INSTANCE_AWS>'
-    port: 3306 # e.g. 3306
+    port: 3306
     username: datadog
-    password: '<MOT_DE_PASSE_CHOISI>' # Le mot de passe créé auparavant lors de l'étape CREATE USER 
+    password: '<MOT_DE_PASSE_CHOISI>' # Le mot de passe créé auparavant lors de l'étape CREATE USER
 ```
 
 **Remarque** : ajoutez des guillemets simples autour de votre mot de passe s'il contient un caractère spécial.
@@ -188,7 +190,7 @@ instances:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Pour configurer l'Agent de surveillance de bases de données qui s'exécute dans un conteneur Docker, par exemple dans ECS ou Fargate, vous pouvez définir des [modèles d'intégration Autodiscovery][1] en tant qu'étiquettes Docker sur le conteneur de votre Agent.
+Pour configurer l'Agent Database Monitoring qui s'exécute dans un conteneur Docker, par exemple pour ECS ou Fargate, vous pouvez définir des [modèles d'intégration Autodiscovery][1] en tant qu'étiquettes Docker sur le conteneur de votre Agent.
 
 **Remarque** : pour que le processus de découverte automatique des étiquettes fonctionne, l'Agent doit être autorisé à lire le socket Docker.
 
@@ -198,7 +200,7 @@ Pour exécuter rapidement l'Agent depuis une interface de ligne de commande, uti
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.30.0
+export DD_AGENT_VERSION=7.32.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -209,7 +211,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<ENDPOINT_INSTANCE_AWS>",
     "port": 3306,
     "username": "datadog",
-    "password": "<MOT_DE_PASSE_UNIQUE>"
+    "password": "<MOTDEPASSEUNIQUE>"
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
@@ -219,11 +221,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Vous pouvez également spécifier des étiquettes dans un `Dockerfile`. Cette approche vous permet de concevoir et de déployer un Agent personnalisé sans avoir à modifier la configuration de l'infrastructure :
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.30.0
+FROM gcr.io/datadoghq/agent:7.32.0
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<ENDPOINT_INSTANCE_AWS>", "port": 3306,"username": "datadog","password": "<MOT_DE_PASSE_UNIQUE>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<ENDPOINT_INSTANCE_AWS>", "port": 3306,"username": "datadog","password": "<MOTDEPASSEUNIQUE>"}]'
 ```
 
 Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, utilisez le [package de gestion des secrets][2] de l'Agent et déclarez le mot de passe à l'aide de la syntaxe `ENC[]`. Sinon, consultez la section [Template variables Autodiscovery][3] pour découvrir comment transmettre le mot de passe en tant que variable d'environnement.
@@ -331,7 +333,7 @@ Pour recueillir des métriques de base de données plus complètes depuis AWS, i
 
 ## Dépannage
 
-Si vous avez respecté les instructions d'installation et de configuration des intégrations et de l'Agent, mais que vous rencontrez un problème, consultez la section [Dépannage de la surveillance de bases de données][9].
+Si vous avez respecté les instructions d'installation et de configuration des intégrations et de l'Agent, mais que vous rencontrez un problème, consultez la section [Dépannage][9].
 
 ## Pour aller plus loin
 

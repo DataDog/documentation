@@ -1,17 +1,18 @@
 ---
-title: Docker タグの抽出
-kind: ドキュメント
 further_reading:
-  - link: /getting_started/tagging/
-    tag: ドキュメント
-    text: タグの概要
-  - link: /getting_started/tagging/using_tags/
-    tag: ドキュメント
-    text: Datadog でタグを使用する
-  - link: /agent/guide/autodiscovery-management/
-    tag: ドキュメント
-    text: データ収集をコンテナのサブセットのみに制限
+- link: /getting_started/tagging/
+  tag: ドキュメント
+  text: タグの概要
+- link: /getting_started/tagging/using_tags/
+  tag: ドキュメント
+  text: Datadog でタグを使用する
+- link: /agent/guide/autodiscovery-management/
+  tag: ドキュメント
+  text: データ収集をコンテナのサブセットのみに制限
+kind: ドキュメント
+title: Docker タグの抽出
 ---
+
 ## 概要
 
 Datadog Agent は、タグを作成し、ラベルまたは環境変数に基づいてコンテナが発行するすべてのメトリクス、トレース、ログに割り当てることができます。
@@ -22,30 +23,31 @@ Datadog Agent は、タグを作成し、ラベルまたは環境変数に基づ
 
 Agent は、タグを自動検出し、コンテナにより送信されたすべてのデータにアタッチします。アタッチされるタグのリストは、Agent の[カーディナリティコンフィギュレーション][1]に基づきます。
 
-| タグ                 | カーディナリティ  | 要件                          |
-|---------------------|--------------|--------------------------------------|
-| `container_name`    | 大         | N/A                                  |
-| `container_id`      | 大         | N/A                                  |
-| `rancher_container` | 大         | Rancher 環境                  |
-| `mesos_task`        | オーケストレーター | Mesos 環境                    |
-| `docker_image`      | 小          | N/A                                  |
-| `image_name`        | 小          | N/A                                  |
-| `short_image`       | 小          | N/A                                  |
-| `image_tag`         | 小          | N/A                                  |
-| `swarm_service`     | 小          | Swarm 環境                    |
-| `swarm_namespace`   | 小          | Swarm 環境                    |
-| `rancher_stack`     | 小          | Rancher 環境                  |
-| `rancher_service`   | 小          | Rancher 環境                  |
-| `env`               | 小          | [統合サービスタグ付け][2]有効 |
-| `version`           | 小          | [統合サービスタグ付け][2]有効 |
-| `service`           | 小          | [統合サービスタグ付け][2]有効 |
-| `marathon_app`      | 小          | Marathon 環境                 |
-| `chronos_job`       | 小          | Mesos 環境                    |
-| `chronos_job_owner` | 小          | Mesos 環境                    |
-| `nomad_task`        | 小          | Nomad 環境                    |
-| `nomad_job`         | 小          | Nomad 環境                    |
-| `nomad_group`       | 小          | Nomad 環境                    |
-
+| タグ                 | カーディナリティ  | 要件                                 |
+|----------------------|--------------|---------------------------------------------|
+| `container_name`     | 大         | N/A                                         |
+| `container_id`       | 大         | N/A                                         |
+| `rancher_container`  | 大         | Rancher 環境                         |
+| `mesos_task`         | オーケストレーター | Mesos 環境                           |
+| `docker_image`       | 小          | N/A                                         |
+| `image_name`         | 小          | N/A                                         |
+| `short_image`        | 小          | N/A                                         |
+| `image_tag`          | 小          | N/A                                         |
+| `swarm_service`      | 小          | Swarm 環境                           |
+| `swarm_namespace`    | 小          | Swarm 環境                           |
+| `rancher_stack`      | 小          | Rancher 環境                         |
+| `rancher_service`    | 小          | Rancher 環境                         |
+| `env`                | 小          | [統合サービスタグ付け][2]有効        |
+| `version`            | 小          | [統合サービスタグ付け][2]有効        |
+| `service`            | 小          | [統合サービスタグ付け][2]有効        |
+| `marathon_app`       | 小          | Marathon 環境                        |
+| `chronos_job`        | 小          | Mesos 環境                           |
+| `chronos_job_owner`  | 小          | Mesos 環境                           |
+| `nomad_task`         | 小          | Nomad 環境                           |
+| `nomad_job`          | 小          | Nomad 環境                           |
+| `nomad_group`        | 小          | Nomad 環境                           |
+| `git.commit.sha`     | 小          | [org.opencontainers.image.revision][3] の使用 |
+| `git.repository_url` | 小          | [org.opencontainers.image.source][3] の使用   |
 
 ### 統合サービスタグ付け
 
@@ -58,34 +60,36 @@ Agent v6.0 以降、Agent は特定のコンテナのラベルを収集し、そ
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
-特定の Docker ラベル `<ラベル名>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、次の環境変数を Datadog Agent に追加します。
+特定のコンテナラベル `<LABEL_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
-DD_DOCKER_LABELS_AS_TAGS='{"<ラベル名>": "<タグキー>"}'
+DD_CONTAINER_LABELS_AS_TAGS='{"<LABEL_NAME>": "<TAG_KEY>"}'
 ```
 
 たとえば、次のように設定できます。
 
 ```shell
-DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
+DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
-**注**: `<ラベル名>` は、大文字と小文字を区別しません。つまり、`foo` と `FOO` のラベルを使用していて、`DD_DOCKER_LABELS_AS_TAGS='{"foo": "bar"}'` を設定すると、`foo` および `FOO` の両方が `bar` にマッピングされます。
+**注**: `<LABEL_NAME>` は、大文字と小文字を区別しません。つまり、`foo` と `FOO` のラベルを使用していて、`DD_CONTAINER_LABELS_AS_TAGS='{"foo": "bar"}'` を設定すると、`foo` および `FOO` の両方が `bar` にマッピングされます。
+
+**注**: `DD_CONTAINER_LABELS_AS_TAGS` は古い `DD_DOCKER_LABELS_AS_TAGS` と同等で、`DD_CONTAINER_ENV_AS_TAGS` は `DD_DOCKER_ENV_AS_TAGS` と同等です。
 
 {{% /tab %}}
 {{% tab "Agent" %}}
 
-特定の Docker ラベル `<ラベル名>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
+特定のコンテナラベル `<LABEL_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
 
 ```yaml
-docker_labels_as_tags:
-  <ラベル名>: <タグキー>
+container_labels_as_tags:
+  <LABEL_NAME>: <TAG_KEY>
 ```
 
 たとえば、次のように設定できます。
 
 ```yaml
-docker_labels_as_tags:
+container_labels_as_tags:
   com.docker.compose.service: service_name
 ```
 
@@ -96,17 +100,17 @@ docker_labels_as_tags:
 
 ## 環境変数をタグとして抽出
 
-Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][3] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
+Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][4] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
-| 環境変数               | 説明                                    |
-|------------------------------------|------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`         | docker コンテナラベルを抽出します                |
-| `DD_DOCKER_ENV_AS_TAGS`            | docker コンテナー環境変数を抽出します |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | ポッドラベルを抽出します                             |
-| `DD_CHECKS_TAG_CARDINALITY`        | タグをチェックメトリクスに追加します                      |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | タグをカスタムメトリクスに追加します                     |
+| 環境変数               | 説明                             |
+|------------------------------------|-----------------------------------------|
+| `DD_CONTAINER_LABELS_AS_TAGS`      | コンテナラベルを抽出する                |
+| `DD_CONTAINER_ENV_AS_TAGS`         | コンテナ環境変数を抽出する |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | ポッドラベルを抽出します                      |
+| `DD_CHECKS_TAG_CARDINALITY`        | タグをチェックメトリクスに追加します               |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | タグをカスタムメトリクスに追加します              |
 
-Agent v7.20 以降では、コンテナ化された Agent は Docker ラベルからタグを自動検出できます。このプロセスにより、Agent は、Agent の `datadog.yaml` ファイルを変更することなく、コンテナによって発行されたすべてのデータにカスタムタグを関連付けることができます。
+Agent v7.20 以降では、コンテナ化された Agent はコンテナラベルからタグを自動検出できます。このプロセスにより、Agent は、Agent の `datadog.yaml` ファイルを変更することなく、コンテナによって発行されたすべてのデータにカスタムタグを関連付けることができます。
 
 タグは次の形式で追加する必要があります。
 
@@ -119,32 +123,32 @@ Agent v6.0 以降、Agent は特定のコンテナの環境変数を収集し、
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
-特定の Docker 環境変数 `<環境変数名>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、次の環境変数を Datadog Agent に追加します。
+特定のコンテナ環境変数 `<ENVVAR_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
-DD_DOCKER_ENV_AS_TAGS='{"<環境変数名>": "<タグキー>"}'
+DD_CONTAINER_ENV_AS_TAGS='{"<ENVVAR_NAME>": "<TAG_KEY>"}'
 ```
 
 たとえば、次のように設定できます。
 
 ```shell
-DD_DOCKER_ENV_AS_TAGS='{"ENVIRONMENT":"env"}'
+DD_CONTAINER_ENV_AS_TAGS='{"ENVIRONMENT":"env"}'
 ```
 
 {{% /tab %}}
 {{% tab "Agent" %}}
 
-特定の Docker 環境変数 `<環境変数名>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
+特定のコンテナ環境変数 `<ENVVAR_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
 
 ```yaml
-docker_env_as_tags:
-  <環境変数>: <タグキー>
+container_env_as_tags:
+  <ENVVAR_NAME>: <TAG_KEY>
 ```
 
 たとえば、次のように設定できます。
 
 ```yaml
-docker_env_as_tags:
+container_env_as_tags:
   ENVIRONMENT: env
 ```
 
@@ -158,4 +162,5 @@ docker_env_as_tags:
 
 [1]: /ja/agent/docker/tag/#extract-environment-variables-as-tags
 [2]: /ja/getting_started/tagging/unified_service_tagging
-[3]: /ja/agent/docker/?tab=standard#tagging
+[3]: https://github.com/opencontainers/image-spec/blob/02efb9a75ee11e05937b535cc5f228f9343ab2f5/annotations.md#pre-defined-annotation-keys
+[4]: /ja/agent/docker/?tab=standard#tagging

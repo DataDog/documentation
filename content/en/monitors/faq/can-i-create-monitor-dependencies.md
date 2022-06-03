@@ -2,7 +2,7 @@
 title: Can I create monitor dependencies?
 kind: faq
 further_reading:
-- link: "/monitors/create/types/"
+- link: "/monitors/create/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"

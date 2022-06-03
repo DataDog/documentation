@@ -8,18 +8,19 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - network
-  - monitoring
+- network
+- monitoring
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_name: Zabbix
 draft: false
 git_integration_title: zabbix
 guid: bf1fa08e-3df3-40b7-ab1d-1ba685c3057d
 integration_id: zabbix
 integration_title: zabbix
+integration_version: 1.1.0
 is_public: true
 kind: integration
 maintainer: KosukeKamiya@users.noreply.github.com
@@ -28,13 +29,17 @@ metric_prefix: zabbix.
 metric_to_check: zabbix.system.uptime
 name: zabbix
 public_title: zabbix
-short_description: Recueillez l'historique des éléments via l'API Zabbix et envoyez-les à Datadog en tant que métriques.
+short_description: Recueillez l'historique des éléments via l'API Zabbix et envoyez-les
+  à Datadog en tant que métriques.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Connectez-vous à Zabbix pour :
@@ -44,26 +49,25 @@ Connectez-vous à Zabbix pour :
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host.
+Le check Zabbix n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer.
 
 ### Installation
 
-Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Zabbix sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
+Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check Zabbix sur votre host. Consultez la section [Utiliser les intégrations de la communauté][3] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
 
-1. [Téléchargez et lancez l'Agent Datadog][5].
-2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+1. Exécutez la commande suivante pour installer l'intégration de l'Agent :
 
    ```shell
    datadog-agent integration install -t datadog-zabbix==<INTEGRATION_VERSION>
    ```
-3. Configurez votre intégration comme [n'importe quelle autre intégration fournie avec l'Agent][5].
 
+2. Configurez votre intégration comme une [intégration][4] de base.
 
 ### Configuration
 
-1. Modifiez le fichier `zabbix.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Zabbix. Consultez le [fichier d'exemple zabbix.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `zabbix.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Zabbix. Consultez le [fichier d'exemple zabbix.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][7].
+2. [Redémarrez l'Agent][6].
 
 #### Collecte d'événements
 
@@ -112,7 +116,7 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][8] et cherchez `zabbix` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `zabbix` dans la section Checks.
 
 ## Données collectées
 
@@ -120,25 +124,26 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 {{< get-metrics-from-git "zabbix" >}}
 
 
-### Checks de service
-
-`zabbix.can_connect` : renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API Zabbix. Si ce n'est pas le cas, renvoie OK.
-
 ### Événements
 
 Les alertes Zabbix sont recueillies en tant qu'événements dans le flux d'événements Datadog.
+
+### Checks de service
+{{< get-service-checks-from-git "zabbix" >}}
+
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
+
 [1]: https://www.zabbix.com/
-[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[5]: https://docs.datadoghq.com/fr/getting_started/integrations/
-[6]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/datadog_checks/zabbix/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/metadata.csv
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[5]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/datadog_checks/zabbix/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/assets/service_checks.json
 [10]: https://docs.datadoghq.com/fr/help/

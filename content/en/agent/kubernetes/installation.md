@@ -265,6 +265,8 @@ To install the Datadog Agent on your Kubernetes cluster:
     echo -n 'Random string' | base64
     ```
 
+    **Note**: The random string must contain at least 32 alphanumeric characters to secure Cluster Agent to Agent communication.
+
 5. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
 
     **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
@@ -335,19 +337,20 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 
 ## Next steps
 
-To configure Live Containers, see [Live Containers][2].
+To configure Live Containers, see [Live Containers][3].
 
-To collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, or reference the full list of available environment variables, see [Configure the Datadog Agent on Kubernetes][3].
+To collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, or reference the full list of available environment variables, see [Configure the Datadog Agent on Kubernetes][4].
 
-To configure integrations, see [Integrations & Autodiscovery][4].
+To configure integrations, see [Integrations & Autodiscovery][5].
 
-To set up APM, see [Kubernetes Trace Collection][5].
+To set up APM, see [Kubernetes Trace Collection][6].
 
-To set up log collection, see [Kubernetes Log Collection][6].
+To set up log collection, see [Kubernetes Log Collection][7].
 
-[1]: /agent/kubernetes/control_plane
-[2]: /infrastructure/livecontainers/?tab=helm#configuration
-[3]: /agent/kubernetes/configuration/
-[4]: /agent/kubernetes/integrations/
-[5]: /agent/kubernetes/apm/
-[6]: /agent/kubernetes/log/
+[1]: /agent/kubernetes/distributions
+[2]: /agent/kubernetes/control_plane
+[3]: /infrastructure/livecontainers/configuration/
+[4]: /agent/kubernetes/configuration/
+[5]: /agent/kubernetes/integrations/
+[6]: /agent/kubernetes/apm/
+[7]: /agent/kubernetes/log/

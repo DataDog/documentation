@@ -309,6 +309,10 @@
     "description": "特定のメトリクス名のインデックス付きタグキーと値ペアを表示します。",
     "summary": "メトリクス名でタグを一覧表示する"
   },
+  "EstimateMetricsOutputSeries": {
+    "description": "指定されたタグ、パーセンタイル、および集計の数の構成で、メトリクスのカーディナリティ推定値を返します。",
+    "summary": "Estimate Output Series - Public v2 API"
+  },
   "DeleteTagConfiguration": {
     "description": "メトリクスのタグ付けコンフィギュレーションを削除します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
     "summary": "タグコンフィギュレーションを削除する"
@@ -403,6 +407,12 @@
     "request_description": "",
     "request_schema_description": "ユーザーとの関係。"
   },
+  "AggregateRUMEvents": {
+    "description": "RUM イベントを、計算されたメトリクスとタイムシリーズのバケットに集約する API エンドポイント。",
+    "summary": "Aggregate RUM events",
+    "request_description": "",
+    "request_schema_description": "オーガニゼーションから RUM イベントの集約バケットを取得するリクエストと共に送信されたオブジェクト。"
+  },
   "ListRUMEvents": {
     "description": "リストエンドポイントは、RUM 検索クエリと一致するイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、最新の RUM イベントを確認します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "RUM イベントのリストを取得"
@@ -412,6 +422,11 @@
     "summary": "RUM イベントの検索",
     "request_description": "",
     "request_schema_description": "RUM イベントリストのリクエスト。"
+  },
+  "UploadIdPMetadata": {
+    "description": "SAML 設定用の IdP メタデータをアップロードするためのエンドポイントです。\n\nこのエンドポイントを使用して、SAML ログイン構成用の IdP メタデータをアップロードまたは置き換えます。",
+    "summary": "IdP メタデータをアップロード",
+    "request_description": ""
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "ダウンロードエンドポイントは、現在有効なクラウドワークロードセキュリティルールからクラウドワークロードセキュリティポリシーファイルを生成し、\n .policy ファイルとしてダウンロードします。それからこのファイルは　\nAgent にデプロイされ、環境で実行中のポリシーを更新します。",
@@ -499,6 +514,12 @@
     "request_description": "",
     "request_schema_description": "セキュリティシグナルのリストをリクエスト"
   },
+  "SubmitMetrics": {
+    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 500 キロバイト (512000 バイト) です。非圧縮ペイロードの場合、サイズは 5 メガバイト (5242880 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 64 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでです。",
+    "summary": "メトリクスを送信する",
+    "request_description": "",
+    "request_schema_description": "メトリクスのペイロード。"
+  },
   "CreateServiceAccount": {
     "description": "オーガニゼーションのサービスアカウントを作成します。",
     "summary": "サービスアカウントを作成する",
@@ -576,6 +597,22 @@
     "summary": "既存のインシデントチームを更新する",
     "request_description": "インシデントチームのペイロード。",
     "request_schema_description": "インシデントチームペイロードを使用してリクエストを更新します。"
+  },
+  "GetUsageApplicationSecurityMonitoring": {
+    "description": "アプリケーションセキュリティの 1 時間あたり使用量を取得します。",
+    "summary": "アプリケーションセキュリティの 1 時間あたり使用量の取得"
+  },
+  "GetCostByOrg": {
+    "description": "マルチオーガニゼーションのアカウントのコストを取得します。",
+    "summary": "マルチオーガニゼーションのアカウントのコストを取得"
+  },
+  "GetUsageLambdaTracedInvocations": {
+    "description": "Lambda Traced Invocations の 1 時間あたり使用量を取得します。",
+    "summary": "Lambda Traced Invocations の 1 時間あたり使用量を取得"
+  },
+  "GetUsageObservabilityPipelines": {
+    "description": "観測可能性パイプラインの 1 時間あたりの使用量を取得します。",
+    "summary": "Get hourly usage for Observability Pipelines"
   },
   "SendInvitations": {
     "description": "組織への参加を招待するメールを 1 人以上のユーザーに送信します。",

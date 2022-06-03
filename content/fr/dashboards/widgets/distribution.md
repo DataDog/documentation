@@ -1,17 +1,16 @@
 ---
-title: Widget Distribution
-kind: documentation
-description: Représentez graphiquement la distribution de métriques agrégées en fonction d'un ou de plusieurs tags.
 aliases:
-  - /fr/graphing/widgets/distribution/
+- /fr/graphing/widgets/distribution/
+description: Représentez graphiquement la distribution de métriques agrégées en fonction
+  d'un ou de plusieurs tags.
 further_reading:
-  - link: /dashboards/timeboards/
-    tag: Documentation
-    text: Timeboards
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+kind: documentation
+title: Widget Distribution
 ---
+
 Le widget Distribution affiche des données agrégées en fonction d'un ou de plusieurs tags, tels que des *hosts*. Contrairement à la [carte thermique][1], l'axe des abscisses d'un graphique de distribution représente une quantité plutôt qu'une durée.
 
 Cette visualisation affiche une seule requête. Les requêtes supplémentaires sont ignorées.

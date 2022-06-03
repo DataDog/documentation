@@ -1,19 +1,20 @@
 ---
-title: Datadog メトリクスにおける Prometheus メトリクスのマッピング
-kind: ガイド
 aliases:
-  - /ja/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
+- /ja/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
-  - link: https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics
-    tag: ブログ
-    text: メトリクスを生成および収集するストアドプロシージャを作成する
-  - link: /integrations/mysql/
-    tag: Documentation
-    text: Datadog-MySQL インテグレーション
-  - link: /agent/kubernetes/prometheus/
-    tag: Documentation
-    text: Kubernetes Prometheus および OpenMetrics メトリクスの収集
+- link: https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics
+  tag: ブログ
+  text: メトリクスを生成および収集するストアドプロシージャを作成する
+- link: /integrations/mysql/
+  tag: Documentation
+  text: Datadog-MySQL インテグレーション
+- link: /agent/kubernetes/prometheus/
+  tag: Documentation
+  text: Kubernetes Prometheus および OpenMetrics メトリクスの収集
+kind: ガイド
+title: Datadog メトリクスにおける Prometheus メトリクスのマッピング
 ---
+
 Datadog の Prometheus または OpenMetrics チェックをお使いの場合に、これらのメトリクスが既存の Datadog メトリクスタイプにどのようにマッピングされるかをご説明します。
 
 詳細は、[Kubernetes Prometheus および OpenMetrics メトリクスの収集][1]を参照してください。
@@ -43,7 +44,7 @@ Datadog の Prometheus または OpenMetrics チェックをお使いの場合�
 
 [Prometheus/OpenMetrics の `histogram`][6] については、histogram の `_count` と `_sum` の値がそれぞれ Datadog の `gauge` にマッピングされます。
 
-パラメーター `send_histograms_buckets` が `true` の場合、それぞれの `_bucket` 値もまた Datadog の `gauge` にマッピングされます。
+パラメーター `collect_histogram_buckets` が `true` の場合、それぞれの `_bucket` 値もまた Datadog の `gauge` にマッピングされます。
 
 パラメーター `send_distribution_buckets` が `true` の場合、それぞれの `_bucket` は Datadog の `distribution` にマッピングされます。Prometheus/OpenMetrics の histogram データは Datadog のディストリビューションメトリクスに変換され、Datadog で Kubernetes のメトリクスをパーセンタイルとして監視できるようになります。Datadog のディストリビューションメトリクスは [DDSketch アルゴリズム][7]に基づいています。詳しくは、関連する Datadog の [OpenMetrics とディストリビューションメトリクスに関するブログ記事][8]を参照してください。
 
@@ -60,7 +61,7 @@ Datadog の Prometheus または OpenMetrics チェックをお使いの場合�
 [1]: /ja/agent/kubernetes/prometheus/
 [2]: /ja/metrics/types/
 [3]: https://prometheus.io/docs/concepts/metric_types/#counter
-[4]: /ja/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[4]: /ja/metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
 [5]: https://prometheus.io/docs/concepts/metric_types/#gauge
 [6]: https://prometheus.io/docs/concepts/metric_types/#histogram
 [7]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/

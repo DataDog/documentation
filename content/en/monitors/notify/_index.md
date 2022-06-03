@@ -126,7 +126,7 @@ See the [list of integrations][15] that can be used to notify your team.
 
 ### Modifications
 
-An [event][16] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
+An [event][16] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
 
 ### Permissions
 
@@ -198,5 +198,5 @@ Message variables auto-populate with a randomly selected group based on the scop
 [19]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [20]: /account_management/rbac/?tab=datadogapplication
 [21]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[22]: /monitors/create/types/
+[22]: /monitors/create/
 [23]: /monitors/faq/what-are-recovery-thresholds/

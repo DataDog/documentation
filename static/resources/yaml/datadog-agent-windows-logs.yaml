@@ -34,6 +34,7 @@ metadata:
   namespace: default
   labels: {}
 spec:
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: datadog
@@ -46,7 +47,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -130,7 +131,7 @@ spec:
             timeoutSeconds: 5
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -144,7 +145,7 @@ spec:
               mountPath: C:/Temp/install_info
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.34.0"
+          image: "gcr.io/datadoghq/agent:7.35.2"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:

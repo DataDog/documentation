@@ -149,10 +149,10 @@ require 'ddtrace'
 class BackupLedger
 
   def write(transactions)
-    # Use global `Datadog.tracer.trace` to trace blocks of inline code
-    Datadog.tracer.trace('BackupLedger.write') do |method_span|
+    # Use global `Datadog::Tracing.trace` to trace blocks of inline code
+    Datadog::Tracing.trace('BackupLedger.write') do |method_span|
       transactions.each do |transaction|
-        Datadog.tracer.trace('BackupLedger.persist') do |span|
+        Datadog::Tracing.trace('BackupLedger.persist') do |span|
           # Add custom metadata to the "persist_transaction" span
           span.set_tag('transaction.id', transaction.id)
           ledger[transaction.id] = transaction

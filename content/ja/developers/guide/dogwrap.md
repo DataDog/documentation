@@ -1,10 +1,11 @@
 ---
-title: Dogwrap
+aliases:
+- /ja/developers/faq/can-i-call-scripts-and-generate-events-from-their-results
 description: Dogwrap を使用してコマンドを呼び出し、その結果からイベントを生成する
 kind: ガイド
-aliases:
-  - /ja/developers/faq/can-i-call-scripts-and-generate-events-from-their-results
+title: Dogwrap
 ---
+
 Dogwrap コマンドラインツールを使用すると、コマンドを呼び出して、その結果からイベントを生成できます。Dogwrap を使用するには、[Datadog Python ライブラリ][1]をインストールします。
 
 pip からインストールする場合
@@ -20,9 +21,19 @@ pip install datadog
 
 有効な最小限の `dogwrap` コマンドは、以下のレイアウトを持ちます。
 
+{{< site-region region="us,us3,us5,gov" >}}
 ```bash
 dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
 ```
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+```bash
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
+```
+{{< /site-region >}}
+
+**注**: `dogwrap` コマンドは、デフォルトで US の Datadog サイトにデータを送信します。EU のサイトにデータを送信する必要がある場合は、`-s eu` オプションを含める必要があります。
 
 次のプレースホルダーと組み合わせます。
 
