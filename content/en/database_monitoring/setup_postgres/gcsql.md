@@ -202,7 +202,7 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
        # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
        gcp:
         project_id: '<PROJECT_ID>'
-        instance_id: '<INSTANCE_NAME>'
+        instance_id: '<INSTANCE_ID>'
    ```
 2. [Restart the Agent][2].
 
@@ -236,7 +236,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "password": "<UNIQUEPASSWORD>",
     "gcp": {
       "project_id": "<PROJECT_ID>",
-      "instance_id": "<INSTANCE_NAME>"
+      "instance_id": "<INSTANCE_ID>"
     }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
@@ -258,7 +258,7 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_NAME>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -302,7 +302,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     gcp:
       project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_NAME>" \
+      instance_id: "<INSTANCE_ID>" \
   datadog/datadog
 ```
 
@@ -329,7 +329,7 @@ instances:
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_NAME>'
+      instance_id: '<INSTANCE_ID>'
 
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
@@ -361,7 +361,7 @@ metadata:
           "password": "<UNIQUEPASSWORD>",
           "gcp": {
             "project_id": "<PROJECT_ID>",
-            "instance_id": "<INSTANCE_NAME>"
+            "instance_id": "<INSTANCE_ID>"
           }
         }
       ]
