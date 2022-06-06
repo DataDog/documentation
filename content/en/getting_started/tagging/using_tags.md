@@ -303,8 +303,9 @@ Additionally, tags are used to filter a logs [Pipeline][14]. In the example belo
 
 The [RUM Explorer][15] visualizes events from your environment over a specified time period. 
 
-To filter RUM event data by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Search RUM Events][16].
+To filter RUM event data by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:shopist`. For advanced search, see [Search RUM Events][16].
 
+{{< img src="tagging/using_tags/rumtags.png" alt="RUM Tags" style="width:80%;">}}
 
 ## Service level objectives
 
