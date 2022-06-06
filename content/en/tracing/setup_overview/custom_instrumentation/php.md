@@ -29,7 +29,7 @@ Even if Datadog does not officially support your web framework, you may not need
 
 ## Write your own custom instrumentation
 
-To show how to write custom instrumentations, we use a basic web application containing a number of interesting use cases.
+To show how to write custom instrumentations, the sample application provided below features a few interesting use cases.
 
 ### A sample application to be instrumented
 
@@ -107,7 +107,7 @@ class SampleRegistry
 In order to write custom instrumentations you do not need any additional composer package.
 </div>
 
-The recommended approach to instrument an application or a service is to write the required code in a separate file, with the result that the application business logic is not mixed with instrumentation code.
+The recommended approach to instrument an application or a service is to write the required code in a separate file. As a result, the application business logic is not mixed with instrumentation code.
 
 Create a file `datadog/instrumentation.php` and add it to the composer autoloader. Do not forget to dump the autoloader after you have added the file definition, for example running `composer update`.
 
@@ -129,7 +129,9 @@ In `composer.json`
 ```
 
 <div class="alert alert-info">
-Note that the file where the custom code to perform manual instrumentation lies and the actual classes that are instrumented are not required to be in the same code base and package. With this approach you can publish an open source composer package, for example on github, containing only the code you wrote to instrument a specific library that others might find useful. Registering the instrumentation entry point, as described below, in the <code>composer.json</code>'s <code>autoload.files</code> array ensures that this file will always be executed when the composer autoloader is required.
+<strong>Note:</strong> the file where the custom code to perform manual instrumentation lies and the actual classes that are instrumented are not required to be in the same code base and package.
+With this approach you can publish an open source composer package, for example to GitHub, containing only the code you wrote to instrument a specific library that others might find useful.
+Registering the instrumentation entry point, as described below, in the <code>composer.json</code>'s <code>autoload.files</code> array ensures that the file is always executed when the composer autoloader is required.
 </div>
 
 #### The `datadog/instrumentation.php` file
@@ -142,13 +144,13 @@ if (!extension_loaded('ddtrace')) {
 }
 ```
 
-Then we instrument the function `\App\some_utility_function`, if you are not interested in any specific aspect of the function other than the execution time, then this is all that is required
+Then instrument the function `\App\some_utility_function`. If you are not interested in any specific aspect of the function other than the execution time, then this is all that is required.
 
 ```
 \DDTrace\trace_function('App\some_utility_function', function (\DDTrace\SpanData $span, $args, $ret, $exception) {});
 ```
 
-For `SampleRegistry::put` method we are interested not only in generating a span, but we also want to add a tag with the value of the returned item identifier and a tag for the key. Since this is a method, we use `\DDTrace\trace_method`:
+For `SampleRegistry::put` method you do not only want to generate a span, you also want to add a tag with the value of the returned item identifier and a tag for the key. Since this is a method, use `\DDTrace\trace_method` in place of `\DDTrace\trace_function`:
 
 ```
 \DDTrace\trace_method(
@@ -162,10 +164,10 @@ For `SampleRegistry::put` method we are interested not only in generating a span
 ```
 
 <div class="alert alert-warning">
-When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy do <code>$span->meta['my'] = 'tag'</code> otherwise you might overwrite existing tags automatically added by our core instrumentations.
+When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy do <code>$span->meta['my'] = 'tag'</code> otherwise you might overwrite existing tags automatically added by the Datadog core instrumentations.
 </div>
 
-`SampleRegistry::faultyMethod` generates an exception. There is nothing your have to do with regards to custom instrumentation. If the method is instrumented, the default exception reporting mechanism will take care of attaching the exception message and the stack trace.
+`SampleRegistry::faultyMethod` generates an exception. There is nothing your have to do with regards to custom instrumentation. If the method is instrumented, the default exception reporting mechanism takes care of attaching the exception message and the stack trace.
 
 ```
 \DDTrace\trace_method(
@@ -176,7 +178,7 @@ When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy d
 );
 ```
 
-`SampleRegistry::get` uses a `NotFound` exception to notify that an item was not found. This exception is an expected part of the businees logic and we do not want to mark the span as errored. We just want to change the resource name in order to add it to a pool of `not_found` operations. In order to achieve this goal, we `unset` the exception for the span.
+`SampleRegistry::get` uses a `NotFound` exception to notify that an item was not found. This exception is an expected part of the businees logic and you do not want to mark the span as errored. You just want to change the resource name in order to add it to a pool of `not_found` operations. In order to achieve that, you `unset` the exception for the span.
 
 ```
 \DDTrace\trace_method(
@@ -191,7 +193,7 @@ When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy d
 );
 ```
 
-The method `SampleRegistry::compact` presents an interesting use case. We are interested in adding a tag with a value that is neither an argument nor the value returned by the function. In order to achieve this, we need to edit both files `datadog/instrumentation.php` and the actual class file `src/Services/SampleRegistry.php`.
+The method `SampleRegistry::compact` presents an interesting use case. You are interested in adding a tag with a value that is neither an argument nor the value returned by the function. In order to achieve that, you need to edit both files `datadog/instrumentation.php` and the actual class file `src/Services/SampleRegistry.php`.
 
 In `datadog/instrumentation.php` add
 
@@ -216,7 +218,7 @@ In `src/Services/SampleRegistry.php` edit the body of the method
 
         $numberOfItemsProcessed = 123;
 
-        // Add instrumenting code in your business logic
+        // Add instrumenting code within your business logic.
         if (\function_exists('\DDTrace\active_span') && $span = \DDTrace\active_span()) {
             $span->meta['registry.compact.items_processed'] = $numberOfItemsProcessed;
         }
@@ -296,8 +298,8 @@ The following method returns a `DDTrace\SpanData` object. When tracing is disabl
 
 ```php
 <?php
-$scope = \DDTrace\root_span();
-if ($scope) {
+$span = \DDTrace\root_span();
+if ($span) {
     $span->meta['customer.id'] = get_customer_id();
 }
 ?>
@@ -307,6 +309,10 @@ if ($scope) {
 {{< /tabs >}}
 
 ## Adding tags
+
+<div class="alert alert-warning">
+When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy do <code>$span->meta['my'] = 'tag'</code> otherwise you might overwrite existing tags automatically added by the Datadog core instrumentations.
+</div>
 
 {{< tabs >}}
 {{% tab "Locally" %}}
