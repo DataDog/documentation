@@ -1,24 +1,25 @@
 ---
-title: インデックス
-kind: documentation
-description: Datadog でインデックス化するログの量を制御する
 aliases:
-  - /ja/logs/dynamic_volume_control
-  - /ja/logs/indexes/
+- /ja/logs/dynamic_volume_control
+- /ja/logs/indexes/
+description: Datadog でインデックス化するログの量を制御する
 further_reading:
-  - link: /logs/explorer/#visualize
-    tag: ドキュメント
-    text: ログ分析の実行
-  - link: /logs/log_configuration/processors
-    tag: ドキュメント
-    text: ログの処理方法
-  - link: /logs/log_configuration/parsing
-    tag: ドキュメント
-    text: パースの詳細
-  - link: https://www.datadoghq.com/blog/logging-without-limits/
-    tag: ブログ
-    text: Logging without Limits*
+- link: /logs/explorer/#visualize
+  tag: ドキュメント
+  text: ログ分析の実行
+- link: /logs/log_configuration/processors
+  tag: ドキュメント
+  text: ログの処理方法
+- link: /logs/log_configuration/parsing
+  tag: ドキュメント
+  text: パースの詳細
+- link: https://www.datadoghq.com/blog/logging-without-limits/
+  tag: ブログ
+  text: Logging without Limits*
+kind: documentation
+title: インデックス
 ---
+
 ログインデックスでは、さまざまな保持、割り当て、使用状況の監視、および課金のためにデータを値グループにセグメント化できるようにすることで、ログ管理予算をきめ細かく制御できます。インデックスは、[Configuration ページ][1]の Indexes セクションにあります。インデックスをダブルクリックするか、*Edit* ボタンをクリックすると、過去 3 日間にインデックス化されたログの数とそれらの保存期間に関する情報が表示されます。
 
 {{< img src="logs/indexes/index_details.jpg" alt="インデックスの詳細"  style="width:70%;">}}
@@ -42,9 +43,22 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 
 複数のインデックスがアクティブになっている場合は、"New Index" ボタンを使用して新しいインデックスを作成します。
 
-{{< img src="logs/indexes/add-index.png" alt="インデックスを追加"  style="width:70%;">}}
+{{< img src="logs/indexes/add-index.png" alt="インデックスを追加" style="width:70%;">}}
 
 **注**: インデックス名は文字で始まる必要があり、小文字、数字、または '-' のみを含めることができます。
+
+### インデックスの削除
+
+組織からインデックスを削除するには、インデックスのアクショントレイにある「削除アイコン」を使用します。このオプションは、`Modify index` と `User manage access` の両方の権限を持つユーザーのみ使用することができます。
+
+{{< img src="logs/indexes/delete-index.png" alt="インデックスを削除" style="width:70%;">}}
+
+<div class="alert alert-warning">
+削除されたインデックスと同じ名前のインデックスを再作成することはできません。 
+</div>
+
+**注:** 削除されたインデックスは、今後新しい受信ログを受け付けません。削除されたインデックス内のログは、クエリに使用できなくなります。保持期間に達した後、そのインデックスはインデックスページに表示されなくなります。
+
 
 ## インデックスフィルター
 
