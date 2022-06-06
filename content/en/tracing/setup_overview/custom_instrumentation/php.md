@@ -339,7 +339,7 @@ DD_TAGS=key1:value1,<TAG_KEY>:<TAG_VALUE>
 {{% /tab %}}
 {{% tab "Errors" %}}
 
-Thrown exceptions are automatically attached to the active span.
+Thrown exceptions are automatically attached to the active span, unless the exception is thrown at a deeper level in the call stack and it is caught before it reaches any function that is traced.
 
 ```php
 <?php
@@ -373,7 +373,7 @@ function doRiskyThing() {
             $span->meta['error.msg'] = 'Foo error';
             // Optional:
             $span->meta['error.type'] = 'CustomError';
-            $span->meta['error.stack'] = my_get_backtrace();
+            $span->meta['error.stack'] = (new \Exception)->getTraceAsString();
         }
     }
 );
@@ -433,7 +433,7 @@ function(
 
 #### Parameter 1: `DDTrace\SpanData $span`
 
-The `DDTrace\SpanData` instance contains [the same span information that the Agent expects][5]. A few exceptions are `trace_id`, `span_id`, `parent_id`, `start`, and `duration` which are set at the C level and not exposed to userland via `DDTrace\SpanData`. Exceptions from the instrumented call are automatically attached to the span and the `error` field is managed automatically.
+The `DDTrace\SpanData` instance contains [the same span information that the Agent expects][5]. A few exceptions are `trace_id`, `span_id`, `parent_id`, `start`, and `duration` which are set at the C level and not exposed to userland via `DDTrace\SpanData`. Exceptions from the instrumented call are automatically attached to the span.
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -443,6 +443,7 @@ The `DDTrace\SpanData` instance contains [the same span information that the Age
 | `SpanData::$type` | `string` | The type of request which can be set to: **web**, **db**, **cache**, or **custom** _(Optional)_ |
 | `SpanData::$meta` | `string[]` | An array of key-value span metadata; keys and values must be strings _(Optional)_ |
 | `SpanData::$metrics` | `float[]` | An array of key-value span metrics; keys must be strings and values must be floats _(Optional)_ |
+| `SpanData::$exception` | `\Throwable` | An exception generated during the execution of the original function, if any. |
 
 ```php
 <?php
@@ -465,9 +466,7 @@ function myRandFunc($min, $max) {
         $span->type = 'web';
         $span->meta['rand.range'] = $args[0] . ' - ' . $args[1];
         $span->meta['rand.value'] = $retval;
-        $span->metrics = [
-            '_sampling_priority_v1' => 0.9,
-        ];
+        $span->metrics['some_metric'] = 0.9;
     }
 );
 ```
