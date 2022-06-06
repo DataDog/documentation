@@ -72,7 +72,7 @@
     contents:
 
     - action: integrations
-      branch: master
+      branch: ofek/v2_migration_hudi
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
