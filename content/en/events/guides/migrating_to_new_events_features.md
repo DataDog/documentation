@@ -105,11 +105,11 @@ Many Event source names have changed. See the full list of affected [source name
 Your monitors are not evaluated beyond a 48 hour window. If you need to use a longer evaluation window, you can [generate custom metrics][3] from events and use a metrics monitor, where the evaluation window can be up to one month.
 
 ### You can group by only up to 4 facets.
-(Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example N = 30 resulting hosts if 3 facets and one facet is `host`.
+(Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example, N = 30 resulting hosts if grouping by two facets and one facet is `host`.
   * One facet results in a limit of 1000 top values.
   * Two facets results in a limit of 30 top values per facet (at most 900 groups)
   * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
-  * Four facets results in a limit of five top values per group (at most 625 groups)
+  * Four facets results in a limit of 5 top values per group (at most 625 groups)
 
 ### Recovery thresholds in monitors are no longer supported
 Event monitor thresholds no longer support the `warning_recovery` and `critical_recovery` threshold types. Recovery thresholds need to be removed in new Event monitors.
