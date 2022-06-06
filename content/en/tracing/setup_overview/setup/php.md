@@ -146,8 +146,6 @@ Automatic instrumentation captures:
 * Unhandled exceptions, including stacktraces if available
 * A total count of traces (for example, web requests) flowing through the system
 
-**Note**: If your application does not use Composer nor an autoloader registered with `spl_autoload_register()`, set the environment variable, `DD_TRACE_NO_AUTOLOADER=1`, to enable automatic instrumentation.
-
 ## Configuration
 
 The PHP tracer can be configured using environment variables and INI settings.
