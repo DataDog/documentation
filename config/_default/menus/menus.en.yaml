@@ -4387,8 +4387,7 @@ api:
         - v2
       operationids:
         - CreateTagConfiguration
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: Update a tag configuration
     url: '#update-a-tag-configuration'
@@ -4400,8 +4399,7 @@ api:
         - v2
       operationids:
         - UpdateTagConfiguration
-      unstable:
-        - v2
+      unstable: []
       order: 3
   - name: List tag configuration by name
     url: '#list-tag-configuration-by-name'
@@ -4413,8 +4411,7 @@ api:
         - v2
       operationids:
         - ListTagConfigurationByName
-      unstable:
-        - v2
+      unstable: []
       order: 2
   - name: Delete a tag configuration
     url: '#delete-a-tag-configuration'
@@ -4426,8 +4423,7 @@ api:
         - v2
       operationids:
         - DeleteTagConfiguration
-      unstable:
-        - v2
+      unstable: []
       order: 4
   - name: Tag Configuration Cardinality Estimator
     url: '#tag-configuration-cardinality-estimator'
@@ -4476,8 +4472,7 @@ api:
         - v2
       operationids:
         - ListTagConfigurations
-      unstable:
-        - v2
+      unstable: []
       order: 5
   - name: Submit metrics
     url: '#submit-metrics'
