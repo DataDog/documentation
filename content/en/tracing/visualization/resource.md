@@ -69,7 +69,7 @@ Hover over a node to view metrics of each service including requests/second, err
 
 The highlight color of the node indicates the service’s [monitor status][8]. If a service has more than one configured monitor, the status of the most severe monitor is shown.
 
-{{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" alt="hovering and clicking a resource dependency map node" style="width:100%;">}}
+{{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" video="true" alt="hovering and clicking a resource dependency map node" style="width:100%;">}}
 
 Click on a node to open a context menu with options to view the Service Page, related traces, and more.
 
