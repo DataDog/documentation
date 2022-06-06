@@ -502,11 +502,26 @@ main:
     identifier: integrations_top_level
     pre: integrations
     weight: 40000
+  - name: Observability Pipelines
+    url: integrations/observability_pipelines/
+    parent: integrations_top_level
+    identifier: observability_pipelines
+    weight: 1
+  - name: Setup
+    url: integrations/observability_pipelines/setup/
+    parent: observability_pipelines
+    identifier: observability_pipelines_setup
+    weight: 101
+  - name: Vector Configurations
+    url: integrations/observability_pipelines/vector_configurations/
+    parent: observability_pipelines
+    identifier: observability_pipelines_vector_configuration
+    weight: 102
   - name: Guides
     url: integrations/guide/
     identifier: integration_guides
     parent: integrations_top_level
-    weight: 1
+    weight: 2
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
