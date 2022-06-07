@@ -2936,8 +2936,8 @@ main:
     parent: organization_settings
     identifier: login_methods
     weight: 202
-  - name: Audit Logs
-    url: account_management/audit_logs
+  - name: Audit Trail
+    url: account_management/audit_trail
     parent: organization_settings
     weight: 203
   - name: OAuth Apps

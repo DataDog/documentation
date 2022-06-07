@@ -3,9 +3,9 @@ title: Audit Trail Monitor
 kind: documentation
 description: "Alert when a specified type of audit trail event is detected or exceeds a threshold."
 further_reading:
-- link: "/account_management/audit_logs/"
+- link: "/account_management/audit_trail/"
   tag: "Documentation"
-  text: "Learn more about Audit Logs"
+  text: "Learn more about Audit Trail"
 - link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
