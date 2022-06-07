@@ -28378,6 +28378,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
       responses:
         '200':
           content:
@@ -28891,6 +28898,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
       responses:
         '200':
           content:
