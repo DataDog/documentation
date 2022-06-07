@@ -84,9 +84,9 @@ Don’t see your desired libraries? Datadog is continually adding additional sup
 
 | **Datadog Agent version**   | **Package version** |
 |-----------------------------|---------------------|
-| [7.x][10]                   | latest              |
-| [6.x][10]                   | latest              |
-| [5.x][11]                   | latest              |
+| [7.x][6]                   | latest              |
+| [6.x][6]                   | latest              |
+| [5.x][7]                   | latest              |
 
 ## Runtime support policy for .NET Framework APM
 
@@ -96,7 +96,7 @@ Datadog APM for .NET Framework depends on the host operating system, .NET Framew
 
 | **Level**                                              | **Support provided**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][6]                                                             |
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][8]                                                             |
 | <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
@@ -104,7 +104,7 @@ Datadog APM for .NET Framework depends on the host operating system, .NET Framew
 
 ### Package versioning
 
-Datadog APM for .NET Framework practices [semantic versioning][7].
+Datadog APM for .NET Framework practices [semantic versioning][9].
 Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
@@ -120,5 +120,7 @@ Version updates imply the following changes to runtime support:
 [3]: https://docs.microsoft.com/en-us/lifecycle/products/microsoft-net-framework
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
 [5]: /help/
-[6]: https://www.datadoghq.com/support/
-[7]: https://semver.org/
+[6]: /agent/basic_agent_usage/?tab=agentv6v7
+[7]: /agent/basic_agent_usage/?tab=agentv5
+[8]: https://www.datadoghq.com/support/
+[9]: https://semver.org/

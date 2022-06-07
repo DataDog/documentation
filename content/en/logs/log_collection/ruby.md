@@ -16,6 +16,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/managing-rails-application-logs/"
   tag: "Blog"
   text: "How to collect, customize, and manage Rails application logs"
+- link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
+  tag: "Blog"
+  text: "How to manage log files using logrotate"
+  
 ---
 
 ## Overview

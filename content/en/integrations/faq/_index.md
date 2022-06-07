@@ -21,117 +21,116 @@ aliases:
 * [Why is there a delay in receiving my data?][5]
 * [Integration Setup for ECS Fargate][6]
 * [Error: Datadog is not authorized to perform sts:AssumeRole][7]
-* [The AWS Integration with Terraform][8]
 
 ## Apache
 
-* [Issues with Apache Integration][9]
-* [Apache SSL certificate issues][10]
+* [Issues with Apache Integration][8]
+* [Apache SSL certificate issues][9]
 
 ## Azure
 
-* [My Azure VM is powered down. Why is it still listed in my infrastructure list?][11]
-* [Azure VMs are showing up in the App but not reporting metrics][12]
-* [Azure Status and Count Metrics][13]
-* [Azure Troubleshooting][14]
+* [My Azure VM is powered down. Why is it still listed in my infrastructure list?][10]
+* [Azure VMs are showing up in the App but not reporting metrics][11]
+* [Azure Status and Count Metrics][12]
+* [Azure Troubleshooting][13]
 
 ## Docker
 
-* [Compose and the Datadog Agent][15]
+* [Compose and the Datadog Agent][14]
 
 ## Elasticsearch
 
-* [Why isn't Elasticsearch sending all my metrics?][16]
-* [Agent can't connect][17]
+* [Why isn't Elasticsearch sending all my metrics?][15]
+* [Agent can't connect][16]
 
 ## Git & GitHub
 
-* [Why events don't appear to be showing up in the event stream with my github integration ?][18]
+* [Why events don't appear to be showing up in the event stream with my github integration ?][17]
 
 ## Hadoop
 
-* [Hadoop Distributed File System (HDFS) Integration Error][19]
+* [Hadoop Distributed File System (HDFS) Integration Error][18]
 
 ## HAProxy
 
-* [HAProxy in multi-process mode][20]
+* [HAProxy in multi-process mode][19]
 
 ## Jira
 
-* [I've set up the JIRA integration, now how do I get events and tickets created?][21]
+* [I've set up the JIRA integration, now how do I get events and tickets created?][20]
 
 ## JMX
 
-* [I Have a Matching Bean for my JMX integration but nothing on Collect !][22]
-* [Collecting Composite type JMX attributes][23]
-* [How to run JMX commands in Windows?][24]
-* [jmx.yaml error: Include Section][25]
-* [Troubleshooting JMX Integrations][26]
-* [View jmx data in jConsole and set up your jmx.yaml to collect them][27]
-* [Both my JMX and AWS integrations use "name" tags. What do I do?][28]
-* [JBoss EAP 7 & Datadog monitoring via JMX][29]
+* [I Have a Matching Bean for my JMX integration but nothing on Collect !][21]
+* [Collecting Composite type JMX attributes][22]
+* [How to run JMX commands in Windows?][23]
+* [jmx.yaml error: Include Section][24]
+* [Troubleshooting JMX Integrations][25]
+* [View jmx data in jConsole and set up your jmx.yaml to collect them][26]
+* [Both my JMX and AWS integrations use "name" tags. What do I do?][27]
+* [JBoss EAP 7 & Datadog monitoring via JMX][28]
 
 ## Kafka
 
+
 * [Troubleshooting and Deep Dive for Kafka][30]
-* [Agent failed to retrieve RMIServer stub][31]
 
 ## Kubernetes
 
-* [Client Authentication against the apiserver and kubelet][32]
+* [Client Authentication against the apiserver and kubelet][31]
 
 ## MySQL & SQL
 
-* [Connection Issues with the SQL Server Integration][33]
-* [MySQL Localhost Error - Localhost VS 127.0.0.1][34]
-* [Can I use a named instance in the SQL Server integration?][35]
-* [MySQL Custom Queries][36]
-* [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table?][37]
-* [How can I collect more metrics from my SQL Server integration?][38]
-* [Database user lacks privileges][39]
+* [Connection Issues with the SQL Server Integration][32]
+* [MySQL Localhost Error - Localhost VS 127.0.0.1][33]
+* [Can I use a named instance in the SQL Server integration?][34]
+* [MySQL Custom Queries][35]
+* [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table?][36]
+* [How can I collect more metrics from my SQL Server integration?][37]
+* [Database user lacks privileges][38]
 
 ## Network
 
-* [How to send TCP/UDP host metrics via the Datadog API ?][40]
+* [How to send TCP/UDP host metrics via the Datadog API ?][39]
 
 ## Postgres
 
-* [Postgres custom metric collection explained][41]
+* [Postgres custom metric collection explained][40]
 
 ## RabbitMQ
 
-* [Tagging RabbitMQ queues by tag family][42]
+* [Tagging RabbitMQ queues by tag family][41]
 
 ## Redis
 
-* [Redis Integration Error: "unknown command 'CONFIG'"][43]
+* [Redis Integration Error: "unknown command 'CONFIG'"][42]
 
 ## SNMP
 
-* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][44]
+* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][43]
 
 ## Unix
 
-* [How can I gather metrics from the UNIX shell?][45]
+* [How can I gather metrics from the UNIX shell?][44]
 
 ## Vertica
 
-* [How to collect metrics from custom Vertica queries][46]
+* [How to collect metrics from custom Vertica queries][45]
 
 ## VSphere
 
-* [Troubleshooting duplicated hosts with vSphere][47]
+* [Troubleshooting duplicated hosts with vSphere][46]
 
 ## Webhooks
 
-* [How to make a Trello Card using Webhooks][48]
+* [How to make a Trello Card using Webhooks][47]
 
 ## Windows
 
-* [How to add event log files to the `Win32_NTLogEvent` WMI class][49]
-* [Collect Custom Windows Performance Counters over WMI][50]
-* [Windows Status Based Check][51]
-* [How to retrieve WMI metrics][52]
+* [How to add event log files to the `Win32_NTLogEvent` WMI class][48]
+* [Collect Custom Windows Performance Counters over WMI][49]
+* [Windows Status Based Check][50]
+* [How to retrieve WMI metrics][51]
 
 [1]: /integrations/faq/aws-integration-and-cloudwatch-faq/
 [2]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration/
@@ -163,25 +162,24 @@ aliases:
 [28]: /integrations/faq/both-my-jmx-and-aws-integrations-use-name-tags-what-do-i-do/
 [29]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx/
 [30]: /integrations/faq/troubleshooting-and-deep-dive-for-kafka/
-[31]: /integrations/faq/agent-failed-to-retrieve-rmierver-stub/
-[32]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet/
-[33]: /integrations/faq/connection-issues-with-the-sql-server-integration/
-[34]: /integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
-[35]: /integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
-[36]: /integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
-[37]: /integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi/
-[38]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
-[39]: /integrations/faq/database-user-lacks-privileges/
-[40]: /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api/
-[41]: /integrations/faq/postgres-custom-metric-collection-explained/
-[42]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family/
-[43]: /integrations/faq/redis-integration-error-unknown-command-config/
-[44]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids/
-[45]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
-[46]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
-[47]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
-[48]: /integrations/faq/how-to-make-trello-card-using-webhooks/
-[49]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
-[50]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
-[51]: /integrations/faq/windows-status-based-check/
-[52]: /integrations/faq/how-to-retrieve-wmi-metrics/
+[31]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet/
+[32]: /integrations/faq/connection-issues-with-the-sql-server-integration/
+[33]: /integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
+[34]: /integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
+[35]: /integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
+[36]: /integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi/
+[37]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
+[38]: /integrations/faq/database-user-lacks-privileges/
+[39]: /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api/
+[40]: /integrations/faq/postgres-custom-metric-collection-explained/
+[41]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family/
+[42]: /integrations/faq/redis-integration-error-unknown-command-config/
+[43]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids/
+[44]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
+[45]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
+[46]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
+[47]: /integrations/faq/how-to-make-trello-card-using-webhooks/
+[48]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
+[49]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
+[50]: /integrations/faq/windows-status-based-check/
+[51]: /integrations/faq/how-to-retrieve-wmi-metrics/

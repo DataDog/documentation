@@ -911,7 +911,8 @@ class Integrations:
             manifest_json["integration_id"] = manifest_json.get("app_id", "")
             categories = []
             supported_os = []
-            for tag in manifest_json.get("classifier_tags", []):
+            classifier_tags = manifest_json.get("tile", {}).get("classifier_tags", [])
+            for tag in classifier_tags:
                 # in some cases tag was null/None
                 if tag:
                     key, value = tag.split("::")
