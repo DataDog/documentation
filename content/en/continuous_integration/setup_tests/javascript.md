@@ -180,6 +180,10 @@ DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 
 {{% tab "Cypress" %}}
 
+### Cypress<10
+
+These are the instructions if you're using a version lower than `cypress@10`.
+
 1. Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
 {{< code-block lang="json" filename="cypress.json" >}}
 {
@@ -208,6 +212,41 @@ Run your tests as you normally do, specifying the environment where test are bei
 DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
+### Cypress >=10
+
+The API for plugin configuration has changed in `cypress>=10`. The new API can be seen at the [cypress docs][4].
+
+In your `cypress.config.js` file (substitute for the old `pluginsFile`):
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  // setupNodeEvents can be defined in either
+  // the e2e or component configuration
+  e2e: {
+    setupNodeEvents(on, config) {
+      // any other plugin can be here
+      return require('dd-trace/ci/cypress/plugin')(on, config)
+    }
+  }
+})
+{{< /code-block >}}
+
+The `supportFile` remains the same, but its configuration is slightly different, as it can be seen in the [cypress migration guide][5]:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    supportFile: 'cypress/support/index.js'
+  }
+})
+{{< /code-block >}}
+
+
+
 ### Add extra tags
 
 To add additional information to your tests, such as the team owner, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
@@ -228,14 +267,16 @@ it('renders a hello world', () => {
 
 ### RUM integration
 
-If the browser application being tested is instrumented using [RUM][4], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][5] guide.
+If the browser application being tested is instrumented using [RUM][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][7] guide.
 
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[4]: /real_user_monitoring/browser/#setup
-[5]: /continuous_integration/guides/rum_integration/
+[4]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
+[5]: https://docs.cypress.io/guides/references/migration-guide#supportFile
+[6]: /real_user_monitoring/browser/#setup
+[7]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 {{< /tabs >}}
 
