@@ -1044,10 +1044,10 @@ main:
     parent: monitors_create
     identifier: monitor_types_auditlogs
     weight: 106
-  - name: CI Pipelines
-    url: monitors/create/types/ci_pipelines/
+  - name: CI
+    url: monitors/create/types/ci/
     parent: monitors_create
-    identifier: monitor_types_cipipelines
+    identifier: monitor_types_ci
     weight: 107
   - name: Composite
     url: monitors/create/types/composite/
