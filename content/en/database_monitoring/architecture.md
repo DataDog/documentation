@@ -52,7 +52,7 @@ Instructions for setting up Database Monitoring with a self-hosted provider:
 
 #### Cloud-managed
 
-If your setup is cloud-managed (i.e. [AWS RDS][6] or Aurora, Google Cloud SQL, or Azure), the Agent must be installed remotely on a separate host and configured to connect to each managed instance.
+If your setup is cloud-managed (with providers such as [AWS RDS][6] or Aurora, Google Cloud SQL, or Azure), the Agent must be installed remotely on a separate host and configured to connect to each managed instance.
 
 Database monitoring collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider using our integration.
 
