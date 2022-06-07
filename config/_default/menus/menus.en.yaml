@@ -1424,6 +1424,11 @@ main:
     parent: tracing
     identifier: trace_explorer
     weight: 2
+  - name: Search
+    url: tracing/trace_explorer/search/
+    parent: trace_explorer
+    identifier: span_search
+    weight: 201
   - name: Query Syntax
     url: tracing/trace_explorer/query_syntax/
     parent: trace_explorer
