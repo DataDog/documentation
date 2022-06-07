@@ -142,14 +142,16 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 ## Enable job log collection (beta)
 
-Supported GitLab versions to collect job logs:
+The following GitLab versions support collecting job logs:
 * GitLab.com (SaaS)
 * GitLab >= 14.8 (self-hosted) only if using [object storage to store job logs][6]
 
-To enable collection of job logs the [feature flag][7] `datadog_integration_logs_collection` must be enabled in your GitLab self-hosted or GitLab.com account.
-After enabling the feature flag, a new option appears in the settings of the Datadog integration: `Enable logs collection`. Enable this option and save the changes.
+To enable collection of job logs:
 
-Job logs will be collected in the [Logs][8] product and automatically correlated with the GitLab pipeline within CI Visibility.
+1. Enable the `datadog_integration_logs_collection` [feature flag][7] in your GitLab self-hosted or GitLab.com account. This reveals the `Enable logs collection` option in the Datadog integration.
+2. Enable the `Enable logs collection` option and save the changes.
+
+Job logs are collected in the [Logs][8] product and automatically correlated with the GitLab pipeline within CI Visibility.
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility</div>
 
