@@ -45,7 +45,7 @@ Once the Datadog Agent is installed, enable Live Processes collection by editing
 
 ```yaml
 process_config:
-    enabled: 'true'
+    enabled: true
 ```
 
 The `enabled` value is a string with the following options:
@@ -299,7 +299,7 @@ Use the [Live Process Monitor][6] to generate alerts based on the count of any g
 ## Processes in dashboards and notebooks
 
 You can graph process metrics in dashboards and notebooks using the [Timeseries widget][8]. To configure:
-1. Select Live Processes as a data source
+1. Select Processes as a data source
 2. Filter using text strings in the search bar
 3. Select a process metric to graph
 4. Filter using tags in the `From` field

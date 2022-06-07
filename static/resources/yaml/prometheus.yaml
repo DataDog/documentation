@@ -6,7 +6,7 @@ metadata:
     app: prometheus
     purpose: example
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: prometheus
@@ -24,9 +24,13 @@ spec:
           ad.datadoghq.com/prometheus-example.instances: |
             [
               {
-                "prometheus_url": "http://%%host%%:%%port%%/metrics",
+                "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
                 "namespace": "documentation_example_kubernetes",
-                "metrics": [ {"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]
+                "metrics": [
+                  {"promhttp_metric_handler_requests": "handler.requests"},
+                  {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
+                  "go_memory.*"
+                ]
               }
             ]
     spec:

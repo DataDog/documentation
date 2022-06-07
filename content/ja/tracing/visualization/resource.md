@@ -1,20 +1,21 @@
 ---
-title: リソースステータス画面
-kind: documentation
 further_reading:
-  - link: /tracing/setup/
-    tag: Documentation
-    text: アプリケーションで APM トレースをセットアップする方法
-  - link: /tracing/visualization/services_list/
-    tag: Documentation
-    text: Datadog に報告するサービスの一覧
-  - link: /tracing/visualization/service/
-    tag: Documentation
-    text: 「Datadogのサービス詳細」
-  - link: /tracing/visualization/trace/
-    tag: Documentation
-    text: Datadog トレースの読み方を理解する
+- link: /tracing/setup/
+  tag: Documentation
+  text: アプリケーションで APM トレースをセットアップする方法
+- link: /tracing/visualization/services_list/
+  tag: Documentation
+  text: Datadog に報告するサービスの一覧
+- link: /tracing/visualization/service/
+  tag: Documentation
+  text: 「Datadogのサービス詳細」
+- link: /tracing/visualization/trace/
+  tag: Documentation
+  text: Datadog トレースの読み方を理解する
+kind: documentation
+title: リソースステータス画面
 ---
+
 {{< img src="tracing/visualization/resource/ressource.png" alt="リソース"  >}}
 
 リソースは、特定の[サービス][1]（通常は個々のエンドポイントまたはクエリ）に対する特定のアクションです。リソースの詳細については、[APM を開始する][2]をご覧ください。リソースごとに、APM は以下をカバーするダッシュボードページを自動的に生成します。
@@ -44,9 +45,9 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="すぐに使えるリソースグラフ"  style="width:90%;">}}
 
-### タイムボードにエクスポート
+### ダッシュボードへのエクスポート
 
-グラフを既存の[タイムボード][4]にエクスポートするには、各グラフの右上隅にある上向き矢印をクリックします。
+グラフを既存の[ダッシュボード][4]にエクスポートするには、各グラフの右上隅にある上向き矢印をクリックします。
 
 ### レイテンシー分布
 
@@ -93,7 +94,7 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 [1]: /ja/tracing/visualization/#services
 [2]: /ja/tracing/visualization/
 [3]: /ja/tracing/visualization/#trace
-[4]: /ja/dashboards/timeboard/
+[4]: /ja/dashboards/
 [5]: /ja/tracing/visualization/#spans
 [6]: /ja/tracing/visualization/trace/
 [7]: /ja/tracing/search/

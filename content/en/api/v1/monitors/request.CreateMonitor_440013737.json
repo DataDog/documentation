@@ -1,0 +1,16 @@
+{
+  "name": "Example-Create_an_Error_Tracking_monitor_returns_OK_response",
+  "type": "error-tracking alert",
+  "query": "error-tracking-rum(\"service:foo AND @error.source:source\").rollup(\"count\").by(\"@issue.id\").last(\"1h\") >= 1",
+  "message": "some message",
+  "tags": [
+    "test:examplecreateanerrortrackingmonitorreturnsokresponse",
+    "env:ci"
+  ],
+  "priority": 3,
+  "options": {
+    "thresholds": {
+      "critical": 1
+    }
+  }
+}

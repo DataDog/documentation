@@ -1,27 +1,28 @@
 ---
-title: インデックス
-kind: documentation
-description: Datadog でインデックス化するログの量を制御する
 aliases:
-  - /ja/logs/dynamic_volume_control
-  - /ja/logs/indexes/
+- /ja/logs/dynamic_volume_control
+- /ja/logs/indexes/
+description: Datadog でインデックス化するログの量を制御する
 further_reading:
-  - link: /logs/explorer/#visualize
-    tag: ドキュメント
-    text: ログ分析の実行
-  - link: /logs/log_configuration/processors
-    tag: ドキュメント
-    text: ログの処理方法
-  - link: /logs/log_configuration/parsing
-    tag: ドキュメント
-    text: パースの詳細
-  - link: https://www.datadoghq.com/blog/logging-without-limits/
-    tag: ブログ
-    text: Logging without Limits*
+- link: /logs/explorer/#visualize
+  tag: ドキュメント
+  text: ログ分析の実行
+- link: /logs/log_configuration/processors
+  tag: ドキュメント
+  text: ログの処理方法
+- link: /logs/log_configuration/parsing
+  tag: ドキュメント
+  text: パースの詳細
+- link: https://www.datadoghq.com/blog/logging-without-limits/
+  tag: ブログ
+  text: Logging without Limits*
+kind: documentation
+title: インデックス
 ---
+
 ログインデックスでは、さまざまな保持、割り当て、使用状況の監視、および課金のためにデータを値グループにセグメント化できるようにすることで、ログ管理予算をきめ細かく制御できます。インデックスは、[Configuration ページ][1]の Indexes セクションにあります。インデックスをダブルクリックするか、*Edit* ボタンをクリックすると、過去 3 日間にインデックス化されたログの数とそれらの保存期間に関する情報が表示されます。
 
-{{< img src="logs/indexes/index_details.png" alt="インデックスの詳細"  style="width:70%;">}}
+{{< img src="logs/indexes/index_details.jpg" alt="インデックスの詳細"  style="width:70%;">}}
 
 インデックス化されたログは、[ファセット検索][2]、[パターン][3]、[分析][4]、[ダッシュボード][5]、および[監視][6]に使用できます。
 
@@ -42,9 +43,22 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 
 複数のインデックスがアクティブになっている場合は、"New Index" ボタンを使用して新しいインデックスを作成します。
 
-{{< img src="logs/indexes/add-index.png" alt="インデックスを追加"  style="width:70%;">}}
+{{< img src="logs/indexes/add-index.png" alt="インデックスを追加" style="width:70%;">}}
 
 **注**: インデックス名は文字で始まる必要があり、小文字、数字、または '-' のみを含めることができます。
+
+### インデックスの削除
+
+組織からインデックスを削除するには、インデックスのアクショントレイにある「削除アイコン」を使用します。このオプションは、`Modify index` と `User manage access` の両方の権限を持つユーザーのみ使用することができます。
+
+{{< img src="logs/indexes/delete-index.png" alt="インデックスを削除" style="width:70%;">}}
+
+<div class="alert alert-warning">
+削除されたインデックスと同じ名前のインデックスを再作成することはできません。 
+</div>
+
+**注:** 削除されたインデックスは、今後新しい受信ログを受け付けません。削除されたインデックス内のログは、クエリに使用できなくなります。保持期間に達した後、そのインデックスはインデックスページに表示されなくなります。
+
 
 ## インデックスフィルター
 
@@ -82,7 +96,7 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 
 #### 傾向を注視する
 
-たとえば、Web アクセスサーバーリクエストからのすべてのログを保持するのではなく、3xx、4xx、5xx のログをすべてインデックス化し、2xx のログの 95% を除外したい場合は、`source:nginx AND http.status_code:[200 TO 299]` を設定することで全体の傾向を追跡できます。
+Web アクセスサーバーリクエストからのすべてのログを保持するのではなく、3xx、4xx、5xx のログをすべてインデックス化し、2xx のログの 95% を除外したい場合は、`source:nginx AND http.status_code:[200 TO 299]` を設定することで全体の傾向を追跡できます。
 **ヒント**: [ログから生成されるメトリクス][9]を使用し、リクエストの数をカウントして、ステータスコード、[ブラウザ][13]、[国][14]でタグ付けすることにより、Web アクセスログを有益な KPI に変換することができます。
 
 {{< img src="logs/indexes/sample_200.png" alt="インデックスフィルターの有効化"  style="width:80%;">}}
@@ -122,7 +136,7 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 
 ## 日別の割り当てを設定する
 
-1 日の割り当てを設定して、インデックスに格納されるログの数を日別に制限することができます。この割り当ては、格納されるべき (除外フィルターが適用された後の) すべてのログに対して適用されます。
+1 日の割り当てを設定して、インデックスに格納されるログの数を日別に制限することができます。この割り当ては、格納されるべき (除外フィルターが適用された後など) すべてのログに対して適用されます。
 1 日の割り当て数に到達したら、ログはインデックス化されなくなりますが、[livetail][18] では利用できるほか、[アーカイブにも送信][10]されるので、[ログからメトリクスを生成する][9]ために使用できます。
 
 この割り当ては、インデックスを編集していつでも更新または削除できます。

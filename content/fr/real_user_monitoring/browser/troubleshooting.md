@@ -19,7 +19,7 @@ Si vous ne voyez aucune donnée RUM ou si des données sont manquantes pour cert
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Les bloqueurs de publicités empêchent le téléchargement du SDK RUM Browser ou empêchent ce dernier d'envoyer les données à Datadog.     | Certains bloqueurs de publicités limitent également le chargement des outils de suivi des performances et marketing. Consultez la documentation pour [installer le SDK RUM Browser avec npm][3] et [transférer les données recueillies par l'intermédiaire d'un proxy][4]. |
 | Les règles réseau ou les VPN empêchent le téléchargement du SDK RUM Browser ou empêchent ce dernier d'envoyer les données à Datadog. | Accordez l'accès aux endpoints requis pour le téléchargement du SDK ou l'envoi des données. La liste des endpoints est disponible dans la [documentation relative à la stratégie de sécurité de contenu][5].                                        |
-| Les scripts, packages et clients initialisés avant le SDK RUM Browser peuvent entraînent la perte de logs, ressources et actions utilisateur. Par exemple, si vous initialisez ApolloClient avant le SDK RUM Browser, il est possible que les requêtes `graphql` ne soient pas enregistrées en tant que ressources XHR dans le RUM Explorer. | Vérifiez à quel moment le SDK RUM Browser est initialisé et, si besoin, déplacez-le à une étape antérieure à l'exécution du code de votre application.                                             |   
+| Les scripts, packages et clients initialisés avant le SDK RUM Browser peuvent entraînent la perte de logs, ressources et actions utilisateur. Par exemple, si vous initialisez ApolloClient avant le SDK RUM Browser, il est possible que les requêtes `graphql` ne soient pas enregistrées en tant que ressources XHR dans le RUM Explorer. | Vérifiez à quel moment le SDK RUM Browser est initialisé et, si besoin, déplacez-le à une étape antérieure à l'exécution du code de votre application.                                             |
 
 Consultez les [directives relatives à la stratégie de sécurité de contenu][6] et assurez-vous que votre site Web accorde l'accès au CDN du SDK RUM Browser et à l'endpoint d'admission.
 
@@ -53,6 +53,60 @@ Le SDK RUM Browser utilise des cookies pour stocker des informations de session 
 
 **Remarque** : les cookies suivants ont été utilisés par le passé : `_dd_l`, `_dd_r` et `_dd`. Ils ont depuis été remplacés par `_dd_s` dans les dernières versions du SDK, mais tous ont la même utilité.
 
+## Limites techniques
+
+Chaque événement envoyé par le SDK RUM Browser comporte les éléments suivants :
+
+- Le contexte RUM global
+- Le contexte de l'événement (le cas échéant)
+- Les attributs propres à l'événement
+
+Exemple :
+
+```javascript
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('global', {'foo': 'bar'})
+window.DD_RUM && window.DD_RUM.addAction('hello', {'action': 'qux'})
+```
+
+Cet exemple de code crée l'événement d'action suivant :
+
+```json
+{
+  "type": "action",
+  "context": {
+    "global": {
+      "foo": "bar"
+    },
+    "action": "qux"
+  },
+  "action": {
+    "id": "xxx",
+    "target": {
+      "name": "hello"
+    },
+    "type": "custom"
+  },
+  ...
+}
+```
+
+Si un événement ou une requête dépasse l'une des limites ci-dessous, il est rejeté par l'admission Datadog.
+
+| Propriété                                 | Limite   |
+| ---------------------------------------- | ------------ |
+| Nombre maximum d'attributs par événement   | 256          |
+| Profondeur maximale des attributs par événement        | 20           |
+| Taille maximale des événements                       | 256 Ko       |
+| Taille maximale de la charge utile d'admission              | 5 Mo         |
+
+## Avertissement relatif au blocage de la lecture interorigines
+
+Sur les navigateurs basés sur Chromium, lorsque le SDK RUM Browser envoie des données à l'admission Datadog, un avertissement relatif au blocage de la lecture interorigines s'affiche dans la console :
+
+`Cross-Origin Read Blocking (CORB) blocked cross-origin response`
+
+Cet avertissement est généré car l'admission renvoie un objet JSON non vide. Il s'agit d'un [problème Chromium][7] connu. Cela n'a aucune incidence sur le SDK ; vous pouvez ignorer l'avertissement.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -63,3 +117,4 @@ Le SDK RUM Browser utilise des cookies pour stocker des informations de session 
 [4]: /fr/real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /fr/real_user_monitoring/faq/content_security_policy/
 [6]: /fr/real_user_monitoring/browser/data_collected/?tab=session
+[7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707

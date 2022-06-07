@@ -27,7 +27,7 @@ Datadog の [Logging without Limits][1]\* を使用すると、インデック�
 
 Export メニューで "Generate new metric" を選択し、Analytics の検索からメトリクスを作成することも可能です。
 
-{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.png" alt="ログからメトリクスを生成"  style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.jpg" alt="ログからメトリクスを生成"  style="width:80%;">}}
 
 ### 新しいログベースのメトリクスを追加
 

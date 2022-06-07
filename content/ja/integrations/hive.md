@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - ログの収集
-  - オートディスカバリー
+- web
+- ログの収集
+- オートディスカバリー
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/hive/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/hive/README.md
 display_name: Hive
 draft: false
 git_integration_title: hive
 guid: 3faee302-f293-45de-9eb8-ba6b7fa052a3
 integration_id: hive
 integration_title: Hive
+integration_version: 1.8.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -34,10 +35,13 @@ public_title: Datadog-Hive インテグレーション
 short_description: HiveServer2 と Hive MetaStore から、さまざまな JMX メトリクスを収集
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、[Hive][1] の Hive Metastore と HiveServer2 の 2 つを監視します。
@@ -82,7 +86,7 @@ Hive チェックは [Datadog Agent][2] パッケージに含まれています�
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従います。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 ##### メトリクスの収集
 
@@ -140,7 +144,7 @@ Datadog-Hive インテグレーションを使用してメトリクスを収集�
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 | パラメーター      | 値                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -176,7 +180,7 @@ Hive チェックには、イベントは含まれません。
 
 
 [1]: https://cwiki.apache.org/confluence/display/Hive/Home
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-Metrics
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

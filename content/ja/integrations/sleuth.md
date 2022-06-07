@@ -57,7 +57,7 @@ Datadog インテグレーションを追加するには
 
 ![][2]
 
-> Datadog インテグレーションが成功すると、**Datadog is connected** というメッセージが表示されます。
+> Datadog インテグレーションのインストールが完了すると、**Datadog is connected** というメッセージが表示されます。
 
 ![][3]
 
@@ -67,13 +67,13 @@ Datadog Sleuth インテグレーションは、Sleuth アカウントからの�
 
 ### 構成
 
-* **Add metric** ドロップダウンをクリックし、受信した Datadog アプリケーションメトリクスを処理する Sleuth プロジェクトを選択します。Sleuth 組織内のすべてのプロジェクトがドロップダウンに表示されます。
+- **Add metric** ドロップダウンをクリックし、受信した Datadog メトリクスを処理する Sleuth プロジェクトを選択します。Sleuth 組織内のすべてのプロジェクトがドロップダウンに表示されます。
 
 ![][4]
 
 > インテグレーションは Sleuth 組織レベルで行われ、その組織内のすべてのプロジェクトで使用できます。インテグレーションの個々の設定は、プロジェクトレベルで行われます。
 
-以上で、Sleuth はデプロイで Datadog メトリクスの表示を開始します。Sleuth のデプロイカードでメトリクスがどのように伝達されるかについて詳しくは、[**ダッシュボード**][5]を参照してください。
+コンフィギュレーションが完了すると、Sleuth はデプロイで Datadog メトリクスを表示します。Sleuth のデプロイカードでメトリクスがどのように伝達されるかについて詳しくは、[**ダッシュボード**][5]を参照してください。
 
 
 ## 収集データ
@@ -96,6 +96,9 @@ Sleuth インテグレーションには、イベントは含まれません。
 2. Datadog インテグレーションカードで、**disable** をクリックします。
 
 Datadog インテグレーションが切断され、その組織内のプロジェクトで使用できなくなります。Datadog インテグレーションに加えたプロジェクトレベルの変更はすべて失われます。
+
+
+
 [1]: https://app.sleuth.io/accounts/login/
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-integration-api-key.png
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-integration.png

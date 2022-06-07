@@ -1,33 +1,36 @@
 ---
 aliases:
-  - /fr/integrations/awsroute53/
+- /fr/integrations/awsroute53/
 categories:
-  - cloud
-  - network
-  - web
-  - aws
-  - log collection
+- cloud
+- network
+- web
+- aws
+- log collection
 ddtype: crawler
 dependencies: []
-description: "Surveillez des métriques de Route\_53 et des checks de santé."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_route53/'
+description: Surveillez des métriques de Route 53 et des checks de santé.
+doc_link: https://docs.datadoghq.com/integrations/amazon_route53/
 draft: false
 git_integration_title: amazon_route53
 has_logo: true
+integration_id: amazon-route-53
 integration_title: Amazon Route 53
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_route53
-public_title: "Intégration Datadog/Amazon\_Route\_53"
-short_description: "Surveillez des métriques de Route\_53 et des checks de santé."
+public_title: Intégration Datadog/Amazon Route 53
+short_description: Surveillez des métriques de Route 53 et des checks de santé.
 version: '1.0'
 ---
+
 {{< img src="integrations/amazon_route53/route53_graph.png" alt="graph route53" popup="true">}}
 
 ## Présentation
 
-AWS Route 53 fournit une solution de gestion de DNS et de trafic ainsi que de surveillance de la disponibilité et des performances grâce à des checks de santé. Vous pouvez visualiser les informations des checks de santé dans Datadog pour fournir du contexte pour d'autres métriques et événements dans vos environnements. Voici un exemple de dashboard de graphique de statut des checks de santé de Route 53 :
+AWS Route 53 fournit une solution de gestion des DNS et du trafic ainsi que de surveillance de la disponibilité et des performances grâce à des checks de santé. Vous pouvez visualiser les informations des checks de santé dans Datadog pour enrichir les données de contexte liées à d'autres métriques et événements dans vos environnements. Voici un exemple de dashboard de graphique de statut des checks de santé de Route 53 :
 
 Pour plus d'informations sur le reste des services AWS, consultez [le carré AWS][1]
 
@@ -45,11 +48,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
     - `route53:listHealthChecks` : répertorie les checks de santé disponibles.
     - `route53:listTagsForResources` : ajoute des tags personnalisés aux métriques Route 53 CloudWatch.
 
-    Pour en savoir plus sur les stratégies Route 53, consultez [la documentation disponible sur le site d'AWS][4].
+    Pour en savoir plus, consultez la section relative aux [stratégies Route53][4] de la documentation AWS.
 
 3. Installez l'[intégration Datadog/AWS Route 53][5].
 
-**Remarque** : pour recueillir les métriques Amazon Route 53 via CloudWatch, vous devez choisir la région USA Est (Virginie du Nord). Les métriques Amazon Route 53 ne sont pas disponibles si vous sélectionnez une autre région. Cliquez [ici][6] pour en savoir plus.
+**Remarque** : pour recueillir les métriques Amazon Route 53 via CloudWatch, vous devez choisir la région USA Est (Virginie du Nord). Les métriques Amazon Route 53 ne sont pas disponibles si vous sélectionnez une autre région. Consultez la page [Surveillance du statut de la vérification de l'état et obtention de notifications][6] pour en savoir plus.
 
 ### Collecte de logs
 
@@ -67,7 +70,7 @@ Configurez Amazon Route 53 pour enregistrer des informations sur les requêtes 
 Accédez à votre console AWS Route 53 et sélectionnez la zone hébergée pour laquelle vous souhaitez configurer la journalisation. Cliquez sur la case d'option et sélectionnez Configure query logging.
 {{< img src="integrations/amazon_route53/amazon_route_53_log_enable.png" alt="activer la journalisation route 53" popup="true" style="width:70%;">}}
 
-Sélectionnez ensuite le groupe de logs Cloudwatch ou créez-en un pour y envoyer les logs. Vérifiez que le nom du groupe de logs contient « route53 ».
+Sélectionnez ensuite le groupe de logs CloudWatch ou créez-en un pour y envoyer les logs. Vérifiez que le nom du groupe de logs contient « route53 ».
 
 #### Activer la journalisation des requêtes du résolveur Route 53
 
@@ -91,7 +94,7 @@ Accédez ensuite à la [section Log de Datadog][8] pour commencer à explorer vo
 {{< get-metrics-from-git "amazon_route53" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se verra assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
+Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
 
@@ -108,7 +111,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_route53.html
+[4]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/auth-and-access-control.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_route53
 [6]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-monitor-view-status.html#monitoring-health-checks
 [7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function

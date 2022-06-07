@@ -1,13 +1,14 @@
 ---
-title: Amazon RDS マネージド Postgres のデータベースモニタリングの設定
-kind: documentation
 description: Amazon RDS 上で動作する Postgres のデータベースモニタリングをインストールして構成します。
 further_reading:
-  - link: /integrations/postgres/
-    tag: ドキュメント
-    text: Postgres インテグレーションの基本
+- link: /integrations/postgres/
+  tag: ドキュメント
+  text: Postgres インテグレーションの基本
+kind: documentation
+title: Amazon RDS マネージド Postgres のデータベースモニタリングの設定
 ---
-{{< site-region region="us3,gov" >}}
+
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -26,7 +27,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 9.6、10、11、12、13
 
 サポート対象の Agent バージョン
-: 7.30.0+
+: 7.33.0+
 
 パフォーマンスへの影響
 : データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
@@ -215,7 +216,7 @@ ECS や Fargate などの Docker コンテナで動作するデータベース�
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.30.0
+export DD_AGENT_VERSION=7.32.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -243,7 +244,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 `Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.30.0
+FROM gcr.io/datadoghq/agent:7.32.0
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'

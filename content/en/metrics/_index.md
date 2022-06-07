@@ -96,7 +96,7 @@ After selecting a metric, you can filter your query based on tag(s). For instanc
 
 #### Configure time aggregation
 
-Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every six minutes (360 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`.
+Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every hour (3600 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`.
 
 #### Configure space aggregation
 
@@ -177,7 +177,7 @@ Read the [metrics summary documentation][21] for more details.
 [9]: /logs/logs_to_metrics/
 [10]: /metrics/custom_metrics/
 [11]: /agent/
-[12]: /metrics/dogstatsd_metrics_submission/
+[12]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [13]: /api/
 [14]: https://docs.datadoghq.com/agent/basic_agent_usage/
 [15]: /metrics/types/

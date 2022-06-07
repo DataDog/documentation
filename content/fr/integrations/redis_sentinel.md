@@ -5,11 +5,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md
 display_name: Redis Sentinel
 draft: false
 git_integration_title: redis_sentinel
@@ -24,14 +24,17 @@ manifest_version: 1.0.0
 metric_prefix: redis.
 metric_to_check: redis.sentinel.known_sentinels
 name: redis_sentinel
-public_title: "Intégration Datadog/Redis\_Sentinel"
-short_description: "Redis\_Sentinel optimise la disponibilité de Redis."
+public_title: Intégration Datadog/Redis Sentinel
+short_description: Redis Sentinel optimise la disponibilité de Redis.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques du service Sentinel de Redis en temps réel pour :
@@ -64,7 +67,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `redis_sentinel` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `redis_sentinel` dans la section Checks.
 
 ## Données collectées
 

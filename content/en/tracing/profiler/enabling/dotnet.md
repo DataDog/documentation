@@ -51,9 +51,13 @@ Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
-2. The profiler ships together with the tracer. Install or upgrade to the last beta version if needed, using the [.NET Monitoring MSI installer][3]. Continuous Profiler supports 64-bit Windows, so you need the file like `datadog-dotnet-apm-2.1.1-x64-profiler-beta.msi`.
+2. The profiler ships together with the tracer. Install or upgrade to the latest version, using the [.NET Monitoring MSI installer][3]. Continuous Profiler supports 64-bit Windows, so you need the file like `datadog-dotnet-apm-<VERSION>-x64.msi`.
 
    Run the installer with administrator privileges.
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> The following steps include setting environment variables to enable the profiler. Datadog <strong>does not recommend</strong> setting those environment variables at machine-level. If set at machine-level, every .NET application running on the machine is profiled and this incurs a significant overhead on the CPU and memory of your machine.
+</div>
 
 {{< tabs >}}
 
@@ -232,6 +236,6 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.1.1-profiler-beta1
+[3]: https://github.com/DataDog/dd-trace-dotnet/releases/
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /getting_started/profiler/

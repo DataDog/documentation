@@ -42,11 +42,19 @@ further_reading:
 
 ### Supported .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, and .NET 6. 
+The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, and .NET 6.
 
 For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
 ## Installation and getting started
+
+<div class="alert alert-info">
+  <div class="alert-info">Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> in the Datadog app for the best experience, including:<br/>
+    <div>- **Step-by-step** instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
+    <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags.</div>
+    <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div>
+  </div>
+</div>
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.
@@ -84,7 +92,7 @@ To install the .NET Tracer machine-wide:
 1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
 
 2. Run one of the following commands to install the package and create the .NET tracer log directory `/var/log/datadog/dotnet` with the appropriate permissions:
-   
+
    Debian or Ubuntu
    : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
 
@@ -118,7 +126,7 @@ To install the .NET Tracer per-application:
 
 ### Enable the tracer for your service
 
-To enable the .NET Tracer for your service, set the required environment variables and restart the application. 
+To enable the .NET Tracer for your service, set the required environment variables and restart the application.
 
 For information about the different methods for setting environment variables, see [Configuring process environment variables](#configuring-process-environment-variables).
 
@@ -138,7 +146,7 @@ For information about the different methods for setting environment variables, s
    ```
 
    <div class="alert alert-warning">
-     <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
+     <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
@@ -191,7 +199,7 @@ For information about the different methods for setting environment variables, s
    Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
 
 2. For Docker images running on Linux, configure the image to run the `createLogPath.sh` script:
-  
+
    ```
    RUN /<APP_DIRECTORY>/datadog/createLogPath.sh
    ```
@@ -208,7 +216,7 @@ For information about the different methods for setting environment variables, s
 
 ### Configure the Datadog Agent for APM
 
-[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`.
+[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data on `http://localhost:8126`.
 
 For containerized, serverless, and cloud environments:
 
@@ -223,9 +231,15 @@ For containerized, serverless, and cloud environments:
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on how to set these variables, see [Configuration](#configuration).
+3. After instrumenting your application, the tracing client attempts to send traces to the following:
 
-{{< site-region region="us3,us5,eu,gov" >}} 
+    - The `/var/run/datadog/apm.socket` Unix domain socket by default.
+    - If the socket does not exist, then traces are sent to `localhost:8126`.
+    - If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable: `DD_TRACE_AGENT_URL=http://custom-hostname:1234` or `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
+
+For more information on how to configure these settings, see [Configuration](#configuration).
+
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. To ensure the Agent sends data to the right Datadog location, set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}}.
 
@@ -365,34 +379,37 @@ The following configuration variables are available for both automatic and custo
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
-**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`
+It can contain a Unix path to a socket by prefixing the path with `unix://`. <br>
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
 
 `DD_AGENT_HOST`
-: Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. <br>
+: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. <br>
+: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `8126`
 
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
-Enables or disables automatic injection of correlation identifiers into application logs.
+Enables or disables automatic injection of correlation identifiers into application logs. <br>
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
-Enables [Tracing without Limits][5].
+Enables ingestion rate control.
 
-`DD_MAX_TRACES_PER_SECOND`
+`DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
-The number of traces allowed to be submitted per second.
+The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent. <br>
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans.
 
 `DD_TRACE_DEBUG`
-Enables or disables debug logging. Valid values are: `true` or `false`.<br>
+: Enables or disables debug logging. Valid values are `true` or `false`.<br>
 **Default**: `false`
 
 `DD_TRACE_HEADER_TAGS`
@@ -404,9 +421,8 @@ Added in version 1.18.3. Response header support and entries without tag names a
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api, team:intake` <br>
+**Example**: `layer:api,team:intake` <br>
 Added in version 1.17.0. <br>
-Note that the delimiter is a comma and a whitespace: `, `.
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
@@ -442,6 +458,19 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 **Default**: `false`<br>
 Added in version 1.23.0.
 
+`DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
+: Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
+This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
+**Default**: `false`
+Added in version 2.5.1.
+
+`DD_TRACE_METHODS`
+: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+**Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
+**Note:** The wildcard method support (`[*]`) selects all methods in a type except constructors, property getters and setters, `Equals`, `Finalize`, `GetHashCode`, and `ToString`. <br>
+Added in version 2.6.0.
+Wildcard support `[*]` added in version 2.7.0.
+
 #### Automatic instrumentation integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration.
@@ -466,11 +495,33 @@ The following configuration variables are for features that are available for us
 #### Deprecated settings
 
 `DD_TRACE_LOG_PATH`
-: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set. 
+: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.
 
 `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
 : Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>
 **Default**: `true`
+
+### Headers extraction and injection
+
+The Datadog APM Tracer supports [B3][9] and [W3C (TraceParent)][10] headers extraction and injection for distributed tracing.
+
+You can configure injection and extraction styles for distributed headers.
+
+The .NET Tracer supports the following styles:
+
+- Datadog: `Datadog`
+- B3: `B3`
+- W3C: `W3C`
+- B3 Single Header: `B3SingleHeader` or `B3 single header`
+
+You can use the following environment variables to configure injection and extraction styles:
+
+- `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
+- `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `Datadog` injection style is enabled.
+
+If multiple extraction styles are enabled, the extraction attempt is completed in order of configured styles, and uses the first successful extracted value.
 
 ## Custom instrumentation
 
@@ -648,7 +699,9 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /tracing/trace_ingestion/
+[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
 [6]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
 [7]: /tracing/setup_overview/custom_instrumentation/dotnet/
 [8]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[9]: https://github.com/openzipkin/b3-propagation
+[10]: https://www.w3.org/TR/trace-context/#traceparent-header

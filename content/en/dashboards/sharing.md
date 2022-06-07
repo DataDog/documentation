@@ -118,8 +118,8 @@ Datadog has a [dedicated API][7] allowing you to interact with your shared graph
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /dashboards/timeboard/
-[3]: /dashboards/screenboard/
+[2]: /dashboards/#timeboards
+[3]: /dashboards/#screenboard
 [4]: https://app.datadoghq.com/account/settings#embeds
 [5]: /help/
 [6]: https://app.datadoghq.com/account/org_security

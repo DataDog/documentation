@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - log collection
-  - autodiscovery
+- processing
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/spark/README.md
+- https://github.com/DataDog/integrations-core/blob/master/spark/README.md
 display_name: Spark
 draft: false
 git_integration_title: spark
 guid: f7a5a40f-f73c-465a-be8f-b2b371c706a2
 integration_id: spark
 integration_title: Spark
+integration_version: 3.1.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -34,10 +35,13 @@ public_title: Datadog-Spark インテグレーション
 short_description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Spark のグラフ][1]
 
 ## 概要
@@ -132,7 +136,7 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
 
 3. [Agent を再起動します][5]。
 
-Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][6]を参照してください。
+Docker 環境のログを有効にするには、[Docker ログ収集][6]を参照してください。
 
 ### 検証
 

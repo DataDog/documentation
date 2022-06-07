@@ -1,7 +1,7 @@
 ---
 title: Configuration de MySQL
 kind: documentation
-description: Configuration de la surveillance de bases de données sur une base de données MySQL
+description: Configuration de Database Monitoring sur une base de données MySQL
 disable_sidebar: true
 ---
 

@@ -44,4 +44,4 @@ If you're running the Agent, and you've intentionally [stopped][4] or [removed][
 [2]: /agent/
 [3]: /infrastructure/
 [4]: /agent/guide/agent-commands/#start-stop-restart-the-agent
-[5]: /agent/faq/how-do-i-uninstall-the-agent/
+[5]: /agent/guide/how-do-i-uninstall-the-agent/

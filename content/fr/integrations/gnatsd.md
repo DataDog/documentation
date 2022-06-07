@@ -19,7 +19,7 @@ git_integration_title: gnatsd
 guid: 7edcf450-d9cf-44aa-9053-ece04ac7c21d
 integration_id: gnatsd
 integration_title: Gnatsd
-integration_version: 1.0.0
+integration_version: 2.0.0
 is_public: true
 kind: integration
 maintainer: dev@goldstar.com
@@ -66,7 +66,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `gnatsd` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][7] et cherchez `gnatsd` dans la section Checks.
 
 ## Compatibilité
 

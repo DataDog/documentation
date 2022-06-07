@@ -53,9 +53,9 @@ When the string "my_key=" is found, all characters following the string until th
   pattern: (?:my_key=[^.])
 ```
 
-## Social Security numbers
+## Social Security numbers (US)
 
-Redact Social Security numbers.
+Redact United States Social Security numbers.
 
 ```yaml
   - type: mask_sequences

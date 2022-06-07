@@ -35,7 +35,7 @@ After searching, select one or more monitors to update using the checkboxes next
 
 To edit an individual monitor, hover over it and use the buttons to the far right: Edit, Clone, Mute, Delete. To see more details on a monitor, click its name to see the status page.
 
-**Note**: With the [Datadog Mobile App][5], you can view, mute, and unmute monitors on your mobile device.
+**Note**: You can view Monitor Saved Views from your mobile device home screen or view and mute monitors by downloading the [Datadog Mobile App][5], available on the [Apple App Store][9] and [Google Play Store][10].
 
 ### Triggered monitors
 
@@ -71,3 +71,5 @@ Monitor tags are independent of tags sent by the Agent or integrations. Add up t
 [6]: https://app.datadoghq.com/monitors/triggered
 [7]: https://app.datadoghq.com/monitors#downtime
 [8]: /getting_started/tagging/assigning_tags/?tab=monitors#ui
+[9]: https://apps.apple.com/app/datadog/id1391380318
+[10]: https://play.google.com/store/apps/details?id=com.datadog.app

@@ -41,7 +41,7 @@ Botprise の Datadog インテグレーションを使用すると、Webhook を
 
 ## セットアップ
 
-Botprise-Datadog インテグレーションを使用するには、Botprise ユーザーである必要があります。Botprise の詳細については、[https://www.botprise.com/][10] にアクセスしてください。
+Botprise-Datadog インテグレーションを使用するには、Botprise ユーザーである必要があります。Botprise の詳細については、[https://www.botprise.com/][1] をご覧ください。
 
 ### インストール
 

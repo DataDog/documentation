@@ -30,14 +30,12 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 You can put controls in place for both Indexed and Ingested span volumes. For more information, read the [Trace Ingestion][4] and [Retention][5] documentation.
 
-**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
-
 ## Database Monitoring
 
-* Datadog records the number of unique database hosts you are monitoring with Datadog Database Monitoring each hour. 
+* Datadog records the number of unique database hosts you are monitoring with Datadog Database Monitoring each hour.
   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* A **normalized query**, often called a query digest, represents an aggregate of queries with similar structure, differing only by the query parameters. Datadog charges based on the total number of configured normalized queries being tracked at any given time. 
+* A **normalized query**, often called a query digest, represents an aggregate of queries with similar structure, differing only by the query parameters. Datadog charges based on the total number of configured normalized queries being tracked at any given time.
 
 ## Log management
 
@@ -79,6 +77,12 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 * Datadog tracks the number of monthly active users who participate in incident management and response.
  * An **active user** is only counted if they contribute comments or signals (graphs, links, etc.) to an incident. Anyone who only opens or closes an incident or anyone who only views the incident are not counted. Additionally, these are not named seats, so you do not need to determine which specific users have access.
 
+## CI Visibility
+
+* Datadog tracks the number of unique committers who send test and pipeline data to the CI Visibility service.
+* A **committer** means an active git committer, identified by their git author email address. A committer is counted towards billing if they commit at least three times in a given month.
+  * In the event that a pipeline is not associated with a git repository, or git metadata is unavailable, the username of the person triggering the pipeline execution is used as the billable committer.
+* For Pipeline Visibility, every pipeline, pipeline stage, and pipeline job counts as a **pipeline span**. For Testing Visibility, every individual test run counts as a **test span**.
 
 ## Troubleshooting
 

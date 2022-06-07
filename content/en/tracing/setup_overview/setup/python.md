@@ -26,15 +26,13 @@ further_reading:
 ---
 ## Compatibility requirements
 
-Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
-
-When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][2] to start receiving profiling data from your app.
+The Python library supports CPython versions 2.7 and 3.5-3.10 on Linux, MacOS and Windows. For more information about Datadog's Python version support, see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
 ### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -59,6 +57,10 @@ For example, if your application is started with `python app.py` then:
 ```shell
 ddtrace-run python app.py
 ```
+
+### Upgrading to v1
+
+If you are upgrading to ddtrace v1, review the [upgrade guide][3] and the [release notes][4] in the library documentation for full details.
 
 ### Configure the Datadog Agent for APM
 
@@ -123,7 +125,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
      dogstatsd_url="unix:///var/run/datadog/dsd.socket",
    )
    ```
-{{< site-region region="us3,us5,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -153,28 +155,28 @@ For other environments, please refer to the [Integrations][5] documentation for 
 {{% /tab %}}
 {{< /tabs >}}
 
-Once you've finished setup and are running the tracer with your application, you can run `ddtrace-run --status` to check that configurations are working as expected. Note that the output from this command does not reflect configuration changes made during runtime in code.
+Once you've finished setup and are running the tracer with your application, you can run `ddtrace-run --info` to check that configurations are working as expected. Note that the output from this command does not reflect configuration changes made during runtime in code.
 
-For more advanced usage, configuration, and fine-grain control, see Datadog's [API documentation][3].
+For more advanced usage, configuration, and fine-grain control, see Datadog's [API documentation][2].
 
 ## Configuration
 
-When using **ddtrace-run**, the following [environment variable options][4] can be used:
+When using **ddtrace-run**, the following [environment variable options][5] can be used:
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
 Enable debug logging in the tracer.
 
-`DATADOG_PATCH_MODULES`
-: Override the modules patched for this application execution. Follow the format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`
+`DD_PATCH_MODULES`
+: Override the modules patched for this application execution. Follow the format: `DD_PATCH_MODULES=module:patch,module:patch...`
 
-It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][5] documentation for recommendations on how to configure these environment variables.
+It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][6] documentation for recommendations on how to configure these environment variables.
 
 `DD_ENV`
-: Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6]. Available in version 0.38+.
+: Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][7]. Available in version 0.38+.
 
 `DD_SERVICE`
-: The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you set the service name in code ([for example, see these Django docs][7]). Available in version 0.38+.
+: The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you set the service name in code ([for example, see these Django docs][8]). Available in version 0.38+.
 
 `DD_SERVICE_MAPPING`
 : Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
@@ -183,7 +185,10 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 : Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
 
 `DD_TRACE_SAMPLE_RATE`
-: Enable [Tracing without Limits][8].
+: Enable trace volume control
+
+`DD_TRACE_RATE_LIMIT`
+: Maximum number of spans to sample per-second, per-Python process. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
 `DD_TAGS`
 : A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.
@@ -224,11 +229,11 @@ Enable [connecting logs and trace injection][9].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/python
-[2]: /tracing/profiler/enabling/?tab=python
-[3]: https://app.datadoghq.com/apm/docs
-[4]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /tracing/guide/setting_primary_tags_to_scope/
-[7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
-[8]: /tracing/trace_ingestion/
+[2]: https://app.datadoghq.com/apm/docs
+[3]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
+[4]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
+[5]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
+[6]: /getting_started/tagging/unified_service_tagging
+[7]: /tracing/guide/setting_primary_tags_to_scope/
+[8]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
 [9]: /tracing/connect_logs_and_traces/python/

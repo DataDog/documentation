@@ -3,6 +3,10 @@ title: Infrastructure
 kind: documentation
 aliases:
   - /graphing/infrastructure/
+further_reading:
+  - link: "https://app.datadoghq.com/release-notes?category=Infrastructure%20Monitoring"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Infrastructure Monitoring releases! (App login required)."
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}
@@ -14,3 +18,7 @@ aliases:
     {{< nextlink href="/infrastructure/livecontainers" >}}<u>Live Containers</u> - Monitor the containers across your environment with real-time visibility.{{< /nextlink >}}
     {{< nextlink href="/serverless" >}}<u>Serverless</u> - Bring together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

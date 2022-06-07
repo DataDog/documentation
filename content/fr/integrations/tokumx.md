@@ -23,7 +23,7 @@ git_integration_title: tokumx
 guid: 7785939b-bfb6-4d3e-acc2-94c1f5fb33e7
 integration_id: tokumx
 integration_title: TokuMX
-integration_version: 2.3.3
+integration_version: 3.1.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -52,7 +52,7 @@ Ce check recueille des métriques TokuMX comme :
 
 ### Installation
 
-Le check TokuMX est inclus avec le paquet de l'[Agent Datadog][1] pour les versions <=6.x de l'Agent : vous n'avez donc rien d'autre à installer sur vos serveurs TokuMX.
+Le check TokuMX est inclus avec le package de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
@@ -91,7 +91,7 @@ Le check TokuMX est inclus avec le paquet de l'[Agent Datadog][1] pour les versi
    echo -e "\033[0;31mdatadog user - Missing\033[0m"
    ```
 
-Pour en savoir plus sur la création et la gestion des utilisateurs dans MongoDB, consultez [la documentation MongoDB][2].
+Pour en savoir plus sur la création et la gestion des utilisateurs dans MongoDB, consultez [documentation MongoDB sur la sécurité][2] (en anglais).
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -162,7 +162,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://www.mongodb.org/display/DOCS/Security+and+Authentication
+[2]: https://docs.mongodb.com/manual/security/
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/fr/help/
 [5]: https://www.datadoghq.com/blog/monitor-key-tokumx-metrics-mongodb-applications

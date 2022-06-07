@@ -1,19 +1,20 @@
 ---
-title: 統合サービスタグ付け
-kind: ドキュメント
 aliases:
-  - /ja/getting_started/tagging/unified_service_tagging
+- /ja/getting_started/tagging/unified_service_tagging
 further_reading:
-  - link: /getting_started/tagging/using_tags
-    tag: Documentation
-    text: Datadog アプリでのタグの使用方法
-  - link: /tracing/version_tracking
-    tag: Documentation
-    text: Datadog APM 内の Version タグを使用してデプロイを監視する
-  - link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
-    tag: ブログ
-    text: オートディスカバリーの詳細
+- link: /getting_started/tagging/using_tags
+  tag: Documentation
+  text: Datadog アプリでのタグの使用方法
+- link: /tracing/version_tracking
+  tag: Documentation
+  text: Datadog APM 内の Version タグを使用してデプロイを監視する
+- link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
+  tag: ブログ
+  text: オートディスカバリーの詳細
+kind: ドキュメント
+title: 統合サービスタグ付け
 ---
+
 ## 概要
 統合サービスタグ付けは、3 つの[予約済みタグ][1]である `env`、`service`、`version` を使用して Datadog テレメトリを結び付けます。
 
@@ -23,13 +24,15 @@ further_reading:
 - 一貫性のあるタグを使用して、トレース、メトリクス、ログ間をシームレスに移動する
 - Datadog サイト内で統一された方法で環境またはバージョンに基づいてサービスデータを表示する
 
-{{< img src="tagging/unified_service_tagging/overview.gif" alt="統合サービスタグ付け"  >}}
+{{< img src="tagging/unified_service_tagging/overview.mp4" alt="統合サービスタグ付け" video=true >}}
+
+**注**: オートディスカバリーログのコンフィギュレーションが存在しない場合、ログの公式サービスはフォルトでコンテナのショートイメージになります。ログの公式サービスを上書きするには、オートディスカバリーの [Docker ラベル/ポッドアノテーション][2]を追加します。例: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
 
 ### 要件
 
-- 統合サービスタグ付けには、[Datadog Agent][2] 6.19.x/7.19.x 以上のセットアップが必要です。
+- 統合サービスタグ付けには、[Datadog Agent][3] 6.19.x/7.19.x 以上のセットアップが必要です。
 
-- 統合サービスタグ付けには、[予約済みタグ][1]の新しいコンフィギュレーションに対応するトレーサーのバージョンが必要です。詳細は、言語別の[セットアップ手順][3]をご覧ください。
+- 統合サービスタグ付けには、[予約済みタグ][1]の新しいコンフィギュレーションに対応するトレーサーのバージョンが必要です。詳細は、言語別の[セットアップ手順][4]をご覧ください。
 
 
 | 言語         | トレーサー最小バージョン |
@@ -43,7 +46,7 @@ further_reading:
 | Python  |  0.38.0+      |
 | Ruby  |  0.34.0+      |
 
-- 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、コンフィギュレーションに進む前に、[タグの概要][1]および[タグの付け方][4]のドキュメントをお読みください。
+- 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、コンフィギュレーションに進む前に、[タグの概要][1]および[タグの付け方][5]のドキュメントをお読みください。
 
 ## コンフィギュレーション
 
@@ -58,9 +61,9 @@ further_reading:
 
 コンテナ化環境で統合サービスタグ付けをセットアップするには
 
-1. [オートディスカバリー][5]を有効にします。これにより、Datadog Agent は特定のコンテナで実行されているサービスを自動的に識別し、そのサービスからデータを収集して、環境変数を `env`、`service`、`version` タグにマッピングできます。
+1. [オートディスカバリー][6]を有効にします。これにより、Datadog Agent は特定のコンテナで実行されているサービスを自動的に識別し、そのサービスからデータを収集して、環境変数を `env`、`service`、`version` タグにマッピングできます。
 
-2. [Docker][6] を使用している場合は、Agent がコンテナの [Docker ソケット][7]にアクセスできることを確認してください。これにより、Agent は環境変数を検出し、それを標準タグにマッピングできます。
+2. [Docker][2] を使用している場合は、Agent がコンテナの [Docker ソケット][7]にアクセスできることを確認してください。これにより、Agent は環境変数を検出し、それを標準タグにマッピングできます。
 
 4. 以下に詳述する完全なコンフィギュレーションまたは部分的なコンフィギュレーションのいずれかに基づいて環境を構成します。
 
@@ -233,7 +236,7 @@ com.datadoghq.tags.version
 {{% tab "ECS" %}}
 ##### 完全なコンフィギュレーション
 
-コンテナのランタイム環境で、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` 環境変数と対応する Docker ラベルを設定して、統合サービスタグ付けの全範囲を取得します。たとえば、ECS タスク定義を通じて、このコンフィギュレーションをすべて 1 か所で設定できます。
+各サービスのコンテナのランタイム環境で、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` 環境変数と対応する Docker ラベルを設定して、統合サービスタグ付けの全範囲を取得します。たとえば、ECS タスク定義を通じて、このコンフィギュレーションをすべて 1 か所で設定できます。
 
 ```
 "environment": [
@@ -294,7 +297,7 @@ com.datadoghq.tags.version
 
 2. `DD_VERSION` でスパンを構成して、トレーサーに属するサービス (通常は `DD_SERVICE`) に属するすべてのスパンにバージョンを追加します。これは、サービスが外部サービスの名前でスパンを作成する場合、そのスパンはタグとして `version` を受信しないことを意味します。
 
-   バージョンがスパンに存在する限り、そのスパンから生成されたメトリクスをトレースするために追加されます。バージョンは、手動でコード内に追加するか、APM トレーサーによって自動的に追加できます。構成すると、少なくともこれらは APM および [DogStatsD クライアント][2]によって使用され、トレースデータと StatsD メトリクスに `env`、`service`、`version` でタグ付けします。有効にすると、APM トレーサーはこの変数の値もログに挿入します。
+    バージョンがスパンに存在する限り、そのスパンから生成されたメトリクスをトレースするために追加されます。バージョンは、手動でコード内に追加するか、APM トレーサーによって自動的に追加できます。構成すると、これらは APM および [DogStatsD クライアント][2]によって使用され、トレースデータと StatsD メトリクスに `env`、`service`、`version` でタグ付けします。有効にすると、APM トレーサーはこの変数の値もログに挿入します。
 
    **注**: **スパンごとに 1 つのサービス**しか存在できません。トレースメトリクスには、通常、単一のサービスもあります。ただし、ホストのタグで異なるサービスが定義されている場合、その構成されたサービスタグは、そのホストから発行されたすべてのトレースメトリクスに表示されます。
 
@@ -375,135 +378,22 @@ instances:
 
 #### AWS Lambda 関数
 
-AWS Lambda ベースのサーバーレスアプリケーションの構築およびデプロイ方法により、`env`、`service`、`version` タグをメトリクス、トレース、およびログに適用する方法はいくつかあります。
-
-*注*: これらのタグは、環境変数ではなく AWS リソースタグを介して指定されます。
-
-{{< tabs >}}
-
-{{% tab "Serverless Framework" %}}
-
-[タグ][1]オプションを使用して Lambda 関数をタグ付けします。
-
-```yaml
-# serverless.yml
-service: service-name
-provider:
-  name: aws
-  # タグをすべての関数に適用するには
-  tags:
-    env: "<ENV>"
-    service: "<SERVICE>"
-    version: "<VERSION>"
-
-functions:
-  hello:
-    # この関数は、上記で構成されたサービスレベルのタグを継承します
-    handler: handler.hello
-  world:
-    # この関数は、タグを上書きします
-    handler: handler.users
-    tags:
-      env: "<ENV>"
-      service: "<SERVICE>"
-      version: "<VERSION>"
-```
-
-[Datadog サーバーレスプラグイン][2]がインストールされている場合、プラグインがサーバーレスアプリケーション定義の `service` 値と `stage` 値を使用して、Lambda 関数に `service` タグと `env` タグを自動的にタグ付けします（`service` または `env` タグがすでに存在する場合を除く）。
-
-[1]: https://www.serverless.com/framework/docs/providers/aws/guide/functions#tags
-[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
-{{% /tab %}}
-
-{{% tab "AWS SAM" %}}
-
-[タグ][1]オプションを使用して Lambda 関数をタグ付けします。
-
-```yaml
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Resources:
-  MyLambdaFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Tags:
-        env: "<ENV>"
-        service: "<SERVICE>"
-        version: "<VERSION>"
-```
-
-[Datadog サーバーレスマクロ][2]がインストールされている場合は、`service` および `env` タグをパラーメーターとして指定することも可能です。
-
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      service: "<SERVICE>"
-      env: "<ENV>"
-```
-
-
-[1]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-tags
-[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "AWS CDK" %}}
-
-[タグのクラス][1]を使用して、アプリ、スタックまたは個別の Lambda 関数をタグ付けします。[Datadog サーバーレスマクロ][2]がインストールされている場合は、`service` および `env` タグをパラーメーターとして指定することも可能です。
-
-```javascript
-import * as cdk from "@aws-cdk/core";
-
-class CdkStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
-    this.addTransform("DatadogServerless");
-
-    new cdk.CfnMapping(this, "Datadog", {
-      mapping: {
-        Parameters: {
-          service: "<SERVICE>",
-          env: "<ENV>",
-        },
-      },
-    });
-  }
-}
-```
-
-
-[1]: https://docs.aws.amazon.com/cdk/latest/guide/tagging.html
-[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "Custom" %}}
-
-[Lambda 関数のタグ付け][1]に関する AWS のガイドに従い、`env`、`service`、`version` タグを適用します。
-
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
-{{% /tab %}}
-
-{{< /tabs >}}
-
-CloudFormation スタックで、[Datadog Forwarder][13] 用に `DdFetchLambdaTags` オプションが `true` に設定されていることを確認します。バージョン `3.19.0` 以降、このオプションはデフォルトで `true` になっています。
-
+[タグを使って Lambda テレメトリーを接続する方法][13]をご覧ください。
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /ja/getting_started/tagging/
-[2]: /ja/getting_started/agent
-[3]: /ja/tracing/setup
-[4]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
-[5]: /ja/getting_started/agent/autodiscovery
-[6]: /ja/agent/docker/integrations/?tab=docker
+[2]: /ja/agent/docker/integrations/?tab=docker
+[3]: /ja/getting_started/agent
+[4]: /ja/tracing/setup
+[5]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
+[6]: /ja/getting_started/agent/autodiscovery
 [7]: /ja/agent/docker/?tab=standard#optional-collection-agents
 [8]: /ja/getting_started/tracing/
 [9]: /ja/getting_started/logs/
 [10]: /ja/integrations/statsd/
 [11]: https://www.chef.io/
 [12]: https://www.ansible.com/
-[13]: /ja/serverless/forwarder/
+[13]: /ja/serverless/configuration/#connect-telemetry-using-tags

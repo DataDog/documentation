@@ -1,7 +1,6 @@
 ---
 title: Instrumenting your browser tests with RUM
 kind: guide
-aliases: /continuous_integration/guides/rum_integration/
 ---
 
 {{< site-region region="gov" >}}

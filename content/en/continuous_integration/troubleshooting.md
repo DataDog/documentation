@@ -17,7 +17,7 @@ kind: documentation
 
 1. Go to the [Setup Tracing on CI Tests][2] page for the language you're instrumenting and check the _Compatibility_ section. Make sure the testing framework you are using is supported.
 2. Check if you see any test results in the [Test Runs][3] section. If you do see results there, but not in the [Tests][4] section, Git information is missing. See [Data appears in Test Runs but not Tests](#data-appears-in-test-runs-but-not-tests) to troubleshoot it.
-3. For languages other than Swift, make sure the Datadog Agent is running on the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname or port, make sure you run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][5] in the tracer to check if it's able to connect to the Agent.
+3. If you are reporting the data through the Datadog Agent, make sure it is running on the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname or port, make sure you run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][5] in the tracer to check if it's able to connect to the Agent.
 4. If you still don't see any results, [contact Support][1] for troubleshooting help.
 
 ### Pipeline not found
@@ -96,7 +96,7 @@ This is done using the following algorithm:
 1. Compute a hash based on CI information to group the tests.
   a. If the tests include `ci.job.url`, use this tag to calculate the hash.
   b. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
-2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is the time difference between the start of the first test in the earliest job and the end of the last test in the latest job.
+2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is calculated for each job, and the maximum from all calculated wall times is shown.
 
 #### Possible issues with wall time calculation
 If you're using a library for testing time-dependent code, like [timecop][7] for Ruby or [FreezeGun][8] for Python, it is possible that test timestamps are wrong, and therefore calculated wall times. If this is the case, make sure that modifications to time are rolled back before finishing your tests.

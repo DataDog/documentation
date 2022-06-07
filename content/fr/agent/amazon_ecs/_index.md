@@ -10,28 +10,31 @@ further_reading:
   - link: /agent/amazon_ecs/apm/
     tag: Documentation
     text: Recueillir les traces de vos applications
-  - link: '/agent/amazon_ecs/data_collected/#metriques'
+  - link: /agent/amazon_ecs/data_collected/#metriques
     tag: Documentation
     text: Recueillir des métriques ECS
+  - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
+    tag: Blog
+    text: Ajout de la prise en charge d'Amazon ECS Anywhere
 ---
 ## Présentation
 
-Amazon ECS est un service d'orchestration de conteneurs hautement évolutif et performant qui prend en charge les conteneurs Docker. Grâce à l'Agent Datadog, vous pouvez surveiller des conteneurs et tâches ECS sur chaque instance EC2 de votre cluster.
+Amazon ECS est un service d'orchestration de conteneurs évolutif et à hautes performances qui prend en charge les conteneurs Docker. Grâce à l'Agent Datadog, vous pouvez surveiller des conteneurs et tâches ECS sur chaque instance EC2 de votre cluster.
 
 Cette page aborde la configuration d'Amazon ECS avec l'[Agent de conteneur Datadog v6][1]. Pour d'autres configurations, consultez les pages suivantes :
 
 - [Configuration de l'Agent de conteneur Datadog v5 pour Amazon ECS][2]
 - [Configuration de l'Agent pour host Datadog avec Autodiscovery][3]
 
-**Remarque** : **si vous souhaitez configurer ECS sur Fargate, suivez [cette documentation][4].**
+**Remarque** : **si vous souhaitez configurer ECS sur Fargate, consultez [Amazon ECS sur AWS Fargate][4].** AWS Batch n'est pas pris en charge.
 
 ## Configuration
 
 Pour commencer la configuration, exécutez l'[Agent Datadog][5] sur chaque instance EC2 de votre cluster ECS. Si vous n'avez pas configuré un cluster EC2 Container Service, consultez la [section de mise en route de la documentation ECS][6] pour définir un cluster. Une fois la configuration terminée, suivez les instructions ci-dessous.
 
-1. [Créer et ajouter une tâche ECS](#create-an-ecs-task)
-2. [Créer ou modifier votre stratégie IAM](#create-or-modify-your-iam-policy)
-3. [Planifier l'Agent Datadog en tant que service Daemon](#run-the-agent-as-a-daemon-service)
+1. [Créer et ajouter une tâche ECS](#creer-une-tache-ecs)
+2. [Créer ou modifier votre stratégie IAM](#creer-ou-modifier-votre-strategie-iam)
+3. [Planifier l'Agent Datadog en tant que service Daemon](#executer-l-agent-en-tant-que-service-daemon)
 4. **Facultatif** : [configurer la collecte de processus](#collecte-de-processus)
 5. **Facultatif** : [configurer la collection de données réseau (NPM)](#collecte-de-donnees-reseau-npm)
 
@@ -62,7 +65,13 @@ Configurez la tâche à l'aide des [outils del 'interface de ligne de commande A
 
 1. Pour les conteneurs Linux, téléchargez [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] si vous utilisez une AMI Amazon Linux 1 d'origine). Pour Windows, téléchargez [datadog-agent-ecs-win.json][3].
 2. Modifiez `datadog-agent-ecs.json` et remplacez `<YOUR_DATADOG_API_KEY>` par la [clé d'API Datadog][4] de votre compte.
-3. Facultatif : ajoutez un [check de santé de l'Agent](#check-de-sante-de-l-agent).
+3. Facultatif :  ajoutez le bloc suivant à la définition de votre tâche ECS à déployer sur un [cluster ECS Anywhere][5].
+
+    ```json
+    "requiresCompatibilities": ["EXTERNAL"]
+    ```
+
+4. Facultatif : ajoutez un check de santé de l'Agent.
 
     Ajoutez le bloc suivant à la définition de votre tâche ECS pour créer un check de santé de l'Agent :
 
@@ -76,12 +85,12 @@ Configurez la tâche à l'aide des [outils del 'interface de ligne de commande A
     }
     ```
 
-4. Facultatif : si vous êtes sur le site européen de Datadog, modifiez `datadog-agent-ecs.json` et définissez `DD_SITE` sur `DD_SITE:datadoghq.eu`.
-5. Facultatif : activez la collecte de logs en consultant la [rubrique dédiée][5].
-6. Facultatif : activez la collecte de processus en consultant la [rubrique dédiée](#collecte-de-processus).
-7. Facultatif : activez la collecte de traces (APM) en consultant la [rubrique dédiée][6].
-8. Facultatif : activez la collecte de données réseau (NPM) en consultant la [rubrique dédiée](#collecte-pour-la-surveillance-des-performances-reseau).
-9. Exécutez la commande suivante :
+5. Facultatif : si vous êtes sur le site européen de Datadog, modifiez `datadog-agent-ecs.json` et définissez `DD_SITE` sur `DD_SITE:datadoghq.eu`.
+6. Facultatif : activez la collecte de logs en consultant la [rubrique dédiée][6].
+7. Facultatif : activez la collecte de processus en consultant la [rubrique dédiée](#collecte-de-processus).
+8. Facultatif : activez la collecte de traces (APM) en consultant la [rubrique dédiée][7].
+9. Facultatif : activez la collecte de données réseau (NPM) en consultant la [rubrique dédiée](#collecte-pour-la-surveillance-des-performances-reseau).
+10. Exécutez la commande suivante :
 
 ```bash
 aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs.json>
@@ -90,15 +99,17 @@ aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs
 [1]: /resources/json/datadog-agent-ecs.json
 [2]: /resources/json/datadog-agent-ecs1.json
 [3]: /resources/json/datadog-agent-ecs-win.json
-[4]: https://app.datadoghq.com/account/settings#api
-[5]: /fr/agent/amazon_ecs/logs/
-[6]: /fr/agent/amazon_ecs/apm/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
+[6]: /fr/agent/amazon_ecs/logs/
+[7]: /fr/agent/amazon_ecs/apm/
 {{% /tab %}}
 {{% tab "Interface utilisateur Web" %}}
 
 1. Connectez-vous à votre console AWS et accédez à la section EC2 Container Service.
 2. Cliquez sur le cluster pour lequel vous souhaitez ajouter Datadog.
 3. Cliquez sur **Task Definitions** sur le côté gauche, puis cliquez ensuite sur le bouton **Create new Task Definition**.
+   Sélectionnez « External » comme type de lancement si vous prévoyez de déployer la tâche de l'Agent sur un cluster ECS Anywhere.
 4. Saisissez un **Task Definition Name**, tel que `datadog-agent-task`.
 5. Cliquez sur le lien **Add volume**.
 6. Pour **Name**, saisissez `docker_sock`. Pour **Source Path**, saisissez `/var/run/docker.sock` sous Linux ou `\\.\pipe\docker_engine` sous Windows. Cliquez sur **Add**.
@@ -106,9 +117,9 @@ aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs
 8. Pour Linux uniquement, ajoutez un autre volume avec le nom `cgroup` et le chemin source `/sys/fs/cgroup/` (ou `/cgroup/` si vous utilisez une AMI Amazon Linux 1 d'origine).
 9. Cliquez sur le gros bouton **Add container**.
 10. Pour **Container name**, saisissez `datadog-agent`.
-11. Pour le champ **Image**, saisissez `public.ecr.aws/datadog/agent:latest`.
+11. Pour le champ **Image**, saisissez `gcr.io/datadoghq/agent:latest`.
 12. Pour **Maximum memory**, indiquez `256`. **Remarque** : en cas d'utilisation intense des ressources, il se peut que vous ayez besoin de rehausser la limite de mémoire.
-13. Faites défiler jusqu'à atteindre la section **Advanced container configuration**, puis saisissez `10` pour **CPU units**.
+13. Descendez jusqu'à atteindre la section **Advanced container configuration**, puis saisissez `100` pour **CPU units**.
 **Remarque** : pour Windows, pour **CPU units**, saisissez au moins `512`, afin d'éviter l'erreur `Timeout while starting the service`.
 14. Pour **Env Variables**, ajoutez la **clé** `DD_API_KEY` et indiquez votre clé d'API Datadog en valeur. *Si vous préférez stocker ce type de secrets dans S3, consultez [le guide de configuration d'ECS][1].*
 15. Ajoutez une variable d'environnement supplémentaire pour chaque tag à ajouter en utilisant la clé `DD_TAGS`.
@@ -125,7 +136,7 @@ aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs
 
 ### Créer ou modifier votre stratégie IAM
 
-Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][13] afin de recueillir des métriques Amazon ECS. Pour en savoir plus sur les stratégies ECS, consultez [la documentation du site Web d'AWS][14].
+Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][13] afin de recueillir des métriques Amazon ECS. Pour en savoir plus sur les stratégies ECS, consultez la documentation du [site Web d'AWS][14].
 
 | Autorisation AWS                   | Description                                                   |
 | -------------------------------- | ------------------------------------------------------------- |
@@ -154,7 +165,7 @@ Pour recueillir des informations sur les processus pour l'ensemble de vos conten
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-1. Suivez les [instructions ci-dessus](#interface-de-ligne-de-commande-d-aws) pour installer l'Agent Datadog.
+1. Suivez les [instructions ci-dessus](#configuration) pour installer l'Agent Datadog.
 2. Modifiez votre fichier [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] si vous utilisez une AMI Amazon Linux d'origine) avec la configuration suivante :
 
 ```json
@@ -180,6 +191,10 @@ Pour recueillir des informations sur les processus pour l'ensemble de vos conten
         {
           "name": "DD_API_KEY",
           "value": "<VOTRE_CLÉ_API_DATADOG>"
+        },
+        {
+          "name": "DD_PROCESS_AGENT_ENABLED",
+          "value": "true"
         }
       ]
     }
@@ -202,7 +217,7 @@ Pour recueillir des informations sur les processus pour l'ensemble de vos conten
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-1. Suivez les [instructions ci-dessus](#interface-de-ligne-de-commande-d-aws) pour installer l'Agent Datadog.
+1. Suivez les [instructions ci-dessus](#configuration) pour installer l'Agent Datadog.
 2. Modifiez votre fichier [datadog-agent-ecs-win.json][1] avec la configuration suivante :
 
 ```json
@@ -230,8 +245,8 @@ Pour recueillir des informations sur les processus pour l'ensemble de vos conten
 
 **Cette fonction est uniquement disponible sous Linux.**
 
- 1. Suivez les [instructions ci-dessus](#interface-de-ligne-de-commande-d-aws) pour installer l'Agent Datadog.
-  - Si vous procédez à l'installation pour la première fois, il existe un fichier `datadog-agent-ecs.json`, [datadog-agent-sysprobe-ecs.json][16] ([datadog-agent-sysprobe-ecs1.json][17] si vous utilisez une AMI Amazon Linux d'origine), à utiliser avec les [instructions ci-dessus](#interface-de-ligne-de-commande-d-aws). Notez que la configuration initiale de la surveillance des performances réseau nécessite l'interface de ligne de commande, car vous ne pouvez pas ajouter `linuxParameters` dans l'interface utilisateur AWS.
+ 1. Suivez les [instructions ci-dessus](#configuration) pour installer l'Agent Datadog.
+  - Si vous procédez à l'installation pour la première fois, il existe un fichier `datadog-agent-ecs.json`, [datadog-agent-sysprobe-ecs.json][16] ([datadog-agent-sysprobe-ecs1.json][17] si vous utilisez une AMI Amazon Linux AMI d'origine), à utiliser avec les [instructions ci-dessus](#configuration). **Remarque** : la configuration initiale du Network Performance Monitoring nécessite l'interface de ligne de commande, car vous ne pouvez pas ajouter `linuxParameters` dans l'interface utilisateur AWS.
  2. Si vous avez déjà une définition de tâche, modifiez votre fichier [datadog-agent-ecs.json][18] ([datadog-agent-ecs1.json][19] si vous utilisez une AMI Amazon Linux d'origine) avec la configuration suivante :
 
  ```json
@@ -259,7 +274,11 @@ Pour recueillir des informations sur les processus pour l'ensemble de vos conten
             "SYS_ADMIN",
             "SYS_RESOURCE",
             "SYS_PTRACE",
-            "NET_ADMIN"
+            "NET_ADMIN",
+            "NET_BROADCAST",
+            "NET_RAW",
+            "IPC_LOCK",
+            "CHOWN"
           ]
         }
       },
@@ -297,7 +316,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][20].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://docs.datadoghq.com/fr/integrations/faq/agent-5-amazon-ecs/
 [3]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=docker
 [4]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/

@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - data store
-  - log collection
+- processing
+- data store
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/druid/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/druid/README.md
 display_name: Druid
 draft: false
 git_integration_title: druid
 guid: 8abd92f8-7383-45f2-a412-d6ee960baa15
 integration_id: druid
 integration_title: Druid
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,13 +32,17 @@ metric_prefix: druid.
 metric_to_check: druid.service.health
 name: druid
 public_title: Intégration Datadog/Druid
-short_description: 'Surveillez des métriques relatives aux requêtes, à l''ingestion et à la coordination.'
+short_description: Surveillez des métriques relatives aux requêtes, à l'ingestion
+  et à la coordination.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard Druid][1]
 
 ## Présentation
@@ -111,7 +116,7 @@ Utilisez la configuration par défaut de votre fichier `druid.d/conf.yaml` pour 
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans datadog.yaml :
 
@@ -147,21 +152,18 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 {{< get-metrics-from-git "druid" >}}
 
 
-### Checks de service
-
-**druid.process.can_connect** :<br>
-Renvoie `CRITICAL` si le check ne parvient pas à se connecter au processus Druid. Si ce n'est pas le cas, renvoie `OK`.
-
-**druid.process.health** :<br>
-Renvoie `CRITICAL` si le processus Druid n'est pas sain. Si ce n'est pas le cas, renvoie `OK`.
-
 ### Événements
 
 Le check Druid n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "druid" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/druid/images/druid_dashboard_overview.png
 [2]: https://docs.datadoghq.com/fr/developers/dogstatsd/
@@ -174,4 +176,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [9]: https://druid.apache.org/docs/latest/operations/including-extensions.html
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/druid/metadata.csv
-[12]: https://docs.datadoghq.com/fr/help/
+[12]: https://github.com/DataDog/integrations-core/blob/master/druid/assets/service_checks.json
+[13]: https://docs.datadoghq.com/fr/help/

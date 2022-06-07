@@ -54,15 +54,13 @@ An unexpected amount of logs has been indexed in index {{datadog_index.name}}
 
 ## Estimated usage dashboard
 
-From log usage metrics, an estimated usage Dashboard can also be built to monitor your Log Management usage across Datadog. Here is an example of such a Dashboard:
+Once you begin ingesting logs, an out-of-the-box [dashboard][5] summarizing your log usage metrics is automatically installed in your account.
 
-{{< img src="logs/guide/log_usage_dashboard.png" alt="Log estimated usage dashboard"  style="width:70%;">}}
+{{< img src="logs/guide/logslight.png" alt="Log estimated usage dashboard" style="width:70%;">}}
 
 **Note**: The metrics used in this dashboard are estimates and might differ from official billing numbers.
 
-To import this dashboard, copy the [estimated usage dashboard JSON definition][5] and paste it as a New Dashboard. Alternatively use the `Import Dashboard JSON` option in the settings cog menu in the upper right corner of a New Dashboard.
-
-**Note**: This JSON definition cannot be imported as a Timeboard or Screenboard.
+To access this dashboard, go to **Dashboards > Dashboards List** and search for `Log Management - Estimated Usage`.
 
 ## Monitor indexed logs with fixed threshold
 
@@ -81,11 +79,13 @@ Get notified if the indexed log volumes in any scope (`service`, `availability-z
 It is also possible to [set up a daily quota on indexes][8] to prevent indexing more than a given number of logs per day. When doing this, Datadog recommends that you set the above monitor to alert when 80% of this quota is reached within the past 24 hours.
 An event is generated when the daily quota is reached. Set up a monitor to be notified when this happens:
 
-{{< img src="logs/guide/daily_quota_monitor.png" alt="Daily quota Monitor"  style="width:70%;">}}
+{{< img src="logs/guide/daily_quota_event_monitor.png" alt="Configuration page of event monitor with Source:datadog in query and datadog_index selected in the group by section" style="width:70%;">}}
+
+Events generated when the daily quota is reached have the `datadog_index` tag by default, displaying the index name. You can optionally [create a facet][9] on the `datadog_index` tag, enabling its use in the `group by` step for [multi-alerts][10], as shown in the screenshot above.
 
 Here is an example of what the notification would look like in Slack:
 
-{{< img src="logs/guide/daily_quota_notification.png" alt="Notification on daily quota"  style="width:70%;">}}
+{{< img src="logs/guide/daily_quota_notification.png" alt="Notification on daily quota of datadog_index:retention-7" style="width:70%;">}}
 
 ## Further Reading
 
@@ -95,7 +95,9 @@ Here is an example of what the notification would look like in Slack:
 [2]: /monitors/create/types/anomaly/
 [3]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [4]: https://app.datadoghq.com/monitors#create/anomaly
-[5]: /resources/json/estimated_log_usage_dashboard_configuration.json
+[5]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [6]: https://app.datadoghq.com/logs
 [7]: /logs/explorer/search/
 [8]: /logs/indexes/#set-daily-quota
+[9]: /events/explorer/#facets
+[10]: /monitors/create/types/event/?tab=threshold#define-the-search-query

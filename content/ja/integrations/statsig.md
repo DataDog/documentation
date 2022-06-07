@@ -72,16 +72,17 @@ Statsig インテグレーションにより、Statsig でのコンフィギュ�
 
 ## トラブルシューティング
 
-ヘルプが必要な場合は、Statsig サポート（support@statsig.com）または[弊社までお問い合わせ][3]ください。
+ヘルプが必要ですか？[Statsig サポート][3]にお問い合わせいただくか、[Statsig ウェブサイト][4]をご覧ください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog マーケットプレイスの Statsig の提供とモニター機能のリリース][4]
+- [Datadog マーケットプレイスの Statsig の提供とモニター機能のリリース][5]
 
 [1]: https://console.statsig.com/integrations
 [2]: https://github.com/DataDog/integrations-extras/blob/master/statsig/metadata.csv
-[3]: https://www.statsig.com/contact
-[4]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
+[3]: mailto:support@statsig.com
+[4]: https://www.statsig.com/contact
+[5]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
 
