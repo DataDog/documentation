@@ -4856,8 +4856,10 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - UpdatePagerDutyIntegrationService
+        - UpdateOpsgenieService
       unstable: []
       order: 3
   - name: Get a single service object
@@ -4868,8 +4870,10 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - GetPagerDutyIntegrationService
+        - GetOpsgenieService
       unstable: []
       order: 2
   - name: Delete a single service object
@@ -4880,8 +4884,10 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - DeletePagerDutyIntegrationService
+        - DeleteOpsgenieService
       unstable: []
       order: 4
   - name: Create a new service object
@@ -4892,8 +4898,10 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CreatePagerDutyIntegrationService
+        - CreateOpsgenieService
       unstable: []
       order: 1
   - name: Screenboards
@@ -7297,6 +7305,22 @@ api:
         - ListRestrictionQueries
       unstable:
         - v2
+      order: 1
+  - name: Opsgenie Integration
+    url: /api/latest/opsgenie-integration/
+    identifier: opsgenie-integration
+    generated: true
+  - name: Get all service objects
+    url: '#get-all-service-objects'
+    identifier: get-all-service-objects
+    parent: opsgenie-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListOpsgenieServices
+      unstable: []
       order: 1
   - name: Processes
     url: /api/latest/processes/
