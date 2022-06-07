@@ -78,7 +78,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 To create a CI Test monitor:
 ### Define the search query
 
-1. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for a branch `main` using the following query: `@test.status:fail @git.branch:main`
+1. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for the `main` branch of the `myapp` test service using the following query: `@test.status:fail @git.branch:main @test.service:myapp`
 2. Choose to monitor over a CI Test event count, facet, or measure:
     * **Monitor over a CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Test events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a dimension**: If a dimension (qualitative facet) is selected, the monitor alerts over the `Unique value count` of the facet.
@@ -92,7 +92,7 @@ To create a CI Test monitor:
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:80%;" >}}
 
 #### Test runs with different parameters or configurations
-If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way, alerts trigger for test runs with specific test parameters or configurations. Using `@test.fignerpint` provides the same granularity level as the Test Stats, Failed and Flaky Tests section on the **Commit Overview** page.
+If you run tests with the same test full name, but different test parameters or configurations, it's recommended to use `@test.fingerprint` in the monitor group by. This way, alerts trigger for test runs with specific test parameters or configurations. Using `@test.fingerprint` provides the same granularity level as the Test Stats, Failed and Flaky Tests section on the **Commit Overview** page.
 
 For example, if a test with the same full name failed on Chrome, but passed on Firefox, then using the fingerprint only triggers the alert on the Chrome test run.
 

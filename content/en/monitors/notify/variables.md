@@ -297,7 +297,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 _Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI monitors][5]_
 
-To include **any** attribute or tag from a log, a trace span, a RUM event, a CI Pipeline, or a CI Test event matching the monitor query, use the following variables:
+To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
 | Monitor type    | Variable syntax                                  |
 |-----------------|--------------------------------------------------|
