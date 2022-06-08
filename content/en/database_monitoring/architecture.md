@@ -22,11 +22,11 @@ The steps required for setting up Database Monitoring in Datadog varies based on
 
 * [A Datadog Agent][1]
 * Host for your Datadog Agent
-* Read-only access for your Databases
+* Read-only access for your databases
 
 ### Agent
 
-The Datadog Agent is lightweight software that monitors system metrics such as CPU, Memory, and Network. It also connects to the Database as a SQL user. For self-hosted Databases, you can install the agent directly onto the host that’s hosting your Database. For cloud-managed databases such as AWS RDS and Azure SQL, the Agent should be configured to connect to these databases remotely.
+The Datadog Agent is lightweight software that monitors system metrics such as CPU, Memory, and Network. It also connects to the Database as a SQL user. For self-hosted Databases, you can install the agent directly onto the host that is hosting your Database. For cloud-managed databases such as AWS RDS and Azure SQL, the Agent should be configured to connect to these databases remotely.
 
 ### Host
 
@@ -34,7 +34,7 @@ The Datadog Agent is lightweight software that monitors system metrics such as C
 
 {{< img src="database_monitoring/dbm_architecture_self-hosted.png" alt="Some really good alt text" style="width:70%;">}}
 
-In a self-hosted setup, the Datadog Agent is used to collect system metrics from the OS host, database metrics directly from the database, as well as database logs.
+In a self-hosted setup, the Datadog Agent is used to collect system metrics from the OS host, database metrics directly from the database, and from database logs.
 
 * [System metrics collected on Postgres][2]
 * [System metrics collected on MySQL][3]
@@ -42,7 +42,7 @@ In a self-hosted setup, the Datadog Agent is used to collect system metrics from
 
 For self-hosted setups, you should install the Agent directly onto the database host so that you have full visibility into the health of your system running the database process.
 
-You need to grant the Agent read-only access to your database, as well as set up the integration configurations. The Agent needs to be able to login as a user to be able to run read-only queries on your database.
+You need to grant the Agent read-only access to your database, and set up the integration configurations. The Agent needs to be able to login as a user to be able to run read-only queries on your database.
 
 Instructions for setting up Database Monitoring with a self-hosted provider:
 
@@ -60,15 +60,15 @@ Database monitoring collects system metrics such as CPU, memory, disk usage, log
 
 You can install the Agent on any cloud VM (for example, EC2) as long as it can connect to your database instance(s).
 
-If you are not already running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. For example, you can use [AWS ECS][7] to host the Datadog Agent, as [the Agent already exists as a Docker container][8].
+If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. For example, you can use [AWS ECS][7] to host the Datadog Agent, as [the Agent already exists as a Docker container][8].
 
 ##### Kubernetes
 
-If you’re already running your apps on [Kubernetes][9], Datadog recommends using the [Datadog Cluster Agent with Database Monitoring][10], as this allows you to run [cluster checks][11] across your pods.
+If you are running your apps on [Kubernetes][9], Datadog recommends using the [Datadog Cluster Agent with Database Monitoring][10], as this allows you to run [cluster checks][11] across your pods.
 
 {{< img src="database_monitoring/dbm_architecture_clusters.png" alt="Some really good alt text" style="width:70%;">}}
 
-Using the [Cluster Agent][12] is preferred because it distributes the Database instances across a pool of agents for you. This ensures that only one instance of each check runs as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of Database instances so that the Cluster Agent can spread out the cluster checks across the different nodes.
+Using the [Cluster Agent][12] is preferred because it distributes the Database instances across a pool of agents for you. This ensures that only one instance of each check runs, as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of Database instances so that the Cluster Agent can spread out the cluster checks across the different nodes.
 
 
 
