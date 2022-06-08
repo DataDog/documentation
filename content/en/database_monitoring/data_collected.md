@@ -22,7 +22,7 @@ The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
 - **Postrgres**: `postgresql.queries.*`
 
-### Normalized queries ###
+## Normalized queries
 
 In order to eliminate redundant information and keep track of performance trends, identical queries with different parameters are grouped together by obfuscating the parameters. These query groups are called normalized queries and sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 200 normalized queries per database host. This also ensures that no sensitive data leaks into observability tools.
 
