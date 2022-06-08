@@ -501,7 +501,7 @@ events {
 # Datadog Agent の HTTP プロキシ
 http {
     server {
-        listen 3834; #listen for metrics
+        listen 3834; #メトリクスのリッスン
         access_log off;
 
         location /api/v1/validate {
@@ -518,42 +518,42 @@ http {
 # Datadog Agent の TCP プロキシ
 stream {
     server {
-        listen 3835; #listen for traces
+        listen 3835; #トレースのリッスン
         proxy_ssl on;
         proxy_pass trace.agent.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3836; #listen for profiles
+        listen 3836; #プロファイルのリッスン
         proxy_ssl on;
-        proxy_pass profile.agent.{{< region-param key="dd_site" >}}:443;
+        proxy_pass intake.profile.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3837; #listen for processes
+        listen 3837; #プロセスのリッスン
         proxy_ssl on;
         proxy_pass process.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3838; #listen for logs with use_http: true
+        listen 3838; #use_http: true でログのリッスン
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3839; #listen for database monitoring metrics
+        listen 3839; #データベースモニタリングメトリクスのリッスン
         proxy_ssl on;
         proxy_pass dbm-metrics-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3840; #listen for database monitoring samples
+        listen 3840; #データベースモニタリングサンプルのリッスン
         proxy_ssl on;
         proxy_pass dbquery-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3841; #listen for network devices metadata
+        listen 3841; #ネットワークデバイスメタデータのリッスン
         proxy_ssl on;
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3843; #listen for instrumentations telemetry data
+        listen 3843; #インスツルメンテーションテレメトリーデータのリッスン
         proxy_ssl on;
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
