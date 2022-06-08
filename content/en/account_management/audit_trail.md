@@ -9,8 +9,6 @@ further_reading:
   text: "Learn more about organization settings"
 ---
 
-<div class="alert alert-warning">This feature is in public beta. Contact <a href="https://www.datadoghq.com/support/">Datadog support</a> for more information.</div>
-
 ## Overview
 
 As an administrator or security team member, you can use [Audit Trail][1] to see who is using Datadog within your organization and the context in which they are using Datadog. As an individual, you can see a stream of your own actions, too.
@@ -37,15 +35,15 @@ For security admins or InfoSec teams, audit trail events help with compliance ch
 
 To enable Audit Trail Events, navigate to your [Organization Settings][2] and select *Audit Trail Settings* under *Security*. Click the **Enable** button.
 
-{{< img src="account_management/audit_logs/setup.png" alt="Audit Trail setup in Datadog" style="width:100%;">}}
+{{< img src="account_management/audit_logs/audit_enable.png" alt="Audit Trail setup in Datadog" style="width:100%;">}}
 
 ## Configuration
 
 ### Event types
 
-Event types are a collection of audit events. For example, the Authentication event type contains all events related to authentication and the Dashboards event type contains all the logs related to interacting with the dashboards product. To enable an event type, navigate to the *Audit Trail Settings* section of your [Organization Settings][2] and toggle on event types that are relevant to you.
+Event types are a collection of audit events. For example, the Authentication event type contains all events related to authentication and the Dashboards event type contains all the events related to interacting with the dashboards product. To enable an event type, navigate to the *Audit Trail Settings* section of your [Organization Settings][2] and toggle on event types that are relevant to you.
 
-{{< img src="account_management/audit_logs/event-types.png" alt="Audit Trail event types setup in Datadog" style="width:70%;">}}
+{{< img src="account_management/audit_logs/audit_toggles.png" alt="Audit Trail event types setup in Datadog" style="width:70%;">}}
 
 ### Archiving
 
@@ -65,9 +63,9 @@ The default retention period for an audit trail event is seven days. You can set
 
 To explore an audit trail event, navigate to the [Audit Trail][1] section, also accessible from your [Organizational Settings][2] in Datadog.
 
-{{< img src="account_management/audit_logs/explore-audit-logs.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
+{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
-Audit Trail events have the same functionality as logs within the Datadog [Logs Explorer][3]:
+Audit Trail events have the same functionality as logs within the Datadog Log Management[Logs Explorer][3]:
 
 - Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, etc), Authentication Attributes (Actor, API Key ID, User email, etc), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
 
@@ -79,23 +77,23 @@ Audit Trail events have the same functionality as logs within the Datadog [Logs 
 
 To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][4]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
 
-## Create a dashboard
+## Create a dashboard or a graph
 
 Give more visual context to your audit trail events with dashboards. To create an Audit Trail Events dashboard:
 
 1. Create a [New Dashboard][5] in Datadog.
 2. Select your visualization. You can visualize an Audit event as [top lists][6], [timeseries][7], and [log streams][8].
 3. [Graph your data][9]: Under edit, select *Audit Events* as the data source, and create a query. Audit events are filtered by count and can be grouped by different facets. Select a facet and limit.
-{{< img src="account_management/audit_logs/graph-your-data.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
+{{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-{{< img src="account_management/audit_logs/dashboard.png" alt="An Audit Trail dashboard" style="width:100%;">}}
+{{< img src="account_management/audit_logs/audit_dashboard.png" alt="An Audit Trail dashboard" style="width:100%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/audit/logs
+[1]: https://app.datadoghq.com/audit-trail
 [2]: https://app.datadoghq.com/organization-settings/
 [3]: /logs/explorer/
 [4]: /monitors/create/types/audit_logs/
