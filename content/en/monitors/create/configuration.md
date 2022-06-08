@@ -142,6 +142,20 @@ For some metrics that report periodically, it may make sense for triggered alert
 
 In most cases this setting is not useful because you only want an alert to resolve once it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
 
+#### Group retention time
+
+Drop the group from the monitor status after `N` hours (can be set up to 72 hours).
+
+Similar to the Auto-resolve option, the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group is kept for 24h in the status before it's dropped.
+
+Typical use cases for defining a retention time are:
+- you would like to drop the group immediately/shortly after data stops reporting
+- you would like to keep the group in the status for as long as you usually take for troubleshooting
+
+The start time of the group retention as well as the auto-resolve option are **identical**, namely as soon as the first, empty evaluation occurs. For example, if you would like to resolve a group af
+
+**Note**: This option is only available for multi-alert monitors as simple-alert monitors do not have groups.
+
 #### New group delay
 
 Delay the evaluation start by `N` seconds for new groups.
