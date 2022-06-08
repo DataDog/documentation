@@ -190,6 +190,7 @@ start: clean source-helpers examples ## Build the documentation with all externa
 		PULL_RBAC_PERMISSIONS=${PULL_RBAC_PERMISSIONS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		LOCAL=${LOCAL}\
+		LANGS_TO_IGNORE=${LANGS_TO_IGNORE}\
 		run-site.sh; \
 	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
 
@@ -202,7 +203,6 @@ start-no-pre-build: clean source-helpers ## Build the documentation without auto
 
 stop:  ## Stop wepack watch/hugo server.
 	@echo "stopping previous..."
-	@pkill -x hugo server --renderToDisk || true
 
 clean-go-examples:
 	@git clean -xdf content/en/api/**/*.go
@@ -269,8 +269,7 @@ examples: examples/go examples/java examples/python examples/ruby examples/types
 
 start-docker: clean
 	GITHUB_TOKEN=${GITHUB_TOKEN} \
-  LANGS_TO_IGNORE=${LANGS_TO_IGNORE} \
-	docker-compose -f ./docker-compose-docs.yml up
+	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -f ./docker-compose-docs.yml up
 
 stop-docker:
 	docker-compose -f ./docker-compose-docs.yml down

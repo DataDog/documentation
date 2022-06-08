@@ -39,7 +39,7 @@ if [ ${RUN_SERVER} = true ]; then
   npm --global install yarn && \
   npm cache clean --force && yarn install --frozen-lockfile
   echo "Starting Hugo build via Docker....."
-	yarn run docker:start
+	LANGS_TO_IGNORE=${LANGS_TO_IGNORE} yarn run docker:start
 
   sleep 5
 
