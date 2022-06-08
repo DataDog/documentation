@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "name": "Example-Create_a_new_service_object_returns_CREATED_response",
+      "opsgenie_api_key": "00000000-0000-0000-0000-000000000000",
+      "region": "us"
+    },
+    "type": "opsgenie-service"
+  }
+}

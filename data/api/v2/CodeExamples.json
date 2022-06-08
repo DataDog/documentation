@@ -504,6 +504,13 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
+  "CreateOpsgenieService": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Create a new service object returns \"CREATED\" response"
+    }
+  ],
   "UploadIdPMetadata": [
     {
       "group": "organizations",
