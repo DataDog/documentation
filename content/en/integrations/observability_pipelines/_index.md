@@ -51,7 +51,7 @@ Now that you are sending configuration data to Observability Pipelines, start ge
 
 ### Monitor the entire health of your Vector pipelines
 
-Get a holistic view of all of your pipelines’ topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows. 
+Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows. 
 
 {{< img src="integrations/observability_pipelines/config-map.png" alt="test" style="width:80%;" >}}
 
