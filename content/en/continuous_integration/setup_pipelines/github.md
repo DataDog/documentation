@@ -24,7 +24,7 @@ further_reading:
 Supported GitHub versions:
 * GitHub.com (SaaS)
 
-GitHub Enterprise is not supported.
+GitHub Enterprise Server is not supported.
 
 ## Configuring the Datadog integration
 
