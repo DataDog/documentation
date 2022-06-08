@@ -43,7 +43,7 @@ To enable Audit Trail Events, navigate to your [Organization Settings][2] and se
 
 Event types are a collection of audit events. For example, the Authentication event type contains all events related to authentication and the Dashboards event type contains all the events related to interacting with the dashboards product. To enable an event type, navigate to the *Audit Trail Settings* section of your [Organization Settings][2] and toggle on event types that are relevant to you.
 
-{{< img src="account_management/audit_logs/audit_toggles.png" alt="Audit Trail event types setup in Datadog" style="width:70%;">}}
+{{< img src="account_management/audit_logs/audit_toggles.png" alt="Audit Trail event types setup in Datadog" style="width:50%;">}}
 
 ### Archiving
 
@@ -57,13 +57,13 @@ Retaining events is an optional feature for Audit Trail. To enable, navigate to 
 
 The default retention period for an audit trail event is seven days. You can set a retention period between three and 90 days.
 
-{{< img src="account_management/audit_logs/retention.png" alt="Audit Trail Retention setup in Datadog" style="width:80%;">}}
+{{< img src="account_management/audit_logs/retention.png" alt="Audit Trail Retention setup in Datadog" style="width:50%;">}}
 
 ## Explore Audit Trail Events
 
 To explore an audit trail event, navigate to the [Audit Trail][1] section, also accessible from your [Organizational Settings][2] in Datadog.
 
-{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
+{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:30%;">}}
 
 Audit Trail events have the same functionality as logs within the Datadog Log Management[Logs Explorer][3]:
 
