@@ -54,7 +54,7 @@ SELECT * FROM timeperiods WHERE start >= ? AND end <= ? AND num = ?
 
 ## Sensitive information
 
-Because Database Monitoring Agent normalizes queries, it obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in query metrics, query samples, or explain plans.
+Because Database Monitoring Agent normalizes queries, it obfuscates all query bind parameters sent to the Datadog intake. Thus, passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database are not viewable in query metrics, query samples, or explain plans.
 
 However, there are some common sources of data risks:
 
