@@ -89,98 +89,37 @@ For more information, see the [JavaScript tracer installation docs][5].
 
 ## Instrument your tests
 
-{{< tabs >}}
-{{% tab "Jest" %}}
+### Mocha, jest or cucumber
 
-1. Configure a custom [`testEnvironment`][1] in your `jest.config.js` or however you are configuring `jest`:
+You may initialize the CI Visibility mode of the Datadog library by setting the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`.
 
-```javascript
-module.exports = {
-  // ...
-  // It may be another route. It refers to the file below.
-  testEnvironment: '<rootDir>/testEnvironment.js',
-  // ...
-}
-```
-
-2. In `testEnvironment.js`:
-
-```javascript
-
-// Only activates test instrumentation on CI
-if (process.env.DD_ENV === 'ci') {
-  require('dd-trace/ci/jest/env')
-}
-// jest-environment-jsdom is an option too
-module.exports = require('jest-environment-node')
-```
-
-### Jest@28
-
-If you are using `jest@28` and `jest-environment-node`, update your environment following the [`jest` documentation][1]:
-
-```javascript
-
-if (process.env.DD_ENV === 'ci') {
-  require('dd-trace/ci/jest/env')
-}
-
-module.exports = require('jest-environment-node').default
-```
-
-Since `jest-environment-jsdom` is not included in `jest@28`, you need to install it separately. Also, `jest>=28` is only supported from `dd-trace>=2.7.0`.
-
-<div class="alert alert-warning"><strong>Note</strong>: <code>jest-environment-node</code>, <code>jest-environment-jsdom</code>, <code>jest-jasmine2</code>, and <code>jest-circus</code> (as of Jest 27) are installed together with <code>jest</code>, so they do not normally appear in your <code>package.json</code>. If you've extracted any of these libraries in your <code>package.json</code>, make sure the installed versions are the same as the one of <code>jest</code>.</div>
-
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-```bash
-DD_ENV=ci DD_SERVICE=my-javascript-app npm test
-```
-
-
-[1]: https://jestjs.io/docs/en/configuration#testenvironment-string
-{{% /tab %}}
-
-{{% tab "Mocha" %}}
-
-Add `--require dd-trace/ci/init` to the run command for your `mocha` tests, for example in your `package.json`:
-
-```json
-"scripts": {
-  "test": "mocha --require dd-trace/ci/init"
-},
-```
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-```bash
-DD_ENV=ci DD_SERVICE=my-javascript-app npm test
-```
-
-{{% /tab %}}
-{{% tab "Cucumber" %}}
-
-Add `--require-module dd-trace/ci/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
-
-{{< code-block lang="json" filename="package.json" >}}
-"scripts": {
-  "test": "cucumber-js --require-module=dd-trace/ci/init"
-},
-{{< /code-block >}}
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+You may then run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci DD_SERVICE=my-javascript-app npm test
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 {{< /code-block >}}
 
-{{% /tab %}}
+### Using `yarn>=2`
 
-{{% tab "Cypress" %}}
+If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
 
-1. Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+You can fix it by setting `NODE_OPTIONS` to the following:
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
+{{< /code-block >}}
+
+### Cypress tests
+
+If you're running Cypress tests, you may **not** initialize the Datadog Library via `NODE_OPTIONS`. Follow these instructions to do it:
+
+#### Plugins file
+
+Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
 {{< code-block lang="json" filename="cypress.json" >}}
 {
   "pluginsFile": "dd-trace/ci/cypress/plugin"
@@ -195,12 +134,13 @@ module.exports = (on, config) => {
 }
 {{< /code-block >}}
 
-2. Add the following line to the [`supportFile`][3]:
+#### Support file
+
+Add the following line to the [`supportFile`][3]:
 {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
 // your previous code is before this line
 require('dd-trace/ci/cypress/support')
 {{< /code-block >}}
-
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
@@ -236,8 +176,6 @@ If the browser application being tested is instrumented using [RUM][4], your Cyp
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [4]: /real_user_monitoring/browser/#setup
 [5]: /continuous_integration/guides/rum_integration/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Configuration settings
 
@@ -311,25 +249,6 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 `DD_GIT_COMMIT_COMMITTER_DATE`
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
-
-## Agentless (Beta)
-
-To instrument your test suite without requiring an Agent, configure the following environment variables:
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED` (Required)
-: Enables or disables Agentless mode.<br/>
-**Default**: `false`
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][7] used to upload the test results.<br/>
-**Default**: `(empty)`
-
-Additionally, configure which [Datadog site][6] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
-
-`DD_SITE` (Required)
-: The [Datadog site][8] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ## Known limitations
 
