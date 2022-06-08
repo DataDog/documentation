@@ -24,7 +24,7 @@ The metrics used for Database Monitoring views are, primarily:
 
 ## Normalized queries
 
-In order to eliminate redundant information and keep track of performance trends, identical queries with different parameters are grouped together by obfuscating the parameters. These query groups are called normalized queries and sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 200 normalized queries per database host. This also ensures that no sensitive data leaks into observability tools.
+In order to eliminate redundant information and keep track of performance trends, Database Monitoring groups together identical queries with different parameters by obfuscating the parameters. These query groups are called normalized queries and are sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 200 normalized queries per database host. This process also ensures that no sensitive data leaks into observability tools.
 
 For example, you may see many queries retrieving data from the same table by id:
 
@@ -34,19 +34,19 @@ SELECT * FROM customers WHERE id = 24435;
 SELECT * FROM customers WHERE id = 34322;
 ```
 
-These will all appear as a normalized query that replaces parameters with ?
+These appear together as a normalized query that replaces the parameter with `?`.
 
 ```sql
 SELECT * FROM customers WHERE id = ?
 ```
 
-Any number of parameters will follow the same pattern:
+Queries with multiple parameters follow the same pattern:
 
 ```sql
 SELECT * FROM timeperiods WHERE start >= '2022-01-01' AND end <= '2022-12-31' AND num = 5
 ```
 
-becomes
+The query above with specific parameters becomes the obfuscated version below:
 
 ```sql
 SELECT * FROM timeperiods WHERE start >= ? AND end <= ? AND num = ?
