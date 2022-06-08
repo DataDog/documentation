@@ -101,6 +101,8 @@ class SampleRegistry
 }
 ```
 
+The two files above contain all the functions and methods that are interesting to instrument.
+
 ### Writing the custom instrumentation
 
 <div class="alert alert-info">
@@ -139,6 +141,8 @@ Registering the instrumentation entry point, as described below, in the <code>co
 The first thing to check is if the extension is loaded. If the extension is not loaded then all the functions used in this file do not exist.
 
 ```
+// file: datadog/instrumentation.php
+
 if (!extension_loaded('ddtrace')) {
     return;
 }
@@ -153,6 +157,10 @@ Then instrument the function `\App\some_utility_function`. If you are not intere
 For `SampleRegistry::put` method you do not only want to generate a span, you also want to add a tag with the value of the returned item identifier and a tag for the key. Since this is a method, use `\DDTrace\trace_method` in place of `\DDTrace\trace_function`:
 
 ```
+// file: datadog/instrumentation.php
+
+...
+
 \DDTrace\trace_method(
     'App\Services\SampleRegistry',
     'put',
@@ -170,6 +178,10 @@ When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy d
 `SampleRegistry::faultyMethod` generates an exception. There is nothing your have to do with regards to custom instrumentation. If the method is instrumented, the default exception reporting mechanism takes care of attaching the exception message and the stack trace.
 
 ```
+// file: datadog/instrumentation.php
+
+...
+
 \DDTrace\trace_method(
     'App\Services\SampleRegistry',
     'faultyMethod',
@@ -181,6 +193,10 @@ When you set tags, never do <code>$span->meta = ['my' => 'tag']</code>. Alwasy d
 `SampleRegistry::get` uses a `NotFound` exception to notify that an item was not found. This exception is an expected part of the businees logic and you do not want to mark the span as errored. You just want to change the resource name in order to add it to a pool of `not_found` operations. In order to achieve that, you `unset` the exception for the span.
 
 ```
+// file: datadog/instrumentation.php
+
+...
+
 \DDTrace\trace_method(
     'App\Services\SampleRegistry',
     'get',
@@ -198,6 +214,10 @@ The method `SampleRegistry::compact` presents an interesting use case. You are i
 In `datadog/instrumentation.php` add
 
 ```
+// file: datadog/instrumentation.php
+
+...
+
 \DDTrace\trace_method(
     'App\Services\SampleRegistry',
     'compact',
@@ -209,6 +229,10 @@ In `datadog/instrumentation.php` add
 In `src/Services/SampleRegistry.php` edit the body of the method
 
 ```
+// file: src/Services/SampleRegistry.php
+
+...
+
     public function compact()
     {
         // This function execute some operations on the registry and
