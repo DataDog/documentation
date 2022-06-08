@@ -325,6 +325,15 @@
           "type": "string"
         }
       },
+      "OpsgenieServiceIDPathParameter": {
+        "description": "The UUID of the service.",
+        "in": "path",
+        "name": "integration_service_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "PageNumber": {
         "description": "Specific page number to return.",
         "in": "query",
@@ -24568,6 +24577,639 @@
         "required": [
           "id",
           "type"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceCreateAttributes": {
+        "description": "The Opsgenie service attributes for a create request.",
+        "properties": {
+          "custom_url": {
+            "description": "The custom URL for a custom region.",
+            "example": "https://example.com",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name for the Opsgenie service.",
+            "example": "fake-opsgenie-service-name",
+            "type": "string"
+          },
+          "opsgenie_api_key": {
+            "description": "The Opsgenie API key for your Opsgenie service.",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region for the Opsgenie service.",
+            "enum": [
+              "us",
+              "eu",
+              "custom"
+            ],
+            "example": "us",
+            "type": "string",
+            "x-enum-varnames": [
+              "US",
+              "EU",
+              "CUSTOM"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "opsgenie_api_key",
+          "region"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceCreateData": {
+        "description": "Opsgenie service data for a create request.",
+        "properties": {
+          "attributes": {
+            "description": "The Opsgenie service attributes for a create request.",
+            "properties": {
+              "custom_url": {
+                "description": "The custom URL for a custom region.",
+                "example": "https://example.com",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name for the Opsgenie service.",
+                "example": "fake-opsgenie-service-name",
+                "type": "string"
+              },
+              "opsgenie_api_key": {
+                "description": "The Opsgenie API key for your Opsgenie service.",
+                "example": "00000000-0000-0000-0000-000000000000",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region for the Opsgenie service.",
+                "enum": [
+                  "us",
+                  "eu",
+                  "custom"
+                ],
+                "example": "us",
+                "type": "string",
+                "x-enum-varnames": [
+                  "US",
+                  "EU",
+                  "CUSTOM"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "opsgenie_api_key",
+              "region"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "opsgenie-service",
+            "description": "Opsgenie service resource type.",
+            "enum": [
+              "opsgenie-service"
+            ],
+            "example": "opsgenie-service",
+            "type": "string",
+            "x-enum-varnames": [
+              "OPSGENIE_SERVICE"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceCreateRequest": {
+        "description": "Create request for an Opsgenie service.",
+        "properties": {
+          "data": {
+            "description": "Opsgenie service data for a create request.",
+            "properties": {
+              "attributes": {
+                "description": "The Opsgenie service attributes for a create request.",
+                "properties": {
+                  "custom_url": {
+                    "description": "The custom URL for a custom region.",
+                    "example": "https://example.com",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name for the Opsgenie service.",
+                    "example": "fake-opsgenie-service-name",
+                    "type": "string"
+                  },
+                  "opsgenie_api_key": {
+                    "description": "The Opsgenie API key for your Opsgenie service.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "The region for the Opsgenie service.",
+                    "enum": [
+                      "us",
+                      "eu",
+                      "custom"
+                    ],
+                    "example": "us",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "US",
+                      "EU",
+                      "CUSTOM"
+                    ]
+                  }
+                },
+                "required": [
+                  "name",
+                  "opsgenie_api_key",
+                  "region"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "opsgenie-service",
+                "description": "Opsgenie service resource type.",
+                "enum": [
+                  "opsgenie-service"
+                ],
+                "example": "opsgenie-service",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPSGENIE_SERVICE"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceRegionType": {
+        "description": "The region for the Opsgenie service.",
+        "enum": [
+          "us",
+          "eu",
+          "custom"
+        ],
+        "example": "us",
+        "type": "string",
+        "x-enum-varnames": [
+          "US",
+          "EU",
+          "CUSTOM"
+        ]
+      },
+      "OpsgenieServiceResponse": {
+        "description": "Response of an Opsgenie service.",
+        "properties": {
+          "data": {
+            "description": "Opsgenie service data from a response.",
+            "properties": {
+              "attributes": {
+                "description": "The attributes from an Opsgenie service response.",
+                "properties": {
+                  "custom_url": {
+                    "description": "The custom URL for a custom region.",
+                    "example": "https://example.com",
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name for the Opsgenie service.",
+                    "example": "fake-opsgenie-service-name",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "The region for the Opsgenie service.",
+                    "enum": [
+                      "us",
+                      "eu",
+                      "custom"
+                    ],
+                    "example": "us",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "US",
+                      "EU",
+                      "CUSTOM"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The ID of the Opsgenie service.",
+                "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                "type": "string"
+              },
+              "type": {
+                "default": "opsgenie-service",
+                "description": "Opsgenie service resource type.",
+                "enum": [
+                  "opsgenie-service"
+                ],
+                "example": "opsgenie-service",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPSGENIE_SERVICE"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceResponseAttributes": {
+        "description": "The attributes from an Opsgenie service response.",
+        "properties": {
+          "custom_url": {
+            "description": "The custom URL for a custom region.",
+            "example": "https://example.com",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "The name for the Opsgenie service.",
+            "example": "fake-opsgenie-service-name",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region for the Opsgenie service.",
+            "enum": [
+              "us",
+              "eu",
+              "custom"
+            ],
+            "example": "us",
+            "type": "string",
+            "x-enum-varnames": [
+              "US",
+              "EU",
+              "CUSTOM"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "OpsgenieServiceResponseData": {
+        "description": "Opsgenie service data from a response.",
+        "properties": {
+          "attributes": {
+            "description": "The attributes from an Opsgenie service response.",
+            "properties": {
+              "custom_url": {
+                "description": "The custom URL for a custom region.",
+                "example": "https://example.com",
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "The name for the Opsgenie service.",
+                "example": "fake-opsgenie-service-name",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region for the Opsgenie service.",
+                "enum": [
+                  "us",
+                  "eu",
+                  "custom"
+                ],
+                "example": "us",
+                "type": "string",
+                "x-enum-varnames": [
+                  "US",
+                  "EU",
+                  "CUSTOM"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The ID of the Opsgenie service.",
+            "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+            "type": "string"
+          },
+          "type": {
+            "default": "opsgenie-service",
+            "description": "Opsgenie service resource type.",
+            "enum": [
+              "opsgenie-service"
+            ],
+            "example": "opsgenie-service",
+            "type": "string",
+            "x-enum-varnames": [
+              "OPSGENIE_SERVICE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceType": {
+        "default": "opsgenie-service",
+        "description": "Opsgenie service resource type.",
+        "enum": [
+          "opsgenie-service"
+        ],
+        "example": "opsgenie-service",
+        "type": "string",
+        "x-enum-varnames": [
+          "OPSGENIE_SERVICE"
+        ]
+      },
+      "OpsgenieServiceUpdateAttributes": {
+        "description": "The Opsgenie service attributes for an update request.",
+        "properties": {
+          "custom_url": {
+            "description": "The custom URL for a custom region.",
+            "example": "https://example.com",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "The name for the Opsgenie service.",
+            "example": "fake-opsgenie-service-name",
+            "type": "string"
+          },
+          "opsgenie_api_key": {
+            "description": "The Opsgenie API key for your Opsgenie service.",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region for the Opsgenie service.",
+            "enum": [
+              "us",
+              "eu",
+              "custom"
+            ],
+            "example": "us",
+            "type": "string",
+            "x-enum-varnames": [
+              "US",
+              "EU",
+              "CUSTOM"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "OpsgenieServiceUpdateData": {
+        "description": "Opsgenie service for an update request.",
+        "properties": {
+          "attributes": {
+            "description": "The Opsgenie service attributes for an update request.",
+            "properties": {
+              "custom_url": {
+                "description": "The custom URL for a custom region.",
+                "example": "https://example.com",
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "The name for the Opsgenie service.",
+                "example": "fake-opsgenie-service-name",
+                "type": "string"
+              },
+              "opsgenie_api_key": {
+                "description": "The Opsgenie API key for your Opsgenie service.",
+                "example": "00000000-0000-0000-0000-000000000000",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region for the Opsgenie service.",
+                "enum": [
+                  "us",
+                  "eu",
+                  "custom"
+                ],
+                "example": "us",
+                "type": "string",
+                "x-enum-varnames": [
+                  "US",
+                  "EU",
+                  "CUSTOM"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The ID of the Opsgenie service.",
+            "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+            "type": "string"
+          },
+          "type": {
+            "default": "opsgenie-service",
+            "description": "Opsgenie service resource type.",
+            "enum": [
+              "opsgenie-service"
+            ],
+            "example": "opsgenie-service",
+            "type": "string",
+            "x-enum-varnames": [
+              "OPSGENIE_SERVICE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceUpdateRequest": {
+        "description": "Update request for an Opsgenie service.",
+        "properties": {
+          "data": {
+            "description": "Opsgenie service for an update request.",
+            "properties": {
+              "attributes": {
+                "description": "The Opsgenie service attributes for an update request.",
+                "properties": {
+                  "custom_url": {
+                    "description": "The custom URL for a custom region.",
+                    "example": "https://example.com",
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name for the Opsgenie service.",
+                    "example": "fake-opsgenie-service-name",
+                    "type": "string"
+                  },
+                  "opsgenie_api_key": {
+                    "description": "The Opsgenie API key for your Opsgenie service.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "The region for the Opsgenie service.",
+                    "enum": [
+                      "us",
+                      "eu",
+                      "custom"
+                    ],
+                    "example": "us",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "US",
+                      "EU",
+                      "CUSTOM"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The ID of the Opsgenie service.",
+                "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                "type": "string"
+              },
+              "type": {
+                "default": "opsgenie-service",
+                "description": "Opsgenie service resource type.",
+                "enum": [
+                  "opsgenie-service"
+                ],
+                "example": "opsgenie-service",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPSGENIE_SERVICE"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServicesResponse": {
+        "description": "Response with a list of Opsgenie services.",
+        "properties": {
+          "data": {
+            "description": "An array of Opsgenie services.",
+            "example": [
+              {
+                "attributes": {
+                  "custom_url": null,
+                  "name": "fake-opsgenie-service-name",
+                  "region": "us"
+                },
+                "id": "596da4af-0563-4097-90ff-07230c3f9db3",
+                "type": "opsgenie-service"
+              },
+              {
+                "attributes": {
+                  "custom_url": null,
+                  "name": "fake-opsgenie-service-name-2",
+                  "region": "eu"
+                },
+                "id": "0d2937f1-b561-44fa-914a-99910f848014",
+                "type": "opsgenie-service"
+              }
+            ],
+            "items": {
+              "description": "Opsgenie service data from a response.",
+              "properties": {
+                "attributes": {
+                  "description": "The attributes from an Opsgenie service response.",
+                  "properties": {
+                    "custom_url": {
+                      "description": "The custom URL for a custom region.",
+                      "example": "https://example.com",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The name for the Opsgenie service.",
+                      "example": "fake-opsgenie-service-name",
+                      "type": "string"
+                    },
+                    "region": {
+                      "description": "The region for the Opsgenie service.",
+                      "enum": [
+                        "us",
+                        "eu",
+                        "custom"
+                      ],
+                      "example": "us",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "US",
+                        "EU",
+                        "CUSTOM"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "The ID of the Opsgenie service.",
+                  "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "opsgenie-service",
+                  "description": "Opsgenie service resource type.",
+                  "enum": [
+                    "opsgenie-service"
+                  ],
+                  "example": "opsgenie-service",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "OPSGENIE_SERVICE"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "type",
+                "attributes"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "data"
         ],
         "type": "object"
       },
@@ -52095,6 +52737,1126 @@
           "type": "idempotent"
         },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+      }
+    },
+    "/api/v2/integration/opsgenie/services": {
+      "get": {
+        "description": "Get a list of all services from the Datadog Opsgenie integration.",
+        "operationId": "ListOpsgenieServices",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response with a list of Opsgenie services.",
+                  "properties": {
+                    "data": {
+                      "description": "An array of Opsgenie services.",
+                      "example": [
+                        {
+                          "attributes": {
+                            "custom_url": null,
+                            "name": "fake-opsgenie-service-name",
+                            "region": "us"
+                          },
+                          "id": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "opsgenie-service"
+                        },
+                        {
+                          "attributes": {
+                            "custom_url": null,
+                            "name": "fake-opsgenie-service-name-2",
+                            "region": "eu"
+                          },
+                          "id": "0d2937f1-b561-44fa-914a-99910f848014",
+                          "type": "opsgenie-service"
+                        }
+                      ],
+                      "items": {
+                        "description": "Opsgenie service data from a response.",
+                        "properties": {
+                          "attributes": {
+                            "description": "The attributes from an Opsgenie service response.",
+                            "properties": {
+                              "custom_url": {
+                                "description": "The custom URL for a custom region.",
+                                "example": "https://example.com",
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "The name for the Opsgenie service.",
+                                "example": "fake-opsgenie-service-name",
+                                "type": "string"
+                              },
+                              "region": {
+                                "description": "The region for the Opsgenie service.",
+                                "enum": [
+                                  "us",
+                                  "eu",
+                                  "custom"
+                                ],
+                                "example": "us",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "US",
+                                  "EU",
+                                  "CUSTOM"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "The ID of the Opsgenie service.",
+                            "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "opsgenie-service",
+                            "description": "Opsgenie service resource type.",
+                            "enum": [
+                              "opsgenie-service"
+                            ],
+                            "example": "opsgenie-service",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "OPSGENIE_SERVICE"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type",
+                          "attributes"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get all service objects",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-menu-order": 1,
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create a new service object in the Opsgenie integration.",
+        "operationId": "CreateOpsgenieService",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Create request for an Opsgenie service.",
+                "properties": {
+                  "data": {
+                    "description": "Opsgenie service data for a create request.",
+                    "properties": {
+                      "attributes": {
+                        "description": "The Opsgenie service attributes for a create request.",
+                        "properties": {
+                          "custom_url": {
+                            "description": "The custom URL for a custom region.",
+                            "example": "https://example.com",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "The name for the Opsgenie service.",
+                            "example": "fake-opsgenie-service-name",
+                            "type": "string"
+                          },
+                          "opsgenie_api_key": {
+                            "description": "The Opsgenie API key for your Opsgenie service.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "region": {
+                            "description": "The region for the Opsgenie service.",
+                            "enum": [
+                              "us",
+                              "eu",
+                              "custom"
+                            ],
+                            "example": "us",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "US",
+                              "EU",
+                              "CUSTOM"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "opsgenie_api_key",
+                          "region"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "opsgenie-service",
+                        "description": "Opsgenie service resource type.",
+                        "enum": [
+                          "opsgenie-service"
+                        ],
+                        "example": "opsgenie-service",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "OPSGENIE_SERVICE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Opsgenie service payload",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response of an Opsgenie service.",
+                  "properties": {
+                    "data": {
+                      "description": "Opsgenie service data from a response.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes from an Opsgenie service response.",
+                          "properties": {
+                            "custom_url": {
+                              "description": "The custom URL for a custom region.",
+                              "example": "https://example.com",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name for the Opsgenie service.",
+                              "example": "fake-opsgenie-service-name",
+                              "type": "string"
+                            },
+                            "region": {
+                              "description": "The region for the Opsgenie service.",
+                              "enum": [
+                                "us",
+                                "eu",
+                                "custom"
+                              ],
+                              "example": "us",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "US",
+                                "EU",
+                                "CUSTOM"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the Opsgenie service.",
+                          "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "opsgenie-service",
+                          "description": "Opsgenie service resource type.",
+                          "enum": [
+                            "opsgenie-service"
+                          ],
+                          "example": "opsgenie-service",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "OPSGENIE_SERVICE"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "CREATED"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Create a new service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-given": {
+          "opsgenie_service": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\",\n      \"opsgenie_api_key\": \"00000000-0000-0000-0000-000000000000\",\n      \"region\": \"us\"\n     },\n     \"type\": \"opsgenie-service\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"opsgenie_service\" in the system"
+          }
+        },
+        "x-menu-order": 2,
+        "x-undo": {
+          "operationId": "DeleteOpsgenieService",
+          "parameters": [
+            {
+              "name": "integration_service_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/integration/opsgenie/services/{integration_service_id}": {
+      "delete": {
+        "description": "Delete a single service object in the Datadog Opsgenie integration.",
+        "operationId": "DeleteOpsgenieService",
+        "parameters": [
+          {
+            "description": "The UUID of the service.",
+            "in": "path",
+            "name": "integration_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Delete a single service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-menu-order": 5,
+        "x-undo": {
+          "type": "idempotent"
+        }
+      },
+      "get": {
+        "description": "Get a single service from the Datadog Opsgenie integration.",
+        "operationId": "GetOpsgenieService",
+        "parameters": [
+          {
+            "description": "The UUID of the service.",
+            "in": "path",
+            "name": "integration_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response of an Opsgenie service.",
+                  "properties": {
+                    "data": {
+                      "description": "Opsgenie service data from a response.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes from an Opsgenie service response.",
+                          "properties": {
+                            "custom_url": {
+                              "description": "The custom URL for a custom region.",
+                              "example": "https://example.com",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name for the Opsgenie service.",
+                              "example": "fake-opsgenie-service-name",
+                              "type": "string"
+                            },
+                            "region": {
+                              "description": "The region for the Opsgenie service.",
+                              "enum": [
+                                "us",
+                                "eu",
+                                "custom"
+                              ],
+                              "example": "us",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "US",
+                                "EU",
+                                "CUSTOM"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the Opsgenie service.",
+                          "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "opsgenie-service",
+                          "description": "Opsgenie service resource type.",
+                          "enum": [
+                            "opsgenie-service"
+                          ],
+                          "example": "opsgenie-service",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "OPSGENIE_SERVICE"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get a single service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-menu-order": 3,
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "patch": {
+        "description": "Update a single service object in the Datadog Opsgenie integration.",
+        "operationId": "UpdateOpsgenieService",
+        "parameters": [
+          {
+            "description": "The UUID of the service.",
+            "in": "path",
+            "name": "integration_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Update request for an Opsgenie service.",
+                "properties": {
+                  "data": {
+                    "description": "Opsgenie service for an update request.",
+                    "properties": {
+                      "attributes": {
+                        "description": "The Opsgenie service attributes for an update request.",
+                        "properties": {
+                          "custom_url": {
+                            "description": "The custom URL for a custom region.",
+                            "example": "https://example.com",
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "The name for the Opsgenie service.",
+                            "example": "fake-opsgenie-service-name",
+                            "type": "string"
+                          },
+                          "opsgenie_api_key": {
+                            "description": "The Opsgenie API key for your Opsgenie service.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "region": {
+                            "description": "The region for the Opsgenie service.",
+                            "enum": [
+                              "us",
+                              "eu",
+                              "custom"
+                            ],
+                            "example": "us",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "US",
+                              "EU",
+                              "CUSTOM"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "The ID of the Opsgenie service.",
+                        "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "opsgenie-service",
+                        "description": "Opsgenie service resource type.",
+                        "enum": [
+                          "opsgenie-service"
+                        ],
+                        "example": "opsgenie-service",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "OPSGENIE_SERVICE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Opsgenie service payload.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response of an Opsgenie service.",
+                  "properties": {
+                    "data": {
+                      "description": "Opsgenie service data from a response.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes from an Opsgenie service response.",
+                          "properties": {
+                            "custom_url": {
+                              "description": "The custom URL for a custom region.",
+                              "example": "https://example.com",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name for the Opsgenie service.",
+                              "example": "fake-opsgenie-service-name",
+                              "type": "string"
+                            },
+                            "region": {
+                              "description": "The region for the Opsgenie service.",
+                              "enum": [
+                                "us",
+                                "eu",
+                                "custom"
+                              ],
+                              "example": "us",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "US",
+                                "EU",
+                                "CUSTOM"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the Opsgenie service.",
+                          "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "opsgenie-service",
+                          "description": "Opsgenie service resource type.",
+                          "enum": [
+                            "opsgenie-service"
+                          ],
+                          "example": "opsgenie-service",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "OPSGENIE_SERVICE"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Update a single service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
+        "x-undo": {
+          "type": "idempotent"
+        }
       }
     },
     "/api/v2/logs": {
@@ -89318,6 +91080,13 @@
     {
       "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.",
       "name": "Metrics"
+    },
+    {
+      "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/api/latest/opsgenie-integration)\ndirectly through the Datadog API.",
+      "externalDocs": {
+        "url": "https://docs.datadoghq.com/api/latest/opsgenie-integration"
+      },
+      "name": "Opsgenie Integration"
     },
     {
       "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization).",
