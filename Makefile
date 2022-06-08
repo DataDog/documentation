@@ -190,7 +190,7 @@ start: clean source-helpers examples ## Build the documentation with all externa
 		PULL_RBAC_PERMISSIONS=${PULL_RBAC_PERMISSIONS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		LOCAL=${LOCAL}\
-		LANGS_TO_IGNORE=${LANGS_TO_IGNORE}\
+		LANGS_TO_IGNORE=${LANGS_TO_IGNORE} \
 		run-site.sh; \
 	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
 
@@ -198,6 +198,7 @@ start-no-pre-build: clean source-helpers ## Build the documentation without auto
 	@echo "\033[35m\033[1m\nBuilding the documentation with NO external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
 		RUN_SERVER=${RUN_SERVER} \
+		LANGS_TO_IGNORE=${LANGS_TO_IGNORE} \
 		run-site-no-pre-build.sh; \
 	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
 
@@ -268,7 +269,8 @@ examples/typescript: examples/datadog-api-client-typescript clean-typescript-exa
 examples: examples/go examples/java examples/python examples/ruby examples/typescript
 
 start-docker: clean
-	GITHUB_TOKEN=${GITHUB_TOKEN} \
+	export GITHUB_TOKEN=${GITHUB_TOKEN} && \
+	export FULL_BUILD=${FULL_BUILD} && \
 	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -f ./docker-compose-docs.yml up
 
 stop-docker:
