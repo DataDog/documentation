@@ -165,9 +165,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][15] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][16].
-
-{{< img src="dashboards/dashboard_list.png" alt="Dashboard List page"  >}}
+Search, view, or create dashboards and lists on the [Dashboard List][15] page. 
 
 ### New list
 

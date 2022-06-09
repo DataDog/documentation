@@ -10763,7 +10763,6 @@ components:
         responseHeaders:
           additionalProperties:
             description: Returned request header.
-            type: object
           description: Response headers returned for the API test.
           type: object
         responseSize:
@@ -11795,12 +11794,12 @@ components:
       properties:
         cls:
           description: Cumulative Layout Shift.
-          format: int64
-          type: integer
+          format: double
+          type: number
         lcp:
           description: Largest Contentful Paint in milliseconds.
-          format: int64
-          type: integer
+          format: double
+          type: number
         url:
           description: URL attached to the metrics.
           type: string
@@ -28378,6 +28377,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
       responses:
         '200':
           content:
@@ -28891,6 +28897,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
       responses:
         '200':
           content:

@@ -1,17 +1,18 @@
 ---
-title: Créer un test API avec l'API
-kind: guide
 further_reading:
-  - link: /api/latest/synthetics/
-    tag: API
-    text: API Synthetics
-  - link: /synthetics/
-    tag: Documentation
-    text: Gérer vos checks
-  - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-    tag: Terraform
-    text: Créer et gérer des tests API Synthetic avec Terraform
+- link: /api/latest/synthetics/
+  tag: API
+  text: API Synthetics
+- link: /synthetics/
+  tag: Documentation
+  text: Gérer vos checks
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
+  tag: Terraform
+  text: Créer et gérer des tests API Synthetic avec Terraform
+kind: guide
+title: Créer un test API avec l'API
 ---
+
 ## Présentation
 
 Ce guide contient des exemples de fichiers de configuration que vous pouvez utiliser pour créer des tests API.
@@ -407,8 +408,7 @@ configuration = Configuration(
     api_key= {"apiKeyAuth": "<VOTRE_CLÉ_API>","appKeyAuth": "<VOTRE_CLÉ_APPLICATION>"}
 )
 
-// Saisir un contexte avec une instance du client API
-with ApiClient(configuration) as api_client:
+// Saisir un contexte avec une instance du client API où ApiClient(configuration) est défini en tant que api_client :
     // Créer une instance de la classe API
     api_instance = synthetics_api.SyntheticsApi(api_client)
     body = SyntheticsAPITest(
