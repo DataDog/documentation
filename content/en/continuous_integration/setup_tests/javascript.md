@@ -91,53 +91,7 @@ For more information, see the [JavaScript tracer installation docs][5].
 ## Instrument your tests
 
 {{< tabs >}}
-{{% tab "Jest" %}}
-Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init` and run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-{{< code-block lang="bash" >}}
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
-{{< /code-block >}}
-
-### Using `yarn>=2`
-
-If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
-
-```text
- Error: Cannot find module 'dd-trace/ci/init'
-```
-
-You can fix it by setting `NODE_OPTIONS` to the following:
-
-{{< code-block lang="bash" >}}
-NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "Mocha" %}}
-Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init` and run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-{{< code-block lang="bash" >}}
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
-{{< /code-block >}}
-
-### Using `yarn>=2`
-
-If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
-
-```text
- Error: Cannot find module 'dd-trace/ci/init'
-```
-
-You can fix it by setting `NODE_OPTIONS` to the following:
-
-{{< code-block lang="bash" >}}
-NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "Cucumber" %}}
+{{% tab "Jest/Mocha/Cucumber" %}}
 Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init` and run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
