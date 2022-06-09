@@ -110,10 +110,6 @@ Nombre de traces reçues et acceptées.
 : **Type** : count<br>
 Total d'octets de charges utiles acceptés par l'Agent.
 
-`datadog.trace_agent.receiver.traces_dropped`
-: **Type** : count<br>
-Traces non envoyées en raison d'une erreur de normalisation.
-
 `datadog.trace_agent.receiver.traces_filtered`
 : **Type** : count<br>
 Traces filtrées par des ressources ignorées (comme défini dans le fichier `datadog.yaml`).

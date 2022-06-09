@@ -23,7 +23,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,.NET" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -85,6 +85,14 @@ To enable Code Hotspots identification for Go, [turn on profiling for your servi
 [9]: https://github.com/golang/go/issues/48577
 [10]: https://go-review.googlesource.com/c/go/+/369741/
 [11]: https://go-review.googlesource.com/c/go/+/369983/
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
+
+Requires tracing library version 2.7.0 or greater.
+
+[1]: /tracing/profiler/enabling/dotnet
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

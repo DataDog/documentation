@@ -158,4 +158,4 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [16]: https://en.wikipedia.org/wiki/Comet_(programming
-[17]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[17]: /real_user_monitoring/explorer/search/#setup-facets-and-measures

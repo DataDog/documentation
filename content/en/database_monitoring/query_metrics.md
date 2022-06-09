@@ -58,7 +58,7 @@ Select or clear facets to find the list of queries you're interested in.
 
 ### Filtering the Query Metrics view to a single query
 
-If you want to filter the contents of the Query Metrics view to just one normalized query, filter on the `query_signature`, not `query`. Tag names are truncated at 200 characters, and because queries can be long, their `query` tags aren't necessarily unique. The `query_signature` is a hash of a normalized query and serves as a unique ID for the normalized query.
+If you want to filter the contents of the Query Metrics view to just one [normalized query][6], filter on the `query_signature`, not `query`. Tag names are truncated at 200 characters, and because queries can be long, their `query` tags aren't necessarily unique. The `query_signature` is a hash of a normalized query and serves as a unique ID for the normalized query.
 
 One way to filter to a specific query without looking up its query signature value is to click the query from the list. This opens its [Query Details page](#query-details-page), where you click **Filter to This Query**. This filters the Query Metrics page by the `query_signature` facet.
 
@@ -78,7 +78,7 @@ The metrics used for Database Monitoring views are, primarily:
 
 ## Query details page
 
-When you click a query in the the Query Metrics list, the Query Details page for that query opens. The top of the page shows the full text of the normalized query, and a list of all tags associated with the query. The list of tags is the union of all tags from each host that the query runs on. Browse the list to see information such as what server the query is running on:
+When you click a query in the the Query Metrics list, the Query Details page for that query opens. The top of the page shows the full text of the [normalized query][6], and a list of all tags associated with the query. The list of tags is the union of all tags from each host that the query runs on. Browse the list to see information such as what server the query is running on:
 
 {{< img src="database_monitoring/dbm_qd_tags.png" alt="Tags list for a query" style="width:100%;">}}
 
@@ -127,3 +127,4 @@ For quick access to dashboards that showcase database-related infrastructure and
 [3]: /database_monitoring/query_samples/
 [4]: /database_monitoring/query_samples/#sample-details
 [5]: /database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[6]: /database_monitoring/data_collected/#normalized-queries
