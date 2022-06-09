@@ -398,7 +398,7 @@ Your logger needs to have a `source` that sets the `trace_id` mapping correctly.
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
 **Default**: `1.0`<br>
-Enables ingestion rate control. The sampling rate for the traces (defaults to: between `0.0` and `1.0`).
+Enables ingestion rate control and specifies a the sampling rate for traces. Valid values are from `0.0` to `1.0`.
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `datadog.trace.sampling_rules`<br>
