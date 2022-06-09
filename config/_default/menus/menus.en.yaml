@@ -4856,10 +4856,8 @@ api:
     params:
       versions:
         - v1
-        - v2
       operationids:
         - UpdatePagerDutyIntegrationService
-        - UpdateOpsgenieService
       unstable: []
       order: 3
   - name: Get a single service object
@@ -4870,10 +4868,8 @@ api:
     params:
       versions:
         - v1
-        - v2
       operationids:
         - GetPagerDutyIntegrationService
-        - GetOpsgenieService
       unstable: []
       order: 2
   - name: Delete a single service object
@@ -4884,10 +4880,8 @@ api:
     params:
       versions:
         - v1
-        - v2
       operationids:
         - DeletePagerDutyIntegrationService
-        - DeleteOpsgenieService
       unstable: []
       order: 4
   - name: Create a new service object
@@ -4898,10 +4892,8 @@ api:
     params:
       versions:
         - v1
-        - v2
       operationids:
         - CreatePagerDutyIntegrationService
-        - CreateOpsgenieService
       unstable: []
       order: 1
   - name: Screenboards
@@ -7310,6 +7302,54 @@ api:
     url: /api/latest/opsgenie-integration/
     identifier: opsgenie-integration
     generated: true
+  - name: Update a single service object
+    url: '#update-a-single-service-object'
+    identifier: update-a-single-service-object
+    parent: opsgenie-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateOpsgenieService
+      unstable: []
+      order: 4
+  - name: Get a single service object
+    url: '#get-a-single-service-object'
+    identifier: get-a-single-service-object
+    parent: opsgenie-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetOpsgenieService
+      unstable: []
+      order: 3
+  - name: Delete a single service object
+    url: '#delete-a-single-service-object'
+    identifier: delete-a-single-service-object
+    parent: opsgenie-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteOpsgenieService
+      unstable: []
+      order: 5
+  - name: Create a new service object
+    url: '#create-a-new-service-object'
+    identifier: create-a-new-service-object
+    parent: opsgenie-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateOpsgenieService
+      unstable: []
+      order: 2
   - name: Get all service objects
     url: '#get-all-service-objects'
     identifier: get-all-service-objects
