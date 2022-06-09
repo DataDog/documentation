@@ -89,9 +89,9 @@ For more information, see the [JavaScript tracer installation docs][5].
 
 ## Instrument your tests
 
-### Mocha, jest or cucumber
-
-You may initialize the CI Visibility mode of the Datadog library by setting the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`.
+{{< tabs >}}
+{{% tab "Jest" %}}
+You may initialize the CI Visibility mode of the Datadog library by setting `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`.
 
 You may then run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
@@ -99,27 +99,33 @@ You may then run your tests as you normally do, specifying the environment where
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 {{< /code-block >}}
 
-### Using `yarn>=2`
+{{% /tab %}}
 
-If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
+{{% tab "Mocha" %}}
+You may initialize the CI Visibility mode of the Datadog library by setting `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`.
 
-```text
- Error: Cannot find module 'dd-trace/ci/init'
-```
-
-You can fix it by setting `NODE_OPTIONS` to the following:
+You may then run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 {{< /code-block >}}
 
-### Cypress tests
+{{% /tab %}}
 
-If you're running Cypress tests, you may **not** initialize the Datadog Library via `NODE_OPTIONS`. Follow these instructions to do it:
+{{% tab "Cucumber" %}}
+You may initialize the CI Visibility mode of the Datadog library by setting `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`.
 
-#### Plugins file
+You may then run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Cypress" %}}
+
+1. Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
 {{< code-block lang="json" filename="cypress.json" >}}
 {
   "pluginsFile": "dd-trace/ci/cypress/plugin"
@@ -134,9 +140,7 @@ module.exports = (on, config) => {
 }
 {{< /code-block >}}
 
-#### Support file
-
-Add the following line to the [`supportFile`][3]:
+2. Add the following line to the [`supportFile`][3]:
 {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
 // your previous code is before this line
 require('dd-trace/ci/cypress/support')
@@ -148,7 +152,7 @@ Run your tests as you normally do, specifying the environment where test are bei
 DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
-### Add extra tags
+#### Add extra tags to your Cypress test
 
 To add additional information to your tests, such as the team owner, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
 
@@ -165,10 +169,36 @@ it('renders a hello world', () => {
 })
 {{< /code-block >}}
 
-
-### RUM integration
+#### Cypress - RUM integration
 
 If the browser application being tested is instrumented using [RUM][4], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][5] guide.
+
+
+[1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
+[2]: https://docs.cypress.io/guides/references/configuration#cypress-json
+[3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[4]: /real_user_monitoring/browser/#setup
+[5]: /continuous_integration/guides/rum_integration/
+
+{{% /tab %}}
+
+
+{{< /tabs >}}
+
+
+### Using `yarn>=2`
+
+If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+You can fix it by setting `NODE_OPTIONS` to the following:
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
+{{< /code-block >}}
 
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
