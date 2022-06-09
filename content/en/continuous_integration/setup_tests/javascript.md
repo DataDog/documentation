@@ -45,8 +45,8 @@ If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` 
 If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
 
 
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
+[1]: /agent
+[2]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
@@ -87,38 +87,75 @@ yarn add --dev dd-trace
 
 For more information, see the [JavaScript tracer installation docs][5].
 
+
 ## Instrument your tests
 
 {{< tabs >}}
 {{% tab "Jest" %}}
-You may initialize the CI Visibility mode of the Datadog library by setting `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`.
-
-You may then run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init` and run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+{{< /code-block >}}
+
+### Using `yarn>=2`
+
+If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+You can fix it by setting `NODE_OPTIONS` to the following:
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
 {{% /tab %}}
 
 {{% tab "Mocha" %}}
-You may initialize the CI Visibility mode of the Datadog library by setting `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`.
-
-You may then run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init` and run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 {{< /code-block >}}
 
+### Using `yarn>=2`
+
+If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+You can fix it by setting `NODE_OPTIONS` to the following:
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
+{{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
-You may initialize the CI Visibility mode of the Datadog library by setting `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`.
-
-You may then run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init` and run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+{{< /code-block >}}
+
+### Using `yarn>=2`
+
+If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+You can fix it by setting `NODE_OPTIONS` to the following:
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -173,39 +210,15 @@ it('renders a hello world', () => {
 
 If the browser application being tested is instrumented using [RUM][4], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][5] guide.
 
-
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [4]: /real_user_monitoring/browser/#setup
 [5]: /continuous_integration/guides/rum_integration/
-
 {{% /tab %}}
-
 
 {{< /tabs >}}
 
-
-### Using `yarn>=2`
-
-If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
-
-```text
- Error: Cannot find module 'dd-trace/ci/init'
-```
-
-You can fix it by setting `NODE_OPTIONS` to the following:
-
-{{< code-block lang="bash" >}}
-NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
-{{< /code-block >}}
-
-
-[1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
-[2]: https://docs.cypress.io/guides/references/configuration#cypress-json
-[3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[4]: /real_user_monitoring/browser/#setup
-[5]: /continuous_integration/guides/rum_integration/
 
 ## Configuration settings
 
@@ -283,12 +296,14 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][9] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][10].
+[Mocha >=9.0.0][7] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][8].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][12] guide.
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][10] guide.
+
+
 
 ## Best practices
 
@@ -307,14 +322,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][13] instead:
+And use [`test.each`][11] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][14]:
+For `mocha`, use [`mocha-each`][12]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -333,17 +348,16 @@ When you use this approach, both the testing framework and CI Visibility can tel
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/facebook/jest/tree/master/packages/jest-circus
-[2]: https://github.com/facebook/jest/tree/master/packages/jest-jasmine2
+
+[1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
+[2]: https://github.com/facebook/jest/tree/main/packages/jest-jasmine2
 [3]: https://jestjs.io/docs/configuration#testrunner-string
 [4]: https://github.com/DataDog/dd-trace-js
 [5]: /tracing/setup_overview/setup/nodejs
 [6]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: /getting_started/site/
-[9]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[11]: /real_user_monitoring/browser/
-[12]: /continuous_integration/guides/rum_integration/
-[13]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[14]: https://github.com/ryym/mocha-each
+[7]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[8]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[9]: /real_user_monitoring/browser/
+[10]: /continuous_integration/guides/rum_integration/
+[11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[12]: https://www.npmjs.com/package/mocha-each
