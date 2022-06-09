@@ -17,8 +17,6 @@ further_reading:
 <div class="alert alert-warning">The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">The GitHub Actions integration is in beta. There are no billing implications for activating the GitHub Actions integration during this period.</div>
-
 ## Compatibility
 
 Supported GitHub versions:
