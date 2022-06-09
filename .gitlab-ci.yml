@@ -291,10 +291,8 @@ index_algolia:
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
   tags: ["runner:main"]
   stage: post-deploy
-  cache:
-    - *yarn_cache
   environment: "live"
-  timeout: 1h 30m
+  timeout: 1h 45m
   script:
     - yarn install --immutable
     - |-
