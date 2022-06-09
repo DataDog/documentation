@@ -51,7 +51,7 @@ const updateMenu = (specData, specs, languages) => {
 
           const actionSlug = getTagSlug(action.summary);
           const itemIdentifier = `${tagSlug}-${actionSlug}`;
-          const existingSubMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === itemIdentifier && i.parent == tagSlug);
+          const existingSubMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === itemIdentifier);
           if(existingSubMenuItemIndex > -1) {
             // already exists
             const existingParams = newMenuArray[existingSubMenuItemIndex].params;
