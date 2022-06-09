@@ -235,15 +235,15 @@ The Ruby tracer has a post-processing pipeline that deletes traces that meet cer
 
 For example, if the resource name is `Api::HealthchecksController#index`, use the `trace.spans.delete_if` method to delete traces that contain the resource name. This filter can also be used to match on other metadata available for the [span object][2].
 
-```
-Datadog::Tracing::Pipeline.before_flush do |trace|
-    trace.spans.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
-    trace
+```ruby
+Datadog::Tracing.before_flush do |trace|
+  trace.spans.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
+  trace
 end
 ```
 
 [1]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[2]: /tracing/setup_overview/setup/ruby/#manual-instrumentation-2
+[2]: /tracing/setup_overview/setup/ruby/#manual-instrumentation
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
