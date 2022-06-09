@@ -16,11 +16,13 @@ private: true
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Freshservice Tickets using Webhooks{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Monitoring HCP Consul with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/source-code-integration" tag="GitHub Apps" >}}Datadog Source Code Integration{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/jmx_integrations/" >}}Which Integrations use Jmxfetch?{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag="kafka" >}}Agent failed to retrieve RMIServer stub{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/jmx_integrations/" >}}Which Integrations use Jmxfetch?{{< /nextlink >}}  
 {{< /whatsnext >}}
 
 {{< whatsnext desc="AWS guides:" >}}
     {{< nextlink href="getting_started/integrations/aws/" tag="AWS" >}}AWS integration automatic setup with CloudFormation{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-terraform-setup" tag="AWS" >}}AWS integration automatic setup with Terraform{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-manual-setup" tag="AWS" >}}AWS Integration manual setup{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag="AWS" >}}Troubleshooting the AWS integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}

@@ -157,7 +157,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 #### Agent is running an unsupported version
-Ensure that the Agent is running version 7.36.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
+Ensure that the Agent is running version 7.36.1 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
 
 #### Queries are truncated
 See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text.

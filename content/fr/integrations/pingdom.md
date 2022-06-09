@@ -1,26 +1,34 @@
 ---
-"categories":
-- "monitoring"
-- "notification"
-"ddtype": "crawler"
-"dependencies": []
-"description": "Consultez les données de disponibilité, les délais de réponse et les alertes recueillis par Pingdom dans Datadog."
-"doc_link": "https://docs.datadoghq.com/integrations/pingdom/"
-"draft": false
-"git_integration_title": "pingdom"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Pingdom"
-"is_public": true
-"kind": "integration"
-"manifest_version": "1.0"
-"name": "pingdom"
-"public_title": "Intégration Datadog/Pingdom"
-"short_description": "Consultez les données de disponibilité, les délais de réponse et les alertes recueillis par Pingdom dans Datadog."
-"version": "1.0"
+categories:
+- monitoring
+- notification
+ddtype: crawler
+dependencies: []
+description: Gérez et migrez des configurations existantes d'endpoints de surveillance
+  Pingdom obsolètes.
+doc_link: https://docs.datadoghq.com/integrations/pingdom/
+draft: false
+git_integration_title: pingdom
+has_logo: true
+integration_id: ''
+integration_title: API Pingdom obsolète (v2.1)
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: '1.0'
+name: pingdom
+public_title: Intégration Datadog/Pingdom reposant sur l'API obsolète (v2.1)
+short_description: Gérez et migrez des configurations existantes d'endpoints de surveillance
+  Pingdom obsolètes.
+team: web-integrations
+version: '1.0'
 ---
 
 ## Présentation
+
+<div class="alert alert-warning">
+Cette intégration est obsolète. Utilisez plutôt l'<a href="https://docs.datadoghq.com/integrations/pingdom_v3/" class="alert-link">intégration Datadog/Pingdom v3</a>.
+</div>
 
 Surveillez les métriques de performance axées sur l'utilisateur de Pingdom dans Datadog, afin de les corréler avec d'autres événements et métriques pertinents.
 
@@ -65,7 +73,7 @@ Pour le check `pingdom.status`, le tableau suivant présente les corrélations e
 
 ## Dépannage
 
-### Je rencontre une erreur lors de la mise à jour de l'utilisateur ou du mot de passe. Pourquoi ?
+### Erreur lors de la mise à jour du nom d'utilisateur ou du mot de passe
 
 Vous avez peut-être déjà rencontré l'erreur suivante lors de l'enregistrement de vos identifiants Pingdom :
 
@@ -75,4 +83,3 @@ Ajoutez l'adresse e-mail du propriétaire de votre compte Pingdom dans le champ 
 
 [1]: https://app.datadoghq.com/monitors#create/integration
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/pingdom/pingdom_metadata.csv
-

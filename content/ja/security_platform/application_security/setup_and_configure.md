@@ -292,30 +292,75 @@ if span, ok := tracer.SpanFromContext(request.Context()); ok {
 
 {{< programming-lang lang="ruby" >}}
 
-トレースにカスタムタグを追加するための Ruby トレーサーの API を使用し、アプリケーションで認証されたリクエストを監視できるように、ユーザー情報を追加します。
+以下の API のいずれかを使用して、トレースにユーザー情報を追加し、アプリケーションで認証されたリクエストを監視できるようにします。
 
-ユーザーモニタリングタグは、トレースに適用され、プレフィックス `usr` の後にフィールド名が続きます。例えば、`usr.name` は、ユーザーの名前を追跡するユーザーモニタリングタグです。
+{{< tabs >}}
 
-以下の例では、ルートスパンを取得し、関連するユーザーモニタリングタグを追加する方法を示しています。
+{{% tab "set_user" %}}
+
+`ddtrace` 1.1.0 からは、`Datadog::Kit::Identity.set_user` メソッドが使用できるようになりました。これは、トレースにユーザ情報を追加するための推奨 API です。
+
+```ruby
+# アクティブトレースを取得する
+trace = Datadog::Tracing.active_trace
+
+# 必須ユーザー ID タグを設定する
+Datadog::Kit::Identity.set_user(trace, id: 'd131dd02c56eeec4')
+
+# または、オプションのユーザーモニタリングタグを設定する
+Datadog::Kit::Identity.set_user(
+  trace,
+
+  # 必須 ID
+  id: 'd131dd02c56eeec4',
+
+  #セマティクスが分かっているオプションタグ
+  name: 'Jean Example',
+  email:, 'jean.example@example.com',
+  session_id:, '987654321',
+  role: 'admin',
+  scope: 'read:message, write:files',
+
+  # オプションの自由形式タグ
+  another_tag: 'another_value',
+)
+```
+
+{{% /tab %}}
+
+{{% tab "set_tag" %}}
+
+`Datadog::Kit::Identity.set_user` がニーズに合わない場合は、代わりに `set_tag` を使用することができます。
+
+ユーザーモニタリングタグは、トレースに適用され、プレフィックス `usr.` の後にフィールド名が続きます。例えば、`usr.name` は、ユーザーの名前を追跡するユーザーモニタリングタグです。
+
+以下の例では、アクティブトレースを取得し、関連するユーザーモニタリングタグを追加する方法を示しています。
 
 **注**:
 - タグの値は文字列でなければなりません。
 - `usr.id` タグは必須です。
 
 ```ruby
-# アクティブトレースの取得
+# アクティブトレースを取得する
 trace = Datadog::Tracing.active_trace
 
 # 必須ユーザー ID タグを設定する
 trace.set_tag('usr.id', 'd131dd02c56eeec4')
 
-# オプションのユーザーモニタリングタグを設定する
+# セマティクスが分かっているユーザーモニタリングタグをオプションで設定する
 trace.set_tag('usr.name', 'Jean Example')
 trace.set_tag('usr.email', 'jean.example@example.com')
 trace.set_tag('usr.session_id', '987654321')
 trace.set_tag('usr.role', 'admin')
 trace.set_tag('usr.scope', 'read:message, write:files')
+
+# 自由形式のタグを設定する
+trace.set_tag('usr.another_tag', 'another_value')
 ```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 {{< /programming-lang >}}
 
@@ -388,8 +433,25 @@ Datadog で収集するデータには、除外、難読化、フィルタリン
 
 ユーザーのデータを保護するために、ASM では機密データスキャンがデフォルトで有効になっています。以下の環境変数を使用することで、構成をカスタマイズすることができます。スキャンは [RE2 構文][2]に基づいているため、スキャンをカスタマイズするには、これらの環境変数の値を有効な RE2 パターンに設定します。
 
-* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - 値が一般的に機密データを含むキーをスキャンするためのパターン。見つかった場合、そのキー、対応するすべての値、およびすべての子ノードが編集されます。
+* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - 値が一般的に機密データを含むキーをスキャンするためのパターン。見つかった場合、そのキーと関連する値およびすべての子ノードが編集されます。
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - 機密データを示す可能性のある値をスキャンするためのパターン。見つかった場合、その値とすべての子ノードが編集されます。
+
+<div class="alert alert-info"><strong>Ruby のみ、ddtrace バージョン 1.1.0 から</strong> 
+
+<p>また、コードでスキャンパターンを構成することも可能です。</p>
+
+```ruby
+Datadog.configure do |c|
+  # ...
+
+  # カスタム RE2 正規表現を設定する
+  c.appsec.obfuscator_key_regex = '...'
+  c.appsec.obfuscator_value_regex = '...'
+end
+```
+
+</div>
+
 
 以下は、デフォルトで機密と判定されるデータの例です。
 

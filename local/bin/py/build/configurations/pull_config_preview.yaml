@@ -574,6 +574,27 @@
     - action: pull-and-push-file
       branch: master
       globs:
+      - 'docs/rum_collection/_index.md'
+      options:
+        dest_path: '/real_user_monitoring/ios/'
+        file_name: '_index.md'
+        front_matters:
+          title: RUM iOS Monitoring
+          kind: documentation
+          beta: true
+          description: "Collect RUM data from your iOS projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/_index.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "GitHub"
+              text: "dd-sdk-ios Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
       - 'docs/log_collection.md'
       options:
         dest_path: '/logs/log_collection/'
@@ -612,6 +633,27 @@
               tag: "Documentation"
               text: "Explore your services, resources, and traces"
 
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/rum_mobile_vitals.md'
+      options:
+        dest_path: '/real_user_monitoring/ios/'
+        file_name: 'mobile_vitals.md'
+        front_matters:
+          title: Mobile Vitals
+          kind: documentation
+          beta: true
+          description: "Collect RUM data from your iOS projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_mobile_vitals.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "GitHub"
+              text: "dd-sdk-ios Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    
     - action: pull-and-push-folder
       branch: master
       globs:
@@ -639,8 +681,8 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/real_user_monitoring/'
-        file_name: 'reactnative.md'
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: '_index.md'
         front_matters:
           title: React Native Monitoring
           kind: documentation
@@ -657,7 +699,53 @@
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
               text: "Monitor React Native applications"
-  
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'docs/rum_integrations.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'integrated_libraries.md'
+        front_matters:
+          title: React Native Integrated Libraries
+          kind: faq
+          beta: true
+          description: "Collect RUM data from your React Native projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/rum_integrations.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "GitHub"
+              text: "dd-sdk-reactnative Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+            - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
+              tag: "Blog"
+              text: "Monitor your React Native applications"   
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'docs/rum_mobile_vitals.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'mobile_vitals.md'
+        front_matters:
+          title: Mobile Vitals
+          kind: documentation
+          beta: true
+          description: "Collect RUM data from your React Native projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/rum_mobile_vitals.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "GitHub"
+              text: "dd-sdk-reactnative Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+            - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
+              tag: "Blog"
+              text: "Monitor your React Native applications"     
+          
   - repo_name: dd-sdk-flutter
     contents:
     - action: pull-and-push-file

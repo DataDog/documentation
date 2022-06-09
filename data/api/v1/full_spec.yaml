@@ -17309,8 +17309,6 @@ components:
               downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, mute, and delete individual monitors.
-            security_monitoring_signals_read: View Security Signals.
-            security_monitoring_signals_write: Modify Security Signals.
             synthetics_global_variable_read: View, search, and use in tests the list
               of global variables available for Synthetics.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -24846,11 +24844,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - AuthZ:
-        - security_monitoring_signals_write
-        apiKeyAuth: []
-        appKeyAuth: []
       summary: Modify the triage assignee of a security signal
       tags:
       - Security Monitoring
@@ -24897,11 +24890,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - AuthZ:
-        - security_monitoring_signals_write
-        apiKeyAuth: []
-        appKeyAuth: []
       summary: Change the triage state of a security signal
       tags:
       - Security Monitoring
@@ -28390,6 +28378,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
       responses:
         '200':
           content:
@@ -28903,6 +28898,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
       responses:
         '200':
           content:

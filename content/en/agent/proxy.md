@@ -527,7 +527,7 @@ stream {
     server {
         listen 3836; #listen for profiles
         proxy_ssl on;
-        proxy_pass profile.agent.{{< region-param key="dd_site" >}}:443;
+        proxy_pass intake.profile.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3837; #listen for processes

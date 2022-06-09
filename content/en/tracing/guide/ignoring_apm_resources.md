@@ -35,7 +35,7 @@ You can specify span tags to require or reject by using environment variables:
 : Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
 
 `DD_APM_FILTER_TAGS_REJECT`
-: Rejects traces that have root spans with and exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
+: Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
 
 Or you can set them in the Agent configuration file:
 
