@@ -404,8 +404,8 @@ For more information, see [Ingestion Mechanisms][11].
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `CustomSamplingRules`<br>
 **Default**: `null`<br>
-A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace’s sample rate.
-For more information, see [Ingestion Mechanisms][6].<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+For more information, see [Ingestion Mechanisms][11].<br>
 **Examples:**<br>
   - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
   - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`  
@@ -484,7 +484,7 @@ Added in version 2.6.0.
 Wildcard support `[*]` added in version 2.7.0.
 
 `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
-: Alters the behaviour of the kafka consumer span<br>
+: Alters the behavior of the Kafka consumer span<br>
 **Default**: `true`<br>
 When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop.<br>
 When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once.

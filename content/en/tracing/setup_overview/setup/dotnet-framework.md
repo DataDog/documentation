@@ -365,7 +365,7 @@ For more information, see [Ingestion Mechanisms][6].
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `CustomSamplingRules`<br>
 **Default**: `null`<br>
-A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace’s sample rate.
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
 For more information, see [Ingestion Mechanisms][6].<br>
 **Examples:**<br>
   - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
