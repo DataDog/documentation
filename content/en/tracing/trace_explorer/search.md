@@ -31,6 +31,9 @@ Select a top list view, and group the query by `resource` to see which specific 
 
 To begin searching for spans in the Trace Explorer, read the [query syntax documentation][2] and the [time frame documentation][3] for more details on custom time frames.
 
+[1]: /tracing/trace_explorer/query_syntax#facets
+[2]: /tracing/trace_explorer/query_syntax
+[3]: /dashboards/guide/custom_time_frames
 
 {{< /site-region >}}
 
@@ -38,6 +41,3 @@ To begin searching for spans in the Trace Explorer, read the [query syntax docum
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_explorer/query_syntax#facets
-[2]: /tracing/trace_explorer/query_syntax
-[3]: /dashboards/guide/custom_time_frames
