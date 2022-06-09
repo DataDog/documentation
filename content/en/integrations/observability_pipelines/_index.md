@@ -28,7 +28,7 @@ further_reading:
 
 Observability Pipelines is a monitoring solution built on [Vector][1], an open source tool that enables you to monitor and manage all of your telemetry pipelines at scale. Vector can be deployed as an agent or an aggregator within your infrastructure to collect, transform, and route all of your logs, metrics, and traces to any destination. 
 
-Add a Datadog API key into your Vector configuration to connect it to Observability Pipelines. Use Observability Pipelines to monitor your Vector pipelines and identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more. 
+Add your Datadog API key to your Vector configuration to connect it to Observability Pipelines. Use Observability Pipelines to monitor your Vector pipelines and identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more. 
 
 With Observability Pipelines, you can also:
 
