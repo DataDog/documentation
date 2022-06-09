@@ -1,5 +1,5 @@
 ---
-title: Audit Trail
+title: Datadog Audit Trail
 kind: documentation
 aliases:
     - /account_management/audit_logs/
@@ -11,13 +11,13 @@ further_reading:
 
 ## Overview
 
-As an administrator or security team member, you can use [Audit Trail][1] to see who is using Datadog within your organization and the context in which they are using Datadog. As an individual, you can see a stream of your own actions, too.
+As an administrator or security team member, you can use [Datadog Audit Trail][1] to see who is using Datadog within your organization and the context in which they are using Datadog. As an individual, you can see a stream of your own actions, too.
 
 There are two types of events that can occur within an audit trail: **request events**, which translate all requests made to Datadog’s API into customer records, or **product-specific events**.
 
 For example, track **request events** so you can see what API calls led up to the event. Or, if you're an enterprise or billing admin, use audit trail events to track user events that change the state of your infrastructure.
 
-In this circumstance, audit trail events are helpful when you want to know product-specific events such as:
+In this circumstance, audit events are helpful when you want to know product-specific events such as:
 
   -  When someone changed the retention of an index because the log volume changed and, therefore, the monthly bill has changed.
 
@@ -33,7 +33,7 @@ For security admins or InfoSec teams, audit trail events help with compliance ch
 
 ## Setup
 
-To enable Audit Trail Events, navigate to your [Organization Settings][2] and select *Audit Trail Settings* under *Security*. Click the **Enable** button.
+To enable Datadog Audit Trail, navigate to your [Organization Settings][2] and select *Audit Trail Settings* under *Security*. Click the **Enable** button.
 
 {{< img src="account_management/audit_logs/audit_enable.png" alt="Audit Trail setup in Datadog" style="width:100%;">}}
 
@@ -53,19 +53,19 @@ To enable archiving for Audit Trail, navigate to your [Organization Settings][2]
 
 ### Retention
 
-Retaining events is an optional feature for Audit Trail. To enable, navigate to your [Organization Settings][2] and select *Audit Trail Settings* under *Security*. Scroll down to Retention and click the Retain Audit Trail Events toggle to enable.
+Retaining events is an optional feature for Audit Trail. To enable, navigate to your [Organization Settings][2] and select *Audit Trail Settings* under *Compliance*. Scroll down to Retention and click the Retain Audit Trail Events toggle to enable.
 
 The default retention period for an audit trail event is seven days. You can set a retention period between three and 90 days.
 
 {{< img src="account_management/audit_logs/retention.png" alt="Audit Trail Retention setup in Datadog" style="width:50%;">}}
 
-## Explore Audit Trail Events
+## Explore audit events
 
-To explore an audit trail event, navigate to the [Audit Trail][1] section, also accessible from your [Organizational Settings][2] in Datadog.
+To explore an audit event, navigate to the [Audit Trail][1] section, also accessible from your [Organizational Settings][2] in Datadog.
 
 {{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:30%;">}}
 
-Audit Trail events have the same functionality as logs within the Datadog Log Management[Logs Explorer][3]:
+Audit Trail events have the same functionality as logs within the Datadog Log Management[Log Explorer][3]:
 
 - Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, etc), Authentication Attributes (Actor, API Key ID, User email, etc), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
 
