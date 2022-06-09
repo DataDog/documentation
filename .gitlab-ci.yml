@@ -294,7 +294,6 @@ index_algolia:
   environment: "live"
   timeout: 1h 45m
   script:
-    - yarn install --immutable
     - |-
       echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
       echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
