@@ -1039,8 +1039,8 @@ main:
     parent: monitors_create
     identifier: monitor_types_apm
     weight: 105
-  - name: Audit logs
-    url: monitors/create/types/audit_logs/
+  - name: Audit Trail
+    url: monitors/create/types/audit_trail/
     parent: monitors_create
     identifier: monitor_types_auditlogs
     weight: 106
