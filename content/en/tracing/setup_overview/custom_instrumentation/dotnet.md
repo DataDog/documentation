@@ -184,7 +184,7 @@ In most cases, headers extraction and injection are transparent. Though, there a
 ```csharp
 var spanContextExtractor = new SpanContextExtractor();
 var parentContext = spanContextExtractor.Extract(headers, (headers, key) => GetHeaderValues(headers, key));
-var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext }; 
+var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext };
 using var scope = Tracer.Instance.StartActive("operation", spanCreationSettings);
 ```
 
@@ -222,6 +222,8 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
     return Enumerable.Empty<string>();
 }
 ```
+
+Note that, using this API will allow you to connect spans to the producer span. Thus, all spans using this context will be a sibling of the consumer span. When you use this API to trace Kafka consumer spans, set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`to false for better readability. Indeed, you will still get a consumer span, but it will only be a placeholder for Kafka related tags like partition, offset...
 
 ### Resource filtering
 

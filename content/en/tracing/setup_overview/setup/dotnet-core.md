@@ -397,7 +397,13 @@ Your logger needs to have a `source` that sets the `trace_id` mapping correctly.
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
-Enables ingestion rate control.
+**Default**: `1.0`<br>
+Enables ingestion rate control. The sampling rate for the traces (defaults to: between `0.0` and `1.0`).
+
+`DD_TRACE_SAMPLING_RULES`
+: **TracerSettings property**: `datadog.trace.sampling_rules`<br>
+**Default**: `null`<br>
+A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). Note that the JSON object **must** be included in single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.|
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
@@ -421,8 +427,9 @@ Added in version 1.18.3. Response header support and entries without tag names a
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api,team:intake` <br>
+**Example**: `layer:api, team:intake` <br>
 Added in version 1.17.0. <br>
+Note that the delimiter is a comma and a whitespace: `, `.
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
@@ -470,6 +477,12 @@ Added in version 2.5.1.
 **Note:** The wildcard method support (`[*]`) selects all methods in a type except constructors, property getters and setters, `Equals`, `Finalize`, `GetHashCode`, and `ToString`. <br>
 Added in version 2.6.0.
 Wildcard support `[*]` added in version 2.7.0.
+
+`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
+: Alters the behaviour of the consumer span<br>
+When set to true, the consumer span is created and its duration is representative to the computation between one message consumption up to the next one. Prefer this setting when message consumption and processing are synchronous.
+When set to false, the consumer span is still created but only for the purpose of storing Kafka tags, its duration isn't representative. Prefer this setting when message consumption and processing are asynchronous.
+**Default**: `true`
 
 #### Automatic instrumentation integration configuration
 
