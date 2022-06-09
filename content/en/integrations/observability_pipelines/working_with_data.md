@@ -45,10 +45,10 @@ Remap transforms act on a single event and can be used to transform them or spec
 - [Encrypt][5] and [decrypt][6] values.
 - [Coerce][7] one datatype to another datatype (for example, from an integer to a string).
 - [Convert syslog values][8] to read-able values.
-- Enrich values by using [enrichment tables][22].
-- [Manipulate][9] IP values.
-- [Parse][10] values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
-- Manipulate event [metadata][11] and [paths][12].
+- Enrich values by using [enrichment tables][9].
+- [Manipulate][10] IP values.
+- [Parse][11] values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
+- Manipulate event [metadata][12] and [paths][11].
 
 ...and [more][1]
 
@@ -105,7 +105,7 @@ In this example, the `type` field is set to a `remap` transform. The `inputs` fi
 
 The second line adds the `.timestamp` field and the value to the event, changing the content of every event that passes through this transform.
 
-See [VRL References][13] and [Vector Configurations][2] for more information.
+See [VRL References][13] and [Vector Configurations][14] for more information.
 
 ## Parse data
 
@@ -383,25 +383,24 @@ The `threshold` field defines the number of events allowed for a given bucket. `
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]:
-[3]:
-[4]:
-[5]:
-[6]:
-[7]:
-[8]:
-[9]:
-[10]:
-[11]:
-[12]:
-[13]:
-[15]:
-[16]:
-[17]:
-[18]:
-[19]:
-[20]:
-[21]:
-
 [1]: https://vector.dev/docs/reference/vrl/functions/
-[2]: /integrations/observability_pipelines/vector_configurations
+[2]: https://vector.dev/docs/reference/vrl/functions/#array-functions
+[3]: https://vector.dev/docs/reference/vrl/functions/#string-functions
+[4]: https://vector.dev/docs/reference/vrl/functions/#codec-functions
+[5]: https://vector.dev/docs/reference/vrl/functions/#encrypt
+[6]: https://vector.dev/docs/reference/vrl/functions/#decrypt
+[7]: https://vector.dev/docs/reference/vrl/functions/#coerce-functions
+[8]: https://vector.dev/docs/reference/vrl/functions/#convert-functions
+[9]: https://vector.dev/docs/reference/vrl/functions/#enrichment-functions
+[10]: 
+[11]: https://vector.dev/docs/reference/vrl/functions/#parse-functions
+[12]: https://vector.dev/docs/reference/vrl/functions/#event-functions
+[13]: https://vector.dev/docs/reference/vrl/#reference
+[14]: /integrations/observability_pipelines/vector_configurations
+[15]: https://vector.dev/docs/reference/configuration/transforms/sample/
+[16]: https://vector.dev/docs/reference/configuration/transforms/reduce/
+[17]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
+[18]: https://vector.dev/docs/reference/configuration/transforms/filter/
+[19]: https://vector.dev/docs/reference/configuration/transforms/aggregate/
+[20]: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/
+[21]: https://vector.dev/docs/reference/configuration/transforms/route/
