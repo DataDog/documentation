@@ -392,7 +392,7 @@ The `threshold` field defines the number of events allowed for a given bucket. `
 [7]: https://vector.dev/docs/reference/vrl/functions/#coerce-functions
 [8]: https://vector.dev/docs/reference/vrl/functions/#convert-functions
 [9]: https://vector.dev/docs/reference/vrl/functions/#enrichment-functions
-[10]: 
+[10]: https://vector.dev/docs/reference/vrl/functions/#ip-functions
 [11]: https://vector.dev/docs/reference/vrl/functions/#parse-functions
 [12]: https://vector.dev/docs/reference/vrl/functions/#event-functions
 [13]: https://vector.dev/docs/reference/vrl/#reference
