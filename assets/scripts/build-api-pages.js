@@ -69,7 +69,7 @@ const updateMenu = (specData, specs, languages) => {
             const item = {
               name: action.summary,
               url: `#` + actionSlug,
-              identifier: actionSlug,
+              identifier: `${tagSlug}-${actionSlug}`,
               parent: tagSlug,
               generated: true,
               params: {

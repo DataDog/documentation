@@ -3075,7 +3075,7 @@ api:
     generated: true
   - name: Generate a new external ID
     url: '#generate-a-new-external-id'
-    identifier: generate-a-new-external-id
+    identifier: aws-integration-generate-a-new-external-id
     parent: aws-integration
     generated: true
     params:
@@ -3087,7 +3087,7 @@ api:
       order: 4
   - name: Set an AWS tag filter
     url: '#set-an-aws-tag-filter'
-    identifier: set-an-aws-tag-filter
+    identifier: aws-integration-set-an-aws-tag-filter
     parent: aws-integration
     generated: true
     params:
@@ -3099,7 +3099,7 @@ api:
       order: 2
   - name: Get all AWS tag filters
     url: '#get-all-aws-tag-filters'
-    identifier: get-all-aws-tag-filters
+    identifier: aws-integration-get-all-aws-tag-filters
     parent: aws-integration
     generated: true
     params:
@@ -3111,7 +3111,7 @@ api:
       order: 1
   - name: Delete a tag filtering entry
     url: '#delete-a-tag-filtering-entry'
-    identifier: delete-a-tag-filtering-entry
+    identifier: aws-integration-delete-a-tag-filtering-entry
     parent: aws-integration
     generated: true
     params:
@@ -3123,7 +3123,7 @@ api:
       order: 3
   - name: List namespace rules
     url: '#list-namespace-rules'
-    identifier: list-namespace-rules
+    identifier: aws-integration-list-namespace-rules
     parent: aws-integration
     generated: true
     params:
@@ -3135,7 +3135,7 @@ api:
       order: 5
   - name: Update an AWS integration
     url: '#update-an-aws-integration'
-    identifier: update-an-aws-integration
+    identifier: aws-integration-update-an-aws-integration
     parent: aws-integration
     generated: true
     params:
@@ -3147,7 +3147,7 @@ api:
       order: 9
   - name: Create an AWS integration
     url: '#create-an-aws-integration'
-    identifier: create-an-aws-integration
+    identifier: aws-integration-create-an-aws-integration
     parent: aws-integration
     generated: true
     params:
@@ -3159,7 +3159,7 @@ api:
       order: 8
   - name: List all AWS integrations
     url: '#list-all-aws-integrations'
-    identifier: list-all-aws-integrations
+    identifier: aws-integration-list-all-aws-integrations
     parent: aws-integration
     generated: true
     params:
@@ -3171,7 +3171,7 @@ api:
       order: 6
   - name: Delete an AWS integration
     url: '#delete-an-aws-integration'
-    identifier: delete-an-aws-integration
+    identifier: aws-integration-delete-an-aws-integration
     parent: aws-integration
     generated: true
     params:
@@ -3187,7 +3187,7 @@ api:
     generated: true
   - name: Check permissions for log services
     url: '#check-permissions-for-log-services'
-    identifier: check-permissions-for-log-services
+    identifier: aws-logs-integration-check-permissions-for-log-services
     parent: aws-logs-integration
     generated: true
     params:
@@ -3199,7 +3199,7 @@ api:
       order: 6
   - name: Enable an AWS Logs integration
     url: '#enable-an-aws-logs-integration'
-    identifier: enable-an-aws-logs-integration
+    identifier: aws-logs-integration-enable-an-aws-logs-integration
     parent: aws-logs-integration
     generated: true
     params:
@@ -3211,7 +3211,7 @@ api:
       order: 5
   - name: Get list of AWS log ready services
     url: '#get-list-of-aws-log-ready-services'
-    identifier: get-list-of-aws-log-ready-services
+    identifier: aws-logs-integration-get-list-of-aws-log-ready-services
     parent: aws-logs-integration
     generated: true
     params:
@@ -3223,7 +3223,7 @@ api:
       order: 4
   - name: Check that an AWS Lambda Function exists
     url: '#check-that-an-aws-lambda-function-exists'
-    identifier: check-that-an-aws-lambda-function-exists
+    identifier: aws-logs-integration-check-that-an-aws-lambda-function-exists
     parent: aws-logs-integration
     generated: true
     params:
@@ -3235,7 +3235,7 @@ api:
       order: 7
   - name: Add AWS Log Lambda ARN
     url: '#add-aws-log-lambda-arn'
-    identifier: add-aws-log-lambda-arn
+    identifier: aws-logs-integration-add-aws-log-lambda-arn
     parent: aws-logs-integration
     generated: true
     params:
@@ -3247,7 +3247,7 @@ api:
       order: 2
   - name: List all AWS Logs integrations
     url: '#list-all-aws-logs-integrations'
-    identifier: list-all-aws-logs-integrations
+    identifier: aws-logs-integration-list-all-aws-logs-integrations
     parent: aws-logs-integration
     generated: true
     params:
@@ -3259,7 +3259,7 @@ api:
       order: 1
   - name: Delete an AWS Logs integration
     url: '#delete-an-aws-logs-integration'
-    identifier: delete-an-aws-logs-integration
+    identifier: aws-logs-integration-delete-an-aws-logs-integration
     parent: aws-logs-integration
     generated: true
     params:
@@ -3275,7 +3275,7 @@ api:
     generated: true
   - name: Validate API key
     url: '#validate-api-key'
-    identifier: validate-api-key
+    identifier: authentication-validate-api-key
     parent: authentication
     generated: true
     params:
@@ -3291,7 +3291,7 @@ api:
     generated: true
   - name: Update Azure integration host filters
     url: '#update-azure-integration-host-filters'
-    identifier: update-azure-integration-host-filters
+    identifier: azure-integration-update-azure-integration-host-filters
     parent: azure-integration
     generated: true
     params:
@@ -3303,7 +3303,7 @@ api:
       order: 5
   - name: Update an Azure integration
     url: '#update-an-azure-integration'
-    identifier: update-an-azure-integration
+    identifier: azure-integration-update-an-azure-integration
     parent: azure-integration
     generated: true
     params:
@@ -3315,7 +3315,7 @@ api:
       order: 4
   - name: Create an Azure integration
     url: '#create-an-azure-integration'
-    identifier: create-an-azure-integration
+    identifier: azure-integration-create-an-azure-integration
     parent: azure-integration
     generated: true
     params:
@@ -3327,7 +3327,7 @@ api:
       order: 2
   - name: List all Azure integrations
     url: '#list-all-azure-integrations'
-    identifier: list-all-azure-integrations
+    identifier: azure-integration-list-all-azure-integrations
     parent: azure-integration
     generated: true
     params:
@@ -3339,7 +3339,7 @@ api:
       order: 1
   - name: Delete an Azure integration
     url: '#delete-an-azure-integration'
-    identifier: delete-an-azure-integration
+    identifier: azure-integration-delete-an-azure-integration
     parent: azure-integration
     generated: true
     params:
@@ -3355,7 +3355,7 @@ api:
     generated: true
   - name: Update items of a dashboard list
     url: '#update-items-of-a-dashboard-list'
-    identifier: update-items-of-a-dashboard-list
+    identifier: dashboard-lists-update-items-of-a-dashboard-list
     parent: dashboard-lists
     generated: true
     params:
@@ -3367,7 +3367,7 @@ api:
       order: 3
   - name: Add Items to a Dashboard List
     url: '#add-items-to-a-dashboard-list'
-    identifier: add-items-to-a-dashboard-list
+    identifier: dashboard-lists-add-items-to-a-dashboard-list
     parent: dashboard-lists
     generated: true
     params:
@@ -3379,7 +3379,7 @@ api:
       order: 2
   - name: Get items of a Dashboard List
     url: '#get-items-of-a-dashboard-list'
-    identifier: get-items-of-a-dashboard-list
+    identifier: dashboard-lists-get-items-of-a-dashboard-list
     parent: dashboard-lists
     generated: true
     params:
@@ -3391,7 +3391,7 @@ api:
       order: 1
   - name: Delete items from a dashboard list
     url: '#delete-items-from-a-dashboard-list'
-    identifier: delete-items-from-a-dashboard-list
+    identifier: dashboard-lists-delete-items-from-a-dashboard-list
     parent: dashboard-lists
     generated: true
     params:
@@ -3403,7 +3403,7 @@ api:
       order: 4
   - name: Update a dashboard list
     url: '#update-a-dashboard-list'
-    identifier: update-a-dashboard-list
+    identifier: dashboard-lists-update-a-dashboard-list
     parent: dashboard-lists
     generated: true
     params:
@@ -3415,7 +3415,7 @@ api:
       order: 4
   - name: Get a dashboard list
     url: '#get-a-dashboard-list'
-    identifier: get-a-dashboard-list
+    identifier: dashboard-lists-get-a-dashboard-list
     parent: dashboard-lists
     generated: true
     params:
@@ -3427,7 +3427,7 @@ api:
       order: 3
   - name: Delete a dashboard list
     url: '#delete-a-dashboard-list'
-    identifier: delete-a-dashboard-list
+    identifier: dashboard-lists-delete-a-dashboard-list
     parent: dashboard-lists
     generated: true
     params:
@@ -3439,7 +3439,7 @@ api:
       order: 5
   - name: Create a dashboard list
     url: '#create-a-dashboard-list'
-    identifier: create-a-dashboard-list
+    identifier: dashboard-lists-create-a-dashboard-list
     parent: dashboard-lists
     generated: true
     params:
@@ -3451,7 +3451,7 @@ api:
       order: 2
   - name: Get all dashboard lists
     url: '#get-all-dashboard-lists'
-    identifier: get-all-dashboard-lists
+    identifier: dashboard-lists-get-all-dashboard-lists
     parent: dashboard-lists
     generated: true
     params:
@@ -3467,7 +3467,7 @@ api:
     generated: true
   - name: Update a dashboard
     url: '#update-a-dashboard'
-    identifier: update-a-dashboard
+    identifier: dashboards-update-a-dashboard
     parent: dashboards
     generated: true
     params:
@@ -3479,7 +3479,7 @@ api:
       order: 6
   - name: Get a dashboard
     url: '#get-a-dashboard'
-    identifier: get-a-dashboard
+    identifier: dashboards-get-a-dashboard
     parent: dashboards
     generated: true
     params:
@@ -3491,7 +3491,7 @@ api:
       order: 7
   - name: Delete a dashboard
     url: '#delete-a-dashboard'
-    identifier: delete-a-dashboard
+    identifier: dashboards-delete-a-dashboard
     parent: dashboards
     generated: true
     params:
@@ -3503,7 +3503,7 @@ api:
       order: 3
   - name: Send shared dashboard invitation email
     url: '#send-shared-dashboard-invitation-email'
-    identifier: send-shared-dashboard-invitation-email
+    identifier: dashboards-send-shared-dashboard-invitation-email
     parent: dashboards
     generated: true
     params:
@@ -3515,7 +3515,7 @@ api:
       order: 6
   - name: Get all invitations for a shared dashboard
     url: '#get-all-invitations-for-a-shared-dashboard'
-    identifier: get-all-invitations-for-a-shared-dashboard
+    identifier: dashboards-get-all-invitations-for-a-shared-dashboard
     parent: dashboards
     generated: true
     params:
@@ -3527,7 +3527,7 @@ api:
       order: 5
   - name: Revoke shared dashboard invitations
     url: '#revoke-shared-dashboard-invitations'
-    identifier: revoke-shared-dashboard-invitations
+    identifier: dashboards-revoke-shared-dashboard-invitations
     parent: dashboards
     generated: true
     params:
@@ -3539,7 +3539,7 @@ api:
       order: 7
   - name: Update a shared dashboard
     url: '#update-a-shared-dashboard'
-    identifier: update-a-shared-dashboard
+    identifier: dashboards-update-a-shared-dashboard
     parent: dashboards
     generated: true
     params:
@@ -3551,7 +3551,7 @@ api:
       order: 3
   - name: Get a shared dashboard
     url: '#get-a-shared-dashboard'
-    identifier: get-a-shared-dashboard
+    identifier: dashboards-get-a-shared-dashboard
     parent: dashboards
     generated: true
     params:
@@ -3563,7 +3563,7 @@ api:
       order: 2
   - name: Revoke a shared dashboard URL
     url: '#revoke-a-shared-dashboard-url'
-    identifier: revoke-a-shared-dashboard-url
+    identifier: dashboards-revoke-a-shared-dashboard-url
     parent: dashboards
     generated: true
     params:
@@ -3575,7 +3575,7 @@ api:
       order: 4
   - name: Create a shared dashboard
     url: '#create-a-shared-dashboard'
-    identifier: create-a-shared-dashboard
+    identifier: dashboards-create-a-shared-dashboard
     parent: dashboards
     generated: true
     params:
@@ -3587,7 +3587,7 @@ api:
       order: 1
   - name: Create a new dashboard
     url: '#create-a-new-dashboard'
-    identifier: create-a-new-dashboard
+    identifier: dashboards-create-a-new-dashboard
     parent: dashboards
     generated: true
     params:
@@ -3599,7 +3599,7 @@ api:
       order: 1
   - name: Restore deleted dashboards
     url: '#restore-deleted-dashboards'
-    identifier: restore-deleted-dashboards
+    identifier: dashboards-restore-deleted-dashboards
     parent: dashboards
     generated: true
     params:
@@ -3611,7 +3611,7 @@ api:
       order: 5
   - name: Get all dashboards
     url: '#get-all-dashboards'
-    identifier: get-all-dashboards
+    identifier: dashboards-get-all-dashboards
     parent: dashboards
     generated: true
     params:
@@ -3623,7 +3623,7 @@ api:
       order: 2
   - name: Delete dashboards
     url: '#delete-dashboards'
-    identifier: delete-dashboards
+    identifier: dashboards-delete-dashboards
     parent: dashboards
     generated: true
     params:
@@ -3639,7 +3639,7 @@ api:
     generated: true
   - name: Get all downtimes for a monitor
     url: '#get-all-downtimes-for-a-monitor'
-    identifier: get-all-downtimes-for-a-monitor
+    identifier: downtimes-get-all-downtimes-for-a-monitor
     parent: downtimes
     generated: true
     params:
@@ -3651,7 +3651,7 @@ api:
       order: 7
   - name: Update a downtime
     url: '#update-a-downtime'
-    identifier: update-a-downtime
+    identifier: downtimes-update-a-downtime
     parent: downtimes
     generated: true
     params:
@@ -3663,7 +3663,7 @@ api:
       order: 6
   - name: Get a downtime
     url: '#get-a-downtime'
-    identifier: get-a-downtime
+    identifier: downtimes-get-a-downtime
     parent: downtimes
     generated: true
     params:
@@ -3675,7 +3675,7 @@ api:
       order: 5
   - name: Cancel a downtime
     url: '#cancel-a-downtime'
-    identifier: cancel-a-downtime
+    identifier: downtimes-cancel-a-downtime
     parent: downtimes
     generated: true
     params:
@@ -3687,7 +3687,7 @@ api:
       order: 4
   - name: Cancel downtimes by scope
     url: '#cancel-downtimes-by-scope'
-    identifier: cancel-downtimes-by-scope
+    identifier: downtimes-cancel-downtimes-by-scope
     parent: downtimes
     generated: true
     params:
@@ -3699,7 +3699,7 @@ api:
       order: 3
   - name: Schedule a downtime
     url: '#schedule-a-downtime'
-    identifier: schedule-a-downtime
+    identifier: downtimes-schedule-a-downtime
     parent: downtimes
     generated: true
     params:
@@ -3711,7 +3711,7 @@ api:
       order: 2
   - name: Get all downtimes
     url: '#get-all-downtimes'
-    identifier: get-all-downtimes
+    identifier: downtimes-get-all-downtimes
     parent: downtimes
     generated: true
     params:
@@ -3727,7 +3727,7 @@ api:
     generated: true
   - name: Revoke embed
     url: '#revoke-embed'
-    identifier: revoke-embed
+    identifier: embeddable-graphs-revoke-embed
     parent: embeddable-graphs
     generated: true
     params:
@@ -3739,7 +3739,7 @@ api:
       order: 0
   - name: Enable embed
     url: '#enable-embed'
-    identifier: enable-embed
+    identifier: embeddable-graphs-enable-embed
     parent: embeddable-graphs
     generated: true
     params:
@@ -3751,7 +3751,7 @@ api:
       order: 0
   - name: Get specific embed
     url: '#get-specific-embed'
-    identifier: get-specific-embed
+    identifier: embeddable-graphs-get-specific-embed
     parent: embeddable-graphs
     generated: true
     params:
@@ -3763,7 +3763,7 @@ api:
       order: 0
   - name: Create embed
     url: '#create-embed'
-    identifier: create-embed
+    identifier: embeddable-graphs-create-embed
     parent: embeddable-graphs
     generated: true
     params:
@@ -3775,7 +3775,7 @@ api:
       order: 0
   - name: Get all embeds
     url: '#get-all-embeds'
-    identifier: get-all-embeds
+    identifier: embeddable-graphs-get-all-embeds
     parent: embeddable-graphs
     generated: true
     params:
@@ -3791,7 +3791,7 @@ api:
     generated: true
   - name: Get an event
     url: '#get-an-event'
-    identifier: get-an-event
+    identifier: events-get-an-event
     parent: events
     generated: true
     params:
@@ -3803,7 +3803,7 @@ api:
       order: 2
   - name: Post an event
     url: '#post-an-event'
-    identifier: post-an-event
+    identifier: events-post-an-event
     parent: events
     generated: true
     params:
@@ -3815,7 +3815,7 @@ api:
       order: 1
   - name: Query the event stream
     url: '#query-the-event-stream'
-    identifier: query-the-event-stream
+    identifier: events-query-the-event-stream
     parent: events
     generated: true
     params:
@@ -3831,7 +3831,7 @@ api:
     generated: true
   - name: Update a GCP integration
     url: '#update-a-gcp-integration'
-    identifier: update-a-gcp-integration
+    identifier: gcp-integration-update-a-gcp-integration
     parent: gcp-integration
     generated: true
     params:
@@ -3843,7 +3843,7 @@ api:
       order: 4
   - name: Create a GCP integration
     url: '#create-a-gcp-integration'
-    identifier: create-a-gcp-integration
+    identifier: gcp-integration-create-a-gcp-integration
     parent: gcp-integration
     generated: true
     params:
@@ -3855,7 +3855,7 @@ api:
       order: 2
   - name: List all GCP integrations
     url: '#list-all-gcp-integrations'
-    identifier: list-all-gcp-integrations
+    identifier: gcp-integration-list-all-gcp-integrations
     parent: gcp-integration
     generated: true
     params:
@@ -3867,7 +3867,7 @@ api:
       order: 1
   - name: Delete a GCP integration
     url: '#delete-a-gcp-integration'
-    identifier: delete-a-gcp-integration
+    identifier: gcp-integration-delete-a-gcp-integration
     parent: gcp-integration
     generated: true
     params:
@@ -3883,7 +3883,7 @@ api:
     generated: true
   - name: Get the total number of active hosts
     url: '#get-the-total-number-of-active-hosts'
-    identifier: get-the-total-number-of-active-hosts
+    identifier: hosts-get-the-total-number-of-active-hosts
     parent: hosts
     generated: true
     params:
@@ -3895,7 +3895,7 @@ api:
       order: 2
   - name: Get all hosts for your organization
     url: '#get-all-hosts-for-your-organization'
-    identifier: get-all-hosts-for-your-organization
+    identifier: hosts-get-all-hosts-for-your-organization
     parent: hosts
     generated: true
     params:
@@ -3907,7 +3907,7 @@ api:
       order: 1
   - name: Unmute a host
     url: '#unmute-a-host'
-    identifier: unmute-a-host
+    identifier: hosts-unmute-a-host
     parent: hosts
     generated: true
     params:
@@ -3919,7 +3919,7 @@ api:
       order: 4
   - name: Mute a host
     url: '#mute-a-host'
-    identifier: mute-a-host
+    identifier: hosts-mute-a-host
     parent: hosts
     generated: true
     params:
@@ -3935,7 +3935,7 @@ api:
     generated: true
   - name: List IP Ranges
     url: '#list-ip-ranges'
-    identifier: list-ip-ranges
+    identifier: ip-ranges-list-ip-ranges
     parent: ip-ranges
     generated: true
     params:
@@ -3951,7 +3951,7 @@ api:
     generated: true
   - name: Edit an application key owned by current user
     url: '#edit-an-application-key-owned-by-current-user'
-    identifier: edit-an-application-key-owned-by-current-user
+    identifier: key-management-edit-an-application-key-owned-by-current-user
     parent: key-management
     generated: true
     params:
@@ -3963,7 +3963,7 @@ api:
       order: 0
   - name: Get one application key owned by current user
     url: '#get-one-application-key-owned-by-current-user'
-    identifier: get-one-application-key-owned-by-current-user
+    identifier: key-management-get-one-application-key-owned-by-current-user
     parent: key-management
     generated: true
     params:
@@ -3975,7 +3975,7 @@ api:
       order: 0
   - name: Delete an application key owned by current user
     url: '#delete-an-application-key-owned-by-current-user'
-    identifier: delete-an-application-key-owned-by-current-user
+    identifier: key-management-delete-an-application-key-owned-by-current-user
     parent: key-management
     generated: true
     params:
@@ -3987,7 +3987,7 @@ api:
       order: 0
   - name: Create an application key for current user
     url: '#create-an-application-key-for-current-user'
-    identifier: create-an-application-key-for-current-user
+    identifier: key-management-create-an-application-key-for-current-user
     parent: key-management
     generated: true
     params:
@@ -3999,7 +3999,7 @@ api:
       order: 0
   - name: Get all application keys owned by current user
     url: '#get-all-application-keys-owned-by-current-user'
-    identifier: get-all-application-keys-owned-by-current-user
+    identifier: key-management-get-all-application-keys-owned-by-current-user
     parent: key-management
     generated: true
     params:
@@ -4011,46 +4011,151 @@ api:
       order: 0
   - name: Edit an application key
     url: '#edit-an-application-key'
-    identifier: edit-an-application-key
+    identifier: key-management-edit-an-application-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateApplicationKey
+      unstable: []
+      order: 0
+  - name: Get an application key
+    url: '#get-an-application-key'
+    identifier: key-management-get-an-application-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetApplicationKey
+      unstable: []
+      order: 0
+  - name: Delete an application key
+    url: '#delete-an-application-key'
+    identifier: key-management-delete-an-application-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteApplicationKey
+      unstable: []
+      order: 0
+  - name: Get all application keys
+    url: '#get-all-application-keys'
+    identifier: key-management-get-all-application-keys
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListApplicationKeys
+      unstable: []
+      order: 0
+  - name: Edit an API key
+    url: '#edit-an-api-key'
+    identifier: key-management-edit-an-api-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateAPIKey
+      unstable: []
+      order: 0
+  - name: Get API key
+    url: '#get-api-key'
+    identifier: key-management-get-api-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetAPIKey
+      unstable: []
+      order: 0
+  - name: Delete an API key
+    url: '#delete-an-api-key'
+    identifier: key-management-delete-an-api-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteAPIKey
+      unstable: []
+      order: 0
+  - name: Create an API key
+    url: '#create-an-api-key'
+    identifier: key-management-create-an-api-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateAPIKey
+      unstable: []
+      order: 0
+  - name: Get all API keys
+    url: '#get-all-api-keys'
+    identifier: key-management-get-all-api-keys
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListAPIKeys
+      unstable: []
+      order: 0
+  - name: Edit an application key
+    url: '#edit-an-application-key'
+    identifier: key-management-edit-an-application-key
     parent: key-management
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - UpdateApplicationKey
       unstable: []
       order: 9
   - name: Get an application key
     url: '#get-an-application-key'
-    identifier: get-an-application-key
+    identifier: key-management-get-an-application-key
     parent: key-management
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - GetApplicationKey
       unstable: []
       order: 8
   - name: Delete an application key
     url: '#delete-an-application-key'
-    identifier: delete-an-application-key
+    identifier: key-management-delete-an-application-key
     parent: key-management
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - DeleteApplicationKey
       unstable: []
       order: 10
   - name: Create an application key
     url: '#create-an-application-key'
-    identifier: create-an-application-key
+    identifier: key-management-create-an-application-key
     parent: key-management
     generated: true
     params:
@@ -4062,78 +4167,72 @@ api:
       order: 7
   - name: Get all application keys
     url: '#get-all-application-keys'
-    identifier: get-all-application-keys
+    identifier: key-management-get-all-application-keys
     parent: key-management
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - ListApplicationKeys
       unstable: []
       order: 6
   - name: Edit an API key
     url: '#edit-an-api-key'
-    identifier: edit-an-api-key
+    identifier: key-management-edit-an-api-key
     parent: key-management
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - UpdateAPIKey
       unstable: []
       order: 4
   - name: Get API key
     url: '#get-api-key'
-    identifier: get-api-key
+    identifier: key-management-get-api-key
     parent: key-management
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - GetAPIKey
       unstable: []
       order: 3
   - name: Delete an API key
     url: '#delete-an-api-key'
-    identifier: delete-an-api-key
+    identifier: key-management-delete-an-api-key
     parent: key-management
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - DeleteAPIKey
       unstable: []
       order: 5
   - name: Create an API key
     url: '#create-an-api-key'
-    identifier: create-an-api-key
+    identifier: key-management-create-an-api-key
     parent: key-management
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - CreateAPIKey
       unstable: []
       order: 2
   - name: Get all API keys
     url: '#get-all-api-keys'
-    identifier: get-all-api-keys
+    identifier: key-management-get-all-api-keys
     parent: key-management
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - ListAPIKeys
       unstable: []
@@ -4142,9 +4241,21 @@ api:
     url: /api/latest/logs/
     identifier: logs
     generated: true
+  - name: Search logs
+    url: '#search-logs'
+    identifier: logs-search-logs
+    parent: logs
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogs
+      unstable: []
+      order: 2
   - name: Get a list of logs
     url: '#get-a-list-of-logs'
-    identifier: get-a-list-of-logs
+    identifier: logs-get-a-list-of-logs
     parent: logs
     generated: true
     params:
@@ -4156,7 +4267,7 @@ api:
       order: 3
   - name: Aggregate events
     url: '#aggregate-events'
-    identifier: aggregate-events
+    identifier: logs-aggregate-events
     parent: logs
     generated: true
     params:
@@ -4168,26 +4279,36 @@ api:
       order: 1
   - name: Send logs
     url: '#send-logs'
-    identifier: send-logs
+    identifier: logs-send-logs
+    parent: logs
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SubmitLog
+      unstable: []
+      order: 1
+  - name: Send logs
+    url: '#send-logs'
+    identifier: logs-send-logs
     parent: logs
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - SubmitLog
       unstable: []
       order: 1
   - name: Search logs
     url: '#search-logs'
-    identifier: search-logs
+    identifier: logs-search-logs
     parent: logs
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - ListLogs
       unstable: []
@@ -4198,7 +4319,7 @@ api:
     generated: true
   - name: Update an index
     url: '#update-an-index'
-    identifier: update-an-index
+    identifier: logs-indexes-update-an-index
     parent: logs-indexes
     generated: true
     params:
@@ -4210,7 +4331,7 @@ api:
       order: 4
   - name: Get an index
     url: '#get-an-index'
-    identifier: get-an-index
+    identifier: logs-indexes-get-an-index
     parent: logs-indexes
     generated: true
     params:
@@ -4222,7 +4343,7 @@ api:
       order: 3
   - name: Create an index
     url: '#create-an-index'
-    identifier: create-an-index
+    identifier: logs-indexes-create-an-index
     parent: logs-indexes
     generated: true
     params:
@@ -4234,7 +4355,7 @@ api:
       order: 2
   - name: Get all indexes
     url: '#get-all-indexes'
-    identifier: get-all-indexes
+    identifier: logs-indexes-get-all-indexes
     parent: logs-indexes
     generated: true
     params:
@@ -4246,7 +4367,7 @@ api:
       order: 1
   - name: Update indexes order
     url: '#update-indexes-order'
-    identifier: update-indexes-order
+    identifier: logs-indexes-update-indexes-order
     parent: logs-indexes
     generated: true
     params:
@@ -4258,7 +4379,7 @@ api:
       order: 6
   - name: Get indexes order
     url: '#get-indexes-order'
-    identifier: get-indexes-order
+    identifier: logs-indexes-get-indexes-order
     parent: logs-indexes
     generated: true
     params:
@@ -4274,7 +4395,7 @@ api:
     generated: true
   - name: Update a pipeline
     url: '#update-a-pipeline'
-    identifier: update-a-pipeline
+    identifier: logs-pipelines-update-a-pipeline
     parent: logs-pipelines
     generated: true
     params:
@@ -4286,7 +4407,7 @@ api:
       order: 7
   - name: Get a pipeline
     url: '#get-a-pipeline'
-    identifier: get-a-pipeline
+    identifier: logs-pipelines-get-a-pipeline
     parent: logs-pipelines
     generated: true
     params:
@@ -4298,7 +4419,7 @@ api:
       order: 5
   - name: Delete a pipeline
     url: '#delete-a-pipeline'
-    identifier: delete-a-pipeline
+    identifier: logs-pipelines-delete-a-pipeline
     parent: logs-pipelines
     generated: true
     params:
@@ -4310,7 +4431,7 @@ api:
       order: 6
   - name: Create a pipeline
     url: '#create-a-pipeline'
-    identifier: create-a-pipeline
+    identifier: logs-pipelines-create-a-pipeline
     parent: logs-pipelines
     generated: true
     params:
@@ -4322,7 +4443,7 @@ api:
       order: 4
   - name: Get all pipelines
     url: '#get-all-pipelines'
-    identifier: get-all-pipelines
+    identifier: logs-pipelines-get-all-pipelines
     parent: logs-pipelines
     generated: true
     params:
@@ -4334,7 +4455,7 @@ api:
       order: 3
   - name: Update pipeline order
     url: '#update-pipeline-order'
-    identifier: update-pipeline-order
+    identifier: logs-pipelines-update-pipeline-order
     parent: logs-pipelines
     generated: true
     params:
@@ -4346,7 +4467,7 @@ api:
       order: 2
   - name: Get pipeline order
     url: '#get-pipeline-order'
-    identifier: get-pipeline-order
+    identifier: logs-pipelines-get-pipeline-order
     parent: logs-pipelines
     generated: true
     params:
@@ -4360,9 +4481,21 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
+  - name: Submit metrics
+    url: '#submit-metrics'
+    identifier: metrics-submit-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SubmitMetrics
+      unstable: []
+      order: 1
   - name: List distinct metric volumes by metric name
     url: '#list-distinct-metric-volumes-by-metric-name'
-    identifier: list-distinct-metric-volumes-by-metric-name
+    identifier: metrics-list-distinct-metric-volumes-by-metric-name
     parent: metrics
     generated: true
     params:
@@ -4374,7 +4507,7 @@ api:
       order: 7
   - name: Create a tag configuration
     url: '#create-a-tag-configuration'
-    identifier: create-a-tag-configuration
+    identifier: metrics-create-a-tag-configuration
     parent: metrics
     generated: true
     params:
@@ -4386,7 +4519,7 @@ api:
       order: 1
   - name: Update a tag configuration
     url: '#update-a-tag-configuration'
-    identifier: update-a-tag-configuration
+    identifier: metrics-update-a-tag-configuration
     parent: metrics
     generated: true
     params:
@@ -4398,7 +4531,7 @@ api:
       order: 3
   - name: List tag configuration by name
     url: '#list-tag-configuration-by-name'
-    identifier: list-tag-configuration-by-name
+    identifier: metrics-list-tag-configuration-by-name
     parent: metrics
     generated: true
     params:
@@ -4410,7 +4543,7 @@ api:
       order: 2
   - name: Delete a tag configuration
     url: '#delete-a-tag-configuration'
-    identifier: delete-a-tag-configuration
+    identifier: metrics-delete-a-tag-configuration
     parent: metrics
     generated: true
     params:
@@ -4422,7 +4555,7 @@ api:
       order: 4
   - name: Tag Configuration Cardinality Estimator
     url: '#tag-configuration-cardinality-estimator'
-    identifier: tag-configuration-cardinality-estimator
+    identifier: metrics-tag-configuration-cardinality-estimator
     parent: metrics
     generated: true
     params:
@@ -4434,7 +4567,7 @@ api:
       order: 10
   - name: List tags by metric name
     url: '#list-tags-by-metric-name'
-    identifier: list-tags-by-metric-name
+    identifier: metrics-list-tags-by-metric-name
     parent: metrics
     generated: true
     params:
@@ -4446,7 +4579,19 @@ api:
       order: 6
   - name: Configure tags for multiple metrics
     url: '#configure-tags-for-multiple-metrics'
-    identifier: configure-tags-for-multiple-metrics
+    identifier: metrics-configure-tags-for-multiple-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateBulkTagsMetricsConfiguration
+      unstable: []
+      order: 8
+  - name: Configure tags for multiple metrics
+    url: '#configure-tags-for-multiple-metrics'
+    identifier: metrics-configure-tags-for-multiple-metrics
     parent: metrics
     generated: true
     params:
@@ -4454,12 +4599,11 @@ api:
         - v2
       operationids:
         - DeleteBulkTagsMetricsConfiguration
-        - CreateBulkTagsMetricsConfiguration
       unstable: []
       order: 9
   - name: List tag configurations
     url: '#list-tag-configurations'
-    identifier: list-tag-configurations
+    identifier: metrics-list-tag-configurations
     parent: metrics
     generated: true
     params:
@@ -4471,20 +4615,19 @@ api:
       order: 5
   - name: Submit metrics
     url: '#submit-metrics'
-    identifier: submit-metrics
+    identifier: metrics-submit-metrics
     parent: metrics
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - SubmitMetrics
       unstable: []
       order: 1
   - name: Search metrics
     url: '#search-metrics'
-    identifier: search-metrics
+    identifier: metrics-search-metrics
     parent: metrics
     generated: true
     params:
@@ -4496,7 +4639,7 @@ api:
       order: 4
   - name: Query timeseries points
     url: '#query-timeseries-points'
-    identifier: query-timeseries-points
+    identifier: metrics-query-timeseries-points
     parent: metrics
     generated: true
     params:
@@ -4508,7 +4651,7 @@ api:
       order: 5
   - name: Edit metric metadata
     url: '#edit-metric-metadata'
-    identifier: edit-metric-metadata
+    identifier: metrics-edit-metric-metadata
     parent: metrics
     generated: true
     params:
@@ -4520,7 +4663,7 @@ api:
       order: 3
   - name: Get metric metadata
     url: '#get-metric-metadata'
-    identifier: get-metric-metadata
+    identifier: metrics-get-metric-metadata
     parent: metrics
     generated: true
     params:
@@ -4532,7 +4675,7 @@ api:
       order: 2
   - name: Get active metrics list
     url: '#get-active-metrics-list'
-    identifier: get-active-metrics-list
+    identifier: metrics-get-active-metrics-list
     parent: metrics
     generated: true
     params:
@@ -4548,7 +4691,7 @@ api:
     generated: true
   - name: Unmute all monitors
     url: '#unmute-all-monitors'
-    identifier: unmute-all-monitors
+    identifier: monitors-unmute-all-monitors
     parent: monitors
     generated: true
     params:
@@ -4560,7 +4703,7 @@ api:
       order: 0
   - name: Mute all monitors
     url: '#mute-all-monitors'
-    identifier: mute-all-monitors
+    identifier: monitors-mute-all-monitors
     parent: monitors
     generated: true
     params:
@@ -4572,7 +4715,7 @@ api:
       order: 0
   - name: Validate an existing monitor
     url: '#validate-an-existing-monitor'
-    identifier: validate-an-existing-monitor
+    identifier: monitors-validate-an-existing-monitor
     parent: monitors
     generated: true
     params:
@@ -4584,7 +4727,7 @@ api:
       order: 8
   - name: Unmute a monitor
     url: '#unmute-a-monitor'
-    identifier: unmute-a-monitor
+    identifier: monitors-unmute-a-monitor
     parent: monitors
     generated: true
     params:
@@ -4596,7 +4739,7 @@ api:
       order: 0
   - name: Mute a monitor
     url: '#mute-a-monitor'
-    identifier: mute-a-monitor
+    identifier: monitors-mute-a-monitor
     parent: monitors
     generated: true
     params:
@@ -4608,7 +4751,7 @@ api:
       order: 0
   - name: Edit a monitor
     url: '#edit-a-monitor'
-    identifier: edit-a-monitor
+    identifier: monitors-edit-a-monitor
     parent: monitors
     generated: true
     params:
@@ -4620,7 +4763,7 @@ api:
       order: 3
   - name: Get a monitor's details
     url: '#get-a-monitors-details'
-    identifier: get-a-monitors-details
+    identifier: monitors-get-a-monitors-details
     parent: monitors
     generated: true
     params:
@@ -4632,7 +4775,7 @@ api:
       order: 4
   - name: Delete a monitor
     url: '#delete-a-monitor'
-    identifier: delete-a-monitor
+    identifier: monitors-delete-a-monitor
     parent: monitors
     generated: true
     params:
@@ -4644,7 +4787,7 @@ api:
       order: 5
   - name: Validate a monitor
     url: '#validate-a-monitor'
-    identifier: validate-a-monitor
+    identifier: monitors-validate-a-monitor
     parent: monitors
     generated: true
     params:
@@ -4656,7 +4799,7 @@ api:
       order: 7
   - name: Monitors search
     url: '#monitors-search'
-    identifier: monitors-search
+    identifier: monitors-monitors-search
     parent: monitors
     generated: true
     params:
@@ -4668,7 +4811,7 @@ api:
       order: 1
   - name: Monitors group search
     url: '#monitors-group-search'
-    identifier: monitors-group-search
+    identifier: monitors-monitors-group-search
     parent: monitors
     generated: true
     params:
@@ -4680,7 +4823,7 @@ api:
       order: 2
   - name: Check if a monitor can be deleted
     url: '#check-if-a-monitor-can-be-deleted'
-    identifier: check-if-a-monitor-can-be-deleted
+    identifier: monitors-check-if-a-monitor-can-be-deleted
     parent: monitors
     generated: true
     params:
@@ -4692,7 +4835,7 @@ api:
       order: 6
   - name: Create a monitor
     url: '#create-a-monitor'
-    identifier: create-a-monitor
+    identifier: monitors-create-a-monitor
     parent: monitors
     generated: true
     params:
@@ -4704,7 +4847,7 @@ api:
       order: 1
   - name: Get all monitor details
     url: '#get-all-monitor-details'
-    identifier: get-all-monitor-details
+    identifier: monitors-get-all-monitor-details
     parent: monitors
     generated: true
     params:
@@ -4720,7 +4863,7 @@ api:
     generated: true
   - name: Update a notebook
     url: '#update-a-notebook'
-    identifier: update-a-notebook
+    identifier: notebooks-update-a-notebook
     parent: notebooks
     generated: true
     params:
@@ -4732,7 +4875,7 @@ api:
       order: 0
   - name: Get a notebook
     url: '#get-a-notebook'
-    identifier: get-a-notebook
+    identifier: notebooks-get-a-notebook
     parent: notebooks
     generated: true
     params:
@@ -4744,7 +4887,7 @@ api:
       order: 0
   - name: Delete a notebook
     url: '#delete-a-notebook'
-    identifier: delete-a-notebook
+    identifier: notebooks-delete-a-notebook
     parent: notebooks
     generated: true
     params:
@@ -4756,7 +4899,7 @@ api:
       order: 0
   - name: Create a notebook
     url: '#create-a-notebook'
-    identifier: create-a-notebook
+    identifier: notebooks-create-a-notebook
     parent: notebooks
     generated: true
     params:
@@ -4768,7 +4911,7 @@ api:
       order: 0
   - name: Get all notebooks
     url: '#get-all-notebooks'
-    identifier: get-all-notebooks
+    identifier: notebooks-get-all-notebooks
     parent: notebooks
     generated: true
     params:
@@ -4784,21 +4927,31 @@ api:
     generated: true
   - name: Upload IdP metadata
     url: '#upload-idp-metadata'
-    identifier: upload-idp-metadata
+    identifier: organizations-upload-idp-metadata
+    parent: organizations
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UploadIdPMetadata
+      unstable: []
+      order: 1
+  - name: Upload IdP metadata
+    url: '#upload-idp-metadata'
+    identifier: organizations-upload-idp-metadata
     parent: organizations
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - UploadIdPForOrg
-        - UploadIdPMetadata
       unstable: []
       order: 5
   - name: Update your organization
     url: '#update-your-organization'
-    identifier: update-your-organization
+    identifier: organizations-update-your-organization
     parent: organizations
     generated: true
     params:
@@ -4810,7 +4963,7 @@ api:
       order: 4
   - name: Get organization information
     url: '#get-organization-information'
-    identifier: get-organization-information
+    identifier: organizations-get-organization-information
     parent: organizations
     generated: true
     params:
@@ -4822,7 +4975,7 @@ api:
       order: 3
   - name: Create a child organization
     url: '#create-a-child-organization'
-    identifier: create-a-child-organization
+    identifier: organizations-create-a-child-organization
     parent: organizations
     generated: true
     params:
@@ -4834,7 +4987,7 @@ api:
       order: 1
   - name: List your managed organizations
     url: '#list-your-managed-organizations'
-    identifier: list-your-managed-organizations
+    identifier: organizations-list-your-managed-organizations
     parent: organizations
     generated: true
     params:
@@ -4850,7 +5003,7 @@ api:
     generated: true
   - name: Update a single service object
     url: '#update-a-single-service-object'
-    identifier: update-a-single-service-object
+    identifier: pagerduty-integration-update-a-single-service-object
     parent: pagerduty-integration
     generated: true
     params:
@@ -4862,7 +5015,7 @@ api:
       order: 3
   - name: Get a single service object
     url: '#get-a-single-service-object'
-    identifier: get-a-single-service-object
+    identifier: pagerduty-integration-get-a-single-service-object
     parent: pagerduty-integration
     generated: true
     params:
@@ -4874,7 +5027,7 @@ api:
       order: 2
   - name: Delete a single service object
     url: '#delete-a-single-service-object'
-    identifier: delete-a-single-service-object
+    identifier: pagerduty-integration-delete-a-single-service-object
     parent: pagerduty-integration
     generated: true
     params:
@@ -4886,7 +5039,7 @@ api:
       order: 4
   - name: Create a new service object
     url: '#create-a-new-service-object'
-    identifier: create-a-new-service-object
+    identifier: pagerduty-integration-create-a-new-service-object
     parent: pagerduty-integration
     generated: true
     params:
@@ -4906,7 +5059,7 @@ api:
     generated: true
   - name: Get a list of security signals
     url: '#get-a-list-of-security-signals'
-    identifier: get-a-list-of-security-signals
+    identifier: security-monitoring-get-a-list-of-security-signals
     parent: security-monitoring
     generated: true
     params:
@@ -4919,7 +5072,7 @@ api:
       order: 6
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
-    identifier: get-a-quick-list-of-security-signals
+    identifier: security-monitoring-get-a-quick-list-of-security-signals
     parent: security-monitoring
     generated: true
     params:
@@ -4932,7 +5085,7 @@ api:
       order: 7
   - name: Update an existing rule
     url: '#update-an-existing-rule'
-    identifier: update-an-existing-rule
+    identifier: security-monitoring-update-an-existing-rule
     parent: security-monitoring
     generated: true
     params:
@@ -4944,7 +5097,7 @@ api:
       order: 4
   - name: Get a rule's details
     url: '#get-a-rules-details'
-    identifier: get-a-rules-details
+    identifier: security-monitoring-get-a-rules-details
     parent: security-monitoring
     generated: true
     params:
@@ -4956,7 +5109,7 @@ api:
       order: 3
   - name: Delete an existing rule
     url: '#delete-an-existing-rule'
-    identifier: delete-an-existing-rule
+    identifier: security-monitoring-delete-an-existing-rule
     parent: security-monitoring
     generated: true
     params:
@@ -4968,7 +5121,7 @@ api:
       order: 5
   - name: Create a detection rule
     url: '#create-a-detection-rule'
-    identifier: create-a-detection-rule
+    identifier: security-monitoring-create-a-detection-rule
     parent: security-monitoring
     generated: true
     params:
@@ -4980,7 +5133,7 @@ api:
       order: 2
   - name: List rules
     url: '#list-rules'
-    identifier: list-rules
+    identifier: security-monitoring-list-rules
     parent: security-monitoring
     generated: true
     params:
@@ -4992,7 +5145,7 @@ api:
       order: 1
   - name: Update a security filter
     url: '#update-a-security-filter'
-    identifier: update-a-security-filter
+    identifier: security-monitoring-update-a-security-filter
     parent: security-monitoring
     generated: true
     params:
@@ -5004,7 +5157,7 @@ api:
       order: 0
   - name: Get a security filter
     url: '#get-a-security-filter'
-    identifier: get-a-security-filter
+    identifier: security-monitoring-get-a-security-filter
     parent: security-monitoring
     generated: true
     params:
@@ -5016,7 +5169,7 @@ api:
       order: 0
   - name: Delete a security filter
     url: '#delete-a-security-filter'
-    identifier: delete-a-security-filter
+    identifier: security-monitoring-delete-a-security-filter
     parent: security-monitoring
     generated: true
     params:
@@ -5028,7 +5181,7 @@ api:
       order: 0
   - name: Create a security filter
     url: '#create-a-security-filter'
-    identifier: create-a-security-filter
+    identifier: security-monitoring-create-a-security-filter
     parent: security-monitoring
     generated: true
     params:
@@ -5040,7 +5193,7 @@ api:
       order: 0
   - name: Get all security filters
     url: '#get-all-security-filters'
-    identifier: get-all-security-filters
+    identifier: security-monitoring-get-all-security-filters
     parent: security-monitoring
     generated: true
     params:
@@ -5052,7 +5205,7 @@ api:
       order: 0
   - name: Change the triage state of a security signal
     url: '#change-the-triage-state-of-a-security-signal'
-    identifier: change-the-triage-state-of-a-security-signal
+    identifier: security-monitoring-change-the-triage-state-of-a-security-signal
     parent: security-monitoring
     generated: true
     params:
@@ -5064,7 +5217,7 @@ api:
       order: 0
   - name: Modify the triage assignee of a security signal
     url: '#modify-the-triage-assignee-of-a-security-signal'
-    identifier: modify-the-triage-assignee-of-a-security-signal
+    identifier: security-monitoring-modify-the-triage-assignee-of-a-security-signal
     parent: security-monitoring
     generated: true
     params:
@@ -5076,7 +5229,7 @@ api:
       order: 0
   - name: Add a security signal to an incident
     url: '#add-a-security-signal-to-an-incident'
-    identifier: add-a-security-signal-to-an-incident
+    identifier: security-monitoring-add-a-security-signal-to-an-incident
     parent: security-monitoring
     generated: true
     params:
@@ -5092,7 +5245,7 @@ api:
     generated: true
   - name: Submit a Service Check
     url: '#submit-a-service-check'
-    identifier: submit-a-service-check
+    identifier: service-checks-submit-a-service-check
     parent: service-checks
     generated: true
     params:
@@ -5108,7 +5261,7 @@ api:
     generated: true
   - name: Get one APM service's dependencies
     url: '#get-one-apm-services-dependencies'
-    identifier: get-one-apm-services-dependencies
+    identifier: service-dependencies-get-one-apm-services-dependencies
     parent: service-dependencies
     generated: true
     params:
@@ -5121,7 +5274,7 @@ api:
       order: 2
   - name: Get all APM service dependencies
     url: '#get-all-apm-service-dependencies'
-    identifier: get-all-apm-service-dependencies
+    identifier: service-dependencies-get-all-apm-service-dependencies
     parent: service-dependencies
     generated: true
     params:
@@ -5138,7 +5291,7 @@ api:
     generated: true
   - name: Update an SLO correction
     url: '#update-an-slo-correction'
-    identifier: update-an-slo-correction
+    identifier: service-level-objective-corrections-update-an-slo-correction
     parent: service-level-objective-corrections
     generated: true
     params:
@@ -5150,7 +5303,7 @@ api:
       order: 4
   - name: Get an SLO correction for an SLO
     url: '#get-an-slo-correction-for-an-slo'
-    identifier: get-an-slo-correction-for-an-slo
+    identifier: service-level-objective-corrections-get-an-slo-correction-for-an-slo
     parent: service-level-objective-corrections
     generated: true
     params:
@@ -5162,7 +5315,7 @@ api:
       order: 3
   - name: Delete an SLO correction
     url: '#delete-an-slo-correction'
-    identifier: delete-an-slo-correction
+    identifier: service-level-objective-corrections-delete-an-slo-correction
     parent: service-level-objective-corrections
     generated: true
     params:
@@ -5174,7 +5327,7 @@ api:
       order: 5
   - name: Create an SLO correction
     url: '#create-an-slo-correction'
-    identifier: create-an-slo-correction
+    identifier: service-level-objective-corrections-create-an-slo-correction
     parent: service-level-objective-corrections
     generated: true
     params:
@@ -5186,7 +5339,7 @@ api:
       order: 1
   - name: Get all SLO corrections
     url: '#get-all-slo-corrections'
-    identifier: get-all-slo-corrections
+    identifier: service-level-objective-corrections-get-all-slo-corrections
     parent: service-level-objective-corrections
     generated: true
     params:
@@ -5202,7 +5355,7 @@ api:
     generated: true
   - name: Get an SLO's history
     url: '#get-an-slos-history'
-    identifier: get-an-slos-history
+    identifier: service-level-objectives-get-an-slos-history
     parent: service-level-objectives
     generated: true
     params:
@@ -5215,7 +5368,7 @@ api:
       order: 6
   - name: Get Corrections For an SLO
     url: '#get-corrections-for-an-slo'
-    identifier: get-corrections-for-an-slo
+    identifier: service-level-objectives-get-corrections-for-an-slo
     parent: service-level-objectives
     generated: true
     params:
@@ -5227,7 +5380,7 @@ api:
       order: 6
   - name: Update an SLO
     url: '#update-an-slo'
-    identifier: update-an-slo
+    identifier: service-level-objectives-update-an-slo
     parent: service-level-objectives
     generated: true
     params:
@@ -5239,7 +5392,7 @@ api:
       order: 3
   - name: Get an SLO's details
     url: '#get-an-slos-details'
-    identifier: get-an-slos-details
+    identifier: service-level-objectives-get-an-slos-details
     parent: service-level-objectives
     generated: true
     params:
@@ -5251,7 +5404,7 @@ api:
       order: 4
   - name: Delete an SLO
     url: '#delete-an-slo'
-    identifier: delete-an-slo
+    identifier: service-level-objectives-delete-an-slo
     parent: service-level-objectives
     generated: true
     params:
@@ -5263,7 +5416,7 @@ api:
       order: 5
   - name: Check if SLOs can be safely deleted
     url: '#check-if-slos-can-be-safely-deleted'
-    identifier: check-if-slos-can-be-safely-deleted
+    identifier: service-level-objectives-check-if-slos-can-be-safely-deleted
     parent: service-level-objectives
     generated: true
     params:
@@ -5275,7 +5428,7 @@ api:
       order: 7
   - name: Bulk Delete SLO Timeframes
     url: '#bulk-delete-slo-timeframes'
-    identifier: bulk-delete-slo-timeframes
+    identifier: service-level-objectives-bulk-delete-slo-timeframes
     parent: service-level-objectives
     generated: true
     params:
@@ -5287,7 +5440,7 @@ api:
       order: 8
   - name: Create an SLO object
     url: '#create-an-slo-object'
-    identifier: create-an-slo-object
+    identifier: service-level-objectives-create-an-slo-object
     parent: service-level-objectives
     generated: true
     params:
@@ -5299,7 +5452,7 @@ api:
       order: 1
   - name: Get all SLOs
     url: '#get-all-slos'
-    identifier: get-all-slos
+    identifier: service-level-objectives-get-all-slos
     parent: service-level-objectives
     generated: true
     params:
@@ -5315,7 +5468,7 @@ api:
     generated: true
   - name: Update a Slack integration channel
     url: '#update-a-slack-integration-channel'
-    identifier: update-a-slack-integration-channel
+    identifier: slack-integration-update-a-slack-integration-channel
     parent: slack-integration
     generated: true
     params:
@@ -5327,7 +5480,7 @@ api:
       order: 4
   - name: Get a Slack integration channel
     url: '#get-a-slack-integration-channel'
-    identifier: get-a-slack-integration-channel
+    identifier: slack-integration-get-a-slack-integration-channel
     parent: slack-integration
     generated: true
     params:
@@ -5339,7 +5492,7 @@ api:
       order: 3
   - name: Remove a Slack integration channel
     url: '#remove-a-slack-integration-channel'
-    identifier: remove-a-slack-integration-channel
+    identifier: slack-integration-remove-a-slack-integration-channel
     parent: slack-integration
     generated: true
     params:
@@ -5351,7 +5504,7 @@ api:
       order: 5
   - name: Create a Slack integration channel
     url: '#create-a-slack-integration-channel'
-    identifier: create-a-slack-integration-channel
+    identifier: slack-integration-create-a-slack-integration-channel
     parent: slack-integration
     generated: true
     params:
@@ -5363,7 +5516,7 @@ api:
       order: 2
   - name: Get all channels in a Slack integration
     url: '#get-all-channels-in-a-slack-integration'
-    identifier: get-all-channels-in-a-slack-integration
+    identifier: slack-integration-get-all-channels-in-a-slack-integration
     parent: slack-integration
     generated: true
     params:
@@ -5375,7 +5528,7 @@ api:
       order: 1
   - name: Add channels to Slack integration
     url: '#add-channels-to-slack-integration'
-    identifier: add-channels-to-slack-integration
+    identifier: slack-integration-add-channels-to-slack-integration
     parent: slack-integration
     generated: true
     params:
@@ -5387,7 +5540,7 @@ api:
       order: 0
   - name: Create a Slack integration
     url: '#create-a-slack-integration'
-    identifier: create-a-slack-integration
+    identifier: slack-integration-create-a-slack-integration
     parent: slack-integration
     generated: true
     params:
@@ -5399,7 +5552,7 @@ api:
       order: 0
   - name: Get info about a Slack integration
     url: '#get-info-about-a-slack-integration'
-    identifier: get-info-about-a-slack-integration
+    identifier: slack-integration-get-info-about-a-slack-integration
     parent: slack-integration
     generated: true
     params:
@@ -5411,7 +5564,7 @@ api:
       order: 0
   - name: Delete a Slack integration
     url: '#delete-a-slack-integration'
-    identifier: delete-a-slack-integration
+    identifier: slack-integration-delete-a-slack-integration
     parent: slack-integration
     generated: true
     params:
@@ -5427,7 +5580,7 @@ api:
     generated: true
   - name: Take graph snapshots
     url: '#take-graph-snapshots'
-    identifier: take-graph-snapshots
+    identifier: snapshots-take-graph-snapshots
     parent: snapshots
     generated: true
     params:
@@ -5443,7 +5596,7 @@ api:
     generated: true
   - name: Edit a global variable
     url: '#edit-a-global-variable'
-    identifier: edit-a-global-variable
+    identifier: synthetics-edit-a-global-variable
     parent: synthetics
     generated: true
     params:
@@ -5455,7 +5608,7 @@ api:
       order: 20
   - name: Get a global variable
     url: '#get-a-global-variable'
-    identifier: get-a-global-variable
+    identifier: synthetics-get-a-global-variable
     parent: synthetics
     generated: true
     params:
@@ -5467,7 +5620,7 @@ api:
       order: 19
   - name: Delete a global variable
     url: '#delete-a-global-variable'
-    identifier: delete-a-global-variable
+    identifier: synthetics-delete-a-global-variable
     parent: synthetics
     generated: true
     params:
@@ -5479,7 +5632,7 @@ api:
       order: 21
   - name: Create a global variable
     url: '#create-a-global-variable'
-    identifier: create-a-global-variable
+    identifier: synthetics-create-a-global-variable
     parent: synthetics
     generated: true
     params:
@@ -5491,7 +5644,7 @@ api:
       order: 18
   - name: Get all global variables
     url: '#get-all-global-variables'
-    identifier: get-all-global-variables
+    identifier: synthetics-get-all-global-variables
     parent: synthetics
     generated: true
     params:
@@ -5503,7 +5656,7 @@ api:
       order: 17
   - name: Pause or start a test
     url: '#pause-or-start-a-test'
-    identifier: pause-or-start-a-test
+    identifier: synthetics-pause-or-start-a-test
     parent: synthetics
     generated: true
     params:
@@ -5515,7 +5668,7 @@ api:
       order: 5
   - name: Get an API test result
     url: '#get-an-api-test-result'
-    identifier: get-an-api-test-result
+    identifier: synthetics-get-an-api-test-result
     parent: synthetics
     generated: true
     params:
@@ -5527,7 +5680,7 @@ api:
       order: 11
   - name: Get an API test's latest results summaries
     url: '#get-an-api-tests-latest-results-summaries'
-    identifier: get-an-api-tests-latest-results-summaries
+    identifier: synthetics-get-an-api-tests-latest-results-summaries
     parent: synthetics
     generated: true
     params:
@@ -5539,7 +5692,7 @@ api:
       order: 13
   - name: Edit a test
     url: '#edit-a-test'
-    identifier: edit-a-test
+    identifier: synthetics-edit-a-test
     parent: synthetics
     generated: true
     params:
@@ -5551,7 +5704,7 @@ api:
       order: 26
   - name: Get a test configuration
     url: '#get-a-test-configuration'
-    identifier: get-a-test-configuration
+    identifier: synthetics-get-a-test-configuration
     parent: synthetics
     generated: true
     params:
@@ -5563,7 +5716,7 @@ api:
       order: 27
   - name: Trigger tests from CI/CD pipelines
     url: '#trigger-tests-from-ci/cd-pipelines'
-    identifier: trigger-tests-from-ci/cd-pipelines
+    identifier: synthetics-trigger-tests-from-ci/cd-pipelines
     parent: synthetics
     generated: true
     params:
@@ -5575,7 +5728,7 @@ api:
       order: 6
   - name: Trigger Synthetics tests
     url: '#trigger-synthetics-tests'
-    identifier: trigger-synthetics-tests
+    identifier: synthetics-trigger-synthetics-tests
     parent: synthetics
     generated: true
     params:
@@ -5587,7 +5740,7 @@ api:
       order: 7
   - name: Delete tests
     url: '#delete-tests'
-    identifier: delete-tests
+    identifier: synthetics-delete-tests
     parent: synthetics
     generated: true
     params:
@@ -5599,7 +5752,7 @@ api:
       order: 16
   - name: Get a browser test result
     url: '#get-a-browser-test-result'
-    identifier: get-a-browser-test-result
+    identifier: synthetics-get-a-browser-test-result
     parent: synthetics
     generated: true
     params:
@@ -5611,7 +5764,7 @@ api:
       order: 12
   - name: Get a browser test's latest results summaries
     url: '#get-a-browser-tests-latest-results-summaries'
-    identifier: get-a-browser-tests-latest-results-summaries
+    identifier: synthetics-get-a-browser-tests-latest-results-summaries
     parent: synthetics
     generated: true
     params:
@@ -5623,7 +5776,7 @@ api:
       order: 14
   - name: Edit a browser test
     url: '#edit-a-browser-test'
-    identifier: edit-a-browser-test
+    identifier: synthetics-edit-a-browser-test
     parent: synthetics
     generated: true
     params:
@@ -5635,7 +5788,7 @@ api:
       order: 4
   - name: Get a browser test
     url: '#get-a-browser-test'
-    identifier: get-a-browser-test
+    identifier: synthetics-get-a-browser-test
     parent: synthetics
     generated: true
     params:
@@ -5647,7 +5800,7 @@ api:
       order: 9
   - name: Create a browser test
     url: '#create-a-browser-test'
-    identifier: create-a-browser-test
+    identifier: synthetics-create-a-browser-test
     parent: synthetics
     generated: true
     params:
@@ -5659,7 +5812,7 @@ api:
       order: 2
   - name: Edit an API test
     url: '#edit-an-api-test'
-    identifier: edit-an-api-test
+    identifier: synthetics-edit-an-api-test
     parent: synthetics
     generated: true
     params:
@@ -5671,7 +5824,7 @@ api:
       order: 3
   - name: Get an API test
     url: '#get-an-api-test'
-    identifier: get-an-api-test
+    identifier: synthetics-get-an-api-test
     parent: synthetics
     generated: true
     params:
@@ -5683,7 +5836,7 @@ api:
       order: 8
   - name: Create an API test
     url: '#create-an-api-test'
-    identifier: create-an-api-test
+    identifier: synthetics-create-an-api-test
     parent: synthetics
     generated: true
     params:
@@ -5695,7 +5848,7 @@ api:
       order: 1
   - name: Create a test
     url: '#create-a-test'
-    identifier: create-a-test
+    identifier: synthetics-create-a-test
     parent: synthetics
     generated: true
     params:
@@ -5707,7 +5860,7 @@ api:
       order: 27
   - name: Get the list of all tests
     url: '#get-the-list-of-all-tests'
-    identifier: get-the-list-of-all-tests
+    identifier: synthetics-get-the-list-of-all-tests
     parent: synthetics
     generated: true
     params:
@@ -5719,7 +5872,7 @@ api:
       order: 10
   - name: Edit a private location
     url: '#edit-a-private-location'
-    identifier: edit-a-private-location
+    identifier: synthetics-edit-a-private-location
     parent: synthetics
     generated: true
     params:
@@ -5731,7 +5884,7 @@ api:
       order: 24
   - name: Get a private location
     url: '#get-a-private-location'
-    identifier: get-a-private-location
+    identifier: synthetics-get-a-private-location
     parent: synthetics
     generated: true
     params:
@@ -5743,7 +5896,7 @@ api:
       order: 23
   - name: Delete a private location
     url: '#delete-a-private-location'
-    identifier: delete-a-private-location
+    identifier: synthetics-delete-a-private-location
     parent: synthetics
     generated: true
     params:
@@ -5755,7 +5908,7 @@ api:
       order: 26
   - name: Create a private location
     url: '#create-a-private-location'
-    identifier: create-a-private-location
+    identifier: synthetics-create-a-private-location
     parent: synthetics
     generated: true
     params:
@@ -5767,7 +5920,7 @@ api:
       order: 22
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
-    identifier: get-all-locations-public-and-private
+    identifier: synthetics-get-all-locations-public-and-private
     parent: synthetics
     generated: true
     params:
@@ -5779,7 +5932,7 @@ api:
       order: 25
   - name: Get details of batch
     url: '#get-details-of-batch'
-    identifier: get-details-of-batch
+    identifier: synthetics-get-details-of-batch
     parent: synthetics
     generated: true
     params:
@@ -5795,7 +5948,7 @@ api:
     generated: true
   - name: Update host tags
     url: '#update-host-tags'
-    identifier: update-host-tags
+    identifier: tags-update-host-tags
     parent: tags
     generated: true
     params:
@@ -5807,7 +5960,7 @@ api:
       order: 4
   - name: Add tags to a host
     url: '#add-tags-to-a-host'
-    identifier: add-tags-to-a-host
+    identifier: tags-add-tags-to-a-host
     parent: tags
     generated: true
     params:
@@ -5819,7 +5972,7 @@ api:
       order: 3
   - name: Get host tags
     url: '#get-host-tags'
-    identifier: get-host-tags
+    identifier: tags-get-host-tags
     parent: tags
     generated: true
     params:
@@ -5831,7 +5984,7 @@ api:
       order: 2
   - name: Remove host tags
     url: '#remove-host-tags'
-    identifier: remove-host-tags
+    identifier: tags-remove-host-tags
     parent: tags
     generated: true
     params:
@@ -5843,7 +5996,7 @@ api:
       order: 5
   - name: Get Tags
     url: '#get-tags'
-    identifier: get-tags
+    identifier: tags-get-tags
     parent: tags
     generated: true
     params:
@@ -5863,7 +6016,7 @@ api:
     generated: true
   - name: Get hourly usage for Observability Pipelines
     url: '#get-hourly-usage-for-observability-pipelines'
-    identifier: get-hourly-usage-for-observability-pipelines
+    identifier: usage-metering-get-hourly-usage-for-observability-pipelines
     parent: usage-metering
     generated: true
     params:
@@ -5875,7 +6028,7 @@ api:
       order: 38
   - name: Get hourly usage for Lambda Traced Invocations
     url: '#get-hourly-usage-for-lambda-traced-invocations'
-    identifier: get-hourly-usage-for-lambda-traced-invocations
+    identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
     parent: usage-metering
     generated: true
     params:
@@ -5887,7 +6040,7 @@ api:
       order: 38
   - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
-    identifier: get-cost-across-multi-org-account
+    identifier: usage-metering-get-cost-across-multi-org-account
     parent: usage-metering
     generated: true
     params:
@@ -5899,7 +6052,7 @@ api:
       order: 39
   - name: Get hourly usage for Application Security
     url: '#get-hourly-usage-for-application-security'
-    identifier: get-hourly-usage-for-application-security
+    identifier: usage-metering-get-hourly-usage-for-application-security
     parent: usage-metering
     generated: true
     params:
@@ -5911,7 +6064,7 @@ api:
       order: 38
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
-    identifier: get-all-custom-metrics-by-hourly-average
+    identifier: usage-metering-get-all-custom-metrics-by-hourly-average
     parent: usage-metering
     generated: true
     params:
@@ -5923,7 +6076,7 @@ api:
       order: 5
   - name: Get hourly usage for custom metrics
     url: '#get-hourly-usage-for-custom-metrics'
-    identifier: get-hourly-usage-for-custom-metrics
+    identifier: usage-metering-get-hourly-usage-for-custom-metrics
     parent: usage-metering
     generated: true
     params:
@@ -5935,7 +6088,7 @@ api:
       order: 4
   - name: Get hourly usage for Synthetics Browser Checks
     url: '#get-hourly-usage-for-synthetics-browser-checks'
-    identifier: get-hourly-usage-for-synthetics-browser-checks
+    identifier: usage-metering-get-hourly-usage-for-synthetics-browser-checks
     parent: usage-metering
     generated: true
     params:
@@ -5947,7 +6100,7 @@ api:
       order: 10
   - name: Get hourly usage for Synthetics API Checks
     url: '#get-hourly-usage-for-synthetics-api-checks'
-    identifier: get-hourly-usage-for-synthetics-api-checks
+    identifier: usage-metering-get-hourly-usage-for-synthetics-api-checks
     parent: usage-metering
     generated: true
     params:
@@ -5959,7 +6112,7 @@ api:
       order: 9
   - name: Get hourly usage for Synthetics Checks
     url: '#get-hourly-usage-for-synthetics-checks'
-    identifier: get-hourly-usage-for-synthetics-checks
+    identifier: usage-metering-get-hourly-usage-for-synthetics-checks
     parent: usage-metering
     generated: true
     params:
@@ -5971,7 +6124,7 @@ api:
       order: 8
   - name: Get usage across your multi-org account
     url: '#get-usage-across-your-multi-org-account'
-    identifier: get-usage-across-your-multi-org-account
+    identifier: usage-metering-get-usage-across-your-multi-org-account
     parent: usage-metering
     generated: true
     params:
@@ -5983,7 +6136,7 @@ api:
       order: 16
   - name: Get hourly usage for SNMP devices
     url: '#get-hourly-usage-for-snmp-devices'
-    identifier: get-hourly-usage-for-snmp-devices
+    identifier: usage-metering-get-hourly-usage-for-snmp-devices
     parent: usage-metering
     generated: true
     params:
@@ -5995,7 +6148,7 @@ api:
       order: 18
   - name: Get hourly usage for Sensitive Data Scanner
     url: '#get-hourly-usage-for-sensitive-data-scanner'
-    identifier: get-hourly-usage-for-sensitive-data-scanner
+    identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
     parent: usage-metering
     generated: true
     params:
@@ -6007,7 +6160,7 @@ api:
       order: 36
   - name: Get hourly usage for RUM Sessions
     url: '#get-hourly-usage-for-rum-sessions'
-    identifier: get-hourly-usage-for-rum-sessions
+    identifier: usage-metering-get-hourly-usage-for-rum-sessions
     parent: usage-metering
     generated: true
     params:
@@ -6019,7 +6172,7 @@ api:
       order: 13
   - name: Get hourly usage for RUM Units
     url: '#get-hourly-usage-for-rum-units'
-    identifier: get-hourly-usage-for-rum-units
+    identifier: usage-metering-get-hourly-usage-for-rum-units
     parent: usage-metering
     generated: true
     params:
@@ -6031,7 +6184,7 @@ api:
       order: 37
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
-    identifier: get-hourly-usage-for-profiled-hosts
+    identifier: usage-metering-get-hourly-usage-for-profiled-hosts
     parent: usage-metering
     generated: true
     params:
@@ -6043,7 +6196,7 @@ api:
       order: 24
   - name: Get hourly usage for Online Archive
     url: '#get-hourly-usage-for-online-archive'
-    identifier: get-hourly-usage-for-online-archive
+    identifier: usage-metering-get-hourly-usage-for-online-archive
     parent: usage-metering
     generated: true
     params:
@@ -6055,7 +6208,7 @@ api:
       order: 38
   - name: Get hourly usage for Network Hosts
     url: '#get-hourly-usage-for-network-hosts'
-    identifier: get-hourly-usage-for-network-hosts
+    identifier: usage-metering-get-hourly-usage-for-network-hosts
     parent: usage-metering
     generated: true
     params:
@@ -6067,7 +6220,7 @@ api:
       order: 14
   - name: Get hourly usage for Network Flows
     url: '#get-hourly-usage-for-network-flows'
-    identifier: get-hourly-usage-for-network-flows
+    identifier: usage-metering-get-hourly-usage-for-network-flows
     parent: usage-metering
     generated: true
     params:
@@ -6079,7 +6232,7 @@ api:
       order: 15
   - name: Get monthly usage attribution
     url: '#get-monthly-usage-attribution'
-    identifier: get-monthly-usage-attribution
+    identifier: usage-metering-get-monthly-usage-attribution
     parent: usage-metering
     generated: true
     params:
@@ -6092,7 +6245,7 @@ api:
       order: 31
   - name: Get hourly usage for Logs by Index
     url: '#get-hourly-usage-for-logs-by-index'
-    identifier: get-hourly-usage-for-logs-by-index
+    identifier: usage-metering-get-hourly-usage-for-logs-by-index
     parent: usage-metering
     generated: true
     params:
@@ -6104,7 +6257,7 @@ api:
       order: 3
   - name: Get hourly logs usage by retention
     url: '#get-hourly-logs-usage-by-retention'
-    identifier: get-hourly-logs-usage-by-retention
+    identifier: usage-metering-get-hourly-logs-usage-by-retention
     parent: usage-metering
     generated: true
     params:
@@ -6116,7 +6269,7 @@ api:
       order: 0
   - name: Get hourly usage for Logs
     url: '#get-hourly-usage-for-logs'
-    identifier: get-hourly-usage-for-logs
+    identifier: usage-metering-get-hourly-usage-for-logs
     parent: usage-metering
     generated: true
     params:
@@ -6128,7 +6281,7 @@ api:
       order: 2
   - name: Get hourly usage for IoT
     url: '#get-hourly-usage-for-iot'
-    identifier: get-hourly-usage-for-iot
+    identifier: usage-metering-get-hourly-usage-for-iot
     parent: usage-metering
     generated: true
     params:
@@ -6140,7 +6293,7 @@ api:
       order: 28
   - name: Get hourly usage for ingested spans
     url: '#get-hourly-usage-for-ingested-spans'
-    identifier: get-hourly-usage-for-ingested-spans
+    identifier: usage-metering-get-hourly-usage-for-ingested-spans
     parent: usage-metering
     generated: true
     params:
@@ -6152,7 +6305,7 @@ api:
       order: 26
   - name: Get hourly usage for indexed spans
     url: '#get-hourly-usage-for-indexed-spans'
-    identifier: get-hourly-usage-for-indexed-spans
+    identifier: usage-metering-get-hourly-usage-for-indexed-spans
     parent: usage-metering
     generated: true
     params:
@@ -6164,7 +6317,7 @@ api:
       order: 7
   - name: Get hourly usage for incident management
     url: '#get-hourly-usage-for-incident-management'
-    identifier: get-hourly-usage-for-incident-management
+    identifier: usage-metering-get-hourly-usage-for-incident-management
     parent: usage-metering
     generated: true
     params:
@@ -6176,7 +6329,7 @@ api:
       order: 27
   - name: Get hourly usage attribution
     url: '#get-hourly-usage-attribution'
-    identifier: get-hourly-usage-attribution
+    identifier: usage-metering-get-hourly-usage-attribution
     parent: usage-metering
     generated: true
     params:
@@ -6189,7 +6342,7 @@ api:
       order: 30
   - name: Get hourly usage for hosts and containers
     url: '#get-hourly-usage-for-hosts-and-containers'
-    identifier: get-hourly-usage-for-hosts-and-containers
+    identifier: usage-metering-get-hourly-usage-for-hosts-and-containers
     parent: usage-metering
     generated: true
     params:
@@ -6201,7 +6354,7 @@ api:
       order: 1
   - name: Get hourly usage for Fargate
     url: '#get-hourly-usage-for-fargate'
-    identifier: get-hourly-usage-for-fargate
+    identifier: usage-metering-get-hourly-usage-for-fargate
     parent: usage-metering
     generated: true
     params:
@@ -6213,7 +6366,7 @@ api:
       order: 11
   - name: Get hourly usage for Database Monitoring
     url: '#get-hourly-usage-for-database-monitoring'
-    identifier: get-hourly-usage-for-database-monitoring
+    identifier: usage-metering-get-hourly-usage-for-database-monitoring
     parent: usage-metering
     generated: true
     params:
@@ -6225,7 +6378,7 @@ api:
       order: 35
   - name: Get hourly usage for Cloud Workload Security
     url: '#get-hourly-usage-for-cloud-workload-security'
-    identifier: get-hourly-usage-for-cloud-workload-security
+    identifier: usage-metering-get-hourly-usage-for-cloud-workload-security
     parent: usage-metering
     generated: true
     params:
@@ -6237,7 +6390,7 @@ api:
       order: 34
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
-    identifier: get-hourly-usage-for-cspm
+    identifier: usage-metering-get-hourly-usage-for-cspm
     parent: usage-metering
     generated: true
     params:
@@ -6249,7 +6402,7 @@ api:
       order: 32
   - name: Get hourly usage for CI Visibility
     url: '#get-hourly-usage-for-ci-visibility'
-    identifier: get-hourly-usage-for-ci-visibility
+    identifier: usage-metering-get-hourly-usage-for-ci-visibility
     parent: usage-metering
     generated: true
     params:
@@ -6261,7 +6414,7 @@ api:
       order: 38
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
-    identifier: get-billable-usage-across-your-account
+    identifier: usage-metering-get-billable-usage-across-your-account
     parent: usage-metering
     generated: true
     params:
@@ -6273,7 +6426,7 @@ api:
       order: 19
   - name: Get hourly usage for Lambda
     url: '#get-hourly-usage-for-lambda'
-    identifier: get-hourly-usage-for-lambda
+    identifier: usage-metering-get-hourly-usage-for-lambda
     parent: usage-metering
     generated: true
     params:
@@ -6285,7 +6438,7 @@ api:
       order: 12
   - name: Get hourly usage for audit logs
     url: '#get-hourly-usage-for-audit-logs'
-    identifier: get-hourly-usage-for-audit-logs
+    identifier: usage-metering-get-hourly-usage-for-audit-logs
     parent: usage-metering
     generated: true
     params:
@@ -6297,7 +6450,7 @@ api:
       order: 33
   - name: Get usage attribution
     url: '#get-usage-attribution'
-    identifier: get-usage-attribution
+    identifier: usage-metering-get-usage-attribution
     parent: usage-metering
     generated: true
     params:
@@ -6310,7 +6463,7 @@ api:
       order: 29
   - name: Get hourly usage for analyzed logs
     url: '#get-hourly-usage-for-analyzed-logs'
-    identifier: get-hourly-usage-for-analyzed-logs
+    identifier: usage-metering-get-hourly-usage-for-analyzed-logs
     parent: usage-metering
     generated: true
     params:
@@ -6322,7 +6475,7 @@ api:
       order: 17
   - name: Get specified monthly custom reports
     url: '#get-specified-monthly-custom-reports'
-    identifier: get-specified-monthly-custom-reports
+    identifier: usage-metering-get-specified-monthly-custom-reports
     parent: usage-metering
     generated: true
     params:
@@ -6335,7 +6488,7 @@ api:
       order: 23
   - name: Get the list of available monthly custom reports
     url: '#get-the-list-of-available-monthly-custom-reports'
-    identifier: get-the-list-of-available-monthly-custom-reports
+    identifier: usage-metering-get-the-list-of-available-monthly-custom-reports
     parent: usage-metering
     generated: true
     params:
@@ -6348,7 +6501,7 @@ api:
       order: 22
   - name: Get specified daily custom reports
     url: '#get-specified-daily-custom-reports'
-    identifier: get-specified-daily-custom-reports
+    identifier: usage-metering-get-specified-daily-custom-reports
     parent: usage-metering
     generated: true
     params:
@@ -6361,7 +6514,7 @@ api:
       order: 21
   - name: Get the list of available daily custom reports
     url: '#get-the-list-of-available-daily-custom-reports'
-    identifier: get-the-list-of-available-daily-custom-reports
+    identifier: usage-metering-get-the-list-of-available-daily-custom-reports
     parent: usage-metering
     generated: true
     params:
@@ -6378,7 +6531,7 @@ api:
     generated: true
   - name: Get a user permissions
     url: '#get-a-user-permissions'
-    identifier: get-a-user-permissions
+    identifier: users-get-a-user-permissions
     parent: users
     generated: true
     params:
@@ -6390,7 +6543,7 @@ api:
       order: 7
   - name: Get a user organization
     url: '#get-a-user-organization'
-    identifier: get-a-user-organization
+    identifier: users-get-a-user-organization
     parent: users
     generated: true
     params:
@@ -6400,9 +6553,69 @@ api:
         - ListUserOrganizations
       unstable: []
       order: 6
+  - name: Update a user
+    url: '#update-a-user'
+    identifier: users-update-a-user
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateUser
+      unstable: []
+      order: 4
+  - name: Get user details
+    url: '#get-user-details'
+    identifier: users-get-user-details
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUser
+      unstable: []
+      order: 3
+  - name: Disable a user
+    url: '#disable-a-user'
+    identifier: users-disable-a-user
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DisableUser
+      unstable: []
+      order: 5
+  - name: Create a user
+    url: '#create-a-user'
+    identifier: users-create-a-user
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateUser
+      unstable: []
+      order: 2
+  - name: List all users
+    url: '#list-all-users'
+    identifier: users-list-all-users
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListUsers
+      unstable: []
+      order: 1
   - name: Get a user invitation
     url: '#get-a-user-invitation'
-    identifier: get-a-user-invitation
+    identifier: users-get-a-user-invitation
     parent: users
     generated: true
     params:
@@ -6414,7 +6627,7 @@ api:
       order: 9
   - name: Send invitation emails
     url: '#send-invitation-emails'
-    identifier: send-invitation-emails
+    identifier: users-send-invitation-emails
     parent: users
     generated: true
     params:
@@ -6426,7 +6639,7 @@ api:
       order: 8
   - name: Create a service account
     url: '#create-a-service-account'
-    identifier: create-a-service-account
+    identifier: users-create-a-service-account
     parent: users
     generated: true
     params:
@@ -6438,65 +6651,60 @@ api:
       order: 1
   - name: Update a user
     url: '#update-a-user'
-    identifier: update-a-user
+    identifier: users-update-a-user
     parent: users
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - UpdateUser
       unstable: []
       order: 4
   - name: Get user details
     url: '#get-user-details'
-    identifier: get-user-details
+    identifier: users-get-user-details
     parent: users
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - GetUser
       unstable: []
       order: 3
   - name: Disable a user
     url: '#disable-a-user'
-    identifier: disable-a-user
+    identifier: users-disable-a-user
     parent: users
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - DisableUser
       unstable: []
       order: 5
   - name: Create a user
     url: '#create-a-user'
-    identifier: create-a-user
+    identifier: users-create-a-user
     parent: users
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - CreateUser
       unstable: []
       order: 1
   - name: List all users
     url: '#list-all-users'
-    identifier: list-all-users
+    identifier: users-list-all-users
     parent: users
     generated: true
     params:
       versions:
         - v1
-        - v2
       operationids:
         - ListUsers
       unstable: []
@@ -6507,7 +6715,7 @@ api:
     generated: true
   - name: Update a webhook
     url: '#update-a-webhook'
-    identifier: update-a-webhook
+    identifier: webhooks-integration-update-a-webhook
     parent: webhooks-integration
     generated: true
     params:
@@ -6519,7 +6727,7 @@ api:
       order: 3
   - name: Get a webhook integration
     url: '#get-a-webhook-integration'
-    identifier: get-a-webhook-integration
+    identifier: webhooks-integration-get-a-webhook-integration
     parent: webhooks-integration
     generated: true
     params:
@@ -6531,7 +6739,7 @@ api:
       order: 2
   - name: Delete a webhook
     url: '#delete-a-webhook'
-    identifier: delete-a-webhook
+    identifier: webhooks-integration-delete-a-webhook
     parent: webhooks-integration
     generated: true
     params:
@@ -6543,7 +6751,7 @@ api:
       order: 4
   - name: Create a webhooks integration
     url: '#create-a-webhooks-integration'
-    identifier: create-a-webhooks-integration
+    identifier: webhooks-integration-create-a-webhooks-integration
     parent: webhooks-integration
     generated: true
     params:
@@ -6555,7 +6763,7 @@ api:
       order: 1
   - name: Update a custom variable
     url: '#update-a-custom-variable'
-    identifier: update-a-custom-variable
+    identifier: webhooks-integration-update-a-custom-variable
     parent: webhooks-integration
     generated: true
     params:
@@ -6567,7 +6775,7 @@ api:
       order: 7
   - name: Get a custom variable
     url: '#get-a-custom-variable'
-    identifier: get-a-custom-variable
+    identifier: webhooks-integration-get-a-custom-variable
     parent: webhooks-integration
     generated: true
     params:
@@ -6579,7 +6787,7 @@ api:
       order: 6
   - name: Delete a custom variable
     url: '#delete-a-custom-variable'
-    identifier: delete-a-custom-variable
+    identifier: webhooks-integration-delete-a-custom-variable
     parent: webhooks-integration
     generated: true
     params:
@@ -6591,7 +6799,7 @@ api:
       order: 8
   - name: Create a custom variable
     url: '#create-a-custom-variable'
-    identifier: create-a-custom-variable
+    identifier: webhooks-integration-create-a-custom-variable
     parent: webhooks-integration
     generated: true
     params:
@@ -6607,7 +6815,7 @@ api:
     generated: true
   - name: Search Audit Logs events
     url: '#search-audit-logs-events'
-    identifier: search-audit-logs-events
+    identifier: audit-search-audit-logs-events
     parent: audit
     generated: true
     params:
@@ -6619,7 +6827,7 @@ api:
       order: 1
   - name: Get a list of Audit Logs events
     url: '#get-a-list-of-audit-logs-events'
-    identifier: get-a-list-of-audit-logs-events
+    identifier: audit-get-a-list-of-audit-logs-events
     parent: audit
     generated: true
     params:
@@ -6635,7 +6843,7 @@ api:
     generated: true
   - name: Edit an AuthN Mapping
     url: '#edit-an-authn-mapping'
-    identifier: edit-an-authn-mapping
+    identifier: authn-mappings-edit-an-authn-mapping
     parent: authn-mappings
     generated: true
     params:
@@ -6647,7 +6855,7 @@ api:
       order: 2
   - name: Get an AuthN Mapping by UUID
     url: '#get-an-authn-mapping-by-uuid'
-    identifier: get-an-authn-mapping-by-uuid
+    identifier: authn-mappings-get-an-authn-mapping-by-uuid
     parent: authn-mappings
     generated: true
     params:
@@ -6659,7 +6867,7 @@ api:
       order: 1
   - name: Delete an AuthN Mapping
     url: '#delete-an-authn-mapping'
-    identifier: delete-an-authn-mapping
+    identifier: authn-mappings-delete-an-authn-mapping
     parent: authn-mappings
     generated: true
     params:
@@ -6671,7 +6879,7 @@ api:
       order: 3
   - name: Create an AuthN Mapping
     url: '#create-an-authn-mapping'
-    identifier: create-an-authn-mapping
+    identifier: authn-mappings-create-an-authn-mapping
     parent: authn-mappings
     generated: true
     params:
@@ -6683,7 +6891,7 @@ api:
       order: 5
   - name: List all AuthN Mappings
     url: '#list-all-authn-mappings'
-    identifier: list-all-authn-mappings
+    identifier: authn-mappings-list-all-authn-mappings
     parent: authn-mappings
     generated: true
     params:
@@ -6699,7 +6907,7 @@ api:
     generated: true
   - name: Update a Cloud Workload Security Agent rule
     url: '#update-a-cloud-workload-security-agent-rule'
-    identifier: update-a-cloud-workload-security-agent-rule
+    identifier: cloud-workload-security-update-a-cloud-workload-security-agent-rule
     parent: cloud-workload-security
     generated: true
     params:
@@ -6711,7 +6919,7 @@ api:
       order: 5
   - name: Get a Cloud Workload Security Agent rule
     url: '#get-a-cloud-workload-security-agent-rule'
-    identifier: get-a-cloud-workload-security-agent-rule
+    identifier: cloud-workload-security-get-a-cloud-workload-security-agent-rule
     parent: cloud-workload-security
     generated: true
     params:
@@ -6723,7 +6931,7 @@ api:
       order: 2
   - name: Delete a Cloud Workload Security Agent rule
     url: '#delete-a-cloud-workload-security-agent-rule'
-    identifier: delete-a-cloud-workload-security-agent-rule
+    identifier: cloud-workload-security-delete-a-cloud-workload-security-agent-rule
     parent: cloud-workload-security
     generated: true
     params:
@@ -6735,7 +6943,7 @@ api:
       order: 6
   - name: Create a Cloud Workload Security Agent rule
     url: '#create-a-cloud-workload-security-agent-rule'
-    identifier: create-a-cloud-workload-security-agent-rule
+    identifier: cloud-workload-security-create-a-cloud-workload-security-agent-rule
     parent: cloud-workload-security
     generated: true
     params:
@@ -6747,7 +6955,7 @@ api:
       order: 4
   - name: Get all Cloud Workload Security Agent rules
     url: '#get-all-cloud-workload-security-agent-rules'
-    identifier: get-all-cloud-workload-security-agent-rules
+    identifier: cloud-workload-security-get-all-cloud-workload-security-agent-rules
     parent: cloud-workload-security
     generated: true
     params:
@@ -6759,7 +6967,7 @@ api:
       order: 3
   - name: Get the latest Cloud Workload Security policy
     url: '#get-the-latest-cloud-workload-security-policy'
-    identifier: get-the-latest-cloud-workload-security-policy
+    identifier: cloud-workload-security-get-the-latest-cloud-workload-security-policy
     parent: cloud-workload-security
     generated: true
     params:
@@ -6775,7 +6983,7 @@ api:
     generated: true
   - name: Update an existing incident service
     url: '#update-an-existing-incident-service'
-    identifier: update-an-existing-incident-service
+    identifier: incident-services-update-an-existing-incident-service
     parent: incident-services
     generated: true
     params:
@@ -6788,7 +6996,7 @@ api:
       order: 0
   - name: Get details of an incident service
     url: '#get-details-of-an-incident-service'
-    identifier: get-details-of-an-incident-service
+    identifier: incident-services-get-details-of-an-incident-service
     parent: incident-services
     generated: true
     params:
@@ -6801,7 +7009,7 @@ api:
       order: 0
   - name: Delete an existing incident service
     url: '#delete-an-existing-incident-service'
-    identifier: delete-an-existing-incident-service
+    identifier: incident-services-delete-an-existing-incident-service
     parent: incident-services
     generated: true
     params:
@@ -6814,7 +7022,7 @@ api:
       order: 0
   - name: Create a new incident service
     url: '#create-a-new-incident-service'
-    identifier: create-a-new-incident-service
+    identifier: incident-services-create-a-new-incident-service
     parent: incident-services
     generated: true
     params:
@@ -6827,7 +7035,7 @@ api:
       order: 0
   - name: Get a list of all incident services
     url: '#get-a-list-of-all-incident-services'
-    identifier: get-a-list-of-all-incident-services
+    identifier: incident-services-get-a-list-of-all-incident-services
     parent: incident-services
     generated: true
     params:
@@ -6844,7 +7052,7 @@ api:
     generated: true
   - name: Update an existing incident team
     url: '#update-an-existing-incident-team'
-    identifier: update-an-existing-incident-team
+    identifier: incident-teams-update-an-existing-incident-team
     parent: incident-teams
     generated: true
     params:
@@ -6857,7 +7065,7 @@ api:
       order: 0
   - name: Get details of an incident team
     url: '#get-details-of-an-incident-team'
-    identifier: get-details-of-an-incident-team
+    identifier: incident-teams-get-details-of-an-incident-team
     parent: incident-teams
     generated: true
     params:
@@ -6870,7 +7078,7 @@ api:
       order: 0
   - name: Delete an existing incident team
     url: '#delete-an-existing-incident-team'
-    identifier: delete-an-existing-incident-team
+    identifier: incident-teams-delete-an-existing-incident-team
     parent: incident-teams
     generated: true
     params:
@@ -6883,7 +7091,7 @@ api:
       order: 0
   - name: Create a new incident team
     url: '#create-a-new-incident-team'
-    identifier: create-a-new-incident-team
+    identifier: incident-teams-create-a-new-incident-team
     parent: incident-teams
     generated: true
     params:
@@ -6896,7 +7104,7 @@ api:
       order: 0
   - name: Get a list of all incident teams
     url: '#get-a-list-of-all-incident-teams'
-    identifier: get-a-list-of-all-incident-teams
+    identifier: incident-teams-get-a-list-of-all-incident-teams
     parent: incident-teams
     generated: true
     params:
@@ -6913,7 +7121,7 @@ api:
     generated: true
   - name: Update an existing incident
     url: '#update-an-existing-incident'
-    identifier: update-an-existing-incident
+    identifier: incidents-update-an-existing-incident
     parent: incidents
     generated: true
     params:
@@ -6926,7 +7134,7 @@ api:
       order: 0
   - name: Get the details of an incident
     url: '#get-the-details-of-an-incident'
-    identifier: get-the-details-of-an-incident
+    identifier: incidents-get-the-details-of-an-incident
     parent: incidents
     generated: true
     params:
@@ -6939,7 +7147,7 @@ api:
       order: 0
   - name: Delete an existing incident
     url: '#delete-an-existing-incident'
-    identifier: delete-an-existing-incident
+    identifier: incidents-delete-an-existing-incident
     parent: incidents
     generated: true
     params:
@@ -6952,7 +7160,7 @@ api:
       order: 0
   - name: Create an incident
     url: '#create-an-incident'
-    identifier: create-an-incident
+    identifier: incidents-create-an-incident
     parent: incidents
     generated: true
     params:
@@ -6965,7 +7173,7 @@ api:
       order: 0
   - name: Get a list of incidents
     url: '#get-a-list-of-incidents'
-    identifier: get-a-list-of-incidents
+    identifier: incidents-get-a-list-of-incidents
     parent: incidents
     generated: true
     params:
@@ -6982,7 +7190,7 @@ api:
     generated: true
   - name: Grant role to an archive
     url: '#grant-role-to-an-archive'
-    identifier: grant-role-to-an-archive
+    identifier: logs-archives-grant-role-to-an-archive
     parent: logs-archives
     generated: true
     params:
@@ -6994,7 +7202,7 @@ api:
       order: 7
   - name: List read roles for an archive
     url: '#list-read-roles-for-an-archive'
-    identifier: list-read-roles-for-an-archive
+    identifier: logs-archives-list-read-roles-for-an-archive
     parent: logs-archives
     generated: true
     params:
@@ -7006,7 +7214,7 @@ api:
       order: 6
   - name: Revoke role from an archive
     url: '#revoke-role-from-an-archive'
-    identifier: revoke-role-from-an-archive
+    identifier: logs-archives-revoke-role-from-an-archive
     parent: logs-archives
     generated: true
     params:
@@ -7018,7 +7226,7 @@ api:
       order: 8
   - name: Update an archive
     url: '#update-an-archive'
-    identifier: update-an-archive
+    identifier: logs-archives-update-an-archive
     parent: logs-archives
     generated: true
     params:
@@ -7030,7 +7238,7 @@ api:
       order: 4
   - name: Get an archive
     url: '#get-an-archive'
-    identifier: get-an-archive
+    identifier: logs-archives-get-an-archive
     parent: logs-archives
     generated: true
     params:
@@ -7042,7 +7250,7 @@ api:
       order: 3
   - name: Delete an archive
     url: '#delete-an-archive'
-    identifier: delete-an-archive
+    identifier: logs-archives-delete-an-archive
     parent: logs-archives
     generated: true
     params:
@@ -7054,7 +7262,7 @@ api:
       order: 5
   - name: Create an archive
     url: '#create-an-archive'
-    identifier: create-an-archive
+    identifier: logs-archives-create-an-archive
     parent: logs-archives
     generated: true
     params:
@@ -7066,7 +7274,7 @@ api:
       order: 2
   - name: Get all archives
     url: '#get-all-archives'
-    identifier: get-all-archives
+    identifier: logs-archives-get-all-archives
     parent: logs-archives
     generated: true
     params:
@@ -7078,7 +7286,7 @@ api:
       order: 1
   - name: Update archive order
     url: '#update-archive-order'
-    identifier: update-archive-order
+    identifier: logs-archives-update-archive-order
     parent: logs-archives
     generated: true
     params:
@@ -7090,7 +7298,7 @@ api:
       order: 10
   - name: Get archive order
     url: '#get-archive-order'
-    identifier: get-archive-order
+    identifier: logs-archives-get-archive-order
     parent: logs-archives
     generated: true
     params:
@@ -7106,7 +7314,7 @@ api:
     generated: true
   - name: Update a log-based metric
     url: '#update-a-log-based-metric'
-    identifier: update-a-log-based-metric
+    identifier: logs-metrics-update-a-log-based-metric
     parent: logs-metrics
     generated: true
     params:
@@ -7118,7 +7326,7 @@ api:
       order: 4
   - name: Get a log-based metric
     url: '#get-a-log-based-metric'
-    identifier: get-a-log-based-metric
+    identifier: logs-metrics-get-a-log-based-metric
     parent: logs-metrics
     generated: true
     params:
@@ -7130,7 +7338,7 @@ api:
       order: 3
   - name: Delete a log-based metric
     url: '#delete-a-log-based-metric'
-    identifier: delete-a-log-based-metric
+    identifier: logs-metrics-delete-a-log-based-metric
     parent: logs-metrics
     generated: true
     params:
@@ -7142,7 +7350,7 @@ api:
       order: 5
   - name: Create a log-based metric
     url: '#create-a-log-based-metric'
-    identifier: create-a-log-based-metric
+    identifier: logs-metrics-create-a-log-based-metric
     parent: logs-metrics
     generated: true
     params:
@@ -7154,7 +7362,7 @@ api:
       order: 2
   - name: Get all log-based metrics
     url: '#get-all-log-based-metrics'
-    identifier: get-all-log-based-metrics
+    identifier: logs-metrics-get-all-log-based-metrics
     parent: logs-metrics
     generated: true
     params:
@@ -7170,7 +7378,7 @@ api:
     generated: true
   - name: Grant role to a restriction query
     url: '#grant-role-to-a-restriction-query'
-    identifier: grant-role-to-a-restriction-query
+    identifier: logs-restriction-queries-grant-role-to-a-restriction-query
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7183,7 +7391,7 @@ api:
       order: 7
   - name: List roles for a restriction query
     url: '#list-roles-for-a-restriction-query'
-    identifier: list-roles-for-a-restriction-query
+    identifier: logs-restriction-queries-list-roles-for-a-restriction-query
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7196,7 +7404,7 @@ api:
       order: 6
   - name: Revoke role from a restriction query
     url: '#revoke-role-from-a-restriction-query'
-    identifier: revoke-role-from-a-restriction-query
+    identifier: logs-restriction-queries-revoke-role-from-a-restriction-query
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7209,7 +7417,7 @@ api:
       order: 8
   - name: Update a restriction query
     url: '#update-a-restriction-query'
-    identifier: update-a-restriction-query
+    identifier: logs-restriction-queries-update-a-restriction-query
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7222,7 +7430,7 @@ api:
       order: 4
   - name: Get a restriction query
     url: '#get-a-restriction-query'
-    identifier: get-a-restriction-query
+    identifier: logs-restriction-queries-get-a-restriction-query
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7235,7 +7443,7 @@ api:
       order: 3
   - name: Delete a restriction query
     url: '#delete-a-restriction-query'
-    identifier: delete-a-restriction-query
+    identifier: logs-restriction-queries-delete-a-restriction-query
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7248,7 +7456,7 @@ api:
       order: 5
   - name: Get all restriction queries for a given user
     url: '#get-all-restriction-queries-for-a-given-user'
-    identifier: get-all-restriction-queries-for-a-given-user
+    identifier: logs-restriction-queries-get-all-restriction-queries-for-a-given-user
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7261,7 +7469,7 @@ api:
       order: 9
   - name: Get restriction query for a given role
     url: '#get-restriction-query-for-a-given-role'
-    identifier: get-restriction-query-for-a-given-role
+    identifier: logs-restriction-queries-get-restriction-query-for-a-given-role
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7274,7 +7482,7 @@ api:
       order: 10
   - name: Create a restriction query
     url: '#create-a-restriction-query'
-    identifier: create-a-restriction-query
+    identifier: logs-restriction-queries-create-a-restriction-query
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7287,7 +7495,7 @@ api:
       order: 2
   - name: List restriction queries
     url: '#list-restriction-queries'
-    identifier: list-restriction-queries
+    identifier: logs-restriction-queries-list-restriction-queries
     parent: logs-restriction-queries
     generated: true
     params:
@@ -7304,7 +7512,7 @@ api:
     generated: true
   - name: Update a single service object
     url: '#update-a-single-service-object'
-    identifier: update-a-single-service-object
+    identifier: opsgenie-integration-update-a-single-service-object
     parent: opsgenie-integration
     generated: true
     params:
@@ -7316,7 +7524,7 @@ api:
       order: 4
   - name: Get a single service object
     url: '#get-a-single-service-object'
-    identifier: get-a-single-service-object
+    identifier: opsgenie-integration-get-a-single-service-object
     parent: opsgenie-integration
     generated: true
     params:
@@ -7328,7 +7536,7 @@ api:
       order: 3
   - name: Delete a single service object
     url: '#delete-a-single-service-object'
-    identifier: delete-a-single-service-object
+    identifier: opsgenie-integration-delete-a-single-service-object
     parent: opsgenie-integration
     generated: true
     params:
@@ -7340,7 +7548,7 @@ api:
       order: 5
   - name: Create a new service object
     url: '#create-a-new-service-object'
-    identifier: create-a-new-service-object
+    identifier: opsgenie-integration-create-a-new-service-object
     parent: opsgenie-integration
     generated: true
     params:
@@ -7352,7 +7560,7 @@ api:
       order: 2
   - name: Get all service objects
     url: '#get-all-service-objects'
-    identifier: get-all-service-objects
+    identifier: opsgenie-integration-get-all-service-objects
     parent: opsgenie-integration
     generated: true
     params:
@@ -7368,7 +7576,7 @@ api:
     generated: true
   - name: Get all processes
     url: '#get-all-processes'
-    identifier: get-all-processes
+    identifier: processes-get-all-processes
     parent: processes
     generated: true
     params:
@@ -7384,7 +7592,7 @@ api:
     generated: true
   - name: Search RUM events
     url: '#search-rum-events'
-    identifier: search-rum-events
+    identifier: rum-search-rum-events
     parent: rum
     generated: true
     params:
@@ -7396,7 +7604,7 @@ api:
       order: 1
   - name: Get a list of RUM events
     url: '#get-a-list-of-rum-events'
-    identifier: get-a-list-of-rum-events
+    identifier: rum-get-a-list-of-rum-events
     parent: rum
     generated: true
     params:
@@ -7408,7 +7616,7 @@ api:
       order: 2
   - name: Aggregate RUM events
     url: '#aggregate-rum-events'
-    identifier: aggregate-rum-events
+    identifier: rum-aggregate-rum-events
     parent: rum
     generated: true
     params:
@@ -7424,7 +7632,7 @@ api:
     generated: true
   - name: Add a user to a role
     url: '#add-a-user-to-a-role'
-    identifier: add-a-user-to-a-role
+    identifier: roles-add-a-user-to-a-role
     parent: roles
     generated: true
     params:
@@ -7436,7 +7644,7 @@ api:
       order: 10
   - name: Get all users of a role
     url: '#get-all-users-of-a-role'
-    identifier: get-all-users-of-a-role
+    identifier: roles-get-all-users-of-a-role
     parent: roles
     generated: true
     params:
@@ -7448,7 +7656,7 @@ api:
       order: 9
   - name: Remove a user from a role
     url: '#remove-a-user-from-a-role'
-    identifier: remove-a-user-from-a-role
+    identifier: roles-remove-a-user-from-a-role
     parent: roles
     generated: true
     params:
@@ -7460,7 +7668,7 @@ api:
       order: 11
   - name: Grant permission to a role
     url: '#grant-permission-to-a-role'
-    identifier: grant-permission-to-a-role
+    identifier: roles-grant-permission-to-a-role
     parent: roles
     generated: true
     params:
@@ -7472,7 +7680,7 @@ api:
       order: 7
   - name: List permissions for a role
     url: '#list-permissions-for-a-role'
-    identifier: list-permissions-for-a-role
+    identifier: roles-list-permissions-for-a-role
     parent: roles
     generated: true
     params:
@@ -7484,7 +7692,7 @@ api:
       order: 6
   - name: Revoke permission
     url: '#revoke-permission'
-    identifier: revoke-permission
+    identifier: roles-revoke-permission
     parent: roles
     generated: true
     params:
@@ -7496,7 +7704,7 @@ api:
       order: 8
   - name: Create a new role by cloning an existing role
     url: '#create-a-new-role-by-cloning-an-existing-role'
-    identifier: create-a-new-role-by-cloning-an-existing-role
+    identifier: roles-create-a-new-role-by-cloning-an-existing-role
     parent: roles
     generated: true
     params:
@@ -7508,7 +7716,7 @@ api:
       order: 12
   - name: Update a role
     url: '#update-a-role'
-    identifier: update-a-role
+    identifier: roles-update-a-role
     parent: roles
     generated: true
     params:
@@ -7520,7 +7728,7 @@ api:
       order: 4
   - name: Get a role
     url: '#get-a-role'
-    identifier: get-a-role
+    identifier: roles-get-a-role
     parent: roles
     generated: true
     params:
@@ -7532,7 +7740,7 @@ api:
       order: 3
   - name: Delete role
     url: '#delete-role'
-    identifier: delete-role
+    identifier: roles-delete-role
     parent: roles
     generated: true
     params:
@@ -7544,7 +7752,7 @@ api:
       order: 5
   - name: Create role
     url: '#create-role'
-    identifier: create-role
+    identifier: roles-create-role
     parent: roles
     generated: true
     params:
@@ -7556,7 +7764,7 @@ api:
       order: 2
   - name: List roles
     url: '#list-roles'
-    identifier: list-roles
+    identifier: roles-list-roles
     parent: roles
     generated: true
     params:
@@ -7568,7 +7776,7 @@ api:
       order: 1
   - name: List permissions
     url: '#list-permissions'
-    identifier: list-permissions
+    identifier: roles-list-permissions
     parent: roles
     generated: true
     params:
@@ -7584,7 +7792,7 @@ api:
     generated: true
   - name: Edit an application key for this service account
     url: '#edit-an-application-key-for-this-service-account'
-    identifier: edit-an-application-key-for-this-service-account
+    identifier: service-accounts-edit-an-application-key-for-this-service-account
     parent: service-accounts
     generated: true
     params:
@@ -7596,7 +7804,7 @@ api:
       order: 2
   - name: Get one application key for this service account
     url: '#get-one-application-key-for-this-service-account'
-    identifier: get-one-application-key-for-this-service-account
+    identifier: service-accounts-get-one-application-key-for-this-service-account
     parent: service-accounts
     generated: true
     params:
@@ -7608,7 +7816,7 @@ api:
       order: 1
   - name: Delete an application key for this service account
     url: '#delete-an-application-key-for-this-service-account'
-    identifier: delete-an-application-key-for-this-service-account
+    identifier: service-accounts-delete-an-application-key-for-this-service-account
     parent: service-accounts
     generated: true
     params:
@@ -7620,7 +7828,7 @@ api:
       order: 3
   - name: Create an application key for this service account
     url: '#create-an-application-key-for-this-service-account'
-    identifier: create-an-application-key-for-this-service-account
+    identifier: service-accounts-create-an-application-key-for-this-service-account
     parent: service-accounts
     generated: true
     params:
@@ -7632,7 +7840,7 @@ api:
       order: 0
   - name: List application keys for this service account
     url: '#list-application-keys-for-this-service-account'
-    identifier: list-application-keys-for-this-service-account
+    identifier: service-accounts-list-application-keys-for-this-service-account
     parent: service-accounts
     generated: true
     params:
