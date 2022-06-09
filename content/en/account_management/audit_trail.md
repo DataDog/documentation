@@ -96,7 +96,7 @@ Give more visual context to your audit trail events with dashboards. To create a
 [1]: https://app.datadoghq.com/audit-trail
 [2]: https://app.datadoghq.com/organization-settings/
 [3]: /logs/explorer/
-[4]: /monitors/create/types/audit_logs/
+[4]: /monitors/create/types/audit_trail/
 [5]: /dashboards/
 [6]: /dashboards/widgets/top_list/
 [7]: /dashboards/widgets/timeseries/
