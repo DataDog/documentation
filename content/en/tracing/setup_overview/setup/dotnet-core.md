@@ -479,10 +479,10 @@ Added in version 2.6.0.
 Wildcard support `[*]` added in version 2.7.0.
 
 `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
-: Alters the behaviour of the consumer span<br>
-When set to true, the consumer span is created and its duration is representative to the computation between one message consumption up to the next one. Prefer this setting when message consumption and processing are synchronous.
-When set to false, the consumer span is still created but only for the purpose of storing Kafka tags, its duration isn't representative. Prefer this setting when message consumption and processing are asynchronous.
+: Alters the behaviour of the kafka consumer span<br>
 **Default**: `true`
+When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Prefer this setting when message consumption is performed in a loop.
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Prefer this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. 
 
 #### Automatic instrumentation integration configuration
 
