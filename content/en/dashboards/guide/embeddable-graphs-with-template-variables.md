@@ -1,8 +1,9 @@
 ---
 title: Embeddable Graphs with Template Variables
-kind: faq
+kind: guide
 aliases:
     - /graphing/faq/embeddable-graphs-with-template-variables
+    - /dashboards/faq/embeddable-graphs-with-template-variables/
 further_reading:
 - link: "/dashboards/sharing/"
   tag: "Documentation"
