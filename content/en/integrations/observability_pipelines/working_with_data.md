@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-Vector enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure Vector pipelines that are composed of a series of Vector `transform` components. These transforms allow you to parse, structure, and  enrich data with built-in type safety.
+Vector enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure Vector pipelines that are composed of a series of Vector `transform` components. These transforms allow you to parse, structure, and enrich data with built-in type safety.
 
 ## Remap data with Vector Remap Language
 
@@ -101,7 +101,7 @@ source = '''
 {{% /tab %}}
 {{< /tabs >}}
 
-In this example, the `type` field is set to a `remap` transform. The `inputs` field defines where it will receive events from the previously defined `previous_component_id` source. The first line in the `source` field deletes the `.user_info` field. At scale, dropping fields is particularly useful for reducing the payload of your events and cutting down on spend for your downstream services. 
+In this example, the `type` field is set to a `remap` transform. The `inputs` field defines where it receives events from the previously defined `previous_component_id` source. The first line in the `source` field deletes the `.user_info` field. At scale, dropping fields is particularly useful for reducing the payload of your events and cutting down on spend for your downstream services. 
 
 The second line adds the `.timestamp` field and the value to the event, changing the content of every event that passes through this transform.
 
@@ -199,7 +199,7 @@ Sampling, reducing, filtering, and aggregating are common transforms to reduce t
 
 ## Route data
 
-Another commonly used transform is `route`, which allows you to split a stream of events into multiple substreams based on  supplied conditions. This is useful when you need to send observability data to different destinations or operate differently on streams of data based on their use case. 
+Another commonly used transform is `route`, which allows you to split a stream of events into multiple substreams based on supplied conditions. This is useful when you need to send observability data to different destinations or operate differently on streams of data based on their use case. 
 
 The below snippet is an example log that you want to route to different destinations based on the value of the `level` field: 
 

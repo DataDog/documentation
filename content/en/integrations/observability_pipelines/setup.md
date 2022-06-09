@@ -123,7 +123,7 @@ Connect your Vector configuration to Observability Pipelines by doing the follow
 - Go to [Observability Pipelines][24].
 - Click **Create Configuration**, and follow the in-app instructions to set up the configuration.
 
-Once the setup is complete, Vector is connected to Observability Pipelines and  data will begin to appear in the Datadog app.
+Once the setup is complete, Vector is connected to Observability Pipelines and the data shows up in the Datadog app.
 
 ## Further Reading
 

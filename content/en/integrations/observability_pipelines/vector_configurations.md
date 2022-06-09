@@ -62,7 +62,7 @@ sources:
 {{% /tab %}}
 {{< /tabs >}}
 
-This `source` component has a unique ID of `generate_syslog`. This unique ID is important for  transforming and routing the data with the `sink` component.
+This `source` component has a unique ID of `generate_syslog`. This unique ID is important for transforming and routing the data with the`sink` component.
 
 `type` is the source type that the Vector configuration collects observability data from. This example uses a `demo_logs` source, which creates sample log data that enables you to simulate different types of events in various formats. The `format` option tells the `demo_logs` source which type of logs to emit, in this case, Syslog format. The `count` option tells the `demo_logs` source how many lines to emit.
 
@@ -117,7 +117,7 @@ transforms:
 {{% /tab %}}
 {{< /tabs >}}
 
-In this `transforms.remap_syslog` component, the `inputs` option is set to `generate_syslog`, which means it will receive events from the previously defined `generate_syslog` source. The transform's component type is `remap`.
+In this `transforms.remap_syslog` component, the `inputs` option is set to `generate_syslog`, which means it receives events from the previously defined `generate_syslog` source. The transform's component type is `remap`.
 
 The `source` contains the list of remapping transformations to apply to each event that Vector receives. In this example, only one operation, `parse_syslog`, is performed, but multiple operations can be added. 
 
