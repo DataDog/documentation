@@ -421,9 +421,8 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `DD_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
 指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。<br>
-**例**: `layer:api, team:intake` <br>
-バージョン 1.17.0 で追加されました。
-デリミタはコンマと空白: `, ` であることに注意してください。
+**例**: `layer:api,team:intake` <br>
+バージョン 1.17.0 で追加されました。<br>
 
 `DD_TRACE_LOG_DIRECTORY`
 : .NET Tracer ログのディレクトリを設定します。<br>
