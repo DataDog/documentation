@@ -180,7 +180,7 @@ Before following these steps to diagnose missing query activity, ensure the Agen
 #### `performance-schema-consumer-events-waits-current` is not enabled {#events-waits-current-not-enabled}
 The Agent requires the `performance-schema-consumer-events-waits-current` option to be enabled. It is disabled by default by MySQL, but may be enabled by your cloud provider. Follow the [setup instructions][1] for enabling it.
 
-Note, this option additionally requires `performance_schema` to be enabled as well.
+Note, this option additionally requires `performance_schema` to be enabled.
 
 <!-- TODO: add a custom query recipe for getting the max sql text length -->
 
