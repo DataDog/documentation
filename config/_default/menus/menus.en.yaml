@@ -1424,7 +1424,7 @@ main:
     parent: tracing
     identifier: trace_explorer
     weight: 2
-  - name: Search
+  - name: Search Spans
     url: tracing/trace_explorer/search/
     parent: trace_explorer
     identifier: span_search
