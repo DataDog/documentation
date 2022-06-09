@@ -2,15 +2,18 @@
 title: Vector Configurations
 kind: Documentation
 further_reading:
+  - link: /integrations/observability_pipelines/working_with_data/
+    tag: Documentation
+    text: Working with data using Vector
   - link: https://vector.dev/releases/ 
     tag: Documentation
     text: Check out the new release for Vector
   - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
     tag: Documentation
-    text: Datadog agent as a source for Vector
+    text: Datadog Agent as a source for Vector
   - link: /agent/vector_aggregation/ 
     tag: Documentation
-    text: Configure Datadog agents to send data to Vector aggregators
+    text: Configure Datadog Agents to send data to Vector aggregators
 ---
 
 ## Overview
