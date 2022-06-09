@@ -173,7 +173,14 @@ performance_schema_max_digest_length=4096
 performance_schema_max_sql_text_length=4096
 ```
 
-Most workloads are able to capture most queries by raising this value to 4096, but you may need to set a higher value for particularly long and complex queries.
+### Query activity is missing
+
+Before following these steps to diagnose missing query activity, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query activity.
+
+#### `performance-schema-consumer-events-waits-current` is not enabled {#events-waits-current-not-enabled}
+The Agent requires the `performance-schema-consumer-events-waits-current` option to be enabled. It is disabled by default by MySQL, but may be enabled by your cloud provider. Follow the [setup instructions][1] for enabling it.
+
+Note, this option additionally requires `performance_schema` to be enabled as well.
 
 <!-- TODO: add a custom query recipe for getting the max sql text length -->
 
