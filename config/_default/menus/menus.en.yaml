@@ -4016,115 +4016,8 @@ api:
     generated: true
     params:
       versions:
-        - v2
-      operationids:
-        - UpdateApplicationKey
-      unstable: []
-      order: 0
-  - name: Get an application key
-    url: '#get-an-application-key'
-    identifier: key-management-get-an-application-key
-    parent: key-management
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetApplicationKey
-      unstable: []
-      order: 0
-  - name: Delete an application key
-    url: '#delete-an-application-key'
-    identifier: key-management-delete-an-application-key
-    parent: key-management
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteApplicationKey
-      unstable: []
-      order: 0
-  - name: Get all application keys
-    url: '#get-all-application-keys'
-    identifier: key-management-get-all-application-keys
-    parent: key-management
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListApplicationKeys
-      unstable: []
-      order: 0
-  - name: Edit an API key
-    url: '#edit-an-api-key'
-    identifier: key-management-edit-an-api-key
-    parent: key-management
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateAPIKey
-      unstable: []
-      order: 0
-  - name: Get API key
-    url: '#get-api-key'
-    identifier: key-management-get-api-key
-    parent: key-management
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetAPIKey
-      unstable: []
-      order: 0
-  - name: Delete an API key
-    url: '#delete-an-api-key'
-    identifier: key-management-delete-an-api-key
-    parent: key-management
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteAPIKey
-      unstable: []
-      order: 0
-  - name: Create an API key
-    url: '#create-an-api-key'
-    identifier: key-management-create-an-api-key
-    parent: key-management
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateAPIKey
-      unstable: []
-      order: 0
-  - name: Get all API keys
-    url: '#get-all-api-keys'
-    identifier: key-management-get-all-api-keys
-    parent: key-management
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListAPIKeys
-      unstable: []
-      order: 0
-  - name: Edit an application key
-    url: '#edit-an-application-key'
-    identifier: key-management-edit-an-application-key
-    parent: key-management
-    generated: true
-    params:
-      versions:
         - v1
+        - v2
       operationids:
         - UpdateApplicationKey
       unstable: []
@@ -4137,6 +4030,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - GetApplicationKey
       unstable: []
@@ -4149,6 +4043,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - DeleteApplicationKey
       unstable: []
@@ -4173,6 +4068,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListApplicationKeys
       unstable: []
@@ -4185,6 +4081,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - UpdateAPIKey
       unstable: []
@@ -4197,6 +4094,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - GetAPIKey
       unstable: []
@@ -4209,6 +4107,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - DeleteAPIKey
       unstable: []
@@ -4221,6 +4120,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CreateAPIKey
       unstable: []
@@ -4233,6 +4133,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListAPIKeys
       unstable: []
@@ -4241,18 +4142,6 @@ api:
     url: /api/latest/logs/
     identifier: logs
     generated: true
-  - name: Search logs
-    url: '#search-logs'
-    identifier: logs-search-logs
-    parent: logs
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListLogs
-      unstable: []
-      order: 2
   - name: Get a list of logs
     url: '#get-a-list-of-logs'
     identifier: logs-get-a-list-of-logs
@@ -4284,19 +4173,8 @@ api:
     generated: true
     params:
       versions:
-        - v2
-      operationids:
-        - SubmitLog
-      unstable: []
-      order: 1
-  - name: Send logs
-    url: '#send-logs'
-    identifier: logs-send-logs
-    parent: logs
-    generated: true
-    params:
-      versions:
         - v1
+        - v2
       operationids:
         - SubmitLog
       unstable: []
@@ -4309,6 +4187,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListLogs
       unstable: []
@@ -4481,18 +4360,6 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
-  - name: Submit metrics
-    url: '#submit-metrics'
-    identifier: metrics-submit-metrics
-    parent: metrics
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - SubmitMetrics
-      unstable: []
-      order: 1
   - name: List distinct metric volumes by metric name
     url: '#list-distinct-metric-volumes-by-metric-name'
     identifier: metrics-list-distinct-metric-volumes-by-metric-name
@@ -4586,19 +4453,8 @@ api:
       versions:
         - v2
       operationids:
-        - CreateBulkTagsMetricsConfiguration
-      unstable: []
-      order: 8
-  - name: Configure tags for multiple metrics
-    url: '#configure-tags-for-multiple-metrics'
-    identifier: metrics-configure-tags-for-multiple-metrics
-    parent: metrics
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
         - DeleteBulkTagsMetricsConfiguration
+        - CreateBulkTagsMetricsConfiguration
       unstable: []
       order: 9
   - name: List tag configurations
@@ -4621,6 +4477,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - SubmitMetrics
       unstable: []
@@ -4932,21 +4789,11 @@ api:
     generated: true
     params:
       versions:
+        - v1
         - v2
       operationids:
-        - UploadIdPMetadata
-      unstable: []
-      order: 1
-  - name: Upload IdP metadata
-    url: '#upload-idp-metadata'
-    identifier: organizations-upload-idp-metadata
-    parent: organizations
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
         - UploadIdPForOrg
+        - UploadIdPMetadata
       unstable: []
       order: 5
   - name: Update your organization
@@ -6553,66 +6400,6 @@ api:
         - ListUserOrganizations
       unstable: []
       order: 6
-  - name: Update a user
-    url: '#update-a-user'
-    identifier: users-update-a-user
-    parent: users
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateUser
-      unstable: []
-      order: 4
-  - name: Get user details
-    url: '#get-user-details'
-    identifier: users-get-user-details
-    parent: users
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetUser
-      unstable: []
-      order: 3
-  - name: Disable a user
-    url: '#disable-a-user'
-    identifier: users-disable-a-user
-    parent: users
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DisableUser
-      unstable: []
-      order: 5
-  - name: Create a user
-    url: '#create-a-user'
-    identifier: users-create-a-user
-    parent: users
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateUser
-      unstable: []
-      order: 2
-  - name: List all users
-    url: '#list-all-users'
-    identifier: users-list-all-users
-    parent: users
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListUsers
-      unstable: []
-      order: 1
   - name: Get a user invitation
     url: '#get-a-user-invitation'
     identifier: users-get-a-user-invitation
@@ -6657,6 +6444,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - UpdateUser
       unstable: []
@@ -6669,6 +6457,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - GetUser
       unstable: []
@@ -6681,6 +6470,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - DisableUser
       unstable: []
@@ -6693,6 +6483,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CreateUser
       unstable: []
@@ -6705,6 +6496,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListUsers
       unstable: []
