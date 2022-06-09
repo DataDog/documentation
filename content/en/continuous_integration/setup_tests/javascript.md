@@ -214,37 +214,42 @@ DD_ENV=ci DD_SERVICE=my-ui-app npm test
 
 ### Cypress >=10
 
-The API for plugin configuration has changed in `cypress>=10`. The new API can be seen at the [cypress docs][4].
+The API for `cypress>=10` can be seen at the [cypress docs][4].
 
-In your `cypress.config.js` file (substitute for the old `pluginsFile`):
-
-{{< code-block lang="javascript" filename="cypress.config.js" >}}
-const { defineConfig } = require('cypress')
-
-module.exports = defineConfig({
-  // setupNodeEvents can be defined in either
-  // the e2e or component configuration
-  e2e: {
-    setupNodeEvents(on, config) {
-      // any other plugin can be here
-      return require('dd-trace/ci/cypress/plugin')(on, config)
-    }
-  }
-})
-{{< /code-block >}}
-
-The `supportFile` remains the same, but its configuration is slightly different, as it can be seen in the [cypress migration guide][5]:
+In your `cypress.config.js` file:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   e2e: {
+    setupNodeEvents: require('dd-trace/ci/cypress/plugin'),
     supportFile: 'cypress/support/index.js'
   }
 })
 {{< /code-block >}}
 
+Your `supportFile` should look the same as in `cypress<10`:
+
+{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
+// your previous code is before this line
+require('dd-trace/ci/cypress/support')
+{{< /code-block >}}
+
+If you're already using other cypress plugins:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      // your previous code is before this line
+      require('dd-trace/ci/cypress/plugin')(on, config)
+    }
+  }
+})
+{{< /code-block >}}
 
 
 ### Add extra tags
@@ -267,16 +272,15 @@ it('renders a hello world', () => {
 
 ### RUM integration
 
-If the browser application being tested is instrumented using [RUM][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][7] guide.
+If the browser application being tested is instrumented using [RUM][5], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][6] guide.
 
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [4]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
-[5]: https://docs.cypress.io/guides/references/migration-guide#supportFile
-[6]: /real_user_monitoring/browser/#setup
-[7]: /continuous_integration/guides/rum_integration/
+[5]: /real_user_monitoring/browser/#setup
+[6]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 {{< /tabs >}}
 
