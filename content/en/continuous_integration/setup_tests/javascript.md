@@ -182,7 +182,7 @@ DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 
 ### Cypress<10
 
-These are the instructions if you're using a version lower than `cypress@10`.
+These are the instructions if you're using a version older than `cypress@10`.
 
 1. Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
 {{< code-block lang="json" filename="cypress.json" >}}
@@ -214,9 +214,9 @@ DD_ENV=ci DD_SERVICE=my-ui-app npm test
 
 ### Cypress >=10
 
-The API for `cypress>=10` can be seen at the [cypress docs][4].
+Use the Cypress API documentation to [learn how to write plugins][4] for `cypress>=10`.
 
-In your `cypress.config.js` file:
+In your `cypress.config.js` file, set the following:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
 const { defineConfig } = require('cypress')
@@ -236,7 +236,7 @@ Your `supportFile` should look the same as in `cypress<10`:
 require('dd-trace/ci/cypress/support')
 {{< /code-block >}}
 
-If you're already using other cypress plugins:
+If you're using other Cypress plugins, your `cypress.config.js` file should contain the following:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
 const { defineConfig } = require('cypress')
