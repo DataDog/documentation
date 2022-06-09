@@ -359,7 +359,7 @@ Your logger needs to have a `source` that sets the `trace_id` mapping correctly.
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
 **Default**: Defaults to the rates returned by the Datadog Agent<br>
-Enables ingestion rate control. This parameter should be a float between 0 and 1, representing the percentage of spans to sample.
+Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
 For more information, see [Ingestion Mechanisms][6].
 
 `DD_TRACE_SAMPLING_RULES`
