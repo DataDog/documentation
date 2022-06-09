@@ -429,7 +429,7 @@ Added in version 1.18.3. Response header support and entries without tag names a
 If specified, adds all of the specified tags to all generated spans. <br>
 **Example**: `layer:api, team:intake` <br>
 Added in version 1.17.0. <br>
-Note that the delimiter is a comma and a whitespace: `, `.
+Note that the delimiter is a comma and a space: `, `.
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
@@ -480,9 +480,9 @@ Wildcard support `[*]` added in version 2.7.0.
 
 `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
 : Alters the behaviour of the kafka consumer span<br>
-**Default**: `true`
-When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Prefer this setting when message consumption is performed in a loop.
-When set to `false`, the consumer span is created when a message is consumed and immediately closed. Prefer this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. 
+**Default**: `true`<br>
+When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop.<br>
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. 
 
 #### Automatic instrumentation integration configuration
 

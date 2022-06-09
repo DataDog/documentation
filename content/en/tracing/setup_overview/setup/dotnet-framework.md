@@ -375,7 +375,7 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans.
 **Example**: `layer:api, team:intake` <br>
-Note that the delimiter is a comma and a whitespace: `, `.
+Note that the delimiter is a comma and a space: `, `.
 
 `DD_TRACE_DEBUG`
 : Enables or disables debug logging. Valid values are `true` or `false`.<br>
@@ -442,9 +442,9 @@ Wildcard support `[*]` added in version 2.7.0.
 
 `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
 : Alters the behaviour of the kafka consumer span<br>
-**Default**: `true`
-When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Prefer this setting when message consumption is performed in a loop.
-When set to `false`, the consumer span is created when a message is consumed and immediately closed. Prefer this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. 
+**Default**: `true`<br>
+When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. 
 
 #### Automatic instrumentation integration configuration
 
