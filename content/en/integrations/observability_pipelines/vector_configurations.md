@@ -169,6 +169,7 @@ type = "console"
         "codec": "json"
       }
     }
+}
 ```
 
 {{% /tab %}}
