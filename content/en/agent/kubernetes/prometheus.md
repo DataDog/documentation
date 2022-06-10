@@ -15,7 +15,7 @@ further_reading:
   text: "Collect your application traces"
 - link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
-  text: "Collect automatically your applications metrics and logs"
+  text: "Automatically collect your applications' metrics and logs"
 - link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
@@ -165,11 +165,11 @@ This configuration generates a check that collects all metrics exposed using the
 
 #### Advanced configuration
 
-You can define advanced Openmetrics check configurations or custom Autodiscovery rules other than native Prometheus annotations with the `additionalConfigs` configuration field in `values.yaml`.
+You can define advanced OpenMetrics check configurations or custom Autodiscovery rules other than native Prometheus annotations with the `additionalConfigs` configuration field in `values.yaml`.
 
-`additionalConfigs` is a list of structures containing Openmetrics check configurations and Autodiscovery rules.
+`additionalConfigs` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
 
-Every [configuration field][14] supported by the Openmetrics check can be passed in the configurations list.
+Every [configuration field][14] supported by the OpenMetrics check can be passed in the configurations list.
 
 The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
@@ -189,7 +189,7 @@ kubernetes_annotations:
 
 **Example:**
 
-In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customizing the Openmetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
+In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
 
 ```yaml
 datadog:
