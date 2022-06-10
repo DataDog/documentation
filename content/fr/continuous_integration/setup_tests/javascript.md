@@ -1,29 +1,39 @@
 ---
-title: Tests JavaScript
-kind: documentation
 further_reading:
-  - link: /continuous_integration/explore_tests
-    tag: Documentation
-    text: Explorer les résultats de test et la performance
-  - link: /continuous_integration/troubleshooting/
-    tag: Documentation
-    text: Dépannage des éléments de configuration
+- link: /continuous_integration/explore_tests
+  tag: Documentation
+  text: Explorer les résultats de test et la performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Dépannage CI
+kind: documentation
+title: Tests JavaScript
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">La solution CI Visibility n'est actuellement pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Compatibilité
 
 Frameworks de test pris en charge :
-* Jest >= 24.8.0
+* Jest 24.8.0+
   * Seuls les environnements de test `jsdom` (dans le package `jest-environment-jsdom`) et `node` (dans le package `jest-environment-node`) peuvent être utilisés. Les environnements personnalisés, comme `@jest-runner/electron/environment` dans `jest-electron-runner`, ne sont pas pris en charge.
   * Seuls les [`testRunners`][3] [`jest-circus`][1] et [`jest-jasmine2`][2] sont pris en charge.
-* Mocha >= 5.2.0
-  * Mocha >= 9.0.0 : [prise en charge partielle](#limites-connues).
-* Cucumber-js >= 7.0.0
-* Cypress >= 6.7.0
-  * Avec au minimum `dd-trace>=1.4.0`.
+  * Jest 28+ est uniquement pris en charge à partir de `dd-trace>=2.7.0`.
+* Mocha 5.2.0+
+  * Mocha 9.0.0+ : [prise en charge partielle](#limites connues)
+* Cucumber-js 7.0.0+
+* Cypress 6.7.0+
+  * À partir de `dd-trace>=1.4.0`
 
 ## Prérequis
 
-[Installez l'Agent Datadog pour recueillir des données de test][4].
+[Installez l'Agent Datadog pour recueillir des données sur les tests][4].
+
+<div class="alert alert-warning">
+Le mode sans Agent est disponible en version bêta. Pour le tester, suivez les <a href="/continuous_integration/setup_tests/javascript#agentless-beta">instructions dédiées</a> indiquées plus bas.
+</div>
 
 ## Installer le traceur JavaScript
 
@@ -54,25 +64,37 @@ module.exports = {
 2. Dans `testEnvironment.js` :
 
 ```javascript
-require('dd-trace').init({
-  // Active uniquement l'instrumentation de tests sur l'environnement de CI
-  enabled: process.env.DD_ENV === 'ci',
-  // Nom du service ou de la bibliothèque concerné(e) par les tests
-  service: 'my-javascript-app',
-  // Pour garantir l'envoi des spans de test
-  flushInterval: 300000
-})
 
+// Active uniquement l'instrumentation de tests sur l'environnement de CI
+if (process.env.DD_ENV === 'ci') {
+  require('dd-trace/ci/jest/env')
+}
 // L'option jest-environment-jsdom est également acceptée
 module.exports = require('jest-environment-node')
 ```
 
+### Jest@28
+
+Si vous utilisez `jest@28` et `jest-environment-node`, suivez la [documentation `jest`][1] pour modifier votre environnement :
+
+```javascript
+
+if (process.env.DD_ENV === 'ci') {
+  require('dd-trace/ci/jest/env')
+}
+
+module.exports = require('jest-environment-node').default
+```
+
+Puisque `jest-environment-jsdom` n'est pas inclus avec `jest@28`, vous devez l'installer séparément. Les versions 28+ de jest sont uniquement prises en charge à partir de `dd-trace>=2.7.0`.
+
 <div class="alert alert-warning"><strong>Remarque</strong> : à compter de la version 27 de Jest, <code>jest-environment-node</code>, <code>jest-environment-jsdom</code>, <code>jest-jasmine2</code>, et <code>jest-circus</code> sont fournis avec <code>jest</code>. Ils n'apparaissent donc normalement pas dans votre <code>package.json</code>. Si vous avez extrait une ou plusieurs de ces bibliothèques dans votre <code>package.json</code>, vérifiez que les versions installées correspondent à celles de <code>jest</code>.</div>
+
 
 Exécutez normalement vos tests, en spécifiant l'environnement concerné (par exemple, `local` pour des tests exécutés sur la machine d'un développeur, ou `ci` pour des tests exécutés sur un fournisseur de CI) dans la variable d'environnement `DD_ENV`. Exemple :
 
 ```bash
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 ```
 
 
@@ -81,57 +103,45 @@ DD_ENV=ci npm test
 
 {{% tab "Mocha" %}}
 
-Créez un fichier dans votre projet (par exemple, `init-tracer.js`) avec le contenu suivant :
-
-```javascript
-require('dd-trace').init({
-  // Active uniquement l'instrumentation de tests sur l'environnement de CI
-  enabled: process.env.DD_ENV === 'ci',
-
-  // Nom du service ou de la bibliothèque concerné(e) par les tests
-  service: 'my-ui-app'
-})
-```
-
-Ajoutez `--require init-tracer` à la commande d'exécution pour vos tests `mocha`. Par exemple, dans votre `package.json` :
+Ajoutez `--require dd-trace/ci/init` à la commande d'exécution de vos tests `mocha`. Par exemple, dans votre `package.json` :
 
 ```json
 "scripts": {
-  "test": "mocha --require init-tracer"
+  "test": "mocha --require dd-trace/ci/init"
 },
 ```
 
 Exécutez normalement vos tests, en spécifiant l'environnement concerné (par exemple, `local` pour des tests exécutés sur la machine d'un développeur, ou `ci` pour des tests exécutés sur un fournisseur de CI) dans la variable d'environnement `DD_ENV`. Exemple :
 
 ```bash
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 ```
 
 {{% /tab %}}
 {{% tab "Cucumber" %}}
 
-Ajoutez `--require-module dd-trace/init` à l'emplacement où vous exécutez normalement vos tests `cucumber-js`. Par exemple, dans votre `package.json` :
+Ajoutez `--require-module dd-trace/ci/init` à l'emplacement où vous exécutez normalement vos tests `cucumber-js`. Par exemple, dans votre `package.json` :
 
 {{< code-block lang="json" filename="package.json" >}}
 "scripts": {
-  "test": "DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init"
+  "test": "cucumber-js --require-module=dd-trace/ci/init"
 },
 {{< /code-block >}}
 
 Exécutez normalement vos tests, en spécifiant l'environnement concerné (par exemple, `local` pour des tests exécutés sur la machine d'un développeur, ou `ci` pour des tests exécutés sur un fournisseur de CI) dans la variable d'environnement `DD_ENV`. Exemple :
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 {{< /code-block >}}
 
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
 
-1. Définissez [`pluginsFile`][1] sur `"dd-trace/cypress/plugin"`. Par exemple, avec [`cypress.json`][2] :
+1. Définissez [`pluginsFile`][1] sur `"dd-trace/ci/cypress/plugin"`, par exemple avec [`cypress.json`][2] :
 {{< code-block lang="json" filename="cypress.json" >}}
 {
-  "pluginsFile": "dd-trace/cypress/plugin"
+  "pluginsFile": "dd-trace/ci/cypress/plugin"
 }
 {{< /code-block >}}
 
@@ -139,28 +149,51 @@ Si vous avez déjà défini un `pluginsFile`, vous pouvez tout de même initiali
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
 module.exports = (on, config) => {
   // votre ancien code se trouve avant ce commentaire
-  require('dd-trace/cypress/plugin')(on, config)
+  require('dd-trace/ci/cypress/plugin')(on, config)
 }
 {{< /code-block >}}
 
 2. Ajoutez la ligne suivante à [`supportFile`][3] :
 {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
 // votre ancien code se trouve avant ce commentaire
-require('dd-trace/cypress/support')
+require('dd-trace/ci/cypress/support')
 {{< /code-block >}}
 
 
 Exécutez normalement vos tests, en spécifiant l'environnement concerné (par exemple, `local` pour des tests exécutés sur la machine d'un développeur, ou `ci` pour des tests exécutés sur un fournisseur de CI) dans la variable d'environnement `DD_ENV`. Exemple :
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci npm test
+DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
+### Ajouter des tags supplémentaires
+
+Pour ajouter des informations supplémentaires à vos tests, par exemple le propriétaire de l'équipe, utilisez `cy.task('dd:addTags', { yourTags: 'here' })` dans votre test ou vos hooks.
+
+Par exemple :
+
+{{< code-block lang="javascript">}}
+beforeEach(() => {
+  cy.task('dd:addTags', { 'before.each': 'certain.information' })
+})
+it('affiche un message Hello world', () => {
+  cy.task('dd:addTags', { 'team.owner': 'ui' })
+  cy.get('.hello-world')
+    .should('have.text', 'Hello World')
+})
+{{< /code-block >}}
+
+
+### Intégration RUM
+
+Si l'application Browser testée est instrumentée avec [RUM][4], les résultats de vos tests Cypress ainsi que les sessions Browser RUM et les replays générés sont automatiquement associés. Pour en savoir plus, consultez la section relative à l'[intégration RUM][5].
 
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[4]: /fr/real_user_monitoring/browser/#setup
+[5]: /fr/continuous_integration/guides/rum_integration/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -191,18 +224,18 @@ Vous pouvez également utiliser toutes les autres options de [configuration du t
 
 Datadog tire profit des données Git pour vous présenter les résultats de vos tests et les regrouper par référentiel, branche et commit. Les métadonnées Git sont automatiquement recueillies par l'instrumentation de test, à partir des variables d'environnement du fournisseur de CI et du dossier local `.git` dans le chemin du projet, le cas échéant.
 
-Si vous exécutez des tests pour des fournisseurs de CI non pris en charge, ou sans dossier `.git`, vous pouvez configurer manuellement les données Git à l'aide de variables d'environnement. Ces dernières sont prioritaires et remplacent les informations détectées automatiquement. Configurez les variables d'environnement suivantes pour obtenir des données Git :
+Si vous exécutez des tests dans des fournisseurs de CI non pris en charge, ou sans dossier `.git`, vous pouvez configurer manuellement les données Git à l'aide de variables d'environnement. Ces dernières sont prioritaires et remplacent les informations détectées automatiquement. Configurez les variables d'environnement suivantes pour obtenir des données Git :
 
 `DD_GIT_REPOSITORY_URL`
 : URL du référentiel dans lequel le code est stocké. Les URL HTTP et SSH sont prises en charge.<br/>
 **Exemple** : `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
 
 `DD_GIT_BRANCH`
-: Branche Git concernée par les tests. Ne renseignez pas cette variable si vous fournissez à la place des informations sur les tags.<br/>
+: Branche Git testée. Ne renseignez pas cette variable si vous fournissez à la place des informations sur les tags.<br/>
 **Exemple** : `develop`
 
 `DD_GIT_TAG`
-: Tag Git concerné par les tests (le cas échéant). Ne renseignez pas cette variable si vous fournissez à la place des informations sur la branche.<br/>
+: Tag Git testé (le cas échéant). Ne renseignez pas cette variable si vous fournissez à la place des informations sur la branche.<br/>
 **Exemple** : `1.0.1`
 
 `DD_GIT_COMMIT_SHA`
@@ -237,14 +270,34 @@ Si vous exécutez des tests pour des fournisseurs de CI non pris en charge, ou s
 : Date du responsable du commit, au format ISO 8601.<br/>
 **Exemple** : `2021-03-12T16:00:28Z`
 
+## Mode sans Agent (version bêta)
+
+Pour instrumenter votre collection de tests sans Agent, configurez les variables d'environnement suivantes :
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED` (requis)
+: Active ou désactive le mode sans Agent.<br/>
+**Valeur par défaut** : `false`
+
+`DD_API_KEY` (requis)
+: La [clé d'API Datadog][8] utilisée pour importer les résultats de test.<br/>
+**Valeur par défaut**: `(vide)`
+
+En outre, configurez le [site Datadog][7] vers lequel vous souhaitez envoyer vos données. Votre site Datadog est {{< region-param key="dd_site" >}}.
+
+`DD_SITE` (requis)
+: Le [site Datadog][92] vers lequel importer les résultats.<br/>
+**Valeur par défaut** : `datadoghq.com`<br/>
+**Site sélectionné** : {{< region-param key="dd_site" code="true" >}}
 
 ## Limites connues
 
 ### Modules ES
-[Mocha >=9.0.0][8] adopte une approche axée sur ESM pour charger les fichiers de test. Ainsi, si vous utilisez des modules ES (par exemple, si vous avez défini des fichiers de test avec l'extension `.mjs`), _l'instrumentation est limitée_. Les tests sont détectés, mais vous n'avez aucune visibilité sur ces derniers. Pour en savoir plus les modules ES, consultez la [documentation NodeJS][9] (en anglais).
+[Mocha >=9.0.0][10] adopte une approche axée sur ESM pour charger les fichiers de test. Ainsi, si vous utilisez des modules ES (par exemple, si vous avez défini des fichiers de test avec l'extension `.mjs`), _l'instrumentation est limitée_. Les tests sont détectés, mais vous n'avez aucune visibilité sur ces derniers. Pour en savoir plus les modules ES, consultez la [documentation NodeJS][11] (en anglais).
 
 ### Tests Browser
-Le traceur JavaScript ne prend par en charge les navigateurs. Si vous exécutez des tests Browser avec `mocha` ou `jest`, vous n'avez donc aucune visibilité sur les tests.
+Les tests Browser exécutés avec `mocha`, `jest`, `cucumber` et `cypress` sont instrumentés par `dd-trace-js`. Toutefois, par défaut, vous ne pouvez pas visualiser les données sur la session Browser (par exemple, les appels réseau, les actions utilisateur, les chargements de page, etc.).
+
+Pour y remédier, utilisez les solutions [RUM et Session Replay][12]. Avec Cypress, les résultats de test ainsi que les sessions Browser RUM et les replays générés sont automatiquement associés. Pour en savoir plus, consultez la section relative à l'[intégration RUM][13].
 
 ## Meilleures pratiques
 
@@ -263,14 +316,14 @@ Utilisez tant que possible les outils des frameworks de test afin de paramétrer
 })
 {{< /code-block >}}
 
-Et privilégiez plutôt [`test.each`][10] :
+Et privilégiez plutôt [`test.each`][14] :
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-Pour `mocha`, utilisez [`mocha-each`][11] :
+Pour `mocha`, utilisez [`mocha-each`][15] :
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -296,7 +349,11 @@ Avec cette approche, le framework de test et la solution CI Visibility peuvent 
 [5]: https://github.com/DataDog/dd-trace-js
 [6]: /fr/tracing/setup_overview/setup/nodejs
 [7]: /fr/tracing/setup_overview/setup/nodejs/?tab=containers#configuration
-[8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[11]: https://github.com/ryym/mocha-each
+[8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: /fr/getting_started/site/
+[10]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[11]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[12]: /fr/real_user_monitoring/browser/
+[13]: /fr/continuous_integration/guides/rum_integration/
+[14]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[15]: https://github.com/ryym/mocha-each

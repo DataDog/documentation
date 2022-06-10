@@ -45,9 +45,9 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="すぐに使えるリソースグラフ"  style="width:90%;">}}
 
-### タイムボードにエクスポート
+### ダッシュボードへのエクスポート
 
-グラフを既存の[タイムボード][4]にエクスポートするには、各グラフの右上隅にある上向き矢印をクリックします。
+グラフを既存の[ダッシュボード][4]にエクスポートするには、各グラフの右上隅にある上向き矢印をクリックします。
 
 ### レイテンシー分布
 
@@ -85,7 +85,7 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 環境、サービス、オペレーション、およびリソース名で既にフィルタリングされている[トレース検索][7]モーダルで、このリソースに関連付けられている[トレース][6]のリストを参照してください。
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="トレースの一覧画面" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="トレースの一覧画面"  style="width:90%;">}}
 
 ## その他の参考資料
 
@@ -94,7 +94,7 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 [1]: /ja/tracing/visualization/#services
 [2]: /ja/tracing/visualization/
 [3]: /ja/tracing/visualization/#trace
-[4]: /ja/dashboards/#timeboards
+[4]: /ja/dashboards/
 [5]: /ja/tracing/visualization/#spans
 [6]: /ja/tracing/visualization/trace/
 [7]: /ja/tracing/search/

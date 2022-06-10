@@ -116,43 +116,50 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-次の 2 つのアクセス許可ステートメントを AWS インテグレーションのロールにアタッチされている IAM ポリシーに追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。
+1. 次の 2 つのアクセス許可ステートメントを持つ[ポリシーを作成][1]します。
 
-**注:**
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "DatadogUploadAndRehydrateLogArchives",
+         "Effect": "Allow",
+         "Action": ["s3:PutObject", "s3:GetObject"],
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+         ]
+       },
+       {
+         "Sid": "DatadogRehydrateLogArchivesListBucket",
+         "Effect": "Allow",
+         "Action": "s3:ListBucket",
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+         ]
+       }
+     ]
+   }
+   ```
+     * `GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][2]を可能にします。
+     * アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
 
-* `GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][1]を可能にします。
-* アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
-
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "DatadogUploadAndRehydrateLogArchives",
-      "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
-      "Resource": [
-        "arn:aws:s3:::<バケット名_1_/_バケットへのパス_任意_1>/*",
-        "arn:aws:s3:::<バケット名_2_/_バケットへのパス_任意_2>/*"
-      ]
-    },
-    {
-      "Sid": "DatadogRehydrateLogArchivesListBucket",
-      "Effect": "Allow",
-      "Action": "s3:ListBucket",
-      "Resource": [
-        "arn:aws:s3:::<バケット名_1>",
-        "arn:aws:s3:::<バケット名_2>"
-      ]
-    }
-  ]
-}
-```
+2. バケット名を編集します。
+3. オプションで、ログアーカイブを含むパスを指定します。
+4. Datadog のインテグレーションロールに新しいポリシーをアタッチします。
+   a. AWS IAM コンソールで **Roles** に移動します。
+   b. Datadog インテグレーションで使用されるロールを見つけます。デフォルトでは、 **DatadogIntegrationRole** という名前になっていますが、組織で名前を変更した場合は、名前が異なる場合があります。ロール名をクリックすると、ロールのサマリーページが表示されます。
+    c. **Add permissions**、**Attach policies** の順にクリックします。
+   d. 上記で作成したポリシーの名称を入力します。
+   e. **Attach policies** をクリックします。
 
 **注**: `s3:PutObject` と `s3:GetObject` アクションのリソース値は `/*` で終わっていることを確認してください。これらの権限はバケット内のオブジェクトに適用されるからです。
 
-[1]: /ja/logs/archives/rehydrating/
+
+[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[2]: /ja/logs/archives/rehydrating/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
@@ -261,7 +268,7 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 [S3 バケットにライフサイクルコンフィギュレーションを設定][1]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。
 
-[リハイドレート][2]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています (Glacier Instant Retrieval は例外です)。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
+[リハイドレート][2]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています (Glacier Instant Retrieval と S3 Intelligent-Tiering は例外です)。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /ja/logs/archives/rehydrating/

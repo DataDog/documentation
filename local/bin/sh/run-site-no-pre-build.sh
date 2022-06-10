@@ -7,9 +7,12 @@ if [ ${RUN_SERVER} = true ]; then
   # Building the documentation
   printf "checking that node modules are installed and up-to-date"
   npm --global install yarn && \
-  npm cache clean --force && yarn install --frozen-lockfile
+  npm cache clean --force && yarn install --immutable
   printf "starting webpack and hugo build"
-  LANGS_TO_IGNORE=${LANGS_TO_IGNORE} yarn run docker:start
+  yarn run prestart
+  yarn run start
+
+  #LANGS_TO_IGNORE=${LANGS_TO_IGNORE} yarn run docker:start
 
   sleep 5
 

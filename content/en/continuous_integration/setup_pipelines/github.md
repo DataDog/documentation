@@ -8,20 +8,21 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
+    - link: "/continuous_integration/setup_pipelines/custom_tags_and_metrics/"
+      tag: "Documentation"
+      text: "Extend Pipeline Visibility by adding custom tags and metrics"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">The GitHub Actions integration is in beta. There are no billing implications for activating the GitHub Actions integration during this period.</div>
-
 ## Compatibility
 
 Supported GitHub versions:
 * GitHub.com (SaaS)
 
-GitHub Enterprise is not supported.
+GitHub Enterprise Server is not supported.
 
 ## Configuring the Datadog integration
 

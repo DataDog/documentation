@@ -450,13 +450,6 @@
       "description": "Delete a tag configuration returns \"No Content\" response"
     }
   ],
-  "EstimateMetricsOutputSeries": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "Estimate Output Series - Public v2 API returns \"Success\" response"
-    }
-  ],
   "ListVolumesByMetricName": [
     {
       "group": "metrics",
@@ -497,11 +490,25 @@
       "description": "Submit metrics returns \"Payload accepted\" response"
     }
   ],
+  "EstimateMetricsOutputSeries": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Tag Configuration Cardinality Estimator returns \"Success\" response"
+    }
+  ],
   "UpdateTagConfiguration": [
     {
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag configuration returns \"OK\" response"
+    }
+  ],
+  "CreateOpsgenieService": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Create a new service object returns \"CREATED\" response"
     }
   ],
   "UploadIdPMetadata": [
@@ -733,7 +740,7 @@
     {
       "group": "usage_metering",
       "suffix": "",
-      "description": "Get Cost Across Multi-Org Account returns \"OK\" response"
+      "description": "Get cost across multi-org account returns \"OK\" response"
     }
   ],
   "GetUsageApplicationSecurityMonitoring": [

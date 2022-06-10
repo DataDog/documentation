@@ -137,6 +137,10 @@ HTTP リクエストのステップを作成するには、**Create Your First S
 
 {{< img src="synthetics/api_tests/assertions2.png" alt="Multistep API テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
 
+テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+
+テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
+
 #### 実行パラメーターの追加
 
 **Continue with test if this step fails** (このステップに失敗してもテストを続行する) をクリックすると、ステップに失敗しても次のステップに進むことができます。

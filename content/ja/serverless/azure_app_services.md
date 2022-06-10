@@ -106,24 +106,26 @@ v2.3.0 以降、.NET 拡張機能はセマンティックバージョニング�
 
 ### アプリケーションロギング
 
-Azure App Service のアプリケーションから Datadog へログを送信するには、Serilog を使用する必要があります。このメソッドでログを送信すると、トレース ID の挿入が可能になり、Datadog でログとトレースを関連付けられるようになります。拡張機能によるトレース ID の挿入を有効にするには、アプリケーション設定 `DD_LOGS_INJECTION:true` を追加します。
+Azure App Service のアプリケーションから Datadog にログを送信するには、以下のいずれかの方法があります。
+1. [自動インスツルメンテーションによるエージェントレスロギング][6]
+2. [Serilog シンクによるエージェントレスロギング][7]
+
+どちらの方法でもトレース ID の挿入が可能で、Datadog のログとトレースを連携させることができます。拡張機能でトレース ID の挿入を有効にするには、アプリケーション設定 `DD_LOGS_INJECTION:true` を追加してください。
 
 **注**: この動作はアプリケーション内で発生するため、診断設定で送信する Azure Platform ログはトレース ID には含まれません。
 
-詳しい手順は、[Serilog でエージェントレスロギングをセットアップ][6]するためのドキュメントを参照してください。
-
 ### DogStatsD を使用したカスタムメトリクス
 
-Azure App Service の拡張機能には、[DogStatsD][7] (Datadog のメトリクス集計サービス) のインスタンスが含まれます。拡張機能を利用して、Azure Web Apps および Functions から Datadog へ直接カスタムメトリクス、サービスチェック、イベントを送信できます。
+Azure App Service の拡張機能には、[DogStatsD][8] (Datadog のメトリクス集計サービス) のインスタンスが含まれます。拡張機能を利用して、Azure Web Apps および Functions から Datadog へ直接カスタムメトリクス、サービスチェック、イベントを送信できます。
 
 Azure App Service でカスタムメトリクスおよびチェックを書き込むことは、Datadog Agent が実行されているホスト上のアプリケーションでそれを実行するプロセスと同様です。拡張機能を使用して Azure App Service から Datadog へカスタムメトリクスを送信するには、以下を実行します。
 
-1. [DogStatsD NuGet パッケージ][8]を Visual Studio プロジェクトに追加します。
-2. アプリケーション内で DogStatdD を初期化し、カスタムメトリクスを作成します。
+1. [DogStatsD NuGet パッケージ][9]を Visual Studio プロジェクトに追加します。
+2. アプリケーション内で DogStatsD を初期化し、カスタムメトリクスを作成します。
 3. Azure App Service にコードをデプロイします。
 4. Datadog App Service 拡張機能をインストールします。
 
-**注**: [標準的な DogStatsD コンフィグプロセス][9]とは異なり、DogStatsD のコンフィギュレーションを開始するのにポートやサーバー名の設定は必要ありません。Azure App Service にはアンビエント環境変数があり、メトリクスの送信条件を決定します（DogStatsD クライアントには v6.0.0 以上が必要）。
+**注**: [標準的な DogStatsD コンフィグプロセス][10]とは異なり、DogStatsD のコンフィギュレーションを開始するのにポートやサーバー名の設定は必要ありません。Azure App Service にはアンビエント環境変数があり、メトリクスの送信条件を決定します（DogStatsD クライアントには v6.0.0 以上が必要）。
 
 メトリクスを送信するには、以下のコードを使用します。
 
@@ -148,7 +150,7 @@ DogStatsd.Increment("sample.startup");
 **注**: カスタムメトリクスのみを送信する場合 (トレースを無効にする場合)、アプリケーションの設定で次の変数を設定します。
   - `DD_TRACE_ENABLED` を `false` に設定します。
   - `DD_AAS_ENABLE_CUSTOM_METRICS` を `true` に設定します。
-[カスタムメトリクス][10]に関する詳細を参照してください。
+[カスタムメトリクス][11]に関する詳細を参照してください。
 
 
 [1]: /ja/integrations/azure
@@ -156,11 +158,12 @@ DogStatsd.Increment("sample.startup");
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /ja/tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
-[6]: /ja/logs/log_collection/csharp/?tab=serilog#agentless-logging
-[7]: /ja/developers/dogstatsd
-[8]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
-[9]: /ja/developers/dogstatsd/?tab=net#code
-[10]: /ja/metrics/
+[6]: /ja/logs/log_collection/csharp/#agentless-logging-with-apm
+[7]: /ja/logs/log_collection/csharp/#agentless-logging-with-serilog-sink
+[8]: /ja/developers/dogstatsd
+[9]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
+[10]: /ja/developers/dogstatsd/?tab=net#code
+[11]: /ja/metrics/
 {{% /tab %}}
 {{< /tabs >}}
 

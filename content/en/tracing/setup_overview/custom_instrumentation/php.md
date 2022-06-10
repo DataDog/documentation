@@ -254,6 +254,31 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Distributed tracing
+
+When a new PHP script is launched, the tracer automatically checks for the presence of datadog headers for distributed tracing:
+- `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)
+- `x-datadog-parent-id` (environment variable: `HTTP_X_DATADOG_PARENT_ID`)
+- `x-datadog-origin` (environment variable: `HTTP_X_DATADOG_ORIGIN`)
+- `x-datadog-tags` (environment variable: `HTTP_X_DATADOG_TAGS`)
+
+To manually set this information in a CLI script on new traces or an existing trace a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided. 
+
+```php
+<?php
+
+function processIncomingQueueMessage($message) {
+}
+
+\DDTrace\trace_function(
+    'processIncomingQueueMessage',
+    function(\DDTrace\SpanData $span, $args) {
+        $message = $args[0];
+        \DDTrace\set_distributed_tracing_context($message->trace_id, $message->parent_id);
+    }
+);
+```
+
 ## Resource filtering
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][5] page.

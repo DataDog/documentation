@@ -325,6 +325,15 @@
           "type": "string"
         }
       },
+      "OpsgenieServiceIDPathParameter": {
+        "description": "The UUID of the service.",
+        "in": "path",
+        "name": "integration_service_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "PageNumber": {
         "description": "Specific page number to return.",
         "in": "query",
@@ -3676,10 +3685,8 @@
               },
               "saml_assertion_attribute_id": {
                 "description": "The ID of the SAML assertion attribute.",
-                "example": 0,
-                "format": "int32",
-                "maximum": 2147483647,
-                "type": "integer"
+                "example": "0",
+                "type": "string"
               }
             },
             "type": "object"
@@ -3688,153 +3695,6 @@
             "description": "ID of the AuthN Mapping.",
             "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
             "type": "string"
-          },
-          "included": {
-            "description": "Included data in the AuthN Mapping response.",
-            "items": {
-              "description": "Included data in the AuthN Mapping response.",
-              "oneOf": [
-                {
-                  "description": "SAML assertion attribute.",
-                  "properties": {
-                    "attributes": {
-                      "description": "Key/Value pair of attributes used in SAML assertion attributes.",
-                      "properties": {
-                        "attribute_key": {
-                          "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
-                          "example": "member-of",
-                          "type": "string"
-                        },
-                        "attribute_value": {
-                          "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
-                          "example": "Development",
-                          "type": "string"
-                        }
-                      },
-                      "type": "object"
-                    },
-                    "id": {
-                      "description": "The ID of the SAML assertion attribute.",
-                      "example": 0,
-                      "format": "int32",
-                      "maximum": 2147483647,
-                      "type": "integer"
-                    },
-                    "type": {
-                      "default": "saml_assertion_attributes",
-                      "description": "SAML assertion attributes resource type.",
-                      "enum": [
-                        "saml_assertion_attributes"
-                      ],
-                      "example": "saml_assertion_attributes",
-                      "type": "string",
-                      "x-enum-varnames": [
-                        "SAML_ASSERTION_ATTRIBUTES"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "type"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "description": "Role object returned by the API.",
-                  "properties": {
-                    "attributes": {
-                      "description": "Attributes of the role.",
-                      "properties": {
-                        "created_at": {
-                          "description": "Creation time of the role.",
-                          "format": "date-time",
-                          "readOnly": true,
-                          "type": "string"
-                        },
-                        "modified_at": {
-                          "description": "Time of last role modification.",
-                          "format": "date-time",
-                          "readOnly": true,
-                          "type": "string"
-                        },
-                        "name": {
-                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
-                          "type": "string"
-                        },
-                        "user_count": {
-                          "description": "Number of users with that role.",
-                          "format": "int64",
-                          "readOnly": true,
-                          "type": "integer"
-                        }
-                      },
-                      "type": "object"
-                    },
-                    "id": {
-                      "description": "The unique identifier of the role.",
-                      "type": "string"
-                    },
-                    "relationships": {
-                      "description": "Relationships of the role object returned by the API.",
-                      "properties": {
-                        "permissions": {
-                          "description": "Relationship to multiple permissions objects.",
-                          "properties": {
-                            "data": {
-                              "description": "Relationships to permission objects.",
-                              "items": {
-                                "description": "Relationship to permission object.",
-                                "properties": {
-                                  "id": {
-                                    "description": "ID of the permission.",
-                                    "type": "string"
-                                  },
-                                  "type": {
-                                    "default": "permissions",
-                                    "description": "Permissions resource type.",
-                                    "enum": [
-                                      "permissions"
-                                    ],
-                                    "example": "permissions",
-                                    "type": "string",
-                                    "x-enum-varnames": [
-                                      "PERMISSIONS"
-                                    ]
-                                  }
-                                },
-                                "type": "object"
-                              },
-                              "type": "array"
-                            }
-                          },
-                          "type": "object"
-                        }
-                      },
-                      "type": "object"
-                    },
-                    "type": {
-                      "default": "roles",
-                      "description": "Roles type.",
-                      "enum": [
-                        "roles"
-                      ],
-                      "example": "roles",
-                      "type": "string",
-                      "x-enum-varnames": [
-                        "ROLES"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "type"
-                  ],
-                  "type": "object"
-                }
-              ],
-              "properties": {},
-              "type": "object"
-            },
-            "type": "array"
           },
           "relationships": {
             "description": "All relationships associated with AuthN Mapping.",
@@ -3876,10 +3736,8 @@
                     "properties": {
                       "id": {
                         "description": "The ID of the SAML assertion attribute.",
-                        "example": 0,
-                        "format": "int32",
-                        "maximum": 2147483647,
-                        "type": "integer"
+                        "example": "0",
+                        "type": "string"
                       },
                       "type": {
                         "default": "saml_assertion_attributes",
@@ -3955,10 +3813,8 @@
           },
           "saml_assertion_attribute_id": {
             "description": "The ID of the SAML assertion attribute.",
-            "example": 0,
-            "format": "int32",
-            "maximum": 2147483647,
-            "type": "integer"
+            "example": "0",
+            "type": "string"
           }
         },
         "type": "object"
@@ -4191,10 +4047,8 @@
               },
               "id": {
                 "description": "The ID of the SAML assertion attribute.",
-                "example": 0,
-                "format": "int32",
-                "maximum": 2147483647,
-                "type": "integer"
+                "example": "0",
+                "type": "string"
               },
               "type": {
                 "default": "saml_assertion_attributes",
@@ -4350,10 +4204,8 @@
                 "properties": {
                   "id": {
                     "description": "The ID of the SAML assertion attribute.",
-                    "example": 0,
-                    "format": "int32",
-                    "maximum": 2147483647,
-                    "type": "integer"
+                    "example": "0",
+                    "type": "string"
                   },
                   "type": {
                     "default": "saml_assertion_attributes",
@@ -4416,10 +4268,8 @@
                   },
                   "saml_assertion_attribute_id": {
                     "description": "The ID of the SAML assertion attribute.",
-                    "example": 0,
-                    "format": "int32",
-                    "maximum": 2147483647,
-                    "type": "integer"
+                    "example": "0",
+                    "type": "string"
                   }
                 },
                 "type": "object"
@@ -4428,153 +4278,6 @@
                 "description": "ID of the AuthN Mapping.",
                 "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                 "type": "string"
-              },
-              "included": {
-                "description": "Included data in the AuthN Mapping response.",
-                "items": {
-                  "description": "Included data in the AuthN Mapping response.",
-                  "oneOf": [
-                    {
-                      "description": "SAML assertion attribute.",
-                      "properties": {
-                        "attributes": {
-                          "description": "Key/Value pair of attributes used in SAML assertion attributes.",
-                          "properties": {
-                            "attribute_key": {
-                              "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
-                              "example": "member-of",
-                              "type": "string"
-                            },
-                            "attribute_value": {
-                              "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
-                              "example": "Development",
-                              "type": "string"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "id": {
-                          "description": "The ID of the SAML assertion attribute.",
-                          "example": 0,
-                          "format": "int32",
-                          "maximum": 2147483647,
-                          "type": "integer"
-                        },
-                        "type": {
-                          "default": "saml_assertion_attributes",
-                          "description": "SAML assertion attributes resource type.",
-                          "enum": [
-                            "saml_assertion_attributes"
-                          ],
-                          "example": "saml_assertion_attributes",
-                          "type": "string",
-                          "x-enum-varnames": [
-                            "SAML_ASSERTION_ATTRIBUTES"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "type"
-                      ],
-                      "type": "object"
-                    },
-                    {
-                      "description": "Role object returned by the API.",
-                      "properties": {
-                        "attributes": {
-                          "description": "Attributes of the role.",
-                          "properties": {
-                            "created_at": {
-                              "description": "Creation time of the role.",
-                              "format": "date-time",
-                              "readOnly": true,
-                              "type": "string"
-                            },
-                            "modified_at": {
-                              "description": "Time of last role modification.",
-                              "format": "date-time",
-                              "readOnly": true,
-                              "type": "string"
-                            },
-                            "name": {
-                              "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
-                              "type": "string"
-                            },
-                            "user_count": {
-                              "description": "Number of users with that role.",
-                              "format": "int64",
-                              "readOnly": true,
-                              "type": "integer"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "id": {
-                          "description": "The unique identifier of the role.",
-                          "type": "string"
-                        },
-                        "relationships": {
-                          "description": "Relationships of the role object returned by the API.",
-                          "properties": {
-                            "permissions": {
-                              "description": "Relationship to multiple permissions objects.",
-                              "properties": {
-                                "data": {
-                                  "description": "Relationships to permission objects.",
-                                  "items": {
-                                    "description": "Relationship to permission object.",
-                                    "properties": {
-                                      "id": {
-                                        "description": "ID of the permission.",
-                                        "type": "string"
-                                      },
-                                      "type": {
-                                        "default": "permissions",
-                                        "description": "Permissions resource type.",
-                                        "enum": [
-                                          "permissions"
-                                        ],
-                                        "example": "permissions",
-                                        "type": "string",
-                                        "x-enum-varnames": [
-                                          "PERMISSIONS"
-                                        ]
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "type": "array"
-                                }
-                              },
-                              "type": "object"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "type": {
-                          "default": "roles",
-                          "description": "Roles type.",
-                          "enum": [
-                            "roles"
-                          ],
-                          "example": "roles",
-                          "type": "string",
-                          "x-enum-varnames": [
-                            "ROLES"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "type"
-                      ],
-                      "type": "object"
-                    }
-                  ],
-                  "properties": {},
-                  "type": "object"
-                },
-                "type": "array"
               },
               "relationships": {
                 "description": "All relationships associated with AuthN Mapping.",
@@ -4616,10 +4319,8 @@
                         "properties": {
                           "id": {
                             "description": "The ID of the SAML assertion attribute.",
-                            "example": 0,
-                            "format": "int32",
-                            "maximum": 2147483647,
-                            "type": "integer"
+                            "example": "0",
+                            "type": "string"
                           },
                           "type": {
                             "default": "saml_assertion_attributes",
@@ -4667,6 +4368,151 @@
               "type"
             ],
             "type": "object"
+          },
+          "included": {
+            "description": "Included data in the AuthN Mapping response.",
+            "items": {
+              "description": "Included data in the AuthN Mapping response.",
+              "oneOf": [
+                {
+                  "description": "SAML assertion attribute.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                      "properties": {
+                        "attribute_key": {
+                          "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                          "example": "member-of",
+                          "type": "string"
+                        },
+                        "attribute_value": {
+                          "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                          "example": "Development",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "The ID of the SAML assertion attribute.",
+                      "example": "0",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "saml_assertion_attributes",
+                      "description": "SAML assertion attributes resource type.",
+                      "enum": [
+                        "saml_assertion_attributes"
+                      ],
+                      "example": "saml_assertion_attributes",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "SAML_ASSERTION_ATTRIBUTES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "Role object returned by the API.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Attributes of the role.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Creation time of the role.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time of last role modification.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
+                          "type": "string"
+                        },
+                        "user_count": {
+                          "description": "Number of users with that role.",
+                          "format": "int64",
+                          "readOnly": true,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "The unique identifier of the role.",
+                      "type": "string"
+                    },
+                    "relationships": {
+                      "description": "Relationships of the role object returned by the API.",
+                      "properties": {
+                        "permissions": {
+                          "description": "Relationship to multiple permissions objects.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to permission objects.",
+                              "items": {
+                                "description": "Relationship to permission object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the permission.",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "permissions",
+                                    "description": "Permissions resource type.",
+                                    "enum": [
+                                      "permissions"
+                                    ],
+                                    "example": "permissions",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "PERMISSIONS"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "default": "roles",
+                      "description": "Roles type.",
+                      "enum": [
+                        "roles"
+                      ],
+                      "example": "roles",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "ROLES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "properties": {},
+              "type": "object"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -4922,10 +4768,8 @@
                     },
                     "saml_assertion_attribute_id": {
                       "description": "The ID of the SAML assertion attribute.",
-                      "example": 0,
-                      "format": "int32",
-                      "maximum": 2147483647,
-                      "type": "integer"
+                      "example": "0",
+                      "type": "string"
                     }
                   },
                   "type": "object"
@@ -4934,153 +4778,6 @@
                   "description": "ID of the AuthN Mapping.",
                   "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                   "type": "string"
-                },
-                "included": {
-                  "description": "Included data in the AuthN Mapping response.",
-                  "items": {
-                    "description": "Included data in the AuthN Mapping response.",
-                    "oneOf": [
-                      {
-                        "description": "SAML assertion attribute.",
-                        "properties": {
-                          "attributes": {
-                            "description": "Key/Value pair of attributes used in SAML assertion attributes.",
-                            "properties": {
-                              "attribute_key": {
-                                "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                "example": "member-of",
-                                "type": "string"
-                              },
-                              "attribute_value": {
-                                "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                "example": "Development",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "id": {
-                            "description": "The ID of the SAML assertion attribute.",
-                            "example": 0,
-                            "format": "int32",
-                            "maximum": 2147483647,
-                            "type": "integer"
-                          },
-                          "type": {
-                            "default": "saml_assertion_attributes",
-                            "description": "SAML assertion attributes resource type.",
-                            "enum": [
-                              "saml_assertion_attributes"
-                            ],
-                            "example": "saml_assertion_attributes",
-                            "type": "string",
-                            "x-enum-varnames": [
-                              "SAML_ASSERTION_ATTRIBUTES"
-                            ]
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "type"
-                        ],
-                        "type": "object"
-                      },
-                      {
-                        "description": "Role object returned by the API.",
-                        "properties": {
-                          "attributes": {
-                            "description": "Attributes of the role.",
-                            "properties": {
-                              "created_at": {
-                                "description": "Creation time of the role.",
-                                "format": "date-time",
-                                "readOnly": true,
-                                "type": "string"
-                              },
-                              "modified_at": {
-                                "description": "Time of last role modification.",
-                                "format": "date-time",
-                                "readOnly": true,
-                                "type": "string"
-                              },
-                              "name": {
-                                "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
-                                "type": "string"
-                              },
-                              "user_count": {
-                                "description": "Number of users with that role.",
-                                "format": "int64",
-                                "readOnly": true,
-                                "type": "integer"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "id": {
-                            "description": "The unique identifier of the role.",
-                            "type": "string"
-                          },
-                          "relationships": {
-                            "description": "Relationships of the role object returned by the API.",
-                            "properties": {
-                              "permissions": {
-                                "description": "Relationship to multiple permissions objects.",
-                                "properties": {
-                                  "data": {
-                                    "description": "Relationships to permission objects.",
-                                    "items": {
-                                      "description": "Relationship to permission object.",
-                                      "properties": {
-                                        "id": {
-                                          "description": "ID of the permission.",
-                                          "type": "string"
-                                        },
-                                        "type": {
-                                          "default": "permissions",
-                                          "description": "Permissions resource type.",
-                                          "enum": [
-                                            "permissions"
-                                          ],
-                                          "example": "permissions",
-                                          "type": "string",
-                                          "x-enum-varnames": [
-                                            "PERMISSIONS"
-                                          ]
-                                        }
-                                      },
-                                      "type": "object"
-                                    },
-                                    "type": "array"
-                                  }
-                                },
-                                "type": "object"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "type": {
-                            "default": "roles",
-                            "description": "Roles type.",
-                            "enum": [
-                              "roles"
-                            ],
-                            "example": "roles",
-                            "type": "string",
-                            "x-enum-varnames": [
-                              "ROLES"
-                            ]
-                          }
-                        },
-                        "required": [
-                          "type"
-                        ],
-                        "type": "object"
-                      }
-                    ],
-                    "properties": {},
-                    "type": "object"
-                  },
-                  "type": "array"
                 },
                 "relationships": {
                   "description": "All relationships associated with AuthN Mapping.",
@@ -5122,10 +4819,8 @@
                           "properties": {
                             "id": {
                               "description": "The ID of the SAML assertion attribute.",
-                              "example": 0,
-                              "format": "int32",
-                              "maximum": 2147483647,
-                              "type": "integer"
+                              "example": "0",
+                              "type": "string"
                             },
                             "type": {
                               "default": "saml_assertion_attributes",
@@ -5172,6 +4867,151 @@
                 "id",
                 "type"
               ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "included": {
+            "description": "Included data in the AuthN Mapping response.",
+            "items": {
+              "description": "Included data in the AuthN Mapping response.",
+              "oneOf": [
+                {
+                  "description": "SAML assertion attribute.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                      "properties": {
+                        "attribute_key": {
+                          "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                          "example": "member-of",
+                          "type": "string"
+                        },
+                        "attribute_value": {
+                          "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                          "example": "Development",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "The ID of the SAML assertion attribute.",
+                      "example": "0",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "saml_assertion_attributes",
+                      "description": "SAML assertion attributes resource type.",
+                      "enum": [
+                        "saml_assertion_attributes"
+                      ],
+                      "example": "saml_assertion_attributes",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "SAML_ASSERTION_ATTRIBUTES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "Role object returned by the API.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Attributes of the role.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Creation time of the role.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time of last role modification.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
+                          "type": "string"
+                        },
+                        "user_count": {
+                          "description": "Number of users with that role.",
+                          "format": "int64",
+                          "readOnly": true,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "The unique identifier of the role.",
+                      "type": "string"
+                    },
+                    "relationships": {
+                      "description": "Relationships of the role object returned by the API.",
+                      "properties": {
+                        "permissions": {
+                          "description": "Relationship to multiple permissions objects.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to permission objects.",
+                              "items": {
+                                "description": "Relationship to permission object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the permission.",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "permissions",
+                                    "description": "Permissions resource type.",
+                                    "enum": [
+                                      "permissions"
+                                    ],
+                                    "example": "permissions",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "PERMISSIONS"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "default": "roles",
+                      "description": "Roles type.",
+                      "enum": [
+                        "roles"
+                      ],
+                      "example": "roles",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "ROLES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "properties": {},
               "type": "object"
             },
             "type": "array"
@@ -24740,6 +24580,639 @@
         ],
         "type": "object"
       },
+      "OpsgenieServiceCreateAttributes": {
+        "description": "The Opsgenie service attributes for a create request.",
+        "properties": {
+          "custom_url": {
+            "description": "The custom URL for a custom region.",
+            "example": "https://example.com",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name for the Opsgenie service.",
+            "example": "fake-opsgenie-service-name",
+            "type": "string"
+          },
+          "opsgenie_api_key": {
+            "description": "The Opsgenie API key for your Opsgenie service.",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region for the Opsgenie service.",
+            "enum": [
+              "us",
+              "eu",
+              "custom"
+            ],
+            "example": "us",
+            "type": "string",
+            "x-enum-varnames": [
+              "US",
+              "EU",
+              "CUSTOM"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "opsgenie_api_key",
+          "region"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceCreateData": {
+        "description": "Opsgenie service data for a create request.",
+        "properties": {
+          "attributes": {
+            "description": "The Opsgenie service attributes for a create request.",
+            "properties": {
+              "custom_url": {
+                "description": "The custom URL for a custom region.",
+                "example": "https://example.com",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name for the Opsgenie service.",
+                "example": "fake-opsgenie-service-name",
+                "type": "string"
+              },
+              "opsgenie_api_key": {
+                "description": "The Opsgenie API key for your Opsgenie service.",
+                "example": "00000000-0000-0000-0000-000000000000",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region for the Opsgenie service.",
+                "enum": [
+                  "us",
+                  "eu",
+                  "custom"
+                ],
+                "example": "us",
+                "type": "string",
+                "x-enum-varnames": [
+                  "US",
+                  "EU",
+                  "CUSTOM"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "opsgenie_api_key",
+              "region"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "opsgenie-service",
+            "description": "Opsgenie service resource type.",
+            "enum": [
+              "opsgenie-service"
+            ],
+            "example": "opsgenie-service",
+            "type": "string",
+            "x-enum-varnames": [
+              "OPSGENIE_SERVICE"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceCreateRequest": {
+        "description": "Create request for an Opsgenie service.",
+        "properties": {
+          "data": {
+            "description": "Opsgenie service data for a create request.",
+            "properties": {
+              "attributes": {
+                "description": "The Opsgenie service attributes for a create request.",
+                "properties": {
+                  "custom_url": {
+                    "description": "The custom URL for a custom region.",
+                    "example": "https://example.com",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name for the Opsgenie service.",
+                    "example": "fake-opsgenie-service-name",
+                    "type": "string"
+                  },
+                  "opsgenie_api_key": {
+                    "description": "The Opsgenie API key for your Opsgenie service.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "The region for the Opsgenie service.",
+                    "enum": [
+                      "us",
+                      "eu",
+                      "custom"
+                    ],
+                    "example": "us",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "US",
+                      "EU",
+                      "CUSTOM"
+                    ]
+                  }
+                },
+                "required": [
+                  "name",
+                  "opsgenie_api_key",
+                  "region"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "opsgenie-service",
+                "description": "Opsgenie service resource type.",
+                "enum": [
+                  "opsgenie-service"
+                ],
+                "example": "opsgenie-service",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPSGENIE_SERVICE"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceRegionType": {
+        "description": "The region for the Opsgenie service.",
+        "enum": [
+          "us",
+          "eu",
+          "custom"
+        ],
+        "example": "us",
+        "type": "string",
+        "x-enum-varnames": [
+          "US",
+          "EU",
+          "CUSTOM"
+        ]
+      },
+      "OpsgenieServiceResponse": {
+        "description": "Response of an Opsgenie service.",
+        "properties": {
+          "data": {
+            "description": "Opsgenie service data from a response.",
+            "properties": {
+              "attributes": {
+                "description": "The attributes from an Opsgenie service response.",
+                "properties": {
+                  "custom_url": {
+                    "description": "The custom URL for a custom region.",
+                    "example": "https://example.com",
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name for the Opsgenie service.",
+                    "example": "fake-opsgenie-service-name",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "The region for the Opsgenie service.",
+                    "enum": [
+                      "us",
+                      "eu",
+                      "custom"
+                    ],
+                    "example": "us",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "US",
+                      "EU",
+                      "CUSTOM"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The ID of the Opsgenie service.",
+                "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                "type": "string"
+              },
+              "type": {
+                "default": "opsgenie-service",
+                "description": "Opsgenie service resource type.",
+                "enum": [
+                  "opsgenie-service"
+                ],
+                "example": "opsgenie-service",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPSGENIE_SERVICE"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceResponseAttributes": {
+        "description": "The attributes from an Opsgenie service response.",
+        "properties": {
+          "custom_url": {
+            "description": "The custom URL for a custom region.",
+            "example": "https://example.com",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "The name for the Opsgenie service.",
+            "example": "fake-opsgenie-service-name",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region for the Opsgenie service.",
+            "enum": [
+              "us",
+              "eu",
+              "custom"
+            ],
+            "example": "us",
+            "type": "string",
+            "x-enum-varnames": [
+              "US",
+              "EU",
+              "CUSTOM"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "OpsgenieServiceResponseData": {
+        "description": "Opsgenie service data from a response.",
+        "properties": {
+          "attributes": {
+            "description": "The attributes from an Opsgenie service response.",
+            "properties": {
+              "custom_url": {
+                "description": "The custom URL for a custom region.",
+                "example": "https://example.com",
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "The name for the Opsgenie service.",
+                "example": "fake-opsgenie-service-name",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region for the Opsgenie service.",
+                "enum": [
+                  "us",
+                  "eu",
+                  "custom"
+                ],
+                "example": "us",
+                "type": "string",
+                "x-enum-varnames": [
+                  "US",
+                  "EU",
+                  "CUSTOM"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The ID of the Opsgenie service.",
+            "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+            "type": "string"
+          },
+          "type": {
+            "default": "opsgenie-service",
+            "description": "Opsgenie service resource type.",
+            "enum": [
+              "opsgenie-service"
+            ],
+            "example": "opsgenie-service",
+            "type": "string",
+            "x-enum-varnames": [
+              "OPSGENIE_SERVICE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceType": {
+        "default": "opsgenie-service",
+        "description": "Opsgenie service resource type.",
+        "enum": [
+          "opsgenie-service"
+        ],
+        "example": "opsgenie-service",
+        "type": "string",
+        "x-enum-varnames": [
+          "OPSGENIE_SERVICE"
+        ]
+      },
+      "OpsgenieServiceUpdateAttributes": {
+        "description": "The Opsgenie service attributes for an update request.",
+        "properties": {
+          "custom_url": {
+            "description": "The custom URL for a custom region.",
+            "example": "https://example.com",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "The name for the Opsgenie service.",
+            "example": "fake-opsgenie-service-name",
+            "type": "string"
+          },
+          "opsgenie_api_key": {
+            "description": "The Opsgenie API key for your Opsgenie service.",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region for the Opsgenie service.",
+            "enum": [
+              "us",
+              "eu",
+              "custom"
+            ],
+            "example": "us",
+            "type": "string",
+            "x-enum-varnames": [
+              "US",
+              "EU",
+              "CUSTOM"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "OpsgenieServiceUpdateData": {
+        "description": "Opsgenie service for an update request.",
+        "properties": {
+          "attributes": {
+            "description": "The Opsgenie service attributes for an update request.",
+            "properties": {
+              "custom_url": {
+                "description": "The custom URL for a custom region.",
+                "example": "https://example.com",
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "The name for the Opsgenie service.",
+                "example": "fake-opsgenie-service-name",
+                "type": "string"
+              },
+              "opsgenie_api_key": {
+                "description": "The Opsgenie API key for your Opsgenie service.",
+                "example": "00000000-0000-0000-0000-000000000000",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region for the Opsgenie service.",
+                "enum": [
+                  "us",
+                  "eu",
+                  "custom"
+                ],
+                "example": "us",
+                "type": "string",
+                "x-enum-varnames": [
+                  "US",
+                  "EU",
+                  "CUSTOM"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The ID of the Opsgenie service.",
+            "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+            "type": "string"
+          },
+          "type": {
+            "default": "opsgenie-service",
+            "description": "Opsgenie service resource type.",
+            "enum": [
+              "opsgenie-service"
+            ],
+            "example": "opsgenie-service",
+            "type": "string",
+            "x-enum-varnames": [
+              "OPSGENIE_SERVICE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceUpdateRequest": {
+        "description": "Update request for an Opsgenie service.",
+        "properties": {
+          "data": {
+            "description": "Opsgenie service for an update request.",
+            "properties": {
+              "attributes": {
+                "description": "The Opsgenie service attributes for an update request.",
+                "properties": {
+                  "custom_url": {
+                    "description": "The custom URL for a custom region.",
+                    "example": "https://example.com",
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name for the Opsgenie service.",
+                    "example": "fake-opsgenie-service-name",
+                    "type": "string"
+                  },
+                  "opsgenie_api_key": {
+                    "description": "The Opsgenie API key for your Opsgenie service.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "The region for the Opsgenie service.",
+                    "enum": [
+                      "us",
+                      "eu",
+                      "custom"
+                    ],
+                    "example": "us",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "US",
+                      "EU",
+                      "CUSTOM"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The ID of the Opsgenie service.",
+                "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                "type": "string"
+              },
+              "type": {
+                "default": "opsgenie-service",
+                "description": "Opsgenie service resource type.",
+                "enum": [
+                  "opsgenie-service"
+                ],
+                "example": "opsgenie-service",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPSGENIE_SERVICE"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServicesResponse": {
+        "description": "Response with a list of Opsgenie services.",
+        "properties": {
+          "data": {
+            "description": "An array of Opsgenie services.",
+            "example": [
+              {
+                "attributes": {
+                  "custom_url": null,
+                  "name": "fake-opsgenie-service-name",
+                  "region": "us"
+                },
+                "id": "596da4af-0563-4097-90ff-07230c3f9db3",
+                "type": "opsgenie-service"
+              },
+              {
+                "attributes": {
+                  "custom_url": null,
+                  "name": "fake-opsgenie-service-name-2",
+                  "region": "eu"
+                },
+                "id": "0d2937f1-b561-44fa-914a-99910f848014",
+                "type": "opsgenie-service"
+              }
+            ],
+            "items": {
+              "description": "Opsgenie service data from a response.",
+              "properties": {
+                "attributes": {
+                  "description": "The attributes from an Opsgenie service response.",
+                  "properties": {
+                    "custom_url": {
+                      "description": "The custom URL for a custom region.",
+                      "example": "https://example.com",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The name for the Opsgenie service.",
+                      "example": "fake-opsgenie-service-name",
+                      "type": "string"
+                    },
+                    "region": {
+                      "description": "The region for the Opsgenie service.",
+                      "enum": [
+                        "us",
+                        "eu",
+                        "custom"
+                      ],
+                      "example": "us",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "US",
+                        "EU",
+                        "CUSTOM"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "The ID of the Opsgenie service.",
+                  "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "opsgenie-service",
+                  "description": "Opsgenie service resource type.",
+                  "enum": [
+                    "opsgenie-service"
+                  ],
+                  "example": "opsgenie-service",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "OPSGENIE_SERVICE"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "type",
+                "attributes"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
       "Organization": {
         "description": "Organization object.",
         "properties": {
@@ -28173,10 +28646,8 @@
             "properties": {
               "id": {
                 "description": "The ID of the SAML assertion attribute.",
-                "example": 0,
-                "format": "int32",
-                "maximum": 2147483647,
-                "type": "integer"
+                "example": "0",
+                "type": "string"
               },
               "type": {
                 "default": "saml_assertion_attributes",
@@ -28208,10 +28679,8 @@
         "properties": {
           "id": {
             "description": "The ID of the SAML assertion attribute.",
-            "example": 0,
-            "format": "int32",
-            "maximum": 2147483647,
-            "type": "integer"
+            "example": "0",
+            "type": "string"
           },
           "type": {
             "default": "saml_assertion_attributes",
@@ -30445,10 +30914,8 @@
           },
           "id": {
             "description": "The ID of the SAML assertion attribute.",
-            "example": 0,
-            "format": "int32",
-            "maximum": 2147483647,
-            "type": "integer"
+            "example": "0",
+            "type": "string"
           },
           "type": {
             "default": "saml_assertion_attributes",
@@ -42212,10 +42679,8 @@
                               },
                               "saml_assertion_attribute_id": {
                                 "description": "The ID of the SAML assertion attribute.",
-                                "example": 0,
-                                "format": "int32",
-                                "maximum": 2147483647,
-                                "type": "integer"
+                                "example": "0",
+                                "type": "string"
                               }
                             },
                             "type": "object"
@@ -42224,153 +42689,6 @@
                             "description": "ID of the AuthN Mapping.",
                             "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                             "type": "string"
-                          },
-                          "included": {
-                            "description": "Included data in the AuthN Mapping response.",
-                            "items": {
-                              "description": "Included data in the AuthN Mapping response.",
-                              "oneOf": [
-                                {
-                                  "description": "SAML assertion attribute.",
-                                  "properties": {
-                                    "attributes": {
-                                      "description": "Key/Value pair of attributes used in SAML assertion attributes.",
-                                      "properties": {
-                                        "attribute_key": {
-                                          "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                          "example": "member-of",
-                                          "type": "string"
-                                        },
-                                        "attribute_value": {
-                                          "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                          "example": "Development",
-                                          "type": "string"
-                                        }
-                                      },
-                                      "type": "object"
-                                    },
-                                    "id": {
-                                      "description": "The ID of the SAML assertion attribute.",
-                                      "example": 0,
-                                      "format": "int32",
-                                      "maximum": 2147483647,
-                                      "type": "integer"
-                                    },
-                                    "type": {
-                                      "default": "saml_assertion_attributes",
-                                      "description": "SAML assertion attributes resource type.",
-                                      "enum": [
-                                        "saml_assertion_attributes"
-                                      ],
-                                      "example": "saml_assertion_attributes",
-                                      "type": "string",
-                                      "x-enum-varnames": [
-                                        "SAML_ASSERTION_ATTRIBUTES"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "type"
-                                  ],
-                                  "type": "object"
-                                },
-                                {
-                                  "description": "Role object returned by the API.",
-                                  "properties": {
-                                    "attributes": {
-                                      "description": "Attributes of the role.",
-                                      "properties": {
-                                        "created_at": {
-                                          "description": "Creation time of the role.",
-                                          "format": "date-time",
-                                          "readOnly": true,
-                                          "type": "string"
-                                        },
-                                        "modified_at": {
-                                          "description": "Time of last role modification.",
-                                          "format": "date-time",
-                                          "readOnly": true,
-                                          "type": "string"
-                                        },
-                                        "name": {
-                                          "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
-                                          "type": "string"
-                                        },
-                                        "user_count": {
-                                          "description": "Number of users with that role.",
-                                          "format": "int64",
-                                          "readOnly": true,
-                                          "type": "integer"
-                                        }
-                                      },
-                                      "type": "object"
-                                    },
-                                    "id": {
-                                      "description": "The unique identifier of the role.",
-                                      "type": "string"
-                                    },
-                                    "relationships": {
-                                      "description": "Relationships of the role object returned by the API.",
-                                      "properties": {
-                                        "permissions": {
-                                          "description": "Relationship to multiple permissions objects.",
-                                          "properties": {
-                                            "data": {
-                                              "description": "Relationships to permission objects.",
-                                              "items": {
-                                                "description": "Relationship to permission object.",
-                                                "properties": {
-                                                  "id": {
-                                                    "description": "ID of the permission.",
-                                                    "type": "string"
-                                                  },
-                                                  "type": {
-                                                    "default": "permissions",
-                                                    "description": "Permissions resource type.",
-                                                    "enum": [
-                                                      "permissions"
-                                                    ],
-                                                    "example": "permissions",
-                                                    "type": "string",
-                                                    "x-enum-varnames": [
-                                                      "PERMISSIONS"
-                                                    ]
-                                                  }
-                                                },
-                                                "type": "object"
-                                              },
-                                              "type": "array"
-                                            }
-                                          },
-                                          "type": "object"
-                                        }
-                                      },
-                                      "type": "object"
-                                    },
-                                    "type": {
-                                      "default": "roles",
-                                      "description": "Roles type.",
-                                      "enum": [
-                                        "roles"
-                                      ],
-                                      "example": "roles",
-                                      "type": "string",
-                                      "x-enum-varnames": [
-                                        "ROLES"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "type"
-                                  ],
-                                  "type": "object"
-                                }
-                              ],
-                              "properties": {},
-                              "type": "object"
-                            },
-                            "type": "array"
                           },
                           "relationships": {
                             "description": "All relationships associated with AuthN Mapping.",
@@ -42412,10 +42730,8 @@
                                     "properties": {
                                       "id": {
                                         "description": "The ID of the SAML assertion attribute.",
-                                        "example": 0,
-                                        "format": "int32",
-                                        "maximum": 2147483647,
-                                        "type": "integer"
+                                        "example": "0",
+                                        "type": "string"
                                       },
                                       "type": {
                                         "default": "saml_assertion_attributes",
@@ -42462,6 +42778,151 @@
                           "id",
                           "type"
                         ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "included": {
+                      "description": "Included data in the AuthN Mapping response.",
+                      "items": {
+                        "description": "Included data in the AuthN Mapping response.",
+                        "oneOf": [
+                          {
+                            "description": "SAML assertion attribute.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                                "properties": {
+                                  "attribute_key": {
+                                    "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                    "example": "member-of",
+                                    "type": "string"
+                                  },
+                                  "attribute_value": {
+                                    "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                    "example": "Development",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "The ID of the SAML assertion attribute.",
+                                "example": "0",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "saml_assertion_attributes",
+                                "description": "SAML assertion attributes resource type.",
+                                "enum": [
+                                  "saml_assertion_attributes"
+                                ],
+                                "example": "saml_assertion_attributes",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "SAML_ASSERTION_ATTRIBUTES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "type"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "The unique identifier of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "properties": {},
                         "type": "object"
                       },
                       "type": "array"
@@ -42693,10 +43154,8 @@
                             },
                             "saml_assertion_attribute_id": {
                               "description": "The ID of the SAML assertion attribute.",
-                              "example": 0,
-                              "format": "int32",
-                              "maximum": 2147483647,
-                              "type": "integer"
+                              "example": "0",
+                              "type": "string"
                             }
                           },
                           "type": "object"
@@ -42705,153 +43164,6 @@
                           "description": "ID of the AuthN Mapping.",
                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                           "type": "string"
-                        },
-                        "included": {
-                          "description": "Included data in the AuthN Mapping response.",
-                          "items": {
-                            "description": "Included data in the AuthN Mapping response.",
-                            "oneOf": [
-                              {
-                                "description": "SAML assertion attribute.",
-                                "properties": {
-                                  "attributes": {
-                                    "description": "Key/Value pair of attributes used in SAML assertion attributes.",
-                                    "properties": {
-                                      "attribute_key": {
-                                        "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                        "example": "member-of",
-                                        "type": "string"
-                                      },
-                                      "attribute_value": {
-                                        "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                        "example": "Development",
-                                        "type": "string"
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "id": {
-                                    "description": "The ID of the SAML assertion attribute.",
-                                    "example": 0,
-                                    "format": "int32",
-                                    "maximum": 2147483647,
-                                    "type": "integer"
-                                  },
-                                  "type": {
-                                    "default": "saml_assertion_attributes",
-                                    "description": "SAML assertion attributes resource type.",
-                                    "enum": [
-                                      "saml_assertion_attributes"
-                                    ],
-                                    "example": "saml_assertion_attributes",
-                                    "type": "string",
-                                    "x-enum-varnames": [
-                                      "SAML_ASSERTION_ATTRIBUTES"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "id",
-                                  "type"
-                                ],
-                                "type": "object"
-                              },
-                              {
-                                "description": "Role object returned by the API.",
-                                "properties": {
-                                  "attributes": {
-                                    "description": "Attributes of the role.",
-                                    "properties": {
-                                      "created_at": {
-                                        "description": "Creation time of the role.",
-                                        "format": "date-time",
-                                        "readOnly": true,
-                                        "type": "string"
-                                      },
-                                      "modified_at": {
-                                        "description": "Time of last role modification.",
-                                        "format": "date-time",
-                                        "readOnly": true,
-                                        "type": "string"
-                                      },
-                                      "name": {
-                                        "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
-                                        "type": "string"
-                                      },
-                                      "user_count": {
-                                        "description": "Number of users with that role.",
-                                        "format": "int64",
-                                        "readOnly": true,
-                                        "type": "integer"
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "id": {
-                                    "description": "The unique identifier of the role.",
-                                    "type": "string"
-                                  },
-                                  "relationships": {
-                                    "description": "Relationships of the role object returned by the API.",
-                                    "properties": {
-                                      "permissions": {
-                                        "description": "Relationship to multiple permissions objects.",
-                                        "properties": {
-                                          "data": {
-                                            "description": "Relationships to permission objects.",
-                                            "items": {
-                                              "description": "Relationship to permission object.",
-                                              "properties": {
-                                                "id": {
-                                                  "description": "ID of the permission.",
-                                                  "type": "string"
-                                                },
-                                                "type": {
-                                                  "default": "permissions",
-                                                  "description": "Permissions resource type.",
-                                                  "enum": [
-                                                    "permissions"
-                                                  ],
-                                                  "example": "permissions",
-                                                  "type": "string",
-                                                  "x-enum-varnames": [
-                                                    "PERMISSIONS"
-                                                  ]
-                                                }
-                                              },
-                                              "type": "object"
-                                            },
-                                            "type": "array"
-                                          }
-                                        },
-                                        "type": "object"
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "type": {
-                                    "default": "roles",
-                                    "description": "Roles type.",
-                                    "enum": [
-                                      "roles"
-                                    ],
-                                    "example": "roles",
-                                    "type": "string",
-                                    "x-enum-varnames": [
-                                      "ROLES"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "type"
-                                ],
-                                "type": "object"
-                              }
-                            ],
-                            "properties": {},
-                            "type": "object"
-                          },
-                          "type": "array"
                         },
                         "relationships": {
                           "description": "All relationships associated with AuthN Mapping.",
@@ -42893,10 +43205,8 @@
                                   "properties": {
                                     "id": {
                                       "description": "The ID of the SAML assertion attribute.",
-                                      "example": 0,
-                                      "format": "int32",
-                                      "maximum": 2147483647,
-                                      "type": "integer"
+                                      "example": "0",
+                                      "type": "string"
                                     },
                                     "type": {
                                       "default": "saml_assertion_attributes",
@@ -42944,6 +43254,151 @@
                         "type"
                       ],
                       "type": "object"
+                    },
+                    "included": {
+                      "description": "Included data in the AuthN Mapping response.",
+                      "items": {
+                        "description": "Included data in the AuthN Mapping response.",
+                        "oneOf": [
+                          {
+                            "description": "SAML assertion attribute.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                                "properties": {
+                                  "attribute_key": {
+                                    "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                    "example": "member-of",
+                                    "type": "string"
+                                  },
+                                  "attribute_value": {
+                                    "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                    "example": "Development",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "The ID of the SAML assertion attribute.",
+                                "example": "0",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "saml_assertion_attributes",
+                                "description": "SAML assertion attributes resource type.",
+                                "enum": [
+                                  "saml_assertion_attributes"
+                                ],
+                                "example": "saml_assertion_attributes",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "SAML_ASSERTION_ATTRIBUTES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "type"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "The unique identifier of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "properties": {},
+                        "type": "object"
+                      },
+                      "type": "array"
                     }
                   },
                   "type": "object"
@@ -43261,10 +43716,8 @@
                             },
                             "saml_assertion_attribute_id": {
                               "description": "The ID of the SAML assertion attribute.",
-                              "example": 0,
-                              "format": "int32",
-                              "maximum": 2147483647,
-                              "type": "integer"
+                              "example": "0",
+                              "type": "string"
                             }
                           },
                           "type": "object"
@@ -43273,153 +43726,6 @@
                           "description": "ID of the AuthN Mapping.",
                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                           "type": "string"
-                        },
-                        "included": {
-                          "description": "Included data in the AuthN Mapping response.",
-                          "items": {
-                            "description": "Included data in the AuthN Mapping response.",
-                            "oneOf": [
-                              {
-                                "description": "SAML assertion attribute.",
-                                "properties": {
-                                  "attributes": {
-                                    "description": "Key/Value pair of attributes used in SAML assertion attributes.",
-                                    "properties": {
-                                      "attribute_key": {
-                                        "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                        "example": "member-of",
-                                        "type": "string"
-                                      },
-                                      "attribute_value": {
-                                        "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                        "example": "Development",
-                                        "type": "string"
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "id": {
-                                    "description": "The ID of the SAML assertion attribute.",
-                                    "example": 0,
-                                    "format": "int32",
-                                    "maximum": 2147483647,
-                                    "type": "integer"
-                                  },
-                                  "type": {
-                                    "default": "saml_assertion_attributes",
-                                    "description": "SAML assertion attributes resource type.",
-                                    "enum": [
-                                      "saml_assertion_attributes"
-                                    ],
-                                    "example": "saml_assertion_attributes",
-                                    "type": "string",
-                                    "x-enum-varnames": [
-                                      "SAML_ASSERTION_ATTRIBUTES"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "id",
-                                  "type"
-                                ],
-                                "type": "object"
-                              },
-                              {
-                                "description": "Role object returned by the API.",
-                                "properties": {
-                                  "attributes": {
-                                    "description": "Attributes of the role.",
-                                    "properties": {
-                                      "created_at": {
-                                        "description": "Creation time of the role.",
-                                        "format": "date-time",
-                                        "readOnly": true,
-                                        "type": "string"
-                                      },
-                                      "modified_at": {
-                                        "description": "Time of last role modification.",
-                                        "format": "date-time",
-                                        "readOnly": true,
-                                        "type": "string"
-                                      },
-                                      "name": {
-                                        "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
-                                        "type": "string"
-                                      },
-                                      "user_count": {
-                                        "description": "Number of users with that role.",
-                                        "format": "int64",
-                                        "readOnly": true,
-                                        "type": "integer"
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "id": {
-                                    "description": "The unique identifier of the role.",
-                                    "type": "string"
-                                  },
-                                  "relationships": {
-                                    "description": "Relationships of the role object returned by the API.",
-                                    "properties": {
-                                      "permissions": {
-                                        "description": "Relationship to multiple permissions objects.",
-                                        "properties": {
-                                          "data": {
-                                            "description": "Relationships to permission objects.",
-                                            "items": {
-                                              "description": "Relationship to permission object.",
-                                              "properties": {
-                                                "id": {
-                                                  "description": "ID of the permission.",
-                                                  "type": "string"
-                                                },
-                                                "type": {
-                                                  "default": "permissions",
-                                                  "description": "Permissions resource type.",
-                                                  "enum": [
-                                                    "permissions"
-                                                  ],
-                                                  "example": "permissions",
-                                                  "type": "string",
-                                                  "x-enum-varnames": [
-                                                    "PERMISSIONS"
-                                                  ]
-                                                }
-                                              },
-                                              "type": "object"
-                                            },
-                                            "type": "array"
-                                          }
-                                        },
-                                        "type": "object"
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "type": {
-                                    "default": "roles",
-                                    "description": "Roles type.",
-                                    "enum": [
-                                      "roles"
-                                    ],
-                                    "example": "roles",
-                                    "type": "string",
-                                    "x-enum-varnames": [
-                                      "ROLES"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "type"
-                                ],
-                                "type": "object"
-                              }
-                            ],
-                            "properties": {},
-                            "type": "object"
-                          },
-                          "type": "array"
                         },
                         "relationships": {
                           "description": "All relationships associated with AuthN Mapping.",
@@ -43461,10 +43767,8 @@
                                   "properties": {
                                     "id": {
                                       "description": "The ID of the SAML assertion attribute.",
-                                      "example": 0,
-                                      "format": "int32",
-                                      "maximum": 2147483647,
-                                      "type": "integer"
+                                      "example": "0",
+                                      "type": "string"
                                     },
                                     "type": {
                                       "default": "saml_assertion_attributes",
@@ -43512,6 +43816,151 @@
                         "type"
                       ],
                       "type": "object"
+                    },
+                    "included": {
+                      "description": "Included data in the AuthN Mapping response.",
+                      "items": {
+                        "description": "Included data in the AuthN Mapping response.",
+                        "oneOf": [
+                          {
+                            "description": "SAML assertion attribute.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                                "properties": {
+                                  "attribute_key": {
+                                    "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                    "example": "member-of",
+                                    "type": "string"
+                                  },
+                                  "attribute_value": {
+                                    "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                    "example": "Development",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "The ID of the SAML assertion attribute.",
+                                "example": "0",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "saml_assertion_attributes",
+                                "description": "SAML assertion attributes resource type.",
+                                "enum": [
+                                  "saml_assertion_attributes"
+                                ],
+                                "example": "saml_assertion_attributes",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "SAML_ASSERTION_ATTRIBUTES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "type"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "The unique identifier of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "properties": {},
+                        "type": "object"
+                      },
+                      "type": "array"
                     }
                   },
                   "type": "object"
@@ -43760,10 +44209,8 @@
                             },
                             "saml_assertion_attribute_id": {
                               "description": "The ID of the SAML assertion attribute.",
-                              "example": 0,
-                              "format": "int32",
-                              "maximum": 2147483647,
-                              "type": "integer"
+                              "example": "0",
+                              "type": "string"
                             }
                           },
                           "type": "object"
@@ -43772,153 +44219,6 @@
                           "description": "ID of the AuthN Mapping.",
                           "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
                           "type": "string"
-                        },
-                        "included": {
-                          "description": "Included data in the AuthN Mapping response.",
-                          "items": {
-                            "description": "Included data in the AuthN Mapping response.",
-                            "oneOf": [
-                              {
-                                "description": "SAML assertion attribute.",
-                                "properties": {
-                                  "attributes": {
-                                    "description": "Key/Value pair of attributes used in SAML assertion attributes.",
-                                    "properties": {
-                                      "attribute_key": {
-                                        "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                        "example": "member-of",
-                                        "type": "string"
-                                      },
-                                      "attribute_value": {
-                                        "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
-                                        "example": "Development",
-                                        "type": "string"
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "id": {
-                                    "description": "The ID of the SAML assertion attribute.",
-                                    "example": 0,
-                                    "format": "int32",
-                                    "maximum": 2147483647,
-                                    "type": "integer"
-                                  },
-                                  "type": {
-                                    "default": "saml_assertion_attributes",
-                                    "description": "SAML assertion attributes resource type.",
-                                    "enum": [
-                                      "saml_assertion_attributes"
-                                    ],
-                                    "example": "saml_assertion_attributes",
-                                    "type": "string",
-                                    "x-enum-varnames": [
-                                      "SAML_ASSERTION_ATTRIBUTES"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "id",
-                                  "type"
-                                ],
-                                "type": "object"
-                              },
-                              {
-                                "description": "Role object returned by the API.",
-                                "properties": {
-                                  "attributes": {
-                                    "description": "Attributes of the role.",
-                                    "properties": {
-                                      "created_at": {
-                                        "description": "Creation time of the role.",
-                                        "format": "date-time",
-                                        "readOnly": true,
-                                        "type": "string"
-                                      },
-                                      "modified_at": {
-                                        "description": "Time of last role modification.",
-                                        "format": "date-time",
-                                        "readOnly": true,
-                                        "type": "string"
-                                      },
-                                      "name": {
-                                        "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
-                                        "type": "string"
-                                      },
-                                      "user_count": {
-                                        "description": "Number of users with that role.",
-                                        "format": "int64",
-                                        "readOnly": true,
-                                        "type": "integer"
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "id": {
-                                    "description": "The unique identifier of the role.",
-                                    "type": "string"
-                                  },
-                                  "relationships": {
-                                    "description": "Relationships of the role object returned by the API.",
-                                    "properties": {
-                                      "permissions": {
-                                        "description": "Relationship to multiple permissions objects.",
-                                        "properties": {
-                                          "data": {
-                                            "description": "Relationships to permission objects.",
-                                            "items": {
-                                              "description": "Relationship to permission object.",
-                                              "properties": {
-                                                "id": {
-                                                  "description": "ID of the permission.",
-                                                  "type": "string"
-                                                },
-                                                "type": {
-                                                  "default": "permissions",
-                                                  "description": "Permissions resource type.",
-                                                  "enum": [
-                                                    "permissions"
-                                                  ],
-                                                  "example": "permissions",
-                                                  "type": "string",
-                                                  "x-enum-varnames": [
-                                                    "PERMISSIONS"
-                                                  ]
-                                                }
-                                              },
-                                              "type": "object"
-                                            },
-                                            "type": "array"
-                                          }
-                                        },
-                                        "type": "object"
-                                      }
-                                    },
-                                    "type": "object"
-                                  },
-                                  "type": {
-                                    "default": "roles",
-                                    "description": "Roles type.",
-                                    "enum": [
-                                      "roles"
-                                    ],
-                                    "example": "roles",
-                                    "type": "string",
-                                    "x-enum-varnames": [
-                                      "ROLES"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "type"
-                                ],
-                                "type": "object"
-                              }
-                            ],
-                            "properties": {},
-                            "type": "object"
-                          },
-                          "type": "array"
                         },
                         "relationships": {
                           "description": "All relationships associated with AuthN Mapping.",
@@ -43960,10 +44260,8 @@
                                   "properties": {
                                     "id": {
                                       "description": "The ID of the SAML assertion attribute.",
-                                      "example": 0,
-                                      "format": "int32",
-                                      "maximum": 2147483647,
-                                      "type": "integer"
+                                      "example": "0",
+                                      "type": "string"
                                     },
                                     "type": {
                                       "default": "saml_assertion_attributes",
@@ -44011,6 +44309,151 @@
                         "type"
                       ],
                       "type": "object"
+                    },
+                    "included": {
+                      "description": "Included data in the AuthN Mapping response.",
+                      "items": {
+                        "description": "Included data in the AuthN Mapping response.",
+                        "oneOf": [
+                          {
+                            "description": "SAML assertion attribute.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Key/Value pair of attributes used in SAML assertion attributes.",
+                                "properties": {
+                                  "attribute_key": {
+                                    "description": "Key portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                    "example": "member-of",
+                                    "type": "string"
+                                  },
+                                  "attribute_value": {
+                                    "description": "Value portion of a key/value pair of the attribute sent from the Identity Provider.",
+                                    "example": "Development",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "The ID of the SAML assertion attribute.",
+                                "example": "0",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "saml_assertion_attributes",
+                                "description": "SAML assertion attributes resource type.",
+                                "enum": [
+                                  "saml_assertion_attributes"
+                                ],
+                                "example": "saml_assertion_attributes",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "SAML_ASSERTION_ATTRIBUTES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "type"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "The name of the role. The name is neither unique nor a stable identifier of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "The unique identifier of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "properties": {},
+                        "type": "object"
+                      },
+                      "type": "array"
                     }
                   },
                   "type": "object"
@@ -52294,6 +52737,1126 @@
           "type": "idempotent"
         },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+      }
+    },
+    "/api/v2/integration/opsgenie/services": {
+      "get": {
+        "description": "Get a list of all services from the Datadog Opsgenie integration.",
+        "operationId": "ListOpsgenieServices",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response with a list of Opsgenie services.",
+                  "properties": {
+                    "data": {
+                      "description": "An array of Opsgenie services.",
+                      "example": [
+                        {
+                          "attributes": {
+                            "custom_url": null,
+                            "name": "fake-opsgenie-service-name",
+                            "region": "us"
+                          },
+                          "id": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "opsgenie-service"
+                        },
+                        {
+                          "attributes": {
+                            "custom_url": null,
+                            "name": "fake-opsgenie-service-name-2",
+                            "region": "eu"
+                          },
+                          "id": "0d2937f1-b561-44fa-914a-99910f848014",
+                          "type": "opsgenie-service"
+                        }
+                      ],
+                      "items": {
+                        "description": "Opsgenie service data from a response.",
+                        "properties": {
+                          "attributes": {
+                            "description": "The attributes from an Opsgenie service response.",
+                            "properties": {
+                              "custom_url": {
+                                "description": "The custom URL for a custom region.",
+                                "example": "https://example.com",
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "The name for the Opsgenie service.",
+                                "example": "fake-opsgenie-service-name",
+                                "type": "string"
+                              },
+                              "region": {
+                                "description": "The region for the Opsgenie service.",
+                                "enum": [
+                                  "us",
+                                  "eu",
+                                  "custom"
+                                ],
+                                "example": "us",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "US",
+                                  "EU",
+                                  "CUSTOM"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "The ID of the Opsgenie service.",
+                            "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "opsgenie-service",
+                            "description": "Opsgenie service resource type.",
+                            "enum": [
+                              "opsgenie-service"
+                            ],
+                            "example": "opsgenie-service",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "OPSGENIE_SERVICE"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type",
+                          "attributes"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get all service objects",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-menu-order": 1,
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create a new service object in the Opsgenie integration.",
+        "operationId": "CreateOpsgenieService",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Create request for an Opsgenie service.",
+                "properties": {
+                  "data": {
+                    "description": "Opsgenie service data for a create request.",
+                    "properties": {
+                      "attributes": {
+                        "description": "The Opsgenie service attributes for a create request.",
+                        "properties": {
+                          "custom_url": {
+                            "description": "The custom URL for a custom region.",
+                            "example": "https://example.com",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "The name for the Opsgenie service.",
+                            "example": "fake-opsgenie-service-name",
+                            "type": "string"
+                          },
+                          "opsgenie_api_key": {
+                            "description": "The Opsgenie API key for your Opsgenie service.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "region": {
+                            "description": "The region for the Opsgenie service.",
+                            "enum": [
+                              "us",
+                              "eu",
+                              "custom"
+                            ],
+                            "example": "us",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "US",
+                              "EU",
+                              "CUSTOM"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "opsgenie_api_key",
+                          "region"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "opsgenie-service",
+                        "description": "Opsgenie service resource type.",
+                        "enum": [
+                          "opsgenie-service"
+                        ],
+                        "example": "opsgenie-service",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "OPSGENIE_SERVICE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Opsgenie service payload",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response of an Opsgenie service.",
+                  "properties": {
+                    "data": {
+                      "description": "Opsgenie service data from a response.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes from an Opsgenie service response.",
+                          "properties": {
+                            "custom_url": {
+                              "description": "The custom URL for a custom region.",
+                              "example": "https://example.com",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name for the Opsgenie service.",
+                              "example": "fake-opsgenie-service-name",
+                              "type": "string"
+                            },
+                            "region": {
+                              "description": "The region for the Opsgenie service.",
+                              "enum": [
+                                "us",
+                                "eu",
+                                "custom"
+                              ],
+                              "example": "us",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "US",
+                                "EU",
+                                "CUSTOM"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the Opsgenie service.",
+                          "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "opsgenie-service",
+                          "description": "Opsgenie service resource type.",
+                          "enum": [
+                            "opsgenie-service"
+                          ],
+                          "example": "opsgenie-service",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "OPSGENIE_SERVICE"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "CREATED"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Create a new service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-given": {
+          "opsgenie_service": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\",\n      \"opsgenie_api_key\": \"00000000-0000-0000-0000-000000000000\",\n      \"region\": \"us\"\n     },\n     \"type\": \"opsgenie-service\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"opsgenie_service\" in the system"
+          }
+        },
+        "x-menu-order": 2,
+        "x-undo": {
+          "operationId": "DeleteOpsgenieService",
+          "parameters": [
+            {
+              "name": "integration_service_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/integration/opsgenie/services/{integration_service_id}": {
+      "delete": {
+        "description": "Delete a single service object in the Datadog Opsgenie integration.",
+        "operationId": "DeleteOpsgenieService",
+        "parameters": [
+          {
+            "description": "The UUID of the service.",
+            "in": "path",
+            "name": "integration_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Delete a single service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-menu-order": 5,
+        "x-undo": {
+          "type": "idempotent"
+        }
+      },
+      "get": {
+        "description": "Get a single service from the Datadog Opsgenie integration.",
+        "operationId": "GetOpsgenieService",
+        "parameters": [
+          {
+            "description": "The UUID of the service.",
+            "in": "path",
+            "name": "integration_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response of an Opsgenie service.",
+                  "properties": {
+                    "data": {
+                      "description": "Opsgenie service data from a response.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes from an Opsgenie service response.",
+                          "properties": {
+                            "custom_url": {
+                              "description": "The custom URL for a custom region.",
+                              "example": "https://example.com",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name for the Opsgenie service.",
+                              "example": "fake-opsgenie-service-name",
+                              "type": "string"
+                            },
+                            "region": {
+                              "description": "The region for the Opsgenie service.",
+                              "enum": [
+                                "us",
+                                "eu",
+                                "custom"
+                              ],
+                              "example": "us",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "US",
+                                "EU",
+                                "CUSTOM"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the Opsgenie service.",
+                          "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "opsgenie-service",
+                          "description": "Opsgenie service resource type.",
+                          "enum": [
+                            "opsgenie-service"
+                          ],
+                          "example": "opsgenie-service",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "OPSGENIE_SERVICE"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get a single service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-menu-order": 3,
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "patch": {
+        "description": "Update a single service object in the Datadog Opsgenie integration.",
+        "operationId": "UpdateOpsgenieService",
+        "parameters": [
+          {
+            "description": "The UUID of the service.",
+            "in": "path",
+            "name": "integration_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Update request for an Opsgenie service.",
+                "properties": {
+                  "data": {
+                    "description": "Opsgenie service for an update request.",
+                    "properties": {
+                      "attributes": {
+                        "description": "The Opsgenie service attributes for an update request.",
+                        "properties": {
+                          "custom_url": {
+                            "description": "The custom URL for a custom region.",
+                            "example": "https://example.com",
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "The name for the Opsgenie service.",
+                            "example": "fake-opsgenie-service-name",
+                            "type": "string"
+                          },
+                          "opsgenie_api_key": {
+                            "description": "The Opsgenie API key for your Opsgenie service.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "region": {
+                            "description": "The region for the Opsgenie service.",
+                            "enum": [
+                              "us",
+                              "eu",
+                              "custom"
+                            ],
+                            "example": "us",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "US",
+                              "EU",
+                              "CUSTOM"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "The ID of the Opsgenie service.",
+                        "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "opsgenie-service",
+                        "description": "Opsgenie service resource type.",
+                        "enum": [
+                          "opsgenie-service"
+                        ],
+                        "example": "opsgenie-service",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "OPSGENIE_SERVICE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Opsgenie service payload.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response of an Opsgenie service.",
+                  "properties": {
+                    "data": {
+                      "description": "Opsgenie service data from a response.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes from an Opsgenie service response.",
+                          "properties": {
+                            "custom_url": {
+                              "description": "The custom URL for a custom region.",
+                              "example": "https://example.com",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name for the Opsgenie service.",
+                              "example": "fake-opsgenie-service-name",
+                              "type": "string"
+                            },
+                            "region": {
+                              "description": "The region for the Opsgenie service.",
+                              "enum": [
+                                "us",
+                                "eu",
+                                "custom"
+                              ],
+                              "example": "us",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "US",
+                                "EU",
+                                "CUSTOM"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the Opsgenie service.",
+                          "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "opsgenie-service",
+                          "description": "Opsgenie service resource type.",
+                          "enum": [
+                            "opsgenie-service"
+                          ],
+                          "example": "opsgenie-service",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "OPSGENIE_SERVICE"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Update a single service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
+        "x-undo": {
+          "type": "idempotent"
+        }
       }
     },
     "/api/v2/logs": {
@@ -60669,8 +62232,7 @@
         "x-menu-order": 5,
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       }
     },
     "/api/v2/metrics/config/bulk-tags": {
@@ -61404,7 +62966,7 @@
     },
     "/api/v2/metrics/{metric_name}/estimate": {
       "get": {
-        "description": "Returns a cardinality estimate for a metric with a given tag, percentile, and number of aggregations configuration.",
+        "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
         "operationId": "EstimateMetricsOutputSeries",
         "parameters": [
           {
@@ -61418,7 +62980,7 @@
             }
           },
           {
-            "description": "Filtered tag groups that the metric is configured to query with.",
+            "description": "Filtered tag keys that the metric is configured to query with.",
             "example": "app,host",
             "in": "query",
             "name": "filter[groups]",
@@ -61649,7 +63211,7 @@
             "AuthZ": []
           }
         ],
-        "summary": "Estimate Output Series - Public v2 API",
+        "summary": "Tag Configuration Cardinality Estimator",
         "tags": [
           "Metrics"
         ],
@@ -61778,8 +63340,7 @@
         "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       },
       "get": {
         "description": "Returns the tag configuration for the given metric name.",
@@ -62053,8 +63614,7 @@
         "x-menu-order": 2,
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       },
       "patch": {
         "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission.",
@@ -62497,8 +64057,7 @@
         "x-menu-order": 3,
         "x-undo": {
           "type": "idempotent"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       },
       "post": {
         "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric or configure custom aggregations\non any count, rate, or gauge metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
@@ -62986,13 +64545,12 @@
             }
           ],
           "type": "unsafe"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       }
     },
     "/api/v2/metrics/{metric_name}/volumes": {
       "get": {
-        "description": "View distinct metrics volumes for the given metric name.\n\nCustom distribution metrics will return both ingested and indexed custom metric volumes.\nFor Metrics without Limits&trade; beta customers, all metrics will return both ingested/indexed volumes.\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+        "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
         "operationId": "ListVolumesByMetricName",
         "parameters": [
           {
@@ -84781,7 +86339,7 @@
     },
     "/api/v2/usage/cost_by_org": {
       "get": {
-        "description": "Get Cost Across Multi-Org Account.",
+        "description": "Get cost across multi-org account. Cost by org data for a given month becomes available no later than the 16th of the following month.",
         "operationId": "GetCostByOrg",
         "parameters": [
           {
@@ -84981,7 +86539,7 @@
             ]
           }
         ],
-        "summary": "Get Cost Across Multi-Org Account",
+        "summary": "Get cost across multi-org account",
         "tags": [
           "Usage Metering"
         ],
@@ -89522,6 +91080,13 @@
     {
       "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.",
       "name": "Metrics"
+    },
+    {
+      "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/api/latest/opsgenie-integration)\ndirectly through the Datadog API.",
+      "externalDocs": {
+        "url": "https://docs.datadoghq.com/api/latest/opsgenie-integration"
+      },
+      "name": "Opsgenie Integration"
     },
     {
       "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization).",

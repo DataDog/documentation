@@ -21,7 +21,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Configure database parameters](#configure-mysql-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
-1. [Install the RDS integration](#install-the-rds-integration)
+1. [Install the Azure MySQL integration](#install-the-azure-mysql-integration)
 
 ## Before you begin
 
@@ -32,7 +32,7 @@ Supported Azure MySQL deployment types
 : Single Server, Flexible Server
 
 Supported Agent versions
-: 7.35.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -149,6 +149,11 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+
+     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    azure:
+      deployment_type: '<DEPLOYMENT_TYPE>'
+      name: '<YOUR_INSTANCE_NAME>'
 ```
 
 **Note**: Wrap your password in single quotes in case a special character is present.
@@ -172,7 +177,7 @@ Execute the following command to run the agent from your command line. Replace t
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.35.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -183,7 +188,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<AZURE_INSTANCE_ENDPOINT>",
     "port": 3306,
     "username": "datadog",
-    "password": "<UNIQUEPASSWORD>"
+    "password": "<UNIQUEPASSWORD>",
+    "azure": {
+      "deployment_type": "<DEPLOYMENT_TYPE>",
+      "name": "<YOUR_INSTANCE_NAME>"
+    }
   }]' \
   datadog/agent:${DD_AGENT_VERSION}
 ```
@@ -193,11 +202,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM datadog/agent:7.35.0
+FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
 ```
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
@@ -231,7 +240,10 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: "<UNIQUEPASSWORD>"
+    azure:
+      deployment_type: "<DEPLOYMENT_TYPE>"
+      name: "<YOUR_INSTANCE_NAME>" \
   datadog/datadog
 ```
 
@@ -248,6 +260,10 @@ instances:
     port: 3306
     username: datadog
     password: '<UNIQUEPASSWORD>'
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    azure:
+      deployment_type: '<DEPLOYMENT_TYPE>'
+      name: '<YOUR_INSTANCE_NAME>'
 ```
 
 ### Configure with Kubernetes service annotations
@@ -273,7 +289,11 @@ metadata:
           "host": "<AZURE_INSTANCE_ENDPOINT>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "<UNIQUEPASSWORD>",
+          "azure": {
+            "deployment_type": "<DEPLOYMENT_TYPE>",
+            "name": "<YOUR_INSTANCE_NAME>"
+          }
         }
       ]
 spec:
