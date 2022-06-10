@@ -49,11 +49,11 @@ Event types are a collection of audit events. For example, the Authentication ev
 
 Archiving is an optional feature for Audit Trail. You can use archiving to write to Amazon S3, Google Cloud Storage, or Azure Storage and have your SIEM system read events from it. After creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Events are uploaded to the archive every 15 minutes, so check back on your storage bucket in 15 minutes to make sure the archives are successfully being uploaded from your Datadog account.
 
-To enable archiving for Audit Trail, navigate to your [Organization Settings][2] and select *Audit Trail Settings* under *Security*. Scroll down to Archiving and click the Store Events toggle to enable.
+To enable archiving for Audit Trail, navigate to your [Organization Settings][2] and select *Audit Trail Settings* under *Compliance*. Scroll down to Archiving and click the Store Events toggle to enable.
 
 ### Retention
 
-Retaining events is an optional feature for Audit Trail. To enable, navigate to your [Organization Settings][2] and select *Audit Trail Settings* under *Compliance*. Scroll down to Retention and click the Retain Audit Trail Events toggle to enable.
+Retaining events is an optional feature for Audit Trail. Scroll down to Retention and click the Retain Audit Trail Events toggle to enable.
 
 The default retention period for an audit trail event is seven days. You can set a retention period between three and 90 days.
 
@@ -61,11 +61,11 @@ The default retention period for an audit trail event is seven days. You can set
 
 ## Explore audit events
 
-To explore an audit event, navigate to the [Audit Trail][1] section, also accessible from your [Organizational Settings][2] in Datadog.
+To explore an audit event, navigate to the [Audit Trail][1] section, also accessible from your [Organization Settings][2] in Datadog.
 
 {{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:30%;">}}
 
-Audit Trail events have the same functionality as logs within the Datadog Log Management[Log Explorer][3]:
+Audit Trail events have the same functionality as logs within the [Log Explorer][3]:
 
 - Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, etc), Authentication Attributes (Actor, API Key ID, User email, etc), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
 
@@ -79,7 +79,7 @@ To create a monitor on a type of audit trail event or by specificTrail attribute
 
 ## Create a dashboard or a graph
 
-Give more visual context to your audit trail events with dashboards. To create an Audit Trail Events dashboard:
+Give more visual context to your audit trail events with dashboards. To create an audit dashboard:
 
 1. Create a [New Dashboard][5] in Datadog.
 2. Select your visualization. You can visualize an Audit event as [top lists][6], [timeseries][7], and [log streams][8].
@@ -87,7 +87,11 @@ Give more visual context to your audit trail events with dashboards. To create a
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-{{< img src="account_management/audit_logs/audit_dashboard.png" alt="An Audit Trail dashboard" style="width:100%;">}}
+## Out of the box dashboard
+
+Datadog Audit Trail comes with an [out of the box dashboard][10] that shows various audit events such as index retention change, log pipeline change, and dashboard change among other things. Clone this dashboard to customize queries and visualizations for your auditing needs.
+
+{{< img src="account_management/audit_logs/audit_dashboard.png" alt="Audit Trail dashboard" style="width:100%;">}}
 
 ## Further Reading
 
@@ -102,3 +106,4 @@ Give more visual context to your audit trail events with dashboards. To create a
 [7]: /dashboards/widgets/timeseries/
 [8]: /dashboards/widgets/log_stream/
 [9]: /dashboards/querying/#choose-the-metric-to-graph/
+[10]: https://app.datadoghq.com/dashboard/a3f-hhh-yad/datadog-audit-trail-overview?from_ts=1646686672468&to_ts=1654631872468&live=true
