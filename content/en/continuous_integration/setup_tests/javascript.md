@@ -116,6 +116,10 @@ NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 
 {{% tab "Cypress" %}}
 
+### Cypress<10
+
+These are the instructions if you're using a version older than `cypress@10`.
+
 1. Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
 {{< code-block lang="json" filename="cypress.json" >}}
 {
@@ -137,11 +141,52 @@ module.exports = (on, config) => {
 require('dd-trace/ci/cypress/support')
 {{< /code-block >}}
 
+
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
+
+### Cypress >=10
+
+Use the Cypress API documentation to [learn how to write plugins][4] for `cypress>=10`.
+
+In your `cypress.config.js` file, set the following:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents: require('dd-trace/ci/cypress/plugin'),
+    supportFile: 'cypress/support/index.js'
+  }
+})
+{{< /code-block >}}
+
+Your `supportFile` should look the same as in `cypress<10`:
+
+{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
+// your previous code is before this line
+require('dd-trace/ci/cypress/support')
+{{< /code-block >}}
+
+If you're using other Cypress plugins, your `cypress.config.js` file should contain the following:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      // your previous code is before this line
+      require('dd-trace/ci/cypress/plugin')(on, config)
+    }
+  }
+})
+{{< /code-block >}}
+
 
 #### Add extra tags to your Cypress test
 
