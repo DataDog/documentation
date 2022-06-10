@@ -178,7 +178,7 @@ performance_schema_max_sql_text_length=4096
 Before following these steps to diagnose missing query activity, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query activity.
 
 #### `performance-schema-consumer-events-waits-current` is not enabled {#events-waits-current-not-enabled}
-The Agent requires the `performance-schema-consumer-events-waits-current` option to be enabled. It is disabled by default by MySQL, but may be enabled by your cloud provider. Follow the [setup instructions][1] for enabling it. Alternatively, to avoid bouncing your database, consider setting up a runtime setup consumer. Create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
+The Agent requires the `performance-schema-consumer-events-waits-current` option to be enabled. It is disabled by default by MySQL, but may be enabled by your cloud provider. Follow the [setup instructions][1] for enabling it. Alternatively, to avoid bouncing your database, consider setting up a runtime setup consumer. Create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
 
 ```SQL
