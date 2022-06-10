@@ -20,6 +20,7 @@ further_reading:
 aliases:
     - /tracing/getting_further/metrics_namespace
 ---
+<div class="alert alert-warning">This method of using trace metrics is outdated. Instead, [tracing distribution metrics using DDSketch][11] is recommended.
 
 ## Overview
 
@@ -187,3 +188,4 @@ With the following definitions:
 [8]: /tracing/visualization/services_list/#services-types
 [9]: /tracing/visualization/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[11]: /tracing/guide/ddsketch_trace_metrics/
