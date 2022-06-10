@@ -358,7 +358,18 @@ Your logger needs to have a `source` that sets the `trace_id` mapping correctly.
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
-Enables ingestion rate control.
+**Default**: Defaults to the rates returned by the Datadog Agent<br>
+Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
+For more information, see [Ingestion Mechanisms][6].
+
+`DD_TRACE_SAMPLING_RULES`
+: **TracerSettings property**: `CustomSamplingRules`<br>
+**Default**: `null`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+For more information, see [Ingestion Mechanisms][6].<br>
+**Examples:**<br>
+  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
@@ -368,6 +379,8 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans.
+**Example**: `layer:api, team:intake` <br>
+Note that the delimiter is a comma and a space: `, `.
 
 `DD_TRACE_DEBUG`
 : Enables or disables debug logging. Valid values are `true` or `false`.<br>
@@ -432,17 +445,23 @@ Added in version 2.5.2
 Added in version 2.6.0.
 Wildcard support `[*]` added in version 2.7.0.
 
+`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
+: Alters the behavior of the Kafka consumer span<br>
+**Default**: `true`<br>
+When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once.
+
 #### Automatic instrumentation integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration.
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings property**: `DisabledIntegrationNames` <br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][6] section.
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][7] section.
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][6] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][7] section.<br>
 **Default**: `true`
 
 #### Experimental features
@@ -464,7 +483,7 @@ The following configuration variables are for features that are available for us
 
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][8] and [W3C (TraceParent)][9] headers extraction and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][9] and [W3C (TraceParent)][10] headers extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
@@ -515,7 +534,7 @@ To use custom instrumentation in your .NET application:
 
 {{< /tabs >}}
 
-For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][7].
+For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
 
 ## Configuring process environment variables
 
@@ -573,7 +592,8 @@ dotnet.exe example.dll
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
-[6]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
-[7]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[8]: https://github.com/openzipkin/b3-propagation
-[9]: https://www.w3.org/TR/trace-context/#traceparent-header
+[6]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#head-based-sampling
+[7]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
+[8]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[9]: https://github.com/openzipkin/b3-propagation
+[10]: https://www.w3.org/TR/trace-context/#traceparent-header

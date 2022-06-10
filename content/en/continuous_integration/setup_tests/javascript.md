@@ -207,13 +207,14 @@ it('renders a hello world', () => {
 
 #### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [RUM][4], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][5] guide.
+If the browser application being tested is instrumented using [RUM][5], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][6] guide.
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[4]: /real_user_monitoring/browser/#setup
-[5]: /continuous_integration/guides/rum_integration/
+[4]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
+[5]: /real_user_monitoring/browser/#setup
+[6]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{< /tabs >}}

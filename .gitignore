@@ -202,3 +202,14 @@ static/images/integrations_logos/2020w2.pdf
 # Generated resources from Hugo Pipes
 resources/_gen/
 static/jsconfig.json
+
+# yarn v2 or greater
+# Not using zero installs
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

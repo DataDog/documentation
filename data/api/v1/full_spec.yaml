@@ -10763,7 +10763,6 @@ components:
         responseHeaders:
           additionalProperties:
             description: Returned request header.
-            type: object
           description: Response headers returned for the API test.
           type: object
         responseSize:
@@ -11795,12 +11794,12 @@ components:
       properties:
         cls:
           description: Cumulative Layout Shift.
-          format: int64
-          type: integer
+          format: double
+          type: number
         lcp:
           description: Largest Contentful Paint in milliseconds.
-          format: int64
-          type: integer
+          format: double
+          type: number
         url:
           description: URL attached to the metrics.
           type: string
