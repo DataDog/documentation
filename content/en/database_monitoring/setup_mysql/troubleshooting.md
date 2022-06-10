@@ -173,7 +173,28 @@ performance_schema_max_digest_length=4096
 performance_schema_max_sql_text_length=4096
 ```
 
-Most workloads are able to capture most queries by raising this value to 4096, but you may need to set a higher value for particularly long and complex queries.
+### Query activity is missing
+
+Before following these steps to diagnose missing query activity, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query activity.
+
+#### `performance-schema-consumer-events-waits-current` is not enabled {#events-waits-current-not-enabled}
+The Agent requires the `performance-schema-consumer-events-waits-current` option to be enabled. It is disabled by default by MySQL, but may be enabled by your cloud provider. Follow the [setup instructions][1] for enabling it. Alternatively, to avoid bouncing your database, consider setting up a runtime setup consumer. Create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
+
+
+```SQL
+DELIMITER $$
+CREATE PROCEDURE datadog.enable_events_statements_consumers()
+    SQL SECURITY DEFINER
+BEGIN
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
+END $$
+DELIMITER ;
+GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
+```
+
+**Note:** This option additionally requires `performance_schema` to be enabled.
+
 
 <!-- TODO: add a custom query recipe for getting the max sql text length -->
 
