@@ -24,8 +24,9 @@ Select a top list view, and group the query by `resource` to see which specific 
 
 {{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="Trace Explorer list search"  style="width:100%;">}}
 
-{{< site-region region="us,eu,gov,us3,us5" >}}
+{{< site-region region="us,eu,us3,us5" >}}
 **Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
+{{< /site-region >}}
 
 ## Query Syntax
 
@@ -34,8 +35,6 @@ To begin searching for spans in the Trace Explorer, read the [query syntax docum
 [1]: /tracing/trace_explorer/query_syntax#facets
 [2]: /tracing/trace_explorer/query_syntax
 [3]: /dashboards/guide/custom_time_frames
-
-{{< /site-region >}}
 
 ## Further Reading
 
