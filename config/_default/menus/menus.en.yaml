@@ -522,6 +522,11 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_working_with_data
     weight: 103
+  - name: Integrations
+    url: integrations/observability_pipelines/integrations/
+    parent: observability_pipelines
+    identifier: observability_pipelines_integrations
+    weight: 104
   - name: Guides
     url: integrations/guide/
     identifier: integration_guides
