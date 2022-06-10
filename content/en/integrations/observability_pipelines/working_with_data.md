@@ -20,6 +20,9 @@ further_reading:
   - link: https://vector.dev/docs/reference/configuration/transforms/geoip/
     tag: Documentation
     text: Enrich events with GeoIP metadata
+  - link: https://vector.dev/guides/level-up/csv-enrichment-guide/
+    tag: Documentation
+    text: Use CSV enrichment to provide more context to your data
   - link: https://docs.datadoghq.com/agent/vector_aggregation/ 
     tag: Documentation
     text: Configure Datadog agents to send data to Vector aggregators
@@ -46,11 +49,11 @@ Remap transforms act on a single event and can be used to transform them or spec
 - [Coerce][7] one datatype to another datatype (for example, from an integer to a string).
 - [Convert syslog values][8] to read-able values.
 - Enrich values by using [enrichment tables][9].
-- [Manipulate][10] IP values.
+- [Manipulate IP values][10].
 - [Parse][11] values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
-- Manipulate event [metadata][12] and [paths][11].
+- Manipulate event [metadata][12] and [paths][13].
 
-...and [more][1]
+See [VRL Function Reference][1] for a full list of VRL built-in functions.
 
 To get started, see the following example for a basic remap transform that contains a VRL program in the `source` field:
 
@@ -105,7 +108,7 @@ In this example, the `type` field is set to a `remap` transform. The `inputs` fi
 
 The second line adds the `.timestamp` field and the value to the event, changing the content of every event that passes through this transform.
 
-See [VRL References][13] and [Vector Configurations][14] for more information.
+See [VRL References][14] and [Vector Configurations][15] for more information.
 
 ## Parse data
 
@@ -187,15 +190,13 @@ This configuration returns the following:
 
 Sampling, reducing, filtering, and aggregating are common transforms to reduce the volume of observability data delivered to downstream services. Vector offers a variety of ways to control your data volume:
 
-- [Sample events][15] based on supplied criteria and at a configurable rate.
-- [Reduce and collapse][16] multiple events into a single event.
+- [Sample events][16] based on supplied criteria and at a configurable rate.
+- [Reduce and collapse][17] multiple events into a single event.
 - Remove unnecessary fields.
-- [Deduplicate][17] events. 
-- [Filter events][18] based on a set of conditions.
-- [Aggregate multiple metric events][19] into a single metric event based on a defined interval window.
-- Convert [metrics to logs][20].
-
-**TBD** For a detailed guide on how to use these transform for cost control, see the [cost control guide].
+- [Deduplicate][18] events. 
+- [Filter events][19] based on a set of conditions.
+- [Aggregate multiple metric events][20] into a single metric event based on a defined interval window.
+- [Convert metrics to logs][21].
 
 ## Route data
 
@@ -324,7 +325,7 @@ compression = "gzip"
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [route transform documentation][21] for more information.
+See the [Route Transform documentation][22] for more information.
 
 ## Throttle data
 
@@ -395,12 +396,13 @@ The `threshold` field defines the number of events allowed for a given bucket. `
 [10]: https://vector.dev/docs/reference/vrl/functions/#ip-functions
 [11]: https://vector.dev/docs/reference/vrl/functions/#parse-functions
 [12]: https://vector.dev/docs/reference/vrl/functions/#event-functions
-[13]: https://vector.dev/docs/reference/vrl/#reference
-[14]: /integrations/observability_pipelines/vector_configurations
-[15]: https://vector.dev/docs/reference/configuration/transforms/sample/
-[16]: https://vector.dev/docs/reference/configuration/transforms/reduce/
-[17]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
-[18]: https://vector.dev/docs/reference/configuration/transforms/filter/
-[19]: https://vector.dev/docs/reference/configuration/transforms/aggregate/
-[20]: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/
-[21]: https://vector.dev/docs/reference/configuration/transforms/route/
+[13]: https://vector.dev/docs/reference/vrl/functions/#path-functions
+[14]: https://vector.dev/docs/reference/vrl/#reference
+[15]: /integrations/observability_pipelines/vector_configurations
+[16]: https://vector.dev/docs/reference/configuration/transforms/sample/
+[17]: https://vector.dev/docs/reference/configuration/transforms/reduce/
+[18]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
+[19]: https://vector.dev/docs/reference/configuration/transforms/filter/
+[20]: https://vector.dev/docs/reference/configuration/transforms/aggregate/
+[21]: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/
+[22]: https://vector.dev/docs/reference/configuration/transforms/route/
