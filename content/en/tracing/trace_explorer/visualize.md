@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Visualizations define how the queried span data is displayed. Select the relevant visualizations to surface valuable information, as a **list** of individual events, or as **timeseries** or **top list** aggregates.
+Visualizations define how the queried span data is displayed. Select the relevant visualizations to surface valuable information, as a **list** of individual events, or as **timeseries** or **top list** aggregates. 
 
 ## List view
 
@@ -81,6 +81,8 @@ Visualize the top values from up to three dimension combinations according to a 
 The following table shows the error spans count by **Env**, **Service** and **Error Type**.
 
 {{< img src="tracing/trace_explorer/visualize/table_view.png" alt="Table view" style="width:100%;">}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
