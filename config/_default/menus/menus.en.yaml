@@ -4542,6 +4542,18 @@ api:
         - ListActiveMetrics
       unstable: []
       order: 1
+  - name: Submit distribution points
+    url: '#submit-distribution-points'
+    identifier: metrics-submit-distribution-points
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SubmitDistributionPoints
+      unstable: []
+      order: 1
   - name: Monitors
     url: /api/latest/monitors/
     identifier: monitors
