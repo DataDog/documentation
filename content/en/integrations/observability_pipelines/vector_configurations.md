@@ -57,6 +57,7 @@ sources:
       "format": "syslog",
       "count": 100
     }
+}
 ```
 
 {{% /tab %}}
