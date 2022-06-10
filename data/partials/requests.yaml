@@ -21,7 +21,7 @@ requests:
     image: "int_apm.png"
   - name: "Custom Metrics"
     description: "Custom metrics can be submitted for business stats using developer tools like the API and DogStatsD."
-    link: "/developers/metrics"
+    link: "metrics/custom_metrics"
     image: "int_custom_metrics.png"
   - name: "Custom Integrations"
     description: "Datadog Agent integrations are Python files querying for metrics. All Agent code is open source, so it's possible to write your own custom Agent integration. The integrations-extras GitHub repository contains many community developed custom Agent integrations."
