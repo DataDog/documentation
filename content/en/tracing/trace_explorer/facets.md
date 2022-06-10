@@ -78,7 +78,7 @@ Hidden facets are still visible in the facet search (see the [Filter Facet](#fil
 
 #### Hidden facets and teammates
 
-Hiding facets is specific to your own troubleshooting context and does not impact your teammates' view, unless you update a [saved view][6]. Hidden facets is part of the context saved in a saved view.
+Hiding facets is specific to your own troubleshooting context and does not impact your teammates' view, unless you update a saved view. Hidden facets is part of the context saved in a saved view.
 
 ### Grouping facets
 
@@ -133,4 +133,3 @@ Autocomplete based on the content in spans of the current views helps you to def
 [3]: /monitors/create/types/apm/?tab=analytics
 [4]: /dashboards/widgets/
 [5]: /notebooks/
-[6]: /trace/trace_explorer/saved_views/

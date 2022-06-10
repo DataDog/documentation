@@ -28,13 +28,13 @@ The default **sort** for spans in the list visualization is by timestamp, with t
 
 {{< /site-region >}}
 
-The configuration of the columns is stored alongside other elements of your troubleshooting context in [Saved Views][3].
+The configuration of the columns is stored alongside other elements of your troubleshooting context in saved views.
 
 ## Timeseries
 
-Visualize the evolution of a [measure][4] (or a tag unique count of values) over a selected time frame, and (optionally) split by up to three tags.
+Visualize the evolution of a [measure][3] (or a tag unique count of values) over a selected time frame, and (optionally) split by up to three tags.
 
-**Note**: The [Live Explorer][5] (15 minutes) only allows to group by one single dimension.
+**Note**: The [Live Explorer][4] (15 minutes) only allows to group by one single dimension.
 
 Aggregated views use additional query options, to define the **measured tag dimension**, the dimensions to **group** the query by, and the **aggregation period**. For instance:
 
@@ -88,6 +88,5 @@ The following table shows the error spans count by **Env**, **Service** and **Er
 
 [1]: /tracing/trace_explorer/query_syntax/#search-syntax
 [2]: /tracing/trace_explorer/query_syntax/#time-range
-[3]: /tracing/trace_explorer/saved_views
-[4]: /tracing/trace_explorer/facets/#quantitative-facets-measures
-[5]: /tracing/trace_explorer/?tab=timeseriesview#live-search-for-15-minutes
+[3]: /tracing/trace_explorer/facets/#quantitative-facets-measures
+[4]: /tracing/trace_explorer/?tab=timeseriesview#live-search-for-15-minutes
