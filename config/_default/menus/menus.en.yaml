@@ -1434,12 +1434,12 @@ main:
     parent: trace_explorer
     identifier: span_query_syntax
     weight: 202
-  - name: Facets
+  - name: Span Facets
     url: tracing/trace_explorer/facets/
     parent: trace_explorer
     identifier: span_facets
     weight: 203
-  - name: Visualize
+  - name: Span Visualizations
     url: tracing/trace_explorer/visualize/
     parent: trace_explorer
     identifier: visualize_spans
