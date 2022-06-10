@@ -53,7 +53,7 @@ To enable archiving for Audit Trail, navigate to your [Organization Settings][2]
 
 ### Retention
 
-Retaining events is an optional feature for Audit Trail. Scroll down to Retention and click the Retain Audit Trail Events toggle to enable.
+Retaining events is an optional feature for Audit Trail. Scroll down to *Retention* and click the *Retain Audit Trail Events* toggle to enable.
 
 The default retention period for an audit trail event is seven days. You can set a retention period between three and 90 days.
 
@@ -87,9 +87,9 @@ Give more visual context to your audit trail events with dashboards. To create a
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-## Out of the box dashboard
+## Out-of-the-box dashboard
 
-Datadog Audit Trail comes with an [out of the box dashboard][10] that shows various audit events such as index retention change, log pipeline change, and dashboard change among other things. Clone this dashboard to customize queries and visualizations for your auditing needs.
+Datadog Audit Trail comes with an [out-of-the-box dashboard][10] that shows various audit events, such as index retention changes, log pipeline changes, dashboard changes, etc. Clone this dashboard to customize queries and visualizations for your auditing needs.
 
 {{< img src="account_management/audit_logs/audit_dashboard.png" alt="Audit Trail dashboard" style="width:100%;">}}
 
