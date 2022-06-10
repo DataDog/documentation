@@ -106,8 +106,8 @@ For help troubleshooting the Agent:
 ## Next steps
 
 {{< whatsnext desc="After the Agent is installed:">}}
-{{< nextlink href="/getting_started/integrations" type="Documentation" >}}Learn about Integrations{{< /nextlink >}}
-{{< nextlink href="/getting_started/application" type="Documentation" >}}Learn about the Datadog UI{{< /nextlink >}}
+{{< nextlink href="/getting_started/integrations" >}}Learn about Integrations{{< /nextlink >}}
+{{< nextlink href="/getting_started/application" >}}Learn about the Datadog UI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /integrations/
