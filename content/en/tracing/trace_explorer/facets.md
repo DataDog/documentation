@@ -72,7 +72,7 @@ Your organization has many facets to address use cases across the various teams 
 
 {{< img src="tracing/trace_explorer/facets/hide_facets.png" alt="Hide Facet" style="width:30%;">}}
 
-Hidden facets are still visible in the facet search (see the [Filter Facet](#filter-facets) section) in case you need it. Unhide hidden facets from facet search.
+Hidden facets are still visible in the facet search (see the [Filter Facet](#filtering-facets) section) in case you need it. Unhide hidden facets from facet search.
 
 {{< img src="logs/explorer/facet/unhide_facet.png" alt="Unhide Facet" style="width:30%;">}}
 
