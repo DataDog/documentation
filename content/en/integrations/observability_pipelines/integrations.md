@@ -37,13 +37,13 @@ Vector integrates with Datadog and offers out-of-the-box integrations with 60 di
 | [NGINX metrics][25]           | Collect metrics from NGINX.                                                                           |
 | [PostgreSQL metrics][26]      | Collect metrics from the PostgreSQL database.                                                         |
 | [Prometheus remote write][27] | Collect metrics from Prometheus.                                                                      |
-| [Prometheus scrape][28]       | Collect metrics via the Prometheus client.                                                            |
+| [Prometheus scrape][28]       | Collect metrics with the Prometheus client.                                                            |
 | [Redis][29]                   | Collect observability data from Redis.                                                                |
 | [Socket][30]                  | Collect logs using the socket client.                                                                 |
 | [Splunk HEC][31]              | Receive logs from Splunk.                                                                             |
 | [StatsD][32]                  | Collect logs emitted by the StatsD aggregator.                                                        |
-| [stdin][33]                   | Collect logs sent via stdin.                                                                          |
-| [Syslog][34]                  | Collect logs sent via Syslog.                                                                         |
+| [stdin][33]                   | Collect logs sent with stdin.                                                                          |
+| [Syslog][34]                  | Collect logs sent with Syslog.                                                                         |
 | [Vector][35]                  | Collect observability data from another Vector instance.                                              |
 
 ## Sinks 
