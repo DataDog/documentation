@@ -100,7 +100,7 @@ Here is the mapping between deprecated tags and the official tags that have repl
 | deprecated tag        | official tag                |
 |-----------------------|-----------------------------|
 | cluster_name          | kube_cluster_name           |
-| container             | kube_container_name         |
+| container_name        | kube_container_name         |
 | cronjob               | kube_cronjob                |
 | daemonset             | kube_daemon_set             |
 | deployment            | kube_deployment             |
