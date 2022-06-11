@@ -155,6 +155,8 @@ instances:
       name: '<YOUR_INSTANCE_NAME>'
 ```
 
+For additional documentation on setting `deployment_type` and `name` fields, please refer to the [mysql integration spec][4]
+
 **Note**: Wrap your password in single quotes in case a special character is present.
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
@@ -163,6 +165,7 @@ instances:
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -208,12 +211,15 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
 ```
 
+For additional documentation on setting `deployment_type` and `name` fields, please refer to the [mysql integration spec][4]
+
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
 
 
 [1]: /agent/docker/integrations/?tab=docker
 [2]: /agent/guide/secrets-management
 [3]: /agent/faq/template_variables/
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -303,6 +309,8 @@ spec:
     name: mysql
 ```
 
+For additional documentation on setting `deployment_type` and `name` fields, please refer to the [mysql integration spec][5]
+
 The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
@@ -311,6 +319,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: /agent/guide/secrets-management
+[5]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{< /tabs >}}
 

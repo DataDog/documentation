@@ -221,9 +221,11 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ```
 2. [Restart the Agent][2].
 
+For additional documentation on setting `deployment_type` and `name` fields, please refer to the [postgres integration spec][3]
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -283,12 +285,15 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
+For additional documentation on setting `deployment_type` and `name` fields, please refer to the [postgres integration spec][2]
+
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][4] to learn how to pass the password as an environment variable.
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/guide/secrets-management
-[3]: /agent/faq/template_variables/
+[2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
+[3]: /agent/guide/secrets-management
+[4]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -396,14 +401,17 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
+For additional documentation on setting `deployment_type` and `name` fields, please refer to the [postgres integration spec][4]
+
 The Cluster Agent automatically registers this configuration and begins running the Postgres check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
+[5]: /agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
