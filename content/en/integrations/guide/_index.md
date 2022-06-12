@@ -13,7 +13,7 @@ private: true
     {{< nextlink href="integrations/guide/prometheus-metrics" tag="Prometheus" >}}Mapping Prometheus metrics to Datadog metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/prometheus-host-collection" tag="Prometheus" >}}Prometheus and OpenMetrics metrics collection from a host{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collect-sql-server-custom-metrics" tag="SQL Server" >}}Collect SQL Server Custom Metrics{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi" tag="SQL Server" >}}Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table?{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi" tag="SQL Server" >}}Collect SQL Server performance metrics beyond the sys.dm_os_performance_counters table with WMI{{< /nextlink >}}
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Freshservice Tickets using Webhooks{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Monitoring HCP Consul with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/source-code-integration" tag="GitHub Apps" >}}Datadog Source Code Integration{{< /nextlink >}}
