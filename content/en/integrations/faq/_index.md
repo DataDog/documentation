@@ -139,7 +139,6 @@ aliases:
 [5]: /integrations/faq/why-is-there-a-delay-in-receiving-my-data/
 [6]: /integrations/faq/integration-setup-ecs-fargate/
 [7]: /integrations/faq/error-datadog-not-authorized-sts-assume-role/
-[8]: /integrations/faq/aws-integration-with-terraform/
 [9]: /integrations/faq/issues-with-apache-integration/
 [10]: /integrations/faq/apache-ssl-certificate-issues/
 [11]: /integrations/faq/my-azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list/
