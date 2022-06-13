@@ -120,13 +120,13 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 #### No data
 
+Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. The sections below explain how to do that with each option.
+
 There are currently two ways to deal with missing data:
 - Using the limited `Notify no data` option which is supported by all monitor types
 - Using the newer `On missing data` option which is supoprted by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM Monitors
 
-<div class="alert alert-warning">While the `Notify no data` option is currently supported by all monitor types, we don't recommend using it anymore if possible.Instead, please refer to the `On missing data` option.</div>
-
-Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. The sections below explain how to do that with each option.
+<div class="alert alert-warning">While the `Notify no data` option is currently supported by all monitor types, we don't recommend using it anymore. Instead, please refer to the `On missing data` option.</div>
 
 {{< tabs >}}
 {{% tab "Notify no data" %}}
@@ -145,9 +145,12 @@ If you are monitoring a metric over an auto-scaling group of hosts that stop and
 
 If data is missing for `N` minutes: `Evaluate as zero` / `Show last known status`, `Show NO DATA`, `Show NO DATA and notify`, or `Show OK`.
 
-Contrary to the previous option, the missing data window is **not** configurable.
+The selected behaviour will be applied once a monitor's query does not return any data. Hencem contrary to the `Do not notify` option, the missing data window is **not** configurable.
+
+The options `Evaluate as zero` and `Show last known status` are shown depending on the type of the query. `Evaluate as zero` is shown for monitors using `Count` queries. `Shwon last known status` on the other hand is available for monitors using any other query than `Count`, for example `Gauge`, `Rate`, or `Distribution`.
 
 {{% /tab %}}
+{{< /tabs >}}
 
 ##### Grouping
 
