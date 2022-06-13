@@ -409,6 +409,18 @@
       "description": "Query timeseries points returns \"OK\" response"
     }
   ],
+  "SubmitDistributionPoints": [
+    {
+      "group": "metrics",
+      "suffix": "_3109558960",
+      "description": "Submit deflate distribution points returns \"Payload accepted\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Submit distribution points returns \"Payload accepted\" response"
+    }
+  ],
   "SubmitMetrics": [
     {
       "group": "metrics",
