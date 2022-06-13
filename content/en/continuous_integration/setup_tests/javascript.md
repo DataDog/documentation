@@ -92,15 +92,15 @@ For more information, see the [JavaScript tracer installation docs][5].
 
 {{< tabs >}}
 {{% tab "Jest/Mocha/Cucumber" %}}
-Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init` and run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
 {{< code-block lang="bash" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 {{< /code-block >}}
 
-### Using `yarn>=2`
+### Using Yarn >=2
 
-If you're using `yarn>=2` and a `.pnp.cjs` file you might get the following error message when using `NODE_OPTIONS`:
+If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
 
 ```text
  Error: Cannot find module 'dd-trace/ci/init'
