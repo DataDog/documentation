@@ -126,8 +126,7 @@ Prerequsites:
 2. Make a copy of `Makefile.config.example` called `Makefile.config`
 3. Enter value for `GITHUB_TOKEN`
 4. Set `DOCKER` to true
-5. Update the volume mount path in `docker-compose-docs.yml` to point to your repo path
-6. Run `make start-docker`
+5. Run `make start-docker`
 
 To stop the app, hit Ctrl-C or run `make stop-docker`
 
