@@ -131,7 +131,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### ランタイムセットアップコンシューマー
-Datadog では、ランタイムで  `performance_schema.events_statements_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めしています。
+Datadog では、ランタイムで  `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めしています。
 
 ```SQL
 DELIMITER $$
@@ -139,6 +139,7 @@ CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
     UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
