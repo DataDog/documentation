@@ -40,7 +40,7 @@ Additional information can be found within [Microsoft's .NET Core Lifecycle Poli
 ## Supported processor architectures
 
 The .NET Tracer supports automatic instrumentation on the following architectures:
- 
+
 | Processor architectures                                                 | Support level         | Package version                        |
 | ------------------------------------------------------------------------|-----------------------|----------------------------------------|
 | Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | latest                                 |
@@ -67,7 +67,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
 | MSMQ                            | built-in                                                                                  | `Msmq`               |
-| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 1.0.0+                                           | `MySql`              |
+| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                  | `RabbitMQ`           |
