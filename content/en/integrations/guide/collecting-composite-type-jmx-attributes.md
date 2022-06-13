@@ -1,6 +1,8 @@
 ---
 title: Collecting Composite type JMX attributes
-kind: faq
+kind: guide
+aliases:
+  - /integrations/faq/collecting-composite-type-jmx-attributes/
 ---
 
 ## JMXFetch
