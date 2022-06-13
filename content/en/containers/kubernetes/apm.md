@@ -227,21 +227,20 @@ kind: Deployment
 ### Configure your application tracers to emit traces:
 After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog Tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the relative `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
 
-Refer to the [language-specific APM instrumentation docs][1] for more examples.
+Refer to the [language-specific APM instrumentation docs][2] for more examples.
 
 **Note:** The PHP tracer does not support sending traces over Unix Domain Socket (UDS). For updates on UDS for PHP, contact support.
 
-[1]: /tracing/setup/
 
 ## Agent environment variables
 
-**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][2] documentation.
+**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][3] documentation.
 
 List of all environment variables available for tracing within the Agent running in Kubernetes:
 
 | Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_API_KEY`               | [Datadog API Key][3]                                                                                                                                                                                                                                                                                                        |
+| `DD_API_KEY`               | [Datadog API Key][2]                                                                                                                                                                                                                                                                                                        |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                        |
 | `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][4].                                                                                                                                                                                                                                                                            |
 | `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
@@ -274,8 +273,8 @@ List of all environment variables available for tracing within the Agent running
 
 
 [1]: /agent/kubernetes/
-[2]: /getting_started/tagging/unified_service_tagging
-[3]: /tracing/setup/
+[2]: /tracing/setup/
+[3]: /getting_started/tagging/unified_service_tagging
 [4]: /tracing/guide/security/#replace-rules
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [6]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
