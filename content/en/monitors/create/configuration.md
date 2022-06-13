@@ -120,7 +120,7 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 #### No data
 
-Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. The sections below explain how to do that with each option.
+Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. The sections below explain how to accomplish this with each option.
 
 There are currently two ways to deal with missing data:
 - Using the limited `Notify no data` option which is supported by all monitor types
@@ -139,22 +139,22 @@ This option works in a binary fashion. You either get notified for data being mi
 
 If you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data. This option does not work if it is enabled at a time when data has not been reporting for a long period.
 
+##### Grouping
+
+For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
+
 {{% /tab %}}
 
 {{% tab "On missing data" %}}
 
 If data is missing for `N` minutes: `Evaluate as zero` / `Show last known status`, `Show NO DATA`, `Show NO DATA and notify`, or `Show OK`.
 
-The selected behaviour will be applied once a monitor's query does not return any data. Hencem contrary to the `Do not notify` option, the missing data window is **not** configurable.
+The selected behaviour will be applied once a monitor's query does not return any data. Hence, contrary to the `Do not notify` option, the missing data window is **not** configurable.
 
-The options `Evaluate as zero` and `Show last known status` are shown depending on the type of the query. `Evaluate as zero` is shown for monitors using `Count` queries. `Shwon last known status` on the other hand is available for monitors using any other query than `Count`, for example `Gauge`, `Rate`, or `Distribution`.
+The options `Evaluate as zero` and `Show last known status` are shown depending on the type of the query. `Evaluate as zero` is shown for monitors using `Count` queries. `Show last known status` on the other hand is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, or `Distribution`. These options are considerd as the **default status** of the monitor.
 
 {{% /tab %}}
 {{< /tabs >}}
-
-##### Grouping
-
-For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
 
 #### Auto resolve
 
@@ -170,13 +170,13 @@ In most cases this setting is not useful because you only want an alert to resol
 
 Drop the group from the monitor status after `N` hours (can be set up to 72 hours).
 
-Similar to the Auto-resolve option, the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group is kept for 24h in the status before it's dropped. The start time of the group retention as well as the Auto-resolve option are **identical**, namely as soon as the first, empty evaluation occurs.
+Similar to the Auto-resolve option, the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group is kept for 24h in the status before it's dropped. The start time of the group retention as well as the Auto-resolve option are **identical**, namely as soon as the monitor query returns an empty result (no data).
 
 Typical use cases for defining a retention time are:
 - you would like to drop the group immediately/shortly after data stops reporting
 - you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: This option is only available for multi-alert monitors as simple-alert monitors do not have groups and only supported with the [`On missing data`][4] option mentioned above.
+**Note**: This option is only available for multi-alert monitors as simple-alert monitors do not have groups.
 
 #### New group delay
 
