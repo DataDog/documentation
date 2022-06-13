@@ -126,7 +126,7 @@ There are currently two ways to deal with missing data:
 - Using the limited `Notify no data` option which is supported by all monitor types
 - Using the newer `On missing data` option which is supoprted by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM Monitors
 
-<div class="alert alert-warning">While the `Notify no data` option is currently supported by all monitor types, we don't recommend using it anymore. Instead, please refer to the `On missing data` option.</div>
+<div class="alert alert-warning">While the <code>Notify no data</code> option is currently supported by all monitor types, we don't recommend using it anymore. Instead, please refer to the <code>On missing data</code> option.</div>
 
 {{< tabs >}}
 {{% tab "Notify no data" %}}
@@ -150,6 +150,14 @@ For a monitor that does not notify on missing data, if a group does not report d
 If data is missing for `N` minutes: `Evaluate as zero` / `Show last known status`, `Show NO DATA`, `Show NO DATA and notify`, or `Show OK`.
 
 The selected behaviour will be applied once a monitor's query does not return any data. Hence, contrary to the `Do not notify` option, the missing data window is **not** configurable.
+
+| Option                    | Monitor status & notification                                             |
+|---------------------------|---------------------------------------------------------------------------|
+| `Evaluate as zero`        | Empty result is "replaced" with zero and compared to the alert/warning thresholds. For example, if the alert threshold is set to `> 10`, a zero would not trigger that condition, hence the Monitor status is set to `OK`.   |
+| `Show last known status`  | The last known status of the group/monitor is set.                        |
+| `Show NO DATA`            | Monitor status is set to `NO DATA`.                                       |
+| `Show NO DATA and notify` | Monitor status is set to `NO DATA` and a notification is sent out.        |
+| `Show OK`                 | Monitor is resolved and status is set to `OK`.                            |
 
 The options `Evaluate as zero` and `Show last known status` are shown depending on the type of the query. `Evaluate as zero` is shown for monitors using `Count` queries. `Show last known status` on the other hand is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, or `Distribution`. These options are considerd as the **default status** of the monitor.
 
