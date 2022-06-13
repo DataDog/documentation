@@ -3,6 +3,7 @@
 
 GITHUB_TOKEN := ${github_personal_token}
 LANGS_TO_IGNORE := "ja fr"
+DOCKER := false
 FULL_BUILD := false
 DD_API_KEY := ${datadog_api_key}
 DD_APP_KEY := ${datadog_application_key}

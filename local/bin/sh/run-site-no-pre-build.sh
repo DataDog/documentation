@@ -10,9 +10,14 @@ if [ ${RUN_SERVER} = true ]; then
   npm cache clean --force && yarn install --immutable
   printf "starting webpack and hugo build"
   yarn run prestart
-  yarn run start
 
-  #LANGS_TO_IGNORE=${LANGS_TO_IGNORE} yarn run docker:start
+  if [ ${DOCKER} == true ]; then
+    echo "Running docker build...."
+    LANGS_TO_IGNORE=${LANGS_TO_IGNORE} yarn run docker:start
+  else
+     echo "Running regular build...."
+    yarn run start
+  fi
 
   sleep 5
 
