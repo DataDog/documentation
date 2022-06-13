@@ -57,7 +57,7 @@ Retaining events is an optional feature for Audit Trail. Scroll down to *Retenti
 
 The default retention period for an audit trail event is seven days. You can set a retention period between three and 90 days.
 
-{{< img src="account_management/audit_logs/retention.png" alt="Audit Trail Retention setup in Datadog" style="width:50%;">}}
+{{< img src="account_management/audit_logs/retention_period.png" alt="Audit Trail Retention setup in Datadog" style="width:80%;">}}
 
 ## Explore audit events
 
