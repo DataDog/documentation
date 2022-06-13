@@ -126,7 +126,7 @@ There are currently two ways to deal with missing data:
 - Using the limited `Notify no data` option which is supported by all monitor types
 - Using the newer `On missing data` option which is supoprted by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM Monitors
 
-<div class="alert alert-warning">While the <code>Notify no data</code> option is currently supported by all monitor types, we don't recommend using it anymore. Instead, please refer to the <code>On missing data</code> option.</div>
+<div class="alert alert-warning">While the <code>Notify no data</code> option is supported by all monitor types, it is not recommend using it anymore. Instead, use the <code>On missing data</code> option if available.</div>
 
 {{< tabs >}}
 {{% tab "Notify no data" %}}
@@ -208,4 +208,3 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 [1]: /monitors/create/#monitor-types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
-[4]: /monitors/create/configuration/?tab=onmissingdata
