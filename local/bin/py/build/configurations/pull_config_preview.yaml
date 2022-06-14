@@ -744,7 +744,27 @@
               text: "Learn how to explore your RUM data"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
-              text: "Monitor your React Native applications"     
+              text: "Monitor your React Native applications"
+    - action: pull-and-push-file
+      branch: louiszawadzki/rumm-2219/write-expo-documentation
+      globs:
+      - 'docs/expo_development.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'expo.md'
+        front_matters:
+          title: Expo
+          kind: documentation
+          beta: true
+          description: "Monitor your React Native projects using Expo and Expo Go with Datadog."
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/louiszawadzki/rumm-2219/write-expo-documentation/docs/expo_development.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "GitHub"
+              text: "dd-sdk-reactnative Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
           
   - repo_name: dd-sdk-flutter
     contents:

@@ -2643,6 +2643,11 @@ main:
     parent: rum_reactnative
     identifier: rum_reactnative_mobile_vitals
     weight: 401
+  - name: Expo
+    url: real_user_monitoring/reactnative/expo/
+    parent: rum_reactnative
+    identifier: rum_reactnative_expo
+    weight: 402
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum
