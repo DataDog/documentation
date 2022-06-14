@@ -30,6 +30,7 @@ First, [install][1] Datadog serverless monitoring to begin collecting metrics, t
 
 ### APM
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
+- [Choose APM tracing sampling rates](#select-sampling-rates-for-ingesting-APM-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
 - [Disable trace collection](#disable-trace-collection)
 - [Collect the request and response payloads](#collect-the-request-and-response-payloads)
@@ -359,6 +360,12 @@ To parse and transform your logs in Datadog, see documentation for [Datadog log 
 
 To see what libraries and frameworks are automatically instrumented by the Datadog APM client, see [Compatibility Requirements for APM][15]. To instrument custom applications, see Datadog's APM guide for [custom instrumentation][16].
 
+## Select sampling rates for ingesting APM spans 
+
+To manage the [APM traced invocation sampling rate][35] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function you want to change the sampling rate for to a value between 0.000 (trace 0% of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
+
+Setting a sampling rate of 1-10% is recommended to manage usage of traced invocations from your Lambda functions.
+
 ## Filter or scrub sensitive information from traces
 
 To filter traces before sending them to Datadog, see [Ignoring Unwanted Resources in APM][17].
@@ -666,3 +673,4 @@ If you have trouble configuring your installations, set the environment variable
 [32]: /serverless/guide/extension_motivation/
 [33]: /serverless/guide#install-using-the-datadog-forwarder
 [34]: /serverless/guide/troubleshoot_serverless_monitoring/
+[35]: /tracing/trace_ingestion/ingestion_controls/#configure-the-service-ingestion-rate
