@@ -48,7 +48,7 @@ Vector integrates with Datadog and offers out-of-the-box integrations with 60 di
 
 ## Sinks 
 
-| Source Name                           | Description                                                                               |
+| Sink Name                             | Description                                                                               |
 | ------------------------------------- | ----------------------------------------------------------------------------------------- |
 | [AWS Cloudwatch logs][36]             | Publish log events to AWS Cloudwatch Logs.                                                |
 | [AWS Cloudwatch metrics][37]          | Publish metric events to AWS Cloudwatch Metrics.                                          |
