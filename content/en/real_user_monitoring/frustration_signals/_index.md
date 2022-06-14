@@ -15,7 +15,11 @@ further_reading:
 
 ## Overview
 
-Frustration signals identify the highest points of user friction in your application by surfacing moments where users exhibit moments of frustration. The [RUM Explorer][1] displays a count of frustration signals as a column in the **List** visualization. Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. 
+<div class="alert alert-warning">
+For access to frustration signals, contact <a href="/help">Datadog Support</a>.
+</div>
+
+Frustration signals identify the highest points of user friction in your application by surfacing moments where users exhibit frustration. 
 
 RUM collects three types of frustration signals:
 
@@ -45,9 +49,11 @@ Frustration signals require actions. Enabling `trackFrustrations` automatically 
 
 ## Usage
 
-Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][2]. Click **Frustrated Sessions** to access sessions with a frustration signal in the [RUM Explorer][1]. 
+Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. The [RUM Explorer][2] displays a count of frustration signals as a column in the **List** visualization. 
 
-Click **Application Overview** to explore a dashboard with additional data about your application such as performance metrics, error metrics, user analytics, and errors. The **Frustration Signals** widget displays a graph correlating frustration signals with contextual user analytics data.
+### Application list
+
+Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click **Frustrated Sessions** to access sessions with a frustration signal. 
 
 ### Explore the frustration signals dashboard
 
@@ -65,11 +71,11 @@ Frustration Type
 : Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration_type:rage_click` to the search query.
 
 Frustration Count
-: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views that had at least one frustration signal occur, add `session.frustration.count>0` or `view.frustration.count>0` to the search query.
+: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views that had at least one frustration signal occur, add `session.frustration.count:>0` or `view.frustration.count:>0` to the search query.
 
 #### Sessions
 
-Click on a session with a value in the **Frustration Count** column to examine the user frustration detected. You can see the type of signal (ranging from `rage`, `dead`, or `error`) and the event timeline that shows what occurred during the session.
+Click on a session with a value in the **Frustration Count** column to examine the user frustration detected. You can see the type of signal (ranging from `rage click`, `dead click`, or `error click`) and the event timeline that shows what occurred during the session.
 
 #### Views
 
@@ -93,7 +99,7 @@ If multiple frustration signals occur in an action, they are displayed under **W
 
 Click on an error in the **Errors** tab to open a side panel with error details. Under the **Parent hierarchy**, you can see if a frustration signal occurred next to the action.
 
-{{< img src="real_user_monitoring/frustration_signals/error_details_panel.png" alt="Error Details side panel" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/errors_tab.png" alt="Errors Tab in the Actions side panel" style="width:90%;" >}}
 
 ## Watch frustration signals in Session Replay
 
@@ -113,26 +119,30 @@ You can create monitors and set alerts on frustration signals to notify you or y
 
 For more information, see the [Real User Monitoring Monitor documentation][9].
 
-## Frequently asked questions
+## Troubleshooting
 
 ### Why is a rage click not created when a user presses a key (like Delete) on the keyboard?
 
 Frustration signals are generated from mouse clicks, not keyboard strokes. 
 
+### Why does the side panel show a session has a different number of frustration signals that in the event timeline?
+
+If a session is live, it is fetching information, and may cause the banners to reflect a different number than those in the timeline.
+
+### Can I pick and choose what signals to track?
+
+By enabling frustration signals, Datadog collects all three signal types by default. Contact your [Customer Success Manager][10] for more information.
+
 <div class="alert alert-warning">
 To provide feedback or submit a feature request, contact <a href="/help/">Datadog Support</a>.
 </div>
-
-###  Why does the side panel show a session has a different number of frustration signals that in the event timeline?
-
-To be answered.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/
-[2]: https://app.datadoghq.com/rum/list
+[1]: https://app.datadoghq.com/rum/list
+[2]: /real_user_monitoring/explorer/
 [3]: /real_user_monitoring/dashboards/frustration_signals_dashboard/
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /dashboards/
@@ -140,3 +150,4 @@ To be answered.
 [7]: https://app.datadoghq.com/rum/replay/sessions/
 [8]: /real_user_monitoring/session_replay/
 [9]: /monitors/create/types/real_user_monitoring/
+[10]: mailto:success@datadoghq.com

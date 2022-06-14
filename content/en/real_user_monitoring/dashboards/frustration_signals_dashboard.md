@@ -12,9 +12,13 @@ further_reading:
 
 ## Overview
 
-The frustration signals dashboard provides insight into areas where users experience the most friction in your application. It is separated in [TBD] sections:
+The frustration signals dashboard provides insight into areas where users experience the most friction in your application. It is separated into three sections by signal type:
 
-// Insert dashboard screenshot here
+- **Rage clicks**: Measures when a user clicks the same button more than three times in a one second sliding window.
+- **Error clicks**: Measures when a user clicks on a static element thinking it is interactive.
+- **Dead clicks**: Measures when a user clicks an element and encounters a JavaScript error.
+
+{{< img src="real_user_monitoring/dashboards/frustration_signals_ootb_dashboard.png" alt="Frustration signals dashboard" style="width:100%;" >}}
 
 For more information about the information displayed, see [RUM Browser Data Collected][1].
 
