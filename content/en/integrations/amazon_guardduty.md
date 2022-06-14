@@ -50,7 +50,7 @@ Datadog integrates with AWS GuardDuty through a Lambda function that ships Guard
 
 3. Under the **Configuration** tab, click `Add trigger`. Select **EventBridge (CloudWatch Events)** from the dropdown menu, and specify the rule created in the [enable logging section](#enable-logging).
 
-3. Once complete, see the [Datadog Log section][3] to start exploring your logs.
+4. See any new GuardDuty Findings in the [Datadog Log section][3].
 
 [1]: /logs/guide/forwarder/
 [2]: https://docs.aws.amazon.com/eventbridge/index.html
