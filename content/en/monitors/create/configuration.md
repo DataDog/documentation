@@ -123,10 +123,8 @@ See the documentation for [process check][1], [integration check][2], and [custo
 Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. The sections below explain how to accomplish this with each option.
 
 There are currently two ways to deal with missing data:
-- Using the limited `Notify no data` option which is supported by all monitor types
-- Using the newer `On missing data` option which is supoprted by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM Monitors
-
-<div class="alert alert-warning">While the <code>Notify no data</code> option is supported by all monitor types, it is not recommend using it anymore. Instead, use the <code>On missing data</code> option if available.</div>
+- Metric based monitors use the limited `Notify no data` option
+- The `On missing data` option is supoprted by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM Monitors
 
 {{< tabs >}}
 {{% tab "Metric based monitors" %}}
