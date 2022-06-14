@@ -4931,8 +4931,7 @@ api:
         - v2
       operationids:
         - SearchSecurityMonitoringSignals
-      unstable:
-        - v2
+      unstable: []
       order: 6
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
@@ -4944,8 +4943,7 @@ api:
         - v2
       operationids:
         - ListSecurityMonitoringSignals
-      unstable:
-        - v2
+      unstable: []
       order: 7
   - name: Update an existing rule
     url: '#update-an-existing-rule'
