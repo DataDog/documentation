@@ -84,7 +84,7 @@ spec:
 # (...)
 ```
 
-`init_config` is usually an empty `{}`, and with AD Annotations v2 it became optional.
+`init_config` is usually an empty `{}`. In AD Annotations v2, it is optional.
 
 To apply two different integration templates to two different containers: `<CONTAINER_IDENTIFIER_1>` and `<CONTAINER_IDENTIFIER_2>` within your pod, add the following annotations to your pod:
 
@@ -323,7 +323,7 @@ See [Autodiscovery Container Identifiers][2] for information on the `<INTEGRATIO
 
 ### Tolerate unready pods
 
-By default, `unready` pods are ignored when the Datadog Agent schedules checks, so metrics, service checks, and logs are not collected from these pods. To override this behavior, set the annotation `ad.datadoghq.com/tolerate-unready` to `"true"`. For example:
+By default, `unready` pods are ignored when the Datadog Agent schedules checks. Therefore, metrics, service checks, and logs are not collected from these pods. To override this behavior, set the annotation `ad.datadoghq.com/tolerate-unready` to `"true"`. For example:
 
 ```yaml
 apiVersion: v1
