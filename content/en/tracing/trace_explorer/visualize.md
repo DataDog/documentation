@@ -16,17 +16,15 @@ Visualizations define how the queried span data is displayed. Select relevant vi
 
 The list view displays a list of spans that match the selected context, defined by the [search bar query][1] filter and a [time range][2].
 
-In the **Show** row, choose which information of interest to display as columns. Manage the columns by either:
+In the table, choose which information of interest to display as columns. Manage the columns by either:
 
 - interacting with the table header row to **sort**, **rearrange**, or **remove** columns.
 - selecting a facet from the facet panel on the left, or from the trace side panel after clicking on a specific span, to **add** a column for a field. You can also add columns from with the **Options** button.
 
 {{< img src="tracing/trace_explorer/visualize/list_view_table_controls.mp4" alt="Configuring the display table" video=true style="width:80%;">}}
 
-{{< site-region region="us,eu,us3,us5,gov" >}}
 The default sort for spans in the list visualization is by timestamp, with the most recent spans on top. To surface spans with lowest or highest value for a measure first, or to sort your spans lexicographically for the value of a tag, specify that column as the **by** column.
 
-{{< /site-region >}}
 
 The configuration of the columns is stored alongside other elements of your troubleshooting context in saved views.
 
