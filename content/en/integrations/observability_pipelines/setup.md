@@ -29,12 +29,14 @@ To set up Observability Pipelines, first [install Vector](#install-vector) and [
 
 ### Quick start
 
+#### Terminal
 Run the following OS-agnostic command in the terminal, which guides you through setting up Vector:
 
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://sh.vector.dev | bash
 ```
 
+#### Containers
 For containerized production environments, run the following command to download and install Vector:
 
 ```
