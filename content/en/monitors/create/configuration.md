@@ -129,7 +129,7 @@ There are currently two ways to deal with missing data:
 <div class="alert alert-warning">While the <code>Notify no data</code> option is supported by all monitor types, it is not recommend using it anymore. Instead, use the <code>On missing data</code> option if available.</div>
 
 {{< tabs >}}
-{{% tab "Notify no data" %}}
+{{% tab "Metric based monitors" %}}
 
 `Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
 
@@ -145,7 +145,9 @@ For a monitor that does not notify on missing data, if a group does not report d
 
 {{% /tab %}}
 
-{{% tab "On missing data" %}}
+{{% tab "Other monitor types" %}}
+
+{{< img src="/monitors/create/on_missing_data.png" alt="No Data Options" style="width:90%;">}}
 
 If data is missing for `N` minutes: `Evaluate as zero` / `Show last known status`, `Show NO DATA`, `Show NO DATA and notify`, or `Show OK`.
 
@@ -184,7 +186,7 @@ Typical use cases for defining a retention time are:
 - you would like to drop the group immediately/shortly after data stops reporting
 - you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: This option is only available for multi-alert monitors as simple-alert monitors do not have groups.
+**Note**: This option is only available for multi-alert monitors and works with the [`On missing data`][4] option mentioned above.
 
 #### New group delay
 
@@ -208,3 +210,4 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 [1]: /monitors/create/#monitor-types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
+[4]: /monitors/create/configuration/?tab=othermonitortypes
