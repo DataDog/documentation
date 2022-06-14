@@ -15,7 +15,7 @@ further_reading:
 If you are unable to download applications directly from the Chrome Web Store because of security reasons, leverage Datadog's extension detection system, available for the Datadog Synthetics Chrome Extension v3.1.6+, to record Synthetic browser tests.
 
 1. Download the Datadog test recorder extension's [latest CRX file][5].
-2. Upload this CRX file to your internal application store and repackage it. Your new extension's icon appears in the Chrome browser next to your extensions.
+2. Upload this CRX file to your internal application store and repackage the extension. The new extension's icon appears in the Chrome browser next to your extensions.
   
    {{< img src="synthetics/guide/manually_adding_chrome_extension/icon.png" alt="the icon that appears in your browser" style="width:100%;" >}}
 

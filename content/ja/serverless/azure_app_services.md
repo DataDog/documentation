@@ -121,7 +121,7 @@ Azure App Service の拡張機能には、[DogStatsD][8] (Datadog のメトリ�
 Azure App Service でカスタムメトリクスおよびチェックを書き込むことは、Datadog Agent が実行されているホスト上のアプリケーションでそれを実行するプロセスと同様です。拡張機能を使用して Azure App Service から Datadog へカスタムメトリクスを送信するには、以下を実行します。
 
 1. [DogStatsD NuGet パッケージ][9]を Visual Studio プロジェクトに追加します。
-2. アプリケーション内で DogStatdD を初期化し、カスタムメトリクスを作成します。
+2. アプリケーション内で DogStatsD を初期化し、カスタムメトリクスを作成します。
 3. Azure App Service にコードをデプロイします。
 4. Datadog App Service 拡張機能をインストールします。
 

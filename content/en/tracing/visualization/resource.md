@@ -59,6 +59,20 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 {{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector"  style="width:50%;">}}
 
+## Dependency Map
+
+You can also view a map of all of a resource’s upstream and downstream service dependencies. With the Dependency Map, you can quickly see the flow of services with spans that go through the specific resource (such as endpoints or database queries) end-to-end.
+
+{{<img alt="resource dependency map" src="tracing/visualization/resource/resource_dependency_map.png" style="width:100%;">}}
+
+Hover over a node to view metrics of each service including requests/second, error rate, and average latency.
+
+The highlight color of the node indicates the service’s [monitor status][8]. If a service has more than one configured monitor, the status of the most severe monitor is shown.
+
+{{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" video="true" alt="hovering and clicking a resource dependency map node" style="width:100%;">}}
+
+Click on a node to open a context menu with options to view the Service Page, related traces, and more.
+
 ## Span summary
 
 For a given resource, Datadog provides you a [span][5] analysis breakdown of all matching traces:
@@ -98,3 +112,4 @@ Consult the list of [traces][6] associated with this resource in the [Trace sear
 [5]: /tracing/visualization/#spans
 [6]: /tracing/visualization/trace/
 [7]: /tracing/search/
+[8]: /monitors/manage/status/

@@ -27,7 +27,7 @@ Having network-related specifics (thanks to your test) as well as backend, infra
 
 ## Usage
 
-Statements on this page apply to both [API][1] and [browser tests][2] for APM except where noted.
+Statements on this page apply to [HTTP API tests][20], [Multistep API tests][21], and [browser tests][2] for APM.
 
 ### Prerequisites
 
@@ -109,3 +109,6 @@ These traces are retained [just like your classical APM traces][19].
 [17]: /tracing/setup_overview/setup/dotnet-core/
 [18]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [19]: /tracing/trace_retention/
+[20]: /synthetics/api_tests/http_tests/?tab=requestoptions
+[21]: /synthetics/multistep?tab=requestoptions
+
