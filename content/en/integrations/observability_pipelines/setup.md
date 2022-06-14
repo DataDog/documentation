@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines connects to the open-source [Vector][1] project to help you manage and monitor the flow of logs, metrics and traces throughout your infrastructure.
+Observability Pipelines connects to the open-source [Vector][1] project to help you manage and monitor the flow of logs, metrics, and traces throughout your infrastructure.
 
 To set up Observability Pipelines, first [install Vector](#install-vector) and [set up Vector configurations](#set-up-vector-configurations), then [connect your Vector configurations to Observability Pipelines](#connect-vector-to-observability-pipelines) using your Datadog API.
 
@@ -60,7 +60,7 @@ Vector supports a wide variety of package managers across several operating syst
 
 ### Specific platforms and operating systems
 
-Many users choose to [install Vector on their Kubernetes platform][10], but Vector can be installed on any of the following platform and operating systems:
+Many users choose to [install Vector on their Kubernetes platform][10], but Vector can be installed on any of the following platforms and operating systems:
 
 - [Docker][11]
 - [Kubernetes][10]
