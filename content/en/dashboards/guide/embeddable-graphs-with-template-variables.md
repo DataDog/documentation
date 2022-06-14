@@ -1,8 +1,9 @@
 ---
 title: Embeddable Graphs with Template Variables
-kind: faq
+kind: guide
 aliases:
     - /graphing/faq/embeddable-graphs-with-template-variables
+    - /dashboards/faq/embeddable-graphs-with-template-variables/
 further_reading:
 - link: "/dashboards/sharing/"
   tag: "Documentation"
@@ -64,7 +65,7 @@ Display the embed graph on a website by using the HTML in the response object. N
 
 **Example embed**:
 
-{{< img src="dashboards/faq/embeddable_graph01.png" alt="Embed Graph with No Filter" >}}
+{{< img src="dashboards/guide/embeddable_graph01.png" alt="Embed Graph with No Filter" >}}
 
 Use the template variable to change the graph by updating the iframe URL to define a filter. In the HTML below, `*` is replaced with `host:embed-graph-test`.
 
@@ -74,7 +75,7 @@ Use the template variable to change the graph by updating the iframe URL to defi
 
 **Example embed**:
 
-{{< img src="dashboards/faq/embeddable_graph02.png" alt="Embed Graph with Filter" >}}
+{{< img src="dashboards/guide/embeddable_graph02.png" alt="Embed Graph with Filter" >}}
 
 ## Further Reading
 
