@@ -76,7 +76,7 @@ The [**OAuth Apps**][9] page allows you to view or manage OAuth applications in 
 
 #### Rename organization
 
-To rename your organization, click the **Rename organization** tab, enter the new name, then click **Save**.
+To rename your organization, select **Preferences** from the **General** section of the menu.
 
 **Note: Your organization name may not exceed 32 characters.**
 
