@@ -1,36 +1,34 @@
 ---
-title: Générer des métriques à partir de spans
-kind: documentation
-description: Générez des métriques custom à partir des spans ingérées.
 aliases:
-  - /fr/tracing/span_to_metrics/
+- /fr/tracing/span_to_metrics/
+description: Générez des métriques custom à partir des spans ingérées.
 further_reading:
-  - link: tracing/trace_retention_and_ingestion
-    tag: Documentation
-    text: Personnalisez l'ingestion de traces et conservez les traces importantes.
-  - link: tracing/trace_search_and_analytics/query_syntax
-    tag: Documentation
-    text: Utilisez des requêtes et des monitors Analytics basés sur les traces conservées.
+- link: tracing/trace_retention_and_ingestion
+  tag: Documentation
+  text: Personnalisez l'ingestion de traces et conservez les traces importantes.
+- link: tracing/trace_search_and_analytics/query_syntax
+  tag: Documentation
+  text: Utilisez des requêtes et des monitors Analytics basés sur les traces conservées.
+kind: documentation
+title: Générer des métriques à partir de spans
 ---
 
 ## Générer des métriques basées sur des spans
 
-Avec Tracing without Limits™, vous pouvez générer des métriques à partir de toutes les spans ingérées, qu'elles soient ou non indexées par un [filtre de rétention][1].
+Générez des métriques à partir de toutes les spans ingérées, qu'elles soient ou non indexées par un [filtre de rétention][1].
 
-Vous pouvez associer ces métriques à des filtres de rétention et des monitors Analytics, ou les utiliser seules.
-
-Utilisez des métriques custom pour des comparaisons et des requêtes fixes spécifiques. Parallèlement, vous pouvez créer des filtres de rétention afin de concevoir des requêtes arbitraires et d'examiner les traces conservées et de leur flamegraph.
+Utilisez des métriques custom pour des comparaisons et des requêtes fixes spécifiques. Parallèlement, vous pouvez créer des filtres de rétention afin de concevoir des requêtes arbitraires et d'examiner les traces conservées ainsi que leur flamegraph.
 
 **Remarque concernant la facturation :** les métriques créées à partir des spans ingérées sont facturées comme des [métriques custom][2].
 
 Les métriques custom vous permettent notamment de visualiser des anomalies, de créer des dashboards et monitors et d'observer des tendances en fonction de différents paramètres importants pour votre contexte métier. Toutes les métriques générées sont disponibles pendant 15 mois sous la forme de [métriques custom][3] Datadog.
 
-| Motif                        | Métriques custom générées à partir de spans                   | Filtres de rétention                           |
+| Raison                        | Métriques custom générées à partir de spans                   | Filtres de rétention                           |
 | -------------------------------------- | -------------------------------------- | --------------------------------- |
 | Période de rétention                     | 15 mois                    | 15 jours             |
-| Détection d'anomalies                           | Créez un [monitor d'anomalies][4] basé sur les métriques générées.                            | Utilisez Analytics pour comparer les comportements au cours des 15 derniers jours, et plongez au cœur des traces complètes pour identifier l'origine des anomalies.                         |
+| Détection d'anomalies                           | Créez un [monitor d'anomalie][4] basé sur les métriques générées.                            | Utilisez Analytics pour comparer les comportements au cours des 15 derniers jours, et consultez des traces complètes pour identifier l'origine des anomalies.                         |
 | Examen des traces correspondantes avec un contexte global                          | S. O. : les métriques custom n'entraînent pas la conservation des traces associées.                            | Conservez exactement les traces pertinentes pour votre contexte métier grâce aux [filtres de rétention][1].                            |
-| Granularité du comportement                           | Créez des métriques custom pour les endpoints importants ou pour d'autres groupes à faible cardinalité.                        | Utilisez la fonctionnalité [Analyse et recherche de traces][5] pour des endpoints spécifiques ou l'option « Group By » dans [Analytics][6].                    |
+| Granularité du comportement                           | Créez des métriques custom pour les endpoints importants ou pour d'autres groupes à faible cardinalité.                        | Utilisez le [Trace Explorer][5] pour des endpoints spécifiques ou l'option « Group By » dans [Analytics][6].                    |
 | Prévisions ou calculs mathématiques complexes                          | Créez un [monitor Forecast][7] basé sur les métriques générées.                          |   S. O.                            |
 
 Pour générer des métriques à partir de spans, depuis la page [APM Setup and Configuration][8], sélectionnez l'onglet [Generate Metrics][9] et cliquez sur le bouton **New Metric**.
@@ -62,7 +60,7 @@ Pour générer des métriques à partir de spans, depuis la page [APM Setup and 
 
 Lorsqu'une métrique est créée, seuls deux champs peuvent être mis à jour :
 
-| Champ                                 | Motif                                                                                                             |
+| Champ                                 | Raison                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | Requête de filtre de flux                  | Modifier l'ensemble de spans correspondantes à agréger pour générer les métriques.            |
 | Groupes d'agrégation             | Modifier les tags pour gérer la cardinalité des métriques générées.                                                     |
@@ -77,11 +75,11 @@ Lorsqu'une métrique est créée, seuls deux champs peuvent être mis à jour :
 [1]: /fr/tracing/trace_retention_and_ingestion
 [2]: /fr/account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/fr/metrics/#overview
-[4]: /fr/monitors/monitor_types/anomaly/#overview
-[5]: /fr/tracing/trace_search_and_analytics/
-[6]: /fr/tracing/trace_search_and_analytics/query_syntax/#analytics-query
-[7]: /fr/monitors/monitor_types/forecasts/
+[4]: /fr/monitors/create/types/anomaly/#overview
+[5]: /fr/tracing/trace_explorer/
+[6]: /fr/tracing/trace_explorer/query_syntax/#analytics-query
+[7]: /fr/monitors/create/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
-[10]: /fr/tracing/trace_search_and_analytics/query_syntax/
+[10]: /fr/tracing/trace_explorer/query_syntax/
 [11]: /fr/metrics/#naming-metrics

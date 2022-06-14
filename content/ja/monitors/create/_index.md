@@ -38,7 +38,7 @@ Datadog でモニターを作成するには
 {{< nextlink href="/monitors/create/types/anomaly" >}}<u>Anomaly</u>: 過去のデータに基づいて、メトリクスの異常な動作を検出します。{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/apm" >}}<u>APM</u>:APM メトリクスの監視やクエリのトレースを行います。{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/audit_logs" >}}<u>Audit Logs</u>: 指定した種類の監査ログが、一定期間内にユーザー定義のしきい値を超えた場合にアラートを発します。{{< /nextlink >}}
-{{< nextlink href="/monitors/create/types/ci_pipelines" >}}<u>CI Pipelines</u>: Datadog で収集した CI パイプラインのデータを監視します。{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/ci" >}}<u>CI</u>: Datadog で収集した CI パイプラインとテストのデータを監視します。{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/composite" >}}<u>Composite</u>: 複数のモニターを組み合わせた式でアラートを発します。{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/custom_check" >}}<u>Custom Check</u>: 任意のカスタムチェックのステータスを監視します。{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/error_tracking" >}}<u>Error Tracking</u>: Datadog で収集したアプリケーションの問題を監視します。{{< /nextlink >}}
