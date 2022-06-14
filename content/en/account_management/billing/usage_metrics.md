@@ -24,8 +24,8 @@ Estimated usage metrics are generally available for the following usage types:
 |-------------------------------|------------------------------------------|
 | Infrastructure Hosts          | `datadog.estimated_usage.hosts`          |
 | Containers                    | `datadog.estimated_usage.containers`     |
-| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_tag`, `datadog.estimated_usage.metrics.custom.by_metric` |
-| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_tag`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` |
+| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` |
+| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes`    |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events`   |
 | Analyzed Logs (security)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes`   |
