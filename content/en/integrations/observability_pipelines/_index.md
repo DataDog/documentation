@@ -26,13 +26,13 @@ further_reading:
 
 ## What is Observability Pipelines?
 
-Observability Pipelines is a monitoring solution built on [Vector][1], an open source tool that enables you to monitor and manage all of your telemetry pipelines at scale. Vector can be deployed as an agent or an aggregator within your infrastructure to collect, transform, and route all of your logs, metrics, and traces to any destination. 
+Observability Pipelines is a monitoring solution built on [Vector][1], an open source tool that enables you to monitor and manage all of your telemetry pipelines at scale. Vector is deployed as an aggregator within your infrastructure to collect, transform, and route all of your logs, metrics, and traces to any destination.
 
 Add your Datadog API key to your Vector configuration to connect it to Observability Pipelines. Use Observability Pipelines to monitor your Vector pipelines and identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more. 
 
 With Observability Pipelines, you can also:
 
-- Control your data volume before routing them to manage costs.
+- Control your data volume before routing to manage costs.
 - Route data anywhere to reduce lock-in and simplify migrations.
 - Meet residency requirements and redact sensitive data to stay more compliant.
 - Enrich, structure, and transform your events to make them more useful.
@@ -41,15 +41,15 @@ Build performant and reliable data pipelines with complete visibility and simpli
 
 ## Get started
 
-- [Install Vector][2] using the quick start method, your preferred package manager, or based on your specific platform or operating system.
-- [Set up Vector configurations][3] to collect, transform and route your data.
-- [Connect Vector to Observability Pipelines][4] with your Datadog API.
+1. [Install Vector][2] using the quick start method, your preferred package manager, or based on your specific platform or operating system.
+2. [Set up Vector configurations][3] to collect, transform and route your data.
+3. [Connect Vector to Observability Pipelines][4] with your Datadog API.
 
 ## Explore Observability Pipelines
 
 Now that you are sending configuration data to Observability Pipelines, start getting insights into your Vector pipelines:
 
-### Monitor the entire health of your Vector pipelines
+### Monitor the health of your Vector pipelines
 
 Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows. 
 

@@ -20,7 +20,7 @@ Vector integrates with Datadog and offers out-of-the-box integrations with 60 di
 | [dnstap][8]                   | Collect DNS logs from a dnstap-compatible server.                                                     |
 | [Docker logs][9]              | Collect logs from Docker.                                                                             |
 | [EventStoreDB][10]            | Receive metrics from collected by a EventStoreDB.                                                     |
-| [Exec][11]                    | Collect output from a process running on the host                                                     |
+| [Exec][11]                    | Collect output from a process running on the host.                                                     |
 | [File][12]                    | Collect logs from files.                                                                              |
 | [Fluent][13]                  | Collect logs from a Fluentd or Fluent Bit agent.                                                      |
 | [Heroku Logplex][14]          | Collect logs from Heroku’s Logplex, the router responsible for receiving logs from your Heroku apps.  |
