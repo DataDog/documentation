@@ -83,30 +83,50 @@ The Agent samples host data  every 15 seconds to provide a more accurate underst
 
 ## Setup
 
-If you haven't already, create a [Datadog account][17].
+### Prerequisites
+
+1. Create a [Datadog account][17].
+2. You will need access to your [Datadog API key][18].
+3. Set up a [Vagrant Ubuntu 16.04 virtual machine][19] using the following commands. For more information about Vagrant, see their [Getting Started][20] page. 
+
+**Note** This step is optional, you can use any other platforms listed in the [Basic Agent Usage][21] page. This walkthrough will be using the Ubuntu platform.
+
+```text
+vagrant init ubuntu/xenial64
+vagrant up
+vagrant ssh
+```
+
+To install the Datadog Agent on a host, use the [one line install command][6] updated with your [Datadog API key][7]:
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
 
 ### Installation
 
-The Agent can be installed on many different platforms either directly on the host or as a [containerized version][18]. Most systems have a one-line install option.
+<!-- The Agent can be installed on many different platforms either directly on the host or as a [containerized version][22]. Most systems have a one-line install option.
 
-{{< partial name="platforms/platforms.html" desc="Choose your platform to see installation instructions:" links="gs" >}}
+{{< partial name="platforms/platforms.html" desc="Choose your platform to see installation instructions:" links="gs" >}} -->
+
+Within the Datadog UI, go to the [Agent Installation Page][23] for Ubuntu, **Integrations > Agent** 
 
 ### Configuration
 
-The Agent's [main configuration file][19] is `datadog.yaml`. The required parameters are your [Datadog API key][20] which is used to associate your Agent's data with your organization and the Datadog site ({{< region-param key="dd_site" code="true" >}}). See the [sample config_template.yaml][21] for all available configuration options.
+The Agent's [main configuration file][24] is `datadog.yaml`. The required parameters are your [Datadog API key][18] which is used to associate your Agent's data with your organization and the Datadog site ({{< region-param key="dd_site" code="true" >}}). See the [sample config_template.yaml][25] for all available configuration options.
 
-For the [container Agent][18], `datadog.yaml` configuration options are passed in with [environment variables][15], for example:
+For the [container Agent][22], `datadog.yaml` configuration options are passed in with [environment variables][15], for example:
 
 - `DD_API_KEY` for the Datadog API key
 - `DD_SITE` for the Datadog site
 
 ### Validation
 
-Run the Agent's [status command][22] to verify installation.
+Run the Agent's [status command][26] to verify installation.
 
 ### Commands
 
-See [Agent Commands][23] to [Start][24], [Stop][25] or [Restart][26] your Agent.
+See [Agent Commands][27] to [Start][28], [Stop][29] or [Restart][30] your Agent.
 
 
 ### Events
@@ -125,9 +145,9 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 For help troubleshooting the Agent:
 
-- See [Agent Troubleshooting][27]
-- View the [Agent Log Files][28]
-- Contact [Datadog support][29]
+- See [Agent Troubleshooting][31]
+- View the [Agent Log Files][32]
+- Contact [Datadog support][33]
 
 ## Further Reading
 
@@ -159,15 +179,19 @@ For help troubleshooting the Agent:
 [15]: /agent/guide/environment-variables/#overview
 [16]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [17]: https://www.datadoghq.com
-[18]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
-[19]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[20]: https://app.datadoghq.com/organization-settings/api-keys
-[21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[22]: /agent/guide/agent-commands/#agent-status-and-information
-[23]: /agent/guide/agent-commands/
-[24]: /agent/guide/agent-commands/#start-the-agent
-[25]: /agent/guide/agent-commands/#stop-the-agent
-[26]: /agent/guide/agent-commands/#restart-the-agent
-[27]: /agent/troubleshooting/
-[28]: /agent/guide/agent-log-files/
-[29]: /help/
+[18]: https://app.datadoghq.com/organization-settings/api-keys
+[19]: https://app.vagrantup.com/ubuntu/boxes/xenial64
+[20]: https://www.vagrantup.com/intro/getting-started
+[21]: /agent/basic_agent_usage/?tab=agentv6v7
+[22]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
+[23]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[24]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[25]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[26]: /agent/guide/agent-commands/#agent-status-and-information
+[27]: /agent/guide/agent-commands/
+[28]: /agent/guide/agent-commands/#start-the-agent
+[29]: /agent/guide/agent-commands/#stop-the-agent
+[30]: /agent/guide/agent-commands/#restart-the-agent
+[31]: /agent/troubleshooting/
+[32]: /agent/guide/agent-log-files/
+[33]: /help/
