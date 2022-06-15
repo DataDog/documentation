@@ -1,5 +1,5 @@
 ---
-title: Upload Javascript source maps
+title: Upload JavaScript source maps
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/error_tracking'
@@ -75,7 +75,7 @@ See the following example:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the 50MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>).</div>
+<div class="alert alert-warning">If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the 50MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.</div>
 
 ## Upload your source maps
 
@@ -117,17 +117,19 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 To minimize overhead on your CI's performance, the CLI is optimized to upload as many source maps as you need in a short amount of time (typically a few seconds).
 
-The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events. For more information on how to setup these tags, refer to the [Browser SDK initialization documentation][2]. The sourcemaps that have been uploaded will then be used to de-obfuscate errors collected by the RUM SDK.
+The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events. For more information on how to setup these tags, refer to the [Browser SDK initialization documentation][2]. The uploaded sourcemaps are used to de-obfuscate errors collected by the RUM Browser SDK.
+
+<div class="alert alert-info">If you have defined multiple services in your RUM application, run the CI command as many times as you need for your services, even if you have one set of sourcemaps for the RUM application.</div>
 
 By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the Javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
-**Note**: Only source maps with the `.js.map` extension work to correctly unminify stack traces in Error Tracking. Source maps with other extensions such as `.mjs.map` are accepted but do not unminify stack traces.
+Only source maps with the `.js.map` extension work to correctly unminify stack traces in Error Tracking. Source maps with other extensions such as `.mjs.map` are accepted but do not unminify stack traces.
 
-<div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).</div>
+<div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>.</div>
 
 ### Link stack frames to your source code
 
-If you run `datadog-ci sourcemaps upload` within a Git working directory, Datadog will collect repository metadata. The `datadog-ci` command collects the repository URL, the current commit hash, and the list of file paths in the repository that relate to your source maps. For more details about Git metadata collection, refer to the [datadog-ci documentation][3].
+If you run `datadog-ci sourcemaps upload` within a Git working directory, Datadog can collect repository metadata. The `datadog-ci` command collects the repository URL, the current commit hash, and the list of file paths in the repository that relate to your source maps. For more details about Git metadata collection, refer to the [datadog-ci documentation][3].
 
 Datadog displays links to your source code on unminified stack frames.
 
