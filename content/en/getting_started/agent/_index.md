@@ -12,9 +12,20 @@ further_reading:
       text: 'Why should I install the Datadog Agent on my cloud instances?'
 ---
 
+This guide provides an overview of the Agent and how you can use it to pull system level metrics into the Datadog Platform. It also provides a walkthrough of an example Agent installation on an Ubuntu environment covering:
+- Agent Installation
+- Verifying the Agent is running
+- Useful Agent Commands
+- Troubleshooting 
+
 ## Overview
 
-The Agent is lightweight software installed on your hosts. It reports metrics and events from your host to Datadog using [integrations][1], [DogStatsD][2], or the [API][3]. With additional setup, the Agent can report [live processes][4], [logs][5], and [traces][6].
+### About the Agent
+
+<!-- The Agent is software installed on your hosts. It reports metrics and events from your host to Datadog using [integrations][1], [DogStatsD][2], or the [API][3]. With additional setup, the Agent can report [live processes][4], [logs][5], and [traces][6]. -->
+
+The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
+
 
 ## Setup
 
