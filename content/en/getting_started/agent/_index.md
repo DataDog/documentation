@@ -24,35 +24,7 @@ This guide provides an overview of the Agent and how you can use it to pull syst
 
 <!-- The Agent is software installed on your hosts. It reports metrics and events from your host to Datadog using [integrations][1], [DogStatsD][2], or the [API][3]. With additional setup, the Agent can report [live processes][4], [logs][5], and [traces][6]. -->
 
-The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
-
-
-## Setup
-
-If you haven't already, create a [Datadog account][7].
-
-### Installation
-
-The Agent can be installed on many different platforms either directly on the host or as a [containerized version][8]. Most systems have a one-line install option.
-
-{{< partial name="platforms/platforms.html" desc="Choose your platform to see installation instructions:" links="gs" >}}
-
-### Configuration
-
-The Agent's [main configuration file][9] is `datadog.yaml`. The required parameters are your [Datadog API key][10] which is used to associate your Agent's data with your organization and the Datadog site ({{< region-param key="dd_site" code="true" >}}). See the [sample config_template.yaml][11] for all available configuration options.
-
-For the [container Agent][8], `datadog.yaml` configuration options are passed in with [environment variables][12], for example:
-
-- `DD_API_KEY` for the Datadog API key
-- `DD_SITE` for the Datadog site
-
-### Validation
-
-Run the Agent's [status command][13] to verify installation.
-
-### Commands
-
-See [Agent Commands][14] to [Start][15], [Stop][16] or [Restart][17] your Agent.
+The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. It can run on your local hosts (Windows, MacOS), containerized environments (Docker, Kubernetes), on premises data centers, and supports configuration management tools (Chef, Puppet, Ansible). The Agent is able to collect 75-100 system level metrics every 15-20 seconds providing a high resolution . With additional setup, the Agent can report live processes, logs, and traces. The Datadog Agent is open source and its source code is available on GitHub at DataDog/datadog-agent.
 
 ## Data Collected
 
@@ -60,7 +32,7 @@ See [Agent Commands][14] to [Start][15], [Stop][16] or [Restart][17] your Agent.
 
 #### Agent
 
-The metrics below are available with Agent v6. For Agent v5, see the [Agent Metrics][18] integration.
+The metrics below are available with Agent v6. For Agent v5, see the [Agent Metrics][7] integration.
 
 | Metric                           | Description                                                                                                          |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -74,19 +46,47 @@ Depending on your platform, the Agent has several core checks enabled by default
 
 | Check       | Metrics       | Platforms          |
 | ----------- | ------------- | ------------------ |
-| CPU         | [System][19]  | All                |
-| Disk        | [Disk][20]    | All                |
-| Docker      | [Docker][21]  | Docker             |
-| File Handle | [System][19]  | All except Mac     |
-| IO          | [System][19]  | All                |
-| Load        | [System][19]  | All except Windows |
-| Memory      | [System][19]  | All                |
-| Network     | [Network][22] | All                |
-| NTP         | [NTP][23]     | All                |
-| Uptime      | [System][19]  | All                |
-| Winproc     | [System][19]  | Windows            |
+| CPU         | [System][8]  | All                |
+| Disk        | [Disk][9]    | All                |
+| Docker      | [Docker][10]  | Docker             |
+| File Handle | [System][8]  | All except Mac     |
+| IO          | [System][8]  | All                |
+| Load        | [System][8]  | All except Windows |
+| Memory      | [System][8]  | All                |
+| Network     | [Network][11] | All                |
+| NTP         | [NTP][12]     | All                |
+| Uptime      | [System][8]  | All                |
+| Winproc     | [System][8]  | Windows            |
 
-To collect metrics from other technologies, see the [Integrations][24] page.
+To collect metrics from other technologies, see the [Integrations][13] page.
+
+## Setup
+
+If you haven't already, create a [Datadog account][14].
+
+### Installation
+
+The Agent can be installed on many different platforms either directly on the host or as a [containerized version][15]. Most systems have a one-line install option.
+
+{{< partial name="platforms/platforms.html" desc="Choose your platform to see installation instructions:" links="gs" >}}
+
+### Configuration
+
+The Agent's [main configuration file][16] is `datadog.yaml`. The required parameters are your [Datadog API key][17] which is used to associate your Agent's data with your organization and the Datadog site ({{< region-param key="dd_site" code="true" >}}). See the [sample config_template.yaml][18] for all available configuration options.
+
+For the [container Agent][15], `datadog.yaml` configuration options are passed in with [environment variables][19], for example:
+
+- `DD_API_KEY` for the Datadog API key
+- `DD_SITE` for the Datadog site
+
+### Validation
+
+Run the Agent's [status command][20] to verify installation.
+
+### Commands
+
+See [Agent Commands][21] to [Start][22], [Stop][23] or [Restart][24] your Agent.
+
 
 ### Events
 
@@ -127,24 +127,24 @@ For help troubleshooting the Agent:
 [4]: /infrastructure/process/
 [5]: /logs/
 [6]: /tracing/
-[7]: https://www.datadoghq.com
-[8]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
-[9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[10]: https://app.datadoghq.com/organization-settings/api-keys
-[11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[12]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent#environment-variables
-[13]: /agent/guide/agent-commands/#agent-status-and-information
-[14]: /agent/guide/agent-commands/
-[15]: /agent/guide/agent-commands/#start-the-agent
-[16]: /agent/guide/agent-commands/#stop-the-agent
-[17]: /agent/guide/agent-commands/#restart-the-agent
-[18]: /integrations/agent_metrics/
-[19]: /integrations/system/#metrics
-[20]: /integrations/disk/#metrics
-[21]: /agent/docker/data_collected/#metrics
-[22]: /integrations/network/#metrics
-[23]: /integrations/ntp/#metrics
-[24]: /getting_started/integrations/
+[7]: /integrations/agent_metrics/
+[8]: /integrations/system/#metrics
+[9]: /integrations/disk/#metrics
+[10]: /agent/docker/data_collected/#metrics
+[11]: /integrations/network/#metrics
+[12]: /integrations/ntp/#metrics
+[13]: /getting_started/integrations/
+[14]: https://www.datadoghq.com
+[15]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
+[16]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[17]: https://app.datadoghq.com/organization-settings/api-keys
+[18]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[19]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent#environment-variables
+[20]: /agent/guide/agent-commands/#agent-status-and-information
+[21]: /agent/guide/agent-commands/
+[22]: /agent/guide/agent-commands/#start-the-agent
+[23]: /agent/guide/agent-commands/#stop-the-agent
+[24]: /agent/guide/agent-commands/#restart-the-agent
 [25]: /agent/troubleshooting/
 [26]: /agent/guide/agent-log-files/
 [27]: /help/
