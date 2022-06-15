@@ -8,6 +8,7 @@ disable_sidebar: true
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}Website uptime monitoring with SLOs{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/clone-tests" >}}Clone your Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-usage/" >}}Monitor Synthetics usage{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Using monitors in Synthetic tests{{< /nextlink >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross product correlation{{< /nextlink >}}
