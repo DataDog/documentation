@@ -4,6 +4,8 @@ kind: guide
 aliases:
   - /synthetics/faq/clone-test/
   - /synthetics/faq/uptime-check-internal-website/ 
+  - /synthetics/guide/browser-tests-switch-tabs/
+  - /synthetics/guide/browser-test-self-maintenance/
 private: true
 disable_sidebar: true
 ---
@@ -49,9 +51,4 @@ disable_sidebar: true
 {{< whatsnext desc="Security:" >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}TOTPs For multi-factor authentication (MFA) in browser tests{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="Troubleshooting:" >}}
-    {{< nextlink href="synthetics/guide/browser-test-self-maintenance/" >}}Why are browser tests self-maintaining?{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/browser-tests-switch-tabs/" >}}Can browser tests switch tabs?{{< /nextlink >}}
 {{< /whatsnext >}}
