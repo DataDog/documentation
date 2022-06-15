@@ -49,7 +49,7 @@ Frustration signals require actions. Enabling `trackFrustrations` automatically 
 
 ## Usage
 
-Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. The [RUM Explorer][2] displays a count of frustration signals as a column in the **List** visualization. 
+Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration count in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`. 
 
 ### Application list
 
@@ -71,7 +71,7 @@ Frustration Type
 : Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration_type:rage_click` to the search query.
 
 Frustration Count
-: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views that had at least one frustration signal occur, add `session.frustration.count:>0` or `view.frustration.count:>0` to the search query.
+: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views that had at least one frustration signal occur, add `session.frustration.count:>1` or `view.frustration.count:>1` to the search query.
 
 #### Sessions
 
@@ -79,11 +79,11 @@ Click on a session with a value in the **Frustration Count** column to examine t
 
 #### Views
 
-Click on a view to identify if a user was frustrated with the `frustration detected` tag.
+Click on a view to identify if a user was frustrated on a specific page with the `frustration detected` tag.
 
 {{< img src="real_user_monitoring/frustration_signals/frustration_signals_in_performance_tab.png" alt="Frustration Signals Actions in the Events dropdown menu in the performance waterfall graph" style="width:90%;" >}}
 
-The action waterfall contains actions with frustration signals.
+The performance waterfall displays actions containing frustration signals.
 
 {{< img src="real_user_monitoring/frustration_signals/actions_frustration_signal.png" alt="Frustration signals detected as an action" style="width:90%;" >}}
 
@@ -97,13 +97,13 @@ If multiple frustration signals occur in an action, they are displayed under **W
 
 #### Errors
 
-Click on an error in the **Errors** tab to open a side panel with error details. Under the **Parent hierarchy**, you can see if a frustration signal occurred next to the action.
+Click on an error in the **Errors** tab to open a side panel with error details. You can see if a frustration signal occurred.
 
 {{< img src="real_user_monitoring/frustration_signals/errors_tab.png" alt="Errors Tab in the Actions side panel" style="width:90%;" >}}
 
 ## Watch frustration signals in Session Replay
 
-In [Session Replay][7], you can observe a replication of real user activity. Replays provide video evidence of the actions users take when they exhibit signs of frustration.
+In [Session Replay][7], you can observe a video-like replication of real user activity. Replays provide video evidence of the actions users take when they exhibit signs of frustration.
 
 A session replay's user journey details the events that occur in chronological order. Hover over an event to move to that point in time in the replay, for example, when a dead click occurred.
 
@@ -114,6 +114,8 @@ A session replay's user journey details the events that occur in chronological o
 ## Create alerts for frustration signals
 
 You can create monitors and set alerts on frustration signals to notify you or your team if any frustration signals occur on an important page in your application.
+
+For example, to set an alert that notifies you if any frustration signals occur on a specific page:
 
 {{< img src="real_user_monitoring/frustration_signals/rum_monitor_frustration_count.png" alt="Create a RUM Monitor that alerts on the count of frustration signals" style="width:90%;" >}}
 
