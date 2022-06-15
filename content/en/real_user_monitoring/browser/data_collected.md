@@ -252,9 +252,9 @@ Source errors include code-level information about the error. For more informati
 |-------------------------------|--------|---------------------------------------------------------------|
 | `session.frustration.count`     | number | Count of all frustration signals associated with one session. |
 | `view.frustration.count`        | number | Count of all frustration signals associated with one view.    |
-| `action.frustration.type:dead`  | string | The dead clicks detected by the RUM Browser SDK.              |
-| `action.frustration.type:rage`  | string | The rage clicks detected by the RUM Browser SDK.              |
-| `action.frustration.type:error` | string | The error clicks detected by the RUM Browser SDK.             |
+| `action.frustration.type:dead_click`  | string | The dead clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:rage_click`  | string | The rage clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:error_click` | string | The error clicks detected by the RUM Browser SDK.             |
 
 ## Further Reading
 
