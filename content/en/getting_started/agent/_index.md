@@ -86,8 +86,9 @@ The Agent samples host data  every 15 seconds to provide a more accurate underst
 ### Prerequisites
 
 1. Create a [Datadog account][17].
-2. You will need access to your [Datadog API key][18].
-3. Set up a [Vagrant Ubuntu 16.04 virtual machine][19] using the following commands. For more information about Vagrant, see their [Getting Started][20] page. 
+2. You will need access to your [Datadog API key][18]. 
+3. Have the Datadog UI open.
+4. Set up a [Vagrant Ubuntu 16.04 virtual machine][19] using the following commands. For more information about Vagrant, see their [Getting Started][20] page. 
 
 **Note** This step is optional, you can use any other platforms listed in the [Basic Agent Usage][21] page. This walkthrough will be using the Ubuntu platform.
 
@@ -97,32 +98,70 @@ vagrant up
 vagrant ssh
 ```
 
-To install the Datadog Agent on a host, use the [one line install command][6] updated with your [Datadog API key][7]:
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
 ### Installation
 
 <!-- The Agent can be installed on many different platforms either directly on the host or as a [containerized version][22]. Most systems have a one-line install option.
 
 {{< partial name="platforms/platforms.html" desc="Choose your platform to see installation instructions:" links="gs" >}} -->
 
-Within the Datadog UI, go to the [Agent Installation Page][23] for Ubuntu, **Integrations > Agent** 
+In the Datadog UI, go to the [Agent Installation Page][23] for Ubuntu, **Integrations > Agent** 
+
+To install the Datadog Agent on a host, use the [one line install command][6] updated with your [Datadog API key][7]:
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+### Validation
+
+#### Terminal Command
+
+Run the Agent's [status command][24] to verify installation.
+
+```shell
+sudo datadog-agent status
+```
+A successfull installation will return an Agent Status report that begins with an Agent information like this:
+
+```shell
+===============
+Agent (v7.36.1)
+===============
+
+  Status date: 2022-06-15 15:54:48.364 EDT / 2022-06-15 19:54:48.364 UTC (1655322888364)
+  Agent start: 2022-06-15 15:54:29.85 EDT / 2022-06-15 19:54:29.85 UTC (1655322869850)
+  Pid: 9801
+  Go Version: go1.17.6
+  Python Version: 3.8.11
+  Build arch: amd64
+  Agent flavor: agent
+  Check Runners: 6
+  Log Level: info
+```
+
+#### Events
+
+In the Datadog UI, go to the Events Explorer Page **Events > Explorer**. The Agent sends events to Datadog when and Agent is started or restarted. The following message will display in if your Agent successfully installed:
+
+```text
+Datadog agent (v. 7.XX.X) started on <Hostname>
+```
+
+#### Metrics
+
+In the Datadog UI, go to the Metrics Summary page **Metrics > Summary** and search for the metric **datadog.agent.started** or the metric **datadog.agent.running**. If these metrics are not visible right away, it may take a few minutes to the Agent to send the data to the Datadog Platform.
+
+Click on either of the metrics and notice 
 
 ### Configuration
 
-The Agent's [main configuration file][24] is `datadog.yaml`. The required parameters are your [Datadog API key][18] which is used to associate your Agent's data with your organization and the Datadog site ({{< region-param key="dd_site" code="true" >}}). See the [sample config_template.yaml][25] for all available configuration options.
+The Agent's [main configuration file][25] is `datadog.yaml`. The required parameters are your [Datadog API key][18] which is used to associate your Agent's data with your organization and the Datadog site ({{< region-param key="dd_site" code="true" >}}). See the [sample config_template.yaml][26] for all available configuration options.
 
 For the [container Agent][22], `datadog.yaml` configuration options are passed in with [environment variables][15], for example:
 
 - `DD_API_KEY` for the Datadog API key
 - `DD_SITE` for the Datadog site
 
-### Validation
-
-Run the Agent's [status command][26] to verify installation.
 
 ### Commands
 
@@ -185,9 +224,9 @@ For help troubleshooting the Agent:
 [21]: /agent/basic_agent_usage/?tab=agentv6v7
 [22]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [23]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[24]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[25]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[26]: /agent/guide/agent-commands/#agent-status-and-information
+[24]: /agent/guide/agent-commands/#agent-status-and-information
+[25]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[26]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [27]: /agent/guide/agent-commands/
 [28]: /agent/guide/agent-commands/#start-the-agent
 [29]: /agent/guide/agent-commands/#stop-the-agent
