@@ -1,5 +1,5 @@
 ---
-title: Monitor your Synthetics usage
+title: Monitor Your Synthetics Usage
 kind: guide
 further_reading:
     - link: '/synthetics/api_tests'

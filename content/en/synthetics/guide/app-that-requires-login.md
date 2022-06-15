@@ -1,5 +1,5 @@
 ---
-title: Running tests on an application that requires authentication
+title: Running Tests On An Application That Requires Authentication
 kind: guide
 further_reading:
   - link: '/synthetics/guide/browser-tests-totp'

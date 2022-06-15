@@ -1,5 +1,5 @@
 ---
-title: Handling Popups in Browser Tests
+title: Handling Popups In Browser Tests
 kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/browser-tests/'

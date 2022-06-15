@@ -1,5 +1,5 @@
 ---
-title: Avoiding cache issues in Synthetic tests
+title: Avoiding Cache Issues In Synthetic Tests
 kind: guide
 further_reading:
     - link: 'synthetics/browser_tests'
