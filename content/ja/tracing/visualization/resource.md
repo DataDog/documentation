@@ -59,6 +59,20 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 {{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="レイテンシー分布セレクター"  style="width:50%;">}}
 
+## 依存関係マップ
+
+また、リソースの上流と下流のすべてのサービスの依存関係のマップを表示することができます。依存関係マップを使用すると、特定のリソース (エンドポイントやデータベースクエリなど) をエンドツーエンドで通過するスパンを持つサービスのフローをすばやく確認することができます。
+
+{{<img alt="resource dependency map" src="tracing/visualization/resource/resource_dependency_map.png" style="width:100%;">}}
+
+ノードにカーソルを合わせると、リクエスト/秒、エラーレート、平均レイテンシーなど、各サービスのメトリクスが表示されます。
+
+ノードのハイライト色は、そのサービスの[モニターステータス][8]を示しています。サービスに複数のモニターが構成されている場合、最も厳しいモニターのステータスが表示されます。
+
+{{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" video="true" alt="hovering and clicking a resource dependency map node" style="width:100%;">}}
+
+ノードをクリックすると、サービスページや関連するトレースなどを表示するオプションが付いたコンテキストメニューが表示されます。
+
 ## スパンサマリー
 
 特定のリソースについて、Datadog は一致するすべてのトレースの[スパン][5]分析内訳を提供します。
@@ -98,3 +112,4 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 [5]: /ja/tracing/visualization/#spans
 [6]: /ja/tracing/visualization/trace/
 [7]: /ja/tracing/search/
+[8]: /ja/monitors/manage/status/

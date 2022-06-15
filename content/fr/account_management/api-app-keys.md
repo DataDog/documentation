@@ -32,13 +32,15 @@ Lorsque vous appliquez des portées à des clés d'application, il est recommand
 
 ## Tokens client
 
-Pour gérer vos tokens client, accédez à **Organization Settings**, puis cliquez sur l'onglet **Client Tokens**.
+Pour des raisons de sécurité, vous ne pouvez pas utiliser de clés d'API pour envoyer des données depuis un navigateur : celles-ci seraient exposées côté client dans le code JavaScript. Les navigateurs Web et certains clients utilisent donc des tokens client pour transmettre des données à Datadog.
 
-Les tokens client sont uniques à votre organisation. Un token client est requis par le [collecteur de logs du navigateur Web][6] pour envoyer des logs à Datadog, et par la fonctionnalité [Real User Monitoring][7] pour envoyer des événements et des logs à Datadog.
+ Plusieurs types de clients doivent utiliser un token client pour envoyer des données. Par exemple :
+- Le [collecteur de logs à partir des navigateurs Web][6], qui envoie des logs
+- Les applications [Real User Monitoring][7], qui envoient des événements et des logs
 
-Pour des raisons de sécurité, vous ne pouvez pas utiliser les clés d'API pour envoyer des données à un navigateur : celles-ci seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un token client.
+Les tokens client sont uniques à votre organisation. Pour les gérer, accédez à **Organization Settings**, puis cliquez sur l'onglet **Client Tokens**.
 
-**Remarque :** un token client ne sera pas révoqué si l'utilisateur qui l'a créé est désactivé. Il pourra encore être utilisé dans vos applications RUM et pour recueillir des logs.
+**Remarque** : lorsqu'un utilisateur ayant créé un token client est désactivé, le token client demeure valide.
 
 ## Ajouter une clé d'API ou un token client
 
@@ -54,7 +56,7 @@ Pour ajouter une clé d'API Datadog ou un token client, procédez comme suit :
 - Votre organisation doit posséder entre une et 50 clés d'API.
 - Les noms de clé doivent être uniques au sein de votre organisation.
 
-## Supprimer des clés d'API ou des token client
+## Supprimer des clés d'API ou des tokens client
 
 Pour supprimer une clé d'API ou un token client Datadog, accédez à la liste des clés ou tokens, puis cliquez sur l'icône en forme de **corbeille** de l'option **Revoke** en regard de la clé ou du token à supprimer.
 

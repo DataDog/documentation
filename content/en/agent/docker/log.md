@@ -315,7 +315,7 @@ Docker container log collection from a file is an alternative to collection over
 
 In versions 7.27.0/6.27.0+, you can configure the Agent to collect Docker container logs from a file. In versions 6.33.0+/7.33.0+, the Agent collects Docker container logs from a file by default. 
 
-File based collection requires the directory storing Docker container logs to be exposed to the Agent in the following location: `/var/lib/docker/containers` (`c:\programdata\docker\containers` on Windows). See the (Docker logs collection troubleshooting guide)[12] for more information.
+File based collection requires the directory storing Docker container logs to be exposed to the Agent in the following location: `/var/lib/docker/containers` (`c:\programdata\docker\containers` on Windows). See the [Docker logs collection troubleshooting guide][12] for more information.
 
 **Note**:
 - When you migrate from Docker socket based container log collection to file based log collection, only new containers are tailed from their files. You can force the Agent to collect all container logs from files by setting the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. Forcing the Agent to collect all container logs from files may result in duplicated logs for existing containers.
@@ -348,3 +348,4 @@ For Kubernetes environments, see the [Kubernetes short lived container documenta
 [9]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
 [10]: /agent/guide/autodiscovery-management/
 [11]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers
+[12]: /logs/guide/docker-logs-collection-troubleshooting-guide/

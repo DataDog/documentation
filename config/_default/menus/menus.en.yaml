@@ -502,11 +502,41 @@ main:
     identifier: integrations_top_level
     pre: integrations
     weight: 40000
+  - name: Observability Pipelines
+    url: integrations/observability_pipelines/
+    parent: integrations_top_level
+    identifier: observability_pipelines
+    weight: 1
+  - name: Setup
+    url: integrations/observability_pipelines/setup/
+    parent: observability_pipelines
+    identifier: observability_pipelines_setup
+    weight: 101
+  - name: Vector Configurations
+    url: integrations/observability_pipelines/vector_configurations/
+    parent: observability_pipelines
+    identifier: observability_pipelines_vector_configuration
+    weight: 102
+  - name: Working with Data
+    url: integrations/observability_pipelines/working_with_data/
+    parent: observability_pipelines
+    identifier: observability_pipelines_working_with_data
+    weight: 103
+  - name: Integrations
+    url: integrations/observability_pipelines/integrations/
+    parent: observability_pipelines
+    identifier: observability_pipelines_integrations
+    weight: 104
+  - name: Integrate Vector with Datadog
+    url: /agent/vector_aggregation/
+    parent: observability_pipelines
+    identifier: observability_pipelines_integrate_vector_with_datadog
+    weight: 105
   - name: Guides
     url: integrations/guide/
     identifier: integration_guides
     parent: integrations_top_level
-    weight: 1
+    weight: 2
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -1424,18 +1454,34 @@ main:
     parent: tracing
     identifier: trace_explorer
     weight: 2
+  - name: Search Spans
+    url: tracing/trace_explorer/search/
+    parent: trace_explorer
+    identifier: span_search
+    weight: 201
   - name: Query Syntax
     url: tracing/trace_explorer/query_syntax/
     parent: trace_explorer
+    identifier: span_query_syntax
+    weight: 202
+  - name: Span Facets
+    url: tracing/trace_explorer/facets/
+    parent: trace_explorer
+    identifier: span_facets
     weight: 203
+  - name: Span Visualizations
+    url: tracing/trace_explorer/visualize/
+    parent: trace_explorer
+    identifier: visualize_spans
+    weight: 204
   - name: Request Flow Map
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
-    weight: 204
+    weight: 207
   - name: Monitoring Analytics
     url: monitors/create/types/apm/
     parent: trace_explorer
-    weight: 205
+    weight: 208
   - name: Trace Ingestion
     url: tracing/trace_ingestion/
     parent: tracing
@@ -4542,6 +4588,18 @@ api:
         - ListActiveMetrics
       unstable: []
       order: 1
+  - name: Submit distribution points
+    url: '#submit-distribution-points'
+    identifier: metrics-submit-distribution-points
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SubmitDistributionPoints
+      unstable: []
+      order: 1
   - name: Monitors
     url: /api/latest/monitors/
     identifier: monitors
@@ -4914,8 +4972,7 @@ api:
         - v2
       operationids:
         - SearchSecurityMonitoringSignals
-      unstable:
-        - v2
+      unstable: []
       order: 6
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
@@ -4927,8 +4984,7 @@ api:
         - v2
       operationids:
         - ListSecurityMonitoringSignals
-      unstable:
-        - v2
+      unstable: []
       order: 7
   - name: Update an existing rule
     url: '#update-an-existing-rule'

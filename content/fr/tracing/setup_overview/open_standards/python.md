@@ -1,10 +1,10 @@
 ---
-title: Standards ouverts Python
-kind: documentation
-description: 'Standards ouverts pour Python'
 code_lang: python
-type: multi-code-lang
 code_lang_weight: 10
+description: Standards ouverts pour Python
+kind: documentation
+title: Standards ouverts Python
+type: multi-code-lang
 ---
 
 ## OpenTracing
@@ -45,11 +45,11 @@ Le traceur peut désormais être utilisé comme dans toute autre application Ope
 
 ## OpenTelemetry
 
-La prise en charge d'OpenTelemetry est disponible via le package `opentelemetry-exporter-datadog`` pour exporter les traces d'OpenTelemetry vers Datadog.
-
 <div class="alert alert-warning">
-Cette fonctionnalité est actuellement en version bêta. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> si elle ne fonctionne pas correctement.
+Cet exportateur est obsolète. Pour exporter vos traces OTLP du SDK OpenTelemetry directement vers l'Agent Datadog, consultez <a href="/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent">Ingestion OTLP dans l'Agent Datadog</a>. <a href="/help/">Contactez l'assistance</a> si vous avez des questions.
 </div>
+
+La prise en charge d'OpenTelemetry est disponible via le package `opentelemetry-exporter-datadog`` pour exporter les traces d'OpenTelemetry vers Datadog.
 
 ### Installation
 

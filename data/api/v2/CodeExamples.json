@@ -511,6 +511,34 @@
       "description": "Create a new service object returns \"CREATED\" response"
     }
   ],
+  "DeleteOpsgenieService": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Delete a single service object returns \"OK\" response"
+    }
+  ],
+  "GetOpsgenieService": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Get a single service object returns \"OK\" response"
+    }
+  ],
+  "ListOpsgenieServices": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Get all service objects returns \"OK\" response"
+    }
+  ],
+  "UpdateOpsgenieService": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Update a single service object returns \"OK\" response"
+    }
+  ],
   "UploadIdPMetadata": [
     {
       "group": "organizations",

@@ -37516,7 +37516,7 @@
           "authorizationCode": {
             "authorizationUrl": "/oauth2/v1/authorize",
             "scopes": {
-              "dashboards_public_share": "Share dashboards externally.",
+              "dashboards_public_share": "Generate public and authenticated links to share dashboards externally.",
               "dashboards_read": "View dashboards.",
               "dashboards_write": "Create and change dashboards.",
               "events_read": "Read Events data.",
@@ -37524,6 +37524,8 @@
               "incident_settings_write": "Configure Incidents settings.",
               "incident_write": "Create, view, and manage incidents in Datadog.",
               "metrics_read": "View custom metrics.",
+              "monitors_read": "View monitors.",
+              "monitors_write": "Edit, mute, and delete individual monitors.",
               "security_monitoring_filters_read": "Read Security Filters.",
               "security_monitoring_filters_write": "Create, edit, and delete Security Filters.",
               "security_monitoring_rules_read": "Read Detection Rules.",
@@ -76663,8 +76665,7 @@
         },
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       }
     },
     "/api/v2/security_monitoring/signals/search": {
@@ -76953,8 +76954,7 @@
         },
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       }
     },
     "/api/v2/series": {

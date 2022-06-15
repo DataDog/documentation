@@ -17,6 +17,10 @@ Kubernetes creates pause containers (requires Agent v5.8+) to acquire the respec
 
 Fargate is charged based on the concurrent number of tasks. For pricing, see the [Infrastructure][4] section on the pricing page.
 
+### GKE Autopilot
+
+Billing of [GKE Autopilot][6] environments is the same as that of [GKE Standard][7].
+
 ## Troubleshooting
 
 For technical questions, contact [Datadog support][5].
@@ -28,3 +32,5 @@ For billing questions, contact your [Customer Success][3] Manager.
 [3]: mailto:success@datadoghq.com
 [4]: https://www.datadoghq.com/pricing/#section-infra
 [5]: /help/
+[6]: /agent/kubernetes/distributions/?tab=helm#autopilot
+[7]: /integrations/google_kubernetes_engine/

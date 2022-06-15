@@ -161,6 +161,12 @@
     "request_description": "Update Dashboard request body.",
     "request_schema_description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure."
   },
+  "SubmitDistributionPoints": {
+    "description": "The distribution points end-point allows you to post distribution data that can be graphed on Datadog’s dashboards.",
+    "summary": "Submit distribution points",
+    "request_description": "",
+    "request_schema_description": "The distribution points payload."
+  },
   "ListDowntimes": {
     "description": "Get all scheduled downtimes.",
     "summary": "Get all downtimes"

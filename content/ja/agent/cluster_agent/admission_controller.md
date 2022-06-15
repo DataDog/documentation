@@ -11,9 +11,9 @@ title: Datadog Admission Controller
 ---
 
 ## 概要
-Datadog Admission Controller は Datadog Cluster Agent のコンポーネントで、ユーザーが利用するアプリケーションポッドのコンフィギュレーションを簡略化できる便利なツールです。Admission Controller には以下の 2 つの機能が備わっています。
+Datadog Admission Controller は Datadog Cluster Agent のコンポーネントで、アプリケーションポッドのコンフィギュレーションを簡略化できる便利なツールです。Admission Controller には以下の 2 つの機能が備わっています。
 
-- 環境変数 (`DD_AGENT_HOST` and `DD_ENTITY_ID`) をユーザーのアプリケーションコンテナに挿入し、DogStatsD および APM トレーサーライブラリを構成する。
+- 環境変数 (`DD_AGENT_HOST`、`DD_TRACE_AGENT_URL`、`DD_ENTITY_ID`) をユーザーのアプリケーションコンテナに挿入し、DogStatsD および APM トレーサーライブラリを構成する。
 - アプリケーションラベルから取得した Datadog の標準タグ (`env`、`service`、`version`) をコンテナ環境変数に挿入する。
 
 Datadog Admission Controller は `MutatingAdmissionWebhook` 型に属します。Admission Controller について詳しくは、[Kubernetes ガイド][1]を参照してください。
@@ -145,10 +145,32 @@ DogStatsD クライアントと APM トレーサーを自動で構成するに�
 | `false`          | `admission.datadoghq.com/enabled=true`  | 〇       |
 | `false`          | `admission.datadoghq.com/enabled=false` | ✕        |
 
+
+#### 優先順位
+Datadog Admission Controller は環境変数 `DD_VERSION`、`DD_ENV` および `DD_SERVICE` が既に存在する場合は挿入を行いません。
+
+これらの環境変数が設定されていない場合、Admission Controller は以下の順序で標準タグの値を使用します (高い方から順に)。
+
+- ポッド上のラベル
+- `ownerReference` のラベル (ReplicaSets、DaemonSets、Deployments...)
+
+#### APM と DogstatsD の通信モードの構成
+Datadog Cluster Agent v1.20.0 以降、Datadog Admission Controller は、アプリケーションと Datadog Agent の間で異なる通信モードを注入するように構成することができるようになりました。
+
+この機能は `admission_controller.inject_config.mode` を設定するか、ポッドラベル `admission.datadoghq.com/config.mode` を使用してポッド固有のモードを定義することによって構成することができます。
+
+可能なオプション:
+| モード               | 説明                                                                                                       |
+|--------------------|-------------------------------------------------------------------------------------------------------------------|
+| `hostip` (デフォルト) | 環境変数 `DD_AGENT_HOST` にホスト IP を注入する                                                        |
+| `service`          | Datadog のローカルサービスの DNS 名を環境変数 `DD_AGENT_HOST` に注入する (Kubernetes v1.22+で使用可能)|
+| `socket`           | 環境変数 `DD_TRACE_AGENT_URL` に Unix ドメインソケットのパスを注入し、対応するパスにアクセスするようにボリュームを定義する |
+
+**注**: ポッド固有のモードは、Admission Controller レベルで定義されたグローバルモードより優先されます。
+
 #### 注
 
 - 新しいアプリケーションポッドを作成する前に、Admission Controller のデプロイと構成が必要です。既に存在するポッドは更新できません。
-- Admission Controller は環境変数 `DD_VERSION`、`DD_ENV` および `DD_SERVICE` が既に存在する場合は挿入を行いません。
 - Admission Controller の挿入機能を無効化するには、Cluster Agent のコンフィギュレーション: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false` を使用します。
 - Datadog Admission Controller を使用すれば、ユーザーは Downward API ([Kubernetes トレースコレクション設定のステップ 2 ][3]) を利用してアプリケーションポッドの構成をスキップすることができます。
 - Google Kubernetes Engine (GKE) Private Cluster では、[コントロールプレーン用のファイアーウォールルールを追加する][4]必要があります。着信接続を処理する Webhook は、ポート `443` でリクエストを受け取り、ポート `8000` に実装されたサービスに誘導します。デフォルトでは、クラスターのネットワークに `gke-<CLUSTER_NAME>-master` という名前のファイアーウォールルールが存在するはずです。ルールの "ソースフィルター" は、クラスターの "コントロールプレーンのアドレス範囲" と一致します。このファイアーウォールルールを編集して、TCP ポート `8000` へのイングレッションを許可するようにします。

@@ -161,14 +161,8 @@ function getPathElement(event = null) {
         );
     }
 
-    // if url is domain + /integrations/**
-    if (
-        `${replaceURL(domain)}/${replacePath(path)}`.includes(
-            `${replaceURL(domain)}/integrations`
-        ) && !`${replaceURL(domain)}/${replacePath(path)}`.includes(
-            `${replaceURL(domain)}/integrations/guide`
-        )
-    ) {
+    // if on a detailed integration page then make sure integrations is highlighted in nav
+    if (document.getElementsByClassName('integration-labels').length) {
         sideNavPathElement = document.querySelector(
             '.side .nav-top-level > [data-path*="integrations"]'
         );
