@@ -121,7 +121,7 @@ Run the Agent's [status command][24] to verify installation.
 ```shell
 sudo datadog-agent status
 ```
-A successfull installation will return an Agent Status report that begins with an Agent information like this:
+A successfull installation will return an Agent Status report that begins with Agent information like this:
 
 ```shell
 ===============
@@ -141,11 +141,22 @@ Agent (v7.36.1)
 
 #### Events
 
-In the Datadog UI, go to the Events Explorer Page **Events > Explorer**. The Agent sends events to Datadog when and Agent is started or restarted. The following message will display in if your Agent successfully installed:
+In the Datadog UI, go to the Events Explorer Page **Events > Explorer**. The Agent sends events to Datadog when an Agent is started or restarted. The following message will display if your Agent successfully installed:
 
 ```text
 Datadog agent (v. 7.XX.X) started on <Hostname>
 ```
+
+### Service Checks
+
+The Agent is set up to provide the following service checks:
+**datadog.agent.up**:
+Returns `OK` if the Agent is able to connect to Datadog.
+
+**datadog.agent.check_status**:
+Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
+
+These checks can be used in the Datadog Platform to visualize the Agent status through Monitors and Dashboards at a quick glance. See [Service Check Overview][] to learn more.
 
 #### Metrics
 
