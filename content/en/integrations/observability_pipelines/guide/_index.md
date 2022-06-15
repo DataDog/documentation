@@ -1,5 +1,5 @@
 ---
-title: Custom Metrics Guides
+title: Observability Pipelines Guides
 kind: guide
 ---
 

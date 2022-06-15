@@ -1,6 +1,8 @@
 ---
 title: Custom Metrics Governance - Drop Metrics Missing Specific Tags
 kind: guide
+aliases:
+  - /metrics/custom_metrics/guide/custom-metrics-governance-drop-metrics-missing-specific-tags
 further_reading:
 - link: "https://vector.dev/docs/setup/going-to-prod/"
   tag: "Documentation"
