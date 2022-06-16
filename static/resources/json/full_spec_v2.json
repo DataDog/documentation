@@ -24782,7 +24782,7 @@
                 "properties": {
                   "custom_url": {
                     "description": "The custom URL for a custom region.",
-                    "example": "https://example.com",
+                    "example": null,
                     "nullable": true,
                     "type": "string"
                   },
@@ -24845,7 +24845,7 @@
         "properties": {
           "custom_url": {
             "description": "The custom URL for a custom region.",
-            "example": "https://example.com",
+            "example": null,
             "nullable": true,
             "type": "string"
           },
@@ -24880,7 +24880,7 @@
             "properties": {
               "custom_url": {
                 "description": "The custom URL for a custom region.",
-                "example": "https://example.com",
+                "example": null,
                 "nullable": true,
                 "type": "string"
               },
@@ -25153,7 +25153,7 @@
                   "properties": {
                     "custom_url": {
                       "description": "The custom URL for a custom region.",
-                      "example": "https://example.com",
+                      "example": null,
                       "nullable": true,
                       "type": "string"
                     },
@@ -52782,7 +52782,7 @@
                             "properties": {
                               "custom_url": {
                                 "description": "The custom URL for a custom region.",
-                                "example": "https://example.com",
+                                "example": null,
                                 "nullable": true,
                                 "type": "string"
                               },
@@ -53004,7 +53004,7 @@
                           "properties": {
                             "custom_url": {
                               "description": "The custom URL for a custom region.",
-                              "example": "https://example.com",
+                              "example": null,
                               "nullable": true,
                               "type": "string"
                             },
@@ -53354,7 +53354,7 @@
                           "properties": {
                             "custom_url": {
                               "description": "The custom URL for a custom region.",
-                              "example": "https://example.com",
+                              "example": null,
                               "nullable": true,
                               "type": "string"
                             },
@@ -53662,7 +53662,7 @@
                           "properties": {
                             "custom_url": {
                               "description": "The custom URL for a custom region.",
-                              "example": "https://example.com",
+                              "example": null,
                               "nullable": true,
                               "type": "string"
                             },
