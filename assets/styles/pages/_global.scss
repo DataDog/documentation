@@ -550,7 +550,8 @@ h5 {
 
     & > ul {
         list-style-type: none;
-        padding: 0;
+        padding-top: 6px;
+        
         li {
             padding-bottom: 6px;
 
@@ -568,19 +569,25 @@ h5 {
             }
             &.active {
                 a {
-                    color: $ddpurple;
-                    border-bottom: 1px solid $ddpurple;
-                    font-weight: 600;
+                    box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
+                    border-radius: 3px;
+                    background-color: $ddpurple;
+                    color: white;
                 }
             }
             a {
-                color: $ddgray;
+                background: #ffffff;
+                border: transparent;
+                padding: 6px 10px 7px 10px;
                 font-weight: 600;
-                padding: 10px 22px 10px 22px;
-                border-bottom: 1px solid $ddgray;
+                font-size: 16px;
+                border-radius: 3px;
                 display: inline-block;
+                margin-right: 0.625rem;
+
                 &:hover {
-                    color: $ddpurple;
+                    box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
+                    border: none;
                 }
             }
         }
@@ -595,7 +602,7 @@ h5 {
         padding-left: 0 !important;
     }
     .tab-content {
-        padding-top: 26px;
+        padding-top: 12px;
         h2 > a,
         h3 > a,
         h4 > a,
