@@ -210,7 +210,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 See the [SQL Server integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
 
-The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][4].
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][4] on how these tags are used throughout Datadog.
 
 ### Validate
 
