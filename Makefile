@@ -284,3 +284,7 @@ examples/typescript: examples/datadog-api-client-typescript clean-typescript-exa
 	-cp -Rn examples/datadog-api-client-typescript/examples/v* ./content/en/api
 
 examples: examples/go examples/java examples/python examples/ruby examples/typescript
+
+pretty-config: hugpython/bin/activate
+	@python local/bin/py/build/actions/pretty_config.py 
+	@open pretty_config.html
