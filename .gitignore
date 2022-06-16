@@ -213,3 +213,5 @@ static/jsconfig.json
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+pretty_config.html
