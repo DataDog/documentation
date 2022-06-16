@@ -91,11 +91,11 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 ### Web and mobile vitals
 
-View performance scores and metrics for [browser applications][6] such as Core Web Vitals and Mobile Vitals for [iOS][7] and [Android applications][8].
+View performance scores and metrics for [browser applications][6] such as Core Web Vitals and Mobile Vitals for [iOS and tvOS][7] or [Android and Android TV applications][8].
 
 ### Web view tracking
 
-Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS][9] and [Android][10].
+Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS and tvOS][9] or [Android and Android TV][10].
 
 {{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="Web Views captured in a user session in the RUM Explorer" >}}
 
