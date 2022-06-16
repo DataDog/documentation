@@ -143,6 +143,9 @@ With Prometheus Autodiscovery, the Datadog Agent is able to detect native Promet
 
 #### Basic configuration
 
+<!-- xxx tabs xxx -->
+<!-- xxx tab "Helm" xxx -->
+
 In your Helm `values.yaml`, add the following:
 
 ```yaml
@@ -150,8 +153,29 @@ datadog:
   # (...)
   prometheusScrape:
     enabled: true
+    serviceEndpoints: true
   # (...)
 ```
+<!-- xxz tab xxx -->
+<!-- xxx tab "DaemonSet" xxx -->
+
+In your DaemonSet manifest for the Agent `daemonset.yaml`, add the following environment variables for the Agent container:
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_ENABLED
+  value: "true"
+- name: DD_PROMETHEUS_SCRAPE_VERSION
+  value: "2"
+```
+If the Cluster Agent is enabled, inside its manifest `cluster-agent-deployment.yaml`, add the following environment variables for the Cluster Agent container:
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_ENABLED
+  value: "true"
+- name: DD_PROMETHEUS_SCRAPE_SERVICE_ENDPOINTS
+  value: "true" 
+```
+
+<!-- xxz tab xxx -->
+<!-- xxz tabs xxx -->
 
 This instructs the Datadog Agent to detect the pods that have native Prometheus annotations and generate corresponding OpenMetrics checks.
 
