@@ -618,7 +618,7 @@
       globs:
       - 'docs/trace_collection.md'
       options:
-        dest_path: '/tracing/setup_overview/setup/'
+        dest_path: '/tracing/trace_collection/dd_libraries/'
         file_name: 'ios.md'
         front_matters:
           title: iOS Trace Collection
