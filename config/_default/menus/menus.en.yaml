@@ -1345,7 +1345,7 @@ main:
     identifier: tracing_serverless
     weight: 103
   - name: Tracing Proxies
-    url: tracing/trace_collection/proxies/
+    url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
     weight: 104

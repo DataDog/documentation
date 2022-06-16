@@ -1,5 +1,5 @@
 ---
-title: Trace Ingestion
+title: The Trace Pipeline
 kind: documentation
 aliases:
     - /tracing/ingestion/
