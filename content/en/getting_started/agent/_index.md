@@ -80,7 +80,7 @@ See the [Docker Agent][17] or [Kubernetes][18] for a walkthrough on running the 
 
 ## Why Should I Install the Agent?
 
-In order to pull data from any one of our Agent based Integrations, you will need to install the Agent. The Agent is not necessarily required to forward data to Datadog, for example, you can send Logs and Metrics through the Datadog API. However, the Agent is the recommended method to forward your data to the Datadog Platform. 
+The Agent needs to be installed to pull data from any one of our Agent based Integraions. The Agent is not necessarily required to forward data to Datadog, for example, you can send Logs and Metrics through the Datadog API. However, the Agent is the recommended method to forward your data to the Datadog Platform. 
 
 The Agent samples host data  every 15 seconds to provide a more accurate understanding of what is happening across your environments. Additionally, it comes with over 50 default metrics to provide greater insight on system level data.
 
@@ -189,11 +189,54 @@ Once you have the Agent installed, you can adjust the Agent configuration files 
 1. Locate your Agent's [main configuration file][29]. For Ubuntu, the file locations is 
 `/etc/datadog-agent/datadog.yaml`
 
-2. 
+2. In the `datadog.yaml` file, locate the tags parameter. Host level tags can be set in the `datadog.yaml` configuration to apply tags on all metrics, traces and logs forwarded from this host.
+
+```yaml
+## @param tags  - list of key:value elements - optional	
+## @env DD_TAGS - space separated list of strings - optional
+## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
+##
+## This configuration value merges with `DD_EXTRA_TAGS`, allowing some
+## tags to be set in a configuration file (`tags`), and additional tags to be added
+## with an environment variable (`DD_EXTRA_TAGS`).
+##
+## Learn more about tagging: https://docs.datadoghq.com/tagging/
+#
+# tags:
+#   - team:infra
+#   - <TAG_KEY>:<TAG_VALUE>
+```
+
+3. Uncomment the Tags parameter and the provided example `team:infra` tag. 
+```yaml
+## @param tags  - list of key:value elements - optional	
+## @env DD_TAGS - space separated list of strings - optional
+## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
+##
+## This configuration value merges with `DD_EXTRA_TAGS`, allowing some
+## tags to be set in a configuration file (`tags`), and additional tags to be added
+## with an environment variable (`DD_EXTRA_TAGS`).
+##
+## Learn more about tagging: https://docs.datadoghq.com/tagging/
+#
+tags:
+   - team:infra
+#   - <TAG_KEY>:<TAG_VALUE>
+```
+
+4. Restart the Agent by running the Agent's [restart command][30]. The Ubuntu restart command:
+
+```shell
+sudo service datadog-agent restart
+```
+
+5. After a few minutes, go to the Metrics Summary page again and click on the metric **datadog.agent.started**. In additional to the default `host` and `version` tags, you will also see the `team` tag.
+
+See [Getting Started with Tags][31] to learn more about tagging your data.
 
 ### Commands
 
-See [Agent Commands][30] to [Start][31], [Stop][32] or [Restart][33] your Agent.
+See [Agent Commands][32] to [Start][33], [Stop][34] or [Restart][30] your Agent.
 
 
 ### Events
@@ -212,9 +255,9 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 For help troubleshooting the Agent:
 
-- See [Agent Troubleshooting][34]
-- View the [Agent Log Files][35]
-- Contact [Datadog support][36]
+- See [Agent Troubleshooting][35]
+- View the [Agent Log Files][36]
+- Contact [Datadog support][37]
 
 ## Further Reading
 
@@ -258,10 +301,11 @@ For help troubleshooting the Agent:
 [27]: /developers/service_checks/#visualize-your-service-check-in-datadog
 [28]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [29]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[30]: /agent/guide/agent-commands/
-[31]: /agent/guide/agent-commands/#start-the-agent
-[32]: /agent/guide/agent-commands/#stop-the-agent
-[33]: /agent/guide/agent-commands/#restart-the-agent
-[34]: /agent/troubleshooting/
-[35]: /agent/guide/agent-log-files/
-[36]: /help/
+[30]: /agent/guide/agent-commands/#restart-the-agent
+[31]: /getting_started/tagging/
+[32]: /agent/guide/agent-commands/
+[33]: /agent/guide/agent-commands/#start-the-agent
+[34]: /agent/guide/agent-commands/#stop-the-agent
+[35]: /agent/troubleshooting/
+[36]: /agent/guide/agent-log-files/
+[37]: /help/
