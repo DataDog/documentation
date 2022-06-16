@@ -672,7 +672,7 @@
     "request_schema_description": "The description of a notebook update request."
   },
   "ListOrgs": {
-    "description": "List your managed organizations.",
+    "description": "This endpoint returns data on your top-level organization.",
     "summary": "List your managed organizations"
   },
   "CreateChildOrg": {
