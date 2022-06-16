@@ -1,5 +1,5 @@
 ---
-title: Alerting with RUM Data
+title: Alerting With RUM Data
 kind: guide
 description: Guide for creating alerts on RUM events.
 further_reading:
