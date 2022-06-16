@@ -4,6 +4,9 @@ kind: documentation
 description: "Gain additional insights into your NodeJS application's performance with the runtime metrics associated to your traces."
 aliases:
 - /tracing/runtime_metrics/nodejs
+code_lang: nodejs
+type: multi-code-lang
+code_lang_weight: 40
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'

@@ -2,8 +2,11 @@
 title: Connecting NodeJS Logs and Traces
 kind: documentation
 description: 'Connect your NodeJS logs and traces to correlate them in Datadog.'
+code_lang: nodejs
+type: multi-code-lang
+code_lang_weight: 50
 aliases:
-- /tracing/connect_logs_and_traces/nodejs
+  - /tracing/connect_logs_and_traces/nodejs
 further_reading:
     - link: 'tracing/manual_instrumentation'
       tag: 'Documentation'

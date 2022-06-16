@@ -2,6 +2,9 @@
 title: Go Runtime Metrics
 kind: documentation
 description: "Gain additional insights into your Go application's performance with the runtime metrics associated to your traces."
+code_lang: go
+type: multi-code-lang
+code_lang_weight: 60
 aliases:
 - /tracing/runtime_metrics/go
 further_reading:

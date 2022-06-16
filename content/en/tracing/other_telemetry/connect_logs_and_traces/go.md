@@ -3,7 +3,10 @@ title: Connecting Go Logs and Traces
 kind: documentation
 description: 'Connect your Go logs and traces to correlate them in Datadog.'
 aliases:
-- /tracing/connect_logs_and_traces/go
+  - /tracing/connect_logs_and_traces/go
+code_lang: go
+type: multi-code-lang
+code_lang_weight: 30
 further_reading:
     - link: 'tracing/manual_instrumentation'
       tag: 'Documentation'

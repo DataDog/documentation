@@ -2,8 +2,11 @@
 title: Connecting Java Logs and Traces
 kind: documentation
 description: 'Connect your Java logs and traces to correlate them in Datadog.'
+code_lang: java
+type: multi-code-lang
+code_lang_weight: 10
 aliases:
-- /tracing/connect_logs_and_traces/java
+  - /tracing/connect_logs_and_traces/java
 further_reading:
     - link: 'tracing/manual_instrumentation'
       tag: 'Documentation'

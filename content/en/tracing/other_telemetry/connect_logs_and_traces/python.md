@@ -2,8 +2,11 @@
 title: Connecting Python Logs and Traces
 kind: documentation
 description: "Connect your Python logs and traces to correlate them in Datadog."
+code_lang: python
+type: multi-code-lang
+code_lang_weight: 20
 aliases:
-- /tracing/connect_logs_and_traces/python
+  - /tracing/connect_logs_and_traces/python
 further_reading:
 - link: "/tracing/manual_instrumentation/"
   tag: 'Documentation'

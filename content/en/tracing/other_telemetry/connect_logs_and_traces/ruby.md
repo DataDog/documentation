@@ -1,8 +1,11 @@
 ---
 title: Connecting Ruby Logs and Traces
 kind: documentation
+code_lang: ruby
+type: multi-code-lang
+code_lang_weight: 40
 aliases:
-- /tracing/connect_logs_and_traces/ruby
+  - /tracing/connect_logs_and_traces/ruby
 description: 'Connect your Ruby logs and traces to correlate them in Datadog.'
 further_reading:
     - link: 'https://www.datadoghq.com/blog/request-log-correlation/'

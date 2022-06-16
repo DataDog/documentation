@@ -3,7 +3,10 @@ title: Connecting .NET Logs and Traces
 kind: documentation
 description: 'Connect your .NET logs and traces to correlate them in Datadog.'
 aliases:
-- /tracing/connect_logs_and_traces/dotnet
+  - /tracing/connect_logs_and_traces/dotnet
+code_lang: dotnet
+type: multi-code-lang
+code_lang_weight: 60
 further_reading:
     - link: 'tracing/manual_instrumentation'
       tag: 'Documentation'
