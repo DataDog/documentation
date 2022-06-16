@@ -533,6 +533,11 @@ main:
     identifier: observability_pipelines_integrate_vector_with_datadog
     weight: 105
   - name: Guides
+    url: integrations/observability_pipelines/guide/
+    parent: observability_pipelines
+    identifier: observability_pipelines_guides
+    weight: 106
+  - name: Guides
     url: integrations/guide/
     identifier: integration_guides
     parent: integrations_top_level
