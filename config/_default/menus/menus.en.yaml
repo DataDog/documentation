@@ -2573,7 +2573,7 @@ main:
     parent: rum_browser
     identifier: troubleshooting
     weight: 107
-  - name: Android Monitoring
+  - name: Android and AndroidTV Monitoring
     url: real_user_monitoring/android/
     parent: rum
     identifier: rum_android
@@ -2608,7 +2608,7 @@ main:
     parent: rum_android
     identifier: rum_troubleshooting_android
     weight: 206
-  - name: iOS Monitoring
+  - name: iOS and tvOS Monitoring
     url: real_user_monitoring/ios/
     parent: rum
     identifier: rum_ios
