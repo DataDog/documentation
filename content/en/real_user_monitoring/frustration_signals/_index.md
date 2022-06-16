@@ -19,15 +19,15 @@ further_reading:
 For access to frustration signals, contact <a href="/help">Datadog Support</a>.
 </div>
 
-Frustration signals identify the highest points of user friction in your application by surfacing moments where users exhibit frustration. 
+Frustration signals identify your application's highest points of user friction by surfacing moments when users exhibit frustration.
 
 RUM collects three types of frustration signals:
 
 Rage Clicks
-: A user clicks on an element more than three times in a one-second rolling window.
+: A user clicks on an element more than three times in a one-second sliding window.
 
 Dead Clicks
-: A user clicks on a static element thinking it is interactive.
+: A user clicks on a static element, thinking it is interactive.
 
 Error Clicks
 : A user clicks on an element right before a JavaScript error occurs.
@@ -49,7 +49,7 @@ Frustration signals require actions. Enabling `trackFrustrations` automatically 
 
 ## Usage
 
-Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration count in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`. 
+Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`. 
 
 ### Application list
 
@@ -57,7 +57,7 @@ Hover over the list of browser sessions and click on a session to observe a user
 
 ### Explore the frustration signals dashboard
 
-The **Frustration Signals** dashboard provides an overview of frustration levels across your application, showing you topics like the most frustrated users and pages with the highest amount of frustration signals.
+The **Frustration Signals** dashboard provides an overview of frustration levels across your application, showing you topics like the most frustrated users and pages with the highest number of frustration signals.
 
 You can clone this dashboard and customize it to fit your needs. For more information, see [Frustration Signals Dashboard][3].
 
@@ -71,11 +71,11 @@ Frustration Type
 : Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration_type:rage_click` to the search query.
 
 Frustration Count
-: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views that had at least one frustration signal occur, add `session.frustration.count:>1` or `view.frustration.count:>1` to the search query.
+: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views with at least one frustration signal, add `session.frustration.count:>1` or `view.frustration.count:>1` to the search query.
 
 #### Sessions
 
-Click on a session with a value in the **Frustration Count** column to examine the user frustration detected. You can see the type of signal (ranging from `rage click`, `dead click`, or `error click`) and the event timeline that shows what occurred during the session.
+Click on a session with a value in the **Frustration Count** column to examine the user frustration detected. You can see the type of signal (`rage click`, `dead click`, or `error click`) and the event timeline, which shows what occurred during the session.
 
 #### Views
 
@@ -89,7 +89,7 @@ The performance waterfall displays actions containing frustration signals.
 
 #### Actions
 
-The Actions tab displays the `frustration detected` tag if the selected action contains a frustration signal.
+The **Actions** tab displays the `frustration detected` tag if the selected action contains a frustration signal.
 
 If multiple frustration signals occur in an action, they are displayed under **What Happened** in the action panel.
 
@@ -105,7 +105,7 @@ Click on an error in the **Errors** tab to open a side panel with error details.
 
 In [Session Replay][7], you can observe a video-like replication of real user activity. Replays provide video evidence of the actions users take when they exhibit signs of frustration.
 
-A session replay's user journey details the events that occur in chronological order. Hover over an event to move to that point in time in the replay, for example, when a dead click occurred.
+A session replay's user journey details the events that occur in chronological order. Hover over an event to move to that point in time in the replay: for example, when a dead click occurred.
 
 {{< img src="real_user_monitoring/frustration_signals/session_replay_frustration_signals.png" alt="Frustration signals appear in a browser recording" style="width:90%;" >}}
 
@@ -127,9 +127,9 @@ For more information, see the [Real User Monitoring Monitor documentation][9].
 
 Frustration signals are generated from mouse clicks, not keyboard strokes. 
 
-### Why does the side panel show a session has a different number of frustration signals that in the event timeline?
+### Why does the side panel show that a session has a different number of frustration signals than in the event timeline?
 
-If a session is live, it is fetching information, and may cause the banners to reflect a different number than those in the timeline.
+If a session is live, it is fetching information and may cause the banners to reflect a different number than those in the timeline.
 
 ### Can I pick and choose what signals to track?
 

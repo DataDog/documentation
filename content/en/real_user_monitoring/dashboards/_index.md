@@ -31,7 +31,7 @@ You can customize your [dashboards][4] or directly explore your application's da
 
 ### Template variables
 
-Datadog generates RUM dashboards with a set of default template variables that are automatically created. Use the template variable dropdown menus to narrow your search. For example, you can filter for a specific application with the `applicationId` template variable.
+Datadog generates RUM dashboards which automatically creates a set of default template variables. Use the template variable dropdown menus to narrow your search. For example, you can filter for a specific application with the `applicationId` template variable.
 
 {{< img src="real_user_monitoring/dashboards/template_variables.mp4" alt="Template variable" video=true style="width:50%;" >}}
 
