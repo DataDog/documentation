@@ -145,6 +145,30 @@
     "request_description": "インシデントのペイロード。",
     "request_schema_description": "インシデントのリクエストを更新します。"
   },
+  "ListOpsgenieServices": {
+    "description": "Datadog Opsgenie インテグレーションからすべてのサービスのリストを取得します。",
+    "summary": "すべてのサービスオブジェクトを取得する"
+  },
+  "CreateOpsgenieService": {
+    "description": "Opsgenie インテグレーションで新しいサービスオブジェクトを作成します。",
+    "summary": "新しいサービスオブジェクトを作成する",
+    "request_description": "Opsgenie サービスペイロード",
+    "request_schema_description": "Opsgenie サービスに対するリクエストを作成します。"
+  },
+  "DeleteOpsgenieService": {
+    "description": "Datadog Opsgenie インテグレーションで単一のサービスオブジェクトを削除します。",
+    "summary": "単一のサービスオブジェクトを削除する"
+  },
+  "GetOpsgenieService": {
+    "description": "Datadog Opsgenie インテグレーションから単一のサービスを取得します。",
+    "summary": "単一のサービスオブジェクトを取得する"
+  },
+  "UpdateOpsgenieService": {
+    "description": "Datadog Opsgenie インテグレーションで単一のサービスオブジェクトを更新します。",
+    "summary": "単一のサービスオブジェクトを更新する",
+    "request_description": "Opsgenie サービスペイロード。",
+    "request_schema_description": "Opsgenie サービスに対するリクエストを更新します。"
+  },
   "SubmitLog": {
     "description": "HTTP を使用して Datadog プラットフォームにログを送信します。HTTP リクエストごとの制限は以下のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ (非圧縮) : 5MB\n- 単一ログの最大サイズ : 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ : 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します.\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\n\nHTTP API により回答されるステータスコード :\n- 202: Accepted: 処理リクエストを受信済み\n- 400: Bad request (ペイロードの形式の問題など)- 401: Unauthorized (API キーの不足など)\n\n- 403: Permission issue (無効な API キーの使用など)\n- 408: Request Timeout (しばらくしてからリクエストを再試行)\n- 413: Payload too large (バッチのサイズが非圧縮で 5MB 以上)\n- 429: Too Many Requests (しばらくしてからリクエストを再試行)\n- 500: Internal Server Error (サーバーがリクエストの遂行を阻む予期せぬ状況がサーバーに発生、しばらくしてからリクエストを再試行)\n- 503: Service Unavailable (おそらく過負荷によりサーバーがリクエストに対応できないため、しばらくしてからリクエストを再試行)",
     "summary": "ログを送信する",
@@ -310,8 +334,8 @@
     "summary": "メトリクス名でタグを一覧表示する"
   },
   "EstimateMetricsOutputSeries": {
-    "description": "指定されたタグ、パーセンタイル、および集計の数の構成で、メトリクスのカーディナリティ推定値を返します。",
-    "summary": "Estimate Output Series - Public v2 API"
+    "description": "Metrics without Limits&amp;trade; を使用して、 指定されたタグ、パーセンタイル、および集計の数の構成で、 メトリクスの推定カーディナリティを返します。",
+    "summary": "タグコンフィギュレーションカーディナリティ推定ツール"
   },
   "DeleteTagConfiguration": {
     "description": "メトリクスのタグ付けコンフィギュレーションを削除します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
@@ -334,7 +358,7 @@
     "request_schema_description": "タグを構成したいメトリクスを含むオブジェクトをリクエストします。"
   },
   "ListVolumesByMetricName": {
-    "description": "特定のメトリクス名の個別のメトリクスボリュームを表示します。\n\nカスタムディストリビューションメトリクスは、取り込まれたカスタムメトリクスボリュームとインデックス化されたカスタムメトリクスボリュームの両方を返します。\nMetrics without Limits™ のベータ版をご利用の場合、すべてのメトリクスが取り込まれたボリュームとインデックス化されたボリュームの両方を返します。\n他の製品のアプリ内で生成されたカスタムメトリクスは、取り込まれたボリュームに対し `null` を返します。",
+    "description": "指定されたメトリクス名に対する個別のメトリクスボリュームを表示します。\n\n他の製品からアプリ内で生成されたカスタムメトリクスは、取り込まれたボリュームに対して `null` を返します。",
     "summary": "メトリクス名で個別のメトリクスボリュームを一覧表示する"
   },
   "ListPermissions": {
@@ -603,7 +627,7 @@
     "summary": "アプリケーションセキュリティの 1 時間あたり使用量の取得"
   },
   "GetCostByOrg": {
-    "description": "マルチオーガニゼーションのアカウントのコストを取得します。",
+    "description": "マルチオーガニゼーションのアカウントでコストを取得します。ある月の組織別コストデータは、翌月 16 日までに利用可能になります。",
     "summary": "マルチオーガニゼーションのアカウントのコストを取得"
   },
   "GetUsageLambdaTracedInvocations": {
