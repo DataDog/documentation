@@ -79,7 +79,7 @@ instances:
       instance_id: '<INSTANCE_ID>'
 ```
 
-For additional documentation on setting `project_id` and `instance_id` fields, please refer to the [sqlserver integration spec][3]
+See the [SQL Server integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
 
 To use [Windows Authentication][4] set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
 
@@ -153,7 +153,7 @@ instances:
       instance_id: '<INSTANCE_ID>'
 ```
 
-For additional documentation on setting `project_id` and `instance_id` fields, please refer to the [sqlserver integration spec][4]
+See the [SQL Server integration spec][4] for additional information on setting `project_id` and `instance_id` fields.
 
 The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][5].
 
@@ -208,7 +208,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-For additional documentation on setting `project_id` and `instance_id` fields, please refer to the [sqlserver integration spec][3]
+See the [SQL Server integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
 
 The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][4].
 
@@ -313,7 +313,7 @@ spec:
     name: sqlserver
 ```
 
-For additional documentation on setting `project_id` and `instance_id` fields, please refer to the [sqlserver integration spec][4]
+See the [SQL Server integration spec][4] for additional information on setting `project_id` and `instance_id` fields.
 
 The Cluster Agent automatically registers this configuration and begins running the SQL Server check.
 

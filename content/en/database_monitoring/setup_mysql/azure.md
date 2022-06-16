@@ -155,7 +155,7 @@ instances:
       name: '<YOUR_INSTANCE_NAME>'
 ```
 
-For additional documentation on setting `deployment_type` and `name` fields, please refer to the [mysql integration spec][4]
+See the [MySQL integration spec][4] for additional information on setting `deployment_type` and `name` fields.
 
 **Note**: Wrap your password in single quotes in case a special character is present.
 
@@ -211,9 +211,9 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
 ```
 
-For additional documentation on setting `deployment_type` and `name` fields, please refer to the [mysql integration spec][4]
+See the [MySQL integration spec][4] for additional information on setting `deployment_type` and `name` fields.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] on how to pass in the password as an environment variable.
 
 
 [1]: /agent/docker/integrations/?tab=docker
@@ -309,7 +309,7 @@ spec:
     name: mysql
 ```
 
-For additional documentation on setting `deployment_type` and `name` fields, please refer to the [mysql integration spec][5]
+See the [MySQL integration spec][5] for additional information on setting `deployment_type` and `name` fields.
 
 The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 

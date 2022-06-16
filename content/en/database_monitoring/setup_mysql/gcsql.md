@@ -205,15 +205,14 @@ instances:
 
 **Note**: Wrap your password in single quotes in case a special character is present.
 
-For additional documentation on setting `project_id` and `instance_id` fields, please refer to the [mysql integration spec][3]
+See the [MySQL integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
 
-[Restart the Agent][4] to start sending MySQL metrics to Datadog.
+[Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L494-L521
-[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -259,15 +258,14 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-For additional documentation on setting `project_id` and `instance_id` fields, please refer to the [mysql integration spec][2]
+See the [MySQL integration spec][2] for additional information on setting `project_id` and `instance_id` fields.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][4] to learn how to pass the password as an environment variable.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][2] on how to pass in the password as an environment variable.
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L494-L521
+[2]: /agent/faq/template_variables/
 [3]: /agent/guide/secrets-management
-[4]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -356,17 +354,16 @@ spec:
     name: mysql
 ```
 
-For additional documentation on setting `project_id` and `instance_id` fields, please refer to the [mysql integration spec][4]
+See the [MySQL integration spec][4] for additional information on setting `project_id` and `instance_id` fields.
 
 The Cluster Agent automatically registers this configuration and begin running the MySQL check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L494-L521
-[5]: /agent/guide/secrets-management
+[4]: /agent/guide/secrets-management
 {{% /tab %}}
 
 {{< /tabs >}}
