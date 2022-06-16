@@ -19883,6 +19883,22 @@ paths:
         required: false
         schema:
           type: string
+      - description: The height of the graph. If no height is specified, the graph's
+          original height is used.
+        in: query
+        name: height
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The width of the graph. If no width is specified, the graph's
+          original width is used.
+        in: query
+        name: width
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
