@@ -189,6 +189,9 @@ This configuration generates a check that collects all metrics exposed using the
 
 #### Advanced configuration
 
+{{< tabs >}}
+{{% tab "Helm" %}}
+
 You can define advanced OpenMetrics check configurations or custom Autodiscovery rules other than native Prometheus annotations with the `additionalConfigs` configuration field in `values.yaml`.
 
 `additionalConfigs` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
@@ -220,6 +223,7 @@ datadog:
   # (...)
   prometheusScrape:
     enabled: true
+    serviceEndpoints: true
     additionalConfigs:
       -
         configurations:
@@ -232,6 +236,45 @@ datadog:
             include:
               app: my-app
 ```
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+You can define advanced OpenMetrics check configurations or custom Autodiscovery rules other than native Prometheus annotations with the `DD_PROMETHEUS_SCRAPE_CHECKS` environment variable in the Agent and Cluster Agent manifests.
+
+`DD_PROMETHEUS_SCRAPE_CHECKS` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
+
+Every [configuration field][14] supported by the OpenMetrics check can be passed in the configurations list.
+
+The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
+
+`kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
+
+`kubernetes_annotations` contains two maps of labels to define the discovery rules: `include` and `exclude`.
+
+**Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
+
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_CHECKS
+  value: "[{\"autodiscovery\":{\"kubernetes_annotations\":{\"exclude\":{\"prometheus.io/scrape\":\"false\"},\"include\":{\"prometheus.io/scrape\":\"true\"}}}}]"
+```
+
+**Example:**
+
+In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
+
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_ENABLED
+  value: "true"
+- name: DD_PROMETHEUS_SCRAPE_CHECKS
+  value: "[{\"autodiscovery\":{\"kubernetes_annotations\":{\"include\":{\"app\":\"my-app\"}},\"kubernetes_container_names\":[\"my-app\"]},\"configurations\":[{\"send_distribution_buckets\":true,\"timeout\":5}]}]"
+- name: DD_PROMETHEUS_SCRAPE_VERSION
+  value: "2"
+```
+
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## From custom to official integration
 
