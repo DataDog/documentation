@@ -10,7 +10,7 @@ aliases:
 
 Set up your application to send [traces][1] using one of the following official Datadog tracing libraries:
 
-{{< partial name="apm/apm-languages.html" >}}
+{{< partial name="apm/apm-compatibility.html" >}}
 
 <br>
 

@@ -5,7 +5,7 @@ kind: documentation
 
 For information about configuration options for tracing libraries, choose your language:
 
-{{< partial name="apm/apm-languages.html" >}}
+{{< partial name="apm/apm-compatibility.html" >}}
 
 <br>
 
