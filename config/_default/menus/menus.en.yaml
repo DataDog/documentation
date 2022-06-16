@@ -1615,7 +1615,7 @@ main:
     identifier: tracing_connect_logs_dotnet
     weight: 107
   - name: OpenTelemetry
-    url: tracing/other_telemetry/connect_logs_and_traces/otel/
+    url: tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
     parent: tracing_connect_logs
     identifier: tracing_connect_logs_otel
     weight: 108

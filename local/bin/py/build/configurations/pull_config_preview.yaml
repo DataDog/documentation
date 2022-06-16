@@ -201,7 +201,7 @@
       globs:
       - 'docs/GettingStarted.md'
       options:
-        dest_path: '/tracing/setup_overview/setup/'
+        dest_path: '/tracing/trace_collection/dd_libraries/'
         file_name: 'ruby.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
@@ -216,6 +216,7 @@
           - /tracing/setup/ruby/
           - /tracing/setup_overview/ruby/
           - /agent/apm/ruby/
+          - /tracing/setup_overview/setup/ruby
 
   - repo_name: datadog-serverless-functions
     contents:
