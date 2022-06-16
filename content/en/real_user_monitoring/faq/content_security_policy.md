@@ -29,7 +29,7 @@ worker-src blob:;
 
 ## CDN bundle URL
 
-If you are using the CDN async or CDN sync setup for [Real User Monitoring][4] or [Browser Log Collection][5], you also add the following `script-src` entry:
+If you are using the CDN async or CDN sync setup for [Real User Monitoring][4] or [Browser Log Collection][5], also add the following `script-src` entry:
 
 ```txt
 script-src https://www.datadoghq-browser-agent.com
