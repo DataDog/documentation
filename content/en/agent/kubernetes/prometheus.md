@@ -244,7 +244,7 @@ You can define advanced OpenMetrics check configurations or custom Autodiscovery
 
 `DD_PROMETHEUS_SCRAPE_CHECKS` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
 
-Every [configuration field][14] supported by the OpenMetrics check can be passed in the configurations list.
+Every [configuration field][15] supported by the OpenMetrics check can be passed in the configurations list.
 
 The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
@@ -280,7 +280,7 @@ In this example we're defining an advanced configuration targeting a container n
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][15] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][16] integration.
 
 ## Further Reading
 
@@ -300,4 +300,5 @@ Official integrations have their own dedicated directories. There's a default in
 [12]: https://app.datadoghq.com/metric/summary
 [13]: /agent/faq/template_variables/
 [14]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[15]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[15]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[16]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
