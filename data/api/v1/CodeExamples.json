@@ -51,6 +51,21 @@
   "CreateDashboard": [
     {
       "group": "dashboards",
+      "suffix": "_1442588603",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions APM Stats query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3882428227",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions events query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_252716965",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions metrics query"
+    },
+    {
+      "group": "dashboards",
       "suffix": "",
       "description": "Create a new dashboard returns \"OK\" response"
     },
