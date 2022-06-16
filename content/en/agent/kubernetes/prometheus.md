@@ -143,6 +143,9 @@ With Prometheus Autodiscovery, the Datadog Agent is able to detect native Promet
 
 #### Basic configuration
 
+{{< tabs >}}
+{{% tab "Helm" %}}
+
 In your Helm `values.yaml`, add the following:
 
 ```yaml
@@ -150,8 +153,29 @@ datadog:
   # (...)
   prometheusScrape:
     enabled: true
+    serviceEndpoints: true
   # (...)
 ```
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+In your DaemonSet manifest for the Agent `daemonset.yaml`, add the following environment variables for the Agent container:
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_ENABLED
+  value: "true"
+- name: DD_PROMETHEUS_SCRAPE_VERSION
+  value: "2"
+```
+If the Cluster Agent is enabled, inside its manifest `cluster-agent-deployment.yaml`, add the following environment variables for the Cluster Agent container:
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_ENABLED
+  value: "true"
+- name: DD_PROMETHEUS_SCRAPE_SERVICE_ENDPOINTS
+  value: "true" 
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 This instructs the Datadog Agent to detect the pods that have native Prometheus annotations and generate corresponding OpenMetrics checks.
 
@@ -165,11 +189,14 @@ This configuration generates a check that collects all metrics exposed using the
 
 #### Advanced configuration
 
+{{< tabs >}}
+{{% tab "Helm" %}}
+
 You can define advanced OpenMetrics check configurations or custom Autodiscovery rules other than native Prometheus annotations with the `additionalConfigs` configuration field in `values.yaml`.
 
 `additionalConfigs` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
 
-Every [configuration field][14] supported by the OpenMetrics check can be passed in the configurations list.
+Every [configuration field][1] supported by the OpenMetrics check can be passed in the configurations list.
 
 The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
@@ -196,6 +223,7 @@ datadog:
   # (...)
   prometheusScrape:
     enabled: true
+    serviceEndpoints: true
     additionalConfigs:
       -
         configurations:
@@ -209,11 +237,53 @@ datadog:
               app: my-app
 ```
 
+
+[1]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+You can define advanced OpenMetrics check configurations or custom Autodiscovery rules other than native Prometheus annotations with the `DD_PROMETHEUS_SCRAPE_CHECKS` environment variable in the Agent and Cluster Agent manifests.
+
+`DD_PROMETHEUS_SCRAPE_CHECKS` is a list of structures containing OpenMetrics check configurations and Autodiscovery rules.
+
+Every [configuration field][1] supported by the OpenMetrics check can be passed in the configurations list.
+
+The Autodiscovery configuration can be based on container names or Kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
+
+`kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
+
+`kubernetes_annotations` contains two maps of labels to define the discovery rules: `include` and `exclude`.
+
+**Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
+
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_CHECKS
+  value: "[{\"autodiscovery\":{\"kubernetes_annotations\":{\"exclude\":{\"prometheus.io/scrape\":\"false\"},\"include\":{\"prometheus.io/scrape\":\"true\"}}}}]"
+```
+
+**Example:**
+
+In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
+
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_ENABLED
+  value: "true"
+- name: DD_PROMETHEUS_SCRAPE_CHECKS
+  value: "[{\"autodiscovery\":{\"kubernetes_annotations\":{\"include\":{\"app\":\"my-app\"}},\"kubernetes_container_names\":[\"my-app\"]},\"configurations\":[{\"send_distribution_buckets\":true,\"timeout\":5}]}]"
+- name: DD_PROMETHEUS_SCRAPE_VERSION
+  value: "2"
+```
+
+
+[1]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+{{% /tab %}}
+{{< /tabs >}}
+
 ## From custom to official integration
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][15] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][14] integration.
 
 ## Further Reading
 
@@ -232,5 +302,4 @@ Official integrations have their own dedicated directories. There's a default in
 [11]: /resources/yaml/prometheus.yaml
 [12]: https://app.datadoghq.com/metric/summary
 [13]: /agent/faq/template_variables/
-[14]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[15]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
