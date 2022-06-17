@@ -3,7 +3,6 @@ on:
   pull_request:
     paths:
     - 'content/en/**.md'
-    - .github/workflows/preview_link.yml
 
 jobs:
   preview-link:
