@@ -57,7 +57,7 @@ Combined with RUM performance data, Session Replay is beneficial for error ident
 
 ## Get started
 
-Select your application type to start collecting RUM data:
+Select an application type to start collecting RUM data:
 
 {{< partial name="rum/rum-getting-started.html" >}}
 
@@ -67,7 +67,7 @@ Select your application type to start collecting RUM data:
 
 ### Out-of-the-box dashboards
 
-Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out-of-the-box dashboards][1].
+Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out-of-the-box RUM dashboards][1].
 
 {{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
