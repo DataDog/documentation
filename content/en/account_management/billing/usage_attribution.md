@@ -36,7 +36,7 @@ The following usage types are not supported in this tool:
 
 ## Getting started
 
-To start receiving daily data, an administrator needs to create a new report with the user interface.
+To start receiving daily data, an administrator needs to create a new report with the user interface, by enabling reporting and setting up tags.
 
 {{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Getting Started with Usage Attribution in Datadog" style="width:100%;" >}}
 
@@ -58,7 +58,7 @@ The **Applied Tags** section enables the following:
 
 Once the reports start to be generated, they are updated daily and aggregated monthly in this table.
 
-{{< img src="account_management/billing/usage_attribution/total-usage.png" alt="Applied tags in Datadog" style="width:100%;" >}}
+![Usage Attribution - Total Usage](https://user-images.githubusercontent.com/97177827/174238910-691b53bb-4561-46e4-8d35-6c48f62be552.jpeg)
 
 - Data is shown by all tag keys selected e.g. by app and service. 
 - Data can be shown by specific organization or tag keys by querying on the left-side dropdown. 
