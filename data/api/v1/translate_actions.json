@@ -691,6 +691,10 @@
     "request_description": "",
     "request_schema_description": "Create, edit, and manage organizations."
   },
+  "DowngradeOrg": {
+    "description": "Only available for MSP customers. Removes a child organization from the hierarchy of the master organization and places the child organization on a 30-day trial.",
+    "summary": "Spin-off Child Organization"
+  },
   "UploadIdPForOrg": {
     "description": "There are a couple of options for updating the Identity Provider (IdP)\nmetadata from your SAML IdP.\n\n* **Multipart Form-Data**: Post the IdP metadata file using a form post.\n\n* **XML Body:** Post the IdP metadata file as the body of the request.",
     "summary": "Upload IdP metadata",
