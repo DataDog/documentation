@@ -18,10 +18,6 @@ title: Watchdog Insights for RUM
 
 Datadog Real User Monitoring(RUM)은 RUM Explorer의 컨텍스트 인사이트와 관련하여 문제의 근본 원인을 파악하는 데 도움이 되는 Watchdog Insights를 제공합니다. Watchdog Insights는 서브셋에 영향을 주는 아웃라이어(outlier)와 성능의 병목 현상이 발생할 수 있는 부분을 파악하여 사용자의 전문 지식과 능력을 보완해줍니다.
 
-<div class="alert alert-warning">
-Watchdog Insights for RUM은 현재 베타 버전입니다. Real User Monitoring을 사용 중이신 고객 여러분께만 본 기능을 제공하고 있습니다. 피드백이 있는 경우 <a href="https://docs.datadoghq.com/help/">Datadog 고객 지원팀</a>에 문의해주세요.
-</div>
-
 이번 가이드에서는 Watchdog Insights를 이용해 `view.url_host:www.shopist.io`에 배포된 애플리케이션 인스턴스가 지정된 기간(예: 과거 1일)에 대부분의 오류를 일으켰다는 사실을 파악하는 사례를 보여드리겠습니다.
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/overview.png" alt="Watchdog Insights" style="width:100%;" >}}
