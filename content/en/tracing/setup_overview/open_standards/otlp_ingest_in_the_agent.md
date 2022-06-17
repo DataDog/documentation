@@ -18,7 +18,7 @@ To get started, you first [instrument your application][3] with OpenTelemetry SD
 
 Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][4].
 
-## Enabling OTLP Ingestion on Datadog Agent
+## Enabling OTLP Ingestion on the Datadog Agent
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -184,11 +184,13 @@ experimental:
    ```
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
+{{< /tabs >}}
 
 There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][5].
 
-## Sending OTLP traces from application to Datadog Agent
+## Sending OTLP traces from the application to Datadog Agent
 
+{{< tabs >}}
 {{% tab "Docker" %}}
 1. For the application container, set `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Datadog Agent container. For example:
 
@@ -197,6 +199,7 @@ There are many other environment variables and settings supported in the Datadog
    ```
 
 2. Both containers must be defined in the same bridge network, which is handled automatically if you use Docker Compose. Otherwise, follow the Docker example in [Tracing Docker Applications][1] to set up a bridge network with the correct ports.
+
 [1]: /agent/docker/apm/#docker-network
 {{% /tab %}}
 
@@ -227,7 +230,7 @@ There are many other environment variables and settings supported in the Datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Check the documentation of your OTLP Library. Some of them needs to send traces to `/v1/traces` instead of the `/` root path.</div>
+<div class="alert alert-info">Check the documentation of your OTLP Library. Some of them must send traces to `/v1/traces` instead of the `/` root path.</div>
 
 
 ## Further Reading
