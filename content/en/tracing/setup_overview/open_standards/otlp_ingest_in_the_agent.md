@@ -18,6 +18,7 @@ To get started, you first [instrument your application][3] with OpenTelemetry SD
 
 Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][4].
 
+## Enabling OTLP Ingestion on Datadog Agent
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -71,17 +72,7 @@ experimental:
    - For gPRC: `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` and port `4317`
    - For HTTP: `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` and port `4318`
 
-3. For the application container, set `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Datadog Agent container. For example:
-
-   ```
-   OTEL_EXPORTER_OTLP_ENDPOINT=http://<datadog-agent>:4318.
-   ```
-
-4. Both containers must be defined in the same bridge network, which is handled automatically if you use Docker Compose. Otherwise, follow the Docker example in [Tracing Docker Applications][2] to set up a bridge network with the correct ports.
-
-
 [1]: /agent/docker/
-[2]: /agent/docker/apm/#docker-network
 {{% /tab %}}
 {{% tab "Kubernetes (Daemonset)" %}}
 
@@ -120,53 +111,20 @@ experimental:
        protocol: TCP
    ```
 
-4. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
-
-   For gPRC:
-   ```
-   env:
-    - name: <DD_AGENT_HOST>
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:4317" # sends to gRPC receiver on port 4317
-   ```
-
-   For HTTP:
-   ```
-   env:
-    - name: <DD_AGENT_HOST>
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:4318" # sends to HTTP receiver on port 4318
-   ```
-
-
 [1]: /agent/kubernetes/?tab=daemonset
 {{% /tab %}}
 {{% tab "Kubernetes (Helm)" %}}
 
 1. Follow the [Kubernetes Agent setup][1].
 
-2. Set environment variables for the Agent. You can either use `set` commands:
+On Helm Installations, you can either configure using `values.yaml` or by using the `set` commands:
+
+{{% tab "values.yaml" %}}
+2. Set environment variables for the Agent editing the `datadog.env` parameter of the `values.yaml` file:
 
    For gRPC:
    ```
-   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT,datadog.env[0].value=0.0.0.0:4317"
-   ```
-   For HTTP:
-   ```
-   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:4318"
-   ```
-
-   Or set them in the `datadog.env` parameter of the `values.yaml` file:
-
-   For gRPC:
-   ```
-   env
+   env:
      - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT
        value: "0.0.0.0:4317"
    ```
@@ -177,19 +135,8 @@ experimental:
      - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT
        value: "0.0.0.0:4318"
    ```
-
-3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the core Agent container. You can either use `set` commands:
-
-   For gRPC:
-   ```
-   --set 'agents.containers.agent.ports[0].containerPort=4317,agents.containers.agent.ports[0].hostPort=4317,agents.containers.agent.ports[0].name=traceportgrpc,agents.containers.agent.ports[0].protocol=TCP' 
-   ```
-   For HTTP:
-   ```
-   --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
-   ```
-
-   Or set them in the `agents.containers.agent.ports` parameter of the `values.yaml` file:
+   
+3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the core Agent container setting them in the `agents.containers.agent.ports` parameter of the `values.yaml` file:
 
    For gRPC:
    ```
@@ -208,38 +155,110 @@ experimental:
          name: traceporthttp
          protocol: TCP
    ```
+{{% /tab %}}
 
-4. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
+{{% tab "set command" %}}
+2. Set environment variables for the Agent using `set` commands:
+
+   For gRPC:
+   ```
+   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT,datadog.env[0].value=0.0.0.0:4317"
+   ```
+   For HTTP:
+   ```
+   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:4318"
+   ```
+   
+3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the core Agent container:
+
+   For gRPC:
+   ```
+   --set 'agents.containers.agent.ports[0].containerPort=4317,agents.containers.agent.ports[0].hostPort=4317,agents.containers.agent.ports[0].name=traceportgrpc,agents.containers.agent.ports[0].protocol=TCP' 
+   ```
+   
+   For HTTP:
+   ```
+   --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
+   ```
+ {{% /tab %}}
+
+   
+
+[1]: /agent/kubernetes/?tab=helm
+{{% /tab %}}
+
+
+There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][5].
+
+## Sending OTLP traces from application to Datadog Agent
+
+{{% tab "Docker" %}}
+1. For the application container, set `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Datadog Agent container. For example:
+
+   ```
+   OTEL_EXPORTER_OTLP_ENDPOINT=http://<datadog-agent>:4318.
+   ```
+
+2. Both containers must be defined in the same bridge network, which is handled automatically if you use Docker Compose. Otherwise, follow the Docker example in [Tracing Docker Applications][1] to set up a bridge network with the correct ports.
+[1]: /agent/docker/apm/#docker-network
+{{% /tab %}}
+
+{{% tab "Kubernetes (Daemonset)" %}}
+1. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
 
    For gPRC:
    ```
    env:
-    - name: <DD_AGENT_HOST>
+    - name: DD_AGENT_HOST
       valueFrom:
         fieldRef:
           fieldPath: status.hostIP
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:4317" # sends to gRPC receiver on port 4317
+      value: "http://$(DD_AGENT_HOST):4317" # sends to gRPC receiver on port 4317
    ```
 
    For HTTP:
    ```
    env:
-    - name: <DD_AGENT_HOST>
+    - name: DD_AGENT_HOST
       valueFrom:
         fieldRef:
           fieldPath: status.hostIP
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:4318" # sends to HTTP receiver on port 4318
+      value: "http://$(DD_AGENT_HOST):4318" # sends to HTTP receiver on port 4318
+   ```
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+1. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
+
+   For gPRC:
+   ```
+   env:
+    - name: DD_AGENT_HOST
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: "http://$(DD_AGENT_HOST):4317" # sends to gRPC receiver on port 4317
    ```
 
+   For HTTP:
+   ```
+   env:
+    - name: DD_AGENT_HOST
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: "http://$(DD_AGENT_HOST):4318" # sends to HTTP receiver on port 4318
+   ```
 
-[1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
+
+<div class="alert alert-info">Check the documentation of your OTLP Library. Some of them needs to send traces to `/v1/traces` instead of the `/` root path.</div>
+
 {{< /tabs >}}
-
-There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][5].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
