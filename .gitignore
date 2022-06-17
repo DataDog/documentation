@@ -203,6 +203,9 @@ static/images/integrations_logos/2020w2.pdf
 resources/_gen/
 static/jsconfig.json
 
+# Generated from GitHub actions
+.github/preview-links-template.md
+
 # yarn v2 or greater
 # Not using zero installs
 # https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
