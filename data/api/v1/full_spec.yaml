@@ -24626,7 +24626,7 @@ paths:
         type: idempotent
   /api/v1/org:
     get:
-      description: List your managed organizations.
+      description: This endpoint returns data on your top-level organization.
       operationId: ListOrgs
       responses:
         '200':
