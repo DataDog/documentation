@@ -13,7 +13,7 @@ disable_sidebar: true
 
 |  | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL |
 |--|------------|---------|------------|------------------|
-| Postgres 9.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Postgres 9.6 | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | Postgres 10 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 11 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 12 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
