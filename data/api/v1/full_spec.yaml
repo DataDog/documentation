@@ -25399,10 +25399,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all SLOs
       tags:
       - Service Level Objectives
@@ -25856,10 +25852,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an SLO's details
       tags:
       - Service Level Objectives
@@ -25955,10 +25947,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get Corrections For an SLO
       tags:
       - Service Level Objectives
@@ -26043,10 +26031,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
