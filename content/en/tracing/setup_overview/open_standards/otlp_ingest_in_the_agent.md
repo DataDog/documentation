@@ -113,13 +113,11 @@ experimental:
 
 [1]: /agent/kubernetes/?tab=daemonset
 {{% /tab %}}
-{{% tab "Kubernetes (Helm)" %}}
+
+{{% tab "Kubernetes (Helm) - values.yaml" %}}
 
 1. Follow the [Kubernetes Agent setup][1].
 
-On Helm Installations, you can either configure using `values.yaml` or by using the `set` commands:
-
-{{% tab "values.yaml" %}}
 2. Set environment variables for the Agent editing the `datadog.env` parameter of the `values.yaml` file:
 
    For gRPC:
@@ -155,9 +153,13 @@ On Helm Installations, you can either configure using `values.yaml` or by using 
          name: traceporthttp
          protocol: TCP
    ```
+[1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
 
-{{% tab "set command" %}}
+{{% tab "Kubernetes (Helm) - set" %}}
+
+1. Follow the [Kubernetes Agent setup][1].
+
 2. Set environment variables for the Agent using `set` commands:
 
    For gRPC:
@@ -180,13 +182,8 @@ On Helm Installations, you can either configure using `values.yaml` or by using 
    ```
    --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
    ```
- {{% /tab %}}
-
-   
-
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
-
 
 There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][5].
 
@@ -255,10 +252,11 @@ There are many other environment variables and settings supported in the Datadog
    ```
 
 {{% /tab %}}
+{{< /tabs >}}
 
 <div class="alert alert-info">Check the documentation of your OTLP Library. Some of them needs to send traces to `/v1/traces` instead of the `/` root path.</div>
 
-{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
