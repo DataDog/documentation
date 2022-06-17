@@ -39,7 +39,7 @@ To enable debug mode for the Datadog Python Tracer, review the instructions belo
     - `DD_TRACE_LOGGING_RATE=0` (Optional: used for more tracer logs)
 2. To route to a log file:
     - Configure `DD_TRACE_LOG_FILE` with the log file that tracer logs should be written to. Example: `DD_TRACE_LOG_FILE=ddtrace_logs.log`.
-    - By default, the file size is `DD_TRACE_LOG_FILE_SIZE_BYTES=15728640` or ~15 mb and one backup log will be created. To increase the default log file size, change `DD_TRACE_LOG_FILE_SIZE_BYTES` to the desired file bytes size.
+    - By default, the file size is `DD_TRACE_LOG_FILE_SIZE_BYTES=15728640` or ~15 mb and one backup log file will be created. To increase the default log file size, change `DD_TRACE_LOG_FILE_SIZE_BYTES` to the desired file bytes size.
 3. To route logs to the console: 
     - This is done by default for **Python 3** applications. 
     - For **Python 2** applications, `logging.basicConfig()` or similar needs to be configured.
