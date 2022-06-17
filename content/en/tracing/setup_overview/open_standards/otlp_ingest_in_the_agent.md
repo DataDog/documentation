@@ -200,7 +200,7 @@ There are many other environment variables and settings supported in the Datadog
 [1]: /agent/docker/apm/#docker-network
 {{% /tab %}}
 
-{{% tab "Kubernetes (Daemonset)" %}}
+{{% tab "Kubernetes" %}}
 1. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
 
    For gPRC:
@@ -224,33 +224,6 @@ There are many other environment variables and settings supported in the Datadog
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
       value: "http://$(DD_AGENT_HOST):4318" # sends to HTTP receiver on port 4318
    ```
-{{% /tab %}}
-
-{{% tab "Kubernetes (Helm)" %}}
-1. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
-
-   For gPRC:
-   ```
-   env:
-    - name: DD_AGENT_HOST
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$(DD_AGENT_HOST):4317" # sends to gRPC receiver on port 4317
-   ```
-
-   For HTTP:
-   ```
-   env:
-    - name: DD_AGENT_HOST
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$(DD_AGENT_HOST):4318" # sends to HTTP receiver on port 4318
-   ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
