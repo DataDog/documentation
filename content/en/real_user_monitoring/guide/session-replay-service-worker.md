@@ -1,10 +1,12 @@
 ---
-title: Allow Third-Party Service Worker for Session Replay
-kind: faq
+title: Allow Third-Party Service Workers For Session Replay
+kind: guide
+aliases:
+  - /real_user_monitoring/faq/session_replay_service_worker/
 further_reading:
-    - link: '/real_user_monitoring/session_replay/'
-      tag: 'Get Started'
-      text: 'Session Replay'
+   - link: '/real_user_monitoring/session_replay/'
+     tag: 'Documentation'
+     text: 'Learn about Session Replay'
 ---
 
 ## Overview
@@ -30,3 +32,7 @@ If you use Google Chrome, follow the instructions below. This exception workflow
    {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2.png" alt="Allow Session Replay Third-Party Service Worker" >}}
 
 Once you have updated your cookie settings, reload the page.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

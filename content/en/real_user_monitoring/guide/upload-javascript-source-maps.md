@@ -1,5 +1,5 @@
 ---
-title: Upload Javascript source maps
+title: Upload JavaScript Source Maps
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/error_tracking'
@@ -12,15 +12,15 @@ further_reading:
 
 ## Overview
 
-If your front-end Javascript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace. Datadog can also link stack frames to your source code in your repository.
+If your front-end JavaScript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace. Datadog can also link stack frames to your source code in your repository.
 
 <div class="alert alert-info">Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> can be unminified.</div>
 
 ## Instrument your code
 
-Configure your Javascript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. Also, ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50MB**.
+Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. Also, ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50MB**.
 
-See the following configurations for popular Javascript bundlers.
+See the following configurations for popular JavaScript bundlers.
 
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
@@ -62,7 +62,7 @@ Parcel generates source maps by default when you run the build command: `parcel 
 {{% /tab %}}
 {{< /tabs >}}
 
-After building your application, bundlers generate a directory (typically named `dist`) with minified Javascript files co-located with their corresponding source maps.
+After building your application, bundlers generate a directory (typically named `dist`) with minified JavaScript files co-located with their corresponding source maps.
 
 See the following example:
 
@@ -117,9 +117,9 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 To minimize overhead on your CI's performance, the CLI is optimized to upload as many source maps as you need in a short amount of time (typically a few seconds).
 
-The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events. For more information on how to setup these tags, refer to the [Browser SDK initialization documentation][2]. The sourcemaps that have been uploaded will then be used to de-obfuscate errors collected by the RUM SDK.
+The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events. For more information on how to setup these tags, refer to the [Browser SDK initialization documentation][2]. The uploaded sourcemaps are used to de-obfuscate errors collected by the RUM Browser SDK.
 
-By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the Javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
+By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the JavaScript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
 **Note**: Only source maps with the `.js.map` extension work to correctly unminify stack traces in Error Tracking. Source maps with other extensions such as `.mjs.map` are accepted but do not unminify stack traces.
 
@@ -127,7 +127,7 @@ By running the command against the example `dist` directory, Datadog expects you
 
 ### Link stack frames to your source code
 
-If you run `datadog-ci sourcemaps upload` within a Git working directory, Datadog will collect repository metadata. The `datadog-ci` command collects the repository URL, the current commit hash, and the list of file paths in the repository that relate to your source maps. For more details about Git metadata collection, refer to the [datadog-ci documentation][3].
+If you run `datadog-ci sourcemaps upload` within a Git working directory, Datadog collects repository metadata. The `datadog-ci` command collects the repository URL, the current commit hash, and the list of file paths in the repository that relate to your source maps. For more details about Git metadata collection, refer to the [datadog-ci documentation][3].
 
 Datadog displays links to your source code on unminified stack frames.
 
