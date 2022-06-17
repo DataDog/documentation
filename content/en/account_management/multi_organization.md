@@ -135,7 +135,7 @@ Functionalities include:
 * Accessing monthly usage in both the UI and as a .tsv download (tab separated values)
 * Accessing daily usage in a .tsv file for most usage types.
 
-{{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Usage Summary Table" >}}
+![Usage Attribution - Total Usage](https://user-images.githubusercontent.com/97177827/174238910-691b53bb-4561-46e4-8d35-6c48f62be552.jpeg)
 
 Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level do not rollup and cannot be viewed in the parent-organization.
 
