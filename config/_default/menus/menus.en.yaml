@@ -4869,6 +4869,18 @@ api:
         - UploadIdPMetadata
       unstable: []
       order: 5
+  - name: Spin-off Child Organization
+    url: '#spin-off-child-organization'
+    identifier: organizations-spin-off-child-organization
+    parent: organizations
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DowngradeOrg
+      unstable: []
+      order: 6
   - name: Update your organization
     url: '#update-your-organization'
     identifier: organizations-update-your-organization
