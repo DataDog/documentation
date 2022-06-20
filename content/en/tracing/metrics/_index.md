@@ -32,6 +32,8 @@ Learn how to [create APM monitors][3] that alert and notify you when APM metrics
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}[1]: /tracing/metrics/trace_metrics/
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/metrics/trace_metrics/
 [2]: /tracing/metrics/runtime_metrics/
 [3]: /monitors/create/types/apm/
