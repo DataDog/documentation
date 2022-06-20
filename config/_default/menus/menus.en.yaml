@@ -1559,7 +1559,7 @@ main:
     parent: tracing_trace_pipeline
     identifier: tracing_ingestion_controls
     weight: 302
-  - name: Retention Filters
+  - name: Trace Retention
     url: tracing/trace_pipeline/trace_retention/
     parent: tracing_trace_pipeline
     identifier: tracing_retention
