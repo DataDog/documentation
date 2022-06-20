@@ -12,9 +12,7 @@ Viewing span and trace data through the lens of your services can ease troublesh
 
 {{< img src="tracing/visualization/service_list.png" alt="service list" >}}
 
-Use the following visualizations and tools to monitor, report, and solve problems in your distributed services.
-
-{{< whatsnext desc="" >}}
+{{< whatsnext desc="Use the following visualizations and tools to monitor, report, and solve problems in your distributed services" >}}
     {{< nextlink href="tracing/services/services_list/" >}}Services List{{< /nextlink >}}
     {{< nextlink href="tracing/services/service_page/" >}}Service Page{{< /nextlink >}}
     {{< nextlink href="tracing/services/resource_page/" >}}Resource Page{{< /nextlink >}}
