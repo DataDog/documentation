@@ -127,17 +127,17 @@ In `datadog.yaml`:
 evp_proxy_config:
   [...]
   additional_endpoints:
-    "https://datadoghq.com":
+    "https://mydomain.datadoghq.com":
     - apikey2
     - apikey3
-    "https://datadoghq.eu":
+    "https://mydomain.datadoghq.eu":
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://datadoghq.eu\": [\"apikey4\"]}'
+DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
