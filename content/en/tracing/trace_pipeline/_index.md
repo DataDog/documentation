@@ -6,16 +6,9 @@ aliases:
     - /tracing/trace_ingestion/
     - /tracing/trace_retention_and_ingestion/
 description: "Learn how to control span ingestion"
-further_reading:
-- link: "/tracing/trace_retention/"
-  tag: "Documentation"
-  text: "Trace Retention"
-- link: "/tracing/trace_retention/usage_metrics/"
-  tag: "Documentation"
-  text: "Usage Metrics"
 ---
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey: Ingestion" >}}
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey: Ingestion" >}}
 
 With APM, both the **ingestion** of traces as well as the **retention** of those traces for 15 days are fully customizable.
 
@@ -34,7 +27,7 @@ The [Ingestion Control page][2] provides an overview of ingestion volumes and co
 
 ## Trace retention
 
-After spans have been ingested by Datadog, some are kept for 15 days according to the [Retention Filters][3] that have been set on your account. The Datadog Intelligent Retention Filter indezes a proportion of traces to help you monitor the health of your applications. Plus, you can define your own custom retention filters to index trace data you want to keep in support your organization's goals.
+After spans have been ingested by Datadog, some are kept for 15 days according to the [Retention Filters][3] that have been set on your account. The Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. Plus, you can define your own custom retention filters to index trace data you want to keep in support your organization's goals.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filter_page.png" style="width:100%;" alt="Retention Filters Page" >}}
 
@@ -44,9 +37,7 @@ Learn about how to track and monitor your volume of ingested and indexed data, i
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 
-## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_ingestion/mechanisms
 [2]: /tracing/trace_ingestion/ingestion_controls
