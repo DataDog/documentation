@@ -32240,6 +32240,7 @@
                           ]
                         },
                         "learningDuration": {
+                          "default": 0,
                           "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                           "enum": [
                             0,
@@ -32252,6 +32253,33 @@
                             "ZERO_DAYS",
                             "ONE_DAY",
                             "SEVEN_DAYS"
+                          ]
+                        },
+                        "learningMethod": {
+                          "default": "duration",
+                          "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                          "enum": [
+                            "duration",
+                            "threshold"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "DURATION",
+                            "THRESHOLD"
+                          ]
+                        },
+                        "learningThreshold": {
+                          "default": 0,
+                          "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                          "enum": [
+                            0,
+                            1
+                          ],
+                          "format": "int32",
+                          "type": "integer",
+                          "x-enum-varnames": [
+                            "ZERO_OCCURRENCES",
+                            "ONE_OCCURRENCE"
                           ]
                         }
                       },
@@ -32718,6 +32746,7 @@
                     ]
                   },
                   "learningDuration": {
+                    "default": 0,
                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                     "enum": [
                       0,
@@ -32730,6 +32759,33 @@
                       "ZERO_DAYS",
                       "ONE_DAY",
                       "SEVEN_DAYS"
+                    ]
+                  },
+                  "learningMethod": {
+                    "default": "duration",
+                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                    "enum": [
+                      "duration",
+                      "threshold"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DURATION",
+                      "THRESHOLD"
+                    ]
+                  },
+                  "learningThreshold": {
+                    "default": 0,
+                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_OCCURRENCES",
+                      "ONE_OCCURRENCE"
                     ]
                   }
                 },
@@ -32992,6 +33048,7 @@
             ]
           },
           "learningDuration": {
+            "default": 0,
             "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
             "enum": [
               0,
@@ -33004,6 +33061,33 @@
               "ZERO_DAYS",
               "ONE_DAY",
               "SEVEN_DAYS"
+            ]
+          },
+          "learningMethod": {
+            "default": "duration",
+            "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+            "enum": [
+              "duration",
+              "threshold"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "DURATION",
+              "THRESHOLD"
+            ]
+          },
+          "learningThreshold": {
+            "default": 0,
+            "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+            "enum": [
+              0,
+              1
+            ],
+            "format": "int32",
+            "type": "integer",
+            "x-enum-varnames": [
+              "ZERO_OCCURRENCES",
+              "ONE_OCCURRENCE"
             ]
           }
         },
@@ -33031,6 +33115,7 @@
         ]
       },
       "SecurityMonitoringRuleNewValueOptionsLearningDuration": {
+        "default": 0,
         "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
         "enum": [
           0,
@@ -33043,6 +33128,33 @@
           "ZERO_DAYS",
           "ONE_DAY",
           "SEVEN_DAYS"
+        ]
+      },
+      "SecurityMonitoringRuleNewValueOptionsLearningMethod": {
+        "default": "duration",
+        "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+        "enum": [
+          "duration",
+          "threshold"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "DURATION",
+          "THRESHOLD"
+        ]
+      },
+      "SecurityMonitoringRuleNewValueOptionsLearningThreshold": {
+        "default": 0,
+        "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+        "enum": [
+          0,
+          1
+        ],
+        "format": "int32",
+        "type": "integer",
+        "x-enum-varnames": [
+          "ZERO_OCCURRENCES",
+          "ONE_OCCURRENCE"
         ]
       },
       "SecurityMonitoringRuleOptions": {
@@ -33199,6 +33311,7 @@
                 ]
               },
               "learningDuration": {
+                "default": 0,
                 "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                 "enum": [
                   0,
@@ -33211,6 +33324,33 @@
                   "ZERO_DAYS",
                   "ONE_DAY",
                   "SEVEN_DAYS"
+                ]
+              },
+              "learningMethod": {
+                "default": "duration",
+                "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                "enum": [
+                  "duration",
+                  "threshold"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "DURATION",
+                  "THRESHOLD"
+                ]
+              },
+              "learningThreshold": {
+                "default": 0,
+                "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                "enum": [
+                  0,
+                  1
+                ],
+                "format": "int32",
+                "type": "integer",
+                "x-enum-varnames": [
+                  "ZERO_OCCURRENCES",
+                  "ONE_OCCURRENCE"
                 ]
               }
             },
@@ -33617,6 +33757,7 @@
                     ]
                   },
                   "learningDuration": {
+                    "default": 0,
                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                     "enum": [
                       0,
@@ -33629,6 +33770,33 @@
                       "ZERO_DAYS",
                       "ONE_DAY",
                       "SEVEN_DAYS"
+                    ]
+                  },
+                  "learningMethod": {
+                    "default": "duration",
+                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                    "enum": [
+                      "duration",
+                      "threshold"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DURATION",
+                      "THRESHOLD"
+                    ]
+                  },
+                  "learningThreshold": {
+                    "default": 0,
+                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_OCCURRENCES",
+                      "ONE_OCCURRENCE"
                     ]
                   }
                 },
@@ -34023,6 +34191,7 @@
                     ]
                   },
                   "learningDuration": {
+                    "default": 0,
                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                     "enum": [
                       0,
@@ -34035,6 +34204,33 @@
                       "ZERO_DAYS",
                       "ONE_DAY",
                       "SEVEN_DAYS"
+                    ]
+                  },
+                  "learningMethod": {
+                    "default": "duration",
+                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                    "enum": [
+                      "duration",
+                      "threshold"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DURATION",
+                      "THRESHOLD"
+                    ]
+                  },
+                  "learningThreshold": {
+                    "default": 0,
+                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_OCCURRENCES",
+                      "ONE_OCCURRENCE"
                     ]
                   }
                 },
@@ -73786,6 +73982,7 @@
                                     ]
                                   },
                                   "learningDuration": {
+                                    "default": 0,
                                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                                     "enum": [
                                       0,
@@ -73798,6 +73995,33 @@
                                       "ZERO_DAYS",
                                       "ONE_DAY",
                                       "SEVEN_DAYS"
+                                    ]
+                                  },
+                                  "learningMethod": {
+                                    "default": "duration",
+                                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                                    "enum": [
+                                      "duration",
+                                      "threshold"
+                                    ],
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "DURATION",
+                                      "THRESHOLD"
+                                    ]
+                                  },
+                                  "learningThreshold": {
+                                    "default": 0,
+                                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                                    "enum": [
+                                      0,
+                                      1
+                                    ],
+                                    "format": "int32",
+                                    "type": "integer",
+                                    "x-enum-varnames": [
+                                      "ZERO_OCCURRENCES",
+                                      "ONE_OCCURRENCE"
                                     ]
                                   }
                                 },
@@ -74260,6 +74484,7 @@
                             ]
                           },
                           "learningDuration": {
+                            "default": 0,
                             "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                             "enum": [
                               0,
@@ -74272,6 +74497,33 @@
                               "ZERO_DAYS",
                               "ONE_DAY",
                               "SEVEN_DAYS"
+                            ]
+                          },
+                          "learningMethod": {
+                            "default": "duration",
+                            "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                            "enum": [
+                              "duration",
+                              "threshold"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "DURATION",
+                              "THRESHOLD"
+                            ]
+                          },
+                          "learningThreshold": {
+                            "default": 0,
+                            "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                            "enum": [
+                              0,
+                              1
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ZERO_OCCURRENCES",
+                              "ONE_OCCURRENCE"
                             ]
                           }
                         },
@@ -74652,6 +74904,7 @@
                               ]
                             },
                             "learningDuration": {
+                              "default": 0,
                               "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                               "enum": [
                                 0,
@@ -74664,6 +74917,33 @@
                                 "ZERO_DAYS",
                                 "ONE_DAY",
                                 "SEVEN_DAYS"
+                              ]
+                            },
+                            "learningMethod": {
+                              "default": "duration",
+                              "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                              "enum": [
+                                "duration",
+                                "threshold"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DURATION",
+                                "THRESHOLD"
+                              ]
+                            },
+                            "learningThreshold": {
+                              "default": 0,
+                              "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                              "enum": [
+                                0,
+                                1
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_OCCURRENCES",
+                                "ONE_OCCURRENCE"
                               ]
                             }
                           },
@@ -75285,6 +75565,7 @@
                               ]
                             },
                             "learningDuration": {
+                              "default": 0,
                               "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                               "enum": [
                                 0,
@@ -75297,6 +75578,33 @@
                                 "ZERO_DAYS",
                                 "ONE_DAY",
                                 "SEVEN_DAYS"
+                              ]
+                            },
+                            "learningMethod": {
+                              "default": "duration",
+                              "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                              "enum": [
+                                "duration",
+                                "threshold"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DURATION",
+                                "THRESHOLD"
+                              ]
+                            },
+                            "learningThreshold": {
+                              "default": 0,
+                              "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                              "enum": [
+                                0,
+                                1
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_OCCURRENCES",
+                                "ONE_OCCURRENCE"
                               ]
                             }
                           },
@@ -75736,6 +76044,7 @@
                             ]
                           },
                           "learningDuration": {
+                            "default": 0,
                             "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                             "enum": [
                               0,
@@ -75748,6 +76057,33 @@
                               "ZERO_DAYS",
                               "ONE_DAY",
                               "SEVEN_DAYS"
+                            ]
+                          },
+                          "learningMethod": {
+                            "default": "duration",
+                            "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                            "enum": [
+                              "duration",
+                              "threshold"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "DURATION",
+                              "THRESHOLD"
+                            ]
+                          },
+                          "learningThreshold": {
+                            "default": 0,
+                            "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                            "enum": [
+                              0,
+                              1
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ZERO_OCCURRENCES",
+                              "ONE_OCCURRENCE"
                             ]
                           }
                         },
@@ -76106,6 +76442,7 @@
                               ]
                             },
                             "learningDuration": {
+                              "default": 0,
                               "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                               "enum": [
                                 0,
@@ -76118,6 +76455,33 @@
                                 "ZERO_DAYS",
                                 "ONE_DAY",
                                 "SEVEN_DAYS"
+                              ]
+                            },
+                            "learningMethod": {
+                              "default": "duration",
+                              "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                              "enum": [
+                                "duration",
+                                "threshold"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DURATION",
+                                "THRESHOLD"
+                              ]
+                            },
+                            "learningThreshold": {
+                              "default": 0,
+                              "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                              "enum": [
+                                0,
+                                1
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_OCCURRENCES",
+                                "ONE_OCCURRENCE"
                               ]
                             }
                           },
