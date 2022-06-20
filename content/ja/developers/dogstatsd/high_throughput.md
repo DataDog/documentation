@@ -377,7 +377,7 @@ Agent は、DogStatsD クライアントから送信されたメトリクスの�
 この例では、DogStatsD の最大メモリ使用量を約 384MB に減らします。
 
 ```yaml
-dogstatsd_queue_size: 512
+dogstatsd_queue_size: 384
 ```
 
 バースト検知を使用してアプリケーションからメトリクスのバーストを検知するには、次のセクションを参照してください。

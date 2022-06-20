@@ -370,7 +370,7 @@ Pour limiter l'utilisation maximale de la mémoire, pensez également à réduir
 Cet exemple réduit l'utilisation maximale de la mémoire de DogStatsD à environ 384 Mo :
 
 ```yaml
-dogstatsd_queue_size: 512
+dogstatsd_queue_size: 384
 ```
 
 Consultez la section suivante dédiée à la détection des salves pour découvrir comment détecter les salves de métriques de vos applications.

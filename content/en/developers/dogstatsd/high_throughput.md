@@ -378,7 +378,7 @@ Another thing to look at to limit the maximum memory usage is to reduce the buff
 This example decreases the max memory usage of DogStatsD to approximately 384MB:
 
 ```yaml
-dogstatsd_queue_size: 512
+dogstatsd_queue_size: 384
 ```
 
 See the next section on burst detection to help you detect bursts of metrics from your applications.
