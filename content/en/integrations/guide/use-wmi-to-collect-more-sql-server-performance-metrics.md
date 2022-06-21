@@ -1,5 +1,5 @@
 ---
-title: Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI
+title: Use WMI to Collect More SQL Server Performance Metrics
 kind: guide
 aliases:
     - /integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi/
