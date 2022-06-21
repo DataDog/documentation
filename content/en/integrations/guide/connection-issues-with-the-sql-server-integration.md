@@ -1,6 +1,8 @@
 ---
 title: Connection Issues with the SQL Server Integration
-kind: faq
+kind: guide
+aliases:
+  - /integrations/faq/connection-issues-with-the-sql-server-integration
 ---
 
 ## Common SQL Server connection issues
@@ -81,7 +83,7 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
 
 [1]: https://app.datadoghq.com/account/settings#integrations/sql_server
 [2]: /integrations/sqlserver/#metrics
-[3]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
+[3]: /integrations/guide/collect-more-metrics-from-the-sql-server-integration/
 [4]: https://msdn.microsoft.com/en-us/library/ms177440.aspx
 [5]: https://msdn.microsoft.com/en-us/library/ms144284.aspx
 [6]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux

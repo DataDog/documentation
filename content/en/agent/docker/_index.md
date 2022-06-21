@@ -279,7 +279,7 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [8]: https://app.datadoghq.com/account/settings#agent/docker
 [9]: /agent/basic_agent_usage/#supported-os-versions
 [10]: https://app.datadoghq.com/organization-settings/api-keys
-[11]: /integrations/faq/compose-and-the-datadog-agent/
+[11]: /integrations/guide/compose-and-the-datadog-agent/
 [12]: /agent/docker/integrations/
 [13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [14]: /agent/docker/apm/

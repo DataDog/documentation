@@ -1,9 +1,11 @@
 ---
-title: How can I collect more metrics from my SQL Server integration?
-kind: faq
+title: Collect more metrics from the SQL Server integration
+kind: guide
+aliases:
+  - /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration
 ---
 
-## Answer
+## Overview
 
 By default, the SQL Server integration only collects [the metrics listed in the documentation page][1]. But you can collect additional metrics from your SQL Server integration by configuring your `sqlserver.d/conf.yaml` following [the syntax in our example file][2] (these goes under "init_config").
 

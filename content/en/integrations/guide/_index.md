@@ -12,11 +12,14 @@ private: true
     {{< nextlink href="integrations/guide/mongo-custom-query-collection" tag="Mongo" >}}Collect Mongo Custom Metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/prometheus-metrics" tag="Prometheus" >}}Mapping Prometheus metrics to Datadog metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/prometheus-host-collection" tag="Prometheus" >}}Prometheus and OpenMetrics metrics collection from a host{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/collect-more-metrics-from-the-sql-server-integration" tag="SQL Server" >}}Collect more metrics from the SQL Server integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collect-sql-server-custom-metrics" tag="SQL Server" >}}Collect SQL Server Custom Metrics{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/connection-issues-with-the-sql-server-integration" tag="SQL Server" >}}Connection issues with the SQL Server integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Freshservice Tickets using Webhooks{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Monitoring HCP Consul with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/source-code-integration" tag="GitHub Apps" >}}Datadog Source Code Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag="kafka" >}}Agent failed to retrieve RMIServer stub{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids" tag="snmp" >}}SNMP commonly used and compatible OIDs{{< /nextlink >}}
     {{< nextlink href="integrations/guide/jmx_integrations/" >}}Which Integrations use Jmxfetch?{{< /nextlink >}}  
 {{< /whatsnext >}}
 
