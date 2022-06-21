@@ -23,8 +23,8 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 ## はじめに
 
-サポート対象の PostgreSQL バージョン
-: 9.6, 10, 11, 12, 13
+サポート対象の PostgreSQL バージョン
+: 10、11、12、13
 
 サポート対象の Agent バージョン
 : 7.36.1+
@@ -68,9 +68,6 @@ Agent が接続するデータベースサーバー上の PostgreSQL データ�
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-{{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
-
 **すべてのデータベース**に以下のスキーマを作成します。
 
 ```SQL
@@ -80,35 +77,6 @@ GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
-
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
-
-**すべてのデータベース**に以下のスキーマを作成します。
-
-```SQL
-CREATE SCHEMA datadog;
-GRANT USAGE ON SCHEMA datadog TO datadog;
-GRANT USAGE ON SCHEMA public TO datadog;
-GRANT SELECT ON pg_stat_database TO datadog;
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
-```
-
-**すべてのデータベース**に関数を作成して、Agent が `pg_stat_activity` および `pg_stat_statements` の全コンテンツを読み込めるようにします。
-
-```SQL
-CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
-  $$ SELECT * FROM pg_catalog.pg_stat_activity; $$
-LANGUAGE sql
-SECURITY DEFINER;
-CREATE OR REPLACE FUNCTION datadog.pg_stat_statements() RETURNS SETOF pg_stat_statements AS
-    $$ SELECT * FROM pg_stat_statements; $$
-LANGUAGE sql
-SECURITY DEFINER;
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 **注意**: 追加のテーブルへの問い合わせを必要とするカスタムメトリクスを生成する場合は、それらのテーブルに対する `SELECT` 権限を `datadog` ユーザーに付与する必要があります。例: `grant SELECT on <TABLE_NAME> to datadog;`。詳細は [PostgreSQL カスタムメトリクス収集の説明][6]を参照してください。
 
@@ -135,9 +103,6 @@ SECURITY DEFINER;
 
 権限が正しいことを確認するために、以下のコマンドを実行して、Agent ユーザーがデータベースに接続してコアテーブルを読み取ることができることを確認します。
 
-{{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
-
 ```shell
 psql -h localhost -U datadog postgres -A \
   -c "select * from pg_stat_database limit 1;" \
@@ -152,26 +117,6 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
-
-```shell
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database limit 1;" \
-  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
-  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 パスワードの入力を求められた場合は、`datadog` ユーザーを作成したときに入力したパスワードを使用してください。
 
@@ -193,9 +138,6 @@ Cloud SQL ホストを監視するには、インフラストラクチャーに 
        port: 5432
        username: datadog
        password: '<PASSWORD>'
-       ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
-       # pg_stat_statements_view: datadog.pg_stat_statements()
-       # pg_stat_activity_view: datadog.pg_stat_activity()
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
 
@@ -242,13 +184,6 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスのconfig に以下の設定を追加します。
-
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
-```
-
 ### Dockerfile
 
 `Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
@@ -259,13 +194,6 @@ FROM gcr.io/datadoghq/agent:7.36.1
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
-```
-
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスのconfig に以下の設定を追加します。
-
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][2]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][3]でパスワードを環境変数として渡す方法をご確認ください。
@@ -306,13 +234,6 @@ instances:
   datadog/datadog
 ```
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスのconfig に以下の設定を追加します。
-
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
-```
-
 ### マウントされたファイルで構成する
 
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/postgres.yaml` にマウントします。
@@ -330,15 +251,11 @@ instances:
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
-
-    ## 必須。Postgres 9.6 の場合、セットアップで作成した関数を使用するため、以下の行をコメント解除します
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 ### Kubernetes サービスアノテーションで構成する
 
-ファイルをマウントせずに、インスタンスのコンフィギュレーションをKubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 ```yaml
 apiVersion: v1
@@ -373,16 +290,9 @@ spec:
     name: postgres
 ```
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスのconfig に以下の設定を追加します。
-
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
-```
-
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、Postgres チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
@@ -401,7 +311,7 @@ GCP からより包括的なデータベースメトリクスを収集するに�
 
 ## トラブルシューティング
 
-インテグレーションと Agent を手順通りにインストール・設定したが期待通りに動作しない場合は、[トラブルシューティング][12]を参照してください。
+インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][12]を参照してください。
 
 ## その他の参考資料
 
