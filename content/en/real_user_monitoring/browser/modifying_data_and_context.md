@@ -78,8 +78,8 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Optionally, define the associated view name, service name, and version. 
 
    - View: Defaults to the page URL path. 
-   - Service: The default service name of your application.
-   - Version: The default deployed version of your application.
+   - Service: Defaults to the default service specified when creating your RUM application.
+   - Version: Defaults to the default version specified when creating your RUM application.
 
    For more information, see [Setup Browser Monitoring][4].
 
