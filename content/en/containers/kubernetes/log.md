@@ -2,7 +2,7 @@
 title: Kubernetes Log collection
 kind: documentation
 alias:
-  - /agent/kubernetes/log
+  - /containers/kubernetes/log
 further_reading:
 - link: "/agent/kubernetes/apm/"
   tag: "Documentation"
