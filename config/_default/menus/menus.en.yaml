@@ -316,7 +316,6 @@ main:
     parent: agent
     weight: 13
   - name: Containers
-    pre: agent-fill
     url: containers/
     identifier: containers
     weight: 40000
