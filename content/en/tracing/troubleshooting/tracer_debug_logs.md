@@ -30,9 +30,9 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 
 {{< programming-lang lang="python" >}}
 
-To enable debug mode for the Datadog Python Tracer, review the instructions below for the specific scenario that applies to the application being traced. Logs emitted by the Python Tracer contain the name **[ddtrace]**.
+To enable debug mode for the Datadog Python Tracer, review the instructions below for the specific scenario that applies to the application being traced.
 
-#### 1.3.0 or higher
+#### Scenario 1) 1.3.0 or higher
 
 1. Set the environment variable to enable debug mode: `DD_TRACE_DEBUG=true`
 2. To route to a log file:
@@ -42,24 +42,26 @@ To enable debug mode for the Datadog Python Tracer, review the instructions belo
     - This is done by default for **Python 3** applications. 
     - For **Python 2** applications, `logging.basicConfig()` or similar needs to be configured.
 
-#### 1.0.0 to 1.2.0
+#### Scenario 2) 1.0.0 to 1.2.0
 
 1. Set these environment variables to enable debug mode:
     - `DD_TRACE_DEBUG=true`
     - `DD_CALL_BASIC_CONFIG=true`
-2. `ddtrace` logs are routed to the console by default.
+2. To route logs to the console: 
+    - This is done by default for **Python 3** applications. 
+    - For **Python 2** applications, `logging.basicConfig()` or similar needs to be configured.
 
 
-#### 0.x
+#### Scenario 3) 0.x
 
 1. Set the environment variable to enable debug mode: `DD_TRACE_DEBUG=true`
 2. To route logs to the console: 
     - This is done by default for **Python 3** applications. 
     - For **Python 2** applications, `logging.basicConfig()` or similar needs to be configured.
 
-#### When using an existing logging configuation on any Python tracing library version
+#### Scenario 4) When using an existing logging configuation on any Python tracing library version
 
-Enable debug logging in the application code by using the `logging` standard library.
+**Note:** This is not needed when using `DD_TRACE_DEBUG=true` suggestions based on the scenarios above. However, to enable debug logging in the application code by using the `logging` standard library directly:
 
 ```
 log = logging.getLogger("ddtrace.tracer")
