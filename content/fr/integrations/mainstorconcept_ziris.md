@@ -1,88 +1,113 @@
 ---
-"app_id": "mainstorconcept-ziris"
-"app_uuid": "dc8b4d40-72a3-46c2-9f9a-ffaadaeacb83"
-"assets":
-  "dashboards":
-    "JDBC and z/OS": assets/dashboards/JDBC_Dashboard.json
-    "z/OS Connect Metrics": assets/dashboards/z_OS_Connect_Metrics.json
-  "integration":
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": mainstorconcept.zos.connect.basic.elapsed_time
-      "metadata_path": metadata.csv
-      "prefix": mainstorconcept.zos.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_name": mainstorconcept-ziris
-"author":
-  "homepage": "https://mainstorconcept.com"
-  "name": mainstorconcept GmbH
-  "sales_email": sales@mainstorconcept.com
-  "support_email": support@mainstorconcept.com
-  "vendor_id": mainstorconcept
-"categories":
+app_id: mainstorconcept-ziris
+app_uuid: dc8b4d40-72a3-46c2-9f9a-ffaadaeacb83
+assets:
+  dashboards:
+    JDBC and z/OS: assets/dashboards/JDBC_Dashboard.json
+    MQ Buffer Pool Manager: assets/dashboards/MQ_Buffer_Pool_Manager.json
+    MQ Channel Initiator: assets/dashboards/MQ_Channel_Initiator.json
+    MQ Data Manager: assets/dashboards/MQ_Data_Manager.json
+    MQ Log Manager: assets/dashboards/MQ_Log_Manager.json
+    MQ Message Manager: assets/dashboards/MQ_Message_Manager.json
+    MQ Storage Manager: assets/dashboards/MQ_Storage_Manager.json
+    z/OS Connect Metrics: assets/dashboards/z_OS_Connect_Metrics.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: mainstorconcept.zos.connect.elapsed_time
+      metadata_path: metadata.csv
+      prefix: mainstorconcept.zos.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: mainstorconcept-ziris
+  monitors:
+    MQ Active Dataset Reads: assets/monitors/mq_active_dataset_reads_monitor.json
+    MQ Archive Dataset Reads: assets/monitors/mq_archive_dataset_reads_monitor.json
+    MQ Checkpoints: assets/monitors/mq_checkpoints_monitor.json
+    MQ Insufficient Storage Events: assets/monitors/mq_insufficient_storage_events_monitor.json
+    MQ Storage Contractions: assets/monitors/mq_storage_contractions_monitor.json
+    MQ Suspensions: assets/monitors/mq_suspensions_monitor.json
+author:
+  homepage: https://mainstorconcept.com
+  name: mainstorconcept GmbH
+  sales_email: sales@mainstorconcept.com
+  support_email: support@mainstorconcept.com
+  vendor_id: mainstorconcept
+categories:
 - marketplace
 - mainframe
 - tracing
 - monitoring
-"classifier_tags":
-- "Supported OS::Linux"
-- "Supported OS::IBM z/OS"
-- "Category::Marketplace"
-- "Category::Mainframe"
-- "Category::Tracing"
-- "Category::Monitoring"
-- "Offering::Integration"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "mainstorconcept_ziris"
-"integration_id": "mainstorconcept-ziris"
-"integration_title": "z/IRIS"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"legal_terms":
-  "eula": EULA.pdf
-"manifest_version": "2.0.0"
-"name": "mainstorconcept_ziris"
-"oauth": {}
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": false
-  "product_id": ziris
-  "short_description": Prix valable pour un mainframe de 50 MSU maximum. Si votre système est plus important, contactez sales@mainstorconcept.com pour bénéficier d'une offre entreprise spécialisée.
-  "unit_price": !!float "4350.0"
-"public_title": "z/IRIS"
-"short_description": "Recueille les données de performance à partir du mainframe et les transmet à Datadog"
-"supported_os":
+classifier_tags:
+- Supported OS::Linux
+- Supported OS::IBM z/OS
+- Category::Marketplace
+- Category::Mainframe
+- Category::Tracing
+- Category::Monitoring
+- Offering::Integration
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: mainstorconcept_ziris
+integration_id: mainstorconcept-ziris
+integration_title: z/IRIS
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: EULA.pdf
+manifest_version: 2.0.0
+name: mainstorconcept_ziris
+oauth: {}
+pricing:
+- billing_type: flat_fee
+  includes_assets: false
+  product_id: ziris
+  short_description: Le tarif inclut 50 millions d'unités de service sur le mainframe.
+  unit_price: 4350.0
+public_title: z/IRIS
+short_description: Recueille les données de performance à partir du mainframe et les
+  transmet à Datadog
+supported_os:
 - linux
 - ibm z/os
-"tile":
-  "configuration": "README.md#Setup"
-  "description": Recueille les données de performance à partir du mainframe et les transmet à Datadog
-  "media":
-  - "caption": z/IRIS - Observabilité du mainframe
-    "image_url": images/thumbnail_mainstorconcept_ziris.PNG
-    "media_type": video
-    "vimeo_id": !!int "630489680"
-  - "caption": z/OS et dashboard JDBC
-    "image_url": images/datadog_Dashboard_JDBC.PNG
-    "media_type": image
-  - "caption": Dashboard z/OS Connect
-    "image_url": images/datadog_Dashboard_z_OS_Connect.PNG
-    "media_type": image
-  - "caption": z/IRIS - Observabilité du mainframe
-    "image_url": images/thumbnail_mainstorconcept_ziris.PNG
-    "media_type": image
-  - "caption": "z/IRIS: Component Design"
-    "image_url": images/datadog_ziris_opentelemetry_traces.PNG
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": z/IRIS
+tile:
+  changelog: CHANGELOG.md
+  configuration: README.md#Setup
+  description: Recueille les données de performance à partir du mainframe et les transmet
+    à Datadog
+  media:
+  - caption: z/IRIS - Observabilité du mainframe
+    image_url: images/thumbnail_mainstorconcept_ziris.PNG
+    media_type: video
+    vimeo_id: 630489680
+  - caption: z/OS et dashboard JDBC
+    image_url: images/datadog_Dashboard_JDBC.PNG
+    media_type: image
+  - caption: Gestionnaire de pools de buffers MQ z/OS
+    image_url: images/datadog_Dashboard_z_OS_MQ_Buffer_Pool_Manager.png
+    media_type: image
+  - caption: Gestionnaire de logs MQ z/OS
+    image_url: images/datadog_Dashboard_z_OS_MQ_Log_Manager.png
+    media_type: image
+  - caption: Dashboard z/OS Connect
+    image_url: images/datadog_Dashboard_z_OS_Connect.PNG
+    media_type: image
+  - caption: Dashboard sur l'infrastructure z/OS
+    image_url: images/datadog_Dashboard_z_OS_Infrastructure.png
+    media_type: image
+  - caption: z/IRIS - Observabilité du mainframe
+    image_url: images/thumbnail_mainstorconcept_ziris.PNG
+    media_type: image
+  - caption: 'z/IRIS: Component Design'
+    image_url: images/datadog_ziris_opentelemetry_traces.PNG
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: z/IRIS
 ---
 
 
@@ -90,7 +115,7 @@
 ## Présentation
 
 
-[z/IRIS](https://www.mainstorconcept.com/mainframe/z-iris-mainframe-observability) est une solution logicielle sous forme de plug-in qui permet de surveiller les performances du mainframe en dehors de celui-ci.
+[z/IRIS](https://www.mainstorconcept.com/mainframe/z-iris-mainframe-observability/z-iris-datadog/?lang=en) est une solution logicielle sous forme de plug-in qui permet de surveiller les performances du mainframe en dehors de celui-ci.
 
 Les équipes DevOps ont besoin d'analyser les performances du mainframe pour leurs applications professionnelles afin d'élaborer des stratégies pour optimiser ces performances.
 L'observabilité du mainframe pour les DevOps est l'un des concepts clés de z/IRIS. Les équipes peuvent s'en servir pour évaluer l'utilisation des ressources du mainframe, analyser ses performances en continu, et mettre en corrélation les métriques et données liées à leurs différentes applications via Datadog.
@@ -112,11 +137,16 @@ L'observabilité du mainframe pour les DevOps est l'un des concepts clés de z/I
 * Surveillance des espaces d'adressage et des sous-systèmes
 * Tracing des activités des utilisateurs TSO
 
-### Métriques z/OS RMF
-* Distribution de la file d'attente des unités de travail in-ready par système
-* Contention du CPU par système
-* Utilisation du CPU par système
+### Partenaires régionaux
 
+Les organisations basées en Amérique du Nord peuvent contacter notre partenaire SEA :
+* E-mail : [SEA - Software Engineering of America](mailto:support@seasoft.com)
+* Téléphone : +1 800 272-7322 (numéro gratuit)
+* Téléphone : +1 516 328-7000
+
+Les organisations basées en Amérique du Sud et dans la région EMEA peuvent utiliser les coordonnées suivantes :
+* E-mail : [mainstorconcept GmbH](mailto:sales@mainstorconcept.com)
+* Téléphone : +49721790760
 
 ### Données collectées
 
@@ -220,6 +250,9 @@ L'observabilité du mainframe pour les DevOps est l'un des concepts clés de z/I
 * [Métriques z/OS Connect](https://public.mainstorconcept.com/home/z%2FOS-Connect-Metrics-Streaming.641040425.html)
     * z/IRIS diffuse les métriques créées à partir des données des entrées IBM z/OS Connect SMF type 123 versions 1 et 2. 
 
+* [Métriques MQ](https://public.mainstorconcept.com/home/MQ-Metrics-Streaming.1424359429.html)
+    * Les entrées statistiques MQ (SMF type 115) contiennent une multitude de statistiques provenant de différentes ressources du système. Les nouvelles métriques z/OS MQ de z/IRIS tiennent avant tout compte des indicateurs de performances essentiels pour répondre à vos besoins en matière de surveillance, d'analyse et d'alerte.
+
 Ce n'est pas la métrique que vous recherchez ? Une fonctionnalité importante pour votre organisation est manquante ? Envoyez-nous une demande à l'adresse [info@mainstorconcept.com](mailto:info@mainstorconcept.com).
 
 
@@ -230,3 +263,4 @@ ou contactez-nous à l'adresse [support@mainstorconcept.com](mailto:support@main
 
 Si vous souhaitez planifier une démonstration, contactez-nous à l'adresse [sales@mainstorconcept.com](mailto:sales@mainstorconcept.com).
 
+Si vous souhaitez bénéficier d'une assistance locale dans la région Amérique du Nord, contactez notre partenaire [SEA - Software Engineering of America](mailto:support@seasoft.com) par e-mail ou par téléphone au +1 800 272-7322.

@@ -1,25 +1,25 @@
 ---
-title: Kubernetes ディストリビューション
-kind: documentation
 further_reading:
-    - link: agent/kubernetes/log
-      tag: ドキュメント
-      text: アプリケーションログの収集
-    - link: agent/kubernetes/host_setup
-      tag: ドキュメント
-      text: アプリケーショントレースの収集
-    - link: /agent/kubernetes/prometheus
-      tag: ドキュメント
-      text: Prometheus メトリクスの収集
-    - link: /agent/kubernetes/integrations
-      tag: ドキュメント
-      text: アプリケーションのメトリクスとログを自動で収集
-    - link: /agent/guide/autodiscovery-management
-      tag: ドキュメント
-      text: データ収集をコンテナのサブセットのみに制限
-    - link: /agent/kubernetes/tag
-      tag: ドキュメント
-      text: コンテナから送信された全データにタグを割り当て
+- link: agent/kubernetes/log
+  tag: ドキュメント
+  text: アプリケーションログの収集
+- link: agent/kubernetes/host_setup
+  tag: ドキュメント
+  text: アプリケーショントレースの収集
+- link: /agent/kubernetes/prometheus
+  tag: ドキュメント
+  text: Prometheus メトリクスの収集
+- link: /agent/kubernetes/integrations
+  tag: ドキュメント
+  text: アプリケーションのメトリクスとログを自動で収集
+- link: /agent/guide/autodiscovery-management
+  tag: ドキュメント
+  text: データ収集をコンテナのサブセットのみに制限
+- link: /agent/kubernetes/tag
+  tag: ドキュメント
+  text: コンテナから送信された全データにタグを割り当て
+kind: documentation
+title: Kubernetes ディストリビューション
 ---
 
 ## 概要
@@ -32,6 +32,7 @@ further_reading:
 * [Google Kubernetes Engine (GKE)](#GKE)
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
+* [Oracle Container Engine for Kubernetes (OKE)](#OKE)
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
@@ -49,6 +50,9 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   criSocketPath: /run/dockershim.sock
+  env:
+  - name: DD_AUTOCONFIG_INCLUDE_FEATURES
+    value: "containerd"
 ```
 
 {{% /tab %}}
@@ -69,23 +73,6 @@ spec:
     config:
       criSocket:
         criSocketPath: /run/dockershim.sock
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    apm:
-      enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
-      enabled: false
-    systemProbe:
-      enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
@@ -118,7 +105,7 @@ datadog:
         fieldRef:
           fieldPath: spec.nodeName
     hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-    # tlsVerify: false # 提供されたコンフィギュレーションで Kubelet インテグレーションが失敗した場合
+    tlsVerify: false # Agent 7.35 で必須となりました。注意事項参照。
 ```
 
 {{% /tab %}}
@@ -142,24 +129,7 @@ spec:
           fieldRef:
             fieldPath: spec.nodeName
         hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-        # tlsVerify: false # 提供されたコンフィギュレーションで Kubelet インテグレーションが失敗した場合
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    apm:
-      enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
-      enabled: false
-    systemProbe:
-      enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
+        tlsVerify: false # Agent 7.35 で必須となりました。注意事項参照。
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
@@ -173,9 +143,17 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: 設定の中には、ポッド内における `spec.nodeName` のDNS 解決が AKS で動作しない場合があります。
-これはすべての AKS Windows ノード、および Linux ノードでカスタム DNS を使用してクラスターを Virtual Network で設定した場合に報告されています。
-この場合は `tlsVerify: false` を使用する必要があります。
+**注**:
+
+- Agent 7.35 では、AKS の Kubelet 証明書には SAN (Subject Alternative Name) が設定されていないため、`tlsVerify: false` が必須となります。
+
+- 一部の設定では、ポッド内における `spec.nodeName` のDNS 解決が AKS で動作しない場合があります。これはすべての AKS Windows ノード、および Linux ノードでカスタム DNS を使用してクラスターを Virtual Network で設定した場合に報告されています。この場合、`agent.config.kubelet.host` フィールド (デフォルトで `status.hostIP`) を削除し、`tlsVerify: false` を使用することが**必要です**。`DD_KUBELET_TLS_VERIFY=false` の環境変数を使用することでも、この問題を解決できます。これらのオプションは両方とも、サーバー証明書の検証を無効にします。
+
+  ```
+  env:
+    - name: DD_KUBELET_TLS_VERIFY
+      value: "false"
+  ```
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -188,13 +166,15 @@ GKE は 2 つの異なる運用モードで構成することができます:
 
 ### 標準的な方法
 
-Agent 7.26 以降、GKE 向けの特殊なコンフィギュレーションは不要となりました (`Docker` および/または `containerd` をお使いの場合)。
+Agent 7.26 以降では、GKE 向けの特殊なコンフィギュレーションは不要です (`Docker` または `containerd` をお使いの場合)。
 
 **注**: COS (Container Optimized OS) をお使いの場合、Kernel  ヘッダーがないため eBPF ベースの `OOM Kill` および `TCP Queue Length` チェックはサポートされません。
 
 ### Autopilot
 
-GKE Autopilot はより高度なセキュリティとノードへのアクセス制限を備えています。そのため、いくつかの特別なコンフィギュレーションが必要となります。
+GKE Autopilot にはコンフィギュレーションが必要です（以下を参照）。
+
+Datadog では、Agent コンテナにリソースの上限を指定することをおすすめします。Autopilot は、比較的低いデフォルトの上限 (50m CPU、100Mi メモリ) を設定するため、ご使用の環境によってはすぐに Agent コンテナが OOMKill に達する可能性があります。該当する場合は、トレースエージェントおよびプロセスエージェントのコンテナにもリソース上限を指定することをおすすめします。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -207,22 +187,48 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   clusterName: <CLUSTER_NAME>
 
-  # 新しい `kubernetes_state_core` チェックを有効化します。
+  # 新しい `kubernetes_state_core` チェックを有効化。
   kubeStateMetricsCore:
     enabled: true
-  # kube-state-metrics チャートのデプロイを回避します。
-  # 新しい `kubernetes_state_core` における kube-state-metrics のデプロイは不要になりました。
+  # kube-state-metrics チャートのデプロイを回避。
+  # 新しい `kubernetes_state_core` における kube-state-metrics のデプロイは不要。
   kubeStateMetricsEnabled: false
+
+  containers:
+    agent:
+      # Agent コンテナのリソース
+      resources:
+        requests:
+          cpu: 200m
+          memory: 256Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
+
+    traceAgent:
+      # トレースエージェントコンテナのリソースcontainer
+      resources:
+        requests:
+          cpu: 100m
+          memory: 200Mi
+        limits:
+          cpu: 100m
+          memory: 200Mi
+
+    processAgent:
+      # プロセスエージェントコンテナのリソース
+      resources:
+        requests:
+          cpu: 100m
+          memory: 200Mi
+        limits:
+          cpu: 100m
+          memory: 200Mi
 
 providers:
   gke:
     autopilot: true
 ```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-まだサポートされていません。Datadog perator v0.7.0 で利用可能となる予定です。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -233,7 +239,7 @@ providers:
 OpenShift にはデフォルトで強化されたセキュリティ (SELinux、SecurityContextConstraints) が搭載されているため、特定のコンフィギュレーションが必要になります:
 - Node Agent と Cluster Agent 用の SCC を作成
 - OpenShift が CRI-O コンテナランタイムを使用しているため、特定の CRI ソケットパスが必要
-- Kubelet API 証明書がクラスター CA により署名されない場合も
+- Kubelet API 証明書は、クラスター CA によって署名されない場合がある
 - Node Agent を `master` および `infra` ノード上にスケジュールするための許容範囲が必要
 - クラスター名には、クラウドプロバイダーが自動で取得されない値を設定
 
@@ -406,6 +412,58 @@ spec:
       - effect: NoExecute
         key: node-role.kubernetes.io/etcd
         operator: Exists
+  clusterAgent:
+    image:
+      name: "gcr.io/datadoghq/cluster-agent:latest"
+    config:
+      externalMetrics:
+        enabled: false
+      admissionController:
+        enabled: false
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Oracle Container Engine for Kubernetes (OKE) {#OKE}
+
+特殊なコンフィギュレーションは必要ありません。
+
+コンテナのモニタリングを有効にするには、以下を追加します (`containerd` check):
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+カスタム `values.yaml`:
+
+```
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  criSocketPath: /run/dockershim.sock
+  env:
+  - name: DD_AUTOCONFIG_INCLUDE_FEATURES
+    value: "containerd"
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+  agent:
+    config:
+      criSocket:
+        criSocketPath: /run/dockershim.sock
   clusterAgent:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"

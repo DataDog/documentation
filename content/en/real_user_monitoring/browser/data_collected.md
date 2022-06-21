@@ -30,7 +30,7 @@ further_reading:
 
 The RUM Browser SDK generates events that have associated metrics and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.loading_time` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
+There are additional [metrics and attributes specific to a given event type](#event-specific-metrics-and-attributes). For example, the `view.loading_time` metric is associated with view events, and the `resource.method` attribute is associated with resource events.
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -221,7 +221,7 @@ Detailed network timing data for the loading of an application’s resources are
 
 #### Source errors
 
-Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][14].
+Source errors include code-level information about the error. For more information about different error types, see the [MDN documentation][13].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -233,7 +233,7 @@ Source errors include code-level information about the error. More information a
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][15]. |
+| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][14]. |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
 | `action.resource.count`         | number      | Count of all resources collected for this action. |
 | `action.error.count`      | number      | Count of all errors collected for this action.|
@@ -243,10 +243,19 @@ Source errors include code-level information about the error. More information a
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `action.id` | string | UUID of the user action. |
-| `action.type` | string | Type of the user action. For [Custom User Actions][16], it is set to `custom`. |
+| `action.type` | string | Type of the user action. For [Custom User Actions][15], it is set to `custom`. |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
-| `action.name` | string | User-friendly name created (for example, `Click on #checkout`). For [Custom User Actions][16], the action name given in the API call. |
+| `action.name` | string | User-friendly name created (for example, `Click on #checkout`). For [Custom User Actions][15], the action name given in the API call. |
 
+### Frustration signals fields
+
+| Field                | Type   | Description                                                   |
+|-------------------------------|--------|---------------------------------------------------------------|
+| `session.frustration.count`     | number | Count of all frustration signals associated with one session. |
+| `view.frustration.count`        | number | Count of all frustration signals associated with one view.    |
+| `action.frustration.type:dead_click`  | string | The dead clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:rage_click`  | string | The rage clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:error_click` | string | The error clicks detected by the RUM Browser SDK.             |
 
 ## Further Reading
 
@@ -265,6 +274,5 @@ Source errors include code-level information about the error. More information a
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[14]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[15]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
-[16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
+[14]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
+[15]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions

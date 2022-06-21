@@ -367,7 +367,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 env: <ENV>
 ```
 
-To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, you can configure a [process check][2]:
+To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
 
 ```yaml
 init_config:

@@ -129,6 +129,7 @@ This configuration creates a directory on the host and mounts it within the Agen
 The default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `agent.apm.hostSocketPath` and `agent.apm.socketPath` configuration values.
 
 #### Optional - Configure the Datadog Agent to accept traces over TCP
+
 The Datadog Agent can also be configured to receive traces over TCP. To enable this feature:
 
 Update your `datadog-agent.yaml` manifest with the following:
@@ -163,6 +164,15 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ### Configure your application pods to submit traces to Datadog Agent
 
 {{< tabs >}}
+
+{{% tab "Datadog Admission Controller" %}}
+[Datadog Admission Controller][1] is able to inject environment variables and mount the necessary volumes on new application-pods in order to configure pod and agent trace communication automatically.
+
+To learn more on how to automatically configure you application to submit traces to Datadog Agent read the [Datadog Admission Controller][1] documentation.
+
+[1]: /agent/cluster_agent/admission_controller/
+{{% /tab %}}
+
 {{% tab "UDS" %}}
 If you are sending traces to the Agent by using Unix Domain Socket (UDS), mount the host directory the socket is in (that the Agent created) to the application container and specify the path to the socket with `DD_TRACE_AGENT_URL`:
 
@@ -186,8 +196,8 @@ kind: Deployment
             path: /var/run/datadog/
           name: apmsocketpath
 ```
-
 {{% /tab %}}
+
 
 {{% tab TCP %}}
 If you are sending traces to the Agent by using TCP (`<IP_ADDRESS>:8126`) supply this IP address to your application pods—either automatically with the [Datadog Admission Controller][1], or manually using the downward API to pull the host IP. The application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`:
@@ -206,9 +216,12 @@ kind: Deployment
               fieldRef:
                 fieldPath: status.hostIP
 ```
+**Note:** This configuration requires the Agent to be configured to accept traces over TCP
 
 [1]: /agent/cluster_agent/admission_controller/
+
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ### Configure your application tracers to emit traces:
@@ -231,7 +244,7 @@ List of all environment variables available for tracing within the Agent running
 | `DD_API_KEY`               | [Datadog API Key][3]                                                                                                                                                                                                                                                                                                        |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                        |
 | `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][4].                                                                                                                                                                                                                                                                            |
-| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
+| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                                                                                                                                                                                                                     |
 | `DD_APM_RECEIVER_SOCKET`  | Collect your traces through a Unix Domain Sockets and takes priority over hostname and port configuration if set. Off by default, when set it must point to a valid sock file.                                                                                                                                            |
 | `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                                                                                                                                                                                                                         |

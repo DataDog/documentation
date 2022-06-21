@@ -55,7 +55,78 @@ title: Kubernetes インテグレーションオートディスカバリー
 ## コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+
+インテグレーションテンプレートは、Kubernetes のポッドアノテーションに格納できます。オートディスカバリーを使用して、Agent は、自身が Kubernetes 上で実行されているかどうかを検出し、すべてのポッドアノテーションでインテグレーションテンプレートを自動的に探します。
+
+特定のコンフィギュレーションを特定のコンテナに適用するために、オートディスカバリーはコンテナをイメージではなく、**名前**で識別します。つまり、`<コンテナ識別子>` は、`.spec.containers[0].image` とではなく `.spec.containers[0].name` との一致が試みられます。ポッド内の特定の `<コンテナ識別子>` で Datadog インテグレーションのオートディスカバリーを構成するには、以下のアノテーションをポッドに追加します。
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+      {
+        "<INTEGRATION_NAME>": {
+          "init_config": <INIT_CONFIG>,
+          "instances": [<INSTANCE_CONFIG>]
+        }
+      }
+    # (...)
+spec:
+  containers:
+    - name: '<CONTAINER_IDENTIFIER>'
+# (...)
+```
+
+`init_config` は通常、空の `{}` です。AD Annotations v2 では、この設定はオプションです。
+
+ポッド内の 2 つの異なるコンテナ `<CONTAINER_IDENTIFIER_1>` と `<CONTAINER_IDENTIFIER_2>` に 2 つの異なるインテグレーションテンプレートを適用するには、次のアノテーションをポッドに追加します。
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.checks: |
+      {
+        "<INTEGRATION_NAME_1>": {
+          "init_config": <INIT_CONFIG_1>,
+          "instances": [<INSTANCE_CONFIG_1>]
+        }
+      }
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.checks: |
+      {
+        "<INTEGRATION_NAME_2>": {
+          "init_config": <INIT_CONFIG_2>,
+          "instances": [<INSTANCE_CONFIG_2>]
+        }
+      }
+spec:
+  containers:
+    - name: '<CONTAINER_IDENTIFIER_1>'
+    # (...)
+    - name: '<CONTAINER_IDENTIFIER_2>'
+# (...)
+```
+
+`kind: Pod` を使用して Kubernetes ポッドを直接定義する場合は、各ポッドのアノテーションを `metadata` セクションの真下に追加します。レプリケーションコントローラー、レプリカセット、またはデプロイメントを使用してポッドを間接的に定義する場合は、ポッドアノテーションを `.spec.template.metadata` の下に追加します。
+
+**注:** Datadog では、コンテナ化環境のベストプラクティスとして、タグを付ける際に統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][1]ドキュメントをご参照ください。
+
+
+
+[1]: /ja/getting_started/tagging/unified_service_tagging
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
 
 インテグレーションテンプレートは、Kubernetes のポッドアノテーションに格納できます。オートディスカバリーを使用して、Agent は、自身が Kubernetes 上で実行されているかどうかを検出し、すべてのポッドアノテーションでインテグレーションテンプレートを自動的に探します。
 
@@ -105,22 +176,6 @@ spec:
 `kind: Pod` を使用して Kubernetes ポッドを直接定義する場合は、各ポッドのアノテーションを `metadata` セクションの真下に追加します。レプリケーションコントローラー、レプリカセット、またはデプロイメントを使用してポッドを間接的に定義する場合は、ポッドアノテーションを `.spec.template.metadata` の下に追加します。
 
 **注:** Datadog では、コンテナ化環境のベストプラクティスとして、タグを付ける際に統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][1]ドキュメントをご参照ください。
-
-
-### 準備のできていないポッドを許容する
-
-デフォルトでは、`unready` ポッドは Datadog Agent がチェックをスケジュールしたときに無視されます。そのため、これらのポッドからメトリクス、サービスチェック、およびログは収集されません。この挙動をオーバーライドするためには、アノテーション `ad.datadoghq.com/tolerate-unready` を `"true"` に設定してください。例:
-
-```yaml
-apiVersion: v1
-kind: Pod
-# (...)
-metadata:
-  name: '<POD_NAME>'
-  annotations:
-    ad.datadoghq.com/tolerate-unready: "true"
-  ...
-```
 
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
@@ -266,12 +321,66 @@ key-value ストアがテンプレートソースとして有効になってい�
 {{% /tab %}}
 {{< /tabs >}}
 
+### 準備のできていないポッドを許容する
+
+デフォルトでは、`unready` ポッドは Datadog Agent がチェックをスケジュールしたときに無視されます。そのため、これらのポッドからメトリクス、サービスチェック、およびログは収集されません。この挙動をオーバーライドするためには、アノテーション `ad.datadoghq.com/tolerate-unready` を `"true"` に設定してください。例:
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/tolerate-unready: "true"
+  ...
+```
+
 ## 例
 
 ### Datadog Redis インテグレーション
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+
+以下のポッドアノテーションは、カスタム `password` パラメーターを使用して `redis` コンテナのインテグレーションテンプレートを定義します。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis
+  annotations:
+    ad.datadoghq.com/redis.checks: |
+      {
+        "redisdb": {
+          "instances": [
+            {
+              "host": "%%host%%",
+              "port":"6379",
+              "password":"%%env_REDIS_PASSWORD%%"
+            }
+          ]
+        }
+      }
+  labels:
+    name: redis
+spec:
+  containers:
+    - name: redis
+      image: redis:latest
+      ports:
+        - containerPort: 6379
+```
+
+**注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][1]を参照してください。
+
+[1]: /ja/agent/faq/template_variables/
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
 
 以下のポッドアノテーションは、カスタム `password` パラメーターを使用して `redis` コンテナのインテグレーションテンプレートを定義します。
 
@@ -394,7 +503,53 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 チェック名は、`apache`、`http_check`、これらの `<初期コンフィギュレーション>`、および `<インスタンスコンフィギュレーション>` です。完全な構成は、それぞれのドキュメントの [Datadog-Apache インテグレーション][10]と [Datadog-HTTP チェックインテグレーション][11]のページにあります。
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apache
+  annotations:
+    ad.datadoghq.com/apache.checks: |
+      {
+        "apache": {
+          "instances": [
+            {
+              "apache_status_url": "http://%%host%%/server-status?auto"
+            }
+          ]
+        },
+        "http_check": {
+          "instances": [
+            {
+              "name": "<WEBSITE_1>",
+              "url": "http://%%host%%/website_1",
+              "timeout": 1
+            },
+            {
+              "name": "<WEBSITE_2>",
+              "url": "http://%%host%%/website_2",
+              "timeout": 1
+            }
+          ]
+        }
+      }
+  labels:
+    name: apache
+spec:
+  containers:
+    - name: apache
+      image: httpd
+      ports:
+        - containerPort: 80
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
 
 ```yaml
 apiVersion: v1

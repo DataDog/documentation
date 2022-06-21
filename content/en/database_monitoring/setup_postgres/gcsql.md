@@ -24,10 +24,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13
+: 10, 11, 12, 13
 
 Supported Agent versions
-: 7.36.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -68,9 +68,6 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-{{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
-
 Create the following schema **in every database**:
 
 ```SQL
@@ -80,35 +77,6 @@ GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
-
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
-
-Create the following schema **in every database**:
-
-```SQL
-CREATE SCHEMA datadog;
-GRANT USAGE ON SCHEMA datadog TO datadog;
-GRANT USAGE ON SCHEMA public TO datadog;
-GRANT SELECT ON pg_stat_database TO datadog;
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
-```
-
-Create functions **in every database** to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
-
-```SQL
-CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
-  $$ SELECT * FROM pg_catalog.pg_stat_activity; $$
-LANGUAGE sql
-SECURITY DEFINER;
-CREATE OR REPLACE FUNCTION datadog.pg_stat_statements() RETURNS SETOF pg_stat_statements AS
-    $$ SELECT * FROM pg_stat_statements; $$
-LANGUAGE sql
-SECURITY DEFINER;
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 **Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
 
@@ -135,9 +103,6 @@ SECURITY DEFINER;
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
 
-{{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
-
 ```shell
 psql -h localhost -U datadog postgres -A \
   -c "select * from pg_stat_database limit 1;" \
@@ -152,26 +117,6 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
-
-```shell
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database limit 1;" \
-  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
-  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
 
@@ -193,16 +138,13 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
        port: 5432
        username: datadog
        password: '<PASSWORD>'
-       ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
-       # pg_stat_statements_view: datadog.pg_stat_statements()
-       # pg_stat_activity_view: datadog.pg_stat_activity()
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
 
        # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
        gcp:
         project_id: '<PROJECT_ID>'
-        instance_id: '<INSTANCE_NAME>'
+        instance_id: '<INSTANCE_ID>'
    ```
 2. [Restart the Agent][2].
 
@@ -222,7 +164,7 @@ Get up and running quickly by executing the following command to run the Agent f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.36.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -236,17 +178,10 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "password": "<UNIQUEPASSWORD>",
     "gcp": {
       "project_id": "<PROJECT_ID>",
-      "instance_id": "<INSTANCE_NAME>"
+      "instance_id": "<INSTANCE_ID>"
     }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
-```
-
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
-
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 ### Dockerfile
@@ -254,18 +189,11 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.36.0
+FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_NAME>"}}]'
-```
-
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
-
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
@@ -302,15 +230,8 @@ instances:
     password: "<UNIQUEPASSWORD>"
     gcp:
       project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_NAME>" \
+      instance_id: "<INSTANCE_ID>" \
   datadog/datadog
-```
-
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
-
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 ### Configure with mounted files
@@ -329,11 +250,7 @@ instances:
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_NAME>'
-
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
+      instance_id: '<INSTANCE_ID>'    
 ```
 
 ### Configure with Kubernetes service annotations
@@ -361,7 +278,7 @@ metadata:
           "password": "<UNIQUEPASSWORD>",
           "gcp": {
             "project_id": "<PROJECT_ID>",
-            "instance_id": "<INSTANCE_NAME>"
+            "instance_id": "<INSTANCE_ID>"
           }
         }
       ]
@@ -371,13 +288,6 @@ spec:
     protocol: TCP
     targetPort: 5432
     name: postgres
-```
-
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
-
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 The Cluster Agent automatically registers this configuration and begin running the Postgres check.

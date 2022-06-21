@@ -8,18 +8,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - network
+- web
+- network
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/network/README.md
+- https://github.com/DataDog/integrations-core/blob/master/network/README.md
 display_name: Network
 draft: false
 git_integration_title: ネットワーク
 guid: 43631795-8a1f-404d-83ae-397639a84050
 integration_id: システム
 integration_title: Network
+integration_version: 2.7.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -31,10 +32,13 @@ public_title: Datadog-Network インテグレーション
 short_description: 送受信バイト数およびパケット数、接続状態、ラウンドトリップ回数などを追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Network ダッシュボード][1]
 
 ## 概要
@@ -99,7 +103,7 @@ Kubernetes: Conntrack メトリクスは、Kubernetes v1.11 未満の場合は�
 
 ## トラブルシューティング
 
-- [Datadog API 経由で TCP/UDP ホストメトリクスを送信するには][9]
+- [Datadog API による TCP/UDP ホストメトリクスの送信][9]
 
 ## その他の参考資料
 

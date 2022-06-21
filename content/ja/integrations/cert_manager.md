@@ -7,19 +7,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - security
-  - 構成 & デプロイ
-  - containers
+- security
+- 構成 & デプロイ
+- containers
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/cert_manager/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/cert_manager/README.md
 display_name: cert-manager
 draft: false
 git_integration_title: cert_manager
 guid: c9bdaf11-fe15-4892-ae30-47c5124144e5
 integration_id: cert-manager
 integration_title: cert-manager
+integration_version: 2.2.0
 is_public: true
 kind: integration
 maintainer: ara.pulido@datadoghq.com
@@ -31,10 +32,13 @@ public_title: Datadog-cert-manager インテグレーション
 short_description: cert-manager のすべてのメトリクスを Datadog で追跡
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、[cert-manager][1] からメトリクスを収集します。
