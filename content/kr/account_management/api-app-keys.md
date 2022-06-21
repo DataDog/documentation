@@ -9,7 +9,7 @@ title: API와 애플리케이션 키
 
 ## API 키
 
-API 키는 조직에 고유하게 할당됩니다. \textcolor{red}Datadog Agent{red}에서 메트릭과 이벤트를 Datadog로 전송하려면 [API 키][1]가 필요합니다.
+API 키는 조직에 고유하게 할당됩니다. <span style="color: red;">Datadog Agent</span>에서 메트릭과 이벤트를 Datadog로 전송하려면 [API 키][1]가 필요합니다.
 
 ## 애플리케이션 키
 
