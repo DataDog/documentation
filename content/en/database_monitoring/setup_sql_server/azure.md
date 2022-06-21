@@ -151,7 +151,7 @@ connector: odbc
 driver: '{ODBC Driver 17 for SQL Server}'
 ```
 
-Once all Agent configuration is complete, [Restart the Datadog Agent][9].
+Once all Agent configuration is complete, [restart the Datadog Agent][9].
 
 ### Validate
 
@@ -200,9 +200,9 @@ instances:
 
 See the [SQL Server integration spec][4] for additional information on setting `deployment_type` and `name` fields.
 
-The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][5].
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
 
-Once all Agent configuration is complete, [Restart the Datadog Agent][6].
+Once all Agent configuration is complete, [restart the Datadog Agent][6].
 
 ### Validate
 
@@ -255,7 +255,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.
 
-The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][4].
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][4] on how these tags are used throughout Datadog.
 
 ### Validate
 

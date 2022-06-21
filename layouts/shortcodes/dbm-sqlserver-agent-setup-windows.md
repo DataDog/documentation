@@ -41,7 +41,7 @@ connector: odbc
 driver: '{ODBC Driver 17 for SQL Server}'
 ```
 
-Once all Agent configuration is complete, [Restart the Datadog Agent][6].
+Once all Agent configuration is complete, [restart the Datadog Agent][6].
 
 ### Validate
 
