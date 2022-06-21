@@ -10,18 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - ログの収集
+- data store
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md
 display_name: ClickHouse
 draft: false
 git_integration_title: clickhouse
 guid: 781edd66-9c4c-4210-898c-182a6b8ba4ab
 integration_id: clickhouse
 integration_title: ClickHouse
+integration_version: 2.7.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -33,10 +34,13 @@ public_title: Datadog-ClickHouse インテグレーション
 short_description: ClickHouse クラスターの健全性とパフォーマンスを監視。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [ClickHouse][1] を監視します。
@@ -105,7 +109,7 @@ ClickHouse チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 ##### ログの収集
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
@@ -142,6 +146,6 @@ ClickHouse チェックにはイベントは含まれません。
 
 [1]: https://clickhouse.yandex
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/agent/
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

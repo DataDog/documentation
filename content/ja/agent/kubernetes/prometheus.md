@@ -13,7 +13,7 @@ further_reading:
   text: アプリケーショントレースの収集
 - link: /agent/kubernetes/integrations/
   tag: ドキュメント
-  text: アプリケーションのメトリクスとログを自動で収集
+  text: アプリケーションのメトリクスとログを自動的に収集する
 - link: /agent/guide/autodiscovery-management/
   tag: ドキュメント
   text: データ収集をコンテナのサブセットのみに制限
@@ -165,11 +165,11 @@ datadog:
 
 #### 高度なコンフィギュレーション
 
-`values.yaml` の `additionalConfigs` コンフィギュレーションフィールドで、ネイティブの Prometheus アノテーション以外にも高度な Openmetrics チェックコンフィギュレーションまたはオートディスカバリーのカスタムルールを定義することができます。
+`values.yaml` の `additionalConfigs` コンフィギュレーションフィールドで、ネイティブの Prometheus アノテーション以外にも高度な OpenMetrics チェックコンフィギュレーションまたはオートディスカバリーのカスタムルールを定義することができます。
 
-`additionalConfigs` は Openmetrics チェックコンフィギュレーションとオートディスカバリーのルールを含む構造のリストです。
+`additionalConfigs` は OpenMetrics チェックコンフィギュレーションとオートディスカバリーのルールを含む構造のリストです。
 
-Openmetrics によりサポートされるすべての[コンフィギュレーションフィールド][14]は、コンフィギュレーションリストで受け渡されます。
+OpenMetrics チェックによりサポートされるすべての[コンフィギュレーションフィールド][14]は、コンフィギュレーションリストで受け渡されます。
 
 オートディスカバリーのコンフィギュレーションはコンテナ名または Kubernetes アノテーション、もしくはその両方に基づきます。`kubernetes_container_names` および `kubernetes_annotations` の両方が定義されている場合、AND のロジックが使用されます (両方のルールに一致する必要があります)。
 
@@ -189,7 +189,7 @@ kubernetes_annotations:
 
 **例:**
 
-この例では、`app=my-app` とラベルが付いたポッドで実行される `my-app` という名前のコンテナを対象とする高度なコンフィギュレーションを定義しています。`send_distribution_buckets` オプションを有効化し、5 秒のカスタムタイムアウトを定義することで、Openmetrics チェックのコンフィギュレーションも同様にカスタマイズすることができます。
+この例では、`app=my-app` とラベルが付いたポッドで実行される `my-app` という名前のコンテナを対象とする高度なコンフィギュレーションを定義しています。`send_distribution_buckets` オプションを有効化し、5 秒のカスタムタイムアウトを定義することで、OpenMetrics チェックのコンフィギュレーションも同様にカスタマイズすることができます。
 
 ```yaml
 datadog:

@@ -1363,6 +1363,96 @@ components:
           type: integer
       readOnly: true
       type: object
+    DistributionPoint:
+      description: Array of distribution points.
+      example:
+      - 1575317847.0
+      - - 0.5
+        - 1.0
+      items:
+        description: List of distribution point.
+        oneOf:
+        - $ref: '#/components/schemas/DistributionPointTimestamp'
+        - $ref: '#/components/schemas/DistributionPointData'
+      maxItems: 2
+      minItems: 2
+      type: array
+    DistributionPointData:
+      description: Distribution point data.
+      items:
+        description: List of distribution point data.
+        format: double
+        type: number
+      type: array
+    DistributionPointTimestamp:
+      description: Distribution point timestamp. It should be in seconds and current.
+      format: double
+      type: number
+    DistributionPointsContentEncoding:
+      description: HTTP header used to compress the media-type.
+      enum:
+      - deflate
+      type: string
+      x-enum-varnames:
+      - DEFLATE
+    DistributionPointsPayload:
+      description: The distribution points payload.
+      properties:
+        series:
+          description: A list of distribution points series to submit to Datadog.
+          example:
+          - metric: system.load.1
+            points:
+            - - 1475317847.0
+              - - 1.0
+                - 2.0
+          items:
+            $ref: '#/components/schemas/DistributionPointsSeries'
+          type: array
+      required:
+      - series
+      type: object
+    DistributionPointsSeries:
+      description: A distribution points metric to submit to Datadog.
+      properties:
+        host:
+          description: The name of the host that produced the distribution point metric.
+          example: test.example.com
+          type: string
+        metric:
+          description: The name of the distribution points metric.
+          example: system.load.1
+          type: string
+        points:
+          description: Points relating to the distribution point metric. All points
+            must be tuples with timestamp and a list of values (cannot be a string).
+            Timestamps should be in POSIX time in seconds.
+          items:
+            $ref: '#/components/schemas/DistributionPoint'
+          type: array
+        tags:
+          description: A list of tags associated with the distribution point metric.
+          example:
+          - environment:test
+          items:
+            description: Individual tags.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/DistributionPointsType'
+      required:
+      - metric
+      - points
+      type: object
+    DistributionPointsType:
+      default: distribution
+      description: The type of the distribution point.
+      enum:
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - DISTRIBUTION
     DistributionWidgetDefinition:
       description: "The Distribution visualization is another way of showing metrics\naggregated
         across one or several tags, such as hosts.\nUnlike the heat map, a distribution
@@ -1423,6 +1513,25 @@ components:
       type: string
       x-enum-varnames:
       - DISTRIBUTION
+    DistributionWidgetHistogramRequestQuery:
+      description: Query definition for Distribution Widget Histogram Request
+      example:
+        data_source: metrics
+        name: query1
+        query: histogram:trace.Load{*}
+      oneOf:
+      - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
+      type: object
+    DistributionWidgetHistogramRequestType:
+      description: Request type for the histogram request.
+      enum:
+      - histogram
+      example: histogram
+      type: string
+      x-enum-varnames:
+      - HISTOGRAM
     DistributionWidgetRequest:
       description: Updated distribution widget.
       properties:
@@ -1443,6 +1552,10 @@ components:
         q:
           description: Widget query.
           type: string
+        query:
+          $ref: '#/components/schemas/DistributionWidgetHistogramRequestQuery'
+        request_type:
+          $ref: '#/components/schemas/DistributionWidgetHistogramRequestType'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -2322,6 +2435,7 @@ components:
       - error_rate
       - hits
       - latency_avg
+      - latency_distribution
       - latency_max
       - latency_p50
       - latency_p75
@@ -2335,6 +2449,7 @@ components:
       - ERROR_RATE
       - HITS
       - LATENCY_AVG
+      - LATENCY_DISTRIBUTION
       - LATENCY_MAX
       - LATENCY_P50
       - LATENCY_P75
@@ -7868,6 +7983,13 @@ components:
           format: int64
           type: integer
       type: object
+    OrgDowngradedResponse:
+      description: Status of downgrade
+      properties:
+        message:
+          description: Information pertaining to the downgraded child organization.
+          type: string
+      type: object
     Organization:
       description: Create, edit, and manage organizations.
       properties:
@@ -7895,6 +8017,11 @@ components:
           $ref: '#/components/schemas/OrganizationSettings'
         subscription:
           $ref: '#/components/schemas/OrganizationSubscription'
+        trial:
+          description: Only available for MSP customers. Allows child organizations
+            to be created on a trial plan.
+          example: false
+          type: boolean
       type: object
     OrganizationBilling:
       deprecated: true
@@ -17298,7 +17425,8 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
-            dashboards_public_share: Share dashboards externally.
+            dashboards_public_share: Generate public and authenticated links to share
+              dashboards externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
@@ -18985,6 +19113,74 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v1/distribution_points:
+    post:
+      description: "The distribution points end-point allows you to post distribution
+        data that can be graphed on Datadog\u2019s dashboards."
+      operationId: SubmitDistributionPoints
+      parameters:
+      - description: HTTP header used to compress the media-type.
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/DistributionPointsContentEncoding'
+      requestBody:
+        content:
+          text/json:
+            examples:
+              dynamic-points:
+                description: "Post time-series data that can be graphed on Datadog\u2019s
+                  dashboards."
+                externalValue: examples/metrics/distribution-points.json.sh
+                summary: Dynamic Points
+                x-variables:
+                  NOW: $(date +%s)
+            schema:
+              $ref: '#/components/schemas/DistributionPointsPayload'
+        required: true
+      responses:
+        '202':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/IntakePayloadAccepted'
+          description: Payload accepted
+        '400':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '408':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Request timeout
+        '413':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Payload too large
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Submit distribution points
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: safe
   /api/v1/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -19724,6 +19920,22 @@ paths:
         required: false
         schema:
           type: string
+      - description: The height of the graph. If no height is specified, the graph's
+          original height is used.
+        in: query
+        name: height
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The width of the graph. If no width is specified, the graph's
+          original width is used.
+        in: query
+        name: width
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -24426,7 +24638,7 @@ paths:
         type: idempotent
   /api/v1/org:
     get:
-      description: List your managed organizations.
+      description: This endpoint returns data on your top-level organization.
       operationId: ListOrgs
       responses:
         '200':
@@ -24589,6 +24801,47 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+  /api/v1/org/{public_id}/downgrade:
+    post:
+      description: Only available for MSP customers. Removes a child organization
+        from the hierarchy of the master organization and places the child organization
+        on a 30-day trial.
+      operationId: DowngradeOrg
+      parameters:
+      - description: The `public_id` of the organization you are operating within.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          example: abc123
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgDowngradedResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Spin-off Child Organization
+      tags:
+      - Organizations
+      x-menu-order: 6
+      x-undo:
+        type: unsafe
   /api/v1/org/{public_id}/idp_metadata:
     post:
       description: 'There are a couple of options for updating the Identity Provider
@@ -25199,10 +25452,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all SLOs
       tags:
       - Service Level Objectives
@@ -25656,10 +25905,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an SLO's details
       tags:
       - Service Level Objectives
@@ -25755,10 +26000,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get Corrections For an SLO
       tags:
       - Service Level Objectives
@@ -25843,10 +26084,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an SLO's history
       tags:
       - Service Level Objectives

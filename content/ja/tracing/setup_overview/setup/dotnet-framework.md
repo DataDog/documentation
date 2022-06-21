@@ -358,7 +358,18 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings プロパティ**: `GlobalSamplingRate` <br>
-取り込み率コントロールを有効にします。
+**デフォルト**: デフォルトは、Datadog Agent から返される率です<br>
+取り込み率コントロールを有効にします。このパラメーターは、サンプリングするスパンのパーセンテージを表す浮動小数点数です。有効な値は `0.0` から `1.0` までです。
+詳しくは、[取り込みメカニズム][6]を参照してください。
+
+`DD_TRACE_SAMPLING_RULES`
+: **TracerSettings プロパティ**: `CustomSamplingRules`<br>
+**デフォルト**: `null`<br>
+オブジェクトの JSON 配列。各オブジェクトは `"sample_rate"` を持たなければなりません。`"name"` と `"service"` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
+詳しくは、[取り込みメカニズム][6]を参照してください。<br>
+**例:**<br>
+  - サンプルレートを 20% に設定: `'[{"sample_rate": 0.2}]'`
+  - 'a' で始まるサービスとスパン名 'b' のサービスのサンプルレートを 10% に、それ以外のサービスのサンプルレートを 20% に設定: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings プロパティ**: `MaxTracesSubmittedPerSecond` <br>
@@ -367,7 +378,9 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
-指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。
+指定された場合、指定されたすべてのタグを生成されたすべてのスパンに追加します。
+**例**: `layer:api, team:intake` <br>
+デリミタはコンマとスペース: `, ` であることに注意してください。
 
 `DD_TRACE_DEBUG`
 : デバッグログの有効・無効を設定します。有効な値は `true` または `false` です。<br>
@@ -382,9 +395,8 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `DD_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
 指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。<br>
-**例**: `layer:api, team:intake` <br>
-バージョン 1.17.0 で追加されました。
-デリミタはコンマと空白: `, ` であることに注意してください。
+**例**: `layer:api,team:intake` <br>
+バージョン 1.17.0 で追加されました。<br>
 
 `DD_TRACE_LOG_DIRECTORY`
 : .NET Tracer ログのディレクトリを設定します。<br>
@@ -433,17 +445,23 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 バージョン 2.6.0 で追加されました。
 ワイルドカードのサポート `[*]` はバージョン 2.7.0 で追加されました。
 
+`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
+: Kafka コンシューマースパンの動作を変更します<br>
+**デフォルト**: `true`<br>
+`true` に設定すると、メッセージが消費されたときにコンシューマースパンが作成され、次のメッセージを消費する前に閉じられます。このスパンの長さは、あるメッセージの消費と次のメッセージの消費との間の計算を代表するものです。この設定は、メッセージの消費がループで実行される場合に使用します。<br>
+`false` に設定すると、メッセージが消費されたときにコンシューマスパンが作成され、すぐに閉じられます。この設定は、メッセージが完全に処理されないまま次のメッセージを消費する場合や、複数のメッセージを一度に消費する場合に使用します。
+
 #### 自動インスツルメンテーションインテグレーションコンフィギュレーション
 
 次の表に、自動インスツルメンテーションを使用しており、インテグレーションごとの設定が可能な場合に**のみ**使用できる構成変数を示します。
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings プロパティ**: `DisabledIntegrationNames` <br>
-無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][6]セクションでリストされているインテグレーション名です。
+無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][7]セクションでリストされているインテグレーション名です。
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings プロパティ**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
-<br>特定のインテグレーションを有効または無効にします。有効な値は、`true` (デフォルト) または `false` です。インテグレーション名は、[インテグレーション][6]セクションにリストされています。
+<br>特定のインテグレーションを有効または無効にします。有効な値は、`true` (デフォルト) または `false` です。インテグレーション名は、[インテグレーション][7]セクションにリストされています。
 **デフォルト**: `true`
 
 #### 試験機能
@@ -465,7 +483,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 ### ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][8] と [W3C (TraceParent)][9] のヘッダー抽出と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのための [B3][9] と [W3C (TraceParent)][10] のヘッダー抽出と挿入をサポートしています。
 
 分散ヘッダーの挿入と抽出のスタイルを構成することができます。
 
@@ -516,7 +534,7 @@ Datadog APM トレーサーは、分散型トレーシングのための [B3][8]
 
 {{< /tabs >}}
 
-カスタムインスツルメンテーションのスパンやタグの追加について詳しくは、[.NET カスタムインスツルメンテーションのドキュメント][7]を参照してください。
+カスタムインスツルメンテーションのスパンやタグの追加について詳しくは、[.NET カスタムインスツルメンテーションのドキュメント][8]を参照してください。
 
 ## プロセス環境変数の構成
 
@@ -574,7 +592,8 @@ dotnet.exe example.dll
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /ja/getting_started/tagging/unified_service_tagging/
 [5]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
-[6]: /ja/tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
-[7]: /ja/tracing/setup_overview/custom_instrumentation/dotnet/
-[8]: https://github.com/openzipkin/b3-propagation
-[9]: https://www.w3.org/TR/trace-context/#traceparent-header
+[6]: /ja/tracing/trace_ingestion/mechanisms/?tab=environmentvariables#head-based-sampling
+[7]: /ja/tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
+[8]: /ja/tracing/setup_overview/custom_instrumentation/dotnet/
+[9]: https://github.com/openzipkin/b3-propagation
+[10]: https://www.w3.org/TR/trace-context/#traceparent-header

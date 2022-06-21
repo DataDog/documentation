@@ -76,7 +76,7 @@ proxy:
       - host2
 ```
 
-**Note**: All integrations that make HTTP(S) requests default back to proxy settings defined in `datadog.yaml` configuration file if none are specified at the integration level. If this is undesired, set `skip_proxy` to true in every instance config or in the `init_config` fallback for your integration.
+**Note**: All integrations that make HTTP(S) requests default back to proxy settings defined in `datadog.yaml` configuration file if none are specified at the integration level. If this is undesired, set `skip_proxy` to true or `use_agent_proxy` to false in every instance config or in the `init_config` fallback for your integration.
 
 ##### NO_PROXY accepted values
 

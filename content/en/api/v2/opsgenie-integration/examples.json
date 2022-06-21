@@ -6,7 +6,7 @@
           "data": [
             {
               "attributes": {
-                "custom_url": "https://example.com",
+                "custom_url": null,
                 "name": "fake-opsgenie-service-name",
                 "region": "us"
               },
@@ -46,7 +46,7 @@
         "json": {
           "data": {
             "attributes": {
-              "custom_url": "https://example.com",
+              "custom_url": null,
               "name": "fake-opsgenie-service-name",
               "region": "us"
             },
@@ -161,7 +161,7 @@
         "json": {
           "data": {
             "attributes": {
-              "custom_url": "https://example.com",
+              "custom_url": null,
               "name": "fake-opsgenie-service-name",
               "region": "us"
             },
@@ -224,7 +224,7 @@
         "json": {
           "data": {
             "attributes": {
-              "custom_url": "https://example.com",
+              "custom_url": null,
               "name": "fake-opsgenie-service-name",
               "region": "us"
             },

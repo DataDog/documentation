@@ -1,23 +1,25 @@
 ---
-title: Commandes et options de l'Agent de cluster
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
-    tag: Blog
-    text: Présentation de l'Agent de cluster Datadog
-  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
-    tag: Blog
-    text: Mettre à l'échelle vos charges de travail Kubernetes en fonction d'une métrique Datadog
-  - link: /agent/cluster_agent/clusterchecks/
-    tag: Documentation
-    text: Exécuter des checks de cluster avec Autodiscovery
-  - link: /agent/kubernetes/daemonset_setup/
-    tag: Documentation
-    text: Exécuter l'Agent avec un DaemonSet Kubernetes
-  - link: /agent/cluster_agent/troubleshooting/
-    tag: Documentation
-    text: Dépanner l'Agent de cluster Datadog
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
+  tag: Blog
+  text: Présentation de l'Agent de cluster Datadog
+- link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
+  tag: Blog
+  text: Mettre à l'échelle vos charges de travail Kubernetes en fonction d'une métrique
+    Datadog
+- link: /agent/cluster_agent/clusterchecks/
+  tag: Documentation
+  text: Exécuter des checks de cluster avec Autodiscovery
+- link: /agent/kubernetes/daemonset_setup/
+  tag: Documentation
+  text: Exécuter l'Agent avec un DaemonSet Kubernetes
+- link: /agent/cluster_agent/troubleshooting/
+  tag: Documentation
+  text: Dépanner l'Agent de cluster Datadog
+kind: documentation
+title: Commandes et options de l'Agent de cluster
 ---
+
 ## Commandes de l'Agent de cluster
 
 Voici les commandes disponibles pour les Agents de cluster de Datadog :
@@ -51,13 +53,13 @@ Les variables d'environnement suivantes sont prises en charge :
 : Active le mappage des métadonnées de cluster. Valeur par défaut : `true`.
 
 `DD_COLLECT_KUBERNETES_EVENTS`                
-: Configure l'Agent afin de recueillir les événements Kubernetes. Valeur par défaut : `false`. Consultez la documentation relative à la [Collecte d'événements][2] pour en savoir plus.
+: Configure l'Agent afin de recueillir les événements Kubernetes. Valeur par défaut : `false`. Consultez la documentation relative à la [collecte d'événements par l'Agent de cluster][2] pour en savoir plus.
 
 `DD_LEADER_ELECTION`                          
 : Active l'élection de leader. Définissez `DD_COLLECT_KUBERNETES_EVENTS` sur `true` pour activer cette fonction. Valeur par défaut : `false`.
 
 `DD_LEADER_LEASE_DURATION`                    
-: Utilisé seulement si l'élection de leader est activée. Pour en savoir plus, consultez la [la section relative à l'élection de leader][3]. Valeur par défaut : 60 secondes.
+: Utilisé uniquement si l'élection de leader est activée. Pour en savoir plus, consultez la documentation relative à la [collecte d'événements par l'Agent de cluster][2]. Valeur par défaut : 60 secondes.
 
 `DD_CLUSTER_AGENT_AUTH_TOKEN`                 
 : Token de 32 caractères qui doit être partagé entre l'Agent de nœud et l'Agent de cluster Datadog.
