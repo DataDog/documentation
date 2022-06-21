@@ -30,7 +30,7 @@ title: 収集された RUM ブラウザデータ
 
 RUM ブラウザ SDK は、メトリクスと属性が関連付けられたイベントを生成します。すべての RUM イベントには、すべての[デフォルト属性](#default-attributes)があります。例: ページの URL (`view.url`) や、デバイスタイプ (`device.type`) や 国 (`geo.country`) などのユーザー情報。
 
-追加の[特定のイベントタイプに固有のメトリクスと属性](#event-specific-metrics-and-attributes)があります。たとえば、メトリクス `view.loading_time` は "view" イベントに関連付けられ、属性 `resource.method` は "resource" イベントに関連付けられます。
+追加の[特定のイベントタイプに固有のメトリクスと属性](#event-specific-metrics-and-attributes)があります。たとえば、`view.loading_time` メトリクスはビューイベントに関連付けられ、`resource.method` 属性はリソースイベントに関連付けられます。
 
 | イベントタイプ     | 保存期間 | 説明                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -246,6 +246,15 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 | `action.target.name` | 文字列 | ユーザーが操作したエレメント。自動収集されたアクションのみ対象。 |
 | `action.name` | 文字列 | 作成されたユーザーフレンドリーな名称 (`Click on #checkout` など)。[カスタムユーザーアクション][15]の場合は、API コールで提供されたアクション名。 |
 
+### フラストレーションシグナルフィールド
+
+| フィールド                | タイプ   | 説明                                                   |
+|-------------------------------|--------|---------------------------------------------------------------|
+| `session.frustration.count`     | 数値 | 1 つのセッションに関連するすべてのフラストレーションシグナルの数。 |
+| `view.frustration.count`        | 数値 | 1 つのビューに関連するすべてのフラストレーションシグナルの数。    |
+| `action.frustration.type:dead_click`  | 文字列 | RUM ブラウザ SDK で検出されたデッドクリック。              |
+| `action.frustration.type:rage_click`  | 文字列 | RUM ブラウザ SDK で検出されたレイジークリック。              |
+| `action.frustration.type:error_click` | 文字列 | RUM ブラウザ SDK で検出されたエラークリック。             |
 
 ## その他の参考資料
 
@@ -256,7 +265,7 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 [3]: /ja/help/
 [4]: /ja/real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
 [5]: /ja/synthetics/browser_tests/
-[6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-is-loading-time-calculated
+[6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [7]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
