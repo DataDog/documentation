@@ -91,7 +91,7 @@ The default standard attribute list is split into the functional domains:
 - [Syslog and log shippers](#syslog-and-log-shippers)
 - [DNS](#dns)
 
-#### Network
+#### Web Access
 
 The following attributes are related to the data used in network communication. All fields and metrics are prefixed by `network`.
 

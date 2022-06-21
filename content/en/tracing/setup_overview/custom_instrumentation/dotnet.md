@@ -184,7 +184,7 @@ In most cases, headers extraction and injection are transparent. Though, there a
 ```csharp
 var spanContextExtractor = new SpanContextExtractor();
 var parentContext = spanContextExtractor.Extract(headers, (headers, key) => GetHeaderValues(headers, key));
-var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext }; 
+var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext };
 using var scope = Tracer.Instance.StartActive("operation", spanCreationSettings);
 ```
 
@@ -222,6 +222,8 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
     return Enumerable.Empty<string>();
 }
 ```
+
+When using the `SpanContextExtractor` API to trace Kafka consumer spans, set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false`. This ensures the consumer span is correctly closed immediately after the message is consumed from the topic, and the metadata (such as `partition` and `offset`) is recorded correctly. Spans created from Kafka messages using the `SpanContextExtractor` API are children of the producer span, and siblings of the consumer span.
 
 ### Resource filtering
 

@@ -32,13 +32,15 @@ The recommended best practice for scoping application keys is to grant your keys
 
 ## Client tokens
 
-To manage your client tokens, go to **Organization Settings**, then click the **Client Tokens** tab.
+For security reasons, API keys cannot be used to send data from a browser, as they would be exposed client-side in the JavaScript code. Instead, web browsers and other clients use client tokens to send data to Datadog.
 
-Client tokens are unique to your organization. A client token is required by the [web browser log collector][6] to submit logs to Datadog, and is required by the [Real User Monitoring][7] to submit events and logs to Datadog.
+ Several types of clients submit data that requires a client token, including the following examples:
+- The [web browser log collector][6] submits logs.
+- [Real User Monitoring][7] applications submit events and logs.
 
-For security reasons, API keys cannot be used to send data from a browser, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a client token must be used.
+Client tokens are unique to your organization. To manage your client tokens, go to **Organization Settings**, then click the **Client Tokens** tab.
 
-**Note:** A client token will not be revoked if the user who created it was deactivated. They will still be available for use in your RUM applications and to collect logs.
+**Note:** When a user who created a client token is deactivated, the client token remains active.
 
 ## Add an API key or client token
 
@@ -72,7 +74,7 @@ To remove a Datadog application key, navigate to **Organization Settings** > **A
 
 ## Scope application keys 
 
-To specify [authorization scopes][3] for application keys, make a request to the [Datadog API][5] to create or edit an application key. Scopes can be specified for application keys owned by [the current user][8] or a [service account][9]. If this field is unspecified, application keys by default have all the same scopes and permissions as the user who created them.
+To specify [authorization scopes][3] for application keys, [make a request to the Datadog API][5] to create or edit an application key. Scopes can be specified for application keys owned by [the current user][8] or a [service account][9]. If this field is unspecified, application keys by default have all the same scopes and permissions as the user who created them.
 
 **Notes:**
 

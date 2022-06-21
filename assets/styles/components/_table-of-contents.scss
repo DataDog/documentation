@@ -81,7 +81,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     .toc {
         margin-right: auto;
         top: 100px;
-        max-height: 100vh;
+        max-height: calc(100vh - 150px);
         padding-bottom: 150px;
         overflow-x: hidden;
         overflow-y: auto;

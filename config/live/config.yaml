@@ -5,6 +5,8 @@ enableGitInfo: true
 
 deployment:
     order:
+      - ".woff2$"
+      - ".woff$"
       - ".css$"
       - ".js$"
       - ".jpg$"

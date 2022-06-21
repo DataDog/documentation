@@ -27,7 +27,7 @@ Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13
 
 Supported Agent versions
-: 7.36.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -192,6 +192,8 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        port: 5432
        username: datadog
        password: '<PASSWORD>'
+       tags:
+         - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -216,7 +218,7 @@ Get up and running quickly by executing the following command to run the agent f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.36.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -227,7 +229,8 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<AWS_INSTANCE_ENDPOINT>",
     "port": 5432,
     "username": "datadog",
-    "password": "<UNIQUEPASSWORD>"
+    "password": "<UNIQUEPASSWORD>",
+    "tags": "dbinstanceidentifier:<DB_INSTANCE_NAME>"
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
@@ -244,11 +247,11 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.36.0
+FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>","tags": "dbinstanceidentifier:<DB_INSTANCE_NAME>"}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -289,7 +292,9 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 5432
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: <UNIQUEPASSWORD>
+    tags:
+      - dbinstanceidentifier:<DB_INSTANCE_NAME>" \
   datadog/datadog
 ```
 
@@ -313,6 +318,8 @@ instances:
     port: 5432
     username: datadog
     password: '<PASSWORD>'
+    tags:
+      - dbinstanceidentifier:<DB_INSTANCE_NAME>
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
     # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -341,7 +348,8 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "<UNIQUEPASSWORD>",
+          "tags": "dbinstanceidentifier:<DB_INSTANCE_NAME>"
         }
       ]
 spec:

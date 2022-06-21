@@ -48,6 +48,14 @@ type: multi-code-lang
 
 ## インストールと利用開始
 
+<div class="alert alert-info">
+  <div class="alert-info">Datadog は、最高の体験を得るために、Datadog アプリの<a href="https://app.datadoghq.com/apm/docs">クイックスタートの説明書</a>に従うことをお勧めします。これには以下が含まれます。<br/>
+    <div>- デプロイメント構成 (ホスト、Docker、Kubernetes、または Amazon ECS) に合わせた**ステップバイステップ**の説明。</div>
+    <div>- <code>サービス</code>タグ、<code>環境</code>タグ、<code>バージョン</code>タグを動的に設定する。</div>
+    <div>- セットアップ時にトレースの 100% インジェストとログへのトレース ID インジェクションを有効にする。</div>
+  </div>
+</div>
+
 <div class="alert alert-warning">
 <strong>**注**:</strong> Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです（たとえば APM）。可視性を最大限に向上するため、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
 </div>
@@ -208,7 +216,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 ### APM に Datadog Agent を構成する
 
-インスツルメントされたアプリケーションからトレースを受信するように [Datadog Agent をインストールして構成][2]します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。
+インスツルメントされたアプリケーションからトレースを受信するように [Datadog Agent をインストールして構成][2]します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。
 
 コンテナ化、サーバーレス、クラウド環境の場合:
 
@@ -223,7 +231,13 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. アプリケーションをインスツルメントした後、トレースクライアントはデフォルトで `localhost:8126` にトレースを送信します。もし、これが正しいホストとポートでない場合には、環境変数 `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` を設定して変更してください。これらの変数の設定方法については、[構成](#configuration)を参照してください。
+3. アプリケーションにインスツルメンテーションを行った後、トレースクライアントは以下にトレースの送信を試みます。
+
+    - デフォルトでは `/var/run/datadog/apm.socket` の Unix ドメインソケット。
+    - ソケットが存在しない場合、トレースは `localhost:8126` に送信されます。
+    - もし、別のソケット、ホスト、ポートが必要な場合は、環境変数 `DD_TRACE_AGENT_URL` を使用します: `DD_TRACE_AGENT_URL=http://custom-hostname:1234` または `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
+
+これらの設定方法の詳細については、[構成](#configuration)を参照してください。
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
@@ -364,15 +378,16 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings プロパティ**: `Exporter.AgentUri`<br>
-<br>トレースが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。
-**デフォルト**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`
+トレースが送信される URL のエンドポイントを設定します。設定されている場合は `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。<br>
+`unix://` をプレフィックスとして、ソケットへの Unix パスを含めることができます。<br>
+**デフォルト**: 設定されている場合は `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`、ファイルが存在する場合は `unix:///var/run/datadog/apm.socket`、または `http://localhost:8126`。
 
 `DD_AGENT_HOST`
-: トレースが送信されるホストを設定します (Agent を実行するホスト)。ホスト名または IP アドレスにできます。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。<br>
+: Agent が接続をリッスンするホストを設定します。ホスト名または IP アドレスを指定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。 <br>
 **デフォルト**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: トレースが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。<br>
+: Agent が接続をリッスンする TCP ポートを設定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。 <br>
 **デフォルト**: `8126`
 
 `DD_LOGS_INJECTION`
@@ -382,7 +397,18 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings プロパティ**: `GlobalSamplingRate` <br>
-取り込み率コントロールを有効にします。
+**デフォルト**: デフォルトは、Datadog Agent から返される率です<br>
+取り込み率コントロールを有効にします。このパラメーターは、サンプリングするスパンのパーセンテージを表す浮動小数点数です。有効な値は `0.0` から `1.0` までです。
+詳しくは、[取り込みメカニズム][11]を参照してください。
+
+`DD_TRACE_SAMPLING_RULES`
+: **TracerSettings プロパティ**: `CustomSamplingRules`<br>
+**デフォルト**: `null`<br>
+オブジェクトの JSON 配列。各オブジェクトは `"sample_rate"` を持たなければなりません。`"name"` と `"service"` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
+詳しくは、[取り込みメカニズム][11]を参照してください。<br>
+**例:**<br>
+  - サンプルレートを 20% に設定: `'[{"sample_rate": 0.2}]'`
+  - 'a' で始まるサービスとスパン名 'b' のサービスのサンプルレートを 10% に、それ以外のサービスのサンプルレートを 20% に設定: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings プロパティ**: `MaxTracesSubmittedPerSecond` <br>
@@ -394,7 +420,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。
 
 `DD_TRACE_DEBUG`
-<br>デバッグログの有効・無効を設定します。有効な値は `true` または `false` です。
+: デバッグログの有効・無効を設定します。有効な値は `true` または `false` です。<br>
 **デフォルト**: `false`
 
 `DD_TRACE_HEADER_TAGS`
@@ -408,7 +434,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。<br>
 **例**: `layer:api, team:intake` <br>
 バージョン 1.17.0 で追加されました。
-デリミタはコンマと空白: `, ` であることに注意してください。
+デリミタはコンマとスペース: `, ` であることに注意してください。
 
 `DD_TRACE_LOG_DIRECTORY`
 : .NET Tracer ログのディレクトリを設定します。<br>
@@ -456,6 +482,12 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 **注:** ワイルドカードメソッドサポート (`[*]`) は、コンストラクタ、プロパティゲッターとセッター、 `Equals`、`Finalize`、`GetHashCode` そして `ToString` 以外の型のすべてのメソッドを選択します。<br>
 バージョン 2.6.0 で追加されました。
 ワイルドカードのサポート `[*]` はバージョン 2.7.0 で追加されました。
+
+`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
+: Kafka コンシューマースパンの動作を変更します<br>
+**デフォルト**: `true`<br>
+`true` に設定すると、メッセージが消費されたときにコンシューマースパンが作成され、次のメッセージを消費する前に閉じられます。このスパンの長さは、あるメッセージの消費と次のメッセージの消費との間の計算を代表するものです。この設定は、メッセージの消費がループで実行される場合に使用します。<br>
+`false` に設定すると、メッセージが消費されたときにコンシューマスパンが作成され、すぐに閉じられます。この設定は、メッセージが完全に処理されないまま次のメッセージを消費する場合や、複数のメッセージを一度に消費する場合に使用します。
 
 #### 自動インスツルメンテーションインテグレーションコンフィギュレーション
 
@@ -691,3 +723,4 @@ Linux Docker コンテナに必要な環境変数を設定するには
 [8]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
+[11]: /ja/tracing/trace_ingestion/mechanisms/?tab=environmentvariables#head-based-sampling

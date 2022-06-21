@@ -415,13 +415,133 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
 
 {{< /tabs >}}
 
-#### ヘルスチェックの設定
+#### ライブネスプローブとレディネスプローブのセットアップ
 
-[ヘルスチェック][10]メカニズムを追加すると、オーケストレーターはワーカーが正しく実行していることを確認できます。
+オーケストレーターがワーカーが正しく動作していることを確認できるように、ライブネスプローブまたはレディネスプローブを追加します。
+
+レディネスプローブの場合、プライベートロケーションデプロイメントでポート `8080` のプライベートロケーションステータスプローブを有効にする必要があります。詳細については、[高度な構成][15]を参照してください。
+
+{{< tabs >}}
+
+{{% tab "Docker Compose" %}}
+
+```yaml
+healthcheck:
+  retries: 3
+  test: [
+    "CMD", "wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
+  ]
+  timeout: 2s
+  interval: 10s
+  start_period: 30s
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes Deployment" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{% tab "Helm Chart" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "CMD-SHELL", "/usr/bin/wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "Fargate" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "CMD-SHELL", "wget -O /dev/null -q http://localhost:8080/liveness || exit 1"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "EKS" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+#### ヘルスチェックの追加構成
+
+<div class="alert alert-danger">プライベートロケーションのヘルスチェックを追加するこの方法は、サポートされなくなりました。Datadog では、ライブネスプローブとレディネスプローブを使用することを推奨しています。</div>
 
 プライベートロケーションコンテナの `/tmp/liveness.date` ファイルは、Datadog から正常にポーリングされるごとに更新されます (デフォルトでは 2 秒)。例えば過去1分間にフェッチされないなど一定期間ポーリングが行われないと、コンテナは異常だとみなされます。
 
-以下のコンフィギュレーションを使い、コンテナにヘルスチェックを設定します。
+以下のコンフィギュレーションを使い、`livenessProbe` でコンテナにヘルスチェックを設定します。
 
 {{< tabs >}}
 
@@ -524,10 +644,6 @@ livenessProbe:
 {{% /tab %}}
 
 {{< /tabs >}}
-
-#### ヘルスチェックの追加構成
-
-選択したコンテナオーケストレーターがヘルスチェックのエンドポイントを必要とする場合、プライベートロケーションデプロイメントでポート `8080` のプライベートロケーションステータスプローブを有効にしてください。詳細については、[高度な構成][15]を参照してください。
 
 ### 内部エンドポイントをテストする
 

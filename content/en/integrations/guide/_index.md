@@ -22,6 +22,7 @@ private: true
 
 {{< whatsnext desc="AWS guides:" >}}
     {{< nextlink href="getting_started/integrations/aws/" tag="AWS" >}}AWS integration automatic setup with CloudFormation{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-terraform-setup" tag="AWS" >}}AWS integration automatic setup with Terraform{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-manual-setup" tag="AWS" >}}AWS Integration manual setup{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag="AWS" >}}Troubleshooting the AWS integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}

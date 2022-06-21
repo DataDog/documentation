@@ -9,6 +9,9 @@ aliases:
 
 Datadog bills for AWS hosts running the Datadog Agent and all EC2 instances picked up by the Datadog-AWS integration. **You are not billed twice** if you are running the Agent on an EC2 instance picked up by the AWS integration.
 
+**IMPORTANT**: Datadog uses EC2 instance metadata to ensure you aren't billed twice for hosts both running the agent and being crawled by the AWS integration. If your EC2 instances are configured to require the use of [Instance Metadata Service Version 2 (IMDSv2)][6], then you must set the parameter `ec2_prefer_imdsv2` to `true` in your [Agent configuration][7] to avoid double-billing.
+
+
 When you set up the Fargate and Lambda integration tiles, and any custom metrics, it impacts your Datadog bill.
 
 Other AWS resources (ELB, RDS, Dynamo, etc.) are not part of monthly billing and configuration exclusions do not apply.
@@ -38,3 +41,5 @@ For billing questions, contact your [Customer Success][5] Manager.
 [3]: /infrastructure/
 [4]: /help/
 [5]: mailto:success@datadoghq.com
+[6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml

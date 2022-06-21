@@ -1,19 +1,20 @@
 ---
-title: Agent の概要
-kind: documentation
 aliases:
-  - /ja/getting_started/agent
+- /ja/getting_started/agent
 further_reading:
-  - link: /agent/basic_agent_usage/
-    tag: ドキュメント
-    text: 基本的な Agent の利用方法
-  - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-    tag: よくあるご質問
-    text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
+- link: /agent/basic_agent_usage/
+  tag: ドキュメント
+  text: 基本的な Agent の利用方法
+- link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+  tag: よくあるご質問
+  text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
+kind: documentation
+title: Agent の概要
 ---
+
 ## 概要
 
-Agent は軽量なソフトウェアで、ホストにインストールされます。[インテグレーション][1]、[DogStatsD][2]、または [API][3] を介して、ホストのメトリクスとイベントを Datadog に報告します。追加のセットアップを行うと、Agent から[ライブプロセス][4]、[ログ][5]、および[トレース][6]を報告できるようになります。
+Agent は軽量なソフトウェアで、ホストにインストールされます。[インテグレーション][1]、[DogStatsD][2]、または [API][3] を使って、ホストのメトリクスとイベントを Datadog に報告します。追加のセットアップを行うと、Agent から[ライブプロセス][4]、[ログ][5]、および[トレース][6]を報告できるようになります。
 
 ## セットアップ
 
@@ -40,7 +41,7 @@ Agent の[メインコンフィギュレーションファイル][9]は `datadog
 
 ### コマンド
 
-Agent を[起動][14]、[停止][15] または [再起動][16]する方法については、[Agent のコマンド][17]ページを参照してください。
+Agent を[起動][14]、[停止][15] または [再起動][16]する方法については、[Agent のコマンド][14]を参照してください。
 
 ## 収集データ
 
@@ -52,8 +53,8 @@ Agent v6 で使用できるメトリクスを下記に示します。Agent v5 �
 
 | メトリクス                           | 説明                                                                                                          |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **datadog.agent.python.version** | Agent が現在 Datadog に報告中の場合は、値 `1` が表示されます。メトリクスには `python_version` がタグ付けされています。 |
-| **datadog.agent.running**        | Agent が現在 Datadog に報告中の場合は、値 `1` が表示されます。                                                 |
+| **datadog.agent.python.version** | Agent が Datadog に報告中の場合は、値 `1` が表示されます。メトリクスには `python_version` がタグ付けされています。 |
+| **datadog.agent.running**        | Agent が Datadog に報告中の場合は、値 `1` が表示されます。                                                 |
 | **datadog.agent.started**        | Agent 起動時に値 `1` で送信されるカウント (v6.12 以上で使用可能)。                                        |
 
 #### チェック
@@ -83,7 +84,7 @@ Agent の起動または再起動の際に、Agent はイベントを Datadog �
 ### サービスチェック
 
 **datadog.agent.up**:
-Agent が Datadog に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+Agent が Datadog に接続できる場合は、`OK` を返します。
 
 **datadog.agent.check_status**:
 Agent チェックが Datadog にメトリクスを送信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
@@ -92,7 +93,7 @@ Agent チェックが Datadog にメトリクスを送信できない場合は�
 
 Agent のトラブルシューティングに関するヘルプ
 
-- [Agent のトラブルシューティング][25]ページにアクセスしてください。
+- [Agent のトラブルシューティング][25]を参照してください
 - [Agent のログファイル][26]を確認してください。
 - [Datadog のサポートチーム][27]までお問合せください。
 
@@ -105,22 +106,22 @@ Agent のトラブルシューティングに関するヘルプ
 ## 次のステップ
 
 {{< whatsnext desc="Agent をインストールしたら、次のドキュメントを参照してください">}}
-{{< nextlink href="/getting_started/integrations" tag="Documentation" >}}インテグレーションの詳細{{< /nextlink >}}
-{{< nextlink href="/getting_started/application" tag="Documentation" >}}Datadog UI の詳細{{< /nextlink >}}
+{{< nextlink href="/getting_started/integrations" >}}インテグレーションについて{{< /nextlink >}}
+{{< nextlink href="/getting_started/application" >}}Datadog UI について{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /ja/integrations/
-[2]: /ja/metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: /ja/api/
 [4]: /ja/infrastructure/process/
 [5]: /ja/logs/
 [6]: /ja/tracing/
 [7]: https://www.datadoghq.com
-[8]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[8]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [9]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[10]: https://app.datadoghq.com/account/settings#api
+[10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[12]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent#environment-variables
+[12]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent#environment-variables
 [13]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [14]: /ja/agent/guide/agent-commands/
 [15]: /ja/agent/guide/agent-commands/#start-the-agent

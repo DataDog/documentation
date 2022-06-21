@@ -88,9 +88,9 @@ To construct a funnel, select **View** or **Action** and choose a query from the
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_funnel.mp4" alt="Create a funnel with queries" video="true" width="80%" >}}
 
-The graph displays the sessions for your selected queries out of your total RUM sessions. When you click on the bar graph, a side panel related to this step displaying **Converted Sessions** and **Dropped off Sessions** appears.
+The funnel graph displays the sessions for your selected queries out of your total RUM sessions. When you click on the bar graph, a side panel displaying the step's **Overall Conversion Rate**, **Converted Rate**, and **Drop Off Rate** appears. Scroll down to see the step's performance, outstanding issues, and conversion rates by type. 
 
-{{< img src="real_user_monitoring/explorer/visualize/funnel.mp4" alt="Funnel graph in the RUM Explorer" video="true" width="100%" >}}
+{{< img src="real_user_monitoring/explorer/visualize/funnel_updated.mp4" alt="Funnel graph in the RUM Explorer" video="true" width="100%" >}}
 
 ## Related events
 
