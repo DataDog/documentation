@@ -104,7 +104,7 @@ supported_os:
     }
     ```
 
-5. StackPulse プレイブックをトリガーするモニターを選択し、**Alert Your Team** フィールドに新規作成した Webhook インテグレーションへの参照を追加します。詳しくは[モニターの管理についての DataDog ドキュメント][4]を参照してください。
+5. StackPulse プレイブックをトリガーするモニターを選択し、**Alert Your Team** フィールドに新規作成した Webhook インテグレーションへの参照を追加します。詳しくは[モニターの管理][4]を参照してください。
 
 6. **Integrations -> APIs** に移動して **API Keys** カードを選択します。**New API Key** 下で新しいキーに対して意味のある名前を入力し、**Create API Key** をクリックした後に新しいキーを**コピー**します。
 
@@ -135,7 +135,7 @@ StackPulse インテグレーションには、サービスのチェック機能
 [1]: https://stackpulse.com
 [2]: https://stackpulse.com/get-started/
 [3]: https://app.datadoghq.com/account/settings#integrations/webhooks
-[4]: https://docs.datadoghq.com/ja/monitors/manage_monitor/
+[4]: https://docs.datadoghq.com/ja/monitors/manage/
 [5]: https://app.stackpulse.io/integrations/datadog%20api%20keys?create=true
 [6]: https://github.com/stackpulse/steps/tree/master/steps/datadog/post-event
 [7]: https://docs.datadoghq.com/ja/help/

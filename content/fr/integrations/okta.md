@@ -26,7 +26,7 @@ Connectez Okta pour intégrer vos logs d'événements système Okta à la foncti
 
 Ces logs vous offrent une meilleure visibilité sur les événements d'accès et de cycle de vie associés à l'ensemble de vos applications, utilisateurs, etc. L'intégration Datadog/Okta vous permet de détecter les menaces pour vos applications, de suivre l'activité des utilisateurs, de débuguer les problèmes d'authentification et d'autorisation, et de créer une piste d'audit pour assurer votre conformité à la réglementation.
 
-[Consultez la documentation d'Okta][1] pour obtenir la liste complète des événements Okta que Datadog peut surveiller.
+[Consultez la section Types d'événements][1] de la documentation Okta (en anglais) pour obtenir la liste de tous les événements Okta que Datadog peut surveiller.
 
 ## SSO avec SAML
 
@@ -45,7 +45,7 @@ Pour activer l'intégration Datadog/Okta :
     | Paramètre    | Description                                                                                                     |
     | ------------ | --------------------------------------------------------------------------------------------------------------- |
     | Account name | Indiquez un nom de compte pour identifier votre compte Okta dans Datadog. Celui-ci ne peut contenir que des caractères alphanumériques et des underscores. |
-    | Domain       | Le domaine unique du compte utilisé pour récupérer des logs à partir de votre compte Okta. Le domaine doit correspondre à une URL valide.                  |
+    | Domain       | Le domaine unique du compte utilisé pour récupérer des logs à partir de votre compte Okta. Le domaine doit correspondre à une URL valide. Cette URL doit commencer par `https://<votre_domaine>.okta.com`.               |
     | API key      | Le token d'API associé au compte Okta créé précédemment.                                                             |
 
 4. Cliquez sur _Save_.

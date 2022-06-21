@@ -45,6 +45,7 @@ def get_dd_metrics(csv_metrics, keys, t):
             'gcp.logging.user.',
             'gcp.custom.',
             'isatap',
+            'spark_extended',
             'vsphere.',
             'zookeeper.avg_',
             'zookeeper.cnt_',

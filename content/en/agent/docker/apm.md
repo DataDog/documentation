@@ -26,7 +26,7 @@ further_reading:
       text: "Assign tags to all data emitted by a container"
 ---
 
-Enable the Trace Agent in the `gcr.io/datadoghq/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
+As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned off, you can re-enable it in the `gcr.io/datadoghq/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 ## Tracing from the host
 
@@ -40,7 +40,8 @@ For example, the following command allows the Agent to receive traces from your 
 {{% tab "Linux" %}}
 
 ```shell
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+docker run -d --cgroupns host \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -p 127.0.0.1:8126:8126/tcp \
@@ -82,7 +83,7 @@ List of all environment variables available for tracing within the Docker Agent:
 | `DD_APM_RECEIVER_SOCKET`   | Collect your traces through a Unix Domain Sockets and takes priority over hostname and port configuration if set. Off by default, when set it must point to a valid sock file.                                                                                                                                                                       |
 | `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                                                                                                                                                                                                                                                  |
 | `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                                                      |
-| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts traces and trace metrics.                                                                                                                                                                                                                                                                                         |
+| `DD_APM_ENABLED`           | When set to `true` (the default), the Datadog Agent accepts traces and trace metrics.                                                                                                                                                                                                                                                                                         |
 | `DD_APM_CONNECTION_LIMIT`  | Sets the maximum connection limit for a 30 second time window. The default limit is 2000 connections.                                                                                                                                                                                                                                                    |
 | `DD_APM_DD_URL`            | Set the Datadog API endpoint where your traces are sent: `https://trace.agent.{{< region-param key="dd_site" >}}`. Defaults to `https://trace.agent.datadoghq.com`.                                                                                                                                                                                                                            |
 | `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                                                                                                                                                                                                                                                    |
@@ -110,6 +111,7 @@ Then start the Agent and the application container, connected to the network pre
 # Datadog Agent
 docker run -d --name datadog-agent \
               --network <NETWORK_NAME> \
+              --cgroupns host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -133,6 +135,7 @@ Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (d
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
+              --cgroupns host \
               --network "<NETWORK_NAME>" \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
@@ -197,8 +200,8 @@ tracer.configure(
 
 ```ruby
 Datadog.configure do |c|
-  c.tracer hostname: 'datadog-agent',
-           port: 8126
+  c.agent.host = 'datadog-agent'
+  c.agent.port = 8126
 end
 ```
 
@@ -238,7 +241,7 @@ Set the environment variables before running your instrumented app:
 # Environment variables
 export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+export CORECLR_PROFILER_PATH=<SYSTEM_DEPENDENT_PATH>
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
 # For containers
@@ -248,6 +251,18 @@ export DD_TRACE_AGENT_PORT=8126
 # Start your application
 dotnet example.dll
 ```
+
+The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
+
+   Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
+   ------------------------------------------|----------------------------
+   Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
+   Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
+   Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
+
+In the table above, `<APP_DIRECTORY>` refers to the directory containing the application's `.dll` files.
 
 {{< /programming-lang >}}
 

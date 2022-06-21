@@ -21,7 +21,7 @@ Tagging is used throughout Datadog to query the machines and metrics you monitor
 Tags can be configured in several different ways:
 
 - In the Datadog Agent [configuration file](#configuration-file) or each individual integration configuration file
-- Through the the Datadog [UI](#ui)
+- Through the Datadog [UI](#ui)
 - With the Datadog [API](#api)
 - With the [DogStatsD](#dogstatsd)
 
@@ -97,7 +97,7 @@ hostname: mymachine.mydomain
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
 [3]: /getting_started/tagging/#defining-tags
-[4]: /metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -131,7 +131,7 @@ hostname: mymachine.mydomain
 
 ##### Changing the hostname
 
-* The old hostname remains in the UI for 2 hours but does not show new metrics.
+* The old hostname remains in the UI for 2 hours, but does not show new metrics.
 * Any data from hosts with the old hostname can be queried with the API.
 * To graph metrics with the old and new hostname in one graph, use [arithmetic between two metrics][5].
 
@@ -139,7 +139,7 @@ hostname: mymachine.mydomain
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
 [3]: /getting_started/tagging/#defining-tags
-[4]: /metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
@@ -148,7 +148,7 @@ hostname: mymachine.mydomain
 
 The most efficient method for assigning tags is to rely on integration inheritance. Tags you assign to your AWS instances, Chef recipes, and other integrations are automatically inherited by hosts and metrics you send to Datadog.
 
-For containerized environments, it is recommend to follow the [unified service tagging][2] documentation to achieve a single point of configuration across all of your Datadog telemetry.
+For containerized environments, it is recommended to follow the [unified service tagging][2] documentation to achieve a single point of configuration across all of your Datadog telemetry.
 
 ##### Cloud integrations
 
@@ -164,19 +164,19 @@ After installing the containerized Datadog Agent, you can set your host tags usi
 
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
-| Environment Variable               | Description                                          |
-|------------------------------------|------------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`         | Extract docker container labels                      |
-| `DD_DOCKER_ENV_AS_TAGS`            | Extract docker container environment variables       |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                                   |
-| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics (low, orchestrator, high)  |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics (low, orchestrator, high) |
+| Environment Variable               | Description                                                                                             |
+|------------------------------------|---------------------------------------------------------------------------------------------------------|
+| `DD_CONTAINER_LABELS_AS_TAGS`      | Extract container labels. This env is equivalent to the old `DD_DOCKER_LABELS_AS_TAGS` env.             |
+| `DD_CONTAINER_ENV_AS_TAGS`         | Extract container environment variables. This env is equivalent to the old `DD_DOCKER_ENV_AS_TAGS` env. |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                                                                                      |
+| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics (low, orchestrator, high)                                                     |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics (low, orchestrator, high)                                                    |
 
 **Examples:**
 
 ```shell
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
-DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
+DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
 When using `DD_KUBERNETES_POD_LABELS_AS_TAGS`, you can use wildcards in the format:
@@ -187,17 +187,17 @@ When using `DD_KUBERNETES_POD_LABELS_AS_TAGS`, you can use wildcards in the form
 
 For example, `{"app*": "kube_%%label%%"}` resolves to the tag name `kube_application` for the label `application`. Further, `{"*": "kube_%%label%%"}` adds all pod labels as tags prefixed with `kube_`.
 
-When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
+When using the `DD_CONTAINER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
 
 ```shell
-DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
 When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is important. To avoid issues, follow the [Docker unified service tagging][2] documentation.
 
  If the container needs to be labeled outside of this configuration, place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog Agent does not have any labels to extract from the containers without this placement.
 
-Below is a sample, working `docker-compose.yaml` file that shows this. In the example below, the labels in the `myapplication:` section, `my.custom.label.project` and `my.custom.label.version` each have unique values. Using the `DD_DOCKER_LABELS_AS_TAGS` environment variable in the `datadog:` section extracts the labels and produces these tags for the `myapplication` container:
+Below is a sample, working `docker-compose.yaml` file that shows this. In the example below, the labels in the `myapplication:` section, `my.custom.label.project` and `my.custom.label.version` each have unique values. Using the `DD_CONTAINER_LABELS_AS_TAGS` environment variable in the `datadog:` section extracts the labels and produces these tags for the `myapplication` container:
 
 Inside the `myapplication` container the labels are: `my.custom.label.project` and `my.custom.label.version`
 
@@ -216,7 +216,7 @@ services:
       - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
-      - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
+      - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:

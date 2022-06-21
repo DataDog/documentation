@@ -47,7 +47,7 @@ snmp_listener:
   workers: 100              # nombre de workers utilisés pour découvrir simultanément des appareils
   discovery_interval: 3600  # secondes
   configs:
-    - network: 1.2.3.4/24   # notation CIDR, nous vous conseillons de ne pas indiquer plus de /24 blocs
+    - network: 1.2.3.4/24   # notation CIDR, Datadog recommande de ne pas indiquer plus de /24 blocs
       version: 2
       port: 161
       community: ***
@@ -74,7 +74,7 @@ snmp_listener:
   workers: 100              # nombre de workers utilisés pour découvrir simultanément des appareils
   discovery_interval: 3600  # intervalle entre chaque découverte automatique, en secondes
   configs:
-    - network: 1.2.3.4/24   # notation CIDR, nous vous conseillons de ne pas indiquer plus de /24 blocks
+    - network: 1.2.3.4/24   # notation CIDR, Datadog recommande de ne pas indiquer plus de /24 blocs
       snmp_version: 3
       user: "user"
       authProtocol: "fakeAuth"

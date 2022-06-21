@@ -26,7 +26,7 @@ Customize your log collection configuration:
 * [Aggregate multi-line logs](#multi-line-aggregation)
 * [Copy commonly used examples](#commonly-used-log-processing-rules)
 * [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
-* [Specify log file encodings](#logfile-encodings)
+* [Specify log file encodings](#log-file-encodings)
 * [Define global processing rules](#global-processing-rules)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
@@ -458,6 +458,8 @@ logs_config:
   auto_multi_line_detection: true
 ```
 
+For containerized deployments, you can enable `auto_multi_line_detection` with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` environment variable.
+
 It can also be enabled or disabled (overriding the global config) per log configuration:
 
 {{< tabs >}}
@@ -532,7 +534,9 @@ logs_config:
 
 With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
 
-**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection. 
+**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection.
+
+Automatic multi-line detection detects logs that begin and comply with the following date/time formats: RFC3339, ANSIC, Unix Date Format, Ruby Date Format, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano, and default Java logging SimpleFormatter date format.
 
 ## Commonly used log processing rules
 
@@ -646,7 +650,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://golang.org/pkg/regexp/syntax/
-[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195
+[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 [3]: /agent/faq/commonly-used-log-processing-rules
 [4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [5]: /agent/guide/agent-commands/#agent-information

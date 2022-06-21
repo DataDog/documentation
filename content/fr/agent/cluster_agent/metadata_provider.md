@@ -25,7 +25,7 @@ Pour activer la fonction Fournisseur de métadonnées sur le cluster :
 3. [Veillez à ce qu'un auth_token soit bien partagé entre les Agents][1].
 4. [Vérifiez que les règles RBAC sont bien définies][1].
 5. Dans l'Agent de nœud, définissez la variable d'environnement `DD_CLUSTER_AGENT_ENABLED` sur `true`.
-6. Facultatif : la variable d'environnement `DD_KUBERNETES_METADATA_TAG_UPDATE_FREQ` peut être définie afin de spécifier à quelle fréquence les Agents de nœud communiquent avec l'Agent de cluster Datadog.
+6. *Facultatif* : la variable d'environnement `DD_KUBERNETES_METADATA_TAG_UPDATE_FREQ` peut être définie afin de spécifier à quelle fréquence les Agents de nœud ping l'Agent de cluster Datadog.
 7. *Facultatif* : vous pouvez désactiver la collecte de tags de métadonnées Kubernetes avec `DD_KUBERNETES_COLLECT_METADATA_TAGS=false`.
 
 ## Pour aller plus loin

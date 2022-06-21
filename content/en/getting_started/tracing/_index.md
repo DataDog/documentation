@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Datadog Application Performance Monitoring (APM or tracing) is used to collect [traces][1] from your backend application code. This beginners' guide shows you how get your first trace into Datadog.
+Datadog Application Performance Monitoring (APM or tracing) is used to collect [traces][1] from your backend application code. This beginners' guide shows you how to get your first trace into Datadog.
 
 **Note**: Datadog APM is available for many languages and frameworks. See the documentation on [Instrumenting Your Application][2]
 

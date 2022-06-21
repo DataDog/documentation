@@ -1,22 +1,28 @@
 ---
 aliases:
-  - /fr/integrations/awselb/
-  - /fr/integrations/faq/wrong-count-of-aws-elb-healthy-host-count
-  - /fr/integrations/faq/does-datadog-support-aws-alb-application-load-balancer/
-  - /fr/integrations/faq/where-are-my-elb-latency-metrics/
+- /fr/integrations/awselb/
+- /fr/integrations/faq/wrong-count-of-aws-elb-healthy-host-count
+- /fr/integrations/faq/does-datadog-support-aws-alb-application-load-balancer/
+- /fr/integrations/faq/where-are-my-elb-latency-metrics/
 categories:
-  - cloud
-  - web
-  - aws
-  - log collection
+- cloud
+- web
+- aws
+- log collection
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Load Balancer.
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_elb/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_elb/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/top-elb-health-and-performance-metrics
+  tag: Blog
+  text: Principales métriques de performance et de santé d'ELB
 git_integration_title: amazon_elb
 has_logo: true
+integration_id: amazon-elb
 integration_title: Amazon Load Balancer
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -25,6 +31,7 @@ public_title: Intégration Datadog/Amazon Load Balancer
 short_description: Surveillez des métriques clés d'Amazon Load Balancer.
 version: '1.0'
 ---
+
 {{< img src="integrations/amazon_elb/elb.png" alt="dashboard par défaut ELB" popup="true">}}
 
 ## Présentation
@@ -42,7 +49,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de métriques
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `ELB` est cochée dans la section concernant la collecte des métriques. Cochez également la case `ApplicationELB` pour les métriques ELB de l'application et la case `NetworkELB` pour les métriques ELB réseau.
-2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon ELB. Pour en savoir plus sur les stratégies ELB, consultez [la documentation du site Web d'AWS][4].
+2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon ELB. Pour en savoir plus, consultez la section relative aux [stratégies ELB][4] de la documentation AWS.
 
     | Autorisation AWS                                | Description                                                        |
     | --------------------------------------------- | ------------------------------------------------------------------ |
@@ -57,19 +64,19 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer la journalisation d'AWS ELB ou ALB
 
-Commencez par activer la journalisation sur votre ELB ou ALB pour recueillir vos logs. Les logs ELB et ALB peuvent être écrits dans un compartiment AWS S3 et [lus par une fonction Lambda][6]. [Pour en savoir plus, consultez la documentation AWS][7].
+Commencez par activer la journalisation sur votre ELB ou ALB pour recueillir vos logs. Les logs ELB et ALB peuvent être écrits dans un compartiment AWS S3 et [lus par une fonction Lambda][6]. Pour en savoir plus, consultez la section [Activer les journaux d'accès pour votre Classic Load Balancer][7].
 
 {{< img src="integrations/amazon_elb/aws_elb_log_enable.png" alt="activer les logs aws elb" popup="true" style="width:70%;" >}}
 
-Choisissez un intervalle de 5 minutes et définissez vos compartiments S3 :
+Choisissez un intervalle de 5 minutes et définissez votre compartiment S3 et votre préfixe. Afin d'éviter toute [ambiguïté pour la définition des notifications d'événements S3][8], assurez-vous d'utiliser un **emplacement unique** qui ne correspond pas à l'emplacement des logs d'un autre Load Balancer. Si plusieurs Load Balancers enregistrent leurs logs dans le même compartiment, assurez-vous d'utiliser un **préfixe unique**, comme `my-bucket-for-elb-logs/my-elb-name`, pour stocker les logs à différents emplacements.
 
 {{< img src="integrations/amazon_elb/aws_elb_configure_log.png" alt="configuration des logs aws elb" popup="true" style="width:70%;">}}
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][8] dans votre compte AWS.
-2. Configurez [automatiquement][9] ou [manuellement][10] vos déclencheurs sur le compartiment S3 qui contient vos logs ELB. Pour une configuration manuelle, utilisez le type d'événement `Object Created (All)`.
-3. Utilisez la [section Logs de Datadog][11] pour explorer vos logs.
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][9] dans votre compte AWS.
+2. Configurez [automatiquement][10] ou [manuellement][11] vos déclencheurs sur le compartiment S3 qui contient vos logs ELB. Pour une configuration manuelle, utilisez le type d'événement `Object Created (All)`.
+3. Utilisez la [section Logs de Datadog][12] pour explorer vos logs.
 
 ## Données collectées
 
@@ -97,22 +104,23 @@ L'intégration AWS Elastic Load Balancing n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 ## Pour aller plus loin
 
-Pour savoir comment surveiller les métriques de performance ELB, consultez [notre série d'articles à ce sujet][13]. Vous y trouverez des informations supplémentaires sur les principales métriques de performance, ainsi que des conseils pour les recueillir, et découvrirez comment utiliser Datadog afin de surveiller ELB.
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html
+[4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-authentication-access-control.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_elb
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [7]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html
-[8]: https://docs.datadoghq.com/fr/serverless/forwarder/
-[9]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
-[10]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
-[11]: https://app.datadoghq.com/logs
-[12]: https://docs.datadoghq.com/fr/help/
-[13]: https://www.datadoghq.com/blog/top-elb-health-and-performance-metrics
+[8]: https://aws.amazon.com/premiumsupport/knowledge-center/lambda-s3-event-configuration-error/
+[9]: https://docs.datadoghq.com/fr/serverless/forwarder/
+[10]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+[11]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
+[12]: https://app.datadoghq.com/logs
+[13]: https://docs.datadoghq.com/fr/help/

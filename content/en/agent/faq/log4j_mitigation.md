@@ -2,7 +2,7 @@
 title: Mitigating the Risk of Remote Code Execution Due to Log4Shell
 kind: faq
 further_reading:
-- link: "/agent/faq/jmx_integrations/"
+- link: "/integrations/guide/jmx_integrations/"
   tag: "Documentation"
   text: "Which Integrations use Jmxfetch?"
 ---
@@ -152,7 +152,13 @@ $stream.Close()
 $stream.Dispose()
 ```
 
-Remove the JndiLogger.class from the jmxfetch.jar. Note that this step will stop the Datadog Agent service to apply the patch. To remove the vulnerable code run:
+Stop the Datadog Agent service before applying the patch:
+
+```powershell
+"$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" stopservice
+```
+
+Apply the patch to remove the JndiLogger.class from the jmxfetch.jar:
 
 ```powershell
 .\jndi_cleanup.ps1

@@ -1,0 +1,31 @@
+{
+	"name": "App errors are abnormally high for the {{service.name}}",
+	"type": "query alert",
+	"query": "avg(last_4h):anomalies(sum:trace.requests.request.errors{cloud_provider:azure} by {service,team}.as_count(), 'basic', 2, direction='above', alert_window='last_15m', interval=60, count_default_zero='true') >= 1",
+	"message": "@teams-{{team.name}} \n\nTake a look at [the Service Summary Page](https://app.datadoghq.com/apm/service/{{service.name}}/rack.request) to review the errors.",
+	"tags": [],
+	"options": {
+		"notify_audit": false,
+		"locked": false,
+		"timeout_h": 0,
+		"include_tags": true,
+		"no_data_timeframe": null,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"new_group_delay": 60,
+		"renotify_occurrences": null,
+		"renotify_statuses": null,
+		"threshold_windows": {
+			"recovery_window": "last_15m",
+			"trigger_window": "last_15m"
+		},
+		"thresholds": {
+			"critical": 1,
+			"critical_recovery": 0
+		},
+		"escalation_message": ""
+	},
+	"priority": null,
+	"classification": "anomaly"
+}

@@ -1,30 +1,39 @@
 ---
-title: Ajouter manuellement l'extension Chrome de test Browser aux boutiques d'applications internes
-kind: guide
 further_reading:
-  - link: https://www.datadoghq.com/blog/browser-tests/
-    tag: Blog
-    text: Surveillance de l'expérience utilisateur avec les tests Browser de Datadog
-  - link: synthetics/browser_tests
-    tag: Documentation
-    text: Configurer un test Browser
+- link: https://www.datadoghq.com/blog/browser-tests/
+  tag: Blog
+  text: Surveillance de l'expérience utilisateur avec les tests Browser de Datadog
+- link: /synthetics/browser_tests
+  tag: Documentation
+  text: Créer un test Browser
+kind: guide
+title: Ajouter manuellement l'extension Chrome de test Browser aux boutiques d'applications
+  internes
 ---
-Si, pour des raisons de sécurité, vous ne pouvez pas télécharger des applications directement depuis le Chrome Web Store, vous pouvez quand même enregistrer des tests Browser Synthetic en utilisant le système de détection d'extension intelligent de Datadog (disponible à partir de la version 3.1.6 de l'extension).
 
-1. Téléchargez le fichier CRX de l'[extension d'enregistrement de test Datadog][1]
-2. Importez ce fichier CRX dans votre boutique d'applications internes et repackagez-la. L'icône de votre nouvelle extension devrait s'afficher dans votre navigateur Chrome, à côté de vos autres extensions Chrome.
-  {{< img src="synthetics/guide/manually_adding_chrome_extension/icon.png" alt="l'icône qui s'affiche dans votre navigateur">}}
-3. Commencez à créer votre [test Browser][2] : [définissez la configuration de votre test][3] (nom, tags, emplacements, fréquence du test, etc.) puis cliquez sur `Save Details & Record Test`. Sur la page de l'enregistreur, un message vous invitant à télécharger l'[extension d'enregistrement de test Datadog][1] pour lancer un enregistrement devrait s'afficher.
-4. Cliquez sur l'icône qui est apparue en haut à droite de votre navigateur. L'[extension d'enregistrement de test Datadog][1] détecte automatiquement l'extension importée dans votre boutique d'applications internes et vous permet de [lancer l'enregistrement de vos étapes de test Broswer][4].
-  {{< img src="synthetics/guide/manually_adding_chrome_extension/record_test.png" alt="enregistrer vos tests browser">}}
+## Présentation
 
-**Remarque :** mettez à jour manuellement votre extension interne lorsque Datadog publie des mises à jour de l'extension d'enregistrement de test.
+Si vous ne pouvez pas télécharger d'application directement depuis le Chrome Web Store pour des raisons de sécurité, utilisez le système de détection d'extensions de Datadog, disponible pour l'extension Chrome Datadog Synthetics v3.1.6+, afin d'enregistrer des tests Browser Synthetic.
+
+1. Téléchargez le [dernier fichier CRX][5] de l'extension d'enregistrement de tests Datadog.
+2. Importez ce fichier CRX dans votre boutique d'applications internes et repackagez-le. L'icône de votre nouvelle extension s'affiche alors dans le navigateur Chrome en regard de vos autres extensions.
+
+   {{< img src="synthetics/guide/manually_adding_chrome_extension/icon.png" alt="L'icône qui s'affiche dans votre navigateur" style="width:100%;" >}}
+
+3. [Définissez la configuration de votre test][3] (en configurant notamment le nom, les tags, les emplacements et la fréquence du test) et cliquez sur **Save Details & Record Test** pour créer votre [test Browser][2]. Pour commencer à créer des enregistrements, commencez par télécharger l'[extension d'enregistrement de tests Datadog][1].
+4. Cliquez sur l'icône de l'extension d'enregistrement en haut à droite de votre navigateur. L'extension d'enregistrement de tests Datadog détecte automatiquement l'extension importée dans votre boutique d'applications internes.
+5. Commencez à [enregistrer les étapes de votre test Browser][4] et cliquez sur **Save Recording** une fois l'enregistrement terminé.
+
+   {{< img src="synthetics/guide/manually_adding_chrome_extension/record_test.png" alt="Enregistrer vos tests Browser" style="width:100%;" >}}
+
+**Remarque** : Datadog publie les mises à jour de l'extension d'enregistrement de tests sur le [Chrome Web Store][1]. Vous pouvez mettre à jour manuellement votre extension interne afin d'enregistrer des tests Browser.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa?hl=en
-[2]: /fr/synthetics/browser_tests
+[2]: https://app.datadoghq.com/synthetics/browser/create
 [3]: /fr/synthetics/browser_tests/#configuration
 [4]: /fr/synthetics/browser_tests/#record-test
+[5]: https://github.com/DataDog/synthetics-browser-extension

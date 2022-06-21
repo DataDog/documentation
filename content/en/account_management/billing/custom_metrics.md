@@ -9,7 +9,7 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
 
-Your monthly billable volume for custom metrics (reflected on the Usage page) is calculated from the average number of distinct custom metrics over all hours in the current month.
+Your monthly billable count for custom metrics (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value.
 
 Metrics without Limits™ users see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][3]. 
 
@@ -81,7 +81,7 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When are you charged for ingested vs indexed custom metrics?
-For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
+For metrics not configured with Metrics without Limits™, you pay for indexed custom metrics.
 
 |                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -332,11 +332,11 @@ For billing questions, contact your [Customer Success][10] Manager.
 [14]: /integrations/nagios/
 [15]: /integrations/pdh_check/
 [16]: /integrations/prometheus/
-[17]: /integrations/snmp/
-[18]: /integrations/windows_service/
-[19]: /integrations/wmi_check/
-[20]: /integrations/mysql/
-[21]: /integrations/oracle/
-[22]: /integrations/postgres/
-[23]: /integrations/sqlserver/
-[24]: /integrations/amazon_web_services/
+[17]: /integrations/windows_service/
+[18]: /integrations/wmi_check/
+[19]: /integrations/mysql/
+[20]: /integrations/oracle/
+[21]: /integrations/postgres/
+[22]: /integrations/sqlserver/
+[23]: /integrations/amazon_web_services/
+[24]: /help/

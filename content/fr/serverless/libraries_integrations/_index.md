@@ -1,5 +1,5 @@
 ---
-title: Bibliothèques et intégrations
+title: Bibliothèques et intégrations sans serveur
 kind: documentation
 further_reading:
   - link: /serverless/serverless_integrations/plugin/
@@ -53,7 +53,7 @@ Activez [Amazon EFS pour Lambda][5] afin de récupérer automatiquement des tag
 
 3. Accédez ensuite à la [vue Serverless][2] pour utiliser le nouveau tag `filesystemid` sur vos fonctions Lambda.
 
-{{< img src="integrations/amazon_lambda/efs_for_lambda.gif" alt="Amazon EFS pour Lambda" >}}
+{{< img src="integrations/amazon_lambda/efs_for_lambda.mp4" alt="Amazon EFS pour Lambda" video=true >}}
 
 ## Lambda@Edge
 

@@ -16,6 +16,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/managing-rails-application-logs/"
   tag: "Blog"
   text: "How to collect, customize, and manage Rails application logs"
+- link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
+  tag: "Blog"
+  text: "How to manage log files using logrotate"
+  
 ---
 
 ## Overview
@@ -35,7 +39,7 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-You can expect to see a single log line with the important information in a JSON format like this:
+You can expect to see a log line with the following information in JSON format:
 
 ```json
 {

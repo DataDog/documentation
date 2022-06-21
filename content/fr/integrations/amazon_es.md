@@ -8,11 +8,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Elasticsearch."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_es/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_es/
 draft: false
 git_integration_title: amazon_es
 has_logo: true
+integration_id: amazon-es
 integration_title: Amazon Elasticsearch
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -39,10 +41,10 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 2. Ajoutez ces autorisations à votre [stratégie IAM Datadog][3] afin de recueillir des métriques d'Amazon ES :
 
     - `es:ListTags` : ajoute des tags de domaine ES personnalisés aux métriques ES.
-    - `es:ListDomainNames` : énumère tous les domaines Amazon ES dont l'utilisateur actuel est le propriétaire dans la région active.
+    - `es:ListDomainNames` : énumère tous les domaines Amazon ES dont le propriétaire est l'utilisateur actuel dans la région active.
     - `es:DescribeElasticsearchDomains` : collecte l'identifiant de domaine, l'endpoint de service de domaine et l'ARN de domaine pour tous les domaines en tant que tags.
 
-    Pour en savoir plus sur les stratégies ES, consultez [la documentation disponible sur le site d'AWS][4].
+    Pour en savoir plus, consultez la section relative aux [stratégies ES][4] de la documentation AWS.
 
 3. Installez l'[intégration Datadog/AWS ES][5].
 
@@ -50,17 +52,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon Elasticsearch de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez Amazon Elasticsearch de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_elasticsearch` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][6].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Elasticsearch dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Elasticsearch dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][7]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][7]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][7]
 
 ## Données collectées
 
@@ -68,7 +70,7 @@ Configurez Amazon Elasticsearch de façon à ce que ses logs soient envoyés ver
 {{< get-metrics-from-git "amazon_es" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se verra assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
+Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
 
@@ -85,7 +87,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html
+[4]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_es
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers

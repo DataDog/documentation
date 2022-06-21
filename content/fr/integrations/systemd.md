@@ -7,17 +7,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/systemd/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
 display_name: Systemd
 draft: false
 git_integration_title: systemd
 guid: acd470e7-5413-4deb-95fc-4b034d904691
 integration_id: systemd
 integration_title: Systemd
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -29,8 +30,11 @@ public_title: Intégration Datadog/Systemd
 short_description: Obtenir des métriques sur Systemd et sur les unités qu'il gère
 support: core
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Systemd][1] ainsi que les unités qu'il gère avec l'Agent Datadog.
@@ -42,6 +46,10 @@ Ce check permet de surveiller [Systemd][1] ainsi que les unités qu'il gère ave
 
 ### Installation
 
+Le check Systemd est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez donc rien à installer sur votre serveur.
+
+### Configuration
+
 {{< tabs >}}
 {{% tab "Host" %}}
 
@@ -49,9 +57,14 @@ Ce check permet de surveiller [Systemd][1] ainsi que les unités qu'il gère ave
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-Le check Systemd est inclus avec le paquet de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+1. Modifiez le fichier `systemd.d/conf.yaml` dans le dossier `conf.d/` à la racine du
+   répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Systemd.
+   Consultez le [fichier d'exemple systemd.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
-[1]: https://app.datadoghq.com/account/settings#agent
+2. [Redémarrez l'Agent][2].
+
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}
 
@@ -65,25 +78,15 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup/:ro \
               -v /run/systemd/:/host/run/systemd/:ro \
               -e DD_API_KEY=<VOTRE_CLÉ_API> \
-              gcr.io/datadoghq/agent:latest
+              datadog/agent:latest
 ```
 
-### Configuration
-
-1. Modifiez le fichier `systemd.d/conf.yaml` dans le dossier `conf.d/` à la racine du
-   répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Systemd.
-   Consultez le [fichier d'exemple systemd.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
-
-2. [Redémarrez l'Agent][2].
-
-[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][2] et cherchez `systemd` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][3] et cherchez `systemd` dans la section Checks.
 
 ## Données collectées
 
@@ -103,26 +106,21 @@ Certaines métriques ne sont disponibles qu'à partir d'une version spécifique 
 - `systemd.service.restart_count` nécessite l'installation de Systemd v235.
 - `systemd.socket.connection_refused_count` nécessite l'installation de Systemd v239.
 
-### Checks de service
-
-**systemd.can_connect** :<br>
-Renvoie `OK` si Systemd est accessible. Si ce n'est pas le cas, renvoie `CRITICAL`.
-
-**systemd.system.state** :<br>
-Renvoie `OK` l'état du système est running, renvoie `CRITICAL` si l'état est degraded, maintenance ou stopping, ou renvoie `UNKNOWN` pour un état initializing, starting ou autre.
-
-**systemd.unit.state** :<br>
-Renvoie `OK` si l'état actif de l'unité est active, renvoie `CRITICAL` si l'état est inactive, deactivating ou failed, ou renvoie `UNKNOWN` pour un état activating ou autre.
-
 ### Événements
 
 Le check Systemd n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "systemd" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
+
 
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/fr/help/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/fr/help/

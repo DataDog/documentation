@@ -87,6 +87,29 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
 
 6. `terraform apply` を実行して Datadog アカウントにこのモニターを作成します。
 
+## Datadog にイベントを送信する
+
+`datadogpy` をインストールすることで、Dogwrap コマンドラインツールにアクセスできるようになります。このツールを使って、任意の Terraform コマンドをラップして、カスタムイベントにバインドすることができます。
+
+`datadogpy` をインストールします:
+  ```
+  pip install datadog
+  ```
+
+詳しくは、[Datadog Python ライブラリ][3]をご覧ください。
+
+`terraform apply` イベントを送信します:
+
+  ```
+  dogwrap -n "terraform apply" -k $DD_API_KEY --submit_mode all --tags="source:terraform" "terraform apply -no-color"
+  ```
+
+`terraform destroy` イベントを送信します:
+
+  ```
+  dogwrap -n "terraform destroy" -k $DD_API_KEY --submit_mode all --tags="source:terraform" "terraform destroy -no-color"
+  ```
+
 ## 収集データ
 
 ### メトリクス
@@ -103,8 +126,9 @@ Terraform には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [2]: https://learn.hashicorp.com/tutorials/terraform/install-cli
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://github.com/DataDog/datadogpy
+[4]: https://docs.datadoghq.com/ja/help/

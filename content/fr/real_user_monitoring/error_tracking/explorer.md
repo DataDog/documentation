@@ -22,7 +22,7 @@ Chaque élément répertorié dans l'Explorateur correspond à un problème et a
 
 {{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Intervalle de suivi des erreurs"  >}}
 
-L'intervalle s'affiche en haut à droite de l'Explorateur sous forme de chronologie. Cette fonction vous permet d'afficher les problèmes pour lesquels des erreurs ont été détectées au cours de la période sélectionnée. Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans la liste déroulante.
+L'intervalle s'affiche en haut à droite de l'Explorateur sous forme de chronologie. Cette fonction vous permet d'afficher les problèmes pour lesquels des erreurs ont été détectées au cours de la période sélectionnée. Sélectionnez une durée prédéfinie dans la liste déroulante pour modifier l'intervalle.
 
 ### Facettes
 
@@ -52,7 +52,7 @@ En étant informé d'un nouveau problème dès qu'il se présente, vous avez la 
 
 Chaque événement généré reçoit automatiquement les tags de version, de service et d'environnement pour vous permettre de contrôler avec précision les problèmes pour lesquels vous souhaitez recevoir une alerte. Vous pouvez exporter votre requête de recherche directement depuis l'explorateur afin de créer un monitor d'événement correspondant :
 
-{{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.gif" alt="Exporter vers un monitor depuis le suivi des erreurs"  >}}
+{{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.mp4" alt="Exporter dans un monitor depuis le suivi des erreurs" video=true >}}
 
 
 [1]: /fr/events

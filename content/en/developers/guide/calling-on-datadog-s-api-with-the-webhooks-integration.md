@@ -63,4 +63,4 @@ Here's an example of one such widget (although in this example, the check's name
 [1]: /integrations/webhooks/
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 [3]: /api/
-[4]: /dashboards/screenboard/
+[4]: /dashboards/#screenboards

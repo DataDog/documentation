@@ -9,6 +9,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
   tag: "Blog"
   text: "How to detect security threats in your systems' Linux processes"
+- link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
+  tag: "Blog"
+  text: "The PwnKit vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/"
+  tag: "Blog"
+  text: "The Dirty Pipe vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
+  tag: "Blog"
+  text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
 ---
 
 ## Overview
@@ -16,14 +25,14 @@ further_reading:
 There are two types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
 1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-2. **Process Execution Monitoring** to monitor process executions for malicious activity on hosts or containers in real-time.
+2. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
 
 ## Requirements
 
 * Datadog Agent >= 7.27.0
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
-  * Ubuntu 16.04+
-  * Debian 9+
+  * Ubuntu 18.04+
+  * Debian 10+
   * Amazon Linux 2
   * Fedora 26+
   * SUSE 15+
@@ -47,10 +56,14 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
       securityAgent:
         runtime:
           enabled: true
+          
+    # Add this to enable the collection of CWS network events, only for Datadog Agent version 7.36
+          network:
+            enabled: true
     ```
 
 3. Restart the Agent.
-4. **Optional, if Security Monitoring is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
+4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
@@ -64,6 +77,7 @@ The following command can be used to start the Runtime Security Agent and `syste
 {{< code-block lang="bash" filename="docker-runtime-security.sh" >}}
 
 docker run -d --name dd-agent \
+  --cgroupns host \
   --security-opt apparmor:unconfined \
   --cap-add SYS_ADMIN \
   --cap-add SYS_RESOURCE \
@@ -82,6 +96,7 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
+  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
   gcr.io/datadoghq/agent:7
@@ -100,6 +115,9 @@ By default Runtime Security is disabled. To enable it, both the datadog.yaml and
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+  
+# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 
@@ -117,7 +135,10 @@ For a package-based deployment, the Datadog package has to be deployed: run `yum
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-
+  
+# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+  
 systemctl restart datadog-agent
 
 {{< /code-block >}}

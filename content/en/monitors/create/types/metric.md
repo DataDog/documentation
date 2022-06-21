@@ -30,8 +30,9 @@ To create a [metric monitor][1] in Datadog, use the main navigation: *Monitors -
 
 A threshold alert compares metric values to a static threshold.
 
-On each alert evaluation, Datadog calculates the average/minimum/maximum/sum over the selected period and checks if it is above or below the threshold. This is the standard alert case where you know the expected values.
+On each alert evaluation, Datadog calculates the average/minimum/maximum/sum over the selected period and checks if it is above or below the threshold. This is the standard alert case where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
 
+[1]: /metrics/distributions/
 {{% /tab %}}
 {{% tab "Change" %}}
 
@@ -108,7 +109,10 @@ The alert conditions vary slightly based on the chosen detection method.
 {{% tab "Threshold" %}}
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`. If the value is between zero and one, a leading zero is required. For example, `0.3`.
-* the threshold `on average`, `at least once`, `at all times`, or `in total`
+* the threshold `on average`, `at least once`, `at all times`, `in total`, or `percentile` (`percentile` is only offered on distribution metrics with percentiles enabled).
+
+    _Note that if you've chosen a distribution metric with a percentile aggregator in Step 2: Define the Metric, a matching percentile threshold is automatically specified._
+
 * during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 730 hours (1 month).
 
 The evaluation frequency changes based on the evaluation time frame you select:
@@ -125,6 +129,8 @@ The evaluation frequency changes based on the evaluation time frame you select:
 | at&nbsp;least&nbsp;once | If any single value in the generated series crosses the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for below or `max()` for above.              |
 | at&nbsp;all&nbsp;times  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for above or `max()` for below. |
 | in&nbsp;total           | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query.                                                                        |
+| percentile(pXX)         | If pXX percentage of points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a `percentile` function to your monitor query. Only available for the distribution metric type.
+
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
 

@@ -1,6 +1,4 @@
 ---
-title: Windows コンテナ問題
-kind: ドキュメント
 further_reading:
 - link: /agent/docker/?tab=windows
   tag: Documentation
@@ -11,6 +9,8 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: Agent のトラブルシューティング
   text: Agent のトラブルシューティング
+kind: ドキュメント
+title: Windows コンテナ問題
 ---
 
 このページでは、Containerized Windows Applications Monitoring の既知の未解決の問題について説明します。
@@ -19,7 +19,11 @@ further_reading:
 
 Containerized Windows Applications Monitoring には、Datadog Agent 7.19+ が必要です。
 
-サポートされている OS バージョンは、Windows Server 2019 (LTSC) とバージョン 1909 (SAC) です。
+対応する OS のバージョンは以下の通りです。
+- Windows Server 2019 (LTSC / 1809)
+- Windows Server 2019 1909
+- Windows Server 2019 2004 / 20H1
+- Windows Server 2019 20H2 (Agent 7.33+)
 
 Hyper-V 分離モードはサポートされていません。
 
@@ -56,6 +60,46 @@ kube-state-metrics:
 * `datadog.kubeStateMetricsEnabled` を `false` に設定し、Kube State メトリクスを別途デプロイします。
 
 **注**: 2 つの Datadog インストール (`targetSystem: linux`、`targetSystem: windows`) を使用する場合、2 つ目のインストールで `datadog.kubeStateMetricsEnabled` を必ず `false` に設定してください。Kube State メトリクスのインスタンスを 2 つデプロイしないようにするためです。
+
+#### Datadog Cluster Agent によるクラスターの混在
+
+Cluster Agent v1.18+ では、Datadog Cluster Agent でクラスターが混在する構成がサポートされます。
+
+Windows ノードにデプロイされた Agent と Cluster Agent 間の通信を構成するには、次の `values.yaml` ファイルを使用します。
+
+```yaml
+targetSystem: windows
+existingClusterAgent:
+  join: true
+  serviceName: "<EXISTING_DCA_SERVICE_NAME>" # Datadog Helm の最初のチャートから
+  tokenSecretName: "<EXISTING_DCA_SECRET_NAME>" # Datadog Helm の最初のチャートから
+
+# datadogMetrics は最初のチャートで既にデプロイされているはずなので、デプロイを無効にします。
+datadog-crds:
+  crds:
+    datadogMetrics: false
+# kube-state-metrics のデプロイメントを無効にします
+datadog:
+  kubeStateMetricsEnabled: false
+```
+
+#### Windows デプロイでは構成オプションが制限される
+
+Windows では、一部の構成オプションが使用できません。以下は、**サポートされていない**オプションのリストです。
+
+| パラメーター                      | 理由 |
+| --- | ----------- |
+| `datadog.dogstatsd.useHostPID` |  Windows コンテナではホスト PID がサポートされていません |
+| `datadog.dogstatsd.useSocketVolume` | Windows では Unix ソケットはサポートされていません |
+| `datadog.dogstatsd.socketPath` |  Windows では Unix ソケットはサポートされていません |
+| `datadog.processAgent.processCollection` |  ホスト/他のコンテナプロセスにアクセスできません |
+| `datadog.systemProbe.seccomp` | システムプローブは Windows では使用できません |
+| `datadog.systemProbe.seccompRoot` | システムプローブは Windows では使用できません |
+| `datadog.systemProbe.debugPort` | システムプローブは Windows では使用できません |
+| `datadog.systemProbe.enableConntrack` | システムプローブは Windows では使用できません |
+| `datadog.systemProbe.bpfDebug` |  システムプローブは Windows では使用できません |
+| `datadog.systemProbe.apparmor` |  システムプローブは Windows では使用できません |
+| `agents.useHostNetwork` | Windows コンテナではホストネットワークがサポートされていません |
 
 ### APM または DogStatsD の HostPort 
 

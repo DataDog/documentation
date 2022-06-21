@@ -13,20 +13,14 @@ Agent versions spanning 3.6.x to 5.32.6 embed the expired certificate and are af
 
 Agent versions 6.x and 7.x are fine and don’t need to be updated.
 
-### Find a list of hosts running affected Agent versions
-
-Use the [Agent Versions list][1] in the Datadog UI to see the hostname, the Agent version that it's running, and the status of that host.
-
-**Note**: The previously recommended Python script that queries your Datadog account for hosts running impacted Agent versions has been deprecated in favor of the list available in the application.
-
 ### Fixing by upgrading to Agent 5.32.7
 
 If you are running Agent v5.x on a 64-bit host, Datadog recommends upgrading to Agent 5.32.7+. This ensures that the Agent continues to function in a variety of different scenarios, with the minimum amount of changes.
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
-Windows (from versions > 5.12.0): Download the Datadog [Agent installer][2]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
-More platforms and configuration management options detailed [on the Agent install page][3].
+Windows (from versions > 5.12.0): Download the Datadog [Agent installer][1]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
+More platforms and configuration management options detailed [on the Agent install page][2].
 
 The last compatible Agent released for 32-bit systems was 5.10.1. Follow the `Fixing without upgrading the Agent` instructions for 32-bit hosts.
 
@@ -81,7 +75,7 @@ Once the file is removed, restart the Datadog Service from the Windows Service M
 
 ### Fixing by upgrading to Agent 6 or 7
 
-You can upgrade to [Agent 7][4] or [Agent 6][5] to resolve this issue, but *see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
+You can upgrade to [Agent 7][3] or [Agent 6][4] to resolve this issue, but *see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
 
 ### Upgrade the Agent after deleting the certificate
 
@@ -116,8 +110,7 @@ restart-service -Force datadogagent
   After `datadog.conf` has been updated, restart the Datadog Service from the Windows Service Manager.
 
 
-[1]: https://app.datadoghq.com/agent-versions
-[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
-[3]: https://app.datadoghq.com/account/settings?agent_version=5#agent
-[4]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
-[5]: /agent/versions/upgrade_to_agent_v6/?tab=linux
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
+[2]: https://app.datadoghq.com/account/settings?agent_version=5#agent
+[3]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
+[4]: /agent/versions/upgrade_to_agent_v6/?tab=linux

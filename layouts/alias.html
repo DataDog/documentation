@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ .Permalink | absURL }}</title>
+        <link rel="canonical" href="{{ .Permalink | absURL }}" />
+        <meta name="robots" content="noindex">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <script>
+            const redirect_url = '{{ .Permalink | absURL }}'
+            window.location = `${ redirect_url }${ window.location.search }${ window.location.hash }`
+        </script>
+        <meta http-equiv="refresh" content="10; url={{ .Permalink | absURL }}" />
+    </head>
+</html>

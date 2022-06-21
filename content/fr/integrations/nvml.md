@@ -65,7 +65,7 @@ Si vous utilisez Docker, il existe un [exemple de Dockerfile][6] dans le référ
 
 Si vous utilisez Docker et Kubernetes, vous devez exposer les variables d'environnement `NVIDIA_VISIBLE_DEVICES` et `NVIDIA_DRIVER_CAPABILITIES`. Consultez le Dockerfile inclus pour obtenir un exemple.
 
-Si vous souhaitez pouvoir mettre en corrélation des appareils Nvidia Kubernetes réservés avec le pod Kubernetes utilisant l'appareil, montez le socket de domaine Unix `/var/lib/kubelet/pod-resources/kubelet.sock` sur la configuration de votre Agent. De plus amples informations sur ce socket sont disponibles sur le [site Web de Kubernetes][2]. Notez que la prise en charge de cet appareil est en bêta dans la version 1.15.
+Pour mettre en corrélation des appareils Nvidia Kubernetes réservés avec le pod Kubernetes utilisant l'appareil, montez le socket de domaine Unix `/var/lib/kubelet/pod-resources/kubelet.sock` sur la configuration de votre Agent. De plus amples informations sur ce socket sont disponibles sur le [site Web de Kubernetes][2] (en anglais). **Remarque** : la prise en charge de cet appareil est en bêta dans la version 1.15.
 
 ### Configuration
 
@@ -81,9 +81,9 @@ Si vous souhaitez pouvoir mettre en corrélation des appareils Nvidia Kubernetes
 
 ### Métriques
 {{< get-metrics-from-git "nvml" >}}
-  La documentation de référence relative aux métriques se trouve sur le [site Web de NVIDIA][11].
+ La documentation de référence relative aux métriques se trouve sur le [site Web de Nvidia][11] (en anglais).
 
-Lorsque cela est possible, les noms de métriques sont mis en correspondance avec [l'exportateur Data Center GPU Manager (DCGM)][14] de NVIDIA.
+Lorsque cela est possible, les noms de métriques sont mis en correspondance avec [l'exportateur Data Center GPU Manager (DCGM)][14] de Nvidia.
 
 ### Événements
 

@@ -28,11 +28,9 @@ The following examples are covered in this guide:
 
 ## Prerequisites
 
-- An API key and an application key from an admin user is required to use the API. These are available in your [Datadog account API key page][2]. Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key.
+- Use of the Logs Search API requires an [API key][2] and an [application key][3]. The user who created the application key must have the appropriate permission to access the data. To use the examples below, replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
 
-- This guide features `curl` examples. Install [curl][3] if you do not have it installed, or reference additional language examples for this API endpoint in the [API documentation][1].
-
-**Note:** By default, all users with Admin, Standard, and Read-Only roles have access to all log data. But the search results might be restricted based on the permissions of the user owning the `<DATADOG_APP_KEY>`.
+- This guide features `curl` examples. Install [curl][4] if you do not have it installed, or reference additional language examples for this API endpoint in the [Logs API][1].
 
 ## Examples
 
@@ -445,7 +443,7 @@ The `from` and `to` parameters can be:
 }
 ```
 
-The timezone can be specified both as an offset (eg "UTC+03:00") or a regional zone (eg "Europe/Paris"). If both offset and timezone are supplied then the offset takes precedence. The offset must be specified in seconds.
+The timezone can be specified both as an offset (for example, "UTC+03:00") or a regional zone (for example, "Europe/Paris"). If both offset and timezone are supplied then the offset takes precedence. The offset must be specified in seconds.
 
 ```javascript
 {
@@ -552,8 +550,7 @@ In the response, the next two results, `joe` with 500 `pageviews` and `chris` wi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/v2/logs/
-[2]: /api/v1/authentication/
-[3]: https://curl.haxx.se/download.html
-[4]: /logs/search_syntax/
+[2]: /account_management/api-app-keys/#api-keys
+[3]: /account_management/api-app-keys/#application-keys
+[4]: https://curl.haxx.se/download.html
 [5]: /account_management/rbac/permissions/?tab=ui#log-data-access
-[6]: /logs/explorer/facets/#overview

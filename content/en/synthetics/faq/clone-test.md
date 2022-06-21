@@ -7,12 +7,28 @@ further_reading:
   text: "Manage your checks"
 ---
 
-You can clone your Synthetic tests using our API:
+## Overview
 
-1. Retrieve your test configuration using the [Get a test][1] endpoint.
-2. Perform modifications if needed (URL, tags, etc.).
-3. Send your new test configuration using the [Create a test][2] endpoint.
-For browser tests, add the `from_test_id` parameter at the end of the endpoint and set its value to the id of the test being cloned. This will allow steps cloning. The endpoint should be `https://api.datadoghq.com/api/v1/synthetics/tests?from_test_id=<SYNTHETIC_TEST_PUBLIC_ID>`.
+To clone a Synthetics test, use the UI or API endpoints.
 
-[1]: /api/v1/synthetics/#get-test
-[2]: /api/v1/synthetics/#create-or-clone-test
+## Use the UI
+
+1. In a Synthetics test, click the **Gear** icon on the right.  
+2. Click **Clone** in the dropdown menu.
+
+{{< img src="synthetics/faq/clone-test.mp4" alt="Cloning your Synthetic tests" video="true" width="90%" >}}
+
+## Use the API
+
+1. Retrieve your test configuration with the relevant endpoint. See [Get an API test][1] or [Get a browser test][2].
+2. Perform modifications as needed (such as changing the URL or tags).
+3. Send your updated test configuration with the relevant endpoint. See [Create an API test][3] or [Create a browser test][4].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api/latest/synthetics/#get-a-browser-test
+[2]: /api/latest/synthetics/#get-an-api-test
+[3]: /api/latest/synthetics/#create-an-api-test
+[4]: /api/latest/synthetics/#create-a-browser-test

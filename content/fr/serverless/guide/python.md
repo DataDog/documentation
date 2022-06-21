@@ -84,7 +84,7 @@ custom:
 
 4. Déployez à nouveau votre application sans serveur.
 
-Si vous préférez inclure la couche Lambda directement dans votre projet, [suivez les instructions figurant dans ce référentiel Github][2] pour effectuer l'installation en utilisant la couche Lambda open-source pour Python.
+Si vous préférez inclure la couche Lambda directement dans votre projet, [suivez les instructions figurant dans ce référentiel GitHub][2] pour effectuer l'installation en utilisant la couche Lambda open-source pour Python.
 
 La couche Lambda devrait désormais être installée automatiquement sur toutes vos fonctions. Pour en savoir plus sur les différents champs de configuration de la couche Lambda Datadog, [consultez cette documentation][3].
 

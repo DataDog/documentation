@@ -123,7 +123,7 @@ Vous pouvez déployer l'Agent avec un [chart Helm][2] ou directement avec un [Da
       datadog/datadog
   ```
 
-  Consultez la [documentation Datadog relative à Helm][1] pour obtenir la liste complète des valeurs configurables.
+  Consultez le [référentiel helm-charts Datadog][1] pour obtenir la liste complète des valeurs configurables.
 
 
 [1]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#values

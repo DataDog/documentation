@@ -113,7 +113,7 @@ _N'importe quelle_ image `httpd`. Supposez que vous avez un conteneur qui exécu
 
 Si cette limite est trop contraignante et que vous souhaitez appliquer des configurations de check différentes à plusieurs conteneurs exécutant la même image, utilisez des étiquettes pour identifier les conteneurs. Appliquez une étiquette différente à chaque conteneur, puis ajoutez chaque étiquette à la liste `docker_images` d'un fichier de modèle (oui, `docker_images` n'est pas seulement fait pour les images : c'est aussi là que doivent figurer les identificateurs de conteneur).
 
-### Stockage key-value
+### Stockage key/value
 
 Autodiscovery peut utiliser Consul, etcd et Zookeeper comme sources de modèle. Pour utiliser un stockage clé/valeur, vous devez le configurer dans `datadog.conf` ou dans les variables d'environnement passées au conteneur docker-dd-agent.
 
@@ -174,14 +174,14 @@ Lorsque le stockage de clé/valeur est activé en tant que source de modèle, l'
 ```text
 /datadog/
   check_configs/
-    docker_image_1/                 # identificateur de conteneur, p. ex. httpd
-      - check_names: [<NOM_CHECK>] # p. ex. apache
+    docker_image_1/                 # identificateur de conteneur, par exemple httpd
+      - check_names: [<NOM_CHECK>] # par exemple, apache
       - init_configs: [<CONFIG_INIT>]
       - instances: [<CONFIG_INSTANCE>]
     ...
 ```
 
-Chaque modèle contient trois éléments : nom du check, `init_config`, et `instances`. L'option `docker_images` de la section précédente, qui fournissait les identificateurs de conteneur à Autodiscovery, n'est pas obligatoire ici. Pour les stockages clé/valeur, les identificateurs de conteneur apparaissent comme clés de premier niveau dans `check_config`. (Notez également que le modèle sous forme de fichier à la section précédente ne nécessitait pas de nom de check, contrairement à cet exemple. L'Agent déduisait le nom du check à partir du nom du fichier.)
+Chaque modèle contient trois éléments : nom du check, `init_config`, et `instances`. L'option `docker_images` de la section précédente, qui fournissait les identificateurs de conteneur à Autodiscovery, n'est pas obligatoire ici. Pour les stockages key/value, les identificateurs de conteneur apparaissent comme clés de premier niveau dans `check_config`. Notez également que le modèle sous forme de fichier à la section précédente ne nécessitait pas de nom de check, contrairement à cet exemple. L'Agent déduisait le nom du check à partir du nom du fichier.
 
 #### Check Apache
 

@@ -47,6 +47,7 @@ aliases:
     {{< nextlink href="/dashboards/functions/rollup" >}}ロールアップ: 使用される元ポイントの数を制御します。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/smoothing" >}}スムーシング: メトリクスの変動を抑制します。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/beta" >}}ベータ版: メトリクスのローリングアベレージを計算します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

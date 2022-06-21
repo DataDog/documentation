@@ -7,7 +7,7 @@ further_reading:
     tag: Documentation
     text: アプリケーションのインスツルメンテーション
 ---
-.NET Datadog Trace ライブラリはオープンソースです。詳細については、[Github リポジトリ][1]をご覧ください。
+.NET Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
 
 .NET トレーサーは、.NET Framework 4.5 以上の自動インスツルメンテーションをサポートします。[.NET Core][2]にも対応しています。
 

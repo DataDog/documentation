@@ -65,7 +65,7 @@ Pour en savoir plus sur les logs, consultez la [documentation de Contrast Secur
 
 Pour en savoir plus, consultez les ressources suivantes :
 - [Documentation Datadog sur les logs][4]
-- [Documentation Datadog sur l'API permettant de créer des dashboards][5]
+- [API Dashboards Datadog][5]
 
 ## Données collectées
 
@@ -85,5 +85,5 @@ L'intégration Contrast n'inclut aucun check de service.
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
 [2]: https://docs.contrastsecurity.com/
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/fr/logs/log_collection/#getting-started-with-the-agent
+[4]: https://docs.datadoghq.com/fr/logs/log_collection/
 [5]: https://docs.datadoghq.com/fr/api/#create-a-dashboard

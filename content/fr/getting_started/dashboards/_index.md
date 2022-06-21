@@ -1,26 +1,28 @@
 ---
-title: Débuter avec les dashboards
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/dashboard-sharing/
-    tag: Blog
-    text: Partager des dashboards en tout sécurité avec des utilisateurs en dehors de votre organisation
-  - link: https://www.datadoghq.com/blog/template-variable-associated-values/
-    tag: Blog
-    text: Utiliser les template variables associées pour affiner vos dashboards
-  - link: https://learn.datadoghq.com/enrol/index.php?id=8
-    tag: Apprentissage
-    text: "Apprentissage en ligne à votre rythme\_: Améliorer vos dashboards"
-  - link: /dashboards/
-    tag: Documentation
-    text: Notions de base sur les dashboards
-  - link: /notebooks/
-    tag: Documentation
-    text: Raconter une histoire à partir de données avec les Notebooks
-  - link: /monitors/
-    tag: Documentation
-    text: Monitors, SLO, notifications, downtimes et incidents
+- link: https://www.datadoghq.com/blog/dashboard-sharing/
+  tag: Blog
+  text: Partager des dashboards en tout sécurité avec des utilisateurs en dehors de
+    votre organisation
+- link: https://www.datadoghq.com/blog/template-variable-associated-values/
+  tag: Blog
+  text: Utiliser les template variables associées pour affiner vos dashboards
+- link: https://learn.datadoghq.com/enrol/index.php?id=8
+  tag: Apprentissage
+  text: 'Apprentissage en ligne à votre rythme : Améliorer vos dashboards'
+- link: /dashboards/
+  tag: Documentation
+  text: Notions de base sur les dashboards
+- link: /notebooks/
+  tag: Documentation
+  text: Raconter une histoire à partir de données avec les Notebooks
+- link: /monitors/
+  tag: Documentation
+  text: Monitors, SLO, notifications, downtimes et incidents
+kind: documentation
+title: Débuter avec les dashboards
 ---
+
 ## Présentation
 
 Pour bien débuter avec les dashboards, vous devez connaître les questions que vous vous posez régulièrement. Quels sont les problèmes courants que rencontrent vos clients ? Lorsqu'un problème survient, quelles questions vous aident à trouver une solution ?
@@ -37,9 +39,9 @@ Si vous ne l'avez pas déjà fait, créez un [compte Datadog][1]. Installez l'Ag
 
 Définissez l'objectif du dashboard que vous créez. Un dashboard peut vous aider, les membres de votre équipe et vous-même, à vous concentrer sur la bonne tâche. Un _dashboard d'équipe_ vous permet d'identifier les tâches prioritaires, les informations qui nécessitent votre attention et vos réussites. Créez un ou plusieurs dashboards d'équipe affichant les informations dont votre équipe a fréquemment besoin pour éviter d'avoir à les rechercher. Un dashboard affichant vos SLO et vos SLI constitue par exemple un excellent dashboard d'équipe.
 
-Lorsqu'ils sont connectés à des données mises à jour en temps réel, les dashboards constituent un outil puissant qui permet de faciliter les échanges entre les responsables et les cadres. Un _dashboard de direction_ peut être utilisé pour vérifier que vous travaillez sur les tâches les plus importantes, pour mesurer les coûts d'un service ou pour vérifier que vous atteignez vos objectifs, respectez vos SLO et employez une stratégie de scaling efficace. Les dashboards de direction deviennent plus efficaces que jamais lorsqu'ils affichent une réponse générale à chaque question tout en étant interconnectés pour permettre des analyses plus poussées.
+Lorsqu'ils sont connectés à des données mises à jour en temps réel, les dashboards constituent un outil puissant qui permet de faciliter les échanges entre les responsables et les cadres. Un _dashboard de direction_ peut être utilisé pour vous assurer que vous travaillez sur les tâches les plus importantes, pour mesurer les coûts d'un service ou pour vérifier que vous atteignez vos objectifs, respectez vos SLO et employez une stratégie de scaling efficace. Les dashboards de direction sont encore plus efficaces lorsqu'ils affichent une réponse générale à chaque question tout en étant interconnectés pour comparer les données et analyser les réponses.
 
-Les dashboards peuvent également vous aider à suivre les problèmes récurrents et à les résoudre. Il est possible de créer un _dashboard de dépannage_ à partir d'une quantité limitée d'informations puis de l'étoffer au fur et à mesure de votre analyse. Par exemple, vous pouvez partir d'un graphique ou d'un widget issu d'un autre dashboard ou d'une autre vue qui affiche un problème, puis effectuer une analyse plus poussée à partir de cet élément.
+Les dashboards peuvent également vous aider à suivre les problèmes récurrents et à les résoudre. Il est possible de créer un _dashboard de dépannage_ à partir d'une quantité limitée d'informations, puis de l'étoffer au fur et à mesure de votre analyse. Par exemple, vous pouvez partir d'un graphique ou d'un widget issu d'un autre dashboard ou d'une autre vue qui affiche un problème, puis effectuer une analyse plus poussée à partir de cet élément.
 
 ## Explorer les dashboards prêts à l'emploi
 
@@ -100,7 +102,7 @@ Réorganisez les graphiques de votre dashboard en fonction de votre flux de trav
 Il est possible d'ajouter des liens à un dashboard de deux façons différentes :
 
  - En ajoutant un widget Notes et Liens, qui accepte le texte au format Markdown, y compris les liens. L'éditeur du widget affiche des conseils pour vous aider à utiliser le format Markdown.
- - En créant un lien personnalisé à partir du menu des paramètres d'un widget (icône en forme d'engrenage). Les liens personnalisés peuvent interpoler des variables et des template variables de façon à ce que le lien change en fonction des sélections de l'utilisateur : celui-ci accède ainsi directement au bon endroit pour analyser les données ou prendre des mesures correctives.
+ - En créant un lien personnalisé à partir du menu des paramètres d'un widget (icône en forme d'engrenage). Les liens personnalisés peuvent interpoler des variables et des template variables de façon à ce que le lien change en fonction des sélections de l'utilisateur. Ce dernier est ainsi redirigé vers la page pertinente pour analyser les données ou prendre des mesures correctives.
      {{< img src="getting_started/dashboards/opening_custom_link.mp4" alt="Ouvrir un lien personnalisé" video=true >}}
 
 ## Et ensuite ?
@@ -116,6 +118,14 @@ Intégrez un dashboard dans les communications avec votre équipe en utilisant l
 Chaque dashboard présente une représentation JSON que vous pouvez copier ou exporter à partir du menu des paramètres. Chaque widget d'un dashboard présente également une définition JSON, que vous pouvez voir et modifier en ouvrant l'éditeur du widget (icône en forme de crayon) et en cliquant sur l'onglet JSON sous **Graph your data**.
 
 Étant donné que tous les widgets et les dashboards sont représentés en JSON, vous pouvez automatiser leur création à l'aide de l'[API Dashboards][14]. Cette fonctionnalité est particulièrement utile si vous souhaitez générer un dashboard à chaque fois que votre équipe commence un nouveau projet, rencontre un problème ou formalise un SLO, par exemple.
+
+### Consulter des dashboards depuis l'application mobile Datadog
+
+Consultez vos dashboards sur votre appareil mobile grâce à l'[application mobile Datadog][15], disponible sur l'[App Store d'Apple][16] et le [Google Play Store][17].
+
+Avec cette application, vous pouvez consulter et rechercher tous les dashboards accessibles de votre organisation Datadog, et les filtrer à l'aide des template variables définies dans l'application Web Datadog.
+
+{{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dashboards sous iOS et Android">}}
 
 ## Pour aller plus loin
 
@@ -135,3 +145,6 @@ Chaque dashboard présente une représentation JSON que vous pouvez copier ou ex
 [12]: https://learn.datadoghq.com/enrol/index.php?id=8
 [13]: /fr/integrations/slack/
 [14]: /fr/api/v1/dashboards/
+[15]: /fr/mobile/
+[16]: https://apps.apple.com/app/datadog/id1391380318
+[17]: https://play.google.com/store/apps/details?id=com.datadog.app

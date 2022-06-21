@@ -26,7 +26,7 @@ La solution Live Tail s'avère par exemple particulièrement utile pour vérifi
 
 Dans le [Log Explorer][3], sélectionnez l'option Live Tail dans l'intervalle pour interroger les logs qui transitent par Datadog.
 
-{{< img src="logs/explorer/live_tail/livetail.gif" alt="Live Tail des logs" style="width:100%;" >}}
+{{< img src="logs/explorer/live_tail/livetail.mp4" alt="Live Tail des logs" video=true style="width:100%;" >}}
 
 Contrairement aux requêtes sur les logs indexés dans le [Log Explorer][3], il n'est *pas* nécessaire de [déclarer une facette][4] avant de pouvoir créer une requête dans la vue Live Tail.
 

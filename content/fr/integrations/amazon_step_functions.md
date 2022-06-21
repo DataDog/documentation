@@ -6,11 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Step\_Functions."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_step_functions/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_step_functions/
 draft: false
 git_integration_title: amazon_step_functions
 has_logo: true
+integration_id: amazon-step-functions
 integration_title: "Amazon\_Step\_Functions"
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -25,7 +27,7 @@ Amazon Step Functions (états) vous permet de coordonner les composants d'appl
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de Step Functions.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -43,23 +45,23 @@ states:DescribeStateMachine
 
 #### Enrichir les métriques AWS Lambda
 
-Si vos états Step Functions sont des fonctions Lambda, l'installation de cette intégration ajoutera des [tags][4] supplémentaires à vos métriques Lambda. Cela vous permet de voir les machines d'état auxquelles appartiennent vos fonctions Lambda. Vous pouvez visualiser ces informations sur la [page Serverless][5].
+Si vos états Step Functions sont des fonctions Lambda, l'installation de cette intégration ajoute des [tags][4] supplémentaires à vos métriques Lambda. Cela vous permet de visualiser les machines d'état auxquelles appartiennent vos fonctions Lambda depuis la [page Serverless][5].
 
 ### Collecte de logs
 
 #### Activer le logging
 
-Configurez Amazon Step Functions de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez Amazon Step Functions de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_step_functions` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][6].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Step Functions dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Step Functions dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][7]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][8]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][8]
 
 ### Collecte de traces
 

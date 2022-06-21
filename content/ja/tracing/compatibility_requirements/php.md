@@ -9,7 +9,7 @@ further_reading:
 ---
 ## 互換性
 
-PHP Datadog Trace ライブラリはオープンソースです。詳細については、[Github リポジトリ][1]をご覧ください。
+PHP Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
 
 PHP APM は以下のバージョンの PHP に対応しています。
 

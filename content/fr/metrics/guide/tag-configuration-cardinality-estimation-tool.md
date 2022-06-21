@@ -23,9 +23,9 @@ GET https://api.datadoghq.com/api/metric/estimate
 |---------------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `metric_name` (*requis*) | chaîne           | Nom de la métrique utilisée pour l'estimation.                                                                                                                                                     |
 | `groups[]`                | liste de chaînes | Groupes à inclure lors de l'estimation de la sortie d'une série temporelle.                                                                                                                           |
-| `hours_ago`               | nombre entier          | Délai en heures à soustraire pour récupérer les données historiques. Valeur par défaut : 49. Toute valeur inférieure nuit à l'exactitude des résultats.                                                                 |
+| `hours_ago`               | nombre entier          | Délai en heures à soustraire pour récupérer les données historiques. Valeur par défaut : 49. Toute valeur inférieure peut générer des résultats inexacts.                                                                 |
 | `timespan_h`              | nombre entier          | Durée en heures pour la surveillance des données, avant la valeur `hours_ago`. Nous vous recommandons un intervalle d'une heure.                                           |
-| `pct`                     | booléen          | Calcule le nombre de sorties d'une série temporelle en centile au lieu d'une distribution, d'un count ou d'une gauge. Valeur par défaut : `false`. Fonctionne uniquement pour les métriques de distribution ; renvoie une erreur pour toute autre métrique. |
+| `pct`                     | booléen          | Calcule le nombre de groupes de centiles au lieu d'une distribution, d'un count ou d'une gauge. Valeur par défaut : `false`. Fonctionne uniquement pour les métriques de distribution ; renvoie une erreur pour toute autre métrique. |
 
 ### Exemple
 
@@ -39,7 +39,7 @@ https://api.datadoghq.com/metric/estimate?metric_name=dist.dd.dogweb.latency&gro
 
 | Champ                     | Type             | Description                                                                                                                                                                      |
 |---------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `estimated_output_series` | nombre entier          | Nombre de valeurs des sorties uniques de série temporelle lors de l'intervalle indiqué dans la requête des groupes spécifiés. Début de l'intervalle : Heure actuelle - `hours_ago`. Fin de l'intervalle : `hours_ago` - (Heure actuelle - `timespan_h`). |
+| `estimated_output_series` | nombre entier          | Nombre de valeurs des sorties uniques de série temporelle lors de l'intervalle indiqué dans la requête des groupes spécifiés. Début de l'intervalle : Heure actuelle - `hours_ago` - `timespan_h`. Fin de l'intervalle : Heure actuelle - `hours_ago`. |
 | `estimate_type`           | chaîne           | Type de la métrique estimée. Valeur possibles : [distribution][2], [percentile][3], [count][4] ou [gauge][5].                                                                                         |
 | `as_of`                   | chaîne de timestamp | Le timestamp au format UTC des dernières données utilisées ( `hours_ago` à compter de l'heure actuelle). Exemple : `2020-04-16 09:25:40.214469`.                                                              |
 

@@ -23,9 +23,9 @@ further_reading:
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
-Pour envoyer vos logs Go à Datadog, nous vous recommandons d'activer la journalisation au sein d'un fichier et de le suivre avec l'Agent Datadog. Pour ce faire, nous vous suggérons d'utiliser la configuration suivante avec la bibliothèque de journalisation open source du nom de [logrus][1].
+Pour envoyer vos logs Go à Datadog, activez la journalisation au sein d'un fichier et suivez ce fichier avec l'Agent Datadog. Pour ce faire, il est recommandé d'utiliser la configuration suivante avec la bibliothèque de journalisation open source [logrus][1].
 
-Nous vous encourageons fortement à configurer votre bibliothèque de journalisation afin de générer vos logs au format JSON et d'éviter de créer des [règles de parsing personnalisées][2].
+Datadog vous recommande fortement de configurer votre bibliothèque de journalisation de façon à générer vos logs au format JSON. Vous n'aurez ainsi pas besoin de créer de [règles de parsing personnalisées][2].
 
 ## Configurer votre logger
 
@@ -48,7 +48,7 @@ func main() {
 }
 ```
 
-Ajoutez des métadonnées à un log est un jeu d'enfant si vous fournissez un objet JSON à afficher dans l'événement du log.
+Vous pouvez ajouter des métadonnées à un log en fournissant l'objet JSON à afficher dans l'événement de log.
 
 Ces métadonnées peuvent correspondre à `hostname`, `username`, `customers`, `metric` ou à toute autre information facilitant de dépannage et la compréhension du fonctionnement de votre application Go.
 

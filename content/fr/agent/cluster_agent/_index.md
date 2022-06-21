@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /fr/agent/kubernetes/cluster/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
+  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
     tag: Blog
     text: Présentation de l'Agent de cluster Datadog
-  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
+  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
     tag: Blog
     text: Mettre à l'échelle vos charges de travail Kubernetes avec n'importe quelle métrique Datadog
   - link: /agent/cluster_agent/clusterchecks/
@@ -19,7 +19,7 @@ further_reading:
   - link: /agent/kubernetes/integrations/
     tag: Documentation
     text: Intégrations personnalisées
-  - link: 'https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting'
+  - link: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting
     tag: Github
     text: Dépanner l'Agent de cluster Datadog
 ---
@@ -33,7 +33,7 @@ Grâce à l'Agent de cluster Datadog, vous pouvez :
 * isoler les Agents de nœud dans leurs nœuds respectifs, afin de limiter les règles RBAC à la lecture des métriques et des métadonnées du kubelet ;
 * transmettre les métadonnées de cluster qui se trouvent dans le serveur d'API aux Agents de nœud, de façon à enrichir les métadonnées des métriques recueillies localement ;
 * activer la collecte de données au niveau du cluster, telles que les données de surveillance de services, les SPOF et les événements ;
-* tirer parti de l'autoscaling de pods horizontaux en fonction de métriques Kubernetes custom. Consultez le [guide dédié][1] pour en savoir plus sur cette fonctionnalité.
+* tirer parti de l'autoscaling de pods horizontaux en fonction de métriques Kubernetes custom. Consultez le [guide][1] pour en savoir plus sur cette fonctionnalité.
 
 Si vous utilisez Docker, l'Agent de cluster Datadog est disponible sur Docker Hub et GCR :
 
@@ -45,13 +45,17 @@ Si vous utilisez Docker, l'Agent de cluster Datadog est disponible sur Docker H
 
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Configuration</u> : configurez l'Agent de cluster Datadog sur votre cluster Kubernetes.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/commands" >}}<u>Commandes</u> : affichez la liste des commandes et des options disponibles pour l'Agent de cluster.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/event_collection" >}}<u>Collecte d'événements</u> : utilisez l'Agent de cluster pour recueillir l'ensemble des événements de votre cluster Kubernetes.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/external_metrics" >}}<u>Métriques externes</u> : tirez parti du serveur de métriques custom de l'Agent de cluster pour effectuer l'autoscaling de vos applications en fonction de vos métriques Datadog.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>Checks de cluster</u> : découvrez automatiquement des services de cluster à charge équilibrée, comme les services Kubernetes, et effectuez des checks sur ces services.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>Checks d'endpoints</u> : surveillez n'importe quel endpoint derrière des services de cluster.{{< /nextlink >}}
-    {{< nextlink href="/agent/troubleshooting/autodiscovery" >}}<u>AutoDiscovery</u> : corrigez les problèmes courants liés à Autodiscovery.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Dépannage</u> : consultez des informations afin de résoudre les problèmes liés à l'Agent de cluster Datadog.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/external_metrics" >}}<u>Métriques externes</u> : tirez parti du serveur de métriques custom de l'Agent de cluster pour effectuer l'autoscaling de vos applications en fonction de toutes vos métriques Datadog.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>Checks de cluster</u> : découvrez automatiquement des services de cluster à charge équilibrée, comme les services Kubernetes, et exécutez des checks sur ces services.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>Checks d'endpoint</u> : surveillez n'importe quel endpoint derrière des services de cluster.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/admission_controller" >}}<u>Contrôleur d'admission</u> : configurez le contrôleur d'admission pour simplifier la configuration des pods d'application.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/commands" >}}<u>Commandes et options</u> : affichez la liste des commandes et des options disponibles pour l'Agent de cluster.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/metadata_provider" >}}<u>Fournisseur de métadonnées</u> : activez la fonctionnalité de fournisseur de métadonnées de cluster.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/build" >}}<u>Création</u> : générez l'image de l'Agent de cluster Datadog.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/clusterchecksrunner" >}}<u>Exécuteur de checks de cluster</u> : configurez cet outil conçu spécialement pour l'exécution de checks de cluster.{{< /nextlink >}}
+    {{< nextlink href="/agent/troubleshooting/autodiscovery" >}}<u>Dépannage d'Autodiscovery</u> : corrigez les problèmes courants liés à Autodiscovery.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Dépannage de l'Agent de cluster</u> : consultez des informations de dépannage afin de résoudre les problèmes liés à l'Agent de cluster Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Pour aller plus loin

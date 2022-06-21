@@ -5,67 +5,73 @@ assets:
   dashboards: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
+- data store
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md
 display_name: Neo4j
 draft: false
 git_integration_title: neo4j
 guid: a85ec8bb-e677-4089-ae8f-d1705c340131
 integration_id: neo4j
 integration_title: Neo4j
+integration_version: 2.0.0
+is_beta: false
 is_public: true
-kind: インテグレーション
-maintainer: help@neo4j.com
+kind: integration
+maintainer: neo4j-cloud@neotechnology.com
 manifest_version: 1.0.0
 metric_prefix: neo4j.
-metric_to_check: neo4j.arraystore.size
+metric_to_check: neo4j.page_cache_hits_total
 name: neo4j
 public_title: Datadog-Neo4j インテグレーション
-short_description: Neo4j Enterprise とのインテグレーションによりサーバーパフォーマンスを監視。
+short_description: Neo4j のメトリクスを収集する
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
-Neo4j サービスからメトリクスをリアルタイムに取得して、以下のことができます。
-
-- Neo4j の状態を視覚化および監視できます。
-- Neo4j のフェイルオーバーとイベントの通知を受けることができます。
+このチェックは、Datadog Agent を介して [neo4j][1] を監視するものです。
+この Agent を介して送信されるメトリクスとチェックを確認してください。Neo4j 4.0 以降では、複数のデータベースをサポートしているため、一部のメトリクスとチェックは公開されなくなりました。
 
 ## セットアップ
 
-Neo4j チェックは [Datadog Agent][1] パッケージに**含まれていません**。
+
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
 ### インストール
 
-Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Neo4j チェックをインストールしてください。[バージョン 6.8 以前の Agent][3] または [Docker Agent][4] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][2]に関する Agent のガイドを参照してください。
+neo4j チェックをホストにインストールするには
 
-1. [Datadog Agent をダウンロードして起動][1]します。
-2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
+1. [Datadog Agent][3] をダウンロードしてインストールします。
+2. neo4j チェックをホストにインストールするには
 
    ```shell
    datadog-agent integration install -t datadog-neo4j==<INTEGRATION_VERSION>
    ```
 
-3. [他のパッケージ化されたインテグレーション][5]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
-1. Neo4j の[メトリクス](#メトリクスの収集)を収集するには、[Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーで `neo4j.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル neo4j.d/conf.yaml][7] を参照してください。
+1. neo4j のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `neo4j.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[neo4j.d/conf.yaml のサンプル][4]を参照してください。
 
-2. [Agent を再起動します][8]。
+2. neo4j_url は host に置き換えられました。更新の際には host を使用するようにしてください。
 
-## 検証
+3. [Agent を再起動します][5]。
 
-[Agent の `status` サブコマンドを実行][9]し、Checks セクションで `neo4j` を探します。
+### 検証
+
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `neo4j` を探します。
 
 ## 収集データ
 
@@ -73,28 +79,24 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 {{< get-metrics-from-git "neo4j" >}}
 
 
+### サービスのチェック
+
+サービスチェック `neo4j.prometheus.health` はベースチェックで送信されます
+
 ### イベント
 
-Neo4j チェックには、イベントは含まれません。
-
-### サービスのチェック
-{{< get-service-checks-from-git "neo4j" >}}
-
+neo4j には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
-[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/datadog_checks/neo4j/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[10]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/metadata.csv
-[11]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/assets/service_checks.json
-[12]: http://docs.datadoghq.com/help
+[1]: https://neo4j.com/
+[2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/datadog_checks/neo4j/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/metadata.csv
+[8]: https://docs.datadoghq.com/ja/help

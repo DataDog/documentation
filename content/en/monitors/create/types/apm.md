@@ -29,7 +29,7 @@ Analytics monitors allow you to visualize APM data over time and set up alerts b
 
 To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
 
-Choose between an **APM Metrics** or **Analytics** monitor:
+Choose between an **APM Metrics** or a **Trace Analytics** monitor:
 
 {{< tabs >}}
 {{% tab "APM Metrics" %}}
@@ -71,7 +71,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 [4]: /monitors/create/configuration/#advanced-alert-conditions
 [5]: /monitors/create/types/metric/#data-window
 {{% /tab %}}
-{{% tab "Analytics" %}}
+{{% tab "Trace Analytics" %}}
 
 <div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
@@ -94,10 +94,14 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 ### Select alert conditions
 
-* Trigger when the metric is `above` or `above or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 48 hours.
+* Trigger when the query result is `above`, `above or equal to`, `below`, or `below or equal to`.
+* The threshold during the last `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 5 minutes and 48 hours.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
+
+#### No data and below alerts
+
+To receive a notification when a group matching a specific query stops sending spans, set the condition to below `1`. This notifies you when no spans match the monitor query in the defined evaluation period for the group.
 
 #### Advanced alert conditions
 

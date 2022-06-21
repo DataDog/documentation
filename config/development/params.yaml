@@ -9,9 +9,7 @@ header_scripts:
   - google-tag-manager: false
   - google-site-tag: false
   - marketo: false
-  - quora-pixel: false
 
 footer_scripts:
   - snowplow: false
-  - adroll: false
 

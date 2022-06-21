@@ -13,13 +13,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/cert_manager/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/cert_manager/README.md
 display_name: cert-manager
 draft: false
 git_integration_title: cert_manager
 guid: c9bdaf11-fe15-4892-ae30-47c5124144e5
 integration_id: cert-manager
 integration_title: cert-manager
+integration_version: 2.2.0
 is_public: true
 kind: integration
 maintainer: ara.pulido@datadoghq.com
@@ -43,7 +44,7 @@ Ce check recueille des métriques à partir de [cert-manager][1].
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][3] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][3] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
 
 ### Installation
 
@@ -73,7 +74,7 @@ Pour installer le check cert_manager sur votre host :
    ddev config set extras ./integrations-extras
    ```
 
-4. Pour générer le paquet `cert_manager`, exécutez :
+4. Pour générer le package `cert_manager`, exécutez :
 
    ```shell
    ddev -e release build cert_manager
@@ -144,18 +145,18 @@ Pour installer le check cert_manager sur votre host :
 {{< get-metrics-from-git "cert_manager" >}}
 
 
-### Checks de service
-
-`cert_manager.prometheus.health` :
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter au endpoint Prometheus. Si ce n'est pas le cas, renvoie UP.
-
 ### Événements
 
 cert_manager n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "cert_manager" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
+
 
 [1]: https://github.com/jetstack/cert-manager
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/cert_manager/images/overview_dashboard.png
@@ -166,4 +167,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
+[10]: https://github.com/DataDog/integrations-extras/blob/master/cert_manager/assets/service_checks.json
+[11]: https://docs.datadoghq.com/fr/help/

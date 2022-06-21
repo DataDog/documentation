@@ -41,18 +41,22 @@ Click **Test URL** to try out the request configuration. A response preview is d
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL`, basic assertions on `latency`, `packet loss`, and `packet received` are added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `latency`, `packet loss`, and `packet received` are added. You must define at least one assertion for your test to monitor.
 
 | Type          | Aggregation    |Operator                                                                               | Value Type       |
 |-----------------|----------------|------------------------------------------------------------------------|------------------|
-| latency         | `avg`, `max`, `min` or `stddev` (aka `jitter`) |`is less than`, `is less than or equal`, <br> `is`, `is more than`, `is more than or equal` | _integer (ms)_    |
+| latency         | `avg`, `max`, `min`, or `stddev` (aka `jitter`) |`is less than`, `is less than or equal`, <br> `is`, `is more than`, `is more than or equal` | _integer (ms)_    |
 | packet loss     | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _percentage (%)_ |
 | packet received | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 | network hops    | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 
 You can create up to 20 assertions per API test by selecting **New Assertion** or by selecting the response preview directly:
 
-{{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test to succeed or fail on" style="width:90%;" >}}
+
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
 ### Select locations
 
@@ -72,7 +76,7 @@ You can set alert conditions to determine the circumstances under which a test s
 
 #### Alerting rule
 
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
+When you set the alert conditions to: `An alert is triggered if your test fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes.
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
@@ -106,7 +110,7 @@ Click **Save** to save your test and have Datadog start executing it.
 
 ### Create local variables
 
-You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -144,7 +148,15 @@ These reasons include the following:
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][9] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of those two [default roles][9].
 
-If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+
+### Restrict access
+
+Access restriction is available for customers using [custom roles][11] on their accounts.
+
+You can restrict access to an ICMP test based on the roles in your organization. When creating an ICMP test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
@@ -160,3 +172,4 @@ If you have access to the [custom role feature][10], add your user to any custom
 [8]: /synthetics/settings/#global-variables
 [9]: /account_management/rbac/
 [10]: /account_management/rbac#custom-roles
+[11]: /account_management/rbac/#create-a-custom-role

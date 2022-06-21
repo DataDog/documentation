@@ -1,28 +1,22 @@
 ---
-title: Widget Flux d'événements
-kind: documentation
-description: Affichez des événements filtrés à partir du flux d'événements.
 aliases:
-  - /fr/graphing/widgets/event_stream/
+- /fr/graphing/widgets/event_stream/
+description: Affichez des événements filtrés à partir du flux d'événements.
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: Documentation
-    text: Screenboard
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+kind: documentation
+title: Widget Flux d'événements
 ---
+
 {{< site-region region="us" >}}
 
 Le flux d'événements affiche les événements de la [vue Flux d'événements][1] sous forme de widget.
 
 Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="flux d'événements" >}}
-
 ## Configuration
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements" style="width:80%;">}}
 
 ### Configuration
 
@@ -55,11 +49,7 @@ Le flux d'événements affiche les événements de la [vue Flux d'événements][
 
 Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="flux d'événements" >}}
-
 ## Configuration
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements" style="width:80%;">}}
 
 ### Configuration
 

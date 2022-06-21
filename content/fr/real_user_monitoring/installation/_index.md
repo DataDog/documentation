@@ -74,7 +74,7 @@ Collez l'extrait de code généré dans le tag head (avant tous les autres tags 
 <script>
     window.DD_RUM &&
         window.DD_RUM.init({
-            clientToken: '<TOEKN_CLIENT>',
+            clientToken: '<TOKEN_CLIENT>',
             applicationId: '<ID_APPLICATION>',
             sampleRate: 100,
         });

@@ -39,7 +39,7 @@ supported_os:
 
 Recueillez des métriques sur le service ExternalDNS en temps réel pour visualiser et surveiller les métriques recueillies avec le plug-in Prometheus ExternalDNS pour Kubernetes.
 
-Pour en savoir plus sur le service ExternalDNS, consultez le [référentiel Github][1].
+Pour en savoir plus sur le service ExternalDNS, consultez le [référentiel GitHub][1].
 
 ## Configuration
 

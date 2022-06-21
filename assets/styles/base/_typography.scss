@@ -1,6 +1,7 @@
 // Typography
 
 body {
+  line-height: 1.42857143;
   &:lang(ja) {
     font-family: 'Noto Sans JP', Helvetica, Arial, sans-serif;
     font-size: 18px;

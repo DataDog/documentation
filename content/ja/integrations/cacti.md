@@ -9,18 +9,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
-  - log collection
+- monitoring
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/cacti/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/cacti/README.md
 display_name: Cacti
 draft: false
 git_integration_title: cacti
 guid: 566466b0-1422-44ef-b14f-493a64e7b58a
 integration_id: cacti
 integration_title: Cacti
+integration_version: 1.11.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -32,8 +33,11 @@ public_title: Datadog-Cacti インテグレーション
 short_description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
 support: コア
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## 概要
 
 Cacti からメトリクスをリアルタイムに取得すると、以下のことができます。
@@ -66,7 +70,7 @@ sudo yum install rrdtool-devel
 
 #### Python バインディング
 
-次に、以下のコマンドを使用して、`rrdtool` Python パッケージを Agent に追加します。
+以下のコマンドを使用して、`rrdtool` Python パッケージを Agent に追加します。
 
 ```shell
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool

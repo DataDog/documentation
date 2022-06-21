@@ -7,14 +7,14 @@ aliases:
 further_reading:
   - link: https://www.datadoghq.com/blog/announcing-security-monitoring/
     tag: Blog
-    text: En savoir plus sur le Security Monitoring
+    text: En savoir plus sur le Cloud SIEM
   - link: /security_monitoring/detection_rules/
     tag: Documentation
     text: En savoir plus sur la logique conditionnelle des règles de sécurité
 ---
 ## Présentation
 
-L'outil [Security Signals Explorer][1] vous permet de mettre en corrélation et de filtrer vos signaux. Vous pouvez également accéder aux dashboards Security Monitoring à partir de cette page.
+L'outil [Security Signals Explorer][1] vous permet de mettre en corrélation et de filtrer vos signaux. Vous pouvez également accéder aux dashboards Cloud SIEM à partir de cette page.
 
 Grâce à cette vue, vous pouvez :
 
@@ -58,7 +58,7 @@ Sous l'aperçu du signal figurent des onglets contenant des informations plus d�
 
 ### Renseignements sur les menaces
 
-La solution Security Monitoring de Datadog fournit des flux de renseignements sur les menaces minutieusement sélectionnés par des experts en la question. Ces flux sont constamment mis à jour de façon à inclure des données sur les activités suspicieuses connues (par exemple, des indicateurs de compromissions), afin que vous puissiez identifier rapidement les menaces potentielles que vous devez éliminer.
+La solution Cloud SIEM de Datadog fournit des flux de renseignements sur les menaces minutieusement sélectionnés par des experts en la question. Ces flux sont constamment mis à jour de façon à inclure des données sur les activités suspicieuses connues (par exemple, des indicateurs de compromissions), afin que vous puissiez identifier rapidement les menaces potentielles que vous devez éliminer.
 
 {{< img src="security_platform/security_monitoring/explorer/threat_intelligence.png" alt="Renseignements sur les menaces dans le Security Signals Explorer"  >}}
 

@@ -88,6 +88,9 @@ If you change a previously set primary tag, be aware of the following:
 
 Primary tags appear at the top of APM pages. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `<TAG_NAME>:*` from the dropdown.
 
+{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="The dropdown menu showing options for selecting a scope with the second primary tag"  style="width:90%;">}}
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

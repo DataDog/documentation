@@ -21,7 +21,7 @@ Voici une présentation vidéo de deux minutes à ce sujet :
 
 {{< vimeo 188833506 >}}
 
-Consultez la page [Monitor d'anomalies][1] pour en savoir plus.
+Consultez la page [Monitor d'anomalie][1] pour en savoir plus.
 
 ## Singularités
 

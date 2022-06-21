@@ -31,7 +31,7 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 5. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
 
-6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**.
+6. Define the maximum number of logs that should be rehydrated in this historical view. If the limit of the rehydration is reached, the reloading is stopped but you still have access to the rehydrated logs.
 
 7. Define the retention period of the rehydrated logs (available retentions are based on your contract, default is 15 days).
 
@@ -74,6 +74,14 @@ Once the content is rehydrated, the historical view is marked as active, and the
 Alternatively, find the historical view from the Log Explorer directly from the index selector.
 
 {{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
+
+### Canceling ongoing historical views
+
+Cancel ongoing Rehydrations directly in the Rehydrate from Archives page to avoid starting Rehydrations with the incorrect time range or when you accidentally make typos in your indexing query.
+
+The logs already indexed will remain queryable until the end of the retention period selected for that historical view, and all the logs already scanned and indexed will still be billed.
+
+{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration.png" alt="Canceling Ongoing Rehydrations" width="75%" >}}
 
 ### Deleting historical views
 

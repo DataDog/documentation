@@ -8,12 +8,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Pub/Sub."
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_pubsub/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_pubsub/
 draft: false
 git_integration_title: google_cloud_pubsub
 has_logo: true
 integration_id: google-cloud-pubsub
 integration_title: Google Pub/Sub
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -45,11 +46,11 @@ Pour recueillir des étiquettes Pub/Sub personnalisées sous forme de tags, acti
 
 ### Collecte de logs
 
-Les logs Google Cloud Pub/Sub sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
+Les logs Google Cloud Pub/Sub sont recueillis avec Google Cloud Logging et envoyés à un Cloud Pub/Sub via un forwarder Push HTTP. Si vous ne l'avez pas déjà fait, configurez un [Cloud Pub/Sub à l'aide d'un forwarder Push HTTP][2].
 
-Une fois cette opération effectuée, exportez vos logs Google Cloud Pub/Sub depuis Stackdriver vers le Pub/Sub :
+Une fois cette opération effectuée, exportez vos logs Google Cloud Pub/Sub depuis Google Cloud Logging vers le Pub/Sub :
 
-1. Accédez à la [page Stackdriver][3] et filtrez les logs Google Cloud Pub/Sub.
+1. Accédez à la [page Google Cloud Logging][3] et filtrez les logs Google Cloud Pub/Sub.
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 

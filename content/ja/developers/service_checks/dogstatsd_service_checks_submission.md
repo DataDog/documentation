@@ -9,7 +9,7 @@ further_reading:
   - link: /developers/community/libraries/
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
+  - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
     tag: GitHub
     text: DogStatsD ソースコード
 ---

@@ -12,6 +12,11 @@ further_reading:
       tag: 'Blog'
       text: 'Database performance monitoring with Datadog'
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Database Monitoring is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Datadog Database Monitoring helps you to better understand the health and performance of your databases, and quickly determine the root cause of any problems.

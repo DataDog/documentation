@@ -30,9 +30,10 @@ After choosing to create a `TCP` test, define your test's request.
 ### Define request
 
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
-2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results. 
-3. **Name** your TCP test.
-4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results.
+3. Specify the amount of time in seconds before the test times out (optional).
+4. **Name** your TCP test.
+5. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
 {{< img src="synthetics/api_tests/tcp_test_config.png" alt="Define TCP connection" style="width:90%;" >}}
 
@@ -45,10 +46,16 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 | Type          | Operator                                                                | Value type     |
 |---------------|-------------------------------------------------------------------------|----------------|
 | response time | `is less than`                                                          | _Integer (ms)_ |
+| network hops    | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
+| connection | `is`                                                          | `established`, `refused`, `timeout` |
 
-You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your TCP test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_tcp.png" alt="Define assertions for your TCP test to succeed or fail on" style="width:90%;" >}}
+
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
 ### Select locations
 
@@ -68,7 +75,7 @@ Set alert conditions to determine the circumstances under which you want a test 
 
 #### Alerting rule
 
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
+When you set the alert conditions to: `An alert is triggered if your test fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes.
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
@@ -102,7 +109,7 @@ Click on **Save** to save your test and have Datadog start executing it.
 
 ### Create local variables
 
-You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -144,14 +151,23 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][9] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][9].
 
-If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+
+### Restrict access
+
+Access restriction is available for customers using [custom roles][11] on their accounts.
+
+You can restrict access to a TCP test based on the roles in your organization. When creating a TCP test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
@@ -167,3 +183,4 @@ If you have access to the [custom role feature][10], add your user to any custom
 [8]: /synthetics/settings/#global-variables
 [9]: /account_management/rbac/
 [10]: /account_management/rbac#custom-roles
+[11]: /account_management/rbac/#create-a-custom-role

@@ -13,6 +13,8 @@
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
+<!-- only ja pages on corp -->
+{{ $langPrefix := cond (eq $dot.Page.Lang "ja") "ja/" "" }}
 
 <footer class="pt-3 position-relative">
     <div class="container">
@@ -35,52 +37,59 @@
                     {{ end}}
                 </a>
                 <p class="font-weight-semibold text-center text-lg-left mb-0">Download mobile app</p>
-                
+
                 <div class="d-flex d-lg-none justify-content-center ">
                     <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-1" aria-label="Apple Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "app-store-badge.svg" )}}
-                    </a>             
+                    </a>
                     <a href="https://play.google.com/store/apps/details?id=com.datadog.app" aria-label="Google Play Store Link">
-                        {{ partial "svg" (dict "context" $dot "src" "google-play-badge.svg" )}}  
+                        {{ partial "svg" (dict "context" $dot "src" "google-play-badge.svg" )}}
                     </a>
                 </div>
 
                 <div class="d-none d-lg-flex justify-content-lg-start">
                     <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-2" aria-label="Apple Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "apple.svg" )}}
-                    </a>             
+                    </a>
                     <a href="https://play.google.com/store/apps/details?id=com.datadog.app" aria-label="Google Play Store Link">
-                        {{ partial "svg" (dict "context" $dot "src" "google-play.svg" )}}  
+                        {{ partial "svg" (dict "context" $dot "src" "google-play.svg" )}}
                     </a>
                 </div>
             </div>
             <div class="col-12 col-lg-6  mt-3 mt-lg-0">
                 <p class="border-bottom border-gray mb-0">{{ i18n "product" }}</p>
+
+                {{ $lenFooterProduct := len .Site.Menus.footer_product }}
+                {{ $secondHalfFooterProduct := div $lenFooterProduct 2 }}
+                {{ $firstHalfFooterProduct := sub $lenFooterProduct  $secondHalfFooterProduct }}
+
                 <div class="row">
                     <div class="col-6 col-lg-4">
                         <ul class="footer-menu mt-1">
-                            {{ range .Site.Menus.footer_product }}
+                            {{ range first $firstHalfFooterProduct .Site.Menus.footer_product }}
                                 <li>
                                     {{ if eq $.Site.Params.full_translation true }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                     {{ else }}
-                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                        {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
+                                        {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                     {{ end }}
                                 </li>
-                            {{ end }}
+                            {{end}}
                         </ul>
                     </div>
                     <div class="col-6 col-lg-4">
                         <ul class="footer-menu mt-1">
-                            {{ range .Site.Menus.footer_product_two }}
+                            {{ range last $secondHalfFooterProduct .Site.Menus.footer_product }}
                                 <li>
                                     {{ if eq $.Site.Params.full_translation true }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                     {{ else }}
-                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                        {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
+                                        {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                     {{ end }}
                                 </li>
-                            {{ end }}
+                            {{end}}
                         </ul>
                     </div>
                     <div class="col-12 d-block d-lg-none">
@@ -94,13 +103,14 @@
                                 {{ if eq $.Site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
-                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                 {{ end }}
                             </li>
-                            {{ end }}
+                            {{end}}
                         </ul>
                     </div>
-                    
+
                     <div class="col-6 d-lg-none">
                         <ul class="footer-menu mt-1">
                             {{ range first 3 .Site.Menus.footer_product_three }}
@@ -108,10 +118,11 @@
                                 {{ if eq $.Site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
-                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                 {{ end }}
                             </li>
-                            {{ end }}
+                            {{end}}
                         </ul>
                     </div>
                     <div class="col-6 d-lg-none">
@@ -121,13 +132,14 @@
                                 {{ if eq $.Site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
-                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                 {{ end }}
                             </li>
-                            {{ end }}
+                            {{end}}
                         </ul>
                     </div>
-                   
+
                 </div>
             </div>
             <div class="col-12 col-lg-3 mt-3 mt-lg-0">
@@ -140,7 +152,8 @@
                                 {{ if eq $.Site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
-                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                    {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                                 {{ end }}
                             </li>
                             {{ end }}
@@ -151,25 +164,12 @@
                         <ul class="footer-menu mt-1">
                             {{ range .Site.Menus.footer_blog }}
                             <li>
-                                {{ if eq (substr .URL 0 1) "/" }}
-                                    <!-- to specifig lang page e.g /es/blog -->
-                                    {{ if $.Site.Params.branch }}
-                                        {{ $.Scratch.Set "flink" ( (print "/" $.Site.Params.branch .URL) | absURL) }}
-                                    {{ else }}
-                                        {{ $.Scratch.Set "flink" ( .URL | absURL) }}
-                                    {{ end }}
-                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ($.Scratch.Get "flink") ) }}
-                                {{ else }}
-                                    {{ if eq $.Site.Params.full_translation true }}
-                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
-                                    {{ else }}
-                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
-                                    {{ end }}
-                                {{ end }}
+                                {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
+                                {{ partial "footer_link" (dict "footer_link" . "base_url" $url ) }}
                             </li>
                             {{ end }}
                         </ul>
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
@@ -230,10 +230,11 @@
                             <ul class="footer-menu d-flex align-items-center">
                                 {{ range $index, $v := .Site.Menus.footer_sub }}
                                     <li class="d-flex align-items-center">
+                                        {{ $url := cond (hasPrefix .URL "http") (.URL | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" .URL)) }}
                                         {{ if eq $.Site.Params.full_translation true }}
-                                            <a href="{{ .URL }}">{{- $v.Name -}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
+                                            <a href="{{ $url }}">{{- $v.Name -}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
                                         {{ else }}
-                                            <a href="{{ .URL }}">{{- $v.Name -}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
+                                            <a href="{{ $url }}">{{- $v.Name -}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
                                         {{ end }}
                                     </li>
                                 {{ end }}

@@ -8,12 +8,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Rassemblez vos logs AWS VPC.
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_vpc/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
 draft: false
 git_integration_title: amazon_vpc
 has_logo: false
 integration_id: ''
 integration_title: "Amazon\_VPC"
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -34,7 +35,9 @@ L'[intégration Amazon Web Services][1] doit être configurée dans Datadog.
 
 ### Collecte de métriques
 
-Aucune étape supplémentaire n'est nécessaire pour recueillir les métriques AWS VPC autres que `aws.vpc.flowlogs.*`. Les métriques commençant par `aws.vpc.flowlogs.*` sont générées par l'intégration [Datadog/Logs de flux VPC][2]. Consultez les instructions ci-dessous pour découvrir comment activer la collecte de métriques des logs de flux.
+Aucune étape supplémentaire n'est nécessaire pour recueillir les métriques AWS VPC autres que `aws.vpc.flowlogs.*`. Les métriques commençant par `aws.vpc.flowlogs.*` sont générées par l'intégration [Datadog/Logs de flux VPC][2]. Consultez la section [collecte de logs](#collecte-de-logs) ci-dessous pour activer la collecte de métriques des logs de flux.
+
+Pour les métriques `aws.vpc.subnet.*`, contactez l'[assistance Datadog][3] afin d'activer la collecte pour votre compte.
 
 ### Collecte de logs
 
@@ -52,9 +55,9 @@ Sélectionnez le filtre `All` pour afficher les connexions acceptées et refusé
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][3].
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
 
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou le groupe de logs CloudWatch contenant vos logs de flux Amazon VPC par le biais de la console AWS. Dans votre Lambda, cliquez ensuite sur S3 ou CloudWatch dans la liste des déclencheurs :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs de flux Amazon VPC depuis la console AWS. Dans votre Lambda, cliquez ensuite sur S3 ou CloudWatch dans la liste des déclencheurs :
 
     {{< img src="integrations/amazon_vpc/s3_trigger_configuration.png" alt="Configuration du déclencheur S3" style="width:75%;" >}}
 
@@ -62,7 +65,7 @@ Sélectionnez le filtre `All` pour afficher les connexions acceptées et refusé
 
     {{< img src="integrations/amazon_vpc/s3_lambda_trigger_configuration.png" alt="Déclencheur Lambda S3" style="width:75%;" >}}
 
-Lorsque vous avez terminé, utilisez le [Log Explorer de Datadog][4] pour visualiser vos logs.
+Lorsque vous avez terminé, utilisez le [Log Explorer de Datadog][5] pour visualiser vos logs.
 
 ## Données collectées
 
@@ -82,11 +85,11 @@ L'intégration AWS VPC n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-VPC-Flow-Logs
-[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[4]: https://docs.datadoghq.com/fr/logs/explorer/
-[5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv
-[6]: https://docs.datadoghq.com/fr/help/
+[3]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[5]: https://docs.datadoghq.com/fr/logs/explorer/
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv

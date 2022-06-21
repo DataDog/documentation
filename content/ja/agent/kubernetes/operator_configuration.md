@@ -572,8 +572,83 @@ spec:
 `site`
 : Agent データの Datadog インテークのサイトを設定します:  {{< region-param key="dd_site" code="true" >}}。デフォルトは `datadoghq.com` です。
 
+`features.kubeStateMetricsCore.clusterCheck`
+: Kubernetes State Metrics Core のチェックをクラスターのチェックとして構成します。
 
+`features.kubeStateMetricsCore.enabled`
+: これを有効にすると、Kubernetes State Metrics Core のチェックが開始されます。Kubernetes State Metrics Core のドキュメント][16]を参照してください。
 
+`features.kubeStateMetricsCore.conf.configData`
+: コンフィギュレーションファイルの内容に対応します。
+
+`features.kubeStateMetricsCore.conf.configMap.fileKey`
+: コンフィギュレーションファイルの内容を格納するために ConfigMap.Data で使用されるキーに対応します。
+
+`features.kubeStateMetricsCore.conf.configMap.name`
+: ConfigMap に名前を付けます。
+
+`features.logCollection.containerCollectUsingFiles`
+: コンテナランタイム API を使用する代わりに、`/var/log/pods` にあるファイルからログを収集します。ファイルからログを収集することは、通常、ログを収集する上で最も効率的な方法です。デフォルトは `true` です。[Kubernetes ログ収集][17]を参照してください。
+
+`features.logCollection.containerLogsPath`
+: コンテナログパスからのログ収集を許可します。Docker ランタイムを使用していない場合は、別のパスを設定します。デフォルトは `/var/lib/docker/containers` です。
+
+`features.logCollection.containerSymlinksPath`
+: コンテナ ID -> ポッドを検証するために、このディレクトリのシンボリックリンクを使用するログ収集を許可します。デフォルトは `/var/log/containers` です。
+
+`features.logCollection.enabled`
+: このオプションを有効にすると、Datadog Agent のログ収集が有効になります。
+
+`features.logCollection.logsConfigContainerCollectAll`
+: このオプションを有効にすると、すべてのコンテナについてログ収集が可能になります。
+
+`features.logCollection.openFilesLimit`
+: Datadog Agent が尾行するログファイルの最大数を設定します。この上限を増やすと、Agent のリソース消費量が増加します。デフォルトは 100 です。
+
+`features.logCollection.podLogsPath`
+: ポッドログパスからのログ収集を許可します。デフォルトは `/var/log/pods` です。
+
+`features.logCollection.tempStoragePath`
+: このパス (常にホストからマウントされます) は、処理されたログファイルに関する情報を格納するために Datadog Agent によって使用されます。Datadog Agent が再起動した場合、ログファイルのテーリングが直ちに開始されます。デフォルトは、`/var/lib/datadog-agent/logs` です。
+
+`features.networkMonitoring.enabled`
+: ネットワーク監視を有効にします。
+
+`features.orchestratorExplorer.additionalEndpoints`
+: 収集したデータを `{"https://process.agent.datadoghq.com": ["apikey1", ...], ...}'` という形式の json として送信するための追加エンドポイントです。
+
+`features.orchestratorExplorer.clusterCheck`
+: オーケストレータエクスプローラーのチェックをクラスタチェックとして構成します。
+
+`features.orchestratorExplorer.conf.configData`
+: コンフィギュレーションファイルの内容に対応します。
+
+`features.orchestratorExplorer.conf.configMap.fileKey`
+: コンフィギュレーションファイルの内容を格納するために ConfigMap.Data で使用されるキーに対応します。
+
+`features.orchestratorExplorer.conf.configMap.name`
+: ConfigMap に名前を付けます。
+
+`features.orchestratorExplorer.ddUrl`
+: オーケストレータエクスプローラーの Datadog のエンドポイントに設定します。
+
+`features.orchestratorExplorer.enabled`
+: Kubernetes のライブ監視を有効にするために、これを有効にします。[ライブコンテナ][18]を参照してください。
+
+`features.orchestratorExplorer.extraTags`
+: 収集したデータに対して、`a b c` のような形式で追加タグを付けます。`DD_TAGS` とは対照的に、これは Cluster Agent のオプションであり、カスタムのクラスタータグを定義するために使用されます。
+
+`features.orchestratorExplorer.scrubbing.containers`
+: 機密性の高いコンテナデータ (パスワード、トークンなど) のスクラビングを停止するには、これを無効にします。
+
+`features.prometheusScrape.additionalConfigs`
+: AdditionalConfigs により、カスタムディスカバリールールによる高度な Prometheus チェックのコンフィギュレーションを追加できます。
+
+`features.prometheusScrape.enabled`
+: Prometheus のメトリクスを公開しているポッドやサービスのオートディスカバリーを有効にします。
+
+`features.prometheusScrape.serviceEndpoints`
+: サービスエンドポイントの専用チェックを生成することを有効にします。
 
 [1]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
 [2]: https://docs.datadoghq.com/ja/agent/docker/?tab=standard#environment-variables
@@ -590,3 +665,6 @@ spec:
 [13]: http://conntrack-tools.netfilter.org/
 [14]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/
 [15]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+[16]: https://docs.datadoghq.com/ja/integrations/kubernetes_state_core
+[17]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset
+[18]: https://docs.datadoghq.com/ja/infrastructure/livecontainers/#kubernetes-resources

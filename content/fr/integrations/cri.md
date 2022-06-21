@@ -40,11 +40,11 @@ Ce check surveille une interface de runtime de conteneur (Container Runtime Inte
 
 ### Installation
 
-CRI est un check de base de l'Agent 6 et doit donc être configuré dans les fichiers `datadog.yaml` et `cri.d/conf.yaml`.
+CRI est un [check de base de l'Agent Datadog][1] qui doit être configuré dans `datadog.yaml` avec `cri.d/conf.yaml`.
 
-Dans `datadog.yaml`, vous devez configurer votre `cri_socket_path` pour l'Agent afin d'interroger votre CRI actuel (vous pouvez également configurer des délais d'expiration par défaut). Dans `cri.d/conf.yaml`, vous pouvez configurer les réglages d'instance de check tels que `collect_disk` si votre CRI (p. ex., `containerd`) transmet des métriques sur l'utilisation du disque.
+Dans `datadog.yaml`, configurez votre `cri_socket_path` pour l'Agent afin d'interroger votre CRI actuel (vous pouvez également configurer des délais d'expiration par défaut). Dans `cri.d/conf.yaml`, configurez les réglages d'instance de check tels que `collect_disk` si votre CRI (p. ex., `containerd`) transmet des métriques sur l'utilisation du disque.
 
-Remarque : si vous utilisez l'Agent dans un conteneur et définissez la variable d'environnement `DD_CRI_SOCKET_PATH`, cela active automatiquement le check `CRI` avec la configuration par défaut.
+**Remarque** : si vous utilisez l'Agent dans un conteneur, définissez la variable d'environnement `DD_CRI_SOCKET_PATH` pour activer automatiquement le check `CRI` avec la configuration par défaut.
 
 #### Installation sur des conteneurs
 
@@ -85,13 +85,13 @@ spec:
 
 ### Configuration
 
-1. Modifiez le fichier `cri.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance CRI. Consultez le [fichier d'exemple cri.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `cri.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance CRI. Consultez le [fichier d'exemple cri.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][2].
+2. [Redémarrez l'Agent][3].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][2] et cherchez `cri` dans la section Checks.
+Lancez la [sous-commande status][3] de l'Agent et cherchez `cri` dans la section Checks.
 
 ## Données collectées
 
@@ -109,9 +109,10 @@ CRI n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
-[4]: https://docs.datadoghq.com/fr/help/
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
+[5]: https://docs.datadoghq.com/fr/help/

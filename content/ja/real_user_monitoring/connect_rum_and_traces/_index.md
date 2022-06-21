@@ -137,7 +137,7 @@ Real User Monitoring から生成されたトレースが、APM インデック�
 `x-datadog-sampled: 1`
 Real User Monitoring SDK から生成されます。このリクエストがサンプリング用に選択されていることを示します。
 
-**注**: 上記 HTTP ヘッダーは CORS セーフリストに登録されていないため、ご使用のサーバーで [Access-Control-Allow-Headers を構成][16]する必要があります。サーバーは、[プレフライトリクエスト][17]も許可する必要があります (OPTIONS リクエスト)。
+**注**: 上記 HTTP ヘッダーは CORS セーフリストに登録されていないため、SDK が監視するように設定されているリクエストを扱うサーバーで [Access-Control-Allow-Headers を構成][16]する必要があります。サーバーは、すべてのリクエストの前に SDK によって作られる[プレフライトリクエスト][17]も許可する必要があります (OPTIONS リクエスト)。
 
 ## APM クオータへの影響
 
@@ -166,4 +166,4 @@ Real User Monitoring SDK から生成されます。このリクエストがサ�
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
 [17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
-[18]: /ja/tracing/trace_retention_and_ingestion/
+[18]: /ja/tracing/trace_retention/

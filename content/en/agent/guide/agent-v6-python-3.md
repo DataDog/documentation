@@ -1,5 +1,5 @@
 ---
-title: Use Python 3 with Datadog Agent v6
+title: Python Version Management
 kind: guide
 further_reading:
 - link: "/agent/versions/upgrade_to_agent_v7/"
@@ -7,35 +7,271 @@ further_reading:
   text: "Upgrade to Agent v7"
 ---
 
-Starting with v6.14.0, the Agent v6 integrates both Python 2 and Python 3 runtimes. This means that Agent Checks can be run either with Python 2 or Python 3, depending on the Agent configuration.
+If you are using Agent v6, Datadog recommends that you [upgrade to Agent v7][1]. Agent v7 only includes support for Python 3.
 
-By default, the Agent v6 uses the Python 2 runtime. To switch to the Python 3 runtime:
+However, there may be a case where you wish to continue using Agent v6 while updating to Python 3. Starting with Datadog Agent v6.14.0, Agent v6 integrates both Python 2 and Python 3 runtimes. This means that Agent Checks can be run either with Python 2 or Python 3, depending on the Agent configuration.
 
-{{< tabs >}}
-{{% tab "Host Agent" %}}
+## Use Python 3 with Datadog Agent v6
 
-1. Set the `python_version` configuration option [in your `datadog.yaml` configuration file][1]:
+By default, the Agent v6 uses the Python 2 runtime. Below are instructions for how to configure Agent v6 to use the Python 3 runtime:
+
+- [Host Agent](#host-agent)
+- [Container Agent](#container-agent)
+  - [Helm](?tab=helm#container-agent)
+  - [Datadog Operator](?tab=datadogoperator#container-agent)
+  - [DaemonSet](?tab=daemonset#container-agent)
+- [Deployment tools](#deployment-tools)
+  - [Chef](?tab=chef#deployment-tools)
+  - [Puppet](?tab=puppet#deployment-tools)
+  - [Ansible](?tab=ansible#deployment-tools)
+
+This configuration is not supported for the Azure VM Extension.
+
+### Host Agent
+
+1. Set the `python_version` configuration option in your [`datadog.yaml`][2] configuration file:
 
     ```yaml
     python_version: 3
     ```
 
-2. [Restart the Agent][2].
+2. [Restart the Agent][3].
 
-Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to `2` or `3` to choose which Python runtime is used. If it is set, the `python_version` option in `datadog.yaml` is ignored.
+Alternatively, specify which Python runtime you want to use by setting the `DD_PYTHON_VERSION` environment variable to `2` or `3`. Environment variables take precedence over configuration options in `datadog.yaml`. For example, by setting the `DD_PYTHON_VERSION` environment variable, the `python_version` option in `datadog.yaml` is ignored.
 
-This is an Agent-wide configuration option: **all Python checks launched by an Agent use the same Python runtime**.
+This is an Agent-wide configuration option. **All Python checks launched by an Agent use the same Python runtime**.
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/#restart-the-agent
+
+### Container Agent
+
+Datadog provides Agent container images for Python 2 and Python 3. 
+
+* Image tags starting with `6.`, like `6.34.0` or `6.34.0-jmx`, are images containing the Python 2 runtime.
+* Image tags starting with `7.`, like `7.34.0` or `7.34.0-jmx`, are images containing the Python 3 runtime.
+
+To switch from Python 2 to Python 3, update the image tag used to deploy the Agent.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+By default, the [Datadog Helm chart][1] uses the Agent 7 image that embeds the Python 3 runtime.
+
+To keep the Datadog Agent updated, edit your `values.yaml` to remove any information under the `agent.image` and the `clusterChecksRunner.image` sections.
+
+To use a specific container registry, set it with `agent.image.repository` and `clusterChecksRunner.image.repository`. Ensure that `agents.image.tag` and  `clusterChecksRunner.image.tag` are undefined.
+
+The default registry is `gcr.io/datadoghq/agent`.
+
+```yaml
+agent:
+  image:
+    repository: public.ecr.aws/datadog/agent
+
+clusterChecksRunner:
+  image:
+    repository: public.ecr.aws/datadog/agent
+```
+
+To set the Agent to a specific version, set `agents.image.tag` and  `clusterChecksRunner.image.tag`. All image tags starting with `7.*` embed the Python 3 runtime.
+
+```yaml
+agent:
+  image:
+    tag: 7.34.0
+
+clusterChecksRunner:
+  image:
+    tag: 7.34.0
+````
+
+You can use both options at the same time.
+
+```yaml
+agent:
+  image:
+    repository: public.ecr.aws/datadog/agent
+    tag: 7.34.0
+
+clusterChecksRunner:
+  image:
+    repository: public.ecr.aws/datadog/agent
+    tag: 7.34.0
+```
+
+[1]:https://artifacthub.io/packages/helm/datadog/datadog/
+
 {{% /tab %}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+By default, the [Datadog Operator][1] uses an `agent:7.*.*` image that embeds the Python 3 runtime.
 
-Since the only change between Agent v6.x and Agent v7.x is that the Agent v7.x includes the Python 3 runtime, contrary to Agent v6.x which includes only the Python 2 runtime, you can switch Python runtimes by switching Agent versions. To switch from one Python runtime to another, choose the appropriate Agent image:
+If the image information is not specified in the `DatadogAgent` resource, the Operator deploys a Python 3 Datadog Agent image.
 
-* **Python 2** runtime: Agent v6 images have the following format: `gcr.io/datadoghq/agent:6.<AGENT_MINOR_VERSION>`, or `gcr.io/datadoghq/agent:6.<AGENT_MINOR_VERSION>-jmx` for images supporting JMX checks.
+If you have previously pinned the image version:
 
-* **Python 3** runtime: Agent v7 images have the following format: `gcr.io/datadoghq/agent:7.<AGENT_MINOR_VERSION>`, or `gcr.io/datadoghq/agent:7.<AGENT_MINOR_VERSION>-jmx` for images supporting JMX checks.
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  # ...
+  agent:
+    # ...
+    imageConfig:
+      tag: 6.33.0
+  clusterChecksRunner:
+    # ...
+    imageConfig:
+      tag: 6.33.0
+```
+
+or you are using `imageConfig.name`:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+  agent:
+    # ...
+    imageConfig:
+      name: gcr.io/datadoghq/agent:6.33.0
+  clusterChecksRunner:
+    # ...
+    imageConfig:
+      name: gcr.io/datadoghq/agent:6.33.0
+```
+
+Use the `spec.registry` if you need to change the default registry. The default is `gcr.io/datadoghq/agent`.
+
+Then, pin the Agent 7 image tag in `spec.agents.imageConfig.tag`.
+
+If you have enabled cluster check runners deployment, also pin the Agent 7 image tag in `spec.clusterChecksRunner.imageConfig.tag`.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  # ...
+  registry: public.ecr.aws/datadog
+  agent:
+    # ...
+    imageConfig:
+      tag: 7.33.0
+  clusterChecksRunner:
+    # ...
+    imageConfig:
+      tag: 7.33.0
+```
+
+**Note**: Datadog recommends that you do not set the `*.imageConfig.tag`. Instead, let the Datadog Operator keep the Agent image tag up-to-date with an Agent 7 image.
+
+If you need to use an Agent JMX image, you can set it without specifying the Agent `*.imageConfig.tag`:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  # ...
+  registry: public.ecr.aws/datadog
+  agent:
+    # ...
+    imageConfig:
+      jmxEnabled: true
+  clusterChecksRunner:
+    # ...
+    imageConfig:
+      jmxEnabled: true
+```
+
+[1]: https://github.com/DataDog/datadog-operator
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+In your DaemonSet manifest, update the image tag in each container definition:
+
+* Each `spec.template.spec.containers[*].image` value
+* Each `spec.template.spec.initContainers[*].image` value
+
+For example, if your previous image value was `gcr.io/datadoghq/agent:6.33.0`, update it to `gcr.io/datadoghq/agent:7.33.0`.
+
+**Before**:
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+spec:
+  template:
+    spec:
+      containers:
+      - name: agent
+        image: gcr.io/datadoghq/agent:6.33.0
+        # ...
+
+```
+
+**After**:
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+spec:
+  template:
+    spec:
+      containers:
+      - name: agent
+        image: gcr.io/datadoghq/agent:7.33.0
+        # ...
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Deployment tools
+
+{{< tabs >}}
+{{% tab "Chef" %}}
+
+Use the `extra_config` field to set the ` python_version` field to `3`:
+
+```
+default_attributes(
+   'datadog' => {
+     'extra_config' => {
+       'python_version' => '3'
+     }
+   }
+ )
+```
+
+{{% /tab %}}
+{{% tab "Puppet" %}}
+
+Use the `agent_extra_config` field to set the `python_version`field to `3`:
+
+```
+class { "datadog_agent":
+    agent_extra_options => {
+        python_version => 3,
+    },
+}
+```
+
+{{% /tab %}}
+{{% tab "Ansible" %}}
+
+Set the `python_version` to `3` inside of your `datadog_config`:
+```
+datadog_config:
+  python_version: 3
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -43,3 +279,7 @@ Since the only change between Agent v6.x and Agent v7.x is that the Agent v7.x i
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/versions/upgrade_to_agent_v7/?tab=linux
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/guide/agent-commands/#restart-the-agent

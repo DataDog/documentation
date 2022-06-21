@@ -8,18 +8,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - ネットワーク
+- web
+- ネットワーク
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
 display_name: 外部 DNS
 draft: false
 git_integration_title: external_dns
 guid: 31eb63d5-15eb-42b3-912d-f8de47ea252a
 integration_id: external-dns
 integration_title: 外部 DNS
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -31,10 +32,13 @@ public_title: Datadog-外部 DNS インテグレーション
 short_description: 外部 DNS のすべてのメトリクスを Datadog で追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 外部 DNS サーバーからメトリクスをリアルタイムに取得して、Kubernetes の外部 DNS Prometheus アドオンで収集した DNS メトリクスを視覚化および監視できます。

@@ -15,7 +15,7 @@ further_reading:
     tag: Documentation
     text: Apprendre comment effectuer des recherches dans vos objets Synthetic
 ---
-## Overview
+## Présentation
 
 L'explorateur de résultats CI vous permet de visualiser vos tâches CI qui exécutent des tests Synthetic. 
 

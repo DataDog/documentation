@@ -12,7 +12,7 @@ further_reading:
     tag: FAQ
     text: Commandes de l'Agent
 ---
-Les intégrations développées par la communauté pour l'Agent Datadog sont stockées dans le référentiel Github [Integrations-extra][1]. Elles ne sont pas ajoutées au paquet ni intégrées à l'Agent Datadog, mais elles peuvent être installées comme extensions en suivant ces instructions :
+Les intégrations développées par la communauté pour l'Agent Datadog sont stockées dans le référentiel GitHub [Integrations-extra][1]. Elles ne sont pas ajoutées au paquet ni intégrées à l'Agent Datadog, mais elles peuvent être installées comme extensions en suivant ces instructions :
 
 {{< tabs >}}
 {{% tab "Agent > v6.8" %}}

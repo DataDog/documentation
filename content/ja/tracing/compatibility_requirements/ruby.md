@@ -11,7 +11,7 @@ further_reading:
 ---
 ## 互換性
 
-Ruby Datadog Trace ライブラリはオープンソースです。詳細については、[Github リポジトリ][1]をご覧ください。
+Ruby Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
 
 **サポートされている Ruby インタープリター**:
 

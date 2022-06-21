@@ -1,8 +1,8 @@
 ---
 categories:
-  - network
-  - log collection
-  - security
+- network
+- log collection
+- security
 ddtype: crawler
 dependencies: []
 description: L'intégration Meraki permet de recueillir des logs d'événement réseau.
@@ -19,19 +19,21 @@ manifest_version: '1.0'
 name: meraki
 public_title: Intégration Datadog/Meraki
 short_description: Recueillez des logs d'événement de Meraki.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Connectez-vous à Meraki pour intégrer vos logs d'événement réseau Meraki au système de gestion de logs Datadog.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
 1. Ouvrez le carré d'intégration Meraki.
 2. Nommez votre compte Meraki.
-3. Ajoutez une clé d'API Meraki. Pour découvrir comment générer une clé d'API Meraki, consultez la [documentation dédiée][1] (en anglais).
+3. Ajoutez une clé d'API Meraki. Pour découvrir comment générer une clé d'API Meraki, consultez la [documentation Cisco Meraki sur l'API Dashboard][1] (en anglais).
 
 ### Collecte de logs
 
@@ -43,7 +45,7 @@ Pour configurer la collecte de logs d'événements réseau, vous devez utiliser 
 2. Activez l'accès à l'API en accédant à Organization > Settings > Dashboard API access.
 3. Accédez à la page My Profile sur le dashboard Meraki afin de générer la clé.
 
-Pour en savoir plus, consultez la [documentation Meraki][2] (en anglais).
+Pour en savoir plus, consultez la [documentation Cisco Meraki sur l'API Dashboard][2].
 
 ## Données collectées
 

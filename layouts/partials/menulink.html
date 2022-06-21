@@ -1,13 +1,5 @@
 {{- $dot := (index $ 3) -}}
-{{- $no_base_urls := ( slice "documentation" "login" "enterprise_cta" "api") -}}
-{{- if eq $dot.Site.Params.full_translation true -}}
-    {{- $dot.Scratch.Set "url" ((index $ 1) | absLangURL) -}}
-{{- else -}}
-    {{- $dot.Scratch.Set "url" ((index $ 1) | absURL) -}}
-{{- end -}}
-{{- $url := $dot.Scratch.Get "url" -}}
-{{- if in $no_base_urls (index $ 0) -}}
+{{/*<!-- only ja pages on corp -->*/}}
+{{- $langPrefix := cond (eq $dot.Page.Lang "ja") "ja/" "" -}}
+{{- $url := cond (hasPrefix (index $ 1) "http") ((index $ 1) | absURL) (printf "https://www.datadoghq.com/%s%s" $langPrefix (strings.TrimPrefix "/" (index $ 1))) -}}
 {{- $url -}}
-{{- else -}}
-{{- $url -}}
-{{- end -}}

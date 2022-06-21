@@ -53,5 +53,5 @@ Chaque exemple d'erreur contient les informations dont vous avez besoin pour mie
 - Tous les tags de span d'erreur, notamment le nom de la ressource ou de l'opération, permettent d'accéder directement à la trace ou aux logs associés.
 - Des données sur la santé du host ou du conteneur sous-jacent au moment de l'apparition de l'erreur sont également indiquées.
 
-[1]: /fr/tracing/trace_search_and_analytics/#live-search-for-15-minutes
-[2]: /fr/tracing/trace_retention_and_ingestion/#retention-filters
+[1]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
+[2]: /fr/tracing/trace_retention/#retention-filters

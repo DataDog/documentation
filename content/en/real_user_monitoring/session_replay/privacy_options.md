@@ -47,31 +47,25 @@ datadogRum.startSessionReplayRecording();
 
 After updating your configuration, you can override elements of your HTML documents with the following privacy options:
 
-{{< tabs >}}
-{{% tab "mask-user-input" %}}
+### Mask user input mode
 
 Masks most form fields such as inputs, text areas, and checkbox values while recording all other text as is. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
 
-{{< img src="real_user_monitoring/session_replay/mask-user-input.png" alt="Mask user input mode" style="width:80%;">}}
+{{< img src="real_user_monitoring/session_replay/mask-user-input.png" alt="Mask user input mode" style="width:70%;">}}
 
 **Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay.
 
-{{% /tab %}}
-{{% tab "mask" %}}
+### Mask mode
 
 Masks all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
-{{< img src="real_user_monitoring/session_replay/mask.png" alt="Mask mode" style="width:80%;">}}
+{{< img src="real_user_monitoring/session_replay/mask.png" alt="Mask mode" style="width:70%;">}}
 
-{{% /tab %}}
-{{% tab "allow" %}}
+### Allow mode
 
 Records everything unmasked, excluding HTML input elements such as `password`, `email`, and `tel`, and elements with `autocomplete` attributes such as credit card numbers, expiration dates, and security codes.
 
-{{< img src="real_user_monitoring/session_replay/allow.png" alt="Allow mode" style="width:80%;">}}
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< img src="real_user_monitoring/session_replay/allow.png" alt="Allow mode" style="width:70%;">}}
 
 ## Privacy options
 
@@ -95,7 +89,7 @@ The example below demonstrates how you can override certain elements in your HTM
 
 The dollar amount in the cart is replaced with astericks.
 
-{{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:80%;">}}
+{{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:70%;">}}
 
 ## Advanced privacy options 
 
@@ -107,7 +101,7 @@ If you are concerned about the number of visible elements in sensitive fields, e
 
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
-{{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:50%;">}}
+{{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%;">}}
 
 ### Override the action name
 

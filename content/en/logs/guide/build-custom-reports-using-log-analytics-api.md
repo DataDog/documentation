@@ -28,13 +28,9 @@ The following examples are covered in this guide:
 
 ## Prerequisites
 
-Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][2].
+- Use of the Log Analytics API requires an [API key][2] and an [application key][3]. The user who created the application key must have the appropriate permission to access the data. To use the examples below, replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
 
-Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
-
-This guide also assumes that you have a terminal with `CURL`. 
-
-**Note:** If you are in the Datadog EU site, use https://api.datadoghq.eu/api/  as the endpoint.
+- This guide also assumes that you have a terminal with `curl`.
 
 ## Examples
 
@@ -870,4 +866,5 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/api/v2/logs/
-[2]: https://docs.datadoghq.com/api/v1/authentication/
+[2]: /account_management/api-app-keys/#api-keys
+[3]: /account_management/api-app-keys/#application-keys

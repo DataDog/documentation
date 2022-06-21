@@ -1,42 +1,42 @@
 ---
-title: 'Collecte de logs avec C#'
+title: Collecte de logs avec C#
 kind: documentation
 aliases:
   - /fr/logs/languages/csharp
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/c-logging-guide/'
+  - link: https://www.datadoghq.com/blog/c-logging-guide/
     tag: Blog
     text: "Comment recueillir, personnaliser et analyser des logs\_C#"
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: En savoir plus sur le parsing
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: '/logs/explorer/#visualiser-les-donnees'
+  - link: /logs/explorer/#visualiser-les-donnees
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
-Pour envoyer vos logs C# à Datadog, nous vous recommandons d'activer la journalisation au sein d'un fichier et de le suivre avec l'Agent Datadog. Voici des exemples de configuration pour les bibliothèques de journalisation `Serilog`, `NLog` et `log4net`.
+Pour envoyer vos logs C# à Datadog, activez la journalisation au sein d'un fichier et suivez ce fichier avec l'Agent Datadog. Les exemples de configuration ci-dessous utilisent les bibliothèques de journalisation `Serilog`, `NLog` et `log4net`.
 
-Nous vous encourageons fortement à configurer votre bibliothèque de journalisation afin de générer vos logs au format JSON et d'éviter de créer des [règles de parsing personnalisées][1].
+Datadog vous recommande fortement de configurer votre bibliothèque de journalisation de façon à générer vos logs au format JSON. Vous n'aurez ainsi pas besoin de créer de [règles de parsing personnalisées][1].
 
 ## Configurer votre logger
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-Comme bien d'autres bibliothèques pour .NET, Serilog vous permet d'effectuer une journalisation de diagnostic dans des fichiers, une console ou d'autres éléments. Ce processus de journalisation est facilement configurable, dispose d'une API épurée et peut être utilisé sur les plateformes .NET récentes.
+Comme bien d'autres bibliothèques pour .NET, Serilog vous permet d'effectuer une journalisation de diagnostic dans des fichiers, la console ou d'autres emplacements. Cette approche repose sur une API épurée et est compatible avec les plateformes .NET récentes.
 
 Contrairement aux autres bibliothèques de journalisation, Serilog est conçu pour fournir de précieuses données d'événement structurées.
 
-Installez Serilog via NuGet. Exécutez la commande suivante dans la console de gestion de paquet :
+Installez Serilog avec NuGet. Exécutez la commande suivante dans la console du gestionnaire de packages :
 
 ```text
 PM> Install-Package Serilog.Sinks.File
@@ -250,7 +250,7 @@ Si vous avez suivi ces instructions, l'événement suivant doit apparaître dans
 }
 ```
 
-Si, malgré les avantages de la journalisation en JSON, vous souhaitez activer la journalisation au format de chaîne brute, nous vous recommandons de mettre à jour le `log4net convertion pattern` pour extraire automatiquement vos logs avec le pipeline d'intégration C# comme suit :
+Si, malgré les avantages de la journalisation en JSON, vous souhaitez activer la journalisation au format de chaîne brute, essayez de modifier le `log4net conversion pattern` pour de façon à parser automatiquement vos logs avec le pipeline d'intégration C# comme suit :
 
 ```text
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
@@ -310,7 +310,7 @@ Initialisez ensuite directement le logger dans votre application. N'oubliez pas 
 
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<CLÉ_API>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.com" })
+    .WriteTo.DatadogLogs("<CLÉ_API>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.com" })
     .CreateLogger())
 {
     // Insérer du code
@@ -322,7 +322,7 @@ using (var log = new LoggerConfiguration()
 
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<CLÉ_API>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.eu" })
+    .WriteTo.DatadogLogs("<CLÉ_API>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.eu" })
     .CreateLogger())
 {
     // Insérer du code
@@ -408,8 +408,8 @@ Dans la matrice `Serilog.WriteTo`, ajoutez une entrée pour `DatadogLogs`. Voici
 ```
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /fr/logs/processing/attributes_naming_convention/#reserved-attributes
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /fr/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -417,5 +417,5 @@ Dans la matrice `Serilog.WriteTo`, ajoutez une entrée pour `DatadogLogs`. Voici
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/processing/parsing/
+[1]: /fr/logs/log_configuration/parsing
 [2]: /fr/tracing/connect_logs_and_traces/dotnet/

@@ -34,6 +34,7 @@ The [**Log Explorer**][1] is your home base for log troubleshooting and explorat
 
   - To learn more about searching for logs in Log Explorer, see the [Search Logs documentation][3].
   - To start creating queries and using facets in Log Explorer, read the [Log Search Syntax documentation][4].
+  - To learn more about how Watchdog Insights surface anomalous logs within your search context, read the [Log Anomaly Detection documentation][8].
 
 ### Group
 
@@ -58,3 +59,4 @@ You can also **export** your Log Explorer view to reuse it later or in different
 [5]: /logs/explorer/group
 [6]: /logs/explorer/visualize
 [7]: /logs/explorer/export
+[8]: /logs/explorer/insights

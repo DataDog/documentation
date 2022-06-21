@@ -54,13 +54,13 @@ To enable log collection with your DaemonSet:
 
     **Note**: Setting `DD_CONTAINER_EXCLUDE_LOGS` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [environment variable for ignoring containers][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE_LOGS` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
 
-2. Mount the `pointdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
+2. Mount the `pointerdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
 
     ```yaml
       # (...)
         volumeMounts:
         #  (...)
-          - name: pointdir
+          - name: pointerdir
             mountPath: /opt/datadog-agent/run
          - name: logpodpath
            mountPath: /var/log/pods
@@ -75,7 +75,7 @@ To enable log collection with your DaemonSet:
        # (...)
         - hostPath:
             path: /opt/datadog-agent/run
-          name: pointdir
+          name: pointerdir
         - hostPath:
             path: /var/log/pods
           name: logpodpath
@@ -89,7 +89,7 @@ To enable log collection with your DaemonSet:
         # (...)
     ```
 
-    The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
+    The `pointerdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
 ### Unprivileged
 
@@ -270,6 +270,8 @@ These integration templates are meant for basic cases. If you need a custom Data
 1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host and add your custom auto-configuration.
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
 
+**Note**: This is only supported when collecting logs through the Docker Socket, and not when using the Kubernetes log file method. To use the Docker Socket for log collection in a Kubernetes environment, ensure Docker is the runtime and `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` has been set to `false`.
+
 **Example auto-configuration file**:
 
 ```text
@@ -289,6 +291,8 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 {{% tab "ConfigMap" %}}
 
 On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
+
+**Note**: This is only supported when collecting logs through the Docker Socket, and not when using the Kubernetes log file method. To use the Docker Socket for log collection in a Kubernetes environment, ensure Docker is the runtime and `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` has been set to `false`.
 
 ```text
 kind: ConfigMap
@@ -369,6 +373,9 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{% tab "Helm" %}}
 
 You can customize logs collection per integration within `confd`. This method mounts the desired configuration onto the Agent container.
+
+**Note**: This is only supported when collecting logs through the Docker Socket, and not when using the Kubernetes log file method. To use the Docker Socket for log collection in a Kubernetes environment, ensure Docker is the runtime and `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` has been set to `false`.
+
   ```yaml
   confd:
     <INTEGRATION_NAME>.yaml: |-

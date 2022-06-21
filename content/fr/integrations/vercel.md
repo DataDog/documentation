@@ -10,17 +10,17 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - ''
+- ''
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
 display_name: Vercel
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-vercel-serverless-functions-with-datadog/
-    tag: Blog
-    text: Surveiller les fonctions sans serveur Vercel avec Datadog
+- link: https://www.datadoghq.com/blog/monitor-vercel-serverless-functions-with-datadog/
+  tag: Blog
+  text: Surveiller les fonctions sans serveur Vercel avec Datadog
 git_integration_title: vercel
 guid: cf0daf64-9c85-43b1-8b6b-7d08f8d31b0f
 integration_id: vercel
@@ -37,10 +37,13 @@ public_title: Vercel
 short_description: Surveiller vos application sans serveur exécutées sur Vercel
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![integration-datadog][1]
 
 ## Présentation
@@ -49,15 +52,14 @@ supported_os:
 
 Intégrez Vercel à Datadog pour :
 
-* Consulter et parser les logs de votre application à l'aide de la solution [Log Management de Datadog][5]
-* Consulter le nombre de requêtes et d'erreurs HTTP 4xx/5xx présentes sur vos applications sans serveur et API exécutés sur Vercel
-* Surveiller les performances frontend grâce à [Datadog Synthetics][6]
+- Consulter et parser les logs de votre application à l'aide de la solution [Log Management de Datadog][5]
+- Consulter le nombre de requêtes et d'erreurs HTTP 4xx/5xx présentes sur vos applications sans serveur et API exécutés sur Vercel
+- Surveiller les performances frontend grâce à [Datadog Synthetics][6]
 
 ## Configuration
 
-
-* Générez une [clé d'API Datadog][7]
-* Configurez l'intégration des logs par le biais du [Marketplace Vercel][8]
+- Générez une [clé d'API Datadog][7]
+- Configurez l'intégration des logs par le biais du [Marketplace Vercel][8]
 
 ## Données collectées
 

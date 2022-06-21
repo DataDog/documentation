@@ -22,11 +22,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/npm-best-practices/"
   tag: "Blog"
   text: "Best practices for getting started with Datadog NPM"
+- link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
+  tag: "Blog"
+  text: "Datadog NPM now supports Consul networking"
 ---
 
 ## Overview
 
-{{< img src="network_performance_monitoring/network_page/npm_cover.png" alt="Main page" >}}
+{{< vimeo 670228207 >}}
 
 Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog. Connection data at the IP, port, and PID levels is aggregated into application-layer dependencies between meaningful _source_ and _destination_ endpoints, which can be analyzed and visualized through a customizable [network page][1] and [network map][2]. Use flow data along with key network traffic and DNS server metrics to:
 

@@ -1,23 +1,25 @@
 ---
-title: ユーザーアクションの追跡
-kind: documentation
 further_reading:
-  - link: /real_user_monitoring/guide/send-rum-custom-actions/
-    tag: ガイド
-    text: RUM カスタムアクションをコードから送信
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-    tag: ブログ
-    text: リアルユーザーモニタリング
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Datadog でビューを検索する
-  - link: /real_user_monitoring/explorer/analytics/
-    tag: Documentation
-    text: イベントに関する分析論を組み立てる
-  - link: /real_user_monitoring/dashboards/
-    tag: Documentation
-    text: RUM ダッシュボード
+- link: /real_user_monitoring/guide/send-rum-custom-actions/
+  tag: ガイド
+  text: RUM カスタムアクションをコードから送信
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: リアルユーザーモニタリング
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: イベントへの視覚化の適用
+- link: /real_user_monitoring/dashboards/
+  tag: Documentation
+  text: RUM ダッシュボード
+kind: documentation
+title: ユーザーアクションの追跡
 ---
+
+
 Real User Monitoring (RUM) Browser SDK は、ユーザージャーニー中に実行されるユーザーアクションを自動的に検出します。
 
 ユーザーアクションを自動収集することで、アプリケーション内のすべてのクリックに手動でインスツルメントしなくても、ユーザー行動のインサイトを得ることが可能になるため、以下の目的を達成できます。
@@ -27,18 +29,19 @@ Real User Monitoring (RUM) Browser SDK は、ユーザージャーニー中に�
 
 [独自のカスタムアクションを送信](#custom-actions)し、ユーザーアクションの収集を拡張できます。
 
-**注**: 初期化パラメーター `trackInteractions` は、アプリケーション内のユーザークリックの収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。Datadog へ送信される情報を制御するには、[アクション名を手動で設定](#declaring-a-name-for-click-actions)するか、[Browser SDK のグローバルスクラビングルールをインスツルメント][1]します。
+初期化パラメーター `trackInteractions` は、アプリケーション内のユーザークリックの収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。Datadog へ送信される情報を制御するには、[アクション名を手動で設定](#declaring-a-name-for-click-actions)するか、[Browser SDK のグローバルスクラビングルールをインスツルメント][1]します。
 
 ## どのようなインタラクションが追跡されますか？
 
-Browser SDK は自動的にクリックを追跡します。以下の **すべて** の条件が満たされると、クリックアクションが作成されます。
-* クリックが処理された 100ms 以内にアクティビティを検出（アクティビティはネットワークリクエストまたは DOM ミューテーションの開始時として定義）。
-* クリックによって新規ページの読み込みは開始しない。この場合、Browser SDK で新規 RUM ビューイベントが生成されます。
-* アクションに名前を計算することが可能です（[アクションの命名に関する詳細をご参照ください](#declaring-a-name-for-click-actions)）。
+RUM ブラウザ SDK は自動的にクリックを追跡します。以下の **すべて** の条件が満たされると、クリックアクションが作成されます。
+
+* クリックに続くアクティビティが検出されます。詳しくは[ページアクティビティの計算方法][2]をご覧ください。
+* クリックによって新規ページの読み込みは開始しない。この場合、RUM ブラウザ SDK で別の RUM ビューイベントが生成されます。
+* アクションの名前を計算することができます。詳しくは、[クリックアクションの名前を宣言する](#declaring-a-name-for-click-actions)を参照してください。
 
 ## アクションタイミングメトリクス
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][2]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[RUM データとコンテキストの変更][1]をご覧ください。
+すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][3]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[RUM データとコンテキストの変更][1]をご覧ください。
 
 | メトリクス    | タイプ   | 説明              |
 |--------------|--------|--------------------------|
@@ -49,7 +52,7 @@ Browser SDK は自動的にクリックを追跡します。以下の **すべ�
 
 ### アクションのロード時間の計算方法
 
-インタラクションが検出されると、RUM SDK によりネットワークリクエストと DOM ミューテーションが監視されます。ページで 100ms 以上アクティビティがないと、アクションが完了したとみなされます（アクティビティは進行中のネットワークリクエストまたは DOM ミューテーションとして定義）。
+RUM ブラウザ SDK は、クリックするたびにページのアクティビティを監視します。ページにアクティビティがなくなると、アクションは終了したとみなされます。詳しくは、[ページアクティビティの計算方法][2]をご覧ください。
 
 ## アクションの属性
 
@@ -74,7 +77,7 @@ RUM ライブラリは、クリックアクションの命名にさまざまな�
 </div>
 ```
 
-[バージョン 2.16.0][3] 以降、`actionNameAttribute` 初期化パラメーターを使用して、アクションに名前を付けるために使用される独自の属性を指定できます。例:
+[バージョン 2.16.0][4] 以降、`actionNameAttribute` 初期化パラメーターを使用して、アクションに名前を付けるために使用される独自の属性を指定できます。例:
 
 ```html
 <script>
@@ -93,7 +96,7 @@ RUM ライブラリは、クリックアクションの命名にさまざまな�
 
 ## カスタムアクション
 
-カスタムアクションは、`addAction` API を使用して手動で宣言および送信されるユーザーアクションです。ユーザージャー中に発生するイベントに関連する情報の送信に使用されます。以下の例では、訪問者がチェックアウトボタンをクリックしたすると、RUM SDK がユーザーのカートデータを収集します。ここでは、カート内のアイテム数、アイテムリスト、カート内のアイテム総額が収集されます。
+カスタムアクションは、`addAction` API を使用して手動で宣言および送信されるユーザーアクションです。ユーザージャー中に発生するイベントに関連する情報の送信に使用されます。以下の例では、訪問者がチェックアウトボタンをクリックしたすると、RUM ブラウザ SDK がユーザーのカートデータを収集します。ここでは、カート内のアイテム数、アイテムリスト、カート内のアイテム総額が収集されます。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -158,7 +161,7 @@ window.DD_RUM &&
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /ja/real_user_monitoring/browser/modifying_data_and_context/
-[2]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
-[3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
+[2]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[3]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
+[4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

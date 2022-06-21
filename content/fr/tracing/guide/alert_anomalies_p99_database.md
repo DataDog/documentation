@@ -13,7 +13,7 @@ further_reading:
     text: Créer un dashboard pour suivre et corréler les métriques APM
   - link: /tracing/guide/add_span_md_and_graph_it/
     tag: "7\_minutes"
-    text: Ajouter des tags de span et filtrer les données de performance de votre application
+    text: Ajouter des tags de span et filtrer ou regrouper les données de performance de votre application
   - link: /tracing/guide/
     tag: ''
     text: Tous les guides
@@ -39,7 +39,7 @@ Datadog vous permet de configurer des monitors pour surveiller la santé de vos 
 
 4. **Définissez le champ *Alert when* sur 100%**.
 
-    Cela signifie que l'alerte se déclenchera uniquement si tous les événements de la période sélectionnée sont anormaux, ce qui est préférable lorsque vous débutez avec la détection d'anomalie. Plus tard, vous pourrez définir une valeur mieux adaptée à votre situation. Consultez la [FAQ][6] pour en savoir plus sur les monitors de détection d'anomalie.
+    Cela signifie que l'alerte se déclenchera uniquement si tous les événements de la période sélectionnée sont anormaux, ce qui est préférable lorsque vous débutez avec la détection d'anomalies. Plus tard, vous pourrez définir une valeur mieux adaptée à votre situation. Consultez la [FAQ][6] pour en savoir plus sur les monitors de détection d'anomalies.
 
 5. **Changez la notification d'alerte**.
 

@@ -54,9 +54,11 @@ Enable monitor renotification (optional) to remind your team that a problem is n
 
 Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
 
-For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
+For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.  
+**Note:** [Attribute and tag variables][6] in the renotification are populated with the data available to the monitor during the time period of the renotification.
 
-If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
+If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.  
+
 
 The escalation message can be added in the following ways:
 
@@ -69,7 +71,7 @@ If you use the `{{#is_renotify}}` block, the original notification message is al
 1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
 2. Send the escalation message to a subset of groups.
 
-Learn how to configure your monitors for those use cases in the [example section][6].
+Learn how to configure your monitors for those use cases in the [example section][7].
 
 ### Priority
 
@@ -106,7 +108,7 @@ Disk space is low @ops-team@company.com
 
 #### Email
 
-* Notify a Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. **Note**: An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
+* Notify an active Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. **Note**: An email address associated with a pending Datadog user invitation or a disabled user is considered inactive and does not receive notifications.
 * Notify any non-Datadog user by email with `@<EMAIL>`.
 
 #### Integrations
@@ -115,34 +117,44 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 
 | Integration    | Prefix       | Examples       |
 |----------------|--------------|----------------|
-| [Jira][7]      | `@jira`      | [Examples][8]  |
-| [PagerDuty][9] | `@pagerduty` | [Examples][10]  |
-| [Slack][11]     | `@slack`     | [Examples][12]  |
-| [Webhooks][13]  | `@webhook`   | [Examples][14] |
+| [Jira][8]      | `@jira`      | [Examples][9]  |
+| [PagerDuty][10] | `@pagerduty` | [Examples][11]  |
+| [Slack][12]     | `@slack`     | [Examples][13]  |
+| [Webhooks][14]  | `@webhook`   | [Examples][15] |
 
-See the [list of integrations][15] that can be used to notify your team.
+See the [list of integrations][16] that can be used to notify your team.
 
 **Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
 
 ### Modifications
 
-An [event][16] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
+An [event][17] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
 
-### Edit restrictions
+### Permissions
 
-If changes are restricted, only the monitor's creator or an administrator can change the monitor. Changes include any updates to the monitor definition and muting for any amount of time.
+All users can read all monitors, regardless of the role they are associated with.
+
+By default, only users attached to roles with the [Monitors Write permission][18] can edit monitors. [Datadog Admin Role and Datadog Standard Role][19] have the Monitors Write permission by default. If your organization uses [Custom Roles][20], other custom roles may have the Monitors Write permission.
+
+You can further restrict your monitor by specifying a list of [roles][21] allowed to edit it. The monitor's creator can always edit the monitor. 
+
+  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
+
+Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
 
 **Note**: The limitations are applied both in the UI and API.
 
+For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][22].
+
 ## Test notifications
 
-Test notifications are supported for the [monitor types][17]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][23]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][18] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][24] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -172,16 +184,22 @@ Message variables auto-populate with a randomly selected group based on the scop
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
-[6]: /monitors/notify/variables/?tab=is_renotify#examples
-[7]: /integrations/jira/
-[8]: /integrations/jira/#use-cases
-[9]: /integrations/pagerduty/
-[10]: /integrations/pagerduty/#troubleshooting
-[11]: /integrations/slack/
-[12]: /integrations/slack/#mentions-in-slack-from-monitor-alert
-[13]: /integrations/webhooks/
-[14]: /integrations/webhooks/#usage
-[15]: /integrations/#cat-notification
-[16]: /events/
-[17]: /monitors/create/types/
-[18]: /monitors/faq/what-are-recovery-thresholds/
+[6]: /monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
+[7]: /monitors/notify/variables/?tab=is_renotify#examples
+[8]: /integrations/jira/
+[9]: /integrations/jira/#use-cases
+[10]: /integrations/pagerduty/
+[11]: /integrations/pagerduty/#troubleshooting
+[12]: /integrations/slack/
+[13]: /integrations/slack/#mentions-in-slack-from-monitor-alert
+[14]: /integrations/webhooks/
+[15]: /integrations/webhooks/#usage
+[16]: /integrations/#cat-notification
+[17]: /events/
+[18]: /account_management/rbac/permissions/#monitors
+[19]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[20]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[21]: /account_management/rbac/?tab=datadogapplication
+[22]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[23]: /monitors/create/
+[24]: /monitors/faq/what-are-recovery-thresholds/

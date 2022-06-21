@@ -14,7 +14,7 @@ Datadog Agent v5 は既に Agent v6 に置き換えられていますが、こ�
 
 セットアップの支援、開発の円滑化、テストの提供を行う [gem][7] およびスクリプトセットがあります。以下の手順でインストールします。
 
-1. Github の [integrations-extras リポジトリ][8]をフォークして、自身の開発環境に複製します。
+1. GitHub の [integrations-extras リポジトリ][8]をフォークして、自身の開発環境に複製します。
 2. `gem install bundler` を実行します。
 3. `bundle install` を実行します。
 

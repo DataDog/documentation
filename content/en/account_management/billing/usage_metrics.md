@@ -24,8 +24,9 @@ Estimated usage metrics are generally available for the following usage types:
 |-------------------------------|------------------------------------------|
 | Infrastructure Hosts          | `datadog.estimated_usage.hosts`          |
 | Containers                    | `datadog.estimated_usage.containers`     |
-| Custom Metrics                | `datadog.estimated_usage.metrics.custom` |
-| Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes`          |
+| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` |
+| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` |
+| Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes`    |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events`   |
 | Analyzed Logs (security)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes`   |
 | APM Hosts                     | `datadog.estimated_usage.apm_hosts` (does not include Azure App Services hosts)      |
@@ -33,10 +34,19 @@ Estimated usage metrics are generally available for the following usage types:
 | APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` |
 | APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` |
 | Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions` |
+| Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`|
 | API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` |
 | Browser test runs             | `datadog.estimated_usage.synthetics.browser_test_runs`|
+| Network Hosts                 | `datadog.estimated_usage.network.hosts` |
+| Network Devices               | `datadog.estimated_usage.network.devices` |
 | Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` |
 | Profiled Containers           | `datadog.estimated_usage.profiling.containers` |
+| CSPM Hosts                    | `datadog.estimated_usage.cspm.hosts` |
+| CSPM Containers               | `datadog.estimated_usage.cspm.containers` |
+| CWS Hosts                     | `datadog.estimated_usage.cws.hosts` |
+| CWS Containers                | `datadog.estimated_usage.cws.containers` | 
+| Database Hosts                | `datadog.estimated_usage.dbm.hosts` |
+
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 

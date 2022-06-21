@@ -2,14 +2,13 @@
 title: Error Tracking
 kind: documentation
 further_reading:
-- link: /tracing/error_tracking/explorer
-  tag: ドキュメント
-  text: Error Tracking Explorer
-- link: "https://app.datadoghq.com/apm/error-tracking"
-  tag: UI
-  text: エラー追跡
+  - link: /tracing/error_tracking/explorer
+    tag: ドキュメント
+    text: Error Tracking Explorer
+  - link: https://app.datadoghq.com/apm/error-tracking
+    tag: UI
+    text: エラー追跡
 ---
-
 {{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="エラー追跡ページ"  >}}
 
 
@@ -21,7 +20,7 @@ Datadog によって収集されたエラーを監視することは、システ
 
 ## Datadog エラー追跡のしくみ
 
-Datadog トレーサーは、ソースコードのインテグレーションと手動インスツルメンテーションを通じてエラーを収集します。トレース内のエラースパンは、_サービスエントリスパン_とも呼ばれる__最上位のサービススパンにある場合__、エラートラッキングによって処理されます。
+Datadog トレーサーは、ソースコードのインテグレーションと手動インスツルメンテーションを通じてエラーを収集します。トレース内のエラースパンは、_サービスエントリスパン_とも呼ばれる__最上位のサービススパンにある場合__、エラートラッキングによって処理されます。スパンは、追跡するために `error.stack`、`error.msg`、`error.type` [スパンタグ][1]も含んでいる必要があります。
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="エラーのあるフレームグラフ"  >}}
 
@@ -32,3 +31,5 @@ Datadog トレーサーは、ソースコードのインテグレーションと
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/ja/tracing/visualization/trace/?tab=spantags#more-information

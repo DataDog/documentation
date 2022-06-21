@@ -26,13 +26,13 @@ With these three tags you can:
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
-**Note**: The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][6]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+**Note**: The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
 
 ### Requirements
 
-- Unified service tagging requires setup of a [Datadog Agent][2] that is 6.19.x/7.19.x or higher.
+- Unified service tagging requires setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
 
-- Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][3].
+- Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][4].
 
 
 | Language         | Minimum Tracer Version |
@@ -46,7 +46,7 @@ With these three tags you can:
 | Python  |  0.38.0+      |
 | Ruby  |  0.34.0+      |
 
-- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][1] and [Assigning Tags][4] documentation before proceeding to configuration.
+- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][1] and [Assigning Tags][5] documentation before proceeding to configuration.
 
 ## Configuration
 
@@ -61,9 +61,9 @@ In containerized environments, `env`, `service`, and `version` are set through t
 
 To setup unified service tagging in a containerized environment:
 
-1. Enable [Autodiscovery][5]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
+1. Enable [Autodiscovery][6]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
 
-2. If you are using [Docker][6], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
+2. If you are using [Docker][2], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
 
 4. Configure your environment based on either full configuration or partial configuration detailed below.
 
@@ -186,7 +186,6 @@ containers:
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [4]: /tracing/send_traces/
 [5]: /integrations/statsd/
-[6]: /agent/docker/log/?tab=containerinstallation#examples
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -239,7 +238,7 @@ As explained in the full configuration, these labels can be set in a Dockerfile 
 {{% tab "ECS" %}}
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in your container's runtime environment to your get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
 
 ```
 "environment": [
@@ -356,7 +355,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 env: <ENV>
 ```
 
-To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, you can configure a [process check][2]:
+To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
 
 ```yaml
 init_config:
@@ -382,136 +381,25 @@ instances:
 
 #### AWS Lambda functions
 
-Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to metrics, traces and logs.
-
-*Note*: These tags are specified through AWS resource tags instead of environment variables.
-
-{{< tabs >}}
-
-{{% tab "Serverless Framework" %}}
-
-Tag your Lambda functions using the [tags][1] option:
-
-```yaml
-# serverless.yml
-service: service-name
-provider:
-  name: aws
-  # to apply the tags to all functions
-  tags:
-    env: "<ENV>"
-    service: "<SERVICE>"
-    version: "<VERSION>"
-
-functions:
-  hello:
-    # this function will inherit the service level tags config above
-    handler: handler.hello
-  world:
-    # this function will overwrite the tags
-    handler: handler.users
-    tags:
-      env: "<ENV>"
-      service: "<SERVICE>"
-      version: "<VERSION>"
-```
-
-If you have installed the [Datadog serverless plugin][2], the plugin automatically tags the Lambda functions with the `service` and `env` tags using the `service` and `stage` values from the serverless application definition, unless a `service` or `env` tag already exists.
-
-[1]: https://www.serverless.com/framework/docs/providers/aws/guide/functions#tags
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-{{% /tab %}}
-
-{{% tab "AWS SAM" %}}
-
-Tag your Lambda functions using the [Tags][1] option:
-
-```yaml
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Resources:
-  MyLambdaFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Tags:
-        env: "<ENV>"
-        service: "<SERVICE>"
-        version: "<VERSION>"
-```
-
-If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
-
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      service: "<SERVICE>"
-      env: "<ENV>"
-```
-
-
-[1]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-tags
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "AWS CDK" %}}
-
-Tag your app, stack, or individual Lambda functions using the [Tags class][1]. If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
-
-```javascript
-import * as cdk from "@aws-cdk/core";
-
-class CdkStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
-    this.addTransform("DatadogServerless");
-
-    new cdk.CfnMapping(this, "Datadog", {
-      mapping: {
-        Parameters: {
-          service: "<SERVICE>",
-          env: "<ENV>",
-        },
-      },
-    });
-  }
-}
-```
-
-
-[1]: https://docs.aws.amazon.com/cdk/latest/guide/tagging.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "Custom" %}}
-
-Apply the `env`, `service` and `version` tags following the AWS instructions for [Tagging Lambda Functions][1].
-
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
-{{% /tab %}}
-
-{{< /tabs >}}
-
-Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation stack for your [Datadog Forwarder][13]. This option defaults to `true` since version `3.19.0`.
-
+See [how to connect your Lambda telemetry using tags][13].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /getting_started/tagging/
-[2]: /getting_started/agent
-[3]: /tracing/setup
-[4]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
-[5]: /getting_started/agent/autodiscovery
-[6]: /agent/docker/integrations/?tab=docker
+[2]: /agent/docker/integrations/?tab=docker
+[3]: /getting_started/agent
+[4]: /tracing/setup
+[5]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
+[6]: /getting_started/agent/autodiscovery
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/
 [10]: /integrations/statsd/
 [11]: https://www.chef.io/
 [12]: https://www.ansible.com/
-[13]: /serverless/forwarder/
+[13]: /serverless/configuration/#connect-telemetry-using-tags
 [14]: /agent/cluster_agent/admission_controller/
+
+

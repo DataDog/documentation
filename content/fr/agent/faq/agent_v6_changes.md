@@ -41,7 +41,7 @@ Pour appliquer le nouveau format et les nouveaux chemins de configuration de l'A
 sudo -u dd-agent -- datadog-agent import
 ```
 
-Cette commande analyse le fichier `datadog.conf` existant et convertit les paramètres pris en charge au nouveau format dans `datadog.yaml`. Elle copie également les fichiers de configuration des checks actuellement activés. Pour en savoir plus, consultez [Upgrade l'Agent v6 de Datadog][2].
+Cette commande parse le fichier `datadog.conf` existant et convertit les paramètres pris en charge au nouveau format dans `datadog.yaml`. Elle copie également les fichiers de configuration des checks activés. Pour en savoir plus, consultez [Upgrade vers l'Agent v6 de Datadog][2].
 
 #### Options
 
@@ -51,10 +51,10 @@ Les options de configuration de l'Agent suivantes ont été modifiées ou suppri
 
 | Nom précédent               | Nouveau nom                 | Remarques                                                                                             |
 |-----------------------------|------------------------------|---------------------------------------------------------------------------------------------------|
-| `proxy_host`                | `proxy`                      | Les paramètres de proxy sont désormais spécifiés en tant que liste d'URI. Consultez la documentation dédiée au [proxy][3] pour en savoir plus. |
+| `proxy_host`                | `proxy`                      | Les paramètres de proxy sont spécifiés en tant que liste d'URI. Consultez la documentation dédiée au [proxy][3] pour en savoir plus. |
 | `collect_instance_metadata` | `enable_metadata_collection` | Active la connecte de métadonnées.                                                                      |
 | `collector_log_file`        | `log_file`                   |                                                                                                   |
-| `syslog_host`               | `syslog_uri`                 | La configuration de Syslog est désormais exprimée sous forme d'URI.                                               |
+| `syslog_host`               | `syslog_uri`                 | La configuration de Syslog est exprimée sous forme d'URI.                                               |
 |                             | `syslog_pem`                 | Certificat client Syslog configuré pour la validation du client TLS.                                |
 |                             | `syslog_key`                 | Clé privée client Syslog configurée pour la validation du client TLS.                                |
 
@@ -164,7 +164,7 @@ Dans l'Agent v6, l'ordre de priorité des options de proxy est différent par r
 {{% /tab %}}
 {{% tab "Hostname" %}}
 
-Des différences existent au niveau de la résolution du hostname entre l'Agent v5 et l'Agent v6. Pour en savoir plus, consultez la [documentation dédiée][1].
+Des différences existent au niveau de la résolution du hostname entre l'Agent v5 et l'Agent v6. Pour en savoir plus, consultez la section [Comment Datadog détermine-t-il le hostname de l'Agent][1].
 
 [1]: /fr/agent/faq/how-datadog-agent-determines-the-hostname/#agent-versions
 {{% /tab %}}
@@ -224,7 +224,7 @@ Si la commande du wrapper `service` n'est pas disponible sur votre système, uti
 * Sur les systèmes basés sur `upstart` : `sudo start/stop/restart/status datadog-agent`
 * Sur les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart/status datadog-agent`
 
-Si vous ne savez pas quel système init votre distribution utilise par défaut, référez-vous au tableau ci-dessous :
+Si vous ne savez pas quel système init votre distribution utilise par défaut, consultez le tableau ci-dessous :
 
 | distribution \ système init      | upstart                   | systemd                   | sysvinit                                  | Remarques                         |
 |---------------------------------|---------------------------|---------------------------|-------------------------------------------|-------------------------------|
@@ -232,7 +232,7 @@ Si vous ne savez pas quel système init votre distribution utilise par défaut, 
 | Amazon Linux 2 (>= 2017.12)     |                           | <i class="icon-check-bold"></i> |                                           |                               |
 | CentOS/RHEL 6                   | <i class="icon-check-bold"></i> |                           |                                           |                               |
 | CentOS/RHEL 7                   |                           | <i class="icon-check-bold"></i> |                                           |                               |
-| Debian 7 (wheezy)               |                           |                           | <i class="icon-check-bold"></i> (Agent v6.6.0+) |                               |
+| Debian 7 (wheezy)               |                           |                           | <i class="icon-check-bold"></i> (Agent v6.6.0+) |                               |
 | Debian 8 (jessie) et 9 (stretch) |                           | <i class="icon-check-bold"></i> |                                           |                               |
 | SUSE 11                         |                           |                           |                                           | Non pris en charge sans `systemd` |
 | SUSE 12                         |                           | <i class="icon-check-bold"></i> |                                           |                               |
@@ -258,8 +258,8 @@ Sous Windows, les changements majeurs dans l'Agent v6 sont les suivants :
 * L'interface graphique de Datadog Agent Manager pour Windows utilisée par l'Agent v5 a été remplacée par une interface de gestion cross-platform qui s'utilise depuis un navigateur. Pour en savoir plus, consultez la section [Datadog Agent Manager pour Windows][1].
 * Le nom du fichier exécutable principal est `agent.exe` (contre `ddagent.exe` précédemment).
 * Les commandes doivent être exécutées en utilisant la syntaxe `"%PROGRAMFILES%\datadog\datadog agent\embedded\agent.exe" <COMMANDE>` depuis une invite de commande avec droits **Administrateur** :
-* Le type de démarrage du service Windows est désormais défini sur « Automatique (début différé) ». Le service est démarré au lancement de Windows, mais après tous les autres services. Cela signifie que l'envoi des métriques est légèrement retardé après un redémarrage.
-* L'interface Windows et l'icône de la barre d'état système sont désormais implémentées séparément. Pour en savoir plus, consultez la section [Datadog Agent Manager pour Windows][1].
+* Le type de démarrage du service Windows est défini sur « Automatique (début différé) ». Le service est démarré au lancement de Windows, mais après tous les autres services. Cela signifie que l'envoi des métriques est légèrement retardé après un redémarrage.
+* L'interface graphique Windows et l'icône de la barre des menus sont implémentées séparément. Pour en savoir plus, consultez la section [Datadog Agent Manager pour Windows][1].
 
 [1]: /fr/agent/guide/datadog-agent-manager-windows/
 {{% /tab %}}
@@ -270,7 +270,7 @@ Sous macOS, les changements majeurs dans l'Agent v6 sont les suivants :
 * Les commandes de _cycle de vie_ (auparavant `datadog-agent start`/`stop`/`restart`/`status`) sont remplacées par les commandes `launchctl` sur le service `com.datadoghq.agent` et doivent être exécutées depuis le compte utilisateur connecté. Vous pouvez également exécuter ces commandes depuis la barre des menus de l'Agent Datadog.
 * Toutes les autres commandes peuvent toujours être exécutées avec le binaire `datadog-agent` situé dans le `PATH` (`/usr/local/bin/`) par défaut.
 * La commande `info` a été renommée `status`.
-* L'interface de configuration graphique est désormais une application basée sur un navigateur. Pour y accéder, exécutez la commande `datadog-agent launch-gui` ou utilisez la barre des menus.
+* L'interface de configuration graphique est une application basée sur un navigateur. Pour y accéder, exécutez la commande `datadog-agent launch-gui` ou utilisez la barre des menus.
 
 **Exemples de changements** :
 
@@ -329,7 +329,7 @@ La valeur `enabled` est une chaîne avec les options suivantes :
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-L'Agent v6 prend en charge les versions 1.12 et supérieures de Docker.
+L'Agent v6 prend en charge les versions 1.12 et ultérieures de Docker.
 
 Le check Docker a été réécrit en Go pour tirer parti de l'architecture interne de l'Agent. La version Python (`docker_daemon`) est donc désormais obsolète.
 
@@ -352,7 +352,7 @@ Certaines options ont été déplacées du fichier `docker_daemon.yaml` vers le 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-L'Agent v6 prend en charge les versions 1.3 et supérieures de Kubernetes.
+L'Agent v6 prend en charge les versions 1.3 et ultérieures de Kubernetes.
 
 L'intégration Kubernetes fournit des informations pertinentes en combinant :
 
@@ -371,7 +371,7 @@ Le check [kubernetes_state][4] fonctionne avec l'Agent v5 ou l'Agent v6.
 
 #### Tagging
 
-Si l'Agent v5 recueillait automatiquement toutes les étiquettes de pod en tant que tags, l'Agent v6 utilise une liste blanche. Pour modifier cette liste, utilisez l'option `kubernetes_pod_labels_as_tags` dans `datadog.yaml`. Consultez [Appliquer et extraire des tags][5] pour en savoir plus.
+Si l'Agent v5 recueillait automatiquement toutes les étiquettes de pod en tant que tags, l'Agent v6 utilise une liste d'autorisation. Pour modifier cette liste, utilisez l'option `kubernetes_pod_labels_as_tags` dans `datadog.yaml`. Consultez la documentation relative à [l'application et à l'extraction des tags][5] pour en savoir plus.
 
 Les options et tags suivants sont désormais obsolètes :
 
@@ -391,11 +391,11 @@ L'Agent v6 intègre JMXFetch. Les changements sont les suivants :
 
 #### Jmxterm
 
-L'Agent v6 n'intègre pas le JAR `jmxterm`. Pour télécharger et utiliser `jmxterm`, référez-vous au [projet upstream][1].
+L'Agent v6 n'intègre pas le JAR `jmxterm`. Pour télécharger et utiliser `jmxterm`, consultez le [projet upstream][1].
 
 #### Commandes de dépannage
 
-La syntaxe des commandes de dépannage a été modifiée. Ces commandes sont valables pour les versions v6.2.0+ ; pour les versions plus anciennes, consultez la section [Dépannage de JMX][2] :
+La syntaxe des commandes de dépannage a été modifiée. Ces commandes sont valables pour les versions v6.2.0+ ; pour les versions plus anciennes, consultez la documentation relative au [dépannage de l'Agent JMX][2] :
 
 | Commande                                                | Description                                                                                                                                                     |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -418,7 +418,7 @@ _Affecte uniquement les Agents Windows_
 
 Avec l'Agent v5 sous Windows, les métriques `system.mem.pagefile.*` affichent des unités incohérentes (erronées de 10^6).
 
-Ce problème est résolu dans l'Agent v6 pour Windows, mais l'erreur reste présente dans l'Agent v5 pour des raisons de rétrocompatibilité. Par conséquent, les valeurs envoyées (et les moniteurs associés) seront différents après un passage à l'Agent v6.
+Ce problème est résolu par la v6 de l'Agent pour Windows, mais l'erreur reste présente dans la v5 de l'Agent, pour des raisons de rétrocompatibilité. Par conséquent, les valeurs envoyées (et les moniteurs associés) sont amenées à changer après une mise à niveau vers la v6.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -432,7 +432,7 @@ Le système [Autodiscovery][7] a été repensé dans l'Agent v6. De plus, les r
 
 Lorsque vous utilisez Kubernetes, Autodiscovery extrait les informations du kubelet au lieu du daemon Docker. Autodiscovery peut ainsi fonctionner sans accéder au socket Docker. De plus, par défaut, les modèles Autodiscovery sont récupérés à partir des annotations des pods. Vous pouvez activer le config-provider `docker` pour utiliser les étiquettes de conteneurs, et remplacer l'écouteur `kubelet` par l'écouteur Docker si vous avez besoin d'utiliser Autodiscovery sur des conteneurs à court de pods.
 
-Lorsque vous spécifiez des [modèles Autodiscovery][1] dans des annotations des pods, le préfixe du nom de l'annotation est `ad.datadoghq.com/`. Le préfixe d'annotation précédent (`service-discovery.datadoghq.com/`) est toujours pris en charge dans l'Agent v6, mais cette compatibilité sera supprimée dans une version future.
+Lorsque vous spécifiez des [modèles Autodiscovery][1] dans des annotations de pod, le préfixe du nom de l'annotation est `ad.datadoghq.com/`. Le préfixe d'annotation précédent (`service-discovery.datadoghq.com/`) est toujours pris en charge par l'Agent v6, mais cette compatibilité sera supprimée dans une future version.
 
 [1]: /fr/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -440,7 +440,7 @@ Lorsque vous spécifiez des [modèles Autodiscovery][1] dans des annotations des
 
 Les [modèles Autodiscovery][1] dans les étiquettes Docker fonctionnent avec le même préfixe de nom, `com.datadoghq.ad.*`.
 
-L'étiquette utilisée pour remplacer l'identificateur est désormais nommée `com.datadoghq.ad.check.id` au lieu de `com.datadoghq.sd.check.id` pour plus de cohérence. L'ancien nom est toujours pris en charge dans l'Agent v6, mais cette compatibilité sera supprimée dans une version future.
+L'étiquette utilisée pour remplacer l'identificateur s'intitule `com.datadoghq.ad.check.id`, au lieu de `com.datadoghq.sd.check.id`, pour plus de cohérence. L'ancien nom est toujours pris en charge par l'Agent v6, mais cette compatibilité sera supprimée dans une future version.
 
 [1]: /fr/agent/docker/integrations/
 {{% /tab %}}
@@ -455,7 +455,7 @@ Avec l'Agent v6, l'ensemble du code Python lié aux checks est importé depuis 
 
 **Remarque** : toutes les intégrations officielles ont été mises à jour pour supprimer les modules obsolètes. Ces changements n'affectent que les checks custom.
 
-Une grande partie du répertoire `utils` a été supprimée dans l'Agent v6, mais la majorité du contenu supprimé n'était pas directement lié aux checks. Le module flare, par exemple, a été supprimé et réimplémenté en Go, mais il est peu probable qu'il ait déjà été utilisé dans un check custom. Pour en savoir plus, consultez [documentation dédiée au développement de checks][9].
+Une grande partie du répertoire `utils` a été supprimée de l'Agent v6, mais la majorité du contenu supprimé n'était pas directement lié aux checks. Le module flare, par exemple, a été supprimé et réimplémenté en Go, mais il est peu probable qu'il ait déjà été utilisé dans un check custom. Pour en savoir plus, consultez la [documentation dédiée à la création de checks custom][9].
 
 {{< tabs >}}
 {{% tab "Intégrations" %}}
@@ -469,7 +469,7 @@ Bien que l'Agent v6 prenne entièrement en charge les checks Python, certaines 
 {{% /tab %}}
 {{% tab "API des checks" %}}
 
-La classe principale pour les checks Python (`AgentCheck`) est désormais importée depuis `datadog_checks.base.checks`. Plusieurs fonctions ont été supprimées ou modifiées dans l'API de la classe. De plus, chaque instance de check est désormais sa propre instance de la classe. Il n'est plus possible de partager un statut entre plusieurs instances.
+La classe principale pour les checks Python (`AgentCheck`) est importée depuis `datadog_checks.base.checks`. Plusieurs fonctions ont été supprimées ou modifiées dans l'API de la classe. De plus, chaque instance de check est désormais sa propre instance de classe. Il n'est donc plus possible de partager un statut entre plusieurs instances.
 
 Les méthodes suivantes de la classe `AgentCheck` ne sont pas implémentées :
 
@@ -568,4 +568,4 @@ De la même manière, vous avez peut-être ajouté un package PIP pour répondre
 [6]: /fr/agent/guide/agent-commands/
 [7]: /fr/getting_started/agent/autodiscovery/
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
-[9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks
+[9]: https://github.com/DataDog/datadog-agent/tree/main/docs/dev/checks

@@ -15,7 +15,7 @@ further_reading:
   text: "Agent commands"
 ---
 
-The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one backup (`agent.log.1`) is kept. If a previous backup exists, it is overwritten during the rollover.
+The Datadog Agent does a logs rollover every 10MB by default. When a rollover occurs, one backup (`agent.log.1`) is kept. If a previous backup exists, it is overwritten during the rollover. To set the maximum size of one log file and the maximum number of backup files to keep, use `log_file_max_size`(default: 10485760 bytes) and `log_file_max_rolls`(default: 1) in the [Agent main configuration file][1].
 
 ## Agent log directory
 
@@ -53,6 +53,7 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 * `agent.log`
 * `process-agent.log`
 * `trace-agent.log`
+* `system-probe.log`
 * `jmxfetch.log` for Agent >= 7.24.0/6.24.0
 
 {{% /tab %}}
@@ -70,10 +71,12 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 
 | Platform                             | Location and file name        |
 |--------------------------------------|-------------------------------|
-| Linux                                | `$pwd/ddagent-install.log`    |
+| Linux                                | `$(pwd)/ddagent-install.log`    |
 | macOS                                | `/tmp/dd_agent.log`           |
 | Windows                              | `%TEMP%\MSI*.LOG`             |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

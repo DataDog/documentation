@@ -94,32 +94,44 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ### Install the extension
 
-Install the PHP extension using one of the [precompiled packages for supported distributions][5].
-
-Once downloaded, install the package with one of the commands below.
+Download the official installer:
 
 ```shell
-# using RPM package (RHEL/Centos 6+, Fedora 20+)
-rpm -ivh datadog-php-tracer.rpm
-
-# using DEB package (Debian Jessie+ , Ubuntu 14.04+ on supported PHP versions)
-dpkg -i datadog-php-tracer.deb
-
-# using APK package (Alpine)
-apk add datadog-php-tracer.apk --allow-untrusted
+curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
 ```
 
-The extension will be installed for the default PHP version. To install the extension for a specific PHP version, use the `DD_TRACE_PHP_BIN` environment variable to set the location of the target PHP binary before installing.
+Run the installer:
 
 ```shell
-export DD_TRACE_PHP_BIN=$(which php-fpm7)
+# Full installation: APM + ASM + Profiling (Beta)
+php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
+
+# APM only
+php datadog-setup.php --php-bin=all
+
+# APM + ASM
+php datadog-setup.php --php-bin=all --enable-appsec
+
+# APM + Profiling (Beta)
+php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
-Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][6] to see the traces.
+This command installs the extension to all the PHP binaries found in the host or container. If `--php-bin` is omitted, the installer runs in interactive mode and asks the user to select the binaries for installation. The value of `--php-bin` can be a path to a specific binary in case `dd-trace-php` should be installed only to such binary.
 
-**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [create a `phpinfo()` page][7] from the host machine and scroll down to the "ddtrace" section. Failed diagnostic checks will appear here to help identify any issues.
+Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. For traces, see the [APM Service List][5].
 
-If you can't find your distribution, you can [manually install][8] the PHP extension.
+<div class="alert alert-info">
+<strong>Note:</strong>
+It may take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
+</div>
+
+<div class="alert alert-warning">
+<strong>Apache ZTS:</strong>
+If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, you need to manually change the extension load for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where Datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example, from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
+</div>
+
+
+If you are unable to use the PHP installer, see the [additional installation options][6].
 
 ## Automatic instrumentation
 
@@ -134,13 +146,13 @@ Automatic instrumentation captures:
 * Unhandled exceptions, including stacktraces if available
 * A total count of traces (for example, web requests) flowing through the system
 
-**Note**: If your application does not use Composer nor an autoloader registered with `spl_autoload_register()`, set the environment variable, `DD_TRACE_NO_AUTOLOADER=true`, to enable automatic instrumentation.
-
 ## Configuration
 
-The PHP tracer can be configured using environment variables.
+The PHP tracer can be configured using environment variables and INI settings.
 
-**Note**: If you use code auto-instrumentation (the recommended approach) be aware that the instrumenting code is executed before any user code. As a result, the environment variables below must be set at the server level and be available to the PHP runtime before any user code is executed. For example, `putenv()` and `.env` files would not work.
+INI settings can be configured globally, for example in the `php.ini` file, or for a specific web server or virtual host.
+
+**Note**: If you use code auto-instrumentation (the recommended approach), be aware that the instrumenting code is executed before any user code. As a result, the environment variables and the INI settings below must be set at the server level and be available to the PHP runtime before any user code is executed. For example, `putenv()` and `.env` files do not work.
 
 ### Apache
 
@@ -153,15 +165,24 @@ env[DD_AGENT_HOST] = $SOME_ENV
 ; Example of passing the value 'my-app' to the PHP
 ; process as DD_SERVICE
 env[DD_SERVICE] = my-app
+; Or using the equivalent INI setting
+php_value datadog.service my-app
 ```
 
-Alternatively, you can use [`SetEnv`][9] from the server config, virtual host, directory, or `.htaccess` file.
+Alternatively, you can use [`SetEnv`][7] from the server config, virtual host, directory, or `.htaccess` file.
 
 ```text
-SetEnv DD_TRACE_DEBUG true
+# In a virtual host configuration as an environment variable
+SetEnv DD_TRACE_DEBUG 1
+# In a virtual host configuration as an INI setting
+php_value datadog.service my-app
 ```
 
-### NGINX
+### NGINX and PHP-FPM
+
+<div class="alert alert-warning">
+<strong>Note:</strong> PHP-FPM does not support the value <code>false</code> in <code>env[...]</code> directives. Use <code>1</code> in place of <code>true</code> and <code>0</code> in place of <code>false</code>.
+</div>
 
 For NGINX, use the `env` directive in the php-fpm's `www.conf` file, for example:
 
@@ -172,152 +193,203 @@ env[DD_AGENT_HOST] = $SOME_ENV
 ; Example of passing the value 'my-app' to the PHP
 ; process as DD_SERVICE
 env[DD_SERVICE] = my-app
+; Or using the equivalent INI setting
+php_value[datadog.service] = my-app
 ```
 
-**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][10] for more details.
+**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][8] for more details.
 
 ### PHP CLI server
 
 Set in the command line to start the server.
 
 ```text
-DD_TRACE_DEBUG=true php -S localhost:8888
+DD_TRACE_DEBUG=1 php -d datadog.service=my-app -S localhost:8888
 ```
 
 ### Environment variable configuration
 
+The following table lists the environment variables for configuring tracing, along with corresponding INI settings (where available) and defaults.
+
 `DD_AGENT_HOST`
-: **Default**: `localhost` <br>
-The Agent host name
+: **INI**: `datadog.agent_host`<br>
+**Default**: `localhost` <br>
+The Agent host name.
 
 `DD_AUTOFINISH_SPANS`
-: **Default**: `false`<br>
-Whether spans are automatically finished when the tracer is flushed
+: **INI**: `datadog.autofinish_spans`<br>
+**Default**: `0`<br>
+Whether spans are automatically finished when the tracer is flushed.
 
 `DD_DISTRIBUTED_TRACING`
-: **Default**: `true`<br>
-Whether to enable distributed tracing
+: **INI**: `datadog.distributed_tracing`<br>
+**Default**: `1`<br>
+Whether to enable distributed tracing.
 
 `DD_ENV`
-: **Default**: `null`<br>
+: **INI**: `datadog.env`<br>
+**Default**: `null`<br>
 Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
+`DD_PROFILING_ENABLED`
+: **INI**: Not available<br>
+**Default**: `0`<br>
+Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][9].
+
+`DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
+: **INI**: Not available<br>
+**Default**: `0`<br>
+Enable the experimental CPU profile type. Added in version `0.69.0`.
+
+`DD_PROFILING_LOG_LEVEL`
+: **INI**: Not available<br>
+**Default**: `off`<br>
+Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, and `debug`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
+
 `DD_PRIORITY_SAMPLING`
-: **Default**: `true`<br>
-Whether to enable priority sampling
+: **INI**: `datadog.priority_sampling`<br>
+**Default**: `1`<br>
+Whether to enable priority sampling.
 
 `DD_SERVICE`
-: **Default**: `null`<br>
+: **INI**: `datadog.service`<br>
+**Default**: `null`<br>
 The default app name. For versions <0.47.0 this is `DD_SERVICE_NAME`.
 
 `DD_SERVICE_MAPPING`
-: **Default**: `null`<br>
+: **INI**: `datadog.service_mapping`<br>
+**Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
 
 `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
-: **Default**: `5000`<br>
-IPC-based configurable circuit breaker retry time (in milliseconds)
+: **INI**: `datadog.trace.agent_attempt_retry_time_msec`<br>
+**Default**: `5000`<br>
+IPC-based configurable circuit breaker retry time (in milliseconds).
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
-: **Default**: `100`<br>
-The Agent connection timeout (in milliseconds)
+: **INI**: `datadog.trace.agent_connect_timeout`<br>
+**Default**: `100`<br>
+The Agent connection timeout (in milliseconds).
 
 `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES`
-: **Default**: `3`<br>
-IPC-based configurable circuit breaker max consecutive failures
+: **INI**: `datadog.trace.agent_max_consecutive_failures`<br>
+**Default**: `3`<br>
+IPC-based configurable circuit breaker max consecutive failures.
 
 `DD_TRACE_AGENT_PORT`
-: **Default**: `8126`<br>
-The Agent port number
+: **INI**: `datadog.trace.agent_port`<br>
+**Default**: `8126`<br>
+The Agent port number.
 
 `DD_TRACE_AGENT_TIMEOUT`
-: **Default**: `500`<br>
-The Agent request transfer timeout (in milliseconds)
+: **INI**: `datadog.trace.agent_timeout`<br>
+**Default**: `500`<br>
+The Agent request transfer timeout (in milliseconds).
 
 `DD_TRACE_AGENT_URL`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.agent_url`<br>
+**Default**: `null`<br>
 The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; for example: `https://localhost:8126`. Added in version `0.47.1`.
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
-: **Default**: `false`<br>
-Automatically flush the tracer when all the spans are closed; set to `true` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes](#long-running-cli-scripts).
+: **INI**: `datadog.trace.auto_flush_enabled`<br>
+**Default**: `0`<br>
+Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TRACE_CLI_ENABLED`
-: **Default**: `false`<br>
+: **INI**: `datadog.trace.cli_enabled`<br>
+**Default**: `0`<br>
 Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-cli-scripts).
 
 `DD_TRACE_DEBUG`
-: **Default**: `false`<br>
-Enable debug mode. When `true`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
+: **INI**: `datadog.trace.debug`<br>
+**Default**: `0`<br>
+Enable debug mode. When `1`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
 
 `DD_TRACE_ENABLED`
-: **Default**: `true`<br>
-Enable the tracer globally
+: **INI**: `datadog.trace.enabled`<br>
+**Default**: `1`<br>
+Enable the tracer globally.
 
 `DD_TRACE_GENERATE_ROOT_SPAN`
-: **Default**: `true`<br>
-Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes](#long-running-cli-scripts).
+: **INI**: `datadog.trace.generate_root_span`<br>
+**Default**: `1`<br>
+Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TAGS`
-: **Default**: `null`<br>
-Tags to be set on all spans, for example: `key1:value1,key2:value2`. Added in version `0.47.0`
+: **INI**: `datadog.tags`<br>
+**Default**: `null`<br>
+Tags to be set on all spans, for example: `key1:value1,key2:value2`. Added in version `0.47.0`.
 
 `DD_TRACE_HEADER_TAGS`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.header_tags`<br>
+**Default**: `null`<br>
 CSV of header names that are reported on the root span as tags.
 
 `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
-: **Default**: `false`<br>
+: **INI**: `datadog.trace.http_client_split_by_domain`<br>
+**Default**: `0`<br>
 Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`.
 
 `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
-: **Default**: `false`<br>
-Set the service name of Redis clients operations to `redis-<hostname>`. Added in version `0.51.0`
+: **INI**: `datadog.trace.redis_client_split_by_host`<br>
+**Default**: `0`<br>
+Set the service name of Redis clients operations to `redis-<hostname>`. Added in version `0.51.0`.
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
-: **Default**: `true`<br>
+: **INI**: `datadog.trace.<INTEGRATION>_enabled`<br>
+**Default**: `1`<br>
 Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)). For versions < `0.47.1`, this parameter is `DD_INTEGRATIONS_DISABLED` which takes a CSV list of integrations to disable, for example: `curl,mysqli`.
 
 `DD_TRACE_MEASURE_COMPILE_TIME`
-: **Default**: `true`<br>
-Record the compile time of the request (in milliseconds) onto the top-level span
-
-`DD_TRACE_NO_AUTOLOADER`
-: **Default**: `false`<br>
-Set to `true` to enable auto instrumentation for applications that do not use an autoloader
+: **INI**: `datadog.trace.measure_compile_time`<br>
+**Default**: `1`<br>
+Record the compile time of the request (in milliseconds) onto the top-level span.
 
 `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.resource_uri_fragment_regex`<br>
+**Default**: `null`<br>
 CSV of regexes that identifies path fragments corresponding to IDs (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.resource_uri_mapping_incoming`<br>
+**Default**: `null`<br>
 CSV of URI mappings to normalize resource naming for incoming requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.resource_uri_mapping_outgoing`<br>
+**Default**: `null`<br>
 CSV of URI mappings to normalize resource naming for outgoing requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
-: **Default**: `false`<br>
-Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][11] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
-
+: **INI**: `datadog.trace.retain_thread_capabilities`<br>
+**Default**: `0`<br>
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][10] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
 `DD_TRACE_SAMPLE_RATE`
-: **Default**: `1.0`<br>
+: **INI**: `datadog.trace.sample_rate`<br>
+**Default**: `1.0`<br>
 The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions < `0.36.0`, this parameter is `DD_SAMPLING_RATE`.
 
 `DD_TRACE_SAMPLING_RULES`
-: **Default**: `null`<br>
+: **INI**: `datadog.trace.sampling_rules`<br>
+**Default**: `null`<br>
 A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). Note that the JSON object **must** be included in single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.|
 
+`DD_TRACE_SPANS_LIMIT`
+: **INI**: `datadog.trace.spans_limit`
+**Default**: `1000`<br>
+The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
+
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
-: **Default**: `true`<br>
+: **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
+**Default**: `1`<br>
 Enable URL's as resource names (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
 `DD_VERSION`
-: **Default**: `null`<br>
+: **INI**: `datadog.version`<br>
+**Default**: `null`<br>
 Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
 
 #### Integration names
@@ -372,7 +444,7 @@ Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hash
 | `/api/v2/b7a992e033004030861784553b11c993/123` | `GET /api/v2/?/?`  |
 | `/book/0dbf3596`                               | `GET /book/?`      |
 
-You can turn this functionality OFF using `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=false`.
+You can turn this functionality OFF using `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=0`.
 
 ##### Custom URL-to-resource mapping
 
@@ -410,7 +482,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][12] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][11] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ## Tracing CLI scripts
@@ -419,10 +491,10 @@ When the application runs in a docker container, the path `/proc/self` should al
 
 A short-running script typically runs for a few seconds or minutes and the expected behavior is to receive one trace each time the script is executed.
 
-By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `true`.
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `1`.
 
 ```
-$ export DD_TRACE_CLI_ENABLED=true
+$ export DD_TRACE_CLI_ENABLED=1
 
 # Optionally, set the agent host and port if different from localhost and 8126, respectively
 $ export DD_AGENT_HOST=agent
@@ -457,13 +529,13 @@ Once run, the trace is generated and sent to the Datadog backend when the script
 
 A long-running script runs for hours or days. Typically, such scripts repetitively execute a specific task, for example processing new incoming messages or new lines added to a table in a database. The expected behavior is that one trace is generated for each "unit of work", for example the processing of a message.
 
-By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `true`.
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `1`.
 
 ```
-$ export DD_TRACE_CLI_ENABLED=true
+$ export DD_TRACE_CLI_ENABLED=1
 # With this pair of settings, traces for each "unit of work" is sent as soon as the method execution terminates.
-$ export DD_TRACE_GENERATE_ROOT_SPAN=false
-$ export DD_TRACE_AUTO_FLUSH_ENABLED=true
+$ export DD_TRACE_GENERATE_ROOT_SPAN=0
+$ export DD_TRACE_AUTO_FLUSH_ENABLED=1
 
 # Optionally, set service name, env, etc...
 $ export DD_SERVICE=my_service
@@ -662,7 +734,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### PHP installed from the Sury Debian DPA
 
-If PHP was installed from the [Sury Debian DPA][13], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+If PHP was installed from the [Sury Debian DPA][12], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
 
 ```
 apt update
@@ -671,7 +743,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### PHP installed from a different package
 
-The Debian project maintains a wiki page with [instructions to install debug symbols][14].
+The Debian project maintains a wiki page with [instructions to install debug symbols][13].
 
 Edit the file `/etc/apt/sources.list`:
 
@@ -721,7 +793,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 ##### PHP installed from `ppa:ondrej/php`
 
-If PHP was installed from the [`ppa:ondrej/php`][15], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
+If PHP was installed from the [`ppa:ondrej/php`][14], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
 
 Before:
 
@@ -757,7 +829,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][16] from the `ddebs` can be found in the Ubuntu documentation.
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][15] from the `ddebs` can be found in the Ubuntu documentation.
 
 For example, for Ubuntu 18.04+, enable the `ddebs` repo:
 
@@ -767,7 +839,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Import the signing key (make sure the [signing key is correct][17]):
+Import the signing key (make sure the [signing key is correct][16]):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -844,7 +916,7 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][18] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][17] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -918,17 +990,16 @@ For Apache, run:
 [2]: https://app.datadoghq.com/apm/docs
 [3]: /tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
-[5]: https://github.com/DataDog/dd-trace-php/releases/latest
-[6]: https://app.datadoghq.com/apm/services
-[7]: /tracing/troubleshooting/tracer_startup_logs?tab=php#php-info
-[8]: /tracing/faq/php-tracer-manual-installation
-[9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[10]: /tracing/setup/nginx/#nginx-and-fastcgi
-[11]: https://github.com/mind04/mod-ruid2
-[12]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
-[13]: https://packages.sury.org/php/
-[14]: https://wiki.debian.org/HowToGetABacktrace
-[15]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
-[18]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[5]: https://app.datadoghq.com/apm/services
+[6]: /tracing/faq/php-tracer-manual-installation
+[7]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[8]: /tracing/setup/nginx/#nginx-and-fastcgi
+[9]: /tracing/profiler/enabling/php/
+[10]: https://github.com/mind04/mod-ruid2
+[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[12]: https://packages.sury.org/php/
+[13]: https://wiki.debian.org/HowToGetABacktrace
+[14]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[15]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[17]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment

@@ -72,11 +72,17 @@ Use inclusive language unless you are referencing third-party technologies such 
 
 Use gender-neutral pronouns as appropriate. Avoid using "he", "him", "his", "she", and "her". Also avoid using combination pronouns such as "he/she" or "(s)he" or similar. Use "they" or "them" instead.
 
-#### First person
+#### First and second person pronouns
 
-Avoid first-person pronouns such as "I", "me", "mine", "we", "us", and "our". Use second-person pronouns such as "you" and "your", but don't use them excessively.
+Avoid first-person pronouns such as "I", "me", "mine", "we", "us", and "our". Use second-person pronouns "you" and "your" (often implied).
 - **Recommended**: Datadog APM is included in Enterprise plans or as an upgrade from Pro plans. If you have a Pro plan, visit the APM page in Datadog to begin a free 14-day trial.
 - **Not recommended**: Datadog APM is included in our Enterprise plan or as an upgrade to our Pro plan. Pro plan members can visit the APM page in Datadog to begin a free 14-day trial.
+
+Adding "You can" to the start of an instruction changes it to a suggestion. Be intentional about your use of each kind of sentence:
+- **Instruction**: Change the environment variable value in your `datadog.yaml` file.
+- **Suggestion**: You can change the environment variable value in your `datadog.yaml` file.
+
+Don't overuse "your" when talking about the items a person interacts with when using Datadog. "Your infrastructure" is okay in moderation. Too much "your Agent" or "your application" is overly familiar. Try "the" instead and see if it works just as well.
 
 ### Tense
 

@@ -40,7 +40,7 @@ Datadog.configure do |c|
   # Optionally, you can configure the DogStatsD instance used for sending runtime metrics.
   # DogStatsD is automatically configured with default settings if `dogstatsd-ruby` is available.
   # You can configure with host and port of Datadog agent; defaults to 'localhost:8125'.
-  c.runtime_metrics statsd: Datadog::Statsd.new
+  c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
 
@@ -56,16 +56,16 @@ The following metrics are collected by default after enabling Runtime metrics.
 
 {{< get-metrics-from-git "ruby" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][7] with the `service` and `runtime-id` tags that are applied to these metrics.
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][7].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
-[2]: /metrics/dogstatsd_metrics_submission/#setup
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
 [4]: /agent/docker/#dogstatsd-custom-metrics
 [5]: /developers/dogstatsd/?tab=kubernetes#agent
-[6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[6]: /agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics

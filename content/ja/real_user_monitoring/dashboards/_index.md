@@ -1,40 +1,45 @@
 ---
-title: RUM ダッシュボード
-kind: documentation
+description: アプリケーションで収集したデータを使って作成した、すぐに使える RUM ダッシュボードを利用できます。
 further_reading:
-  - link: /real_user_monitoring/explorer
-    tag: ドキュメント
-    text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer
+  tag: ドキュメント
+  text: RUM エクスプローラーについて
+kind: documentation
+title: RUM ダッシュボード
 ---
-RUM アプリケーションを作成すると、すべての[収集データ][1]を分析するためのダッシュボードが Datadog 内に作成されます。RUM ダッシュボードはダッシュボードリストに表示され、Datadog ロゴが付いています。
 
-{{< img src="real_user_monitoring/dashboards/rum_dashboard_in_dashlist.png" alt="ダッシュボードリストに表示された RUM ダッシュボード" >}}
+## 概要
 
-ダッシュボードには、[RUM Applications ページ][2]からアクセスできます。アプリケーションに紐付けられた **Dashboard** リンクをクリックします。
+RUM アプリケーションを作成すると、Datadog は、アプリケーションのパフォーマンス、エラー、リソース、ユーザーセッション、モバイルパフォーマンスに関する[データを収集][1]し、ダッシュボードを生成します。
 
-{{< img src="real_user_monitoring/dashboards/rum_applications.gif" alt="RUM アプリケーション" >}}
+{{< img src="real_user_monitoring/dashboards/rum_application_overview_dashboard.png" alt="RUM Application Overview ページ" style="width:90%;" >}}
 
-{{< whatsnext desc="次のダッシュボードを使用できます" >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/performance_overview_dashboard" >}}<u>Performance Overview</u>: Web サイトのパフォーマンスとデモグラフィック (人口動態) について総合的な意見を取得します。{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/resources_dashboard" >}}<u>Resources</u>: 最も遅いリソースを把握するとともに、サードパーティのリソースを調査します。{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/errors_dashboard" >}}<u>Errors</u>: ユーザーのコンソールに表示されるエラーをブラウザの種類やデバイスの種類別に分析します。{{< /nextlink >}}
+RUM ダッシュボードには、[**Dashboard List**][2] の検索クエリで `RUM` をフィルタリングするか、[**RUM Applications** ページ][3]でダッシュボードの **Application Overview** をクリックすることでアクセスすることができます。
+
+{{< img src="real_user_monitoring/dashboards/available_rum_dashboards.png" alt="すぐに使える RUM ダッシュボード" style="width:90%;" >}}
+
+{{< whatsnext desc="RUM のダッシュボードは、すぐに使える以下のようなものが用意されています。" >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/performance_overview_dashboard" >}}<u>Performance Overview</u>: ウェブサイトのパフォーマンスとデモグラフィックのグローバルビューを見ることができます。 {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/resources_dashboard" >}}<u>Resources</u>: どのリソースが最も遅いかを分析し、サードパーティのリソースを調査します。 {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/errors_dashboard" >}}<u>Errors</u>: ユーザーコンソールに表示されるエラーを、ブラウザやデバイスの種類別に観測します。 {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/frustration_signals_dashboard" >}}<u>Frustration Signals</u>: ユーザーがアプリケーションで最も高い摩擦を感じるフラストレーションシグナルを調査します。 {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## ダッシュボードの相互関係
+## RUM ダッシュボードの操作
 
-[他のダッシュボード][3]と同じようにダッシュボードをカスタマイズできます。また、[RUM エクスプローラー][1]で基礎のデータを直接検索できます。
+[ダッシュボード][4]をカスタマイズしたり、[RUM エクスプローラー][5]でアプリケーションのデータを直接探索したりすることができます。
 
 ### テンプレート変数
 
-自動的に作成されるデフォルトのテンプレート変数セットと一緒に、すべてのアプリケーション用の RUM ダッシュボードが生成されます。RUM ダッシュボードを絞り込むには、テンプレート上部にあるテンプレート変数を使用します。たとえば、`applicationId` テンプレート変数を使用すると、特定のアプリケーションに絞り込めます。
+Datadog は、自動的にデフォルトのテンプレート変数のセットを作成する RUM ダッシュボードを生成します。テンプレート変数のドロップダウンメニューを使用して、検索を絞り込むことができます。例えば、`applicationId` テンプレート変数で、特定のアプリケーションをフィルターすることができます。
 
-{{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="テンプレート変数" style="width:50%;" >}}
+{{< img src="real_user_monitoring/dashboards/template_variables.mp4" alt="テンプレート変数" video=true style="width:50%;" >}}
 
 ### RUM イベントの表示
 
-すべての個別イベントを調査するには、グラフをクリックして _View RUM views_ を選択すると、現在選択中のフィルターで RUM Explore にリダイレクトされます。
+個々のイベントを調べるには、グラフをクリックし、**View RUM events** をクリックします。これにより、事前に選択された検索フィルターを備えた RUM エクスプローラーにリダイレクトされます。
 
-{{< img src="real_user_monitoring/dashboards/view_rum_events.gif" alt="RUM イベントの表示" style="width:80%;" >}}
+{{< img src="real_user_monitoring/dashboards/view_rum_events.mp4" alt="RUM イベントの表示" video=true style="width:80%;" >}}
 
 ### ダッシュボードのカスタマイズ
 
@@ -47,5 +52,7 @@ RUM アプリケーションを作成すると、すべての[収集データ][1
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/real_user_monitoring/data_collected/
-[2]: https://app.datadoghq.com/rum/list
-[3]: /ja/dashboards/
+[2]: https://app.datadoghq.com/dashboard/lists
+[3]: https://app.datadoghq.com/rum/list
+[4]: /ja/dashboards/
+[5]: /ja/real_user_monitoring/explorer/

@@ -1,10 +1,11 @@
 ---
-title: Attribution de l'utilisation
-kind: documentation
 aliases:
-  - /fr/account_management/billing/advanced_usage_reporting/
-  - /fr/account_management/billing/custom_usage_reporitng/
+- /fr/account_management/billing/advanced_usage_reporting/
+- /fr/account_management/billing/custom_usage_reporitng/
+kind: documentation
+title: Attribution de l'utilisation
 ---
+
 ## Présentation
 
 <div class="alert alert-warning">
@@ -28,8 +29,6 @@ Les administrateurs peuvent accéder à l'onglet Usage Attribution à partir de 
 - Spans ingérées
 - Network Flows
 - Real User Monitoring
-
-**Remarque : les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.**
 
 ### Prise en main
 
@@ -59,7 +58,7 @@ Dès que la création de rapports est lancée, ces derniers sont mis à jour quo
 - Si vous avez activé les comptes multi-org, l'utilisation est résumée pour toutes les organisations Datadog du compte parent.
 - Utilisez le sélecteur d'intervalle pour accéder aux rapports des mois précédents.
 - Les rapports mensuels ne sont générés qu'à la fin du mois. Chaque rapport mensuel est disponible le deuxième jour du mois suivant. 
-- Utilisez l'option « Export Current View » pour télécharger des rapports. Les rapports `.tsv` incluent les valeurs et pourcentages d'utilisation, afin de simplifier l'attribution des ressources et la rétrofacturation.
+- Utilisez l'option Export Current View pour télécharger des rapports. Les rapports `.tsv` incluent les valeurs et pourcentages d'utilisation, afin de simplifier l'attribution des ressources et la rétrofacturation.
 
 Les données mensuelles peuvent également être récupérées à l'aide de l'API publique de l'outil. Consultez la [documentation sur l'endpoint d'API][1] pour en savoir plus.
 

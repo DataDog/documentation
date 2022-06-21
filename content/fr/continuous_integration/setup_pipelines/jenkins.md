@@ -5,13 +5,17 @@ further_reading:
   - link: /continuous_integration/explore_pipelines
     tag: Documentation
     text: Explorer les résultats et les performances de l'exécution du pipeline
-  - link: /continuous_integration/setup_pipelines/custom_spans/
+  - link: /continuous_integration/setup_pipelines/custom_commands/
     tag: Documentation
-    text: Étendre la visibilité du pipeline à l'aide de spans personnalisées
+    text: Étendre la visibilité du pipeline en traçant des commandes individuelles
   - link: /continuous_integration/troubleshooting/
     tag: Documentation
     text: Dépannage de l'intégration continue
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">À l'heure actuelle, la solution CI Visibility n'est pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Compatibilité
 
 Versions de Jenkins prises en charge :
@@ -25,10 +29,10 @@ Si le contrôleur Jenkins et l'Agent Datadog ont été déployés sur un cluster
 
 ## Installer le plug-in Jenkins Datadog
 
-Installez et activez le [plug-in Jenkins Datadog][3] v3.1.0 ou une version ultérieure :
+Installez et activez le [plug-in Jenkins Datadog][3] v3.3.0 ou une version ultérieure :
 
 1. Dans l'interface Web de votre instance Jenkins, accédez à **Manage Jenkins > Manage Plugins**.
-2. Dans l'[Update Center][4] sur l'onglet **Available**, recherchez `Datadog Plugin`.
+2. Accédez à l'onglet **Available** de l'[Update Center][4] et recherchez `Datadog Plugin`.
 3. Cochez la case à côté du plug-in, puis installez-le en utilisant l'un des deux boutons d'installation situés au bas de l'écran.
 4. Pour vérifier que le plug-in est installé, recherchez `Datadog Plugin` sur l'onglet **Installed**.
 
@@ -134,13 +138,13 @@ Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
-## Activer la collecte de logs de tâches
+## Activer la collecte des logs de tâches
 
 Cette étape facultative permet d'activer la collecte de logs de tâches. L'opération s'effectue en activant le port de collecte de tâches sur l'Agent Datadog, puis en activant la collecte de tâches sur le plug-in Datadog.
 
 ### Agent Datadog
 
-Tout d'abord, activez la collecte de tâches sur l'Agent Datadog en ouvrant un port TCP pour recueillir les logs :
+Tout d'abord, activez la collecte des logs de tâches sur l'Agent Datadog en ouvrant un port TCP pour recueillir les logs :
 
 1. Ajoutez `logs_enabled: true` dans le fichier de configuration de votre Agent `datadog.yaml` ou définissez la variable d'environnement `DD_LOGS_ENABLED=true`.
 
@@ -160,7 +164,7 @@ Avec cette configuration, l'Agent écoute les logs sur le port `10518`.
 
 ### Plug-in Datadog
 
-Ensuite, activez la collecte de logs de tâches sur le plug-in Datadog :
+Ensuite, activez la collecte des logs de tâches sur le plug-in Datadog :
 
 {{< tabs >}}
 {{% tab "Depuis l'interface" %}}
@@ -263,6 +267,87 @@ pipeline {
 }
 {{< /code-block >}}
 
+## Définir les informations Git manuellement
+
+Le plug-in Jenkins utilise des variables d'environnement pour déterminer les informations Git. Toutefois, il arrive que ces variables d'environnement ne soient pas définies automatiquement en raison de dépendances sur le plug-in Git utilisé dans le pipeline.
+
+Si les informations Git ne sont pas détectées automatiquement, vous pouvez définir les variables d'environnement suivantes manuellement.
+
+**Remarque :** bien que facultatives, ces variables d'environnement ont la priorité sur les informations Git définies par les autres plug-ins Jenkins.
+
+`DD_GIT_REPOSITORY` (facultatif)
+: URL du référentiel de votre service.<br/>
+**Exemple** : `https://github.com/mon-org/mon-referentiel.git`
+
+`DD_GIT_BRANCH` (facultatif)
+: Nom de la branche.<br/>
+**Exemple** : `main`
+
+`DD_GIT_TAG` (facultatif)
+: Tag du commit (le cas échant).<br/>
+**Exemple** : `0.1.0`
+
+`DD_GIT_COMMIT_SHA` (facultatif)
+: Commit sous forme de chaîne de 40 caractères hexadécimaux.<br/>
+**Exemple** : `faaca5c59512cdfba9402c6e67d81b4f5701d43c`
+
+`DD_GIT_COMMIT_MESSAGE` (facultatif)
+: Message de commit.<br/>
+**Exemple** : `Message de commit initial`
+
+`DD_GIT_COMMIT_AUTHOR_NAME` (facultatif)
+: Nom de l'auteur du commit.<br/>
+**Exemple** : `David Martin`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL` (facultatif)
+: Adresse e-mail de l'auteur du commit.<br/>
+**Exemple** : `david@exemple.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE` (facultatif)
+: Date à laquelle l'auteur a effectué le commit, au format ISO 8601.<br/>
+**Exemple** : `2021-08-16T15:41:45.000Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME` (facultatif)
+: Nom du responsable du commit.<br/>
+**Exemple** : `Marine Martin`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL` (facultatif)
+: Adresse e-mail du responsable du commit.<br/>
+**Exemple** : `marine@exemple.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE` (facultatif)
+: Date à laquelle le responsable du commit a effectué le commit, au format ISO 8601.<br/>
+**Exemple** : `2021-08-16T15:41:45.000Z`
+
+Si vous définissez uniquement le référentiel, la branche et le commit, le plugin essaiera d'extraire le reste des informations Git depuis le dossier `.git`.
+
+Exemple d'utilisation :
+
+{{< code-block lang="groovy" >}}
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        script {
+          def gitVars = git url:'https://github.com/mon-org/mon-referentiel.git', branch:'une/branche-de-fonctionnalite'
+
+          // Définir les informations Git manuellement à l'aide de variables d'environnement.
+          env.DD_GIT_REPOSITORY_URL=gitVars.GIT_URL
+          env.DD_GIT_BRANCH=gitVars.GIT_BRANCH
+          env.DD_GIT_COMMIT_SHA=gitVars.GIT_COMMIT
+        }
+      }
+    }
+    stage('Test') {
+      steps {
+        // Exécuter le reste du pipeline.
+      }
+    }
+  }
+}
+{{< /code-block >}}
+
 ## Personnalisation
 
 ### Définir des tags personnalisés pour vos pipelines
@@ -302,7 +387,7 @@ datadog(tags: ["team:backend", "release:canary"]){
 
 ### Définir des tags personnalisés globaux
 
-Vous pouvez configurer le plug-in Jenkins pour envoyer des tags personnalisés dans toutes les traces de pipeline :
+Vous pouvez configurer le plug-in Jenkins de façon à envoyer des tags personnalisés dans toutes les traces de pipeline :
 
 1. Dans l'interface Web de votre instance Jenkins, accédez à **Manage Jenkins > Configure System**.
 2. Accédez à la section `Datadog Plugin` en faisant dérouler l'écran de configuration vers le bas.
@@ -314,7 +399,7 @@ Vous pouvez configurer le plug-in Jenkins pour envoyer des tags personnalisés d
 **Tags globaux**
 : Liste de tags séparés par des virgules à appliquer à l'intégralité des métriques, traces, événements et checks de service. Les tags peuvent inclure des variables d'environnement qui sont définies dans l'instance de contrôleur Jenkins.<br/>
 **Variable d'environnement** : `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`<br/>
-**Exemple** : `key1:value1,key2:${SOME_ENVVAR},${OTHER_ENVVAR}:value3`
+**Exemple** : `key1:value1,key2:${PREMIERE_VARENV},${AUTRE_VARENV}:value3`
 
 **Global job tags**
 : Liste d'expressions régulières séparées par des virgules permettant d'identifier une tâche, et liste de tags à appliquer à cette tâche. Les tags peuvent inclure des variables d'environnement définies dans l'instance de contrôleur Jenkins. Les tags peuvent être mis en correspondance avec des groupes dans l'expression régulière à l'aide du caractère `$`.<br/>
@@ -369,7 +454,7 @@ Vous pouvez également séparer les loggers dans différents enregistreurs de lo
 
 Une fois les enregistreurs de log correctement configurés, vous pouvez consulter les logs `DEBUG` en accédant à l'enregistreur de log souhaité via **Manage Jenkins > System log**.
 
-Si vous déclenchez un pipeline Jenkins, vous pouvez rechercher le message `Send pipeline traces` dans **Datadog Plugin Logs**. Ce message indique que le plug-in envoie des données liées à la **Visibilité CI** à l'**Agent Datadog**.
+Si vous déclenchez un pipeline Jenkins, vous pouvez rechercher le message `Send pipeline traces` dans **Datadog Plugin Logs**. Ce message indique que le plug-in envoie des données liées à **CI Visibility** à l'**Agent Datadog**.
 
 {{< code-block lang="text" >}}
 Send pipeline traces.
@@ -377,6 +462,17 @@ Send pipeline traces.
 Send pipeline traces.
 ...
 {{< /code-block >}}
+
+### Le plug-in Datadog ne peut pas écrire de charges utiles sur le serveur
+
+Si le message d'erreur suivant s'affiche dans le **log Jenkins**, assurez-vous que la configuration du plug-in est correcte.
+
+{{< code-block lang="text" >}}
+Error writing to server
+{{< /code-block >}}
+
+1. Si vous utilisez `localhost` comme hostname, essayez de remplacer cette valeur par le hostname du serveur.
+2. Si votre instance Jenkins est derrière un proxy HTTP, accédez à **Manage Jenkins** > **Manage Plugins** > **onglet Advanced** et vérifiez que la configuration du proxy est correcte.
 
 ### La section Datadog Plugin n'apparaît pas dans la configuration Jenkins
 

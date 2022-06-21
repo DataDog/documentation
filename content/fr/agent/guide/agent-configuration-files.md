@@ -46,7 +46,7 @@ Le fichier de configuration de l'Agent v6 utilise le format **YAML** pour mieux
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : [un exemple complet de fichier `datadog.yaml` est disponible dans le référentiel Github `datadog-agent`][1].
+**Remarque** : [un exemple complet de fichier `datadog.yaml` est disponible dans le référentiel GitHub `datadog-agent`][1].
 
 ## Répertoire de configuration de l'Agent
 

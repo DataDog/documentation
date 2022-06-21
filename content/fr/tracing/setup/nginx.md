@@ -39,7 +39,7 @@ Les plug-ins suivants doivent être installés :
 Commandes pour télécharger et installer ces modules :
 
 ```bash
-# Récupérer le dernier numéro de version depuis Github.
+# Récupérer le dernier numéro de version depuis GitHub.
 get_latest_release() {
   wget -qO- "https://api.github.com/repos/$1/releases/latest" |
     grep '"tag_name":' |

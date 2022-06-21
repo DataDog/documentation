@@ -30,22 +30,22 @@ After choosing to create an `WebSocket` test, define your test's request.
 2. Enter the string you want to send in your test. 
 2. Add **Advanced Options** (optional) to your test:
 
-   {{< tabs >}}
+  {{< tabs >}}
 
-   {{% tab "Request Options" %}}
+  {{% tab "Request Options" %}}
+  * **Timeout**: Specify the amount of time in seconds before the test times out.
+  * **Request headers**: Define headers to add to the HTTP request initiating the WebSocket connection. You can also override the default headers (for example, the `user-agent` header).
+  * **Cookies**: Define cookies to add to the HTTP request initiating the WebSocket connection. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-   * **Request headers**: Define headers to add to the HTTP request initiating the WebSocket connection. You can also override the default headers (for example, the `user-agent` header).
-   * **Cookies**: Define cookies to add to the HTTP request initiating the WebSocket connection. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+  {{% /tab %}}
 
-   {{% /tab %}}
+  {{% tab "Authentication" %}}
 
-   {{% tab "Authentication" %}}
+  * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
 
-   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+  {{% /tab %}}
 
-   {{% /tab %}}
-
-   {{< /tabs >}}
+  {{< /tabs >}}
 
 <br/>
 
@@ -68,7 +68,11 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per WebSocket test.
 
-{{< img src="synthetics/api_tests/websocket_assertions.png" alt="Define assertions for your WebSocket test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/websocket_assertions.png" alt="Define assertions for your WebSocket test to succeed or fail on" style="width:90%;" >}}
+
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
 ### Select locations
 
@@ -88,7 +92,7 @@ Set alert conditions to determine the circumstances under which you want a test 
 
 #### Alerting rule
 
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
+When you set the alert conditions to: `An alert is triggered if your test fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes;
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
@@ -122,7 +126,7 @@ Click **Save** to save and start your test.
 
 ### Create local variables
 
-You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -167,14 +171,23 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. 
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic WebSocket tests. To get create, edit, and delete access to Synthetic WebSocket tests, upgrade your user to one of those two [default roles][10].
 
-If you have access to the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+
+### Restrict access
+
+Access restriction is available for customers using [custom roles][12] on their accounts.
+
+You can restrict access to a WebSocket test based on the roles in your organization. When creating a WebSocket test, choose which roles (in addition to your user) can read and write your test. 
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
@@ -191,3 +204,4 @@ If you have access to the [custom role feature][11], add your user to any custom
 [9]: /synthetics/api_tests/errors/#ssl-errors
 [10]: /account_management/rbac/
 [11]: /account_management/rbac#custom-roles
+[12]: /account_management/rbac/#create-a-custom-role

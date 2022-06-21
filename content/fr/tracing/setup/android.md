@@ -76,7 +76,7 @@ class SampleApplication : Application() {
     GlobalTracer.registerIfAbsent(tracer)
     ```
 
-4. Définissez le seuil de vidage partiel (facultatif). Vous pouvez optimiser la charge de travail du SDK si vous créez de nombreuses spans dans votre application, ou au contraire en créez très peu. La bibliothèque écrit les spans terminées sur le disque uniquement lorsque leur nombre dépasse le seuil défini. Si vous définissez le seuil sur `1`, chaque span est écrite dès qu'elle est terminée.
+4. Définissez le seuil de vidage partiel (facultatif). Vous pouvez optimiser le workload du SDK si vous créez de nombreuses spans dans votre application, ou au contraire en créez très peu. La bibliothèque écrit les spans terminées sur le disque uniquement lorsque leur nombre dépasse le seuil défini. Si vous définissez le seuil sur `1`, chaque span est écrite dès qu'elle est terminée.
 
     ```kotlin
     val tracer = AndroidTracer.Builder()

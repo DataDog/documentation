@@ -5,9 +5,15 @@ further_reading:
     - link: "/continuous_integration/guides/find_flaky_tests/"
       tag: "Guide"
       text: "Finding Flaky Tests"
+    - link: "/continuous_integration/guides/rum_integration/"
+      tag: "Guide"
+      text: "Linking CI Visibility and RUM"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
+    - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
+      tag: "Blog"
+      text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
 ---
 
 {{< site-region region="gov" >}}

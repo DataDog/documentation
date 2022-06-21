@@ -1,29 +1,35 @@
 ---
 categories:
-  - Source Control
-  - Collaboration
-  - issue tracking
+- Source Control
+- Collaboration
+- issue tracking
 ddtype: crawler
 dependencies: []
-description: Visualisez les commits et les pull requests qui affectent les performances de l'ensemble de vos services.
-doc_link: 'https://docs.datadoghq.com/integrations/bitbucket/'
+description: Visualisez les commits et les pull requests qui affectent les performances
+  de l'ensemble de vos services.
+doc_link: https://docs.datadoghq.com/integrations/bitbucket/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/'
-    tag: Blog
-    text: "Bitbucket et Datadog\_: découvrez l'impact des changements de code sur votre infrastructure"
+- link: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
+  tag: Blog
+  text: 'Bitbucket et Datadog : découvrez l''impact des changements de code sur votre
+    infrastructure'
 git_integration_title: bitbucket
 has_logo: true
 integration_id: bitbucket
 integration_title: Bitbucket
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: bitbucket
 public_title: Intégration Datadog/Bitbucket
-short_description: Visualisez l'impact des commits et des pull requests sur les performances de vos services.
+short_description: Visualisez l'impact des commits et des pull requests sur les performances
+  de vos services.
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/bitbucket/integrations-bitbucket.gif" alt="intégrations bitbucket" popup="true">}}
 
 ## Présentation
@@ -46,20 +52,20 @@ Une fois l'intégration configurée, les éléments que vous sélectionnez (à s
 
 ### Installation
 
-Consultez la [documentation de Bitbucket][1] afin de configurer des webhooks pour les comportements Bitbucket que vous souhaitez surveiller dans Datadog. Définissez l'URL de vos webhooks sur :
+Consultez la documentation de Bitbucket relative à la [gestion des webhooks][1] afin de configurer des webhooks pour les comportements Bitbucket que vous souhaitez surveiller dans Datadog. Définissez l'URL de vos webhooks sur :
 
 ```text
 https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<VOTRE_CLÉ_API_DATADOG>
 ```
 
-### Configuration
+### Procédure à suivre
 
 L'[intégration Bitbucket][2] se configure par l'intermédiaire du carré d'intégration.
 
 1. Saisissez le nom complet de chaque référentiel que vous souhaitez surveiller. Si l'URL de votre référentiel est `https://bitbucket.org/nomgroupe/nomreferentiel`, saisissez `nomgroupe/nomreferentiel` dans la zone de texte **Repository**.
 2. Sélectionnez le type d'événements à envoyer à Datadog :
 
-    - Bitbucke Cloud : choisissez des éléments parmi la liste de déclencheurs (Commits, Pull Requests ou Issues).
+    - Bitbucket Cloud : choisissez des éléments parmi la liste de déclencheurs (Commits, Pull Requests ou Issues).
     - Bitbucket Server : sélectionnez Commits ou Pull Requests.
 
 3. Cliquez sur **Update Configuration**.
@@ -80,7 +86,7 @@ L'intégration Bitbucket n'inclut aucune métrique.
 
 ### Événements
 
-Les événements Bitbucket, y compris les commits et les pull requests provenant de Bitbucket Cloud et Server, sont transmis à votre application Datadog.
+Les événements Bitbucket, y compris les commits et les pull requests provenant de Bitbucket Cloud et Server, sont transmis à Datadog.
 
 ### Checks de service
 

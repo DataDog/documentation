@@ -11,14 +11,13 @@ further_reading:
   - link: "/real_user_monitoring/explorer/"
     tag: "Documentation"
     text: "Explore your views within Datadog"
-  - link: "/real_user_monitoring/explorer/analytics/"
+  - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
-    text: "Build analytics upon your events"
+    text: "Apply visualizations on your events"
   - link: "/real_user_monitoring/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
 ---
-
 
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
@@ -50,7 +49,7 @@ Source errors include code-level information about the error. More information a
 
 ## Collect errors manually
 
-Monitor handled exceptions, handled promise rejections and other errors not tracked automatically by the RUM SDK with the `addError()` API:
+Monitor handled exceptions, handled promise rejections, and other errors not tracked automatically by the RUM Browser SDK with the `addError()` API:
 
 {{< code-block lang="javascript" >}}
 addError(

@@ -61,30 +61,15 @@ To ensure that all traces are being sent to Datadog correctly outside of any ins
 
 ## Manual instrumentation
 
-When manually instrumenting your code, statically set the span name to ensure that your resources are grouped with the same primary operation (for example, `web.request`). If the span is being named dynamically, set it as the resource.
+When writing custom spans, statically set the span name to ensure that your resources are grouped with the same primary operation (for example, `web.request`). If the span is being named dynamically, set it as the resource (for example, `/user/profile`).
 
-Modify the primary operation for Python:
-
-```text
-  @tracer.wrap('tornado.notify',
-                service='tornado-notification',
-                resource='MainHandler.do_something')
-    @tornado.gen.coroutine
-    def do_something(self):
-        # do something
-```
-
-This function explicitly sets both the service name and primary operation, being `tornado-notification` and `tornado.notify`, respectively.
-
-Also note that the resource name is set manually, `MainHandler.do_something`.
-
-By default, the resource name would be set to this as it’s the name of the function and the class for which it lives under in Tornado.
+See [Custom Instrumentation][3] for your programming language for detailed information.
 
 ## OpenTracing
 
 When using Datadog, the OpenTracing operation name is a resource and the OpenTracing "component" tag is Datadog's span name. For example, to define (in OpenTracing terms) a span that has the resource "/user/profile", and the span name "http.request":
 
-{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
 
 
@@ -157,7 +142,7 @@ For more information, see [Setting up Go and OpenTracing][1].
 
 ```javascript
 const span = tracer.startSpan('http.request');
-span.setTag('resource.name',  ‘/user/profile’)
+span.setTag('resource.name',  '/user/profile')
 span.setTag('span.type', 'web')
 // code being traced
 span.finish();
@@ -205,7 +190,7 @@ $otTracer = \OpenTracing\GlobalTracer::get();
 $scope = $otTracer->startActiveSpan('http.request');
 $span = $scope->getSpan();
 $span->setTag('service.name', 'service_name');
-$span->setTag('resource.name', ‘/user/profile’);
+$span->setTag('resource.name', '/user/profile');
 $span->setTag('span.type', 'web');
 // ...Use OpenTracing as expected
 $scope->close();
@@ -215,6 +200,21 @@ For more information, see [Setting up PHP and OpenTracing][1].
 
 
 [1]: /tracing/setup_overview/open_standards/php/#opentracing
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
+
+
+```cpp
+// Create a root span for the current request.
+auto root_span = tracer->StartSpan("web.request");
+// Set a resource name for the root span.
+root_span->SetTag(datadog::tags::resource_name, "/user/profile");
+```
+
+For more information, see [Setting up CPP and Custom Instrumentation][1].
+
+
+[1]: /tracing/setup_overview/custom_instrumentation/cpp/#manually-instrument-a-method
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -226,3 +226,4 @@ For more information, see [Setting up PHP and OpenTracing][1].
 
 [1]: /tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
+[3]: /tracing/setup_overview/custom_instrumentation/

@@ -82,7 +82,6 @@ services:
      - DD_API_KEY=${DD_API_KEY}
      - DD_SITE={{< region-param key="dd_site" >}}
      - DD_LOGS_ENABLED=true
-     - DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true # To read log from file instead of the docker socket
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock
      - /proc/:/host/proc/:ro

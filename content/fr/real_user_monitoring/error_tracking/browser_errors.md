@@ -25,7 +25,7 @@ La fonctionnalité Suivi des erreurs traite les erreurs recueillies à partir du
 
 La nouvelle version de l'[interface de ligne de commande Datadog][6] vous permet non seulement d'envoyer des source maps, mais également d'obtenir des informations Git, comme le hash d'un commit, l'URL d'un référentiel et la liste des chemins de fichiers suivis dans le référentiel de code. Grâce à ces informations, la solution RUM et la fonctionnalité Suivi des erreurs peuvent mettre en corrélation une erreur avec le code source. Vous pouvez ainsi passer du cadre d'une stack trace à la ligne de code pertinente dans [GitHub][7], [GitLab][8] et [BitBucker][9].
 
-{{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.gif" alt="Associer le cadre d'une stack trace au code source"  >}}
+{{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.mp4" alt="Associer le cadre d'une stack trace au code source" video=true >}}
 
 <div class="alert alert-info">L'association des cadres de stack trace au code source est prise en charge par la version <code>0.12.0</code> et les versions ultérieurs de l'<a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">interface de ligne de commande Datadog</a>.</div>
 

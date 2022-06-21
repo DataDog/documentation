@@ -10,7 +10,7 @@ There are two ways to specify that such an endpoint should be untraced and exclu
 - [Trace Agent configuration](#trace-agent-configuration-options) (in Datadog Agent), or
 - [Tracer configuration](#tracer-configuration-options).
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces using any of the following options removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces using any of the following options removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 If you need assistance, contact [Datadog support][1].
 
@@ -32,10 +32,10 @@ The filter tags option requires an exact string match. If your use case requires
 You can specify span tags to require or reject by using environment variables:
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped.
+: Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
 
 `DD_APM_FILTER_TAGS_REJECT`
-: Rejects traces that have root spans with and exact match for the specified span tags and values. If it matches this rule, the trace is dropped.
+: Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
 
 Or you can set them in the Agent configuration file:
 
@@ -54,7 +54,7 @@ apm_config:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 
 ### Ignoring based on resources
@@ -64,6 +64,7 @@ The **ignore resources** option allows resources to be excluded if the global ro
 You can specify resources to ignore either in the Agent configuration file, `datadog.yaml`, or with the `DD_APM_IGNORE_RESOURCES` environment variable. See examples below.
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
+apm_config:
 ## @param ignore_resources - list of strings - optional
 ## A list of regular expressions can be provided to exclude certain traces based on their resource name.
 ## All entries must be surrounded by double quotes and separated by commas.
@@ -119,11 +120,12 @@ In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESO
 
 {{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
+              --cgroupns host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<> \
-        -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
+              -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
@@ -216,7 +218,7 @@ If you use AWS ECS (such as on EC2), in your Datadog Agent container definition,
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 ## Tracer configuration options
 
@@ -234,13 +236,13 @@ The Ruby tracer has a post-processing pipeline that deletes traces that meet cer
 For example, if the resource name is `Api::HealthchecksController#index`, use the `trace.delete_if` method to delete traces that contain the resource name. This filter can also be used to match on other metadata available for the [span object][2].
 
 ```
-Datadog::Pipeline.before_flush do |trace|
+Datadog::Tracing::Pipeline.before_flush do |trace|
   trace.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
 end
 ```
 
 [1]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[2]: /tracing/setup_overview/setup/ruby/#manual-instrumentation-2
+[2]: /tracing/setup_overview/setup/ruby/#manual-instrumentation
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -314,7 +316,7 @@ public class GreetingController {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 [1]: /help/
 [2]: /tracing/guide/add_span_md_and_graph_it/

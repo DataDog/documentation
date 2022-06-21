@@ -50,15 +50,15 @@ L'intégration Flagsmith n'inclut aucune métrique.
 
 ### Checks de service
 
-Flagsmith n'inclut aucun check de service.
+L'intégration Flagsmith n'inclut aucun check de service.
 
 ### Événements
 
-Tous les événements sont transmis au flux d'événements Datadog.
+Tous les événements Flagsmith sont tranmis au flux d'événements Datadog.
 
 ## Dépannage
 
-Besoin d'aide ? Consultez la [documentation Flagsmith][4] ou [contactez l'assistance Datadog] [5].
+Besoin d'aide ? Consultez la [documentation Flagsmith][4] (en anglais) ou [contactez l'assistance Datadog] [5].
 
 [1]: https://www.flagsmith.com/
 [2]: https://app.datadoghq.com/account/settings#integrations/flagsmith

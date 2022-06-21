@@ -1,0 +1,98 @@
+{{ $dot := . }}
+
+{{ $s := newScratch }}
+
+{{ range $versionIndex, $versionNum := (slice "v1" "v2") }}
+  {{ with (index $dot.Site.Data.api $versionNum).full_spec_deref }}
+    {{ $spec := . }}
+    {{ range $path_key, $path_object := $spec.paths }}
+      {{ range $action_type, $action := $path_object }}
+          {{ $tag := index $action.tags 0 }}
+            {{ range $sec := ($action.security | default slice) }}
+                {{ range $k, $v := $sec }}
+                    {{ if eq $k "AuthZ" }}
+                      {{ range $scope := $v }}
+                        {{ $scopeMap := index ($s.Get "scopes" | default dict) $scope | default dict }}
+                        {{ $tags := ($scopeMap.tags | default slice) }}
+                        {{ if not (in $tags $tag) }}
+                            {{ $tags = $tags | append $tag }}
+                        {{ end }}
+                        {{ $endpoints := ($scopeMap.endpoints | default slice) }}
+                        {{ $slug := (replaceRE " " "-" ($action.summary | humanize | lower)) }}
+                        {{ $url := (printf "api/latest/%s/" (replaceRE " " "-" ($tag | humanize | lower))) | absLangURL }}
+                        {{ $endpoints = $endpoints | append (dict "url" (printf "%s#%s" $url $slug) "summary" $action.summary) }}
+                        {{ $updateMap := (dict "endpoints" $endpoints "tags" $tags "desc" (index $spec.components.securitySchemes.AuthZ.flows.authorizationCode.scopes $scope)) }}
+                        {{ $scopeMap = merge $scopeMap $updateMap }}
+                        {{ $s.SetInMap "scopes" $scope $scopeMap }}
+                      {{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<!--
+For each scope find the common tags and group them together
+-->
+{{ $tagGroups := slice }}
+{{ $scopeGroups := slice }}
+{{ range $scope, $scope_obj := ($s.Get "scopes") }}
+  {{ $intersect := len (intersect $tagGroups $scope_obj.tags) }}
+  {{ if eq $intersect 0 }}
+    {{ if $tagGroups}}
+      {{ $tagStr := (print (delimit $tagGroups ", ")) }}
+      {{ $s.SetInMap "tags" $tagStr $scopeGroups }}
+    {{ end }}
+    {{ $tagGroups = slice }}
+    {{ $scopeGroups = slice }}
+  {{ end }}
+  {{ $tagGroups = ($tagGroups | append $scope_obj.tags) | uniq }}
+  {{ $scopeGroups = ($scopeGroups | append $scope) | uniq }}
+{{ end }}
+
+{{ range $tagString, $scopeSlice := ($s.Get "tags") }}
+    <h4>{{ $tagString }}</h4>
+    {{ range $tag := (split $tagString ", ") }}
+      {{ $slug := (replaceRE " " "-" ($tag | humanize | lower)) }}
+      <a id="{{ $slug }}"></a>
+    {{ end }}
+    <div class="table-request schema-table row has-no-expands">
+        <div class="col-12">
+            <!-- Header -->
+            <div class="row table-header">
+                <div class="col-4 pl-2 column">
+                    <p class="font-semibold">Scope name</p>
+                </div>
+                <div class="col-3 pl-2 column">
+                    <p class="font-semibold">Description</p>
+                </div>
+                <div class="col-5 pl-2 column">
+                    <p class="font-semibold">Endpoints that require this scope</p>
+                </div>
+            </div>
+            <!-- Detail -->
+            {{ range $scope := $scopeSlice }}
+            {{ $scope_obj := index ($s.Get "scopes") $scope }}
+            <div class="row">
+                <div class="col-12 first-column">
+                    <div class="row first-row">
+                        <div class="col-4 p-2 column">
+                            <p>{{ $scope }}</p>
+                        </div>
+                        <div class="col-3 p-2 column">
+                            <p>{{ $scope_obj.desc }}</p>
+                        </div>
+                        <div class="col-5 p-2 column">
+                            {{ range $endpoint := $scope_obj.endpoints }}
+                              <a href="{{ $endpoint.url }}">{{ $endpoint.summary }}</a><br/>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+{{ end }}

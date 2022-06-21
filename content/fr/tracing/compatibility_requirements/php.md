@@ -91,7 +91,7 @@ Pour demander la prise en charge d'une autre bibliothèque CLI, contactez notre 
 | MongoDB - via l'extension [mongodb][4]                                    | *(Toute version de PHP prise en charge)*      | _Disponible prochainement_   |
 | MySQLi                                                                  | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
 | PDO (MySQL, PostgreSQL, MariaDB)                                        | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
-| PhpRedis                                                                | 3, 4, 5                    | Prise en charge complète |
+| PhpRedis                                                                | 3, 4, 5                    | PHP 7, 8 |
 | Predis                                                                  | 1.1                        | Prise en charge complète |
 | AWS Couchbase                                                           | AWS PHP SDK 3              | _Disponible prochainement_   |
 | AWS DynamoDB                                                            | AWS PHP SDK 3              | _Disponible prochainement_   |

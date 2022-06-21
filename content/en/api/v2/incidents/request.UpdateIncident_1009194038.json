@@ -1,0 +1,11 @@
+{
+  "data": {
+    "id": "00000000-0000-0000-1234-000000000000",
+    "type": "incidents",
+    "relationships": {
+      "commander_user": {
+        "data": null
+      }
+    }
+  }
+}

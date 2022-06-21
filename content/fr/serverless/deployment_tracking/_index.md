@@ -1,5 +1,5 @@
 ---
-title: Suivi des déploiements
+title: Suivi des déploiements pour les applications sans serveur
 kind: documentation
 further_reading:
   - link: /serverless/distributed_tracing
@@ -37,4 +37,3 @@ Si vous avez ajouté l'autorisation, mais que les événements de vos fonctions 
 
 [1]: https://app.datadoghq.com/functions
 [2]: /fr/integrations/amazon_web_services/#setup
-[3]: /fr/help/

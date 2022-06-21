@@ -73,7 +73,7 @@ En cas de redirection, la durée de téléchargement correspond uniquement à la
 
 ### Durée totale de réponse
 
-Les métriques `*.response.time` mesurent la durée totale entre le début et la fin du traitement d'une requête par Synthetic. La durée de réponse correspond à la somme de toutes les durées réseau.
+Les métriques `*.response.time` mesurent la durée totale entre le début et la fin du traitement d'une requête par Synthetics. La durée de réponse correspond à la somme de toutes les durées réseau.
 
 Par exemple, la formule suivante décrit la durée de réponse totale d'un test HTTP sans redirection sur un endpoint HTTPS : `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time + synthetics.http.ssl.time + synthetics.http.firstbyte.time + synthetics.http.download.time`.
 
@@ -105,7 +105,7 @@ Il est possible que la durée de résolution DNS augmente en cas de hausse de la
 Les écarts de connexion TCP peuvent être causés par la charge réseau et serveur, par la taille de la requête et des messages de réponse et par la distance entre l'[emplacement privé][5] ou l'emplacement géré par Synthetic et le serveur.
 
 ### Durée de liaison SSL
-Les écarts de liaison SSL peuvent être causés par la charge serveur (les liaisons SSL sont généralement gourmandes en CPU), par la charge réseau et par la distance entre l'[emplacement privé][5] ou l'emplacement géré par Synthetic et le serveur. Un CDN défectueux peut également augmenter la durée de liaison SSL.
+Les écarts de liaison SSL peuvent être causés par la charge serveur (les liaisons SSL sont généralement gourmandes en CPU), par la charge réseau et par la distance entre l'[emplacement privé][5] ou l'emplacement géré par Synthetics et le serveur. Un CDN défectueux peut également augmenter la durée de liaison SSL.
 
 ### Time to first byte
 Les écarts de Time to first byte peuvent être causés par la charge réseau et serveur et par la distance entre l'[emplacement privé][5] ou l'emplacement géré par Synthetic et le serveur. Par exemple, une charge réseau élevée ou une redirection du trafic entraînée par un CDN défectueux peut augmenter la durée Time to first byte.

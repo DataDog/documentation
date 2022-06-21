@@ -1,20 +1,21 @@
 ---
-title: Synthetic APM
-kind: documentation
-description: Synthetic モニタリングを使用した APM と分散型トレーシング
 aliases:
-  - /ja/synthetics/apm
+- /ja/synthetics/apm
+description: Synthetic モニタリングを使用した APM と分散型トレーシング
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-    tag: ブログ
-    text: Datadog Synthetic モニタリングの紹介
-  - link: /tracing/
-    tag: ドキュメント
-    text: APM と分散型トレーシング
-  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-    tag: ガイド
-    text: クロスプロダクト相関で容易にトラブルシューティング。
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  tag: ブログ
+  text: Datadog Synthetic モニタリングの紹介
+- link: /tracing/
+  tag: ドキュメント
+  text: APM と分散型トレーシング
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: ガイド
+  text: クロスプロダクト相関で容易にトラブルシューティング。
+kind: documentation
+title: Synthetic APM
 ---
+
 {{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM and Synthetic モニタリング" video="true"  >}}
 
 ## 概要
@@ -25,7 +26,7 @@ Synthetic モニタリングとの APM インテグレーションを使用す�
 
 ## 使用方法
 
-このページの内容は、どちらかに限定して説明する場合を除き、[API][1] と [ブラウザテスト][2]の両方に当てはまります。
+本ページの記述は、APM の [HTTP API テスト][20]、[Multistep API テスト][21]、[ブラウザテスト][2]に適用されます。
 
 ### 前提条件
 
@@ -47,7 +48,7 @@ https://*.datadoghq.com/*
 
 | ライブラリ                             | 最小バージョン                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][5]                  | [0.22.0][6]                |
+| [Python][5]                  | [0.50.4][6]                |
 | [Go][7]                  | [1.10.0][8]                |
 | [Java][9]                  | [0.24.1][10]                |
 | [Ruby][11]                  | [0.20.0][12]                |
@@ -93,7 +94,7 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 [3]: /ja/tracing/
 [4]: https://app.datadoghq.com/synthetics/settings/default
 [5]: /ja/tracing/setup_overview/setup/python/
-[6]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
+[6]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.50.4
 [7]: /ja/tracing/setup_overview/setup/go/
 [8]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
 [9]: /ja/tracing/setup_overview/setup/java/
@@ -106,4 +107,6 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 [16]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
 [17]: /ja/tracing/setup_overview/setup/dotnet-core/
 [18]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[19]: /ja/tracing/trace_retention_and_ingestion/
+[19]: /ja/tracing/trace_retention/
+[20]: /ja/synthetics/api_tests/http_tests/?tab=requestoptions
+[21]: /ja/synthetics/multistep?tab=requestoptions

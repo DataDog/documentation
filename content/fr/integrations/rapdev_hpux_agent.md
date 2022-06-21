@@ -15,9 +15,9 @@
     "source_type_name": Agent HP-UX RapDeb
 "author":
   "homepage": "https://www.rapdev.io"
-  "name": RapDev.io
+  "name": RapDev
   "sales_email": ddsales@rapdev.io
-  "support_email": integrations@rapdev.io
+  "support_email": datadog-engineering@rapdev.io
   "vendor_id": rapdev
 "categories":
 - marketplace
@@ -70,7 +70,7 @@
 ---
 
 
-## Overview
+## Présentation
 
 L'Agent HP-UX vous permet de recueillir et d'analyser des métriques système dans Datadog. L'intégration prend en charge HP-UX 11.31 dans les architectures PA-RISC et Itanium. L'Agent HP-UX utilise la distribution système Perl par défaut de HP-UX et ne nécessite pas de dépendances de bibliothèques supplémentaires, ce qui simplifie l'installation et la compatibilité.
 
@@ -82,14 +82,14 @@ L'Agent HP-UX utilise les mêmes URL et ports que les Agents natifs. L'Agent HP-
 
 Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez RapDev.io aux coordonnées suivantes :
 
- - E-mail : integrations@rapdev.io 
- - Chat : [RapDev.io/products](https://rapdev.io/products)
+ - E-mail : datadog-engineering@rapdev.io 
+ - Chat : [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - Téléphone : 855-857-0222 
 
 ---
 Développé avec ❤️ à Boston
 
-*Ce n'est pas l'intégration que vous recherchez ? Une fonctionnalité importante pour votre organisation est manquante ? [Écrivez-nous](mailto:integrations@rapdev.io) et nous l'ajouterons !*
+*Ce n'est pas l'intégration que vous recherchez ? Une fonctionnalité importante pour votre organisation est manquante ? [Écrivez-nous](mailto:datadog-engineering@rapdev.io) et nous l'ajouterons !*
 
 ---
 Cette application est disponible sur le Marketplace et développée par un partenaire technologique de Datadog. [Cliquez ici](https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent/pricing) pour l'acheter.

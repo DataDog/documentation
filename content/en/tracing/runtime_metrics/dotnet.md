@@ -22,9 +22,10 @@ further_reading:
 
 ## Runtime metrics compatibility
 
-- .NET Framework 4.5+ 
+- .NET Framework 4.6.1+ 
 - .NET Core 3.1
 - .NET 5
+- .NET 6
  
 ## Automatic configuration
 
@@ -45,7 +46,7 @@ The following metrics are collected by default after enabling .NET metrics.
 
 {{< get-metrics-from-git "dotnet" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default .NET Runtime Dashboard][6] with the `service` and `runtime-id` tags that are applied to these metrics.
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default .NET Runtime Dashboard][6].
 
 ## Additional permissions for IIS
 
@@ -67,5 +68,5 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 [2]: /developers/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /developers/dogstatsd/?tab=kubernetes#agent
-[5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[5]: /agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30412/net-runtime-metrics

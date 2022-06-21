@@ -28,7 +28,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 | Platform   | Command                                                 |
 |------------|---------------------------------------------------------|
 | AIX        | `datadog-agent flare <CASE_ID>`                         |
-| Docker     | `docker exec -it datadog-agent agent flare <CASE_ID>`   |
+| Docker     | `docker exec -it dd-agent agent flare <CASE_ID>`        |
 | macOS      | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
 | CentOS     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian     | `sudo datadog-agent flare <CASE_ID>`                    |
@@ -69,7 +69,13 @@ kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --lo
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
 ```
-  
+
+### Security Agent
+
+```bash
+kubectl exec -it <AGENT_POD_NAME> -c security-agent -- security-agent flare <CASE_ID>
+```
+
 ### System probe
 
 The system-probe container cannot send a flare so get container logs instead:
@@ -94,7 +100,7 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
-[3]: /agent/faq/heroku-troubleshooting/#send-a-flare
+[3]: /agent/guide/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 {{% /tab %}}

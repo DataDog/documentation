@@ -37,7 +37,7 @@ Datadog では、コンテナ化環境のベストプラクティスとして、
 
 ### 注
 
-- IAM ロールが、基底の EC2 インスタンスではなく、[Amazon ECS コンテナインスタンス][2]に関連付けられていることを確認します。
+- IAM ロールが、Datadog Agent コンテナのタスクロールではなく、[Amazon ECS コンテナインスタンス][2]に関連付けされていることを確認します。
 - ECS リソースタグは EC2 インスタンスからは収集できますが、AWS Fargate からは収集できません。
 - この機能には、Datadog Agent v6.17+ または v7.17+ が必要です。
 - Agent は、`tasks`、`services`、`container instances` ECS リソースからの ECS タグ収集をサポートします。

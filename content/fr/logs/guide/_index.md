@@ -28,8 +28,9 @@ private: true
 <br>
 
 {{< whatsnext desc="Traitement des logs" >}}
-    {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Bonnes pratiques à adopter pour le parsing de log{{< /nextlink >}}
+    {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Parsing de log : bonnes pratiques à adopter{{< /nextlink >}}
     {{< nextlink href="/logs/guide/enrichment-tables/" >}}Ajouter des métadonnées personnalisées aux logs grâce aux tables d'enrichissement{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}Règles de nettoyage de logs couramment utilisées{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

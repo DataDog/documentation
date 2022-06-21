@@ -93,7 +93,7 @@ further_reading:
 
 **注:** エラー比較は、_観察された_ エラータイプに基づいています。珍しいエラータイプは、_まだ_ 確認されていないという理由だけで、「出現しなくなった」と検出される可能性があります。
 
-{{< img src="tracing/deployment_tracking/ErrorComparison.gif" alt="エラー比較"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ErrorComparison.mp4" alt="エラー比較" video=true style="width:100%;">}}
 
 ### エンドポイント比較
 
@@ -160,7 +160,7 @@ Datadog 内で `version` タグを使用すると、カナリアデプロイの�
 
 ### トレース検索と分析
 
-{{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.gif" alt="App Analytics のバージョン"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.mp4" alt="App Analytics のバージョン" video=true style="width:100%;">}}
 
 使用可能な場合、`version` はトレース検索と分析の両方のタグとして使用することで、ライブ検索モードとインデックス化されたトレースをフィルタリングするか、分析クエリをフィルタリングまたはグループ化することができます。
 

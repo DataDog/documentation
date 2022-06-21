@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/couchdb
+- /ja/integrations/couchdb
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -14,13 +14,13 @@ assets:
     couchdb_processes: assets/saved_views/couchdb_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/couch/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/couch/README.md
 description: Apache CouchDB は、MapReduce 方式で JavaScript を使用してクエリおよびインデックスを作成できるドキュメント指向のデータベースです。
 display_name: CouchDB
 draft: false
@@ -28,25 +28,29 @@ git_integration_title: couch
 guid: 9e7ed68c-669a-40f0-8564-548d49aa8098
 integration_id: couchdb
 integration_title: CouchDB
+integration_version: 5.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: couch.
 metric_to_check:
-  - couchdb.couchdb.request_time.n
-  - couchdb.couchdb.request_time
+- couchdb.couchdb.request_time.n
+- couchdb.couchdb.request_time
 name: couch
 process_signatures:
-  - couchjs
+- couchjs
 public_title: Datadog-CouchDB インテグレーション
 short_description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![CouchDB ダッシュボード][1]
 
 ## 概要
@@ -137,7 +141,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
