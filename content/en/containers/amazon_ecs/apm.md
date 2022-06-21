@@ -1,6 +1,8 @@
 ---
 title: Tracing ECS Applications
 kind: Documentation
+aliases:
+  - /agent/amazon_ecs/apm
 further_reading:
     - link: "/agent/amazon_ecs/logs/"
       tag: "Documentation"

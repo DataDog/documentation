@@ -3,6 +3,7 @@ title: Amazon ECS
 kind: documentation
 aliases:
   - /integrations/amazon_ecs/
+  - /agent/amazon_ecs/
 further_reading:
 - link: "/agent/amazon_ecs/logs/"
   tag: "Documentation"
