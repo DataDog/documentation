@@ -72,6 +72,8 @@ To setup unified service tagging in a containerized environment:
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
+**Note**: If you deployed the Datadog Cluster Agent with [Admission Controller][14] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. See the [Admission Controller][14] documentation for more details.
+
 ##### Full configuration
 
 To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
@@ -398,3 +400,6 @@ See [how to connect your Lambda telemetry using tags][13].
 [11]: https://www.chef.io/
 [12]: https://www.ansible.com/
 [13]: /serverless/configuration/#connect-telemetry-using-tags
+[14]: /agent/cluster_agent/admission_controller/
+
+
