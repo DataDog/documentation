@@ -9,17 +9,18 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - モニタリング
+- モニタリング
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/pulsar/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/pulsar/README.md
 display_name: pulsar
 draft: false
 git_integration_title: pulsar
 guid: 799b35dd-d481-4d71-825e-83c92a5227c4
 integration_id: pulsar
 integration_title: Pulsar
+integration_version: 0.0.1
 is_public: true
 kind: インテグレーション
 maintainer: ming.luo@kesque.com
@@ -31,10 +32,13 @@ public_title: Pulsar
 short_description: Apache Pulsar メトリクス
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Pulsar][1] を監視します。
@@ -79,7 +83,7 @@ Pulsar チェックをホストにインストールするには
 
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `pulsar` を探します。
+[Agent の status サブコマンド][7]を実行し、Checks セクションで `pulsar` を探します。
 
 ## 収集データ
 

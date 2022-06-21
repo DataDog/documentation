@@ -4,6 +4,13 @@ components:
   headers: {}
   links: {}
   parameters:
+    SignalID:
+      description: The ID of the signal.
+      in: path
+      name: signal_id
+      required: true
+      schema:
+        type: string
     SlackAccountNamePathParameter:
       description: Your Slack account name.
       in: path
@@ -360,6 +367,23 @@ components:
       - ADMIN
       - READ_ONLY
       - ERROR
+    AddSignalToIncidentRequest:
+      description: Attributes describing which incident to add the signal to.
+      properties:
+        add_to_signal_timeline:
+          description: Whether to post the signal on the incident timeline.
+          type: boolean
+        incident_id:
+          description: Public ID attribute of the incident to which the signal will
+            be added.
+          example: 2066
+          format: int64
+          type: integer
+        version:
+          $ref: '#/components/schemas/Version'
+      required:
+      - incident_id
+      type: object
     AgentCheck:
       description: Array of strings.
       example:
@@ -1339,6 +1363,96 @@ components:
           type: integer
       readOnly: true
       type: object
+    DistributionPoint:
+      description: Array of distribution points.
+      example:
+      - 1575317847.0
+      - - 0.5
+        - 1.0
+      items:
+        description: List of distribution point.
+        oneOf:
+        - $ref: '#/components/schemas/DistributionPointTimestamp'
+        - $ref: '#/components/schemas/DistributionPointData'
+      maxItems: 2
+      minItems: 2
+      type: array
+    DistributionPointData:
+      description: Distribution point data.
+      items:
+        description: List of distribution point data.
+        format: double
+        type: number
+      type: array
+    DistributionPointTimestamp:
+      description: Distribution point timestamp. It should be in seconds and current.
+      format: double
+      type: number
+    DistributionPointsContentEncoding:
+      description: HTTP header used to compress the media-type.
+      enum:
+      - deflate
+      type: string
+      x-enum-varnames:
+      - DEFLATE
+    DistributionPointsPayload:
+      description: The distribution points payload.
+      properties:
+        series:
+          description: A list of distribution points series to submit to Datadog.
+          example:
+          - metric: system.load.1
+            points:
+            - - 1475317847.0
+              - - 1.0
+                - 2.0
+          items:
+            $ref: '#/components/schemas/DistributionPointsSeries'
+          type: array
+      required:
+      - series
+      type: object
+    DistributionPointsSeries:
+      description: A distribution points metric to submit to Datadog.
+      properties:
+        host:
+          description: The name of the host that produced the distribution point metric.
+          example: test.example.com
+          type: string
+        metric:
+          description: The name of the distribution points metric.
+          example: system.load.1
+          type: string
+        points:
+          description: Points relating to the distribution point metric. All points
+            must be tuples with timestamp and a list of values (cannot be a string).
+            Timestamps should be in POSIX time in seconds.
+          items:
+            $ref: '#/components/schemas/DistributionPoint'
+          type: array
+        tags:
+          description: A list of tags associated with the distribution point metric.
+          example:
+          - environment:test
+          items:
+            description: Individual tags.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/DistributionPointsType'
+      required:
+      - metric
+      - points
+      type: object
+    DistributionPointsType:
+      default: distribution
+      description: The type of the distribution point.
+      enum:
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - DISTRIBUTION
     DistributionWidgetDefinition:
       description: "The Distribution visualization is another way of showing metrics\naggregated
         across one or several tags, such as hosts.\nUnlike the heat map, a distribution
@@ -1399,6 +1513,25 @@ components:
       type: string
       x-enum-varnames:
       - DISTRIBUTION
+    DistributionWidgetHistogramRequestQuery:
+      description: Query definition for Distribution Widget Histogram Request
+      example:
+        data_source: metrics
+        name: query1
+        query: histogram:trace.Load{*}
+      oneOf:
+      - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
+      type: object
+    DistributionWidgetHistogramRequestType:
+      description: Request type for the histogram request.
+      enum:
+      - histogram
+      example: histogram
+      type: string
+      x-enum-varnames:
+      - HISTOGRAM
     DistributionWidgetRequest:
       description: Updated distribution widget.
       properties:
@@ -1419,6 +1552,10 @@ components:
         q:
           description: Widget query.
           type: string
+        query:
+          $ref: '#/components/schemas/DistributionWidgetHistogramRequestQuery'
+        request_type:
+          $ref: '#/components/schemas/DistributionWidgetHistogramRequestType'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -1563,6 +1700,11 @@ components:
             description: A monitor tag.
             type: string
           type: array
+        mute_first_recovery_notification:
+          description: If the first recovery notification during a downtime should
+            be muted.
+          example: false
+          type: boolean
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -1692,6 +1834,11 @@ components:
             description: A monitor tag.
             type: string
           type: array
+        mute_first_recovery_notification:
+          description: If the first recovery notification during a downtime should
+            be muted.
+          example: false
+          type: boolean
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -1946,7 +2093,7 @@ components:
           description: 'The type of event being posted. Option examples include nagios,
             hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
 
-            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+            The list of standard source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
           type: string
         tags:
           description: A list of tags to apply to the event.
@@ -2017,7 +2164,7 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (that
             is no quotes).
 
-            Limited to events no older than 7 days.'
+            Limited to events no older than 18 hours'
           format: int64
           type: integer
         device_name:
@@ -2288,6 +2435,7 @@ components:
       - error_rate
       - hits
       - latency_avg
+      - latency_distribution
       - latency_max
       - latency_p50
       - latency_p75
@@ -2301,6 +2449,7 @@ components:
       - ERROR_RATE
       - HITS
       - LATENCY_AVG
+      - LATENCY_DISTRIBUTION
       - LATENCY_MAX
       - LATENCY_P50
       - LATENCY_P75
@@ -3050,6 +3199,9 @@ components:
       - message
       type: object
     HTTPLogItem:
+      additionalProperties:
+        description: Additional log attributes.
+        type: string
       description: Logs that are sent over HTTP.
       properties:
         ddsource:
@@ -4461,7 +4613,7 @@ components:
         categories:
           description: 'Array of filters to match or not a log and their
 
-            corresponding `name`to assign a custom value to the log.'
+            corresponding `name` to assign a custom value to the log.'
           example: []
           items:
             $ref: '#/components/schemas/LogsCategoryProcessorCategory'
@@ -5247,7 +5399,7 @@ components:
       x-enum-varnames:
       - SERVICE_REMAPPER
     LogsSort:
-      description: Time-ascending `asc` or time-descending `desc`results.
+      description: Time-ascending `asc` or time-descending `desc` results.
       enum:
       - asc
       - desc
@@ -5964,11 +6116,13 @@ components:
       enum:
       - rum
       - ci_pipelines
+      - ci_tests
       example: rum
       type: string
       x-enum-varnames:
       - RUM
       - CI_PIPELINES
+      - CI_TESTS
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -6222,7 +6376,8 @@ components:
           type: boolean
         silenced:
           additionalProperties:
-            description: ID of the downtime applied to the monitor.
+            description: UTC epoch timestamp in seconds when the downtime for the
+              group expires.
             format: int64
             nullable: true
             type: integer
@@ -6662,6 +6817,7 @@ components:
       - event-v2 alert
       - audit alert
       - ci-pipelines alert
+      - ci-tests alert
       - error-tracking alert
       example: query alert
       type: string
@@ -6680,6 +6836,7 @@ components:
       - EVENT_V2_ALERT
       - AUDIT_ALERT
       - CI_PIPELINES_ALERT
+      - CI_TESTS_ALERT
       - ERROR_TRACKING_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
@@ -6804,7 +6961,7 @@ components:
         metadata:
           $ref: '#/components/schemas/MonthlyUsageAttributionMetadata'
         usage:
-          description: Get Usage Summary by tag(s).
+          description: Get usage summary by tag(s).
           items:
             $ref: '#/components/schemas/MonthlyUsageAttributionBody'
           type: array
@@ -7826,6 +7983,13 @@ components:
           format: int64
           type: integer
       type: object
+    OrgDowngradedResponse:
+      description: Status of downgrade
+      properties:
+        message:
+          description: Information pertaining to the downgraded child organization.
+          type: string
+      type: object
     Organization:
       description: Create, edit, and manage organizations.
       properties:
@@ -7853,6 +8017,11 @@ components:
           $ref: '#/components/schemas/OrganizationSettings'
         subscription:
           $ref: '#/components/schemas/OrganizationSubscription'
+        trial:
+          description: Only available for MSP customers. Allows child organizations
+            to be created on a trial plan.
+          example: false
+          type: boolean
       type: object
     OrganizationBilling:
       deprecated: true
@@ -8358,7 +8527,7 @@ components:
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
-          description: ID of the SLO that this correction will be applied to.
+          description: ID of the SLO that this correction applies to.
           example: sloId
           type: string
         start:
@@ -8399,7 +8568,7 @@ components:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
         created_at:
-          description: The epoch timestamp of when the correction was created at
+          description: The epoch timestamp of when the correction was created at.
           format: int64
           type: integer
         creator:
@@ -8419,7 +8588,7 @@ components:
           format: int64
           type: integer
         modified_at:
-          description: The epoch timestamp of when the correction was modified at
+          description: The epoch timestamp of when the correction was modified at.
           format: int64
           type: integer
         modifier:
@@ -8428,12 +8597,12 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           nullable: true
           type: string
         slo_id:
-          description: ID of the SLO that this correction will be applied to.
+          description: ID of the SLO that this correction applies to.
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -8504,7 +8673,7 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         start:
@@ -9525,8 +9694,9 @@ components:
             type: string
           type: array
         type:
-          default: gauge
-          description: The type of the metric either `count`, `gauge`, or `rate`.
+          default: ''
+          description: The type of the metric. Valid types are "",`count`, `gauge`,
+            and `rate`.
           example: rate
           type: string
       required:
@@ -10216,6 +10386,59 @@ components:
         live_span:
           $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
       type: object
+    SignalArchiveReason:
+      description: Reason why a signal has been archived.
+      enum:
+      - none
+      - false_positive
+      - testing_or_maintenance
+      - other
+      type: string
+      x-enum-varnames:
+      - NONE
+      - FALSE_POSITIVE
+      - TESTING_OR_MAINTENANCE
+      - OTHER
+    SignalAssigneeUpdateRequest:
+      description: Attributes describing an assignee update operation over a security
+        signal.
+      properties:
+        assignee:
+          description: The UUID of the user being assigned. Use empty string to return
+            signal to unassigned.
+          example: 773b045d-ccf8-4808-bd3b-955ef6a8c940
+          type: string
+        version:
+          $ref: '#/components/schemas/Version'
+      required:
+      - assignee
+      type: object
+    SignalStateUpdateRequest:
+      description: Attributes describing the change of state for a given state.
+      properties:
+        archiveComment:
+          description: Optional comment to explain why a signal is being archived.
+          type: string
+        archiveReason:
+          $ref: '#/components/schemas/SignalArchiveReason'
+        state:
+          $ref: '#/components/schemas/SignalTriageState'
+        version:
+          $ref: '#/components/schemas/Version'
+      required:
+      - state
+      type: object
+    SignalTriageState:
+      description: The new triage state of the signal.
+      enum:
+      - open
+      - archived
+      - under_review
+      type: string
+      x-enum-varnames:
+      - OPEN
+      - ARCHIVED
+      - UNDER_REVIEW
     SingleServiceDependencies:
       description: An object with information on APM services that call, and are called
         by a given service.
@@ -10361,6 +10584,13 @@ components:
       required:
       - account
       - url
+      type: object
+    SuccessfulSignalUpdateResponse:
+      description: Updated signal data following a successfully performed update.
+      properties:
+        status:
+          description: Status of the response.
+          type: string
       type: object
     SunburstWidgetDefinition:
       description: Sunbursts are spot on to highlight how groups contribute to the
@@ -10660,7 +10890,6 @@ components:
         responseHeaders:
           additionalProperties:
             description: Returned request header.
-            type: object
           description: Response headers returned for the API test.
           type: object
         responseSize:
@@ -10917,6 +11146,8 @@ components:
       - packetsReceived
       - networkHop
       - receivedMessage
+      - grpcHealthcheckStatus
+      - connection
       example: statusCode
       type: string
       x-enum-varnames:
@@ -10935,6 +11166,8 @@ components:
       - PACKETS_RECEIVED
       - NETWORK_HOP
       - RECEIVED_MESSAGE
+      - GRPC_HEALTHCHECK_STATUS
+      - CONNECTION
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       oneOf:
@@ -11420,6 +11653,50 @@ components:
           format: int64
           type: integer
       type: object
+    SyntheticsBrowserTestRumSettings:
+      description: 'The RUM data collection settings for the Synthetic browser test.
+
+        **Note:** There are 3 ways to format RUM settings:
+
+
+        `{ isEnabled: false }`
+
+        RUM data is not collected.
+
+
+        `{ isEnabled: true }`
+
+        RUM data is collected from the Synthetic test''s default application.
+
+
+        `{ isEnabled: true, applicationId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        clientTokenId: 12345 }`
+
+        RUM data is collected using the specified application.'
+      example:
+        applicationId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        clientTokenId: 12345
+        isEnabled: true
+      properties:
+        applicationId:
+          description: RUM application ID used to collect RUM data for the browser
+            test.
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          type: string
+        clientTokenId:
+          description: RUM application API key ID used to collect RUM data for the
+            browser test.
+          example: 12345
+          format: int64
+          type: integer
+          x-secret: true
+        isEnabled:
+          description: Determines whether RUM data is collected during test runs.
+          example: true
+          type: boolean
+      required:
+      - isEnabled
+      type: object
     SyntheticsBrowserTestType:
       default: browser
       description: Type of the Synthetic test, `browser`.
@@ -11644,12 +11921,12 @@ components:
       properties:
         cls:
           description: Cumulative Layout Shift.
-          format: int64
-          type: integer
+          format: double
+          type: number
         lcp:
           description: Largest Contentful Paint in milliseconds.
-          format: int64
-          type: integer
+          format: double
+          type: number
         url:
           description: URL attached to the metrics.
           type: string
@@ -12394,7 +12671,7 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`, `icmp`, `udp`, `websocket` or `multi`.'
+        `dns`, `icmp`, `udp`, `websocket`, `grpc` or `multi`.'
       enum:
       - http
       - ssl
@@ -12404,6 +12681,7 @@ components:
       - icmp
       - udp
       - websocket
+      - grpc
       example: http
       type: string
       x-enum-varnames:
@@ -12415,6 +12693,7 @@ components:
       - ICMP
       - UDP
       - WEBSOCKET
+      - GRPC
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -12440,6 +12719,12 @@ components:
         description: A single Header.
         type: string
       description: Headers to include when performing the test.
+      type: object
+    SyntheticsTestMetadata:
+      additionalProperties:
+        description: A single Metadatum.
+        type: string
+      description: Metadata to include when performing the gRPC test.
       type: object
     SyntheticsTestMonitorStatus:
       description: 'The status of your Synthetic monitor.
@@ -12515,6 +12800,8 @@ components:
           $ref: '#/components/schemas/SyntheticsRestrictedRoles'
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        rumSettings:
+          $ref: '#/components/schemas/SyntheticsBrowserTestRumSettings'
         tick_every:
           description: The frequency at which to run the Synthetic test (in seconds).
           format: int64
@@ -12616,6 +12903,8 @@ components:
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
+        metadata:
+          $ref: '#/components/schemas/SyntheticsTestMetadata'
         method:
           $ref: '#/components/schemas/HTTPMethod'
         noSavingResponseBody:
@@ -12643,6 +12932,9 @@ components:
             allowing the server to present one of multiple possible certificates on
 
             the same IP address and TCP port number.'
+          type: string
+        service:
+          description: gRPC service on which you want to perform the healthcheck.
           type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
@@ -13474,7 +13766,7 @@ components:
         metadata:
           $ref: '#/components/schemas/UsageAttributionMetadata'
         usage:
-          description: Get Usage Summary by tag(s).
+          description: Get usage summary by tag(s).
           items:
             $ref: '#/components/schemas/UsageAttributionBody'
           type: array
@@ -14738,16 +15030,25 @@ components:
         session_count:
           description: Contains the number of browser RUM Lite Sessions.
           format: int64
+          nullable: true
           type: integer
         session_count_android:
           description: Contains the number of mobile RUM Sessions on Android (data
             available beginning December 1, 2020).
           format: int64
+          nullable: true
           type: integer
         session_count_ios:
           description: Contains the number of mobile RUM Sessions on iOS (data available
             beginning December 1, 2020).
           format: int64
+          nullable: true
+          type: integer
+        session_count_reactnative:
+          description: Contains the number of mobile RUM Sessions on React Native
+            (data available beginning May 1, 2022).
+          format: int64
+          nullable: true
           type: integer
       type: object
     UsageRumSessionsResponse:
@@ -15160,6 +15461,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for all organizations
@@ -15178,6 +15484,11 @@ components:
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Networks hosts over
             all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        observability_pipelines_bytes_processed_sum:
+          description: Sum of all observability pipelines bytes processed over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -15474,6 +15785,11 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        mobile_rum_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for the given org.
@@ -15495,6 +15811,11 @@ components:
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Networks hosts over
             all hours in the current date for the given org.
+          format: int64
+          type: integer
+        observability_pipelines_bytes_processed_sum:
+          description: Sum of all observability pipelines bytes processed over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -15823,6 +16144,11 @@ components:
             in the current months for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on React Native over
+            all hours in the current months for all organizations.
+          format: int64
+          type: integer
         mobile_rum_units_agg_sum:
           description: Shows the sum of all mobile RUM units over all hours in the
             current months for all organizations.
@@ -15836,6 +16162,11 @@ components:
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Networks hosts over
             all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        observability_pipelines_bytes_processed_agg_sum:
+          description: Sum of all observability pipelines bytes processed over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         online_archive_events_count_agg_sum:
@@ -16180,6 +16511,11 @@ components:
         user:
           $ref: '#/components/schemas/User'
       type: object
+    Version:
+      description: Version of the updated signal. If server side version is higher,
+        update will be rejected.
+      format: int64
+      type: integer
     WebhooksIntegration:
       description: Datadog-Webhooks integration.
       properties:
@@ -17089,7 +17425,8 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
-            dashboards_public_share: Share dashboards externally.
+            dashboards_public_share: Generate public and authenticated links to share
+              dashboards externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
@@ -17662,6 +17999,7 @@ paths:
         type: safe
   /api/v1/daily_custom_reports:
     get:
+      deprecated: true
       description: Get daily custom reports.
       operationId: GetDailyCustomReports
       parameters:
@@ -17727,6 +18065,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/daily_custom_reports/{report_id}:
     get:
+      deprecated: true
       description: Get specified daily custom reports.
       operationId: GetSpecifiedDailyCustomReports
       parameters:
@@ -18774,6 +19113,74 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v1/distribution_points:
+    post:
+      description: "The distribution points end-point allows you to post distribution
+        data that can be graphed on Datadog\u2019s dashboards."
+      operationId: SubmitDistributionPoints
+      parameters:
+      - description: HTTP header used to compress the media-type.
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/DistributionPointsContentEncoding'
+      requestBody:
+        content:
+          text/json:
+            examples:
+              dynamic-points:
+                description: "Post time-series data that can be graphed on Datadog\u2019s
+                  dashboards."
+                externalValue: examples/metrics/distribution-points.json.sh
+                summary: Dynamic Points
+                x-variables:
+                  NOW: $(date +%s)
+            schema:
+              $ref: '#/components/schemas/DistributionPointsPayload'
+        required: true
+      responses:
+        '202':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/IntakePayloadAccepted'
+          description: Payload accepted
+        '400':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '408':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Request timeout
+        '413':
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Payload too large
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Submit distribution points
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: safe
   /api/v1/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -19513,6 +19920,22 @@ paths:
         required: false
         schema:
           type: string
+      - description: The height of the graph. If no height is specified, the graph's
+          original height is used.
+        in: query
+        name: height
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The width of the graph. If no width is specified, the graph's
+          original width is used.
+        in: query
+        name: width
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -22684,19 +23107,19 @@ paths:
         Example: `"check".over(tags).last(count).by(group).count_by_status()`
 
 
-        - **`check`** name of the check, for example `datadog.agent.up`
+        - `check` name of the check, for example `datadog.agent.up`
 
-        - **`tags`** one or more quoted tags (comma-separated), or "*". for example:
-        `.over("env:prod", "role:db")`; **`over`** cannot be blank.
+        - `tags` one or more quoted tags (comma-separated), or "*". for example: `.over("env:prod",
+        "role:db")`; `over` cannot be blank.
 
-        - **`count`** must be at greater than or equal to your max threshold (defined
+        - `count` must be at greater than or equal to your max threshold (defined
         in the `options`). It is limited to 100.
 
         For example, if you''ve specified to notify on 1 critical, 3 ok, and 2 warn
         statuses, `count` should be at least 3.
 
-        - **`group`** must be specified for check monitors. Per-check grouping is
-        already explicitly known for some service checks.
+        - `group` must be specified for check monitors. Per-check grouping is already
+        explicitly known for some service checks.
 
         For example, Postgres integration monitors are tagged by `db`, `host`, and
         `port`, and Network monitors by `host`, `instance`, and `url`. See [Service
@@ -22711,28 +23134,28 @@ paths:
         "string query"'').rollup("count").last("1h")"`
 
 
-        - **`event`**, the event query string:
+        - `event`, the event query string:
 
-        - **`string_query`** free text query to match against event title and text.
+        - `string_query` free text query to match against event title and text.
 
-        - **`sources`** event sources (comma-separated).
+        - `sources` event sources (comma-separated).
 
-        - **`status`** event statuses (comma-separated). Valid options: error, warn,
-        and info.
+        - `status` event statuses (comma-separated). Valid options: error, warn, and
+        info.
 
-        - **`priority`** event priorities (comma-separated). Valid options: low, normal,
+        - `priority` event priorities (comma-separated). Valid options: low, normal,
         all.
 
-        - **`host`** event reporting host (comma-separated).
+        - `host` event reporting host (comma-separated).
 
-        - **`tags`** event tags (comma-separated).
+        - `tags` event tags (comma-separated).
 
-        - **`excluded_tags`** excluded event tags (comma-separated).
+        - `excluded_tags` excluded event tags (comma-separated).
 
-        - **`rollup`** the stats roll-up method. `count` is the only supported method
+        - `rollup` the stats roll-up method. `count` is the only supported method
         now.
 
-        - **`last`** the timeframe to roll up the counts. Examples: 45m, 4h. Supported
+        - `last` the timeframe to roll up the counts. Examples: 45m, 4h. Supported
         timeframes: m, h and d. This value should not exceed 48 hours.
 
 
@@ -22747,23 +23170,18 @@ paths:
         operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
-        `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.
-
-
-        **NOTE** Only available on US1-FED, US3, US5 and in closed beta on EU and
-        US1.
+        - `#` an integer or decimal number used to set the threshold.
 
 
         **Process Alert Query**
@@ -22773,19 +23191,19 @@ paths:
         #`
 
 
-        - **`search`** free text search string for querying processes.
+        - `search` free text search string for querying processes.
 
         Matching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows)
         page.
 
-        - **`tags`** one or more tags (comma-separated)
+        - `tags` one or more tags (comma-separated)
 
-        - **`timeframe`** the timeframe to roll up the counts. Examples: 10m, 4h.
-        Supported timeframes: s, m, h and d
+        - `timeframe` the timeframe to roll up the counts. Examples: 10m, 4h. Supported
+        timeframes: s, m, h and d
 
-        - **`operator`** <, <=, >, >=, ==, or !=
+        - `operator` <, <=, >, >=, ==, or !=
 
-        - **`#`** an integer or decimal number used to set the threshold
+        - `#` an integer or decimal number used to set the threshold
 
 
         **Logs Alert Query**
@@ -22795,22 +23213,21 @@ paths:
         operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`index_name`** For multi-index organizations, the log index in which the
-        request is performed.
+        - `index_name` For multi-index organizations, the log index in which the request
+        is performed.
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
-        `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.
+        - `#` an integer or decimal number used to set the threshold.
 
 
         **Composite Query**
@@ -22820,16 +23237,16 @@ paths:
         monitors
 
 
-        * **`name`** [*required*, *default* = **dynamic, based on query**]: The name
-        of the alert.
+        * `name` [*required*, *default* = **dynamic, based on query**]: The name of
+        the alert.
 
-        * **`message`** [*required*, *default* = **dynamic, based on query**]: A message
+        * `message` [*required*, *default* = **dynamic, based on query**]: A message
         to include with notifications for this monitor.
 
         Email notifications can be sent to specific users by using the same ''@username''
         notation as events.
 
-        * **`tags`** [*optional*, *default* = **empty list**]: A list of tags to associate
+        * `tags` [*optional*, *default* = **empty list**]: A list of tags to associate
         with your monitor.
 
         When getting all monitor details via the API, use the `monitor_tags` argument
@@ -22845,13 +23262,13 @@ paths:
         Example: `error_budget("slo_id").over("time_window") operator #`
 
 
-        - **`slo_id`**: The alphanumeric SLO ID of the SLO you are configuring the
-        alert for.
+        - `slo_id`: The alphanumeric SLO ID of the SLO you are configuring the alert
+        for.
 
-        - **`time_window`**: The time window of the SLO target you wish to alert on.
-        Valid options: `7d`, `30d`, `90d`.
+        - `time_window`: The time window of the SLO target you wish to alert on. Valid
+        options: `7d`, `30d`, `90d`.
 
-        - **`operator`**: `>=` or `>`
+        - `operator`: `>=` or `>`
 
 
         **Audit Alert Query**
@@ -22861,19 +23278,18 @@ paths:
         operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
-        `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.
+        - `#` an integer or decimal number used to set the threshold.
 
 
         **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
@@ -22887,22 +23303,48 @@ paths:
         operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
-        and `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.
+        - `#` an integer or decimal number used to set the threshold.
 
 
         **NOTE** CI Pipeline monitors are in alpha on US1, EU, US3 and US5.
+
+
+        **CI Tests Alert Query**
+
+
+        Example: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
+
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - `#` an integer or decimal number used to set the threshold.
+
+
+        **NOTE** CI Test monitors are available only in closed beta on US1, EU, US3
+        and US5.
 
 
         **Error Tracking Alert Query**
@@ -22915,19 +23357,19 @@ paths:
         measure]).last(time_window) operator #`
 
 
-        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
-        - **`rollup_method`** The stats roll-up method - supports `count`, `avg`,
-        and `cardinality`.
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
 
-        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
-        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - **`#`** an integer or decimal number used to set the threshold.'
+        - `#` an integer or decimal number used to set the threshold.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -23687,6 +24129,7 @@ paths:
         type: idempotent
   /api/v1/monthly_custom_reports:
     get:
+      deprecated: true
       description: Get monthly custom reports.
       operationId: GetMonthlyCustomReports
       parameters:
@@ -23752,6 +24195,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/monthly_custom_reports/{report_id}:
     get:
+      deprecated: true
       description: Get specified monthly custom reports.
       operationId: GetSpecifiedMonthlyCustomReports
       parameters:
@@ -24194,7 +24638,7 @@ paths:
         type: idempotent
   /api/v1/org:
     get:
-      description: List your managed organizations.
+      description: This endpoint returns data on your top-level organization.
       operationId: ListOrgs
       responses:
         '200':
@@ -24357,6 +24801,47 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+  /api/v1/org/{public_id}/downgrade:
+    post:
+      description: Only available for MSP customers. Removes a child organization
+        from the hierarchy of the master organization and places the child organization
+        on a 30-day trial.
+      operationId: DowngradeOrg
+      parameters:
+      - description: The `public_id` of the organization you are operating within.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          example: abc123
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgDowngradedResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Spin-off Child Organization
+      tags:
+      - Organizations
+      x-menu-order: 6
+      x-undo:
+        type: unsafe
   /api/v1/org/{public_id}/idp_metadata:
     post:
       description: 'There are a couple of options for updating the Identity Provider
@@ -24518,6 +25003,151 @@ paths:
       x-menu-order: 4
       x-undo:
         type: safe
+  /api/v1/security_analytics/signals/{signal_id}/add_to_incident:
+    patch:
+      description: Add a security signal to an incident. This makes it possible to
+        search for signals by incident within the signal explorer and to view the
+        signals on the incident timeline.
+      operationId: AddSecurityMonitoringSignalToIncident
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddSignalToIncidentRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessfulSignalUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - security_monitoring_signals_write
+        apiKeyAuth: []
+        appKeyAuth: []
+      summary: Add a security signal to an incident
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v1/security_analytics/signals/{signal_id}/assignee:
+    patch:
+      description: Modify the triage assignee of a security signal.
+      operationId: EditSecurityMonitoringSignalAssignee
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignalAssigneeUpdateRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessfulSignalUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Modify the triage assignee of a security signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v1/security_analytics/signals/{signal_id}/state:
+    patch:
+      description: Change the triage state of a security signal.
+      operationId: EditSecurityMonitoringSignalState
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignalStateUpdateRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessfulSignalUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Change the triage state of a security signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/series:
     post:
       description: "The metrics end-point allows you to post time-series data that
@@ -24525,7 +25155,7 @@ paths:
         3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed
         size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting
         metrics directly to the Datadog API without using DogStatsD, expect:\n\n-
-        64 bits for the timestamp\n- 32 bits for the value\n- 40 bytes for the metric
+        64 bits for the timestamp\n- 64 bits for the value\n- 40 bytes for the metric
         names\n- 50 bytes for the timeseries\n- The full payload is approximately
         100 bytes. However, with the DogStatsD API,\ncompression is applied, which
         reduces the payload size."
@@ -24822,10 +25452,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all SLOs
       tags:
       - Service Level Objectives
@@ -25005,9 +25631,6 @@ paths:
       x-menu-order: 2
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create an SLO Correction.
       operationId: CreateSLOCorrection
@@ -25066,9 +25689,6 @@ paths:
         - name: slo_correction_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/correction/{slo_correction_id}:
     delete:
       description: Permanently delete the specified SLO correction object.
@@ -25103,9 +25723,6 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Get an SLO correction.
       operationId: GetSLOCorrection
@@ -25143,11 +25760,8 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
-      description: Update the specified SLO correction object object.
+      description: Update the specified SLO correction object.
       operationId: UpdateSLOCorrection
       parameters:
       - description: The ID of the SLO correction object.
@@ -25197,9 +25811,6 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/{slo_id}:
     delete:
       description: 'Permanently delete the specified service level objective object.
@@ -25294,10 +25905,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an SLO's details
       tags:
       - Service Level Objectives
@@ -25393,19 +26000,12 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get Corrections For an SLO
       tags:
       - Service Level Objectives
       x-menu-order: 6
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/{slo_id}/history:
     get:
       description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\nThe
@@ -25484,10 +26084,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
@@ -25531,7 +26127,7 @@ paths:
       summary: Get details of batch
       tags:
       - Synthetics
-      x-menu-order: 27
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/synthetics/locations:
@@ -25557,7 +26153,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -25601,7 +26197,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 21
+      x-menu-order: 22
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -25640,7 +26236,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: idempotent
     get:
@@ -25678,7 +26274,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         type: safe
     put:
@@ -25724,7 +26320,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests:
@@ -26457,7 +27053,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -26585,7 +27181,7 @@ paths:
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         type: safe
     put:
@@ -26858,7 +27454,7 @@ paths:
       summary: Get all global variables
       tags:
       - Synthetics
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         type: safe
     post:
@@ -26901,7 +27497,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -26950,7 +27546,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
-      x-menu-order: 20
+      x-menu-order: 21
       x-undo:
         type: idempotent
     get:
@@ -27042,7 +27638,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 18
+      x-menu-order: 20
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -27357,7 +27953,8 @@ paths:
         type: safe
   /api/v1/usage/attribution:
     get:
-      description: Get Usage Attribution.
+      deprecated: true
+      description: Get usage attribution.
       operationId: GetUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -27440,7 +28037,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get Usage Attribution
+      summary: Get usage attribution
       tags:
       - Usage Metering
       x-menu-order: 29
@@ -27616,8 +28213,7 @@ paths:
         type: safe
   /api/v1/usage/ci-app:
     get:
-      description: Get hourly usage for CI Visibility (Tests, Pipeline, Combo, and
-        Spans).
+      description: Get hourly usage for CI Visibility (Tests, Pipeline, and Spans).
       operationId: GetUsageCIApp
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -27967,7 +28563,7 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: "Get Hourly Usage Attribution.\n\nThis API endpoint is paginated.
+      description: "Get hourly usage attribution.\n\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
@@ -28018,6 +28614,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
       responses:
         '200':
           content:
@@ -28042,7 +28645,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get Hourly Usage Attribution
+      summary: Get hourly usage attribution
       tags:
       - Usage Metering
       x-menu-order: 30
@@ -28467,7 +29070,7 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: "Get Monthly Usage Attribution.\n\nThis API endpoint is paginated.
+      description: "Get monthly usage attribution.\n\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
@@ -28531,6 +29134,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Include child org usage in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
       responses:
         '200':
           content:
@@ -28555,7 +29165,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get Monthly Usage Attribution
+      summary: Get monthly usage attribution
       tags:
       - Usage Metering
       x-given:
@@ -30111,6 +30721,10 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
   name: Screenboards
   x-deprecated: true
+- description: 'Detection rules for generating signals and listing of generated
+
+    signals.'
+  name: Security Monitoring
 - description: 'The service check endpoint allows you to post check statuses for use
     with monitors.
 
@@ -30228,7 +30842,7 @@ tags:
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.
 
-    It is retained for the past 15 months.
+    It is retained for 15 months.
 
 
     You can retrieve up to 24 hours of hourly usage data for multiple organizations,

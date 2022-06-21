@@ -30,7 +30,7 @@ further_reading:
 
 The RUM Browser SDK generates events that have associated metrics and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.loading_time` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
+There are additional [metrics and attributes specific to a given event type](#event-specific-metrics-and-attributes). For example, the `view.loading_time` metric is associated with view events, and the `resource.method` attribute is associated with resource events.
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -104,7 +104,6 @@ The following attributes are related to the geo-location of IP addresses:
 | `geo.country`         | string | Name of the country.                                                                                                                  |
 | `geo.country_iso_code`     | string | [ISO Code][2] of the country (for example, `US` for the United States or `FR` for France).                                                  |
 | `geo.country_subdivision`     | string | Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France). |
-| `geo.country_subdivision_iso_code` | string | [ISO Code][2] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
 | `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).                                                                 |
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (for example, `Paris` or `New York`).                                                                                   |
@@ -221,7 +220,7 @@ Detailed network timing data for the loading of an application’s resources are
 
 #### Source errors
 
-Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][13].
+Source errors include code-level information about the error. For more information about different error types, see the [MDN documentation][13].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -247,6 +246,15 @@ Source errors include code-level information about the error. More information a
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 | `action.name` | string | User-friendly name created (for example, `Click on #checkout`). For [Custom User Actions][15], the action name given in the API call. |
 
+### Frustration signals fields
+
+| Field                | Type   | Description                                                   |
+|-------------------------------|--------|---------------------------------------------------------------|
+| `session.frustration.count`     | number | Count of all frustration signals associated with one session. |
+| `view.frustration.count`        | number | Count of all frustration signals associated with one view.    |
+| `action.frustration.type:dead_click`  | string | The dead clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:rage_click`  | string | The rage clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:error_click` | string | The error clicks detected by the RUM Browser SDK.             |
 
 ## Further Reading
 
@@ -257,7 +265,7 @@ Source errors include code-level information about the error. More information a
 [3]: /help/
 [4]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
 [5]: /synthetics/browser_tests/
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#how-is-loading-time-calculated
+[6]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [7]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event

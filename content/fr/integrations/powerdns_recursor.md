@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/integrations/powerdns
+- /fr/integrations/powerdns
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -14,20 +14,21 @@ assets:
     powerdns_processes: assets/saved_views/powerdns_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - network
-  - autodiscovery
-  - log collection
+- web
+- network
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md'
-display_name: "PowerDNS\_Recursor"
+- https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
+display_name: PowerDNS Recursor
 draft: false
 git_integration_title: powerdns_recursor
 guid: ae533b67-a2af-45ce-8e23-235acb3a3893
 integration_id: powerdns
-integration_title: "PowerDNS\_Recursor"
+integration_title: PowerDNS Recursor
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -36,16 +37,20 @@ metric_prefix: powerdns.
 metric_to_check: powerdns.recursor.questions
 name: powerdns_recursor
 process_signatures:
-  - pdns_server
-  - systemctl start pdns@
-public_title: "Intégration Datadog/PowerDNS\_Recursor"
-short_description: Analysez le trafic entrant et sortant de vos recursors PowerDNS afin d'identifier les anomalies.
+- pdns_server
+- systemctl start pdns@
+public_title: Intégration Datadog/PowerDNS Recursor
+short_description: Analysez le trafic entrant et sortant de vos recursors PowerDNS
+  afin d'identifier les anomalies.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Analysez les performances de votre PowerDNS Recursor et surveillez le trafic inhabituel ou préoccupant. Ce check de l'Agent recueille une multitude de métriques issues de vos recursors, vous permettant ainsi de mesurer :
@@ -68,7 +73,7 @@ Le check PowerDNS Recursor est inclus avec le package de l'[Agent Datadog][1] 
 
 #### Préparer PowerDNS
 
-Ce check recueille des statistiques de performance via l'API de statistiques de PowerDNS Recursor. Cette API n'est activée par défaut qu'à partir de la version 4.1 de pdns_recursor. Si vous utilisez une version plus ancienne, activez l'API en ajoutant le code ci-dessous au fichier de configuration de votre recursor (p. ex. `/etc/powerdns/recursor.conf`) :
+Ce check recueille des statistiques de performance à l'aide de l'API de statistiques de PowerDNS Recursor. Cette API n'est activée par défaut qu'à partir de la version 4.1 de pdns_recursor. Si vous utilisez une version plus ancienne, activez l'API en ajoutant le code ci-dessous au fichier de configuration de votre recursor, par exemple `/etc/powerdns/recursor.conf` :
 
 ```conf
 webserver=yes
@@ -194,15 +199,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "powerdns_recursor" >}}
 
 
-
 ### Événements
 
 Le check PowerDNS n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "powerdns_recursor" >}}
 
-**powerdns.recursor.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API de statistiques du recursor. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

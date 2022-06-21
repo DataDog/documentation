@@ -1,17 +1,18 @@
 ---
-title: Vector を使用して複数の Agent を集計する
-kind: documentation
 further_reading:
-  - link: /logs/
-    tag: ドキュメント
-    text: ログの収集
-  - link: /agent/proxy/
-    tag: ドキュメント
-    text: プロキシを使用するよう Agent を構成する
-  - link: https://vector.dev/docs/
-    tag: ドキュメント
-    text: Vector ドキュメント
+- link: /logs/
+  tag: ドキュメント
+  text: ログの収集
+- link: /agent/proxy/
+  tag: ドキュメント
+  text: プロキシを使用するよう Agent を構成する
+- link: https://vector.dev/docs/
+  tag: ドキュメント
+  text: Vector ドキュメント
+kind: documentation
+title: Vector を使用して複数の Agent を集計する
 ---
+
 ## 概要
 
 Datadog Agent は [Vector][1] と組み合わせて使用することができます。このシナリオでは、Agent が Vector に
@@ -30,81 +31,112 @@ Vector はデータを Datadog および他の宛先に送信する前に処理�
 
 **注**:
 
-- サポート対象となるのはログの集計のみです。
-- Vector は他のソースから直接ログを収集することができます。その際、サードパーティのログには適切なタグ付けがされていない場合があります。[タグ][8]、ソース、またはサービスの値を追加するには、[Vector Remap Language][9] を使用すると便利です。
+- サポート対象となるのはログとメトリクスの集計のみです。
+- Vector は他のソースから直接ログとメトリクスを収集することができます。その際、サードパーティのログには適切なタグ付けがされていない場合があります。[タグ][8]、ソース、またはサービスの値を追加するには、[Vector Remap Language][9] を使用すると便利です。
 
 ## コンフィギュレーション
 
 ### Agent の構成
-Vector にログを送信するには、Agent のコンフィギュレーションファイル、`datadog.yaml` を更新します。
-サポート対象となるのはログのデータタイプのみです。`datadog.yaml` ファイルで以下の値を更新してください。
+
+この構成には、Datadog Agent のバージョン 6.35 または 7.35 が必要です。
+
+Vector にログを送信するには、Agent のコンフィギュレーションファイルである `datadog.yaml` を更新してください。
 
 ```yaml
-logs_config:
-  logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
-  logs_no_ssl: true # TLS/SSL が Vector 側で有効化されていない場合
-  use_http: true # Vector `datadog_logs` ソースは、HTTP(S) を介したイベントのみをサポートし、生の TCP はサポートしません
-  # use_v2_api: false # v0.17.0 より前のバージョンの Vector を使用している場合は、この行のコメントを解除します
+vector:
+  logs.enabled: true
+  # Vector 側で TLS/SSL が有効になっている場合、プロトコルを https に調整します
+  logs.url: "http://<VECTOR_HOST>:<VECTOR_PORT>"
+# Vector の v0.17.0 以前のバージョンを使用している場合は、以下の行をコメント解除します
+# logs_config.use_v2_api: false
 ```
 
-`VECTOR_HOST` は Vector を実行しているシステムのホスト名で、`VECTOR_PORT` は
-Vector `datadog_logs` ソースをリッスンしている TCP ポートです。
+メトリクスについては、`datadog.yaml`ファイル内の以下の値を更新します。
+
+```yaml
+vector:
+  metrics.enabled: true
+  # Vector 側で TLS/SSL が有効になっている場合、プロトコルを https に調整します
+  metrics.url: "http://<VECTOR_HOST>:<VECTOR_PORT>"
+```
+
+`VECTOR_HOST` は Vector を実行しているシステムのホスト名で、`VECTOR_PORT` は Vector `datadog_agent` ソースをリッスンしている TCP ポートです。
+
+### Docker コンフィギュレーション
+
+Docker を使用している場合は、Agent のコンフィギュレーションファイルに以下を追加します。
+
+```
+-e DD_VECTOR_METRICS_URL=http://<VECTOR_HOST>:<VECTOR_PORT>
+-e DD_VECTOR_METRICS_ENABLED=true
+-e DD_VECTOR_LOGS_URL=http://<VECTOR_HOST>:<VECTOR_PORT>
+-e DD_VECTOR_LOGS_ENABLED=true
+```
 
 ### Vector のコンフィギュレーション
-Datadog Agent からログを受信するには、Vector に[datadog_logs source][10] を設定します。
-Datadog にログを送信するには、Vector に少なくとも 1 つの [datadog_logs sink][11] を設定する必要があります。
+Datadog Agent からログやメトリクスを受信するには、Vector に [datadog_agent source][10] を構成します。Datadog にログを送信するには、Vector に少なくとも 1 つの [datadog_logs sink][11] を構成する必要があります。同様に、Datadog にメトリクスを送信するには、Vector に少なくとも 1 つの [datadog_metrics シンク][12]が構成されている必要があります。
 
-Vector での処理中にログに適用できるコンフィギュレーションパラメーターや変換の一覧については、
-公式の [Vector ドキュメント][12]を参照してください。
+Vector での処理中にログに適用できるコンフィギュレーションパラメーターや変換の一覧については、公式の [Vector ドキュメント][13]を参照してください。
 
-ここでは、Vector Remap Language を使ってすべてのログにタグを追加するコンフィギュレーションの例をご紹介します。
+ここでは、Vector Remap Language を使ってすべてのログとメトリクスにタグを追加するコンフィギュレーションの例をご紹介します。
 
 ```yaml
 sources:
   datadog_agents:
     type: datadog_agent
-    address: "[::]:8080" # 上記の <VECTOR_PORT> をここで使用するポート値に設定
+    # ここで使用するポート値には、上記の <VECTOR_PORT> を設定する必要があります
+    address: "[::]:8080"
+   multiple_outputs: true # メトリクスとログを自動的に分離するために
 
 transforms:
-  add_tags:
+  tag_logs:
     type: remap
     inputs:
-      - datadog_agents
+      - datadog_agents.logs
     source: |
-      # ここでは、`!` の省略形を `string` 関数とともに使用しています。.ddtags が "string" でない場合はエラーになります。
-      # .ddtags フィールドは、常に文字列であることが期待されています。
+      # ここで `!` の省略形は `string` 関数で使用され、
+      # .ddtags が "string" でない場合はエラーになります。
+      # .ddtags フィールドは、常に文字列であることが期待されます。
       .ddtags = string!(.ddtags) + ",sender:vector"
+  tag_metrics:
+    type: remap
+    inputs:
+      - datadog_agents.metrics
+    source: |
+      .tags.sender = "vector"
 
 sinks:
-  to_datadog:
+  log_to_datadog:
     type: datadog_logs
     inputs:
-       - add_tags
+       - tag_logs
     default_api_key: "${DATADOG_API_KEY_ENV_VAR}"
     encoding:
       codec: json
+  metrics_to_datadog:
+    type: datadog_metrics
+    inputs:
+       - tag_metrics
+    default_api_key: "${DATADOG_API_KEY_ENV_VAR}"
 ```
 
 ### Kubernetes を使用する
 
 公式の Datadog チャートを使用して、上記の [Agent コンフィギュレーション](#agent-configuration)を `agents.customAgentConfig` 値に追加します。**注**: `agents.customAgentConfig` を考慮するために、`agent.useConfigMap` を `true` に設定する必要があります。
 
-Datadog Helm チャートの詳細については、[Kubernetes ドキュメント][13]を参照してください。
+Datadog Helm チャートの詳細については、[Kubernetes ドキュメント][14]を参照してください。
 
-Vector では、Datadog のログソースがあらかじめ設定された[データ集計用公式チャート][14]を提供しています。
-Helm を使用した Vector のインストールについては
-[公式の Vector ドキュメント][15]を参照してください。
+Vector では、Datadog のログソースがあらかじめ設定された[データ集計用公式チャート][15]を提供しています。Helm を使用した Vector のインストールについては[公式の Vector ドキュメント][16]を参照してください。
 
-Datadog にログを送信するには、Vector のコンフィギュレーションに `datadog_logs` シンクを追加する必要があります。Vector のチャートでは、`customConfig` フィールドを使用して、`values.yaml` ファイル内の任意の有効な Vector のコンフィギュレーションを保持することができます。`datadog_logs` を有効にするには、[Vector のコンフィギュレーション](#vector-configuration)で説明したものと同様の設定を直接 Vector のチャートのコンフィギュレーションに含めることができます。
+Datadog にログを送信するには、Vector の構成に `datadog_logs` シンクを追加する必要があります。同様に、Datadog にメトリクスを送信するには、`datadog_metrics` シンクを Vector の構成に追加する必要があります。Vector のチャートには、`values.yaml` ファイルの `customConfig` フィールドを使用して、任意の有効な Vector の構成を保持することができます。`datadog_logs` を有効にするには、[Vector の構成](#vector-configuration)で説明したのと同じ種類の構成を、そのまま Vector のチャートの構成に含めることができます。
 
-## Vector で Datadog ログを操作する
+## Vector で Datadog のログとメトリクスを操作する
 
-Vector に送信されたログを活用すれば、ログ変換を行う [Vector Remap Language][3] など、Vector の全機能を利用することができます。
-Datadog Agent から送信されたログは、Vectorに到達すると期待される形式のスキーマで構造化されます。また
-Datadog API に直接ログを送信する場合は [API ドキュメント][16]に記載のスキーマの詳細説明を参照してください。
+Vector に送信されたログやメトリクスは、変換のための [Vector Remap Language][3] を含むベクターの全機能の恩恵を受けることができます。
 
-Vector が他のソースから収集したログは[高度な機能を使用して強化][8]することができます。VRL でこれらのログを調整し、
-期待されるスキーマに従って関連するフィールドにデータを入力します。
+Datadog Agent から送信されたログは、Vector が受信すると、期待されるスキーマを使用して構造化されます。Datadog API を使用してログを送信する場合、完全なスキーマの説明については、[API ドキュメント][17]を参照してください。
+
+Vector が他のソースから収集したログとメトリクスは[高度な機能を使用して強化][8]することができます。VRL でログとメトリクスを調整し、期待されるスキーマに従って関連するフィールドにデータを入力します。
 
 ## その他の参考資料
 
@@ -121,8 +153,9 @@ Vector が他のソースから収集したログは[高度な機能を使用し
 [9]: https://vector.dev/docs/reference/vrl/
 [10]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
 [11]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
-[12]: https://vector.dev/docs/reference/configuration/
-[13]: /ja/agent/kubernetes/?tab=helm
-[14]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
-[15]: https://vector.dev/docs/setup/installation/package-managers/helm/
-[16]: /ja/api/latest/logs/#send-logs
+[12]: https://vector.dev/docs/reference/configuration/sinks/datadog_metrics/
+[13]: https://vector.dev/docs/reference/configuration/
+[14]: /ja/agent/kubernetes/?tab=helm
+[15]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
+[16]: https://vector.dev/docs/setup/installation/package-managers/helm/
+[17]: /ja/api/latest/logs/#send-logs

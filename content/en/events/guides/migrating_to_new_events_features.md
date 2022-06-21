@@ -3,6 +3,10 @@ title: Migrating to the New Events Features
 kind: documentation
 aliases:
   /events/guides/migrating_from_stream_to_explorer
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-events/"
+  tag: "Blog"
+  text: "Troubleshoot faster with improved Datadog Events"
 ---
 
 <div class="alert alert-warning">
@@ -25,7 +29,7 @@ Launched more than 10 years ago, Datadog's event stream is one of its earliest f
 
 ## What action do I need to take?
 
-If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them on June 30, 2022.
+If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them by June 30, 2022 at the latest.
 
 <strong>If you use Terraform or other API-based scripts</strong> to manage all or some of your <strong>dashboards</strong>, Datadog will migrate queries in your event widgets and overlays to the new syntax, but you will need to update your scripts to keep them in sync before June 30, 2022.
 
@@ -72,7 +76,7 @@ The new query search allows you to use complex queries in event monitors with ne
 
 ### Pipelines
 
-With pipelines, events are parsed and enriched by chaining them sequentially through processors. Processors extract meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
+Datadog automatically parses JSON-formatted events. When events are not JSON-formatted, they are parsed and enriched by chaining them sequentially through a processing pipeline. Processors extract meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
 
 ## What Changed?
 
@@ -101,11 +105,14 @@ Many Event source names have changed. See the full list of affected [source name
 Your monitors are not evaluated beyond a 48 hour window. If you need to use a longer evaluation window, you can [generate custom metrics][3] from events and use a metrics monitor, where the evaluation window can be up to one month.
 
 ### You can group by only up to 4 facets.
-(Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example N = 30 resulting hosts if 3 facets and one facet is `host`.
+(Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example, N = 30 resulting hosts if grouping by two facets and one facet is `host`.
   * One facet results in a limit of 1000 top values.
   * Two facets results in a limit of 30 top values per facet (at most 900 groups)
   * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
-  * Four facets results in a limit of five top values per group (at most 625 groups)
+  * Four facets results in a limit of 5 top values per group (at most 625 groups)
+
+### Recovery thresholds in monitors are no longer supported
+Event monitor thresholds no longer support the `warning_recovery` and `critical_recovery` threshold types. Recovery thresholds need to be removed in new Event monitors.
 
 If you are using these features, [contact Support][6] to get help finding an alternative solution.
 
@@ -158,7 +165,7 @@ EC2 Instance marked for maintenance
 : Legacy syntax </br>
 `events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`
 : New syntax </br>
-`events('"Upcoming AWS maintenance event"').rollup("count").by("name,host").last("2d") >= 1`
+`events("Upcoming AWS maintenance event").rollup("count").by("name,host").last("2d") >= 1`
 
 Zabbix or Prometheus has triggered an alert for a service today
 : Legacy syntax </br>
@@ -171,6 +178,11 @@ No events received in a datacenter for service `datadog-agent`
 Legacy Event Monitors do not support cardinality rollup.
 : New syntax </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /events/explorer
 [2]: /events/explorer/#event-analytics

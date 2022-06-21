@@ -28,8 +28,8 @@ RUM ビューイベントでは、すべてのページビューのパフォー�
 - **RUM ウォーターフォール**: [RUM エクスプローラー][3]のあらゆる RUM ビューイベントでアクセス可能で、ここから特定のページビューのパフォーマンスのトラブルシューティングができます。エンドユーザーのパフォーマンスに影響を与えているウェブサイトのアセットおよびリソース、長時間タスク、フロントエンドエラーなどを、ページレベルで表示されます。
 
 ### コアウェブバイタル
-<div class="alert alert-warning"> 
-  <strong>注:</strong>コアウェブバイタルメトリクスは、Datadog の <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.0.0 以降から入手できます。
+<div class="alert alert-warning">
+  コアウェブバイタルメトリクスは、Datadog の <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.2.0 以降から入手できます。
 </div>
 
 [Google のウェブに関する主な指標][4]は、サイトのユーザーエクスペリエンスを監視するために設計された 3 つのメトリクスのセットです。これらのメトリクスは、負荷パフォーマンス、対話性、視覚的安定性のビューを提供することに重点を置いています。各メトリクスには、優れたユーザーエクスペリエンスにつながる値の範囲に関するガイダンスが付属しています。Datadog では、このメトリクスの 75 パーセンタイルの監視をおすすめしています。
@@ -69,20 +69,45 @@ RUM ビューイベントでは、すべてのページビューのパフォー�
 
 ## シングルページアプリケーション (SPA) の監視
 
-シングルページアプリケーション (SPA) の場合、RUM SDK は、`loading_type` 属性を使用して、`initial_load` ナビゲーションと `route_change` ナビゲーションを区別します。ウェブページをクリックすると、ページが完全に更新されずに新しいページが表示される場合、RUM SDK は、`loading_type:route_change` を使用して新しいビューイベントを開始します。RUM は、[履歴 API][15] を使用してページの変更を追跡します。
+シングルページアプリケーション (SPA) の場合、RUM ブラウザ SDK は、`loading_type` 属性を使用して、`initial_load` ナビゲーションと `route_change` ナビゲーションを区別します。ウェブページをクリックすると、ページが完全に更新されずに新しいページが表示される場合、RUM SDK は、`loading_type:route_change` を使用して新しいビューイベントを開始します。RUM は、[履歴 API][15] を使用してページの変更を追跡します。
 
 Datadog は、ページの読み込みに必要な時間を計算する独自のパフォーマンスメトリクス、`loading_time` を提供します。このメトリクスは、`initial_load` と `route_change` の両方のナビゲーションで機能します。
 
-### 読み込み時間はどのように計算されますか？
+### ロード時間の計算方法
 
 最新のウェブアプリケーションを考慮するために、読み込み時間はネットワークリクエストと DOM のミューテーションを監視します。
 
 - **Initial Load**: 読み込み時間は、次の_どちらか長い方_になります。
 
   - `navigationStart` と `loadEventEnd` の差。
-  - または、`navigationStart` と、ページに 100 ミリ秒を超えて初めてアクティビティがないときの差 (進行中のネットワークリクエストまたは DOM ミューテーションとして定義されたアクティビティ)。
+  - または、`navigationStart` からページにアクティビティがない最初の時間までの差。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
 
-- **SPA Route Change**: 読み込み時間は、ユーザーのクリックと、ページに 100 ミリ秒を超えて初めてアクティビティがないときの差に等しくなります (進行中のネットワークリクエストまたは DOM ミューテーションとして定義されたアクティビティ)。
+- **SPA Route Change**: ロード時間は、ユーザーがクリックしてから、そのページに初めてアクティビティが発生するまでの差に相当します。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
+
+### ページアクティビティの計算方法
+
+ナビゲーションやクリックが発生するたびに、RUM ブラウザ SDK はページのアクティビティを追跡し、インターフェイスが再び安定するまでの時間を推定します。ネットワークリクエストと DOM の変異を見ることで、ページにアクティビティがあると判断されます。100ms 以上継続的なリクエストがなく、DOM の変異もない場合、ページアクティビティは終了します。100ms の間にリクエストも DOM ミューテーションも発生しなかった場合、そのページはアクティビティがないと判断されます。
+
+最後のリクエストまたは DOM 変異から 100ms という基準は、以下のシナリオではアクティビティの正確な判断にならないかもしれません。
+
+- アプリケーションは、定期的またはクリックごとに API へのリクエストを送信することで分析を収集します。
+
+- アプリケーションは "[comet][16])” の技術 (つまり、ストリーミングやロングポーリング) を使用しており、リクエストは不定時間保留されたままです。
+
+このような場合のアクティビティ判定の精度を向上させるには、`excludedActivityUrls` を指定します。これは、ページアクティビティを計算する際に RUM ブラウザ SDK が除外するリソースのリストです。
+
+```javascript
+DD_RUM.init({
+    ...
+    excludedActivityUrls: [
+        // 正確な URL を除外する
+        'https://third-party-analytics-provider.com/endpoint',
+
+        // /comet で終わる URL を除外する
+        /\/comet$/
+    ]
+})
+```
 
 ### Hash SPA ナビゲーション
 
@@ -109,9 +134,9 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-タイミングが送信されると、タイミングは `@view.custom_timings.<timing_name>` (たとえば `@view.custom_timings.first_scroll`) としてアクセス可能になります。RUM 分析またはダッシュボードでグラフを作成する前に、[メジャーを作成][16]する必要があります。
+タイミングが送信されると、タイミングは `@view.custom_timings.<timing_name>` (たとえば `@view.custom_timings.first_scroll`) としてアクセス可能になります。RUM 分析またはダッシュボードでグラフを作成する前に、[メジャーを作成][17]する必要があります。
 
-**注**: シングルページアプリケーションの場合、`addTiming` API により現在の RUM ビューの開始の相対的なタイミングが発行されます。たとえば、ユーザーがアプリケーションを表示し（初期ロード）、次に別のページを 5 秒間表示して（ルート変更）、8 秒後に `addTiming` をトリガーした場合、タイミングは 8-5 = 3 秒となります。
+**注**: シングルページアプリケーションの場合、`addTiming` API により現在の RUM ビューの開始の相対的なタイミングが発行されます。たとえば、ユーザーがアプリケーションを表示し（初期ロード）、次に別のページを 5 秒間表示して（ルート変更）、8 秒後に `addTiming` をトリガーした場合、タイミングは `8-5 = 3` 秒となります。
 
 ## その他の参考資料
 
@@ -125,11 +150,12 @@ document.addEventListener("scroll", function handler() {
 [6]: https://web.dev/fid/
 [7]: https://web.dev/cls/
 [8]: /ja/synthetics/browser_tests/
-[9]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-is-loading-time-calculated
+[9]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [10]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[16]: /ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[16]: https://en.wikipedia.org/wiki/Comet_(programming
+[17]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures

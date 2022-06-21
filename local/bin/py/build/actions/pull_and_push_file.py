@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import re
+import pathlib
 import yaml
 
 from os.path import basename
@@ -38,7 +39,8 @@ def pull_and_push_file(content, content_dir):
 
     if output_content:
         destination_path = content["options"]["dest_path"].lstrip('/')
-
+        dest_path_dir = pathlib.Path(content_dir) / pathlib.Path(destination_path)
+        dest_path_dir.mkdir(parents=True, exist_ok=True)
         with open(
             "{}{}{}".format(
                 content_dir,

@@ -23,8 +23,8 @@ further_reading:
       text: 'Create and manage Synthetic Private Locations with Terraform'
 ---
 
-<div class="alert alert-warning">
-The access to this feature is restricted. For access to this feature, or if you would like to be added to the Windows Private Location beta allowing you to run IE11 browser tests, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+<div class="alert alert-info">
+If you would like to be added to the Windows Private Location beta, which allows you to run IE11 browser tests, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 </div>
 
 ## Overview
@@ -415,13 +415,133 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 {{< /tabs >}}
 
-#### Set up healthchecks
+#### Set up liveness and readiness probes
 
-Add a [healthcheck][10] mechanism so your orchestrator can ensure the workers are running correctly.
+Add a liveness or readiness probe so your orchestrator can ensure the workers are running correctly.
+
+For readiness probes, you need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configuration][15].
+
+{{< tabs >}}
+
+{{% tab "Docker Compose" %}}
+
+```yaml
+healthcheck:
+  retries: 3
+  test: [
+    "CMD", "wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
+  ]
+  timeout: 2s
+  interval: 10s
+  start_period: 30s
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes Deployment" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{% tab "Helm Chart" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "CMD-SHELL", "/usr/bin/wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "Fargate" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "CMD-SHELL", "wget -O /dev/null -q http://localhost:8080/liveness || exit 1"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "EKS" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+#### Additional health check configurations
+
+<div class="alert alert-danger">This method of adding private location health checks is no longer supported. Datadog recommends using liveness and readiness probes.</div>
 
 The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (2s by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
 
-Use the configuration below to set up healthchecks on your containers with:
+Use the configuration below to set up health checks on your containers with `livenessProbe`:
 
 {{< tabs >}}
 
@@ -524,10 +644,6 @@ livenessProbe:
 {{% /tab %}}
 
 {{< /tabs >}}
-
-#### Additional health check configurations
-
-If your container orchestrator of choice requires a health check endpoint, enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configurations][15].
 
 ### Test your internal endpoint
 

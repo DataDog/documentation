@@ -1,15 +1,16 @@
 ---
-title: API Screenboard
-kind: guide
 aliases:
-  - /fr/graphing/faq/screenboard-api-doc
-  - /fr/graphing/guide/screenboard-api-doc
+- /fr/graphing/faq/screenboard-api-doc
+- /fr/graphing/guide/screenboard-api-doc
+kind: guide
+title: API Screenboard
 ---
+
 <div class="alert alert-danger">
 Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/v1/dashboards/">nouvel endpoint Dashboards</a>.
 </div>
 
-L'endpoint `Screenboard` vous permet de programmer la création, la mise à jour, la suppression et la récupération de screenboards. [En savoir plus sur les screenboards][1].
+L'endpoint `Screenboard` vous permet de programmer la création, la mise à jour, la suppression et la récupération de screenboards.
 
 ## Créer un screenboard
 
@@ -256,7 +257,7 @@ curl -X PUT -H "Content-type: application/json" \
 
 ## Supprimer un screenboard
 
-Supprimez un [screenboard][1] existant.
+Supprimez un screenboard existant.
 *Cet endpoint ne prend aucun argument JSON.*
 
 ### Signature
@@ -418,7 +419,7 @@ curl -X GET \
 
 ## Récupérer tous les screenboards
 
-Récupérez toutes les définitions de vos [screenboards][1].
+Récupérez toutes les définitions de vos screenboards.
 
 ### Signature
 
@@ -474,5 +475,3 @@ curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY
 
 {{% /tab %}}
 {{< /tabs >}}
-
-[1]: /fr/dashboards/screenboard/

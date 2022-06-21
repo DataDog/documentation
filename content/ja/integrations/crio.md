@@ -9,17 +9,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - コンテナ
+- コンテナ
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/crio/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/crio/README.md
 display_name: CRI-O
 draft: false
 git_integration_title: crio
 guid: 40fd8230-d178-4e8e-9e6a-6ce4acc19a85
 integration_id: cri-o
 integration_title: CRI-O
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -31,10 +32,13 @@ public_title: Datadog-CRI-O インテグレーション
 short_description: CRI-O のすべてのメトリクスを Datadog で追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは [CRI-O][1] を監視します。

@@ -1,5 +1,5 @@
 ---
-title: .NET Applications
+title: .NET Getting Started with ASM
 kind: documentation
 code_lang: dotnet
 type: multi-code-lang
@@ -10,7 +10,7 @@ further_reading:
       text: '.NET Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Rules"
+      text: "OOTB Application Security Monitoring Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Monitoring"
@@ -26,7 +26,7 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 
    For information about which language and framework versions are supported by the library, see [Compatibility][2].
 
-2. **Enable Application Security Monitoring** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
+2. **Enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
    ```
    $target=[System.EnvironmentVariableTarget]::Process
    [System.Environment]::SetEnvironmentVariable("DD_APPSEC_ENABLED","true",$target)
@@ -88,7 +88,7 @@ net start w3svc
 ```
 
 **Or**, to avoid editing registry keys, edit the application settings in the `web.config` file of your application: 
-```
+```xml
 <configuration>
   <appSettings>
         <add key="DD_APPSEC_ENABLED" value="true"/>
@@ -97,7 +97,7 @@ net start w3svc
 ```
 
 This can also be done at the IIS application pools level in the `applicationHost.config` file, usually in `C:\Windows\System32\inetsrv\config\`: 
-```
+```xml
 <system.applicationHost>
 
     <applicationPools>
@@ -112,7 +112,7 @@ This can also be done at the IIS application pools level in the `applicationHost
 {{% tab "Linux" %}}
 
 Add the following to your application configuration: 
-```
+```shell
 DD_APPSEC_ENABLED=true
 ```
 {{% /tab %}}
@@ -120,7 +120,7 @@ DD_APPSEC_ENABLED=true
 
 Update your configuration container for APM by adding the following argument in your `docker run` command: 
 
-```
+```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
@@ -129,16 +129,16 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 
 Add the following environment variable value to your container Dockerfile:
 
-```
+```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the Application Security environment variable:
+Update your deployment configuration file for APM and add the ASM environment variable:
 
-```
+```yaml
 spec:
   template:
     spec:
@@ -155,7 +155,7 @@ spec:
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
-```
+```json
 "environment": [
   ...,
   {
@@ -169,7 +169,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% tab "AWS Fargate" %}}
 
 Add the following line to your container Dockerfile:
-```
+```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 

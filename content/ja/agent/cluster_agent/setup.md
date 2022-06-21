@@ -1,29 +1,32 @@
 ---
-title: Cluster Agentのドキュメント
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
-    tag: ブログ
-    text: Datadog Cluster Agent のご紹介
-  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
-    tag: ブログ
-    text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
-  - link: /agent/cluster_agent/clusterchecks/
-    tag: ドキュメント
-    text: Autodiscovery によるクラスターチェックの実行
-  - link: /agent/kubernetes/daemonset_setup/
-    tag: ドキュメント
-    text: Kubernetes DaemonSet のセットアップ
-  - link: /agent/cluster_agent/troubleshooting/
-    tag: ドキュメント
-    text: Datadog Cluster Agent のトラブルシューティング
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
+  tag: ブログ
+  text: Datadog Cluster Agent のご紹介
+- link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
+  tag: ブログ
+  text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
+- link: /agent/cluster_agent/clusterchecks/
+  tag: ドキュメント
+  text: Autodiscovery によるクラスターチェックの実行
+- link: /agent/kubernetes/daemonset_setup/
+  tag: ドキュメント
+  text: Kubernetes DaemonSet のセットアップ
+- link: /agent/cluster_agent/troubleshooting/
+  tag: ドキュメント
+  text: Datadog Cluster Agent のトラブルシューティング
+kind: documentation
+title: Cluster Agentのドキュメント
 ---
+
 お使いの Kubernetes クラスタで Datadog Cluster Agent を設定するには、以下の手順に従います。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Helm で Cluster Agent コレクションを有効にするには、[datadog-values.yaml][1] ファイルを次の Cluster Agent コンフィギュレーションで更新してから、Datadog Helm チャートをアップグレードします。
+Helm Chart `2.7.0` 以降、Cluster Agent はデフォルトで有効になっています。
+
+古いバージョンで有効にする場合、または `clusterAgent` キーを上書きするカスタム [datadog-values.yaml][1] を使用する場合、以下の Cluster Agent コンフィギュレーションで [datadog-values.yaml][1] ファイルを更新してから、Datadog Helm チャートをアップグレードします。
 
   ```yaml
   clusterAgent:
@@ -38,6 +41,24 @@ Helm で Cluster Agent コレクションを有効にするには、[datadog-val
 手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Datadog Operator `v0.7.0` 以降、Cluster Agent はデフォルトで有効になっています。
+
+明示的に有効にするには、`DatadogAgent` オブジェクトを以下のコンフィギュレーションで更新します。
+
+  ```yaml
+spec:
+  clusterAgent:
+    # clusterAgent.enabled -- これを false に設定すると、Datadog Cluster Agent が無効になります
+    enabled: true
+  ```
+
+Operator は次に、必要な RBAC を作成し、Cluster Agent をデプロイし、ランダムに生成されたトークン (Agent と Cluster Agent 間の通信を保護するため) を使用するように Agent DaemonSet コンフィギュレーションを変更します。このトークンは、`credentials.token` フィールドを設定することで手動で指定することができます。
+
+手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
+
 {{% /tab %}}
 {{% tab "Daemonset" %}}
 
@@ -160,7 +181,7 @@ Datadog Cluster Agent をセットアップした後、Datadog Agent コンフ�
 
 これらのコンフィギュレーションを適切に設定して `Daemonset` を再デプロイした後、Datadog Agent は Cluster Agent と通信できるようになります。
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent
+[1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/manifests/cluster-agent
 [2]: /ja/agent/kubernetes/?tab=daemonset
 [3]: /ja/agent/faq/rbac-for-dca-running-on-aks-with-helm/
 [4]: /ja/agent/cluster_agent/setup/?tab=daemonset#configure-the-datadog-agent
@@ -169,7 +190,7 @@ Datadog Cluster Agent をセットアップした後、Datadog Agent コンフ�
 [7]: https://raw.githubusercontent.com/DataDog/datadog-agent/main/Dockerfiles/manifests/cluster-agent/secret-application-key.yaml
 [8]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml
 [9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/install_info-configmap.yaml
-[10]: https://app.datadoghq.com/account/settings#api
+[10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://app.datadoghq.com/access/application-keys
 [12]: /ja/agent/cluster_agent/setup/?tab=daemonset#configure-rbac-permissions
 [13]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
@@ -215,6 +236,32 @@ Datadog Cluster Agent
 
 Datadog アカウントに Kubernetes イベントが流れ込み始め、Agent によって収集された関連メトリクスに、それぞれに対応するクラスターレベルのメタデータがタグ付けされます。
 
+### Windows コンテナ
+
+Datadog Cluster Agent は、Linux ノードにのみデプロイ可能です。
+
+Windows コンテナを監視するには、混在クラスターに 2 つの Helm チャートをインストールします。最初の Helm チャートは、Linux ノード用に Datadog Cluster Agent と Agent DaemonSet をデプロイします (`targetSystem: linux` を使用)。2 つ目の Helm チャート (`targetSystem: windows` を使用) は、Windows ノードにのみ Agent をデプロイし、最初の Helm チャートの一部としてデプロイされた既存の Cluster Agent に接続します。
+
+Windows ノードにデプロイされた Agent と Cluster Agent 間の通信を構成するには、次の `values.yaml` ファイルを使用します。
+
+```yaml
+targetSystem: windows
+existingClusterAgent:
+  join: true
+  serviceName: "<EXISTING_DCA_SECRET_NAME>" # Datadog Helm の最初のチャートから
+  tokenSecretName: "<EXISTING_DCA_SERVICE_NAME>" # Datadog Helm の最初のチャートから
+
+# datadogMetrics は最初のチャートで既にデプロイされているはずなので、デプロイを無効にします。
+datadog-crds:
+  crds:
+    datadogMetrics: false
+# kube-state-metrics のデプロイメントを無効にします
+datadog:
+  kubeStateMetricsEnabled: false
+```
+
+詳しくは、[Windows コンテナの問題のトラブルシューティング][2]をご覧ください。
+
 #### AWS の管理型サービスを監視
 
 MSK、ElastiCache、RDS などの AWS マネージドサービスを監視するには、`clusterChecksRunner` を設定して、Helm チャートの serviceAccountAnnotation を介して割り当てられた IAM ロールを持つポッドを作成します。次に、`clusterAgent.confd` の下にインテグレーションコンフィギュレーションを設定します。
@@ -244,3 +291,4 @@ clusterAgent:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[2]: https://docs.datadoghq.com/ja/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows

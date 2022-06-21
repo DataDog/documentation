@@ -8,6 +8,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
+    - link: "/continuous_integration/setup_pipelines/custom_tags_and_metrics/"
+      tag: "Documentation"
+      text: "Extend Pipeline Visibility by adding custom tags and metrics"
 ---
 
 {{< site-region region="gov" >}}
@@ -33,7 +36,7 @@ Configure the integration on a [project][1] or [group][2] by going to **Settings
 [1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 [2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
 {{% /tab %}}
-{{% tab "GitLab &gt;&equals; 14.1" %}}
+{{% tab "GitLab >= 14.1" %}}
 
 Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
 
@@ -43,7 +46,7 @@ You can also activate the integration at the GitLab [instance][3] level, by goin
 [2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
 [3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
 {{% /tab %}}
-{{% tab "GitLab &lt; 14.1" %}}
+{{% tab "GitLab < 14.1" %}}
 
 Enable the `datadog_ci_integration` [feature flag][1] to activate the integration. Run one of the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
 
@@ -136,6 +139,22 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+
+## Enable job log collection (beta)
+
+The following GitLab versions support collecting job logs:
+* GitLab.com (SaaS)
+* GitLab >= 14.8 (self-hosted) only if using [object storage to store job logs][6]
+
+To enable collection of job logs:
+
+1. Enable the `datadog_integration_logs_collection` [feature flag][7] in your GitLab self-hosted or GitLab.com account. This reveals the `Enable logs collection` option in the Datadog integration.
+2. Enable the `Enable logs collection` option and save the changes.
+
+Job logs are collected in the [Logs][8] product and automatically correlated with the GitLab pipeline within CI Visibility.
+
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility</div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -145,3 +164,6 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
+[7]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[8]: /logs/

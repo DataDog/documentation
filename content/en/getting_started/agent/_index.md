@@ -106,12 +106,12 @@ For help troubleshooting the Agent:
 ## Next steps
 
 {{< whatsnext desc="After the Agent is installed:">}}
-{{< nextlink href="/getting_started/integrations" tag="Documentation" >}}Learn about Integrations{{< /nextlink >}}
-{{< nextlink href="/getting_started/application" tag="Documentation" >}}Learn about the Datadog UI{{< /nextlink >}}
+{{< nextlink href="/getting_started/integrations" >}}Learn about Integrations{{< /nextlink >}}
+{{< nextlink href="/getting_started/application" >}}Learn about the Datadog UI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /integrations/
-[2]: /metrics/dogstatsd_metrics_submission/
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: /api/
 [4]: /infrastructure/process/
 [5]: /logs/

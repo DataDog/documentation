@@ -11,20 +11,21 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - security
-  - containers
-  - configuration & deployment
-  - log collection
+- security
+- containers
+- configuration & deployment
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
 display_name: open_policy_agent
 draft: false
 git_integration_title: open_policy_agent
 guid: 73fdfc40-51ea-11eb-ae93-0242ac130002
 integration_id: open-policy-agent
 integration_title: Open Policy Agent
+integration_version: 0.0.1
 is_public: true
 kind: integration
 maintainer: ara.pulido@datadoghq.com
@@ -36,8 +37,11 @@ public_title: Open Policy Agent
 short_description: Intégration d'OPA
 support: contrib
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Ce check recueille des métriques à partir d'[Open Policy Agent][1].
@@ -123,11 +127,11 @@ Pour installer le check open_policy_agent sur votre cluster Kubernetes :
 
 Le dashboard par défaut inclut des graphiques représentant une métrique portant sur les décisions d'OPA, à savoir `open_policy_agent.decisions`. Cette métrique est créée à partir des « logs de décision » d'OPA. Pour générer cette métrique et l'ajouter à cette section du dashboard, vous devez créer une nouvelle métrique générée par des logs dans Datadog.
 
-Commencez par créer une facette pour le champ `msg` des logs OPA. En effet, OPA générera uniquement des métriques pour les entrées de log de type « logs de décision ». Pour ce faire, sélectionnez une entrée de log provenant d'OPA, cliquez sur l'icône de réglages en regard du champ `msg` et sélectionnez « Create facet for @msg » :
+Commencez par créer une facette pour le champ `msg` des logs OPA. En effet, OPA génère uniquement des métriques pour les entrées de log de type « log de décision ». Pour ce faire, sélectionnez une entrée de log provenant d'OPA, cliquez sur l'icône de réglages en regard du champ `msg` et sélectionnez « Create facet for @msg » :
 
 ![Facette de msg][5]
 
-Créez ensuite deux facettes, pour les champs `input.request.kind.kind` et `result.response.allowed`. Ces deux facettes doivent être disponibles dans les entrées de log de type « log de décision ».
+Créez deux facettes, pour les champs `input.request.kind.kind` et `result.response.allowed`. Ces deux facettes doivent être disponibles dans les entrées de log de type « log de décision ».
 
 ![Facette kind][6]
 ![Facette allowed][7]
@@ -152,27 +156,18 @@ Une fois les facettes créées, générez la métrique souhaitée afin de compl�
 {{< get-metrics-from-git "open_policy_agent" >}}
 
 
-### Checks de service
-
-**`open_policy_agent.prometheus.health`** :<br>
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter au endpoint Prometheus. Si ce n'est pas le cas, renvoie UP.
-
-**`open_policy_agent.health`** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au endpoint de santé d'OPA, `OK` s'il renvoie 200 ou `WARNING` pour les autres cas.
-
-**`open_policy_agent.bundles_health`** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au endpoint de santé des lots d'OPA, `OK` s'il renvoie 200 ou `WARNING` pour les autres cas.
-
-**`open_policy_agent.plugins_health`** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au endpoint de santé des plug-ins d'OPA, `OK` s'il renvoie 200 ou `WARNING` pour les autres cas.
-
 ### Événements
 
 open_policy_agent n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "open_policy_agent" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][13].
+Besoin d'aide ? Contactez [l'assistance Datadog][14].
+
 
 [1]: https://www.openpolicyagent.org/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
@@ -186,4 +181,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/open_policy_agent/metadata.csv
-[13]: https://docs.datadoghq.com/fr/help/
+[13]: https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/assets/service_checks.json
+[14]: https://docs.datadoghq.com/fr/help/

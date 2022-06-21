@@ -17,10 +17,10 @@ The video below demonstrates a user looking at an overview dashboard for a web a
 
 {{< img src="dashboards/guide/context_links/overview.mp4" alt="Context Link Demo" video="true" style="width:80%;" >}}
 
-This guide introduces **context links** in your dashboards. 
-1. How context links work, and how to adapt them your exact needs (#context-links-how-to).
-2. Example use-cases on how to take advantage of context links configuration (#example-use-cases).
+This guide introduces **context links** in your dashboards and covers the following:
 
+1. [How context links work, and how to adapt them to your exact needs](#introduction-to-context-links).
+2. [Example use cases of the context links configuration](#example-use-cases).
 
 ## Introduction to context links
 
@@ -54,16 +54,16 @@ When applicable, context links embed:
 
 ### Customize context links
 
-For any [generic widget][16], enter its edit mode to access its **Context Links** section. Here, you can create your own context links, override default links, and promote or hide links.
+For any [generic widget][16], enter its edit mode to access its **Context Links** section. You can create your own context links, override default links, and promote or hide links.
 
 {{< img src="dashboards/guide/context_links/edit-links.png" alt="Edit links" style="width:75%;" >}}
 
-To define custom links or override the default links, specify the link name in the **Label** field and the link path in the **URL** field. You can use the URL parameter key-value helper.
+To define custom links or override the default links, specify the link name in the **Label** field and the link path in the **URL** field. Click **+ Add URL Parameter** to use the key-value helper.
 
 
 #### Context Links variables
 
-{{< img src="dashboards/guide/context_links/custom-link.png" alt="Customize link" style="width:75%;" >}}
+{{< img src="dashboards/guide/context_links/custom-link.png" alt="Set a key-value pair for a URL parameter in the URL" style="width:75%;" >}}
 
 Available variable types for context links include:
 
@@ -80,7 +80,7 @@ When you have to choose between `{{something}}` and `{{something.value}}`:
 
 In this example, when you click **View in Acme**, the link directs you to `https://prod.acme.io/search?what=basic&when=1643021787564`.
 
-{{< img src="dashboards/guide/context_links/view-in-acme.png" alt="Customize link" style="width:60%;" >}}
+{{< img src="dashboards/guide/context_links/view-in-acme.png" alt="Example context link to Acme" style="width:60%;" >}}
 
 The context link:
 
@@ -98,7 +98,7 @@ For a complex context link that encodes a wide variety of parameters, it can be 
 
 #### URL encoding
 
-{{< img src="dashboards/guide/context_links/url-encoding.png" alt="Customize link" style="width:75%;" >}}
+{{< img src="dashboards/guide/context_links/url-encoding.png" alt="Screenshot of a URL and key-value parameters" style="width:75%;" >}}
 
 Datadog handles URL encoding in context links.
 
@@ -176,7 +176,7 @@ If your platforms runs on multiple regions, your widget configuration depends on
 
 Your dashboard widget contains a link that takes you to the appropriate host in the AWS Console.
 
-{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 Query Interaction" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 Query context link" style="width:90%;" >}}
 
 Clicking the **AWS EC2 Instance Summary** link directs you to the AWS EC2 instance page in the AWS Console.
 
@@ -212,11 +212,11 @@ You would like to identify the `@session.ip` attribute from your RUM events with
 
 To do so, inject the `@session.ip` in a filter based on `@network.client.ip`, and build the appropriate filter `@network.client.ip:{{@session.ip.value}}`.
 
-{{< img src="dashboards/guide/context_links/logs-saved-view_query.png" alt="Logs Saved View result" style="width:70%;">}}
+{{< img src="dashboards/guide/context_links/logs-saved-view_query.png" alt="Example search query for saved views" style="width:70%;">}}
 
 For a RUM dashboard widget displaying insights per session IP and for specific countries, follow this link configuration.
 
-{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Logs Saved View result" style="width:70%;">}}
+{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Example URL configuration for saved views" style="width:70%;">}}
 
 #### Result
 

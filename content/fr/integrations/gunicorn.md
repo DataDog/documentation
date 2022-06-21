@@ -16,18 +16,19 @@ assets:
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - log collection
+- web
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
 display_name: Gunicorn
 draft: false
 git_integration_title: gunicorn
 guid: 5347bfe1-2e9b-4c92-9410-48b8659ce10f
 integration_id: gunicorn
 integration_title: Gunicorn
+integration_version: 2.3.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -36,21 +37,25 @@ metric_prefix: gunicorn.
 metric_to_check: gunicorn.workers
 name: gunicorn
 process_signatures:
-  - 'gunicorn: master'
+- 'gunicorn: master'
 public_title: Intégration Datadog/Gunicorn
-short_description: 'Surveillez les taux et les durées de requêtes, les taux de messages de log et les processus de travail.'
+short_description: Surveillez les taux et les durées de requêtes, les taux de messages
+  de log et les processus de travail.
 support: core
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ![Dashboard Gunicorn][1]
 
 ## Présentation
 
 L'Agent Datadog recueille une métrique clé de Gunicorn : le nombre de processus de travail en cours d'exécution. Il envoie également un check de service, qui vérifie si Gunicorn est en cours d'exécution ou non.
 
-Gunicorn peut fournir directement d'autres métriques via DogStatsD, y compris concernant :
+Gunicorn peut fournir directement d'autres métriques via DogStatsD, y compris :
 
 - Le taux de requêtes total
 - Le taux de requêtes par code de statut (2xx, 3xx, 4xx, 5xx)
@@ -63,7 +68,7 @@ Gunicorn peut fournir directement d'autres métriques via DogStatsD, y compris c
 
 Le check Gunicorn de l'Agent Datadog est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Gunicorn.
 
-Le check Gunicorn nécessite l'environnement Python de votre application Gunicorn pour obtenir le package [`setproctitle`][3]. Sans celui-ci, l'Agent Datadog signalera toujours qu'il ne parvient pas à trouver de processus principal `gunicorn` (et donc, qu'il ne peut pas non plus trouver de workers). Installez le package `setproctitle` dans l'environnement Python de votre application si vous souhaitez recueillir la métrique `gunicorn.workers`.
+Le check Gunicorn nécessite l'environnement Python de votre application Gunicorn pour obtenir le package [`setproctitle`][3]. Sans celui-ci, l'Agent Datadog signale qu'il ne parvient pas à trouver de processus principal `gunicorn` (et donc, qu'il ne peut pas non plus trouver de workers). Installez le package `setproctitle` dans l'environnement Python de votre application si vous souhaitez recueillir la métrique `gunicorn.workers`.
 
 ### Configuration
 
@@ -91,7 +96,7 @@ instances:
   - proc_name: <NOM_DE_VOTRE_APP>
 ```
 
-2. [Redémarrez l'Agent][2] pour commencer à envoyer vos métriques Gunicorn à Datadog.
+3. [Redémarrez l'Agent][8] pour commencer à envoyer vos métriques Gunicorn à Datadog.
 
 #### Collecte de logs
 
@@ -103,9 +108,11 @@ _Disponible à partir des versions > 6.0 de l'Agent_
    logs_enabled: true
    ```
 
-2. Utilisez la commande suivante pour configurer le chemin du fichier de log d'accès comme expliqué dans la [documentation Gunicorn][8] (en anglais) : `--access-logfile <CHEMIN_DU_FICHIER>`
+2. Utilisez la commande suivante pour configurer le chemin du fichier de [log d'accès][9] :
+    `--access-logfile <CHEMIN_DU_FICHIER>`
 
-3. Utilisez la commande suivante pour configurer le chemin du fichier de log d'erreurs comme expliqué dans la [documentation Gunicorn][9] (en anglais) : `--error-logfile FILE, --log-file <CHEMIN_DU_FICHIER>`
+3. Utilisez la commande suivante pour configurer le chemin du fichier de [log d'erreurs][10] :
+    `--error-logfile FILE, --log-file <CHEMIN_DU_FICHIER>`
 
 4. Ajoutez ce bloc de configuration à votre fichier `gunicorn.d/conf.yaml` pour commencer à recueillir vos logs Gunicorn :
 
@@ -128,11 +135,11 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
     Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple gunicorn.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-5. [Redémarrez l'Agent][2].
+5. [Redémarrez l'Agent][8].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][10] et cherchez `gunicorn` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][11] et cherchez `gunicorn` dans la section Checks.
 
 Si le statut n'est pas défini sur `OK`, consultez la section Dépannage.
 
@@ -154,9 +161,8 @@ udp        0      0 127.0.0.1:38374         127.0.0.1:8125          ESTABLISHED 
 Le check Gunicorn n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "gunicorn" >}}
 
-**gunicorn.is_running** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à trouver le processus maître Gunicorn ou s'il ne trouve aucun worker, actif ou non. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -196,17 +202,19 @@ ubuntu   18463 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 
 ## Pour aller plus loin
 
-- [Surveiller les performances de Gunicorn avec Datadog][12]
+- [Surveiller les performances de Gunicorn avec Datadog][14]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/gunicorn/images/gunicorn-dash.png
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://pypi.python.org/pypi/setproctitle
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/datadog_checks/gunicorn/data/conf.yaml.example
 [6]: https://docs.gunicorn.org/en/stable/settings.html#statsd-host
 [7]: https://docs.datadoghq.com/fr/guides/dogstatsd/
-[8]: https://docs.gunicorn.org/en/stable/settings.html#accesslog
-[9]: https://docs.gunicorn.org/en/stable/settings.html#errorlog
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/metadata.csv
-[12]: https://www.datadoghq.com/blog/monitor-gunicorn-performance
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.gunicorn.org/en/stable/settings.html#accesslog
+[10]: https://docs.gunicorn.org/en/stable/settings.html#errorlog
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/metadata.csv
+[13]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/assets/service_checks.json
+[14]: https://www.datadoghq.com/blog/monitor-gunicorn-performance

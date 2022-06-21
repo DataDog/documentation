@@ -5,10 +5,13 @@ further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
   text: "Datadog Events API"
+- link: "https://www.datadoghq.com/blog/datadog-events/"
+  tag: "Blog"
+  text: "Troubleshoot faster with improved Datadog Events"
 ---
 {{< site-region region="us,eu" >}}
 <div class="alert alert-warning">
-  The Events Explorer is being rolled out to all customers in Q1 2022. 
+  The Events Explorer is being rolled out to all customers in Q1 2022.
 </div>
 {{< /site-region >}}
 
@@ -48,7 +51,7 @@ Click **Options** to customize your Events Explorer:
 
 ## Time range
 
-The time frame selector controls the time range of events that are shown in the Explorer or Analytics, and sets the range of the timeline under the search bar. 
+The time frame selector controls the time range of events that are shown in the Explorer or Analytics, and sets the range of the timeline under the search bar.
 
 Change the time range by selecting a preset range from the time frame dropdown, or by entering a custom time range.
 
@@ -68,25 +71,25 @@ Like logs search, events search permits:
 
 Example queries:
 
-`source:(github OR chef)`           
+`source:(github OR chef)`
 : Show events from GitHub OR Chef.
 
-`host:(i-0ade23e6 AND db.myapp.com)` 
+`host:(i-0ade23e6 AND db.myapp.com)`
 : Show events from `i-0ade23e6` AND `db.myapp.com`.
 
-`service:kafka`                
+`service:kafka`
 : Show events from the `kafka` service.
 
-`status:error`                 
+`status:error`
 : Show events with an `error` status (supports: `error`, `warning`, `info`, `ok`).
 
-`availability-zone:us-east-1a` 
+`availability-zone:us-east-1a`
 : Show events in the `us-east-1a` AWS availability zone (AZ).
 
-`container_id:foo*`             
+`container_id:foo*`
 : Show events from all containers with an ID beginning with `foo`.
 
-`@evt.name:foo`                
+`@evt.name:foo`
 : Show the events with attribute `evt.name` equal to `foo`.
 
 See [Logs Search Syntax][1] for more details.
@@ -109,16 +112,16 @@ Once you add the facet, the value of this attribute is stored for all new views,
 
 Datadog supports `@notifications` in the messages of events when posted by the API. For example:
 
-`@all`                                  
+`@all`
 : Sends a notification to all members of your organization.
 
-`@test@example.com`                     
+`@test@example.com`
 : Sends an email to `test@example.com`.
 
-`@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>` 
+`@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>`
 : Posts the event or graph to the specified Slack channel.
 
-`@webhook`                              
+`@webhook`
 : Alerts or triggers the webhook. See the [blog post on webhooks][2].
 
 See [Notifications][3] to learn more.

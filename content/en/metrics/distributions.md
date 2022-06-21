@@ -6,7 +6,7 @@ aliases:
   - /developers/faq/characteristics-of-datadog-histograms/
   - /graphing/metrics/distributions/
 further_reading:
-  - link: "/metrics/dogstatsd_metrics_submission/"
+  - link: "/metrics/custom_metrics/dogstatsd_metrics_submission/"
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
