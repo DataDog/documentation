@@ -53,7 +53,7 @@ De plus, il est possible de définir des template variables RUM, de log ou d'APM
 Chaque dashboard affiche un menu déroulant *(Default Value)* à gauche des template variables. Lorsque vous modifiez la valeur d'une template variable, celle-ci n'est pas automatiquement enregistrée en tant que nouvelle vue. 
 Pour enregistrer les valeurs actuelles des template variables dans une nouvelle vue, cliquez sur le menu déroulant et sélectionnez *Save selections as view*. Vous serez alors invité à donner un nom unique à votre vue. Une fois enregistrée, la vue est ajoutée au menu déroulant. Cliquez dessus pour rétablir les valeurs de template variables précédemment enregistrées.
 
-#### Delete
+#### Suppression
 
 Pour supprimer une vue, cliquez sur le menu déroulant des vues enregistrées et sélectionnez *Manage views...*. Une fenêtre contenant chacune de vos vues enregistrées avec une icône en forme de corbeille s'affiche alors. Cliquez sur la corbeille appropriée pour supprimer la vue correspondante.
 
