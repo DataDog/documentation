@@ -69,9 +69,9 @@ function redirectCodeLang(codeLang = '') {
         // if cookie is not set, default to python
         newCodeLang = 'python';
         Cookies.set('code-lang', newCodeLang, { path: '/' });
-
-        toggleCodeBlocks(newCodeLang);
     }
+
+    toggleCodeBlocks(newCodeLang);
 }
 
 redirectCodeLang();
