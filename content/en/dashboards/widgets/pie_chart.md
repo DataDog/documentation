@@ -51,7 +51,7 @@ By default, the ‘auto’ option will show a labeled Aside legend within a dash
 
 Context links are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party). More details on context links can be found [here][4].
 
-<img style="width:80%; max-width: 700px;" alt="Pie Chart Context Links"  src="https://user-images.githubusercontent.com/19559239/175112166-12663086-88db-448a-b1aa-092b96011046.png">
+<img style="width:80%; max-width: 500px;" alt="Pie Chart Context Links"  src="https://user-images.githubusercontent.com/19559239/175112166-12663086-88db-448a-b1aa-092b96011046.png">
 
 ## Display & Interaction
 
