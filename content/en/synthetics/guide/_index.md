@@ -38,8 +38,8 @@ disable_sidebar: true
     {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Using a shadow DOM in browser tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Integrations:" >}}
-    {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross product correlation{{< /nextlink >}}
+{{< whatsnext desc="Datadog Integrations:" >}}
+    {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross-product correlation{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of the RUM Explorer in Synthetics{{< /nextlink >}}
 {{< /whatsnext >}}
 
