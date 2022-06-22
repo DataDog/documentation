@@ -227,7 +227,7 @@ sudo service datadog-agent restart
 
 #### Other configuration options
 
-The collection of logs, traces, and processes data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, notice that for the `logs_enabled` parameter, it is set to false.
+The collection of [logs][26], [traces][19], and [processes][27] data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, notice that for the `logs_enabled` parameter, it is set to false.
 
 ```yaml
 ##################################
@@ -242,23 +242,23 @@ The collection of logs, traces, and processes data can be enabled through the Ag
 ```
 
 Other Datadog features that can be configured through the Agent configuration file include:
-- Enabling OTLP Trace Ingestion
-- Customizing log collection to filter or scrub sensitive data
-- Setting trace sample rates 
+- Enabling [OTLP Trace Ingestion][28]
+- [Customizing log collection][29] to filter or scrub sensitive data
+- Configuring custom data through [DogStatsD][30]
 
 Throughout your setup, when the documentation refers to the `datadog.yaml` file or the Agent configuration file, this is the file you need to configure.
 
 ## Commands
 
-See [Agent Commands][26] to [Start][27], [Stop][28] or [Restart][25] your Agent.
+See [Agent Commands][31] to [Start][32], [Stop][33] or [Restart][25] your Agent.
 
 ## Troubleshooting
 
 For help troubleshooting the Agent:
 
-- See [Agent Troubleshooting][29]
-- View the [Agent Log Files][30]
-- Contact [Datadog support][31]
+- See [Agent Troubleshooting][34]
+- View the [Agent Log Files][35]
+- Contact [Datadog support][36]
 
 ## Further Reading
 
@@ -300,9 +300,14 @@ For help troubleshooting the Agent:
 [23]: /getting_started/tagging/
 [24]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [25]: /agent/guide/agent-commands/#restart-the-agent
-[26]: /agent/guide/agent-commands/
-[27]: /agent/guide/agent-commands/#start-the-agent
-[28]: /agent/guide/agent-commands/#stop-the-agent
-[29]: /agent/troubleshooting/
-[30]: /agent/guide/agent-log-files/
-[31]: /help/
+[26]: /logs/
+[27]: /infrastructure/process/?tab=linuxwindows#introduction
+[28]: /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/?tab=host
+[29]: /agent/logs/advanced_log_collection/
+[30]: /developers/dogstatsd/?tab=hostagent
+[31]: /agent/guide/agent-commands/
+[32]: /agent/guide/agent-commands/#start-the-agent
+[33]: /agent/guide/agent-commands/#stop-the-agent
+[34]: /agent/troubleshooting/
+[35]: /agent/guide/agent-log-files/
+[36]: /help/
