@@ -27,7 +27,7 @@ Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13
 
 Supported Azure PostgreSQL deployment types
-: Single Server, Flexible Server
+: PostgreSQL on Azure VMs, Single Server, Flexible Server
 
 Supported Agent versions
 : 7.36.1+
