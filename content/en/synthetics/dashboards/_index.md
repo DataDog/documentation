@@ -15,7 +15,7 @@ further_reading:
 
 When you create a Synthetics test, Datadog [collects data][1] and generates dashboards about your stack, browser applications, or overall tests' performance, private locations, and events. 
 
-Access your Synthetics dashboards by filtering for `Synthetics` in the search query of the [**Dashboard List**][2] or by clicking on the dropdown menu under [**Dashboards**][3] on the Synthetic Monitoring homepage.
+Access your Synthetics dashboards by filtering for `Synthetics` in the search query of the [**Dashboard List**][2] or by clicking on the dropdown menu under [**Dashboards**][3] on the [Synthetic Monitoring homepage][5].
 
 {{< img src="synthetics/dashboards/synthetic_tests_dashboards.png" alt="Synthetic Monitoring Dashboards" style="width:100%;">}}
 
@@ -51,3 +51,4 @@ To clone your Synthetics dashboard, click the **Settings** icon and select **Clo
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: https://app.datadoghq.com/synthetics/tests/
 [4]: /dashboards/
+[5]: https://app.datadoghq.com/synthetics/tests
