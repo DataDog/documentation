@@ -55,7 +55,7 @@ To drill-down into a category, hover over the outer portion of the category, and
 
 To access the content menu, first hover over an individual category: this can be a nested category, or group - such as Canada, or Canada > Chrome in the example before. This should reveal a vertical ellipsis button in the top right corner. When clicked, the context menu will appear.
 
-<img width="80%" alt="How to access the context menu on a treemap widget" src="https://user-images.githubusercontent.com/19559239/175116834-c4cd20c2-12bb-48b8-88a9-7c8a684273d4.png">
+<img width="50%" alt="How to access the context menu on a treemap widget" src="https://user-images.githubusercontent.com/19559239/175116834-c4cd20c2-12bb-48b8-88a9-7c8a684273d4.png">
 
 ### Full-Screen Interaction
 
