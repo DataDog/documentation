@@ -30,8 +30,8 @@ Like the Treemap widget, the [Pie Chart Widget][8] can also be used to display n
 ### Configuration Process
 
 1. Select one or more data sources from metrics or events
-  - Metrics: See the [querying documentation][1] to configure a metric query.
-  - Events: See the [log search documentation][2] to configure a log event query.
+    * Metrics: See the [querying documentation][1] to configure a metric query.
+    * Events: See the [log search documentation][2] to configure a log event query.
 2. (Optional) Modify query with a [formula][3]
 3. Customize your graph with the available options (below)
 
