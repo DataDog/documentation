@@ -17,7 +17,7 @@ The pie chart widget allows you to display proportions of one or datasets. This 
 
 *In the example below, unique page views stemming from the RUM dataset are shown at both the country and browser level. The innermost ring shows the user’s country, and the outermost ring is segmented proportionally to show the share of browsers used in each country.*
 
-<img style="width:80%; max-width: 700px;" alt="Pie Chart Example" src="https://user-images.githubusercontent.com/19559239/175108545-a3944ec6-b900-4b2a-908a-bd2dee0f0f67.png">
+<img style="width:80%; max-width: 500px;" alt="Pie Chart Example" src="https://user-images.githubusercontent.com/19559239/175108545-a3944ec6-b900-4b2a-908a-bd2dee0f0f67.png">
 
 ## Similar Widget: Treemap
 
