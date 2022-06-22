@@ -78,8 +78,6 @@ instances:
     azure:
       deployment_type: 'sql_database'
       name: '<SERVER_NAME>'
-
-   # ...
 ```
 
 See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.
