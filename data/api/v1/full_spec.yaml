@@ -12594,6 +12594,12 @@ components:
       - TYPE_TEXT
       - UPLOAD_FILES
       - WAIT
+    SyntheticsTestCiOptions:
+      description: CI/CD options for a Synthetic test.
+      properties:
+        executionRule:
+          $ref: '#/components/schemas/SyntheticsTestExecutionRule'
+      type: object
     SyntheticsTestConfig:
       description: Configuration object for a Synthetic test.
       properties:
@@ -12759,6 +12765,8 @@ components:
           description: For SSL test, whether or not the test should fail on revoked
             certificate in stapled OCSP.
           type: boolean
+        ci:
+          $ref: '#/components/schemas/SyntheticsTestCiOptions'
         device_ids:
           description: For browser test, array with the different device IDs used
             to run the test.
