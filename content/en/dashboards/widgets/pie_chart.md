@@ -21,7 +21,7 @@ The pie chart widget allows you to display proportions of one or datasets. This 
 
 ## Similar Widget: Treemap
 
-Like the pie chart widget, the tree map widget (link, also needs docs) can also be used to display nested proportions. The primary difference between the two is that the pie chart displays proportions in radial slices, whereas the tree-map displays nested rectangles.
+Like the pie chart widget, the [Treemap][8] can also be used to display nested proportions. The primary difference between the two is that the pie chart displays proportions in radial slices, whereas the tree-map displays nested rectangles.
 
 ## Setup
 
@@ -65,7 +65,7 @@ To drill-down into a category, hover over the outer portion of the category ring
 
 ### Full-Screen Interaction
 
-Viewing the pie chart widget in full-screen will reveal the standard set of full-screen options.
+Viewing the pie chart widget in full-screen will reveal the standard set of [full-screen options][5].
 
 ## API
 
@@ -82,3 +82,4 @@ This widget can be used with the [Dashboards API][7].
 [5]: /dashboards/widgets/#full-screen
 [6]: /dashboards/guide/context-links/
 [7]: /api/latest/dashboards/
+[8]: /dashboards/widgets/treemap/
