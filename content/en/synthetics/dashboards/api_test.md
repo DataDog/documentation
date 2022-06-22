@@ -9,10 +9,10 @@ further_reading:
 
 ## Overview
 
-The [API test performance dashboard][1] provides insights about your entire stack and events. It is separated in two sections:
+The [API test performance dashboard][1] provides insights about your entire stack and events. It is separated in nine sections:
 
-- **API test type**: View your network levels' average response time, latency, or lookup time, along with transaction timings and response time by location.
-- **Events**: Explore outstanding events from your Synthetic test alerts.
+- **API test types**: View your network levels' average response time, latency, or lookup time, along with transaction timings and response time by location by test type.
+- **Events**: View events triggered for all of your API tests and filter for specific tests using the template variables at the top of the dashboard.
 
 Click the pink Watchdog icon to open the [**Watchdog Insights**][2] side panel and analyze outstanding anomalies in your application performance or triggered monitor alerts.
 

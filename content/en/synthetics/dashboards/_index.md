@@ -15,19 +15,19 @@ further_reading:
 
 When you create a Synthetics test, Datadog [collects data][1] and generates dashboards about your stack, browser applications, or overall tests' performance, private locations, and events. 
 
-Access your Synthetics dashboards by filtering for `Synthetics` in the search query of the [**Dashboard List**][2] or by clicking on the dropdown menu under [**Dashboards**][3].
+Access your Synthetics dashboards by filtering for `Synthetics` in the search query of the [**Dashboard List**][2] or by clicking on the dropdown menu under [**Dashboards**][3] on the Synthetic Monitoring homepage.
 
 {{< img src="synthetics/dashboards/synthetic_tests_dashboards.png" alt="Synthetic Monitoring Dashboards" style="width:100%;">}}
 
 {{< whatsnext desc="You can explore the following out-of-the-box Synthetics dashboards:" >}}
-  {{< nextlink href="/synthetics/dashboards/api_test" >}}<u>API Test Performance</u>: Monitor your entire stack. {{< /nextlink >}}
-  {{< nextlink href="/synthetics/dashboards/browser_test" >}}<u>Browser Test Performance</u>: Create browser tests to monitor and test your applications and services. {{< /nextlink >}}
+  {{< nextlink href="/synthetics/dashboards/api_test" >}}<u>API Test Performance</u>: Monitor your endpoints and services. {{< /nextlink >}}
+  {{< nextlink href="/synthetics/dashboards/browser_test" >}}<u>Browser Test Performance</u>: View your browser tests' web performance, insights into third-party providers, and Core Web Vitals. {{< /nextlink >}}
   {{< nextlink href="/synthetics/dashboards/test_summary" >}}<u>Test Summary</u>: See insights about your Synthetic tests by region, environment, or team. {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Interact with Synthetics dashboards
 
-You can customize your [dashboards][4] or directly explore the CI jobs executing your Synthetics tests in the [CI Results Explorer][5].
+You can customize your [dashboards][4] and clone them by team, environment or region using template variables.
 
 ### Template variables
 
@@ -51,4 +51,3 @@ To clone your Synthetics dashboard, click the **Settings** icon and select **Clo
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: https://app.datadoghq.com/synthetics/tests/
 [4]: /dashboards/
-[5]: /synthetics/ci_results_explorer/
