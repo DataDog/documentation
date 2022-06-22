@@ -49,9 +49,6 @@ In the case where multiple groups of data are plotted at once, you can drill dow
 
 To drill-down into a category, hover over the outer portion of the category, and click. To undo the drill-down, click the ‘back’ button on the top left header of the widget.
 
-![Treemap drilldown animation](https://user-images.githubusercontent.com/19559239/175114136-bfe55f69-eaaf-45aa-9c8c-0cab95785db6.gif)
-
-
 <img width="80%" alt="Treemap drilldown animation" src="https://user-images.githubusercontent.com/19559239/175114136-bfe55f69-eaaf-45aa-9c8c-0cab95785db6.gif">
 
 ### Context Menu Access
