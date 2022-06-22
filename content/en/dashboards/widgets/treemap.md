@@ -51,6 +51,8 @@ To drill-down into a category, hover over the outer portion of the category, and
 
 ![Treemap drilldown animation](https://user-images.githubusercontent.com/19559239/175114136-bfe55f69-eaaf-45aa-9c8c-0cab95785db6.gif)
 
+<img width="80%" alt="Treemap drilldown animation" src="[https://user-images.githubusercontent.com/19559239/175116834-c4cd20c2-12bb-48b8-88a9-7c8a684273d4.png](https://user-images.githubusercontent.com/19559239/175114136-bfe55f69-eaaf-45aa-9c8c-0cab95785db6.gif)">
+
 ### Context Menu Access
 
 To access the content menu, first hover over an individual category: this can be a nested category, or group - such as Canada, or Canada > Chrome in the example before. This should reveal a vertical ellipsis button in the top right corner. When clicked, the context menu will appear.
