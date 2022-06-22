@@ -2,7 +2,7 @@
 title: Ease Troubleshooting With Cross-Product Correlation
 kind: guide
 further_reading:
-- link: '/getting_started/unified_service_tagging/'
+- link: '/getting_started/tagging/unified_service_tagging/'
   tag: 'Documentation'
   text: 'Learn about Unified Service Tagging'
 - link: '/tracing/connect_logs_and_traces/'
