@@ -61,7 +61,7 @@ In the case where multiple groups of data are plotted at once, you can drill dow
 
 To drill-down into a category, hover over the outer portion of the category ring, and click. To undo the drill-down, move your cursor to the center of the cart and click.
 
-<img width="80%" alt=“Animation of pie chart drill down” src="https://user-images.githubusercontent.com/19559239/175110093-a2b666ed-2e90-42c0-b10f-308f27175d0a.gif">
+<img style="width:80%" alt="Animation of pie chart drilldown"  src="https://user-images.githubusercontent.com/19559239/175110093-a2b666ed-2e90-42c0-b10f-308f27175d0a.gif">
 
 ### Full-Screen Interaction
 
