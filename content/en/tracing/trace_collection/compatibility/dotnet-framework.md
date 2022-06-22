@@ -39,7 +39,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3] and in [Runtime support policy for .NET Framework APM](#runtime-support-policy-for-net-framework-apm).
 
 <div class="alert alert-info">
-  <div class="alert-info">Note that if you use automatic instrumentation only, the version to take into account is the version of the runtime.<br/>
+  <div class="alert-info">**Note**: if you use automatic instrumentation only, the version to take into account is the version of the runtime.<br/>
     <div>This means that if you compile your application in 4.5.1, but the application runs under framework 4.8 on the server, then you can use the latest version of the tracer.</div>
   </div>
 </div>
@@ -107,7 +107,7 @@ Datadog APM for .NET Framework depends on the host operating system, .NET Framew
 | <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
-| <span id="support-eol">End-of-life (EOL)</span>        |  No. The version can still be used but no bugfixes will be provided. support.                                                                                                                                                                  |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
 
 ### Package versioning
 
