@@ -17,7 +17,7 @@ The pie chart widget allows you to display proportions of one or datasets. This 
 
 *In the example below, unique page views stemming from the RUM dataset are shown at both the country and browser level. The innermost ring shows the user’s country, and the outermost ring is segmented proportionally to show the share of browsers used in each country.*
 
-<img style="width:60%; max-width: 500px;" alt="Pie Chart Example" src="https://user-images.githubusercontent.com/19559239/175108545-a3944ec6-b900-4b2a-908a-bd2dee0f0f67.png">
+<img style="width:60%;" alt="Pie Chart Example" src="https://user-images.githubusercontent.com/19559239/175108545-a3944ec6-b900-4b2a-908a-bd2dee0f0f67.png">
 
 ## Similar Widget: Treemap
 
@@ -45,13 +45,13 @@ The legend can either be turned off, displayed directly over chart segments with
 
 By default, the ‘auto’ option will show a labeled Aside legend within a dashboard, and will display both the Aside and Table legends when opened in full-screen.
 
-<img style="width:80%; max-width: 700px;" alt="Pie Chart Legend Options"  src="https://user-images.githubusercontent.com/19559239/175111768-9f8e5e3f-db4d-453f-bc2c-e02af52e58a5.png">
+<img style="width:80%" alt="Pie Chart Legend Options"  src="https://user-images.githubusercontent.com/19559239/175111768-9f8e5e3f-db4d-453f-bc2c-e02af52e58a5.png">
 
 #### Context Links
 
 Context links are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party). More details on context links can be found [here][4].
 
-<img style="width:80%; max-width: 500px;" alt="Pie Chart Context Links"  src="https://user-images.githubusercontent.com/19559239/175112166-12663086-88db-448a-b1aa-092b96011046.png">
+<img style="width:80%" alt="Pie Chart Context Links"  src="https://user-images.githubusercontent.com/19559239/175112166-12663086-88db-448a-b1aa-092b96011046.png">
 
 ## Display & Interaction
 
@@ -61,9 +61,8 @@ In the case where multiple groups of data are plotted at once, you can drill dow
 
 To drill-down into a category, hover over the outer portion of the category ring, and click. To undo the drill-down, move your cursor to the center of the cart and click.
 
-![toggle-gif](https://user-images.githubusercontent.com/19559239/175110093-a2b666ed-2e90-42c0-b10f-308f27175d0a.gif)
+![Animation of Treemap drilldown](https://user-images.githubusercontent.com/19559239/175110093-a2b666ed-2e90-42c0-b10f-308f27175d0a.gif)
 
-{{< img src="https://user-images.githubusercontent.com/19559239/175110093-a2b666ed-2e90-42c0-b10f-308f27175d0a.gif" alt="Widget title" style="width:80%;">}}
 
 ### Full-Screen Interaction
 
