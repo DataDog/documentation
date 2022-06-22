@@ -25,7 +25,7 @@ This guide provides an introduction to the Agent and how you can use it to send 
 
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. It can run on your local hosts (Windows, MacOS), containerized environments (Docker, Kubernetes), and in on-premises data centers. You can install and configure it using configuration management tools (Chef, Puppet, Ansible). 
 
-The Agent is able to collect 75 to 100 system level metrics every 15 to 20 seconds. With additional setup and configuration, the Agent can also send live processes, logs, and traces to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
+The Agent is able to collect 75 to 100 system level metrics every 15 to 20 seconds. With additional setup and configuration, the Agent can also send live processes data, logs, and traces to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
 ### Agent overhead
 
@@ -69,13 +69,13 @@ To collect metrics from other technologies, see the [Integrations][9] page.
 
 ## Differences between Agents for hosts and containers
 
-There are a few differences in the way the Agent runs in a containerized environment from how it runs on a host.
+This guide walks you through installing and configuring an Agent on a host. If you plan to eventually install Agents in a containerized environment, there are a few differences you should know about.
 
-1. While on a host, the Agent is configured using a YAMLS file (as you will see later in this guide), the Agent configuration options for a container's Agent are passed in with [environment variables][10], for example:
+1. On a host, the Agent is configured using a YAML file (as you will see later in this guide), whereas Agent configuration options for a container's Agent are passed in with [environment variables][10], for example:
     - `DD_API_KEY` for the Datadog API key
     - `DD_SITE` for the Datadog site
 
-2. Similarly, while on a host, [integrations][9] are identified through the Agent configuration file, whereas in a container environment, integrations are automatically identified through Datadog's Autodiscovery feature. See [Basic Agent Autodiscovery][11] to learn more.
+2. Similarly, while on a host, [integrations][9] are identified through the Agent configuration file, in a container environment, integrations are automatically identified through Datadog's Autodiscovery feature. See [Basic Agent Autodiscovery][11] to learn more.
 
 See the [Docker Agent][12] or [Kubernetes][13] for a walkthrough on running the Agent in a containerized environment.
 
@@ -83,7 +83,7 @@ See the [Docker Agent][12] or [Kubernetes][13] for a walkthrough on running the 
 
 The Agent needs to be installed to send data from any one of the many Agent based Integrations. The Agent is not necessarily required to forward data to the Datadog Platform, for example, you can send Logs and Metrics through the Datadog API. However, the Agent is the recommended method to forward your data to the Datadog Platform. 
 
-The Agent collects host data every 15 seconds to provide an accurate understanding of what is happening across your environments. As previously mentioned in the [Checks][14]sections the Agent has several checks enabled which collect over 50 default metrics to provide greater insight on system level data.
+The Agent collects host data every 15 seconds to provide an accurate understanding of what is happening across your environments. As previously mentioned in the [Checks][14] section, the Agent has several checks enabled which collect over 50 default metrics to provide greater insight on system level data.
 
 ## Setup
 
@@ -99,7 +99,7 @@ The Agent collects host data every 15 seconds to provide an accurate understandi
 
 ### Installation
 
-In the Datadog UI, go to the [Agent Installation Page][18] for Ubuntu, **Integrations > Agent** 
+In the Datadog UI, go to the [Agent Installation Page][18] for Ubuntu by navigating to **Integrations > Agent** .
 
 To install the Datadog Agent on a host, use the [one line install command][19] updated with your [Datadog API key][2]:
 
@@ -174,9 +174,9 @@ You can adjust the Agent configuration files to take advantage of other Datadog 
 
 #### Setting tags through the Agent configuration file
 
-Tags add an additional layer of metadata to your metrics and events. This allows you to scope and compare your data in Dataodg visualizations. When data is sent to Datadog from multiple hosts, tagging this information allows you to scope down to the data you are most interested in visualising. 
+Tags add an additional layer of metadata to your metrics and events. They allow you to scope and compare your data in Datadog visualizations. When data is sent to Datadog from multiple hosts, tagging this information allows you to scope down to the data you are most interested in visualizing. 
 
-For example, let's say you have data that is collected from different teams and you are only interested in seeing the metrics from team alpha, tagging those specific hosts with either the `team:alpha` or `team:bravo` tag gives you the ability to filter down to the metrics that are tagged with `teamp:alpha`. See [Getting Started with Tags][23] to learn more about tagging your data.
+For example, let's say you have data that is collected from different teams and you are only interested in seeing the metrics from team alpha, tagging those specific hosts with either the `team:alpha` or `team:bravo` tag gives you the ability to filter down to the metrics that are tagged with `team:alpha`. See [Getting Started with Tags][23] to learn more about tagging your data.
 
 1. Locate your Agent's [main configuration file][24]. For Ubuntu, the file locations is `/etc/datadog-agent/datadog.yaml`.
 
@@ -221,13 +221,13 @@ tags:
 sudo service datadog-agent restart
 ```
 
-5. After a few minutes, go to the Metrics Summary page again **Metrics > Summary**, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and whatever personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
+5. After a few minutes, go to **Metrics > Summary** again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and whatever personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
 
-6. Go to the Events Explorer page **Events > Explorer** and find the custom tags displayed with the latest Agent Event. 
+6. Go to **Events > Explorer** and find the custom tags displayed with the latest Agent Event. 
 
 #### Other configuration options
 
-Logs, traces, and processes can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, notice that for the `logs_enabled` parameter, it is set to false.
+The collection of logs, traces, and processes data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, notice that for the `logs_enabled` parameter, it is set to false.
 
 ```yaml
 ##################################
@@ -246,7 +246,7 @@ Other Datadog features that can be configured through the Agent configuration fi
 - Customizing log collection to filter or scrub sensitive data
 - Setting trace sample rates 
 
-Without going into too much detail on all the individual features, be aware that throughout your setup, when the documentation refers to the `datadog.yaml` file or the Agent configuration file, this is the file you need to configure.
+Throughout your setup, when the documentation refers to the `datadog.yaml` file or the Agent configuration file, this is the file you need to configure.
 
 ## Commands
 
