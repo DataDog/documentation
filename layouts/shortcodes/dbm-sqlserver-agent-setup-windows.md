@@ -16,9 +16,9 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-To use [Windows Authentication][10] set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
+To use [Windows Authentication][10], set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
 
-The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][5].
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
 
 ### Supported Drivers
 
@@ -41,7 +41,7 @@ connector: odbc
 driver: '{ODBC Driver 17 for SQL Server}'
 ```
 
-Once all Agent configuration is complete, [Restart the Datadog Agent][6].
+Once all Agent configuration is complete, [restart the Datadog Agent][6].
 
 ### Validate
 
