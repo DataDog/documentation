@@ -19,9 +19,11 @@ The treemap widget allows you to display proportions of one or datasets. This wi
 
 <img width="80%" alt="Treemap Widget Example" src="https://user-images.githubusercontent.com/19559239/175114419-91ffa888-c21c-43e3-991d-e7ab8fa3c454.png">
 
+
 ## Similar Widget: Pie Chart
 
 Like the Treemap widget, the [Pie Chart Widget][8] can also be used to display nested proportions. The primary difference between the two is that the pie chart displays proportions in radial slices, whereas the tree-map displays nested rectangles.
+
 
 ## Setup
 
@@ -40,6 +42,7 @@ Like the Treemap widget, the [Pie Chart Widget][8] can also be used to display n
 Context links are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party). More details on context links can be found [here][4].
 
 <img style="width:80%; max-width: 500px;" alt="Pie Chart Context Links"  src="https://user-images.githubusercontent.com/19559239/175112166-12663086-88db-448a-b1aa-092b96011046.png">
+
 
 ## Display & Interaction
 
@@ -61,9 +64,11 @@ To access the content menu, first hover over an individual category: this can be
 
 Viewing the pie chart widget in full-screen will reveal the standard set of [full-screen options][5].
 
+
 ## API
 
 This widget can be used with the [Dashboards API][7].
+
 
 ## Further Reading
 
