@@ -63,6 +63,8 @@ To drill-down into a category, hover over the outer portion of the category ring
 
 ![toggle-gif](https://user-images.githubusercontent.com/19559239/175110093-a2b666ed-2e90-42c0-b10f-308f27175d0a.gif)
 
+{{< img src="https://user-images.githubusercontent.com/19559239/175110093-a2b666ed-2e90-42c0-b10f-308f27175d0a.gif" alt="Widget title" style="width:80%;">}}
+
 ### Full-Screen Interaction
 
 Viewing the pie chart widget in full-screen will reveal the standard set of [full-screen options][5].
