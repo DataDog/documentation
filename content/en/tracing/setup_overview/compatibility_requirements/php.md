@@ -34,18 +34,27 @@ When these versions are no longer supported by their maintainers, Datadog APM fo
 
 PHP APM supports the following PHP versions:
 
-| PHP Version    | Support level        | Package version |
-|:---------------|:---------------------|:----------------|
-| 8.1.x          | General Availability | > `0.66.0+`     |
-| 8.0.x          | General Availability | > `0.52.0+`     |
-| 7.4.x          | General Availability | All             |
-| 7.3.x          | General Availability | All             |
-| 7.2.x          | General Availability | All             |
-| 7.1.x          | General Availability | All             |
-| 7.0.x          | General Availability | All             |
-| 5.6.x          | Maintenance          | All             |
-| 5.5.x          | Maintenance          | All             |
-| 5.4.x          | Maintenance          | All             |
+<div class="alert alert-info">
+<strong>Note:</strong>
+PHP 5.x was fully supported until version 0.75.0. It is now in maintenance mode and will be supported with security and important bug fixes until December 31, 2023.
+<br>
+If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, please contact us at <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
+<br>
+We recommend using <a href="https://www.php.net/supported-versions.php">officially supported versions</a> of PHP, especially 7.4, 8.0, and 8.1.
+</div>
+
+| PHP Version    | Support level                         | Package version |
+|:---------------|:--------------------------------------|:----------------|
+| 8.1.x          | General Availability                  | > `0.66.0+`     |
+| 8.0.x          | General Availability                  | > `0.52.0+`     |
+| 7.4.x          | General Availability                  | All             |
+| 7.3.x          | General Availability                  | All             |
+| 7.2.x          | General Availability                  | All             |
+| 7.1.x          | General Availability                  | All             |
+| 7.0.x          | General Availability                  | All             |
+| 5.6.x          | Maintenance (until December 31, 2023) | All             |
+| 5.5.x          | Maintenance (until December 31, 2023) | All             |
+| 5.4.x          | Maintenance (until December 31, 2023) | All             |
 
 PHP APM supports the following SAPI's:
 
