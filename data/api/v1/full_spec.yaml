@@ -30716,11 +30716,11 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/multi_organization
   name: Organizations
-- description: 'Configure your [Datadog-PagerDuty integration](https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty)
+- description: 'Configure your [Datadog-PagerDuty integration](https://docs.datadoghq.com/integrations/pagerduty/)
 
     directly through the Datadog API.'
   externalDocs:
-    url: https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty
+    url: https://docs.datadoghq.com/integrations/pagerduty/
   name: PagerDuty Integration
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
     instead.

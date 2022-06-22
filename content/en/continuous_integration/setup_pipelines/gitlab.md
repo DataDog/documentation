@@ -36,7 +36,7 @@ Configure the integration on a [project][1] or [group][2] by going to **Settings
 [1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 [2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
 {{% /tab %}}
-{{% tab "GitLab >= 14.1" %}}
+{{% tab "GitLab &gt;&equals; 14.1" %}}
 
 Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
 
@@ -46,7 +46,7 @@ You can also activate the integration at the GitLab [instance][3] level, by goin
 [2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
 [3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
 {{% /tab %}}
-{{% tab "GitLab < 14.1" %}}
+{{% tab "GitLab &lt; 14.1" %}}
 
 Enable the `datadog_ci_integration` [feature flag][1] to activate the integration. Run one of the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
 
