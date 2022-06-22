@@ -17,7 +17,7 @@ The treemap widget allows you to display proportions of one or datasets. This wi
 
 *In the example below, unique page views stemming from the Real User Monitoring (RUM) dataset are shown at both the country and browser level. The outer groups - distinguished by color - shows the user’s country. These 'country' groups are segmented proportionally into secondary gorups to show the share of browsers used in each country.*
 
-<img width="600" alt="Treemap Widget Exmaple" src="https://user-images.githubusercontent.com/19559239/175114419-91ffa888-c21c-43e3-991d-e7ab8fa3c454.png">
+<img width="80%" alt="Treemap Widget Example" src="https://user-images.githubusercontent.com/19559239/175114419-91ffa888-c21c-43e3-991d-e7ab8fa3c454.png">
 
 ## Similar Widget: Pie Chart
 
@@ -49,11 +49,13 @@ In the case where multiple groups of data are plotted at once, you can drill dow
 
 To drill-down into a category, hover over the outer portion of the category, and click. To undo the drill-down, click the ‘back’ button on the top left header of the widget.
 
-![treemaptrim(1)](https://user-images.githubusercontent.com/19559239/175114136-bfe55f69-eaaf-45aa-9c8c-0cab95785db6.gif)
+![Treemap drilldown animation](https://user-images.githubusercontent.com/19559239/175114136-bfe55f69-eaaf-45aa-9c8c-0cab95785db6.gif)
 
 ### Context Menu Access
 
 To access the content menu, first hover over an individual category: this can be a nested category, or group - such as Canada, or Canada > Chrome in the example before. This should reveal a vertical ellipsis button in the top right corner. When clicked, the context menu will appear.
+
+<img width="80%" alt="How to access the context menu on a treemap widget" src="https://user-images.githubusercontent.com/19559239/175116834-c4cd20c2-12bb-48b8-88a9-7c8a684273d4.png">
 
 ### Full-Screen Interaction
 
