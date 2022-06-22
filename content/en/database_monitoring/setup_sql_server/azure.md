@@ -54,6 +54,35 @@ Grant the Agent access to each additional Azure SQL Database on this server:
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
+When configuring the Datadog Agent to talk to Azure SQL DB, specify one check instance for each database located on a given single Azure SQL DB server.
+
+```yaml
+init_config:
+instances:
+  # database_1
+  - host: '<SERVER_NAME>.database.windows.net,1433'
+    username: datadog
+    password: '<PASSWORD>'
+    database: '<DATABASE_1>'
+    reported_hostname: '<SERVER_NAME>.database.windows.net/<DATABASE_1>'
+    azure:
+      deployment_type: 'sql_database'
+      name: '<SERVER_NAME>'
+
+  # database_2
+  - host: '<SERVER_NAME>.database.windows.net,1433'
+    username: datadog
+    password: '<PASSWORD>'
+    database: '<DATABASE_2>'
+    reported_hostname: '<SERVER_NAME>.database.windows.net/<DATABASE_2>'
+    azure:
+      deployment_type: 'sql_database'
+      name: '<SERVER_NAME>'
+   ...
+```
+
+See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.
+
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
 {{% /tab %}}
 
