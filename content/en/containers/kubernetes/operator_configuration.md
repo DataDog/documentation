@@ -1,7 +1,7 @@
 ---
 title: Operator configuration
 kind: faq
-alias:
+aliases:
   - /agent/kubernetes/operator_configuration
 further_reading:
   - link: 'agent/kubernetes/log'
