@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The [test summary dashboard][1] provides insights about your Synthetic test runs, Synthetic tests in your CI/CD pipelines, and private locations. It is separated in three sections:
+The [test summary dashboard][1] provides insights about your Synthetic test runs, Synthetic tests in your CI/CD pipelines, and private locations. It shows:
 
 - **Synthetic monitoring & testing usage**: View a breakdown of your Synthetic test usage by environment, team, and test type.
 - **Test automation**: View Synthetic test runs in your CI/CD pipelines by type and team.

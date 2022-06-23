@@ -27,11 +27,11 @@ Access your Synthetics dashboards by filtering for `Synthetics` in the search qu
 
 ## Interact with Synthetics dashboards
 
-You can customize your [dashboards][4] and clone them by team, environment or region using template variables.
+You can clone [dashboards][4] and customize them by team, environment, or region using template variables.
 
 ### Template variables
 
-Datadog generates Synthetics dashboards which automatically creates a set of default template variables. Use the template variable dropdown menus to narrow your search. For example, you can filter for a specific browser type with the `Browser` template variable.
+The generated Synthetics dashboards automatically contain a set of default template variables. Use the template variable dropdown menus to narrow the data shown in the dashboard. For example, you can filter for a specific browser type with the `Browser` template variable.
 
 ### Saved views
 

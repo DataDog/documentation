@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-The [browser test performance dashboard][1] provides insights about your browser test runs, browser analysis, web performance, and events. It is separated in three sections:
+The [browser test performance dashboard][1] provides insights about your browser test runs, browser analysis, web performance, and events. It shows:
 
 - **Synthetic browser test analysis**: See a breakdown of success rate by browser type, a list of browser test alerts, and average test duration by browser type and location.
 - **Synthetic test web performance**: If you have Datadog RUM enabled, use the [RUM integration][2] to examine core web vitals and a list of third-party provider test resources.  
