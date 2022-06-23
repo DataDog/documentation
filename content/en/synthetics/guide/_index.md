@@ -44,7 +44,7 @@ disable_sidebar: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Metrics:" >}}
-    {{< nextlink href="synthetics/guide/monitor-usage/" >}}Monitor Synthetics usage{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/monitor-usage/" >}}Using estimated usage metrics for Synthetic Monitoring{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understanding API test timings and troubleshooting variations{{< /nextlink >}}
 {{< /whatsnext >}}
 

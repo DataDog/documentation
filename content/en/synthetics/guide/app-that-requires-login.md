@@ -16,7 +16,9 @@ further_reading:
     text: 'Best practices for creating end-to-end tests'
 ---
 
-You might need to monitor journeys located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:
+## Overview 
+
+You may need to monitor journeys located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:
 
 - [Include the login steps in your recording](#include-the-login-steps-in-your-recording)
 - [Leverage browser test configuration options](#leverage-browser-test-configuration-options)

@@ -11,6 +11,8 @@ further_reading:
   text: "Configure advanced options for steps"
 ---
 
+## Overview
+
 Some implementations lead applications to render a certain way only when using a specific `User-Agent` string (for example, when using a mobile `User-Agent`). In these cases, you need to set the `User-Agent` header to a custom string to be able to record your browser tests' steps in your application. To do so:
 
 1. Open your application in a pop up by clicking on **Open in Popup** in your browser test recorder.
