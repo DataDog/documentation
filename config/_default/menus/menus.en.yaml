@@ -2663,6 +2663,11 @@ main:
     parent: rum_reactnative
     identifier: rum_reactnative_mobile_vitals
     weight: 401
+  - name: Expo
+    url: real_user_monitoring/reactnative/expo/
+    parent: rum_reactnative
+    identifier: rum_reactnative_expo
+    weight: 402
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum
@@ -2774,17 +2779,17 @@ main:
     identifier: rum_error_tracking
     weight: 12
   - name: Explorer
-    url: real_user_monitoring/error_tracking/explorer
+    url: real_user_monitoring/error_tracking/explorer/
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 2202
+    weight: 2201
   - name: Track Browser Errors
-    url: real_user_monitoring/error_tracking/browser_errors
+    url: real_user_monitoring/error_tracking/browser_errors/
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
     weight: 2202
   - name: Track Android Errors
-    url: real_user_monitoring/error_tracking/android
+    url: real_user_monitoring/error_tracking/android/
     parent: rum_error_tracking
     identifier: rum_error_tracking_android
     weight: 2203
@@ -2792,7 +2797,7 @@ main:
     url: real_user_monitoring/ios/crash_reporting/
     parent: rum_error_tracking
     identifier: rum_error_tracking_ios
-    weight: 2104
+    weight: 2204
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
@@ -5354,6 +5359,19 @@ api:
         - DeleteSLO
       unstable: []
       order: 5
+  - name: Search for SLOs
+    url: '#search-for-slos'
+    identifier: service-level-objectives-search-for-slos
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SearchSLO
+      unstable:
+        - v1
+      order: 1
   - name: Check if SLOs can be safely deleted
     url: '#check-if-slos-can-be-safely-deleted'
     identifier: service-level-objectives-check-if-slos-can-be-safely-deleted

@@ -49,5 +49,5 @@ instances:
 [1]: /integrations/sqlserver/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://msdn.microsoft.com/en-us/library/ms187743.aspx
-[4]: /integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi/
+[4]: /integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics/
 [5]: https://msdn.microsoft.com/en-us/library/ms188247.aspx

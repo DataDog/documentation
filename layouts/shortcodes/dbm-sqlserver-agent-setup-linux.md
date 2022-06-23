@@ -20,9 +20,9 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][4].
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][4] on how these tags are used throughout Datadog.
 
-Once all Agent configuration is complete, [Restart the Datadog Agent][5].
+Once all Agent configuration is complete, [restart the Datadog Agent][5].
 
 ### Validate
 

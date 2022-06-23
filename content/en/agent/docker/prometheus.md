@@ -47,7 +47,7 @@ docker run -d --cgroupns host \
 ```
 
 {{% /tab %}}
-{{% tab "Amazon Linux version <2" %}}
+{{% tab "Amazon Linux version < 2" %}}
 
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
