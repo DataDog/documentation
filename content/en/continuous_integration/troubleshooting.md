@@ -130,11 +130,27 @@ If the same test is collected several times for the same commit but with differe
 | `Skipped`                   | `Failed`                   | `Failed`   |
 | `Skipped`                   | `Skipped`                  | `Skipped`  |
 
+### The default branch is not correct
+
+#### How it impacts the product
+
+The default branch is used to power some features of the products, namely:
+
+- Default branches list: only default branches are displayed there, so a branch that is not result would result in a missing item from this table or the wrong branch being displayed.
+
+- Wall Time comparison for non-default branches: in the Branches list page, the **VS Default** column is calculated comparing wall time for the current branch against wall time for the default branch.
+
+- New flaky tests: Those are tests that were never flaky previously in the default branch, so, if the default branch is not properly set, this could lead to a wrong number of detected new flaky tests.
+
+#### How to fix the default branch
+
+You can easily update[^1] it on the [Repository Settings Page](https://app.datadoghq.com/ci/settings/repository).
+
+[^1]: *You need priveleged access to change it.*
 
 ### Need further help?
 
 Still need help? Contact [Datadog support][1].
-
 
 [1]: /help/
 [2]: /continuous_integration/setup_tests/
