@@ -7,6 +7,7 @@ aliases:
 - /tracing/php/
 - /tracing/setup/php
 - /tracing/setup_overview/php
+- /tracing/faq/php-tracer-manual-installation/
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
@@ -131,8 +132,6 @@ If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS
 </div>
 
 
-If you are unable to use the PHP installer, see the [additional installation options][6].
-
 ## Automatic instrumentation
 
 Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
@@ -169,7 +168,7 @@ env[DD_SERVICE] = my-app
 php_value datadog.service my-app
 ```
 
-Alternatively, you can use [`SetEnv`][7] from the server config, virtual host, directory, or `.htaccess` file.
+Alternatively, you can use [`SetEnv`][6] from the server config, virtual host, directory, or `.htaccess` file.
 
 ```text
 # In a virtual host configuration as an environment variable
@@ -197,7 +196,7 @@ env[DD_SERVICE] = my-app
 php_value[datadog.service] = my-app
 ```
 
-**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][8] for more details.
+**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][7] for more details.
 
 ### PHP CLI server
 
@@ -234,7 +233,7 @@ Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Ad
 `DD_PROFILING_ENABLED`
 : **INI**: Not available<br>
 **Default**: `0`<br>
-Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][9].
+Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][8].
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: Not available<br>
@@ -364,7 +363,7 @@ CSV of URI mappings to normalize resource naming for outgoing requests (see [Map
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **INI**: `datadog.trace.retain_thread_capabilities`<br>
 **Default**: `0`<br>
-Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][10] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][9] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
 `DD_TRACE_SAMPLE_RATE`
@@ -482,7 +481,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][11] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][10] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ## Tracing CLI scripts
@@ -734,7 +733,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### PHP installed from the Sury Debian DPA
 
-If PHP was installed from the [Sury Debian DPA][12], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+If PHP was installed from the [Sury Debian DPA][11], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
 
 ```
 apt update
@@ -743,7 +742,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### PHP installed from a different package
 
-The Debian project maintains a wiki page with [instructions to install debug symbols][13].
+The Debian project maintains a wiki page with [instructions to install debug symbols][12].
 
 Edit the file `/etc/apt/sources.list`:
 
@@ -793,7 +792,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 ##### PHP installed from `ppa:ondrej/php`
 
-If PHP was installed from the [`ppa:ondrej/php`][14], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
+If PHP was installed from the [`ppa:ondrej/php`][13], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
 
 Before:
 
@@ -829,7 +828,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][15] from the `ddebs` can be found in the Ubuntu documentation.
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][14] from the `ddebs` can be found in the Ubuntu documentation.
 
 For example, for Ubuntu 18.04+, enable the `ddebs` repo:
 
@@ -839,7 +838,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Import the signing key (make sure the [signing key is correct][16]):
+Import the signing key (make sure the [signing key is correct][15]):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -916,7 +915,7 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][17] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][16] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -991,15 +990,14 @@ For Apache, run:
 [3]: /tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: https://app.datadoghq.com/apm/services
-[6]: /tracing/faq/php-tracer-manual-installation
-[7]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[8]: /tracing/setup/nginx/#nginx-and-fastcgi
-[9]: /tracing/profiler/enabling/php/
-[10]: https://github.com/mind04/mod-ruid2
-[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
-[12]: https://packages.sury.org/php/
-[13]: https://wiki.debian.org/HowToGetABacktrace
-[14]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[15]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
-[17]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[6]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[7]: /tracing/setup/nginx/#nginx-and-fastcgi
+[8]: /tracing/profiler/enabling/php/
+[9]: https://github.com/mind04/mod-ruid2
+[10]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[11]: https://packages.sury.org/php/
+[12]: https://wiki.debian.org/HowToGetABacktrace
+[13]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[14]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[15]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[16]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
