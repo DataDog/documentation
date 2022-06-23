@@ -25,10 +25,10 @@ When these versions are no longer supported by their maintainers, Datadog APM fo
 | **Level**                                              | **Support provided**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact our customer support team for special requests.][2]                                                             |
-| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
-| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
-| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
-| <span id="support-legacy">Legacy</span>                |  Legacy implementation. May have limited function, but no maintenance provided. [Contact our customer support team for special requests.][2] |
+| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug, and security fixes provided on a best-effort basis.                                    |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug, and security fixes.                                                                                    |
+| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                                                              |
+| <span id="support-legacy">Legacy</span>                |  Legacy implementation. May have limited function, but no maintenance provided. [Contact the support team][2] for special requests. |
 | <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
 
 
@@ -36,11 +36,11 @@ PHP APM supports the following PHP versions:
 
 <div class="alert alert-info">
 <strong>Note:</strong>
-PHP 5.x is fully supported until version 0.75.0. It is now in maintenance mode and will be supported with security and important bug fixes until December 31, 2023.
+PHP 5.x is fully supported until version 0.75.0. It is now in maintenance mode and supported with security and important bug fixes until December 31, 2023.
 <br>
-If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, please contact us at <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
+If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact [Datadog Support][2].
 <br>
-We recommend using <a href="https://www.php.net/supported-versions.php">officially supported versions</a> of PHP, especially 7.4, 8.0, and 8.1.
+It's recommended to use [officially supported versions][9] of PHP, especially 7.4, 8.0, and 8.1.
 </div>
 
 | PHP Version    | Support level                         | Package version |
@@ -169,3 +169,4 @@ If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is ins
 [6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
+[9]: https://www.php.net/supported-versions.php
