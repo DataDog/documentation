@@ -80,55 +80,55 @@ aliases:
 
 ## MySQL & SQL
 
-* [Connection Issues with the SQL Server Integration][31]
-* [MySQL Localhost Error - Localhost VS 127.0.0.1][32]
-* [Can I use a named instance in the SQL Server integration?][33]
-* [MySQL Custom Queries][34]
-* [How can I collect more metrics from my SQL Server integration?][35]
-* [Database user lacks privileges][36]
+* [Connection Issues with the SQL Server Integration][30]
+* [MySQL Localhost Error - Localhost VS 127.0.0.1][31]
+* [Can I use a named instance in the SQL Server integration?][32]
+* [MySQL Custom Queries][33]
+* [How can I collect more metrics from my SQL Server integration?][34]
+* [Database user lacks privileges][35]
 
 ## Network
 
-* [How to send TCP/UDP host metrics via the Datadog API ?][37]
+* [How to send TCP/UDP host metrics via the Datadog API ?][36]
 
 ## Postgres
 
-* [Postgres custom metric collection explained][38]
+* [Postgres custom metric collection explained][37]
 
 ## RabbitMQ
 
-* [Tagging RabbitMQ queues by tag family][39]
+* [Tagging RabbitMQ queues by tag family][38]
 
 ## Redis
 
-* [Redis Integration Error: "unknown command 'CONFIG'"][40]
+* [Redis Integration Error: "unknown command 'CONFIG'"][39]
 
 ## SNMP
 
-* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][41]
+* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][40]
 
 ## Unix
 
-* [How can I gather metrics from the UNIX shell?][42]
+* [How can I gather metrics from the UNIX shell?][41]
 
 ## Vertica
 
-* [How to collect metrics from custom Vertica queries][43]
+* [How to collect metrics from custom Vertica queries][42]
 
 ## VSphere
 
-* [Troubleshooting duplicated hosts with vSphere][44]
+* [Troubleshooting duplicated hosts with vSphere][43]
 
 ## Webhooks
 
-* [How to make a Trello Card using Webhooks][45]
+* [How to make a Trello Card using Webhooks][44]
 
 ## Windows
 
-* [How to add event log files to the `Win32_NTLogEvent` WMI class][46]
-* [Collect Custom Windows Performance Counters over WMI][47]
-* [Windows Status Based Check][48]
-* [How to retrieve WMI metrics][49]
+* [How to add event log files to the `Win32_NTLogEvent` WMI class][45]
+* [Collect Custom Windows Performance Counters over WMI][46]
+* [Windows Status Based Check][47]
+* [How to retrieve WMI metrics][48]
 
 [1]: /integrations/faq/aws-integration-and-cloudwatch-faq/
 [2]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration/
@@ -151,31 +151,30 @@ aliases:
 [19]: /integrations/faq/haproxy-multi-process/
 [20]: /integrations/faq/i-ve-set-up-the-jira-integration-now-how-do-i-get-events-and-tickets-created/
 [21]: /integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect/
-[22]: /integrations/faq/collecting-composite-type-jmx-attributes/
-[23]: /integrations/faq/how-to-run-jmx-commands-in-windows/
-[24]: /integrations/faq/jmx-yaml-error-include-section/
-[25]: /integrations/faq/troubleshooting-jmx-integrations/
-[26]: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
-[27]: /integrations/faq/both-my-jmx-and-aws-integrations-use-name-tags-what-do-i-do/
-[28]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx/
-[29]: /integrations/faq/troubleshooting-and-deep-dive-for-kafka/
-[30]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet/
-[31]: /integrations/faq/connection-issues-with-the-sql-server-integration/
-[32]: /integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
-[33]: /integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
-[34]: /integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
-[35]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
-[36]: /integrations/faq/database-user-lacks-privileges/
-[37]: /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api/
-[38]: /integrations/faq/postgres-custom-metric-collection-explained/
-[39]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family/
-[40]: /integrations/faq/redis-integration-error-unknown-command-config/
-[41]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids/
-[42]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
-[43]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
-[44]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
-[45]: /integrations/faq/how-to-make-trello-card-using-webhooks/
-[46]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
-[47]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
-[48]: /integrations/faq/windows-status-based-check/
-[49]: /integrations/faq/how-to-retrieve-wmi-metrics/
+[22]: /integrations/faq/how-to-run-jmx-commands-in-windows/
+[23]: /integrations/faq/jmx-yaml-error-include-section/
+[24]: /integrations/faq/troubleshooting-jmx-integrations/
+[25]: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
+[26]: /integrations/faq/both-my-jmx-and-aws-integrations-use-name-tags-what-do-i-do/
+[27]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx/
+[28]: /integrations/faq/troubleshooting-and-deep-dive-for-kafka/
+[29]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet/
+[30]: /integrations/faq/connection-issues-with-the-sql-server-integration/
+[31]: /integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
+[32]: /integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
+[33]: /integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
+[34]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
+[35]: /integrations/faq/database-user-lacks-privileges/
+[36]: /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api/
+[37]: /integrations/faq/postgres-custom-metric-collection-explained/
+[38]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family/
+[39]: /integrations/faq/redis-integration-error-unknown-command-config/
+[40]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids/
+[41]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
+[42]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
+[43]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
+[44]: /integrations/faq/how-to-make-trello-card-using-webhooks/
+[45]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
+[46]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
+[47]: /integrations/faq/windows-status-based-check/
+[48]: /integrations/faq/how-to-retrieve-wmi-metrics/
