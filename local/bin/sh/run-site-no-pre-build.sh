@@ -2,6 +2,7 @@
 
 RUN_SERVER=${RUN_SERVER:=false}
 RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
+DOCKER=${DOCKER:=false}
 
 if [ ${RUN_SERVER} = true ]; then
   # Building the documentation

@@ -5,6 +5,8 @@ GITHUB_TOKEN=${GITHUB_TOKEN:=false}
 RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 LOCAL=${LOCAL:=False}
+PULL_RBAC_PERMISSIONS=${PULL_RBAC_PERMISSIONS:=false}
+DOCKER=${DOCKER:=false}
 
 if [ ${RUN_SERVER} = true ]; then
 	# integrations
@@ -48,7 +50,7 @@ if [ ${RUN_SERVER} = true ]; then
     echo "Running regular build...."
     yarn run start
   fi
-  
+
   sleep 5
 
 else

@@ -191,7 +191,7 @@ hugpython/bin/activate: local/etc/requirements3.txt  ## Start python virtual env
 	else printf "\e[93mPython 3 is required to fetch integrations and run tests.\033[0m Try https://github.com/pyenv/pyenv.\n"; fi
 
 source-helpers: # Source the helper functions used in build, test, deploy.
-	@if [ ${DOCKER} != "true" ]; then hugpython; fi
+	@if [ "${DOCKER}" != "true" ]; then make hugpython; fi
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
