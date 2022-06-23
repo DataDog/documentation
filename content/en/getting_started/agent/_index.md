@@ -95,7 +95,7 @@ The Agent collects host data every 15 seconds to provide an accurate understandi
 
 3. Have the Datadog UI open.
 
-**Note:** This walkthrough will be using the Ubuntu operating system. See the [Basic Agent Usage][17] page for a full list of supported platforms. 
+**Note**: This walkthrough uses the Ubuntu operating system. See the [Basic Agent Usage][17] page for a full list of supported platforms. 
 
 ### Installation
 
@@ -168,7 +168,7 @@ The Agent's main configuration file is `datadog.yaml`. The required parameters a
 - your [Datadog API key][16], which is used to associate your Agent's data with your organization, and 
 - the Datadog site ({{< region-param key="dd_site" code="true" >}}). 
 
-See the [sample config_template.yaml][22] for all available configuration options.
+See the [sample `config_template.yaml` file][22] for all available configuration options.
 
 You can adjust the Agent configuration files to take advantage of other Datadog features including tags.
 
