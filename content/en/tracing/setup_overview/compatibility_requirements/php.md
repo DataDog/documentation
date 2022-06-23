@@ -38,9 +38,9 @@ PHP APM supports the following PHP versions:
 <strong>Note:</strong>
 PHP 5.x is fully supported until version 0.75.0. It is now in maintenance mode and supported with security and important bug fixes until December 31, 2023.
 <br>
-If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact [Datadog Support][2].
+If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
 <br>
-It's recommended to use [officially supported versions][9] of PHP, especially 7.4, 8.0, and 8.1.
+It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 7.4, 8.0, and 8.1.
 </div>
 
 | PHP Version    | Support level                         | Package version |
@@ -169,4 +169,3 @@ If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is ins
 [6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
-[9]: https://www.php.net/supported-versions.php
