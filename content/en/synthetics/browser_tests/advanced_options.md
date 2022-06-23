@@ -2,6 +2,9 @@
 title: Advanced Options for Browser Test Steps
 kind: documentation
 description: Configure advanced options for Browser Test Steps
+aliases:
+  - /synthetics/guide/browser-tests-switch-tabs/
+  - /synthetics/guide/browser-test-self-maintenance/
 further_reading:
 - link: "/synthetics/browser_tests/actions/"
   tag: "Documentation"
@@ -37,7 +40,7 @@ By default, the **If user specified locator fails, fail test** checkbox is selec
 
 {{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="Test Highlighted Element" video=true >}}
 
-You can decide to fall back on the regular browser test algorithm by clicking the **If user specified locator fails, fail test** box.
+You can decide to fall back on the regular browser test algorithm by clearing the **If user specified locator fails, fail test** box.
 
 {{< img src="synthetics/browser_tests/advanced_options/fail_test.png" alt="Fail test option" style="width:70%">}}
 

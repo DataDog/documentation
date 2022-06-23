@@ -2,10 +2,7 @@
 title: Synthetic Monitoring Guides
 kind: guide
 aliases:
-  - /synthetics/faq/clone-test/
   - /synthetics/faq/uptime-check-internal-website/ 
-  - /synthetics/guide/browser-tests-switch-tabs/
-  - /synthetics/guide/browser-test-self-maintenance/
 private: true
 disable_sidebar: true
 ---
