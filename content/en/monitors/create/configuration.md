@@ -145,11 +145,16 @@ For a monitor that does not notify on missing data, if a group does not report d
 
 {{% tab "Other monitor types" %}}
 
+If data is missing for `N` minutes:
+
+- `Evaluate as zero` / `Show last known status`
+- `Show NO DATA`
+- `Show NO DATA and notify`
+- `Show OK`.
+
 {{< img src="/monitors/create/on_missing_data.png" alt="No Data Options" style="width:90%;">}}
 
-If data is missing for `N` minutes: `Evaluate as zero` / `Show last known status`, `Show NO DATA`, `Show NO DATA and notify`, or `Show OK`.
-
-The selected behaviour will be applied once a monitor's query does not return any data. Hence, contrary to the `Do not notify` option, the missing data window is **not** configurable.
+The selected behaviour is applied once a monitor's query does not return any data. Hence, contrary to the `Do not notify` option, the missing data window is **not** configurable.
 
 | Option                    | Monitor status & notification                                             |
 |---------------------------|---------------------------------------------------------------------------|
@@ -159,7 +164,15 @@ The selected behaviour will be applied once a monitor's query does not return an
 | `Show NO DATA and notify` | Monitor status is set to `NO DATA` and a notification is sent out.        |
 | `Show OK`                 | Monitor is resolved and status is set to `OK`.                            |
 
-The options `Evaluate as zero` and `Show last known status` are shown depending on the type of the query. `Evaluate as zero` is shown for monitors using `Count` queries. `Show last known status` on the other hand is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, or `Distribution`. These options are considerd as the **default status** of the monitor.
+The options `Evaluate as zero` and `Show last known status` are shown depending on the type of the query:
+
+**Evaluate as zero**
+This option is available for monitors using `Count` queries.
+
+**Show last known status**
+On the other hand, `Show last known status` is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, or `Distribution`.
+
+Both options are considered as the **default status** of the monitor.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -176,15 +189,18 @@ In most cases this setting is not useful because you only want an alert to resol
 
 #### Group retention time
 
-Drop the group from the monitor status after `N` hours (can be set up to 72 hours).
+Drop the group from the monitor status after `N` hours of missing data (can be set up to 72 hours).
 
-Similar to the Auto-resolve option, the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group is kept for 24h in the status before it's dropped. The start time of the group retention as well as the Auto-resolve option are **identical**, namely as soon as the monitor query returns an empty result (no data).
+{{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
+
+
+Similar to the [Auto-resolve option][4], the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group is kept for 24h in the status before it's dropped. The start time of the group retention as well as the Auto-resolve option are **identical**, namely as soon as the monitor query returns an empty result (no data).
 
 Typical use cases for defining a retention time are:
 - you would like to drop the group immediately/shortly after data stops reporting
 - you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: This option is only available for multi-alert monitors and works with the [`On missing data`][4] option mentioned above.
+**Note**: This option is only available for multi-alert monitors and works with the [`On missing data`][5] option mentioned above.
 
 #### New group delay
 
@@ -208,4 +224,5 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 [1]: /monitors/create/#monitor-types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
-[4]: /monitors/create/configuration/?tab=othermonitortypes
+[4]: /monitors/create/configuration#auto-resolve
+[5]: /monitors/create/configuration/?tab=othermonitortypes
