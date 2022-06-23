@@ -27,7 +27,6 @@ disable_sidebar: true
 
 {{< whatsnext desc="Best Practices:" >}}
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Avoiding cache issues in Synthetic tests{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/or-logic-api-tests-assertions" >}}Perform OR logic in API test assertions{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-https-redirection" >}}Monitor your HTTP requests are redirected into HTTPS{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Reusing browser tests journeys across your test suite{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation" >}}Email validation with browser tests{{< /nextlink >}}

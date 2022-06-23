@@ -5,6 +5,7 @@ description: Simulate HTTP requests to monitor public and internal API endpoints
 aliases:
   - /synthetics/http_test
   - /synthetics/http_check
+  - /synthetics/guide/or-logic-api-tests-assertions
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
