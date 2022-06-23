@@ -62,22 +62,21 @@ aliases:
 ## JMX
 
 * [I Have a Matching Bean for my JMX integration but nothing on Collect !][21]
-* [Collecting Composite type JMX attributes][22]
-* [How to run JMX commands in Windows?][23]
-* [jmx.yaml error: Include Section][24]
-* [Troubleshooting JMX Integrations][25]
-* [View jmx data in jConsole and set up your jmx.yaml to collect them][26]
-* [Both my JMX and AWS integrations use "name" tags. What do I do?][27]
-* [JBoss EAP 7 & Datadog monitoring via JMX][28]
+* [How to run JMX commands in Windows?][22]
+* [jmx.yaml error: Include Section][23]
+* [Troubleshooting JMX Integrations][24]
+* [View jmx data in jConsole and set up your jmx.yaml to collect them][25]
+* [Both my JMX and AWS integrations use "name" tags. What do I do?][26]
+* [JBoss EAP 7 & Datadog monitoring via JMX][27]
 
 ## Kafka
 
 
-* [Troubleshooting and Deep Dive for Kafka][29]
+* [Troubleshooting and Deep Dive for Kafka][28]
 
 ## Kubernetes
 
-* [Client Authentication against the apiserver and kubelet][30]
+* [Client Authentication against the apiserver and kubelet][29]
 
 ## MySQL & SQL
 

@@ -109,10 +109,13 @@ const initCodeTabs = () => {
             .replace(window.location.hash, '')
             .replace(window.location.search, '');
 
+        const queryParams = new URLSearchParams(window.location.search);
+        queryParams.set('tabs', activeLang)
+
         window.history.replaceState(
             null,
             null,
-            `${url}?tab=${activeLang}${window.location.hash}`
+            `${url}?${queryParams}${window.location.hash}`
         );
     }
 

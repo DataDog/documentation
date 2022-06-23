@@ -25,8 +25,9 @@ Datadog Admission Controller は `MutatingAdmissionWebhook` 型に属します�
 ## コンフィギュレーション
 
 ### Helm チャート
+Helm チャート v2.35.0 から、Datadog アドミッションコントローラーがデフォルトで有効化されるようになりました。アドミッションコントローラーを有効にするための追加構成は必要ありません。
 
-Admission Controller で Helm チャートを有効にするには、パラメーター `clusterAgent.admissionController.enabled` を `true` に設定してください。
+Admission Controller で v2.34.6 以前の Helm チャートを有効にするには、パラメーター `clusterAgent.admissionController.enabled` を `true` に設定してください。
 
 {{< code-block lang="yaml" filename="values.yaml" disable_copy="true" >}}
 [...]

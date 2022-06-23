@@ -1,6 +1,8 @@
 ---
 title: Trace and Span ID Formats
-kind: faq
+kind: guide
+aliases:
+  - /tracing/faq/span_and_trace_id_format/
 ---
 {{< jqmath-vanilla >}}
 

@@ -1,6 +1,8 @@
 ---
 title: Installing the trace Agent from source
-kind: faq
+kind: guide
+aliases:
+  - /tracing/faq/trace-agent-from-source/
 ---
 
 ## Install from source

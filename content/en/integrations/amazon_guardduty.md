@@ -4,7 +4,6 @@ categories:
     - aws
     - log collection
     - security
-ddtype: crawler
 description: Gather your AWS GuardDuty logs.
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
