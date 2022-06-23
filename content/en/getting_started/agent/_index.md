@@ -182,44 +182,44 @@ For example, let's say you have data that is collected from different teams and 
 
 2. In the `datadog.yaml` file, locate the `tags` parameter. Host level tags can be set in the `datadog.yaml` configuration to apply tags on all metrics, traces and logs forwarded from this host.
 
-```yaml
-## @param tags  - list of key:value elements - optional	
-## @env DD_TAGS - space separated list of strings - optional
-## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
-##
-## This configuration value merges with `DD_EXTRA_TAGS`, allowing some
-## tags to be set in a configuration file (`tags`), and additional tags to be added
-## with an environment variable (`DD_EXTRA_TAGS`).
-##
-## Learn more about tagging: https://docs.datadoghq.com/tagging/
-#
-# tags:
-#   - team:infra
-#   - <TAG_KEY>:<TAG_VALUE>
-```
+   ```yaml
+   ## @param tags  - list of key:value elements - optional	
+   ## @env DD_TAGS - space separated list of strings - optional
+   ## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
+   ##
+   ## This configuration value merges with `DD_EXTRA_TAGS`, allowing some
+   ## tags to be set in a configuration file (`tags`), and additional tags to be added
+   ## with an environment variable (`DD_EXTRA_TAGS`).
+   ##
+   ## Learn more about tagging: https://docs.datadoghq.com/tagging/
+   #
+   # tags:
+   #   - team:infra
+   #   - <TAG_KEY>:<TAG_VALUE>
+   ```
 
 3. Uncomment the tags parameter and the provided example `team:infra` tag. You can also add your own custom tag, for example `test:agent_walkthrough`. 
-```yaml
-## @param tags  - list of key:value elements - optional	
-## @env DD_TAGS - space separated list of strings - optional
-## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
-##
-## This configuration value merges with `DD_EXTRA_TAGS`, allowing some
-## tags to be set in a configuration file (`tags`), and additional tags to be added
-## with an environment variable (`DD_EXTRA_TAGS`).
-##
-## Learn more about tagging: https://docs.datadoghq.com/tagging/
-#
-tags:
-   - team:infra
-   - test:agent_walkthrough
-```
+   ```yaml
+   ## @param tags  - list of key:value elements - optional	
+   ## @env DD_TAGS - space separated list of strings - optional
+   ## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
+   ##
+   ## This configuration value merges with `DD_EXTRA_TAGS`, allowing some
+   ## tags to be set in a configuration file (`tags`), and additional tags to be added
+   ## with an environment variable (`DD_EXTRA_TAGS`).
+   ##
+   ## Learn more about tagging: https://docs.datadoghq.com/tagging/
+   #
+   tags:
+      - team:infra
+      - test:agent_walkthrough
+   ```
 
 4. Restart the Agent by running the Agent’s [restart command][25]. The Ubuntu restart command:
 
-```shell
-sudo service datadog-agent restart
-```
+   ```shell
+   sudo service datadog-agent restart
+   ```
 
 5. After a few minutes, go to **Metrics > Summary** again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and whatever personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
 
