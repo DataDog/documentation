@@ -9,6 +9,9 @@ further_reading:
 - link: "real_user_monitoring/explorer/watchdog_insights/"
   tag: "Documentation"
   text: "Learn about Watchdog Insights for RUM"
+- link: "real_user_monitoring/connect_rum_and_traces/"
+  tag: "Documentation"
+  text: "Connect RUM and Traces"
 ---
 
 ## Overview
@@ -28,6 +31,3 @@ This feature is automatically enabled for all APM and RUM users. Whenever Watchd
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
-https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tabs=browserrum
