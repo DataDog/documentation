@@ -69,7 +69,6 @@ function redirectCodeLang(codeLang = '') {
         // if cookie is not set, default to python
         newCodeLang = 'python';
         Cookies.set('code-lang', newCodeLang, { path: '/' });
-
         toggleCodeBlocks(newCodeLang);
     }
 }
@@ -94,26 +93,21 @@ function codeLangTabHoverHandler(event) {
 function codeLangTabClickHandler(event) {
     const queryParams = new URLSearchParams(window.location.search);
     const codeLang = event.target.dataset.codeLangTrigger;
-
     const { currentSection, baseUrl } = document.documentElement.dataset;
 
     event.preventDefault();
 
-    if (queryParams.get('code-lang')) {
-        queryParams.set('code-lang', codeLang);
-        window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
-        Cookies.set('code-lang', codeLang, { path: '/' });
-        toggleCodeBlocks(codeLang);
-    } else if (
-        document.documentElement.dataset.type === 'multi-code-lang' &&
+    if (document.documentElement.dataset.type === 'multi-code-lang' &&
         (document.body.classList.contains('kind-section') || document.body.classList.contains('kind-page'))
     ) {
         Cookies.set('code-lang', codeLang, { path: '/' });
         loadPage(`${baseUrl}${currentSection}${codeLang}`);
         window.history.replaceState({}, '', `${baseUrl}${currentSection}${codeLang}`);
     } else {
-        toggleCodeBlocks(codeLang);
         Cookies.set('code-lang', codeLang, { path: '/' });
+        toggleCodeBlocks(codeLang);
+        queryParams.set('code-lang', codeLang);
+        window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
     }
 }
 

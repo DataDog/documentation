@@ -239,7 +239,7 @@ datadog:
 ```
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -276,7 +276,7 @@ In this example we're defining an advanced configuration targeting a container n
 ```
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 {{% /tab %}}
 {{< /tabs >}}
 

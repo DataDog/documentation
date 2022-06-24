@@ -157,5 +157,5 @@ Common browser test errors include:
 [5]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
 [6]: /tracing/visualization/trace/
 [7]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
-[8]: /synthetics/guide/browser-test-self-maintenance/
+[8]: /synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator
 [9]: /help/

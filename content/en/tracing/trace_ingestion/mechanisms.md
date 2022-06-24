@@ -42,6 +42,7 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 @param max_traces_per_second - integer - optional - default: 10
 @env DD_APM_MAX_TPS - integer - optional - default: 10
 ```
+**Note**: The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries, it has no effect on other tracing libraries such as OpenTelemetry SDKs. 
 
 ### In tracing libraries: user-defined rules
 `ingestion_reason: rule`
