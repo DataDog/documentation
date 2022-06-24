@@ -76,7 +76,7 @@ POST https://api.datadoghq.com/api/unstable/services/definition
 
 
 #### Example
-{{< code-block lang="yaml" filename="service_definition.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
 ---
 schema-version: v2
 dd-service: shopping-cart 
@@ -133,7 +133,7 @@ curl --request POST 'https://api.datadoghq.com/api/unstable/services/definition'
 --header 'DD-APPLICATION-KEY: {APPLICATION_KEY}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-<service_definition.yaml> 
+<service.definition.yaml> 
 }'
 {{< /code-block >}}
 
