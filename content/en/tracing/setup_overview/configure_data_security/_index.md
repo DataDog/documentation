@@ -13,44 +13,47 @@ aliases:
 ---
 ## Overview
 
-The performance data and traces that you're collecting with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect.  Additionally, it may contain synthetic traffic that might cause your error counts to be inaccurate or Datadog to not accurately indicate the health of your services.
+The performance data and traces that you're collecting with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, it may contain synthetic traffic that might cause your error counts to be inaccurate or Datadog to not accurately indicate the health of your services.
 
-The Datadog Agent and some tracing libraries have  options available to address these situations and modify or discard spans, and various options are described below.  These docs cover several common methods for configuring Tracer and Agent to achieve these security requirements.
+The Datadog Agent and some tracing libraries have options available to address these situations and modify or discard spans, and various options are described below. These docs cover several common methods for configuring Tracer and Agent to achieve these security requirements.
 
 If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
 
 ## HTTP data collected
 
-To understand data security concerns it's important to understand what data is being collected. Datadog is in the process of standardizing the tags collected for web spans across all of it's APM libraries. When this standardization is complete the following tags will be collected for each server side web span:
+To understand data security concerns, it's important to understand what data is being collected. Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, the following tags are collected for each server side web span:
 
-*  `http.status_code` - the requests response status code
-*  `http.method` - the method or http verb
-*  `http.version` - the protocol version
-*  `http.url` - the full url, including the query string
-*  `http.useragent` - the browser's user agent field, if available
-*  `http.server_name` - The primary server name of the matched virtual host/host
-*  `http.route` - The matched route (path template)
-*  `http.client_ip` - The IP address of the original client behind all proxies, if known (discovered from headers such as X-Forwarded-For).
+*  `http.status_code` - The request's response status code.
+*  `http.method` - The method or HTTP verb.
+*  `http.version` - The protocol version.
+*  `http.url` - The full URL, including the query string.
+*  `http.useragent` - The browser's user agent field, if available.
+*  `http.server_name` - The primary server name of the matched host or virtual host.
+*  `http.route` - The matched route (path template).
+*  `http.client_ip` - The IP address of the original client behind all proxies, if known. Discovered from headers such as `X-Forwarded-For`.
 *  `http.request.content_length` - The size of the request payload body in bytes.
 *  `http.request.content_length_uncompressed` - The size of the uncompressed request payload body after transport decoding.
-*  `http.request.headers.*` - The request http headers. None will be collected by default, users can opt-in configure them.
+*  `http.request.headers.*` - The request HTTP headers. None are collected by default, but you can optionally configure them.
 *  `http.response.content_length` - The size of the response payload body in bytes.
-*  `http.response.content_length_uncompressed` - The size of the uncompressed request payload body after transport decoding.
-*  `http.response.headers.*` - The response http headers. None will be collected by default, users can opt-in configure them.
+*  `http.response.content_length_uncompressed` - The size of the uncompressed response payload body after transport decoding.
+*  `http.response.headers.*` - The response HTTP headers. None are collected by default, but you can optionally configure them.
 
-Some libraries may not yet implement all of these tags. Please check your libraries release notes for their availability.
 
 ### Configuring HTTP data
 
-Datadog will automatically try and resolve `http.client_ip` from a number of well known headers, such as X-Forwarded-For. If you use a custom header for this field, or whish to bypass the resolution algorithm, you can set the environment variable `DD_TRACE_CLIENT_IP_HEADER` and the library will only look in the specified header for the client IP.
+Datadog automatically attempts to resolve `http.client_ip` from a number of well known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library looks only in the specified header for the client IP.
 
-If you do not whish to collect this value, because you consider it sensitive data, or for any other reason, you can set the environment variable `DD_TRACE_CLIENT_IP_HEADER_DISABLED` to true. It is false by default.
+If you do not wish to collect this value because you consider it sensitive data, or for any other reason, set the `DD_TRACE_CLIENT_IP_HEADER_DISABLED` environment variable to `true`. It is `false` by default.
 
-The full url is placed in `http.url`, including the query string. The query string could contain sensitive data and therefore automatically parsed by a regex and any suspicious looking values are redacted by default. This redaction process is configurable, to modify the regex used for redaction set the environment variable to `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` to a valid regex of your choice. The regex are platform specific.
+The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific.
 
-If you do not wish to collect the query string you can set the environment variable `DD_HTTP_SERVER_TAG_QUERY_STRING` to false. The default value is true.
+If you do not want to collect the query string, set the `DD_HTTP_SERVER_TAG_QUERY_STRING` environment variable to `false`. The default value is `true`.
 
-If you wish to collect `DD_TRACE_HEADER_TAGS` this accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. **Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`
+To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variable with a map of case-insensitive header keys to tag names. The library applies matching header values as tags on root spans. The setting also accepts entries without a specified tag name, for example:
+
+```
+DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
+```
 
 ## Generalizing resource names and filtering baseline
 
@@ -298,7 +301,7 @@ For an in depth overview of the options to avoid tracing specific resources, see
 
 If your services include simulated traffic such as health checks, you may want to exclude these traces from being collected so the metrics for your services match production traffic.
 
-The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . Then create a list of one or more regular expressions, specifying which resources the Agent will filter out based on their resource name.
+The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . Then create a list of one or more regular expressions, specifying which resources the Agent filters out based on their resource name.
 
 If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][6] for details.
 
