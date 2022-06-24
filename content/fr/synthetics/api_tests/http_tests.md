@@ -1,31 +1,35 @@
 ---
-title: Tests HTTP
-kind: documentation
-description: Simuler des requêtes HTTPS pour surveiller les endpoints d'API publics et internes
 aliases:
-  - /fr/synthetics/http_test
-  - /fr/synthetics/http_check
+- /fr/synthetics/http_test
+- /fr/synthetics/http_check
+description: Simuler des requêtes HTTPS pour surveiller les endpoints d'API publics
+  et internes
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-    tag: Blog
-    text: Présentation de la surveillance Synthetic Datadog
-  - link: https://learn.datadoghq.com/course/view.php?id=39
-    tag: Centre d'apprentissage
-    text: Présentation des tests Synthetic
-  - link: /getting_started/synthetics/api_test
-    tag: Documentation
-    text: Débuter avec les tests HTTP
-  - link: /synthetics/private_locations
-    tag: Documentation
-    text: Exécuter des tests HTTP sur des endpoints internes
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  tag: Blog
+  text: Présentation de la surveillance Synthetic Datadog
+- link: https://learn.datadoghq.com/course/view.php?id=39
+  tag: Centre d'apprentissage
+  text: Présentation des tests Synthetic
+- link: /getting_started/synthetics/api_test
+  tag: Documentation
+  text: Débuter avec les tests HTTP
+- link: /synthetics/private_locations
+  tag: Documentation
+  text: Exécuter des tests HTTP sur des endpoints internes
+- link: /synthetics/multistep
+  tag: Documentation
+  text: Exécuter des tests HTTP à plusieurs étapes
+kind: documentation
+title: Tests HTTP
 ---
 ## Présentation
 
 Les tests HTTP vous permettent d'envoyer des requêtes HTTP aux endpoints d'API de vos applications pour vérifier les réponses et les conditions définies, y compris le temps de réponse global, le code de statut attendu, l'en-tête ou le contenu du corps.
 
-Les tests HTTP peuvent être exécutés depuis des [emplacements gérés][1] et des [emplacements privés][2], selon que vous souhaitez exécuter le test à l'extérieur ou à l'intérieur de votre réseau. Les tests HTTP peuvent être exécutés de façon récurrente, à la demande ou directement dans vos [pipelines de CI/CD][3].
+Les tests HTTP peuvent être exécutés depuis des [emplacements gérés][1] et des [emplacements privés][2], selon que vous souhaitez exécuter le test à l'extérieur ou à l'intérieur de votre réseau. Les tests HTTP peuvent être exécutés selon un programme, à la demande ou directement dans vos [pipelines de CI/CD][3].
 
-## Configuration
+## Procédure à suivre
 
 Après avoir choisi de créer un test `HTTP`, définissez la requête de votre test.
 
@@ -39,6 +43,7 @@ Après avoir choisi de créer un test `HTTP`, définissez la requête de votre t
    {{% tab "Options de requête" %}}
 
    * **Follow redirects** : sélectionnez cette option pour que le test HTTP suive jusqu'à dix redirections lors de l'exécution de la requête.
+   * **Timeout** : permet de spécifier le délai (en secondes) avant l'expiration du test.
    * **Request headers** : définissez les en-têtes à ajouter à votre requête HTTP. Vous pouvez également remplacer les en-têtes par défaut (par exemple, l'en-tête `user-agent`).
    * **Cookies** : définissez les cookies à ajouter à votre requête HTTP. Définissez plusieurs cookies en suivant le format `<COOKIE_NOM1>=<COOKIE_VALEUR1>; <COOKIE_NOM2>=<COOKIE_VALEUR2>`.
 
@@ -47,16 +52,24 @@ Après avoir choisi de créer un test `HTTP`, définissez la requête de votre t
    {{% tab "Authentification" %}}
 
    * **HTTP Basic Auth** : ajoutez des identifiants d'authentification basique HTTP.
-   * **AWS Signature V4** : entrez votre ID de clé d'accès et votre clé d'accès secrète. Datadog génère la signature de votre requête.
-   Cette option utilise l'implémentation basique de SigV4. Les signatures spécifiques, telles qu'AWS S3, ne sont pas implémentées.
-   * **NTLM v1** : ajoutez vos identifiants d'authentification NTLM.
+   * **Digest Auth** : ajoutez des identifiants d'authentification Digest.
+   * **NTLM** : ajoutez les informations d'authentification NTLM. NTLMv2 et NTLMv1 sont pris en charge.
+   * **AWS Signature v4** : saisissez votre ID de clé d'accès et votre clé d'accès secrète. Datadog génère alors la signature pour votre requête. Cette option repose sur une implémentation de base de SigV4. Les signatures spécifiques (par exemple pour AWS S3) ne sont pas implémentées.
+
+  </br>Si vous le souhaitez, vous pouvez spécifier le domaine et la station de travail dans la section **Additional configuration**.  
+
+   {{% /tab %}}
+
+   {{% tab "Paramètres de requête" %}}
+
+   * **Encode parameters** : ajoutez le nom et la valeur des paramètres de requête nécessitant un encodage.
 
    {{% /tab %}}
 
    {{% tab "Corps de requête" %}}
 
    * **Body type** : sélectionnez le type du corps de requête (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded` ou `None`) que vous voulez ajouter à votre requête HTTP.
-   * **Request body** : ajoutez le contenu du corps de votre requête HTTP. **Remarque** : la taille du corps de la requête est limitée à 50 Ko.
+   * **Request body** : ajoutez le contenu du corps de votre requête HTTP. La taille du corps de la requête ne doit pas dépasser 50 Ko.
 
    {{% /tab %}}
 
@@ -75,7 +88,7 @@ Après avoir choisi de créer un test `HTTP`, définissez la requête de votre t
    {{% tab "Proxy" %}}
 
    * **Proxy URL** : indiquez l'URL du proxy que la requête HTTP doit utiliser (`http://<VOTRE_UTILISATEUR>:<VOTRE_MOT_DE_PASSE>@<VOTRE_IP>:<VOTRE_PORT>`).
-   * **Proxy Header** : ajoutez les en-têtes à inclure dans la requête HTTP envoyée au proxy.
+   * **Proxy header** : ajoutez les en-têtes à inclure dans la requête HTTP envoyée au proxy.
 
    {{% /tab %}}
 
@@ -101,7 +114,7 @@ Cliquez sur **Test URL** pour essayer la configuration de requête. Un aperçu d
 
 ### Définir des assertions
 
-Les assertions définissent un résultat de test escompté. Lorsque vous cliquez sur `Test URL`, les assertions de base pour `response time`, `status code` et `header` `content-type` sont ajoutées en fonction de la réponse obtenue. Vous devez définir au moins une assertion à surveiller pour votre test.
+Les assertions définissent un résultat de test escompté. Après avoir cliqué sur **Test URL**, les assertions de base pour `response time`, `status code` et `header` `content-type` sont ajoutées en fonction de la réponse obtenue. Vous devez définir au moins une assertion à surveiller pour votre test.
 
 | Type          | Opérateur                                                                                               | Type de valeur                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -110,11 +123,15 @@ Les assertions définissent un résultat de test escompté. Lorsque vous cliquez
 | response time | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Nombre entier_                                                      |
 
-**Remarque** : les tests HTTP peuvent décompresser les corps de réponse contenant les en-têtes `content-encoding` suivants : `br`, `deflate`, `gzip` et `identity`.
+Les tests HTTP peuvent décompresser les corps de réponse contenant les en-têtes `content-encoding` suivants : `br`, `deflate`, `gzip` et `identity`.
 
 Vous pouvez créer jusqu'à 20 assertions par test API en cliquant sur **New Assertion** ou en sélectionnant directement l'aperçu de la réponse :
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Définir les assertions pour votre test HTTP" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_http.png" alt="Définir des assertions pour déterminer la réussite ou l'échec de votre test HTTP" style="width:90%;" >}}
+
+Si un test ne contient pas d'assertion sur le corps de la réponse, la charge utile du corps est abandonnée et le temps de réponse associé à la requête est renvoyé, dans la limite du délai d'expiration défini par le worker Synthetic.
+
+Si un test contient une assertion sur le corps de la réponse et que le délai d'expiration est atteint, une erreur `Assertions on the body/response cannot be run beyond this limit` apparaît.
 
 ### Sélectionner des emplacements
 
@@ -134,10 +151,10 @@ Définissez des conditions d'alerte afin de spécifier les circonstances dans le
 
 #### Règle d'alerte
 
-Lorsque vous définissez les conditions d'alerte sur `An alert is triggered if any assertion fails for X minutes from any n of N locations`, une alerte se déclenche uniquement si les deux conditions suivantes se vérifient :
+Lorsque vous définissez les conditions d'alerte sur `An alert is triggered if your test fails for X minutes from any n of N locations`, une alerte se déclenche uniquement si les deux conditions suivantes se vérifient :
 
 * Au moins un emplacement a donné lieu à un échec (au moins une assertion a échoué) au cours des *X* dernières minutes
-* À un moment au cours des *X* dernières minutes, au moins *n* emplacements ont donné lieu à un échec
+* À un moment au cours des *X* dernières minutes, au moins *n* emplacements ont donné lieu à un échec.
 
 #### Nouvelle tentative rapide
 
@@ -199,6 +216,9 @@ Un test est considéré comme `FAILED` s'il ne répond pas à une ou plusieurs d
 
 Voici la liste des erreurs concernées :
 
+`CONNREFUSED`
+: Aucune connexion n'a pu être établie, en raison d'un refus explicite de la machine cible.
+
 `CONNRESET`
 : La connexion a été interrompue de façon soudaine par le serveur à distance. Causes possibles : erreur ou défaillance du serveur Web lors de la réponse ou perte de connectivité du serveur Web.
 
@@ -212,18 +232,27 @@ Voici la liste des erreurs concernées :
 : La connexion SSL n'a pas pu être établie. [Pour en savoir plus, consultez la page relative aux erreurs][12].
 
 `TIMEOUT`
-: La requête n'a pas pu être effectuée dans un délai raisonnable. Deux types d'erreur `TIMEOUT` peuvent se produire :
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indique que la requête a expiré lors de la connexion au socket TCP. 
-  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indique que la requête a expiré lors de son traitement global (qui comprend la connexion au socket TCP, le transfert de données et les assertions).
+: La requête n'a pas pu être effectuée dans un délai raisonnable. Deux types d'erreurs `TIMEOUT` peuvent se produire :
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indique que la durée de la requête a dépassé le délai d'expiration défini (par défaut, 60 secondes).
+  Pour chaque requête, seules les étapes terminées sont affichées dans la cascade réseau. Par exemple, si rien d'autre que `Total response time` ne s'affiche, cela signifie que l'expiration est survenue durant la résolution DNS.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indique que la durée du test (requête + assertions) a atteint la durée maximale (60,5 secondes).
 
 `MALFORMED_RESPONSE` 
 : Le serveur à distance a répondu avec une charge utile non conforme aux spécifications HTTP.
 
 ## Autorisations
 
-Par défaut, seuls les utilisateurs disposant des [rôles Admin Datadog et Standard Datadog][13] peuvent créer, modifier et supprimer des tests HTTP Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][13]. 
+Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][13] peuvent créer, modifier et supprimer des tests HTTP Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][13]. 
 
-Si vous avez accès aux [rôles personnalisés][14], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write`.
+Si vous utilisez des [rôles personnalisés][14], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write`.
+
+### Restreindre l'accès
+
+Les clients qui ont configuré des [rôles personnalisés][15] sur leur compte peuvent utiliser la fonctionnalité de restriction d'accès.
+
+Vous pouvez faire en sorte que certains rôles au sein de votre organisation ne puissent pas accéder à un test HTTP. Lors de la création du test HTTP, choisissez les rôles (en plus des utilisateurs) auxquels vous souhaitez attribuer des autorisations de lecture/écriture pour votre test.
+
+{{< img src="synthetics/settings/restrict_access.png" alt="Définir des autorisations pour votre test" style="width:70%;" >}}
 
 ## Pour aller plus loin
 
@@ -243,3 +272,4 @@ Si vous avez accès aux [rôles personnalisés][14], ajoutez votre utilisateur �
 [12]: /fr/synthetics/api_tests/errors/#ssl-errors
 [13]: /fr/account_management/rbac/
 [14]: /fr/account_management/rbac#custom-roles
+[15]: /fr/account_management/rbac/#create-a-custom-role

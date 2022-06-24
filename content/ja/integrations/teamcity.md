@@ -3,26 +3,28 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: teamcity
   metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     teamcity_processes: assets/saved_views/teamcity_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - configuration & deployment
-  - autodiscovery
-  - log collection
+- configuration & deployment
+- autodiscovery
+- log collection
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
+- https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
 display_name: Teamcity
 draft: false
 git_integration_title: teamcity
 guid: b390dd3f-47d5-4555-976a-36722833f000
 integration_id: teamcity
 integration_title: Teamcity
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,16 +32,19 @@ manifest_version: 1.0.0
 metric_prefix: teamcity.
 name: teamcity
 process_signatures:
-  - teamcity-server.sh
-  - teamcity-server
+- teamcity-server.sh
+- teamcity-server
 public_title: Datadog-Teamcity インテグレーション
 short_description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、正常なビルドに関連するイベントを監視し、それらのイベントを Datadog に送信します。
@@ -56,7 +61,7 @@ Teamcity チェックは [Datadog Agent][1] パッケージに含まれていま
 
 #### Teamcity の準備
 
-[Teamcity のドキュメント][2]に従って、ゲストログインを有効にします。
+Teamcity を準備するには、[ゲストログインを有効にする][2]を参照してください。
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -170,7 +175,7 @@ Teamcity チェックには、メトリクスは含まれません。
 
 ### イベント
 
-正常なビルドを表す Teamcity イベントが Datadog アプリケーションに転送されます。
+正常なビルドを表す Teamcity イベントが Datadog に転送されます。
 
 ### サービスのチェック
 

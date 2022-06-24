@@ -6,12 +6,12 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - log collection
-  - security
+- log collection
+- security
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
 display_name: Auth0
 draft: false
 git_integration_title: auth0
@@ -30,10 +30,13 @@ public_title: Intégration Datadog/Auth0
 short_description: Visualisez et analysez vos événements Auth0.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Auth0 est une plateforme de vérification d'identité pour les équipes de développement qui fournit aux développeurs et aux entreprises les éléments dont ils ont besoin pour sécuriser leurs applications.
@@ -70,13 +73,13 @@ L'intégralité de la configuration s'effectue sur le [dashboard Auth0][1].
 
     | Paramètre          | Description                                                |
     | ---------------- | ---------------------------------------------------------- |
-    | `API Key`        | Saisissez votre [clé d'api Datadog][2].                           |
-    | `Region`         | Si vous utilisez le site européen de Datadog (app.datadoghq.eu), le paramètre Region doit être défini sur `EU`. Si ce n'est pas le cas, il doit être défini sur `GLOBAL`   |
+    | `API Key`        | Saisissez votre [clé d'API Datadog][2].                           |
+    | `Region`           | Votre [site Datadog][3], par exemple `EU` pour app.datadoghq.eu, `US1` pour app.datadoghq.com ou `US3` pour us3.datadoghq.com. |
 
 
 6. Cliquez sur Save.
 
-Lors de l'écriture du prochain log de locataire par Auth0, vous recevrez une copie de cet événement de log dans Datadog avec la source et le service définis sur `auth0`.
+Lorsqu'Auth0 écrit le prochain log de locataire, vous recevez une copie de cet événement de log dans Datadog. La source et le service ont alors pour valeur `auth0`.
 
 ### Validation
 
@@ -88,7 +91,8 @@ Visualiser vos logs dans Datadog :
 ## Données collectées
 
 ### Collecte de logs
-Les logs Auth0 sont recueillis et envoyés à Datadog. Les types de logs qui peuvent être renvoyés sont décrits [ici][3].
+
+Les logs Auth0 sont recueillis et envoyés à Datadog. Les types de logs qui peuvent être renvoyés sont décrits dans la section [Codes des types d'événements de log][4] (en anglais).
 
 ### Métriques
 
@@ -104,11 +108,11 @@ Auth0 n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
-Consultez notre [article de blog][5] pour en savoir plus à propos de cette intégration.
+Besoin d'aide ? Contactez [l'assistance Datadog][5]. Consultez notre [article de blog][6] pour en savoir plus à propos de cette intégration.
 
 [1]: https://manage.auth0.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://auth0.com/docs/logs/references/log-event-type-codes
-[4]: https://docs.datadoghq.com/fr/help/
-[5]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/
+[3]: https://docs.datadoghq.com/fr/getting_started/site/
+[4]: https://auth0.com/docs/logs/references/log-event-type-codes
+[5]: https://docs.datadoghq.com/fr/help/
+[6]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/

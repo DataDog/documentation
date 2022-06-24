@@ -297,7 +297,7 @@ Le check Kafka-consumer n'inclut aucun check de service.
 [5]: https://github.com/DataDog/jmxfetch
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://docs.datadoghq.com/fr/integrations/faq/troubleshooting-and-deep-dive-for-kafka/
-[8]: https://docs.datadoghq.com/fr/integrations/faq/agent-failed-to-retrieve-rmierver-stub/
+[8]: https://docs.datadoghq.com/fr/integrations/guide/agent-failed-to-retrieve-rmiserver-stub/
 [9]: https://docs.datadoghq.com/fr/integrations/faq/producer-and-consumer-metrics-don-t-appear-in-my-datadog-application/
 [10]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
 [11]: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics

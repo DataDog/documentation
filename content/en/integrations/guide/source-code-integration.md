@@ -27,7 +27,7 @@ Combined with the GitHub Apps integrations, you can see inline code snippets in 
 <div class="alert alert-info">
 The source code integration supports Go and all JVM languages.
 <br>
-Datadog Agent 7.33.0 or higher is required.
+Datadog Agent 7.35.0 or higher is required.
 </div>
 
 To map telemetry data with your source code:
@@ -38,7 +38,7 @@ To map telemetry data with your source code:
 
 ### Tag your telemetry
 
-To link data to a specific commit, tag your telemetry with a `git.commit.sha` tag.
+To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags.
 
 {{< tabs >}}
 {{% tab "Docker Runtime" %}}

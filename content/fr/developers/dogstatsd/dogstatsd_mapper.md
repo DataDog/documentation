@@ -1,18 +1,20 @@
 ---
-title: Mapper DogStatsD
-kind: documentation
-description: Convertissez certains éléments des noms de métriques StatsD en tags grâce aux règles de mappage de DogStatsD.
+description: Convertissez certains éléments des noms de métriques StatsD en tags grâce
+  aux règles de mappage de DogStatsD.
 further_reading:
-  - link: developers/dogstatsd
-    tag: Documentation
-    text: Présentation de DogStatsD
-  - link: developers/libraries
-    tag: Documentation
-    text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
-    tag: GitHub
-    text: Code source de DogStatsD
+- link: developers/dogstatsd
+  tag: Documentation
+  text: Présentation de DogStatsD
+- link: developers/libraries
+  tag: Documentation
+  text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
+- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
+  tag: GitHub
+  text: Code source de DogStatsD
+kind: documentation
+title: Mapper DogStatsD
 ---
+
 Depuis la version 7.17 de l'Agent, le Mapper DogstatsD vous permet de convertir des éléments du nom d'une métrique transmise à DogStatsD en des tags. Cette création de tags passe par l'utilisation de règles de mappage, qui reposent sur des wildcards et des regex. Vous pouvez ainsi convertir la métrique suivante :
 
 - `airflow.job.duration.<TYPE_TÂCHE>.<NOM_TÂCHE>`
@@ -57,7 +59,10 @@ Voici l'explication des paramètres fictifs de la commande :
 
 ## Correspondance avec wildcard
 
-La correspondance avec wildcard renvoie des noms de métriques séparés par des points à l'aide du wildcard `*`. Pour que cette expression fonctionne, les noms de métriques doivent uniquement être composés de caractères alphanumériques, ainsi que des caractères `.` et `_`. Les groupes extraits peuvent être réutilisés en suivant le format `$n` (exemple : `$1`, `$2`, `$3`) ou le format `${n}` (exemple :   `${1}`, `${2}`, `${3}`).
+La correspondance avec wildcard renvoie des noms de métriques séparés par des points à l'aide du wildcard `*`. Pour que cette expression fonctionne, les noms des métriques doivent uniquement être composés de caractères alphanumériques, ainsi que des caractères `.` et `_`. Les groupes extraits peuvent être réutilisés en suivant l'un des formats ci-dessous :
+
+- Format `$n` : `$1`, `$2`, `$3`, etc.
+- Format `${n}` : `${1}`, `${2}`, `${3}`, etc.
 
 Imaginons que vous disposiez de la métrique `custom_metric.process.value_1.value_2`, avec la configuration de groupe de mappage suivante :
 
@@ -76,11 +81,12 @@ dogstatsd_mapper_profiles:
 
 Cela envoie la métrique `custom_metric.process` à Datadog, avec les tags `tag_key_1:value_1` et `tag_key_2:value_2`.
 
-**Remarque** : si la métrique envoyée possède déjà un tag, aucun mappage n'est appliqué.
-
 ## Correspondance avec regex
 
-La correspondance avec regex renvoie des noms de métriques à l'aide d'une expression régulière. Contrairement à la correspondance avec wildcard, il est possible de récupérer des groupes contenant le caractère `.`. Les groupes extraits peuvent être réutilisés en suivant le format `$n` (exemple : `$1`, `$2`, `$3`) ou le format `${n}` (exemple : `${1}`, `${2}`, `${3}`).
+La correspondance avec regex renvoie des noms de métriques à l'aide d'une expression régulière. Contrairement à la correspondance avec wildcard, il est possible de récupérer des groupes contenant le caractère `.`. Les groupes extraits peuvent être réutilisés en suivant l'un des formats ci-dessous :
+
+- Format `$n` : `$1`, `$2`, `$3`, etc.
+- Format `${n}` : `${1}`, `${2}`, `${3}`, etc.
 
 Imaginons que vous disposiez de la métrique `custom_metric.process.value_1.value.with.dots._2`, avec la configuration de groupe de mappage suivante :
 
@@ -98,8 +104,6 @@ dogstatsd_mapper_profiles:
 ```
 
 Cela envoie la métrique `custom_metric.process` à Datadog, avec les tags `tag_key_1:value_1` et `tag_key_2:value.with.dots._2`.
-
-**Remarque** : si la métrique envoyée possède déjà un tag, aucun mappage n'est appliqué.
 
 ## Réutiliser un groupe dans un nom de métrique
 

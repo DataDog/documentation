@@ -1,0 +1,26 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Create_a_new_dashboard_with_apm_issue_stream_list_stream_widget with list_stream widget",
+  "widgets": [
+    {
+      "definition": {
+        "type": "list_stream",
+        "requests": [
+          {
+            "columns": [
+              {
+                "width": "auto",
+                "field": "timestamp"
+              }
+            ],
+            "query": {
+              "data_source": "apm_issue_stream",
+              "query_string": ""
+            },
+            "response_format": "event_list"
+          }
+        ]
+      }
+    }
+  ]
+}

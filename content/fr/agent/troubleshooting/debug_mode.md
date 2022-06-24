@@ -1,18 +1,23 @@
 ---
-title: Mode debugging
-kind: documentation
 aliases:
-  - /fr/agent/faq/how-to-get-more-logging-from-the-agent
-  - /fr/agent/faq/agent-5-container-more-log
+- /fr/agent/faq/how-to-get-more-logging-from-the-agent
+- /fr/agent/faq/agent-5-container-more-log
 further_reading:
-  - link: /agent/troubleshooting/send_a_flare/
-    tag: Dépannage de l'Agent
-    text: Envoyer un flare de l'Agent
-  - link: /agent/troubleshooting/agent_check_status/
-    tag: Dépannage de l'Agent
-    text: Obtenir le statut d'un check de l'Agent
+- link: /agent/troubleshooting/send_a_flare/
+  tag: Dépannage de l'Agent
+  text: Envoyer un flare de l'Agent
+- link: /agent/troubleshooting/agent_check_status/
+  tag: Dépannage de l'Agent
+  text: Obtenir le statut d'un check de l'Agent
+kind: documentation
+title: Mode debugging
 ---
+
 ## Agent
+
+Par défaut, le niveau de log de l'Agent est défini sur `INFO`. Pour obtenir plus d'informations à partir de vos logs, définissez le niveau de log sur `DEBUG`.
+
+**Remarque** : le mode debug doit uniquement être utilisé à des fins de debugging. Datadog vous recommande d'activer uniquement `DEBUG` pendant une certaine période, car cela entraîne une hausse du nombre de logs indexés. Redéfinissez le niveau de log sur `INFO` une fois votre debugging terminé.
 
 Pour activer le mode debugging complet de l'Agent :
 

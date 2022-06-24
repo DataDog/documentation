@@ -130,14 +130,14 @@ auto_explain.log_min_duration = '500ms'
 
 ```python
 if os.environ.get('DD_LOGS_INJECTION') == 'true':
-    from ddtrace.helpers import get_correlation_ids
+    from ddtrace import tracer
     from sqlalchemy.engine import Engine
     from sqlalchemy import event
 
     @event.listens_for(Engine, "before_cursor_execute", retval=True)
     def comment_sql_calls(conn, cursor, statement, parameters, context, executemany):
-        trace_id, span_id = get_correlation_ids()
-        statement = f"{statement} -- dd.trace_id=<{trace_id or 0}>"
+        trace_ctx = tracer.get_log_correlation_context()
+        statement = f"{statement} -- dd.trace_id=<{trace_ctx['trace_id']}>"
         return statement, parameters
 ```
 

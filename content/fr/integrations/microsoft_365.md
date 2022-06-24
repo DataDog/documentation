@@ -1,25 +1,28 @@
 ---
 categories:
-  - log collection
-  - security
+- log collection
+- security
 ddtype: crawler
 dependencies: []
-description: "Connectez-vous à votre compte Microsoft\_365 pour intégrer les logs d'audit d'une organisation à la journalisation de Datadog."
+description: Connectez-vous à votre compte Microsoft 365 pour intégrer les logs d'audit
+  d'une organisation à la plateforme de journalisation de Datadog.
 doc_link: https://docs.datadoghq.com/integrations/microsoft_365/
 draft: false
 git_integration_title: microsoft_365
 has_logo: true
 integration_id: ''
-integration_title: "Microsoft\_365"
+integration_title: Microsoft 365
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: microsoft_365
-public_title: "Intégration Datadog/Microsoft\_365"
-short_description: "Afficher les logs d'audit Microsoft\_365 dans Datadog"
+public_title: Intégration Datadog/Microsoft 365
+short_description: Afficher les logs d'audit Microsoft 365 dans Datadog
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Intégrez votre plate-forme Microsoft 365 pour :

@@ -24,7 +24,7 @@ Kubernetes resources for Live Containers requires [Agent version >= 7.27.0][2] a
 If you are using the official [Datadog Helm Chart][1]:
 
 - Use chart version 2.10.0 or above
-  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your helm chart [values.yaml][2] file.
+  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your Helm chart [values.yaml][2] file.
 - Make sure the Process Agent is enabled. You can do this by modifying your `datadog-values.yaml` file to include:
 
     ```yaml
@@ -126,18 +126,23 @@ The following table presents the list of collected resources and the minimal Age
 
 | Resource | Minimal Agent version | Minimal Cluster Agent version | Minimal Helm chart version |
 |---|---|---|---|
+| ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
+| ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 |
 | Clusters | 7.27.0 | 1.12.0 | 2.10.0 |
-| Deployments | 7.27.0 | 1.11.0 | 2.10.0 |
-| Nodes | 7.27.0 | 1.11.0 | 2.10.0 |
-| Pods | 7.27.0 | 1.11.0 | 2.10.0 |
-| ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 |
-| Services | 7.27.0 | 1.11.0 | 2.10.0 |
-| Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
-| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
+| Deployments | 7.27.0 | 1.11.0 | 2.10.0 |
+| Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
+| Nodes | 7.27.0 | 1.11.0 | 2.10.0 |
 | PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
 | PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
+| Pods | 7.27.0 | 1.11.0 | 2.10.0 |
+| ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 |
+| RoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
+| Roles | 7.27.0 | 1.19.0 | 2.30.9 |
+| ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 |
+| Services | 7.27.0 | 1.11.0 | 2.10.0 |
+| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
@@ -312,7 +317,7 @@ To prevent the leaking of sensitive data, you can scrub sensitive words in conta
 - `credentials`
 - `stripetoken`
 
-You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words. 
+You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words.
 
 **Note**: The additional sensitive words must be in lowercase, as the Agent compares the text with the pattern in lowercase. This means `password` scrubs `MY_PASSWORD` to `MY_*******`, while `PASSWORD` does not.
 
@@ -336,7 +341,7 @@ password: <MY_PASSWORD>
 password::::== <MY_PASSWORD>
 ```
 
-However it does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/secret/******` even though `secret` is a sensitive word.
+However it does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
 
 ## Further reading
 

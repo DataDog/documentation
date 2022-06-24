@@ -1,29 +1,30 @@
 ---
-title: Débuter avec la Gestion des incidents
-kind: documentation
 further_reading:
-  - link: /monitors/incident_management/datadog_clipboard
-    tag: Documentation
-    text: Presse-papiers Datadog
-  - link: https://www.youtube.com/watch?v=QIambwILy_M
-    tag: Vidéo
-    text: Datadog sur la Gestion des incidents
-  - link: /monitors/incident_management
-    tag: Documentation
-    text: Gestion des incidents
-  - link: https://www.datadoghq.com/blog/incident-response-with-datadog/
-    tag: Blog
-    text: Gestion des incidents avec Datadog
-  - link: /monitors/incident_management/notification_rules
-    tag: Documentation
-    text: Règles de notification
-  - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
-    tag: Documentation
-    text: Intégration de Slack avec les incidents
-  - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
-    tag: Blog
-    text: Pratiques recommandées pour la création de post-mortems d'incident
+- link: /monitors/incident_management/datadog_clipboard
+  tag: Documentation
+  text: Presse-papiers Datadog
+- link: https://www.youtube.com/watch?v=QIambwILy_M
+  tag: Vidéo
+  text: Datadog sur la Gestion des incidents
+- link: /monitors/incident_management
+  tag: Documentation
+  text: Gestion des incidents
+- link: https://www.datadoghq.com/blog/incident-response-with-datadog/
+  tag: Blog
+  text: Gestion des incidents avec Datadog
+- link: /monitors/incident_management/notification_rules
+  tag: Documentation
+  text: Règles de notification
+- link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
+  tag: Documentation
+  text: Intégration de Slack avec les incidents
+- link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
+  tag: Blog
+  text: Pratiques recommandées pour la création de post-mortems d'incident
+kind: documentation
+title: Débuter avec la Gestion des incidents
 ---
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">La fonctionnalité de gestion des incidents n'est pas disponible le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
@@ -64,7 +65,7 @@ Ce guide décrit l'utilisation du [presse-papiers Datadog][2] pour déclarer un 
 
 {{< img src="getting_started/incident_management/copy_to_clipboard.png" alt="Copier dans le presse-papiers" responsive="true" style="width:100%;">}}
 
-6. Cliquez sur **Select All** puis sur **Add Selected Items To…**
+6. Cliquez sur **Select All**, puis sur **Add Selected Items To…**
 
 7. Sélectionnez **New Incident**.
 
@@ -269,6 +270,14 @@ Pour personnaliser la Gestion des incident, accédez à la [page de paramètres 
 
 {{< img src="getting_started/incident_management/im_settings_button.png" alt="Paramètres" responsive="true" style="width:100%;">}}
 
+## Créer et gérer des incidents sur un appareil mobile
+
+Grâce à l'[application mobile Datadog][10], disponible sur l'[App Store d'Apple][11] et le [Google Play Store][12], vous pouvez créer des incidents, mais également consulter, rechercher et filtrer tous les incidents auxquels vous avez accès avec votre compte Datadog. Cette application vous permet de prendre rapidement des mesures et de résoudre des problèmes, même lorsque vous n'êtes pas devant votre ordinateur.
+
+Vous avez également la possibilité de déclarer et de modifier des incidents, ainsi que d'échanger rapidement avec vos équipes via les intégrations Slack, Zoom, et plus encore.
+
+{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors sur l'application mobile">}}
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -282,3 +291,6 @@ Pour personnaliser la Gestion des incident, accédez à la [page de paramètres 
 [7]: /fr/monitors/incident_management/#status-levels
 [8]: /fr/monitors/incident_management/notification_rules
 [9]: https://app.datadoghq.com/incidents/settings
+[10]: /fr/mobile/
+[11]: https://apps.apple.com/app/datadog/id1391380318
+[12]: https://play.google.com/store/apps/details?id=com.datadog.app

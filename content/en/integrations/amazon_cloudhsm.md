@@ -3,7 +3,6 @@ categories:
     - cloud
     - aws
     - log collection
-ddtype: crawler
 description: Gather your HSM audit logs in your Datadog organization.
 has_logo: true
 dependencies:

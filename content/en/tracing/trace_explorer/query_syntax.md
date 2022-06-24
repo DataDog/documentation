@@ -308,7 +308,7 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 [9]: /tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /tracing/visualization/#trace
 [11]: /monitors/create/types/apm/
-[12]: /dashboards/timeboard/
+[12]: /dashboards/#timeboards
 [13]: /help/
 [14]: /tracing/visualization/#indexed-span
 [15]: /dashboards/

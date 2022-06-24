@@ -104,7 +104,7 @@ For generality, the library exposes a C API. Here is an example of incorporating
 1. Download a release of [ddprof][4] with library support (v0.8.0 or later) and extract the tarball. For example:
 
    ```bash
-   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.1/ddprof-x86_64-linux-gnu.tar.xz
+   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.8.1/ddprof-0.8.1-x86_64-unknown-linux-gnu.tar.xz
    tar xvf ddprof-x86_64-linux-gnu.tar.xz --directory /tmp
    ```
 

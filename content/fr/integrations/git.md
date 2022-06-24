@@ -1,22 +1,25 @@
 ---
-"categories":
-- "Source Control"
-"ddtype": "library"
-"dependencies": []
-"description": "Envoyez des commits et pull requests depuis votre serveur Git auto-hébergé vers Datadog."
-"doc_link": "https://docs.datadoghq.com/integrations/git/"
-"draft": false
-"git_integration_title": "git"
-"has_logo": true
-"integration_id": "git"
-"integration_title": "Git"
-"is_public": true
-"kind": "integration"
-"manifest_version": "1.0"
-"name": "git"
-"public_title": "Intégration Datadog/Git"
-"short_description": "Envoyez des commits et pull requests depuis votre serveur Git auto-hébergé vers Datadog."
-"version": "1.0"
+categories:
+- Source Control
+ddtype: library
+dependencies: []
+description: Envoyez des commits et pull requests depuis votre serveur Git auto-hébergé
+  vers Datadog.
+doc_link: https://docs.datadoghq.com/integrations/git/
+draft: false
+git_integration_title: git
+has_logo: true
+integration_id: git
+integration_title: Git
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: '1.0'
+name: git
+public_title: Intégration Datadog/Git
+short_description: Envoyez des commits et pull requests depuis votre serveur Git auto-hébergé
+  vers Datadog.
+version: '1.0'
 ---
 
 {{< img src="integrations/git/git_event.png" alt="Événement Git" popup="true">}}
@@ -57,6 +60,5 @@ Enregistrez des commits Git directement depuis votre serveur Git pour ;
 
 5. Installez l'[intégration Datadog/Git][2].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/account/settings#integrations/git
-

@@ -1,7 +1,7 @@
 ---
-title: ログガイド
 kind: ガイド
 private: true
+title: ログガイド
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}
@@ -16,6 +16,8 @@ private: true
 {{< whatsnext desc="Log Collection" >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Datadog Kinesis Firehose Destination を使用して AWS サービスログを送信する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Amazon EventBridge API Destination を使用して Datadog にイベントとログを送信する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/forwarder/" >}}Datadog Lambda Forwarder を設定する{{< /nextlink >}}
+    {{< nextlink href="logs/guide/collect-heroku-logs" >}}Heroku ログを収集する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Datadog Lambda 関数を使用して AWS サービスログを送信する{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Heroku ログを収集する{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}ログ収集のトラブルシューティングガイド{{< /nextlink >}}
@@ -30,6 +32,7 @@ private: true
 {{< whatsnext desc="ログ処理" >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}ログパースのベストプラクティス{{< /nextlink >}}
     {{< nextlink href="/logs/guide/enrichment-tables/" >}}エンリッチメントテーブルを使用してログにカスタムメタデータを追加する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}よく使われるログ処理ルール{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -51,4 +54,3 @@ private: true
 {{< whatsnext desc="Cross product" >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}クロスプロダクト相関で容易にトラブルシューティング{{< /nextlink >}}
 {{< /whatsnext >}}
-

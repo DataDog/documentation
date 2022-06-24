@@ -1,16 +1,17 @@
 ---
-title: Commande flare de l'Agent
-kind: documentation
 aliases:
-  - /fr/agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+- /fr/agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
-  - link: /agent/troubleshooting/debug_mode/
-    tag: Dépannage de l'Agent
-    text: Mode debugging de l'Agent
-  - link: /agent/troubleshooting/agent_check_status/
-    tag: Dépannage de l'Agent
-    text: Obtenir le statut d'un check de l'Agent
+- link: /agent/troubleshooting/debug_mode/
+  tag: Dépannage de l'Agent
+  text: Mode debugging de l'Agent
+- link: /agent/troubleshooting/agent_check_status/
+  tag: Dépannage de l'Agent
+  text: Obtenir le statut d'un check de l'Agent
+kind: documentation
+title: Commande flare de l'Agent
 ---
+
 Si vous utilisez l'Agent 5.3+, vous pouvez envoyer les informations de dépannage nécessaires à l'équipe d'assistance Datadog avec une seule commande flare.
 
 La commande `flare` rassemble tous les fichiers de configuration et tous les logs de l'Agent dans un fichier d'archive. Elle supprime les informations sensibles, y compris les mots de passe, les clés d'API, les authentifiants de proxy et les chaînes de communauté SNMP. **Confirmez l'importation de l'archive pour l'envoyer immédiatement à l'assistance Datadog**.
@@ -27,7 +28,7 @@ Si vous ne disposez pas d'un ID de ticket, saisissez simplement l'adresse e-mail
 | Plateforme   | Commande                                                 |
 |------------|---------------------------------------------------------|
 | AIX        | `datadog-agent flare <ID_TICKET>`                         |
-| Docker     | `docker exec -it datadog-agent agent flare <ID_TICKET>`   |
+| Docker     | `docker exec -it dd-agent agent flare <ID_TICKET>`        |
 | macOS      | `datadog-agent flare <ID_TICKET>` ou via l'[interface Web][1] |
 | CentOS     | `sudo datadog-agent flare <ID_TICKET>`                    |
 | Debian     | `sudo datadog-agent flare <ID_TICKET>`                    |
@@ -38,6 +39,7 @@ Si vous ne disposez pas d'un ID de ticket, saisissez simplement l'adresse e-mail
 | Source     | `sudo datadog-agent flare <ID_TICKET>`                    |
 | Windows    | Consultez la [documentation relative à Windows][2]        |
 | Heroku     | Consultez la [documentation relative à Heroku][3]         |
+| PCF     | `sudo /var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent flare <ID_TICKET>`             |
 
 ## Conteneurs dédiés
 
@@ -66,6 +68,12 @@ kubectl exec -it <NOM_POD_AGENT> -c process-agent -- agent flare <ID_TICKET> --l
 
 ```bash
 kubectl exec -it <NOM_POD_AGENT> -c trace-agent -- agent flare <ID_TICKET> --local
+```
+
+### Agent de sécurité
+
+```bash
+kubectl exec -it <NOM_POD_AGENT> -c security-agent -- security-agent flare <ID_TICKET>
 ```
 
 ### System probe

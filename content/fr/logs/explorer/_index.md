@@ -1,27 +1,28 @@
 ---
-title: Log Explorer
-kind: documentation
-description: Effectuez des recherches et des analyses sur l'ensemble de vos logs
 aliases:
-  - /fr/logs/explore
-  - /fr/logs/patterns
-  - /fr/logs/graph
-  - /fr/logs/analytics
-  - /fr/logs/explorer/list
-  - /fr/logs/explorer/patterns
-  - /fr/logs/explorer/analytics
-  - /fr/logs/explorer/transactions/
+- /fr/logs/explore
+- /fr/logs/patterns
+- /fr/logs/graph
+- /fr/logs/analytics
+- /fr/logs/explorer/list
+- /fr/logs/explorer/patterns
+- /fr/logs/explorer/analytics
+- /fr/logs/explorer/transactions/
+description: Effectuez des recherches et des analyses sur l'ensemble de vos logs
 further_reading:
-  - link: logs/explorer/live_tail
-    tag: Documentation
-    text: "Afficher un aperçu de vos logs dans la vue Live\_Tail"
-  - link: logs/explorer/saved_views/
-    tag: Documentation
-    text: Configurer automatiquement votre vue Log Explorer
-  - link: https://www.datadoghq.com/blog/datadog-clipboard/
-    tag: Blog
-    text: "Ajouter une URL Log\_Explorer à votre presse-papiers"
+- link: logs/explorer/live_tail
+  tag: Documentation
+  text: Afficher un aperçu de vos logs dans la vue Live Tail
+- link: logs/explorer/saved_views/
+  tag: Documentation
+  text: Configurer automatiquement votre vue Log Explorer
+- link: https://www.datadoghq.com/blog/datadog-clipboard/
+  tag: Blog
+  text: Ajouter une URL Log Explorer à votre presse-papiers
+kind: documentation
+title: Log Explorer
 ---
+
 ## Présentation
 
 Commencez par accéder au [**Log Explorer**][1] pour débuter vos diagnostics et plonger au cœur de vos logs. Que vous partiez de zéro, d'une [vue enregistrée][2] ou des données de contexte associées à une notification de monitor ou un widget de dashboard, le Log Explorer vous permet de rechercher et de filtrer, de regrouper, de visualiser et d'exporter vos logs, le tout de façon itérative.
@@ -33,6 +34,7 @@ Commencez par accéder au [**Log Explorer**][1] pour débuter vos diagnostics et
 
   - Pour en savoir plus sur la recherche de logs dans le Log Explorer, consultez la [section Rechercher des logs][3].
   - Pour commencer à créer des requêtes et à utiliser des facettes dans le Log Explorer, consultez la [section Syntaxe de recherche de logs][4].
+  - Pour en savoir plus sur la fonctionnalité Watchdog Insights vous permettant de consulter des logs anormaux dans votre contexte de recherche, référez-vous à la [documentation relative à la détection des anomalies dans les logs][8].
 
 ### Group
 
@@ -57,3 +59,4 @@ Vous pouvez également **exporter** votre vue du Log Explorer, afin de l'utilis
 [5]: /fr/logs/explorer/group
 [6]: /fr/logs/explorer/visualize
 [7]: /fr/logs/explorer/export
+[8]: /fr/logs/explorer/insights

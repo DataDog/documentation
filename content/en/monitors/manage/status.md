@@ -115,9 +115,9 @@ If you made changes to a monitor, you can see examples with the following event 
 https://app.datadoghq.com/event/stream?per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20monitor%20modified
 ```
 
-Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Notify your team**, choose **Notify** in the drop-down next to: *alert recipients when this alert is modified*.
+Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Notify your team**, choose **Notify** in the drop-down next to: *alert recipients and monitor creator when this alert is modified*.
 
-The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor. The monitor audit event also appears in the [event stream][8].
+The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor as well as to the monitor creator. The monitor audit event also appears in the [event stream][8].
 
 ## Export and import
 

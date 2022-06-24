@@ -1,14 +1,15 @@
 ---
-title: カスタム Agent チェックの書き方
-kind: documentation
 aliases:
-  - /ja/agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
-  - /ja/agent/faq/agent-5-custom-agent-check/
+- /ja/agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
+- /ja/agent/faq/agent-5-custom-agent-check/
 further_reading:
-  - link: /developers/
-    tag: ドキュメント
-    text: Datadog での開発
+- link: /developers/
+  tag: ドキュメント
+  text: Datadog での開発
+kind: documentation
+title: カスタム Agent チェックの書き方
 ---
+
 ## 概要
 
 このページでは、`min_collection_interval` を使用してサンプルのカスタム Agent チェックを作成し、サンプルのカスタムチェックを拡張するためのユースケースの例を示します。カスタムチェックは、Agent ベースのインテグレーションと同じ固定間隔で実行されます。デフォルトでは 15 秒ごとです。
@@ -24,7 +25,7 @@ further_reading:
 ### コンフィギュレーション
 
 1. システムの `conf.d` ディレクトリに移動します。`conf.d` ディレクトリの場所の詳細については、オペレーティングシステムの [Agent コンフィギュレーション設定][2]を参照してください。
-2. `conf.d` ディレクトリに、新しい Agent チェック用の新しいコンフィギュレーションファイルを作成します。ファイルに `checkvalue.yaml` という名前を付けます。
+2. `conf.d` ディレクトリに、新しい Agent チェック用の新しいコンフィギュレーションファイルを作成します。ファイルに `custom_checkvalue.yaml` という名前を付けます。
 3. ファイルを編集して、以下を含めます。
   ```yaml
     init_config:
@@ -32,7 +33,7 @@ further_reading:
     instances:
       [{}]
   ```
-4. `checks.d` ディレクトリに新しいチェックファイルを作成します。ファイルに `checkvalue.py` という名前を付けます。
+4. `checks.d` ディレクトリに新しいチェックファイルを作成します。ファイルに `custom_checkvalue.py` という名前を付けます。
 5. ファイルを編集して、以下を含めます。
   ```python
     from checks import AgentCheck
@@ -42,7 +43,7 @@ further_reading:
   ```
 6. [Agent を再起動します][3]。1 分以内に、[メトリクスサマリー][4]に `hello.world` という新しいメトリクスが表示されます。
 
-**注**: コンフィギュレーションファイルとチェックファイルの名前は一致している必要があります。チェックの名前が `checkvalue.py` の場合、コンフィギュレーションファイルの名前は `checkvalue.yaml` である必要があります。
+**注**: コンフィギュレーションファイルとチェックファイルの名前は一致している必要があります。チェックの名前が `custom_checkvalue.py` の場合、コンフィギュレーションファイルの名前は `custom_checkvalue.yaml` である必要があります。
 
 ### 結果
 
@@ -52,7 +53,7 @@ further_reading:
 
 ### 収集間隔の更新
 
-チェックの収集間隔を変更するには、`checkvalue.yaml` ファイルで `min_collection_interval` を使用します。デフォルト値は `15` です。Agent v6 の場合、`min_collection_interval` をインスタンスレベルで追加し、インスタンスごとに個別に構成する必要があります。例:
+チェックの収集間隔を変更するには、`custom_checkvalue.yaml` ファイルで `min_collection_interval` を使用します。デフォルト値は `15` です。Agent v6 の場合、`min_collection_interval` をインスタンスレベルで追加し、インスタンスごとに個別に構成する必要があります。例:
 
 ```yaml
 init_config:
@@ -114,7 +115,7 @@ class LSCheck(AgentCheck):
 
 カスタム Agent チェックを作成するための一般的な使用例は、ロードバランサーから Datadog メトリクスを送信したい場合です。まず、[コンフィギュレーション](#configuration)の手順に従います。次に、次の手順に従ってファイルを展開し、ロードバランサーからデータを送信します。
 
-1. checkvalue.py のコードを次のように置き換えます (`lburl` の値をロードバランサーのアドレスに置き換えます)。
+1. `custom_checkvalue.py` のコードを次のように置き換えます (`lburl` の値をロードバランサーのアドレスに置き換えます)。
   ```python
     import urllib2
     import simplejson
@@ -130,7 +131,7 @@ class LSCheck(AgentCheck):
 
         self.gauge('coreapp.update.value', data["value"])
   ```
-2. `checkvalue.yaml` ファイルを更新します (`ipaddress` をロードバランサーの IP アドレスに置き換えます)。
+2. `custom_checkvalue.yaml` ファイルを更新します (`ipaddress` をロードバランサーの IP アドレスに置き換えます)。
   ```yaml
     init_config:
 

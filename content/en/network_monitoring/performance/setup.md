@@ -446,10 +446,10 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[4]: /network_monitoring/performance/network_page#dns-resolution
-[5]: https://docs.datadoghq.com/network_monitoring/performance/setup/?tab=agent#windows-systems
-[6]: https://docs.datadoghq.com/integrations/docker_daemon/
-[7]: https://docs.datadoghq.com/agent/kubernetes/
+[4]: /network_monitoring/dns/
+[5]: https://docs.datadoghq.com/agent/docker/
+[6]: https://docs.datadoghq.com/agent/kubernetes/
+[7]: https://docs.datadoghq.com/agent/amazon_ecs
 [8]: https://docs.datadoghq.com/integrations/istio/
 [9]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
 [10]: https://www.datadoghq.com/blog/istio-datadog/

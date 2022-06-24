@@ -64,7 +64,7 @@ This example shows all flows from pods in the production environment’s availab
 
 Your DNS metrics are displayed through the graphs and the associated table. 
 
-**Note:** The default collection interval is five minutes and retention is seven days.
+**Note:** Data is collected every 30 seconds, aggregated in five minute buckets, and retained for 14 days.
 
 The following DNS metrics are available:
 

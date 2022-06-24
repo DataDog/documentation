@@ -23,7 +23,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,.NET" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -65,7 +65,7 @@ Requires tracing library version 0.49.0 or greater.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Code Hotspots identification for Go is disabled by default. To enable it, [turn on profiling for your service][1] and ensure that:
+To enable Code Hotspots identification for Go, [turn on profiling for your service][1] and ensure that:
 
 - You are using [dd-trace-go][2] version 1.35.0 or later.
 - [`DD_PROFILING_CODE_HOTSPOTS_COLLECTION_ENABLED=true`][3] is set in your environment, or the [`tracer.WithProfilerCodeHotspots(true)`][3] option is passed to [`tracer.Start()`][4]. This option is enabled by default in [dd-trace-go][2] versions 1.37.0+.
@@ -85,6 +85,14 @@ Code Hotspots identification for Go is disabled by default. To enable it, [turn 
 [9]: https://github.com/golang/go/issues/48577
 [10]: https://go-review.googlesource.com/c/go/+/369741/
 [11]: https://go-review.googlesource.com/c/go/+/369983/
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
+
+Requires tracing library version 2.7.0 or greater.
+
+[1]: /tracing/profiler/enabling/dotnet
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

@@ -1,26 +1,27 @@
 ---
-title: ライブプロセス
-kind: documentation
 aliases:
-  - /ja/guides/process
-  - /ja/graphing/infrastructure/process/
+- /ja/guides/process
+- /ja/graphing/infrastructure/process/
 further_reading:
-  - link: https://www.datadoghq.com/blog/live-process-monitoring/
-    tag: ブログ
-    text: Datadog でのプロセスのモニタリング
-  - link: /infrastructure/process/generate_process_metrics/
-    tag: Documentation
-    text: メトリクスでプロセスデータの保持期間を高めます
-  - link: /infrastructure/livecontainers
-    tag: グラフ
-    text: 環境内のすべてのコンテナのリアルタイム表示
-  - link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
-    tag: ブログ
-    text: 保存ビューでソフトウェアのパフォーマンスとリソース消費を相関付ける
-  - link: https://www.datadoghq.com/blog/process-level-data/
-    tag: ブログ
-    text: プロセスレベルのアプリとネットワークデータを使用して、より迅速にトラブルシューティングを行います
+- link: https://www.datadoghq.com/blog/live-process-monitoring/
+  tag: ブログ
+  text: Datadog でのプロセスのモニタリング
+- link: /infrastructure/process/generate_process_metrics/
+  tag: Documentation
+  text: メトリクスでプロセスデータの保持期間を高めます
+- link: /infrastructure/livecontainers
+  tag: グラフ
+  text: 環境内のすべてのコンテナのリアルタイム表示
+- link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
+  tag: ブログ
+  text: 保存ビューでソフトウェアのパフォーマンスとリソース消費を相関付ける
+- link: https://www.datadoghq.com/blog/process-level-data/
+  tag: ブログ
+  text: プロセスレベルのアプリとネットワークデータを使用して、より迅速にトラブルシューティングを行います
+kind: documentation
+title: ライブプロセス
 ---
+
 ## はじめに
 
 Datadog のライブプロセスにより、インフラストラクチャー上で実行中のプロセスをリアルタイムで可視化できます。ライブプロセスを使用すると、以下のことができます。
@@ -298,7 +299,7 @@ Kubernetes コンテナ内のプロセスは、以下でタグ付けされます
 ## ダッシュボードおよびノートブックでのプロセス
 
 ダッシュボードやノートブックでプロセスメトリクスをグラフ化するには、[時系列ウィジェット][8]を使用します。構成するには、
-1. ライブプロセスをデータソースとして選択
+1. プロセスをデータソースとして選択
 2. 検索バーのテキスト文字列を使用してフィルタリング
 3. グラフ化するプロセスメトリクスを選択
 4. `From` フィールドのタグを使用してフィルタリング
@@ -324,7 +325,7 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 
 {{< img src="infrastructure/process/integration_views.png" alt="インテグレーションビュー" >}}
 
-サードパーティーソフトウェアが検出されると、ライブプロセスはそのソフトウェアのパフォーマンスを迅速かつ容易に分析します。
+サードパーティ製ソフトウェアが検出された後、ライブプロセスはそのソフトウェアのパフォーマンスを分析するのに役立ちます。
 1. まず、ページ右上の *Views* をクリックし、Nginx、Redis、Kafka などの予め設定されたオプションの一覧を開きます。
 2. そのソフトウェアを実行中の処理のみにページのスコープを設定するビューを選択します。　
 3. 重いプロセスを検査する際は、*Integration Metrics* タブに切り替え、基底のホストにあるソフトウェアの健全性を分析します。関連する Datadog インテグレーションを有効にしてある場合は、インテグレーションから収集されたすべてのパフォーマンスメトリクスを表示できるため、問題がホストレベルなのかソフトウェアレベルなのかを判断できます。たとえば、プロセス CPU と MySQL クエリのレイテンシーが相関して急上昇する場合、全表スキャンなどの集中的な操作が、同じ基底のリソースに依存する別の MySQL クエリの実行を遅らせていることが考えられます。
@@ -333,7 +334,7 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 
 ## プラットフォームにおけるプロセス
 
-{{< img src="infrastructure/process/process_platform.gif" alt="プラットフォームにおけるプロセス" >}}
+{{< img src="infrastructure/process/process_platform.mp4" alt="プラットフォームにおけるプロセス" video=true >}}
 
 ### ライブコンテナ
 
@@ -349,7 +350,7 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 
 ## リアルタイムの監視
 
-ライブプロセスをアクティブに使用している間、メトリクスは 2 秒の解像度で収集されます。これは、CPU などの揮発性が高いメトリクスでは重要です。バックグラウンドでは、履歴を目的として 10 秒の解像度でメトリクスが収集されます。
+ライブプロセスをアクティブに使用している間、メトリクスは 2 秒の解像度で収集されます。これは、CPU などの揮発性のメトリクスでは重要です。バックグラウンドでは、履歴を目的として 10 秒の解像度でメトリクスが収集されます。
 
 ## 追加情報
 

@@ -27,7 +27,7 @@ further_reading:
 
 ## Compatibility requirements
 
-The Go Tracer requires Go `1.12+` and Datadog Agent `>= 5.21.1`.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+The Go Tracer requires Go `1.16+` and Datadog Agent `>= 5.21.1`. For a full list of supported libraries, see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -107,6 +107,9 @@ Override the default trace Agent port for DogStatsD metric submission.
 
 `DD_TRACE_SAMPLE_RATE`
 : Enable ingestion rate control.
+
+`DD_TRACE_RATE_LIMIT`
+: Maximum number of spans to sample per-second, per-Go process. Defaults to 100 when DD_TRACE_SAMPLE_RATE is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
 `DD_TAGS`
 : **Default**: [] <br>
