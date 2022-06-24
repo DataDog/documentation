@@ -10,7 +10,7 @@ further_reading:
   text: "Introducing Datadog Synthetic Monitoring"
 - link: "/synthetics/"
   tag: "Documentation"
-  text: "Manage your checks"
+  text: "Learn about Synthetic Monitoring"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"

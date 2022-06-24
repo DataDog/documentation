@@ -1,10 +1,12 @@
 ---
-title: Clone your Synthetic tests
-kind: faq
+title: Clone Your Synthetic Tests
+kind: guide
+aliases:
+  - /synthetics/faq/clone-test/
 further_reading:
 - link: "/synthetics/"
   tag: "Documentation"
-  text: "Manage your checks"
+  text: "Learn about Synthetic Monitoring"
 ---
 
 ## Overview
