@@ -118,17 +118,17 @@ If the numbers are lower than expected it is likely that either the library or t
 
 If the same test is collected several times for the same commit but with different status, the aggregated result will follow the next algorithm:
 
-| **Test Status - Retry #1** | **Test Status - Retry #2** | **Result** |
-|----------------------------|----------------------------|------------|
-| `Passed`                   | `Passed`                   | `Passed`   |
-| `Passed`                   | `Failed`                   | `Passed`   |
-| `Passed`                   | `Skipped`                  | `Passed`   |
-| `Failed`                   | `Passed`                   | `Passed`   |
-| `Failed`                   | `Failed`                   | `Failed`   |
-| `Failed`                   | `Skipped`                  | `Failed`   |
-| `Skipped`                  | `Passed`                   | `Passed`   |
-| `Skipped`                  | `Failed`                   | `Failed`   |
-| `Skipped`                  | `Skipped`                  | `Skipped`  |
+| **Test Status - First Try** | **Test Status - Retry #1** | **Result** |
+|-----------------------------|----------------------------|------------|
+| `Passed`                    | `Passed`                   | `Passed`   |
+| `Passed`                    | `Failed`                   | `Passed`   |
+| `Passed`                    | `Skipped`                  | `Passed`   |
+| `Failed`                    | `Passed`                   | `Passed`   |
+| `Failed`                    | `Failed`                   | `Failed`   |
+| `Failed`                    | `Skipped`                  | `Failed`   |
+| `Skipped`                   | `Passed`                   | `Passed`   |
+| `Skipped`                   | `Failed`                   | `Failed`   |
+| `Skipped`                   | `Skipped`                  | `Skipped`  |
 
 
 ### Need further help?
