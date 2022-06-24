@@ -1,4 +1,3 @@
-preview-links-template.md.mako
 <%
 import re
 import os
