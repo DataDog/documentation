@@ -103,7 +103,7 @@ If you're using a library for testing time-dependent code, like [timecop][7] for
 
 ### The test status numbers are not what is expected
 
-The test status numbers are calculated based on the unique tests that were collected. The uniqueness of a test is defined, not only by its suite and name, but by its test parameters and test configurations as well.
+The test status numbers are calculated based on the unique tests that were collected. The uniqueness of a test is defined not only by its suite and name, but by its test parameters and test configurations as well.
 
 #### The numbers are lower than expected
 
