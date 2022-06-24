@@ -133,7 +133,7 @@ systemctl restart datadog-agent
 
 {{% tab "Amazon Elastic Beanstalk" %}}
 
-The following deployment can be used to start the Runtime Security Agent and `system-probe` in an Amazon Elastic Beanstalk environment - multiple Docker containers:
+The following deployment can be used to start the Runtime Security Agent and `system-probe` in an Amazon Elastic Beanstalk environment with multiple Docker containers:
 
 ```json
 {
