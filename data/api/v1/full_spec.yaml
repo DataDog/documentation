@@ -10987,6 +10987,7 @@ components:
       - locations
       - options
       - type
+      - message
       type: object
     SyntheticsAPITestConfig:
       description: Configuration object for a Synthetic API test.
@@ -11582,6 +11583,7 @@ components:
       - name
       - options
       - type
+      - message
       type: object
     SyntheticsBrowserTestConfig:
       description: Configuration object for a Synthetic browser test.
