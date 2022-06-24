@@ -80,13 +80,13 @@ Datadog automatically parses JSON-formatted events. When events are not JSON-for
 
 ## Reserved attributes
 
-Below is a list of reserved attributes that are automatically ingested with events:
+This list describes automatically ingested reserved attributes with events.
 
 | Attribute | Description                                                                                                                                                                                                                                |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your events. The Agent sets this value automatically.                          |
-| `source`  | This corresponds to the integration name: the technology from which the event originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
-| `status`  | This corresponds to the level/severity of a event.      |
+| `source`  | This corresponds to the integration name, or the technology from which the event originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, and more. |
+| `status`  | This corresponds to the level or severity of an event.      |
 | `service` | The name of the application or service generating the events. |
                                                                                                                          |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the event entry. 
