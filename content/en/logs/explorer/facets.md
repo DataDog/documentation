@@ -252,6 +252,8 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 
 ## Delete a facet
 
+<div class="alert alert-danger">Deleting a deleted facet that is being used in indexes, monitors, dashboards, restriction queries, or by other teams can cause configurations to break.</div>
+
 To delete a facet, follow these steps:
 
 - Click **Showing xx of xx** at the top of the facet panel.
