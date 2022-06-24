@@ -107,11 +107,11 @@ The test status numbers are calculated based on the unique tests that were colle
 
 #### The numbers are lower than expected
 
-If the numbers are lower than expected it is likely that either the library or the tool you used to collect Test data could not collect test parameters and/or some test configurations.
+If the numbers are lower than expected it is likely that either the library or the tool you are using to collect Test data cannot collect test parameters and/or some test configurations.
 
 1. If you are uploading JUnit test report files:
   a. If you are running the same tests in different environment configurations, [make sure you are setting those configuration tags during the upload][9].
-  b. If you are running parameterized tests, it's very likely that the JUnit report has not that information. [Try to use a native library to report test data][10].
+  b. If you are running parameterized tests, it's very likely that the JUnit report does not have that information. [Try using a native library to report test data][10].
 2. If you still don't see the expected results, [contact Support][1] for troubleshooting help.
 
 #### The passed/failed/skipped numbers are different than expected
