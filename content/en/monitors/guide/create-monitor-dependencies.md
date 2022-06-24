@@ -12,7 +12,7 @@ further_reading:
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 aliases:
-- monitors/faq/can-i-create-monitor-dependencies
+- /monitors/faq/can-i-create-monitor-dependencies
 ---
 
 While Datadog does fully support [composite monitors][1], there is not an official way to create alerting trees.

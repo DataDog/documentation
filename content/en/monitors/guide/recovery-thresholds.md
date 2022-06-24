@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Metric monitor"
 aliases:
-- monitors/faq/what-are-recovery-thresholds
+- /monitors/faq/what-are-recovery-thresholds
 ---
 
 ## Definition

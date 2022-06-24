@@ -9,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: "Configure your monitor notifications"
 aliases:
-- monitors/faq/how-do-i-monitor-ephemeral-servers-for-reboots
+- /monitors/faq/how-do-i-monitor-ephemeral-servers-for-reboots
 ---
 
 Ephemeral environments spin up and terminate hosts constantly, which can make it challenging to distinguish new hosts from rebooted hosts.
