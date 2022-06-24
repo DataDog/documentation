@@ -23037,7 +23037,6 @@
             "type": "array"
           },
           "include_percentiles": {
-            "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
             "example": true,
             "type": "boolean"
@@ -23163,7 +23162,6 @@
                 "type": "array"
               },
               "include_percentiles": {
-                "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                 "example": true,
                 "type": "boolean"
@@ -23316,7 +23314,6 @@
                     "type": "array"
                   },
                   "include_percentiles": {
-                    "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                     "example": true,
                     "type": "boolean"
@@ -23653,7 +23650,6 @@
             "type": "array"
           },
           "include_percentiles": {
-            "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
             "example": true,
             "type": "boolean"
@@ -23756,7 +23752,6 @@
                 "type": "array"
               },
               "include_percentiles": {
-                "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                 "example": true,
                 "type": "boolean"
@@ -23886,7 +23881,6 @@
                     "type": "array"
                   },
                   "include_percentiles": {
-                    "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                     "example": true,
                     "type": "boolean"
@@ -63917,7 +63911,6 @@
                             "type": "array"
                           },
                           "include_percentiles": {
-                            "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                             "example": true,
                             "type": "boolean"
@@ -64361,7 +64354,6 @@
                             "type": "array"
                           },
                           "include_percentiles": {
-                            "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                             "example": true,
                             "type": "boolean"
