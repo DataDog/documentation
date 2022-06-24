@@ -17,7 +17,7 @@ aliases:
     {{< nextlink href="tracing/guide/instrument_custom_method" >}}6. Instrument a custom method to get deep visibility into your business logic. [8 mins]{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
-{{< whatsnext desc="Advanced Guides" >}}
+{{< whatsnext desc="Tracing Guides" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex Score by Service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}Primary Operations in Services {{< /nextlink >}}
     {{< nextlink href="tracing/guide/ignoring_apm_resources" >}}Discard Health Checks and Other Unwanted Spans by Ignoring Resources{{< /nextlink >}}
