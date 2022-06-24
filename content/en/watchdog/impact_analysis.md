@@ -28,3 +28,6 @@ This feature is automatically enabled for all APM and RUM users. Whenever Watchd
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tabs=browserrum
