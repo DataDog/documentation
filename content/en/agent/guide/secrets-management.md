@@ -237,7 +237,7 @@ The script `readsecret_multiple_providers.sh` can be used to read from both file
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-To use this executable with our Helm chart, set it as follows:
+To use this executable with the Helm chart, set it as the following:
 ```yaml
 datadog:
   [...]
@@ -320,8 +320,7 @@ roleRef:
 ```
 This `Role` gives access to the `Secret: database-secret` in the `Namespace: database`. The `RoleBinding` links up this permission to the `ServiceAccount: datadog-agent` in the `Namespace: default`. This needs to be manually added to your cluster with respect to your resources deployed.
 
-**Note:**
-- On top of the additional permissions, the script to read from multiple providers `"/readsecret_multiple_providers.sh"` must be enabled when using the Kubernetes Secrets provider.
+In addition to these permissions, you need to enable the script to read from multiple providers `"/readsecret_multiple_providers.sh"` when using the Kubernetes Secrets provider.
 
 ### (Legacy) Scripts for reading from files
 Datadog Agent v7.32 introduces the `readsecret_multiple_providers.sh` script. Datadog recommends that you use this script instead of `/readsecret.py` and `/readsecret.sh` from Agent v6.12. Note that `/readsecret.py` and `/readsecret.sh` are still included and supported in the Agent to read files.
