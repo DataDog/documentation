@@ -1,5 +1,5 @@
 ---
-title: Alerting with Conversion Rates
+title: Alerting With Conversion Rates
 kind: guide
 description: Guide for creating alerts on conversion rates.
 further_reading:
@@ -12,7 +12,7 @@ further_reading:
 
 Conversion rates are crucial in monitoring the success of a user workflow. This guide describes how to generate conversion rates in the [RUM funnel][1] visualization and create alerts that notify you when conversion rates dip below a given threshold.
 
-## Create a funnel in RUM Analytics
+## Create a funnel in the RUM Explorer
 
 To create a funnel visualization based on your views and actions, navigate to [**UX Monitoring** > **Analytics**][2] and click **Funnel** in the `Visualize as` field.
 

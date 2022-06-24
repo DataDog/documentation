@@ -153,6 +153,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/real_user_monitoring/reactnative/integrated_libraries.md ;fi
 	@if [ content/en/real_user_monitoring/reactnative/mobile_vitals.md ]; then \
 	rm -f content/en/real_user_monitoring/reactnative/mobile_vitals.md ;fi
+	@if [ content/en/real_user_monitoring/reactnative/expo.md ]; then \
+	rm -f content/en/real_user_monitoring/reactnative/expo.md ;fi
 	@if [ content/en/real_user_monitoring/flutter/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/flutter/_index.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \

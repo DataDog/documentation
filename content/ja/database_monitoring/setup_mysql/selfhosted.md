@@ -26,7 +26,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 5.6、5.7、または 8.0+
 
 サポート対象の Agent バージョン
-: 7.33.0+
+: 7.36.1+
 
 パフォーマンスへの影響
 : データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。
@@ -146,7 +146,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### ランタイムセットアップコンシューマー
-Datadogは、ランタイムで `performance_schema.events_statements_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めします。
+Datadogは、ランタイムで `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めします。
 
 ```SQL
 DELIMITER $$
@@ -154,6 +154,7 @@ CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
     UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';

@@ -1,9 +1,15 @@
 ---
-title: Infrastructure
-kind: documentation
 aliases:
-  - /fr/graphing/infrastructure/
+- /fr/graphing/infrastructure/
+further_reading:
+- link: https://app.datadoghq.com/release-notes?category=Infrastructure%20Monitoring
+  tag: Notes de version
+  text: Découvrez les dernières versions de la surveillance d'infrastructure Datadog
+    (connexion à l'application requise).
+kind: documentation
+title: Infrastructure
 ---
+
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
     {{< nextlink href="/infrastructure/list" >}}<u>Liste d'infrastructures</u> : consultez la liste de l'ensemble des hosts surveillés par Datadog.{{< /nextlink >}}
     {{< nextlink href="/infrastructure/hostmap" >}}<u>Hostmap</u> : découvrez une vue d'ensemble de vos hosts utilisant des couleurs et des formes pour faciliter la compréhension des regroupements personnalisés, des filtres et des métriques.{{< /nextlink >}}
@@ -13,3 +19,7 @@ aliases:
     {{< nextlink href="/infrastructure/livecontainers" >}}<u>Live containers</u> : surveillez les conteneurs de votre environnement en les visualisant en temps réel.{{< /nextlink >}}
     {{< nextlink href="/serverless" >}}<u>Informatique sans serveur</u> : regroupez en une vue unique les métriques, les traces et les logs de vos fonctions AWS Lambda qui exécutent des applications sans serveur.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}

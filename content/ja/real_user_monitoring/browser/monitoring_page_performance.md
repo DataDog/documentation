@@ -29,7 +29,7 @@ RUM ビューイベントでは、すべてのページビューのパフォー�
 
 ### コアウェブバイタル
 <div class="alert alert-warning">
-  <strong>注:</strong>コアウェブバイタルメトリクスは、Datadog の <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.0.0 以降から入手できます。
+  コアウェブバイタルメトリクスは、Datadog の <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.2.0 以降から入手できます。
 </div>
 
 [Google のウェブに関する主な指標][4]は、サイトのユーザーエクスペリエンスを監視するために設計された 3 つのメトリクスのセットです。これらのメトリクスは、負荷パフォーマンス、対話性、視覚的安定性のビューを提供することに重点を置いています。各メトリクスには、優れたユーザーエクスペリエンスにつながる値の範囲に関するガイダンスが付属しています。Datadog では、このメトリクスの 75 パーセンタイルの監視をおすすめしています。
@@ -158,4 +158,4 @@ document.addEventListener("scroll", function handler() {
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [16]: https://en.wikipedia.org/wiki/Comet_(programming
-[17]: /ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[17]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures

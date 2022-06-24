@@ -24,7 +24,7 @@ If you can't see any RUM data or if data is missing for some users:
 
 Read the [Content Security Policy guidelines][6] and ensure your website grants access to the RUM Browser SDK CDN and the intake endpoint.
 
-### The RUM Browser SDK initialized
+### The RUM Browser SDK is initialized
 
 Check if the RUM Browser SDK is initialized by running `window.DD_RUM.getInternalContext()` in your browser console and verify an `application_id`, `session_id`, and view object are returned:
 
@@ -113,7 +113,7 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [1]: /help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: /real_user_monitoring/browser/#npm
-[4]: /real_user_monitoring/faq/proxy_rum_data/?tab=npm
+[4]: /real_user_monitoring/guide/proxy-rum-data/
 [5]: /real_user_monitoring/faq/content_security_policy/
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
 [7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707

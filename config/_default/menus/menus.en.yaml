@@ -533,6 +533,11 @@ main:
     identifier: observability_pipelines_integrate_vector_with_datadog
     weight: 105
   - name: Guides
+    url: integrations/observability_pipelines/guide/
+    parent: observability_pipelines
+    identifier: observability_pipelines_guides
+    weight: 106
+  - name: Guides
     url: integrations/guide/
     identifier: integration_guides
     parent: integrations_top_level
@@ -1902,16 +1907,21 @@ main:
     parent: dbm_setup_postgres
     identifier: dbm_setup_postgres_gcsql
     weight: 104
+  - name: Azure
+    url: database_monitoring/setup_postgres/azure
+    parent: dbm_setup_postgres
+    identifier: dbm_postgres_azure
+    weight: 105
   - name: Advanced Configuration
     url: database_monitoring/setup_postgres/advanced_configuration
     parent: dbm_setup_postgres
     identifier: dbm_postgres_advanced_configuration
-    weight: 105
+    weight: 106
   - name: Troubleshooting
     url: database_monitoring/setup_postgres/troubleshooting/
     parent: dbm_setup_postgres
     identifier: dbm_troubleshooting_postgres
-    weight: 106
+    weight: 107
   - name: Setting Up MySQL
     url: database_monitoring/setup_mysql/
     parent: dbm
@@ -1937,16 +1947,21 @@ main:
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_gcsql
     weight: 104
+  - name: Azure
+    url: database_monitoring/setup_mysql/azure
+    parent: dbm_setup_mysql
+    identifier: dbm_mysql_azure
+    weight: 105
   - name: Advanced Configuration
     url: database_monitoring/setup_mysql/advanced_configuration
     parent: dbm_setup_mysql
     identifier: dbm_mysql_advanced_configuration
-    weight: 105
+    weight: 106
   - name: Troubleshooting
     url: database_monitoring/setup_mysql/troubleshooting/
     parent: dbm_setup_mysql
     identifier: dbm_troubleshooting_mysql
-    weight: 106
+    weight: 107
   - name: Setting Up SQL Server
     url: database_monitoring/setup_sql_server/
     parent: dbm
@@ -2568,7 +2583,7 @@ main:
     parent: rum_browser
     identifier: troubleshooting
     weight: 107
-  - name: Android Monitoring
+  - name: Android and AndroidTV Monitoring
     url: real_user_monitoring/android/
     parent: rum
     identifier: rum_android
@@ -2603,7 +2618,7 @@ main:
     parent: rum_android
     identifier: rum_troubleshooting_android
     weight: 206
-  - name: iOS Monitoring
+  - name: iOS and tvOS Monitoring
     url: real_user_monitoring/ios/
     parent: rum
     identifier: rum_ios
@@ -2648,6 +2663,11 @@ main:
     parent: rum_reactnative
     identifier: rum_reactnative_mobile_vitals
     weight: 401
+  - name: Expo
+    url: real_user_monitoring/reactnative/expo/
+    parent: rum_reactnative
+    identifier: rum_reactnative_expo
+    weight: 402
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum
@@ -2668,111 +2688,121 @@ main:
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
     weight: 602
+  - name: Frustration Signals
+    url: real_user_monitoring/frustration_signals/
+    parent: rum
+    identifier: rum_frustration_signals
+    weight: 7
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 7
+    weight: 8
   - name: Performance Overview
     url: real_user_monitoring/dashboards/performance_overview_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_performance
-    weight: 701
+    weight: 801
   - name: Resources
     url: real_user_monitoring/dashboards/resources_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_resources
-    weight: 702
+    weight: 802
   - name: Errors
     url: real_user_monitoring/dashboards/errors_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_errors
-    weight: 703
+    weight: 803
+  - name: Frustration Signals
+    url: real_user_monitoring/dashboards/frustration_signals_dashboard
+    parent: rum_dashboards
+    identifier: rum_dashboards_frustration_signals
+    weight: 804
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 8
+    weight: 9
   - name: Search
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 801
+    weight: 901
   - name: Search Syntax
     url: real_user_monitoring/explorer/search_syntax/
     parent: rum_explorer
     identifier: rum_explorer_search_syntax
-    weight: 802
+    weight: 902
   - name: Group
     url: real_user_monitoring/explorer/group/
     parent: rum_explorer
     identifier: rum_explorer_group
-    weight: 803
+    weight: 903
   - name: Visualize
     url: real_user_monitoring/explorer/visualize/
     parent: rum_explorer
     identifier: rum_explorer_visualize
-    weight: 804
+    weight: 904
   - name: Events
     url: real_user_monitoring/explorer/events/
     parent: rum_explorer
     identifier: rum_explorer_events
-    weight: 805
+    weight: 905
   - name: Export
     url: real_user_monitoring/explorer/export/
     parent: rum_explorer
     identifier: rum_explorer_export
-    weight: 806
+    weight: 906
   - name: Saved Views
     url: real_user_monitoring/explorer/saved_views/
     parent: rum_explorer
     identifier: rum_explorer_saved_views
-    weight: 807
+    weight: 907
   - name: Watchdog Insights for RUM
     url: real_user_monitoring/explorer/watchdog_insights/
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
-    weight: 808
+    weight: 908
   - name: Generate Metrics
     url: real_user_monitoring/generate_metrics
     parent: rum
     identifier: rum_generate_metrics
-    weight: 9
+    weight: 10
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 10
+    weight: 11
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 11
+    weight: 12
   - name: Explorer
-    url: real_user_monitoring/error_tracking/explorer
+    url: real_user_monitoring/error_tracking/explorer/
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 1101
+    weight: 2201
   - name: Track Browser Errors
-    url: real_user_monitoring/error_tracking/browser_errors
+    url: real_user_monitoring/error_tracking/browser_errors/
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
-    weight: 1102
+    weight: 2202
   - name: Track Android Errors
-    url: real_user_monitoring/error_tracking/android
+    url: real_user_monitoring/error_tracking/android/
     parent: rum_error_tracking
     identifier: rum_error_tracking_android
-    weight: 1103
+    weight: 2203
   - name: Track iOS Errors
     url: real_user_monitoring/ios/crash_reporting/
     parent: rum_error_tracking
     identifier: rum_error_tracking_ios
-    weight: 1104
+    weight: 2204
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 12
+    weight: 13
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -4854,6 +4884,18 @@ api:
         - UploadIdPMetadata
       unstable: []
       order: 5
+  - name: Spin-off Child Organization
+    url: '#spin-off-child-organization'
+    identifier: organizations-spin-off-child-organization
+    parent: organizations
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DowngradeOrg
+      unstable: []
+      order: 6
   - name: Update your organization
     url: '#update-your-organization'
     identifier: organizations-update-your-organization
@@ -5317,6 +5359,19 @@ api:
         - DeleteSLO
       unstable: []
       order: 5
+  - name: Search for SLOs
+    url: '#search-for-slos'
+    identifier: service-level-objectives-search-for-slos
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SearchSLO
+      unstable:
+        - v1
+      order: 1
   - name: Check if SLOs can be safely deleted
     url: '#check-if-slos-can-be-safely-deleted'
     identifier: service-level-objectives-check-if-slos-can-be-safely-deleted
