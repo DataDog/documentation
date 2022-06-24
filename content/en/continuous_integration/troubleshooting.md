@@ -94,8 +94,8 @@ The wall time is defined as the time difference between the start time of the fi
 This is done using the following algorithm:
 
 1. Compute a hash based on CI information to group the tests.
-  a. If the tests include `ci.job.url`, use this tag to calculate the hash.
-  b. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
+    a. If the tests include `ci.job.url`, use this tag to calculate the hash.
+    b. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
 2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is calculated for each job, and the maximum from all calculated wall times is shown.
 
 #### Possible issues with wall time calculation
@@ -110,8 +110,8 @@ The test status numbers are calculated based on the unique tests that were colle
 If the numbers are lower than expected it is likely that either the library or the tool you are using to collect Test data cannot collect test parameters and/or some test configurations.
 
 1. If you are uploading JUnit test report files:
-  a. If you are running the same tests in different environment configurations, [make sure you are setting those configuration tags during the upload][9].
-  b. If you are running parameterized tests, it's very likely that the JUnit report does not have that information. [Try using a native library to report test data][10].
+    a. If you are running the same tests in different environment configurations, [make sure you are setting those configuration tags during the upload][9].
+    b. If you are running parameterized tests, it's very likely that the JUnit report does not have that information. [Try using a native library to report test data][10].
 2. If you still don't see the expected results, [contact Support][1] for troubleshooting help.
 
 #### The passed/failed/skipped numbers are different than expected
