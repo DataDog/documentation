@@ -1,9 +1,11 @@
 ---
 title: Export Monitor Alerts to CSV
-kind: faq
+kind: guide
+aliases:
+- /monitors/faq/how-can-i-export-alert-history
 ---
 
-Download a history of monitor alerts through the [hourly monitor data][1], which generates a CSV for the past 6 months (182 days). This CSV is **not** live; it is updated once a week on Monday at 11:59AM UTC.
+Download a history of Monitor Alerts through the [hourly monitor data][1], which generates a CSV for the past 6 months (182 days). This CSV is **not** live; it is updated once a week on Monday at 11:59AM UTC.
 
 **Notes**:
 

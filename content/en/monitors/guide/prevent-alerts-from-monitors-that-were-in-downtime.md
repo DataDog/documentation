@@ -1,6 +1,6 @@
 ---
-title: Why did I get a recovery event from a Monitor that was in a Downtime when it alerted?
-kind: faq
+title: Prevent alerts from Monitors that were in downtime
+kind: guide
 further_reading:
 - link: "/monitors/create/"
   tag: "Documentation"
@@ -11,6 +11,8 @@ further_reading:
 - link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Learn more about downtimes"
+aliases:
+- /monitors/faq/why-did-i-get-a-recovery-event-from-a-monitor-that-was-in-a-downtime-when-it-alerted/ 
 ---
 
 When a group is [downtimed][1] and transitions from **`OK`** to one of a **`ALERT`**, **`WARNING`**, or **`NO DATA`** state, this event is suppressed from notifying you. 

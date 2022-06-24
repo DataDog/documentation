@@ -1,7 +1,8 @@
 ---
-title: Why Did My Monitor Settings Change Not Take Effect?
-kind: faq
-
+title: Monitor settings changes not taking effect
+kind: guide
+aliases:
+- /monitors/faq/why-did-my-monitor-settings-change-not-take-effect
 ---
 
 Datadog keeps monitor groups available in the UI for 24 hours (48h for host monitors) unless the query is changed. If you do not have *No Data* alert settings enabled and your group for a metric monitor stops reporting data, it will persist on the monitor status page until it ages out, though that group will stop being evaluated after a short absence (specific timing depends on your settings).
