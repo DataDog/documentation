@@ -39,15 +39,19 @@ To understand data security concerns, it's important to understand what data is 
 *  `http.response.headers.*` - The response HTTP headers. None are collected by default, but you can optionally configure them.
 
 
-### Configuring HTTP data
+### Configuring a client IP header
 
 Datadog automatically attempts to resolve `http.client_ip` from a number of well known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library looks only in the specified header for the client IP.
 
-If you do not wish to collect this value because you consider it sensitive data, or for any other reason, set the `DD_TRACE_CLIENT_IP_HEADER_DISABLED` environment variable to `true`. It is `false` by default.
+If you do not wish to collect the client IP value because you consider it sensitive data, or for any other reason, set the `DD_TRACE_CLIENT_IP_HEADER_DISABLED` environment variable to `true`. It is `false` by default.
+
+### Redacting the query in the URL
 
 The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific.
 
 If you do not want to collect the query string, set the `DD_HTTP_SERVER_TAG_QUERY_STRING` environment variable to `false`. The default value is `true`.
+
+### Applying header tags to root spans
 
 To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variable with a map of case-insensitive header keys to tag names. The library applies matching header values as tags on root spans. The setting also accepts entries without a specified tag name, for example:
 
