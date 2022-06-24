@@ -485,7 +485,7 @@ Users [John, Oliver, Marc, Tom] have been added to the database
 **Rule**:
 
 ```text
-myParsingRule Users %{data:users:array(“[]“,”,“)} have been added to the database
+myParsingRule Users %{data:users:array("[]",",")} have been added to the database
 ```
 
 {{< img src="logs/processing/parsing/array_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
