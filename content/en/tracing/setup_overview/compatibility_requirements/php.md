@@ -17,7 +17,7 @@ further_reading:
 The PHP Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
 Datadog APM for PHP is built upon dependencies defined in specific versions of the host operating system, PHP runtime,
-certain PHP libraries, and the Datadog Agent/API.
+certain PHP libraries, and the Datadog Agent or API.
 When these versions are no longer supported by their maintainers, Datadog APM for PHP limits its support for these as well.
 
 #### Levels of support
