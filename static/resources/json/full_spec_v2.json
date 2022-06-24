@@ -71205,17 +71205,6 @@
             "description": "Too many requests"
           }
         },
-        "security": [
-          {
-            "apiKeyAuth": [],
-            "appKeyAuth": []
-          },
-          {
-            "AuthZ": [
-              "security_monitoring_rules_read"
-            ]
-          }
-        ],
         "summary": "Get the latest Cloud Workload Security policy",
         "tags": [
           "Cloud Workload Security"
