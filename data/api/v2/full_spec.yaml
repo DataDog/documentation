@@ -4347,7 +4347,6 @@ components:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
         include_percentiles:
-          default: false
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
             Defaults to false. Can only be applied to metrics that have a `metric_type`
@@ -4439,7 +4438,6 @@ components:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
         include_percentiles:
-          default: false
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
             Defaults to false. Can only be applied to metrics that have a `metric_type`
