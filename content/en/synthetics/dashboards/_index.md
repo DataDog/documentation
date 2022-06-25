@@ -1,7 +1,7 @@
 ---
 title: Synthetics Dashboards
 kind: documentation
-description: Use the out-of-the-box Synthetics API Tests dashboard to proactively monitor your entire stack.  
+description: Explore out-of-the-box Synthetics dashboards to learn more about your Synthetic tests.  
 further_reading:
 - link: '/synthetics/'
   tag: 'Documentation'
