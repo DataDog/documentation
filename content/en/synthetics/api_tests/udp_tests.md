@@ -29,7 +29,7 @@ After choosing to create an `UDP` Test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
+1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `53`.
 2. Enter the string you want to send in your test. 
 3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your UDP test.
@@ -51,6 +51,8 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per UDP test.
 
 {{< img src="synthetics/api_tests/udp_assertions.png" alt="Define assertions for your UDP test to succeed or fail on" style="width:90%;" >}}
+
+To perform `OR` logic in an assertion, use the `matches regex` or `does not match regex` comparators to define a regex with multiple expected values for the same assertion type like `(0|100)`. The test result is successful if the string response assertion's value is 0 or 100.
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 

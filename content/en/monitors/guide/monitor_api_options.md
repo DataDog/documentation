@@ -91,4 +91,4 @@ Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 
 [1]: /api/latest/roles/
 [2]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[3]: ../../faq/what-are-recovery-thresholds/
+[3]: /monitors/guide/recovery-thresholds/
