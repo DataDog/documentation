@@ -2,9 +2,9 @@
 title: RUM Performance Overview Dashboard
 kind: documentation
 further_reading:
-    - link: '/real_user_monitoring/explorer'
-      tag: 'Documentation'
-      text: 'Learn about the RUM Explorer'
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Learn about the RUM Explorer'
 ---
 
 ## Overview
