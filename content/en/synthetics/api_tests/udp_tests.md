@@ -100,7 +100,11 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     | `{{#is_alert}}`            | Show when the test alerts.                                          |
     | `{{^is_alert}}`            | Show unless the test alerts.                                        |
     | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
-    | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
+    | `{{^is_recovery}}`         | Show unless the test recovers from alert.
+    | `{{#is_renotify}}`         | Show when monitor renotifies   |
+    | `{{^is_renotify}}`         | Show unless monitor renotifies |
+    | `{{#is_priority}}`         | Show when monitor matches priority (P1 to P5)   |
+    | `{{^is_priority}}`         | Show unless monitor matches priority (P1 to P5)  |                           |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
@@ -131,7 +135,7 @@ When you have entered a name and a value, click **Add Variable**.
 
 ### Use variables
 
-You can use the [global variables defined in `Settings`][8] and [locally defined variables](#create-local-variables) in the URL and assertions of your UDP tests.
+You can use the [global variables defined in `Settings`][8] in the URL and assertions of your UDP tests.
 
 To display your list of variables, type `{{` in your desired field:
 

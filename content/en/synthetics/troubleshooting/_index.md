@@ -98,6 +98,10 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true" width="100%" >}}
 
+#### I am having issues with a CSS pointer property
+
+Automated browsers do not support emulating the CSS `pointer` media feature. Due to this, synthetics browser tests have `pointer: none` for all tests and devices (laptop/tablet/mobile).
+
 ## API and browser tests
 
 ### Unauthorized errors

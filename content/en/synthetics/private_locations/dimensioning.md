@@ -16,6 +16,14 @@ By defining a test type, maximum number of test runs, and total hardware require
 
 To improve dimensioning, split your test assignments based on test types. For example, you can have some private locations run only API and multistep API tests while other private locations run only browser tests.
 
+### Prerequisites
+
+You will need:
+
+1. Basic understanding of Docker and container orchestration
+2. The private location configuration file mounted with your orchestrator of choice and accessible to your underlying private location containers
+3. If you are using browser tests with IP blocking (see [Advanced configuration][5]), `sudo` access may be required
+
 ### Define your maximum number of test runs
 
 Resource requirements depend on the maximum number of test runs your private location may execute in parallel and the application(s) you want to test. Take into account spikes that may happen with on-demand testing (for example, when running tests as part of your [CI/CD pipelines][4]) as well as the size and number of assets that need to be loaded.
@@ -34,10 +42,10 @@ Additional requirements vary based on the test type for the private location.
 
 | Test type                                     | CPU/Memory/Disk recommendation    |
 | --------------------------------------------- | --------------------------------- |
-| [API tests][1] and [Multistep API tests][2] | 20mCores/5MiB/1MiB per test run   |
-| [Browser tests][3]                           | 150mCores/1GiB/10MiB per test run |
+| [API tests][1] and [Multistep API tests][2] | 100mCores/200MiB/100MiB per test run   |
+| [Browser tests][3]                           | 800mCores/1GiB/500MiB per test run |
 
-For example, Datadog recommends ~ 1.5 core CPU `(150mCores + (150mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 100MiB disk `(10MiB*10 test runs)` for a private location running only Browser tests with a maximum number of concurrent test runs of `10`.
+For example, Datadog recommends ~ 8 core CPU `(150mCores + (150mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 5GiB disk `(500MiB*10 test runs)` for a private location running only Browser tests with a maximum number of concurrent test runs of `10`.
 
 **Note:** If you want to run API or multistep API tests and Browser tests on a private location, Datadog recommends computing the total hardware requirements with the Browser tests requirements.
 
@@ -62,6 +70,12 @@ When multiple workers are associated with a private location, each worker reques
 
 For example, ten tests are scheduled to run simultaneously on a private location that has two workers running. If Worker 1 is running two tests, Worker 1 can request three additional tests to run. If Worker 2 is not running any tests, Worker 2 can request the five following tests. The remaining two tests can be requested by whichever worker has finished running its test first (any worker that has available slots).
 
+### Troubleshooting
+
+#### Browser tests are taking too long to run
+
+Confirm you are not seeing [out of memory issues][6] with your private location deployments. If you have scaled your container instances following our [guidelines](#Define-your-total-hardware-requirements), please reach out to Datadog Support for assistance.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -71,3 +85,4 @@ For example, ten tests are scheduled to run simultaneously on a private location
 [3]: /synthetics/browser_tests/?tab=requestoptions
 [4]: /synthetics/cicd_integrations
 [5]: /synthetics/private_locations/configuration#advanced-configuration
+[6]: https://docs.docker.com/config/containers/resource_constraints/

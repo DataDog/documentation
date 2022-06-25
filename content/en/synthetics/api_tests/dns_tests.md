@@ -105,7 +105,11 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     | `{{#is_alert}}`            | Show when the test alerts.                                          |
     | `{{^is_alert}}`            | Show unless the test alerts.                                        |
     | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
-    | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
+    | `{{^is_recovery}}`         | Show unless the test recovers from alert.
+    | `{{#is_renotify}}`         | Show when monitor renotifies   |
+    | `{{^is_renotify}}`         | Show unless monitor renotifies |
+    | `{{#is_priority}}`         | Show when monitor matches priority (P1 to P5)   |
+    | `{{^is_priority}}`         | Show unless monitor matches priority (P1 to P5)  |                           |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
@@ -134,7 +138,7 @@ You can create local variables by clicking **Create Local Variable** at the top 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][9] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][9] in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
