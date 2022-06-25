@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The mobile dashboard provides insights about your mobile RUM application, errors, and crashes. 
+The [mobile dashboard][1] provides insights about your mobile RUM application, errors, and crashes. 
 
 It shows:
 
@@ -18,10 +18,11 @@ It shows:
 
 {{< img src="real_user_monitoring/dashboards/mobile_dashboard.png" alt="Out-of-the-box mobile dashboard" style="width:100%;" >}}
 
-For more information about the information displayed, see [RUM Browser Data Collected][1].
+For more information about the information displayed, see [RUM Browser Data Collected][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/data_collected/
+[1]: https://app.datadoghq.com/dash/integration/30411/rum---mobile
+[2]: /real_user_monitoring/data_collected/

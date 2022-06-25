@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The sessions dashboard provides insights about your user sessions, user demographics, and application usage. 
+The [sessions dashboard][1] provides insights about your user sessions, user demographics, and application usage. 
 
 It shows:
 
@@ -19,10 +19,11 @@ It shows:
 
 {{< img src="real_user_monitoring/dashboards/sessions_dashboard.png" alt="Out-of-the-box User sessions dashboard" style="width:100%;" >}}
 
-For more information about the information displayed, see [RUM Browser Data Collected][1].
+For more information about the information displayed, see [RUM Browser Data Collected][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/data_collected/
+[1]: https://app.datadoghq.com/dash/integration/30410/rum---user-sessions
+[2]: /real_user_monitoring/data_collected/
