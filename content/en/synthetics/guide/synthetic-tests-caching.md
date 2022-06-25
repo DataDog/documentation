@@ -1,5 +1,5 @@
 ---
-title: Avoiding cache issues in Synthetic tests
+title: Avoiding Cache Issues In Synthetic Tests
 kind: guide
 further_reading:
     - link: 'synthetics/browser_tests'
@@ -11,15 +11,19 @@ further_reading:
 
 ---
 
-## Browser tests
+## Overview
 
-Browsers are killed after every test execution. This ensures your Browser tests do not face cache related issues on the client side.
+This guide describes how you can avoid caching issues while using Synthetic tests.
 
 ## API tests
 
 ### HTTP tests
 
-You can leverage [local variables][1] to generate a random string to send with your payload and ensure your [HTTP tests][2] do not use your caching systems.
+You can leverage [local variables][1] to generate a random string and send it with your payload to ensure your [HTTP tests][2] do not use your caching systems.
+
+## Browser tests
+
+Browsers are killed after every test execution, which ensures that your browser tests do not experience cache-related issues on the client side.
 
 ## Further Reading
 

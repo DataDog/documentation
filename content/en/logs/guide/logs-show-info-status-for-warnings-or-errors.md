@@ -2,7 +2,7 @@
 title: Logs Show Info Status for Warnings or Errors
 kind: guide
 aliases:
-  - /logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors.md
+  - /logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors
 further_reading:
 - link: "/logs/guide/remap-custom-severity-to-official-log-status/"
   tag: "Guide"

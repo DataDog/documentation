@@ -4347,7 +4347,6 @@ components:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
         include_percentiles:
-          default: false
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
             Defaults to false. Can only be applied to metrics that have a `metric_type`
@@ -4439,7 +4438,6 @@ components:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
         include_percentiles:
-          default: false
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
             Defaults to false. Can only be applied to metrics that have a `metric_type`
@@ -12084,11 +12082,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_rules_read
       summary: Get the latest Cloud Workload Security policy
       tags:
       - Cloud Workload Security
@@ -14276,7 +14269,7 @@ tags:
     that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
     only be performed by\na user who has the `Manage Tags for Metrics` permission."
   name: Metrics
-- description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/api/latest/opsgenie-integration)
+- description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'
   externalDocs:

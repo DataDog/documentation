@@ -2,8 +2,7 @@ name: Post preview link
 on:
   pull_request:
     paths:
-      - 'content/en/**.md'
-      - .github/workflows/preview_link.yml
+    - 'content/en/**.md'
 
 jobs:
   preview-link:
@@ -12,24 +11,35 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - run: pip install Mako  
+    
     - name: Find changed files
       id: changed_files
-      uses: tj-actions/changed-files@v19
+      uses: tj-actions/changed-files@v23
+      with: 
+        include_all_old_new_renamed_files: true      
+    
     - name: Generate links
+      env:
+        branch: ${{ github.head_ref }}
       id: comment_body
       run: |
-        for file in ${{ steps.changed_files.outputs.all_modified_files }}; do
-          echo "Checking file ${file}..."
-          if [[ "$file" =~ ^content/en/(.*).md$ ]]; then
-            fname=$( echo ${BASH_REMATCH[1]} | sed "s/_index//")
-            body="${body}https://docs-staging.datadoghq.com/${{ github.head_ref }}/${fname}\n"
-          fi
-        done
-        printf "Preview links:\n$body"
-        # This terrible syntax is so we can pass a multi-line body to the "post comment" action
-        printf "COMMENT_BODY<<EOF\n" >> $GITHUB_ENV
-        printf "$body" >> $GITHUB_ENV
-        printf "EOF\n" >> $GITHUB_ENV
+        python local/bin/py/preview_links.py --deleted='${{ steps.changed_files.outputs.deleted_files }}' \
+        --renamed='${{ steps.changed_files.outputs.renamed_files }}' \
+        --modified='${{ steps.changed_files.outputs.modified_files }}' \
+        --added='${{ steps.changed_files.outputs.added_files }}'
+
+    - name: Render template
+      id: template
+      uses: chuhlomin/render-template@v1.4
+      with:
+        template: .github/preview-links-template.md
+
     - name: Find existing comment
       uses: peter-evans/find-comment@v2.0.0
       id: find_comment
@@ -37,13 +47,11 @@ jobs:
         issue-number: ${{ github.event.pull_request.number }}
         comment-author: 'github-actions[bot]'
         body-includes: "Preview links ("
+    
     - name: Post comment
       uses: peter-evans/create-or-update-comment@v2.0.0
       with:
         issue-number: ${{ github.event.pull_request.number }}
         comment-id: ${{ steps.find_comment.outputs.comment-id }}
         edit-mode: replace
-        body: |
-          Preview links (active after the `build_preview` check completes):
-          ${{ env.COMMENT_BODY }}
-
+        body: ${{ steps.template.outputs.result }}

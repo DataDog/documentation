@@ -23,7 +23,7 @@ Additionally the following security policies are applied to the account during i
 * Deny log on through Remote Desktop Services
 * Log on as a service
 
-**Important**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
+**Important**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent. You cannot install the Datadog agent using a Group Managed Service Account (GMSA).
 
 ## Installation
 

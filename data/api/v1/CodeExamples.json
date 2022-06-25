@@ -691,6 +691,13 @@
       "description": "Get an SLO's history returns \"OK\" response"
     }
   ],
+  "SearchSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Search for SLOs returns \"OK\" response"
+    }
+  ],
   "UpdateSLO": [
     {
       "group": "service_level_objectives",
