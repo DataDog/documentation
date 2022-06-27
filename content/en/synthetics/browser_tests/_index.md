@@ -132,10 +132,10 @@ A notification is sent according to the set of alerting conditions. To configure
     | `{{^is_alert}}`            | Show unless monitor alerts                                          |
     | `{{#is_recovery}}`         | Show when monitor recovers from either ALERT   |
     | `{{^is_recovery}}`         | Show unless monitor recovers from either ALERT |
-    | `{{#is_renotify}}`         | Show when monitor renotifies   |
-    | `{{^is_renotify}}`         | Show unless monitor renotifies |
-    | `{{#is_priority}}`         | Show when monitor matches priority (P1 to P5)   |
-    | `{{^is_priority}}`         | Show unless monitor matches priority (P1 to P5)  |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.   |
+    | `{{^is_renotify}}`         | Show unless the monitor renotifies. |
+    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).   |
+    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).  |
 
     Notification messages include the **message** defined in this section and information about the failing locations.
 

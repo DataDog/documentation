@@ -101,10 +101,10 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     | `{{^is_alert}}`            | Show unless the test alerts.                                        |
     | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
     | `{{^is_recovery}}`         | Show unless the test recovers from alert.
-    | `{{#is_renotify}}`         | Show when monitor renotifies   |
-    | `{{^is_renotify}}`         | Show unless monitor renotifies |
-    | `{{#is_priority}}`         | Show when monitor matches priority (P1 to P5)   |
-    | `{{^is_priority}}`         | Show unless monitor matches priority (P1 to P5)  |                           |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.   |
+    | `{{^is_renotify}}`         | Show unless the monitor renotifies. |
+    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).   |
+    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).  |                           |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 

@@ -100,7 +100,7 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 #### I am having issues with a CSS pointer property
 
-Automated browsers do not support emulating the CSS `pointer` media feature. Due to this, synthetics browser tests have `pointer: none` for all tests and devices (laptop/tablet/mobile).
+Automated browsers do not support emulating the CSS `pointer` media feature. Browser tests have `pointer: none` for all tests and devices (laptop, tablet, or mobile).
 
 ## API and browser tests
 

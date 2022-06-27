@@ -18,11 +18,11 @@ To improve dimensioning, split your test assignments based on test types. For ex
 
 ### Prerequisites
 
-You will need:
+To get started with dimensioning your private locations, you need the following:
 
-1. Basic understanding of Docker and container orchestration
-2. The private location configuration file mounted with your orchestrator of choice and accessible to your underlying private location containers
-3. If you are using browser tests with IP blocking (see [Advanced configuration][5]), `sudo` access may be required
+1. A basic understanding of container orchestration and the particular option you are using to run your private location.
+2. The private location configuration file mounted with your orchestrator of choice and is accessible to your underlying private location containers.
+3. If you are using [browser tests with IP blocking][5], `sudo` access may be required.
 
 ### Define your maximum number of test runs
 
@@ -45,7 +45,7 @@ Additional requirements vary based on the test type for the private location.
 | [API tests][1] and [Multistep API tests][2] | 100mCores/200MiB/100MiB per test run   |
 | [Browser tests][3]                           | 800mCores/1GiB/500MiB per test run |
 
-For example, Datadog recommends ~ 8 core CPU `(150mCores + (150mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 5GiB disk `(500MiB*10 test runs)` for a private location running only Browser tests with a maximum number of concurrent test runs of `10`.
+For example, Datadog recommends ~ 8 core CPU `(150mCores + (800mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 5GiB disk `(500MiB*10 test runs)` for a private location running only Browser tests with a maximum number of concurrent test runs of `10`.
 
 **Note:** If you want to run API or multistep API tests and Browser tests on a private location, Datadog recommends computing the total hardware requirements with the Browser tests requirements.
 
@@ -74,7 +74,7 @@ For example, ten tests are scheduled to run simultaneously on a private location
 
 #### Browser tests are taking too long to run
 
-Confirm you are not seeing [out of memory issues][6] with your private location deployments. If you have scaled your container instances following our [guidelines](#Define-your-total-hardware-requirements), please reach out to Datadog Support for assistance.
+Confirm you are not seeing [out of memory issues][6] with your private location deployments. If you have scaled your container instances following the [guidelines](#Define-your-total-hardware-requirements) above, reach out to [Datadog Support][7].
 
 ## Further Reading
 
@@ -86,3 +86,4 @@ Confirm you are not seeing [out of memory issues][6] with your private location 
 [4]: /synthetics/cicd_integrations
 [5]: /synthetics/private_locations/configuration#advanced-configuration
 [6]: https://docs.docker.com/config/containers/resource_constraints/
+[7]: /help/
