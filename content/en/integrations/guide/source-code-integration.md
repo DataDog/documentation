@@ -81,14 +81,13 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_U
 ### Configure repositories
 
 {{< tabs >}}
-
 {{% tab "Configure a GitHub App" %}}
+
 If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][2] in order to link your telemetry to your source code.
 When specifying your permissions in the integration tile, enable Datadog read permissions to Contents.
-
 {{% /tab %}}
-
 {{% tab "Upload your git metadata" %}}
+
 If you are not using GitHub, Datadog collects information for every commit SHA from your git repository with the [`datadog-ci git-metadata upload`][1] command in order to link your telemetry to your source code.
 
 When you run `datadog-ci git-metadata upload` within a git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
@@ -103,11 +102,10 @@ You can expect to see the following output:
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:DataDog/datadog-ci.git.
 180 tracked file paths will be reported.
 ✅  Handled in 0.077 seconds.
-{{% /tab %}}
-
-{{< /tabs >}}
-
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Links to Git
 
