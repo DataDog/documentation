@@ -7,7 +7,7 @@ aliases:
 
 Our [SQL Server check][1] is limited to collecting metrics from the [sys.dm_os_performance_counters table][2], and by default it only collects the metrics that Datadog believes are most likely to be relevant. With some simple configurations, you can [extend what metrics are collected from that table][3], but there may be cases where you're interested in collecting more than what is available in that table at all.
 
-In these cases, you might consider our [WMI check][4] as an additional source of SQL Server metrics (and if you're not familiar with the WMI check yet, [here is a great guide for implementing that][5]). Some WMI classes may be available that can contain additional performance data about your SQL Server (such as [Win32_PerfFormattedData_SQLSERVERAGENT_SQLAgentJobs][6]), and you may be able to use our WMI check to query them for additional metric collection.
+In these cases, you might consider our [WMI check][4] as an additional source of SQL Server metrics (and if you're not familiar with the WMI check yet, see the [retrieving WMI metrics guide][5]). Some WMI classes may be available that can contain additional performance data about your SQL Server (such as [Win32_PerfFormattedData_SQLSERVERAGENT_SQLAgentJobs][6]), and you may be able to use our WMI check to query them for additional metric collection.
 
 For example, we've had some users employ our WMI check with the following configuration to collect a gauge metric for the number of failed jobs in their SQL Server:
 
