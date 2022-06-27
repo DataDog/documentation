@@ -5,9 +5,9 @@ private: true
 ---
 
 {{< whatsnext desc="General RUM:" >}}
-{{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Compute Apdex and custom performance indicators with RUM data{{< /nextlink >}}
-{{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Create alerts with RUM data{{< /nextlink >}}
-{{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Create alerts for conversion rates{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Compute Apdex and custom performance indicators with RUM data{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Create alerts with RUM data{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Create alerts for conversion rates{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
@@ -19,5 +19,6 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Session Replay:" >}}
-{{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Allow third-party service workers for Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Allow third-party service workers for Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Use Session Replay in your Technical Solutions or Support workflow{{< /nextlink >}}
 {{< /whatsnext >}}
