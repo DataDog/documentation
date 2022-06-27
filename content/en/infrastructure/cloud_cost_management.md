@@ -32,7 +32,11 @@ Select the following Delivery options:
 
 ### Configure the AWS integration
 
-Select your AWS billing account from the dropdown. Once your account is selected, Datadog displays tags associated with that account. If you have multiple similarly-named billing accounts, viewing the tags associated with a selected account can help ensure that you've selected the specific one you want.
+Select your AWS management account from the dropdown. Once your account is selected, Datadog displays tags associated with that account. If you have multiple similarly-named management accounts, viewing the tags associated with a selected account can help ensure that you've selected the specific one you want.
+
+**Note**: we recommend that you send us a Cost and Usage Report from an [AWS _management account_][6] for cost visibility into related _member accounts_. If you decide to send us a Cost and Usage report from an AWS _member account_, please ensure that you've selected following options in [preferences][7] of the _management account_ so that we have full visibility into the member account:
+
+<img width="770" alt="Screen Shot 2022-06-27 at 1 53 10 PM" src="https://user-images.githubusercontent.com/99217719/176004906-d06096a2-cec8-481a-8113-0a98bc963d9a.png">
 
 ### Locate the Cost and Usage Report
 
@@ -142,3 +146,5 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [5]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html 
+[7]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
