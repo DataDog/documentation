@@ -83,8 +83,11 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_U
 {{< tabs >}}
 {{% tab "Configure a GitHub App" %}}
 
-If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][2] in order to link your telemetry to your source code.
+If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][1] in the [GitHub Apps integration tile][2] in order to link your telemetry to your source code.
 When specifying your permissions in the integration tile, enable Datadog read permissions to Contents.
+
+[1]: https://docs.datadoghq.com/integrations/github_apps/
+[2]: https://app.datadoghq.com/account/settings#integrations/github-apps
 {{% /tab %}}
 {{% tab "Upload your git metadata" %}}
 
@@ -99,11 +102,12 @@ To ensure the data is being collected, run `datadog-ci git-metadata upload` in y
 You can expect to see the following output:
 
 ```
-Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:DataDog/datadog-ci.git.
+Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
 ✅  Handled in 0.077 seconds.
 ```
 
+[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -136,7 +140,7 @@ For more information, see [GitHub Apps & OAuth Apps][4].
 
 #### Continuous Profiler
 
-In the [Continuous Profiler][2], you can directly access traces in the source repository on GitHub.
+In the [Continuous Profiler][5], you can directly access traces in the source repository on GitHub.
 
 1. Navigate to **APM** > **Profile Search**.
 2. Click on a profile and hover your cursor over a method in the flamegraph. A kebab icon with the **More actions** label appears to the right.
@@ -152,4 +156,4 @@ In the [Continuous Profiler][2], you can directly access traces in the source re
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
 [3]: https://app.datadoghq.com/apm/error-tracking
 [4]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
-[5]: https://docs.datadoghq.com/integrations/github_apps/
+[5]: https://docs.datadoghq.com/tracing/profiler/search_profiles/
