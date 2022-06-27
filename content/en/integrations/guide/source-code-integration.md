@@ -27,7 +27,7 @@ Datadog Agent 7.35.0 or higher is required.
 To map telemetry data with your source code:
 
 1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
-2. a. [install a GitHub App][2] to display inline source code snippets.
+2. a. Install Datadog's [GitHub Apps integration][2] to display inline source code snippets.
 2. b. Alternatively, upload metadata about your git repository by running [`datadog-ci git-metadata upload`][1] in your CI pipeline.
 
 ### Tag your telemetry
