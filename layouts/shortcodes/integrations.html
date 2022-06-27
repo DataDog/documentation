@@ -86,48 +86,53 @@
     {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
 </div>
 
-<div class="input-group mt-4">
+<div class="input-group mt-4 mb-4">
     <span class="input-group-prepend">
         <span class="input-group-text">{{ partial "img.html" (dict "root" . "src" "icons/nav_search_2.svg" "alt" "search" "width" "20") }}</span>
     </span>
     <input class="form-control integration-search" data-ref="search" placeholder="Search for an integration..." />
 </div>
 
-<!-- using 5 col -->
-<div class="row no-gutters integration-tiles mt-4" data-ref="container">
-    {{ range $integration := $integrationData }}
-        {{ if $integration.int_logo }}
-            <div id="mixid_{{ $integration.id }}" class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mix text-center {{ range $cat := $integration.tags }} {{ $cat }} {{ end }}" data-id="{{ $integration.id }}" data-ref="item">
-                <div id="{{ $integration.name }}" class="card">
-                    {{ if $integration.is_marketplace }}
+<div id="integration-tiles">
+    <div>
+
+        {{ $integration_list_display := $integrationData }}
+        {{ $integration_count := (len $integration_list_display) }}
+
+        <div class="">
+          <div id="integrations" class="row integration-row mx-0">
+            {{ range $i, $v := $integration_list_display }}
+                {{ if $v.int_logo }}
+                <div data-id="{{ $i }}" class="item {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}"
+                     data-ref="item">
+                  <div class="integration {{ if in $v.categories "marketplace" }}integration-marketplace{{ end }}">
+                    {{ if $v.is_marketplace }}
                         <div class="card-banner">
-                            <p class="font-primary font-weight-bold text-uppercase">Marketplace</p>
+                            <p class="font-primary font-weight-bold text-uppercase text-center">Marketplace</p>
                         </div>
                     {{ end }}
-                    <a class="card-img" href="{{ $integration.redirect | absLangURL }}">
-                        <picture class="mx-auto">
-                            <img class="img-fluid mx-auto"
-                                 src="{{ $integration.int_logo }}"
-                                 alt="integration">
+                    <div class="card-content">
+
+
+                      <a href="{{ $v.redirect | absLangURL }}" aria-label="{{ $v.public_title }} datadog integration docs link">
+                        <picture class="mx-auto my-auto">
+                          {{ $img := (replace $v.int_logo "_large" "_avatar") }}
+                          <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="{{ $img }}" alt="{{ $v.public_title }} logo">
                         </picture>
-                    </a>
-                    <a class="card-img-gray" href="{{ $integration.redirect | absLangURL }}">
-                        <picture class="mx-auto">
-                            <img class="img-fluid mx-auto"
-                                 src="{{ $integration.int_logo }}"
-                                 alt="integration" style="filter: saturate(0%);">
-                        </picture>
-                    </a>
-                    <div class="text-center title">{{ $integration.integration_title }}</div>
-                    <div class="card-body">
-                        <a class="card-button" href="{{ $integration.redirect | absLangURL }}">
-                            <h4 class="card-title">{{ $integration.integration_title }}</h4>
-                            <p class="card-text">{{ $integration.blurb }}</p>
-                            <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>
-                        </a>
+                        <div class="text-center picture-title">{{ $v.integration_title }}</div>
+                        <div class="text-center title">{{ $v.integration_title }}</div>
+                        <div class="blurb text-center">{{ $v.blurb }}</div>
+                        <button type="button">{{ i18n "learn_more" }}</button>
+                      </a>
+                      <div class="dimmer-cloak"></div>
                     </div>
+                  </div>
+
                 </div>
-            </div>
-        {{ end }}
-    {{ end }}
+                {{ end }} <!-- if image -->
+            {{ end }} <!-- end range -->
+            </div> <!-- end row -->
+          </div>
+
+    </div>
 </div>
