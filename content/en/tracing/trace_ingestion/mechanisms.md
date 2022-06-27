@@ -185,7 +185,7 @@ The rare sampler sends a set of rare spans to Datadog. Rare sampling is also a d
 In Agent version 7.33 and forward, you can disable the rare sampler in the Agent main configuration file (`datadog.yaml`) or with an environment variable:
 
 ```
-@params apm_config.disable_rare_sample - boolean - optional - default: false
+@params apm_config.disable_rare_sampler - boolean - optional - default: false
 @env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
