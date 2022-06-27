@@ -413,7 +413,7 @@
               tag: "Blog"
               text: "Monitor Mobile Vitals in Datadog"
     - action: pull-and-push-file
-      branch: alai97/android-rum-services-doc-update
+      branch: master
       globs:
       - 'docs/web_view_tracking.md'
       options:
