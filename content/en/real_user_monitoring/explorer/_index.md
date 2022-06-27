@@ -25,7 +25,7 @@ You can:
 
 - Navigate through user sessions
 - Investigate performance issues affecting views, resources, or actions
-- Troubleshoot application errors
+- Troubleshoot application errors and long tasks
 
 {{< img src="real_user_monitoring/explorer/rum_explorer_1.png" alt="RUM Explorer" style="width:95%;" >}}
 

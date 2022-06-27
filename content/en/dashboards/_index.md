@@ -232,7 +232,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][17]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][16]. Click on an individual dashboard to view it.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
@@ -265,5 +265,4 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [13]: /account_management/rbac/
 [14]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
 [15]: https://app.datadoghq.com/dashboard/lists
-[16]: /help/
-[17]: /dashboards/template_variables/#saved-views
+[16]: /dashboards/template_variables/#saved-views
