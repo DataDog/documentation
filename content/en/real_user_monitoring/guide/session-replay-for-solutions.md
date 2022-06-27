@@ -56,7 +56,9 @@ The multistep API test did not save because of a character limit in the step’s
 
 ## Resolve a customer issue
 
-To resolve this customer issue, the Technical Solutions team may request the Product team to update the multistep API test workflow with contextual help for when a test is unable to be saved. The Frontend team may also be encouraged to implement an error message in the UI that ensures users are notified when they breach the maximum character limit for the test step name.
+To resolve this customer issue, the Technical Solutions team may request the Product team to update the multistep API test workflow with contextual help for when a test is unable to be saved. 
+
+The Frontend team may also be encouraged to implement an error message in the UI that ensures users are notified when they breach the maximum character limit for the test step name.
 
 ## Further Reading
 
