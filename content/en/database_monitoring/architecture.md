@@ -32,7 +32,7 @@ The Datadog Agent is lightweight software that monitors system metrics such as C
 
 #### Self-hosted
 
-{{< img src="database_monitoring/dbm_architecture_self-hosted.png" alt="Some really good alt text" style="width:70%;">}}
+{{< img src="database_monitoring/dbm_architecture_self-hosted.png" alt="The self-hosted setup goes through the database process on the database host, where the agent is also run. Then after connecting to the internet, it goes through Datadog's backend." style="width:70%;">}}
 
 In a self-hosted setup, the Datadog Agent is used to collect system metrics from the OS host, database metrics directly from the database, and from database logs.
 
@@ -56,7 +56,7 @@ If your setup is cloud-managed (with providers such as [AWS RDS][6] or Aurora, G
 
 Database monitoring collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider using our integration.
 
-{{< img src="database_monitoring/dbm_architecture_cloud-hosted.png" alt="Some really good alt text" style="width:70%;">}}
+{{< img src="database_monitoring/dbm_architecture_cloud-hosted.png" alt="The database instance is separate from the agent host, which is separate from the Datadog backend. The Cloud API connects directly to the Datadog AWS integration through the internet." style="width:70%;">}}
 
 You can install the Agent on any cloud VM (for example, EC2) as long as it can connect to your database instance(s).
 
@@ -66,7 +66,7 @@ If you are not running your own Kubernetes cluster, Datadog recommends using you
 
 If you are running your apps on [Kubernetes][9], Datadog recommends using the [Datadog Cluster Agent with Database Monitoring][10], as this allows you to run [cluster checks][11] across your pods.
 
-{{< img src="database_monitoring/dbm_architecture_clusters.png" alt="Some really good alt text" style="width:70%;">}}
+{{< img src="database_monitoring/dbm_architecture_clusters.png" alt="Database instances in a cloud provider connect to nodes in a Kubernetes cluster, which then connect to the Datadog backend through the internet. The cloud API connects directly to the Datadog AWS integration." style="width:70%;">}}
 
 Using the [Cluster Agent][12] is preferred because it distributes the Database instances across a pool of agents for you. This ensures that only one instance of each check runs, as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of Database instances so that the Cluster Agent can spread out the cluster checks across the different nodes.
 
