@@ -163,24 +163,25 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 
 {{< code-block lang="text" disable_copy="true" >}}
 {
-    "version": 1,                       // <-- incremented every time this information is changed
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
-    "agents": {                         // <-- the IPs used by the Agent to submit metrics to Datadog
-        "prefixes_ipv4": [              // <-- list of IPv4 CIDR blocks
+    "version": 1,                          // <-- incremented every time this information is changed
+    "modified": "YYYY-MM-DD-HH-MM-SS",     // <-- timestamp of the last modification
+    "agents": {                            // <-- the IPs used by the Agent to submit metrics to Datadog
+        "prefixes_ipv4": [                 // <-- list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- list of IPv6 CIDR blocks
+        "prefixes_ipv6": [                 // <-- list of IPv6 CIDR blocks
             ...
         ]
     },
-    "api": {...},                       // <-- same for non-critical Agent functionality (querying information from API)
-    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
-    "logs": {...},                      // <-- same for the logs Agent data
-    "process": {...},                   // <-- same for the process Agent data
-    "orchestrator": {...},              // <-- same for the process Agent data
-    "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
-    "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
+    "api": {...},                          // <-- same for non-critical Agent functionality (querying information from API)
+    "apm": {...},                          // <-- same structure as "agents" but IPs used for the APM Agent data
+    "logs": {...},                         // <-- same for the logs Agent data
+    "process": {...},                      // <-- same for the process Agent data
+    "orchestrator": {...},                 // <-- same for the process Agent data
+    "synthetics": {...},                   // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
+    "synthetics-private-locations": {...}, // <-- not used for Agent traffic (Datadog intake IPs for synthetics private locations)
+    "webhooks": {...}                      // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
 {{< /code-block >}}
 
