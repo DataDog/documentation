@@ -21,13 +21,17 @@ further_reading:
 ---
 
 Customize your log collection configuration:
-* [Filter logs](#filter-logs)
-* [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
-* [Aggregate multi-line logs](#multi-line-aggregation)
-* [Copy commonly used examples](#commonly-used-log-processing-rules)
-* [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
-* [Specify log file encodings](#log-file-encodings)
-* [Define global processing rules](#global-processing-rules)
+- [Filter logs](#filter-logs)
+  - [Exclude at match](#exclude-at-match)
+  - [Include at match](#include-at-match)
+- [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
+- [Multi-line aggregation](#multi-line-aggregation)
+  - [Automatic multi-line aggregation](#automatic-multi-line-aggregation)
+- [Commonly used log processing rules](#commonly-used-log-processing-rules)
+- [Tail directories by using wildcards](#tail-directories-by-using-wildcards)
+- [Log file encodings](#log-file-encodings)
+- [Global processing rules](#global-processing-rules)
+- [Further Reading](#further-reading)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
@@ -445,11 +449,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
 ### Automatic multi-line aggregation
-With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns][2] automatically. 
-
-<div class="alert alert-warning">
-Automatic Multi-line aggregation is in public beta.
-</div>
+With Agent 7.37+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns][2] automatically. 
 
 Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
 
