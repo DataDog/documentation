@@ -56,4 +56,4 @@ instances:
 **Note**: If you are submitting performance counters in languages other than English, set up the ddagentuser account with the en-US language pack.
 
 
-[1]: /integrations/faq/how-to-retrieve-wmi-metrics/
+[1]: /integrations/guide/retrieving-wmi-metrics/

@@ -27,5 +27,5 @@ instances:
 [2]: https://github.com/DataDog/dd-agent/blob/5.9.x/conf.d/sqlserver.yaml.example#L3-L5
 [3]: /integrations/guide/collect-more-metrics-from-the-sql-server-integration/
 [4]: /integrations/wmi_check/
-[5]: /integrations/faq/how-to-retrieve-wmi-metrics/
+[5]: /integrations/guide/retrieving-wmi-metrics/
 [6]: http://wutils.com/wmi/root/cimv2/win32_perfformatteddata_sqlserveragent_sqlagentjobs
