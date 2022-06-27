@@ -88,7 +88,7 @@ The Agent should not connect to the database through a proxy, load balancer, con
 [2]: /integrations/postgres/?tab=host#data-collected
 [3]: /integrations/mysql/?tab=host#data-collected
 [4]: /database_monitoring/setup_postgres/selfhosted/
-[5]: /database/monitoring/setup_mysql/selfhosted/
+[5]: /database_monitoring/setup_mysql/selfhosted/
 [6]: /integrations/amazon_rds/
 [7]: /agent/amazon_ecs/
 [8]: /agent/docker/
