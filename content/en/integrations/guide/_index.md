@@ -15,10 +15,10 @@ private: true
     {{< nextlink href="integrations/guide/prometheus-metrics" tag="Prometheus" >}}Mapping Prometheus metrics to Datadog metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/prometheus-host-collection" tag="Prometheus" >}}Prometheus and OpenMetrics metrics collection from a host{{< /nextlink >}}
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Freshservice tickets using Webhooks{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/hdfs-integration-error.md" tag="Hadoop" >}}Hadoop Distributed File System (HDFS) integration error{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Monitoring HCP Consul with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/source-code-integration" tag="GitHub Apps" >}}Datadog Source Code Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag="kafka" >}}Agent failed to retrieve RMIServer stub{{< /nextlink >}}
-    
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag="network" >}}Send TCP/UDP host metrics to the Datadog API{{< /nextlink >}}
     {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag="snmp" >}}SNMP commonly used and compatible OIDs{{< /nextlink >}}     
 {{< /whatsnext >}}
