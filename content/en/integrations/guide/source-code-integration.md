@@ -16,12 +16,6 @@ The source code integration is an integration with Git that enables you to link 
 
 Combined with the GitHub Apps integrations, you can see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
 
-| Integration Name            | Stack Trace Links | Issue and PR Previews | Inline Code Snippets |
-|-----------------------------|-------------------|-----------------------|----------------------|
-| Source Code                 | {{< X >}}         | X                     | X                    |
-| GitHub Apps                 | X                 | {{< X >}}             | X                    |
-| Source Code and GitHub Apps | {{< X >}}         | {{< X >}}             | {{< X >}}            |
-
 ## Configuration
 
 <div class="alert alert-info">
@@ -33,8 +27,8 @@ Datadog Agent 7.35.0 or higher is required.
 To map telemetry data with your source code:
 
 1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
-2. Upload metadata about your git repository by running [`datadog-ci git-metadata upload`][1] in your CI pipeline.
-3. Optionally, [install a GitHub App][2] to display inline source code snippets.
+2. a. [install a GitHub App][2] to display inline source code snippets.
+2. b. Alternatively, upload metadata about your git repository by running [`datadog-ci git-metadata upload`][1] in your CI pipeline.
 
 ### Tag your telemetry
 
@@ -84,9 +78,18 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_U
 {{% /tab %}}
 {{< /tabs >}}
 
-### Upload your git metadata
+### Configure repositories
 
-In order to link your telemetry to your source code, Datadog collects information for every commit SHA from your git repository with the [`datadog-ci git-metadata upload`][1] command.
+{{< tabs >}}
+
+{{% tab "Configure a GitHub App" %}}
+If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][2] in order to link your telemetry to your source code.
+When specifying your permissions in the integration tile, enable Datadog read permissions to Contents.
+
+{{% /tab %}}
+
+{{% tab "Upload your git metadata" %}}
+If you are not using GitHub, Datadog collects information for every commit SHA from your git repository with the [`datadog-ci git-metadata upload`][1] command in order to link your telemetry to your source code.
 
 When you run `datadog-ci git-metadata upload` within a git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
@@ -100,6 +103,10 @@ You can expect to see the following output:
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:DataDog/datadog-ci.git.
 180 tracked file paths will be reported.
 ✅  Handled in 0.077 seconds.
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ```
 
 ## Links to Git
@@ -147,3 +154,4 @@ In the [Continuous Profiler][2], you can directly access traces in the source re
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
 [3]: https://app.datadoghq.com/apm/error-tracking
 [4]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
+[5]: https://docs.datadoghq.com/integrations/github_apps/
