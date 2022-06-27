@@ -11,19 +11,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - メッセージング
-  - 処理
-  - ログの収集
+- メッセージング
+- 処理
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md
 display_name: HiveMQ
 draft: false
 git_integration_title: hivemq
 guid: 905e4d87-2777-4253-ad44-f91ee66ad888
 integration_id: hivemq
 integration_title: HiveMQ
+integration_version: 1.6.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -35,10 +36,13 @@ public_title: Datadog-HiveMQ インテグレーション
 short_description: HiveMQ クラスターを監視します。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 [HiveMQ][1] は、接続された IoT デバイスと行き来するデータの高速で効率的かつ信頼性の高い移動のために設計された MQTT ベースのメッセージングプラットフォームです。MQTT 3.1、3.1.1、5.0 に準拠したブローカーです。
@@ -157,5 +161,5 @@ JMXFetch
 
 
 [1]: https://www.hivemq.com/hivemq/
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/help

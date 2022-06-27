@@ -8,17 +8,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md
 display_name: Linux proc extras
 draft: false
 git_integration_title: linux_proc_extras
 guid: 47f243d7-5df4-47b5-9f1a-923b4f7cefe7
 integration_id: system
 integration_title: Linux Proc Extras
+integration_version: 2.3.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -26,12 +27,15 @@ manifest_version: 1.0.0
 metric_prefix: system.
 metric_to_check: system.inodes.total
 name: linux_proc_extras
-public_title: "Intégration Datadog/Linux\_Proc\_Extras"
+public_title: Intégration Datadog/Linux Proc Extras
 short_description: Visualiser et surveiller les états de linux_proc_extras.
 support: core
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques du service linux_proc_extras en temps réel pour :

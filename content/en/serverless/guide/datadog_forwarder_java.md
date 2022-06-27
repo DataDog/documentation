@@ -1,5 +1,5 @@
 ---
-title: Using the Datadog Forwarder - Java
+title: Instrumenting Java Serverless Applications Using the Datadog Forwarder
 kind: guide
 ---
 ## Overview

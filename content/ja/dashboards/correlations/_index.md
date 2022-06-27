@@ -1,29 +1,30 @@
 ---
-title: Metric Correlations
-kind: documentation
 aliases:
-  - /ja/graphing/correlations/
+- /ja/graphing/correlations/
 further_reading:
-  - link: /dashboards/
-    tag: ドキュメント
-    text: Datadog ダッシュボード
-  - link: /notebooks/
-    tag: ドキュメント
-    text: Datadog ノートブック
-  - link: /tracing/visualization/service/
-    tag: ドキュメント
-    text: APM サービス詳細画面
-  - link: /watchdog/
-    tag: ドキュメント
-    text: Watchdog
+- link: /dashboards/
+  tag: ドキュメント
+  text: Datadog ダッシュボード
+- link: /notebooks/
+  tag: ドキュメント
+  text: Datadog ノートブック
+- link: /tracing/visualization/service/
+  tag: ドキュメント
+  text: APM サービス詳細画面
+- link: /watchdog/
+  tag: ドキュメント
+  text: Watchdog
+kind: documentation
+title: Metric Correlations
 ---
+
 ## 概要
 
 Metric Correlations は、検出した問題の潜在的な根本原因を突き止める際に、同じ時間帯に不規則な挙動を示した他のメトリクスを検索することでその作業を支援します。ダッシュボード、インテグレーション、APM、カスタムメトリクスなど、さまざまなソースからのメトリクスをスキャンします。
 
 ## 検索
 
-メトリクスの相関性の探索は、任意のダッシュボード、ノートブック、APM、Watchdog ストーリー、モニターステータスページから開始できます。
+メトリクス相関の探索は、任意のダッシュボード、ノートブック、APM、Watchdog アラート、またはモニターステータスページから開始できます。
 
 * 任意のグラフを左クリックし、**Find correlated metrics** を選択します。
 * グラフを全画面表示にして、**Correlations** タブをクリックします。

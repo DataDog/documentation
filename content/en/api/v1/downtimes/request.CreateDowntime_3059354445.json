@@ -9,5 +9,6 @@
   ],
   "start": 1636629071,
   "end": 1636632671,
-  "timezone": "Etc/UTC"
+  "timezone": "Etc/UTC",
+  "mute_first_recovery_notification": true
 }

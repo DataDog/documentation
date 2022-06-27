@@ -1,19 +1,29 @@
 ---
-title: Log Management
-kind: Documentation
-description: Configurez votre Agent Datadog pour rassembler les logs de votre host, de vos conteneurs et de vos services.
-disable_sidebar: true
 aliases:
-  - /fr/guides/logs/
-  - /fr/logs/logging_without_limits
+- /fr/guides/logs/
+- /fr/logs/logging_without_limits
+description: Configurez votre Agent Datadog pour rassembler les logs de votre host,
+  de vos conteneurs et de vos services.
+disable_sidebar: true
 further_reading:
-  - link: /logs/log_collection/
-    tag: Documentation
-    text: Commencer à recueillir vos logs
-  - link: https://learn.datadoghq.com
-    tag: Centre d'apprentissage
-    text: "Découvrir le fonctionnement de la solution Log\_Management de Datadog"
+- link: https://app.datadoghq.com/release-notes?category=Log%20Management
+  tag: Notes de version
+  text: Découvrez les dernières versions de la solution Log Management Datadog (connexion
+    à l'application requise).
+- link: /logs/log_collection/
+  tag: Documentation
+  text: Commencer à recueillir vos logs
+- link: https://learn.datadoghq.com
+  tag: Centre d'apprentissage
+  text: Découvrir le fonctionnement de la solution Log Management de Datadog
+- link: https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/
+  tag: Blog
+  text: Des enquêtes plus rapides sur les incidents avec la détection des anomalies
+    des logs
+kind: Documentation
+title: Log Management
 ---
+
 ## Présentation
 
 Pour veiller à l'intégrité de votre infrastructure, il est crucial d'enregistrer des logs à propos des principales opérations de votre système. Les infrastructures modernes peuvent générer toutes les minutes des milliers d'événements. Vous devez donc déterminer les types de logs à envoyer à une solution de gestion de logs, et les types de logs à archiver. Tout filtrage de vos logs peut entraîner un traitement non exhaustif ou la perte de données importantes.

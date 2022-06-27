@@ -26,7 +26,7 @@ Customize your log collection configuration:
 * [Aggregate multi-line logs](#multi-line-aggregation)
 * [Copy commonly used examples](#commonly-used-log-processing-rules)
 * [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
-* [Specify log file encodings](#logfile-encodings)
+* [Specify log file encodings](#log-file-encodings)
 * [Define global processing rules](#global-processing-rules)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
@@ -650,7 +650,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://golang.org/pkg/regexp/syntax/
-[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195
+[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 [3]: /agent/faq/commonly-used-log-processing-rules
 [4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [5]: /agent/guide/agent-commands/#agent-information

@@ -1,30 +1,31 @@
 ---
-title: Collecte de logs avec Docker
-kind: documentation
 aliases:
-  - /fr/logs/docker
-  - /fr/logs/languages/docker
-  - /fr/logs/log_collection/docker
+- /fr/logs/docker
+- /fr/logs/languages/docker
+- /fr/logs/log_collection/docker
 further_reading:
-  - link: logs/explorer
-    tag: Documentation
-    text: Apprendre à explorer vos logs
-  - link: /agent/docker/apm/
-    tag: Documentation
-    text: Recueillir les traces de votre application
-  - link: /agent/docker/prometheus/
-    tag: Documentation
-    text: Recueillir vos métriques Prometheus
-  - link: /agent/docker/integrations/
-    tag: Documentation
-    text: Recueillir automatiquement les métriques et les logs de vos applications
-  - link: /agent/guide/autodiscovery-management/
-    tag: Documentation
-    text: Limiter la collecte de données à un sous-ensemble de conteneurs
-  - link: /agent/docker/tag/
-    tag: Documentation
-    text: Attribuer des tags à toutes les données envoyées par un conteneur
+- link: logs/explorer
+  tag: Documentation
+  text: Apprendre à explorer vos logs
+- link: /agent/docker/apm/
+  tag: Documentation
+  text: Recueillir les traces de votre application
+- link: /agent/docker/prometheus/
+  tag: Documentation
+  text: Recueillir vos métriques Prometheus
+- link: /agent/docker/integrations/
+  tag: Documentation
+  text: Recueillir automatiquement les métriques et les logs de vos applications
+- link: /agent/guide/autodiscovery-management/
+  tag: Documentation
+  text: Limiter la collecte de données à un sous-ensemble de conteneurs
+- link: /agent/docker/tag/
+  tag: Documentation
+  text: Attribuer des tags à toutes les données envoyées par un conteneur
+kind: documentation
+title: Collecte de logs avec Docker
 ---
+
 ## Présentation
 
 L'Agent Datadog 6 (et ses versions ultérieures) recueille des logs à partir des conteneurs. Deux types d'installation sont disponibles :
@@ -42,14 +43,16 @@ La configuration de la collecte de logs dépend de votre environnement actuel. C
 {{< tabs >}}
 {{% tab "Installation de l'Agent conteneurisé" %}}
 
-Afin de lancer un [conteneur Docker][1] qui intègre l'Agent Datadog pour surveiller votre host, utilisez la commande suivante :
+Pour exécuter un [conteneur Docker][1] qui intègre l'Agent Datadog de façon à surveiller votre host, utilisez la commande suivante pour votre système d'exploitation respectif :
+
+### Linux
 
 ```shell
 docker run -d --name datadog-agent \
+           --cgroupns host \
            -e DD_API_KEY=<CLÉ_API_DATADOG> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
@@ -59,17 +62,35 @@ docker run -d --name datadog-agent \
            gcr.io/datadoghq/agent:latest
 ```
 
-**Remarque** : sur les systèmes Windows, exécutez cette commande sans aucun montage de volume. Exemple :
+### Windows
 
 ```shell
 docker run -d --name datadog-agent \
+           --cgroupns host \
+           -e DD_API_KEY=<CLÉ_API_DATADOG> \
+           -e DD_LOGS_ENABLED=true \
+           -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
+           -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
+           gcr.io/datadoghq/agent:latest
+```
+
+### macOS
+
+Ajoutez le chemin `/opt/datadog-agent/run` sous Docker Desktop -> Settings -> Resources -> File sharing.
+
+```shell
+docker run -d --name datadog-agent \
+           --cgroupns host \
            -e DD_API_KEY=<CLÉ_API_DATADOG> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
-           -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
+           -v /var/run/docker.sock:/var/run/docker.sock:ro \
+           -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
+           -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            gcr.io/datadoghq/agent:latest
 ```
 
@@ -82,9 +103,6 @@ Voici les commandes associées à la collecte de logs :
 
 `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`                
 : Ajoute une configuration de log qui active la collecte de logs pour tous les conteneurs.
-
-`-e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true`            
-: Ajoute une configuration de log qui active la collecte des logs de conteneur Docker depuis un fichier. Disponible pour les versions 7.27.0/6.27.0+ de l'Agent Datadog. Consultez la [section dédiée](#collecte-de-logs-de-conteneur-docker-depuis-un-fichier) pour en savoir plus.
 
 `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         
 : Pour éviter de perdre des logs de conteneur lors des redémarrages ou des problèmes de réseau, la dernière ligne de log recueillie pour chaque conteneur dans ce répertoire est stockée sur le host.
@@ -141,6 +159,8 @@ Voici les commandes associées à la collecte de logs :
 
 3. [Redémarrez l'Agent][4]pour afficher tous vos logs de conteneur dans Datadog.
 
+**Remarque** : pour que l'Agent puisse recueillir les logs générés par un conteneur avec une configuration de log personnalisée, les logs doivent être écrits sur un volume accessible depuis le host. Il est conseillé d'écrire les logs de conteneur dans `stdout` et `stderr` afin de pouvoir les recueillir automatiquement.
+
 [1]: /fr/agent/basic_agent_usage/
 [2]: /fr/agent/logs/#custom-log-collection
 [3]: /fr/agent/guide/agent-configuration-files/
@@ -157,17 +177,6 @@ Voici les commandes associées à la collecte de logs :
 - Les logs qui proviennent du `Stderr` du conteneur possèdent par défaut le statut `Error`.
 
 - Si vous utilisez le pilote de journalisation _journald_ à la place du pilote json-file par défaut de Docker, consultez la [documentation relative à l'intégration de journald][2] pour obtenir des instructions de configuration spécifiques aux environnements conteneurisés. Consultez la [documentation sur les unités de filtrage journald][2] pour en savoir plus sur les paramètres de filtrage.
-
-## Collecte de logs de conteneur Docker depuis un fichier
-
-Avec l'Agent Datadog 7.27.0/6.27.0+, les logs de conteneur Docker peuvent être recueillis depuis un fichier. Cette méthode permet d'éviter d'utiliser le socket Docker. Elle est plus efficace et peut être utilisée dès que le répertoire stockant les logs de conteneur Docker est exposé à l'Agent à l'emplacement suivant : `/var/lib/docker/containers` (`c:\programdata\docker\containers` sous Windows). 
-
-**Remarques importantes** :
-
-- Lorsque vous passez d'une collecte basée sur le socket Docker à une collecte basée sur un fichier, seuls les nouveaux conteneurs sont suivis à partir du fichier. Si besoin, vous pouvez faire en sorte que l'Agent recueille tous les logs de conteneur à partir du fichier, en définissant la variable d'environnement `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` sur `true`. Avec cette solution, il est possible que des logs soient dupliqués pour les conteneurs dont certains logs avaient déjà été recueillis.
-
-- Si un Agent repasse à une approche basée sur le socket Docker, il se peut que les logs des conteneurs existants se dupliquent.
-
 
 
 ## Intégrations de log
@@ -213,7 +222,7 @@ Lorsque `<CONFIG_LOGS>` correspond à la configuration de collecte de logs, vous
 
 **Remarque** : lorsque vous configurez la valeur `service` via les étiquettes Docker, Datadog vous conseille d'utiliser le tagging de service unifié. Cette approche permet de lier toutes les données de télémétrie Datadog entre elles, y compris les logs, via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la [documentation dédiée][6].
 
-### Scénarios
+### Exemples
 
 {{< tabs >}}
 {{% tab "Dockerfile NGINX" %}}
@@ -299,6 +308,18 @@ Utilisez des étiquettes de log Autodiscovery afin d'appliquer une logique de tr
 - [Filtrer les logs avant de les envoyer à Datadog][7]
 - [Nettoyer les données sensibles de vos logs][8]
 - [Effectuer une agrégation multiligne][9]
+
+## Collecte de logs de conteneur Docker depuis un fichier
+
+Plutôt que de recueillir vos logs sur le socket Docker, vous pouvez choisir de les recueillir depuis un fichier. Cette alternative offre de meilleures performances.
+
+Vous pouvez configurer l'Agent 7.27.0/6.27.0 et ses versions ultérieures afin de recueillir des logs de conteneur Docker depuis un fichier. Depuis les versions 6.33.0/7.33.0, cette méthode de collecte est configurée par défaut.
+
+Pour pouvoir recueillir des logs de conteneur Docker depuis un fichier, le répertoire de stockage des logs doit être exposé à l'Agent à l'emplacement suivant : `/var/lib/docker/containers` (`c:\programdata\docker\containers` sous Windows). Consultez le [guide de dépannage pour la collecte de logs avec Docker][12] pour en savoir plus.
+
+**Remarques** :
+- Lorsque vous passez d'une collecte basée sur le socket Docker à une collecte basée sur un fichier, seuls les nouveaux conteneurs sont suivis à partir de leur fichier. Pour faire en sorte que l'Agent recueille les logs de tous les conteneurs depuis des fichiers, définissez la variable d'environnement `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` sur `true`. Cette configuration peut entraîner la duplication des logs des conteneurs existants.
+- Si vous repassez à une collecte de logs sur le socket Docker, il est probable que des logs soient dupliqués pour les conteneurs existants.
 
 ## Filtrer les conteneurs
 

@@ -2,9 +2,12 @@
 title: Getting Started with Logs
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=15'
+    - link: 'https://learn.datadoghq.com/enrol/index.php?id=40'
       tag: 'Learning Center'
-      text: 'Introduction to Logs in Datadog'
+      text: 'Introduction to Log Management'
+    - link: 'https://learn.datadoghq.com/enrol/index.php?id=36'
+      tag: 'Learning Center'
+      text: 'Going Deeper with Logs: Processing'
     - link: '/logs/log_collection/'
       tag: 'Documentation'
       text: 'Log Collection & Integrations'

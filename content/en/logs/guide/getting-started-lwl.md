@@ -64,7 +64,7 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 3. The Log Index Configuration page opens in a new tab with a pre-filled exclusion filter for the index where the majority of the logs for that pattern show up.
 4. The exclusion filter is populated with an automatically generated search query associated with the pattern. Input the filter name and set an exclusion percentage and then save the new exclusion filter.
 
-{{< img src="logs/guide/getting-started-lwl/exclusion_filter.mp4" alt="Exclusion Filter" video=true style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/exclusion_filter_new.mp4" alt="Exclusion Filter" video=true style="width:100%;">}}
 
 **Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 

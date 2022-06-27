@@ -1,131 +1,34 @@
 ---
-title: イベントストリームウィジェット
-kind: documentation
-description: イベントストリームからイベントを絞り込んで表示する
 aliases:
-  - /ja/graphing/widgets/event_stream/
+- /ja/graphing/widgets/event_stream/
+description: イベントストリームからイベントを絞り込んで表示する
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: イベントストリームウィジェット
 ---
-{{< site-region region="us" >}}
 
-イベントストリームは、[イベントストリームビュー][1]に表示されるイベントストリームのウィジェット版です。
+イベントストリームは、[Event Explorer ビュー][1]に表示されるイベントストリームのウィジェット版です。
 
-注: **このウィジェットには、直近の 100 イベントだけが表示されます**。
-
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="イベントストリーム" >}}
-
-## セットアップ
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="イベントストリームのセットアップ"  style="width:80%;">}}
-
-### コンフィギュレーション
-
-1. [検索クエリ][1]を入力して、イベントストリームを絞り込みます。
-2. スクリーンボードの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、スクリーンボードのグローバルタイムフレームを持つかを選択します。
-3. Size パラメーターを使用して、イベントタイトルのみを表示するか、イベント本文全体を表示するかを選択します。
-
-### オプション
-
-#### タイトル
-
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
-
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル"  style="width:80%;">}}
-
-オプションで、サイズと配置を定義できます。
-
-## API
-
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
-
-イベントストリームウィジェット専用の[ウィジェット JSON スキーマ定義][3]は次のとおりです。
-
-[1]: /ja/events/
-[2]: /ja/api/v1/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
-[4]: /ja/events/#event-explorer
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-イベントストリームは、[イベントストリームビュー][1]に表示されるイベントストリームのウィジェット版です。
-
-注: **このウィジェットには、直近の 100 イベントだけが表示されます**。
-
-{{< img src="dashboards/widgets/event_stream/event_stream.png" alt="イベントストリーム" >}}
-
-## セットアップ
-
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="イベントストリームのセットアップ"  style="width:80%;">}}
-
-### コンフィギュレーション
-
-1. [検索クエリ][1]を入力して、イベントストリームを絞り込みます。
-2. スクリーンボードの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、スクリーンボードのグローバルタイムフレームを持つかを選択します。
-3. Size パラメーターを使用して、イベントタイトルのみを表示するか、イベント本文全体を表示するかを選択します。
-
-### オプション
-
-#### タイトル
-
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
-
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル"  style="width:80%;">}}
-
-オプションで、サイズと配置を定義できます。
-
-## API
-
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
-
-イベントストリームウィジェット専用の[ウィジェット JSON スキーマ定義][3]は次のとおりです。
-
-[1]: /ja/events/
-[2]: /ja/api/v1/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
-[4]: /ja/events/#event-explorer
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-イベントストリームは、[Event Explorer ビュー][4]に表示されるイベントストリームのウィジェット版です。
+**注**: このウィジェットには、直近の 100 イベントだけが表示されます。
 
 ## セットアップ
 
 ### コンフィギュレーション
 
-1. [検索クエリ][4]を入力して、イベントストリームを絞り込みます。
+1. [検索クエリ][2]を入力して、イベントストリームを絞り込みます。
 2. スクリーンボードの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、スクリーンボードのグローバルタイムフレームを持つかを選択します。
 3. Size パラメーターを使用して、イベントタイトルのみを表示するか、イベント本文全体を表示するかを選択します。
-
-### オプション
-
-#### タイトル
-
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
-
-オプションで、サイズと配置を定義できます。
+4. グラフにタイトルをつけます。
+5. **Done** ボタンをクリックします。
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
+このウィジェットは、[Dashboards API][3] で使用することができます。
 
-イベントストリームウィジェット専用の[ウィジェット JSON スキーマ定義][3]は次のとおりです。
-
-[1]: /ja/events/
-[2]: /ja/api/v1/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
-[4]: /ja/events/#event-explorer
-
-{{< /site-region >}}
+イベントストリームウィジェット専用の[ウィジェット JSON スキーマ定義][4]は次に従います。
 
 {{< dashboards-widgets-api >}}
 
@@ -134,6 +37,6 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/events/
-[2]: /ja/api/v1/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
-[4]: /ja/events/#event-explorer
+[2]: /ja/events/explorer/#search-syntax
+[3]: /ja/api/latest/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

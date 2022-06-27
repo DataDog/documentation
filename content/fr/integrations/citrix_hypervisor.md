@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/xenserver
+- /fr/xenserver
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -14,19 +14,19 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - cloud
-  - log collection
+- cloud
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/README.md
-display_name: "Citrix\_Hypervisor"
+- https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/README.md
+display_name: Citrix Hypervisor
 draft: false
 git_integration_title: citrix_hypervisor
 guid: d6c1911b-f7fd-4537-af4f-1aa40dae40c2
 integration_id: citrix-hypervisor
-integration_title: "Citrix\_Hypervisor"
-integration_version: 2.0.0
+integration_title: Citrix Hypervisor
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -34,14 +34,17 @@ manifest_version: 1.0.0
 metric_prefix: citrix_hypervisor.
 metric_to_check: citrix_hypervisor.host.cpu
 name: citrix_hypervisor
-public_title: "Citrix\_Hypervisor"
-short_description: "Surveillez les performances et la santé d'un host Citrix\_Hypervisor."
+public_title: Citrix Hypervisor
+short_description: Surveillez les performances et la santé d'un host Citrix Hypervisor.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check surveille [Citrix Hypervisor][1] avec l'Agent Datadog.

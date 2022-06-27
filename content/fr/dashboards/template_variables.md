@@ -100,8 +100,6 @@ tags:<CLÉ_TAG>:$<NOM_TEMPLATE_VARIABLE>.value
 
 Par exemple, si vous recherchez `tags:region:$region.value` et que la valeur sélectionnée pour la template variable `region` est `us-east1`, vous obtenez les événements associés au tag `region:us-east1`. Les barres roses sur les graphiques indiquent à quel moment les événements se sont produits.
 
-{{< img src="dashboards/template_variables/search_dashboard.png" alt="Rechercher depuis un dashboard" style="width:85%;">}}
-
 Utilisez des virgules pour effectuer une recherche à partir de plusieurs template variables. Exemple : `tags:role:$role.value,env:$env.value`
 
 **Remarque** : après avoir validé votre recherche avec *Entrée*, `$region.value` est remplacé par la valeur sélectionnée dans le menu déroulant de la template variable.
@@ -114,9 +112,7 @@ Depuis un widget, utilisez les template variables pour visualiser à quel moment
 tags:$<NOM_TEMPLATE_VARIABLE>
 ```
 
-Par exemple, essayez d'entrer `tags:$region` dans la barre de recherche d'événements à superposer. Vous obtenez les événements correspondant à la valeur sélectionnée dans le menu déroulant de la template variable `region` :
-
-{{< img src="dashboards/template_variables/search_widget.png" alt="Rechercher depuis un widget" style="width:85%;">}}
+Par exemple, essayez d'entrer `tags:$region` dans la barre de recherche d'événements à superposer. Vous obtenez les événements correspondant à la valeur sélectionnée dans le menu déroulant de la template variable `region`.
 
 ## Pour aller plus loin
 

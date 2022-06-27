@@ -37,7 +37,7 @@ manifest_version: 2.0.0
 name: pagerduty_ui
 oauth: {}
 public_title: Interface PagerDuty
-short_description: Surveiller des services PagerDuty et interagir avec des incidents directement depuis un dashboard Datadog
+short_description: Surveiller vos incidents PagerDuty depuis votre dashboard Datadog
 supported_os:
   - linux
   - mac os
@@ -45,7 +45,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   configuration: README.md#Setup
-  description: Surveiller des services PagerDuty et interagir avec des incidents directement depuis un dashboard Datadog
+  description: Surveiller vos incidents PagerDuty depuis votre dashboard Datadog
   media:
     - caption: Page d'accueil
       image_url: images/landing_page.png
@@ -65,7 +65,7 @@ tile:
 ---
 ## Présentation
 
-PagerDuty est une plateforme de gestion des opérations en temps réel qui traite, analyse et achemine en continu des données. Ce système agit en tant que centre d'agrégation pour les données provenant de différents outils de surveillance. PagerDuty vous offre une vue d'ensemble de l'état de vos opérations. Grâce à PagerDuty, les utilisateurs Datadog peuvent gérer plus efficacement les incidents, tout en bénéficiant d'une visibilité et d'une responsabilisation accrues tout au long du cycle de vie des incidents. PagerDuty propose deux nouvelles applications afin que vous puissiez tirer pleinement profit de sa plateforme de gestion des opérations en temps réel où que vous soyez, sans avoir à changer d'outil. Ajoutez directement à vos dashboards les nouveaux widgets, à savoir Status Dashboard de PagerDuty et Incidents de PagerDuty. Vous pourrez ainsi consulter en temps réel le statut de vos services et réagir rapidement en cas d'incident urgent en prenant des mesures directement depuis Datadog.
+PagerDuty est une plateforme de gestion des opérations en temps réel qui traite, analyse et achemine en continu des données. Ce système agit en tant que centre d'agrégation pour les données provenant de différents outils de surveillance. PagerDuty vous offre une vue d'ensemble de l'état de vos opérations. Grâce à PagerDuty, les utilisateurs Datadog peuvent gérer plus efficacement les incidents, tout en bénéficiant d'une visibilité et d'une responsabilisation accrues tout au long du cycle de vie des incidents. PagerDuty propose deux nouvelles applications afin que vous puissiez tirer pleinement profit de sa plateforme de gestion des opérations en temps réel où que vous soyez, sans avoir à changer d'outil. Ajoutez directement à vos dashboards les nouveaux widgets, à savoir Status Dashboard de PagerDuty et Incidents de PagerDuty. Vous pourrez ainsi consulter en temps réel le statut de vos services et réagir rapidement en cas d'incident urgent en prenant des mesures en temps réel, directement depuis Datadog.
 
 ### Status Dashboard de PagerDuty
 
@@ -84,7 +84,7 @@ Le widget Status Dashboard de PagerDuty fournit une vue partagée qui représent
 
 ### Incidents de PagerDuty
 
-Le widget Incidents de PagerDuty vous permet de prendre des mesures directement depuis l'interface Datadog. Vous bénéficiez ainsi d'informations détaillées sur tous les incidents en cours dans PagerDuty. De plus, grâce à la navigation fluide vers PagerDuty, vous pouvez consulter les incidents et les résoudre sans perdre la moindre information de contexte.
+Le widget Incidents de PagerDuty vous permet de prendre des mesures directement depuis l'interface Datadog. Vous bénéficiez d'informations détaillées sur tous les incidents en cours dans PagerDuty. De plus, grâce à la navigation fluide vers PagerDuty, vous pouvez consulter les incidents et les résoudre sans perdre la moindre information de contexte.
 
 #### Principales fonctionnalités
 - Vos équipes peuvent consulter jusqu'à 20 incidents actifs et urgents.

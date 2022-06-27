@@ -1,26 +1,27 @@
 ---
-title: ダッシュボードの概要
-kind: ドキュメント
 further_reading:
-  - link: https://www.datadoghq.com/blog/dashboard-sharing/
-    tag: ブログ
-    text: ダッシュボードを組織外の人と安全に共有する
-  - link: https://www.datadoghq.com/blog/template-variable-associated-values/
-    tag: ブログ
-    text: 関連するテンプレート変数を使用してダッシュボードを調整
-  - link: https://learn.datadoghq.com/enrol/index.php?id=8
-    tag: 学習
-    text: '自分のペースで学べるオンライン学習: ダッシュボードのより効果的な活用'
-  - link: /dashboards/
-    tag: Documentation
-    text: ダッシュボードの基本
-  - link: /notebooks/
-    tag: Documentation
-    text: ノートブックでデータに背景情報を追加
-  - link: /monitors/
-    tag: Documentation
-    text: モニター、SLO、通知、ダウンタイム、インシデント
+- link: https://www.datadoghq.com/blog/dashboard-sharing/
+  tag: ブログ
+  text: ダッシュボードを組織外の人と安全に共有する
+- link: https://www.datadoghq.com/blog/template-variable-associated-values/
+  tag: ブログ
+  text: 関連するテンプレート変数を使用してダッシュボードを調整
+- link: https://learn.datadoghq.com/enrol/index.php?id=8
+  tag: 学習
+  text: '自分のペースで学べるオンライン学習: ダッシュボードのより効果的な活用'
+- link: /dashboards/
+  tag: Documentation
+  text: ダッシュボードの基本
+- link: /notebooks/
+  tag: Documentation
+  text: ノートブックでデータに背景情報を追加
+- link: /monitors/
+  tag: Documentation
+  text: モニター、SLO、通知、ダウンタイム、インシデント
+kind: ドキュメント
+title: ダッシュボードの概要
 ---
+
 ## 概要
 
 ダッシュボードの使用を始める際は、まず定期的に確認したい事項について考えることが重要です。顧客がよく直面する問題や、問題解決のために知るべき項目は何でしょうか。
@@ -118,6 +119,14 @@ Y 軸の範囲、色、凡例を調整またはマーカーやイベントオー
 
 すべてのウィジェットおよびダッシュボードは JSON として表現されるため、[ダッシュボード API][14] を使用してプログラムで生成することができます。これは、たとえばチームが新規プロジェクトを開始、またはインシデントに遭遇、あるいは SLO を正式化するたびにダッシュボードを生成するのに便利です。
 
+### Datadog モバイルアプリからダッシュボードを見る
+
+[Apple App Store][16] と [Google Play Store][17] で入手できる [Datadog モバイルアプリ][15]を使って、モバイルデバイスでダッシュボードを表示することができます。
+
+モバイルアプリでは、Datadog 組織でアクセスできるすべてのダッシュボードを表示および検索し、Datadog ウェブアプリで使用されるのと同じテンプレート変数を使用してフィルタリングすることができます。
+
+{{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS と Android のダッシュボード">}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -136,3 +145,6 @@ Y 軸の範囲、色、凡例を調整またはマーカーやイベントオー
 [12]: https://learn.datadoghq.com/enrol/index.php?id=8
 [13]: /ja/integrations/slack/
 [14]: /ja/api/v1/dashboards/
+[15]: /ja/mobile/
+[16]: https://apps.apple.com/app/datadog/id1391380318
+[17]: https://play.google.com/store/apps/details?id=com.datadog.app

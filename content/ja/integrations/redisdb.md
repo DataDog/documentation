@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/redis/
+- /ja/integrations/redis/
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -18,19 +18,20 @@ assets:
     redis_processes: assets/saved_views/redis_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - caching
-  - log collection
+- data store
+- caching
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md
 display_name: Redis
 draft: false
 git_integration_title: redisdb
 guid: 0e2f3ed1-d36b-47a4-b69c-fedb50adf240
 integration_id: redis
 integration_title: Redis
+integration_version: 4.5.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -39,18 +40,29 @@ metric_prefix: redis.
 metric_to_check: redis.net.clients
 name: redisdb
 process_signatures:
-  - redis-server
+- redis-server
 public_title: Datadog-Redis インテグレーション
 short_description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
-Redis をデータベース、キャッシュ、メッセージキューのどの用途で使用している場合でも、このインテグレーションを使用して、Redis サーバーの問題や、インフラストラクチャーが Redis サーバーを利用している部分の問題を追跡できます。Datadog Agent の Redis チェックは、パフォーマンスに関連するメトリクス、メモリ使用量、クライアントのブロック数、スレーブ接続数、ディスク持続性、キーの期限切れ数とエビクション数など、多数のメトリクスを収集します。
+Redis をデータベース、キャッシュ、メッセージキューとして使用しているかどうかにかかわらず、このインテグレーションは、Redis サーバー、クラウドサービス、およびそれらが提供するインフラストラクチャーの一部の問題を追跡します。Datadog Agent の Redis チェックを使用して、以下に関連するメトリクスを収集します。
+
+- パフォーマンス
+- メモリ使用量
+- ブロックされたクライアント
+- 二次接続
+- ディスクの永続性
+- キーの期限切れとエビクション
+- その他多数
 
 ## セットアップ
 
@@ -92,7 +104,7 @@ Redis チェックは [Datadog Agent][1] パッケージに含まれています
        # password: <PASSWORD>
    ```
 
-2. Redis 6+ および ACL を使用している場合は、ユーザーが少なくともデータベースレベルで `DB  Viewer` 権限を、クラスター環境で実行している場合は `Cluster Viewer` 権限を所有していることを確認します。詳細は、[関連ドキュメント][3]を参照してください。
+2. Redis 6+ と ACL を使用する場合、少なくともデータベースレベルの `DB Viewer` 権限、クラスター環境で運用する場合は `Cluster Viewer` 権限、および `+config|get +info +slowlog|get` ACL ルールが必要であることを確認してください。詳しくは、[データベースアクセス制御][3]を参照してください。
 
 3. [Agent を再起動します][4]。
 
@@ -130,7 +142,7 @@ Datadog APM は、Redis と統合して分散システム全体のトレース�
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[3]: https://docs.redislabs.com/latest/rs/administering/access-control/user-roles/#cluster-management-roles
+[3]: https://docs.redis.com/latest/rs/security/passwords-users-roles/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [6]: https://docs.datadoghq.com/ja/tracing/setup/
@@ -157,7 +169,7 @@ LABEL "com.datadoghq.ad.instances"='[{"host":"%%host%%","port":"6379","password"
 
 _Agent バージョン 6.0 以降で利用可能_
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][4]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][4]を参照してください。
 
 次に、[ログインテグレーション][5]を Docker ラベルとして設定します。
 
@@ -232,7 +244,7 @@ spec:
 
 _Agent バージョン 6.0 以降で利用可能_
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Kubernetes ログ収集のドキュメント][5]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][5]を参照してください。
 
 次に、[ログのインテグレーション][6]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][7]を使用して構成することも可能です。
 
@@ -310,7 +322,7 @@ Agent コンテナで必要な環境変数
 
 _Agent バージョン 6.0 以降で利用可能_
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[ECS ログ収集ドキュメント][4]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][4]を参照してください。
 
 次に、[ログインテグレーション][5]を Docker ラベルとして設定します。
 
@@ -381,7 +393,7 @@ Redis チェックには、イベントは含まれません。
     redisdb
     -------
       - instance #0 [ERROR]: 'Error 111 connecting to localhost:6379. Connection refused.'
-      - Collected 0 metrics, 0 events & 1 service chec
+      - Collected 0 metrics, 0 events & 1 service check
 ```
 
 `redisdb.yaml` 内の接続情報が正しいかどうかをチェックしてください。

@@ -1,11 +1,12 @@
 ---
-title: Enrichir et contrôler les données RUM Browser avec beforeSend
-kind: guide
 further_reading:
-  - link: /real_user_monitoring/explorer
-    tag: Documentation
-    text: Visualiser vos données RUM dans l'Explorer
+- link: /real_user_monitoring/explorer
+  tag: Documentation
+  text: Visualiser vos données RUM dans l'Explorer
+kind: guide
+title: Enrichir et contrôler les données RUM Browser avec beforeSend
 ---
+
 ## Présentation
 
 Le SDK RUM Browser enregistre les événements RUM et renseigne les attributs principaux correspondants. La fonction de rappel `beforeSend` vous permet d'accéder à chaque événement recueilli par le SDK RUM avant qu'il ne soit envoyé à Datadog. L'interception d'événements RUM vous permet d'effectuer les opérations suivantes :
@@ -34,15 +35,15 @@ La propriété `event.type` vous permet d'identifier le type de l'événement :
 
 ### Contexte
 Le contexte rassemble des informations sur les API Browser qui déclenchent la création de l'événement. Les valeurs de contexte varient en fonction du paramètre `event.type` :
-| Type d'événement RUM | Contexte |
-|------------------|---------------------------|
-| Vue | [Emplacement][3] |
-| Action | [Événement][4] |
-| Ressource (XHR) | [XMLHttpRequest][5] et [PerformanceResourceTiming][6] |
-| Ressource (Fetch) | [Requête][7], [réponse][8], et [PerformanceResourceTiming][6] |
-| Ressource (autre) | [PerformanceResourceTiming][6] |
-| Erreur | [Erreur][9] |
-| Tâche longue | [PerformanceLongTaskTiming][10] |
+| Type d'événement RUM       | Contexte                                                         |
+|----------------------|-----------------------------------------------------------------|
+| Vue | [Emplacement][3]                                              |
+| Action               | [Événement][4]                                                      |
+| Ressource (XHR)       | [XMLHttpRequest][5] et [PerformanceResourceTiming][6]          |
+| Ressource (Fetch)     | [Requête][7], [réponse][8] et [PerformanceResourceTiming][6] |
+| Ressource (autre)     | [PerformanceResourceTiming][6]                                  |
+| Erreur                | [Erreur][9] ou toute autre valeur considérée comme une erreur                |
+| Tâche longue            | [PerformanceLongTaskTiming][10]                                 |
 
 Le [référentiel browser-sdk][11] contient plus d'informations sur la structure des objets de contexte.
 

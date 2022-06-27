@@ -1,5 +1,5 @@
 ---
-title: Email Validation with Browser Tests
+title: Email Validation With Browser Tests
 kind: documentation
 description: Verify an email and its content with browser test steps
 further_reading:

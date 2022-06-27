@@ -1,13 +1,14 @@
 ---
-title: Google Cloud SQL マネージド MySQL のデータベースモニタリングの設定
-kind: documentation
 description: Google Cloud SQL で管理される MySQL のデータベースモニタリングをインストールして構成します。
 further_reading:
-  - link: /integrations/mysql/
-    tag: ドキュメント
-    text: 基本的な MySQL インテグレーション
+- link: /integrations/mysql/
+  tag: ドキュメント
+  text: 基本的な MySQL インテグレーション
+kind: documentation
+title: Google Cloud SQL マネージド MySQL のデータベースモニタリングの設定
 ---
-{{< site-region region="us3,us5,gov" >}}
+
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -27,7 +28,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 5.6、5.7、または 8.0+
 
 サポート対象の Agent バージョン
-: 7.30.0+
+: 7.36.1+
 
 パフォーマンスへの影響
 : データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。
@@ -141,7 +142,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### ランタイムセットアップコンシューマー
-Datadogは、ランタイムで `performance_schema.events_statements_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めします。
+Datadogは、ランタイムで `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めします。
 
 ```SQL
 DELIMITER $$
@@ -149,6 +150,7 @@ CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
     UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
@@ -192,7 +194,12 @@ instances:
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>' # 前の CREATE USER ステップから
+    password: '<UNIQUEPASSWORD>' # 先ほどの CREATE USER のステップから
+
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
+    gcp:
+      project_id: '<PROJECT_ID>'
+      instance_id: '<INSTANCE_ID>'
 ```
 
 **注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
@@ -216,7 +223,7 @@ Google Cloud Run などの Docker コンテナで動作するデータベース�
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.30.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -227,7 +234,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<INSTANCE_ADDRESS>",
     "port": 3306,
     "username": "datadog",
-    "password": "<UNIQUEPASSWORD>"
+    "password": "<UNIQUEPASSWORD>",
+    "gcp": {
+      "project_id": "<PROJECT_ID>",
+      "instance_id": "<INSTANCE_ID>"
+    }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
@@ -237,11 +248,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 `Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.30.0
+FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][2]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][3]でパスワードを環境変数として渡す方法をご確認ください。
@@ -275,7 +286,10 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: "<UNIQUEPASSWORD>"
+    gcp:
+      project_id: "<PROJECT_ID>"
+      instance_id: "<INSTANCE_ID>" \
   datadog/datadog
 ```
 
@@ -284,7 +298,7 @@ instances:
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/mysql.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # このフラグを必ず含めてください
+cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true
@@ -292,6 +306,10 @@ instances:
     port: 3306
     username: datadog
     password: '<UNIQUEPASSWORD>'
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
+    gcp:
+      project_id: '<PROJECT_ID>'
+      instance_id: '<INSTANCE_ID>'
 ```
 
 ### Kubernetes サービスアノテーションで構成する
@@ -316,7 +334,11 @@ metadata:
           "host": "<INSTANCE_ADDRESS>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "<UNIQUEPASSWORD>",
+          "gcp": {
+            "project_id": "<PROJECT_ID>",
+            "instance_id": "<INSTANCE_ID>"
+          }
         }
       ]
 spec:

@@ -22,9 +22,39 @@ The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
 - **Postrgres**: `postgresql.queries.*`
 
+## Normalized queries
+
+In order to eliminate redundant information and keep track of performance trends, Database Monitoring groups together identical queries with different parameters by obfuscating the parameters. These query groups are called normalized queries and are sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 200 normalized queries per database host. This process also ensures that no sensitive data leaks into observability tools.
+
+For example, you may see many queries retrieving data from the same table by id:
+
+```sql
+SELECT * FROM customers WHERE id = 13345;
+SELECT * FROM customers WHERE id = 24435;
+SELECT * FROM customers WHERE id = 34322;
+```
+
+These appear together as a normalized query that replaces the parameter with `?`.
+
+```sql
+SELECT * FROM customers WHERE id = ?
+```
+
+Queries with multiple parameters follow the same pattern:
+
+```sql
+SELECT * FROM timeperiods WHERE start >= '2022-01-01' AND end <= '2022-12-31' AND num = 5
+```
+
+The query above with specific parameters becomes the obfuscated version below:
+
+```sql
+SELECT * FROM timeperiods WHERE start >= ? AND end <= ? AND num = ?
+```
+
 ## Sensitive information
 
-The Database Monitoring Agent obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in query metrics, query samples, or explain plans.
+Because Database Monitoring Agent normalizes queries, it obfuscates all query bind parameters sent to the Datadog intake. Thus, passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database are not viewable in query metrics, query samples, or explain plans.
 
 However, there are some common sources of data risks:
 

@@ -4,6 +4,7 @@ kind: guide
 private: true
 aliases:
 - /tracing/getting_further/
+- /tracing/guide/ecommerce_and_retail_use_cases/
 ---
 
 
@@ -23,10 +24,12 @@ aliases:
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}Tracing Application Metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/ddsketch_trace_metrics/" >}}DDSketch Based Metrics in APM{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/send_traces_to_agent_by_api/" >}}Send Traces to the Agent by the Tracing API{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/span_and_trace_id_format" >}}Valid formats of span and trace IDs{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/trace-agent-from-source" >}}Installing the trace Agent from source{{< /nextlink >}}
     {{< nextlink href="/developers/community/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/ingestion_control_page/" >}}Ingestion Control Page v2{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
 
 {{< /whatsnext >}}

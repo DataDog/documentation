@@ -3,12 +3,15 @@ title: Incident Management
 kind: documentation
 description: Create and manage incidents
 further_reading:
-- link: "dashboards/querying/#incident-management-analytics"
-  tag: "Documentation"
-  text: "Incident Management Analytics"
-- link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
-  tag: 'Blog'
-  text: 'Best practices for writing incident postmortems'
+  - link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
+    tag: "Release Notes"
+    text: "Check out the latest Incident Management releases! (App login required)."
+  - link: "dashboards/querying/#incident-management-analytics"
+    tag: "Documentation"
+    text: "Incident Management Analytics"
+  - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
+    tag: 'Blog'
+    text: 'Best practices for writing incident postmortems'
 ---
 
 {{< site-region region="gov" >}}
@@ -61,6 +64,14 @@ You can declare an incident directly from a monitor by clicking **Declare incide
 You can also add a monitor to an existing incident.
 
 {{< img src="monitors/incidents/existing.png" alt="Add a monitor to an existing incident" style="width:80%;">}}
+
+#### From a Security Signal
+
+Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
+
+Declare an incident from an Application Security Monitoring signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
+
+{{< img src="monitors/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
 
 #### From the Incidents page
 

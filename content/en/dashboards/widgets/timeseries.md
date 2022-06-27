@@ -7,15 +7,9 @@ aliases:
     - /dashboards/widgets/network/
     - /graphing/widgets/network/
 further_reading:
-- link: "/dashboards/timeboards/"
-  tag: "Documentation"
-  text: "Timeboards"
-- link: "/dashboards/screenboards/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboard using JSON"
+  text: "Building Dashboards using JSON"
 - link: "https://www.datadoghq.com/blog/full-screen-graphs"
   tag: "Blog"
   text: "Explore your data in full-screen graph mode"
@@ -140,8 +134,8 @@ The dedicated [widget JSON schema definition][12] for the timeseries widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/timeboard/
-[2]: /dashboards/screenboard/
+[1]: /dashboards/#timeboards
+[2]: /dashboards/#screenboards
 [3]: /dashboards/querying/
 [4]: /tracing/app_analytics/search/#search-bar
 [5]: /logs/search_syntax/

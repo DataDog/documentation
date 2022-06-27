@@ -202,7 +202,7 @@ When child spans are concurrent, execution time is calculated by dividing the ov
 [9]: /tracing/manual_instrumentation/
 [10]: /tracing/opentracing/
 [11]: /tracing/connect_logs_and_traces/
-[12]: /tracing/guide/adding_metadata_to_spans/
+[12]: /tracing/guide/add_span_md_and_graph_it/
 [13]: /tracing/runtime_metrics/
 [14]: /tracing/trace_explorer/
 [15]: /tracing/guide/metrics_namespace/

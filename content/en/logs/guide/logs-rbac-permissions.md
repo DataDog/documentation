@@ -199,7 +199,7 @@ For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the f
 
 ### Removed: `logs_public_config_api`
 
-Datadog has removed the `logs_public_config_api` permission. 
+Datadog has removed the `logs_public_config_api` permission.
 
 Five separate permissions control the ability to view, create, or modify log configuration through the Datadog API:
 * [`logs_generate_metrics`](#logs_generate_metrics)
@@ -254,7 +254,7 @@ Create a new restriction query defining its query filter. The new query appears 
 
 Pick the role wherever it stands, and assign it to the intended restriction query.
 
-*Note*: Keep in mind that a role can be assigned no more than one restriction query. Meaning, when you assign a role to a restriction query, it loses connection to the restriction query it was already attached to.
+**Note**: Keep in mind that a role can be assigned no more than one restriction query. Meaning, when you assign a role to a restriction query, it loses connection to the restriction query it was already attached to.
 
 {{< img src="account_management/rbac/logs_rq-assign_roles.mp4" alt="Assign a role to Restriction Query" video=true style="width:70%;">}}
 

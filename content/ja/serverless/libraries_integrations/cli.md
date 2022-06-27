@@ -102,5 +102,5 @@ datadog-ci lambda instrument -f functionname -r us-east-1 -v 10 --dry
 [2]: https://github.com/DataDog/datadog-ci
 [3]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [4]: https://github.com/DataDog/datadog-lambda-layer-python/releases
-[5]: https://docs.datadoghq.com/ja/serverless/datadog_lambda_library/extension
+[5]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys

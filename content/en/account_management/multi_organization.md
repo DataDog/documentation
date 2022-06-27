@@ -40,7 +40,7 @@ The new child-organization inherits the parent-organization's plan and is added 
 
 ### Content
 
-Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][5] and tools such as Terraform, see [Managing Datadog with Terraform][6]. Additionally, scripts can be used to backup existing [dashboards][7] and [monitors][8] as code.
+Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][5] and tools such as Terraform, see [Managing Datadog with Terraform][6]. Additionally, scripts can be used to backup existing dashboards and [monitors][7] as code.
 
 ### Custom sub-domains
 
@@ -121,11 +121,11 @@ On the **Individual Organizations** usage tab, you can view the usage of your ch
 
 The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
-To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
+To view the [Usage Details][8] of a child-organization, you can click on the child-organization's name.
 
 ## Usage attribution
 
-The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
+The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][9] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 
 When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
@@ -157,7 +157,6 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [4]: mailto:success@datadoghq.com
 [5]: /api/
 [6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
-[7]: /dashboards/screenboards/#backup-my-screenboard
-[8]: /monitors/manage/
-[9]: /account_management/billing/usage_details/
-[10]: /account_management/billing/usage_attribution/
+[7]: /monitors/manage/
+[8]: /account_management/billing/usage_details/
+[9]: /account_management/billing/usage_attribution/
