@@ -1,5 +1,5 @@
 ---
-title: Database Monitoring Architecture in Datadog
+title: DBM Setup Architectures
 kind: documentation
 description: Learn about Database Monitoring and get started
 further_reading:

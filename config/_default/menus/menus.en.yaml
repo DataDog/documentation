@@ -1887,7 +1887,7 @@ main:
     pre: database-2
     identifier: dbm
     weight: 160000
-  - name: Architecture
+  - name: Setup Architectures
     url: database_monitoring/architecture/
     parent: dbm
     identifier: dbm_setup_architecture
