@@ -64,9 +64,6 @@ Since graphs are just a series of data points joined by lines, a long period wit
 
 In contrast, a monitor uses a rollup of a time frame to evaluate interpolated values and calculate averages.
 
-### Interpolation is disabled but metrics are dropping to 0 which is not expected
-These artificial dips are caused by front-end visualization enhancement. See the FAQ on [unexpected drops to zero][2] for more details.
-
 ### Choose the interpolation method
 The default interpolation method (which is chosen based on a metric's type) is usually fine, but it is sometimes desirable to override these defaults.
 
@@ -75,4 +72,3 @@ Linear interpolation is a great fit for metrics reported on a steady basis from 
 Null prevents graphs from displaying interpolated values 5 min after the last real value.
 
 [1]: /metrics/types/
-[2]: /dashboards/faq/i-see-unexpected-drops-to-zero-on-my-graph-why/

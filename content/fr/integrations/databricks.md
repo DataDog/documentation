@@ -2,25 +2,32 @@
 assets:
   dashboards:
     Databricks Spark Overview: assets/dashboards/databricks_overview.json
-  logs: {}
+  logs:
+    source: spark
   metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - cloud
-  - collaboration
-  - processing
+- cloud
+- collaboration
+- processing
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/databricks/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/databricks/README.md
 display_name: Databricks
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/databricks-monitoring-datadog/
+  tag: Blog
+  text: Surveiller Databricks avec Datadog
 git_integration_title: databricks
 guid: 3e1c7918-f224-46c6-836f-1169857e2564
 integration_id: databricks
 integration_title: Databricks
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,10 +39,13 @@ public_title: Databricks
 short_description: Surveillez Apache Spark dans vos clusters Databricks.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Surveillez vos clusters [Databricks][1] avec l'[intégration Spark/Datadog][2].
@@ -44,7 +54,7 @@ Surveillez vos clusters [Databricks][1] avec l'[intégration Spark/Datadog][2].
 
 ### Installation
 
-Surveillez vos applications Spark Databricks avec l'[intégration Spark/Datadog][3]. Installez l'Agent Datadog sur vos clusters en suivant les instructions de [configuration](#configuration) correspondant à votre type de cluster.
+Surveillez vos applications Spark Databricks avec l'[intégration Datadog/Spark][3]. Installez l'[Agent Datadog][4] sur vos clusters en suivant les instructions de [configuration](#configuration) correspondant à votre type de cluster.
 
 ### Configuration
 
@@ -52,8 +62,8 @@ Configurez l'intégration Spark de façon à surveiller votre cluster Apache Sp
 
 1. Identifiez parmi les scripts init ci-dessous celui qui convient le mieux à l'environnement de votre cluster Databricks.
 
-2. Copiez et exécutez le contenu dans un notebook. Ce dernier créera un script init afin d'installer un Agent Datadog sur vos clusters.
-    Il suffit d'exécuter le notebook une seule fois pour enregistrer le script comme configuration globale. Pour en savoir plus sur les scripts init Datadog Databricks, consultez [cette page][3].
+2. Copiez et exécutez le contenu dans un notebook. Ce dernier crée un script init afin d'installer un Agent Datadog sur vos clusters.
+    Il suffit d'exécuter le notebook une seule fois pour enregistrer le script comme configuration globale. Pour en savoir plus sur les scripts init Datadog Databricks, consultez la section [Surveillance des clusters Apache Spark avec Databricks et Datadog][3] (en anglais).
     - Définissez le chemin `<init-script-folder>` sur l'emplacement où vous souhaitez enregistrer les scripts init.
 
 3. Configurez un nouveau cluster Databricks avec le nouveau chemin du script init. Pour ce faire, vous pouvez utiliser l'IU ou l'interface de ligne de commande Datadog, ou encore transmettre des appels à l'API Clusters.
@@ -89,7 +99,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:driver"
 
   # INSTALLER LA DERNIÈRE VERSION DE L'AGENT DATADOG 7
-  DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=DD_TAGS bash -c "\$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+  DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 
   # ATTENDRE QUE L'AGENT DATADOG SOIT INSTALLÉ
   while [ -z \$datadoginstalled ]; do
@@ -126,7 +136,7 @@ instances:
 logs:
     - type: file
       path: /databricks/driver/logs/*.log
-      source: databricks
+      source: spark
       service: databricks
       log_processing_rules:
         - type: multi_line
@@ -195,7 +205,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     sleep 2
   done
 
-  # ÉCRIRE LE FICHIER DE CONFIGURATION POUR L'INTÉGRATION SPARK AVEC LES MÉTRIQUES STRUCTURED STREAMING ACTIVÉES ET LA CONFIGURATION DES LOGS
+  # ÉCRIRE LE FICHIER DE CONFIGURATION POUR L'INTÉGRATION SPARK AVEC LES MÉTRIQUES STRUCTURED STREAMING ACTIVÉES
   # MODIFIER CE QUI SUIT POUR INCLURE D'AUTRES OPTIONS DE spark.d/conf.yaml.example
   echo "init_config:
 instances:
@@ -206,7 +216,7 @@ instances:
 logs:
     - type: file
       path: /databricks/driver/logs/*.log
-      source: databricks
+      source: spark
       service: databricks
       log_processing_rules:
         - type: multi_line
@@ -236,7 +246,7 @@ chmod a+x /tmp/start_datadog.sh
 {{< /tabs >}}
 
 #### Cluster de tâches
-Une fois le script `datadog-install-job-driver-mode.sh` créé, ajoutez le chemin du script init sur la [page de configuration du cluster][4].
+Une fois le script `datadog-install-job-driver-mode.sh` créé, ajoutez le chemin du script init sur la [page de configuration du cluster][5].
 
 **Remarque** : les clusters de tâches sont surveillés en mode `spark_driver_mode` avec le port de l'interface Spark.
 
@@ -293,7 +303,7 @@ instances:
 logs:
     - type: file
       path: /databricks/driver/logs/*.log
-      source: databricks
+      source: spark
       service: databricks
       log_processing_rules:
         - type: multi_line
@@ -318,18 +328,18 @@ fi
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `spark` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `spark` dans la section Checks.
 
 ## Données collectées
 
 ### Métriques
 
-Consultez la [documentation sur l'intégration Spark][6] pour découvrir la liste des métriques recueillies.
+Consultez la [documentation sur l'intégration Spark][7] pour découvrir la liste des métriques recueillies.
 
 
 ### Checks de service
 
-Consultez la [documentation sur l'intégration Spark][6] pour découvrir la liste des checks de service recueillis.
+Consultez la [documentation sur l'intégration Spark][8] pour découvrir la liste des checks de service recueillis.
 
 ### Événements
 
@@ -337,14 +347,19 @@ L'intégration Databricks n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://databricks.com/
 [2]: https://docs.datadoghq.com/fr/integrations/spark/?tab=host
 [3]: https://databricks.com/blog/2017/06/01/apache-spark-cluster-monitoring-with-databricks-and-datadog.html
-[4]: https://docs.databricks.com/clusters/init-scripts.html#configure-a-cluster-scoped-init-script-using-the-ui
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/integrations/spark/#metrics
-[7]: https://docs.datadoghq.com/fr/integrations/spark/#service-checks
-[8]: https://docs.datadoghq.com/fr/help/
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: https://docs.databricks.com/clusters/init-scripts.html#configure-a-cluster-scoped-init-script-using-the-ui
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?#agent-status-and-information
+[7]: https://docs.datadoghq.com/fr/integrations/spark/#metrics
+[8]: https://docs.datadoghq.com/fr/integrations/spark/#service-checks
+[9]: https://docs.datadoghq.com/fr/help/

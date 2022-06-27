@@ -1,16 +1,17 @@
 ---
-title: Guides sur les événements
-kind: documentation
-further_reading:
-  - link: /events/explorer/
-    tag: Documentation
-    text: "Events\_Explorer Datadog"
-  - link: /monitors/create/types/event/
-    tag: Documentation
-    text: Monitors d'événement
 aliases:
-  - /fr/developers/events/
+- /fr/developers/events/
+further_reading:
+- link: /events/explorer/
+  tag: Documentation
+  text: Events Explorer Datadog
+- link: /monitors/create/types/event/
+  tag: Documentation
+  text: Monitors d'événement
+kind: documentation
+title: Guides sur les événements
 ---
+
 Un événement représente n'importe quelle activité pouvant s'avérer pertinente pour les équipes d'ingénierie (dev, ops et sécurité).
 
 {{< whatsnext desc="Il existe plusieurs façons d'envoyer des événements à Datadog :">}}

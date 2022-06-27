@@ -4,8 +4,10 @@ kind: documentation
 further_reading:
     - link: '/real_user_monitoring/explorer'
       tag: 'Documentation'
-      text: 'Explore your views within Datadog'
+      text: 'Learn about the RUM Explorer'
 ---
+
+## Overview
 
 The errors dashboard provides insights about your applications’ errors. It is separated in two sections:
 
@@ -16,7 +18,7 @@ The errors dashboard provides insights about your applications’ errors. It is 
 
 {{< img src="real_user_monitoring/dashboards/errors_dashboard.png" alt="Error Dashboard" >}}
 
-For more information about the information displayed, check the [RUM Data Collected documentation][1]
+For more information about the information displayed, see [RUM Browser Data Collected][1].
 
 ## Further Reading
 

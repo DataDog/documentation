@@ -9,20 +9,21 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - caching
-  - log collection
-  - autodiscovery
+- web
+- caching
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/squid/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/squid/README.md
 display_name: Squid
 draft: false
 git_integration_title: squid
 guid: e7d4b233-b32a-46f9-8cb2-c582ee8fd251
 integration_id: squid
 integration_title: Squid
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -34,10 +35,13 @@ public_title: Intégration Datadog/Squid
 short_description: Surveillez les métriques de vos serveurs squid-cache avec Datadog
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller les métriques [Squid][1] issues du Cache Manager avec l'Agent Datadog.
@@ -65,7 +69,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -111,7 +115,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
@@ -139,13 +143,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Le check Squid n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "squid" >}}
 
-**squid.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Squid pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
+
 
 
 [1]: http://www.squid-cache.org/

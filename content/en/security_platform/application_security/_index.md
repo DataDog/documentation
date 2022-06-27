@@ -2,7 +2,6 @@
 title: Application Security Monitoring
 kind: documentation
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
-is_beta: true
 disable_sidebar: true
 further_reading:
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
@@ -14,15 +13,14 @@ further_reading:
 - link: "/security_platform/guide/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Monitoring Works in Datadog"
+- link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
+  tag: "Product Page"
+  text: "Datadog Application Security Monitoring"
 ---
-
-<div class="alert alert-warning">
-Application Security Monitoring is in public beta. See the <a href="https://app.datadoghq.com/security/appsec?instructions=all">in-app instructions</a> to get started.
-</div>
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
-Datadog Application Security Monitoring (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor application security for apps running in Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
+Datadog Application Security Monitoring (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor application security for apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
 ASM leverages Datadog [tracing libraries][1], the [Datadog Agent][2], and in-app detection rules to detect threats in your application environment and trigger signals whenever an attack targets your production system, or a vulnerability is triggered from the code.
 

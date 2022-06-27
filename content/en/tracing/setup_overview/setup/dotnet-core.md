@@ -21,6 +21,9 @@ further_reading:
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
     text: "Microsoft Azure App Service extension"
+  - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
+    tag: 'Blog'
+    text: 'Monitor containerized ASP.NET Core applications'
   - link: "/tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources, and traces"
@@ -47,6 +50,14 @@ The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, and .NET
 For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
 ## Installation and getting started
+
+<div class="alert alert-info">
+  <div class="alert-info">Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> in the Datadog app for the best experience, including:<br/>
+    <div>- **Step-by-step** instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
+    <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags.</div>
+    <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div>
+  </div>
+</div>
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.
@@ -208,7 +219,7 @@ For information about the different methods for setting environment variables, s
 
 ### Configure the Datadog Agent for APM
 
-[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`.
+[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data on `http://localhost:8126`.
 
 For containerized, serverless, and cloud environments:
 
@@ -223,7 +234,13 @@ For containerized, serverless, and cloud environments:
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on how to set these variables, see [Configuration](#configuration).
+3. After instrumenting your application, the tracing client attempts to send traces to the following:
+
+    - The `/var/run/datadog/apm.socket` Unix domain socket by default.
+    - If the socket does not exist, then traces are sent to `localhost:8126`.
+    - If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable: `DD_TRACE_AGENT_URL=http://custom-hostname:1234` or `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
+
+For more information on how to configure these settings, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
@@ -365,24 +382,31 @@ The following configuration variables are available for both automatic and custo
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
-**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`
+It can contain a Unix path to a socket by prefixing the path with `unix://`. <br>
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
 
 `DD_AGENT_HOST`
-: Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. <br>
+: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. <br>
+: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `8126`
-
-`DD_LOGS_INJECTION`
-: **TracerSettings property**: `LogsInjectionEnabled` <br>
-Enables or disables automatic injection of correlation identifiers into application logs. <br>
-Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
-Enables ingestion rate control.
+**Default**: Defaults to the rates returned by the Datadog Agent<br>
+Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
+For more information, see [Ingestion Mechanisms][11].
+
+`DD_TRACE_SAMPLING_RULES`
+: **TracerSettings property**: `CustomSamplingRules`<br>
+**Default**: `null`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+For more information, see [Ingestion Mechanisms][11].<br>
+**Examples:**<br>
+  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`  
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
@@ -394,7 +418,7 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 If specified, adds all of the specified tags to all generated spans.
 
 `DD_TRACE_DEBUG`
-Enables or disables debug logging. Valid values are: `true` or `false`.<br>
+: Enables or disables debug logging. Valid values are `true` or `false`.<br>
 **Default**: `false`
 
 `DD_TRACE_HEADER_TAGS`
@@ -408,7 +432,7 @@ Added in version 1.18.3. Response header support and entries without tag names a
 If specified, adds all of the specified tags to all generated spans. <br>
 **Example**: `layer:api, team:intake` <br>
 Added in version 1.17.0. <br>
-Note that the delimiter is a comma and a whitespace: `, `.
+Note that the delimiter is a comma and a space: `, `.
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
@@ -439,6 +463,11 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 : Sets status code ranges that will cause HTTP server spans to be marked as errors. <br>
 **Default**: `500-599`
 
+`DD_LOGS_INJECTION`
+: **TracerSettings property**: `LogsInjectionEnabled` <br>
+Enables or disables automatic injection of correlation identifiers into application logs. <br>
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
+
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
 **Default**: `false`<br>
@@ -451,9 +480,17 @@ This can be useful if you are using parameter names to differentiate between for
 Added in version 2.5.1.
 
 `DD_TRACE_METHODS`
-: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is a comma (`,`) separated list of method names. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
-**Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync]```<br>
-Added in version 2.6.0
+: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+**Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
+**Note:** The wildcard method support (`[*]`) selects all methods in a type except constructors, property getters and setters, `Equals`, `Finalize`, `GetHashCode`, and `ToString`. <br>
+Added in version 2.6.0.
+Wildcard support `[*]` added in version 2.7.0.
+
+`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
+: Alters the behavior of the Kafka consumer span<br>
+**Default**: `true`<br>
+When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop.<br>
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once.
 
 #### Automatic instrumentation integration configuration
 
@@ -487,15 +524,15 @@ The following configuration variables are for features that are available for us
 
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][9] and [W3C][10] headers extraction and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][9] and [W3C (TraceParent)][10] headers extraction and injection for distributed tracing.
 
-You can configure injection and extraction styles for distributed headers. 
+You can configure injection and extraction styles for distributed headers.
 
 The .NET Tracer supports the following styles:
 
 - Datadog: `Datadog`
 - B3: `B3`
-- W3C: `TraceParent`
+- W3C: `W3C`
 - B3 Single Header: `B3SingleHeader` or `B3 single header`
 
 You can use the following environment variables to configure injection and extraction styles:
@@ -689,3 +726,4 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [8]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
+[11]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#head-based-sampling

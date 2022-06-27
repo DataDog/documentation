@@ -6,7 +6,7 @@ aliases:
   - /developers/faq/characteristics-of-datadog-histograms/
   - /graphing/metrics/distributions/
 further_reading:
-  - link: "/metrics/dogstatsd_metrics_submission/"
+  - link: "/metrics/custom_metrics/dogstatsd_metrics_submission/"
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
@@ -29,7 +29,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
   * **Threshold Queries**:
   
-    _“I’d like to define a 30-day SLO where the p95 of request latency is < 5 seconds”_
+    _“I’d like to define a 30-day SLO where 95% of requests to my service are completed in under 5 seconds.”_
 
 
 * **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (for example, transactions per second for a checkout service).
@@ -68,7 +68,7 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 Threshold queries are in public beta.
 </div>
 
-Enabling DDSketch-calculated globally-accurate percentiles on your distribution metrics unlocks threshold queries where you can count the number of raw distribution metric values if they exceed or fall below a numerical threshold. You can use this functionality to count the number of errors or violations compared to an anomalous numerical threshold on dashboards. Or you can also use threshold queries within Datadog's SLOs product to define SLOs for the past 30 days where the p95 request latency is < 10 seconds. 
+Enabling DDSketch-calculated globally-accurate percentiles on your distribution metrics unlocks threshold queries where you can count the number of raw distribution metric values if they exceed or fall below a numerical threshold. You can use this functionality to count the number of errors or violations compared to an anomalous numerical threshold on dashboards. Or you can also use threshold queries to define SLOs like “95% of requests were completed in under 10 seconds over the past 30 days”. 
 
 With threshold queries for distributions with percentiles, you do not need to predefine a threshold value prior to metric submission, and have full flexibility to adjust the threshold value in Datadog.
 

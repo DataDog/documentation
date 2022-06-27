@@ -537,7 +537,7 @@ class Integrations:
                 h2_h3_regex_matches = re.finditer(h2_h3_regex, markdown_string)
                 end_index = -1
 
-                # Find the string index of the next h2 or h3 header in markdown 
+                # Find the string index of the next h2 or h3 header in markdown
                 # so we can strip out all of the unwanted content
                 for match in h2_h3_regex_matches:
                     if match.start() > start_index + 3:
@@ -551,7 +551,7 @@ class Integrations:
                     if horiz_line != -1:
                         end_index = horiz_line
                     else:
-                        # If there isn't another h2, h3, or horizontal line break 
+                        # If there isn't another h2, h3, or horizontal line break
                         end_index = len(markdown_string)
 
                 content_to_remove = markdown_string[start_index:end_index]
@@ -846,7 +846,6 @@ class Integrations:
                     item.get("name", "").lower()
                 )
                 if item.get("type", None):
-                    item["ddtype"] = item.get("type")
                     del item["type"]
                 item["dependencies"] = dependencies
                 item["draft"] = not item.get("is_public", False)
@@ -911,7 +910,8 @@ class Integrations:
             manifest_json["integration_id"] = manifest_json.get("app_id", "")
             categories = []
             supported_os = []
-            for tag in manifest_json.get("classifier_tags", []):
+            classifier_tags = manifest_json.get("tile", {}).get("classifier_tags", [])
+            for tag in classifier_tags:
                 # in some cases tag was null/None
                 if tag:
                     key, value = tag.split("::")

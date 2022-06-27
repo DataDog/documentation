@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for Azure Database for PostgreSQL
 kind: documentation
 description: Install and configure Database Monitoring for PostgreSQL managed on Azure.
-beta: true
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
@@ -20,7 +19,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
-1. [Install the RDS integration](#install-the-rds-integration)
+1. [Install the Azure PostgreSQL integration](#install-the-azure-postgresql-integration)
 
 ## Before you begin
 
@@ -28,10 +27,10 @@ Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13
 
 Supported Azure PostgreSQL deployment types
-: Single Server, Flexible Server
+: PostgreSQL on Azure VMs, Single Server, Flexible Server
 
 Supported Agent versions
-: 7.35.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -214,12 +213,19 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # pg_stat_activity_view: datadog.pg_stat_activity()
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
+
+       # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+       azure:
+        deployment_type: '<DEPLOYMENT_TYPE>'
+        name: '<YOUR_INSTANCE_NAME>'
    ```
 2. [Restart the Agent][2].
 
+See the [Postgres integration spec][3] for additional information on setting `deployment_type` and `name` fields.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -233,7 +239,7 @@ Execute the following command to run the Agent from your command line. Replace t
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.35.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -244,7 +250,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<AZURE_INSTANCE_ENDPOINT>",
     "port": 5432,
     "username": "datadog",
-    "password": "<UNIQUEPASSWORD>"
+    "password": "<UNIQUEPASSWORD>",
+    "azure": {
+      "deployment_type": "<DEPLOYMENT_TYPE>",
+      "name": "<YOUR_INSTANCE_NAME>"
+    }
   }]' \
   datadog/agent:${DD_AGENT_VERSION}
 ```
@@ -261,11 +271,11 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom Agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM datadog/agent:7.35.0
+FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -275,12 +285,15 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
+See the [Postgres integration spec][2] for additional information on setting `deployment_type` and `name` fields.
+
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][4] on how to pass the password in as an environment variable.
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/guide/secrets-management
-[3]: /agent/faq/template_variables/
+[2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
+[3]: /agent/guide/secrets-management
+[4]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -306,7 +319,10 @@ instances:
     host: <AZURE_INSTANCE_ENDPOINT>
     port: 5432
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: "<UNIQUEPASSWORD>"
+    azure:
+      deployment_type: "<DEPLOYMENT_TYPE>"
+      name: "<YOUR_INSTANCE_NAME>" \
   datadog/datadog
 ```
 
@@ -330,6 +346,11 @@ instances:
     port: 5432
     username: datadog
     password: '<PASSWORD>'
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    azure:
+      deployment_type: '<DEPLOYMENT_TYPE>'
+      name: '<YOUR_INSTANCE_NAME>'
+
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
     # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -358,7 +379,11 @@ metadata:
           "host": "<AZURE_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "<UNIQUEPASSWORD>",
+          "azure": {
+            "deployment_type": "<DEPLOYMENT_TYPE>",
+            "name": "<YOUR_INSTANCE_NAME>"
+          }
         }
       ]
 spec:
@@ -376,14 +401,17 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
+See the [Postgres integration spec][4] for additional information on setting `deployment_type` and `name` fields.
+
 The Cluster Agent automatically registers this configuration and begins running the Postgres check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
+[5]: /agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

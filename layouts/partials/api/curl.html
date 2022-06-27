@@ -3,6 +3,7 @@
 {{- $endpoint := .endpoint }}
 {{- $parameters := partial "api/arguments-data.html" (dict "endpoint" $endpoint) -}}
 {{- $count := 0 -}}
+{{- $body := .body -}}
 
 {{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
@@ -78,10 +79,10 @@
 {{- end -}}
 
 {{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
-{{- if $endpoint.action.requestBody -}}
+{{- if (or ($body) ($endpoint.action.requestBody)) -}}
 &nbsp;\
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
-<span class="s1">{{ .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
+<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
 <span class="n">EOF</span>
 {{- end -}}
 <br/>

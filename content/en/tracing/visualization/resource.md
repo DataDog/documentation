@@ -45,9 +45,9 @@ Datadog provides out-of-the-box graphs for any given resource:
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs"  style="width:90%;">}}
 
-### Export to timeboard
+### Export to dashboard
 
-On the upper-right corner of each graph, click on the up arrow in order to export your graph into a pre-existing [Timeboard][4].
+On the upper-right corner of each graph, click on the up arrow in order to export your graph into a pre-existing [Dashboard][4].
 
 ### Latency distribution
 
@@ -58,6 +58,20 @@ The resource page also displays a resource latency distribution graph:
 Use the top right percentile selectors to zoom into a given percentile, or hover over the sidebar to view percentile markers.
 
 {{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector"  style="width:50%;">}}
+
+## Dependency Map
+
+You can also view a map of all of a resource’s upstream and downstream service dependencies. With the Dependency Map, you can quickly see the flow of services with spans that go through the specific resource (such as endpoints or database queries) end-to-end.
+
+{{<img alt="resource dependency map" src="tracing/visualization/resource/resource_dependency_map.png" style="width:100%;">}}
+
+Hover over a node to view metrics of each service including requests/second, error rate, and average latency.
+
+The highlight color of the node indicates the service’s [monitor status][8]. If a service has more than one configured monitor, the status of the most severe monitor is shown.
+
+{{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" video="true" alt="hovering and clicking a resource dependency map node" style="width:100%;">}}
+
+Click on a node to open a context menu with options to view the Service Page, related traces, and more.
 
 ## Span summary
 
@@ -85,7 +99,7 @@ The displayed metrics represent, per span:
 
 Consult the list of [traces][6] associated with this resource in the [Trace search][7] modal already filtered on your environment, service, operation, and resource name:
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list"  style="width:90%;">}}
 
 ## Further Reading
 
@@ -94,7 +108,8 @@ Consult the list of [traces][6] associated with this resource in the [Trace sear
 [1]: /tracing/visualization/#services
 [2]: /tracing/visualization/
 [3]: /tracing/visualization/#trace
-[4]: /dashboards/#timeboards
+[4]: /dashboards/
 [5]: /tracing/visualization/#spans
 [6]: /tracing/visualization/trace/
 [7]: /tracing/search/
+[8]: /monitors/manage/status/

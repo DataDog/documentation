@@ -14,9 +14,9 @@ To use Cloud Cost Management, you must have an AWS account with access to Cost a
  
 ## Setup
 
-To setup Cloud Cost Management in Datadog, you need to generate a Cost 
+To setup Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
  
-### Prerequisite: Generate a Cost and Usage Report
+### Prerequisite: generate a Cost and Usage Report
  
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
  

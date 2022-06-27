@@ -12,18 +12,19 @@ assets:
     postfix_processes: assets/saved_views/postfix_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - Collaboration
-  - log collection
+- Collaboration
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/postfix/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
 display_name: Postfix
 draft: false
 git_integration_title: postfix
 guid: 7f03c5b7-ee54-466e-8854-5896d62c82b4
 integration_id: postfix
 integration_title: Postfix
+integration_version: 1.12.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,15 +33,18 @@ metric_prefix: postfix.
 metric_to_check: postfix.queue.size
 name: postfix
 process_signatures:
-  - postfix start
-  - sendmail -bd
+- postfix start
+- sendmail -bd
 public_title: Intégration Datadog/Postfix
 short_description: Surveillez la taille de toutes vos files d'attente Postfix.
 support: core
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ![Graphique Postfix][1]
 
 ## Présentation
@@ -81,8 +85,9 @@ Vous pouvez également configurer l'agent de façon à le faire utiliser une com
      postfix_user: postfix
 
    instances:
-     ## @param directory - string - required
-     ## Path to the postfix directory.
+     ## @param directory - string - optional - default: /var/spool/postfix
+     ## Path to the postfix directory. The directory option is required if `postqueue: false` is set. For more 
+     ## information see https://docs.datadoghq.com/integrations/postfix/#using-sudo.
      #
      - directory: /var/spool/postfix
 
@@ -147,7 +152,7 @@ Vous pouvez également configurer l'agent de façon à le faire utiliser une com
          - deferred
    ```
 
-2. Pour chaque `config_directory` dans `instances`, l'Agent effectue un fork de `postqueue -c` pour le répertoire de configuration de Postfix. Postfix offre des contrôles d'accès internes qui limitent les opérations pouvant être effectuées sur la file d'attente d'e-mails. L'option par défaut `anyone` de Postfix permet à tout le monde de consulter la file d'attente. Sur les systèmes de production sur lesquels une installation Postfix peut être configurée avec des contrôles d'accès plus stricts, vous devrez peut-être accorder à l'utilisateur `dd-agent` un accès en lecture à la file d'attente d'e-mails ([documentation de la commande Postfix postqueue][6]) :
+2. Pour chaque `config_directory` dans `instances`, l'Agent effectue un fork de `postqueue -c` pour le répertoire de configuration de Postfix. Postfix offre des contrôles d'accès internes qui limitent les opérations pouvant être effectuées sur la file d'attente d'e-mails. L'option par défaut `anyone` de Postfix permet à tout le monde de consulter la file d'attente. Sur les systèmes de production sur lesquels une installation Postfix peut être configurée avec des contrôles d'accès plus stricts, vous devrez peut-être accorder à l'utilisateur `dd-agent` un accès en lecture à la file d'attente d'e-mails. Consultez la [documentation Postfix sur la commande postqueue][6] (en anglais) pour en savoir plus.
 
    ```shell
    postconf -e "authorized_mailq_users = dd-agent"

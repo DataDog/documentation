@@ -1,24 +1,27 @@
 ---
-title: Configurer l'APM Datadog
-kind: documentation
-description: Débuter avec l'APM Datadog
 aliases:
-  - /fr/tracing/setup
-  - /fr/tracing/send_traces/
-  - /fr/tracing/setup/
-  - /fr/tracing/environments/
-  - /fr/tracing/setup/environment
-  - /fr/tracing/setup/first_class_dimensions
-  - /fr/tracing/getting_further/first_class_dimensions/
-  - /fr/agent/apm/
+- /fr/tracing/setup
+- /fr/tracing/send_traces/
+- /fr/tracing/setup/
+- /fr/tracing/environments/
+- /fr/tracing/setup/environment
+- /fr/tracing/setup/first_class_dimensions
+- /fr/tracing/getting_further/first_class_dimensions/
+- /fr/agent/apm/
+description: Débuter avec l'APM Datadog
+kind: documentation
+title: Configurer l'APM Datadog
 ---
+
 Dans la plupart des environnements, la configuration de votre application pour envoyer des [traces][1] à Datadog repose sur deux étapes :
 
 1. Configuration de l'Agent Datadog pour l'APM.
 
 2. Ajout de la bibliothèque de tracing Datadog à votre code.
 
-Les traces sont envoyées depuis votre application instrumentée via une bibliothèque de tracing Datadog à l'Agent Datadog, et depuis l'Agent Datadog à Datadog.
+Les traces sont envoyées depuis votre application instrumentée via une bibliothèque de tracing Datadog à l'Agent Datadog, et depuis l'Agent Datadog au backend Datadog. Elles s'affichent alors dans l'interface.
+
+{{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="Le pipeline de l'APM">}}
 
 Dans les environnements conteneurisés, les environnements sans serveur et certains autres environnements, des étapes de configuration spécifiques à l'APM peuvent être requises sur le traceur et l'Agent pour que les traces soient correctement reçues. Assurez-vous donc de suivre les instructions pour les deux composants.
 

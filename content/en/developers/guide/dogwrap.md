@@ -4,6 +4,7 @@ description: "Call commands and generate events from their results with Dogwrap"
 kind: guide
 aliases:
 - /developers/faq/can-i-call-scripts-and-generate-events-from-their-results
+- /dashboards/faq/how-do-i-track-cron-jobs
 ---
 
 The Dogwrap command line tool allows you to call commands and generate events from their results. In order to use Dogwrap, install the [Datadog Python Library][1]:
@@ -21,9 +22,19 @@ To install from source:
 
 The minimum valid `dogwrap` command has the following layout:
 
+{{< site-region region="us,us3,us5,gov" >}}
 ```bash
 dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
 ```
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+```bash
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
+```
+{{< /site-region >}}
+
+**Note**: The `dogwrap` command sends data to the US Datadog site by default. If you need to send data to the EU site, you must include the `-s eu` option.
 
 With the following placeholders:
 

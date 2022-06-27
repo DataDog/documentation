@@ -1,14 +1,14 @@
 ---
-title: Configuration des emplacements privés
-kind: documentation
 description: Configurer vos emplacements privés
 further_reading:
 - link: getting_started/synthetics/private_location
   tag: Documentation
   text: Débuter avec les emplacements privés
-- link: /synthetics/private_locations/
+- link: synthetics/private_locations/dimensioning
   tag: Documentation
-  text: Exécuter des tests Synthetic à partir d'emplacements privés
+  text: Dimensionner vos emplacements privés
+kind: documentation
+title: Configuration des emplacements privés
 ---
 
 ## Présentation
@@ -43,14 +43,14 @@ Les deux paramètres ci-dessous peuvent être utilisés pour personnaliser la r�
 `dnsUseHost`
 : **Type** : booléen <br>
 **Valeur par défaut** : `true`<br>
-Utilise la configuration DNS locale du host en priorité (p. ex., la configuration définie dans votre fichier `etc/resolv.conf`), puis les serveurs DNS spécifiés dans le paramètre `dnsServer` (le cas échéant).
+Utilise la configuration DNS locale du host en priorité (par exemple, la configuration définie dans votre fichier `etc/resolv.conf`), puis les serveurs DNS spécifiés dans le paramètre `dnsServer` (le cas échéant).
 
 `dnsServer`
 : **Type** : tableau de chaînes <br>
 **Valeur par défaut** : `["8.8.8.8","1.1.1.1"]`<br>
-Adresses IP des serveurs DNS utilisées dans l'ordre donné (p. ex., `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`).
+Adresses IP des serveurs DNS utilisées dans l'ordre donné (par exemple, `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`).
 
-Pour les **tests Browser**, la résolution DNS est effectuée directement par le navigateur. Ce dernier accède généralement aux serveurs DNS à partir du host. Vous avez également la possibilité de configurer la résolution DNS au niveau des conteneurs (p. ex., à l'aide du flag `--dns` pour [Docker][1] ou de `dnsConfig.nameservers` pour [Kubernetes][2]).
+Pour les **tests Browser**, la résolution DNS est effectuée directement par le navigateur. Ce dernier accède généralement aux serveurs DNS à partir du host. Vous avez également la possibilité de configurer la résolution DNS au niveau des conteneurs (par exemple, à l'aide du flag `--dns` pour [Docker][1] ou de `dnsConfig.nameservers` pour [Kubernetes][2]).
 
 ### Configuration des IP réservées
 
@@ -62,21 +62,21 @@ Empêche les utilisateurs de créer des tests Synthetic sur des endpoints qui ut
 `allowedIPRanges`
 : **Type** : tableau de chaînes <br>
 **Valeur par défaut** : `none`<br>
-Autorise l'accès à des adresses IP et/ou à des CIDR spécifiques parmi les plages d'IP bloquées via le paramètre `enableDefaultBlockedIpRanges` ou `blockedIPRanges` (p. ex., `"allowedIPRanges.4": "10.0.0.0/8"`). **Remarque :** `allowedIPRanges` est prioritaire sur `blockedIPRanges`.
+Autorise l'accès à des adresses IP et/ou à des CIDR spécifiques parmi les plages d'IP bloquées via le paramètre `enableDefaultBlockedIpRanges` ou `blockedIPRanges` (par exemple, `"allowedIPRanges.4": "10.0.0.0/8"`). **Remarque :** `allowedIPRanges` est prioritaire sur `blockedIPRanges`.
 
 `blockedIPRanges`
 : **Type** : tableau de chaînes <br>
 **Valeur par défaut** : `none`<br>
-Bloque l'accès à des IP et/ou à des CIDR spécifiques en plus (ou non) des plages d'IP bloquées lorsque le paramètre `enableDefaultBlockedIpRanges` est défini sur `true` (p. ex. `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`).
+Bloque l'accès à des adresses IP et/ou à des CIDR spécifiques en plus (ou non) des plages d'adresses IP bloquées lorsque le paramètre `enableDefaultBlockedIpRanges` est défini sur `true` (par exemple, `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`).
 
-**Remarque :** les paramètres `whitelistedRange` et `blacklistedRange` sont désormais obsolètes et doivent être remplacés par ceux spécifiés ci-dessus.
+**Remarque :** les paramètres `whitelistedRange` et `blacklistedRange` sont obsolètes et doivent être remplacés par ceux spécifiés ci-dessus.
 
 ### Configuration d'un proxy
 
 `proxyDatadog`
 : **Type** : chaîne <br>
 **Valeur par défaut** : `none`<br>
-URL de proxy utilisée par l'emplacement privé pour envoyer des requêtes à Datadog (p. ex., `--proxyDatadog=http://<VOTRE_UTILISATEUR>:<VOTRE_MOT_DE_PASSE>@<VOTRE_IP>:<VOTRE_PORT>`).
+URL de proxy utilisée par l'emplacement privé pour envoyer des requêtes à Datadog (par exemple, `--proxyDatadog=http://<VOTRE_UTILISATEUR>:<VOTRE_MOT_DE_PASSE>@<VOTRE_IP>:<VOTRE_PORT>`).
 
 `proxyTestRequests`
 : **Type** : chaîne <br>
@@ -88,7 +88,7 @@ URL de proxy utilisée par l'emplacement privé pour envoyer les requêtes de te
 **Valeur par défaut** : `false`<br>
 Ignore les erreurs SSL lorsque l'emplacement privé utilise un proxy pour envoyer des requêtes à Datadog.
 
-**Remarque :** le paramètre `proxy` est désormais obsolète et doit être remplacé par `proxyDatadog`.
+**Remarque :** le paramètre `proxy` est obsolète et doit être remplacé par `proxyDatadog`.
 
 ### Configuration avancée
 
@@ -97,10 +97,19 @@ Ignore les erreurs SSL lorsque l'emplacement privé utilise un proxy pour envoye
 **Valeur par défaut** : `10`<br>
 Nombre maximum de tests exécutés simultanément.
 
+`enableStatusProbes`
+: **Type** : booléen <br>
+Active l'aptitude et l'activité des probes des emplacements privés, avec les endpoints http://127.0.0.1:8080/liveness et http://127.0.0.1:8080/readiness.
+
 `maxTimeout`
 : **Type** : nombre <br>
 **Valeur par défaut** : `60000`<br>
 Durée maximum d'exécution des tests API (en millisecondes).
+
+`statusProbesPort`
+: **Type** : nombre <br>
+**Valeur par défaut** : `8080`<br>
+Remplace le port des probes de statut des emplacements privés.
 
 ## Certificat racine privés
 
@@ -123,7 +132,7 @@ Format des logs sortants (`"pretty"` ou `"json"`). Le format de log `json` vous 
 `verbosity`
 : **Type** : nombre <br>
 **Valeur par défaut** : `3`<br>
-Niveau de verbosité (p. ex., `-v`, `-vv`, `-vvv`, etc.).
+Niveau de verbosité (par exemple, `-v`, `-vv`, `-vvv`, etc.).
 
 `dumpConfig`
 : **Type** : booléen <br>

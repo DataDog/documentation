@@ -116,7 +116,7 @@ Choose what to display in your resources list:
 ### Deployments
 A service configured with version tags will show versions in the Deployment tab. The version section shows all versions of the service that were active during the selected time interval, with active versions at the top.
 
-By default you will see:
+By default, you can see:
 * The version names deployed for this service over the timeframe.
 * The times at which traces that correspond to this version were first and last seen.
 * An Error Types indicator, which shows how many types of errors appear in each version that did not appear in the immediately previous version.
@@ -136,31 +136,33 @@ You can add columns to or remove columns from this overview table and your selec
 
 {{< img src="tracing/visualization/service/deployments.png" alt="Deployments"  style="width:90%;">}}
 
-Read more about Deployments on the service page [here][12].
+Read more about Deployments [on the service page][12].
 
 ### Error Tracking
-View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][4])
+View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][4].
 
 This tab has overview graphs that show which resources have the most issues and a list of the most common issues occurring in your service. Click on an issue in the list to see details in a side panel, including its stack trace, related code versions, and total error occurrences since inception.
 
 {{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking tab"  style="width:90%;">}}
 
 ### Infrastructure
-If your service is running on Kubernetes, you’ll see an Infrastructure tab on the Service Page. The live Kubernetes pods table shows you detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by clearly seeing if provisioned compute resources exceed what’s required for optimal application performance. 
+If your service is running on Kubernetes, you can see an Infrastructure tab on the Service Page. The live Kubernetes Pods table displays detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by seeing if provisioned compute resources exceed what is required for optimal application performance. 
 
 {{< img src="tracing/visualization/service/infra_pods.png" alt="Kubernetes Pods"  style="width:90%;">}}
 
-The Kubernetes metrics below show you a high level summary of your infrastructure health for the selected time period, including CPU, Memory, Network, and Disk metrics.
+The Kubernetes Metrics section contains a high level summary of your infrastructure health for the selected time period, and includes CPU, Memory, Network, and Disk metrics.
 
 {{< img src="tracing/visualization/service/infra_metrics.png" alt="Kubernetes Metrics"  style="width:90%;">}}
 
+For non-Kubernetes environments (such as host-based installation), see the [Unified Service Tagging documentation][13].
+
 ### Runtime Metrics
-If runtime metrics are enabled in the tracing client, you’ll see a Runtime metrics tab corresponding to the runtime language of your service. Read more in [Runtime Metrics][13].
+If runtime metrics are enabled in the tracing client, you’ll see a Runtime metrics tab corresponding to the runtime language of your service. Read more in [Runtime Metrics][14].
 
 {{< img src="tracing/visualization/service/runtime_metrics.png" alt="Runtime Metrics"  style="width:90%;">}}
 
 ### Profiling
-You'll see a Profiling tab if the [Continuous Profiler][14] is set up for your service. Summary details like versions available and runtime language are at the top. Below are out-of-the-box profiling metrics by version, endpoint, and method to help you identify and debug resource-intensive methods. Click on any graph to view related traces, logs, and other data, or open a flame graph to inspect the code profile. Learn more about APM and the Continuous Profiler [here][15]. 
+You'll see a Profiling tab if the [Continuous Profiler][15] is set up for your service. Summary details like versions available and runtime language are at the top. Below are out-of-the-box profiling metrics by version, endpoint, and method to help you identify and debug resource-intensive methods. Click on any graph to view related traces, logs, and other data, or open a flame graph to inspect the code profile. [Learn more about APM and the Continuous Profiler][15]. 
 
 {{< img src="tracing/visualization/service/profiler.jpg" alt="Profiling"  style="width:90%;">}}
 
@@ -190,8 +192,8 @@ View common patterns in your service’s logs, and use facets like status in the
 [10]: /dashboards/
 [11]: /tracing/visualization/#resources
 [12]: /tracing/deployment_tracking/#versions-deployed
-[13]: /tracing/runtime_metrics/
-[14]: /tracing/profiler/
-[15]: /tracing/
+[13]: /getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
+[14]: /tracing/runtime_metrics/
+[15]: /tracing/profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/

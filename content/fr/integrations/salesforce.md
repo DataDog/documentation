@@ -1,11 +1,12 @@
 ---
 categories:
-  - monitoring
-  - network
-  - cloud
+- monitoring
+- network
+- cloud
 ddtype: crawler
 dependencies: []
-description: Salesforce
+description: Recueillez des événements de la plateforme Salesforce en temps réel et
+  convertissez-les en logs Datadog.
 doc_link: https://docs.datadoghq.com/integrations/salesforce/
 draft: false
 git_integration_title: salesforce
@@ -18,9 +19,12 @@ kind: integration
 manifest_version: '1.0'
 name: salesforce
 public_title: Salesforce
-short_description: Recueillez des événements de la plateforme Salesforce en temps réel et convertissez-les en logs Datadog.
+short_description: Recueillez des événements de la plateforme Salesforce en temps
+  réel et convertissez-les en logs Datadog.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Salesforce fournit des services de gestion de la relation client ainsi qu'une suite d'applications professionnelles complémentaires axées sur le service client, l'automatisation marketing, l'analytique et le développement d'applications. Intégrez Salesforce à Datadog pour : 
@@ -36,7 +40,7 @@ Salesforce fournit des services de gestion de la relation client ainsi qu'une su
 
 Aucune installation n'est requise.
 
-### Configuration
+### Procédure à suivre
 
 Pour configurer Salesforce de façon à envoyer des données à Datadog, vous devez accéder à la fonctionnalité de [surveillance des événements Salesforce][5], activer le stockage de vos événements Salesforce, puis connecter votre organisation Salesforce à Datadog.
 

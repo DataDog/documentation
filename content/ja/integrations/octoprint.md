@@ -10,19 +10,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - orchestration
-  - ログの収集
+- web
+- orchestration
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
 display_name: OctoPrint
 draft: false
 git_integration_title: octoprint
 guid: 77844a89-7202-4f8b-a0fb-642904eb9513
 integration_id: octoprint
 integration_title: Datadog OctoPrint
+integration_version: 1.0.0
 is_public: true
 kind: integration
 maintainer: gwaldo@gmail.com
@@ -34,8 +35,11 @@ public_title: Datadog OctoPrint インテグレーション
 short_description: 3D プリンターを管理する Web インターフェイス、OctoPrint を監視
 support: contrib
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [OctoPrint][1] を監視します。
@@ -46,11 +50,13 @@ supported_os:
 
 ### インストール
 
-OctoPrint チェックをホストにインストールするには
+以下を実行して OctoPrint チェックをホストにインストールするには
 
-1. `sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>`を実行します
-    - 現在のバージョンは `1.0.0` です。これは `./datadog_checks/octoprint/__about__.py` で検証可能です。
+```shell
+sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>
+```
 
+**注**: このページの一番上に `VERSION` が記載されています。
 
 #### ソースからインストール (オプション)
 
@@ -90,7 +96,7 @@ OctoPrint チェックをホストにインストールするには
 
 #### ログ処理
 
-OctoPrint は独自のログ形式（オブジェクト形式ではない）を使用するため、ログを活用するにはパース規則を使用してログ処理パイプラインを作成する必要があります。たとえば、
+OctoPrint は独自のログ形式（オブジェクト形式ではない）を使用します。ログを活用するにはパース規則を使用してログ処理パイプラインを作成します。たとえば、
 
 1. メインパイプライン: "OctoPrint"
     1. サブパイプライン 1: "OctoPrint 印刷ジョブ"

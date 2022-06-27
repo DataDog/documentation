@@ -250,6 +250,17 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 
 {{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Alias facet from attribute" style="width:30%;">}}
 
+## Delete a facet
+
+<div class="alert alert-danger">Deleting a facet that is being used in indexes, monitors, dashboards, restriction queries, or by other teams can cause configurations to break.</div>
+
+To delete a facet, follow these steps:
+
+- Click **Showing xx of xx** at the top of the facet panel.
+- Search for your facet.
+- Click the pencil icon for your facet.
+- Click **Delete**.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

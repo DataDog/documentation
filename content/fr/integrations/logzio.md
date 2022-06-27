@@ -5,17 +5,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
+- monitoring
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md
 display_name: Logz.io
 draft: false
 git_integration_title: logzio
 guid: 0e44f9bd-8c7b-426a-a0ba-8f4302808191
 integration_id: logz-io
 integration_title: Logz.io
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -25,10 +26,13 @@ public_title: Intégration Datadog/Logz.io
 short_description: Suite ELK avec apprentissage automatique en tant que service
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Intégrez les alertes Logz.io pour visualiser les événements en temps réel.
@@ -50,7 +54,7 @@ Pour importer vos alertes dans Datadog, procédez comme suit :
 1. Utilisez une [clé d'API Datadog][3] pour créer un endpoint d'alertes dans Logz.io.
 2. Créez une alerte pour une requête spécifique dans Logz.io.
 
-Pour en savoir plus sur la procédure de configuration, consultez la [documentation détaillée de logz.io concernant Datadog][4].
+Pour en savoir plus sur la procédure de configuration, consultez la documentation relative à la [corrélation de logs avec Logz.io et Datadog][4].
 
 ## Données collectées
 
@@ -72,6 +76,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/logzio/images/import_alert_from_logz.jpg
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/logzio/images/dashboard.png
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: http://logz.io/blog/log-correlation-datadog
 [5]: https://docs.datadoghq.com/fr/help/
