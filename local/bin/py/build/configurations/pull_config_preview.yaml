@@ -458,7 +458,7 @@
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
-      branch: alai97/rum-services-documentation-updates
+      branch: main
       globs:
       - 'packages/rum/README.md'
       options:
