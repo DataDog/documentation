@@ -28,15 +28,15 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 
 | Parameter            | Type            | Required | Description                                                                                |
 |----------------------|-----------------|----------|--------------------------------------------------------------------------------------------|
-| `<TITLE>`            | String          | Yes      | The title of the event                                                                     |
-| `<TEXT>`             | String          | Yes      | The text body of the event                                                                 |
-| `<TIMESTAMP>`        | Integer         | No       | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
-| `<HOSTNAME>`         | String          | No       | The name of the host                                                                       |
-| `<AGGREGATION_KEY>`  | String          | No       | A key to use for aggregating events                                                        |
-| `<PRIORITY>`         | String          | No       | Specifies the priority of the event (`normal` or `low`).                                   |
-| `<SOURCE_TYPE_NAME>` | String          | No       | The source type name                                                                  |
-| `<ALERT_TYPE>`       | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                              |
-| `<TAGS>`             | List of strings | No       | A list of tags associated with this event.                                                 |
+| `<title>`            | String          | Yes      | The title of the event                                                                     |
+| `<message>`          | String          | Yes      | The text body of the event                                                                 |
+| `<alert_type>`       | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                              |
+| `<aggregation_key>`  | String          | No       | A key to use for aggregating events                                                        |
+| `<source_type_name>` | String          | No       | The source type name                                                                       |
+| `<date_happened>`    | Integer         | No       | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
+| `<priority>`         | String          | No       | Specifies the priority of the event (`normal` or `low`)                                    |
+| `<tags>`             | List of strings | No       | A list of tags associated with this event                                                  |
+| `<hostname>`         | String          | No       | The name of the host                                                                       |
 
 ### Examples
 
