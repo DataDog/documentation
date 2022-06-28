@@ -9,9 +9,7 @@ further_reading:
 
 ## Overview
 
-The [sessions dashboard][1] provides insights about your user sessions, user demographics, and application usage. 
-
-It shows:
+The [sessions dashboard][1] provides insights about your user sessions, user demographics, and application usage. It shows:
 
 - **Sessions**: Analyze the number of user sessions, the average session duration, and the number of page views per session. The two graphs on the right visualize the number of sessions and the top pages. 
 - **User demographics**: Observe the number of sessions by country and the top countries, devices, and operating systems for your application. You can also view a graph of the top browser usage shares. 
