@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - 処理
-  - data store
-  - ログの収集
+- 処理
+- data store
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/druid/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/druid/README.md
 display_name: Druid
 draft: false
 git_integration_title: druid
 guid: 8abd92f8-7383-45f2-a412-d6ee960baa15
 integration_id: druid
 integration_title: Druid
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -34,10 +35,13 @@ public_title: Datadog-Druid インテグレーション
 short_description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Druid ダッシュボード][1]
 
 ## 概要

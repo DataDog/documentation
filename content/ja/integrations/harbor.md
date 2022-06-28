@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - コンテナ
-  - ログの収集
-  - オートディスカバリー
+- コンテナ
+- ログの収集
+- オートディスカバリー
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/harbor/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/harbor/README.md
 display_name: Harbor
 draft: false
 git_integration_title: harbor
 guid: 8fcaa5d7-a121-45ea-bde2-f12d55bc6286
 integration_id: harbor
 integration_title: Harbor
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -34,10 +35,13 @@ public_title: Datadog-Harbor インテグレーション
 short_description: Harbor コンテナレジストリの健全性を監視
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Harbor][1] を監視します。
@@ -109,7 +113,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |

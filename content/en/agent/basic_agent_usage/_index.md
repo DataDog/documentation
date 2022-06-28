@@ -63,12 +63,12 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 
 In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][6].
 
-[1]: /metrics/dogstatsd_metrics_submission/#metrics
+[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
 [3]: /agent/guide/network/#open-ports
 [4]: /developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /metrics/dogstatsd_metrics_submission/
+[6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -136,8 +136,8 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | Platform                                 | Supported versions                                        |
 |------------------------------------------|-----------------------------------------------------------|
 | [Amazon Linux][1]                        | Amazon Linux 2                                            |
-| [Debian][2] with systemd                 | Debian 7 (wheezy)+                                        |
-| [Debian][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                        |
+| [Debian][2] with systemd                 | Debian 7 (wheezy)+ in Agent < 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
+| [Debian][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0 - 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
 | [Ubuntu][3]                              | Ubuntu 14.04+                                             |
 | [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 6+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
 | [Docker][5]                              | Version 1.12+                                             |

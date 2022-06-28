@@ -1,4 +1,5 @@
 ---
+disable_sidebar: true
 kind: ガイド
 private: true
 title: Synthetic モニタリングガイド
@@ -8,6 +9,7 @@ title: Synthetic モニタリングガイド
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}SLO による Web サイトのアップタイムの監視{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Synthetic ボットを特定する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-usage/" >}}Synthetics の使用量を監視する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Synthetic テストでモニターを使用する{{< /nextlink >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}クロス積相関によるトラブルシューティングの容易化{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Synthetic テストのキャッシュの問題の回避{{< /nextlink >}}
 {{< /whatsnext >}}

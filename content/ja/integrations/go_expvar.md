@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/goexpvar
+- /ja/integrations/goexpvar
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -10,18 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - languages
-  - autodiscovery
+- languages
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md
 display_name: Go-Expvar
 draft: false
 git_integration_title: go_expvar
 guid: 33557f7a-5f24-43f3-9551-78432894e539
 integration_id: go-expvar
 integration_title: Go-Expvar
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -33,10 +34,13 @@ public_title: Datadog-Go-Expvar インテグレーション
 short_description: Go サービスから expvar で計測されたメトリクスとメモリ統計を収集
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Go グラフ][1]
 
 ## 概要
@@ -77,7 +81,7 @@ Go サービスで [expvar パッケージ][4]をまだ使用していない場�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
+[4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [6]: https://docs.datadoghq.com/ja/help/
 {{% /tab %}}

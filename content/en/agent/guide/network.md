@@ -31,10 +31,6 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}
 
-[Database Monitoring][2]
-: `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
-`dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
-
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
@@ -56,6 +52,14 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
+
+{{< site-region region="us,eu,us3" >}}
+[Database Monitoring][2]
+: `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
+
+[2]: /database_monitoring/
+{{< /site-region >}}
 
 {{< site-region region="us" >}}
 
@@ -159,24 +163,25 @@ The information is structured as JSON following this schema:
 
 {{< code-block lang="text" disable_copy="true" >}}
 {
-    "version": 1,                       // <-- incremented every time this information is changed
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
-    "agents": {                         // <-- the IPs used by the Agent to submit metrics to Datadog
-        "prefixes_ipv4": [              // <-- list of IPv4 CIDR blocks
+    "version": 1,                          // <-- incremented every time this information is changed
+    "modified": "YYYY-MM-DD-HH-MM-SS",     // <-- timestamp of the last modification
+    "agents": {                            // <-- the IPs used by the Agent to submit metrics to Datadog
+        "prefixes_ipv4": [                 // <-- list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- list of IPv6 CIDR blocks
+        "prefixes_ipv6": [                 // <-- list of IPv6 CIDR blocks
             ...
         ]
     },
-    "api": {...},                       // <-- same for non-critical Agent functionality (querying information from API)
-    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
-    "logs": {...},                      // <-- same for the logs Agent data
-    "process": {...},                   // <-- same for the process Agent data
-    "orchestrator": {...},              // <-- same for the process Agent data
-    "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
-    "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
+    "api": {...},                          // <-- same for non-critical Agent functionality (querying information from API)
+    "apm": {...},                          // <-- same structure as "agents" but IPs used for the APM Agent data
+    "logs": {...},                         // <-- same for the logs Agent data
+    "process": {...},                      // <-- same for the process Agent data
+    "orchestrator": {...},                 // <-- same for the process Agent data
+    "synthetics": {...},                   // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
+    "synthetics-private-locations": {...}, // <-- not used for Agent traffic (Datadog intake IPs for synthetics private locations)
+    "webhooks": {...}                      // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
 {{< /code-block >}}
 

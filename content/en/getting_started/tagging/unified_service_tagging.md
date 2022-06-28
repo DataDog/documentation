@@ -16,13 +16,14 @@ further_reading:
 ---
 
 ## Overview
-Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`.
 
-With these three tags you can:
+Unified service tagging ties Datadog telemetry together through using three [reserved tags][1]: `env`, `service`, and `version`.
+
+With these three tags, you can:
 
 - Identify deployment impact with trace and container metrics filtered by version
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
-- View service data based on environment or version in a unified fashion within the Datadog site
+- View service data based on environment or version in a unified fashion
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
@@ -71,6 +72,8 @@ To setup unified service tagging in a containerized environment:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
+
+**Note**: If you deployed the Datadog Cluster Agent with [Admission Controller][14] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. See the [Admission Controller][14] documentation for more details.
 
 ##### Full configuration
 
@@ -278,15 +281,17 @@ If your service has no need for the Datadog environment variables (for example, 
 
 ### Non-containerized environment
 
-Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, it is recommended that these environment variables be scoped to a single process.
+Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, Datadog recommends scoping these environment variables to a single process.
 
-To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][8], [logs][9], and [StatsD metrics][10], you can either:
+To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], and [StatsD metrics][10], either:
 
 1. Export the environment variables in the command for your executable:
+   
+   ```
+   DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
+   ```
 
-    `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
-
-2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it has access to those variables.
+2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. When the service process starts, it has access to those variables.
 
 {{< tabs >}}
 {{% tab "Traces" %}}
@@ -312,6 +317,17 @@ If you're using [connected logs and traces][1], enable automatic logs injection 
 **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
 [1]: /tracing/connect_logs_and_traces/
+{{% /tab %}}
+
+{{% tab "RUM & Session Replay" %}}
+
+If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
+
+When you [create a RUM application][2], confirm the `env` and `service` names.
+
+
+[1]: /real_user_monitoring/connect_rum_and_traces/
+[2]: /real_user_monitoring/browser/#setup
 {{% /tab %}}
 
 {{% tab "Custom Metrics" %}}
@@ -353,7 +369,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 env: <ENV>
 ```
 
-To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, you can configure a [process check][2]:
+To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
 
 ```yaml
 init_config:
@@ -379,120 +395,7 @@ instances:
 
 #### AWS Lambda functions
 
-Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to metrics, traces and logs.
-
-*Note*: These tags are specified through AWS resource tags instead of environment variables.
-
-{{< tabs >}}
-
-{{% tab "Serverless Framework" %}}
-
-Tag your Lambda functions using the [tags][1] option:
-
-```yaml
-# serverless.yml
-service: service-name
-provider:
-  name: aws
-  # to apply the tags to all functions
-  tags:
-    env: "<ENV>"
-    service: "<SERVICE>"
-    version: "<VERSION>"
-
-functions:
-  hello:
-    # this function will inherit the service level tags config above
-    handler: handler.hello
-  world:
-    # this function will overwrite the tags
-    handler: handler.users
-    tags:
-      env: "<ENV>"
-      service: "<SERVICE>"
-      version: "<VERSION>"
-```
-
-If you have installed the [Datadog serverless plugin][2], the plugin automatically tags the Lambda functions with the `service` and `env` tags using the `service` and `stage` values from the serverless application definition, unless a `service` or `env` tag already exists.
-
-[1]: https://www.serverless.com/framework/docs/providers/aws/guide/functions#tags
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-{{% /tab %}}
-
-{{% tab "AWS SAM" %}}
-
-Tag your Lambda functions using the [Tags][1] option:
-
-```yaml
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Resources:
-  MyLambdaFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Tags:
-        env: "<ENV>"
-        service: "<SERVICE>"
-        version: "<VERSION>"
-```
-
-If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
-
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      service: "<SERVICE>"
-      env: "<ENV>"
-```
-
-
-[1]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-tags
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "AWS CDK" %}}
-
-Tag your app, stack, or individual Lambda functions using the [Tags class][1]. If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
-
-```javascript
-import * as cdk from "@aws-cdk/core";
-
-class CdkStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
-    this.addTransform("DatadogServerless");
-
-    new cdk.CfnMapping(this, "Datadog", {
-      mapping: {
-        Parameters: {
-          service: "<SERVICE>",
-          env: "<ENV>",
-        },
-      },
-    });
-  }
-}
-```
-
-
-[1]: https://docs.aws.amazon.com/cdk/latest/guide/tagging.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-{{% /tab %}}
-
-{{% tab "Custom" %}}
-
-Apply the `env`, `service` and `version` tags following the AWS instructions for [Tagging Lambda Functions][1].
-
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
-{{% /tab %}}
-
-{{< /tabs >}}
-
-Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation stack for your [Datadog Forwarder][13]. This option defaults to `true` since version `3.19.0`.
-
+See [how to connect your Lambda telemetry using tags][13].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -510,4 +413,7 @@ Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation sta
 [10]: /integrations/statsd/
 [11]: https://www.chef.io/
 [12]: https://www.ansible.com/
-[13]: /serverless/forwarder/
+[13]: /serverless/configuration/#connect-telemetry-using-tags
+[14]: /agent/cluster_agent/admission_controller/
+
+

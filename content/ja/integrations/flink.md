@@ -11,33 +11,37 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - 処理
-  - ログの収集
+- 処理
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/flink/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/flink/README.md
 display_name: flink
 draft: false
 git_integration_title: flink
 guid: 8b3e5591-533e-4504-aabb-e697f07461ca
 integration_id: flink
 integration_title: Flink
+integration_version: 1.4.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: flink.
-metric_to_check: flink.taskmanager.Status.JVM.CPU.load
+metric_to_check: flink.taskmanager.Status.JVM.CPU.Load
 name: flink
 public_title: Datadog-Flink インテグレーション
 short_description: Flink ジョブのメトリクスを追跡する。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは [Flink][1] を監視します。Datadog は Flink の [Datadog HTTP Reporter][2] を使用し、[Datadog の HTTP API][3] によって Flink のメトリクスを収集します。
@@ -90,7 +94,7 @@ Flink チェックは [Datadog Agent][4] パッケージに含まれています
 
 _Agent バージョン 6.0 以降で利用可能_
 
-1. Flink はデフォルトで `log4j` ロガーを使用します。ファイルへのログ記録をアクティブにし、フォーマットをカスタマイズするには、`log4j.properties`、`log4j-cli.properties`、`log4j-yarn-session.properties`、または `log4j-console.properties` ファイルを編集します。デフォルトのコンフィギュレーションについては、[Flink に関するドキュメント][6]を参照してください。たとえば、`log4j.properties` にはデフォルトで以下のコンフィギュレーションが含まれます。
+1. Flink はデフォルトで `log4j` ロガーを使用します。ファイルへのログ記録をアクティブにし、フォーマットをカスタマイズするには、`log4j.properties`、`log4j-cli.properties`、`log4j-yarn-session.properties`、または `log4j-console.properties` ファイルを編集します。デフォルトのコンフィギュレーションについては、[Flink のリポジトリ][6]を参照してください。たとえば、`log4j.properties` にはデフォルトで以下のコンフィギュレーションが含まれます。
 
    ```conf
    log4j.appender.file=org.apache.log4j.FileAppender
@@ -100,7 +104,7 @@ _Agent バージョン 6.0 以降で利用可能_
    log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
    ```
 
-2. Datadog のインテグレーションパイプラインは、デフォルトで、次の変換パターンをサポートします。
+2. インテグレーションパイプラインは、デフォルトで、次の変換パターンをサポートします。
 
     ```text
     %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
@@ -155,11 +159,12 @@ Flink には、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
+
 [1]: https://flink.apache.org/
 [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.9/monitoring/metrics.html#datadog-orgapacheflinkmetricsdatadogdatadoghttpreporter
 [3]: https://docs.datadoghq.com/ja/api/?lang=bash#api-reference
 [4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://app.datadoghq.com/account/settings#api
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://github.com/apache/flink/tree/master/flink-dist/src/main/flink-bin/conf
 [7]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
 [8]: https://github.com/DataDog/integrations-core/blob/master/flink/datadog_checks/flink/data/conf.yaml.example

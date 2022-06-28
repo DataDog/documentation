@@ -1,25 +1,22 @@
 ---
-title: "Watchdog\_Insights pour RUM"
-kind: documentation
 description: Sachez précisément où regarder pour commencer ou poursuivre vos enquêtes
 further_reading:
-  - link: /real_user_monitoring/explorer/search/
-    tag: Documentation
-    text: "En savoir plus sur la fonctionnalité de recherche du RUM\_Explorer"
-  - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
-    tag: Blog
-    text: Surveiller les signaux Web essentiels avec le RUM
-  - link: https://www.datadoghq.com/blog/datadog-mobile-rum/
-    tag: Blog
-    text: Améliorer l'expérience utilisateur mobile avec la solution Mobile RUM Datadog
+- link: /real_user_monitoring/explorer/search/
+  tag: Documentation
+  text: En savoir plus sur la fonctionnalité de recherche du RUM Explorer
+- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
+  tag: Blog
+  text: Surveiller les signaux Web essentiels avec le RUM
+- link: https://www.datadoghq.com/blog/datadog-mobile-rum/
+  tag: Blog
+  text: Améliorer l'expérience utilisateur mobile avec la solution Mobile RUM Datadog
+kind: documentation
+title: Watchdog Insights pour RUM
 ---
+
 ## Présentation
 
 Grâce à la fonctionnalité Watchdog Insights de la solution Real User Monitoring (RUM) de Datadog, vous pouvez identifier plus facilement les causes d'origine de vos problèmes en visualisation des informations contextuelles dans le RUM Explorer. Les Watchdog Insights renforcent vos connaissances et confirment vos intuitions en suggérant des anomalies et des goulots d'étranglement nuisant potentiellement à un sous-ensemble d'utilisateurs.
-
-<div class="alert alert-warning">
-Watchdog Insights pour RUM est disponible en version bêta. Cette fonctionnalité est proposée aux clients utilisant la solution Real User Monitoring. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a>.
-</div>
 
 Dans cet exemple, la fonctionnalité Watchdog Insights identifie que l'instance d'application déployée sur `view.url_host:www.shopist.io` génère la majorité des erreurs sur l'intervalle donné (par exemple, les 24 dernières heures).
 

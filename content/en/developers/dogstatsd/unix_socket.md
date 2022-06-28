@@ -304,7 +304,7 @@ For guidelines on creating additional implementation options, see the [datadog-a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/dogstatsd_metrics_submission/
+[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [2]: /metrics/custom_metrics/
 [3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
 [4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support

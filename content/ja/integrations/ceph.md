@@ -12,19 +12,20 @@ assets:
     ceph_processes: assets/saved_views/ceph_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - os & system
-  - log collection
+- data store
+- os & system
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ceph/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/ceph/README.md
 display_name: Ceph
 draft: false
 git_integration_title: ceph
 guid: 8a60c34f-ecde-4269-bcae-636e6cbce98f
 integration_id: ceph
 integration_title: Ceph
+integration_version: 2.7.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -33,16 +34,19 @@ metric_prefix: ceph.
 metric_to_check: ceph.write_bytes_sec
 name: ceph
 process_signatures:
-  - ceph-mon
-  - ceph-mgr
-  - ceph-osd
+- ceph-mon
+- ceph-mgr
+- ceph-osd
 public_title: Datadog-Ceph インテグレーション
 short_description: プールごとのパフォーマンスメトリクスを収集し、クラスター状態全体を監視。
 support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ![Ceph ダッシュボード][1]
 
 ## 概要
@@ -110,7 +114,7 @@ _Agent バージョン 6.0 以降で利用可能_
 {{< get-metrics-from-git "ceph" >}}
 
 
-**注**: Ceph Luminous 以降を実行している場合、`ceph.osd.pct_used` メトリクスは表示されません。
+**注**: Ceph luminous またはそれ以降を実行している場合、`ceph.osd.pct_used` メトリクスは含まれません。
 
 ### イベント
 

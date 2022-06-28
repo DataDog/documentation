@@ -20,6 +20,7 @@ further_reading:
 aliases:
     - /tracing/getting_further/metrics_namespace
 ---
+<div class="alert alert-warning">This method of using trace metrics is outdated. Instead, <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> is recommended.</div>
 
 ## Overview
 

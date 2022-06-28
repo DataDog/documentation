@@ -1,9 +1,10 @@
 ---
-title: Interpolation
-kind: documentation
 aliases:
-  - /fr/graphing/functions/interpolation/
+- /fr/graphing/functions/interpolation/
+kind: documentation
+title: Interpolation
 ---
+
 ## Fill
 
 | Fonction | Description                                       | Exemple                                    |
@@ -35,7 +36,7 @@ La fonction `default_zero()` peut notamment être utilisée pour :
 - Aligner des gauges sur la valeur 0 lors de la réalisation d'opérations arithmétiques sur des métriques creuses. Remarque : les métriques de type `COUNT` ou `RATE` traitées via `as_count()` ou `as_rate()` sont _toujours_ alignées sur la valeur 0. L'utilisation de `default_zero()` ne modifie pas leur alignement : seules les métriques de type `GAUGE` sont affectées.
 - Rétablir l'état des monitors depuis l'état no-data. Cela fonctionne pour les alertes simples et multiples, mais la valeur 0 ne doit pas causer le déclenchement du monitor. Par exemple, la fonction ne pourrait pas rétablir l'état d'un monitor utilisant la requête `avg(last_10m):avg:system.cpu.idle{*} < 10`, car ce monitor se déclenche (au lieu de rétablir son état) lorsqu'il détecte la valeur 0. Évitez d'utiliser cette fonction pour les monitors de taux d'erreur utilisant une requête `as_count()`. Consultez la section [as_count() dans les évaluations de monitors][2] pour en savoir plus.
 - Remplir des intervalles vides dans des séries de métriques creuses (mais non vides) pour des raisons visuelles ou pour ajuster la valeur min/max/moyenne d'une série temporelle dans une évaluation de monitor.
-- Afficher la valeur 0 sur le widget Valeur de requête en cas d'absence de données.
+- Afficher la valeur 0 sur le widget Série temporelle en l'absence de données.
 
 ### Exemple
 

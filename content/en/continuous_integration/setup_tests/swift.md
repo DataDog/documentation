@@ -201,7 +201,7 @@ For UITests, both the test target and the application running from the UITests m
 
 ### RUM Integration
 
-If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][4] guide. An iOS RUM version >= 1.10 is needed.
+If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][3] guide. An iOS RUM version >= 1.10 is needed.
 
 
 ## Additional optional configuration
@@ -284,7 +284,7 @@ DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 
 **Note**: Using OpenTelemetry is only supported for Swift.
 
-Datadog Swift testing framework uses [OpenTelemetry][3] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
+Datadog Swift testing framework uses [OpenTelemetry][4] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -687,5 +687,5 @@ Always call `session.end()` at the end so that all the test info is flushed to D
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
-[3]: https://opentelemetry.io/
-[4]: /continuous_integration/guides/rum_swift_integration
+[3]: /continuous_integration/guides/rum_swift_integration
+[4]: https://opentelemetry.io/

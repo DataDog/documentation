@@ -34,7 +34,7 @@ This guide provides an overview of the process for integrating an Amazon Web Ser
 
 At a high level, this involves creating an IAM role and associated policy to enable Datadog's AWS account to make API calls into your AWS account for collecting or pushing data. The template also deploys the [Datadog Forwarder][1] Lambda function for sending logs to Datadog. Using the CloudFormation template provides all the tools needed to send this data to your Datadog account, and Datadog maintains the CloudFormation template to provide the latest functionality.
 
-After the initial connection is established, you can enable individual AWS service integrations relevant to your AWS environment. With a single click, Datadog provisions the necessary resources in your AWS account and begins querying metrics and events for the services you use. For popular AWS services you are using, Datadog provisions out-of-the-box dashboards, providing immediate and customizable visibility. This guide demonstrates setting up the integration, sending logs from [CloudTrail][2] and the Forwarder Lambda function, and installing the Datadog Agent on an Amazon Linux EC2 instance. See the [Enable sub-integrations section](#enable-sub-integrations) for a list of the available sub-integrations.
+After the initial connection is established, you can enable individual AWS service integrations relevant to your AWS environment. With a single click, Datadog provisions the necessary resources in your AWS account and begins querying metrics and events for the services you use. For popular AWS services you are using, Datadog provisions out-of-the-box dashboards, providing immediate and customizable visibility. This guide demonstrates setting up the integration, sending logs from [CloudTrail][2] and the Forwarder Lambda function, and installing the Datadog Agent on an Amazon Linux EC2 instance. See the [Enable integrations for individual AWS service](#enable-integrations-for-individual-aws-service) section for a list of the available sub-integrations.
 
 This process can be repeated for as many AWS accounts as necessary, or you can also use the [API][3], [AWS CLI][4], or [Terraform][5] to set up multiple accounts at once. For more information, read the [Datadog-Amazon CloudFormation guide][6].
 
@@ -96,7 +96,7 @@ This launches the creation process for the Datadog stack along with three nested
 
 7. After the Stack is created, go back to the AWS integration tile in Datadog and find the box for the new account you created. Click "Refresh to Check Status" to see a success message at the top of the page, along with the new account visible on the page with the relevant details.
 
-    {{< img src="getting_started/integrations/new-account.png" alt="The AWS integration tile in the Datadog account. The left hand side shows that the EC2 automuting option is enabled. There is a section titled 'Limit metric collection by AWS Service' which displays the sub-integrations associated with the Datadog AWS integration. These are ApiGateway, ApplicationELB, AppRunner, AppStream, AppSync, Athena, AutoScaling, Billing, Budgeting, CertificateManager, CloudFront, CloudHSM, CloudSearch, CodeBuild, Cognito, and Connect. There is a heading which states 'Turning on sub-integrations can affect your CloudWatch API usage. See our AWS FAQ for more info.'. All boxes are displayed as checked. Below this is another section called 'Other options'. There are two checkboxes here, Collect CloudWatch alarms and Collect custom metrics. Both options are checked.' On the right hand side of the page there is a section showing the settings for the connected AWS account. The Account ID is displayed as an obfuscated value. The AWS Role name is displayed as DatadogIntegrationRole.">}}
+    {{< img src="getting_started/integrations/new-account.png" alt="The AWS integration tile in the Datadog account showing the Account: New Account section and a message that the integration setup with CloudFormation is pending completion. There is a button for refreshing to check the status, and a warning to check the CloudFormation stack generation before checking the status.">}}
 
     Depending on which AWS services you use and your use case for monitoring, there are multiple options within the integration tile to specify the data to be collected. For example, you can limit data collection based on AWS service, namespace, or tags. Additionally, you can choose to mute monitor notifications. For example, terminations triggered manually or by autoscaling with [EC2 automuting][9] enabled. If needed, enable [Alarm Collection][10] to send your CloudWatch alarms to the Datadog [Event Stream][11] and choose whether to collect custom metrics.
 
@@ -225,7 +225,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [36]: /dashboards/#overview
 [37]: /dashboards/functions/
 [38]: /dashboards/correlations/
-[39]: /monitors/create/types/
+[39]: /monitors/create/#monitor-types
 [40]: /monitors/notify/
 [41]: /integrations/#cat-notification
 [42]: /serverless

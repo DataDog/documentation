@@ -1,5 +1,5 @@
 ---
-title: Upgrade the Browser SDK
+title: Upgrade The RUM Browser SDK
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/explorer'
@@ -10,25 +10,27 @@ further_reading:
   text: "Use Datadog Session Replay to view real-time user journeys"
 ---
 
-Follow this guide to migrate between major versions of the RUM and logs Browser SDK.
+## Overview 
+
+Follow this guide to migrate between major versions of the RUM and Logs Browser SDKs.
 
 ## From v3 to v4
 
-Several breaking changes were made to RUM and logs Browser SDK with the v4 version.
+Several breaking changes were made to the RUM and Logs Browser SDK with the v4 version.
 
 ### Changes
 
 #### Intake URLs
 
-The URLs for where the Browser SDK data is sent has changed. Ensure that your [Content Security Policy is up to date][1].
+The URLs for where the RUM Browser SDK data is sent has changed. Ensure that your [Content Security Policy is up to date][1].
 
 #### Minimal Typescript version support
 
-Browser SDK v4 is not compatible with TypeScript earlier than v3.8.2. If you use TypeScript, ensure that the version is at least v3.8.2.
+The RUM Browser SDK v4 is not compatible with TypeScript earlier than v3.8.2. If you use TypeScript, ensure that the version is at least v3.8.2.
 
 #### Tags syntax
 
-The `version`, `env`, and `service` initialization parameters are sent as tags to Datadog. The Browser SDK slightly sanitizes them, to ensure that they don't generate multiple tags, and prints a warning if those values don't meet the tag requirements syntax.
+The `version`, `env`, and `service` initialization parameters are sent as tags to Datadog. The RUM Browser SDK slightly sanitizes them to ensure that they don't generate multiple tags, and prints a warning if those values don't meet the tag requirements syntax.
 
 #### Stricter initialization parameters typing
 
@@ -40,9 +42,9 @@ When multiple privacy options are specified on the same element, Datadog applies
 
 #### Action names computation
 
-When computing action names, the Browser SDK removes text of child elements with the `data-dd-action-name` attribute from inner text.
+When computing action names, the RUM Browser SDK removes text of child elements with the `data-dd-action-name` attribute from inner text.
 
-For example, for the following `container` element, where previously the computed action name would be `Container sensitive data`, in v4 the computed action name is `Container`:
+For example, for the following `container` element, where previously the computed action name would be `Container sensitive data`, in v4, the computed action name is `Container`:
 ```html
 <div id="container">
   Container
@@ -55,7 +57,7 @@ For example, for the following `container` element, where previously the compute
 
 #### XHR `_datadog_xhr` field
 
-The Browser SDK previously used a `_datadog_xhr` property on `XMLHttpRequest` objects representing its internal state. This property has been removed without replacement as it wasn't intended to be used externally.
+The RUM Browser SDK previously used a `_datadog_xhr` property on `XMLHttpRequest` objects representing its internal state. This property has been removed without replacement as it wasn't intended to be used externally.
 
 #### `proxyHost` initialization parameter
 
@@ -63,20 +65,21 @@ The `proxyHost` initialization parameter has been removed. Use the `proxyUrl` in
 
 #### Privacy options support
 
-The privacy options `input-ignored` and `input-masked` are no longer valid. Instead, use the `mask-user-input` privacy option. Specifically, replace:
+The privacy options `input-ignored` and `input-masked` are no longer valid. Instead, use the `mask-user-input` privacy option. 
+
+Specifically, replace:
 
 * `dd-privacy-input-ignored` and `dd-privacy-input-masked` class names with `dd-privacy-mask-user-input`
 * `dd-privacy="input-masked"` and `dd-privacy="input-ignored"` attribute values with `dd-privacy="mask-user-input"`
 
 ## From v2 to v3
 
-Browser SDK v3 introduces [Session Replay][2]. With this major version update, several breaking changes were made to RUM and logs Browser SDKs.
+The Browser SDK v3 introduces [Session Replay][2]. With this major version update, several breaking changes were made to the RUM and Logs Browser SDKs.
 
 ### Changes
 #### RUM errors
 
 The RUM Browser SDK no longer issues [RUM errors][3] for failed XHR and Fetch calls. These failed network requests are still collected as [RUM resources][4], which contain the status code attribute.
-
 
 To continue seeing the failed network requests as RUM errors, Datadog recommends intercepting the resource with the [beforeSend API][5], checking the `status_code` property, and manually sending an error with the [addError API][6].
 

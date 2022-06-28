@@ -1,21 +1,22 @@
 ---
-title: Utilisation de base de l'Agent
-kind: documentation
 aliases:
-  - /fr/guides/basic_agent_usage/
-  - /fr/agent/faq/where-is-the-configuration-file-for-the-agent/
-  - /fr/agent/faq/log-location
+- /fr/guides/basic_agent_usage/
+- /fr/agent/faq/where-is-the-configuration-file-for-the-agent/
+- /fr/agent/faq/log-location
 further_reading:
-  - link: /agent/faq/how-datadog-agent-determines-the-hostname/
-    tag: FAQ
-    text: "Comment Datadog détermine-t-il le hostname de l'Agent\_?"
-  - link: /agent/guide/agent-commands/
-    tag: FAQ
-    text: Liste de toutes les commandes de l'Agent
-  - link: /agent/guide/agent-configuration-files/
-    tag: FAQ
-    text: Emplacement de l'ensemble des fichiers de configuration de l'Agent
+- link: /agent/faq/how-datadog-agent-determines-the-hostname/
+  tag: FAQ
+  text: Comment Datadog détermine-t-il le hostname de l'Agent ?
+- link: /agent/guide/agent-commands/
+  tag: FAQ
+  text: Liste de toutes les commandes de l'Agent
+- link: /agent/guide/agent-configuration-files/
+  tag: FAQ
+  text: Emplacement de l'ensemble des fichiers de configuration de l'Agent
+kind: documentation
+title: Utilisation de base de l'Agent
 ---
+
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
 ## Architecture de l'Agent
@@ -96,7 +97,7 @@ Les ports[3] suivants acceptent les opérations :
 
 Par défaut, tous les processus d'écoute sont liés à `127.0.0.1` et/ou `::1` pour les versions 3.4.1+ de l'Agent. Dans les versions antérieures, ils étaient liés à `0.0.0.0` (toutes les interfaces). Pour en savoir plus sur l'exécution de l'Agent via un proxy, consultez la section [Configuration de l'Agent pour un proxy][4]. Pour en savoir plus sur les plages d'IP à autoriser, consultez la section [Trafic réseau][5].
 
-Nous vous conseillons de prévoir 1024 descripteurs de fichiers ouverts. Vous pouvez consulter cette valeur avec la commande `ulimit -a`. Si vous êtes contraint d'utiliser une valeur plus faible en raison d'une limite stricte (par exemple si l'option Shell Fork Bomb Protection est activée), vous pouvez ajouter la ligne suivante dans `superisord.conf` :
+Nous vous conseillons de prévoir 1024 descripteurs de fichiers ouverts. Vous pouvez consulter cette valeur avec la commande `ulimit -a`. Si vous êtes contraint d'utiliser une valeur plus faible en raison d'une limite stricte (par exemple si l'option Shell Fork Bomb Protection est activée), vous pouvez ajouter la ligne suivante dans `supervisord.conf` :
 
 ```conf
 [supervisord]
@@ -138,14 +139,15 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 | [Debian][2] avec systemd                 | Debian 7 (wheezy) et versions ultérieures                                        |
 | [Debian][2] avec SysVinit                | Debian 7 (wheezy) et versions ultérieures avec l'Agent 6.6.0+                        |
 | [Ubuntu][3]                              | Ubuntu 14.04 et versions ultérieures                                             |
-| [RedHat/CentOS][4]                       | RedHat/CentOS 6 et versions ultérieures                                          |
+| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 6 et versions ultérieures, AlmaLinux/Rocky 8 et versions ultérieures avec les versions 6.33.0/7.33.0 et ultérieures de l'Agent |
 | [Docker][5]                              | 1.12 et versions ultérieures                                             |
 | [Kubernetes][6]                          | 1.3 et versions ultérieures                                              |
-| [SUSE Enterprise Linux][7] avec systemd  | SUSE 11 SP4 et versions ultérieures                                              |
-| [SUSE Enterprise Linux][7] avec SysVinit | SUSE 11 SP4 avec l'Agent 7.16.0+                              |
+| [SUSE Enterprise Linux][7] avec systemd  | SUSE 11 SP4+ avec une version de l'Agent antérieure à 6.33.0/7.33.0, SUSE 12+ avec l'Agent 6.33.0+/7.33.0+                     |
+| [SUSE Enterprise Linux][7] avec SysVinit | SUSE 11 SP4 avec les versions 6.16.0/7.16.0 à 6.33.0/7.33.0 de l'Agent        |
+| [OpenSUSE][7] avec systemd               | OpenSUSE 15+ avec l'Agent 6.33.0+/7.33.0+                     |
 | [Fedora][8]                              | Fedora 26 et versions ultérieures                                                |
 | [macOS][9]                               | macOS 10.12 et versions ultérieures                                              |
-| [Windows Server][10]                     | Windows Server 2008 R2+ et Server Core (Nano Server non pris en charge) |
+| [Windows Server][10]                     | Windows Server 2008 R2 et versions ultérieures (y compris Server Core)           |
 | [Windows][10]                            | Windows 7 et versions ultérieures                                                |
 | [Système d'exploitation Windows Azure Stack HCI][10]         | Toutes les versions                                              |
 
@@ -236,6 +238,7 @@ L'interface de ligne de commande pour l'Agent v6 est basée sur un système de 
 | `start`           | [Démarre l'Agent][3].                                                       |
 | `start-service`   | Démarre l'Agent dans le gestionnaire de contrôle des services.                         |
 | `status`          | [Affiche le statut actuel de l'Agent][4].                                        |
+| `stream-logs`     | Diffuse les logs en cours de traitement par un Agent exécuté.                         |
 | `stop`            | [Arrête l'Agent][5].                                                        |
 | `stopservice`     | Arrête l'Agent dans le gestionnaire de contrôle des services.                          |
 | `version`         | Affiche les informations sur la version.                                                         |
@@ -248,35 +251,16 @@ L'interface de ligne de commande pour l'Agent v6 est basée sur un système de 
 
 ## Charge de l'Agent
 
-Vous trouverez ci-dessous un exemple de la consommation en ressources de l'Agent Datadog. Les tests ont été effectués sur une instance `c5.xlarge` de machine EC2 AWS (4 VCPU/8 Go de RAM), où le `datadog-agent` de base était exécuté avec un check de processus pour surveiller l'Agent. La consommation en ressources de l'Agent peut augmenter avec davantage d'intégrations.
+Vous trouverez ci-dessous un exemple de la consommation en ressources de l'Agent Datadog. Les tests ont été effectués sur une instance `c5.xlarge` de machine AWS EC2 (4 VCPU/8 Go de RAM). Des performances similaires ont été obtenues avec des instances basées sur ARM64 dotées de ressources similaires. Le `datadog-agent` de base était exécuté avec un check de processus pour surveiller l'Agent. La consommation en ressources de l'Agent peut augmenter avec davantage d'intégrations.
 L'activation des checks JMX force l'Agent à utiliser plus de mémoire selon le nombre de beans exposés par les JVM surveillées. L'activation des Agents de traces et de processus augmente également la consommation en ressources.
 
-{{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
-
-* Version de l'Agent testé : 6.7.0
-* Processeur : ~ 0,12 % du processeur utilisé en moyenne
-* Mémoire : ~ 60 Mo de RAM utilisés (mémoire RSS)
-* Bande passante réseau : ~ 86 B/s ▼ | 260 B/s ▲
+* Version de l'Agent testé : 7.34.0
+* Processeur : ~ 0,08 % du processeur utilisé en moyenne
+* Mémoire : ~ 130 Mo de RAM utilisés (mémoire RSS)
+* Bande passante réseau : ~ 140 B/s ▼ | 800 B/s ▲
 * Disque :
-  * Linux : 350 Mo à 400 Mo selon la distribution
-  * Windows : 260 Mo
-
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-* Version de l'Agent testé : 5.24.0
-* Processeur : ~ 0,35 % du processeur utilisé en moyenne
-* Mémoire : ~ 115 Mo de RAM utilisés
-* Bande passante réseau : ~ 1 900 B/s ▼ | 800 B/s ▲
-* Disque :
-  * Linux : 312 Mo
-  * Windows : 295 Mo
-
-**Remarque** : depuis la v5.15 de l'Agent de conteneur, nous vous conseillons d'allouer au moins 256 Mo de mémoire au conteneur en raison d'un cache plus large. L'augmentation de la limite ne signifie pas que la charge normale est plus haute qu'avant : il s'agit plutôt de faire face aux pics temporaires. La version 6 de l'Agent dispose d'une empreinte mémoire beaucoup plus limitée.
-
-{{% /tab %}}
-{{< /tabs >}}
+  * Linux : 830 Mo à 880 Mo selon la distribution
+  * Windows : 870 Mo
 
 **Collecte de logs** :
 
@@ -289,9 +273,6 @@ Les mesures ci-dessous reflètent la collecte de *110 Ko de logs par seconde* �
 * Processeur : ~ 1,5 % du processeur utilisé en moyenne
 * Mémoire : ~ 95 Mo de RAM utilisés
 * Bande passante réseau : ~ 14 KB/s ▲
-* Disque :
-  * Linux : 350 Mo à 400 Mo selon la distribution
-  * Windows : 260 Mo
 
 {{% /tab %}}
 {{% tab "Compression HTTP niveau 1" %}}
@@ -300,9 +281,6 @@ Les mesures ci-dessous reflètent la collecte de *110 Ko de logs par seconde* �
 * Processeur : ~ 1 % du processeur utilisé en moyenne
 * Mémoire : ~ 95 Mo de RAM utilisés
 * Bande passante réseau : ~ 20 KB/s ▲
-* Disque :
-  * Linux : 350 Mo à 400 Mo selon la distribution
-  * Windows : 260 Mo
 
 {{% /tab %}}
 {{% tab "Pas de compression HTTP" %}}
@@ -311,9 +289,6 @@ Les mesures ci-dessous reflètent la collecte de *110 Ko de logs par seconde* �
 * Processeur : ~ 0,7 % du processeur utilisé en moyenne
 * Mémoire : ~ 90 Mo de RAM utilisés (mémoire RSS)
 * Bande passante réseau : ~ 200 KB/s ▲
-* Disque :
-  * Linux : 350 Mo à 400 Mo selon la distribution
-  * Windows : 260 Mo
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -328,7 +303,7 @@ Remarque : si vous souhaitez mettre à jour manuellement une intégration spéc
 
 ### Fichiers de configuration
 
-[Consultez la documentation relative aux fichiers de configuration de l'Agent][9].
+Consultez la [documentation relative aux fichiers de configuration de l'Agent][9].
 
 ### Site Datadog
 
@@ -340,7 +315,7 @@ site: {{< region-param key="dd_site" >}}
 
 ### Emplacement des logs
 
-[Consultez la documentation relative aux fichiers de log de l'Agent][11].
+Consultez la [documentation relative aux fichiers de log de l'Agent][11].
 
 ## Pour aller plus loin
 

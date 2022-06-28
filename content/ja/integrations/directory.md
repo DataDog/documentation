@@ -8,17 +8,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/directory/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/directory/README.md
 display_name: Directory
 draft: false
 git_integration_title: directory
 guid: 0c38c4ef-5266-4667-9fb1-de8f2b73708a
 integration_id: システム
 integration_title: Directory
+integration_version: 1.13.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,10 +31,13 @@ public_title: Datadog-Directory インテグレーション
 short_description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 選択したディレクトリやファイルからメトリクスをキャプチャします。Agent は以下を収集します。

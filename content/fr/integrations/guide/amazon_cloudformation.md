@@ -1,17 +1,11 @@
 ---
 aliases:
-  - /fr/developers/amazon_cloudformation/
+- /fr/developers/amazon_cloudformation/
 dependencies:
-  - https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md
+- https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md
 kind: documentation
-title: "Datadog/Amazon\_CloudFormation"
+title: Datadog/Amazon CloudFormation
 ---
-<div class="alert alert-warning">
-  Les ressources Datadog/Amazon CloudFormation sont uniquement disponibles pour le registre public de CloudFormation, dans la région us-east-1. Pour ajouter de façon privée une ressource dans une autre région, utilisez les packages fournis.
-</div>
-
-
-
 ​
 [AWS CloudFormation][1] vous fournit des modèles afin de décrire, de configurer et de provisionner simultanément toutes les ressources AWS de votre environnement. Les ressources Datadog/AWS CloudFormation vous permettent d’interagir avec les ressources Datadog prises en charge, d'envoyer des ressources à un datacenter Datadog et d'ajouter de façon privée une extension dans n'importe quelle région possédant des ressources Datadog.
 
@@ -122,6 +116,31 @@ Les ressources Datadog suivantes peuvent être ajoutées à votre compte AWS. Co
 | Downtimes               | `Datadog::Monitors::Downtime`     | [Activer ou désactiver des downtimes pour vos monitors][11]     | `datadog-monitors-downtime`     | [Versions du gestionnaire de schémas][12] |
 | Utilisateur                    | `Datadog::IAM::User`              | [Créer et gérer des utilisateurs Datadog][13]                  | `datadog-iam-user`              | [Versions du gestionnaire de schémas][14] |
 | SLO                    | `Datadog::SLOs::SLO`              | [Créer et gérer des SLO Datadog][19]                   | `datadog-slos-slo`              | [Versions du gestionnaire de schémas][20] |
+
+## Régions prises en charge
+
+Les ressources Datadog/Amazon CloudFormation sont disponibles dans le registre public de CloudFormation dans les régions suivantes :
+
+| Code            | Name                      |
+|-----------------|---------------------------|
+| us-east-1       | US East (N. Virginia)     |
+| us-east-2       | US East (Ohio)            |
+| us-west-1       | US West (N. California)   |
+| us-west-2       | US West (Oregon)          |
+| ap-south-1      | Asia Pacific (Mumbai)     |
+| ap-northeast-1  | Asia Pacific (Tokyo)      |
+| ap-northeast-2  | Asia Pacific (Seoul)      |
+| ap-southeast-1  | Asia Pacific (Singapore)  |
+| ap-southeast-2  | Asia Pacific (Sydney)     |
+| ca-central-1    | Canada (Central)          |
+| eu-central-1    | Europe (Frankfurt)        |
+| eu-west-1       | Europe (Ireland)          |
+| eu-west-2       | Europe (London)           |
+| eu-west-3       | Europe (Paris)            |
+| eu-north-1      | Europe (Stockholm)        |
+| sa-east-1       | South America (São Paulo) |
+
+**Remarque** : pour ajouter de façon privée une ressource dans une autre région, utilisez les packages fournis.
 
 ## Dépannage
 

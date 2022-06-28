@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/dnscheck
+- /ja/integrations/dnscheck
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -10,18 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - network
-  - web
+- network
+- web
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md
 display_name: DNS
 draft: false
 git_integration_title: dns_check
 guid: 31e4c84c-fc4b-4cd4-97ed-0331bf4e2023
 integration_id: dns
 integration_title: DNS Check
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -33,10 +34,13 @@ public_title: Datadog-DNS Check インテグレーション
 short_description: DNS レコードの解決可能性とルックアップ時間を監視。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 選択したネームサーバーを使用した DNS レコードの解決可能性とルックアップ時間を監視します。
@@ -45,7 +49,7 @@ supported_os:
 
 ### インストール
 
-DNS チェックは [Datadog Agent][1] パッケージに含まれているため、DNS サーバーを調査するサーバーに追加でインストールする必要はありません。
+DNS チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 メトリクス指向チェックの多くは監視対象サービスと同じホストで実行することが最適ですが、このステータス指向チェックは、監視対象の DNS サービスを実行していないホストから実行することが望ましい場合があります。
 

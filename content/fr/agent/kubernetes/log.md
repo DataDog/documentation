@@ -1,29 +1,30 @@
 ---
-title: Collecte de logs Kubernetes
-kind: documentation
 further_reading:
-  - link: /agent/kubernetes/apm/
-    tag: Documentation
-    text: Recueillir les traces de vos applications
-  - link: /agent/kubernetes/prometheus/
-    tag: Documentation
-    text: Recueillir vos métriques Prometheus
-  - link: /agent/kubernetes/integrations/
-    tag: Documentation
-    text: Recueillir automatiquement les métriques et les logs de vos applications
-  - link: /agent/guide/autodiscovery-management/
-    tag: Documentation
-    text: Limiter la collecte de données à un seul sous-ensemble de conteneurs
-  - link: /agent/kubernetes/tag/
-    tag: Documentation
-    text: Attribuer des tags à toutes les données émises par un conteneur
+- link: /agent/kubernetes/apm/
+  tag: Documentation
+  text: Recueillir les traces de vos applications
+- link: /agent/kubernetes/prometheus/
+  tag: Documentation
+  text: Recueillir vos métriques Prometheus
+- link: /agent/kubernetes/integrations/
+  tag: Documentation
+  text: Recueillir automatiquement les métriques et les logs de vos applications
+- link: /agent/guide/autodiscovery-management/
+  tag: Documentation
+  text: Limiter la collecte de données à un seul sous-ensemble de conteneurs
+- link: /agent/kubernetes/tag/
+  tag: Documentation
+  text: Attribuer des tags à toutes les données émises par un conteneur
+kind: documentation
+title: Collecte de logs Kubernetes
 ---
+
 L'Agent peut collecter les logs de deux façons : depuis le [socket Docker][1] et depuis les [fichiers de logs Kubernetes](#collecte-logs) (automatiquement gérés par Kubernetes). Datadog recommande d'utiliser la logique des fichiers de logs Kubernetes lorsque :
 
 * Docker n'est pas le runtime, **ou**
 * Plus de 10 conteneurs sont utilisés au sein de chaque nœud
 
-L'API Docker est optimisée pour obtenir les logs d'un conteneur à la fois. Lorsqu'un pod contient un grand nombre de conteneurs, la collecte de logs via le socket Docker peut solliciter davantage de ressources qu'en passant par les fichiers de logs Kubernetes.
+L'API Docker est optimisée de façon à obtenir les logs d'un conteneur à la fois. Lorsqu'un nœud contient un grand nombre de conteneurs, la collecte de logs via le socket Docker peut solliciter davantage de ressources qu'en passant par les fichiers de log Kubernetes.
 
 ## Collecte de logs
 
@@ -46,20 +47,20 @@ Pour activer la collecte de logs avec votre DaemonSet :
           value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
           value: "true"
-        - name: DD_CONTAINER_EXCLUDE
+        - name: DD_CONTAINER_EXCLUDE_LOGS
           value: "name:datadog-agent"
      # (...)
     ```
 
-    **Remarque** : définissez `DD_CONTAINER_EXCLUDE` pour empêcher l'Agent Datadog de recueillir et d'envoyer ses propres logs. Supprimez ce paramètre si vous souhaitez recueillir les logs de l'Agent Datadog. Pour en savoir plus, consultez [Gestion de la découverte de conteneurs][1]. Lorsque vous utilisez ImageStreams au sein d'environnements OpenShift, définissez `DD_CONTAINER_INCLUDE` avec le `name` du conteneur pour recueillir des logs. Ces deux paramètres Exclude/Include prennent en charge les expressions régulières.
+    **Remarque** : définissez `DD_CONTAINER_EXCLUDE_LOGS` pour empêcher l'Agent Datadog de recueillir et d'envoyer ses propres logs. Supprimez ce paramètre si vous souhaitez recueillir les logs de l'Agent Datadog. Pour en savoir plus, consultez la documentation relative à [la variable d'environnement permettant d'ignorer des conteneurs][1]. Lorsque vous utilisez ImageStreams au sein d'environnements OpenShift, définissez `DD_CONTAINER_INCLUDE_LOGS` avec le `name` du conteneur pour recueillir des logs. Ces deux paramètres Exclude/Include prennent en charge les expressions régulières.
 
-2. Montez le volume `pointdir` pour empêcher la perte de logs de conteneurs lors des redémarrages ou en en cas de problèmes réseau. Montez également `/var/lib/docker/containers` pour recueillir des logs via le fichier de logs Kubernetes, car `/var/log/pods` est un lien symbolique vers ce répertoire :
+2. Montez le volume `pointerdir` pour empêcher la perte de logs de conteneur lors des redémarrages ou en cas de problèmes réseau. Montez également `/var/lib/docker/containers` pour recueillir des logs via le fichier de logs Kubernetes, car `/var/log/pods` est un lien symbolique vers ce répertoire :
 
     ```yaml
       # (...)
         volumeMounts:
         #  (...)
-          - name: pointdir
+          - name: pointerdir
             mountPath: /opt/datadog-agent/run
          - name: logpodpath
            mountPath: /var/log/pods
@@ -74,7 +75,7 @@ Pour activer la collecte de logs avec votre DaemonSet :
        # (...)
         - hostPath:
             path: /opt/datadog-agent/run
-          name: pointdir
+          name: pointerdir
         - hostPath:
             path: /var/log/pods
           name: logpodpath
@@ -88,7 +89,7 @@ Pour activer la collecte de logs avec votre DaemonSet :
         # (...)
     ```
 
-   Le `pointdir` est utilisé pour stocker un fichier avec un pointeur vers tous les conteneurs à partir desquels l'Agent recueille des logs. Ce volume permet de s'assurer qu'aucun log n'est perdu lorsque l'Agent est redémarré ou lors d'un problème réseau.
+    Le `pointerdir` est utilisé pour stocker un fichier avec un pointeur vers tous les conteneurs à partir desquels l'Agent recueille des logs. Ce volume permet de s'assurer qu'aucun log n'est perdu lorsque l'Agent est redémarré ou lors d'un problème réseau.
 
 ### Sans privilèges
 
@@ -106,7 +107,7 @@ Pour activer la collecte de logs avec votre DaemonSet :
 
 Lorsque l'Agent s'exécute avec un utilisateur non root, il ne peut pas lire directement les fichiers de log contenus dans `/var/lib/docker/containers`. Dans la plupart des cas, il est nécessaire de monter le socket Docker sur le conteneur de l'Agent, afin de pouvoir récupérer les logs du conteneur depuis le daemon Docker.
 
-[1]: /fr/agent/guide/autodiscovery-management/
+[1]: /fr/agent/docker/?tab=standard#ignore-containers
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -180,7 +181,7 @@ agent:
 
 `<USER_ID>` est l'UID pour exécuter l'agent et `<DOCKER_GROUP_ID>` est l'ID du groupe auquel appartient le docker ou le socket containerd.
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -206,7 +207,8 @@ Chaque onglet des sections ci-dessous présente une façon différente d'appliqu
 
 * [Annotations de pod Kubernetes](?tab=kubernetes#configuration)
 * [ConfigMap](?tab=configmap#configuration)
-* [Des stockages key/value](?tab=keyvaluestore#configuration)
+* [Stockages clé-valeur](?tab=stockagecle-valeur#configuration)
+* [Helm](?tab=helm#configuration)
 
 ### Configuration
 
@@ -268,6 +270,8 @@ Ces modèles d'intégration peuvent convenir dans les cas simples. Toutefois, si
 1. Créez un fichier `conf.d/<NOM_INTÉGRATION>.d/conf.yaml` sur votre host et ajoutez votre configuration automatique personnalisée.
 2. Montez le répertoire `conf.d/` de votre host dans le répertoire `conf.d/` de l'Agent conteneurisé.
 
+**Remarque** : cette méthode fonctionne uniquement lorsque vous recueillez vos logs via le socket Docker, et non via le fichier de logs Kubernetes. Pour recueillir des logs dans un environnement Kubernetes avec le socket Docker, vérifiez que vous utilisez le runtime Docker et que `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` est défini sur `false`.
+
 **Exemple de fichier de configuration automatique** :
 
 ```text
@@ -287,6 +291,8 @@ Consultez la documentation sur [les identificateurs de conteneur Autodiscovery][
 {{% tab "ConfigMap" %}}
 
 Kubernetes vous permet d'utiliser des [ConfigMaps][1]. Pour en savoir plus, consultez le modèle ci-dessous et la documentation relative aux [intégrations personnalisées Kubernetes][2].
+
+**Remarque** : cette méthode fonctionne uniquement lorsque vous recueillez vos logs via le socket Docker, et non via le fichier de logs Kubernetes. Pour recueillir des logs dans un environnement Kubernetes avec le socket Docker, vérifiez que vous utilisez le runtime Docker et que `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` est défini sur `false`.
 
 ```text
 kind: ConfigMap
@@ -363,6 +369,25 @@ Lorsque le stockage clé-valeur est activé en tant que source de modèle, l'Age
 
 [1]: /fr/integrations/consul/
 [2]: /fr/agent/guide/agent-commands/
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Vous pouvez personnaliser la collecte de logs pour chaque intégration de `confd`. Avec cette méthode, la configuration souhaitée est montée sur l'Agent de conteneur.
+
+**Remarque** : cette méthode fonctionne uniquement lorsque vous recueillez vos logs via le socket Docker, et non via le fichier de logs Kubernetes. Pour recueillir des logs dans un environnement Kubernetes avec le socket Docker, vérifiez que vous utilisez le runtime Docker et que `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` est défini sur `false`.
+
+  ```yaml
+  confd:
+    <NOM_INTÉGRATION>.yaml: |-
+      ad_identifiers:
+        - <IDENTIFIANT_AUTODISCOVERY_INTÉGRATION>
+      init_config:
+      instances:
+        (...)
+      logs:
+        <CONFIGURATION_LOGS>
+  ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -443,10 +468,58 @@ etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "
 
 Notez que chacune des trois valeurs est une liste. Autodiscovery assemble les éléments de liste en fonction des index de liste partagée de manière à générer la configuration de l'intégration. Dans le cas présent, il assemble la première (et unique) configuration de check à partir de `check_names[0]`, `init_configs[0]` et `instances[0]`.
 
-Contrairement aux fichiers de configuration automatique, **les stockages clé-valeur peuvent utiliser la version courte OU la version longue du nom d'image comme identificateur de conteneur**, p. ex. `redis` OU `redis:latest`.
+Contrairement aux fichiers de configuration automatique, **les stockages key/value peuvent utiliser la version courte OU la version longue du nom d'image comme identificateur de conteneur**. Exemple : `redis` OU `redis:latest`.
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+La configuration suivante définit le modèle d'intégration pour les conteneurs Redis avec les attributs `source` et `service` pour la collecte des logs :
+  ```yaml
+  confd:
+    redis.yaml: |-
+      ad_identifiers:
+        - redis
+      logs:
+        - source: redis
+        - service: redis
+  ```
+
+**Note** : la configuration ci-dessus recueille uniquement les logs de l'intégration en question. Si vous recueillez déjà d'autres données depuis l'intégration Redis, vous pouvez ajouter la section `logs` à votre configuration existante.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Exemples - Collecte de logs depuis un fichier configuré avec une annotation
+
+L'Agent v7.26.0+/6.26.0+ peut recueillir directement des logs depuis un fichier reposant sur une annotation. Pour recueillir ces logs, utilisez `ad.datadoghq.com/<IDENTIFIANT_CONTENEUR>.logs` avec un fichier de configuration. Les logs recueillis depuis les fichiers avec une annotation comme celle-ci se voient automatiquement appliquer le même ensemble de tags que les logs provenant du conteneur.
+
+Par exemple, pour recueillir des logs depuis `/logs/app/prod.log` à partir du conteneur `webapp` situé dans un pod Kubernetes, utilisez la définition de pod suivante :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+  annotations:
+    ad.datadoghq.com/webapp.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}]'
+  labels:
+    name: webapp
+spec:
+  containers:
+    - name: webapp
+      image: webapp:latest
+```
+
+**Remarques** :
+
+- Le chemin du fichier est **relatif** à l'Agent : le répertoire contenant le fichier doit ainsi être partagé entre le conteneur qui exécute l'application et le conteneur de l'Agent. Par exemple, si le conteneur monte `/logs`, chaque conteneur écrivant des données dans un fichier peut monter un volume, par exemple `/logs/app`, afin d'y écrire le fichier de log. Veuillez consulter la documentation Kubernetes pour obtenir plus d'informations sur le partage de volumes entre des pods et des conteneurs.
+
+- Lorsque vous utilisez ce type d'annotation avec un conteneur, les logs générés ne sont pas recueillis automatiquement. Si vous devez effectuer une collecte depuis le conteneur et un fichier, vous devez activer explicitement cette collecte dans l'annotation. Exemple :
+```yaml
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}, {"source": "container", "service": "app"}]'
+```
+
+- Lorsque vous utilisez ce type de combinaison, les paramètres `source` et `service` ne présentent aucune valeur par défaut pour les logs recueillis depuis un fichier. Ils doivent être définis explicitement dans l'annotation.
 
 
 ## Collecte de logs avancée
