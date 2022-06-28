@@ -23,6 +23,7 @@ Access your RUM dashboards by filtering for `RUM` in the search query of the [**
   {{< nextlink href="/real_user_monitoring/dashboards/resources_dashboard" >}}<u>Resources</u>: Analyze which resources are the slowest and investigate third-party resources. {{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/dashboards/errors_dashboard" >}}<u>Errors</u>: Observe errors that appear in user consoles by browser and device type. {{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/dashboards/frustration_signals_dashboard" >}}<u>Frustration Signals</u>: Examine frustration signals where users experience the highest points of friction in your application. {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/test_summary" >}}<u>Testing Coverage</u>: Evaluate your browser tests' application coverage and identify popular elements in your application to track using RUM and Synthetics data. {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Interact with RUM dashboards

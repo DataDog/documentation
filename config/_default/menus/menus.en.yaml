@@ -2498,25 +2498,30 @@ main:
     identifier: synthetics_testing_tunnel
     weight: 7
   - name: Dashboards
-    url: /synthetics/dashboards/
+    url: synthetics/dashboards
     parent: synthetics
     identifier: synthetics_dashboards
     weight: 8
   - name: API Test
-    url: /synthetics/dashboards/api_test
+    url: synthetics/dashboards/api_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_api_test
     weight: 801
   - name: Browser Test
-    url: /synthetics/dashboards/browser_test
+    url: synthetics/dashboards/browser_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_browser_test
     weight: 802
+  - name: Testing Coverage
+    url: synthetics/dashboards/testing_coverage
+    parent: synthetics_dashboards
+    identifier: synthetics_dashboards_testing_coverage
+    weight: 803
   - name: Test Summary
-    url: /synthetics/dashboards/test_summary
+    url: synthetics/dashboards/test_summary
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_test_summary
-    weight: 803
+    weight: 804
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
@@ -2723,6 +2728,11 @@ main:
     parent: rum_dashboards
     identifier: rum_dashboards_frustration_signals
     weight: 804
+  - name: Testing Coverage
+    url: real_user_monitoring/dashboards/testing_coverage
+    parent: rum_dashboards
+    identifier: rum_dashboards_testing_coverage
+    weight: 805
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
