@@ -71,7 +71,7 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
     :param list_of_content: List of content to check if available locally or if it needs to be downloaded from Github
     """
     for content in list_of_contents:
-        repo_name = "../" + content["repo_name"] + sep
+        repo_name = os.path.join(extract_dir, content["repo_name"]) + sep
         if isdir(repo_name):
             print("\x1b[32mINFO\x1b[0m: Local version of {} found".format(
                 content["repo_name"]))
