@@ -211,7 +211,7 @@ See the table below for example setups. Some require setting up additional netwo
 | [AWS EKS on Fargate][9] | Do not set `DD_AGENT_HOST` |
 | [AWS Elastic Beanstalk - Single Container][10] | Gateway IP (usually `172.17.0.1`) |
 | [AWS Elastic Beanstalk - Multiple Containers][11] | Link pointing to the Datadog Agent container name |
-| [Kubernetes][12] | [`status.hostIP`][13] added manually or through the [Admission Controller][14] |
+| [Kubernetes][12] | 1) [Unix Domain Socket][20], 2) [`status.hostIP`][13] added manually, 3) through the [Admission Controller][14] |
 | [AWS EKS (non Fargate)][15] | [`status.hostIP`][13] added manually or through the [Admission Controller][14] |
 | [Datadog Agent and Application Docker Containers][16] | Datadog Agent container |
 
@@ -274,3 +274,4 @@ If the configuration is correct, but you’re still seeing connection errors, [c
 [17]: /tracing/setup_overview/setup/php/?tab=containers#apache
 [18]: /tracing/setup_overview/setup/php/?tab=containers#nginx
 [19]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
+[20]: /containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces
