@@ -112,7 +112,7 @@ If the numbers are lower than expected, it is likely that either the library or 
 1. If you are uploading JUnit test report files:
     1. If you are running the same tests in different environment configurations, [make sure you are setting those configuration tags during the upload][9].
     2. If you are running parameterized tests, it's very likely that the JUnit report does not have that information. [Try using a native library to report test data][10].
-2. If you still don't see the expected results, [contact Support][1] for troubleshooting help.
+2. If you still don't see the expected results, [contact Datadog support][1] for troubleshooting help.
 
 #### The passed/failed/skipped numbers are different than expected
 
