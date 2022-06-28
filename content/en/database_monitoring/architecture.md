@@ -51,7 +51,7 @@ Instructions for setting up Database Monitoring with a self-hosted provider:
 * [MySQL][5]
 
 
-#### Cloud-managed
+### Cloud-managed databases
 
 If your setup is cloud-managed (with providers such as [AWS RDS][6] or Aurora, Google Cloud SQL, or Azure), you install the Agent on a separate host and configure it to connect to each managed instance.
 
@@ -63,7 +63,7 @@ You can install the Agent on any cloud VM (for example, EC2) provided it can con
 
 If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. For example, you can use [AWS ECS][7] to host the Datadog Agent, as [the Agent already exists as a Docker container][8].
 
-#### Kubernetes
+### Kubernetes
 
 If you are running your apps on [Kubernetes][9], use the [Datadog Cluster Agent with Database Monitoring][10], which can run [cluster checks][11] across your pods.
 
@@ -75,7 +75,7 @@ If an Agent stops reporting, the Cluster Agent removes it from the active pool a
 
 
 
-##### Aurora
+#### Aurora
 
 If you are using [Aurora][13], the Agent must be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored.
 
