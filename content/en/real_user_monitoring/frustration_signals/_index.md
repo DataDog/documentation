@@ -15,10 +15,6 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-warning">
-For access to frustration signals, contact <a href="/help">Datadog Support</a>.
-</div>
-
 Frustration signals help you identify your application's highest points of user friction by surfacing moments when users exhibit frustration.
 
 RUM collects three types of frustration signals:
