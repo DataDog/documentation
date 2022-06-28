@@ -32,7 +32,7 @@ In order to reduce Session Replay's network impact and ensure the Session Replay
 
 ## Setup
 
-Session Replay is available through a dedicated build of the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK.
+Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK.
 
 ### Enable Session Replay
 
@@ -80,7 +80,7 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 ### Disable Session Replay
 
-To stop session recordings, remove `startSessionReplayRecording()` and set `replaySampleRate` to `0`. This stops collecting data for RUM & Session Replay's [Browser Premium plan][7], which includes replays, resources, and long tasks.
+To stop session recordings, remove `startSessionReplayRecording()` and set `premiumSampleRate` to `0`. This stops collecting data for RUM & Session Replay's [Browser Premium plan][7], which includes replays, resources, and long tasks.
 
 In order to apply these configurations, upgrade the [RUM Browser SDK][5] to a version >= 3.6.
 
