@@ -21,17 +21,13 @@ further_reading:
 ---
 
 Customize your log collection configuration:
-- [Filter logs](#filter-logs)
-  - [Exclude at match](#exclude-at-match)
-  - [Include at match](#include-at-match)
-- [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
-- [Multi-line aggregation](#multi-line-aggregation)
-  - [Automatic multi-line aggregation](#automatic-multi-line-aggregation)
-- [Commonly used log processing rules](#commonly-used-log-processing-rules)
-- [Tail directories by using wildcards](#tail-directories-by-using-wildcards)
-- [Log file encodings](#log-file-encodings)
-- [Global processing rules](#global-processing-rules)
-- [Further Reading](#further-reading)
+* [Filter logs](#filter-logs)
+* [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
+* [Aggregate multi-line logs](#multi-line-aggregation)
+* [Copy commonly used examples](#commonly-used-log-processing-rules)
+* [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
+* [Specify log file encodings](#log-file-encodings)
+* [Define global processing rules](#global-processing-rules)(#further-reading)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
