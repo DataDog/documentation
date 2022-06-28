@@ -143,7 +143,7 @@ Datadog can also enrich the collected telemetry with existing AWS resource tags 
 
 ## Collect the request and response payloads
 
-<div class="alert alert-info">This feature is currently supported for Python, Node.js, Java, and .NET.</div>
+<div class="alert alert-info">This feature is currently supported for Python, Node.js, and .NET.</div>
 
 Datadog can [collect and visualize the JSON request and response payloads of AWS Lambda functions][5], giving you deeper insight into your serverless applications and helping troubleshoot Lambda function failures.
 
@@ -422,7 +422,7 @@ Set the environment variable `DD_TRACE_ENABLED` to `false` on your Lambda functi
 
 If you are using the [Lambda extension][2] to collect traces and logs, Datadog automatically adds the AWS Lambda request ID to the `aws.lambda` span under the `request_id` tag. Additionally, Lambda logs for the same request are added under the `lambda.request_id` attribute. The Datadog trace and log views are connected using the AWS Lambda request ID.
 
-If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][19]). 
+If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][19]).
 
 If you are using a runtime or custom logger that isn't supported, follow these steps:
 - When logging in JSON, you need to obtain the Datadog trace ID using `dd-trace` and add it to your logs under the `dd.trace_id` field:
@@ -450,7 +450,7 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Run `datadog-ci lambda instrument` with `--source-code-integration true` to automatically send Git metadata in the current local directory and add the required tags to your Lambda functions. 
+Run `datadog-ci lambda instrument` with `--source-code-integration true` to automatically send Git metadata in the current local directory and add the required tags to your Lambda functions.
 
 **Note**: You must set environment variable `DATADOG_API_KEY` for `datadog-ci` to upload Git metadata. `DATADOG_API_KEY` is also set on your Lambda functions to send telemetry unless you also have `DATADOG_API_KEY_SECRET_ARN` defined, which takes precedence over `DATADOG_API_KEY`.
 
@@ -471,7 +471,7 @@ datadog-ci lambda instrument \
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-With `enableSourceCodeIntegration` set to `true`, the Datadog serverless plugin automatically sends Git metadata in the current local directory and adds the required tags to your Lambda functions. 
+With `enableSourceCodeIntegration` set to `true`, the Datadog serverless plugin automatically sends Git metadata in the current local directory and adds the required tags to your Lambda functions.
 
 **Note**: You must set the `apiKey` parameter for the plugin to upload Git metadata. `apiKey` is also set on your Lambda functions to send telemetry unless you also have `apiKeySecretArn` defined, which takes precedence over `apiKey`.
 
