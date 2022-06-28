@@ -66,7 +66,7 @@ Replace the RUM Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog
 
 ## Configuration
 
-The usual [RUM initialization parameters][6] are all supported.
+You can use the RUM Browser SDK's [initialization parameters][6].
 
 The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example, to only record authenticated user sessions:
 
@@ -80,9 +80,9 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 ### Disable Session Replay
 
-To stop session recordings, remove `startSessionReplayRecording()` and set `replaySampleRate` to `0`. This stops collecting data for the [Browser Premium plan][7] for RUM & Session Replay, which includes replays, resources, and long tasks.
+To stop session recordings, remove `startSessionReplayRecording()` and set `replaySampleRate` to `0`. This stops collecting data for the RUM & Session Replay's [Browser Premium plan][7], which includes replays, resources, and long tasks.
 
-In order to apply these configurations, upgrade the [Browser RUM SDK][5] to a version >= 3.6.
+In order to apply these configurations, upgrade the [RUM Browser SDK][5] to a version >= 3.6.
 
 ## Further Reading
 
