@@ -391,6 +391,21 @@ Enable URL's as resource names (see [Map resource names to normalized URI](#map-
 **Default**: `null`<br>
 Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
 
+`DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
+: **INI**: `datadog.trace.http_url_query_param_allowed`<br>
+**Default**: `*`<br>
+A comma-separated list of query parameters to be collected as part of the URL, this can be empty to prevent collecting any parameters or `*` to collect all parameters. Added in version `0.74.0`
+
+`DD_TRACE_CLIENT_IP_HEADER_DISABLED`
+: **INI**: `datadog.trace.client_ip_header_disabled`<br>
+**Default**: `0`<br>
+Disable client IP collection from relevant IP headers. Added in version `0.76.0`.
+
+`DD_TRACE_CLIENT_IP_HEADER`
+: **INI**: `datadog.trace.client_ip_header`<br>
+**Default**: `null`<br>
+The IP header to be used for client IP collection, for example: `x-forwarded-for`. Added in version `0.76.0`.
+
 #### Integration names
 
 The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.
