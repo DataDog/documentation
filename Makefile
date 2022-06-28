@@ -245,24 +245,19 @@ clean-examples: clean-go-examples clean-java-examples clean-python-examples clea
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 
 examples/datadog-api-client-go:
-	@git clone https://github.com/DataDog/datadog-api-client-go.git $@
-	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
+	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-go.git || git clone --depth 1 https://github.com/DataDog/datadog-api-client-go.git
 
 examples/datadog-api-client-java:
-	@git clone https://github.com/DataDog/datadog-api-client-java.git $@
-	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
+	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-java.git || git clone --depth 1 https://github.com/DataDog/datadog-api-client-java.git
 
 examples/datadog-api-client-python:
-	@git clone https://github.com/DataDog/datadog-api-client-python.git $@
-	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
+	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-python.git || git clone --depth 1 https://github.com/DataDog/datadog-api-client-python.git
 
 examples/datadog-api-client-ruby:
-	@git clone https://github.com/DataDog/datadog-api-client-ruby.git $@
-	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
+	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-ruby.git || git clone --depth 1 https://github.com/DataDog/datadog-api-client-ruby.git
 
 examples/datadog-api-client-typescript:
-	@git clone https://github.com/DataDog/datadog-api-client-typescript.git $@
-	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
+	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-typescript.git || git clone --depth 1 https://github.com/DataDog/datadog-api-client-typescript.git
 
 .PHONY: examples/go examples/java examples/python examples/ruby examples/typescript examples
 
