@@ -102,7 +102,7 @@ Ensure to leave **Require MFA** disabled.
 
 ### AWS
 
-1. In your AWS console, create an IAM user to be used by the Datadog integration with the necessary permissions. Scroll to the end of this document for the full list.
+1. In your AWS console, create an IAM user to be used by the Datadog integration with the [necessary permissions](#permissions).
 2. Generate an access key and secret key for the Datadog integration IAM user.
 
 For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][1] AWS documentation.
@@ -122,6 +122,8 @@ For more details, see the [How to use an external ID when granting access to you
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 {{% /tab %}}
 {{< /tabs >}}
+
+### Permissions
 
 {{% aws-permissions %}}
 
