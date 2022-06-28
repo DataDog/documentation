@@ -94,12 +94,42 @@ The wall time is defined as the time difference between the start time of the fi
 This is done using the following algorithm:
 
 1. Compute a hash based on CI information to group the tests.
-  a. If the tests include `ci.job.url`, use this tag to calculate the hash.
-  b. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
+    1. If the tests include `ci.job.url`, use this tag to calculate the hash.
+    2. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
 2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is calculated for each job, and the maximum from all calculated wall times is shown.
 
 #### Possible issues with wall time calculation
 If you're using a library for testing time-dependent code, like [timecop][7] for Ruby or [FreezeGun][8] for Python, it is possible that test timestamps are wrong, and therefore calculated wall times. If this is the case, make sure that modifications to time are rolled back before finishing your tests.
+
+### The test status numbers are not what is expected
+
+The test status numbers are calculated based on the unique tests that were collected. The uniqueness of a test is defined not only by its suite and name, but by its test parameters and test configurations as well.
+
+#### The numbers are lower than expected
+
+If the numbers are lower than expected, it is likely that either the library or the tool you are using to collect test data cannot collect test parameters and/or some test configurations.
+
+1. If you are uploading JUnit test report files:
+    1. If you are running the same tests in different environment configurations, [make sure you are setting those configuration tags during the upload][9].
+    2. If you are running parameterized tests, it's very likely that the JUnit report does not have that information. [Try using a native library to report test data][10].
+2. If you still don't see the expected results, [contact Datadog support][1] for troubleshooting help.
+
+#### The passed/failed/skipped numbers are different than expected
+
+If the same test is collected several times for the same commit but with different status, the aggregated result follows the algorithm in the table below:
+
+| **Test Status - First Try** | **Test Status - Retry #1** | **Result** |
+|-----------------------------|----------------------------|------------|
+| `Passed`                    | `Passed`                   | `Passed`   |
+| `Passed`                    | `Failed`                   | `Passed`   |
+| `Passed`                    | `Skipped`                  | `Passed`   |
+| `Failed`                    | `Passed`                   | `Passed`   |
+| `Failed`                    | `Failed`                   | `Failed`   |
+| `Failed`                    | `Skipped`                  | `Failed`   |
+| `Skipped`                   | `Passed`                   | `Passed`   |
+| `Skipped`                   | `Failed`                   | `Failed`   |
+| `Skipped`                   | `Skipped`                  | `Skipped`  |
+
 
 ### Need further help?
 
@@ -114,3 +144,5 @@ Still need help? Contact [Datadog support][1].
 [6]: /continuous_integration/setup_tests/containers/
 [7]: https://github.com/travisjeffery/timecop
 [8]: https://github.com/spulec/freezegun
+[9]: https://docs.datadoghq.com/continuous_integration/setup_tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
+[10]: https://docs.datadoghq.com/continuous_integration/setup_tests/

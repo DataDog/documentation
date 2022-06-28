@@ -3789,10 +3789,12 @@ components:
       enum:
       - api_usage
       - apm_host_usage
+      - appsec_usage
       - browser_usage
       - container_usage
       - custom_timeseries_usage
       - estimated_indexed_logs_usage
+      - estimated_indexed_spans_usage
       - fargate_usage
       - functions_usage
       - indexed_logs_usage
@@ -3806,10 +3808,12 @@ components:
       x-enum-varnames:
       - API_USAGE
       - APM_HOST_USAGE
+      - APPSEC_USAGE
       - BROWSER_USAGE
       - CONTAINER_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INDEXED_LOGS_USAGE
@@ -3956,6 +3960,23 @@ components:
           description: List of IPv6 prefixes by location.
           type: object
       type: object
+    IPPrefixesSyntheticsPrivateLocations:
+      description: Available prefix information for the Synthetics Private Locations
+        endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
     IPPrefixesWebhooks:
       description: Available prefix information for the Webhook endpoints.
       properties:
@@ -3991,6 +4012,8 @@ components:
           $ref: '#/components/schemas/IPPrefixesProcess'
         synthetics:
           $ref: '#/components/schemas/IPPrefixesSynthetics'
+        synthetics-private-locations:
+          $ref: '#/components/schemas/IPPrefixesSyntheticsPrivateLocations'
         version:
           description: Version of the IP list.
           example: 11
@@ -6973,6 +6996,8 @@ components:
       - api_percentage
       - apm_host_usage
       - apm_host_percentage
+      - appsec_usage
+      - appsec_percentage
       - browser_usage
       - browser_percentage
       - container_usage
@@ -6981,6 +7006,8 @@ components:
       - custom_timeseries_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_indexed_spans_usage
+      - estimated_indexed_spans_percentage
       - fargate_usage
       - fargate_percentage
       - functions_usage
@@ -7006,6 +7033,8 @@ components:
       - API_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
+      - APPSEC_USAGE
+      - APPSEC_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
       - CONTAINER_USAGE
@@ -7014,6 +7043,8 @@ components:
       - CUSTOM_TIMESERIES_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -7052,6 +7083,15 @@ components:
           description: The APM host usage by tag(s).
           format: double
           type: number
+        appsec_percentage:
+          description: The percentage of Application Security Monitoring host usage
+            by tag(s).
+          format: double
+          type: number
+        appsec_usage:
+          description: The Application Security Monitoring host usage by tag(s).
+          format: double
+          type: number
         browser_percentage:
           description: The percentage of synthetic browser test usage by tag(s).
           format: double
@@ -7084,6 +7124,16 @@ components:
         estimated_indexed_logs_usage:
           description: The estimated live indexed logs usage by tag(s). This field
             is in private beta.
+          format: double
+          type: number
+        estimated_indexed_spans_percentage:
+          description: The percentage of estimated indexed spans usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_spans_usage:
+          description: The estimated indexed spans usage by tag(s). This field is
+            in private beta.
           format: double
           type: number
         fargate_percentage:
@@ -13947,6 +13997,8 @@ components:
       - snmp_usage
       - apm_host_usage
       - api_usage
+      - appsec_usage
+      - appsec_percentage
       - container_usage
       - custom_timeseries_percentage
       - container_percentage
@@ -13965,12 +14017,16 @@ components:
       - lambda_invocations_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_indexed_spans_usage
+      - estimated_indexed_spans_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
       - SNMP_USAGE
       - APM_HOST_USAGE
       - API_USAGE
+      - APPSEC_USAGE
+      - APPSEC_PERCENTAGE
       - CONTAINER_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
       - CONTAINER_PERCENTAGE
@@ -13989,6 +14045,8 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14025,6 +14083,10 @@ components:
       - dbm_queries_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - appsec_usage
+      - appsec_percentage
+      - estimated_indexed_spans_usage
+      - estimated_indexed_spans_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -14060,6 +14122,10 @@ components:
       - DBM_QUERIES_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - APPSEC_USAGE
+      - APPSEC_PERCENTAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -14088,6 +14154,13 @@ components:
           type: number
         apm_host_usage:
           description: The APM host usage by tag(s).
+          format: double
+          type: number
+        appsec_percentage:
+          description: The percentage of Application Security Monitoring host usage
+            by tag(s).
+        appsec_usage:
+          description: The Application Security Monitoring host usage by tag(s).
           format: double
           type: number
         browser_percentage:
@@ -14174,6 +14247,16 @@ components:
         estimated_indexed_logs_usage:
           description: The estimated live indexed logs usage by tag(s). Note this
             field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_spans_percentage:
+          description: The percentage of estimated indexed spans usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_spans_usage:
+          description: The estimated indexed spans usage by tag(s). Note this field
+            is in private beta.
           format: double
           type: number
         infra_host_percentage:

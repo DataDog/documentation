@@ -316,7 +316,7 @@ Docker container log collection from a file is an alternative to collection over
 
 In versions 7.27.0/6.27.0+, you can configure the Agent to collect Docker container logs from a file. In versions 6.33.0+/7.33.0+, the Agent collects Docker container logs from a file by default. 
 
-File based collection requires the directory storing Docker container logs to be exposed to the Agent in the following location: `/var/lib/docker/containers` (`c:\programdata\docker\containers` on Windows). See the [Docker logs collection troubleshooting guide][12] for more information.
+File based collection requires the directory storing Docker container logs to be exposed to the Agent in the following location: `/var/lib/docker/containers` (`c:\programdata\docker\containers` on Windows). See the [Docker logs collection troubleshooting guide][10] for more information.
 
 **Note**:
 - When you migrate from Docker socket based container log collection to file based log collection, only new containers are tailed from their files. You can force the Agent to collect all container logs from files by setting the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. Forcing the Agent to collect all container logs from files may result in duplicated logs for existing containers.
@@ -324,7 +324,7 @@ File based collection requires the directory storing Docker container logs to be
 
 ## Filter containers
 
-It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][10] to learn more.
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][11] to learn more.
 
 ## Short lived containers
 
@@ -332,7 +332,7 @@ For a Docker environment, the Agent receives container updates in real time thro
 
 Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
-For Kubernetes environments, see the [Kubernetes short lived container documentation][11].
+For Kubernetes environments, see the [Kubernetes short lived container documentation][12].
 
 ## Further Reading
 
@@ -347,6 +347,6 @@ For Kubernetes environments, see the [Kubernetes short lived container documenta
 [7]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
 [8]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
 [9]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-[10]: /agent/guide/autodiscovery-management/
-[11]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers
-[12]: /logs/guide/docker-logs-collection-troubleshooting-guide/
+[10]: /logs/guide/docker-logs-collection-troubleshooting-guide/
+[11]: /agent/guide/autodiscovery-management/
+[12]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers
