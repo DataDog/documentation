@@ -1892,11 +1892,16 @@ main:
     pre: database-2
     identifier: dbm
     weight: 160000
+  - name: Setup Architectures
+    url: database_monitoring/architecture/
+    parent: dbm
+    identifier: dbm_setup_architecture
+    weight: 1
   - name: Setting Up Postgres
     url: database_monitoring/setup_postgres/
     parent: dbm
     identifier: dbm_setup_postgres
-    weight: 1
+    weight: 2
   - name: Self-hosted
     url: database_monitoring/setup_postgres/selfhosted
     parent: dbm_setup_postgres
@@ -1936,7 +1941,7 @@ main:
     url: database_monitoring/setup_mysql/
     parent: dbm
     identifier: dbm_setup_mysql
-    weight: 2
+    weight: 3
   - name: Self-hosted
     url: database_monitoring/setup_mysql/selfhosted
     parent: dbm_setup_mysql
@@ -1976,7 +1981,7 @@ main:
     url: database_monitoring/setup_sql_server/
     parent: dbm
     identifier: dbm_setup_sql_server
-    weight: 3
+    weight: 4
   - name: Self-hosted
     url: database_monitoring/setup_sql_server/selfhosted/
     parent: dbm_setup_sql_server
@@ -2001,27 +2006,27 @@ main:
     url: database_monitoring/data_collected
     parent: dbm
     identifier: dbm_data_collected
-    weight: 4
+    weight: 5
   - name: Exploring Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm
     identifier: dbm_query_metrics
-    weight: 5
+    weight: 6
   - name: Exploring Query Samples
     url: database_monitoring/query_samples/
     parent: dbm
     identifier: dbm_query_samples
-    weight: 6
+    weight: 7
   - name: Troubleshooting
     url: database_monitoring/troubleshooting/
     parent: dbm
     identifier: dbm_troubleshooting
-    weight: 7
+    weight: 8
   - name: Guides
     url: database_monitoring/guide/
     parent: dbm
     identifier: dbm_guides
-    weight: 8
+    weight: 9
   - name: Log Management
     url: logs/
     pre: log
