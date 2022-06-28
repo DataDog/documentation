@@ -289,7 +289,14 @@ $screen-md-max: ($screen-lg-min - 1) !default;
         max-width: none;
         padding-bottom: 20px;
     }
-    @media (min-width: $screen-lg-min) {
+    @media (min-width: 1200px) and (max-width: 1269px){
+      .item {
+            width: auto;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+    @media (min-width: 1270px) {
         .item {
             width: auto;
             padding-left: 10px;
@@ -495,6 +502,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
     }
     button {
         display: none;
+        text-transform: uppercase;
     }
     &.hover {
         background: white;

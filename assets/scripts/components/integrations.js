@@ -64,6 +64,35 @@ export function initializeIntegrations() {
         },
         data: {
             uidKey: 'id' // Our data model must have a unique id. In this case, its key is 'id'
+        },
+        callbacks: {
+          onMixEnd: function() {
+            console.log('[callback] Animation Ended');
+            setTimeout(function () {
+              if(container) {
+                const dimmers = container.querySelectorAll('.dimmer');
+                if(dimmers) {
+                  for (let i = 0; i < dimmers.length; ++i) {
+                   dimmers[i].classList.remove('dimmer');
+                  }
+                }
+              }
+              const activeFilter = controls.querySelector(`.active`).getAttribute('data-filter').replace('.','');
+              if(activeFilter !== 'all') {
+                const items = container.querySelectorAll('.item');
+                console.log(activeFilter, items);
+                if(items) {
+                  for (let i = 0; i < items.length; ++i) {
+                    if(!items[i].classList.contains(activeFilter)) {
+                      const int = items[i].querySelector('.integration');
+                      console.log(int);
+                      int.classList.add('dimmer');
+                    }
+                  }
+                }
+              }
+            }, 50);
+          }
         }
     };
 
@@ -335,4 +364,15 @@ export function initializeIntegrations() {
     if (window.location.href.indexOf('#') > -1) {
         $(window).trigger('hashchange');
     }
+    $('.integration-row').on('mouseover', '.integration', {}, function () {
+        $('.integration-row .integration').removeClass('hover');
+
+        if (window.innerWidth >= 576) {
+            $(this).addClass('hover');
+        }
+    });
+
+    $('.integration-row').on('mouseout', '.integration', {}, function () {
+        $(this).removeClass('hover');
+    });
 }

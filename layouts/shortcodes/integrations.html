@@ -93,7 +93,7 @@
     <input class="form-control integration-search" data-ref="search" placeholder="Search for an integration..." />
 </div>
 
-<div id="integration-tiles">
+<div id="integration-tiles" data-ref="container">
     <div>
 
         {{ $integration_list_display := $integrationData }}
@@ -103,9 +103,8 @@
           <div id="integrations" class="row integration-row mx-0">
             {{ range $i, $v := $integration_list_display }}
                 {{ if $v.int_logo }}
-                <div data-id="{{ $i }}" class="item {{ range $i, $e := $v.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}"
-                     data-ref="item">
-                  <div class="integration {{ if in $v.categories "marketplace" }}integration-marketplace{{ end }}">
+                <div id="mixid_{{ $v.id }}" data-id="{{ $v.id }}" class="item {{ range $cat := $v.tags }} {{ $cat }} {{ end }}" data-ref="item">
+                  <div class="integration {{ if $v.is_marketplace }}integration-marketplace{{ end }}">
                     {{ if $v.is_marketplace }}
                         <div class="card-banner">
                             <p class="font-primary font-weight-bold text-uppercase text-center">Marketplace</p>
