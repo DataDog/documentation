@@ -21,7 +21,7 @@ Click the pink Watchdog icon to open the [**Watchdog Insights**][2] side panel a
 {{< img src="synthetics/dashboards/test_automation.png" alt="Synthetics and CI/CD Integrations section of the Synthetics test summary dashboard" style="width:100%" >}}
 {{< img src="synthetics/dashboards/private_locations.png" alt="Private locations section of the Synthetics test summary dashboard" style="width:100%" >}}
 
-For more information about the information displayed, see [Synthetic Monitoring Metrics][3].
+For more information about the data displayed, see [Synthetic Monitoring Metrics][3].
 
 ## Further Reading
 

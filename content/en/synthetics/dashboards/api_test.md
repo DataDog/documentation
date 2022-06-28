@@ -20,7 +20,7 @@ Click the pink Watchdog icon to open the [**Watchdog Insights**][2] side panel a
 
 {{< img src="synthetics/dashboards/api_test_performance_events.png" alt="Events section of the Synthetics API test performance dashboard" style="width:100%" >}}
 
-For more information about the information displayed, see [Synthetic Monitoring Metrics][3].
+For more information about the data displayed, see [Synthetic Monitoring Metrics][3].
 
 ## Further Reading
 
