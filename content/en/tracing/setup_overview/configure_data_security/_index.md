@@ -26,7 +26,7 @@ To understand data security concerns, it's important to understand what data is 
 *  `http.status_code` - The request's response status code.
 *  `http.method` - The method or HTTP verb.
 *  `http.version` - The protocol version.
-*  `http.url` - The full URL, including the query string.
+*  `http.url` - The full URL, including the obfuscated query string. For details of the obfuscation see below.
 *  `http.useragent` - The browser's user agent field, if available.
 *  `http.server_name` - The primary server name of the matched host or virtual host.
 *  `http.route` - The matched route (path template).
