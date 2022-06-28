@@ -21,7 +21,7 @@ aliases:
 After [installing DogStatsD][1], you can emit events to your [Datadog event stream][2] with the following function:
 
 ```text
-event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <SOURCE_TYPE_NAME>, <ALERT_TYPE>, <TAGS>)
+event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <date_happened>, <priority>, <tags>, <hostname>)
 ```
 
 **Definitions**:
