@@ -3,6 +3,15 @@ import config from './regions.config';
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
+    const currentUserAppRegion = getSiteFromReferrer()
+
+    if (currentUserAppRegion) {
+        redirectToRegion(currentUserAppRegion)
+        // Do we need to reset document.referrer?
+    } else {
+        redirectToRegion()
+    }
+
     const regionSelector = document.querySelector('.js-region-select');
 
     if (regionSelector) {
@@ -16,6 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 });
+
+const getSiteFromReferrer = () => {
+    const ddFullSitesObject = config.dd_full_site
+    let referrerSite = ''
+
+    if (document.referrer) {
+        for (const site in ddFullSitesObject) {
+            if (ddFullSitesObject[site] === document.referrer) {
+                if (site !== Cookies.get('site')) {
+                    referrerSite = site
+                }
+            }
+        }
+    }
+    
+    return referrerSite
+}
 
 function replaceButtonInnerText(value) {
     const selectedRegion = config.dd_datacenter[value];
@@ -114,11 +140,9 @@ function showRegionSnippet(newSiteRegion) {
     }
 }
 
-// have option to pass new site region to function.
 function redirectToRegion(region = '') {
     const regionSelector = document.querySelector('.js-region-select');
     const queryParams = new URLSearchParams(window.location.search);
-
     let newSiteRegion = region;
 
     if (config.allowedRegions.includes(queryParams.get('site'))) {
@@ -156,9 +180,7 @@ function redirectToRegion(region = '') {
         }
     } else {
         newSiteRegion = 'us';
-
         Cookies.set('site', newSiteRegion, { path: '/' });
-
         showRegionSnippet(newSiteRegion);
     }
 
@@ -166,7 +188,5 @@ function redirectToRegion(region = '') {
         replaceButtonInnerText(newSiteRegion);
     }
 }
-
-redirectToRegion();
 
 export { redirectToRegion, showRegionSnippet, regionOnChangeHandler };
