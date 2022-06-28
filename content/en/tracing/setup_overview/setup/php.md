@@ -394,7 +394,7 @@ Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
 **Default**: `*`<br>
-A comma-separated list of query parameters to be collected as part of the URL, this can be empty to prevent collecting any parameters or `*` to collect all parameters. Added in version `0.74.0`
+A comma-separated list of query parameters to be collected as part of the URL, this can also be empty to prevent collecting any parameters or `*` to collect all parameters. Added in version `0.74.0`.
 
 `DD_TRACE_CLIENT_IP_HEADER_DISABLED`
 : **INI**: `datadog.trace.client_ip_header_disabled`<br>
