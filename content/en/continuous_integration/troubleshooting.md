@@ -107,7 +107,7 @@ The test status numbers are calculated based on the unique tests that were colle
 
 #### The numbers are lower than expected
 
-If the numbers are lower than expected it is likely that either the library or the tool you are using to collect Test data cannot collect test parameters and/or some test configurations.
+If the numbers are lower than expected, it is likely that either the library or the tool you are using to collect test data cannot collect test parameters and/or some test configurations.
 
 1. If you are uploading JUnit test report files:
     1. If you are running the same tests in different environment configurations, [make sure you are setting those configuration tags during the upload][9].
@@ -116,7 +116,7 @@ If the numbers are lower than expected it is likely that either the library or t
 
 #### The passed/failed/skipped numbers are different than expected
 
-If the same test is collected several times for the same commit but with different status, the aggregated result will follow the next algorithm:
+If the same test is collected several times for the same commit but with different status, the aggregated result follows the algorithm in the table below:
 
 | **Test Status - First Try** | **Test Status - Retry #1** | **Result** |
 |-----------------------------|----------------------------|------------|
