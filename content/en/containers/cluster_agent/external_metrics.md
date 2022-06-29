@@ -96,7 +96,7 @@ To enable the Custom Metrics Server, first follow the instructions to [set up th
 
 Once the Datadog Cluster Agent is up and running, apply some additional RBAC policies and set up the `Service` to route the corresponding requests.
 
-1. Create a `Service` named `datadog-custom-metrics-server`, exposing the port `443` with the following `custom-metric-server.yaml` manifest:
+1. Create a `Service` named `datadog-custom-metrics-server`, exposing the port `8443` with the following `custom-metric-server.yaml` manifest:
 
     ```yaml
     kind: Service
@@ -108,10 +108,10 @@ Once the Datadog Cluster Agent is up and running, apply some additional RBAC pol
         app: datadog-cluster-agent
       ports:
       - protocol: TCP
-        port: 443
-        targetPort: 443
+        port: 8443
+        targetPort: 8443
     ```
-    **Note:** The Cluster Agent by default is expecting these requests over port `443`. However, if your Cluster Agent `Deployment` has set the environment variable `DD_EXTERNAL_METRICS_PROVIDER_PORT` to some other port value, change the `targetPort` of this `Service` accordingly.
+    **Note:** The Cluster Agent by default is expecting these requests over port `8443`. However, if your Cluster Agent `Deployment` has set the environment variable `DD_EXTERNAL_METRICS_PROVIDER_PORT` to some other port value, change the `targetPort` of this `Service` accordingly.
 
     Apply this `Service` by running `kubectl apply -f custom-metric-server.yaml`
 2. Download the [`rbac-hpa.yaml` RBAC rules file][2].
