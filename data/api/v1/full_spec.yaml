@@ -3960,6 +3960,23 @@ components:
           description: List of IPv6 prefixes by location.
           type: object
       type: object
+    IPPrefixesSyntheticsPrivateLocations:
+      description: Available prefix information for the Synthetics Private Locations
+        endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
     IPPrefixesWebhooks:
       description: Available prefix information for the Webhook endpoints.
       properties:
@@ -3995,6 +4012,8 @@ components:
           $ref: '#/components/schemas/IPPrefixesProcess'
         synthetics:
           $ref: '#/components/schemas/IPPrefixesSynthetics'
+        synthetics-private-locations:
+          $ref: '#/components/schemas/IPPrefixesSyntheticsPrivateLocations'
         version:
           description: Version of the IP list.
           example: 11
