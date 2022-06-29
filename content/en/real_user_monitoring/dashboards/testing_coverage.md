@@ -1,5 +1,5 @@
 ---
-title: RUM Application Testing Coverage Dashboard
+title: Application Testing Coverage Dashboard
 kind: documentation
 description: Learn about the out-of-the-box RUM application testing coverage dashboard.
 further_reading:
@@ -21,8 +21,6 @@ You can use this dashboard to answer the following questions:
 - How do you identify the most popular sections of your application to continuously monitor?
 - How do you find the most popular user actions in your application to add browser test coverage? 
 
-For more information, see [Explore RUM & Session Replay in Synthetics][4].
-
 It shows:
 
 - **Untested actions**: Explore the most popular untested user actions with the count of real user interactions and the number of actions covered in browser tests.
@@ -43,15 +41,15 @@ In order to improve your testing coverage and better manage your browser tests, 
 - What actions need more browser tests?
 - What percentage of browser tests are covering user actions? 
 
-By creating more browser tests to monitor your RUM views and actions, you are alerted when key user journeys in your application are negatively impacted by a code change. You can run tests [directly in your CI/CD pipelines][5] to ensure no regressions occur before releasing code in production. 
+By adding the most popular sections of your application to an existing browser test or creating a browser test, you are alerted when key user journeys in your application are negatively impacted by a code change. You can run tests [directly in your CI/CD pipelines][4] to ensure no regressions occur before releasing code in production. 
 
-To add a browser test for a top view or untested action, click on a view with a low percentage of tested actions under **Top Views** or an action under **Untested Actions** and select **Create a Synthetics browser test** from the dropdown menu. Clicking **View RUM events** navigates you to the [RUM Explorer][6] with an autofilled search query for actions with a specific view name.
+To add a browser test for a top view or untested action, click on a view with a low percentage of tested actions under **Top Views** or an action under **Untested Actions** and select **Create a Synthetics browser test** from the dropdown menu. Clicking **View RUM events** navigates you to the [RUM Explorer][5] with an autofilled search query for actions with a specific view name.
 
 The **Top Views** table lists the most popular web pages that users are interacting with, along with the number of real user interactions and the percentage of actions that are tested in browser tests. 
 
 ## Explore custom actions
 
-Use the dropdown menus to customize the data types and view [custom actions][7] specific to your queried data. 
+Use the dropdown menus to customize the data types and view [custom actions][6] specific to your queried data. 
 
 Because you are the one instrumenting your code to define these custom actions, your definitions result in more accurate results compared to a generic, generated **Click on Save** action.
 
@@ -62,7 +60,6 @@ Because you are the one instrumenting your code to define these custom actions, 
 [1]: https://app.datadoghq.com/dash/integration/30697/synthetics---browser-test-performance
 [2]: /real_user_monitoring/browser/data_collected/
 [3]: /synthetics/browser_tests/
-[4]: /synthetics/guide/explore-rum-through-synthetics/
-[5]: /synthetics/cicd_integrations/
-[6]: /real_user_monitoring/explorer
-[7]: /real_user_monitoring/guide/send-rum-custom-actions/
+[4]: /synthetics/cicd_integrations/
+[5]: /real_user_monitoring/explorer
+[6]: /real_user_monitoring/guide/send-rum-custom-actions/
