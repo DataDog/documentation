@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - autodiscovery
-  - log collection
+- web
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md
 display_name: Twemproxy
 draft: false
 git_integration_title: twemproxy
 guid: a5cca58a-9984-4226-ad1c-8dff73c9d6ac
 integration_id: twemproxy
 integration_title: Twemproxy
+integration_version: 1.13.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,13 +32,17 @@ metric_prefix: twemproxy.
 metric_to_check: twemproxy.total_connections
 name: twemproxy
 public_title: Intégration Datadog/Twemproxy
-short_description: Visualisez les performances de Twemproxy pour les corréler avec le reste de vos applications.
+short_description: Visualisez les performances de Twemproxy pour les corréler avec
+  le reste de vos applications.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Suivez les statistiques globales et les statistiques de chaque pool pour chacun de vos serveurs Twemproxy. Ce check de l'Agent recueille les métriques pour les connexions et les erreurs client/serveur, les taux de requêtes et de réponses, les octets entrants/sortants du proxy, et plus encore.
@@ -109,7 +114,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                            |
 | -------------- | ------------------------------------------------ |
@@ -122,7 +127,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][2] et cherchez `twemproxy` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][2] et cherchez `twemproxy` dans la section Checks.
 
 ## Données collectées
 
@@ -135,13 +140,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Le check Twemproxy n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "twemproxy" >}}
 
-**twemproxy.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint de statistiques Twemproxy pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
