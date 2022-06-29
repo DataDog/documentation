@@ -1154,11 +1154,16 @@ main:
     parent: monitors_create
     identifier: monitor_types_rum
     weight: 119
+  - name: SLO Alerts
+    url: monitors/create/types/slo/
+    parent: monitors_create
+    identifier: monitor_types_slo
+    weight: 120
   - name: Watchdog
     url: monitors/create/types/watchdog/
     parent: monitors_create
     identifier: monitor_types_watchdog
-    weight: 120
+    weight: 121
   - name: Notifications
     url: monitors/notify/
     parent: alerting
