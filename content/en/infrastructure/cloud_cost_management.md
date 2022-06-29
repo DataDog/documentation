@@ -36,7 +36,9 @@ Select your AWS management account from the dropdown. Once your account is selec
 
 **Note**: Datadog recommends that you send a Cost and Usage Report from an [AWS **management account**][6] for cost visibility into related **member accounts**. If you decide to send a Cost and Usage report from an AWS **member account**, ensure that you've selected the following options in [preferences][7] of the **management account** so that Datadog has full visibility into the member account:
 
-<img width="770" alt="Screen Shot 2022-06-27 at 1 53 10 PM" src="https://user-images.githubusercontent.com/99217719/176004906-d06096a2-cec8-481a-8113-0a98bc963d9a.png">
+* Linked Account Access
+* Linked Account Refunds and Credits
+* Linked Account Discounts
 
 ### Locate the Cost and Usage Report
 
