@@ -23037,7 +23037,6 @@
             "type": "array"
           },
           "include_percentiles": {
-            "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
             "example": true,
             "type": "boolean"
@@ -23163,7 +23162,6 @@
                 "type": "array"
               },
               "include_percentiles": {
-                "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                 "example": true,
                 "type": "boolean"
@@ -23316,7 +23314,6 @@
                     "type": "array"
                   },
                   "include_percentiles": {
-                    "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                     "example": true,
                     "type": "boolean"
@@ -23653,7 +23650,6 @@
             "type": "array"
           },
           "include_percentiles": {
-            "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
             "example": true,
             "type": "boolean"
@@ -23756,7 +23752,6 @@
                 "type": "array"
               },
               "include_percentiles": {
-                "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                 "example": true,
                 "type": "boolean"
@@ -23886,7 +23881,6 @@
                     "type": "array"
                   },
                   "include_percentiles": {
-                    "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                     "example": true,
                     "type": "boolean"
@@ -32089,6 +32083,11 @@
                 "options": {
                   "description": "Options on rules.",
                   "properties": {
+                    "decreaseCriticalityBasedOnEnv": {
+                      "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                      "example": false,
+                      "type": "boolean"
+                    },
                     "detectionMethod": {
                       "description": "The detection method.",
                       "enum": [
@@ -32595,6 +32594,11 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "decreaseCriticalityBasedOnEnv": {
+                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                "example": false,
+                "type": "boolean"
+              },
               "detectionMethod": {
                 "description": "The detection method.",
                 "enum": [
@@ -32892,6 +32896,11 @@
         ],
         "type": "object"
       },
+      "SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv": {
+        "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+        "example": false,
+        "type": "boolean"
+      },
       "SecurityMonitoringRuleDetectionMethod": {
         "description": "The detection method.",
         "enum": [
@@ -33160,6 +33169,11 @@
       "SecurityMonitoringRuleOptions": {
         "description": "Options on rules.",
         "properties": {
+          "decreaseCriticalityBasedOnEnv": {
+            "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+            "example": false,
+            "type": "boolean"
+          },
           "detectionMethod": {
             "description": "The detection method.",
             "enum": [
@@ -33606,6 +33620,11 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "decreaseCriticalityBasedOnEnv": {
+                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                "example": false,
+                "type": "boolean"
+              },
               "detectionMethod": {
                 "description": "The detection method.",
                 "enum": [
@@ -34040,6 +34059,11 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "decreaseCriticalityBasedOnEnv": {
+                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                "example": false,
+                "type": "boolean"
+              },
               "detectionMethod": {
                 "description": "The detection method.",
                 "enum": [
@@ -63917,7 +63941,6 @@
                             "type": "array"
                           },
                           "include_percentiles": {
-                            "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                             "example": true,
                             "type": "boolean"
@@ -64361,7 +64384,6 @@
                             "type": "array"
                           },
                           "include_percentiles": {
-                            "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                             "example": true,
                             "type": "boolean"
@@ -73820,6 +73842,11 @@
                           "options": {
                             "description": "Options on rules.",
                             "properties": {
+                              "decreaseCriticalityBasedOnEnv": {
+                                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                                "example": false,
+                                "type": "boolean"
+                              },
                               "detectionMethod": {
                                 "description": "The detection method.",
                                 "enum": [
@@ -74322,6 +74349,11 @@
                   "options": {
                     "description": "Options on rules.",
                     "properties": {
+                      "decreaseCriticalityBasedOnEnv": {
+                        "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                        "example": false,
+                        "type": "boolean"
+                      },
                       "detectionMethod": {
                         "description": "The detection method.",
                         "enum": [
@@ -74742,6 +74774,11 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "decreaseCriticalityBasedOnEnv": {
+                          "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                          "example": false,
+                          "type": "boolean"
+                        },
                         "detectionMethod": {
                           "description": "The detection method.",
                           "enum": [
@@ -75403,6 +75440,11 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "decreaseCriticalityBasedOnEnv": {
+                          "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                          "example": false,
+                          "type": "boolean"
+                        },
                         "detectionMethod": {
                           "description": "The detection method.",
                           "enum": [
@@ -75882,6 +75924,11 @@
                   "options": {
                     "description": "Options on rules.",
                     "properties": {
+                      "decreaseCriticalityBasedOnEnv": {
+                        "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                        "example": false,
+                        "type": "boolean"
+                      },
                       "detectionMethod": {
                         "description": "The detection method.",
                         "enum": [
@@ -76280,6 +76327,11 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "decreaseCriticalityBasedOnEnv": {
+                          "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                          "example": false,
+                          "type": "boolean"
+                        },
                         "detectionMethod": {
                           "description": "The detection method.",
                           "enum": [
@@ -86893,6 +86945,238 @@
           }
         ],
         "summary": "Get cost across multi-org account",
+        "tags": [
+          "Usage Metering"
+        ],
+        "x-menu-order": 39,
+        "x-undo": {
+          "type": "safe"
+        }
+      }
+    },
+    "/api/v2/usage/estimated_cost_by_org": {
+      "get": {
+        "description": "Get estimated cost across multi-org account.",
+        "operationId": "GetEstimatedCostByOrg",
+        "parameters": [
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost beginning this month. Either start_month or start_date should be specified, but not both.",
+            "in": "query",
+            "name": "start_month",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost ending this month.",
+            "in": "query",
+            "name": "end_month",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost beginning this day. Either start_month or start_date should be specified, but not both.",
+            "in": "query",
+            "name": "start_date",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost ending this day.",
+            "in": "query",
+            "name": "end_date",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "Chargeback Summary response.",
+                  "properties": {
+                    "data": {
+                      "description": "Response containing Chargeback Summary.",
+                      "items": {
+                        "description": "Cost data.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Cost attributes data.",
+                            "properties": {
+                              "charges": {
+                                "description": "List of charges data reported for the requested month.",
+                                "items": {
+                                  "description": "Charges breakdown.",
+                                  "properties": {
+                                    "charge_type": {
+                                      "description": "The type of charge for a particular product.",
+                                      "example": "on_demand",
+                                      "type": "string"
+                                    },
+                                    "cost": {
+                                      "description": "The cost for a particular product and charge type during a given month.",
+                                      "format": "double",
+                                      "type": "number"
+                                    },
+                                    "product_name": {
+                                      "description": "The product for which cost is being reported.",
+                                      "example": "infra_host",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "date": {
+                                "description": "The month requested.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "org_name": {
+                                "description": "The organization name.",
+                                "type": "string"
+                              },
+                              "public_id": {
+                                "description": "The organization public ID.",
+                                "type": "string"
+                              },
+                              "total_cost": {
+                                "description": "The total cost of products for the month.",
+                                "format": "double",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the response.",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "cost_by_org",
+                            "description": "Type of cost data.",
+                            "enum": [
+                              "cost_by_org"
+                            ],
+                            "example": "cost_by_org",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "COST_BY_ORG"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden - User is not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "usage_read"
+            ]
+          }
+        ],
+        "summary": "Get estimated cost across multi-org account",
         "tags": [
           "Usage Metering"
         ],

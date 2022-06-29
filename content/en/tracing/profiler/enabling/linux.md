@@ -34,7 +34,7 @@ The profiler can be used either as a standalone executable or as a library. Skip
 3. Download the appropriate [ddprof release][4] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` platform:
 
    ```bash
-   curl -L -O https://github.com/DataDog/ddprof/releases/download/v0.8.1/ddprof-x86_64-linux-gnu.tar.xz
+   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.8.1/ddprof-0.8.1-x86_64-unknown-linux-gnu.tar.xz
    tar xvf ddprof-x86_64-linux-gnu.tar.xz
    mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```

@@ -67,7 +67,7 @@ You can also view a map of all of a resource’s upstream and downstream service
 
 Hover over a node to view metrics of each service including requests/second, error rate, and average latency.
 
-The highlight color of the node indicates the service’s [monitor status][8]. If a service has more than one configured monitor, the status of the most severe monitor is shown.
+The highlight color of the node indicates the service’s [monitor status][5]. If a service has more than one configured monitor, the status of the most severe monitor is shown.
 
 {{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" video="true" alt="hovering and clicking a resource dependency map node" style="width:100%;">}}
 
@@ -75,7 +75,7 @@ Click on a node to open a context menu with options to view the Service Page, re
 
 ## Span summary
 
-For a given resource, Datadog provides you a [span][5] analysis breakdown of all matching traces:
+For a given resource, Datadog provides you a [span][6] analysis breakdown of all matching traces:
 
 {{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics"  style="width:80%;">}}
 
@@ -97,7 +97,7 @@ The displayed metrics represent, per span:
 
 ## Traces
 
-Consult the list of [traces][6] associated with this resource in the [Trace search][7] modal already filtered on your environment, service, operation, and resource name:
+Consult the list of [traces][7] associated with this resource in the [Trace search][8] modal already filtered on your environment, service, operation, and resource name:
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list"  style="width:90%;">}}
 
@@ -109,7 +109,7 @@ Consult the list of [traces][6] associated with this resource in the [Trace sear
 [2]: /tracing/visualization/
 [3]: /tracing/visualization/#trace
 [4]: /dashboards/
-[5]: /tracing/visualization/#spans
-[6]: /tracing/visualization/trace/
-[7]: /tracing/search/
-[8]: /monitors/manage/status/
+[5]: /monitors/manage/status/
+[6]: /tracing/visualization/#spans
+[7]: /tracing/visualization/trace/
+[8]: /tracing/search/

@@ -1,5 +1,5 @@
 ---
-title: Create an API test with the API
+title: Create An API Test With The API
 kind: guide
 further_reading:
 - link: "/api/latest/synthetics/"
@@ -7,7 +7,7 @@ further_reading:
   text: "Synthetics API"
 - link: "/synthetics/"
   tag: "Documentation"
-  text: "Manage your checks"
+  text: "Learn about Synthetic Monitoring"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
   tag: "Terraform"
   text: "Create and manage Synthetic API tests with Terraform"

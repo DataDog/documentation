@@ -188,4 +188,3 @@ With the following definitions:
 [8]: /tracing/visualization/services_list/#services-types
 [9]: /tracing/visualization/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[11]: /tracing/guide/ddsketch_trace_metrics/
