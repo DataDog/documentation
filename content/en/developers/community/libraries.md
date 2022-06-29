@@ -198,7 +198,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [27]: https://github.com/keirans/datadog-management
 [28]: https://github.com/zendesk/consul2dogstats
 [29]: https://github.com/cvent/dogscaler
-[30]: https://github.com/Dynatrace/Dynatrace-AppMon-Datadog-Plugin
+[30]: https://github.com/sworisbreathing/Dynatrace-Datadog-Plugin
 [31]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
 [32]: https://github.com/wimactel
 [33]: https://github.com/bithauschile/datadog-ga
