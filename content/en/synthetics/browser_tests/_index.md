@@ -92,7 +92,7 @@ Define the configuration of your browser test.
 
 3. **Name**: The name of your browser test.
 4. **Select tags**: The `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-5. **Browsers & Devices**: The browsers (such as `Chrome`, `Firefox`, `Edge`, and `Internet Explorer 11`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
+5. **Browsers & Devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
    - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels. 
    - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
    - For a small mobile device, the dimensions are 320 pixels x 550 pixels.  
