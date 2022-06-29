@@ -31,10 +31,10 @@ In addition to the [standard template variables][6] available across all monitor
 
 | Variable   | Description   |
 | ---------- | ------------- |
-| `{{timeframe}}` | The time window of the SLO (7, 30, 90 days) |
-| `{{value}}` | The percentage of error budget consumed (error budget alerts only) |
-| `{{short_window_burn_rate}}` | The burn rate value observed by the short window (burn rate alerts only) |
-| `{{long_window_burn_rate}}` | The burn rate value observed by the long window (burn rate alerts only) |
+| `{{timeframe}}` | The time window of the SLO (7, 30, 90 days). |
+| `{{value}}` | The percentage of error budget consumed (error budget alerts only). |
+| `{{short_window_burn_rate}}` | The burn rate value observed by the short window (burn rate alerts only). |
+| `{{long_window_burn_rate}}` | The burn rate value observed by the long window (burn rate alerts only). |
 
 [1]: /monitors/service_level_objectives/
 [2]: https://app.datadoghq.com/monitors/create/slo
