@@ -39,6 +39,7 @@ In a self-hosted setup, the Datadog Agent collects system metrics from the opera
 
 * [System metrics collected on Postgres][2]
 * [System metrics collected on MySQL][3]
+* [System metrics collected on SQLServer][15]
 
 
 For self-hosted setups, you install the Agent directly onto the database host so that you have full visibility into the health of your system running the database process.
@@ -49,6 +50,7 @@ Instructions for setting up Database Monitoring with a self-hosted provider:
 
 * [Postgres][4]
 * [MySQL][5]
+* [SQLServer][14]
 
 
 ### Cloud-managed databases
@@ -100,3 +102,5 @@ For monitoring Aurora databases, the Agent should not connect to the database th
 [11]: /agent/cluster_agent/clusterchecks/
 [12]: https://www.datadoghq.com/blog/datadog-cluster-agent/
 [13]: /database_monitoring/setup_postgres/aurora/
+[14]: /database_monitoring/setup_sql_server/selfhosted/
+[15]: /integrations/sqlserver/?tabs=host#data-collected
