@@ -103,7 +103,7 @@ If you use the browser variable to identify Synthetic bots on Firefox, Datadog c
 
 Cookies that are applied in your browser include `datadog-synthetics-public-id` and `datadog-synthetics-result-id`.
 
-These cookies are available for all steps in Firefox. For Edge and Google Chrome, these cookies are set only for the start URL.
+These cookies are available for all steps in Firefox. For Microsoft Edge and Google Chrome, these cookies are set only for the start URL.
 
 ## Further Reading
 
