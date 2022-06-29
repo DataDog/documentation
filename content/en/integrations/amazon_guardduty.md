@@ -37,7 +37,7 @@ Datadog integrates with AWS GuardDuty through a Lambda function that ships Guard
 
 4. Select the Datadog Forwarder as the target. Set `AWS service` as the target type, `Lambda function` as the target, and choose the Datadog forwarder from the dropdown `Function` menu. Click **Next**.
 
-5. Configure any desired tags, and click `Create rule`.
+5. Configure any desired tags, and click **Create rule**.
 
 
 
@@ -47,7 +47,7 @@ Datadog integrates with AWS GuardDuty through a Lambda function that ships Guard
 
 2. Click **Functions** and select the Datadog forwarder.
 
-3. Under the **Configuration** tab, click `Add trigger`. Select **EventBridge (CloudWatch Events)** from the dropdown menu, and specify the rule created in the [enable logging section](#enable-logging).
+3. In the Function Overview section, click **Add Trigger**. Select **EventBridge (CloudWatch Events)** from the dropdown menu, and specify the rule created in the [enable logging section](#enable-logging).
 
 4. See any new GuardDuty Findings in the [Datadog Log Explorer][3].
 
