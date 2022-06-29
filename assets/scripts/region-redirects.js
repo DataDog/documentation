@@ -3,16 +3,18 @@ import config from './regions.config';
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
-    const currentUserAppRegion = getSiteFromReferrer()
+    const regionSelector = document.querySelector('.js-region-select')
+    const currentUserSavedRegion = Cookies.get('site')
+    const currentReferrerAppRegion = getDDSiteFromReferrer()
 
-    if (currentUserAppRegion) {
-        redirectToRegion(currentUserAppRegion)
-        // Do we need to reset document.referrer?
+    // keeps docs and app region in sync if user navigated to docs from in-app link.
+    // otherwise docs links to the app will go to a different region and prompt user to
+    // sign-in to the app again.
+    if (currentReferrerAppRegion !== currentUserSavedRegion) {
+        redirectToRegion(currentReferrerAppRegion)
     } else {
         redirectToRegion()
     }
-
-    const regionSelector = document.querySelector('.js-region-select');
 
     if (regionSelector) {
         const options = regionSelector.querySelectorAll('.dropdown-item');
@@ -26,16 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-const getSiteFromReferrer = () => {
+// returns the Datadog site associated with the referrer URL, if applicable.
+const getDDSiteFromReferrer = () => {
     const ddFullSitesObject = config.dd_full_site
     let referrerSite = ''
 
     if (document.referrer) {
         for (const site in ddFullSitesObject) {
             if (ddFullSitesObject[site] === document.referrer) {
-                if (site !== Cookies.get('site')) {
-                    referrerSite = site
-                }
+                referrerSite = site
             }
         }
     }
@@ -77,12 +78,7 @@ function regionOnChangeHandler(region) {
         showRegionSnippet(region);
         replaceButtonInnerText(region);
         Cookies.set('site', region, { path: '/' });
-    } else if (isReferrerEU()) {
-        // need to reload the page if referrer is from EU to reset window.document.referrer
-        Cookies.set('site', region, { path: '/' });
-        window.location.reload();
-    }
-    else if (config.allowedRegions.includes(region)){
+    } else if (config.allowedRegions.includes(region)) {
         showRegionSnippet(region);
         replaceButtonInnerText(region);
         Cookies.set('site', region, { path: '/' });
@@ -153,10 +149,6 @@ function redirectToRegion(region = '') {
     } else if (newSiteRegion !== '') {
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
-    } else if (isReferrerEU()) {
-        newSiteRegion = 'eu';
-        Cookies.set('site', newSiteRegion, { path: '/' });
-        showRegionSnippet(newSiteRegion);
     } else if (
         window.document.referrer.includes('datadoghq.com') &&
         window.document.referrer.indexOf(
@@ -189,4 +181,4 @@ function redirectToRegion(region = '') {
     }
 }
 
-export { redirectToRegion, showRegionSnippet, regionOnChangeHandler };
+export { redirectToRegion };
