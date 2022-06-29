@@ -351,11 +351,6 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : Agent が接続をリッスンする TCP ポートを設定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。 <br>
 **デフォルト**: `8126`
 
-`DD_LOGS_INJECTION`
-: **TracerSettings プロパティ**: `LogsInjectionEnabled` <br>
-アプリケーションログに相関識別子を自動的に注入することを有効または無効にします。 <br>
-ロガーは `trace_id` のマッピングを正しく設定する `source` を持つ必要があります。.NET アプリケーションのデフォルトのソースである `csharp` は、自動的にこれを行います。詳しくは、[トレース ID パネルの相関するログ][5]を参照してください。
-
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings プロパティ**: `GlobalSamplingRate` <br>
 **デフォルト**: デフォルトは、Datadog Agent から返される率です<br>
@@ -426,6 +421,11 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `DD_HTTP_SERVER_ERROR_STATUSES`
 : HTTP サーバースパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。 <br>
 **デフォルト**: `500-599`
+
+`DD_LOGS_INJECTION`
+: **TracerSettings プロパティ**: `LogsInjectionEnabled` <br>
+アプリケーションログに相関識別子を自動的に注入することを有効または無効にします。 <br>
+ロガーは `trace_id` のマッピングを正しく設定する `source` を持つ必要があります。.NET アプリケーションのデフォルトのソースである `csharp` は、自動的にこれを行います。詳しくは、[トレース ID パネルの相関するログ][5]を参照してください。
 
 `DD_RUNTIME_METRICS_ENABLED`
 : .NET ランタイムメトリクスを有効にします。有効な値は `true` または `false`。<br>
