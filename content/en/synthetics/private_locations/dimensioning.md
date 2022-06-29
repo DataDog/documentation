@@ -45,7 +45,7 @@ Additional requirements vary based on the test type for the private location.
 | [API tests][1] and [Multistep API tests][2] | 100mCores/200MiB/100MiB per test run   |
 | [Browser tests][3]                           | 800mCores/1GiB/500MiB per test run |
 
-For example, Datadog recommends ~ 8 core CPU `(150mCores + (800mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 5GiB disk `(500MiB*10 test runs)` for a private location running only Browser tests with a maximum number of concurrent test runs of `10`.
+For example, Datadog recommends ~ 8 cores CPU `(150mCores + (800mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 5GiB disk `(500MiB*10 test runs)` for a private location running only Browser tests with a maximum number of concurrent test runs of `10`.
 
 **Note:** If you want to run API or multistep API tests and Browser tests on a private location, Datadog recommends computing the total hardware requirements with the Browser tests requirements.
 
