@@ -3930,9 +3930,14 @@ components:
       description: HTTP header used to compress the media-type.
       enum:
       - deflate
+      - zstd1
+      - gzip
+      example: deflate
       type: string
       x-enum-varnames:
       - DEFLATE
+      - ZSTD1
+      - GZIP
     MetricCustomAggregation:
       description: A time and space aggregation combination for use in query.
       example:
@@ -4138,13 +4143,13 @@ components:
       x-enum-varnames:
       - METRIC_VOLUMES
     MetricIntakeType:
-      description: The type of metric.
+      description: The type of metric. The available types are 0(unspecified), 1(count),
+        2(rate), 3(gauge)
       enum:
       - 0
       - 1
       - 2
       - 3
-      - 15
       format: int32
       type: integer
       x-enum-varnames:
@@ -4152,7 +4157,6 @@ components:
       - COUNT
       - RATE
       - GAUGE
-      - UNSPECIFIED_LEGACY
     MetricMetadata:
       description: Metadata for the metric.
       properties:
@@ -4347,6 +4351,7 @@ components:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
         include_percentiles:
+          default: false
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
             Defaults to false. Can only be applied to metrics that have a `metric_type`
@@ -4438,6 +4443,7 @@ components:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
         include_percentiles:
+          default: false
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
             Defaults to false. Can only be applied to metrics that have a `metric_type`
@@ -6540,17 +6546,6 @@ components:
       - cases
       - message
       type: object
-    SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv:
-      description: 'If true, signals in non-production environments have a lower severity
-        than what is defined by the rule case, which can reduce signal noise.
-
-        The severity is decreased by one level: `CRITICAL` in production becomes `HIGH`
-        in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.
-
-        The decrement is applied when the environment tag of the signal starts with
-        `staging`, `test` or `dev`.'
-      example: false
-      type: boolean
     SecurityMonitoringRuleDetectionMethod:
       description: The detection method.
       enum:
@@ -6744,8 +6739,6 @@ components:
     SecurityMonitoringRuleOptions:
       description: Options on rules.
       properties:
-        decreaseCriticalityBasedOnEnv:
-          $ref: '#/components/schemas/SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv'
         detectionMethod:
           $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
         evaluationWindow:
@@ -12095,6 +12088,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
       summary: Get the latest Cloud Workload Security policy
       tags:
       - Cloud Workload Security
@@ -13598,81 +13596,6 @@ paths:
       - AuthZ:
         - usage_read
       summary: Get cost across multi-org account
-      tags:
-      - Usage Metering
-      x-menu-order: 39
-      x-undo:
-        type: safe
-  /api/v2/usage/estimated_cost_by_org:
-    get:
-      description: Get estimated cost across multi-org account.
-      operationId: GetEstimatedCostByOrg
-      parameters:
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for cost beginning this month. Either start_month or start_date should be
-          specified, but not both.'
-        in: query
-        name: start_month
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for cost ending this month.'
-        in: query
-        name: end_month
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
-          for cost beginning this day. Either start_month or start_date should be
-          specified, but not both.'
-        in: query
-        name: start_date
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
-          for cost ending this day.'
-        in: query
-        name: end_date
-        required: false
-        schema:
-          format: date-time
-          type: string
-      responses:
-        '200':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/CostByOrgResponse'
-          description: OK
-        '400':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden - User is not authorized
-        '429':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
-      summary: Get estimated cost across multi-org account
       tags:
       - Usage Metering
       x-menu-order: 39
