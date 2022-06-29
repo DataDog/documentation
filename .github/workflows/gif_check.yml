@@ -1,6 +1,9 @@
 name: "No GIFs"
 
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+    - 'static/images/**'
 
 jobs:
   file_existence:
