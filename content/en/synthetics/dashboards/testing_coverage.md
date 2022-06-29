@@ -13,9 +13,19 @@ further_reading:
 
 ## Overview
 
-The [application testing coverage dashboard][1] uses data collected from [RUM & Session Replay][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. For more information, see [Explore RUM & Session Replay in Synthetics][4].
+The [application testing coverage dashboard][1] uses data collected from [RUM & Session Replay][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. 
 
-You can use this dashboard to build a more complete, accurate testing suite with information such as the percentage of tested RUM actions, number of tested and total actions, number of tests covering actions, and number of real user interactions. It shows:
+You can use this dashboard to build a more complete, accurate testing suite with information about the following topics:
+
+- A list of top web pages linked to RUM views
+- The percentage of tested RUM actions
+- The number of tested and total actions
+- The number of browser tests covering actions
+- The number of real user interactions 
+
+For more information, see [Explore RUM & Session Replay in Synthetics][4].
+
+It shows:
 
 - **Untested actions**: Explore the most popular untested user actions with the count of real user interactions and the number of actions covered in browser tests.
 - **Top Synthetic browser tests**: Analyze the the list of browser tests with the count of tested RUM actions.
@@ -28,7 +38,14 @@ For more information about the data displayed, see [Synthetic Monitoring Metrics
 
 ## Manage browser tests
 
-In order to improve your testing coverage and better manage your browser tests, you need to understand what actions are not being tested in your application, what views are most popular to your users, what actions need more browser tests, and what percentage of browser tests cover user actions. 
+In order to improve your testing coverage and better manage your browser tests, this dashboard can help you answer the following questions:
+
+- What actions are not being tested in your application?
+- What views are the most popular to your users? 
+- What actions need more browser tests?
+- What percentage of browser tests are covering user actions? 
+
+By creating more browser tests to monitor your RUM views and actions, you are alerted when key user journeys in your application are negatively impacted by a code change. You can run tests [directly in your CI/CD pipelines][5] to ensure no regressions occur before releasing code in production. 
 
 To add a browser test for a top view or untested action, click on a view with a low percentage of tested actions under **Top Views** or an action under **Untested Actions** and select **Create a Synthetics browser test** from the dropdown menu. Clicking **View RUM events** navigates you to the [RUM Explorer][6] with an autofilled search query for actions with a specific view name.
 
@@ -38,7 +55,7 @@ The **Top Views** table lists the most popular web pages that users are interact
 
 Use the dropdown menus to customize the data types and view [custom actions][7] specific to your queried data. 
 
-Because you are instrumenting your code to define these custom actions, your definitions may result in more accurate results compared to the generic **Click on Save** action generated.
+Because you are instrumenting your code to define these custom actions, your definitions lead to more accurate results compared to a generic, generated **Click on Save** action.
 
 ## Further Reading
 
