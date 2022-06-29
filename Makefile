@@ -201,7 +201,7 @@ source-helpers: # Source the helper functions used in build, test, deploy.
 start: clean source-helpers examples ## Build the documentation with all external content.
 	@echo "\033[35m\033[1m\nBuilding the documentation with ALL external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
-		source ${VIRENV}/bin/activate; \
+		. ${VIRENV}/bin/activate; \
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
 		DD_API_KEY=${DD_API_KEY} \
 		DD_APP_KEY=${DD_APP_KEY} \
@@ -218,7 +218,7 @@ start: clean source-helpers examples ## Build the documentation with all externa
 start-no-pre-build: clean source-helpers ## Build the documentation without automatically pulled content.
 	@echo "\033[35m\033[1m\nBuilding the documentation with NO external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
-		source ${VIRENV}/bin/activate; \
+		. ${VIRENV}/bin/activate; \
 		RUN_SERVER=${RUN_SERVER} \
 		LANGS_TO_IGNORE=${LANGS_TO_IGNORE} \
 		DOCKER=${DOCKER} \
