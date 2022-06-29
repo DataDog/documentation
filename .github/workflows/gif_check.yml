@@ -3,7 +3,7 @@ name: "No GIFs"
 on: 
   pull_request:
     paths:
-    - 'static/images/'
+    - 'static/images/**'
 
 jobs:
   file_existence:
