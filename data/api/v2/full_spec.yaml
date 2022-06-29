@@ -2633,10 +2633,12 @@ components:
     IntakePayloadAccepted:
       description: The payload accepted for intake.
       properties:
-        status:
-          description: The status of the intake payload.
-          example: ok
-          type: string
+        errors:
+          description: A list of errors.
+          items:
+            description: An empty error list.
+            type: string
+          type: array
       type: object
     ListApplicationKeysResponse:
       description: Response for a list of application keys.
