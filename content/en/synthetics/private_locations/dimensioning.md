@@ -62,7 +62,7 @@ To distribute resources across multiple workers, run multiple containers for a p
  2. Assign `total private location resource requirements / number of workers` resources to every private location container.
 
 
-For example, Datadog recommends ~ 1.5 core CPU, ~ 10GiB memory, and ~ 100MiB disk for a private location running only Browser tests with a maximum number of concurrent test runs of `10`. To distribute these resources across two workers, set the [`concurrency` parameter][4] to 5 and allocate ~ 750mCores CPU, ~ 5GiB memory, and ~ 50MiB disk to each worker.
+For example, Datadog recommends ~ 8 cores CPU, ~ 10GiB memory, and ~ 5GiB disk for a private location running only Browser tests with a maximum number of concurrent test runs of `10`. To distribute these resources across two workers, set the [`concurrency` parameter][4] to 5 and allocate ~ 4 cores CPU, ~ 5GiB memory, and ~ 2.5GiB disk to each worker.
 
 #### Queueing mechanism
 
