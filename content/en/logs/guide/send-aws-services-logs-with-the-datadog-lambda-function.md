@@ -13,7 +13,7 @@ further_reading:
   text: "Learn how to process your logs"
 ---
 
-AWS service logs can be collected with the Datadog Forwarder Lambda function. This Lambda—which triggers on S3 Buckets, CloudWatch log groups, and CloudWatch events—forwards logs to Datadog.
+AWS service logs can be collected with the Datadog Forwarder Lambda function. This Lambda—which triggers on S3 Buckets, CloudWatch log groups, and EventBridge events—forwards logs to Datadog.
 
 To start collecting logs from your AWS services:
 
