@@ -32,8 +32,6 @@ The .NET Tracer supports the following logging libraries:
 
 ## Getting started
 
-Before you begin, 
-
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
 
 {{< tabs >}}
@@ -211,6 +209,8 @@ If you prefer to manually correlate your traces with your logs, you can add corr
 
 **Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see the [FAQ on this topic][10].
 
+**Note**: If you are using Serilog, Nlog or log4net *through* ILogger, see the Microsoft.Extensions.Logging section to configure these properties via `BeginScope()`.
+
 After completing the [getting started steps](#getting-started), finish your manual log enrichment setup:
 
 1. Reference the [`Datadog.Trace` NuGet package][11] in your project.
@@ -225,8 +225,6 @@ Examples:
 {{% tab "Serilog" %}}
 
 **Note**: The Serilog library requires message property names to be valid C# identifiers. The required property names are: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id`, and `dd_span_id`.
-
-**Note**: If you are using Serilog through ILogger, see the [ILogger section](?tab=microsoftextensionslogging#configure-log-collection) to configure these properties via `BeginScope()`.
 
 ```csharp
 using Datadog.Trace;
