@@ -3,9 +3,9 @@ title: Database Monitoring
 kind: documentation
 description: Learn about Database Monitoring and get started
 further_reading:
-- link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
+- link: "https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/"
   tag: "Blog"
-  text: "Monitor and visualize database performance"
+  text: "Monitor SQL Server and Azure managed databases with Datadog DBM"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
