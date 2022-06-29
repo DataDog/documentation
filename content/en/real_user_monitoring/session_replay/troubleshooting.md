@@ -41,7 +41,7 @@ For proper mouse hover support, the CSS rules must be accessible through the CSS
 
 If the stylesheets are hosted on a different domain than the web page, access to the CSS rules is subject to cross-origin security checks by the browser, and the browser must be instructed to load the stylesheet leveraging CORS using the [crossorigin][6] attribute.
 
-For example, if your application is on the `example.com` domain and depends on a CSS file on `assets.example.com` via a link element, the `crossorigin` attribute should be set to `anonymous`, unless credentials are required:
+For example, if your application is on the `example.com` domain and depends on a CSS file on `assets.example.com` through a link element, the `crossorigin` attribute should be set to `anonymous`, unless credentials are required:
 
 ```html
 <link rel="stylesheet" crossorigin="anonymous"
