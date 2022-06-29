@@ -292,7 +292,7 @@ examples/typescript: examples/datadog-api-client-typescript clean-typescript-exa
 examples: examples/go examples/java examples/python examples/ruby examples/typescript
 
 start-docker: clean
-	export REPO_PATH=$(PWD) && \
+	@export REPO_PATH=$(PWD) && \
 	export GITHUB_TOKEN=${GITHUB_TOKEN} && \
 	export FULL_BUILD=${FULL_BUILD} && \
 	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -p docs-local -f ./docker-compose-docs.yml up
