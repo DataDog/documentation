@@ -29,12 +29,14 @@ To set up Observability Pipelines, first [install Vector](#install-vector) and [
 
 ### Quick start
 
+#### Terminal
 Run the following OS-agnostic command in the terminal, which guides you through setting up Vector:
 
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://sh.vector.dev | bash
 ```
 
+#### Containers
 For containerized production environments, run the following command to download and install Vector:
 
 ```
@@ -152,4 +154,4 @@ Once the setup is complete, Vector is connected to Observability Pipelines and t
 [21]: https://vector.dev/docs/setup/installation/
 [22]: /integrations/observability_pipelines/vector_configurations
 [23]: https://app.datadoghq.com/organization-settings/service-accounts/new
-[24]: https://app.datadoghq.com/pipelines
+[24]: https://app.datadoghq.com/observability-pipelines

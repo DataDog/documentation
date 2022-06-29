@@ -67,14 +67,14 @@ type: multi-code-lang
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
 | MSMQ                            | 組み込み                                                                                  | `Msmq`               |
-| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 1.0.0+                                           | `MySql`              |
+| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                  | `RabbitMQ`           |
 | Redis (ServiceStack クライアント)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
 | Redis (StackExchange クライアント)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                           | `Sqlite`             |
-| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+  | `SqlClient`     |
+| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+  | WebClient / WebRequest     |
 | WCF (サーバー)                    | 組み込み                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | 組み込み                                                                                  | `WebRequest`         |
 

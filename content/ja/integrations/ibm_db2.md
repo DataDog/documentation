@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - ログの収集
-  - オートディスカバリー
+- data store
+- ログの収集
+- オートディスカバリー
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
 display_name: IBM Db2
 draft: false
 git_integration_title: ibm_db2
 guid: 67378f79-e72b-4f49-8ec2-57053706523d
 integration_id: ibm-db2
 integration_title: IBM Db2
+integration_version: 1.11.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -34,10 +35,13 @@ public_title: Datadog-IBM Db2 インテグレーション
 short_description: IBM Db2 データベースからのテーブルスペース、バッファプールなどのメトリクスを監視
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![デフォルトのダッシュボード][1]
 
 ## 概要
@@ -68,10 +72,16 @@ Agent バージョン < 6.11 の場合
 "C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" -m pip install ibm_db==3.0.1
 ```
 
-Agent バージョン >= 6.12 の場合
+Agent バージョン >= 6.12 および < 7.0 の場合
 
 ```text
 "C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install ibm_db==3.0.1
+```
+
+Agent バージョン >= 7.0 の場合
+
+```text
+"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.1.0
 ```
 
 Linux では、XML 機能が必要になる場合があります。ビルドプロセス中にエラーが発生した場合は、
@@ -90,7 +100,7 @@ update dbm cfg using DFT_MON_TABLE on
 update dbm cfg using DFT_MON_BUFPOOL on
 ```
 
-これで、`get dbm cfg` を実行すると、次のように表示されます。
+次に、`get dbm cfg` を実行すると、以下のように表示されるはずです。
 
 ```text
  Default database monitor switches
@@ -166,7 +176,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                                                                                                                                                                |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -208,7 +218,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/images/dashboard_overview.png
 [2]: https://www.ibm.com/analytics/us/en/db2
-[3]: https://docs.datadoghq.com/ja/agent/
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/ibmdb/python-ibmdb/tree/master/IBM_DB/ibm_db
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/help/

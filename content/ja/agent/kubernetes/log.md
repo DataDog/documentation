@@ -1,23 +1,24 @@
 ---
-title: Kubernetes ログの収集
-kind: documentation
 further_reading:
-  - link: /agent/kubernetes/apm/
-    tag: ドキュメント
-    text: アプリケーショントレースの収集
-  - link: /agent/kubernetes/prometheus/
-    tag: ドキュメント
-    text: Prometheus メトリクスの収集
-  - link: /agent/kubernetes/integrations/
-    tag: ドキュメント
-    text: アプリケーションのメトリクスとログを自動で収集
-  - link: /agent/guide/autodiscovery-management/
-    tag: ドキュメント
-    text: データ収集をコンテナのサブセットのみに制限
-  - link: /agent/kubernetes/tag/
-    tag: ドキュメント
-    text: コンテナから送信された全データにタグを割り当て
+- link: /agent/kubernetes/apm/
+  tag: ドキュメント
+  text: アプリケーショントレースの収集
+- link: /agent/kubernetes/prometheus/
+  tag: ドキュメント
+  text: Prometheus メトリクスの収集
+- link: /agent/kubernetes/integrations/
+  tag: ドキュメント
+  text: アプリケーションのメトリクスとログを自動で収集
+- link: /agent/guide/autodiscovery-management/
+  tag: ドキュメント
+  text: データ収集をコンテナのサブセットのみに制限
+- link: /agent/kubernetes/tag/
+  tag: ドキュメント
+  text: コンテナから送信された全データにタグを割り当て
+kind: documentation
+title: Kubernetes ログの収集
 ---
+
 Agent がログを収集する方法には、[Docker ソケット][1]から収集する方法と、[Kubernetes ログファイル](#ログの収集)から収集する方法 (Kubernetes によって自動的に処理されます) の 2 つがあります。次の場合、Datadog では Kubernetes ログファイルの使用を推奨しています。
 
 * Docker がランタイムではない、**または**
@@ -53,13 +54,13 @@ DaemonSet によるログの収集を有効にするには
 
     **注**: `DD_CONTAINER_EXCLUDE_LOGS` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナを無視するための環境変数][1]を参照してください。OpenShift 環境内で ImageStreams を使用する場合は、`DD_CONTAINER_INCLUDE_LOGS` にコンテナの `name` を設定してログを収集します。これらパラメーター値（除外/含む）は正規表現をサポートします。
 
-2. 再起動やネットワーク障害の際にコンテナログを失わないように、`pointdir` ボリュームをマウントします。`/var/log/pods` がこのディレクトリへのシンボリックリンクであるため、Kubernetes ログファイルからログを収集するよう `/var/lib/docker/containers` もマウントします。
+2. 再起動やネットワーク障害の際にコンテナログを失わないように、`pointerdir` ボリュームをマウントします。`/var/log/pods` がこのディレクトリへのシンボリックリンクであるため、Kubernetes ログファイルからログを収集するよう `/var/lib/docker/containers` もマウントします。
 
     ```yaml
       # (...)
         volumeMounts:
         #  (...)
-          - name: pointdir
+          - name: pointerdir
             mountPath: /opt/datadog-agent/run
          - name: logpodpath
            mountPath: /var/log/pods
@@ -74,7 +75,7 @@ DaemonSet によるログの収集を有効にするには
        # (...)
         - hostPath:
             path: /opt/datadog-agent/run
-          name: pointdir
+          name: pointerdir
         - hostPath:
             path: /var/log/pods
           name: logpodpath
@@ -88,7 +89,7 @@ DaemonSet によるログの収集を有効にするには
         # (...)
     ```
 
-   `pointdir` は、Agent がログを収集するすべてのコンテナへのポインターを含むファイルを格納するために使用されます。これは、Agent が再起動したり、ネットワークに問題があった場合でも、何も失われないようにするためです。
+   `pointerdir` は、Agent がログを収集するすべてのコンテナへのポインターを含むファイルを格納するために使用されます。これは、Agent が再起動したり、ネットワークに問題があった場合でも、何も失われないようにするためです。
 
 ### 非特権
 
@@ -269,6 +270,8 @@ Agent v6.2.0 (および v5.24.0) 以降、デフォルトテンプレートは�
 1. ホストに `conf.d/<INTEGRATION_NAME>.d/conf.yaml` ファイルを作成し、カスタムオートディスカバリー構成を追加します。
 2. ホスト の `conf.d/` フォルダーをコンテナ化 Agent の `conf.d` フォルダーにマウントします。
 
+**注**: これは Docker Socket 経由でログを収集する場合のみサポートされ、Kubernetes のログファイル方式を使用する場合はサポートされません。Kubernetes 環境でログ収集に Docker Socket を使用するには、ランタイムが Docker で、`DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` が `false` に設定されていることを確認してください。
+
 **オートディスカバリー構成ファイル例**:
 
 ```text
@@ -288,6 +291,8 @@ logs:
 {{% tab "ConfigMap" %}}
 
 Kubernetes では、[ConfigMaps][1] を使用できます。以下のテンプレートと[Kubernetes カスタムインテグレーションに関するドキュメント][2]を参照してください。
+
+**注**: これは Docker Socket 経由でログを収集する場合のみサポートされ、Kubernetes のログファイル方式を使用する場合はサポートされません。Kubernetes 環境でログ収集に Docker Socket を使用するには、ランタイムが Docker で、`DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` が `false` に設定されていることを確認してください。
 
 ```text
 kind: ConfigMap
@@ -368,6 +373,9 @@ key-value ストアがテンプレートソースとして有効になってい�
 {{% tab "Helm" %}}
 
 `confd` 内で、インテグレーションごとにログコレクションをカスタマイズできます。この方法で、希望するコンフィギュレーションを Agent コンテナにマウントします。
+
+**注**: これは Docker Socket 経由でログを収集する場合のみサポートされ、Kubernetes のログファイル方式を使用する場合はサポートされません。Kubernetes 環境でログ収集に Docker Socket を使用するには、ランタイムが Docker で、`DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` が `false` に設定されていることを確認してください。
+
   ```yaml
   confd:
     <INTEGRATION_NAME>.yaml: |-

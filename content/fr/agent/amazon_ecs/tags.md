@@ -1,20 +1,44 @@
 ---
-title: "Extraction de tags Amazon\_ECS"
-kind: documentation
 further_reading:
-  - link: /getting_started/tagging/
-    tag: Documentation
-    text: Débuter avec les tags
-  - link: /getting_started/tagging/using_tags/
-    tag: Documentation
-    text: Utiliser des tags avec Datadog
-  - link: /agent/guide/autodiscovery-management/
-    tag: Documentation
-    text: Limiter la collecte de données à un sous-ensemble de conteneurs
+- link: /getting_started/tagging/
+  tag: Documentation
+  text: Débuter avec les tags
+- link: /getting_started/tagging/using_tags/
+  tag: Documentation
+  text: Utiliser des tags avec Datadog
+- link: /agent/guide/autodiscovery-management/
+  tag: Documentation
+  text: Limiter la collecte de données à un sous-ensemble de conteneurs
+kind: documentation
+title: Extraction de tags Amazon ECS
 ---
+
 ## Présentation
 
 L'Agent Datadog peut créer et appliquer des tags à l'ensemble des métriques, des traces et des logs envoyés par un conteneur en fonction de ses étiquettes ou de ses variables d'environnement.
+
+## Tags prêts à l'emploi
+
+L'Agent peut découvrir automatiquement des tags et les ajouter à toutes les données générées par toute une tâche ou par un conteneur spécifique dans cette tâche. La liste des tags ajoutés automatiquement dépend de la [configuration de cardinalité][5] de l'Agent.
+
+<div style="overflow-x: auto;">
+
+  | Tag                           | Cardinalité  | Source               |
+  |-------------------------------|--------------|----------------------|
+  | `container_name`              | Forte         | Docker               |
+  | `container_id`                | Forte         | Docker               |
+  | `docker_image`                | Faible          | Docker               |
+  | `image_name`                  | Faible          | Docker               |
+  | `short_image`                 | Faible         | Docker               |
+  | `image_tag`                   | Faible          | Docker               |
+  | `ecs_cluster_name`            | Faible          | API ECS               |
+  | `ecs_container_name`          | Faible          | API ECS              |
+  | `task_arn`                    | Orchestrateur | API ECS              |
+  | `task_family`                 | Faible          | API ECS              |
+  | `task_name`                   | Faible          | API ECS              |
+  | `task_version`                | Faible          | API ECS              |
+
+</div>
 
 ## Tagging de service unifié
 
@@ -50,3 +74,4 @@ Si vous n'avez pas activé le tagging de service unifié, effectuez les étapes 
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_instances.html
 [3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [4]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
+[5]: /fr/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables

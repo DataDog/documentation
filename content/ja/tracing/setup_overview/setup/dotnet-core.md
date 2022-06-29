@@ -397,7 +397,18 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings プロパティ**: `GlobalSamplingRate` <br>
-取り込み率コントロールを有効にします。
+**デフォルト**: デフォルトは、Datadog Agent から返される率です<br>
+取り込み率コントロールを有効にします。このパラメーターは、サンプリングするスパンのパーセンテージを表す浮動小数点数です。有効な値は `0.0` から `1.0` までです。
+詳しくは、[取り込みメカニズム][11]を参照してください。
+
+`DD_TRACE_SAMPLING_RULES`
+: **TracerSettings プロパティ**: `CustomSamplingRules`<br>
+**デフォルト**: `null`<br>
+オブジェクトの JSON 配列。各オブジェクトは `"sample_rate"` を持たなければなりません。`"name"` と `"service"` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
+詳しくは、[取り込みメカニズム][11]を参照してください。<br>
+**例:**<br>
+  - サンプルレートを 20% に設定: `'[{"sample_rate": 0.2}]'`
+  - 'a' で始まるサービスとスパン名 'b' のサービスのサンプルレートを 10% に、それ以外のサービスのサンプルレートを 20% に設定: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings プロパティ**: `MaxTracesSubmittedPerSecond` <br>
@@ -423,7 +434,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。<br>
 **例**: `layer:api, team:intake` <br>
 バージョン 1.17.0 で追加されました。
-デリミタはコンマと空白: `, ` であることに注意してください。
+デリミタはコンマとスペース: `, ` であることに注意してください。
 
 `DD_TRACE_LOG_DIRECTORY`
 : .NET Tracer ログのディレクトリを設定します。<br>
@@ -471,6 +482,12 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 **注:** ワイルドカードメソッドサポート (`[*]`) は、コンストラクタ、プロパティゲッターとセッター、 `Equals`、`Finalize`、`GetHashCode` そして `ToString` 以外の型のすべてのメソッドを選択します。<br>
 バージョン 2.6.0 で追加されました。
 ワイルドカードのサポート `[*]` はバージョン 2.7.0 で追加されました。
+
+`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
+: Kafka コンシューマースパンの動作を変更します<br>
+**デフォルト**: `true`<br>
+`true` に設定すると、メッセージが消費されたときにコンシューマースパンが作成され、次のメッセージを消費する前に閉じられます。このスパンの長さは、あるメッセージの消費と次のメッセージの消費との間の計算を代表するものです。この設定は、メッセージの消費がループで実行される場合に使用します。<br>
+`false` に設定すると、メッセージが消費されたときにコンシューマスパンが作成され、すぐに閉じられます。この設定は、メッセージが完全に処理されないまま次のメッセージを消費する場合や、複数のメッセージを一度に消費する場合に使用します。
 
 #### 自動インスツルメンテーションインテグレーションコンフィギュレーション
 
@@ -706,3 +723,4 @@ Linux Docker コンテナに必要な環境変数を設定するには
 [8]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
+[11]: /ja/tracing/trace_ingestion/mechanisms/?tab=environmentvariables#head-based-sampling

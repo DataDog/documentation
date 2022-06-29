@@ -1,5 +1,5 @@
 ---
-title: Handling Popups in Browser Tests
+title: Handling Popups In Browser Tests
 kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/browser-tests/'
@@ -9,17 +9,22 @@ further_reading:
       tag: 'Documentation'
       text: 'Configure a Browser Test'
 ---
+## Overview
+
+This guide describes how to manage popups such as modals or application windows in a Synthetics browser test.
+
 ## Modals
 
 ### JavaScript
 
 Synthetic browser tests automatically handle [JavaScript modals][1]:
+
  - `alert` modals are closed. 
  - `prompt` and `confirm` modals are answered `Lorem Ipsum`.
 
-### Basic auth
+### Basic authentication
 
-For Basic auth popups, specify the associated credentials in your browser test configuration, in [**Advanced Options > HTTP Auth**][2]:
+For basic authentication popups, specify the associated credentials in your browser test configuration under [**Advanced Options > HTTP Auth**][2]:
 
 {{< img src="synthetics/guide/popup/http_auth_option.png" alt="Basic Auth Popup">}}
 

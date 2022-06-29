@@ -1,6 +1,6 @@
 ---
 aliases: null
-description: RUM を使用しないユーザーが、Synthetic ブラウザのテスト結果から、RUM のデータ、セッション、エラーをプレビューできるようになりました。
+description: RUM を使用しないユーザーが、Synthetic ブラウザのテスト結果から、RUM のデータ、セッション、エラーを追加費用なしでプレビューできるようになりました。
 further_reading:
 - link: https://docs.datadoghq.com/synthetics/browser_tests/
   tag: ドキュメント

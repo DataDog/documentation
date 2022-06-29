@@ -8,17 +8,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md
+- https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md
 display_name: Linux proc extras
 draft: false
 git_integration_title: linux_proc_extras
 guid: 47f243d7-5df4-47b5-9f1a-923b4f7cefe7
 integration_id: システム
 integration_title: Linux Proc Extras
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,8 +31,11 @@ public_title: Datadog-Linux Proc Extras インテグレーション
 short_description: linux_proc_extras の状態を視覚化および監視。
 support: コア
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## 概要
 
 linux_proc_extras サービスからメトリクスをリアルタイムに取得して、以下のことができます。

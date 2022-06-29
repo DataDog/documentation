@@ -1,7 +1,7 @@
 import { initializeIntegrations } from './components/integrations';
 import { initializeSecurityRules } from './components/security-rules';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
-import codeTabs from './components/codetabs';
+import initCodeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
@@ -91,7 +91,7 @@ $(document).ready(function () {
     }
 
     if (document.querySelector('.code-tabs')) {
-        codeTabs();
+        initCodeTabs();
     }
 });
 

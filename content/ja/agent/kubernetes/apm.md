@@ -129,6 +129,7 @@ APM トレースの収集を有効にするには、DaemonSet コンフィギュ
 デフォルトのコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。次に Agent はソケットファイル `/var/run/datadog/apm.socket` を作成し、リッスンします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。`agent.apm.hostSocketPath` と `agent.apm.socketPath` のコンフィギュレーション値で、パスとソケットを変更することが可能です。
 
 #### オプション - TCP 経由でトレースを受け取るように Datadog Agent を構成する
+
 Datadog Agent は、TCP 経由でトレースを受信するように構成することも可能です。この機能を有効にするには:
 
 `datadog-agent.yaml` のマニフェストを以下のように更新します。
@@ -163,6 +164,15 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ### Datadog Agent にトレースを送信するためのアプリケーションポッドの構成
 
 {{< tabs >}}
+
+{{% tab "Datadog Admission Controller" %}}
+[Datadog Admission Controller][1] は、ポッドと Agent のトレース通信を自動的に構成するために、新しいアプリケーションポッドに環境変数を注入し、必要なボリュームをマウントすることが可能です。
+
+Datadog Agent にトレースを送信するためにアプリケーションを自動的に構成する方法の詳細については、[Datadog Admission Controller][1] のドキュメントをご覧ください。
+
+[1]: /ja/agent/cluster_agent/admission_controller/
+{{% /tab %}}
+
 {{% tab "UDS" %}}
 Unix Domain Socket (UDS) を使用して Agent にトレースを送信する場合は、ソケットのあるホストディレクトリ (Agent が作成したもの) をアプリケーションコンテナにマウントし、ソケットへのパスを `DD_TRACE_AGENT_URL` で指定します。
 
@@ -186,8 +196,8 @@ kind: Deployment
             path: /var/run/datadog/
           name: apmsocketpath
 ```
-
 {{% /tab %}}
+
 
 {{% tab TCP %}}
 TCP (`<IP_ADDRESS>:8126`) を使用して Agent にトレースを送信している場合、この IP アドレスをアプリケーションポッドに供給します ([Datadog Admission Controller][1] で自動的に、または手動で下位 API を使用してホスト IP をプルします)。アプリケーションコンテナには、`status.hostIP` を指す環境変数 `DD_AGENT_HOST` が必要です。
@@ -206,9 +216,12 @@ kind: Deployment
               fieldRef:
                 fieldPath: status.hostIP
 ```
+**注:** この構成では、Agent が TCP 上のトレースを受け入れるように構成されている必要があります。
 
 [1]: /ja/agent/cluster_agent/admission_controller/
+
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ### アプリケーショントレーサーがトレースを発するように構成します。

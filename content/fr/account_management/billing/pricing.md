@@ -1,11 +1,12 @@
 ---
-title: Tarification
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/pricing
-    tag: Tarification
-    text: Tarification Datadog
+- link: https://www.datadoghq.com/pricing
+  tag: Tarification
+  text: Tarification Datadog
+kind: documentation
+title: Tarification
 ---
+
 Datadog propose différentes offres tarifaires selon vos besoins. Pour en savoir plus, consultez la page [Tarifs][1]. Sauf mention contraire dans votre commande, Datadog calcule le prix facturé en fonction de votre utilisation du produit durant chaque mois calendaire. Voici les unités de tarification les plus courantes :
 
 ## Surveillance d'infrastructure
@@ -27,25 +28,23 @@ Datadog propose différentes offres tarifaires selon vos besoins. Pour en savoir
 * Une **span indexée** est une requête individuelle effectuée auprès d'un service de votre pile. Le prix facturé par Datadog est calculé en fonction du nombre total de spans indexées par des [filtres de rétention][3] dans l'APM Datadog.
 * Une **span ingérée** est une requête individuelle effectuée auprès d'un service de votre pile. Le prix facturé par Datadog est calculé en fonction du nombre total de gigaoctets de spans ingérées par l'APM Datadog.
 
-Vous pouvez mettre en place des contrôles afin de limiter les volumes de spans ingérées et indexées. Pour en savoir plus, consultez la documentation relative aux [contrôles de rétention et d'ingestion des traces][4].
+Vous pouvez mettre en place des contrôles afin de limiter les volumes de spans ingérées et indexées. Pour en savoir plus, consultez la documentation relative à l'[ingestion][4] et la [rétention][5] de traces.
 
-**Remarque :** les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.
+## Database Monitoring
 
-## Surveillance de base de données
-
-* Datadog enregistre le nombre de hosts de base de données uniques que vous surveillez toutes les heures grâce à la solution de surveillance des bases de données.
+* Datadog enregistre le nombre de hosts de base de données uniques que vous surveillez toutes les heures grâce à la solution Database Monitoring.
   * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
   * Avec une formule mensuelle/horaire hybride (MHP), Datadog facture votre engagement mensuel minimum et applique un taux horaire par host/heure une fois cet engagement dépassé.
-* Une **requête normalisée**, ou synthèse de requête, représente un agrégat de requêtes possédant une structure similaire et dont les seules différences résident dans les paramètres de requête. Le prix facturé par Datadog est calculé en fonction du nombre total de requêtes normalisées configurées qui sont surveillées à tout moment.
+* Le prix facturé par Datadog est calculé en fonction du nombre total de [requêtes normalisées][9] configurées qui sont surveillées à un moment donné.
 
 ## Log Management
 
 * Un **log** est un enregistrement au format texte de l'activité générée par un système d'exploitation, une application ou d'autres sources. Datadog facture les logs ingérés en fonction du nombre total de gigaoctets envoyés au service Logs de Datadog.
 * Un **événement de log** est un log indexé par le service Logs de Datadog. Le prix facturé par Datadog est calculé par tranche de million d'événements de log envoyés pour indexation en appliquant le tarif désigné dans la stratégie de rétention pour laquelle vous avez optée.
 
-## Security Monitoring
+## Cloud SIEM
 
-* Un **log analysé** est un enregistrement au format texte de l'activité générée par un système d'exploitation, une application ou d'autres sources qui a été analysé pour détecter les menaces de sécurité potentielles. Datadog facture les logs analysés en fonction du nombre total de gigaoctets ingérés et analysés par le service Security Monitoring de Datadog.
+* Un **log analysé** est un enregistrement au format texte de l'activité générée par un système d'exploitation, une application ou d'autres sources qui a été analysé pour détecter les menaces de sécurité potentielles. Datadog facture les logs analysés en fonction du nombre total de gigaoctets ingérés et analysés par le service Cloud SIEM de Datadog.
 
 ## Surveillance Synthetic
 
@@ -55,7 +54,7 @@ Vous pouvez mettre en place des contrôles afin de limiter les volumes de spans 
 
 ## Network Performance Monitoring
 
-* Le nombre de hosts que vous surveillez en même temps via le service **surveillance des performances réseau** (NPM) de Datadog est mesuré toutes les heures.
+* Le nombre de hosts que vous surveillez en même temps via le service **Network Performance Monitoring** (NPM) de Datadog est mesuré toutes les heures.
   * Ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
 * En outre, le nombre total de flux utilisés par tous les hosts NPM est mesuré chaque mois par Datadog. Un **flux** correspond à un enregistrement du trafic envoyé et reçu entre une source (IP:Port) et une destination (IP:Port), mesuré sur une période de cinq minutes.
 
@@ -73,22 +72,30 @@ Vous pouvez mettre en place des contrôles afin de limiter les volumes de spans 
     **Remarque** : ce quota est agrégé pour tous les hosts. Si vous avez une moyenne de quatre conteneurs sur l'ensemble de vos hosts, les conteneurs supplémentaires ne vous sont pas facturés pour chaque host séparément.
 * Datadog mesure le nombre total de conteneurs qui sont profilés. Un conteneur est un environnement d'exploitation autonome qui comprend une application ainsi que des paramètres et des bibliothèques de système d'exploitation limités. Le nombre de conteneurs uniques que vous surveillez avec le service Profileur en continu de Datadog est mesuré toutes les cinq minutes. Chaque mois, Datadog facture le nombre d'heures de surveillance de vos conteneurs, calculé proportionnellement. Pour le service Profileur en continu, Datadog comptabilise uniquement les conteneurs qui exécutent le service Profileur en continu dans le nombre total de conteneurs surveillés.
 
-## Gestion des incidents
+## Incident Management
 
 * Datadog surveille le nombre d'utilisateurs actifs mensuels qui prennent part à la gestion des incidents et aux interventions connexes.
  * Un utilisateur est uniquement considéré comme **actif** lorsqu'il publie des commentaires ou des signaux (graphiques, liens, etc.) sur un incident. Toutes les personnes qui se contentent d'ouvrir ou de fermer un incident, ou simplement de le consulter, ne sont pas prises en compte. De plus, le calcul ne se base pas sur un système d'attribution de postes. Vous n'avez donc pas besoin d'identifier les utilisateurs qui accèdent aux incidents.
 
+## CI Visibility
+
+* Datadog suit le nombre unique d'auteurs de commit qui envoient des données de test et de pipeline vers le service CI Visibility.
+* Un **auteur de commit** désigne un auteur de commit actif sur Git, identifié par son adresse e-mail Git. Un auteur de commit est pris en compte dans la facturation s'il effectue au moins trois commit au cours d'un mois donné.
+  * Si un pipeline n'est associé à aucun dépôt Git ou que les métadonnées Git ne sont pas disponibles, le nom d'utilisateur de la personne qui a déclenché l'exécution du pipeline est utilisé pour la facturation.
+* En ce qui concerne la visibilité sur les pipelines, chaque pipeline, étape de pipeline et tâche de pipeline est comptabilisée comme une **span de pipeline**. En ce qui concerne la visibilité sur les tests, chaque exécution de test est comptabilisée comme une **span de test**.
 
 ## Dépannage
 
-Pour toute question technique, contactez [l'assistance Datadog][5].
+Pour toute question technique, contactez [l'assistance Datadog][6].
 
-Contactez le [service commercial][6] ou votre [chargé de compte][7] pour toute question concernant la tarification horaire ou la facturation pour votre compte.
+Contactez le [service commercial][7] ou votre [chargé de compte][8] pour toute question concernant la tarification horaire ou la facturation pour votre compte.
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /fr/metrics/custom_metrics/
-[3]: /fr/tracing/trace_retention_and_ingestion/#retention-filters
-[4]: /fr/tracing/trace_retention_and_ingestion/
-[5]: /fr/help/
-[6]: mailto:sales@datadoghq.com
-[7]: mailto:success@datadoghq.com
+[3]: /fr/tracing/trace_retention/#retention-filters
+[4]: /fr/tracing/trace_ingestion/
+[5]: /fr/tracing/trace_retention/
+[6]: /fr/help/
+[7]: mailto:sales@datadoghq.com
+[8]: mailto:success@datadoghq.com
+[9]: /fr/database_monitoring/data_collected/#normalized-queries

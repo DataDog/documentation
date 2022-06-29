@@ -42,6 +42,7 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 @param max_traces_per_second - integer - optional - default: 10
 @env DD_APM_MAX_TPS - integer - optional - default: 10
 ```
+**Note**: The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries, it has no effect on other tracing libraries such as OpenTelemetry SDKs. 
 
 ### In tracing libraries: user-defined rules
 `ingestion_reason: rule`
@@ -184,7 +185,7 @@ The rare sampler sends a set of rare spans to Datadog. Rare sampling is also a d
 In Agent version 7.33 and forward, you can disable the rare sampler in the Agent main configuration file (`datadog.yaml`) or with an environment variable:
 
 ```
-@params apm_config.disable_rare_sample - boolean - optional - default: false
+@params apm_config.disable_rare_sampler - boolean - optional - default: false
 @env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 

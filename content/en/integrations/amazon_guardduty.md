@@ -4,7 +4,6 @@ categories:
     - aws
     - log collection
     - security
-ddtype: crawler
 description: Gather your AWS GuardDuty logs.
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
@@ -52,6 +51,5 @@ Datadog integrates with AWS GuardDuty through a Lambda function that ships Guard
 
 4. See any new GuardDuty Findings in the [Datadog Log section][3].
 
-[1]: /logs/guide/forwarder/
-[2]: https://docs.aws.amazon.com/eventbridge/index.html
-[3]: https://app.datadoghq.com/logs
+[1]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[2]: https://app.datadoghq.com/logs

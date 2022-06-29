@@ -7,24 +7,27 @@ assets:
   logs:
     source: confluent_platform
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Confluent Platform] Unclean leader election': assets/monitors/unclean_leader_election.json
+    '[Confluent Platform] Unused topic partition': assets/monitors/unused_partition.json
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - 処理
-  - メッセージング
-  - オートディスカバリー
-  - ログの収集
+- 処理
+- メッセージング
+- オートディスカバリー
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
 display_name: Confluent Platform
 draft: false
 git_integration_title: confluent_platform
 guid: 8e4a6d7e-44bc-440c-aafa-a0f98df87cc0
 integration_id: confluent-platform
 integration_title: Confluent Platform
+integration_version: 1.8.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -36,10 +39,13 @@ public_title: Datadog-Confluent Platform インテグレーション
 short_description: Confluent Platform のコンポーネントを監視する。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて Confluent Platform と Kafka のコンポーネントを監視します。

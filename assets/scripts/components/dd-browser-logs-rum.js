@@ -21,12 +21,14 @@ if (window.DD_RUM) {
             service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
             trackInteractions: true,
-            replaySampleRate: 100,
+            trackFrustrations: true,
+            enableExperimentalFeatures: ["frustration-signals"],
+            sampleRate: 50,
+            premiumSampleRate: 50,
+            trackSessionAcrossSubdomains: true, 
             allowedTracingOrigins: [window.location.origin]
         });
-        if (env !== 'live') {
-            window.DD_RUM.startSessionReplayRecording();
-        }
+        window.DD_RUM.startSessionReplayRecording();
         if (branch) {
             window.DD_RUM.addRumGlobalContext('branch', branch);
         }
@@ -39,6 +41,7 @@ if (window.DD_LOGS) {
         forwardErrorsToLogs: true,
         env,
         service: 'docs',
+        trackSessionAcrossSubdomains: true,
         version: CI_COMMIT_SHORT_SHA
     });
     // global context

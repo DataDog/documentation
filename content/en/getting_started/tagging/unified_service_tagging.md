@@ -16,13 +16,14 @@ further_reading:
 ---
 
 ## Overview
-Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`.
 
-With these three tags you can:
+Unified service tagging ties Datadog telemetry together through using three [reserved tags][1]: `env`, `service`, and `version`.
+
+With these three tags, you can:
 
 - Identify deployment impact with trace and container metrics filtered by version
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
-- View service data based on environment or version in a unified fashion within the Datadog site
+- View service data based on environment or version in a unified fashion
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
@@ -71,6 +72,8 @@ To setup unified service tagging in a containerized environment:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
+
+If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
 ##### Full configuration
 
@@ -122,7 +125,7 @@ template:
       tags.datadoghq.com/service: "<SERVICE>"
       tags.datadoghq.com/version: "<VERSION>"
 ```
-These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][1].
+These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][2].
 
 If you have multiple containers per pod, you can specify standard labels by container:
 
@@ -134,9 +137,9 @@ tags.datadoghq.com/<container-name>.version
 
 ###### State metrics
 
-To configure [Kubernetes State Metrics][2]:
+To configure [Kubernetes State Metrics][3]:
 
-1. Set `join_standard_tags` to `true` in your [configuration file][3].
+1. Set `join_standard_tags` to `true` in your [configuration file][4].
 
 2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
 
@@ -159,7 +162,7 @@ To configure [Kubernetes State Metrics][2]:
 
 ###### APM tracer and StatsD client
 
-To configure [APM tracer][4] and [StatsD client][5] environment variables, use the [Kubernetes's downward API][1] in the format below:
+To configure [APM tracer][5] and [StatsD client][6] environment variables, use the [Kubernetes's downward API][2] in the format below:
 
 ```yaml
 containers:
@@ -179,11 +182,13 @@ containers:
               fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[2]: /agent/kubernetes/data_collected/#kube-state-metrics
-[3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
-[4]: /tracing/send_traces/
-[5]: /integrations/statsd/
+
+[1]: /agent/cluster_agent/admission_controller/
+[2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
+[3]: /agent/kubernetes/data_collected/#kube-state-metrics
+[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
+[5]: /tracing/send_traces/
+[6]: /integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -278,15 +283,17 @@ If your service has no need for the Datadog environment variables (for example, 
 
 ### Non-containerized environment
 
-Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, it is recommended that these environment variables be scoped to a single process.
+Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, Datadog recommends scoping these environment variables to a single process.
 
-To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][8], [logs][9], and [StatsD metrics][10], you can either:
+To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], and [StatsD metrics][10], either:
 
 1. Export the environment variables in the command for your executable:
+   
+   ```
+   DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
+   ```
 
-    `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
-
-2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it has access to those variables.
+2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. When the service process starts, it has access to those variables.
 
 {{< tabs >}}
 {{% tab "Traces" %}}
@@ -312,6 +319,17 @@ If you're using [connected logs and traces][1], enable automatic logs injection 
 **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
 [1]: /tracing/connect_logs_and_traces/
+{{% /tab %}}
+
+{{% tab "RUM & Session Replay" %}}
+
+If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
+
+When you [create a RUM application][2], confirm the `env` and `service` names.
+
+
+[1]: /real_user_monitoring/connect_rum_and_traces/
+[2]: /real_user_monitoring/browser/#setup
 {{% /tab %}}
 
 {{% tab "Custom Metrics" %}}
