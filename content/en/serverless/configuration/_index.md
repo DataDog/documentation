@@ -362,9 +362,15 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 ## Select sampling rates for ingesting APM spans 
 
-To manage the [APM traced invocation sampling rate][35] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function you want to change the sampling rate for to a value between 0.000 (trace 0% of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
+To manage the [APM traced invocation sampling rate][35] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function you want to change the sampling rate for to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
 
-Setting a sampling rate of 1-10% is recommended to manage usage of traced invocations from your Lambda functions.
+If you decide to set a sampling rate on your function, metrics will remain accurate as they are being calculated based on 100% of the application’s traffic, regardless of any sampling configuration. 
+
+For high throughput services, there’s usually no need for you to collect every single request as trace data is very repetitive - an important enough problem should always show symptoms in multiple traces. [Ingestion controls][36] helps you to have the visibility that you need to troubleshoot problems while remaining within budget.
+
+The default sampling mechanism is called [head-based sampling][37]. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the root span. This decision is then propagated to other services as part of their request context, for example as an HTTP request header.
+
+Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, the trace is guaranteed to be kept or dropped as a whole.
 
 ## Filter or scrub sensitive information from traces
 
@@ -674,3 +680,5 @@ If you have trouble configuring your installations, set the environment variable
 [33]: /serverless/guide#install-using-the-datadog-forwarder
 [34]: /serverless/guide/troubleshoot_serverless_monitoring/
 [35]: /tracing/trace_ingestion/ingestion_controls/#configure-the-service-ingestion-rate
+[36]: /tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
+[37]: /tracing/trace_ingestion/mechanisms/?tabs=environmentvariables#head-based-sampling
