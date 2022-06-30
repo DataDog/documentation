@@ -1,5 +1,5 @@
 ---
-title: Send AWS Services Logs with the Datadog Lambda Function
+title: Send AWS Services Logs With The Datadog Lambda Function
 kind: documentation
 further_reading:
 - link: "/logs/explorer/"
