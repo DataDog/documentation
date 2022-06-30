@@ -26,9 +26,22 @@ Datadog Agent 7.35.0 or higher is required.
 
 To map telemetry data with your source code:
 
+{{< tabs >}}
+{{% tab "GitHub" %}}
+
 1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
-2. a. Install Datadog's [GitHub Apps integration][2] to display inline source code snippets.
-2. b. Alternatively, upload metadata about your git repository by running [`datadog-ci git-metadata upload`][1] in your CI pipeline.
+2. Install Datadog's [GitHub Apps integration][2] to display inline source code snippets.
+
+[1]: https://app.datadoghq.com/account/settings#integrations/github-apps
+{{% /tab %}}
+{{% tab "Other Git Providers" %}}
+
+1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
+2. Upload metadata about your git repository by running [`datadog-ci git-metadata upload`][1] in your CI pipeline.
+
+[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Tag your telemetry
 
@@ -81,7 +94,7 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_U
 ### Configure repositories
 
 {{< tabs >}}
-{{% tab "Configure a GitHub App" %}}
+{{% tab "GitHub" %}}
 
 If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][1] in the [GitHub Apps integration tile][2] in order to link your telemetry to your source code.
 When specifying your permissions in the integration tile, enable Datadog read permissions to Contents.
@@ -89,7 +102,7 @@ When specifying your permissions in the integration tile, enable Datadog read pe
 [1]: https://docs.datadoghq.com/integrations/github_apps/
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
 {{% /tab %}}
-{{% tab "Upload your git metadata" %}}
+{{% tab "Other Git Providers" %}}
 
 If you are not using GitHub, Datadog collects information for every commit SHA from your git repository with the [`datadog-ci git-metadata upload`][1] command in order to link your telemetry to your source code.
 
