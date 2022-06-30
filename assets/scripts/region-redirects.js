@@ -3,19 +3,24 @@ import config from './regions.config';
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
-    // Object.defineProperty(document, "referrer", {configurable: true, get : function(){ return 'app.datadoghq.eu'; }})
-    console.log(`Checking referrer on page load: ${document.referrer}`)
+    Object.defineProperty(document, "referrer", {configurable: true, get : function(){ return 'app.datadoghq.eu'; }})
+    console.info(`Checking referrer on page load: ${document.referrer}`)
     const regionSelector = document.querySelector('.js-region-select')
     const currentUserSavedRegion = Cookies.get('site')
     const currentReferrerAppRegion = getDDSiteFromReferrer()
 
+    console.info(`User current saved region: ${currentUserSavedRegion}`)
+    console.info(`Current referrer app region: ${currentReferrerAppRegion}`)
+
     // keeps docs and app region in sync if user navigated to docs from in-app link.
     // otherwise docs links to the app will go to a different region and prompt user to
     // sign-in to the app again.
-    if (currentReferrerAppRegion !== currentUserSavedRegion) {
+    if (currentReferrerAppRegion && currentReferrerAppRegion !== currentUserSavedRegion) {
         redirectToRegion(currentReferrerAppRegion)
+        console.info(`App region from referrer and user saved region dont match, redirecting to ${currentReferrerAppRegion}`)
     } else {
         redirectToRegion()
+        console.info(`App region and saved region match, or the referrer was not from the app.`)
     }
 
     if (regionSelector) {
@@ -51,17 +56,6 @@ function replaceButtonInnerText(value) {
     const regionSelector = document.querySelector('.js-region-select');
     const buttonInner = regionSelector.querySelector('.btn-inner');
     buttonInner.innerText = selectedRegion;
-}
-
-function isReferrerEU() {
-    if (window.document.referrer.includes('datadoghq.eu') &&
-    window.document.referrer.indexOf(
-        `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
-    ) === -1) {
-        return true;
-    }
-
-    return false;
 }
 
 function regionOnChangeHandler(region) {
@@ -139,6 +133,7 @@ function showRegionSnippet(newSiteRegion) {
 }
 
 function redirectToRegion(region = '') {
+    console.info(`redirect to region called, region: ${region}`)
     const regionSelector = document.querySelector('.js-region-select');
     const queryParams = new URLSearchParams(window.location.search);
     let newSiteRegion = region;
