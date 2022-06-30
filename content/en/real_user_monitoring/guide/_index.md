@@ -20,5 +20,5 @@ private: true
 
 {{< whatsnext desc="Session Replay:" >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Allow third-party service workers for Session Replay{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Use Session Replay in your Solutions and Support workflows{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Use Session Replay in your Support workflows{{< /nextlink >}}
 {{< /whatsnext >}}
