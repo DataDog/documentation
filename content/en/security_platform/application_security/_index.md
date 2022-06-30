@@ -32,7 +32,7 @@ With ASM, you can cut through the noise of continuous trace data to focus on sec
 
 ## Configure your environment
 
-Powered by provided [out-of-the-box rules][3], ASM detects threats without manual configuration. If you're already using Datadog [APM][1], setup only requires setting one environment variable to get started.
+Powered by provided [out-of-the-box rules][3], ASM detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, setup only requires setting one environment variable to get started.
 
 To start configuring your environment to detect threats with ASM, follow the [Getting Started documentation][4]. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][5].
 
