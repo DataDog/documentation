@@ -13,7 +13,7 @@ further_reading:
 
 The pie chart widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.
 
-{{< img src="dashboards/pie_chart/pie_chart_overview.png" alt="A pie chart widget. The innermost ring shows the user’s country, and the outermost ring is segmented proportionally to show the share of browsers used in each country." style="width:60%;">}}
+{{< img src="dashboards/widgets/pie_chart/pie_chart_overview.png" alt="A pie chart widget. The innermost ring shows the user’s country, and the outermost ring is segmented proportionally to show the share of browsers used in each country." style="width:60%;">}}
 
 
 ## Configuration
@@ -36,7 +36,7 @@ The legend can be turned off, displayed directly over chart segments with the **
 
 By default, the **Automatic** option shows a labeled Aside legend within a dashboard, and displays both the **Aside** and **Table** legends when opened in full-screen.
 
-{{< img src="dashboards/pie_chart/legend_automatic.png" alt="Pie chart Legend and Labeling options: Automatic, Table, Aside, and None" style="width:80%;">}}
+{{< img src="dashboards/widgets/pie_chart/legend_automatic.png" alt="Pie chart Legend and Labeling options: Automatic, Table, Aside, and None" style="width:80%;">}}
 
 ### Context links
 
@@ -50,7 +50,7 @@ In the case where multiple groups of data are plotted at once, you can choose a 
 
 To view a single category, hover over the outer portion of the category ring, and click. To go back to the previous view, move your cursor to the center of the cart and click.
 
-{{< img src="dashboards/pie_chart/interaction_animation.mp4" alt="Animation of pie chart interaction to filter and focus on a single category" style="width:80%;">}}
+{{< img src="dashboards/widgets/pie_chart/interaction_animation.mp4" alt="Animation of pie chart interaction to filter and focus on a single category" style="width:80%;">}}
 
 ### Full-screen
 
