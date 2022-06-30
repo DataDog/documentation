@@ -56,7 +56,6 @@ To view a single category, hover over the outer portion of the category ring, an
 
 Viewing the pie chart widget in full-screen reveals the standard set of [full-screen options][5].
 
-
 ## API
 
 This widget can be used with the [Dashboards API][6].
