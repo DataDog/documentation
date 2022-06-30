@@ -30,7 +30,7 @@ To map telemetry data with your source code:
 {{% tab "GitHub" %}}
 
 1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
-2. Install Datadog's [GitHub Apps integration][2] to display inline source code snippets.
+2. Install Datadog's [GitHub Apps integration][1] to display inline source code snippets.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/github-apps
 {{% /tab %}}
