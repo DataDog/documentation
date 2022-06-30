@@ -9,8 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // keep docs/app saved regions in sync.   if user navigates to docs from in-app links,
     // we want docs links back to the app returning user to DD app region they came from.
+    // reloading resets document.referrer, otherwise every page load we'd be reading this value
+    // even if user changes region preference in the dropdown.
     if (currentReferrerAppRegion && currentReferrerAppRegion !== currentUserSavedRegion) {
         regionOnChangeHandler(currentReferrerAppRegion)
+        window.location.reload()
     } else {
         redirectToRegion()
     }
