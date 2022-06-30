@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // keep docs/app saved regions in sync.   if user navigates to docs from in-app links,
     // we want docs links back to the app returning user to DD app region they came from.
     if (currentReferrerAppRegion && currentReferrerAppRegion !== currentUserSavedRegion) {
-        redirectToRegion(currentReferrerAppRegion)
+        regionOnChangeHandler(currentReferrerAppRegion)
     } else {
         redirectToRegion()
     }
@@ -138,16 +138,6 @@ function redirectToRegion(region = '') {
 
         Cookies.set('site', newSiteRegion, { path: '/' });
     } else if (newSiteRegion !== '') {
-        Cookies.set('site', newSiteRegion, { path: '/' });
-        showRegionSnippet(newSiteRegion);
-    } else if (
-        window.document.referrer.includes('datadoghq.com') &&
-        window.document.referrer.indexOf(
-            `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
-        ) === -1
-    ) {
-        // not current domain
-        newSiteRegion = 'us';
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
     } else if (
