@@ -15,7 +15,7 @@ further_reading:
 
 The treemap widget allows you to display proportions of one or datasets. This widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.
 
-{{< img src="/dashboards/treemap/treemap_overview.png" alt="A treemap widget with unique page views stemming from the Real User Monitoring (RUM) dataset are shown at both the country and browser level. The outer groups - distinguished by color - shows the user’s country.">}}
+{{< img src="dashboards/treemap/treemap_overview.png" alt="A treemap widget with unique page views stemming from the Real User Monitoring (RUM) dataset are shown at both the country and browser level. The outer groups - distinguished by color - shows the user’s country.">}}
 
 ## Configuration
 
@@ -39,13 +39,13 @@ In the case where multiple groups of data are plotted at once, you can filter th
 
 To filter and focus on a single category, hover over the outer portion of the category, and click. To go back to the previous view, click the **back** button on the top left header of the widget.
 
-{{< img src="/dashboards/treemap/focus_animation.mp4" alt="Animation showing how to filter and view a single category at a time in the treemap widget.">}}
+{{< img src="dashboards/treemap/focus_animation.mp4" alt="Animation showing how to filter and view a single category at a time in the treemap widget.">}}
 
 ### Accessing the context menu
 
 To access the context menu, first hover over an individual category: this can be a nested category, or group - such as **Canada**, or **Canada > Chrome** in the following example. This reveals a vertical ellipsis button in the top right corner. When clicked, the context menu appears.
 
-{{< img src="/dashboards/treemap/context_menu.png" alt="The triple ellipsis button is revealed when hovering over a category">}}
+{{< img src="dashboards/treemap/context_menu.png" alt="The triple ellipsis button is revealed when hovering over a category">}}
 
 ### Full-screen
 
