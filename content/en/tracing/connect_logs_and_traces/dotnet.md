@@ -315,9 +315,9 @@ using(_logger.BeginScope(new Dictionary<string, object>
 {{< /tabs >}}
 
 You can read more about using BeginScope to create structured log messages using the following log providers:
-- [Serilog][13],
-- [NLog][14],
-- [log4net][15]
+- Serilog: [The semantics of ILogger.BeginScope()][13]
+- NLog: [NLog properties with Microsoft Extension Logging][14]
+- log4net: [Using BeginScope][15]
 
 ## Configure log collection
 
