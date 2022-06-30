@@ -24,9 +24,11 @@ This guide describes a workflow that organizations can replicate and use as an a
 
 ## Scope a customer issue
 
-Let’s say a Zendesk ticket is created because a customer cannot update or save a Synthetics multistep API test. The Technical Solutions team may request more information from the customer (such as the specific test ID and a screen recording with the [Browser Dev Tools][2] open) in order to obtain some additional context into the customer's test not updating or saving. 
+Let’s assume that a customer encounters an issue using Datadog. Your Technical Solutions team may use a support solution such as Zendesk or ServiceNow that creates a ticket when this customer reports that they cannot update or save a Synthetics multistep API test. The Technical Solutions team may request more information from the customer (such as the specific test ID and a screen recording with the [Browser Dev Tools][2] open) in order to obtain some additional context into the customer's test not updating or saving. 
 
-If no console errors were recorded, the team would not have any hints to start investigating the multistep API test's issue. Your Technical Solutions team may be trying to understand the following questions:
+If no console errors were recorded, the team would not have any hints to start investigating the multistep API test's issue. 
+
+The Technical Solutions team may try to understand the following questions:
 
 - What is the exact error the customer is experiencing?
 - Is the customer seeing an in-app notification that hints at a particular issue (such as a console error or an error message)?
@@ -36,7 +38,7 @@ If no console errors were recorded, the team would not have any hints to start i
 
 If there were a way to view the customer’s user journey in Datadog and see associated backend requests, the Technical Solutions team would have a better understanding of what may be causing this issue.
 
-{{< img src="real_user_monitoring/guide/session-replay/view-traces.png" alt="An APM stack trace associated with a RUM view action" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/session-replay/apm-traces-in-session-replay.png" alt="An APM stack trace associated with a RUM view action" style="width:100%;">}}
 
 With the APM integration enabled, you can connect requests from your web application with corresponding backend traces to access APM trace data from a RUM event and uncover any backend errors. For more information, see [Connect RUM and Traces][3].
 
@@ -51,6 +53,8 @@ Click on a user session with a replay recording to observe the user’s behavior
 ## Uncover errors in backend traces
 
 While examining errors in the multistep API tests' APM trace, the Technical Solutions team may encounter an `APIInvalidInputError` related to the `maxLength` of a `​​https://properties.steps.items.properties.name/` configuration, which appears to be the root cause of the failed test save. 
+
+{{< img src="real_user_monitoring/guide/session-replay/view-traces.png" alt="An APM stack trace associated with a RUM view action" style="width:90%;">}}
 
 The multistep API test did not save because of a character limit in the step’s name.
 
