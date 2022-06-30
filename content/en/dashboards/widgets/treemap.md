@@ -39,7 +39,7 @@ In the case where multiple groups of data are plotted at once, you can filter th
 
 To filter and focus on a single category, hover over the outer portion of the category, and click. To go back to the previous view, click the **back** button on the top left header of the widget.
 
-{{< img src="dashboards/widgets/treemap/focus_animation.mp4" alt="Animation showing how to filter and view a single category at a time in the treemap widget.">}}
+{{< img src="dashboards/widgets/treemap/focus_animation.mp4" alt="Animation showing how to filter and view a single category at a time in the treemap widget." video=true>}}
 
 ### Accessing the context menu
 
