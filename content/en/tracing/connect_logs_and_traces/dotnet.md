@@ -209,7 +209,7 @@ If you prefer to manually correlate your traces with your logs, you can add corr
 
 **Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see the [FAQ on this topic][10].
 
-**Note**: If you are using Serilog, Nlog or log4net *through* ILogger, see the Microsoft.Extensions.Logging section to configure these properties via `BeginScope()`.
+**Note**: If you are using Serilog, Nlog or log4net through ILogger, see the Microsoft.Extensions.Logging section to configure these properties using `BeginScope()`.
 
 After completing the [getting started steps](#getting-started), finish your manual log enrichment setup:
 
