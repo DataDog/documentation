@@ -74,15 +74,9 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-## Beta restrictions
-
-- Alerting is available only for metric-based SLOs or for monitor-based SLOs that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
-- The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel or the [Manage Monitors][7] page.
-
 [1]: /monitors/service_level_objectives/metric/
 [2]: /monitors/service_level_objectives/monitor/
 [3]: https://app.datadoghq.com/slo
 [4]: /monitors/notify/
 [5]: /api/v1/monitors/#create-a-monitor
 [6]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
-[7]: https://app.datadoghq.com/monitors/manage
