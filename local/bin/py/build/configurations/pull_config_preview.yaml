@@ -504,6 +504,9 @@
           title: Android Error Tracking
           kind: documentation
           further_reading:
+          - link: 'https://www.datadoghq.com/blog/debug-android-crashes/'
+            tag: 'Blog'
+            text: 'Debug Android crashes faster with Datadog'
           - link: '/real_user_monitoring/error_tracking/'
             tag: 'GitHub'
             text: 'Learn about Error Tracking'
