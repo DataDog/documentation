@@ -7,6 +7,9 @@ further_reading:
 - link: "/account_management/org_settings/"
   tag: "Documentation"
   text: "Learn more about organization settings"
+- link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+  tag: "Blog"
+  text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
 ---
 
 ## Overview
