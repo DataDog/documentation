@@ -4,10 +4,6 @@ kind: documentation
 description: "Use Monitors to alert off of the error budget consumption of an SLO"
 ---
 
-<div class="alert alert-warning">
-This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to ask questions or to provide feedback on this feature.
-</div>
-
 ## Overview
 
 SLO error budget alerts are threshold based and notify you when a certain percentage of your SLO’s error budget has been consumed. For example, alert me if 75% of the error budget for my 7-day target is consumed. Warn me if 50% is consumed (optional).
