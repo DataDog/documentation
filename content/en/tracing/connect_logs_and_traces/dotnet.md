@@ -291,8 +291,6 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 {{% /tab %}}
 {{% tab "Microsoft.Extensions.Logging" %}}
 
-*Note:* If you are using Serilog as an ILogger provider, it is preferrably to use this `ILogger.BeginScope()` method as opposed to the Serilog static properties. Passing an `ILogger.BeginScope()` an `IDictionary<string,object>` as the same effect as `LogContext.PushProperty()`. See [this blog by the author of Serilog][13].
-
 ```csharp
 using Datadog.Trace;
 using Microsoft.Extensions.Logging;
@@ -315,6 +313,11 @@ using(_logger.BeginScope(new Dictionary<string, object>
 
 {{% /tab %}}
 {{< /tabs >}}
+
+You can read more about using BeginScope to create structured log messages using the following log providers:
+- [Serilog][13],
+- [NLog][14],
+- [log4net][15]
 
 ## Configure log collection
 
@@ -339,3 +342,5 @@ Ensure that log collection is configured in the Datadog Agent and that the [Logs
 [11]: https://www.nuget.org/packages/Datadog.Trace/
 [12]: /logs/log_collection/csharp/#configure-your-datadog-agent
 [13]: https://nblumhardt.com/2016/11/ilogger-beginscope/
+[14]: https://github.com/NLog/NLog.Extensions.Logging/wiki/NLog-properties-with-Microsoft-Extension-Logging
+[15]: https://github.com/huorswords/Microsoft.Extensions.Logging.Log4Net.AspNetCore#using-beginscope
