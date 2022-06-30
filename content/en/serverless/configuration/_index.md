@@ -362,7 +362,7 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 ## Select sampling rates for ingesting APM spans 
 
-To manage the [APM traced invocation sampling rate][35] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function you want to change the sampling rate for to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
+To manage the [APM traced invocation sampling rate][35] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
 
 If you decide to set a sampling rate on your function, metrics will remain accurate as they are being calculated based on 100% of the application’s traffic, regardless of any sampling configuration. 
 
