@@ -34,10 +34,10 @@ const getDDSiteFromReferrer = () => {
     let referrerSite = ''
 
     if (document.referrer) {
-        const referrer = document.referrer.replace(/^https?:\/\//, '')
+        const referrerHostname = new URL(document.referrer).hostname
 
         for (const site in ddFullSitesObject) {
-            if (ddFullSitesObject[site] === referrer) {
+            if (ddFullSitesObject[site] === referrerHostname) {
                 referrerSite = site
             }
         }
