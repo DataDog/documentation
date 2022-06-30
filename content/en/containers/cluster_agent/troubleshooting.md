@@ -245,7 +245,7 @@ autoscaling/v2beta1
 external.metrics.k8s.io/v1beta1
 ```
 
-The latter shows up if the Datadog Cluster Agent properly registers as an External Metrics Provider—and if you have the same service name referenced in the APIService for the External Metrics Provider, as well as the one for the Datadog Cluster Agent on port `443`. Also make sure you have created the RBAC from the [Register the External Metrics Provider][1] step.
+The latter shows up if the Datadog Cluster Agent properly registers as an External Metrics Provider—and if you have the same service name referenced in the APIService for the External Metrics Provider, as well as the one for the Datadog Cluster Agent on port `8443`. Also make sure you have created the RBAC from the [Register the External Metrics Provider][1] step.
 
 If you see the following error when describing the HPA manifest:
 
@@ -253,7 +253,7 @@ If you see the following error when describing the HPA manifest:
 Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscaler  failed to get nginx.net.request_per_s external metric: unable to get external metric default/nginx.net.request_per_s/&LabelSelector{MatchLabels:map[string]string{kube_container_name: nginx,},MatchExpressions:[],}: unable to fetch metrics from external metrics API: the server is currently unable to handle the request (get nginx.net.request_per_s.external.metrics.k8s.io)
 ```
 
-Make sure the Datadog Cluster Agent is running, and the service exposing the port `443`, whose name is registered in the APIService, is up.
+Make sure the Datadog Cluster Agent is running, and the service exposing the port `8443`, whose name is registered in the APIService, is up.
 
 ### Differences of value between Datadog and Kubernetes
 
