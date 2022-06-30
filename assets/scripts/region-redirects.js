@@ -3,24 +3,16 @@ import config from './regions.config';
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
-    // Object.defineProperty(document, "referrer", {configurable: true, get : function(){ return 'app.datadoghq.eu'; }})
-    console.info(`Checking referrer on page load: ${document.referrer}`)
     const regionSelector = document.querySelector('.js-region-select')
     const currentUserSavedRegion = Cookies.get('site')
     const currentReferrerAppRegion = getDDSiteFromReferrer()
 
-    console.info(`User current saved region: ${currentUserSavedRegion}`)
-    console.info(`Current referrer app region: ${currentReferrerAppRegion}`)
-
-    // keeps docs and app region in sync if user navigated to docs from in-app link.
-    // otherwise docs links to the app will go to a different region and prompt user to
-    // sign-in to the app again.
+    // keep docs/app saved regions in sync.   if user navigates to docs from in-app links,
+    // we want docs links back to the app returning user to DD app region they came from.
     if (currentReferrerAppRegion && currentReferrerAppRegion !== currentUserSavedRegion) {
         redirectToRegion(currentReferrerAppRegion)
-        console.info(`App region from referrer and user saved region dont match, redirecting to ${currentReferrerAppRegion}`)
     } else {
         redirectToRegion()
-        console.info(`App region and saved region match, or the referrer was not from the app.`)
     }
 
     if (regionSelector) {
@@ -35,14 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// returns the Datadog site associated with the referrer URL, if applicable.
+// returns the Datadog site associated with referrer URL, if applicable.
+// i.e. 'app.datadoghq.eq' => 'eu'
 const getDDSiteFromReferrer = () => {
     const ddFullSitesObject = config.dd_full_site
     let referrerSite = ''
 
     if (document.referrer) {
+        const referrer = document.referrer.replace(/^https?:\/\//, '')
+
         for (const site in ddFullSitesObject) {
-            if (ddFullSitesObject[site] === document.referrer) {
+            if (ddFullSitesObject[site] === referrer) {
                 referrerSite = site
             }
         }
@@ -133,7 +128,6 @@ function showRegionSnippet(newSiteRegion) {
 }
 
 function redirectToRegion(region = '') {
-    console.info(`redirect to region called, region: ${region}`)
     const regionSelector = document.querySelector('.js-region-select');
     const queryParams = new URLSearchParams(window.location.search);
     let newSiteRegion = region;
