@@ -574,7 +574,7 @@ stream {
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3842; #listen for network devices metadata
+        listen 3842; #listen for network devices traps
         proxy_ssl on;
         proxy_pass snmp-traps-intake.{{< region-param key="dd_site" >}}:443;
     }
