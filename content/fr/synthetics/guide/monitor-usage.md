@@ -1,5 +1,5 @@
 ---
-title: Surveillance de votre utilisation de Synthetic
+title: Surveillance de votre utilisation de Synthetics
 kind: guide
 further_reading:
   - link: /synthetics/api_tests
@@ -18,10 +18,10 @@ further_reading:
 Les tests Synthetic proposent des [métriques d'estimation][1] vous permettant de surveiller votre utilisation de Synthetic. Grâce à ces métriques, vous pouvez notamment :
 
 * Déterminer l'évolution de votre utilisation
-* Visualiser les équipes, applications ou services qui se servent le plus de Synthetic
+* Visualiser les équipes, applications ou services qui se servent le plus de Synthetics
 * Recevoir des alertes en cas de pics d'utilisation inattendue susceptibles d'augmenter vos coûts
 
-Pour visualiser votre utilisation Synthetic ou recevoir des alertes à ce sujet, utilisez les requêtes suivantes :
+Pour visualiser votre utilisation Synthetics ou recevoir des alertes à ce sujet, utilisez les requêtes suivantes :
 
 * [Test API uniques][2] et [tests API à plusieurs étapes][3] : `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count()`
 

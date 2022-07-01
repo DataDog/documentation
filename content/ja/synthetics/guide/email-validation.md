@@ -34,7 +34,7 @@ Datadog ブラウザテストでメール検証を実行するには:
 
 ## ステップを記録
 
-UI の左上にある **Start Recording** ボタンを押して、今作成されたメール変数を使用してメールがトリガーするステップを記録します。手の形のアイコンを使用すると、フォームのテキスト入力に変数を入力できます。
+UI の左上にある **Start Recording** ボタンをクリックして、今作成されたメール変数を使用してメールがトリガーするステップを記録します。手の形のアイコンを使用すると、フォームのテキスト入力に変数を入力できます。
 
 {{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="ステップを記録" video="true"  width="100%">}}
 
@@ -58,7 +58,7 @@ UI の左上にある **Start Recording** ボタンを押して、今作成さ�
 
 {{< img src="synthetics/guide/email-validation/navigation-step.mp4" alt="ナビゲーションステップの追加" video="true"  width="100%">}}
 
-上記の例では、ブラウザテストで “Welcome to Shopist” というメールの認証リンク先に移動し、ユーザー登録のメカニズムが正常に動作していることを確認します。“Welcome to Shopist” というメールが選択され、“Verify your email by clicking here” というリンクが指定されています。このステップが保存されると、iframe が該当ページにリダイレクトされます。
+上記の例では、ブラウザテストで “Welcome to Shopist” というメールの認証リンクをクリックし、ユーザー登録のメカニズムが正常に動作していることを確認します。“Welcome to Shopist” というメールが選択され、“Verify your email by clicking here” というリンクが指定されています。このステップが保存されると、iframe が該当ページにリダイレクトされます。
 
 次に、`div` コンテンツをテストする最後のアサーションを作成し、適切なアカウント認証（`Your account is now verified.` という文が含まれるページ）がトリガーされたことを確認できます。
 

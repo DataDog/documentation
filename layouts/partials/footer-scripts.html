@@ -1,5 +1,26 @@
+<!--
+isProd is equivalent to preview, live environments
+hugo defaults to environment development with hugo server
+-->
+{{- $isProd := ne hugo.Environment "development" -}}
+{{- $defines := dict "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" "10" "global" "window" -}}
+{{- $sourcemap := cond $isProd "external" "inline" -}}
+{{- $inject := slice "scripts/injects/inject-jquery.js" -}}
+
+{{ $opts := dict "targetPath" "static/main-dd-js.js" "defines" $defines "inject" $inject "sourceMap" $sourcemap "minify" $isProd }}
+{{ $js := resources.Get "scripts/main-dd-js.js" | js.Build $opts }}
+{{ if $isProd }}
+  {{ $js = $js | fingerprint "sha512" }}
+{{ end }}
+<script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
+
 {{ if eq .File.BaseFileName "search" }}
-    <script src="{{ (index $.Site.Data.manifest "search.js") | relURL}}"></script>
+    {{ $opts := dict "targetPath" "static/search.js" "defines" $defines "inject" $inject "sourceMap" $sourcemap "minify" $isProd }}
+    {{ $js := resources.Get "scripts/components/search.js" | js.Build $opts }}
+    {{ if $isProd }}
+      {{ $js = $js | fingerprint "sha512" }}
+    {{ end }}
+    <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
 {{ end }}
 
 {{ if .Params.footer_scripts }}

@@ -11,36 +11,40 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - キャッシュ
-  - ログの収集
+- data store
+- キャッシュ
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/hazelcast/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/hazelcast/README.md
 display_name: Hazelcast
 draft: false
 git_integration_title: hazelcast
 guid: b2c63c99-f955-4494-a171-494f9dcf7d1f
 integration_id: hazelcast
 integration_title: Hazelcast
+integration_version: 2.0.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: hazelcast.
 metric_to_check:
-  - hazelcast.mc.license_expiration_time
-  - hazelcast.instance.running
+- hazelcast.mc.license_expiration_time
+- hazelcast.instance.running
 name: hazelcast
 public_title: Datadog-Hazelcast インテグレーション
 short_description: Hazelcast メンバーと管理センターを監視します。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは [Hazelcast][1] v4.0+ を監視します。
@@ -197,23 +201,16 @@ JMXFetch
 
 
 ### サービスのチェック
+{{< get-service-checks-from-git "hazelcast" >}}
 
-**hazelcast.can_connect**:<br>
-Agent が監視対象の Hazelcast インスタンスに接続できず、メトリクスを収集できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-**hazelcast.mc_cluster_state**:<br>
-健全性チェックで示されたとおりに Hazelcast 管理センターの状態を表示します。
-
-### イベント
-
-Hazelcast には、イベントは含まれません。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
+
 [1]: https://hazelcast.org
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

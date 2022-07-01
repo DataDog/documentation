@@ -159,6 +159,22 @@ To notify your dev team if a triggering host has the name `production`, use the 
 {{/is_exact_match}}
 ```
 
+The `is_exact_match` conditional variable also supports [`{{value}}` template variables](#template-variables):
+
+```text
+{{#is_exact_match "value" "<VALUE>"}}
+  This displays if the value that breached the threshold of the monitor is exactly <VALUE>.
+{{/is_exact_match}}
+```
+
+To notify your dev team if the value that breached the threshold of your monitor is 5, use the following:
+
+```text
+{{#is_exact_match "value" "5"}}
+  This displays if the value that breached the threshold of the monitor is 5. @dev-team@company.com
+{{/is_exact_match}}
+```
+
 {{% /tab %}}
 {{% tab "is_renotify" %}}
 
@@ -279,16 +295,17 @@ If your facet has periods, use brackets around the facet, for example:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI Pipeline monitors][5]_
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI monitors][5]_
 
-To include **any** attribute or tag from a log, a trace span, a RUM event, or a CI Pipeline event matching the monitor query, use the following variables:
+To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
-| Monitor type    | Variable syntax                                         |
-|-----------------|---------------------------------------------------------|
-| Log             |  `{{log.attributes.key}}` or `{{log.tags.key}}`          |
-| Trace Analytics |  `{{span.attributes.key}}` or `{{span.tags.key}}`        |
-| RUM             |  `{{rum.attributes.key}}` or `{{rum.tags.key}}`          |
-| CI Pipeline     | `{{cipipeline.attributes.key}}`                          |
+| Monitor type    | Variable syntax                                  |
+|-----------------|--------------------------------------------------|
+| Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
+| Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
+| RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
+| CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
+| CI Test         | `{{citest.attributes.key}}`                      |
 
 For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 
@@ -305,6 +322,8 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
 <div class="alert alert-info"><strong>Note</strong>: If the selected event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, do not use these variables for routing notification with <code>{{#is_match}}</code> handles.</div>
+
+If a monitor uses Formulas & Functions in its queries, the values are resolved with events that are extracted from the first query.
 
 #### Reserved attributes
 
@@ -454,7 +473,7 @@ The monitors link is customizable with additional parameters. The most common ar
 
 
 
-[1]: /monitors/create/types/
+[1]: /monitors/create/#monitor-types
 {{% /tab %}}
 {{% tab "Logs" %}}
 
@@ -518,6 +537,6 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [2]: /monitors/create/types/log/
 [3]: /monitors/create/types/apm/?tab=analytics
 [4]: /monitors/create/types/real_user_monitoring/
-[5]: /monitors/create/types/ci_pipelines/
+[5]: /monitors/create/types/ci/
 [6]: /monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

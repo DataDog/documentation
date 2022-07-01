@@ -52,7 +52,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    tracer.Start(tracer.WithServiceName("<SERVICE_NAME>"))
+    tracer.Start(tracer.WithService("<SERVICE_NAME>"))
     defer tracer.Stop()
     http.HandleFunc("/posts", handler)
     log.Fatal(http.ListenAndServe(":8080", nil))
@@ -119,22 +119,22 @@ There are two functions available to create spans. API details are available for
 
 ```go
 //Create a span with a resource name, which is the child of parentSpan.
-span := tracer.StartSpan(“mainOp”, tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
+span := tracer.StartSpan("mainOp", tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
 
 // Create a span which will be the child of the span in the Context ctx, if there is a span in the context.
 // Returns the new span, and a new context containing the new span.
-span, ctx := tracer.StartSpanFromContext(ctx, “mainOp”, tracer.ResourceName("/user"))
+span, ctx := tracer.StartSpanFromContext(ctx, "mainOp", tracer.ResourceName("/user"))
 ```
 
 ### Asynchronous traces
 
 ```go
 func main() {
-	span, ctx := tracer.StartSpanFromContext(context.Background(), “mainOp”)
+	span, ctx := tracer.StartSpanFromContext(context.Background(), "mainOp")
 	defer span.Finish()
 
 	go func() {
-		asyncSpan := tracer.StartSpanFromContext(ctx, “asyncOp”)
+		asyncSpan := tracer.StartSpanFromContext(ctx, "asyncOp")
 		defer asyncSpan.Finish()
 		performOp()
 	}()

@@ -242,7 +242,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
-[タグの割り当て][1]後、サービスマップを使用して、特定のサービスをクリックしてアプリケーションのそれぞれの領域にジャンプできます。以下の例では、タグ `service:coffee-house` で絞り込んで、[分析][2]、[モニター][3]、[ログ][4]、[ホストマップ][5]を表示します。
+[タグの割り当て][1]後、サービスマップを使用して、特定のサービスをクリックしてアプリケーションのそれぞれの領域に移動できます。以下の例では、タグ `service:coffee-house` で絞り込んで、[分析][2]、[モニター][3]、[ログ][4]、[ホストマップ][5]を表示します。
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="サービスマップタグ" style="width:80%;">}}
 

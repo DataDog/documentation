@@ -23,9 +23,9 @@ further_reading:
 
 Il n'est pas toujours facile de contrôler l'ensemble de vos données, en particulier sur des plateformes vastes et collaboratives. Ce guide présente les différentes options pour découvrir et gérer les données sensibles qui sont ingérées dans Datadog.
 
-## Sensitive Data Scanner
+## Scanner de données sensibles
 
-Le [Sensitive Data Scanner][2] est un service de détection d'expressions en temps réel que vous pouvez utiliser pour identifier, taguer et éventuellement censurer ou hacher des données sensibles. Cette fonctionnalité permet à vos équipes de conformité et de sécurité de mettre en place une ligne de défense contre les fuites de données sensibles en dehors de votre organisation. Le Sensitive Data Scanner est disponible dans vos [paramètres d'organisation][3].
+Le [scanner de données sensibles][2] est un service de détection d'expressions en temps réel que vous pouvez utiliser pour identifier, taguer et éventuellement censurer ou hacher des données sensibles. Cette fonctionnalité permet à vos équipes de conformité et de sécurité de mettre en place une ligne de défense contre les fuites de données sensibles en dehors de votre organisation. Le scanner de données sensibles est disponible dans vos [paramètres d'organisation][3].
 
 Si vous avez déjà indexé des logs qui contiennent des données sensibles, suivez les trois étapes ci-après :
 
@@ -59,13 +59,13 @@ Une fois que des données sensibles dans des logs ont été envoyées à votre p
 
 ## Corriger la source de données en amont
 
-### Censurer les données sensibles lors de streaming de logs à l'aide du Sensitive Data Scanner
+### Censurer les données sensibles lors de streaming de logs à l'aide du scanner de données sensibles
 
 Utilisez des règles prêtes à l'emploi ou personnalisées pour [identifier et censurer les autres types de données sensibles][2] qui continuent d'arriver dans vos logs.
 
 ### Arrêter l'indexation de logs sensibles
 
-Si vous n'utilisez pas le Sensitive Data Scanner, déterminez si vous souhaitez empêcher tous les nouveaux logs contenant des données sensibles d'être indexés. Vous devrez toujours traiter les logs contenant des données sensibles déjà indexés dans Datadog.
+Si vous n'utilisez pas le scanner de données sensibles, déterminez si vous souhaitez empêcher tous les nouveaux logs contenant des données sensibles d'être indexés. Vous devrez toujours traiter les logs contenant des données sensibles déjà indexés dans Datadog.
 
 * Recherchez les index qui contiennent des logs avec des données sensibles.
 * Pour chaque index, ajoutez un filtre d'exclusion en fonction de la requête de recherche des données sensibles.
@@ -106,7 +106,7 @@ Si vous devez modifier vos archives afin de supprimer des données sensibles, co
 Si vous avez des questions concernant la conformité des logs ou si vous avez besoin d'aide, n'hésitez pas à contacter l'[équipe d'assistance][20] Datadog. Assurez-vous au préalable d'avoir à disposition les informations suivantes :
 
 * La requête de recherche des données sensibles ou tout élément pouvant être utilisé pour définir les données sensibles, comme un intervalle, un service ou un environnement.
-* Si vous utilisez le [Sensitive Data Scanner][21] ou non.
+* Si vous utilisez le [scanner de données sensibles][21] ou non.
 * Si des données sensibles sont encore envoyées à Datadog.
 * Si des données sensibles ont été indexées (et dans quels index) ou transformées en métriques.
 * Si vous avez déjà fait en sorte que les données sensibles ne puissent plus faire l'objet d'une requête.

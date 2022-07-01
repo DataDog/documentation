@@ -25,7 +25,7 @@ aliases:
 
 ## Overview
 
-To create a new log detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a new log detection rule in Datadog, hover over **Security**, select **Detection Rules**, and select the **New Rule** button in the top right corner of the page.
 
 ## Rule Type
 
@@ -37,7 +37,7 @@ For Cloud SIEM (Security Information and Event Management), select **Log Detecti
 
 Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal occurs when the condition is met.
 
-### New term
+### New value
 
 Detect when an attribute changes to a new value. For example, if you create a trigger based on a specific attribute, such as `country` or `IP address`, a security signal will be generated whenever a new value is seen which has not been seen before.
 
@@ -50,10 +50,6 @@ Anomaly detection is currently in <a href="https://app.datadoghq.com/security/co
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
 ### Impossible Travel
-
-<div class="alert alert-warning">
-Impossible travel is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new">public beta</a>.
-</div>
 
 Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
 
@@ -94,12 +90,10 @@ The Detection Rule cases join these queries together based on their group by val
 
 In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
 
-{{< img src="security_platform/security_monitoring/detection_rules/gbv2.png" alt="Set rule cases" >}}
-
 [1]: /logs/search_syntax/
 {{% /tab %}}
 
-{{% tab "New Term" %}}
+{{% tab "New Value" %}}
 
 ### Search query
 
@@ -162,9 +156,9 @@ Do not click the checkbox if you want Datadog to detect all impossible travel be
 
 Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
 
+
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -206,7 +200,7 @@ Additional cases can be added by clicking the **Add Case** button.
 [1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
-{{% tab "New Term" %}}
+{{% tab "New Value" %}}
 
 {{< img src="security_platform/security_monitoring/detection_rules/new_term_rule_case.png" alt="Define the rule case" >}}
 

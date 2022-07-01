@@ -2,7 +2,7 @@
 title: Datadog Lambda ライブラリ
 kind: ドキュメント
 further_reading:
-  - link: /serverless/datadog_lambda_library/extension
+  - link: /serverless/libraries_integrations/extension
     tag: Documentation
     text: Datadog Lambda 拡張機能 (プレビュー)
   - link: /serverless/datadog_lambda_library/python

@@ -1,14 +1,18 @@
 ---
-title: beforeSend を使用してブラウザ RUM データを強化および制御する
-kind: ガイド
 further_reading:
-  - link: /real_user_monitoring/explorer
-    tag: ドキュメント
-    text: RUM データを Explorer で確認
+- link: /real_user_monitoring/explorer
+  tag: ドキュメント
+  text: RUM データを Explorer で確認
+kind: ガイド
+title: beforeSend を使用してブラウザ RUM データを強化および制御する
 ---
+
 ## 概要
 
-RUM ブラウザ SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。RUM イベントをインターセプトすると、次のことが可能になります。
+RUM ブラウザ SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM  SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。
+
+RUM イベントをインターセプトすると、次のことが可能になります。
+
 * 追加のコンテキスト属性で RUM イベントを強化する
 * RUM イベントを変更してコンテンツを変更するか、機密性の高いシーケンスを編集する ([編集可能なプロパティのリスト][1]を参照)
 * 選択した RUM イベントを破棄する
@@ -21,7 +25,7 @@ function beforeSend(event, context)
 ```
 
 ### イベント
-イベントは RUM SDK によって生成されます。さまざまなイベントタイプと収集された属性の詳細については、[収集された RUM データ][2]のドキュメントをご覧ください。
+イベントは RUM ブラウザ SDK によって生成されます。さまざまなイベントタイプと収集された属性の詳細については、[収集された RUM データ][2]のドキュメントをご覧ください。
 
 `event.type` プロパティを使用すると、イベントのタイプを識別できます。
 ```json
@@ -34,15 +38,15 @@ function beforeSend(event, context)
 
 ### コンテキスト
 コンテキストは、イベントの作成をトリガーする Browser API で構成されます。コンテキスト値は `event.type` に依存します。
-| RUM イベントタイプ   | コンテキスト                   |
-|------------------|---------------------------|
-| View             | [Location][3]                  |
-| Action           | [Event][4]                     |
-| Resource (XHR)   | [XMLHttpRequest][5] および [PerformanceResourceTiming][6]            |
-| Resource (Fetch) | [Request][7]、[Response][8]、および [PerformanceResourceTiming][6]      |
-| Resource (Other) | [PerformanceResourceTiming][6] |
-| Error            | [Error][9]                     |
-| Long Task        | [PerformanceLongTaskTiming][10] |
+| RUM イベントタイプ       | コンテキスト                                                         |
+|----------------------|-----------------------------------------------------------------|
+| View                 | [Location][3]                                                   |
+| Action               | [Event][4]                                                      |
+| Resource (XHR)       | [XMLHttpRequest][5] および [PerformanceResourceTiming][6]          |
+| Resource (Fetch)     | [Request][7]、[Response][8]、および [PerformanceResourceTiming][6] |
+| Resource (Other)     | [PerformanceResourceTiming][6]                                  |
+| Error                | [Error][9] またはエラーとして発生するその他の値                |
+| Long Task            | [PerformanceLongTaskTiming][10]                                 |
 
 コンテキストオブジェクトの構造の詳細については、[Browser SDK リポジトリ][11]を参照してください。
 

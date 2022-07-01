@@ -16,8 +16,8 @@ further_reading:
       text: 'Learn more about private locations'
 ---
 
-<div class="alert alert-warning">
-The access to this feature is restricted. For access to this feature, or if you would like to be added to the Windows Private Location beta allowing you to run IE11 browser tests, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+<div class="alert alert-info">
+If you would like to be added to the Windows Private Location beta, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 </div>
 
 ## Overview
@@ -62,6 +62,9 @@ Your private locations test results display identically to your managed location
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
+    
+    This command starts a Docker container and prepares your private location to run tests. Datadog recommends running the container in detached mode with proper restart policy.
+    
 11. If your private location reports correctly to Datadog, an `OK` health status displays under **Private Location Status** and on the **Private Locations** list in the **Settings** page:
 
     {{< img src="synthetics/private_locations/pl_health.png" alt="Private Location Health" style="width:100%;">}}

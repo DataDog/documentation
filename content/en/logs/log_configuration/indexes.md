@@ -28,24 +28,37 @@ You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][
 
 ## Multiple indexes
 
-By default, each account has a single index representing a monolithic set of all your logs. Datadog also offers multiple indexes if you require:
+By default, each new account gets a single index representing a monolithic set of all your logs. Datadog recommends using multiple indexes if you require:
 
 * Multiple [retention periods](#update-log-retention)
 * Multiple [daily quotas](#set-daily-quota), for finer budget control.
 
 The Log Explorer supports [queries across multiple indexes][7].
 
-<div class="alert alert-info">
-<a href="/help">Contact Datadog support</a> to enable multiple-indexes for your account.
-</div>
-
 ### Add indexes
 
-If multiple indexes is activated, use the "New Index" button to create a new index.
+Use the "New Index" button to create a new index. There is a maximum number of indexes you can create for each account, set to 10 by default.
 
-{{< img src="logs/indexes/add-index.png" alt="Add index"  style="width:70%;">}}
+{{< img src="logs/indexes/add-index.png" alt="Add index" style="width:70%;">}}
 
 **Note**: Index names must start with a letter and can only contain lowercase letters, numbers, or the '-' character.
+
+<div class="alert alert-info">
+<a href="/help">Contact Datadog support</a> if you need to increase the maximum number of indexes for your account.
+</div>
+
+### Delete indexes
+
+To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with both `Modify index` and `User manage access` permissions can use this option. 
+
+{{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
+
+<div class="alert alert-warning">
+You cannot recreate an index with the same name as the deleted one. 
+</div>
+
+**Note:** The deleted index will no longer accept new incoming logs. The logs in the deleted index are no longer available for querying. After the retention period is reached, the index will no longer show up in the Index page.
+
 
 ## Indexes filters
 

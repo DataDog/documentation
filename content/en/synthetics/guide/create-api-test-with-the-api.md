@@ -1,5 +1,5 @@
 ---
-title: Create an API test with the API
+title: Create An API Test With The API
 kind: guide
 further_reading:
 - link: "/api/latest/synthetics/"
@@ -7,7 +7,7 @@ further_reading:
   text: "Synthetics API"
 - link: "/synthetics/"
   tag: "Documentation"
-  text: "Manage your checks"
+  text: "Learn about Synthetic Monitoring"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
   tag: "Terraform"
   text: "Create and manage Synthetic API tests with Terraform"
@@ -408,8 +408,7 @@ configuration = Configuration(
     api_key= {"apiKeyAuth": "<YOUR_API_KEY>","appKeyAuth": "<YOUR_APPLICATION_KEY>"}
 )
 
-// Enter a context with an instance of the API client
-with ApiClient(configuration) as api_client:
+// Enter a context with an instance of the API client where the ApiClient configuration is set as api_client:
     // Create an instance of the API class
     api_instance = synthetics_api.SyntheticsApi(api_client)
     body = SyntheticsAPITest(

@@ -109,7 +109,7 @@ First, create a default policy file to load to the Agent by following the instru
 Once your new default policy file is downloaded, navigate to the [**Rules** page][3].
 
 1. Click the **New Rule** button in the top right.
-2. Select **Workload Security** under **Rule types**. Select a detection method such as **Threshold** or **New Term**.
+2. Select **Workload Security** under **Rule types**. Select a detection method such as **Threshold** or **New Value**.
 3. Configure a new Cloud Workload Security rule. A rule can have multiple rule cases combined with boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
 
     {{< img src="security_platform/cws/workload_security_rules/define_runtime_expression.png" alt="Adding a rule to the expression field" >}}

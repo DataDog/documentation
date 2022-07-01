@@ -336,7 +336,7 @@ GAUGE、HISTOGRAM などのメトリクスタイプと同様に、DISTRIBUTION �
 [1]: /ja/developers/metrics/type_modifiers/
 [2]: /ja/dashboards/functions/
 [3]: /ja/metrics/summary/
-[4]: https://statsd.readthedocs.io/en/v3.2.1/types.html#sets
+[4]: https://statsd.readthedocs.io/en/v3.2.2/types.html#sets
 [5]: /ja/developers/metrics/agent_metrics_submission/
 [6]: /ja/developers/metrics/dogstatsd_metrics_submission/
 [7]: /ja/api/v1/metrics/#submit-metrics

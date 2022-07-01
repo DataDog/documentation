@@ -4,7 +4,7 @@ kind: documentation
 description: MySQL データベースモニタリングの高度なコンフィギュレーション
 
 ---
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -54,7 +54,7 @@ instances:
 
 ## サンプリングレートの増加
 
-比較的頻度が低い、または非常にすばやく実行するクエリがある場合は、`collection_interval` の値を下げてサンプル収集の頻度を上げ、サンプリングレートを増加します。
+比較的頻度が低い、またはすばやく実行するクエリがある場合は、`collection_interval` の値を下げてサンプル収集の頻度を上げ、サンプリングレートを増加します。
 
 Datadog Agent のデータベースインスタンスコンフィギュレーションで `collection_interval` を設定します。デフォルト値は 1 で、値を小さくするとインターバルが小さくなります。
 
@@ -62,7 +62,7 @@ Datadog Agent のデータベースインスタンスコンフィギュレーシ
 instances:
   - dbm: true
     ...
-    query_samples:        
+    query_samples:
         collection_interval: 0.1
 ```
 

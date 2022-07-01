@@ -5,19 +5,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - containers
-  - orchestration
-  - log collection
+- containers
+- orchestration
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md'
-display_name: "Pivotal\_PKS"
+- https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md
+display_name: Pivotal PKS
 draft: false
 git_integration_title: pivotal_pks
 guid: b0090603-01c8-4ad9-8f9a-4f3700bf065b
 integration_id: pivotal-pks
 integration_title: Pivotal Container Service
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -27,9 +28,12 @@ public_title: Intégration Datadog/Pivotal Container Service
 short_description: Offre Kubernetes pour entreprises proposée par Pivotal.
 support: core
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ## Présentation
 
 L'intégration surveille les clusters [Pivotal Container Service][1].

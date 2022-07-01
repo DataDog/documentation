@@ -3,21 +3,21 @@ assets:
   configuration: {}
   dashboards:
     N2WSBackup&Recovery-EntitiesSpecificDashboard: assets/dashboards/N2WSBackup&Recovery-EntityTypesDetails.json
-    N2WSBackup&Recovery-EntitiesSpecificDashboardV4.0: assets/dashboards/N2WSBackup&RecoveryV4.0-EntityTypesDetails.json
+    N2WSBackup&Recovery-EntitiesSpecificDashboardV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-EntityTypesDetails.json
     N2WSBackup&Recovery-GraphicalVersion: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(ColumnGraphs).json
     N2WSBackup&Recovery-GraphicalVersion-Areas: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(AreasGraphs).json
-    N2WSBackup&Recovery-GraphicalVersionV4.0: assets/dashboards/N2WSBackup&RecoveryV4.0-BackupSuccessRates(ColumnGraphs).json
+    N2WSBackup&Recovery-GraphicalVersionV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-BackupSuccessRates(ColumnGraphs).json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - cloud
+- cloud
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
 display_name: N2WS Backup & Recovery
 doc_link: https://docs.datadoghq.com/integrations/n2ws/
 draft: false
@@ -35,13 +35,17 @@ metric_prefix: cpm_metric.
 metric_to_check: cpm_metric.dashboard_activity.backup_success_num
 name: n2ws
 public_title: Intégration Datadog/N2WS
-short_description: Consulter les données récapitulatives de tous les hosts connectés de N2WS Backup & Recovery
+short_description: Consulter les données récapitulatives de tous les hosts connectés
+  de N2WS Backup & Recovery
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 
@@ -53,9 +57,9 @@ Votre instance N2WS Backup and Recovery prend en charge la surveillance des sauv
 
 ### Installation
 
-1.  ##### Installez l'[intégration Python][1].
+1.  Installez l'[intégration Python][1].
 
-2.  ##### Activez la prise en charge de Datadog sur votre instance N2WS :
+2.  Activez la prise en charge de Datadog sur votre instance N2WS :
     - Connectez-vous à votre instance N2WS Backup and Recovery avec le protocole SSH.
     - Ajoutez les lignes suivantes à `/cpmdata/conf/cpmserver.cfg`. Vous devrez peut-être posséder les privilèges `sudo` pour effectuer cette action.
         ```
@@ -64,27 +68,28 @@ Votre instance N2WS Backup and Recovery prend en charge la surveillance des sauv
         ```
     - Exécutez `service apache2 restart`.
 
-3.  ##### Installez l'Agent Datadog sur votre instance N2WS.
-    Connectez-vous à Datadog et accédez à Integrations-> Agent -> Ubuntu.
-    Copiez la commande ‘easy one-step install’ de l'Agent.
-    Connectez-vous à votre instance N2WS Backup and Recovery avec le protocole SSH. Vous devrez peut-être posséder les privilèges `sudo` pour effectuer cette action.
+3.  Installez l'Agent Datadog sur votre instance N2WS.
+    - Connectez-vous à Datadog et accédez à Integrations-> Agent -> Ubuntu.
+    - Copiez la commande `easy one-step install` de l'Agent.
+    - Connectez-vous à votre instance N2WS Backup and Recovery avec le protocole SSH. Vous devrez peut-être posséder les privilèges `sudo` pour effectuer cette action.
 
-4.  ##### Configurer les métriques du dashboard Datadog
-    Accédez à [‘Metrics-> Explorer’][2].
+4.  Configurez les métriques du dashboard Datadog :
+    - Accédez à [Metrics -> Explorer][2].
 
-    **Graph** : sélectionnez votre métrique dans la liste. Toutes les métriques N2WS commencent par la chaîne ‘cpm_metric’.
+    **Graph** : sélectionnez votre métrique dans la liste. Toutes les métriques N2WS commencent par la chaîne « cpm_metric ».
 
-    **Over** : sélectionnez les données dans la liste. Toutes les données des utilisateurs N2WS commencent par la chaîne ‘cpm:user:<nom-utilisateur>’.
+    **Over** : sélectionnez les données dans la liste. Toutes les données des utilisateurs N2WS commencent par la chaîne « cpm:user:<nom-utilisateur> ».
               Vous pouvez sélectionner un utilisateur spécifique ou toute l'instance N2WS.
 
 
-5.  ##### Accéder aux dashboards N2WS 
-    Dans les [intégrations Datadog][3], recherchez le carré 'N2WS' et installez-le.
-    Vous pouvez consulter cinq types de dashboards pour votre compte : 3 pour N2WS Backup & Recovery v3.2.1 (uniquement pour AWS) et 2 pour N2WS Backup & Recovery v4.0 (AWS et Azure) :
-    'N2WSBackup&Recovery-Graphicalversion', 'N2WSBackup&Recovery-Graphicalversion-areas' et 'N2WSBackup&Recovery-EntitiesSpecificDashboard' pour la version 3.2.1
-    'N2WSBackup&Recovery-EntitiesSpecificDashboardV4.0' et 'N2WSBackup&Recovery-GraphicalVersionV4.0' pour la version 4.0
+5.  Accéder aux dashboards N2WS 
+    - Dans les [intégrations Datadog][3], recherchez le carré `N2WS` et installez-le.
+    - Cinq dashboard sont alors ajoutés à votre compte :
+    N2WSBackup&Recovery-Graphicalversion, N2WSBackup&Recovery-Graphicalversion-areas et N2WSBackup&Recovery-EntitiesSpecificDashboard pour la version 3.2.1 de N2WS Backup & Recovery.
+    **Remarque** : seuls les utilisateurs AWS ont accès à ces dashboards.
+    Les dashboards N2WSBackup&Recovery-EntitiesSpecificDashboardV4.1 et N2WSBackup&Recovery-GraphicalVersionV4.1 sont également ajoutés pour la version 4.1 de N2WS Backup & Discovery.
 
-    Les utilisateurs peuvent également [importer des modèles JSON depuis N2WS][4].
+    Vous pouvez également [importer des modèles JSON depuis N2WS][4] pour créer vos propres dashboards.
 
 ## Données collectées
 

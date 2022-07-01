@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/faq/issues-with-apache-integration/
+- /ja/integrations/faq/issues-with-apache-integration/
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -20,13 +20,13 @@ assets:
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - log collection
-  - autodiscovery
+- web
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/apache/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/apache/README.md
 description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
 display_name: Apache
 draft: false
@@ -34,6 +34,7 @@ git_integration_title: apache
 guid: cb2b4a06-4ede-465e-9478-a45f8b32058a
 integration_id: apache
 integration_title: Apache
+integration_version: 4.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -42,17 +43,20 @@ metric_prefix: apache.
 metric_to_check: apache.performance.busy_workers
 name: Apache
 process_signatures:
-  - httpd
-  - apache
-  - apache2
+- httpd
+- apache
+- apache2
 public_title: Datadog-Apache インテグレーション
 short_description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Apache ダッシュボード][1]
 
 ## 概要
@@ -63,9 +67,9 @@ Apache チェックは、毎秒のリクエスト数、処理されたバイト�
 
 ### インストール
 
-Apache チェックは Agent にパッケージ化されています。Apache のメトリクスとログの収集を開始するには、以下を行います。
+Apache チェックは [Datadog Agent][2] にパッケージ化されています。Apache のメトリクスとログの収集を開始するには、以下を行います。
 
-1. Apache サーバーに [Agent をインストール][2]します。
+1. Apache サーバーに [Agent をインストール][3]します。
 
 2. Apache サーバーに `mod_status` をインストールし、`ExtendedStatus` を有効にします。
 
@@ -148,7 +152,7 @@ LABEL "com.datadoghq.ad.instances"='[{"apache_status_url": "http://%%host%%/serv
 ##### ログの収集
 
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
 次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
@@ -192,7 +196,7 @@ spec:
 ##### ログの収集
 
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
 
@@ -242,7 +246,7 @@ spec:
 ##### ログの収集
 
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[ECS ログ収集ドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
 次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
@@ -266,7 +270,7 @@ spec:
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションの `apache` を探します。
+[Agent の status サブコマンドを実行][4]し、Checks セクションの `apache` を探します。
 
 ## 収集データ
 
@@ -286,26 +290,27 @@ Apache チェックにはイベントは含まれません。
 
 ### Apache のステータス URL
 
-Apache インテグレーションで問題が発生する場合の多くは、Agent が Apache のステータス URL にアクセスできないことが原因です。[`apache.d/conf.yaml` ファイル][4]に一覧表示されている `apache_status_url` に対して curl を実行してみてください (必要に応じてログイン資格情報を指定)。
+Apache インテグレーションで問題が発生する場合の多くは、Agent が Apache のステータス URL にアクセスできないことが原因です。[`apache.d/conf.yaml` ファイル][5]に一覧表示されている `apache_status_url` に対して curl を実行してみてください (必要に応じてログイン資格情報を指定)。
 
-- [Apache SSL 証明書に関する問題][5]
+- [Apache SSL 証明書に関する問題][6]
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [CloudFormation を使用した Datadog のデプロイと構成][6]
-- [Apache Web サーバーのパフォーマンスの監視][7]
-- [Apache パフォーマンスメトリクスを収集する方法][8]
-- [Datadog で Apache Web サーバーを監視する方法][9]
+- [CloudFormation を使用した Datadog のデプロイと構成][7]
+- [Apache Web サーバーのパフォーマンスの監視][8]
+- [Apache パフォーマンスメトリクスを収集する方法][9]
+- [Datadog で Apache Web サーバーを監視する方法][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/apache/images/apache_dashboard.png
-[2]: https://docs.datadoghq.com/ja/agent/
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/integrations/faq/apache-ssl-certificate-issues/
-[6]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation
-[7]: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
-[8]: https://www.datadoghq.com/blog/collect-apache-performance-metrics
-[9]: https://www.datadoghq.com/blog/monitor-apache-web-server-datadog
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/agent/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/integrations/faq/apache-ssl-certificate-issues/
+[7]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation
+[8]: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
+[9]: https://www.datadoghq.com/blog/collect-apache-performance-metrics
+[10]: https://www.datadoghq.com/blog/monitor-apache-web-server-datadog

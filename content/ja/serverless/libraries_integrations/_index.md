@@ -1,73 +1,44 @@
 ---
-title: サーバーレスライブラリとインテグレーション
-kind: documentation
-further_reading:
-  - link: /serverless/serverless_integrations/plugin/
-    tag: Datadog サーバーレスプラグイン
-    text: ドキュメント
-  - link: /serverless/serverless_integrations/macro/
-    tag: ドキュメント
-    text: Datadog のサーバーレスマクロ
-  - link: /serverless/serverless_integrations/cli/
-    tag: ドキュメント
-    text: Datadog サーバーレス CLI
 aliases:
-  - /ja/serverless/serverless_integrations
+- /ja/serverless/serverless_integrations
+- /ja/serverless/datadog_lambda_library/
+- /ja/serverless/libraries_integrations/library/
+kind: documentation
+title: サーバーレスライブラリとインテグレーション
 ---
-{{< whatsnext desc="サーバーレスライブラリとインテグレーション:" >}}
-    {{< nextlink href="/serverless/libraries_integrations/extension/" >}}Datadog Lambda 拡張機能{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/library/" >}}Datadog Lambda ライブラリ{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/forwarder/" >}}Datadog Lambda Forwarder{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/plugin/" >}}Datadog Lambda プラグイン{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/macro/" >}}Datadog Lambda マクロ{{< /nextlink >}}
+
+## サーバーレス開発ツールとのインテグレーション
+
+{{< whatsnext desc="Datadog は、一般的なサーバーレス開発ツールと統合し、Datadog Lambda の拡張機能とライブラリをアプリケーションに自動的にインストールします。" >}}
+    {{< nextlink href="/serverless/libraries_integrations/plugin/" >}}サーバーレスフレームワーク用 Datadog プラグイン{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/cli/" >}}Datadog Lambda CLI{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/lambda_code_signing/" >}}Lambda コード署名{{< /nextlink >}}
+    {{< nextlink href="/serverless/libraries_integrations/cdk/" >}}AWS CDK 用 Datadog コンストラクト{{< /nextlink >}}
+    {{< nextlink href="/serverless/libraries_integrations/macro/" >}}AWS SAM 用 Datadog サーバーレスマクロ{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## AWS Step Functions
+## Datadog Lambda 拡張機能と Forwarder
 
-[AWS Step Functions インテグレーション][1]を有効にすると、特定の関数が属するステートマシンを識別する Lambda メトリクスの追加タグを自動的に取得できます。これらのタグを使用して、[サーバーレスビュー][2]で Step Functions ごとの Lambda メトリクスとログの集計ビューを取得します。
+{{< whatsnext desc="Lambda 関数からテレメトリーを送信するには、Lambda 拡張機能または Forwarder のいずれかが必要です。また、AWS API Gateway など、Lambda 以外のサーバーレスリソースのログを収集するには、Forwarder が必要な場合があります。" >}}
+    {{< nextlink href="/serverless/libraries_integrations/extension/" >}}Datadog Lambda 拡張機能{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring" >}}Datadog Forwarder Lambda 関数{{< /nextlink >}}
+{{< /whatsnext >}}
 
-1. [AWS Step Functions インテグレーション][1]をインストールします。
-2. Lambda メトリクスにタグを追加するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
+## Datadog Lambda ライブラリ
 
-    | AWS アクセス許可     | 説明                                  |
-    | ------------------ | -------------------------------------------- |
-    | `states:ListStateMachines`     | 有効な Step Functions を一覧表示します。   |
-    | `states:DescribeStateMachine` | Step Function メタデータやタグを取得します。  |
-3. AWS Step Functions の[分散型トレーシングとロギング][1]を構成します。
-4. 完了したら、[Serverless Homepage][4] に移動し、Lambda 関数を `statemachinename`、`statemachinearn` または `stepname` でフィルタリングします。
+{{< whatsnext desc="特定のランタイムでは、テレメトリーを収集するために、Datadog Lambda 拡張機能に加えて、Datadog Lambda ライブラリが必要です。" >}}
+    {{< nextlink href="https://github.com/DataDog/datadog-lambda-python" >}}Python 用 Datadog Lambda ライブラリ{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/datadog-lambda-js" >}}Node.js 用 Datadog Lambda ライブラリ{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/datadog-lambda-go" >}}Go 用 Datadog Lambda ライブラリ{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/datadog-lambda-rb" >}}Ruby 用 Datadog Lambda ライブラリ{{< /nextlink >}}
+{{< /whatsnext >}}
 
-{{< img src="serverless/step-function-trace.jpeg" alt="AWS Step Function Tracing" >}}
+## Datadog AWS インテグレーション
 
-## Amazon EFS for Lambda
-
-[Amazon EFS for Lambda][5]を有効にすると、特定の関数が属する EFS を識別する Lambda メトリクスの追加タグを自動的に取得できます。これらのタグを使用して、[サーバーレスビュー][6]で EFS ごとの Lambda メトリクスとログの集計ビューを取得します。
-
-1. [Amazon EFS インテグレーション][7]をインストールします。
-2. Lambda から EFS のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
-
-    | AWS アクセス許可     | 説明                                  |
-    | ------------------ | -------------------------------------------- |
-    | `elasticfilesystem:DescribeAccessPoints`     | Lambda 関数に接続された有効な EFS を一覧表示します。 |
-
-3. 完了したら、[サーバレスビュー][2]に移動し、Lambda 関数で新しい `filesystemid` タグを使用します。
-
-{{< img src="integrations/amazon_lambda/efs_for_lambda.mp4" alt="Amazon EFS for Lambda" video=true >}}
-
-## Lambda@Edge
-
-`at_edge`、`edge_master_name`、`edge_master_arn` タグを使用し、エッジロケーションで実行中の Lambda 関数のメトリクスとロゴの集計ビューを取得します。
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-
-[1]: /ja/integrations/amazon_step_functions/
-[2]: https://app.datadoghq.com/functions
-[3]: /ja/integrations/amazon_web_services/#installation
-[4]: /ja/serverless/serverless_integrations/macro/
-[5]: /ja/integrations/amazon_efs/#amazon-efs-for-lambda
-[6]: /ja/serverless/serverless_integrations/plugin/
-[7]: /ja/integrations/amazon_efs/
+{{< whatsnext desc="Lambda 関数から直接テレメトリーを収集するだけでなく、Datadog AWS インテグレーションを通じて、サーバーレスアプリケーションが利用するリソースのテレメトリーを収集することも可能です。" >}}
+    {{< nextlink href="/integrations/amazon_lambda/" >}}AWS Lambda インテグレーション{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_step_functions/" >}}AWS Step Functions インテグレーション{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_appsync/" >}}AWS AppSync インテグレーション{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_api_gateway/" >}}AWS API Gateway インテグレーション{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sqs/" >}}AWS SQS インテグレーション{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sns/" >}}AWS SNS インテグレーション{{< /nextlink >}}
+{{< /whatsnext >}}

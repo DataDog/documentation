@@ -1,7 +1,8 @@
 ---
 title: Flaky Test Management
 kind: guide
-aliases: /continuous_integration/guides/find_flaky_tests/
+aliases: 
+    - /continuous_integration/guides/find_flaky_tests/
 ---
 
 {{< site-region region="gov" >}}
@@ -25,6 +26,8 @@ The app helps you prioritize flaky tests by providing the following information 
 * **Trend**: A visualization that indicates whether a flaky test was fixed or it is still actively flaking.
 
 Once you identify a flaky test you want to fix, click on the test to see links to view the most recent failed test run or the first flaky test run.
+
+<div class="alert alert-info"><strong>Note</strong>: The table is limited to the 1000 flaky tests with the highest number of commits flaked for the selected time frame.</div>
 
 ## Remediation
 

@@ -46,6 +46,8 @@ When constraining a downtime to a simple alert monitor, the `Group scope` field 
 
 If a multi-alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi-alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
 
+To include all groups in the scope of a Downtime that applies to multi-alert monitors, select `All` for the `Group scope`.
+
 The examples below show how `Group scope` may be applied to multi-alert monitors.
 
 {{< tabs >}}
@@ -143,6 +145,16 @@ Enter a message to notify your team about this downtime. The message field allow
 ### Notify your team
 
 Notify your team by specifying team members or send the message to a service [integration][3].
+
+#### Disable first recovery notification
+
+By default, Datadog sends a recovery notification for monitors that trigger **before** a downtime and end up recovering **during** a downtime. This is useful when using third party integrations to automatically close opened incidents. Selecting the checkbox will mute these notifications.
+
+{{< img src="monitors/downtimes/downtime_first_recovery.png" alt="mute first recovery notification" style="width:80%;">}}
+
+The option to disable the first recovery notification is additive between multiple downtimes. Consequently, if multiple downtimes overlap and mute the same monitor, the first recovery notification will be muted if **at least one** downtime checked the option to disable it.
+
+**Note**: This option mutes the **first** recovery notification. If a monitor proceeds to trigger and recover again during a downtime, then the corresponding notifications are always muted, regardless of this option's settings.
 
 ## Manage
 

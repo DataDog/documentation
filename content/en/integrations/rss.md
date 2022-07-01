@@ -12,7 +12,6 @@ dependencies:
 categories:
     - notification
     - web
-ddtype: crawler
 integration_id: "feed"
 ---
 

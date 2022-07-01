@@ -2,7 +2,6 @@
 categories:
 - log collection
 - Security
-ddtype: crawler
 description: Collect your Carbon Black Defense Logs
 doc_link: https://docs.datadoghq.com/integrations/carbon_black/
 dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md"]
@@ -33,8 +32,8 @@ Carbon Black provides a [Postman collection][1] for the API that you use to crea
 #### Configuration
 
 1. [Install the Datadog Forwarder][2].
-2. [Create a bucket in your AWS Management Console][3] to forward events to. 
-3. [Configure the S3 bucket to allow the Carbon Black forwarder to write data][4]. 
+2. [Create a bucket in your AWS Management Console][3] to forward events to.
+3. [Configure the S3 bucket to allow the Carbon Black forwarder to write data][4].
    - **Important**: The S3 bucket must have a prefix with the keyword `carbon-black` in which the CB events come in. This allows Datadog to recognize the source of the logs correctly.
 5. [Create an access level in the Carbon Black Cloud console][5].
 6. [Create an API key in the Carbon Black Cloud console][6].
@@ -48,7 +47,7 @@ Carbon Black provides a [Postman collection][1] for the API that you use to crea
 Need help? Contact [Datadog support][10].
 
 [1]: https://documenter.getpostman.com/view/7740922/SWE9YGSs?version=latest
-[2]: /serverless/libraries_integrations/forwarder/
+[2]: /logs/guide/forwarder/
 [3]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-a-bucket
 [4]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-bucket-to-write-events
 [5]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-access-level

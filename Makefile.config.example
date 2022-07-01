@@ -2,12 +2,14 @@
 # Create a new file called Makefile.config using this file as a template for your local config
 
 GITHUB_TOKEN := ${github_personal_token}
-CREATE_I18N_PLACEHOLDERS:= false
-PULL_RBAC_PERMISSIONS := true
+LANGS_TO_IGNORE := "ja fr"
+DOCKER := false
+FULL_BUILD := false
 DD_API_KEY := ${datadog_api_key}
 DD_APP_KEY := ${datadog_application_key}
+CREATE_I18N_PLACEHOLDERS:= false
+PULL_RBAC_PERMISSIONS := true
 RUN_SERVER := true
-RUN_WEBPACK := true
 CONFIGURATION_FILE := "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
 LOCAL := True

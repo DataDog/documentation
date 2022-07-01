@@ -71,15 +71,21 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Display command usage              | `sudo service datadog-agent`                      |
 | Run a check                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
 
+{{% /tab %}}
+
+{{< /tabs >}}
+
 **Note**: If the `service` wrapper is not available on your system, use:
 
 * On `upstart`-based systems: `sudo start/stop/restart/status datadog-agent`
 * On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
+* On `initctl`-based systems: `sudo initctl start/stop/restart/status datadog-agent`
 
 [Learn more about Service lifecycle commands][2]
 
-{{% /tab %}}
-{{< /tabs >}}
+
+
+
 
 ## Configuration
 

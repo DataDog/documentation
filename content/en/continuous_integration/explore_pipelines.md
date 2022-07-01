@@ -31,34 +31,41 @@ Get insights on the selected pipeline such as total and failed executions over t
 
 The pipeline execution list at the bottom shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
-### Explore connections to services, resources, logs, and network events
+### Explore connections to services, resources, and network events
 
 Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
 
-Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to related log events and network monitoring events.
+Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to network monitoring events.
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Trace info for pipeline execution" style="width:100%;">}}
 
+### Explore connections to logs
+
+If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
+
+**Note**: Job log collection is only supported for [Jenkins][2].
+
 ## Pipeline executions details and traces
 
-On the [Pipeline Executions][2] page, you can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
+On the [Pipeline Executions][3] page, you can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
 
-Alternatively, click the [Analytics][3] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and to share on dashboards.
+Alternatively, click the [Analytics][4] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and to share on dashboards.
 
 {{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 
 ## Communicate about CI pipelines data
 
-CI pipeline data is available when you create widgets in [Dashboards][4] and [Notebooks][5].
+CI pipeline data is available when you create widgets in [Dashboards][5] and [Notebooks][6].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: https://app.datadoghq.com/ci/pipeline-executions
-[3]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
-[4]: https://app.datadoghq.com/dashboard/lists
-[5]: https://app.datadoghq.com/notebook/list
+[2]: /continuous_integration/setup_pipelines/jenkins#enable-job-log-collection
+[3]: https://app.datadoghq.com/ci/pipeline-executions
+[4]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
+[5]: https://app.datadoghq.com/dashboard/lists
+[6]: https://app.datadoghq.com/notebook/list

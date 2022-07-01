@@ -271,6 +271,7 @@ Some options have flags and options detailed under `--help`. For example, use he
 | `remove-service`  | Remove the Agent from the service control manager. Windows only.            |
 | `restart-service` | Restart the Agent within the service control manager. Windows only.         |
 | `start-service`   | Start the Agent within the service control manager. Windows only.           |
+| `stream-logs`     | Stream the logs being processed by a running agent.                         |
 | `stopservice`     | Stop the Agent within the service control manager. Windows only.            |
 | `version`         | Print version info.                                                         |
 

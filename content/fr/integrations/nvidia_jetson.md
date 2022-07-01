@@ -55,7 +55,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `jetson` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][5] et cherchez `jetson` dans la section Checks.
 
 ## Données collectées
 
@@ -73,11 +73,11 @@ Certaines métriques sont uniquement transmises lorsque `use_sudo` est défini s
 
 ### Checks de service
 
-Nvidia Jetson n'inclut aucun check de service.
+L'intégration Nvidia Jetson n'inclut aucun check de service.
 
 ### Événements
 
-Nvidia Jetson n'inclut aucun événement.
+L'intégration Nvidia Jetson n'inclut aucun événement.
 
 ## Dépannage
 

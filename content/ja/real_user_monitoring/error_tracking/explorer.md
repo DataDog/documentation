@@ -22,7 +22,7 @@ Explorer には問題がリスト表示され、それぞれエラーに関す�
 
 {{< img src="real_user_monitoring/error_tracking/time_range.png" alt="エラー追跡範囲"  >}}
 
-Explorer の右上に、タイムラインの形式で時間範囲が表示されます。ここで、選択した期間内に発生したエラーとともに問題を確認できます。プリセットされた期間をドロップダウンから選択することで、期間をすばやく変更できます。
+Explorer の右上に、タイムラインの形式で時間範囲が表示されます。ここで、選択した期間内に発生したエラーとともに問題を確認できます。プリセットされた期間をドロップダウンから選択することで、期間を変更できます。
 
 ### ファセット
 
@@ -52,7 +52,7 @@ Error Tracking により、問題は事前定義された属性リストに自�
 
 生成された各イベントは、バージョン、サービス、環境でタグ付けされるため、アラートを受信したい問題についてきめ細かな制御が可能です。エクスプローラーから直接検索クエリをエクスポートして、関連スコープのイベントモニターを作成できます。
 
-{{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.gif" alt="エラー追跡のモニターへエクスポート"  >}}
+{{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.mp4" alt="エラー追跡のモニターへエクスポート" video=true >}}
 
 
 [1]: /ja/events

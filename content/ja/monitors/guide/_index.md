@@ -1,11 +1,12 @@
 ---
-title: モニターガイド
+disable_sidebar: true
 kind: ガイド
 private: true
-disable_sidebar: true
+title: モニターガイド
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}
+    {{< nextlink href="monitors/guide/monitor_api_options" >}}API オプションの監視{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}演算メトリクスとまばらなメトリクスの監視{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() モニター評価{{< /nextlink >}}
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}テンプレート変数評価{{< /nextlink >}}
@@ -14,4 +15,5 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}値に変化がないことを警告するようにメトリクスモニターを構成{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}メトリクスモニターのクラスターアラートを作成{{< /nextlink >}}
     {{< nextlink href="monitors/guide/slo-checklist" >}}SLO チェックリスト{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}モニターに RBAC を設定する方法{{< /nextlink >}}
 {{< /whatsnext >}}

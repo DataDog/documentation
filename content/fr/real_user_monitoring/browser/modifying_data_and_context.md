@@ -10,13 +10,13 @@ further_reading:
     text: Real User Monitoring
   - link: /real_user_monitoring/browser/data_collected/
     tag: Documentation
-    text: Données de navigateur RUM recueillies
+    text: Données RUM recueillies (Browser)
   - link: /real_user_monitoring/explorer/
     tag: Documentation
     text: Explorer vos vues dans Datadog
-  - link: /real_user_monitoring/explorer/analytics/
+  - link: /real_user_monitoring/explorer/visualize/
     tag: Documentation
-    text: Générer des analyses à partir de vos événements
+    text: Appliquer des visualisations sur vos événements
   - link: /logs/log_configuration/attributes_naming_convention
     tag: Documentation
     text: Attributs standard Datadog
@@ -30,7 +30,7 @@ Vous pouvez modifier les [données collectées][1] par la fonctionnalité RUM de
 
 ## Remplacer les noms de vue RUM par défaut
 
-Le SDK RUM génère automatiquement un [événement de vue][2] à chaque fois qu'un utilisateur consulte une nouvelle page, ou lorsque l'URL de la page est modifiée (pour les applications monopage). Un nom de vue est généré à partir de l'URL de la page en cours, où les ID alphanumériques de variable sont supprimés automatiquement : par exemple, « /dashboard/1234 » devient « /dashboard/? ».
+Le SDK RUM génère automatiquement un [événement de vue][2] à chaque fois qu'un utilisateur consulte une nouvelle page, ou lorsque l'URL de la page est modifiée (pour les applications monopages). Un nom de vue est généré à partir de l'URL de la page en cours, où les ID alphanumériques de variable sont supprimés automatiquement : par exemple, « /dashboard/1234 » devient « /dashboard/? ».
 
 À partir de la [version 2.17.0][3], vous pouvez indiquer vos propres noms de vue en effectuant un suivi manuel des événements de vue avec l'option `trackViewsManually` :
 
@@ -310,7 +310,7 @@ window.DD_RUM &&
 
 ## Identifier les sessions utilisateur
 
-L'ajout des informations utilisateur à vos sessions RUM facilite :
+L'ajout des informations utilisateur à vos sessions RUM permet :
 * le suivi du parcours d'un utilisateur donné ;
 * l'identification des utilisateurs les plus touchés par les erreurs ;
 * la surveillance des performances de vos utilisateurs les plus importants.
@@ -587,12 +587,9 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{% /tab %}}
 {{< /tabs >}}
 
-
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /fr/real_user_monitoring/browser/data_collected/
 [2]: /fr/real_user_monitoring/browser/monitoring_page_performance/
