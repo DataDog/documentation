@@ -21,7 +21,7 @@ If your fine-tuning needs aren't covered and you need assistance, reach out to [
 
 ## HTTP data collected
 
-To understand data security concerns, it's important to understand what data is being collected. Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, the following tags are collected for each server side web span:
+Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, the following tags are collected for each server side web span:
 
 *  `http.status_code` - The request's response status code.
 *  `http.method` - The method or HTTP verb.
@@ -43,7 +43,7 @@ To understand data security concerns, it's important to understand what data is 
 
 Datadog automatically attempts to resolve `http.client_ip` from a number of well known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library looks only in the specified header for the client IP.
 
-If you do not wish to collect the client IP value because you consider it sensitive data, or for any other reason, set the `DD_TRACE_CLIENT_IP_HEADER_DISABLED` environment variable to `true`. It is `false` by default.
+If you do not wish to collect the client IP value, set the `DD_TRACE_CLIENT_IP_HEADER_DISABLED` environment variable to `true`. It is `false` by default.
 
 ### Redacting the query in the URL
 
