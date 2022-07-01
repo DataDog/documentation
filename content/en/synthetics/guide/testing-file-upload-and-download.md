@@ -1,5 +1,5 @@
 ---
-title: Test file upload and download
+title: Test File Upload and Download
 kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
@@ -7,7 +7,7 @@ further_reading:
       text: 'Introducing Datadog Synthetic Monitoring'
     - link: 'synthetics/'
       tag: 'Documentation'
-      text: 'Manage your checks'
+      text: 'Learn about Synthetic Monitoring'
     - link: 'synthetics/browser_tests'
       tag: 'Documentation'
       text: 'Configure a Browser Test'

@@ -2633,10 +2633,12 @@ components:
     IntakePayloadAccepted:
       description: The payload accepted for intake.
       properties:
-        status:
-          description: The status of the intake payload.
-          example: ok
-          type: string
+        errors:
+          description: A list of errors.
+          items:
+            description: An empty error list.
+            type: string
+          type: array
       type: object
     ListApplicationKeysResponse:
       description: Response for a list of application keys.
@@ -4347,7 +4349,6 @@ components:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
         include_percentiles:
-          default: false
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
             Defaults to false. Can only be applied to metrics that have a `metric_type`
@@ -4439,7 +4440,6 @@ components:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
         include_percentiles:
-          default: false
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
             Defaults to false. Can only be applied to metrics that have a `metric_type`
@@ -6542,6 +6542,17 @@ components:
       - cases
       - message
       type: object
+    SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv:
+      description: 'If true, signals in non-production environments have a lower severity
+        than what is defined by the rule case, which can reduce signal noise.
+
+        The severity is decreased by one level: `CRITICAL` in production becomes `HIGH`
+        in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.
+
+        The decrement is applied when the environment tag of the signal starts with
+        `staging`, `test` or `dev`.'
+      example: false
+      type: boolean
     SecurityMonitoringRuleDetectionMethod:
       description: The detection method.
       enum:
@@ -6735,6 +6746,8 @@ components:
     SecurityMonitoringRuleOptions:
       description: Options on rules.
       properties:
+        decreaseCriticalityBasedOnEnv:
+          $ref: '#/components/schemas/SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv'
         detectionMethod:
           $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
         evaluationWindow:
@@ -7539,8 +7552,6 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
-            dashboards_public_share: Generate public and authenticated links to share
-              dashboards externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
@@ -12084,11 +12095,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_rules_read
       summary: Get the latest Cloud Workload Security policy
       tags:
       - Cloud Workload Security
@@ -13597,6 +13603,81 @@ paths:
       x-menu-order: 39
       x-undo:
         type: safe
+  /api/v2/usage/estimated_cost_by_org:
+    get:
+      description: Get estimated cost across multi-org account.
+      operationId: GetEstimatedCostByOrg
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost beginning this month. Either start_month or start_date should be
+          specified, but not both.'
+        in: query
+        name: start_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
+          for cost beginning this day. Either start_month or start_date should be
+          specified, but not both.'
+        in: query
+        name: start_date
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
+          for cost ending this day.'
+        in: query
+        name: end_date
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/CostByOrgResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get estimated cost across multi-org account
+      tags:
+      - Usage Metering
+      x-menu-order: 39
+      x-undo:
+        type: safe
   /api/v2/usage/lambda_traced_invocations:
     get:
       description: Get hourly usage for Lambda Traced Invocations.
@@ -14276,7 +14357,7 @@ tags:
     that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
     only be performed by\na user who has the `Manage Tags for Metrics` permission."
   name: Metrics
-- description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/api/latest/opsgenie-integration)
+- description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'
   externalDocs:

@@ -3,7 +3,6 @@ categories:
     - cloud
     - aws
     - log collection
-ddtype: crawler
 description: Gather your HSM audit logs in your Datadog organization.
 has_logo: true
 dependencies:
@@ -45,6 +44,6 @@ Once done, go in your [Datadog Log section][2] to start exploring your logs!
 
 Need help? Contact [Datadog Support][3].
 
-[1]: /integrations/amazon_web_services/#create-a-new-lambda-function
+[1]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [2]: https://app.datadoghq.com/logs
 [3]: /help/
