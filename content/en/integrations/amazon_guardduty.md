@@ -44,12 +44,12 @@ Datadog integrates with AWS GuardDuty through a Lambda function that ships Guard
 #### Send your logs to Datadog
 
 1. If you haven't already, set up the [Datadog Forwarder Lambda function][1] in your AWS account.
-2. Once setup, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**. 
+2. Once set up, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**. 
 3. Select the **EventBridge (CloudWatch Events)** trigger for the Trigger Configuration.
 4. Select your GuardDuty rule.
 5. Click **Add** to add the trigger to your Lambda.
 
- Go to [Log Explorer][2] to start exploring your logs.
+ Go to the [Log Explorer][2] to start exploring your logs.
 
 For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][3].
 
