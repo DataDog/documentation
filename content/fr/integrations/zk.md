@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/integrations/zookeeper
+- /fr/integrations/zookeeper
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -14,20 +14,21 @@ assets:
     zookeeper_processes: assets/saved_views/zookeeper_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - orchestration
-  - notification
-  - log collection
-  - autodiscovery
+- orchestration
+- notification
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/zk/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/zk/README.md
 display_name: ZooKeeper
 draft: false
 git_integration_title: zk
 guid: 5519c110-5183-438e-85ad-63678c072ac7
 integration_id: zookeeper
 integration_title: ZooKeeper
+integration_version: 4.2.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -36,15 +37,19 @@ metric_prefix: zookeeper.
 metric_to_check: zookeeper.connections
 name: zk
 process_signatures:
-  - zkServer.sh start
-  - java zoo.cfg
+- zkServer.sh start
+- java zoo.cfg
 public_title: Intégration Datadog/ZooKeeper
-short_description: Surveillez les connexions client et les latences et soyez informé des échecs de traitement des requêtes.
+short_description: Surveillez les connexions client et les latences et soyez informé
+  des échecs de traitement des requêtes.
 support: core
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ![Dashboard ZooKeeper][1]
 
 ## Présentation
@@ -59,9 +64,9 @@ Le check ZooKeeper est inclus avec le paquet de l'[Agent Datadog][2] : vous n'a
 
 ### Configuration
 
-#### Liste blanche ZooKeeper
+#### Liste d'inclusion
 
-Depuis la version 3.5 de ZooKeeper, le paramètre `4lw.commands.whitelist` (voir la [documentation ZooKeeper][3]) permet d'ajouter des [commandes à 4 lettres][4] à la liste blanche. Par défaut, seule la commande `srvr` est autorisée. Ajoutez `stat` et `mntr` à la liste blanche, car le processus d'intégration repose sur ces commandes.
+Depuis la version 3.5, ZooKeeper comprend le paramètre `4lw.commands.whitelist`. Consultez la section sur les [options de cluster ZooKeeper][3]) pour découvrir un exemple permettant d'ajouter des [commandes à 4 lettres][4]. Par défaut, seule la commande `srvr` est ajoutée à la liste blanche. Ajoutez `stat` et `mntr` à la liste blanche, car le processus d'intégration repose sur ces commandes.
 
 #### Activation de l'authentification SSL
 
@@ -77,7 +82,7 @@ Les exemples de commandes suivants supposent que vos fichiers `truststore` et `k
 - `client_keystore.jks`
 
 Nous partons également du principe que les fichiers `keystore` et `truststore` côté client et serveur disposent chacun des certificats réciproques, avec les alias `server_cert` et `client_cert`. Ainsi, le client ZooKeeper Java peut d'ores et déjà se connecter à un serveur ZooKeeper.
-Si votre clé privée est protégée par un mot de passe, assurez-vous d'indiquer le mot de passe pour l'option `tls_private_key_password` du fichier `config.yaml`.
+Si votre clé privée est protégée par un mot de passe, assurez-vous d'indiquer le mot de passe pour l'option de configuration `tls_private_key_password` du fichier `config.yaml`.
 
 Pour convertir des fichiers JKS en fichiers PEM :
 
@@ -122,7 +127,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
      log4j.appender.R.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p [%t] %c{1}:%L - %m%n
    ```
 
-2. Par défaut, notre pipeline d'intégration prend en charge les expressions de conversion suivantes :
+2. Par défaut, le pipeline d'intégration de Datadog prend en charge les expressions de conversion suivantes :
 
    ```text
      %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
@@ -179,7 +184,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                           |
 | -------------- | ----------------------------------------------- |
@@ -212,16 +217,13 @@ Bien qu'elles soient toujours envoyées, les métriques suivantes seront prochai
 Le check ZooKeeper n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "zk" >}}
 
-**zookeeper.ruok** :<br>
-Envoie `ruok` au nœud surveillé. Renvoie `OK` pour une réponse `imok`, renvoie `WARN` pour toute autre réponse ou renvoie `CRITICAL` si aucune réponse n'est reçue.
-
-**zookeeper.mode** :<br>
-L'Agent envoie ce check de service si `expected_mode` est configuré dans `zk.yaml`. Ce check renvoie `OK` lorsque le mode réel de ZooKeeper correspond à `expected_mode`. Si ce n'est pas le cas, il renvoie `CRITICAL`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/zk/images/zk_dashboard.png

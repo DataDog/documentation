@@ -12,8 +12,6 @@ title: Google Cloud SQL マネージド SQL Server のデータベースモニ�
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">Database Monitoring for SQL Server 用データベースモニタリングはプライベートベータ版です。ベータ版へのアクセスリクエストは、カスタマーサクセスマネージャーについては、お問い合わせください。</div>
-
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
 データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
@@ -79,15 +77,17 @@ instances:
       instance_id: '<INSTANCE_ID>'
 ```
 
-[Windows 認証][3]を利用する場合は、[Windows 認証][3]を利用する場合は、`connection_string.Trusted_Connection=yes’ と設定し、 `username` と `password` フィールドを省略します。
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][3]を参照してください。
 
-`service` および `env` タグを使用すると、共通のタグ付けスキームを介してデータベーステレメトリーを他のテレメトリーにリンクすることができます。Datadog 内でこのようなタグが使用される方法については、[統合サービスタグ付け][4]に関するドキュメントをお読みください。
+[Windows 認証][4]を利用する場合は、`connection_string: "Trusted_Connection=yes"` と設定し、`username` と `password` フィールドを省略します。
+
+`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][5]を参照してください。
 
 ### 対応ドライバー
 
 #### Microsoft ADO
 
-推奨する [ADO][5] プロバイダーは、[Microsoft OLE DB Driver][6] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
+推奨する [ADO][6] プロバイダーは、[Microsoft OLE DB Driver][7] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
 ```yaml
 connector: adodbapi
 provider: MSOLEDBSQL
@@ -97,30 +97,31 @@ provider: MSOLEDBSQL
 
 #### ODBC
 
-推奨する ODBC ドライバーは、[Microsoft ODBC Driver][7] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
+推奨する ODBC ドライバーは、[Microsoft ODBC Driver][8] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
 
 ```yaml
 connector: odbc
 driver: '{ODBC Driver 17 for SQL Server}'
 ```
 
-すべての Agent の構成が完了したら、[Datadog Agent を再起動][8]します。
+すべての Agent の構成が完了したら、[Datadog Agent を再起動][9]します。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][11]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][10]のページへ移動して開始します。
+[Agent の status サブコマンドを実行][10]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][11]のページへ移動して開始します。
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[3]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
-[4]: /ja/getting_started/tagging/unified_service_tagging
-[5]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
-[6]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
-[7]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[8]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://app.datadoghq.com/databases
+[3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
+[4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
+[5]: /ja/getting_started/tagging/unified_service_tagging
+[6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
+[7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
+[8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
+[9]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux ホスト" %}}
 SQL Server テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
@@ -150,22 +151,25 @@ instances:
       instance_id: '<INSTANCE_ID>'
 ```
 
-`service` および `env` タグを使用すると、共通のタグ付けスキームを介してデータベーステレメトリーを他のテレメトリーにリンクすることができます。Datadog 内でこのようなタグが使用される方法については、[統合サービスタグ付け][4]に関するドキュメントをお読みください。
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][4]を参照してください。
 
-すべての Agent の構成が完了したら、[Datadog Agent を再起動][5]します。
+`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][5]を参照してください。
+
+すべての Agent の構成が完了したら、[Datadog Agent を再起動][6]します。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][7]のページへ移動して開始します。
+[Agent の status サブコマンドを実行][7]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][8]のページへ移動して開始します。
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[4]: /ja/getting_started/tagging/unified_service_tagging
-[5]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://app.datadoghq.com/databases
+[4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
+[5]: /ja/getting_started/tagging/unified_service_tagging
+[6]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
 Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
@@ -202,17 +206,20 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-`service` および `env` タグを使用すると、共通のタグ付けスキームを介してデータベーステレメトリーを他のテレメトリーにリンクすることができます。Datadog 内でこのようなタグが使用される方法については、[統合サービスタグ付け][3]に関するドキュメントをお読みください。
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][3]を参照してください。
+
+`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][4]を参照してください。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][4]し、**Checks** セクションで `sqlserver` を探します。または、Datadog の[データベース][5]のページへ移動して開始します。
+[Agent の status サブコマンドを実行][5]し、**Checks** セクションで `sqlserver` を探します。または、Datadog の[データベース][6]のページへ移動して開始します。
 
 [1]: /ja/agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[3]: /ja/getting_started/tagging/unified_service_tagging
-[4]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://app.datadoghq.com/databases
+[3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
+[4]: /ja/getting_started/tagging/unified_service_tagging
+[5]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
@@ -304,14 +311,17 @@ spec:
     name: sqlserver
 ```
 
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][4]を参照してください。
+
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、SQL Server チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][5]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ja/agent/guide/secrets-management
+[4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
+[5]: /ja/agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -1,5 +1,4 @@
 ---
-beta: true
 description: Azure 上で管理される MySQL 用のデータベースモニタリングをインストールし、構成します。
 further_reading:
 - link: /integrations/mysql/
@@ -28,7 +27,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 5.7 または 8.0+
 
 サポートされる Azure MySQL のデプロイメントタイプ
-: シングルサーバー、フレキシブルサーバー
+: Azure VM 上の MySQL、シングルサーバー、フレキシブルサーバー
 
 サポート対象の Agent バージョン
 : 7.36.1+
@@ -155,6 +154,8 @@ instances:
       name: '<YOUR_INSTANCE_NAME>'
 ```
 
+`deployment_type` と `name` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][4]を参照してください。
+
 **注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
 
 [Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
@@ -163,6 +164,7 @@ instances:
 [1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -208,12 +210,15 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
 ```
 
+`deployment_type` と `name` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][4]を参照してください。
+
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][2]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][3]でパスワードを環境変数として渡す方法をご確認ください。
 
 
 [1]: /ja/agent/docker/integrations/?tab=docker
 [2]: /ja/agent/guide/secrets-management
 [3]: /ja/agent/faq/template_variables/
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -303,6 +308,8 @@ spec:
     name: mysql
 ```
 
+`deployment_type` と `name` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][5]を参照してください。
+
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、MySQL チェックを開始します。
 
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
@@ -311,6 +318,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: /ja/agent/guide/secrets-management
+[5]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{< /tabs >}}
 

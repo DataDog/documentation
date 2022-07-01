@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /integrations/supervisor
+- /fr/integrations/supervisor
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -13,19 +13,20 @@ assets:
     supervisord_processes: assets/saved_views/supervisord_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - os & system
-  - autodiscovery
-  - log collection
+- os & system
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
 display_name: Supervisord
 draft: false
 git_integration_title: supervisord
 guid: 2b81259b-723e-47be-8612-87e1f64152e9
 integration_id: supervisord
 integration_title: Supervisord
+integration_version: 2.3.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -34,16 +35,20 @@ metric_prefix: supervisord.
 metric_to_check: supervisord.process.count
 name: supervisord
 process_signatures:
-  - python supervisord
-  - supervisord
+- python supervisord
+- supervisord
 public_title: Intégration Datadog/Supervisord
-short_description: 'Surveillez le statut, la disponibilité et le nombre de processus gérés par Supervisor.'
+short_description: Surveillez le statut, la disponibilité et le nombre de processus
+  gérés par Supervisor.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Événement Supervisor][1]
 
 ## Présentation
@@ -64,7 +69,7 @@ L'Agent peut recueillir des données à partir de Supervisor via un serveur HTTP
 
 ##### Serveur HTTP
 
-Ajoutez un bloc comme celui-ci au fichier de configuration principal de Supervisor (par exemple, `/etc/supervisor.conf`) :
+Ajoutez un bloc comme celui-ci au fichier de configuration principal de Supervisor (`/etc/supervisor.conf`) :
 
 ```ini
 [inet_http_server]
@@ -89,7 +94,7 @@ chown=nobody:nogroup
 ;password=pass  # facultatif
 ```
 
-Si Supervisor est exécuté en mode root, assurez-vous que `chmod` ou `chown` est défini de façon à ce que les utilisateurs non root (c'est-à-dire, dd-agent) puissent lire le socket.
+Si Supervisor est exécuté en mode root, assurez-vous que `chmod` ou `chown` est défini de façon à ce que les utilisateurs non root comme `dd-agent` puissent lire le socket.
 
 ---
 
@@ -117,7 +122,7 @@ instances:
   #   socket: unix:///var/run/supervisor.sock
 ```
 
-Utilisez les options `proc_names` et/ou `proc_regex` pour énumérer les processus pour lesquels vous souhaitez que l'Agent recueille des métriques et crée des checks de service. Si aucune de ces options n'est spécifiée, l'Agent suit _tous_ les processus enfants de Supervisor. Si les deux options sont spécifiées, l'Agent suit les processus présents dans les deux listes (en d'autres termes, les deux options ne sont pas mutuellement exclusives).
+Utilisez les options `proc_names` et/ou `proc_regex` pour énumérer les processus pour lesquels vous souhaitez que l'Agent recueille des métriques et crée des checks de service. Si aucune de ces options n'est spécifiée, l'Agent suit _tous_ les processus enfants de Supervisor. Si les deux options sont spécifiées, l'Agent suit les processus présents dans les deux listes. En d'autres termes, les deux options ne sont pas mutuellement exclusives.
 
 Consultez [un exemple de configuration du check][2] pour obtenir les descriptions complètes des autres options du check.
 
@@ -145,6 +150,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 #### Collecte de logs
 
+
+
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
    ```yaml
@@ -167,7 +174,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `supervisord` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][5] et cherchez `supervisord` dans la section Checks.
 
 ## Données collectées
 
@@ -180,25 +187,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check Supervisor n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "supervisord" >}}
 
-**supervisord.can_connect** :<br>
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter au serveur HTTP ou au socket UNIX que vous avez configuré. Si ce n'est pas le cas, renvoie `OK`.
-
-**supervisord.process.status** :<br>
-L'Agent envoie ce check de service pour tous les processus enfants de supervisord (si aucune des options `proc_names` ou `proc_regex` n'est configurée) OU un ensemble de processus enfants (ceux qui sont configurés dans `proc_names` et/ou `proc_regex`), en appliquant le tag `supervisord_process:<nom_processus>` à chaque check de service.
-
-Ce tableau montre le `supervisord.process.status` renvoyé pour chaque statut de supervisord :
-
-| supervisord status | supervisord.process.status |
-| ------------------ | -------------------------- |
-| STOPPED            | CRITICAL                   |
-| STARTING           | UNKNOWN                    |
-| RUNNING            | OK                         |
-| BACKOFF            | CRITICAL                   |
-| STOPPING           | CRITICAL                   |
-| EXITED             | CRITICAL                   |
-| FATAL              | CRITICAL                   |
-| UNKNOWN            | UNKNOWN                    |
 
 ## Dépannage
 

@@ -11,19 +11,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - caching
-  - data store
-  - log collection
+- caching
+- data store
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ignite/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/ignite/README.md
 display_name: Ignite
 draft: false
 git_integration_title: ignite
 guid: fd5a21d5-ddfe-4d04-855f-28492b4d270e
 integration_id: ignite
 integration_title: ignite
+integration_version: 2.2.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -35,10 +36,13 @@ public_title: Intégration Datadog/Ignite
 short_description: Recueillez des métriques à partir de votre serveur Ignite.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Ignite][1].
@@ -68,14 +72,14 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
    Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué sur la page d'informations.
    Choisissez les métriques qui vous intéressent en modifiant la configuration ci-dessous.
-   Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][2] afin d'obtenir des instructions détaillées.
+   Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][2] afin d'obtenir des informations supplémentaires.
    Si vous devez surveiller davantage de métriques, contactez [l'assistance Datadog][3].
 
 2. [Redémarrez l'Agent][4].
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -118,7 +122,7 @@ Pour recueillir des métriques avec l'intégration Datadog/Ignite, consultez le 
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][3].
 
@@ -142,14 +146,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "ignite" >}}
 
 
-### Checks de service
-
-**ignite.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Ignite qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
-
 ### Événements
 
 L'intégration Ignite n'inclut aucun événement.
+
+### Checks de service
+{{< get-service-checks-from-git "ignite" >}}
+
 
 ## Dépannage
 
@@ -158,7 +161,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 
 [1]: https://ignite.apache.org/
-[2]: https://docs.datadoghq.com/fr/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://apacheignite.readme.io/docs/logging#section-log4j
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example
