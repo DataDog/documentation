@@ -371,7 +371,7 @@ backend datadog-network-devices-snmp-traps
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 snmp-traps-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
