@@ -2,6 +2,9 @@
 title: Frustration Signals
 kind: documentation
 further_reading:
+- link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
+  tag: 'Blog'
+  text: 'Detect user pain points with Datadog Frustration Signals'
 - link: '/real_user_monitoring/dashboards/frustration_signals_dashboard/'
   tag: 'Documentation'
   text: 'Frustration Signals Dashboard'
