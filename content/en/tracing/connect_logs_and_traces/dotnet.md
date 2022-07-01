@@ -314,14 +314,14 @@ using(_logger.BeginScope(new Dictionary<string, object>
 {{% /tab %}}
 {{< /tabs >}}
 
-You can read more about using BeginScope to create structured log messages using the following log providers:
+You can read more about using BeginScope to create structured log messages for the following log providers:
 - Serilog: [The semantics of ILogger.BeginScope()][13]
 - NLog: [NLog properties with Microsoft Extension Logging][14]
 - log4net: [Using BeginScope][15]
 
 ## Configure log collection
 
-Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][12] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If the `source` is set to a value other than `csharp`, you may need to add a [trace remapper](/logs/log_configuration/processors/?tab=ui#trace-remapper) to the appropriate log processing pipeline for the correlation to work correctly.
+Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][12] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If the `source` is set to a value other than `csharp`, you may need to add a [trace remapper][8] to the appropriate log processing pipeline for the correlation to work correctly.
 
 <div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
 
