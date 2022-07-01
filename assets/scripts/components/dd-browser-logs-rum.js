@@ -25,7 +25,6 @@ if (window.DD_RUM) {
             enableExperimentalFeatures: ["frustration-signals"],
             sampleRate: 50,
             premiumSampleRate: 50,
-            trackSessionAcrossSubdomains: true, 
             allowedTracingOrigins: [window.location.origin]
         });
         window.DD_RUM.startSessionReplayRecording();
@@ -41,7 +40,6 @@ if (window.DD_LOGS) {
         forwardErrorsToLogs: true,
         env,
         service: 'docs',
-        trackSessionAcrossSubdomains: true,
         version: CI_COMMIT_SHORT_SHA
     });
     // global context

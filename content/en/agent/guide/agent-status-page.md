@@ -92,6 +92,7 @@ This section displays a list of running check instances, for example:
       Metric Samples: Last Run: 6, Total: 24
       Events: Last Run: 0, Total: 0
       Service Checks: Last Run: 0, Total: 0
+      Histogram Buckets: Last Run: 12, Total: 36
       Average Execution Time : 6ms
 ```
 
@@ -104,6 +105,7 @@ Terms and descriptions:
 | Metric Samples         | The number of fetched metrics.                                   |
 | Events                 | The number of triggered events.                                  |
 | Service Checks         | The number of service checks reported.                           |
+| Histogram Buckets      | The number of histogram buckets sent.                            |
 | Average Execution Time | The average time taken to run the instance.                      |
 | Last Run               | The number during the last check run.                            |
 | Total                  | The total number since the Agent's most recent start or restart. |

@@ -8,7 +8,7 @@ aliases:
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
     tag: "Release Notes"
-    text: "Check out the latest Datadog Synthetics Monitoring releases! (App login required)."
+    text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
   - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
     tag: "Blog"
     text: "Introduction to Datadog Synthetic Monitoring"
@@ -56,17 +56,23 @@ Use [Synthetic private locations][15] to monitor internal APIs and websites or c
 
 Leverage your Synthetic tests as [canary deployments][16] or run them directly within your [CI pipelines][16] to start shipping without fear that faulty code may impact your customers' experience.
 
- {{< img src="synthetics/ci.png" alt="CI tests" style="width:100%;">}}
+{{< img src="synthetics/ci.png" alt="CI tests" style="width:100%;">}}
 
 ## Connect data and traces
 
-Use the [out of the box integration between Synthetic tests and APM traces][17] to find the root cause of failures across frontend, network, and backend requests.
+Use the [integration between Synthetic tests and APM traces][17] to find the root cause of failures across frontend, network, and backend requests.
 
 {{< img src="synthetics/synthetics_traces.mp4" alt="Synthetic Monitoring" video=true style="width:100%;">}}
 
+## Access out-of-the-box dashboards
+
+Analyze performance information about your API tests, multistep API tests, browser tests, and private locations, as well as Datadog events, with [out-of-the-box Synthetics dashboards][18]. 
+
+{{< img src="synthetics/test_summary_dashboard.png" alt="Test Summary Dashboard" style="width:100%;">}}
+
 ## Ready to start?
 
-See [Getting Started with Synthetic Monitoring][18] for instructions on creating your first Synthetic test and monitoring your web applications. Then, explore [Getting Started with Private Locations][19] for instructions on creating your private location and running Synthetic tests with your private location.
+See [Getting Started with Synthetic Monitoring][19] for instructions on creating your first Synthetic test and monitoring your web applications. Then, explore [Getting Started with Private Locations][20] for instructions on creating your private location and running Synthetic tests with your private location.
 
 ## Further Reading
 
@@ -90,5 +96,6 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [15]: /synthetics/private_locations
 [16]: /synthetics/cicd_testing
 [17]: /synthetics/apm/
-[18]: /getting_started/synthetics
-[19]: /getting_started/synthetics/private_location
+[18]: /synthetics/dashboards/
+[19]: /getting_started/synthetics
+[20]: /getting_started/synthetics/private_location

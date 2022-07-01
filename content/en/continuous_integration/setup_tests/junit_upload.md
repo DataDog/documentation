@@ -206,6 +206,10 @@ You can specify these special tags using the `--tags` parameter when calling `da
 
 All of these tags are optional, and only the ones you specify will be used to differentiate between environment configurations.
 
+`test.bundle`
+: Used to execute groups of test suites separately.<br/>
+**Examples**: `ApplicationUITests`, `ModelTests`
+
 `os.platform`
 : Name of the operating system.<br/>
 **Examples**: `windows`, `linux`, `darwin`
@@ -244,10 +248,6 @@ For mobile apps (Swift, Android):
 : The name of the device being tested.<br/>
 **Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
-<!-- TODO: uncomment once added in backend
-`test.bundle`
-: Used to execute groups of test suites separately.<br/>
-**Examples**: `ApplicationUITests`, `ModelTests` -->
 
 ## Providing metadata through `<property>` elements
 

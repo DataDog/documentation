@@ -11,19 +11,19 @@ assets:
     tokumx_processes: assets/saved_views/tokumx_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - autodiscovery
+- data store
+- autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
+- https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
 display_name: TokuMX
 draft: false
 git_integration_title: tokumx
 guid: 7785939b-bfb6-4d3e-acc2-94c1f5fb33e7
 integration_id: tokumx
 integration_title: TokuMX
-integration_version: 3.1.1
+integration_version: 3.2.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -33,13 +33,17 @@ metric_to_check: tokumx.uptime
 name: tokumx
 process_signatures: []
 public_title: Intégration Datadog/TokuMX
-short_description: Surveillez des métriques sur le nombre d'opérations effectuées, le délai de réplication, la taille d'une table de cache, et plus encore.
+short_description: Surveillez des métriques sur le nombre d'opérations effectuées,
+  le délai de réplication, la taille d'une table de cache, et plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check recueille des métriques TokuMX comme :
