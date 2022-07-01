@@ -82,7 +82,8 @@ The `ddtrace` library includes support for the following data stores:
 | [MySQL][29] [mysql-connector][32]  | >= 2.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
 | [Postgres][33] [aiopg][34]         | >= 0.12.0, <=&nbsp;0.16        | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
 | [Postgres][33] [psycopg][35]       | >= 2.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
-| [PynamoDB][36]                     | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pynamodb                               |
+| [PynamoDB][36]                     | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pynamodb
+| [PyMySQL][58]                      | >= 0.7, <=&nbsp;0.9            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html?highlight=pymysql#pymysql|
 | [PyODBC][37]                       | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyodbc                               |
 | [Redis][38]                        | >= 2.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
 | [Redis][38] [redis-py-cluster][39] | >= 1.3.5          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
@@ -173,3 +174,5 @@ The `ddtrace` library includes support for the following libraries:
 [55]: https://www.makotemplates.org
 [56]: https://requests.readthedocs.io/en/master/
 [57]: https://urllib3.readthedocs.io/en/stable/
+[58]: https://pypi.org/project/PyMySQL/
+
