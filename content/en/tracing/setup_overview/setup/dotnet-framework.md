@@ -50,9 +50,17 @@ further_reading:
 ### Supported .NET Framework runtimes
 The .NET Tracer supports instrumentation on .NET Framework 4.6.1 and above.
 
-For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
+For a full list of supported libraries and processor architectures (including older versions of .NET Framework), see [Compatibility Requirements][1].
 
 ## Installation and getting started
+
+<div class="alert alert-info">
+  <div class="alert-info">Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/docs">Quickstart instructions</a> in the Datadog app for the best experience, including:<br/>
+    <div>- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
+    <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags.</div>
+    <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div>
+  </div>
+</div>
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example: APM). To ensure maximum visibility, run only one APM solution in your application environment.
@@ -163,7 +171,7 @@ For information about the different methods for setting environment variables, s
 
 ### Configure the Datadog Agent for APM
 
-[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`.
+[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic on `http://localhost:8126`.
 
 For containerized, serverless, and cloud environments:
 
@@ -178,7 +186,7 @@ For containerized, serverless, and cloud environments:
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on how to set these variables, see [Configuration](#configuration).
+3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on how to configure these settings, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
@@ -332,35 +340,45 @@ The following configuration variables are available for both automatic and custo
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. <br>
-**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.<br>
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set or `http://localhost:8126`.
 
 `DD_AGENT_HOST`
-: Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. <br>
+: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. <br>
+: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `8126`
-
-`DD_LOGS_INJECTION`
-: **TracerSettings property**: `LogsInjectionEnabled` <br>
-Enables or disables automatic injection of correlation identifiers into application logs.
 
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
-Enables ingestion rate control.
+**Default**: Defaults to the rates returned by the Datadog Agent<br>
+Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
+For more information, see [Ingestion Mechanisms][6].
 
-`DD_MAX_TRACES_PER_SECOND`
+`DD_TRACE_SAMPLING_RULES`
+: **TracerSettings property**: `CustomSamplingRules`<br>
+**Default**: `null`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+For more information, see [Ingestion Mechanisms][6].<br>
+**Examples:**<br>
+  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
+
+`DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
-The number of traces allowed to be submitted per second.
+The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent. <br>
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans.
+**Example**: `layer:api, team:intake` <br>
+Note that the delimiter is a comma and a space: `, `.
 
 `DD_TRACE_DEBUG`
-Enables or disables debug logging. Valid values are: `true` or `false`.<br>
+: Enables or disables debug logging. Valid values are `true` or `false`.<br>
 **Default**: `false`
 
 `DD_TRACE_HEADER_TAGS`
@@ -372,9 +390,8 @@ Added in version 1.18.3. Response header support and entries without tag names a
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api, team:intake` <br>
+**Example**: `layer:api,team:intake` <br>
 Added in version 1.17.0. <br>
-Note that the delimiter is a comma and a whitespace: `, `.
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
@@ -405,10 +422,34 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 : Sets status code ranges that will cause HTTP server spans to be marked as errors. <br>
 **Default**: `500-599`
 
+`DD_LOGS_INJECTION`
+: **TracerSettings property**: `LogsInjectionEnabled` <br>
+Enables or disables automatic injection of correlation identifiers into application logs. <br>
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
+
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
 **Default**: `false`<br>
 Added in version 1.23.0.
+
+`DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
+: Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
+This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
+**Default**: `false`
+Added in version 2.5.2
+
+`DD_TRACE_METHODS`
+: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+**Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
+**Note:** The wildcard method support (`[*]`) selects all methods in a type except constructors, property getters and setters, `Equals`, `Finalize`, `GetHashCode`, and `ToString`. <br>
+Added in version 2.6.0.
+Wildcard support `[*]` added in version 2.7.0.
+
+`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
+: Alters the behavior of the Kafka consumer span<br>
+**Default**: `true`<br>
+When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once.
 
 #### Automatic instrumentation integration configuration
 
@@ -416,11 +457,11 @@ The following table lists configuration variables that are available **only** wh
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings property**: `DisabledIntegrationNames` <br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][5] section.
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][7] section.
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][5] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][7] section.<br>
 **Default**: `true`
 
 #### Experimental features
@@ -439,6 +480,28 @@ The following configuration variables are for features that are available for us
 `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
 : Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>
 **Default**: `true`
+
+### Headers extraction and injection
+
+The Datadog APM Tracer supports [B3][9] and [W3C (TraceParent)][10] headers extraction and injection for distributed tracing.
+
+You can configure injection and extraction styles for distributed headers.
+
+The .NET Tracer supports the following styles:
+
+- Datadog: `Datadog`
+- B3: `B3`
+- W3C: `W3C`
+- B3 Single Header: `B3SingleHeader` or `B3 single header`
+
+You can use the following environment variables to configure injection and extraction styles:
+
+- `DD_PROPAGATION_STYLE_INJECT=Datadog, B3, W3C`
+- `DD_PROPAGATION_STYLE_EXTRACT=Datadog, B3, W3C`
+
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `Datadog` injection style is enabled.
+
+If multiple extraction styles are enabled, the extraction attempt is completed in order of configured styles, and uses the first successful extracted value.
 
 ## Custom instrumentation
 
@@ -471,7 +534,7 @@ To use custom instrumentation in your .NET application:
 
 {{< /tabs >}}
 
-For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][6].
+For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
 
 ## Configuring process environment variables
 
@@ -528,5 +591,9 @@ dotnet.exe example.dll
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
-[6]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
+[6]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#head-based-sampling
+[7]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
+[8]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[9]: https://github.com/openzipkin/b3-propagation
+[10]: https://www.w3.org/TR/trace-context/#traceparent-header

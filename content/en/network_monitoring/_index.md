@@ -4,6 +4,9 @@ kind: documentation
 disable_sidebar: true
 description: Explore Datadog Network Monitoring Products
 further_reading:
+  - link: "https://app.datadoghq.com/release-notes?category=Network%20Monitoring"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Network Monitoring releases! (App login required)."
   - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
     tag: "Blog"
     text: "Introducing Datadog Network Performance Monitoring"

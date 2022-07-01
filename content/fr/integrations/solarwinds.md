@@ -62,13 +62,21 @@ Pour créer une action de déclenchement dans SolarWinds :
 ### Body to post de l'action de déclenchement
 ``` 
 {
+    "acknowledged": "${N=Alerting;M=Acknowledged}",
+    "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
+    "alert_description": "${N=Alerting;M=AlertDescription}",
+    "alert_details_url": "${N=Alerting;M=AlertDetailsUrl}",
+    "alert_id": "${N=Alerting;M=AlertDefID}",
     "alert_message": "${N=Alerting;M=AlertMessage}",
     "alert_name": "${N=Alerting;M=AlertName}",
     "alert_severity": "${N=Alerting;M=Severity}",
-    "alert_details_url": "${N=Alerting;M=AlertDetailsUrl}",
-    "alert_id": "${N=Alerting;M=AlertDefID}",
     "application": "${N=Generic;M=Application}",
-    "alert_description": "${N=Alerting;M=AlertDescription}",
+    "device_type": "${N=SwisEntity;M=Router.Nodes.CustomProperties.Device_Type}",
+    "host": "${N=SWQL;M=SELECT TOP 1 RelatedNodeCaption FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
+    "host_url": "${N=SWQL;M=SELECT TOP 1 RelatedNodeDetailsUrl FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
+    "ip": "${N=SwisEntity;M=IP_Address}",
+    "location": "${N=SwisEntity;M=Router.Nodes.CustomProperties.City}",
+    "object": "${N=SWQL;M=SELECT TOP 1 EntityCaption FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
     "object_type": "${N=Alerting;M=ObjectType}",
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}"
 }
@@ -77,16 +85,24 @@ Pour créer une action de déclenchement dans SolarWinds :
 ### Body to post de l'action de réinitialisation
 ``` 
 {
+    "acknowledged": "${N=Alerting;M=Acknowledged}",
+    "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
+    "alert_description": "${N=Alerting;M=AlertDescription}",
+    "alert_details_url": "${N=Alerting;M=AlertDetailsUrl}",
+    "alert_id": "${N=Alerting;M=AlertDefID}",
     "alert_message": "${N=Alerting;M=AlertMessage}",
     "alert_name": "${N=Alerting;M=AlertName}",
     "alert_severity": "${N=Alerting;M=Severity}",
-    "alert_details_url": "${N=Alerting;M=AlertDetailsUrl}",
-    "alert_id": "${N=Alerting;M=AlertDefID}",
     "application": "${N=Generic;M=Application}",
-    "alert_description": "${N=Alerting;M=AlertDescription}",
+    "device_type": "${N=SwisEntity;M=Router.Nodes.CustomProperties.Device_Type}",
+    "host": "${N=SWQL;M=SELECT TOP 1 RelatedNodeCaption FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
+    "host_url": "${N=SWQL;M=SELECT TOP 1 RelatedNodeDetailsUrl FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
+    "ip": "${N=SwisEntity;M=IP_Address}",
+    "location": "${N=SwisEntity;M=Router.Nodes.CustomProperties.City}",
+    "object": "${N=SWQL;M=SELECT TOP 1 EntityCaption FROM Orion.AlertObjects WHERE AlertObjectID = ${N=Alerting;M=AlertObjectID} }",
     "object_type": "${N=Alerting;M=ObjectType}",
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}",
-    “reset”: “true”
+    "reset": "true"
 }
 ``` 
 

@@ -2,6 +2,9 @@
 title: .NET Tests
 kind: documentation
 further_reading:
+    - link: "/continuous_integration/setup_tests/containers/"
+      tag: "Documentation"
+      text: "Forwarding Environment Variables for Tests in Containers"
     - link: "/continuous_integration/explore_tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
@@ -17,33 +20,103 @@ further_reading:
 ## Compatibility
 
 Supported .NET versions:
-* .NET Core >= 2.1 and >= 3.0
-* .NET >= 5.0
+* .NET Framework 4.6.1 and above
+* .NET Core 2.1, 3.1, .NET 5, and .NET 6
 
 Supported test frameworks:
-* xUnit >= 2.2
-* NUnit >= 3.0
-* MsTest V2 >= 14
+* xUnit 2.2 and above
+* NUnit 3.0 and above
+* MsTestV2 14 and above
 
-## Prerequisites
+## Configuring reporting method
 
-[Install the Datadog Agent to collect tests data][1].
+To report test results to Datadog, you need to configure the Datadog .NET library:
 
-## Installing the .NET tracer
+{{< tabs >}}
 
-To install or update the `dd-trace` command globally on the machine, run:
+{{% tab "On-Premises CI provider (Datadog Agent)" %}}
 
-{{< code-block lang="bash" >}}
-dotnet tool update -g dd-trace
-{{< /code-block >}}
+If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
+
+If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, as using `localhost` inside the build references the container itself and not the underlying worker node where the Datadog Agent is running.
+
+If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
+
+
+[1]: /agent/
+[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
+{{% /tab %}}
+
+{{% tab "Cloud CI provider (Agentless)" %}}
+
+<div class="alert alert-info">Agentless mode is available in Datadog .NET library versions >= 2.5.1</div>
+
+If you are using a cloud CI provider without access to the underlying worker nodes, such as GitHub Actions or CircleCI, configure the library to use the Agentless mode. For this, set the following environment variables:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
+: Enables or disables Agentless mode.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][1] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+Additionally, configure which [Datadog site][2] to which you want to send data.
+
+`DD_SITE` (Required)
+: The [Datadog site][2] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site/
+{{% /tab %}}
+
+{{< /tabs >}}
+
+## Installing the .NET tracer CLI
+
+Install or update the `dd-trace` command using one of the following ways:
+
+- Using the .NET SDK by running the command:
+   ```
+   dotnet tool update -g dd-trace
+   ```
+- By downloading the appropriate version:
+    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][1]
+    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][2]
+    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][3]
+
+- Or by downloading [from the github release page][4].
 
 ## Instrumenting tests
 
-To instrument your test suite, prefix your test command with `dd-trace`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
+To instrument your test suite, prefix your test command with `dd-trace ci run`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
+
+{{< tabs >}}
+
+{{% tab "dotnet test" %}}
+
+By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>
 
 {{< code-block lang="bash" >}}
-dd-trace --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "VSTest.Console" %}}
+
+By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 All tests are automatically instrumented.
 
@@ -52,7 +125,7 @@ All tests are automatically instrumented.
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
 
 {{< code-block lang="bash" >}}
-dd-trace --help
+dd-trace ci run --help
 {{< /code-block >}}
 
 The following list shows the default values for key configuration settings:
@@ -74,7 +147,7 @@ The following list shows the default values for key configuration settings:
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][2] options can also be used.
+All other [Datadog Tracer configuration][5] options can also be used.
 
 ### Collecting Git metadata
 
@@ -130,23 +203,26 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Your custom instrumentation setup depends on the `dd-trace` version. To use the custom instrumentation, you must keep the package versions for `dd-trace` and `Datadog.Trace` NuGet packages in sync.
+  <strong>Note:</strong> Your custom instrumentation setup depends on the <code>dd-trace</code> version. To use the custom instrumentation, you must keep the package versions for <code>dd-trace</code> and <code>Datadog.Trace</code> NuGet packages in sync.
 </div>
 
 To use the custom instrumentation in your .NET application:
 
 1. Execute `dd-trace --version` to get the version of the tool.
-1. Add the `Datadog.Trace` [NuGet package][3] with the same version to your application.
-2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+2. Add the `Datadog.Trace` [NuGet package][6] with the same version to your application.
+3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][4].
+For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][7].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /continuous_integration/setup_tests/agent/
-[2]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
-[3]: https://www.nuget.org/packages/Datadog.Trace
-[4]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[1]: https://dtdg.co/dd-trace-dotnet-win-x64
+[2]: https://dtdg.co/dd-trace-dotnet-linux-x64
+[3]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases
+[5]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
+[6]: https://www.nuget.org/packages/Datadog.Trace
+[7]: /tracing/setup_overview/custom_instrumentation/dotnet/

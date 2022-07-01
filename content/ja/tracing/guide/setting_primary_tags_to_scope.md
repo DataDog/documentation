@@ -1,22 +1,23 @@
 ---
-title: プライマリタグをスコープに設定
-kind: documentation
 aliases:
-  - /ja/tracing/advanced/setting_primary_tags_to_scope/
+- /ja/tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
-  - link: /tracing/connect_logs_and_traces/
-    tags: トレースの加工
-    text: ログとトレースの接続
-  - link: /tracing/manual_instrumentation/
-    tags: トレースの加工
-    text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
-  - link: /tracing/opentracing/
-    tags: トレースの加工
-    text: アプリケーション全体に Opentracing を実装します。
-  - link: /tracing/visualization/
-    tag: APM の UI を利用する
-    text: サービス、リソース、トレースの詳細
+- link: /tracing/connect_logs_and_traces/
+  tags: トレースの加工
+  text: ログとトレースの接続
+- link: /tracing/manual_instrumentation/
+  tags: トレースの加工
+  text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
+- link: /tracing/opentracing/
+  tags: トレースの加工
+  text: アプリケーション全体に Opentracing を実装します。
+- link: /tracing/visualization/
+  tag: APM の UI を利用する
+  text: サービス、リソース、トレースの詳細
+kind: documentation
+title: プライマリタグをスコープに設定
 ---
+
 ## 定義
 
 Datadog APM アプリケーション全体をスコープに設定するために使用できるディメンションが複数あります。これには、集計統計（リクエスト/秒、レイテンシー、エラー率、Apdex スコアなど）および表示可能な[トレース][1]が含まれます。こうしたディメンションは、アプリケーションの動作をさらに詳細に把握できるプライマリタグを介して設定されます。プライマリタグのユースケースには、環境、アベイラビリティゾーン、データセンターなどがあります。
@@ -86,6 +87,9 @@ Datadog は、トレーサーに `env` を設定することをお勧めしま�
 ### プライマリタグごとのデータ
 
 プライマリタグは、APM ページの上部に表示されます。これらのセレクターを使用して、現在のページに表示されるデータを分類します。プライマリタグに依存しないすべてのデータを表示するには、ドロップダウンから `<タグ名>:*` を選択します。
+
+{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="2 番目のプライマリタグを持つスコープを選択するためのオプションを示すドロップダウンメニュー"  style="width:90%;">}}
+
 
 ## その他の参考資料
 

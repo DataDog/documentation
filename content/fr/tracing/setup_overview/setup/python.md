@@ -131,8 +131,8 @@ Lorsque vous utilisez **ddtrace-run**, les [variables d'environnement][4] suivan
 : **Valeur par défaut** : `false`<br>
 Active les logs de debugging dans le traceur.
 
-`DATADOG_PATCH_MODULES`
-: Remplace les modules patchés pour l'exécution de cette application. Format à utiliser : `DATADOG_PATCH_MODULES=module:patch,module:patch...`
+`DD_PATCH_MODULES`
+: Remplace les modules patchés pour l'exécution de cette application. Format à utiliser : `DD_PATCH_MODULES=module:patch,module:patch...`
 
 Nous vous conseillons d'utiliser `DD_ENV`, `DD_SERVICE` et `DD_VERSION` pour définir les paramètres `env`, `service` et `version` pour vos services. Consultez la documentation sur le [tagging de service unifié][5] pour en savoir plus sur la configuration de ces variables d'environnement.
 

@@ -17,7 +17,7 @@ The function takes two parameters, `<AGGREGATOR>` and optionally `<INTERVAL>`: `
 
 | Parameter  | Description                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------|
-| `<AGGREGATOR>` | Can be `sum`, `min`, `max`, `count`, or `avg` and defines how data points are aggregated within a given time interval. |
+| `<AGGREGATOR>` | Can be `avg`, `sum`, `min`, `max`, or `count`, and defines how data points are aggregated within a given time interval. [Enforced default](#rollup-interval-enforced-vs-custom): `avg`. |
 | `<INTERVAL>`   | Time (in seconds) of the interval between two data points displayed. Optional.                                            |
 
 You can use them individually or together, for instance `.rollup(sum,120)`. The following bar graph displays a week's worth of CPU usage for a host **without** using the `.rollup()` function:
@@ -57,7 +57,7 @@ A custom `.rollup()` function can be used to enforce the type of time aggregatio
 
   {{< img src="dashboards/functions/rollup/as_count.png" alt="as_count" style="width:50%;">}}
 
-For more details about how to use `.as_count()` and `.as_rate()` see the [blog post][3] or learn more about the effects of those functions with the documentation on [in-application modifiers][4].
+For more details about how to use `.as_count()` and `.as_rate()` see the [Visualize StatsD metrics][3] blog post, or learn more about the effects of those functions with the documentation on [in-application modifiers][4].
 
 ## Rollups in monitors
 
@@ -81,5 +81,5 @@ Rollups should usually be avoided in [monitor][5] queries, because of the possib
 [1]: /dashboards/functions/#proceed-to-time-aggregation
 [2]: /metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[4]: /metrics/type_modifiers/
+[4]: /metrics/custom_metrics/type_modifiers/
 [5]: /monitors/create/types/metric/

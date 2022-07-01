@@ -185,7 +185,7 @@ You may wish to keep the non-standard _aliased_ version of the facet if you are 
 
 ### Out-of-the-box facets
 
-Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
+Most common facets such as `Host` and `Service` come out-of-the-box, so you can start troubleshooting right away once your logs are flowing into log indexes.
 
 Facets on [Reserved Attributes][25] and most [Standard Attributes][26] are available by default.
 
@@ -249,6 +249,17 @@ To alias a facet towards a standard one, select the `Alias to...` action item in
 This is the best option if you onboard logs flowing from new sources. Rather than creating a facet for some field on those logs, and right after deprecating this facet by aliasing it to a standard facet, alias the field directly to an existing facet:
 
 {{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Alias facet from attribute" style="width:30%;">}}
+
+## Delete a facet
+
+<div class="alert alert-danger">Deleting a facet that is being used in indexes, monitors, dashboards, restriction queries, or by other teams can cause configurations to break.</div>
+
+To delete a facet, follow these steps:
+
+- Click **Showing xx of xx** at the top of the facet panel.
+- Search for your facet.
+- Click the pencil icon for your facet.
+- Click **Delete**.
 
 ## Further Reading
 

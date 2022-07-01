@@ -1,26 +1,27 @@
 ---
-title: RUM データとコンテキストの変更
-kind: documentation
 aliases:
-  - /ja/real_user_monitoring/installation/advanced_configuration/
-  - /ja/real_user_monitoring/browser/advanced_configuration/
+- /ja/real_user_monitoring/installation/advanced_configuration/
+- /ja/real_user_monitoring/browser/advanced_configuration/
 further_reading:
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-    tag: ブログ
-    text: Real User Monitoring
-  - link: /real_user_monitoring/browser/data_collected/
-    tag: ドキュメント
-    text: 収集された RUM ブラウザデータ
-  - link: /real_user_monitoring/explorer/
-    tag: ドキュメント
-    text: Datadog でビューを検索する
-  - link: /real_user_monitoring/explorer/analytics/
-    tag: ドキュメント
-    text: イベントに関する分析論を組み立てる
-  - link: /logs/log_configuration/attributes_naming_convention
-    tag: ドキュメント
-    text: Datadog 標準属性
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: Real User Monitoring
+- link: /real_user_monitoring/browser/data_collected/
+  tag: ドキュメント
+  text: 収集された RUM ブラウザデータ
+- link: /real_user_monitoring/explorer/
+  tag: ドキュメント
+  text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer/visualize/
+  tag: ドキュメント
+  text: イベントへの視覚化の適用
+- link: /logs/log_configuration/attributes_naming_convention
+  tag: ドキュメント
+  text: Datadog 標準属性
+kind: documentation
+title: RUM データとコンテキストの変更
 ---
+
 RUM によって[収集されたデータ][1]を変更して、次のニーズをサポートするには、さまざまな方法があります。
 
 - 個人を特定できる情報などの機密データを保護します。
@@ -94,17 +95,19 @@ window.DD_RUM && window.DD_RUM.startView('checkout')
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: React、Angular、Vue、またはその他のフロントエンドフレームワークを使用している場合、Datadog はフレームワークルーターレベルで `startView` ロジックを実装することをお勧めします。
+React、Angular、Vue、またはその他のフロントエンドフレームワークを使用している場合、Datadog はフレームワークルーターレベルで `startView` ロジックを実装することをお勧めします。
 
 ## RUM データを強化および制御する
 
-RUM SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。RUM イベントをインターセプトすると、次のことが可能になります。
+RUM ブラウザ SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM ブラウザ SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。
+
+RUM イベントをインターセプトすると、次のことが可能になります。
 
 - 追加のコンテキスト属性で RUM イベントを強化する
 - RUM イベントを変更して、コンテンツを変更したり、機密性の高いシーケンスを編集したりします ([編集可能なプロパティのリスト](#modify-the-content-of-a-rum-event)を参照してください)
 - 選択した RUM イベントを破棄する
 
-[バージョン 2.13.0][4] 以降、`beforeSend` は 2 つの引数を取ります。RUM SDK によって生成された `event` と、RUM イベントの作成をトリガーした `context` です。
+[バージョン 2.13.0][4] 以降、`beforeSend` は 2 つの引数を取ります。RUM ブラウザ SDK によって生成された `event` と、RUM イベントの作成をトリガーした `context` です。
 
 ```javascript
 function beforeSend(event, context)
@@ -179,13 +182,16 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: RUM SDK は以下を無視します。
-- `event.context` の外に追加された属性。
-- RUM ビューイベントコンテキストに加えられた変更。
+ユーザーが複数のチームに所属している場合は、グローバルコンテキスト API を呼び出す際に、Key-Value ペアを追加してください。
+
+RUM ブラウザ SDK は以下を無視します。
+
+- `event.context` の外に追加された属性
+- RUM ビューイベントコンテキストに加えられた変更
 
 ### RUM イベントのコンテンツを変更
 
-たとえば、Web アプリケーションの URL からメールアドレスを編集します。
+たとえば、Web アプリケーションの URL からメールアドレスを編集するには
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -248,7 +254,7 @@ window.DD_RUM &&
 |   `resource.url`        |   文字列  |   リソースの URL。                                                                                 |
 |   `context`        |   オブジェクト  |   [グローバルコンテキスト API](#global-context) を介して、またはイベントを手動で生成するときに追加される属性 (例: `addError` および `addAction`)。RUM ビューイベント `context` は読み取り専用です。                                                                                 |
 
-**注**: RUM SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。すべてのイベントプロパティについては、[Browser SDK リポジトリ][14]を参照してください。
+RUM ブラウザ SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。イベントプロパティの詳細については、[RUM ブラウザ SDK GitHub リポジトリ][14]を参照してください。
 
 ### RUM イベントを破棄
 
@@ -310,7 +316,7 @@ window.DD_RUM &&
 
 ## ユーザーセッションを特定する
 
-RUM セッションにユーザー情報を追加すると、次のことが簡単になります。
+RUM セッションにユーザー情報を追加すると、次の役に立ちます。
 * 特定のユーザーのジャーニーをたどる
 * エラーの影響を最も受けているユーザーを把握する
 * 最も重要なユーザーのパフォーマンスを監視する
@@ -325,7 +331,7 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 | `usr.name`  | 文字列 | RUM UI にデフォルトで表示されるユーザーフレンドリーな名前。                                                  |
 | `usr.email` | 文字列 | ユーザー名が存在しない場合に RUM UI に表示されるユーザーのメール。Gravatar をフェッチするためにも使用されます。 |
 
-**注**: 推奨される属性に加えてさらに属性を追加することで、フィルタリング機能を向上できます。たとえば、ユーザープランに関する情報や、所属するユーザーグループなどを追加します。
+推奨される属性に加えてさらに属性を追加することで、フィルタリング機能を向上できます。たとえば、ユーザープランに関する情報や、所属するユーザーグループなどを追加します。
 
 ユーザーセッションを識別するには、`setUser` API を使用します。
 
@@ -399,7 +405,9 @@ window.DD_RUM && window.DD_RUM.removeUser()
 
 ## サンプリング
 
-デフォルトでは、収集セッション数にサンプリングは適用されていません。収集セッション数に相対サンプリング (% 表示) を適用するには、RUM を初期化する際に `sampleRate` パラメーターを使用します。下記の例では、RUM アプリケーションの全セッションの 90% のみを収集します。
+デフォルトでは、収集セッション数にサンプリングは適用されていません。収集セッション数に相対サンプリング (% 表示) を適用するには、RUM を初期化する際に `sampleRate` パラメーターを使用します。
+
+下記の例では、RUM アプリケーションの全セッションの 90% のみを収集します。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -450,7 +458,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: サンプルとして抽出したセッションでは、すべてのページビューとそのセッションに紐付くテレメトリーは収集されません。
+サンプルとして抽出したセッションでは、すべてのページビューとそのセッションに紐付くテレメトリーは収集されません。
 
 ## グローバルコンテキスト
 
@@ -504,7 +512,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][15]に従ってください。
+製品全体でデータの相関を高めるには [Datadog の命名規則][15]に従ってください。
 
 ### グローバルコンテキストを置換
 
@@ -555,7 +563,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][15]に従ってください。
+製品全体でデータの相関を高めるには [Datadog の命名規則][15]に従ってください。
 
 ### グローバルコンテキストを読み取る
 
@@ -587,12 +595,9 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{% /tab %}}
 {{< /tabs >}}
 
-
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /ja/real_user_monitoring/browser/data_collected/
 [2]: /ja/real_user_monitoring/browser/monitoring_page_performance/

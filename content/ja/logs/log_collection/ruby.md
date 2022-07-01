@@ -1,22 +1,31 @@
 ---
-title: Ruby on Rails ログ収集
-kind: documentation
 aliases:
-  - /ja/logs/languages/ruby
+- /ja/logs/languages/ruby
 further_reading:
-  - link: https://github.com/roidrage/lograge
-    tag: Github
-    text: Lograge ドキュメント
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法
-  - link: /logs/faq/log-collection-troubleshooting-guide/
-    tag: よくあるご質問
-    text: ログ収集のトラブルシューティングガイド
+- link: https://github.com/roidrage/lograge
+  tag: Github
+  text: Lograge ドキュメント
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: ログの処理方法
+- link: /logs/faq/log-collection-troubleshooting-guide/
+  tag: よくあるご質問
+  text: ログ収集のトラブルシューティングガイド
+- link: https://www.datadoghq.com/blog/managing-rails-application-logs/
+  tag: ブログ
+  text: Rails アプリケーションログを収集、カスタマイズ、管理する方法
+- link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
+  tag: ブログ
+  text: logrotate を使ったログファイルの管理方法
+kind: documentation
+title: Ruby on Rails ログ収集
 ---
-Datadog にログを送信する際は、[`lograge`][1] を適用したファイルにログを記録し、Datadog Agent でそのファイルを追跡することをお勧めします。Ruby でロギングのセットアップを行う際は、[予約済み属性][2]に注意してください。
 
-次のような Rail ログ出力があったとします。
+## 概要
+
+Datadog にログを送信する際は、[`lograge`][1] を適用したファイルにログを記録し、Datadog Agent でそのファイルを追跡します。Ruby でロギングのセットアップを行う際は、[予約済み属性][2]に注意してください。
+
+次のような Rails ログ出力があったとします。
 
 ```text
 Started GET "/" for 127.0.0.1 at 2012-03-10 14:28:14 +0100
@@ -29,7 +38,7 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-Lograge による書式設定が完了すると、以下のように重要な情報をすべて格納した 1 行のログが JSON 形式で作成されます。
+以下の情報が JSON 形式でログラインに表示されることが期待できます。
 
 ```json
 {
@@ -50,15 +59,15 @@ Lograge による書式設定が完了すると、以下のように重要な情
 
 ## セットアップ
 
-このセクションでは、Rails アプリケーションのログを Datadog に転送する際に必要となる最低限のセットアップについて説明します。このセットアップに関するさらに詳しいサンプルは、ブログ記事「[Rails アプリケーションログを収集、カスタマイズ、管理する方法][3]」を参照してください。
+このセクションでは、Rails アプリケーションのログを Datadog に転送する際に必要となる最低限のセットアップについて説明します。このセットアップに関するさらに詳しいサンプルは、「[Rails アプリケーションログを収集、カスタマイズ、管理する方法][3]」を参照してください。
 
-1. **プロジェクトに Lograge GEM を追加します**。
+1. プロジェクトに Lograge gem を追加します。
 
     ```ruby
     gem 'lograge'
     ```
 
-2. **Lograge を構成します**。コンフィギュレーションファイルで以下のように記述してください。
+2. Lograge を構成します。コンフィギュレーションファイルで以下のように記述してください。
 
     ```ruby
     # Lograge config
@@ -81,9 +90,9 @@ Lograge による書式設定が完了すると、以下のように重要な情
     end
     ```
 
-   **注**: コンテキスト情報をログに追加するよう Lograge で設定を行うことも可能です。詳細は公式の [Lograge ドキュメント][4]でご確認ください。
+   **注**: コンテキスト情報をログに追加するよう Lograge で設定を行うことも可能です。詳細は [Lograge ドキュメント][4]を参照してください。
 
-3. **Datadog Agent を構成します**。`conf.d/` フォルダーに、次の内容を含む `ruby.d/conf.yaml` ファイルを作成します。
+3. Datadog Agent を構成します。`conf.d/` フォルダーに、次の内容を含む `ruby.d/conf.yaml` ファイルを作成します。
 
     ```yaml
       logs:
@@ -108,21 +117,22 @@ Lograge による書式設定が完了すると、以下のように重要な情
 
 ### ログとトレースの接続
 
-このアプリケーションで APM が有効になっている場合、[APM Ruby ロギングの指示に従って][7]ログにトレース ID とスパン ID を自動的に追加することで、アプリケーションログとトレース間の相関関係を改善できます。
+このアプリケーションで APM が有効になっている場合、[APM Ruby のロギング手順に従う][7]ことでアプリケーションログとトレースの関連性を高め、ログにトレースとスパン ID を自動的に追加することが可能です。
 
 ### アプリケーションで推奨されるログの例
 
-これで、適切な JSON を送信するログ構成になりました。できるだけこれを活用してください。
+これで、適切な JSON を送信するログ構成になりました。できるだけこれを使用してください。
 
-送信するログの各行にできるだけ多くのコンテキスト (ユーザー、セッション、アクション、メトリクスなど) を入れることをお勧めします。
-それには、単純な文字列メッセージをログに記録するのではなく、次の例のように、ハッシュをログに記録します。
+ログを取る際には、できるだけ多くのコンテキスト (ユーザー、セッション、アクション、メトリクス) を追加します。
+
+単純な文字列メッセージのログの代わりに、次の例に示すようにログのハッシュを使用することができます。
 
 ```ruby
 my_hash = {'user' => '1234', 'button_name'=>'save','message' => 'User 1234 clicked on button saved'};
 logger.info(my_hash);
 ```
 
-このハッシュは JSON に変換され、`user` や `button_name` などに対して分析を行うことができます。
+ハッシュは JSON に変換されます。そして、`user` と `button_name` に対して Analytics を持つことができるようになります。
 
 ```json
 {
@@ -139,14 +149,11 @@ logger.info(my_hash);
 
 ### RocketPants の推奨ログコンフィギュレーション
 
-`config/initializers/lograge_rocketpants.rb` ファイル (プロジェクトによって異なります) を次のように構成します。
+`config/initializers/lograge_rocketpants.rb` ファイル (プロジェクトによって異なります) で、Lograge が `rocket_pants` コントローラと連動するように構成します。
 
 ```ruby
-# rocket_pants のコントローラーを使用するよう Lograge を構成します
-#
 # 参照:
 #   https://github.com/Sutto/rocket_pants/issues/111
-#
 app = Rails.application
 if app.config.lograge.enabled
   ActiveSupport::LogSubscriber.log_subscribers.each do |subscriber|
@@ -161,7 +168,7 @@ end
 
 ### Grape の推奨ログ構成
 
-grape_logging gem を追加します。
+`grape_logging` を追加します。
 
 ```ruby
 gem 'grape_logging'

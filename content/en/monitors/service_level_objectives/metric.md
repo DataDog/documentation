@@ -12,19 +12,21 @@ further_reading:
 
 ## Overview
 
-Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI).
+Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI). You can use any metric to create SLOs, including custom metrics generated from [APM spans][1], [RUM events][2], and [logs][3].
 
 {{< img src="monitors/service_level_objectives/metric-based-slo-example.png" alt="example metric-based SLO"  >}}
 
 ## Setup
 
-On the [SLO status page][1], select **New SLO +**. Then select [**Metric**][2].
+On the [SLO status page][4], select **New SLO +**. Then select [**Metric**][5].
 
 ### Define queries
 
-1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use either COUNT or RATE metrics to ensure the SLO calculation behaves correctly.
+1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use COUNT, RATE, or percentile-enabled DISTRIBUTION metrics to ensure the SLO calculation behaves correctly.
 2. Use the `FROM` field to include or exclude specific groups using tags.
-3. Optionally, use the `sum by` aggregator to break your SLI out by specific groups (for tracking and visualization).
+3. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. For more information, see [Threshold Queries][6].
+4. Optionally, for percentile-enabled DISTRIBUTION metrics, use the dropdown immediately to the right of the `count values..` aggregator to break your SLI out by specific groups.
+5. Optionally, for COUNT or RATE metrics, use the `sum by` aggregator to break your SLI out by specific groups.
 
 **Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx` || `code:3xx` || `code:4xx`. The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events would be `sum:httpservice.hits{!code:3xx}`.
 
@@ -42,7 +44,7 @@ By grouping these SLIs you can visualize each individual group’s status, good 
 
 By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph. 
 
-**Note**: If you are using monitor-based SLIs, you can also [view monitor groups][3].
+**Note**: If you are using monitor-based SLIs, you can also [view monitor groups][7].
 
 ### Set your SLO targets
 
@@ -62,6 +64,10 @@ Here you can add contextual information about the purpose of the SLO, including 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/slo
-[2]: https://app.datadoghq.com/slo/new/metric
-[3]: /monitors/service_level_objectives/monitor/
+[1]: https://docs.datadoghq.com/tracing/generate_metrics/
+[2]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
+[3]: https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics/#overview
+[4]: https://app.datadoghq.com/slo
+[5]: https://app.datadoghq.com/slo/new/metric
+[6]: /metrics/distributions/#threshold-queries
+[7]: /monitors/service_level_objectives/monitor/

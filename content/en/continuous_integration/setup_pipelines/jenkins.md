@@ -20,13 +20,16 @@ further_reading:
 ## Compatibility
 
 Supported Jenkins versions:
-* Jenkins >= 2.164.1
+* For 3.x versions of the plugin: Jenkins >= 2.164.1
+* For 4.x versions of the plugin: Jenkins >= 2.303.3
 
 ## Prerequisite
 
 Install the [Datadog Agent][1] on the Jenkins controller instance.
 
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
+
+<div class="alert alert-info"><strong>Note</strong>: Unix domain sockets are not yet supported for sending CI Visibility traces.</div>
 
 ## Install the Datadog Jenkins plugin
 
@@ -541,6 +544,17 @@ Error writing to server
 
 1. If you are using `localhost` as the hostname, try to change it to the server hostname instead.
 2. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
+
+#### HTTP 504
+
+If the HTTP 504 error message appears, make sure that the Jenkins proxy configuration is correct.
+
+{{< code-block lang="text" >}}
+Failed to send HTTP request: PUT http://localhost:8126/v0.3/traces - Status: HTTP 504
+{{< /code-block >}}
+
+1. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
+  1. Check that `localhost` has been configured in the `No Proxy Hosts` section.
 
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 

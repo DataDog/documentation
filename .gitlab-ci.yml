@@ -18,6 +18,8 @@ variables:
   # gitlab checkout
   DOCS_REPO_NAME: documentation
   REPO_URL: "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ddbuild.io/DataDog/${DOCS_REPO_NAME}.git"
+  # yarn/node cache dirs
+  YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
 
 # ================== copy scripts =============== #
 before_script:
@@ -27,11 +29,27 @@ before_script:
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
   - mkdir -p logs
 
-cache: &cache
-  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-  paths:
-    - node_modules/
-    - tmp/.htmltest/
+# set policy for the common case
+# yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
+.yarn_cache: &yarn_cache
+  - key:
+      files:
+        - yarn.lock
+    paths:
+      - package.json
+      - yarn.lock
+      - ${YARN_CACHE_FOLDER}
+    policy: pull
+
+.yarn_cache_pull_push: &yarn_cache_pull_push
+  - key:
+      files:
+        - yarn.lock
+    paths:
+      - package.json
+      - yarn.lock
+      - ${YARN_CACHE_FOLDER}
+    policy: pull-push
 
 # ================== templates ================== #
 .base_template: &base_template
@@ -43,35 +61,13 @@ cache: &cache
   only:
     - branches
 
-# ================== Install Node Dependencies ================== #
-install_dependencies:
-  <<: *base_template
-  stage: bootstrap
-  cache:
-    <<: *cache
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - git version
-    - git clone --branch $CI_COMMIT_REF_NAME --depth 1 --filter=blob:none --no-checkout $REPO_URL sparse-docs
-    - cd sparse-docs && git sparse-checkout init --cone && git sparse-checkout set local && git checkout $CI_COMMIT_REF_NAME && cd ..
-    - mkdir -p ./local/bin/sh && cp --remove-destination ./sparse-docs/local/bin/sh/preinstall.sh ./local/bin/sh/preinstall.sh
-    - cp --remove-destination ./sparse-docs/package.json ./package.json
-    - cp --remove-destination ./sparse-docs/yarn.lock ./yarn.lock
-    - yarn install --link-duplicates --frozen-lockfile --cache-folder .yarn
-    - rm -rf ./sparse-docs # cleanup runner
-  only:
-    changes:
-      - yarn.lock
-
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
   stage: build
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache_pull_push
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -81,13 +77,15 @@ build_preview:
     LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - yarn install --immutable
     - touch Makefile.config
     - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
+    - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -106,43 +104,6 @@ build_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
-
-# build_preview_legacy:
-#   <<: *base_template
-#   stage: build
-#   environment: "preview"
-#   variables:
-#     URL: ${PREVIEW_DOMAIN}
-#     CONFIG: ${PREVIEW_CONFIG}
-#     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
-#     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
-#     LOCAL: "False"
-#   script:
-#     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-#     - version_static_assets
-#     - touch Makefile.config
-#     - make clean-examples
-#     - make examples
-#     - sync_integration_descriptions
-#     #- sync_integration_descriptions_cached
-#     - placehold_translations
-#     - update_preview_baseurl
-#     - build_hugo_site_new
-#     - in-isolation deploy_preview
-#     - collect_static_assets
-#     # remove service_checks json as we don't need to s3 push that..
-#     - rm -rf data/service_checks
-#     - push_site_to_s3
-#     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-#     #- remove_static_from_repo
-#     #- create_artifact
-#     #- create_artifact_untracked
-#   artifacts:
-#     paths:
-#       - ${ARTIFACT_RESOURCE}
-#       - ./integrations_data
-#   only:
-#     - /.+?\/[a-zA-Z0-9_-]+/
 
 link_checks_preview:
   <<: *base_template
@@ -170,21 +131,17 @@ link_checks_preview:
   interruptible: true
 
 missing_tms_preview:
-  image:
-    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
-    entrypoint: [ "" ]
-  tags: ["runner:main"]
+  <<: *base_template
   stage: post-deploy
-  cache: {}
   environment: "preview"
+  allow_failure: true
+  cache: {}
   variables:
     GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
-    # remove dirs we don't need to scan
-    - rm -rf ./public/fr ./public/ja ./public/api/v1/ ./public/api/v2/
-    - GOMAXPROCS=$(nproc --all) vale --glob='*.{html}' ./public
+    - check_missing_tms
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
@@ -196,14 +153,14 @@ index_algolia_preview:
   tags: ["runner:main"]
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "preview"
   timeout: 1h 30m
   script:
+    - yarn install --immutable
     - |-
-        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
         export DISPLAY=:99
         Xvfb :99 -ac &
         echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
@@ -218,11 +175,11 @@ replica_algolia_preview:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "preview"
   script:
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
+    - yarn install --immutable
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
   when: manual
@@ -234,12 +191,13 @@ sourcemaps_preview:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "preview"
   script:
-    - yarn run build:webpack:preview -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    - yarn install --immutable
+    # Rename any js.map files to include SHA if correlating JS file is fingerprinted.  Hugo's asset build system seems to lose the fingerprint value when generating source maps.
+    - find ./public -type f -name "*.*.js" -exec bash -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/.js/.$hash.js}' \;
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
   allow_failure: true
@@ -252,8 +210,7 @@ build_live:
   <<: *base_template
   stage: build
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache_pull_push
   environment: "live"
   variables:
     CONFIG: ${LIVE_CONFIG}
@@ -264,17 +221,19 @@ build_live:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
+    - yarn install --immutable
     - touch Makefile.config
     - make clean-examples
     - make examples
     - sync_integration_descriptions
     - sync_integration_metrics
-    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
     - placehold_translations
+    - yarn run prebuild
     - yarn run build:live
     - in-isolation deploy_live
     - create_artifact
-    - create_artifact_untracked
+    - create_artifact_ignored
     - remove_static_from_repo
   artifacts:
     when: on_success
@@ -332,11 +291,8 @@ index_algolia:
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
   tags: ["runner:main"]
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
   environment: "live"
-  timeout: 1h 30m
+  timeout: 1h 45m
   script:
     - |-
       echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
@@ -353,10 +309,10 @@ replica_algolia:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   script:
+    - yarn install --immutable
     - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
@@ -367,12 +323,13 @@ sourcemaps_live:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   script:
-    - yarn run build:webpack -- --devtool source-map
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    - yarn install --immutable
+    # Rename any js.map files to include SHA if correlating JS file is fingerprinted. Hugo's asset build system seems to lose the fingerprint value when generating source maps.
+    - find ./public -type f -name "*.*.js" -exec bash -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/.js/.$hash.js}' \;
+    - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_live
   allow_failure: true
@@ -385,48 +342,51 @@ evaluate_missing_metrics:
   cache: {}
   environment: "live"
   script:
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd-api-key') -b $(get_secret 'dd-app-key')
   when: manual
   only:
     - master
 
-
-manage_translations:on-schedule:
+# Uploads git ignored source (EN) files to Transifex as part of the nightly build.
+# The translation syncing pipeline is triggered by github webhook, but these files are not in git.
+# This allows some dynamically built content (such as integrations) to be localized automatically.
+manage_ignored_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
   cache: {}
   environment: "live"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-    CONFIG: ${PREVIEW_CONFIG}
-  script:
-    - |-
-      if [[ $(date +%u) -lt 6 ]]; then
-        nodenv shell 14.16.0
-        [ -d ./node_modules ] && rm -rf ./node_modules
-        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
-        DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
-      fi
-      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
-  artifacts:
-    paths:
-      - translate-debug.log
   only:
-    - schedules
+    - master
+  script:
+    - echo "Downloading ignored translation source files..."
+    - manage_ignored_translation_files
+  when: manual
 
-
-
-#push_translations:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  script:
-#    - push_changed_translations
-#  only:
-#    - master
-#  except:
-#    - triggers
-#    - schedules
+# Legacy translations nightly job
+# manage_translations:on-schedule:
+#   <<: *base_template
+#   stage: post-deploy
+#   cache:
+#     <<: *cache
+#     policy: pull
+#   environment: "live"
+#   variables:
+#     URL: ${PREVIEW_DOMAIN}
+#     CONFIG: ${PREVIEW_CONFIG}
+#   script:
+#     - |-
+#       if [[ $(date +%u) -lt 6 ]]; then
+#         nodenv shell 14.16.0
+#         [ -d ./node_modules ] && rm -rf ./node_modules
+#         yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
+#         DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
+#       fi
+#       chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+#   artifacts:
+#     paths:
+#       - translate-debug.log
+#   only:
+#     - schedules
 
 test_missing_tms_live:
   <<: *base_template
@@ -446,13 +406,13 @@ test_pa11y:
   <<: *base_template
   stage: post-deploy
   cache:
-    <<: *cache
-    policy: pull
+    - *yarn_cache
   environment: "live"
   dependencies:
     - build_live
   script:
-    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
+    - yarn install --immutable
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
   only:
     - schedules
 

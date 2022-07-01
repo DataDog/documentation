@@ -2,10 +2,11 @@
 
 RUN_SERVER=${RUN_SERVER:=false}
 GITHUB_TOKEN=${GITHUB_TOKEN:=false}
-RUN_WEBPACK=${RUN_WEBPACK:=true}
 RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 LOCAL=${LOCAL:=False}
+PULL_RBAC_PERMISSIONS=${PULL_RBAC_PERMISSIONS:=false}
+DOCKER=${DOCKER:=false}
 
 if [ ${RUN_SERVER} = true ]; then
 	# integrations
@@ -19,7 +20,7 @@ if [ ${RUN_SERVER} = true ]; then
 
   update_pre_build.py "${args}"
 
-	# rbac permissions 
+	# rbac permissions
 	if [ ${PULL_RBAC_PERMISSIONS} == true ]; then
 		echo "Pulling RBAC permissions."
 
@@ -36,16 +37,21 @@ if [ ${RUN_SERVER} = true ]; then
 		placehold_translations.py -c "config/_default/languages.yaml"
 	fi
 
-	# webpack
-	if [ ${RUN_WEBPACK} = true ]; then
-		echo "Checking that node modules are installed and up-to-date."
-    npm --global install yarn && \
-    npm cache clean --force && yarn install --frozen-lockfile
-    echo "Starting webpack and hugo build."
-	yarn run start
+  echo "Checking that node modules are installed and up-to-date."
+  npm --global install yarn && \
+  npm cache clean --force && yarn install --immutable
+  echo "Starting webpack and hugo build."
+  yarn run prestart
 
-    sleep 5
-	fi
+  if [ ${DOCKER} == true ]; then
+    echo "Running docker build...."
+    LANGS_TO_IGNORE=${LANGS_TO_IGNORE} yarn run docker:start
+  else
+    echo "Running regular build...."
+    yarn run start
+  fi
+
+  sleep 5
 
 else
 	exit 0

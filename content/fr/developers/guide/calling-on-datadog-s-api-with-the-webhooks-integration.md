@@ -12,7 +12,7 @@ Il est également possible de configurer des notifications de webhook pour appel
 
 Chaque webhook doit être configuré avec un nom (qui doit être spécifié dans les monitors) et une URL (qui doit être ping par le webhook). Pour envoyer un appel à l'API Datadog, sélectionnez « Use custom payload » et ajoutez votre charge utile personnalisée dans le champ correspondant.
 
-* Champ **Name** : indiquez le nom de votre choix, tant qu'il est unique parmi l'ensemble des noms de webhook.
+* Champ **Name** : indiquez le nom de votre choix, tant qu'il n'est pas utilisé par un autre webhook.
 
 * Champ **URL** : l'URL utilisée pour ping l'API. Ressemble à :
 `https://api.datadoghq.com/api/v1/<ENDPOINT_API>?api_key=<CLÉ_API_DATADOG>`

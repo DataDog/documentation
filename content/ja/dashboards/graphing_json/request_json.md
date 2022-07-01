@@ -1,16 +1,17 @@
 ---
-title: リクエスト JSON スキーマ
-kind: documentation
 aliases:
-  - /ja/graphing/graphing_json/request_json/
+- /ja/graphing/graphing_json/request_json/
 further_reading:
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
-  - link: /dashboards/graphing_json/widget_json/
-    tag: ドキュメント
-    text: ウィジェット JSON スキーマ
+- link: /dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+- link: /dashboards/graphing_json/widget_json/
+  tag: ドキュメント
+  text: ウィジェット JSON スキーマ
+kind: documentation
+title: リクエスト JSON スキーマ
 ---
+
 `REQUEST_SCHEMA` の一般的な書式は、1 つ以上の `request` の配列です。
 
 ```text

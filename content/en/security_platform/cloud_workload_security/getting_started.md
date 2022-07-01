@@ -12,6 +12,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
   tag: "Blog"
   text: "The PwnKit vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/"
+  tag: "Blog"
+  text: "The Dirty Pipe vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
+  tag: "Blog"
+  text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
 ---
 
 ## Overview
@@ -19,7 +25,7 @@ further_reading:
 There are two types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
 1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-2. **Process Execution Monitoring** to monitor process executions for malicious activity on hosts or containers in real-time.
+2. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
 
 ## Requirements
 
@@ -50,6 +56,10 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
       securityAgent:
         runtime:
           enabled: true
+          
+    # Add this to enable the collection of CWS network events, only for Datadog Agent version 7.36
+          network:
+            enabled: true
     ```
 
 3. Restart the Agent.
@@ -86,6 +96,7 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
+  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
   gcr.io/datadoghq/agent:7
@@ -104,6 +115,9 @@ By default Runtime Security is disabled. To enable it, both the datadog.yaml and
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+  
+# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 
@@ -121,7 +135,10 @@ For a package-based deployment, the Datadog package has to be deployed: run `yum
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-
+  
+# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+  
 systemctl restart datadog-agent
 
 {{< /code-block >}}

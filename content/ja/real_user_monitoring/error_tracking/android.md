@@ -1,6 +1,6 @@
 ---
 dependencies:
-- "https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md"
+- https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md
 further_reading:
 - link: /real_user_monitoring/error_tracking/
   tag: Error Tracking
@@ -104,6 +104,17 @@ datadog {
 | `remoteRepositoryUrl`      | ソースコードがデプロイされたリモートリポジトリの URL。指定しない場合、この値はタスクの実行時に現在の GIT コンフィギュレーションから解決されます。                     |
 | `checkProjectDependencies` | このプロパティは、Datadog SDK が依存関係に含まれているかどうかをプラグインがチェックするかどうかを制御します。"none" - 無視、"warn" - 警告をログに記録、"fail" - エラーでビルドに失敗します (デフォルト)。 |
 
+### CI/CD パイプラインとのインテグレーション
+
+デフォルトでは、マッピングのアップロードタスクは、ビルドグラフの他のタスクから独立しています。マッピングのアップロードが必要な場合は、このタスクを手動で実行します。
+
+CI/CD パイプラインでこのタスクを実行し、ビルドグラフの一部としてこのタスクが必要な場合、マッピングファイルが生成された後にアップロードタスクを実行するように設定できます。
+
+例:
+
+```groovy
+tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
+```
 
 ## エラーの解決
 

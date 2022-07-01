@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/ssh
+- /ja/integrations/ssh
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -10,18 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - network
-  - autodiscovery
+- network
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md
+- https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md
 display_name: SSH
 draft: false
 git_integration_title: ssh_check
 guid: 4eb195ef-554f-4cc2-80af-8f286c631fa8
 integration_id: ssh
-integration_title: SSH チェック
+integration_title: SSH
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,18 +31,21 @@ metric_prefix: ssh.
 metric_to_check: sftp.response_time
 name: ssh_check
 process_signatures:
-  - ssh
-  - sftp
-  - sshd
-  - 'sshd:'
-public_title: Datadog-SSH チェックインテグレーション
+- ssh
+- sftp
+- sshd
+- 'sshd:'
+public_title: SSH インテグレーション
 short_description: SSH 接続と SFTP レイテンシーを監視。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックを使用して、リモートホストへの SSH 接続と SFTP 応答時間を監視できます。
@@ -50,7 +54,7 @@ supported_os:
 
 ### インストール
 
-SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれているため、SSH 接続をテストするサーバーに追加で何かをインストールする必要はありません。
+SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 

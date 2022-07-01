@@ -69,6 +69,6 @@ Create a snapshot of an individual graph by using the share icon in the upper ri
 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: /notebooks/
-[3]: /dashboards/screenboard/
-[4]: /dashboards/timeboard/
+[3]: /dashboards/#screenboards
+[4]: /dashboards/#timeboards
 [5]: /metrics/introduction/#space-aggregation

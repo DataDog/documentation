@@ -9,12 +9,18 @@ aliases:
   - /tracing/serverless_functions/datadog_apm
   - /integrations/amazon_lambda/docs.datadoghq.com/serverless/
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Serverless"
+  tag: "Release Notes"
+  text: "Check out the latest Serverless releases! (App login required)."
 - link: "https://www.datadoghq.com/state-of-serverless"
   tag: "Blog"
   text: "The State of Serverless"
-- link: "/integrations/amazon_xray/"
+- link: "/serverless/installation/"
   tag: "Documentation"
-  text: "AWS X-Ray Integration"
+  text: "Installing Serverless Monitoring"
+- link: '/serverless/configuration/'
+  tag: 'Documentation'
+  text: 'Configure Serverless Monitoring'
 - link: "/integrations/amazon_lambda/"
   tag: "Documentation"
   text: "AWS Lambda Integration"
@@ -30,6 +36,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
   tag: "Blog"
   text: "Best practices for building serverless applications that follow AWS's Well-Architected Framework"
+- link: "https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/"
+  tag: "Blog"
+  text: "Monitor your AWS Lambda functions' ephemeral storage usage"
 ---
 
 {{< vimeo 543362476 >}}
@@ -40,21 +49,11 @@ further_reading:
 
 [Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your serverless compute as well as related fully-managed APIs, queues, streams and data stores.
 
-The following section outlines Datadog's solution for monitoring AWS serverless applications and Lambda functions. You can also learn more about support for monitoring [Azure serverless][7] and [Google serverless][8] applications.
+The following section outlines Datadog's solution for monitoring AWS serverless applications and Lambda functions. You can also learn more about support for monitoring [Azure serverless][2] and [Google serverless][3] applications.
 
-## Quick start
+## Explore Datadog Serverless Monitoring for AWS Lambda
 
-If you are new to Datadog, you can get started by [signing up for a Datadog account][5], then following the instructions for [installing Datadog's Lambda Extension][6]. These steps configure your Lambda functions to send real-time metrics, logs, and traces to Datadog:
-
-{{< img src="serverless/aws-fully-managed-services-serverless-monitoring-hero.png" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
-
-## Installation instructions
-
-For more detailed installation instructions, select the Lambda runtime below for instructions to instrument your serverless application:
-
-{{< partial name="serverless/getting-started-languages.html" >}}
-
-## Explore Datadog Serverless Monitoring
+To get started, follow the [installation instructions][4] to collect metrics, traces, and logs from your serverless applications.
 
 ### Monitor your entire serverless stack in the Serverless view
 
@@ -84,13 +83,13 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 {{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog Serverless Monitoring"  style="width:100%;" >}}
 
-## Other serverless clouds
+## Datadog Serverless Monitoring for other serverless clouds
 
 ### Azure App Service
 
 The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. 
 
-Use the [Azure App Service view][2] to:
+Use the [Azure App Service view][5] to:
 
 - Quickly identify apps with high latency or errors
 
@@ -100,21 +99,20 @@ Use the [Azure App Service view][2] to:
 
 - Map the apps running on your App Service Plans to identify apps that may be impacting costs or performance
 
-The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see the [Azure App Service Extension documentation][3].
+The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see the [Azure App Service Extension documentation][6].
 
 ### Google Cloud Functions
 
-Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][4].
+Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][7].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
-[2]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-[3]: /infrastructure/serverless/azure_app_services/#overview
-[4]: /integrations/google_cloud_platform/
-[5]: https://app.datadoghq.com/signup/
-[6]: https://app.datadoghq.com/signup/agent#lambda
-[7]: /serverless/#azure-app-service
-[8]: /serverless/#google-cloud-functions
+[2]: /serverless/#azure-app-service
+[3]: /serverless/#google-cloud-functions
+[4]: /serverless/installation
+[5]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
+[6]: /infrastructure/serverless/azure_app_services/#overview
+[7]: /integrations/google_cloud_platform/

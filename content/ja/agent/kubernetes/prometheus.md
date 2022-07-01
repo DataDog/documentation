@@ -1,31 +1,32 @@
 ---
-title: Kubernetes Prometheus および OpenMetrics メトリクスの収集
-kind: ドキュメント
 aliases:
-  - /ja/getting_started/prometheus
-  - /ja/getting_started/integrations/prometheus
-  - /ja/agent/openmetrics
-  - /ja/agent/prometheus
+- /ja/getting_started/prometheus
+- /ja/getting_started/integrations/prometheus
+- /ja/agent/openmetrics
+- /ja/agent/prometheus
 further_reading:
-  - link: /agent/kubernetes/log/
-    tag: ドキュメント
-    text: アプリケーションログの収集
-  - link: /agent/kubernetes/apm/
-    tag: ドキュメント
-    text: アプリケーショントレースの収集
-  - link: /agent/kubernetes/integrations/
-    tag: ドキュメント
-    text: アプリケーションのメトリクスとログを自動で収集
-  - link: /agent/guide/autodiscovery-management/
-    tag: ドキュメント
-    text: データ収集をコンテナのサブセットのみに制限
-  - link: /agent/kubernetes/tag/
-    tag: ドキュメント
-    text: コンテナから送信された全データにタグを割り当て
-  - link: /integrations/guide/prometheus-metrics/
-    tag: Documentation
-    text: Datadog メトリクスにおける Prometheus メトリクスのマッピング
+- link: /agent/kubernetes/log/
+  tag: ドキュメント
+  text: アプリケーションログの収集
+- link: /agent/kubernetes/apm/
+  tag: ドキュメント
+  text: アプリケーショントレースの収集
+- link: /agent/kubernetes/integrations/
+  tag: ドキュメント
+  text: アプリケーションのメトリクスとログを自動的に収集する
+- link: /agent/guide/autodiscovery-management/
+  tag: ドキュメント
+  text: データ収集をコンテナのサブセットのみに制限
+- link: /agent/kubernetes/tag/
+  tag: ドキュメント
+  text: コンテナから送信された全データにタグを割り当て
+- link: /integrations/guide/prometheus-metrics/
+  tag: Documentation
+  text: Datadog メトリクスにおける Prometheus メトリクスのマッピング
+kind: ドキュメント
+title: Kubernetes Prometheus および OpenMetrics メトリクスの収集
 ---
+
 Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] インテグレーションを併用して、Kubernetes 内で実行されているアプリケーションから、公開されている Prometheus および OpenMetrics メトリクスを収集します。
 
 ## 概要
@@ -44,42 +45,44 @@ Datadog メトリクスにおける Prometheus および OpenMetrics メトリ�
 
 ### 構成
 
-OpenMetrics/Prometheus **ポッド** に以下の `annotations` を適用し、オートディスカバリーを使用して OpenMetrics または Prometheus チェックを構成します。
+OpenMetrics/Prometheus のメトリクスを公開する **pod** に以下の `annotations` を適用し、オートディスカバリーを使用して OpenMetrics または Prometheus のチェックを構成します。
 
 ```yaml
 # (...)
 metadata:
-    #(...)
-    annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: |
-            ["openmetrics"]
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: |
-            [{}]
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
-            [
-              {
-                "prometheus_url": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
-                "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
-                "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
-              }
-            ]
+  #(...)
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: |
+      ["openmetrics"]
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: |
+      [{}]
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
+      [
+        {
+          "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
+          "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
+          "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
+        }
+      ]
 spec:
-    containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+  containers:
+    - name: '<CONTAINER_IDENTIFIER>'
 ```
 
 コンフィギュレーションには次のプレースホルダー値を使用します。
 
-| プレースホルダー                              | 説明                                                                                                                                                                                                    |
-| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<PROMETHEUS_PORT>`                      | Prometheus エンドポイントにアクセスするための接続先ポート。                                                                                                                                                 |
-| `<PROMETHEUS_ENDPOINT>`                  | コンテナによって処理されたメトリクスの URL (Prometheus 形式)。                                                                                                                                             |
-| `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>` | Datadog で表示するときに、すべてのメトリクスの前にネームスペースを付加します。                                                                                                                                           |
-| `<METRIC_TO_FETCH>`                      | Prometheus エンドポイントから取得される Prometheus メトリクスキー。                                                                                                                                             |
-| `<NEW_METRIC_NAME>`                      | オプションパラメーター。設定すると、`<METRIC_TO_FETCH>` メトリクスキーは Datadog の `<NEW_METRIC_NAME>` に変換されます。このオプションを使用しない場合は、`key:value` ペアではなく、文字列のリストを渡します。 |
+| プレースホルダー                              | 説明                                                                                        |
+|------------------------------------------|----------------------------------------------------------------------------------------------------|
+| `<CONTAINER_IDENTIFIER>`                 | `annotations` で使用される識別子は、メトリクスを公開しているコンテナ `name` と一致しなければならない。 |
+| `<PROMETHEUS_ENDPOINT>`                  | コンテナによって処理されたメトリクスの URL パス (Prometheus 形式)。                            |
+| `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>` | Datadog で表示するときに、すべてのメトリクスの前にネームスペースを付加します。                               |
+| `<METRIC_TO_FETCH>`                      | Prometheus エンドポイントから取得される Prometheus メトリクスキー。                                 |
+| `<NEW_METRIC_NAME>`                      | Datadog の `<METRIC_TO_FETCH>` メトリクスキーを `<NEW_METRIC_NAME>` に変換します。                   |
 
-`namespace` や `metrics` を含むインスタンスで使用可能なパラメーターのリストについては、see the table in the [Prometheus ホスト収集ガイド][9]の表を参照してください。
 
+`metrics` の構成は、カスタムメトリクスとして取得するメトリクスのリストです。取得する各メトリクスと Datadog で希望するメトリクス名をキー値のペアで、例えば `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}` のように記載します。代わりに、正規表現として解釈されるメトリクス名の文字列のリストを提供し、現在の名前で必要なメトリクスをもたらすことができます。**注:** 正規表現では、多くのカスタムメトリクスを送信できる可能性があります。
+
+`namespace` や `metrics` など、インスタンスで利用可能なパラメーターの一覧は、[構成例 openmetrics.d/conf.yaml][9] を参照してください。
 
 ## はじめに
 
@@ -87,48 +90,45 @@ spec:
 
 1. [Datadog Agent を起動します][10]。
 
-2. [この Prometheus DaemonSet `prometheus.yaml`][11] を使用して、オートディスカバリーコンフィギュレーションを設定済みの Prometheus ポッドを起動します。
-
-    オートディスカバリーのコンフィギュレーション:
+2. [Prometheus `prometheus.yaml`][11] を使用して、ポッドにオートディスカバリーの構成をした Prometheus Deployment の例を起動します。
 
     ```yaml
      # (...)
     spec:
-      replicas: 2
-      selector:
-        matchLabels:
-          app: prometheus
-          purpose: example
       template:
         metadata:
-          labels:
-            app: prometheus
-            purpose: example
           annotations:
-              ad.datadoghq.com/prometheus-example.check_names: |
-                ["openmetrics"]
-              ad.datadoghq.com/prometheus-example.init_configs: |
-                [{}]
-              ad.datadoghq.com/prometheus-example.instances: |
-                [
-                  {
-                    "prometheus_url": "http://%%host%%:%%port%%/metrics",
-                    "namespace": "documentation_example_kubernetes",
-                    "metrics": [ {"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]
-                  }
-                ]
-      # (...)
+            ad.datadoghq.com/prometheus-example.check_names: |
+              ["openmetrics"]
+            ad.datadoghq.com/prometheus-example.init_configs: |
+              [{}]
+            ad.datadoghq.com/prometheus-example.instances: |
+              [
+                {
+                  "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
+                  "namespace": "documentation_example_kubernetes",
+                  "metrics": [
+                    {"promhttp_metric_handler_requests": "handler.requests"},
+                    {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
+                    "go_memory.*"
+                  ]
+                }
+              ]
+        spec:
+          containers:
+          - name: prometheus-example
+          # (...)
     ```
 
-     Prometheus ポッドの作成コマンド:
+    Prometheus Deployment を作成するコマンド:
 
     ```shell
     kubectl create -f prometheus.yaml
     ```
 
-3. [メトリクスの概要][12]ページに移動して、収集されたメトリクス `prometheus_target_interval_length_seconds*` を確認します。
+3. [Metric summary][12] ページにアクセスし、このサンプルポッドから収集されたメトリクスを確認します。この構成では、`promhttp_metric_handler_requests`、`promhttp_metric_handler_requests_in_flight`、および `go_memory` で始まるすべての公開メトリクスを収集することになります。
 
-    {{< img src="integrations/guide/prometheus_kubernetes/prometheus_collected_metric_kubernetes.png" alt="Kubernetes で収集された Prometheus メトリクス">}}
+    {{< img src="integrations/guide/prometheus_kubernetes/openmetrics_v2_collected_metric_kubernetes.png" alt="Kubernetes で収集された Prometheus メトリクス">}}
 
 ## Prometheus アノテーションによるメトリクスの収集
 
@@ -143,16 +143,39 @@ Prometheus Autodiscovery を使用して、Datadog Agent でネイティブ Prom
 
 #### 基本のコンフィギュレーション
 
+{{< tabs >}}
+{{% tab "Helm" %}}
+
 Helm `values.yaml` で、以下を追加します。
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   prometheusScrape:
     enabled: true
-...
+    serviceEndpoints: true
+  # (...)
 ```
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+Agent 用の DaemonSet マニフェスト `daemonset.yaml` に、Agent コンテナ用の以下の環境変数を追加します。
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_ENABLED
+  value: "true"
+- name: DD_PROMETHEUS_SCRAPE_VERSION
+  value: "2"
+```
+Cluster Agent が有効な場合、そのマニフェスト `cluster-agent-deployment.yaml` 内に、Cluster Agent コンテナ用の以下の環境変数を追加します。
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_ENABLED
+  value: "true"
+- name: DD_PROMETHEUS_SCRAPE_SERVICE_ENDPOINTS
+  value: "true" 
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 これにより、Datadog Agent がネイティブ Prometheus アノテーションのあるポッドを検出し、対応する OpenMetrics チェックを生成するよう指示します。
 
@@ -166,11 +189,14 @@ datadog:
 
 #### 高度なコンフィギュレーション
 
-`values.yaml` の `additionalConfigs` コンフィギュレーションフィールドで、ネイティブの Prometheus アノテーション以外にも高度な Openmetrics チェックコンフィギュレーションまたはオートディスカバリーのカスタムルールを定義することができます。
+{{< tabs >}}
+{{% tab "Helm" %}}
 
-`additionalConfigs` は Openmetrics チェックコンフィギュレーションとオートディスカバリーのルールを含む構造のリストです。
+`values.yaml` の `additionalConfigs` コンフィギュレーションフィールドで、ネイティブの Prometheus アノテーション以外にも高度な OpenMetrics チェックコンフィギュレーションまたはオートディスカバリーのカスタムルールを定義することができます。
 
-Openmetrics によりサポートされるすべての[コンフィギュレーションフィールド][14]は、コンフィギュレーションリストで受け渡されます。
+`additionalConfigs` は OpenMetrics チェックコンフィギュレーションとオートディスカバリーのルールを含む構造のリストです。
+
+OpenMetrics チェックによりサポートされるすべての[コンフィギュレーションフィールド][1]は、コンフィギュレーションリストで受け渡されます。
 
 オートディスカバリーのコンフィギュレーションはコンテナ名または Kubernetes アノテーション、もしくはその両方に基づきます。`kubernetes_container_names` および `kubernetes_annotations` の両方が定義されている場合、AND のロジックが使用されます (両方のルールに一致する必要があります)。
 
@@ -180,23 +206,24 @@ Openmetrics によりサポートされるすべての[コンフィギュレー�
 
 **注:** Datadog Agent コンフィギュレーションでの `kubernetes_annotations` のデフォルト値は次の通りです:
 
-```
+```yaml
 kubernetes_annotations:
   include:
-    - prometheus.io/scrape: "true"
+     prometheus.io/scrape: "true"
   exclude:
-    - prometheus.io/scrape: "false"
+     prometheus.io/scrape: "false"
 ```
 
 **例:**
 
-この例では、`app=my-app` とラベルが付いたポッドで実行される `my-app` という名前のコンテナを対象とする高度なコンフィギュレーションを定義しています。`send_distribution_buckets` オプションを有効化し、5 秒のカスタムタイムアウトを定義することで、Openmetrics チェックのコンフィギュレーションも同様にカスタマイズすることができます。
+この例では、`app=my-app` とラベルが付いたポッドで実行される `my-app` という名前のコンテナを対象とする高度なコンフィギュレーションを定義しています。`send_distribution_buckets` オプションを有効化し、5 秒のカスタムタイムアウトを定義することで、OpenMetrics チェックのコンフィギュレーションも同様にカスタマイズすることができます。
 
-```
+```yaml
 datadog:
-...
+  # (...)
   prometheusScrape:
     enabled: true
+    serviceEndpoints: true
     additionalConfigs:
       -
         configurations:
@@ -210,11 +237,53 @@ datadog:
               app: my-app
 ```
 
+
+[1]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+Agent と Cluster Agent のマニフェストの `DD_PROMETHEUS_SCRAPE_CHECKS` 環境変数で、ネイティブの Prometheus アノテーション以外にも高度な OpenMetrics チェックコンフィギュレーションまたはオートディスカバリーのカスタムルールを定義することができます。
+
+`DD_PROMETHEUS_SCRAPE_CHECKS` は OpenMetrics チェックコンフィギュレーションとオートディスカバリーのルールを含む構造のリストです。
+
+OpenMetrics チェックによりサポートされるすべての[コンフィギュレーションフィールド][1]は、コンフィギュレーションリストで受け渡されます。
+
+オートディスカバリーのコンフィギュレーションはコンテナ名または Kubernetes アノテーション、もしくはその両方に基づきます。`kubernetes_container_names` および `kubernetes_annotations` の両方が定義されている場合、AND のロジックが使用されます (両方のルールに一致する必要があります)。
+
+`kubernetes_container_names` は対象とするコンテナ名のリストで、`*` を使用したワイルドカードをサポートしています。
+
+`kubernetes_annotations` には、ディスカバリーのルールを定義する `include` と `exclude` の 2 つのラベルマップが含まれます。
+
+**注:** Datadog Agent コンフィギュレーションでの `kubernetes_annotations` のデフォルト値は次の通りです:
+
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_CHECKS
+  value: "[{\"autodiscovery\":{\"kubernetes_annotations\":{\"exclude\":{\"prometheus.io/scrape\":\"false\"},\"include\":{\"prometheus.io/scrape\":\"true\"}}}}]"
+```
+
+**例:**
+
+この例では、`app=my-app` とラベルが付いたポッドで実行される `my-app` という名前のコンテナを対象とする高度なコンフィギュレーションを定義しています。`send_distribution_buckets` オプションを有効化し、5 秒のカスタムタイムアウトを定義することで、OpenMetrics チェックのコンフィギュレーションも同様にカスタマイズすることができます。
+
+```yaml
+- name: DD_PROMETHEUS_SCRAPE_ENABLED
+  value: "true"
+- name: DD_PROMETHEUS_SCRAPE_CHECKS
+  value: "[{\"autodiscovery\":{\"kubernetes_annotations\":{\"include\":{\"app\":\"my-app\"}},\"kubernetes_container_names\":[\"my-app\"]},\"configurations\":[{\"send_distribution_buckets\":true,\"timeout\":5}]}]"
+- name: DD_PROMETHEUS_SCRAPE_VERSION
+  value: "2"
+```
+
+
+[1]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+{{% /tab %}}
+{{< /tabs >}}
+
 ## カスタムインテグレーションを公式インテグレーションに
 
 デフォルトでは、汎用の Prometheus チェックによって取得されるすべてのメトリクスが、カスタムメトリクスだと見なされます。既製ソフトウェアを監視されて、公式のインテグレーションにするべきだと思われた場合は、[ぜひご提供をお願いします][5]。
 
-公式インテグレーションは、それぞれ専用のディレクトリを持ちます。汎用のチェックには、デフォルトの構成とメトリクスメタデータをハードコードするためのデフォルトのインスタンスメカニズムがあります。たとえば、[kube-proxy][15] インテグレーションを参照します。
+公式インテグレーションは、それぞれ専用のディレクトリを持ちます。汎用のチェックには、デフォルトの構成とメトリクスメタデータをハードコードするためのデフォルトのインスタンスメカニズムがあります。たとえば、[kube-proxy][14] インテグレーションを参照します。
 
 ## その他の参考資料
 
@@ -228,10 +297,9 @@ datadog:
 [6]: /ja/integrations/guide/prometheus-metrics
 [7]: /ja/agent/kubernetes/#installation
 [8]: /ja/getting_started/tagging/
-[9]: /ja/integrations/guide/prometheus-host-collection/#parameters-available
+[9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [10]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [11]: /resources/yaml/prometheus.yaml
 [12]: https://app.datadoghq.com/metric/summary
 [13]: /ja/agent/faq/template_variables/
-[14]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[15]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

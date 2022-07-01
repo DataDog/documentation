@@ -2,15 +2,15 @@
 title: Manage Your Browser Tests Programmatically
 kind: guide
 further_reading:
-    - link: '/synthetics/browser_tests'
-      tag: 'Documentation'
-      text: 'Learn about Browser Tests'
-    - link: '/api/latest/synthetics'
-      tag: 'API'
-      text: 'Synthetics API'
-    - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
-      tag: 'Terraform'
-      text: 'Create and manage Synthetic Browser Tests with Terraform'
+- link: '/api/latest/synthetics'
+  tag: 'API'
+  text: 'Synthetics API'
+- link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
+  tag: 'Terraform'
+  text: 'Create and manage Synthetic Browser Tests with Terraform'
+- link: '/synthetics/browser_tests'
+  tag: 'Documentation'
+  text: 'Learn about Browser Tests'
 ---
 
 ## Overview

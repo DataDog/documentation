@@ -145,10 +145,6 @@ To add more Trace details to the list, click the **Options** button and select a
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns"  style="width:80%;">}}
 
-Origin resource is a default column that shows the resource at the root of the given trace. To add origin service or origin operation name, click the **Options** button and select `@trace.origin.operation_name` or `@trace.origin.service`.
-
-{{< img src="tracing/app_analytics/search/trace_origin_column.png" alt="Trace list with origin columns"  style="width:80%;">}}
-
 ### Multi-line display
 
 {{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display"  style="width:30%;">}}
@@ -312,7 +308,7 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 [9]: /tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /tracing/visualization/#trace
 [11]: /monitors/create/types/apm/
-[12]: /dashboards/timeboard/
+[12]: /dashboards/#timeboards
 [13]: /help/
 [14]: /tracing/visualization/#indexed-span
 [15]: /dashboards/

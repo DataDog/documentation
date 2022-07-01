@@ -1,10 +1,10 @@
 ---
-title: Standards ouverts NodeJS
-kind: documentation
-description: 'Standards ouverts pour NodeJS'
 code_lang: nodejs
-type: multi-code-lang
 code_lang_weight: 40
+description: Standards ouverts pour NodeJS
+kind: documentation
+title: Standards ouverts NodeJS
+type: multi-code-lang
 ---
 
 ## OpenTracing
@@ -30,11 +30,11 @@ Consultez le site [opentracing.io][1] (en anglais) pour en savoir plus sur l'uti
 
 ## OpenTelemetry
 
-La prise en charge d'OpenTelemetry est disponible via le package `opentelemetry-exporter-datadog`` pour exporter les traces d'OpenTelemetry vers Datadog.
-
 <div class="alert alert-warning">
-Cette fonctionnalité est actuellement en version bêta. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> si elle ne fonctionne pas correctement.
+Cet exportateur est obsolète. Pour exporter vos traces OTLP du SDK OpenTelemetry directement vers l'Agent Datadog, consultez <a href="/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent">Ingestion OTLP dans l'Agent Datadog</a>. <a href="/help/">Contactez l'assistance</a> si vous avez des questions.
 </div>
+
+La prise en charge d'OpenTelemetry est disponible via le package `opentelemetry-exporter-datadog`` pour exporter les traces d'OpenTelemetry vers Datadog.
 
 ### Installation
 

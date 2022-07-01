@@ -1,22 +1,27 @@
 ---
-title: "Collecte de données Amazon\_ECS"
-kind: documentation
 further_reading:
-  - link: /agent/amazon_ecs/logs/
-    tag: Documentation
-    text: Recueillir les logs de votre application
-  - link: /agent/amazon_ecs/apm/
-    tag: Documentation
-    text: Recueillir les traces de vos applications
-  - link: /agent/amazon_ecs/data_collected/#metriques
-    tag: Documentation
-    text: Recueillir des métriques ECS
+- link: /agent/amazon_ecs/logs/
+  tag: Documentation
+  text: Recueillir les logs de votre application
+- link: /agent/amazon_ecs/apm/
+  tag: Documentation
+  text: Recueillir les traces de vos applications
+- link: /agent/amazon_ecs/data_collected/#metriques
+  tag: Documentation
+  text: Recueillir des métriques ECS
+kind: documentation
+title: Collecte de données Amazon ECS
 ---
+
 ## Données collectées
 
 ### Métriques
 
-Amazon ECS sur EC2 est un service de gestion de conteneurs pour les conteneurs Docker s'exécutant sur des instances EC2. Lorsque l'Agent est déployé dans un conteneur Docker, il recueille les mêmes métriques que l'intégration Docker. Pour obtenir la liste complète des métriques recueillies, consultez la documentation relative aux [métriques de l'intégration Docker][1].
+Amazon ECS sur EC2 est un service de gestion de conteneurs pour les conteneurs Docker exécutés sur des instances EC2. Voici les métriques recueillies par l'Agent pour Amazon ECS :
+
+{{< get-metrics-from-git "amazon_ecs" >}}
+
+Lorsque l'Agent est déployé dans un conteneur Docker, il recueille également les mêmes métriques que l'intégration Docker. Pour obtenir la liste complète des métriques recueillies, consultez la documentation relative aux [métriques de l'intégration Docker][1].
 
 **Remarque** : les tags `container_name`, `task_arn`, `task_family`, `task_name` et `task_version` sont appliqués aux métriques Docker. Aucune configuration supplémentaire n'est requise.
 

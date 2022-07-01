@@ -1,6 +1,8 @@
 ---
 title: Enabling the Profiler
 kind: Documentation
+aliases: 
+  - /tracing/faq/profiling_migration/
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'

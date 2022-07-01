@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
   tag: "Blog"
   text: "Monitor and visualize database performance"
+- link: "https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/"
+  tag: "Blog"
+  text: "Monitor SQL Server and Azure managed databases with Datadog DBM"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -25,16 +28,21 @@ Datadog Database Monitoring provides deep visibility into databases across all o
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres** and **MySQL**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, and **SQL Server**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
-### Self-hosted databases
+### Postgres
 
-{{< partial name="dbm/dbm-getting-started" >}}
+{{< partial name="dbm/dbm-setup-postgres" >}}
 <p></p>
 
-### Managed databases
+### MySQL
 
-{{< partial name="dbm/dbm-getting-started-managed" >}}
+{{< partial name="dbm/dbm-setup-mysql" >}}
+<p></p>
+
+### SQL Server
+
+{{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
 
 ## Explore Datadog Database Monitoring
