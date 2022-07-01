@@ -272,7 +272,7 @@ frontend network_devices_metadata_frontend
 
 # This declares the endpoint where your Agents connects for
 # sending Network Devices SNMP Traps data (e.g the value of "network_devices.snmp_traps.forwarder.dd_url")
-frontend network_devices_metadata_frontend
+frontend network_devices_snmp_traps_frontend
     bind *:3842
     mode http
     option tcplog
