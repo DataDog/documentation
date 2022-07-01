@@ -192,7 +192,8 @@ hugpython/bin/activate: local/etc/requirements3.txt  ## Start python virtual env
 		$(VIRENV)/bin/pip install -r local/etc/requirements3.txt; \
 	else printf "\e[93mPython 3 is required to fetch integrations and run tests.\033[0m Try https://github.com/pyenv/pyenv.\n"; fi
 
-source-helpers: hugpython  ## Source the helper functions used in build, test, deploy.
+source-helpers: # Source the helper functions used in build, test, deploy.
+	@if [ "${DOCKER}" != "true" ]; then make hugpython; fi
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
@@ -200,7 +201,7 @@ source-helpers: hugpython  ## Source the helper functions used in build, test, d
 start: clean source-helpers examples ## Build the documentation with all external content.
 	@echo "\033[35m\033[1m\nBuilding the documentation with ALL external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
-		source ${VIRENV}/bin/activate;  \
+		. ${VIRENV}/bin/activate; \
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
 		DD_API_KEY=${DD_API_KEY} \
 		DD_APP_KEY=${DD_APP_KEY} \
@@ -209,20 +210,23 @@ start: clean source-helpers examples ## Build the documentation with all externa
 		PULL_RBAC_PERMISSIONS=${PULL_RBAC_PERMISSIONS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		LOCAL=${LOCAL}\
+		LANGS_TO_IGNORE=${LANGS_TO_IGNORE} \
+		DOCKER=${DOCKER} \
 		run-site.sh; \
 	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
 
 start-no-pre-build: clean source-helpers ## Build the documentation without automatically pulled content.
 	@echo "\033[35m\033[1m\nBuilding the documentation with NO external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
-		source ${VIRENV}/bin/activate;  \
+		. ${VIRENV}/bin/activate; \
 		RUN_SERVER=${RUN_SERVER} \
+		LANGS_TO_IGNORE=${LANGS_TO_IGNORE} \
+		DOCKER=${DOCKER} \
 		run-site-no-pre-build.sh; \
 	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
 
 stop:  ## Stop wepack watch/hugo server.
 	@echo "stopping previous..."
-	@pkill -x hugo server --renderToDisk || true
 
 clean-go-examples:
 	@git clean -xdf content/en/api/**/*.go
@@ -286,3 +290,12 @@ examples/typescript: examples/datadog-api-client-typescript clean-typescript-exa
 	-cp -Rn examples/datadog-api-client-typescript/examples/v* ./content/en/api
 
 examples: examples/go examples/java examples/python examples/ruby examples/typescript
+
+start-docker: clean
+	@export REPO_PATH=$(PWD) && \
+	export GITHUB_TOKEN=${GITHUB_TOKEN} && \
+	export FULL_BUILD=${FULL_BUILD} && \
+	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -p docs-local -f ./docker-compose-docs.yml up
+
+stop-docker:
+	docker-compose -f ./docker-compose-docs.yml down

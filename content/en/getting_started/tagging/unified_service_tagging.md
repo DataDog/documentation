@@ -403,6 +403,8 @@ See [how to connect your Lambda telemetry using tags][13].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
+
+
 [1]: /getting_started/tagging/
 [2]: /agent/docker/integrations/?tab=docker
 [3]: /getting_started/agent
