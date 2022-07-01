@@ -47,6 +47,9 @@ Estimated usage metrics are generally available for the following usage types:
 | CWS Hosts                     | `datadog.estimated_usage.cws.hosts` |
 | CWS Containers                | `datadog.estimated_usage.cws.containers` | 
 | Database Hosts                | `datadog.estimated_usage.dbm.hosts` |
+| ASM Hosts                     | `datadog.estimated_usage.asm.hosts` |
+| Incident Management (Active Users)   | `datadog.estimated_usage.incident_management.active_users` |
+| CI Visibility                 | `datadog.estimated_usage.ci_visibility.pipeline.committers`, `datadog.estimated_usage.ci_visibility.test.committers` |
 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
