@@ -120,6 +120,7 @@ Prerequsites:
   2. Click the gear icon
   3. Click Experimental Features
   4. Click Enable VirtioFS accelerated directory sharing
+  5. Click Apply & Restart
 
 ### How to run documentation inside a Docker container
 1. Go to project root
