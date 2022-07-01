@@ -8,7 +8,7 @@ further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
-- link: "/dashboards/pie_chart/"
+- link: "/dashboards/widgets/pie_chart/"
   tag: "Documentation"
   text: "Pie Chart Widget"
 ---
