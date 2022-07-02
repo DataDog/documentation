@@ -86,7 +86,8 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
 2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
-3. 次のコマンドを実行します。
+3. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
+
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
      --service=my-service \
@@ -102,7 +103,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
 2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
 3. 2 つの環境変数 `export DATADOG_SITE="datadoghq.eu"` および `export DATADOG_API_HOST="api.datadoghq.eu"` をエクスポートして、EU リージョンにファイルをアップロードするために CLI を構成します。
-4. 次のコマンドを実行します。
+4. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
      --service=my-service \
@@ -119,9 +120,11 @@ CI のパフォーマンスに対するオーバーヘッドを最小限に抑�
 
 パラメーター `--service` と `--release-version` は、RUM イベントの `service` タグと `version` タグに一致させる必要があります。これらのタグの設定方法の詳細については、[Browser SDK 初期化ドキュメント][2]を参照してください。アップロードされたソースマップは、RUM Browser SDK によって収集されたエラーの難読化を解除するために使用されます。
 
+<div class="alert alert-info">RUM アプリケーションで複数のサービスを定義している場合、RUM アプリケーション全体のソースマップのセットが 1 つであっても、サービスの数だけ CI コマンドを実行します。</div>
+
 サンプルの `dist` ディレクトリに対してコマンドを実行すると、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` と `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` に JavaScript ファイルを配信することを期待します。
 
-**注**: エラー追跡でスタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。 `.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
+エラー追跡でスタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。 `.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
 
 <div class="alert alert-info">異なるサブドメインから同じ JavaScript ソースファイルを提供する場合、関連するソースマップを一度アップロードし、完全な URL の代わりに絶対プレフィックスパスを使用することで複数のサブドメインで動作するようにしてください。例えば、<code>https://hostname.com/static/js</code> の代わりに <code>/static/js</code> を指定します。</div>
 
