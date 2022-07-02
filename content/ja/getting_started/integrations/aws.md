@@ -24,6 +24,9 @@ further_reading:
 - link: integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
   tag: ドキュメント
   text: Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリーム
+- link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
+  tag: ブログ
+  text: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
 kind: documentation
 title: AWS の概要
 ---
@@ -176,7 +179,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 
 [Cloud SIEM の概要][50]を参照して、すぐに使える[ログ検出ルール][51]に照らし合わせてログを評価します。これらのルールはカスタマイズ可能で、脅威が検出されると[セキュリティシグナルエクスプローラー][52]でアクセス可能なセキュリティシグナルが生成されます。適切なチームに通知するために、[通知ルール][53]を使用して複数のルールにまたがる通知設定を構成することができます。
 
-#### CSPM
+#### クラウドセキュリティポスチャ管理(CSPM)
 
 [CSPM の概要][54]ガイドを使用して、クラウド環境における誤構成の検出と評価について学びます。リソース構成データは、すぐに利用可能なポスチャ管理[クラウド][55]および[インフラストラクチャー][56]の検出ルールに対して評価され、攻撃者のテクニックと潜在的な誤構成にフラグを立て、迅速な対応と修復を可能にします。
 
