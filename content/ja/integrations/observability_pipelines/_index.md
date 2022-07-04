@@ -3,6 +3,9 @@ further_reading:
 - link: /integrations/observability_pipelines/setup/
   tag: ドキュメント
   text: 観測可能性パイプラインを設定する
+- link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
+  tag: ブログ
+  text: 観測可能性パイプラインでテレメトリーデータを管理する
 - link: /integrations/observability_pipelines/vector_configurations/
   tag: ドキュメント
   text: Vector の構成の詳細

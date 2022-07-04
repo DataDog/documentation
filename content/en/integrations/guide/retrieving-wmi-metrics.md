@@ -1,6 +1,8 @@
 ---
-title: How to retrieve WMI metrics
-kind: faq
+title: Retrieving WMI metrics
+kind: guide
+aliases:
+  - /integrations/faq/how-to-retrieve-wmi-metrics
 ---
 
 ## What is WMI?

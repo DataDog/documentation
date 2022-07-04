@@ -1,6 +1,8 @@
 ---
-title: How to send TCP/UDP host metrics via the Datadog API ?
-kind: faq
+title: Send TCP/UDP host metrics to the Datadog API
+kind: guide
+aliases:
+  - /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api
 ---
 
 To get insights about your TCP/UDP connections, you can gather statistics through a Crontab Entry and forward them to your Datadog platform.

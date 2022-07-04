@@ -245,7 +245,7 @@ autoscaling/v2beta1
 external.metrics.k8s.io/v1beta1
 ```
 
-後者は、Datadog Cluster Agent が External Metrics Provider として適切に登録されている場合、および External Metrics Provider の APIService で参照されている同じサービス名と、ポート `443` 上の Datadog Cluster Agent のサービス名がある場合に表示されます。また、[External Metrics Provider の登録][1]ステップから RBAC を作成したことを確認します。
+後者は、Datadog Cluster Agent が External Metrics Provider として適切に登録されている場合、および External Metrics Provider の APIService で参照されている同じサービス名と、ポート `8443` 上の Datadog Cluster Agent のサービス名がある場合に表示されます。また、[External Metrics Provider の登録][1]ステップから RBAC を作成したことを確認します。
 
 HPA マニフェストの記述時に次のエラーが表示される場合
 
@@ -253,7 +253,7 @@ HPA マニフェストの記述時に次のエラーが表示される場合
 Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscaler  failed to get nginx.net.request_per_s external metric: unable to get external metric default/nginx.net.request_per_s/&LabelSelector{MatchLabels:map[string]string{kube_container_name: nginx,},MatchExpressions:[],}: unable to fetch metrics from external metrics API: the server is currently unable to handle the request (get nginx.net.request_per_s.external.metrics.k8s.io)
 ```
 
-Datadog Cluster Agent が実行されており、APIService に名前が登録されているポート `443` を公開しているサービスが稼働していることを確認します。
+Datadog Cluster Agent が実行されており、APIService に名前が登録されているポート `8443` を公開しているサービスが稼働していることを確認します。
 
 ### Datadog と Kubernetes の値の違い
 

@@ -1,6 +1,8 @@
 ---
 title: Connection Issues with the SQL Server Integration
-kind: faq
+kind: guide
+aliases:
+  - /integrations/faq/connection-issues-with-the-sql-server-integration
 ---
 
 ## Common SQL Server connection issues
@@ -29,9 +31,9 @@ If you are unsure how to set your SQL Server's authentication mode, see Microsof
 **Note**: If you make any of the changes above to SQL Server, you must restart SQL Server before the changes take effect.
 
 Here's an example of some SQL Server IP/TCP settings that have worked on one of Datadog's testing environments (Windows 2012 R2, SQL Server 2014 Express):
-{{< img src="integrations/faq/sql_server_test_1.png" alt="sql_server_test_1"  >}}
+{{< img src="integrations/faq/sql_server_test_1.png" alt="the TCP/IP properties window with IP addresses tab selected. The IP4 section is set with active yes and enabled no. IP address is set to 127.0.0.1 and TCP dynamic ports is set to 1433. TCP port is left blank."  >}}
 
-{{< img src="integrations/faq/sql_server_test_2.png" alt="sql_server_test_2"  >}}
+{{< img src="integrations/faq/sql_server_test_2.png" alt="the TCP/IP properties window with IP addresses tab selected. In the IPAll section the TCP dynamic ports is set to 1433 and TCP port is left blank."  >}}
 
 ## Empty connection string
 
@@ -81,7 +83,7 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
 
 [1]: https://app.datadoghq.com/account/settings#integrations/sql_server
 [2]: /integrations/sqlserver/#metrics
-[3]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
+[3]: /integrations/guide/collect-more-metrics-from-the-sql-server-integration/
 [4]: https://msdn.microsoft.com/en-us/library/ms177440.aspx
 [5]: https://msdn.microsoft.com/en-us/library/ms144284.aspx
 [6]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux

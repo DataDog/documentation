@@ -1,6 +1,8 @@
 ---
-title: For SNMP, does Datadog have a list of commonly used/compatible OIDs?
-kind: faq
+title: SNMP commonly used and compatible OIDs
+kind: guide
+aliases:
+  - /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
 ---
 
 For Cisco devices, you can use the command:

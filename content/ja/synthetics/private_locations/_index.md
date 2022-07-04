@@ -24,7 +24,7 @@ title: Synthetic テストをプライベートロケーションから実行す
 ---
 
 <div class="alert alert-info">
-IE11 ブラウザテストを実行するための Windows プライベートロケーションベータ版への追加をご希望の場合は、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にご連絡ください。
+Windows プライベートロケーションベータ版への追加をご希望の場合は、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にご連絡ください。
 </div>
 
 ## 概要
@@ -66,7 +66,7 @@ IE11 ブラウザテストを実行するための Windows プライベートロ
 
 | ポート | エンドポイント                                               | 説明                                                                                   |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `api.datadoghq.eu`                                | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
+| 443  | バージョン >=1.11.0 の場合は `intake.synthetics.datadoghq.eu`、バージョン <=1.10.0 の場合は `api.datadoghq.eu`                                | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
 | 443  | バージョン 0.2.0 以降、1.5.0 以下は `intake-v2.synthetics.datadoghq.eu` | ブラウザのテストアーティファクト（スクリーンショット、エラー、リソース）をプッシュするためにプライベートロケーションで使用されます。                                                                            |
 
 **注**: これらのドメインは、静的 IP アドレスのセットを指しています。これらのアドレスは、https://ip-ranges.datadoghq.eu、具体的には https://ip-ranges.datadoghq.eu/api.json (`api.datadoghq.eu` の場合) および https://ip-ranges.datadoghq.eu/synthetics-private-locations.json (`intake-v2.synthetics.datadoghq.eu` の場合) にあります。
