@@ -1,6 +1,6 @@
 ---
 title: Compose and the Datadog Agent
-kind: faq
+kind: guide
 further_reading:
     - link: 'https://github.com/DataDog/docker-compose-example'
       tag: 'Github'
@@ -11,6 +11,8 @@ further_reading:
     - link: '/agent/docker/log/'
       tag: 'Documentation'
       text: 'Datadog Docker Log collection documentation'
+aliases:
+    - /integrations/faq/compose-and-the-datadog-agent
 ---
 
 [Compose][1] is a Docker tool that simplifies building applications on Docker by allowing you to define, build and run multiple containers as a single application.

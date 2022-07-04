@@ -1,6 +1,8 @@
 ---
-title: How to use Bean Regexes to filter your JMX metrics and supply additional tags
-kind: faq
+title: Use Bean regexes to filter your JMX metrics and supply additional tags
+kind: guide
+aliases:
+  - /integrations/faq/how-to-use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags
 further_reading:
 - link: "/integrations/java/"
   tag: "Documentation"

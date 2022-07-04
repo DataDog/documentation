@@ -1,6 +1,8 @@
 ---
 title: MySQL Custom Queries
-kind: faq
+kind: guide
+aliases:
+  - /integrations/faq/how-to-collect-metrics-from-custom-mysql-queries
 further_reading:
 - link: "/integrations/mysql"
   tag: "Documentation"
