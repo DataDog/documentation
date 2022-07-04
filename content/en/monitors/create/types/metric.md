@@ -224,6 +224,6 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [2]: /getting_started/tagging/using_tags/?tab=assignment
 [3]: /dashboards/querying/#advanced-graphing
 [4]: /monitors/notify/?tab=is_alert#tag-variables
-[5]: /monitors/faq/what-are-recovery-thresholds/
+[5]: /monitors/guide/recovery-thresholds/
 [6]: /monitors/create/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/

@@ -14,6 +14,9 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
       tag: 'GitHub'
       text: 'Examples of Custom Instrumentation'
+    - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
+      tag: 'Blog'
+      text: 'Monitor containerized ASP.NET Core applications'
 ---
 
 
@@ -65,7 +68,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                    | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
-| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 1.0.0+                                           | `MySql`              |
+| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                  | `RabbitMQ`           |

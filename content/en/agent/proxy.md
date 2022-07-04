@@ -76,7 +76,7 @@ proxy:
       - host2
 ```
 
-**Note**: All integrations that make HTTP(S) requests default back to proxy settings defined in `datadog.yaml` configuration file if none are specified at the integration level. If this is undesired, set `skip_proxy` to true in every instance config or in the `init_config` fallback for your integration.
+**Note**: All integrations that make HTTP(S) requests default back to proxy settings defined in `datadog.yaml` configuration file if none are specified at the integration level. If this is undesired, set `skip_proxy` to true or `use_agent_proxy` to false in every instance config or in the `init_config` fallback for your integration.
 
 ##### NO_PROXY accepted values
 
@@ -271,12 +271,12 @@ frontend network_devices_metadata_frontend
     default_backend datadog-network-devices-metadata
 
 # This declares the endpoint where your Agents connect for
-# sending Instrumentations Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
-frontend instrumentation_telemetry_data_frontend
-    bind *:3843
+# sending appsec events (deprecated).
+frontend appsec-events-frontend
+    bind *:3842
     mode tcp
     option tcplog
-    default_backend datadog-instrumentations-telemetry
+    default_backend datadog-appsec-events
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -359,13 +359,13 @@ backend datadog-network-devices-metadata
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
-backend datadog-instrumentations-telemetry
+backend datadog-appsec-events # deprecated
     balance roundrobin
     mode tcp
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 ```
 
 **Note**: Download the certificate with one of the following commands:
@@ -555,9 +555,9 @@ stream {
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3843; #listen for instrumentations telemetry data
+        listen 3842; #listen for appsec events (deprecated)
         proxy_ssl on;
-        proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
+        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -596,7 +596,11 @@ database_monitoring:
 
 network_devices:
     metadata:
-        dd_url: nginx.example.com:3841
+        dd_url: "<PROXY_SERVER_DOMAIN>:3841"
+
+appsec_config:
+    appsec_dd_url: "<PROXY_SERVER_DOMAIN>:3842"
+
 ```
 
 When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.

@@ -45,7 +45,7 @@ datadogRum.init({
     //  env: 'production',
     //  version: '1.0.0',
     sampleRate: 100,
-    replaySampleRate: 100,
+    premiumSampleRate: 100,
     trackInteractions: true
 });
 
@@ -134,7 +134,7 @@ Session Replay follows the same 30 days retention policy as normal RUM sessions.
 ### How do you disable Session Replay?
 
 - Remove `startSessionReplayRecording()` to stop session recordings.
-- Set `replaySampleRate` to `0` to stop collecting the Browser Premium plan for RUM & Session Replay, which includes replays, resources, and long tasks.
+- Set `premiumSampleRate` to `0` to stop collecting the Browser Premium plan for RUM & Session Replay, which includes replays, resources, and long tasks.
 
 In order to apply these configurations, upgrade the [Browser RUM SDK][2] to a version >= 3.6.
 

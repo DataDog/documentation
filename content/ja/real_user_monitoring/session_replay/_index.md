@@ -45,7 +45,7 @@ datadogRum.init({
     //  env: 'production',
     //  version: '1.0.0',
     sampleRate: 100,
-    replaySampleRate: 100,
+    premiumSampleRate: 100,
     trackInteractions: true
 });
 
@@ -134,7 +134,7 @@ Datadog のリプレイビュー上では、ページが再構築され、記録
 ### セッションリプレイを無効にするには？
 
 - セッションの記録を停止するには、`startSessionReplayRecording()` を削除します。
-- リプレイ、リソース、ロングタスクを含む RUM およびセッションリプレイのブラウザプレミアムプランの収集を停止するには、`replaySampleRate` を `0` に設定します。
+- リプレイ、リソース、ロングタスクを含む RUM およびセッションリプレイのブラウザプレミアムプランの収集を停止するには、`premiumSampleRate` を `0` に設定します。
 
 これらの構成を適用するには、[Browser RUM SDK][2] をバージョン 3.6 以降にアップグレードしてください。
 

@@ -11,19 +11,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - autodiscovery
-  - log collection
+- processing
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/yarn/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
 display_name: Yarn
 draft: false
 git_integration_title: yarn
 guid: 3223c2e3-29dd-4cfb-82a2-51b951c648eb
 integration_id: yarn
 integration_title: Yarn
+integration_version: 4.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,22 +33,26 @@ metric_prefix: yarn.
 metric_to_check: yarn.metrics.total_mb
 name: yarn
 public_title: Intégration Datadog/Yarn
-short_description: Recueillez des métriques de santé à l'échelle du cluster et surveillez la progression de l'application.
+short_description: Recueillez des métriques de santé à l'échelle du cluster et surveillez
+  la progression de l'application.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Hadoop Yarn][1]
 
 ## Présentation
 
 Ce check recueille des métriques à partir de votre YARN ResourceManager, notamment (sans s'y limiter) :
 
-- Des métriques propres à votre cluster (p. ex. le nombre d'applications lancées, les conteneurs exécutés, les nœuds qui ne sont pas sains, etc.)
-- Des métriques propres à une application (p. ex. l'avancement de l'application, le temps d'exécution écoulé, les conteneurs exécutés, la mémoire utilisée, etc.)
-- Des métriques propres à vos nœuds (p. ex. les vCores disponibles, la date de dernière vérification de l'état de santé, etc.)
+- Des métriques propres à votre cluster, comme le nombre d'applications lancées, les conteneurs exécutés, les nœuds qui ne sont pas sains, etc.
+- Des métriques propres à une application, comme l'avancement de l'application, le temps d'exécution écoulé, les conteneurs exécutés, la mémoire utilisée, etc.
+- Des métriques propres à vos nœuds, comme les vCores disponibles, la date de dernière vérification de l'état de santé, etc.
 
 ### Métriques obsolètes
 
@@ -138,18 +143,18 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 3. [Redémarrez l'Agent][3].
 
-Consultez la [documentation de Datadog][4] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Docker.
+Pour activer les logs pour les environnements Docker, consultez la section [Collecte de logs avec Docker][4].
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: 
+[4]: https://docs.datadoghq.com/fr/agent/docker/log/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][3] et cherchez `yarn` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][3] et cherchez `yarn` dans la section Checks.
 
 ## Données collectées
 
@@ -162,31 +167,26 @@ Consultez la [documentation de Datadog][4] pour découvrir comment configurer l'
 Le check Yarn n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "yarn" >}}
 
-**yarn.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'URI ResourceManager pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
-
-**yarn.application.status** :<br>
-Renvoie le statut de chaque application selon le mappage spécifié dans le fichier [`conf.yaml`][4].
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 ## Pour aller plus loin
 
-- [Vue d'ensemble de l'architecture Hadoop][6]
-- [Comment surveiller des métriques Hadoop][7]
-- [Comment recueillir des métriques Hadoop][8]
-- [Comment surveiller Hadoop avec Datadog][9]
+- [Vue d'ensemble de l'architecture Hadoop][5]
+- [Comment surveiller des métriques Hadoop][6]
+- [Comment recueillir des métriques Hadoop][7]
+- [Comment surveiller Hadoop avec Datadog][8]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/yarn/images/yarn_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/help/
-[6]: https://www.datadoghq.com/blog/hadoop-architecture-overview
-[7]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
-[8]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
-[9]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
+[4]: https://docs.datadoghq.com/fr/help/
+[5]: https://www.datadoghq.com/blog/hadoop-architecture-overview
+[6]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
+[7]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
+[8]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog

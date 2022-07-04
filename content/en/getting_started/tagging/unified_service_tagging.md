@@ -16,13 +16,14 @@ further_reading:
 ---
 
 ## Overview
-Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`.
 
-With these three tags you can:
+Unified service tagging ties Datadog telemetry together through using three [reserved tags][1]: `env`, `service`, and `version`.
+
+With these three tags, you can:
 
 - Identify deployment impact with trace and container metrics filtered by version
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
-- View service data based on environment or version in a unified fashion within the Datadog site
+- View service data based on environment or version in a unified fashion
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
@@ -71,6 +72,8 @@ To setup unified service tagging in a containerized environment:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
+
+If you deployed the Datadog Cluster Agent with [Admission Controller][6] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][6].
 
 ##### Full configuration
 
@@ -184,6 +187,8 @@ containers:
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [4]: /tracing/send_traces/
 [5]: /integrations/statsd/
+[6]: /agent/cluster_agent/admission_controller/
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -278,15 +283,17 @@ If your service has no need for the Datadog environment variables (for example, 
 
 ### Non-containerized environment
 
-Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, it is recommended that these environment variables be scoped to a single process.
+Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, Datadog recommends scoping these environment variables to a single process.
 
-To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][8], [logs][9], and [StatsD metrics][10], you can either:
+To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], and [StatsD metrics][10], either:
 
 1. Export the environment variables in the command for your executable:
+   
+   ```
+   DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
+   ```
 
-    `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
-
-2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it has access to those variables.
+2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. When the service process starts, it has access to those variables.
 
 {{< tabs >}}
 {{% tab "Traces" %}}
@@ -312,6 +319,17 @@ If you're using [connected logs and traces][1], enable automatic logs injection 
 **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
 [1]: /tracing/connect_logs_and_traces/
+{{% /tab %}}
+
+{{% tab "RUM & Session Replay" %}}
+
+If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
+
+When you [create a RUM application][2], confirm the `env` and `service` names.
+
+
+[1]: /real_user_monitoring/connect_rum_and_traces/
+[2]: /real_user_monitoring/browser/#setup
 {{% /tab %}}
 
 {{% tab "Custom Metrics" %}}
@@ -353,7 +371,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 env: <ENV>
 ```
 
-To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, you can configure a [process check][2]:
+To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
 
 ```yaml
 init_config:
@@ -383,6 +401,8 @@ See [how to connect your Lambda telemetry using tags][13].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
 
 
 [1]: /getting_started/tagging/

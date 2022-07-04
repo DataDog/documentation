@@ -99,6 +99,7 @@ content/en/real_user_monitoring/ios/*
 content/en/real_user_monitoring/reactnative/_index.md
 content/en/real_user_monitoring/reactnative/integrated_libraries.md
 content/en/real_user_monitoring/reactnative/mobile_vitals.md
+content/en/real_user_monitoring/reactnative/expo.md
 content/en/real_user_monitoring/flutter/_index.md
 
 # Synthetics
@@ -202,3 +203,17 @@ static/images/integrations_logos/2020w2.pdf
 # Generated resources from Hugo Pipes
 resources/_gen/
 static/jsconfig.json
+
+# Generated from GitHub actions
+.github/preview-links-template.md
+
+# yarn v2 or greater
+# Not using zero installs
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

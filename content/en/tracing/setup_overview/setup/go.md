@@ -27,7 +27,7 @@ further_reading:
 
 ## Compatibility requirements
 
-The Go Tracer requires Go `1.12+` and Datadog Agent `>= 5.21.1`.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+The Go Tracer requires Go `1.16+` and Datadog Agent `>= 5.21.1`. For a full list of supported libraries, see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -43,7 +43,7 @@ When you set up tracing, you're also setting up Continuous Profiler, and you nee
 
 #### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][7] within the Datadog for the best experience, including:
+Follow the [Quickstart instructions][7] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.

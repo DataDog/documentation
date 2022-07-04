@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - security
-  - log collection
-  - autodiscovery
+- security
+- log collection
+- autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
 display_name: Twistlock
 draft: false
 git_integration_title: twistlock
 guid: 59082b73-62f4-48d4-83f8-af3d5576eae1
 integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
+integration_version: 3.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -34,10 +35,13 @@ public_title: Intégration Datadog/Prisma Cloud Compute Edition
 short_description: Twistlock est un scanner de sécurité pour conteneur.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 [Prisma Cloud Compute Edition][1] est un scanner de sécurité. Il peut analyser des conteneurs, des hosts et des packages afin de détecter les vulnérabilités et les problèmes de conformité.
@@ -110,9 +114,15 @@ spec:
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+{{< site-region region="us3" >}}
+**La collecte de logs n'est pas prise en charge pour le site {{< region-param key="dd_site_name" >}} Datadog**.
+{{< /site-region >}}
+
+
+_Disponible à partir des versions > 6.0 de l'Agent_
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                             |
 | -------------- | ------------------------------------------------- |
@@ -133,7 +143,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
      #(...)
    ```
 
-2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog, comme dans [ce manifeste][4].
+2. Montez le socket Docker sur l'Agent Datadog. Consultez les [exemples de manifeste][4] Kubernetes pour Datadog.
 
 3. Assurez-vous que la section de log est comprise dans l'annotation de pod relative au defender, où l'on peut trouver le nom du conteneur dans les spécifications de pod ci-dessous :
 
@@ -157,14 +167,14 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
    ad.datadoghq.com/<container-name>.logs: '[{"source": "twistlock", "service": "twistlock"}]'
    ```
 
-3. Assurez-vous que le socket Docker est monté sur l'Agent Datadog. Vous trouverez davantage d'informations concernant la configuration requise pour recueillir des logs via l'Agent Datadog dans la [documentation relative à Docker][6].
+3. Montez le socket Docker sur l'Agent Datadog. Vous trouverez davantage d'informations concernant la configuration requise pour recueillir des logs via l'Agent Datadog à la section [Collecte de logs Docker][6].
 
 4. [Redémarrez l'Agent][5].
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection
-[4]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#create-manifest
+[4]: https://docs.datadoghq.com/fr/agent/kubernetes/?tab=daemonset
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation
 {{% /tab %}}
@@ -172,7 +182,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][3] et cherchez `twistlock` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][3] et cherchez `twistlock` dans la section Checks.
 
 ## Données collectées
 
@@ -185,15 +195,16 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Prisma Cloud Compute Edition envoie un événement lorsqu'une nouvelle vulnérabilité ou un nouveau problème de sécurité est détecté.
 
 ### Checks de service
+{{< get-service-checks-from-git "twistlock" >}}
 
-Prisma Cloud Compute Edition envoie des checks de service en cas d'échec d'une analyse.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 
+
 [1]: https://www.paloaltonetworks.com/prisma/cloud
-[2]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/fr/help/

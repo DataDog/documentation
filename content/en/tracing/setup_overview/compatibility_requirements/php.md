@@ -12,24 +12,49 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
-## Compatibility
+## Runtime support policy for PHP APM
 
 The PHP Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
+Datadog APM for PHP is built upon dependencies defined in specific versions of the host operating system, PHP runtime,
+certain PHP libraries, and the Datadog Agent or API.
+When these versions are no longer supported by their maintainers, Datadog APM for PHP limits its support for these as well.
+
+#### Levels of support
+
+| **Level**                                              | **Support provided**                                                                                                                                                          |
+|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact our customer support team for special requests.][2]                                                             |
+| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug, and security fixes provided on a best-effort basis.                                    |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug, and security fixes.                                                                                    |
+| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                                                              |
+| <span id="support-legacy">Legacy</span>                |  Legacy implementation. May have limited function, but no maintenance provided. [Contact the support team][2] for special requests. |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
+
+
 PHP APM supports the following PHP versions:
 
-| Version    | Support type                          |
-|:-----------|:--------------------------------------|
-| 8.1.x      | Fully Supported (tracer `0.66.0+`)    |
-| 8.0.x      | Fully Supported (tracer `0.52.0+`)    |
-| 7.4.x      | Fully Supported                       |
-| 7.3.x      | Fully Supported                       |
-| 7.2.x      | Fully Supported                       |
-| 7.1.x      | Fully Supported                       |
-| 7.0.x      | Fully Supported                       |
-| 5.6.x      | Fully Supported                       |
-| 5.5.x      | Fully Supported (tracer `0.49.0+`)    |
-| 5.4.x      | Fully Supported                       |
+<div class="alert alert-info">
+<strong>Note:</strong>
+PHP 5.x is fully supported until version 0.75.0. It is now in maintenance mode and supported with security and important bug fixes until December 31, 2023.
+<br>
+If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
+<br>
+It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 7.4, 8.0, and 8.1.
+</div>
+
+| PHP Version    | Support level                         | Package version |
+|:---------------|:--------------------------------------|:----------------|
+| 8.1.x          | General Availability                  | > `0.66.0+`     |
+| 8.0.x          | General Availability                  | > `0.52.0+`     |
+| 7.4.x          | General Availability                  | All             |
+| 7.3.x          | General Availability                  | All             |
+| 7.2.x          | General Availability                  | All             |
+| 7.1.x          | General Availability                  | All             |
+| 7.0.x          | General Availability                  | All             |
+| 5.6.x          | Maintenance (until December 31, 2023) | All             |
+| 5.5.x          | Maintenance (until December 31, 2023) | All             |
+| 5.4.x          | Maintenance (until December 31, 2023) | All             |
 
 PHP APM supports the following SAPI's:
 
@@ -79,7 +104,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
 
-Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks.  To request support for additional span metadata and framework internals, contact our awesome [support team][2].
+Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks.  To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 
 #### CLI library compatibility
 
@@ -90,7 +115,7 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 | CakePHP Console | 2.x      | Fully Supported |
 | Laravel Artisan | 5.x      | Fully Supported |
 
-To request support for additional CLI libraries, contact our awesome [support team][2].
+To request support for additional CLI libraries, contact our awesome [support team][3].
 
 #### Datastore compatibility
 
@@ -100,13 +125,13 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Elasticsearch                                                           | 1.x                        | Fully Supported |
 | Eloquent                                                                | Laravel supported versions | Fully Supported |
 | Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
-| MongoDB - via [mongo][3] extension                                      | 1.4.x                      | Fully Supported |
+| MongoDB - via [mongo][4] extension                                      | 1.4.x                      | Fully Supported |
 | MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
 | PDO (MySQL, PostgreSQL, MariaDB)                                        | *(Any Supported PHP)*      | Fully Supported |
 | PhpRedis                                                                | 3, 4, 5                    | PHP 7, 8        |
 | Predis                                                                  | 1.1                        | Fully Supported |
 
-To request support for additional datastores, contact our awesome [support team][2].
+To request support for additional datastores, contact our awesome [support team][3].
 
 #### Library compatibility
 
@@ -116,30 +141,31 @@ To request support for additional datastores, contact our awesome [support team]
 | Guzzle     | 5.x                   | Fully Supported |
 | Guzzle     | 6.x                   | Fully Supported |
 
-To request support for additional libraries, contact our awesome [support team][2].
+To request support for additional libraries, contact our awesome [support team][3].
 
 #### Deep call stacks on PHP 5
 
-The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][4] for more details.
+The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][5] for more details.
 
 ### Generators
 
-Instrumenting [generators][5] is not supported on PHP 5 and PHP 7.
+Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
 ### PCNTL
 
-Datadog does not offer support for tracing processes forked using [pcntl][6]. When a call to `pcntl_fork` is detected, tracing is disabled in the forked process. The main process can still be traced.
+Datadog does not offer support for tracing processes forked using [pcntl][7]. When a call to `pcntl_fork` is detected, tracing is disabled in the forked process. The main process can still be traced.
 
-If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][7], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
+If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-php
-[2]: /help
-[3]: https://pecl.php.net/package/mongo
-[4]: /tracing/troubleshooting/php_5_deep_call_stacks
-[5]: https://www.php.net/manual/en/language.generators.overview.php
-[6]: https://www.php.net/manual/en/book.pcntl.php
-[7]: https://man7.org/linux/man-pages/man2/unshare.2.html
+[2]: https://www.datadoghq.com/support/
+[3]: /help
+[4]: https://pecl.php.net/package/mongo
+[5]: /tracing/troubleshooting/php_5_deep_call_stacks
+[6]: https://www.php.net/manual/en/language.generators.overview.php
+[7]: https://www.php.net/manual/en/book.pcntl.php
+[8]: https://man7.org/linux/man-pages/man2/unshare.2.html

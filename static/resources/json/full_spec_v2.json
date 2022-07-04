@@ -325,6 +325,15 @@
           "type": "string"
         }
       },
+      "OpsgenieServiceIDPathParameter": {
+        "description": "The UUID of the service.",
+        "in": "path",
+        "name": "integration_service_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "PageNumber": {
         "description": "Specific page number to return.",
         "in": "query",
@@ -15529,10 +15538,13 @@
       "IntakePayloadAccepted": {
         "description": "The payload accepted for intake.",
         "properties": {
-          "status": {
-            "description": "The status of the intake payload.",
-            "example": "ok",
-            "type": "string"
+          "errors": {
+            "description": "A list of errors.",
+            "items": {
+              "description": "An empty error list.",
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -23028,7 +23040,6 @@
             "type": "array"
           },
           "include_percentiles": {
-            "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
             "example": true,
             "type": "boolean"
@@ -23154,7 +23165,6 @@
                 "type": "array"
               },
               "include_percentiles": {
-                "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                 "example": true,
                 "type": "boolean"
@@ -23307,7 +23317,6 @@
                     "type": "array"
                   },
                   "include_percentiles": {
-                    "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                     "example": true,
                     "type": "boolean"
@@ -23644,7 +23653,6 @@
             "type": "array"
           },
           "include_percentiles": {
-            "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
             "example": true,
             "type": "boolean"
@@ -23747,7 +23755,6 @@
                 "type": "array"
               },
               "include_percentiles": {
-                "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                 "example": true,
                 "type": "boolean"
@@ -23877,7 +23884,6 @@
                     "type": "array"
                   },
                   "include_percentiles": {
-                    "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                     "example": true,
                     "type": "boolean"
@@ -24568,6 +24574,639 @@
         "required": [
           "id",
           "type"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceCreateAttributes": {
+        "description": "The Opsgenie service attributes for a create request.",
+        "properties": {
+          "custom_url": {
+            "description": "The custom URL for a custom region.",
+            "example": "https://example.com",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name for the Opsgenie service.",
+            "example": "fake-opsgenie-service-name",
+            "type": "string"
+          },
+          "opsgenie_api_key": {
+            "description": "The Opsgenie API key for your Opsgenie service.",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region for the Opsgenie service.",
+            "enum": [
+              "us",
+              "eu",
+              "custom"
+            ],
+            "example": "us",
+            "type": "string",
+            "x-enum-varnames": [
+              "US",
+              "EU",
+              "CUSTOM"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "opsgenie_api_key",
+          "region"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceCreateData": {
+        "description": "Opsgenie service data for a create request.",
+        "properties": {
+          "attributes": {
+            "description": "The Opsgenie service attributes for a create request.",
+            "properties": {
+              "custom_url": {
+                "description": "The custom URL for a custom region.",
+                "example": "https://example.com",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name for the Opsgenie service.",
+                "example": "fake-opsgenie-service-name",
+                "type": "string"
+              },
+              "opsgenie_api_key": {
+                "description": "The Opsgenie API key for your Opsgenie service.",
+                "example": "00000000-0000-0000-0000-000000000000",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region for the Opsgenie service.",
+                "enum": [
+                  "us",
+                  "eu",
+                  "custom"
+                ],
+                "example": "us",
+                "type": "string",
+                "x-enum-varnames": [
+                  "US",
+                  "EU",
+                  "CUSTOM"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "opsgenie_api_key",
+              "region"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "opsgenie-service",
+            "description": "Opsgenie service resource type.",
+            "enum": [
+              "opsgenie-service"
+            ],
+            "example": "opsgenie-service",
+            "type": "string",
+            "x-enum-varnames": [
+              "OPSGENIE_SERVICE"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceCreateRequest": {
+        "description": "Create request for an Opsgenie service.",
+        "properties": {
+          "data": {
+            "description": "Opsgenie service data for a create request.",
+            "properties": {
+              "attributes": {
+                "description": "The Opsgenie service attributes for a create request.",
+                "properties": {
+                  "custom_url": {
+                    "description": "The custom URL for a custom region.",
+                    "example": "https://example.com",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name for the Opsgenie service.",
+                    "example": "fake-opsgenie-service-name",
+                    "type": "string"
+                  },
+                  "opsgenie_api_key": {
+                    "description": "The Opsgenie API key for your Opsgenie service.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "The region for the Opsgenie service.",
+                    "enum": [
+                      "us",
+                      "eu",
+                      "custom"
+                    ],
+                    "example": "us",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "US",
+                      "EU",
+                      "CUSTOM"
+                    ]
+                  }
+                },
+                "required": [
+                  "name",
+                  "opsgenie_api_key",
+                  "region"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "opsgenie-service",
+                "description": "Opsgenie service resource type.",
+                "enum": [
+                  "opsgenie-service"
+                ],
+                "example": "opsgenie-service",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPSGENIE_SERVICE"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceRegionType": {
+        "description": "The region for the Opsgenie service.",
+        "enum": [
+          "us",
+          "eu",
+          "custom"
+        ],
+        "example": "us",
+        "type": "string",
+        "x-enum-varnames": [
+          "US",
+          "EU",
+          "CUSTOM"
+        ]
+      },
+      "OpsgenieServiceResponse": {
+        "description": "Response of an Opsgenie service.",
+        "properties": {
+          "data": {
+            "description": "Opsgenie service data from a response.",
+            "properties": {
+              "attributes": {
+                "description": "The attributes from an Opsgenie service response.",
+                "properties": {
+                  "custom_url": {
+                    "description": "The custom URL for a custom region.",
+                    "example": null,
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name for the Opsgenie service.",
+                    "example": "fake-opsgenie-service-name",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "The region for the Opsgenie service.",
+                    "enum": [
+                      "us",
+                      "eu",
+                      "custom"
+                    ],
+                    "example": "us",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "US",
+                      "EU",
+                      "CUSTOM"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The ID of the Opsgenie service.",
+                "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                "type": "string"
+              },
+              "type": {
+                "default": "opsgenie-service",
+                "description": "Opsgenie service resource type.",
+                "enum": [
+                  "opsgenie-service"
+                ],
+                "example": "opsgenie-service",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPSGENIE_SERVICE"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceResponseAttributes": {
+        "description": "The attributes from an Opsgenie service response.",
+        "properties": {
+          "custom_url": {
+            "description": "The custom URL for a custom region.",
+            "example": null,
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "The name for the Opsgenie service.",
+            "example": "fake-opsgenie-service-name",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region for the Opsgenie service.",
+            "enum": [
+              "us",
+              "eu",
+              "custom"
+            ],
+            "example": "us",
+            "type": "string",
+            "x-enum-varnames": [
+              "US",
+              "EU",
+              "CUSTOM"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "OpsgenieServiceResponseData": {
+        "description": "Opsgenie service data from a response.",
+        "properties": {
+          "attributes": {
+            "description": "The attributes from an Opsgenie service response.",
+            "properties": {
+              "custom_url": {
+                "description": "The custom URL for a custom region.",
+                "example": null,
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "The name for the Opsgenie service.",
+                "example": "fake-opsgenie-service-name",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region for the Opsgenie service.",
+                "enum": [
+                  "us",
+                  "eu",
+                  "custom"
+                ],
+                "example": "us",
+                "type": "string",
+                "x-enum-varnames": [
+                  "US",
+                  "EU",
+                  "CUSTOM"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The ID of the Opsgenie service.",
+            "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+            "type": "string"
+          },
+          "type": {
+            "default": "opsgenie-service",
+            "description": "Opsgenie service resource type.",
+            "enum": [
+              "opsgenie-service"
+            ],
+            "example": "opsgenie-service",
+            "type": "string",
+            "x-enum-varnames": [
+              "OPSGENIE_SERVICE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceType": {
+        "default": "opsgenie-service",
+        "description": "Opsgenie service resource type.",
+        "enum": [
+          "opsgenie-service"
+        ],
+        "example": "opsgenie-service",
+        "type": "string",
+        "x-enum-varnames": [
+          "OPSGENIE_SERVICE"
+        ]
+      },
+      "OpsgenieServiceUpdateAttributes": {
+        "description": "The Opsgenie service attributes for an update request.",
+        "properties": {
+          "custom_url": {
+            "description": "The custom URL for a custom region.",
+            "example": "https://example.com",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "The name for the Opsgenie service.",
+            "example": "fake-opsgenie-service-name",
+            "type": "string"
+          },
+          "opsgenie_api_key": {
+            "description": "The Opsgenie API key for your Opsgenie service.",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region for the Opsgenie service.",
+            "enum": [
+              "us",
+              "eu",
+              "custom"
+            ],
+            "example": "us",
+            "type": "string",
+            "x-enum-varnames": [
+              "US",
+              "EU",
+              "CUSTOM"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "OpsgenieServiceUpdateData": {
+        "description": "Opsgenie service for an update request.",
+        "properties": {
+          "attributes": {
+            "description": "The Opsgenie service attributes for an update request.",
+            "properties": {
+              "custom_url": {
+                "description": "The custom URL for a custom region.",
+                "example": "https://example.com",
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "The name for the Opsgenie service.",
+                "example": "fake-opsgenie-service-name",
+                "type": "string"
+              },
+              "opsgenie_api_key": {
+                "description": "The Opsgenie API key for your Opsgenie service.",
+                "example": "00000000-0000-0000-0000-000000000000",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region for the Opsgenie service.",
+                "enum": [
+                  "us",
+                  "eu",
+                  "custom"
+                ],
+                "example": "us",
+                "type": "string",
+                "x-enum-varnames": [
+                  "US",
+                  "EU",
+                  "CUSTOM"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The ID of the Opsgenie service.",
+            "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+            "type": "string"
+          },
+          "type": {
+            "default": "opsgenie-service",
+            "description": "Opsgenie service resource type.",
+            "enum": [
+              "opsgenie-service"
+            ],
+            "example": "opsgenie-service",
+            "type": "string",
+            "x-enum-varnames": [
+              "OPSGENIE_SERVICE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServiceUpdateRequest": {
+        "description": "Update request for an Opsgenie service.",
+        "properties": {
+          "data": {
+            "description": "Opsgenie service for an update request.",
+            "properties": {
+              "attributes": {
+                "description": "The Opsgenie service attributes for an update request.",
+                "properties": {
+                  "custom_url": {
+                    "description": "The custom URL for a custom region.",
+                    "example": "https://example.com",
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name for the Opsgenie service.",
+                    "example": "fake-opsgenie-service-name",
+                    "type": "string"
+                  },
+                  "opsgenie_api_key": {
+                    "description": "The Opsgenie API key for your Opsgenie service.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "The region for the Opsgenie service.",
+                    "enum": [
+                      "us",
+                      "eu",
+                      "custom"
+                    ],
+                    "example": "us",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "US",
+                      "EU",
+                      "CUSTOM"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The ID of the Opsgenie service.",
+                "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                "type": "string"
+              },
+              "type": {
+                "default": "opsgenie-service",
+                "description": "Opsgenie service resource type.",
+                "enum": [
+                  "opsgenie-service"
+                ],
+                "example": "opsgenie-service",
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPSGENIE_SERVICE"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OpsgenieServicesResponse": {
+        "description": "Response with a list of Opsgenie services.",
+        "properties": {
+          "data": {
+            "description": "An array of Opsgenie services.",
+            "example": [
+              {
+                "attributes": {
+                  "custom_url": null,
+                  "name": "fake-opsgenie-service-name",
+                  "region": "us"
+                },
+                "id": "596da4af-0563-4097-90ff-07230c3f9db3",
+                "type": "opsgenie-service"
+              },
+              {
+                "attributes": {
+                  "custom_url": null,
+                  "name": "fake-opsgenie-service-name-2",
+                  "region": "eu"
+                },
+                "id": "0d2937f1-b561-44fa-914a-99910f848014",
+                "type": "opsgenie-service"
+              }
+            ],
+            "items": {
+              "description": "Opsgenie service data from a response.",
+              "properties": {
+                "attributes": {
+                  "description": "The attributes from an Opsgenie service response.",
+                  "properties": {
+                    "custom_url": {
+                      "description": "The custom URL for a custom region.",
+                      "example": null,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The name for the Opsgenie service.",
+                      "example": "fake-opsgenie-service-name",
+                      "type": "string"
+                    },
+                    "region": {
+                      "description": "The region for the Opsgenie service.",
+                      "enum": [
+                        "us",
+                        "eu",
+                        "custom"
+                      ],
+                      "example": "us",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "US",
+                        "EU",
+                        "CUSTOM"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "The ID of the Opsgenie service.",
+                  "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "opsgenie-service",
+                  "description": "Opsgenie service resource type.",
+                  "enum": [
+                    "opsgenie-service"
+                  ],
+                  "example": "opsgenie-service",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "OPSGENIE_SERVICE"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "type",
+                "attributes"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "data"
         ],
         "type": "object"
       },
@@ -31447,6 +32086,11 @@
                 "options": {
                   "description": "Options on rules.",
                   "properties": {
+                    "decreaseCriticalityBasedOnEnv": {
+                      "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                      "example": false,
+                      "type": "boolean"
+                    },
                     "detectionMethod": {
                       "description": "The detection method.",
                       "enum": [
@@ -31598,6 +32242,7 @@
                           ]
                         },
                         "learningDuration": {
+                          "default": 0,
                           "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                           "enum": [
                             0,
@@ -31610,6 +32255,33 @@
                             "ZERO_DAYS",
                             "ONE_DAY",
                             "SEVEN_DAYS"
+                          ]
+                        },
+                        "learningMethod": {
+                          "default": "duration",
+                          "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                          "enum": [
+                            "duration",
+                            "threshold"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "DURATION",
+                            "THRESHOLD"
+                          ]
+                        },
+                        "learningThreshold": {
+                          "default": 0,
+                          "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                          "enum": [
+                            0,
+                            1
+                          ],
+                          "format": "int32",
+                          "type": "integer",
+                          "x-enum-varnames": [
+                            "ZERO_OCCURRENCES",
+                            "ONE_OCCURRENCE"
                           ]
                         }
                       },
@@ -31925,6 +32597,11 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "decreaseCriticalityBasedOnEnv": {
+                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                "example": false,
+                "type": "boolean"
+              },
               "detectionMethod": {
                 "description": "The detection method.",
                 "enum": [
@@ -32076,6 +32753,7 @@
                     ]
                   },
                   "learningDuration": {
+                    "default": 0,
                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                     "enum": [
                       0,
@@ -32088,6 +32766,33 @@
                       "ZERO_DAYS",
                       "ONE_DAY",
                       "SEVEN_DAYS"
+                    ]
+                  },
+                  "learningMethod": {
+                    "default": "duration",
+                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                    "enum": [
+                      "duration",
+                      "threshold"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DURATION",
+                      "THRESHOLD"
+                    ]
+                  },
+                  "learningThreshold": {
+                    "default": 0,
+                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_OCCURRENCES",
+                      "ONE_OCCURRENCE"
                     ]
                   }
                 },
@@ -32193,6 +32898,11 @@
           "message"
         ],
         "type": "object"
+      },
+      "SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv": {
+        "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+        "example": false,
+        "type": "boolean"
       },
       "SecurityMonitoringRuleDetectionMethod": {
         "description": "The detection method.",
@@ -32350,6 +33060,7 @@
             ]
           },
           "learningDuration": {
+            "default": 0,
             "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
             "enum": [
               0,
@@ -32362,6 +33073,33 @@
               "ZERO_DAYS",
               "ONE_DAY",
               "SEVEN_DAYS"
+            ]
+          },
+          "learningMethod": {
+            "default": "duration",
+            "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+            "enum": [
+              "duration",
+              "threshold"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "DURATION",
+              "THRESHOLD"
+            ]
+          },
+          "learningThreshold": {
+            "default": 0,
+            "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+            "enum": [
+              0,
+              1
+            ],
+            "format": "int32",
+            "type": "integer",
+            "x-enum-varnames": [
+              "ZERO_OCCURRENCES",
+              "ONE_OCCURRENCE"
             ]
           }
         },
@@ -32389,6 +33127,7 @@
         ]
       },
       "SecurityMonitoringRuleNewValueOptionsLearningDuration": {
+        "default": 0,
         "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
         "enum": [
           0,
@@ -32403,9 +33142,41 @@
           "SEVEN_DAYS"
         ]
       },
+      "SecurityMonitoringRuleNewValueOptionsLearningMethod": {
+        "default": "duration",
+        "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+        "enum": [
+          "duration",
+          "threshold"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "DURATION",
+          "THRESHOLD"
+        ]
+      },
+      "SecurityMonitoringRuleNewValueOptionsLearningThreshold": {
+        "default": 0,
+        "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+        "enum": [
+          0,
+          1
+        ],
+        "format": "int32",
+        "type": "integer",
+        "x-enum-varnames": [
+          "ZERO_OCCURRENCES",
+          "ONE_OCCURRENCE"
+        ]
+      },
       "SecurityMonitoringRuleOptions": {
         "description": "Options on rules.",
         "properties": {
+          "decreaseCriticalityBasedOnEnv": {
+            "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+            "example": false,
+            "type": "boolean"
+          },
           "detectionMethod": {
             "description": "The detection method.",
             "enum": [
@@ -32557,6 +33328,7 @@
                 ]
               },
               "learningDuration": {
+                "default": 0,
                 "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                 "enum": [
                   0,
@@ -32569,6 +33341,33 @@
                   "ZERO_DAYS",
                   "ONE_DAY",
                   "SEVEN_DAYS"
+                ]
+              },
+              "learningMethod": {
+                "default": "duration",
+                "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                "enum": [
+                  "duration",
+                  "threshold"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "DURATION",
+                  "THRESHOLD"
+                ]
+              },
+              "learningThreshold": {
+                "default": 0,
+                "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                "enum": [
+                  0,
+                  1
+                ],
+                "format": "int32",
+                "type": "integer",
+                "x-enum-varnames": [
+                  "ZERO_OCCURRENCES",
+                  "ONE_OCCURRENCE"
                 ]
               }
             },
@@ -32824,6 +33623,11 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "decreaseCriticalityBasedOnEnv": {
+                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                "example": false,
+                "type": "boolean"
+              },
               "detectionMethod": {
                 "description": "The detection method.",
                 "enum": [
@@ -32975,6 +33779,7 @@
                     ]
                   },
                   "learningDuration": {
+                    "default": 0,
                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                     "enum": [
                       0,
@@ -32987,6 +33792,33 @@
                       "ZERO_DAYS",
                       "ONE_DAY",
                       "SEVEN_DAYS"
+                    ]
+                  },
+                  "learningMethod": {
+                    "default": "duration",
+                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                    "enum": [
+                      "duration",
+                      "threshold"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DURATION",
+                      "THRESHOLD"
+                    ]
+                  },
+                  "learningThreshold": {
+                    "default": 0,
+                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_OCCURRENCES",
+                      "ONE_OCCURRENCE"
                     ]
                   }
                 },
@@ -33230,6 +34062,11 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "decreaseCriticalityBasedOnEnv": {
+                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                "example": false,
+                "type": "boolean"
+              },
               "detectionMethod": {
                 "description": "The detection method.",
                 "enum": [
@@ -33381,6 +34218,7 @@
                     ]
                   },
                   "learningDuration": {
+                    "default": 0,
                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                     "enum": [
                       0,
@@ -33393,6 +34231,33 @@
                       "ZERO_DAYS",
                       "ONE_DAY",
                       "SEVEN_DAYS"
+                    ]
+                  },
+                  "learningMethod": {
+                    "default": "duration",
+                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                    "enum": [
+                      "duration",
+                      "threshold"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DURATION",
+                      "THRESHOLD"
+                    ]
+                  },
+                  "learningThreshold": {
+                    "default": 0,
+                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_OCCURRENCES",
+                      "ONE_OCCURRENCE"
                     ]
                   }
                 },
@@ -36874,7 +37739,6 @@
           "authorizationCode": {
             "authorizationUrl": "/oauth2/v1/authorize",
             "scopes": {
-              "dashboards_public_share": "Share dashboards externally.",
               "dashboards_read": "View dashboards.",
               "dashboards_write": "Create and change dashboards.",
               "events_read": "Read Events data.",
@@ -36882,6 +37746,8 @@
               "incident_settings_write": "Configure Incidents settings.",
               "incident_write": "Create, view, and manage incidents in Datadog.",
               "metrics_read": "View custom metrics.",
+              "monitors_read": "View monitors.",
+              "monitors_write": "Edit, mute, and delete individual monitors.",
               "security_monitoring_filters_read": "Read Security Filters.",
               "security_monitoring_filters_write": "Create, edit, and delete Security Filters.",
               "security_monitoring_rules_read": "Read Detection Rules.",
@@ -52097,6 +52963,1126 @@
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
+    "/api/v2/integration/opsgenie/services": {
+      "get": {
+        "description": "Get a list of all services from the Datadog Opsgenie integration.",
+        "operationId": "ListOpsgenieServices",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response with a list of Opsgenie services.",
+                  "properties": {
+                    "data": {
+                      "description": "An array of Opsgenie services.",
+                      "example": [
+                        {
+                          "attributes": {
+                            "custom_url": null,
+                            "name": "fake-opsgenie-service-name",
+                            "region": "us"
+                          },
+                          "id": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "opsgenie-service"
+                        },
+                        {
+                          "attributes": {
+                            "custom_url": null,
+                            "name": "fake-opsgenie-service-name-2",
+                            "region": "eu"
+                          },
+                          "id": "0d2937f1-b561-44fa-914a-99910f848014",
+                          "type": "opsgenie-service"
+                        }
+                      ],
+                      "items": {
+                        "description": "Opsgenie service data from a response.",
+                        "properties": {
+                          "attributes": {
+                            "description": "The attributes from an Opsgenie service response.",
+                            "properties": {
+                              "custom_url": {
+                                "description": "The custom URL for a custom region.",
+                                "example": null,
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "The name for the Opsgenie service.",
+                                "example": "fake-opsgenie-service-name",
+                                "type": "string"
+                              },
+                              "region": {
+                                "description": "The region for the Opsgenie service.",
+                                "enum": [
+                                  "us",
+                                  "eu",
+                                  "custom"
+                                ],
+                                "example": "us",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "US",
+                                  "EU",
+                                  "CUSTOM"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "The ID of the Opsgenie service.",
+                            "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "opsgenie-service",
+                            "description": "Opsgenie service resource type.",
+                            "enum": [
+                              "opsgenie-service"
+                            ],
+                            "example": "opsgenie-service",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "OPSGENIE_SERVICE"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type",
+                          "attributes"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get all service objects",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-menu-order": 1,
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create a new service object in the Opsgenie integration.",
+        "operationId": "CreateOpsgenieService",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Create request for an Opsgenie service.",
+                "properties": {
+                  "data": {
+                    "description": "Opsgenie service data for a create request.",
+                    "properties": {
+                      "attributes": {
+                        "description": "The Opsgenie service attributes for a create request.",
+                        "properties": {
+                          "custom_url": {
+                            "description": "The custom URL for a custom region.",
+                            "example": "https://example.com",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "The name for the Opsgenie service.",
+                            "example": "fake-opsgenie-service-name",
+                            "type": "string"
+                          },
+                          "opsgenie_api_key": {
+                            "description": "The Opsgenie API key for your Opsgenie service.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "region": {
+                            "description": "The region for the Opsgenie service.",
+                            "enum": [
+                              "us",
+                              "eu",
+                              "custom"
+                            ],
+                            "example": "us",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "US",
+                              "EU",
+                              "CUSTOM"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "opsgenie_api_key",
+                          "region"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "opsgenie-service",
+                        "description": "Opsgenie service resource type.",
+                        "enum": [
+                          "opsgenie-service"
+                        ],
+                        "example": "opsgenie-service",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "OPSGENIE_SERVICE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Opsgenie service payload",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response of an Opsgenie service.",
+                  "properties": {
+                    "data": {
+                      "description": "Opsgenie service data from a response.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes from an Opsgenie service response.",
+                          "properties": {
+                            "custom_url": {
+                              "description": "The custom URL for a custom region.",
+                              "example": null,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name for the Opsgenie service.",
+                              "example": "fake-opsgenie-service-name",
+                              "type": "string"
+                            },
+                            "region": {
+                              "description": "The region for the Opsgenie service.",
+                              "enum": [
+                                "us",
+                                "eu",
+                                "custom"
+                              ],
+                              "example": "us",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "US",
+                                "EU",
+                                "CUSTOM"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the Opsgenie service.",
+                          "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "opsgenie-service",
+                          "description": "Opsgenie service resource type.",
+                          "enum": [
+                            "opsgenie-service"
+                          ],
+                          "example": "opsgenie-service",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "OPSGENIE_SERVICE"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "CREATED"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Create a new service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-given": {
+          "opsgenie_service": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\",\n      \"opsgenie_api_key\": \"00000000-0000-0000-0000-000000000000\",\n      \"region\": \"us\"\n     },\n     \"type\": \"opsgenie-service\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"opsgenie_service\" in the system"
+          }
+        },
+        "x-menu-order": 2,
+        "x-undo": {
+          "operationId": "DeleteOpsgenieService",
+          "parameters": [
+            {
+              "name": "integration_service_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/integration/opsgenie/services/{integration_service_id}": {
+      "delete": {
+        "description": "Delete a single service object in the Datadog Opsgenie integration.",
+        "operationId": "DeleteOpsgenieService",
+        "parameters": [
+          {
+            "description": "The UUID of the service.",
+            "in": "path",
+            "name": "integration_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Delete a single service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-menu-order": 5,
+        "x-undo": {
+          "type": "idempotent"
+        }
+      },
+      "get": {
+        "description": "Get a single service from the Datadog Opsgenie integration.",
+        "operationId": "GetOpsgenieService",
+        "parameters": [
+          {
+            "description": "The UUID of the service.",
+            "in": "path",
+            "name": "integration_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response of an Opsgenie service.",
+                  "properties": {
+                    "data": {
+                      "description": "Opsgenie service data from a response.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes from an Opsgenie service response.",
+                          "properties": {
+                            "custom_url": {
+                              "description": "The custom URL for a custom region.",
+                              "example": null,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name for the Opsgenie service.",
+                              "example": "fake-opsgenie-service-name",
+                              "type": "string"
+                            },
+                            "region": {
+                              "description": "The region for the Opsgenie service.",
+                              "enum": [
+                                "us",
+                                "eu",
+                                "custom"
+                              ],
+                              "example": "us",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "US",
+                                "EU",
+                                "CUSTOM"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the Opsgenie service.",
+                          "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "opsgenie-service",
+                          "description": "Opsgenie service resource type.",
+                          "enum": [
+                            "opsgenie-service"
+                          ],
+                          "example": "opsgenie-service",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "OPSGENIE_SERVICE"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get a single service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-menu-order": 3,
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "patch": {
+        "description": "Update a single service object in the Datadog Opsgenie integration.",
+        "operationId": "UpdateOpsgenieService",
+        "parameters": [
+          {
+            "description": "The UUID of the service.",
+            "in": "path",
+            "name": "integration_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Update request for an Opsgenie service.",
+                "properties": {
+                  "data": {
+                    "description": "Opsgenie service for an update request.",
+                    "properties": {
+                      "attributes": {
+                        "description": "The Opsgenie service attributes for an update request.",
+                        "properties": {
+                          "custom_url": {
+                            "description": "The custom URL for a custom region.",
+                            "example": "https://example.com",
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "The name for the Opsgenie service.",
+                            "example": "fake-opsgenie-service-name",
+                            "type": "string"
+                          },
+                          "opsgenie_api_key": {
+                            "description": "The Opsgenie API key for your Opsgenie service.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "region": {
+                            "description": "The region for the Opsgenie service.",
+                            "enum": [
+                              "us",
+                              "eu",
+                              "custom"
+                            ],
+                            "example": "us",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "US",
+                              "EU",
+                              "CUSTOM"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "The ID of the Opsgenie service.",
+                        "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "opsgenie-service",
+                        "description": "Opsgenie service resource type.",
+                        "enum": [
+                          "opsgenie-service"
+                        ],
+                        "example": "opsgenie-service",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "OPSGENIE_SERVICE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Opsgenie service payload.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response of an Opsgenie service.",
+                  "properties": {
+                    "data": {
+                      "description": "Opsgenie service data from a response.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes from an Opsgenie service response.",
+                          "properties": {
+                            "custom_url": {
+                              "description": "The custom URL for a custom region.",
+                              "example": null,
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "The name for the Opsgenie service.",
+                              "example": "fake-opsgenie-service-name",
+                              "type": "string"
+                            },
+                            "region": {
+                              "description": "The region for the Opsgenie service.",
+                              "enum": [
+                                "us",
+                                "eu",
+                                "custom"
+                              ],
+                              "example": "us",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "US",
+                                "EU",
+                                "CUSTOM"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the Opsgenie service.",
+                          "example": "596da4af-0563-4097-90ff-07230c3f9db3",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "opsgenie-service",
+                          "description": "Opsgenie service resource type.",
+                          "enum": [
+                            "opsgenie-service"
+                          ],
+                          "example": "opsgenie-service",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "OPSGENIE_SERVICE"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Update a single service object",
+        "tags": [
+          "Opsgenie Integration"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
     "/api/v2/logs": {
       "post": {
         "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
@@ -60470,8 +62456,7 @@
         "x-menu-order": 5,
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       }
     },
     "/api/v2/metrics/config/bulk-tags": {
@@ -61579,8 +63564,7 @@
         "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       },
       "get": {
         "description": "Returns the tag configuration for the given metric name.",
@@ -61854,8 +63838,7 @@
         "x-menu-order": 2,
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       },
       "patch": {
         "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission.",
@@ -61960,7 +63943,6 @@
                             "type": "array"
                           },
                           "include_percentiles": {
-                            "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                             "example": true,
                             "type": "boolean"
@@ -62298,8 +64280,7 @@
         "x-menu-order": 3,
         "x-undo": {
           "type": "idempotent"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       },
       "post": {
         "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric or configure custom aggregations\non any count, rate, or gauge metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
@@ -62405,7 +64386,6 @@
                             "type": "array"
                           },
                           "include_percentiles": {
-                            "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                             "example": true,
                             "type": "boolean"
@@ -62787,13 +64767,12 @@
             }
           ],
           "type": "unsafe"
-        },
-        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+        }
       }
     },
     "/api/v2/metrics/{metric_name}/volumes": {
       "get": {
-        "description": "View distinct metrics volumes for the given metric name.\n\nCustom distribution metrics will return both ingested and indexed custom metric volumes.\nFor Metrics without Limits&trade; beta customers, all metrics will return both ingested/indexed volumes.\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+        "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
         "operationId": "ListVolumesByMetricName",
         "parameters": [
           {
@@ -69250,17 +71229,6 @@
             "description": "Too many requests"
           }
         },
-        "security": [
-          {
-            "apiKeyAuth": [],
-            "appKeyAuth": []
-          },
-          {
-            "AuthZ": [
-              "security_monitoring_rules_read"
-            ]
-          }
-        ],
         "summary": "Get the latest Cloud Workload Security policy",
         "tags": [
           "Cloud Workload Security"
@@ -71876,6 +73844,11 @@
                           "options": {
                             "description": "Options on rules.",
                             "properties": {
+                              "decreaseCriticalityBasedOnEnv": {
+                                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                                "example": false,
+                                "type": "boolean"
+                              },
                               "detectionMethod": {
                                 "description": "The detection method.",
                                 "enum": [
@@ -72027,6 +74000,7 @@
                                     ]
                                   },
                                   "learningDuration": {
+                                    "default": 0,
                                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                                     "enum": [
                                       0,
@@ -72039,6 +74013,33 @@
                                       "ZERO_DAYS",
                                       "ONE_DAY",
                                       "SEVEN_DAYS"
+                                    ]
+                                  },
+                                  "learningMethod": {
+                                    "default": "duration",
+                                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                                    "enum": [
+                                      "duration",
+                                      "threshold"
+                                    ],
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "DURATION",
+                                      "THRESHOLD"
+                                    ]
+                                  },
+                                  "learningThreshold": {
+                                    "default": 0,
+                                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                                    "enum": [
+                                      0,
+                                      1
+                                    ],
+                                    "format": "int32",
+                                    "type": "integer",
+                                    "x-enum-varnames": [
+                                      "ZERO_OCCURRENCES",
+                                      "ONE_OCCURRENCE"
                                     ]
                                   }
                                 },
@@ -72350,6 +74351,11 @@
                   "options": {
                     "description": "Options on rules.",
                     "properties": {
+                      "decreaseCriticalityBasedOnEnv": {
+                        "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                        "example": false,
+                        "type": "boolean"
+                      },
                       "detectionMethod": {
                         "description": "The detection method.",
                         "enum": [
@@ -72501,6 +74507,7 @@
                             ]
                           },
                           "learningDuration": {
+                            "default": 0,
                             "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                             "enum": [
                               0,
@@ -72513,6 +74520,33 @@
                               "ZERO_DAYS",
                               "ONE_DAY",
                               "SEVEN_DAYS"
+                            ]
+                          },
+                          "learningMethod": {
+                            "default": "duration",
+                            "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                            "enum": [
+                              "duration",
+                              "threshold"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "DURATION",
+                              "THRESHOLD"
+                            ]
+                          },
+                          "learningThreshold": {
+                            "default": 0,
+                            "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                            "enum": [
+                              0,
+                              1
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ZERO_OCCURRENCES",
+                              "ONE_OCCURRENCE"
                             ]
                           }
                         },
@@ -72742,6 +74776,11 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "decreaseCriticalityBasedOnEnv": {
+                          "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                          "example": false,
+                          "type": "boolean"
+                        },
                         "detectionMethod": {
                           "description": "The detection method.",
                           "enum": [
@@ -72893,6 +74932,7 @@
                               ]
                             },
                             "learningDuration": {
+                              "default": 0,
                               "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                               "enum": [
                                 0,
@@ -72905,6 +74945,33 @@
                                 "ZERO_DAYS",
                                 "ONE_DAY",
                                 "SEVEN_DAYS"
+                              ]
+                            },
+                            "learningMethod": {
+                              "default": "duration",
+                              "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                              "enum": [
+                                "duration",
+                                "threshold"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DURATION",
+                                "THRESHOLD"
+                              ]
+                            },
+                            "learningThreshold": {
+                              "default": 0,
+                              "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                              "enum": [
+                                0,
+                                1
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_OCCURRENCES",
+                                "ONE_OCCURRENCE"
                               ]
                             }
                           },
@@ -73375,6 +75442,11 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "decreaseCriticalityBasedOnEnv": {
+                          "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                          "example": false,
+                          "type": "boolean"
+                        },
                         "detectionMethod": {
                           "description": "The detection method.",
                           "enum": [
@@ -73526,6 +75598,7 @@
                               ]
                             },
                             "learningDuration": {
+                              "default": 0,
                               "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                               "enum": [
                                 0,
@@ -73538,6 +75611,33 @@
                                 "ZERO_DAYS",
                                 "ONE_DAY",
                                 "SEVEN_DAYS"
+                              ]
+                            },
+                            "learningMethod": {
+                              "default": "duration",
+                              "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                              "enum": [
+                                "duration",
+                                "threshold"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DURATION",
+                                "THRESHOLD"
+                              ]
+                            },
+                            "learningThreshold": {
+                              "default": 0,
+                              "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                              "enum": [
+                                0,
+                                1
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_OCCURRENCES",
+                                "ONE_OCCURRENCE"
                               ]
                             }
                           },
@@ -73826,6 +75926,11 @@
                   "options": {
                     "description": "Options on rules.",
                     "properties": {
+                      "decreaseCriticalityBasedOnEnv": {
+                        "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                        "example": false,
+                        "type": "boolean"
+                      },
                       "detectionMethod": {
                         "description": "The detection method.",
                         "enum": [
@@ -73977,6 +76082,7 @@
                             ]
                           },
                           "learningDuration": {
+                            "default": 0,
                             "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                             "enum": [
                               0,
@@ -73989,6 +76095,33 @@
                               "ZERO_DAYS",
                               "ONE_DAY",
                               "SEVEN_DAYS"
+                            ]
+                          },
+                          "learningMethod": {
+                            "default": "duration",
+                            "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                            "enum": [
+                              "duration",
+                              "threshold"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "DURATION",
+                              "THRESHOLD"
+                            ]
+                          },
+                          "learningThreshold": {
+                            "default": 0,
+                            "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                            "enum": [
+                              0,
+                              1
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ZERO_OCCURRENCES",
+                              "ONE_OCCURRENCE"
                             ]
                           }
                         },
@@ -74196,6 +76329,11 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "decreaseCriticalityBasedOnEnv": {
+                          "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                          "example": false,
+                          "type": "boolean"
+                        },
                         "detectionMethod": {
                           "description": "The detection method.",
                           "enum": [
@@ -74347,6 +76485,7 @@
                               ]
                             },
                             "learningDuration": {
+                              "default": 0,
                               "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                               "enum": [
                                 0,
@@ -74359,6 +76498,33 @@
                                 "ZERO_DAYS",
                                 "ONE_DAY",
                                 "SEVEN_DAYS"
+                              ]
+                            },
+                            "learningMethod": {
+                              "default": "duration",
+                              "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                              "enum": [
+                                "duration",
+                                "threshold"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DURATION",
+                                "THRESHOLD"
+                              ]
+                            },
+                            "learningThreshold": {
+                              "default": 0,
+                              "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                              "enum": [
+                                0,
+                                1
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_OCCURRENCES",
+                                "ONE_OCCURRENCE"
                               ]
                             }
                           },
@@ -74906,8 +77072,7 @@
         },
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       }
     },
     "/api/v2/security_monitoring/signals/search": {
@@ -75196,8 +77361,7 @@
         },
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       }
     },
     "/api/v2/series": {
@@ -75407,10 +77571,13 @@
                 "schema": {
                   "description": "The payload accepted for intake.",
                   "properties": {
-                    "status": {
-                      "description": "The status of the intake payload.",
-                      "example": "ok",
-                      "type": "string"
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "An empty error list.",
+                        "type": "string"
+                      },
+                      "type": "array"
                     }
                   },
                   "type": "object"
@@ -84792,6 +86959,238 @@
         }
       }
     },
+    "/api/v2/usage/estimated_cost_by_org": {
+      "get": {
+        "description": "Get estimated cost across multi-org account.",
+        "operationId": "GetEstimatedCostByOrg",
+        "parameters": [
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost beginning this month. Either start_month or start_date should be specified, but not both.",
+            "in": "query",
+            "name": "start_month",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost ending this month.",
+            "in": "query",
+            "name": "end_month",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost beginning this day. Either start_month or start_date should be specified, but not both.",
+            "in": "query",
+            "name": "start_date",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost ending this day.",
+            "in": "query",
+            "name": "end_date",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "Chargeback Summary response.",
+                  "properties": {
+                    "data": {
+                      "description": "Response containing Chargeback Summary.",
+                      "items": {
+                        "description": "Cost data.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Cost attributes data.",
+                            "properties": {
+                              "charges": {
+                                "description": "List of charges data reported for the requested month.",
+                                "items": {
+                                  "description": "Charges breakdown.",
+                                  "properties": {
+                                    "charge_type": {
+                                      "description": "The type of charge for a particular product.",
+                                      "example": "on_demand",
+                                      "type": "string"
+                                    },
+                                    "cost": {
+                                      "description": "The cost for a particular product and charge type during a given month.",
+                                      "format": "double",
+                                      "type": "number"
+                                    },
+                                    "product_name": {
+                                      "description": "The product for which cost is being reported.",
+                                      "example": "infra_host",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "date": {
+                                "description": "The month requested.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "org_name": {
+                                "description": "The organization name.",
+                                "type": "string"
+                              },
+                              "public_id": {
+                                "description": "The organization public ID.",
+                                "type": "string"
+                              },
+                              "total_cost": {
+                                "description": "The total cost of products for the month.",
+                                "format": "double",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the response.",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "cost_by_org",
+                            "description": "Type of cost data.",
+                            "enum": [
+                              "cost_by_org"
+                            ],
+                            "example": "cost_by_org",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "COST_BY_ORG"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden - User is not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "usage_read"
+            ]
+          }
+        ],
+        "summary": "Get estimated cost across multi-org account",
+        "tags": [
+          "Usage Metering"
+        ],
+        "x-menu-order": 39,
+        "x-undo": {
+          "type": "safe"
+        }
+      }
+    },
     "/api/v2/usage/lambda_traced_invocations": {
       "get": {
         "description": "Get hourly usage for Lambda Traced Invocations.",
@@ -89323,6 +91722,13 @@
     {
       "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.",
       "name": "Metrics"
+    },
+    {
+      "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API.",
+      "externalDocs": {
+        "url": "https://docs.datadoghq.com/api/latest/opsgenie-integration"
+      },
+      "name": "Opsgenie Integration"
     },
     {
       "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization).",

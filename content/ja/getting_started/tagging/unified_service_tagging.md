@@ -16,13 +16,14 @@ title: 統合サービスタグ付け
 ---
 
 ## 概要
+
 統合サービスタグ付けは、3 つの[予約済みタグ][1]である `env`、`service`、`version` を使用して Datadog テレメトリを結び付けます。
 
 これら 3 つのタグを使用すると、次のことができます。
 
 - バージョンでフィルタリングされたトレースおよびコンテナメトリクスでデプロイへの影響を特定する
 - 一貫性のあるタグを使用して、トレース、メトリクス、ログ間をシームレスに移動する
-- Datadog サイト内で統一された方法で環境またはバージョンに基づいてサービスデータを表示する
+- 統一された方法で環境またはバージョンに基づいてサービスデータを表示する
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="統合サービスタグ付け" video=true >}}
 
@@ -71,6 +72,8 @@ title: 統合サービスタグ付け
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
+
+[Admission Controller][6] を有効にして Datadog Cluster Agent をデプロイした場合、Admission Controller はポッドマニフェストを変異させ、(構成された変異条件に基づいて) 必要なすべての環境変数を注入します。その場合、ポッドマニフェスト内の環境変数 `DD_` の手動構成は不要になります。詳細は [Admission Controller のドキュメント][6]を参照してください。
 
 ##### 完全なコンフィギュレーション
 
@@ -184,6 +187,8 @@ containers:
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [4]: /ja/tracing/send_traces/
 [5]: /ja/integrations/statsd/
+[6]: /ja/agent/cluster_agent/admission_controller/
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -278,15 +283,17 @@ com.datadoghq.tags.version
 
 ### 非コンテナ化環境
 
-サービスのバイナリまたは実行可能ファイルをどのように構築およびデプロイするかによって、環境変数を設定するためのオプションをいくつか利用できる場合があります。ホストごとに 1 つ以上のサービスを実行する可能性があるため、これらの環境変数のスコープを単一プロセスにすることをお勧めします。
+サービスのバイナリまたは実行可能ファイルをどのように構築およびデプロイするかによって、環境変数を設定するためのオプションをいくつか利用できる場合があります。ホストごとに 1 つ以上のサービスを実行する可能性があるため、Datadog ではこれらの環境変数のスコープを単一プロセスにすることをお勧めします。
 
 [トレース][8]、[ログ][9]、[StatsD メトリクス][10]のサービスのランタイムから直接送信されるすべてのテレメトリーのコンフィギュレーションの単一ポイントを形成するには、次のいずれかを実行します。
 
 1. 実行可能ファイルのコマンドで環境変数をエクスポートします。
 
-    `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
+   ```
+   DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
+   ```
 
-2. または、[Chef][11]、[Ansible][12]、または別のオーケストレーションツールを使用して、サービスの systemd または initd コンフィギュレーションファイルに `DD` 環境変数を設定します。これにより、サービスプロセスが開始されると、その変数にアクセスできるようになります。
+2. または、[Chef][11]、[Ansible][12]、または別のオーケストレーションツールを使用して、サービスの systemd または initd コンフィギュレーションファイルに `DD` 環境変数を設定します。サービスプロセスが開始すると、その変数にアクセスできるようになります。
 
 {{< tabs >}}
 {{% tab "トレース" %}}
@@ -312,6 +319,17 @@ com.datadoghq.tags.version
 **注**: PHP Tracer は、ログの統合サービスタグ付けのコンフィギュレーションをサポートしていません。
 
 [1]: /ja/tracing/connect_logs_and_traces/
+{{% /tab %}}
+
+{{% tab "RUM とセッションリプレイ" %}}
+
+[接続された RUM とトレース][1]を使用する場合、初期化ファイルの `service` フィールドにブラウザアプリケーションを指定し、`env` フィールドに環境を定義し、`version` フィールドにバージョンを列挙します。
+
+[RUM アプリケーションの作成][2]の際に、`env` と `service` の名前を確認します。
+
+
+[1]: /ja/real_user_monitoring/connect_rum_and_traces/
+[2]: /ja/real_user_monitoring/browser/#setup
 {{% /tab %}}
 
 {{% tab "カスタムメトリクス" %}}
@@ -352,7 +370,7 @@ Agent の[メインコンフィギュレーションファイル][1]に、以下
 env: <ENV>
 ```
 
-[プロセスチェック][2]を構成して、CPU、メモリー、ディスクの処理レベルの入出力メトリクスで一意の `service` タグを取得することができます。
+CPU、メモリ、ディスク I/O のメトリクスに一意の `service` タグをプロセスレベルで取得するには、Agent の構成フォルダ (例えば、`process.d/conf.yaml` 下の `conf.d` フォルダ) で[プロセスチェック][2]を構成します。
 
 ```yaml
 init_config:

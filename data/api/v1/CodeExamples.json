@@ -51,6 +51,21 @@
   "CreateDashboard": [
     {
       "group": "dashboards",
+      "suffix": "_1442588603",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions APM Stats query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3882428227",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions events query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_252716965",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions metrics query"
+    },
+    {
+      "group": "dashboards",
       "suffix": "",
       "description": "Create a new dashboard returns \"OK\" response"
     },
@@ -409,6 +424,18 @@
       "description": "Query timeseries points returns \"OK\" response"
     }
   ],
+  "SubmitDistributionPoints": [
+    {
+      "group": "metrics",
+      "suffix": "_3109558960",
+      "description": "Submit deflate distribution points returns \"Payload accepted\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Submit distribution points returns \"Payload accepted\" response"
+    }
+  ],
   "SubmitMetrics": [
     {
       "group": "metrics",
@@ -662,6 +689,13 @@
       "group": "service_level_objectives",
       "suffix": "",
       "description": "Get an SLO's history returns \"OK\" response"
+    }
+  ],
+  "SearchSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Search for SLOs returns \"OK\" response"
     }
   ],
   "UpdateSLO": [

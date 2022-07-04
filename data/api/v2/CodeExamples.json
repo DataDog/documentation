@@ -504,6 +504,41 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
+  "CreateOpsgenieService": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Create a new service object returns \"CREATED\" response"
+    }
+  ],
+  "DeleteOpsgenieService": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Delete a single service object returns \"OK\" response"
+    }
+  ],
+  "GetOpsgenieService": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Get a single service object returns \"OK\" response"
+    }
+  ],
+  "ListOpsgenieServices": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Get all service objects returns \"OK\" response"
+    }
+  ],
+  "UpdateOpsgenieService": [
+    {
+      "group": "opsgenie_integration",
+      "suffix": "",
+      "description": "Update a single service object returns \"OK\" response"
+    }
+  ],
   "UploadIdPMetadata": [
     {
       "group": "organizations",
@@ -734,6 +769,18 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get cost across multi-org account returns \"OK\" response"
+    }
+  ],
+  "GetEstimatedCostByOrg": [
+    {
+      "group": "usage_metering",
+      "suffix": "_627383212",
+      "description": "Get estimated cost across multi-org account with date returns \"OK\" response"
+    },
+    {
+      "group": "usage_metering",
+      "suffix": "_1171921972",
+      "description": "Get estimated cost across multi-org account with month returns \"OK\" response"
     }
   ],
   "GetUsageApplicationSecurityMonitoring": [

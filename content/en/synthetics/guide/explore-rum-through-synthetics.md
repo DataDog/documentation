@@ -1,7 +1,7 @@
 ---
-title: Explore RUM & Session Replay in Synthetics
+title: Explore RUM & Session Replay In Synthetics
 kind: documentation
-description: Users without RUM can now preview RUM data, sessions, and errors from their Synthetic browser test results. 
+description: Users without RUM can now preview RUM data, sessions, and errors from their Synthetic browser test results with no additional cost. 
 aliases:
 further_reading:
 - link: "https://docs.datadoghq.com/synthetics/browser_tests/"

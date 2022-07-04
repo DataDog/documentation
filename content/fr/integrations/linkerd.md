@@ -22,7 +22,7 @@ git_integration_title: linkerd
 guid: 9aa60dff-4baf-4112-9177-f9c3814dd513
 integration_id: linkerd
 integration_title: Linkerd
-integration_version: 3.1.0
+integration_version: 3.2.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -100,7 +100,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][3].
 
 | Paramètre      | Valeur                                                |
 | -------------- | ---------------------------------------------------- |
