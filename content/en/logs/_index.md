@@ -9,7 +9,7 @@ aliases:
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
     tag: "Release Notes"
-    text: "Check out the latest Datadog Log Management releases! (App login required)."
+    text: "Check out the latest Datadog Log Management releases (App login required)"
   - link: "/logs/log_collection/"
     tag: "Documentation"
     text: "Starting collecting your logs"
@@ -19,6 +19,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/"
     tag: "Blog"
     text: "Accelerate Incident Investigations with Log Anomaly Detection"
+  - link: "https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/"
+    tag: "Blog"
+    text: "Monitor your IoT devices at scale with Datadog Log Management"
 ---
 
 ## Overview

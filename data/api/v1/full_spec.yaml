@@ -3789,10 +3789,18 @@ components:
       enum:
       - api_usage
       - apm_host_usage
+      - appsec_usage
       - browser_usage
       - container_usage
+      - cspm_containers_usage
+      - cspm_hosts_usage
       - custom_timeseries_usage
+      - cws_containers_usage
+      - cws_hosts_usage
+      - dbm_hosts_usage
+      - dbm_queries_usage
       - estimated_indexed_logs_usage
+      - estimated_indexed_spans_usage
       - fargate_usage
       - functions_usage
       - indexed_logs_usage
@@ -3806,10 +3814,18 @@ components:
       x-enum-varnames:
       - API_USAGE
       - APM_HOST_USAGE
+      - APPSEC_USAGE
       - BROWSER_USAGE
       - CONTAINER_USAGE
+      - CSPM_CONTAINERS_USAGE
+      - CSPM_HOSTS_USAGE
       - CUSTOM_TIMESERIES_USAGE
+      - CWS_CONTAINERS_USAGE
+      - CWS_HOSTS_USAGE
+      - DBM_HOSTS_USAGE
+      - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INDEXED_LOGS_USAGE
@@ -3956,6 +3972,23 @@ components:
           description: List of IPv6 prefixes by location.
           type: object
       type: object
+    IPPrefixesSyntheticsPrivateLocations:
+      description: Available prefix information for the Synthetics Private Locations
+        endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
     IPPrefixesWebhooks:
       description: Available prefix information for the Webhook endpoints.
       properties:
@@ -3991,6 +4024,8 @@ components:
           $ref: '#/components/schemas/IPPrefixesProcess'
         synthetics:
           $ref: '#/components/schemas/IPPrefixesSynthetics'
+        synthetics-private-locations:
+          $ref: '#/components/schemas/IPPrefixesSyntheticsPrivateLocations'
         version:
           description: Version of the IP list.
           example: 11
@@ -6973,14 +7008,30 @@ components:
       - api_percentage
       - apm_host_usage
       - apm_host_percentage
+      - appsec_usage
+      - appsec_percentage
       - browser_usage
       - browser_percentage
       - container_usage
       - container_percentage
+      - cspm_containers_percentage
+      - cspm_containers_usage
+      - cspm_hosts_percentage
+      - cspm_hosts_usage
       - custom_timeseries_usage
       - custom_timeseries_percentage
+      - cws_containers_percentage
+      - cws_containers_usage
+      - cws_hosts_percentage
+      - cws_hosts_usage
+      - dbm_hosts_percentage
+      - dbm_hosts_usage
+      - dbm_queries_percentage
+      - dbm_queries_usage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_indexed_spans_usage
+      - estimated_indexed_spans_percentage
       - fargate_usage
       - fargate_percentage
       - functions_usage
@@ -7006,14 +7057,30 @@ components:
       - API_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
+      - APPSEC_USAGE
+      - APPSEC_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
       - CONTAINER_USAGE
       - CONTAINER_PERCENTAGE
+      - CSPM_CONTAINERS_PERCENTAGE
+      - CSPM_CONTAINERS_USAGE
+      - CSPM_HOSTS_PERCENTAGE
+      - CSPM_HOSTS_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
+      - CWS_CONTAINERS_PERCENTAGE
+      - CWS_CONTAINERS_USAGE
+      - CWS_HOSTS_PERCENTAGE
+      - CWS_HOSTS_USAGE
+      - DBM_HOSTS_PERCENTAGE
+      - DBM_HOSTS_USAGE
+      - DBM_QUERIES_PERCENTAGE
+      - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -7052,6 +7119,15 @@ components:
           description: The APM host usage by tag(s).
           format: double
           type: number
+        appsec_percentage:
+          description: The percentage of Application Security Monitoring host usage
+            by tag(s).
+          format: double
+          type: number
+        appsec_usage:
+          description: The Application Security Monitoring host usage by tag(s).
+          format: double
+          type: number
         browser_percentage:
           description: The percentage of synthetic browser test usage by tag(s).
           format: double
@@ -7084,6 +7160,16 @@ components:
         estimated_indexed_logs_usage:
           description: The estimated live indexed logs usage by tag(s). This field
             is in private beta.
+          format: double
+          type: number
+        estimated_indexed_spans_percentage:
+          description: The percentage of estimated indexed spans usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_spans_usage:
+          description: The estimated indexed spans usage by tag(s). This field is
+            in private beta.
           format: double
           type: number
         fargate_percentage:
@@ -10987,6 +11073,7 @@ components:
       - locations
       - options
       - type
+      - message
       type: object
     SyntheticsAPITestConfig:
       description: Configuration object for a Synthetic API test.
@@ -11582,6 +11669,7 @@ components:
       - name
       - options
       - type
+      - message
       type: object
     SyntheticsBrowserTestConfig:
       description: Configuration object for a Synthetic browser test.
@@ -13945,6 +14033,8 @@ components:
       - snmp_usage
       - apm_host_usage
       - api_usage
+      - appsec_usage
+      - appsec_percentage
       - container_usage
       - custom_timeseries_percentage
       - container_percentage
@@ -13963,12 +14053,16 @@ components:
       - lambda_invocations_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_indexed_spans_usage
+      - estimated_indexed_spans_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
       - SNMP_USAGE
       - APM_HOST_USAGE
       - API_USAGE
+      - APPSEC_USAGE
+      - APPSEC_PERCENTAGE
       - CONTAINER_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
       - CONTAINER_PERCENTAGE
@@ -13987,6 +14081,8 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14023,6 +14119,10 @@ components:
       - dbm_queries_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - appsec_usage
+      - appsec_percentage
+      - estimated_indexed_spans_usage
+      - estimated_indexed_spans_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -14058,6 +14158,10 @@ components:
       - DBM_QUERIES_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - APPSEC_USAGE
+      - APPSEC_PERCENTAGE
+      - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -14086,6 +14190,13 @@ components:
           type: number
         apm_host_usage:
           description: The APM host usage by tag(s).
+          format: double
+          type: number
+        appsec_percentage:
+          description: The percentage of Application Security Monitoring host usage
+            by tag(s).
+        appsec_usage:
+          description: The Application Security Monitoring host usage by tag(s).
           format: double
           type: number
         browser_percentage:
@@ -14172,6 +14283,16 @@ components:
         estimated_indexed_logs_usage:
           description: The estimated live indexed logs usage by tag(s). Note this
             field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_spans_percentage:
+          description: The percentage of estimated indexed spans usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_indexed_spans_usage:
+          description: The estimated indexed spans usage by tag(s). Note this field
+            is in private beta.
           format: double
           type: number
         infra_host_percentage:
@@ -14325,13 +14446,75 @@ components:
     UsageBillableSummaryKeys:
       description: Response with aggregated usage types.
       properties:
+        apm_fargate_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_fargate_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_profiler_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_profiler_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_trace_search_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_pipeline_indexed_spans_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_pipeline_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_pipeline_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_test_indexed_spans_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_testing_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_testing_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cspm_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cspm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cspm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        custom_event_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cws_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cws_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cws_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        dbm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        dbm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        dbm_normalized_queries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        dbm_normalized_queries_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_apm_and_profiler_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_apm_and_profiler_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         fargate_container_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_profiler_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_profiler_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        incident_management_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        incident_management_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_and_apm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_and_apm_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         infra_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -14339,15 +14522,27 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         infra_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ingested_spans_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ingested_timeseries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ingested_timeseries_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        iot_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         iot_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         lambda_function_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        lambda_function_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_15day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_180day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_30day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_360day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_3day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -14365,6 +14560,8 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_ingested_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        network_device_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         network_device_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_flow_sum:
@@ -14373,21 +14570,39 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        observability_pipeline_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        online_archive_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         prof_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        prof_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         prof_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_lite_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_replay_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         rum_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_units_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        sensitive_data_scanner_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_invocation_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         siem_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        standard_timeseries_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_api_tests_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_browser_checks_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         timeseries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        timeseries_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
       type: object
     UsageBillableSummaryResponse:

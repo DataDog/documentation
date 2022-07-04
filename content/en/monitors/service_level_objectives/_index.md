@@ -180,7 +180,7 @@ When you create a correction window for an SLO, the time period you specify is r
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][15]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][15]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 

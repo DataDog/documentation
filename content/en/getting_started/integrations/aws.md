@@ -26,6 +26,9 @@ further_reading:
     - link: 'integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation'
       tag: 'Documentation'
       text: 'AWS CloudWatch Metric Streams with Kinesis Data Firehose'
+    - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
+      tag: 'Blog'
+      text: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
 ---
 
 ## Overview
