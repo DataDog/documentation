@@ -232,6 +232,8 @@ DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
 
 ### How to apply the DD_TRACE_SAMPLING_RULES configuration option ?
 
+#### In a Shell script
+
 If envoy is executed by a shell script, set the environment variable right before executing envoy in the shell script
 
 ```
@@ -239,8 +241,9 @@ If envoy is executed by a shell script, set the environment variable right befor
 export DD_TRACE_SAMPLING_RULES=[]
 envoy -c envoy-config.yaml
 ```
+#### Docker compose setup
 
-If envoy is executed as a servive in a docker-compose setup, set the environment variable in the `environment` section of the service definition:
+If envoy is executed as a service in a docker-compose setup, set the environment variable in the `environment` section of the service definition:
 
 ```
 services:
@@ -256,6 +259,8 @@ services:
     environment:
         - DD_TRACE_SAMPLING_RULES=[]
 ```
+
+#### Kubernetes pod container
 
 If envoy is a container inside of a Kubernetes pod, speficy the env variable in the `env` section of the relevant `containers` entry of the pod's spec:
 
