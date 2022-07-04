@@ -200,7 +200,7 @@ If you do not wish to collect the client IP value, set the `DD_TRACE_CLIENT_IP_H
 
 ### Redacting the query in the URL
 
-The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex find a suspicious key / value pair, it will replace it with `<redacted>`.
+The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex finds a suspicious key-value pair, it replaces it with `<redacted>`.
 
 If you do not want to collect the query string, set the `DD_HTTP_SERVER_TAG_QUERY_STRING` environment variable to `false`. The default value is `true`.
 
