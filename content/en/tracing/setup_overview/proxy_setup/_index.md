@@ -227,7 +227,6 @@ You can also define an explicit sampling rate between `0.0` (0%) and `1.0` (100%
 DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
 ```
 
-### How to apply the DD_TRACE_SAMPLING_RULES configuration option ?
 
 To configure your sampling rate with `DD_TRACE_SAMPLING_RULES`, use one of the following methods , depending on how you run Envoy:
 
