@@ -213,10 +213,7 @@ stats_config:
 
 ## Sampling
 
-The sampling rate for traces starting from Envoy can be set between `0.0` (0%) and `1.0` (100%).
-
-Configure the sampling rate in order to control the volume of traces sent to Datadog by using the parameter `DD_TRACE_SAMPLING_RULES`.
-By default, 100% of traces starting from Envoy are sampled.
+To control the volume of traces starting from Envoy that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Envoy are sent.
 
 To use the [Datadog Agent calculated sampling rates][2] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
@@ -224,7 +221,7 @@ To use the [Datadog Agent calculated sampling rates][2] (10 traces per second pe
 DD_TRACE_SAMPLING_RULES=[]
 ```
 
-You can also define an explicit sampling rate between `0.0` (0%) and `1.0` (100%) by service. For instance, to set the sample rate to 10% for service `envoy-proxy`, set :
+You can also define an explicit sampling rate between `0.0` (0%) and `1.0` (100%) by service. For example, to set the sample rate to 10% for service `envoy-proxy`:
 
 ```
 DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
@@ -232,18 +229,17 @@ DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
 
 ### How to apply the DD_TRACE_SAMPLING_RULES configuration option ?
 
-#### In a Shell script
+To configure your sampling rate with `DD_TRACE_SAMPLING_RULES`, use one of the following methods , depending on how you run Envoy:
 
-If envoy is executed by a shell script, set the environment variable right before executing envoy in the shell script
+- **By shell script**: Set the environment variable immediately before executing `envoy` in the script:
 
 ```
 #!/bin/sh
 export DD_TRACE_SAMPLING_RULES=[]
 envoy -c envoy-config.yaml
 ```
-#### Docker compose setup
 
-If envoy is executed as a service in a docker-compose setup, set the environment variable in the `environment` section of the service definition:
+- **In a Docker Compose setup**: Set the environment variable in the `environment` section of the service definition:
 
 ```
 services:
@@ -260,9 +256,7 @@ services:
         - DD_TRACE_SAMPLING_RULES=[]
 ```
 
-#### Kubernetes pod container
-
-If envoy is a container inside of a Kubernetes pod, speficy the env variable in the `env` section of the relevant `containers` entry of the pod's spec:
+- **As a container inside a Kubernetes pod**: specify the environment variable in the `env` section of the corresponding `containers` entry of the pod's spec:
 
 ```
 apiVersion: v1
@@ -299,7 +293,7 @@ The available [environment variables][3] depend on the version of the C++ tracer
 | v1.9 | v0.3.6 |
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
-[2]: tracing/trace_ingestion/mechanisms#in-the-agent
+[2]: /tracing/trace_ingestion/mechanisms#in-the-agent
 [3]: /tracing/setup/cpp/#environment-variables
 {{% /tab %}}
 {{% tab "NGINX" %}}
@@ -441,10 +435,7 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 
 ### Sampling
 
-The sampling rate for traces starting from Nginx services can be set between `0.0` (0%) and `1.0` (100%).
-
-Configure the sampling rate in order to control the volume of traces sent to Datadog by using the parameter `DD_TRACE_SAMPLING_RULES`.
-By default, 100% of traces starting from Nginx are sampled (the Kubernetes Nginx ingress controller uses the [v1.2.1][8] of the `dd-opentracing-cpp` library).
+To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Nginx are sent. The Kubernetes Nginx ingress controller uses [v1.2.1][8] of the `dd-opentracing-cpp` library).
 
 To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
@@ -452,7 +443,7 @@ To use the [Datadog Agent calculated sampling rates][9] (10 traces per second pe
 DD_TRACE_SAMPLING_RULES=[]
 ```
 
-Append a `main-snippet` data entry to the controller's ConfigMap, as below:
+To configure `DD_TRACE_SAMPLING_RULES`, add a `main-snippet` entry in the `data` section of the controller's ConfigMap:
 
 ```
 apiVersion: v1
@@ -541,10 +532,7 @@ of the higher-level `CronJob`.
 
 ### Sampling
 
-The sampling rate for traces starting from Istio services can be set between `0.0` (0%) and `1.0` (100%).
-
-Configure the sampling rate in order to control the volume of traces sent to Datadog by using the parameter `DD_TRACE_SAMPLING_RULES`.
-By default, 100% of traces starting from Istio are sampled.
+To control the volume of traces starting from Istio that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent. 
 
 To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
@@ -552,7 +540,7 @@ To use the [Datadog Agent calculated sampling rates][9] (10 traces per second pe
 DD_TRACE_SAMPLING_RULES=[]
 ```
 
-In each deployment whose namespace is labeled istio-injection=enabled, the environment variable can be set as part of the apm.datadoghq.com/env annotation of the deployment spec template.
+To configure `DD_TRACE_SAMPLING_RULES`, in each deployment whose namespace is labeled `istio-injection=enabled`, set the environment variable as part of the `apm.datadoghq.com/env` annotation of the deployment spec template:
 ```
 apiVersion: apps/v1
 ...
