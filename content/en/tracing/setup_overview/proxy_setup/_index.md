@@ -94,13 +94,13 @@ The following settings are required to enable Datadog APM in Envoy:
           typed_config:
             "@type": type.googleapis.com/envoy.extensions.request_id.uuid.v3.UuidRequestIdConfig
             use_request_id_for_trace_sampling: false
-        tracing: 
+        tracing:
           provider:
             name: envoy.tracers.datadog
             typed_config:
               "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
               collector_cluster: datadog_agent
-              service_name: envoy-v1.19 
+              service_name: envoy-v1.19
    ```
    The `collector_cluster` value must match the name provided for the Datadog Agent cluster. The `service_name` can be changed to a meaningful value for your usage of Envoy.
 
@@ -211,9 +211,71 @@ stats_config:
       - prefix: "cluster.datadog_agent."
 ```
 
+## Sampling
+
+The sampling rate for traces starting from Envoy can be set between `0.0` (0%) and `1.0` (100%).
+
+Configure the sampling rate in order to control the volume of traces sent to Datadog by using the parameter `DD_TRACE_SAMPLING_RULES`.
+By default, 100% of traces starting from Envoy are sampled.
+
+To use the [Datadog Agent calculated sampling rates][2] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
+
+```
+DD_TRACE_SAMPLING_RULES=[]
+```
+
+You can also define an explicit sampling rate between `0.0` (0%) and `1.0` (100%) by service. For instance, to set the sample rate to 10% for service `envoy-proxy`, set :
+
+```
+DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
+```
+
+### How to apply the DD_TRACE_SAMPLING_RULES configuration option ?
+
+If envoy is executed by a shell script, set the environment variable right before executing envoy in the shell script
+
+```
+#!/bin/sh
+export DD_TRACE_SAMPLING_RULES=[]
+envoy -c envoy-config.yaml
+```
+
+If envoy is executed as a servive in a docker-compose setup, set the environment variable in the `environment` section of the service definition:
+
+```
+services:
+  envoy:
+    image: envoyproxy/envoy:v1.19-latest
+    entrypoint: []
+    command:
+        - envoy
+        - -c
+        - /etc/envoy/envoy.yaml
+    volumes:
+        - './envoy.yaml:/etc/envoy/envoy.yaml:ro'
+    environment:
+        - DD_TRACE_SAMPLING_RULES=[]
+```
+
+If envoy is a container inside of a Kubernetes pod, speficy the env variable in the `env` section of the relevant `containers` entry of the pod's spec:
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: envoy
+spec:
+  containers:
+  - name: envoy
+    image: envoyproxy/envoy:v1.20-latest
+    env:
+    - name: DD_TRACE_SAMPLING_RULES
+      value: "[]"
+```
+
 ## Environment variables
 
-The available [environment variables][2] depend on the version of the C++ tracer embedded in Envoy.
+The available [environment variables][3] depend on the version of the C++ tracer embedded in Envoy.
 
 **Note**: The variables `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT` and `DD_TRACE_AGENT_URL` do not apply to Envoy, as the address of the Datadog Agent is configured using the `cluster` settings.
 
@@ -232,7 +294,8 @@ The available [environment variables][2] depend on the version of the C++ tracer
 | v1.9 | v0.3.6 |
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
-[2]: /tracing/setup/cpp/#environment-variables
+[2]: tracing/trace_ingestion/mechanisms
+[3]: /tracing/setup/cpp/#environment-variables
 {{% /tab %}}
 {{% tab "NGINX" %}}
 
@@ -291,7 +354,7 @@ The `http` block enables the OpenTracing module and loads the Datadog tracer:
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/nginx/dd-config.json;
 ```
 
-The `log_format with_trace_id` block is for correlating logs and traces. See the [example NGINX config][5] file for the complete format. The `$opentracing_context_x_datadog_trace_id` value captures the trace ID, and `$opentracing_context_x_datadog_parent_id` captures the span ID. 
+The `log_format with_trace_id` block is for correlating logs and traces. See the [example NGINX config][5] file for the complete format. The `$opentracing_context_x_datadog_trace_id` value captures the trace ID, and `$opentracing_context_x_datadog_parent_id` captures the span ID.
 
 The `location` block within the server where tracing is desired should add the following:
 
@@ -392,7 +455,7 @@ To learn more about monitoring your Istio environment with Datadog, [see the Ist
 
 ## Configuration
 
-Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters. 
+Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
 
 ### Datadog Agent installation
 
