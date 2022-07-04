@@ -42,15 +42,15 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 @param max_traces_per_second - integer - optional - default: 10
 @env DD_APM_MAX_TPS - integer - optional - default: 10
 ```
-**Note**: The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries, it has no effect on other tracing libraries such as OpenTelemetry SDKs.
+**Note**: The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
 
 ### In tracing libraries: user-defined rules
 `ingestion_reason: rule`
 
 For more granular control, use tracing library sampling configuration options:
 - Set a specific **sampling rate to apply to all root services** for the library, overriding the Agent's [default mechanism](#in-the-agent).
-- Set a **sampling rate to apply to specific root services** and/or for specific span operation names.
-- Set a **rate limit** on the number of ingested traces per second. The default rate limit is 100 traces per second per service instance (when using the Agent [default mechanism](#in-the-agent), the rate limiter is ignored)
+- Set a **sampling rate to apply to specific root services** or for specific span operation names.
+- Set a **rate limit** on the number of ingested traces per second. The default rate limit is 100 traces per second per service instance (when using the Agent [default mechanism](#in-the-agent), the rate limiter is ignored).
 
 **Note**: These rules are also head-based sampling controls. If the traffic for a service is higher than the configured maximum traces per second, then traces are dropped at the root. It does not create incomplete traces.
 
@@ -58,9 +58,9 @@ The configuration can be set by environment variables or directly in the code:
 
 {{< tabs >}}
 {{% tab "Java" %}}
-For Java aplications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set sampling rates by service using the `DD_TRACE_SAMPLING_SERVICE_RULES` environment variable.
+For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_SERVICE_RULES` environment variable.
 
-For instance, to sample 20.00% of the traces for the service `my-service`:
+For example, to send 20% of the traces for the service named `my-service`:
 
 ```
 # using system property
@@ -70,34 +70,34 @@ java -Ddd.trace.sampling.service.rules=my-service:0.2 -javaagent:dd-java-agent.j
 export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
 ```
 
-The rate limit is controllable via the environment variable `DD_TRACE_RATE_LIMIT`.
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
 
-Read more about sampling controls in the [Java tracing library documentation][1]
+Read more about sampling controls in the [Java tracing library documentation][1].
 
 [1]: /tracing/setup_overview/setup/java
 {{% /tab %}}
 {{% tab "Python" %}}
-For Python applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set sampling rates by service using the `DD_TRACE_SAMPLING_RULES` environment variable.
+For Python applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-For instance, to sample 50.00% of the traces for the service `my-service` and 10% for the rest of the traces:
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
 @env DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
 ```
 
-The rate limit is controllable via the environment variable `DD_TRACE_RATE_LIMIT`.
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
 
-Read more about sampling controls in the [Python tracing library documentation][1]
+Read more about sampling controls in the [Python tracing library documentation][1].
 
 [1]: /tracing/setup_overview/setup/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
 For Ruby applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
 
-You can also configure sampling rates by service. For instance, to sample 20.00% of the traces for the service `my-service`:
+You can also configure sampling rates by service. For instance, to send 20% of the traces for the service named `my-service`:
 
-```
+```ruby
 require 'ddtrace'
 
 Datadog.configure do |c|
@@ -112,33 +112,32 @@ Datadog.configure do |c|
 end
 ```
 
-Read more about sampling controls in the [Ruby tracing library documentation][1]
+Read more about sampling controls in the [Ruby tracing library documentation][1].
 
 [1]: /tracing/setup_overview/setup/ruby#sampling
 {{% /tab %}}
 {{% tab "Go" %}}
-For Go applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set sampling rates by service using the `DD_TRACE_SAMPLING_RULES` environment variable.
+For Go applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-For instance, to sample 50.00% of the traces for the service "my-service" and 10% for the rest of the traces:
+For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
 @env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
-The rate limit is controllable via the environment variable `DD_TRACE_RATE_LIMIT`.
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
 
-Read more about sampling controls in the [Go tracing library documentation][1]
+Read more about sampling controls in the [Go tracing library documentation][1].
 
 [1]: /tracing/setup_overview/setup/go
 {{% /tab %}}
 {{% tab "NodeJS" %}}
 For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
 
+You can also set by-service sampling rates. For instance, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
-You can also configure sampling rates by service. For instance, to sample 50.00% of the traces for the service `my-service` and 10% for the rest of the traces:
-
-```
+```javascript
 tracer.init({
   ingestion:
     sampler: {
@@ -150,56 +149,56 @@ tracer.init({
   }
 ```
 
-The rate limit is controllable via the environment variable `DD_TRACE_RATE_LIMIT`.
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
 
-Read more about sampling controls in the [NodeJS tracing library documentation][1]
+Read more about sampling controls in the [NodeJS tracing library documentation][1].
 
 [1]: /tracing/setup_overview/setup/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
-For PHP applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set sampling rates by service using the `DD_TRACE_SAMPLING_RULES` environment variable.
+For PHP applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-For instance, to sample 50.00% of the traces for the service "my-service" and 10% for the rest of the traces:
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
 @env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
-Read more about sampling controls in the [PHP tracing library documentation][1]
+Read more about sampling controls in the [PHP tracing library documentation][1].
 
 [1]: /tracing/setup_overview/setup/php
 {{% /tab %}}
 {{% tab "C++" %}}
-From version `v1.3.2`, the Datadog C++ library supports the following configurations:
+Starting in version version `1.3.2`, the Datadog C++ library supports the following configurations:
 - Global sampling rate: `DD_TRACE_SAMPLE_RATE` environment variable
 - Sampling rates by service: `DD_TRACE_SAMPLING_RULES` environment variable.
 - Rate limit setting: `DD_TRACE_RATE_LIMIT` environment variable.
 
-For instance, to sample 50.00% of the traces for the service "my-service" and 10% for the rest of the traces:
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
 @env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
-C++ does not provide integrations for OOTB instrumentation, but it’s used by Proxy tracing such as Envoy, Nginx or Istio. Read more about how to configure sampling for proxies in the dedicated [proxy tracing article][1]
+C++ does not provide integrations for out-of-the-box instrumentation, but it’s used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][1].
 
 [1]: /tracing/setup_overview/proxy_setup
 {{% /tab %}}
 {{% tab ".NET" %}}
-For Go applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set sampling rates by service using the `DD_TRACE_SAMPLING_RULES` environment variable.
+For .NET applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-For instance, to sample 50.00% of the traces for the service "my-service" and 10% for the rest of the traces:
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
 @env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
-The rate limit is controllable via the environment variable `DD_TRACE_RATE_LIMIT`.
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
 
-Read more about sampling controls in the [.NET tracing library documentation][1]
+Read more about sampling controls in the [.NET tracing library documentation][1].
 
 [1]: /tracing/setup_overview/setup/dotnet-core
 {{% /tab %}}
