@@ -19,46 +19,6 @@ The Datadog Agent and some tracing libraries have options available to address t
 
 If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
 
-## HTTP data collected
-
-Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, the following tags are collected for each server side web span:
-
-*  `http.status_code` - The request's response status code.
-*  `http.method` - The method or HTTP verb.
-*  `http.version` - The protocol version.
-*  `http.url` - The full URL, including the obfuscated query string. For details of the obfuscation see below.
-*  `http.useragent` - The browser's user agent field, if available.
-*  `http.server_name` - The primary server name of the matched host or virtual host.
-*  `http.route` - The matched route (path template).
-*  `http.client_ip` - The IP address of the original client behind all proxies, if known. Discovered from headers such as `X-Forwarded-For`.
-*  `http.request.content_length` - The size of the request payload body in bytes.
-*  `http.request.content_length_uncompressed` - The size of the uncompressed request payload body after transport decoding.
-*  `http.request.headers.*` - The request HTTP headers. None are collected by default, but you can optionally configure them.
-*  `http.response.content_length` - The size of the response payload body in bytes.
-*  `http.response.content_length_uncompressed` - The size of the uncompressed response payload body after transport decoding.
-*  `http.response.headers.*` - The response HTTP headers. None are collected by default, but you can optionally configure them.
-
-
-### Configuring a client IP header
-
-Datadog automatically attempts to resolve `http.client_ip` from a number of well known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library looks only in the specified header for the client IP.
-
-If you do not wish to collect the client IP value, set the `DD_TRACE_CLIENT_IP_HEADER_DISABLED` environment variable to `true`. It is `false` by default.
-
-### Redacting the query in the URL
-
-The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific.
-
-If you do not want to collect the query string, set the `DD_HTTP_SERVER_TAG_QUERY_STRING` environment variable to `false`. The default value is `true`.
-
-### Applying header tags to root spans
-
-To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variable with a map of case-insensitive header keys to tag names. The library applies matching header values as tags on root spans. The setting also accepts entries without a specified tag name, for example:
-
-```
-DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
-```
-
 ## Generalizing resource names and filtering baseline
 
 Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security and generalize resource names to facilitate grouping during analysis. In particular:
@@ -211,6 +171,46 @@ apm_config:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## HTTP data collected
+
+Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, the following tags are collected for each server side web span:
+
+*  `http.status_code` - The request's response status code.
+*  `http.method` - The method or HTTP verb.
+*  `http.version` - The protocol version.
+*  `http.url` - The full URL, including the obfuscated query string. For details of the obfuscation see below.
+*  `http.useragent` - The browser's user agent field, if available.
+*  `http.server_name` - The primary server name of the matched host or virtual host.
+*  `http.route` - The matched route (path template).
+*  `http.client_ip` - The IP address of the original client behind all proxies, if known. Discovered from headers such as `X-Forwarded-For`.
+*  `http.request.content_length` - The size of the request payload body in bytes.
+*  `http.request.content_length_uncompressed` - The size of the uncompressed request payload body after transport decoding.
+*  `http.request.headers.*` - The request HTTP headers. None are collected by default, but you can optionally configure them.
+*  `http.response.content_length` - The size of the response payload body in bytes.
+*  `http.response.content_length_uncompressed` - The size of the uncompressed response payload body after transport decoding.
+*  `http.response.headers.*` - The response HTTP headers. None are collected by default, but you can optionally configure them.
+
+
+### Configuring a client IP header
+
+Datadog automatically attempts to resolve `http.client_ip` from a number of well known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library looks only in the specified header for the client IP.
+
+If you do not wish to collect the client IP value, set the `DD_TRACE_CLIENT_IP_HEADER_DISABLED` environment variable to `true`. It is `false` by default.
+
+### Redacting the query in the URL
+
+The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex find a suspicious key / value pair, it will replace it with `<redacted>`.
+
+If you do not want to collect the query string, set the `DD_HTTP_SERVER_TAG_QUERY_STRING` environment variable to `false`. The default value is `true`.
+
+### Applying header tags to root spans
+
+To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variable with a map of case-insensitive header keys to tag names. The library applies matching header values as tags on root spans. The setting also accepts entries without a specified tag name, for example:
+
+```
+DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
+```
 
 ## Scrub sensitive data from your spans
 
