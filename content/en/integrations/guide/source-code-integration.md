@@ -104,7 +104,7 @@ When specifying your permissions in the integration tile, enable Datadog read pe
 {{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
-If you are not using GitHub, Datadog collects information for every commit SHA from your git repository with the [`datadog-ci git-metadata upload`][1] command in order to link your telemetry to your source code.
+To link telemetry to your source code, Datadog collects information for every commit SHA from your git repository with the [`datadog-ci git-metadata upload`][1] command.
 
 When you run `datadog-ci git-metadata upload` within a git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
