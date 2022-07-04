@@ -22,7 +22,7 @@ Access your Synthetics dashboards by filtering for `Synthetics` in the search qu
 {{< whatsnext desc="You can explore the following out-of-the-box Synthetics dashboards:" >}}
   {{< nextlink href="/synthetics/dashboards/api_test" >}}<u>API Test Performance</u>: Monitor your endpoints and services. {{< /nextlink >}}
   {{< nextlink href="/synthetics/dashboards/browser_test" >}}<u>Browser Test Performance</u>: View your browser tests' web performance, insights into third-party providers, and Core Web Vitals. {{< /nextlink >}}
-    {{< nextlink href="/synthetics/dashboards/test_summary" >}}<u>Testing Coverage</u>: Evaluate your browser tests' application coverage and identify popular elements in your application to track using RUM and Synthetics data. {{< /nextlink >}}
+    {{< nextlink href="/synthetics/dashboards/testing_coverage" >}}<u>Testing Coverage</u>: Evaluate your browser tests' application coverage and identify popular elements in your application to track using RUM and Synthetics data. {{< /nextlink >}}
   {{< nextlink href="/synthetics/dashboards/test_summary" >}}<u>Test Summary</u>: See insights about your Synthetic tests by region, environment, or team. {{< /nextlink >}}
 {{< /whatsnext >}}
 
