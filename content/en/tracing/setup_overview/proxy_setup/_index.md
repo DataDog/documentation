@@ -232,44 +232,44 @@ To configure your sampling rate with `DD_TRACE_SAMPLING_RULES`, use one of the f
 
 - **By shell script**: Set the environment variable immediately before executing `envoy` in the script:
 
-```
-#!/bin/sh
-export DD_TRACE_SAMPLING_RULES=[]
-envoy -c envoy-config.yaml
-```
+  ```
+  #!/bin/sh
+  export DD_TRACE_SAMPLING_RULES=[]
+  envoy -c envoy-config.yaml
+  ```
 
 - **In a Docker Compose setup**: Set the environment variable in the `environment` section of the service definition:
 
-```
-services:
-  envoy:
-    image: envoyproxy/envoy:v1.19-latest
-    entrypoint: []
-    command:
-        - envoy
-        - -c
-        - /etc/envoy/envoy.yaml
-    volumes:
-        - './envoy.yaml:/etc/envoy/envoy.yaml:ro'
-    environment:
-        - DD_TRACE_SAMPLING_RULES=[]
-```
+  ```
+  services:
+    envoy:
+      image: envoyproxy/envoy:v1.19-latest
+      entrypoint: []
+      command:
+          - envoy
+          - -c
+          - /etc/envoy/envoy.yaml
+      volumes:
+          - './envoy.yaml:/etc/envoy/envoy.yaml:ro'
+      environment:
+          - DD_TRACE_SAMPLING_RULES=[]
+  ```
 
 - **As a container inside a Kubernetes pod**: specify the environment variable in the `env` section of the corresponding `containers` entry of the pod's spec:
 
-```
-apiVersion: v1
-kind: Pod
-metadata:
-  name: envoy
-spec:
-  containers:
-  - name: envoy
-    image: envoyproxy/envoy:v1.20-latest
-    env:
-    - name: DD_TRACE_SAMPLING_RULES
-      value: "[]"
-```
+  ```
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: envoy
+  spec:
+    containers:
+    - name: envoy
+      image: envoyproxy/envoy:v1.20-latest
+      env:
+      - name: DD_TRACE_SAMPLING_RULES
+        value: "[]"
+  ```
 
 ## Environment variables
 
