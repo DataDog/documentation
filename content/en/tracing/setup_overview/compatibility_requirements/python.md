@@ -82,15 +82,14 @@ The `ddtrace` library includes support for the following data stores:
 | [MySQL][29] [mysql-connector][32]  | >= 2.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
 | [Postgres][33] [aiopg][34]         | >= 0.12.0, <=&nbsp;0.16        | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
 | [Postgres][33] [psycopg][35]       | >= 2.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
-| [PyMySQL][58]                      | >= 0.7, <=&nbsp;0.9            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html?highlight=pymysql#pymysql|
-| [PynamoDB][36]                     | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pynamodb
-
-| [PyODBC][37]                       | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyodbc                               |
-| [Redis][38]                        | >= 2.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
-| [Redis][38] [redis-py-cluster][39] | >= 1.3.5          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
-| [SQLAlchemy][40]                   | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
-| [SQLite3][41]                      | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
-| [Vertica][42]                      | >= 0.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
+| [PyMySQL][36]                      | >= 0.7, <=&nbsp;0.9            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html?highlight=pymysql#pymysql |
+| [PynamoDB][37]                     | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pynamodb |
+| [PyODBC][38]                       | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyodbc                               |
+| [Redis][39]                        | >= 2.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
+| [Redis][39] [redis-py-cluster][40] | >= 1.3.5          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
+| [SQLAlchemy][41]                   | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
+| [SQLite3][42]                      | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
+| [Vertica][43]                      | >= 0.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
 
 ### Library compatibility
 
@@ -98,25 +97,26 @@ The `ddtrace` library includes support for the following libraries:
 
 | Library           | Supported Version |  Automatic       | Library Documentation                                                    |
 | ----------------- | ----------------- | ---------------- | ------------------------------------------------------------------------ |
-| [aiobotocore][43] | >= 0.2.3          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
-| [asyncio][44]     | Fully Supported   | > Python 3.7 yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
-| [Botocore][45]    | >= 1.4.51         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
-| [Boto2][46]       | >= 2.29.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
-| [Celery][47]      | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
-| [Consul][48]      | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
-| [Futures][49]     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
-| [gevent][50]      | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
-| [Grpc][51]        | >= 1.8.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
-| [httplib][52]     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
-| [Jinja2][53]      | >= 2.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
-| [Kombu][54]       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
-| [Mako][55]        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
-| [Requests][56]    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
-| [urllib3][57]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
+| [aiobotocore][44] | >= 0.2.3          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
+| [asyncio][45]     | Fully Supported   | > Python 3.7 yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
+| [Botocore][46]    | >= 1.4.51         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
+| [Boto2][47]       | >= 2.29.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
+| [Celery][48]      | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Consul][49]      | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
+| [Futures][50]     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
+| [gevent][51]      | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [Grpc][52]        | >= 1.8.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
+| [httplib][53]     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [Jinja2][54]      | >= 2.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
+| [Kombu][55]       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
+| [Mako][56]        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
+| [Requests][57]    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [urllib3][58]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [2]: /help
@@ -153,27 +153,26 @@ The `ddtrace` library includes support for the following libraries:
 [33]: https://www.postgresql.org
 [34]: https://aiopg.readthedocs.io
 [35]: http://initd.org/psycopg
-[36]: https://pynamodb.readthedocs.io/en/latest/
-[37]: https://pypi.org/project/pyodbc/
-[38]: https://redis.io
-[39]: https://redis-py-cluster.readthedocs.io
-[40]: https://www.sqlalchemy.org
-[41]: https://www.sqlite.org
-[42]: https://www.vertica.com
-[43]: https://pypi.org/project/aiobotocore/
-[44]: https://docs.python.org/3/library/asyncio.html
-[45]: https://pypi.org/project/botocore/
-[46]: http://docs.pythonboto.org/en/latest
-[47]: http://www.celeryproject.org
-[48]: https://python-consul.readthedocs.io/en/latest/
-[49]: https://docs.python.org/3/library/concurrent.futures.html
-[50]: http://www.gevent.org
-[51]: https://grpc.io
-[52]: https://docs.python.org/2/library/httplib.html
-[53]: http://jinja.pocoo.org
-[54]: https://kombu.readthedocs.io/en/latest
-[55]: https://www.makotemplates.org
-[56]: https://requests.readthedocs.io/en/master/
-[57]: https://urllib3.readthedocs.io/en/stable/
-[58]: https://pypi.org/project/PyMySQL/
-
+[36]: https://pypi.org/project/PyMySQL/
+[37]: https://pynamodb.readthedocs.io/en/latest/
+[38]: https://pypi.org/project/pyodbc/
+[39]: https://redis.io
+[40]: https://redis-py-cluster.readthedocs.io
+[41]: https://www.sqlalchemy.org
+[42]: https://www.sqlite.org
+[43]: https://www.vertica.com
+[44]: https://pypi.org/project/aiobotocore/
+[45]: https://docs.python.org/3/library/asyncio.html
+[46]: https://pypi.org/project/botocore/
+[47]: http://docs.pythonboto.org/en/latest
+[48]: http://www.celeryproject.org
+[49]: https://python-consul.readthedocs.io/en/latest/
+[50]: https://docs.python.org/3/library/concurrent.futures.html
+[51]: http://www.gevent.org
+[52]: https://grpc.io
+[53]: https://docs.python.org/2/library/httplib.html
+[54]: http://jinja.pocoo.org
+[55]: https://kombu.readthedocs.io/en/latest
+[56]: https://www.makotemplates.org
+[57]: https://requests.readthedocs.io/en/master/
+[58]: https://urllib3.readthedocs.io/en/stable/
