@@ -1249,7 +1249,7 @@ main:
     parent: tracing
     identifier: tracing_trace_collection
     weight: 1
-  - name: Instrumenting with Datadog Tracing Library 
+  - name: Instrumenting with Datadog Tracing Libraries 
     url: tracing/trace_collection/dd_libraries/java/
     parent: tracing_trace_collection
     identifier: tracing_dd_libraries
@@ -1339,7 +1339,7 @@ main:
     parent: tracing_open_standards
     identifier: tracing_open_standards_dotnet
     weight: 108
-  - name: Tracing Serverless 
+  - name: Tracing Serverless Applications
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
@@ -1500,7 +1500,7 @@ main:
     identifier: tracing_metrics
     weight: 2
   - name: Trace Metrics
-    url: tracing/metrics/trace_metrics/
+    url: tracing/metrics/metrics_namespace/
     parent: tracing_metrics
     identifier: tracing_trace_metrics
     weight: 201
@@ -1559,16 +1559,21 @@ main:
     parent: tracing_trace_pipeline
     identifier: tracing_ingestion_controls
     weight: 302
+  - name: Generate Metrics
+    url: tracing/trace_pipeline/generate_metrics/
+    parent: tracing_trace_pipeline
+    identifier: tracing_pipeline_generate_metrics
+    weight: 303
   - name: Trace Retention
     url: tracing/trace_pipeline/trace_retention/
     parent: tracing_trace_pipeline
     identifier: tracing_retention
-    weight: 303
-  - name: Pipeline Metrics
+    weight: 304
+  - name: Usage Metrics
     url: tracing/trace_pipeline/metrics/
     parent: tracing_trace_pipeline
     identifier: tracing_pipeline_metrics
-    weight: 304
+    weight: 305
   - name: Connect Traces with Other Telemetry
     url: tracing/other_telemetry/
     parent: tracing

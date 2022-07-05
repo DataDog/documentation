@@ -25,15 +25,21 @@ The [Ingestion Control page][2] provides an overview of ingestion volumes and co
 
 {{< img src="tracing/trace_indexing_and_ingestion/ingestion_control_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
 
+## Generating metrics from spans
+
+You can generate metrics from ingested spans, and use those custom metrics for queries and comparisons. Learn more in [Generating Metrics from Spans][3].
+
+{{< img src="tracing/span_to_metrics/metrics_from_spans_1.png" style="width:100%;" alt="Graph of a span-based metric" >}}
+
 ## Trace retention
 
-After spans have been ingested by Datadog, some are kept for 15 days according to the [Retention Filters][3] that have been set on your account. The Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. Plus, you can define your own custom retention filters to index trace data you want to keep in support your organization's goals.
+After spans have been ingested by Datadog, some are kept for 15 days according to the [Retention Filters][4] that have been set on your account. The Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. Plus, you can define your own custom retention filters to index trace data you want to keep in support your organization's goals.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filter_page.png" style="width:100%;" alt="Retention Filters Page" >}}
 
-## Trace pipeline metrics
+## Trace usage metrics
 
-Learn about how to track and monitor your volume of ingested and indexed data, including using the APM Estimated Usage and Ingestion Reasons dashboards, by reading [Trace Pipeline Metrics][4].
+Learn about how to track and monitor your volume of ingested and indexed data, including using the APM Estimated Usage and Ingestion Reasons dashboards, by reading [Usage Metrics][5].
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 
@@ -41,5 +47,6 @@ Learn about how to track and monitor your volume of ingested and indexed data, i
 
 [1]: /tracing/trace_ingestion/mechanisms
 [2]: /tracing/trace_ingestion/ingestion_controls
-[3]: /tracing/trace_retention
-[4]: /tracing/trace_retention/usage_metrics
+[3]: /tracing/trace_pipeline/generate_metrics
+[4]: /tracing/trace_retention
+[5]: /tracing/trace_retention/usage_metrics

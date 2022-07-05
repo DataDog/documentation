@@ -1,5 +1,5 @@
 ---
-title: Trace Pipeline Metrics
+title: Usage Metrics
 kind: documentation
 aliases:
     - /tracing/trace_retention_and_ingestion/usage_metrics/
@@ -35,8 +35,6 @@ Leverage these metrics in dashboards and monitors to visualize and control your 
  monitor your APM usage as well as your ingested and indexed span volumes.
 
 Datadog APM plans come with indexed and ingested spans included. For more information, see the [Pricing page][3] or some [pricing example scenarios][4].
-
-## Usage Metrics
 
 ### Ingested spans volume
 

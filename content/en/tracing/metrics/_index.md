@@ -16,9 +16,9 @@ further_reading:
 
 ## Trace metrics
 
-Ingested span and traces are kept for 15 minutes. Indexed spans and traces that retention filters keep are stored in Datadog for 15 days. But if you generate custom metrics from ingested data, the metrics are retained for 15 months. 
+[Tracing application metrics][1] are collected after enabling trace collection and instrumenting your application. These metrics are available for dashboards and monitors.
 
-Learn how to create targeted custom metrics that help you troubleshoot and monitor longer term patterns in your application performance data by reading [Trace Metrics][1].
+Ingested span and traces are kept for 15 minutes. Indexed spans and traces that retention filters keep are stored in Datadog for 15 days. But if you generate custom metrics from ingested data, the metrics are retained for 15 months. 
 
 ## Runtime metrics
 
@@ -34,6 +34,6 @@ Learn how to [create APM monitors][3] that alert and notify you when APM metrics
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/metrics/trace_metrics/
+[1]: /tracing/metrics/metrics_namespace/
 [2]: /tracing/metrics/runtime_metrics/
 [3]: /monitors/create/types/apm/
