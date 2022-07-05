@@ -366,7 +366,7 @@ To manage the [APM traced invocation sampling rate][35] for serverless functions
 
 Metrics are calculated based on 100% of the application’s traffic, and remain accurate regardless of any sampling configuration. 
 
-For high throughput services, there’s usually no need for you to collect every single request as trace data is very repetitive - an important enough problem should always show symptoms in multiple traces. [Ingestion controls][36] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
+For high throughput services, there’s usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][36] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
 The default sampling mechanism is called [head-based sampling][37]. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the root span. This decision is then propagated to other services as part of their request context, for example as an HTTP request header.
 
