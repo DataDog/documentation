@@ -5,6 +5,13 @@ disable_toc: false
 is_public: true
 beta: true
 is_beta: true
+further_reading:
+  - link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
+    tag: "Blog"
+    text: "Use associated template variables to refine your dashboards"
+  - link: "https://learn.datadoghq.com/course/view.php?id=8"
+    tag: "Learning Center"
+    text: "Building Better Dashboards"
 ---
 
 <div class="alert alert-warning">This feature is currently in private beta. To request access, reach out to support@datadoghq.com.</div>
@@ -63,5 +70,8 @@ Images generated in reports show all data regardless of granular read restrictio
 
 {{< img src="dashboards/reporting/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:100%;" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/users/#edit-a-user-s-roles
