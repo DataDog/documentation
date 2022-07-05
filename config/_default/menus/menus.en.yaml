@@ -1244,11 +1244,16 @@ main:
     pre: apm
     identifier: tracing
     weight: 140000
-  - name: Trace Collection
+  - name: APM Terms and Concepts
+    url: tracing/glossary/
+    parent: tracing
+    identifier: tracing_glossary
+    weight: 1
+  - name: Sending Traces to Datadog
     url: tracing/trace_collection/
     parent: tracing
     identifier: tracing_trace_collection
-    weight: 1
+    weight: 2
   - name: Instrumenting with Datadog Tracing Libraries 
     url: tracing/trace_collection/dd_libraries/java/
     parent: tracing_trace_collection
@@ -1498,7 +1503,7 @@ main:
     url: tracing/metrics/
     parent: tracing
     identifier: tracing_metrics
-    weight: 2
+    weight: 3
   - name: Trace Metrics
     url: tracing/metrics/metrics_namespace/
     parent: tracing_metrics
@@ -1548,7 +1553,7 @@ main:
     url: tracing/trace_pipeline/
     parent: tracing
     identifier: tracing_trace_pipeline
-    weight: 3
+    weight: 4
   - name: Ingestion Mechanisms
     url: tracing/trace_pipeline/ingestion_mechanisms/
     parent: tracing_trace_pipeline
@@ -1578,7 +1583,7 @@ main:
     url: tracing/other_telemetry/
     parent: tracing
     identifier: tracing_other_telemetry
-    weight: 4
+    weight: 5
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: tracing_other_telemetry
@@ -1638,7 +1643,7 @@ main:
     url: tracing/trace_explorer/
     parent: tracing
     identifier: trace_explorer
-    weight: 5
+    weight: 6
   - name: Search Spans
     url: tracing/trace_explorer/search/
     parent: trace_explorer
@@ -1671,7 +1676,7 @@ main:
     url: tracing/services/
     parent: tracing
     identifier: tracing_services
-    weight: 6
+    weight: 7
   - name: Services List 
     url: tracing/services/services_list/
     parent: tracing_services
@@ -1701,7 +1706,7 @@ main:
     url: tracing/profiler/
     parent: tracing
     identifier: profiler
-    weight: 7
+    weight: 8
   - name: Enabling the Profiler
     url: tracing/profiler/enabling/java/
     parent: profiler
@@ -1771,7 +1776,7 @@ main:
     url: tracing/error_tracking/
     parent: tracing
     identifier: tracing_error_tracking
-    weight: 8
+    weight: 9
   - name: Error Tracking Explorer
     url: tracing/error_tracking/explorer/
     parent: tracing_error_tracking
@@ -1781,11 +1786,6 @@ main:
     url: tracing/configure_data_security/
     parent: tracing
     identifier: tracing_data_security
-    weight: 9
-  - name: APM Terms and Concepts
-    url: tracing/glossary/
-    parent: tracing
-    identifier: tracing_glossary
     weight: 10
   - name: Guides
     url: tracing/guide/

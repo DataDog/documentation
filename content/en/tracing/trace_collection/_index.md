@@ -1,5 +1,5 @@
 ---
-title: Set up Datadog APM
+title: Sending Traces to Datadog
 kind: documentation
 description: "Get Started with Datadog APM"
 aliases:
