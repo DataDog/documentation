@@ -1,5 +1,8 @@
 ---
 further_reading:
+- link: https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/
+  tag: ブログ
+  text: Datadog フラストレーションシグナルによるユーザーのペインポイントの検出
 - link: /real_user_monitoring/dashboards/frustration_signals_dashboard/
   tag: ドキュメント
   text: フラストレーションシグナルダッシュボード
@@ -15,11 +18,7 @@ title: フラストレーションシグナル
 
 ## 概要
 
-<div class="alert alert-warning">
-フラストレーションシグナルへのアクセスについては、<a href="/help">Datadog サポート</a>にお問い合わせください。
-</div>
-
-フラストレーションシグナルは、ユーザーがフラストレーションを感じる瞬間を顕在化させることで、アプリケーションの最大の摩擦ポイントを特定します。
+フラストレーションシグナルは、ユーザーがフラストレーションを感じる瞬間を顕在化させることで、アプリケーションの最大の摩擦ポイントを特定するのに役立ちます。
 
 RUM は 3 種類のフラストレーションシグナルを収集します。
 
@@ -34,7 +33,7 @@ RUM は 3 種類のフラストレーションシグナルを収集します。
 
 ## 要件
 
-まず、ブラウザ RUM SDK バージョン >=  4.9.0 が必要です。
+まず、ブラウザ RUM SDK バージョン >=  4.14.0 が必要です。
 
 フラストレーションシグナルの収集を開始するには、SDK の構成に以下を追加します。
 
@@ -95,7 +94,7 @@ Frustration Count
 
 {{< img src="real_user_monitoring/frustration_signals/actions_panel_multiple_frustration_signals.png" alt="What Happened のアクションで検出された複数のフラストレーションシグナルの種類" style="width:90%;" >}}
 
-#### Errors
+#### エラー
 
 **Errors** タブでエラーをクリックすると、エラーの詳細が表示されたサイドパネルが開きます。フラストレーションシグナルが発生したかどうかを確認することができます。
 
