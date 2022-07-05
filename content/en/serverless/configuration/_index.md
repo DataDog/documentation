@@ -30,6 +30,7 @@ First, [install][1] Datadog serverless monitoring to begin collecting metrics, t
 
 ### APM
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
+- [Choose APM tracing sampling rates](#select-sampling-rates-for-ingesting-APM-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
 - [Disable trace collection](#disable-trace-collection)
 - [Collect the request and response payloads](#collect-the-request-and-response-payloads)
@@ -359,6 +360,18 @@ To parse and transform your logs in Datadog, see documentation for [Datadog log 
 
 To see what libraries and frameworks are automatically instrumented by the Datadog APM client, see [Compatibility Requirements for APM][15]. To instrument custom applications, see Datadog's APM guide for [custom instrumentation][16].
 
+## Select sampling rates for ingesting APM spans 
+
+To manage the [APM traced invocation sampling rate][35] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
+
+Metrics are calculated based on 100% of the application’s traffic, and remain accurate regardless of any sampling configuration. 
+
+For high throughput services, there’s usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][36] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
+
+The default sampling mechanism is called [head-based sampling][37]. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the root span. This decision is then propagated to other services as part of their request context, for example as an HTTP request header.
+
+Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, the trace is guaranteed to be kept or dropped as a whole.
+
 ## Filter or scrub sensitive information from traces
 
 To filter traces before sending them to Datadog, see [Ignoring Unwanted Resources in APM][17].
@@ -666,3 +679,6 @@ If you have trouble configuring your installations, set the environment variable
 [32]: /serverless/guide/extension_motivation/
 [33]: /serverless/guide#install-using-the-datadog-forwarder
 [34]: /serverless/guide/troubleshoot_serverless_monitoring/
+[35]: /tracing/trace_ingestion/ingestion_controls/#configure-the-service-ingestion-rate
+[36]: /tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
+[37]: /tracing/trace_ingestion/mechanisms/?tabs=environmentvariables#head-based-sampling
