@@ -3,6 +3,8 @@ title: Integration Guides
 kind: guide
 disable_sidebar: true
 private: true
+aliases:
+    - /integrations/faq/snmp
 ---
 
 {{< whatsnext desc="General guides:" >}}
