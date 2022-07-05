@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-page/"
   tag: "Blog"
   text: "Service Telemetry, Error Tracking, SLOs and more"
+- link: "https://www.datadoghq.com/blog/monitor-service-performance-with-slo-alerts/"
+  tag: "Blog"
+  text: "Proactively monitor service performance with SLO alerts"
 ---
 
 {{< vimeo 382481078 >}}
