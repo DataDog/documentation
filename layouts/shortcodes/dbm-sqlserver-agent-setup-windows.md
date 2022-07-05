@@ -10,7 +10,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: adodbapi
-    provider: MSOLEDBSQL
+    adoprovider: MSOLEDBSQL
     tags:  # optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -27,7 +27,7 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 The recommended [ADO][9] provider is [Microsoft OLE DB Driver][2]. Ensure the driver is installed on the host where the agent is running.
 ```yaml
 connector: adodbapi
-provider: MSOLEDBSQL
+adoprovider: MSOLEDBSQL
 ```
 
 The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
