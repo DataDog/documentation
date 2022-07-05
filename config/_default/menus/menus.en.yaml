@@ -1549,6 +1549,11 @@ main:
     parent: tracing_metrics
     identifier: tracing_apm_monitors
     weight: 203
+  - name: Set Up an APM Metrics Dashboard
+    url: /tracing/guide/apm_dashboard
+    parent: tracing_metrics
+    identifier: tracing_metrics_dashboard
+    weight: 204
   - name: Trace Pipeline Configuration
     url: tracing/trace_pipeline/
     parent: tracing

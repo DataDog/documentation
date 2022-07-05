@@ -28,6 +28,11 @@ Enable [runtime metrics collection][2] in supported tracing libraries to gain in
 
 Learn how to [create APM monitors][3] that alert and notify you when APM metrics or trace analytics reach certain thresholds or fall outside expected bounds.
 
+## Next steps
+
+{{< whatsnext desc="Use what you set up" >}}
+    {{< nextlink href="tracing/guide/apm_dashboard" >}}Create a Dashboard to track and correlate APM metrics{{< /nextlink >}}
+{{< /whatsnext >}}
 
 
 ## Further Reading
