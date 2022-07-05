@@ -55,9 +55,13 @@
 {{- end -}}
 <span class="kn">"</span>
 
+&nbsp;\
+<span class="o">-H</span> <span class="s1">"Accept: "application/json"</span>
 {{- /* Content-Type header based on "requestBody" */ -}}
+{{- if (or ($body) ($endpoint.action.requestBody)) -}}
 &nbsp;\
 <span class="o">-H</span> <span class="s1">"Content-Type: {{ default "application/json" .contentType }}"</span>
+{{- end -}}
 
 {{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
 {{- if isset $endpoint.action "security" -}}
