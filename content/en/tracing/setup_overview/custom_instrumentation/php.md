@@ -162,7 +162,7 @@ if (!extension_loaded('ddtrace')) {
    When you set tags, to avoid overwriting existing tags automatically added by the Datadog core instrumentation, <strong>do write <code>$span->meta['mytag'] = 'value'</code></strong>. Do not write <code>$span->meta = ['mytag' => 'value']</code>.
    </div>
 
-6. In the sample code, `SampleRegistry::faultyMethod` generates an exception. There is nothing your have to do with regards to custom instrumentation. If the method is instrumented, the default exception reporting mechanism takes care of attaching the exception message and the stack trace.
+6. In the sample code, `SampleRegistry::faultyMethod` generates an exception. There is nothing you have to do with regards to custom instrumentation. If the method is instrumented, the default exception reporting mechanism takes care of attaching the exception message and the stack trace.
 
    {{< code-block lang="php" filename="datadog/instrumentation.php" >}}
 ...
