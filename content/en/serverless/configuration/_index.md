@@ -30,7 +30,7 @@ First, [install][1] Datadog serverless monitoring to begin collecting metrics, t
 
 ### APM
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
-- [Choose APM tracing sampling rates](#select-sampling-rates-for-ingesting-APM-spans)
+- [Choose APM tracing sampling rates](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
 - [Disable trace collection](#disable-trace-collection)
 - [Collect the request and response payloads](#collect-the-request-and-response-payloads)
