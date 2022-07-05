@@ -233,6 +233,9 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 
 **Note**: Set the parameter to `0` to disable the error sampler.
 
+**Note**: The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
+
+
 ### Rare traces
 `ingestion_reason: rare`
 
@@ -245,9 +248,7 @@ In Agent version 7.33 and forward, you can disable the rare sampler in the Agent
 @env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-**Note**: Sampled rare traces may be incomplete, because this mechanism occurs downstream of the head-based sampling. There is no way to guarantee that the Agent will receive a complete trace from the tracing libraries.
-
-
+**Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
 
 ## Force keep and drop
 `ingestion_reason: manual`
