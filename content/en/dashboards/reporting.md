@@ -36,13 +36,13 @@ The following widget types are supported:
 
 In the configuration modal that opens, set a schedule for the report to determine when and how often the report is sent. Set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.
 
-Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the red****. 
+Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the red **X**. 
 
 {{< img src="dashboards/reporting/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal is a radio button to link to the live dashboard and other buttons to edit template variables, send preview, cancel, and save" style="width:100%;" >}}
 
 Finally, customize the report to provide recipients with more context or a tailored view. The optional description appears at the top of each report to provide more context on the dashboard.
 
-Click **Edit Template Variable** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard’s defaults. 
+Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard’s defaults. 
 
 To see the report before saving the schedule, click **Send Preview**. You can pause a report schedule at any time.
 
