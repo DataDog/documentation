@@ -42,6 +42,7 @@ Agent のメインコンフィギュレーションファイル (`datadog.yaml`)
 @param max_traces_per_second - 整数 - オプション - デフォルト: 10
 @env DD_APM_MAX_TPS - 整数 - オプション - デフォルト: 10
 ```
+**注**: Agent で設定した traces-per-second サンプリングレートは、Datadog トレースライブラリにのみ適用され、OpenTelemetry SDK など他のトレースライブラリには影響を与えません。
 
 ### トレーシングライブラリ: ユーザー定義のルール
 `ingestion_reason: rule`
@@ -184,7 +185,7 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 Agent バージョン 7.33 以降では、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) または環境変数でレアサンプラーを無効にすることが可能です。
 
 ```
-@params apm_config.disable_rare_sample - ブール値 - オプション - デフォルト: false
+@params apm_config.disable_rare_sampler - ブール値 - オプション - デフォルト: false
 @env DD_APM_DISABLE_RARE_SAMPLER - ブール値 - オプション - デフォルト: false
 ```
 

@@ -67,7 +67,7 @@ datadog-ci version
 Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
 
-次に、`Start-Process -FilePath "datadog-ci.exe"` と任意のコマンドを実行します:
+次に、`Start-Process -FilePath "datadog-ci.exe"` と任意のコマンドを実行します: 
 {{< code-block lang="powershell" >}}
 Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 {{< /code-block >}}

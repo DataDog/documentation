@@ -42,51 +42,210 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 @param max_traces_per_second - integer - optional - default: 10
 @env DD_APM_MAX_TPS - integer - optional - default: 10
 ```
-**Note**: The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries, it has no effect on other tracing libraries such as OpenTelemetry SDKs. 
+
+**Note**: The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
 
 ### In tracing libraries: user-defined rules
 `ingestion_reason: rule`
 
-At the library level, more specific sampling configuration is available:
-- Set a specific sampling rate to apply to all root services, overriding the Agent's [default mechanism](#head-based-sampling).
-- Set a sampling rate for a specific root service.
-- Set a limit on the number of ingested traces per second.
+For more granular control, use tracing library sampling configuration options:
+- Set a specific **sampling rate to apply to all root services** for the library, overriding the Agent's [default mechanism](#in-the-agent).
+- Set a **sampling rate to apply to specific root services** or for specific span operation names.
+- Set a **rate limit** on the number of ingested traces per second. The default rate limit is 100 traces per second per service instance (when using the Agent [default mechanism](#in-the-agent), the rate limiter is ignored).
 
-**Note**: These rules also follow a head-based sampling mechanism. If the traffic for a service is higher than the configured maximum traces per second, then traces are dropped at the root. It does not create incomplete traces.
+**Note**: These rules are also head-based sampling controls. If the traffic for a service is higher than the configured maximum traces per second, then traces are dropped at the root. It does not create incomplete traces.
 
 The configuration can be set by environment variables or directly in the code:
 
 {{< tabs >}}
-{{% tab "Environment variables" %}}
+{{% tab "Java" %}}
+For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_SERVICE_RULES` environment variable.
+
+For example, to send 20% of the traces for the service named `my-service`:
 
 ```
-@env  DD_TRACE_SAMPLE_RATE - integer - optional null (defaults to Agent default feedback loop)
-@env DD_TRACE_SAMPLING_RULES - integer - optional null
-@env  DD_TRACE_RATE_LIMIT - integer - optional 100 (if using the Agent default mechanism, the rate limiter is ignored)
+# using system property
+java -Ddd.trace.sampling.service.rules=my-service:0.2 -javaagent:dd-java-agent.jar -jar my-app.jar
+
+# using environment variables
+export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
 ```
 
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
+
+Read more about sampling controls in the [Java tracing library documentation][1].
+
+[1]: /tracing/setup_overview/setup/java
 {{% /tab %}}
-{{% tab "Code API" %}}
+{{% tab "Python" %}}
+For Python applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-The following Python example shows sampling 10 percent of all traces, with a rate limit of 100 traces per second, and an overriding sampling rate for a specific service:
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
 ```
-# in dd-trace-py
-tracer.configure(sampler=DatadogSampler(
-    default_sample_rate=0.10, # keep 10% of traces
-    rate_limit=100, # but at most 100 traces per second
-    rules=[
-      # 100% sampled for “my-service”, but the 100 traces-per-second overall limit is still honored
-      SamplingRule(sample_rate=1.0, service=’my-service’),
-    ],
-)
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
 ```
 
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
+
+Read more about sampling controls in the [Python tracing library documentation][1].
+
+[1]: /tracing/setup_overview/setup/python
+{{% /tab %}}
+{{% tab "Ruby" %}}
+For Ruby applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
+
+You can also configure sampling rates by service. For instance, to send 20% of the traces for the service named `my-service`:
+
+```ruby
+require 'ddtrace'
+
+Datadog.configure do |c|
+  c.tracing.sampler = Datadog::Tracing::Sampling::PrioritySampler.new(
+    post_sampler: Datadog::Tracing::Sampling::RuleSampler.new(
+      [
+        # Sample all 'my-service' traces at 20.00%:
+        Datadog::Tracing::Sampling::SimpleRule.new(service: 'my-service', sample_rate: 0.2000)
+      ]
+    )
+  )
+end
+```
+
+Read more about sampling controls in the [Ruby tracing library documentation][1].
+
+[1]: /tracing/setup_overview/setup/ruby#sampling
+{{% /tab %}}
+{{% tab "Go" %}}
+For Go applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+```
+
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
+
+Read more about sampling controls in the [Go tracing library documentation][1].
+
+[1]: /tracing/setup_overview/setup/go
+{{% /tab %}}
+{{% tab "NodeJS" %}}
+For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
+
+You can also set by-service sampling rates. For instance, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```javascript
+tracer.init({
+  ingestion:
+    sampler: {
+      sampleRate: 0.1,
+      rules: [
+        { sampleRate: 0.5, service: 'my-service' }
+      ]
+    }
+  }
+```
+
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
+
+Read more about sampling controls in the [NodeJS tracing library documentation][1].
+
+[1]: /tracing/setup_overview/setup/nodejs
+{{% /tab %}}
+{{% tab "PHP" %}}
+For PHP applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+```
+
+Read more about sampling controls in the [PHP tracing library documentation][1].
+
+[1]: /tracing/setup_overview/setup/php
+{{% /tab %}}
+{{% tab "C++" %}}
+Starting in version version `1.3.2`, the Datadog C++ library supports the following configurations:
+- Global sampling rate: `DD_TRACE_SAMPLE_RATE` environment variable
+- Sampling rates by service: `DD_TRACE_SAMPLING_RULES` environment variable.
+- Rate limit setting: `DD_TRACE_RATE_LIMIT` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+```
+
+C++ does not provide integrations for out-of-the-box instrumentation, but it’s used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][1].
+
+[1]: /tracing/setup_overview/proxy_setup
+{{% /tab %}}
+{{% tab ".NET" %}}
+For .NET applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+```
+
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance, less than the Agent default `100`.
+
+Read more about sampling controls in the [.NET tracing library documentation][1].
+
+[1]: /tracing/setup_overview/setup/dotnet-core
 {{% /tab %}}
 {{< /tabs >}}
 
-Read more about configuring the ingestion in the [tracing libraries][1] documentation.
+**Note**: All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`. All the spans from a trace sampled using a tracing library configuration (`DD_TRACE_SAMPLE_RATE` or `DD_TRACE_SAMPLING_RULES`) are tagged with the ingestion reason `rule`.
 
-**Note**: Services configured with user-defined rules are marked as `Configured` in the [Ingestion Control Page][4] Configuration column. Services configured to use the default mechanism are labeled as `Automatic`.
+**Note**: Services configured with user-defined sampling rules are marked as `Configured` in the [Ingestion Control Page][4] Configuration column. Services using the Datadog Agent [default mechanism](#in-the-agent) are labeled as `Automatic`.
+
+## Error and rare traces
+
+For traces not caught by the head-based sampling, two additional Datadog Agent sampling mechanisms make sure that critical and diverse traces are kept and ingested. These two samplers keep a diverse set of traces by catching all combinations of a predetermined set of tags:
+
+- **Error traces**: Sampling errors is important for providing visibility on potential system failures.
+- **Rare traces**: Sampling rare traces allows you to keep visibility on your system as a whole, by making sure that low-traffic services and resources are still monitored.
+
+**Note**: Error and rare samplers are ignored for services for which you set [library sampling rules](#in-tracing-libraries-user-defined-rules).
+
+### Error traces
+`ingestion_reason: error`
+
+The error sampler catches pieces of traces that contain error spans that are not caught by head-based sampling. It distributes a ten-traces-per-second rate to catch all combinations of `service`, `name`, `resource`, `http.status` and `error.type`.
+
+With Agent version 7.33 and forward, you can configure the error sampler in the Agent main configuration file (`datadog.yaml`) or with environment variables:
+```
+@param errors_per_second - integer - optional - default: 10
+@env DD_APM_ERROR_TPS - integer - optional - default: 10
+```
+
+**Note**: Set the parameter to `0` to disable the error sampler.
+
+### Rare traces
+`ingestion_reason: rare`
+
+The rare sampler sends a set of rare spans to Datadog. Rare sampling is also a distributed rate, to catch combinations of `env`, `service`, `name`, `resource`, `error.type`, and `http.status`. The default sampling rate for rare traces is five traces per second.
+
+In Agent version 7.33 and forward, you can disable the rare sampler in the Agent main configuration file (`datadog.yaml`) or with an environment variable:
+
+```
+@params apm_config.disable_rare_sampler - boolean - optional - default: false
+@env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
+```
+
+**Note**: Sampled rare traces may be incomplete, because this mechanism occurs downstream of the head-based sampling. There is no way to guarantee that the Agent will receive a complete trace from the tracing libraries.
+
+
 
 ## Force keep and drop
 `ingestion_reason: manual`
@@ -155,52 +314,41 @@ Set the rate in the Agent main configuration file (`datadog.yaml`) or as an envi
 @env DD_APM_MAX_EPS - integer - optional 200
 ```
 
-## Error and rare traces
-
-For traces not caught by the head-based sampling, **Agent** mechanisms make sure that critical and diverse traces are kept and ingested. These two samplers keep a diverse set of traces by catching all combinations of a predetermined set of tags:
-
-- **Error traces**: Sampling errors is important for providing visibility on potential system failures.
-- **Rare traces**: Sampling rare traces allows you to keep visibility on your system as a whole, by making sure that low-traffic services and resources are still monitored.
-
-**Note**: Error and rare samplers are ignored for services for which you set [library sampling rules](#in-tracing-libraries-user-defined-rules).
-
-### Error traces
-`ingestion_reason: error`
-
-The error sampler catches pieces of traces that contain error spans that are not caught by head-based sampling. It distributes a ten-traces-per-second rate to catch all combinations of `service`, `name`, `resource`, `http.status` and `error.type`.
-
-With Agent version 7.33 and forward, you can configure the error sampler in the Agent main configuration file (`datadog.yaml`) or with environment variables:
-```
-@param errors_per_second - integer - optional - default: 10
-@env DD_APM_ERROR_TPS - integer - optional - default: 10
-```
-
-**Note**: Set the parameter to `0` to disable the error sampler.
-
-### Rare traces
-`ingestion_reason: rare`
-
-The rare sampler sends a set of rare spans to Datadog. Rare sampling is also a distributed rate, to catch combinations of `env`, `service`, `name`, `resource`, `error.type`, and `http.status`. The default sampling rate for rare traces is five traces per second.
-
-In Agent version 7.33 and forward, you can disable the rare sampler in the Agent main configuration file (`datadog.yaml`) or with an environment variable:
-
-```
-@params apm_config.disable_rare_sampler - boolean - optional - default: false
-@env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
-```
-
-**Note**: Sampled rare traces may be incomplete, because this mechanism occurs downstream of the head-based sampling. There is no way to guarantee that the Agent will receive a complete trace from the tracing libraries.
-
 ## Product ingested spans
+
+### RUM Traces
+`ingestion_reason:rum`
+
+A request from a web or mobile application generates a trace when the backend services are instrumented. [The APM integration with Real User Monitoring][5] links web and mobile application requests to their corresponding backend traces so you can see your full frontend and backend data through one lens.
+
+Starting in version `4.10.0` of the RUM browser SDK , you can control ingested volumes and keep a sampling of the backend traces by configuring the `tracingSampleRate` initialization parameter.  Set `tracingSampleRate` to a number between `0` and `100`.
+If no `tracingSampleRate` value is set, a default of 100% of the traces coming from the browser requests are sent to Datadog.
+
+Similarly, control the trace sampling rate in other SDKs by using similar parameters:
+
+| SDK         | Parameter             | Minimum version   |
+|-------------|-----------------------|-------------------|
+| Browser     | `tracingSampleRate`   | [v4.10.0][6]      |
+| iOS         | `tracingSamplingRate` | [1.11.0][7]       |
+| Android     | `traceSamplingRate`   | [1.13.0][8]       |
+| Flutter     | `tracingSamplingRate` | [1.0.0-beta.2][9] |
+| React Native | `tracingSamplingRate` | [1.0.0-rc6][10]   |
+
+### Synthetic traces
+`ingestion_reason:synthetics` and `ingestion_reason:synthetics-browser`
+
+HTTP and browser tests generate traces when the backend services are instrumented. [The APM integration with Synthetic Testing][11] links your synthetic tests with the corresponding backend traces. Navigate from a test run that failed to the root cause of the issue by looking at the trace generated by that test run.
+
+By default, 100% of synthetic HTTP and browser tests generate backend traces.
+
+### Other products
 
 Some additional ingestion reasons are attributed to spans that are generated by specific Datadog products:
 
 | Product    | Ingestion Reason                    | Ingestion Mechanism Description |
 |------------|-------------------------------------|---------------------------------|
-| Synthetic Monitoring | `synthetics` and `synthetics-browser` | An HTTP or browser test generates a trace when the backend services are instrumented. Find the backend trace from the [synthetic test][5] run.
-| Real User Monitoring        | `RUM`                               | A browser request from a web or mobile application generates a trace when the backend services are instrumented. Find the backend trace from the [RUM browser sessions][6] and resources. |
-| Serverless | `lambda` and `xray`                   | Your traces received from the [Serverless applications][7] traced with Datadog Tracing Libraries or the AWS X-Ray integration. |
-| Application Security Monitoring     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [ASM][8] as a threat. |
+| Serverless | `lambda` and `xray`                   | Your traces received from the [Serverless applications][12] traced with Datadog Tracing Libraries or the AWS X-Ray integration. |
+| Application Security Monitoring     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [ASM][13] as a threat. |
 
 
 ## Further Reading
@@ -211,7 +359,12 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 [2]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
 [3]: /tracing/visualization/#trace-root-span
 [4]: /tracing/trace_ingestion/control_page
-[5]: /synthetics/apm/
-[6]: /real_user_monitoring/connect_rum_and_traces/
-[7]: /serverless/distributed_tracing/
-[8]: /security_platform/application_security/
+[5]: /real_user_monitoring/connect_rum_and_traces/
+[6]: https://github.com/DataDog/browser-sdk/releases/tag/v4.10.0
+[7]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
+[8]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
+[9]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_tracking_http_client%2Fv1.0.0-beta.2
+[10]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0-rc6
+[11]: /synthetics/apm/
+[12]: /serverless/distributed_tracing/
+[13]: /security_platform/application_security/
