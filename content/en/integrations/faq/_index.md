@@ -10,6 +10,8 @@ aliases:
     - /integrations/faq/i-removed-my-aws-ec2-integration-why-do-my-hosts-still-have-aws-tags
     - /integrations/faq/i-just-set-up-my-aws-integration-why-am-i-seeing-duplicate-hosts
     - /integrations/faq/extra-hosts-with-name-n-a-reporting-data
+    - /integrations/faq/redis-integration-error-unknown-command-config
+    - /integrations/faq/snmp
 ---
 
 ## Amazon Web Services
@@ -83,30 +85,26 @@ aliases:
 
 * [Tagging RabbitMQ queues by tag family][31]
 
-## Redis
-
-* [Redis Integration Error: "unknown command 'CONFIG'"][32]
-
 ## Unix
 
-* [How can I gather metrics from the UNIX shell?][33]
+* [How can I gather metrics from the UNIX shell?][32]
 
 ## Vertica
 
-* [How to collect metrics from custom Vertica queries][34]
+* [How to collect metrics from custom Vertica queries][33]
 
 ## VSphere
 
-* [Troubleshooting duplicated hosts with vSphere][35]
+* [Troubleshooting duplicated hosts with vSphere][34]
 
 ## Webhooks
 
-* [How to make a Trello Card using Webhooks][36]
+* [How to make a Trello Card using Webhooks][35]
 
 ## Windows
 
-* [Collect Custom Windows Performance Counters over WMI][37]
-* [Windows Status Based Check][38]
+* [Collect Custom Windows Performance Counters over WMI][36]
+* [Windows Status Based Check][37]
 
 [1]: /integrations/faq/aws-integration-and-cloudwatch-faq/
 [2]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration/
@@ -139,10 +137,9 @@ aliases:
 [29]: /integrations/faq/database-user-lacks-privileges/
 [30]: /integrations/faq/postgres-custom-metric-collection-explained/
 [31]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family/
-[32]: /integrations/faq/redis-integration-error-unknown-command-config/
-[33]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
-[34]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
-[35]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
-[36]: /integrations/faq/how-to-make-trello-card-using-webhooks/
-[37]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
-[38]: /integrations/faq/windows-status-based-check/
+[32]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
+[33]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
+[34]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
+[35]: /integrations/faq/how-to-make-trello-card-using-webhooks/
+[36]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
+[37]: /integrations/faq/windows-status-based-check/
