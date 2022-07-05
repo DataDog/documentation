@@ -213,7 +213,7 @@ Read more about sampling controls in the [.NET tracing library documentation][1]
 
 ## Error and rare traces
 
-For traces not caught by the head-based sampling, two additional Datadog Agent sampling mechanisms make sure that critical and diverse traces are kept and ingested. These two samplers keep a diverse set of traces by catching all combinations of a predetermined set of tags:
+For traces not caught by the head-based sampling, two additional Datadog Agent sampling mechanisms make sure that critical and diverse traces are kept and ingested. These two samplers keep a diverse set of local traces (set of spans forwarded to the same host) by catching all combinations of a predetermined set of tags:
 
 - **Error traces**: Sampling errors is important for providing visibility on potential system failures.
 - **Rare traces**: Sampling rare traces allows you to keep visibility on your system as a whole, by making sure that low-traffic services and resources are still monitored.
@@ -223,7 +223,7 @@ For traces not caught by the head-based sampling, two additional Datadog Agent s
 ### Error traces
 `ingestion_reason: error`
 
-The error sampler catches pieces of traces that contain error spans that are not caught by head-based sampling. It distributes a ten-traces-per-second rate to catch all combinations of `service`, `name`, `resource`, `http.status` and `error.type`.
+The error sampler catches pieces of traces that contain error spans that are not caught by head-based sampling. It catches error traces up to a rate of 10 traces per second (per Agent). It ensures to keep comprehensive visibility on errors when the head-based sampling rate is low.
 
 With Agent version 7.33 and forward, you can configure the error sampler in the Agent main configuration file (`datadog.yaml`) or with environment variables:
 ```
@@ -239,7 +239,7 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 ### Rare traces
 `ingestion_reason: rare`
 
-The rare sampler sends a set of rare spans to Datadog. Rare sampling is also a distributed rate, to catch combinations of `env`, `service`, `name`, `resource`, `error.type`, and `http.status`. The default sampling rate for rare traces is five traces per second.
+The rare sampler sends a set of rare spans to Datadog. It catches combinations of `env`, `service`, `name`, `resource`, `error.type`, and `http.status` up to 5 traces per second (per Agent). It ensures to keep visibility on low traffic resources when the head-based sampling rate is low.
 
 In Agent version 7.33 and forward, you can disable the rare sampler in the Agent main configuration file (`datadog.yaml`) or with an environment variable:
 
