@@ -1299,111 +1299,11 @@ main:
     parent: tracing_dd_libraries
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
-  - name: Instrumenting with OpenStandards
-    url: tracing/trace_collection/open_standards/
-    parent: tracing_trace_collection
-    identifier: tracing_open_standards
-    weight: 102
-  - name: Java
-    url: tracing/trace_collection/open_standards/java/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_java
-    weight: 101
-  - name: Python
-    url: tracing/trace_collection/open_standards/python/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_python
-    weight: 102
-  - name: Ruby
-    url: tracing/trace_collection/open_standards/ruby/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_ruby
-    weight: 108
-  - name: Go
-    url: tracing/trace_collection/open_standards/go/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_go
-    weight: 104
-  - name: NodeJS
-    url: tracing/trace_collection/open_standards/nodejs/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_nodejs
-    weight: 105
-  - name: PHP
-    url: tracing/trace_collection/open_standards/php/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_php
-    weight: 106
-  - name: .NET
-    url: tracing/trace_collection/open_standards/dotnet/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_dotnet
-    weight: 108
-  - name: Tracing Serverless Applications
-    url: serverless/distributed_tracing/
-    parent: tracing_trace_collection
-    identifier: tracing_serverless
-    weight: 103
-  - name: Tracing Proxies
-    url: tracing/trace_collection/proxy_setup/
-    parent: tracing_trace_collection
-    identifier: tracing_proxies
-    weight: 104
-  - name: Library Configuration
-    url: tracing/trace_collection/library_config/java/
-    parent: tracing_trace_collection
-    identifier: tracing_library_config
-    weight: 105
-  - name: Java
-    url: tracing/trace_collection/library_config/java/
-    parent: tracing_library_config
-    identifier: tracing_library_config_java
-    weight: 101
-  - name: Python
-    url: tracing/trace_collection/library_config/python/
-    parent: tracing_library_config
-    identifier: tracing_library_config_python
-    weight: 102
-  - name: Ruby
-    url: tracing/trace_collection/library_config/ruby/
-    parent: tracing_library_config
-    identifier: tracing_library_config_ruby
-    weight: 103
-  - name: Go
-    url: tracing/trace_collection/library_config/go/
-    parent: tracing_library_config
-    identifier: tracing_library_config_go
-    weight: 104
-  - name: NodeJS
-    url: tracing/trace_collection/library_config/nodejs/
-    parent: tracing_library_config
-    identifier: tracing_library_config_nodejs
-    weight: 105
-  - name: PHP
-    url: tracing/trace_collection/library_config/php/
-    parent: tracing_library_config
-    identifier: tracing_library_config_php
-    weight: 106
-  - name: C++
-    url: tracing/trace_collection/library_config/cpp/
-    parent: tracing_library_config
-    identifier: tracing_library_config_cpp
-    weight: 107
-  - name: .NET Core
-    url: tracing/trace_collection/library_config/dotnet-core/
-    parent: tracing_library_config
-    identifier: tracing_library_config_dotnet_core
-    weight: 108
-  - name: .NET Framework
-    url: tracing/trace_collection/library_config/dotnet-framework/
-    parent: tracing_library_config
-    identifier: tracing_library_config_dotnet_framework
-    weight: 109
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/java/
     parent: tracing_trace_collection
     identifier: tracing_compatibility
-    weight: 106
+    weight: 102
   - name: Java
     url: tracing/trace_collection/compatibility/java/
     parent: tracing_compatibility
@@ -1449,11 +1349,61 @@ main:
     parent: tracing_compatibility
     identifier: tracing_compatibility_dotnet_framework
     weight: 109
+  - name: Library Configuration
+    url: tracing/trace_collection/library_config/java/
+    parent: tracing_trace_collection
+    identifier: tracing_library_config
+    weight: 103
+  - name: Java
+    url: tracing/trace_collection/library_config/java/
+    parent: tracing_library_config
+    identifier: tracing_library_config_java
+    weight: 101
+  - name: Python
+    url: tracing/trace_collection/library_config/python/
+    parent: tracing_library_config
+    identifier: tracing_library_config_python
+    weight: 102
+  - name: Ruby
+    url: tracing/trace_collection/library_config/ruby/
+    parent: tracing_library_config
+    identifier: tracing_library_config_ruby
+    weight: 103
+  - name: Go
+    url: tracing/trace_collection/library_config/go/
+    parent: tracing_library_config
+    identifier: tracing_library_config_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/trace_collection/library_config/nodejs/
+    parent: tracing_library_config
+    identifier: tracing_library_config_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/trace_collection/library_config/php/
+    parent: tracing_library_config
+    identifier: tracing_library_config_php
+    weight: 106
+  - name: C++
+    url: tracing/trace_collection/library_config/cpp/
+    parent: tracing_library_config
+    identifier: tracing_library_config_cpp
+    weight: 107
+  - name: .NET Core
+    url: tracing/trace_collection/library_config/dotnet-core/
+    parent: tracing_library_config
+    identifier: tracing_library_config_dotnet_core
+    weight: 108
+  - name: .NET Framework
+    url: tracing/trace_collection/library_config/dotnet-framework/
+    parent: tracing_library_config
+    identifier: tracing_library_config_dotnet_framework
+    weight: 109
   - name: Custom Instrumentation
     url: tracing/trace_collection/custom_instrumentation
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
-    weight: 107
+    weight: 104
   - name: Java
     url: tracing/trace_collection/custom_instrumentation/java/
     parent: tracing_custom_inst
@@ -1494,6 +1444,56 @@ main:
     parent: tracing_custom_inst
     identifier: tracing_custom_inst_dotnet
     weight: 108
+  - name: Instrumenting with OpenStandards
+    url: tracing/trace_collection/open_standards/
+    parent: tracing_trace_collection
+    identifier: tracing_open_standards
+    weight: 105
+  - name: Java
+    url: tracing/trace_collection/open_standards/java/
+    parent: tracing_open_standards
+    identifier: tracing_open_standards_java
+    weight: 101
+  - name: Python
+    url: tracing/trace_collection/open_standards/python/
+    parent: tracing_open_standards
+    identifier: tracing_open_standards_python
+    weight: 102
+  - name: Ruby
+    url: tracing/trace_collection/open_standards/ruby/
+    parent: tracing_open_standards
+    identifier: tracing_open_standards_ruby
+    weight: 108
+  - name: Go
+    url: tracing/trace_collection/open_standards/go/
+    parent: tracing_open_standards
+    identifier: tracing_open_standards_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/trace_collection/open_standards/nodejs/
+    parent: tracing_open_standards
+    identifier: tracing_open_standards_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/trace_collection/open_standards/php/
+    parent: tracing_open_standards
+    identifier: tracing_open_standards_php
+    weight: 106
+  - name: .NET
+    url: tracing/trace_collection/open_standards/dotnet/
+    parent: tracing_open_standards
+    identifier: tracing_open_standards_dotnet
+    weight: 108
+  - name: Tracing Serverless Applications
+    url: serverless/distributed_tracing/
+    parent: tracing_trace_collection
+    identifier: tracing_serverless
+    weight: 106
+  - name: Tracing Proxies
+    url: tracing/trace_collection/proxy_setup/
+    parent: tracing_trace_collection
+    identifier: tracing_proxies
+    weight: 107
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing

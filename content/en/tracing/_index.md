@@ -1,6 +1,6 @@
 ---
 
-title: APM & Continuous Profiler
+title: APM
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:
@@ -38,7 +38,7 @@ aliases:
 
 </br>
 
-Datadog APM & Continuous Profiler gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues, and databases to monitor requests, errors, and latency. Distributed traces **seamlessly correlate** to browser sessions, logs, profiles, synthetic checks, network, processes, and infrastructure metrics across hosts, containers, proxies, and serverless functions. Navigate directly from investigating a slow trace to **identifying the specific line of code** causing performance bottlenecks with code hotspots.
+Datadog Application Performance Monitoring (APM) gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues, and databases to monitor requests, errors, and latency. Distributed traces **seamlessly correlate** to browser sessions, logs, profiles, synthetic checks, network, processes, and infrastructure metrics across hosts, containers, proxies, and serverless functions. Navigate directly from investigating a slow trace to **identifying the specific line of code** causing performance bottlenecks with code hotspots.
 
 ## Send traces to Datadog
 
