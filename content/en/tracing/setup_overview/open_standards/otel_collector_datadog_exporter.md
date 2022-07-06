@@ -25,7 +25,9 @@ datadog:
     site: {{< region-param key="dd_site" code="true" >}}
 ```
 
-On each OpenTelemetry-instrumented application, set the resource attributes `deployment.environment`, `service.name`, and `service.version` using [the language's SDK][1]. The exporter attempts to get a hostname by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
+On each OpenTelemetry-instrumented application, set the resource attributes `deployment.environment`, `service.name`, and `service.version` using [the language's SDK][1]. 
+
+The exporter attempts to get a hostname by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
 
 1. Hostname set in the OTLP resource
 1. Manually set hostname in the exporter configuration
