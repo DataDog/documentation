@@ -51,7 +51,7 @@ Event types are a collection of audit events. For example, the Authentication ev
 
 {{< img src="account_management/audit_logs/audit_toggles.png" alt="Audit Trail event types setup in Datadog" style="width:50%;">}}
 
-See [Audit Trail Event Types][3] to see a list of event types.
+See [Audit Trail Event Types][3] for a list of different event types.
 
 ### Archiving
 
