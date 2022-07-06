@@ -30,7 +30,7 @@ Learn how to [create APM monitors][3] that alert and notify you when APM metrics
 
 ## Next steps
 
-{{< whatsnext desc="**Use what you set up:**" >}}
+{{< whatsnext desc="Use what you set up:" >}}
     {{< nextlink href="tracing/guide/apm_dashboard" >}}Create a Dashboard to track and correlate APM metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
