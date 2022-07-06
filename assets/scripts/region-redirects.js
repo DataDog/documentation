@@ -1,17 +1,16 @@
 import Cookies from 'js-cookie';
-import config from './regions.config';
+import config from './config/regions.config'
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
-    console.log(`Referrer: ${document.referrer}`)
     const regionSelector = document.querySelector('.js-region-select')
     const currentUserSavedRegion = Cookies.get('site')
     const currentReferrerAppRegion = getDDSiteFromReferrer()
 
-    // keep docs/app saved regions in sync.   if user navigates to docs from in-app links,
+    // keep docs/app saved regions in sync.   if user navigates to docs from app,
     // we want docs links back to the app returning user to DD app region they came from.
-    // reloading resets document.referrer, otherwise every page load we'd be reading this value
-    // even if user changes region preference in the dropdown.
+    // reloading resets document.referrer ensuring subsequent page loads/async loading
+    // dont read from referrer again. 
     if (currentReferrerAppRegion && currentReferrerAppRegion !== currentUserSavedRegion) {
         regionOnChangeHandler(currentReferrerAppRegion)
         window.location.reload()
@@ -166,4 +165,4 @@ function redirectToRegion(region = '') {
     }
 }
 
-export { redirectToRegion };
+export { redirectToRegion, getDDSiteFromReferrer };

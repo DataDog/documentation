@@ -1,4 +1,4 @@
-import { redirectToRegion } from '../region-redirects';
+import { redirectToRegion, getDDSiteFromReferrer } from '../region-redirects';
 
 let regionUSSnippet;
 let regionEUSnippet;
@@ -106,8 +106,9 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
         describe('referrer coming from app.datadoghq.eu', () => {
             it('should set cookie value "site" to region "eu" from document referrer', () => {
                 window.document.referrer = "https://app.datadoghq.eu/";
+                const currentReferrerAppRegion = getDDSiteFromReferrer();
 
-                redirectToRegion();
+                redirectToRegion(currentReferrerAppRegion);
 
                 expect(window.document.cookie).toContain('site=eu');
                 expect(regionUSSnippet.classList).toContain('d-none')
@@ -169,8 +170,9 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
         describe('referrer coming from app.datadoghq.com', () => {
             it('should set cookie value "site" to region "us" from document referrer', () => {
                 window.document.referrer = "https://app.datadoghq.com/";
+                const currentReferrerAppRegion = getDDSiteFromReferrer();
 
-                redirectToRegion();
+                redirectToRegion(currentReferrerAppRegion);
 
                 expect(window.document.cookie).toContain('site=us');
                 expect(regionUSSnippet.classList).not.toContain('d-none')
