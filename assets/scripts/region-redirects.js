@@ -3,6 +3,7 @@ import config from './regions.config';
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
+    console.log(`Referrer: ${document.referrer}`)
     const regionSelector = document.querySelector('.js-region-select')
     const currentUserSavedRegion = Cookies.get('site')
     const currentReferrerAppRegion = getDDSiteFromReferrer()
