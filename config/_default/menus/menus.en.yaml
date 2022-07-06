@@ -34,98 +34,103 @@ main:
     url: getting_started/containers/datadog_operator
     parent: getting_started_containers
     weight: 402
+  - name: Serverless
+    identifier: getting_started_serverless
+    url: getting_started/serverless/
+    parent: getting_started
+    weight: 5
   - name: Integrations
     identifier: getting_started_integrations
     url: getting_started/integrations/
     parent: getting_started
-    weight: 5
+    weight: 6
   - name: AWS
     identifier: getting_started_with_aws
     url: getting_started/integrations/aws/
-    weight: 501
+    weight: 601
     parent: getting_started_integrations
   - name: Dashboards
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
     parent: getting_started
-    weight: 6
+    weight: 7
   - name: Monitors
     identifier: getting_started_monitors
     url: getting_started/monitors/
     parent: getting_started
-    weight: 7
+    weight: 8
   - name: Logs
     identifier: getting_started_logs
     url: getting_started/logs/
     parent: getting_started
-    weight: 8
+    weight: 9
   - name: Tracing
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
-    weight: 9
+    weight: 10
   - name: Profiler
     identifier: getting_started_profiler
     url: getting_started/profiler/
     parent: getting_started
-    weight: 10
+    weight: 11
   - name: Tags
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 11
+    weight: 12
   - name: Assigning Tags
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
     parent: tagging_
-    weight: 1101
+    weight: 1201
   - name: Unified Service Tagging
     identifier: unified_service_tagging
     url: getting_started/tagging/unified_service_tagging
     parent: tagging_
-    weight: 1102
+    weight: 1202
   - name: Using Tags
     identifier: using_tags
     url: getting_started/tagging/using_tags
     parent: tagging_
-    weight: 1103
+    weight: 1203
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 12
+    weight: 13
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 13
+    weight: 14
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1302
+    weight: 1402
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1301
+    weight: 1401
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1303
+    weight: 1403
   - name: Incident Management
     url: getting_started/incident_management/
     parent: getting_started
-    weight: 14
+    weight: 15
   - name: Database Monitoring
     url: getting_started/database_monitoring/
     parent: getting_started
-    weight: 15
+    weight: 16
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 16
+    weight: 17
   - name: Agent
     url: agent/
     pre: agent-fill
@@ -1149,11 +1154,16 @@ main:
     parent: monitors_create
     identifier: monitor_types_rum
     weight: 119
+  - name: SLO Alerts
+    url: monitors/create/types/slo/
+    parent: monitors_create
+    identifier: monitor_types_slo
+    weight: 120
   - name: Watchdog
     url: monitors/create/types/watchdog/
     parent: monitors_create
     identifier: monitor_types_watchdog
-    weight: 120
+    weight: 121
   - name: Notifications
     url: monitors/notify/
     parent: alerting
@@ -1887,11 +1897,16 @@ main:
     pre: database-2
     identifier: dbm
     weight: 160000
+  - name: Setup Architectures
+    url: database_monitoring/architecture/
+    parent: dbm
+    identifier: dbm_setup_architecture
+    weight: 1
   - name: Setting Up Postgres
     url: database_monitoring/setup_postgres/
     parent: dbm
     identifier: dbm_setup_postgres
-    weight: 1
+    weight: 2
   - name: Self-hosted
     url: database_monitoring/setup_postgres/selfhosted
     parent: dbm_setup_postgres
@@ -1931,7 +1946,7 @@ main:
     url: database_monitoring/setup_mysql/
     parent: dbm
     identifier: dbm_setup_mysql
-    weight: 2
+    weight: 3
   - name: Self-hosted
     url: database_monitoring/setup_mysql/selfhosted
     parent: dbm_setup_mysql
@@ -1971,7 +1986,7 @@ main:
     url: database_monitoring/setup_sql_server/
     parent: dbm
     identifier: dbm_setup_sql_server
-    weight: 3
+    weight: 4
   - name: Self-hosted
     url: database_monitoring/setup_sql_server/selfhosted/
     parent: dbm_setup_sql_server
@@ -1996,27 +2011,27 @@ main:
     url: database_monitoring/data_collected
     parent: dbm
     identifier: dbm_data_collected
-    weight: 4
+    weight: 5
   - name: Exploring Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm
     identifier: dbm_query_metrics
-    weight: 5
+    weight: 6
   - name: Exploring Query Samples
     url: database_monitoring/query_samples/
     parent: dbm
     identifier: dbm_query_samples
-    weight: 6
+    weight: 7
   - name: Troubleshooting
     url: database_monitoring/troubleshooting/
     parent: dbm
     identifier: dbm_troubleshooting
-    weight: 7
+    weight: 8
   - name: Guides
     url: database_monitoring/guide/
     parent: dbm
     identifier: dbm_guides
-    weight: 8
+    weight: 9
   - name: Log Management
     url: logs/
     pre: log
@@ -2512,37 +2527,57 @@ main:
     parent: synthetics
     identifier: synthetics_testing_tunnel
     weight: 7
+  - name: Dashboards
+    url: /synthetics/dashboards/
+    parent: synthetics
+    identifier: synthetics_dashboards
+    weight: 8
+  - name: API Test
+    url: /synthetics/dashboards/api_test
+    parent: synthetics_dashboards
+    identifier: synthetics_dashboards_api_test
+    weight: 801
+  - name: Browser Test
+    url: /synthetics/dashboards/browser_test
+    parent: synthetics_dashboards
+    identifier: synthetics_dashboards_browser_test
+    weight: 802
+  - name: Test Summary
+    url: /synthetics/dashboards/test_summary
+    parent: synthetics_dashboards
+    identifier: synthetics_dashboards_test_summary
+    weight: 803
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 8
+    weight: 9
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 11
+    weight: 12
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 12
+    weight: 13
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 13
+    weight: 14
   - name: Data Security
     url: data_security/synthetics/
     parent: synthetics
-    weight: 14
+    weight: 15
   - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: rum

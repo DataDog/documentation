@@ -520,6 +520,9 @@ Kubernetes State Metrics Core チェックには、イベントは含まれま�
 
 ### サービスのチェック
 
+`kubernetes_state.cronjob.complete`
+: cronjob の最後のジョブが失敗したかどうか。タグ:`kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+
 `kubernetes_state.cronjob.on_schedule_check`
 : cronjob の次のスケジュールが過去である場合に警告します。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 

@@ -45,8 +45,8 @@ CI プロバイダーがコンテナベースのエグゼキューターを使�
 Kubernetes のエグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] の使用を推奨しており、これは自動的にビルドポッドの環境変数 `DD_AGENT_HOST` を設定してローカルの Datadog Agent と通信させます。
 
 
-[1]: /ja/agent/
-[2]: https://docs.datadoghq.com/ja/agent/cluster_agent/admission_controller/
+[1]: /ja/agent
+[2]: /ja/agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{% tab "クラウド CI プロバイダー (Agentless)" %}}
@@ -87,93 +87,29 @@ yarn add --dev dd-trace
 
 詳しくは、[JavaScript トレーサーのインストールに関するドキュメント][5]を参照してください。
 
+
 ## テストのインスツルメント
 
 {{< tabs >}}
-{{% tab "Jest" %}}
-
-1. `jest.config.js` 内でカスタム [`testEnvironment`][1] を構成するか、普段 `jest` を構成している方法で進めます:
-
-```javascript
-module.exports = {
-  // ...
-  // 別のルートかもしれません。以下のファイルを参照しています。
-  testEnvironment: '<rootDir>/testEnvironment.js',
-  // ...
-}
-```
-
-2. `testEnvironment.js` で以下を実行します:
-
-```javascript
-
-// CI ではテストインスツルメンテーションのみ有効にします
-if (process.env.DD_ENV === 'ci') {
-  require('dd-trace/ci/jest/env')
-}
-// jest-environment-jsdom もオプションです
-module.exports = require('jest-environment-node')
-```
-
-### Jest@28
-
-`jest@28` と `jest-environment-node` を使用している場合は、[`jest` のドキュメント][1]に従って環境を更新してください。
-
-```javascript
-
-if (process.env.DD_ENV === 'ci') {
-  require('dd-trace/ci/jest/env')
-}
-
-module.exports = require('jest-environment-node').default
-```
-
-`jest-environment-jsdom` は `jest@28` に含まれていないため、別途インストールする必要があります。また、`jest>=28`は `dd-trace>=2.7.0` からしかサポートされていません。
-
-<div class="alert alert-warning"><strong>注</strong>: <code>jest-environment-node</code>、<code>jest-environment-jsdom</code>、<code>est-jasmine2</code>、<code>jest-circus</code> (Jest 27時点) は <code>jest</code> と一緒にインストールされるため、通常は <code>package.json</code> に表示されません。<code>package.json</code> でこれらのライブラリのいずれかを抽出した場合は、インストールされているバージョンが <code>jest</code> のものと同じであることを確認してください。</div>
-
-
-`DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
-
-```bash
-DD_ENV=ci DD_SERVICE=my-javascript-app npm test
-```
-
-
-[1]: https://jestjs.io/docs/en/configuration#testenvironment-string
-{{% /tab %}}
-
-{{% tab "Mocha" %}}
-
-たとえば、`package.json` で、`mocha` テストの実行コマンドに `--require dd-trace/ci/init` を追加します。
-
-```json
-"scripts": {
-  "test": "mocha --require dd-trace/ci/init"
-},
-```
-
-`DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
-
-```bash
-DD_ENV=ci DD_SERVICE=my-javascript-app npm test
-```
-
-{{% /tab %}}
-{{% tab "Cucumber" %}}
-
-`cucumber-js` テストを通常実行している方法に従って `--require-module dd-trace/ci/init` を追加します。たとえば、`package.json` に追加することができます:
-
-{{< code-block lang="json" filename="package.json" >}}
-"scripts": {
-  "test": "cucumber-js --require-module=dd-trace/ci/init"
-},
-{{< /code-block >}}
-
-`DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
+{{% tab "Jest/Mocha/Cucumber" %}}
+`NODE_OPTIONS` 環境変数を `-r dd-trace/ci/init` に設定します。環境変数 `DD_ENV` にテストを実行する環境を指定し、通常通りテストを実行してください。例えば、開発者のワークステーションでテストを実行する場合は `DD_ENV` を `local` に設定し、CI プロバイダでテストを実行する場合は `ci` に設定します。
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci DD_SERVICE=my-javascript-app npm test
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+{{< /code-block >}}
+
+### Yarn >=2 を使用する場合
+
+`yarn>=2` と `.pnp.cjs` ファイルを使用していて、`NODE_OPTIONS` を使用したときに次のようなエラーメッセージが表示された場合
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+`NODE_OPTIONS` を以下のように設定することで修正できます。
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -252,7 +188,7 @@ module.exports = defineConfig({
 {{< /code-block >}}
 
 
-### さらにタグを追加
+#### Cypress テストに追加のタグを追加する
 
 テストに、チームオーナーなどの情報を追加するには、テストまたはフックで `cy.task('dd:addTags', { yourTags: 'here' })` を使用します。
 
@@ -269,11 +205,9 @@ it('renders a hello world', () => {
 })
 {{< /code-block >}}
 
-
-### RUM インテグレーション
+#### Cypress - RUM インテグレーション
 
 テスト対象のブラウザアプリケーションが [RUM][5] を使用してインスツルメントされている場合、Cypress テストの結果と生成された RUM ブラウザセッションおよびセッションリプレイは自動的にリンクされます。詳しくは、[RUM インテグレーション][6]ガイドをご参照ください。
-
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
@@ -282,7 +216,9 @@ it('renders a hello world', () => {
 [5]: /ja/real_user_monitoring/browser/#setup
 [6]: /ja/continuous_integration/guides/rum_integration/
 {{% /tab %}}
+
 {{< /tabs >}}
+
 
 ## コンフィギュレーション設定
 
@@ -357,34 +293,17 @@ Datadog は、テスト結果を可視化し、リポジトリ、ブランチ、
 : ISO 8601 形式のコミットのコミッターの日付。<br/>
 **例**: `2021-03-12T16:00:28Z`
 
-## Agentless (ベータ版)
-
-Agent を使用せずにテストスイートをインスツルメントするには、以下の環境変数を構成します。
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED` (必須)
-: Agentless モードを有効または無効にします。<br/>
-**デフォルト**: `false`
-
-`DD_API_KEY` (必須)
-: テスト結果のアップロードに使用される [Datadog API キー][7]。<br/>
-**デフォルト**: `(empty)`
-
-さらに、どの [Datadog サイト][6]にデータを送信するかを構成します。あなたの Datadog サイトは {{< region-param key="dd_site" >}} です。
-
-`DD_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][8]。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
-
 ## 既知の制限
 
 ### ES モジュール
-[Mocha >=9.0.0][9] はテストファイルの読み込みに ESM-first アプローチを採用しています。つまり、ES モジュールが使用されている場合 (たとえば、テストファイルの拡張子を `.mjs` にして定義している場合) は_インスツルメンテーションが制限されます_。テストは検出されますが、自分のテストを可視化することはできません。ES モジュールについて詳しくは、[NodeJS に関するドキュメント][10]を参照してください。
+[Mocha >=9.0.0][7] はテストファイルの読み込みに ESM-first アプローチを採用しています。つまり、ES モジュールが使用されている場合 (たとえば、テストファイルの拡張子を `.mjs` にして定義している場合) は_インスツルメンテーションが制限されます_。テストは検出されますが、自分のテストを可視化することはできません。ES モジュールについて詳しくは、[NodeJS に関するドキュメント][8]を参照してください。
 
 ### ブラウザテスト
 `mocha`、`jest`、`cucumber`、`cypress` で実行されるブラウザテストは `dd-trace-js` によりインスツルメントされますが、ブラウザセッション自体の可視性はデフォルトでは提供されません（ネットワーク呼び出し、ユーザーのアクション、ページロードなど）。
 
-ブラウザ処理の可視性を希望する場合は、[RUM とセッションリプレイ][11]の使用をご検討ください。Cypress を使用していると、テスト結果と生成された RUM ブラウザセッションおよびセッションリプレイは自動的にリンクされます。詳しくは、[RUM インテグレーション][12]ガイドをご参照ください。
+ブラウザ処理の可視性を希望する場合は、[RUM とセッションリプレイ][9]の使用をご検討ください。Cypress を使用していると、テスト結果と生成された RUM ブラウザセッションおよびセッションリプレイは自動的にリンクされます。詳しくは、[RUM インテグレーション][10]ガイドをご参照ください。
+
+
 
 ## ベストプラクティス
 
@@ -403,14 +322,14 @@ Agent を使用せずにテストスイートをインスツルメントする�
 })
 {{< /code-block >}}
 
-代わりに [`test.each`][13] を使用:
+代わりに [`test.each`][11] を使用:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-`mocha` の場合は、[`mocha-each`][14] を使用:
+`mocha` の場合は、[`mocha-each`][12] を使用:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -429,17 +348,16 @@ forEach([
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/facebook/jest/tree/master/packages/jest-circus
-[2]: https://github.com/facebook/jest/tree/master/packages/jest-jasmine2
+
+[1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
+[2]: https://github.com/facebook/jest/tree/main/packages/jest-jasmine2
 [3]: https://jestjs.io/docs/configuration#testrunner-string
 [4]: https://github.com/DataDog/dd-trace-js
 [5]: /ja/tracing/setup_overview/setup/nodejs
 [6]: /ja/tracing/setup_overview/setup/nodejs/?tab=containers#configuration
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: /ja/getting_started/site/
-[9]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[11]: /ja/real_user_monitoring/browser/
-[12]: /ja/continuous_integration/guides/rum_integration/
-[13]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[14]: https://github.com/ryym/mocha-each
+[7]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[8]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[9]: /ja/real_user_monitoring/browser/
+[10]: /ja/continuous_integration/guides/rum_integration/
+[11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[12]: https://www.npmjs.com/package/mocha-each

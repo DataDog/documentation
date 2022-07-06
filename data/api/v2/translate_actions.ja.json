@@ -630,6 +630,10 @@
     "description": "マルチオーガニゼーションのアカウントでコストを取得します。ある月の組織別コストデータは、翌月 16 日までに利用可能になります。",
     "summary": "マルチオーガニゼーションのアカウントのコストを取得"
   },
+  "GetEstimatedCostByOrg": {
+    "description": "マルチオーガニゼーションのアカウントの推定コストを取得します。",
+    "summary": "マルチオーガニゼーションのアカウントの推定コストを取得"
+  },
   "GetUsageLambdaTracedInvocations": {
     "description": "Lambda Traced Invocations の 1 時間あたり使用量を取得します。",
     "summary": "Lambda Traced Invocations の 1 時間あたり使用量を取得"

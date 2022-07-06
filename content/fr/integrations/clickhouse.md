@@ -10,18 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
+- data store
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md
 display_name: ClickHouse
 draft: false
 git_integration_title: clickhouse
 guid: 781edd66-9c4c-4210-898c-182a6b8ba4ab
 integration_id: clickhouse
 integration_title: ClickHouse
+integration_version: 2.7.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -33,17 +34,20 @@ public_title: Intégration Datadog/ClickHouse
 short_description: Surveillez les performances et la santé de vos clusters ClickHouse.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [ClickHouse][1] avec l'Agent Datadog.
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
 
 ### Installation
 
@@ -105,7 +109,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                     |
 |----------------|-------------------------------------------|
@@ -126,22 +130,22 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "clickhouse" >}}
 
 
-### Checks de service
-
-**clickhouse.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à la base de données ClickHouse surveillée. Si ce n'est pas le cas, renvoie `OK`.
-
 ### Événements
 
 Le check ClickHouse n'inclut aucun événement.
+
+### Checks de service
+{{< get-service-checks-from-git "clickhouse" >}}
+
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 
+
 [1]: https://clickhouse.yandex
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/fr/agent/
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/fr/help/

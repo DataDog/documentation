@@ -19,19 +19,20 @@ assets:
     tomcat_processes: assets/saved_views/tomcat_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - log collection
-  - autodiscovery
+- web
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md
 display_name: Tomcat
 draft: false
 git_integration_title: tomcat
 guid: 60f37d34-3bb7-43c9-9b52-2659b8898997
 integration_id: tomcat
 integration_title: Tomcat
+integration_version: 1.11.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -40,15 +41,19 @@ metric_prefix: tomcat.
 metric_to_check: tomcat.threads.count
 name: tomcat
 process_signatures:
-  - java tomcat
+- java tomcat
 public_title: Intégration Datadog/Tomcat
-short_description: 'Surveillez le nombre de requêtes par seconde, les octets traités, les hits de cache, les métriques de servlet et plus encore.'
+short_description: Surveillez le nombre de requêtes par seconde, les octets traités,
+  les hits de cache, les métriques de servlet et plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard Tomcat][1]
 
 ## Présentation
@@ -65,7 +70,7 @@ Ce check recueille des métriques Tomcat comme :
 
 Le check Tomcat est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Tomcat.
 
-Ce check étant basé sur JMX, vous devez activer les connexions JMX à distance sur vos serveurs Tomcat. Suivez les instructions dans la [documentation Tomcat][3] pour effectuer cette opération.
+Ce check étant basé sur JMX, vous devez activer les connexions JMX à distance sur vos serveurs Tomcat. Suivez les instructions de la section [Surveillance et gestion de Tomcat][3] (en anglais).
 
 ### Configuration
 
@@ -163,7 +168,7 @@ La liste de filtres est uniquement prise en charge pour les versions > 5.3.0 de
 #### Collecte de logs
 
 
-1. Tomcat utilise le logger `log4j` pour envoyer les logs à Datadog. Avec les versions < 8.0 de Tomcat, `log4j` est configuré par défaut. À partir de la version 8.0, vous devez configurer Tomcat pour le faire utiliser `log4j` en suivant la [documentation sur Apache Tomcat][5]. À la première étape de ces instructions, modifiez le fichier `log4j.properties` dans le répertoire `$CATALINA_BASE/lib` comme suit :
+1. Tomcat utilise le logger `log4j` pour envoyer les logs à Datadog. Avec les versions < 8.0 de Tomcat, `log4j` est configuré par défaut. À partir de la version 8.0, vous devez configurer Tomcat afin d'utiliser `log4j`. Pour ce faire, suivez les instructions de la rubrique [Utilisation de Log4j][5] (en anglais). À la première étape de ces instructions, modifiez le fichier `log4j.properties` dans le répertoire `$CATALINA_BASE/lib` comme suit :
 
    ```conf
      log4j.rootLogger = INFO, CATALINA
@@ -215,7 +220,7 @@ La liste de filtres est uniquement prise en charge pour les versions > 5.3.0 de
      %d [%t] %-5p %c - %m%n
    ```
 
-    Dupliquez et modifiez le [pipeline d'intégration][6] si vous utilisez un autre format. Consultez la [documentation sur la journalisation][7] (en anglais) Tomcat pour obtenir plus d'informations sur les fonctionnalités de journalisation de Tomcat.
+    Dupliquez et modifiez le [pipeline d'intégration][6] si vous utilisez un autre format. Consultez la section [Journalisation dans Tomcat][7] (en anglais) pour obtenir plus d'informations sur les fonctionnalités de journalisation de Tomcat.
 
 3. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -275,11 +280,31 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 Le check Tomcat n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "tomcat" >}}
 
-**tomcat.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Tomcat qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
+
+### Métriques `tomcat.*` manquantes
+L'intégration recueille des métriques Tomcat par défaut depuis le nom de domaine du bean `Catalina`. Si le nom des métriques Tomcat exposées est précédé par le nom de domaine d'un autre bean, par exemple `Tomcat`, copiez les métriques par défaut depuis le fichier `metrics.yaml` vers la section `conf` du fichier `tomcat.d/conf.yaml`, puis modifiez le filtre `domain` de façon à utiliser le nom de domaine du bean applicable.
+
+```yaml
+- include:
+    domain: Tomcat      # Valeur par défaut : Catalina
+    type: ThreadPool
+    attribute:
+      maxThreads:
+        alias: tomcat.threads.max
+        metric_type: gauge
+      currentThreadCount:
+        alias: tomcat.threads.count
+        metric_type: gauge
+      currentThreadsBusy:
+        alias: tomcat.threads.busy
+        metric_type: gauge
+```
+
+Consultez la [section JMX][5] pour obtenir plus d'informations à ce sujet.
 
 ### Commandes pour afficher les métriques disponibles
 
@@ -302,13 +327,14 @@ La commande `datadog-agent jmx` a été ajoutée dans la version 4.1.0.
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller les métriques de Tomcat avec Datadog][5]
-- [Métriques clés pour la surveillance de Tomcat][6]
+- [Surveiller les métriques Tomcat avec Datadog][6]
+- [Métriques clés pour la surveillance de Tomcat][7]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tomcat/images/tomcat_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://tomcat.apache.org/tomcat-6.0-doc/monitoring.html
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
-[6]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance
+[5]: https://docs.datadoghq.com/fr/integrations/java/
+[6]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
+[7]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance

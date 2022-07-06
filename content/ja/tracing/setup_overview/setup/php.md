@@ -5,6 +5,7 @@ aliases:
 - /ja/tracing/php/
 - /ja/tracing/setup/php
 - /ja/tracing/setup_overview/php
+- /ja/tracing/faq/php-tracer-manual-installation/
 code_lang: php
 code_lang_weight: 40
 further_reading:
@@ -49,7 +50,7 @@ PHP トレーサーのオープンソースに対する貢献に関しては、[
 {{< tabs >}}
 {{% tab "コンテナ" %}}
 
-1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します
+1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
 
 2. コンテナ化された環境でトレースを受信するように Agent を構成する方法については、それぞれの説明を参照してください。
 
@@ -131,8 +132,6 @@ PHP CLI のバイナリが NTS (non thread-safe) でビルドされ、Apache が
 </div>
 
 
-PHP インストーラーを使用できない場合は、[追加インストールオプション][6]をご覧ください。
-
 ## 自動インスツルメンテーション
 
 トレースはデフォルトで自動的に有効になります。拡張機能がインストールされると、**ddtrace** はアプリケーションをトレースし、Agent へトレースを送ります。
@@ -168,7 +167,7 @@ env[DD_SERVICE] = my-app
 ; または同等の INI 設定を使用
 php_value datadog.service my-app```
 
-サーバーコンフィギュレーション、仮想ホスト、ディレクトリ、または `.htaccess` ファイルから [`SetEnv`][7] を使用することも可能です。
+サーバーコンフィギュレーション、仮想ホスト、ディレクトリ、または `.htaccess` ファイルから [`SetEnv`][6] を使用することも可能です。
 
 ```text
 # バーチャルホストコンフィギュレーションで環境変数として
@@ -196,7 +195,7 @@ env[DD_SERVICE] = my-app
 php_value[datadog.service] = my-app
 ```
 
-**注**: NGINX サーバーで APM を有効にしている場合、分散トレースが正常に機能するように `opentracing_fastcgi_propagate_context` 設定を適切に構成してください。詳細は、[NGINX APM コンフィギュレーション][8]を参照してください。
+**注**: NGINX サーバーで APM を有効にしている場合、分散トレースが正常に機能するように `opentracing_fastcgi_propagate_context` 設定を適切に構成してください。詳細は、[NGINX APM コンフィギュレーション][7]を参照してください。
 
 ### PHP CLI サーバー
 
@@ -233,7 +232,7 @@ Agent ホスト名。
 `DD_PROFILING_ENABLED`
 : **INI**: Not available<br>
 **デフォルト**: `0`<br>
-Datadog プロファイラーを有効にします。バージョン `0.69.0` に追加されています。[PHP プロファイラーの有効化][9]を参照。
+Datadog プロファイラーを有効にします。バージョン `0.69.0` に追加されています。[PHP プロファイラーの有効化][8]を参照。
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: Not available<br>
@@ -363,7 +362,7 @@ ID に対応するパスフラグメントを特定する正規表現のCSV ([�
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **INI**: `datadog.trace.retain_thread_capabilities`<br>
 **デフォルト**: `0`<br>
-Linux で動作します。`true` に設定すると、有効なユーザー ID を変更しても Datadog のバックグラウンドスレッド機能を維持することができます。このオプションはほとんどの設定には影響しませんが、一部のモジュールで影響が出る場合があります。現時点で Datadog が確認している限りでは、[Apache の mod-ruid2][10] で `setuid()` や類似の syscall を呼び出した場合に影響が生じ、クラッシュや機能の不具合につながる可能性があります。<br><br>
+Linux で動作します。`true` に設定すると、有効なユーザー ID を変更しても Datadog のバックグラウンドスレッド機能を維持することができます。このオプションはほとんどの設定には影響しませんが、一部のモジュールで影響が出る場合があります。現時点で Datadog が確認している限りでは、[Apache の mod-ruid2][9] で `setuid()` や類似の syscall を呼び出した場合に影響が生じ、クラッシュや機能の不具合につながる可能性があります。<br><br>
 **注:** このオプションを有効にすると、セキュリティが損なわれる可能性があります。このオプションは単独ならセキュリティ上のリスクをもたらす心配はありません。しかし、Web サーバーや PHP がフル機能で起動されている場合はバックグラウンドスレッドが元の機能を維持しているため、攻撃者は PHP や Web サーバーの脆弱性を悪用して比較的容易に権限を昇格できる可能性があります。Datadog では、`setcap` ユーティリティを使用して Web サーバーの機能を制限することをお勧めしています。
 
 `DD_TRACE_SAMPLE_RATE`
@@ -481,7 +480,7 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 ### `open_basedir` 制限
 
-[`open_basedir`][11] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
+[`open_basedir`][10] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
 アプリケーションを Docker コンテナで実行する場合は、許可されるディレクトリにパス `/proc/self` も追加する必要があります。
 
 ## CLI スクリプトのトレーシング
@@ -733,7 +732,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### Sury Debian DPA から PHP をインストールした場合
 
-PHP を [Sury Debian DPA][12] からインストールした場合は、DPA でデバッグデバッグシンボルを入手することができます。たとえば、PHP-FPM 7.2 の場合は次のようになります。
+PHP を [Sury Debian DPA][11] からインストールした場合は、DPA でデバッグデバッグシンボルを入手することができます。たとえば、PHP-FPM 7.2 の場合は次のようになります。
 
 ```
 apt update
@@ -742,7 +741,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### 異なるパッケージから PHP をインストールした場合
 
-Debian プロジェクトでは、wiki ページに[デバッグシンボルのインストール手順][13]を掲載しています。
+Debian プロジェクトでは、wiki ページに[デバッグシンボルのインストール手順][12]を掲載しています。
 
 `/etc/apt/sources.list` ファイルを編集します。
 
@@ -792,7 +791,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 ##### `ppa:ondrej/php` から PHP をインストールした場合　
 
-PHP を [`ppa:ondrej/php`][14] からインストールした場合は、`main/debug` コンポーネントを追加して apt ソースファイル `/etc/apt/sources.list.d/ondrej-*.list` を編集します。
+PHP を [`ppa:ondrej/php`][13] からインストールした場合は、`main/debug` コンポーネントを追加して apt ソースファイル `/etc/apt/sources.list.d/ondrej-*.list` を編集します。
 
 以前:
 
@@ -828,7 +827,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-`-dbg` および `-dbgsym` パッケージが見つからない場合は、`ddebs` リポジトリを有効にしてください。`ddebs` から[デバッグシンボルをインストールする方法][15]についての詳細は、Ubuntu のドキュメントを参照してください。
+`-dbg` および `-dbgsym` パッケージが見つからない場合は、`ddebs` リポジトリを有効にしてください。`ddebs` から[デバッグシンボルをインストールする方法][14]についての詳細は、Ubuntu のドキュメントを参照してください。
 
 たとえば、Ubuntu 18.04 以降の場合、`ddebs` リポジトリを有効にします。
 
@@ -838,7 +837,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-署名キーをインポートします ([署名キーが正しい][16]ことを確認してください)。
+署名キーをインポートします ([署名キーが正しい][15]ことを確認してください)。
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -915,7 +914,7 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-結果として得られる Valgrind のトレースは、デフォルトでは標準エラーに出力されますが、[公式ドキュメント][17]に従って別のターゲットに出力することもできます。想定される出力は、PHP-FPM プロセスの場合、以下の例のようになります。
+結果として得られる Valgrind のトレースは、デフォルトでは標準エラーに出力されますが、[公式ドキュメント][16]に従って別のターゲットに出力することもできます。想定される出力は、PHP-FPM プロセスの場合、以下の例のようになります。
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -990,15 +989,14 @@ Apache の場合は、次を実行します。
 [3]: /ja/tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: https://app.datadoghq.com/apm/services
-[6]: /ja/tracing/faq/php-tracer-manual-installation
-[7]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[8]: /ja/tracing/setup/nginx/#nginx-and-fastcgi
-[9]: /ja/tracing/profiler/enabling/php/
-[10]: https://github.com/mind04/mod-ruid2
-[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
-[12]: https://packages.sury.org/php/
-[13]: https://wiki.debian.org/HowToGetABacktrace
-[14]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[15]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
-[17]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[6]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[7]: /ja/tracing/setup/nginx/#nginx-and-fastcgi
+[8]: /ja/tracing/profiler/enabling/php/
+[9]: https://github.com/mind04/mod-ruid2
+[10]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[11]: https://packages.sury.org/php/
+[12]: https://wiki.debian.org/HowToGetABacktrace
+[13]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[14]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[15]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[16]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
