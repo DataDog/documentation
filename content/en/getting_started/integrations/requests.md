@@ -1,6 +1,8 @@
 ---
 title: Request Datadog Integrations
 kind: guide
+aliases:
+  - /integrations/guide/requests/
 further_reading:
   - link: "developers/integrations/new_check_howto"
     tag: "Documentation"
@@ -13,7 +15,31 @@ To request a Datadog integration, review the information below.
 
 There are some technologies that Datadog does not support, but there might be an alternative. Review the information below before submitting a request.
 
-{{< partial name="requests.html" links="requests" >}}
+### OpenMetrics
+
+- Should also mention metrics collected from this are custom metrics
+
+### JMX Beans
+
+- Should also mention all JMX-based integrations not natively supported by Datadog are considered as custom metrics
+
+### Custom Metrics
+
+- Combine custom metrics (DogStatsD) and Custom Integration (custom python checks) as a row in the table
+
+### Logs
+
+### APM
+
+### Processes
+
+### Files/Directories
+
+### Endpoint
+
+### SNMP Traffic / Network Traffic
+
+### Cloud providers
 
 ## Feature request
 
