@@ -4,6 +4,9 @@ kind: documentation
 aliases:
     - /account_management/audit_logs/
 further_reading:
+- link: "/account_management/audit_trail_event_types/"
+  tag: "Documentation"
+  text: "See the different Audit Trail events"
 - link: "/account_management/org_settings/"
   tag: "Documentation"
   text: "Learn more about organization settings"
@@ -48,6 +51,8 @@ Event types are a collection of audit events. For example, the Authentication ev
 
 {{< img src="account_management/audit_logs/audit_toggles.png" alt="Audit Trail event types setup in Datadog" style="width:50%;">}}
 
+See [Audit Trail Event Types][3] to see a list of event types.
+
 ### Archiving
 
 Archiving is an optional feature for Audit Trail. You can use archiving to write to Amazon S3, Google Cloud Storage, or Azure Storage and have your SIEM system read events from it. After creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Events are uploaded to the archive every 15 minutes, so check back on your storage bucket in 15 minutes to make sure the archives are successfully being uploaded from your Datadog account.
@@ -68,7 +73,7 @@ To explore an audit event, navigate to the [Audit Trail][1] section, also access
 
 {{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:30%;">}}
 
-Audit Trail events have the same functionality as logs within the [Log Explorer][3]:
+Audit Trail events have the same functionality as logs within the [Log Explorer][4]:
 
 - Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, etc), Authentication Attributes (Actor, API Key ID, User email, etc), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
 
@@ -78,21 +83,21 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 
 ## Create a monitor
 
-To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][4]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
+To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][5]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
 
 ## Create a dashboard or a graph
 
 Give more visual context to your audit trail events with dashboards. To create an audit dashboard:
 
-1. Create a [New Dashboard][5] in Datadog.
-2. Select your visualization. You can visualize an Audit event as [top lists][6], [timeseries][7], and [log streams][8].
-3. [Graph your data][9]: Under edit, select *Audit Events* as the data source, and create a query. Audit events are filtered by count and can be grouped by different facets. Select a facet and limit.
+1. Create a [New Dashboard][6] in Datadog.
+2. Select your visualization. You can visualize an Audit event as [top lists][7], [timeseries][8], and [log streams][9].
+3. [Graph your data][10]: Under edit, select *Audit Events* as the data source, and create a query. Audit events are filtered by count and can be grouped by different facets. Select a facet and limit.
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
 ## Out-of-the-box dashboard
 
-Datadog Audit Trail comes with an [out-of-the-box dashboard][10] that shows various audit events, such as index retention changes, log pipeline changes, dashboard changes, etc. Clone this dashboard to customize queries and visualizations for your auditing needs.
+Datadog Audit Trail comes with an [out-of-the-box dashboard][11] that shows various audit events, such as index retention changes, log pipeline changes, dashboard changes, etc. Clone this dashboard to customize queries and visualizations for your auditing needs.
 
 {{< img src="account_management/audit_logs/audit_dashboard.png" alt="Audit Trail dashboard" style="width:100%;">}}
 
@@ -102,11 +107,12 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][10] that shows vari
 
 [1]: https://app.datadoghq.com/audit-trail
 [2]: https://app.datadoghq.com/organization-settings/
-[3]: /logs/explorer/
-[4]: /monitors/create/types/audit_trail/
-[5]: /dashboards/
-[6]: /dashboards/widgets/top_list/
-[7]: /dashboards/widgets/timeseries/
-[8]: /dashboards/widgets/log_stream/
-[9]: /dashboards/querying/#choose-the-metric-to-graph/
-[10]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
+[3]: /account_management/audit_trail_event_types/
+[4]: /logs/explorer/
+[5]: /monitors/create/types/audit_trail/
+[6]: /dashboards/
+[7]: /dashboards/widgets/top_list/
+[8]: /dashboards/widgets/timeseries/
+[9]: /dashboards/widgets/log_stream/
+[10]: /dashboards/querying/#choose-the-metric-to-graph/
+[11]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
