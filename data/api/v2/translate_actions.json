@@ -631,7 +631,7 @@
     "summary": "Get cost across multi-org account"
   },
   "GetEstimatedCostByOrg": {
-    "description": "Get estimated cost across multi-org account.",
+    "description": "Get estimated cost across multi-org account. Estimated data is only available for the current month and previous month. To access historical costs beyond 2 months in the past, use the [/cost_by_org](#get-cost-across-multi-org-account) endpoint.",
     "summary": "Get estimated cost across multi-org account"
   },
   "GetUsageLambdaTracedInvocations": {
