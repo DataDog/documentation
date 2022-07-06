@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/account_management/audit_trail_event_types/"
   tag: "Documentation"
-  text: "See the different Audit Trail events"
+  text: "See the different Audit Trail event types"
 - link: "/account_management/org_settings/"
   tag: "Documentation"
   text: "Learn more about organization settings"
