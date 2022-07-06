@@ -736,23 +736,6 @@ class Integrations:
                 self.regex_partial_close, "", result, 0
             )
 
-        if metrics_exist:
-            result = re.sub(
-                self.regex_metrics,
-                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
-                % format(title),
-                result,
-                0,
-            )
-        if service_check_exist:
-            result = re.sub(
-                self.regex_service_check,
-                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
-                % format(title),
-                result,
-                0,
-            )
-
         # if __init__.py exists lets grab the integration id
         integration_id = manifest_json.get("integration_id", "") or ""
         initpy = "{0}{1}{2}".format(dirname(file_name), sep, "__init__.py")
@@ -775,6 +758,28 @@ class Integrations:
                 if matches:
                     integration_version = matches.group(1)
 
+        # determine new name is collision
+        if exist_collision:
+            collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or new_file_name.replace('.md','')
+            manifest_json["name"] = collision_name
+
+        if metrics_exist:
+            result = re.sub(
+                self.regex_metrics,
+                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
+                % format(title if not exist_collision else collision_name),
+                result,
+                0,
+            )
+        if service_check_exist:
+            result = re.sub(
+                self.regex_service_check,
+                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
+                % format(title if not exist_collision else collision_name),
+                result,
+                0,
+            )
+
         if not exist_already and no_integration_issue:
             # lets only write out file.md if its going to be public
             if manifest_json.get("is_public", False):
@@ -789,14 +794,12 @@ class Integrations:
                 # if the same integration exists in multiple locations try name md file differently
                 # integration_id.md -> name.md -> original_collision_name.md
                 if exist_collision:
-                    f_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or new_file_name
-                    manifest_json["name"] = f_name
-                    f_name = f_name if f_name.endswith('.md') else f_name + ".md"
-                    out_name = self.content_integrations_dir + f_name
+                    collision_name = collision_name if collision_name.endswith('.md') else collision_name + ".md"
+                    out_name = self.content_integrations_dir + collision_name
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
-                        new_file_name, f_name))
+                        new_file_name, collision_name))
                     result = self.add_integration_frontmatter(
-                        f_name, result, dependencies, integration_id, integration_version, manifest_json
+                        collision_name, result, dependencies, integration_id, integration_version, manifest_json
                     )
                 else:
                     result = self.add_integration_frontmatter(
