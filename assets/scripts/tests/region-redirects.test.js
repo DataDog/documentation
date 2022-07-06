@@ -245,3 +245,26 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
         });
     });
 });
+
+describe('Parses datadog region correctly from referrer', () => {
+    it('Should return correct DD site if there is a match', () => {
+        window.document.referrer = 'https://app.datadoghq.eu/'
+        const currentReferrerAppRegion = getDDSiteFromReferrer()
+
+        expect(currentReferrerAppRegion).toEqual('eu')
+    })
+
+    it('Should return correct DD site if there is a match', () => {
+        window.document.referrer = 'https://app.ddog-gov.com'
+        const currentReferrerAppRegion = getDDSiteFromReferrer()
+
+        expect(currentReferrerAppRegion).toEqual('gov')
+    })
+
+    it('Should return an empty result if referrer site did not match any full DD sites', () => {
+        window.document.referrer = 'https://fake.datadoghq.com'
+        const currentReferrerAppRegion = getDDSiteFromReferrer()
+
+        expect(currentReferrerAppRegion).toEqual('')
+    })
+})
