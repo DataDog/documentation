@@ -160,7 +160,7 @@ Get visibility into cross-origin scripts by following these two steps:
 
 2. Configure the `Access-Control-Allow-Origin` HTTP header.
 
-    The most common value for this header is `Access-Control-Allow-Origin: *`, which allows all origins to fetch the resource. Instead, restrict which origins can access your resources by setting, for example `Access-Control-Allow-Origin: www.example.com`.
+    The most common value for this header is `Access-Control-Allow-Origin: *`, which allows all origins to fetch the resource. Otherwise, a set of origins can be allowed but it requires code on the server side to check the origin of the request. In this case, you need to ensure that your origins are allowed by the server. 
 
 ## Further Reading
 
