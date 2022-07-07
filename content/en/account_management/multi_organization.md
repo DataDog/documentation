@@ -52,7 +52,7 @@ For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated 
 
 **Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.com/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
 
-**Note**: Even though you _can_ replace API urls like `https://api.datadoghq.eu/api/v2/series` with `https://org-a.datadoghq.eu/api/v2` that could be misleading, because only the API key is used to select the organization. So that URL used together with an API key for org-b would submit the data to org-b, disregaring the URL's subdomain.
+**Note**: Even though you _can_ replace API urls like `https://api.datadoghq.eu/api/v2/series` with `https://org-a.datadoghq.eu/api/v2/series` that could be misleading, because only the API key is used to select the organization. So that URL used together with an API key for org-b would submit the data to org-b, disregaring the URL's subdomain.
 
 ## Set up SAML
 
