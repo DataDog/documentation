@@ -117,7 +117,7 @@ Pin the Collector to the latest version to pick up the latest changes.
       $ docker run \
       -p 4317:4317 \
       --hostname $(hostname) \
-      -v $(pwd)/otel_collector_config.yaml:/etc/otel/config.yaml \
+      -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
       otel/opentelemetry-collector-contrib:<VERSION>
       ```
 
@@ -143,7 +143,7 @@ Pin the Collector to the latest version to pick up the latest changes.
     docker run -d --name opentelemetry-collector \
               --network <NETWORK_NAME> \
               --hostname $(hostname) \
-              -v $(pwd)/otel_collector_config.yaml:/etc/otel/config.yaml \
+              -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
               otel/opentelemetry-collector-contrib:<VERSION>
 
     # Application
