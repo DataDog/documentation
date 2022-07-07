@@ -24,7 +24,7 @@ Reporting automatically sends a visual summary of a dashboard to selected recipi
 
 ## Schedule a report
 
-Create a new report from any dashboard by opening the dashboard’s cog menu and selecting **Schedule a Report**.
+Create a new report from any custom timeboard by opening the dashboard’s cog menu and selecting **Schedule a Report**.
 
 The following widget types are supported:
 
@@ -43,7 +43,7 @@ The following widget types are supported:
 
 In the configuration modal that opens, set a schedule for the report to determine when and how often the report is sent. Set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.
 
-Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the red **X**. 
+Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the **X** that appears next to it. 
 
 {{< img src="dashboards/reporting/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal is a radio button to link to the live dashboard and other buttons to edit template variables, send preview, cancel, and save" style="width:100%;" >}}
 
