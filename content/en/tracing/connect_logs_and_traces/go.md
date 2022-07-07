@@ -53,4 +53,4 @@ The above example illustrates how to use the span's context in the standard libr
 
 
 [1]: /logs/log_collection/go/#configure-your-logger
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[2]: /troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

@@ -87,5 +87,5 @@ If your application uses json logs format instead of appending trace_id and span
 
 [1]: /logs/log_collection/php/
 [2]: /logs/log_configuration/processors/#trace-remapper
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog

@@ -315,13 +315,13 @@ using(_logger.BeginScope(new Dictionary<string, object>
 {{< /tabs >}}
 
 You can read more about using BeginScope to create structured log messages for the following log providers:
-- Serilog: [The semantics of ILogger.BeginScope()][13]
-- NLog: [NLog properties with Microsoft Extension Logging][14]
-- log4net: [Using BeginScope][15]
+- Serilog: [The semantics of ILogger.BeginScope()][12]
+- NLog: [NLog properties with Microsoft Extension Logging][13]
+- log4net: [Using BeginScope][14]
 
 ## Configure log collection
 
-Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][12] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If the `source` is set to a value other than `csharp`, you may need to add a [trace remapper][8] to the appropriate log processing pipeline for the correlation to work correctly.
+Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][15] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If the `source` is set to a value other than `csharp`, you may need to add a [trace remapper][8] to the appropriate log processing pipeline for the correlation to work correctly.
 
 <div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
 
@@ -337,10 +337,10 @@ Ensure that log collection is configured in the Datadog Agent and that the [Logs
 [6]: /tracing/setup_overview/setup/dotnet-core/#configuring-the-net-tracer
 [7]: /logs/log_collection/csharp/
 [8]: /logs/log_configuration/processors/?tab=ui#trace-remapper
-[9]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=withlogintegration
-[10]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[9]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=withlogintegration
+[10]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [11]: https://www.nuget.org/packages/Datadog.Trace/
-[12]: /logs/log_collection/csharp/#configure-your-datadog-agent
-[13]: https://nblumhardt.com/2016/11/ilogger-beginscope/
-[14]: https://github.com/NLog/NLog.Extensions.Logging/wiki/NLog-properties-with-Microsoft-Extension-Logging
-[15]: https://github.com/huorswords/Microsoft.Extensions.Logging.Log4Net.AspNetCore#using-beginscope
+[12]: https://nblumhardt.com/2016/11/ilogger-beginscope/
+[13]: https://github.com/NLog/NLog.Extensions.Logging/wiki/NLog-properties-with-Microsoft-Extension-Logging
+[14]: https://github.com/huorswords/Microsoft.Extensions.Logging.Log4Net.AspNetCore#using-beginscope
+[15]: /logs/log_collection/csharp/#configure-your-datadog-agent

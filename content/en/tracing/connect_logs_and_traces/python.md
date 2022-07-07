@@ -112,4 +112,4 @@ Once the logger is configured, executing a traced function that logs an event yi
 [1]: /tracing/visualization/#trace
 [2]: /logs/log_collection/python/#configure-the-datadog-agent
 [3]: /logs/log_configuration/processors/#trace-remapper
-[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[4]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

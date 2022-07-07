@@ -1767,16 +1767,21 @@ main:
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
     weight: 1705
+  - name: Correlated Logs
+    url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
+    identifier: tracing_troubleshooting_correlated_logs
+    parent: tracing_troubleshooting
+    weight: 1706
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1706
+    weight: 1707
   - name: .NET diagnostic tool
     url: tracing/troubleshooting/dotnet_diagnostic_tool
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
-    weight: 1707
+    weight: 1708
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
