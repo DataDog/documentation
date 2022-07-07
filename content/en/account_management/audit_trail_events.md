@@ -21,15 +21,15 @@ further_reading:
 - [Notebook](#notebook-events)
 - [OAuth](#oauth-events)
 - [Organization management](#organization-management-events)
-- [SLO](#slo-events)
 - [Support administration](#support-administration-events)
 
 #### Product-Specific Events
 - [Cloud Security Platform](#cloud-security-platform-events)
-- [Custom metrics](#custom-metrics-events)
 - [Log Management](#log-management-events)
+- [Metrics](#metrics-events)
 - [Real User Monitoring](#real-user-monitoring-events)
 - [Sensitive Data Scanner](#sensitive-data-scanner-events)
+- [Service Level Objectives](#service-level-objectives-slo-events)
 - [Synthetic Monitoring](#synthetics-monitoring-events)
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -104,7 +104,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Restriction query configuration | A user created, modified, or deleted the configuration of a restriction query in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:restriction_query` |
 | Standard attribute configuration | A user created, modified, or deleted the configuration of a standard attribute in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:standard_attribute` |
 
-### Custom metrics events
+### Metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- |------------------------------------------------------------------- | --------------------------------------------------|
 | Custom metric created | A user created a custom metric and the new value for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:created` |
@@ -152,7 +152,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Scanning group | A user created, modified, or deleted a scanning group in Sensitive Data Scanner and the previous and new values for the configuration. | `@evt.name:Sensitive Data Scanner @asset.type:sensitive_data_scanner_scanning_group` |
 | Scanning rule | A user created, modified, or deleted a scanning rule within a scanning group in Sensitive Data Scanner and the previous and new values for the configuration. | `@evt.name:Sensitive Data Scanner @asset.type:sensitive_data_scanner_scanning_rule` |
 
-### SLO events
+### Service Level Objectives (SLO) events
 
 | Name          | Description of audit event                                                                       | Query in audit explorer                  |
 | ------------- | ------------------------------------------------------------------------------------------------ | -----------------------------------------|
