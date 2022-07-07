@@ -24,14 +24,12 @@ Ingested span and traces are kept for 15 minutes. Indexed spans and traces that 
 
 Enable [runtime metrics collection][2] in supported tracing libraries to gain insights into an application’s performance.
 
-## Monitors on APM data
-
-Learn how to [create APM monitors][3] that alert and notify you when APM metrics or trace analytics reach certain thresholds or fall outside expected bounds.
 
 ## Next steps
 
 {{< whatsnext desc="Use what you set up:" >}}
     {{< nextlink href="tracing/guide/apm_dashboard" >}}Create a Dashboard to track and correlate APM metrics{{< /nextlink >}}
+    {{< nextlink href="monitors/create/types/apm/" >}}Create APM Monitors that alert and notify you when something is unexpected{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
@@ -41,4 +39,3 @@ Learn how to [create APM monitors][3] that alert and notify you when APM metrics
 
 [1]: /tracing/metrics/metrics_namespace/
 [2]: /tracing/metrics/runtime_metrics/
-[3]: /monitors/create/types/apm/

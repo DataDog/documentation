@@ -1239,7 +1239,7 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
-  - name: APM
+  - name: APM & Continuous Profiler
     url: tracing/
     pre: apm
     identifier: tracing
@@ -1544,11 +1544,6 @@ main:
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_dotnet
     weight: 106
-  - name: APM Monitors
-    url: /monitors/create/types/apm/
-    parent: tracing_metrics
-    identifier: tracing_apm_monitors
-    weight: 203
   - name: Trace Pipeline Configuration
     url: tracing/trace_pipeline/
     parent: tracing
@@ -1702,6 +1697,11 @@ main:
     parent: tracing_services
     identifier: tracing_service_map
     weight: 605
+  - name: APM Monitors
+    url: /monitors/create/types/apm/
+    parent: tracing_services
+    identifier: tracing_apm_monitors
+    weight: 607
   - name: Continuous Profiler
     url: tracing/profiler/
     parent: tracing

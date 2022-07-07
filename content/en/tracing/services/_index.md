@@ -18,4 +18,5 @@ Viewing span and trace data through the lens of your services can ease troublesh
     {{< nextlink href="tracing/services/resource_page/" >}}Resource Page{{< /nextlink >}}
     {{< nextlink href="tracing/services/deployment_tracking/" >}}Deployment Tracking{{< /nextlink >}}
     {{< nextlink href="tracing/services/services_map/" >}}Services Map{{< /nextlink >}}
+    {{< nextlink href="monitors/create/types/apm/" >}}APM Monitors{{< /nextlink >}}
 {{< /whatsnext >}}
