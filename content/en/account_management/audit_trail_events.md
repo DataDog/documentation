@@ -26,11 +26,11 @@ further_reading:
 
 #### Product-Specific Events
 - [Cloud Security Platform](#cloud-security-platform-events)
-- [Custom Metrics](#custom-metrics-events)
-- [Log management](#log-management-events)
+- [Custom metrics](#custom-metrics-events)
+- [Log Management](#log-management-events)
 - [Real User Monitoring](#real-user-monitoring-events)
 - [Sensitive Data Scanner](#sensitive-data-scanner-events)
-- [Synthetics monitoring](#synthetics-monitoring-events)
+- [Synthetic Monitoring](#synthetics-monitoring-events)
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
 
@@ -165,14 +165,14 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | -------------------- | ------------------------------------------------------------------- | --------------------------------------------------|
 | Support admin access | A Datadog support admin accesses the account and the reason for it. | `@evt.name:"Support Administration" @action:login`  |
 
-### Synthetics Monitoring events
+### Synthetic Monitoring events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
-| Private location | A user created or deleted a private location for synthetics tests. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_private_location` |
-| Synthetics test created or deleted | A user created or deleted a synthetics test. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
-| Synthetics test modified | A user modified a synthetics test and the previous and new values for the configuration. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
-| Synthetics variable | A user created, modified, or deleted a synthetics variable. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
-| Synthetics settings | A user modified synthetics settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
+| Private location | A user created or deleted a private location for synthetic tests. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_private_location` |
+| Synthetics test created or deleted | A user created or deleted a synthetic test. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| Synthetics test modified | A user modified a synthetic test and the previous and new values for the configuration. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
+| Synthetics variable | A user created, modified, or deleted a synthetic variable. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
+| Synthetics settings | A user modified synthetic settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
 
 ## Further Reading
 
