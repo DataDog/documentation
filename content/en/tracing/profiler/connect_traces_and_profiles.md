@@ -23,7 +23,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,.NET" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,.NET,php" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -94,7 +94,7 @@ Requires tracing library version 2.7.0 or greater.
 
 [1]: /tracing/profiler/enabling/dotnet
 {{< /programming-lang >}}
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
 
