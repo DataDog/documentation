@@ -6932,6 +6932,23 @@ api:
         - DownloadCloudWorkloadPolicyFile
       unstable: []
       order: 1
+  - name: EventRules
+    url: /api/latest/eventrules/
+    identifier: eventrules
+    generated: true
+  - name: TODO
+    url: '#todo'
+    identifier: eventrules-todo
+    parent: eventrules
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetEventRules
+        - FindEventRulesByConfigID
+      unstable: []
+      order: 0
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services

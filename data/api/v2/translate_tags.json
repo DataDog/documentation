@@ -15,6 +15,10 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
+  "eventrules": {
+    "name": "EventRules",
+    "description": "Manage event rules for ASM through remote configuration."
+  },
   "incident-services": {
     "name": "Incident Services",
     "description": "Create, update, delete, and retrieve services which can be associated with incidents."

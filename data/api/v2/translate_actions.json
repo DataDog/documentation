@@ -1,4 +1,12 @@
 {
+  "GetEventRules": {
+    "description": "Get a list of ASM event rules files for the current organization",
+    "summary": "TODO"
+  },
+  "FindEventRulesByConfigID": {
+    "description": "Get the ASM event rules file for the current organization. “id” may be “recommended” only for now",
+    "summary": "TODO"
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"

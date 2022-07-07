@@ -1995,6 +1995,41 @@
           "API_KEYS"
         ]
       },
+      "Address": {
+        "description": "address",
+        "enum": [
+          "server.request.method",
+          "server.request.uri.raw",
+          "server.request.path_params",
+          "server.request.query",
+          "server.request.headers.no_cookies",
+          "server.request.cookies",
+          "server.request.trailers",
+          "server.request.body",
+          "server.response.status",
+          "server.response.headers.no_cookies",
+          "server.response.trailers",
+          "grpc.server.request.metadata",
+          "grpc.server.request.message"
+        ],
+        "example": "server.request.method",
+        "type": "string",
+        "x-enum-varnames": [
+          "SERVER_REQUEST_METHOD",
+          "SERVER_REQUEST_URI_RAW",
+          "SERVER_REQUEST_PATH_PARAMS",
+          "SERVER_REQUEST_QUERY",
+          "SERVER_REQUEST_HEADERS_NO_COOKIES",
+          "SERVER_REQUEST_COOKIES",
+          "SERVER_REQUEST_TRAILERS",
+          "SERVER_REQUEST_BODY",
+          "SERVER_RESPONSE_STATUS",
+          "SERVER_RESPONSE_HEADERS_NO_COOKIES",
+          "SERVER_RESPONSE_TRAILERS",
+          "GRPC_SERVER_REQUEST_METADATA",
+          "GRPC_SERVER_REQUEST_MESSAGE"
+        ]
+      },
       "ApplicationKeyCreateAttributes": {
         "description": "Attributes used to create an application Key.",
         "properties": {
@@ -3126,6 +3161,236 @@
         "x-enum-varnames": [
           "APPLICATION_KEYS"
         ]
+      },
+      "Attributes": {
+        "description": "attributes",
+        "properties": {
+          "rules": {
+            "description": "rule list",
+            "items": {
+              "description": "event rule",
+              "properties": {
+                "metadata": {
+                  "description": "metadata",
+                  "properties": {
+                    "rules_version": {
+                      "description": "rules version",
+                      "example": "1.3.1",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "rules": {
+                  "description": "rules",
+                  "items": {
+                    "description": "rule",
+                    "properties": {
+                      "conditions": {
+                        "description": "array",
+                        "items": {
+                          "description": "condition",
+                          "properties": {
+                            "operator": {
+                              "description": "operator",
+                              "enum": [
+                                "match_regex",
+                                "phrase_match",
+                                "is_xss",
+                                "is_sqli"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "MATCH_REGEX",
+                                "PHRASE_MATCH",
+                                "IS_XSS",
+                                "IS_SQLI"
+                              ]
+                            },
+                            "parameters": {
+                              "description": "parameter list",
+                              "properties": {
+                                "inputs": {
+                                  "description": "array",
+                                  "items": {
+                                    "description": "input",
+                                    "properties": {
+                                      "address": {
+                                        "description": "address",
+                                        "enum": [
+                                          "server.request.method",
+                                          "server.request.uri.raw",
+                                          "server.request.path_params",
+                                          "server.request.query",
+                                          "server.request.headers.no_cookies",
+                                          "server.request.cookies",
+                                          "server.request.trailers",
+                                          "server.request.body",
+                                          "server.response.status",
+                                          "server.response.headers.no_cookies",
+                                          "server.response.trailers",
+                                          "grpc.server.request.metadata",
+                                          "grpc.server.request.message"
+                                        ],
+                                        "example": "server.request.method",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "SERVER_REQUEST_METHOD",
+                                          "SERVER_REQUEST_URI_RAW",
+                                          "SERVER_REQUEST_PATH_PARAMS",
+                                          "SERVER_REQUEST_QUERY",
+                                          "SERVER_REQUEST_HEADERS_NO_COOKIES",
+                                          "SERVER_REQUEST_COOKIES",
+                                          "SERVER_REQUEST_TRAILERS",
+                                          "SERVER_REQUEST_BODY",
+                                          "SERVER_RESPONSE_STATUS",
+                                          "SERVER_RESPONSE_HEADERS_NO_COOKIES",
+                                          "SERVER_RESPONSE_TRAILERS",
+                                          "GRPC_SERVER_REQUEST_METADATA",
+                                          "GRPC_SERVER_REQUEST_MESSAGE"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "address"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "minItems": 1,
+                                  "type": "array"
+                                },
+                                "list": {
+                                  "description": "array",
+                                  "items": {
+                                    "description": "string",
+                                    "example": "acunetix-product",
+                                    "type": "string"
+                                  },
+                                  "minItems": 1,
+                                  "type": "array"
+                                }
+                              },
+                              "required": [
+                                "inputs"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "id": {
+                        "description": "id",
+                        "example": "h8u-0x1-799",
+                        "pattern": "^[0-9a-z]{3}-[0-9x]{3}-[0-9x]{3}$",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "string",
+                        "example": "Acunetix",
+                        "type": "string"
+                      },
+                      "tags": {
+                        "description": "tag",
+                        "properties": {
+                          "category": {
+                            "description": "string",
+                            "example": "attack_attempt",
+                            "type": "string"
+                          },
+                          "type": {
+                            "description": "string",
+                            "example": "security-scanner",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "category"
+                        ],
+                        "type": "object"
+                      },
+                      "transformers": {
+                        "description": "transformers",
+                        "example": [
+                          "htmlEntityDecode"
+                        ],
+                        "items": {
+                          "description": "items",
+                          "enum": [
+                            "htmlEntityDecode",
+                            "jsDecode",
+                            "cssDecode",
+                            "base64Encode",
+                            "base64Decode",
+                            "base64DecodeExt",
+                            "urlDecode",
+                            "urlDecodeUni",
+                            "normalizePath",
+                            "normalizePathWin",
+                            "compressWhiteSpace",
+                            "lowercase",
+                            "length",
+                            "cmdLine",
+                            "removeComments",
+                            "numerize",
+                            "removeNulls",
+                            "keys_only"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "HTML_ENTITY_DECODE",
+                            "JS_DECODE",
+                            "CSS_DECODE",
+                            "BASE_64_ENCODE",
+                            "BASE_64_DECODE",
+                            "BASE_64_DECODE_EXT",
+                            "URL_DECODE",
+                            "URL_DECODE_UNI",
+                            "NORMALIZE_PATH",
+                            "NORMALIZE_PATH_WIN",
+                            "COMPRESS_WHITE_SPACE",
+                            "LOWERCASE",
+                            "LENGTH",
+                            "CMD_LINE",
+                            "REMOVE_COMMENTS",
+                            "NUMERIZE",
+                            "REMOVE_NULLS",
+                            "KEYS_ONLY"
+                          ]
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "tags",
+                      "conditions",
+                      "transformers"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "version": {
+                  "description": "version",
+                  "example": "2.2",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "rules_version": {
+            "description": "rules version",
+            "example": "1.3.1",
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "AuditLogsEvent": {
         "description": "Object description of an Audit Logs event after it is processed and stored by Datadog.",
@@ -5838,6 +6103,96 @@
         },
         "type": "object"
       },
+      "Condition": {
+        "description": "condition",
+        "properties": {
+          "operator": {
+            "description": "operator",
+            "enum": [
+              "match_regex",
+              "phrase_match",
+              "is_xss",
+              "is_sqli"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "MATCH_REGEX",
+              "PHRASE_MATCH",
+              "IS_XSS",
+              "IS_SQLI"
+            ]
+          },
+          "parameters": {
+            "description": "parameter list",
+            "properties": {
+              "inputs": {
+                "description": "array",
+                "items": {
+                  "description": "input",
+                  "properties": {
+                    "address": {
+                      "description": "address",
+                      "enum": [
+                        "server.request.method",
+                        "server.request.uri.raw",
+                        "server.request.path_params",
+                        "server.request.query",
+                        "server.request.headers.no_cookies",
+                        "server.request.cookies",
+                        "server.request.trailers",
+                        "server.request.body",
+                        "server.response.status",
+                        "server.response.headers.no_cookies",
+                        "server.response.trailers",
+                        "grpc.server.request.metadata",
+                        "grpc.server.request.message"
+                      ],
+                      "example": "server.request.method",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "SERVER_REQUEST_METHOD",
+                        "SERVER_REQUEST_URI_RAW",
+                        "SERVER_REQUEST_PATH_PARAMS",
+                        "SERVER_REQUEST_QUERY",
+                        "SERVER_REQUEST_HEADERS_NO_COOKIES",
+                        "SERVER_REQUEST_COOKIES",
+                        "SERVER_REQUEST_TRAILERS",
+                        "SERVER_REQUEST_BODY",
+                        "SERVER_RESPONSE_STATUS",
+                        "SERVER_RESPONSE_HEADERS_NO_COOKIES",
+                        "SERVER_RESPONSE_TRAILERS",
+                        "GRPC_SERVER_REQUEST_METADATA",
+                        "GRPC_SERVER_REQUEST_MESSAGE"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "address"
+                  ],
+                  "type": "object"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "list": {
+                "description": "array",
+                "items": {
+                  "description": "string",
+                  "example": "acunetix-product",
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "required": [
+              "inputs"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "ContentEncoding": {
         "description": "HTTP header used to compress the media-type.",
         "enum": [
@@ -6657,6 +7012,236 @@
           "INTEGRATION_TIMEBOARD",
           "HOST_TIMEBOARD"
         ]
+      },
+      "EventRule": {
+        "description": "event rule",
+        "properties": {
+          "metadata": {
+            "description": "metadata",
+            "properties": {
+              "rules_version": {
+                "description": "rules version",
+                "example": "1.3.1",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "rules": {
+            "description": "rules",
+            "items": {
+              "description": "rule",
+              "properties": {
+                "conditions": {
+                  "description": "array",
+                  "items": {
+                    "description": "condition",
+                    "properties": {
+                      "operator": {
+                        "description": "operator",
+                        "enum": [
+                          "match_regex",
+                          "phrase_match",
+                          "is_xss",
+                          "is_sqli"
+                        ],
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "MATCH_REGEX",
+                          "PHRASE_MATCH",
+                          "IS_XSS",
+                          "IS_SQLI"
+                        ]
+                      },
+                      "parameters": {
+                        "description": "parameter list",
+                        "properties": {
+                          "inputs": {
+                            "description": "array",
+                            "items": {
+                              "description": "input",
+                              "properties": {
+                                "address": {
+                                  "description": "address",
+                                  "enum": [
+                                    "server.request.method",
+                                    "server.request.uri.raw",
+                                    "server.request.path_params",
+                                    "server.request.query",
+                                    "server.request.headers.no_cookies",
+                                    "server.request.cookies",
+                                    "server.request.trailers",
+                                    "server.request.body",
+                                    "server.response.status",
+                                    "server.response.headers.no_cookies",
+                                    "server.response.trailers",
+                                    "grpc.server.request.metadata",
+                                    "grpc.server.request.message"
+                                  ],
+                                  "example": "server.request.method",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "SERVER_REQUEST_METHOD",
+                                    "SERVER_REQUEST_URI_RAW",
+                                    "SERVER_REQUEST_PATH_PARAMS",
+                                    "SERVER_REQUEST_QUERY",
+                                    "SERVER_REQUEST_HEADERS_NO_COOKIES",
+                                    "SERVER_REQUEST_COOKIES",
+                                    "SERVER_REQUEST_TRAILERS",
+                                    "SERVER_REQUEST_BODY",
+                                    "SERVER_RESPONSE_STATUS",
+                                    "SERVER_RESPONSE_HEADERS_NO_COOKIES",
+                                    "SERVER_RESPONSE_TRAILERS",
+                                    "GRPC_SERVER_REQUEST_METADATA",
+                                    "GRPC_SERVER_REQUEST_MESSAGE"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "address"
+                              ],
+                              "type": "object"
+                            },
+                            "minItems": 1,
+                            "type": "array"
+                          },
+                          "list": {
+                            "description": "array",
+                            "items": {
+                              "description": "string",
+                              "example": "acunetix-product",
+                              "type": "string"
+                            },
+                            "minItems": 1,
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "inputs"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "id": {
+                  "description": "id",
+                  "example": "h8u-0x1-799",
+                  "pattern": "^[0-9a-z]{3}-[0-9x]{3}-[0-9x]{3}$",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "string",
+                  "example": "Acunetix",
+                  "type": "string"
+                },
+                "tags": {
+                  "description": "tag",
+                  "properties": {
+                    "category": {
+                      "description": "string",
+                      "example": "attack_attempt",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "string",
+                      "example": "security-scanner",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "category"
+                  ],
+                  "type": "object"
+                },
+                "transformers": {
+                  "description": "transformers",
+                  "example": [
+                    "htmlEntityDecode"
+                  ],
+                  "items": {
+                    "description": "items",
+                    "enum": [
+                      "htmlEntityDecode",
+                      "jsDecode",
+                      "cssDecode",
+                      "base64Encode",
+                      "base64Decode",
+                      "base64DecodeExt",
+                      "urlDecode",
+                      "urlDecodeUni",
+                      "normalizePath",
+                      "normalizePathWin",
+                      "compressWhiteSpace",
+                      "lowercase",
+                      "length",
+                      "cmdLine",
+                      "removeComments",
+                      "numerize",
+                      "removeNulls",
+                      "keys_only"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "HTML_ENTITY_DECODE",
+                      "JS_DECODE",
+                      "CSS_DECODE",
+                      "BASE_64_ENCODE",
+                      "BASE_64_DECODE",
+                      "BASE_64_DECODE_EXT",
+                      "URL_DECODE",
+                      "URL_DECODE_UNI",
+                      "NORMALIZE_PATH",
+                      "NORMALIZE_PATH_WIN",
+                      "COMPRESS_WHITE_SPACE",
+                      "LOWERCASE",
+                      "LENGTH",
+                      "CMD_LINE",
+                      "REMOVE_COMMENTS",
+                      "NUMERIZE",
+                      "REMOVE_NULLS",
+                      "KEYS_ONLY"
+                    ]
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "tags",
+                "conditions",
+                "transformers"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "version": {
+            "description": "version",
+            "example": "2.2",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "EventRuleFile": {
+        "description": "event rule file",
+        "properties": {
+          "id": {
+            "description": "id",
+            "example": "recommended",
+            "type": "string"
+          },
+          "version": {
+            "description": "version",
+            "type": "integer"
+          }
+        },
+        "type": "object"
       },
       "FullAPIKey": {
         "description": "Datadog API key.",
@@ -15535,6 +16120,50 @@
         ],
         "type": "object"
       },
+      "Input": {
+        "description": "input",
+        "properties": {
+          "address": {
+            "description": "address",
+            "enum": [
+              "server.request.method",
+              "server.request.uri.raw",
+              "server.request.path_params",
+              "server.request.query",
+              "server.request.headers.no_cookies",
+              "server.request.cookies",
+              "server.request.trailers",
+              "server.request.body",
+              "server.response.status",
+              "server.response.headers.no_cookies",
+              "server.response.trailers",
+              "grpc.server.request.metadata",
+              "grpc.server.request.message"
+            ],
+            "example": "server.request.method",
+            "type": "string",
+            "x-enum-varnames": [
+              "SERVER_REQUEST_METHOD",
+              "SERVER_REQUEST_URI_RAW",
+              "SERVER_REQUEST_PATH_PARAMS",
+              "SERVER_REQUEST_QUERY",
+              "SERVER_REQUEST_HEADERS_NO_COOKIES",
+              "SERVER_REQUEST_COOKIES",
+              "SERVER_REQUEST_TRAILERS",
+              "SERVER_REQUEST_BODY",
+              "SERVER_RESPONSE_STATUS",
+              "SERVER_RESPONSE_HEADERS_NO_COOKIES",
+              "SERVER_RESPONSE_TRAILERS",
+              "GRPC_SERVER_REQUEST_METADATA",
+              "GRPC_SERVER_REQUEST_MESSAGE"
+            ]
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "type": "object"
+      },
       "IntakePayloadAccepted": {
         "description": "The payload accepted for intake.",
         "properties": {
@@ -15545,6 +16174,318 @@
               "type": "string"
             },
             "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "JsonAPIEventRuleFiles": {
+        "description": "event rule files list",
+        "properties": {
+          "attributes": {
+            "description": "attributes",
+            "properties": {
+              "configs": {
+                "description": "configs",
+                "items": {
+                  "description": "event rule file",
+                  "properties": {
+                    "id": {
+                      "description": "id",
+                      "example": "recommended",
+                      "type": "string"
+                    },
+                    "version": {
+                      "description": "version",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "id",
+            "example": "org2",
+            "type": "string"
+          },
+          "type": {
+            "description": "type",
+            "example": "event-rule-configs",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "JsonAPIEventRuleFilesAttributes": {
+        "description": "attributes",
+        "properties": {
+          "configs": {
+            "description": "configs",
+            "items": {
+              "description": "event rule file",
+              "properties": {
+                "id": {
+                  "description": "id",
+                  "example": "recommended",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "version",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "JsonAPIEventRules": {
+        "description": "jsonAPI compliant event rule list",
+        "properties": {
+          "attributes": {
+            "description": "attributes",
+            "properties": {
+              "rules": {
+                "description": "rule list",
+                "items": {
+                  "description": "event rule",
+                  "properties": {
+                    "metadata": {
+                      "description": "metadata",
+                      "properties": {
+                        "rules_version": {
+                          "description": "rules version",
+                          "example": "1.3.1",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "rules": {
+                      "description": "rules",
+                      "items": {
+                        "description": "rule",
+                        "properties": {
+                          "conditions": {
+                            "description": "array",
+                            "items": {
+                              "description": "condition",
+                              "properties": {
+                                "operator": {
+                                  "description": "operator",
+                                  "enum": [
+                                    "match_regex",
+                                    "phrase_match",
+                                    "is_xss",
+                                    "is_sqli"
+                                  ],
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "MATCH_REGEX",
+                                    "PHRASE_MATCH",
+                                    "IS_XSS",
+                                    "IS_SQLI"
+                                  ]
+                                },
+                                "parameters": {
+                                  "description": "parameter list",
+                                  "properties": {
+                                    "inputs": {
+                                      "description": "array",
+                                      "items": {
+                                        "description": "input",
+                                        "properties": {
+                                          "address": {
+                                            "description": "address",
+                                            "enum": [
+                                              "server.request.method",
+                                              "server.request.uri.raw",
+                                              "server.request.path_params",
+                                              "server.request.query",
+                                              "server.request.headers.no_cookies",
+                                              "server.request.cookies",
+                                              "server.request.trailers",
+                                              "server.request.body",
+                                              "server.response.status",
+                                              "server.response.headers.no_cookies",
+                                              "server.response.trailers",
+                                              "grpc.server.request.metadata",
+                                              "grpc.server.request.message"
+                                            ],
+                                            "example": "server.request.method",
+                                            "type": "string",
+                                            "x-enum-varnames": [
+                                              "SERVER_REQUEST_METHOD",
+                                              "SERVER_REQUEST_URI_RAW",
+                                              "SERVER_REQUEST_PATH_PARAMS",
+                                              "SERVER_REQUEST_QUERY",
+                                              "SERVER_REQUEST_HEADERS_NO_COOKIES",
+                                              "SERVER_REQUEST_COOKIES",
+                                              "SERVER_REQUEST_TRAILERS",
+                                              "SERVER_REQUEST_BODY",
+                                              "SERVER_RESPONSE_STATUS",
+                                              "SERVER_RESPONSE_HEADERS_NO_COOKIES",
+                                              "SERVER_RESPONSE_TRAILERS",
+                                              "GRPC_SERVER_REQUEST_METADATA",
+                                              "GRPC_SERVER_REQUEST_MESSAGE"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "address"
+                                        ],
+                                        "type": "object"
+                                      },
+                                      "minItems": 1,
+                                      "type": "array"
+                                    },
+                                    "list": {
+                                      "description": "array",
+                                      "items": {
+                                        "description": "string",
+                                        "example": "acunetix-product",
+                                        "type": "string"
+                                      },
+                                      "minItems": 1,
+                                      "type": "array"
+                                    }
+                                  },
+                                  "required": [
+                                    "inputs"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "id": {
+                            "description": "id",
+                            "example": "h8u-0x1-799",
+                            "pattern": "^[0-9a-z]{3}-[0-9x]{3}-[0-9x]{3}$",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "string",
+                            "example": "Acunetix",
+                            "type": "string"
+                          },
+                          "tags": {
+                            "description": "tag",
+                            "properties": {
+                              "category": {
+                                "description": "string",
+                                "example": "attack_attempt",
+                                "type": "string"
+                              },
+                              "type": {
+                                "description": "string",
+                                "example": "security-scanner",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "category"
+                            ],
+                            "type": "object"
+                          },
+                          "transformers": {
+                            "description": "transformers",
+                            "example": [
+                              "htmlEntityDecode"
+                            ],
+                            "items": {
+                              "description": "items",
+                              "enum": [
+                                "htmlEntityDecode",
+                                "jsDecode",
+                                "cssDecode",
+                                "base64Encode",
+                                "base64Decode",
+                                "base64DecodeExt",
+                                "urlDecode",
+                                "urlDecodeUni",
+                                "normalizePath",
+                                "normalizePathWin",
+                                "compressWhiteSpace",
+                                "lowercase",
+                                "length",
+                                "cmdLine",
+                                "removeComments",
+                                "numerize",
+                                "removeNulls",
+                                "keys_only"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "HTML_ENTITY_DECODE",
+                                "JS_DECODE",
+                                "CSS_DECODE",
+                                "BASE_64_ENCODE",
+                                "BASE_64_DECODE",
+                                "BASE_64_DECODE_EXT",
+                                "URL_DECODE",
+                                "URL_DECODE_UNI",
+                                "NORMALIZE_PATH",
+                                "NORMALIZE_PATH_WIN",
+                                "COMPRESS_WHITE_SPACE",
+                                "LOWERCASE",
+                                "LENGTH",
+                                "CMD_LINE",
+                                "REMOVE_COMMENTS",
+                                "NUMERIZE",
+                                "REMOVE_NULLS",
+                                "KEYS_ONLY"
+                              ]
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "tags",
+                          "conditions",
+                          "transformers"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "version": {
+                      "description": "version",
+                      "example": "2.2",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "rules_version": {
+                "description": "rules version",
+                "example": "1.3.1",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "id",
+            "example": "recommended",
+            "type": "string"
+          },
+          "type": {
+            "description": "type",
+            "example": "event-rules",
+            "type": "string"
           }
         },
         "type": "object"
@@ -21165,6 +22106,17 @@
         },
         "type": "object"
       },
+      "Metadata": {
+        "description": "metadata",
+        "properties": {
+          "rules_version": {
+            "description": "rules version",
+            "example": "1.3.1",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "Metric": {
         "description": "Object for a single metric tag configuration.",
         "example": {
@@ -24577,6 +25529,22 @@
         ],
         "type": "object"
       },
+      "Operator": {
+        "description": "operator",
+        "enum": [
+          "match_regex",
+          "phrase_match",
+          "is_xss",
+          "is_sqli"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "MATCH_REGEX",
+          "PHRASE_MATCH",
+          "IS_XSS",
+          "IS_SQLI"
+        ]
+      },
       "OpsgenieServiceCreateAttributes": {
         "description": "The Opsgenie service attributes for a create request.",
         "properties": {
@@ -25341,6 +26309,74 @@
             "type": "integer"
           }
         },
+        "type": "object"
+      },
+      "Parameters": {
+        "description": "parameter list",
+        "properties": {
+          "inputs": {
+            "description": "array",
+            "items": {
+              "description": "input",
+              "properties": {
+                "address": {
+                  "description": "address",
+                  "enum": [
+                    "server.request.method",
+                    "server.request.uri.raw",
+                    "server.request.path_params",
+                    "server.request.query",
+                    "server.request.headers.no_cookies",
+                    "server.request.cookies",
+                    "server.request.trailers",
+                    "server.request.body",
+                    "server.response.status",
+                    "server.response.headers.no_cookies",
+                    "server.response.trailers",
+                    "grpc.server.request.metadata",
+                    "grpc.server.request.message"
+                  ],
+                  "example": "server.request.method",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "SERVER_REQUEST_METHOD",
+                    "SERVER_REQUEST_URI_RAW",
+                    "SERVER_REQUEST_PATH_PARAMS",
+                    "SERVER_REQUEST_QUERY",
+                    "SERVER_REQUEST_HEADERS_NO_COOKIES",
+                    "SERVER_REQUEST_COOKIES",
+                    "SERVER_REQUEST_TRAILERS",
+                    "SERVER_REQUEST_BODY",
+                    "SERVER_RESPONSE_STATUS",
+                    "SERVER_RESPONSE_HEADERS_NO_COOKIES",
+                    "SERVER_RESPONSE_TRAILERS",
+                    "GRPC_SERVER_REQUEST_METADATA",
+                    "GRPC_SERVER_REQUEST_MESSAGE"
+                  ]
+                }
+              },
+              "required": [
+                "address"
+              ],
+              "type": "object"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "list": {
+            "description": "array",
+            "items": {
+              "description": "string",
+              "example": "acunetix-product",
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "inputs"
+        ],
         "type": "object"
       },
       "PartialAPIKey": {
@@ -30890,6 +31926,195 @@
           "ROLES"
         ]
       },
+      "Rule": {
+        "description": "rule",
+        "properties": {
+          "conditions": {
+            "description": "array",
+            "items": {
+              "description": "condition",
+              "properties": {
+                "operator": {
+                  "description": "operator",
+                  "enum": [
+                    "match_regex",
+                    "phrase_match",
+                    "is_xss",
+                    "is_sqli"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "MATCH_REGEX",
+                    "PHRASE_MATCH",
+                    "IS_XSS",
+                    "IS_SQLI"
+                  ]
+                },
+                "parameters": {
+                  "description": "parameter list",
+                  "properties": {
+                    "inputs": {
+                      "description": "array",
+                      "items": {
+                        "description": "input",
+                        "properties": {
+                          "address": {
+                            "description": "address",
+                            "enum": [
+                              "server.request.method",
+                              "server.request.uri.raw",
+                              "server.request.path_params",
+                              "server.request.query",
+                              "server.request.headers.no_cookies",
+                              "server.request.cookies",
+                              "server.request.trailers",
+                              "server.request.body",
+                              "server.response.status",
+                              "server.response.headers.no_cookies",
+                              "server.response.trailers",
+                              "grpc.server.request.metadata",
+                              "grpc.server.request.message"
+                            ],
+                            "example": "server.request.method",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "SERVER_REQUEST_METHOD",
+                              "SERVER_REQUEST_URI_RAW",
+                              "SERVER_REQUEST_PATH_PARAMS",
+                              "SERVER_REQUEST_QUERY",
+                              "SERVER_REQUEST_HEADERS_NO_COOKIES",
+                              "SERVER_REQUEST_COOKIES",
+                              "SERVER_REQUEST_TRAILERS",
+                              "SERVER_REQUEST_BODY",
+                              "SERVER_RESPONSE_STATUS",
+                              "SERVER_RESPONSE_HEADERS_NO_COOKIES",
+                              "SERVER_RESPONSE_TRAILERS",
+                              "GRPC_SERVER_REQUEST_METADATA",
+                              "GRPC_SERVER_REQUEST_MESSAGE"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "address"
+                        ],
+                        "type": "object"
+                      },
+                      "minItems": 1,
+                      "type": "array"
+                    },
+                    "list": {
+                      "description": "array",
+                      "items": {
+                        "description": "string",
+                        "example": "acunetix-product",
+                        "type": "string"
+                      },
+                      "minItems": 1,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "inputs"
+                  ],
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "id": {
+            "description": "id",
+            "example": "h8u-0x1-799",
+            "pattern": "^[0-9a-z]{3}-[0-9x]{3}-[0-9x]{3}$",
+            "type": "string"
+          },
+          "name": {
+            "description": "string",
+            "example": "Acunetix",
+            "type": "string"
+          },
+          "tags": {
+            "description": "tag",
+            "properties": {
+              "category": {
+                "description": "string",
+                "example": "attack_attempt",
+                "type": "string"
+              },
+              "type": {
+                "description": "string",
+                "example": "security-scanner",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "category"
+            ],
+            "type": "object"
+          },
+          "transformers": {
+            "description": "transformers",
+            "example": [
+              "htmlEntityDecode"
+            ],
+            "items": {
+              "description": "items",
+              "enum": [
+                "htmlEntityDecode",
+                "jsDecode",
+                "cssDecode",
+                "base64Encode",
+                "base64Decode",
+                "base64DecodeExt",
+                "urlDecode",
+                "urlDecodeUni",
+                "normalizePath",
+                "normalizePathWin",
+                "compressWhiteSpace",
+                "lowercase",
+                "length",
+                "cmdLine",
+                "removeComments",
+                "numerize",
+                "removeNulls",
+                "keys_only"
+              ],
+              "type": "string",
+              "x-enum-varnames": [
+                "HTML_ENTITY_DECODE",
+                "JS_DECODE",
+                "CSS_DECODE",
+                "BASE_64_ENCODE",
+                "BASE_64_DECODE",
+                "BASE_64_DECODE_EXT",
+                "URL_DECODE",
+                "URL_DECODE_UNI",
+                "NORMALIZE_PATH",
+                "NORMALIZE_PATH_WIN",
+                "COMPRESS_WHITE_SPACE",
+                "LOWERCASE",
+                "LENGTH",
+                "CMD_LINE",
+                "REMOVE_COMMENTS",
+                "NUMERIZE",
+                "REMOVE_NULLS",
+                "KEYS_ONLY"
+              ]
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "tags",
+          "conditions",
+          "transformers"
+        ],
+        "type": "object"
+      },
       "SAMLAssertionAttribute": {
         "description": "SAML assertion attribute.",
         "properties": {
@@ -34941,6 +36166,77 @@
         ],
         "type": "object"
       },
+      "Tag": {
+        "description": "tag",
+        "properties": {
+          "category": {
+            "description": "string",
+            "example": "attack_attempt",
+            "type": "string"
+          },
+          "type": {
+            "description": "string",
+            "example": "security-scanner",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "category"
+        ],
+        "type": "object"
+      },
+      "Transformers": {
+        "description": "transformers",
+        "example": [
+          "htmlEntityDecode"
+        ],
+        "items": {
+          "description": "items",
+          "enum": [
+            "htmlEntityDecode",
+            "jsDecode",
+            "cssDecode",
+            "base64Encode",
+            "base64Decode",
+            "base64DecodeExt",
+            "urlDecode",
+            "urlDecodeUni",
+            "normalizePath",
+            "normalizePathWin",
+            "compressWhiteSpace",
+            "lowercase",
+            "length",
+            "cmdLine",
+            "removeComments",
+            "numerize",
+            "removeNulls",
+            "keys_only"
+          ],
+          "type": "string",
+          "x-enum-varnames": [
+            "HTML_ENTITY_DECODE",
+            "JS_DECODE",
+            "CSS_DECODE",
+            "BASE_64_ENCODE",
+            "BASE_64_DECODE",
+            "BASE_64_DECODE_EXT",
+            "URL_DECODE",
+            "URL_DECODE_UNI",
+            "NORMALIZE_PATH",
+            "NORMALIZE_PATH_WIN",
+            "COMPRESS_WHITE_SPACE",
+            "LOWERCASE",
+            "LENGTH",
+            "CMD_LINE",
+            "REMOVE_COMMENTS",
+            "NUMERIZE",
+            "REMOVE_NULLS",
+            "KEYS_ONLY"
+          ]
+        },
+        "type": "array"
+      },
       "UsageApplicationSecurityMonitoringResponse": {
         "description": "Application Security Monitoring usage response.",
         "properties": {
@@ -37790,6 +39086,403 @@
   },
   "openapi": "3.0.0",
   "paths": {
+    "/api/unstable/remote_config/products/asm/event-rules": {
+      "get": {
+        "description": "Get a list of ASM event rules files for the current organization",
+        "operationId": "GetEventRules",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "event rule files list",
+                  "properties": {
+                    "attributes": {
+                      "description": "attributes",
+                      "properties": {
+                        "configs": {
+                          "description": "configs",
+                          "items": {
+                            "description": "event rule file",
+                            "properties": {
+                              "id": {
+                                "description": "id",
+                                "example": "recommended",
+                                "type": "string"
+                              },
+                              "version": {
+                                "description": "version",
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "id",
+                      "example": "org2",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "type",
+                      "example": "event-rule-configs",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "TODO",
+        "tags": [
+          "EventRules"
+        ]
+      }
+    },
+    "/api/unstable/remote_config/products/asm/event-rules/{config_id}": {
+      "get": {
+        "description": "Get the ASM event rules file for the current organization. “id” may be “recommended” only for now",
+        "operationId": "FindEventRulesByConfigID",
+        "parameters": [
+          {
+            "description": "ID of config to filter event rules by",
+            "in": "path",
+            "name": "config_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Version of the config requested",
+            "in": "query",
+            "name": "versionNumber",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "jsonAPI compliant event rule list",
+                  "properties": {
+                    "attributes": {
+                      "description": "attributes",
+                      "properties": {
+                        "rules": {
+                          "description": "rule list",
+                          "items": {
+                            "description": "event rule",
+                            "properties": {
+                              "metadata": {
+                                "description": "metadata",
+                                "properties": {
+                                  "rules_version": {
+                                    "description": "rules version",
+                                    "example": "1.3.1",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "rules": {
+                                "description": "rules",
+                                "items": {
+                                  "description": "rule",
+                                  "properties": {
+                                    "conditions": {
+                                      "description": "array",
+                                      "items": {
+                                        "description": "condition",
+                                        "properties": {
+                                          "operator": {
+                                            "description": "operator",
+                                            "enum": [
+                                              "match_regex",
+                                              "phrase_match",
+                                              "is_xss",
+                                              "is_sqli"
+                                            ],
+                                            "type": "string",
+                                            "x-enum-varnames": [
+                                              "MATCH_REGEX",
+                                              "PHRASE_MATCH",
+                                              "IS_XSS",
+                                              "IS_SQLI"
+                                            ]
+                                          },
+                                          "parameters": {
+                                            "description": "parameter list",
+                                            "properties": {
+                                              "inputs": {
+                                                "description": "array",
+                                                "items": {
+                                                  "description": "input",
+                                                  "properties": {
+                                                    "address": {
+                                                      "description": "address",
+                                                      "enum": [
+                                                        "server.request.method",
+                                                        "server.request.uri.raw",
+                                                        "server.request.path_params",
+                                                        "server.request.query",
+                                                        "server.request.headers.no_cookies",
+                                                        "server.request.cookies",
+                                                        "server.request.trailers",
+                                                        "server.request.body",
+                                                        "server.response.status",
+                                                        "server.response.headers.no_cookies",
+                                                        "server.response.trailers",
+                                                        "grpc.server.request.metadata",
+                                                        "grpc.server.request.message"
+                                                      ],
+                                                      "example": "server.request.method",
+                                                      "type": "string",
+                                                      "x-enum-varnames": [
+                                                        "SERVER_REQUEST_METHOD",
+                                                        "SERVER_REQUEST_URI_RAW",
+                                                        "SERVER_REQUEST_PATH_PARAMS",
+                                                        "SERVER_REQUEST_QUERY",
+                                                        "SERVER_REQUEST_HEADERS_NO_COOKIES",
+                                                        "SERVER_REQUEST_COOKIES",
+                                                        "SERVER_REQUEST_TRAILERS",
+                                                        "SERVER_REQUEST_BODY",
+                                                        "SERVER_RESPONSE_STATUS",
+                                                        "SERVER_RESPONSE_HEADERS_NO_COOKIES",
+                                                        "SERVER_RESPONSE_TRAILERS",
+                                                        "GRPC_SERVER_REQUEST_METADATA",
+                                                        "GRPC_SERVER_REQUEST_MESSAGE"
+                                                      ]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "address"
+                                                  ],
+                                                  "type": "object"
+                                                },
+                                                "minItems": 1,
+                                                "type": "array"
+                                              },
+                                              "list": {
+                                                "description": "array",
+                                                "items": {
+                                                  "description": "string",
+                                                  "example": "acunetix-product",
+                                                  "type": "string"
+                                                },
+                                                "minItems": 1,
+                                                "type": "array"
+                                              }
+                                            },
+                                            "required": [
+                                              "inputs"
+                                            ],
+                                            "type": "object"
+                                          }
+                                        },
+                                        "type": "object"
+                                      },
+                                      "type": "array"
+                                    },
+                                    "id": {
+                                      "description": "id",
+                                      "example": "h8u-0x1-799",
+                                      "pattern": "^[0-9a-z]{3}-[0-9x]{3}-[0-9x]{3}$",
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "description": "string",
+                                      "example": "Acunetix",
+                                      "type": "string"
+                                    },
+                                    "tags": {
+                                      "description": "tag",
+                                      "properties": {
+                                        "category": {
+                                          "description": "string",
+                                          "example": "attack_attempt",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "description": "string",
+                                          "example": "security-scanner",
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "type",
+                                        "category"
+                                      ],
+                                      "type": "object"
+                                    },
+                                    "transformers": {
+                                      "description": "transformers",
+                                      "example": [
+                                        "htmlEntityDecode"
+                                      ],
+                                      "items": {
+                                        "description": "items",
+                                        "enum": [
+                                          "htmlEntityDecode",
+                                          "jsDecode",
+                                          "cssDecode",
+                                          "base64Encode",
+                                          "base64Decode",
+                                          "base64DecodeExt",
+                                          "urlDecode",
+                                          "urlDecodeUni",
+                                          "normalizePath",
+                                          "normalizePathWin",
+                                          "compressWhiteSpace",
+                                          "lowercase",
+                                          "length",
+                                          "cmdLine",
+                                          "removeComments",
+                                          "numerize",
+                                          "removeNulls",
+                                          "keys_only"
+                                        ],
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "HTML_ENTITY_DECODE",
+                                          "JS_DECODE",
+                                          "CSS_DECODE",
+                                          "BASE_64_ENCODE",
+                                          "BASE_64_DECODE",
+                                          "BASE_64_DECODE_EXT",
+                                          "URL_DECODE",
+                                          "URL_DECODE_UNI",
+                                          "NORMALIZE_PATH",
+                                          "NORMALIZE_PATH_WIN",
+                                          "COMPRESS_WHITE_SPACE",
+                                          "LOWERCASE",
+                                          "LENGTH",
+                                          "CMD_LINE",
+                                          "REMOVE_COMMENTS",
+                                          "NUMERIZE",
+                                          "REMOVE_NULLS",
+                                          "KEYS_ONLY"
+                                        ]
+                                      },
+                                      "type": "array"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "name",
+                                    "tags",
+                                    "conditions",
+                                    "transformers"
+                                  ],
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "version": {
+                                "description": "version",
+                                "example": "2.2",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "rules_version": {
+                          "description": "rules version",
+                          "example": "1.3.1",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "id",
+                      "example": "recommended",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "type",
+                      "example": "event-rules",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid configID value"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "TODO",
+        "tags": [
+          "EventRules"
+        ]
+      }
+    },
     "/api/v2/api_keys": {
       "get": {
         "description": "List all API keys available for your account.",
@@ -91674,6 +93367,10 @@
     {
       "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization.",
       "name": "Dashboard Lists"
+    },
+    {
+      "description": "Manage event rules for ASM through remote configuration.",
+      "name": "EventRules"
     },
     {
       "description": "Create, update, delete, and retrieve services which can be associated with incidents.",
