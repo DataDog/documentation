@@ -94,6 +94,14 @@ Requires tracing library version 2.7.0 or greater.
 
 [1]: /tracing/profiler/enabling/dotnet
 {{< /programming-lang >}}
+{{< programming-lang lang="PHP" >}}
+
+Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
+
+Requires tracing library version 0.71 or greater.
+
+[1]: /tracing/profiler/enabling/php
+{{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ### Link from a span to profiling data
