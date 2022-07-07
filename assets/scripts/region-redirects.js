@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // keep docs/app saved regions in sync.   if user navigates to docs from app,
     // we want docs links back to the app returning user to DD app region they came from.
-    // reloading resets document.referrer ensuring subsequent page loads/async loading
-    // dont read from referrer again. 
+    // reloading resets document.referrer ensuring user region remains in sync.
     if (currentReferrerAppRegion && currentReferrerAppRegion !== currentUserSavedRegion) {
         regionOnChangeHandler(currentReferrerAppRegion)
         window.location.reload()
