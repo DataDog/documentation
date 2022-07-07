@@ -366,6 +366,12 @@ class Integrations:
         new_file_name = "{}{}.yaml".format(
             self.data_integrations_dir, key_name
         )
+        # likely collision
+        if exists(new_file_name):
+            collision_name = self.get_collision_alternate_name(file_name)
+            new_file_name = "{}{}.yaml".format(
+                self.data_integrations_dir, collision_name
+            )
         self.metric_csv_to_yaml(key_name, file_name, new_file_name)
 
     def process_integration_manifest(self, file_name):
@@ -607,6 +613,14 @@ class Integrations:
         matches = re.search(setup_header_markdown_regex, markdown_string, re.MULTILINE | re.IGNORECASE)
         return matches == None
 
+    def get_collision_alternate_name(self, file_name):
+        dir_path = dirname(normpath(file_name))
+        dir_name = basename(dir_path)
+        manifest_json = json.load(open(dir_path + '/manifest.json'))
+        integration_id = manifest_json.get("integration_id", "") or ""
+        collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or dir_name
+        return collision_name
+
     def process_integration_readme(self, file_name, marketplace=False):
         """
         Take a single README.md file and
@@ -760,7 +774,7 @@ class Integrations:
 
         # determine new name is collision
         if exist_collision:
-            collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or new_file_name.replace('.md','')
+            collision_name = self.get_collision_alternate_name(file_name)
             manifest_json["name"] = collision_name
 
         if metrics_exist:
