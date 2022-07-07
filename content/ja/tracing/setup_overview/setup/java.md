@@ -62,7 +62,8 @@ Datadog アプリ内の[クイックスタート手順][3]に従って、最高�
 | `DD_VERSION` | `dd.version` |  アプリケーションのバージョン（例: `2.5`、`202003181415`、`1.3-alpha` など） |
 | `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | [継続的プロファイラー][6]を有効化 |
 | `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Datadog トレース ID とスパン ID に対する自動 MDC キー挿入を有効にします。詳しくは、[高度な使用方法][7]を参照してください。 |
-| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   トレースボリュームコントロールを有効にする     |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   全サービスのトレースのルートでサンプリングレートを設定します。     |
+| `DD_TRACE_SAMPLING_SERVICE_RULES` | `dd.trace.sampling.service.rules` |   指定したルールに合致するサービスのトレースのルートでのサンプリングレートを設定します。    |
 
 追加の[コンフィギュレーションオプション](#configuration) は以下で説明されています。
 
