@@ -3,6 +3,7 @@ title: I'm switching between the sum/min/max/avg aggregators but the values look
 kind: faq
 aliases:
     - /graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
+    - /dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
 further_reading:
     - link: '/metrics/introduction/#combining-time-series'
       tag: 'Documentation'

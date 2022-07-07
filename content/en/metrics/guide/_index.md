@@ -1,0 +1,15 @@
+---
+title: Metrics Guides
+kind: guide
+private: true
+disable_sidebar: true
+---
+
+{{< whatsnext desc="General guides:" >}}
+    {{< nextlink href="metrics/guide/different-aggregators-look-same/" >}}I'm switching between the sum/min/max/avg aggregators but the values look the same{{< /nextlink >}}
+    {{< nextlink href="metrics/guide/calculating-the-system-mem-used-metric/" >}}Calculating the system.mem.used metric{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Custom metrics guides:" >}}
+    {{< nextlink href="integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags" >}}Custom Metrics Governance - Drop Metrics Missing Specific Tags{{< /nextlink >}}
+{{< /whatsnext >}}
