@@ -169,10 +169,10 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
 | Private location | A user created or deleted a private location for synthetic tests. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_private_location` |
-| Synthetics test created or deleted | A user created or deleted a synthetic test. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
-| Synthetics test modified | A user modified a synthetic test and the previous and new values for the configuration. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
-| Synthetics variable | A user created, modified, or deleted a synthetic variable. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
-| Synthetics settings | A user modified synthetic settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
+| Synthetic test created or deleted | A user created or deleted a synthetic test. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| Synthetic test modified | A user modified a synthetic test and the previous and new values for the configuration. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
+| Synthetic variable | A user created, modified, or deleted a synthetic variable. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
+| Synthetic settings | A user modified synthetic settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
 
 ## Further Reading
 
