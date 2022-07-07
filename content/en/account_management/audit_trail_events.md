@@ -1,5 +1,5 @@
 ---
-title: Audit Trail Event Types
+title: Audit Trail Events
 kind: documentation
 further_reading:
 - link: "/account_management/audit_trail/"
@@ -9,24 +9,27 @@ further_reading:
 
 ## Overview
 
-[Datadog Audit Trail][1] records more than 80 types of audit events from across the Datadog platform. These audit events are categorized into different product categories as event names.
+[Datadog Audit Trail][1] records more than 100 types of audit events from across the Datadog platform. These audit events are categorized into different product categories as event names.
 
+#### Platform Events
 - [Access management](#access-management-events)
 - [API request](#api-request-events)
 - [Authentication](#authentication-events)
-- [Cloud Security Platform](#cloud-security-platform-events)
 - [Dashboard](#dashboard-events)
 - [Integration](#integration-events)
-- [Log management](#log-management-events)
-- [Metrics](#metrics-events)
 - [Monitor](#monitor-events)
 - [Notebook](#notebook-events)
 - [OAuth](#oauth-events)
 - [Organization management](#organization-management-events)
-- [Real User Monitoring](#real-user-monitoring-events)
-- [Sensitive Data Scanner](#sensitive-data-scanner-events)
 - [SLO](#slo-events)
 - [Support administration](#support-administration-events)
+
+#### Product-Specific Events
+- [Cloud Security Platform](#cloud-security-platform-events)
+- [Custom Metrics](#custom-metrics-events)
+- [Log management](#log-management-events)
+- [Real User Monitoring](#real-user-monitoring-events)
+- [Sensitive Data Scanner](#sensitive-data-scanner-events)
 - [Synthetics monitoring](#synthetics-monitoring-events)
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -47,13 +50,13 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 ### API request events
 
-| Event type  | Description of audit event                          | Query in audit explorer              |
+| Name  | Description of audit event                          | Query in audit explorer              |
 |-------------| --------------------------------------------------  | ------------------------------------ |
 | API Request | An API Request is made across the Datadog platform. | `@evt.name:Request @action:accessed` |
 
 ### Authentication events
 
-|Event type                      | Description of audit event                                                                    | Query in audit explorer                                 |
+| Name                    | Description of audit event                                                                    | Query in audit explorer                                 |
 |--------------------------------| --------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | API key (Org settings)         | An API key is accessed, listed, created, or deleted in the Organization Settings page.        | `@evt.name:Authentication @asset.type:api_key`          |
 | Application key (Org settings) | An application key is accessed, listed, created, or deleted in the Organization Settings page.| `@evt.name:Authentication @asset.type:application_key`  |
@@ -101,12 +104,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Restriction query configuration | A user created, modified, or deleted the configuration of a restriction query in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:restriction_query` |
 | Standard attribute configuration | A user created, modified, or deleted the configuration of a standard attribute in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:standard_attribute` |
 
-### Metrics events
+### Custom metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- |------------------------------------------------------------------- | --------------------------------------------------|
-| Custom metric created | A user created a metric and the new value for the metric configuration. | `@evt.name:Metrics @asset.type:metric @action:created` |
-| Custom metric deleted | A user deleted a metric and the previous value for the metric configuration. | `@evt.name:Metrics @asset.type:metric @action:deleted` |
-| Custom metric modified | A user modified a metric and the previous and new values for the metric configuration. | `@evt.name:Metrics @asset.type:metric @action:modified` |
+| Custom metric created | A user created a custom metric and the new value for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:created` |
+| Custom metric deleted | A user deleted a custom metric and the previous value for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:deleted` |
+| Custom metric modified | A user modified a custom metric and the previous and new values for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:modified` |
 
 ### Monitor events
 

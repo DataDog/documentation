@@ -4,9 +4,9 @@ kind: documentation
 aliases:
     - /account_management/audit_logs/
 further_reading:
-- link: "/account_management/audit_trail_event_types/"
+- link: "/account_management/audit_trail_events/"
   tag: "Documentation"
-  text: "See the different Audit Trail event types"
+  text: "See the different Audit Trail events"
 - link: "/account_management/org_settings/"
   tag: "Documentation"
   text: "Learn more about organization settings"
@@ -51,7 +51,7 @@ Event types are a collection of audit events. For example, the Authentication ev
 
 {{< img src="account_management/audit_logs/audit_toggles.png" alt="Audit Trail event types setup in Datadog" style="width:50%;">}}
 
-See [Audit Trail Event Types][3] for a list of different event types.
+See [Audit Trail Events][3] for a list of different events.
 
 ### Archiving
 
@@ -107,7 +107,7 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][11] that shows vari
 
 [1]: https://app.datadoghq.com/audit-trail
 [2]: https://app.datadoghq.com/organization-settings/
-[3]: /account_management/audit_trail_event_types/
+[3]: /account_management/audit_trail_events/
 [4]: /logs/explorer/
 [5]: /monitors/create/types/audit_trail/
 [6]: /dashboards/
