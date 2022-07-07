@@ -309,7 +309,7 @@ Need help? Contact [Datadog support][14].
 
 Additional helpful documentation, links, and articles:
 
-* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?][15]
+* [SNMP commonly used and compatible OIDs][15]
 * [Monitoring Unifi devices using SNMP and Datadog][16]
 
 [1]: https://app.datadoghq.com/account/settings#agent
@@ -326,5 +326,5 @@ Additional helpful documentation, links, and articles:
 [12]: /account_management/billing/custom_metrics/
 [13]: /agent/guide/agent-commands/#agent-status-and-information
 [14]: /help/
-[15]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids/
+[15]: /integrations/guide/snmp-commonly-used-compatible-oids/
 [16]: https://medium.com/server-guides/monitoring-unifi-devices-using-snmp-and-datadog-c8093a7d54ca

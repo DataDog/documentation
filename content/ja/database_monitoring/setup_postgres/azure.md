@@ -1,5 +1,4 @@
 ---
-beta: true
 description: Azure 上で管理される PostgreSQL 用のデータベースモニタリングをインストールし、構成します。
 further_reading:
 - link: /integrations/postgres/
@@ -28,7 +27,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 9.6、10、11、12、13
 
 サポートされる Azure PostgreSQL のデプロイメントタイプ
-: シングルサーバー、フレキシブルサーバー
+: Azure VM 上の PostgreSQL、シングルサーバー、フレキシブルサーバー
 
 サポート対象の Agent バージョン
 : 7.36.1+
@@ -222,9 +221,11 @@ Azure Postgres データベースを監視するには、インフラストラ�
    ```
 2. [Agent を再起動します][2]。
 
+`deployment_type` と `name` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][3]を参照してください。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -284,12 +285,15 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][2]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][3]でパスワードを環境変数として渡す方法をご確認ください。
+`deployment_type` と `name` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][2]を参照してください。
+
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][3]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][4]でパスワードを環境変数として渡す方法をご確認ください。
 
 
 [1]: /ja/agent/docker/integrations/?tab=docker
-[2]: /ja/agent/guide/secrets-management
-[3]: /ja/agent/faq/template_variables/
+[2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
+[3]: /ja/agent/guide/secrets-management
+[4]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -397,14 +401,17 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
+`deployment_type` と `name` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][4]を参照してください。
+
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、Postgres チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][5]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ja/agent/guide/secrets-management
+[4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
+[5]: /ja/agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

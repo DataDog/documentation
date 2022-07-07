@@ -1,126 +1,178 @@
 ---
 aliases:
-- /ja/tracing/compatibility_requirements/dotnet-framework
-code_lang: dotnet-framework
-code_lang_weight: 80
-description: .NET トレーサーの互換性要件です。
+- /ja/tracing/compatibility_requirements/python
+code_lang: python
+code_lang_weight: 10
+description: Python トレーサーの互換性要件
 further_reading:
-- link: tracing/setup/dotnet-framework
+- link: tracing/setup/python
   tag: Documentation
   text: アプリケーションのインスツルメンテーション
-- link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
-  tag: GitHub
-  text: カスタムインスツルメンテーションの例
 kind: documentation
-title: .NET Framework 互換性要件
+title: Python 互換性要件
 type: multi-code-lang
 ---
 
+## リリース
 
-.NET トレーサーは、すべての .NET ベースの言語 (例えば、C#、F#、Visual Basic など) をサポートしています。オープンソースです。詳細は、[.NET トレーサーのリポジトリ][1]を参照してください。
+Python APM クライアントライブラリは，ライブラリと Python ランタイムの異なるバージョンに対するサポートレベルを指定する[バージョニングポリシー][1]に従っています。
 
-## サポートされている .NET フレームワークのランタイム
+2 つのリリースブランチに対応しています。
 
-.NET トレーサーは、以下の .NET Framework バージョンでの自動インスツルメンテーションに対応しています。また、[.NET Core][2] にも対応しています。
+| リリース    | サポートレベル        |
+|------------|----------------------|
+| `<1`       | メンテナンス           |
+| `>=1.0,<2` | 一般提供 |
 
-| .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン | Datadog サポート終了 |
-| ----------------------- | --------------------- | ----------------------------------- | --------------- | ------------------- |
-| 4.8                     |                       | [GA](#support-ga)                   | 最新          |                     |
-| 4.7.2                   |                       | [GA](#support-ga)                   | 最新          |                     |
-| 4.7                     |                       | [GA](#support-ga)                   | 最新          |                     |
-| 4.6.2                   |                       | [GA](#support-ga)                   | 最新          |                     |
-| 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | 最新          |                     |
-| 4.6                     | 04/26/2022            | [メンテナンス](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
-| 4.5.2                   | 04/26/2022            | [メンテナンス](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
-| 4.5.1                   | 01/12/2016            | [メンテナンス](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
-| 4.5                     | 01/12/2016            | [メンテナンス](#support-Maintenance) | < 2.0.0         | 04/26/2022          |
+また、このライブラリは以下のランタイムをサポートしています。
 
-その他の情報は、[マイクロソフトの .NET コアライフサイクルポリシー][3] および [.NET Framework APM のランタイムサポートポリシー](#runtime-support-policy-for-net-framework-apm)に記載されています。
-
-## 対応プロセッサアーキテクチャー
-
-.NET トレーサーは、次のアーキテクチャーの自動インスツルメンテーションをサポートします:
-
-| プロセッサアーキテクチャー                                                 | サポートレベル         | パッケージバージョン                        |
-| ------------------------------------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | 最新                                 |
-| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | 最新                                 |
+| OS      | CPU                   | ランタイム | ランタイムバージョン | ddtrace のバージョンに対応 |
+|---------|-----------------------|---------|-----------------|--------------------------|
+| Linux   | x86-64、i686、AArch64 | CPython | 2.7、3.5-3.10   | `<2`                     |
+| MacOS   | Intel、Apple Silicon  | CPython | 2.7、3.5-3.10   | `<2`                     |
+| Windows | 64bit、32bit          | CPython | 2.7、3.5-3.10   | `<2`                     |
 
 ## インテグレーション
 
-[最新版 .NET トレーサー][4]では、以下のライブラリの自動インスツルメンテーションが可能です。
+ライブラリに関するサポートをご希望の場合は、[サポートチーム][2]までお気軽にお問い合わせください。
 
-| フレームワークまたはライブラリ            | NuGet パッケージ                                                                             | インテグレーション名     |
-| ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
-| ADO.NET                         | すべての AdoNet インテグレーション                                                                   | `AdoNet`             |
-| Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
-| ASP.NET (Web Forms を含む)   | 組み込み                                                                                  | `AspNet`             |
-| ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
-| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
-| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
-| Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
-| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
-| GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
-| gRPC                            | `Grpc.Core` 2.3.0+                                            | `Grpc`               |
-| HttpClient / HttpMessageHandler | 組み込み                                                                                  | `HttpMessageHandler` |
-| Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
-| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
-| MSMQ                            | 組み込み                                                                                  | `Msmq`               |
-| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
-| Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
-| PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
-| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                  | `RabbitMQ`           |
-| Redis (ServiceStack クライアント)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
-| Redis (StackExchange クライアント)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
-| SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                           | `Sqlite`             |
-| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+  | WebClient / WebRequest     |
-| WCF (サーバー)                    | 組み込み                                                                                  | `Wcf`                |
-| WebClient / WebRequest          | 組み込み                                                                                  | `WebRequest`         |
+### Web フレームワークの互換性
 
-希望するライブラリが見つかりませんか？Datadog では継続的にサポートを追加しています。[Datadog チーム][5]までお気軽にお問い合わせください。
+`ddtrace` ライブラリには、次のような数多くの Ｗeb フレームワークのサポートが含まれています。
 
-## サポートされている Datadog Agent バージョン
+| フレームワーク                 | サポート対象のバージョン | 自動 | ライブラリドキュメント                                              |
+| ------------------------- | ----------------- | --------- |------------------------------------------------------------------ |
+| [asgi][3]                 | >= 2.0            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
+| [aiohttp][4] (クライアント)     | >= 2.0            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [aiohttp][4] (サーバー)     | >= 2.0            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [Bottle][5]               | 0.11 以降           | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
+| [CherryPy][6]            | >= 11.2.0         | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
+| [Django][7]               | 1.8 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
+| [djangorestframework][7]  | 3.4 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
+| [Falcon][8]               | 1.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
+| [Flask][9]                | 0.10 以降           | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask   |
+| [FastAPI][10]              | >= 0.51           | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#fastapi |
+| [Molten][11]               | 0.7.0 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
+| [Pylons][12]              | 0.9.6 以降          | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
+| [Pyramid][13]             | 1.7 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
+| [pytest][14]              | 3.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
+| [Sanic][15]               | >= 19.6.0         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
+| [Starlette][16]           | >= 0.13.0         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
+| [Tornado][17]             | 4.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
-| **Datadog Agent バージョン**   | **パッケージバージョン** |
-|-----------------------------|---------------------|
-| [7.x][6]                   | 最新              |
-| [6.x][6]                   | 最新              |
-| [5.x][7]                   | 最新              |
 
-## .NET Framework APM のランタイムサポートポリシー
 
-Datadog APM for .NET Framework は、ホスト OS、.NET Framework ランタイム、特定の .NET Framework ライブラリ、Datadog Agent/API に依存しています。これらのサードパーティソフトウェアシステムは、.NET Framework の特定のバージョンをサポートしています。外部ソフトウェアが .NET Framework のバージョンをサポートしなくなった場合、Datadog APM for .NET Framework もそのバージョンのサポートを制限します。
+### データストアの互換性
 
-### サポートレベル
+`ddtrace` ライブラリには、次のデータストアのサポートが含まれています。
 
-| **レベル**                                              | **サポート内容**                                                                                                                                                          |
-|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">非対応</span>      |  実装していません。[特別なご要望はカスタマーサポートにお問い合わせください][8]。                                                             |
-| <span id="support-beta">ベータ版</span>                    |  初期実装です。まだすべての機能が含まれていない可能性があります。新機能のサポート、バグやセキュリティの修正は、ベストエフォートで提供されます。                                    |
-| <span id="support-ga">一般提供 (GA)</span> |  全機能の完全実装。新機能、バグ、セキュリティフィックスを完全サポート。                                                                                    |
-| <span id="support-maintenance">メンテナンス</span>      |  既存機能の完全実装。新機能は受けません。バグフィックス、セキュリティフィックスのみの対応となります。                                                              |
-| <span id="support-eol">サポート終了 (EOL)</span>        |  サポートはありません。                                                                                                                                                                  |
+| data store                          | サポート対象のバージョン | 自動 |  ライブラリドキュメント                                                                         |
+| ---------------------------------- | ----------------- | --------- | --------------------------------------------------------------------------------------------- |
+| [algoliasearch][18]                | >= 1.20.0         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
+| [Cassandra][19]                    | 3.5 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
+| [Elasticsearch][20]                | 1.6 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Flask Cache][21]                  | 0.12 以降           | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
+| [Mariadb][22]                      | >= 1.0.0          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#mariadb                             |
+| [Memcached][23] [pylibmc][24]      | 1.4 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
+| [Memcached][23] [pymemcache][25]   | 1.3 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymemcache                          |
+| [MongoDB][26] [Mongoengine][27]    | 0.11 以降           | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#mongoengine                         |
+| [MongoDB][26] [Pymongo][28]        | 3.0 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymongo                             |
+| [MySQL][29] [MySQL-python][30]     | 1.2.3 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
+| [MySQL][29] [mysqlclient][31]      | 1.3 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
+| [MySQL][29] [mysql-connector][32]  | 2.1 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
+| [Postgres][33] [aiopg][34]         | >= 0.12.0, <=&nbsp;0.16        | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
+| [Postgres][33] [psycopg][35]       | 2.4 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
+| [PyMySQL][36]                      | >= 0.7、<=&nbsp;0.9            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html?highlight=pymysql#pymysql |
+| [PynamoDB][37]                     | 4.0 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#pynamodb |
+| [PyODBC][38]                       | 4.0 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyodbc                               |
+| [Redis][39]                        | 2.6 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
+| [Redis][39] [redis-py-cluster][40] | 1.3.5 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
+| [SQLAlchemy][41]                   | 1.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
+| [SQLite3][42]                      | 完全対応   | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
+| [Vertica][43]                      | 0.6 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
 
-### パッケージのバージョニング
+### ライブラリの互換性
 
-Datadog APM for .NET Framework は、[セマンティックバージョニング][9]を実践しています。
-バージョンの更新は、ランタイムサポートの以下の変更を意味します。
+`ddtrace` ライブラリには、次のライブラリのサポートが含まれています。
 
-  - **メジャーバージョンアップ** (例えば `1.0.0` から `2.0.0`) により、ランタイムのサポートが[ベータ版](#support-beta)/[GA](#support-ga)から[メンテナンス](#support-maintenance)/[EOL](#support-eol) に変更される場合があります。
-  - **マイナーバージョンアップ** (例えば `1.0.0` から `1.1.0`) は、あるランタイムのサポートレベルを下げることはありませんが、あるランタイムのサポートは追加されるかもしれません。
-  - **パッチバージョンアップ** (例えば `1.0.0` から `1.0.1`) によって、ランタイムのサポートが変更されることはありません。
+| ライブラリ           | サポート対象のバージョン |  自動       | ライブラリドキュメント                                                    |
+| ----------------- | ----------------- | ---------------- | ------------------------------------------------------------------------ |
+| [aiobotocore][44] | 0.2.3 以降          | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
+| [asyncio][45]     | 完全対応   | > Python 3.7 yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
+| [Botocore][46]    | 1.4.51 以降         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
+| [Boto2][47]       | 2.29.0 以降         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
+| [Celery][48]      | >= 3.1            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Consul][49]      | >= 0.7            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
+| [Futures][50]     | 完全対応   | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
+| [gevent][51]      | 1.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [Grpc][52]        | 1.8.0 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
+| [httplib][53]     | 完全対応   | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [Jinja2][54]      | 2.7 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
+| [Kombu][55]       | 4.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
+| [Mako][56]        | 0.1.0 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
+| [Requests][57]    | 2.08 以降           | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [urllib3][58]     | >= 1.22           | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-dotnet
-[2]: /ja/tracing/compatibility_requirements/dotnet-core/
-[3]: https://docs.microsoft.com/en-us/lifecycle/products/microsoft-net-framework
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[5]: /ja/help/
-[6]: /ja/agent/basic_agent_usage/?tab=agentv6v7
-[7]: /ja/agent/basic_agent_usage/?tab=agentv5
-[8]: https://www.datadoghq.com/support/
-[9]: https://semver.org/
+
+[1]: https://ddtrace.readthedocs.io/en/stable/versioning.html
+[2]: /ja/help
+[3]: http://asgi.readthedocs.io/
+[4]: https://aiohttp.readthedocs.io
+[5]: https://bottlepy.org
+[6]: https://cherrypy.org/
+[7]: https://www.djangoproject.com
+[8]: https://falconframework.org
+[9]: http://flask.pocoo.org
+[10]: https://fastapi.tiangolo.com/
+[11]: https://moltenframework.com
+[12]: http://pylonsproject.org
+[13]: https://trypyramid.com
+[14]: https://docs.pytest.org/en/stable/
+[15]: https://sanic.readthedocs.io/en/latest/
+[16]: https://www.starlette.io/
+[17]: http://www.tornadoweb.org
+[18]: https://www.algolia.com/doc/
+[19]: https://cassandra.apache.org
+[20]: https://www.elastic.co/products/elasticsearch
+[21]: https://pythonhosted.org/Flask-Cache
+[22]: https://mariadb-corporation.github.io/mariadb-connector-python/index.html
+[23]: https://memcached.org
+[24]: http://sendapatch.se/projects/pylibmc
+[25]: https://pymemcache.readthedocs.io
+[26]: https://www.mongodb.com/what-is-mongodb
+[27]: http://mongoengine.org
+[28]: https://api.mongodb.com/python/current
+[29]: https://www.mysql.com
+[30]: https://pypi.org/project/MySQL-python
+[31]: https://pypi.org/project/mysqlclient
+[32]: https://dev.mysql.com/doc/connector-python/en/
+[33]: https://www.postgresql.org
+[34]: https://aiopg.readthedocs.io
+[35]: http://initd.org/psycopg
+[36]: https://pypi.org/project/PyMySQL/
+[37]: https://pynamodb.readthedocs.io/en/latest/
+[38]: https://pypi.org/project/pyodbc/
+[39]: https://redis.io
+[40]: https://redis-py-cluster.readthedocs.io
+[41]: https://www.sqlalchemy.org
+[42]: https://www.sqlite.org
+[43]: https://www.vertica.com
+[44]: https://pypi.org/project/aiobotocore/
+[45]: https://docs.python.org/3/library/asyncio.html
+[46]: https://pypi.org/project/botocore/
+[47]: http://docs.pythonboto.org/en/latest
+[48]: http://www.celeryproject.org
+[49]: https://python-consul.readthedocs.io/en/latest/
+[50]: https://docs.python.org/3/library/concurrent.futures.html
+[51]: http://www.gevent.org
+[52]: https://grpc.io
+[53]: https://docs.python.org/2/library/httplib.html
+[54]: http://jinja.pocoo.org
+[55]: https://kombu.readthedocs.io/en/latest
+[56]: https://www.makotemplates.org
+[57]: https://requests.readthedocs.io/en/master/
+[58]: https://urllib3.readthedocs.io/en/stable/

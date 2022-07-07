@@ -11,36 +11,40 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - caching
-  - log collection
+- data store
+- caching
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/hazelcast/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/hazelcast/README.md
 display_name: Hazelcast
 draft: false
 git_integration_title: hazelcast
 guid: b2c63c99-f955-4494-a171-494f9dcf7d1f
 integration_id: hazelcast
 integration_title: Hazelcast
+integration_version: 2.0.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: hazelcast.
 metric_to_check:
-  - hazelcast.mc.license_expiration_time
-  - hazelcast.instance.running
+- hazelcast.mc.license_expiration_time
+- hazelcast.instance.running
 name: hazelcast
 public_title: Intégration Datadog/Hazelcast
 short_description: Surveillez les membres Hazelcast et le Management Center.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Hazelcast][1] 4.0 et ultérieur.
@@ -161,7 +165,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 
 ##### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Docker][2].
 
 | Paramètre      | Valeur                                              |
 | -------------- | -------------------------------------------------- |
@@ -197,23 +201,16 @@ JMXFetch
 
 
 ### Checks de service
+{{< get-service-checks-from-git "hazelcast" >}}
 
-**hazelcast.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Hazelcast qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
-
-**hazelcast.mc_cluster_state** :<br>
-Correspond au statut du Hazelcast Management Center selon son check de santé.
-
-### Événements
-
-Hazelcast n'inclut aucun événement.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 
+
 [1]: https://hazelcast.org
-[2]: https://docs.datadoghq.com/fr/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/fr/help/

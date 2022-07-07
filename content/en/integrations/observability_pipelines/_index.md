@@ -5,6 +5,9 @@ further_reading:
   - link: /integrations/observability_pipelines/setup/
     tag: Documentation
     text: Set up Observability Pipelines 
+  - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
+    tag: Blog
+    text: Take control of your telemetry data with Observability Pipelines
   - link: /integrations/observability_pipelines/vector_configurations/
     tag: Documentation
     text: Learn more about Vector configurations

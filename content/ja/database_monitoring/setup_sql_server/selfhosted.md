@@ -15,8 +15,6 @@ title: セルフホスト SQL Server のデータベースモニタリングの�
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">Database Monitoring for SQL Server 用データベースモニタリングはプライベートベータ版です。ベータ版へのアクセスリクエストは、カスタマーサクセスマネージャーについては、お問い合わせください。</div>
-
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
 データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
@@ -75,6 +73,12 @@ Agent を SQL Server ホストに直接インストールすることをお勧�
 {{% /tab %}}
 {{% tab "Linux Host" %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
+{{% /tab %}}
+{{% tab "Docker" %}}
+{{% dbm-sqlserver-agent-setup-docker %}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+{{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
 

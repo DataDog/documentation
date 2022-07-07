@@ -81,11 +81,15 @@
   },
   "pagerduty-integration": {
     "name": "PagerDuty インテグレーション",
-    "description": "[Datadog-PagerDuty インテグレーション](https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty)を Datadog API を介して直接構成します。"
+    "description": "[Datadog-PagerDuty インテグレーション](https://docs.datadoghq.com/integrations/pagerduty/)を Datadog API を介して直接構成します。"
   },
   "screenboards": {
     "name": "スクリーンボード",
     "description": "このエンドポイントは旧バージョンです。代わりに、[新しいダッシュボードエンドポイント](https://docs.datadoghq.com/api/#dashboards)を使用してください。"
+  },
+  "security-monitoring": {
+    "name": "セキュリティモニタリング",
+    "description": "信号を生成し、生成された信号を一覧表示するための検出ルール。"
   },
   "service-checks": {
     "name": "サービスのチェック",
