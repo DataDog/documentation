@@ -47,7 +47,7 @@ msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWOR
 
 **Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
 
-**Note**: It's currently not possible to specify the user in the installer UI. Use the command line to pass the `DDAGENTUSER_NAME` and other parameters, they will be taken into account even in a UI install.
+**Note**: The user cannot be specified in the installer UI. Use the command line to pass the `DDAGENTUSER_NAME` and other parameters. They are taken into account, even in a UI install.
 
 ### Installation with group policy
 
