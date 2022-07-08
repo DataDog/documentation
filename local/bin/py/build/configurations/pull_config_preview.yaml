@@ -814,6 +814,8 @@
         - "workload-security/backend-rules/*.md"
         - "security-monitoring/*.json"
         - "security-monitoring/*.md"
+        - "cloud-siem/**/*.json"
+        - "cloud-siem/**/*.md"
         - "posture-management/**/*.json"
         - "posture-management/**/*.yaml"
         - "posture-management/**/*.yml"

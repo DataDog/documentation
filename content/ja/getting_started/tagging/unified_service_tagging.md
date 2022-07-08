@@ -257,13 +257,12 @@ com.datadoghq.tags.version
     "name": "DD_VERSION",
     "value": "<VERSION>"
   }
-
+],
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
   "com.datadoghq.tags.service": "<SERVICE>",
   "com.datadoghq.tags.version": "<VERSION>"
-  }
-]
+}
 ```
 
 ##### 部分的なコンフィギュレーション
@@ -400,6 +399,8 @@ instances:
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
 
 
 [1]: /ja/getting_started/tagging/

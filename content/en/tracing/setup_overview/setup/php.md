@@ -391,6 +391,29 @@ Enable URL's as resource names (see [Map resource names to normalized URI](#map-
 **Default**: `null`<br>
 Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
 
+`DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
+: **INI**: `datadog.trace.http_url_query_param_allowed`<br>
+**Default**: `*`<br>
+A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
+
+`DD_TRACE_CLIENT_IP_HEADER_DISABLED`
+: **INI**: `datadog.trace.client_ip_header_disabled`<br>
+**Default**: `0`<br>
+Disable client IP collection from relevant IP headers. Added in version `0.76.0`.
+
+`DD_TRACE_CLIENT_IP_HEADER`
+: **INI**: `datadog.trace.client_ip_header`<br>
+**Default**: `null`<br>
+The IP header to be used for client IP collection, for example: `x-forwarded-for`. Added in version `0.76.0`.
+
+`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
+: **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
+**Default**: 
+  ```
+  (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
+  ```
+  Regular expression used to obfuscate the query string included as part of the URL. Added in version `0.76.0`.
+
 #### Integration names
 
 The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.

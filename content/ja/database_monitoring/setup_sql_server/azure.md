@@ -141,7 +141,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: adodbapi
-    provider: MSOLEDBSQL
+   adoprovider: MSOLEDBSQL
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -164,7 +164,7 @@ instances:
 推奨する [ADO][6] プロバイダーは、[Microsoft OLE DB Driver][7] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
 ```yaml
 connector: adodbapi
-provider: MSOLEDBSQL
+adoprovider: MSOLEDBSQL
 ```
 
 他の 2 つのプロバイダー、`SQLOLEDB` と `SQLNCLI` は、Microsoft によって非推奨とされており、もはや使用するべきではありません。
