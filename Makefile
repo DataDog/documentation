@@ -159,6 +159,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/ruby.md ;fi
+	@if [ content/en/tracing/trace_collection/dd_libraries/ruby.md ]; then \
+	rm -f content/en/tracing/trace_collection/dd_libraries/ruby.md ;fi
 	@if [ content/en/integrations/guide/amazon_cloudformation.md ]; then \
 	rm -f content/en/integrations/guide/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
@@ -171,6 +173,12 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/guide/forwarder.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
+	@if [ content/en/tracing/trace_collection/dd_libraries/android.md ]; then \
+	rm -f content/en/tracing/trace_collection/dd_libraries/android.md ;fi
+	@if [ content/en/tracing/setup_overview/setup/ios.md ]; then \
+	rm -f content/en/tracing/setup_overview/setup/ios.md ;fi
+	@if [ content/en/tracing/trace_collection/dd_libraries/ios.md ]; then \
+	rm -f content/en/tracing/trace_collection/dd_libraries/ios.md ;fi
 	@if [ content/en/security_platform/cloud_workload_security/agent_expressions.md ]; then \
 	rm -f content/en/security_platform/cloud_workload_security/agent_expressions.md ;fi
 	@if [ content/en/security_platform/cloud_workload_security/backend.md ]; then \
