@@ -118,41 +118,29 @@ experimental:
 
 1. Follow the [Kubernetes Agent setup][1].
 
-2. Set environment variables for the Agent editing the `datadog.env` parameter of the `values.yaml` file:
+2. Set environment variables for the Agent editing the `datadog.otlp` section of the `values.yaml` file:
 
    For gRPC:
    ```
-   env:
-     - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT
-       value: "0.0.0.0:4317"
+   otlp:
+    receiver:
+      protocols:
+        grpc:
+          enabled: true
    ```
    
    For HTTP:
    ```
-   env: 
-     - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT
-       value: "0.0.0.0:4318"
-   ```
-   
-3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the core Agent container setting them in the `agents.containers.agent.ports` parameter of the `values.yaml` file:
-
-   For gRPC:
-   ```
-     ports: 
-       - containerPort: 4317
-         hostPort: 4317
-         name: traceportgrpc
-         protocol: TCP
+   otlp:
+    receiver:
+      protocols:
+        http:
+          enabled: true
    ```
 
-   For HTTP:
-   ```
-     ports: 
-       - containerPort: 4318
-         hostPort: 4318
-         name: traceporthttp
-         protocol: TCP
-   ```
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
+
+
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
 
@@ -160,28 +148,19 @@ experimental:
 
 1. Follow the [Kubernetes Agent setup][1].
 
-2. Set environment variables for the Agent using `set` commands:
+2. Enable the preferred protocol:
 
    For gRPC:
    ```
-   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT,datadog.env[0].value=0.0.0.0:4317"
+   --set "datadog.otlp.receiver.protocols.grpc.enabled=true"
    ```
    For HTTP:
    ```
-   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:4318"
+   --set "datadog.otlp.receiver.protocols.http.enabled=true"
    ```
-   
-3. Map the container ports (`4317` for gRPC or `4318` for HTTP) to the host port for the core Agent container:
 
-   For gRPC:
-   ```
-   --set 'agents.containers.agent.ports[0].containerPort=4317,agents.containers.agent.ports[0].hostPort=4317,agents.containers.agent.ports[0].name=traceportgrpc,agents.containers.agent.ports[0].protocol=TCP' 
-   ```
-   
-   For HTTP:
-   ```
-   --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
-   ```
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
+
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
 {{< /tabs >}}
