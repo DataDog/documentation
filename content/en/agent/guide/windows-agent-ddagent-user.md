@@ -27,7 +27,7 @@ Additionally the following security policies are applied to the account during i
 
 **Note**: All example commands on this page use `<>` to indicate a variable that should be replaced. For example, if the user account is `ddagentuser` and the command contains `DDAGENTUSER_NAME=<USERNAME>` then `DDAGENTUSER_NAME=ddagentuser` should be entered in the command line.
 
-**Note**: Starting with release `7.38.0`/`6.38.0` the installer supports Grouped Managed Service Account (gMSA). To specify a Grouped Managed Service Account, append $ at the end of the username, i.e. `<DOMAIN>\<USERNAME>$`. The Grouped Managed Service Account must exist *prior* to installation, the installer cannot create the Grouped Managed Service Account.
+**Note**: Starting with release `7.38.0/6.38.0` the installer supports **Grouped Managed Service Account (gMSA)**. To specify a Grouped Managed Service Account, append **$** at the end of the username, i.e. `<DOMAIN>\<USERNAME>$`. The Grouped Managed Service Account must exist *prior* to installation, the installer cannot it.
 
 ## Installation
 
