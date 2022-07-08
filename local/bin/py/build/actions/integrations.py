@@ -366,8 +366,8 @@ class Integrations:
         new_file_name = "{}{}.yaml".format(
             self.data_integrations_dir, key_name
         )
-        # likely collision
-        if exists(new_file_name):
+        # if md already exists likely collision
+        if exists("{}{}.md".format(self.content_integrations_dir, key_name)):
             collision_name = self.get_collision_alternate_name(file_name)
             new_file_name = "{}{}.yaml".format(
                 self.data_integrations_dir, collision_name
@@ -430,10 +430,16 @@ class Integrations:
             key_name = basename(
                 dirname(normpath(file_name))
             )
-
         new_file_name = "{}{}.json".format(
             self.data_service_checks_dir, key_name
         )
+
+        # if md already exists likely collision
+        if exists("{}{}.md".format(self.content_integrations_dir, key_name)):
+            collision_name = self.get_collision_alternate_name(file_name)
+            new_file_name = "{}{}.json".format(
+                self.data_service_checks_dir, collision_name
+            )
 
         shutil.copy(
             file_name,
@@ -775,7 +781,6 @@ class Integrations:
         # determine new name is collision
         if exist_collision:
             collision_name = self.get_collision_alternate_name(file_name)
-            manifest_json["name"] = collision_name
 
         if metrics_exist:
             result = re.sub(
@@ -808,6 +813,7 @@ class Integrations:
                 # if the same integration exists in multiple locations try name md file differently
                 # integration_id.md -> name.md -> original_collision_name.md
                 if exist_collision:
+                    manifest_json["name"] = collision_name
                     collision_name = collision_name if collision_name.endswith('.md') else collision_name + ".md"
                     out_name = self.content_integrations_dir + collision_name
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
