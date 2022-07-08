@@ -17,7 +17,7 @@ further_reading:
 
 The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed Spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
-{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="Timeseriesx" height="318" width="794" >}}
+{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="Timeseries" height="318" width="794" >}}
 
 ## Setup
 
