@@ -90,7 +90,7 @@ Network Performance Monitoring supports use of the following provisioning system
 
 ## Setup
 
-Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
@@ -131,6 +131,9 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     ```
 
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+
+
+6. If running on AWS, enable 'expanded collection' for AWS to allow NPM to tag traffic by load balancer or NAT gateway.
 
 ### SELinux-enabled systems
 
@@ -200,7 +203,7 @@ To enable Network Performance Monitoring for Windows hosts:
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers. 
+**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers.
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
