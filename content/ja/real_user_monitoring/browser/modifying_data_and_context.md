@@ -22,6 +22,8 @@ kind: documentation
 title: RUM データとコンテキストの変更
 ---
 
+## 概要
+
 RUM によって[収集されたデータ][1]を変更して、次のニーズをサポートするには、さまざまな方法があります。
 
 - 個人を特定できる情報などの機密データを保護します。
@@ -31,66 +33,76 @@ RUM によって[収集されたデータ][1]を変更して、次のニーズ�
 
 ## デフォルトの RUM ビュー名をオーバーライドする
 
-RUM SDK は、ユーザーが新しいページにアクセスするたびに、またはページの URL が変更されたときに (シングルページアプリケーションの場合)、[ビューイベント][2]を自動的に生成します。ビュー名は現在のページの URL から計算され、可変英数字 ID は自動的に削除されます。たとえば、"/dashboard/1234" は "/dashboard/?" になります。
+RUM SDK は、ユーザーが新しいページにアクセスするたびに、またはページの URL が変更されたときに (シングルページアプリケーションの場合)、[ビューイベント][2]を自動的に生成します。ビュー名は現在のページの URL から計算され、可変英数字 ID は自動的に削除されます。たとえば、`/dashboard/1234` は `/dashboard/?` になります。
 
-[バージョン 2.17.0][3] 以降、`trackViewsManually` オプションを使用してビューイベントを手動で追跡することにより、独自のビュー名を指定できます。
+[バージョン 2.17.0][3] からは、`trackViewsManually` オプションでビューイベントを手動で追跡することにより、ビュー名を追加して、チームが所有する専用サービスに割り当てることができます。
 
-1. RUM を初期化するときに `trackViewsManually` を true に設定します。
-{{< tabs >}}
-{{% tab "NPM" %}}
+1. RUM ブラウザ SDK を初期化する際に、`trackViewsManually` を true に設定します。
 
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
+    {{< tabs >}}
+    {{% tab "NPM" %}}
 
-datadogRum.init({
-    ...,
-    trackViewsManually: true,
-    ...
-});
-```
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
-        ...,
-        trackViewsManually: true,
-        ...
-    })
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-```javascript
-window.DD_RUM &&
-    window.DD_RUM.init({
+    ```
+    import { datadogRum } from '@datadog/browser-rum';
+
+    datadogRum.init({
         ...,
         trackViewsManually: true,
         ...
     });
-```
-{{% /tab %}}
-{{< /tabs >}}
+    ```
+    {{% /tab %}}
+    {{% tab "CDN 非同期" %}}
+    ```
+    DD_RUM.onReady(function() {
+        DD_RUM.init({
+            ...,
+            trackViewsManually: true,
+            ...
+        })
+    })
+    ```
+    {{% /tab %}}
+    {{% tab "CDN 同期" %}}
+    ```
+    window.DD_RUM &&
+        window.DD_RUM.init({
+            ...,
+            trackViewsManually: true,
+            ...
+        });
+    ```
+    {{% /tab %}}
+    {{< /tabs >}}
 
-2. 新しいページまたはルートの変更ごとにビューを開始する**必要があります** (シングルページアプリケーションの場合)。オプションで、関連付けられたビュー名を定義できます。デフォルトでは、ページの URL パスになります。ビューが開始されるまで、RUM データは収集されません。
+2. 新しいページまたはルート変更 (単一ページアプリケーションの場合) ごとにビューを開始する必要があります。RUM データは、ビューの開始時に収集されます。オプションで、関連するビュー名、サービス名、およびバージョンを定義します。
+
+   - ビュー: デフォルトは、ページの URL パスです。
+   - サービス: デフォルトは、RUM アプリケーションの作成時に指定されたデフォルトのサービスです。
+   - バージョン: デフォルトは、RUM アプリケーションの作成時に指定されたデフォルトのバージョンです。
+
+   詳しくは、[ブラウザモニタリングの設定][4]をご覧ください。
+
+次の例は、RUM アプリケーションの `checkout` ページにおけるページビューを手動で追跡するものです。ビュー名には `checkout` を使用し、`purchase` サービスとバージョン `1.2.3` を関連付けます。
+
 {{< tabs >}}
 {{% tab "NPM" %}}
-```javascript
-datadogRum.startView('checkout')
+```
+datadogRum.startView('checkout', 'purchase', '1.2.3')
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+```
 DD_RUM.onReady(function() {
-    DD_RUM.startView('checkout')
+    DD_RUM.startView('checkout', 'purchase', '1.2.3')
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
-window.DD_RUM && window.DD_RUM.startView('checkout')
+```
+window.DD_RUM && window.DD_RUM.startView('checkout', 'purchase', '1.2.3')
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -107,9 +119,9 @@ RUM イベントをインターセプトすると、次のことが可能にな�
 - RUM イベントを変更して、コンテンツを変更したり、機密性の高いシーケンスを編集したりします ([編集可能なプロパティのリスト](#modify-the-content-of-a-rum-event)を参照してください)
 - 選択した RUM イベントを破棄する
 
-[バージョン 2.13.0][4] 以降、`beforeSend` は 2 つの引数を取ります。RUM ブラウザ SDK によって生成された `event` と、RUM イベントの作成をトリガーした `context` です。
+[バージョン 2.13.0][5] 以降、`beforeSend` は 2 つの引数を取ります。RUM ブラウザ SDK によって生成された `event` と、RUM イベントの作成をトリガーした `context` です。
 
-```javascript
+```
 function beforeSend(event, context)
 ```
 
@@ -117,15 +129,15 @@ function beforeSend(event, context)
 
 | RUM イベントタイプ   | コンテキスト                   |
 |------------------|---------------------------|
-| ビュー             | [場所][5]                  |
-| アクション           | [イベント][6]                     |
-| リソース (XHR)   | [XMLHttpRequest][7] と [PerformanceResourceTiming][8]            |
-| リソース (フェッチ) | [リクエスト][9]、[リソース][10]、[PerformanceResourceTiming][8]      |
-| リソース (その他) | [PerformanceResourceTiming][8] |
-| エラー            | [エラー][11]                     |
-| ロングタスク        | [PerformanceLongTaskTiming][12] |
+| ビュー             | [場所][6]                  |
+| アクション           | [イベント][7]                     |
+| リソース (XHR)   | [XMLHttpRequest][8] と [PerformanceResourceTiming][9]            |
+| リソース (フェッチ) | [リクエスト][10]、[リソース][11]、[PerformanceResourceTiming][9]      |
+| リソース (その他) | [PerformanceResourceTiming][9] |
+| エラー            | [エラー][12]                     |
+| ロングタスク        | [PerformanceLongTaskTiming][13] |
 
-詳細については、[RUM データの強化と制御ガイド][13]を参照してください。
+詳細については、[RUM データの強化と制御ガイド][14]を参照してください。
 
 ### RUM イベントを強化する
 
@@ -134,7 +146,7 @@ function beforeSend(event, context)
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```javascript
+```
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -150,7 +162,7 @@ datadogRum.init({
 ```
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+```
 DD_RUM.onReady(function() {
     DD_RUM.init({
         ...,
@@ -166,7 +178,7 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-```javascript
+```
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
@@ -196,7 +208,7 @@ RUM ブラウザ SDK は以下を無視します。
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```javascript
+```
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -211,7 +223,7 @@ datadogRum.init({
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+```
 DD_RUM.onReady(function() {
     DD_RUM.init({
         ...,
@@ -226,7 +238,7 @@ DD_RUM.onReady(function() {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
+```
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
@@ -252,9 +264,9 @@ window.DD_RUM &&
 |   `error.stack `        |   文字列  |   スタックトレースまたはエラーに関する補足情報。                                     |
 |   `error.resource.url`  |   文字列  |   エラーをトリガーしたリソース URL。                                                        |
 |   `resource.url`        |   文字列  |   リソースの URL。                                                                                 |
-|   `context`        |   オブジェクト  |   [グローバルコンテキスト API](#global-context) を介して、またはイベントを手動で生成するときに追加される属性 (例: `addError` および `addAction`)。RUM ビューイベント `context` は読み取り専用です。                                                                                 |
+|   `context`        |   オブジェクト  |   [グローバルコンテキスト API](#global-context) を使って、またはイベントを手動で生成するときに追加される属性 (例: `addError` および `addAction`)。RUM ビューイベント `context` は読み取り専用です。                                                                                 |
 
-RUM ブラウザ SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。イベントプロパティの詳細については、[RUM ブラウザ SDK GitHub リポジトリ][14]を参照してください。
+RUM ブラウザ SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。イベントプロパティの詳細については、[RUM ブラウザ SDK GitHub リポジトリ][15]を参照してください。
 
 ### RUM イベントを破棄
 
@@ -263,7 +275,7 @@ RUM ブラウザ SDK は、上記にリストされていないイベントプ�
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```javascript
+```
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -280,7 +292,7 @@ datadogRum.init({
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+```
 DD_RUM.onReady(function() {
     DD_RUM.init({
         ...,
@@ -297,7 +309,7 @@ DD_RUM.onReady(function() {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
+```
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
@@ -323,7 +335,7 @@ RUM セッションにユーザー情報を追加すると、次の役に立ち�
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API"  >}}
 
-次の属性は**オプション**ですが、**少なくとも 1 つ**を指定することをお勧めします。
+次の属性はオプションですが、Datadog は少なくとも 1 つを指定することを推奨しています。
 
 | 属性  | タイプ | 説明                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
@@ -337,7 +349,7 @@ RUM セッションにユーザー情報を追加すると、次の役に立ち�
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```javascript
+```
 datadogRum.setUser({
     id: '1234',
     name: 'John Doe',
@@ -349,7 +361,7 @@ datadogRum.setUser({
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+```
 DD_RUM.onReady(function() {
     DD_RUM.setUser({
         id: '1234',
@@ -363,7 +375,7 @@ DD_RUM.onReady(function() {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
+```
 window.DD_RUM && window.DD_RUM.setUser({
     id: '1234',
     name: 'John Doe',
@@ -382,13 +394,13 @@ window.DD_RUM && window.DD_RUM.setUser({
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```javascript
+```
 datadogRum.removeUser()
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+```
 DD_RUM.onReady(function() {
     DD_RUM.removeUser()
 })
@@ -396,7 +408,7 @@ DD_RUM.onReady(function() {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
+```
 window.DD_RUM && window.DD_RUM.removeUser()
 ```
 
@@ -412,7 +424,7 @@ window.DD_RUM && window.DD_RUM.removeUser()
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```javascript
+```
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -425,7 +437,7 @@ datadogRum.init({
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```html
+```
 <script>
  (function(h,o,u,n,d) {
    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
@@ -445,7 +457,7 @@ datadogRum.init({
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
+```
 window.DD_RUM &&
     window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
@@ -469,7 +481,7 @@ RUM を初期化したら、`addRumGlobalContext(key: string, value: any)` API �
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```javascript
+```
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
@@ -483,7 +495,7 @@ datadogRum.addRumGlobalContext('activity', {
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+```
 DD_RUM.onReady(function() {
     DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
@@ -499,7 +511,7 @@ DD_RUM.onReady(function() {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
+```
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
 // コード例
@@ -512,7 +524,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-製品全体でデータの相関を高めるには [Datadog の命名規則][15]に従ってください。
+製品全体でデータの相関を高めるには [Datadog の命名規則][16]に従ってください。
 
 ### グローバルコンテキストを置換
 
@@ -521,12 +533,12 @@ RUM を初期化したら、`setRumGlobalContext(context: Context)` API を使�
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```javascript
+```
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.setRumGlobalContext({ '<コンテキストキー>', <コンテキスト値>' });
+datadogRum.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Code example
+// コード例
 datadogRum.setRumGlobalContext({
     codeVersion: 34,
 });
@@ -534,7 +546,7 @@ datadogRum.setRumGlobalContext({
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+```
 DD_RUM.onReady(function() {
     DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 })
@@ -549,11 +561,11 @@ DD_RUM.onReady(function() {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
+```
 window.DD_RUM &&
-    DD_RUM.setRumGlobalContext({ '<コンテキストキー>', <コンテキスト値>' });
+    DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Code example
+// コード例
 window.DD_RUM &&
     DD_RUM.setRumGlobalContext({
         codeVersion: 34,
@@ -563,7 +575,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-製品全体でデータの相関を高めるには [Datadog の命名規則][15]に従ってください。
+製品全体でデータの相関を高めるには [Datadog の命名規則][16]に従ってください。
 
 ### グローバルコンテキストを読み取る
 
@@ -572,7 +584,7 @@ RUM を初期化したら、`getRumGlobalContext()` API を使用してグロー
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```javascript
+```
 import { datadogRum } from '@datadog/browser-rum';
 
 const context = datadogRum.getRumGlobalContext();
@@ -580,7 +592,7 @@ const context = datadogRum.getRumGlobalContext();
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+```
 DD_RUM.onReady(function() {
   var context = DD_RUM.getRumGlobalContext();
 });
@@ -588,7 +600,7 @@ DD_RUM.onReady(function() {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
+```
 var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 ```
 
@@ -602,15 +614,16 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 [1]: /ja/real_user_monitoring/browser/data_collected/
 [2]: /ja/real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
-[5]: https://developer.mozilla.org/en-US/docs/Web/API/Location
-[6]: https://developer.mozilla.org/en-US/docs/Web/API/Event
-[7]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[8]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[9]: https://developer.mozilla.org/en-US/docs/Web/API/Request
-[10]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
-[13]: /ja/real_user_monitoring/guide/enrich-and-control-rum-data
-[14]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
-[15]: /ja/logs/log_configuration/attributes_naming_convention/#user-related-attributes
+[4]: /ja/real_user_monitoring/browser/#setup
+[5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
+[7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
+[8]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
+[11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
+[12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
+[13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
+[14]: /ja/real_user_monitoring/guide/enrich-and-control-rum-data
+[15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
+[16]: /ja/logs/log_configuration/attributes_naming_convention/#user-related-attributes

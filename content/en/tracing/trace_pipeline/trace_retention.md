@@ -69,7 +69,7 @@ The intelligent retention filter is always active for your services, and it keep
 For 30 days, intelligent retention retains:
 
  - A representative selection of errors, ensuring error diversity (for example, response code 400s, 500s).
- - High latency in the `p75`, `p90`, and `p95` quartiles.
+ - High latency in the `p75`, `p90`, and `p95` percentiles.
  - All resources with any traffic that have associated traces in the past for any time window selection.
  - True maximum duration trace for each time window.
 

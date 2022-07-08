@@ -24,6 +24,9 @@ further_reading:
 - link: integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
   tag: ドキュメント
   text: Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリーム
+- link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
+  tag: ブログ
+  text: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
 kind: documentation
 title: AWS の概要
 ---
@@ -96,7 +99,7 @@ title: AWS の概要
 
 7. Stack の作成後、Datadog の AWS インテグレーションタイルに戻り、作成した新しいアカウントのボックスを見つけます。"Refresh to Check Status" をクリックすると、ページの上部に成功メッセージが表示され、関連する詳細とともに新しいアカウントがページ上に表示されます。
 
-    {{< img src="getting_started/integrations/new-account.png" alt="Datadog アカウントの AWS インテグレーションタイル。左側は、EC2 自動化オプションが有効になっていることを示しています。'Limit metric collection by AWS Service' というセクションがあり、Datadog の AWS インテグレーションに関連するサブインテグレーションが表示されます。これらは、ApiGateway、ApplicationELB、AppRunner、AppStream、AppSync、Athena、AutoScaling、Billing、Budgeting、CertificateManager、CloudFront、CloudHSM、CloudSearch、CodeBuild、Cognito、および Connect です。'Turning on sub-integrations can affect your CloudWatch API usage. See our AWS FAQ for more info.' (サブインテグレーションをオンにすると、CloudWatch API の使用に影響を与える可能性があります。詳しくは AWS FAQ をご覧ください) という見出しがあります。すべてのボックスがチェックされた状態で表示されています。この下に 'Other options' という項目があります。ここには、Collect CloudWatch alarms と Collect custom metrics の 2 つのチェックボックスがあります。どちらのオプションもチェックされています。ページの右側には、接続されている AWS アカウントの設定を表示するセクションがあります。アカウント ID は難読化された値として表示されます。AWS ロール名は、DatadogIntegrationRole と表示されます。">}}
+    {{< img src="getting_started/integrations/new-account.png" alt="Datadog アカウントの AWS インテグレーションタイルに Account: New Account セクションが表示され、CloudFormation とのインテグレーション設定が完了待ちである旨のメッセージが表示されます。ステータスを確認するための更新ボタンと、ステータスを確認する前に CloudFormation のスタック生成を確認するための警告が表示されています。">}}
 
    使用する AWS サービスや監視のユースケースに応じて、インテグレーションタイル内には収集するデータを指定するためのオプションが複数あります。例えば、AWS サービス、ネームスペース、またはタグに基づいてデータ収集を制限することができます。さらに、モニター通知をミュートすることを選択できます。例えば、手動でトリガーされたターミネーションや、[EC2 automuting][9] を有効にした自動スケーリングによってトリガーされたターミネーションなどです。必要に応じて、CloudWatch アラームを Datadog [イベントストリーム][11]に送るために [Alarm Collection][10] を有効にし、カスタムメトリクスを収集するかどうかを選択します。
 
@@ -176,7 +179,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 
 [Cloud SIEM の概要][50]を参照して、すぐに使える[ログ検出ルール][51]に照らし合わせてログを評価します。これらのルールはカスタマイズ可能で、脅威が検出されると[セキュリティシグナルエクスプローラー][52]でアクセス可能なセキュリティシグナルが生成されます。適切なチームに通知するために、[通知ルール][53]を使用して複数のルールにまたがる通知設定を構成することができます。
 
-#### CSPM
+#### クラウドセキュリティポスチャ管理(CSPM)
 
 [CSPM の概要][54]ガイドを使用して、クラウド環境における誤構成の検出と評価について学びます。リソース構成データは、すぐに利用可能なポスチャ管理[クラウド][55]および[インフラストラクチャー][56]の検出ルールに対して評価され、攻撃者のテクニックと潜在的な誤構成にフラグを立て、迅速な対応と修復を可能にします。
 
@@ -225,7 +228,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [36]: /ja/dashboards/#overview
 [37]: /ja/dashboards/functions/
 [38]: /ja/dashboards/correlations/
-[39]: /ja/monitors/create/types/
+[39]: /ja/monitors/create/#monitor-types
 [40]: /ja/monitors/notify/
 [41]: /ja/integrations/#cat-notification
 [42]: /ja/serverless

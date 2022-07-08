@@ -51,6 +51,7 @@ Datadog でモニターを作成するには
 {{< nextlink href="/monitors/create/types/outlier" >}}<u>Outlier</u>: あるグループのメンバーが他のメンバーとは異なる行動をとった場合に警告を発します。{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/process_check" >}}<u>Process Check</u>: process.up のサービスチェックで生成されるステータスを見ます。{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/real_user_monitoring" >}}<u>Real User Monitoring</u>: Datadog で収集した実ユーザーのデータを監視します。{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/slo" >}}<u>SLO Alerts</u>: SLO のエラーバジェットとバーンレートを監視します。{{< /nextlink >}}
 {{< nextlink href="/synthetics/guide/synthetic-test-monitors" >}}<u>Synthetic Monitoring</u>: Synthetic テスト実行からメトリクスの値やテストのステータスを監視します。{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/watchdog" >}}<u>Watchdog</u>: Watchdog が異常な動作を検出した際に通知を受けます。{{< /nextlink >}}
 {{< /whatsnext >}}

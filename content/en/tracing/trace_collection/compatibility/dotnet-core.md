@@ -15,6 +15,9 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
       tag: 'GitHub'
       text: 'Examples of Custom Instrumentation'
+    - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
+      tag: 'Blog'
+      text: 'Monitor containerized ASP.NET Core applications'
 ---
 
 
@@ -52,31 +55,32 @@ The .NET Tracer supports automatic instrumentation on the following architecture
 
 The [latest version of the .NET Tracer][4] can automatically instrument the following libraries:
 
-| Framework or library            | NuGet package                                                                             | Integration Name     |
-| ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
-| ADO.NET                         | All AdoNet integrations                                                                   | `AdoNet`             |
-| Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
-| ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                   | `AspNetCore`         |
-| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
-| Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
-| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
-| GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
-| gRPC                            | `Grpc.Net.Client`2.30.0+ (.NET Core 3.0+ only)</br>`Grpc.Core` 2.30.0+</br>`Grpc.AspNetCore` 2.30.0+                                            | `Grpc`               |
-| HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                    | `HttpMessageHandler` |
-| Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
-| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
-| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
-| Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
-| PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
-| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                  | `RabbitMQ`           |
-| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
-| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
-| Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                      | `ServiceRemoting`    |
-| SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                           | `Sqlite`             |
-| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+  | `SqlClient`     |
-| WCF (server)                    | built-in                                                                                  | `Wcf`                |
-| WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                | `WebRequest`         |
+| Framework or library            | NuGet package                                                                                        | Integration Name     |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------- |
+| ADO.NET                         | All AdoNet integrations                                                                              | `AdoNet`             |
+| Aerospike                       | `Aerospike.Client` 4.0.0+                                                                            | `Aerospike`          |
+| ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                              | `AspNetCore`         |
+| Azure Functions                 | `Microsoft.Azure.Webjobs` 3.0+                                                                       | `AzureFunctions`     |
+| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
+| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                               | `CosmosDb`           |
+| Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
+| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
+| GraphQL .NET                    | `GraphQL` 2.3.0+                                                                                     | `GraphQL`            |
+| gRPC                            | `Grpc.Net.Client`2.30.0+ (.NET Core 3.0+ only)</br>`Grpc.Core` 2.30.0+</br>`Grpc.AspNetCore` 2.30.0+ | `Grpc`               |
+| HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                               | `HttpMessageHandler` |
+| Kafka                           | `Confluent.Kafka` 1.4+                                                                               | `Kafka`              |
+| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                                         | `MongoDb`            |
+| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                                     | `MySql`              |
+| Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |
+| PostgreSQL                      | `Npgsql` 4.0+                                                                                        | `Npgsql`             |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                             | `RabbitMQ`           |
+| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                                         | `ServiceStackRedis`  |
+| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                                       | `StackExchangeRedis` |
+| Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                                 | `ServiceRemoting`    |
+| SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                                      | `Sqlite`             |
+| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
+| WCF (server)                    | built-in                                                                                             | `Wcf`                |
+| WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 

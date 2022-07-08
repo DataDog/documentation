@@ -139,6 +139,22 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 **注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
 
+
+## ジョブログ収集を有効にする (ベータ版)
+
+以下の GitLab バージョンは、ジョブログの収集をサポートしています。
+* GitLab.com (SaaS)
+* GitLab >= 14.8 (セルフホスティング) [ジョブログを格納するオブジェクトストレージ][6]を使用している場合のみ
+
+ジョブログの収集を有効にするには
+
+1. GitLab セルフホストまたは GitLab.com アカウントで `datadog_integration_logs_collection` [機能フラグ][7]を有効化します。これにより、Datadog インテグレーションにある `Enable logs collection` オプションが表示されます。
+2. `Enable logs collection` オプションを有効にし、変更を保存します。
+
+ジョブログは [Logs][8] 製品に収集され、CI Visibility 内で GitLab パイプラインと自動的に相関が取られます。
+
+<div class="alert alert-info"><strong>注</strong>: Logs は、CI Visibility とは別課金となります。</div>
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -148,3 +164,6 @@ kubectl exec -it <task-runner-pod-name> -- \
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
+[7]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[8]: /ja/logs/

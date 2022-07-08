@@ -142,7 +142,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### ランタイムセットアップコンシューマー
-Datadogは、ランタイムで `performance_schema.events_statements_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めします。
+Datadogは、ランタイムで `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めします。
 
 ```SQL
 DELIMITER $$
@@ -150,6 +150,7 @@ CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
     UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
@@ -203,6 +204,8 @@ instances:
 
 **注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
 
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][3]を参照してください。
+
 [Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
 
@@ -254,12 +257,14 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][2]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][3]でパスワードを環境変数として渡す方法をご確認ください。
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][2]を参照してください。
+
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][3]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][2]でパスワードを環境変数として渡す方法をご確認ください。
 
 
 [1]: /ja/agent/docker/integrations/?tab=docker
-[2]: /ja/agent/guide/secrets-management
-[3]: /ja/agent/faq/template_variables/
+[2]: /ja/agent/faq/template_variables/
+[3]: /ja/agent/guide/secrets-management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -313,7 +318,7 @@ instances:
 
 ### Kubernetes サービスアノテーションで構成する
 
-ファイルをマウントせずに、インスタンスのコンフィギュレーションをKubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 ```yaml
 apiVersion: v1
@@ -347,9 +352,12 @@ spec:
     targetPort: 3306
     name: mysql
 ```
+
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][4]を参照してください。
+
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、MySQL チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/

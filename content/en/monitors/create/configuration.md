@@ -88,7 +88,7 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 
 
 [1]: /monitors/guide/as-count-in-monitor-evaluations/
-[2]: /monitors/faq/what-are-recovery-thresholds/
+[2]: /monitors/guide/recovery-thresholds/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 

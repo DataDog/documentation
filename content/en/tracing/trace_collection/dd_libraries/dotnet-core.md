@@ -22,6 +22,9 @@ further_reading:
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
     text: "Microsoft Azure App Service extension"
+  - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
+    tag: 'Blog'
+    text: 'Monitor containerized ASP.NET Core applications'
   - link: "/tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources, and traces"

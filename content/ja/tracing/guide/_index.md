@@ -24,6 +24,8 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}トレースアプリケーションメトリクス{{< /nextlink >}}
     {{< nextlink href="tracing/guide/ddsketch_trace_metrics/" >}}APM の DDSketch ベースメトリクス{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/send_traces_to_agent_by_api/" >}}トレーシング API を使用して Agent にトレースを送信する{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/span_and_trace_id_format" >}}スパン ID、トレース ID の有効なフォーマット{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/trace-agent-from-source" >}}トレース Agent をソースからインストールする{{< /nextlink >}}
     {{< nextlink href="/developers/community/libraries/#apm-distributed-tracing-client-libraries" >}}トレーシングクライアントライブラリ{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープへのプライマリタグの設定{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray をいつ使用するかの決定{{< /nextlink >}}

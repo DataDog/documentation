@@ -5,6 +5,7 @@ aliases:
 - /ja/tracing/php/
 - /ja/tracing/setup/php
 - /ja/tracing/setup_overview/php
+- /ja/tracing/faq/php-tracer-manual-installation/
 code_lang: php
 code_lang_weight: 40
 further_reading:
@@ -49,7 +50,7 @@ PHP トレーサーのオープンソースに対する貢献に関しては、[
 {{< tabs >}}
 {{% tab "コンテナ" %}}
 
-1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します
+1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
 
 2. コンテナ化された環境でトレースを受信するように Agent を構成する方法については、それぞれの説明を参照してください。
 
@@ -131,8 +132,6 @@ PHP CLI のバイナリが NTS (non thread-safe) でビルドされ、Apache が
 </div>
 
 
-PHP インストーラーを使用できない場合は、[追加インストールオプション][6]をご覧ください。
-
 ## 自動インスツルメンテーション
 
 トレースはデフォルトで自動的に有効になります。拡張機能がインストールされると、**ddtrace** はアプリケーションをトレースし、Agent へトレースを送ります。
@@ -145,8 +144,6 @@ Datadog はそのままの状態ですべてのウェブフレームワークを
 * Web リクエスト用 URL やステータスレスポンスコード、またはデータベースアクセス用 SQL クエリなどの関連するトレースデータ
 * 未処理の例外（該当する場合スタックトレースを含む）
 * Web リクエストなど、システムを通過するトレースの合計数
-
-**注**: アプリケーションが Composer や `spl_autoload_register()` で登録されたオートローダーを使用しない場合、環境変数を `DD_TRACE_NO_AUTOLOADER=true` と設定し、自動インスツルメンテーションを有効にします。
 
 ## コンフィギュレーション
 
@@ -170,16 +167,20 @@ env[DD_SERVICE] = my-app
 ; または同等の INI 設定を使用
 php_value datadog.service my-app```
 
-サーバーコンフィギュレーション、仮想ホスト、ディレクトリ、または `.htaccess` ファイルから [`SetEnv`][7] を使用することも可能です。
+サーバーコンフィギュレーション、仮想ホスト、ディレクトリ、または `.htaccess` ファイルから [`SetEnv`][6] を使用することも可能です。
 
 ```text
 # バーチャルホストコンフィギュレーションで環境変数として
-SetEnv DD_TRACE_DEBUG true
+SetEnv DD_TRACE_DEBUG 1
 # バーチャルホストコンフィギュレーションで INI 設定として
 php_value datadog.service my-app
 ```
 
-### NGINX
+### NGINX と PHP-FPM
+
+<div class="alert alert-warning">
+<strong>注:</strong> PHP-FPM は <code>env[...]</code> ディレクティブの値として <code>false</code> をサポートしていません。<code>true</code> のかわりに <code>1</code> を、<code>false</code> のかわりに <code>0</code> を使用します。
+</div>
 
 NGINX の場合、php-fpm の `www.conf` ファイルの `env` ディレクティブを使用します。次に例を示します。
 
@@ -191,16 +192,17 @@ env[DD_AGENT_HOST] = $SOME_ENV
 ; プロセスへ渡す例 
 env[DD_SERVICE] = my-app
 ; または同等の INI 設定を使用
-php_value datadog.service my-app```
+php_value[datadog.service] = my-app
+```
 
-**注**: NGINX サーバーで APM を有効にしている場合、分散トレースが正常に機能するように `opentracing_fastcgi_propagate_context` 設定を適切に構成してください。詳細は、[NGINX APM コンフィギュレーション][8]を参照してください。
+**注**: NGINX サーバーで APM を有効にしている場合、分散トレースが正常に機能するように `opentracing_fastcgi_propagate_context` 設定を適切に構成してください。詳細は、[NGINX APM コンフィギュレーション][7]を参照してください。
 
 ### PHP CLI サーバー
 
 コマンドラインで設定しサーバーを起動します。
 
 ```text
-DD_TRACE_DEBUG=true php -d datadog.service=my-app -S localhost:8888
+DD_TRACE_DEBUG=1 php -d datadog.service=my-app -S localhost:8888
 ```
 
 ### 環境変数コンフィギュレーション
@@ -214,12 +216,12 @@ Agent ホスト名。
 
 `DD_AUTOFINISH_SPANS`
 : **INI**: `datadog.autofinish_spans`<br>
-**デフォルト**: `false`<br>
+**デフォルト**: `0`<br>
 トレーサーがフラッシュした際にスパンが自動的に終了するかどうか。
 
 `DD_DISTRIBUTED_TRACING`
 : **INI**: `datadog.distributed_tracing`<br>
-**デフォルト**: `true`<br>
+**デフォルト**: `1`<br>
 分散型トレーシングを有効にするかどうか。
 
 `DD_ENV`
@@ -229,12 +231,12 @@ Agent ホスト名。
 
 `DD_PROFILING_ENABLED`
 : **INI**: Not available<br>
-**デフォルト**: `false`<br>
-Datadog プロファイラーを有効にします。バージョン `0.69.0` に追加されています。[PHP プロファイラーの有効化][9]を参照。
+**デフォルト**: `0`<br>
+Datadog プロファイラーを有効にします。バージョン `0.69.0` に追加されています。[PHP プロファイラーの有効化][8]を参照。
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: Not available<br>
-**デフォルト**: `false`<br>
+**デフォルト**: `0`<br>
 試験的 CPU プロファイルタイプを有効にします。バージョン `0.69.0` に追加されています。
 
 `DD_PROFILING_LOG_LEVEL`
@@ -244,7 +246,7 @@ Datadog プロファイラーを有効にします。バージョン `0.69.0` �
 
 `DD_PRIORITY_SAMPLING`
 : **INI**: `datadog.priority_sampling`<br>
-**デフォルト**: `true`<br>
+**デフォルト**: `1`<br>
 優先度付きサンプリングを有効にするかどうか。
 
 `DD_SERVICE`
@@ -289,28 +291,28 @@ Agent の URL で、`DD_AGENT_HOST` および `DD_TRACE_AGENT_PORT` よりも優
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
-**デフォルト**: `false`<br>
-すべてのスパンが終了されたタイミングでトレーサーを自動的にフラッシュします。[長時間実行されるプロセス](#long-running-cli-scripts)をトレースするために、`DD_TRACE_GENERATE_ROOT_SPAN=0` と併せて `true` に設定されます。
+**デフォルト**: `0`<br>
+すべてのスパンが終了されたタイミングでトレーサーを自動的にフラッシュします。[長時間実行されるプロセス](#long-running-cli-scripts)をトレースするために、`DD_TRACE_GENERATE_ROOT_SPAN=0` と併せて `1` に設定されます。
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
-**デフォルト**: `false`<br>
+**デフォルト**: `0`<br>
 CLI から送られた PHP スクリプトのトレーシングを有効にします。 [CLI スクリプトのトレーシング](#tracing-cli-scripts)を参照してください。
 
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
-**デフォルト**: `false`<br>
-デバッグモードを有効にします。`true` の場合、ログメッセージは INI 設定の `error_log` で設定されたデバイスまたはファイルに送信されます。実際の `error_log` の値は PHP-FPM/Apache のコンフィギュレーションファイルで上書きされる可能性があるため、`php -i` の出力とは異なる場合があります。
+**デフォルト**: `0`<br>
+デバッグモードを有効にします。`1` の場合、ログメッセージは INI 設定の `error_log` で設定されたデバイスまたはファイルに送信されます。実際の `error_log` の値は PHP-FPM/Apache のコンフィギュレーションファイルで上書きされる可能性があるため、`php -i` の出力とは異なる場合があります。
 
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
-**デフォルト**: `true`<br>
+**デフォルト**: `1`<br>
 トレーサーをグローバルに有効化します
 
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
-**デフォルト**: `true`<br>
-トップレベルのスパンを自動生成します。[長時間実行されるプロセス](#long-running-cli-scripts)をトレースするために、`DD_TRACE_AUTO_FLUSH_ENABLED=1` と併せて `false` に設定されます。
+**デフォルト**: `1`<br>
+トップレベルのスパンを自動生成します。[長時間実行されるプロセス](#long-running-cli-scripts)をトレースするために、`DD_TRACE_AUTO_FLUSH_ENABLED=1` と併せて `0` に設定されます。
 
 `DD_TAGS`
 : **INI**: `datadog.tags`<br>
@@ -324,22 +326,22 @@ CLI から送られた PHP スクリプトのトレーシングを有効にし�
 
 `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
 : **INI**: `datadog.trace.http_client_split_by_domain`<br>
-**デフォルト**: `false`<br>
+**デフォルト**: `0`<br>
 HTTP リクエストのサービス名を `host-<hostname>` に設定します。例: `https://datadoghq.com` に対する `curl_exec()` コールのサービス名は、デフォルトのサービス名 `curl` ではなく `host-datadoghq.com` となります。
 
 `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
 : **INI**: `datadog.trace.redis_client_split_by_host`<br>
-**デフォルト**: `false`<br>
+**デフォルト**: `0`<br>
 Redis クライアントオペレーションのサービス名を `redis-<hostname>` に設定します。バージョン `0.51.0` に追加されています　
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : **INI**: `datadog.trace.<INTEGRATION>_enabled`<br>
-**デフォルト**: `true`<br>
+**デフォルト**: `1`<br>
 インテグレーションを有効または無効にします。すべてのインテグレーションはデフォルトで有効になっています ([インテグレーション名](#integration-names)を参照してください)。バージョン `0.47.1` 以前の場合、このパラメーターは `DD_INTEGRATIONS_DISABLED` に相当し、無効にするインテグレーションの CSV リストを取得します (例: `curl,mysqli`)。
 
 `DD_TRACE_MEASURE_COMPILE_TIME`
 : **INI**: `datadog.trace.measure_compile_time`<br>
-**デフォルト**: `true`<br>
+**デフォルト**: `1`<br>
 リクエストのコンパイル時間 (ミリ秒) をトップレベルのスパン上に記録します。
 
 `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
@@ -359,8 +361,8 @@ ID に対応するパスフラグメントを特定する正規表現のCSV ([�
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **INI**: `datadog.trace.retain_thread_capabilities`<br>
-**デフォルト**: `false`<br>
-Linux で動作します。`true` に設定すると、有効なユーザー ID を変更しても Datadog のバックグラウンドスレッド機能を維持することができます。このオプションはほとんどの設定には影響しませんが、一部のモジュールで影響が出る場合があります。現時点で Datadog が確認している限りでは、[Apache の mod-ruid2][10] で `setuid()` や類似の syscall を呼び出した場合に影響が生じ、クラッシュや機能の不具合につながる可能性があります。<br><br>
+**デフォルト**: `0`<br>
+Linux で動作します。`true` に設定すると、有効なユーザー ID を変更しても Datadog のバックグラウンドスレッド機能を維持することができます。このオプションはほとんどの設定には影響しませんが、一部のモジュールで影響が出る場合があります。現時点で Datadog が確認している限りでは、[Apache の mod-ruid2][9] で `setuid()` や類似の syscall を呼び出した場合に影響が生じ、クラッシュや機能の不具合につながる可能性があります。<br><br>
 **注:** このオプションを有効にすると、セキュリティが損なわれる可能性があります。このオプションは単独ならセキュリティ上のリスクをもたらす心配はありません。しかし、Web サーバーや PHP がフル機能で起動されている場合はバックグラウンドスレッドが元の機能を維持しているため、攻撃者は PHP や Web サーバーの脆弱性を悪用して比較的容易に権限を昇格できる可能性があります。Datadog では、`setcap` ユーティリティを使用して Web サーバーの機能を制限することをお勧めしています。
 
 `DD_TRACE_SAMPLE_RATE`
@@ -380,7 +382,7 @@ JSON でエンコードされた文字列で、サンプリングレートを構
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
-**デフォルト**: `true`<br>
+**デフォルト**: `1`<br>
 リソース名として URL を有効にします ([リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri)を参照してください)。
 
 `DD_VERSION`
@@ -440,7 +442,7 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 | `/api/v2/b7a992e033004030861784553b11c993/123` | `GET /api/v2/?/?`  |
 | `/book/0dbf3596`                               | `GET /book/?`      |
 
-`DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=false` を使用してこの機能をオフにすることも可能です。
+`DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=0` を使用してこの機能をオフにすることも可能です。
 
 ##### URL からリソースへのマッピングをカスタマイズ
 
@@ -478,7 +480,7 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 ### `open_basedir` 制限
 
-[`open_basedir`][11] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
+[`open_basedir`][10] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
 アプリケーションを Docker コンテナで実行する場合は、許可されるディレクトリにパス `/proc/self` も追加する必要があります。
 
 ## CLI スクリプトのトレーシング
@@ -487,10 +489,10 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 短時間実行のスクリプトは、通常、数秒から数分程度実行され、スクリプトが実行されるたびに 1 つのトレースを受け取ります。
 
-デフォルトでは、コマンドラインから実行される PHP スクリプトのトレースは無効です。`DD_TRACE_CLI_ENABLED` を `true` に設定することで有効になります。
+デフォルトでは、コマンドラインから実行される PHP スクリプトのトレースは無効です。`DD_TRACE_CLI_ENABLED` を `1` に設定することで有効になります。
 
 ```
-$ export DD_TRACE_CLI_ENABLED=true
+$ export DD_TRACE_CLI_ENABLED=1
 
 # オプションとして、エージェントのホストとポートが localhost と 8126 と異なる場合はそれぞれ設定します
 $ export DD_AGENT_HOST=agent
@@ -525,13 +527,13 @@ $ php script.php
 
 長時間実行されるスクリプトは、数時間から数日にわたって実行されます。通常、このようなスクリプトは、新しい受信メッセージの処理やデータベースのテーブルに追加された新しい行の処理など、特定のタスクを繰り返し実行します。これにより、メッセージの処理など「作業単位」ごとに 1 つのトレースが生成されることが期待されます。
 
-デフォルトでは、コマンドラインから実行される PHP スクリプトのトレースは無効です。`DD_TRACE_CLI_ENABLED` を `true` に設定することで有効になります。
+デフォルトでは、コマンドラインから実行される PHP スクリプトのトレースは無効です。`DD_TRACE_CLI_ENABLED` を `1` に設定することで有効になります。
 
 ```
-$ export DD_TRACE_CLI_ENABLED=true
+$ export DD_TRACE_CLI_ENABLED=1
 # この設定では、メソッドの実行が終了すると同時に、各「作業単位」のトレースが送信されます。
-$ export DD_TRACE_GENERATE_ROOT_SPAN=false
-$ export DD_TRACE_AUTO_FLUSH_ENABLED=true
+$ export DD_TRACE_GENERATE_ROOT_SPAN=0
+$ export DD_TRACE_AUTO_FLUSH_ENABLED=1
 
 # オプションとしてサービス名や env などを設定します...
 $ export DD_SERVICE=my_service
@@ -730,7 +732,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### Sury Debian DPA から PHP をインストールした場合
 
-PHP を [Sury Debian DPA][12] からインストールした場合は、DPA でデバッグデバッグシンボルを入手することができます。たとえば、PHP-FPM 7.2 の場合は次のようになります。
+PHP を [Sury Debian DPA][11] からインストールした場合は、DPA でデバッグデバッグシンボルを入手することができます。たとえば、PHP-FPM 7.2 の場合は次のようになります。
 
 ```
 apt update
@@ -739,7 +741,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### 異なるパッケージから PHP をインストールした場合
 
-Debian プロジェクトでは、wiki ページに[デバッグシンボルのインストール手順][13]を掲載しています。
+Debian プロジェクトでは、wiki ページに[デバッグシンボルのインストール手順][12]を掲載しています。
 
 `/etc/apt/sources.list` ファイルを編集します。
 
@@ -789,7 +791,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 ##### `ppa:ondrej/php` から PHP をインストールした場合　
 
-PHP を [`ppa:ondrej/php`][14] からインストールした場合は、`main/debug` コンポーネントを追加して apt ソースファイル `/etc/apt/sources.list.d/ondrej-*.list` を編集します。
+PHP を [`ppa:ondrej/php`][13] からインストールした場合は、`main/debug` コンポーネントを追加して apt ソースファイル `/etc/apt/sources.list.d/ondrej-*.list` を編集します。
 
 以前:
 
@@ -825,7 +827,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-`-dbg` および `-dbgsym` パッケージが見つからない場合は、`ddebs` リポジトリを有効にしてください。`ddebs` から[デバッグシンボルをインストールする方法][15]についての詳細は、Ubuntu のドキュメントを参照してください。
+`-dbg` および `-dbgsym` パッケージが見つからない場合は、`ddebs` リポジトリを有効にしてください。`ddebs` から[デバッグシンボルをインストールする方法][14]についての詳細は、Ubuntu のドキュメントを参照してください。
 
 たとえば、Ubuntu 18.04 以降の場合、`ddebs` リポジトリを有効にします。
 
@@ -835,7 +837,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-署名キーをインポートします ([署名キーが正しい][16]ことを確認してください)。
+署名キーをインポートします ([署名キーが正しい][15]ことを確認してください)。
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -912,7 +914,7 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-結果として得られる Valgrind のトレースは、デフォルトでは標準エラーに出力されますが、[公式ドキュメント][17]に従って別のターゲットに出力することもできます。想定される出力は、PHP-FPM プロセスの場合、以下の例のようになります。
+結果として得られる Valgrind のトレースは、デフォルトでは標準エラーに出力されますが、[公式ドキュメント][16]に従って別のターゲットに出力することもできます。想定される出力は、PHP-FPM プロセスの場合、以下の例のようになります。
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -987,15 +989,14 @@ Apache の場合は、次を実行します。
 [3]: /ja/tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: https://app.datadoghq.com/apm/services
-[6]: /ja/tracing/faq/php-tracer-manual-installation
-[7]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[8]: /ja/tracing/setup/nginx/#nginx-and-fastcgi
-[9]: /ja/tracing/profiler/enabling/php/
-[10]: https://github.com/mind04/mod-ruid2
-[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
-[12]: https://packages.sury.org/php/
-[13]: https://wiki.debian.org/HowToGetABacktrace
-[14]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[15]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
-[17]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[6]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[7]: /ja/tracing/setup/nginx/#nginx-and-fastcgi
+[8]: /ja/tracing/profiler/enabling/php/
+[9]: https://github.com/mind04/mod-ruid2
+[10]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[11]: https://packages.sury.org/php/
+[12]: https://wiki.debian.org/HowToGetABacktrace
+[13]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[14]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[15]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[16]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment

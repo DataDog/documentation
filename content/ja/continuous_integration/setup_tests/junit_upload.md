@@ -205,6 +205,10 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 
 これらのタグはすべて任意であり、指定したものだけが環境構成の区別に使用されます。
 
+`test.bundle`
+: テストスイートのグループを個別に実行するために使用します。<br/>
+**例**: `ApplicationUITests`、`ModelTests`
+
 `os.platform`
 : オペレーティングシステムの名称。<br/>
 **例**: `windows`、`linux`、`darwin`
@@ -243,10 +247,6 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 : テストするデバイスの名前。<br/>
 **例**: `iPhone 12 Pro Simulator`、`iPhone 13 (QA team)`
 
-<!-- TODO: バックエンドに追加された後、コメント解除する
-`test.bundle`
-: テストスイートのグループを個別に実行するために使用します。<br/>
-**例**: `ApplicationUITests`、`ModelTests` -->
 
 ## `<property>` 要素によるメタデータの提供
 

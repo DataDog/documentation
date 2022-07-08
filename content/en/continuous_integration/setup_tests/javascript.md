@@ -45,8 +45,8 @@ If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` 
 If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
 
 
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
+[1]: /agent
+[2]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
@@ -87,93 +87,29 @@ yarn add --dev dd-trace
 
 For more information, see the [JavaScript tracer installation docs][5].
 
+
 ## Instrument your tests
 
 {{< tabs >}}
-{{% tab "Jest" %}}
-
-1. Configure a custom [`testEnvironment`][1] in your `jest.config.js` or however you are configuring `jest`:
-
-```javascript
-module.exports = {
-  // ...
-  // It may be another route. It refers to the file below.
-  testEnvironment: '<rootDir>/testEnvironment.js',
-  // ...
-}
-```
-
-2. In `testEnvironment.js`:
-
-```javascript
-
-// Only activates test instrumentation on CI
-if (process.env.DD_ENV === 'ci') {
-  require('dd-trace/ci/jest/env')
-}
-// jest-environment-jsdom is an option too
-module.exports = require('jest-environment-node')
-```
-
-### Jest@28
-
-If you are using `jest@28` and `jest-environment-node`, update your environment following the [`jest` documentation][1]:
-
-```javascript
-
-if (process.env.DD_ENV === 'ci') {
-  require('dd-trace/ci/jest/env')
-}
-
-module.exports = require('jest-environment-node').default
-```
-
-Since `jest-environment-jsdom` is not included in `jest@28`, you need to install it separately. Also, `jest>=28` is only supported from `dd-trace>=2.7.0`.
-
-<div class="alert alert-warning"><strong>Note</strong>: <code>jest-environment-node</code>, <code>jest-environment-jsdom</code>, <code>jest-jasmine2</code>, and <code>jest-circus</code> (as of Jest 27) are installed together with <code>jest</code>, so they do not normally appear in your <code>package.json</code>. If you've extracted any of these libraries in your <code>package.json</code>, make sure the installed versions are the same as the one of <code>jest</code>.</div>
-
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-```bash
-DD_ENV=ci DD_SERVICE=my-javascript-app npm test
-```
-
-
-[1]: https://jestjs.io/docs/en/configuration#testenvironment-string
-{{% /tab %}}
-
-{{% tab "Mocha" %}}
-
-Add `--require dd-trace/ci/init` to the run command for your `mocha` tests, for example in your `package.json`:
-
-```json
-"scripts": {
-  "test": "mocha --require dd-trace/ci/init"
-},
-```
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-```bash
-DD_ENV=ci DD_SERVICE=my-javascript-app npm test
-```
-
-{{% /tab %}}
-{{% tab "Cucumber" %}}
-
-Add `--require-module dd-trace/ci/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
-
-{{< code-block lang="json" filename="package.json" >}}
-"scripts": {
-  "test": "cucumber-js --require-module=dd-trace/ci/init"
-},
-{{< /code-block >}}
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+{{% tab "Jest/Mocha/Cucumber" %}}
+Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci DD_SERVICE=my-javascript-app npm test
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+{{< /code-block >}}
+
+### Using Yarn >=2
+
+If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+You can fix it by setting `NODE_OPTIONS` to the following:
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -252,7 +188,7 @@ module.exports = defineConfig({
 {{< /code-block >}}
 
 
-### Add extra tags
+#### Add extra tags to your Cypress test
 
 To add additional information to your tests, such as the team owner, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
 
@@ -269,11 +205,9 @@ it('renders a hello world', () => {
 })
 {{< /code-block >}}
 
-
-### RUM integration
+#### Cypress - RUM integration
 
 If the browser application being tested is instrumented using [RUM][5], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][6] guide.
-
 
 [1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [2]: https://docs.cypress.io/guides/references/configuration#cypress-json
@@ -282,7 +216,9 @@ If the browser application being tested is instrumented using [RUM][5], your Cyp
 [5]: /real_user_monitoring/browser/#setup
 [6]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
+
 {{< /tabs >}}
+
 
 ## Configuration settings
 
@@ -357,34 +293,17 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
-## Agentless (Beta)
-
-To instrument your test suite without requiring an Agent, configure the following environment variables:
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED` (Required)
-: Enables or disables Agentless mode.<br/>
-**Default**: `false`
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][7] used to upload the test results.<br/>
-**Default**: `(empty)`
-
-Additionally, configure which [Datadog site][6] you want to send data to. Your Datadog site is: {{< region-param key="dd_site" >}}.
-
-`DD_SITE` (Required)
-: The [Datadog site][8] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][9] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][10].
+[Mocha >=9.0.0][7] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][8].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][12] guide.
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][10] guide.
+
+
 
 ## Best practices
 
@@ -403,14 +322,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][13] instead:
+And use [`test.each`][11] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][14]:
+For `mocha`, use [`mocha-each`][12]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -429,17 +348,16 @@ When you use this approach, both the testing framework and CI Visibility can tel
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/facebook/jest/tree/master/packages/jest-circus
-[2]: https://github.com/facebook/jest/tree/master/packages/jest-jasmine2
+
+[1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
+[2]: https://github.com/facebook/jest/tree/main/packages/jest-jasmine2
 [3]: https://jestjs.io/docs/configuration#testrunner-string
 [4]: https://github.com/DataDog/dd-trace-js
 [5]: /tracing/setup_overview/setup/nodejs
 [6]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: /getting_started/site/
-[9]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[11]: /real_user_monitoring/browser/
-[12]: /continuous_integration/guides/rum_integration/
-[13]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[14]: https://github.com/ryym/mocha-each
+[7]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[8]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[9]: /real_user_monitoring/browser/
+[10]: /continuous_integration/guides/rum_integration/
+[11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[12]: https://www.npmjs.com/package/mocha-each

@@ -102,6 +102,8 @@ With the following definitions:
 
 ### Duration
 
+<div class="alert alert-warning">This method of using trace metrics is outdated. Instead, <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> is recommended.</div>
+
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** [LEGACY] Measure the total time for a collection of spans within a time interval, including child spans seen in the collecting service. This metric used to generate the "% exec time for downstream services" graph. When `trace.<SPAN_NAME>.duration` is divided by `trace.<SPAN_NAME>.hits`, the result can yield an average latency, but this is not the recommended approach for calculating the average latency. Instead, refer to the [Latency Distribution](#latency-distribution) section for average latency calculations. <br>
@@ -109,6 +111,8 @@ With the following definitions:
 **Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 ### Duration by
+
+<div class="alert alert-warning">This method of using trace metrics is outdated. Instead, <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> is recommended.</div>
 
 `trace.<SPAN_NAME>.duration.by_http_status`
 : **Prerequisite:** This metric exists for HTTP/WEB APM services if http metadata exists.<br>

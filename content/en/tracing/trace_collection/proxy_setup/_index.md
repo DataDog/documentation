@@ -95,13 +95,13 @@ The following settings are required to enable Datadog APM in Envoy:
           typed_config:
             "@type": type.googleapis.com/envoy.extensions.request_id.uuid.v3.UuidRequestIdConfig
             use_request_id_for_trace_sampling: false
-        tracing: 
+        tracing:
           provider:
             name: envoy.tracers.datadog
             typed_config:
               "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
               collector_cluster: datadog_agent
-              service_name: envoy-v1.19 
+              service_name: envoy-v1.19
    ```
    The `collector_cluster` value must match the name provided for the Datadog Agent cluster. The `service_name` can be changed to a meaningful value for your usage of Envoy.
 
@@ -212,9 +212,69 @@ stats_config:
       - prefix: "cluster.datadog_agent."
 ```
 
+## Sampling
+
+To control the volume of traces starting from Envoy that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Envoy are sent.
+
+To use the [Datadog Agent calculated sampling rates][2] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
+
+```
+DD_TRACE_SAMPLING_RULES=[]
+```
+
+You can also define an explicit sampling rate between `0.0` (0%) and `1.0` (100%) by service. For example, to set the sample rate to 10% for service `envoy-proxy`:
+
+```
+DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
+```
+
+
+To configure your sampling rate with `DD_TRACE_SAMPLING_RULES`, use one of the following methods , depending on how you run Envoy:
+
+- **By shell script**: Set the environment variable immediately before executing `envoy` in the script:
+
+  ```
+  #!/bin/sh
+  export DD_TRACE_SAMPLING_RULES=[]
+  envoy -c envoy-config.yaml
+  ```
+
+- **In a Docker Compose setup**: Set the environment variable in the `environment` section of the service definition:
+
+  ```
+  services:
+    envoy:
+      image: envoyproxy/envoy:v1.19-latest
+      entrypoint: []
+      command:
+          - envoy
+          - -c
+          - /etc/envoy/envoy.yaml
+      volumes:
+          - './envoy.yaml:/etc/envoy/envoy.yaml:ro'
+      environment:
+          - DD_TRACE_SAMPLING_RULES=[]
+  ```
+
+- **As a container inside a Kubernetes pod**: specify the environment variable in the `env` section of the corresponding `containers` entry of the pod's spec:
+
+  ```
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: envoy
+  spec:
+    containers:
+    - name: envoy
+      image: envoyproxy/envoy:v1.20-latest
+      env:
+      - name: DD_TRACE_SAMPLING_RULES
+        value: "[]"
+  ```
+
 ## Environment variables
 
-The available [environment variables][2] depend on the version of the C++ tracer embedded in Envoy.
+The available [environment variables][3] depend on the version of the C++ tracer embedded in Envoy.
 
 **Note**: The variables `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT` and `DD_TRACE_AGENT_URL` do not apply to Envoy, as the address of the Datadog Agent is configured using the `cluster` settings.
 
@@ -233,7 +293,8 @@ The available [environment variables][2] depend on the version of the C++ tracer
 | v1.9 | v0.3.6 |
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
-[2]: /tracing/setup/cpp/#environment-variables
+[2]: /tracing/trace_ingestion/mechanisms#in-the-agent
+[3]: /tracing/setup/cpp/#environment-variables
 {{% /tab %}}
 {{% tab "NGINX" %}}
 
@@ -292,7 +353,7 @@ The `http` block enables the OpenTracing module and loads the Datadog tracer:
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/nginx/dd-config.json;
 ```
 
-The `log_format with_trace_id` block is for correlating logs and traces. See the [example NGINX config][5] file for the complete format. The `$opentracing_context_x_datadog_trace_id` value captures the trace ID, and `$opentracing_context_x_datadog_parent_id` captures the span ID. 
+The `log_format with_trace_id` block is for correlating logs and traces. See the [example NGINX config][5] file for the complete format. The `$opentracing_context_x_datadog_trace_id` value captures the trace ID, and `$opentracing_context_x_datadog_parent_id` captures the span ID.
 
 The `location` block within the server where tracing is desired should add the following:
 
@@ -372,6 +433,36 @@ To set a different service name per Ingress using annotations:
 ```
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
+### Sampling
+
+To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Nginx are sent. The Kubernetes Nginx ingress controller uses [v1.2.1][8] of the `dd-opentracing-cpp` library).
+
+To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
+
+```
+DD_TRACE_SAMPLING_RULES=[]
+```
+
+To configure `DD_TRACE_SAMPLING_RULES`, add a `main-snippet` entry in the `data` section of the controller's ConfigMap:
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+	  app.kubernetes.io/name: ingress-nginx
+	  app.kubernetes.io/instance: ingress-nginx
+	  app.kubernetes.io/component: controller
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  enable-opentracing: "true"
+  datadog-collector-host: $HOST_IP
+  http-snippet: |
+	  opentracing_trace_locations off;
+  main-snippet: |
+	  env DD_TRACE_SAMPLING_RULES=[];
+```
 
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
@@ -380,6 +471,8 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 [5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
 [6]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
 [7]: https://github.com/kubernetes/ingress-nginx
+[8]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
+[9]: /tracing/trace_ingestion/mechanisms#in-the-agent
 {{% /tab %}}
 {{% tab "Istio" %}}
 
@@ -393,7 +486,7 @@ To learn more about monitoring your Istio environment with Datadog, [see the Ist
 
 ## Configuration
 
-Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters. 
+Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
 
 ### Datadog Agent installation
 
@@ -437,9 +530,32 @@ template:
 For [CronJobs][8], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
 of the higher-level `CronJob`.
 
+### Sampling
+
+To control the volume of traces starting from Istio that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent. 
+
+To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
+
+```
+DD_TRACE_SAMPLING_RULES=[]
+```
+
+To configure `DD_TRACE_SAMPLING_RULES`, in each deployment whose namespace is labeled `istio-injection=enabled`, set the environment variable as part of the `apm.datadoghq.com/env` annotation of the deployment spec template:
+```
+apiVersion: apps/v1
+...
+kind: Deployment
+...
+spec:
+  template:
+    metadata:
+      annotations:
+        apm.datadoghq.com/env: '{"DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1", "DD_TRACE_SAMPLING_RULES": "[]"}'
+```
+
 ### Environment variables
 
-Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation. This is unique for deployments employing Istio sidecars and is set in addition to the [labels for unified service tagging][9].
+Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation. This is unique for deployments employing Istio sidecars and is set in addition to the [labels for unified service tagging][10].
 ```yaml
 apiVersion: apps/v1
 ...
@@ -452,7 +568,7 @@ spec:
         apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1"}'
 ```
 
-The available [environment variables][10] depend on the version of the C++ tracer embedded in the Istio sidecar's proxy.
+The available [environment variables][11] depend on the version of the C++ tracer embedded in the Istio sidecar's proxy.
 
 | Istio Version | C++ Tracer Version |
 |---------------|--------------------|
@@ -502,7 +618,7 @@ spec:
 ```
 
 Automatic Protocol Selection may determine that traffic between the sidecar and Agent is HTTP, and enable tracing.
-This can be disabled using [manual protocol selection][11] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
+This can be disabled using [manual protocol selection][12] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
 If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specification.
 
 
@@ -516,9 +632,10 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [6]: https://istio.io/docs/setup/install/istioctl/
 [7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
 [8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[9]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
-[10]: /tracing/setup/cpp/#environment-variables
-[11]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[9]: /tracing/trace_ingestion/mechanisms#in-the-agent
+[10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
+[11]: /tracing/setup/cpp/#environment-variables
+[12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 {{% /tab %}}
 {{< /tabs >}}
 

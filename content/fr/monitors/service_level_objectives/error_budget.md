@@ -5,10 +5,6 @@ kind: documentation
 title: Alertes de marge d'erreur
 ---
 
-<div class="alert alert-warning">
-Cette fonctionnalité est en version bêta ouverte. Envoyez un e-mail à <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> si vous avez des questions ou des retours.
-</div>
-
 ## Présentation
 
 Les alertes de marge d'erreur de SLO sont basées sur des seuils et vous informent lorsqu'un certain pourcentage de votre marge d'erreur de SLO a été utilisé. Par exemple, vous pouvez recevoir une alerte si 75 % de la marge d'erreur sur 7 jours a été utilisée, et un avertissement si 50 % de la marge a été utilisée (facultatif).
@@ -79,15 +75,9 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-## Restrictions bêta
-
-- Les alertes sont uniquement disponibles pour les SLO basés sur des métriques, ou les SLO basés sur des monitors uniquement composés de types de monitors de métrique (les monitors Metric, Integration, APM Metric, Anomaly, Forecast ou Outliner).
-- Le statut d'alerte d'un monitor de SLO est disponible dans l'onglet **Alerts** du volet des détails du SLO ou sur la page [Manager Monitors][7].
-
 [1]: /fr/monitors/service_level_objectives/metric/
 [2]: /fr/monitors/service_level_objectives/monitor/
 [3]: https://app.datadoghq.com/slo
 [4]: /fr/monitors/notify/
 [5]: /fr/api/v1/monitors/#create-a-monitor
 [6]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
-[7]: https://app.datadoghq.com/monitors/manage

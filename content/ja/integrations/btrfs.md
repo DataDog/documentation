@@ -9,17 +9,18 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md
 display_name: Btrfs
 draft: false
 git_integration_title: btrfs
 guid: 54f9329a-8270-4f5a-bd4b-cd169abfc791
 integration_id: btrfs
 integration_title: Btrfs
+integration_version: 1.14.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -31,9 +32,12 @@ public_title: Datadog-Btrfs インテグレーション
 short_description: Btrfs ボリュームに空きがなくなる前に対応できるように使用状況を監視。
 support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ![BTRFS メトリクス][1]
 
 ## 概要

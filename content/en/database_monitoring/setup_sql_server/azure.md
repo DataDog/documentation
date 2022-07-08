@@ -17,8 +17,6 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">Database Monitoring for SQL Server is in private beta. Contact your Customer Success Manager to request access to the beta.</div>
-
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 Do the following steps to enable Database Monitoring with your database:
@@ -56,7 +54,36 @@ Grant the Agent access to each additional Azure SQL Database on this server:
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
+When configuring the Datadog Agent, specify one check instance for each application database located on a given single Azure SQL DB server. Do not include `master` and other [system databases][2]. The Datadog Agent must connect directly to each application database in Azure SQL DB because each database is running in an isolated compute environment. This also means that `database_autodiscovery` does not work for Azure SQL DB, so it should not be enabled.
+
+```yaml
+init_config:
+instances:
+  # database_1
+  - host: '<SERVER_NAME>.database.windows.net,1433'
+    database: '<DATABASE_1>'
+    reported_hostname: '<SERVER_NAME>.database.windows.net/<DATABASE_1>'
+    username: datadog
+    password: '<PASSWORD>'
+    azure:
+      deployment_type: 'sql_database'
+      name: '<SERVER_NAME>'
+
+  # database_2
+  - host: '<SERVER_NAME>.database.windows.net,1433'
+    database: '<DATABASE_2>'
+    reported_hostname: '<SERVER_NAME>.database.windows.net/<DATABASE_2>'
+    username: datadog
+    password: '<PASSWORD>'
+    azure:
+      deployment_type: 'sql_database'
+      name: '<SERVER_NAME>'
+```
+
+See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.
+
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
+[2]: https://docs.microsoft.com/en-us/sql/relational-databases/databases/system-databases
 {{% /tab %}}
 
 {{% tab "Azure SQL Managed Instance" %}}
@@ -116,7 +143,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: adodbapi
-    provider: MSOLEDBSQL
+    adoprovider: MSOLEDBSQL
     tags:  # optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -126,48 +153,51 @@ instances:
       name: '<YOUR_INSTANCE_NAME>'
 ```
 
-To use [Windows Authentication][3] set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
+See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.
 
-The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][4].
+To use [Windows Authentication][4], set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
+
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
 
 ### Supported Drivers
 
 #### Microsoft ADO
 
-The recommended [ADO][5] provider is [Microsoft OLE DB Driver][6]. Ensure the driver is installed on the host where the agent is running.
+The recommended [ADO][6] provider is [Microsoft OLE DB Driver][7]. Ensure the driver is installed on the host where the agent is running.
 ```yaml
 connector: adodbapi
-provider: MSOLEDBSQL
+adoprovider: MSOLEDBSQL
 ```
 
 The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
 
 #### ODBC
 
-The recommended ODBC driver is [Microsoft ODBC Driver][7]. Ensure the driver is installed on the host where the Agent is running.
+The recommended ODBC driver is [Microsoft ODBC Driver][8]. Ensure the driver is installed on the host where the Agent is running.
 
 ```yaml
 connector: odbc
 driver: '{ODBC Driver 17 for SQL Server}'
 ```
 
-Once all Agent configuration is complete, [Restart the Datadog Agent][8].
+Once all Agent configuration is complete, [restart the Datadog Agent][9].
 
 ### Validate
 
-[Run the Agent's status subcommand][9] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][10] page in Datadog to get started.
+[Run the Agent's status subcommand][10] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][11] page in Datadog to get started.
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[3]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
-[4]: /getting_started/tagging/unified_service_tagging
-[5]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
-[6]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
-[7]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[8]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: /agent/guide/agent-commands/#agent-status-and-information
-[10]: https://app.datadoghq.com/databases
+[3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
+[4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
+[5]: /getting_started/tagging/unified_service_tagging
+[6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
+[7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
+[8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
+[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/guide/agent-commands/#agent-status-and-information
+[11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux Host" %}}
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
@@ -197,22 +227,25 @@ instances:
       name: '<YOUR_INSTANCE_NAME>'
 ```
 
-The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][4].
+See the [SQL Server integration spec][4] for additional information on setting `deployment_type` and `name` fields.
 
-Once all Agent configuration is complete, [Restart the Datadog Agent][5].
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
+
+Once all Agent configuration is complete, [restart the Datadog Agent][6].
 
 ### Validate
 
-[Run the Agent's status subcommand][6] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][7] page in Datadog to get started.
+[Run the Agent's status subcommand][7] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][8] page in Datadog to get started.
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[4]: /getting_started/tagging/unified_service_tagging
-[5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: https://app.datadoghq.com/databases
+[4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
+[5]: /getting_started/tagging/unified_service_tagging
+[6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: /agent/guide/agent-commands/#agent-status-and-information
+[8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
 To configure the Database Monitoring Agent running in a Docker container, set the [Autodiscovery Integration Templates][1] as Docker labels on your Agent container.
@@ -249,18 +282,21 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][3].
+See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.
+
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][4] on how these tags are used throughout Datadog.
 
 ### Validate
 
-[Run the Agent's status subcommand][4] and look for `sqlserver` under the **Checks** section. Alternatively, navigate to the [Databases][5] page in Datadog to get started.
+[Run the Agent's status subcommand][5] and look for `sqlserver` under the **Checks** section. Alternatively, navigate to the [Databases][6] page in Datadog to get started.
 
 
 [1]: /agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /agent/guide/agent-commands/#agent-status-and-information
-[5]: https://app.datadoghq.com/databases
+[3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
@@ -352,15 +388,18 @@ spec:
     name: sqlserver
 ```
 
+See the [SQL Server integration spec][4] for additional information on setting `deployment_type` and `name` fields.
+
 The Cluster Agent automatically registers this configuration and begins running the SQL Server check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax.
 
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
+[5]: /agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -672,7 +672,7 @@
     "request_schema_description": "ノートブック更新リクエストの説明です。"
   },
   "ListOrgs": {
-    "description": "管理している組織を一覧表示します。",
+    "description": "このエンドポイントは、トップレベルの組織に関するデータを返します。",
     "summary": "管理している組織を一覧表示する"
   },
   "CreateChildOrg": {
@@ -690,6 +690,10 @@
     "summary": "組織を更新する",
     "request_description": "",
     "request_schema_description": "オーガニゼーションを作成、編集、管理します。"
+  },
+  "DowngradeOrg": {
+    "description": "MSP のお客様のみ利用可能です。マスター組織の階層から子組織を削除し、30 日間の試用期間中に子組織を配置します。",
+    "summary": "子組織のスピンオフ"
   },
   "UploadIdPForOrg": {
     "description": "SAML IdP に含まれる ID プロバイダー (IdP) のメタデータを\n更新するオプションはいくつかあります。\n\n* **マルチパートフォームデータ**: フォームポストを使用して IdP のメタデータファイルをポストします。\n\n* **XML 本文**: IdP のメタデータファイルをリクエスト本文としてポストします。",
@@ -779,6 +783,10 @@
     "summary": "Update an SLO correction",
     "request_description": "編集済みの SLO 補正オブジェクト",
     "request_schema_description": "SLO に適用される補正を定義するオブジェクト。"
+  },
+  "SearchSLO": {
+    "description": "オーガニゼーションのサービスレベル目標オブジェクトのリストを取得します。",
+    "summary": "SLO の検索"
   },
   "DeleteSLO": {
     "description": "指定のサービスレベル目標オブジェクトを完全に削除します。\n\nSLO を使用するダッシュボードの場合はダッシュボード内で SLO が参照されているため、\n`DELETE /v1/slo/` エンドポイントは 409 競合エラーを返します。",

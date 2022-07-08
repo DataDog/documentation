@@ -184,10 +184,10 @@ Message variables auto-populate with a randomly selected group based on the scop
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
-[6]: /monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
+[6]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [7]: /monitors/notify/variables/?tab=is_renotify#examples
 [8]: /integrations/jira/
-[9]: /integrations/jira/#use-cases
+[9]: /integrations/jira/#usage
 [10]: /integrations/pagerduty/
 [11]: /integrations/pagerduty/#troubleshooting
 [12]: /integrations/slack/
@@ -201,5 +201,5 @@ Message variables auto-populate with a randomly selected group based on the scop
 [20]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [21]: /account_management/rbac/?tab=datadogapplication
 [22]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[23]: /monitors/create/
-[24]: /monitors/faq/what-are-recovery-thresholds/
+[23]: /monitors/create/#monitor-types
+[24]: /monitors/guide/recovery-thresholds/
