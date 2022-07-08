@@ -49,6 +49,6 @@ Datadog integrates with AWS GuardDuty through a Lambda function that ships Guard
 
 4. See any new GuardDuty Findings in the [Datadog Log Explorer][3].
 
-[1]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[1]: /logs/guide/forwarder/
 [2]: https://console.aws.amazon.com/events/home
 [3]: https://app.datadoghq.com/logs
