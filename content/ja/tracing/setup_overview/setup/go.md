@@ -1,32 +1,33 @@
 ---
-title: Go アプリケーションのトレース
-kind: documentation
 aliases:
-  - /ja/tracing/go/
-  - /ja/tracing/languages/go
-  - /ja/agent/apm/go/
-  - /ja/tracing/setup/go
-  - /ja/tracing/setup_overview/go
+- /ja/tracing/go/
+- /ja/tracing/languages/go
+- /ja/agent/apm/go/
+- /ja/tracing/setup/go
+- /ja/tracing/setup_overview/go
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-  - link: https://github.com/DataDog/dd-trace-go/tree/v1
-    tag: GitHub
-    text: ソースコード
-  - link: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-    tag: GoDoc
-    text: パッケージページ
-  - link: /tracing/visualization/
-    tag: Documentation
-    text: サービス、リソース、トレースを調査する
-  - link: /tracing/
-    tag: 高度な使用方法
-    text: 高度な使用方法
+- link: https://github.com/DataDog/dd-trace-go/tree/v1
+  tag: GitHub
+  text: ソースコード
+- link: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+  tag: GoDoc
+  text: パッケージページ
+- link: /tracing/visualization/
+  tag: Documentation
+  text: サービス、リソース、トレースを調査する
+- link: /tracing/
+  tag: 高度な使用方法
+  text: 高度な使用方法
+kind: documentation
+title: Go アプリケーションのトレース
+type: multi-code-lang
 ---
+
 ## 互換性要件
 
-Go トレーサーには、Go `1.12+` および Datadog Agent `>= 5.21.1` が必要です。サポートするライブラリの一覧については、[互換性要件][1]ページをご覧ください。
+Go トレーサーには、Go `1.16+` および Datadog Agent `>= 5.21.1` が必要です。サポートするライブラリの一覧については、[互換性要件][1]ページをご覧ください。
 
 ## インストールと利用開始
 
@@ -34,7 +35,7 @@ Go トレーサーには、Go `1.12+` および Datadog Agent `>= 5.21.1` が必
 
 APM で使用される用語の説明については、[「APM を開始する」セクション][3]を参照してください。寄稿の詳細については、公式リポジトリ [README.md][4] を確認してください。
 
-古いバージョンのトレーサー（例: v<0.6.x）から最新バージョンに移行する必要がある場合は、[移行ドキュメント][5]を参照してください。
+古いバージョンのトレーサー（例: v<0.6.x）から最新バージョンに移行する必要がある場合は、[移行ドキュメント][5]を使用してください。
 
 トレースを設定すると、Continuous Profiler も設定され、アプリからプロファイリングデータの受信を開始するために必要なのは[プロファイラーを有効にする][6]ことだけです。
 
@@ -57,11 +58,10 @@ Datadog には、一連のライブラリとフレームワークをインスツ
 
 ## コンフィギュレーション
 
-Go トレーサーは、コンフィギュレーション用の追加の環境変数と関数をサポートしています。
-[コンフィギュレーションドキュメント][8]で利用可能なすべてのオプションを参照してください。
 
-サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することを強くおすすめします。
-このような環境変数の推奨構成方法については、[統合サービスタグ付け][9]のドキュメントをご参照ください。変数は、Go トレーサーのバージョン 1.24.0 以降で利用可能です。
+Datadog では、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用して、サービスの `env`、`service`、`version` を設定することを推奨します。
+
+これらの環境変数の構成方法に関する推奨事項は、[統合サービスタグ付け][8]のドキュメントをお読みください。これらの変数は、Go トレーサーのバージョン 1.24.0 以降で利用可能です。
 
 トレーサーの API を通じて、`env`、`service`、`version` を指定することもできます。
 
@@ -85,6 +85,52 @@ func main() {
 }
 ```
 
+Go トレーサーは、コンフィギュレーション用の追加の環境変数と関数をサポートしています。
+[コンフィギュレーションドキュメント][9]で利用可能なすべてのオプションを参照してください。
+
+`DD_VERSION`
+: アプリケーションのバージョン (例: `1.2.3`、`6c44da20`、 `2020.02.13`) を設定します。
+
+`DD_SERVICE`
+: このアプリケーションで使用されるサービス名。
+
+`DD_ENV`
+: アプリケーションの環境を設定します。例: prod、pre-prod、staging
+
+`DD_AGENT_HOST`
+: **デフォルト**: `localhost` <br>
+トレース送信のためのデフォルトのトレース Agent ホストアドレスをオーバーライドします。
+
+`DD_DOGSTATSD_PORT`
+: **デフォルト**: `8125` <br>
+DogStatsD メトリクス送信のためのデフォルトのトレース Agent ポートをオーバーライドします。
+
+`DD_TRACE_SAMPLE_RATE`
+: インジェストレートコントロールを有効にします。
+
+`DD_TRACE_RATE_LIMIT`
+: 1 秒あたり、Go プロセスごとにサンプリングするスパンの最大数。DD_TRACE_SAMPLE_RATE が設定されている場合、デフォルトは 100 です。それ以外の場合は、Datadog Agent にレート制限を委ねます。
+
+`DD_TAGS`
+: **デフォルト**: [] <br>
+すべてのスパンとプロファイルに追加されるデフォルトタグのリスト。タグはカンマやスペースで区切ることができます。例えば、 `layer:api,team:intake` や `layer:api team:intake` などです。
+
+`DD_TRACE_STARTUP_LOGS`
+: **デフォルト**: `true` <br>
+スタートアップコンフィグレーションと診断ログを有効にします。
+
+`DD_TRACE_DEBUG`
+: **デフォルト**: `false`<br>
+トレーサーでデバッグロギングを有効化します。
+
+`DD_TRACE_ENABLED`
+: **デフォルト**: `true`<br>
+Web フレームワークとライブラリインスツルメンテーションを有効にします。false の場合、アプリケーションコードはトレースを生成しません。
+
+`DD_SERVICE_MAPPING`
+: **デフォルト**: `null` <br>
+構成により、サービス名を動的に変更することができます。サービス名はカンマやスペースで区切ることができ、例えば `mysql:mysql-service-name,postgres:postgres-service-name`、`mysql:mysql-service-name postgres:postgres-service-name` のようにすることができます。
+
 ### APM に Datadog Agent を構成する
 
 インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
@@ -99,31 +145,40 @@ func main() {
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. アプリケーションをインスツルメント化した後、トレースクライアントはデフォルトでトレースを `localhost:8126` に送信します。これが正しいホストとポートでない場合は、以下の環境変数を設定して変更します。
+3. アプリケーションがインスツルメントされた後、トレースクライアントはデフォルトで Unix ドメインソケット `/var/run/datadog/apm.socket` にトレースを送信しようとします。ソケットが存在しない場合、トレースは `http://localhost:8126` に送信されます。
 
-   `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT`
+   同様のルールが Go トレーサーから送られる全てのメトリクス (ランタイムメトリクスや内部テレメトリを含む) に適用されます。クライアントは Dogstatsd データを Unix ドメインソケット `/var/run/datadog/dsd.socket` に送信しようとし、それが存在しない場合は `http://localhost:8125` をデフォルトとします。
 
-   カスタムホスト名およびポートは、コードで設定することもできます。
+   異なるホストやポートが必要な場合は、以下の環境変数を 1 つ以上使用します。この例ではデフォルト値を示していますが、他の値に設定することもできます。
+
+   ```
+   DD_AGENT_HOST=localhost   # The host to send traces and metrics to. Defaults to localhost.
+   DD_TRACE_AGENT_PORT=8126  # The port to send traces to. Defaults to 8126.
+   DD_DOGSTATSD_PORT=8125    # The port to send Dogstatsd metrics to. Defaults to 8125.
+   ```
+
+   トレース用の接続は、コードで構成することも可能です。
 
     ```go
     package main
 
-    import (
-        "net"
-
-        "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    )
+    import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
     func main() {
-        addr := net.JoinHostPort(
-            "custom-hostname",
-            "1234",
+        tracer.Start(
+            // Unix Domain Socket configuration:
+            tracer.WithUDS("/var/run/datadog/apm.socket"),
+            // or, for a non-default TCP connection:
+            // tracer.WithAgentAddr("localhost:8126"),
+            // or, for an alternative UDP connection for Dogstatsd:
+            // tracer.WithDogstatsdAddress("localhost:8125"),
         )
-        tracer.Start(tracer.WithAgentAddr(addr))
         defer tracer.Stop()
+
+        // ...
     }
     ```
-{{< site-region region="us3,us5,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
@@ -155,7 +210,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 
 ## APM 環境名の構成
 
-[APM 環境名][10]は、[Agent 内][11] またはトレーサーの [WithEnv][8] スタートオプションを使用して構成できます。
+[APM 環境名][10]は、[Agent 内][11] またはトレーサーの [WithEnv][9] スタートオプションを使用して構成できます。
 
 ### B3 ヘッダーの抽出と挿入
 
@@ -184,8 +239,8 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
 [6]: /ja/tracing/profiler/enabling/?code-lang=go
 [7]: https://app.datadoghq.com/apm/docs
-[8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[9]: /ja/getting_started/tagging/unified_service_tagging
+[8]: /ja/getting_started/tagging/unified_service_tagging
+[9]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [10]: /ja/tracing/advanced/setting_primary_tags_to_scope/#environment
 [11]: /ja/getting_started/tracing/#environment-name
 [12]: https://github.com/openzipkin/b3-propagation

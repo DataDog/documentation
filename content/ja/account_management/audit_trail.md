@@ -5,6 +5,9 @@ further_reading:
 - link: /account_management/org_settings/
   tag: ドキュメント
   text: オーガニゼーションの設定について
+- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
+  tag: ブログ
+  text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
 kind: documentation
 title: Datadog 監査証跡
 ---
@@ -57,7 +60,7 @@ Datadog 監査証跡を有効にするには、[オーガニゼーションの�
 
 デフォルトの監査証跡イベント保持期間は 7 日間です。保持期間は 3～90 日間の間で設定できます。
 
-{{< img src="account_management/audit_logs/retention.png" alt="Datadog の監査証跡保持期間の設定" style="width:50%;">}}
+{{< img src="account_management/audit_logs/retention_period.png" alt="Datadog の監査証跡保持期間の設定" style="width:80%;">}}
 
 ## 監査イベントの確認
 

@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
   tag: "Blog"
   text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
+- link: "https://www.datadoghq.com/blog/dns-based-threat-detection/"
+  tag: "Blog"
+  text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
 ## Overview

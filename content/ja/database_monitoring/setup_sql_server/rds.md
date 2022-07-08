@@ -15,8 +15,6 @@ title: Amazon RDS 上の SQL Server のデータベースモニタリングの�
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">Database Monitoring for SQL Server 用データベースモニタリングはプライベートベータ版です。ベータ版へのアクセスリクエストは、カスタマーサクセスマネージャーについては、お問い合わせください。</div>
-
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
 データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。

@@ -43,7 +43,7 @@ When you set up tracing, you're also setting up Continuous Profiler, and you nee
 
 #### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][7] within the Datadog for the best experience, including:
+Follow the [Quickstart instructions][7] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.

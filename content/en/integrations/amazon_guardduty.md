@@ -39,7 +39,6 @@ Datadog integrates with AWS GuardDuty through a Lambda function that ships Guard
 
 5. Configure any desired tags, and click **Create rule**.
 
-
 #### Send your logs to Datadog
 
 1. In the AWS console, go to **Lambda**.

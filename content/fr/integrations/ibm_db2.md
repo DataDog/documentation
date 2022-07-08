@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
 display_name: IBM Db2
 draft: false
 git_integration_title: ibm_db2
 guid: 67378f79-e72b-4f49-8ec2-57053706523d
 integration_id: ibm-db2
 integration_title: IBM Db2
+integration_version: 1.11.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -30,14 +31,18 @@ manifest_version: 1.0.0
 metric_prefix: ibm_db2.
 metric_to_check: ibm_db2.connection.active
 name: ibm_db2
-public_title: "Intégration Datadog/IBM\_Db2"
-short_description: "Surveillez les métriques de tablespace et de pool de mémoires tampon ainsi que d'autres métriques depuis votre base de données IBM\_Db2."
+public_title: Intégration Datadog/IBM Db2
+short_description: Surveillez les métriques de tablespace et de pool de mémoires tampon
+  ainsi que d'autres métriques depuis votre base de données IBM Db2.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard par défaut][1]
 
 ## Présentation
@@ -68,10 +73,16 @@ Pour les versions <= 6.11 de l'Agent :
 "C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" -m pip install ibm_db==3.0.1
 ```
 
-Pour les versions >= 6.12 de l'Agent :
+Pour les versions >= 6.12 et < 7.0 de l'Agent :
 
 ```text
 "C:\Program Files\Datadog\Datadog Agent\embedded<VERSION_MAJEURE_PYTHON>\python.exe" -m pip install ibm_db==3.0.1
+```
+
+Pour le versions >= 7.0 de l'Agent :
+
+```text
+"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.1.0
 ```
 
 Des fonctionnalités XML peuvent être requises sur Linux. Si vous rencontrez des erreurs durant
@@ -90,7 +101,7 @@ update dbm cfg using DFT_MON_TABLE on
 update dbm cfg using DFT_MON_BUFPOOL on
 ```
 
-Si vous exécutez désormais `get dbm cfg`, voici ce qui s'affiche :
+Exécutez ensuite `get dbm cfg` pour obtenir un résultat similaire à ce qui suit :
 
 ```text
  Default database monitor switches
@@ -104,7 +115,7 @@ Si vous exécutez désormais `get dbm cfg`, voici ce qui s'affiche :
  Monitor health of instance and databases   (HEALTH_MON) = ON
 ```
 
-### Configuration
+### Procédure à suivre
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -121,7 +132,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -164,7 +175,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
@@ -187,17 +198,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "ibm_db2" >}}
 
 
-### Checks de service
-
-**ibm_db2.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à la base de données IBM Db2 qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
-
-**ibm_db2.status** :<br>
-Renvoie `CRITICAL` si la base de données IBM Db2 surveillée est en veille, `WARNING` pour l'attente de mise en veille ou les restaurations ou renvoie `OK` pour les autres cas.
-
 ### Événements
 
 - `ibm_db2.tablespace_state_change` se déclenche à chaque changement d'état d'un tablespace.
+
+### Checks de service
+{{< get-service-checks-from-git "ibm_db2" >}}
+
 
 ## Dépannage
 
@@ -212,7 +219,7 @@ Documentation, liens et articles supplémentaires utiles :
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/images/dashboard_overview.png
 [2]: https://www.ibm.com/analytics/us/en/db2
-[3]: https://docs.datadoghq.com/fr/agent/
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/ibmdb/python-ibmdb/tree/master/IBM_DB/ibm_db
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/fr/help/

@@ -1,24 +1,23 @@
 ---
-title: Page Network
-kind: documentation
-description: Explorez les données de votre réseau qui transitent entre chaque source et destination sur votre pile.
 aliases:
-  - /fr/network_performance_monitoring/network_table
-  - /fr/network_performance_monitoring/network_page
+- /fr/network_performance_monitoring/network_table
+- /fr/network_performance_monitoring/network_page
+description: Explorez les données de votre réseau qui transitent entre chaque source
+  et destination sur votre pile.
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
-    tag: Blog
-    text: Network Performance Monitoring
-  - link: /network_monitoring/devices
-    tag: Documentation
-    text: Network Device Monitoring
-  - link: /network_monitoring/performance/setup
-    tag: Documentation
-    text: Recueillir vos données réseau avec l'Agent Datadog
-  - link: /dashboards/widgets/network
-    tag: Documentation
-    text: Widget Réseau
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: Blog
+  text: Network Performance Monitoring
+- link: /network_monitoring/devices
+  tag: Documentation
+  text: Network Device Monitoring
+- link: /network_monitoring/performance/setup
+  tag: Documentation
+  text: Recueillir vos données réseau avec l'Agent Datadog
+kind: documentation
+title: Page Network
 ---
+
 {{< img src="network_performance_monitoring/network_page/main_page_npm.png" alt="Page principale" >}}
 
 ## Requêtes
@@ -35,7 +34,7 @@ L'exemple suivant montre toutes les connexions agrégées entre les adresses IP 
 
 Vous pouvez définir la période d'agrégation du trafic à l'aide du sélecteur d'intervalle en haut à droite de la page :
 
-{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Intervalle NPM"  style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Intervalle NPM"  style="width:30%;">}} 
 
 ### Volets des facettes
 
@@ -45,17 +44,30 @@ Les volets des facettes reflètent les tags définis dans la requête de la barr
 
 #### Facettes personnalisées
 
-Agrégez et filtrez vos données de trafic à l'aide de n'importe quel tag dans la page Network de Datadog. Une liste de tags autorisés est fournie par défaut. Elle figure dans le menu déroulant de la barre de recherche :
+Agrégez et filtrez vos données de trafic à l'aide de n'importe quel tag sur la page Network de Datadog. Une liste d'inclusion est fournie par défaut pour les tags. Elle se trouve dans le menu déroulant de la barre de recherche :
 
 {{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Menu déroulant"  style="width:90%;">}}
 
-Parmi les tags autorisés figurent `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip` ou encore `port`. Si vous souhaitez agréger ou filtrer le trafic en fonction d'un tag qui n'est pas répertorié dans la liste, ajoutez-le en tant que facette personnalisée :
+Cette liste comprend notamment les tags `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip` et `port`. Si vous souhaitez agréger ou filtrer le trafic en fonction d'un tag qui n'est pas répertorié dans la liste, ajoutez-le en tant que facette personnalisée :
 
 1. Cliquez sur le bouton `+` en haut à droite des volets de facettes.
 2. Saisissez le tag à partir duquel vous souhaitez créer une facette personnalisée.
 3. Cliquez sur `Create`.
 
 Une fois votre facette personnalisée créée, utilisez ce tag pour filtrer et agréger le trafic depuis la page Network et Map. Toutes les facettes personnalisées sont accessibles sous la section `Custom` des volets de facettes.
+
+### Recherche avec un wildcard
+Afin d'effectuer une recherche avec un wildcard pour plusieurs caractères, utilisez le symbole `*` comme illustré ci-dessous :
+
+- `service:web*` renvoie tous les services qui commencent par « web ».
+- `service:*web` renvoient tous les services qui se terminent par « web ».
+- `service:*web*` renvoie tous les services qui contiennent le texte « web ».
+
+Les wildcards peuvent être utilisés au sein d'une facette avec cette syntaxe. La requête suivante renvoie tous les services se terminant par le texte « mongo » :
+
+`service:*mongo`
+
+Pour en savoir plus, consultez la documentation relative à la [syntaxe de recherche][1].
 
 ## Données réseau
 
@@ -68,7 +80,7 @@ Les métriques de votre réseau sont affichées dans les graphiques et le tablea
 
 Lorsqu'une perte de paquets importante se produit, les valeurs affichées peuvent être différentes pour `sent_metric(source to destination)` et `received_metric(destination to source)`. Dans ce cas, si la `destination` envoie un grand nombre d'octets vers la `source`, les connexions agrégées qui partent de la `destination` comprennent ces octets, mais les connexions agrégées qui partent de la `source` ne les voient pas comme reçus.
 
-**Remarque** : l'intervalle de collecte par défaut est de cinq minutes, et la durée de rétention est de sept jours.
+**Remarque** : les données sont recueillies toutes les 30 secondes, agrégées dans des compartiments de 5 minutes et conservées pendant 14 jours.
 
 ### Métriques
 
@@ -87,23 +99,42 @@ TCP est un protocole orienté connexion qui assure la transmission des paquets d
 
 | Métrique                    |  Description                                                                                                                           |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **Retransmissions TCP** | Une retransmission TCP signifie qu'un échec a été détecté et que la transmission a été renouvelée pour garantir la bonne livraison des données. Cette métrique représente le nombre de retransmissions à partir de la `source`. |
-| **Latence TCP** | Cette métrique mesure la durée lissée d'aller-retour TCP, à savoir le délai entre l'envoi et la réception d'une trame TCP. |
-| **Gigue TCP** | Cette métrique mesure l'écart entre les durées lissées d'aller-retour TCP. |
+| **TCP Retransmits** | Une retransmission TCP signifie qu'un échec a été détecté et que la transmission a été renouvelée pour garantir la bonne livraison des données. Cette métrique représente le nombre de retransmissions à partir de la `source`. |
+| **TCP Latency** | Cette métrique mesure la durée lissée d'aller-retour TCP, à savoir le délai entre l'envoi et la réception d'une trame TCP. |
+| **TCP Jitter** | Cette métrique mesure la variance entre les durées lissées d'aller-retour TCP. |
 | **Established Connections** | Le nombre de connexions TCP établies. Calculé en nombre de connexions par seconde à partir de la `source`. |
 | **Closed Connections** | Le nombre de connexions TCP fermées. Calculé en nombre de connexions par seconde à partir de la `source`. |
 
-### Résolution DNS
+### Détection automatique des services cloud
 
-Depuis la version 7.17, l'Agent convertit les adresses IP en noms de domaine lisibles pour le trafic interne et externe. Le domaine vous permet de surveiller les endpoints de vos fournisseurs de solutions cloud sur lesquelles il n'est pas possible d'installer un Agent Datadog. Il peut s'agir par exemple d'équilibreurs de charge d'application, d'API ou de compartiments S3. Les noms de domaines ne pouvant pas être identifiés, tels que ceux générés par un algorithme depuis un serveur C&C, peuvent être le signe d'une menace pour la sécurité réseau. **Le domaine est encodé sous la forme d'un tag dans Datadog**. Vous pouvez l'ajouter dans les requêtes de la barre de recherche et dans le volet de facettes afin d'agréger et de filtrer le trafic.
+Si vous utilisez des services cloud gérés, comme S3 ou Kinesis, vous pouvez surveiller les performances du trafic entre vos applications internes et ces services. Filtrez votre vue sur une dépendance AWS ou GCP précise pour déterminer la latence, évaluer les performances des bases de données et consulter une vue d'ensemble de votre réseau.
+
+{{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Carte des services cloud" >}}
+
+Vous pouvez par exemple :
+
+- visualiser le flux de données entre votre cluster Kubernetes interne et `service:aws.s3` dans la [Network Map][2] ;
+- basculer sur la [page Network](#tableau) pour isoler les pods qui établissent le plus de connexions au service ; et
+- confirmer que leur requête est bien transmise en analysant les métriques de performance S3, qui sont directement corrélées avec les performances du trafic dans le volet latéral de la dépendance en question, sous l'onglet *Integration Metrics*.
+
+La solution NPM mappe automatiquement :
+
+- les appels réseau vers S3 (ces appels peuvent être répartis par `s3_bucket`), RDS (ces appels peuvent être répartis par `rds_instance_type`), Kinesis, ELB, Elasticache et d'autres [services AWS services][3] ;
+- les appels d'API vers AppEngine, Google DNS, Gmail et d'autres [services GCP][4].
+
+Pour surveiller d'autres endpoints sur lesquels l'Agent ne peut pas être installé (par exemple, des API publiques), depuis la vue d'ensemble du réseau, regroupez la destination en fonction du [tag `domain`](#resolution-du-domaine).
+
+### Résolution du domaine
+
+Depuis la version 7.17, l'Agent convertit les adresses IP en noms de domaine lisibles pour le trafic interne et externe. Le domaine vous permet de surveiller les endpoints de vos fournisseurs de solutions cloud sur lesquelles il n'est pas possible d'installer un Agent Datadog. Il peut s'agir par exemple d'équilibreurs de charge d'application, d'API ou de compartiments S3. Les noms de domaines ne pouvant pas être identifiés, tels que ceux générés par un algorithme depuis un serveur C&C, peuvent être le signe d'une menace pour la sécurité réseau. `domain` est **encodé sous la forme d'un tag dans Datadog**. Vous pouvez l'ajouter dans les requêtes de la barre de recherche et dans le volet des facettes afin d'agréger et de filtrer le trafic.
 
 {{< img src="network_performance_monitoring/network_page/domain_aggregation.png" alt="Agrégation de domaine" >}}
 
 **Remarque** : la résolution DNS fonctionne sur les hosts pour lesquels le system probe s'exécute sur l'espace de nommage réseau à la racine. Cela se produit généralement lorsque le system probe est exécuté dans un conteneur, sans passer par le réseau host.
 
-### Adresses IP pré-NAT
+### Network Address Translation (NAT)
 
-Le NAT (Network Address Translation) est un outil utilisé par Kubernetes et d'autres systèmes pour acheminer le trafic entre les conteneurs. Lorsque vous analysez une dépendance spécifique (par exemple entre deux services), la présence ou l'absence d'IP pré-NAT peut vous permettre de faire la distinction entre les services natifs à Kubernetes, qui font leur propre routage, et les services qui dépendent de clients externes pour le routage. Cette fonctionnalité ne prend pas en compte la résolution des passerelles NAT pour le moment.
+Le NAT est un outil utilisé par Kubernetes et d'autres systèmes pour acheminer le trafic entre les conteneurs. Lorsque vous analysez une dépendance spécifique (par exemple entre deux services), la présence ou l'absence d'IP pré-NAT peut vous permettre de faire la distinction entre les services natifs à Kubernetes, qui font leur propre routage, et les services qui dépendent de clients externes pour le routage. Cette fonctionnalité ne prend actuellement pas en compte la résolution des passerelles NAT.
 
 Pour afficher les IP pré-NAT et post-NAT, utilisez le paramètre _Show pre-NAT IPs_ dans les paramètres du tableau. Lorsque ce paramètre est désactivé, les IP affichées dans les colonnes Source IP et Dest IP correspondent aux IP post-NAT par défaut. Si plusieurs IP pré-NAT existent pour une même IP post-NAT, les 5 IP pré-NAT les plus courantes s'affichent. Le tag `pre_nat.ip` fonctionne comme n'importe quel autre tag : vous pouvez donc l'utiliser pour agréger et filtrer le trafic.
 
@@ -124,16 +155,16 @@ Dans AWS et GCP, l'ID réseau est automatiquement défini sur l'ID du VPC. Pour 
 
 ### Vues enregistrées
 
-Organisez et partagez vos vues représentant les données de trafic. Les vues enregistrées facilitent le debugging et favorisent la collaboration. Vous pouvez ainsi créer une vue, l'enregistrer pour l'utiliser ultérieurement avec des requêtes basiques et envoyer son lien à votre équipe afin de partager des données réseau.
+Organisez et partagez vos vues représentant les données de votre trafic. Les vues enregistrées facilitent le debugging et favorisent la collaboration. Vous pouvez ainsi créer une vue, l'enregistrer pour l'utiliser ultérieurement avec des requêtes basiques et envoyer son lien à votre équipe afin de partager des données réseau.
 
 {{< img src="network_performance_monitoring/network_page/npm_saved_views.png" alt="Vues enregistrées" >}}
 
-- Pour enregistrer une vue, cliquez sur le bouton « + Save » et attribuez un nom à la vue pour enregistrer votre requête actuelle, la configuration du tableau ainsi que les métriques sélectionnées pour les graphiques.
-- Pour charger une vue, cliquez sur Views en haut à gauche afin d'afficher vos vues enregistrées, puis sélectionnez une vue dans la liste.
-- Pour renommer une vue, passez le curseur sur une vue dans la liste des vues enregistrées, puis cliquez sur l'icône en forme d'engrenage afin d'afficher l'option *Edit name*.
-- Pour partager une vue, passez le curseur sur cette vue dans la liste des vues enregistrées, puis cliquez sur l'icône représentant un lien afin d'afficher l'option *Copy permalink*.
+- Pour enregistrer une vue, cliquez sur le bouton *+ Save* et attribuez un nom à la vue. Cela enregistre votre requête actuelle, la configuration du tableau ainsi que les métriques sélectionnées pour les graphiques.
+- Pour charger une vue, cliquez sur *Views* en haut à gauche afin d'afficher la liste de vues enregistrées, puis sélectionnez une vue.
+- Pour renommer une vue, passez le curseur sur cette vue dans la liste des vues enregistrées, cliquez sur l'icône en forme d'engrenage, puis sur l'option *Edit name*.
+- Pour partager une vue, passez le curseur sur cette vue dans la liste des vues enregistrées, cliquez sur l'icône représentant un lien, puis sur l'option *Copy permalink*.
 
-Pour en savoir plus, consultez notre documentation sur les [vues enregistrées][1].
+Pour en savoir plus, consultez la section [Vues enregistrées][5].
 
 
 ## Tableau
@@ -183,4 +214,8 @@ Les tags de source et de destination communs partagés par les dernières connex
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/explorer/saved_views/
+[1]: /fr/logs/search_syntax/
+[2]: /fr/network_monitoring/performance/network_map/
+[3]: /fr/network_monitoring/performance/guide/aws_supported_services/
+[4]: /fr/network_monitoring/performance/guide/gcp_supported_services/
+[5]: /fr/logs/explorer/saved_views/

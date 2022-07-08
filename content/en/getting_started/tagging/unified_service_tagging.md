@@ -257,13 +257,12 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corre
     "name": "DD_VERSION",
     "value": "<VERSION>"
   }
-
+],
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
   "com.datadoghq.tags.service": "<SERVICE>",
   "com.datadoghq.tags.version": "<VERSION>"
-  }
-]
+}
 ```
 
 ##### Partial configuration
@@ -401,6 +400,8 @@ See [how to connect your Lambda telemetry using tags][13].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
 
 
 [1]: /getting_started/tagging/

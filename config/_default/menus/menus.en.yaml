@@ -2527,37 +2527,57 @@ main:
     parent: synthetics
     identifier: synthetics_testing_tunnel
     weight: 7
+  - name: Dashboards
+    url: /synthetics/dashboards/
+    parent: synthetics
+    identifier: synthetics_dashboards
+    weight: 8
+  - name: API Test
+    url: /synthetics/dashboards/api_test
+    parent: synthetics_dashboards
+    identifier: synthetics_dashboards_api_test
+    weight: 801
+  - name: Browser Test
+    url: /synthetics/dashboards/browser_test
+    parent: synthetics_dashboards
+    identifier: synthetics_dashboards_browser_test
+    weight: 802
+  - name: Test Summary
+    url: /synthetics/dashboards/test_summary
+    parent: synthetics_dashboards
+    identifier: synthetics_dashboards_test_summary
+    weight: 803
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 8
+    weight: 9
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 11
+    weight: 12
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 12
+    weight: 13
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 13
+    weight: 14
   - name: Data Security
     url: data_security/synthetics/
     parent: synthetics
-    weight: 14
+    weight: 15
   - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: rum

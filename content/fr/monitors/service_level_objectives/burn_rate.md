@@ -1,13 +1,10 @@
 ---
-title: Alertes sur le taux d'utilisation
+description: Utiliser des monitors pour envoyer des alertes à propos du taux d'utilisation
+  d'un SLO
 kind: documentation
-description: Utiliser des monitors pour envoyer des alertes à propos du taux d'utilisation d'un SLO
+title: Alertes sur le taux d'utilisation
 ---
 {{< jqmath-vanilla >}}
-
-<div class="alert alert-warning">
-Cette fonctionnalité est disponible en version bêta ouverte. Envoyez un e-mail à <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> si vous avez des questions ou des retours.
-</div>
 
 ## Présentation
 
@@ -19,7 +16,7 @@ Les alertes de taux d'utilisation de SLO vous préviennent lorsque l'utilisation
 
 ## Fonctionnement des alertes de taux d'utilisation
 
-Le taux d'utilisation est une valeur sans unité [créée par Google][3]. Elle indique la vitesse à laquelle vous utilisez votre marge d'erreur par rapport à la durée cible de votre SLO. Par exemple, pour une cible de 30 jours, un taux d'utilisation de 1 indique que votre marge d'erreur sera entièrement utilisée en 30 jours précisément, tant que le taux de 1 reste constant. Un taux d'utilisation stable de 2 indique que la marge d'erreur sera utilisée en 15 jours, un taux d'indisponibilité de 3 en 10 jours, etc.
+Le taux d'utilisation est une valeur sans unité [créée par Google][3]. Elle indique la vitesse à laquelle vous utilisez votre marge d'erreur par rapport à la durée cible de votre SLO. Par exemple, pour une cible de 30 jours, un taux d'utilisation de 1 indique que votre marge d'erreur sera entièrement utilisée en 30 jours précisément, tant que le taux de 1 reste constant. Un taux d'utilisation stable de 2 indique que la marge d'erreur sera utilisée en 15 jours, un taux d'utilisation de 3 en 10 jours, etc.
 
 Cette relation s'exprime de la façon suivante :
 
@@ -93,14 +90,14 @@ Par exemple, avec un SLO de 7 jours, si vous souhaitez recevoir une alerte lors
    * La valeur de la période longue doit être comprise entre 1 heure et 48 heures.
    * Dans l'interface, la période courte est automatiquement calculée à partir de la formule suivante : `période courte = 1/12 * période longue`.
    * Vous pouvez définir une période courte personnalisée à l'aide de [l'API ou de Terraform](#api-et-terraform). Toutefois, la valeur de la période courte doit forcément être inférieure à celle de la période longue.
-5. Ajoutez des [informations sur les notifications][4] dans les sections **Say what’s happening** et **Notify your team**.
+5. Ajoutez les [informations de notification][4] dans les sections **Say what’s happening** et **Notify your team**.
 6. Cliquez sur le bouton **Save and Exit** sur la page de configuration du SLO.
 
-### Scénarios
+### Exemples
 
 Vous trouverez ci-dessous les valeurs recommandées pour les cibles de 7, 30 et 90 jours.
 
-- Pour ces exemples, il est supposé que la cible est définie sur 99,9 %. Les valeurs demeurent cependant acceptables pour des cibles plus faibles jusqu'à 96 % (le taux d'utilisation maximal pour une cible de 96 % est de 25). Toutefois, sachez que si vous utilisez des cibles moins élevées, vous devrez définir des seuils plus faibles, tels que décrits à la rubrique [Valeurs maximales des taux d'utilisation](valeurs-maximales-des-taux-d-utilisation). Datadog recommande d'utiliser la [2e approche](2e-approche- utilisation-theorique-de-la-marge-d-erreur) avec une utilisation théorique de la marge d'erreur plus faible ou une période longue plus élevée.
+- Pour ces exemples, il est supposé que la cible est définie sur 99,9 %. Les valeurs demeurent cependant acceptables pour des cibles plus faibles jusqu'à 96 % (le taux d'utilisation maximal pour une cible de 96 % est de 25). Toutefois, sachez que si vous utilisez des cibles moins élevées, vous devrez définir des seuils plus faibles, tels que décrits à la rubrique [Valeurs maximales des taux d'utilisation](#valeurs-maximales-des-taux-d-utilisation). Datadog recommande d'utiliser la [2e approche](#2e-approche- utilisation-theorique-de-la-marge-d-erreur) avec une utilisation théorique de la marge d'erreur plus faible ou une période longue plus élevée.
 - Pour les SLO basés sur des métriques, l'utilisation théorique de la marge d'erreur est calculée en extrapolant le nombre total d'occurrences observées lors de la période d'alerte longue à partir de la durée totale de la cible du SLO.
 
 Pour les cibles de 7 jours :
@@ -115,7 +112,7 @@ Pour les cibles de 30 jours :
 
 | Taux d'utilisation | Période longue | Période courte | Utilisation théorique de la marge d'erreur |
 |---|---|---|---|
-| 14.4  | 1 heure  | 5 mlnutes  | 2 %  |
+| 14.4  | 1 heure  | 5 minutes  | 2 %  |
 | 6  | 6 heures  | 30 minutes  | 5 %  |
 | 3  | 24 heures  | 120 minutes  | 10 %  |
 
@@ -123,7 +120,7 @@ Pour les cibles de 90 jours :
 
 | Taux d'utilisation | Période longue | Période courte | Utilisation théorique de la marge d'erreur |
 |---|---|---|---|
-| 21.6  | 1 heure  | 5 mlnutes  | 1 %  |
+| 21.6  | 1 heure  | 5 minutes  | 1 %  |
 | 10.8  | 6 heures  | 30 minutes  | 3 %  |
 | 4.5  | 24 heures  | 120 minutes  | 5 %  |
 
@@ -158,14 +155,9 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-## Restrictions bêta
-
-- Les alertes sont uniquement disponibles pour les SLO basés sur des métriques, ou les SLO basés sur des monitors uniquement composés de types de monitors de métrique (les monitors Metric, Integration, APM Metric, Anomaly, Forecast ou Outliner).
-- Le statut d'alerte d'un monitor de SLO est disponible dans l'onglet **Alerts** du volet des détails du SLO ou sur la page [Manager Monitors][6].
 
 [1]: /fr/monitors/service_level_objectives/metric/
 [2]: /fr/monitors/service_level_objectives/monitor/
 [3]: https://sre.google/workbook/alerting-on-slos/
 [4]: https://app.datadoghq.com/slo
 [5]: /fr/api/v1/monitors/#create-a-monitor
-[6]: https://www.terraform.io/docs/providers/datadog/r/monitor.html

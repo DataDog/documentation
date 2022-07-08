@@ -140,7 +140,7 @@ def security_rules(content, content_dir):
                                 page_data['rule_category'].append('Workload Security')
 
                         # new categorization
-                        if 'security-monitoring' in relative_path:
+                        if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
                             page_data['rule_category'].append('Cloud SIEM')
 
                         if 'posture-management' in relative_path:
@@ -174,7 +174,7 @@ def security_rules(content, content_dir):
                             page_data["scope"] = tech
 
                         # Hardcoded rules in cloud siem which can span several different log sources do not include a source tag
-                        if 'security-monitoring' in relative_path:
+                        if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
                             is_hardcoded = not page_data.get("source", None)
                             if is_hardcoded:
                                 page_data["source"] = "multi Log Sources"
