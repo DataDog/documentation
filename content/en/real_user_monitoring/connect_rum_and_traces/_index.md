@@ -190,7 +190,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 
 ## How are APM quotas affected?
 
-Connecting RUM and Traces might increase significantly the APM ingested volumes. Use the initialization parameter `tracingSampleRate` to only keep a share of the backend traces starting from browserand mobile requests.
+Connecting RUM and traces may significantly increase the APM ingested volumes. Use the initialization parameter `tracingSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
 
 ## How long are traces retained?
 
