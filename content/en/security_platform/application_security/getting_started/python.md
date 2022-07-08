@@ -7,7 +7,7 @@ code_lang_weight: 50
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-py'
       tag: 'GitHub'
-      text: 'NodeJS Datadog Library source code'
+      text: 'Python Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Monitoring Rules"
