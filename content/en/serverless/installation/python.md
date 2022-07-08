@@ -50,8 +50,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     Specify the [Datadog site][2] where the telemetry should be sent to. The default is `datadoghq.com`.
 
     ```sh
-    # ensure the correct SITE is selected on the right
-    export DATADOG_SITE="{{< region-param key="dd_site" >}}"
+    export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu or ddog-gov.com
     ```
 
 5. Configure the Datadog API key
