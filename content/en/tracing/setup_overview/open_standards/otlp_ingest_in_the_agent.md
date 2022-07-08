@@ -118,7 +118,7 @@ experimental:
 
 1. Follow the [Kubernetes Agent setup][1].
 
-2. Set environment variables for the Agent editing the `datadog.otlp` section of the `values.yaml` file:
+2. Enable the OTLP endpoints in the Agent by editing the `datadog.otlp` section of the `values.yaml` file:
 
    For gRPC:
    ```
