@@ -132,11 +132,6 @@ It can contain a Unix path to a socket by prefixing the path with `unix://`. <br
 : Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `8126`
 
-`DD_LOGS_INJECTION`
-: **TracerSettings property**: `LogsInjectionEnabled` <br>
-Enables or disables automatic injection of correlation identifiers into application logs. <br>
-Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
-
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
 **Default**: Defaults to the rates returned by the Datadog Agent<br>
@@ -206,6 +201,11 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 `DD_HTTP_SERVER_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP server spans to be marked as errors. <br>
 **Default**: `500-599`
+
+`DD_LOGS_INJECTION`
+: **TracerSettings property**: `LogsInjectionEnabled` <br>
+Enables or disables automatic injection of correlation identifiers into application logs. <br>
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
