@@ -22283,13 +22283,12 @@
         ]
       },
       "MetricIntakeType": {
-        "description": "The type of metric.",
+        "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
         "enum": [
           0,
           1,
           2,
-          3,
-          15
+          3
         ],
         "format": "int32",
         "type": "integer",
@@ -22297,8 +22296,7 @@
           "UNSPECIFIED",
           "COUNT",
           "RATE",
-          "GAUGE",
-          "UNSPECIFIED_LEGACY"
+          "GAUGE"
         ]
       },
       "MetricMetadata": {
@@ -22488,13 +22486,12 @@
                   "type": "array"
                 },
                 "type": {
-                  "description": "The type of metric.",
+                  "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
                   "enum": [
                     0,
                     1,
                     2,
-                    3,
-                    15
+                    3
                   ],
                   "format": "int32",
                   "type": "integer",
@@ -22502,8 +22499,7 @@
                     "UNSPECIFIED",
                     "COUNT",
                     "RATE",
-                    "GAUGE",
-                    "UNSPECIFIED_LEGACY"
+                    "GAUGE"
                   ]
                 },
                 "unit": {
@@ -22666,13 +22662,12 @@
             "type": "array"
           },
           "type": {
-            "description": "The type of metric.",
+            "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
             "enum": [
               0,
               1,
               2,
-              3,
-              15
+              3
             ],
             "format": "int32",
             "type": "integer",
@@ -22680,8 +22675,7 @@
               "UNSPECIFIED",
               "COUNT",
               "RATE",
-              "GAUGE",
-              "UNSPECIFIED_LEGACY"
+              "GAUGE"
             ]
           },
           "unit": {
@@ -77522,13 +77516,12 @@
                           "type": "array"
                         },
                         "type": {
-                          "description": "The type of metric.",
+                          "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
                           "enum": [
                             0,
                             1,
                             2,
-                            3,
-                            15
+                            3
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -77536,8 +77529,7 @@
                             "UNSPECIFIED",
                             "COUNT",
                             "RATE",
-                            "GAUGE",
-                            "UNSPECIFIED_LEGACY"
+                            "GAUGE"
                           ]
                         },
                         "unit": {

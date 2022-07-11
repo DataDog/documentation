@@ -4140,13 +4140,13 @@ components:
       x-enum-varnames:
       - METRIC_VOLUMES
     MetricIntakeType:
-      description: The type of metric.
+      description: The type of metric. The available types are `0` (unspecified),
+        `1` (count), `2` (rate), and `3` (gauge).
       enum:
       - 0
       - 1
       - 2
       - 3
-      - 15
       format: int32
       type: integer
       x-enum-varnames:
@@ -4154,7 +4154,6 @@ components:
       - COUNT
       - RATE
       - GAUGE
-      - UNSPECIFIED_LEGACY
     MetricMetadata:
       description: Metadata for the metric.
       properties:
