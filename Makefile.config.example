@@ -19,3 +19,4 @@ LOCALETC := local/etc
 EXEDIR := /usr/local/bin
 EXE_LIST := `find local/bin -type f -exec sh -c "echo ${EXEDIR}/{} | sed s@${LOCALBIN}/@@" \;`
 VIRENV=hugpython
+CLEAN_EXTRACTED_REPOS=true

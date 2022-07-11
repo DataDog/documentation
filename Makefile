@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-all clean-build clean-examples clean-go-examples clean-java-examples clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
+.PHONY: clean clean-all clean-build clean-examples clean-go-examples clean-java-examples clean-exe clean-extracted-repos clean-auto-doc clean-node clean-virt help start stop
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -24,13 +24,13 @@ help:
 clean: stop  ## Clean all make installs.
 	@echo "cleaning up..."
 	make clean-build
-	make clean-integrations
+	make clean-extracted-repos
 	make clean-auto-doc
 
 clean-all: stop  ## Clean everything.
 	make clean-build
 	make clean-exe
-	make clean-integrations
+	make clean-extracted-repos
 	make clean-auto-doc
 	make clean-node
 	make clean-virt
@@ -44,7 +44,15 @@ clean-build:  ## Remove build artifacts.
 clean-exe:  ## Remove execs.
 	@rm -rf ${EXE_LIST}
 
-clean-integrations:  ## Remove built integrations files.
+clean-extracted-repos:  ## Remove built integrations files.
+	@if [ "${CLEAN_EXTRACTED_REPOS}" == "true" ]; \
+		then echo "\033[31m\033[1mCleaning all extracted repos, to persist these between builds, set CLEAN_EXTRACTED_REPOS=false in your Makefile.config \033[0m"; \
+	else \
+	  echo "\033[31m\033[1mSkipping cleaning extracted repos, to clean these between builds, set CLEAN_EXTRACTED_REPOS=true in your Makefile.config \033[0m"; \
+	  exit 0; \
+	fi
+
+
 	@rm -rf ./integrations_data/
 	@if [ -d data/integrations ]; then \
 		find ./data/integrations -type f -maxdepth 1 \
