@@ -51,7 +51,7 @@ further_reading:
 ### Supported .NET Framework runtimes
 The .NET Tracer supports instrumentation on .NET Framework 4.6.1 and above.
 
-For a full list of supported libraries and processor architectures (including older versions of .NET Framework), see [Compatibility Requirements][1].
+For a complete list of supported libraries and processor architectures (including older versions of .NET Framework), see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
@@ -76,7 +76,7 @@ For a full list of supported libraries and processor architectures (including ol
 
 ### Install the tracer
 
-You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented or on a per-application basis so developers are able to manage the instrumentation through the application’s dependencies. To see machine-wide installation instructions, click the Windows tab. To see per-application installation instructions, click the NuGet tab.
+Install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented or on a per-application basis, so developers can manage the instrumentation through the application’s dependencies. To see machine-wide installation instructions, click the Windows tab. To see per-application installation instructions, click the NuGet tab.
 
 {{< tabs >}}
 
@@ -182,12 +182,12 @@ For containerized, serverless, and cloud environments:
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+2. See the specific setup instructions to configure the Agent to receive traces in a containerized environment:
 
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on how to configure these settings, see [Configuration](#configuration).
+3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on configuring these settings, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
@@ -240,7 +240,7 @@ After enabling the .NET Tracer for your service:
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
+If needed, configure the tracing library to send application performance telemetry data, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
 
 ## Custom instrumentation
 

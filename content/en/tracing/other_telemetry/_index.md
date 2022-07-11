@@ -8,7 +8,7 @@ further_reading:
       text: 'Ease troubleshooting with cross-product correlation'
 ---
 
-Correlating data by various Datadog products gives context to help estimate business impact and find the root cause of an issue in a few clicks. Set up connections between incoming data to facilitate quick pivots in your explorers and dashboards.
+Correlating data by various Datadog products gives context to help estimate the business impact and find the root cause of an issue in a few clicks. Set up connections between incoming data to facilitate quick pivots in your explorers and dashboards.
 
 ## Connect Logs and Traces
 

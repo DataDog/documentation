@@ -36,7 +36,7 @@ If specified, adds the `env` tag with the specified value to all generated spans
 
 `DD_SERVICE` 
 : **Version**: v1.1.4 <br>
-If specified, sets the default service name. Otherwise the service name must be provided via TracerOptions or JSON configuration.
+If specified, sets the default service name. Otherwise, the service name must be provided via TracerOptions or JSON configuration.
 
 `DD_TRACE_ANALYTICS_ENABLED` 
 : **Version**: v1.1.3 <br>

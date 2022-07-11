@@ -23,13 +23,13 @@ After you set up the tracing library with your code and configure the Agent to c
 
 The PHP tracer can be configured using environment variables and INI settings.
 
-INI settings can be configured globally, for example in the `php.ini` file, or for a specific web server or virtual host.
+INI settings can be configured globally, for example, in the `php.ini` file, or for a specific web server or virtual host.
 
 **Note**: If you use code auto-instrumentation (the recommended approach), be aware that the instrumenting code is executed before any user code. As a result, the environment variables and the INI settings below must be set at the server level and be available to the PHP runtime before any user code is executed. For example, `putenv()` and `.env` files do not work.
 
 ### Apache
 
-For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the php tracer, for example:
+For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the PHP tracer, for example:
 
 ```
 ; Example of passing the host environment variable SOME_ENV
@@ -82,7 +82,7 @@ DD_TRACE_DEBUG=1 php -d datadog.service=my-app -S localhost:8888
 
 ### Environment variable configuration
 
-The following table lists the environment variables for configuring tracing, along with corresponding INI settings (where available) and defaults.
+The following table lists the environment variables for configuring tracing, and corresponding INI settings (where available) and defaults.
 
 `DD_AGENT_HOST`
 : **INI**: `datadog.agent_host`<br>

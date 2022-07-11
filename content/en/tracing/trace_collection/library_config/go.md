@@ -94,7 +94,7 @@ Dynamically rename services through configuration. Services can be separated by 
 
 ## Configure APM environment name
 
-The [APM environment name][3] may be configured [in the agent][4] or using the [WithEnv][2] start option of the tracer.
+The [APM environment name][3] may be configured [in the Agent][4] or using the [WithEnv][2] start option of the tracer.
 
 ## B3 headers extraction and injection
 

@@ -37,7 +37,7 @@ Tracer settings can be configured with the following environment variables:
 `DD_TAGS`
 : Set global tags that are applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically, the format is `tracer.init({ tags: { foo: 'bar' } })`.
 
-It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][1] documentation for recommendations on how to configure these environment variables.
+It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][1] documentation for recommendations on configuring these environment variables.
 
 ### Instrumentation
 
@@ -84,7 +84,7 @@ Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD
 Provide service names for each plugin. Accepts comma separated `plugin:service-name` pairs, with or without spaces.
 
 `DD_TRACE_DISABLED_PLUGINS`
-: A comma-separated string of integration names automatically disabled when tracer is initialized. Environment variable only, for example, `DD_TRACE_DISABLED_PLUGINS=express,dns`.
+: A comma-separated string of integration names automatically disabled when the tracer is initialized. Environment variable only, for example, `DD_TRACE_DISABLED_PLUGINS=express,dns`.
 
 `DD_TRACE_LOG_LEVEL`
 : **Default**: `debug`<br>
