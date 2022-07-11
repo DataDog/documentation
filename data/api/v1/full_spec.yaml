@@ -25444,11 +25444,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - AuthZ:
-        - security_monitoring_signals_write
-        apiKeyAuth: []
-        appKeyAuth: []
       summary: Add a security signal to an incident
       tags:
       - Security Monitoring
