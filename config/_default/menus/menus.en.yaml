@@ -6111,18 +6111,6 @@ api:
         - GetUsageLambdaTracedInvocations
       unstable: []
       order: 38
-  - name: Get estimated cost across multi-org account
-    url: '#get-estimated-cost-across-multi-org-account'
-    identifier: usage-metering-get-estimated-cost-across-multi-org-account
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetEstimatedCostByOrg
-      unstable: []
-      order: 39
   - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
     identifier: usage-metering-get-cost-across-multi-org-account
