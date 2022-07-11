@@ -264,13 +264,18 @@ A signal closes regardless of the query being matched once the time exceeds the 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Dynamic Criticality
+### Dynamic criticality
 
-If `dynamic criticality` is set to `true`, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.
+One way to decrease signal noise is to prioritize production environment signals over non-production environment signals. Select the `Decrease severity for non-production environments` checkbox to decrease the severity of signals in non-production environments by one level from what is defined by the rule case.
 
-The severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.
+| Signal Severity in Production Environment| Signal Severity in Non-production Environment|
+| ---------------------------------------- | -------------------------------------------- |
+| Critical                                 | High                                         |
+| High                                     | Medium                                       |
+| Medium                                   | Info                                         |
+| Info                                     | Info                                         |
 
-The decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.
+The severity decrement is applied to signals with an environment tag starting with `staging`, `test` or `dev`.
 
 ## Say what's happening
 
