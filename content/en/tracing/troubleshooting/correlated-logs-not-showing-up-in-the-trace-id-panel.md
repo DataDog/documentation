@@ -1,6 +1,6 @@
 ---
 title: Correlated Logs Not Showing Up in the Trace ID Panel
-kind: faq
+kind: documentation
 aliases:
   - /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
 further_reading:
