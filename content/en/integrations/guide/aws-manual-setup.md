@@ -93,7 +93,7 @@ Ensure to leave **Require MFA** disabled.
 [2]: https://console.aws.amazon.com/iam/home#/policies
 [3]: https://console.aws.amazon.com/iam/home#/roles
 [4]: /security_platform/cspm
-[5]: /integrations/faq/error-datadog-not-authorized-sts-assume-role/
+[5]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 {{% /tab %}}
 
 {{% tab "Access keys (GovCloud or China Only)" %}}

@@ -1,9 +1,10 @@
 ---
 title: Cloud Metric Delay
-kind: faq
+kind: guide
 aliases:
     - /integrations/faq/are-my-aws-cloudwatch-metrics-delayed/
     - /integrations/faq/why-is-there-a-delay-in-receiving-my-data/
+    - /integrations/faq/cloud-metric-delay
 further_reading:
 - link: "/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
   tag: "FAQ"
