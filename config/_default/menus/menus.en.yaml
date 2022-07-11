@@ -1425,7 +1425,7 @@ main:
     identifier: tracing_library_config_dotnet_framework
     weight: 109
   - name: Custom Instrumentation
-    url: tracing/trace_collection/custom_instrumentation
+    url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
     weight: 104
