@@ -622,6 +622,7 @@ class Integrations:
     def get_collision_alternate_name(self, file_name):
         dir_path = dirname(normpath(file_name))
         dir_name = basename(dir_path)
+        dir_path = dir_path.replace('/assets', '') if dir_path.endswith('assets') else dir_path
         manifest_json = json.load(open(dir_path + '/manifest.json'))
         integration_id = manifest_json.get("integration_id", "") or ""
         collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or dir_name
