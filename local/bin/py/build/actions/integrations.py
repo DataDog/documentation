@@ -623,8 +623,10 @@ class Integrations:
         dir_path = dirname(normpath(file_name))
         dir_name = basename(dir_path)
         dir_path = dir_path.replace('/assets', '') if dir_path.endswith('assets') else dir_path
-        manifest_json = json.load(open(dir_path + '/manifest.json'))
-        integration_id = manifest_json.get("integration_id", "") or ""
+        manifest_json = {}
+        with open(dir_path + '/manifest.json') as fp:
+            manifest_json = json.load(fp)
+        integration_id = manifest_json.get("integration_id", "") or manifest_json.get('app_id', "") or ""
         collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or dir_name
         return collision_name
 
@@ -782,6 +784,7 @@ class Integrations:
         # determine new name is collision
         if exist_collision:
             collision_name = self.get_collision_alternate_name(file_name)
+            print(f"{file_name} {collision_name}")
 
         if metrics_exist:
             result = re.sub(
