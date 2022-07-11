@@ -264,6 +264,14 @@ A signal closes regardless of the query being matched once the time exceeds the 
 {{% /tab %}}
 {{< /tabs >}}
 
+### Dynamic Criticality
+
+If `dynamic criticality` is set to `true`, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.
+
+The severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.
+
+The decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.
+
 ## Say what's happening
 
 The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
