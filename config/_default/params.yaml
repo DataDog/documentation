@@ -85,6 +85,7 @@ code_language_ids:
     native: Native
     other: Other
     linux: Linux
+    opentelemetry: OpenTelemetry
 
 branch: ""
 
