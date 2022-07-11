@@ -13,6 +13,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-page/
   tag: ブログ
   text: サービステレメトリー、エラー追跡、SLO など
+- link: https://www.datadoghq.com/blog/monitor-service-performance-with-slo-alerts/
+  tag: ブログ
+  text: SLO アラートによるサービスパフォーマンスのプロアクティブな監視
 kind: documentation
 title: サービスレベル目標
 ---
