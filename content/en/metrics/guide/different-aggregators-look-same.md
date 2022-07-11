@@ -1,5 +1,5 @@
 ---
-title: I'm switching between the sum/min/max/avg aggregators but the values look the same?
+title: Switching between the sum/min/max/avg aggregators doesn't change the value
 kind: faq
 aliases:
     - /graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
