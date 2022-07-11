@@ -66,7 +66,7 @@ Each query or formula, along with any [filtering tags][6], can be aliased. The a
 
 ##### Event overlay
 
-Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][7], for example:
+Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Explorer][7], for example:
 
 | Query                       | Description                                                |
 |-----------------------------|------------------------------------------------------------|

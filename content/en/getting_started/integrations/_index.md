@@ -155,7 +155,7 @@ custom check
 : This is the main configuration file where you're defining how the Agent as a whole interacts with its own integrations and with your system. Use this file to update API keys, proxies, host tags, and other global settings.
 
 event
-: Events are informational messages about your system that are consumed by [the events stream][40] so that you can build monitors on them.
+: Events are informational messages about your system that are consumed by [the events explorer][40] so that you can build monitors on them.
 
 instance
 : You define and map the instance of whatever you are monitoring in the `conf.yaml` file. For example, in the [`http_check` integration][41], you're defining the name associated with the instance of the HTTP endpoint you are monitoring up and downtime. You can monitor **multiple instances** in the same integration, and you do that by defining all of the instances in the `conf.yaml` file.
@@ -224,7 +224,7 @@ tagging
 [37]: /agent/troubleshooting/
 [38]: /help/
 [39]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[40]: https://app.datadoghq.com/event/stream
+[40]: https://app.datadoghq.com/event/explorer
 [41]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
 [42]: /metrics/
 [43]: /metrics/custom_metrics/
