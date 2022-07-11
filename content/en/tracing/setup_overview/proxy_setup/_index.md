@@ -383,13 +383,44 @@ Complete examples:
 
 After completing this configuration, HTTP requests to NGINX will initiate and propagate Datadog traces, and will appear in the APM UI.
 
+#### Sampling
+
+To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate in the config file `dd-config.json` by setting the parameter `sample_rate` to a value between `0.0` (0%) and `1.0` (100%):
+
+```json
+{
+  "environment": "prod",
+  "service": "nginx",
+  "agent_host": "localhost",
+  "agent_port": 8126,
+  "sample_rate": 0.2
+}
+```
+
+If no value is specified, the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent) are applied.
+
+Set **by-service** sampling rates with the `sampling_rules` configuration parameter. Configure a rate limit by setting the parameter `sampling_limit_per_second` to a number of traces per second per service instance. If no `sampling_limit_per_second` value is set, a limit of 100 traces per second is applied.
+
+For example, to send 50% of the traces for the service named `nginx`, up to `50` traces per second:
+
+```json
+{
+  "environment": "prod",
+  "service": "nginx",
+  "agent_host": "localhost",
+  "agent_port": 8126,
+  "sampling_rules": [{"service":"nginx", "sample_rate":0.5}],
+  "sampling_limit_per_second":50
+}
+```
+
 #### NGINX and FastCGI
 
 When the location is serving a FastCGI backend instead of HTTP, the `location` block should use `opentracing_fastcgi_propagate_context` instead of `opentracing_propagate_context`.
 
 ## NGINX Ingress Controller for Kubernetes
 
-The [Kubernetes ingress-nginx][7] controller versions 0.23.0+ include the NGINX plugin for OpenTracing.
+The [Kubernetes ingress-nginx][8] controller versions 0.23.0+ include the NGINX plugin for OpenTracing.
 
 To enable this plugin, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
 The name of the ConfigMap will be cited explicitly by the nginx-ingress controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
@@ -434,9 +465,15 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 
 ### Sampling
 
-To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Nginx are sent. The Kubernetes Nginx ingress controller uses [v1.2.1][8] of the `dd-opentracing-cpp` library).
+To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Nginx are sent. The Kubernetes Nginx ingress controller uses [v1.2.1][9] of the `dd-opentracing-cpp` library).
 
-To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
+To keep 10% of the traces starting for the service named `ingress-nginx`, set the following environment variable:
+
+```
+DD_TRACE_SAMPLING_RULES=[{"service":"ingress-nginx","sample_rate":0.1}]
+```
+
+To use the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
 ```
 DD_TRACE_SAMPLING_RULES=[]
@@ -469,9 +506,9 @@ data:
 [4]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
 [5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
 [6]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
-[7]: https://github.com/kubernetes/ingress-nginx
-[8]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
-[9]: /tracing/trace_ingestion/mechanisms#in-the-agent
+[7]: /tracing/trace_ingestion/mechanisms#in-the-agent
+[8]: https://github.com/kubernetes/ingress-nginx
+[9]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
 {{% /tab %}}
 {{% tab "Istio" %}}
 
@@ -531,7 +568,7 @@ of the higher-level `CronJob`.
 
 ### Sampling
 
-To control the volume of traces starting from Istio that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent. 
+To control the volume of traces starting from Istio that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent.
 
 To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
