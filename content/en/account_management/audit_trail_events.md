@@ -30,7 +30,7 @@ further_reading:
 - [Real User Monitoring](#real-user-monitoring-events)
 - [Sensitive Data Scanner](#sensitive-data-scanner-events)
 - [Service Level Objectives](#service-level-objectives-slo-events)
-- [Synthetic Monitoring](#synthetics-monitoring-events)
+- [Synthetic Monitoring](#synthetic-monitoring-events)
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
 
