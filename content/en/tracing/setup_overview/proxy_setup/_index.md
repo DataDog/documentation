@@ -385,7 +385,7 @@ After completing this configuration, HTTP requests to NGINX will initiate and pr
 
 #### Sampling
 
-To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate in the config file `dd-config.json` by setting the parameter `sample_rate` to a value between `0.0` (0%) and `1.0` (100%):
+To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate in the config file `dd-config.json` by setting the `sample_rate` parameter to a value between `0.0` (0%) and `1.0` (100%):
 
 ```json
 {
@@ -469,7 +469,7 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 
 To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Nginx are sent. The Kubernetes Nginx ingress controller uses [v1.2.1][11] of the `dd-opentracing-cpp` library).
 
-To keep 10% of the traces starting for the service named `ingress-nginx`, set the following environment variable:
+For example, to keep 10% of the traces starting from the `ingress-nginx` service:
 
 ```
 DD_TRACE_SAMPLING_RULES=[{"service":"ingress-nginx","sample_rate":0.1}]
