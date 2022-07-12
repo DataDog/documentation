@@ -30,8 +30,8 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 ### Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your service be at least version 7.37<br />
-: Note: The USM beta has been available since Agent version 7.32, but it's strongly suggested to run a newer version to get the latest improvements.
+: Universal Service Monitoring requires that the Datadog Agent installed alongside your service be at least version 7.37.<br />
+: **Note:** The USM beta has been available since Agent version 7.32, but Datadog strongly suggests running a newer version to get the latest improvements.
 
 Supported platforms
 : Linux kernel 4.4 and greater<br/>
