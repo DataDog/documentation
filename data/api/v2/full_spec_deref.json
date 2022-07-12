@@ -37741,7 +37741,6 @@
               "incident_write": "Create, view, and manage incidents in Datadog.",
               "metrics_read": "View custom metrics.",
               "monitors_read": "View monitors.",
-              "monitors_write": "Edit, mute, and delete individual monitors.",
               "security_monitoring_filters_read": "Read Security Filters.",
               "security_monitoring_filters_write": "Create, edit, and delete Security Filters.",
               "security_monitoring_rules_read": "Read Detection Rules.",
@@ -63825,6 +63824,17 @@
             "description": "Too Many Requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "metrics_read"
+            ]
+          }
+        ],
         "summary": "List tag configuration by name",
         "tags": [
           "Metrics"
