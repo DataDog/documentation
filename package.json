@@ -22,7 +22,8 @@
         "deploy:live": "./node_modules/.bin/hugo deploy --target live -e live --maxDeletes -1 --log --verbose --debug",
         "build:apiPages": "node -e 'require(\"./assets/scripts/build-api-pages.js\").init()'",
         "dereference": "node ./assets/scripts/dereference.js",
-        "test": "./node_modules/.bin/jest assets/scripts/tests"
+        "test": "./node_modules/.bin/jest",
+        "jest": "./node_modules/.bin/jest ./assets/scripts/tests"
     },
     "repository": {
         "type": "git",
