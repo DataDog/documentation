@@ -355,38 +355,24 @@ manage_ignored_translations:on-schedule:
   stage: post-deploy
   cache: {}
   environment: "live"
+  script:
+    - echo "Downloading ignored translation source files from weekly scheduled job..."
+    - manage_ignored_translation_files
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "translations" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: always
+
+manage_ignored_translations:manual:
+  <<: *base_template
+  stage: post-deploy
+  cache: {}
+  environment: "live"
   only:
     - master
   script:
-    - echo "Downloading ignored translation source files..."
+    - echo "Downloading ignored translation source files from manual invocation..."
     - manage_ignored_translation_files
   when: manual
-
-# Legacy translations nightly job
-# manage_translations:on-schedule:
-#   <<: *base_template
-#   stage: post-deploy
-#   cache:
-#     <<: *cache
-#     policy: pull
-#   environment: "live"
-#   variables:
-#     URL: ${PREVIEW_DOMAIN}
-#     CONFIG: ${PREVIEW_CONFIG}
-#   script:
-#     - |-
-#       if [[ $(date +%u) -lt 6 ]]; then
-#         nodenv shell 14.16.0
-#         [ -d ./node_modules ] && rm -rf ./node_modules
-#         yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
-#         DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
-#       fi
-#       chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
-#   artifacts:
-#     paths:
-#       - translate-debug.log
-#   only:
-#     - schedules
 
 test_missing_tms_live:
   <<: *base_template
