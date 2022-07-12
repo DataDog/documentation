@@ -2,7 +2,7 @@
 title: Tracing a Proxy
 kind: documentation
 further_reading:
-- link: "/tracing/visualization/"
+- link: "/tracing/glossary/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"
 - link: "https://www.envoyproxy.io/"

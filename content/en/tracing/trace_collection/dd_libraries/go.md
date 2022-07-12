@@ -18,7 +18,7 @@ further_reading:
 - link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
   text: "Package page"
-- link: "/tracing/visualization/"
+- link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 ---

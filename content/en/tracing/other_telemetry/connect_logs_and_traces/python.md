@@ -14,7 +14,7 @@ further_reading:
 - link: "/tracing/opentracing/"
   tag: 'Documentation'
   text: "Implement Opentracing across your applications."
-- link: "/tracing/visualization/"
+- link: "/tracing/glossary/"
   tag: 'Documentation'
   text: "Explore your services, resources, and traces"
 - link: "https://www.datadoghq.com/blog/request-log-correlation/"

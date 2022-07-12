@@ -11,7 +11,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
-- link: "/tracing/visualization/"
+- link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 - link: "/tracing/"

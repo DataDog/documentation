@@ -7,10 +7,10 @@ aliases:
     - /tracing/trace_ingestion/usage_metrics/
 description: "Learn how to monitor your APM usage."
 further_reading:
-- link: "/tracing/trace_ingestion/"
+- link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"
   text: "Trace Ingestion"
-- link: "/tracing/trace_retention/"
+- link: "/tracing/trace_pipeline/trace_retention/"
   tag: "Documentation"
   text: "Trace Retention"
 ---

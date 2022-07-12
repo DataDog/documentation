@@ -6,7 +6,7 @@ aliases:
   - /tracing/servicemap
   - /tracing/visualization/services_map/
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
 - link: "https://www.datadoghq.com/blog/service-map/"

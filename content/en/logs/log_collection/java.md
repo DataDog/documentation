@@ -16,7 +16,7 @@ further_reading:
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "/tracing/connect_logs_and_traces/java/"
+- link: "/tracing/other_telemetry/connect_logs_and_traces/java/"
   tag: "Documentation"
   text: "Connect Logs and Traces"
 - link: "/logs/faq/log-collection-troubleshooting-guide/"

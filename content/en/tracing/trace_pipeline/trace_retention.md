@@ -5,13 +5,13 @@ description: "Learn how to control trace retention with retention filters."
 aliases:
 - /tracing/trace_retention/
 further_reading:
-- link: "/tracing/trace_ingestion/mechanisms"
+- link: "/tracing/trace_pipeline/ingestion_mechanisms"
   tag: "Documentation"
   text: "Ingestion Mechanisms"
-- link: "/tracing/trace_ingestion/ingestion_controls/"
+- link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"
   text: "Ingestion Controls"
-- link: "/tracing/trace_retention/usage_metrics/"
+- link: "/tracing/trace_pipeline/metrics/"
   tag: "Documentation"
   text: "Usage Metrics"
 ---

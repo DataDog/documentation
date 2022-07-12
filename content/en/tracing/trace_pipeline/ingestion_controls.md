@@ -10,13 +10,13 @@ aliases:
     - /tracing/trace_ingestion/ingestion_controls
 description: "Learn how to control Ingestion rates with APM."
 further_reading:
-- link: "/tracing/trace_ingestion/mechanisms/"
+- link: "/tracing/trace_pipeline/ingestion_mechanisms/"
   tag: "Documentation"
   text: "Ingestion Mechanisms"
-- link: "/tracing/trace_retention/"
+- link: "/tracing/trace_pipeline/trace_retention/"
   tag: "Documentation"
   text: "Trace Retention"
-- link: "/tracing/trace_retention/usage_metrics/"
+- link: "/tracing/trace_pipeline/metrics/"
   tag: "Documentation"
   text: "Usage Metrics"
 ---

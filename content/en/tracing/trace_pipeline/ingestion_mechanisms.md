@@ -5,13 +5,13 @@ description: "Overview of the mechanisms in the tracer and the Agent that contro
 aliases:
 - /tracing/trace_ingestion/mechanisms
 further_reading:
-- link: "/tracing/trace_ingestion/ingestion_controls/"
+- link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"
   text: "Ingestion Controls"
-- link: "/tracing/trace_retention/"
+- link: "/tracing/trace_pipeline/trace_retention/"
   tag: "Documentation"
   text: "Trace Retention"
-- link: "/tracing/trace_ingestion/usage_metrics/"
+- link: "/tracing/trace_pipeline/metrics/"
   tag: "Documentation"
   text: "Usage Metrics"
 ---

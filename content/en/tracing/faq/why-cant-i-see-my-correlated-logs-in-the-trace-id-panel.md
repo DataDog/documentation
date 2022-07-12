@@ -2,7 +2,7 @@
 title: Why can't I see my correlated logs in the Trace ID panel?
 kind: faq
 further_reading:
-- link: "/tracing/connect_logs_and_traces/"
+- link: "/tracing/other_telemetry/connect_logs_and_traces/"
   tag: "Documentation"
   text: "Correlate Traces and Logs"
 - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
