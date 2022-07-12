@@ -38,7 +38,7 @@
         "node": ">= 14.16.0"
     },
     "jest": {
-        "coveragePathIgnorePatterns": ["<rootDir>/examples/"]
+        "coveragePathIgnorePatterns": ["examples/datadog-api-client-typescript/tests/api/deserialization.test.ts"]
     },
     "dependencies": {
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
