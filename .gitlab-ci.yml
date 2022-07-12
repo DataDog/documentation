@@ -85,7 +85,7 @@ build_preview:
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
-    - yarn run test
+    - jest assets/scripts/tests
     - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
