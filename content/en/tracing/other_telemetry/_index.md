@@ -32,6 +32,6 @@ Follow the data from failing synthetic tests directly through to the root causes
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/connect_logs_and_traces/
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
 [2]: /real_user_monitoring/connect_rum_and_traces/
 [3]: /synthetics/apm/

@@ -216,4 +216,4 @@ These traces are available for 15 minutes in the [Live Search][18] explorer. To 
 [16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
 [17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
 [18]: /tracing/trace_explorer/#live-search-for-15-minutes
-[19]: /tracing/trace_retention/#retention-filters
+[19]: /tracing/trace_pipeline/trace_retention/#retention-filters

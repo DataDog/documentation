@@ -583,7 +583,7 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/parsing
-[2]: /tracing/connect_logs_and_traces/dotnet/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [3]: /agent/logs/advanced_log_collection
 [4]: /serverless/azure_app_services
 [5]: /account_management/org_settings/sensitive_data_detection/#overview

@@ -312,7 +312,7 @@ This configuration ensures consistent host metadata and centralizes the configur
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[2]: /tracing/connect_logs_and_traces/opentelemetry
+[2]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
 [3]: https://opentelemetry.io/docs/collector/getting-started/#deployment
 [4]: https://opentelemetry.io/docs/collector/configuration/
 [5]: https://app.datadoghq.com/organization-settings/api-keys

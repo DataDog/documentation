@@ -143,7 +143,7 @@ The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support 
 [7]: https://docs.datadoghq.com/help/
 [8]: /tracing/trace_collection/compatibility/ruby
 [9]: /tracing/trace_collection/compatibility/go
-[10]: /tracing/connect_logs_and_traces/java/
+[10]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [11]: /tracing/trace_collection/compatibility/java
 [12]: https://datadoghq.slack.com/archives/CFDPB83M4
 [13]: https://chat.datadoghq.com/

@@ -224,6 +224,6 @@ For more information, see [Setting up CPP and Custom Instrumentation][1].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/guide/metrics_namespace/
+[1]: /tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
 [3]: /tracing/trace_collection/custom_instrumentation/

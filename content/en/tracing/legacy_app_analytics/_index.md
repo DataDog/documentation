@@ -501,4 +501,4 @@ apm_config:
 ```
 
 [1]: /tracing/trace_ingestion/
-[2]: /tracing/trace_ingestion/mechanisms
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/

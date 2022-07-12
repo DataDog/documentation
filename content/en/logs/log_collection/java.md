@@ -517,7 +517,7 @@ To generate this JSON:
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /logs/log_configuration/parsing
-[3]: /tracing/connect_logs_and_traces/java/
+[3]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: https://github.com/logstash/logstash-logback-encoder
 [5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
 [6]: /logs/log_configuration/parsing/#key-value-or-logfmt

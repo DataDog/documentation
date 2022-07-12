@@ -73,7 +73,7 @@ After a metric is created, only two fields can be updated:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/trace_retention_and_ingestion
+[1]: /tracing/trace_pipeline/trace_retention_and_ingestion
 [2]: /account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/metrics/#overview
 [4]: /monitors/create/types/anomaly/#overview

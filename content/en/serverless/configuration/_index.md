@@ -661,12 +661,12 @@ If you have trouble configuring your installations, set the environment variable
 [14]: /logs/log_configuration/pipelines/
 [15]: /tracing/trace_collection/compatibility/
 [16]: /tracing/trace_collection/custom_instrumentation/
-[17]: /tracing/trace_ingestion/ingestion_controls/#configure-the-service-ingestion-rate
+[17]: /tracing/trace_pipeline/ingestion_controls/#configure-the-service-ingestion-rate
 [18]: /tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
-[19]: /tracing/trace_ingestion/mechanisms/?tabs=environmentvariables#head-based-sampling
+[19]: /tracing/trace_pipeline/ingestion_mechanisms//?tabs=environmentvariables#head-based-sampling
 [20]: /tracing/guide/ignoring_apm_resources/
 [21]: /tracing/configure_data_security/
-[22]: /tracing/connect_logs_and_traces/
+[22]: /tracing/other_telemetry/connect_logs_and_traces/
 [23]: /logs/log_configuration/parsing/
 [24]: /integrations/guide/source-code-integration
 [25]: /serverless/custom_metrics

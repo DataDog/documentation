@@ -47,5 +47,5 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
 [2]: https://opentracing.io/docs/
 [3]: /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
 [4]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
-[5]: /tracing/connect_logs_and_traces/opentelemetry
+[5]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
 [6]: /tracing/trace_collection/open_standards/java

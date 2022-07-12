@@ -70,4 +70,4 @@ Datadog APM seamlessly integrates with the other Datadog metrics and information
 [5]: /tracing/visualization/#spans
 [6]: /tracing/visualization/trace/?tab=spanmetadata
 [7]: /tracing/guide/adding_metadata_to_spans/
-[8]: /tracing/connect_logs_and_traces/
+[8]: /tracing/other_telemetry/connect_logs_and_traces/

@@ -107,7 +107,7 @@ For example, you can create filters to keep all traces for:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_ingestion
-[2]: /tracing/trace_retention/usage_metrics
+[2]: /tracing/trace_pipeline/metrics
 [3]: https://app.datadoghq.com/apm/traces/retention-filters
 [4]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [5]: /tracing/visualization/#service-entry-span

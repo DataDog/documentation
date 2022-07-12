@@ -91,7 +91,7 @@ Use the **Share** button to share the log opened in side panel to other contexts
 [6]: /network_monitoring/performance/network_page/
 [7]: /infrastructure/livecontainers/?tab=linuxwindows#introduction
 [8]: /infrastructure/serverless/#function-detail-view
-[9]: /tracing/connect_logs_and_traces/
+[9]: /tracing/other_telemetry/connect_logs_and_traces/
 [10]: /getting_started/tagging/unified_service_tagging
 [11]: /tracing/app_analytics/search/#displaying-a-full-trace
 [12]: /logs/explorer/facets/#overview

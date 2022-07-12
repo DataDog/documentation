@@ -309,7 +309,7 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
-[6]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#head-based-sampling
+[6]: /tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#head-based-sampling
 [7]: /tracing/trace_collection/compatibility/dotnet-framework/#integrations
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [9]: https://github.com/openzipkin/b3-propagation

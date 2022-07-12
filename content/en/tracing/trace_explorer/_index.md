@@ -139,14 +139,14 @@ You can customize which spans are retained and at what retention rates. By defau
 
 
 [1]: https://app.datadoghq.com/apm/traces
-[2]: /tracing/trace_ingestion/ingestion_controls
-[3]: /tracing/trace_retention/#retention-filters
-[4]: /tracing/trace_retention/#datadog-intelligent-retention-filter
+[2]: /tracing/trace_pipeline/ingestion_controls
+[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[4]: /tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
 [5]: /tracing/visualization/#indexed-span
 [6]: /tracing/trace_ingestion/
-[7]: /tracing/trace_retention/
-[8]: /tracing/trace_ingestion/mechanisms#in-the-agent
-[9]: /tracing/trace_ingestion/mechanisms#in-tracing-libraries-user-defined-rules
+[7]: /tracing/trace_pipeline/trace_retention/
+[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[9]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
 [10]: /account_management/billing/apm_distributed_tracing/
 [11]: /tracing/visualization/#service-entry-span
 [12]: /tracing/visualization/#trace-root-span

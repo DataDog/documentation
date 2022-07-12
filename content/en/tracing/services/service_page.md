@@ -189,13 +189,13 @@ View common patterns in your service’s logs, and use facets like status in the
 [5]: /monitors/service_level_objectives/
 [6]: /monitors/incident_management/
 [7]: /watchdog/
-[8]: /tracing/guide/metrics_namespace/
+[8]: /tracing/metrics/metrics_namespace/
 [9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [10]: /dashboards/
 [11]: /tracing/visualization/#resources
 [12]: /tracing/deployment_tracking/#versions-deployed
 [13]: /getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
-[14]: /tracing/runtime_metrics/
+[14]: /tracing/metrics/runtime_metrics/
 [15]: /tracing/profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/

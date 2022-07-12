@@ -293,7 +293,7 @@ The available [environment variables][3] depend on the version of the C++ tracer
 | v1.9 | v0.3.6 |
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
-[2]: /tracing/trace_ingestion/mechanisms#in-the-agent
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [3]: /tracing/setup/cpp/#environment-variables
 {{% /tab %}}
 {{% tab "NGINX" %}}
@@ -509,7 +509,7 @@ data:
 [4]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
 [5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
 [6]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
-[7]: /tracing/trace_ingestion/mechanisms#in-the-agent
+[7]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [8]: https://github.com/DataDog/dd-opentracing-cpp/
 [9]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [10]: https://github.com/kubernetes/ingress-nginx
@@ -675,7 +675,7 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [6]: https://istio.io/docs/setup/install/istioctl/
 [7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
 [8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[9]: /tracing/trace_ingestion/mechanisms#in-the-agent
+[9]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection

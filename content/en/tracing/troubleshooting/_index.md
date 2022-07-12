@@ -125,7 +125,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: /tracing/guide/metrics_namespace/
+[2]: /tracing/metrics/metrics_namespace/
 [3]: /tracing/troubleshooting/tracer_startup_logs/
 [4]: /tracing/troubleshooting/connection_errors/
 [5]: /tracing/troubleshooting/tracer_debug_logs/

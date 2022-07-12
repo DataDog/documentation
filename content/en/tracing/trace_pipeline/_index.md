@@ -45,8 +45,8 @@ Learn about how to track and monitor your volume of ingested and indexed data, i
 
 
 
-[1]: /tracing/trace_ingestion/mechanisms
-[2]: /tracing/trace_ingestion/ingestion_controls
+[1]: /tracing/trace_pipeline/ingestion_mechanisms/
+[2]: /tracing/trace_pipeline/ingestion_controls
 [3]: /tracing/trace_pipeline/generate_metrics
-[4]: /tracing/trace_retention
-[5]: /tracing/trace_retention/usage_metrics
+[4]: /tracing/trace_pipeline/trace_retention
+[5]: /tracing/trace_pipeline/metrics
