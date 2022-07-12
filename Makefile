@@ -47,13 +47,13 @@ clean-exe:  ## Remove execs.
 clean-extracted-repos:  ## Remove built integrations files.
 	@if [ "${CLEAN_EXTRACTED_REPOS}" == "true" ] || [ -z ${CLEAN_EXTRACTED_REPOS} ] ; \
 		then echo "\033[31m\033[1mCleaning all extracted repos, to persist these between builds, set CLEAN_EXTRACTED_REPOS=false in your Makefile.config \033[0m"; \
+		rm -rf ./integrations_data/; \
 	else \
 	  echo "\033[31m\033[1mSkipping cleaning extracted repos, to clean these between builds, set CLEAN_EXTRACTED_REPOS=true in your Makefile.config \033[0m"; \
 	  exit 0; \
 	fi
 
 
-	@rm -rf ./integrations_data/
 	@if [ -d data/integrations ]; then \
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \

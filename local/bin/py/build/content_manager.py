@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-
+import glob
 import requests
 
 from github_connect import GitHub
@@ -61,6 +61,22 @@ def update_globs(new_path, globs):
     return new_globs
 
 
+def extracted_files_exist(extracted_dir, globs):
+    """
+    Determines if the extracted globs already exist in a dir
+    if there are at least as many files as there are globs then its likely we have everything we need.
+    :param: extracted_dir dir containing already extracted files
+    :param globs: list of globs
+    :return: boolean
+    """
+    files = []
+    glob_count = len(globs)
+    for pattern in globs:
+        files = files + glob.glob(os.path.join(extracted_dir, pattern), recursive=True)
+    files = list(filter(lambda x: not x.endswith('.pickle'), files))
+    return len(files) >= glob_count
+
+
 def local_or_upstream(github_token, extract_dir, list_of_contents):
     """
     This goes through the list_of_contents and check for each repo specified in order:
@@ -80,7 +96,7 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
                 local_repo_path,
                 content["globs"],
             )
-        elif isdir(repo_path_last_extract):
+        elif isdir(repo_path_last_extract) and extracted_files_exist(repo_path_last_extract, content["globs"]):
             print(
                 f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found from previous extract in:"
                 f" {repo_path_last_extract} "
