@@ -86,7 +86,7 @@ build_preview:
     - placehold_translations
     - update_preview_baseurl
     # - yarn run jest
-    - jest assets/scripts/tests/lang-redirects.test.js 
+    - ./node_modules/.bin/jest assets/scripts/tests/lang-redirects.test.js 
     - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
