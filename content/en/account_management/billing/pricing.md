@@ -93,7 +93,7 @@ Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly prici
 [1]: https://www.datadoghq.com/pricing
 [2]: /metrics/custom_metrics/
 [3]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[4]: /tracing/trace_ingestion/
+[4]: /tracing/trace_pipeline/ingestion_controls/
 [5]: /tracing/trace_pipeline/trace_retention/
 [6]: /database_monitoring/data_collected/#normalized-queries
 [7]: /help/
