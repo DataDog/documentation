@@ -1,6 +1,8 @@
 ---
 title: Events Explorer
 kind: documentation
+aliases:
+    - /events/stream/
 further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
