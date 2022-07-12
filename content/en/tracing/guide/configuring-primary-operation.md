@@ -13,7 +13,7 @@ further_reading:
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/services/resource page/"
+- link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
 - link: "/tracing/trace_explorer/trace_view/"
