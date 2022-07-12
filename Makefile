@@ -1,6 +1,7 @@
 # make
 .PHONY: clean clean-all clean-build clean-examples clean-go-examples clean-java-examples clean-exe clean-extracted-repos clean-auto-doc clean-node clean-virt help start stop
 .DEFAULT_GOAL := help
+CLEAN_EXTRACTED_REPOS ?= true
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
 					printf `pyenv which python3`; \
@@ -21,11 +22,16 @@ include $(CONFIG_FILE)
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
+ifeq ($(CLEAN_EXTRACTED_REPOS),true)
 clean: stop  ## Clean all make installs.
 	@echo "cleaning up..."
 	make clean-build
 	make clean-extracted-repos
 	make clean-auto-doc
+else
+clean:
+	echo "\033[31m\033[1mSkipping cleaning extracted repos, to clean these between builds, set CLEAN_EXTRACTED_REPOS=true in your Makefile.config \033[0m";
+endif
 
 clean-all: stop  ## Clean everything.
 	make clean-build
@@ -45,15 +51,9 @@ clean-exe:  ## Remove execs.
 	@rm -rf ${EXE_LIST}
 
 clean-extracted-repos:  ## Remove built integrations files.
-	@if [ "${CLEAN_EXTRACTED_REPOS}" == "true" ] || [ -z ${CLEAN_EXTRACTED_REPOS} ] ; \
-		then echo "\033[31m\033[1mCleaning all extracted repos, to persist these between builds, set CLEAN_EXTRACTED_REPOS=false in your Makefile.config \033[0m"; \
-		rm -rf ./integrations_data/; \
-	else \
-	  echo "\033[31m\033[1mSkipping cleaning extracted repos, to clean these between builds, set CLEAN_EXTRACTED_REPOS=true in your Makefile.config \033[0m"; \
-	  exit 0; \
-	fi
+	@echo "\033[31m\033[1mCleaning all extracted repos, to persist these between builds, set CLEAN_EXTRACTED_REPOS=false in your Makefile.config \033[0m"; \
 
-
+	@rm -rf ./integrations_data/
 	@if [ -d data/integrations ]; then \
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
