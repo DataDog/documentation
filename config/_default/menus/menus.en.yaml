@@ -1099,7 +1099,7 @@ main:
     parent: monitors_create
     identifier: monitor_types_composite
     weight: 108
-  - name: Custom Check
+  - name: Service Check
     url: monitors/create/types/custom_check/
     parent: monitors_create
     identifier: monitor_types_custom_check
