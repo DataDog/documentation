@@ -2216,7 +2216,7 @@ main:
     parent: log_configuration
     weight: 209
   - name: Connect Logs and Traces
-    url: tracing/connect_logs_and_traces/
+    url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
     identifier: logs_traces_connection
     weight: 3
