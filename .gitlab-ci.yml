@@ -20,6 +20,7 @@ variables:
   REPO_URL: "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ddbuild.io/DataDog/${DOCS_REPO_NAME}.git"
   # yarn/node cache dirs
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
+  IMAGE: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
 
 # ================== copy scripts =============== #
 before_script:
@@ -53,7 +54,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: ${IMAGE}
   tags:
     - "runner:main"
   except:
@@ -351,7 +352,9 @@ evaluate_missing_metrics:
 # The translation syncing pipeline is triggered by github webhook, but these files are not in git.
 # This allows some dynamically built content (such as integrations) to be localized automatically.
 manage_ignored_translations:on-schedule:
-  <<: *base_template
+  image: ${IMAGE}
+  tags:
+    - "runner:main"
   stage: post-deploy
   cache: {}
   environment: "live"
