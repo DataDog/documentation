@@ -142,6 +142,8 @@ The default branch is used to power some features of the products, namely:
 
 - New flaky tests: Tests that are not currently classified as flaky in the default branch. If the default branch is not properly set, this could lead to a wrong number of detected new flaky tests.
 
+- Pipelines list: only default branches are displayed there, so a branch that is not results in a missing item from this table or the wrong branch being displayed.
+
 #### How to fix the default branch
 
 If you have admin access, you can update it from the [Repository Settings Page][11].
