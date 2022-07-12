@@ -11,7 +11,7 @@ code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-    - link: 'tracing/setup/ruby'
+    - link: 'tracing/trace_collection/dd_libraries/ruby'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---

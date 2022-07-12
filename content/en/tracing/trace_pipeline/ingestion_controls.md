@@ -129,6 +129,6 @@ To specify that a specific percentage of a service's traffic should be sent, add
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#single-spans-app-analytics
 [7]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
-[9]: /tracing/trace_pipeline/trace_retention_and_ingestion/usage_metrics
+[9]: /tracing/trace_pipeline/metrics
 [10]: /tracing/trace_pipeline/ingestion_mechanisms/
 [11]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage

@@ -11,10 +11,10 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
 further_reading:
-    - link: 'tracing/connect_logs_and_traces'
+    - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect your Logs and Traces together'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---

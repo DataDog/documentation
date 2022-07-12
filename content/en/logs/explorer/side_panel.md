@@ -8,7 +8,7 @@ further_reading:
     - link: "/logs/log_configuration/processors"
       tag: 'Documentation'
       text: 'Learn how to process your logs'
-    - link: '/tracing/connect_logs_and_traces'
+    - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect logs and traces'
     - link: '/logs/guide/correlate-logs-with-metrics'

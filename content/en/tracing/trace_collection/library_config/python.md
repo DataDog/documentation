@@ -11,7 +11,7 @@ further_reading:
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
       tag: 'Pypi'
       text: 'API Docs'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'

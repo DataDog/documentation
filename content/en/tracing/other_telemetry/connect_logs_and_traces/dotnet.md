@@ -8,13 +8,10 @@ code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 60
 further_reading:
-    - link: 'tracing/manual_instrumentation'
+    - link: 'tracing/trace_collection/custom_instrumentation'
       tag: 'Documentation'
-      text: 'Instrument manually your application to create traces.'
-    - link: 'tracing/opentracing'
-      tag: 'Documentation'
-      text: 'Implement Opentracing across your applications.'
-    - link: 'tracing/visualization/'
+      text: 'Manually instrument your application to create traces.'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
     - link: 'https://www.datadoghq.com/blog/request-log-correlation/'

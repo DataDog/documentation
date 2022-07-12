@@ -5,7 +5,7 @@ further_reading:
 - link: '/getting_started/tagging/unified_service_tagging/'
   tag: 'Documentation'
   text: 'Learn about Unified Service Tagging'
-- link: '/tracing/connect_logs_and_traces/'
+- link: '/tracing/other_telemetry/connect_logs_and_traces'
   tag: 'Documentation'
   text: 'Connect Logs and Traces'
 - link: '/real_user_monitoring/connect_rum_and_traces/'
