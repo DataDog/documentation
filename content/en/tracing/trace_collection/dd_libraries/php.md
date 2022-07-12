@@ -653,7 +653,7 @@ For Apache, run:
 
 [1]: /tracing/compatibility_requirements/php
 [2]: https://app.datadoghq.com/apm/docs
-[3]: /tracing/visualization/
+[3]: /tracing/glossary/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: https://app.datadoghq.com/apm/services
 [6]: /tracing/trace_collection/library_config/php/

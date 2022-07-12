@@ -161,8 +161,8 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#span-tags
-[2]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#span-tags
+[2]: /tracing/glossary/#spans
 [3]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/include/datadog/tags.h
 [4]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/ext/tags.h
 [5]: /getting_started/tagging/unified_service_tagging

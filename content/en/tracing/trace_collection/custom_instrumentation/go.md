@@ -227,12 +227,12 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#span-tags
-[2]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#span-tags
+[2]: /tracing/glossary/#spans
 [3]: /tracing/setup/go/#compatibility
 [4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 [5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
 [6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
-[7]: /tracing/visualization/#trace
+[7]: /tracing/glossary/#trace
 [8]: https://github.com/openzipkin/b3-propagation
 [9]: /tracing/security

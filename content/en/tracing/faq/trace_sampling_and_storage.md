@@ -385,7 +385,7 @@ Individual traces are stored for 15 days. This means that all **sampled** traces
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 [2]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [3]: /tracing/app_analytics/#span-filtering
 [4]: /security/tracing/#resource-filtering

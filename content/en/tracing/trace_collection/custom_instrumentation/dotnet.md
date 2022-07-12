@@ -239,9 +239,9 @@ You can exclude traces based on the resource name to remove Synthetics traffic s
 [2]: /tracing/trace_collection/compatibility/dotnet-core
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: https://www.nuget.org/packages/Datadog.Trace.Annotations
-[5]: /tracing/visualization/#span-tags
-[6]: /tracing/visualization/#spans
-[7]: /tracing/visualization/#trace
+[5]: /tracing/glossary/#span-tags
+[6]: /tracing/glossary/#spans
+[7]: /tracing/glossary/#trace
 [8]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [9]: /tracing/trace_collection/dd_libraries/dotnet-core
 [10]: /tracing/security

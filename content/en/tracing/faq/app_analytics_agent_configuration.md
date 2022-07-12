@@ -71,7 +71,7 @@ For example, if you have a Python service named `python-api`, and it's running F
 [3]: /tracing/app_analytics/#custom-instrumentation
 [4]: /tracing/send_traces/
 [5]: https://app.datadoghq.com/apm/docs/trace-search
-[6]: /tracing/visualization/#services
-[7]: /tracing/visualization/#resources
+[6]: /tracing/glossary/#services
+[7]: /tracing/glossary/#resources
 [8]: /tracing/app_analytics/search/#analysed-span
-[9]: /tracing/visualization/#trace
+[9]: /tracing/glossary/#trace

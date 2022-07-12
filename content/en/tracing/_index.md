@@ -115,7 +115,7 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 [10]: /real_user_monitoring/connect_rum_and_traces
 [11]: /synthetics/apm/
 [12]: /tracing/trace_explorer/#live-search-for-15-minutes
-[13]: /tracing/visualization/services_map/
-[14]: /tracing/visualization/service/
-[15]: /tracing/deployment_tracking/
+[13]: /tracing/services/services_map/
+[14]: /tracing/services/service_page/
+[15]: /tracing/services/deployment_tracking/
 [16]: /tracing/profiler/

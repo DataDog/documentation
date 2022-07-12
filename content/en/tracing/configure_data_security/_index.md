@@ -75,7 +75,7 @@ apm_config:
 
 * `keep_values` - defines a set of keys to exclude from Agent trace obfuscation.
 
-[1]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}
 
@@ -98,7 +98,7 @@ apm_config:
         - product_id
 ```
 
-[1]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "Redis" %}}
 
@@ -115,7 +115,7 @@ apm_config:
       enabled: true
 ```
 
-[1]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "MemCached" %}}
 
@@ -132,7 +132,7 @@ apm_config:
       enabled: true
 ```
 
-[1]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "Http" %}}
 
@@ -154,7 +154,7 @@ apm_config:
 * `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
 
 
-[1]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "Stack Traces" %}}
 
@@ -331,8 +331,8 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 
 
 [1]: /help/
-[2]: /tracing/visualization/#trace
-[3]: /tracing/visualization/#spans
+[2]: /tracing/glossary/#trace
+[3]: /tracing/glossary/#spans
 [4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [5]: /tracing/guide/ignoring_apm_resources/
 [6]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables

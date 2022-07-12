@@ -298,8 +298,8 @@ After enabling Universal Service Monitoring, you can:
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: https://docs.datadoghq.com/tracing/deployment_tracking/
-[3]: /tracing/visualization/services_map/
-[4]: /tracing/deployment_tracking/
+[3]: /tracing/services/services_map/
+[4]: /tracing/services/deployment_tracking/
 [5]: /monitors/create/types/apm/?tab=apmmetrics
 [6]: /dashboards/
 [7]: /monitors/service_level_objectives/metric/

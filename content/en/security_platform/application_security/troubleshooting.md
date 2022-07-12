@@ -508,5 +508,5 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [6]: /tracing/troubleshooting/connection_errors/
 [7]: /security_platform/default_rules/security-scan-detected/
 [8]: /tracing/troubleshooting/tracer_startup_logs/
-[9]: /tracing/visualization/#spans
+[9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs

@@ -710,8 +710,8 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#spans
-[2]: /tracing/visualization/#span-tags
+[1]: /tracing/glossary/#spans
+[2]: /tracing/glossary/#span-tags
 [3]: /tracing/security
 [4]: /tracing/guide/send_traces_to_agent_by_api/
 [5]: https://www.php.net/func_get_args

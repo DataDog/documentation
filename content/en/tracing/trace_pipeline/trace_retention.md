@@ -110,7 +110,7 @@ For example, you can create filters to keep all traces for:
 [2]: /tracing/trace_pipeline/metrics
 [3]: https://app.datadoghq.com/apm/traces/retention-filters
 [4]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[5]: /tracing/visualization/#service-entry-span
+[5]: /tracing/glossary/#service-entry-span
 [6]: /tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
 [7]: /tracing/trace_explorer/?tab=listview#indexed-spans-search-with-15-day-retention
-[8]: /tracing/visualization/#trace-root-span
+[8]: /tracing/glossary/#trace-root-span

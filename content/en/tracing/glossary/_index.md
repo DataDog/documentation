@@ -195,10 +195,10 @@ When child spans are concurrent, execution time is calculated by dividing the ov
 [1]: /monitors/create/types/apm/
 [2]: /developers/guide/data-collection-resolution-retention/
 [3]: /tracing/setup/
-[4]: /tracing/visualization/services_list/
-[5]: /tracing/visualization/services_map/
-[6]: /tracing/visualization/service/
-[7]: /tracing/visualization/resource/
+[4]: /tracing/services/services_list/
+[5]: /tracing/services/services_map/
+[6]: /tracing/services/service_page/
+[7]: /tracing/services/resource_page/
 [8]: /tracing/opentracing/java/#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
 [9]: /tracing/manual_instrumentation/
 [10]: /tracing/opentracing/

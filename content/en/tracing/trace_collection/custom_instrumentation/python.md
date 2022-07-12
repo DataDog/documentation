@@ -111,7 +111,7 @@ API details of the decorator can be found in the `ddtrace.Tracer.trace` [documen
 
 
 
-[1]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#spans
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
 [3]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
 {{% /tab %}}

@@ -59,7 +59,7 @@ Some attributes have special meanings that lead to a dedicated display or specif
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Error Formating"  >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 {{% /tab %}}
 {{% tab "Host Info" %}}
 
@@ -104,7 +104,7 @@ Click on a service’s span to see network dependencies of the service making th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
-[2]: /tracing/visualization/#spans
-[3]: /tracing/visualization/#services
-[4]: /tracing/visualization/#resources
+[1]: /tracing/glossary/#trace
+[2]: /tracing/glossary/#spans
+[3]: /tracing/glossary/#services
+[4]: /tracing/glossary/#resources

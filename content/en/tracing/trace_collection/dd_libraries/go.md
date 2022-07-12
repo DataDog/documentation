@@ -142,7 +142,7 @@ If needed, configure the tracing library to send application performance telemet
 
 [1]: /tracing/compatibility_requirements/go
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[3]: /tracing/visualization/
+[3]: /tracing/glossary/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
 [6]: /tracing/profiler/enabling/?code-lang=go

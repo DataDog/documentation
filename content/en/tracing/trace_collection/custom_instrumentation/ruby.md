@@ -56,7 +56,7 @@ class ShoppingCartController < ApplicationController
 end
 ```
 
-[1]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#spans
 {{% /tab %}}
 
 {{% tab "Manually Instrumented Spans" %}}
@@ -75,7 +75,7 @@ end
 ```
 
 
-[1]: /tracing/visualization/#span-tags
+[1]: /tracing/glossary/#span-tags
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -299,8 +299,8 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#span-tags
-[2]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#span-tags
+[2]: /tracing/glossary/#spans
 [3]: /tracing/setup/ruby/#environment-and-tags
 [4]: /tracing/compatibility_requirements/ruby/
 [5]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
