@@ -65,7 +65,7 @@ _チェックステータス_ウィジェットアイコンをクリックする
 メトリクスのように経時的にカスタムチェックをグラフ化できなくても、監視することはできます。
 _Monitors_ タブ > _new monitor_ に移動し、**Custom Check** セクションを選択します。
 
-{{< img src="developers/service_checks/check_monitor.png" alt="チェックモニター"  >}}
+{{< img src="developers/service_checks/service_check_monitor.png" alt="チェックモニター"  >}}
 
 カスタムチェックモニターを構成します。
 
