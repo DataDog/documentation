@@ -468,9 +468,9 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/setup_overview/compatibility_requirements/dotnet-core
+[1]: /tracing/trace_collection/compatibility/dotnet-core
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /tracing/trace_collection/library_config/dotnet-core/
-[5]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6

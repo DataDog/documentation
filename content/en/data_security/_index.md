@@ -159,7 +159,7 @@ Continuous Integration pipelines and tests
 [15]: /logs/guide/logs-rbac-permissions
 [16]: /infrastructure/process/#process-arguments-scrubbing
 [17]: /infrastructure/livecontainers/configuration/#scrubbing-sensitive-information
-[18]: /tracing/setup_overview/configure_data_security/
+[18]: /tracing/configure_data_security/
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
 [21]: /real_user_monitoring/browser/modifying_data_and_context/

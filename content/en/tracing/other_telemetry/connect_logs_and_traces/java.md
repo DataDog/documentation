@@ -89,7 +89,7 @@ try {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_collection/java/
-[2]: /tracing/setup_overview/setup/java/
+[2]: /tracing/trace_collection/dd_libraries/java/
 [3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=jsonlogs#trace_id-option
 [4]: /logs/log_collection/java/#raw-format
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

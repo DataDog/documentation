@@ -104,10 +104,10 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/glossary/
-[2]: /tracing/setup_overview/setup/java
-[3]: /tracing/setup_overview/proxy_setup/
-[4]: /tracing/setup_overview/serverless_functions/
-[5]: /tracing/setup_overview/open_standards/
+[2]: /tracing/trace_collection/dd_libraries/java
+[3]: /tracing/trace_collection/proxy_setup/
+[4]: /tracing/trace_collection/serverless_functions/
+[5]: /tracing/trace_collection/open_standards/
 [6]: /tracing/trace_ingestion/ingestion_controls/
 [7]: /tracing/trace_retention/#retention-filters
 [8]: /tracing/generate_metrics/

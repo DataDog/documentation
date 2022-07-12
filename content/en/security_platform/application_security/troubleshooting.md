@@ -215,10 +215,10 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 
 
 [1]: /security_platform/application_security/setup_and_configure/
-[2]: /tracing/setup_overview/setup/ruby/#rack
+[2]: /tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
-[4]: /tracing/setup_overview/setup/ruby/#rails
-[5]: /tracing/setup_overview/setup/ruby/#sinatra
+[4]: /tracing/trace_collection/dd_libraries/ruby/#rails
+[5]: /tracing/trace_collection/dd_libraries/ruby/#sinatra
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

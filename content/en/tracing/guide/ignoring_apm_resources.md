@@ -241,8 +241,8 @@ Datadog::Tracing::Pipeline.before_flush do |trace|
 end
 ```
 
-[1]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[2]: /tracing/setup_overview/setup/ruby/#manual-instrumentation
+[1]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[2]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -312,7 +312,7 @@ public class GreetingController {
 }
 ```
 
-[1]: /tracing/setup_overview/custom_instrumentation/java/#extending-tracers
+[1]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -320,5 +320,5 @@ public class GreetingController {
 
 [1]: /help/
 [2]: /tracing/guide/add_span_md_and_graph_it/
-[3]: /tracing/setup_overview/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
+[3]: /tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
 [4]: https://golang.org/pkg/regexp/

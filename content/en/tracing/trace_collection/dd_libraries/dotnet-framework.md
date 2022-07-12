@@ -330,4 +330,4 @@ dotnet.exe example.dll
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /tracing/trace_collection/library_config/dotnet-framework/
-[5]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[5]: /tracing/trace_collection/custom_instrumentation/dotnet/

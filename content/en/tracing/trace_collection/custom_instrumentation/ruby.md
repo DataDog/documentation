@@ -303,6 +303,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [2]: /tracing/visualization/#spans
 [3]: /tracing/setup/ruby/#environment-and-tags
 [4]: /tracing/compatibility_requirements/ruby/
-[5]: /tracing/setup_overview/setup/ruby/#manual-instrumentation
+[5]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
 [6]: https://github.com/openzipkin/b3-propagation
 [7]: /tracing/security

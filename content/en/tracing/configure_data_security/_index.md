@@ -337,6 +337,6 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 [5]: /tracing/guide/ignoring_apm_resources/
 [6]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
 [7]: /tracing/guide/send_traces_to_agent_by_api/
-[8]: /tracing/setup_overview/custom_instrumentation/java/#extending-tracers
-[9]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[8]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
+[9]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering

@@ -587,8 +587,8 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [3]: /agent/logs/advanced_log_collection
 [4]: /serverless/azure_app_services
 [5]: /account_management/org_settings/sensitive_data_detection/#overview
-[6]: /tracing/setup_overview/setup/dotnet-core
-[7]: /tracing/setup_overview/setup/dotnet-framework
+[6]: /tracing/trace_collection/dd_libraries/dotnet-core
+[7]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: /getting_started/site/
 [10]: /logs/log_configuration/pipelines/?tab=source
