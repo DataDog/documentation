@@ -82,7 +82,6 @@ build_preview:
     - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
     - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
-    #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
     - yarn run jest-test
