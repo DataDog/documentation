@@ -582,11 +582,6 @@ main:
     identifier: events_top_level
     pre: events
     weight: 60000
-  - name: Stream
-    url: events/stream/
-    identifier: event_stream
-    parent: events_top_level
-    weight: 1
   - name: Explorer
     url: events/explorer/
     identifier: event_explorer

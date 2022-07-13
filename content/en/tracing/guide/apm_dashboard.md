@@ -97,7 +97,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     With the dashboard you can also explore related events.
 
-9. **Click on the `Search Events or Logs`** button and add search for a relevant event stream. **Note**: in this example Ansible is used, your [event stream][5] might be different.
+9. **Click on the `Search Events or Logs`** button and add search for a relevant event explorer. **Note**: in this example Ansible is used, your [event explorer][5] might be different.
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="dashboard 1"  style="width:90%;">}}
 

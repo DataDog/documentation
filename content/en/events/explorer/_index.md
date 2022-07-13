@@ -1,6 +1,8 @@
 ---
 title: Events Explorer
 kind: documentation
+aliases:
+    - /events/stream/
 further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
@@ -9,11 +11,6 @@ further_reading:
   tag: "Blog"
   text: "Troubleshoot faster with improved Datadog Events"
 ---
-{{< site-region region="us,eu" >}}
-<div class="alert alert-warning">
-  The Events Explorer is being rolled out to all customers in Q1 2022.
-</div>
-{{< /site-region >}}
 
 {{< img src="events/explorer/events-overview.png" alt="Events Explorer" style="width:100%;" >}}
 

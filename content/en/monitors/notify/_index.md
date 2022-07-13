@@ -162,7 +162,7 @@ Test notifications are supported for the [monitor types][23]: host, metric, anom
 
 ### Events
 
-Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
+Test notifications produce events that can be searched within the event explorer. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
 
 Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
 

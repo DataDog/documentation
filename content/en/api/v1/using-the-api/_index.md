@@ -25,10 +25,10 @@ Available integrations endpoints:
 
 **Platform endpoints**
 
-Use these endpoints to post and fetch data to and from other parts of the Datadog platform: 
+Use these endpoints to post and fetch data to and from other parts of the Datadog platform:
 
 - The [metrics][8] endpoints allow you to post [metrics][9] data so it can be graphed on Datadog’s dashboards and query metrics from any time period.
-- The [events][10] endpoints allow you to post and fetch events to and from the [Datadog event stream][11].
+- The [events][10] endpoints allow you to post and fetch events to and from  [Datadog events][11].
 - Use the [Synthetic Monitoring][12] endpoints to create, start, stop, and see [Synthetic tests][13] results.
 - Use the [Tracing Agent API][14] to send traces to your Datadog Agent, which then forwards them to Datadog.
 

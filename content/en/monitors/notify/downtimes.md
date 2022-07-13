@@ -165,7 +165,7 @@ Use the facets panel and the search bar to filter the list on the `Creator`, the
 
 ### History
 
-Downtime history is viewable on the [Monitor Status][4] page as overlaid on the group transition history, and the [Event stream][5] by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<DOWNTIME_ID>`.
+Downtime history is viewable on the [Monitor Status][4] page as overlaid on the group transition history, and the [Event explorer][5] by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<DOWNTIME_ID>`.
 
 ### Muting
 
@@ -201,6 +201,6 @@ All alerted states are included on the [weekly monitor report][7] even if the mo
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /integrations/#cat-notification
 [4]: /monitors/manage/status/
-[5]: /events/#event-stream
+[5]: /events/explorer
 [6]: /api/v1/downtimes/#cancel-a-downtime
 [7]: /account_management/#preferences

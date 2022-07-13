@@ -1,7 +1,7 @@
 ---
 title: FAQ Integrations
 kind: faq
-cascade: 
+cascade:
   - private: true
 aliases:
     - /integrations/faq/how-can-i-gather-metrics-from-the-unix-shell
@@ -43,7 +43,11 @@ aliases:
 
 ## Git & GitHub
 
-* [Why events don't appear to be showing up in the event stream with my github integration ?][16]
+* [Why events don't appear to be showing up in the event explorer with my github integration ?][17]
+
+## Hadoop
+
+* [Hadoop Distributed File System (HDFS) Integration Error][18]
 
 ## HAProxy
 
