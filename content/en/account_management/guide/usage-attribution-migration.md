@@ -38,26 +38,25 @@ See the below sections for differences between the two APIs and recommendations 
 #### Pagination
 
 In the v1 API, pagination is configured by the query parameters offset and limit. The value in
-`metadata.pagination.total_number_of_records` provides the total number of records that users can expect in all pages.
+`metadata.pagination.total_number_of_records` provides the total number of records in all pages.
 
 In the v2 API, pagination is configured by the `next_record_id` query parameter. The starting value for the next page is
-returned in `metadata.pagination.next_record_id`. There is no total number of records returned to users. This pagination
-pattern matches our custom metrics API and allows us to provide more performant APIs.
+returned in `metadata.pagination.next_record_id`. There is no total number of records in the response.
 
-In order to migrate to the v2 API, clients should use the `next_record_id` to advance through pages as described on the
-API documentation page.
+In order to migrate to the v2 API, use the `next_record_id` to advance through pages as described on the API
+documentation page.
 
 #### Tag Breakdown
 
 In the v1 API, the usage data is broken down for each tag separately in the same response. This leads to what appears to
 be duplicate data where the same resource is counted as broken down by tags a, b and c separately.
 
-In the v2 API, users can select the tag breakdown by supplying a tag configuration in the `tag_breakdown_keys`
-parameter. They can specify one tag at a time or multiple tags as a comma separated list. Supplying multiple tags will
+In the v2 API, you can select the tag breakdown by supplying a tag configuration in the `tag_breakdown_keys`
+parameter. You can specify one tag at a time or multiple tags as a comma separated list. Supplying multiple tags will
 return usage broken down by the combination of those tags.
 
-In order to migrate to the v2 API, clients should specify the tags to use in the `tag_breakdown_keys` parameter. To get
-the same breakdowns as the v1 API, they can make separate requests for each tag on its own.
+In order to migrate to the v2 API, specify the tags to use in the `tag_breakdown_keys` parameter. To get
+the same breakdowns as the v1 API, make separate requests for each tag on its own.
 
 #### Aggregates
 
@@ -82,8 +81,8 @@ In the v2 API, the `aggregates` section contains sums only the records for the t
 },
 ```
 
-In order to migrate to the v2 API, users should use the aggregates in the v2 API as those numbers represent the total
-usage for the organization for the months requested.
+In order to migrate to the v2 API, use the aggregates in the v2 API as those numbers represent the total usage for the
+organization for the months requested.
 
 #### Decimal Values
 
@@ -136,20 +135,19 @@ See the below sections for differences between the two APIs and recommendations 
 
 #### Response format
 
-In the v1 API, the response contains a link to a zip file. After downloading and unzipping that file users get a tsv
-file per product.
+In the v1 API, the response contains a link to a zip file that contains a tsv file per product.
 
-In the v2 API, the response returns the usage attribution data itself in json format.
+In the v2 API, the response returns the usage attribution data in json format.
 
-In order to migrate to the v2 API, users should expect the data in json format. They can apply transformations as needed
-to the json data in order to get it into the format that best suits their needs.
+In order to migrate to the v2 API, your processes should handle the data in json format. You can apply transformations
+as needed to the json data in order to get it into the format that best suits your needs.
 
 #### Tag breakdown
 
 In the v1 API, usage data is broken down by all chosen tags.
 
-In the v2 API, users can select the tag breakdown by supplying a tag configuration in `tag_breakdown_keys`. They can
-specify one tag at a time or multiple tags as a comma separated list.
+In the v2 API, you can select the tag breakdown by supplying a tag configuration in `tag_breakdown_keys` as a comma
+separated list.
 
 In order to migrate to the v2 API, specify all chosen tags in the `tag_breakdown_keys` query parameter.
 
@@ -178,7 +176,7 @@ In the v2 API, chosen tags are keys in the tags object of each item in the usage
 ...
 ```
 
-In order to migrate to the v2 API, the keys can be retrieved from the tags object on each row of the response.
+In order to migrate to the v2 API, retrieve from the tags object on each row of the response.
 
 #### Tag values
 
@@ -212,8 +210,9 @@ Example:
 ...
 ```
 
-In order to migrate to the v2 API, users should handle resources with the same tag applied multiple times. Tag values in
-the v2 response array will appear in the same order as they appear in the pipe separated string in the v1 response.
+In order to migrate to the v2 API, your processes should handle resources with the same tag applied multiple times.
+Tag values in the v2 response array will appear in the same order as they appear in the pipe separated string in the v1
+response, so you can join the array with pipe characters to produce the same tag values as the v1 response.
 
 #### Total usage
 
@@ -221,7 +220,7 @@ In the v1 API, the total usage is called `total_usage` in the csv header.
 
 In the v2 API, the total usage is called `total_usage_sum` as a key in each object in the usage array.
 
-In order to migrate to the v2 API, users should use the key `total_usage_sum` to extract the usage value.
+In order to migrate to the v2 API, use the key `total_usage_sum` to extract the usage value.
 
 #### Total usage data type
 
@@ -229,7 +228,7 @@ In the v1 API, while total usage is always a number, csv has no way to specify d
 
 In the v2 API, total usage is an integer.
 
-In order to migrate to the v2 API, clients should handle the total usage as an integer.
+In order to migrate to the v2 API, handle the total usage as an integer.
 
 #### Time format
 
@@ -250,18 +249,19 @@ contain data for the parent org and all children of the parent. This will includ
 inherited from the parent org to the child orgs, but will also include any tag configurations set directly on those
 children. The origin of a given tag configuration can be discerned from the `tag_config_source` field.
 
-In order to migrate to the v2 API, users should pass the `include_descendants=true` parameter. They can then filter out
-any records in the response that do not match the `tag_config_source` of the tag configuration set on the parent org.
+In order to migrate to the v2 API, pass the `include_descendants=true` parameter. To get the same values as the v1
+response, filter out any records in the response that do not match the `tag_config_source` of the tag configuration
+from the parent org.
 
 #### Data range
 
 In the v1 API, data is returned for one day at a time. The date is specified in the `record_id` parameter of the
 request.
 
-In the v2 API, users can retrieve data for arbitrary time bounds up to 24 hours at a time using the `start_hr`
+In the v2 API, you can retrieve data for arbitrary time bounds up to 24 hours at a time using the `start_hr`
 and `end_hr` parameters.
 
-In order to migrate to the v2 API, users should request data with `start_hr` as midnight (00 hour) on desired day
+In order to migrate to the v2 API, request data with `start_hr` as midnight (00 hour) on the desired day
 and `end_hr` as midnight on the next day.
 
 #### Pagination
@@ -272,16 +272,15 @@ In the v2 API, the data is paginated. If a response takes up more than one page,
 provided in the field `metadata.pagination.next_record_id`. This can be supplied in the query parameter `next_record_id`
 to retrieve the next page.
 
-In order to migrate to the v2 API, users should retrieve all pages for the given day.
+In order to migrate to the v2 API, retrieve all pages for the given day.
 
 #### Data cardinality
 
 In the v1 API, data is broken down by all three tags.
 
-In the v2 API, data is broken down as specified in the query param `tag_breakdown_keys`.
+In the v2 API, data is broken down as specified in the query parameter `tag_breakdown_keys`.
 
-In order to migrate to the v2 API, users should supply all chosen tags in the parameter
-`tag_breakdown_keys`.
+In order to migrate to the v2 API, supply all chosen tags in the parameter `tag_breakdown_keys`.
 
 #### Usage type names
 
@@ -289,7 +288,7 @@ In the v1 API, files are named `daily_<product>_<date>.tsv`
 
 In the v2 API, usage types always have the `_usage` suffix.
 
-In order to migrate to the v2 API, users should handle the `_usage` suffix to all usage types.
+In order to migrate to the v2 API, handle the `_usage` suffix to all usage types.
 
 #### Usage type renames
 
@@ -313,7 +312,7 @@ In the v2 API, the usage types matching those are:
 * `npm_host_usage`
 * `profiled_host_usage`
 
-In order to migrate to the v2 API, users should map specified usage types to the new names.
+In order to migrate to the v2 API, map specified usage types to the new names.
 
 #### Timeseries usage type
 
@@ -329,7 +328,7 @@ In the v1 API, the synthetics file contains usage for both API and browser tests
 
 In the v2 API, there are two synthetics usage types api_usage and browser_usage.
 
-In order to migrate to the v2 API, users should use the new usage types for retrieving synthetics usage.
+In order to migrate to the v2 API, use the new usage types for retrieving synthetics usage.
 
 ### [Get the list of available monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-the-list-of-available-monthly-custom-reports)
 
@@ -349,18 +348,17 @@ version of the daily zip files available
 from [Get specified daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-specified-daily-custom-reports)
 .
 
-Users should migrate to
+You should migrate to
 the [Get hourly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-attribution)
 API. Because these files are very similar to files available
 from [Get specified daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-specified-daily-custom-reports)
-, users can follow that guide with the exception of the recommendation for time ranges. To migrate from the v1 monthly
-files, users should request all pages for each day in the month. Requests are limited to 24 hours at a time in the v2
-API.
+, you can follow that guide, except for the recommendation for time ranges. To migrate from the v1 monthly files,
+request all pages for each day in the month. Requests are limited to 24 hours at a time in the v2 API.
 
 ### Monthly summary by tag files
 
 The monthly summary files are named in the format `summary_<tag>_<date>.tsv`. They provide a rollup for all usage across
-the month for each tag. Users should migrate to
+the month for each tag. You should migrate to
 the [Get monthly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-usage-attribution)
 API.
 
@@ -368,23 +366,21 @@ See the below sections for differences between the two APIs and recommendations 
 
 #### Response format
 
-The v1 API response contains a link to a zip file. After downloading and unzipping that file users get a tsv file for
-each chosen tag.
+The v1 API response contains a link to a zip file, which contains a tsv file for each chosen tag.
 
-The v2 API response returns the usage attribution data itself in json format.
+The v2 API response returns the usage attribution data in json format.
 
-In order to migrate to the v2 API, users should expect the data in json format. They can apply transformations as needed
-to the json data in order to get it into the format that best suits their needs.
+In order to migrate to the v2 API, your processes should handle the data in json format. You can apply transformations
+as needed to the json data in order to get it into the format that best suits your needs.
 
 #### Tag breakdown
 
 In the v1 API, there is a separate tsv file for each chosen tag.
 
-In the v2 API, users can select the tag breakdown by supplying a tag configuration in `tag_breakdown_keys`. They can
-specify one tag at a time or multiple tags as a comma separated list.
+In the v2 API, you can select the tag breakdown by supplying a tag configuration in `tag_breakdown_keys` as a comma
+separated list.
 
-In order to migrate to the v2 API, users should make requests with each tag specified on its own in `tag_breakdown_keys`
-.
+In order to migrate to the v2 API, make requests with each tag specified on its own in `tag_breakdown_keys`.
 
 #### Tag values
 
@@ -415,13 +411,17 @@ Example:
 ...
 ```
 
+In order to migrate to the v2 API, your processes should handle resources with the same tag applied multiple times.
+Tag values in the v2 response array will appear in the same order as they appear in the pipe separated string in the v1
+response, so you can join the array with pipe characters to produce the same tag values as the v1 response.
+
 #### Total usage
 
 In the v1 API, the second row of the file contains aggregated usage for all tags.
 
 In the v2 API, the `metadata.aggregates` section of the response contains aggregated usage for all tags.
 
-In order to migrate to the v2 API, users should retrieve total usage from the `metadata.aggregates` section.
+In order to migrate to the v2 API, retrieve total usage from the `metadata.aggregates` section.
 
 #### Usage data type
 
@@ -449,8 +449,9 @@ contain data for the parent org and all children of the parent. This will includ
 inherited from the parent org to the child orgs, but will also include any tag configurations set directly on those
 children. The origin of a given tag configuration can be discerned from the `tag_config_source` field.
 
-In order to migrate to the v2 API, users should pass the `include_descendants=true` parameter. They can then filter out
-any records in the response that do not match the tag_config_source of the tag configuration set on the parent org.
+In the v2 API, if the parameter `include_descendants=true` is supplied (this is the default) then the response will
+contain data for the parent org and all children of the parent. This will include all data from tag configurations
+inherited from the parent org to the child orgs, but will also include any tag configurations set directly on those
 
 #### Serverless Monitoring Usage
 
@@ -468,7 +469,7 @@ In the v2 API, usage for serverless monitoring is under the names:
 * `invocations_usage`
 * `invocations_percentage`
 
-In order to migrate to the v2 API, users should look for serverless monitoring usage under these new field names. These
+In order to migrate to the v2 API, look for serverless monitoring usage under these new field names. These
 fields represent the same product usage. The difference is just a field renaming.
 
 ## Further Reading
