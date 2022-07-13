@@ -37,16 +37,6 @@
     "engines": {
         "node": ">= 14.16.0"
     },
-    "jest": {
-        "collectCoverage": true,
-        "collectCoverageFrom": [
-            "./assets/scripts/tests/*.js",
-            "!**/node_modules/**",
-            "!**/examples/**",
-            "!**/*.ts",
-            "!**/*.test.ts"
-        ]
-    },
     "dependencies": {
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
         "@babel/polyfill": "^7.4.4",
