@@ -21,7 +21,7 @@ further_reading:
   text: "Usage Metrics"
 ---
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+{{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Ingestion Sampling Rules" >}}
 
 Ingestion controls affect what traces are sent by your applications to Datadog. Stats and [metrics][1] are always calculated based on all traces, and are not impacted by ingestion controls.
 

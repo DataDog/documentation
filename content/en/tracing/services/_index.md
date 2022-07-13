@@ -8,7 +8,10 @@ further_reading:
       text: 'Learn about Unified Service Tagging and reserved tags'
 ---
 
-Viewing span and trace data through the lens of your services can ease troubleshooting, prioritize attention, alert to problems, and help you achieve business objectives. 
+{{< img src="tracing/apm_lifecycle/stats_pipeline.png" style="width:65%; background:none; border:none; box-shadow:none;" alt="Service stats Pipeline" >}}
+
+
+Viewing span and trace data through the lens of your services can ease troubleshooting, prioritize attention, alert to problems, and help you achieve business objectives.
 
 {{< img src="tracing/visualization/service_list.png" alt="service list" >}}
 

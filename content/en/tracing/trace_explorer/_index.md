@@ -8,7 +8,7 @@ aliases:
 description: "Trace Explorer"
 ---
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Explorer" >}}
 
 ## Overview
 
@@ -47,7 +47,7 @@ After you instrument your services and ingest traces, set tag-based [retention f
 
 ## Live Search for 15 minutes
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_live_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Live Search" >}}
 
 When you use Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window), displayed without any sampling.
 
@@ -109,7 +109,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 
 ## Indexed spans search with 15 day retention
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_indexed_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Indexed Search" >}}
 
 You can search retained traces in the same way as you do a Live Search. To switch from searching live data to searching retained data, change the time selector to any period of time greater than 15 minutes. All spans that are indexed by retention filters are accessible from search. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 

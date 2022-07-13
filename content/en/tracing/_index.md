@@ -54,7 +54,7 @@ As you transition from monoliths to microservices, setting up Datadog APM across
 
 ## Control and manage data flowing into and being kept by Datadog
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+{{< img src="tracing/apm_lifecycle/apm_lifecycle_0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="APM Lifecycle" >}}
 
 Traces start in your instrumented applications and flow into Datadog. For high-throughput services, you can view and control ingestion using [Ingestion Controls][6]. All ingested traces are available for live search and analytics for 15 minutes. You can use custom tag-based [retention filters][7] to keep exactly the traces that matter for your business for 15 days for search and analytics.
 
@@ -66,7 +66,7 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 
 {{< img src="tracing/index/SpantoMetricsPreview.png" alt="Generate Custom Metrics from ingested spans"  style="width:100%;">}}
 
-## Connect traces with other telemetry 
+## Connect traces with other telemetry
 
 [View your application logs][9] side-by-side with the trace for a single distributed request with automatic trace-id injection. [Link between real user sessions][10] and traces to see the exact traces that correspond to user experiences and reported issues. [Link simulated tests][11] to traces to find the root cause of failures across frontend, network and backend requests.
 
