@@ -23,7 +23,7 @@ Each difference is discussed in further detail in the following sections.
 The new API introduces the concepts of product family and usage type. Product families are
 groupings of one or more usage types. Usage types are usage measurements for a given organization
 for a given time period. The initial set of product families mostly aligns with the existing APIs,
-with the full mapping outlined below. There is also a special “all” product family that retrieves
+with the full mapping outlined below. There is also a special `all` product family that retrieves
 the usage for all other product families.
 
 | Endpoint                                          | Additional param | Datapoint                               | Product Family                                                                 | Usage Type                                                                                                                    |
@@ -103,15 +103,24 @@ the usage for all other product families.
 | <base_url>/api/v2/usage/observability_pipelines   |                  | observability_pipelines_bytes_processed | observability_pipelines                                                        | observability_pipelines_bytes_processed                                                                                       |
 
 ## JSON:API Compliant Format
-Response bodies and parameter names are changed to conform to the standard. All data available in the existing APIs is still available. See the below example for an explanation of how the existing hosts API maps to the new hourly usage API
 
-### Existing API: Get hourly usage for hosts and containers
+Response bodies and parameter names conform to the [JSON:API specification](https://jsonapi.org/format/). All data
+available in the existing APIs is still available. See the below example of the mapping from the existing hosts
+API to the new hourly usage API
+
+### Existing API: [Get hourly usage for hosts and containers](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers)
+
 #### Request
+
 `https://api.datadoghq.com/api/v1/usage/hosts?start_hr=2022-06-01T00&end_hr=2022-06-01T01`
+
 ##### Notes
+
 * Product is an element of the path “hosts”
 * Time bounds are controlled by the parameters “start_hr” and “end_hr”
+
 #### Response
+
 ```json
 {
   "usage": [
@@ -136,21 +145,26 @@ Response bodies and parameter names are changed to conform to the standard. All 
   ]
 }
 ```
+
 ##### Notes
+
 * Usage for each hour is represented as an object in the usage array.
 * Usage types are keys in the object and measured usage for those usage types are the corresponding values.
 * Hour, org name and public id are also fields in the object.
 
-
 ### New API: Get hourly usage by product family
+
 #### Request
+
 `https://api.datadoghq.com/api/v2/usage/hourly_usage?filter[timestamp][start]=2022-06-01T00&filter[timestamp][end]=2022-06-01T01&filter[product_families]=infra_hosts`
 
 ##### Notes
-* Product is passed as a query parameter “filter[product_families]=infra_hosts”
-* Time bounds are controlled by the parameters “filter[timestamp][start]” and “filter[timestamp][end]”
+
+* Product is passed as a query parameter `filter[product_families]=infra_hosts`
+* Time bounds are controlled by the parameters `filter[timestamp][start]` and `filter[timestamp][end]`
 
 #### Response
+
 ```json
 {
   "data": [
@@ -223,24 +237,26 @@ Response bodies and parameter names are changed to conform to the standard. All 
 }
 ```
 
-####Notes
-* Usage for each hour for each product for each organization is represented as an object in the data array
-    * The existing APIs did not support multiple products or multiple orgs per request
-* Usage measurements are represented in the nested measurements array.
-* Usage measurement objects have the fields usage_type and value
-* Hour, org name and public id are also fields in the attributes object.
+#### Notes
+
+* Objects in the data array represent usage for each hour for each product for each organization.
+    * The existing APIs did not support multiple products or multiple orgs per request.
+* Usage measurements are represented in the nested `measurements` array.
+* Usage measurement objects have the fields `usage_type` and `value`.
+* `hour`, `org_name` and `public_id` are also fields in the `attributes` object.
 
 ## Pagination
+
 The new hourly usage API is paginated. Responses are limited to 500 pages, where a page contains usage data for one
 product family for one hour for one organization. Pagination allows the API to support other features such as multiple
-products per request, multiple organizations per request, and unlimited time ranges For users requesting many pages in
-one request, they will have to iterate through the pages of the result.
+products per request, multiple organizations per request, and unlimited time ranges.
 
-If a result has more pages, then the record id of the next page will be returned in the meta.pagination.next_record_id
-field. Clients should then pass that id in the parameter `pagination[next_record_id]`. There are no more pages to
-retrieve when the meta.pagination.next_record_id field is not set.
+If a result has more pages, then the record id of the next page will be returned in the field
+`meta.pagination.next_record_id`. Clients should then pass that id in the parameter `pagination[next_record_id]`. There
+are no more pages to retrieve when the `meta.pagination.next_record_id` field is not set.
 
 ### Pseudo code example
+
 ```
 response := GetHourlyUsage(start_time, end_time, product_families)
 cursor := response.metadata.pagination.next_record_id
@@ -251,9 +267,10 @@ cursor := response.metadata.pagination.next_record_id
 END
 ```
 
-
 ## Multi-org responses
-The new API supports retrieving usage data for all of your child organizations in one request. Clients will need to use the parameter `filter[include_descendants]` to request data for child organizations.
+
+The new API supports retrieving usage data for all of your child organizations in one request. Use the
+parameter `filter[include_descendants]` to request data for child organizations.
 
 ### Further Reading
 
