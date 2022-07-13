@@ -399,7 +399,7 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 Also, whenever you modify an integration, the Datadog service needs to be restarted. You can do this from services.msc or from the UI sidebar.
 
-For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process][7] or [WMI][8] integration). To set up a Monitor, select the [Integration monitor type][9] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process](#monitoring-windows-processes) or [WMI][7] integration). To set up a Monitor, select the [Integration monitor type][8] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
@@ -409,7 +409,7 @@ While Windows does not offer the `system.load.*` metrics, an equivalent option t
 
 ### Monitoring Windows processes
 
-You can monitor Windows processes with [Live Process Monitoring][10]. To enable this on Windows, edit the [Agent main configuration file][11] by setting the following parameter to true:
+You can monitor Windows processes with [Live Process Monitoring][9]. To enable this on Windows, edit the [Agent main configuration file][10] by setting the following parameter to true:
 
 `datadog.yaml`:
 
@@ -418,7 +418,7 @@ process_config:
   enabled: "true"
 ```
 
-After configuration is complete, [restart the Agent][12].
+After configuration is complete, [restart the Agent][11].
 
 ## Further Reading
 
@@ -431,9 +431,8 @@ After configuration is complete, [restart the Agent][12].
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [5]: /agent/faq/windows-agent-ddagent-user/#domain-controllers
 [6]: /agent/guide/datadog-agent-manager-windows/
-[7]: /#monitoring-windows-processes
-[8]: /integrations/wmi/
-[9]: https://app.datadoghq.com/monitors#create/integration
-[10]: /infrastructure/process/?tab=linuxwindows#installation
-[11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /agent/guide/agent-commands/#restart-the-agent
+[7]: /integrations/wmi/
+[8]: https://app.datadoghq.com/monitors#create/integration
+[9]: /infrastructure/process/?tab=linuxwindows#installation
+[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/guide/agent-commands/#restart-the-agent
