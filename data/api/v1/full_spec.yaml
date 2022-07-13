@@ -3801,6 +3801,7 @@ components:
       - dbm_queries_usage
       - estimated_indexed_logs_usage
       - estimated_indexed_spans_usage
+      - estimated_ingested_spans_usage
       - fargate_usage
       - functions_usage
       - indexed_logs_usage
@@ -3826,6 +3827,7 @@ components:
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INDEXED_LOGS_USAGE
@@ -6961,7 +6963,7 @@ components:
           type: string
         tag_config_source:
           description: The source of the usage attribution tag configuration and the
-            selected tags in the format `<source_org_name>:<selected tag 1>///<selected
+            selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
             tag 2>///<selected tag 3>`.
           type: string
         tags:
@@ -7032,6 +7034,8 @@ components:
       - estimated_indexed_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
+      - estimated_ingested_spans_usage
+      - estimated_ingested_spans_percentage
       - fargate_usage
       - fargate_percentage
       - functions_usage
@@ -7081,6 +7085,8 @@ components:
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -7169,6 +7175,16 @@ components:
           type: number
         estimated_indexed_spans_usage:
           description: The estimated indexed spans usage by tag(s). This field is
+            in private beta.
+          format: double
+          type: number
+        estimated_ingested_spans_percentage:
+          description: The percentage of estimated ingested spans usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_spans_usage:
+          description: The estimated ingested spans usage by tag(s). This field is
             in private beta.
           format: double
           type: number
@@ -13962,8 +13978,8 @@ components:
           type: string
         tag_config_source:
           description: The source of the usage attribution tag configuration and the
-            selected tags in the format `<source_org_name>:<selected tag 1>-<selected
-            tag 2>-<selected tag 3>`.
+            selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
+            tag 2>///<selected tag 3>`.
           type: string
         tags:
           $ref: '#/components/schemas/UsageAttributionTagNames'
@@ -14055,6 +14071,8 @@ components:
       - estimated_indexed_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
+      - estimated_ingested_spans_usage
+      - estimated_ingested_spans_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -14083,6 +14101,8 @@ components:
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14123,6 +14143,8 @@ components:
       - appsec_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
+      - estimated_ingested_spans_usage
+      - estimated_ingested_spans_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -14162,16 +14184,36 @@ components:
       - APPSEC_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
-        description: A list of tag values.
+        description: 'A list of values that are associated with each tag key.
+
+
+          - An empty list means the resource use wasn''t tagged with the respective
+          tag.
+
+          - Multiple values means the respective tag was applied multiple times on
+          the resource.
+
+          - An `<empty>` value means the resource was tagged with the respective tag
+          but did not have a value.'
         items:
           description: A given tag in a list.
           example: datadog-integrations-lab
           type: string
         type: array
-      description: Usage Summary by tag name.
+      description: 'Tag keys and values.
+
+
+        A `null` value here means that the requested tag breakdown cannot be applied
+        because it does not match the [tags
+
+        configured for usage attribution](https://docs.datadoghq.com/account_management/billing/usage_attribution/#getting-started).
+
+        In this scenario the API returns the total usage, not broken down by tags.'
       type: object
     UsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -14195,6 +14237,8 @@ components:
         appsec_percentage:
           description: The percentage of Application Security Monitoring host usage
             by tag(s).
+          format: double
+          type: number
         appsec_usage:
           description: The Application Security Monitoring host usage by tag(s).
           format: double
@@ -14292,6 +14336,16 @@ components:
           type: number
         estimated_indexed_spans_usage:
           description: The estimated indexed spans usage by tag(s). Note this field
+            is in private beta.
+          format: double
+          type: number
+        estimated_ingested_spans_percentage:
+          description: The percentage of estimated ingested spans usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_spans_usage:
+          description: The estimated ingested spans usage by tag(s). Note this field
             is in private beta.
           format: double
           type: number
@@ -25426,11 +25480,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - AuthZ:
-        - security_monitoring_signals_write
-        apiKeyAuth: []
-        appKeyAuth: []
       summary: Add a security signal to an incident
       tags:
       - Security Monitoring

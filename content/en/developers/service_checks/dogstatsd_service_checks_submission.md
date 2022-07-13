@@ -164,7 +164,7 @@ $statsd->service_check('Service.check.name', 0);
 
 {{< /programming-lang-wrapper >}}
 
-After a service check is reported, use it to trigger a [custom check monitor][2].
+After a service check is reported, use it to trigger a [service check monitor][2].
 
 ## Further reading
 

@@ -68,7 +68,7 @@ Datadog offers many different ways to enable instrumentation for your serverless
     - Set `JAVA_TOOL_OPTIONS` to `-javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1`
     - Set `DD_JMXFETCH_ENABLED` to `false`
     - Set `DD_TRACE_ENABLED` to `true`
-    - Set `DD_SITE` to your [Datadog site][3] to send the telemetry to.
+    - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
@@ -115,7 +115,7 @@ Datadog offers many different ways to enable instrumentation for your serverless
     - Set `JAVA_TOOL_OPTIONS` to `-javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1`
     - Set `DD_JMXFETCH_ENABLED` to `false`
     - Set `DD_TRACE_ENABLED` to `true`
-    - Set `DD_SITE` to your [Datadog site][3] to send the telemetry to.
+    - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html

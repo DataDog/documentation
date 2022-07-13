@@ -246,7 +246,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 4. Configure the Datadog site and API key
 
-    - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
+    - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 
@@ -312,7 +312,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 4. Configure Datadog site and API key
 
-    - Set the environment variable `DD_SITE` with your [Datadog site][3] to send the telemetry to.
+    - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html

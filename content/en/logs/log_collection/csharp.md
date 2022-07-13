@@ -198,9 +198,10 @@ Once the library is installed, attach the following layout to any target. Edit t
       <appender-ref ref="JsonFileAppender" />
     </root>
     <appender name="JsonFileAppender" type="log4net.Appender.FileAppender">
-    <threshold value="DEBUG"/>
-    <file value="application-logs.json" />
-    <appendToFile value="true" />
+      <threshold value="DEBUG"/>
+      <file value="application-logs.json" />
+      <encoding type="System.Text.UTF8Encoding" />
+      <appendToFile value="true" />
       <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
         <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
         <default />

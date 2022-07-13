@@ -38,7 +38,7 @@
     "rumSettings": {
       "isEnabled": true,
       "applicationId": "mockApplicationId",
-      "clientTokenId": 123456
+      "clientTokenId": 12345
     },
     "tick_every": 300,
     "ci": {
