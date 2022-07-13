@@ -29,9 +29,8 @@ to the v2 API.
 
 This API provides monthly usage attribution.
 
-We have introduced a new monthly usage attribution
-API, [Get monthly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-usage-attribution)
-that supports querying by combinations of tags.
+The new monthly usage attribution API [Get monthly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-usage-attribution)
+also provides monthly usage attribution and supports querying by combinations of tags.
 
 See the below sections for differences between the two APIs and recommendations for migrating to the new API.
 
@@ -127,9 +126,8 @@ this API.
 This API returns a link to download a zip file of the usage attribution data for all products for a given day. The zip
 file contains a tsv file for each product.
 
-Users should migrate to
-the [Get hourly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-attribution)
-API.
+The [Get hourly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-attribution)
+API provides this same data.
 
 See the below sections for differences between the two APIs and recommendations for migrating to the new API.
 
@@ -320,7 +318,7 @@ In the v1 API, the timeseries file contains usage for both standard and custom t
 
 In the v2 API, there is one `custom_timeseries_usage` usage type.
 
-Datadog only bills customers for custom timeseries usage, so standard timeseries usage is not needed.
+Datadog only bills for custom timeseries usage, so standard timeseries usage is not needed.
 
 #### Synthetics usage type
 
@@ -348,9 +346,10 @@ version of the daily zip files available
 from [Get specified daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-specified-daily-custom-reports)
 .
 
-You should migrate to
-the [Get hourly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-attribution)
-API. Because these files are very similar to files available
+The [Get hourly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-attribution)
+API provides this same data.
+
+Because the hourly data files are very similar to files available
 from [Get specified daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-specified-daily-custom-reports)
 , you can follow that guide, except for the recommendation for time ranges. To migrate from the v1 monthly files,
 request all pages for each day in the month. Requests are limited to 24 hours at a time in the v2 API.
@@ -358,9 +357,8 @@ request all pages for each day in the month. Requests are limited to 24 hours at
 ### Monthly summary by tag files
 
 The monthly summary files are named in the format `summary_<tag>_<date>.tsv`. They provide a rollup for all usage across
-the month for each tag. You should migrate to
-the [Get monthly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-usage-attribution)
-API.
+the month for each tag. The [Get monthly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-usage-attribution)
+API provides this same data.
 
 See the below sections for differences between the two APIs and recommendations for migrating to the new API.
 
