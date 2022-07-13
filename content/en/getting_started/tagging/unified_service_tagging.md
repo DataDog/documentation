@@ -194,7 +194,7 @@ containers:
 {{% tab "Docker" %}}
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to your get the full range of unified service tagging.
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
 
 The values for `service` and `version` can be provided in the Dockerfile:
 

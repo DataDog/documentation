@@ -1,7 +1,7 @@
 ---
 title: FAQ Integrations
 kind: faq
-cascade: 
+cascade:
   - private: true
 aliases:
     - /integrations/faq/how-can-i-gather-metrics-from-the-unix-shell
@@ -43,68 +43,72 @@ aliases:
 
 ## Git & GitHub
 
-* [Why events don't appear to be showing up in the event stream with my github integration ?][16]
+* [Why events don't appear to be showing up in the event explorer with my github integration ?][16]
+
+## Hadoop
+
+* [Hadoop Distributed File System (HDFS) Integration Error][17]
 
 ## HAProxy
 
-* [HAProxy in multi-process mode][17]
+* [HAProxy in multi-process mode][16]
 
 ## Jira
 
-* [I've set up the JIRA integration, now how do I get events and tickets created?][18]
+* [I've set up the JIRA integration, now how do I get events and tickets created?][17]
 
 ## JMX
 
-* [I Have a Matching Bean for my JMX integration but nothing on Collect !][19]
-* [jmx.yaml error: Include Section][20]
-* [Troubleshooting JMX Integrations][21]
-* [View jmx data in jConsole and set up your jmx.yaml to collect them][22]
-* [Both my JMX and AWS integrations use "name" tags. What do I do?][23]
-* [JBoss EAP 7 & Datadog monitoring via JMX][24]
+* [I Have a Matching Bean for my JMX integration but nothing on Collect !][18]
+* [jmx.yaml error: Include Section][19]
+* [Troubleshooting JMX Integrations][20]
+* [View jmx data in jConsole and set up your jmx.yaml to collect them][21]
+* [Both my JMX and AWS integrations use "name" tags. What do I do?][22]
+* [JBoss EAP 7 & Datadog monitoring via JMX][23]
 
 ## Kafka
 
 
-* [Troubleshooting and Deep Dive for Kafka][25]
+* [Troubleshooting and Deep Dive for Kafka][24]
 
 ## Kubernetes
 
-* [Client Authentication against the apiserver and kubelet][26]
+* [Client Authentication against the apiserver and kubelet][25]
 
 ## MySQL & SQL
 
-* [MySQL Localhost Error - Localhost VS 127.0.0.1][27]
-* [Can I use a named instance in the SQL Server integration?][28]
-* [Database user lacks privileges][29]
+* [MySQL Localhost Error - Localhost VS 127.0.0.1][26]
+* [Can I use a named instance in the SQL Server integration?][27]
+* [Database user lacks privileges][28]
 
 ## Postgres
 
-* [Postgres custom metric collection explained][30]
+* [Postgres custom metric collection explained][29]
 
 ## RabbitMQ
 
-* [Tagging RabbitMQ queues by tag family][31]
+* [Tagging RabbitMQ queues by tag family][30]
 
 ## Unix
 
-* [How can I gather metrics from the UNIX shell?][32]
+* [How can I gather metrics from the UNIX shell?][31]
 
 ## Vertica
 
-* [How to collect metrics from custom Vertica queries][33]
+* [How to collect metrics from custom Vertica queries][32]
 
 ## VSphere
 
-* [Troubleshooting duplicated hosts with vSphere][34]
+* [Troubleshooting duplicated hosts with vSphere][33]
 
 ## Webhooks
 
-* [How to make a Trello Card using Webhooks][35]
+* [How to make a Trello Card using Webhooks][34]
 
 ## Windows
 
-* [Collect Custom Windows Performance Counters over WMI][36]
-* [Windows Status Based Check][37]
+* [Collect Custom Windows Performance Counters over WMI][35]
+* [Windows Status Based Check][36]
 
 [1]: /integrations/faq/aws-integration-and-cloudwatch-faq/
 [2]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration/
@@ -121,25 +125,24 @@ aliases:
 [13]: /integrations/faq/azure-troubleshooting/
 [14]: /integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
 [15]: /integrations/faq/elastic-agent-can-t-connect/
-[16]: /integrations/faq/why-events-don-t-appear-to-be-showing-up-in-the-event-stream-with-my-github-integration/
-[17]: /integrations/faq/haproxy-multi-process/
-[18]: /integrations/faq/i-ve-set-up-the-jira-integration-now-how-do-i-get-events-and-tickets-created/
-[19]: /integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect/
-[20]: /integrations/faq/jmx-yaml-error-include-section/
-[21]: /integrations/faq/troubleshooting-jmx-integrations/
-[22]: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
-[23]: /integrations/faq/both-my-jmx-and-aws-integrations-use-name-tags-what-do-i-do/
-[24]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx/
-[25]: /integrations/faq/troubleshooting-and-deep-dive-for-kafka/
-[26]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet/
-[27]: /integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
-[28]: /integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
-[29]: /integrations/faq/database-user-lacks-privileges/
-[30]: /integrations/faq/postgres-custom-metric-collection-explained/
-[31]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family/
-[32]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
-[33]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
-[34]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
-[35]: /integrations/faq/how-to-make-trello-card-using-webhooks/
-[36]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
-[37]: /integrations/faq/windows-status-based-check/
+[16]: /integrations/faq/haproxy-multi-process/
+[17]: /integrations/faq/i-ve-set-up-the-jira-integration-now-how-do-i-get-events-and-tickets-created/
+[18]: /integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect/
+[19]: /integrations/faq/jmx-yaml-error-include-section/
+[20]: /integrations/faq/troubleshooting-jmx-integrations/
+[21]: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
+[22]: /integrations/faq/both-my-jmx-and-aws-integrations-use-name-tags-what-do-i-do/
+[23]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx/
+[24]: /integrations/faq/troubleshooting-and-deep-dive-for-kafka/
+[25]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet/
+[26]: /integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
+[27]: /integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
+[28]: /integrations/faq/database-user-lacks-privileges/
+[29]: /integrations/faq/postgres-custom-metric-collection-explained/
+[30]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family/
+[31]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
+[32]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
+[33]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
+[34]: /integrations/faq/how-to-make-trello-card-using-webhooks/
+[35]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
+[36]: /integrations/faq/windows-status-based-check/

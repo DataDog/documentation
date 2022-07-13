@@ -16,7 +16,7 @@ further_reading:
   text: "Usage Metrics"
 ---
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey: Indexing" >}}
+{{< img src="tracing/apm_lifecycle/retention_filters.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Retention filters" >}}
 
 With APM, [the ingestion and the retention of traces for 15 days][1] are fully customizable.
 
