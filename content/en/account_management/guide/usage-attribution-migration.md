@@ -1,10 +1,10 @@
 ---
-title: Migrating from V1 to V2 of the Usage Attribution API kind: guide further_reading:
-
-- link: "/agent/troubleshooting/"
+title: Migrating from V1 to V2 of the Usage Attribution API
+kind: guide
+further_reading:
+- link: "/account_management/plan_and_usage/"
   tag: "Documentation"
-  text: "Agent Troubleshooting"
-
+  text: "Plan and Usage Settings"
 ---
 
 ## Summary
