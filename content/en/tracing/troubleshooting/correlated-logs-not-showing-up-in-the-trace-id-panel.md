@@ -14,7 +14,7 @@ further_reading:
 
 Clicking on a [trace][1] opens a contextual panel that contains information about the trace, about the host and the correlated logs. However the log panel can be empty in some specific cases. This page reviews how this can be fixed.
 
-{{< img src="tracing/troubleshooting/tracing_no_logs_in_trace.png" alt="Tracing missing logs"  style="width:90%;">}}
+{{< img src="tracing/troubleshooting/tracing_no_logs_in_trace.png" alt="Tracing missing logs" style="width:90%;">}}
 
 ## What logs are displayed in the trace panel?
 

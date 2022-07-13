@@ -197,7 +197,7 @@ The final step to enable automatic correlation identifier injection is to:
 
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
-**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [correlated logs in the Trace ID panel][9] for more information.
+**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
 
 ## Manual injection
 
@@ -212,7 +212,7 @@ If you prefer to manually correlate your traces with your logs, you can add corr
   | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
 
 
-**Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see the [FAQ on this topic][10].
+**Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see [Correlated Logs Not Showing Up in the Trace ID Panel][10].
 
 **Note**: If you are using Serilog, Nlog or log4net through ILogger, see the Microsoft.Extensions.Logging section to configure these properties using `BeginScope()`.
 
