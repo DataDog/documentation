@@ -16,10 +16,10 @@ further_reading:
   - link: "/tracing/guide/security/"
     tag: "Documentation"
     text: "Automatically scrub PII from your traces"
-  - link: "/tracing/guide/metrics_namespace/"
+  - link: "/tracing/metrics/metrics_namespace/"
     tag: "Documentation"
     text: "Learn about trace metrics and their tags"
-  - link: "/tracing/visualization/"
+  - link: "/tracing/glossary/"
     tag: "Documentation"
     text: "Learn APM terminology and concepts"
   - link: "https://www.datadoghq.com/blog/span-based-metrics/"
@@ -104,18 +104,18 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/glossary/
-[2]: /tracing/setup_overview/setup/java
-[3]: /tracing/setup_overview/proxy_setup/
-[4]: /tracing/setup_overview/serverless_functions/
-[5]: /tracing/setup_overview/open_standards/
-[6]: /tracing/trace_ingestion/ingestion_controls/
-[7]: /tracing/trace_retention/#retention-filters
-[8]: /tracing/generate_metrics/
-[9]: /tracing/connect_logs_and_traces/
+[2]: /tracing/trace_collection/dd_libraries/java
+[3]: /tracing/trace_collection/proxy_setup/
+[4]: /serverless/distributed_tracing
+[5]: /tracing/trace_collection/open_standards/
+[6]: /tracing/trace_pipeline/ingestion_controls/
+[7]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[8]: /tracing/trace_pipeline/generate_metrics/
+[9]: /tracing/other_telemetry/connect_logs_and_traces/
 [10]: /real_user_monitoring/connect_rum_and_traces
 [11]: /synthetics/apm/
 [12]: /tracing/trace_explorer/#live-search-for-15-minutes
-[13]: /tracing/visualization/services_map/
-[14]: /tracing/visualization/service/
-[15]: /tracing/deployment_tracking/
+[13]: /tracing/services/services_map/
+[14]: /tracing/services/service_page/
+[15]: /tracing/services/deployment_tracking/
 [16]: /tracing/profiler/

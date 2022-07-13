@@ -8,16 +8,13 @@ code_lang_weight: 60
 aliases:
 - /tracing/runtime_metrics/go
 further_reading:
-    - link: 'tracing/connect_logs_and_traces'
+    - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
-      text: 'Connect your Logs and Traces'
-    - link: 'tracing/manual_instrumentation'
+      text: 'Connect your Logs and Traces together'
+    - link: 'tracing/trace_collection/custom_instrumentation'
       tag: 'Documentation'
       text: 'Manually instrument your application to create traces.'
-    - link: 'tracing/opentracing'
-      tag: 'Documentation'
-      text: 'Implement Opentracing across your applications.'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---

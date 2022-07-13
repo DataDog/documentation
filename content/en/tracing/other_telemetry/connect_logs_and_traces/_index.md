@@ -21,6 +21,6 @@ To learn more about automatically or manually connecting your logs to your trace
 
 {{< partial name="apm/apm-connect-logs-and-traces.html" >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /agent/logs/#enabling-log-collection-from-integrations

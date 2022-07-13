@@ -11,10 +11,10 @@ code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
 further_reading:
-    - link: 'tracing/connect_logs_and_traces'
+    - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect your Logs and Traces together'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
@@ -350,9 +350,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#span-tags
-[2]: /tracing/visualization/#spans
-[3]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#span-tags
+[2]: /tracing/glossary/#spans
+[3]: /tracing/glossary/#trace
 [4]: /tracing/custom_instrumentation/java/#set-tags-errors-on-a-root-span-from-a-child-span
 [5]: /tracing/setup/java/#compatibility
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api

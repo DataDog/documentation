@@ -236,7 +236,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [44]: /serverless/distributed_tracing
 [45]: /serverless/troubleshooting
 [46]: /integrations/amazon_xray/?tab=nodejs
-[47]: /tracing/setup_overview/
+[47]: /tracing/trace_collection/
 [48]: /tracing/#explore-datadog-apm
 [49]: /watchdog/
 [50]: /security_platform/cloud_siem/getting_started/

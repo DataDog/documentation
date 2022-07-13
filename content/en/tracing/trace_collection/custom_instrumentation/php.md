@@ -14,10 +14,10 @@ further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       tag: 'Guide'
       text: 'Instrument a custom method to get deep visibility into your business logic'
-    - link: 'tracing/connect_logs_and_traces'
+    - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect your Logs and Traces together'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
@@ -710,11 +710,11 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#spans
-[2]: /tracing/visualization/#span-tags
+[1]: /tracing/glossary/#spans
+[2]: /tracing/glossary/#span-tags
 [3]: /tracing/security
 [4]: /tracing/guide/send_traces_to_agent_by_api/
 [5]: https://www.php.net/func_get_args
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[8]: /tracing/setup_overview/open_standards/php#opentracing
+[8]: /tracing/trace_collection/open_standards/php#opentracing

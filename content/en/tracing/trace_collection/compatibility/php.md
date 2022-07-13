@@ -9,7 +9,7 @@ code_lang: php
 type: multi-code-lang
 code_lang_weight: 50
 further_reading:
-    - link: 'tracing/setup/php'
+    - link: 'tracing/trace_collection/dd_libraries/php'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---

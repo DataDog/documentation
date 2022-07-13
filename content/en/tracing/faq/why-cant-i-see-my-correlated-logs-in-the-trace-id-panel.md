@@ -2,7 +2,7 @@
 title: Why can't I see my correlated logs in the Trace ID panel?
 kind: faq
 further_reading:
-- link: "/tracing/connect_logs_and_traces/"
+- link: "/tracing/other_telemetry/connect_logs_and_traces/"
   tag: "Documentation"
   text: "Correlate Traces and Logs"
 - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
@@ -54,8 +54,8 @@ If this isn't working as expected, ensure the name of the logs attribute that co
 
 {{< img src="tracing/faq/trace_id_reserved_attribute_mapping.png" alt="Trace ID mapping" >}}
 
-[1]: /tracing/visualization/#trace
-[2]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#trace
+[2]: /tracing/glossary/#spans
 [3]: /logs/log_configuration/processors/#remapper
 [4]: https://app.datadoghq.com/logs/pipelines/remapping
 {{% /tab %}}
@@ -81,8 +81,8 @@ For raw logs without any integration:
 
 * Then define a [Trace remapper][3] on the extracted attribute to remap them to the official trace id of the logs.
 
-[1]: /tracing/visualization/#trace
-[2]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#trace
+[2]: /tracing/glossary/#spans
 [3]: /logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
@@ -95,7 +95,7 @@ Once the IDs are properly injected and remapped into your logs, you can make a d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 [2]: /logs/guide/logs-not-showing-expected-timestamp/
-[3]: /tracing/visualization/#services
-[4]: /tracing/connect_logs_and_traces/
+[3]: /tracing/glossary/#services
+[4]: /tracing/other_telemetry/connect_logs_and_traces/

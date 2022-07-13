@@ -57,9 +57,9 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 
  Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][8], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
 
-[1]: /tracing/setup_overview/
+[1]: /tracing/trace_collection/
 [2]: /security_platform/application_security/getting_started/#prerequisites
-[3]: /tracing/setup_overview/configure_data_security/?tab=http
+[3]: /tracing/configure_data_security/?tab=http
 [4]: /security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api/
 [5]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [6]: /security_platform/default_rules/#cat-application-security

@@ -279,7 +279,7 @@ See the [associated documentation][28] for additional information.
 [5]: /integrations/amazon_cloudfront/
 [6]: /getting_started/tagging/unified_service_tagging/
 [7]: /logs/explorer/patterns/
-[8]: /tracing/connect_logs_and_traces/
+[8]: /tracing/other_telemetry/connect_logs_and_traces/
 [9]: /integrations/varnish/
 [10]: /integrations/amazon_elb/
 [11]: /integrations/nginx/

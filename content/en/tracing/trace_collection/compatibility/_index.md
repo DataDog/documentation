@@ -3,7 +3,7 @@ title: Compatibility Requirements
 kind: documentation
 description:
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Add the tracing library to your application"
 aliases:

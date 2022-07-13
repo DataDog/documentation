@@ -5,16 +5,16 @@ code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60
 further_reading:
-  - link: "/tracing/connect_logs_and_traces/dotnet/"
+  - link: "/tracing/other_telemetry/connect_logs_and_traces/dotnet/"
     tag: "Documentation"
     text: "Connect .NET application logs to traces"
-  - link: "/tracing/runtime_metrics/dotnet/"
+  - link: "/tracing/metrics/runtime_metrics/dotnet/"
     tag: "Documentation"
     text: "Runtime metrics"
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
     text: "Microsoft Azure App Service extension"
-  - link: "/tracing/visualization/"
+  - link: "/tracing/glossary/"
     tag: "Documentation"
     text: "Explore your services, resources, and traces"
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
@@ -290,8 +290,8 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
-[6]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
-[7]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[6]: /tracing/trace_collection/compatibility/dotnet-core#integrations
+[7]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [8]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header

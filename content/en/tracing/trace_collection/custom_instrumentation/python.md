@@ -11,10 +11,10 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
 further_reading:
-    - link: 'tracing/connect_logs_and_traces'
+    - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect your Logs and Traces together'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
@@ -111,7 +111,7 @@ API details of the decorator can be found in the `ddtrace.Tracer.trace` [documen
 
 
 
-[1]: /tracing/visualization/#spans
+[1]: /tracing/glossary/#spans
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
 [3]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
 {{% /tab %}}

@@ -4,19 +4,19 @@ kind: documentation
 aliases:
 - /tracing/visualization/trace/
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/visualization/resource/"
+- link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "/tracing/visualization/trace/"
+- link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
@@ -59,7 +59,7 @@ Some attributes have special meanings that lead to a dedicated display or specif
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Error Formating"  >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 {{% /tab %}}
 {{% tab "Host Info" %}}
 
@@ -104,7 +104,7 @@ Click on a service’s span to see network dependencies of the service making th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
-[2]: /tracing/visualization/#spans
-[3]: /tracing/visualization/#services
-[4]: /tracing/visualization/#resources
+[1]: /tracing/glossary/#trace
+[2]: /tracing/glossary/#spans
+[3]: /tracing/glossary/#services
+[4]: /tracing/glossary/#resources

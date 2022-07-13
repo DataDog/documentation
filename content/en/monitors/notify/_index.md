@@ -185,7 +185,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
 [6]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[7]: /monitors/notify/variables/?tab=is_renotify#examples 
+[7]: /monitors/notify/variables/?tab=is_renotify#examples
 [8]: /integrations/jira/
 [9]: /integrations/jira/#usage
 [10]: /integrations/pagerduty/

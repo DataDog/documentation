@@ -36,6 +36,6 @@ To instrument an application written in a language that does not yet have offici
 
 After you set up tracing, you are [one step from accessing profiling data by enabling Continuous Profiler][3]. Profiler is available for Java, Python, Go, Ruby, Node.js, (beta) PHP, (beta) .NET, and (beta) Linux.
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 [2]: /developers/community/libraries/#apm-tracing-client-libraries
 [3]: /tracing/profiler/enabling/

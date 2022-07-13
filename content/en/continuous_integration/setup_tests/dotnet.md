@@ -223,6 +223,6 @@ For more information about how to add spans and tags for custom instrumentation,
 [2]: https://dtdg.co/dd-trace-dotnet-linux-x64
 [3]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
-[5]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
+[5]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#configuration
 [6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[7]: /tracing/trace_collection/custom_instrumentation/dotnet/

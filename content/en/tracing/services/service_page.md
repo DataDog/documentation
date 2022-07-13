@@ -4,16 +4,16 @@ kind: documentation
 aliases:
 - /tracing/visualization/service/
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/resource/"
+- link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "/tracing/visualization/trace/"
+- link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
@@ -182,20 +182,20 @@ View common patterns in your service’s logs, and use facets like status in the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/
-[2]: /tracing/visualization/resource/
+[1]: /tracing/glossary/
+[2]: /tracing/services/resource_page/
 [3]: /monitors/create/types/apm/
 [4]: /tracing/error_tracking/
 [5]: /monitors/service_level_objectives/
 [6]: /monitors/incident_management/
 [7]: /watchdog/
-[8]: /tracing/guide/metrics_namespace/
+[8]: /tracing/metrics/metrics_namespace/
 [9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [10]: /dashboards/
-[11]: /tracing/visualization/#resources
-[12]: /tracing/deployment_tracking/#versions-deployed
+[11]: /tracing/glossary/#resources
+[12]: /tracing/services/deployment_tracking/#versions-deployed
 [13]: /getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
-[14]: /tracing/runtime_metrics/
+[14]: /tracing/metrics/runtime_metrics/
 [15]: /tracing/profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
