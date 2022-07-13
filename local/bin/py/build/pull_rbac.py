@@ -32,11 +32,15 @@ def pull_rbac():
     with open('data/permissions.json', 'w+') as outfile:
       outfile.write(formatted_permissions_json)
   else:
-    print('RBAC api request failed.')
     print(r)
-    
-    if getenv("LOCAL") != 'True':
-      sys.exit(1)
+
+    # if in gitlab we need to exit with failure
+    # if in local we need to continue
+    if getenv("CI_COMMIT_REF_NAME"):
+        print('\x1b[31mERROR\x1b[0m: RBAC api request failed. Aborting')
+        sys.exit(1)
+    else:
+        print('\x1b[33mWARNING\x1b[0m: RBAC api request failed. Acceptable behavior locally when missing api keys')
 
 pull_rbac()
 
