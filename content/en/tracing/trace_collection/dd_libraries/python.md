@@ -118,7 +118,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
    # Network socket
    tracer.configure(
-     dogstatsd_url="http://localhost:8125",
+     dogstatsd_url="udp://localhost:8125",
    )
 
    # Unix domain socket configuration
