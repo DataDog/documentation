@@ -17,7 +17,7 @@ further_reading:
 ## Trace metrics
 
 [Tracing application metrics][1] are collected after enabling trace collection and instrumenting your application. These metrics are available for dashboards and monitors.
-These metrics capture **request, error** counts and **latency** measures. They are being calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][2] configuration.
+These metrics capture **request** counts, **error** counts, and **latency** measures. They are calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][2] configuration.
 
 
 Ingested span and traces are kept for 15 minutes. Indexed spans and traces that retention filters keep are stored in Datadog for 15 days. But if you generate custom metrics from ingested data, the metrics are retained for 15 months.
