@@ -218,7 +218,7 @@ There are many other environment variables and settings supported in the Datadog
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/
-[2]: /metrics/otlp/
+[2]: /metrics/open_telemetry/otlp_metric_types/
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
 [5]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
