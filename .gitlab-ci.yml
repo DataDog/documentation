@@ -82,9 +82,9 @@ build_preview:
     - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
     - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
-    #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
+    - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
@@ -245,7 +245,6 @@ build_live:
     expire_in: 1 week
   only:
     - master
-
 
 index_internal_doc:
   stage: post-deploy
@@ -415,16 +414,6 @@ test_pa11y:
     - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
   only:
     - schedules
-
-#rollback_live:
-#  <<: *base_template
-#  stage: cleanup
-#  environment: "live"
-#  when: on_failure
-#  script:
-#    - rollback_env
-#  only:
-#    - master
 
 tag_successful_live_pipeline:
   <<: *base_template
