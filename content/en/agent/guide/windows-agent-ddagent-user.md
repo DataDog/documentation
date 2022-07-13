@@ -23,7 +23,11 @@ Additionally the following security policies are applied to the account during i
 * Deny log on through Remote Desktop Services
 * Log on as a service
 
-**Important**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent. You cannot install the Datadog agent using a Group Managed Service Account (GMSA).
+**Important**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
+
+**Note**: All example commands on this page use `<>` to indicate a variable that should be replaced. For example, if the user account is `ddagentuser` and the command contains `DDAGENTUSER_NAME=<USERNAME>` then `DDAGENTUSER_NAME=ddagentuser` should be entered in the command line.
+
+**Note**: Starting with release `7.38.0/6.38.0` the installer supports the use of a **Grouped Managed Service Account (gMSA)**. To specify a Grouped Managed Service Account, append **$** at the end of the username: `<DOMAIN>\<USERNAME>$`. The Grouped Managed Service Account must exist *prior* to installation, as the installer cannot create one.
 
 ## Installation
 
@@ -42,6 +46,8 @@ msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWOR
 **Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
 
 **Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
+
+**Note**: The user cannot be specified in the installer UI. Use the command line to pass the `DDAGENTUSER_NAME` and other parameters. They are taken into account, even in a UI install.
 
 ### Installation with group policy
 

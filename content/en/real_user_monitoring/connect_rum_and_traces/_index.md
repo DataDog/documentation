@@ -63,6 +63,19 @@ To connect RUM to Traces, you need to specify your browser application in the `s
 
 **Note:** `allowedTracingOrigins` accepts Javascript strings and RegExp that matches the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
 
+3.  _(Optional)_ Configure the `tracingSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces:
+
+    ```javascript
+    import { datadogRum } from '@datadog/browser-rum'
+
+    datadogRum.init({
+        ...otherConfig,
+        tracingSampleRate: 20
+    })
+    ```
+
+**Note**: `tracingSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
 [1]: /real_user_monitoring/browser/
@@ -83,6 +96,16 @@ To connect RUM to Traces, you need to specify your browser application in the `s
     ```
 
 **Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
+
+3.  _(Optional)_ Configure the `traceSamplingRate` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
+
+```java
+    val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(RumInterceptor(traceSamplingRate = 100f))
+       .build()
+  ```
+
+**Note**: `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/android/
 {{% /tab %}}
@@ -111,6 +134,19 @@ To connect RUM to Traces, you need to specify your browser application in the `s
     ```
 
 **Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
+
+4.  _(Optional)_ Set the `tracingSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
+    ```swift
+    Datadog.initialize(
+    appContext: .init(),
+    configuration: Datadog.Configuration
+        .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
+        .set(tracingSamplingRate: 20)
+        .build()
+    )
+    ```
+
+**Note**: `tracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/ios/
 {{% /tab %}}
@@ -154,11 +190,11 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 
 ## How are APM quotas affected?
 
-The `x-datadog-origin: rum` header specifies to the APM backend that the traces are generated from Real User Monitoring. The generated traces consequently do not impact Indexed Span counts.
+Connecting RUM and traces may significantly increase the APM ingested volumes. Use the initialization parameter `tracingSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
 
 ## How long are traces retained?
 
-These traces are retained [just like your classical APM traces][18].
+These traces are available for 15 minutes in the [Live Search][18] explorer. To retain the traces for a longer period of time, create [retention filters][19]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -179,4 +215,5 @@ These traces are retained [just like your classical APM traces][18].
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
 [17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
-[18]: /tracing/trace_retention/
+[18]: /tracing/trace_explorer/#live-search-for-15-minutes
+[19]: /tracing/trace_retention/#retention-filters

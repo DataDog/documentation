@@ -390,6 +390,29 @@ JSON でエンコードされた文字列で、サンプリングレートを構
 **デフォルト**: `null`<br>
 トレースとログで、アプリケーションのバージョン (例:  `1.2.3`、`6c44da20`、`2020.02.13`) を設定します。バージョン `0.47.0` で追加されています
 
+`DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
+: **INI**: `datadog.trace.http_url_query_param_allowed`<br>
+**デフォルト**: `*`<br>
+URL の一部として収集するクエリパラメータのカンマ区切りリスト。パラメータを収集しない場合は空、すべてのパラメータを収集する場合は `*` を設定します。バージョン `0.74.0` で追加されました。
+
+`DD_TRACE_CLIENT_IP_HEADER_DISABLED`
+: **INI**: `datadog.trace.client_ip_header_disabled`<br>
+**デフォルト**: `0`<br>
+関連する IP ヘッダーからのクライアント IP 収集を無効にします。バージョン `0.76.0` で追加されました。
+
+`DD_TRACE_CLIENT_IP_HEADER`
+: **INI**: `datadog.trace.client_ip_header`<br>
+**デフォルト**: `null`<br>
+クライアント IP の収集に使用する IP ヘッダー。例: `x-forwarded-for`。バージョン `0.76.0` で追加されました。
+
+`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
+: **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
+**デフォルト**: 
+  ```
+  (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
+  ```
+ URL の一部として含まれるクエリ文字列を難読化するために使用される正規表現。バージョン `0.76.0` で追加されました。
+
 #### インテグレーション名
 
 以下の表は、各インテグレーションに紐付くデフォルトのサービス名をまとめたものです。サービス名は `DD_SERVICE_MAPPING` に変更してください。
