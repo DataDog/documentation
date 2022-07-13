@@ -84,15 +84,15 @@ build_preview:
     - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
     - placehold_translations
     - update_preview_baseurl
-    - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
+    # - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
-    - rm -rf data/service_checks
-    - in-isolation deploy_preview > logs/deploy.txt
-    # remove static images so we can skip from artifact passed in gitlab
-    - remove_static_from_repo
-    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
+    # - rm -rf data/service_checks
+    # - in-isolation deploy_preview > logs/deploy.txt
+    # # remove static images so we can skip from artifact passed in gitlab
+    # - remove_static_from_repo
+    # - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
@@ -105,9 +105,40 @@ build_preview:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
+test_preview:
+  <<: *base_template
+  stage: build
+  needs: ["build_preview"]
+  environment: "preview"
+  script:
+    - echo "Test test preview"
+    - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
+
+deploy_preview:
+  <<: *base_template
+  stage: build
+  needs: ["build_preview"]
+  cache:
+    - *yarn_cache_pull_push
+  environment: "preview"
+  script:
+    - echo "Test deploy preview"
+    # - rm -rf data/service_checks
+    # - in-isolation deploy_preview > logs/deploy.txt
+    # # remove static images so we can skip from artifact passed in gitlab
+    # - remove_static_from_repo
+    # - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
+
 link_checks_preview:
   <<: *base_template
-  stage: post-deploy
+  stage: build
+  needs: ["build_preview"]
   cache: {}
   environment: "preview"
   variables:
