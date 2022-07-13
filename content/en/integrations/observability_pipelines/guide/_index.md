@@ -1,6 +1,8 @@
 ---
 title: Observability Pipelines Guides
 kind: guide
+private: true
+disable_sidebar: true
 ---
 
 {{< whatsnext desc="General guides:" >}}
