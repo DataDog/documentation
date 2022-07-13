@@ -21,6 +21,8 @@ further_reading:
   text: "Usage Metrics"
 ---
 
+{{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Ingestion Sampling Rules" >}}
+
 Ingestion controls affect what traces are sent by your applications to Datadog. Stats and [metrics][1] are always calculated based on all traces, and are not impacted by ingestion controls.
 
 The Ingestion Control page provides visibility at the Agent and tracing libraries level into the ingestion configuration of your applications and services. From the [ingestion control configuration page][2], you can:

@@ -24,11 +24,11 @@ aliases:
 
 ## Overview
 
-Tracing application metrics are collected after [enabling trace collection][1] and [instrumenting your application][2].
+Tracing application metrics are collected after you [enable trace collection][1] and [instrument your application][2].
 
 {{< img src="tracing/apm_lifecycle/trace_metrics.png" style="width:70%; background:none; border:none; box-shadow:none;" alt="Trace Metrics" >}}
 
-These metrics capture **request, error** counts and **latency** measures. They are being calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][3] configuration. In order to make sure you have full visibility into your application's traffic, you can use these metrics to spot potential errors on a service or a resource, by creating dashboards, monitors, and SLOs.
+These metrics capture **request** counts, **error** counts, and **latency** measures. They are calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][3] configuration. Ensure you have full visibility into your application's traffic by using these metrics to spot potential errors on a service or a resource, and by creating dashboards, monitors, and SLOs.
 
 The [trace metrics][4] namespace is formatted as:
 
