@@ -247,7 +247,6 @@ build_live:
   only:
     - master
 
-
 index_internal_doc:
   stage: post-deploy
   cache: {}
@@ -303,8 +302,11 @@ index_algolia:
       echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
   dependencies:
     - build_live
-  only:
-    - schedules
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE != "translations" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: always
+    - if: $SCHEDULE_TYPE == "translations"
+      when: never
 
 replica_algolia:
   <<: *base_template
@@ -319,6 +321,9 @@ replica_algolia:
     - build_live
   only:
     - schedules
+  except:
+    variables:
+      - $SCHEDULE_TYPE == "translations"
 
 sourcemaps_live:
   <<: *base_template
@@ -364,6 +369,8 @@ manage_ignored_translations:on-schedule:
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "translations" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: always
+    - if: $SCHEDULE_TYPE != "translations"
+      when: never
 
 manage_ignored_translations:manual:
   <<: *base_template
@@ -404,16 +411,9 @@ test_pa11y:
     - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
   only:
     - schedules
-
-#rollback_live:
-#  <<: *base_template
-#  stage: cleanup
-#  environment: "live"
-#  when: on_failure
-#  script:
-#    - rollback_env
-#  only:
-#    - master
+  except:
+    variables:
+      - $SCHEDULE_TYPE == "translations"
 
 tag_successful_live_pipeline:
   <<: *base_template
