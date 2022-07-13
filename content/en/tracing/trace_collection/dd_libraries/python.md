@@ -108,7 +108,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
    If a different configuration is required, the `DD_DOGSTATSD_URL` environment variable can be used. Some examples:
    ```
-   DD_DOGSTATSD_URL=http://custom-hostname:1234
+   DD_DOGSTATSD_URL=udp://custom-hostname:1234
    DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
    ```
    The connection for stats can also be configured in code:
