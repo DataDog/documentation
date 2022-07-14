@@ -155,7 +155,7 @@ Imagine that you want to collect events from logging where you have enough contr
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
-You could set up a log parser like the following to create an event from this logged data in your Datadog [event stream][4]:
+You could set up a log parser like the following to create an event from this logged data in your Datadog [event explorer][4]:
 
 ```python
 

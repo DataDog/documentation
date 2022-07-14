@@ -2,19 +2,19 @@
 title: Trace Metrics
 kind: documentation
 further_reading:
-    - link: 'tracing/setup/'
+    - link: 'tracing/trace_collection/'
       tag: 'Documentation'
       text: 'Learn how to setup APM tracing with your application'
-    - link: 'tracing/visualization/services_list/'
+    - link: 'tracing/services/services_list/'
       tag: 'Documentation'
       text: 'Discover the list of services reporting to Datadog'
-    - link: 'tracing/visualization/service'
+    - link: 'tracing/services/service_page'
       tag: 'Documentation'
       text: 'Learn more about services in Datadog'
-    - link: 'tracing/visualization/resource'
+    - link: 'tracing/services/resource_page'
       tag: 'Documentation'
       text: 'Dive into your resource performance and traces'
-    - link: 'tracing/visualization/trace'
+    - link: 'tracing/trace_explorer/trace_view/'
       tag: 'Documentation'
       text: 'Understand how to read a Datadog Trace'
 aliases:
@@ -24,7 +24,13 @@ aliases:
 
 ## Overview
 
-Tracing application metrics are collected after [enabling trace collection][1] and [instrumenting your application][2]. These metrics are available for dashboards and monitors. The [trace metrics][3] namespace is formatted as:
+Tracing application metrics are collected after you [enable trace collection and [instrument your application][1].
+
+{{< img src="tracing/apm_lifecycle/trace_metrics.png" style="width:70%; background:none; border:none; box-shadow:none;" alt="Trace Metrics" >}}
+
+These metrics capture **request** counts, **error** counts, and **latency** measures. They are calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][2] configuration. Ensure you have full visibility into your application's traffic by using these metrics to spot potential errors on a service or a resource, and by creating dashboards, monitors, and SLOs.
+
+The [trace metrics][3] namespace is formatted as:
 
 - `trace.<SPAN_NAME>.<METRIC_SUFFIX>`
 - `trace.<SPAN_NAME>.<METRIC_SUFFIX>.<2ND_PRIM_TAG>_service`
@@ -37,7 +43,7 @@ With the following definitions:
 `<METRIC_SUFFIX>`
 : The name of the metric (examples: `duration`, `hits`, `span_count`). See the section below.
 
-`<2ND_PRIM_TAG>` 
+`<2ND_PRIM_TAG>`
 : If the metric name accounts for the [second primary tag][4], this tag is part of the metric name.
 
 `<TAGS>`
@@ -182,13 +188,13 @@ With the following definitions:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/send_traces/
-[2]: /tracing/setup/
-[3]: /tracing/visualization/#trace-metrics
+[1]: /tracing/trace_collection/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms
+[3]: /tracing/glossary/#trace-metrics
 [4]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [5]: /metrics/types/?tab=count#metric-types
 [6]: /metrics/types/?tab=distribution#metric-types
 [7]: /metrics/types/?tab=gauge#metric-types
-[8]: /tracing/visualization/services_list/#services-types
-[9]: /tracing/visualization/#services
+[8]: /tracing/services/services_list/#services-types
+[9]: /tracing/glossary/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

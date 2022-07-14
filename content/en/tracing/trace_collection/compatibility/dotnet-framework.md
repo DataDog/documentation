@@ -9,7 +9,7 @@ code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 80
 further_reading:
-    - link: 'tracing/setup/dotnet-framework'
+    - link: 'tracing/trace_collection/dd_libraries/dotnet-framework'
       tag: 'Documentation'
       text: 'Instrument Your Application'
     - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'

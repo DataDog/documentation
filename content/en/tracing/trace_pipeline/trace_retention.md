@@ -5,20 +5,20 @@ description: "Learn how to control trace retention with retention filters."
 aliases:
 - /tracing/trace_retention/
 further_reading:
-- link: "/tracing/trace_ingestion/mechanisms"
+- link: "/tracing/trace_pipeline/ingestion_mechanisms"
   tag: "Documentation"
   text: "Ingestion Mechanisms"
-- link: "/tracing/trace_ingestion/ingestion_controls/"
+- link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"
   text: "Ingestion Controls"
-- link: "/tracing/trace_retention/usage_metrics/"
+- link: "/tracing/trace_pipeline/metrics/"
   tag: "Documentation"
   text: "Usage Metrics"
 ---
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey: Indexing" >}}
+{{< img src="tracing/apm_lifecycle/retention_filters.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Retention filters" >}}
 
-With APM, both the [ingestion][1] of traces as well as the **retention** of those traces for 15 days are fully customizable.
+With APM, [the ingestion and the retention of traces for 15 days][1] are fully customizable.
 
 To track or monitor your volume of ingested and indexed data, see the [Usage Metrics][2] documentation.
 
@@ -106,11 +106,11 @@ For example, you can create filters to keep all traces for:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_ingestion
-[2]: /tracing/trace_retention/usage_metrics
+[1]: /tracing/trace_pipeline/
+[2]: /tracing/trace_pipeline/metrics
 [3]: https://app.datadoghq.com/apm/traces/retention-filters
 [4]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[5]: /tracing/visualization/#service-entry-span
+[5]: /tracing/glossary/#service-entry-span
 [6]: /tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
 [7]: /tracing/trace_explorer/?tab=listview#indexed-spans-search-with-15-day-retention
-[8]: /tracing/visualization/#trace-root-span
+[8]: /tracing/glossary/#trace-root-span

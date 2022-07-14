@@ -272,6 +272,6 @@ If the configuration is correct, but you’re still seeing connection errors, [c
 [15]: /agent/cluster_agent/admission_controller/
 [16]: /integrations/amazon_eks/#setup
 [17]: /agent/docker/apm/#tracing-from-other-containers
-[18]: /tracing/setup_overview/setup/php/?tab=containers#apache
-[19]: /tracing/setup_overview/setup/php/?tab=containers#nginx
+[18]: /tracing/trace_collection/dd_libraries/php/?tab=containers#apache
+[19]: /tracing/trace_collection/dd_libraries/php/?tab=containers#nginx
 [20]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent

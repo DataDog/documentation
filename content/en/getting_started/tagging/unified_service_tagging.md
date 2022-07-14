@@ -317,7 +317,7 @@ If you're using [connected logs and traces][1], enable automatic logs injection 
 
 **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
-[1]: /tracing/connect_logs_and_traces/
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
 {{% /tab %}}
 
 {{% tab "RUM & Session Replay" %}}

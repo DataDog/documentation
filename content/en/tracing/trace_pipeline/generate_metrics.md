@@ -6,7 +6,7 @@ aliases:
 - /tracing/span_to_metrics/
 - /tracing/generate_metrics/
 further_reading:
-    - link: 'tracing/trace_retention_and_ingestion'
+    - link: 'tracing/trace_pipeline'
       tag: "Documentation"
       text: 'Customize trace ingestion and retain important traces.'
     - link: 'tracing/trace_search_and_analytics/query_syntax'
@@ -14,9 +14,9 @@ further_reading:
       text: 'Use Analytics queries and monitors based on retained traces.'
 ---
 
-## Generate span-based metrics
+{{< img src="tracing/apm_lifecycle/span_based_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Span-based metrics" >}}
 
-Generate metrics from 100% of ingested spans, regardless of whether they are indexed by a [retention filter][1].
+Generate metrics from 100% of ingested spans, regardless of whether the spans are indexed by a [retention filter][1].
 
 Use custom metrics for specific fixed queries and comparisons, while creating retention filters to allow arbitrary querying and investigation of the retained trace and its flame graph.
 
@@ -39,7 +39,7 @@ To generate metrics from spans, on the [APM Setup and Configuration][8] page sel
 {{< img src="tracing/span_to_metrics/GenerateMetrics.png" style="width:100%;" alt="Generate metrics from ingested spans" >}}
 
 
-### Creating a span-based metric
+## Creating a span-based metric
 
 {{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="How to create a metric" >}}
 
@@ -55,7 +55,7 @@ To generate metrics from spans, on the [APM Setup and Configuration][8] page sel
 
 **Important Note**: Span-based metrics are considered custom metrics and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.
 
-### Updating existing span-based metrics
+## Updating existing span-based metrics
 
 {{< img src="tracing/span_to_metrics/editspantometrics.png" style="width:100%;" alt="Edit an existing metrics" >}}
 
@@ -73,7 +73,7 @@ After a metric is created, only two fields can be updated:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/trace_retention_and_ingestion
+[1]: /tracing/trace_pipeline/trace_retention
 [2]: /account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/metrics/#overview
 [4]: /monitors/create/types/anomaly/#overview

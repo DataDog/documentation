@@ -14,10 +14,10 @@ further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       tag: 'Guide'
       text: 'Instrument a custom method to get deep visibility into your business logic'
-    - link: 'tracing/connect_logs_and_traces'
+    - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect your Logs and Traces together'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
     - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
@@ -235,13 +235,13 @@ You can exclude traces based on the resource name to remove Synthetics traffic s
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/setup_overview/compatibility_requirements/dotnet-framework
-[2]: /tracing/setup_overview/compatibility_requirements/dotnet-core
+[1]: /tracing/trace_collection/compatibility/dotnet-framework
+[2]: /tracing/trace_collection/compatibility/dotnet-core
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: https://www.nuget.org/packages/Datadog.Trace.Annotations
-[5]: /tracing/visualization/#span-tags
-[6]: /tracing/visualization/#spans
-[7]: /tracing/visualization/#trace
-[8]: /tracing/setup_overview/setup/dotnet-framework
-[9]: /tracing/setup_overview/setup/dotnet-core
+[5]: /tracing/glossary/#span-tags
+[6]: /tracing/glossary/#spans
+[7]: /tracing/glossary/#trace
+[8]: /tracing/trace_collection/dd_libraries/dotnet-framework
+[9]: /tracing/trace_collection/dd_libraries/dotnet-core
 [10]: /tracing/security

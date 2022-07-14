@@ -11,7 +11,7 @@ further_reading:
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
       tag: 'Pypi'
       text: 'API Docs'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'
@@ -101,4 +101,4 @@ Enable [connecting logs and trace injection][5].
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
 [3]: /tracing/guide/setting_primary_tags_to_scope/
 [4]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
-[5]: /tracing/connect_logs_and_traces/python/
+[5]: /tracing/other_telemetry/connect_logs_and_traces/python/

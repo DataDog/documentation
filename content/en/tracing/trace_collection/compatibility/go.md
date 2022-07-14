@@ -9,7 +9,7 @@ code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-    - link: 'tracing/setup/go'
+    - link: 'tracing/trace_collection/dd_libraries/go'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---

@@ -79,7 +79,7 @@ Need help? Contact [Datadog support][15].
 [9]: /integrations/amazon_dynamodb/
 [10]: /monitors/
 [11]: https://app.datadoghq.com/watchdog
-[12]: /tracing/visualization/services_list/
-[13]: /tracing/visualization/service/#overview
+[12]: /tracing/services/services_list/
+[13]: /tracing/services/service_page/#overview
 [14]: /watchdog/alerts#alert-details
 [15]: /help/

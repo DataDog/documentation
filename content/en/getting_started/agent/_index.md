@@ -302,7 +302,7 @@ For help troubleshooting the Agent:
 [25]: /agent/guide/agent-commands/#restart-the-agent
 [26]: /logs/
 [27]: /infrastructure/process/?tab=linuxwindows#introduction
-[28]: /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/?tab=host
+[28]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host
 [29]: /agent/logs/advanced_log_collection/
 [30]: /developers/dogstatsd/?tab=hostagent
 [31]: /agent/guide/agent-commands/

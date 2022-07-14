@@ -8,7 +8,7 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-java'
       tag: 'GitHub'
       text: 'Datadog Java APM source code'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
 ---

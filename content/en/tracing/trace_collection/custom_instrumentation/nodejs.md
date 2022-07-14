@@ -11,10 +11,10 @@ code_lang: nodejs
 code_lang_weight: 40
 type: multi-code-lang
 further_reading:
-    - link: 'tracing/connect_logs_and_traces'
+    - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect your Logs and Traces together'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
@@ -270,6 +270,6 @@ Additionally, traces can be excluded based on their resource name, so that the A
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/nodejs/
-[2]: /tracing/visualization/#spans
+[2]: /tracing/glossary/#spans
 [3]: /tracing/security
 [4]: /tracing/guide/ignoring_apm_resources/

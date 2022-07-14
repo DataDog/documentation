@@ -9,7 +9,7 @@ code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40
 further_reading:
-    - link: 'tracing/setup/nodejs'
+    - link: 'tracing/trace_collection/dd_libraries/nodejs'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---

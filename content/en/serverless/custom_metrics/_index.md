@@ -339,7 +339,7 @@ Where:
 [4]: /metrics/#time-and-space-aggregation
 [5]: /dashboards/guide/query-to-the-graph/
 [6]: /logs/logs_to_metrics/
-[7]: /tracing/generate_metrics/
+[7]: /tracing/trace_pipeline/generate_metrics/
 [8]: /serverless/installation/
 [9]: /serverless/forwarder/
 [10]: /integrations/amazon_web_services/?tab=roledelegation#datadog-aws-iam-policy

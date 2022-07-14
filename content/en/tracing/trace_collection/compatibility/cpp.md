@@ -9,7 +9,7 @@ code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 60
 further_reading:
-    - link: 'tracing/setup/cpp'
+    - link: 'tracing/trace_collection/dd_libraries/cpp'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
