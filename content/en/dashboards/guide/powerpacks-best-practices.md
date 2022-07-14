@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Powerpacks are templated groups of dashboard widgets that scale graphing expertise as reusable dashboard building blocks. By capturing domain knowledge or organization-specific standards for observability as a Powerpack, you can empower dashboard owners across your organization. This knowledge can be incorporated into their existing dashboards across technology areas, and without additional training.
+Powerpacks are templated groups of dashboard widgets that scale graphing expertise as reusable dashboard building blocks. You can empower dashboard owners across your organization by capturing domain knowledge or organization-specific standards for observability as a Powerpack. This knowledge can be incorporated into existing dashboards across technology areas, without additional training.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="The configure powerpack page in the Datadog application showing a section to configure values with tags or attributes, several graphs from an example powerpack, and a menu on the right to browse other packs" style="width:100%;" >}}
 
@@ -27,10 +27,10 @@ This guide addresses best practices for creating and sharing custom Powerpacks.
 
 As an organization grows, expertise and ownership easily become distributed across multiple teams. Powerpacks work best for organizations with:
 
-- Teams owning a specific technology (for example Postgres, Kafka, Node.js) or stakes (such as Compliance or Security) across the organization.
+- Teams who own a specific technology (for example, Postgres, Kafka, Node.js) or stakes (such as Compliance or Security) across the organization.
 - Individual teams in charge of incorporating these technologies or stakes into full-stack and business-driven views.
 
-This ownership model fosters standardization across your teams and provides a scalable way to promote organizational best practices for monitoring key components of a business. For operational metrics and KPIs alike, distributing ownership along both technology lines and team lines ensures key stakeholders like on-call engineers, SREs, and executives can access and interpret relevant views on dashboards across the business.
+This ownership model fosters standardization across your teams and provides a scalable way to promote organizational best practices for monitoring key components of a business. For both operational metrics and KPIs, distributing ownership along technology lines and team lines ensures key stakeholders like on-call engineers, SREs, and executives can access and interpret relevant views on dashboards across the business.
 
 ## Best practices for creating a Powerpack
 
@@ -48,23 +48,23 @@ A note widget can give helpful context on how to interpret a graph. For example,
 
 {{< img src="dashboards/guide/powerpacks_best_practices/note_widget_example.png" alt="An example powerpack titled /checkout Page Views showing several graphs of real user monitoring data. In the top right is a notes widget with a message providing information about one of the graphs" style="width:100%;" >}}
 
-On-graph markers, like horizontal markers and forecasts functions, can provide context on what a value means. For example, the `Hosts Overview` pack shows Agent NTP offsets exactly where they appear on a graph. Horizontal markers reduce the amount of visual mapping a viewer has to do by clearly defining acceptable thresholds on a graph.
+On-graph markers, like horizontal markers and forecast functions, can provide context on what a value means. For example, the `Hosts Overview` pack shows Agent NTP offsets where they appear on a graph. Horizontal markers reduce the visual mapping a viewer has to do by clearly defining acceptable thresholds on a graph.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/horizontal_marker_example.png" alt="An example powerpack titled hosts overview showing a line graph titled Current Agent NTP offset. The graph is colored green between the values -1 and 1, and these thresholds are marked as offset -1s and offset +1s respectively. The graph is colored yellow between 1 and 3 and also between -1 and -3, and these thresholds are marked as offset -3s and offset +3s respectively. The graph is colored red beyond +3 and -3." style="width:100%;" >}}
 
 ### Make Powerpacks discoverable
 
-Powerpacks appear in the dashboard widget tray and can be discovered through keyword or tag search. Powerpack title, description, and tags are all searchable fields and provide the easiest way for someone to find your Powerpack.
+Powerpacks appear in the dashboard widget tray and you can find them through keyword or tag searches. Powerpack title, description, and tags are all searchable fields and provide the easiest way for someone to find your Powerpack.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/powerpack_keyword_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with the keyword resource" style="width:60%;" >}}
 
-To ensure the right users find your Powerpack, include any keywords your users might search (such as “performance”) in the title or description, and tag key technologies.
+To ensure the right users find your Powerpack, include keywords your users might search (such as “performance”) in the title or description, and tag key technologies.
 
 Descriptions are limited to 80 characters. A good description provides a brief summary of what a pack is for and how someone can use it. For example, “View usage patterns for a UI action on a specific app page” for `RUM Feature Usage` describes what the Powerpack tracks, what it expects as an input (a specific app page), and includes keywords like “usage,” “UI,” and “app”.
 
 #### Tagging Powerpacks
 
-Use tags to specify key technologies or search phrases for a specific pack (for example `aws`, `k8s`, `app`). Use plain strings to describe the content of the packs; avoid putting `key:value` pairs in the tag field directly. Tags are limited to 80 characters.
+Use tags to specify key technologies or search phrases for a specific pack (for example, `aws`, `k8s`, `app`). Use plain strings to describe the content of the packs; avoid putting `key:value` pairs in the tag field directly. Tags are limited to 80 characters.
 
 To search Powerpacks by tag in the widget tray, use `tag:search_string` syntax. 
 
@@ -78,7 +78,7 @@ The Powerpack creation modal suggests variables to add to your pack based on com
 
 Modify the names of variables to clarify how others should use them. In the example below, `@appsec.type` is renamed `AttackType` to clarify the expected input. 
 
-{{< img src="dashboards/guide/powerpacks_best_practices/create_powerpack.png" alt="The Create Powerpack screen. Along the left it shows Powerpack Title and Group Title both entered as Application Security Overview, the Add Tags section configured with security and app, and several variables configured in the Add Variables section, including the attribute @appsec.type showing AttackType entered as its name. Below that is a section showing Add Common Filters as Variables, with several options shown and the @appsec.category:attack_attempt filter highlighted. There are several graphs along the right, and three of them are highlighted in the same color as the @appsec.category:attack_attempt filter on the left" style="width:100%;" >}}
+{{< img src="dashboards/guide/powerpacks_best_practices/create_powerpack.png" alt="The Create Powerpack screen. Along the left, it shows Powerpack Title, and Group Title ,both entered as Application Security Overview, the Add Tags section configured with security and app, and several variables configured in the Add Variables section, including the attribute @appsec.type showing AttackType entered as its name. Below that is a section showing Add Common Filters as Variables, with several options shown and the @appsec.category:attack_attempt filter highlighted. There are several graphs along the right, and three of them are highlighted in the same color as the @appsec.category:attack_attempt filter on the left" style="width:100%;" >}}
 
 Configuration variables serve two purposes. They can:
 1. Help a team scope a Powerpack to their context once, before the pack gets added to their dashboard (such as selecting a `service` to ensure a security Powerpack is relevant to the correct service).
