@@ -57,7 +57,6 @@ The **Reliability** tab contains information about the stability of your service
 
 Click the Settings icon on the right hand corner to hide columns from the service list.
 
-## Reliability view
 
 #### PagerDuty Integration
 You can add PagerDuty metadata to Service Catalog to complete the Reliability view. 
