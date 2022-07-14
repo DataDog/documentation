@@ -61,7 +61,7 @@ Click the Settings icon on the right hand corner to hide columns from the servic
 #### PagerDuty Integration
 You can add PagerDuty metadata to Service Catalog to complete the Reliability view. 
 
-- Set up PagerDuty integration by following the instructions [here][6].
+- Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][6].
 - Get your [API acccess key][7].
 - Link PagerDuty service to Service Definition YAML.
 ```yaml
