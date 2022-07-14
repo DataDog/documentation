@@ -59,7 +59,7 @@ Click the Settings icon on the right hand corner to hide columns from the servic
 
 ## Reliability view
 
-#PagerDuty Integration
+#### PagerDuty Integration
 You can add PagerDuty metadata to Service Catalog to complete the Reliability view. 
 
 - Set up PagerDuty integration by following the instructions [here][6].
