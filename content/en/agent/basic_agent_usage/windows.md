@@ -29,7 +29,7 @@ Starting with **Agent v6.11.0**, the core and APM/trace components of the Window
 
 If installing the Datadog Agent on a domain environment, see the [installation requirements for the Agent][4].
 
-**Note**: There are special considerations for [domain controllers][4].
+**Note**: There are special considerations for [domain controllers][12].
 
 {{< tabs >}}
 {{% tab "GUI" %}}
@@ -436,3 +436,4 @@ After configuration is complete, [restart the Agent][11].
 [9]: /infrastructure/process/?tab=linuxwindows#installation
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [11]: /agent/guide/agent-commands/#restart-the-agent
+[12]: /agent/faq/windows-agent-ddagent-user/#domain-controllers

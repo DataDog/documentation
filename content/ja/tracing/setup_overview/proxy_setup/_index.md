@@ -1,48 +1,49 @@
 ---
-title: プロキシのトレース
-kind: documentation
-further_reading:
-  - link: /tracing/visualization/
-    tag: APM の UI を利用する
-    text: サービス、リソース、トレースを調査する
-  - link: https://www.envoyproxy.io/
-    tag: Documentation
-    text: Envoy Web サイト
-  - link: https://www.envoyproxy.io/docs/envoy/latest/
-    tag: Documentation
-    text: Envoy ドキュメント
-  - link: https://www.nginx.com/
-    tag: Documentation
-    text: NGINX ウェブサイト
-  - link: https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/
-    tag: Documentation
-    text: NGINX Ingress Controller OpenTracing
-  - link: https://github.com/opentracing-contrib/nginx-opentracing
-    tag: ソースコード
-    text: OpenTracing 対応 NGINX プラグイン
-  - link: https://istio.io/
-    tag: Documentation
-    text: Istio ウェブサイト
-  - link: https://istio.io/docs/
-    tag: Documentation
-    text: Istio ドキュメント
-  - link: https://github.com/DataDog/dd-opentracing-cpp
-    tag: ソースコード
-    text: Datadog OpenTracing C++ クライアント
 aliases:
-  - /ja/tracing/proxies/envoy
-  - /ja/tracing/envoy/
-  - /ja/tracing/proxies/nginx
-  - /ja/tracing/nginx/
-  - /ja/tracing/istio/
-  - /ja/tracing/setup/envoy/
-  - /ja/tracing/setup/nginx/
-  - /ja/tracing/setup/istio/
-  - /ja/tracing/proxies
-  - /ja/tracing/setup_overview/envoy/
-  - /ja/tracing/setup_overview/nginx/
-  - /ja/tracing/setup_overview/istio/
+- /ja/tracing/proxies/envoy
+- /ja/tracing/envoy/
+- /ja/tracing/proxies/nginx
+- /ja/tracing/nginx/
+- /ja/tracing/istio/
+- /ja/tracing/setup/envoy/
+- /ja/tracing/setup/nginx/
+- /ja/tracing/setup/istio/
+- /ja/tracing/proxies
+- /ja/tracing/setup_overview/envoy/
+- /ja/tracing/setup_overview/nginx/
+- /ja/tracing/setup_overview/istio/
+further_reading:
+- link: /tracing/visualization/
+  tag: APM の UI を利用する
+  text: サービス、リソース、トレースを調査する
+- link: https://www.envoyproxy.io/
+  tag: Documentation
+  text: Envoy Web サイト
+- link: https://www.envoyproxy.io/docs/envoy/latest/
+  tag: Documentation
+  text: Envoy ドキュメント
+- link: https://www.nginx.com/
+  tag: Documentation
+  text: NGINX ウェブサイト
+- link: https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/
+  tag: Documentation
+  text: NGINX Ingress Controller OpenTracing
+- link: https://github.com/opentracing-contrib/nginx-opentracing
+  tag: ソースコード
+  text: OpenTracing 対応 NGINX プラグイン
+- link: https://istio.io/
+  tag: Documentation
+  text: Istio ウェブサイト
+- link: https://istio.io/docs/
+  tag: Documentation
+  text: Istio ドキュメント
+- link: https://github.com/DataDog/dd-opentracing-cpp
+  tag: ソースコード
+  text: Datadog OpenTracing C++ クライアント
+kind: documentation
+title: プロキシのトレース
 ---
+
 プロキシに関するトレース情報の収集を含めるよう、トレースを設定することができます。
 
 {{< tabs >}}
@@ -52,66 +53,62 @@ Datadog APM は Envoy v1.9.0 以降に含まれています。
 
 ## Datadog APM を有効にする
 
-**注**: 以下のコンフィギュレーション例は、Envoy v1.14 用です。
-古いバージョンのコンフィギュレーション例は[こちら][1]にあります。
+**注**: 以下のコンフィギュレーション例は、Envoy v1.19 用です。
+他のバージョンのコンフィギュレーション例は[`dd-opentracing-cpp`GitHub リポジトリ][1]にあります。
 
-Datadog APM を Envoy で使用するには、以下の 3 つを設定する必要があります。
+Datadog APM を Envoy で使用するには、以下の設定をする必要があります。
 
 - トレースを Datadog Agent に送信するためのクラスター
-- Datadog APM 拡張機能を有効にするための `tracing` コンフィギュレーション
 - トレースをアクティブにするための `http_connection_manager` コンフィギュレーション
 
-トレースを Datadog Agent に送信するために、クラスターを追加する必要があります。
+1. トレースを Datadog Agent に送信するためのクラスターを追加します:
 
-```yaml
-  clusters:
-  ... existing cluster configs ...
-  - name: datadog_agent
-    connect_timeout: 1s
-    type: strict_dns
-    lb_policy: round_robin
-    load_assignment:
-      cluster_name: datadog_agent
-      endpoints:
-      - lb_endpoints:
-        - endpoint:
-            address:
-              socket_address:
-                address: localhost
-                port_value: 8126
-```
+   ```yaml
+    clusters:
+    ... existing cluster configs ...
+    - name: datadog_agent
+      connect_timeout: 1s
+      type: strict_dns
+      lb_policy: round_robin
+      load_assignment:
+        cluster_name: datadog_agent
+        endpoints:
+        - lb_endpoints:
+          - endpoint:
+              address:
+                socket_address:
+                  address: localhost
+                  port_value: 8126
+   ```
 
-Envoy がコンテナまたはオーケストレーション環境で稼働している場合は、`address` 値の変更が必要になる場合もあります。
+   Envoy がコンテナやオーケストレーション環境で動作している場合は、`address` の値を変更します。
 
-Envoy の `tracing` コンフィギュレーションが Datadog APM 拡張機能を使用するように設定する必要があります。
+2. トレースを有効にするには、`http_connection_manager` セクションに以下の追加構成を含めます。
 
-```yaml
-tracing:
-  http:
-    name: envoy.tracers.datadog
-    typed_config:
-      "@type": type.googleapis.com/envoy.config.trace.v2.DatadogConfig
-      collector_cluster: datadog_agent   # 名前付きクラスターと照合
-      service_name: envoy-example        # ユーザー定義のサービス名
-```
+   ```yaml
+    - name: envoy.filters.network.http_connection_manager
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+        generate_request_id: true
+        request_id_extension:
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.request_id.uuid.v3.UuidRequestIdConfig
+            use_request_id_for_trace_sampling: false
+        tracing:
+          provider:
+            name: envoy.tracers.datadog
+            typed_config:
+              "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
+              collector_cluster: datadog_agent
+              service_name: envoy-v1.19
+   ```
+   `collector_cluster` の値は、Datadog Agent クラスターに付けられた名前と一致している必要があります。`service_name` は、Envoy の使用を表す別の値に変えることもできます。
 
-`collector_cluster` の値は、Datadog Agent クラスターに付けられた名前と一致している必要があります。
-`service_name` は、Envoy の使用を表す別の値に変えることもできます。
+このコンフィギュレーションにより、Envoy への HTTP リクエストが起動し、Datadog トレースに伝播して、リクエストが APM UI に表示されます。
 
-最後に、`http_connection_manager` セクションに、トレースを有効にするためのコンフィギュレーションを追加する必要があります。
+## Envoy v1.19 コンフィギュレーションの例
 
-```yaml
-      - name: envoy.http_connection_manager
-        typed_config:
-          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
-          tracing: {}
-```
-
-このコンフィギュレーションが完了すると、Envoy への HTTP リクエストが起動し、Datadog トレースに伝播して、リクエストが APM UI に表示されます。
-
-## Envoy v1.14 コンフィギュレーションの例
-
-Datadog APM を使用してトレースを実行するために必要な各項目の配置を示すために、コンフィギュレーションの例を紹介します。
+以下の構成例では、Datadog APM を使用してトレースを有効にするために必要な項目の配置を示します。
 
 ```yaml
 static_resources:
@@ -123,11 +120,22 @@ static_resources:
     traffic_direction: OUTBOUND
     filter_chains:
     - filters:
-      - name: envoy.http_connection_manager
+      - name: envoy.filters.network.http_connection_manager
         typed_config:
-          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
           generate_request_id: true
-          tracing: {}
+          request_id_extension:
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.request_id.uuid.v3.UuidRequestIdConfig
+              use_request_id_for_trace_sampling: false
+          tracing:
+          # Datadog トレーサーを使用します
+            provider:
+              name: envoy.tracers.datadog
+              typed_config:
+                "@type": type.googleapis.com/envoy.config.trace.v3.DatadogConfig
+                collector_cluster: datadog_agent   # 指定されたクラスターと一致
+                service_name: envoy-v1.19          # ユーザー定義サービス名
           codec_type: auto
           stat_prefix: ingress_http
           route_config:
@@ -141,11 +149,11 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: service1
+          # ヘルスチェックのリクエストのトレースはサンプリングされるべきではありません。
           http_filters:
-          # ヘルスチェックリクエストのトレースはサンプリングしないでください。
           - name: envoy.filters.http.health_check
             typed_config:
-              "@type": type.googleapis.com/envoy.config.filter.http.health_check.v2.HealthCheck
+              "@type": type.googleapis.com/envoy.extensions.filters.http.health_check.v3.HealthCheck
               pass_through_mode: false
               headers:
                 - exact_match: /healthcheck
@@ -158,7 +166,6 @@ static_resources:
     connect_timeout: 0.250s
     type: strict_dns
     lb_policy: round_robin
-    http2_protocol_options: {}
     load_assignment:
       cluster_name: service1
       endpoints:
@@ -168,7 +175,7 @@ static_resources:
               socket_address:
                 address: service1
                 port_value: 80
-  # トレースを送信するための datadog Agent のアドレスを使用して、
+  # トレースを送信するための Datadog Agent のアドレスで
   # このクラスターを構成します。
   - name: datadog_agent
     connect_timeout: 1s
@@ -183,15 +190,6 @@ static_resources:
               socket_address:
                 address: localhost
                 port_value: 8126
-
-tracing:
-  # datadog トレーサーを使用します
-  http:
-    name: envoy.tracers.datadog
-    typed_config:
-      "@type": type.googleapis.com/envoy.config.trace.v2.DatadogConfig
-      collector_cluster: datadog_agent   # 名前付きクラスターと照合
-      service_name: envoy-example        # ユーザー定義のサービス名
 
 admin:
   access_log_path: "/dev/null"
@@ -213,14 +211,75 @@ stats_config:
       - prefix: "cluster.datadog_agent."
 ```
 
+## サンプリング
+
+Envoy から始まるトレースのDatadogへの送信量を制御するには、パラメーター `DD_TRACE_SAMPLING_RULES` を `0.0` (0%) から `1.0` (100%) の間の値に設定し、サンプリングレートを指定してください。値を指定しない場合、Envoy から始まるトレースの 100% が送信されます。
+
+[Datadog Agent が算出したサンプリングレート][2] (10 トレース/秒/Agent) を使用し、100% に設定されたデフォルトのサンプリングルールを無視するには、パラメーター `DD_TRACE_SAMPLING_RULES` を空の配列に設定します。
+
+```
+DD_TRACE_SAMPLING_RULES=[]
+```
+
+また、サービスごとに `0.0` (0%) から `1.0` (100%) の間で明示的にサンプリングレートを定義することができます。例えば、サービス `envoy-proxy` のサンプリングレートを 10% に設定するには、以下のようにします。
+
+```
+DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
+```
+
+
+`DD_TRACE_SAMPLING_RULES` でサンプリングレートを構成するには、Envoy の実行方法に応じて、以下の方法のいずれかを使用します。
+
+- **シェルスクリプト**: スクリプトで `envoy` を実行する直前に環境変数を設定します。
+
+  ```
+  #!/bin/sh
+  export DD_TRACE_SAMPLING_RULES=[]
+  envoy -c envoy-config.yaml
+  ```
+
+- **Docker Compose のセットアップ**: サービス定義の `environment` セクションに環境変数を設定します。
+
+  ```
+  services:
+    envoy:
+      image: envoyproxy/envoy:v1.19-latest
+      entrypoint: []
+      command:
+          - envoy
+          - -c
+          - /etc/envoy/envoy.yaml
+      volumes:
+          - './envoy.yaml:/etc/envoy/envoy.yaml:ro'
+      environment:
+          - DD_TRACE_SAMPLING_RULES=[]
+  ```
+
+- **Kubernetes ポッド内のコンテナとして**: ポッド仕様の対応する `containers` エントリの `env` セクションに環境変数を指定します。
+
+  ```
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: envoy
+  spec:
+    containers:
+    - name: envoy
+      image: envoyproxy/envoy:v1.20-latest
+      env:
+      - name: DD_TRACE_SAMPLING_RULES
+        value: "[]"
+  ```
+
 ## 環境変数
 
-利用可能な[環境変数][2]は、Envoy に埋め込まれた C++ トレーサーのバージョンによって異なります。
+利用可能な[環境変数][3]は、Envoy に埋め込まれた C++ トレーサーのバージョンによって異なります。
 
 **注**: Datadog Agent のアドレスは `cluster` 設定を使用して構成されているため、変数 `DD_AGENT_HOST`、`DD_TRACE_AGENT_PORT`、`DD_TRACE_AGENT_URL` は  Envoy に適用されません。
 
 | Envoy バージョン | C++ トレーサーバージョン |
 |---------------|--------------------|
+| v1.19 | v1.2.1 |
 | v1.18 | v1.2.1 |
 | v1.17 | v1.1.5 |
 | v1.16 | v1.1.5 |
@@ -233,7 +292,8 @@ stats_config:
 | v1.9 | v0.3.6 |
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
-[2]: /ja/tracing/setup/cpp/#environment-variables
+[2]: /ja/tracing/trace_ingestion/mechanisms#in-the-agent
+[3]: /ja/tracing/setup/cpp/#environment-variables
 {{% /tab %}}
 {{% tab "NGINX" %}}
 
@@ -372,6 +432,36 @@ data:
 ```
 上記はデフォルトの `nginx-ingress-controller.ingress-nginx` サービス名をオーバーライドします。
 
+### サンプリング
+
+Nginx から始まるトレースのDatadogへの送信量を制御するには、パラメーター `DD_TRACE_SAMPLING_RULES` を `0.0` (0%) から `1.0` (100%) の間の値に設定し、サンプリングレートを指定してください。値を指定しない場合、Nginx から始まるトレースの 100% が送信されます。Kubernetes Nginx ingress controller は `dd-opentracing-cpp` ライブラリの [v1.2.1][8] を使用します。
+
+[Datadog Agent が算出したサンプリングレート][9] (10 トレース/秒/Agent) を使用し、100% に設定されたデフォルトのサンプリングルールを無視するには、パラメーター `DD_TRACE_SAMPLING_RULES` を空の配列に設定します。
+
+```
+DD_TRACE_SAMPLING_RULES=[]
+```
+
+`DD_TRACE_SAMPLING_RULES` を設定するには、コントローラーの ConfigMap の `data` セクションに `main-snippet` エントリを追加します。
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+      app.kubernetes.io/name: ingress-nginx
+      app.kubernetes.io/instance: ingress-nginx
+      app.kubernetes.io/component: controller
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  enable-opentracing: "true"
+  datadog-collector-host: $HOST_IP
+  http-snippet: |
+      opentracing_trace_locations off;
+  main-snippet: |
+      env DD_TRACE_SAMPLING_RULES=[];
+```
 
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
@@ -380,11 +470,13 @@ data:
 [5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
 [6]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
 [7]: https://github.com/kubernetes/ingress-nginx
+[8]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
+[9]: /ja/tracing/trace_ingestion/mechanisms#in-the-agent
 {{% /tab %}}
 {{% tab "Istio" %}}
 
 Datadog は、Istio 環境のあらゆる側面を監視するため、以下を実現できます。
-- APM でメッシュを実行してアプリケーションの分散型トレースの詳細を確認（以下を参照）。
+- APM でメッシュを実行してアプリケーションの個々の分散型トレースを表示 (以下を参照)。
 - [ログ][1]を使用して、Envoy および Istio の Control Plane の健全性を評価。
 - リクエスト、帯域幅、リソース消費の[メトリクス][1]でサービスメッシュのパフォーマンスを詳しく確認。
 - [ネットワークパフォーマンスモニタリング][2]で、コンテナ、ポッド、サービス間のネットワークコミュニケーションをメッシュ状にマッピング。
@@ -393,7 +485,7 @@ Istio 環境での Datadog の使用について、詳細は [Istio のブログ
 
 ## コンフィギュレーション
 
-Datadog APM は、Kubernetes クラスターの Istio v1.1.3 以降で使用可能です。
+Datadog APM は Istio v1.1.3 以降のバージョンに対応しており、Kubernetes クラスター上でご利用いただけます。
 
 ### Datadog Agent のインストール
 
@@ -434,19 +526,53 @@ template:
 
 [CronJobs][8] の場合、生成された名前がより高レベルの `CronJob` ではなく `Job` から来る場合があるため、`app` ラベルをジョブテンプレートに追加する必要があります
 
-### 環境変数
+### サンプリング
 
-Istio サイドカーの環境変数は `apm.datadoghq.com/env` アノテーションを使用してデプロイごとに設定することができます。
-```yaml
-    metadata:
-      annotations:
-        apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_TRACE_ANALYTICS_ENABLED": "true" }'
+Istio から始まるトレースのDatadogへの送信量を制御するには、パラメーター `DD_TRACE_SAMPLING_RULES` を `0.0` (0%) から `1.0` (100%) の間の値に設定し、サンプリングレートを指定してください。値を指定しない場合、Istio から始まるトレースの 100% が送信されます。
+
+[Datadog Agent が算出したサンプリングレート][9] (10 トレース/秒/Agent) を使用し、100% に設定されたデフォルトのサンプリングルールを無視するには、パラメーター `DD_TRACE_SAMPLING_RULES` を空の配列に設定します。
+
+```
+DD_TRACE_SAMPLING_RULES=[]
 ```
 
-使用可能な[環境変数][9]は、Istio サイドカーのプロキシに埋め込まれた C++ トレーサーのバージョンによって異なります。
+`DD_TRACE_SAMPLING_RULES` を構成するには、ネームスペースが `istio-injection=enabled` となっている各デプロイで、デプロイ仕様テンプレートの `apm.datadoghq.com/env` アノテーションの一部として、環境変数を設定します。
+```
+apiVersion: apps/v1
+...
+kind: Deployment
+...
+spec:
+  template:
+    metadata:
+      annotations:
+        apm.datadoghq.com/env: '{"DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1", "DD_TRACE_SAMPLING_RULES": "[]"}'
+```
+
+### 環境変数
+
+Istio サイドカー用の環境変数は `apm.datadoghq.com/env` アノテーションを使用して、デプロイメントごとに設定することができます。これは、Istio サイドカーを採用したデプロイメントに固有のもので、[統合サービスタグ付け用ラベル][10]に加えて設定されます。
+```yaml
+apiVersion: apps/v1
+...
+kind: Deployment
+...
+spec:
+  template:
+    metadata:
+      annotations:
+        apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1"}'
+```
+
+使用可能な[環境変数][11]は、Istio サイドカーのプロキシに埋め込まれた C++ トレーサーのバージョンによって異なります。
 
 | Istio バージョン | C++ トレーサーバージョン |
 |---------------|--------------------|
+| v1.12.x | v1.2.1 |
+| v1.11.x | v1.2.1 |
+| v1.10.x | v1.2.1 |
+| v1.9.x | v1.2.1 |
+| v1.8.x | v1.1.5 |
 | v1.7.x | v1.1.5 |
 | v1.6.x | v1.1.3 |
 | v1.5.x | v1.1.1 |
@@ -488,7 +614,7 @@ spec:
 ```
 
 プロトコルの自動選択でサイドカーと Agent 間のトラフィックが HTTP であることを確認し、トレーシングを有効にすることができます。
-この機能は、この特定のサービスについての[プロトコルの手動選択][10]を使用することで無効にすることが可能です。`datadog-agent` サービス内のポート名は `tcp-traceport` に変更できます。
+この機能は、この特定のサービスについての[プロトコルの手動選択][12]を使用することで無効にすることが可能です。`datadog-agent` サービス内のポート名は `tcp-traceport` に変更できます。
 Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProtocol: tcp` を追加できます。
 
 
@@ -502,8 +628,10 @@ Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProt
 [6]: https://istio.io/docs/setup/install/istioctl/
 [7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
 [8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[9]: /ja/tracing/setup/cpp/#environment-variables
-[10]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[9]: /ja/tracing/trace_ingestion/mechanisms#in-the-agent
+[10]: /ja/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
+[11]: /ja/tracing/setup/cpp/#environment-variables
+[12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 {{% /tab %}}
 {{< /tabs >}}
 

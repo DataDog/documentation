@@ -2,6 +2,9 @@
 title: Frustration Signals
 kind: documentation
 further_reading:
+- link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
+  tag: 'Blog'
+  text: 'Detect user pain points with Datadog Frustration Signals'
 - link: '/real_user_monitoring/dashboards/frustration_signals_dashboard/'
   tag: 'Documentation'
   text: 'Frustration Signals Dashboard'
@@ -14,10 +17,6 @@ further_reading:
 ---
 
 ## Overview
-
-<div class="alert alert-warning">
-For access to frustration signals, contact <a href="/help">Datadog Support</a>.
-</div>
 
 Frustration signals help you identify your application's highest points of user friction by surfacing moments when users exhibit frustration.
 
@@ -34,7 +33,7 @@ Error Clicks
 
 ## Requirements
 
-First, you need the Browser RUM SDK version >= 4.9.0.
+First, you need the Browser RUM SDK version >= 4.14.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 

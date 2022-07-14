@@ -150,6 +150,10 @@ Vous pouvez spécifier ces tags spéciaux à l'aide du paramètre `--tags` lorsq
 
 Tous ces tags sont facultatifs, et seuls ceux que vous spécifiez seront utilisés pour identifier les différentes configurations de l'environnement.
 
+`test.bundle`
+: Permet d'exécuter des groupes de suites de tests séparément.<br/>
+**Exemples** : `ApplicationUITests`, `ModelTests`
+
 `os.platform`
 : Nom du système d'exploitation.<br/>
 **Exemples** : `windows`, `linux`, `darwin`
@@ -188,10 +192,6 @@ Pour les applications mobiles (Swift, Android) :
 : Nom de l'appareil testé.<br/>
 **Exemples** : `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
-<!-- TODO: uncomment once added in backend
-`test.bundle`
-: Permet d'exécuter des groupes de suites de tests séparément.<br/>
-**Exemples** : `ApplicationUITests`, `ModelTests` -->
 
 ## Ajouter des métadonnées via des éléments `<property>`
 

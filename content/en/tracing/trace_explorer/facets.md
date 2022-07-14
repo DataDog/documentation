@@ -24,8 +24,8 @@ Facets also allow you to manipulate spans in your [trace analytics monitors][3],
 **Note**: [Creating facets](#creating-facets) is not required to [search spans][1], to [generate metrics from spans][2], or to [index spans with retention filters][3]. In all these contexts, autocomplete capabilities do use existing facets, but also any input that matches incoming spans also works.
 
 [1]: /tracing/trace_explorer/search
-[2]: /tracing/generate_metrics
-[3]: /tracing/trace_retention/#retention-filters
+[2]: /tracing/trace_pipeline/generate_metrics
+[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
 
 {{< /site-region >}}
 

@@ -2633,10 +2633,12 @@ components:
     IntakePayloadAccepted:
       description: The payload accepted for intake.
       properties:
-        status:
-          description: The status of the intake payload.
-          example: ok
-          type: string
+        errors:
+          description: A list of errors.
+          items:
+            description: An empty error list.
+            type: string
+          type: array
       type: object
     ListApplicationKeysResponse:
       description: Response for a list of application keys.
@@ -4138,13 +4140,13 @@ components:
       x-enum-varnames:
       - METRIC_VOLUMES
     MetricIntakeType:
-      description: The type of metric.
+      description: The type of metric. The available types are `0` (unspecified),
+        `1` (count), `2` (rate), and `3` (gauge).
       enum:
       - 0
       - 1
       - 2
       - 3
-      - 15
       format: int32
       type: integer
       x-enum-varnames:
@@ -4152,7 +4154,6 @@ components:
       - COUNT
       - RATE
       - GAUGE
-      - UNSPECIFIED_LEGACY
     MetricMetadata:
       description: Metadata for the metric.
       properties:
@@ -7550,8 +7551,6 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
-            dashboards_public_share: Generate public and authenticated links to share
-              dashboards externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
@@ -7560,7 +7559,6 @@ components:
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_read: View monitors.
-            monitors_write: Edit, mute, and delete individual monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_rules_read: Read Detection Rules.
@@ -10936,6 +10934,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - metrics_read
       summary: List tag configuration by name
       tags:
       - Metrics
@@ -13598,81 +13601,6 @@ paths:
       - AuthZ:
         - usage_read
       summary: Get cost across multi-org account
-      tags:
-      - Usage Metering
-      x-menu-order: 39
-      x-undo:
-        type: safe
-  /api/v2/usage/estimated_cost_by_org:
-    get:
-      description: Get estimated cost across multi-org account.
-      operationId: GetEstimatedCostByOrg
-      parameters:
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for cost beginning this month. Either start_month or start_date should be
-          specified, but not both.'
-        in: query
-        name: start_month
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for cost ending this month.'
-        in: query
-        name: end_month
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
-          for cost beginning this day. Either start_month or start_date should be
-          specified, but not both.'
-        in: query
-        name: start_date
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
-          for cost ending this day.'
-        in: query
-        name: end_date
-        required: false
-        schema:
-          format: date-time
-          type: string
-      responses:
-        '200':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/CostByOrgResponse'
-          description: OK
-        '400':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden - User is not authorized
-        '429':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
-      summary: Get estimated cost across multi-org account
       tags:
       - Usage Metering
       x-menu-order: 39

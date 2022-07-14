@@ -11,13 +11,15 @@ title: Configuration de Postgres
 
 ### Versions de Postgres prises en charge
 
-|  | Auto-hébergé | AWS RDS | AWS Aurora | Google Cloud SQL |
-|--|------------|---------|------------|------------------|
-| Postgres 9.6 | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Postgres 10 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 11 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 12 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 13 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+
+|  | Auto-hébergé | AWS RDS | AWS Aurora | Google Cloud SQL | Azure |
+|--|------------|---------|------------|------------------|---------|
+| Postgres 9.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Postgres 10 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Postgres 11 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Postgres 12 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Postgres 13 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+
 
 Pour obtenir les instructions de configuration, sélectionnez votre type d'hébergement :
 

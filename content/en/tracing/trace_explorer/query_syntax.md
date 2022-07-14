@@ -19,19 +19,19 @@ aliases:
  - /tracing/app_analytics/analytics
  - /tracing/trace_search_and_analytics/query_syntax
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/visualization/trace/"
+- link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/visualization/resource/"
+- link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
 ---
@@ -301,15 +301,15 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 [2]: /getting_started/tagging/#tags-best-practices
 [3]: /dashboards/guide/custom_time_frames/
 [4]: /tracing/trace_search_and_analytics/
-[5]: /tracing/visualization/#apm-event
-[6]: /tracing/visualization/#services
-[7]: /tracing/trace_retention/#retention-filters
+[5]: /tracing/glossary/#apm-event
+[6]: /tracing/glossary/#services
+[7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_search_and_analytics/query_syntax/#facets
 [9]: /tracing/trace_search_and_analytics/query_syntax/#measures
-[10]: /tracing/visualization/#trace
+[10]: /tracing/glossary/#trace
 [11]: /monitors/create/types/apm/
 [12]: /dashboards/#timeboards
 [13]: /help/
-[14]: /tracing/visualization/#indexed-span
+[14]: /tracing/glossary/#indexed-span
 [15]: /dashboards/
 [16]: /dashboards/widgets/timeseries/

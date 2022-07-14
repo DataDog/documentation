@@ -216,6 +216,12 @@ Open the following ports to benefit from all the **Agent** functionalities:
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
 
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
+
 10516/tcp
 : Port for log collection over TCP.<br>
 See [logs endpoints][3] for other connection types.

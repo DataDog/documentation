@@ -43,7 +43,7 @@ The following Agent metrics are information the Agent sends to Datadog about its
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `datadog.agent.python.version` | Shows a value of `1` if the Agent is reporting to Datadog. The metric is tagged with the `python_version`. |
 | `datadog.agent.running`        | Shows a value of `1` if the Agent is reporting to Datadog.                                                 |
-| `datadog.agent.started        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
+| `datadog.agent.started`        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
 
 See the [Agent Metrics][3] integration for a full list of Agent metrics.
 
@@ -302,7 +302,7 @@ For help troubleshooting the Agent:
 [25]: /agent/guide/agent-commands/#restart-the-agent
 [26]: /logs/
 [27]: /infrastructure/process/?tab=linuxwindows#introduction
-[28]: /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/?tab=host
+[28]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host
 [29]: /agent/logs/advanced_log_collection/
 [30]: /developers/dogstatsd/?tab=hostagent
 [31]: /agent/guide/agent-commands/

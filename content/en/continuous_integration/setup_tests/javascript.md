@@ -353,8 +353,8 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [2]: https://github.com/facebook/jest/tree/main/packages/jest-jasmine2
 [3]: https://jestjs.io/docs/configuration#testrunner-string
 [4]: https://github.com/DataDog/dd-trace-js
-[5]: /tracing/setup_overview/setup/nodejs
-[6]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
+[5]: /tracing/trace_collection/dd_libraries/nodejs
+[6]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
 [7]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
 [8]: https://nodejs.org/api/packages.html#packages_determining_module_system
 [9]: /real_user_monitoring/browser/

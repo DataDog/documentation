@@ -164,8 +164,8 @@ Yes. Let Datadog know if you are interested in buying the Continuous Profiler wi
 
 
 [1]: /tracing/
-[2]: /tracing/trace_ingestion/ingestion_controls
-[3]: /tracing/trace_retention/#retention-filters
+[2]: /tracing/trace_pipeline/ingestion_controls
+[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [4]: /account_management/billing/pricing/#infrastructure-monitoring
 [5]: /account_management/billing/pricing/#apm
 [6]: /tracing/profiling/
@@ -174,6 +174,6 @@ Yes. Let Datadog know if you are interested in buying the Continuous Profiler wi
 [9]: mailto:success@datadoghq.com
 [10]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
 [11]: /account_management/billing/
-[12]: /tracing/setup_overview/setup/java/?tab=containers#configure-the-datadog-agent-for-apm
-[13]: /tracing/trace_retention/
-[14]: /tracing/trace_retention/usage_metrics
+[12]: /tracing/trace_collection/dd_libraries/java/?tab=containers#configure-the-datadog-agent-for-apm
+[13]: /tracing/trace_pipeline/trace_retention/
+[14]: /tracing/trace_pipeline/metrics

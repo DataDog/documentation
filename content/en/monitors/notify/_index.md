@@ -162,7 +162,7 @@ Test notifications are supported for the [monitor types][23]: host, metric, anom
 
 ### Events
 
-Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
+Test notifications produce events that can be searched within the event explorer. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
 
 Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
 
@@ -184,21 +184,22 @@ Message variables auto-populate with a randomly selected group based on the scop
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
-[6]: /monitors/notify/variables/?tab=is_renotify#examples
-[7]: /integrations/jira/
-[8]: /integrations/jira/#use-cases
-[9]: /integrations/pagerduty/
-[10]: /integrations/pagerduty/#troubleshooting
-[11]: /integrations/slack/
-[12]: /integrations/slack/#mentions-in-slack-from-monitor-alert
-[13]: /integrations/webhooks/
-[14]: /integrations/webhooks/#usage
-[15]: /integrations/#cat-notification
-[16]: /events/
-[17]: /account_management/rbac/permissions/#monitors
-[18]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[19]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[20]: /account_management/rbac/?tab=datadogapplication
-[21]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[22]: /monitors/create/
-[23]: /monitors/guide/recovery-thresholds/
+[6]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
+[7]: /monitors/notify/variables/?tab=is_renotify#examples
+[8]: /integrations/jira/
+[9]: /integrations/jira/#usage
+[10]: /integrations/pagerduty/
+[11]: /integrations/pagerduty/#troubleshooting
+[12]: /integrations/slack/
+[13]: /integrations/slack/#mentions-in-slack-from-monitor-alert
+[14]: /integrations/webhooks/
+[15]: /integrations/webhooks/#usage
+[16]: /integrations/#cat-notification
+[17]: /events/
+[18]: /account_management/rbac/permissions/#monitors
+[19]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[20]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[21]: /account_management/rbac/?tab=datadogapplication
+[22]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[23]: /monitors/create/#monitor-types
+[24]: /monitors/guide/recovery-thresholds/

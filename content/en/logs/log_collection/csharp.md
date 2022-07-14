@@ -198,9 +198,10 @@ Once the library is installed, attach the following layout to any target. Edit t
       <appender-ref ref="JsonFileAppender" />
     </root>
     <appender name="JsonFileAppender" type="log4net.Appender.FileAppender">
-    <threshold value="DEBUG"/>
-    <file value="application-logs.json" />
-    <appendToFile value="true" />
+      <threshold value="DEBUG"/>
+      <file value="application-logs.json" />
+      <encoding type="System.Text.UTF8Encoding" />
+      <appendToFile value="true" />
       <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
         <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
         <default />
@@ -582,12 +583,12 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/parsing
-[2]: /tracing/connect_logs_and_traces/dotnet/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [3]: /agent/logs/advanced_log_collection
 [4]: /serverless/azure_app_services
 [5]: /account_management/org_settings/sensitive_data_detection/#overview
-[6]: /tracing/setup_overview/setup/dotnet-core
-[7]: /tracing/setup_overview/setup/dotnet-framework
+[6]: /tracing/trace_collection/dd_libraries/dotnet-core
+[7]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: /getting_started/site/
 [10]: /logs/log_configuration/pipelines/?tab=source

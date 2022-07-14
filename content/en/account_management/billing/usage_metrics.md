@@ -33,6 +33,7 @@ Estimated usage metrics are generally available for the following usage types:
 | APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` |
 | APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` |
 | APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` |
+| RUM Sessions                  | `datadog.estimated_usage.rum.sessions`  |
 | Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions` |
 | Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`|
 | API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` |
@@ -46,6 +47,9 @@ Estimated usage metrics are generally available for the following usage types:
 | CWS Hosts                     | `datadog.estimated_usage.cws.hosts` |
 | CWS Containers                | `datadog.estimated_usage.cws.containers` | 
 | Database Hosts                | `datadog.estimated_usage.dbm.hosts` |
+| ASM Hosts                     | `datadog.estimated_usage.asm.hosts` |
+| Incident Management (Active Users)   | `datadog.estimated_usage.incident_management.active_users` |
+| CI Visibility                 | `datadog.estimated_usage.ci_visibility.pipeline.committers`, `datadog.estimated_usage.ci_visibility.test.committers` |
 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}

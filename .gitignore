@@ -31,9 +31,9 @@ content/en/agent/basic_agent_usage/puppet.md
 content/en/agent/basic_agent_usage/saltstack.md
 
 # Tracing
-content/en/tracing/setup_overview/setup/ruby.md
-content/en/tracing/setup_overview/setup/android.md
-content/en/tracing/setup_overview/setup/ios.md
+content/en/tracing/trace_collection/dd_libraries/ruby.md
+content/en/tracing/trace_collection/dd_libraries/android.md
+content/en/tracing/trace_collection/dd_libraries/ios.md
 
 # Log collection
 content/en/logs/log_collection/android.md

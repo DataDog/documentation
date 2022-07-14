@@ -85,7 +85,7 @@ Node.js 16 or higher is recommended. On earlier versions, some applications see 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/
+[1]: /tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings#agent/overview
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [4]: https://app.datadoghq.com/profiling
