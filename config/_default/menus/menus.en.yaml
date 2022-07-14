@@ -3013,16 +3013,21 @@ main:
     parent: ndm
     identifier: ndm_data
     weight: 303
+  - name: SNMP Traps
+    url: network_monitoring/devices/snmp_traps
+    parent: ndm
+    identifier: ndm_snmptraps
+    weight: 304
   - name: Troubleshooting
     url: network_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 304
+    weight: 305
   - name: Guides
     url: network_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 305
+    weight: 306
   - name: Developers
     url: developers/
     pre: dev-code
@@ -3170,22 +3175,18 @@ main:
     parent: organization_settings
     identifier: login_methods
     weight: 202
-  - name: Audit Trail
-    url: account_management/audit_trail
-    parent: organization_settings
-    weight: 203
   - name: OAuth Apps
     url: account_management/org_settings/oauth_apps
     parent: organization_settings
-    weight: 204
+    weight: 203
   - name: Sensitive Data Scanner
     url: account_management/org_settings/sensitive_data_detection
     parent: organization_settings
-    weight: 205
+    weight: 204
   - name: Custom Organization Landing Page
     url: account_management/org_settings/custom_landing
     parent: organization_settings
-    weight: 206
+    weight: 205
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -3237,18 +3238,28 @@ main:
     url: account_management/api-app-keys/
     parent: account_management
     weight: 5
+  - name: Audit Trail
+    url: account_management/audit_trail/
+    parent: account_management
+    identifier: account_management_audit_trail
+    weight: 6
+  - name: Events
+    url: account_management/audit_trail/events/
+    parent: account_management_audit_trail
+    identifier: account_management_audit_trail_events
+    weight: 601
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
-    weight: 6
+    weight: 7
   - name: Billing
     url: account_management/billing/
     parent: account_management
-    weight: 7
+    weight: 8
   - name: Multi-org Accounts
     url: account_management/multi_organization/
     parent: account_management
-    weight: 8
+    weight: 9
   - name: Data Security
     url: data_security/
     pre: security-lock
