@@ -1,5 +1,5 @@
 ---
-title: Access your support ticket
+title: Access Your Support Ticket
 kind: faq
 aliases:
   - /developers/faq/access-your-support-ticket
