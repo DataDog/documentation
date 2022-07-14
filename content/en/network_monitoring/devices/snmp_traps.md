@@ -38,15 +38,15 @@ network_devices:
         privProtocol: 'AES' # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
 ```
 
-**Note**: Multiple v3 users/passwords are not supported. If this is a requirement in your environment, contact [Datadog support][2].
+**Note**: Multiple v3 users and passwords are not supported. If this is a requirement in your environment, contact [Datadog support][2].
 
 ## Device namespaces
 
-As in [Network Device Monitoring][3], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York, and one in Paris, which share the same private IP. There should be one Agent in the New York datacenter and another in the Paris datacenter. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.
+As in [Network Device Monitoring][3], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York and one in Paris, which share the same private IP. There should be one Agent in the New York data center and another in the Paris data center. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.
 
 The namespace can then be used to uniquely pivot from an SNMP Trap to the emitter device, or from the emitter device to an SNMP Trap. 
 
-It is critical to have consistency between the multiple Agent configurations. For instance, if you have two Agents configured (for one for trap collection, and the other for metrics) you must ensure that the namespaces exist in both places. Alternatively, ensure that the namespaces exist in neither. 
+It is critical to have consistency between the multiple Agent configurations. For instance, if you have two Agents configured (for example, one for trap collection, and the other for metrics) you must ensure that the namespaces exist in both places. Alternatively, ensure that the namespaces exist in neither. 
 
 [1]: /monitors/
 [2]: /help/
