@@ -44,7 +44,7 @@ The content in a Powerpack should be self-explanatory. When creating a Powerpack
 - Note widgets with additional context.
 - Horizontal markers to show expected and unexpected thresholds.
 
-A note widget can give helpful context on how to interpret a graph. For example, the `RUM Page Views` Powerpack describes how to compare the current week’s page views to the previous week’s. Notes can also link to external resources, like in the System Resource Utilization pack.
+A note widget can give helpful context on how to interpret a graph. For example, the `RUM Page Views` Powerpack describes how to compare the current week’s page views to the previous week’s. Notes can also link to external resources, like in the `System Resource Utilization` pack.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/note_widget_example.png" alt="An example powerpack titled /checkout Page Views showing several graphs of real user monitoring data. In the top right is a notes widget with a message providing information about one of the graphs" style="width:100%;" >}}
 
@@ -90,6 +90,6 @@ Each Powerpack user decides which variables to configure permanently and which v
 
 ### Spread the word
 
-Once your Powerpack is created, let your organization know about it. Communicating about your pack both announces the pack and provides a channel for any questions. Share the name of your Powerpack with your organization through communication channels like email or messaging platforms, specify who the pack is intended for, and where you expect it to appear. 
+Once your Powerpack is created, let your organization know about it. Communicating about your pack both announces the pack and provides a channel for any questions. Share the name of your Powerpack with your organization through communication channels like email or messaging platforms, specify who the pack is intended for, and describe where you expect it to appear. 
 
 {{< partial name="whats-next/whats-next.html" >}}
