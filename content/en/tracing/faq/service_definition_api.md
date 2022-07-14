@@ -31,7 +31,7 @@ You can manage your service ownership information with Service Catalog even if t
 ## Post a service definition
 
 ```
-POST https://api.datadoghq.com/api/unstable/services/definition
+POST /api/v2/services/definitions
 ```
 
 ### Arguments
@@ -123,24 +123,26 @@ extensions:
 
 ### Response
 
-Status: `200 OK`
+Status: `200 OK` `400 Invalid Request` `429 Too Many Requests` 
+
 
 ### Curl example
 
 {{< code-block lang="curl" >}}
-curl --request POST 'https://api.datadoghq.com/api/unstable/services/definition' \
---header 'DD-API-KEY: {API_KEY}' \
---header 'DD-APPLICATION-KEY: {APPLICATION_KEY}' \
+curl --request POST 'https://api.datadoghq.com/api/v2/services/definitions' \
+--header 'DD-API-KEY: <API_KEY>' \
+--header 'DD-APPLICATION-KEY: <APPLICATION_KEY>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-<service.definition.yaml> 
+  "schema-version": "v2",
+  "dd-service": "shopping-service"
 }'
 {{< /code-block >}}
 
 ## Get a service definition
 
 ```
-GET https://api.datadoghq.com/api/unstable/services/definition/{service_name}?schema_version="v2"
+GET /api/v2/services/definitions/<service_name>
 ```
 
 ### Arguments 
