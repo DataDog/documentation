@@ -56,7 +56,7 @@ On-graph markers, like horizontal markers and forecasts functions, can provide c
 
 Powerpacks appear in the dashboard widget tray and can be discovered through keyword or tag search. Powerpack title, description, and tags are all searchable fields and provide the easiest way for someone to find your Powerpack.
 
-{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_keyword_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with the keyword resource" style="width:100%;" >}}
+{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_keyword_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with the keyword resource" style="width:60%;" >}}
 
 To ensure the right users find your Powerpack, include any keywords your users might search (such as “performance”) in the title or description, and tag key technologies.
 
@@ -68,7 +68,7 @@ Use tags to specify key technologies or search phrases for a specific pack (for 
 
 To search Powerpacks by tag in the widget tray, use `tag:search_string` syntax. 
 
-{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_tag_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with tag:security" style="width:100%;" >}}
+{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_tag_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with tag:security" style="width:60%;" >}}
 
 ### Make Powerpacks customizable
 
@@ -84,7 +84,7 @@ Configuration variables serve two purposes. They can:
 1. Help a team scope a Powerpack to their context once, before the pack gets added to their dashboard (such as selecting a `service` to ensure a security Powerpack is relevant to the correct service).
 2. Allow users to filter a Powerpack after the pack gets added to a dashboard (such as viewing security signals in a Powerpack in both `prod` and `staging` environments).
 
-Each Powerpack user decides which variables to configure one-time and which variables to save to their dashboard for on-the-fly filtering. Variables are configured one-time by default. 
+Each Powerpack user decides which variables to configure permanently and which variables to save to their dashboard for further dynamic filtering. Variables are configured permanently by default. 
 
 {{< img src="dashboards/guide/powerpacks_best_practices/configure_variables.png" alt="A screen showing the option to configure values for tag or attribute variables, with a column for Tag or Attribute, Name, Value, and Use as Template Variable, which shows a checkbox providing the option to Add to dashboard" style="width:100%;" >}}
 
