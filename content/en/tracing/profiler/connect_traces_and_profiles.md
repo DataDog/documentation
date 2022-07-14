@@ -205,4 +205,4 @@ It is valuable to track top endpoints that are consuming valuable resources such
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/profiler/profiler_troubleshooting#reduce-overhead-from-default-setup
-[2]: /tracing/setup_overview/custom_instrumentation/java#manually-creating-a-new-span
+[2]: /tracing/trace_collection/custom_instrumentation/java#manually-creating-a-new-span

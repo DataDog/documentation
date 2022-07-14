@@ -11,7 +11,7 @@ further_reading:
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
       text: 'API documentation'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Use the APM UI'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'

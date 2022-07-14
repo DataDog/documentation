@@ -158,7 +158,7 @@ Learn more about [custom metrics][11].
 [2]: /tracing/setup/dotnet/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
+[5]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
 [6]: /logs/log_collection/csharp/#agentless-logging-with-apm
 [7]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
 [8]: /developers/dogstatsd
@@ -239,7 +239,7 @@ Learn more about [custom metrics][10].
 [2]: /tracing/setup/dotnet/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
+[5]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
 [6]: /logs/log_collection/csharp/?tab=serilog#agentless-logging
 [7]: /developers/dogstatsd
 [8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
@@ -257,8 +257,8 @@ Datadog provides scripts to update or install the Azure App Service Extension us
 
 ### Prerequisites
 
-- The [Azure CLI][8] or [Azure Cloud Shell][9].
-- Azure App Service [user-scope credentials][10]. If you do not already have credentials, go to your [Azure portal][11] and access your Web App or Function App. Navigate to **Deployment** > **Deployment Center** to create or retrieve your user-scope credentials.
+- The [Azure CLI][1] or [Azure Cloud Shell][2].
+- Azure App Service [user-scope credentials][3]. If you do not already have credentials, go to your [Azure portal][4] and access your Web App or Function App. Navigate to **Deployment** > **Deployment Center** to create or retrieve your user-scope credentials.
 
 ### Installing the extension for the first time {#powershell-first-time}
 
@@ -283,17 +283,14 @@ The install script adds the latest version of the extension to an Azure Web App 
 
 - `<USERNAME>`: Your Azure user scope username.
 - `<PASSWORD>`: Your Azure user scope password.
-- `<SUBSCRIPTION_ID>`: Your Azure [subscription ID][1].
+- `<SUBSCRIPTION_ID>`: Your Azure [subscription ID][5].
 - `<RESOURCE_GROUP_NAME>`: Your Azure resource group name.
 - `<SITE_NAME>`: The name of your app.
-- `<DATADOG_API_KEY>`: Your [Datadog API key][2].
+- `<DATADOG_API_KEY>`: Your [Datadog API key][6].
 
-Also, set `DATADOG_SITE` to your [Datadog site][3]. `DATADOG_SITE` defaults to `datadoghq.com`. Your site is: {{< region-param key="dd_site" code="true" >}}.
+Also, set `DATADOG_SITE` to your [Datadog site][7]. `DATADOG_SITE` defaults to `datadoghq.com`. Your site is: {{< region-param key="dd_site" code="true" >}}.
 
 
-[1]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /getting_started/site/
 
 
 ### Updating the extension for a resource group {#powershell-resource-group}
@@ -343,17 +340,17 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 
 ### ARM template
 
-Many organizations use [Azure Resource Management (ARM) templates][4] to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template][5] into your deployments to add the extension and configure it alongside your App Service resources.
+Many organizations use [Azure Resource Management (ARM) templates][8] to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template][9] into your deployments to add the extension and configure it alongside your App Service resources.
 
-[1]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /getting_started/site/
-[4]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
-[5]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
-[8]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-[9]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
-[10]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
-[11]: https://portal.azure.com/
+[1]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+[2]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
+[3]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
+[4]: https://portal.azure.com/
+[5]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /getting_started/site/
+[8]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
+[9]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
 {{% /tab %}}
 {{% tab "Java" %}}
 
@@ -371,7 +368,7 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 1. Go to the Azure integration tile.
 
-2. Ensure you have installed the [Azure integration][12] for the Azure subscription where your application is running.
+2. Ensure you have installed the [Azure integration][8] for the Azure subscription where your application is running.
 
 3. Ensure that any App Service plan filtering rules you have applied include the App Service plan where the app is running. If an App Service plan is not included, all apps and functions hosted on it are also not included. Tags on the app itself are not used for filtering by Datadog.
 
@@ -386,7 +383,7 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
-Still need help? Contact [Datadog support][13].
+Still need help? Contact [Datadog support][9].
 
 ### Further Reading
 
@@ -400,9 +397,5 @@ Still need help? Contact [Datadog support][13].
 [5]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/resource-logs
 [6]: /integrations/azure/?tab=eventhub#log-collection
 [7]: /developers/dogstatsd
-[8]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-[9]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
-[10]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
-[11]: https://portal.azure.com/
-[12]: /integrations/azure
-[13]: /help
+[8]: /integrations/azure
+[9]: /help

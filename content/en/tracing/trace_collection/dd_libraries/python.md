@@ -18,7 +18,7 @@ further_reading:
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
       tag: 'Pypi'
       text: 'API Docs'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'
@@ -108,7 +108,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
    If a different configuration is required, the `DD_DOGSTATSD_URL` environment variable can be used. Some examples:
    ```
-   DD_DOGSTATSD_URL=http://custom-hostname:1234
+   DD_DOGSTATSD_URL=udp://custom-hostname:1234
    DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
    ```
    The connection for stats can also be configured in code:
@@ -118,7 +118,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
    # Network socket
    tracer.configure(
-     dogstatsd_url="http://localhost:8125",
+     dogstatsd_url="udp://localhost:8125",
    )
 
    # Unix domain socket configuration

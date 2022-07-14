@@ -15,7 +15,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-opentracing-cpp"
   tag: "Github"
   text: Source code
-- link: "/tracing/visualization/"
+- link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 - link: "/tracing/"

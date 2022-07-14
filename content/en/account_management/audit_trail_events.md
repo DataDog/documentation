@@ -31,6 +31,7 @@ further_reading:
 - [Sensitive Data Scanner](#sensitive-data-scanner-events)
 - [Service Level Objectives](#service-level-objectives-slo-events)
 - [Synthetic Monitoring](#synthetic-monitoring-events)
+- [Reference Tables](#reference-table-events)
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
 
@@ -173,6 +174,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Synthetic test modified | A user modified a synthetic test and the previous and new values for the configuration. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
 | Synthetic variable | A user created, modified, or deleted a synthetic variable. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
 | Synthetic settings | A user modified synthetic settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
+
+### Reference Table events
+| Name                     | Description of audit event                                          | Query in audit explorer                           |
+| ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
+| Reference Table | A user created, deleted, or modified a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table @action:(created OR deleted OR modified)` |
+| Reference Table File | A user uploaded a file or imported a file with a cloud provider for a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table_file @action:(uploaded OR imported)` |
 
 ## Further Reading
 

@@ -4,16 +4,16 @@ kind: documentation
 aliases:
 - /tracing/visualization/resource/
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/visualization/trace/"
+- link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
@@ -107,11 +107,11 @@ Consult the list of [traces][7] associated with this resource in the [Trace sear
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#services
-[2]: /tracing/visualization/
-[3]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#services
+[2]: /tracing/glossary/
+[3]: /tracing/glossary/#trace
 [4]: /dashboards/
 [5]: /monitors/manage/status/
-[6]: /tracing/visualization/#spans
-[7]: /tracing/visualization/trace/
+[6]: /tracing/glossary/#spans
+[7]: /tracing/trace_explorer/trace_view/
 [8]: /tracing/search/

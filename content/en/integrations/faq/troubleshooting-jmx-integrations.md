@@ -275,7 +275,7 @@ instances:
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /help/
-[3]: /tracing/runtime_metrics/java/
+[3]: /tracing/metrics/runtime_metrics/java/
 [4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener
 [6]: https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#SSL_and_Tomcat

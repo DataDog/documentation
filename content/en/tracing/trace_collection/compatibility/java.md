@@ -10,7 +10,7 @@ aliases:
     - /tracing/compatibility_requirements/java
     - /tracing/setup_overview/compatibility_requirements/java
 further_reading:
-    - link: 'tracing/setup/java'
+    - link: 'tracing/trace_collection/dd_libraries/java'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---

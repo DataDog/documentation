@@ -6,7 +6,7 @@ aliases:
   - /tracing/servicemap
   - /tracing/visualization/services_map/
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
 - link: "https://www.datadoghq.com/blog/service-map/"
@@ -87,8 +87,8 @@ Monitors are not constrained to APM monitors. The service tag, described above, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#services
-[2]: /tracing/visualization/services_list/#facets
+[1]: /tracing/glossary/#services
+[2]: /tracing/services/services_list/#facets
 [3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: https://app.datadoghq.com/apm/services
-[5]: /tracing/visualization/#trace
+[5]: /tracing/glossary/#trace

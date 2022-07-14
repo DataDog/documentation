@@ -8,7 +8,7 @@ code_lang_weight: 80
 aliases:
   - /tracing/connect_logs_and_traces/opentelemetry
 further_reading:
-- link: "/tracing/setup_overview/open_standards/"
+- link: "/tracing/trace_collection/open_standards/"
   tag: "Documentation"
   text: "Send OpenTelemetry Traces to Datadog"
 - link: "https://opentelemetry.io/docs/collector/"
@@ -74,7 +74,7 @@ log.info("Example log line with trace correlation info")
 
 
 [1]: https://www.structlog.org/en/stable/standard-library.html
-[2]: /tracing/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
+[2]: /tracing/other_telemetry/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
 {{% /tab %}}
 
@@ -205,7 +205,7 @@ logger.info("Example log line with trace correlation info")
 
 
 [1]: https://github.com/winstonjs/winston
-[2]: /tracing/connect_logs_and_traces/nodejs/#manually-inject-trace-and-span-ids
+[2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/node-microservice/logger.js#L86
 {{% /tab %}}
 
@@ -237,7 +237,7 @@ logger.info("Example log line with trace correlation info")
 
 
 [1]: https://ruby-doc.org/stdlib-3.0.0/libdoc/logger/rdoc/index.html
-[2]: /tracing/connect_logs_and_traces/ruby/#manually-inject-trace-and-span-ids
+[2]: /tracing/other_telemetry/connect_logs_and_traces/ruby/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/ruby-microservice/app.rb#L21-L35
 {{% /tab %}}
 
@@ -262,7 +262,7 @@ logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_
 
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
 [2]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
-[3]: /tracing/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
+[3]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
 {{% /tab %}}
 
 {{% tab "PHP" %}}
@@ -274,7 +274,7 @@ For trace and log correlation in PHP, modify the [Datadog SDK PHP examples][1] t
 
 
 
-[1]: /tracing/connect_logs_and_traces/php/
+[1]: /tracing/other_telemetry/connect_logs_and_traces/php/
 [2]: /help/
 {{% /tab %}}
 
@@ -364,6 +364,6 @@ using (LogContext.PushProperty("dd.span_id", ddSpanId))
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/connect_logs_and_traces/
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
 [2]: https://github.com/open-telemetry/opentelemetry-specification/blob/eeef21259a12d61100804eff2e12ba06523821c3/specification/trace/api.md#retrieving-the-traceid-and-spanid
 [3]: /api/latest/tracing/#send-traces
