@@ -146,7 +146,7 @@ When set to `true` db spans get assigned the instance name as the service name
 
 `dd.trace.health.metrics.enabled`
 : **Environment Variable**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 When set to `true` sends tracer health metrics
 
 `dd.trace.health.metrics.statsd.host`
