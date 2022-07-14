@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Powerpacks are templated groups of dashboard widgets that scale graphing expertise as reusable dashboard building blocks. By capturing domain knowledge or organization-specific standards for observability as a Powerpack, you can empower dashboard owners across your organization to incorporate this knowledge across technology areas into their existing dashboards without additional training.
+Powerpacks are templated groups of dashboard widgets that scale graphing expertise as reusable dashboard building blocks. By capturing domain knowledge or organization-specific standards for observability as a Powerpack, you can empower dashboard owners across your organization. This knowledge can be incorporated into their existing dashboards across technology areas, and without additional training.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="The configure powerpack page in the Datadog application showing a section to configure values with tags or attributes, several graphs from an example powerpack, and a menu on the right to browse other packs" style="width:100%;" >}}
 
