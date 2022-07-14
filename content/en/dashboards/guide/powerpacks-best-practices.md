@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Powerpacks are templated groups of dashboard widgets that scale graphing expertise as reusable dashboard building blocks. You can empower dashboard owners across your organization by capturing domain knowledge or organization-specific standards for observability as a Powerpack. This knowledge can be incorporated into existing dashboards across technology areas, without additional training.
+Powerpacks are templated groups of widgets that scale graphing expertise as reusable dashboard building blocks. They provide a scalable way to capture domain knowledge or organization-specific standards and share them throughout an organization. Using Powerpacks, you can empower dashboard creators to incorporate knowledge across technology areas into their existing dashboards without additional training.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="The configure powerpack page in the Datadog application showing a section to configure values with tags or attributes, several graphs from an example powerpack, and a menu on the right to browse other packs" style="width:100%;" >}}
 
@@ -84,9 +84,9 @@ Configuration variables serve two purposes. They can:
 1. Help a team scope a Powerpack to their context once, before the pack gets added to their dashboard (such as selecting a `service` to ensure a security Powerpack is relevant to the correct service).
 2. Allow users to filter a Powerpack after the pack gets added to a dashboard (such as viewing security signals in a Powerpack in both `prod` and `staging` environments).
 
-Each Powerpack user decides which variables to configure permanently and which variables to save to their dashboard for further dynamic filtering. Variables are configured permanently by default. 
+Each Powerpack user decides whether to save a variable to their dashboard to allow dynamic filtering. In the example below, the user is able to change the value of `$Environment` on their dashboard through a template variable, but `$Service` is always set to `agent`.
 
-{{< img src="dashboards/guide/powerpacks_best_practices/configure_variables.png" alt="A screen showing the option to configure values for tag or attribute variables, with a column for Tag or Attribute, Name, Value, and Use as Template Variable, which shows a checkbox providing the option to Add to dashboard" style="width:100%;" >}}
+{{< img src="dashboards/guide/powerpacks_best_practices/configure_variables.png" alt="A screen showing the option to configure values for tag or attribute variables, with a column for Tag or Attribute, Name, Value, and Use as Template Variable, which shows a checkbox providing the option to Add to dashboard. The Add to dashboard checkbox is checked for $Environment and unchecked for $Service." style="width:100%;" >}}
 
 ### Spread the word
 
