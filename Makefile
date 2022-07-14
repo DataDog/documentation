@@ -37,9 +37,8 @@ clean-all: stop  ## Clean everything.
 	make clean-examples
 
 clean-build:  ## Remove build artifacts.
-	@if [ -d public ]; then rm -rf public; fi
-	@if [ static/images/integrations_logos/2020w2.pdf ]; then \
-	rm -f static/images/integrations_logos/2020w2.pdf ;fi
+	@rm -rf public
+	@rm -rf static/images/integrations_logos/2020w2.pdf
 
 clean-exe:  ## Remove execs.
 	@rm -rf ${EXE_LIST}
@@ -90,107 +89,56 @@ clean-integrations:  ## Remove built integrations files.
 	@find ./content/en/security_platform/default_rules -type f -maxdepth 1 \
 		-a -not -name '_index.md' \
 		-exec rm -rf {} \;
-	@if [ -d static/images/marketplace ]; then \
-		find ./static/images/marketplace -type f \
-	    -exec rm -rf {} \; ;fi
+	@rm -rf static/images/marketplace
 
 clean-auto-doc: ##Remove all doc automatically created
-	@if [ -d content/en/developers/integrations ]; then \
-	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
-	@if [ content/en/agent/basic_agent_usage/ansible.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/ansible.md ;fi
-	@if [ content/en/agent/basic_agent_usage/chef.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/chef.md ;fi
-	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
-	@if [ content/en/agent/basic_agent_usage/puppet.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
-	@if [ content/en/agent/basic_agent_usage/saltstack.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
-	@if [ content/en/serverless/libraries_integrations/plugin.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/plugin.md ;fi
-	@if [ content/en/serverless/libraries_integrations/macro.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
-	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/cli.md ;fi
-	@if [ content/en/serverless/libraries_integrations/extension.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/extension.md ;fi
-	@if [ content/en/serverless/libraries_integrations/cdk.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/cdk.md ;fi
-	@if [ content/en/synthetics/cicd_integrations/circleci_orb.md ]; then \
-	rm -f content/en/synthetics/cicd_integrations/circleci_orb.md ;fi
-	@if [ content/en/synthetics/cicd_integrations/github_actions.md ]; then \
-	rm -f content/en/synthetics/cicd_integrations/github_actions.md ;fi
-	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/android/_index.md ;fi
-	@if [ content/en/real_user_monitoring/android/data_collected.md ]; then \
-	rm -f content/en/real_user_monitoring/android/data_collected.md ;fi
-	@if [ content/en/real_user_monitoring/android/advanced_configuration.md ]; then \
-	rm -f content/en/real_user_monitoring/android/advanced_configuration.md ;fi
-	@if [ content/en/real_user_monitoring/android/integrated_libraries.md ]; then \
-	rm -f content/en/real_user_monitoring/android/integrated_libraries.md ;fi
-	@if [ content/en/real_user_monitoring/android/mobile_vitals.md ]; then \
-	rm -f content/en/real_user_monitoring/android/mobile_vitals.md ;fi
-	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
-	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
-	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
-	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
-	@if [ content/en/real_user_monitoring/error_tracking/ios.md ]; then \
-	rm -f content/en/real_user_monitoring/error_tracking/ios.md ;fi
-	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
-	@if [ content/en/real_user_monitoring/ios/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/ios/_index.md ;fi
-	@if [ content/en/real_user_monitoring/ios/crash_reporting.md ]; then \
-	rm -f content/en/real_user_monitoring/ios/crash_reporting.md ;fi
-	@if [ content/en/real_user_monitoring/ios/mobile_vitals.md ]; then \
-	rm -f content/en/real_user_monitoring/ios/mobile_vitals.md ;fi
-	@if [ -d content/en/real_user_monitoring/ios ]; then \
-	find ./content/en/real_user_monitoring/ios -type f -maxdepth 1 -exec rm -rf {} \; ;fi
-	@if [ content/en/real_user_monitoring/reactnative/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/reactnative/_index.md ;fi
-	@if [ content/en/real_user_monitoring/reactnative/integrated_libraries.md ]; then \
-	rm -f content/en/real_user_monitoring/reactnative/integrated_libraries.md ;fi
-	@if [ content/en/real_user_monitoring/reactnative/mobile_vitals.md ]; then \
-	rm -f content/en/real_user_monitoring/reactnative/mobile_vitals.md ;fi
-	@if [ content/en/real_user_monitoring/reactnative/expo.md ]; then \
-	rm -f content/en/real_user_monitoring/reactnative/expo.md ;fi
-	@if [ content/en/real_user_monitoring/flutter/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/flutter/_index.md ;fi
-	@if [ content/en/tracing/setup/ruby.md ]; then \
-	rm -f content/en/tracing/setup/ruby.md ;fi
-	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
-	rm -f content/en/tracing/setup_overview/setup/ruby.md ;fi
-	@if [ content/en/tracing/trace_collection/dd_libraries/ruby.md ]; then \
-	rm -f content/en/tracing/trace_collection/dd_libraries/ruby.md ;fi
-	@if [ content/en/integrations/guide/amazon_cloudformation.md ]; then \
-	rm -f content/en/integrations/guide/amazon_cloudformation.md ;fi
-	@if [ content/en/logs/log_collection/android.md ]; then \
-	rm -f content/en/logs/log_collection/android.md ;fi
-	@if [ content/en/logs/log_collection/ios.md ]; then \
-	rm -f content/en/logs/log_collection/ios.md ;fi
-	@if [ content/en/logs/log_collection/javascript.md ]; then \
-	rm -f content/en/logs/log_collection/javascript.md ;fi
-	@if [ content/en/logs/guide/forwarder.md ]; then \
-	rm -f content/en/logs/guide/forwarder.md ;fi
-	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
-	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
-	@if [ content/en/tracing/trace_collection/dd_libraries/android.md ]; then \
-	rm -f content/en/tracing/trace_collection/dd_libraries/android.md ;fi
-	@if [ content/en/tracing/setup_overview/setup/ios.md ]; then \
-	rm -f content/en/tracing/setup_overview/setup/ios.md ;fi
-	@if [ content/en/tracing/trace_collection/dd_libraries/ios.md ]; then \
-	rm -f content/en/tracing/trace_collection/dd_libraries/ios.md ;fi
-	@if [ content/en/security_platform/cloud_workload_security/agent_expressions.md ]; then \
-	rm -f content/en/security_platform/cloud_workload_security/agent_expressions.md ;fi
-	@if [ content/en/security_platform/cloud_workload_security/backend.md ]; then \
-	rm -f content/en/security_platform/cloud_workload_security/backend.md ;fi
+	@rm -rf content/en/developers/integrations;
+	@rm -f content/en/agent/basic_agent_usage/ansible.md;
+	@rm -f content/en/agent/basic_agent_usage/chef.md;
+	@rm -f content/en/agent/basic_agent_usage/heroku.md;
+	@rm -f content/en/agent/basic_agent_usage/puppet.md;
+	@rm -f content/en/agent/basic_agent_usage/saltstack.md;
+	@rm -f content/en/serverless/libraries_integrations/plugin.md;
+	@rm -f content/en/serverless/libraries_integrations/macro.md;
+	@rm -f content/en/serverless/libraries_integrations/cli.md;
+	@rm -f content/en/serverless/libraries_integrations/extension.md;
+	@rm -f content/en/serverless/libraries_integrations/cdk.md;
+	@rm -f content/en/synthetics/cicd_integrations/circleci_orb.md;
+	@rm -f content/en/synthetics/cicd_integrations/github_actions.md;
+	@rm -f content/en/real_user_monitoring/android/_index.md;
+	@rm -f content/en/real_user_monitoring/android/data_collected.md;
+	@rm -f content/en/real_user_monitoring/android/advanced_configuration.md;
+	@rm -f content/en/real_user_monitoring/android/integrated_libraries.md;
+	@rm -f content/en/real_user_monitoring/android/mobile_vitals.md;
+	@rm -f content/en/real_user_monitoring/android/troubleshooting.md;
+	@rm -f content/en/real_user_monitoring/error_tracking/android.md;
+	@rm -f content/en/real_user_monitoring/error_tracking/ios.md;
+	@rm -f content/en/real_user_monitoring/browser/_index.md;
+	@rm -f content/en/real_user_monitoring/ios/_index.md;
+	@rm -f content/en/real_user_monitoring/ios/crash_reporting.md;
+	@rm -f content/en/real_user_monitoring/ios/mobile_vitals.md;
+	@rm -rf content/en/real_user_monitoring/ios;
+	@rm -f content/en/real_user_monitoring/reactnative/_index.md;
+	@rm -f content/en/real_user_monitoring/reactnative/integrated_libraries.md;
+	@rm -f content/en/real_user_monitoring/reactnative/mobile_vitals.md;
+	@rm -f content/en/real_user_monitoring/reactnative/expo.md;
+	@rm -f content/en/real_user_monitoring/flutter/_index.md;
+	@rm -f content/en/tracing/setup/ruby.md;
+	@rm -f content/en/tracing/setup_overview/setup/ruby.md;
+	@rm -f content/en/integrations/guide/amazon_cloudformation.md;
+	@rm -f content/en/logs/log_collection/android.md;
+	@rm -f content/en/logs/log_collection/ios.md;
+	@rm -f content/en/logs/log_collection/javascript.md;
+	@rm -f content/en/logs/guide/forwarder.md;
+	@rm -f content/en/tracing/setup_overview/setup/android.md;
+	@rm -f content/en/security_platform/cloud_workload_security/agent_expressions.md;
+	@rm -f content/en/security_platform/cloud_workload_security/backend.md;
 
 clean-node:  ## Remove node_modules.
-	@if [ -d node_modules ]; then rm -r node_modules; fi
+	@rm -rf node_modules;
 
 clean-virt:  ## Remove python virtual env.
-	@if [ -d ${VIRENV} ]; then rm -rf $(VIRENV); fi
+	@rm -rf $(VIRENV);
 
 hugpython: hugpython/bin/activate  ## Build virtualenv used for tests.
 
