@@ -57,6 +57,23 @@ The **Reliability** tab contains information about the stability of your service
 
 Click the Settings icon on the right hand corner to hide columns from the service list.
 
+## Reliability view
+
+#PagerDuty Integration
+You can add PagerDuty metadata to Service Catalog to complete the Reliability view. 
+
+- Set up PagerDuty integration by following the instructions [here][6].
+- Get your [API acccess key][7].
+- Link PagerDuty service to Service Definition YAML.
+```yaml
+schema-version: v2
+dd-service: product-recommendation-lite
+team: Shopist
+integrations:
+  pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
+tags: []
+```
+
 ### Performance view
 
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. Sort the table by clicking columns to reveal services that:
@@ -165,3 +182,5 @@ To register multiple services in one YAML file, separate each service definition
 [3]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [4]: https://www.datadoghq.com/blog/unified-service-tagging/
 [5]: /tracing/faq/service_definition_api/
+[6]: https://docs.datadoghq.com/integrations/pagerduty/
+[7]: https://support.pagerduty.com/docs/api-access-keys
