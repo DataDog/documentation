@@ -7,7 +7,7 @@ further_reading:
   text: Add widgets and refine what they show
 - link: "https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/"
   tag: "Guide"
-  text: Maintain relevant dashboards
+  text: Best practices for maintaining relevant dashboards
 ---
 
 ## Overview
