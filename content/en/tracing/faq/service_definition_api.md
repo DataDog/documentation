@@ -77,53 +77,42 @@ POST /api/v2/services/definitions
 
 #### Example
 {{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
----
-schema-version: v2
-dd-service: shopping-cart 
-team: e-commerce 
-contacts:
-  - type: slack
-    contact: http://slack/e-commerce
-  - type: email 
-    name: E-commerce team
-    contact: ecommerce@example.com  
-links: 
-  - name: Runbook
-    type: runbook
-    url: http://runbook/shopping-cart
-repos: 
-  - name: Source 
-    provider: github 
-    url: http://github.com/shopping-cart 
-  - name: Deployment 
-    provider: github 
-    url: http://github.com/shopping-cart 
-  - name: Config
-    provider: github 
-    url: http://github.com/consul-config/shopping-cart
-docs: 
-  - name: E-Commerce Team
-    provider: wiki
-    url: http://wiki/ecommerce
-  - name: Shopping Cart Architecture
-    provider: wiki
-    url: http://wiki/ecommerce/shopping-cart
-  - name: Shopping Cart RFC
-    provider: google doc
-    url: http://doc.google.com/shopping-cart
-tags:
-  - business-unit:retail
-  - cost-center:engineering
-integrations: 
-  pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
-extensions:
-  your_org/your_domain: 
-    customField: customValue
+{
+    "data": [
+        {
+            "attributes": {
+                "meta": {
+                    "ingested-schema-version": "v2",
+                    "ingestion-source": "api",
+                    "last-modified-time": "2022-07-13T19:45:14.974121477Z",
+                    "github-html-url": "",
+                    "warnings": []
+                },
+                "schema": {
+                    "dd-service": "shopping-service"
+                    "schema-version": "v2",
+                    "links": [],
+                    "contacts": [],
+                    "docs": [],
+                    "repos": [],
+                    "tags": null,
+                    "integrations": {},
+                    "team": "",
+                    "extensions": {},
+                }
+            },
+            "type": "service-definition"
+        }
+    ]
+}
 {{< /code-block >}}
 
 ### Response
 
-Status: `200 OK` `400 Invalid Request` `429 Too Many Requests` 
+Status: 
+`200 OK` 
+`400 Invalid Request` 
+`429 Too Many Requests` 
 
 
 ### Curl example
@@ -140,6 +129,7 @@ curl --request POST 'https://api.datadoghq.com/api/v2/services/definitions' \
 {{< /code-block >}}
 
 ## Get a service definition
+This endpoint allows you to retrieve a single definition file for a service. 
 
 ```
 GET /api/v2/services/definitions/<service_name>
@@ -239,10 +229,10 @@ curl --request GET 'https://api.datadoghq.com/api/unstable/services/definition/s
 --header 'DD-APPLICATION-KEY: {APPLICATION_KEY}' 
 {{< /code-block >}}
 
-## Query service definitions
+## Query all service definitions
 
 ```
-GET https://api.datadoghq.com/api/unstable/services/definition
+GET /api/v2/services/definitions
 ```
 
 ### Arguments
@@ -258,18 +248,77 @@ GET https://api.datadoghq.com/api/unstable/services/definition
 
 This endpoint returns every service definition that Datadog has for an organization. See the Response example for [Get a service definition](#get-a-service-definition).
 
+### Example
+{{< code-block lang="curl" >}}
+{
+  "data": [
+    {
+      "attributes": {
+        "meta": {
+          "ingested-schema-version": "v2",
+          "ingestion-source": "api",
+          "last-modified-time": "2022-07-13T19:45:14Z",
+          "github-html-url": "",
+          "warnings": []
+        },
+        "schema": {
+          "links": [],
+          "contacts": [],
+          "docs": [],
+          "repos": [],
+          "tags": [],
+          "integrations": {},
+          "schema-version": "v2",
+          "team": "",
+          "extensions": {},
+          "dd-service": "shopping-service"
+        }
+      },
+      "type": "service-definition",
+      "id": "0007484c47fea9a3cd74d7fc4a1c4e8f"
+    },
+    {
+      "attributes": {
+        "meta": {
+          "ingested-schema-version": "v2",
+          "ingestion-source": "api",
+          "last-modified-time": "2022-07-12T15:06:00Z",
+          "github-html-url": "",
+          "warnings": []
+        },
+        "schema": {
+          "links": [],
+          "contacts": [],
+          "docs": [],
+          "repos": [],
+          "tags": [],
+          "integrations": {},
+          "schema-version": "v2",
+          "team": "",
+          "extensions": {},
+          "dd-service": "delivery-service"
+        }
+      },
+      "type": "service-definition",
+      "id": "0007484c47fea9a3cd74d7fc4a1c4e8f"
+    }
+  ]
+}
+{{< /code-block >}}
+
+
 ### Curl example
 
 {{< code-block lang="curl" >}}
-curl --request GET 'https://api.datadoghq.com/api/unstable/services/definition \
---header 'DD-API-KEY: {API_KEY}' \
---header 'DD-APPLICATION-KEY: {APPLICATION_KEY}'
+curl --location --request GET 'https://api.datadoghq.com/api/v2/services/definitions' \
+--header 'DD-API-KEY: <API_KEY>' \
+--header 'DD-APPLICATION-KEY: <APPLICATION_KEY>' 
 {{< /code-block >}}
 
 ## Delete a service definition
 
 ```
-DELETE https://api.datadoghq.com/api/unstable/services/definition/{service_name}
+DELETE /api/v2/services/definitions/<service_name>
 ```
 
 #### Path parameters
@@ -292,9 +341,9 @@ Status: `200 OK (Deleted)`
 ### Curl example
 
 {{< code-block lang="curl" >}}
-curl --request DELETE 'https://api.datadoghq.com/api/unstable/services/definition/shopping-cart \
---header 'DD-API-KEY: {API_KEY}' \
---header 'DD-APPLICATION-KEY: {APPLICATION_KEY}'
+curl --location --request DELETE 'https://api.datadoghq.com/api/v2/services/definitions/shopping-cart' \
+--header 'DD-API-KEY: <API_KEY>' \
+--header 'DD-APPLICATION-KEY: <APPLICATION_KEY>'
 {{< /code-block >}}
 
 ## Further Reading
