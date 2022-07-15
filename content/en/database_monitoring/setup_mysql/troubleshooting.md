@@ -98,7 +98,7 @@ Datadog additionally recommends enabling:
 ```
 performance-schema-consumer-events-statements-history-long=ON
 ```
-This enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries.
+This enables tracking of a larger number of recent queries across all threads. If enabled, it increases the likelihood of capturing execution details from infrequent queries.
 
 #### Missing explain plan procedure {#explain-plan-procedure-missing}
 The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.
