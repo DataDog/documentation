@@ -162,7 +162,7 @@ Test notifications are supported for the [monitor types][23]: host, metric, anom
 
 ### Events
 
-Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
+Test notifications produce events that can be searched within the event explorer. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
 
 Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
 
@@ -185,7 +185,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
 [6]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[7]: /monitors/notify/variables/?tab=is_renotify#examples 
+[7]: /monitors/notify/variables/?tab=is_renotify#examples
 [8]: /integrations/jira/
 [9]: /integrations/jira/#usage
 [10]: /integrations/pagerduty/

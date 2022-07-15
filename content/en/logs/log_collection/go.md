@@ -112,4 +112,4 @@ Tips for getting further with Go log collection:
 
 [1]: https://github.com/sirupsen/logrus
 [2]: /logs/log_configuration/parsing
-[3]: /tracing/connect_logs_and_traces/go/
+[3]: /tracing/other_telemetry/connect_logs_and_traces/go/

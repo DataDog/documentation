@@ -171,7 +171,7 @@ Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 [12]: /api/v1/logs-indexes/#update-an-index
 [13]: /logs/log_configuration/processors/#user-agent-parser
 [14]: /logs/log_configuration/processors/#geoip-parser
-[15]: /tracing/connect_logs_and_traces/
+[15]: /tracing/other_telemetry/connect_logs_and_traces/
 [16]: /logs/log_configuration/processors/#trace-remapper
 [17]: /help/
 [18]: /logs/live_tail/#overview

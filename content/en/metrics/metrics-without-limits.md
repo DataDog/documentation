@@ -91,7 +91,7 @@ Learn more about [Custom Metrics Billing][8].
 [2]: /api/latest/metrics/#create-a-tag-configuration
 [3]: /api/latest/metrics/#update-a-tag-configuration
 [4]: /api/latest/metrics/#delete-a-tag-configuration
-[5]: /metrics/guide/tag-configuration-cardinality-estimation-tool/
+[5]: /api/latest/metrics/#tag-configuration-cardinality-estimator
 [6]: /metrics/#time-and-space-aggregation
 [7]: /metrics/summary/#configuration-of-multiple-metrics
 [8]: /account_management/billing/custom_metrics/?tab=countrategauge

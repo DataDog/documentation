@@ -129,7 +129,7 @@ Once a logging source is configured, and your logs are available in the Log Expl
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://www.datadoghq.com
-[2]: /tracing/connect_logs_and_traces/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/
 [3]: /logs/guide/correlate-logs-with-metrics/
 [4]: /security_platform/cloud_siem/
 [5]: /getting_started/integrations/

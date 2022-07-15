@@ -73,7 +73,7 @@ To setup unified service tagging in a containerized environment:
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-If you deployed the Datadog Cluster Agent with [Admission Controller][6] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][6].
+If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
 ##### Full configuration
 
@@ -125,7 +125,7 @@ template:
       tags.datadoghq.com/service: "<SERVICE>"
       tags.datadoghq.com/version: "<VERSION>"
 ```
-These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][1].
+These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][2].
 
 If you have multiple containers per pod, you can specify standard labels by container:
 
@@ -137,9 +137,9 @@ tags.datadoghq.com/<container-name>.version
 
 ###### State metrics
 
-To configure [Kubernetes State Metrics][2]:
+To configure [Kubernetes State Metrics][3]:
 
-1. Set `join_standard_tags` to `true` in your [configuration file][3].
+1. Set `join_standard_tags` to `true` in your [configuration file][4].
 
 2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
 
@@ -162,7 +162,7 @@ To configure [Kubernetes State Metrics][2]:
 
 ###### APM tracer and StatsD client
 
-To configure [APM tracer][4] and [StatsD client][5] environment variables, use the [Kubernetes's downward API][1] in the format below:
+To configure [APM tracer][5] and [StatsD client][6] environment variables, use the [Kubernetes's downward API][2] in the format below:
 
 ```yaml
 containers:
@@ -182,19 +182,19 @@ containers:
               fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[2]: /agent/kubernetes/data_collected/#kube-state-metrics
-[3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
-[4]: /tracing/send_traces/
-[5]: /integrations/statsd/
-[6]: /agent/cluster_agent/admission_controller/
 
+[1]: /agent/cluster_agent/admission_controller/
+[2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
+[3]: /agent/kubernetes/data_collected/#kube-state-metrics
+[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
+[5]: /tracing/send_traces/
+[6]: /integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to your get the full range of unified service tagging.
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
 
 The values for `service` and `version` can be provided in the Dockerfile:
 
@@ -317,7 +317,7 @@ If you're using [connected logs and traces][1], enable automatic logs injection 
 
 **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
-[1]: /tracing/connect_logs_and_traces/
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
 {{% /tab %}}
 
 {{% tab "RUM & Session Replay" %}}
