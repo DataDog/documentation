@@ -136,7 +136,7 @@ If the same test is collected several times for the same commit but with differe
 
 The default branch is used to power some features of the products, namely:
 
-- Tests Default branches list: This list only displays default branches. Setting the wrong default branch can result in missing or incorrect data in the default branches list.
+- Default branches list on the Tests page: This list only displays default branches. Setting the wrong default branch can result in missing or incorrect data in the default branches list.
 
 - Tests Wall Time comparison for non-default branches: in the Tests Branches list page, the **VS Default** column is calculated comparing wall time for the current branch against wall time for the default branch.
 
