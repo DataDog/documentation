@@ -138,7 +138,7 @@ The default branch is used to power some features of the products, namely:
 
 - Default branches list on the Tests page: This list only displays default branches. Setting the wrong default branch can result in missing or incorrect data in the default branches list.
 
-- Tests Wall Time comparison for non-default branches: in the Tests Branches list page, the **VS Default** column is calculated comparing wall time for the current branch against wall time for the default branch.
+- Wall time comparison for non-default branches: On the Tests page, in the Branches view, the **VS Default** column is calculated by comparing wall time for the current branch against wall time for the default branch.
 
 - New flaky tests: Tests that are not currently classified as flaky in the default branch. If the default branch is not properly set, this could lead to a wrong number of detected new flaky tests.
 
