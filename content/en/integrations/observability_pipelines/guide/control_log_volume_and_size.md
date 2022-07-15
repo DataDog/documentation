@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-As your organization scales, your log volume grows, which means that the cost of ingesting and indexing your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Vector transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your network. 
+As your organization scales, your log volume grows, which means that the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Vector transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
 
 This guide assumes that you have [Vector installed and configured][1], such that you’re collecting data from your sources and routing them to your destinations. It also assumes that you are familiar with [the basics of configuring Vector][2].
 
