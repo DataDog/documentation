@@ -57,7 +57,7 @@ The steps for enabling debug mode Datadog Python Tracer, depends on which versio
 
 ### Scenario 4: Configuring debug logging in the application code with the standard logging library
 
-For any version of dd-trace-py, rather than setting the `DD_TRACE_DEBUG` tracer environment variable, you can enable debug logging in the application code by using the `logging` standard library directly:
+For any version of ddtrace, rather than setting the `DD_TRACE_DEBUG` tracer environment variable, you can enable debug logging in the application code by using the `logging` standard library directly:
 
 ```
 log = logging.getLogger("ddtrace.tracer")
