@@ -317,7 +317,7 @@ This configuration ensures consistent host metadata and centralizes the configur
 [4]: https://opentelemetry.io/docs/collector/configuration/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /getting_started/site/
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/example/config.yaml
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
 [8]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#pipelines
 [9]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/examples
 [10]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor#batch-processor
