@@ -5,7 +5,7 @@ further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'
       text: 'Learn more about distributions'
-    - link: 'tracing/setup_overview/open_standards/'
+    - link: 'tracing/trace_collection/open_standards/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
 ---

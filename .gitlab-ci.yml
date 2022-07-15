@@ -82,9 +82,9 @@ build_preview:
     - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
     - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd-api-key') $(get_secret 'dd-app-key')
-    #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
+    - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
@@ -246,7 +246,6 @@ build_live:
   only:
     - master
 
-
 index_internal_doc:
   stage: post-deploy
   cache: {}
@@ -356,37 +355,10 @@ manage_ignored_translations:on-schedule:
   cache: {}
   environment: "live"
   only:
-    - master
+    - schedules
   script:
     - echo "Downloading ignored translation source files..."
     - manage_ignored_translation_files
-  when: manual
-
-# Legacy translations nightly job
-# manage_translations:on-schedule:
-#   <<: *base_template
-#   stage: post-deploy
-#   cache:
-#     <<: *cache
-#     policy: pull
-#   environment: "live"
-#   variables:
-#     URL: ${PREVIEW_DOMAIN}
-#     CONFIG: ${PREVIEW_CONFIG}
-#   script:
-#     - |-
-#       if [[ $(date +%u) -lt 6 ]]; then
-#         nodenv shell 14.16.0
-#         [ -d ./node_modules ] && rm -rf ./node_modules
-#         yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.42.tgz
-#         DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
-#       fi
-#       chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
-#   artifacts:
-#     paths:
-#       - translate-debug.log
-#   only:
-#     - schedules
 
 test_missing_tms_live:
   <<: *base_template
@@ -415,16 +387,6 @@ test_pa11y:
     - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
   only:
     - schedules
-
-#rollback_live:
-#  <<: *base_template
-#  stage: cleanup
-#  environment: "live"
-#  when: on_failure
-#  script:
-#    - rollback_env
-#  only:
-#    - master
 
 tag_successful_live_pipeline:
   <<: *base_template

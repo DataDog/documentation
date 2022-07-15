@@ -211,12 +211,12 @@ See the table below for example setups. Some require setting up additional netwo
 | [AWS EKS on Fargate][9] | Do not set `DD_AGENT_HOST` |
 | [AWS Elastic Beanstalk - Single Container][10] | Gateway IP (usually `172.17.0.1`) |
 | [AWS Elastic Beanstalk - Multiple Containers][11] | Link pointing to the Datadog Agent container name |
-| [Kubernetes][12] | 1) [Unix Domain Socket][20], 2) [`status.hostIP`][13] added manually, or 3) through the [Admission Controller][14] |
-| [AWS EKS (non Fargate)][15] | 1) [Unix Domain Socket][20], 2) [`status.hostIP`][13] added manually, or 3) through the [Admission Controller][14] |
-| [Datadog Agent and Application Docker Containers][16] | Datadog Agent container |
+| [Kubernetes][12] | 1) [Unix Domain Socket][13], 2) [`status.hostIP`][14] added manually, or 3) through the [Admission Controller][15] |
+| [AWS EKS (non Fargate)][16] | 1) [Unix Domain Socket][13], 2) [`status.hostIP`][14] added manually, or 3) through the [Admission Controller][15] |
+| [Datadog Agent and Application Docker Containers][17] | Datadog Agent container |
 
 
-**Note about web servers**: If the `agent_url` section in the [tracer startup logs][1] has a mismatch against the `DD_AGENT_HOST` environment variable that was passed in, review how environment variables are cascaded for that specific server. For example, in PHP, there’s an additional setting to ensure that [Apache][17] or [Nginx][18] pick up the `DD_AGENT_HOST` environment variable correctly.
+**Note about web servers**: If the `agent_url` section in the [tracer startup logs][1] has a mismatch against the `DD_AGENT_HOST` environment variable that was passed in, review how environment variables are cascaded for that specific server. For example, in PHP, there’s an additional setting to ensure that [Apache][18] or [Nginx][19] pick up the `DD_AGENT_HOST` environment variable correctly.
 
 If your tracing library is sending traces correctly based on your setup, then proceed to the next step.
 
@@ -252,7 +252,7 @@ If the configuration is correct, but you’re still seeing connection errors, [c
 - If you’re using proxies, information about how they’ve been configured.
 - Any configuration files used to set up the application and the Datadog Agent.
 - Startup logs or tracer debug logs outlining the connection error.
-- A Datadog [Agent flare][5]. For dedicated containers, send the flare from the [dedicated Trace Agent container][19].
+- A Datadog [Agent flare][5]. For dedicated containers, send the flare from the [dedicated Trace Agent container][20].
 
 
 [1]: /tracing/troubleshooting/tracer_startup_logs/
@@ -267,11 +267,11 @@ If the configuration is correct, but you’re still seeing connection errors, [c
 [10]: /integrations/amazon_elasticbeanstalk/?tab=singlecontainer#trace-collection
 [11]: /integrations/amazon_elasticbeanstalk/?tab=multiplecontainers#trace-collection
 [12]: /agent/kubernetes/apm/
-[13]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[14]: /agent/cluster_agent/admission_controller/
-[15]: /integrations/amazon_eks/#setup
-[16]: /agent/docker/apm/#tracing-from-other-containers
-[17]: /tracing/setup_overview/setup/php/?tab=containers#apache
-[18]: /tracing/setup_overview/setup/php/?tab=containers#nginx
-[19]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
-[20]: /containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces
+[13]: /containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces
+[14]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
+[15]: /agent/cluster_agent/admission_controller/
+[16]: /integrations/amazon_eks/#setup
+[17]: /agent/docker/apm/#tracing-from-other-containers
+[18]: /tracing/trace_collection/dd_libraries/php/?tab=containers#apache
+[19]: /tracing/trace_collection/dd_libraries/php/?tab=containers#nginx
+[20]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent

@@ -107,8 +107,8 @@ This feature is in open beta.
 In the Responders section, you can form your response team by adding other users and assigning them roles to carry out in the process of resolving an incident. The three default roles provided by Datadog are:
 
 1. `Incident Commander` - The individual responsible for leading the response team 
-2. `Communications Lead` - The individual responsible for managing stakeholder communications throughout the lifecycle of the incident
-3. `Responder` - An individual that is actively contribution to investigating an incident and resolving its underlying issue
+2. `Communications Lead` - An individual responsible for managing stakeholder communications throughout the lifecycle of the incident
+3. `Responder` - An individual that actively contributes to investigating an incident and resolving its underlying issue
 
 **Note:** There must always be exactly one `Incident Commander` at all times during an incident. If there is only one responder in an incident, this individual is assigned the `Incident Commander` role automatically. There is no limit to the number of individuals that are assigned the `Communications Lead` or `Responder` role in an incident.
 

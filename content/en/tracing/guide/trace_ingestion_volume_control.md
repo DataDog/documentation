@@ -2,7 +2,7 @@
 title: Ingestion volume control with APM Distributed Tracing
 kind: guide
 further_reading:
-- link: "/tracing/trace_ingestion/ingestion_controls/"
+- link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"
   text: "Ingestion Control Page"
 ---
@@ -125,14 +125,14 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_ingestion/ingestion_controls
-[2]: /tracing/trace_ingestion/mechanisms
-[3]: /tracing/guide/metrics_namespace/
-[4]: /tracing/generate_metrics/
+[1]: /tracing/trace_pipeline/ingestion_controls
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /tracing/metrics/metrics_namespace/
+[4]: /tracing/trace_pipeline/generate_metrics/
 [5]: /monitors/create/types/apm/?tab=analytics
-[6]: /tracing/trace_ingestion/mechanisms/#head-based-sampling
-[7]: /tracing/trace_retention/usage_metrics/
-[8]: /tracing/trace_ingestion/mechanisms#error-traces
-[9]: /tracing/trace_ingestion/mechanisms#rare-traces
-[10]: /tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[6]: /tracing/trace_pipeline/ingestion_mechanisms//#head-based-sampling
+[7]: /tracing/trace_pipeline/metrics/
+[8]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
+[9]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
+[10]: /tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#in-tracing-libraries-user-defined-rules
 [11]: /tracing/legacy_app_analytics

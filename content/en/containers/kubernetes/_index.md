@@ -7,7 +7,6 @@ aliases:
     - /tracing/kubernetes/
     - /tracing/setup/kubernetes
     - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
-    - /agent/autodiscovery
     - /integrations/faq/can-i-install-the-agent-on-my-Kubernetes-master-node-s/
     - /integrations/faq/docker-ecs-kubernetes-events/
     - /integrations/faq/container-integration-event/

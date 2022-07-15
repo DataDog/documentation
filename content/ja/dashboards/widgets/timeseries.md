@@ -1,35 +1,32 @@
 ---
-title: 時系列ウィジェット
-kind: documentation
-description: 1 つ以上のメトリクス、ログイベント、Indexed Span、プロセスメトリクスなどの動きを経時的に表示する。
 aliases:
-  - /ja/graphing/widgets/timeseries/
+- /ja/graphing/widgets/timeseries/
+- /ja/dashboards/widgets/network/
+- /ja/graphing/widgets/network/
+description: 1 つ以上のメトリクス、ログイベント、Indexed Span、プロセスメトリクスなどの動きを経時的に表示する。
 further_reading:
-  - link: /dashboards/timeboards/
-    tag: ドキュメント
-    text: Timeboards
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
-  - link: https://www.datadoghq.com/blog/full-screen-graphs
-    tag: ブログ
-    text: 全画面モードでグラフを表示しデータを調べる
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+- link: https://www.datadoghq.com/blog/full-screen-graphs
+  tag: ブログ
+  text: 全画面モードでグラフを表示しデータを調べる
+kind: documentation
+title: 時系列ウィジェット
 ---
+
 時系列可視化機能を使用すると、1 つ以上のメトリクス、ログイベント、Indexed Span などの動きを経時的に表示できます。タイムウィンドウは、[タイムボード][1]または[スクリーンボード][2]で選択した内容によって異なります。
 
-{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="時系列" >}}
+{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="時系列" height="318" width="794" >}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="時系列のセットアップ" style="width:80%;" >}}
+{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="時系列のセットアップ" style="width:80%;" height="543" width="635" >}}
 
 ### コンフィギュレーション
 
 1. グラフ化するデータを選択します。
-    * メトリクス:  メトリクスクエリの構成については、[クエリ][3]に関するドキュメントを参照してください。
+    * メトリクス: メトリクスクエリの構成については、[クエリ作成のドキュメント][3]を参照してください。
     * Indexed Span: Indexed Span クエリの構成については、[トレース検索に関するドキュメント][4]を参照してください。
     * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][5]を参照してください。
 
@@ -69,7 +66,7 @@ further_reading:
 
 ##### イベントオーバーレイ
 
-関連するシステムからイベントを追加して、グラフにさらにコンテキストを追加できます。たとえば、GitHub のコミットイベント、Jenkins のデプロイイベント、Docker の作成イベントなどを追加できます。**Event Overlays** セクションを展開して、イベントを表示するためのクエリを入力します。[イベントストリーム][7]と同じクエリ書式を使用してください。以下に例を示します。
+関連するシステムからイベントを追加して、グラフにさらにコンテキストを追加できます。たとえば、GitHub のコミットイベント、Jenkins のデプロイイベント、Docker の作成イベントなどを追加できます。**Event Overlays** セクションを展開して、イベントを表示するためのクエリを入力します。[イベントエクスプローラー][7]と同じクエリ書式を使用してください。以下に例を示します。
 
 | クエリ                       | 説明                                                |
 |-----------------------------|------------------------------------------------------------|
@@ -137,8 +134,8 @@ Y 軸の目盛を変更するには、Y-Axis Controls ボタンを展開しま�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/timeboard/
-[2]: /ja/dashboards/screenboard/
+[1]: /ja/dashboards/#timeboards
+[2]: /ja/dashboards/#screenboards
 [3]: /ja/dashboards/querying/
 [4]: /ja/tracing/app_analytics/search/#search-bar
 [5]: /ja/logs/search_syntax/

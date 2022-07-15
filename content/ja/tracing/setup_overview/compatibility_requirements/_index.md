@@ -1,170 +1,140 @@
 ---
 aliases:
-- /ja/tracing/compatibility_requirements/php
-code_lang: php
-code_lang_weight: 50
-description: PHP トレーサーの互換性要件です
+- /ja/tracing/compatibility_requirements/dotnet-core
+code_lang: dotnet-core
+code_lang_weight: 70
+description: .NET トレーサーの互換性要件です。
 further_reading:
-- link: tracing/setup/php
+- link: tracing/setup/dotnet-core
   tag: Documentation
   text: アプリケーションのインスツルメンテーション
+- link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
+  tag: GitHub
+  text: カスタムインスツルメンテーションの例
+- link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
+  tag: ブログ
+  text: コンテナ化された ASP.NET コアアプリケーションを監視する
 kind: documentation
-title: PHP 互換性要件
+title: .NET Core 互換性要件
 type: multi-code-lang
 ---
-## PHP APM のランタイムサポートポリシー
 
-PHP Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
 
-Datadog APM for PHP は、ホスト OS や PHP ランタイム、特定の PHP ライブラリ、 Datadog Agent や API の特定のバージョンで定義される依存関係に基づいて構築されています。
-これらのバージョンがメンテナによってサポートされなくなった場合、 Datadog APM for PHP はこれらのサポートにも制限をかけます。
+.NET トレーサーは、すべての .NET ベースの言語 (例えば、C#、F#、Visual Basic など) をサポートしています。オープンソースです。詳細は、[.NET トレーサーのリポジトリ][1]を参照してください。
 
-#### サポートレベル
+## サポートされている .NET Core のランタイム
+
+.NET トレーサーは、以下の .NET Core バージョンでの自動インスツルメンテーションに対応しています。また、[.NET Framework][2] にも対応しています。
+
+| バージョン              | マイクロソフトサポート終了 | サポートレベル        | パッケージバージョン      |
+| -------------------- | --------------------- | -------------------- | -------------------- |
+| .NET 6               |                       | [GA](#support-ga)    | 最新版 (>= 2.0.0)    |
+| .NET 5               |                       | [GA](#support-ga)    | 最新版 (>= 2.0.0)    |
+| .NET Core 3.1        | 12/03/2022            | [GA](#support-ga)    | 最新               |
+| .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | 最新               |
+| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | 非推奨       |
+| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | 非推奨       |
+| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | 非推奨       |
+
+その他の情報は、[マイクロソフトの .NET コアライフサイクルポリシー][3]、[APM .NET Core バージョン終了のお知らせ](#end-of-life-net-core-versions)および [.NET Core APM のランタイムサポートポリシー](#runtime-support-policy-for-net-core-apm)に記載されています。
+
+## 対応プロセッサアーキテクチャー
+
+.NET トレーサーは、次のアーキテクチャーの自動インスツルメンテーションをサポートします:
+
+| プロセッサアーキテクチャー                   | サポートレベル         | パッケージバージョン                        |
+| ------------------------------------------|-----------------------|----------------------------------------|
+| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | 最新                                 |
+| Windows x64 (`win-x64`)                   | [GA](#support-ga)     | 最新                                 |
+| Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | 最新                                 |
+| Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     | 最新                                 |
+| Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ のみ、バージョン 1.27.0 で追加  |
+
+## インテグレーション
+
+[最新版 .NET トレーサー][4]では、以下のライブラリの自動インスツルメンテーションが可能です。
+
+| フレームワークまたはライブラリ            | NuGet パッケージ                                                                                        | インテグレーション名     |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------- |
+| ADO.NET                         | すべての AdoNet インテグレーション                                                                              | `AdoNet`             |
+| Aerospike                       | `Aerospike.Client` 4.0.0+                                                                            | `Aerospike`          |
+| ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ および 3.0+                              | `AspNetCore`         |
+| Azure Functions                 | `Microsoft.Azure.Webjobs` 3.0+                                                                       | `AzureFunctions`     |
+| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
+| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                               | `CosmosDb`           |
+| Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
+| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
+| GraphQL .NET                    | `GraphQL` 2.3.0+                                                                                     | `GraphQL`            |
+| gRPC                            | `Grpc.Net.Client`2.30.0+ (.NET Core 3.0+ のみ)</br>`Grpc.Core` 2.30.0+</br>`Grpc.AspNetCore` 2.30.0+ | `Grpc`               |
+| HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                               | `HttpMessageHandler` |
+| Kafka                           | `Confluent.Kafka` 1.4+                                                                               | `Kafka`              |
+| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                                         | `MongoDb`            |
+| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                                     | `MySql`              |
+| Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |
+| PostgreSQL                      | `Npgsql` 4.0+                                                                                        | `Npgsql`             |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                             | `RabbitMQ`           |
+| Redis (ServiceStack クライアント)     | `ServiceStack.Redis` 4.0.48+                                                                         | `ServiceStackRedis`  |
+| Redis (StackExchange クライアント)    | `StackExchange.Redis` 1.0.187+                                                                       | `StackExchangeRedis` |
+| Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                                 | `ServiceRemoting`    |
+| SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                                      | `Sqlite`             |
+| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | WebClient / WebRequest          |
+| WCF (サーバー)                    | 組み込み                                                                                             | `Wcf`                |
+| WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
+
+希望するフレームワークが見つかりませんか？Datadog では継続的にサポートを追加しています。サポートが必要な場合は、[Datadog チーム][5]にお問い合わせください。
+
+## .NET Core バージョン終了のお知らせ
+
+.NET トレーサーは .NET コア 2.0、2.1、2.2、3.0 で動作しますが、これらのバージョンはサポートが終了しており、Microsoft ではサポートされていません。詳細については、[Microsoft のサポートポリシー][3]を参照してください。Datadog では、.NET Core 3.1、.NET 5、または .NET 6 の最新のパッチバージョンを使用することをお勧めします。古いバージョンの .NET Core では、自動インスツルメンテーションを有効にすると、次のようなランタイム問題が発生することがあります。
+
+| 問題                                         | 影響を受ける .NET Core バージョン               | ソリューション                                                               | 詳細                        |
+|-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
+| Linux/x64 での JIT コンパイラのバグ                 | 2.0.x、</br>2.1.0-2.1.11、</br>2.2.0-2.2.5  | .NET Core を最新のパッチバージョンにアップグレードするか、リンク先の問題の手順に従います | [DataDog/dd-trace-dotnet/issues/302][6] |
+| `en-US` 以外のロケールでのリソース参照に関するバグ | 2.0.0                                     | .NET Core を 2.0.3 以上にアップグレードします                                    | [dotnet/runtime/issues/23938][7]        |
+
+## サポートされている Datadog Agent バージョン
+
+| **Datadog Agent バージョン**   | **パッケージバージョン** |
+|-----------------------------|---------------------|
+| [7.x][8]                    | 最新              |
+| [6.x][8]                    | 最新              |
+| [5.x][9]                    | 最新              |
+
+## .NET Core APM のランタイムサポートポリシー
+
+Datadog APM for .NET Core は、ホスト OS、.NET Core ランタイム、特定の .NET Core ライブラリ、Datadog Agent/API に依存しています。これらのサードパーティソフトウェアシステムは、.NET Core の特定のバージョンをサポートしています。外部ソフトウェアが .NET Core のバージョンをサポートしなくなった場合、Datadog APM for .NET Core もそのバージョンのサポートを制限します。
+
+### サポートレベル
 
 | **レベル**                                              | **サポート内容**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">非対応</span>      |  実装していません。[特別なご要望はカスタマーサポートチームにお問い合わせください][2]。                                                             |
+| <span id="support-unsupported">非対応</span>      |  実装していません。[特別なご要望はカスタマーサポートにお問い合わせください][10]。                                                             |
 | <span id="support-beta">ベータ版</span>                    |  初期実装です。まだすべての機能が含まれていない可能性があります。新機能のサポート、バグやセキュリティの修正は、ベストエフォートで提供されます。                                    |
 | <span id="support-ga">一般提供 (GA)</span> |  全機能の完全実装。新機能、バグ、セキュリティフィックスを完全サポート。                                                                                    |
 | <span id="support-maintenance">メンテナンス</span>      |  既存機能の完全実装。新機能は受けません。バグフィックス、セキュリティフィックスのみの対応となります。                                                              |
-| <span id="support-legacy">レガシー</span>                |  レガシーな実装。機能は限定されますが、メンテナンスは提供されません。[特別なご要望がある場合は、サポートチームにお問い合わせください。 |
 | <span id="support-eol">サポート終了 (EOL)</span>        |  サポートはありません。                                                                                                                                                                  |
 
+### パッケージのバージョニング
 
-PHP APM は以下のバージョンの PHP に対応しています。
+Datadog APM for .NET Core は、[セマンティックバージョニング][11]を実践しています。
+バージョンの更新は、ランタイムサポートの以下の変更を意味します。
 
-<div class="alert alert-info">
-<strong>注:</strong>
-PHP 5.x はバージョン 0.75.0 まで完全にサポートされています。現在はメンテナンスモードに移行しており、2023 年 12 月 31 日までセキュリティや重要なバグの修正でサポートされています。
-<br>
-もし、アプリケーションで PHP 5.x バージョンを使用していて、ビジネスニーズにとって重要な機能要求がある場合は、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>にご連絡ください。
-<br>
-PHP は公式にサポートされているバージョン、特に 7.4、8.0、8.1 を使用することが推奨されています。
-</div>
-
-| PHP バージョン    | サポートレベル                         | パッケージバージョン |
-|:---------------|:--------------------------------------|:----------------|
-| 8.1.x          | 一般提供                  | > `0.66.0+`     |
-| 8.0.x          | 一般提供                  | > `0.52.0+`     |
-| 7.4.x          | 一般提供                  | すべて             |
-| 7.3.x          | 一般提供                  | すべて             |
-| 7.2.x          | 一般提供                  | すべて             |
-| 7.1.x          | 一般提供                  | すべて             |
-| 7.0.x          | 一般提供                  | すべて             |
-| 5.6.x          | メンテナンス (2023 年 12 月 31 日まで) | すべて             |
-| 5.5.x          | メンテナンス (2023 年 12 月 31 日まで) | すべて             |
-| 5.4.x          | メンテナンス (2023 年 12 月 31 日まで) | すべて             |
-
-PHP APM は以下の SAPI に対応しています。
-
-| SAPI           | サポートの種類    |
-|:---------------|:----------------|
-| apache2handler | 完全対応 |
-| cli            | 完全対応 |
-| fpm-fcgi       | 完全対応 |
-| cgi-fcgi       | 完全対応 |
-
-
-### インテグレーション
-
-#### Web フレームワークの互換性
-
-Datadog はデフォルトで、**すべての PHP Web フレームワークをサポート**し、フレームワークレベルのインスツルメンテーション、または一般的な Web トレースを行うことができます。
-
-フレームワークレベルのインスツルメンテーションには、内部メソッドのトレースとフレームワーク固有のタグ付けが含まれます。
-
-一般的な Web トレースには、データベースや HTTP クライアントなどのサポートされたライブラリのスパンに加えて、コールから発生したレイテンシーやエラーを追跡するための `web.request` スパンが含まれています。
-
-次の表は、Datadog が正常にトレースするフレームワークとバージョンの一部を示しています。
-
-**ウェブフレームワーク**:
-
-| モジュール         | バージョン             | サポートの種類               | インスツルメンテーションレベル           |
-|:-------------- |:---------------------|:---------------------------|:--------------------------------|
-| CakePHP        | 2.x                  | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| CodeIgniter    | 2.x                  | PHP 7+                     | フレームワークレベルのインスツルメンテーション |
-| CodeIgniter    | 3.x                  | PHP 7+                     | 一般的な Web トレース             |
-| Laravel        | 4.2、5.x、6.x        | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Laravel 8      | 8.x (トレーサー `0.52.0+`) | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Lumen          | 5.2+                 | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Symfony 3      | 3.3、3.4             | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Symfony 4      | 4.x                  | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Symfony 5      | 5.x (トレーサー `0.50.0+`) | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| WordPress      | 4.x、5.x             | PHP 7+                     | フレームワークレベルのインスツルメンテーション |
-| Zend Framework | 1.12                 | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Zend Framework | 2.x                  | サポートされているすべての PHP バージョン | 一般的な Web トレース             |
-| Yii            | 1.1、2.0             | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Drupal         |                      | サポートされているすべての PHP バージョン | 一般的な Web トレース             |
-| Magento        | 1、2                 | サポートされているすべての PHP バージョン | 一般的な Web トレース             |
-| Phalcon        | 1.3、3.4             | サポートされているすべての PHP バージョン | 一般的な Web トレース             |
-| Slim           | 2.x、3.x、4.x        | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Neos Flow      | 1.1                  | サポートされているすべての PHP バージョン | 一般的な Web トレース             |
-| FuelPHP        | 1.1                  | PHP 7+                     | 一般的な Web トレース             |
-
-このリストにウェブフレームワークがない場合でも、トレーサーの最新リリースではそのまま使用できます。
-
-Datadog では、PHP ウェブフレームワークのより詳細なトレースのためのサポートを継続的に追加しています。スパンメタデータおよびフレームワーク内部に対するさらなるサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
-
-#### CLI ライブラリの互換性
-
-デフォルトで、CLI SAPI からのトレースは無効になっています。PHP CLI スクリプトのトレースを有効にするには、`DD_TRACE_CLI_ENABLED=true` とします。
-
-| モジュール          | バージョン | サポートの種類    |
-|:----------------|:---------|:----------------|
-| CakePHP Console | 2.x      | 完全対応 |
-| Laravel Artisan | 5.x      | 完全対応 |
-
-追加 CLI ライブラリに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
-
-#### データストアの互換性
-
-| モジュール                                                                  | バージョン                   | サポートの種類    |
-|-------------------------------------------------------------------------|----------------------------|-----------------|
-| Amazon RDS (PDO または MySQLi 使用)                                        | *(対応する PHP)*      | 完全対応 |
-| Elasticsearch                                                           | 1.x                        | 完全対応 |
-| Eloquent                                                                | Laravel 対応バージョン | 完全対応 |
-| Memcached                                                               | *(対応する PHP)*      | 完全対応 |
-| MongoDB - [mongo][4] 拡張機能を使用                                      | 1.4.x                      | 完全対応 |
-| MySQLi                                                                  | *(対応する PHP)*      | 完全対応 |
-| PDO (MySQL、PostgreSQL、MariaDB)                                        | *(対応する PHP)*      | 完全対応 |
-| PhpRedis                                                                | 3、4、5                    | PHP 7、8        |
-| Predis                                                                  | 1.1                        | 完全対応 |
-
-追加データストアに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
-
-#### ライブラリの互換性
-
-| モジュール     | バージョン              | サポートの種類    |
-|:-----------|:----------------------|:----------------|
-| Curl       | *(対応する PHP)* | 完全対応 |
-| Guzzle     | 5.x                   | 完全対応 |
-| Guzzle     | 6.x                   | 完全対応 |
-
-ライブラリに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
-
-#### PHP 5 の深いコールスタック
-
-コールスタックは PHP 5 のみに限定されます。詳細は[深いコールスタックのトラブルシューティングページ][5]を参照してください。 
-
-### ジェネレータ
-
-[ジェネレータ][6]のインスツルメントは、PHP 5 および PHP 7 ではサポートされていません。
-
-### PCNTL
-
-Datadog は、[pcntl][7] を使ってフォークされたプロセスのトレースをサポートしません。`pcntl_fork` のコールが検出されると、フォークされたプロセスのトレースは無効化されます。メインプロセスはまだトレースすることができます。
-
-アプリケーションが `pcntl_unshare(CLONE_NEWUSER);` を実行し、トレーサーがインストールされている場合、アプリケーションは致命的にクラッシュします。これは、`CLONE_NEWUSER` を持つ `unshare` がプロセスを[スレッド化しない][8]ことを要求し、PHP トレーサーが別スレッドを使用してメインプロセスをブロックせずに Datadog Agent にトレースを送信するために起こります。
+  - **メジャーバージョンアップ** (例えば `1.0.0` から `2.0.0`) により、ランタイムのサポートが[ベータ版](#support-beta)/[GA](#support-ga)から[メンテナンス](#support-maintenance)/[EOL](#support-eol) に変更される場合があります。
+  - **マイナーバージョンアップ** (例えば `1.0.0` から `1.1.0`) は、あるランタイムのサポートレベルを下げることはありませんが、あるランタイムのサポートは追加されるかもしれません。
+  - **パッチバージョンアップ** (例えば `1.0.0` から `1.0.1`) によって、ランタイムのサポートが変更されることはありません。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-php
-[2]: https://www.datadoghq.com/support/
-[3]: /ja/help
-[4]: https://pecl.php.net/package/mongo
-[5]: /ja/tracing/troubleshooting/php_5_deep_call_stacks
-[6]: https://www.php.net/manual/en/language.generators.overview.php
-[7]: https://www.php.net/manual/en/book.pcntl.php
-[8]: https://man7.org/linux/man-pages/man2/unshare.2.html
+[1]: https://github.com/DataDog/dd-trace-dotnet
+[2]: /ja/tracing/compatibility_requirements/dotnet-framework/
+[3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
+[5]: /ja/help/
+[6]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
+[7]: https://github.com/dotnet/runtime/issues/23938
+[8]: /ja/agent/basic_agent_usage/?tab=agentv6v7
+[9]: /ja/agent/basic_agent_usage/?tab=agentv5
+[10]: https://www.datadoghq.com/support/
+[11]: https://semver.org/
