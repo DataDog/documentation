@@ -101,7 +101,7 @@ title: AWS の概要
 
     {{< img src="getting_started/integrations/new-account.png" alt="Datadog アカウントの AWS インテグレーションタイルに Account: New Account セクションが表示され、CloudFormation とのインテグレーション設定が完了待ちである旨のメッセージが表示されます。ステータスを確認するための更新ボタンと、ステータスを確認する前に CloudFormation のスタック生成を確認するための警告が表示されています。">}}
 
-   使用する AWS サービスや監視のユースケースに応じて、インテグレーションタイル内には収集するデータを指定するためのオプションが複数あります。例えば、AWS サービス、ネームスペース、またはタグに基づいてデータ収集を制限することができます。さらに、モニター通知をミュートすることを選択できます。例えば、手動でトリガーされたターミネーションや、[EC2 automuting][9] を有効にした自動スケーリングによってトリガーされたターミネーションなどです。必要に応じて、CloudWatch アラームを Datadog [イベントストリーム][11]に送るために [Alarm Collection][10] を有効にし、カスタムメトリクスを収集するかどうかを選択します。
+   使用する AWS サービスや監視のユースケースに応じて、インテグレーションタイル内には収集するデータを指定するためのオプションが複数あります。例えば、AWS サービス、ネームスペース、またはタグに基づいてデータ収集を制限することができます。さらに、モニター通知をミュートすることを選択できます。例えば、手動でトリガーされたターミネーションや、[EC2 automuting][9] を有効にした自動スケーリングによってトリガーされたターミネーションなどです。必要に応じて、CloudWatch アラームを Datadog [イベントエクスプローラー][11]に送るために [Alarm Collection][10] を有効にし、カスタムメトリクスを収集するかどうかを選択します。
 
 8. データ収集が開始されるまで最大 10 分待ち、すぐに使える [AWS 概要ダッシュボード][12]を表示し、AWS サービスやインフラストラクチャーから送信されるメトリクスを確認します。
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="Datadog アカウントの AWS 概要ダッシュボード。左側には AWS のロゴと、'No matching entries found' (該当するエントリーはありません) を示す AWS イベントグラフが表示されます。中央には、数値データが表示された EBS ボリューム関連のグラフと、一貫したデータを示すヒートマップが表示されています。右側には、数値データが表示された ELB 関連のグラフと、3 つのソースからのスパイク状のデータを示す時系列グラフが表示されています。">}}
@@ -200,7 +200,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [8]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [9]: /ja/integrations/amazon_ec2/#ec2-automuting
 [10]: /ja/integrations/amazon_web_services/?tab=roledelegation#alarm-collection
-[11]: /ja/events/stream/
+[11]: /ja/events/explorer
 [12]: https://app.datadoghq.com/screen/integration/7/aws-overview
 [13]: /ja/integrations/#cat-aws
 [14]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
