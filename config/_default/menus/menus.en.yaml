@@ -1,8 +1,33 @@
 main:
+  - name: Essentials
+    identifier: essentials_heading
+    weight: 1000000
+  - name: In The App
+    identifier: platform_heading
+    weight: 2000000
+  - name: Infrastructure
+    identifier: infrastructure_heading
+    weight: 3000000
+  - name: APM
+    identifier: apm_heading
+    weight: 4000000
+  - name: Log Management
+    identifier: log_management_heading
+    weight: 5000000
+  - name: Security Platform
+    identifier: security_platform_heading
+    weight: 6000000
+  - name: UX Monitoring
+    identifier: ux_monitoring_heading
+    weight: 7000000
+  - name: Administration
+    identifier: administration_heading
+    weight: 8000000
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
     pre: hex-ringed
+    parent: essentials_heading
     weight: 10000
   - name: Datadog
     identifier: getting_started_datadog
@@ -134,6 +159,7 @@ main:
   - name: Agent
     url: agent/
     pre: agent-fill
+    parent: essentials_heading
     weight: 30000
     identifier: agent
   - name: Basic Agent Usage
@@ -323,6 +349,7 @@ main:
   - name: Containers
     url: containers/
     identifier: containers
+    parent: infrastructure_heading
     weight: 40000
     pre: container
   - name: Docker
@@ -511,6 +538,7 @@ main:
     url: integrations/
     identifier: integrations_top_level
     pre: integrations
+    parent: essentials_heading
     weight: 45000
   - name: Observability Pipelines
     url: integrations/observability_pipelines/
@@ -556,6 +584,7 @@ main:
     url: watchdog/
     identifier: watchdog_top_level
     pre: watchdog
+    parent: platform_heading
     weight: 50000
   - name: Alerts
     url: watchdog/alerts
@@ -581,6 +610,7 @@ main:
     url: events/
     identifier: events_top_level
     pre: events
+    parent: platform_heading
     weight: 60000
   - name: Explorer
     url: events/explorer/
@@ -612,6 +642,7 @@ main:
     url: dashboards/
     pre: dashboard
     identifier: dashboards
+    parent: platform_heading
     weight: 70000
   - name: Widgets
     url: dashboards/widgets/
@@ -811,11 +842,13 @@ main:
     url: mobile/
     identifier: mobile
     pre: mobile
+    parent: platform_heading
     weight: 80000
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
     pre: host-map
+    parent: infrastructure_heading
     weight: 90000
   - name: Infrastructure List
     url: infrastructure/list/
@@ -856,6 +889,7 @@ main:
     url: serverless
     pre: serverless
     identifier: serverless
+    parent: infrastructure_heading
     weight: 100000
   - name: Installation
     url: serverless/installation
@@ -972,6 +1006,7 @@ main:
     url: metrics/
     identifier: metrics_top_level
     pre: metric
+    parent: platform_heading
     weight: 110000
   - name: Explorer
     url: metrics/explorer/
@@ -1043,11 +1078,13 @@ main:
     url: notebooks/
     identifier: notebooks
     pre: notebook
+    parent: platform_heading
     weight: 120000
   - name: Alerting
     url: monitors/
     pre: monitor
     identifier: alerting
+    parent: platform_heading
     weight: 130000
   - name: Create Monitors
     url: monitors/create/
@@ -1258,6 +1295,7 @@ main:
     url: tracing/
     pre: apm
     identifier: tracing
+    parent: apm_heading
     weight: 140000
   - name: APM Terms and Concepts
     url: tracing/glossary/
@@ -1851,6 +1889,7 @@ main:
     url: continuous_integration/
     pre: ci
     identifier: ci
+    parent: apm_heading
     weight: 150000
   - name: Tracing Tests
     url: continuous_integration/setup_tests/
@@ -1966,6 +2005,7 @@ main:
     url: database_monitoring/
     pre: database-2
     identifier: dbm
+    parent: apm_heading
     weight: 160000
   - name: Setup Architectures
     url: database_monitoring/architecture/
@@ -2106,6 +2146,7 @@ main:
     url: logs/
     pre: log
     identifier: log_management
+    parent: log_management_heading
     weight: 170000
   - name: Log Collection & Integrations
     url: logs/log_collection/
@@ -2279,6 +2320,7 @@ main:
     url: security_platform/
     pre: security-platform
     identifier: security_platform
+    parent: security_platform_heading
     weight: 180000
   - name: Cloud SIEM
     url: security_platform/cloud_siem/
@@ -2482,6 +2524,7 @@ main:
     url: synthetics/
     pre: synthetics
     identifier: synthetics
+    parent: ux_monitoring_heading
     weight: 190000
   - name: API Tests
     url: synthetics/api_tests/
@@ -2652,6 +2695,7 @@ main:
     url: real_user_monitoring/
     pre: rum
     identifier: rum
+    parent: ux_monitoring_heading
     weight: 155000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
@@ -2917,6 +2961,7 @@ main:
     url: network_monitoring/
     pre: network
     identifier: nm_parent
+    parent: infrastructure_heading
     weight: 200000
   - name: Network Performance Monitoring
     url: network_monitoring/performance/
@@ -2987,6 +3032,7 @@ main:
     url: developers/
     pre: dev-code
     identifier: dev_tools
+    parent: essentials_heading
     weight: 210000
   - name: DogStatsD
     url: developers/dogstatsd/
@@ -3102,11 +3148,13 @@ main:
     url: api/
     pre: api
     identifier: api
+    parent: essentials_heading
     weight: 220000
   - name: Account Management
     url: account_management/
     pre: cog-2
     identifier: account_management
+    parent: administration_heading
     weight: 230000
   - name: Switching Between Orgs
     url: account_management/org_switching/
@@ -3216,6 +3264,7 @@ main:
     url: data_security/
     pre: security-lock
     identifier: data_security
+    parent: administration_heading
     weight: 240000
   - name: Agent
     url: data_security/agent/
@@ -3241,6 +3290,7 @@ main:
     url: help/
     pre: info-fill
     identifier: help_top_level
+    parent: administration_heading
     weight: 240000
   - name: Aggregating Agents
     url: agent/vector_aggregation/
