@@ -52,6 +52,7 @@ clean-virt                Remove python virtual env.
 clean                     Clean all make installs.
 examples                  Build the examples.
 hugpython                 Build virtualenv used for tests.
+source-helpers            Source the helper functions used to build, test, deploy.
 start-docker              Start server in a docker container.
 start-no-pre-build        Build the documentation without automatically pulled content.
 start                     Build the documentation with all external content.
