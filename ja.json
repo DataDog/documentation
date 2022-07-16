@@ -48,7 +48,7 @@
   },
 
   "email_support_sentence": {
-    "other": "サポートチームへのお問い合わせは、Datadog のサポート Web サイトからお願いします。(すべてのサイト)"
+    "other": "サポートチームへのお問い合わせは、<a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog のサポート Web サイト</a>で受け付けています。(すべてのサイト)。<br><br>サポート Web サイトへのログイン方法の詳細については、<a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\">サポートチケットにアクセスする</a>を参照してください。"
   },
 
   "live_chat_support_sentence": {
