@@ -1552,6 +1552,11 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_proxies
     weight: 107
+  - name: Span tags semantic
+    url: tracing/trace_collection/tracing_naming_convention
+    parent: tracing_trace_collection
+    identifier: tracing_naming_convention
+    weight: 108
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
