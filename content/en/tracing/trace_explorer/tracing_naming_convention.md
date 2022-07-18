@@ -1,5 +1,5 @@
 ---
-title: Span tags naming convention
+title: Span tags semantic
 kind: documentation
 further_reading:
     - link: 'logs/log_configuration/attributes_naming_convention'
@@ -13,13 +13,13 @@ further_reading:
       text: 'Learn how to explore your traces'
 ---
 
-# Overview
+## Overview
 [Datadog tracing libraries][3] provide out-of-the-box support for instrumenting a variety of libraries.
 These instrumentations generate spans to represent logical unit of work in distributed systems.
 Each span consists of [span tags][4] providing extra layers of information on the unit of work happening on the system. The naming convention describe the name and content that can be used in span events.
 
-# Span tags naming convention
-## Core
+## Span tags naming convention
+### Core
 The following span tags relates to the core concepts to describe the instrumentation used and the kind of operation performed.
 
 | **Name**    | **Type** | **Description**                                                                                                                                                                                                                                                                   |
@@ -30,7 +30,7 @@ The following span tags relates to the core concepts to describe the instrumenta
 | `span.kind` | `string` | String representing the type of work unit handled by the span. Can be one of `server`, `client`, `producer`, `consumer` or `internal`.<br>More information from [OpenTelemetry SpanKind documentation][1] |
 | `component` | `string` | The name of the library/integration which created the span                                                                                                                                                                                                                        |
 
-## Network communications
+### Network communications
 The following span tags can be used to describe work units corresponding to network communications:
 
 | **Fullname**                    | **Type** | **Description**                                                           |
@@ -46,7 +46,7 @@ The following span tags can be used to describe work units corresponding to netw
 | `network.client.transport`      | `string` | Transport protocol used to make the inbound connection                    |
 | `network.destination.transport` | `string` | Transport protocol used to make the outbound connection                   |
 
-## HTTP requests
+### HTTP requests
 The following span tags can be used to describe HTTP client and server spans:
 
 | **Fullname**                                | **Type** | **Description**                                                                                                                                                    |
@@ -65,7 +65,7 @@ The following span tags can be used to describe HTTP client and server spans:
 | `http.response.headers.*`                   | `string` | The response HTTP headers. None are collected by default but can optionally be configured with `DD_TRACE_HEADER_TAGS`.                                             |
 
 
-## Database
+### Database
 The following span tags can be used to describe Databases spans:
 
 | **Fullname**           | **Type** | **Description**                                                                                              |
@@ -81,7 +81,7 @@ The following span tags can be used to describe Databases spans:
 
 Additional attributes for specific database technologies will use the prefix `db.<db.system>`.
 
-## Message Queue
+### Message Queue
 The following span tags can be used to describe spans corresponding to messaging systems:
 
 | **Fullname**                     | **Type** | **Description**                                                                                                                                                                                                                  |
@@ -100,7 +100,7 @@ The following span tags can be used to describe spans corresponding to messaging
 
 Additional attributes for specific database technologies will use the prefix `messaging.<messaging.system>`.
 
-## Remote procedure calls
+### Remote procedure calls
 The following span tags can be used to describe spans corresponding to remote procedure calls such as RMI or gRPC:
 
 | **Fullname**  | **Type** | **Description**                      |
@@ -109,7 +109,7 @@ The following span tags can be used to describe spans corresponding to remote pr
 | `rpc.service` | `string` | The name of the service being called |
 | `rpc.method`  | `string` | The name of the method being called  |
 
-## Errors
+### Errors
 The following span tags can be used to describe errors associated with spans:
 
 | **Fullname**    | **Type** | **Description**                                                  |
