@@ -118,6 +118,9 @@ The following span tags can be used to describe errors associated with spans:
 | `error.type`    | `string` | A concise, human-readable, one-line message explaining the event |
 | `error.stack`   | `string` | The stack trace or the complementary information about the error |
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
 [2]: /tracing/setup_overview/configure_data_security/
