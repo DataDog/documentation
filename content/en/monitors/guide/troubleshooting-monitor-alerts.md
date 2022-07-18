@@ -24,11 +24,11 @@ further_reading:
 
 ## Overview
 
-This guide provides an overview of some foundational concepts that can help you determine if your monitor's alerting behavior is warranted. If you suspect that your monitor evaluations are not accurately reflecting the underlying data, inspect the monitor to determine if it is misconfigured. This section provides an overview of foundational concepts that can help this evaluation process.
+This guide provides an overview of some foundational concepts that can help you determine if your monitor's alerting behavior is valid. If you suspect that your monitor's evaluations are not accurately reflecting the underlying data, refer to the sections below as you inspect your monitor.
 
 ### Monitor state and monitor status
 
-While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status. See below for some potential causes of this:
+While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status. See below for some potential causes:
 
 - **Data is too sparse within the monitor evaluation window**
 
@@ -52,11 +52,11 @@ For a multi-alert monitor, a group is a set of tags with one value for each grou
 
 By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. See [Monitor settings changes not taking effect][9] for more information.
 
-For some multi-alert monitors, you may want to configure a delay for new groups to be evaluated. This can help you to avoid alerts from expected behavior of new groups, such as high resource usage associated with the creation of a new container. Read [new group delay][10] for more information.
+If you anticipate new monitor groups to be created within the scope of your multi-alert monitors, you may want to configure a delay for the evaluation of these new groups. This can help you to avoid alerts from expected behavior of new groups, such as high resource usage associated with the creation of a new container. Read [new group delay][10] for more information.
 
 If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
 
-### Notification controls
+### Notification issues
 
 If your monitor is behaving as expected, but producing unwanted notifications, there are multiple options to reduce or suppress notifications:
 
@@ -64,14 +64,14 @@ If your monitor is behaving as expected, but producing unwanted notifications, t
 - For alerts which are expected or are otherwise not useful for your organization, use [Downtimes][14] to suppress unwanted notifications.
 - To control alert routing, use [template variables][15] and the separation of **warning** or **alert** states with[conditional variables][16].
 
-### Absent notifications
+#### Absent notifications
 
 If you suspect that notifications are not being properly delivered, check the items below to ensure that notifications are able to be delivered:
 
 - Check [email preferences][17] for the recipient and ensure that `Notification from monitor alerts` is checked.
 - Check the [event stream][18] for events with the string `Error delivering notification`.
 
-### Opsgenie multi-notification
+#### Opsgenie multi-notification
 
 If you are using multiple @opsgenie-[...] notifications in your monitor, we send those notifications with the same alias to opsgenie.
 Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplication.
