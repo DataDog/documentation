@@ -275,6 +275,14 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 {{% /tab %}}
 {{< /tabs >}}
 
+## Automatic service tagging
+
+Universal Service Monitoring automatically detects services running in your infrastructure. If it does not find [unified service tags][1], it assigns them a name based on one of the tags: `app`, `short_image`, `kube_container_name`, `container_name`, `kube_deployment`, `kube_service`.
+
+To update the service's name, use [unified service tagging][1].
+
+{{< img src="tracing/universal_service_monitoring/automatic-service-tagging.png" alt="When Datadog automatically detects your services, the tag used for this is shown on the top of the service page" style="width:100%;" >}}
+
 ## Exploring your services
 
 After you configure the Agent, wait about five minutes for your service to appear in the APM Services List. Click the service to see the APM service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring.
