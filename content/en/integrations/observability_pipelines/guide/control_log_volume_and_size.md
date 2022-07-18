@@ -12,13 +12,15 @@ further_reading:
 
 ## Overview
 
-As your organization scales, your log volume grows, which means that the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Vector transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
+Because your log volume grows as your organization scales, the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Vector transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
 
-This guide assumes that you have [Vector installed and configured][1], such that you’re collecting data from your sources and routing them to your destinations. It also assumes that you are familiar with [the basics of configuring Vector][2].
+## Prerequisites
+- You have [installed and configured Vector][1] to collect data from your sources and route it to your destinations.
+- You are familiar with [the basics of configuring Vector][2].
 
 ## Use transforms to manage log volumes
 
-In Observability Pipelines, `transforms` perform an action that modifies events, where events are logs, metrics, and traces flowing through the pipeline. 
+In Observability Pipelines, a **transform** performs an action that modifies events, where events are logs, metrics, or traces flowing through the pipeline. 
 
 ### Deduplicate events 
 
@@ -195,9 +197,9 @@ In scenarios where you want to understand behavior over time, metrics around an 
 
 You can generate four types of metrics:
 
-- Counter, which is useful to count the number of instances of logs with a specific tag. It can be incremented or resent to zero. 
+- Counter, which is useful to count the number of instances of logs with a specific tag. A count can be incremented, or reset to zero. 
 - Distribution, which represents the distribution of sampled values. This is useful for generating summaries and histograms.
-- Gauge, which represents a single numerical value that can arbitrarily go up and down. This is useful to track values that fluctuates frequently. 
+- Gauge, which represents a single numerical value that can arbitrarily go up or down. This is useful to track values that fluctuate frequently. 
 - Set, which consolidates unique values in an array. This can be useful to collect unique IP addresses, for example. 
 
 The example below illustrates a configuration for generating a `counter` metric , where `metrics` defines the key/value pairs to be added to the event.
@@ -292,9 +294,9 @@ The following metric is generated:
 
 ### Collapse multiple events into a single log
 
-In some cases, multiple logs can be consolidated into a single log, so another way to cut down on log volume is to merge multiple logs into a single log. Use the [reduce transform][9] to reduce multiple logs into one. 
+In some cases, multiple logs can be consolidated into a single log. Thus, another way to cut down on log volume is to merge multiple logs into a single log. Use the [reduce transform][9] to reduce multiple logs into one. 
 
-The example below uses a reduce transform configuration to merge multiple Ruby log exceptions event.
+The example below uses a reduce transform configuration to merge multiple Ruby log exceptions events.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -358,9 +360,9 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
 
 In the reduce transform, `group_by` is an ordered list of fields used to group events. In this example, the events are grouped by `host`, `pid`, and `tid` fields. 
 
-`merge_strategies` is a map of field names to custom merge strategies. There are [different merge strategies][10], ranging from `array`, where each value is appended to an array, to `sum`, which adds all numeric values. In this example, `concat_newline` is used, where each string value is concatenated then delimited by a newline.
+`merge_strategies` is a map of field names to custom merge strategies. There are [different merge strategies][10], including `array`, where each value is appended to an array, and `sum`, which adds all numeric values. In this example, `concat_newline` is used, where each string value is concatenated, then delimited by a newline.
 
-`starts_when` is a condition used to distinguish the first event of a transaction. If this condition resolves to `true` for an event, the previous transaction is flushed without this event and a new transaction is started. In this example, events with `.message` that do not match the `^[^\\s]` regular expression condition are reduced into a single event. 
+`starts_when` is a condition used to distinguish the first event of a transaction. If this condition resolves to `true` for an event, the previous transaction is flushed without this event, and a new transaction is started. In this example, events with `.message` that do not match the `^[^\\s]` regular expression condition are reduced into a single event. 
 
 If the following Ruby exception logs are passed through the configuration above:
 
