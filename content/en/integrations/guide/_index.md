@@ -6,7 +6,6 @@ private: true
 ---
 
 {{< whatsnext desc="General guides:" >}}
-    {{< nextlink href="integrations/guide/requests" tag="documentation" >}}Request Datadog integrations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-portal" tag="Azure" >}}Datadog in the Azure Portal{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag="Azure" >}}Azure Cloud Adoption Framework with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag="Windows" >}}Add event log files to the `Win32_NTLogEvent` WMI class{{< /nextlink >}}

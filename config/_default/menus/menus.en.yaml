@@ -74,6 +74,11 @@ main:
     url: getting_started/integrations/aws/
     weight: 601
     parent: getting_started_integrations
+  - name: Requesting integrations
+    identifier: requests
+    url: getting_started/integrations/requests/
+    weight: 602
+    parent: getting_started_integrations
   - name: Dashboards
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
