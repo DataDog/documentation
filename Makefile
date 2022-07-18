@@ -133,6 +133,8 @@ clean-auto-doc: ## Remove all doc automatically created
 	rm -f content/en/real_user_monitoring/android/mobile_vitals.md ;fi
 	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
 	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
+	@if [ content/en/real_user_monitoring/android/web_view_tracking.md ]; then \
+	rm -f content/en/real_user_monitoring/android/web_view_tracking.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
 	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/ios.md ]; then \
