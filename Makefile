@@ -69,6 +69,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'carbon_black.md' \
 		-a -not -name 'cloudability.md' \
 		-a -not -name 'cloudcheckr.md' \
+		-a -not -name 'content_security_policy_reports.md' \
 		-a -not -name 'fluentbit.md' \
 		-a -not -name 'iam_access_analyzer.md' \
 		-a -not -name 'integration_sdk.md' \
