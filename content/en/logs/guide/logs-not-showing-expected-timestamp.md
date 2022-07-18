@@ -17,7 +17,7 @@ further_reading:
 
 By default, when logs are received by the Datadog intake API, a timestamp is generated and appended as a date attribute. However, this default timestamp does not always reflect the actual timestamp that might be contained in the log itself. This guides walks you through how to override the default timestamp with the actual timestamp.
 
-{{< img src="logs/guide/log_timestamp_1.png" alt="Log panel showing the log timestamp that is different from the timestamp in the message" style="width:75%;">}}
+{{< img src="logs/guide/log_timestamp_1.png" alt="Log panel showing the log timestamp that is different from the timestamp in the message" style="width:70%;">}}
 
 ## Displayed timestamp
 
@@ -88,7 +88,7 @@ JSON logs are automatically parsed in Datadog. The log `date` attribute is a [re
 
 In the below example, the actual timestamp of the log is the value of the `mytimestamp` attribute and not the log timestamp `Dec 13, 2017 at 14:16:45.158`.
 
-{{< img src="logs/guide/log_timestamp_6.png" alt="Log panel showing the log timestamp which is different from the mytimestamp attribute value in the message" style="width:75%;">}}
+{{< img src="logs/guide/log_timestamp_6.png" alt="Log panel showing the log timestamp which is different from the mytimestamp attribute value in the message" style="width:50%;">}}
 
 ### Supported date formats
         
