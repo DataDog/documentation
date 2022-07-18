@@ -62,7 +62,7 @@ If your monitor is behaving as expected, but producing unwanted notifications, t
 
 - For monitors that rapidly change between states, read [reduce alert flapping][13] for ways to minimize alert fatigue. 
 - For alerts which are expected or are otherwise not useful for your organization, use [Downtimes][14] to suppress unwanted notifications.
-- To control alert routing, use [template variables][15] and the separation of **warning** or **alert** states with[conditional variables][16].
+- To control alert routing, use [template variables][15] and the separation of **warning** or **alert** states with [conditional variables][16].
 
 #### Absent notifications
 
