@@ -142,36 +142,6 @@ To add service ownership information such as team name, Slack channels, and sour
 
 You can also manage service ownership information for services that do not emit any Datadog telemetry. To register a service, specify the service ownership, on-call information, and custom tags using the [Service Definition API][5]. 
 
-See the example service definition YAML:
-
-```yaml
----
-schema-version: v2
-dd-service: product-recommendation-lite
-team: Shopist
-contacts:
-  - type: slack
-    contact: https://exampleco.slack.com/archives/S319HSDB32
-links: 
-  - name: Demo Dashboard
-    type: dashboard
-    url: https://app.datadoghq.com/dashboard/abc-def-ghi
-repos: 
-  - name: Source 
-    provider: github 
-    url: https://github.com/DataDog/shopist/tree/prod/product-recommendation-lite
-  - name: Deployment 
-    provider: github 
-    url: https://github.com/DataDog/shopist/blob/prod/k8s/dd-trace-demo/templates/product-recommendation-lite-deployment.yaml
-docs: 
-  - name: Datadog Doc
-    provider: link
-    url: https://docs.datadoghq.com/tracing/faq/service_catalog/
-tags: []
-```
-
-To register multiple services in one YAML file, separate each service definition with a line containing three hyphens: `---`.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

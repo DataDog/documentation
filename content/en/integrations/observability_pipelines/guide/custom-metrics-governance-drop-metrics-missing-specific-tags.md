@@ -1,6 +1,8 @@
 ---
 title: Custom Metrics Governance - Drop Metrics Missing Specific Tags
 kind: guide
+dependencies:
+  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags.md"]
 aliases:
   - /metrics/custom_metrics/guide/custom-metrics-governance-drop-metrics-missing-specific-tags
 further_reading:

@@ -43,16 +43,20 @@ After you have a config file, run `make help` to see options:
 
 ```text
 clean-all                 Clean everything.
+clean-auto-doc            Remove all doc automatically created.
 clean-build               Remove build artifacts.
 clean-exe                 Remove execs.
 clean-integrations        Remove built integrations files.
 clean-node                Remove node_modules.
 clean-virt                Remove python virtual env.
 clean                     Clean all make installs.
+examples                  Build the examples.
 hugpython                 Build virtualenv used for tests.
 source-helpers            Source the helper functions used to build, test, deploy.
+start-docker              Start server in a docker container.
 start-no-pre-build        Build the documentation without automatically pulled content.
 start                     Build the documentation with all external content.
+stop-docker               Stop the running docker container.
 stop                      Stop wepack watch/hugo server.
 ```
 

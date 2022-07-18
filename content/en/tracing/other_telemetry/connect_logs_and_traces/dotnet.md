@@ -194,7 +194,7 @@ The final step to enable automatic correlation identifier injection is to:
 
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
-**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [correlated logs in the Trace ID panel][9] for more information.
+**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
 
 ## Manual injection
 
@@ -209,7 +209,7 @@ If you prefer to manually correlate your traces with your logs, you can add corr
   | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
 
 
-**Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see the [FAQ on this topic][10].
+**Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see [Correlated Logs Not Showing Up in the Trace ID Panel][10].
 
 **Note**: If you are using Serilog, Nlog or log4net through ILogger, see the Microsoft.Extensions.Logging section to configure these properties using `BeginScope()`.
 
@@ -339,8 +339,8 @@ Ensure that log collection is configured in the Datadog Agent and that the [Logs
 [6]: /tracing/trace_collection/library_config/dotnet-core/#configuring-the-net-tracer
 [7]: /logs/log_collection/csharp/
 [8]: /logs/log_configuration/processors/?tab=ui#trace-remapper
-[9]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=withlogintegration
-[10]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[9]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=withlogintegration
+[10]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [11]: https://www.nuget.org/packages/Datadog.Trace/
 [12]: https://nblumhardt.com/2016/11/ilogger-beginscope/
 [13]: https://github.com/NLog/NLog.Extensions.Logging/wiki/NLog-properties-with-Microsoft-Extension-Logging

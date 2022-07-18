@@ -51,7 +51,7 @@ Otherwise, to begin tracing your applications:
 2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, logs injection (if you are sending logs to Datadog), and trace volume control, add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
     ```text
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
     ```
 
     **Note:** Enabling profiling may impact your bill depending on your APM bundle. See the [pricing page][5] for more information.
