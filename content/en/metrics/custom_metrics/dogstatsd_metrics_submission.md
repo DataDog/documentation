@@ -86,7 +86,7 @@ statsd = Datadog::Statsd.new('localhost', 8125, tags: ['environment:dev'])
 
 while true do
     statsd.increment('example_metric.increment')
-    statsd.increment('example_metric.increment', tags: ['another': 'tag'])
+    statsd.increment('example_metric.increment', tags: ['another:tag'])
     statsd.decrement('example_metric.decrement')
     statsd.count('example_metric.count', 2)
     sleep 10

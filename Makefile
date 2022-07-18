@@ -94,7 +94,7 @@ clean-integrations:  ## Remove built integrations files.
 		find ./static/images/marketplace -type f \
 	    -exec rm -rf {} \; ;fi
 
-clean-auto-doc: ##Remove all doc automatically created
+clean-auto-doc: ## Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/agent/basic_agent_usage/ansible.md ]; then \
@@ -161,6 +161,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/ruby.md ;fi
+	@if [ content/en/tracing/trace_collection/dd_libraries/ruby.md ]; then \
+	rm -f content/en/tracing/trace_collection/dd_libraries/ruby.md ;fi
 	@if [ content/en/integrations/guide/amazon_cloudformation.md ]; then \
 	rm -f content/en/integrations/guide/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
@@ -173,6 +175,12 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/guide/forwarder.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
+	@if [ content/en/tracing/trace_collection/dd_libraries/android.md ]; then \
+	rm -f content/en/tracing/trace_collection/dd_libraries/android.md ;fi
+	@if [ content/en/tracing/setup_overview/setup/ios.md ]; then \
+	rm -f content/en/tracing/setup_overview/setup/ios.md ;fi
+	@if [ content/en/tracing/trace_collection/dd_libraries/ios.md ]; then \
+	rm -f content/en/tracing/trace_collection/dd_libraries/ios.md ;fi
 	@if [ content/en/security_platform/cloud_workload_security/agent_expressions.md ]; then \
 	rm -f content/en/security_platform/cloud_workload_security/agent_expressions.md ;fi
 	@if [ content/en/security_platform/cloud_workload_security/backend.md ]; then \
@@ -243,7 +251,7 @@ clean-ruby-examples:
 clean-typescript-examples:
 	@git clean -xdf content/en/api/**/*.ts*
 
-clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples clean-typescript-examples
+clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples clean-typescript-examples ## Remove the examples.
 	@rm -rf examples
 
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
@@ -289,13 +297,13 @@ examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
 examples/typescript: examples/datadog-api-client-typescript clean-typescript-examples
 	-cp -Rn examples/datadog-api-client-typescript/examples/v* ./content/en/api
 
-examples: examples/go examples/java examples/python examples/ruby examples/typescript
+examples: examples/go examples/java examples/python examples/ruby examples/typescript ## Build the examples.
 
-start-docker: clean
+start-docker: clean ## Start server in a docker container.
 	@export REPO_PATH=$(PWD) && \
 	export GITHUB_TOKEN=${GITHUB_TOKEN} && \
 	export FULL_BUILD=${FULL_BUILD} && \
 	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -p docs-local -f ./docker-compose-docs.yml up
 
-stop-docker:
+stop-docker: ## Stop the running docker container.
 	docker-compose -f ./docker-compose-docs.yml down

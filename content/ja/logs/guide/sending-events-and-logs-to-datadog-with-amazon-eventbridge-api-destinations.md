@@ -1,11 +1,12 @@
 ---
-title: Amazon EventBridge API 宛先でイベントおよびログを Datadog へ送信
-kind: ガイド
 further_reading:
-  - link: https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog
-    tag: ブログ
-    text: API 宛先のユースケース例を示す AWS ブログ
+- link: https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog
+  tag: ブログ
+  text: API 宛先のユースケース例を示す AWS ブログ
+kind: ガイド
+title: Amazon EventBridge API 宛先でイベントおよびログを Datadog へ送信
 ---
+
 Amazon EventBridge は、イベント駆動型アプリケーションの構築を可能にするサーバーレスイベントバスです。 EventBridge は AWS サービスと統合可能ですが、API 宛先機能を利用すると、API を使用して AWS 外からのデータをプッシュ/プルできます。このガイドでは、EventBridge から Datadog へイベントおよびログを送信する方法を解説します。Datadog から EventBridge へのイベントのプッシュに関する詳細は、[EventBridge インテグレーション文書][1]をご参照ください。
 
 ## セットアップ
@@ -24,7 +25,7 @@ Amazon EventBridge は、イベント駆動型アプリケーションの構築�
     echo "test" > testfile.txt
     aws s3 cp testfile.txt s3://YOUR_BUCKET_NAME
     ```
-4. およそ 5 分後、イベントとログが送信されると、Datadog の[ログコンソール][11]または[イベントストリーム][12]（送信先となっているエンドポイントに基づき ます）でデータが利用可能になります。
+4. およそ 5 分後、イベントとログが送信されると、Datadog の[ログコンソール][11]または[イベントエクスプローラー][12]（送信先となっているエンドポイントに基づき ます）でデータが利用可能になります。
 
 ## その他の参考資料
 
@@ -42,4 +43,4 @@ Amazon EventBridge は、イベント駆動型アプリケーションの構築�
 [9]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
 [10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
 [11]: https://app.datadoghq.com/logs
-[12]: https://app.datadoghq.com/event/stream
+[12]: https://app.datadoghq.com/event/explorer

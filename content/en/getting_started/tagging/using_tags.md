@@ -55,7 +55,7 @@ To create an aggregated group using tags, enter the key part of the tag in the *
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="Tags in Dashboards avg by text box" style="width:80%;">}}
 
-Tags can also be used to overlay events on the dashboard. This works the same way as in the [Events Stream][2].
+Tags can also be used to overlay events on the dashboard. This works the same way as in the [Events Explorer][2].
 Enter `tags:` followed by the tag. The matching events are overlaid as vertical bars on the graph. The example below uses `tags:service:coffee-house`.
 
 {{< img src="tagging/using_tags/dashboardeventtags.png" alt="Event Overlays in Dashboards" style="width:80%;">}}
@@ -348,7 +348,7 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 Tags can be used in various ways with the [API][17]. See the list below for links to those sections:
 
 * [Schedule monitor downtime][18]
-* [Query the event stream][19]
+* [Query the event explorer][19]
 * [Search hosts][20]
 * Integrations for [AWS][21] and [Google Cloud][22]
 * [Querying timeseries points][23]

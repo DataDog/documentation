@@ -434,6 +434,15 @@
           "type": "string"
         }
       },
+      "SignalID": {
+        "description": "The ID of the signal.",
+        "in": "path",
+        "name": "signal_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "UserID": {
         "description": "The ID of the user.",
         "in": "path",
@@ -22283,13 +22292,12 @@
         ]
       },
       "MetricIntakeType": {
-        "description": "The type of metric.",
+        "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
         "enum": [
           0,
           1,
           2,
-          3,
-          15
+          3
         ],
         "format": "int32",
         "type": "integer",
@@ -22297,8 +22305,7 @@
           "UNSPECIFIED",
           "COUNT",
           "RATE",
-          "GAUGE",
-          "UNSPECIFIED_LEGACY"
+          "GAUGE"
         ]
       },
       "MetricMetadata": {
@@ -22488,13 +22495,12 @@
                   "type": "array"
                 },
                 "type": {
-                  "description": "The type of metric.",
+                  "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
                   "enum": [
                     0,
                     1,
                     2,
-                    3,
-                    15
+                    3
                   ],
                   "format": "int32",
                   "type": "integer",
@@ -22502,8 +22508,7 @@
                     "UNSPECIFIED",
                     "COUNT",
                     "RATE",
-                    "GAUGE",
-                    "UNSPECIFIED_LEGACY"
+                    "GAUGE"
                   ]
                 },
                 "unit": {
@@ -22666,13 +22671,12 @@
             "type": "array"
           },
           "type": {
-            "description": "The type of metric.",
+            "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
             "enum": [
               0,
               1,
               2,
-              3,
-              15
+              3
             ],
             "format": "int32",
             "type": "integer",
@@ -22680,8 +22684,7 @@
               "UNSPECIFIED",
               "COUNT",
               "RATE",
-              "GAUGE",
-              "UNSPECIFIED_LEGACY"
+              "GAUGE"
             ]
           },
           "unit": {
@@ -34410,6 +34413,176 @@
         },
         "type": "object"
       },
+      "SecurityMonitoringSignalArchiveComment": {
+        "description": "Optional comment to display on archived signals.",
+        "type": "string"
+      },
+      "SecurityMonitoringSignalArchiveReason": {
+        "description": "Reason a signal is archived.",
+        "enum": [
+          "none",
+          "false_positive",
+          "testing_or_maintenance",
+          "other"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "NONE",
+          "FALSE_POSITIVE",
+          "TESTING_OR_MAINTENANCE",
+          "OTHER"
+        ]
+      },
+      "SecurityMonitoringSignalAssigneeUpdateAttributes": {
+        "description": "Attributes describing the new assignee of a security signal.",
+        "properties": {
+          "assignee": {
+            "description": "Object representing a given user entity.",
+            "properties": {
+              "handle": {
+                "description": "The handle for this user account.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Numerical ID assigned by Datadog to this user account.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "name": {
+                "description": "The name for this user account.",
+                "type": "string"
+              },
+              "uuid": {
+                "description": "UUID assigned by Datadog to this user account.",
+                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                "type": "string"
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "type": "object"
+          },
+          "version": {
+            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "assignee"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalAssigneeUpdateData": {
+        "description": "Data containing the patch for changing the assignee of a signal.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes describing the new assignee of a security signal.",
+            "properties": {
+              "assignee": {
+                "description": "Object representing a given user entity.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle for this user account.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Numerical ID assigned by Datadog to this user account.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "The name for this user account.",
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "description": "UUID assigned by Datadog to this user account.",
+                    "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uuid"
+                ],
+                "type": "object"
+              },
+              "version": {
+                "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                "format": "int64",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "assignee"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalAssigneeUpdateRequest": {
+        "description": "Request body for changing the assignee of a given security monitoring signal.",
+        "properties": {
+          "data": {
+            "description": "Data containing the patch for changing the assignee of a signal.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes describing the new assignee of a security signal.",
+                "properties": {
+                  "assignee": {
+                    "description": "Object representing a given user entity.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle for this user account.",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Numerical ID assigned by Datadog to this user account.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "The name for this user account.",
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "description": "UUID assigned by Datadog to this user account.",
+                        "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid"
+                    ],
+                    "type": "object"
+                  },
+                  "version": {
+                    "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "assignee"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
       "SecurityMonitoringSignalAttributes": {
         "description": "The object containing all signal attributes and their\nassociated values.",
         "properties": {
@@ -34453,6 +34626,115 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "SecurityMonitoringSignalIncidentIds": {
+        "description": "Array of incidents that are associated with this signal.",
+        "items": {
+          "description": "Public ID attribute of the incident that is associated with the signal.",
+          "example": 2066,
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": "array"
+      },
+      "SecurityMonitoringSignalIncidentsUpdateAttributes": {
+        "description": "Attributes describing the new list of related signals for a security signal.",
+        "properties": {
+          "incident_ids": {
+            "description": "Array of incidents that are associated with this signal.",
+            "items": {
+              "description": "Public ID attribute of the incident that is associated with the signal.",
+              "example": 2066,
+              "format": "int64",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "version": {
+            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "incident_ids"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalIncidentsUpdateData": {
+        "description": "Data containing the patch for changing the related incidents of a signal.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes describing the new list of related signals for a security signal.",
+            "properties": {
+              "incident_ids": {
+                "description": "Array of incidents that are associated with this signal.",
+                "items": {
+                  "description": "Public ID attribute of the incident that is associated with the signal.",
+                  "example": 2066,
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              "version": {
+                "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                "format": "int64",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "incident_ids"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalIncidentsUpdateRequest": {
+        "description": "Request body for changing the related incidents of a given security monitoring signal.",
+        "properties": {
+          "data": {
+            "description": "Data containing the patch for changing the related incidents of a signal.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes describing the new list of related signals for a security signal.",
+                "properties": {
+                  "incident_ids": {
+                    "description": "Array of incidents that are associated with this signal.",
+                    "items": {
+                      "description": "Public ID attribute of the incident that is associated with the signal.",
+                      "example": 2066,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "type": "array"
+                  },
+                  "version": {
+                    "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "incident_ids"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "SecurityMonitoringSignalListRequest": {
@@ -34557,6 +34839,656 @@
         },
         "type": "object"
       },
+      "SecurityMonitoringSignalState": {
+        "description": "The new triage state of the signal.",
+        "enum": [
+          "open",
+          "archived",
+          "under_review"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "OPEN",
+          "ARCHIVED",
+          "UNDER_REVIEW"
+        ]
+      },
+      "SecurityMonitoringSignalStateUpdateAttributes": {
+        "description": "Attributes describing the change of state of a security signal.",
+        "properties": {
+          "archive_comment": {
+            "description": "Optional comment to display on archived signals.",
+            "type": "string"
+          },
+          "archive_reason": {
+            "description": "Reason a signal is archived.",
+            "enum": [
+              "none",
+              "false_positive",
+              "testing_or_maintenance",
+              "other"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "NONE",
+              "FALSE_POSITIVE",
+              "TESTING_OR_MAINTENANCE",
+              "OTHER"
+            ]
+          },
+          "state": {
+            "description": "The new triage state of the signal.",
+            "enum": [
+              "open",
+              "archived",
+              "under_review"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "OPEN",
+              "ARCHIVED",
+              "UNDER_REVIEW"
+            ]
+          },
+          "version": {
+            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "state"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalStateUpdateData": {
+        "description": "Data containing the patch for changing the state of a signal.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes describing the change of state of a security signal.",
+            "properties": {
+              "archive_comment": {
+                "description": "Optional comment to display on archived signals.",
+                "type": "string"
+              },
+              "archive_reason": {
+                "description": "Reason a signal is archived.",
+                "enum": [
+                  "none",
+                  "false_positive",
+                  "testing_or_maintenance",
+                  "other"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "NONE",
+                  "FALSE_POSITIVE",
+                  "TESTING_OR_MAINTENANCE",
+                  "OTHER"
+                ]
+              },
+              "state": {
+                "description": "The new triage state of the signal.",
+                "enum": [
+                  "open",
+                  "archived",
+                  "under_review"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPEN",
+                  "ARCHIVED",
+                  "UNDER_REVIEW"
+                ]
+              },
+              "version": {
+                "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                "format": "int64",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "state"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalStateUpdateRequest": {
+        "description": "Request body for changing the state of a given security monitoring signal.",
+        "properties": {
+          "data": {
+            "description": "Data containing the patch for changing the state of a signal.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes describing the change of state of a security signal.",
+                "properties": {
+                  "archive_comment": {
+                    "description": "Optional comment to display on archived signals.",
+                    "type": "string"
+                  },
+                  "archive_reason": {
+                    "description": "Reason a signal is archived.",
+                    "enum": [
+                      "none",
+                      "false_positive",
+                      "testing_or_maintenance",
+                      "other"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "NONE",
+                      "FALSE_POSITIVE",
+                      "TESTING_OR_MAINTENANCE",
+                      "OTHER"
+                    ]
+                  },
+                  "state": {
+                    "description": "The new triage state of the signal.",
+                    "enum": [
+                      "open",
+                      "archived",
+                      "under_review"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "OPEN",
+                      "ARCHIVED",
+                      "UNDER_REVIEW"
+                    ]
+                  },
+                  "version": {
+                    "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "state"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalTriageAttributes": {
+        "description": "Attributes describing a triage state update operation over a security signal.",
+        "properties": {
+          "archive_comment": {
+            "description": "Optional comment to display on archived signals.",
+            "type": "string"
+          },
+          "archive_comment_timestamp": {
+            "description": "Timestamp of the last edit to the comment.",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "archive_comment_user": {
+            "description": "Object representing a given user entity.",
+            "properties": {
+              "handle": {
+                "description": "The handle for this user account.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Numerical ID assigned by Datadog to this user account.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "name": {
+                "description": "The name for this user account.",
+                "type": "string"
+              },
+              "uuid": {
+                "description": "UUID assigned by Datadog to this user account.",
+                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                "type": "string"
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "type": "object"
+          },
+          "archive_reason": {
+            "description": "Reason a signal is archived.",
+            "enum": [
+              "none",
+              "false_positive",
+              "testing_or_maintenance",
+              "other"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "NONE",
+              "FALSE_POSITIVE",
+              "TESTING_OR_MAINTENANCE",
+              "OTHER"
+            ]
+          },
+          "assignee": {
+            "description": "Object representing a given user entity.",
+            "properties": {
+              "handle": {
+                "description": "The handle for this user account.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Numerical ID assigned by Datadog to this user account.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "name": {
+                "description": "The name for this user account.",
+                "type": "string"
+              },
+              "uuid": {
+                "description": "UUID assigned by Datadog to this user account.",
+                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                "type": "string"
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "type": "object"
+          },
+          "incident_ids": {
+            "description": "Array of incidents that are associated with this signal.",
+            "items": {
+              "description": "Public ID attribute of the incident that is associated with the signal.",
+              "example": 2066,
+              "format": "int64",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "state": {
+            "description": "The new triage state of the signal.",
+            "enum": [
+              "open",
+              "archived",
+              "under_review"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "OPEN",
+              "ARCHIVED",
+              "UNDER_REVIEW"
+            ]
+          },
+          "state_update_timestamp": {
+            "description": "Timestamp of the last update to the signal state.",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "state_update_user": {
+            "description": "Object representing a given user entity.",
+            "properties": {
+              "handle": {
+                "description": "The handle for this user account.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Numerical ID assigned by Datadog to this user account.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "name": {
+                "description": "The name for this user account.",
+                "type": "string"
+              },
+              "uuid": {
+                "description": "UUID assigned by Datadog to this user account.",
+                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                "type": "string"
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "assignee",
+          "state",
+          "incident_ids"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalTriageUpdateData": {
+        "description": "Data containing the updated triage attributes of the signal.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes describing a triage state update operation over a security signal.",
+            "properties": {
+              "archive_comment": {
+                "description": "Optional comment to display on archived signals.",
+                "type": "string"
+              },
+              "archive_comment_timestamp": {
+                "description": "Timestamp of the last edit to the comment.",
+                "format": "int64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "archive_comment_user": {
+                "description": "Object representing a given user entity.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle for this user account.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Numerical ID assigned by Datadog to this user account.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "The name for this user account.",
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "description": "UUID assigned by Datadog to this user account.",
+                    "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uuid"
+                ],
+                "type": "object"
+              },
+              "archive_reason": {
+                "description": "Reason a signal is archived.",
+                "enum": [
+                  "none",
+                  "false_positive",
+                  "testing_or_maintenance",
+                  "other"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "NONE",
+                  "FALSE_POSITIVE",
+                  "TESTING_OR_MAINTENANCE",
+                  "OTHER"
+                ]
+              },
+              "assignee": {
+                "description": "Object representing a given user entity.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle for this user account.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Numerical ID assigned by Datadog to this user account.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "The name for this user account.",
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "description": "UUID assigned by Datadog to this user account.",
+                    "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uuid"
+                ],
+                "type": "object"
+              },
+              "incident_ids": {
+                "description": "Array of incidents that are associated with this signal.",
+                "items": {
+                  "description": "Public ID attribute of the incident that is associated with the signal.",
+                  "example": 2066,
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              "state": {
+                "description": "The new triage state of the signal.",
+                "enum": [
+                  "open",
+                  "archived",
+                  "under_review"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPEN",
+                  "ARCHIVED",
+                  "UNDER_REVIEW"
+                ]
+              },
+              "state_update_timestamp": {
+                "description": "Timestamp of the last update to the signal state.",
+                "format": "int64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "state_update_user": {
+                "description": "Object representing a given user entity.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle for this user account.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Numerical ID assigned by Datadog to this user account.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "The name for this user account.",
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "description": "UUID assigned by Datadog to this user account.",
+                    "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uuid"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "assignee",
+              "state",
+              "incident_ids"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringSignalTriageUpdateResponse": {
+        "description": "The response returned after all triage operations, containing the updated signal triage data.",
+        "properties": {
+          "data": {
+            "description": "Data containing the updated triage attributes of the signal.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes describing a triage state update operation over a security signal.",
+                "properties": {
+                  "archive_comment": {
+                    "description": "Optional comment to display on archived signals.",
+                    "type": "string"
+                  },
+                  "archive_comment_timestamp": {
+                    "description": "Timestamp of the last edit to the comment.",
+                    "format": "int64",
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "archive_comment_user": {
+                    "description": "Object representing a given user entity.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle for this user account.",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Numerical ID assigned by Datadog to this user account.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "The name for this user account.",
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "description": "UUID assigned by Datadog to this user account.",
+                        "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid"
+                    ],
+                    "type": "object"
+                  },
+                  "archive_reason": {
+                    "description": "Reason a signal is archived.",
+                    "enum": [
+                      "none",
+                      "false_positive",
+                      "testing_or_maintenance",
+                      "other"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "NONE",
+                      "FALSE_POSITIVE",
+                      "TESTING_OR_MAINTENANCE",
+                      "OTHER"
+                    ]
+                  },
+                  "assignee": {
+                    "description": "Object representing a given user entity.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle for this user account.",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Numerical ID assigned by Datadog to this user account.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "The name for this user account.",
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "description": "UUID assigned by Datadog to this user account.",
+                        "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid"
+                    ],
+                    "type": "object"
+                  },
+                  "incident_ids": {
+                    "description": "Array of incidents that are associated with this signal.",
+                    "items": {
+                      "description": "Public ID attribute of the incident that is associated with the signal.",
+                      "example": 2066,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "type": "array"
+                  },
+                  "state": {
+                    "description": "The new triage state of the signal.",
+                    "enum": [
+                      "open",
+                      "archived",
+                      "under_review"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "OPEN",
+                      "ARCHIVED",
+                      "UNDER_REVIEW"
+                    ]
+                  },
+                  "state_update_timestamp": {
+                    "description": "Timestamp of the last update to the signal state.",
+                    "format": "int64",
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "state_update_user": {
+                    "description": "Object representing a given user entity.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle for this user account.",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Numerical ID assigned by Datadog to this user account.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "The name for this user account.",
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "description": "UUID assigned by Datadog to this user account.",
+                        "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "assignee",
+                  "state",
+                  "incident_ids"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
       "SecurityMonitoringSignalType": {
         "default": "signal",
         "description": "The type of event.",
@@ -34568,6 +35500,11 @@
         "x-enum-varnames": [
           "SIGNAL"
         ]
+      },
+      "SecurityMonitoringSignalVersion": {
+        "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+        "format": "int64",
+        "type": "integer"
       },
       "SecurityMonitoringSignalsListResponse": {
         "description": "The response object with all security signals matching the request\nand pagination information.",
@@ -34725,6 +35662,33 @@
           "TIMESTAMP_ASCENDING",
           "TIMESTAMP_DESCENDING"
         ]
+      },
+      "SecurityMonitoringTriageUser": {
+        "description": "Object representing a given user entity.",
+        "properties": {
+          "handle": {
+            "description": "The handle for this user account.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Numerical ID assigned by Datadog to this user account.",
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "description": "The name for this user account.",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "UUID assigned by Datadog to this user account.",
+            "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid"
+        ],
+        "type": "object"
       },
       "ServiceAccountCreateAttributes": {
         "description": "Attributes of the created user.",
@@ -37747,7 +38711,6 @@
               "incident_write": "Create, view, and manage incidents in Datadog.",
               "metrics_read": "View custom metrics.",
               "monitors_read": "View monitors.",
-              "monitors_write": "Edit, mute, and delete individual monitors.",
               "security_monitoring_filters_read": "Read Security Filters.",
               "security_monitoring_filters_write": "Create, edit, and delete Security Filters.",
               "security_monitoring_rules_read": "Read Detection Rules.",
@@ -63831,6 +64794,17 @@
             "description": "Too Many Requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "metrics_read"
+            ]
+          }
+        ],
         "summary": "List tag configuration by name",
         "tags": [
           "Metrics"
@@ -77364,6 +78338,1121 @@
         }
       }
     },
+    "/api/v2/security_monitoring/signals/{signal_id}/assignee": {
+      "patch": {
+        "description": "Modify the triage assignee of a security signal.",
+        "operationId": "EditSecurityMonitoringSignalAssignee",
+        "parameters": [
+          {
+            "description": "The ID of the signal.",
+            "in": "path",
+            "name": "signal_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request body for changing the assignee of a given security monitoring signal.",
+                "properties": {
+                  "data": {
+                    "description": "Data containing the patch for changing the assignee of a signal.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes describing the new assignee of a security signal.",
+                        "properties": {
+                          "assignee": {
+                            "description": "Object representing a given user entity.",
+                            "properties": {
+                              "handle": {
+                                "description": "The handle for this user account.",
+                                "type": "string"
+                              },
+                              "id": {
+                                "description": "Numerical ID assigned by Datadog to this user account.",
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "name": {
+                                "description": "The name for this user account.",
+                                "type": "string"
+                              },
+                              "uuid": {
+                                "description": "UUID assigned by Datadog to this user account.",
+                                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "uuid"
+                            ],
+                            "type": "object"
+                          },
+                          "version": {
+                            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                            "format": "int64",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "assignee"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Attributes describing the signal update.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The response returned after all triage operations, containing the updated signal triage data.",
+                  "properties": {
+                    "data": {
+                      "description": "Data containing the updated triage attributes of the signal.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes describing a triage state update operation over a security signal.",
+                          "properties": {
+                            "archive_comment": {
+                              "description": "Optional comment to display on archived signals.",
+                              "type": "string"
+                            },
+                            "archive_comment_timestamp": {
+                              "description": "Timestamp of the last edit to the comment.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "archive_comment_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "archive_reason": {
+                              "description": "Reason a signal is archived.",
+                              "enum": [
+                                "none",
+                                "false_positive",
+                                "testing_or_maintenance",
+                                "other"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "NONE",
+                                "FALSE_POSITIVE",
+                                "TESTING_OR_MAINTENANCE",
+                                "OTHER"
+                              ]
+                            },
+                            "assignee": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "incident_ids": {
+                              "description": "Array of incidents that are associated with this signal.",
+                              "items": {
+                                "description": "Public ID attribute of the incident that is associated with the signal.",
+                                "example": 2066,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "type": "array"
+                            },
+                            "state": {
+                              "description": "The new triage state of the signal.",
+                              "enum": [
+                                "open",
+                                "archived",
+                                "under_review"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "OPEN",
+                                "ARCHIVED",
+                                "UNDER_REVIEW"
+                              ]
+                            },
+                            "state_update_timestamp": {
+                              "description": "Timestamp of the last update to the signal state.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "state_update_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "assignee",
+                            "state",
+                            "incident_ids"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_signals_write"
+            ]
+          }
+        ],
+        "summary": "Modify the triage assignee of a security signal",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
+    "/api/v2/security_monitoring/signals/{signal_id}/incidents": {
+      "patch": {
+        "description": "Change the related incidents for a security signal.",
+        "operationId": "EditSecurityMonitoringSignalIncidents",
+        "parameters": [
+          {
+            "description": "The ID of the signal.",
+            "in": "path",
+            "name": "signal_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request body for changing the related incidents of a given security monitoring signal.",
+                "properties": {
+                  "data": {
+                    "description": "Data containing the patch for changing the related incidents of a signal.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes describing the new list of related signals for a security signal.",
+                        "properties": {
+                          "incident_ids": {
+                            "description": "Array of incidents that are associated with this signal.",
+                            "items": {
+                              "description": "Public ID attribute of the incident that is associated with the signal.",
+                              "example": 2066,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "type": "array"
+                          },
+                          "version": {
+                            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                            "format": "int64",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "incident_ids"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Attributes describing the signal update.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The response returned after all triage operations, containing the updated signal triage data.",
+                  "properties": {
+                    "data": {
+                      "description": "Data containing the updated triage attributes of the signal.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes describing a triage state update operation over a security signal.",
+                          "properties": {
+                            "archive_comment": {
+                              "description": "Optional comment to display on archived signals.",
+                              "type": "string"
+                            },
+                            "archive_comment_timestamp": {
+                              "description": "Timestamp of the last edit to the comment.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "archive_comment_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "archive_reason": {
+                              "description": "Reason a signal is archived.",
+                              "enum": [
+                                "none",
+                                "false_positive",
+                                "testing_or_maintenance",
+                                "other"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "NONE",
+                                "FALSE_POSITIVE",
+                                "TESTING_OR_MAINTENANCE",
+                                "OTHER"
+                              ]
+                            },
+                            "assignee": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "incident_ids": {
+                              "description": "Array of incidents that are associated with this signal.",
+                              "items": {
+                                "description": "Public ID attribute of the incident that is associated with the signal.",
+                                "example": 2066,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "type": "array"
+                            },
+                            "state": {
+                              "description": "The new triage state of the signal.",
+                              "enum": [
+                                "open",
+                                "archived",
+                                "under_review"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "OPEN",
+                                "ARCHIVED",
+                                "UNDER_REVIEW"
+                              ]
+                            },
+                            "state_update_timestamp": {
+                              "description": "Timestamp of the last update to the signal state.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "state_update_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "assignee",
+                            "state",
+                            "incident_ids"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_signals_write"
+            ]
+          }
+        ],
+        "summary": "Change the related incidents of a security signal",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
+    "/api/v2/security_monitoring/signals/{signal_id}/state": {
+      "patch": {
+        "description": "Change the triage state of a security signal.",
+        "operationId": "EditSecurityMonitoringSignalState",
+        "parameters": [
+          {
+            "description": "The ID of the signal.",
+            "in": "path",
+            "name": "signal_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request body for changing the state of a given security monitoring signal.",
+                "properties": {
+                  "data": {
+                    "description": "Data containing the patch for changing the state of a signal.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes describing the change of state of a security signal.",
+                        "properties": {
+                          "archive_comment": {
+                            "description": "Optional comment to display on archived signals.",
+                            "type": "string"
+                          },
+                          "archive_reason": {
+                            "description": "Reason a signal is archived.",
+                            "enum": [
+                              "none",
+                              "false_positive",
+                              "testing_or_maintenance",
+                              "other"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "NONE",
+                              "FALSE_POSITIVE",
+                              "TESTING_OR_MAINTENANCE",
+                              "OTHER"
+                            ]
+                          },
+                          "state": {
+                            "description": "The new triage state of the signal.",
+                            "enum": [
+                              "open",
+                              "archived",
+                              "under_review"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "OPEN",
+                              "ARCHIVED",
+                              "UNDER_REVIEW"
+                            ]
+                          },
+                          "version": {
+                            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                            "format": "int64",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "state"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Attributes describing the signal update.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The response returned after all triage operations, containing the updated signal triage data.",
+                  "properties": {
+                    "data": {
+                      "description": "Data containing the updated triage attributes of the signal.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes describing a triage state update operation over a security signal.",
+                          "properties": {
+                            "archive_comment": {
+                              "description": "Optional comment to display on archived signals.",
+                              "type": "string"
+                            },
+                            "archive_comment_timestamp": {
+                              "description": "Timestamp of the last edit to the comment.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "archive_comment_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "archive_reason": {
+                              "description": "Reason a signal is archived.",
+                              "enum": [
+                                "none",
+                                "false_positive",
+                                "testing_or_maintenance",
+                                "other"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "NONE",
+                                "FALSE_POSITIVE",
+                                "TESTING_OR_MAINTENANCE",
+                                "OTHER"
+                              ]
+                            },
+                            "assignee": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "incident_ids": {
+                              "description": "Array of incidents that are associated with this signal.",
+                              "items": {
+                                "description": "Public ID attribute of the incident that is associated with the signal.",
+                                "example": 2066,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "type": "array"
+                            },
+                            "state": {
+                              "description": "The new triage state of the signal.",
+                              "enum": [
+                                "open",
+                                "archived",
+                                "under_review"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "OPEN",
+                                "ARCHIVED",
+                                "UNDER_REVIEW"
+                              ]
+                            },
+                            "state_update_timestamp": {
+                              "description": "Timestamp of the last update to the signal state.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "state_update_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "assignee",
+                            "state",
+                            "incident_ids"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_signals_write"
+            ]
+          }
+        ],
+        "summary": "Change the triage state of a security signal",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
     "/api/v2/series": {
       "post": {
         "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.",
@@ -77522,13 +79611,12 @@
                           "type": "array"
                         },
                         "type": {
-                          "description": "The type of metric.",
+                          "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
                           "enum": [
                             0,
                             1,
                             2,
-                            3,
-                            15
+                            3
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -77536,8 +79624,7 @@
                             "UNSPECIFIED",
                             "COUNT",
                             "RATE",
-                            "GAUGE",
-                            "UNSPECIFIED_LEGACY"
+                            "GAUGE"
                           ]
                         },
                         "unit": {
@@ -86950,238 +89037,6 @@
           }
         ],
         "summary": "Get cost across multi-org account",
-        "tags": [
-          "Usage Metering"
-        ],
-        "x-menu-order": 39,
-        "x-undo": {
-          "type": "safe"
-        }
-      }
-    },
-    "/api/v2/usage/estimated_cost_by_org": {
-      "get": {
-        "description": "Get estimated cost across multi-org account.",
-        "operationId": "GetEstimatedCostByOrg",
-        "parameters": [
-          {
-            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost beginning this month. Either start_month or start_date should be specified, but not both.",
-            "in": "query",
-            "name": "start_month",
-            "required": false,
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost ending this month.",
-            "in": "query",
-            "name": "end_month",
-            "required": false,
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost beginning this day. Either start_month or start_date should be specified, but not both.",
-            "in": "query",
-            "name": "start_date",
-            "required": false,
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost ending this day.",
-            "in": "query",
-            "name": "end_date",
-            "required": false,
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json;datetime-format=rfc3339": {
-                "schema": {
-                  "description": "Chargeback Summary response.",
-                  "properties": {
-                    "data": {
-                      "description": "Response containing Chargeback Summary.",
-                      "items": {
-                        "description": "Cost data.",
-                        "properties": {
-                          "attributes": {
-                            "description": "Cost attributes data.",
-                            "properties": {
-                              "charges": {
-                                "description": "List of charges data reported for the requested month.",
-                                "items": {
-                                  "description": "Charges breakdown.",
-                                  "properties": {
-                                    "charge_type": {
-                                      "description": "The type of charge for a particular product.",
-                                      "example": "on_demand",
-                                      "type": "string"
-                                    },
-                                    "cost": {
-                                      "description": "The cost for a particular product and charge type during a given month.",
-                                      "format": "double",
-                                      "type": "number"
-                                    },
-                                    "product_name": {
-                                      "description": "The product for which cost is being reported.",
-                                      "example": "infra_host",
-                                      "type": "string"
-                                    }
-                                  },
-                                  "type": "object"
-                                },
-                                "type": "array"
-                              },
-                              "date": {
-                                "description": "The month requested.",
-                                "format": "date-time",
-                                "type": "string"
-                              },
-                              "org_name": {
-                                "description": "The organization name.",
-                                "type": "string"
-                              },
-                              "public_id": {
-                                "description": "The organization public ID.",
-                                "type": "string"
-                              },
-                              "total_cost": {
-                                "description": "The total cost of products for the month.",
-                                "format": "double",
-                                "type": "number"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "id": {
-                            "description": "Unique ID of the response.",
-                            "type": "string"
-                          },
-                          "type": {
-                            "default": "cost_by_org",
-                            "description": "Type of cost data.",
-                            "enum": [
-                              "cost_by_org"
-                            ],
-                            "example": "cost_by_org",
-                            "type": "string",
-                            "x-enum-varnames": [
-                              "COST_BY_ORG"
-                            ]
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "400": {
-            "content": {
-              "application/json;datetime-format=rfc3339": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "403": {
-            "content": {
-              "application/json;datetime-format=rfc3339": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Forbidden - User is not authorized"
-          },
-          "429": {
-            "content": {
-              "application/json;datetime-format=rfc3339": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Too many requests"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": [],
-            "appKeyAuth": []
-          },
-          {
-            "AuthZ": [
-              "usage_read"
-            ]
-          }
-        ],
-        "summary": "Get estimated cost across multi-org account",
         "tags": [
           "Usage Metering"
         ],

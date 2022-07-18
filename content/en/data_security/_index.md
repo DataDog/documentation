@@ -14,7 +14,7 @@ further_reading:
 - link: "/data_security/synthetics/"
   tag: "Documentation"
   text: "Synthetic Monitoring Data Security"
-- link: "/tracing/setup_overview/configure_data_security/"
+- link: "/tracing/configure_data_security/"
   tag: "Documentation"
   text: "Tracing Data Security"
 - link: "/real_user_monitoring/browser/modifying_data_and_context/"
@@ -159,11 +159,11 @@ Continuous Integration pipelines and tests
 [15]: /logs/guide/logs-rbac-permissions
 [16]: /infrastructure/process/#process-arguments-scrubbing
 [17]: /infrastructure/livecontainers/configuration/#scrubbing-sensitive-information
-[18]: /tracing/setup_overview/configure_data_security/
+[18]: /tracing/configure_data_security/
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
 [21]: /real_user_monitoring/browser/modifying_data_and_context/
 [22]: /real_user_monitoring/session_replay/privacy_options
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
-[25]: /tracing/visualization/
+[25]: /tracing/glossary/

@@ -10,7 +10,7 @@ further_reading:
 - link: "/notebooks/"
   tag: "Documentation"
   text: "Datadog Notebooks"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "APM Service Page"
 - link: "/watchdog/"
