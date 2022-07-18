@@ -100,3 +100,6 @@ security:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
       - ^(HUGO_|CI_)
+  exec:
+    osEnv:
+    - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME)$
