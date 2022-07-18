@@ -22,12 +22,12 @@ You can monitor application security for Python apps running in Docker, Kubernet
 
 ## Get started
 
-1. **Update your Datadog Python library package** to at least version 1.2.0 or later, by running:
+1. **Update your Datadog Python library package** to at least version 1.2.2 or later, by running:
    ```shell
     pip install --upgrade ddtrace
    ```
 
-   For information about which language and framework versions are supported by the library, see [Compatibility][2].
+   For information about which language and framework versions are supported by the library, see [Compatibility][1].
 
 2. **Enable ASM when starting the Python application.**
 
@@ -74,7 +74,7 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the  environment section:
+Update your ECS task definition JSON file, by adding this in the environment section:
 
 ```json
 "environment": [
@@ -105,5 +105,4 @@ DD_APPSEC_ENABLED=true ddtrace-run python app.py
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[2]: /security_platform/application_security/setup_and_configure/?code-lang=python#compatibility
+[1]: /security_platform/application_security/setup_and_configure/?code-lang=python#compatibility
