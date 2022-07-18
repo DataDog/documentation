@@ -1,49 +1,99 @@
 ---
 title: Troubleshooting Monitor Alerts
 kind: guide
+further_reading:
+- link: "https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/"
+  tag: "Guide"
+  text: Alert on no change in value
+- link: "https://docs.datadoghq.com/monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting/"
+  tag: "Guide"
+  text: Set up an alert for when a specific tag stops reporting  
+- link: "https://docs.datadoghq.com/monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime/"
+  tag: "Guide"
+  text: Prevent alerts from monitors that were in downtime    
+- link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
+  tag: "Blog"
+  text: Enable preconfigured alerts with recommended monitors
+- link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
+  tag: "Blog"
+  text: Monitor alerts and events with OpsGenie and Datadog
+- link: "https://www.datadoghq.com/blog/set-and-monitor-slas/"
+  tag: "Blog"
+  text: Monitoring services and setting SLAs with Datadog   
 ---
 
 ## Overview
 
-If you're not certain whether your monitor's alerting behavior(or lack thereof) is warranted, this guide provides an overview of some foundational concepts and common issues.
+This guide provides an overview of some foundational concepts that can help you determine if your monitor's alerting behavior is warranted. If you suspect that your monitor evaluations are not accurately reflecting the underlying data, inspect the monitor to determine if it is misconfigured. This section provides an overview of foundational concepts that can help this evaluation process.
 
-### Monitor State and Monitor Status
+### Monitor state and monitor status
 
-While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status. For example, if data is absent from the monitor's evaluation window, the evaluation may be `skipped`, in which case the monitor state is not updated. See [Monitor Arithmetic and Sparse Metrics][1] for more information.
+While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status. See below for some potential causes of this:
 
-The state of a monitor may also sometimes updated in the absence of a monitor evaluation, for example, due to [auto-resolve][2]. 
+- **Data is too sparse within the monitor evaluation window**
+
+If data is absent from a monitor's evaluation window, and the monitor is not configured to anticipate [no-data conditions][1], the evaluation may be `skipped`. In such a case, the monitor state is not updated, so a monitor previously in `OK` state remains `OK`, and likewise with a monitor in `Alert` state. Use the [history][2] graph on the monitor status page and select the group and time frame of interest. If data is sparsely populated, see [monitor arithmetic and sparse metrics][3] for more information.
+
+- **Monitor state updates due to external conditions**
+
+The state of a monitor may also sometimes update in the absence of a monitor evaluation, for example, due to [auto-resolve][4]. 
+
+### Alert conditions
+
+Unexpected monitor behavior can sometimes be the result of misconfigured [alert conditions][5], which vary by [monitor type][6]. If your monitor query uses the `as_count()` function, check the [`as_count()` in Monitor Evaluations][7] guide. 
+
+If using recovery thresholds, check the conditions listed in the [recovery thresholds guide][8] to see if the behavior is expected.
 
 ### Monitor status and groups
 
 For both monitor evaluations and state, status is tracked by group. 
 
-For a multi-alert monitor, a group is a set of tags with one value for each grouping key (for example, `env:dev`,`host:myhost` for a monitor grouped by `env` and `host`). 
+For a multi-alert monitor, a group is a set of tags with one value for each grouping key (for example, `env:dev`,`host:myhost` for a monitor grouped by `env` and `host`). For a simple alert, there is only one group (`*`), representing everything within the monitor's scope. 
 
-For a simple alert, there is only one group (`*`, representing everything within the monitor's scope). 
+By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. See [Monitor settings changes not taking effect][9] for more information.
 
-By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. See [Monitor settings changes not taking effect][3] for more information.
+For some multi-alert monitors, you may want to configure a delay for new groups to be evaluated. This can help you to avoid alerts from expected behavior of new groups, such as high resource usage associated with the creation of a new container. Read [new group delay][10] for more information.
 
-### Monitor Notifications
+If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
 
-Monitor state transitions are often accompanied by monitor notifications, which are Datadog events that indicate a monitor has changed state. Like any other events, these events can include @-mention handles that allow notification via external services such as Slack or Pagerduty. Not all state transitions result in the generation of a monitor notification. If a monitor group is silenced by a monitor downtime, the state transition occurs without a notification event being created. 
+### Notification controls
 
-Monitor state transition history is used to drive the [status and history][4] visualization on the monitor status page. 
+If your monitor is behaving as expected, but producing unwanted notifications, there are multiple options to reduce or suppress notifications:
 
-#### Troubleshooting missing emails
+- For monitors that rapidly change between states, read [reduce alert flapping][13] for ways to minimize alert fatigue. 
+- For alerts which are expected or are otherwise not useful for your organization, use [Downtimes][14] to suppress unwanted notifications.
+- To control alert routing, use [template variables][15] and the separation of **warning** or **alert** states with[conditional variables][16].
 
-- Check [email preferences][5] for the recipient and ensure that `Notification from monitor alerts` is checked 
-- Check the [event stream][6] for events with the string `Error delivering notification`.
+### Absent notifications
 
-#### Opsgenie multi-notification
+If you suspect that notifications are not being properly delivered, check the items below to ensure that notifications are able to be delivered:
+
+- Check [email preferences][17] for the recipient and ensure that `Notification from monitor alerts` is checked.
+- Check the [event stream][18] for events with the string `Error delivering notification`.
+
+### Opsgenie multi-notification
 
 If you are using multiple @opsgenie-[...] notifications in your monitor, we send those notifications with the same alias to opsgenie.
-Due to an [Opsgenie feature][7], Opsgenie will discard what is seen as a duplication.
+Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplication.
 
+{{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
-[2]: /monitors/create/configuration/?tabs=thresholdalert#auto-resolve
-[3]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect
-[4]: /monitors/manage/status/#status-and-history
-[5]: /account_management/#preferences
-[6]: /events/stream
-[7]: https://docs.opsgenie.com/docs/alert-deduplication
+[1]: /monitors/create/configuration/?tabs=thresholdalert#no-data
+[2]: /monitors/manage/status/#history
+[3]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
+[4]: /monitors/create/configuration/?tabs=thresholdalert#auto-resolve
+[5]: /monitors/create/configuration/?tabs=thresholdalert#set-alert-conditions
+[6]: /monitors/create/#monitor-types
+[7]: /monitors/guide/as-count-in-monitor-evaluations/
+[8]: /monitors/guide/recovery-thresholds/#behavior
+[9]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect
+[10]: /monitors/create/configuration/?tabs=thresholdalert#new-group-delay
+[11]: /monitors/create/configuration/?tabs=thresholdalert#evaluation-delay
+[12]: /integrations/faq/cloud-metric-delay/
+[13]: /monitors/guide/reduce-alert-flapping/
+[14]: /monitors/guide/suppress-alert-with-downtimes/
+[15]: /monitors/notify/variables/?tab=is_alert&tabs=is_alert#template-variables
+[16]: /monitors/notify/variables/?tab=is_alert&tabs=is_alert#conditional-variables
+[17]: /account_management/#preferences
+[18]: /events/stream
+[19]: https://docs.opsgenie.com/docs/alert-deduplication
