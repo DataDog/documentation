@@ -1,10 +1,27 @@
-### Default standard attribute list
+---
+title: Span tags naming convention
+kind: documentation
+further_reading:
+    - link: 'logs/log_configuration/attributes_naming_convention'
+      tag: 'Documentation'
+      text: 'Log Management Standard Attributes'
+    - link: '/real_user_monitoring/browser/data_collected'
+      tag: 'Documentation'
+      text: 'RUM Browser Datad Collected'
+    - link: '/tracing/trace_explorer/query_syntax/'
+      tag: 'Documentation'
+      text: 'Learn how to explore your traces'
+---
 
-// TODO
+# Overview
+[Datadog tracing libraries][3] provide out-of-the-box support for instrumenting a variety of libraries.
+These instrumentations generate spans to represent logical unit of work in distributed systems.
+Each span consists of [span tags][4] providing extra layers of information on the unit of work happening on the system. The naming convention describe the name and content that can be used in span events.
 
-#### General
+# Span tags naming convention
+## Core
+The following span tags relates to the core concepts to describe the instrumentation used and the kind of operation performed.
 
-// TODO
 | **Name**    | **Type** | **Description**                                                                                                                                                                                                                                                                   |
 |-------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `language`  | `string` | The client SDK language used to generate the span. Can be one of `cpp`, `dotnet`, `go`, `jvm`, `javascript`, `php`, `python`, `ruby`                                                                                                                                                                                                                                 |
@@ -13,8 +30,9 @@
 | `span.kind` | `string` | String representing the type of work unit handled by the span. Can be one of `server`, `client`, `producer`, `consumer` or `internal`.<br>More information from [OpenTelemetry SpanKind documentation][1] |
 | `component` | `string` | The name of the library/integration which created the span                                                                                                                                                                                                                        |
 
-#### Network communications
-// TODO
+## Network communications
+The following span tags can be used to describe work units corresponding to network communications:
+
 | **Fullname**                    | **Type** | **Description**                                                           |
 |---------------------------------|----------|---------------------------------------------------------------------------|
 | `network.client.ip`             | `string` | The IP address of the client that initiated the inbound connection        |
@@ -28,7 +46,8 @@
 | `network.client.transport`      | `string` | Transport protocol used to make the inbound connection                    |
 | `network.destination.transport` | `string` | Transport protocol used to make the outbound connection                   |
 
-#### HTTP requests
+## HTTP requests
+The following span tags can be used to describe HTTP client and server spans:
 
 | **Fullname**                                | **Type** | **Description**                                                                                                                                                    |
 |---------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -46,9 +65,8 @@
 | `http.response.headers.*`                   | `string` | The response HTTP headers. None are collected by default but can optionally be configured with `DD_TRACE_HEADER_TAGS`.                                             |
 
 
-#### Database & Cache
-
-// TODO
+## Database
+The following span tags can be used to describe Databases spans:
 
 | **Fullname**           | **Type** | **Description**                                                                                              |
 |------------------------|----------|--------------------------------------------------------------------------------------------------------------|
@@ -63,9 +81,8 @@
 
 Additional attributes for specific database technologies will use the prefix `db.<db.system>`.
 
-#### Message Queue
-
-// TODO
+## Message Queue
+The following span tags can be used to describe spans corresponding to messaging systems:
 
 | **Fullname**                     | **Type** | **Description**                                                                                                                                                                                                                  |
 |----------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -83,9 +100,8 @@ Additional attributes for specific database technologies will use the prefix `db
 
 Additional attributes for specific database technologies will use the prefix `messaging.<messaging.system>`.
 
-#### Remote procedure calls
-
-// TODO
+## Remote procedure calls
+The following span tags can be used to describe spans corresponding to remote procedure calls such as RMI or gRPC:
 
 | **Fullname**  | **Type** | **Description**                      |
 |---------------|----------|--------------------------------------|
@@ -93,10 +109,8 @@ Additional attributes for specific database technologies will use the prefix `me
 | `rpc.service` | `string` | The name of the service being called |
 | `rpc.method`  | `string` | The name of the method being called  |
 
-
-#### Errors
-
-// TODO
+## Errors
+The following span tags can be used to describe errors associated with spans:
 
 | **Fullname**    | **Type** | **Description**                                                  |
 |-----------------|----------|------------------------------------------------------------------|
@@ -107,3 +121,5 @@ Additional attributes for specific database technologies will use the prefix `me
 
 [1]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
 [2]: /tracing/setup_overview/configure_data_security/
+[3]: /tracing/setup_overview/
+[4]: /tracing/visualization/#span-tags
