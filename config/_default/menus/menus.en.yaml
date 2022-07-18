@@ -6383,8 +6383,7 @@ api:
         - v1
       operationids:
         - GetMonthlyUsageAttribution
-      unstable:
-        - v1
+      unstable: []
       order: 31
   - name: Get hourly usage for Logs by Index
     url: '#get-hourly-usage-for-logs-by-index'
@@ -6480,8 +6479,7 @@ api:
         - v1
       operationids:
         - GetHourlyUsageAttribution
-      unstable:
-        - v1
+      unstable: []
       order: 30
   - name: Get hourly usage for hosts and containers
     url: '#get-hourly-usage-for-hosts-and-containers'
