@@ -54,9 +54,9 @@ For more information, see [Watchdog Insights for RUM][6].
 Watchdog Insights appear on several pages within APM:
 - [Trace Explorer][7]
 - [Continuous Profiler][8]
-- [Service List][9]
-- [Service Page][10]
-- [Resource Page][11]
+- Service Catalog (beta)
+- [Service Page][9]
+- [Resource Page][10]
 
 ## Navigation
 
@@ -76,6 +76,5 @@ Click an individual panel for a detailed view.
 [6]: /real_user_monitoring/explorer/watchdog_insights/
 [7]: /tracing/trace_explorer/
 [8]: /tracing/profiler/
-[9]: /tracing/services/services_list/
-[10]: /tracing/services/service_page/
-[11]: /tracing/services/resource_page/
+[9]: /tracing/services/service_page/
+[10]: /tracing/services/resource_page/
