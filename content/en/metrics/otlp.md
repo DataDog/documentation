@@ -122,7 +122,7 @@ OpenTelemetry defines certain semantic conventions related to host names. If an 
 
 1. `datadog.host.name`, a Datadog-specific hostname convention
 1. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
-1. Kubernetes-specific conventions from the `k8s.node.name` and `k8s.cluster.name` semantic conventions.
+1. Kubernetes-specific conventions from the `k8s.node.name` and `k8s.cluster.name` semantic conventions
 1. `host.id`, the unique host ID
 1. `host.name`, the system hostname
 
