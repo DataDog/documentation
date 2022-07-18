@@ -1,27 +1,28 @@
 ---
-title: "Utilisation de base de l'Agent pour Red\_Hat"
-kind: documentation
-platform: "Red\_Hat"
 aliases:
-  - /fr/guides/basic_agent_usage/redhat/
+- /fr/guides/basic_agent_usage/redhat/
 further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: Recueillir vos logs
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: Recueillir vos processus
-  - link: /tracing/
-    tag: Documentation
-    text: Recueillir vos traces
+- link: /logs/
+  tag: Documentation
+  text: Recueillir vos logs
+- link: /infrastructure/process/
+  tag: Documentation
+  text: Recueillir vos processus
+- link: /tracing/
+  tag: Documentation
+  text: Recueillir vos traces
+kind: documentation
+platform: Red Hat
+title: Utilisation de base de l'Agent pour Red Hat
 ---
+
 ## Présentation
 
 Cette page présente les fonctionnalités de base de l'Agent Datadog pour Red Hat. Si vous n'avez pas encore installé l'Agent, vous trouverez des instructions dans la documentation relative à l'[intégration de l'Agent Datadog][1].
 
 Les paquets sont disponibles en versions pour architectures x86 64 bits et Arm v8. Pour toute autre architecture, utilisez l'installation depuis les sources.
 
-**Remarque** : les versions 6 et ultérieures de Red Hat sont prises en charge.
+**Remarque** : la version 6 et les versions ultérieures de RedHat et de CentOS sont prises en charge. Depuis l'Agent 6.33.0/7.33.0, la version 8 et les versions ultérieures d'AlmaLinux et de Rocky 8 sont également prises en charge.
 
 ## Commandes
 
@@ -71,15 +72,18 @@ Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 | Exécuter un check                        | `sudo -u dd-agent -- dd-agent check <NOM_CHECK>` |
 
 {{% /tab %}}
+
 {{< /tabs >}}
 
 **Remarque** : si le wrapper de `service` n'est pas disponible sur votre système, utilisez :
 
 * Sur les systèmes basés sur `upstart` : `sudo start/stop/restart/status datadog-agent`
 * Sur les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart/status datadog-agent`
-* Sur les systèmes basés sur `initctl` : `sudo initctl start/stop/restart/status datadog-agent`
+* Sur les systèmes basés sur `initctl` : `sudo initctl start/stop/restart/status datadog-agent`
 
 [En savoir plus sur les commandes de cycle de vie du service][2]
+
+
 
 
 
