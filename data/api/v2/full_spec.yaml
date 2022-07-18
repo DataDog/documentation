@@ -311,6 +311,13 @@ components:
       schema:
         example: 00000000-0000-1234-0000-000000000000
         type: string
+    SignalID:
+      description: The ID of the signal.
+      in: path
+      name: signal_id
+      required: true
+      schema:
+        type: string
     UserID:
       description: The ID of the user.
       in: path
@@ -7005,6 +7012,49 @@ components:
         type:
           $ref: '#/components/schemas/SecurityMonitoringSignalType'
       type: object
+    SecurityMonitoringSignalArchiveComment:
+      description: Optional comment to display on archived signals.
+      type: string
+    SecurityMonitoringSignalArchiveReason:
+      description: Reason a signal is archived.
+      enum:
+      - none
+      - false_positive
+      - testing_or_maintenance
+      - other
+      type: string
+      x-enum-varnames:
+      - NONE
+      - FALSE_POSITIVE
+      - TESTING_OR_MAINTENANCE
+      - OTHER
+    SecurityMonitoringSignalAssigneeUpdateAttributes:
+      description: Attributes describing the new assignee of a security signal.
+      properties:
+        assignee:
+          $ref: '#/components/schemas/SecurityMonitoringTriageUser'
+        version:
+          $ref: '#/components/schemas/SecurityMonitoringSignalVersion'
+      required:
+      - assignee
+      type: object
+    SecurityMonitoringSignalAssigneeUpdateData:
+      description: Data containing the patch for changing the assignee of a signal.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSignalAssigneeUpdateAttributes'
+      required:
+      - attributes
+      type: object
+    SecurityMonitoringSignalAssigneeUpdateRequest:
+      description: Request body for changing the assignee of a given security monitoring
+        signal.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSignalAssigneeUpdateData'
+      required:
+      - data
+      type: object
     SecurityMonitoringSignalAttributes:
       description: 'The object containing all signal attributes and their
 
@@ -7041,6 +7091,44 @@ components:
           example: '2019-01-02T09:42:36.320Z'
           format: date-time
           type: string
+      type: object
+    SecurityMonitoringSignalIncidentIds:
+      description: Array of incidents that are associated with this signal.
+      items:
+        description: Public ID attribute of the incident that is associated with the
+          signal.
+        example: 2066
+        format: int64
+        type: integer
+      type: array
+    SecurityMonitoringSignalIncidentsUpdateAttributes:
+      description: Attributes describing the new list of related signals for a security
+        signal.
+      properties:
+        incident_ids:
+          $ref: '#/components/schemas/SecurityMonitoringSignalIncidentIds'
+        version:
+          $ref: '#/components/schemas/SecurityMonitoringSignalVersion'
+      required:
+      - incident_ids
+      type: object
+    SecurityMonitoringSignalIncidentsUpdateData:
+      description: Data containing the patch for changing the related incidents of
+        a signal.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSignalIncidentsUpdateAttributes'
+      required:
+      - attributes
+      type: object
+    SecurityMonitoringSignalIncidentsUpdateRequest:
+      description: Request body for changing the related incidents of a given security
+        monitoring signal.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSignalIncidentsUpdateData'
+      required:
+      - data
       type: object
     SecurityMonitoringSignalListRequest:
       description: The request for a security signal list.
@@ -7086,6 +7174,96 @@ components:
           maximum: 1000
           type: integer
       type: object
+    SecurityMonitoringSignalState:
+      description: The new triage state of the signal.
+      enum:
+      - open
+      - archived
+      - under_review
+      type: string
+      x-enum-varnames:
+      - OPEN
+      - ARCHIVED
+      - UNDER_REVIEW
+    SecurityMonitoringSignalStateUpdateAttributes:
+      description: Attributes describing the change of state of a security signal.
+      properties:
+        archive_comment:
+          $ref: '#/components/schemas/SecurityMonitoringSignalArchiveComment'
+        archive_reason:
+          $ref: '#/components/schemas/SecurityMonitoringSignalArchiveReason'
+        state:
+          $ref: '#/components/schemas/SecurityMonitoringSignalState'
+        version:
+          $ref: '#/components/schemas/SecurityMonitoringSignalVersion'
+      required:
+      - state
+      type: object
+    SecurityMonitoringSignalStateUpdateData:
+      description: Data containing the patch for changing the state of a signal.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSignalStateUpdateAttributes'
+      required:
+      - attributes
+      type: object
+    SecurityMonitoringSignalStateUpdateRequest:
+      description: Request body for changing the state of a given security monitoring
+        signal.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSignalStateUpdateData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringSignalTriageAttributes:
+      description: Attributes describing a triage state update operation over a security
+        signal.
+      properties:
+        archive_comment:
+          $ref: '#/components/schemas/SecurityMonitoringSignalArchiveComment'
+        archive_comment_timestamp:
+          description: Timestamp of the last edit to the comment.
+          format: int64
+          minimum: 0
+          type: integer
+        archive_comment_user:
+          $ref: '#/components/schemas/SecurityMonitoringTriageUser'
+        archive_reason:
+          $ref: '#/components/schemas/SecurityMonitoringSignalArchiveReason'
+        assignee:
+          $ref: '#/components/schemas/SecurityMonitoringTriageUser'
+        incident_ids:
+          $ref: '#/components/schemas/SecurityMonitoringSignalIncidentIds'
+        state:
+          $ref: '#/components/schemas/SecurityMonitoringSignalState'
+        state_update_timestamp:
+          description: Timestamp of the last update to the signal state.
+          format: int64
+          minimum: 0
+          type: integer
+        state_update_user:
+          $ref: '#/components/schemas/SecurityMonitoringTriageUser'
+      required:
+      - assignee
+      - state
+      - incident_ids
+      type: object
+    SecurityMonitoringSignalTriageUpdateData:
+      description: Data containing the updated triage attributes of the signal.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSignalTriageAttributes'
+      type: object
+    SecurityMonitoringSignalTriageUpdateResponse:
+      description: The response returned after all triage operations, containing the
+        updated signal triage data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSignalTriageUpdateData'
+      required:
+      - data
+      type: object
     SecurityMonitoringSignalType:
       default: signal
       description: The type of event.
@@ -7095,6 +7273,11 @@ components:
       type: string
       x-enum-varnames:
       - SIGNAL
+    SecurityMonitoringSignalVersion:
+      description: Version of the updated signal. If server side version is higher,
+        update will be rejected.
+      format: int64
+      type: integer
     SecurityMonitoringSignalsListResponse:
       description: 'The response object with all security signals matching the request
 
@@ -7147,6 +7330,26 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    SecurityMonitoringTriageUser:
+      description: Object representing a given user entity.
+      properties:
+        handle:
+          description: The handle for this user account.
+          type: string
+        id:
+          description: Numerical ID assigned by Datadog to this user account.
+          format: int64
+          type: integer
+        name:
+          description: The name for this user account.
+          type: string
+        uuid:
+          description: UUID assigned by Datadog to this user account.
+          example: 773b045d-ccf8-4808-bd3b-955ef6a8c940
+          type: string
+      required:
+      - uuid
+      type: object
     ServiceAccountCreateAttributes:
       description: Attributes of the created user.
       properties:
@@ -12743,6 +12946,159 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/security_monitoring/signals/{signal_id}/assignee:
+    patch:
+      description: Modify the triage assignee of a security signal.
+      operationId: EditSecurityMonitoringSignalAssignee
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalAssigneeUpdateRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_write
+      summary: Modify the triage assignee of a security signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v2/security_monitoring/signals/{signal_id}/incidents:
+    patch:
+      description: Change the related incidents for a security signal.
+      operationId: EditSecurityMonitoringSignalIncidents
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalIncidentsUpdateRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_write
+      summary: Change the related incidents of a security signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v2/security_monitoring/signals/{signal_id}/state:
+    patch:
+      description: Change the triage state of a security signal.
+      operationId: EditSecurityMonitoringSignalState
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalStateUpdateRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_write
+      summary: Change the triage state of a security signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/series:
     post:
       description: "The metrics end-point allows you to post time-series data that

@@ -5175,6 +5175,18 @@ api:
     url: /api/latest/security-monitoring/
     identifier: security-monitoring
     generated: true
+  - name: Change the related incidents of a security signal
+    url: '#change-the-related-incidents-of-a-security-signal'
+    identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - EditSecurityMonitoringSignalIncidents
+      unstable: []
+      order: 0
   - name: Get a list of security signals
     url: '#get-a-list-of-security-signals'
     identifier: security-monitoring-get-a-list-of-security-signals
@@ -5327,6 +5339,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - EditSecurityMonitoringSignalState
       unstable: []
@@ -5339,6 +5352,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - EditSecurityMonitoringSignalAssignee
       unstable: []
