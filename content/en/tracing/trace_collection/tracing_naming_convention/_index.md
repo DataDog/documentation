@@ -7,7 +7,7 @@ further_reading:
       text: 'Log Management Standard Attributes'
     - link: '/real_user_monitoring/browser/data_collected'
       tag: 'Documentation'
-      text: 'RUM Browser Datad Collected'
+      text: 'RUM Browser Data Collected'
     - link: '/tracing/trace_explorer/query_syntax/'
       tag: 'Documentation'
       text: 'Learn how to explore your traces'
