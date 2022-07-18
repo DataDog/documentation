@@ -23,7 +23,7 @@ By default, when logs are received by the Datadog intake API, a timestamp is gen
 
 The log timestamp is located at the top section of the log panel. Timestamps are stored in UTC and displayed in the user's local timezone. In the above screenshot, the local profile is set to `UTC+1`, therefore the time the log was received is `11:06:16.807 UTC`.
 
-To check if the reason the timestamp isn't showing the expected value due to the timezone being incorrectly set, go to your [Personal Settings][1] and check the Time zone section.
+The timestamp may not show the expected value because the timezone is incorrectly set. To check if this is the case, go to [Personal Settings > Preferences][1] and look at the **Time zone** section.
 
 If the timezone is correct, extract the timestamp from the message to override the log timestamp being shown.
 
@@ -36,7 +36,7 @@ If your raw logs are not showing the expected timestamp in Datadog, [extract](#e
 1. Go to your [Logs Pipeline][2]. 
 2. Click **Add Processor**. 
 3. Select **Grok Parser** for the processor type. 
-4. Use the [date() matcher][3] to extract the date and pass it into a custom date attribute. See the below example and also [parsing dates examples][4] for details.
+4. Use the [date() matcher][3] to extract the date and pass it into a custom date attribute. See the below example, as well as [parsing dates examples][4], for details.
 
 Log example:
 
@@ -99,7 +99,7 @@ To make sure the `mytimestamp` attribute value overrides the current log timesta
 3. Add `mytimestamp` to the list of date attributes. The date remapper looks for each of the reserved attributes in the order they are listed. To ensure the date comes from the `mytimestamp` attribute, place it first in the list.
 4. Click **Save**.
 
-There are specific date formats to follow for the remapping to work. The recognized date formats are: [ISO8601][7], [UNIX (the milliseconds EPOCH format)][8] and [RFC3164][9].
+There are specific date formats to follow for the remapping to work. The recognized date formats are: [ISO8601][7], [UNIX (the milliseconds EPOCH format)][8], and [RFC3164][9].
 
 If a different date format is being used, see [Custom date format](#custom-date-format).
 
