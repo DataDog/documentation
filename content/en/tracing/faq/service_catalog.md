@@ -57,6 +57,22 @@ The **Reliability** tab contains information about the stability of your service
 
 Click the Settings icon on the right hand corner to hide columns from the service list.
 
+
+#### PagerDuty Integration
+You can add PagerDuty metadata to the Service Catalog to complete the Reliability view. 
+
+- Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][6].
+- Get your [API acccess key from PagerDuty][7].
+- Link your PagerDuty service to Service Definition YAML.
+```yaml
+schema-version: v2
+dd-service: product-recommendation-lite
+team: Shopist
+integrations:
+  pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
+tags: []
+```
+
 ### Performance view
 
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. Sort the table by clicking columns to reveal services that:
@@ -126,36 +142,6 @@ To add service ownership information such as team name, Slack channels, and sour
 
 You can also manage service ownership information for services that do not emit any Datadog telemetry. To register a service, specify the service ownership, on-call information, and custom tags using the [Service Definition API][5]. 
 
-See the example service definition YAML:
-
-```yaml
----
-schema-version: v2
-dd-service: product-recommendation-lite
-team: Shopist
-contacts:
-  - type: slack
-    contact: https://exampleco.slack.com/archives/S319HSDB32
-links: 
-  - name: Demo Dashboard
-    type: dashboard
-    url: https://app.datadoghq.com/dashboard/abc-def-ghi
-repos: 
-  - name: Source 
-    provider: github 
-    url: https://github.com/DataDog/shopist/tree/prod/product-recommendation-lite
-  - name: Deployment 
-    provider: github 
-    url: https://github.com/DataDog/shopist/blob/prod/k8s/dd-trace-demo/templates/product-recommendation-lite-deployment.yaml
-docs: 
-  - name: Datadog Doc
-    provider: link
-    url: https://docs.datadoghq.com/tracing/faq/service_catalog/
-tags: []
-```
-
-To register multiple services in one YAML file, separate each service definition with a line containing three hyphens: `---`.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -165,3 +151,5 @@ To register multiple services in one YAML file, separate each service definition
 [3]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [4]: https://www.datadoghq.com/blog/unified-service-tagging/
 [5]: /tracing/faq/service_definition_api/
+[6]: https://docs.datadoghq.com/integrations/pagerduty/
+[7]: https://support.pagerduty.com/docs/api-access-keys

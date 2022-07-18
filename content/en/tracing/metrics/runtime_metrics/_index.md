@@ -14,4 +14,4 @@ Enable runtime metrics collection in the tracing client to gain additional insig
 {{< partial name="apm/apm-runtime-metrics.html" >}}
 <br>
 
-[1]: /tracing/visualization/#services
+[1]: /tracing/glossary/#services

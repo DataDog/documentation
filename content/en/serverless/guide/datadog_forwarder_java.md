@@ -217,6 +217,6 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 [8]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [9]: https://app.datadoghq.com/functions
 [10]: /serverless/custom_metrics?tab=java
-[11]: /tracing/connect_logs_and_traces/java/
+[11]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [12]: https://www.datadoghq.com/log4j-vulnerability/
 [13]: https://github.com/DataDog/datadog-lambda-java/releases

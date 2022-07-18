@@ -8,13 +8,13 @@ further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
   text: "Unified Service Tagging"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/visualization/services_map/"
+- link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
 ---
@@ -299,8 +299,8 @@ After enabling Universal Service Monitoring, you can:
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: https://docs.datadoghq.com/tracing/deployment_tracking/
-[3]: /tracing/visualization/services_map/
-[4]: /tracing/deployment_tracking/
+[3]: /tracing/services/services_map/
+[4]: /tracing/services/deployment_tracking/
 [5]: /monitors/create/types/apm/?tab=apmmetrics
 [6]: /dashboards/
 [7]: /monitors/service_level_objectives/metric/

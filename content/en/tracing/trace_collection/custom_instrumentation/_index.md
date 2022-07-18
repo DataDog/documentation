@@ -45,5 +45,5 @@ If you’re already using OpenTracing or OpenTelemetry, see [OpenTracing and Ope
 
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
-[2]: /tracing/visualization
-[3]: /tracing/setup_overview/open_standards/
+[2]: /tracing/glossary
+[3]: /tracing/trace_collection/open_standards/

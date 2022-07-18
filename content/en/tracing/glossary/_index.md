@@ -6,19 +6,19 @@ aliases:
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
   - /tracing/visualization/
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/visualization/resource/"
+- link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "/tracing/visualization/trace/"
+- link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
@@ -195,20 +195,20 @@ When child spans are concurrent, execution time is calculated by dividing the ov
 [1]: /monitors/create/types/apm/
 [2]: /developers/guide/data-collection-resolution-retention/
 [3]: /tracing/setup/
-[4]: /tracing/visualization/services_list/
-[5]: /tracing/visualization/services_map/
-[6]: /tracing/visualization/service/
-[7]: /tracing/visualization/resource/
+[4]: /tracing/services/services_list/
+[5]: /tracing/services/services_map/
+[6]: /tracing/services/service_page/
+[7]: /tracing/services/resource_page/
 [8]: /tracing/opentracing/java/#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
 [9]: /tracing/manual_instrumentation/
 [10]: /tracing/opentracing/
-[11]: /tracing/connect_logs_and_traces/
+[11]: /tracing/other_telemetry/connect_logs_and_traces/
 [12]: /tracing/guide/add_span_md_and_graph_it/
-[13]: /tracing/runtime_metrics/
+[13]: /tracing/metrics/runtime_metrics/
 [14]: /tracing/trace_explorer/
-[15]: /tracing/guide/metrics_namespace/
+[15]: /tracing/metrics/metrics_namespace/
 [16]: https://app.datadoghq.com/metric/summary
 [17]: https://app.datadoghq.com/monitors#/create
 [18]: /tracing/trace_explorer/query_syntax/#facets
-[19]: /tracing/trace_retention/#retention-filters
-[20]: /tracing/trace_ingestion/ingestion_controls/
+[19]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[20]: /tracing/trace_pipeline/ingestion_controls/

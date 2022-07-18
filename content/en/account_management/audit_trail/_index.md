@@ -4,7 +4,7 @@ kind: documentation
 aliases:
     - /account_management/audit_logs/
 further_reading:
-- link: "/account_management/audit_trail_events/"
+- link: "/account_management/audit_trail/events/"
   tag: "Documentation"
   text: "See the different Audit Trail events"
 - link: "/account_management/org_settings/"
@@ -107,7 +107,7 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][11] that shows vari
 
 [1]: https://app.datadoghq.com/audit-trail
 [2]: https://app.datadoghq.com/organization-settings/
-[3]: /account_management/audit_trail_events/
+[3]: /account_management/audit_trail/events/
 [4]: /logs/explorer/
 [5]: /monitors/create/types/audit_trail/
 [6]: /dashboards/

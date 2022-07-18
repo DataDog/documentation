@@ -77,7 +77,7 @@ Start exploring your ingested logs in the [Log Explorer][1].
 [2]: /security_platform/cloud_siem/
 [3]: /logs/log_collection/
 [4]: /logs/log_configuration/
-[5]: /tracing/connect_logs_and_traces/
+[5]: /tracing/other_telemetry/connect_logs_and_traces/
 [6]: /logs/guide/correlate-logs-with-metrics/
 [7]: /logs/explorer/search_syntax/
 [8]: /logs/live_tail/

@@ -94,7 +94,7 @@ clean-integrations:  ## Remove built integrations files.
 		find ./static/images/marketplace -type f \
 	    -exec rm -rf {} \; ;fi
 
-clean-auto-doc: ##Remove all doc automatically created
+clean-auto-doc: ## Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/agent/basic_agent_usage/ansible.md ]; then \
@@ -133,6 +133,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/real_user_monitoring/android/mobile_vitals.md ;fi
 	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
 	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
+	@if [ content/en/real_user_monitoring/android/web_view_tracking.md ]; then \
+	rm -f content/en/real_user_monitoring/android/web_view_tracking.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
 	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/ios.md ]; then \
@@ -200,7 +202,7 @@ hugpython/bin/activate: local/etc/requirements3.txt  ## Start python virtual env
 		$(VIRENV)/bin/pip install -r local/etc/requirements3.txt; \
 	else printf "\e[93mPython 3 is required to fetch integrations and run tests.\033[0m Try https://github.com/pyenv/pyenv.\n"; fi
 
-source-helpers: # Source the helper functions used in build, test, deploy.
+source-helpers: ## Source the helper functions used in build, test, deploy.
 	@if [ "${DOCKER}" != "true" ]; then make hugpython; fi
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
@@ -251,7 +253,7 @@ clean-ruby-examples:
 clean-typescript-examples:
 	@git clean -xdf content/en/api/**/*.ts*
 
-clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples clean-typescript-examples
+clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples clean-typescript-examples ## Remove the examples.
 	@rm -rf examples
 
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
@@ -297,13 +299,13 @@ examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
 examples/typescript: examples/datadog-api-client-typescript clean-typescript-examples
 	-cp -Rn examples/datadog-api-client-typescript/examples/v* ./content/en/api
 
-examples: examples/go examples/java examples/python examples/ruby examples/typescript
+examples: examples/go examples/java examples/python examples/ruby examples/typescript ## Build the examples.
 
-start-docker: clean
+start-docker: clean ## Start server in a docker container.
 	@export REPO_PATH=$(PWD) && \
 	export GITHUB_TOKEN=${GITHUB_TOKEN} && \
 	export FULL_BUILD=${FULL_BUILD} && \
 	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -p docs-local -f ./docker-compose-docs.yml up
 
-stop-docker:
+stop-docker: ## Stop the running docker container.
 	docker-compose -f ./docker-compose-docs.yml down

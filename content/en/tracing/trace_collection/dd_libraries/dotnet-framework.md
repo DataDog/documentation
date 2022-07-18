@@ -18,16 +18,16 @@ code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 70
 further_reading:
-  - link: "/tracing/connect_logs_and_traces/dotnet/"
+  - link: "/tracing/other_telemetry/connect_logs_and_traces/dotnet/"
     tag: "Documentation"
     text: "Connect .NET application logs to traces"
-  - link: "/tracing/runtime_metrics/dotnet/"
+  - link: "/tracing/metrics/runtime_metrics/dotnet/"
     tag: "Documentation"
     text: "Runtime metrics"
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
     text: "Microsoft Azure App Service extension"
-  - link: "/tracing/visualization/"
+  - link: "/tracing/glossary/"
     tag: "Documentation"
     text: "Explore your services, resources, and traces"
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
@@ -330,4 +330,4 @@ dotnet.exe example.dll
 [2]: /agent/
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /tracing/trace_collection/library_config/dotnet-framework/
-[5]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[5]: /tracing/trace_collection/custom_instrumentation/dotnet/

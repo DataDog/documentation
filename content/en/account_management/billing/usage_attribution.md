@@ -58,7 +58,7 @@ The **Applied Tags** section enables the following:
 
 Once the reports start to be generated, they are updated daily and aggregated monthly in this table.
 
-{{< img src="account_management/billing/usage_attribution/UsageAttributionV2.png" alt="Applied tags in Datadog" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-v2-Total-Usage.png" alt="Applied tags in Datadog" style="width:100%;" >}}
 
 - Data is shown by all tag keys selected e.g. by app and service. 
 - Data can be shown by specific organization or tag keys by querying on the left-side dropdown. 

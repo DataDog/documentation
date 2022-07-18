@@ -168,8 +168,8 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 [1]: /tracing/setup/ruby/#quickstart-for-opentracing
 [2]: /tracing/setup/ruby/#tracer-settings
-[3]: /tracing/visualization/#spans
-[4]: /tracing/visualization/#trace
+[3]: /tracing/glossary/#spans
+[4]: /tracing/glossary/#trace
 [5]: /tracing/setup/ruby/#integration-instrumentation
 [6]: https://bundler.io
 [7]: https://rubygems.org/gems/opentelemetry-exporters-datadog

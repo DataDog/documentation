@@ -88,6 +88,18 @@ DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 
 Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup. Below are possible causes for missing explain plans.
 
+#### Missing event statements consumer {#events-statements-consumer-missing}
+To capture explain plans, you must enable an event statements consumer. You can do this by adding the following option to your configuration files (for example, `mysql.conf`):
+```
+performance-schema-consumer-events-statements-current=ON
+```
+
+Datadog additionally recommends enabling the following:
+```
+performance-schema-consumer-events-statements-history-long=ON
+```
+This option enables the tracking of a larger number of recent queries across all threads. Turning it on increases the likelihood of capturing execution details from infrequent queries.
+
 #### Missing explain plan procedure {#explain-plan-procedure-missing}
 The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.
 

@@ -9,7 +9,7 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
 further_reading:
-    - link: 'tracing/setup/python'
+    - link: 'tracing/trace_collection/dd_libraries/python'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---

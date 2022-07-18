@@ -48,7 +48,7 @@
   },
 
   "email_support_sentence": {
-    "other": "You can contact our Support Team by visiting <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog's Support Website</a>. (all sites)."
+    "other": "You can contact our Support Team by visiting <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog's Support Website</a>. (all sites). <br><br> For details on how to log into the Support Website, see <a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\"> Access Your Support Ticket</a>."
   },
 
   "live_chat_support_sentence": {

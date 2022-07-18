@@ -9,7 +9,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
   text: "Datadog's partnership with OpenTelemetry"
-- link: "/tracing/connect_logs_and_traces/opentelemetry"
+- link: "/tracing/other_telemetry/connect_logs_and_traces/opentelemetry"
   tag: "Documentation"
   text: "Connect OpenTelemetry Traces and Logs"
 - link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
@@ -45,7 +45,7 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
 
 [1]: https://opentelemetry.io/docs/
 [2]: https://opentracing.io/docs/
-[3]: /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
-[4]: /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
-[5]: /tracing/connect_logs_and_traces/opentelemetry
-[6]: /tracing/setup_overview/open_standards/java
+[3]: /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
+[4]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
+[5]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
+[6]: /tracing/trace_collection/open_standards/java

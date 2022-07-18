@@ -15,9 +15,9 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-java'
       tag: 'GitHub'
       text: 'Datadog Java APM source code'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
-      text: 'Explore your services, resources and traces'
+      text: 'Explore your services, resources, and traces'
 ---
 ## Compatibility requirements
 
@@ -51,7 +51,7 @@ Otherwise, to begin tracing your applications:
 2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, logs injection (if you are sending logs to Datadog), and trace volume control, add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
     ```text
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
     ```
 
     **Note:** Enabling profiling may impact your bill depending on your APM bundle. See the [pricing page][5] for more information.
@@ -319,7 +319,7 @@ Java APM has minimal impact on the overhead of an application:
 [4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
 [5]: /account_management/billing/apm_tracing_profiler/
 [6]: /tracing/profiler/
-[7]: /tracing/connect_logs_and_traces/java/
+[7]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [8]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [9]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [10]: /tracing/trace_collection/library_config/java/

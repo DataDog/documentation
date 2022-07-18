@@ -18,5 +18,5 @@ To instrument an application written in a language that does not yet have offici
 
 
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 [2]: /developers/community/libraries/#apm-tracing-client-libraries

@@ -107,10 +107,10 @@ Some status values have changed:
 
 | Legacy status | New status |
 |---------------|------------|
-| success       | OK         |
-| warning       | WARN       |
-| info          | INFO       |
-| error         | ERROR      |
+| success       | ok         |
+| warning       | warn       |
+| info          | info       |
+| error         | error      |
 
 ### Source remapping in queries
 Many Event source names have changed. See the full list of affected [source names][5].

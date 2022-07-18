@@ -8,7 +8,7 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-java'
       tag: 'GitHub'
       text: 'Datadog Java APM source code'
-    - link: 'tracing/visualization/'
+    - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
 ---
@@ -146,7 +146,7 @@ When set to `true` db spans get assigned the instance name as the service name
 
 `dd.trace.health.metrics.enabled`
 : **Environment Variable**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 When set to `true` sends tracer health metrics
 
 `dd.trace.health.metrics.statsd.host`

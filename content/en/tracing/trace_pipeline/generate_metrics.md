@@ -6,7 +6,7 @@ aliases:
 - /tracing/span_to_metrics/
 - /tracing/generate_metrics/
 further_reading:
-    - link: 'tracing/trace_retention_and_ingestion'
+    - link: 'tracing/trace_pipeline'
       tag: "Documentation"
       text: 'Customize trace ingestion and retain important traces.'
     - link: 'tracing/trace_search_and_analytics/query_syntax'
@@ -73,7 +73,7 @@ After a metric is created, only two fields can be updated:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/trace_retention_and_ingestion
+[1]: /tracing/trace_pipeline/trace_retention
 [2]: /account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/metrics/#overview
 [4]: /monitors/create/types/anomaly/#overview

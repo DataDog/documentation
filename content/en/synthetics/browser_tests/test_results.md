@@ -155,7 +155,7 @@ Common browser test errors include:
 [3]: https://web.dev/cls/
 [4]: https://web.dev/fid/
 [5]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
-[6]: /tracing/visualization/trace/
+[6]: /tracing/trace_explorer/trace_view/
 [7]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
 [8]: /synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator
 [9]: /help/
