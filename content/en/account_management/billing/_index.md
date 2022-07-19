@@ -48,23 +48,25 @@ See [Credit Card Billing][11] for more details.
 
 If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. If you need an additional copy, email [Datadog billing][10]. Details on where to remit payment can be found on the invoice.
 
-### Managing your Payment Method
+### Managing your payment method
+
 The **Payment Method** section contains details on your payment options. 
 
-{{< img src="static/images/account_management/billing/PaymentMethodOverview.png" >}}
+{{< img src="account_management/billing/PaymentMethodOverview.png" style="width:80%;" >}}
 
 **Edit Payment** provides options to manage payment methods. You can edit or remove cards, and request to change your payment method from card to invoice and vice versa. 
 
-{{< img src="static/images/account_management/billing/PaymentSettingsDetails.png" >}}
+{{< img src="account_management/billing/PaymentSettingsDetails.png" style="width:80%;" >}}
 
-### Managing your Billing Contact Details
+### Managing your billing contact details
+
 You can view your billing contact details on the **Billing Contact Details** section. 
 
-{{< img src="static/images/account_management/billing/BillingContactDetailsOverview.png" >}}
+{{< img src="account_management/billing/BillingContactDetailsOverview.png" style="width:80%;"  >}}
 
 Through **Edit Details**, you can add, edit or remove your billing address. You can also set specific email addresses to receive invoices.
 
-{{< img src="static/images/account_management/billing/BillingContactDetailsEdit.png" >}}
+{{< img src="account_management/billing/BillingContactDetailsEdit.png" style="width:80%;" >}}
 
 **Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
 
