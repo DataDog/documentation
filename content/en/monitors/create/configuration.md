@@ -120,17 +120,62 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 #### No data
 
+Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. The sections below explain how to accomplish this with each option.
+
+There are currently two ways to deal with missing data:
+- Metric based monitors use the limited `Notify no data` option
+- The `On missing data` option is supoprted by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM Monitors
+
+{{< tabs >}}
+{{% tab "Metric based monitors" %}}
+
 `Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
 
-Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data.
+You either get notified for data being missing, or not. The notification occurs when no data was received during a configured time window.
 
 **Note**: It is recommended that you set the missing data window to at least two times the evaluation period.
 
-Alternatively, if you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data. This option does not work if it is enabled at a time when data has not been reporting for a long period.
+If you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data. This option does not work if it is enabled at a time when data has not been reporting for a long period.
 
 ##### Grouping
 
 For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
+
+{{% /tab %}}
+
+{{% tab "Other monitor types" %}}
+
+If data is missing for `N` minutes:
+
+- `Evaluate as zero` / `Show last known status`
+- `Show NO DATA`
+- `Show NO DATA and notify`
+- `Show OK`.
+
+{{< img src="/monitors/create/on_missing_data.png" alt="No Data Options" style="width:90%;">}}
+
+The selected behaviour is applied once a monitor's query does not return any data. Hence, contrary to the `Do not notify` option, the missing data window is **not** configurable.
+
+| Option                    | Monitor status & notification                                             |
+|---------------------------|---------------------------------------------------------------------------|
+| `Evaluate as zero`        | Empty result is "replaced" with zero and compared to the alert/warning thresholds. For example, if the alert threshold is set to `> 10`, a zero would not trigger that condition, hence the Monitor status is set to `OK`.   |
+| `Show last known status`  | The last known status of the group/monitor is set.                        |
+| `Show NO DATA`            | Monitor status is set to `NO DATA`.                                       |
+| `Show NO DATA and notify` | Monitor status is set to `NO DATA` and a notification is sent out.        |
+| `Show OK`                 | Monitor is resolved and status is set to `OK`.                            |
+
+The options `Evaluate as zero` and `Show last known status` are shown depending on the type of the query:
+
+**Evaluate as zero**
+This option is available for monitors using `Count` queries.
+
+**Show last known status**
+On the other hand, `Show last known status` is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, or `Distribution`.
+
+Both options are considered as the **default status** of the monitor.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Auto resolve
 
@@ -141,6 +186,12 @@ Auto-resolve works when data is no longer being submitted. Monitors do not auto-
 For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
 
 In most cases this setting is not useful because you only want an alert to resolve once it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
+
+#### Group retention time
+
+Drop the group from the monitor status after `N` hours of missing data (can be set up to 72 hours).
+
+{{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
 
 #### New group delay
 
