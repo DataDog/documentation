@@ -35,7 +35,6 @@ Basic information about a service.
 | schema-version&nbsp;[_required_] | string          | Version of the service definition schema being used. Only value `v2` is supported.| yes |
 | dd-service&nbsp;[_required_]     | string          | Unique identifier of the service. Must be unique across all services, and used to match with a service in Datadog. | yes |
 | team                        | string          | Name of the team responsible for the service. | yes |
-| dd-team                     | string          | Datadog Teams (not available); do not use | yes |
 
 #### Example
 {{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
