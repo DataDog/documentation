@@ -122,7 +122,7 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. The sections below explain how to accomplish this with each option.
 
-There are currently two ways to deal with missing data:
+There are two ways to deal with missing data:
 - Metric based monitors use the limited `Notify no data` option
 - The `On missing data` option is supoprted by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM Monitors
 
@@ -152,7 +152,7 @@ If data is missing for `N` minutes:
 - `Show NO DATA and notify`
 - `Show OK`.
 
-{{< img src="/monitors/create/on_missing_data.png" alt="No Data Options" style="width:90%;">}}
+{{< img src="/monitors/create/on_missing_data.png" alt="No Data Options" style="width:70%;">}}
 
 The selected behaviour is applied once a monitor's query does not return any data. Hence, contrary to the `Do not notify` option, the missing data window is **not** configurable.
 
