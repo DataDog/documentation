@@ -193,6 +193,14 @@ Drop the group from the monitor status after `N` hours of missing data (can be s
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
 
+Similar to the [Auto-resolve option][4], the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group is kept for 24h in the status before it's dropped. The start time of the group retention as well as the Auto-resolve option are **identical**, namely as soon as the monitor query returns no data.
+
+Typical use cases for defining a group retention time are:
+- you would like to drop the group immediately/shortly after data stops reporting
+- you would like to keep the group in the status for as long as you usually take for troubleshooting
+
+**Note**: This option is only available for multi-alert monitors and works with the [`On missing data`][5] option mentioned above.
+
 #### New group delay
 
 Delay the evaluation start by `N` seconds for new groups.
@@ -215,3 +223,5 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 [1]: /monitors/create/#monitor-types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
+[4]: /monitors/create/configuration#auto-resolve
+[5]: /monitors/create/configuration/?tab=othermonitortypes
