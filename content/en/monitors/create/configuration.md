@@ -191,7 +191,7 @@ In most cases this setting is not useful because you only want an alert to resol
 
 Drop the group from the monitor status after `N` hours of missing data (can be set up to 72 hours).
 
-{{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
+{{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:80%;">}}
 
 Similar to the [Auto-resolve option][4], the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group is kept for 24h in the status before it's dropped. The start time of the group retention as well as the Auto-resolve option are **identical**, namely as soon as the monitor query returns no data.
 
