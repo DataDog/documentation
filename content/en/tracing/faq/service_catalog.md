@@ -61,8 +61,8 @@ Click the Settings icon on the right hand corner to hide columns from the servic
 #### PagerDuty Integration
 You can add PagerDuty metadata to the Service Catalog to complete the Reliability view. 
 
-- Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][6].
-- Get your [API acccess key from PagerDuty][7].
+- Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][3].
+- Get your [API acccess key from PagerDuty][4].
 - Link your PagerDuty service to Service Definition YAML.
 ```yaml
 schema-version: v2
@@ -83,7 +83,7 @@ The **Performance** tab provides several ways to view how your services are perf
 - Have the highest error numbers or rates
 - Are running on the most pods, hosts, or serverless environments
 - Have related dashboards where you can see more performance data breakdowns, and identify which ones need to have dashboards added to their service definition
-- Have the highest or lowest [Apdex scores][3]
+- Have the highest or lowest [Apdex scores][5]
 - Have monitors that are triggered
 
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
@@ -104,7 +104,7 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 
 ## Service definitions
 
-A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][4], and the `DD_SERVICE` tag, provides a standard way to manage and monitor services consistently across multiple telemetry types including infrastructure metrics, logs, and traces. To define a service using additional criteria, you can customize a service definition that fits your architectural style.
+A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][6], and the `DD_SERVICE` tag, provides a standard way to manage and monitor services consistently across multiple telemetry types including infrastructure metrics, logs, and traces. To define a service using additional criteria, you can customize a service definition that fits your architectural style.
 
 Service definitions include the following elements which are all optional (except the service name):
 
@@ -132,45 +132,14 @@ Tags
 Integrations
 : Custom strings to connect integrations such as PagerDuty for identifying the service on-call.
 
-### Enriching a listed service 
+## Enriching an existing APM service 
 
-Initially, services sending data to Datadog through one of the telemetry products (Traces, Logs, Profiles, Infrastructure, Network Performance, and RUM) are listed with an `UNDEFINED` label, which means that no service definition has been associated with the service yet. 
+If you already use APM to trace your applications, add information about those services. Initially, APM-monitored services listed on the Service Catalog page have an `UNDEFINED` label. 
 
-To add service ownership information such as team name, Slack channels, and source code repositories, use the [Service Definition API][5].
+Add service ownership information such as the team name, Slack channels, and source code repositories by pushing a YAML file with the POST endpoint to the [Service Definition API][7].
 
-### Registering a new service
-
-You can also manage service ownership information for services that do not emit any Datadog telemetry. To register a service, specify the service ownership, on-call information, and custom tags using the [Service Definition API][5]. 
-
-See the example service definition YAML:
-
-```yaml
----
-schema-version: v2
-dd-service: product-recommendation-lite
-team: Shopist
-contacts:
-  - type: slack
-    contact: https://exampleco.slack.com/archives/S319HSDB32
-links: 
-  - name: Demo Dashboard
-    type: dashboard
-    url: https://app.datadoghq.com/dashboard/abc-def-ghi
-repos: 
-  - name: Source 
-    provider: github 
-    url: https://github.com/DataDog/shopist/tree/prod/product-recommendation-lite
-  - name: Deployment 
-    provider: github 
-    url: https://github.com/DataDog/shopist/blob/prod/k8s/dd-trace-demo/templates/product-recommendation-lite-deployment.yaml
-docs: 
-  - name: Datadog Doc
-    provider: link
-    url: https://docs.datadoghq.com/tracing/faq/service_catalog/
-tags: []
-```
-
-To register multiple services in one YAML file, separate each service definition with a line containing three hyphens: `---`.
+## Registering a new service
+You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. 
 
 ## Further Reading
 
@@ -178,8 +147,8 @@ To register multiple services in one YAML file, separate each service definition
 
 [1]: https://app.datadoghq.com/services
 [2]: /integrations/github/
-[3]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[4]: https://www.datadoghq.com/blog/unified-service-tagging/
-[5]: /tracing/faq/service_definition_api/
-[6]: https://docs.datadoghq.com/integrations/pagerduty/
-[7]: https://support.pagerduty.com/docs/api-access-keys
+[3]: https://docs.datadoghq.com/integrations/pagerduty/
+[4]: https://support.pagerduty.com/docs/api-access-keys
+[5]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[6]: https://www.datadoghq.com/blog/unified-service-tagging/
+[7]: /tracing/faq/service_definition_api/

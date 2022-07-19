@@ -1880,16 +1880,21 @@ main:
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
     weight: 1205
+  - name: Correlated Logs
+    url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
+    identifier: tracing_troubleshooting_correlated_logs
+    parent: tracing_troubleshooting
+    weight: 1206
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1206
+    weight: 1207
   - name: .NET diagnostic tool
     url: tracing/troubleshooting/dotnet_diagnostic_tool
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
-    weight: 1207
+    weight: 1208
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
@@ -6186,6 +6191,18 @@ api:
         - GetUsageLambdaTracedInvocations
       unstable: []
       order: 38
+  - name: Get hourly usage by product family
+    url: '#get-hourly-usage-by-product-family'
+    identifier: usage-metering-get-hourly-usage-by-product-family
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetHourlyUsage
+      unstable: []
+      order: 40
   - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
     identifier: usage-metering-get-cost-across-multi-org-account
@@ -6388,8 +6405,7 @@ api:
         - v1
       operationids:
         - GetMonthlyUsageAttribution
-      unstable:
-        - v1
+      unstable: []
       order: 31
   - name: Get hourly usage for Logs by Index
     url: '#get-hourly-usage-for-logs-by-index'
@@ -6485,8 +6501,7 @@ api:
         - v1
       operationids:
         - GetHourlyUsageAttribution
-      unstable:
-        - v1
+      unstable: []
       order: 30
   - name: Get hourly usage for hosts and containers
     url: '#get-hourly-usage-for-hosts-and-containers'

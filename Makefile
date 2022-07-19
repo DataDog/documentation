@@ -133,6 +133,8 @@ clean-auto-doc: ## Remove all doc automatically created
 	rm -f content/en/real_user_monitoring/android/mobile_vitals.md ;fi
 	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
 	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
+	@if [ content/en/real_user_monitoring/android/web_view_tracking.md ]; then \
+	rm -f content/en/real_user_monitoring/android/web_view_tracking.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
 	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/ios.md ]; then \
@@ -200,7 +202,7 @@ hugpython/bin/activate: local/etc/requirements3.txt  ## Start python virtual env
 		$(VIRENV)/bin/pip install -r local/etc/requirements3.txt; \
 	else printf "\e[93mPython 3 is required to fetch integrations and run tests.\033[0m Try https://github.com/pyenv/pyenv.\n"; fi
 
-source-helpers: # Source the helper functions used in build, test, deploy.
+source-helpers: ## Source the helper functions used in build, test, deploy.
 	@if [ "${DOCKER}" != "true" ]; then make hugpython; fi
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;

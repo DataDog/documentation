@@ -53,10 +53,10 @@ If your incident is customer-facing, specify the details in the Impact section:
 In addition to housing your property fields, the Overview section also provides the following at-a-glance summary modules:
 
 1. *Condensed Timeline*: Displays the times when the incident changes state as well as when impact started and ended for a high-level view of the incident's lifecycle.
-2. *Latest Notifications*: Displays the most recent notification sent for the incident, with quick access to the full list of notifications in the [Notification section][14].
-3. *Pending Tasks*: Displays the most recent incomplete task, with quick access to the full list of tasks in the [Remediation section][15].
+2. *Latest Notifications*: Displays the most recent notification sent for the incident, with quick access to the full list of notifications in the [Notification section](#notifications-section).
+3. *Pending Tasks*: Displays the most recent incomplete task, with quick access to the full list of tasks in the [Remediation section](#remediation-section).
 4. *Responders*: Displays the current incident commander and avatars for the remaining responders assigned to the incident.
-5. *Recent timeline entries*: Displays the five most recent entries in the incident timeline, with quick access to see the entire [Timeline section][16].
+5. *Recent timeline entries*: Displays the five most recent entries in the incident timeline, with quick access to see the entire [Timeline section](#timeline-section).
 
 ## Timeline section
 
@@ -164,6 +164,3 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [11]: /monitors/incident_management/incident_settings#rules
 [12]: /monitors/incident_management/incident_settings#message-templates
 [13]: /getting_started/incident_management
-[14]: #notifications-section
-[15]: #remediation-section
-[16]: #timeline-section
