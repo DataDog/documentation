@@ -41,7 +41,6 @@ Basic information about a service.
 schema-version: v2
 dd-service: shopping-cart
 team: E-Commerce Team
-dd-team: e-commerce
 {{< /code-block >}}
 
 #### Contacts (Optional)
