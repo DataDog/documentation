@@ -111,11 +111,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### APM events
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Retention filter][38] | A user created, modified, or deleted a [retention filter][39]. | `@evt.name:APM @asset.type:retention_filter` |
-| [Span-based metric][40] | A user created, modified, or deleted a [span-based metric][41]. | `@evt.name:APM @asset.type:custom_metrics` |
-| [Facet][42] | A user created, modified, or deleted a [facet][43]. | `@evt.name:APM @asset.type:facet` |
-| [Primary operation name][44] | A user created, modified, or deleted the [primary operation name][45] of a service. | `@evt.name:APM @asset.type:service_operation_name` |
-| [Second Primary tag][46] | A user added, modified, or deleted the [second primary tag][47].  | `@evt.name:APM @asset.type:second_primary_tag` |
+| [Retention filter][38] | A user created, modified, or deleted a [retention filter][39]  and the previous and/or new values for the retention filter configuration. | `@evt.name:APM @asset.type:retention_filter` |
+| [Span-based metric][40] | A user created, modified, or deleted a [span-based metric][41] and the previous and/or new values for the metric configuration. | `@evt.name:APM @asset.type:custom_metrics` |
+| [Facet][42] | A user created, modified, or deleted a [facet][43] and the previous and/or new values for the facet configuration. | `@evt.name:APM @asset.type:facet` |
+| [Primary operation name][44] | A user created, modified, or deleted the [primary operation name][45] of a service and the previous and/or new values for the configuration. | `@evt.name:APM @asset.type:service_operation_name` |
+| [Second Primary tag][46] | A user added, modified, or deleted the [second primary tag][47] and the previous and/or new values for the configuration.  | `@evt.name:APM @asset.type:second_primary_tag` |
 
 ### Metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
