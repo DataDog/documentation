@@ -804,6 +804,13 @@
       "description": "Get estimated cost across multi-org account with month returns \"OK\" response"
     }
   ],
+  "GetHourlyUsage": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage by product family returns \"OK\" response"
+    }
+  ],
   "GetUsageApplicationSecurityMonitoring": [
     {
       "group": "usage_metering",
