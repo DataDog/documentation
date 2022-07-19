@@ -5,6 +5,8 @@ GITHUB_TOKEN=${GITHUB_TOKEN:=false}
 RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
 LOCAL=${LOCAL:=False}
+PULL_RBAC_PERMISSIONS=${PULL_RBAC_PERMISSIONS:=false}
+DOCKER=${DOCKER:=false}
 
 if [ ${RUN_SERVER} = true ]; then
 	# integrations
@@ -22,10 +24,11 @@ if [ ${RUN_SERVER} = true ]; then
 	if [ ${PULL_RBAC_PERMISSIONS} == true ]; then
 		echo "Pulling RBAC permissions."
 
-		if [ ${DD_API_KEY} != false ] && [ ${DD_APP_KEY} != false ]; then
+		if [ -n "${DD_API_KEY}" ] && [ -n "${DD_APP_KEY}" ]; then
+      echo "API key and application key variables found."
 			pull_rbac.py ${DD_API_KEY} ${DD_APP_KEY}
 		else
-			echo "Api or application keys were not found. Skipping RBAC permissions."
+			echo "API or application keys were not found. Skipping RBAC permissions."
 		fi
 	fi
 
@@ -40,7 +43,14 @@ if [ ${RUN_SERVER} = true ]; then
   npm cache clean --force && yarn install --immutable
   echo "Starting webpack and hugo build."
   yarn run prestart
-	yarn run start
+
+  if [ ${DOCKER} == true ]; then
+    echo "Running docker build...."
+    LANGS_TO_IGNORE=${LANGS_TO_IGNORE} yarn run docker:start
+  else
+    echo "Running regular build...."
+    yarn run start
+  fi
 
   sleep 5
 

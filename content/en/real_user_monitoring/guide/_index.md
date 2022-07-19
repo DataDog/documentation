@@ -8,6 +8,7 @@ private: true
 {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Compute Apdex and custom performance indicators with RUM data{{< /nextlink >}}
 {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Create alerts with RUM data{{< /nextlink >}}
 {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Create alerts for conversion rates{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}

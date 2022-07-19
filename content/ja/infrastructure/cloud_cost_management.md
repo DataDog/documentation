@@ -32,7 +32,13 @@ AWS の [Cost and Usage Report の作成][1]の説明に従い、Datadog Cloud C
 
 ### AWS インテグレーションの構成
 
-ドロップダウンから AWS の請求アカウントを選択します。アカウントが選択されると、Datadog はそのアカウントに関連するタグを表示します。似たような名前の複数の請求アカウントがある場合、選択したアカウントに関連するタグを表示することで、必要な特定の 1 つを選択したことを確認できます。
+ドロップダウンメニューから AWS 管理アカウントを選択し、Datadog がこのアカウントに関連するタグを表示できるようにします。同じような名前の管理アカウントが複数ある場合、選択したアカウントに関連するタグを表示し、必要な特定のアカウントを選択したことを確認します。
+
+**注**: Datadog では、関連する**メンバーアカウント**のコストを視覚化するために、[AWS **管理アカウント**][6]からコストと使用量のレポートを送信することを推奨しています。AWS **メンバーアカウント**からコストと使用量レポートを送信する場合、Datadog がメンバーアカウントを完全に視覚化できるように、**管理アカウント**の[設定][7]で次のオプションが選択されていることを確認してください。
+
+* **リンクされたアカウントへのアクセス**
+* **リンクされたアカウントの払い戻しおよびクレジット**
+* **リンクされたアカウントの割引**
 
 ### Cost and Usage Report を探す
 
@@ -142,3 +148,5 @@ Datadog は、インジェストされたコストデータにタグを追加し
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [5]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html 
+[7]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings

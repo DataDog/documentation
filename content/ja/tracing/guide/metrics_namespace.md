@@ -20,7 +20,6 @@ further_reading:
 kind: ガイド
 title: トレースアプリケーションメトリクス
 ---
-<div class="alert alert-warning">このトレースメトリクスの使用方法は時代遅れです。代わりに、<a href="/tracing/guide/ddsketch_trace_metrics/">DDSketch を使用してディストリビューションメトリクスをトレースする</a>ことが推奨されます。</div>
 
 ## 概要
 
@@ -70,7 +69,7 @@ title: トレースアプリケーションメトリクス
 **タグ:** `env`、`service`、`resource`、`resource_name`、`version`、`synthetics`、[第 2 プライマリタグ][4]。
 
 
-### Errors
+### エラー
 
 `trace.<SPAN_NAME>.errors`
 : **前提条件:** このメトリクスは、すべての APM サービスに存在します。
@@ -108,6 +107,8 @@ title: トレースアプリケーションメトリクス
 
 ### Duration
 
+<div class="alert alert-warning">このトレースメトリクスの使用方法は時代遅れです。代わりに、<a href="/tracing/guide/ddsketch_trace_metrics/">DDSketch を使用してディストリビューションメトリクスをトレースする</a>ことが推奨されます。</div>
+
 `trace.<SPAN_NAME>.duration`
 : **前提条件:** このメトリクスは、どの APM サービスにも存在します。<br>
 **説明:** [レガシー] 収集サービスで見られる子スパンを含む、時間間隔内のスパンの収集の合計時間を測定します。このメトリクスは、「下流サービスの % 実行時間」グラフを生成するために使用されます。`trace.<SPAN_NAME>.duration` を `trace.<SPAN_NAME>.hits` で割ると、平均レイテンシーが得られますが、これは平均レイテンシーを計算するための推奨アプローチではありません。平均レイテンシーの計算には、[レイテンシー分布](#latency-distribution)のセクションを参照してください。 <br>
@@ -115,6 +116,8 @@ title: トレースアプリケーションメトリクス
 **タグ:** `env`、`service`、`resource`、`http.status_code`、Datadog Host Agent のすべてのホストタグ、および [2 番目のプライマリタグ][4]。
 
 ### 継続時間
+
+<div class="alert alert-warning">このトレースメトリクスの使用方法は時代遅れです。代わりに、<a href="/tracing/guide/ddsketch_trace_metrics/">DDSketch を使用してディストリビューションメトリクスをトレースする</a>ことが推奨されます。</div>
 
 `trace.<SPAN_NAME>.duration.by_http_status`
 : **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
@@ -204,4 +207,3 @@ title: トレースアプリケーションメトリクス
 [8]: /ja/tracing/visualization/services_list/#services-types
 [9]: /ja/tracing/visualization/#services
 [10]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[11]: /ja/tracing/guide/ddsketch_trace_metrics/

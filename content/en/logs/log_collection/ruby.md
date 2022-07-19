@@ -81,7 +81,7 @@ This section describes the minimum setup required to forward your Rails applicat
     config.colorize_logging = false
 
     # Log to a dedicated file
-    config.lograge.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
+    config.lograge.logger = ActiveSupport::Logger.new(Rails.root.join('log', "#{Rails.env}.log"))
 
     # This is useful if you want to log query parameters
     config.lograge.custom_options = lambda do |event|
@@ -204,4 +204,4 @@ end
 [4]: https://github.com/roidrage/lograge#installation
 [5]: /agent/logs/
 [6]: /agent/guide/agent-commands/#restart-the-agent
-[7]: /tracing/connect_logs_and_traces/ruby/
+[7]: /tracing/other_telemetry/connect_logs_and_traces/ruby/

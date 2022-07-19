@@ -56,7 +56,7 @@ To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
 ### Dashboards
-Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling view, which update in real-time and can represent fixed points in the past. They also work well for debugging.
+Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views, which update in real-time and can represent fixed points in the past. They also work well for debugging.
 
 ### Timeboards
 Timeboards have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
@@ -104,11 +104,11 @@ Toggle between UTC time and your default time zone.
 
 #### Notifications
 
-If notifications are activated for a dashboard, an event is created in the [event stream][12]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
+If notifications are activated for a dashboard, an event is created in the [event explorer][12]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
 
 Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
 
-Change events for dashboards with notifications enabled are seen in the event stream by searching:
+Change events for dashboards with notifications enabled are seen in the event explorer by searching:
 
 ```text
 tags:audit,dash

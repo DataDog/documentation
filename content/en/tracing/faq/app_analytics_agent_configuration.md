@@ -10,7 +10,7 @@ aliases:
 <div class="alert alert-danger">
 This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_ingestion">ingestion controls</a> and <a href="/tracing/trace_retention">retention filters</a> instead.
 <br>
-Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion"> Trace Retention and Ingestion </a> to use the new functionality.
+Migrate to <a href="/tracing/trace_pipeline"> Trace Retention and Ingestion </a> to use the new functionality.
 </div>
 
 [App Analytics][1] is used to filter APM data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
@@ -71,7 +71,7 @@ For example, if you have a Python service named `python-api`, and it's running F
 [3]: /tracing/app_analytics/#custom-instrumentation
 [4]: /tracing/send_traces/
 [5]: https://app.datadoghq.com/apm/docs/trace-search
-[6]: /tracing/visualization/#services
-[7]: /tracing/visualization/#resources
+[6]: /tracing/glossary/#services
+[7]: /tracing/glossary/#resources
 [8]: /tracing/app_analytics/search/#analysed-span
-[9]: /tracing/visualization/#trace
+[9]: /tracing/glossary/#trace

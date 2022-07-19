@@ -16,6 +16,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/
   tag: ブログ
   text: Dirty Pipe の脆弱性を利用したコンテナからの脱却
+- link: https://www.datadoghq.com/blog/dns-based-threat-detection/
+  tag: ブログ
+  text: DNS ベースの脅威検出でネットワーク層での攻撃をキャッチ
 kind: documentation
 title: クラウドワークロードセキュリティの概要
 ---

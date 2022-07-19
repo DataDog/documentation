@@ -65,7 +65,7 @@ Utilisez ce formulaire pour définir les options suivantes :
 Même si vous ne pouvez pas représenter graphiquement un check custom (comme vous le feriez pour des métriques), vous pouvez quand même le surveiller.
 Accédez à l'onglet _Monitor_ > _new monitor_, puis sélectionnez la section **custom check** :
 
-{{< img src="developers/service_checks/check_monitor.png" alt="Monitor de check"  >}}
+{{< img src="developers/service_checks/service_check_monitor.png" alt="Monitor de check"  >}}
 
 Configurez votre monitor de checks custom : 
 

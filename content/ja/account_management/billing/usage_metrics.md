@@ -33,6 +33,7 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | APM インデックス化スパン             | `datadog.estimated_usage.apm.indexed_spans` |
 | APM 取り込みバイト            | `datadog.estimated_usage.apm.ingested_bytes` |
 | APM 取り込みスパン            | `datadog.estimated_usage.apm.ingested_spans` |
+| RUM Sessions                  | `datadog.estimated_usage.rum.sessions`  |
 | サーバーレス Lambda 関数   | `datadog.estimated_usage.serverless.aws_lambda_functions` |
 | サーバーレス呼び出し        | `datadog.estimated_usage.serverless.invocations`|
 | API テストの実行                 | `datadog.estimated_usage.synthetics.api_test_runs` |
@@ -46,6 +47,9 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | CWS ホスト                     | `datadog.estimated_usage.cws.hosts` |
 | CWS コンテナ                | `datadog.estimated_usage.cws.containers` | 
 | データベースホスト                | `datadog.estimated_usage.dbm.hosts` |
+| ASM ホスト                     | `datadog.estimated_usage.asm.hosts` |
+| インシデント管理 (アクティブユーザー)   | `datadog.estimated_usage.incident_management.active_users` |
+| CI Visibility                 | `datadog.estimated_usage.ci_visibility.pipeline.committers`、`datadog.estimated_usage.ci_visibility.test.committers` |
 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="メトリクス名" >}}

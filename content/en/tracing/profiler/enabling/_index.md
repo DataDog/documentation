@@ -36,4 +36,4 @@ The following profiling library can be used for applications that are written in
 
 
 
-[1]: /tracing/setup_overview/
+[1]: /tracing/trace_collection/

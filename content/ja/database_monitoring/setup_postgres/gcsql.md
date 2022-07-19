@@ -48,11 +48,12 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` および `pg_stat_statements` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
 | `pg_stat_statements.track` | `all` | オプションです。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
 | `pg_stat_statements.max` | `10000` | オプションです。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
+| `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
 
 
 ## Agent にアクセスを付与する
 
-Datadog Agent は、統計やクエリを収集するためにデータベース サーバーへの読み取り専用のアクセスを必要とします。
+Datadog Agent が統計やクエリを収集するためには、データベース サーバーへの読み取り専用のアクセスが必要となります。
 
 Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ]を Agentで実行する必要がある場合のみ別のデータベースを選択してください[6]。
 
@@ -148,9 +149,11 @@ Cloud SQL ホストを監視するには、インフラストラクチャーに 
    ```
 2. [Agent を再起動します][2]。
 
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][3]を参照してください。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -196,12 +199,15 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][2]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][3]でパスワードを環境変数として渡す方法をご確認ください。
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][2]を参照してください。
+
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][3]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][4]でパスワードを環境変数として渡す方法をご確認ください。
 
 
 [1]: /ja/agent/docker/integrations/?tab=docker
-[2]: /ja/agent/guide/secrets-management
-[3]: /ja/agent/faq/template_variables/
+[2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
+[3]: /ja/agent/guide/secrets-management
+[4]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -290,14 +296,17 @@ spec:
     name: postgres
 ```
 
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][4]を参照してください。
+
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、Postgres チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][5]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ja/agent/guide/secrets-management
+[4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
+[5]: /ja/agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

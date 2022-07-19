@@ -8,7 +8,7 @@ kind: documentation
 title: トレースエクスプローラー
 ---
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースエクスプローラー" >}}
 
 ## 概要
 
@@ -47,7 +47,7 @@ Live Search は、トレースページのデフォルトの表示です。Live 
 
 ## 15 分間の Live Search
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_live_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ライブ検索" >}}
 
 Live Search を使用すると、スパンは、Datadog Agent から送信された時点で、保持フィルターによりインデックス化する前に Datadog に表示されます。取り込まれたすべてのスパンは、15 分間利用可能になり（ローリングウィンドウ）、サンプリングなしで表示されます。
 
@@ -109,7 +109,7 @@ Live Search の **List view** では、以下のことが可能です。
 
 ## 15 日間保持のインデックス化されたスパンの検索
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_indexed_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="インデックス検索" >}}
 
 Live Search と同じように、保持されたトレースを検索することができます。ライブデータ検索から保持データ検索に切り替えるには、タイムセレクターを 15 分以上の任意の期間に変更します。保持フィルターによってインデックス化されたすべてのスパンは、検索からアクセスできます。これらのスパンは、保持フィルターによってインデックス化された後、Datadog によって 15 日間保持されます。
 

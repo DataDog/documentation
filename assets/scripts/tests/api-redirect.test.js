@@ -51,5 +51,4 @@ describe(`Check if current page is an old API page, and redirect if able`, () =>
 
         expect(actual).toEqual(expected);
     });
-
 });

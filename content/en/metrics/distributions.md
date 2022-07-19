@@ -101,7 +101,7 @@ To customize tagging:
 {{< img src="metrics/distributions/dist_manage.jpg" alt="Configuring tags on a distribution with the Manage Tags button" style="width:80%;">}}
 
 ## Audit events
-Any tag configuration or percentile aggregation changes create an event in the [event stream][3]. This event explains the change and displays the user that made the change.
+Any tag configuration or percentile aggregation changes create an event in the [event explorer][3]. This event explains the change and displays the user that made the change.
 
 If you created, updated, or removed a tag configuration on a distribution metric, you can see examples with the following event search:
 ```text
@@ -120,4 +120,4 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 
 [1]: /metrics/types/
 [2]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
-[3]: https://app.datadoghq.com/event/stream
+[3]: https://app.datadoghq.com/event/explorer
