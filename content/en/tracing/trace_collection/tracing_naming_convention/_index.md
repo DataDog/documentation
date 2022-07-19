@@ -52,7 +52,7 @@ The following span tags can be used to describe HTTP client and server spans:
 | **Fullname**                                | **Type** | **Description**                                                                                                                                                    |
 |---------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `http.status_code`                          | `string` | The HTTP response status code                                                                                                                                      |
-| `http.url`                                  | `string` | The URL of the HTTP request, including the obfuscated query string. For more informations on obfuscation refer to [Data security][2] |
+| `http.url`                                  | `string` | The URL of the HTTP request, including query string. For more informations on how to obfuscate or disable query string refer to [Data security][2]                 |
 | `http.version`                              | `string` | The version of HTTP used for the request                                                                                                                           |
 | `http.method`                               | `string` | The port of the client that initiated the connection                                                                                                               |
 | `http.route`                                | `string` | The matched route (path template).<br>Example: `/users/:userID`                                                                                                    |
@@ -62,8 +62,8 @@ The following span tags can be used to describe HTTP client and server spans:
 | `http.response.content_length`              | `number` | The size of the request payload body in bytes                                                                                                                      |
 | `http.request.content_length_uncompressed`  | `number` | The size of the uncompressed request payload body after transport decoding                                                                                         |
 | `http.response.content_length_uncompressed` | `number` | The size of the uncompressed response payload body after transport decoding                                                                                        |
-| `http.request.headers.*`                    | `string` | The request HTTP headers. None are collected by default but can optionally be configured with `DD_TRACE_HEADER_TAGS`.<br>To know more about how tho collect headers, refer to the corresponding [Configure Datadog tracing Library][5].  |
-| `http.response.headers.*`                   | `string` | The response HTTP headers. None are collected by default but can optionally be configured with `DD_TRACE_HEADER_TAGS`.<br>To know more about how tho collect headers, refer [Configure Datadog tracing Library][5]. |
+| `http.request.headers.*`                    | `string` | The request HTTP headers. None are collected by default but can optionally be configured with `DD_TRACE_HEADER_TAGS`.                                              |
+| `http.response.headers.*`                   | `string` | The response HTTP headers. None are collected by default but can optionally be configured with `DD_TRACE_HEADER_TAGS`.                                             |
 
 
 ### Database
@@ -124,7 +124,7 @@ The following span tags can be used to describe errors associated with spans:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
-[2]: /tracing/setup_overview/configure_data_security/
+[2]: /tracing/configure_data_security/#http-data-collected
 [3]: /tracing/setup_overview/
 [4]: /tracing/visualization/#span-tags
 [5]: /tracing/trace_collection/library_config/
