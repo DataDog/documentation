@@ -139,7 +139,7 @@ If you already use APM to trace your applications, add information about those s
 Add service ownership information such as team name, Slack channels, and source code repositories, by pushing a YAML file using the POST endpoint to the [Service Definition API][7].
 
 ## Registering a new service
-You can manage your service ownership information with Service Catalog even if those services are not emitting any of Datadog telemetry (such as APM traces) through the [Service Definition API][7]. Specify service ownership, on-call info, and custom tags in YAML files, and the information is reflected in the Service Catalog UI. 
+You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. 
 
 ## Further Reading
 
