@@ -777,11 +777,37 @@
       "description": "Edit an API test returns \"OK\" response"
     }
   ],
+  "GetBrowserTestResult": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Get a browser test result returns \"OK\" response"
+    }
+  ],
+  "GetBrowserTestLatestResults": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Get a browser test's latest results summaries returns \"OK\" response"
+    }
+  ],
   "GetAPITestResult": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Get an API test result returns \"OK\" response"
+    },
     {
       "group": "synthetics",
       "suffix": "_1321866518",
       "description": "Get an API test result returns result with failure object"
+    }
+  ],
+  "GetAPITestLatestResults": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Get an API test's latest results summaries returns \"OK\" response"
     }
   ],
   "TriggerTests": [

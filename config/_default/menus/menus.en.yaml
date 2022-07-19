@@ -1879,7 +1879,7 @@ main:
     url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
-    weight: 1206  
+    weight: 1206
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
