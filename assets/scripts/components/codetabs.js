@@ -91,7 +91,7 @@ const initCodeTabs = () => {
     }
 
     const addEventListeners = () => {
-        const allTabLinksNodeList = document.querySelectorAll('.code-tabs li a')
+        const allTabLinksNodeList = document.querySelectorAll('.code-tabs .nav-tabs li a')
 
         allTabLinksNodeList.forEach(link => {
             link.addEventListener('click', () => {
