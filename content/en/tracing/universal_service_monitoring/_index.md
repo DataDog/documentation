@@ -281,7 +281,7 @@ Universal Service Monitoring automatically detects services running in your infr
 
 To update the service's name, use [unified service tagging][1].
 
-{{< img src="tracing/universal_service_monitoring/automatic-service-tagging.png" alt="When Datadog automatically detects your services, the tag used for this is shown on the top of the service page" style="width:100%;" >}}
+{{< img src="tracing/universal_service_monitoring/automatic-service-tagging.png" alt="When Datadog automatically detects your services, the tag used for this is shown on the top of the service page" style="width:80%;" >}}
 
 ## Exploring your services
 
