@@ -52,21 +52,21 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
 
 The **Payment Method** section contains details on your payment options. 
 
-{{< img src="account_management/billing/PaymentMethodOverview.png" style="width:80%;" >}}
+{{< img src="account_management/billing/PaymentMethodOverview.png" alt="Payment method on the Plan page" style="width:80%;" >}}
 
 **Edit Payment** provides options to manage payment methods. You can edit or remove cards, and request to change your payment method from card to invoice and vice versa. 
 
-{{< img src="account_management/billing/PaymentSettingsDetails.png" style="width:80%;" >}}
+{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="Payment settings on the Plan page" style="width:80%;" >}}
 
 ### Managing your billing contact details
 
 You can view your billing contact details on the **Billing Contact Details** section. 
 
-{{< img src="account_management/billing/BillingContactDetailsOverview.png" style="width:80%;"  >}}
+{{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:80%;" >}}
 
 Through **Edit Details**, you can add, edit or remove your billing address. You can also set specific email addresses to receive invoices.
 
-{{< img src="account_management/billing/BillingContactDetailsEdit.png" style="width:80%;" >}}
+{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="Editing billing contact details on the Plan page" style="width:80%;" >}}
 
 **Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
 
