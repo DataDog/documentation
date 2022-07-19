@@ -41,9 +41,9 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 
 On the [Rules][10] page, hover over a rule and click on the pencil icon to edit the rule. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how the rule scans your environment.
 
-For example, you can remove all resources tagged with `env:staging` using the **Never trigger a finding when** function. Or, limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only trigger a finding when** function.
+For example, you can remove all resources tagged with `env:staging` using the **This rule will not generate a finding if there is a match with any of the following suppression queries** function. Or, limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only generate a finding if there is a match with any of the following queries** function.
 
-{{< img src="security_platform/cspm/frameworks_and_benchmarks/never-trigger-a-signal.png" alt="In the Datadog app, select Advanced to populate Never trigger a finding when, and add a query." >}}
+{{< img src="security_platform/cspm/frameworks_and_benchmarks/never-trigger-a-finding.png" alt="In the Datadog app, select Advanced to populate Never trigger a finding when, and add a query." >}}
 
 ## Set notification targets for detection rules
 
