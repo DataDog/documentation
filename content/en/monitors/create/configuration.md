@@ -224,4 +224,4 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
 [4]: /monitors/create/configuration#auto-resolve
-[5]: /monitors/create/configuration/?tabs=thresholdalert#no-data
+[5]: /monitors/create/configuration/?tabs=othermonitortypes#no-data
