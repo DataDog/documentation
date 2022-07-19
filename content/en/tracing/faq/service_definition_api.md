@@ -60,7 +60,7 @@ contacts:
 External Resources (Optional)
 {{< /code-block >}}
 
-See full schema on [GitHub][6].
+See full schema on [GitHub][4].
 
 ## Post a service definition
 
@@ -74,8 +74,8 @@ POST /api/v2/services/definitions
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][5]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][6]. |
 
 ### Request
 
@@ -84,7 +84,7 @@ POST /api/v2/services/definitions
 ##### Model 
 | Field                       | Type            | Description |
 | --------------------------- | --------------- | ------------------------------------------------------- |
-| Request Body                | JSON or YAML    | See Service Definition Schema [v2][6] |
+| Request Body                | JSON or YAML    | See Service Definition Schema [v2][4] |
 
 #### Example
 {{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
@@ -167,8 +167,8 @@ GET /api/v2/services/definitions/<service_name>
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][5]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][6]. |
 
 ### Response
 
@@ -260,8 +260,8 @@ GET /api/v2/services/definitions
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][5]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][6]. |
 
 ### Response
 
@@ -350,8 +350,8 @@ DELETE /api/v2/services/definitions/<service_name>
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][5]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][6]. |
 
 ### Response
 
@@ -372,6 +372,6 @@ curl --location --request DELETE 'https://api.datadoghq.com/api/v2/services/defi
 [1]: https://www.datadoghq.com/blog/unified-service-tagging/
 [2]: /tracing/faq/service_catalog/
 [3]: /account_management/api-app-keys/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: https://app.datadoghq.com/organization-settings/application-keys
-[6]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
+[4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: https://app.datadoghq.com/organization-settings/application-keys

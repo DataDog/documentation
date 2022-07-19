@@ -61,8 +61,8 @@ Click the Settings icon on the right hand corner to hide columns from the servic
 #### PagerDuty Integration
 You can add PagerDuty metadata to the Service Catalog to complete the Reliability view. 
 
-- Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][6].
-- Get your [API acccess key from PagerDuty][7].
+- Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][3].
+- Get your [API acccess key from PagerDuty][4].
 - Link your PagerDuty service to Service Definition YAML.
 ```yaml
 schema-version: v2
@@ -83,7 +83,7 @@ The **Performance** tab provides several ways to view how your services are perf
 - Have the highest error numbers or rates
 - Are running on the most pods, hosts, or serverless environments
 - Have related dashboards where you can see more performance data breakdowns, and identify which ones need to have dashboards added to their service definition
-- Have the highest or lowest [Apdex scores][3]
+- Have the highest or lowest [Apdex scores][5]
 - Have monitors that are triggered
 
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
@@ -104,7 +104,7 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 
 ## Service definitions
 
-A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][4], and the `DD_SERVICE` tag, provides a standard way to manage and monitor services consistently across multiple telemetry types including infrastructure metrics, logs, and traces. To define a service using additional criteria, you can customize a service definition that fits your architectural style.
+A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][6], and the `DD_SERVICE` tag, provides a standard way to manage and monitor services consistently across multiple telemetry types including infrastructure metrics, logs, and traces. To define a service using additional criteria, you can customize a service definition that fits your architectural style.
 
 Service definitions include the following elements which are all optional (except the service name):
 
@@ -136,11 +136,11 @@ Integrations
 
 Initially, services sending data to Datadog through one of the telemetry products (Traces, Logs, Profiles, Infrastructure, Network Performance, and RUM) are listed with an `UNDEFINED` label, which means that no service definition has been associated with the service yet. 
 
-To add service ownership information such as team name, Slack channels, and source code repositories, use the [Service Definition API][5].
+To add service ownership information such as team name, Slack channels, and source code repositories, use the [Service Definition API][7].
 
 ### Registering a new service
 
-You can also manage service ownership information for services that do not emit any Datadog telemetry. To register a service, specify the service ownership, on-call information, and custom tags using the [Service Definition API][5]. 
+You can also manage service ownership information for services that do not emit any Datadog telemetry. To register a service, specify the service ownership, on-call information, and custom tags using the [Service Definition API][7]. 
 
 ## Further Reading
 
@@ -148,8 +148,8 @@ You can also manage service ownership information for services that do not emit 
 
 [1]: https://app.datadoghq.com/services
 [2]: /integrations/github/
-[3]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[4]: https://www.datadoghq.com/blog/unified-service-tagging/
-[5]: /tracing/faq/service_definition_api/
-[6]: https://docs.datadoghq.com/integrations/pagerduty/
-[7]: https://support.pagerduty.com/docs/api-access-keys
+[3]: https://docs.datadoghq.com/integrations/pagerduty/
+[4]: https://support.pagerduty.com/docs/api-access-keys
+[5]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[6]: https://www.datadoghq.com/blog/unified-service-tagging/
+[7]: /tracing/faq/service_definition_api/

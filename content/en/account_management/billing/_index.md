@@ -112,5 +112,3 @@ Through **Edit Details**, you can add, edit or remove your billing address. You 
 [9]: https://app.datadoghq.com/account/billing_history
 [10]: mailto:billing@datadoghq.com
 [11]: /account_management/billing/credit_card/
-[12]: mailto:success@datadoghq.com
-[13]: https://app.datadoghq.com/billing/history
