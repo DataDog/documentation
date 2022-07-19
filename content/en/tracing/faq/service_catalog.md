@@ -132,15 +132,14 @@ Tags
 Integrations
 : Custom strings to connect integrations such as PagerDuty for identifying the service on-call.
 
-### Enriching a listed service 
+## Enriching an existing APM service 
 
-Initially, services sending data to Datadog through one of the telemetry products (Traces, Logs, Profiles, Infrastructure, Network Performance, and RUM) are listed with an `UNDEFINED` label, which means that no service definition has been associated with the service yet. 
+If you already use APM to trace your applications, add information about those services. Initially, APM-monitored services listed on the Service Catalog page have an `UNDEFINED` label. 
 
-To add service ownership information such as team name, Slack channels, and source code repositories, use the [Service Definition API][7].
+Add service ownership information such as the team name, Slack channels, and source code repositories by pushing a YAML file with the POST endpoint to the [Service Definition API][7].
 
-### Registering a new service
-
-You can also manage service ownership information for services that do not emit any Datadog telemetry. To register a service, specify the service ownership, on-call information, and custom tags using the [Service Definition API][7]. 
+## Registering a new service
+You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. 
 
 ## Further Reading
 
