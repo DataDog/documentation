@@ -6186,6 +6186,18 @@ api:
         - GetUsageLambdaTracedInvocations
       unstable: []
       order: 38
+  - name: Get hourly usage by product family
+    url: '#get-hourly-usage-by-product-family'
+    identifier: usage-metering-get-hourly-usage-by-product-family
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetHourlyUsage
+      unstable: []
+      order: 40
   - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
     identifier: usage-metering-get-cost-across-multi-org-account
