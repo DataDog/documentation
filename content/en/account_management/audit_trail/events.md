@@ -111,7 +111,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### APM events
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Retention filter][38] | A user created, modified, or deleted a [retention filter][39]  and the previous and/or new values for the retention filter configuration. | `@evt.name:APM @asset.type:retention_filter` |
+| [Retention filter][38] | A user created, modified, or deleted a [retention filter][39] and the previous and/or new values for the retention filter configuration. | `@evt.name:APM @asset.type:retention_filter` |
 | [Span-based metric][40] | A user created, modified, or deleted a [span-based metric][41] and the previous and/or new values for the metric configuration. | `@evt.name:APM @asset.type:custom_metrics` |
 | [Facet][42] | A user created, modified, or deleted a [facet][43] and the previous and/or new values for the facet configuration. | `@evt.name:APM @asset.type:facet` |
 | [Primary operation name][44] | A user created, modified, or deleted the [primary operation name][45] of a service and the previous and/or new values for the configuration. | `@evt.name:APM @asset.type:service_operation_name` |
@@ -181,11 +181,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### Synthetic Monitoring events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Private location][67] | A user created or deleted a private location for synthetic tests. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_private_location` |
-| [Synthetic test created or deleted][68] | A user created or deleted a synthetic test. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
-| [Synthetic test modified][69] | A user modified a synthetic test and the previous and new values for the configuration. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
-| [Synthetic variable][70] | A user created, modified, or deleted a synthetic variable. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
-| [Synthetic settings][71] | A user modified synthetic settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
+| [Private location][67] | A user created or deleted a private location for Synthetic tests. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_private_location` |
+| [Synthetic test created or deleted][68] | A user created or deleted a Synthetic test. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| [Synthetic test modified][69] | A user modified a Synthetic test and the previous and new values for the configuration. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
+| [Synthetic variable][70] | A user created, modified, or deleted a Synthetic variable. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
+| [Synthetic settings][71] | A user modified Synthetic settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
 
 ### Reference Table events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
