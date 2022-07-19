@@ -5,7 +5,7 @@ kind: documentation
 
 Datadog offers different sites throughout the world. Each site is completely independent, and you cannot share data across sites. Each site gives you benefits (for example, government security regulations) or allows you to store your data in specific locations around the world.
 
-| Site    | Site URL                    | Site parameter      | Location |
+| Site    | Site URL                    | Site Parameter      | Location |
 |---------|-----------------------------|---------------------|----------|
 | US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
 | US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       |
