@@ -542,6 +542,10 @@ By default the Agent looks every 5 seconds for new containers.
 
 For Agent v6.12+, short lived container logs (stopped or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
 
+## Troubleshooting
+
+If you are missing tags on Kubernetes logs, this may be because the Agent's internal tagger does not yet have the related container or pod tags when logs are sent. To make the Log Agent wait a few seconds for the tagger to be ready, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to set how many seconds to wait. The default value is 0.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
