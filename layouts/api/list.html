@@ -64,6 +64,9 @@
 {{ range (where .Sites.First.Menus.api ".Name" "==" $ParamTitleEn) }}
   {{ range $menuChild := sort .Children ".Params.order" "asc" }}
 
+    {{/* if hasPrefix ($menuChild.Name | lower) "get hourly usage for" */}}
+    {{/* else */}}
+
     {{ $anchorStr := $menuChild.Name }}
     {{ $versionCount := (len $menuChild.Params.versions) }}
     <div class="row">
@@ -77,13 +80,22 @@
       {{ if gt (len $menuChild.Params.versions) 0 }}
       <div class="col-12 col-md-6">
           <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
+
+            {{ $isHourlyUsage := (eq ( .Name | lower ) "get hourly usage by product family") }}
+
+            {{ if $isHourlyUsage }}
+              <li class="nav-item">
+                <a class="nav-link mr-1" data-toggle="tab" href="#get-hourly-usage-by-product-family-v1">v1</a>
+              </li>
+            {{ end }}
+
             {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
               {{ $adat := (index (index $dot.Site.Data.api $versionNum) "full_spec_deref") }}
               {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
               {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
               {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
               <li class="nav-item">
-                <a class="nav-link mr-1 {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-toggle="collapse"{{- else -}}data-toggle="tab"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
+                <a class="nav-link mr-1 {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if or (and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1)) $isHourlyUsage }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) (not $isHourlyUsage) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-toggle="collapse"{{- else -}}data-toggle="tab"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
               </li>
             {{ end }}
           </ul>
@@ -92,6 +104,12 @@
     </div>
 
     <div class="tab-content">
+
+
+    <div id="get-hourly-usage-by-product-family-v1" class="collapse" role="tabpanel">
+      {{ partial "api/usage-menu" (dict "dot" $dot "ParamTitleEn" $ParamTitleEn) }}
+    </div>
+
     <!-- If we have multiple endpoints for a version output them next to each other -->
     {{ range $versionIndex, $versionNum := .Params.versions }}
       {{ $adat := (index (index $dot.Site.Data.api $versionNum) "full_spec_deref") }}
@@ -186,6 +204,7 @@
             <hr class="mt-0 mb-2" style="border-top: 2px solid#DADADA"/>
         </div>
     </div>
+    {{/* end */}}
 
   {{ end }}
 {{ end }}

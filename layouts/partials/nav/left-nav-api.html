@@ -34,12 +34,39 @@
             <ul class="nav">
                 {{ range sort .Children ".Params.order" "asc"  }}
                     {{ $menuChild := . }}
+                    {{ if hasPrefix (.Name | lower) "get hourly usage for" }}
+                      <!--<li style="color:red">{{ .Name }}</li>-->
+                    {{ else }}
                     <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
                         <a class="col nav-link d-inline-block" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-target="#{{.Identifier}}">
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
+
+                        {{- with .Params.versions -}}
+                          {{ $versionCount := (len .) }}
+
+                          <span class="col-auto text-right pr-3 d-inline-block">
+                          {{- range $i, $version := . -}}
+                            {{ if $i }}, {{ end }}
+                            {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $version "menuChild" $menuChild) }}
+                            <a class="d-inline-block text-purple font-bold px-0 mx-0" data-version="{{- $version -}}" href="#{{- $menuChild.Name | anchorize -}}">
+                              <!-- * - beta , ~x~ - deprecated -->
+                              {{- $endpointVisibility.labelPrefix -}}{{- $version -}}{{- $endpointVisibility.labelSuffix -}}
+                            </a>
+                          {{- end -}}
+                          </span>
+
+                        {{- end -}}
                     </li>
+                    {{ end }}
                 {{ end }}
+
+                <!-- manual get hourly usage -->
+                <!--<li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
+                    <a class="col nav-link d-inline-block" href="#{{ "Get hourly usage" | anchorize }}" data-target="#{{.Identifier}}">
+                      <span class="d-inline-block">Get hourly usage by product family (v1)</span>
+                    </a>
+                </li>-->
             </ul>
         </li>
     {{ else }}
