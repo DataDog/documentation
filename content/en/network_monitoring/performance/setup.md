@@ -133,7 +133,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
 
-6. If running on AWS, enable 'expanded collection' for AWS to allow NPM to tag traffic by load balancer or NAT gateway.
+6. [Optional] If runing on AWS, enable 'standard collection' for AWS for additional visibility in NAT gateways and Elastic loadbalancers.
 
 ### SELinux-enabled systems
 
