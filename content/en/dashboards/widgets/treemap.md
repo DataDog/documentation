@@ -55,6 +55,10 @@ Viewing the pie chart widget in full-screen reveals the standard set of [full-sc
 
 This widget can be used with the [Dashboards API][6].
 
+The dedicated [widget JSON schema definition][8] for the treemap widget is:
+
+{{< dashboards-widgets-api >}}
+
 ## Pie chart widget
 
 Like the treemap widget, the [pie chart widget][7] can also be used to display nested proportions. The primary difference between the two is that the pie chart displays proportions in radial slices, and the treemap displays nested rectangles.
@@ -70,3 +74,4 @@ Like the treemap widget, the [pie chart widget][7] can also be used to display n
 [5]: /dashboards/widgets/#full-screen
 [6]: /api/latest/dashboards/
 [7]: /dashboards/widgets/pie_chart/
+[8]: /dashboards/graphing_json/widget_json/
