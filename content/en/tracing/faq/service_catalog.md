@@ -133,7 +133,8 @@ Integrations
 : Custom strings to connect integrations such as PagerDuty for identifying the service on-call.
 
 ## Enriching an existing APM service 
-If you already use APM to trace your applications, add information about those services. Initially, APM monitored services listed on the Service Catalog page have an `UNDEFINED` label on them. 
+
+If you already use APM to trace your applications, add information about those services. Initially, APM-monitored services listed on the Service Catalog page have an `UNDEFINED` label. 
 
 Add service ownership information such as team name, Slack channels, and source code repositories, by pushing a YAML file using the POST endpoint to the [Service Definition API][7].
 
