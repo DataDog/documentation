@@ -2,7 +2,7 @@ import { getQueryParameterByName } from '../helpers/browser';
 
 const initCodeTabs = () => {
     const codeTabsList = document.querySelectorAll('.code-tabs')
-    const tabQueryParameter = getQueryParameterByName('tab')
+    const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs')
 
     const init = () => {
         renderCodeTabElements()
@@ -107,10 +107,14 @@ const initCodeTabs = () => {
     const updateUrl = (activeLang) => {
         const url = window.location.href
             .replace(window.location.hash, '')
-            .replace(window.location.search, '');
+            .replace(window.location.search, '')
 
-        const queryParams = new URLSearchParams(window.location.search);
-        queryParams.set('tabs', activeLang)
+        const queryParams = new URLSearchParams(window.location.search)
+        queryParams.set('tab', activeLang)
+
+        if (queryParams.get('tabs')) {
+            queryParams.delete('tabs')
+        }
 
         window.history.replaceState(
             null,
