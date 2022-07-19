@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import sys
 import requests
 import json
@@ -7,8 +8,12 @@ from os import getenv
 from collections import defaultdict
 
 def pull_rbac():
+  parser = argparse.ArgumentParser()
+  parser.add_argument('apikey', default='')
+  parser.add_argument('appkey', default='')
+  args = parser.parse_args()
   api_endpoint = 'https://app.datadoghq.com/api/v2/permissions'
-  headers = {'DD-API-KEY': sys.argv[1], 'DD-APPLICATION-KEY': sys.argv[2]}
+  headers = {'DD-API-KEY': args.apikey, 'DD-APPLICATION-KEY': args.appkey}
   formatted_permissions_dict = {}
 
   r = requests.get(api_endpoint, headers=headers)

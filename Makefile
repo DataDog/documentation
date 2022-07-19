@@ -84,7 +84,7 @@ dependencies: clean hugpython all-examples data/permissions.json placeholders up
 # builds permissions json from rbac
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
 data/permissions.json:
-	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py $(DATADOG_API_KEY) $(DATADOG_APP_KEY)
+	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py "$(DATADOG_API_KEY)" "$(DATADOG_APP_KEY)"
 
 # only build placeholders in ci
 placeholders:
