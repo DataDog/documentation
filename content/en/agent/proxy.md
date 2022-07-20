@@ -433,11 +433,14 @@ logs_config:
 
 database_monitoring:
     metrics:
-        dd_url: haproxy.example.com:3839
+        logs_dd_url: haproxy.example.com:3839
+        logs_no_ssl: true
     activity:
-        dd_url: haproxy.example.com:3839
+        logs_dd_url: haproxy.example.com:3839
+        logs_no_ssl: true
     samples:
-        dd_url: haproxy.example.com:3840
+        logs_dd_url: haproxy.example.com:3840
+        logs_no_ssl: true
 
 network_devices:
     metadata:
@@ -625,11 +628,14 @@ logs_config:
 
 database_monitoring:
     metrics:
-        dd_url: nginx.example.com:3839
+        logs_dd_url: nginx.example.com:3839
+        logs_no_ssl: true
     activity:
-        dd_url: nginx.example.com:3839
+        logs_dd_url: nginx.example.com:3839
+        logs_no_ssl: true
     samples:
-        dd_url: nginx.example.com:3840
+        logs_dd_url: nginx.example.com:3840
+        logs_no_ssl: true
 
 network_devices:
     metadata:
