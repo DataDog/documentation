@@ -2,27 +2,27 @@
 title: Getting Started with API Tests
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/course/view.php?id=39'
-      tag: 'Learning Center'
-      text: 'Introduction to Synthetic Tests'
-    - link: '/synthetics/api_tests'
-      tag: 'Documentation'
-      text: 'Learn more about single API tests'
-    - link: '/synthetics/multistep'
-      tag: 'Documentation'
-      text: 'Learn more about multistep API tests'
-    - link: '/getting_started/synthetics/private_location'
-      tag: 'Documentation'
-      text: 'Learn about private locations'
-    - link: '/synthetics/cicd_integrations/'
-      tag: 'Documentation'
-      text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
-    - link: '/synthetics/identify_synthetics_bots'
-      tag: 'Documentation'
-      text: 'Learn how to identify Synthetic bots for API tests'
-    - link: '/api/v1/synthetics/#create-a-test'
-      tag: 'API Docs'
-      text: 'Create a Synthetic test programmatically'
+- link: '/api/v1/synthetics/#create-a-test'
+  tag: 'API'
+  text: 'Create a Synthetic test programmatically'
+- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
+- link: '/synthetics/api_tests'
+  tag: 'Documentation'
+  text: 'Learn more about single API tests'
+- link: '/synthetics/multistep'
+  tag: 'Documentation'
+  text: 'Learn more about multistep API tests'
+- link: '/getting_started/synthetics/private_location'
+  tag: 'Documentation'
+  text: 'Learn about private locations'
+- link: '/synthetics/cicd_integrations/'
+  tag: 'Documentation'
+  text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
+- link: '/synthetics/identify_synthetics_bots'
+  tag: 'Documentation'
+  text: 'Learn how to identify Synthetic bots for API tests'
 
 ---
 
@@ -99,11 +99,11 @@ You can also configure your test to only trigger a notification when your endpoi
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### Notify your team
+### Configure the test monitor
 
 Design your alert message and add any email address you want your test to send alerts to. You can also use [notifications integrations][10] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][11].
 
-When you're ready to run your test, click **Save Test**. 
+When you're ready to save your test configuration and monitor, click **Create**. 
 
 ## Create a multistep API test
 
@@ -142,7 +142,7 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
     - In the **Response Header,** select `location`.
     - In the **Parsing Regex** field, add a regular expression such as `(?:[^\\/](?!(\\|/)))+$`.
 
-  {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="Extracted variable from response content" style="width:100%;" >}}
+   {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="Extracted variable from response content" style="width:100%;" >}}
 
 8. Click **Save Variable**.
 9. When you're done creating this test step, click **Save Step**.
@@ -188,7 +188,7 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
 
 {{< img src="getting_started/synthetics/defined-steps.png" alt="Created test steps" style="width:100%;" >}}
 
-You can then configure the rest of your test conditions including test frequency, alerting conditions, and alert message. When you're ready to run your test, click **Save Test**. 
+You can then configure the rest of your test conditions including test frequency, alerting conditions, and alert message. When you're ready to save your test configuration and monitor, click **Create**. 
 
 ## Look at test results
 

@@ -2,21 +2,21 @@
 title: Getting Started with Browser Tests
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/course/view.php?id=39'
-      tag: 'Learning Center'
-      text: 'Introduction to Synthetic Tests'
-    - link: '/synthetics/browser_tests'
-      tag: 'Documentation'
-      text: 'Learn more about browser tests'
-    - link: '/getting_started/synthetics/private_location'
-      tag: 'Documentation'
-      text: 'Learn about private locations'
-    - link: '/synthetics/cicd_integrations'
-      tag: 'Documentation'
-      text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
-    - link: '/synthetics/identify_synthetics_bots'
-      tag: 'Documentation'
-      text: 'Learn how to identify Synthetic bots for API tests'
+- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
+- link: '/synthetics/browser_tests'
+  tag: 'Documentation'
+  text: 'Learn more about browser tests'
+- link: '/getting_started/synthetics/private_location'
+  tag: 'Documentation'
+  text: 'Learn about private locations'
+- link: '/synthetics/cicd_integrations'
+  tag: 'Documentation'
+  text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
+- link: '/synthetics/identify_synthetics_bots'
+  tag: 'Documentation'
+  text: 'Learn how to identify Synthetic bots for API tests'
       
 ---
 
@@ -76,7 +76,7 @@ You can also configure your test to only trigger a notification when your applic
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-#### Notify your team
+#### Configure the test monitor
 
 Design your alert message and add an email address you want your test to send alerts to.
 
@@ -84,7 +84,7 @@ Design your alert message and add an email address you want your test to send al
 
 You can also use [notifications integrations][6] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][7].
 
-When you're ready to record your test, click **Save Details & Record Test**.
+When you're ready to save your test configuration and monitor, click **Save & Edit Recording**.
 
 ### Create recording
 
