@@ -227,4 +227,4 @@ CPU
 
 
 [1]: /tracing/send_traces/#configure-your-environment
-[2]: /tracing/visualization/#services
+[2]: /tracing/glossary/#services

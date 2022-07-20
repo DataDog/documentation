@@ -270,13 +270,13 @@ frontend network_devices_metadata_frontend
     option tcplog
     default_backend datadog-network-devices-metadata
 
-# これは、Agent が Instrumentations Telemetry データを
-# 送信するために接続するエンドポイントを宣言します (例えば、"apm_config.telemetry.dd_url" の値です)
-frontend instrumentation_telemetry_data_frontend
-    bind *:3843
+# これは、Agent が appsec イベントを
+# 送信するために接続するエンドポイントを宣言します (非推奨)
+frontend appsec-events-frontend
+    bind *:3842
     mode tcp
     option tcplog
-    default_backend datadog-instrumentations-telemetry
+    default_backend datadog-appsec-events
 
 # これは Datadog のサーバーです。事実上、上記で定義した
 # フォワーダーフロントエンドに来る全ての TCP リクエストは、
@@ -359,13 +359,13 @@ backend datadog-network-devices-metadata
     # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
     # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
-backend datadog-instrumentations-telemetry
+backend datadog-appsec-events # 非推奨
     balance roundrobin
     mode tcp
     # 以下の構成は、HAProxy 1.8 以降の場合です
-    server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
-    # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 ```
 
 **注**: 次のコマンドで証明書をダウンロードしてください:
@@ -553,9 +553,9 @@ stream {
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3843; #インスツルメンテーションテレメトリーデータのリッスン
+        listen 3842; #appsec イベントのリッスン (非推奨)
         proxy_ssl on;
-        proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
+        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -594,7 +594,11 @@ database_monitoring:
 
 network_devices:
     metadata:
-        dd_url: nginx.example.com:3841
+        dd_url: "<PROXY_SERVER_DOMAIN>:3841"
+
+appsec_config:
+    appsec_dd_url: "<PROXY_SERVER_DOMAIN>:3842"
+
 ```
 
 TCP 経由でログを送信する場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>を参照してください。

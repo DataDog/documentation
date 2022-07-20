@@ -1,41 +1,42 @@
 ---
-title: DogStatsD によるイベント
-kind: documentation
+aliases:
+- /ja/developers/events/dogstatsd/
 description: データタイプ、タグ付けなど、DogStatsD の機能の概要
 further_reading:
-  - link: /developers/dogstatsd/
-    tag: ドキュメント
-    text: DogStatsD 入門
-  - link: /developers/community/libraries/
-    tag: ドキュメント
-    text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
-    tag: GitHub
-    text: DogStatsD ソースコード
-aliases:
-  - /ja/developers/events/dogstatsd/
+- link: /developers/dogstatsd/
+  tag: ドキュメント
+  text: DogStatsD 入門
+- link: /developers/community/libraries/
+  tag: ドキュメント
+  text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
+  tag: GitHub
+  text: DogStatsD ソースコード
+kind: documentation
+title: DogStatsD によるイベント
 ---
+
 ## 送信
 
-[DogStatsD をインストール][1]した後、次の関数を使用して [Datadog のイベントストリーム][2]にイベントを送信できます。
+[DogStatsD をインストール][1]した後、次の関数を使用して [Datadog のイベントエクスプローラー][2]にイベントを送信できます。
 
 ```text
-event(<タイトル>, <テキスト>, <タイムスタンプ>, <ホスト名>, <集計キー>, <優先度>, <ソースタイプ名>, <アラートタイプ>, <タグ>)
+event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <date_happened>, <priority>, <tags>, <hostname>)
 ```
 
 **定義**:
 
 | パラメーター            | タイプ            | 必須 | 説明                                                                                |
 |----------------------|-----------------|----------|--------------------------------------------------------------------------------------------|
-| `<タイトル>`            | 文字列          | 〇      | イベントのタイトル                                                                     |
-| `<テキスト>`             | 文字列          | 〇      | イベントのテキスト本文                                                                 |
-| `<タイムスタンプ>`        | 整数         | ✕       | イベントの Epoch タイムスタンプ (デフォルトで DogStatsD サーバーからの現在時刻が入力されます) |
-| `<ホスト名>`         | 文字列          | ✕       | ホストの名前                                                                       |
-| `<集計キー>`  | 文字列          | ✕       | イベントを集計するために使用するキー                                                        |
-| `<優先度>`         | 文字列          | ✕       | イベントの優先度を指定します (`normal` または `low`)。                                   |
-| `<ソースタイプ名>` | 文字列          | ✕       | ソースタイプの名前                                                                  |
-| `<アラートタイプ>`       | 文字列          | ✕       | `error`、`warning`、`success`、または `info` (デフォルトは `info`)                              |
-| `<タグ>`             | 文字列のリスト | ✕       | このイベントに関連付けられるタグのリスト                                                 |
+| `<title>`            | 文字列          | 〇      | イベントのタイトル                                                                     |
+| `<message>`          | 文字列          | 〇      | イベントのテキスト本文                                                                 |
+| `<alert_type>`       | 文字列          | ✕       | `error`、`warning`、`success`、または `info` (デフォルトは `info`)                              |
+| `<aggregation_key>`  | 文字列          | ✕       | イベントを集計するために使用するキー                                                        |
+| `<source_type_name>` | 文字列          | ✕       | ソースタイプの名前                                                                       |
+| `<date_happened>`    | 整数         | ✕       | イベントの Epoch タイムスタンプ (デフォルトで DogStatsD サーバーからの現在時刻が入力されます) |
+| `<priority>`         | 文字列          | ✕       | イベントの優先度を指定します (`normal` または `low`)                                    |
+| `<tags>`             | 文字列のリスト | ✕       | このイベントに関連付けられるタグのリスト                                                  |
+| `<hostname>`         | 文字列          | ✕       | ホストの名前                                                                       |
 
 ### 例
 
@@ -56,9 +57,6 @@ options = {
 initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
-
-# オプションの手動フラッシュ (クライアントバージョン 0.43.0 以降でのみ利用可能)
-statsd.flush()
 ```
 {{< /programming-lang >}}
 
@@ -173,7 +171,7 @@ $statsd->event('An error occurred.',
   );
 ```
 
-DogStatsD-PHP ライブラリを使用すると、イベントを TCP 経由で直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー][1]を使用してライブラリを構成する必要があります。
+DogStatsD-PHP ライブラリを使用すると、イベントを TCP を通じて直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー][1]を使用してライブラリを構成する必要があります。
 
 ```php
 <?php
@@ -196,7 +194,7 @@ $statsd->event('An error occurred.',
 ```
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

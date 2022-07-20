@@ -7,6 +7,7 @@
         "algolia:config": "node ./local/bin/js/algolia-config.js",
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public && npx hugo mod clean",
+        "docker:start": "HUGO_DISABLELANGUAGES=$LANGS_TO_IGNORE /usr/local/bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache --bind 0.0.0.0",
         "start": "./node_modules/.bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache",
         "prebuild": "rimraf public && npx hugo mod clean",
         "build": "yarn run prebuild && yarn run build:hugo",
@@ -21,7 +22,7 @@
         "deploy:live": "./node_modules/.bin/hugo deploy --target live -e live --maxDeletes -1 --log --verbose --debug",
         "build:apiPages": "node -e 'require(\"./assets/scripts/build-api-pages.js\").init()'",
         "dereference": "node ./assets/scripts/dereference.js",
-        "test": "./node_modules/.bin/jest"
+        "jest-test": "./node_modules/.bin/jest ./assets/scripts/tests"
     },
     "repository": {
         "type": "git",
@@ -71,6 +72,9 @@
         "yaml-lint": "^1.2.4"
     },
     "devDependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.18.6",
+        "@babel/plugin-proposal-object-rest-spread": "^7.18.6",
+        "@babel/preset-env": "^7.18.6",
         "@datadog/datadog-ci": "^1.2.0",
         "acorn": "^7.1.1",
         "cross-env": "^5.2.0",

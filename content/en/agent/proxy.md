@@ -270,13 +270,21 @@ frontend network_devices_metadata_frontend
     option tcplog
     default_backend datadog-network-devices-metadata
 
+# This declares the endpoint where your Agents connects for
+# sending Network Devices SNMP Traps data (e.g the value of "network_devices.snmp_traps.forwarder.dd_url")
+frontend network_devices_snmp_traps_frontend
+    bind *:3842
+    mode http
+    option tcplog
+    default_backend datadog-network-devices-snmp-traps
+
 # This declares the endpoint where your Agents connect for
-# sending Instrumentations Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
-frontend instrumentation_telemetry_data_frontend
-    bind *:3843
+# sending appsec events (deprecated).
+frontend appsec-events-frontend
+    bind *:3842
     mode tcp
     option tcplog
-    default_backend datadog-instrumentations-telemetry
+    default_backend datadog-appsec-events
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -359,6 +367,14 @@ backend datadog-network-devices-metadata
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
+backend datadog-network-devices-snmp-traps
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
 backend datadog-instrumentations-telemetry
     balance roundrobin
     mode tcp
@@ -366,9 +382,17 @@ backend datadog-instrumentations-telemetry
     server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
+backend datadog-appsec-events # deprecated
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 ```
 
-**Note**: Download the certificate with one of the following commands:
+Download the certificate with one of the following commands:
 
 ```shell
 sudo apt-get install ca-certificates # (Debian, Ubuntu)
@@ -418,6 +442,9 @@ database_monitoring:
 network_devices:
     metadata:
         dd_url: haproxy.example.com:3841
+    snmp_traps:
+        forwarder:
+            dd_url: haproxy.example.com:3842
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate ({{< region-param key="dd_full_site" code="true" >}}) and your HAProxy hostname:
@@ -555,9 +582,19 @@ stream {
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
+        listen 3842; #listen for network devices traps
+        proxy_ssl on;
+        proxy_pass snmp-traps-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
         listen 3843; #listen for instrumentations telemetry data
         proxy_ssl on;
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {    
+        listen 3844; #listen for appsec events (deprecated)
+        proxy_ssl on;
+        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -597,6 +634,13 @@ database_monitoring:
 network_devices:
     metadata:
         dd_url: nginx.example.com:3841
+    snmp_traps:
+        forwarder:
+            dd_url: nginx.example.com:3842
+
+appsec_config (deprecated):
+    appsec_dd_url: "<PROXY_SERVER_DOMAIN>:3842"
+
 ```
 
 When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.

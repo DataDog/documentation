@@ -54,7 +54,7 @@ You can also choose to enable App Analytics per service, or per integration in c
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /account_management/billing/apm_distributed_tracing/
-[3]: /tracing/visualization/#apm-event
+[3]: /tracing/glossary/#apm-event
 [4]: /tracing/app_analytics/
 [5]: mailto:sales@datadoghq.com
 [6]: mailto:success@datadoghq.com

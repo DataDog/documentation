@@ -43,16 +43,20 @@ After you have a config file, run `make help` to see options:
 
 ```text
 clean-all                 Clean everything.
+clean-auto-doc            Remove all doc automatically created.
 clean-build               Remove build artifacts.
 clean-exe                 Remove execs.
 clean-integrations        Remove built integrations files.
 clean-node                Remove node_modules.
 clean-virt                Remove python virtual env.
 clean                     Clean all make installs.
+examples                  Build the examples.
 hugpython                 Build virtualenv used for tests.
 source-helpers            Source the helper functions used to build, test, deploy.
+start-docker              Start server in a docker container.
 start-no-pre-build        Build the documentation without automatically pulled content.
 start                     Build the documentation with all external content.
+stop-docker               Stop the running docker container.
 stop                      Stop wepack watch/hugo server.
 ```
 
@@ -104,3 +108,29 @@ Within 10 minutes of merging to master, it deploys automatically.
 [12]: https://gohugo.io/getting-started/installing/
 [13]: https://golang.org/doc/install
 [14]: https://github.blog/2019-02-14-introducing-draft-pull-requests/
+
+## Docker development
+
+Prerequsites:
+- Running Monterey OSX
+- Docker Desktop >= 4.7.1 is installed
+- At least 6GB of RAM is dedicated towards Docker for Mac
+  1. Open the Docker for Mac app dashboard
+  2. Click the gear icon
+  3. Click Resources
+  4. The memory slider should be set to 6GB
+- VirtioFS is enabled
+  1. Open the Docker for Mac app dashboard
+  2. Click the gear icon
+  3. Click Experimental Features
+  4. Click Enable VirtioFS accelerated directory sharing
+  5. Click Apply & Restart
+
+### How to run documentation inside a Docker container
+1. Go to project root
+2. Make a copy of `Makefile.config.example` called `Makefile.config`
+3. Enter value for `GITHUB_TOKEN`
+4. Set `DOCKER` to true
+5. Run `make start-docker`
+
+To stop the app, hit Ctrl-C or run `make stop-docker`

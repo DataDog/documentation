@@ -41,7 +41,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with [we
             - dd-trace
             - datadog-lambda-js
       esbuild: # for esbuild
-        exclude: ["dd-trace", "datadog-lambda-js"]
+        exclude: ["dd-trace", "datadog-lambda-js", "aws-sdk"] # aws-sdk is included because it is the default for `exclude`
     ```
 
     **Note:** This exclusion may not be sufficient if you have any transitive dependencies on `datadog-lambda-js` or `dd-trace`. In these cases, **forceExclude** does not avoid the inclusion of one of these libraries. If this is your case, you can try to remove them manually using something like the following:

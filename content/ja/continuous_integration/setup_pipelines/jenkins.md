@@ -544,6 +544,17 @@ Error writing to server
 1. ホスト名として `localhost` を使用している場合は、代わりにサーバーのホスト名に変更してみてください。
 2. Jenkins インスタンスが HTTP プロキシの後ろにある場合、**Manage Jenkins** > **Manage Plugins** > **Advanced tab** に移動して、プロキシ構成が正しいことを確認します。
 
+#### HTTP 504
+
+HTTP 504 のエラーメッセージが表示される場合は、Jenkins のプロキシ構成が正しいかどうかを確認してください。
+
+{{< code-block lang="text" >}}
+Failed to send HTTP request: PUT http://localhost:8126/v0.3/traces - Status: HTTP 504
+{{< /code-block >}}
+
+1. Jenkins インスタンスが HTTP プロキシの後ろにある場合、**Manage Jenkins** > **Manage Plugins** > **Advanced tab** に移動して、プロキシ構成が正しいことを確認します。
+  1. `No Proxy Hosts` に `localhost` が構成されていることを確認します。
+
 ### Datadog プラグインセクションが Jenkins コンフィギュレーションに表示されない
 
 Datadog プラグインセクションが Jenkins コンフィギュレーションセクションに表示されない場合は、プラグインが有効になっていることを確認してください。手順:
