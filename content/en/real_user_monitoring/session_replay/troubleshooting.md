@@ -19,17 +19,17 @@ If you experience unexpected behavior with Datadog Session Replay, use this page
 
 ### Some HTML elements are not visible at replay
 
-Session Replay does not support the following HTML elements at the moment: `iframe`, `video`, `audio`, `canvas`, as well as Web Components.
+Session Replay does not support the following HTML elements: `iframe`, `video`, `audio`, or `canvas`. Session Replay does not support Web Components.
 
 ### Fonts or images do not render properly
 
-A Session Replay is not a video, but an actual iframe rebuilt based on snapshots of the DOM. The replay thus depends on the various assets of the page: fonts & images.
+A Session Replay is not a video, but an actual iframe rebuilt based on snapshots of the DOM. The replay thus depends on the various assets of the page: fonts and images.
 
-Several reasons might explain why assets are not available at the time of the replay.
+Assets may not be available at the time of replay for the following reasons:
 
-1. The resource does not exist anymore. For example, it was part of a previous deployment.
-2. The resource is inaccessible. For example, authentication might be required, or the resource might only be accessible from an internal network.
-3. The resource is blocked by the browser due to CORS (typically web-fonts).
+- The resource no longer exists. For example, it was part of a previous deployment.
+- The resource is inaccessible. For example, authentication might be required, or the resource might only be accessible from an internal network.
+- The resource is blocked by the browser due to CORS (typically web-fonts).
    - The replay rendered on the `session-replay-datadoghq.com` sandbox domain and the asset requests are subject to cross-origin security checks by your browser. If the given asset is not authorized for the domain, your browser blocks the request.
    - Allow `session-replay-datadoghq.com` through the [`Access-Control-Allow-Origin`][3] header for any font or image assets your website depends on to ensure these resources are accessible for the replay. For more information, see [Cross Origin Resource Sharing][4].
 
