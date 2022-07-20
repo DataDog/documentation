@@ -2857,21 +2857,31 @@ main:
     parent: rum_dashboards
     identifier: rum_dashboards_performance
     weight: 801
-  - name: Resources
-    url: real_user_monitoring/dashboards/resources_dashboard
-    parent: rum_dashboards
-    identifier: rum_dashboards_resources
-    weight: 802
-  - name: Errors
-    url: real_user_monitoring/dashboards/errors_dashboard
-    parent: rum_dashboards
-    identifier: rum_dashboards_errors
-    weight: 803
   - name: Frustration Signals
     url: real_user_monitoring/dashboards/frustration_signals_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_frustration_signals
+    weight: 802
+  - name: User Sessions
+    url: real_user_monitoring/dashboards/user_sessions_dashboard
+    parent: rum_dashboards
+    identifier: rum_dashboards_sessions
+    weight: 803
+  - name: Errors
+    url: real_user_monitoring/dashboards/errors_dashboard
+    parent: rum_dashboards
+    identifier: rum_dashboards_errors
     weight: 804
+  - name: Resources
+    url: real_user_monitoring/dashboards/resources_dashboard
+    parent: rum_dashboards
+    identifier: rum_dashboards_resources
+    weight: 805
+  - name: Mobile
+    url: real_user_monitoring/dashboards/mobile_dashboard
+    parent: rum_dashboards
+    identifier: rum_dashboards_mobile
+    weight: 806
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
