@@ -18,7 +18,7 @@ further_reading:
   text: "How to investigate a log parsing issue?"
 ---
 
-By default, Datadog generates a status `INFO` and appends it in the `status` attribute when Datadog's intake API receives the logs. However, this default `status` does not always reflect the actual status that might be contained in the log itself. This guide walks through how to override this default value.
+By default, when Datadog's intake API receives a log, a status `INFO` is generated and appended as the `status` attribute. However, this default `status` does not always reflect the actual status that might be contained in the log itself. This guide walks through how to override the default value with the actual status.
 
 {{< img src="logs/guide/original_log.png" alt="Log panel showing a log with info status but the message showing warning." style="width:50%;">}}
 
@@ -28,9 +28,7 @@ If your raw logs are not showing the correct status in Datadog, [extract](#extra
 
 #### Extract the status value with a parser
 
-While writing a parsing rule for your logs, extract the `status` in a specific attribute.
-
-For the log above, use the following rule with the [word() matcher][1] to extract the status and pass it into a custom `log_status` attribute:
+Use a Grok parser to define a rule with the [word() matcher][1] to extract the actual log status.
 
 1. Go to your [Logs Pipeline][2].
 2. Click **Add Processor**.
@@ -63,7 +61,7 @@ The output for MyParsingRule's extraction:
 
 #### Define a log status remapper
 
-The `log_status` attribute contains the correct status. Add a [Log Status remapper][3] to make sure the status value in the `log_status` attribute overrides the official log status.
+The `log_status` attribute contains the correct status. Add a [Log Status remapper][3] to make sure the status value in the `log_status` attribute overrides the default log status.
 
 1. Go to your [Logs Pipeline][2].
 2. Click **Add Processor**.
@@ -80,11 +78,11 @@ The `log_status` attribute contains the correct status. Add a [Log Status remapp
 
 JSON logs are automatically parsed in Datadog. The log `status` attribute is a [reserved attribute][4], so it goes through preprocessing operations for JSON logs. 
 
-In the below example, the actual status of the log is the value of the `logger_severity` attribute and not the log status `INFO`.
+In the below example, the actual status of the log is the value of the `logger_severity` attribute and not the default log status `INFO`.
 
 {{< img src="logs/guide/new_log.png" alt="Log panel showing a log with info status but the logger_severity attribute value is error" style="width:50%;">}}
 
-To make sure the `logger_severity` attribute value is taken to override the log status, add it to the list of status attributes.
+To make sure the `logger_severity` attribute value overrides the default log status, add `logger_severity` to the list of status attributes.
 
 1. Go to your [Logs Pipeline][2].
 2. Hover over Preprocessing for JSON Logs, and click the pencil icon.
@@ -93,7 +91,7 @@ To make sure the `logger_severity` attribute value is taken to override the log 
 
 **Note**: Any modification on the Pipeline only impacts new logs as all the processing is done at ingestion.
 
-New logs correctly configured with the `logger_severity` attribute value:
+New logs are correctly configured with the `logger_severity` attribute value.
 
 {{< img src="logs/guide/new_log_remapped.png" alt="Log panel showing a log with an error status that matches the logger_severity attribute value of error" style="width:50%;">}}
 
