@@ -48,13 +48,25 @@ See [Credit Card Billing][11] for more details.
 
 If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. If you need an additional copy, email [Datadog billing][10]. Details on where to remit payment can be found on the invoice.
 
-To change your payment method, contact your [Customer Success][12] Manager.
+### Managing your payment method
 
-### Billing emails
+The **Payment Method** section contains details on your payment options. 
 
-You can set specific email addresses to receive invoices on the [Billing history][13] page under **Manage Billing Emails**:
+{{< img src="account_management/billing/PaymentMethodOverview.png" alt="Payment method on the Plan page" style="width:80%;" >}}
 
-{{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
+**Edit Payment** provides options to manage payment methods. You can edit or remove cards, and request to change your payment method from card to invoice and vice versa. 
+
+{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="Payment settings on the Plan page" style="width:80%;" >}}
+
+### Managing your billing contact details
+
+You can view your billing contact details on the **Billing Contact Details** section. 
+
+{{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:80%;" >}}
+
+Through **Edit Details**, you can add, edit or remove your billing address. You can also set specific email addresses to receive invoices.
+
+{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="Editing billing contact details on the Plan page" style="width:80%;" >}}
 
 **Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
 
@@ -100,5 +112,3 @@ You can set specific email addresses to receive invoices on the [Billing history
 [9]: https://app.datadoghq.com/account/billing_history
 [10]: mailto:billing@datadoghq.com
 [11]: /account_management/billing/credit_card/
-[12]: mailto:success@datadoghq.com
-[13]: https://app.datadoghq.com/billing/history

@@ -14,19 +14,44 @@ further_reading:
 
 A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor services consistently across multiple telemetry types, including infrastructure metrics, logs, and traces. If you want to define a service using additional criteria, customize the service definition that fits your architectural style. View the service list and gain insights into all services' reliability and security in the [Datadog Service Catalog][2].
 
-
 ## Requirements
 
 Before you begin, you need a [Datadog API and app key][3].
 
-## Enriching an existing APM service 
-If you already use APM to trace your applications, add information about those services. Initially, APM monitored services listed on the Service Catalog page have an `UNDEFINED` label on them. 
 
-Add service ownership information such as team name, Slack channels, and source code repositories, by pushing a YAML file using the POST endpoint, described below.
+## Service Definition Schema (v2)
+Basic information about a service. 
+| Field                       |   Description      |Type  | Required |
+| --------------------------- | --------------- | ------------------------------------------------------- | -------- |
+| schema-version&nbsp;[_required_] | string          | Version of the service definition schema being used. Only value `v2` is supported.| yes |
+| dd-service&nbsp;[_required_]     | string          | Unique identifier of the service. Must be unique across all services, and used to match with a service in Datadog. | yes |
+| team                        | string          | Name of the team responsible for the service. | yes |
 
-## Registering a new service without any Datadog telemetry
-You can manage your service ownership information with Service Catalog even if those services are not emitting any of Datadog telemetry (such as APM traces). Specify service ownership, on-call info, and custom tags in YAML files, and the information is reflected in the Service Catalog UI. 
+#### Example
+{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
+schema-version: v2
+dd-service: shopping-cart
+team: E-Commerce Team
+{{< /code-block >}}
 
+#### Contacts (Optional)
+| Field                       |   Description     |  Type| Required |
+| --------------------------- | --------------- | ------------------------------------------------------- | -------- |
+| Type | Contact type          | string| yes |
+| name | Contact name          | string| no |
+| contact | Contact value       | string| yes |
+
+#### Example
+{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
+contacts:
+  - type: slack
+    contact: http://slack/e-commerce
+  - type: email 
+    contact: ecommerce@example.com  
+External Resources (Optional)
+{{< /code-block >}}
+
+See full schema on [GitHub][4].
 
 ## Post a service definition
 
@@ -40,40 +65,25 @@ POST /api/v2/services/definitions
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][5]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][6]. |
 
 ### Request
 
 #### Body data (required)
 
+##### Model 
 | Field                       | Type            | Description |
 | --------------------------- | --------------- | ------------------------------------------------------- |
-| schema-version&nbsp;[_required_] | string          | Version of the service definition schema being used. Only value `v2` is supported.|
-| dd-service&nbsp;[_required_]     | string          | Unique identifier of the service. Must be unique across all services, and used to match with a service in Datadog. |
-| team                        | string          | Name of the team responsible for the service. |
-| contacts                    | object          | List of contacts on the team. |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;[_required_]      | string          | Contact type  |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name                        | string          | Contact name  |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact&nbsp;[_required_]   | string          | Contact value |
-| links                       | object          | List of important links related to the service (for example, a runbook). |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;[_required_]      | string          | Link name     |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;[_required_]      | string          | Resource type |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;[_required_]       | URL&nbsp;string      | Resource link |
-| repos                       | object          | List of code repositories related to the service. |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;[_required_]      | string          | Name of the code repository     |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider                    | string          | Code repository provider |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;[_required_]       | URL&nbsp;string      | Link to the code repository |
-| docs                        | object          | List of documentation links for the services. |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;[_required_]      | string          | Name of the document     |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider                    | string          | Document provider |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;[_required_]       | URL&nbsp;string      | Link to the document |
-| tags                        | object          | Set of custom tags for the service definition. |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`"key:value"`&nbsp;or&nbsp;`"value"` | string           | custom tags |
-| integrations                | object          | Configuration for supported integrations. |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pagerduty&nbsp;[_required_] | URL&nbsp;string          | `https://www.pagerduty.com/service-directory/{service-name}` If you have integrated PagerDuty within Datadog, the URL is used to retrieve PagerDuty data about the service, such as who is currently on call for the service, and active pagers. |
-| extensions                  | object          | Custom metadata. The service definition parser treats everything under extensions as a text blob.  |
+| Request Body                | JSON or YAML    | See Service Definition Schema [v2][4] |
 
+#### Example
+{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
+{
+  "schema-version": "v2",
+  "dd-version": "shopping-service"
+}
+{{< /code-block >}}
 
 #### Example
 {{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
@@ -148,8 +158,8 @@ GET /api/v2/services/definitions/<service_name>
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][5]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][6]. |
 
 ### Response
 
@@ -241,8 +251,8 @@ GET /api/v2/services/definitions
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][5]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][6]. |
 
 ### Response
 
@@ -331,8 +341,8 @@ DELETE /api/v2/services/definitions/<service_name>
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][5]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][6]. |
 
 ### Response
 
@@ -353,5 +363,6 @@ curl --location --request DELETE 'https://api.datadoghq.com/api/v2/services/defi
 [1]: https://www.datadoghq.com/blog/unified-service-tagging/
 [2]: /tracing/faq/service_catalog/
 [3]: /account_management/api-app-keys/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: https://app.datadoghq.com/organization-settings/application-keys
+[4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: https://app.datadoghq.com/organization-settings/application-keys

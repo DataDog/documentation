@@ -1704,6 +1704,84 @@ components:
       required:
       - message
       type: object
+    HourlyUsage:
+      description: Hourly usage for a product family for an org.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/HourlyUsageAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageTimeSeriesType'
+      type: object
+    HourlyUsageAttributes:
+      description: Attributes of hourly usage for a product family for an org for
+        a time period.
+      properties:
+        measurements:
+          description: List of the measured usage values for the product family for
+            the org for the time period.
+          items:
+            $ref: '#/components/schemas/HourlyUsageMeasurement'
+          type: array
+        org_name:
+          description: The organization name.
+          type: string
+        product_family:
+          description: The product for which usage is being reported.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
+        timestamp:
+          description: Datetime in ISO-8601 format, UTC. The hour for the usage.
+          format: date-time
+          type: string
+      type: object
+    HourlyUsageMeasurement:
+      description: Usage amount for a given usage type.
+      properties:
+        usage_type:
+          description: Type of usage.
+          type: string
+        value:
+          description: Contains the number measured for the given usage_type during
+            the hour.
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    HourlyUsageMetadata:
+      description: The object containing document metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/HourlyUsagePagination'
+      type: object
+    HourlyUsagePagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to get the next results (if any). To make the next
+            request, use the same parameters and add `next_record_id`.
+          nullable: true
+          type: string
+      type: object
+    HourlyUsageResponse:
+      description: Hourly usage response.
+      properties:
+        data:
+          description: Response containing hourly usage.
+          items:
+            $ref: '#/components/schemas/HourlyUsage'
+          type: array
+        meta:
+          $ref: '#/components/schemas/HourlyUsageMetadata'
+      type: object
     HourlyUsageType:
       description: Usage type that is being measured.
       enum:
@@ -13960,6 +14038,120 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 39
+      x-undo:
+        type: safe
+  /api/v2/usage/hourly_usage:
+    get:
+      description: Get hourly usage by product family
+      operationId: GetHourlyUsage
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage beginning at this hour.'
+        in: query
+        name: filter[timestamp][start]
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
+          for usage ending **before** this hour.'
+        in: query
+        name: filter[timestamp][end]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Comma separated list of product families to retrieve. Available
+          families are `all`, `analyzed_logs`,
+
+          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `cws`,
+          `dbm`, `fargate`,
+
+          `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
+          `iot`,
+
+          `lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `observability_pipelines`,
+
+          `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
+          `sds`, `snmp`,
+
+          `synthetics_api`, `synthetics_browser`, and `timeseries`.'
+        in: query
+        name: filter[product_families]
+        required: true
+        schema:
+          type: string
+      - description: Include child org usage in the response. Defaults to false.
+        in: query
+        name: filter[include_descendants]
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - description: 'Comma separated list of product family versions to use in the
+          format `product_family:version`. For example,
+
+          `infra_hosts:1.0.0`. If this parameter is not used, the API will use the
+          latest version of each requested
+
+          product family. Currently all families have one version `1.0.0`.'
+        in: query
+        name: filter[versions]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of results to return (between 1 and 500) - defaults
+          to 500 if limit not specified.
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 500
+          format: int32
+          maximum: 500
+          minimum: 1
+          type: integer
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: page[next_record_id]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/HourlyUsageResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage by product family
+      tags:
+      - Usage Metering
+      x-menu-order: 40
       x-undo:
         type: safe
   /api/v2/usage/lambda_traced_invocations:
