@@ -1825,11 +1825,16 @@ main:
     parent: profiler
     identifier: profiler_profiler_troubleshooting
     weight: 705
+  - name: Service Catalog
+    url: tracing/service_catalog/
+    parent: tracing
+    identifier: service_catalog
+    weight: 9
   - name: Error Tracking
     url: tracing/error_tracking/
     parent: tracing
     identifier: tracing_error_tracking
-    weight: 9
+    weight: 10
   - name: Error Tracking Explorer
     url: tracing/error_tracking/explorer/
     parent: tracing_error_tracking
@@ -1839,17 +1844,17 @@ main:
     url: tracing/configure_data_security/
     parent: tracing
     identifier: tracing_data_security
-    weight: 10
+    weight: 11
   - name: Guides
     url: tracing/guide/
     parent: tracing
     identifier: tracing_guides
-    weight: 11
+    weight: 12
   - name: Troubleshooting
     url: tracing/troubleshooting/
     parent: tracing
     identifier: tracing_troubleshooting
-    weight: 12
+    weight: 13
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
