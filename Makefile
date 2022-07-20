@@ -139,12 +139,12 @@ clean-auto-doc: ## Remove all doc automatically created
 	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
 	@if [ content/en/real_user_monitoring/error_tracking/ios.md ]; then \
 	rm -f content/en/real_user_monitoring/error_tracking/ios.md ;fi
+	@if [ content/en/real_user_monitoring/error_tracking/reactnative.md ]; then \
+	rm -f content/en/real_user_monitoring/error_tracking/reactnative.md ;fi
 	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
 	@if [ content/en/real_user_monitoring/ios/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/ios/_index.md ;fi
-	@if [ content/en/real_user_monitoring/ios/crash_reporting.md ]; then \
-	rm -f content/en/real_user_monitoring/ios/crash_reporting.md ;fi
 	@if [ content/en/real_user_monitoring/ios/mobile_vitals.md ]; then \
 	rm -f content/en/real_user_monitoring/ios/mobile_vitals.md ;fi
 	@if [ -d content/en/real_user_monitoring/ios ]; then \
