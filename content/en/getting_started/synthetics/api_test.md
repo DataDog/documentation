@@ -23,6 +23,9 @@ further_reading:
 - link: '/synthetics/identify_synthetics_bots'
   tag: 'Documentation'
   text: 'Learn how to identify Synthetic bots for API tests'
+- link: '/synthetics/guide/synthetic-test-monitors'
+  tag: 'Documentation'
+  text: 'Learn about Synthetic test monitors'
 
 ---
 
@@ -81,7 +84,7 @@ The Shopist application is publicly available at `https://www.shopist.io/`, so y
 
 Select the frequency at which you want your test to execute. You can leave the default frequency of 1 minute.
 
-**Note:** In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][9]. 
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][9]. 
 
 ### Define alert conditions
 
@@ -188,7 +191,9 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
 
 {{< img src="getting_started/synthetics/defined-steps.png" alt="Created test steps" style="width:100%;" >}}
 
-You can then configure the rest of your test conditions including test frequency, alerting conditions, and alert message. When you're ready to save your test configuration and monitor, click **Create**. 
+You can then configure the rest of your test conditions such as test frequency and alerting conditions, and the test monitor. When you're ready to save your test configuration and monitor, click **Create**. 
+
+For more information, see [Using Synthetic Test Monitors][13].
 
 ## Look at test results
 
@@ -198,7 +203,7 @@ To troubleshoot a failed test, scroll down to **Test Results** and click on a fa
 
 {{< img src="getting_started/synthetics/api-test-failure-5.png" alt="API test failure" style="width:100%;">}}
 
-With Datadog's [APM integration with Synthetic Monitoring][13], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
+With Datadog's [APM integration with Synthetic Monitoring][14], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 
 ## Further Reading
 
@@ -216,4 +221,5 @@ With Datadog's [APM integration with Synthetic Monitoring][13], access the root 
 [10]: /integrations/#cat-notification
 [11]: https://app.datadoghq.com/account/settings
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
-[13]: /synthetics/apm/
+[13]: /synthetics/guide/synthetic-test-monitors
+[14]: /synthetics/apm/
