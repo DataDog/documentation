@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-The [application testing coverage dashboard][1] uses data collected from [RUM & Session Replay][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. 
+The [application testing coverage dashboard][1] uses data collected from [RUM][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. 
 
 You can use this dashboard to answer the following questions:
 
@@ -23,8 +23,8 @@ You can use this dashboard to answer the following questions:
 
 It shows:
 
-- **Untested actions**: Explore the most popular untested user actions with the count of real user interactions and the number of actions covered in browser tests.
-- **Top Synthetic browser tests**: Analyze the the list of browser tests with the count of tested RUM actions.
+- **Untested actions**: Explore the most popular untested user actions with the count of real user interactions.
+- **Top Synthetic browser tests**: Analyze the list of browser tests with the count of tested RUM actions.
 
 {{< img src="synthetics/dashboards/testing_coverage.png" alt="Out-of-the-box Synthetics testing coverage dashboard" style="width:100%" >}}
 
@@ -38,10 +38,10 @@ In order to improve your testing coverage and better manage your browser tests, 
 
 - What actions are not being tested in your application?
 - What views are the most popular to your users? 
-- What actions need more browser tests?
+- What views need more browser tests?
 - What percentage of browser tests are covering user actions? 
 
-By adding the most popular sections of your application to an existing browser test or creating a browser test, you are alerted when key user journeys in your application are negatively impacted by a code change. You can run tests [directly in your CI/CD pipelines][4] to ensure no regressions occur before releasing code in production. 
+By testing the most popular sections of your application through Synthetic browser tests, you are alerted when key user journeys in your application are negatively impacted by a code change. You can run tests [directly in your CI/CD pipelines][4] to ensure no regressions occur before releasing code in production. 
 
 To add a browser test for a top view or untested action, click on a view with a low percentage of tested actions under **Top Views** or an action under **Untested Actions** and select **Create a Synthetics browser test** from the dropdown menu. Clicking **View RUM events** navigates you to the [RUM Explorer][5] with an autofilled search query for actions with a specific view name.
 
