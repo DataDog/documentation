@@ -677,6 +677,8 @@
           beta: true
           description: "Set up Error Tracking for your iOS projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/alai97/front-matter-migration/docs/rum_collection/crash_reporting.md"]
+          aliases:
+            - /real_user_monitoring/ios/crash_reporting/
           further_reading:
             - link: "https://datadoghq.com/blog/ios-crash-reporting-datadog/"
               tag: "Blog"
