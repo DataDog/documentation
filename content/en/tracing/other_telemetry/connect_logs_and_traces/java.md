@@ -85,7 +85,6 @@ try {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-tab=jsonlogs#trace_id-option
 [1]: /logs/log_collection/java/
 [2]: /tracing/trace_collection/dd_libraries/java/
 [3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?
