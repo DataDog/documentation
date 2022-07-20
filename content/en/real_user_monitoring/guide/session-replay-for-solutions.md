@@ -24,7 +24,7 @@ This guide describes a workflow that organizations can replicate and use as an a
 
 ## Assess user issues
 
-Let’s assume that a customer encounters an issue using Datadog. Your Technical Solutions team may use a support solution such as Zendesk or ServiceNow that creates a ticket when this customer reports that they cannot update or save a Synthetics multistep API test. 
+Assume that a customer encounters an issue using Datadog. Your Technical Solutions team may use a support solution, such as Zendesk or ServiceNow, that creates a ticket when this customer reports that they cannot update or save a Synthetics multistep API test. 
 
 The team may request more information from the customer (such as the specific test ID and a screen recording with the [Browser Dev Tools][2] open) that may provide additional context for the customer's test not updating or saving. If no console errors were recorded, the team would not have any hints to start investigating the multistep API test's issue. 
 
