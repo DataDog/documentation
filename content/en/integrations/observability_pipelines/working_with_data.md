@@ -1,6 +1,8 @@
 ---
 title: Working with Data
 kind: Documentation
+dependencies:
+  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/working_with_data.md"]
 further_reading:
   - link: https://vector.dev/docs/reference/configuration/transforms/aws_ec2_metadata/
     tag: Documentation

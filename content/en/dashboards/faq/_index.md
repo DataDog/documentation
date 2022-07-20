@@ -19,6 +19,5 @@ aliases:
     {{< nextlink href="dashboards/faq/how-can-i-graph-host-uptime-percentage" >}}How can I graph host uptime percentage?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs" >}}Why does zooming out a timeframe also smooth out my graphs?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/the-same-color-is-used-twice-in-my-graph" >}}The same color is used twice in my graph!{{< /nextlink >}}
-    {{< nextlink href="dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same" >}}I'm switching between the sum/min/max/avg aggregators but the values look the same?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/historical-data" >}}Historical Data{{< /nextlink >}}
 {{< /whatsnext >}}

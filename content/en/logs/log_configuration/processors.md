@@ -758,4 +758,4 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following trace remapper
 [5]: /logs/log_collection/?tab=host#attributes-and-tags
 [6]: /logs/search_syntax/
 [7]: /logs/guide/reference-tables/
-[8]: /tracing/connect_logs_and_traces/
+[8]: /tracing/other_telemetry/connect_logs_and_traces/

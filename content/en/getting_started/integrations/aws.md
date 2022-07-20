@@ -101,7 +101,7 @@ This launches the creation process for the Datadog stack along with three nested
 
     {{< img src="getting_started/integrations/new-account.png" alt="The AWS integration tile in the Datadog account showing the Account: New Account section and a message that the integration setup with CloudFormation is pending completion. There is a button for refreshing to check the status, and a warning to check the CloudFormation stack generation before checking the status.">}}
 
-    Depending on which AWS services you use and your use case for monitoring, there are multiple options within the integration tile to specify the data to be collected. For example, you can limit data collection based on AWS service, namespace, or tags. Additionally, you can choose to mute monitor notifications. For example, terminations triggered manually or by autoscaling with [EC2 automuting][9] enabled. If needed, enable [Alarm Collection][10] to send your CloudWatch alarms to the Datadog [Event Stream][11] and choose whether to collect custom metrics.
+    Depending on which AWS services you use and your use case for monitoring, there are multiple options within the integration tile to specify the data to be collected. For example, you can limit data collection based on AWS service, namespace, or tags. Additionally, you can choose to mute monitor notifications. For example, terminations triggered manually or by autoscaling with [EC2 automuting][9] enabled. If needed, enable [Alarm Collection][10] to send your CloudWatch alarms to the Datadog [Event Explorer][11] and choose whether to collect custom metrics.
 
 8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="The AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heat map showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spiky data from three sources.">}}
@@ -200,7 +200,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [8]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [9]: /integrations/amazon_ec2/#ec2-automuting
 [10]: /integrations/amazon_web_services/?tab=roledelegation#alarm-collection
-[11]: /events/stream/
+[11]: /events/explorer
 [12]: https://app.datadoghq.com/screen/integration/7/aws-overview
 [13]: /integrations/#cat-aws
 [14]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
@@ -236,7 +236,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [44]: /serverless/distributed_tracing
 [45]: /serverless/troubleshooting
 [46]: /integrations/amazon_xray/?tab=nodejs
-[47]: /tracing/setup_overview/
+[47]: /tracing/trace_collection/
 [48]: /tracing/#explore-datadog-apm
 [49]: /watchdog/
 [50]: /security_platform/cloud_siem/getting_started/

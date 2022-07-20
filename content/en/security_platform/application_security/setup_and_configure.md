@@ -237,7 +237,7 @@ if ((span instanceof MutableSpan)) {
 ```
 
 
-[1]: /tracing/setup_overview/open_standards/java/#setup
+[1]: /tracing/trace_collection/open_standards/java/#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -492,9 +492,9 @@ If you need additional help, contact [Datadog support][6].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/custom_instrumentation/
+[1]: /tracing/trace_collection/custom_instrumentation/
 [2]: https://github.com/google/re2/wiki/Syntax
-[3]: /tracing/setup_overview/configure_data_security/
+[3]: /tracing/configure_data_security/
 [4]: https://app.datadoghq.com/security/appsec/signals
 [5]: https://app.datadoghq.com/security/appsec/exclusions
 [6]: /help/
