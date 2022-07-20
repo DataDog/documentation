@@ -13,7 +13,7 @@ When you setup Database Monitoring, the Agent collects all the metrics described
 
 These are standard Datadog metrics that you can use in [dashboards][1], [monitors][2], [notebooks][3], and anywhere else you use metrics.
 
-To see a complete list of metrics collected, see the integration Data Collected documentation for your database product:
+To see a complete list of metrics collected, see the integration **Data Collected** documentation section for your database product:
 
 {{< partial name="dbm/dbm-data-collected" >}}
 <p></p>
@@ -21,6 +21,7 @@ To see a complete list of metrics collected, see the integration Data Collected 
 The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
 - **Postrgres**: `postgresql.queries.*`
+- **SQL Server**: `sqlserver.queries.*`
 
 ## Normalized queries
 
