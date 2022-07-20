@@ -17,7 +17,7 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Python test instrumentation is in beta. There are no billing implications for instrumenting Python tests during this period.
+<div class="alert alert-info">Python test instrumentation is in beta.
 </div>
 
 ## Compatibility
@@ -392,5 +392,5 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [1]: /agent/
 [2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /tracing/setup_overview/setup/python/
-[5]: /tracing/setup_overview/setup/python/?tab=containers#configuration
+[4]: /tracing/trace_collection/dd_libraries/python/
+[5]: /tracing/trace_collection/library_config/python/?tab=containers#configuration

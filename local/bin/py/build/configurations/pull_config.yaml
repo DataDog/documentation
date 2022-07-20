@@ -200,7 +200,7 @@
       globs:
       - 'docs/GettingStarted.md'
       options:
-        dest_path: '/tracing/setup_overview/setup/'
+        dest_path: '/tracing/trace_collection/dd_libraries/'
         file_name: 'ruby.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
@@ -215,6 +215,7 @@
           - /tracing/setup/ruby/
           - /tracing/setup_overview/ruby/
           - /agent/apm/ruby/
+          - /tracing/setup_overview/setup/ruby
 
   - repo_name: datadog-serverless-functions
     contents:
@@ -552,17 +553,20 @@
       globs:
       - 'docs/trace_collection.md'
       options:
-        dest_path: '/tracing/setup_overview/setup/'
+        dest_path: '/tracing/trace_collection/dd_libraries/'
         file_name: 'android.md'
         front_matters:
           title: Android Trace Collection
           kind: documentation
           beta: true
+          aliases:
+            - /tracing/setup_overview/setup/android
+            - /tracing/setup/android
           description: "Collect traces from your Android applications."
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-android Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
@@ -616,17 +620,20 @@
       globs:
       - 'docs/trace_collection.md'
       options:
-        dest_path: '/tracing/setup_overview/setup/'
+        dest_path: '/tracing/trace_collection/dd_libraries/'
         file_name: 'ios.md'
         front_matters:
           title: iOS Trace Collection
           kind: documentation
           beta: true
+          aliases:
+            - /tracing/setup_overview/setup/ios/
+            - /tracing/setup/ios/
           description: "Collect traces from your iOS applications."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-ios Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
@@ -745,7 +752,26 @@
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
               text: "Monitor your React Native applications"     
-
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'docs/expo_development.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'expo.md'
+        front_matters:
+          title: Expo
+          kind: documentation
+          beta: true
+          description: "Monitor your React Native projects using Expo and Expo Go with Datadog."
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_development.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "GitHub"
+              text: "dd-sdk-reactnative Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
   - repo_name: dd-sdk-flutter
     contents:
     - action: pull-and-push-file
@@ -791,6 +817,8 @@
         - "workload-security/backend-rules/*.md"
         - "security-monitoring/*.json"
         - "security-monitoring/*.md"
+        - "cloud-siem/**/*.json"
+        - "cloud-siem/**/*.md"
         - "posture-management/**/*.json"
         - "posture-management/**/*.yaml"
         - "posture-management/**/*.yml"

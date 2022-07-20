@@ -59,7 +59,7 @@ Datadog truncates the following strings if they exceed the indicated number of c
 
 Additionally, the number of [span tags][8] present on any span cannot exceed 250.
 
-For a given 10 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, contact [support][1] to discuss your use case.
+For a given 40 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, contact [support][1] to discuss your use case.
 
 - 1000 unique environments and service combinations
 - 30 unique host groups per environment
@@ -125,13 +125,13 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: /tracing/guide/metrics_namespace/
+[2]: /tracing/metrics/metrics_namespace/
 [3]: /tracing/troubleshooting/tracer_startup_logs/
 [4]: /tracing/troubleshooting/connection_errors/
 [5]: /tracing/troubleshooting/tracer_debug_logs/
-[6]: /tracing/visualization/#services
-[7]: /tracing/visualization/#resources
-[8]: /tracing/visualization/#span-tags
+[6]: /tracing/glossary/#services
+[7]: /tracing/glossary/#resources
+[8]: /tracing/glossary/#span-tags
 [9]: /tracing/troubleshooting/agent_rate_limits
 [10]: /tracing/custom_instrumentation/agent_customization
 [11]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7

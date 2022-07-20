@@ -288,5 +288,5 @@ If you need to use a previous version of the tracer, you can configure CI Visibi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/setup/java/?tab=containers#configuration
-[2]: /tracing/setup_overview/compatibility_requirements/java
+[1]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
+[2]: /tracing/trace_collection/compatibility/java

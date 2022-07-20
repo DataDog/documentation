@@ -434,6 +434,15 @@
           "type": "string"
         }
       },
+      "SignalID": {
+        "description": "The ID of the signal.",
+        "in": "path",
+        "name": "signal_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "UserID": {
         "description": "The ID of the user.",
         "in": "path",
@@ -7120,6 +7129,262 @@
         "required": [
           "message"
         ],
+        "type": "object"
+      },
+      "HourlyUsage": {
+        "description": "Hourly usage for a product family for an org.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes of hourly usage for a product family for an org for a time period.",
+            "properties": {
+              "measurements": {
+                "description": "List of the measured usage values for the product family for the org for the time period.",
+                "items": {
+                  "description": "Usage amount for a given usage type.",
+                  "properties": {
+                    "usage_type": {
+                      "description": "Type of usage.",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "Contains the number measured for the given usage_type during the hour.",
+                      "format": "int64",
+                      "nullable": true,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "org_name": {
+                "description": "The organization name.",
+                "type": "string"
+              },
+              "product_family": {
+                "description": "The product for which usage is being reported.",
+                "type": "string"
+              },
+              "public_id": {
+                "description": "The organization public ID.",
+                "type": "string"
+              },
+              "region": {
+                "description": "The region of the Datadog instance that the organization belongs to.",
+                "type": "string"
+              },
+              "timestamp": {
+                "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "Unique ID of the response.",
+            "type": "string"
+          },
+          "type": {
+            "default": "usage_timeseries",
+            "description": "Type of usage data.",
+            "enum": [
+              "usage_timeseries"
+            ],
+            "example": "usage_timeseries",
+            "type": "string",
+            "x-enum-varnames": [
+              "USAGE_TIMESERIES"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "HourlyUsageAttributes": {
+        "description": "Attributes of hourly usage for a product family for an org for a time period.",
+        "properties": {
+          "measurements": {
+            "description": "List of the measured usage values for the product family for the org for the time period.",
+            "items": {
+              "description": "Usage amount for a given usage type.",
+              "properties": {
+                "usage_type": {
+                  "description": "Type of usage.",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Contains the number measured for the given usage_type during the hour.",
+                  "format": "int64",
+                  "nullable": true,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "org_name": {
+            "description": "The organization name.",
+            "type": "string"
+          },
+          "product_family": {
+            "description": "The product for which usage is being reported.",
+            "type": "string"
+          },
+          "public_id": {
+            "description": "The organization public ID.",
+            "type": "string"
+          },
+          "region": {
+            "description": "The region of the Datadog instance that the organization belongs to.",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "HourlyUsageMeasurement": {
+        "description": "Usage amount for a given usage type.",
+        "properties": {
+          "usage_type": {
+            "description": "Type of usage.",
+            "type": "string"
+          },
+          "value": {
+            "description": "Contains the number measured for the given usage_type during the hour.",
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "HourlyUsageMetadata": {
+        "description": "The object containing document metadata.",
+        "properties": {
+          "pagination": {
+            "description": "The metadata for the current pagination.",
+            "properties": {
+              "next_record_id": {
+                "description": "The cursor to get the next results (if any). To make the next request, use the same parameters and add `next_record_id`.",
+                "nullable": true,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "HourlyUsagePagination": {
+        "description": "The metadata for the current pagination.",
+        "properties": {
+          "next_record_id": {
+            "description": "The cursor to get the next results (if any). To make the next request, use the same parameters and add `next_record_id`.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "HourlyUsageResponse": {
+        "description": "Hourly usage response.",
+        "properties": {
+          "data": {
+            "description": "Response containing hourly usage.",
+            "items": {
+              "description": "Hourly usage for a product family for an org.",
+              "properties": {
+                "attributes": {
+                  "description": "Attributes of hourly usage for a product family for an org for a time period.",
+                  "properties": {
+                    "measurements": {
+                      "description": "List of the measured usage values for the product family for the org for the time period.",
+                      "items": {
+                        "description": "Usage amount for a given usage type.",
+                        "properties": {
+                          "usage_type": {
+                            "description": "Type of usage.",
+                            "type": "string"
+                          },
+                          "value": {
+                            "description": "Contains the number measured for the given usage_type during the hour.",
+                            "format": "int64",
+                            "nullable": true,
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "org_name": {
+                      "description": "The organization name.",
+                      "type": "string"
+                    },
+                    "product_family": {
+                      "description": "The product for which usage is being reported.",
+                      "type": "string"
+                    },
+                    "public_id": {
+                      "description": "The organization public ID.",
+                      "type": "string"
+                    },
+                    "region": {
+                      "description": "The region of the Datadog instance that the organization belongs to.",
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "Unique ID of the response.",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "usage_timeseries",
+                  "description": "Type of usage data.",
+                  "enum": [
+                    "usage_timeseries"
+                  ],
+                  "example": "usage_timeseries",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "USAGE_TIMESERIES"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "meta": {
+            "description": "The object containing document metadata.",
+            "properties": {
+              "pagination": {
+                "description": "The metadata for the current pagination.",
+                "properties": {
+                  "next_record_id": {
+                    "description": "The cursor to get the next results (if any). To make the next request, use the same parameters and add `next_record_id`.",
+                    "nullable": true,
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
         "type": "object"
       },
       "HourlyUsageType": {
@@ -15538,10 +15803,13 @@
       "IntakePayloadAccepted": {
         "description": "The payload accepted for intake.",
         "properties": {
-          "status": {
-            "description": "The status of the intake payload.",
-            "example": "ok",
-            "type": "string"
+          "errors": {
+            "description": "A list of errors.",
+            "items": {
+              "description": "An empty error list.",
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -22280,13 +22548,12 @@
         ]
       },
       "MetricIntakeType": {
-        "description": "The type of metric.",
+        "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
         "enum": [
           0,
           1,
           2,
-          3,
-          15
+          3
         ],
         "format": "int32",
         "type": "integer",
@@ -22294,8 +22561,7 @@
           "UNSPECIFIED",
           "COUNT",
           "RATE",
-          "GAUGE",
-          "UNSPECIFIED_LEGACY"
+          "GAUGE"
         ]
       },
       "MetricMetadata": {
@@ -22485,13 +22751,12 @@
                   "type": "array"
                 },
                 "type": {
-                  "description": "The type of metric.",
+                  "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
                   "enum": [
                     0,
                     1,
                     2,
-                    3,
-                    15
+                    3
                   ],
                   "format": "int32",
                   "type": "integer",
@@ -22499,8 +22764,7 @@
                     "UNSPECIFIED",
                     "COUNT",
                     "RATE",
-                    "GAUGE",
-                    "UNSPECIFIED_LEGACY"
+                    "GAUGE"
                   ]
                 },
                 "unit": {
@@ -22663,13 +22927,12 @@
             "type": "array"
           },
           "type": {
-            "description": "The type of metric.",
+            "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
             "enum": [
               0,
               1,
               2,
-              3,
-              15
+              3
             ],
             "format": "int32",
             "type": "integer",
@@ -22677,8 +22940,7 @@
               "UNSPECIFIED",
               "COUNT",
               "RATE",
-              "GAUGE",
-              "UNSPECIFIED_LEGACY"
+              "GAUGE"
             ]
           },
           "unit": {
@@ -23037,7 +23299,6 @@
             "type": "array"
           },
           "include_percentiles": {
-            "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
             "example": true,
             "type": "boolean"
@@ -23163,7 +23424,6 @@
                 "type": "array"
               },
               "include_percentiles": {
-                "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                 "example": true,
                 "type": "boolean"
@@ -23316,7 +23576,6 @@
                     "type": "array"
                   },
                   "include_percentiles": {
-                    "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                     "example": true,
                     "type": "boolean"
@@ -23653,7 +23912,6 @@
             "type": "array"
           },
           "include_percentiles": {
-            "default": false,
             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
             "example": true,
             "type": "boolean"
@@ -23756,7 +24014,6 @@
                 "type": "array"
               },
               "include_percentiles": {
-                "default": false,
                 "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                 "example": true,
                 "type": "boolean"
@@ -23886,7 +24143,6 @@
                     "type": "array"
                   },
                   "include_percentiles": {
-                    "default": false,
                     "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                     "example": true,
                     "type": "boolean"
@@ -32089,6 +32345,11 @@
                 "options": {
                   "description": "Options on rules.",
                   "properties": {
+                    "decreaseCriticalityBasedOnEnv": {
+                      "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                      "example": false,
+                      "type": "boolean"
+                    },
                     "detectionMethod": {
                       "description": "The detection method.",
                       "enum": [
@@ -32240,6 +32501,7 @@
                           ]
                         },
                         "learningDuration": {
+                          "default": 0,
                           "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                           "enum": [
                             0,
@@ -32252,6 +32514,33 @@
                             "ZERO_DAYS",
                             "ONE_DAY",
                             "SEVEN_DAYS"
+                          ]
+                        },
+                        "learningMethod": {
+                          "default": "duration",
+                          "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                          "enum": [
+                            "duration",
+                            "threshold"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "DURATION",
+                            "THRESHOLD"
+                          ]
+                        },
+                        "learningThreshold": {
+                          "default": 0,
+                          "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                          "enum": [
+                            0,
+                            1
+                          ],
+                          "format": "int32",
+                          "type": "integer",
+                          "x-enum-varnames": [
+                            "ZERO_OCCURRENCES",
+                            "ONE_OCCURRENCE"
                           ]
                         }
                       },
@@ -32304,6 +32593,14 @@
                       "metric": {
                         "description": "The target field to aggregate over when using the sum or max\naggregations.",
                         "type": "string"
+                      },
+                      "metrics": {
+                        "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                        "items": {
+                          "description": "Field.",
+                          "type": "string"
+                        },
+                        "type": "array"
                       },
                       "name": {
                         "description": "Name of the query.",
@@ -32567,6 +32864,11 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "decreaseCriticalityBasedOnEnv": {
+                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                "example": false,
+                "type": "boolean"
+              },
               "detectionMethod": {
                 "description": "The detection method.",
                 "enum": [
@@ -32718,6 +33020,7 @@
                     ]
                   },
                   "learningDuration": {
+                    "default": 0,
                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                     "enum": [
                       0,
@@ -32730,6 +33033,33 @@
                       "ZERO_DAYS",
                       "ONE_DAY",
                       "SEVEN_DAYS"
+                    ]
+                  },
+                  "learningMethod": {
+                    "default": "duration",
+                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                    "enum": [
+                      "duration",
+                      "threshold"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DURATION",
+                      "THRESHOLD"
+                    ]
+                  },
+                  "learningThreshold": {
+                    "default": 0,
+                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_OCCURRENCES",
+                      "ONE_OCCURRENCE"
                     ]
                   }
                 },
@@ -32784,6 +33114,14 @@
                   "description": "The target field to aggregate over when using the sum or max\naggregations.",
                   "type": "string"
                 },
+                "metrics": {
+                  "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                  "items": {
+                    "description": "Field.",
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
                 "name": {
                   "description": "Name of the query.",
                   "type": "string"
@@ -32835,6 +33173,11 @@
           "message"
         ],
         "type": "object"
+      },
+      "SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv": {
+        "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+        "example": false,
+        "type": "boolean"
       },
       "SecurityMonitoringRuleDetectionMethod": {
         "description": "The detection method.",
@@ -32992,6 +33335,7 @@
             ]
           },
           "learningDuration": {
+            "default": 0,
             "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
             "enum": [
               0,
@@ -33004,6 +33348,33 @@
               "ZERO_DAYS",
               "ONE_DAY",
               "SEVEN_DAYS"
+            ]
+          },
+          "learningMethod": {
+            "default": "duration",
+            "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+            "enum": [
+              "duration",
+              "threshold"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "DURATION",
+              "THRESHOLD"
+            ]
+          },
+          "learningThreshold": {
+            "default": 0,
+            "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+            "enum": [
+              0,
+              1
+            ],
+            "format": "int32",
+            "type": "integer",
+            "x-enum-varnames": [
+              "ZERO_OCCURRENCES",
+              "ONE_OCCURRENCE"
             ]
           }
         },
@@ -33031,6 +33402,7 @@
         ]
       },
       "SecurityMonitoringRuleNewValueOptionsLearningDuration": {
+        "default": 0,
         "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
         "enum": [
           0,
@@ -33045,9 +33417,41 @@
           "SEVEN_DAYS"
         ]
       },
+      "SecurityMonitoringRuleNewValueOptionsLearningMethod": {
+        "default": "duration",
+        "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+        "enum": [
+          "duration",
+          "threshold"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "DURATION",
+          "THRESHOLD"
+        ]
+      },
+      "SecurityMonitoringRuleNewValueOptionsLearningThreshold": {
+        "default": 0,
+        "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+        "enum": [
+          0,
+          1
+        ],
+        "format": "int32",
+        "type": "integer",
+        "x-enum-varnames": [
+          "ZERO_OCCURRENCES",
+          "ONE_OCCURRENCE"
+        ]
+      },
       "SecurityMonitoringRuleOptions": {
         "description": "Options on rules.",
         "properties": {
+          "decreaseCriticalityBasedOnEnv": {
+            "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+            "example": false,
+            "type": "boolean"
+          },
           "detectionMethod": {
             "description": "The detection method.",
             "enum": [
@@ -33199,6 +33603,7 @@
                 ]
               },
               "learningDuration": {
+                "default": 0,
                 "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                 "enum": [
                   0,
@@ -33211,6 +33616,33 @@
                   "ZERO_DAYS",
                   "ONE_DAY",
                   "SEVEN_DAYS"
+                ]
+              },
+              "learningMethod": {
+                "default": "duration",
+                "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                "enum": [
+                  "duration",
+                  "threshold"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "DURATION",
+                  "THRESHOLD"
+                ]
+              },
+              "learningThreshold": {
+                "default": 0,
+                "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                "enum": [
+                  0,
+                  1
+                ],
+                "format": "int32",
+                "type": "integer",
+                "x-enum-varnames": [
+                  "ZERO_OCCURRENCES",
+                  "ONE_OCCURRENCE"
                 ]
               }
             },
@@ -33261,6 +33693,14 @@
           "metric": {
             "description": "The target field to aggregate over when using the sum or max\naggregations.",
             "type": "string"
+          },
+          "metrics": {
+            "description": "Group of target fields to aggregate over when using the new value aggregations.",
+            "items": {
+              "description": "Field.",
+              "type": "string"
+            },
+            "type": "array"
           },
           "name": {
             "description": "Name of the query.",
@@ -33335,6 +33775,14 @@
           "metric": {
             "description": "The target field to aggregate over when using the sum or max\naggregations.",
             "type": "string"
+          },
+          "metrics": {
+            "description": "Group of target fields to aggregate over when using the new value aggregations.",
+            "items": {
+              "description": "Field.",
+              "type": "string"
+            },
+            "type": "array"
           },
           "name": {
             "description": "Name of the query.",
@@ -33466,6 +33914,11 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "decreaseCriticalityBasedOnEnv": {
+                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                "example": false,
+                "type": "boolean"
+              },
               "detectionMethod": {
                 "description": "The detection method.",
                 "enum": [
@@ -33617,6 +34070,7 @@
                     ]
                   },
                   "learningDuration": {
+                    "default": 0,
                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                     "enum": [
                       0,
@@ -33629,6 +34083,33 @@
                       "ZERO_DAYS",
                       "ONE_DAY",
                       "SEVEN_DAYS"
+                    ]
+                  },
+                  "learningMethod": {
+                    "default": "duration",
+                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                    "enum": [
+                      "duration",
+                      "threshold"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DURATION",
+                      "THRESHOLD"
+                    ]
+                  },
+                  "learningThreshold": {
+                    "default": 0,
+                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_OCCURRENCES",
+                      "ONE_OCCURRENCE"
                     ]
                   }
                 },
@@ -33681,6 +34162,14 @@
                 "metric": {
                   "description": "The target field to aggregate over when using the sum or max\naggregations.",
                   "type": "string"
+                },
+                "metrics": {
+                  "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                  "items": {
+                    "description": "Field.",
+                    "type": "string"
+                  },
+                  "type": "array"
                 },
                 "name": {
                   "description": "Name of the query.",
@@ -33872,6 +34361,11 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "decreaseCriticalityBasedOnEnv": {
+                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                "example": false,
+                "type": "boolean"
+              },
               "detectionMethod": {
                 "description": "The detection method.",
                 "enum": [
@@ -34023,6 +34517,7 @@
                     ]
                   },
                   "learningDuration": {
+                    "default": 0,
                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                     "enum": [
                       0,
@@ -34035,6 +34530,33 @@
                       "ZERO_DAYS",
                       "ONE_DAY",
                       "SEVEN_DAYS"
+                    ]
+                  },
+                  "learningMethod": {
+                    "default": "duration",
+                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                    "enum": [
+                      "duration",
+                      "threshold"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DURATION",
+                      "THRESHOLD"
+                    ]
+                  },
+                  "learningThreshold": {
+                    "default": 0,
+                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_OCCURRENCES",
+                      "ONE_OCCURRENCE"
                     ]
                   }
                 },
@@ -34087,6 +34609,14 @@
                 "metric": {
                   "description": "The target field to aggregate over when using the sum or max\naggregations.",
                   "type": "string"
+                },
+                "metrics": {
+                  "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                  "items": {
+                    "description": "Field.",
+                    "type": "string"
+                  },
+                  "type": "array"
                 },
                 "name": {
                   "description": "Name of the query.",
@@ -34187,6 +34717,176 @@
         },
         "type": "object"
       },
+      "SecurityMonitoringSignalArchiveComment": {
+        "description": "Optional comment to display on archived signals.",
+        "type": "string"
+      },
+      "SecurityMonitoringSignalArchiveReason": {
+        "description": "Reason a signal is archived.",
+        "enum": [
+          "none",
+          "false_positive",
+          "testing_or_maintenance",
+          "other"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "NONE",
+          "FALSE_POSITIVE",
+          "TESTING_OR_MAINTENANCE",
+          "OTHER"
+        ]
+      },
+      "SecurityMonitoringSignalAssigneeUpdateAttributes": {
+        "description": "Attributes describing the new assignee of a security signal.",
+        "properties": {
+          "assignee": {
+            "description": "Object representing a given user entity.",
+            "properties": {
+              "handle": {
+                "description": "The handle for this user account.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Numerical ID assigned by Datadog to this user account.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "name": {
+                "description": "The name for this user account.",
+                "type": "string"
+              },
+              "uuid": {
+                "description": "UUID assigned by Datadog to this user account.",
+                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                "type": "string"
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "type": "object"
+          },
+          "version": {
+            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "assignee"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalAssigneeUpdateData": {
+        "description": "Data containing the patch for changing the assignee of a signal.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes describing the new assignee of a security signal.",
+            "properties": {
+              "assignee": {
+                "description": "Object representing a given user entity.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle for this user account.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Numerical ID assigned by Datadog to this user account.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "The name for this user account.",
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "description": "UUID assigned by Datadog to this user account.",
+                    "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uuid"
+                ],
+                "type": "object"
+              },
+              "version": {
+                "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                "format": "int64",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "assignee"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalAssigneeUpdateRequest": {
+        "description": "Request body for changing the assignee of a given security monitoring signal.",
+        "properties": {
+          "data": {
+            "description": "Data containing the patch for changing the assignee of a signal.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes describing the new assignee of a security signal.",
+                "properties": {
+                  "assignee": {
+                    "description": "Object representing a given user entity.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle for this user account.",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Numerical ID assigned by Datadog to this user account.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "The name for this user account.",
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "description": "UUID assigned by Datadog to this user account.",
+                        "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid"
+                    ],
+                    "type": "object"
+                  },
+                  "version": {
+                    "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "assignee"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
       "SecurityMonitoringSignalAttributes": {
         "description": "The object containing all signal attributes and their\nassociated values.",
         "properties": {
@@ -34230,6 +34930,115 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "SecurityMonitoringSignalIncidentIds": {
+        "description": "Array of incidents that are associated with this signal.",
+        "items": {
+          "description": "Public ID attribute of the incident that is associated with the signal.",
+          "example": 2066,
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": "array"
+      },
+      "SecurityMonitoringSignalIncidentsUpdateAttributes": {
+        "description": "Attributes describing the new list of related signals for a security signal.",
+        "properties": {
+          "incident_ids": {
+            "description": "Array of incidents that are associated with this signal.",
+            "items": {
+              "description": "Public ID attribute of the incident that is associated with the signal.",
+              "example": 2066,
+              "format": "int64",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "version": {
+            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "incident_ids"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalIncidentsUpdateData": {
+        "description": "Data containing the patch for changing the related incidents of a signal.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes describing the new list of related signals for a security signal.",
+            "properties": {
+              "incident_ids": {
+                "description": "Array of incidents that are associated with this signal.",
+                "items": {
+                  "description": "Public ID attribute of the incident that is associated with the signal.",
+                  "example": 2066,
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              "version": {
+                "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                "format": "int64",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "incident_ids"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalIncidentsUpdateRequest": {
+        "description": "Request body for changing the related incidents of a given security monitoring signal.",
+        "properties": {
+          "data": {
+            "description": "Data containing the patch for changing the related incidents of a signal.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes describing the new list of related signals for a security signal.",
+                "properties": {
+                  "incident_ids": {
+                    "description": "Array of incidents that are associated with this signal.",
+                    "items": {
+                      "description": "Public ID attribute of the incident that is associated with the signal.",
+                      "example": 2066,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "type": "array"
+                  },
+                  "version": {
+                    "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "incident_ids"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "SecurityMonitoringSignalListRequest": {
@@ -34334,6 +35143,656 @@
         },
         "type": "object"
       },
+      "SecurityMonitoringSignalState": {
+        "description": "The new triage state of the signal.",
+        "enum": [
+          "open",
+          "archived",
+          "under_review"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "OPEN",
+          "ARCHIVED",
+          "UNDER_REVIEW"
+        ]
+      },
+      "SecurityMonitoringSignalStateUpdateAttributes": {
+        "description": "Attributes describing the change of state of a security signal.",
+        "properties": {
+          "archive_comment": {
+            "description": "Optional comment to display on archived signals.",
+            "type": "string"
+          },
+          "archive_reason": {
+            "description": "Reason a signal is archived.",
+            "enum": [
+              "none",
+              "false_positive",
+              "testing_or_maintenance",
+              "other"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "NONE",
+              "FALSE_POSITIVE",
+              "TESTING_OR_MAINTENANCE",
+              "OTHER"
+            ]
+          },
+          "state": {
+            "description": "The new triage state of the signal.",
+            "enum": [
+              "open",
+              "archived",
+              "under_review"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "OPEN",
+              "ARCHIVED",
+              "UNDER_REVIEW"
+            ]
+          },
+          "version": {
+            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "state"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalStateUpdateData": {
+        "description": "Data containing the patch for changing the state of a signal.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes describing the change of state of a security signal.",
+            "properties": {
+              "archive_comment": {
+                "description": "Optional comment to display on archived signals.",
+                "type": "string"
+              },
+              "archive_reason": {
+                "description": "Reason a signal is archived.",
+                "enum": [
+                  "none",
+                  "false_positive",
+                  "testing_or_maintenance",
+                  "other"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "NONE",
+                  "FALSE_POSITIVE",
+                  "TESTING_OR_MAINTENANCE",
+                  "OTHER"
+                ]
+              },
+              "state": {
+                "description": "The new triage state of the signal.",
+                "enum": [
+                  "open",
+                  "archived",
+                  "under_review"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPEN",
+                  "ARCHIVED",
+                  "UNDER_REVIEW"
+                ]
+              },
+              "version": {
+                "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                "format": "int64",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "state"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalStateUpdateRequest": {
+        "description": "Request body for changing the state of a given security monitoring signal.",
+        "properties": {
+          "data": {
+            "description": "Data containing the patch for changing the state of a signal.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes describing the change of state of a security signal.",
+                "properties": {
+                  "archive_comment": {
+                    "description": "Optional comment to display on archived signals.",
+                    "type": "string"
+                  },
+                  "archive_reason": {
+                    "description": "Reason a signal is archived.",
+                    "enum": [
+                      "none",
+                      "false_positive",
+                      "testing_or_maintenance",
+                      "other"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "NONE",
+                      "FALSE_POSITIVE",
+                      "TESTING_OR_MAINTENANCE",
+                      "OTHER"
+                    ]
+                  },
+                  "state": {
+                    "description": "The new triage state of the signal.",
+                    "enum": [
+                      "open",
+                      "archived",
+                      "under_review"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "OPEN",
+                      "ARCHIVED",
+                      "UNDER_REVIEW"
+                    ]
+                  },
+                  "version": {
+                    "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "state"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalTriageAttributes": {
+        "description": "Attributes describing a triage state update operation over a security signal.",
+        "properties": {
+          "archive_comment": {
+            "description": "Optional comment to display on archived signals.",
+            "type": "string"
+          },
+          "archive_comment_timestamp": {
+            "description": "Timestamp of the last edit to the comment.",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "archive_comment_user": {
+            "description": "Object representing a given user entity.",
+            "properties": {
+              "handle": {
+                "description": "The handle for this user account.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Numerical ID assigned by Datadog to this user account.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "name": {
+                "description": "The name for this user account.",
+                "type": "string"
+              },
+              "uuid": {
+                "description": "UUID assigned by Datadog to this user account.",
+                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                "type": "string"
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "type": "object"
+          },
+          "archive_reason": {
+            "description": "Reason a signal is archived.",
+            "enum": [
+              "none",
+              "false_positive",
+              "testing_or_maintenance",
+              "other"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "NONE",
+              "FALSE_POSITIVE",
+              "TESTING_OR_MAINTENANCE",
+              "OTHER"
+            ]
+          },
+          "assignee": {
+            "description": "Object representing a given user entity.",
+            "properties": {
+              "handle": {
+                "description": "The handle for this user account.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Numerical ID assigned by Datadog to this user account.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "name": {
+                "description": "The name for this user account.",
+                "type": "string"
+              },
+              "uuid": {
+                "description": "UUID assigned by Datadog to this user account.",
+                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                "type": "string"
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "type": "object"
+          },
+          "incident_ids": {
+            "description": "Array of incidents that are associated with this signal.",
+            "items": {
+              "description": "Public ID attribute of the incident that is associated with the signal.",
+              "example": 2066,
+              "format": "int64",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "state": {
+            "description": "The new triage state of the signal.",
+            "enum": [
+              "open",
+              "archived",
+              "under_review"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "OPEN",
+              "ARCHIVED",
+              "UNDER_REVIEW"
+            ]
+          },
+          "state_update_timestamp": {
+            "description": "Timestamp of the last update to the signal state.",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "state_update_user": {
+            "description": "Object representing a given user entity.",
+            "properties": {
+              "handle": {
+                "description": "The handle for this user account.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Numerical ID assigned by Datadog to this user account.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "name": {
+                "description": "The name for this user account.",
+                "type": "string"
+              },
+              "uuid": {
+                "description": "UUID assigned by Datadog to this user account.",
+                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                "type": "string"
+              }
+            },
+            "required": [
+              "uuid"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "assignee",
+          "state",
+          "incident_ids"
+        ],
+        "type": "object"
+      },
+      "SecurityMonitoringSignalTriageUpdateData": {
+        "description": "Data containing the updated triage attributes of the signal.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes describing a triage state update operation over a security signal.",
+            "properties": {
+              "archive_comment": {
+                "description": "Optional comment to display on archived signals.",
+                "type": "string"
+              },
+              "archive_comment_timestamp": {
+                "description": "Timestamp of the last edit to the comment.",
+                "format": "int64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "archive_comment_user": {
+                "description": "Object representing a given user entity.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle for this user account.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Numerical ID assigned by Datadog to this user account.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "The name for this user account.",
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "description": "UUID assigned by Datadog to this user account.",
+                    "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uuid"
+                ],
+                "type": "object"
+              },
+              "archive_reason": {
+                "description": "Reason a signal is archived.",
+                "enum": [
+                  "none",
+                  "false_positive",
+                  "testing_or_maintenance",
+                  "other"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "NONE",
+                  "FALSE_POSITIVE",
+                  "TESTING_OR_MAINTENANCE",
+                  "OTHER"
+                ]
+              },
+              "assignee": {
+                "description": "Object representing a given user entity.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle for this user account.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Numerical ID assigned by Datadog to this user account.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "The name for this user account.",
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "description": "UUID assigned by Datadog to this user account.",
+                    "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uuid"
+                ],
+                "type": "object"
+              },
+              "incident_ids": {
+                "description": "Array of incidents that are associated with this signal.",
+                "items": {
+                  "description": "Public ID attribute of the incident that is associated with the signal.",
+                  "example": 2066,
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              "state": {
+                "description": "The new triage state of the signal.",
+                "enum": [
+                  "open",
+                  "archived",
+                  "under_review"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "OPEN",
+                  "ARCHIVED",
+                  "UNDER_REVIEW"
+                ]
+              },
+              "state_update_timestamp": {
+                "description": "Timestamp of the last update to the signal state.",
+                "format": "int64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "state_update_user": {
+                "description": "Object representing a given user entity.",
+                "properties": {
+                  "handle": {
+                    "description": "The handle for this user account.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Numerical ID assigned by Datadog to this user account.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "The name for this user account.",
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "description": "UUID assigned by Datadog to this user account.",
+                    "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uuid"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "assignee",
+              "state",
+              "incident_ids"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringSignalTriageUpdateResponse": {
+        "description": "The response returned after all triage operations, containing the updated signal triage data.",
+        "properties": {
+          "data": {
+            "description": "Data containing the updated triage attributes of the signal.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes describing a triage state update operation over a security signal.",
+                "properties": {
+                  "archive_comment": {
+                    "description": "Optional comment to display on archived signals.",
+                    "type": "string"
+                  },
+                  "archive_comment_timestamp": {
+                    "description": "Timestamp of the last edit to the comment.",
+                    "format": "int64",
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "archive_comment_user": {
+                    "description": "Object representing a given user entity.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle for this user account.",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Numerical ID assigned by Datadog to this user account.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "The name for this user account.",
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "description": "UUID assigned by Datadog to this user account.",
+                        "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid"
+                    ],
+                    "type": "object"
+                  },
+                  "archive_reason": {
+                    "description": "Reason a signal is archived.",
+                    "enum": [
+                      "none",
+                      "false_positive",
+                      "testing_or_maintenance",
+                      "other"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "NONE",
+                      "FALSE_POSITIVE",
+                      "TESTING_OR_MAINTENANCE",
+                      "OTHER"
+                    ]
+                  },
+                  "assignee": {
+                    "description": "Object representing a given user entity.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle for this user account.",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Numerical ID assigned by Datadog to this user account.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "The name for this user account.",
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "description": "UUID assigned by Datadog to this user account.",
+                        "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid"
+                    ],
+                    "type": "object"
+                  },
+                  "incident_ids": {
+                    "description": "Array of incidents that are associated with this signal.",
+                    "items": {
+                      "description": "Public ID attribute of the incident that is associated with the signal.",
+                      "example": 2066,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "type": "array"
+                  },
+                  "state": {
+                    "description": "The new triage state of the signal.",
+                    "enum": [
+                      "open",
+                      "archived",
+                      "under_review"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "OPEN",
+                      "ARCHIVED",
+                      "UNDER_REVIEW"
+                    ]
+                  },
+                  "state_update_timestamp": {
+                    "description": "Timestamp of the last update to the signal state.",
+                    "format": "int64",
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "state_update_user": {
+                    "description": "Object representing a given user entity.",
+                    "properties": {
+                      "handle": {
+                        "description": "The handle for this user account.",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Numerical ID assigned by Datadog to this user account.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "The name for this user account.",
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "description": "UUID assigned by Datadog to this user account.",
+                        "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "assignee",
+                  "state",
+                  "incident_ids"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
       "SecurityMonitoringSignalType": {
         "default": "signal",
         "description": "The type of event.",
@@ -34345,6 +35804,11 @@
         "x-enum-varnames": [
           "SIGNAL"
         ]
+      },
+      "SecurityMonitoringSignalVersion": {
+        "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+        "format": "int64",
+        "type": "integer"
       },
       "SecurityMonitoringSignalsListResponse": {
         "description": "The response object with all security signals matching the request\nand pagination information.",
@@ -34502,6 +35966,33 @@
           "TIMESTAMP_ASCENDING",
           "TIMESTAMP_DESCENDING"
         ]
+      },
+      "SecurityMonitoringTriageUser": {
+        "description": "Object representing a given user entity.",
+        "properties": {
+          "handle": {
+            "description": "The handle for this user account.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Numerical ID assigned by Datadog to this user account.",
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "description": "The name for this user account.",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "UUID assigned by Datadog to this user account.",
+            "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid"
+        ],
+        "type": "object"
       },
       "ServiceAccountCreateAttributes": {
         "description": "Attributes of the created user.",
@@ -37516,7 +39007,6 @@
           "authorizationCode": {
             "authorizationUrl": "/oauth2/v1/authorize",
             "scopes": {
-              "dashboards_public_share": "Generate public and authenticated links to share dashboards externally.",
               "dashboards_read": "View dashboards.",
               "dashboards_write": "Create and change dashboards.",
               "events_read": "Read Events data.",
@@ -37525,7 +39015,6 @@
               "incident_write": "Create, view, and manage incidents in Datadog.",
               "metrics_read": "View custom metrics.",
               "monitors_read": "View monitors.",
-              "monitors_write": "Edit, mute, and delete individual monitors.",
               "security_monitoring_filters_read": "Read Security Filters.",
               "security_monitoring_filters_write": "Create, edit, and delete Security Filters.",
               "security_monitoring_rules_read": "Read Detection Rules.",
@@ -63609,6 +65098,17 @@
             "description": "Too Many Requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "metrics_read"
+            ]
+          }
+        ],
         "summary": "List tag configuration by name",
         "tags": [
           "Metrics"
@@ -63721,7 +65221,6 @@
                             "type": "array"
                           },
                           "include_percentiles": {
-                            "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                             "example": true,
                             "type": "boolean"
@@ -64165,7 +65664,6 @@
                             "type": "array"
                           },
                           "include_percentiles": {
-                            "default": false,
                             "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
                             "example": true,
                             "type": "boolean"
@@ -71009,17 +72507,6 @@
             "description": "Too many requests"
           }
         },
-        "security": [
-          {
-            "apiKeyAuth": [],
-            "appKeyAuth": []
-          },
-          {
-            "AuthZ": [
-              "security_monitoring_rules_read"
-            ]
-          }
-        ],
         "summary": "Get the latest Cloud Workload Security policy",
         "tags": [
           "Cloud Workload Security"
@@ -73635,6 +75122,11 @@
                           "options": {
                             "description": "Options on rules.",
                             "properties": {
+                              "decreaseCriticalityBasedOnEnv": {
+                                "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                                "example": false,
+                                "type": "boolean"
+                              },
                               "detectionMethod": {
                                 "description": "The detection method.",
                                 "enum": [
@@ -73786,6 +75278,7 @@
                                     ]
                                   },
                                   "learningDuration": {
+                                    "default": 0,
                                     "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                                     "enum": [
                                       0,
@@ -73798,6 +75291,33 @@
                                       "ZERO_DAYS",
                                       "ONE_DAY",
                                       "SEVEN_DAYS"
+                                    ]
+                                  },
+                                  "learningMethod": {
+                                    "default": "duration",
+                                    "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                                    "enum": [
+                                      "duration",
+                                      "threshold"
+                                    ],
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "DURATION",
+                                      "THRESHOLD"
+                                    ]
+                                  },
+                                  "learningThreshold": {
+                                    "default": 0,
+                                    "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                                    "enum": [
+                                      0,
+                                      1
+                                    ],
+                                    "format": "int32",
+                                    "type": "integer",
+                                    "x-enum-varnames": [
+                                      "ZERO_OCCURRENCES",
+                                      "ONE_OCCURRENCE"
                                     ]
                                   }
                                 },
@@ -73850,6 +75370,14 @@
                                 "metric": {
                                   "description": "The target field to aggregate over when using the sum or max\naggregations.",
                                   "type": "string"
+                                },
+                                "metrics": {
+                                  "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                                  "items": {
+                                    "description": "Field.",
+                                    "type": "string"
+                                  },
+                                  "type": "array"
                                 },
                                 "name": {
                                   "description": "Name of the query.",
@@ -74109,6 +75637,11 @@
                   "options": {
                     "description": "Options on rules.",
                     "properties": {
+                      "decreaseCriticalityBasedOnEnv": {
+                        "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                        "example": false,
+                        "type": "boolean"
+                      },
                       "detectionMethod": {
                         "description": "The detection method.",
                         "enum": [
@@ -74260,6 +75793,7 @@
                             ]
                           },
                           "learningDuration": {
+                            "default": 0,
                             "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                             "enum": [
                               0,
@@ -74272,6 +75806,33 @@
                               "ZERO_DAYS",
                               "ONE_DAY",
                               "SEVEN_DAYS"
+                            ]
+                          },
+                          "learningMethod": {
+                            "default": "duration",
+                            "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                            "enum": [
+                              "duration",
+                              "threshold"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "DURATION",
+                              "THRESHOLD"
+                            ]
+                          },
+                          "learningThreshold": {
+                            "default": 0,
+                            "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                            "enum": [
+                              0,
+                              1
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ZERO_OCCURRENCES",
+                              "ONE_OCCURRENCE"
                             ]
                           }
                         },
@@ -74325,6 +75886,14 @@
                         "metric": {
                           "description": "The target field to aggregate over when using the sum or max\naggregations.",
                           "type": "string"
+                        },
+                        "metrics": {
+                          "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                          "items": {
+                            "description": "Field.",
+                            "type": "string"
+                          },
+                          "type": "array"
                         },
                         "name": {
                           "description": "Name of the query.",
@@ -74501,6 +76070,11 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "decreaseCriticalityBasedOnEnv": {
+                          "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                          "example": false,
+                          "type": "boolean"
+                        },
                         "detectionMethod": {
                           "description": "The detection method.",
                           "enum": [
@@ -74652,6 +76226,7 @@
                               ]
                             },
                             "learningDuration": {
+                              "default": 0,
                               "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                               "enum": [
                                 0,
@@ -74664,6 +76239,33 @@
                                 "ZERO_DAYS",
                                 "ONE_DAY",
                                 "SEVEN_DAYS"
+                              ]
+                            },
+                            "learningMethod": {
+                              "default": "duration",
+                              "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                              "enum": [
+                                "duration",
+                                "threshold"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DURATION",
+                                "THRESHOLD"
+                              ]
+                            },
+                            "learningThreshold": {
+                              "default": 0,
+                              "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                              "enum": [
+                                0,
+                                1
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_OCCURRENCES",
+                                "ONE_OCCURRENCE"
                               ]
                             }
                           },
@@ -74716,6 +76318,14 @@
                           "metric": {
                             "description": "The target field to aggregate over when using the sum or max\naggregations.",
                             "type": "string"
+                          },
+                          "metrics": {
+                            "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                            "items": {
+                              "description": "Field.",
+                              "type": "string"
+                            },
+                            "type": "array"
                           },
                           "name": {
                             "description": "Name of the query.",
@@ -75134,6 +76744,11 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "decreaseCriticalityBasedOnEnv": {
+                          "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                          "example": false,
+                          "type": "boolean"
+                        },
                         "detectionMethod": {
                           "description": "The detection method.",
                           "enum": [
@@ -75285,6 +76900,7 @@
                               ]
                             },
                             "learningDuration": {
+                              "default": 0,
                               "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                               "enum": [
                                 0,
@@ -75297,6 +76913,33 @@
                                 "ZERO_DAYS",
                                 "ONE_DAY",
                                 "SEVEN_DAYS"
+                              ]
+                            },
+                            "learningMethod": {
+                              "default": "duration",
+                              "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                              "enum": [
+                                "duration",
+                                "threshold"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DURATION",
+                                "THRESHOLD"
+                              ]
+                            },
+                            "learningThreshold": {
+                              "default": 0,
+                              "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                              "enum": [
+                                0,
+                                1
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_OCCURRENCES",
+                                "ONE_OCCURRENCE"
                               ]
                             }
                           },
@@ -75349,6 +76992,14 @@
                           "metric": {
                             "description": "The target field to aggregate over when using the sum or max\naggregations.",
                             "type": "string"
+                          },
+                          "metrics": {
+                            "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                            "items": {
+                              "description": "Field.",
+                              "type": "string"
+                            },
+                            "type": "array"
                           },
                           "name": {
                             "description": "Name of the query.",
@@ -75585,6 +77236,11 @@
                   "options": {
                     "description": "Options on rules.",
                     "properties": {
+                      "decreaseCriticalityBasedOnEnv": {
+                        "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                        "example": false,
+                        "type": "boolean"
+                      },
                       "detectionMethod": {
                         "description": "The detection method.",
                         "enum": [
@@ -75736,6 +77392,7 @@
                             ]
                           },
                           "learningDuration": {
+                            "default": 0,
                             "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                             "enum": [
                               0,
@@ -75748,6 +77405,33 @@
                               "ZERO_DAYS",
                               "ONE_DAY",
                               "SEVEN_DAYS"
+                            ]
+                          },
+                          "learningMethod": {
+                            "default": "duration",
+                            "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                            "enum": [
+                              "duration",
+                              "threshold"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "DURATION",
+                              "THRESHOLD"
+                            ]
+                          },
+                          "learningThreshold": {
+                            "default": 0,
+                            "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                            "enum": [
+                              0,
+                              1
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ZERO_OCCURRENCES",
+                              "ONE_OCCURRENCE"
                             ]
                           }
                         },
@@ -75800,6 +77484,14 @@
                         "metric": {
                           "description": "The target field to aggregate over when using the sum or max\naggregations.",
                           "type": "string"
+                        },
+                        "metrics": {
+                          "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                          "items": {
+                            "description": "Field.",
+                            "type": "string"
+                          },
+                          "type": "array"
                         },
                         "name": {
                           "description": "Name of the query.",
@@ -75955,6 +77647,11 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "decreaseCriticalityBasedOnEnv": {
+                          "description": "If true, signals in non-production environments have a lower severity than what is defined by the rule case, which can reduce signal noise.\nThe severity is decreased by one level: `CRITICAL` in production becomes `HIGH` in non-production, `HIGH` becomes `MEDIUM` and so on. `INFO` remains `INFO`.\nThe decrement is applied when the environment tag of the signal starts with `staging`, `test` or `dev`.",
+                          "example": false,
+                          "type": "boolean"
+                        },
                         "detectionMethod": {
                           "description": "The detection method.",
                           "enum": [
@@ -76106,6 +77803,7 @@
                               ]
                             },
                             "learningDuration": {
+                              "default": 0,
                               "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
                               "enum": [
                                 0,
@@ -76118,6 +77816,33 @@
                                 "ZERO_DAYS",
                                 "ONE_DAY",
                                 "SEVEN_DAYS"
+                              ]
+                            },
+                            "learningMethod": {
+                              "default": "duration",
+                              "description": "The learning method used to determine when signals should be generated for values that weren't learned.",
+                              "enum": [
+                                "duration",
+                                "threshold"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DURATION",
+                                "THRESHOLD"
+                              ]
+                            },
+                            "learningThreshold": {
+                              "default": 0,
+                              "description": "A number of occurrences after which signals will be generated for values that weren't learned.",
+                              "enum": [
+                                0,
+                                1
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_OCCURRENCES",
+                                "ONE_OCCURRENCE"
                               ]
                             }
                           },
@@ -76170,6 +77895,14 @@
                           "metric": {
                             "description": "The target field to aggregate over when using the sum or max\naggregations.",
                             "type": "string"
+                          },
+                          "metrics": {
+                            "description": "Group of target fields to aggregate over when using the new value aggregations.",
+                            "items": {
+                              "description": "Field.",
+                              "type": "string"
+                            },
+                            "type": "array"
                           },
                           "name": {
                             "description": "Name of the query.",
@@ -76957,6 +78690,1121 @@
         }
       }
     },
+    "/api/v2/security_monitoring/signals/{signal_id}/assignee": {
+      "patch": {
+        "description": "Modify the triage assignee of a security signal.",
+        "operationId": "EditSecurityMonitoringSignalAssignee",
+        "parameters": [
+          {
+            "description": "The ID of the signal.",
+            "in": "path",
+            "name": "signal_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request body for changing the assignee of a given security monitoring signal.",
+                "properties": {
+                  "data": {
+                    "description": "Data containing the patch for changing the assignee of a signal.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes describing the new assignee of a security signal.",
+                        "properties": {
+                          "assignee": {
+                            "description": "Object representing a given user entity.",
+                            "properties": {
+                              "handle": {
+                                "description": "The handle for this user account.",
+                                "type": "string"
+                              },
+                              "id": {
+                                "description": "Numerical ID assigned by Datadog to this user account.",
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "name": {
+                                "description": "The name for this user account.",
+                                "type": "string"
+                              },
+                              "uuid": {
+                                "description": "UUID assigned by Datadog to this user account.",
+                                "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "uuid"
+                            ],
+                            "type": "object"
+                          },
+                          "version": {
+                            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                            "format": "int64",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "assignee"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Attributes describing the signal update.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The response returned after all triage operations, containing the updated signal triage data.",
+                  "properties": {
+                    "data": {
+                      "description": "Data containing the updated triage attributes of the signal.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes describing a triage state update operation over a security signal.",
+                          "properties": {
+                            "archive_comment": {
+                              "description": "Optional comment to display on archived signals.",
+                              "type": "string"
+                            },
+                            "archive_comment_timestamp": {
+                              "description": "Timestamp of the last edit to the comment.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "archive_comment_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "archive_reason": {
+                              "description": "Reason a signal is archived.",
+                              "enum": [
+                                "none",
+                                "false_positive",
+                                "testing_or_maintenance",
+                                "other"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "NONE",
+                                "FALSE_POSITIVE",
+                                "TESTING_OR_MAINTENANCE",
+                                "OTHER"
+                              ]
+                            },
+                            "assignee": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "incident_ids": {
+                              "description": "Array of incidents that are associated with this signal.",
+                              "items": {
+                                "description": "Public ID attribute of the incident that is associated with the signal.",
+                                "example": 2066,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "type": "array"
+                            },
+                            "state": {
+                              "description": "The new triage state of the signal.",
+                              "enum": [
+                                "open",
+                                "archived",
+                                "under_review"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "OPEN",
+                                "ARCHIVED",
+                                "UNDER_REVIEW"
+                              ]
+                            },
+                            "state_update_timestamp": {
+                              "description": "Timestamp of the last update to the signal state.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "state_update_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "assignee",
+                            "state",
+                            "incident_ids"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_signals_write"
+            ]
+          }
+        ],
+        "summary": "Modify the triage assignee of a security signal",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
+    "/api/v2/security_monitoring/signals/{signal_id}/incidents": {
+      "patch": {
+        "description": "Change the related incidents for a security signal.",
+        "operationId": "EditSecurityMonitoringSignalIncidents",
+        "parameters": [
+          {
+            "description": "The ID of the signal.",
+            "in": "path",
+            "name": "signal_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request body for changing the related incidents of a given security monitoring signal.",
+                "properties": {
+                  "data": {
+                    "description": "Data containing the patch for changing the related incidents of a signal.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes describing the new list of related signals for a security signal.",
+                        "properties": {
+                          "incident_ids": {
+                            "description": "Array of incidents that are associated with this signal.",
+                            "items": {
+                              "description": "Public ID attribute of the incident that is associated with the signal.",
+                              "example": 2066,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "type": "array"
+                          },
+                          "version": {
+                            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                            "format": "int64",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "incident_ids"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Attributes describing the signal update.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The response returned after all triage operations, containing the updated signal triage data.",
+                  "properties": {
+                    "data": {
+                      "description": "Data containing the updated triage attributes of the signal.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes describing a triage state update operation over a security signal.",
+                          "properties": {
+                            "archive_comment": {
+                              "description": "Optional comment to display on archived signals.",
+                              "type": "string"
+                            },
+                            "archive_comment_timestamp": {
+                              "description": "Timestamp of the last edit to the comment.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "archive_comment_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "archive_reason": {
+                              "description": "Reason a signal is archived.",
+                              "enum": [
+                                "none",
+                                "false_positive",
+                                "testing_or_maintenance",
+                                "other"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "NONE",
+                                "FALSE_POSITIVE",
+                                "TESTING_OR_MAINTENANCE",
+                                "OTHER"
+                              ]
+                            },
+                            "assignee": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "incident_ids": {
+                              "description": "Array of incidents that are associated with this signal.",
+                              "items": {
+                                "description": "Public ID attribute of the incident that is associated with the signal.",
+                                "example": 2066,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "type": "array"
+                            },
+                            "state": {
+                              "description": "The new triage state of the signal.",
+                              "enum": [
+                                "open",
+                                "archived",
+                                "under_review"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "OPEN",
+                                "ARCHIVED",
+                                "UNDER_REVIEW"
+                              ]
+                            },
+                            "state_update_timestamp": {
+                              "description": "Timestamp of the last update to the signal state.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "state_update_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "assignee",
+                            "state",
+                            "incident_ids"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_signals_write"
+            ]
+          }
+        ],
+        "summary": "Change the related incidents of a security signal",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
+    "/api/v2/security_monitoring/signals/{signal_id}/state": {
+      "patch": {
+        "description": "Change the triage state of a security signal.",
+        "operationId": "EditSecurityMonitoringSignalState",
+        "parameters": [
+          {
+            "description": "The ID of the signal.",
+            "in": "path",
+            "name": "signal_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request body for changing the state of a given security monitoring signal.",
+                "properties": {
+                  "data": {
+                    "description": "Data containing the patch for changing the state of a signal.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes describing the change of state of a security signal.",
+                        "properties": {
+                          "archive_comment": {
+                            "description": "Optional comment to display on archived signals.",
+                            "type": "string"
+                          },
+                          "archive_reason": {
+                            "description": "Reason a signal is archived.",
+                            "enum": [
+                              "none",
+                              "false_positive",
+                              "testing_or_maintenance",
+                              "other"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "NONE",
+                              "FALSE_POSITIVE",
+                              "TESTING_OR_MAINTENANCE",
+                              "OTHER"
+                            ]
+                          },
+                          "state": {
+                            "description": "The new triage state of the signal.",
+                            "enum": [
+                              "open",
+                              "archived",
+                              "under_review"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "OPEN",
+                              "ARCHIVED",
+                              "UNDER_REVIEW"
+                            ]
+                          },
+                          "version": {
+                            "description": "Version of the updated signal. If server side version is higher, update will be rejected.",
+                            "format": "int64",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "state"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Attributes describing the signal update.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The response returned after all triage operations, containing the updated signal triage data.",
+                  "properties": {
+                    "data": {
+                      "description": "Data containing the updated triage attributes of the signal.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes describing a triage state update operation over a security signal.",
+                          "properties": {
+                            "archive_comment": {
+                              "description": "Optional comment to display on archived signals.",
+                              "type": "string"
+                            },
+                            "archive_comment_timestamp": {
+                              "description": "Timestamp of the last edit to the comment.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "archive_comment_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "archive_reason": {
+                              "description": "Reason a signal is archived.",
+                              "enum": [
+                                "none",
+                                "false_positive",
+                                "testing_or_maintenance",
+                                "other"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "NONE",
+                                "FALSE_POSITIVE",
+                                "TESTING_OR_MAINTENANCE",
+                                "OTHER"
+                              ]
+                            },
+                            "assignee": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            },
+                            "incident_ids": {
+                              "description": "Array of incidents that are associated with this signal.",
+                              "items": {
+                                "description": "Public ID attribute of the incident that is associated with the signal.",
+                                "example": 2066,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "type": "array"
+                            },
+                            "state": {
+                              "description": "The new triage state of the signal.",
+                              "enum": [
+                                "open",
+                                "archived",
+                                "under_review"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "OPEN",
+                                "ARCHIVED",
+                                "UNDER_REVIEW"
+                              ]
+                            },
+                            "state_update_timestamp": {
+                              "description": "Timestamp of the last update to the signal state.",
+                              "format": "int64",
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "state_update_user": {
+                              "description": "Object representing a given user entity.",
+                              "properties": {
+                                "handle": {
+                                  "description": "The handle for this user account.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Numerical ID assigned by Datadog to this user account.",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "description": "The name for this user account.",
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "description": "UUID assigned by Datadog to this user account.",
+                                  "example": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "uuid"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "assignee",
+                            "state",
+                            "incident_ids"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_signals_write"
+            ]
+          }
+        ],
+        "summary": "Change the triage state of a security signal",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
     "/api/v2/series": {
       "post": {
         "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.",
@@ -77115,13 +79963,12 @@
                           "type": "array"
                         },
                         "type": {
-                          "description": "The type of metric.",
+                          "description": "The type of metric. The available types are `0` (unspecified), `1` (count), `2` (rate), and `3` (gauge).",
                           "enum": [
                             0,
                             1,
                             2,
-                            3,
-                            15
+                            3
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -77129,8 +79976,7 @@
                             "UNSPECIFIED",
                             "COUNT",
                             "RATE",
-                            "GAUGE",
-                            "UNSPECIFIED_LEGACY"
+                            "GAUGE"
                           ]
                         },
                         "unit": {
@@ -77164,10 +80010,13 @@
                 "schema": {
                   "description": "The payload accepted for intake.",
                   "properties": {
-                    "status": {
-                      "description": "The status of the intake payload.",
-                      "example": "ok",
-                      "type": "string"
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "An empty error list.",
+                        "type": "string"
+                      },
+                      "type": "array"
                     }
                   },
                   "type": "object"
@@ -86549,6 +89398,283 @@
         }
       }
     },
+    "/api/v2/usage/hourly_usage": {
+      "get": {
+        "description": "Get hourly usage by product family",
+        "operationId": "GetHourlyUsage",
+        "parameters": [
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.",
+            "in": "query",
+            "name": "filter[timestamp][start]",
+            "required": true,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.",
+            "in": "query",
+            "name": "filter[timestamp][end]",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Comma separated list of product families to retrieve. Available families are `all`, `analyzed_logs`,\n`application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `cws`, `dbm`, `fargate`,\n`infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`, `iot`,\n`lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `observability_pipelines`,\n`online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`, `sds`, `snmp`,\n`synthetics_api`, `synthetics_browser`, and `timeseries`.",
+            "in": "query",
+            "name": "filter[product_families]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Include child org usage in the response. Defaults to false.",
+            "in": "query",
+            "name": "filter[include_descendants]",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Comma separated list of product family versions to use in the format `product_family:version`. For example,\n`infra_hosts:1.0.0`. If this parameter is not used, the API will use the latest version of each requested\nproduct family. Currently all families have one version `1.0.0`.",
+            "in": "query",
+            "name": "filter[versions]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of results to return (between 1 and 500) - defaults to 500 if limit not specified.",
+            "in": "query",
+            "name": "page[limit]",
+            "required": false,
+            "schema": {
+              "default": 500,
+              "format": "int32",
+              "maximum": 500,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "List following results with a next_record_id provided in the previous query.",
+            "in": "query",
+            "name": "page[next_record_id]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "Hourly usage response.",
+                  "properties": {
+                    "data": {
+                      "description": "Response containing hourly usage.",
+                      "items": {
+                        "description": "Hourly usage for a product family for an org.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Attributes of hourly usage for a product family for an org for a time period.",
+                            "properties": {
+                              "measurements": {
+                                "description": "List of the measured usage values for the product family for the org for the time period.",
+                                "items": {
+                                  "description": "Usage amount for a given usage type.",
+                                  "properties": {
+                                    "usage_type": {
+                                      "description": "Type of usage.",
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "description": "Contains the number measured for the given usage_type during the hour.",
+                                      "format": "int64",
+                                      "nullable": true,
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "org_name": {
+                                "description": "The organization name.",
+                                "type": "string"
+                              },
+                              "product_family": {
+                                "description": "The product for which usage is being reported.",
+                                "type": "string"
+                              },
+                              "public_id": {
+                                "description": "The organization public ID.",
+                                "type": "string"
+                              },
+                              "region": {
+                                "description": "The region of the Datadog instance that the organization belongs to.",
+                                "type": "string"
+                              },
+                              "timestamp": {
+                                "description": "Datetime in ISO-8601 format, UTC. The hour for the usage.",
+                                "format": "date-time",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the response.",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "usage_timeseries",
+                            "description": "Type of usage data.",
+                            "enum": [
+                              "usage_timeseries"
+                            ],
+                            "example": "usage_timeseries",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "USAGE_TIMESERIES"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "description": "The object containing document metadata.",
+                      "properties": {
+                        "pagination": {
+                          "description": "The metadata for the current pagination.",
+                          "properties": {
+                            "next_record_id": {
+                              "description": "The cursor to get the next results (if any). To make the next request, use the same parameters and add `next_record_id`.",
+                              "nullable": true,
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden - User is not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "usage_read"
+            ]
+          }
+        ],
+        "summary": "Get hourly usage by product family",
+        "tags": [
+          "Usage Metering"
+        ],
+        "x-menu-order": 40,
+        "x-undo": {
+          "type": "safe"
+        }
+      }
+    },
     "/api/v2/usage/lambda_traced_invocations": {
       "get": {
         "description": "Get hourly usage for Lambda Traced Invocations.",
@@ -91082,7 +94208,7 @@
       "name": "Metrics"
     },
     {
-      "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/api/latest/opsgenie-integration)\ndirectly through the Datadog API.",
+      "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API.",
       "externalDocs": {
         "url": "https://docs.datadoghq.com/api/latest/opsgenie-integration"
       },

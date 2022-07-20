@@ -1,6 +1,8 @@
 ---
 title: Enabling the Profiler
 kind: Documentation
+aliases: 
+  - /tracing/faq/profiling_migration/
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
@@ -34,4 +36,4 @@ The following profiling library can be used for applications that are written in
 
 
 
-[1]: /tracing/setup_overview/
+[1]: /tracing/trace_collection/

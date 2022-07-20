@@ -78,6 +78,20 @@ The new query search allows you to use complex queries in event monitors with ne
 
 Datadog automatically parses JSON-formatted events. When events are not JSON-formatted, they are parsed and enriched by chaining them sequentially through a processing pipeline. Processors extract meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
 
+## Reserved attributes
+
+This list describes automatically ingested reserved attributes with events.
+
+| Attribute | Description                                                                                                                                                                                                                                |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `host`    | The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your events. The Agent sets this value automatically.                          |
+| `source`  | This corresponds to the integration name, or the technology from which the event originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, and more. |
+| `status`  | This corresponds to the level or severity of an event.      |
+| `service` | The name of the application or service generating the events. |
+                                                                                                                         |
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the event entry. 
+|                     
+
 ## What Changed?
 
 **Note:** The process for sending events remains the same. You can continue sending events using the API, the Agent, or the events via email feature as before.
@@ -93,10 +107,10 @@ Some status values have changed:
 
 | Legacy status | New status |
 |---------------|------------|
-| success       | OK         |
-| warning       | WARN       |
-| info          | INFO       |
-| error         | ERROR      |
+| success       | ok         |
+| warning       | warn       |
+| info          | info       |
+| error         | error      |
 
 ### Source remapping in queries
 Many Event source names have changed. See the full list of affected [source names][5].

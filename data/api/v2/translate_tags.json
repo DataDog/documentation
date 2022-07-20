@@ -53,7 +53,7 @@
   },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
-    "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/api/latest/opsgenie-integration)\ndirectly through the Datadog API."
+    "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
   },
   "organizations": {
     "name": "Organizations",

@@ -16,7 +16,7 @@ further_reading:
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "/tracing/connect_logs_and_traces/java/"
+- link: "/tracing/other_telemetry/connect_logs_and_traces/java/"
   tag: "Documentation"
   text: "Connect Logs and Traces"
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
@@ -244,7 +244,7 @@ Configure a file appender in `logback.xml`:
     <immediateFlush>true</immediateFlush>
 
     <encoder>
-      <pattern>Logback %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
     </encoder>
   </appender>
 
@@ -517,7 +517,7 @@ To generate this JSON:
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /logs/log_configuration/parsing
-[3]: /tracing/connect_logs_and_traces/java/
+[3]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: https://github.com/logstash/logstash-logback-encoder
 [5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
 [6]: /logs/log_configuration/parsing/#key-value-or-logfmt

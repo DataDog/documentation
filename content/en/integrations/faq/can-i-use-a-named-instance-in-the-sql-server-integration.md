@@ -20,6 +20,6 @@ instances:
   - host: $SERVER\$INSTANCENAME
 ```
 
-[1]: /integrations/faq/connection-issues-with-the-sql-server-integration/
+[1]: /integrations/guide/connection-issues-with-the-sql-server-integration/
 [2]: https://technet.microsoft.com/en-us/library/ms165734(v=sql.90.aspx
 [3]: https://github.com/DataDog/integrations-core/blob/5.17.x/sqlserver/conf.yaml.example#L61

@@ -81,7 +81,7 @@
   },
   "pagerduty-integration": {
     "name": "PagerDuty Integration",
-    "description": "Configure your [Datadog-PagerDuty integration](https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty)\ndirectly through the Datadog API."
+    "description": "Configure your [Datadog-PagerDuty integration](https://docs.datadoghq.com/integrations/pagerduty/)\ndirectly through the Datadog API."
   },
   "screenboards": {
     "name": "Screenboards",

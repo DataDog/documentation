@@ -1,6 +1,8 @@
 ---
 title: Set up Observability Pipelines
 kind: Documentation
+dependencies:
+  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/setup.md"]
 further_reading:
   - link: /integrations/observability_pipelines/vector_configurations/
     tag: Documentation
@@ -154,4 +156,4 @@ Once the setup is complete, Vector is connected to Observability Pipelines and t
 [21]: https://vector.dev/docs/setup/installation/
 [22]: /integrations/observability_pipelines/vector_configurations
 [23]: https://app.datadoghq.com/organization-settings/service-accounts/new
-[24]: https://app.datadoghq.com/pipelines
+[24]: https://app.datadoghq.com/observability-pipelines

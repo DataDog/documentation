@@ -52,7 +52,7 @@ When creating monitors in Datadog, a warning message displays if you choose a de
 
 ## Faster metrics
 
-To obtain metrics with virtually zero delay, install the Datadog Agent on your cloud hosts when possible. Refer to the documentation on [installing the Datadog Agent on your cloud instances][1].
+To obtain system-level metrics with virtually zero delay, install the Datadog Agent on your cloud hosts when possible. For a full list of the benefits of installing the Agent on your cloud instances, refer to the documentation [Why should I install the Datadog Agent on my cloud instances?][1].
 
 On the Datadog side for the AWS, Azure, and GCP integrations, Datadog may be able to speed up the default metric crawler for all metrics. Additionally, for AWS, Datadog has namespace specific crawlers. Contact [Datadog support][2] for more information.
 

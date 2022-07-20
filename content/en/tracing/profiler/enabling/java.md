@@ -20,7 +20,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires [JDK Flight Recorder][2]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle JDK 11+, [OpenJDK 8 (version 8u262+)][3] and Azul Zulu 8+ (version 8u212+). It is not supported in OpenJ9 as it doesn't support the [JDK Flight Recorder][2].
+The Datadog Profiler requires [JDK Flight Recorder][2]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle JDK 11+, [OpenJDK 8 (version 1.8.0.262/8u262+)][3] and Azul Zulu 8 (version 1.8.0.212/8u212+). It is not supported in OpenJ9 as it doesn't support the [JDK Flight Recorder][2].
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
@@ -111,7 +111,7 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/
+[1]: /tracing/trace_collection/
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [3]: /tracing/profiler/profiler_troubleshooting/#java-8-support
 [4]: https://app.datadoghq.com/account/settings#agent/overview

@@ -2,7 +2,7 @@ import { getQueryParameterByName } from '../helpers/browser';
 
 const initCodeTabs = () => {
     const codeTabsList = document.querySelectorAll('.code-tabs')
-    const tabQueryParameter = getQueryParameterByName('tab')
+    const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs')
 
     const init = () => {
         renderCodeTabElements()
@@ -91,7 +91,7 @@ const initCodeTabs = () => {
     }
 
     const addEventListeners = () => {
-        const allTabLinksNodeList = document.querySelectorAll('.code-tabs li a')
+        const allTabLinksNodeList = document.querySelectorAll('.code-tabs .nav-tabs li a')
 
         allTabLinksNodeList.forEach(link => {
             link.addEventListener('click', () => {
@@ -107,12 +107,19 @@ const initCodeTabs = () => {
     const updateUrl = (activeLang) => {
         const url = window.location.href
             .replace(window.location.hash, '')
-            .replace(window.location.search, '');
+            .replace(window.location.search, '')
+
+        const queryParams = new URLSearchParams(window.location.search)
+        queryParams.set('tab', activeLang)
+
+        if (queryParams.get('tabs')) {
+            queryParams.delete('tabs')
+        }
 
         window.history.replaceState(
             null,
             null,
-            `${url}?tab=${activeLang}${window.location.hash}`
+            `${url}?${queryParams}${window.location.hash}`
         );
     }
 

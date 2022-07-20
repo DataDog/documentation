@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-page/"
   tag: "Blog"
   text: "Service Telemetry, Error Tracking, SLOs and more"
+- link: "https://www.datadoghq.com/blog/monitor-service-performance-with-slo-alerts/"
+  tag: "Blog"
+  text: "Proactively monitor service performance with SLO alerts"
 ---
 
 {{< vimeo 382481078 >}}
@@ -139,7 +142,7 @@ Once you are using a saved view, you can update it by selecting that saved view,
 
 ## SLO audit events
 
-SLO audit events allow you to track the history of your SLO configurations using the Event Stream. Audit events are added to the Event Stream every time you create, modify or delete an SLO. Each event includes information on an SLO's configuration, and the stream provides a history of the SLO's configuration changes over time.
+SLO audit events allow you to track the history of your SLO configurations using the Event Explorer. Audit events are added to the Event Explorer every time you create, modify or delete an SLO. Each event includes information on an SLO's configuration, and the stream provides a history of the SLO's configuration changes over time.
 
 Each event includes the following SLO configuration information:
 
@@ -148,17 +151,17 @@ Each event includes the following SLO configuration information:
 - Target percentages and time windows
 - Datasources (monitor IDs or metric query)
 
-Three types of SLO audit events appear in the Event Stream:
+Three types of SLO audit events appear in the Event Explorer:
 
 1. `SLO Created` events show all four pieces of SLO configuration information at creation time.
 2. `SLO Modified` events show a what configuration information changed during a modification
 3. `SLO Deleted` events show all four pieces of configuration information the SLO had right before it was deleted
 
-To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
+To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Explorer. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
 
-You can also query the Event Stream programmatically using the [Datadog Events API][13].
+You can also query the Event Explorer programmatically using the [Datadog Events API][13].
 
-**Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Stream to a longer period, for example, the past 7 days.
+**Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Explorer to a longer period, for example, the past 7 days.
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
 
@@ -180,7 +183,7 @@ When you create a correction window for an SLO, the time period you specify is r
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalender RFC 5545's RRULE specification][15]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][15]. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
