@@ -665,7 +665,7 @@
               text: "Learn how to explore your RUM data"
     
     - action: pull-and-push-file
-      branch: master
+      branch: alai97/front-matter-migration
       globs:
       - 'docs/rum_collection/crash_reporting.md'
       options:
@@ -673,7 +673,7 @@
         file_name: 'ios.md'
         front_matters:
           description: "Set up Error Tracking for your iOS projects."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/crash_reporting.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/alai97/front-matter-migration/docs/rum_collection/crash_reporting.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "GitHub"
