@@ -16,7 +16,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
 display_name: Couchbase
@@ -35,7 +34,7 @@ metric_to_check: couchbase.ram.used
 name: couchbase
 process_signatures:
 - beam.smp couchbase
-public_title: Datadog-CouchBase インテグレーション
+public_title: CouchBase インテグレーション
 short_description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
 support: コア
 supported_os:

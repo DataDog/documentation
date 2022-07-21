@@ -9,7 +9,6 @@ categories:
 - notification
 - network
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/README.md
 display_name: Snmpwalk
@@ -24,7 +23,7 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 name: snmpwalk
-public_title: Datadog-SNMP walk インテグレーション
+public_title: SNMP walk
 short_description: snmpwalk の説明
 support: contrib
 supported_os:

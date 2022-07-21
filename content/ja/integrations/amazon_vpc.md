@@ -1,11 +1,10 @@
 ---
 aliases:
-  - /ja/integrations/amazon_vpc/
+- /ja/integrations/amazon_vpc/
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: AWS VPC ログを収集
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
@@ -23,6 +22,7 @@ public_title: Datadog-Amazon VPC インテグレーション
 short_description: AWS VPC ログを収集
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Virtual Private Cloud (Amazon VPC) を使用すると、仮想ネットワーク内で AWS リソースを起動できます。VPC フローログは、VPC 内のネットワークインターフェイスを行き来する IP トラフィックに関する情報をキャプチャできる機能です。
@@ -43,29 +43,28 @@ Datadog で [Amazon Web Services インテグレーション][1]がセットア�
 
 #### VPC フローログ記録の有効化
 
-VPC フローログは、S3 バケットまたは CloudWatch ロググループに送信できます。リストで監視する VPC をクリックし、画面下部の Flow Logs タブにある `Create Flow logs` を選択します。
+VPC のフローログは、S3 バケットまたは CloudWatch のロググループに送信することができます。
 
-{{< img src="integrations/amazon_vpc/flow_logs.png" alt="フローログ" style="width:75%;" >}}
-
-`All` フィルターを選択して、許可された接続と拒否された接続の両方を取得します。次に、適切な S3 バケットまたはロググループを選択します。
-
-{{< img src="integrations/amazon_vpc/flow_log_creation.png" alt="フローログの作成" style="width:75%;" >}}
+1. AWS コンソールで、監視したい VPC に移動します。
+2. **Flow logs** タブに移動します。
+3. **Create flow log** をクリックします。
+4. `All` フィルターを選択すると、受け入れた接続と拒否した接続の両方を取得することができます。
+5. ログを送信する S3 バケットまたは CloudWatch のロググループを選択します。
 
 **注**: Lambda が自動的に `vpc` ソースをログに設定するようにするには、S3 ファイル名または CloudWatch ロググループ名のプレフィックスとして `vpc` を指定します。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
+1. AWS アカウントで [Datadog Forwarder Lambda 関数][4] をまだセットアップしていない場合は、セットアップします。
+2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
+3. Trigger Configuration で **S3** または **CloudWatch Logs** トリガーを選択します。
+4. VPC のログが含まれる S3 バケットまたは CloudWatch のロググループを選択します。
+5. イベントの種類は `All object create events` のままにしておきます。
+6. **Add** をクリックすると、Lambda にトリガーが追加されます。
 
-2. Lambda 関数がインストールされたら、AWS コンソールを使って Amazon VPC フローログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。次に、Lambda のトリガー一覧で S3 または CloudWatch をクリックします。
+[ログエクスプローラー][5]に移動して、ログを確認します。
 
-    {{< img src="integrations/amazon_vpc/s3_trigger_configuration.png" alt="S3 トリガーのコンフィギュレーション" style="width:75%;" >}}
-
-    AWS VPC ログを含む S3 バケットを選択してトリガーを構成し、_イベントタイプ_ を `Object Created (All)` に変更してから Add ボタンをクリックします。
-
-    {{< img src="integrations/amazon_vpc/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガー" style="width:75%;" >}}
-
-終了したら、[Datadog ログエクスプローラー][5]を使用してログを確認します。
+AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][6]を参照してください。
 
 ## 収集データ
 
@@ -90,6 +89,7 @@ AWS VPC インテグレーションには、サービスのチェック機能は
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-VPC-Flow-Logs
 [3]: https://docs.datadoghq.com/ja/help/
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/ja/logs/explorer/
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv

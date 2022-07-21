@@ -5,17 +5,17 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - os & system
+- os & system
 creates_events: true
-ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md
 display_name: Uptime
 draft: false
 git_integration_title: uptime
 guid: 5da2ddb8-ecf7-4971-a3ee-e42752efc1f5
 integration_id: uptime
 integration_title: Uptime
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: jeremy-lq
@@ -23,14 +23,17 @@ manifest_version: 1.0.0
 metric_prefix: uptime
 metric_to_check: uptime.response_time
 name: uptime
-public_title: Datadog-Uptime インテグレーション
+public_title: Uptime
 short_description: アップタイムとパフォーマンスの監視を容易に実行
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 アプリからイベントとメトリクスをリアルタイムに取得して、以下のことができます。
@@ -44,7 +47,7 @@ supported_os:
 
 ### コンフィギュレーション
 
-Uptime アカウント内で Datadog のインテグレーションを有効にするには、[Notifications > Integrations][2] に移動し、新しいプッシュ通知プロファイルを追加する際にプロバイダータイプとして Datadog を選択します。
+Uptime アカウント内で Datadog インテグレーションを有効にするには、[Notifications > Integrations][2] に移動し、新しいプッシュ通知プロファイルを追加する際にプロバイダータイプとして Datadog を選択します。
 
 下記は、Uptime アカウントで Datadog を構成する際に表示されるフィールドです。
 shell
@@ -54,7 +57,7 @@ shell
 
 - Application Key: <span class="app_key" data-name="uptime"></span>
 
-Datadog プロファイルの構成が完了したら、Alerting > Contacts にある連絡先グループにプロファイルを割り当てる必要があります。プロファイルは、連絡先グループの Push Notifications フィールドに割り当てます。
+Datadog プロファイルの構成が完了したら、_Alerting > Contacts_ にある連絡先グループにプロファイルを割り当てます。プロファイルは、連絡先グループの **Push Notifications** フィールドに割り当てます。
 
 ## 収集データ
 

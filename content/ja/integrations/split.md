@@ -5,30 +5,33 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - notification
+- notification
 creates_events: true
-ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/split/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/split/README.md
 display_name: Split
 draft: false
 git_integration_title: split
 guid: 2c48dd0b-418f-4ca7-9b8d-54c857587db4
 integration_id: split
 integration_title: Split
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: jeremy-lq
 manifest_version: 1.0.0
 name: split
-public_title: Datadog-Split インテグレーション
+public_title: Split
 short_description: エンジニアリングチームや製品チームに実験用プラットフォームを提供。
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 [Split][1] は、[ロールアウトを制御して行う][2]ためのプラットフォームです。目的の機能を簡単かつ安全な方法で顧客に提供でき、ビジネスの規模に関係なく、極めて優れたユーザーエクスペリエンスを実現すると共にリスクを軽減します。
@@ -51,7 +54,7 @@ Split を Datadog と統合すると、以下のことができます。
 
 ![Split のスクリーンショット][4]
 
-Split のデータが Datadog に届くようになります。
+Split のデータが Datadog に届きます。
 
 ## 収集データ
 

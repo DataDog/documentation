@@ -19,7 +19,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul/README.md
 display_name: Consul
@@ -40,7 +39,7 @@ process_signatures:
 - consul agent
 - consul_agent
 - consul-agent
-public_title: Datadog-Consul インテグレーション
+public_title: Consul インテグレーション
 short_description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
 support: コア
 supported_os:
