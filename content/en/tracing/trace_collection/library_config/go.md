@@ -64,6 +64,14 @@ Override the default trace Agent host address for trace submission.
 : **Default**: `8125` <br>
 Override the default trace Agent port for DogStatsD metric submission.
 
+`DD_TRACE_SAMPLING_RULES`
+: **Default**: `nil`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+For more information, see [Ingestion Mechanisms][6].<br>
+**Examples:**<br>
+  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
+
 `DD_TRACE_SAMPLE_RATE`
 : Enable ingestion rate control.
 
@@ -127,3 +135,4 @@ extracted value is used.
 [3]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [4]: /getting_started/tracing/#environment-name
 [5]: https://github.com/openzipkin/b3-propagation
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
