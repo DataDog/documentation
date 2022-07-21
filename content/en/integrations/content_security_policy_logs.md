@@ -30,71 +30,68 @@ The Datadog Content Security Policy (CSP) integration sends logs to Datadog from
 
 For more information about CSPs, see [Google's web.dev post][1].
 
-## Setup
+## Prerequisites
 
+Before you add a directive to your CSP header, [generate a client token in your Datadog account][2].
 
+<div class="alert alert-info">For security reasons, API keys cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a client token must be used. <a href="https://docs.datadoghq.com/logs/log_collection/?tab=host#setup">See the client token documentation for more details</a>.</div>
 
+## Prepare a URL for the CSP
 
-Setup (from https://docs.datadoghq.com/logs/log_collection/?tab=host#setup)
-
-Datadog client token: For security reasons, API keys cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a client token must be used. See the client token documentation for more details.
-
-Browsers send policy violation reports to the endpoint listed in the report-uri directive. The URL must have the following format: 
+You need a URL where browsers can send policy violation reports. The URL must have the following format:
 
 ```
 https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
 ```
 
-Optionally, the `ddtags` key can be added to the URL to convey additional information such as the service name, the environment (production, staging, development…) and the service version:
+Optionally, add the `ddtags` key to the URL to convey additional information such as the service name, the environment, and service version:
 - `env`: the application's environment
 - `service`: the service name for your application
 - `version`: the application's version
 
-The `ddtags` value is formatted in this way:
-- Keys and values grouped with `:`
-- Keys and values concatenated with `,`
-- And the URL encoded.
+When formatting the `ddtags` values, you must:
+- Group keys and values with a colon (`:`)
+- Concatenate keys and values with a comma (`,`)
+- Use URL encoding
 
-For instance, in order to encode:
+For example, after URL encoding, the following key-value pairs:
 ```
 {“service”: “billingService”, “env”: “production”}
 ```
 
-The following should be used:
+Would result in the following:
 
 ```
 service%3AbillingService%2Cenv%3Aproduction
 ```
 
-The new URL with tags is then: 
+And the final URL with tags would be: 
 
 ```
 https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=service%3AbillingService%2Cenv%3Aproduction
 ```
 
-## Adding the URL in the Content Security Policy
+## Adding the URL to the Content Security Policy
 
-### Policy embedded in an HTTP header
-This is the recommended way to embed Content Security Policy. Two options are available:
+You either embedd the URL in an HTTP header, or embed it in a `<meta>` HTML tag. We recommend using an HTTP header.
 
-#### Using the report-uri directive:
+### Embedd the policy in an HTTP header
+This is the recommended way to embed Content Security Policy. You can either use the `report-uri` directive or the `report-to` directive. The `report-to` directive will eventually supersede `report-uri`. Currently Chrome is the only browser that supports `report-to`.
 
-```shell
-Content-Security-Policy: ...; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
-```
+- If you're using the `report-uri` directive:
+  ```shell
+  Content-Security-Policy: ...; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
+  ```
 
-#### Using the report-to directive:
-
-Report-to will supersede report-uri at some point but only Chrome supports it today. See browser compatibility here.
-
-```json
-Content-Security-Policy: ...; report-to browser-intake-datadoghq
-Report-To: { "group": "browser-intake-datadoghq",
-             "max_age": 10886400,
-             "endpoints": [
-                { "url": " https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report" }
-             ] }
-```
+- If you're using the `report-to` directive:
+  ```json
+  Content-Security-Policy: ...; report-to browser-intake-datadoghq
+  Report-To: { "group": "browser-intake-datadoghq",
+              "max_age": 10886400,
+              "endpoints": [
+                  { "url": " https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report" }
+              ] }
+  ```
 
 ### Policy embedded in a <meta> HTML tag
 
@@ -104,7 +101,7 @@ Report-To: { "group": "browser-intake-datadoghq",
 ```
 ## Violation reports examples
 
-Each browser interprets the reports format differently:
+Each browser interprets the report format differently:
 
 {{< tabs >}}
 {{% tab "Firefox" %}}
@@ -155,3 +152,6 @@ Each browser interprets the reports format differently:
 ```
 {{% /tab %}}
 {{< /tabs >}}[1]: https://web.dev/csp/
+
+[1]: https://web.dev/csp/
+[2]: https://app.datadoghq.com/organization-settings/client-tokens
