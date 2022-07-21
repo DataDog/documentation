@@ -51,7 +51,7 @@ The **Top Views** table lists the most popular web pages that users are interact
 
 ## Explore custom actions
 
-Use the [template variables][7] to customize the data types and view [custom actions][8] specific to your queried data. 
+Use the [template variables][7] to customize the data types and filter out your queried data on [custom actions][8].  
 
 Datadog recommends using custom actions. By default, custom actions are unique and offer more accurate coverage results compared to generated actions.
 
