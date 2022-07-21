@@ -141,7 +141,7 @@ sudo userdel dd-agent \
 ---
 
 ## macOS
-**Agent v6 & v7**
+**Agent v6 & v7 single user installation**
 
 1. Stop and close the Datadog Agent with the bone icon in the tray.
 2. Drag the Datadog application from the application folder to the trash bin.
@@ -152,6 +152,24 @@ sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
 sudo rm -rf ~/.datadog-agent/**​ #to remove broken symlinks
 launchctl remove com.datadoghq.agent
+sudo rm -rf /var/log/datadog
+```
+
+Then, reboot your machine for changes to take effect.
+
+> This method removes the Agent, as well as all Agent configuration files.
+---
+**Agent v6 & v7 systemwide LaunchDaemon installation**
+
+1. Drag the Datadog application from the application folder to the trash bin.
+2. Run:
+
+```shell
+sudo rm -rf /opt/datadog-agent
+sudo rm -rf /usr/local/bin/datadog-agent
+sudo rm -rf ~/.datadog-agent/**​ #to remove broken symlinks
+sudo launchctl disable system/com.datadoghq.agent && sudo launchctl bootout system/com.datadoghq.agent
+sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 sudo rm -rf /var/log/datadog
 ```
 
