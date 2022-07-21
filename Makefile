@@ -1,6 +1,6 @@
 # make
 SHELL = /bin/bash
-.PHONY: clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config
+.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -33,13 +33,15 @@ DATADOG_API_KEY ?= $(DD_API_KEY)
 DATADOG_APP_KEY ?= $(DD_APP_KEY)
 CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
+help:
+	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-clean-all: clean clean-examples
+clean-all: clean clean-examples ## Clean everything (environment, sourced repos, generated files)
 	rm -rf ./node_modules ./hugpython ./public ./integrations_data
 
 # remove build generated content
 # removing only git ignored files
-clean:
+clean:  ## Clean generated files placed in the hugo site
 	@git clean -Xf ./content
 	@git clean -Xf ./data
 	@git clean -Xf ./static/images/marketplace
@@ -59,19 +61,19 @@ server:
 	fi;
 
 # Download all dependencies and run the site
-start: dependencies
+start: dependencies ## Build and run docs including external content.
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
-start-no-pre-build: node_modules
+start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make server
 
-start-docker: clean
+start-docker: clean  ## Build and run docs including external content via docker
 	@export REPO_PATH=$(PWD) && \
 	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
 	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -p docs-local -f ./docker-compose-docs.yml up
 
-stop-docker:
+stop-docker: ## Stop the running docker container.
 	@docker-compose -f ./docker-compose-docs.yml down
 
 # install the root level node modules
@@ -108,14 +110,10 @@ config:
 # API Code Examples
 #######################################################################################################################
 
-# create dir if non existent
-examples:
-	@mkdir examples
-
 # template for extracting example repos
 define EXAMPLES_template
-examples/$(1)/.git: examples
-	@cd examples; git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git || git clone --depth 1 --branch $(shell grep -A1 $(1) data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '"') https://github.com/DataDog/$(1).git || (cd $(1) && git fetch origin)
+examples/$(1):
+	git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch $(shell grep -A1 $(1) data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '"') https://github.com/DataDog/$(1).git examples/$(1);
 
 .PHONY: examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)) examples/$(patsubst datadog-api-client-%,%,$(1))
 
@@ -134,7 +132,7 @@ examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)):
 		git clean -xdf content/en/api/**/*.$(subst datadog-api-client-,,$(1)); \
 	fi
 
-examples/$(patsubst datadog-api-client-%,%,$(1)): examples/$(1)/.git examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1))
+examples/$(patsubst datadog-api-client-%,%,$(1)): examples/$(1) examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1))
 	-find examples/$(1)/examples -iname \*.py -exec mv {} {}beta \;
 	-find examples/$(1)/examples -iname \*.rb -exec mv {} {}beta \;
 	-cp -Rn examples/$(1)/examples/v* ./content/en/api
@@ -155,4 +153,4 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 # clean all examples
 # dynamic prerequisites equivalent to examples/clean-go-examples examples/clean-java-examples examples/clean-python-examples etc.
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
-	rm -rf examples
+	@rm -rf examples

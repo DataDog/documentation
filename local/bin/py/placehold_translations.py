@@ -164,7 +164,7 @@ def main():
 
 if __name__ == "__main__":
     # if in gitlab we need to exit with failure
-    # if in local we need to continue
+    # if in local we skip building the placeholders
     if os.getenv("CI_COMMIT_REF_NAME"):
         main()
     else:
