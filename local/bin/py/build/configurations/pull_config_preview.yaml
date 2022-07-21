@@ -674,16 +674,6 @@
         front_matters:
           dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
 
-    - action: pull-and-push-folder
-      branch: master
-      globs:
-        - docs/error_tracking/*
-      options:
-        dest_dir: '/real_user_monitoring/error_tracking/'
-        path_to_remove: 'docs/error_tracking/'
-        front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
-
   - repo_name: dd-sdk-reactnative
     contents:
     - action: pull-and-push-file
