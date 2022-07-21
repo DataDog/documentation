@@ -49,7 +49,7 @@ As you expand your search filters, the graph above the search bar updates.
     * **Multiple queries**: Click **Add Query** to analyze multiple different sets of RUM data in relation to each other.
     * **Formulas and functions**: After adding your desired queries, click the **Add Function** icon to add a mathematical computation. The example below calculates the error rate on a cart page using the formula `(a/b)*100`.
 
-   {{< img src="monitors/monitor_types/rum/rum_multiple_queries_2.png" alt="Multiple queries and formulas in the search" style="width:80%;" >}}
+   {{< img src="monitors/monitor_types/rum/rum_multiple_queries_2.png" alt="A monitor configured to alert on the error rate of a cart page. This monitor has two queries (a and b) and contains a formula: (a/b)*100." style="width:80%;" >}}
 
 ### Set alert conditions
 
