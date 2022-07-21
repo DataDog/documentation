@@ -1,23 +1,25 @@
 ---
 categories:
-  - Collaboration
-ddtype: crawler
+- Collaboration
 dependencies: []
 description: 選択した Datadog のアラートとグラフをチームの Campfire チャンネルに送信。
-doc_link: 'https://docs.datadoghq.com/integrations/campfire/'
+doc_link: https://docs.datadoghq.com/integrations/campfire/
 draft: false
 git_integration_title: campfire
 has_logo: true
-integration_id: campfire
+integration_id: ''
 integration_title: Campfire
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: campfire
 public_title: Datadog-Campfire インテグレーション
 short_description: 選択した Datadog のアラートとグラフをチームの Campfire チャンネルに送信。
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 Campfire と統合すると、以下のことができます。
