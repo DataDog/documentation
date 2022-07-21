@@ -1,19 +1,19 @@
 ---
 aliases:
-  - /ja/integrations/awspolly/
+- /ja/integrations/awspolly/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- aws
+- log collection
 dependencies: []
 description: AWS Polly のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_polly/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_polly/
 draft: false
 git_integration_title: amazon_polly
 has_logo: true
 integration_id: amazon-polly
 integration_title: Amazon Polly
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-Amazon Polly インテグレーション
 short_description: AWS Polly のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Polly は、文章をリアルな音声に変換するサービスです。
@@ -61,7 +62,7 @@ Amazon Polly から S3 バケットまたは CloudWatch のいずれかにログ
 {{< get-metrics-from-git "amazon_polly" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
