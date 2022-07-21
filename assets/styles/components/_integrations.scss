@@ -445,13 +445,15 @@ $screen-md-max: ($screen-lg-min - 1) !default;
         font-size: 14px;
     }
     a {
-        display: flex;
+        display: block;
         color: black;
         text-align: center;
         flex-direction: column;
         justify-content: center;
         align-content: center;
         min-height: 136px;
+        position:relative;
+        height:100%;
     }
     img {
         padding: 1px;
