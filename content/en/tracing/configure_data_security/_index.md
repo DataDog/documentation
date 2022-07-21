@@ -26,6 +26,7 @@ Datadog enforces several filtering mechanisms on spans as a baseline, to provide
 
 * **Environment variables are not collected by the Agent**
 * **SQL variables are obfuscated, even when not using prepared statements**: For example, the following `sql.query` attribute: `SELECT data FROM table WHERE key=123 LIMIT 10` has its variables obfuscated, to become the following Resource name: `SELECT data FROM table WHERE key = ? LIMIT ?`
+* **SQL strings are identified using standard ANSI SQL quotes**: This means strings should be surrounded in single quotes (`'`). Some SQL variants optionally support double-quotes (`"`) for strings, but most treat double-quoted things as identifiers. The Datadog obfuscator treats these as identifiers rather than strings and will not obfuscate them.
 * **Numbers in Resource names (for example, request URLs) are obfuscated** For example, the following `elasticsearch` attribute:
 
     ```text
