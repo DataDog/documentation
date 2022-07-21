@@ -17,16 +17,12 @@ kind: integration
 name: 
 public_title: Datadog-Content Security Policy logs 
 version: '1.0'
-further_reading:
-    - link: ''
-      tag: ''
-      text: ''
 integration_id: "content_security_policy_logs"      
 ---
 
 ## Overview
 
-The Datadog Content Security Policy (CSP) integration sends logs to Datadog from web browsers as they interpret your CSP and detect violations. Using the CSP integration means you don't have to host or manage a dedicated endpoint that is responsible for aggregating all this data for you.
+The Datadog Content Security Policy (CSP) integration sends logs to Datadog from web browsers as they interpret your CSP and detect violations. Using the CSP integration means you don't have to host or manage a dedicated endpoint to aggregate your CSP data.
 
 For more information about CSPs, see [Google's web.dev post][1].
 
@@ -54,12 +50,7 @@ When formatting the `ddtags` values, you must:
 - Concatenate keys and values with a comma (`,`)
 - Use URL encoding
 
-For example, after URL encoding, the following key-value pairs:
-```
-{“service”: “billingService”, “env”: “production”}
-```
-
-Would result in the following:
+For example, given the key-value pairs `{“service”: “billingService”, “env”: “production”}`, you would end up with the following URL-encoded string:
 
 ```
 service%3AbillingService%2Cenv%3Aproduction
@@ -73,9 +64,9 @@ https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -
 
 ## Adding the URL to the Content Security Policy
 
-You either embedd the URL in an HTTP header, or embed it in a `<meta>` HTML tag. We recommend using an HTTP header.
+You can either embed the URL in an HTTP header, or embed it in a `<meta>` HTML tag. We recommend using an HTTP header.
 
-### Embedd the policy in an HTTP header
+### Embed the policy in an HTTP header
 This is the recommended way to embed Content Security Policy. You can either use the `report-uri` directive or the `report-to` directive. The `report-to` directive will eventually supersede `report-uri`. Currently Chrome is the only browser that supports `report-to`.
 
 - If you're using the `report-uri` directive:
@@ -94,6 +85,8 @@ This is the recommended way to embed Content Security Policy. You can either use
   ```
 
 ### Policy embedded in a <meta> HTML tag
+
+You can also embed the URL in an HTML <meta> tag.
 
 ```html
 <meta http-equiv="Content-Security-Policy"
@@ -151,7 +144,7 @@ Each browser interprets the report format differently:
 }
 ```
 {{% /tab %}}
-{{< /tabs >}}[1]: https://web.dev/csp/
+{{< /tabs >}}
 
 [1]: https://web.dev/csp/
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
