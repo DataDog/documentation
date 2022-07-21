@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon SageMaker のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_sagemaker/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon SageMaker インテグレーション
 short_description: Amazon SageMaker のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon SageMaker は、フルマネージド型の機械学習サービスです。Amazon SageMaker を使用して、データサイエンティストや開発者は、機械学習モデルを構築およびトレーニングした後に、実稼働準備ができたホスト環境にモデルを直接デプロイすることができます。
