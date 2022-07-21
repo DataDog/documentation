@@ -189,23 +189,23 @@ There are many other environment variables and settings supported in the Datadog
    For gPRC:
    ```
    env:
-    - name: DD_AGENT_HOST
+    - name: HOST_IP
       valueFrom:
         fieldRef:
           fieldPath: status.hostIP
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$(DD_AGENT_HOST):4317" # sends to gRPC receiver on port 4317
+      value: "http://$(HOST_IP):4317" # sends to gRPC receiver on port 4317
    ```
 
    For HTTP:
    ```
    env:
-    - name: DD_AGENT_HOST
+    - name: HOST_IP
       valueFrom:
         fieldRef:
           fieldPath: status.hostIP
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$(DD_AGENT_HOST):4318" # sends to HTTP receiver on port 4318
+      value: "http://$(HOST_IP):4318" # sends to HTTP receiver on port 4318
    ```
 {{% /tab %}}
 {{< /tabs >}}
