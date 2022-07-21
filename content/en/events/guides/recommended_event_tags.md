@@ -18,7 +18,7 @@ It is recommended that all events should have the below tags to help you:
 
 If using the [API][1], they can be added within the tags param or to learn more about to how add them to certain integrations, check out [assigning_tags][2]
 
-###Recommended Default Attributes (Type: all)
+### Recommended Default Attributes (Type: all)
 
 | **Attribute** | **Notes**                                                                                                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -29,20 +29,20 @@ If using the [API][1], they can be added within the tags param or to learn more 
 | version      | The build, service, etc version so that you know that an outage for instance is only related to a particular version released                                                        |
 
 
-###Type: Alert
+### Type: Alert
 
 The current supported alerts integrations, are:
 
-[Amazon CloudWatch Alarms][3]
-[Nagios][4]
-[New Relic][5]
-[Prometheus AlertManager][6]
-[Sentry][7]
-[SolarWinds Orion][8]
-[Splunk][9]
-[Sumo Logic][10]
-[Webhooks][11]
-[Zabbix][12]
+- [Amazon CloudWatch Alarms][3]
+- [Nagios][4]
+- [New Relic][5]
+- [Prometheus AlertManager][6]
+- [Sentry][7]
+- [SolarWinds Orion][8]
+- [Splunk][9]
+- [Sumo Logic][10]
+- [Webhooks][11]
+- [Zabbix][12]
 
 For all alerts it recommended at minimum to use the above standard attributes and for the above integrations they will automatically have an aggregation_key added to them.
 
