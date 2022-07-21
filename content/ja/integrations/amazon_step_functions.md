@@ -3,7 +3,6 @@ categories:
 - cloud
 - aws
 - ログの収集
-ddtype: crawler
 dependencies: []
 description: Amazon Step Functions のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_step_functions/
