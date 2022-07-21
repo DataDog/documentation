@@ -1,6 +1,8 @@
 ---
-title: Control Log Volume and Size Using Observability Pipelines
+title: Control Log Volume and Size
 kind: guide
+dependencies:
+  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/guide/control_log_volume_and_size.md"]
 further_reading:
   - link: "/integrations/observability_pipelines/working_with_data/"
     tag: "Documentation"
