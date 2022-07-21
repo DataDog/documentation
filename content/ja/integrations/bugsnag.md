@@ -1,24 +1,26 @@
 ---
 categories:
-  - exceptions
-  - notification
-ddtype: crawler
+- exceptions
+- notification
 dependencies: []
-description: 複数のアプリケーションのエラー率の変化を一元的に追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/bugsnag/'
+description: 複数のアプリケーションのエラー率を一元的に追跡。
+doc_link: https://docs.datadoghq.com/integrations/bugsnag/
 draft: false
 git_integration_title: bugsnag
 has_logo: true
 integration_id: bugsnag
 integration_title: Bugsnag
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: bugsnag
 public_title: Datadog-Bugsnag インテグレーション
 short_description: 複数のアプリケーションのエラー率の変化を一元的に追跡。
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 Bugsnag は、Web およびモバイルアプリケーション用の自動クラッシュ検出プラットフォームをソフトウェアチームに提供します。Bugsnag は、発生したエラーを自動的にキャプチャしてアラートを生成します。Datadog を Bugsnag と統合すると、エラー通知が Datadog のイベントストリームに送信されます。
@@ -48,7 +50,7 @@ Bugsnag を Datadog と統合するには、以下の手順に従います。
    {{< img src="integrations/bugsnag/bugsnag_2.png" alt="bugsnag_フィルター設定" popup="true">}}
 
 5. Datadog API キーを入力します。
-6. **Test Notification** を選択して、構成をテストします。Bugsnag からのテストエラーが Datadog アプリケーションに表示されるはずです。
+6. **Test Notification** を選択してコンフィギュレーションをテストします。Bugsnag からのテストエラーが Datadog に表示されるはずです。
 7. 設定を保存します。
 8. 別の通知条件セットに基づいてエラーイベントを表示するには、同じプロジェクトからのストリームを追加します。
 

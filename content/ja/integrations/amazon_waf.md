@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awswaf/
+- /ja/integrations/awswaf/
 categories:
-  - cloud
-  - security
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- security
+- aws
+- log collection
 dependencies: []
 description: 許可およびブロックされたリクエストを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_waf/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_waf/
 draft: false
 git_integration_title: amazon_waf
 has_logo: true
 integration_id: amazon-waf
 integration_title: Amazon Web Application Firewall
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +23,7 @@ public_title: Datadog-Amazon Web Application Firewall インテグレーショ�
 short_description: 許可およびブロックされたリクエストを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 AWS WAF は、一般的な Web エクスプロイトから Web アプリケーションを保護するために役立つ Web アプリケーションファイアウォールです。
@@ -51,7 +52,7 @@ Web Application Firewall 監査ログを有効にして、Web ACL で分析さ�
 2. `Amazon Kinesis Data Firehose` の送信先として `Amazon S3` を選択し、プレフィックスとして `waf` を追加します。
 3. 必要な Web ACL を選択し、そのログを新しく作成した Firehose に送信します ([詳細な手順はこちら][5])。
 
-これで、WAF ログが収集され、S3 バケットに送信されます。
+WAF ログが収集され、S3 バケットに送信されます。
 
 #### ログを Datadog に送信する方法
 
@@ -60,6 +61,8 @@ Web Application Firewall 監査ログを有効にして、Web ACL で分析さ�
    {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
    WAF ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
    {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
+
+**注**: Datadog Lambda Forwarder は、WAF ログのネストされたオブジェクトの配列を、使いやすいように自動的に `key:value` 形式に変換します。
 
 ## 収集データ
 

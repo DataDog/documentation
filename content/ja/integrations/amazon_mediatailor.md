@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Elemental MediaTailor のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_mediatailor/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Elemental MediaTailor インテグレーション
 short_description: Amazon Elemental MediaTailor のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon MediaTailor は、スケーラブルなサーバー側広告挿入を可能にするパーソナライゼーションおよびマネタイゼーションサービスです。

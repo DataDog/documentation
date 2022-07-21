@@ -1,42 +1,64 @@
 ---
+app_id: clickhouse
+app_uuid: 668f43c1-bdd8-4686-bb92-d40f0c48fda9
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     ClickHouse Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: clickhouse.query.active
+      metadata_path: metadata.csv
+      prefix: clickhouse.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: ClickHouse
   logs:
     source: clickhouse
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md
-display_name: ClickHouse
+display_on_public_website: true
 draft: false
 git_integration_title: clickhouse
-guid: 781edd66-9c4c-4210-898c-182a6b8ba4ab
 integration_id: clickhouse
 integration_title: ClickHouse
 integration_version: 2.7.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: clickhouse.
-metric_to_check: clickhouse.query.active
+manifest_version: 2.0.0
 name: clickhouse
-public_title: Datadog-ClickHouse インテグレーション
+oauth: {}
+public_title: ClickHouse
 short_description: ClickHouse クラスターの健全性とパフォーマンスを監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ClickHouse クラスターの健全性とパフォーマンスを監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ClickHouse
 ---
 
 

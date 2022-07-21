@@ -18,7 +18,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couch/README.md
 description: Apache CouchDB は、MapReduce 方式で JavaScript を使用してクエリおよびインデックスを作成できるドキュメント指向のデータベースです。
@@ -40,7 +39,7 @@ metric_to_check:
 name: couch
 process_signatures:
 - couchjs
-public_title: Datadog-CouchDB インテグレーション
+public_title: CouchDB インテグレーション
 short_description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
 support: コア
 supported_os:

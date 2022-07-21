@@ -35,6 +35,7 @@ further_reading:
 - [Service Level Objectives](#service-level-objectives-slo-events)
 - [Synthetic Monitoring](#synthetic-monitoring-events)
 - [Reference Tables](#reference-table-events)
+- [CI Visibility](#ci-visibility-events)
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
 
@@ -193,6 +194,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Reference Table][72] | A user created, deleted, or modified a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table @action:(created OR deleted OR modified)` |
 | [Reference Table File][73] | A user uploaded a file or imported a file with a cloud provider for a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table_file @action:(uploaded OR imported)` |
 
+### CI Visibility events
+| Name                            | Description of audit event                                                                             | Query in audit explorer                                                                          |
+|---------------------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| [Repository Default Branch][74] | A user modified the default branch of a repository, and the previous and new values for the default branch. | `@evt.name:"CI Visibility" @asset.type:ci_app_repository`                                                         |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -270,3 +276,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [71]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Synthetics%20Monitoring%22%20%40asset.type%3Asynthetics_settings%20%40action%3Amodified
 [72]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Reference%20Tables%22%20%40asset.type%3Areference_table%20%40action%3A%28created%20OR%20deleted%20OR%20modified%29
 [73]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Reference%20Tables%22%20%40asset.type%3Areference_table_file%20%40action%3A%28uploaded%20OR%20imported%29
+[74]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI+Visibility%22+%40asset.type%3Aci_app_repository

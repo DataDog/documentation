@@ -1,17 +1,16 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Trusted Advisor のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
 draft: false
 further_reading:
-  - link: https://docs.datadoghq.com/dashboards/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data/
-    tag: よくあるご質問
-    text: AWS Trusted Advisor ダッシュボードにデータが表示されないのはなぜですか？
+- link: https://docs.datadoghq.com/dashboards/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data/
+  tag: よくあるご質問
+  text: AWS Trusted Advisor ダッシュボードにデータが表示されないのはなぜですか？
 git_integration_title: amazon_trusted_advisor
 has_logo: true
 integration_id: amazon-trusted-advisor
@@ -25,6 +24,7 @@ public_title: Datadog-Amazon Trusted Advisor インテグレーション
 short_description: Amazon Trusted Advisor のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Trusted Advisor は、AWS ベストプラクティスに従ってリソースをプロビジョニングするために、リアルタイムガイダンスを提供するオンラインツールです。

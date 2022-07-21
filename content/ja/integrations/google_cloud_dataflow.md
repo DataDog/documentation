@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
 dependencies: []
 description: Google Cloud Dataflow のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataflow/
@@ -21,6 +20,7 @@ public_title: Datadog-Google Cloud Dataflow インテグレーション
 short_description: Google Cloud Dataflow のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Dataflow は、ストリーム (リアルタイム) モードとバッチ (履歴) モードのどちらでも、同等の信頼性と表現力でデータを変換し、強化することができる、フルマネージド型のサービスです。

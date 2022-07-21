@@ -117,7 +117,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
 
     To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
+    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to. Possible values are `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com` and `ddog-gov.com`.
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
 
     For more information and additional settings, see the [plugin documentation][1].
