@@ -51,15 +51,15 @@ For all alerts it recommended at minimum to use the above standard attributes an
 | aggregation_key | All events coming from an alerts integration will have this attribute in order to deduplicate them. It can be found under the event attributes tab in the events explorer. |
 
 
-[1]: api/latest/events/#post-an-event
-[2]: getting_started/tagging/assigning_tags
-[3]: integrations/amazon_web_services
-[4]: integrations/nagios
-[5]: integrations/new_relic
-[6]: integrations/prometheus
-[7]: integrations/sentry
-[8]: integrations/solarwinds
-[9]: integrations/splunk
-[10]: integrations/sumo_logic
-[11]: integrations/webhooks
-[12]: integrations/zabbix
+[1]: /api/latest/events/#post-an-event
+[2]: /getting_started/tagging/assigning_tags
+[3]: /integrations/amazon_web_services
+[4]: /integrations/nagios
+[5]: /integrations/new_relic
+[6]: /integrations/prometheus
+[7]: /integrations/sentry
+[8]: /integrations/solarwinds
+[9]: /integrations/splunk
+[10]: /integrations/sumo_logic
+[11]: /integrations/webhooks
+[12]: /integrations/zabbix
