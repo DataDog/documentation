@@ -7,7 +7,6 @@ assets:
 categories:
 - processing
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/storm/README.md
 display_name: storm
@@ -24,7 +23,7 @@ manifest_version: 1.0.0
 metric_prefix: storm.
 metric_to_check: storm.bolt.last_60.acked
 name: storm
-public_title: Datadog-Storm インテグレーション
+public_title: Storm
 short_description: Apache Storm 1.x.x トポロジー実行統計
 support: contrib
 supported_os:
