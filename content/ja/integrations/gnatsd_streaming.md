@@ -9,7 +9,6 @@ assets:
 categories:
 - monitoring
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gnatsd_streaming/README.md
 display_name: Gnatsd streaming
@@ -26,7 +25,7 @@ manifest_version: 1.0.0
 metric_prefix: gnatsd.
 metric_to_check: gnatsd.streaming.serverz.clients
 name: gnatsd_streaming
-public_title: Datadog-Gnatsd Streaming インテグレーション
+public_title: Gnatsd Streaming
 short_description: NATS サーバーストリーミング
 support: contrib
 supported_os:
