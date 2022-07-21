@@ -1,23 +1,23 @@
 ---
 aliases:
-  - /ja/integrations/awsmq/
+- /ja/integrations/awsmq/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- aws
+- log collection
 dependencies: []
 description: AWS MQ のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_mq/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_mq/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog'
-    tag: ブログ
-    text: Datadog で Amazon MQ のメトリクスを監視
+- link: https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog
+  tag: ブログ
+  text: Datadog で Amazon MQ のメトリクスを監視
 git_integration_title: amazon_mq
 has_logo: true
 integration_id: amazon-mq
 integration_title: Amazon MQ
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -26,6 +26,7 @@ public_title: Datadog-Amazon MQ インテグレーション
 short_description: AWS MQ のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon MQ は、クラウドでメッセージブローカーを容易にセットアップして運用できる、Apache ActiveMQ 向けのマネージド型メッセージブローカーサービスです。
@@ -66,7 +67,7 @@ Amazon MQ から S3 バケットまたは CloudWatch のいずれかにログを
 {{< get-metrics-from-git "amazon_mq" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
