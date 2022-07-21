@@ -1,23 +1,39 @@
 ---
+title: Content Security Policy logs
+name: content_security_policy_logs
+kind: integration
+description: 'Detect and aggregate CSP violations with Datadog'
+short_description: 'Detect CSP violations'
+dependencies: 
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/content_security_policy_logs.md']
 categories:
-- log collection
-- Security
-dependencies: []
-description: 
-doc_link: 
+    - log collection
+    - security
+doc_link: /integrations/content_security_policy_logs/
 has_logo: false
-integration_title: 
+integration_title: Content Security Policy logs
 is_public: true
 kind: integration
 name: 
-public_title: Datadog-
-short_description: 
+public_title: Datadog-Content Security Policy logs 
 version: '1.0'
+further_reading:
+    - link: ''
+      tag: ''
+      text: ''
+integration_id: "content_security_policy_logs"      
 ---
 
 ## Overview
 
-Send logs to Datadog from web browsers as they interpret the Content Security Policy (CSP) and detect violations. See this for more information about CSP.
+The Datadog Content Security Policy (CSP) integration sends logs to Datadog from web browsers as they interpret your CSP and detect violations. Using the CSP integration means you don't have to host or manage a dedicated endpoint that is responsible for aggregating all this data for you.
+
+For more information about CSPs, see [Google's web.dev post][1].
+
+## Setup
+
+
+
 
 Setup (from https://docs.datadoghq.com/logs/log_collection/?tab=host#setup)
 
@@ -88,10 +104,10 @@ Report-To: { "group": "browser-intake-datadoghq",
 ```
 ## Violation reports examples
 
-Each browser interprets the reports format differently, see examples below:
+Each browser interprets the reports format differently:
 
-Firefox
-
+{{< tabs >}}
+{{% tab "Firefox" %}}
 ```json
 {
   'csp-report': {
@@ -103,9 +119,9 @@ Firefox
   }
 }
 ```
+{{% /tab %}}
 
-Chrome
-
+{{% tab "Chrome" %}}
 ```json
 {
   'csp-report': {
@@ -121,9 +137,9 @@ Chrome
   }
 }
 ```
+{{% /tab %}}
 
-## Safari
-
+{{% tab "Safari" %}}
 ```json
 {
   'csp-report': {
@@ -137,3 +153,5 @@ Chrome
   }
 }
 ```
+{{% /tab %}}
+{{< /tabs >}}[1]: https://web.dev/csp/
