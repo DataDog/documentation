@@ -444,10 +444,12 @@ database_monitoring:
 
 network_devices:
     metadata:
-        dd_url: haproxy.example.com:3841
+        logs_dd_url: haproxy.example.com:3841
+        logs_no_ssl: true
     snmp_traps:
         forwarder:
-            dd_url: haproxy.example.com:3842
+            logs_dd_url: haproxy.example.com:3842
+            logs_no_ssl: true
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate ({{< region-param key="dd_full_site" code="true" >}}) and your HAProxy hostname:
@@ -639,10 +641,12 @@ database_monitoring:
 
 network_devices:
     metadata:
-        dd_url: nginx.example.com:3841
+        logs_dd_url: nginx.example.com:3841
+        logs_no_ssl: true
     snmp_traps:
         forwarder:
-            dd_url: nginx.example.com:3842
+            logs_dd_url: nginx.example.com:3842
+            logs_no_ssl: true
 
 appsec_config (deprecated):
     appsec_dd_url: "<PROXY_SERVER_DOMAIN>:3842"
