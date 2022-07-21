@@ -39,7 +39,7 @@ In order to improve your testing coverage and better manage your browser tests, 
 - What actions are not being tested in your application?
 - What views are the most popular to your users? 
 - What views need more browser tests?
-- What percentage of browser tests are covering user actions? 
+- What browser tests are covering user actions? 
 
 By testing the most popular sections of your application through Synthetic browser tests, you are alerted when key user journeys in your application are negatively impacted by a code change. You can run tests [directly in your CI/CD pipelines][4] to ensure no regressions occur before releasing code in production. 
 
