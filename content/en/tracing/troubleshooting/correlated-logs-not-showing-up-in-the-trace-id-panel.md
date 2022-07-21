@@ -12,7 +12,7 @@ further_reading:
   text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-The [trace][1] panel contains information about the trace, including information about the host and correlated logs. However, in certain cases, the log panel might be empty. This guide walks through how to fix the issue.
+The [trace][1] panel contains information about the trace, including information about the host and correlated logs. However, in certain cases, the logs section in the trace panel might be empty. This guide walks you through how to fix this issue.
 
 {{< img src="tracing/troubleshooting/tracing_no_logs_in_trace.png" alt="A trace page showing an empty log section" style="width:90%;">}}
 
@@ -58,7 +58,7 @@ If that process is not working as expected, ensure the name of the logs attribut
 {{% /tab %}}
 {{% tab "With Log integration" %}}
 
-For raw logs, where you are collecting the logs using a [log integration][1] for a specific language, set the `source` attribute to the language (for example `java`, `python`, `ruby`, and so). The integration automatically correlates the traces and logs.
+For raw logs where you are collecting the logs using a [log integration][1] for a specific language, set the `source` attribute to the language (for example `java`, `python`, `ruby`, and so). The integration automatically correlates the traces and logs.
 
 Here is an example with the Java integration pipeline:
 
@@ -71,7 +71,7 @@ However, it is possible that the log format is not recognized by the integration
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-For raw logs, where you aren't using an integration to collect the logs:
+For raw logs where you aren't using an integration to collect the logs:
 
 1. Make sure that the custom parsing rule extracts the [trace][1] and [span][2] IDs as a string, like in the following example:
 
@@ -85,7 +85,7 @@ For raw logs, where you aren't using an integration to collect the logs:
 {{% /tab %}}
 {{< /tabs >}}
 
-Once the IDs are properly injected and remapped to your logs, you can see the trace to log correlation in the trace.
+Once the IDs are properly injected and remapped to your logs, you can see the logs correlated to the trace in the trace panel.
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the the logs section with correlated logs"  style="width:90%;">}}
 
