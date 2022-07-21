@@ -2852,6 +2852,11 @@ main:
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
     weight: 602
+  - name: Troubleshooting
+    url: real_user_monitoring/session_replay/troubleshooting
+    parent: rum_session_replay
+    identifier: rum_session_replay_troubleshooting
+    weight: 603
   - name: Frustration Signals
     url: real_user_monitoring/frustration_signals/
     parent: rum
