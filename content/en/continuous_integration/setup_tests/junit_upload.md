@@ -16,11 +16,11 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files, since the native instrumentation provides more accurate time results, supports distributed traces on integration tests and supports structured stack traces.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files, as the native instrumentation provides more accurate time results, supports distributed traces on integration tests, and supports structured stack traces.</div>
 
-JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
+JUnit test report files are XML files that contain test execution information, such as test and suite names, pass or fail status, duration, and sometimes error logs. Although introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
-If your testing framework can generate JUnit XML test reports, these can be used as a lightweight alternative to [instrumenting your tests natively][8] using Datadog tracers. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
+If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][8] using Datadog tracers. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
 
 ## Installing the Datadog CI CLI
 
