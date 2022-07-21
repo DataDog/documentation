@@ -57,7 +57,8 @@ To delete an index from your organization, use the "Delete icon" in the index ac
 You cannot recreate an index with the same name as the deleted one. 
 </div>
 
-**Note:** The deleted index will no longer accept new incoming logs. The logs in the deleted index are no longer available for querying. After the retention period is reached, the index will no longer show up in the Index page.
+**Note:** The deleted index will no longer accept new incoming logs. The logs in the deleted index are no longer available for querying. After all logs have aged out according to the applicable retention period, the index will no longer show up in the Index page.
+
 
 
 ## Indexes filters

@@ -6869,6 +6869,13 @@ components:
 
             aggregations.'
           type: string
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
         name:
           description: Name of the query.
           type: string
@@ -6915,6 +6922,13 @@ components:
 
             aggregations.'
           type: string
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
         name:
           description: Name of the query.
           type: string
