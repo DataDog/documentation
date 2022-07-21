@@ -25,8 +25,8 @@ You can use this dashboard to build a more complete, accurate testing suite with
 
 It shows:
 
-- **Untested actions**: Explore the most popular untested user actions with the count of real user interactions and the number of actions covered in browser tests.
 - **Percentage of tested actions**: Scan your application's overall testing coverage.
+- **Untested actions**: Explore the most popular untested user actions with the count of real user interactions and the number of actions covered in browser tests.
 
 {{< img src="synthetics/dashboards/testing_coverage.png" alt="Out-of-the-box Synthetics testing coverage dashboard" style="width:100%" >}}
 
@@ -51,7 +51,7 @@ The **Top Views** table lists the most popular web pages that users are interact
 
 ## Explore custom actions
 
-Use the [template variables][8] to customize the data types and view [custom actions][7] specific to your queried data. 
+Use the [template variables][7] to customize the data types and view [custom actions][8] specific to your queried data. 
 
 Datadog recommends using custom actions. By default, custom actions are unique and offer more accurate coverage results compared to generated actions.
 
@@ -65,5 +65,5 @@ Datadog recommends using custom actions. By default, custom actions are unique a
 [4]: /synthetics/metrics/
 [5]: /synthetics/cicd_integrations/
 [6]: /real_user_monitoring/explorer
-[7]: /real_user_monitoring/guide/send-rum-custom-actions/
-[8]: /dashboards/template_variables/
+[7]: /dashboards/template_variables/
+[8]: /real_user_monitoring/guide/send-rum-custom-actions/
