@@ -65,7 +65,7 @@ Datadog offers many different ways to enable instrumentation for your serverless
 
 4. Set the required environment variables
 
-    - Set `JAVA_TOOL_OPTIONS` to `-javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1`
+    - Set `JAVA_TOOL_OPTIONS` to `-javaagent:"/opt/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1`
     - Set `DD_JMXFETCH_ENABLED` to `false`
     - Set `DD_TRACE_ENABLED` to `true`
     - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
