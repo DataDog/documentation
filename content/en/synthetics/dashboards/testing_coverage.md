@@ -13,11 +13,11 @@ further_reading:
 
 ## Overview
 
-The [application testing coverage dashboard][1] uses data collected from [RUM & Session Replay][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. 
+The [application testing coverage dashboard][1] uses data collected from [RUM][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. 
 
 You can use this dashboard to build a more complete, accurate testing suite with information about the following topics:
 
-- A list of top web pages linked to RUM views
+- A list of top visited web pages
 - The percentage of tested RUM actions
 - The number of tested and total actions
 - The number of browser tests covering actions
@@ -26,7 +26,7 @@ You can use this dashboard to build a more complete, accurate testing suite with
 It shows:
 
 - **Untested actions**: Explore the most popular untested user actions with the count of real user interactions and the number of actions covered in browser tests.
-- **Top Synthetic browser tests**: Analyze the the list of browser tests with the count of tested RUM actions.
+- **Percentage of tested actions**: Scan your application's overall testing coverage.
 
 {{< img src="synthetics/dashboards/testing_coverage.png" alt="Out-of-the-box Synthetics testing coverage dashboard" style="width:100%" >}}
 
@@ -51,9 +51,9 @@ The **Top Views** table lists the most popular web pages that users are interact
 
 ## Explore custom actions
 
-Use the dropdown menus to customize the data types and view [custom actions][7] specific to your queried data. 
+Use the [template variables][8] to customize the data types and view [custom actions][7] specific to your queried data. 
 
-Because you are instrumenting your code to define these custom actions, your definitions lead to more accurate results compared to a generic, generated **Click on Save** action.
+Datadog recommends using custom actions. By default, custom actions are unique and offer more accurate coverage results compared to generated actions.
 
 ## Further Reading
 
@@ -66,3 +66,4 @@ Because you are instrumenting your code to define these custom actions, your def
 [5]: /synthetics/cicd_integrations/
 [6]: /real_user_monitoring/explorer
 [7]: /real_user_monitoring/guide/send-rum-custom-actions/
+[8]: /dashboards/template_variables/
