@@ -132,6 +132,7 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 
 8. Click on the VPC endpoint ID to check its status.
 9. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
+10. Once this is created, route traffic from another region to send the data to Datadog via private link. For more information, see [Work With VPC Peering connections][3]. 
 
 {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:80%;" >}}
 
@@ -232,3 +233,4 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 
 [1]: https://aws.amazon.com/privatelink/
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
+[3]: https://docs.aws.amazon.com/vpc/latest/peering/working-with-vpc-peering.html
