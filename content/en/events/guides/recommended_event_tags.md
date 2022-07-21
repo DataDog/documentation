@@ -2,10 +2,13 @@
 title: Recommend Tagging Practices for Events
 kind: documentation
 description: Recommended event tags and how to add them.
+aliases:
+    - /developers/taggingevents/
 further_reading:
 - link: "/getting_started/tagging/assigning_tags"
   tag: "Documentation"
   text: "Assigning Tags"
+
 ---
 
 It is recommended that all events should have the below tags to help you:

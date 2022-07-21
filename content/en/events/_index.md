@@ -8,6 +8,9 @@ further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
   text: "Datadog Events API"
+- link: "/guides/recommened_event_tags"
+  tag: "Documentation"
+  text: "Recommend Tagging Practices for Events"
 ---
 
 {{< img src="events/events-overview.png" alt="Events explorer" >}}
@@ -20,7 +23,7 @@ Datadog Events gives you a consolidated interface to search, analyze, and filter
 
 Without any additional setup, Datadog Events automatically gathers events that are collected by the Agent and installed integrations.
 
-More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [AWS ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9]. 
+More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [AWS ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9].
 
 ## Sending custom events to Datadog
 
@@ -42,7 +45,7 @@ You can use events as a data source in [graph widgets][17]. You can build timese
 
 For example, check out the [Monitor Notifications Overview][18] dashboard, which analyzes monitor alert event trends to help you improve your configuration and reduce alert fatigue.
 
-### Generate custom metrics from events 
+### Generate custom metrics from events
 
 [Generate metrics][15] with 15-month retention from any event search query to create and monitor historical events and alerts.
 
