@@ -7,7 +7,7 @@
         "algolia:config": "node ./local/bin/js/algolia-config.js",
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public && npx hugo mod clean",
-        "docker:start": "HUGO_DISABLELANGUAGES=$LANGS_TO_IGNORE /usr/local/bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache --bind 0.0.0.0",
+        "docker:start": "/usr/local/bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache --bind 0.0.0.0",
         "start": "./node_modules/.bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache",
         "prebuild": "rimraf public && npx hugo mod clean",
         "build": "yarn run prebuild && yarn run build:hugo",
