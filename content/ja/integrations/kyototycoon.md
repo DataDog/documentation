@@ -15,7 +15,6 @@ categories:
 - data store
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md
 display_name: Kyoto Tycoon
@@ -34,7 +33,7 @@ metric_to_check: kyototycoon.records
 name: kyototycoon
 process_signatures:
 - ktserver
-public_title: Datadog-Kyoto Tycoon インテグレーション
+public_title: Kyoto Tycoon インテグレーション
 short_description: 取得/設定/削除操作の追跡とレプリケーションラグの監視。
 support: コア
 supported_os:
