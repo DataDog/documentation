@@ -102,4 +102,5 @@ security:
       - ^(HUGO_|CI_)
   exec:
     osEnv:
-    - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME)$
+      # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616
+      - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME|SSH_AUTH_SOCK|USERPROFILE|XDG_CONFIG_HOME)$
