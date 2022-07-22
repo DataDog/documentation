@@ -64,35 +64,6 @@ export function initializeIntegrations() {
         },
         data: {
             uidKey: 'id' // Our data model must have a unique id. In this case, its key is 'id'
-        },
-        callbacks: {
-          onMixEnd: function() {
-            console.log('[callback] Animation Ended');
-            setTimeout(function () {
-              if(container) {
-                const dimmers = container.querySelectorAll('.dimmer');
-                if(dimmers) {
-                  for (let i = 0; i < dimmers.length; ++i) {
-                   dimmers[i].classList.remove('dimmer');
-                  }
-                }
-              }
-              const activeFilter = controls.querySelector(`.active`).getAttribute('data-filter').replace('.','');
-              if(activeFilter !== 'all') {
-                const items = container.querySelectorAll('.item');
-                console.log(activeFilter, items);
-                if(items) {
-                  for (let i = 0; i < items.length; ++i) {
-                    if(!items[i].classList.contains(activeFilter)) {
-                      const int = items[i].querySelector('.integration');
-                      console.log(int);
-                      int.classList.add('dimmer');
-                    }
-                  }
-                }
-              }
-            }, 50);
-          }
         }
     };
 
@@ -217,13 +188,14 @@ export function initializeIntegrations() {
         for (let i = 0; i < window.integrations.length; i++) {
             const item = window.integrations[i];
             const domitem = document.getElementById(`mixid_${item.id}`);
+            const int = domitem.querySelector('.integration');
             if (
                 filter === 'all' ||
                 filter === '#all' ||
                 (isSearch && !filter)
             ) {
                 if (!isSafari) {
-                    domitem.classList.remove('grayscale');
+                    int.classList.remove('dimmer');
                 }
                 show.push(item);
             } else {
@@ -240,12 +212,12 @@ export function initializeIntegrations() {
                     (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)
                 ) {
                     if (!isSafari) {
-                        domitem.classList.remove('grayscale');
+                        int.classList.remove('dimmer');
                     }
                     show.push(item);
                 } else {
                     if (!isSafari) {
-                        domitem.classList.add('grayscale');
+                        int.classList.add('dimmer');
                     }
                     hide.push(item);
                 }
@@ -258,12 +230,13 @@ export function initializeIntegrations() {
                 for (let i = 0; i < window.integrations.length; i++) {
                     const item = window.integrations[i];
                     const domitem = document.getElementById(`mixid_${item.id}`);
+                    const int = domitem.querySelector('.integration');
                     if (
                         filter === 'all' ||
                         filter === '#all' ||
                         (isSearch && !filter)
                     ) {
-                        domitem.classList.remove('grayscale');
+                        int.classList.remove('dimmer');
                     } else {
                         const name = item.name ? item.name.toLowerCase() : '';
                         const publicTitle = item.public_title
@@ -278,9 +251,9 @@ export function initializeIntegrations() {
                             (!isSearch &&
                                 item.tags.indexOf(filter.substr(1)) !== -1)
                         ) {
-                            domitem.classList.remove('grayscale');
+                            int.classList.remove('dimmer');
                         } else {
-                            domitem.classList.add('grayscale');
+                            int.classList.add('dimmer');
                         }
                     }
                 }
