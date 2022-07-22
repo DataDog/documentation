@@ -17,7 +17,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marathon/README.md
 display_name: Marathon
@@ -36,7 +35,7 @@ metric_to_check: marathon.apps
 name: marathon
 process_signatures:
 - start --master mesos marathon
-public_title: Datadog-Marathon インテグレーション
+public_title: Marathon インテグレーション
 short_description: 必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。
 support: コア
 supported_os:
