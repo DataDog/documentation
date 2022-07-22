@@ -534,6 +534,7 @@ spec:
     config:
       kubelet:
         tlsVerify: false
+      # Add a toleration so that the agent can be scheduled on the control plane nodes.
       tolerations:
         - key: node-role.kubernetes.io/master
           effect: NoSchedule
