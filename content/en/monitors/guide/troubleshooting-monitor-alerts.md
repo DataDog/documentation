@@ -32,7 +32,7 @@ While monitor *evaluations* are stateless, meaning that the result of a given ev
 
 - **Metrics are too sparse within the monitor evaluation window**
 
-If metrics are absent from a monitor's evaluation window, and the monitor is not configured to anticipate [no-data conditions][1], the evaluation may be `skipped`. In such a case, the monitor state is not updated, so a monitor previously in `OK` state remains `OK`, and likewise with a monitor in `Alert` state. Use the [history][2] graph on the monitor status page and select the group and time frame of interest. If data is sparsely populated for a metric monitor, see [monitor arithmetic and sparse metrics][3] for more information.
+If metrics are absent from a monitor's evaluation window, and the monitor is not configured to anticipate [no-data conditions][1], the evaluation may be `skipped`. In such a case, the monitor state is not updated, so a monitor previously in `OK` state remains `OK`, and likewise with a monitor in `Alert` state. Use the [history][2] graph on the monitor status page and select the group and time frame of interest. If data is sparsely populated, see [monitor arithmetic and sparse metrics][3] for more information.
 
 - **Monitor state updates due to external conditions**
 
