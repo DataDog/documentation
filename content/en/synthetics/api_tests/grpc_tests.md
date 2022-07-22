@@ -38,7 +38,53 @@ After choosing to create a `gRPC` health check test, define your test's request.
 ### Define request
 
 1. Specify the **Host** and **Port** to run your health check test on. By default, the port is set to `50051`.
+
+{{< tabs >}}
+{{% tab "Health Check" %}}
+
 2. Enter the service you want to send a health check. Leave this field blank if you want to send a health check on the gRPC server.
+
+{{% /tab %}}
+{{% tab "Unary Call" %}}
+
+2. Upload a [proto file][1] to define the data structure you want to serialize.
+
+   - Select values for your services and methods from the dropdown menus. 
+   - Add a request or response message.  
+
+
+[1]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
+{{% /tab %}} 
+{{< /tabs >}}
+
+3. Add **Advanced Options** (optional) to your test:
+
+   {{< tabs >}}
+
+   {{% tab "Request Options" %}}
+   
+   * **Timeout**: Specify the amount of time in seconds before the test times out.
+   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * **gRPC metadata**: Add and define metadata to your gRPC request to pass metadata between services.
+
+   {{% /tab %}}
+
+   {{% tab "Authentication" %}}
+
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
+
+     <br/> 
+   
+     You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
+
+   {{% /tab %}}
+
+   {{< /tabs >}}
 
 3. **Name** your gRPC health check test.
 
