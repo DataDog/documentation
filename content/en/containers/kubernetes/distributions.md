@@ -528,9 +528,6 @@ spec:
     # Enable the new `kubernetes_state_core` check.
     kubeStateMetricsCore:
       enabled: true
-    # Avoid deploying kube-state-metrics chart.
-    # The new `kubernetes_state_core` doesn't require to deploy the kube-state-metrics anymore.
-    kubeStateMetricsEnabled: false
   agent:
     image:
       name: "gcr.io/datadoghq/agent:latest"
