@@ -162,7 +162,7 @@ Then, reboot your machine for changes to take effect.
 **Agent v6 & v7 systemwide LaunchDaemon installation**
 
 1. Drag the Datadog application from the application folder to the trash bin.
-2. Run:
+2. To remove remaining files, run the following:
 
 ```shell
 sudo rm -rf /opt/datadog-agent
@@ -173,7 +173,7 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 sudo rm -rf /var/log/datadog
 ```
 
-Then, reboot your machine for changes to take effect.
+Reboot your machine for changes to take effect.
 
 > This method removes the Agent, as well as all Agent configuration files.
 ---
