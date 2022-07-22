@@ -5,7 +5,7 @@ description: Recommended event tags and how to add them.
 further_reading:
 - link: "/getting_started/tagging/assigning_tags"
   tag: "Documentation"
-  text: "Assigning Tags"
+  text: "Learn about assigning tags"
 
 ---
 
