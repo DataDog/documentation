@@ -22,7 +22,7 @@ If using the [API][1], they can be added within the tags param or to learn more 
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | env          | The environment in which the event is from e.g production, edge, staging. <br>Enables you to ensure that events from a lower environment are not confused to be of a higher priority |
 | service      | The name of the service                                                                                                                                                              |
-| host         | The host name that either the service, pod, cluster, etc is running on                                                                                                               |
+| host         | The host name that the service, pod, or cluster is running on.                                                                                                               |
 | team         | The team which owns the event, so that they can be later notified if need be                                                                                                         |
 | version      | The build, service, etc version so that you know that an outage for instance is only related to a particular version released                                                        |
 
