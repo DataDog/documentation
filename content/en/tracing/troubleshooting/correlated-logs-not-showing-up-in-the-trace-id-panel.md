@@ -23,7 +23,7 @@ There are two types of logs that appear in a [trace][1]:
 - `host`: Display logs from the trace's host within the trace's timeframe.
 - `trace_id`: Display logs that have the corresponding trace ID.
 
-{{< img src="tracing/troubleshooting/tracing_logs_display_option.png" alt="A trace's log dropdown menu showing the trace ID and host options"  style="width:35%;">}}
+{{< img src="tracing/troubleshooting/tracing_logs_display_option.png" alt="A trace's log dropdown menu showing the trace ID and host options" style="width:35%;">}}
 
 In some cases, the **Logs** section in the trace panel may appear empty. This guide walks you through how to fix this issue.
 
