@@ -30,11 +30,11 @@ This guide provides an overview of some foundational concepts that can help you 
 
 While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status. See below for some potential causes:
 
-- **Metrics are too sparse within the monitor evaluation window**
+1. **Metrics are too sparse within a metric monitor's evaluation window**
 
 If metrics are absent from a monitor's evaluation window, and the monitor is not configured to anticipate [no-data conditions][1], the evaluation may be `skipped`. In such a case, the monitor state is not updated, so a monitor previously in `OK` state remains `OK`, and likewise with a monitor in `Alert` state. Use the [history][2] graph on the monitor status page and select the group and time frame of interest. If data is sparsely populated, see [monitor arithmetic and sparse metrics][3] for more information.
 
-- **Monitor state updates due to external conditions**
+2. **Monitor state updates due to external conditions**
 
 The state of a monitor may also sometimes update in the absence of a monitor evaluation, for example, due to [auto-resolve][4]. 
 
