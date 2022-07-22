@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon AppStream のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_appstream/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon AppStream インテグレーション
 short_description: Amazon AppStream のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon AppStream は、AWS から Web ブラウザへデスクトップアプリケーションをストリーミングできるフルマネージド型の安全なアプリケーションストリーミングサービスです。

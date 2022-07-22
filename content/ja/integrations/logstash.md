@@ -11,7 +11,6 @@ assets:
 categories:
 - log collection
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/logstash/README.md
 display_name: Logstash
@@ -28,7 +27,7 @@ manifest_version: 1.0.0
 metric_prefix: logstash.
 metric_to_check: logstash.process.cpu.percent
 name: logstash
-public_title: Datadog-Logstash インテグレーション
+public_title: Logstash
 short_description: Logstash インスタンスからランタイムメトリクスを収集して監視
 support: contrib
 supported_os:

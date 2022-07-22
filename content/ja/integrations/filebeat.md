@@ -9,7 +9,6 @@ assets:
 categories:
 - os & system
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/filebeat/README.md
 display_name: Filebeat
@@ -26,7 +25,7 @@ manifest_version: 1.0.0
 metric_prefix: filebeat.
 metric_to_check: filebeat.registry.unprocessed_bytes
 name: filebeat
-public_title: Datadog-Filebeat インテグレーション
+public_title: Filebeat
 short_description: 軽量ログシッパー
 support: contrib
 supported_os:

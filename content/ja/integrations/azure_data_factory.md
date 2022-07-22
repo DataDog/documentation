@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_datafactory
+- /ja/integrations/azure_datafactory
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Data Factory のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_factory/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure Data Factory インテグレーション
 short_description: Azure Data Factory のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Data Factory は、データの保管・移動・処理サービスを自動化されたデータパイプラインとして構築するクラウドデータ統合サービスです。

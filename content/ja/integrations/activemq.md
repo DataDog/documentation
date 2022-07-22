@@ -20,7 +20,6 @@ categories:
 - messaging
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
 display_name: ActiveMQ
@@ -41,7 +40,7 @@ metric_to_check:
 name: activemq
 process_signatures:
 - activemq
-public_title: Datadog-ActiveMQ インテグレーション
+public_title: ActiveMQ インテグレーション
 short_description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
 support: コア
 supported_os:
@@ -66,7 +65,7 @@ ActiveMQ チェックは、ブローカーとキュー、プロデューサー�
 
 Agent の ActiveMQ チェックは [Datadog Agent][3] パッケージに含まれています。ActiveMQ ノードに追加でインストールする必要はありません。
 
-このチェックは、メトリクスを JMX 経由で収集するため、Agent が [jmxfetch][4] をフォークできるように、各ノード上に JVM が必要です。Datadog は、Oracle 提供の JVM を使用することをお勧めします。
+チェックは、[JMXFetch][4] を使って JMX からメトリクスを収集します。Agent が JMXFetch を実行できるように、各ノードで JVM が必要です。Datadog は、Oracle が提供する JVM の使用を推奨しています。
 
 ### コンフィギュレーション
 

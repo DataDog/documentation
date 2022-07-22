@@ -1,19 +1,19 @@
 ---
 categories:
-  - cloud
-  - azure
-  - data store
-  - provisioning
-  - configuration & deployment
-ddtype: crawler
+- cloud
+- azure
+- data store
+- provisioning
+- configuration & deployment
 dependencies: []
 description: Azure SQL Elastic Pool の主要メトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/'
+doc_link: https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/
 draft: false
 git_integration_title: azure_sql_elastic_pool
 has_logo: true
 integration_id: azure-sql-elastic-pool
 integration_title: Microsoft Azure SQL Elastic Pool
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-Microsoft Azure SQL Elastic Pool インテグレーショ�
 short_description: Azure SQL Elastic Pool の主要メトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 エラスティックプールは、複数のデータベースのパフォーマンスを管理するためのシンプルでコスト効率の高いソリューションを提供します。

@@ -2,20 +2,6 @@
 # Create a new file called Makefile.config using this file as a template for your local config
 
 GITHUB_TOKEN := ${github_personal_token}
-LANGS_TO_IGNORE := "ja fr"
-DOCKER := false
-FULL_BUILD := false
-DD_API_KEY := ${datadog_api_key}
-DD_APP_KEY := ${datadog_application_key}
-CREATE_I18N_PLACEHOLDERS:= false
-PULL_RBAC_PERMISSIONS := true
-RUN_SERVER := true
+DATADOG_API_KEY := false
+DATADOG_APP_KEY := false
 CONFIGURATION_FILE := "./local/bin/py/build/configurations/pull_config_preview.yaml"
-
-LOCAL := True
-LOCALBIN := local/bin
-LOCALETC := local/etc
-
-EXEDIR := /usr/local/bin
-EXE_LIST := `find local/bin -type f -exec sh -c "echo ${EXEDIR}/{} | sed s@${LOCALBIN}/@@" \;`
-VIRENV=hugpython
