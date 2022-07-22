@@ -1,5 +1,5 @@
 ---
-title: Recommend Tagging Practices for Events
+title: Best Practices For Tagging Events
 kind: documentation
 description: Recommended event tags and how to add them.
 aliases:
