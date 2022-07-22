@@ -35,6 +35,7 @@ These configuration can then be customized to add any Datadog feature.
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
 * [Oracle Container Engine for Kubernetes (OKE)](#OKE)
+* [vSphere Tanzu Kubernetes Grid (TKG)](#TKG)
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
@@ -482,6 +483,63 @@ spec:
 
 More `values.yaml` examples can be found in the [Helm chart repository][1]
 More `DatadogAgent` examples can be found in the [Datadog Operator repository][2]
+
+## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
+
+TKG requires some small configuration changes, shown below. For example, tolerations are required to schedule the Node Agent on the `master` nodes.
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Custom `values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  kubelet:
+    tlsVerify: false
+agents:
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      effect: NoSchedule
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+  features:
+    # Enable the new `kubernetes_state_core` check.
+    kubeStateMetricsCore:
+      enabled: true
+  agent:
+    image:
+      name: "gcr.io/datadoghq/agent:latest"
+    config:
+      kubelet:
+        tlsVerify: false
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+  clusterAgent:
+    config:
+      collectEvents: true
+    image:
+      name: "gcr.io/datadoghq/cluster-agent:latest"
+```
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 
