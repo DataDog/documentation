@@ -1,39 +1,58 @@
 ---
+app_id: kubelet
+app_uuid: 8afd5500-0b72-4574-95f9-81282e2bd535
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kubernetes.cpu.usage.total
+      metadata_path: metadata.csv
+      prefix: kubernetes.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kubelet
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - containers
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md
-display_name: Kubelet
+display_on_public_website: true
 draft: false
 git_integration_title: kubelet
-guid: 55039e21-7e89-41fb-968c-ab8bf8f25da0
 integration_id: kubelet
 integration_title: Kubelet
 integration_version: 7.4.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kubernetes.
-metric_to_check: kubernetes.cpu.usage.total
+manifest_version: 2.0.0
 name: kubelet
-public_title: Datadog-Kubelet インテグレーション
+oauth: {}
+public_title: Kubelet
 short_description: Kubelet からコンテナ統計を収集。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  configuration: README.md#Setup
+  description: Kubelet からコンテナ統計を収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kubelet
 ---
 
 
