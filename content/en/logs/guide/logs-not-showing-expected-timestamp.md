@@ -33,24 +33,24 @@ If your raw logs are not showing the expected timestamp in Datadog, [extract](#e
 
 #### Extract the timestamp value with a parser
 
-1. Go to your [Logs Pipeline][2]. 
+1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
 2. Click **Add Processor**. 
 3. Select **Grok Parser** for the processor type. 
 4. Use the [date() matcher][3] to extract the date and pass it into a custom date attribute. See the below example, as well as [parsing dates examples][4], for details.
 
-Log example:
+For a log example like this:
 
 ```
 2017-12-13 11:01:03 EST | INFO | (tagger.go:80 in Init) | starting the tagging system
 ```
 
-Parsing rule example:
+Add a parsing rule like:
 
 ```
 MyParsingRule %{date("yyyy-MM-dd HH:mm:ss z"):date} \| %{word:severity} \| \(%{notSpace:logger.name}:%{integer:logger.line}[^)]*\) \|.*
 ``` 
 
-The output for MyParsingRule's extraction:
+The output for `MyParsingRule`'s extraction:
 
 ```
 {
@@ -69,7 +69,7 @@ The `date` attribute stores the `mytimestamp` value.
 
 Add a [Log Date Remapper][5] to make sure that the value of the `date` attribute overrides the current log timestamp.
 
-1. Go to your [Logs Pipeline][2].
+1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
 2. Click **Add Processor**. 
 3. Select **Date remapper** as the processor type.
 4. Enter a name for the processor.
