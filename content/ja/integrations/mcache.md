@@ -20,7 +20,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
 display_name: Memcached
@@ -39,7 +38,7 @@ metric_to_check: memcache.uptime
 name: mcache
 process_signatures:
 - memcached
-public_title: Datadog-Memcache インテグレーション
+public_title: Memcache インテグレーション
 short_description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
 support: コア
 supported_os:
