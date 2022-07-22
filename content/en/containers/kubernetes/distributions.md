@@ -540,6 +540,9 @@ spec:
       name: "gcr.io/datadoghq/cluster-agent:latest"
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 
