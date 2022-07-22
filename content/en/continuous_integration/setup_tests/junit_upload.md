@@ -16,11 +16,11 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 </div>
 {{< /site-region >}}
 
-JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
+<div class="alert alert-warning"><strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files, as the native instrumentation provides more accurate time results, supports distributed traces on integration tests, and supports structured stack traces.</div>
 
-As an alternative to instrumenting your tests natively using Datadog tracers, which is the recommended option as it provides the most comprehensive test results, you can also upload JUnit XML test reports.
+JUnit test report files are XML files that contain test execution information, such as test and suite names, pass or fail status, duration, and sometimes error logs. Although introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
-Test results imported from JUnit XML reports appear alongside test data reported by tracers. However, there are some limitations when using this method, such as the lack of distributed traces on integration tests or structured stack traces. For this reason, only use this method if there is no native support for the language or testing framework being used.
+If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][8] using Datadog tracers. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
 
 ## Installing the Datadog CI CLI
 
@@ -297,3 +297,4 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 [5]: /logs/
 [6]: /getting_started/site/
 [7]: https://git-scm.com/downloads
+[8]: https://docs.datadoghq.com/continuous_integration/setup_tests/

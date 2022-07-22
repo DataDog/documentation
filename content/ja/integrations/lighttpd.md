@@ -16,7 +16,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
 display_name: Lighttpd
@@ -35,7 +34,7 @@ metric_to_check: lighttpd.performance.uptime
 name: lighttpd
 process_signatures:
 - lighttpd
-public_title: Datadog-Lighttpd インテグレーション
+public_title: Lighttpd インテグレーション
 short_description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
 support: コア
 supported_os:

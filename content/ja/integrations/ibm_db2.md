@@ -1,43 +1,66 @@
 ---
+app_id: ibm-db2
+app_uuid: e588293a-833f-4888-a7b4-2208e087059a
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     IBM Db2 Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: ibm_db2.connection.active
+      metadata_path: metadata.csv
+      prefix: ibm_db2.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: IBM Db2
   logs:
     source: ibm_db2
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
 - オートディスカバリー
-creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
-display_name: IBM Db2
+display_on_public_website: true
 draft: false
 git_integration_title: ibm_db2
-guid: 67378f79-e72b-4f49-8ec2-57053706523d
 integration_id: ibm-db2
 integration_title: IBM Db2
 integration_version: 1.11.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ibm_db2.
-metric_to_check: ibm_db2.connection.active
+manifest_version: 2.0.0
 name: ibm_db2
-public_title: Datadog-IBM Db2 インテグレーション
+oauth: {}
+public_title: IBM Db2
 short_description: IBM Db2 データベースからのテーブルスペース、バッファプールなどのメトリクスを監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: IBM Db2 データベースからのテーブルスペース、バッファプールなどのメトリクスを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM Db2
 ---
 
 
