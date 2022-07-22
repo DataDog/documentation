@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Elemental MediaPackage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_mediapackage/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Elemental MediaPackage インテグレーション
 short_description: Amazon Elemental MediaPackage のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Elemental MediaPackage は、さまざまな再生デバイスに安全性、拡張性、信頼性の高いビデオストリームを配信するジャストインタイムのビデオパッケージングおよびオリジネーションサービスです。

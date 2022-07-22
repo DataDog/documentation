@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon NAT Gateway のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_nat_gateway/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon NAT Gateway インテグレーション
 short_description: Amazon NAT Gateway のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon NAT Gateway を使用すると、プライベートサブネットのインスタンスからインターネットに接続できても、インターネットからはこれらのインスタンスとの接続を開始できないようにすることができます。

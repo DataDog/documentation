@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - AWS
-  - ログの収集
-ddtype: crawler
+- cloud
+- AWS
+- ログの収集
 dependencies: []
 description: Amazon FSx のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_fsx/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon FSx インテグレーション
 short_description: Amazon FSx のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon FSx は、Windows File Server または Lustre にスケーラブルなストレージを提供するフルマネージド型のサービスです。

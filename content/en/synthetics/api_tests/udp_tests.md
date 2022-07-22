@@ -12,6 +12,9 @@ further_reading:
 - link: "/getting_started/synthetics/api_test/"
   tag: "Documentation"
   text: "Get started with API tests"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 ## Overview
 
@@ -87,9 +90,9 @@ When you set the alert conditions to `An alert is triggered if your test fails f
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes;
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -108,7 +111,9 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click **Save** to save and start your test.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][9].
 
 ## Variables
 
@@ -164,13 +169,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][9].
+By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][10].
 
-If you are using the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][11] on their accounts.
+Access restriction is available for customers using [custom roles][12] on their accounts.
 
 You can restrict access to a UDP test based on the roles in your organization. When creating a UDP test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -188,6 +193,7 @@ You can restrict access to a UDP test based on the roles in your organization. W
 [6]: /monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /synthetics/settings/#global-variables
-[9]: /account_management/rbac/
-[10]: /account_management/rbac#custom-roles
-[11]: /account_management/rbac/#create-a-custom-role
+[9]: /synthetics/guide/synthetic-test-monitors
+[10]: /account_management/rbac/
+[11]: /account_management/rbac#custom-roles
+[12]: /account_management/rbac/#create-a-custom-role

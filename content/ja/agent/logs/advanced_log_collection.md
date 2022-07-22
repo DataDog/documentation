@@ -1,31 +1,33 @@
 ---
-title: ログの収集
-kind: documentation
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: ドキュメント
-    text: ログの処理方法について
-  - link: /logs/log_configuration/parsing
-    tag: ドキュメント
-    text: パースの詳細
-  - link: /logs/live_tail/
-    tag: ドキュメント
-    text: Datadog Live Tail 機能
-  - link: /logs/explorer/
-    tag: ドキュメント
-    text: ログの調査方法
-  - link: /logs/logging_without_limits/
-    tag: ドキュメント
-    text: Logging without Limits (無制限のログ)*
+- link: /logs/log_configuration/processors
+  tag: ドキュメント
+  text: ログの処理方法について
+- link: /logs/log_configuration/parsing
+  tag: ドキュメント
+  text: パースの詳細
+- link: /logs/live_tail/
+  tag: ドキュメント
+  text: Datadog Live Tail 機能
+- link: /logs/explorer/
+  tag: ドキュメント
+  text: ログの調査方法
+- link: /logs/logging_without_limits/
+  tag: ドキュメント
+  text: Logging without Limits (無制限のログ)*
+kind: documentation
+title: ログの収集
 ---
-特定のログ収集構成にログ処理ルールを適用することで、以下が可能です。
 
+ログ収集の構成をカスタマイズします。
 * [ログをフィルター](#filter-logs)
 * [ログの機密データのスクラビング](#scrub-sensitive-data-from-your-logs)
-* [複数行の集約の実行](#multi-line-aggregation)
-* [ワイルドカードを使用したディレクトリの追跡](#tail-directories-by-using-wildcards)
-* [UTF-16 形式のログをエンコード](#encode-utf-16-format-logs)
+* [複数行のログを集計する](#multi-line-aggregation)
+* [よく使われる例をコピーする](#commonly-used-log-processing-rules)
+* [ディレクトリを監視するためにワイルドカードを使用する](#tail-directories-by-using-wildcards)
+* [ログファイルのエンコーディングを指定する](#log-file-encodings)
+* [グローバルな処理ルールを定義する](#global-processing-rules)
 
 **注**: 複数の処理ルールを設定した場合、ルールは順次適用され、各ルールは直前のルールの結果に適用されます。
 
@@ -49,7 +51,7 @@ Datadog Agent によって収集されたすべてのログに同一の処理ル
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -136,7 +138,7 @@ spec:
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -151,7 +153,7 @@ logs_config:
 1 つ以上のパターンを一致させるには、単一の表現内で定義します。
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -165,7 +167,7 @@ logs_config:
 パターンが長すぎて1行に表示されない場合は、複数行に分けることが可能です。
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -252,7 +254,7 @@ spec:
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs_config:
+logs:
  - type: file
    path: /my/test/file.log
    service: cardpayment
@@ -261,7 +263,7 @@ logs_config:
       - type: mask_sequences
         name: mask_credit_cards
         replace_placeholder: "[masked_credit_card]"
-        ##キャプチャするグループを含む 1 つのパターン
+        ## キャプチャするグループを含む 1 つのパターン
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
@@ -358,7 +360,7 @@ Agent バージョン 7.17 以降をご利用の場合、文字列 `replace_plac
 構成ファイルで上記のログ例を送信するには、次の `log_processing_rules` を使用します。
 
 ```yaml
-logs_config:
+logs:
  - type: file
    path: /var/log/pg_log.log
    service: database
@@ -442,9 +444,99 @@ spec:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
+### 自動複数行集計
+Agent 7.37+ では、`auto_multi_line_detection` を有効にすることで、Agent が[共通複数行パターン][2]を自動的に検出することができます。
+
+`datadog.yaml` ファイルで `auto_multi_line_detection` をグローバルに有効化します。
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+```
+
+コンテナ化されたデプロイメントでは、環境変数 `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` で `auto_multi_line_detection` を有効にすることが可能です。
+
+また、ログ構成ごとに有効・無効 (グローバル構成をオーバーライド) を設定することができます。
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+```yaml
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: testApp
+    source: java
+    auto_multi_line_detection: true
+```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "testApp",
+        "auto_multi_line_detection": true
+      }]
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: testApp
+spec:
+  selector:
+    matchLabels:
+      app: testApp
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/testApp.logs: >-
+          [{
+            "source": "java",
+            "service": "testApp",
+            "auto_multi_line_detection": true
+          }]
+      labels:
+        app: testApp
+      name: testApp
+    spec:
+      containers:
+        - name: testApp
+          image: testApp:latest
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`datadog.yaml` ファイルにカスタムパターンを追加することもできます。
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
+```
+
+この機能を有効にすると、新しいログファイルが開かれたとき、Agent はパターンの検出を試みます。このプロセスの間、ログは 1 行で送信されます。検出しきい値に達すると、そのソースの将来のすべてのログは、検出されたパターンで集計され、パターンが見つからない場合は 1 行で集計されます。検出には、最大 30 秒または最初の 500 ログ (いずれか早い方) が必要です。
+
+**注**: ローテーションされたログの命名パターンを制御できる場合、ローテーションされたファイルが、同じ名前で以前アクティブだったファイルを置き換えることを確認してください。Agent は、新しくローテーションされたファイル上で以前に検出されたパターンを再利用し、検出の再実行を回避します。
+
+複数行の自動検出は、以下の日付/時刻形式から始まり、それに準拠するログを検出します: RFC3339、ANSIC、Unix Date Format、Ruby Date Format、RFC822、RFC822Z、RFC850、RFC1123、RFC1123Z、RFC3339Nano、Java ロギング SimpleFormatter デフォルト日付書式。
+
 ## 良く使用されるログの処理ルール
 
-例の一覧を確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][2] をご覧ください。
+例の一覧を確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][3] をご覧ください。
 
 ## ワイルドカードを使用したディレクトリの追跡
 
@@ -462,7 +554,7 @@ spec:
 構成例:
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /var/log/myapp/*.log
     exclude_paths:
@@ -472,18 +564,23 @@ logs_config:
     source: go
 ```
 
-上の例は `/var/log/myapp/log/myfile.log` と一致しますが `/var/log/myapp/log/debug.log` と `/var/log/myapp/log/trace.log` が追尾されることはありません。
+上記の例では、`/var/log/myapp/log/myfile.log` にマッチし、`/var/log/myapp/log/debug.log` と `/var/log/myapp/log/trace.log` は除外しています。
 
 **注**: Agent がディレクトリ内にあるファイルをリストするには、そのディレクトリへの読み取りおよび実行アクセス許可が必要です。
 
-## UTF-16 形式のログをエンコード
+## ログファイルのエンコーディング
 
-Datadog Agent **v6.23/v7.23** 以降でアプリケーションログが UTF-16 形式で記述されている場合は、これらのログをエンコードして[ログエクスプローラー][3]で望ましい形にパースすることができます。ログコンフィギュレーションのセクションで `encoding` パラメーターを使用して、UTF16 リトルエンディアン の場合は `utf-16-le` に、UTF16 ビッグエンディアンの場合は `utf-16-be` に設定します。その他の値は無視され、Agent はファイルを UTF-8 形式で読み込みます。
+デフォルトでは、Datadog Agent は、ログが UTF-8 エンコーディングを使用すると仮定しています。アプリケーションログが異なるエンコーディングを使用する場合、ログ構成設定で `encoding` パラメーターを指定します。
+
+以下のリストは、サポートされているエンコーディングの値を示しています。サポートされていない値を指定した場合、Agent はその値を無視し、ファイルを UTF-8 として読み取ります。
+ * `utf-16-le` - UTF-16 little-endian (Datadog Agent **v6.23/v7.23**)
+ * `utf-16-be` - UTF-16 big-endian (Datadog Agent **v6.23/v7.23**)
+ * `shift-jis` - Shift-JIS (Datadog Agent **v6.34/v7.34**)
 
 構成例:
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /test/log/hello-world.log
     tags: key:value
@@ -549,7 +646,7 @@ Datadog Agent によって収集されるすべてのログが、グローバル
 *Logging without Limits は Datadog, Inc. の商標です。
 
 [1]: https://golang.org/pkg/regexp/syntax/
-[2]: /ja/agent/faq/commonly-used-log-processing-rules
-[3]: https://docs.datadoghq.com/ja/logs/explorer/#overview
+[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
+[3]: /ja/agent/faq/commonly-used-log-processing-rules
 [4]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [5]: /ja/agent/guide/agent-commands/#agent-information

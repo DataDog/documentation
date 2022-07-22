@@ -2,12 +2,12 @@
 title: Troubleshooting
 kind: documentation
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
-      tag: 'Blog'
-      text: 'Real User Monitoring'
-    - link: '/real_user_monitoring/faq/content_security_policy/'
-      tag: 'Documentation'
-      text: 'Content Security Policy'
+- link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  tag: 'Blog'
+  text: 'Real User Monitoring'
+- link: '/real_user_monitoring/faq/content_security_policy/'
+  tag: 'Documentation'
+  text: 'Content Security Policy'
 ---
 
 If you experience unexpected behavior with Datadog Browser RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.

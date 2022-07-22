@@ -118,41 +118,29 @@ experimental:
 
 1. [Kubernetes Agent のセットアップ][1]に従ってください。
 
-2. `values.yaml` ファイルの `datadog.env` パラメーターを編集して、Agent 用の環境変数を設定します。
+2. `values.yaml` ファイルの `datadog.otlp` セクションを編集して、Agent で OTLP エンドポイントを有効にします。
 
    gRPC の場合:
    ```
-   env:
-     - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT
-       value: "0.0.0.0:4317"
+   otlp:
+    receiver:
+      protocols:
+        grpc:
+          enabled: true
    ```
 
    HTTP の場合:
    ```
-   env: 
-     - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT
-       value: "0.0.0.0:4318"
+   otlp:
+    receiver:
+      protocols:
+        http:
+          enabled: true
    ```
 
-3. コンテナポート (gRPC の場合は `4317` 、HTTP の場合は `4318` ) を Agent コンテナのホストポートにマッピングし、 `values.yaml` ファイルの `agents.containers.agent.ports` パラメーターで設定します。
+これは、各プロトコルをデフォルトのポート (OTLP/gRPC は `4317`、OTLP/HTTP は `4318`) で有効にするものです。
 
-   gRPC の場合:
-   ```
-     ports: 
-       - containerPort: 4317
-         hostPort: 4317
-         name: traceportgrpc
-         protocol: TCP
-   ```
 
-   HTTP の場合:
-   ```
-     ports: 
-       - containerPort: 4318
-         hostPort: 4318
-         name: traceporthttp
-         protocol: TCP
-   ```
 [1]: /ja/agent/kubernetes/?tab=helm
 {{% /tab %}}
 
@@ -160,28 +148,19 @@ experimental:
 
 1. [Kubernetes Agent のセットアップ][1]に従ってください。
 
-2. `set` コマンドを使用して、Agent の環境変数を設定します。
+2. 優先プロトコルを有効にします。
 
    gRPC の場合:
    ```
-   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT,datadog.env[0].value=0.0.0.0:4317"
+   --set "datadog.otlp.receiver.protocols.grpc.enabled=true"
    ```
    HTTP の場合:
    ```
-   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:4318"
+   --set "datadog.otlp.receiver.protocols.http.enabled=true"
    ```
 
-3. コンテナポート (gRPC の場合は `4317`、HTTP の場合は `4318`) を、コア Agent コンテナのホストポートにマッピングします。
+これは、各プロトコルをデフォルトのポート (OTLP/gRPC は `4317`、OTLP/HTTP は `4318`) で有効にするものです。
 
-   gRPC の場合:
-   ```
-   --set 'agents.containers.agent.ports[0].containerPort=4317,agents.containers.agent.ports[0].hostPort=4317,agents.containers.agent.ports[0].name=traceportgrpc,agents.containers.agent.ports[0].protocol=TCP' 
-   ```
-
-   HTTP の場合:
-   ```
-   --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
-   ```
 [1]: /ja/agent/kubernetes/?tab=helm
 {{% /tab %}}
 {{< /tabs >}}

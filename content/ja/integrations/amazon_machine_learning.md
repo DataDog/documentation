@@ -1,19 +1,19 @@
 ---
 aliases:
-  - /ja/integrations/awsml/
+- /ja/integrations/awsml/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- aws
+- log collection
 dependencies: []
 description: AWS Machine Learning の予測カウントおよび失敗数を追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_machine_learning/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_machine_learning/
 draft: false
 git_integration_title: amazon_machine_learning
 has_logo: true
 integration_id: amazon-machine-learning
 integration_title: Amazon Machine Learning
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-Amazon Machine Learning インテグレーション
 short_description: AWS Machine Learning の予測カウントおよび失敗数を追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Machine Learning は、あらゆるスキルレベルの開発者が機械学習テクノロジーを簡単に利用できるサービスです。
@@ -61,7 +62,7 @@ Amazon Machine Learning から S3 バケットまたは CloudWatch のいずれ�
 {{< get-metrics-from-git "amazon_machine_learning" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 

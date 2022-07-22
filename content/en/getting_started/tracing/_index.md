@@ -4,10 +4,10 @@ kind: documentation
 aliases:
     - /getting_started/tracing/distributed-tracing
 further_reading:
-    - link: '/tracing/setup/'
+    - link: '/tracing/trace_collection/'
       tag: 'Documentation'
       text: 'Select your application language'
-    - link: '/tracing/visualization/'
+    - link: '/tracing/glossary/'
       tag: 'Documentation'
       text: 'Use the APM UI'
     - link: 'https://learn.datadoghq.com/enrol/index.php?id=4'

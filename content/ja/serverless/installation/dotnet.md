@@ -143,7 +143,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 3. 必要な環境変数を設定する
 
-    - 環境変数 `DD_SITE` に、テレメトリー送信先の [Datadog サイト][3]を設定します。
+    - 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
@@ -163,7 +163,21 @@ Datadog サーバーレスプラグインをインストールして構成する
 
    以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
 
-    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}`
+     ```sh
+      # Use this format for x86-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadogdd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+      ```
+
+   `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
 
 3. 必要な環境変数を設定する
 
@@ -171,7 +185,7 @@ Datadog サーバーレスプラグインをインストールして構成する
     - `CORECLR_PROFILER` を `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` に設定します。
     - `CORECLR_PROFILER_PATH` を `/opt/datadog/Datadog.Trace.ClrProfiler.Native.so` に設定します。
     - `DD_DOTNET_TRACER_HOME` を `/opt/datadog` に設定します。
-    - `DD_SITE` を、テレメトリーの送信先となる [Datadog サイト][2]に設定します。
+    - `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html

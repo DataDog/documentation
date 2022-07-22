@@ -103,7 +103,7 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
                 ),
                 content["globs"],
             )
-        elif getenv("LOCAL") == 'True':
+        elif not getenv("CI_COMMIT_REF_NAME"):
             print(
                 "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Documentation is now in degraded mode".format(content["repo_name"]))
             content["action"] = "Not Available"
@@ -167,7 +167,7 @@ def prepare_content(configuration, github_token, extract_dir):
         list_of_contents = local_or_upstream(
             github_token, extract_dir, extract_config(configuration))
     except:
-        if getenv("LOCAL") == 'True':
+        if not getenv("CI_COMMIT_REF_NAME"):
             print(
                 "\x1b[33mWARNING\x1b[0m: Downloading files failed, documentation is now in degraded mode.")
         else:

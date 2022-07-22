@@ -48,12 +48,12 @@ Use the request flow map to investigate your application's behavior:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/services_map/
+[1]: /tracing/services/services_map/
 [2]: /tracing/trace_explorer/
-[3]: /tracing/trace_ingestion/ingestion_controls
+[3]: /tracing/trace_pipeline/ingestion_controls
 [4]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [5]: https://app.datadoghq.com/apm/flow-map
-[6]: /tracing/visualization/#resources
-[7]: /tracing/deployment_tracking/#shadow-deploys
+[6]: /tracing/glossary/#resources
+[7]: /tracing/services/deployment_tracking/#shadow-deploys
 [8]: /tracing/guide/add_span_md_and_graph_it/
-[9]: /tracing/deployment_tracking/
+[9]: /tracing/services/deployment_tracking/

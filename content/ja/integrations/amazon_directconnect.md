@@ -1,19 +1,19 @@
 ---
 aliases:
-  - /ja/integrations/awsdirectconnect/
+- /ja/integrations/awsdirectconnect/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- aws
+- log collection
 dependencies: []
-description: Amazon Direct Connect のキーメトリクスを追跡します。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_directconnect/'
+description: Amazon Direct Connect のキーメトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_directconnect/
 draft: false
 git_integration_title: amazon_directconnect
 has_logo: true
 integration_id: amazon-direct-connect
 integration_title: Amazon Direct Connect
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-Amazon Direct Connect インテグレーション
 short_description: Amazon Direct Connect のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 このインテグレーションは、AWS Direct Connect から接続状態、送受信ビットレート、送受信パケットレートなどのメトリクスを収集します。
@@ -40,7 +41,7 @@ version: '1.0'
     - `directconnect:DescribeConnections`: 使用できる Direct Connect 接続をリストするために使用されます。
     - `directconnect:DescribeTags`: Direct Connect 接続に適用されるカスタムタグを収集するために使用されます。
 
-    Direct Connect ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
+    詳細については、AWS ウェブサイト上の [Direct Connect ポリシー][4]を参照してください。
 
 3. [Datadog - AWS Direct Connect インテグレーション][5]をインストールします。
 
@@ -66,7 +67,7 @@ Amazon Direct Connect から S3 バケットまたは CloudWatch のいずれか
 {{< get-metrics-from-git "amazon_directconnect" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -83,7 +84,7 @@ AWS Direct Connect インテグレーションには、サービスのチェッ�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_directconnect.html
+[4]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/security-iam.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_directconnect
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
