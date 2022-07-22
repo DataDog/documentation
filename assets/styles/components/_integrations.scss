@@ -643,7 +643,6 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             height: 100%;
         }
         &.hover {
-            border: 1px solid $brand-primary;
             .dimmer-cloak {
                 opacity: 0;
                 width: 0;
