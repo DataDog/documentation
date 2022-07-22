@@ -16,7 +16,6 @@ categories:
 - data store
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/istio/README.md
 description: istio インテグレーションで、istio サービスメッシュおよびミキサーからデータを収集。
@@ -26,7 +25,7 @@ git_integration_title: istio
 guid: d8bd53c0-0884-4357-9517-11858bf6aa9d
 integration_id: istio
 integration_title: Istio
-integration_version: 4.2.0
+integration_version: 4.2.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -37,7 +36,7 @@ metric_to_check:
 - istio.mesh.request.count
 - istio.galley.endpoint_no_pod
 name: istio
-public_title: Datadog-Istio インテグレーション
+public_title: Istio インテグレーション
 short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
 support: コア
 supported_os:
@@ -75,15 +74,13 @@ Envoy プロキシ を Istioで監視する場合は、[Envoy インテグレー
 Istio に接続するには、`istio.d/conf.yaml` ファイル ([Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダー内) を編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル istio.d/conf.yaml][8] を参照してください。
 
 #### メトリクスの収集
-Istio `v1.5+` の `istiod` デプロイと `istio-proxy` をモニタリングするには、次のコンフィギュレーションを使用します。
+Istio `v1.5+` の `istiod` デプロイメントと `istio-proxy` を監視するために、Prometheus 形式のメトリクスを収集するための 2 つの主要なコンポーネントがあります。[Istio アーキテクチャ][9]に沿って、**データプレーン** (`istio-proxy` サイドカーコンテナ) と**コントロールプレーン** (プロキシを管理する `istiod` サービス) が存在します。これらは両方とも `istio` Agent チェックとして実行されますが、異なる責任を負っており、以下に説明するように別々に構成されます。
 
+##### データプレーン構成
+Istio データプレーンを監視するために、Agent は [`istio.d/auto_conf.yaml`][10] ファイルを含み、`istio-proxy` サイドカーコンテナごとに監視を自動的にセットアップするようになっています。Agent は、自動的に検出した各サイドカーコンテナに対してこのチェックを初期化します。この構成により、各サイドカーコンテナから公開されるデータの `istio.mesh.*` メトリクスをレポートすることができます。
+
+インテグレーションのデータプレーン部分をカスタマイズするには、Istio 用に同等の[コンフィギュレーションファイル][11]を作成します。`ad_identifiers` と `istio_mesh_endpoint` を適切に設定し、`istio-proxy` サイドカーコンテナが検出された場合のインテグレーションをセットアップします。利用可能なすべての構成オプションは、提供されている [`istio.d/auto_conf.yaml`][10] と[コンフィギュレーションファイル例][8]を参照してください。カスタマイズの際には、`use_openmetrics: true` と `exclude_labels` を以下の構成に設定します。
 ```yaml
-init_config:
-
-instances:
-  - use_openmetrics: true  # Openmetrics V2 バージョンのインテグレーションを有効にします
-    istiod_endpoint: http://istiod.istio-system:15014/metrics
-    istio_mesh_endpoint: http://istio-proxy.istio-system:15090/stats/prometheus
     exclude_labels:
       - source_version
       - destination_version
@@ -101,10 +98,23 @@ instances:
       - connection_security_policy
 ```
 
-**注**: Prometheus のラベルである `connectionID` は除外されます。[istio.d/conf.yaml のサンプル][8]には、除外するラベルの候補も記載されています。
+##### コントロールプレーン構成
+Istio のコントロールプレーンを監視し、`mixer`、`galley`、`pilot`、`citadel` のメトリクスをレポートするには、`istiod` デプロイメントを監視するように Agent を構成する必要があります。Istio `v1.5+` では、`istio-system` ネームスペースにある `istiod` デプロイメントのポッドアノテーションとして、以下のオートディスカバリーアノテーションを適用してください。
 
+```yaml
+ad.datadoghq.com/discovery.check_names: '["istio"]'
+ad.datadoghq.com/discovery.init_configs: '[{}]'
+ad.datadoghq.com/discovery.instances: |
+     [
+       {
+         "istiod_endpoint": "http://%%host%%:15014/metrics",
+         "use_openmetrics": "true"
+       }
+     ]
+```
+これらのアノテーションの適用方法は、使用する [Istio のデプロイメント戦略 (Istioctl、Helm、Operator)][12] によって異なります。これらのポッドアノテーションを適用するための適切な方法については、Istio のドキュメントを参照してください。
 
-Istio メッシュメトリクスは、対応するオートディスカバリーを使用した `istio-proxy` コンテナからのみ利用可能です。[`istio.d/auto_conf.yaml`][9] を参照してください。
+これらのアノテーションは、`discovery` を `<CONTAINER_IDENTIFIER>` として参照し、`istiod` デプロイメントのポッドのデフォルトコンテナ名と一致するようにします。もし、コンテナ名が異なる場合は、適宜調整してください。
 
 ##### OpenMetrics V2 と OpenMetrics V1 の比較
 <div class="alert alert-warning">
@@ -117,71 +127,68 @@ OpenMetrics V2 では、デフォルトでより正確にメトリクスが送�
 
 OpenMetrics V2 は、OpenMetrics V1 のパフォーマンスと品質に関する問題を解決しています。ネイティブのメトリクスタイプのサポート、構成の改善、カスタムメトリクスタイプなどのアップデートが含まれています。
 
-OpenMetrics V1 の実装を使用する場合は、`use_openmetrics` 構成オプションを `false` に設定します。OpenMetrics V1 の構成パラメーターを見るには、[`conf.yaml.example` ファイル][10]を参照してください。
+OpenMetrics V1 の実装を使用する場合は、`use_openmetrics` 構成オプションを `false` に設定します。OpenMetrics V1 の構成パラメーターを見るには、[`conf.yaml.example` ファイル][13]を参照してください。
 
+#### Datadog Agent ポッドのサイドカーインジェクションを無効化
 
-##### Datadog Agent ポッドのサイドカーインジェクションを無効化
-
-[コンテナに Datadog Agent を][11]インストールする場合は、その前に Istio のサイドカーインジェクションを無効にすることをお勧めします。
+[コンテナに Datadog Agent][14] をインストールする場合は、その前に Istio のサイドカーインジェクションを無効にすることをお勧めします。
 
 _Istio バージョン >= 1.10:_
 
-`sidecar.istio.io/inject: "false"` _ラベル_を `datadog-agent` DaemonSet に追加します。
+`sidecar.istio.io/inject: "false"` **ラベル**を `datadog-agent` DaemonSet に追加します。
 
 ```yaml
-...
+# (...)
 spec:
-   ...
   template:
     metadata:
       labels:
         sidecar.istio.io/inject: "false"
-     ...
+    # (...)
 ```
 
 これは、`kubectl patch` コマンドでも実行できます。
 
-```text
+```shell
 kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"labels":{"sidecar.istio.io/inject":"false"}}}}}'
 ```
 
-_Istio バージョン <= 1.9:_ 
+_Istio バージョン <= 1.9:_
 
-`sidecar.istio.io/inject: "false"` _アノテーション_を `datadog-agent` DaemonSet に追加します。
+`sidecar.istio.io/inject: "false"` **アノテーション**を `datadog-agent` DaemonSet に追加します。
 
 ```yaml
-...
+# (...)
 spec:
-   ...
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "false"
-     ...
+    # (...)
 ```
 
 `kubectl patch` コマンドを使用します。
 
-```text
+```shell
 kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"}}}}}'
 ```
 
 #### ログの収集
 
-Istio には 2 種類のログがあります。[Envoy インテグレーション][12]、あるいは [Istio logs][13]で収集される Envoy アクセスログです。 
+Istio には 2 種類のログがあります。[Envoy インテグレーション][15]、あるいは [Istio logs][16] で収集される Envoy アクセスログです。 
 
 _Agent バージョン 6.0 以降で利用可能_
 
 [オートディスカバリーのインテグレーションテンプレート][4]のガイドを参照して、次のパラメーターを適用してください。
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][14]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][17]を参照してください。
 
 | パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "istio", "service": "<サービス名>"}` |
+| `<LOG_CONFIG>` | `{"source": "istio", "service": "<サービス名>"}`   |
 
 ### 検証
 
-[Agent の `info` サブコマンドを実行][15]し、Checks セクションで `istio` を探します。
+[Agent の `info` サブコマンドを実行][18]し、Checks セクションで `istio` を探します。
 
 ## 収集データ
 
@@ -203,7 +210,7 @@ Istio チェックには、イベントは含まれません。
 Istio の OpenMetricsBaseCheck (V1) 実装 (Istio インテグレーションバージョン `3.13.0` 以降) で、以下のエラーが発生する場合:
 
 ```python
-  Error: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", 
+  Error: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)",
   InvalidChunkLength(got length b'', 0 bytes read))
 ```
 
@@ -214,7 +221,7 @@ Istio の OpenMetricsBaseCheck (V1) 実装 (Istio インテグレーションバ
 
 ### Istio のデプロイメントで一般的な Openmetrics インテグレーションを使用する
 
-Istio のプロキシサイドカーインジェクションが有効な場合、`istio_mesh_endpoint` と同じメトリクスエンドポイントで [Openmetrics インテグレーション][18]を使用して他の Prometheus メトリクスを監視すると、カスタムメトリクス使用量が多く、メトリクス収集が二重になることがあります。
+Istio のプロキシサイドカーインジェクションが有効な場合、`istio_mesh_endpoint` と同じメトリクスエンドポイントで [Openmetrics インテグレーション][21]を使用して他の Prometheus メトリクスを監視すると、カスタムメトリクス使用量が多く、メトリクス収集が二重になることがあります。
 
 Openmetrics の構成により、メトリクスの収集が重複しないようにするためには、以下のどちらかを行います。
 
@@ -251,15 +258,15 @@ instances:
       - envoy_*
 ```
 
-ご不明な点は、[Datadog のサポートチーム][19]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][22]までお問い合わせください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した Istio サービスメッシュの監視][20]
-- [Datadog でキーメトリクスを収集して Istio を監視する][21]
-- [Datadog を使用した Istio の監視方法][17]
+- [Datadog を使用した Istio サービスメッシュの監視][23]
+- [Datadog でキーメトリクスを収集して Istio を監視する][24]
+- [Datadog を使用した Istio の監視方法][20]
 
 [1]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
 [2]: https://docs.datadoghq.com/ja/tracing/setup_overview/proxy_setup/?tab=istio
@@ -269,16 +276,19 @@ instances:
 [6]: https://github.com/DataDog/integrations-core/tree/master/envoy#istio
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example
-[9]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
-[10]: https://github.com/DataDog/integrations-core/blob/7.32.x/istio/datadog_checks/istio/data/conf.yaml.example
-[11]: https://docs.datadoghq.com/ja/agent/kubernetes/
-[12]: https://docs.datadoghq.com/ja/integrations/envoy/#log-collection
-[13]: https://istio.io/v1.4/docs/tasks/observability/logs/collecting-logs/
-[14]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[15]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[16]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
-[17]: https://github.com/DataDog/integrations-core/blob/master/istio/assets/service_checks.json
-[18]: https://docs.datadoghq.com/ja/integrations/openmetrics/
-[19]: https://docs.datadoghq.com/ja/help/
-[20]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
-[21]: https://www.datadoghq.com/blog/istio-metrics/
+[9]: https://istio.io/latest/docs/ops/deployment/architecture/
+[10]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
+[11]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=file#configuration
+[12]: https://istio.io/latest/docs/setup/install/
+[13]: https://github.com/DataDog/integrations-core/blob/7.32.x/istio/datadog_checks/istio/data/conf.yaml.example
+[14]: https://docs.datadoghq.com/ja/agent/kubernetes/
+[15]: https://docs.datadoghq.com/ja/integrations/envoy/#log-collection
+[16]: https://istio.io/v1.4/docs/tasks/observability/logs/collecting-logs/
+[17]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[18]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[19]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
+[20]: https://github.com/DataDog/integrations-core/blob/master/istio/assets/service_checks.json
+[21]: https://docs.datadoghq.com/ja/integrations/openmetrics/
+[22]: https://docs.datadoghq.com/ja/help/
+[23]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
+[24]: https://www.datadoghq.com/blog/istio-metrics/
