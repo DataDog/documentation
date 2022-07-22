@@ -34,7 +34,7 @@ If your raw logs are not showing the correct status in Datadog, [extract](#extra
 
 Use a Grok parser to define a rule with the [`word()` matcher][1] and extract the actual log status.
 
-1. Navigate to the [Logs Pipeline][2].
+1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
 2. Click **Add Processor**.
 3. Select **Grok Parser** for the processor type.
 4. Use the [`word()` matcher][1] to extract the status and pass it into a custom `log_status` attribute. 
@@ -67,7 +67,7 @@ The output for `MyParsingRule`'s extraction:
 
 The `log_status` attribute contains the correct status. Add a [Log Status remapper][3] to make sure the status value in the `log_status` attribute overrides the default log status.
 
-1. Navigate to the [Logs Pipeline][2].
+1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
 2. Click **Add Processor**.
 3. Select Status remapper as the processor type.
 4. Enter a name for the processor.
@@ -88,7 +88,7 @@ In this example, the actual status of the log is the value of the `logger_severi
 
 To make sure the `logger_severity` attribute value overrides the default log status, add `logger_severity` to the list of status attributes.
 
-1. Navigate to the [Logs Pipeline][2].
+1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
 2. Hover over Preprocessing for JSON Logs, and click the pencil icon.
 3. Add `logger_severity` to the list of status attributes. The status remapper looks for every reserved attribute in the order they are listed. To ensure the status comes from the `logger_severity` attribute, place it first in the list.
 4. Click **Save**.
