@@ -518,8 +518,12 @@ metadata:
   name: datadog
 spec:
   credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
+    apiSecret:
+      secretName: datadog-secret
+      keyName: api-key
+    appSecret:
+      secretName: datadog-secret
+      keyName: app-key
   features:
     # Enable the new `kubernetes_state_core` check.
     kubeStateMetricsCore:
