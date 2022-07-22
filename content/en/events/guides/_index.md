@@ -22,7 +22,7 @@ An event represents any record of activity noteworthy for engineers (devs, ops, 
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Ensure your events are tagged:">}}
-{{< nextlink href="/events/guides/recommended_event_tags/" >}}Recommend Tagging Practices for Events{{< /nextlink >}}
+{{< nextlink href="/events/guides/recommended_event_tags/" >}}Best Practices for Tagging Events{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Other guides:">}}
