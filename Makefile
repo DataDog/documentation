@@ -81,7 +81,8 @@ node_modules: package.json yarn.lock
 	@yarn install --immutable
 
 # All the requirements for a full build
-dependencies: clean hugpython all-examples data/permissions.json placeholders update_pre_build node_modules
+dependencies: clean hugpython all-examples data/permissions.json update_pre_build node_modules
+	@make placeholders
 
 # builds permissions json from rbac
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
