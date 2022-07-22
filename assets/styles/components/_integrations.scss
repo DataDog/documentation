@@ -302,12 +302,6 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             padding-left: 10px;
             padding-right: 10px;
         }
-        .item:nth-child(4n + 1) {
-            padding-left: 0;
-        }
-        .item:nth-child(4n-8) {
-            padding-right: 0;
-        }
     }
     @media (max-width: $screen-md-max) {
         .item {
