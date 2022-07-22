@@ -179,7 +179,7 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 
 Status corrections allow you to exclude specific time periods from SLO status and error budget calculations. This way, you can:
 - Prevent expected downtime, such as scheduled maintenance, from depleting your error budget
-- Ignore non-business hours, where you're not expected to conform to your SLO
+- Ignore non-business hours, where you're not expected to conform to your SLOs
 - Ensure that temporary issues caused by deployments do not negatively impact your SLOs
 
 When you apply a correction, the time period you specify is dropped from the SLO’s calculation.
