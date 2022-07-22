@@ -131,7 +131,7 @@ In the following example:
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
-To add retentions that are not in your current contract contact [Datadog support][17].
+To add retentions that are not in your current contract please send an email to Customer Success at: success@datadoghq.com
 
 {{< img src="logs/indexes/log_retention.png" alt="index details"  style="width:70%;">}}
 
@@ -174,7 +174,6 @@ Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 [14]: /logs/log_configuration/processors/#geoip-parser
 [15]: /tracing/other_telemetry/connect_logs_and_traces/
 [16]: /logs/log_configuration/processors/#trace-remapper
-[17]: /help/
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
 [20]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
