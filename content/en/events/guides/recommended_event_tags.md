@@ -1,7 +1,7 @@
 ---
 title: Best Practices For Tagging Events
 kind: documentation
-description: Recommended event tags and how to add them.
+description: Learn about recommended event tags and how to add them.
 further_reading:
 - link: "/getting_started/tagging/assigning_tags"
   tag: "Documentation"
