@@ -24,7 +24,7 @@ If using the [API][1], they can be added within the tags param or to learn more 
 | service      | The name of the service                                                                                                                                                              |
 | host         | The host name that the service, pod, or cluster is running on.                                                                                                               |
 | team         | The team that owns the event so they can be notified if need be.                                                                                                         |
-| version      | The build, service, etc version so that you know that an outage for instance is only related to a particular version released                                                        |
+| version      | The build or service version. This allows you to identify, for example, if an outage is related to a particular release version.                                                        |
 
 
 ### Type: Alert
