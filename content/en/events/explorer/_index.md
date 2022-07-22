@@ -105,6 +105,18 @@ To create a facet, use the “Add a facet” button in the left side panel.
 
 Once you add the facet, the value of this attribute is stored for all new views, and you can use it in the search bar and facet side-panels. You can also use it to group by in event monitors and graph widgets.
 
+### Reserved attributes
+
+This list describes automatically ingested reserved attributes with events.
+
+| Attribute | Description                                                                                                                                                                                                                                |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `host`    | The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your events. The Agent sets this value automatically.                          |
+| `source`  | This corresponds to the integration name, or the technology from which the event originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, and more. |
+| `status`  | This corresponds to the level or severity of an event.      |
+| `service` | The name of the application or service generating the events. |
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the event entry. |   
+
 ## Notifications
 
 Datadog supports `@notifications` in the messages of events when posted by the API. For example:
