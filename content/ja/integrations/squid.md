@@ -14,7 +14,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/squid/README.md
 display_name: Squid
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: squid.
 metric_to_check: squid.cachemgr.cpu_time
 name: squid
-public_title: Datadog-Squid インテグレーション
+public_title: Squid インテグレーション
 short_description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
 support: コア
 supported_os:
