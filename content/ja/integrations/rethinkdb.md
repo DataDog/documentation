@@ -15,7 +15,6 @@ categories:
 - data store
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
 display_name: RethinkDB
@@ -34,7 +33,7 @@ metric_to_check: rethinkdb.config.servers
 name: rethinkdb
 process_signatures:
 - rethinkdb
-public_title: Datadog-RethinkDB インテグレーション
+public_title: RethinkDB インテグレーション
 short_description: ステータスやパフォーマンスなどのメトリクスを RethinkDB クラスターから収集します。
 support: コア
 supported_os:
