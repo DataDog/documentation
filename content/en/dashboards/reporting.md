@@ -47,7 +47,8 @@ In the configuration modal that opens, set a schedule for the report to determin
 
 ### Add recipients
 
-Enterprise and Pro accounts can send reports to recipients outside of their organizations. Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the **X** that appears next to it. 
+Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the **X** that appears next to it.   
+**Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations. 
 
 {{< img src="dashboards/reporting/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:100%;" >}}
 
