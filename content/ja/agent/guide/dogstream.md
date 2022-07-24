@@ -1,10 +1,11 @@
 ---
-title: Dogstream
+aliases:
+- /ja/agent/faq/dogstream
 kind: ガイド
 private: true
-aliases:
-  - /ja/agent/faq/dogstream
+title: Dogstream
 ---
+
 <div class="alert alert-danger">
 これは、Agent 5 の非推奨の機能です。新機能のリリースは中止されました。
 <br>
@@ -154,7 +155,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
-次のようにログパーサーを設定して、Datadog の[イベントストリーム][4]内に、このログデータから取得したイベントを作成できます。
+次のようにログパーサーを設定して、Datadog の[イベントエクスプローラー][4]内に、このログデータから取得したイベントを作成できます。
 
 ```python
 

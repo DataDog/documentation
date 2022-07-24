@@ -192,7 +192,7 @@ logs:
 
   - type: file
     path: "/path/to/your/php/application-json.log"
-    service: php
+    service: "<SERVICE_NAME>"
     source: php
     sourcecategory: sourcecode
 ```
@@ -541,7 +541,7 @@ class AppServiceProvider extends ServiceProvider
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/logs/
-[2]: /tracing/connect_logs_and_traces/php/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/php/
 [3]: /logs/log_collection/php/#symfony-v2-v3
 [4]: /logs/log_collection/php/#ppi
 [5]: /logs/log_collection/php/#laravel

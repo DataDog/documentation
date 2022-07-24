@@ -1,12 +1,13 @@
 ---
-title: Service Check
-kind: documentation
 aliases:
-  - /ja/developers/faq/how-can-i-submit-a-custom-status-check
-  - /ja/developers/service_checks/visualize-your-service-check-in-the-datadog-ui
-  - /ja/guides/services_checks/
-  - /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui
+- /ja/developers/faq/how-can-i-submit-a-custom-status-check
+- /ja/developers/service_checks/visualize-your-service-check-in-the-datadog-ui
+- /ja/guides/services_checks/
+- /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui
+kind: documentation
+title: Service Check
 ---
+
 ## 概要
 
 サービスチェックを使用すると、サービスのステータスを特徴付けて、Datadog 内でサービスを監視できます。サービスチェックは、特定のサービスのアップまたはダウンステータスを監視します。指定された回数の連続したチェックでモニタリング Agent がそのサービスに接続できなかった場合は常に警告が表示されます。たとえば、Redis ホスト上のモニタリング Agent が Redis への接続とメトリクスの収集に 3 回連続して失敗したことを報告した場合に、アラートを受け取ることができます。
@@ -33,11 +34,11 @@ aliases:
 
 - [チェック内容のサマリー][1]
 - [スクリーンボード][2]
-- [カスタムチェックモニター][3]
+- [サービスチェックモニター][3]
 
 ### チェック内容のサマリー
 
-_Monitors_ タブをクリックし、_Check Summary_ をクリックして、[チェック内容のサマリー][1]ページを表示します。
+**Monitors** > **Check Summary** をクリックし、[チェック内容のサマリー][1]ページを表示します。
 
 {{< img src="developers/service_checks/check_summary.png" alt="チェック内容のサマリー"  >}}
 
@@ -45,11 +46,11 @@ _Monitors_ タブをクリックし、_Check Summary_ をクリックして、[�
 
 ### スクリーンボード
 
-スクリーンボードの_チェックステータス_ウィジェットを使用して、サービスチェックを視覚化できます。
+スクリーンボードの**チェックステータス**ウィジェットを使用して、サービスチェックを視覚化できます。
 
 {{< img src="developers/service_checks/check_status_widget.png" alt="チェックステータスウィジェット"  >}}
 
-_チェックステータス_ウィジェットアイコンをクリックすると、次のポップアップが表示されます。
+**チェックステータス**ウィジェットアイコンをクリックすると、次のポップアップが表示されます。
 
 {{< img src="developers/service_checks/check_widget_config.png" alt="チェックステータス構成"  >}}
 
@@ -60,33 +61,25 @@ _チェックステータス_ウィジェットアイコンをクリックする
 - **Scoping**: 1 つのチェックを選択するか、1 つのタグ値またはタグキーに基づいて報告されるチェックステータスのクラスターを選択します。
 - **Widget Title**: ウィジェットのタイトルを設定します。
 
-## カスタムチェックモニター
+## サービスチェックモニター
 
-メトリクスのように経時的にカスタムチェックをグラフ化できなくても、監視することはできます。
-_Monitors_ タブ > _new monitor_ に移動し、**Custom Check** セクションを選択します。
+サービスチェックは、メトリクスのように時間をかけてグラフ化できなくても、モニターすることは可能です。
+**Monitors** > **New Monitor** で、**Service Check** を選択します。
 
-{{< img src="developers/service_checks/check_monitor.png" alt="チェックモニター"  >}}
-
-カスタムチェックモニターを構成します。
-
-{{< img src="developers/service_checks/check_monitor_config.png" alt="チェックモニター構成"  >}}
+{{< img src="developers/service_checks/service_check_monitor.png" alt="チェックモニター"  >}}
 
 このフォームで、以下の設定を行うことができます。
 
-- **Pick a custom check**: 監視するチェックステータス名を選択します。
+- **Pick a service check**: 監視するチェックステータス名を選択します。
 - **Pick monitor scope**: モニターのコンテキストを選択します (タグの選択/除外)。
 - **Set alert conditions**: シンプルチェックアラートまたはクラスターアラートを選択します。
-- **Say what's happening**: 送信する通知を編集します (詳細は [Datadog 通知][4]を参照)。
 - **Notify your team**: このモニターを誰に通知するかを選択します。
+- **Say what's happening**: 送信する通知を編集します (詳細は [Datadog 通知][4]を参照)。
 
-すぐに使用できる Datadog インテグレーションのサービスチェックモニターは、左側の _Monitors_ タブ > _Integration_ > _Integration status_ タブで設定できます。以下は、HAProxy インテグレーションの例です。
-
-{{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Haproxy サービスチェック" video="true"  >}}
-
-インテグレーションの書き方について、詳しくは [Agent ベースのインテグレーション入門][5]をご参照ください。
+サービスチェックの作成については、[サービスチェックモニター][5]を参照してください。
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors#create/custom
 [4]: /ja/monitors/notify/
-[5]: /ja/developers/integrations/
+[5]: /ja/monitors/create/types/custom_check/

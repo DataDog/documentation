@@ -23,7 +23,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kafka/README.md
 display_name: Kafka
@@ -32,7 +31,7 @@ git_integration_title: kafka
 guid: f201c0b7-4b31-4528-9955-ae756a4580b8
 integration_id: kafka
 integration_title: Kafka
-integration_version: 2.12.1
+integration_version: 2.13.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -42,7 +41,7 @@ metric_to_check: kafka.net.bytes_out.rate
 name: kafka
 process_signatures:
 - java kafka.kafka
-public_title: Datadog-Kafka インテグレーション
+public_title: Kafka インテグレーション
 short_description: プロデューサーとコンシューマー、レプリケーション、最大ラグなどのメトリクスを収集
 support: コア
 supported_os:
@@ -75,7 +74,7 @@ Kafka コンシューマーメトリクスを収集する方法については�
 
 Agent の Kafka チェックは [Datadog Agent][5] パッケージに含まれています。Kafka ノードに追加でインストールする必要はありません。
 
-このチェックは、メトリクスを JMX を使って収集するため、Agent が [jmxfetch][6] をフォークできるように、各 kafka ノード上に JVM が必要です。Kafka が使用している JVM を使用できます。
+チェックは、[JMXFetch][6] を使用して JMX からメトリクスを収集します。Agent が JMXFetch を実行できるように、各 kafka ノードで JVM が必要です。Kafka が使用しているのと同じ JVM を使用することができます。
 
 **注**: Kafka チェックは Managed Streaming for Apache Kafka (Amazon MSK) と共に使用することはできません。代わりに [Amazon MSK インテグレーション][6]を使用してください。
 

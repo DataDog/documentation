@@ -1,11 +1,10 @@
 ---
 aliases:
-  - /ja/integrations/awscodebuild/
+- /ja/integrations/awscodebuild/
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: 行われているデプロイを表示し、その所要時間を追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_codebuild/
@@ -23,6 +22,7 @@ public_title: Datadog-AWS CodeBuild インテグレーション
 short_description: 行われているデプロイを表示し、その所要時間を追跡
 version: '1.0'
 ---
+
 ## 概要
 
 AWS CodeBuild は、ソースコードのコンパイル、テストの実行、デプロイ可能なソフトウェアパッケージの生成を行うビルドサービスです。

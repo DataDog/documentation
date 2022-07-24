@@ -20,7 +20,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/etcd/README.md
 display_name: etcd
@@ -41,7 +40,7 @@ metric_to_check:
 name: etcd
 process_signatures:
 - etcd
-public_title: Datadog-etcd インテグレーション
+public_title: etcd インテグレーション
 short_description: 書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。
 support: コア
 supported_os:

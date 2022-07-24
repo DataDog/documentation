@@ -1,6 +1,8 @@
 ---
 title: Working with Data
 kind: Documentation
+dependencies:
+  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/working_with_data.md"]
 further_reading:
   - link: https://vector.dev/docs/reference/configuration/transforms/aws_ec2_metadata/
     tag: Documentation
@@ -198,6 +200,8 @@ Sampling, reducing, filtering, and aggregating are common transforms to reduce t
 - [Aggregate multiple metric events][20] into a single metric event based on a defined interval window.
 - [Convert metrics to logs][21].
 
+See [Control Log Volume and Size][22] for examples on how to use these transforms.
+
 ## Route data
 
 Another commonly used transform is `route`, which allows you to split a stream of events into multiple substreams based on supplied conditions. This is useful when you need to send observability data to different destinations or operate differently on streams of data based on their use case. 
@@ -325,7 +329,7 @@ compression = "gzip"
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [Route Transform documentation][22] for more information.
+See the [Route Transform documentation][23] for more information.
 
 ## Throttle data
 
@@ -405,4 +409,5 @@ The `threshold` field defines the number of events allowed for a given bucket. `
 [19]: https://vector.dev/docs/reference/configuration/transforms/filter/
 [20]: https://vector.dev/docs/reference/configuration/transforms/aggregate/
 [21]: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/
-[22]: https://vector.dev/docs/reference/configuration/transforms/route/
+[22]: /integrations/observability_pipelines/guide/control_log_volume_and_size/
+[23]: https://vector.dev/docs/reference/configuration/transforms/route/

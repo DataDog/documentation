@@ -200,7 +200,7 @@
       globs:
       - 'docs/GettingStarted.md'
       options:
-        dest_path: '/tracing/setup_overview/setup/'
+        dest_path: '/tracing/trace_collection/dd_libraries/'
         file_name: 'ruby.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
@@ -215,6 +215,7 @@
           - /tracing/setup/ruby/
           - /tracing/setup_overview/ruby/
           - /agent/apm/ruby/
+          - /tracing/setup_overview/setup/ruby
 
   - repo_name: datadog-serverless-functions
     contents:
@@ -552,17 +553,20 @@
       globs:
       - 'docs/trace_collection.md'
       options:
-        dest_path: '/tracing/setup_overview/setup/'
+        dest_path: '/tracing/trace_collection/dd_libraries/'
         file_name: 'android.md'
         front_matters:
           title: Android Trace Collection
           kind: documentation
           beta: true
+          aliases:
+            - /tracing/setup_overview/setup/android
+            - /tracing/setup/android
           description: "Collect traces from your Android applications."
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-android Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
@@ -616,17 +620,20 @@
       globs:
       - 'docs/trace_collection.md'
       options:
-        dest_path: '/tracing/setup_overview/setup/'
+        dest_path: '/tracing/trace_collection/dd_libraries/'
         file_name: 'ios.md'
         front_matters:
           title: iOS Trace Collection
           kind: documentation
           beta: true
+          aliases:
+            - /tracing/setup_overview/setup/ios/
+            - /tracing/setup/ios/
           description: "Collect traces from your iOS applications."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
-              tag: "Github"
+              tag: "GitHub"
               text: "dd-sdk-ios Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
@@ -662,16 +669,6 @@
         path_to_remove: 'docs/rum_collection/'
         front_matters:
           dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
-
-    - action: pull-and-push-folder
-      branch: master
-      globs:
-        - docs/error_tracking/*
-      options:
-        dest_dir: '/real_user_monitoring/error_tracking/'
-        path_to_remove: 'docs/error_tracking/'
-        front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:

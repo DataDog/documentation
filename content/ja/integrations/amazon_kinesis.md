@@ -1,21 +1,21 @@
 ---
 aliases:
-  - /ja/integrations/awskinesis/
+- /ja/integrations/awskinesis/
 categories:
-  - cloud
-  - processing
-  - messaging
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- processing
+- messaging
+- aws
+- log collection
 dependencies: []
 description: Amazon Kinesis のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_kinesis/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis/
 draft: false
 git_integration_title: amazon_kinesis
 has_logo: true
 integration_id: amazon-kinesis
 integration_title: Amazon Kinesis
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -24,6 +24,7 @@ public_title: Datadog-Amazon Kinesis インテグレーション
 short_description: Amazon Kinesis のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Kinesis は、膨大な分散型データストリームをリアルタイムに処理するクラウドベースのフルマネージド型サービスです。
@@ -45,7 +46,7 @@ Amazon Kinesis は、膨大な分散型データストリームをリアルタ�
     - `kinesis:DescribeStream`: Kinesis ストリームのタグと新しいメトリクスを追加します。
     - `kinesis:ListTagsForStream`: カスタムタグを追加します。
 
-    Kinesis ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
+    詳細については、AWS ウェブサイト上の [Kinesis ポリシー][4]を参照してください。
 
 3. [Datadog - AWS Kinesis インテグレーション][5]をインストールします。
 
@@ -74,7 +75,7 @@ AWS Firehose コンソールで Kinesis Firehose Delivery Stream を設定する
 {{< get-metrics-from-git "amazon_kinesis" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -91,7 +92,7 @@ AWS AWS Kinesis インテグレーションには、サービスのチェック�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html
+[4]: https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_kinesis
 [6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=cloudformationtemplate

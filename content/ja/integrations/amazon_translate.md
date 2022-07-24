@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Translate のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_translate/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Translate インテグレーション
 short_description: Amazon Translate のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Translate は、英語とサポートされているさまざまな言語の間でテキストを相互に翻訳するためのニューラル機械翻訳サービスです。

@@ -18,7 +18,7 @@ aliases:
 
 ## Submission
 
-After [installing DogStatsD][1], you can emit events to your [Datadog event stream][2] with the following function:
+After [installing DogStatsD][1], you can emit events to your [Datadog event explorer][2] with the following function:
 
 ```text
 event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <date_happened>, <priority>, <tags>, <hostname>)

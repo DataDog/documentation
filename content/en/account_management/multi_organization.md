@@ -135,7 +135,7 @@ Functionalities include:
 * Accessing monthly usage in both the UI and as a .tsv download (tab separated values)
 * Accessing daily usage in a .tsv file for most usage types.
 
-{{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Usage Summary Table" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-v2-Total-Usage.png" alt="Applied tags in Datadog" style="width:100%;" >}}
 
 Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level do not rollup and cannot be viewed in the parent-organization.
 

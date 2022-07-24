@@ -19,7 +19,6 @@ describe(`createResources`, () => {
 });
 
 describe(`getSchema`, () => {
-
   it('should return the schema object with non application/json formatted first key', () => {
     const expected = {
         "description": "This is a test",
@@ -80,7 +79,6 @@ describe(`getSchema`, () => {
 });
 
 describe(`getTagSlug`, () => {
-
   it('should return lowercase', () => {
       const expected = "integration";
       const actual = bp.getTagSlug("Integration");
@@ -107,7 +105,7 @@ describe(`getTagSlug`, () => {
 
 });
 
-describe(`isTagMatch `, () => {
+describe(`isTagMatch`, () => {
 
   let pathObj;
 
@@ -241,7 +239,6 @@ rule_name_2 bar
 });
 
 describe(`getJsonWrapChars `, () => {
-
   it('should return array chars when data.items', () => {
     const mockInput = {
       "type": "array",
@@ -780,8 +777,9 @@ describe(`filterExampleJson`, () => {
       },
       "type": "object"
     };
+
     const actual = bp.filterExampleJson("request", mockSchema);
-    const expected = {"service_hooks": [{"account": "Main_Account", "url": "https://hooks.slack.com/services/1/1/1"},{"account": "doghouse", "url": "https://hooks.slack.com/services/2/2/2"}]};
+    const expected = {"service_hooks": [{"account": "doghouse", "url": "https://hooks.slack.com/services/2/2/2"}]}
     expect(actual).toEqual(expected);
   });
 

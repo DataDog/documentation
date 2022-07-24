@@ -13,7 +13,7 @@ kind: ドキュメント
 title: Datadog の Lambda 関数で AWS サービスのログを送信する
 ---
 
-AWS サービスログは、Datadog Forwarder Lambda 関数を使用して収集できます。S3、CloudWatch ロググループ、および CloudWatch ログイベントでトリガーするこの Lambda は、ログを Datadog に転送します。
+AWS サービスログは、Datadog Forwarder Lambda 関数を使用して収集できます。S3 Buckets、CloudWatch ロググループ、および EventBridge イベントでトリガーするこの Lambda は、ログを Datadog に転送します。
 
 AWS サービスからログの収集を開始するには
 

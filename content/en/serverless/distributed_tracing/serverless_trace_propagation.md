@@ -176,5 +176,5 @@ ddlambda.WrapFunction(handler, cfg)
 [2]: /serverless/distributed_tracing
 [3]: /serverless/datadog_lambda_library
 [4]: /serverless/distributed_tracing#runtime-recommendations
-[5]: /tracing/setup_overview/custom_instrumentation/
+[5]: /tracing/trace_collection/custom_instrumentation/
 [6]: /serverless/guide/handler_wrapper/

@@ -665,6 +665,20 @@
       "description": "Update a role returns \"OK\" response"
     }
   ],
+  "EditSecurityMonitoringSignalIncidents": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Change the related incidents of a security signal returns \"OK\" response"
+    }
+  ],
+  "EditSecurityMonitoringSignalState": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Change the triage state of a security signal returns \"OK\" response"
+    }
+  ],
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -715,6 +729,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Get all security filters returns \"OK\" response"
+    }
+  ],
+  "EditSecurityMonitoringSignalAssignee": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
   "UpdateSecurityFilter": [
@@ -781,6 +802,13 @@
       "group": "usage_metering",
       "suffix": "_1171921972",
       "description": "Get estimated cost across multi-org account with month returns \"OK\" response"
+    }
+  ],
+  "GetHourlyUsage": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get hourly usage by product family returns \"OK\" response"
     }
   ],
   "GetUsageApplicationSecurityMonitoring": [

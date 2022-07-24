@@ -12,7 +12,6 @@ categories:
 - オーケストレーション
 - コンテナ
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md
 display_name: Kubernetes Controller Manager
@@ -29,7 +28,7 @@ manifest_version: 1.0.0
 metric_prefix: kube_controller_manager.
 metric_to_check: kube_controller_manager.threads
 name: kube_controller_manager
-public_title: Datadog-Kubernetes Controller Manager インテグレーション
+public_title: Kubernetes Controller Manager インテグレーション
 short_description: Kubernetes Controller Manager の監視
 support: コア
 supported_os:

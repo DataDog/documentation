@@ -1,6 +1,8 @@
 ---
 title: Set up Observability Pipelines
 kind: Documentation
+dependencies:
+  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/setup.md"]
 further_reading:
   - link: /integrations/observability_pipelines/vector_configurations/
     tag: Documentation

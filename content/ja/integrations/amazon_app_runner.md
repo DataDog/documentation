@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - AWS
-  - ログの収集
-ddtype: crawler
+- cloud
+- AWS
+- ログの収集
 dependencies: []
 description: 主要な AWS App Runner メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
@@ -21,6 +20,7 @@ public_title: Datadog-AWS App Runner Integration
 short_description: 主要な AWS App Runner メトリクスを追跡します。
 version: '1.0'
 ---
+
 ## 概要
 
 AWS App Runner を使用すると、ソースコードまたはコンテナイメージから AWS にアプリケーションをデプロイできます。

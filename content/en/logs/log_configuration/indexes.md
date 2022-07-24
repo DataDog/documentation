@@ -57,7 +57,8 @@ To delete an index from your organization, use the "Delete icon" in the index ac
 You cannot recreate an index with the same name as the deleted one. 
 </div>
 
-**Note:** The deleted index will no longer accept new incoming logs. The logs in the deleted index are no longer available for querying. After the retention period is reached, the index will no longer show up in the Index page.
+**Note:** The deleted index will no longer accept new incoming logs. The logs in the deleted index are no longer available for querying. After all logs have aged out according to the applicable retention period, the index will no longer show up in the Index page.
+
 
 
 ## Indexes filters
@@ -130,26 +131,26 @@ In the following example:
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
-To add retentions that are not in your current contract contact [Datadog support][17].
+To add retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`.
 
 {{< img src="logs/indexes/log_retention.png" alt="index details"  style="width:70%;">}}
 
 ## Set daily quota
 
 You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (such as after exclusion filters are applied).
-After the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
+After the daily quota is reached, logs are no longer indexed but are still available in the [livetail][17], [sent to your archives][10], and used to [generate metrics from logs][9].
 
 Update or remove this quota at any time when editing the Index:
 
 {{< img src="logs/indexes/index_quota.png" alt="index details"  style="width:70%;">}}
 
-**Note**: Indexes daily quotas reset automatically at [2:00pm UTC][19].
+**Note**: Indexes daily quotas reset automatically at [2:00pm UTC][18].
 
 An event is generated when the daily quota is reached:
 
 {{< img src="logs/indexes/index_quota_event.png" alt="index quota notification"  style="width:70%;">}}
 
-Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
+Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
 
 ## Further Reading
 
@@ -171,9 +172,8 @@ Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 [12]: /api/v1/logs-indexes/#update-an-index
 [13]: /logs/log_configuration/processors/#user-agent-parser
 [14]: /logs/log_configuration/processors/#geoip-parser
-[15]: /tracing/connect_logs_and_traces/
+[15]: /tracing/other_telemetry/connect_logs_and_traces/
 [16]: /logs/log_configuration/processors/#trace-remapper
-[17]: /help/
-[18]: /logs/live_tail/#overview
-[19]: https://www.timeanddate.com/worldclock/converter.html
-[20]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
+[17]: /logs/live_tail/#overview
+[18]: https://www.timeanddate.com/worldclock/converter.html
+[19]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
