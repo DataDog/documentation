@@ -294,115 +294,120 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. When the service process starts, it has access to those variables.
 
-{{< tabs >}}
-{{% tab "Traces" %}}
+   {{< tabs >}}
+   {{% tab "Traces" %}}
 
-When configuring your traces for unified service tagging:
+   When configuring your traces for unified service tagging:
 
-1. Configure the [APM Tracer][1] with `DD_ENV` to keep the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
+   1. Configure the [APM Tracer][1] with `DD_ENV` to keep the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
 
-2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
+   2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
 
-    As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
+      As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
 
-    **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
+      **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
 
 [1]: /tracing/setup/
 [2]: /developers/dogstatsd/
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Logs" %}}
+   {{% tab "Logs" %}}
 
-If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
+   If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
-**Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
+   **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "RUM & Session Replay" %}}
+   {{% tab "RUM & Session Replay" %}}
 
-If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
+   If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
 
-When you [create a RUM application][2], confirm the `env` and `service` names.
+   When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
 [1]: /real_user_monitoring/connect_rum_and_traces/
 [2]: /real_user_monitoring/browser/#setup
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Custom Metrics" %}}
+   {{% tab "Synthetics" %}}
 
-Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for `env`, the metrics are tagged with both environments. There is no order in which one tag overrides another of the same name.
+   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2]. 
 
-If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the DogStatsD client automatically adds the corresponding tags to your custom metrics.
+   You can use `*` for wildcards, for example: `https://*.datadoghq.com`.
 
-**Note**: The Datadog DogStatsD clients for .NET and PHP do not yet support this functionality.
+[1]: /synthetics/apm/
+[2]: https://app.datadoghq.com/synthetics/settings/integrations
+   {{% /tab %}}
+
+   {{% tab "Custom Metrics" %}}
+
+   Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for `env`, the metrics are tagged with both environments. There is no order in which one tag overrides another of the same name.
+
+   If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the DogStatsD client automatically adds the corresponding tags to your custom metrics.
+
+   **Note**: The Datadog DogStatsD clients for .NET and PHP do not yet support this functionality.
 
 [1]: /metrics/
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "System Metrics" %}}
+   {{% tab "System Metrics" %}}
 
-`env` and `service` can also be added to your infrastructure metrics.
+   You can add `env` and `service` tags to your infrastructure metrics.
 
-The tagging configuration for service metrics lives closer to the Agent in non-containerized contexts.
-Given that this configuration does not change for each invocation of a service's process, adding `version`
-to the configuration is not recommended.
+   The tagging configuration for service metrics lives closer to the Agent in non-containerized contexts.
+   Given that this configuration does not change for each invocation of a service's process, adding `version`
+   to the configuration is not recommended.
 
-##### Single service per host
+   #### Single service per host
 
-Set the following configuration in the Agent's [main configuration file][1]:
+   Set the following configuration in the Agent's [main configuration file][1]:
 
-```yaml
-env: <ENV>
-tags:
-    - service:<SERVICE>
-```
+   ```yaml
+   env: <ENV>
+   tags:
+       - service:<SERVICE>
+   ```
 
-This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.
+   This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.
 
-##### Multiple services per host
+   #### Multiple services per host
 
-Set the following configuration in the Agent's [main configuration file][1]:
+   Set the following configuration in the Agent's [main configuration file][1]:
 
-```yaml
-env: <ENV>
-```
+   ```yaml
+   env: <ENV>
+   ```
 
-To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
+   To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
 
-```yaml
-init_config:
-instances:
-    - name: web-app
-      search_string: ["/bin/web-app"]
-      exact_match: false
-      service: web-app
-    - name: nginx
-      search_string: ["nginx"]
-      exact_match: false
-      service: nginx-web-app
-```
+   ```yaml
+   init_config:
+   instances:
+       - name: web-app
+         search_string: ["/bin/web-app"]
+         exact_match: false
+         service: web-app
+       - name: nginx
+         search_string: ["nginx"]
+         exact_match: false
+         service: nginx-web-app
+   ```
 
-**Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
+   **Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
 
 [1]: /agent/guide/agent-configuration-files
 [2]: /integrations/process
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
 ### Serverless environment
 
-#### AWS Lambda functions
-
-See [how to connect your Lambda telemetry using tags][13].
+For more information about AWS Lambda function, see [how to connect your Lambda telemetry using tags][13].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
-
 
 [1]: /getting_started/tagging/
 [2]: /agent/docker/integrations/?tab=docker
