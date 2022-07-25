@@ -6223,6 +6223,18 @@ api:
         - GetHourlyUsage
       unstable: []
       order: 40
+  - name: Get hourly usage for Custom Events
+    url: '#get-hourly-usage-for-custom-events'
+    identifier: usage-metering-get-hourly-usage-for-custom-events
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCustomEventsCount
+      unstable: []
+      order: 38
   - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
     identifier: usage-metering-get-cost-across-multi-org-account

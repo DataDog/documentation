@@ -1788,12 +1788,14 @@ components:
       - app_sec_host_count
       - observability_pipelines_bytes_processed
       - lambda_traced_invocations_count
+      - custom_event_count
       example: observability_pipelines_bytes_processed
       type: string
       x-enum-varnames:
       - APP_SEC_HOST_COUNT
       - OBSERVABILITY_PIPELINES_BYTES_PROCESSSED
       - LAMBDA_TRACED_INVOCATIONS_COUNT
+      - CUSTOM_EVENT_COUNT
     IdPMetadataFormData:
       description: The form data submitted to upload IdP metadata
       properties:
@@ -7512,6 +7514,15 @@ components:
           type: array
         usage_type:
           $ref: '#/components/schemas/HourlyUsageType'
+      type: object
+    UsageCustomEventsResponse:
+      description: Custom Events usage response.
+      properties:
+        data:
+          description: Response containing Custom Events usage.
+          items:
+            $ref: '#/components/schemas/UsageDataObject'
+          type: array
       type: object
     UsageDataObject:
       description: Usage data.
@@ -14052,6 +14063,65 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 39
+      x-undo:
+        type: safe
+  /api/v2/usage/custom_events:
+    get:
+      description: Get hourly usage for Custom Events.
+      operationId: GetCustomEventsCount
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCustomEventsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get hourly usage for Custom Events
+      tags:
+      - Usage Metering
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v2/usage/hourly_usage:
