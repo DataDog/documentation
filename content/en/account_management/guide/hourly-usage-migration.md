@@ -11,18 +11,18 @@ further_reading:
 Users of the v1 APIs should recognize familiar concepts in the v2 hourly usage API,
 albeit represented in slightly different format.
 
-The most notable differences between the old APIs and the new APIs are that the new API:
-* consolidates all products to one endpoint
-* follows the JSON:API standard
-* is paginated
-* can return data for multiple organizations per request
+The most notable differences between the v1 API and the v2 API are that the v2 API:
+* Consolidates all products to one endpoint
+* Follows the JSON:API standard
+* Is paginated
+* Can return data for multiple organizations per request
 
 Each difference is discussed in further detail in the following sections.
 
 ## Consolidated Product Families
-The new API introduces the concepts of product family and usage type. Product families are
+The v2 API introduces the concepts of product family and usage type. Product families are
 groupings of one or more usage types. Usage types are usage measurements for a given organization
-for a given time period. The initial set of product families mostly aligns with the existing APIs,
+and time period. The initial set of product families mostly aligns with the V1 APIs,
 with the full mapping outlined below. There is also a special `all` product family that retrieves
 the usage for all other product families.
 
@@ -240,10 +240,10 @@ Those families and usage types map to the exising hourly usage endpoints as foll
 ## JSON:API Compliant Format
 
 Response bodies and parameter names conform to the [JSON:API specification](https://jsonapi.org/format/). All data
-available in the existing APIs is still available. See the below example of the mapping from the existing hosts
-API to the new hourly usage API
+available in the v1 APIs is still available. See the below example of the mapping from the v1 hosts
+API to the v2 hourly usage API
 
-### Existing API: [Get hourly usage for hosts and containers](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers)
+### V1 API: [Get hourly usage for hosts and containers][2]
 
 #### Request
 
@@ -251,8 +251,8 @@ API to the new hourly usage API
 
 ##### Notes
 
-* Product is an element of the path “hosts”
-* Time bounds are controlled by the parameters “start_hr” and “end_hr”
+* Product is an element of the path `hosts`.
+* Time bounds are controlled by the parameters `start_hr` and `end_hr`.
 
 #### Response
 
@@ -284,10 +284,10 @@ API to the new hourly usage API
 ##### Notes
 
 * Usage for each hour is represented as an object in the usage array.
-* Usage types are keys in the object and measured usage for those usage types are the corresponding values.
-* Hour, org name and public id are also fields in the object.
+* Usage types are keys in the object, and measured usage for those usage types are the corresponding values.
+* Hour, organization name, and public ID are also fields in the object.
 
-### New API: Get hourly usage by product family
+### V2 API: Get hourly usage by product family
 
 #### Request
 
@@ -295,8 +295,8 @@ API to the new hourly usage API
 
 ##### Notes
 
-* Product is passed as a query parameter `filter[product_families]=infra_hosts`
-* Time bounds are controlled by the parameters `filter[timestamp][start]` and `filter[timestamp][end]`
+* Product is passed as a query parameter `filter[product_families]=infra_hosts`.
+* Time bounds are controlled by the parameters `filter[timestamp][start]` and `filter[timestamp][end]`.
 
 #### Response
 
@@ -374,23 +374,23 @@ API to the new hourly usage API
 
 #### Notes
 
-* Objects in the data array represent usage for each hour for each product for each organization.
-    * The existing APIs did not support multiple products or multiple orgs per request.
+* Objects in the data array represent hourly usage, for each product and each organization.
+    * V1 APIs did not support multiple products or multiple organizations per request.
 * Usage measurements are represented in the nested `measurements` array.
 * Usage measurement objects have the fields `usage_type` and `value`.
-* `hour`, `org_name` and `public_id` are also fields in the `attributes` object.
+* `hour`, `org_name`, and `public_id` are also fields in the `attributes` object.
 
 ## Pagination
 
-The new hourly usage API is paginated. Responses are limited to 500 pages, where a page contains usage data for one
-product family for one hour for one organization. Pagination allows the API to support other features such as multiple
+The v2 hourly usage API is paginated. Responses are limited to 500 pages, with a page containing usage data for one
+product family, for one hour, for one organization. Pagination allows the API to support other features such as multiple
 products per request, multiple organizations per request, and unlimited time ranges.
 
-If a result has more pages, then the record id of the next page will be returned in the field
+If a result has more pages, the record ID of the next page is returned in the field
 `meta.pagination.next_record_id`. Clients should then pass that id in the parameter `pagination[next_record_id]`. There
 are no more pages to retrieve when the `meta.pagination.next_record_id` field is not set.
 
-### Pseudo code example
+### Pseudo-code example
 ```
 response := GetHourlyUsage(start_time, end_time, product_families)
 cursor := response.metadata.pagination.next_record_id
@@ -401,9 +401,9 @@ cursor := response.metadata.pagination.next_record_id
 END
 ```
 
-## Multi-org responses
+## Multi-organization responses
 
-The new API supports retrieving usage data for all of your child organizations in one request. Use the
+The v2 API supports retrieving usage data for all of your child organizations in one request. Use the
 parameter `filter[include_descendants]` to request data for child organizations.
 
 ## Product Taxonomy Tree
@@ -414,6 +414,6 @@ parameter `filter[include_descendants]` to request data for child organizations.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage
+[1]: https://jsonapi.org/format/
 [2]: /account_management/plan_and_usage/
 
