@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /tracing/faq/service_catalog/
 further_reading:
-- link: "/tracing/faq/service_definition_api/"
+- link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Service Definition API"
 ---
@@ -151,4 +151,4 @@ You can manage your service ownership information with the Service Catalog even 
 [4]: https://support.pagerduty.com/docs/api-access-keys
 [5]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [6]: https://www.datadoghq.com/blog/unified-service-tagging/
-[7]: /tracing/faq/service_definition_api/
+[7]: /tracing/service_catalog/service_definition_api/

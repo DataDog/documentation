@@ -4,7 +4,7 @@ kind: documentation
 aliases:
 - /tracing/faq/service_definition_api/
 further_reading:
-- link: "/tracing/faq/service_catalog/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Datadog Service Catalog"
 ---
@@ -360,7 +360,7 @@ curl --location --request DELETE 'https://api.datadoghq.com/api/v2/services/defi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/unified-service-tagging/
-[2]: /tracing/faq/service_catalog/
+[2]: /tracing/service_catalog/
 [3]: /account_management/api-app-keys/
 [4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
 [5]: https://app.datadoghq.com/organization-settings/api-keys
