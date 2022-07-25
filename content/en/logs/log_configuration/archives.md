@@ -268,7 +268,7 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[Rehydration][2] supports the following storage classes:
+[Rehydration][2] only supports the following storage classes:
 
 * S3 Standard
 * S3 Intelligent-Tiering
