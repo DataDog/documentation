@@ -192,8 +192,8 @@ Example:
 ...
 ```
 
-In order to migrate to the v2 API, your processes should handle resources with the same tag applied multiple times.
-Tag values in the v2 response array will appear in the same order as they appear in the pipe separated string in the v1
+To migrate to the v2 API, your processes must handle resources with the same tag applied multiple times.
+Tag values in the v2 response array appear in the same order as they appear in the pipe-separated string in the v1
 response, so you can join the array with pipe characters to produce the same tag values as the v1 response.
 
 #### Total usage
