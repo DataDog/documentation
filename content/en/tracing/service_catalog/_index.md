@@ -1,6 +1,6 @@
 ---
 title: Datadog Service Catalog
-kind: faq
+kind: documentation
 aliases:
   - /tracing/faq/service_catalog/
 further_reading:
@@ -9,7 +9,6 @@ further_reading:
   text: "Service Definition API"
 ---
 
-<div class="alert alert-warning">This feature is in private beta and the endpoints are likely to change.</div>
 
 {{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
 

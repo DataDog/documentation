@@ -1,14 +1,13 @@
 ---
 title: Registering Services through the Datadog Service Definition API
-kind: faq
-is_beta: true
+kind: documentation
+aliases:
+- /tracing/faq/service_definition_api/
 further_reading:
 - link: "/tracing/faq/service_catalog/"
   tag: "Documentation"
   text: "Datadog Service Catalog"
 ---
-
-<div class="alert alert-warning">This feature is in private beta and the endpoints are likely to change.</div>
 
 ## Overview
 
