@@ -44,7 +44,7 @@
   {{- $s.SetInMap $path "redirect" (print "integrations/" (($v.Params.name | lower) | default ($v.File.TranslationBaseName | lower)) "/") -}}
   {{- $s.SetInMap $path "blurb" $v.Params.short_description -}}
   {{- $s.SetInMap $path "public_title" $v.Params.public_title -}}
-  {{- $s.SetInMap $path "integration_title" $v.Params.integration_title -}}
+  {{- $s.SetInMap $path "integration_title" ($v.Params.integration_title_short | default $v.Params.integration_title) -}}
   {{- $s.SetInMap $path "is_marketplace" (in $enpage.Params.categories "marketplace") -}}
   {{- $curr_categories := slice -}}
   {{- range $i, $e := $v.Params.categories -}}
