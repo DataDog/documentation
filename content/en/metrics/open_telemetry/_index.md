@@ -55,6 +55,17 @@ There are three available workflows for sending OTel metrics to Datadog. Choose 
 3. Add an OTLP exporter to your [OTel configuration YAML file][4]. Point the exporter to the Datadog Agent endpoint. For example, if your Datadog Agent is listening on port 4317 and you are running the OTel Collector on the same host, you may define the exporter as:
    ```yaml
    receivers:
+     otlp:
+         protocols:
+             grpc:
+               # Set to different port from Datadog Agent OTLP ingest 
+               # Point your instrumented application to port '5317' if using gRPC.
+               endpoint: "0.0.0.0:5317" 
+             http:
+               # Set to different port from Datadog Agent OTLP ingest 
+               # Point your instrumented application to port '5318' if using HTTP.
+               endpoint: "0.0.0.0:5318"
+
      hostmetrics:
        scrapers:
          load:
