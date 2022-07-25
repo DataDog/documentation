@@ -14,7 +14,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md
 display_name: Twemproxy
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: twemproxy.
 metric_to_check: twemproxy.total_connections
 name: twemproxy
-public_title: Datadog-Twemproxy インテグレーション
+public_title: Twemproxy インテグレーション
 short_description: twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け
 support: コア
 supported_os:

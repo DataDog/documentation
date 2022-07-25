@@ -15,7 +15,6 @@ categories:
 - 処理
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
 display_name: MapR
@@ -32,7 +31,7 @@ manifest_version: 1.0.0
 metric_prefix: mapr.
 metric_to_check: mapr.metrics.submitted
 name: mapr
-public_title: Datadog-MapR インテグレーション
+public_title: MapR インテグレーション
 short_description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
 support: コア
 supported_os:

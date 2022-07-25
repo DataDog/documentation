@@ -14,7 +14,6 @@ categories:
 - data store
 - コスト管理
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md
 display_name: Snowflake
@@ -23,7 +22,7 @@ git_integration_title: snowflake
 guid: 4813a514-e9a4-4f28-9b83-b4221b51b18b
 integration_id: snowflake
 integration_title: Snowflake
-integration_version: 4.3.1
+integration_version: 4.4.2
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: snowflake.
 metric_to_check: snowflake.storage.storage_bytes.total
 name: snowflake
-public_title: Datadog-Snowflake インテグレーション
+public_title: Snowflake インテグレーション
 short_description: クレジットの使用状況、ストレージ、クエリ、ユーザー履歴などの主要なメトリクスを監視します。
 support: コア
 supported_os:
@@ -73,7 +72,7 @@ datadog-agent integration install datadog-snowflake==2.0.1
 
 1. Snowflake を監視するための Datadog 固有のロールとユーザーを作成します。Snowflake で、以下を実行して、ACCOUNT_USAGE スキーマにアクセスできるカスタムロールを作成します。
 
-   注: デフォルトでは、このインテグレーションは `SNOWFLAKE` データベースと `ACCOUNT_USAGE` スキーマを監視します。
+   注: デフォルトでは、このインテグレーションは `SNOWFLAKE` データベースと `ACCOUNT_USAGE` スキーマを監視します。`ORGANIZATION_USAGE` スキーマを監視する方法については、"組織データの収集” を参照してください。
    このデータベースはデフォルトで使用でき、表示できるのは `ACCOUNTADMIN` ロールまたは [ACCOUNTADMIN によって付与されたロール][4]のユーザーのみです。
 
 
@@ -158,6 +157,41 @@ datadog-agent integration install datadog-snowflake==2.0.1
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
 3. [Agent を再起動します][6]。
+
+#### 組織データの収集
+
+デフォルトでは、このインテグレーションは `ACCOUNT_USAGE` スキーマを監視しますが、代わりに組織レベルのメトリクスを監視するように設定することができます。
+
+組織メトリクスを収集するには、インテグレーションの構成でスキーマフィールドを `ORGANIZATION_USAGE` に変更し、`min_collection_interval` を 43200 に増やします。ほとんどの組織クエリのレイテンシーが最大 24 時間であるため、これにより Snowflake へのクエリ数を減らすことができます。
+
+注: 組織のメトリクスを監視するには、`user` が `ORGADMIN` ロールである必要があります。
+
+    ```yaml
+       - schema: ORGANIZATION_USAGE
+         min_collection_interval: 43200
+    ```
+
+
+さらに、アカウントと組織の両方のメトリクスを同時に監視することができます。
+
+    ```yaml
+    instances:
+      - account: example-inc
+        username: DATADOG_ORG_ADMIN
+        password: '<PASSWORD>'
+        role: SYSADMIN
+        schema: ORGANIZATION_USAGE
+        database: SNOWFLAKE
+        min_collection_interval: 43200
+
+      - account: example-inc
+        username: DATADOG_ACCOUNT_ADMIN
+        password: '<PASSWORD>'
+        role: DATADOG_ADMIN
+        schema: ACCOUNT_USAGE
+        database: SNOWFLAKE
+        min_collection_interval: 3600
+    ```
 
 #### 複数環境のデータ収集
 

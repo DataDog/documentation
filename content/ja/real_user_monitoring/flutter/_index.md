@@ -32,7 +32,7 @@ RUM は、モバイル Flutter の Android および iOS アプリケーショ�
 
 | iOS SDK | Android SDK | Browser SDK |
 | :-----: | :---------: | :---------: |
-| 1.11.0-beta2 | 1.12.0-alpha2 | ❌ |
+| 1.11.0-rc1 | 1.12.0-alpha2 | v4.11.2 |
 
 [//]: # (End SDK Table)
 
@@ -43,6 +43,19 @@ iOS の Podfile は `use_frameworks!` (Flutter のデフォルトでは true) �
 ### Android
 
 Android では、`minSdkVersion` が >= 19 である必要があり、Kotlin を使用している場合は、バージョン >= 1.5.31 である必要があります。
+
+### Web
+
+`⚠️ Flutter Web の Datadog サポートはまだ初期開発中です`
+
+Web の場合、`index.html` の `head` タグの下に以下を追加します。
+
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
+```
+
+これは、CDN 配信された Datadog Logging および RUM Browser SDK をロードします。Browser SDK の同期 CDN 配信バージョンは、Flutter プラグインでサポートされる唯一のバージョンであることに注意してください。
 
 ## セットアップ
 
@@ -118,6 +131,31 @@ RUM の初期化は、`main.dart` ファイル内の 2 つのメソッドのう�
    });
    ```
 
+### ログを送信する
+
+Datadog を `LoggingConfiguration` で初期化した後、`logs` のデフォルトインスタンスを使用して Datadog にログを送信することができます。
+
+```dart
+DatadogSdk.instance.logs?.debug("A debug message.");
+DatadogSdk.instance.logs?.info("Some relevant information?");
+DatadogSdk.instance.logs?.warn("An important warning...");
+DatadogSdk.instance.logs?.error("An error was met!");
+```
+
+また、`createLogger` メソッドを使用して、追加のロガーを作成することも可能です。
+
+```dart
+final myLogger = DatadogSdk.instance.createLogger(
+  LoggingConfiguration({
+    loggerName: 'Additional logger'
+  })
+);
+
+myLogger.info('Info from my additional logger.');
+```
+
+ロガーに設定されたタグおよび属性は、各ロガーにローカルです。
+
 ### RUM ビューの追跡
 
 Datadog Flutter Plugin は、MaterialApp 上の `DatadogNavigationObserver` を使用して、自動的に名前付きルートを追跡することができます。
@@ -126,7 +164,7 @@ Datadog Flutter Plugin は、MaterialApp 上の `DatadogNavigationObserver` を�
 MaterialApp(
   home: HomeScreen(),
   navigatorObservers: [
-    DatadogNavigationObserver(),
+    DatadogNavigationObserver(DatadogSdk.instance),
   ],
 );
 ```
@@ -146,7 +184,7 @@ final configuration = DdSdkConfiguration(
 )..enableHttpTracking()
 ```
 
-Datadog 分散型トレーシングを有効にするには、コンフィギュレーションオブジェクトの `DdSdkConfiguration.firstPartyHosts` プロパティを分散型トレーシングをサポートしているドメインに設定する必要があります。
+Datadog 分散型トレーシングを有効にするには、構成オブジェクトの `DdSdkConfiguration.firstPartyHosts` プロパティを、分散型トレーシングをサポートするドメインに設定する必要があります。また、`RumConfiguration` で `tracingSamplingRate` を設定することで、Datadog 分散型トレーシングのサンプリングレートを変更することができます。
 
 ## データストレージ
 

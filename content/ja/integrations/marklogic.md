@@ -18,7 +18,6 @@ categories:
 - data store
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
 display_name: MarkLogic
@@ -37,7 +36,7 @@ metric_to_check: marklogic.hosts.total_hosts
 name: marklogic
 process_signatures:
 - MarkLogic
-public_title: Datadog-MarkLogic インテグレーション
+public_title: MarkLogic インテグレーション
 short_description: MarkLogic のデータベース、 フォレスト、ホスト、サーバーに関するメトリクスを追跡します。
 support: コア
 supported_os:

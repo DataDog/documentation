@@ -15,7 +15,6 @@ categories:
 - notification
 - log collection
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
 display_name: Nagios
@@ -34,7 +33,7 @@ metric_to_check: nagios.host.rta
 name: nagios
 process_signatures:
 - nagios
-public_title: Datadog-Nagios インテグレーション
+public_title: Nagios インテグレーション
 short_description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
 support: コア
 supported_os:

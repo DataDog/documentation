@@ -1,39 +1,58 @@
 ---
+app_id: システム
+app_uuid: 43bff15c-c943-4153-a0dc-25bb557ac763
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.processes.cpu.pct
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: プロセス
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/process/README.md
-display_name: プロセス
+display_on_public_website: true
 draft: false
 git_integration_title: プロセス
-guid: 1675eced-b435-464a-8f84-f65e438f838e
 integration_id: システム
 integration_title: プロセス
 integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: system.
-metric_to_check: system.processes.cpu.pct
+manifest_version: 2.0.0
 name: プロセス
-public_title: Datadog-Processes インテグレーション
+oauth: {}
+public_title: プロセス
 short_description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: プロセス
 ---
 
 

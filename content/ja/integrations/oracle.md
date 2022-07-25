@@ -12,7 +12,6 @@ categories:
 - data store
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
 display_name: Oracle Database
@@ -29,7 +28,7 @@ manifest_version: 1.0.0
 metric_prefix: oracle.
 metric_to_check: oracle.session_count
 name: Oracle
-public_title: Datadog-Oracle インテグレーション
+public_title: Oracle インテグレーション
 short_description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
 support: コア
 supported_os:

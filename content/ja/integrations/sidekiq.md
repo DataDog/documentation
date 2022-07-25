@@ -11,17 +11,17 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - ログの収集
+- ログの収集
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md
+- https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md
 display_name: Sidekiq
 draft: false
 git_integration_title: sidekiq
 guid: b4bc604c-73a5-4bd8-8dfe-3f80fc19976b
 integration_id: sidekiq
 integration_title: Sidekiq
+integration_version: 1.3.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -29,14 +29,17 @@ manifest_version: 1.0.0
 metric_prefix: sidekiq.
 metric_to_check: sidekiq.jobs.count
 name: sidekiq
-public_title: Datadog-Sidekiq インテグレーション
+public_title: Sidekiq インテグレーション
 short_description: Sidekiq ジョブ、キュー、バッチに関するメトリクスを追跡します。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このインテグレーションは、[Sidekiq][1]〜[DogStatsD][2] を監視します。[Datadog の DogStatsD Ruby クライアント][3]を介してメトリクスを収集します。
@@ -107,7 +110,7 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
              worker: "$1"
     ```
 
-4. [Agent を再起動します][4]。
+4. [Agent を再起動します][8]。
 
 ## 収集データ
 
@@ -115,7 +118,7 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
 {{< get-metrics-from-git "sidekiq" >}}
 
 
-Sidekiq インテグレーションでは、カスタムメトリクスも使用できます。カスタムメトリクスのアイデアについては、[Sidekiq のドキュメント][9]を参照してください。
+Sidekiq インテグレーションでは、カスタムメトリクスも使用できます。カスタムメトリクスのアイデアについては、[Sidekiq Enterprise Historical Metrics][10] を参照してください。
 
 ### ログの収集
 
@@ -135,9 +138,9 @@ Sidekiq インテグレーションでは、カスタムメトリクスも使用
           service: <SERVICE>
     ```
 
-     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。ログが見つからない場合は、[Sidekiq のドキュメントでログの詳細を確認][10]してください。
+     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。ログが見つからない場合は、[Sidekiq Logging][11] を参照してください。
 
-3. [Agent を再起動します][4]。
+3. [Agent を再起動します][8]。
 
 ### サービスのチェック
 
@@ -149,16 +152,17 @@ Sidekiq には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://sidekiq.org/
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://github.com/DataDog/dogstatsd-ruby
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://github.com/mperham/sidekiq/wiki/Pro-Metrics
 [6]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[8]: https://github.com/DataDog/integrations-core/blob/master/sidekiq/metadata.csv
-[9]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics#custom
-[10]: https://github.com/mperham/sidekiq/wiki/Logging#log-file
-[11]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://github.com/DataDog/integrations-core/blob/master/sidekiq/metadata.csv
+[10]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics#custom
+[11]: https://github.com/mperham/sidekiq/wiki/Logging#log-file
+[12]: https://docs.datadoghq.com/ja/help/
