@@ -500,6 +500,7 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   kubelet:
     tlsVerify: false
+# Add a toleration so that the agent can be scheduled on the control plane nodes.
 agents:
   tolerations:
     - key: node-role.kubernetes.io/master
