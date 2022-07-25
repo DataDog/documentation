@@ -27,38 +27,38 @@ with the full mapping outlined below. There is also a special `all` product fami
 the usage for all other product families.
 
 The families and usage types are as follows:
-* `all`
+* **all**
   * _Contains all other product families_
-* `analyzed_logs`
+* **analyzed_logs**
   * `analyzed_logs`
-* `application_security`
+* **application_security**
   * `app_sec_host_count`
-* `audit_logs`
+* **audit_logs**
   * `lines_indexed`
-* `serverless`
+* **serverless**
   * `func_count`
   * `invocations_sum`
-* `ci_app`
+* **ci_app**
   * `ci_pipeline_indexed_spans`
   * `ci_test_indexed_spans`
   * `ci_visibility_pipeline_committers`
   * `ci_visibility_test_committers`
-* `cspm`
+* **cspm**
   * `aas_host_count`
   * `azure_host_count`
   * `compliance_host_count`
   * `container_count`
   * `host_count`
-* `cws`
+* **cws**
   * `cws_container_count`
   * `cws_host_count`
-* `dbm`
+* **dbm**
   * `dbm_host_count`
   * `dbm_queries_count`
-* `fargate`
+* **fargate**
   * `avg_profiled_fargate_tasks`
   * `tasks_count`
-* `infra_hosts`
+* **infra_hosts**
   * `agent_host_count`
   * `alibaba_host_count`
   * `apm_azure_app_service_host_count`
@@ -72,9 +72,9 @@ The families and usage types are as follows:
   * `infra_azure_app_service`
   * `opentelemetry_host_count`
   * `vsphere_host_count`
-* `incident_management`
+* **incident_management**
   * `monthly_active_users`
-* `indexed_logs`
+* **indexed_logs**
   * `logs_indexed_events_3_day_count`
   * `logs_live_indexed_events_3_day_count`
   * `logs_rehydrated_indexed_events_3_day_count`
@@ -105,15 +105,15 @@ The families and usage types are as follows:
   * `logs_indexed_events_custom_day_count`
   * `logs_live_indexed_events_custom_day_count`
   * `logs_rehydrated_indexed_events_custom_day_count`
-* `indexed_spans`
+* **indexed_spans**
   * `indexed_events_count`
   * `ingested_spans`
   * `ingested_events_bytes`
-* `iot`
+* **iot**
   * `iot_device_count`
-* `lambda_traced_invocations`
+* **lambda_traced_invocations**
   * `lambda_traced_invocations_count`
-* `logs`
+* **logs**
   * `billable_ingested_bytes`
   * `indexed_events_count`
   * `ingested_events_bytes`
@@ -121,39 +121,39 @@ The families and usage types are as follows:
   * `logs_live_ingested_bytes`
   * `logs_rehydrated_indexed_count`
   * `logs_rehydrated_ingested_bytes`
-* `network_flows`
+* **network_flows**
   * `indexed_events_count`
-* `network_hosts`
+* **network_hosts**
   * `host_count`
-* `observability_pipelines`
+* **observability_pipelines**
   * `observability_pipelines_bytes_processed`
-* `online_archive`
+* **online_archive**
   * `online_archive_events_count`
-* `profiling`
+* **profiling**
   * `avg_container_agent_count`
   * `host_count`
-* `rum`
+* **rum**
   * `browser_rum_units`
   * `mobile_rum_units`
   * `rum_units`
-* `rum_browser_sessions`
+* **rum_browser_sessions**
   * `replay_session_count`
   * `session_count`
-* `rum_mobile_sessions`
+* **rum_mobile_sessions**
   * `session_count`
   * `session_count_android`
   * `session_count_ios`
   * `session_count_reactnative`
-* `sds`
+* **sds**
   * `logs_scanned_bytes`
   * `total_scanned_bytes`
-* `snmp`
+* **snmp**
   * `snmp_devices`
-* `synthetics_api`
+* **synthetics_api**
   * `check_calls_count`
-* `synthetics_browser`
+* **synthetics_browser**
   * `browser_check_calls_count`
-* `timeseries`
+* **timeseries**
   * `num_custom_input_timeseries`
   * `num_custom_output_timeseries`
   * `num_custom_timeseries`
@@ -406,14 +406,10 @@ END
 The v2 API supports retrieving usage data for all of your child organizations in one request. Use the
 parameter `filter[include_descendants]` to request data for child organizations.
 
-## Product Taxonomy Tree
-
-
-
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://jsonapi.org/format/
-[2]: /account_management/plan_and_usage/
+[2]: /api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
 

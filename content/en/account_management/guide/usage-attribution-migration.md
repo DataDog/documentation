@@ -122,8 +122,8 @@ In the v1 API, the response contains a link to a zip file, that contains a tsv f
 
 In the v2 API, the response returns the usage attribution data in JSON format.
 
-In order to migrate to the v2 API, your processes should handle the data in json format. You can apply transformations
-as needed to the json data in order to get it into the format that best suits your needs.
+To migrate to the v2 API, your processes must handle the data in JSON format. You can apply transformations
+as needed to the JSON data in order to create the format that best suits your needs.
 
 #### Tag breakdown
 
@@ -346,8 +346,8 @@ The v1 API response contains a link to a zip file, which contains a tsv file for
 
 The v2 API response returns the usage attribution data in JSON format.
 
-To migrate to the v2 API, your processes should handle the data in JSON format. You can apply transformations
-as needed to the JSON data to create the format that best suits your needs.
+To migrate to the v2 API, your processes must handle the data in JSON format. You can apply transformations
+as needed to the JSON data in order to create the format that best suits your needs.
 
 #### Tag breakdown
 
@@ -386,7 +386,7 @@ Example:
 ...
 ```
 
-To migrate to the v2 API, your processes should handle resources with the same tag applied multiple times.
+To migrate to the v2 API, your processes must handle resources with the same tag applied multiple times.
 Tag values in the v2 response array appear in the same order as they appear in the pipe-separated string in the v1
 response, so you can join the array with pipe characters to produce the same tag values as the v1 response.
 
