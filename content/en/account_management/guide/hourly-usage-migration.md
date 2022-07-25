@@ -159,7 +159,7 @@ The families and usage types are as follows:
   * `num_custom_timeseries`
 
 
-Those families and usage types map to the exising hourly usage endpoints as follows:
+The following table shows how the families and usage types above map to the v1 hourly usage endpoints:
 
 | Endpoint                                              | Additional param   | Datapoint                                 | Product Family                                                                   | Usage Type                                                                                                                        |
 |-------------------------------------------------------|--------------------|-------------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
