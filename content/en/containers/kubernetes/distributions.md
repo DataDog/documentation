@@ -500,6 +500,9 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   kubelet:
     tlsVerify: false
+  # Enable the new `kubernetes_state_core` check.
+  kubeStateMetricsCore:
+    enabled: true
 # Add a toleration so that the agent can be scheduled on the control plane nodes.
 agents:
   tolerations:
