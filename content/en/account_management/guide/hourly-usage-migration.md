@@ -8,7 +8,7 @@ further_reading:
 ---
 
 ## Summary
-Users of the existing APIs should recognize familiar concepts in the new hourly usage API,
+Users of the v1 APIs should recognize familiar concepts in the v2 hourly usage API,
 albeit represented in slightly different format.
 
 The most notable differences between the old APIs and the new APIs are that the new API:
