@@ -268,7 +268,15 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive (Glacier Instant Retrieval and S3 Intelligent-Tiering are exceptions). If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+[Rehydration][2] supports the following storage classes:
+
+* S3 Standard
+* S3 Intelligent-Tiering
+* S3 Standard-IA
+* S3 One Zone-IA
+* S3 Glacier Instant Retrieval
+
+If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /logs/archives/rehydrating/
