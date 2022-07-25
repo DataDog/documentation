@@ -18,7 +18,7 @@ based APIs ([Get the list of available daily custom reports][2], [Get specified 
 
 ## Monthly API
 
-### [Get usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution)
+### [Get usage attribution][6]
 
 This API provides monthly usage attribution.
 
