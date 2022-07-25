@@ -13,7 +13,6 @@ assets:
 categories:
 - data store
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
 display_name: RiakCS
@@ -32,7 +31,7 @@ metric_to_check: riakcs.bucket_list_pool.workers
 name: riakcs
 process_signatures:
 - riak-cs start
-public_title: Datadog-Riak CS インテグレーション
+public_title: Riak CS インテグレーション
 short_description: GET、PUT、DELETE などの速度と平均レイテンシーを追跡。
 support: コア
 supported_os:

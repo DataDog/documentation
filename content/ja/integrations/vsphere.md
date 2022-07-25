@@ -14,7 +14,6 @@ assets:
 categories:
 - cloud
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md
 display_name: vSphere
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: vsphere.
 metric_to_check: vsphere.vm.count
 name: vsphere
-public_title: Datadog-vSphere インテグレーション
+public_title: vSphere インテグレーション
 short_description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
 support: コア
 supported_os:

@@ -15,7 +15,6 @@ categories:
 - ログの収集
 - オートディスカバリー
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openldap/README.md
 display_name: OpenLDAP
@@ -32,7 +31,7 @@ manifest_version: 1.0.0
 metric_prefix: openldap.
 metric_to_check: openldap.connections.current
 name: openldap
-public_title: Datadog-OpenLDAP インテグレーション
+public_title: OpenLDAP インテグレーション
 short_description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
 support: コア
 supported_os:

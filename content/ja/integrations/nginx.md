@@ -24,7 +24,6 @@ categories:
 - web
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
 display_name: Nginx
@@ -45,7 +44,7 @@ metric_to_check:
 name: nginx
 process_signatures:
 - 'nginx: マスタープロセス'
-public_title: Datadog-Nginx インテグレーション
+public_title: Nginx インテグレーション
 short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
 support: コア
 supported_os:

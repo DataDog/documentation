@@ -12,7 +12,6 @@ assets:
 categories:
 - os & system
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md
 display_name: Windows Service
@@ -28,7 +27,7 @@ maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: windows_service.
 name: windows_service
-public_title: Datadog-Windows Services インテグレーション
+public_title: Windows Services インテグレーション
 short_description: Windows Service の状態を監視。
 support: コア
 supported_os:

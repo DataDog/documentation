@@ -12,7 +12,6 @@ assets:
 categories:
 - monitoring
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md
 display_name: WMI
@@ -28,7 +27,7 @@ maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: wmi.
 name: wmi_check
-public_title: Datadog-WMI チェックインテグレーション
+public_title: WMI Check インテグレーション
 short_description: WMI メトリクスを収集してグラフを作成。
 support: コア
 supported_os:
