@@ -170,6 +170,8 @@ To parse your variable:
 
 {{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
+You can extract up to ten variables per test step.
+
 Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
 
 ### Specify test frequency
