@@ -31,7 +31,7 @@ See the sections below for the differences between the v1 and v2 API, and recomm
 In the v1 API, pagination is configured through the query parameters `offset` and `limit`. The value in
 `metadata.pagination.total_number_of_records` provides the total number of records in all pages.
 
-In the v2 API, pagination is configured by the `next_record_id` query parameter. The starting value for the next page is
+In the v2 API, pagination is configured through the `next_record_id` query parameter. The starting value for the next page is
 returned in `metadata.pagination.next_record_id`. There is no total number of records in the response.
 
 In order to migrate to the v2 API, use the `next_record_id` to advance through pages as described on the API
