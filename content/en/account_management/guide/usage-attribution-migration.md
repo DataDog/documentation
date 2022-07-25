@@ -22,10 +22,9 @@ based APIs ([Get the list of available daily custom reports][2], [Get specified 
 
 This API provides monthly usage attribution.
 
-The new monthly usage attribution API [Get monthly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-usage-attribution)
-also provides monthly usage attribution and supports querying by combinations of tags.
+The v2 monthly usage attribution API [Get monthly usage attribution][7] also provides monthly usage attribution and supports querying by combinations of tags.
 
-See the below sections for differences between the two APIs and recommendations for migrating to the new API.
+See the sections below for the differences between the v1 and v2 API, and recommendations for migrating to the v2 API.
 
 #### Pagination
 
