@@ -470,12 +470,16 @@ $screen-md-max: ($screen-lg-min - 1) !default;
         }
     }
     .picture-title {
-        position: absolute;
-        bottom: 15px;
-        left: 0px;
-        right: 0px;
+        bottom: 0px;
+        display: flex;
         font-size: 14px;
         line-height: 18px;
+        position: absolute;
+        width: 100%;
+        min-height:50px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
     .title {
         display: none;
