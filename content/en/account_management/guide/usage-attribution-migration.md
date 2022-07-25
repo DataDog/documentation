@@ -10,18 +10,11 @@ further_reading:
 ## Summary
 
 This guide provides instructions for migrating from the v1 usage attribution APIs to the v2 APIs. The v1 APIs are
-deprecated and come in two types: The monthly
-API ([Get usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution)), and the file
-based
-APIs ([Get the list of available daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-the-list-of-available-daily-custom-reports)
-,
-[Get specified daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-specified-daily-custom-reports)
-,
-[Get the list of available monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-the-list-of-available-monthly-custom-reports)
-, and
-[Get specified monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-specified-monthly-custom-reports))
-. To use this guide, find the section below for the APIs you are currently using and follow the instructions to migrate
-to the v2 API.
+deprecated, and there are two types: The monthly
+API ([Get usage attribution][1]), and the file
+based APIs ([Get the list of available daily custom reports][2], [Get specified daily custom reports][3],
+[Get the list of available monthly custom reports][4], and
+[Get specified monthly custom reports][5]). To use this guide, find the section below for the v1 APIs you are currently using, and follow the instructions to migrate to the corresponding v2 APIs.
 
 ## Monthly API
 
