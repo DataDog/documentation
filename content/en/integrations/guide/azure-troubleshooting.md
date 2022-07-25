@@ -1,6 +1,8 @@
 ---
 title: Azure Troubleshooting
-kind: faq
+kind: guide
+aliases:
+  - /integrations/faq/azure-troubleshooting
 further_reading:
 - link: "/integrations/azure/"
   tag: "Documentation"
@@ -15,7 +17,7 @@ further_reading:
 
 Your tenant name is also available from the URL when using the [classic portal][2]. It is the text in between (**not including**) the `@` and `#` symbol:
 
-{{< img src="integrations/faq/azure_tenant_url.png" alt="azure tenant url" style="width:70%">}}
+{{< img src="integrations/guide/azure_troubleshooting/azure_tenant_url.png" alt="The azure tenant url with the text yourcompanyname.onmicrosoft.com highlighted between the @ and # symbols" style="width:70%">}}
 
 ## Unable to login
 
@@ -46,7 +48,7 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 4. By default, basic metrics and logs are enabled. Adjust based on your preferences.
 5. Click **Save** to save any changes.
 
-    {{< img src="integrations/faq/azure_enable_diagnostics.png" alt="azure enable diagnostics" style="width:70%">}}
+    {{< img src="integrations/guide/azure_troubleshooting/azure_enable_diagnostics.png" alt="azure diagnostics settings overview displayed with No storage account highlighted under Pick a storage account and enable guest level monitoring enabled" style="width:70%">}}
 
 ## Automated log collection
 
