@@ -34,8 +34,7 @@ In the v1 API, pagination is configured through the query parameters `offset` an
 In the v2 API, pagination is configured through the `next_record_id` query parameter. The starting value for the next page is
 returned in `metadata.pagination.next_record_id`. There is no total number of records in the response.
 
-In order to migrate to the v2 API, use the `next_record_id` to advance through pages as described on the API
-documentation page.
+To migrate to the v2 API, use the `next_record_id` to advance through pages as described on the API documentation page.
 
 #### Tag Breakdown
 
