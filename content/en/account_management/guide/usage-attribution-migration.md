@@ -38,8 +38,7 @@ To migrate to the v2 API, use the `next_record_id` to advance through pages as d
 
 #### Tag Breakdown
 
-In the v1 API, the usage data is broken down for each tag separately in the same response. This leads to what appears to
-be duplicate data where the same resource is counted as broken down by tags a, b and c separately.
+In the v1 API, the usage data is broken down for each tag separately in the same response. This leads to seemingly duplicate data, in which the same resource is counted by multiple tags such as `a`, `b`, and `c` separately.
 
 In the v2 API, you can select the tag breakdown by supplying a tag configuration in the `tag_breakdown_keys`
 parameter. You can specify one tag at a time or multiple tags as a comma separated list. Supplying multiple tags will
