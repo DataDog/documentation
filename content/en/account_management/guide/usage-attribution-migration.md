@@ -42,8 +42,8 @@ In the v1 API, the usage data is broken down for each tag separately in the same
 
 In the v2 API, you can select the tag breakdown by supplying a tag configuration in the `tag_breakdown_keys` parameter. You can specify one tag at a time, or multiple tags as a comma separated list. Supplying multiple tags returns usage filtered by the combination of those tags.
 
-In order to migrate to the v2 API, specify the tags to use in the `tag_breakdown_keys` parameter. To get
-the same breakdowns as the v1 API, make separate requests for each tag on its own.
+To migrate to the v2 API, specify the tags to use in the `tag_breakdown_keys` parameter. To get
+the same breakdowns as the v1 API, make separate requests for each tag.
 
 #### Aggregates
 
