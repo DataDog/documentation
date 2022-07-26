@@ -121,6 +121,16 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "ListEvents": {
+    "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
+    "summary": "Get a list of events"
+  },
+  "SearchEvents": {
+    "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "summary": "Search events",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve a list of events from your organization."
+  },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
     "summary": "Get a list of incidents"

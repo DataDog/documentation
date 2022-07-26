@@ -33,7 +33,7 @@
   },
   "events": {
     "name": "Events",
-    "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters. If an event is sent out with a message\ncontaining more than 4000 characters only the 4000 first characters are displayed."
+    "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters.\nIf an event is sent out with a message containing more than 4000 characters, only the\nfirst 4000 characters are displayed."
   },
   "gcp-integration": {
     "name": "GCP Integration",
