@@ -22642,6 +22642,12 @@
                     "timestamp": 1475317847,
                     "value": 0.7
                   }
+                ],
+                "resources": [
+                  {
+                    "name": "dummyhost",
+                    "type": "host"
+                  }
                 ]
               }
             ],
@@ -22720,13 +22726,17 @@
                   "description": "A list of resources to associate with this metric.",
                   "items": {
                     "description": "Metric resource.",
+                    "example": {
+                      "name": "dummyhost",
+                      "type": "host"
+                    },
                     "properties": {
                       "name": {
-                        "description": "The name of the metric.",
+                        "description": "The name of the resource.",
                         "type": "string"
                       },
                       "type": {
-                        "description": "The type of metric.",
+                        "description": "The type of the resource.",
                         "type": "string"
                       }
                     },
@@ -22809,13 +22819,17 @@
       },
       "MetricResource": {
         "description": "Metric resource.",
+        "example": {
+          "name": "dummyhost",
+          "type": "host"
+        },
         "properties": {
           "name": {
-            "description": "The name of the metric.",
+            "description": "The name of the resource.",
             "type": "string"
           },
           "type": {
-            "description": "The type of metric.",
+            "description": "The type of the resource.",
             "type": "string"
           }
         },
@@ -22896,13 +22910,17 @@
             "description": "A list of resources to associate with this metric.",
             "items": {
               "description": "Metric resource.",
+              "example": {
+                "name": "dummyhost",
+                "type": "host"
+              },
               "properties": {
                 "name": {
-                  "description": "The name of the metric.",
+                  "description": "The name of the resource.",
                   "type": "string"
                 },
                 "type": {
-                  "description": "The type of metric.",
+                  "description": "The type of the resource.",
                   "type": "string"
                 }
               },
@@ -79807,7 +79825,7 @@
     },
     "/api/v2/series": {
       "post": {
-        "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.",
+        "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.\n\nHost name is one of the resources in the Resources field.",
         "operationId": "SubmitMetrics",
         "parameters": [
           {
@@ -79853,6 +79871,12 @@
                           {
                             "timestamp": 1475317847,
                             "value": 0.7
+                          }
+                        ],
+                        "resources": [
+                          {
+                            "name": "dummyhost",
+                            "type": "host"
                           }
                         ]
                       }
@@ -79932,13 +79956,17 @@
                           "description": "A list of resources to associate with this metric.",
                           "items": {
                             "description": "Metric resource.",
+                            "example": {
+                              "name": "dummyhost",
+                              "type": "host"
+                            },
                             "properties": {
                               "name": {
-                                "description": "The name of the metric.",
+                                "description": "The name of the resource.",
                                 "type": "string"
                               },
                               "type": {
-                                "description": "The type of metric.",
+                                "description": "The type of the resource.",
                                 "type": "string"
                               }
                             },
