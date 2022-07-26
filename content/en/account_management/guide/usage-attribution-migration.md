@@ -1,5 +1,5 @@
 ---
-title: Migrating from V1 to V2 of the Usage Attribution API
+title: Migrating from v1 to v2 of the Usage Attribution API
 kind: guide
 further_reading:
 - link: "/account_management/plan_and_usage/"
@@ -123,7 +123,7 @@ In the v1 API, the response contains a link to a zip file, that contains a tsv f
 In the v2 API, the response returns the usage attribution data in JSON format.
 
 To migrate to the v2 API, your processes must handle the data in JSON format. You can apply transformations
-as needed to the JSON data in order to create the format that best suits your needs.
+as needed to the JSON data to create the format that best suits your needs.
 
 #### Tag breakdown
 
@@ -158,7 +158,7 @@ In the v2 API, chosen tags are keys in the `tags` object of each item in the usa
 ...
 ```
 
-In order to migrate to the v2 API, retrieve from the tags object on each row of the response.
+To migrate to the v2 API, retrieve from the `tags` object on each row of the response.
 
 #### Tag values
 
@@ -347,7 +347,7 @@ The v1 API response contains a link to a zip file, which contains a tsv file for
 The v2 API response returns the usage attribution data in JSON format.
 
 To migrate to the v2 API, your processes must handle the data in JSON format. You can apply transformations
-as needed to the JSON data in order to create the format that best suits your needs.
+as needed to the JSON data to create the format that best suits your needs.
 
 #### Tag breakdown
 
@@ -441,7 +441,7 @@ In the v2 API, usage for serverless monitoring uses the names:
 * `invocations_usage`
 * `invocations_percentage`
 
-In order to migrate to the v2 API, look for serverless monitoring usage under the updated field names. These usage types are functionally equivalent; the only difference is the new field name.
+To migrate to the v2 API, look for serverless monitoring usage under the updated field names. These usage types are functionally equivalent; the only difference is the new field name.
 
 ## Further Reading
 
