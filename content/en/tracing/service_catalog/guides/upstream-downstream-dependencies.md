@@ -8,6 +8,6 @@ further_reading:
 ---
 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
