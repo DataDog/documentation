@@ -1,8 +1,9 @@
 ---
 title: Azure Status and Count Metrics
-kind: faq
+kind: guide
 aliases:
   - /integrations/faq/azure-vm-status-is-not-reporting
+  - /integrations/faq/azure-status-metric
 ---
 
 ## Overview

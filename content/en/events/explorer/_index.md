@@ -121,8 +121,8 @@ To search a tag that has the same key as a reserved attribute, use the `tags` se
 Example: `tags:("status:<status>")`
 
 To create a facet on a tag that has the same key as a reserved attribute:
-1. Use the [Remapper processor][4] to remap the tag to another tag or attribute.
-2. Create a [facet][5] on the new tag/attribute.
+1. Use the [Remapper processor][2] to remap the tag to another tag or attribute.
+2. Create a [facet][3] on the new tag/attribute.
 
 ## Notifications
 
@@ -138,9 +138,9 @@ Datadog supports `@notifications` in the messages of events when posted by the A
 : Posts the event or graph to the specified Slack channel.
 
 `@webhook`
-: Alerts or triggers the webhook. See the [blog post on webhooks][2].
+: Alerts or triggers the webhook. See the [blog post on webhooks][4].
 
-See [Notifications][3] to learn more.
+See [Notifications][5] to learn more.
 
 ## Event Analytics
 
@@ -171,7 +171,7 @@ Use the query to control what’s displayed in your Events Analytics:
 
 
 [1]: /logs/explorer/search_syntax/
-[2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
-[3]: /monitors/notify/
-[4]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
-[5]: https://docs.datadoghq.com/events/explorer/#create-a-facet
+[2]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
+[3]: https://docs.datadoghq.com/events/explorer/#create-a-facet
+[4]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
+[5]: /monitors/notify/
