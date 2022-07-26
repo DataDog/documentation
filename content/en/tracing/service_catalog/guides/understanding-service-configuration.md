@@ -9,7 +9,7 @@ further_reading:
 
 Following monitoring best practices such as tracing, logging, and code profiling helps you ensure that you have all the data you need during incident triage. Service Catalog provides automatic checks for these recommended setups. It helps you detect any monitoring gaps and helps you connect all available data for a service.
 
-To view the configuration completeness for a service, click it in the [APM Services List][1]. On the Service details page, click **Service Info** in the upper-right side. 
+To view the configuration completeness for a service, click it in the [APM Services List][1]. On the service details page, click **Service Info** in the upper-right side. 
 
 On this page you can see the ownership, PagerDuty, and related links information you've specified for the service in its [service definition][2].
 
