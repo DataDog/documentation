@@ -38,14 +38,14 @@ For dedicated documentation and examples for major Kubernetes distributions incl
 
 For dedicated documentation and examples for monitoring the Kubernetes control plane, see [Kubernetes control plane monitoring][2].
 
-### Minimum Agent and Cluster-Agent versions
+### Minimum Agent and Cluster Agent versions
 
-Some features relatives to recent Kubernetes evolutions require to use a minimum agent version.
+Some features related to later Kubernetes versions require a minimum Datadog Agent version.
 
-| Kubernetes Version | Agent Version  | Cluster Agent Version | Reasons                               |
+| Kubernetes version | Agent version  | Cluster Agent version | Reason                              |
 |--------------------|----------------|-----------------------|---------------------------------------|
-| 1.16.0+            | 7.19.0+        | 1.9.0+                | `Kubelet`'s metrics deprecation       |
-| 1.21.0+            | 7.36.0+        | 1.20.0+               | `Kubernetes` resources deprecation    |
+| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation       |
+| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation    |
 
 {{< tabs >}}
 {{% tab "Operator" %}}
