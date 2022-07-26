@@ -486,7 +486,7 @@ More `DatadogAgent` examples can be found in the [Datadog Operator repository][2
 
 ## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
 
-TKG requires some small configuration changes, shown below. For example, tolerations are required to schedule the Node Agent on the `master` nodes.
+TKG requires some small configuration changes, shown below. For example, setting a toleration is required for the controller to schedule the Node Agent on the `master` nodes.
 
 
 {{< tabs >}}
