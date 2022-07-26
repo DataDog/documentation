@@ -19,7 +19,7 @@ If services that you know are instrumented for APM are not appearing in the Serv
 
 Service Catalog relies on the `DD_SERVICE` tag in all telemetry types (infrastructure metrics, logs, network performance monitoring) to gather information about a given service. If you don’t see a telemetry type that you expect in the Service Catalog, ensure that you have configured the `DD_SERVICE` tag according to the instructions in [Unified Service Tagging][2]. 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

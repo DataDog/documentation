@@ -120,9 +120,9 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
 
 ### Response
 
-Status: 
-`200 OK` 
-`400 Invalid Request` 
+Status: <br>
+`200 OK` <br>
+`400 Invalid Request` <br>
 `429 Too Many Requests` 
 
 
@@ -357,7 +357,7 @@ curl --location --request DELETE 'https://api.datadoghq.com/api/v2/services/defi
 --header 'DD-APPLICATION-KEY: <APPLICATION_KEY>'
 {{< /code-block >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

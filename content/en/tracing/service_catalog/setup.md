@@ -34,12 +34,13 @@ If the service, API, or custom library you are interested in is not listed on th
 
 <div class="alert alert-warning">This feature is in beta.</div>
 
-To discover other services through existing Datadog telemetry such as infrastructure metrics, go to the Discover Services tab and follow instructions there. Discovery uses the `DD_SERVICE` tagging convention to locate services sending data to your Datadog organization.
+To discover other services through existing Datadog telemetry such as infrastructure metrics, go to the Discover Services tab and follow instructions there. Discovery uses the `DD_SERVICE` [Unified Service Tagging convention][4] to locate services sending data to your Datadog organization.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/service_catalog/service_definition_api/
 [2]: https://app.datadoghq.com/services/setup
 [3]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
+[4]: /getting_started/tagging/unified_service_tagging
