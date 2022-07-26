@@ -28,135 +28,135 @@ the usage for all other product families.
 
 The families and usage types are as follows:
 1. **all**
-  * _Contains all other product families_
+    * _Contains all other product families_
 2. **analyzed_logs**
-  * `analyzed_logs`
+    * `analyzed_logs`
 3. **application_security**
-  * `app_sec_host_count`
+    * `app_sec_host_count`
 4. **audit_logs**
-  * `lines_indexed`
+    * `lines_indexed`
 5. **serverless**
-  * `func_count`
-  * `invocations_sum`
+    * `func_count`
+    * `invocations_sum`
 6. **ci_app**
-  * `ci_pipeline_indexed_spans`
-  * `ci_test_indexed_spans`
-  * `ci_visibility_pipeline_committers`
-  * `ci_visibility_test_committers`
+    * `ci_pipeline_indexed_spans`
+    * `ci_test_indexed_spans`
+    * `ci_visibility_pipeline_committers`
+    * `ci_visibility_test_committers`
 7. **cspm**
-  * `aas_host_count`
-  * `azure_host_count`
-  * `compliance_host_count`
-  * `container_count`
-  * `host_count`
+    * `aas_host_count`
+    * `azure_host_count`
+    * `compliance_host_count`
+    * `container_count`
+    * `host_count`
 8. **cws**
-  * `cws_container_count`
-  * `cws_host_count`
+    * `cws_container_count`
+    * `cws_host_count`
 9. **dbm**
-  * `dbm_host_count`
-  * `dbm_queries_count`
+    * `dbm_host_count`
+    * `dbm_queries_count`
 10. **fargate**
-  * `avg_profiled_fargate_tasks`
-  * `tasks_count`
+    * `avg_profiled_fargate_tasks`
+    * `tasks_count`
 11. **infra_hosts**
-  * `agent_host_count`
-  * `alibaba_host_count`
-  * `apm_azure_app_service_host_count`
-  * `apm_host_count`
-  * `aws_host_count`
-  * `azure_host_count`
-  * `container_count`
-  * `gcp_host_count`
-  * `heroku_host_count`
-  * `host_count`
-  * `infra_azure_app_service`
-  * `opentelemetry_host_count`
-  * `vsphere_host_count`
+    * `agent_host_count`
+    * `alibaba_host_count`
+    * `apm_azure_app_service_host_count`
+    * `apm_host_count`
+    * `aws_host_count`
+    * `azure_host_count`
+    * `container_count`
+    * `gcp_host_count`
+    * `heroku_host_count`
+    * `host_count`
+    * `infra_azure_app_service`
+    * `opentelemetry_host_count`
+    * `vsphere_host_count`
 12. **incident_management**
-  * `monthly_active_users`
+    * `monthly_active_users`
 13. **indexed_logs**
-  * `logs_indexed_events_3_day_count`
-  * `logs_live_indexed_events_3_day_count`
-  * `logs_rehydrated_indexed_events_3_day_count`
-  * `logs_indexed_events_7_day_count`
-  * `logs_live_indexed_events_7_day_count`
-  * `logs_rehydrated_indexed_events_7_day_count`
-  * `logs_indexed_events_15_day_count`
-  * `logs_live_indexed_events_15_day_count`
-  * `logs_rehydrated_indexed_events_15_day_count`
-  * `logs_indexed_events_30_day_count`
-  * `logs_live_indexed_events_30_day_count`
-  * `logs_rehydrated_indexed_events_30_day_count`
-  * `logs_indexed_events_45_day_count`
-  * `logs_live_indexed_events_45_day_count`
-  * `logs_rehydrated_indexed_events_45_day_count`
-  * `logs_indexed_events_60_day_count`
-  * `logs_live_indexed_events_60_day_count`
-  * `logs_rehydrated_indexed_events_60_day_count`
-  * `logs_indexed_events_90_day_count`
-  * `logs_live_indexed_events_90_day_count`
-  * `logs_rehydrated_indexed_events_90_day_count`
-  * `logs_indexed_events_180_day_count`
-  * `logs_live_indexed_events_180_day_count`
-  * `logs_rehydrated_indexed_events_180_day_count`
-  * `logs_indexed_events_360_day_count`
-  * `logs_live_indexed_events_360_day_count`
-  * `logs_rehydrated_indexed_events_360_day_count`
-  * `logs_indexed_events_custom_day_count`
-  * `logs_live_indexed_events_custom_day_count`
-  * `logs_rehydrated_indexed_events_custom_day_count`
+    * `logs_indexed_events_3_day_count`
+    * `logs_live_indexed_events_3_day_count`
+    * `logs_rehydrated_indexed_events_3_day_count`
+    * `logs_indexed_events_7_day_count`
+    * `logs_live_indexed_events_7_day_count`
+    * `logs_rehydrated_indexed_events_7_day_count`
+    * `logs_indexed_events_15_day_count`
+    * `logs_live_indexed_events_15_day_count`
+    * `logs_rehydrated_indexed_events_15_day_count`
+    * `logs_indexed_events_30_day_count`
+    * `logs_live_indexed_events_30_day_count`
+    * `logs_rehydrated_indexed_events_30_day_count`
+    * `logs_indexed_events_45_day_count`
+    * `logs_live_indexed_events_45_day_count`
+    * `logs_rehydrated_indexed_events_45_day_count`
+    * `logs_indexed_events_60_day_count`
+    * `logs_live_indexed_events_60_day_count`
+    * `logs_rehydrated_indexed_events_60_day_count`
+    * `logs_indexed_events_90_day_count`
+    * `logs_live_indexed_events_90_day_count`
+    * `logs_rehydrated_indexed_events_90_day_count`
+    * `logs_indexed_events_180_day_count`
+    * `logs_live_indexed_events_180_day_count`
+    * `logs_rehydrated_indexed_events_180_day_count`
+    * `logs_indexed_events_360_day_count`
+    * `logs_live_indexed_events_360_day_count`
+    * `logs_rehydrated_indexed_events_360_day_count`
+    * `logs_indexed_events_custom_day_count`
+    * `logs_live_indexed_events_custom_day_count`
+    * `logs_rehydrated_indexed_events_custom_day_count`
 14. **indexed_spans**
-  * `indexed_events_count`
-  * `ingested_spans`
-  * `ingested_events_bytes`
+    * `indexed_events_count`
+    * `ingested_spans`
+    * `ingested_events_bytes`
 15. **iot**
-  * `iot_device_count`
+    * `iot_device_count`
 16. **lambda_traced_invocations**
-  * `lambda_traced_invocations_count`
+    * `lambda_traced_invocations_count`
 17. **logs**
-  * `billable_ingested_bytes`
-  * `indexed_events_count`
-  * `ingested_events_bytes`
-  * `logs_live_indexed_count`
-  * `logs_live_ingested_bytes`
-  * `logs_rehydrated_indexed_count`
-  * `logs_rehydrated_ingested_bytes`
+    * `billable_ingested_bytes`
+    * `indexed_events_count`
+    * `ingested_events_bytes`
+    * `logs_live_indexed_count`
+    * `logs_live_ingested_bytes`
+    * `logs_rehydrated_indexed_count`
+    * `logs_rehydrated_ingested_bytes`
 18. **network_flows**
-  * `indexed_events_count`
+    * `indexed_events_count`
 19. **network_hosts**
-  * `host_count`
+    * `host_count`
 20. **observability_pipelines**
-  * `observability_pipelines_bytes_processed`
+    * `observability_pipelines_bytes_processed`
 21. **online_archive**
-  * `online_archive_events_count`
+    * `online_archive_events_count`
 22. **profiling**
-  * `avg_container_agent_count`
-  * `host_count`
+    * `avg_container_agent_count`
+    * `host_count`
 23. **rum**
-  * `browser_rum_units`
-  * `mobile_rum_units`
-  * `rum_units`
+    * `browser_rum_units`
+    * `mobile_rum_units`
+    * `rum_units`
 24. **rum_browser_sessions**
-  * `replay_session_count`
-  * `session_count`
+    * `replay_session_count`
+    * `session_count`
 25. **rum_mobile_sessions**
-  * `session_count`
-  * `session_count_android`
-  * `session_count_ios`
-  * `session_count_reactnative`
+    * `session_count`
+    * `session_count_android`
+    * `session_count_ios`
+    * `session_count_reactnative`
 26. **sds**
-  * `logs_scanned_bytes`
-  * `total_scanned_bytes`
+    * `logs_scanned_bytes`
+    * `total_scanned_bytes`
 27. **snmp**
-  * `snmp_devices`
+    * `snmp_devices`
 28. **synthetics_api**
-  * `check_calls_count`
+    * `check_calls_count`
 29. **synthetics_browser**
-  * `browser_check_calls_count`
+    * `browser_check_calls_count`
 30. **timeseries**
-  * `num_custom_input_timeseries`
-  * `num_custom_output_timeseries`
-  * `num_custom_timeseries`
+    * `num_custom_input_timeseries`
+    * `num_custom_output_timeseries`
+    * `num_custom_timeseries`
 
 
 The following table shows how the families and usage types above map to the v1 hourly usage endpoints:
