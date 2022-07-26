@@ -209,7 +209,7 @@ variable to `1`, as described in the
 
 Without this flag, profiles for short-lived Resque jobs will be unavailable.
 
-## Profiling does not turn on due to "missing support" error
+## Profiling does not turn on because compilation of the Ruby VM just-in-time header failed
 
 There is a known incompatibility between Ruby 2.7 and older GCC versions (4.8 and below) that impacts the profiler ([upstream Ruby report][6], [`dd-trace-rb` bug report][7]). This can result in the following error message: "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken."
 
