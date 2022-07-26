@@ -86,7 +86,7 @@ For example, for a 7-day SLO, to be alerted if the theoretical error budget cons
 4. Set an alert to trigger when a certain burn rate is measured during a specific long window:
    * The burn rate value must be in the range of
      {{< img src="monitors/service_level_objectives/burn-rate-range.jpeg" alt="Burn rate range">}}
-   * Datadog currently supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
+   * Datadog supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
    * The short window is then automatically calculated in the UI as `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
 5. Add [Notification information][4] into the **Say what’s happening** and **Notify your team** sections.
