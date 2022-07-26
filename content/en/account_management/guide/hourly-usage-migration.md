@@ -159,83 +159,143 @@ The families and usage types are as follows:
     * `num_custom_timeseries`
 
 
-The following table shows how the families and usage types above map to the v1 hourly usage endpoints:
+The following table shows how the families and usage types above map to the v1 hourly usage endpoints. Usage type and datapoint are the same, except where explicitly noted otherwise:
 
-| Endpoint                                              | Additional param   | Datapoint                                 | Product Family                                                                   | Usage Type                                                                                                                        |
-|-------------------------------------------------------|--------------------|-------------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `<base_url>/api/v1/usage/hosts`                       |                    | `agent_host_count`                        | `infra_hosts`                                                                    | `agent_host_count`                                                                                                                |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `alibaba_host_count`                      | `infra_hosts`                                                                    | `alibaba_host_count`                                                                                                              |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `apm_azure_app_service_host_count`        | `infra_hosts`                                                                    | `apm_azure_app_service_host_count`                                                                                                |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `apm_host_count`                          | `infra_hosts`                                                                    | `apm_host_count`                                                                                                                  |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `aws_host_count`                          | `infra_hosts`                                                                    | `aws_host_count`                                                                                                                  |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `azure_host_count`                        | `infra_hosts`                                                                    | `azure_host_count`                                                                                                                |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `container_count`                         | `infra_hosts`                                                                    | `container_count`                                                                                                                 |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `gcp_host_count`                          | `infra_hosts`                                                                    | `gcp_host_count`                                                                                                                  |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `heroku_host_count`                       | `infra_hosts`                                                                    | `heroku_host_count`                                                                                                               |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `host_count`                              | `infra_hosts`                                                                    | `host_count`                                                                                                                      |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `infra_azure_app_service`                 | `infra_hosts`                                                                    | `infra_azure_app_service`                                                                                                         |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `opentelemetry_host_count`                | `infra_hosts`                                                                    | `opentelemetry_host_count`                                                                                                        |
-| `<base_url>/api/v1/usage/hosts`                       |                    | `vsphere_host_count`                      | `infra_hosts`                                                                    | `vsphere_host_count`                                                                                                              |
-| `<base_url>/api/v1/usage/logs`                        |                    | `billable_ingested_bytes`                 | `logs`                                                                           | `billable_ingested_bytes`                                                                                                         |
-| `<base_url>/api/v1/usage/logs`                        |                    | `indexed_events_count`                    | `logs`                                                                           | `indexed_events_count`                                                                                                            |
-| `<base_url>/api/v1/usage/logs`                        |                    | `ingested_events_bytes`                   | `logs`                                                                           | `ingested_events_bytes`                                                                                                           |
-| `<base_url>/api/v1/usage/logs`                        |                    | `logs_live_indexed_count`                 | `logs`                                                                           | `logs_live_indexed_count`                                                                                                         |
-| `<base_url>/api/v1/usage/logs`                        |                    | `logs_live_ingested_bytes`                | `logs`                                                                           | `logs_live_ingested_bytes`                                                                                                        |
-| `<base_url>/api/v1/usage/logs`                        |                    | `logs_rehydrated_indexed_count`           | `logs`                                                                           | `logs_rehydrated_indexed_count`                                                                                                   |
-| `<base_url>/api/v1/usage/logs`                        |                    | `logs_rehydrated_ingested_bytes`          | `logs`                                                                           | `logs_rehydrated_ingested_bytes`                                                                                                  |
-| `<base_url>/api/v1/usage/timeseries`                  |                    | `num_custom_input_timeseries`             | `timeseries`                                                                     | `num_custom_input_timeseries`                                                                                                     |
-| `<base_url>/api/v1/usage/timeseries`                  |                    | `num_custom_output_timeseries`            | `timeseries`                                                                     | `num_custom_output_timeseries`                                                                                                    |
-| `<base_url>/api/v1/usage/timeseries`                  |                    | `num_custom_timeseries`                   | `timeseries`                                                                     | `num_custom_timeseries`                                                                                                           |
-| `<base_url>/api/v1/usage/indexed-spans`               |                    | `indexed_events_count`                    | `indexed_spans`                                                                  | `indexed_events_count`                                                                                                            |
-| `<base_url>/api/v1/usage/synthetics`                  |                    | `check_calls_count`                       | n/a deprecated. See synthetics_api and synthetics_browser for synthetics usage   |                                                                                                                                   |
-| `<base_url>/api/v1/usage/synthetics_api`              |                    | `check_calls_count`                       | `synthetics_api`                                                                 | `check_calls_count`                                                                                                               |
-| `<base_url>/api/v1/usage/synthetics_browser`          |                    | `browser_check_calls_count`               | `synthetics_browser`                                                             | `browser_check_calls_count`                                                                                                       |
-| `<base_url>/api/v1/usage/fargate`                     |                    | `avg_profiled_fargate_tasks`              | `fargate`                                                                        | `avg_profiled_fargate_tasks`                                                                                                      |
-| `<base_url>/api/v1/usage/fargate`                     |                    | `tasks_count`                             | `fargate`                                                                        | `tasks_count`                                                                                                                     |
-| `<base_url>/api/v1/usage/aws_lambda`                  |                    | `func_count`                              | `serverless`                                                                     | `func_count`                                                                                                                      |
-| `<base_url>/api/v1/usage/aws_lambda`                  |                    | `invocations_sum`                         | `serverless`                                                                     | `invocations_sum`                                                                                                                 |
-| `<base_url>/api/v1/usage/rum_sessions`                | `type=browser`     | `replay_session_count`                    | `rum_browser_sessions`                                                           | `replay_session_count`                                                                                                            |
-| `<base_url>/api/v1/usage/rum_sessions`                | `type=browser`     | `session_count`                           | `rum_browser_sessions`                                                           | `session_count`                                                                                                                   |
-| `<base_url>/api/v1/usage/rum_sessions`                | `type=mobile`      | `session_count`                           | `rum_mobile_sessions`                                                            | `session_count`                                                                                                                   |
-| `<base_url>/api/v1/usage/rum_sessions`                | `type=mobile`      | `session_count_android`                   | `rum_mobile_sessions`                                                            | `session_count_android`                                                                                                           |
-| `<base_url>/api/v1/usage/rum_sessions`                | `type=mobile`      | `session_count_ios`                       | `rum_mobile_sessions`                                                            | `session_count_ios`                                                                                                               |
-| `<base_url>/api/v1/usage/rum_sessions`                | `type=mobile`      | `session_count_reactnative`               | `rum_mobile_sessions`                                                            | `session_count_reactnative`                                                                                                       |
-| `<base_url>/api/v1/usage/network_hosts`               |                    | `host_count`                              | `network_hosts`                                                                  | `host_count`                                                                                                                      |
-| `<base_url>/api/v1/usage/network_flows`               |                    | `indexed_events_count`                    | `network_flows`                                                                  | `indexed_events_count`                                                                                                            |
-| `<base_url>/api/v1/usage/logs-by-retention`           |                    | `indexed_events_count`                    | `indexed_logs`                                                                   | `logs_indexed_events_<retention>_count`                                                                                           |
-| `<base_url>/api/v1/usage/logs-by-retention`           |                    | `live_indexed_events_count`               | `indexed_logs`                                                                   | `logs_live_indexed_events_<retention>_count`                                                                                      |
-| `<base_url>/api/v1/usage/logs-by-retention`           |                    | `rehydrated_indexed_events_count`         | `indexed_logs`                                                                   | `logs_rehydrated_indexed_events_<retention>_count`                                                                                |
-| `<base_url>/api/v1/usage/logs-by-retention`           |                    | `retention`                               | `indexed_logs`                                                                   | In `usage_type` replace `<retetion>` with one of : 3_day, 7_day, 15_day, 30_day, 45_day, 60_day, 90_day, 180_day, 360_day, custom |
-| `<base_url>/api/v1/usage/analyzed_logs`               |                    | `analyzed_logs`                           | `analyzed_logs`                                                                  | `analyzed_logs`                                                                                                                   |
-| `<base_url>/api/v1/usage/snmp`                        |                    | `snmp_devices`                            | `snmp`                                                                           | `snmp_devices`                                                                                                                    |
-| `<base_url>/api/v1/usage/profiling`                   |                    | `avg_container_agent_count`               | `profiling`                                                                      | `avg_container_agent_count`                                                                                                       |
-| `<base_url>/api/v1/usage/profiling`                   |                    | `host_count`                              | `profiling`                                                                      | `host_count`                                                                                                                      |
-| `<base_url>/api/v1/usage/ingested-spans`              |                    | `ingested_events_bytes`                   | `ingested_spans`                                                                 | `ingested_events_bytes`                                                                                                           |
-| `<base_url>/api/v1/usage/incident-management`         |                    | `monthly_active_users`                    | `incident_management`                                                            | `monthly_active_users`                                                                                                            |
-| `<base_url>/api/v1/usage/iot`                         |                    | `iot_device_count`                        | `iot`                                                                            | `iot_device_count`                                                                                                                |
-| `<base_url>/api/v1/usage/cspm`                        |                    | `aas_host_count`                          | `cspm`                                                                           | `aas_host_count`                                                                                                                  |
-| `<base_url>/api/v1/usage/cspm`                        |                    | `azure_host_count`                        | `cspm`                                                                           | `azure_host_count`                                                                                                                |
-| `<base_url>/api/v1/usage/cspm`                        |                    | `compliance_host_count`                   | `cspm`                                                                           | `compliance_host_count`                                                                                                           |
-| `<base_url>/api/v1/usage/cspm`                        |                    | `container_count`                         | `cspm`                                                                           | `container_count`                                                                                                                 |
-| `<base_url>/api/v1/usage/cspm`                        |                    | `host_count`                              | `cspm`                                                                           | `host_count`                                                                                                                      |
-| `<base_url>/api/v1/usage/audit_logs`                  |                    | `lines_indexed`                           | `audit_logs`                                                                     | `lines_indexed`                                                                                                                   |
-| `<base_url>/api/v1/usage/cws`                         |                    | `cws_container_count`                     | `cws`                                                                            | `cws_container_count`                                                                                                             |
-| `<base_url>/api/v1/usage/cws`                         |                    | `cws_host_count`                          | `cws`                                                                            | `cws_host_count`                                                                                                                  |
-| `<base_url>/api/v1/usage/dbm`                         |                    | `dbm_host_count`                          | `dbm`                                                                            | `dbm_host_count`                                                                                                                  |
-| `<base_url>/api/v1/usage/dbm`                         |                    | `dbm_queries_count`                       | `dbm`                                                                            | `dbm_queries_count`                                                                                                               |
-| `<base_url>/api/v1/usage/sds`                         |                    | `logs_scanned_bytes`                      | `sds`                                                                            | `logs_scanned_bytes`                                                                                                              |
-| `<base_url>/api/v1/usage/sds`                         |                    | `total_scanned_bytes`                     | `sds`                                                                            | `total_scanned_bytes`                                                                                                             |
-| `<base_url>/api/v1/usage/rum`                         |                    | `browser_rum_units`                       | `rum`                                                                            | `browser_rum_units`                                                                                                               |
-| `<base_url>/api/v1/usage/rum`                         |                    | `mobile_rum_units`                        | `rum`                                                                            | `mobile_rum_units`                                                                                                                |
-| `<base_url>/api/v1/usage/rum`                         |                    | `rum_units`                               | `rum`                                                                            | `rum_units`                                                                                                                       |
-| `<base_url>/api/v1/usage/ci-app`                      |                    | `ci_pipeline_indexed_spans`               | `ci_app`                                                                         | `ci_pipeline_indexed_spans`                                                                                                       |
-| `<base_url>/api/v1/usage/ci-app`                      |                    | `ci_test_indexed_spans`                   | `ci_app`                                                                         | `ci_test_indexed_spans`                                                                                                           |
-| `<base_url>/api/v1/usage/ci-app`                      |                    | `ci_visibility_pipeline_committers`       | `ci_app`                                                                         | `ci_visibility_pipeline_committers`                                                                                               |
-| `<base_url>/api/v1/usage/ci-app`                      |                    | `ci_visibility_test_committers`           | `ci_app`                                                                         | `ci_visibility_test_committers`                                                                                                   |
-| `<base_url>/api/v1/usage/online-archive`              |                    | `online_archive_events_count`             | `online_archive`                                                                 | `online_archive_events_count`                                                                                                     |
-| `<base_url>/api/v2/usage/lambda_traced_invocations`   |                    | `lambda_traced_invocations_count`         | `lambda_traced_invocations`                                                      | `lambda_traced_invocations_count`                                                                                                 |
-| `<base_url>/api/v2/usage/application_security`        |                    | `app_sec_host_count`                      | `application_security`                                                           | `app_sec_host_count`                                                                                                              |
-| `<base_url>/api/v2/usage/observability_pipelines`     |                    | `observability_pipelines_bytes_processed` | `observability_pipelines`                                                        | `observability_pipelines_bytes_processed`                                                                                         |
+ENDPOINT | PRODUCT FAMILY
+`<base_url>/api/v1/usage/hosts` | infra_hosts
+: `agent_host_count`
+: `alibaba_host_count`
+: `apm_azure_app_service_host_count`
+: `apm_host_count`
+: `aws_host_count`
+: `azure_host_count`
+: `container_count`
+: `gcp_host_count`
+: `heroku_host_count`
+: `host_count`
+: `infra_azure_app_service`
+: `opentelemetry_host_count`
+: `vsphere_host_count`
+
+`<base_url>/api/v1/usage/logs` | logs
+: `billable_ingested_bytes`
+: `indexed_events_count`
+: `ingested_events_bytes`
+: `logs_live_indexed_count`
+: `logs_live_ingested_bytes`
+: `logs_rehydrated_indexed_count`
+: `logs_rehydrated_ingested_bytes`
+
+`<base_url>/api/v1/usage/timeseries` | timeseries
+: `num_custom_input_timeseries`
+: `num_custom_output_timeseries`
+: `num_custom_timeseries`
+
+`<base_url>/api/v1/usage/indexed-spans` | indexed_spans
+: `indexed_events_count`
+
+`<base_url>/api/v1/usage/synthetics`
+: Deprecated. See synthetics_api and synthetics_browser for synthetics usage
+
+`<base_url>/api/v1/usage/synthetics_api` | synthetics_api
+: `check_calls_count`
+
+`<base_url>/api/v1/usage/synthetics_browser` | synthetics_browser
+: `browser_check_calls_count`
+
+`<base_url>/api/v1/usage/fargate` | fargate
+: `avg_profiled_fargate_tasks`
+: `tasks_count`
+
+`<base_url>/api/v1/usage/aws_lambda` | serverless
+: `func_count`
+: `invocations_sum`
+
+`<base_url>/api/v1/usage/rum_sessions?type=browser` | rum_browser_sessions
+: `replay_session_count`
+: `session_count`
+
+`<base_url>/api/v1/usage/rum_sessions?type=mobile` | rum_mobile_sessions
+: `session_count`
+: `session_count_android`
+: `session_count_ios`
+: `session_count_reactnative`
+
+`<base_url>/api/v1/usage/network_hosts` | network_hosts
+: `host_count`
+
+`<base_url>/api/v1/usage/network_flows` | network_flows
+: `indexed_events_count`
+
+`<base_url>/api/v1/usage/logs-by-retention` | indexed_logs
+: **Note:** The usage type and datapoint are separate for this URL, because the retention value is included in the usage type.
+: **Usage Type:** `logs_indexed_events_<retention>_count` **Datapoint:** `indexed_events_count`
+: **Usage Type:** `logs_live_indexed_events_<retention>_count` **Datapoint:** `live_indexed_events_count`
+: **Usage Type:** `logs_rehydrated_indexed_events_<retention>_count` **Datapoint:** `rehydrated_indexed_events_count`
+: **Usage Type:** In `usage_type`, replace `<retention>` with one of : `3_day`, `7_day`, `15_day`, `30_day`, `45_day`, `60_day`, `90_day`, `180_day`, `365_day`, `custom` **Datapoint:** `retention`
+
+`<base_url>/api/v1/usage/analyzed_logs` | analyzed_logs
+: `analyzed_logs`
+
+`<base_url>/api/v1/usage/snmp` | snmp
+: `snmp_devices`
+
+`<base_url>/api/v1/usage/profiling` | profiling
+: `host_count`
+
+`<base_url>/api/v1/usage/ingested-spans` | ingested_spans
+:`ingested_events_bytes` 
+
+`<base_url>/api/v1/usage/incident-management` | incident_management
+: `monthly_active_users`
+
+`<base_url>/api/v1/usage/iot` | iot
+: `iot_device_count`
+
+`<base_url>/api/v1/usage/cspm` | cspm
+: `aas_host_count`
+: `azure_host_count`
+: `compliance_host_count`
+: `container_count`
+: `host_count`
+
+`<base_url>/api/v1/usage/audit_logs` | audit_logs
+: `lines_indexed`
+
+`<base_url>/api/v1/usage/cws` | cws
+: `cws_container_count`
+: `cws_host_count`
+
+`<base_url>/api/v1/usage/dbm` | dbm
+: `dbm_host_count`
+: `dbm_queries_count`
+
+`<base_url>/api/v1/usage/sds` | sds
+: `logs_scanned_bytes`
+: `total_scanned_bytes`
+
+`<base_url>/api/v1/usage/rum` | rum
+: `browser_rum_units`
+: `mobile_rum_units`
+: `rum_units`
+
+`<base_url>/api/v1/usage/ci-app` | ci_app
+: `ci_pipeline_indexed_spans`
+: `ci_test_indexed_spans`
+: `ci_visibility_pipeline_committers`
+: `ci_visibility_test_committers`
+
+`<base_url>/api/v1/usage/online-archive` | online_archive
+: `online_archive_events_count`
+
+`<base_url>/api/v2/usage/lambda_traced_invocations` | lambda_traced_invocations
+: `lambda_traced_invocations_count`
+
+`<base_url>/api/v2/usage/application_security` | application_security
+: `app_sec_host_count`
+
+`<base_url>/api/v2/usage/observability_pipelines` | observability_pipelines
+: `observability_pipelines_bytes_processed`
 
 ## JSON:API Compliant Format
 
