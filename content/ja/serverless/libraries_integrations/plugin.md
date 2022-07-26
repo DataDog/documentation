@@ -40,9 +40,10 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `appKey`                      | Datadog アプリキー。`monitors` フィールドが定義されている場合のみ必要です。また、デプロイ環境で `DATADOG_APP_KEY` 環境変数を設定することも可能です。 |
 | `apiKeySecretArn`             | `apiKey` フィールドを使用する代替です。AWS Secrets Manager に Datadog API キーを保存しているシークレットの ARN です。Lambda の実行ロールに `secretsmanager:GetSecretValue` 権限を追加することを忘れないようにします。 |
 | `apiKMSKey`                   | `apiKey` フィールドを使用する代替です。Datadog API キーは KMS を使用して暗号化されています。Lambda の実行ロールに `kms:Decrypt` 権限を追加することを忘れないようにします。 |
-| `env`                         | Datadog のテレメトリーに、目的の `env` をタグ付けします。 |
-| `service`                     | Datadog のテレメトリーに、目的の `service` をタグ付けします。 |
-| `version`                     | Datadog のテレメトリーに、目的の `version` をタグ付けします。 |
+| `env`                         | `addExtension` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_ENV` 環境変数が追加されます。それ以外の場合、すべての Lambda 関数に `env` タグが追加され、指定した値が設定されます。デフォルトはサーバーレスデプロイメントの `stage` 値です。 |
+| `service`                     | `addExtension` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_SERVICE` 環境変数が追加されます。それ以外の場合、すべての Lambda 関数に `service` タグが追加され、指定した値が設定されます。デフォルトはサーバーレスプロジェクトの `service` 値です。
+| `version`                     | `addExtension` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_VERSION` 環境変数が追加されます。`forwarderArn` と共に設定すると、すべての Lambda 関数に `version` タグが追加され、指定した値が設定されます。 |
+| `tags`                        | 1 つの文字列としての `key`:`value` のペアのカンマ区切りのリスト。`extensionLayerVersion` と共に設定すると、すべての Lambda 関数に `DD_TAGS` 環境変数が追加され、指定した値が設定されます。`forwarderArn` と共に指定すると、プラグインは文字列をパースして、各 `key`:`value` ペアをタグとしてすべての Lambda 関数に設定します。 |
 | `enableXrayTracing`           | Lambda 関数と API Gateway 統合で X-Ray トレーシングを有効にするには、`true` に設定します。デフォルトは `false` です。 |
 | `enableDDTracing`             | Lambda 関数で Datadog トレースを有効にします。デフォルトは `true` です。 |
 | `enableDDLogs`                | Lambda 拡張機能を使用して Datadog のログ収集を有効にします。デフォルトは `true` です。注: この設定は、Datadog Forwarder から送信されるログには影響しません。 |
@@ -165,6 +166,7 @@ custom:
             thresholds:
               ok: 0.025
               warning: 0.05
+              critical: 0.1
 ```
 
 ##### モニターを削除するには
@@ -195,15 +197,15 @@ custom:
             thresholds:
               ok: 1
               warning: 2
+              critical: 3
 ```
 
 ## 変更の分割
 
 ### [v5.0.0](https://github.com/DataDog/serverless-plugin-datadog/releases/tag/v5.0.0)
 
-- このプラグインは、Service と ENV のタグの設定を止め、代わりに環境変数を使用します (Datadog 拡張機能と併用する場合)。
-
-v5.0 は、Datadog 拡張機能の v10 以上、および Datadog Forwarder の全バージョンと互換性があります。
+- Datadog 拡張機能と併用することで、Lambda のリソースタグではなく、環境変数を通して `service` と `env` タグを設定するプラグインです。
+- `enableTags` パラメータは、新しい `service`、`env` パラメータに置き換わりました。
 
 ### [v4.0.0](https://github.com/DataDog/serverless-plugin-datadog/releases/tag/v4.0.0)
 
