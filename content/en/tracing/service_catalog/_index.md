@@ -7,6 +7,12 @@ further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Service Definition API"
+- link: "/tracing/service_catalog/guides/understanding-service-configuration"
+  tag: "Guide"
+  text: "Understanding Your Service Configuration"
+- link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
+  tag: "Guide"
+  text: "See Upstream and Downstream Dependencies During an Active Incident"
 ---
 
 
