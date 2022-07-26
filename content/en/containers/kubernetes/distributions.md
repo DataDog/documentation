@@ -535,8 +535,6 @@ spec:
     kubeStateMetricsCore:
       enabled: true
   agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
     config:
       kubelet:
         tlsVerify: false
@@ -547,8 +545,6 @@ spec:
   clusterAgent:
     config:
       collectEvents: true
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
 ```
 
 {{% /tab %}}
