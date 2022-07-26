@@ -8,7 +8,6 @@ assets:
 categories:
 - monitoring
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
 display_name: Prometheus
@@ -23,7 +22,7 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 name: prometheus
-public_title: Datadog-Prometheus (レガシー) インテグレーション
+public_title: Prometheus (レガシー) インテグレーション
 short_description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
 support: コア
 supported_os:

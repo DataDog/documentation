@@ -9,15 +9,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/monitor-dns-with-datadog/"
+  tag: "Blog"
+  text: "DNS monitoring with Datadog"
 - link: "/getting_started/synthetics/api_test"
   tag: "Documentation"
   text: "Get started with API tests"
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Test DNS resolution of your internal endpoints"
-- link: "https://www.datadoghq.com/blog/monitor-dns-with-datadog/"
-  tag: "Blog"
-  text: "DNS monitoring with Datadog"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 
 ## Overview
@@ -92,9 +95,9 @@ Your test can trigger retries `X` times after `Y` ms in case of a failed test re
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -113,7 +116,9 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click on **Save** to save your test and have Datadog start executing it.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][9].
 
 ## Variables
 
@@ -138,7 +143,7 @@ You can create local variables by clicking **Create Local Variable** at the top 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][9] in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][10] in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -167,13 +172,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][10].
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][11].
 
-If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][12] on their accounts.
+Access restriction is available for customers using [custom roles][13] on their accounts.
 
 You can restrict access to a DNS test based on the roles in your organization. When creating a DNS test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -191,7 +196,8 @@ You can restrict access to a DNS test based on the roles in your organization. W
 [6]: /monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /synthetics/settings/#global-variables
-[10]: /account_management/rbac/
-[11]: /account_management/rbac#custom-roles
-[12]: /account_management/rbac/#create-a-custom-role
+[9]: /synthetics/guide/synthetic-test-monitors
+[10]: /synthetics/settings/#global-variables
+[11]: /account_management/rbac/
+[12]: /account_management/rbac#custom-roles
+[13]: /account_management/rbac/#create-a-custom-role

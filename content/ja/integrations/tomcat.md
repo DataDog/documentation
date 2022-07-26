@@ -23,7 +23,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md
 display_name: Tomcat
@@ -42,7 +41,7 @@ metric_to_check: tomcat.threads.count
 name: tomcat
 process_signatures:
 - java tomcat
-public_title: Datadog-Tomcat インテグレーション
+public_title: Tomcat インテグレーション
 short_description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
 support: コア
 supported_os:

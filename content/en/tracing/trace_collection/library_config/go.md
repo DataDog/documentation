@@ -64,6 +64,14 @@ Override the default trace Agent host address for trace submission.
 : **Default**: `8125` <br>
 Override the default trace Agent port for DogStatsD metric submission.
 
+`DD_TRACE_SAMPLING_RULES`
+: **Default**: `nil`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+For more information, see [Ingestion Mechanisms][3].<br>
+**Examples:**<br>
+  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
+
 `DD_TRACE_SAMPLE_RATE`
 : Enable ingestion rate control.
 
@@ -94,11 +102,11 @@ Dynamically rename services through configuration. Services can be separated by 
 
 ## Configure APM environment name
 
-The [APM environment name][3] may be configured [in the Agent][4] or using the [WithEnv][2] start option of the tracer.
+The [APM environment name][4] may be configured [in the Agent][5] or using the [WithEnv][2] start option of the tracer.
 
 ## B3 headers extraction and injection
 
-The Datadog APM tracer supports [B3 headers extraction][5] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][6] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -124,6 +132,7 @@ extracted value is used.
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[3]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[4]: /getting_started/tracing/#environment-name
-[5]: https://github.com/openzipkin/b3-propagation
+[3]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
+[4]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[5]: /getting_started/tracing/#environment-name
+[6]: https://github.com/openzipkin/b3-propagation

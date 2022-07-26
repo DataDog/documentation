@@ -16,7 +16,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
 display_name: fluentd
@@ -37,7 +36,7 @@ process_signatures:
 - td-agent
 - fluentd
 - ruby td-agent
-public_title: Datadog-FluentD インテグレーション
+public_title: FluentD インテグレーション
 short_description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
 support: コア
 supported_os:

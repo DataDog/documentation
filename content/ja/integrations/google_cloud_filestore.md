@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
 dependencies: []
 description: Google Cloud Filestore のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_filestore/
@@ -21,6 +20,7 @@ public_title: Datadog-Google Cloud Filestore インテグレーション
 short_description: Google Cloud Filestore のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Filestore は、データ用のファイルシステムインターフェイスと共有ファイルシステムを必要とするアプリケーション向けのマネージド型ファイルストレージサービスです。

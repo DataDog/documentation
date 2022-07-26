@@ -1,23 +1,25 @@
 ---
 categories:
-  - exceptions
-ddtype: crawler
+- exceptions
 dependencies: []
 description: イベントストリームで Honeybadger の例外を表示、検索、議論。
-doc_link: 'https://docs.datadoghq.com/integrations/honeybadger/'
+doc_link: https://docs.datadoghq.com/integrations/honeybadger/
 draft: false
 git_integration_title: honeybadger
 has_logo: true
 integration_id: honeybadger
 integration_title: Honeybadger
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: honeybadger
 public_title: Datadog-Honeybadger インテグレーション
 short_description: イベントストリームで Honeybadger の例外を表示、検索、議論。
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger のイベント" popup="true">}}
 
 ## 概要
@@ -62,6 +64,6 @@ Honeybadger インテグレーションには、サービスのチェック機�
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://app.honeybadger.io/users/sign_in
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/account/settings#integrations/honeybadger
 [4]: https://docs.datadoghq.com/ja/help/

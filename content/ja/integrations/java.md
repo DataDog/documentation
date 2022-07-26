@@ -1,36 +1,36 @@
 ---
 aliases:
-  - /ja/agent/faq/docker-jmx
+- /ja/agent/faq/docker-jmx
 categories:
-  - languages
-ddtype: チェック
+- languages
 dependencies: []
-description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集します。
+description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集。
 doc_link: https://docs.datadoghq.com/integrations/java/
 draft: false
 further_reading:
-  - link: https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect
-    tag: よくあるご質問
-    text: JMX インテグレーションに一致する Bean がありますが、データが収集できません。
-  - link: https://docs.datadoghq.com/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
-    tag: よくあるご質問
-    text: jConsole で JMX データを表示し、jmx.yaml でデータの収集をセットアップする
-  - link: https://docs.datadoghq.com/integrations/faq/jmx-yaml-error-include-section/
-    tag: よくあるご質問
-    text: 'jmx.yaml error: Include Section'
-  - link: https://docs.datadoghq.com/integrations/faq/collecting-composite-type-jmx-attributes/
-    tag: よくあるご質問
-    text: 複合型の JMX 属性を収集する
-  - link: https://docs.datadoghq.com/integrations/faq/how-to-run-jmx-commands-in-windows/
-    tag: よくあるご質問
-    text: Windows で JMX コマンドを実行する
-  - link: https://docs.datadoghq.com/integrations/faq/how-to-use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/
-    tag: よくあるご質問
-    text: Bean 正規表現を使用して JMX メトリクスをフィルタリングし、追加のタグを提供する方法
+- link: https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect
+  tag: よくあるご質問
+  text: JMX インテグレーションに一致する Bean がありますが、データが収集できません。
+- link: https://docs.datadoghq.com/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
+  tag: よくあるご質問
+  text: jConsole で JMX データを表示し、jmx.yaml でデータの収集をセットアップする
+- link: https://docs.datadoghq.com/integrations/faq/jmx-yaml-error-include-section/
+  tag: よくあるご質問
+  text: 'jmx.yaml error: Include Section'
+- link: https://docs.datadoghq.com/integrations/faq/collecting-composite-type-jmx-attributes/
+  tag: よくあるご質問
+  text: 複合型の JMX 属性を収集する
+- link: https://docs.datadoghq.com/integrations/guide/running-jmx-commands-in-windows/
+  tag: ガイド
+  text: Windows で JMX コマンドを実行する
+- link: https://docs.datadoghq.com/integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/
+  tag: ガイド
+  text: Bean 正規表現を使用して JMX メトリクスをフィルタリングし、追加のタグを提供する
 git_integration_title: java
 has_logo: true
 integration_id: java
 integration_title: JMX
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -39,6 +39,7 @@ public_title: Datadog-JMX インテグレーション
 short_description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集。
 version: '1.0'
 ---
+
 ## 概要
 
 Java インテグレーションを利用して、Java アプリケーションからメトリクス、トレース、ログを収集できます。
@@ -168,16 +169,16 @@ mydomain:attr0=val0,attr1=val1
 
 各 `include` または `exclude` 辞書は次のキーをサポートします。
 
-| キー                   | 説明                                                                                                                                                                                                      |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| キー                   | 説明                                                                                                                                                                                                             |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `domain`              | ドメイン名またはドメイン名のリスト (例: `java.lang`)。                                                                                                                                                        |
 | `domain_regex`        | ドメイン名に一致する正規表現のパターンまたはパターンリスト (例: `java\.lang.*`)。                                                                                                                              |
 | `bean` または `bean_name` | Bean 名または完全な Bean 名のリスト (例: `java.lang:type=Compilation`)。                                                                                                                                      |
 | `bean_regex`          | 完全な Bean名に一致する正規表現のパターンまたはパターンリスト (例: `java\.lang.*[,:]type=Compilation.*`)。正規表現でキャプチャグループを使用して、タグ値として指定できます。上記のコンフィギュレーション例を参照してください。 |
 | `class`               | クラス名のリストのクラス (例: `org.datadog.jmxfetch.SimpleTestJavaApp`)。                                                                                                                                  |
 | `class_regex`         | クラス名に一致する正規表現のパターンまたはパターンリスト (例: `org\.datadog\.jmxfetch\.SimpleTestJavaApp`)。                                                                                                 |
-| `exclude_tags`        | 最終メトリクスから削除するタグキーのリスト。メトリクスタグの粒度の向上に使用します (例: `["attr1", "id", "partition-id"]`)。                                                           |
-| `attribute`           | 属性名のリストまたは辞書 (詳細については以下を参照)。                                                                                                                                          |
+| `exclude_tags`        | 最終メトリクスから削除するタグキーのリスト。メトリクスタグの粒度の向上に使用します (例: `["attr1", "id", "partition-id"]`)。                                                            |
+| `attribute`           | 属性名のリストまたは辞書 (詳細については以下を参照)。                                                                                                                                                 |
 
 **注**:
 

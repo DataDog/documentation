@@ -2646,25 +2646,30 @@ main:
     identifier: synthetics_testing_tunnel
     weight: 7
   - name: Dashboards
-    url: /synthetics/dashboards/
+    url: synthetics/dashboards
     parent: synthetics
     identifier: synthetics_dashboards
     weight: 8
   - name: API Test
-    url: /synthetics/dashboards/api_test
+    url: synthetics/dashboards/api_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_api_test
     weight: 801
   - name: Browser Test
-    url: /synthetics/dashboards/browser_test
+    url: synthetics/dashboards/browser_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_browser_test
     weight: 802
+  - name: Testing Coverage
+    url: synthetics/dashboards/testing_coverage
+    parent: synthetics_dashboards
+    identifier: synthetics_dashboards_testing_coverage
+    weight: 803
   - name: Test Summary
-    url: /synthetics/dashboards/test_summary
+    url: synthetics/dashboards/test_summary
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_test_summary
-    weight: 803
+    weight: 804
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
@@ -2847,6 +2852,11 @@ main:
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
     weight: 602
+  - name: Troubleshooting
+    url: real_user_monitoring/session_replay/troubleshooting
+    parent: rum_session_replay
+    identifier: rum_session_replay_troubleshooting
+    weight: 603
   - name: Frustration Signals
     url: real_user_monitoring/frustration_signals/
     parent: rum
@@ -2877,16 +2887,21 @@ main:
     parent: rum_dashboards
     identifier: rum_dashboards_errors
     weight: 804
+  - name: Testing Coverage
+    url: real_user_monitoring/dashboards/testing_coverage
+    parent: rum_dashboards
+    identifier: rum_dashboards_testing_coverage
+    weight: 805
   - name: Resources
     url: real_user_monitoring/dashboards/resources_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_resources
-    weight: 805
+    weight: 806
   - name: Mobile
     url: real_user_monitoring/dashboards/mobile_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_mobile
-    weight: 806
+    weight: 807
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
@@ -4055,6 +4070,19 @@ api:
     url: /api/latest/events/
     identifier: events
     generated: true
+  - name: Search events
+    url: '#search-events'
+    identifier: events-search-events
+    parent: events
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchEvents
+      unstable:
+        - v2
+      order: 2
   - name: Get an event
     url: '#get-an-event'
     identifier: events-get-an-event
@@ -4079,17 +4107,19 @@ api:
         - CreateEvent
       unstable: []
       order: 1
-  - name: Query the event stream
-    url: '#query-the-event-stream'
-    identifier: events-query-the-event-stream
+  - name: Get a list of events
+    url: '#get-a-list-of-events'
+    identifier: events-get-a-list-of-events
     parent: events
     generated: true
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListEvents
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: GCP Integration
     url: /api/latest/gcp-integration/
@@ -6176,7 +6206,7 @@ api:
     url: /api/latest/usage-metering/
     identifier: usage-metering
     generated: true
-  - name: Get hourly usage for Observability Pipelines
+  - name: Get hourly usage for observability pipelines
     url: '#get-hourly-usage-for-observability-pipelines'
     identifier: usage-metering-get-hourly-usage-for-observability-pipelines
     parent: usage-metering
@@ -6188,7 +6218,7 @@ api:
         - GetUsageObservabilityPipelines
       unstable: []
       order: 38
-  - name: Get hourly usage for Lambda Traced Invocations
+  - name: Get hourly usage for lambda traced invocations
     url: '#get-hourly-usage-for-lambda-traced-invocations'
     identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
     parent: usage-metering
@@ -6199,7 +6229,7 @@ api:
       operationids:
         - GetUsageLambdaTracedInvocations
       unstable: []
-      order: 38
+      order: 36
   - name: Get hourly usage by product family
     url: '#get-hourly-usage-by-product-family'
     identifier: usage-metering-get-hourly-usage-by-product-family
@@ -6211,7 +6241,7 @@ api:
       operationids:
         - GetHourlyUsage
       unstable: []
-      order: 40
+      order: 1
   - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
     identifier: usage-metering-get-cost-across-multi-org-account
@@ -6223,8 +6253,8 @@ api:
       operationids:
         - GetCostByOrg
       unstable: []
-      order: 39
-  - name: Get hourly usage for Application Security
+      order: 5
+  - name: Get hourly usage for application security
     url: '#get-hourly-usage-for-application-security'
     identifier: usage-metering-get-hourly-usage-for-application-security
     parent: usage-metering
@@ -6235,7 +6265,7 @@ api:
       operationids:
         - GetUsageApplicationSecurityMonitoring
       unstable: []
-      order: 38
+      order: 37
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: usage-metering-get-all-custom-metrics-by-hourly-average
@@ -6247,7 +6277,7 @@ api:
       operationids:
         - GetUsageTopAvgMetrics
       unstable: []
-      order: 5
+      order: 6
   - name: Get hourly usage for custom metrics
     url: '#get-hourly-usage-for-custom-metrics'
     identifier: usage-metering-get-hourly-usage-for-custom-metrics
@@ -6259,8 +6289,8 @@ api:
       operationids:
         - GetUsageTimeseries
       unstable: []
-      order: 4
-  - name: Get hourly usage for Synthetics Browser Checks
+      order: 12
+  - name: Get hourly usage for synthetics browser checks
     url: '#get-hourly-usage-for-synthetics-browser-checks'
     identifier: usage-metering-get-hourly-usage-for-synthetics-browser-checks
     parent: usage-metering
@@ -6271,8 +6301,8 @@ api:
       operationids:
         - GetUsageSyntheticsBrowser
       unstable: []
-      order: 10
-  - name: Get hourly usage for Synthetics API Checks
+      order: 16
+  - name: Get hourly usage for synthetics API checks
     url: '#get-hourly-usage-for-synthetics-api-checks'
     identifier: usage-metering-get-hourly-usage-for-synthetics-api-checks
     parent: usage-metering
@@ -6283,8 +6313,8 @@ api:
       operationids:
         - GetUsageSyntheticsAPI
       unstable: []
-      order: 9
-  - name: Get hourly usage for Synthetics Checks
+      order: 15
+  - name: Get hourly usage for synthetics checks
     url: '#get-hourly-usage-for-synthetics-checks'
     identifier: usage-metering-get-hourly-usage-for-synthetics-checks
     parent: usage-metering
@@ -6295,7 +6325,7 @@ api:
       operationids:
         - GetUsageSynthetics
       unstable: []
-      order: 8
+      order: 14
   - name: Get usage across your multi-org account
     url: '#get-usage-across-your-multi-org-account'
     identifier: usage-metering-get-usage-across-your-multi-org-account
@@ -6307,7 +6337,7 @@ api:
       operationids:
         - GetUsageSummary
       unstable: []
-      order: 16
+      order: 7
   - name: Get hourly usage for SNMP devices
     url: '#get-hourly-usage-for-snmp-devices'
     identifier: usage-metering-get-hourly-usage-for-snmp-devices
@@ -6319,8 +6349,8 @@ api:
       operationids:
         - GetUsageSNMP
       unstable: []
-      order: 18
-  - name: Get hourly usage for Sensitive Data Scanner
+      order: 23
+  - name: Get hourly usage for sensitive data scanner
     url: '#get-hourly-usage-for-sensitive-data-scanner'
     identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
     parent: usage-metering
@@ -6331,8 +6361,8 @@ api:
       operationids:
         - GetUsageSDS
       unstable: []
-      order: 36
-  - name: Get hourly usage for RUM Sessions
+      order: 31
+  - name: Get hourly usage for RUM sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: usage-metering-get-hourly-usage-for-rum-sessions
     parent: usage-metering
@@ -6343,8 +6373,8 @@ api:
       operationids:
         - GetUsageRumSessions
       unstable: []
-      order: 13
-  - name: Get hourly usage for RUM Units
+      order: 19
+  - name: Get hourly usage for RUM units
     url: '#get-hourly-usage-for-rum-units'
     identifier: usage-metering-get-hourly-usage-for-rum-units
     parent: usage-metering
@@ -6355,7 +6385,7 @@ api:
       operationids:
         - GetUsageRumUnits
       unstable: []
-      order: 37
+      order: 32
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: usage-metering-get-hourly-usage-for-profiled-hosts
@@ -6367,8 +6397,8 @@ api:
       operationids:
         - GetUsageProfiling
       unstable: []
-      order: 24
-  - name: Get hourly usage for Online Archive
+      order: 33
+  - name: Get hourly usage for online archive
     url: '#get-hourly-usage-for-online-archive'
     identifier: usage-metering-get-hourly-usage-for-online-archive
     parent: usage-metering
@@ -6379,8 +6409,8 @@ api:
       operationids:
         - GetUsageOnlineArchive
       unstable: []
-      order: 38
-  - name: Get hourly usage for Network Hosts
+      order: 35
+  - name: Get hourly usage for network hosts
     url: '#get-hourly-usage-for-network-hosts'
     identifier: usage-metering-get-hourly-usage-for-network-hosts
     parent: usage-metering
@@ -6391,8 +6421,8 @@ api:
       operationids:
         - GetUsageNetworkHosts
       unstable: []
-      order: 14
-  - name: Get hourly usage for Network Flows
+      order: 20
+  - name: get hourly usage for network flows
     url: '#get-hourly-usage-for-network-flows'
     identifier: usage-metering-get-hourly-usage-for-network-flows
     parent: usage-metering
@@ -6403,7 +6433,7 @@ api:
       operationids:
         - GetUsageNetworkFlows
       unstable: []
-      order: 15
+      order: 21
   - name: Get monthly usage attribution
     url: '#get-monthly-usage-attribution'
     identifier: usage-metering-get-monthly-usage-attribution
@@ -6415,8 +6445,8 @@ api:
       operationids:
         - GetMonthlyUsageAttribution
       unstable: []
-      order: 31
-  - name: Get hourly usage for Logs by Index
+      order: 3
+  - name: Get hourly usage for logs by index
     url: '#get-hourly-usage-for-logs-by-index'
     identifier: usage-metering-get-hourly-usage-for-logs-by-index
     parent: usage-metering
@@ -6427,7 +6457,7 @@ api:
       operationids:
         - GetUsageLogsByIndex
       unstable: []
-      order: 3
+      order: 8
   - name: Get hourly logs usage by retention
     url: '#get-hourly-logs-usage-by-retention'
     identifier: usage-metering-get-hourly-logs-usage-by-retention
@@ -6439,8 +6469,8 @@ api:
       operationids:
         - GetUsageLogsByRetention
       unstable: []
-      order: 0
-  - name: Get hourly usage for Logs
+      order: 9
+  - name: Get hourly usage for logs
     url: '#get-hourly-usage-for-logs'
     identifier: usage-metering-get-hourly-usage-for-logs
     parent: usage-metering
@@ -6451,7 +6481,7 @@ api:
       operationids:
         - GetUsageLogs
       unstable: []
-      order: 2
+      order: 11
   - name: Get hourly usage for IoT
     url: '#get-hourly-usage-for-iot'
     identifier: usage-metering-get-hourly-usage-for-iot
@@ -6463,7 +6493,7 @@ api:
       operationids:
         - GetUsageInternetOfThings
       unstable: []
-      order: 28
+      order: 26
   - name: Get hourly usage for ingested spans
     url: '#get-hourly-usage-for-ingested-spans'
     identifier: usage-metering-get-hourly-usage-for-ingested-spans
@@ -6475,7 +6505,7 @@ api:
       operationids:
         - GetIngestedSpans
       unstable: []
-      order: 26
+      order: 24
   - name: Get hourly usage for indexed spans
     url: '#get-hourly-usage-for-indexed-spans'
     identifier: usage-metering-get-hourly-usage-for-indexed-spans
@@ -6487,7 +6517,7 @@ api:
       operationids:
         - GetUsageIndexedSpans
       unstable: []
-      order: 7
+      order: 13
   - name: Get hourly usage for incident management
     url: '#get-hourly-usage-for-incident-management'
     identifier: usage-metering-get-hourly-usage-for-incident-management
@@ -6499,7 +6529,7 @@ api:
       operationids:
         - GetIncidentManagement
       unstable: []
-      order: 27
+      order: 25
   - name: Get hourly usage attribution
     url: '#get-hourly-usage-attribution'
     identifier: usage-metering-get-hourly-usage-attribution
@@ -6511,7 +6541,7 @@ api:
       operationids:
         - GetHourlyUsageAttribution
       unstable: []
-      order: 30
+      order: 2
   - name: Get hourly usage for hosts and containers
     url: '#get-hourly-usage-for-hosts-and-containers'
     identifier: usage-metering-get-hourly-usage-for-hosts-and-containers
@@ -6523,7 +6553,7 @@ api:
       operationids:
         - GetUsageHosts
       unstable: []
-      order: 1
+      order: 10
   - name: Get hourly usage for Fargate
     url: '#get-hourly-usage-for-fargate'
     identifier: usage-metering-get-hourly-usage-for-fargate
@@ -6535,8 +6565,8 @@ api:
       operationids:
         - GetUsageFargate
       unstable: []
-      order: 11
-  - name: Get hourly usage for Database Monitoring
+      order: 17
+  - name: Get hourly usage for database monitoring
     url: '#get-hourly-usage-for-database-monitoring'
     identifier: usage-metering-get-hourly-usage-for-database-monitoring
     parent: usage-metering
@@ -6547,8 +6577,8 @@ api:
       operationids:
         - GetUsageDBM
       unstable: []
-      order: 35
-  - name: Get hourly usage for Cloud Workload Security
+      order: 30
+  - name: Get hourly usage for cloud workload security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: usage-metering-get-hourly-usage-for-cloud-workload-security
     parent: usage-metering
@@ -6559,7 +6589,7 @@ api:
       operationids:
         - GetUsageCWS
       unstable: []
-      order: 34
+      order: 29
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
     identifier: usage-metering-get-hourly-usage-for-cspm
@@ -6571,8 +6601,8 @@ api:
       operationids:
         - GetUsageCloudSecurityPostureManagement
       unstable: []
-      order: 32
-  - name: Get hourly usage for CI Visibility
+      order: 27
+  - name: Get hourly usage for CI visibility
     url: '#get-hourly-usage-for-ci-visibility'
     identifier: usage-metering-get-hourly-usage-for-ci-visibility
     parent: usage-metering
@@ -6583,7 +6613,7 @@ api:
       operationids:
         - GetUsageCIApp
       unstable: []
-      order: 38
+      order: 34
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: usage-metering-get-billable-usage-across-your-account
@@ -6595,8 +6625,8 @@ api:
       operationids:
         - GetUsageBillableSummary
       unstable: []
-      order: 19
-  - name: Get hourly usage for Lambda
+      order: 5
+  - name: Get hourly usage for lambda
     url: '#get-hourly-usage-for-lambda'
     identifier: usage-metering-get-hourly-usage-for-lambda
     parent: usage-metering
@@ -6607,7 +6637,7 @@ api:
       operationids:
         - GetUsageLambda
       unstable: []
-      order: 12
+      order: 18
   - name: Get hourly usage for audit logs
     url: '#get-hourly-usage-for-audit-logs'
     identifier: usage-metering-get-hourly-usage-for-audit-logs
@@ -6619,7 +6649,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 33
+      order: 28
   - name: Get usage attribution
     url: '#get-usage-attribution'
     identifier: usage-metering-get-usage-attribution
@@ -6632,7 +6662,7 @@ api:
         - GetUsageAttribution
       unstable:
         - v1
-      order: 29
+      order: 39
   - name: Get hourly usage for analyzed logs
     url: '#get-hourly-usage-for-analyzed-logs'
     identifier: usage-metering-get-hourly-usage-for-analyzed-logs
@@ -6644,7 +6674,7 @@ api:
       operationids:
         - GetUsageAnalyzedLogs
       unstable: []
-      order: 17
+      order: 22
   - name: Get specified monthly custom reports
     url: '#get-specified-monthly-custom-reports'
     identifier: usage-metering-get-specified-monthly-custom-reports
@@ -6657,7 +6687,7 @@ api:
         - GetSpecifiedMonthlyCustomReports
       unstable:
         - v1
-      order: 23
+      order: 43
   - name: Get the list of available monthly custom reports
     url: '#get-the-list-of-available-monthly-custom-reports'
     identifier: usage-metering-get-the-list-of-available-monthly-custom-reports
@@ -6670,7 +6700,7 @@ api:
         - GetMonthlyCustomReports
       unstable:
         - v1
-      order: 22
+      order: 42
   - name: Get specified daily custom reports
     url: '#get-specified-daily-custom-reports'
     identifier: usage-metering-get-specified-daily-custom-reports
@@ -6683,7 +6713,7 @@ api:
         - GetSpecifiedDailyCustomReports
       unstable:
         - v1
-      order: 21
+      order: 41
   - name: Get the list of available daily custom reports
     url: '#get-the-list-of-available-daily-custom-reports'
     identifier: usage-metering-get-the-list-of-available-daily-custom-reports
@@ -6696,7 +6726,7 @@ api:
         - GetDailyCustomReports
       unstable:
         - v1
-      order: 20
+      order: 40
   - name: Users
     url: /api/latest/users/
     identifier: users

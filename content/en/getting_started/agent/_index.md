@@ -25,7 +25,7 @@ This guide provides an introduction to the Agent and how you can use it to send 
 
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. It can run on your local hosts (Windows, MacOS), containerized environments (Docker, Kubernetes), and in on-premises data centers. You can install and configure it using configuration management tools (Chef, Puppet, Ansible). 
 
-The Agent is able to collect 75 to 100 system level metrics every 15 to 20 seconds. With additional setup and configuration, the Agent can also send live processes data, logs, and traces to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
+The Agent is able to collect 75 to 100 system level metrics every 15 to 20 seconds. With additional configuration, the Agent can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
 ### Agent overhead
 

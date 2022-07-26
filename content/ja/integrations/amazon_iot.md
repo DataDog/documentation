@@ -1,19 +1,19 @@
 ---
 aliases:
-  - /ja/integrations/awsiot/
+- /ja/integrations/awsiot/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- aws
+- log collection
 dependencies: []
 description: Amazon Internet of Things のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_iot/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_iot/
 draft: false
 git_integration_title: amazon_iot
 has_logo: true
 integration_id: amazon-iot
 integration_title: Amazon Internet of Things
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-Amazon Internet of Things インテグレーション
 short_description: Amazon Internet of Things のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 AWS IoT は、接続されたデバイスが簡単かつセキュアにクラウドアプリケーションや他のデバイスと対話できるようにするマネージド型クラウドプラットフォームです。
@@ -61,7 +62,7 @@ Amazon IoT から S3 バケットまたは CloudWatch のいずれかにログ�
 {{< get-metrics-from-git "amazon_iot" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 

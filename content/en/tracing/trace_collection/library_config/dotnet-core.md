@@ -145,7 +145,7 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` a
 For more information, see [Ingestion Mechanisms][11].<br>
 **Examples:**<br>
   - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
-  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`  
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
@@ -295,3 +295,4 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 [8]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
+[11]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle

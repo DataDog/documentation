@@ -199,7 +199,7 @@
   },
   "ListEvents": {
     "description": "The event stream can be queried and filtered by time, priority, sources and tags.\n\n**Notes**:\n- If the event you’re querying contains markdown formatting of any kind,\nyou may see characters such as `%`,`\\`,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most recent results. To return additional results,\nidentify the last timestamp of the last result and set that as the `end` query time to\npaginate the results. You can also use the page parameter to specify which set of `1000` results to return.",
-    "summary": "Query the event stream"
+    "summary": "Get a list of events"
   },
   "CreateEvent": {
     "description": "This endpoint allows you to post events to the stream.\nTag them, set priority and event aggregate them with other events.",
@@ -979,7 +979,7 @@
     "request_schema_description": "Set of tags to associate with your host."
   },
   "GetUsageAnalyzedLogs": {
-    "description": "Get hourly usage for analyzed logs (Security Monitoring).",
+    "description": "Get hourly usage for analyzed logs (Security Monitoring).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for analyzed logs"
   },
   "GetUsageAttribution": {
@@ -987,39 +987,39 @@
     "summary": "Get usage attribution"
   },
   "GetUsageAuditLogs": {
-    "description": "Get hourly usage for audit logs.",
+    "description": "Get hourly usage for audit logs.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for audit logs"
   },
   "GetUsageLambda": {
-    "description": "Get hourly usage for lambda.",
-    "summary": "Get hourly usage for Lambda"
+    "description": "Get hourly usage for lambda.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for lambda"
   },
   "GetUsageBillableSummary": {
     "description": "Get billable usage across your account.",
     "summary": "Get billable usage across your account"
   },
   "GetUsageCIApp": {
-    "description": "Get hourly usage for CI Visibility (Tests, Pipeline, and Spans).",
-    "summary": "Get hourly usage for CI Visibility"
+    "description": "Get hourly usage for CI visibility (tests, pipeline, and spans).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for CI visibility"
   },
   "GetUsageCloudSecurityPostureManagement": {
-    "description": "Get hourly usage for Cloud Security Posture Management (CSPM).",
+    "description": "Get hourly usage for cloud security posture management (CSPM).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for CSPM"
   },
   "GetUsageCWS": {
-    "description": "Get hourly usage for Cloud Workload Security.",
-    "summary": "Get hourly usage for Cloud Workload Security"
+    "description": "Get hourly usage for cloud workload security.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for cloud workload security"
   },
   "GetUsageDBM": {
-    "description": "Get hourly usage for Database Monitoring",
-    "summary": "Get hourly usage for Database Monitoring"
+    "description": "Get hourly usage for database monitoring\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for database monitoring"
   },
   "GetUsageFargate": {
-    "description": "Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).",
+    "description": "Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for Fargate"
   },
   "GetUsageHosts": {
-    "description": "Get hourly usage for hosts and containers.",
+    "description": "Get hourly usage for hosts and containers.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for hosts and containers"
   },
   "GetHourlyUsageAttribution": {
@@ -1027,67 +1027,67 @@
     "summary": "Get hourly usage attribution"
   },
   "GetIncidentManagement": {
-    "description": "Get hourly usage for incident management.",
+    "description": "Get hourly usage for incident management.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for incident management"
   },
   "GetUsageIndexedSpans": {
-    "description": "Get hourly usage for indexed spans.",
+    "description": "Get hourly usage for indexed spans.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for indexed spans"
   },
   "GetIngestedSpans": {
-    "description": "Get hourly usage for ingested spans.",
+    "description": "Get hourly usage for ingested spans.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for ingested spans"
   },
   "GetUsageInternetOfThings": {
-    "description": "Get hourly usage for IoT.",
+    "description": "Get hourly usage for IoT.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for IoT"
   },
   "GetUsageLogs": {
-    "description": "Get hourly usage for logs.",
-    "summary": "Get hourly usage for Logs"
+    "description": "Get hourly usage for logs.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for logs"
   },
   "GetUsageLogsByRetention": {
-    "description": "Get hourly usage for indexed logs by retention period.",
+    "description": "Get hourly usage for indexed logs by retention period.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly logs usage by retention"
   },
   "GetUsageLogsByIndex": {
     "description": "Get hourly usage for logs by index.",
-    "summary": "Get hourly usage for Logs by Index"
+    "summary": "Get hourly usage for logs by index"
   },
   "GetMonthlyUsageAttribution": {
     "description": "Get monthly usage attribution.\n\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
     "summary": "Get monthly usage attribution"
   },
   "GetUsageNetworkFlows": {
-    "description": "Get hourly usage for network flows.",
-    "summary": "Get hourly usage for Network Flows"
+    "description": "Get hourly usage for network flows.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "get hourly usage for network flows"
   },
   "GetUsageNetworkHosts": {
-    "description": "Get hourly usage for network hosts.",
-    "summary": "Get hourly usage for Network Hosts"
+    "description": "Get hourly usage for network hosts.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for network hosts"
   },
   "GetUsageOnlineArchive": {
-    "description": "Get hourly usage for Online Archive.",
-    "summary": "Get hourly usage for Online Archive"
+    "description": "Get hourly usage for online archive.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for online archive"
   },
   "GetUsageProfiling": {
-    "description": "Get hourly usage for profiled hosts.",
+    "description": "Get hourly usage for profiled hosts.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for profiled hosts"
   },
   "GetUsageRumUnits": {
-    "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Units.",
-    "summary": "Get hourly usage for RUM Units"
+    "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Units.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for RUM units"
   },
   "GetUsageRumSessions": {
-    "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Sessions.",
-    "summary": "Get hourly usage for RUM Sessions"
+    "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Sessions.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for RUM sessions"
   },
   "GetUsageSDS": {
-    "description": "Get hourly usage for Sensitive Data Scanner.",
-    "summary": "Get hourly usage for Sensitive Data Scanner"
+    "description": "Get hourly usage for sensitive data scanner.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for sensitive data scanner"
   },
   "GetUsageSNMP": {
-    "description": "Get hourly usage for SNMP devices.",
+    "description": "Get hourly usage for SNMP devices.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for SNMP devices"
   },
   "GetUsageSummary": {
@@ -1095,19 +1095,19 @@
     "summary": "Get usage across your multi-org account"
   },
   "GetUsageSynthetics": {
-    "description": "Get hourly usage for [Synthetics checks](https://docs.datadoghq.com/synthetics/).",
-    "summary": "Get hourly usage for Synthetics Checks"
+    "description": "Get hourly usage for [synthetics checks](https://docs.datadoghq.com/synthetics/).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for synthetics checks"
   },
   "GetUsageSyntheticsAPI": {
-    "description": "Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).",
-    "summary": "Get hourly usage for Synthetics API Checks"
+    "description": "Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for synthetics API checks"
   },
   "GetUsageSyntheticsBrowser": {
-    "description": "Get hourly usage for synthetics browser checks.",
-    "summary": "Get hourly usage for Synthetics Browser Checks"
+    "description": "Get hourly usage for synthetics browser checks.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for synthetics browser checks"
   },
   "GetUsageTimeseries": {
-    "description": "Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).",
+    "description": "Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for custom metrics"
   },
   "GetUsageTopAvgMetrics": {

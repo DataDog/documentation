@@ -1,26 +1,28 @@
 ---
 categories:
-  - azure
-  - ソースコントロール
-  - コラボレーション
-  - 問題追跡
-ddtype: crawler
+- azure
+- ソースコントロール
+- コラボレーション
+- 問題追跡
 dependencies: []
 description: 主要な Azure DevOps メトリクスを追跡します。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_devops'
+doc_link: https://docs.datadoghq.com/integrations/azure_devops
 draft: false
 git_integration_title: azure_devops
 has_logo: true
 integration_id: azuredevops
 integration_title: Microsoft Azure DevOps
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: azure_devops
 public_title: Datadog-Microsoft Azure DevOps インテグレーション
 short_description: 主要な Azure DevOps メトリクスを追跡します。
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 Datadog と Azure DevOps を統合して、次のことを行います。
@@ -57,7 +59,7 @@ Azure 側の他の参照先: [Create a service hook for Azure DevOps Services an
 
 #### プログラマティック
 
-[Azure ドキュメント][4]および Datadog のエンドポイントを使用して、プログラムでサービスフックサブスクリプションを作成します。
+Azure ドキュメントに従い[プログラムでサービスフックサブスクリプションを作成][4]し、Datadog のエンドポイントを使用します。
 
 ```text
 https://{{< region-param key="dd_full_site" >}}/intake/webhook/azuredevops?api_key=<DATADOG_API_KEY>
@@ -74,7 +76,7 @@ Datadog モニターを、Azure Pipelines の[リリースデプロイをコン�
 2. Azure DevOps で、プロジェクト設定の下の **Service Connections** に移動し、**New Service Connection** を選択します。
 3. リストから Datadog を選択し、**Next** を押します。
 4. 指定されたフィールドに、使用するアカウントの Datadog API キーとアプリケーションキーを追加し、名前と説明を入力して、Azure DevOps でこの Datadog アカウントを識別します。**Save** をクリックします。複数の Datadog アカウントからモニターを照会する必要がある場合は、他のサービス接続を追加できます。
-5. **Azure Pipelines** に移動して、デプロイの構成を開始します。ステージ間でデプロイ前後の条件を追加するオプションが表示されます。Datadog モニターを追加する場所を選択し、**Gates** のトグルスイッチを有効にします。
+5. **Azure Pipelines** に移動して、デプロイを構成します。ステージ間でデプロイ前後の条件を追加するオプションが表示されるので、Datadog モニターを追加する場所を選択し、**Gates** のトグルスイッチを有効にします。
 6. **Add** をクリックし、**Query Datadog monitors** オプションを選択します。
 7. Datadog サービス接続を選択し、使用するモニター ID と重大度しきい値を入力します。重大度しきい値は、タスクが失敗したモニターの状態（`Alert` または `Warning`）です。
 
@@ -84,7 +86,7 @@ Datadog モニターを、Azure Pipelines の[リリースデプロイをコン�
 
 **注**: 各ステージの単一の健全性状態の一部としてパイプラインのゲートの複数の状況を監視するには、[複合条件モニター][7]を使用します。
 
-ソースコードを表示するには、[Azure Devops Monitor Gate Extension リポジトリ][8]にアクセスします。
+ソースコードを表示するには、[Azure Devops Monitor Gate Extension リポジトリ][8]をご覧ください。
 
 ## 収集データ
 
@@ -134,7 +136,7 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 サービスフックサブスクリプションテストは、Azure DevOps が Datadog へイベントを送信できるかどうかのみをチェックします。API キーまたは Datadog オーガニゼーションサイト (US または EU) は検証されません。API キーおよびサイトが正しいことをご確認ください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azuredevops
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/datadog?view=azure-devops
 [4]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
 [5]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops

@@ -13,7 +13,6 @@ categories:
 - web
 - オートディスカバリー
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tls/README.md
 display_name: TLS
@@ -30,7 +29,7 @@ manifest_version: 1.0.0
 metric_prefix: tls.
 metric_to_check: tls.seconds_left
 name: tls
-public_title: Datadog-TLS インテグレーション
+public_title: TLS インテグレーション
 short_description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
 support: コア
 supported_os:

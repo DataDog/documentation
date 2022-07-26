@@ -28,8 +28,19 @@ private: true
     {{< nextlink href="integrations/guide/aws-terraform-setup" tag="AWS" >}}AWS integration automatic setup with Terraform{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-manual-setup" tag="AWS" >}}AWS integration manual setup{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag="AWS" >}}Troubleshooting the AWS integration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag="AWS" >}}Monitor your AWS billing details{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag="AWS" >}}Error: Datadog is not authorized to perform sts:AssumeRole{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag="AWS" >}}Using Amazon CloudFormation{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/cloud-metric-delay" tag="AWS" >}}Cloud metric delay{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-integration-and-cloudwatch-faq" tag="AWS" >}}AWS integration and CloudWatch FAQ{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Azure guides:" >}}
+    {{< nextlink href="integrations/guide/azure-status-metric" tag="Azure" >}}Azure status and count metrics{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-troubleshooting" tag="Azure" >}}Azure troubleshooting{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag="Azure" >}}Azure VMs appear in the app without metrics{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag="Azure" >}}Powered-down Azure VMs on the Infrastructure list{{< /nextlink >}}  
 {{< /whatsnext >}}
 
 {{< whatsnext desc="JMX guides:" >}}

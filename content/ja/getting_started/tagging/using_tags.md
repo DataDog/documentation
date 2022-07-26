@@ -1,19 +1,20 @@
 ---
-title: タグの使用方法
-kind: ドキュメント
 aliases:
-  - /ja/tagging/using_tags/
+- /ja/tagging/using_tags/
 further_reading:
-  - link: /getting_started/tagging/
-    tag: Documentation
-    text: タグの概要
-  - link: /getting_started/tagging/assigning_tags/
-    tag: Documentation
-    text: タグの割り当て方法
-  - link: https://www.datadoghq.com/blog/tagging-best-practices/
-    tag: ブログ
-    text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
+- link: /getting_started/tagging/
+  tag: Documentation
+  text: タグの概要
+- link: /getting_started/tagging/assigning_tags/
+  tag: Documentation
+  text: タグの割り当て方法
+- link: https://www.datadoghq.com/blog/tagging-best-practices/
+  tag: ブログ
+  text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
+kind: ドキュメント
+title: タグの使用方法
 ---
+
 [タグの割り当て][1]後に、Datadog プラットフォームでタグを使用してデータの絞り込みおよびグループ化を開始します。タグを使用して、データを含めたり除外したりできます。複数のタグを含めたり除外したりする場合:
 
 * 含めるには `AND` ロジックを使用します
@@ -21,9 +22,9 @@ further_reading:
 
 ## イベント
 
-[イベントストリーム][2]は、指定された期間に環境内で発生したイベントを表示します。タグを使用して、イベント リストを絞り込み、イベントのサブセットに注目します。そのタグを持つホスト、[インテグレーション][3]、サービスからのすべてのイベントを表示するには、`tags:` に続けてタグを入力します。以下の例は、`tags:service:coffee-house` を使用してタグ `service:coffee-house` を検索します。複数のタグを包括的に検索するには、`tags:service:coffee-house OR host:coffeehouseprod` のように各タグを「OR」で区切ります。複数のタグを排他的に検索するには、`tags:service:coffee-house,host:coffeehouseprod` のように各タグをカンマで区切ります。
+[イベントエクスプローラー][2]は、指定された期間の環境からのイベントを表示します。タグを使用して、イベントリストをフィルターし、イベントのサブセットに焦点を当てることができます。`tags:` の後にタグを入力すると、そのタグを持つホスト、[インテグレーション][3]、またはサービスからのすべてのイベントを見ることができます。例えば、`service:coffee-house` というタグを検索するには、`tags:service:coffee-house` を使用します。
 
-{{< img src="tagging/using_tags/eventtags.png" alt="イベントリストとタグ" style="width:80%;">}}
+複数のタグを包括的に検索する場合は、括弧を使用し、各タグを OR で区切ってください: `tags:(service:coffee-house OR host:coffeehouseprod)`。複数のタグを排他的に検索するには、各タグを AND で区切ってください: `tags:(service:coffee-house AND host:coffeehouseprod)`。
 
 ## ダッシュボード
 
@@ -54,7 +55,7 @@ further_reading:
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="ダッシュボードの avg by テキストボックスに入力されたタグ" style="width:80%;">}}
 
-タグを使用して、ダッシュボードでイベントを重ねることもできます。これは、[イベントストリーム][2]と同じように機能します。
+タグを使用して、ダッシュボードでイベントを重ねることもできます。これは、[イベントエクスプローラー][2]と同じように機能します。
 `tags:` に続けてタグを入力します。一致するイベントは、縦棒としてグラフに重なります。以下の例は、`tags:service:coffee-house` を使用します。
 
 {{< img src="tagging/using_tags/dashboardeventtags.png" alt="ダッシュボードでのイベントオーバーレイ" style="width:80%;">}}
@@ -129,9 +130,11 @@ further_reading:
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
 
-[割り当てられたタグ][1]によってモニターを絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。**注**: モニター タグは、メトリクス タグとは別のもので、独立しています。
+[割り当てられたタグ][1]によってモニターを絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="モニターの管理タグ" style="width:80%;">}}
+
+モニタータグは、メトリクスタグとは異なる別のものです。
 
 [1]: /ja/getting_started/tagging/assigning_tags/
 {{% /tab %}}
@@ -148,7 +151,7 @@ further_reading:
 
 {{< img src="tagging/using_tags/newmonitortags.png" alt="新しいモニタータグ" style="width:80%;">}}
 
-[1]: /ja/monitors/create/types/
+[1]: /ja/monitors/create/#monitor-types
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
@@ -265,9 +268,9 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 {{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="ノートブック除外タグ" video="true" width="80%">}}
 
-## ログ
+## ログ管理
 
-ログ[検索][10]、[分析][11]、[パターン][12]、[Live Tail][13]は、検索バーまたはファセットのチェックボックスを使用して、タグでログを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[ログ検索][10]のページを参照してください。
+ログ[検索][10]、[分析][11]、[パターン][12]、[Live Tail][13]は、検索バーまたはファセットのチェックボックスを使用して、タグでログを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[ログ検索][10]を参照してください。
 
 {{< tabs >}}
 {{% tab "Search" %}}
@@ -296,15 +299,24 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 {{< img src="tagging/using_tags/logpipelinetags.png" alt="パイプラインタグ" style="width:80%;">}}
 
+## RUM & セッションリプレイ
+
+[RUM エクスプローラー][15]は、環境から指定された期間内のイベントを視覚化します。
+
+RUM のイベントデータをタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `service:shopist` のようになります。詳細な検索については、[RUM イベントを検索する][16]を参照してください。
+
+{{< img src="tagging/using_tags/rumtags.png" alt="RUM タグ" style="width:80%;">}}
 
 ## サービスレベル目標
 
 {{< tabs >}}
 {{% tab "Manage SLOs" %}}
 
-[割り当てられたタグ][1]によって SLO を絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `<KEY>:<VALUE>` で、`journey:add_item` などです。特定のタグを持つ SLO を検索から除外するには、`-` を使用して、`-journey:add_item` とします。**注**: SLO タグは、SLO の基底のメトリクスやモニターで使用されるメトリクスタグやモニタータグとは別のもので、独立しています。
+[割り当てられたタグ][1]によって SLO を絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は、`<KEY>:<VALUE>`です (例: `journey:add_item`)。特定のタグを持つ SLO を検索から除外するには、`-` を使用します (例: `-journey:add_item`)。
 
 {{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO タグ" style="width:80%;">}}
+
+SLO タグは、SLO の基礎となるメトリクスまたはモニターで使用されるメトリクスまたはモニタータグとは異なる別のものです。
 
 [1]: /ja/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
 {{% /tab %}}
@@ -333,29 +345,29 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 ## 開発者
 
-[API][15] では、タグはさまざまな方法で使用できます。これらのセクションへのリンクは、以下のリストを参照してください。
+[API][17] では、タグはさまざまな方法で使用できます。これらのセクションへのリンクは、以下のリストを参照してください。
 
-* [モニターのダウンタイムのスケジューリング][16]
-* [イベントストリームのクエリ][17]
-* [ホストの検索][18]
-* [AWS][19] や [Google Cloud][20] のインテグレーション
-* [時系列ポイントのクエリ][21]
-* [すべてのモニターの詳細を取得][22]
-* [モニターのミュート][23]
-* [モニターの検索][22]
-* [モニターグループの検索][22]
-* [スクリーンボードの作成][24]
-* [タイムボードの作成][24]
-* [SLO を作成する][25]
-* [SLO の詳細を取得する][26]
-* [SLO を更新する][27]
+* [モニターのダウンタイムのスケジューリング][18]
+* [イベントエクスプローラーのクエリ][19]
+* [ホストの検索][20]
+* [AWS][21] や [Google Cloud][22] のインテグレーション
+* [時系列ポイントのクエリ][23]
+* [すべてのモニターの詳細を取得][24]
+* [モニターのミュート][25]
+* [モニターの検索][24]
+* [モニターグループの検索][24]
+* [スクリーンボードの作成][26]
+* [タイムボードの作成][26]
+* [SLO を作成する][27]
+* [SLO の詳細を取得する][28]
+* [SLO を更新する][29]
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/tagging/assigning_tags/
-[2]: /ja/events/
+[2]: /ja/events/explorer
 [3]: /ja/integrations/
 [4]: /ja/infrastructure/hostmap/
 [5]: /ja/infrastructure/
@@ -368,16 +380,18 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 [12]: /ja/logs/explorer/patterns/
 [13]: /ja/logs/live_tail/
 [14]: /ja/logs/log_configuration/pipelines
-[15]: /ja/api/
-[16]: /ja/api/v1/downtimes/#schedule-a-downtime
-[17]: /ja/api/v1/events/#query-the-event-stream
-[18]: /ja/api/v1/hosts/
-[19]: /ja/api/v1/aws-integration/
-[20]: /ja/api/v1/gcp-integration/
-[21]: /ja/api/v1/metrics/#query-timeseries-points
-[22]: /ja/api/v1/monitors/#get-all-monitor-details
-[23]: /ja/api/v1/monitors/#mute-a-monitor
-[24]: /ja/api/v1/dashboards/#create-a-new-dashboard
-[25]: /ja/api/v1/service-level-objectives/#create-a-slo-object
-[26]: /ja/api/v1/service-level-objectives/#get-a-slos-details
-[27]: /ja/api/v1/service-level-objectives/#update-a-slo
+[15]: /ja/real_user_monitoring/explorer/
+[16]: /ja/real_user_monitoring/explorer/search/
+[17]: /ja/api/
+[18]: /ja/api/v1/downtimes/#schedule-a-downtime
+[19]: /ja/api/v1/events/#query-the-event-stream
+[20]: /ja/api/v1/hosts/
+[21]: /ja/api/v1/aws-integration/
+[22]: /ja/api/v1/gcp-integration/
+[23]: /ja/api/v1/metrics/#query-timeseries-points
+[24]: /ja/api/v1/monitors/#get-all-monitor-details
+[25]: /ja/api/v1/monitors/#mute-a-monitor
+[26]: /ja/api/v1/dashboards/#create-a-new-dashboard
+[27]: /ja/api/v1/service-level-objectives/#create-a-slo-object
+[28]: /ja/api/v1/service-level-objectives/#get-a-slos-details
+[29]: /ja/api/v1/service-level-objectives/#update-a-slo

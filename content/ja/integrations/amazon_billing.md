@@ -1,21 +1,21 @@
 ---
 aliases:
-  - /ja/integrations/awsbilling/
-  - /ja/integrations/faq/using-datadog-s-aws-billing-integration-to-monitor-your-cloudwatch-usage/
+- /ja/integrations/awsbilling/
+- /ja/integrations/faq/using-datadog-s-aws-billing-integration-to-monitor-your-cloudwatch-usage/
 categories:
-  - cloud
-  - Cost Management
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- Cost Management
+- aws
+- log collection
 dependencies: []
 description: AWS アカウントの支払実績と支払予測を監視
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_billing/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_billing/
 draft: false
 git_integration_title: amazon_billing
 has_logo: true
 integration_id: amazon-billing
 integration_title: AWS Billing
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -24,6 +24,7 @@ public_title: Datadog-AWS Billing インテグレーション
 short_description: AWS アカウントの支払実績と支払予測を監視
 version: '1.0'
 ---
+
 ## 概要
 
 AWS Billing を使用すると、CloudWatch の使用量を含む AWS インフラストラクチャーの予測課金額やコストを追跡できます。
@@ -39,7 +40,7 @@ AWS Billing を使用すると、CloudWatch の使用量を含む AWS インフ�
 ### メトリクスの収集
 
 1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Billing` をオンにします。
-2. AWS Billing のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。AWS Budgets ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
+2. AWS 請求のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [AWS 予算ポリシー][4]を参照してください。
 
     | AWS アクセス許可       | 説明                      |
     | -------------------- | -------------------------------- |
@@ -49,7 +50,7 @@ AWS Billing を使用すると、CloudWatch の使用量を含む AWS インフ�
 4. [Datadog - AWS Billing インテグレーション][6]をインストールします。
 5. [AWS 予算を作成][7]して、[メトリクス](#metrics)の受信を開始します。
 
-**注**: AWS の予算メトリクスは、AWS マスターアカウントからのみ収集できます。
+**注**: AWS の予算メトリクスは、AWS プライマリアカウントからのみ収集できます。
 
 ### ログの収集
 
@@ -75,7 +76,7 @@ AWS の請求メトリクスは、約 4 時間ごとに取得できます。Data
 
 メトリクスが利用可能になったら、`aws.billing.estimated_charges` と `aws.billing.forecasted_charges` を調べます。これらのメトリクスを使用して、コンテキストを `service:amazoncloudwatch` まで絞り込むことで、CloudWatch の使用状況を追跡できます。また、`max:account_id` を使用して、支払額を AWS アカウントごとに分けることができます。
 
-メトリクス `aws.billing.estimated_charges` は、当月のその時点までの CloudWatch 請求額と AWS が見なす額を示します。この値は、毎月初に 0 にリセットされます。メトリクス `aws.billing.forecasted_charges` は、当月の使用状況に基づいて CloudWatch が推定する月末時点の請求額を示します。
+メトリクス `aws.billing.estimated_charges` は、当月のその時点までの CloudWatch 請求額と AWS が見なす額を示します。この値は、毎月初に 0 にリセットされます。メトリクス `aws.billing.forecasted_charges` は、当月の使用状況に基づいた月末の CloudWatch の推定請求額です。
 
 ## 収集データ
 
@@ -95,7 +96,7 @@ AWS Billing インテグレーションには、サービスのチェック機�
 
 ## トラブルシューティング
 
-### AWS Billing インテグレーションからメトリクスが報告されない
+### AWS 請求インテグレーションからメトリクスが報告されない
 
 インテグレーションのトラブルシューティングに使用できるチェックリストを以下に示します。
 
@@ -113,7 +114,7 @@ AWS Billing インテグレーションには、サービスのチェック機�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html
+[4]: https://docs.aws.amazon.com/cost-management/latest/userguide/security-iam.html
 [5]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
 [6]: https://app.datadoghq.com/account/settings#integrations/amazon_billing
 [7]: https://console.aws.amazon.com/billing/home?#/createbudget

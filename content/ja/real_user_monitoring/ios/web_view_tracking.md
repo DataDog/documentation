@@ -27,7 +27,7 @@ Real User Monitoring により、iOS と tvOS のハイブリッドアプリケ�
 
 ### 前提条件
 
-モバイル iOS および tvOS アプリケーションでレンダリングしたい Web ページを、まず Browser SDK で設定します。詳しくは、[RUM ブラウザモニタリング][1]をご覧ください。
+モバイル iOS および tvOS アプリケーションでレンダリングしたい Web ページを、まず RUM Browser SDK で設定します。詳しくは、[RUM ブラウザモニタリング][1]をご覧ください。
 
 ### Web ビューをインスツルメントする
 
@@ -50,7 +50,9 @@ webView.configuration.userContentController.trackDatadogEvents(in: ["example.com
 
 ## Web ビューにアクセスする
 
-Web ビューは、[RUM エクスプローラー][4]にイベントとビューとして表示されます。iOS や tvOS のアプリケーションでフィルタリングし、セッションをクリックします。セッションのイベント一覧が表示されたサイドパネルが表示されます。
+Web ビューは、関連する `service` と `source` 属性を持つイベントとビューとして、[RUM エクスプローラー][4]に表示されます。`service` 属性は Web ビューが生成された Web コンポーネントを示し、`source` 属性は iOS などのモバイルアプリケーションのプラットフォームを表します。
+
+iOS や tvOS のアプリケーションでフィルタリングし、セッションをクリックします。セッションのイベント一覧が表示されたサイドパネルが表示されます。
 
 {{< img src="real_user_monitoring/ios/ios-webview-tracking.png" alt="RUM エクスプローラーのセッションで取得した Web ビューイベント" style="width:100%;">}}
 

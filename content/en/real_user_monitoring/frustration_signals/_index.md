@@ -26,7 +26,7 @@ Rage Clicks
 : A user clicks on an element more than three times in a one-second sliding window.
 
 Dead Clicks
-: A user clicks on a static element, thinking it is interactive.
+: A user clicks on a static element that produces no action on the page.
 
 Error Clicks
 : A user clicks on an element right before a JavaScript error occurs.

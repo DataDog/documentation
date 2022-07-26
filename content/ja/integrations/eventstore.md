@@ -10,7 +10,6 @@ assets:
 categories:
 - data store
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
 display_name: Eventstore
@@ -27,7 +26,7 @@ manifest_version: 1.0.0
 metric_prefix: eventstore.
 metric_to_check: eventstore.proc.mem
 name: eventstore
-public_title: Datadog-Eventstore インテグレーション
+public_title: Eventstore
 short_description: Eventstore のメトリクスを収集
 support: contrib
 supported_os:
