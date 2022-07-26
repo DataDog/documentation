@@ -31,9 +31,16 @@ You can connect any service in your [PagerDuty Service Directory][1]. You can ma
 
 ## IDE integrations
 
+Datadog provides a [JSON Schema][6] for service definitions so that when you are editing a service definition in a [supporting IDE][7], features such as autocomplete and validation are provided.
+
+The [JSON schema for Datadog service definitions][8] is registered with the open source [Schema Store][7].
+
 
 [1]: https://support.pagerduty.com/docs/service-directory
 [2]: /integrations/pagerduty/
 [3]: https://support.pagerduty.com/docs/api-access-keys
 [4]: https://app.datadoghq.com/integrations/pagerduty
 [5]: /tracing/service_catalog/service_definition_api/
+[6]: http://json-schema.org/
+[7]: https://www.schemastore.org/json/
+[8]: https://raw.githubusercontent.com/DataDog/schema/main/service-catalog/version.schema.json
