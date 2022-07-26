@@ -142,17 +142,25 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 
 ## HAProxy
 
-[HAProxy][1] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
-
-This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network-each proxy can accommodate upwards of 1000 Agents. **Note**: This figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. See the [HAProxy documentation][2] for additional information.
+[HAProxy][1] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity :
 
 `agent -> haproxy -> Datadog`
+
+This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network as each proxy can accommodate upwards connections of 1000 Agents. **Note**: This figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. See the [HAProxy documentation][2] for additional information.
+
+The communication between HAProxy and Datadog will always be encrypted and it is recommended to encrypt the communication between the Agent host and the HAProxy host if they are not part of the same local network.
+In order to encrypt data between the Agent and HAProxy, you will need to create a Subject Alternative Name (SAN) certificate for the HAProxy host. 
 
 ### Proxy forwarding with HAProxy
 
 #### HAProxy configuration
 
-HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
+HAProxy should be installed on a host that has connectivity to Datadog. Use one of the following configuration files if you do not already have it configured.
+
+**Note**: It is recommended to use the `HTTPS` configuration file if the Agent and HAProxy are not part of the same local network.
+
+{{< tabs >}}
+{{% tab "HTTP" %}}
 
 ```conf
 # Basic configuration
@@ -279,9 +287,17 @@ frontend network_devices_snmp_traps_frontend
     default_backend datadog-network-devices-snmp-traps
 
 # This declares the endpoint where your Agents connect for
+# sending Instrumentations Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
+frontend instrumentation_telemetry_data_frontend
+    bind *:3843
+    mode tcp
+    option tcplog
+    default_backend datadog-instrumentations-telemetry
+
+# This declares the endpoint where your Agents connects for
 # sending appsec events (deprecated).
 frontend appsec-events-frontend
-    bind *:3842
+    bind *:3844
     mode tcp
     option tcplog
     default_backend datadog-appsec-events
@@ -293,113 +309,368 @@ backend datadog-metrics
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-api
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 api.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 api.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership api.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership api.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-flare
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 flare.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 flare.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership flare.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership flare.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-profiles
     balance roundrobin
     mode tcp
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 intake.profile.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 intake.profile.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership profile.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership profile.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 process.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 process.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership process.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership process.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-logs-http
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 agent-http-intake.logs.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 agent-http-intake.logs.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-database-monitoring-metrics
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 dbm-metrics-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 dbm-metrics-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-database-monitoring-samples
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 dbquery-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 dbquery-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-network-devices-metadata
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 ndm-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 ndm-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-network-devices-snmp-traps
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-instrumentations-telemetry
     balance roundrobin
     mode tcp
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 
 backend datadog-appsec-events # deprecated
     balance roundrobin
     mode tcp
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
 ```
 
-Download the certificate with one of the following commands:
+{{% /tab %}}
+{{% tab "HTTPS" %}}
+
+```conf
+# Basic configuration
+global
+    log 127.0.0.1 local0
+    maxconn 4096
+    stats socket /tmp/haproxy
+
+# Some sane defaults
+defaults
+    log     global
+    option  dontlognull
+    retries 3
+    option  redispatch
+    timeout client 5s
+    timeout server 5s
+    timeout connect 5s
+
+# This declares a view into HAProxy statistics, on port 3833
+# You do not need credentials to view this page and you can
+# turn it off once you are done with setup.
+listen stats
+    bind *:3833
+    mode http
+    stats enable
+    stats uri /
+
+# This section is to reload DNS Records
+# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
+# For HAProxy 1.8 and newer
+resolvers my-dns
+    nameserver dns1 <DNS_SERVER_IP>:53
+    nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
+    resolve_retries 3
+    timeout resolve 2s
+    timeout retry 1s
+    accepted_payload_size 8192
+    hold valid 10s
+    hold obsolete 60s
+
+# This declares the endpoint where your Agents connects for
+# sending metrics (for example, the value of "dd_url").
+frontend metrics-forwarder
+    bind *:3834 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode http
+    option tcplog
+    default_backend datadog-metrics
+
+    use_backend datadog-api if { path_beg -i  /api/v1/validate }
+    use_backend datadog-flare if { path_beg -i  /support/flare/ }
+
+# This declares the endpoint where your Agents connects for
+# sending traces (for example, the value of "endpoint" in the APM
+# configuration section).
+frontend traces-forwarder
+    bind *:3835 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode tcp
+    option tcplog
+    default_backend datadog-traces
+
+# This declares the endpoint where your Agents connects for
+# sending profiles (for example, the value of "apm_config.profiling_dd_url").
+frontend profiles-forwarder
+    bind *:3836 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode tcp
+    option tcplog
+    default_backend datadog-profiles
+
+# This declares the endpoint where your agents connects for
+# sending processes (for example, the value of "url" in the process
+# configuration section).
+frontend processes-forwarder
+    bind *:3837 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode tcp
+    option tcplog
+    default_backend datadog-processes
+
+# This declares the endpoint where your Agents connects for
+# sending Logs (e.g the value of "logs.config.logs_dd_url")
+# If sending logs with use_http: true
+frontend logs_http_frontend
+    bind *:3838 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode http
+    option tcplog
+    default_backend datadog-logs-http
+
+# If sending logs with use_tcp: true
+# frontend logs_frontend
+#    bind *:10514 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+#    mode tcp
+#    option tcplog
+#    default_backend datadog-logs
+
+# This declares the endpoint where your Agents connects for
+# sending database monitoring metrics and activity (e.g the value of "database_monitoring.metrics.dd_url" and "database_monitoring.activity.dd_url")
+frontend database_monitoring_metrics_frontend
+    bind *:3839 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-metrics
+
+# This declares the endpoint where your Agents connects for
+# sending database monitoring samples (e.g the value of "database_monitoring.samples.dd_url")
+frontend database_monitoring_samples_frontend
+    bind *:3840 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode http
+    option tcplog
+    default_backend datadog-database-monitoring-samples
+
+# This declares the endpoint where your Agents connects for
+# sending Network Devices Monitoring metadata (e.g the value of "network_devices.metadata.dd_url")
+frontend network_devices_metadata_frontend
+    bind *:3841 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode http
+    option tcplog
+    default_backend datadog-network-devices-metadata
+
+# This declares the endpoint where your Agents connects for
+# sending Network Devices SNMP Traps data (e.g the value of "network_devices.snmp_traps.forwarder.dd_url")
+frontend network_devices_snmp_traps_frontend
+    bind *:3842 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode http
+    option tcplog
+    default_backend datadog-network-devices-snmp-traps
+
+
+# This declares the endpoint where your Agents connect for
+# sending Instrumentations Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
+frontend instrumentation_telemetry_data_frontend
+    bind *:3843 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode tcp
+    option tcplog
+    default_backend datadog-instrumentations-telemetry
+
+# This declares the endpoint where your Agents connect for
+# sending appsec events (deprecated).
+frontend appsec-events-frontend
+    bind *:3844 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    mode tcp
+    option tcplog
+    default_backend datadog-appsec-events
+
+# This is the Datadog server. In effect any TCP request coming
+# to the forwarder frontends defined above are proxied to
+# Datadog's public endpoints.
+backend datadog-metrics
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-api
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 api.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership api.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-flare
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 flare.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership flare.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-traces
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership trace.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-profiles
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 intake.profile.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership profile.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-processes
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 process.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership process.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-logs-http
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 agent-http-intake.logs.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-database-monitoring-metrics
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 dbm-metrics-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-database-monitoring-samples
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 dbquery-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-network-devices-metadata
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 ndm-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-network-devices-snmp-traps
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-instrumentations-telemetry
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+
+backend datadog-appsec-events # deprecated
+    balance roundrobin
+    mode tcp
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify <PATH_TO_CERTIFICATES>
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: Download the certificate with one of the following commands:
 
 ```shell
 sudo apt-get install ca-certificates # (Debian, Ubuntu)
 yum install ca-certificates # (CentOS, Red Hat)
 ```
 
-The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Red Hat.
+The file might be located at `/etc/ssl/certs/ca-certificates.crt` for Debian, Ubuntu or `/etc/ssl/certs/ca-bundle.crt` for CentOS, Red Hat.
+
+**Note**: You can use `ssl verify none` instead of `ssl verify <PATH_TO_CERTIFICATES>` if you are unable to get the certificates on the proxy host, but be aware that HAProxy will not be able to verify Datadog intake identity.
 
 HAProxy 1.8 and newer allow DNS service discovery to detect server changes and automatically apply them to your configuration.
 If you are using older version of HAProxy, you have to reload or restart HAProxy. **It is recommended to have a `cron` job reload HAProxy every 10 minutes** (such as `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case {{< region-param key="dd_full_site" code="true" >}} fails over to another IP.
@@ -412,47 +683,59 @@ If you are using older version of HAProxy, you have to reload or restart HAProxy
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy, for example: `haproxy.example.com`.
 This `dd_url` setting can be found in the `datadog.yaml` file.
 
-`dd_url: http://haproxy.example.com:3834`
+`dd_url: <SCHEME>://haproxy.example.com:3834`
+
+Replace `<SCHEME>` by `https` if you want your data to be encrypted between the Agent and HAProxy, or by `http` otherwise.
 
 To send traces, profiles, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
 
 ```yaml
 apm_config:
-    apm_dd_url: http://haproxy.example.com:3835
-    profiling_dd_url: http://haproxy.example.com:3836
+    apm_dd_url: <SCHEME>://haproxy.example.com:3835
+    profiling_dd_url: <SCHEME>://haproxy.example.com:3836
     telemetry:
-        dd_url: http://haproxy.example.com:3843
+        dd_url: <SCHEME>://haproxy.example.com:3843
 
 process_config:
-    process_dd_url: http://haproxy.example.com:3837
+    process_dd_url: <SCHEME>://haproxy.example.com:3837
 
 logs_config:
     use_http: true
     logs_dd_url: haproxy.example.com:3838
+    # Comment the line below to use encryption between the Agent and HAProxy
     logs_no_ssl: true
 
 database_monitoring:
     metrics:
         logs_dd_url: haproxy.example.com:3839
+        # Comment the line below to use encryption between the Agent and HAProxy
         logs_no_ssl: true
     activity:
         logs_dd_url: haproxy.example.com:3839
+        # Comment the line below to use encryption between the Agent and HAProxy
         logs_no_ssl: true
     samples:
         logs_dd_url: haproxy.example.com:3840
+        # Comment the line below to use encryption between the Agent and HAProxy
         logs_no_ssl: true
 
 network_devices:
     metadata:
         logs_dd_url: haproxy.example.com:3841
+        # Comment the line below to use encryption between the Agent and HAProxy
         logs_no_ssl: true
     snmp_traps:
         forwarder:
             logs_dd_url: haproxy.example.com:3842
+            # Comment the line below to use encryption between the Agent and HAProxy
             logs_no_ssl: true
+
+appsec_config (deprecated):
+    appsec_dd_url: haproxy.example.com:3844
 ```
 
-Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate ({{< region-param key="dd_full_site" code="true" >}}) and your HAProxy hostname:
+When using encryption, if the Agent cannot access the proxy certificate or is unable to validate it, you can then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
+With this option set to `true`, the Agent will skip the certificate validation step so it will not be able to verify the identity of the proxy but the communication will still be encrypted.
 
 ```yaml
 skip_ssl_validation: true
@@ -517,11 +800,19 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 `agent ---> nginx ---> Datadog`
 
+The communication between NGINX and Datadog will always be encrypted and it is recommended to encrypt the communication between the Agent host and the NGINX host if they are not part of the same local network. 
+In order to encrypt data between the Agent and NGINX, you will need to create a Subject Alternative Name (SAN) certificate for the NGINX host. 
+
 ### Proxy forwarding with NGINX
 
 #### NGINX configuration
 
-This example `nginx.conf` can be used to proxy Agent traffic to Datadog. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
+NGINX should be installed on a host that has connectivity to Datadog. Use one of the following configuration files if you do not already have it configured.
+
+**Note**: It is recommended to use the `HTTPS` configuration file if the Agent and NGINX are not part of the same local network.
+
+{{< tabs >}}
+{{% tab "HTTP" %}}
 
 ```conf
 user nginx;
@@ -534,127 +825,282 @@ events {
 }
 # HTTP Proxy for Datadog Agent
 http {
+
+    proxy_ssl_trusted_certificate <PATH_TO_CERTIFICATES>;
+
     server {
         listen 3834; #listen for metrics
         access_log off;
 
         location /api/v1/validate {
+            proxy_ssl_verify on;
             proxy_pass https://api.{{< region-param key="dd_site" >}}:443/api/v1/validate;
         }
         location /support/flare/ {
+            proxy_ssl_verify on;
             proxy_pass https://flare.{{< region-param key="dd_site" >}}:443/support/flare/;
         }
         location / {
+            proxy_ssl_verify on;
             proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }
 # TCP Proxy for Datadog Agent
 stream {
+
+    proxy_ssl_trusted_certificate <PATH_TO_CERTIFICATES>;
+
     server {
         listen 3835; #listen for traces
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass trace.agent.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3836; #listen for profiles
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass intake.profile.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3837; #listen for processes
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass process.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3838; #listen for logs with use_http: true
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3839; #listen for database monitoring metrics
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass dbm-metrics-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3840; #listen for database monitoring samples
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass dbquery-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3841; #listen for network devices metadata
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3842; #listen for network devices traps
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass snmp-traps-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3843; #listen for instrumentations telemetry data
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {    
         listen 3844; #listen for appsec events (deprecated)
+        proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
 
+{{% /tab %}}
+{{% tab "HTTPS" %}}
+
+```conf
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid;
+
+events {
+    worker_connections 1024;
+}
+# HTTP Proxy for Datadog Agent
+http {
+
+    proxy_ssl_trusted_certificate <PATH_TO_CERTIFICATES>;
+
+    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE> 
+    ssl_certificate_key <PATH_TO_PROXY_CERTIFICATE_KEY>
+
+    server {
+        listen 3834 ssl; #listen for metrics
+        access_log off;
+
+        location /api/v1/validate {
+            proxy_ssl_verify on;
+            proxy_pass https://api.{{< region-param key="dd_site" >}}:443/api/v1/validate;
+        }
+        location /support/flare/ {
+            proxy_ssl_verify on;
+            proxy_pass https://flare.{{< region-param key="dd_site" >}}:443/support/flare/;
+        }
+        location / {
+            proxy_ssl_verify on;
+            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
+        }
+    }
+}
+# TCP Proxy for Datadog Agent
+stream {
+
+    proxy_ssl_trusted_certificate <PATH_TO_CERTIFICATES>;
+
+    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE> 
+    ssl_certificate_key <PATH_TO_PROXY_CERTIFICATE_KEY>
+
+    server {
+        listen 3835 ssl; #listen for traces
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass trace.agent.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3836 ssl; #listen for profiles
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass intake.profile.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3837 ssl; #listen for processes
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass process.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3838 ssl; #listen for logs with use_http: true
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3839 ssl; #listen for database monitoring metrics
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass dbm-metrics-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3840 ssl; #listen for database monitoring samples
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass dbquery-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3841 ssl; #listen for network devices metadata
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
+    } 
+    server {
+        listen 3842 ssl; #listen for network devices traps
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass snmp-traps-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3843 ssl; #listen for instrumentations telemetry data
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3844 ssl; #listen for appsec events (deprecated)
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
+    }
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: Download the certificate with one of the following commands:
+
+```shell
+sudo apt-get install ca-certificates # (Debian, Ubuntu)
+yum install ca-certificates # (CentOS, Red Hat)
+```
+
+The file might be located at `/etc/ssl/certs/ca-certificates.crt` for Debian, Ubuntu or `/etc/ssl/certs/ca-bundle.crt` for CentOS, Red Hat.
+
+**Note**: You can remove `proxy_ssl_verify on` if you are unable to get the certificates on the proxy host, but be aware that NGINX will not be able to verify Datadog intake identity.
+
 #### Datadog Agent configuration
 
 Edit each Agent configuration file to point to Nginx by setting its `dd_url` to the address of Nginx, for example: `nginx.example.com`.
 This `dd_url` setting can be found in the `datadog.yaml` file.
 
-`dd_url: http://nginx.example.com:3834`
+`dd_url: "<SCHEME>://nginx.example.com:3834"`
 
-To use the Datadog Agent v6/7.16+ as the logs collector, instruct the Agent to use the newly created proxy instead of establishing a connection directly with the logs intake by updating `datadog.yaml`:
+Replace `<SCHEME>` by `https` if you want your data to be encrypted between the Agent and NGINX, or by `http` otherwise.
+
+To send traces, profiles, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
 
 ```yaml
 apm_config:
-    apm_dd_url: http://nginx.example.com:3835
-    profiling_dd_url: http://nginx.example.com:3836
+    apm_dd_url: <SCHEME>://nginx.example.com:3835
+    profiling_dd_url: <SCHEME>://nginx.example.com:3836
     telemetry:
-        dd_url: http://nginx.example.com:3843
+        dd_url: <SCHEME>://nginx.example.com:3843
 
 process_config:
-    process_dd_url: http://nginx.example.com:3837
+    process_dd_url: <SCHEME>://nginx.example.com:3837
 
 logs_config:
     use_http: true
     logs_dd_url: nginx.example.com:3838
+    # Comment the line below to use encryption between the Agent and NGINX
     logs_no_ssl: true
 
 database_monitoring:
     metrics:
         logs_dd_url: nginx.example.com:3839
+        # Comment the line below to use encryption between the Agent and NGINX
         logs_no_ssl: true
     activity:
         logs_dd_url: nginx.example.com:3839
+        # Comment the line below to use encryption between the Agent and NGINX
         logs_no_ssl: true
     samples:
         logs_dd_url: nginx.example.com:3840
+        # Comment the line below to use encryption between the Agent and NGINX
         logs_no_ssl: true
 
 network_devices:
     metadata:
         logs_dd_url: nginx.example.com:3841
+        # Comment the line below to use encryption between the Agent and NGINX
         logs_no_ssl: true
     snmp_traps:
         forwarder:
             logs_dd_url: nginx.example.com:3842
+            # Comment the line below to use encryption between the Agent and NGINX
             logs_no_ssl: true
 
 appsec_config (deprecated):
-    appsec_dd_url: "<PROXY_SERVER_DOMAIN>:3842"
+    appsec_dd_url: haproxy.example.com:3844
 
 ```
 
-When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
+When using encryption, if the Agent cannot access the proxy certificate or is unable to validate it, you can then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
+With this option set to `true`, the Agent will skip the certificate validation step so it will not be able to verify the identity of the proxy but the communication will still be encrypted.
 
+```yaml
+skip_ssl_validation: true
+```
+
+When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
 
 ## Datadog Agent
 
