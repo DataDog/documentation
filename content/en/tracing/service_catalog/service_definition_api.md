@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor services consistently across multiple telemetry types, including infrastructure metrics, logs, and traces. If you want to define a service using additional criteria, customize the service definition that fits your architectural style. View the service list and gain insights into all services' reliability and security in the [Datadog Service Catalog][2].
+A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor services consistently across multiple telemetry types, including infrastructure metrics, logs, and traces. If you want to define a service using additional criteria, customize the service definition that fits your architectural style and register it using this API. View the service list and gain insights into all services' reliability and security in the [Datadog Service Catalog][2].
 
 ## Requirements
 
@@ -70,6 +70,8 @@ POST /api/v2/services/definitions
 ### Request
 
 #### Body data (required)
+
+You can generate this body data on the [Service Catalog Getting Started page][7].
 
 ##### Model 
 | Field                       | Type            | Description |
@@ -365,3 +367,4 @@ curl --location --request DELETE 'https://api.datadoghq.com/api/v2/services/defi
 [4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
+[7]: https://app.datadoghq.com/services/setup
