@@ -244,7 +244,7 @@ ENDPOINT | PRODUCT FAMILY
 : `host_count`
 
 `<base_url>/api/v1/usage/ingested-spans` | ingested_spans
-:`ingested_events_bytes` 
+: `ingested_events_bytes` 
 
 `<base_url>/api/v1/usage/incident-management` | incident_management
 : `monthly_active_users`
