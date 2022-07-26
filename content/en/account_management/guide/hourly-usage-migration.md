@@ -22,7 +22,7 @@ Each difference is discussed in further detail in the following sections.
 ## Consolidated Product Families
 The v2 API introduces the concepts of product family and usage type. Product families are
 groupings of one or more usage types. Usage types are usage measurements for a given organization
-and time period. The initial set of product families mostly aligns with the V1 APIs,
+and time period. The initial set of product families mostly aligns with the v1 APIs,
 with the full mapping outlined below. There is also a special `all` product family that retrieves
 the usage for all other product families.
 
@@ -239,9 +239,9 @@ The following table shows how the families and usage types above map to the v1 h
 
 ## JSON:API Compliant Format
 
-Response bodies and parameter names conform to the [JSON:API specification](https://jsonapi.org/format/). All data
-available in the v1 APIs is still available. See the below example of the mapping from the v1 hosts
-API to the v2 hourly usage API
+Response bodies and parameter names conform to the [JSON:API specification][1]. All data
+available in the v1 APIs is still available. See the example below of the mapping from the v1 hosts
+API to the v2 hourly usage API.
 
 ### V1 API: [Get hourly usage for hosts and containers][2]
 
