@@ -199,7 +199,7 @@
   },
   "ListEvents": {
     "description": "The event stream can be queried and filtered by time, priority, sources and tags.\n\n**Notes**:\n- If the event you’re querying contains markdown formatting of any kind,\nyou may see characters such as `%`,`\\`,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most recent results. To return additional results,\nidentify the last timestamp of the last result and set that as the `end` query time to\npaginate the results. You can also use the page parameter to specify which set of `1000` results to return.",
-    "summary": "Query the event stream"
+    "summary": "Get a list of events"
   },
   "CreateEvent": {
     "description": "This endpoint allows you to post events to the stream.\nTag them, set priority and event aggregate them with other events.",
