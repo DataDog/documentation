@@ -4281,6 +4281,9 @@ components:
             points:
             - timestamp: 1475317847
               value: 0.7
+            resources:
+            - name: dummyhost
+              type: host
           items:
             $ref: '#/components/schemas/MetricSeries'
           type: array
@@ -4308,12 +4311,15 @@ components:
       type: object
     MetricResource:
       description: Metric resource.
+      example:
+        name: dummyhost
+        type: host
       properties:
         name:
-          description: The name of the metric.
+          description: The name of the resource.
           type: string
         type:
-          description: The type of metric.
+          description: The type of the resource.
           type: string
       type: object
     MetricSeries:
@@ -13200,7 +13206,7 @@ paths:
         metrics directly to the Datadog API without using DogStatsD, expect:\n\n-
         64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric
         names\n- 50 bytes for the timeseries\n- The full payload is approximately
-        100 bytes."
+        100 bytes.\n\nHost name is one of the resources in the Resources field."
       operationId: SubmitMetrics
       parameters:
       - description: HTTP header used to compress the media-type.
