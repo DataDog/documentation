@@ -10,6 +10,12 @@ assets:
       check: docker.containers.running
       metadata_path: metadata.csv
       prefix: docker.
+    process_signatures:
+    - dockerd
+    - docker-containerd
+    - docker run
+    - docker daemon
+    - docker-containerd-shim
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Docker
