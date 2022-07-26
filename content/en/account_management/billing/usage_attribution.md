@@ -76,6 +76,13 @@ Monthly data can also be pulled using the tool's public API. For more informatio
 
 ### Daily usage attribution
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
+{{< /site-region >}}
+
+<div class="alert alert-info">
+Daily usage attribution is only available for organizations in a US1 or EU1 datacenter.
+</div>
+
 This section provides daily reports at an hourly granularity to dig into time frames. It also provides a concatenation of all reports during a given month.
 
 - Clicking on a specific time period expands a view on the right where reports can be downloaded as a `.tsv`.
