@@ -15,7 +15,7 @@ The most notable differences between the v1 API and the v2 API are that the v2 A
 * Consolidates all products to one endpoint
 * Follows the JSON:API standard
 * Is paginated
-* Can return data for multiple organizations per request
+* Can return data for multiple organizations and regions per request
 
 Each difference is discussed in further detail in the following sections.
 
@@ -403,7 +403,7 @@ END
 
 ## Multi-organization responses
 
-The v2 API supports retrieving usage data for all of your child organizations in one request. Use the
+The v2 API supports retrieving usage data for all of your child organizations in all regions in one request. Use the
 parameter `filter[include_descendants]` to request data for child organizations.
 
 ### Further Reading
