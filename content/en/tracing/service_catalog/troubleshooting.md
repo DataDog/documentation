@@ -11,7 +11,7 @@ further_reading:
 
 ## APM-instrumented services not appearing
 
-If services that you know are instrumented for APM are not appearing in the Service Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any Primary Tag values of your choosing) or [Secondary Primary Tag][1]. To confirm, on the Performance tab, hover over the columns where you expect the performance metrics to appear and see instructions on which environments the services are active. 
+If services that you know are instrumented for APM are not appearing in the Service Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any Primary Tag values of your choosing) or [Secondary Primary Tag][1]. To confirm, on the **Performance** tab, hover over the columns where you expect the performance metrics to appear and see information on which environments the services are active. 
 
 {{< img src="tracing/service_catalog/svc_cat_troubleshooting_1.png" alt="Hover message indicating that no performance data has been reported in the past hour" >}}
 
