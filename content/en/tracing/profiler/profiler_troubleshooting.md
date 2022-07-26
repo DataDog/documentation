@@ -209,12 +209,21 @@ variable to `1`, as described in the
 
 Without this flag, profiles for short-lived Resque jobs will be unavailable.
 
+## Profiling does not turn on due to "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken."
+
+There is a known incompatibility between Ruby 2.7 and older GCC versions (4.8 and below) that impacts the profiler ([upstream Ruby report][6], [ddtrace bug report][7]).
+
+To fix this, we recommend updating your operating system/docker image or GCC version.
+
+For further help with this issue, please contact support and include the output of running `DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace`, as well as the resulting `mkmf.log` file.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 [3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
 [4]: https://github.com/resque/resque
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
+[6]: https://bugs.ruby-lang.org/issues/18073
+[7]: https://github.com/DataDog/dd-trace-rb/issues/1799
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
