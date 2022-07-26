@@ -500,6 +500,8 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   kubelet:
     tlsVerify: false
+  # Disable the `kube-state-metrics` dependency chart installation.
+  kubeStateMetricsEnabled: false
   # Enable the new `kubernetes_state_core` check.
   kubeStateMetricsCore:
     enabled: true
