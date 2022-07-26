@@ -22,12 +22,12 @@ You can connect any service in your [PagerDuty Service Directory][1]. You can ma
 
 4. Update the service definition with the PagerDuty information. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
 
-```
-...
-integrations:
-  pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
-...
-```
+   ```
+   ...
+   integrations:
+     pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
+   ...
+   ```
 
 ## IDE integrations
 
