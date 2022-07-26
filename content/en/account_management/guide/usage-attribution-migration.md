@@ -220,7 +220,7 @@ In the v2 API, time is formatted `YYYY-MM-DDThh`.
 
 Data in the v1 format always has the value `0` for minute and second (the data is hourly). The data in the v2 format can be parsed and treated as equivalent to the parsed time of the v1 format.
 
-#### Handling of child organizations
+#### Child organizations
 
 In the v1 API, the file contains only data for the tag configuration set on the parent org. This includes any child orgs of the parent, because tag configurations are also applied to child orgs.
 
@@ -413,7 +413,7 @@ In the v2 API, usage is returned with integer precision. Example:
 
 It is not possible to convert from the integer values to the decimal values. The integer values are the rounded decimal values.
 
-#### Handling of child orgs
+#### Child organizations
 
 In the v1 API, the file contains only data for the tag configuration set on the parent org. This includes any child orgs
 of the parent, because tag configurations are also applied to child orgs.
