@@ -37,7 +37,7 @@ Before collecting your observability data from the Datadog Agent using Vector, y
 
 ## Set up the Datadog Agent and your environment
  
-You must configure the [Datadog Agent](#datadog-agent-configuration) before setting up Vector to collect, transform, and route logs, metrics, or traces from the Datadog Agent to Datadog. If you are using [Kubernetes](#using-kubernetes), it also has to be configured before setting up Vector.
+You must configure the [Datadog Agent](#datadog-agent-configuration) before setting up Vector to collect, transform, and route logs, metrics, or traces from the Datadog Agent to Datadog. If you are using Kubernetes, you must also configure [Kubernetes](#kubernetes-configuration) before setting up Vector.
 
 ### Datadog Agent configuration
  
