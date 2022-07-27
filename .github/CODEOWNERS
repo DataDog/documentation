@@ -19,3 +19,7 @@ package.json              @DataDog/corpweb @DataDog/documentation
 
 # Database Management
 /content/en/database_management/                        @DataDog/database-monitoring-app @DataDog/documentation
+
+
+# Agent Shared Component
+/content/en/agent/proxy.md                              @DataDog/agent-shared-components
