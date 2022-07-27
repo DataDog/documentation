@@ -689,8 +689,8 @@ class Integrations:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
                 # Add static copy with link to the in-app tile, link converters called later will ensure the `site` flag is respected
-                in_app_tile_link = f"https://app.datadoghq.com/marketplace/app/{manifest_json['integration_id']}"
-                purchase_copy = f"---\nThis application is made available through the Marketplace and is supported by a Datadog Technology Partner. [Click here]({in_app_tile_link}) to purchase this application."
+                purchase_copy = f"---\nThis application is made available through the Marketplace and is supported by a Datadog Technology Partner." \
+                                f" <a href=\"https://app.datadoghq.com/marketplace/app/{manifest_json['integration_id']}\" target=\"_blank\">Click Here</a> to purchase this application."
 
                 markdown_string = f"{markdown_string}\n{purchase_copy}"
                 markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
