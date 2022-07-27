@@ -34044,6 +34044,7 @@
                           "description": "Field.",
                           "type": "string"
                         },
+                        "nullable": true,
                         "type": "array"
                       },
                       "name": {
@@ -34564,6 +34565,7 @@
                     "description": "Field.",
                     "type": "string"
                   },
+                  "nullable": true,
                   "type": "array"
                 },
                 "name": {
@@ -35144,6 +35146,7 @@
               "description": "Field.",
               "type": "string"
             },
+            "nullable": true,
             "type": "array"
           },
           "name": {
@@ -35226,6 +35229,7 @@
               "description": "Field.",
               "type": "string"
             },
+            "nullable": true,
             "type": "array"
           },
           "name": {
@@ -35613,6 +35617,7 @@
                     "description": "Field.",
                     "type": "string"
                   },
+                  "nullable": true,
                   "type": "array"
                 },
                 "name": {
@@ -36060,6 +36065,7 @@
                     "description": "Field.",
                     "type": "string"
                   },
+                  "nullable": true,
                   "type": "array"
                 },
                 "name": {
@@ -77864,6 +77870,7 @@
                                     "description": "Field.",
                                     "type": "string"
                                   },
+                                  "nullable": true,
                                   "type": "array"
                                 },
                                 "name": {
@@ -78380,6 +78387,7 @@
                             "description": "Field.",
                             "type": "string"
                           },
+                          "nullable": true,
                           "type": "array"
                         },
                         "name": {
@@ -78812,6 +78820,7 @@
                               "description": "Field.",
                               "type": "string"
                             },
+                            "nullable": true,
                             "type": "array"
                           },
                           "name": {
@@ -79486,6 +79495,7 @@
                               "description": "Field.",
                               "type": "string"
                             },
+                            "nullable": true,
                             "type": "array"
                           },
                           "name": {
@@ -79978,6 +79988,7 @@
                             "description": "Field.",
                             "type": "string"
                           },
+                          "nullable": true,
                           "type": "array"
                         },
                         "name": {
@@ -80389,6 +80400,7 @@
                               "description": "Field.",
                               "type": "string"
                             },
+                            "nullable": true,
                             "type": "array"
                           },
                           "name": {

@@ -7263,6 +7263,7 @@ components:
           items:
             description: Field.
             type: string
+          nullable: true
           type: array
         name:
           description: Name of the query.
@@ -7316,6 +7317,7 @@ components:
           items:
             description: Field.
             type: string
+          nullable: true
           type: array
         name:
           description: Name of the query.
