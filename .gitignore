@@ -171,7 +171,9 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-.vscode
+# don't ignore snippets
+.vscode/**/*
+!.vscode/markdown.code-snippets
 
 # jetbrains
 .idea
