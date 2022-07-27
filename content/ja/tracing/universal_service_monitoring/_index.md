@@ -6,13 +6,13 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging/
   tag: ドキュメント
   text: 統合サービスタグ付け
-- link: /tracing/visualization/services_list/
+- link: /tracing/services/services_list/
   tag: ドキュメント
   text: Datadog に報告するサービスの一覧
-- link: /tracing/visualization/service/
+- link: /tracing/services/service_page/
   tag: ドキュメント
   text: Datadog のサービスについて
-- link: /tracing/visualization/services_map/
+- link: /tracing/services/services_map/
   tag: ドキュメント
   text: サービスマップについて読む
 kind: documentation
@@ -276,6 +276,14 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 {{% /tab %}}
 {{< /tabs >}}
 
+## 自動サービスタグ付け
+
+ユニバーサルサービスモニタリングは、インフラストラクチャーで稼働しているサービスを自動的に検出します。[統合サービスタグ付け][1]が見つからない場合、タグの 1 つ (`app`、`short_image`、`kube_container_name`、`container_name`、`kube_deployment`、`kube_service`) に基づいて名前を付けます。
+
+サービス名を更新するには、[統合サービスタグ付け][1]を使用します。
+
+{{< img src="tracing/universal_service_monitoring/automatic-service-tagging.png" alt="Datadog がサービスを自動検出すると、その際に使用されるタグがサービスページの上部に表示されます" style="width:80%;" >}}
+
 ## サービスの確認
 
 Agent を構成した後、APM サービスリストにサービスが表示されるまで約 5 分間待ちます。サービスをクリックすると、APM サービスの詳細ページが表示されます。左上の操作名 `universal.http.server` または `universal.http.client` は、サービスのテレメトリーがユニバーサルサービスモニタリングから来ることを示します。
@@ -300,8 +308,8 @@ Agent を構成した後、APM サービスリストにサービスが表示さ�
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
 [2]: https://docs.datadoghq.com/ja/tracing/deployment_tracking/
-[3]: /ja/tracing/visualization/services_map/
-[4]: /ja/tracing/deployment_tracking/
+[3]: /ja/tracing/services/services_map/
+[4]: /ja/tracing/services/deployment_tracking/
 [5]: /ja/monitors/create/types/apm/?tab=apmmetrics
 [6]: /ja/dashboards/
 [7]: /ja/monitors/service_level_objectives/metric/
