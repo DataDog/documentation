@@ -13,7 +13,7 @@ To view the configuration completeness for a service, click it in the [APM Servi
 
 On this page you can see the ownership, PagerDuty, and related links information you've specified for the service in its [service definition][2].
 
-You can also find which Datadog features you are actively using for a given service, to help you spot gaps in your monitoring completeness. 
+You can also find which Datadog features you are actively using for a given service, to help you find and close gaps in your monitoring completeness. 
 
 {{< img src="tracing/service_catalog/svc_cat_completeness1.png" alt="Service configuration page showing configuration completeness." >}}
 
