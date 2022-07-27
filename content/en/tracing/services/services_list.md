@@ -20,6 +20,8 @@ further_reading:
 
 {{< img src="tracing/visualization/services_page_2.png" alt="Services page"  >}}
 
+<div class="alert alert-warning">The Services List is being replaced by the <a href="https://app.datadoghq.com/services">Service Catalog</a>. Read more in the <a href="/tracing/service_catalog/">Service Catalog documentation</a>.</div>
+
 ## Overview 
 
 After you [instrument your application][1], your reporting [services][2] appear on [the APM services page][3]. The services list is a high-level view of all [services][4] reporting from your infrastructure.

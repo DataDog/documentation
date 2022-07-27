@@ -15,7 +15,7 @@ On this page you can see the ownership, PagerDuty, and related links information
 
 You can also find which Datadog features you are actively using for a given service, to help you spot gaps in your monitoring completeness. 
 
-{{< img src="tracing/service_catalog/svc_cat_completeness.png" alt="Service configuration page showing configuration completeness." >}}
+{{< img src="tracing/service_catalog/svc_cat_completeness1.png" alt="Service configuration page showing configuration completeness." >}}
 
 This table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Enabled` specified, even if you have hosts or containers running infrastructure monitoring. 
 
