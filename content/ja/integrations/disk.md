@@ -1,19 +1,30 @@
 ---
+app_id: システム
+app_uuid: 52179e9d-9012-4478-b1db-08e4d21d1181
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.disk.free
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Disk
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/disk/README.md
 display_name: Disk
+display_on_public_website: true
 draft: false
 git_integration_title: disk
 guid: 94588b23-111e-4ed2-a2af-fd6e4caeea04
@@ -23,19 +34,33 @@ integration_version: 4.7.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 metric_prefix: system.
 metric_to_check: system.disk.free
 monitors:
   disk-space-forecast: assets/monitors/disk_monitor.json
 name: disk
-public_title: Datadog-Disk インテグレーション
+oauth: {}
+public_title: Disk
 short_description: ディスクチェックで、マウントされたディスクのメトリクスを収集。
 support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: ディスクチェックで、マウントされたディスクのメトリクスを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Disk
 ---
 
 

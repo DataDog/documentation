@@ -16,7 +16,6 @@ categories:
 - data store
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md
 display_name: VoltDB
@@ -29,7 +28,7 @@ git_integration_title: voltdb
 guid: 15abd7c6-1845-405a-8627-f83be1e48b11
 integration_id: voltdb
 integration_title: VoltDB
-integration_version: 2.1.1
+integration_version: 2.1.2
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

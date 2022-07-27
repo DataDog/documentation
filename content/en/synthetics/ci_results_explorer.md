@@ -8,9 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
   text: "Incorporate Datadog Synthetic tests into your CI/CD pipeline"
-- link: "https://learn.datadoghq.com/enrol/index.php?id=37"
+- link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
   tag: "Learning Center"
-  text: "Learn how to run Synthetic tests in CI/CD pipelines"
+  text: "Learn how to run Synthetic tests in a CI/CD pipeline"
 - link: "/synthetics/search/"
   tag: "Documentation"
   text: "Learn how to search through your Synthetic objects"
@@ -21,7 +21,7 @@ further_reading:
 
 The CI Results Explorer provides visibility into the CI jobs executing your Synthetic tests. 
 
-{{< img src="synthetics/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
+{{< img src="synthetics/ci_results_explorer/ci_results_explorer_1.png" alt="CI Results Explorer" style="width:100%;">}}
 
 You can:
 

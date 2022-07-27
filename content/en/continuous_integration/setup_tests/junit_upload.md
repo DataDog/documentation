@@ -16,15 +16,15 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 </div>
 {{< /site-region >}}
 
-JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
+<div class="alert alert-warning"><strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files, as the native instrumentation provides more accurate time results, supports distributed traces on integration tests, and supports structured stack traces.</div>
 
-As an alternative to instrumenting your tests natively using Datadog tracers, which is the recommended option as it provides the most comprehensive test results, you can also upload JUnit XML test reports.
+JUnit test report files are XML files that contain test execution information, such as test and suite names, pass or fail status, duration, and sometimes error logs. Although introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
-Test results imported from JUnit XML reports appear alongside test data reported by tracers. However, there are some limitations when using this method, such as the lack of distributed traces on integration tests or structured stack traces. For this reason, only use this method if there is no native support for the language or testing framework being used.
+If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][2] using Datadog tracers. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
 
 ## Installing the Datadog CI CLI
 
-Install the [`datadog-ci`][2] CLI globally using `npm`:
+Install the [`datadog-ci`][3] CLI globally using `npm`:
 
 {{< code-block lang="bash" >}}
 npm install -g @datadog/datadog-ci
@@ -34,7 +34,7 @@ npm install -g @datadog/datadog-ci
 
 <div class="alert alert-warning"><strong>Note</strong>: The standalone binaries are in <strong>beta</strong> and their stability is not guaranteed.</div>
 
-If installing NodeJS in the CI is an issue, standalone binaries are provided with [Datadog CI releases][3]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
+If installing NodeJS in the CI is an issue, standalone binaries are provided with [Datadog CI releases][4]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -85,7 +85,7 @@ To upload your JUnit XML test reports to Datadog, run the following command, spe
 datadog-ci junit upload --service <service_name> <path> [<path> ...]
 {{< /code-block >}}
 
-Specify a valid [Datadog API key][4] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
+Specify a valid [Datadog API key][5] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
 <pre>
 <code>
@@ -119,7 +119,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
 `--logs` **(beta)**
-: Enable forwarding content from the XML reports as [Logs][5]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
+: Enable forwarding content from the XML reports as [Logs][6]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **Default**: `false`<br/>
 **Note**: Logs are billed separately from CI Visibility.
@@ -138,19 +138,19 @@ Positional arguments
 The following environment variables are supported:
 
 `DATADOG_API_KEY` (Required)
-: [Datadog API key][4] used to authenticate the requests.<br/>
+: [Datadog API key][5] used to authenticate the requests.<br/>
 **Default**: (none)
 
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
-: The [Datadog site][6] to upload results to.<br/>
+: The [Datadog site][7] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ## Collecting repository and commit metadata
 
-Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][7] binary is required.
+Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][8] binary is required.
 
 If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
 
@@ -291,9 +291,10 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://junit.org/junit5/
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://github.com/DataDog/datadog-ci/releases
-[4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /logs/
-[6]: /getting_started/site/
-[7]: https://git-scm.com/downloads
+[2]: https://docs.datadoghq.com/continuous_integration/setup_tests/
+[3]: https://www.npmjs.com/package/@datadog/datadog-ci
+[4]: https://github.com/DataDog/datadog-ci/releases
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: /logs/
+[7]: /getting_started/site/
+[8]: https://git-scm.com/downloads

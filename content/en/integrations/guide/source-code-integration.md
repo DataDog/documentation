@@ -128,7 +128,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 #### Stack traces
 
-In [Error Tracking][3] and on APM error spans, you can directly access links to repositories from your stack traces.
+In [Error Tracking][1] and on APM error spans, you can directly access links to repositories from your stack traces.
 
 1. Navigate to **APM** > **Error Tracking**.
 2. Click on an issue. The **Issue Details** panel appears to the right.
@@ -144,7 +144,7 @@ When specifying your permissions in the integration tile, enable Datadog read pe
 
 To install a GitHub App for your organization, you need to be an organization owner or have admin permissions in a repository. You can also install a GitHub App on your personal GitHub account.
 
-For more information, see [GitHub Apps & OAuth Apps][4].
+For more information, see [GitHub Apps & OAuth Apps][3].
 
 1. Click on a frame to expand the code snippet containing lines of your source code.
 2. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error.
@@ -153,7 +153,7 @@ For more information, see [GitHub Apps & OAuth Apps][4].
 
 #### Continuous Profiler
 
-In the [Continuous Profiler][5], you can directly access traces in the source repository on GitHub.
+In the [Continuous Profiler][4], you can directly access traces in the source repository on GitHub.
 
 1. Navigate to **APM** > **Profile Search**.
 2. Click on a profile and hover your cursor over a method in the flamegraph. A kebab icon with the **More actions** label appears to the right.
@@ -165,8 +165,7 @@ In the [Continuous Profiler][5], you can directly access traces in the source re
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://app.datadoghq.com/apm/error-tracking
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
-[3]: https://app.datadoghq.com/apm/error-tracking
-[4]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
-[5]: https://docs.datadoghq.com/tracing/profiler/search_profiles/
+[3]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
+[4]: https://docs.datadoghq.com/tracing/profiler/search_profiles/

@@ -1,37 +1,57 @@
 ---
+app_id: oom-kill
+app_uuid: 7546b270-2efe-4a59-8f94-3447df2db801
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: oom_kill.oom_process.count
+      metadata_path: metadata.csv
+      prefix: oom_kill.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: OOM Killer
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - OS & システム
-creates_events: true
-ddtype: check
+- OS & システム
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
-display_name: OOM Killer
+- https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: oom_kill
-guid: 4b8e9c18-1a13-43b0-a03c-186eb3221147
 integration_id: oom-kill
 integration_title: OOM Killer
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: oom_kill.
-metric_to_check: oom_kill.oom_process.count
+manifest_version: 2.0.0
 name: oom_kill
-public_title: Datadog-OOM Killer インテグレーション
+oauth: {}
+public_title: OOM Killer
 short_description: システムまたはcgroupによる OOM killer プロセスの追跡。
-support: コア
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: システムまたはcgroupによる OOM killer プロセスの追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OOM Killer
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent およびシステムプローブを通じて、OOM（メモリ不足）の強制終了プロセスというカーネルを監視します。

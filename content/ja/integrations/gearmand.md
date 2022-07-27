@@ -18,7 +18,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
 display_name: Gearman
@@ -38,7 +37,7 @@ name: gearmand
 process_signatures:
 - gearmand
 - gearman
-public_title: Datadog-Gearman インテグレーション
+public_title: Gearman インテグレーション
 short_description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
 support: コア
 supported_os:

@@ -128,6 +128,25 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "ListEvents": [
+    {
+      "group": "events",
+      "suffix": "",
+      "description": "Get a list of events returns \"OK\" response"
+    },
+    {
+      "group": "events",
+      "suffix": "_2663715109",
+      "description": "Get a quick list of events returns \"OK\" response"
+    }
+  ],
+  "SearchEvents": [
+    {
+      "group": "events",
+      "suffix": "",
+      "description": "Search events returns \"OK\" response"
+    }
+  ],
   "CreateIncidentService": [
     {
       "group": "incident_services",
@@ -665,6 +684,20 @@
       "description": "Update a role returns \"OK\" response"
     }
   ],
+  "EditSecurityMonitoringSignalIncidents": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Change the related incidents of a security signal returns \"OK\" response"
+    }
+  ],
+  "EditSecurityMonitoringSignalState": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Change the triage state of a security signal returns \"OK\" response"
+    }
+  ],
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -715,6 +748,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Get all security filters returns \"OK\" response"
+    }
+  ],
+  "EditSecurityMonitoringSignalAssignee": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
   "UpdateSecurityFilter": [
@@ -783,24 +823,31 @@
       "description": "Get estimated cost across multi-org account with month returns \"OK\" response"
     }
   ],
-  "GetUsageApplicationSecurityMonitoring": [
+  "GetHourlyUsage": [
     {
       "group": "usage_metering",
       "suffix": "",
+      "description": "Get hourly usage by product family returns \"OK\" response"
+    }
+  ],
+  "GetUsageApplicationSecurityMonitoring": [
+    {
+      "group": "usage_metering",
+      "suffix": "_3959166796",
       "description": "Get hourly usage for Application Security returns \"OK\" response"
     }
   ],
   "GetUsageLambdaTracedInvocations": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1436752065",
       "description": "Get hourly usage for Lambda Traced Invocations returns \"OK\" response"
     }
   ],
   "GetUsageObservabilityPipelines": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_970725512",
       "description": "Get hourly usage for Observability Pipelines returns \"OK\" response"
     }
   ],

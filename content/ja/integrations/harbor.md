@@ -1,43 +1,66 @@
 ---
+app_id: harbor
+app_uuid: a4aae6fb-1865-42d0-be03-78e98b7e4b22
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Harbor Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: harbor.projects.count
+      metadata_path: metadata.csv
+      prefix: harbor.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Harbor
   logs:
     source: harbor
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - コンテナ
 - ログの収集
 - オートディスカバリー
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/harbor/README.md
-display_name: Harbor
+display_on_public_website: true
 draft: false
 git_integration_title: harbor
-guid: 8fcaa5d7-a121-45ea-bde2-f12d55bc6286
 integration_id: harbor
 integration_title: Harbor
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: harbor.
-metric_to_check: harbor.projects.count
+manifest_version: 2.0.0
 name: harbor
-public_title: Datadog-Harbor インテグレーション
+oauth: {}
+public_title: Harbor
 short_description: Harbor コンテナレジストリの健全性を監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: Harbor コンテナレジストリの健全性を監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Harbor
 ---
 
 

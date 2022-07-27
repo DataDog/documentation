@@ -1,19 +1,18 @@
 ---
 categories:
-  - コラボレーション
-  - notification
-ddtype: crawler
+- コラボレーション
+- notification
 dependencies: []
 description: Datadog のアラートとグラフをチームの Google Hangouts ルームへ送信
 doc_link: https://docs.datadoghq.com/integrations/google_hangouts_chat/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/google-hangouts-chat-integration/
-    tag: ブログ
-    text: Datadog と Google Hangouts Chat の統合
-  - link: https://developers.google.com/hangouts/chat/
-    tag: 外部ドキュメント
-    text: Google Hangouts Chat
+- link: https://www.datadoghq.com/blog/google-hangouts-chat-integration/
+  tag: ブログ
+  text: Datadog と Google Hangouts Chat の統合
+- link: https://developers.google.com/hangouts/chat/
+  tag: 外部ドキュメント
+  text: Google Hangouts Chat
 git_integration_title: google_hangouts_chat
 has_logo: true
 integration_id: google-hangouts-chat
@@ -27,6 +26,7 @@ public_title: Datadog-Google Hangouts Chat インテグレーション
 short_description: Datadog のアラートとグラフをチームの Google Hangouts ルームへ送信
 version: '1.0'
 ---
+
 {{< site-region region="us3,eu,gov" >}}
 <div class="alert alert-warning">
   このインテグレーションは、米国のサイトを使用している Datadog のお客様にのみサポートされています。

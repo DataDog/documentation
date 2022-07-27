@@ -281,11 +281,11 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
-[2]: /tracing/visualization/#spans
-[3]: /tracing/visualization/#span-tags
-[4]: /tracing/visualization/#resources
-[5]: /tracing/visualization/#services
+[1]: /tracing/glossary/#trace
+[2]: /tracing/glossary/#spans
+[3]: /tracing/glossary/#span-tags
+[4]: /tracing/glossary/#resources
+[5]: /tracing/glossary/#services
 [6]: https://app.datadoghq.com/apm/search
 [7]: /tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics

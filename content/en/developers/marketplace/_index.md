@@ -305,7 +305,7 @@ Email marketplace@datadog.com if you have any questions.
 [5]: /help/
 [6]: /account_management/org_switching/
 [7]: /account_management/users/#add-new-members-and-manage-invites
-[8]: https://learn.datadoghq.com/course/view.php?id=38
+[8]: https://learn.datadoghq.com/courses/intro-to-integrations
 [9]: https://learn.datadoghq.com/
 [10]: https://github.com/DataDog/marketplace
 [11]: https://github.com/DataDog/integrations-extras

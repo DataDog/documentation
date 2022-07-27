@@ -21,7 +21,6 @@ categories:
 - web
 - ネットワーク
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_name: nginx-ingress-controller
@@ -38,7 +37,7 @@ manifest_version: 1.0.0
 metric_prefix: nginx_ingress.
 metric_to_check: nginx_ingress.nginx.process.count
 name: nginx_ingress_controller
-public_title: Datadog-nginx-ingress-controller インテグレーション
+public_title: nginx-ingress-controller インテグレーション
 short_description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
 support: コア
 supported_os:

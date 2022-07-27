@@ -48,7 +48,7 @@ By creating historical views with specific queries (for example, over one or mor
 #### Notify
 
 Events are triggered automatically when a rehydration starts and finishes.
-These events are available in your [Events stream][7].
+These events are available in your [Events Explorer][7].
 
 During the creation of a historical view, you can use the built-in template variables to customize the notification triggered at the end of the rehydration:
 

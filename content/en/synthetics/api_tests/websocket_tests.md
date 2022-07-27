@@ -10,9 +10,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/udp-websocket-api-tests/"
   tag: "Blog"
   text: "Run UDP and WebSocket tests to monitor latency-critical applications"
-- link: "https://learn.datadoghq.com/course/view.php?id=39"
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
   tag: "Learning Center"
   text: "Introduction to Synthetic Tests"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 ## Overview
 
@@ -30,22 +33,22 @@ After choosing to create an `WebSocket` test, define your test's request.
 2. Enter the string you want to send in your test. 
 3. Add **Advanced Options** (optional) to your test:
 
-  {{< tabs >}}
+   {{< tabs >}}
 
-  {{% tab "Request Options" %}}
-  * **Timeout**: Specify the amount of time in seconds before the test times out.
-  * **Request headers**: Define headers to add to the HTTP request initiating the WebSocket connection. You can also override the default headers (for example, the `user-agent` header).
-  * **Cookies**: Define cookies to add to the HTTP request initiating the WebSocket connection. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+   {{% tab "Request Options" %}}
+   * **Timeout**: Specify the amount of time in seconds before the test times out.
+   * **Request headers**: Define headers to add to the HTTP request initiating the WebSocket connection. You can also override the default headers (for example, the `user-agent` header).
+   * **Cookies**: Define cookies to add to the HTTP request initiating the WebSocket connection. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "Authentication" %}}
+   {{% tab "Authentication" %}}
 
-  * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{< /tabs >}}
+   {{< /tabs >}}
 
 <br/>
 
@@ -105,9 +108,9 @@ Your test can trigger retries `X` times after `Y` ms in case of a failed test re
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -126,7 +129,9 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click **Save** to save and start your test.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][9].
 
 ## Variables
 
@@ -173,7 +178,7 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][9].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][10].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -183,13 +188,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic WebSocket tests. To get create, edit, and delete access to Synthetic WebSocket tests, upgrade your user to one of those two [default roles][10].
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic WebSocket tests. To get create, edit, and delete access to Synthetic WebSocket tests, upgrade your user to one of those two [default roles][11].
 
-If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][12] on their accounts.
+Access restriction is available for customers using [custom roles][13] on their accounts.
 
 You can restrict access to a WebSocket test based on the roles in your organization. When creating a WebSocket test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -207,7 +212,8 @@ You can restrict access to a WebSocket test based on the roles in your organizat
 [6]: /monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /synthetics/api_tests/errors/#ssl-errors
-[10]: /account_management/rbac/
-[11]: /account_management/rbac#custom-roles
-[12]: /account_management/rbac/#create-a-custom-role
+[9]: /synthetics/guide/synthetic-test-monitors
+[10]: /synthetics/api_tests/errors/#ssl-errors
+[11]: /account_management/rbac/
+[12]: /account_management/rbac#custom-roles
+[13]: /account_management/rbac/#create-a-custom-role

@@ -13,7 +13,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
 display_name: StatsD
@@ -30,7 +29,7 @@ manifest_version: 1.0.0
 metric_prefix: statsd.
 metric_to_check: statsd.counters.count
 name: statsd
-public_title: Datadog-StatsD インテグレーション
+public_title: StatsD インテグレーション
 short_description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
 support: コア
 supported_os:

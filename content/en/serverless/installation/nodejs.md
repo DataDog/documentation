@@ -117,7 +117,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
 
     To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
+    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to. Possible values are `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com` and `ddog-gov.com`.
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
 
     For more information and additional settings, see the [plugin documentation][1].
@@ -247,13 +247,12 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 4. Configure the Datadog site and API key
 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
-[3]: https://docs.datadoghq.com/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -313,12 +312,11 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 4. Configure Datadog site and API key
 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
-[3]: https://docs.datadoghq.com/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 

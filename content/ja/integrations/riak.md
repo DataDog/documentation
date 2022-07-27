@@ -14,7 +14,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/riak/README.md
 display_name: Riak
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: riak.
 metric_to_check: riak.memory_processes
 name: riak
-public_title: Datadog-Riak インテグレーション
+public_title: Riak インテグレーション
 short_description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
 support: コア
 supported_os:

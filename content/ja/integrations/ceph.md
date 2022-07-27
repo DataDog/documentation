@@ -16,7 +16,6 @@ categories:
 - os & system
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ceph/README.md
 display_name: Ceph
@@ -37,7 +36,7 @@ process_signatures:
 - ceph-mon
 - ceph-mgr
 - ceph-osd
-public_title: Datadog-Ceph インテグレーション
+public_title: Ceph インテグレーション
 short_description: プールごとのパフォーマンスメトリクスを収集し、クラスター状態全体を監視。
 support: コア
 supported_os:

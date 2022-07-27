@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
 dependencies: []
 description: Google Cloud APIs のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_apis/
@@ -21,6 +20,7 @@ public_title: Datadog-Google Cloud APIs インテグレーション
 short_description: Google Cloud APIs のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud APIs を使用すると、Google Cloud Platform 製品にコードからアクセスできます。

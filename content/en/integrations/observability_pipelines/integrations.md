@@ -1,6 +1,8 @@
 ---
 title: Integrations
 kind: Documentation
+dependencies:
+  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/integrations.md"]
 ---
 ## Overview
 

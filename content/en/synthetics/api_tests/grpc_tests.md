@@ -9,15 +9,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/"
   tag: "Blog"
   text: "Monitor your gRPC APIs with Datadog"
-- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+- link: "https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/"
+  tag: "Blog"
+  text: "Monitor gRPC APIs with Datadog Synthetic Monitoring"
+- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run gRPC healthchecks on internal endpoints"
-- link: "https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/"
-  tag: "Blog"
-  text: "Monitor gRPC APIs with Datadog Synthetic Monitoring"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 ## Overview
 
@@ -44,7 +47,7 @@ After choosing to create a `gRPC` health check test, define your test's request.
 
 4. Add `env` **Tags** as well as any other tag to your gRPC health check test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
 
-{{< img src="synthetics/api_tests/grpc_test_config.png" alt="Define gRPC request" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/grpc_test_config.png" alt="Define gRPC request" style="width:90%;" >}}
 
 Click **Test Service** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
@@ -94,9 +97,9 @@ Your health check test can trigger retries `X` times after `Y` ms in case of a f
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -115,7 +118,9 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your health check test to **re-send the notification message** in case of test failure. To prevent renotification on failing health check tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click **Save** to save and start your health check test.
+4. Click **Create** to save your health check test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][9].
 
 ## Variables
 
@@ -140,7 +145,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][9] in the URL, advanced options, and assertions of your gRPC tests.
+You can use the [global variables defined in the `Settings`][10] in the URL, advanced options, and assertions of your gRPC tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -153,7 +158,7 @@ A health check test is considered `FAILED` if it does not satisfy one or more as
 These reasons include the following:
 
 `gRPC specific errors`
-: gRPC has a list of specific status codes that can be found in the [official gRPC documentation][10].
+: gRPC has a list of specific status codes that can be found in the [official gRPC documentation][11].
 
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or losing connectivity to the web server.
@@ -165,7 +170,7 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][11].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -175,13 +180,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic gRPC health check tests. To get create, edit, and delete access to Synthetic gRPC health check tests, upgrade your user to one of those two [default roles][12].
+By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic gRPC health check tests. To get create, edit, and delete access to Synthetic gRPC health check tests, upgrade your user to one of those two [default roles][13].
 
-If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][14], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Restrict access
 
-Access restriction is available for customers using [custom roles][14] on their accounts.
+Access restriction is available for customers using [custom roles][15] on their accounts.
 
 You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
 
@@ -200,9 +205,10 @@ You can restrict access to a browser test based on the roles in your organizatio
 [6]: /monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /synthetics/settings/#global-variables
-[10]: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
-[11]: /synthetics/api_tests/errors/#ssl-errors
-[12]: /account_management/rbac/
-[13]: /account_management/rbac#custom-roles
-[14]: /account_management/rbac/#create-a-custom-role
+[9]: /synthetics/guide/synthetic-test-monitors
+[10]: /synthetics/settings/#global-variables
+[11]: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
+[12]: /synthetics/api_tests/errors/#ssl-errors
+[13]: /account_management/rbac/
+[14]: /account_management/rbac#custom-roles
+[15]: /account_management/rbac/#create-a-custom-role

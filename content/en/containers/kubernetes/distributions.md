@@ -47,7 +47,7 @@ If you are using AWS Bottlerocket OS on your nodes, add the following to enable 
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -62,7 +62,7 @@ datadog:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -97,7 +97,7 @@ AKS requires specific configuration for the `Kubelet` integration due to AKS cer
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -115,7 +115,7 @@ datadog:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -151,7 +151,7 @@ spec:
 
 - In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is **required**. Using the `DD_KUBELET_TLS_VERIFY=false` environment variable also resolves this issue. Both of these options deactivate verification of the server certificate.
 
-  ```
+  ```yaml
   env:
     - name: DD_KUBELET_TLS_VERIFY
       value: "false"
@@ -252,7 +252,7 @@ This configuration supports OpenShift 3.11 and OpenShift 4, but works best with 
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -289,7 +289,7 @@ When using the Datadog Operator in OpenShift, it is recommended that you install
 The configuration below is meant to work with this setup (due to SCC/ServiceAccount setup), when the
 Agent is installed in the same namespace as the Datadog Operator.
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -356,7 +356,7 @@ Rancher installations are close to vanilla Kubernetes, requiring only some minor
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -378,7 +378,7 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -439,7 +439,7 @@ To enable container monitoring, add the following (`containerd` check):
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -454,7 +454,7 @@ datadog:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:

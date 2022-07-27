@@ -22,7 +22,7 @@ from os.path import (
     normpath
 )
 
-from format_link import format_link_file
+from actions.format_link import format_link_file
 
 
 class Integrations:
@@ -402,7 +402,7 @@ class Integrations:
                 else:
                     self.datafile_json.append(data)
             except JSONDecodeError:
-                if getenv("LOCAL") == 'True':
+                if not getenv("CI_COMMIT_REF_NAME"):
                     print(
                         "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(file_name))
                 else:
@@ -649,7 +649,7 @@ class Integrations:
             except JSONDecodeError:
                 no_integration_issue = False
                 manifest_json = {}
-                if getenv("LOCAL") == 'True':
+                if not getenv("CI_COMMIT_REF_NAME"):
                     print(
                         "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(manifest))
                 else:

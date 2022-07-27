@@ -78,11 +78,10 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 ### Configure the required environment variables
 
 - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-- Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+- Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 

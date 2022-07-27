@@ -55,25 +55,6 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-**For provider version v3+**
-
-```
-resource "datadog_monitor" "metric-based-slo" {
-    name = "SLO Error Budget Alert Example"
-    type  = "slo alert"
-    
-    query = <<EOT
-    error_budget("slo_id").over("time_window") > 75 
-    EOT
-
-    message = "Example monitor message"
-    monitor_thresholds {
-      critical = 75
-    }
-    tags = ["foo:bar", "baz"]
-}
-```
-
 [1]: /monitors/service_level_objectives/metric/
 [2]: /monitors/service_level_objectives/monitor/
 [3]: https://app.datadoghq.com/slo

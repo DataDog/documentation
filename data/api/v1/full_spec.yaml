@@ -3801,6 +3801,7 @@ components:
       - dbm_queries_usage
       - estimated_indexed_logs_usage
       - estimated_indexed_spans_usage
+      - estimated_ingested_spans_usage
       - fargate_usage
       - functions_usage
       - indexed_logs_usage
@@ -3826,6 +3827,7 @@ components:
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INDEXED_LOGS_USAGE
@@ -7032,6 +7034,8 @@ components:
       - estimated_indexed_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
+      - estimated_ingested_spans_usage
+      - estimated_ingested_spans_percentage
       - fargate_usage
       - fargate_percentage
       - functions_usage
@@ -7081,6 +7085,8 @@ components:
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -7169,6 +7175,16 @@ components:
           type: number
         estimated_indexed_spans_usage:
           description: The estimated indexed spans usage by tag(s). This field is
+            in private beta.
+          format: double
+          type: number
+        estimated_ingested_spans_percentage:
+          description: The percentage of estimated ingested spans usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_spans_usage:
+          description: The estimated ingested spans usage by tag(s). This field is
             in private beta.
           format: double
           type: number
@@ -13810,7 +13826,9 @@ components:
       type: object
     TreeMapColorBy:
       default: user
-      description: The attribute used to determine color in the widget.
+      deprecated: true
+      description: (deprecated) The attribute formerly used to determine color in
+        the widget.
       enum:
       - user
       example: user
@@ -13818,7 +13836,9 @@ components:
       x-enum-varnames:
       - USER
     TreeMapGroupBy:
-      description: The attribute used to group elements in the widget.
+      deprecated: true
+      description: (deprecated) The attribute formerly used to group elements in the
+        widget.
       enum:
       - user
       - family
@@ -13830,7 +13850,9 @@ components:
       - FAMILY
       - PROCESS
     TreeMapSizeBy:
-      description: The attribute used to determine size in the widget.
+      deprecated: true
+      description: (deprecated) The attribute formerly used to determine size in the
+        widget.
       enum:
       - pct_cpu
       - pct_mem
@@ -13840,20 +13862,26 @@ components:
       - PCT_CPU
       - PCT_MEM
     TreeMapWidgetDefinition:
-      description: "The treemap visualization found on the Host Dashboards comes from
-        the output of `ps auxww`. This is not continuously run on your hosts. Instead,
-        it\u2019s run once on Agent start/restart. The treemap is only supported for
-        process data on a single host dashboard \u2014 this may not be reused in other
-        dashboards or for other metrics."
+      description: The treemap visualization enables you to display hierarchical and
+        nested data. It is well suited for queries that describe part-whole relationships,
+        such as resource usage by availability zone, data center, or team.
       properties:
         color_by:
           $ref: '#/components/schemas/TreeMapColorBy'
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         group_by:
           $ref: '#/components/schemas/TreeMapGroupBy'
         requests:
-          description: List of top list widget requests.
+          description: List of treemap widget requests.
           example:
-          - q: system.load.1
+          - aggregator: sum
+            data_source: metrics
+            name: query1
+            query: sum:system.mem.total{*} by {service}
           items:
             $ref: '#/components/schemas/TreeMapWidgetRequest'
           maxItems: 1
@@ -13861,6 +13889,8 @@ components:
           type: array
         size_by:
           $ref: '#/components/schemas/TreeMapSizeBy'
+        time:
+          $ref: '#/components/schemas/WidgetTime'
         title:
           description: Title of your widget.
           type: string
@@ -14055,6 +14085,8 @@ components:
       - estimated_indexed_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
+      - estimated_ingested_spans_usage
+      - estimated_ingested_spans_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -14083,6 +14115,8 @@ components:
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14123,6 +14157,8 @@ components:
       - appsec_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
+      - estimated_ingested_spans_usage
+      - estimated_ingested_spans_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -14162,6 +14198,8 @@ components:
       - APPSEC_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
+      - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -14213,6 +14251,8 @@ components:
         appsec_percentage:
           description: The percentage of Application Security Monitoring host usage
             by tag(s).
+          format: double
+          type: number
         appsec_usage:
           description: The Application Security Monitoring host usage by tag(s).
           format: double
@@ -14310,6 +14350,16 @@ components:
           type: number
         estimated_indexed_spans_usage:
           description: The estimated indexed spans usage by tag(s). Note this field
+            is in private beta.
+          format: double
+          type: number
+        estimated_ingested_spans_percentage:
+          description: The percentage of estimated ingested spans usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_spans_usage:
+          description: The estimated ingested spans usage by tag(s). Note this field
             is in private beta.
           format: double
           type: number
@@ -18456,7 +18506,7 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
-      x-menu-order: 20
+      x-menu-order: 40
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -18507,7 +18557,7 @@ paths:
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
-      x-menu-order: 21
+      x-menu-order: 41
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19977,7 +20027,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - events_read
-      summary: Query the event stream
+      summary: Get a list of events
       tags:
       - Events
       x-menu-order: 1
@@ -24586,7 +24636,7 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
-      x-menu-order: 22
+      x-menu-order: 42
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -24643,7 +24693,7 @@ paths:
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
-      x-menu-order: 23
+      x-menu-order: 43
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -25444,11 +25494,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - AuthZ:
-        - security_monitoring_signals_write
-        apiKeyAuth: []
-        appKeyAuth: []
       summary: Add a security signal to an incident
       tags:
       - Security Monitoring
@@ -28381,7 +28426,10 @@ paths:
         type: idempotent
   /api/v1/usage/analyzed_logs:
     get:
-      description: Get hourly usage for analyzed logs (Security Monitoring).
+      description: 'Get hourly usage for analyzed logs (Security Monitoring).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageAnalyzedLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28435,7 +28483,7 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
       - Usage Metering
-      x-menu-order: 17
+      x-menu-order: 22
       x-undo:
         type: safe
   /api/v1/usage/attribution:
@@ -28527,7 +28575,7 @@ paths:
       summary: Get usage attribution
       tags:
       - Usage Metering
-      x-menu-order: 29
+      x-menu-order: 39
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28535,7 +28583,10 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/audit_logs:
     get:
-      description: Get hourly usage for audit logs.
+      description: 'Get hourly usage for audit logs.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageAuditLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28589,12 +28640,15 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
-      x-menu-order: 33
+      x-menu-order: 28
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
     get:
-      description: Get hourly usage for lambda.
+      description: 'Get hourly usage for lambda.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageLambda
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -28643,10 +28697,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Lambda
+      summary: Get hourly usage for lambda
       tags:
       - Usage Metering
-      x-menu-order: 12
+      x-menu-order: 18
       x-undo:
         type: safe
   /api/v1/usage/billable-summary:
@@ -28695,12 +28749,15 @@ paths:
       summary: Get billable usage across your account
       tags:
       - Usage Metering
-      x-menu-order: 19
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/usage/ci-app:
     get:
-      description: Get hourly usage for CI Visibility (Tests, Pipeline, and Spans).
+      description: 'Get hourly usage for CI visibility (tests, pipeline, and spans).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageCIApp
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28751,15 +28808,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for CI Visibility
+      summary: Get hourly usage for CI visibility
       tags:
       - Usage Metering
-      x-menu-order: 38
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/cspm:
     get:
-      description: Get hourly usage for Cloud Security Posture Management (CSPM).
+      description: 'Get hourly usage for cloud security posture management (CSPM).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageCloudSecurityPostureManagement
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28813,12 +28873,15 @@ paths:
       summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 27
       x-undo:
         type: safe
   /api/v1/usage/cws:
     get:
-      description: Get hourly usage for Cloud Workload Security.
+      description: 'Get hourly usage for cloud workload security.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageCWS
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28869,15 +28932,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Cloud Workload Security
+      summary: Get hourly usage for cloud workload security
       tags:
       - Usage Metering
-      x-menu-order: 34
+      x-menu-order: 29
       x-undo:
         type: safe
   /api/v1/usage/dbm:
     get:
-      description: Get hourly usage for Database Monitoring
+      description: 'Get hourly usage for database monitoring
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageDBM
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28928,15 +28994,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Database Monitoring
+      summary: Get hourly usage for database monitoring
       tags:
       - Usage Metering
-      x-menu-order: 35
+      x-menu-order: 30
       x-undo:
         type: safe
   /api/v1/usage/fargate:
     get:
-      description: Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
+      description: 'Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageFargate
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -28988,12 +29057,15 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
       - Usage Metering
-      x-menu-order: 11
+      x-menu-order: 17
       x-undo:
         type: safe
   /api/v1/usage/hosts:
     get:
-      description: Get hourly usage for hosts and containers.
+      description: 'Get hourly usage for hosts and containers.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageHosts
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29045,7 +29117,7 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
-      x-menu-order: 1
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v1/usage/hourly-attribution:
@@ -29135,15 +29207,15 @@ paths:
       summary: Get hourly usage attribution
       tags:
       - Usage Metering
-      x-menu-order: 30
+      x-menu-order: 2
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/incident-management:
     get:
-      description: Get hourly usage for incident management.
+      description: 'Get hourly usage for incident management.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetIncidentManagement
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29197,12 +29269,15 @@ paths:
       summary: Get hourly usage for incident management
       tags:
       - Usage Metering
-      x-menu-order: 27
+      x-menu-order: 25
       x-undo:
         type: safe
   /api/v1/usage/indexed-spans:
     get:
-      description: Get hourly usage for indexed spans.
+      description: 'Get hourly usage for indexed spans.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageIndexedSpans
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29254,12 +29329,15 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
       - Usage Metering
-      x-menu-order: 7
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/usage/ingested-spans:
     get:
-      description: Get hourly usage for ingested spans.
+      description: 'Get hourly usage for ingested spans.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetIngestedSpans
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29313,12 +29391,15 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
       - Usage Metering
-      x-menu-order: 26
+      x-menu-order: 24
       x-undo:
         type: safe
   /api/v1/usage/iot:
     get:
-      description: Get hourly usage for IoT.
+      description: 'Get hourly usage for IoT.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageInternetOfThings
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29372,12 +29453,15 @@ paths:
       summary: Get hourly usage for IoT
       tags:
       - Usage Metering
-      x-menu-order: 28
+      x-menu-order: 26
       x-undo:
         type: safe
   /api/v1/usage/logs:
     get:
-      description: Get hourly usage for logs.
+      description: 'Get hourly usage for logs.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29426,15 +29510,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Logs
+      summary: Get hourly usage for logs
       tags:
       - Usage Metering
-      x-menu-order: 2
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/usage/logs-by-retention:
     get:
-      description: Get hourly usage for indexed logs by retention period.
+      description: 'Get hourly usage for indexed logs by retention period.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageLogsByRetention
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29488,6 +29575,7 @@ paths:
       summary: Get hourly logs usage by retention
       tags:
       - Usage Metering
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
@@ -29549,10 +29637,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Logs by Index
+      summary: Get hourly usage for logs by index
       tags:
       - Usage Metering
-      x-menu-order: 3
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v1/usage/monthly-attribution:
@@ -29663,15 +29751,15 @@ paths:
           - name: fields
             value: '"infra_host_usage"'
           step: there is a valid "monthly_usage_attribution" response
-      x-menu-order: 31
+      x-menu-order: 3
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/network_flows:
     get:
-      description: Get hourly usage for network flows.
+      description: 'Get hourly usage for network flows.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageNetworkFlows
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29722,15 +29810,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Network Flows
+      summary: get hourly usage for network flows
       tags:
       - Usage Metering
-      x-menu-order: 15
+      x-menu-order: 21
       x-undo:
         type: safe
   /api/v1/usage/network_hosts:
     get:
-      description: Get hourly usage for network hosts.
+      description: 'Get hourly usage for network hosts.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageNetworkHosts
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29779,15 +29870,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Network Hosts
+      summary: Get hourly usage for network hosts
       tags:
       - Usage Metering
-      x-menu-order: 14
+      x-menu-order: 20
       x-undo:
         type: safe
   /api/v1/usage/online-archive:
     get:
-      description: Get hourly usage for Online Archive.
+      description: 'Get hourly usage for online archive.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageOnlineArchive
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29838,15 +29932,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Online Archive
+      summary: Get hourly usage for online archive
       tags:
       - Usage Metering
-      x-menu-order: 38
+      x-menu-order: 35
       x-undo:
         type: safe
   /api/v1/usage/profiling:
     get:
-      description: Get hourly usage for profiled hosts.
+      description: 'Get hourly usage for profiled hosts.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageProfiling
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29900,13 +29997,16 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
       - Usage Metering
-      x-menu-order: 24
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/rum:
     get:
-      description: Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
+      description: 'Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
         Units.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageRumUnits
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29955,16 +30055,19 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for RUM Units
+      summary: Get hourly usage for RUM units
       tags:
       - Usage Metering
-      x-menu-order: 37
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
     get:
-      description: Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
+      description: 'Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
         Sessions.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageRumSessions
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30019,15 +30122,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for RUM Sessions
+      summary: Get hourly usage for RUM sessions
       tags:
       - Usage Metering
-      x-menu-order: 13
+      x-menu-order: 19
       x-undo:
         type: safe
   /api/v1/usage/sds:
     get:
-      description: Get hourly usage for Sensitive Data Scanner.
+      description: 'Get hourly usage for sensitive data scanner.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageSDS
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -30078,15 +30184,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Sensitive Data Scanner
+      summary: Get hourly usage for sensitive data scanner
       tags:
       - Usage Metering
-      x-menu-order: 36
+      x-menu-order: 31
       x-undo:
         type: safe
   /api/v1/usage/snmp:
     get:
-      description: Get hourly usage for SNMP devices.
+      description: 'Get hourly usage for SNMP devices.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageSNMP
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -30140,7 +30249,7 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
       - Usage Metering
-      x-menu-order: 18
+      x-menu-order: 23
       x-undo:
         type: safe
   /api/v1/usage/summary:
@@ -30206,13 +30315,16 @@ paths:
       summary: Get usage across your multi-org account
       tags:
       - Usage Metering
-      x-menu-order: 16
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/usage/synthetics:
     get:
       deprecated: true
-      description: Get hourly usage for [Synthetics checks](https://docs.datadoghq.com/synthetics/).
+      description: 'Get hourly usage for [synthetics checks](https://docs.datadoghq.com/synthetics/).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageSynthetics
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30261,15 +30373,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Synthetics Checks
+      summary: Get hourly usage for synthetics checks
       tags:
       - Usage Metering
-      x-menu-order: 8
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/usage/synthetics_api:
     get:
-      description: Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
+      description: 'Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageSyntheticsAPI
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30318,15 +30433,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Synthetics API Checks
+      summary: Get hourly usage for synthetics API checks
       tags:
       - Usage Metering
-      x-menu-order: 9
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/usage/synthetics_browser:
     get:
-      description: Get hourly usage for synthetics browser checks.
+      description: 'Get hourly usage for synthetics browser checks.
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageSyntheticsBrowser
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30375,15 +30493,18 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for Synthetics Browser Checks
+      summary: Get hourly usage for synthetics browser checks
       tags:
       - Usage Metering
-      x-menu-order: 10
+      x-menu-order: 16
       x-undo:
         type: safe
   /api/v1/usage/timeseries:
     get:
-      description: Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
+      description: 'Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
+
+        **Note:** hourly usage data for all products is now available in the [Get
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageTimeseries
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30435,7 +30556,7 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
       - Usage Metering
-      x-menu-order: 4
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/usage/top_avg_metrics:
@@ -30521,7 +30642,7 @@ paths:
       summary: Get all custom metrics by hourly average
       tags:
       - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/user:
@@ -31108,9 +31229,11 @@ tags:
     event stream
 
     and fetch events from the event stream. Events are limited to 4000 characters.
-    If an event is sent out with a message
 
-    containing more than 4000 characters only the 4000 first characters are displayed.'
+    If an event is sent out with a message containing more than 4000 characters, only
+    the
+
+    first 4000 characters are displayed.'
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 

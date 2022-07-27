@@ -29,7 +29,7 @@ Starting with **Agent v6.11.0**, the core and APM/trace components of the Window
 
 If installing the Datadog Agent on a domain environment, see the [installation requirements for the Agent][4].
 
-**Note**: There are special considerations for [domain controllers][12].
+**Note**: There are special considerations for [domain controllers][5].
 
 {{< tabs >}}
 {{% tab "GUI" %}}
@@ -188,7 +188,7 @@ You can also use Windows Powershell, where available:
 
 ## Configuration
 
-Use the [Datadog Agent Manager][5] to enable, disable, and configure checks. Restart the Agent for your changes to be applied.
+Use the [Datadog Agent Manager][6] to enable, disable, and configure checks. Restart the Agent for your changes to be applied.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -399,7 +399,7 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 Also, whenever you modify an integration, the Datadog service needs to be restarted. You can do this from services.msc or from the UI sidebar.
 
-For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process][6] or [WMI][7] integration). To set up a Monitor, select the [Integration monitor type][8] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process](#monitoring-windows-processes) or [WMI][7] integration). To set up a Monitor, select the [Integration monitor type][8] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
@@ -429,11 +429,10 @@ After configuration is complete, [restart the Agent][11].
 [2]: /agent/basic_agent_usage/?tab=agentv6v7#supported-platforms
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: /agent/guide/datadog-agent-manager-windows/
-[6]: /#monitoring-windows-processes
+[5]: /agent/faq/windows-agent-ddagent-user/#domain-controllers
+[6]: /agent/guide/datadog-agent-manager-windows/
 [7]: /integrations/wmi/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [11]: /agent/guide/agent-commands/#restart-the-agent
-[12]: /agent/faq/windows-agent-ddagent-user/#domain-controllers

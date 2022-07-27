@@ -112,5 +112,5 @@ To download data from a timeseries, table, or top list widget in CSV format, cli
 [2]: /dashboards/guide/context-links/
 [3]: /dashboards/
 [4]: /notebooks/
-[5]: /tracing/visualization/service/
-[6]: /tracing/visualization/resource/
+[5]: /tracing/services/service_page/
+[6]: /tracing/services/resource_page/

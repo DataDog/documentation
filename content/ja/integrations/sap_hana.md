@@ -11,7 +11,6 @@ assets:
 categories:
 - data store
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
 display_name: SAP HANA
@@ -28,7 +27,7 @@ manifest_version: 1.0.0
 metric_prefix: sap_hana.
 metric_to_check: sap_hana.uptime
 name: sap_hana
-public_title: Datadog-SAP HANA インテグレーション
+public_title: SAP HANA インテグレーション
 short_description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
 support: コア
 supported_os:

@@ -165,7 +165,7 @@ Use the facets panel and the search bar to filter the list on the `Creator`, the
 
 ### History
 
-Downtime history is viewable on the [Monitor Status][4] page as overlaid on the group transition history, and the [Event stream][5] by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<DOWNTIME_ID>`.
+Downtime history is viewable on the [Monitor Status][4] page as overlaid on the group transition history, and the [Event explorer][5] by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<DOWNTIME_ID>`.
 
 ### Muting
 
@@ -177,7 +177,7 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 ### Expiration
 
-If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins.
+If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
 
 **Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
 1. During downtime, notifications for this alert are suppressed.
@@ -201,6 +201,6 @@ All alerted states are included on the [weekly monitor report][7] even if the mo
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /integrations/#cat-notification
 [4]: /monitors/manage/status/
-[5]: /events/#event-stream
+[5]: /events/explorer
 [6]: /api/v1/downtimes/#cancel-a-downtime
 [7]: /account_management/#preferences

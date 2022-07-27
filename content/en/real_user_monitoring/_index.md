@@ -6,36 +6,36 @@ disable_sidebar: true
 aliases:
   - /real_user_monitoring/installation
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog RUM releases! (App login required)."
-  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-    tag: "Blog"
-    text: "Introducing Datadog Real User Monitoring"
-  - link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
-    tag: "Blog"
-    text: "Improve mobile user experience with Datadog Mobile Real User Monitoring"
-  - link: "https://www.datadoghq.com/blog/mobile-monitoring-best-practices/"
-    tag: "Blog"
-    text: "Best practices for monitoring mobile app performance"
-  - link: "https://www.datadoghq.com/blog/error-tracking/"
-    tag: "Blog"
-    text: "Make sense of application issues with Datadog Error Tracking"
-  - link: "https://www.datadoghq.com/blog/unify-apm-rum-datadog/"
-    tag: "Blog"
-    text: "Unify APM and RUM data for full-stack visibility"
-  - link: "https://www.datadoghq.com/blog/datadog-geomaps/"
-    tag: "Blog"
-    text: "Use geomaps to visualize your app data by location"
-  - link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
-    tag: "Blog"
-    text: "Get better RUM data with our custom React components"
-  - link: "/real_user_monitoring/browser/data_collected/"
-    tag: "Documentation"
-    text: "RUM Browser Data Collected"
-  - link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
-    tag: "Blog"
-    text: "Monitor your hybrid mobile applications with Datadog"
+- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+  tag: "Blog"
+  text: "Introducing Datadog Real User Monitoring"
+- link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
+  tag: "Blog"
+  text: "Improve mobile user experience with Datadog Mobile Real User Monitoring"
+- link: "https://www.datadoghq.com/blog/mobile-monitoring-best-practices/"
+  tag: "Blog"
+  text: "Best practices for monitoring mobile app performance"
+- link: "https://www.datadoghq.com/blog/error-tracking/"
+  tag: "Blog"
+  text: "Make sense of application issues with Datadog Error Tracking"
+- link: "https://www.datadoghq.com/blog/unify-apm-rum-datadog/"
+  tag: "Blog"
+  text: "Unify APM and RUM data for full-stack visibility"
+- link: "https://www.datadoghq.com/blog/datadog-geomaps/"
+  tag: "Blog"
+  text: "Use geomaps to visualize your app data by location"
+- link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
+  tag: "Blog"
+  text: "Get better RUM data with our custom React components"
+- link: "/real_user_monitoring/browser/data_collected/"
+  tag: "Documentation"
+  text: "RUM Browser Data Collected"
+- link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
+  tag: "Blog"
+  text: "Monitor your hybrid mobile applications with Datadog"
 ---
 
 {{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
@@ -67,7 +67,7 @@ Select an application type to start collecting RUM data:
 
 ### Out-of-the-box dashboards
 
-Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out-of-the-box RUM dashboards][1].
+Analyze information about your user sessions, performance, mobile applications, frustration signals, network resources, and errors collected automatically with [out-of-the-box RUM dashboards][1].
 
 {{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
