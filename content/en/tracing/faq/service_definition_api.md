@@ -78,7 +78,7 @@ POST /api/v2/services/definitions
 | Request Body                | JSON or YAML    | See Service Definition Schema [v2][4] |
 
 #### Example
-{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
+{{< code-block lang="json" filename="service.definition.json" collapsible="true" >}}
 {
   "schema-version": "v2",
   "dd-version": "shopping-service"
@@ -86,7 +86,7 @@ POST /api/v2/services/definitions
 {{< /code-block >}}
 
 #### Example
-{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
+{{< code-block lang="json" filename="service.definition.json" collapsible="true" >}}
 {
     "data": [
         {
