@@ -1,45 +1,67 @@
 ---
+app_id: databricks
+app_uuid: f99b6e79-f50a-479d-b916-955a577e4f41
 assets:
   dashboards:
     Databricks Spark Overview: assets/dashboards/databricks_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Databricks
+  logs:
+    source: spark
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - cloud
-  - コラボレーション
-  - 処理
-creates_events: false
-ddtype: check
+- cloud
+- コラボレーション
+- 処理
+- ログの収集
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/databricks/README.md'
-display_name: Databricks
+- https://github.com/DataDog/integrations-core/blob/master/databricks/README.md
+display_on_public_website: true
 draft: false
-further_reading:
-  - link: 'https://www.datadoghq.com/blog/databricks-monitoring-datadog/'
-    tag: ブログ
-    text: Datadog を使用した Databricks の監視
 git_integration_title: databricks
-guid: 3e1c7918-f224-46c6-836f-1169857e2564
 integration_id: databricks
 integration_title: Databricks
+integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: databricks.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: databricks
+oauth: {}
 public_title: Databricks
 short_description: Databricks クラスターで Apache Spark を監視する
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Collaboration
+  - Category::Processing
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Databricks クラスターで Apache Spark を監視する
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Databricks
 ---
+
+
+
 ## 概要
 
 [Databricks][1] クラスターを Datadog の [Spark インテグレーション][2]で監視します。
@@ -48,7 +70,7 @@ supported_os:
 
 ### インストール
 
-Databricks Spark アプリケーションを [Datadog Spark インテグレーション][3]で監視します。適切なクラスターの[コンフィギュレーション](#コンフィギュレーション)方法に従って、クラスターに Datadog Agent をインストールしてください。
+Databricks Spark アプリケーションを [Datadog Spark インテグレーション][3]で監視します。適切なクラスターの[コンフィギュレーション](#configuration)方法に従って、クラスターに [Datadog Agent][4] をインストールしてください。
 
 ### コンフィギュレーション
 
@@ -57,12 +79,13 @@ Databricks で Apache Spark クラスターを監視し、システムと Spark 
 1. Databricks クラスター環境に最適な init スクリプトを以下で決定します。
 
 2. 内容をコピーしてノートブックに実行します。ノートブックは、クラスターに Datadog Agent をインストールする init スクリプトを作成します。
-   スクリプトをグローバルコンフィギュレーションとして保存するには、ノートブックを 1 回実行するだけで済みます。Databricks Datadog Init スクリプトの詳細については[こちら][3]をご覧ください。
+   スクリプトをグローバルコンフィギュレーションとして保存するには、ノートブックを 1 回実行するだけで済みます。Databricks Datadog Init スクリプトの詳細については、[Databricks と Datadog による Apache Spark Cluster のモニタリング][3]を参照してください。
     - `<init-script-folder>` パスを init スクリプトを保存する場所に設定します。
 
 3. UI、Databricks CLI を使用するか、Clusters API を呼び出して、クラスタースコープの init スクリプトパスで新しい Databricks クラスターを構成します。
     - Datadog API キーを使用して、クラスターの Advanced Options で `DD_API_KEY` 環境変数を設定します。
     - Advanced Options の下に `DD_ENV` 環境変数を追加して、クラスターをより適切に識別するためのグローバル環境タグを追加します。
+    - `DD_SITE` に[サイトの URL][5] を設定します。
 
 
 #### 標準クラスター
@@ -93,7 +116,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:driver"
 
   # 最新の Datadog Agent 7 をインストールします
-  DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=DD_TAGS bash -c "\$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+  DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 
   # Datadog Agent がインストールされるのを待ちます
   while [ -z \$datadoginstalled ]; do
@@ -130,7 +153,7 @@ instances:
 logs:
     - type: file
       path: /databricks/driver/logs/*.log
-      source: databricks
+      source: spark
       service: databricks
       log_processing_rules:
         - type: multi_line
@@ -210,7 +233,7 @@ instances:
 logs:
     - type: file
       path: /databricks/driver/logs/*.log
-      source: databricks
+      source: spark
       service: databricks
       log_processing_rules:
         - type: multi_line
@@ -240,7 +263,7 @@ chmod a+x /tmp/start_datadog.sh
 {{< /tabs >}}
 
 #### ジョブクラスター
-`datadog-install-job-driver-mode.sh` スクリプトを作成した後、[クラスターコンフィギュレーションページ][4]に init スクリプトパスを追加します。
+`datadog-install-job-driver-mode.sh` スクリプトを作成した後、[クラスターコンフィギュレーションページ][6]に init スクリプトパスを追加します。
 
 **注**: ジョブクラスターは Spark UI ポートを使用して `spark_driver_mode` で監視されます。
 
@@ -297,7 +320,7 @@ instances:
 logs:
     - type: file
       path: /databricks/driver/logs/*.log
-      source: databricks
+      source: spark
       service: databricks
       log_processing_rules:
         - type: multi_line
@@ -322,18 +345,18 @@ fi
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `spark` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `spark` を探します。
 
 ## 収集データ
 
 ### メトリクス
 
-収集されたメトリクスのリストについては、[Spark インテグレーションドキュメント][6]を参照してください。
+収集されたメトリクスのリストについては、[Spark インテグレーションドキュメント][8]を参照してください。
 
 
 ### サービスのチェック
 
-収集されたサービスチェックのリストについては、[Spark インテグレーションドキュメント][7]を参照してください。
+収集されたサービスチェックのリストについては、[Spark インテグレーションドキュメント][9]を参照してください。
 
 ### イベント
 
@@ -341,7 +364,7 @@ Databricks インテグレーションには、イベントは含まれません
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
 
@@ -351,8 +374,10 @@ Databricks インテグレーションには、イベントは含まれません
 [1]: https://databricks.com/
 [2]: https://docs.datadoghq.com/ja/integrations/spark/?tab=host
 [3]: https://databricks.com/blog/2017/06/01/apache-spark-cluster-monitoring-with-databricks-and-datadog.html
-[4]: https://docs.databricks.com/clusters/init-scripts.html#configure-a-cluster-scoped-init-script-using-the-ui
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/integrations/spark/#metrics
-[7]: https://docs.datadoghq.com/ja/integrations/spark/#service-checks
-[8]: https://docs.datadoghq.com/ja/help/
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: https://docs.datadoghq.com/ja/getting_started/site/
+[6]: https://docs.databricks.com/clusters/init-scripts.html#configure-a-cluster-scoped-init-script-using-the-ui
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/integrations/spark/#metrics
+[9]: https://docs.datadoghq.com/ja/integrations/spark/#service-checks
+[10]: https://docs.datadoghq.com/ja/help/
