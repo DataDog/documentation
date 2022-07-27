@@ -25,7 +25,7 @@ If the service, API, or custom library you are interested in is not listed on th
 
 1. Go to [Get Started][2].
 
-2. The **Register Services*** form helps you generate JSON that you can post to Service Catalog API endpoint. Provide a service name in the `dd-service` field. Fill in ownership, source, and other service information in the Service Definition schema presented. Refer to the [full JSON schema on GitHub][3] for complete details.
+2. The **Register Services** form helps you generate JSON that you can post to Service Catalog API endpoint. Provide a service name in the `dd-service` field. Fill in ownership, source, and other service information in the Service Definition schema presented. Refer to the [full JSON schema on GitHub][3] for complete details.
 
 3. Click the **Copy** button to copy the generated JSON. Send this as the `body` of a `POST` API call with the [Service Definition API][1].
 
