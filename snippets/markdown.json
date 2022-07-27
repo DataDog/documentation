@@ -17,11 +17,11 @@
 			"disable_toc: false",
 			"aliases:",
 			"- /path-to-old-doc/",
-			"---",
 			"further_reading:",
 				"- link: \"logs/processing/pipelines\"",
 					  "tag: \"Documentation\"",
-					"text: \"Log processing pipelines\""
+					"text: \"Log processing pipelines\"",
+            "---"
 		],
 		"description": "Frontmatter"
 	},
@@ -48,7 +48,7 @@
 	"Alert box":{
 		"prefix": "alert",
 		"body": [
-			"<div class=\"alert alert-${1|info,danger,warning|}\">Text containing an <a href=\"https://google.com\">HTML link</a></div>."
+			"<div class=\"alert alert-${1|info,danger,warning|}\">Text containing an <a href=\"https://google.com\">HTML link.</a></div>"
 		],
 		"description": "Alert box with choice of info, danger, or warning"
 	},
