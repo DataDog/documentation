@@ -22,7 +22,6 @@ categories:
 - caching
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md
 display_name: Redis
@@ -41,7 +40,7 @@ metric_to_check: redis.net.clients
 name: redisdb
 process_signatures:
 - redis-server
-public_title: Datadog-Redis インテグレーション
+public_title: Redis インテグレーション
 short_description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
 support: コア
 supported_os:
@@ -385,8 +384,6 @@ Redis チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-- [Redis インテグレーションエラー: "unknown command 'CONFIG'"][3]
-
 ### Agent が接続できない
 
 ```shell
@@ -413,10 +410,9 @@ Redis チェックには、イベントは含まれません。
 
 お役に立つドキュメント、リンクや記事:
 
-- [Redis パフォーマンスメトリクスの監視方法][4]
+- [Redis パフォーマンスメトリクスの監視方法][3]
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/integrations/faq/redis-integration-error-unknown-command-config/
-[4]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics
+[3]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics

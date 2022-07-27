@@ -15,7 +15,6 @@ categories:
 - ログの収集
 - オートディスカバリー
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
 display_name: IBM WAS
@@ -32,7 +31,7 @@ manifest_version: 1.0.0
 metric_prefix: ibm_was.
 metric_to_check: ibm_was.can_connect
 name: ibm_was
-public_title: Datadog-IBM WAS インテグレーション
+public_title: IBM WAS インテグレーション
 short_description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
 support: コア
 supported_os:

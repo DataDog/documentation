@@ -1,20 +1,21 @@
 ---
 aliases:
-  - /ja/integrations/awsec2/
-  - /ja/agent/faq/install-the-agent-with-aws-ssm
+- /ja/integrations/awsec2/
+- /ja/agent/faq/install-the-agent-with-aws-ssm
 categories:
-  - cloud
-  - os & system
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- os & system
+- aws
+- log collection
 dependencies: []
 description: インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_ec2/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_ec2/
 draft: false
 git_integration_title: amazon_ec2
 has_logo: true
+integration_id: amazon-ec2
 integration_title: Amazon EC2
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +24,7 @@ public_title: Datadog-Amazon EC2 インテグレーション
 short_description: インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変更可能なコンピューティング能力を提供する Web サービスです。開発者が Web スケールのコンピューティングを簡単に利用できるように設計されています。
@@ -39,7 +41,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
 
 1. [AWS インテグレーションタイル][2]で **Configuration** タブを開き、**Limit metric collection by AWS Service** で `EC2` をオンにします。
 
-2. Amazon EC2 のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。EC2 ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
+2. Amazon EC2 のメトリクスを収集するには、次の必須アクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [EC2 ポリシー][4]を参照してください。
 
     | AWS アクセス許可               | 説明                                                                                                                           |
     | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,7 +55,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
 
 #### EC2 オートミュート
 
-Datadog は、Cloudwatch API からのホストステータスに基づいて、EC2 インスタンスの手動シャットダウンや AWS オートスケーリングによってトリガーされるインスタンスの停止に関連するモニターを事前にミュートすることができます。オートミュートされた EC2 インスタンスは、[モニターのダウンタイム][6ページで **Show automatically muted hosts** をオンにするとリストされます。
+Datadog は、CloudWatch API からのホストステータスに基づいて、EC2 インスタンスの手動シャットダウンや AWS オートスケーリングによってトリガーされるインスタンスの停止に関連するモニターを事前にミュートすることができます。オートミュートされた EC2 インスタンスは、[モニターのダウンタイム][6ページで **Show automatically muted hosts** をオンにするとリストされます。
 
 オートミュートを有効にするには、EC2 インテグレーションをインストールする必要があります。メトリクスの収集が何らかのタグが付いたホストに限られている場合は、それらのタグと一致するインスタンスだけがオートミュートされます。
 
@@ -87,7 +89,7 @@ Systems Manager で、新しい[ドキュメント][10]を作成します。
 - ドキュメントタイプ: `コマンドのドキュメント`
 - コンテンツ: `JSON`
 
-Datadog US サイトの場合は、`runCommand` をご使用の `<AWS リージョン>` (例: `us-east-1`) で更新した [dd-agent-install-us-site.json][11] ファイルを使用します。Datadog EU サイトの場合は、[dd-agent-install-eu-site.json][12] を使用します。
+Datadog US サイトの場合は、`runCommand` をご使用の `<AWS_REGION>` (例: `us-east-1`) で更新した [dd-agent-install-us-site.json][11] ファイルを使用します。Datadog EU サイトの場合は、[dd-agent-install-eu-site.json][12] を使用します。
 
 ##### コマンドの実行
 
@@ -118,18 +120,11 @@ Datadog US サイトの場合は、`runCommand` をご使用の `<AWS リージ�
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-**注**: Datadog - EC2 インテグレーションは、デフォルトでは `aws.ec2.instance_age` を収集しません。このメトリクスの収集を有効にするには、[Datadog のサポートチーム][18]までお問い合わせください。
+**注**: Datadog - EC2 インテグレーションは、デフォルトでは `aws.ec2.instance_age` を収集しません。このメトリクスの収集を有効にするには、[Datadog サポート][18]までお問い合わせください。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "amazon_ec2" >}}
 
-**aws.ec2.host_status**<br>
-AWS コンソールによって報告された EC2 インスタンスのステータスを返します。インスタンスに問題がある場合は、`CRITICAL` を返します。AWS にステータスチェックを実行するのに十分なデータがない場合は、`UNKNOWN` を返します。インスタンスが実行中または適切にシャットダウンされている場合は、`OK` を返します。
-
-### イベント
-
-AWS EC2 インテグレーションには、インスタンスの警告と共に、スケジュール設定されたメンテナンスと次回のメンテナンスのイベントが含まれます。以下はイベントの例です。
-
-{{< img src="integrations/amazon_ec2/aws_ec2_events.png" alt="AWS EC2 イベント" >}}
 
 ## トラブルシューティング
 
@@ -137,19 +132,19 @@ AWS EC2 インテグレーションには、インスタンスの警告と共に
 
 ## その他の参考資料
 
-- [EC2 監視のキーメトリクス][19]
-- [EC2 メトリクスの収集方法][20]
-- [Datadog で EC2 インスタンスを監視する方法][21]
+- [EC2 モニタリングのキーメトリクス][20]
+- [EC2 メトリクスの収集方法][21]
+- [Datadog で EC2 インスタンスを監視する方法][22]
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ec2.html
+[4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-iam.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_ec2
 [6]: https://app.datadoghq.com/monitors#downtime
 [7]: https://docs.datadoghq.com/ja/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [8]: https://console.aws.amazon.com/systems-manager/parameters
-[9]: https://app.datadoghq.com/account/settings#api
+[9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://console.aws.amazon.com/systems-manager/documents
 [11]: https://docs.datadoghq.com/resources/json/dd-agent-install-us-site.json
 [12]: https://docs.datadoghq.com/resources/json/dd-agent-install-eu-site.json
@@ -159,6 +154,7 @@ AWS EC2 インテグレーションには、インスタンスの警告と共に
 [16]: https://docs.datadoghq.com/ja/integrations/rsyslog/
 [17]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2/amazon_ec2_metadata.csv
 [18]: https://docs.datadoghq.com/ja/help/
-[19]: https://www.datadoghq.com/blog/ec2-monitoring
-[20]: https://www.datadoghq.com/blog/collecting-ec2-metrics
-[21]: https://www.datadoghq.com/blog/monitoring-ec2-instances-with-datadog
+[19]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2/service_checks.json
+[20]: https://www.datadoghq.com/blog/ec2-monitoring
+[21]: https://www.datadoghq.com/blog/collecting-ec2-metrics
+[22]: https://www.datadoghq.com/blog/monitoring-ec2-instances-with-datadog

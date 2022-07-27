@@ -1,39 +1,58 @@
 ---
+app_id: システム
+app_uuid: b30c1062-d2cd-4fb7-be84-c144913b8266
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.disk.directory.file.bytes
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Directory
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/directory/README.md
-display_name: Directory
+display_on_public_website: true
 draft: false
 git_integration_title: directory
-guid: 0c38c4ef-5266-4667-9fb1-de8f2b73708a
 integration_id: システム
 integration_title: Directory
 integration_version: 1.13.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: system.
-metric_to_check: system.disk.directory.file.bytes
+manifest_version: 2.0.0
 name: directory
-public_title: Datadog-Directory インテグレーション
+oauth: {}
+public_title: Directory
 short_description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Directory
 ---
 
 

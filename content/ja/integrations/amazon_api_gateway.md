@@ -1,19 +1,19 @@
 ---
 aliases:
-  - /ja/integrations/awsapigateway/
+- /ja/integrations/awsapigateway/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- aws
+- log collection
 dependencies: []
 description: ゲートウェイエラー、キャッシュのヒット/ミス、リクエストレイテンシーを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_api_gateway/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_api_gateway/
 draft: false
 git_integration_title: amazon_api_gateway
 has_logo: true
 integration_id: amazon-api-gateway
 integration_title: Amazon API Gateway
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-Amazon API Gateway インテグレーション
 short_description: Amazon API ゲートウェイエラーを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon API Gateway は、開発者があらゆる規模で API の作成、公開、保守、監視、およびセキュリティ保護を簡単に行えるフルマネージド型サービスです。
@@ -87,7 +88,7 @@ API Gateway ログを有効化します。
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 

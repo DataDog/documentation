@@ -3,7 +3,8 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards:
-    Vault - Overview: assets/dashboards/vault_overview.json
+    Vault - Overview: assets/dashboards/vault_overview_legacy.json
+    Vault - Overview (OpenMetricsV2): assets/dashboards/vault_overview.json
   logs:
     source: vault
   metrics_metadata: metadata.csv
@@ -20,7 +21,6 @@ categories:
 - ログの収集
 - オートディスカバリー
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vault/README.md
 display_name: Vault
@@ -29,7 +29,7 @@ git_integration_title: vault
 guid: d65af827-c818-44ce-9ec3-cd7ead3ac4ce
 integration_id: vault
 integration_title: Vault
-integration_version: 3.2.0
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -37,7 +37,7 @@ manifest_version: 1.0.0
 metric_prefix: vault.
 metric_to_check: vault.is_leader
 name: vault
-public_title: Datadog-Vault インテグレーション
+public_title: Vault インテグレーション
 short_description: Vault は機密情報管理サービスアプリケーション
 support: コア
 supported_os:
@@ -245,6 +245,8 @@ _Agent バージョン 6.0 以降で利用可能_
 {{< get-metrics-from-git "vault" >}}
 
 
+**注**: このチェックのバージョン3.4.0+ では、メトリクスの収集に [OpenMetrics][7] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、構成で `use_openmetrics` の値を `false` に設定します。
+
 ### イベント
 
 `vault.leader_change`:
@@ -256,16 +258,16 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した HashiCorp Vault の監視][8]
-- [HashiCorp Vault のメトリクスおよびログの監視][9]
-- [HashiCorp Vault 監視用ツール][10]
-- [Datadog を使用した HashiCorp Vault の監視方法][11]
+- [Datadog を使用した HashiCorp Vault の監視][9]
+- [HashiCorp Vault のメトリクスおよびログの監視][10]
+- [HashiCorp Vault 監視用ツール][11]
+- [Datadog を使用した HashiCorp Vault の監視方法][12]
 
 
 [1]: https://www.vaultproject.io
@@ -274,8 +276,9 @@ _Agent バージョン 6.0 以降で利用可能_
 [4]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
 [5]: https://www.vaultproject.io/docs/auth
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/help/
-[8]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
-[9]: https://www.datadoghq.com/blog/monitor-vault-metrics-and-logs/
-[10]: https://www.datadoghq.com/blog/vault-monitoring-tools
-[11]: https://www.datadoghq.com/blog/vault-monitoring-with-datadog
+[7]: https://docs.datadoghq.com/ja/integrations/openmetrics/
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
+[10]: https://www.datadoghq.com/blog/monitor-vault-metrics-and-logs/
+[11]: https://www.datadoghq.com/blog/vault-monitoring-tools
+[12]: https://www.datadoghq.com/blog/vault-monitoring-with-datadog

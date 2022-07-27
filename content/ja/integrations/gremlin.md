@@ -5,12 +5,11 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - コラボレーション
-  - 問題追跡
+- コラボレーション
+- 問題追跡
 creates_events: true
-ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
 display_name: Gremlin
 draft: false
 git_integration_title: gremlin
@@ -23,14 +22,17 @@ kind: インテグレーション
 maintainer: support@gremlin.com
 manifest_version: 1.0.0
 name: gremlin
-public_title: Datadog-Gremlin インテグレーション
+public_title: Gremlin
 short_description: Gremlin で発生したイベントを Datadog に送信
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 Gremlin の攻撃の表示、再実行、停止を Datadog から直接行うことができます。

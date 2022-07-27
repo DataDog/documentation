@@ -12,7 +12,6 @@ assets:
 categories:
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tenable/README.md
 display_name: Tenable
@@ -29,7 +28,7 @@ manifest_version: 1.0.0
 metric_prefix: tenable.
 metric_to_check: ''
 name: tenable
-public_title: Datadog-Tenable Nessus インテグレーション
+public_title: Tenable Nessus インテグレーション
 short_description: Nessus のバックエンドと Web サーバーのログを追跡
 support: コア
 supported_os:

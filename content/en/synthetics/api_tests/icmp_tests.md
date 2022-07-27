@@ -1,7 +1,7 @@
 ---
 title: ICMP Tests
 kind: documentation
-description: Monitor availability of your hosts and diagnose network issues
+description: Monitor the availability of your hosts and diagnose network issues.
 aliases:
   - /synthetics/icmp_test
   - /synthetics/icmp_check
@@ -15,6 +15,9 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run ICMP pings on internal endpoints"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 
 ## Overview
@@ -87,9 +90,9 @@ Your test can trigger retries `X` times after `Y` ms in case of a failed test re
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-Your test sends a notification based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define what messages to send to your teams and how to send them.
+Your test sends a notification based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][5], select **users and/or services** that should receive notifications either by adding a `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -108,7 +111,9 @@ Your test sends a notification based on the [alerting conditions](#define-alert-
 
 3. Specify how often you want your test to **resend the notification message** in the case of test failure. To prevent renotifications from failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click **Save** to save your test and have Datadog start executing it.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][8].
 
 ## Variables
 
@@ -133,7 +138,7 @@ You can create local variables by clicking **Create Local Variable** at the top 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][8] in the URL and assertions of your ICMP tests.
+You can use the [global variables defined in the `Settings`][9] in the URL and assertions of your ICMP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -150,13 +155,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][9] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of those two [default roles][9].
+By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of those two [default roles][10].
 
-If you are using the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][11] on their accounts.
+Access restriction is available for customers using [custom roles][12] on their accounts.
 
 You can restrict access to an ICMP test based on the roles in your organization. When creating an ICMP test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -173,7 +178,8 @@ You can restrict access to an ICMP test based on the roles in your organization.
 [5]: /monitors/notify/#notify-your-team
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[8]: /synthetics/settings/#global-variables
-[9]: /account_management/rbac/
-[10]: /account_management/rbac#custom-roles
-[11]: /account_management/rbac/#create-a-custom-role
+[8]: /synthetics/guide/synthetic-test-monitors
+[9]: /synthetics/settings/#global-variables
+[10]: /account_management/rbac/
+[11]: /account_management/rbac#custom-roles
+[12]: /account_management/rbac/#create-a-custom-role

@@ -1,18 +1,18 @@
 ---
 categories:
-  - provisioning
-  - orchestration
-  - configuration & deployment
-  - log collection
-ddtype: crawler
+- provisioning
+- orchestration
+- configuration & deployment
+- log collection
 dependencies: []
 description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
-doc_link: 'https://docs.datadoghq.com/integrations/ansible/'
+doc_link: https://docs.datadoghq.com/integrations/ansible/
 draft: false
 git_integration_title: ansible
 has_logo: true
 integration_id: ansible
 integration_title: Ansible
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -21,6 +21,7 @@ public_title: Datadog-Ansible インテグレーション
 short_description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
 version: '1.0'
 ---
+
 {{< img src="integrations/ansible/ansibledashboard.png" alt="Ansible ダッシュボード" popup="true">}}
 
 ## 概要
@@ -53,7 +54,7 @@ Datadog の Ansible インテグレーションの使用方法については、
 
 5. プレイブックが実行されると、Ansible のイベントおよびメトリクスが Datadog に表示されます。
 
-Ansible を使用して Datadog Agent をインストールする方法については、[こちらのインストールガイドを参照][3]してください。
+Ansible を使用して Datadog Agent をインストールするには、[Agent インストール手順][3]を参照してください。
 
 ### ログの収集
 

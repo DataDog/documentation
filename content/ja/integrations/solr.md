@@ -16,7 +16,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/solr/README.md
 display_name: Solr
@@ -35,7 +34,7 @@ metric_to_check: solr.searcher.numdocs
 name: solr
 process_signatures:
 - solr start
-public_title: Datadog-Solr インテグレーション
+public_title: Solr インテグレーション
 short_description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
 support: コア
 supported_os:

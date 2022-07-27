@@ -1,7 +1,7 @@
 ---
 title: HTTP Tests
 kind: documentation
-description: Simulate HTTP requests to monitor public and internal API endpoints
+description: Simulate HTTP requests to monitor public and internal API endpoints.
 aliases:
   - /synthetics/http_test
   - /synthetics/http_check
@@ -10,9 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
-- link: 'https://learn.datadoghq.com/course/view.php?id=39'
-  tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+  tag: "Learning Center"
+  text: "Introduction to Synthetic Tests"
 - link: "/getting_started/synthetics/api_test"
   tag: "Documentation"
   text: "Get started with HTTP tests"
@@ -22,6 +22,9 @@ further_reading:
 - link: "/synthetics/multistep"
   tag: "Documentation"
   text: "Run multistep HTTP tests"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 ## Overview
 
@@ -108,7 +111,7 @@ After choosing to create an `HTTP` test, define your test's request.
 
 4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
-{{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
@@ -164,9 +167,9 @@ Your test can trigger retries `X` times after `Y` ms in case of a failed test re
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][8], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -185,7 +188,9 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click **Save** to save and start your test.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][11].
 
 ## Variables
 
@@ -210,7 +215,7 @@ You can create local variables by clicking **Create Local Variable** at the top 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][11] in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][12] in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -235,7 +240,7 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][13].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -248,13 +253,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][13].
+By default, only users with the [Datadog Admin and Datadog Standard roles][14] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][14].
 
-If you are using the [custom role feature][14], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][15] on their accounts.
+Access restriction is available for customers using [custom roles][16] on their accounts.
 
 You can restrict access to an HTTP test based on the roles in your organization. When creating an HTTP test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -274,8 +279,9 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [8]: /monitors/notify/#notify-your-team
 [9]: https://www.markdownguide.org/basic-syntax/
 [10]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[11]: /synthetics/settings/#global-variables
-[12]: /synthetics/api_tests/errors/#ssl-errors
-[13]: /account_management/rbac/
-[14]: /account_management/rbac#custom-roles
-[15]: /account_management/rbac/#create-a-custom-role
+[11]: /synthetics/guide/synthetic-test-monitors
+[12]: /synthetics/settings/#global-variables
+[13]: /synthetics/api_tests/errors/#ssl-errors
+[14]: /account_management/rbac/
+[15]: /account_management/rbac#custom-roles
+[16]: /account_management/rbac/#create-a-custom-role

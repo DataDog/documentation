@@ -2,12 +2,12 @@
 title: Getting Started with Logs
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=40'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-log-management'
       tag: 'Learning Center'
       text: 'Introduction to Log Management'
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=36'
+    - link: 'https://learn.datadoghq.com/courses/going-deeper-with-logs-processing'
       tag: 'Learning Center'
-      text: 'Going Deeper with Logs: Processing'
+      text: 'Going Deeper with Logs Processing'
     - link: '/logs/log_collection/'
       tag: 'Documentation'
       text: 'Log Collection & Integrations'

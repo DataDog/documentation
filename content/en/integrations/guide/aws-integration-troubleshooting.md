@@ -76,7 +76,7 @@ You can verify the integration is enabled by checking the “Apps Running” for
 If you want to permanently remove AWS host tags from a host, you can do this by using the [Remove host tags API endpoint][7].
 
 [1]: /integrations/amazon_web_services/
-[2]: /integrations/faq/error-datadog-not-authorized-sts-assume-role/#pagetitle
+[2]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
 [3]: /agent/
 [4]: /help/
 [5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml

@@ -3,7 +3,6 @@ categories:
 - collaboration
 - issue tracking
 - notification
-ddtype: crawler
 dependencies: []
 description: このインテグレーションにより、Datadog でトリガーされたアラートからチケットを作成し、新しい情報が発生すると既存のチケットを更新することができます。さらに、Jira
   チケットの作成を Datadog 内のイベントとして表示し、すべてのメトリクスと重ね合わせることができます。

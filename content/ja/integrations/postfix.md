@@ -15,7 +15,6 @@ categories:
 - Collaboration
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
 display_name: Postfix
@@ -35,7 +34,7 @@ name: postfix
 process_signatures:
 - postfix start
 - sendmail -bd
-public_title: Datadog-Postfix インテグレーション
+public_title: Postfix インテグレーション
 short_description: すべての Postfix キューのサイズを監視する。
 support: コア
 supported_os:

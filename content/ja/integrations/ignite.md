@@ -15,7 +15,6 @@ categories:
 - data store
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ignite/README.md
 display_name: Ignite
@@ -32,7 +31,7 @@ manifest_version: 1.0.0
 metric_prefix: ignite.
 metric_to_check: ignite.received_messages
 name: ignite
-public_title: Datadog-ignite インテグレーション
+public_title: ignite インテグレーション
 short_description: Ignite サーバーからメトリクスを収集します。
 support: コア
 supported_os:
