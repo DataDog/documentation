@@ -137,81 +137,53 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     RUN wget -O /opt/dd-java-agent.jar https://dtdg.co/latest-java-tracer
     ```
 
-3. Install the Datadog Lambda library
-    
-    If you are using Maven, include the following dependency in your `pom.xml`, and replace `VERSION` with the latest release (omitting the preceeding `v`): ![Maven Cental][2]:
-
-    ```xml
-    <dependency>
-      <groupId>com.datadoghq</groupId>
-      <artifactId>datadog-lambda-java</artifactId>
-      <version>VERSION</version>
-    </dependency>
-    ```
-    
-    If you are using Gradle, include the following dependency in your `build.gradle`, and replace `VERSION` with the latest release (omitting the preceeding `v`): ![Maven Cental][2]:
-
-    ```groovy
-    dependencies {
-      implementation 'com.datadoghq:datadog-lambda-java:VERSION'
-    }
-    ```
-
-4. Set the required environment variables
+3. Set the required environment variables
 
     - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
-    - Set `DD_TRACE_ENABLED` to `true`
     - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-1. Install the Datadog Lambda Extension
+1. Install the Datadog Tracer
 
     [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
+    ```sh
+    # Use this format for Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
 
-2. Install the Datadog Java APM client
+    # Use this format for Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
+    ```
+
+    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
+
+2. Install the Datadog Lambda Extension
 
     [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}`
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
 
-3. Install the Datadog Lambda library
-    
-    If you are using Maven, include the following dependency in your `pom.xml`, and replace `VERSION` with the latest release (omitting the preceeding `v`): ![Maven Cental][2]:
-
-    ```xml
-    <dependency>
-      <groupId>com.datadoghq</groupId>
-      <artifactId>datadog-lambda-java</artifactId>
-      <version>VERSION</version>
-    </dependency>
-    ```
-    
-    If you are using Gradle, include the following dependency in your `build.gradle`, and replace `VERSION` with the latest release (omitting the preceeding `v`): ![Maven Cental][2]:
-
-    ```groovy
-    dependencies {
-      implementation 'com.datadoghq:datadog-lambda-java:VERSION'
-    }
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
     ```
 
-4. Set the required environment variables
+    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
+
+3. Set the required environment variables
 
     - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
-    - Set `DD_TRACE_ENABLED` to `true`
     - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
