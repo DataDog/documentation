@@ -175,7 +175,7 @@ apm_config:
 
 ## HTTP data collected
 
-Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, see [Span tags semantic][11].
+Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, see [Span Tags Semantics][11].
 
 ### Configuring a client IP header
 
