@@ -10,7 +10,6 @@ categories:
 - messaging
 - notification
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gnatsd/README.md
 display_name: Gnatsd
@@ -27,7 +26,7 @@ manifest_version: 1.0.0
 metric_prefix: gnatsd.
 metric_to_check: gnatsd.connz.connections.in_bytes
 name: gnatsd
-public_title: Datadog-Gnatsd インテグレーション
+public_title: Gnatsd
 short_description: Datadog で gnatsd クラスターを監視。
 support: contrib
 supported_os:

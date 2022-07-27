@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Neptune のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_neptune/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Neptune インテグレーション
 short_description: Amazon Neptune のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Neptune は、高速かつ信頼性の高いフルマネージド型グラフデータベースサービスです。高度に接続されたデータセットと連携するアプリケーションを簡単に構築および実行できます。

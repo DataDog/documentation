@@ -20,7 +20,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md
 display_name: Cassandra
@@ -39,7 +38,7 @@ metric_to_check: cassandra.load.count
 name: cassandra
 process_signatures:
 - java org.apache.cassandra.service.CassandraDaemon
-public_title: Datadog-Cassandra インテグレーション
+public_title: Cassandra インテグレーション
 short_description: クラスターのパフォーマンス、容量、全体的な健全性などを追跡
 support: コア
 supported_os:

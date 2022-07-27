@@ -14,7 +14,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/spark/README.md
 display_name: Spark
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: spark.
 metric_to_check: spark.job.count
 name: spark
-public_title: Datadog-Spark インテグレーション
+public_title: Spark インテグレーション
 short_description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
 support: コア
 supported_os:

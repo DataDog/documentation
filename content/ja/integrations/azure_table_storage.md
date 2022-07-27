@@ -1,8 +1,7 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: '"crawler"'
+- cloud
+- azure
 dependencies: []
 description: Azure Table Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_table_storage/
@@ -20,6 +19,7 @@ public_title: Datadog-Microsoft Azure Table Storage インテグレーション
 short_description: Azure Table Storage のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Table Storage は、大量の半構造化データセットを使用して迅速な開発を行うための NoSQL key-value ストアです。

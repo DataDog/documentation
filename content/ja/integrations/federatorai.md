@@ -4,6 +4,9 @@ assets:
     ProphetStor Federator.ai Application Overview: assets/dashboards/application-overview.json
     ProphetStor Federator.ai Cluster Overview: assets/dashboards/cluster-overview.json
     ProphetStor Federator.ai Cost Analysis Overview: assets/dashboards/cost-analysis-overview.json
+    ProphetStor Federator.ai Cost Management - Cluster: assets/dashboards/cost-management-cluster-overview.json
+    ProphetStor Federator.ai Cost Management - Namespace: assets/dashboards/cost-management-namespace-overview.json
+    ProphetStor Federator.ai Cost Management - Node: assets/dashboards/cost-management-node-overview.json
     ProphetStor Federator.ai Kafka Overview: assets/dashboards/overview.json
   metrics_metadata: metadata.csv
   monitors:
@@ -12,12 +15,11 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - コンテナ
-  - orchestration
+- コンテナ
+- orchestration
 creates_events: false
-ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
 display_name: Federator.ai
 draft: false
 git_integration_title: federatorai
@@ -32,12 +34,15 @@ manifest_version: 1.0.0
 metric_prefix: federatorai.
 metric_to_check: federatorai.integration.status
 name: federatorai
-public_title: Datadog-Federator.ai インテグレーション
+public_title: Federator.ai
 short_description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
 support: contrib
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## 概要
 
 
@@ -152,9 +157,9 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
    - この時系列グラフは、コンシューマーの CPU 使用量を示しています。
 
 
-**ProphetStor Federator.ai コスト分析の概要**
+**ProphetStor Federator.ai マルチクラウドコスト分析の概要**
 
-![コスト分析の概要][8]
+![マルチクラウドコスト分析の概要][8]
 
 * 現在のクラスターコストおよび現在のクラスターコンフィギュレーション
    - この表は、クラスターの現在のコストと環境コンフィギュレーションを示しています。

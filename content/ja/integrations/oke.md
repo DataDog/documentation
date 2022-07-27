@@ -9,7 +9,6 @@ categories:
 - containers
 - orchestration
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oke/README.md
 display_name: Oracle Container Engine for Kubernetes - OKE
@@ -26,7 +25,7 @@ manifest_version: 1.0.0
 metric_prefix: oke.
 metric_to_check: ''
 name: oke
-public_title: Datadog-Oracle Container Engine for Kubernetes インテグレーション
+public_title: Oracle Container Engine for Kubernetes インテグレーション
 short_description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
 support: コア
 supported_os:

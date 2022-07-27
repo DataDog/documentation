@@ -1,21 +1,21 @@
 ---
 aliases:
-  - /ja/integrations/awss3/
+- /ja/integrations/awss3/
 categories:
-  - cloud
-  - data store
-  - aws
-  - os & system
-  - log collection
-ddtype: crawler
+- cloud
+- data store
+- aws
+- os & system
+- log collection
 dependencies: []
 description: リクエストレイテンシー、種類別リクエスト数、バケットサイズなどを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_s3/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_s3/
 draft: false
 git_integration_title: amazon_s3
 has_logo: true
 integration_id: amazon-s3
 integration_title: Amazon S3
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -24,6 +24,7 @@ public_title: Datadog-Amazon S3 インテグレーション
 short_description: リクエストレイテンシー、種類別リクエスト数、バケットサイズなどを追跡。
 version: '1.0'
 ---
+
 {{< img src="integrations/amazon_s3/s3_db_screenshot.png" alt="S3 ダッシュボード" popup="true">}}
 
 ## 概要
@@ -46,7 +47,7 @@ Amazon Simple Storage Service (S3) は、可用性の高いスケーラブルな
     - `s3:ListAllMyBuckets`: 使用できるバケットを一覧表示するために使用されます。
     - `s3:GetBucketTagging`: カスタムバケットタグを取得するために使用されます。
 
-    S3 ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
+    詳細については、AWS ウェブサイト上の [S3 ポリシー][4]を参照してください。
 
 3. [Datadog - AWS S3 インテグレーション][5]をインストールします。
 4. (オプション) **リクエストメトリクス**を収集するには、AWS コンソールで Amazon S3 バケットの [Request metrics ][6] を有効にします。
@@ -55,33 +56,34 @@ Amazon Simple Storage Service (S3) は、可用性の高いスケーラブルな
 
 #### S3 アクセスログの有効化
 
-S3 バケットを選択し、Properties タブをクリックします。
+1. S3 バケットに移動します。
+2. **Properties** をクリックします。
+3. Services Access Logging セクションに移動し、**Edit** をクリックします。
+4. **Enable** を選択します。
+5. ログの送信先となる S3 バケットを選択します。
 
-{{< img src="integrations/amazon_s3/selecting_s3_bucket.png" alt="S3 バケットの選択" popup="true" style="width:70%;">}}
-
-次に、Server access logging をクリックし、Enable を選択します。
-
-{{< img src="integrations/amazon_s3/server_access_logging.png" alt="S3 サーバーアクセスのロギング" popup="true" style="width:70%;">}}
-
-ログの書き込み先になる S3 バケットを選択します。詳細については、[S3 AWS のドキュメント][7]を参照してください。
+ 詳しくは、[Amazon S3 サーバーのアクセスロギングを有効にする][7]を参照してください。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][8]をまだセットアップしていない場合は、セットアップします。
+1. AWS アカウントで [Datadog Forwarder Lambda 関数][8] をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、S3 アクセスログを収集する方法を以下の 2 つから選択します。
 
-    - 自動: 必要なアクセス許可を Datadog に提供していただくことで、Datadog が S3 アクセスログを管理します。[自動ログ収集を構成するには、メイン Amazon Web サービスを参照してください][9]。
-    - 手動: AWS コンソールで S3 アクセスログを含む S3 バケットに手動でトリガーを追加します。
+    - 自動: Datadog に権限を設定してアクセスを許可した場合、S3 のログは自動的に管理されます。Datadog Forwarder Lambda 関数での自動ログ収集の構成については、[トリガーを自動的にセットアップする][9]を参照してください。
+    - 手動: AWS コンソールで、S3 のアクセスログが格納されている S3 バケットにトリガーを追加します。[手動インストール手順](#manual-installation-steps)を参照してください。
 
 #### 手動インストールの手順
 
-1. [Datadog ログコレクション AWS Lambda 関数][10]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールで S3 ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
-   S3 ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
+1. AWS アカウントで [Datadog Forwarder Lambda 関数][8] をまだセットアップしていない場合は、セットアップします。
+2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
+3. Trigger Configuration で **S3** トリガーを選択します。
+4. S3 のログが格納されている S3 バケットを選択します。
+5. イベントの種類は `All object create events` のままにしておきます。
+6. **Add** をクリックすると、Lambda にトリガーが追加されます。
 
-完了したら、[Datadog Log セクション][11]に移動し、ログを確認します。
+[ログエクスプローラー][10]に移動して、ログを確認します。
+
+AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][11]を参照してください。
 
 ## 収集データ
 
@@ -89,7 +91,7 @@ S3 バケットを選択し、Properties タブをクリックします。
 {{< get-metrics-from-git "amazon_s3" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -105,16 +107,17 @@ AWS S3 インテグレーションには、サービスのチェック機能は�
 
 ご使用の AWS S3 で AWS CloudTrail ログデータが KMS によって暗号化される場合は、`kms:Decrypt` ポリシーを使用して Datadog ロールが CloudTrail ログデータを解読できるようにします。[KMS 暗号化/解読ポリシーの詳細については、こちらを参照してください][13]。
 
+
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html
+[4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-overview.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_s3
 [6]: http://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
 [7]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/server-access-logging.html
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
+[8]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#log-collection
-[10]: /ja/integrations/amazon_web_services/#create-a-new-lambda-function
-[11]: https://app.datadoghq.com/logs
+[10]: https://app.datadoghq.com/logs
+[11]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [12]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_s3/amazon_s3_metadata.csv
 [13]: https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-encrypt-decrypt-one-account

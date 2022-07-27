@@ -4,6 +4,7 @@ kind: guide
 private: true
 aliases:
     - /graphing/guide/
+    - /faq/treemap-graph-visualization-can-i-use-this-elsewhere/
 ---
 
 {{< whatsnext desc="General Guides:" >}}

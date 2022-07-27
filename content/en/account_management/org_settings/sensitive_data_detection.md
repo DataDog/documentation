@@ -35,7 +35,7 @@ Sensitive Data Scanner can be found under [Organization Settings][1].
 
 ### Setup
 
-- **Define Scanning Groups:** A scanning group consists of a filter query indicating which kinds of logs to scan, and a set of scanning rules indicating specific types of sensitive data to scan for within those logs. See the [Log Search Syntax][2] documentation to learn more about filter queries.
+- **Define Scanning Groups:** A scanning group consists of a query filter indicating which kinds of logs to scan, and a set of scanning rules indicating specific types of sensitive data to scan for within those logs. See the [Log Search Syntax][2] documentation to learn more about query filters.
 - **Define Scanning Rules:** Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
 
 ### Custom Scanning Rules

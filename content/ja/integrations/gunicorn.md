@@ -19,7 +19,6 @@ categories:
 - web
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
 display_name: Gunicorn
@@ -38,7 +37,7 @@ metric_to_check: gunicorn.workers
 name: gunicorn
 process_signatures:
 - 'gunicorn: master'
-public_title: Datadog-Gunicorn インテグレーション
+public_title: Gunicorn インテグレーション
 short_description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
 support: コア
 supported_os:
