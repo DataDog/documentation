@@ -149,7 +149,7 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network as each proxy can accommodate upwards connections of 1000 Agents. **Note**: This figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. See the [HAProxy documentation][2] for additional information.
 
 The communication between HAProxy and Datadog will always be encrypted and it is recommended to encrypt the communication between the Agent host and the HAProxy host if they are not part of the same local network.
-In order to encrypt data between the Agent and HAProxy, you will need to create a Subject Alternative Name (SAN) certificate for the HAProxy host. 
+In order to encrypt data between the Agent and HAProxy, you will need to create a Subject Alternative Name (SAN) certificate for the HAProxy host. This certificate should contain both the public certificate and private key. See this [HAProxy blog post][3] for more information.
 
 ### Proxy forwarding with HAProxy
 
@@ -796,7 +796,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 ## NGINX
 
-[NGINX][3] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
+[NGINX][4] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
 
 `agent ---> nginx ---> Datadog`
 
@@ -1147,6 +1147,8 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: http://haproxy.1wt.eu
 [2]: http://www.haproxy.org/#perf
-[3]: https://www.nginx.com
+[3]: https://www.haproxy.com/blog/haproxy-ssl-termination/
+[4]: https://www.nginx.com
