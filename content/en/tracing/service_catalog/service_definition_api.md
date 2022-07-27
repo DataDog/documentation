@@ -79,7 +79,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
 | Request Body                | JSON or YAML    | See Service Definition Schema [v2][4] |
 
 #### Example
-{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
+{{< code-block lang="json" filename="service.definition.json" collapsible="true" >}}
 {
   "schema-version": "v2",
   "dd-version": "shopping-service"
@@ -87,7 +87,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
 {{< /code-block >}}
 
 #### Example
-{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
+{{< code-block lang="json" filename="service.definition.json" collapsible="true" >}}
 {
     "data": [
         {
