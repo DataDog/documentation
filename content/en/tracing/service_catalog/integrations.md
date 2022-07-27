@@ -8,7 +8,7 @@ further_reading:
 ---
 
 ## PagerDuty integration
-You can add PagerDuty metadata to a service so that Service Catalog it displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service.
+You can add PagerDuty metadata to a service so that Service Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service.
 
 ### Setup
 
