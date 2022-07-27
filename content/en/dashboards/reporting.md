@@ -23,7 +23,7 @@ Reporting automatically sends a visual summary of a dashboard to selected recipi
 
 ## Schedule a report
 
-Create a new report from any dashboard with a grid-based or automatic layout by opening the dashboard’s cog menu and selecting **Schedule a Report**.
+Create a new report from any dashboard with a grid-based or automatic layout. Click on the dashboard’s cog icon and select **Schedule a Report**.
 
 The following widget types are supported:
 
