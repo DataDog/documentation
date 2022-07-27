@@ -167,10 +167,10 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
     ```sh
-    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    # Use this format for Lambda deployed in AWS commercial regions
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
 
-    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    # Use this format for Lambda deployed in AWS GovCloud regions
     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
     ```
 
