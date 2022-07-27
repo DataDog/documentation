@@ -142,7 +142,7 @@ sudo journalctl -u dd-agent.service
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help/
+[1]: /ja/integrations/
 [2]: /ja/agent/troubleshooting/send_a_flare/
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 [4]: /ja/integrations/
