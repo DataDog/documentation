@@ -7,7 +7,16 @@
         {{ $object_id := md5 $rel_path -}}
         {{ $title := $page.Params.integration_title | default $page.Title }}
 
-        {{- $.Scratch.Add "algoliaindex" (dict "objectID" $object_id "title" $title "permalink" $page.Permalink ) -}}
+        {{- $.Scratch.Add "algoliaindex" (
+            dict "objectID" $object_id 
+            "title" $title
+            "description" $page.Description
+            "type" $page.Type
+            "content" $page.Plain
+            "permalink" $page.Permalink
+            "relpermalink" $page.RelPermalink
+            "language" $page.Language.Lang
+            ) -}}
     {{- end -}}
 {{- end -}}
 {{- $.Scratch.Get "algoliaindex" | jsonify -}}
