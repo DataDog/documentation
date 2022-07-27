@@ -1,6 +1,9 @@
 ---
-title: How do I monitor my AWS billing details?
-kind: faq
+title: Monitor your AWS billing details
+kind: guide
+aliases:
+  - /integrations/faq/how-do-i-monitor-my-aws-billing-details
+
 ---
 
 Billing metrics can be collected from AWS by using the Datadog-AWS Billing integration.

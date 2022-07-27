@@ -11,7 +11,6 @@ categories:
 - モニター
 - オートディスカバリー
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
 display_name: OpenMetrics
@@ -20,13 +19,13 @@ git_integration_title: openmetrics
 guid: 3f67af75-6987-468c-99b3-5001ba5ab414
 integration_id: openmetrics
 integration_title: OpenMetrics
-integration_version: 2.2.0
+integration_version: 2.2.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 name: openmetrics
-public_title: Datadog-OpenMetrics インテグレーション
+public_title: OpenMetrics インテグレーション
 short_description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
 support: コア
 supported_os:

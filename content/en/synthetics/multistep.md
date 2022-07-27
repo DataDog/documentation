@@ -6,7 +6,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"
   tag: "Blog"
   text: "Monitor your workflows with Datadog multistep API tests"
-- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
 - link: "/getting_started/synthetics/api_test"
@@ -169,6 +169,8 @@ To parse your variable:
     * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][9].
 
 {{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+
+You can extract up to ten variables per test step.
 
 Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
 

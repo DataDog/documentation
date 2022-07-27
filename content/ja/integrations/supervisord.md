@@ -17,7 +17,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
 display_name: Supervisord
@@ -37,7 +36,7 @@ name: supervisord
 process_signatures:
 - python supervisord
 - supervisord
-public_title: Datadog-Supervisord インテグレーション
+public_title: Supervisord インテグレーション
 short_description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
 support: コア
 supported_os:

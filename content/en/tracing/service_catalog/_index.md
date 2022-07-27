@@ -1,14 +1,20 @@
 ---
 title: Datadog Service Catalog
-kind: faq
-is_beta: true
+kind: documentation
+aliases:
+  - /tracing/faq/service_catalog/
 further_reading:
-- link: "/tracing/faq/service_definition_api/"
+- link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Service Definition API"
+- link: "/tracing/service_catalog/guides/understanding-service-configuration"
+  tag: "Guide"
+  text: "Understanding Your Service Configuration"
+- link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
+  tag: "Guide"
+  text: "See Upstream and Downstream Dependencies During an Active Incident"
 ---
 
-<div class="alert alert-warning">This feature is in private beta and the endpoints are likely to change.</div>
 
 {{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
 
@@ -25,7 +31,7 @@ The Service Catalog is useful for:
 - Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream services and dependencies.
 - Detecting which services aren't reporting observability data or having that data monitored.
 - Facilitating the practice of good tagging to optimize cross-telemetry insights.
-- Providing engineering leadership with a high-level view of reliability practices across teams and services. 
+- Providing engineering leadership with a high-level view of reliability practices across teams and services.
 - Spotting issues like missing SLOs, monitors, or services without ownership.
 
 ## Browse the Service Catalog
@@ -59,7 +65,7 @@ Click the Settings icon on the right hand corner to hide columns from the servic
 
 
 #### PagerDuty Integration
-You can add PagerDuty metadata to the Service Catalog to complete the Reliability view. 
+You can add PagerDuty metadata to the Service Catalog to complete the Reliability view.
 
 - Set up the PagerDuty integration by following the instructions [on the PagerDuty integration page][3].
 - Get your [API acccess key from PagerDuty][4].
@@ -97,7 +103,7 @@ Clicking on a service opens a side panel with details including:
 - **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
 - **Configuration completeness status** for Datadog products that can collect data for the service.
 - **Service definition** in YAML with a link to the service's source code.
-- An interactive service map displaying services upstream and downstream from this service. 
+- An interactive service map displaying services upstream and downstream from this service.
 
 
 Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the APM Service page and service map for this service, or related telemetry data pages, such as Distributed Tracing, Infrastructure, Network Performance, Log Management, RUM, and Continuous Profiler.
@@ -132,16 +138,16 @@ Tags
 Integrations
 : Custom strings to connect integrations such as PagerDuty for identifying the service on-call.
 
-## Enriching an existing APM service 
+## Enriching an existing APM service
 
-If you already use APM to trace your applications, add information about those services. Initially, APM-monitored services listed on the Service Catalog page have an `UNDEFINED` label. 
+If you already use APM to trace your applications, add information about those services. Initially, APM-monitored services listed on the Service Catalog page have a gray check mark.
 
-Add service ownership information such as the team name, Slack channels, and source code repositories by pushing a YAML file with the POST endpoint to the [Service Definition API][7].
+Add service ownership information such as the team name, Slack channels, and source code repositories by pushing a YAML file with the POST endpoint to the [Service Definition API][7]. Read [Setting Up Service Catalog][8] for more information.
 
 ## Registering a new service
-You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. 
+You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. Read [Setting Up Service Catalog][8] for more information.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -151,4 +157,5 @@ You can manage your service ownership information with the Service Catalog even 
 [4]: https://support.pagerduty.com/docs/api-access-keys
 [5]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [6]: https://www.datadoghq.com/blog/unified-service-tagging/
-[7]: /tracing/faq/service_definition_api/
+[7]: /tracing/service_catalog/service_definition_api/
+[8]: /tracing/service_catalog/setup/
