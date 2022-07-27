@@ -1,0 +1,13 @@
+{{- $.Scratch.Add "algoliaindex" slice -}}
+
+{{- range (where .Site.AllPages "Kind" "!=" "home") -}}
+    {{- $page := . -}}
+    {{- if and (ne $page.Params.private true) (ne $page.Params.kind "faq") (ne $page.Params.beta true) (not $page.Draft) -}}
+        {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
+        {{ $object_id := md5 $rel_path -}}
+        {{ $title := $page.Params.integration_title | default $page.Title }}
+
+        {{- $.Scratch.Add "algoliaindex" (dict "objectID" $object_id "title" $title "permalink" $page.Permalink ) -}}
+    {{- end -}}
+{{- end -}}
+{{- $.Scratch.Get "algoliaindex" | jsonify -}}
