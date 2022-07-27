@@ -20027,7 +20027,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - events_read
-      summary: Query the event stream
+      summary: Get a list of events
       tags:
       - Events
       x-menu-order: 1
@@ -31229,9 +31229,11 @@ tags:
     event stream
 
     and fetch events from the event stream. Events are limited to 4000 characters.
-    If an event is sent out with a message
 
-    containing more than 4000 characters only the 4000 first characters are displayed.'
+    If an event is sent out with a message containing more than 4000 characters, only
+    the
+
+    first 4000 characters are displayed.'
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 

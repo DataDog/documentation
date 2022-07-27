@@ -128,6 +128,25 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "ListEvents": [
+    {
+      "group": "events",
+      "suffix": "",
+      "description": "Get a list of events returns \"OK\" response"
+    },
+    {
+      "group": "events",
+      "suffix": "_2663715109",
+      "description": "Get a quick list of events returns \"OK\" response"
+    }
+  ],
+  "SearchEvents": [
+    {
+      "group": "events",
+      "suffix": "",
+      "description": "Search events returns \"OK\" response"
+    }
+  ],
   "CreateIncidentService": [
     {
       "group": "incident_services",

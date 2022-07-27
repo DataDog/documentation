@@ -1552,6 +1552,11 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_proxies
     weight: 107
+  - name: Span Tags Semantics
+    url: tracing/trace_collection/tracing_naming_convention
+    parent: tracing_trace_collection
+    identifier: tracing_naming_convention
+    weight: 108
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
@@ -2640,40 +2645,44 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_monitoring
     weight: 403
+  - name: Search and Manage
+    url: synthetics/search/
+    parent: synthetics
+    weight: 5
   - name: CI/CD Integrations
     url: /synthetics/cicd_integrations
     parent: synthetics
     identifier: synthetics_cicd_integrations
-    weight: 5
+    weight: 6
   - name: Configuration
     url: /synthetics/cicd_integrations/configuration
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_configuration
-    weight: 501
+    weight: 601
   - name: CircleCI Orb
     url: /synthetics/cicd_integrations/circleci_orb
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_circleci_orb
-    weight: 502
+    weight: 602
   - name: GitHub Actions
     url: /synthetics/cicd_integrations/github_actions
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_github_actions
-    weight: 503
+    weight: 603
   - name: Jenkins
     url: /synthetics/cicd_integrations/jenkins
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_jenkins
-    weight: 504
+    weight: 604
+  - name: Testing Tunnel
+    url: /synthetics/testing_tunnel
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_testing_tunnel
+    weight: 605
   - name: CI Results Explorer
     url: /synthetics/ci_results_explorer
     parent: synthetics
     identifier: synthetics_ci_results_explorer
-    weight: 6
-  - name: Testing Tunnel
-    url: /synthetics/testing_tunnel
-    parent: synthetics
-    identifier: synthetics_testing_tunnel
     weight: 7
   - name: Dashboards
     url: synthetics/dashboards
@@ -2709,12 +2718,12 @@ main:
     url: synthetics/settings/
     parent: synthetics
     weight: 10
-  - name: Search and Manage
-    url: synthetics/search/
-    parent: synthetics
-    weight: 11
   - name: Metrics
     url: synthetics/metrics/
+    parent: synthetics
+    weight: 11
+  - name: Data Security
+    url: data_security/synthetics/
     parent: synthetics
     weight: 12
   - name: Guides
@@ -2727,10 +2736,6 @@ main:
     parent: synthetics
     identifier: synthetics_troubleshooting
     weight: 14
-  - name: Data Security
-    url: data_security/synthetics/
-    parent: synthetics
-    weight: 15
   - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: rum
@@ -4096,6 +4101,19 @@ api:
     url: /api/latest/events/
     identifier: events
     generated: true
+  - name: Search events
+    url: '#search-events'
+    identifier: events-search-events
+    parent: events
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchEvents
+      unstable:
+        - v2
+      order: 2
   - name: Get an event
     url: '#get-an-event'
     identifier: events-get-an-event
@@ -4120,17 +4138,19 @@ api:
         - CreateEvent
       unstable: []
       order: 1
-  - name: Query the event stream
-    url: '#query-the-event-stream'
-    identifier: events-query-the-event-stream
+  - name: Get a list of events
+    url: '#get-a-list-of-events'
+    identifier: events-get-a-list-of-events
     parent: events
     generated: true
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListEvents
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: GCP Integration
     url: /api/latest/gcp-integration/

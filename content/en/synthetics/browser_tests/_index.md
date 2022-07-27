@@ -12,7 +12,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "https://learn.datadoghq.com/course/view.php?id=39"
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
   tag: "Learning Center"
   text: "Introduction to Synthetic Tests"
 - link: "/getting_started/synthetics/browser_test"
