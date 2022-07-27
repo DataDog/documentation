@@ -14,9 +14,9 @@ further_reading:
 ---
 
 ## Overview
-[Datadog tracing libraries][3] provide out-of-the-box support for instrumenting a variety of libraries.
+[Datadog tracing libraries][1] provide out-of-the-box support for instrumenting a variety of libraries.
 These instrumentations generate spans to represent logical units of work in distributed systems.
-Each span consists of [span tags][4] to provide additional information on the unit of work happening in the system. The naming convention describes the name and content that can be used in span events.
+Each span consists of [span tags][2] to provide additional information on the unit of work happening in the system. The naming convention describes the name and content that can be used in span events.
 
 ## Span tag naming convention
 ### Core
@@ -27,7 +27,7 @@ The following span tags are the core concepts for describing the instrumentation
 | `language`  | `string` | The client SDK language used to generate the span. It can be one of the following: `cpp`, `dotnet`, `go`, `jvm`, `javascript`, `php`, `python`, `ruby`.                                                                                                                                                                                                                                 |
 | `env`       | `string` | The value of `DD_ENV` environment variable or user defined `env` for the running process.                                                                                                                                                                                            |
 | `version`   | `string` | The value of `DD_VERSION` environment variable or user defined `version` for the running process.                                                                                                                                                                                      |
-| `span.kind` | `string` | The string representing the type of work unit handled by the span. It can be one of the following: `server`, `client`, `producer`, `consumer` or `internal`.<br>More information in the [OpenTelemetry SpanKind documentation][1]. |
+| `span.kind` | `string` | The string representing the type of work unit handled by the span. It can be one of the following: `server`, `client`, `producer`, `consumer` or `internal`.<br>More information in the [OpenTelemetry SpanKind documentation][3]. |
 | `component` | `string` | The name of the library/integration that created the span.                                                                                                                                                                                                                        |
 
 ### Network communications
@@ -52,7 +52,7 @@ The following span tags can be used to describe the HTTP client and server spans
 | **Fullname**                                | **Type** | **Description**                                                                                                                                                                                                              |
 |---------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `http.status_code`                          | `string` | The HTTP response status code.                                                                                                                                                                                                |
-| `http.url`                                  | `string` | The URL of the HTTP request, including the obfuscated query string. For more information on obfuscation, see [Configure Data Security][6].                                                         |
+| `http.url`                                  | `string` | The URL of the HTTP request, including the obfuscated query string. For more information on obfuscation, see [Configure Data Security][4].                                                         |
 | `http.version`                              | `string` | The version of HTTP used for the request.                                                                                                                                                                                     |
 | `http.method`                               | `string` | The port of the client that initiated the connection.                                                                                                                                                                         |
 | `http.route`                                | `string` | The matched route (path template).<br>Example: `/users/:userID`                                                                                                                                                              |
@@ -60,8 +60,8 @@ The following span tags can be used to describe the HTTP client and server spans
 | `http.useragent`                            | `string` | The user agent header received with the request.                                                                                                                                                                              |
 | `http.request.content_length`               | `number` | The size of the request payload body in bytes.                                                                                                                                                                                |
 | `http.response.content_length`              | `number` | The size of the request payload body in bytes.                                                                                                                                                                                |
-| `http.request.content_length_uncompressed`  | `number` | The size of the uncompressed request payload body after transport decoding.                                                                                                                                                   |
-| `http.response.content_length_uncompressed` | `number` | The size of the uncompressed response payload body after transport decoding.                                                                                                                                                  |
+| `http.request.`<br>`content_length_uncompressed`  | `number` | The size of the uncompressed request payload body after transport decoding.                                                                                                                                                   |
+| `http.response.`<br>`content_length_uncompressed` | `number` | The size of the uncompressed response payload body after transport decoding.                                                                                                                                                  |
 | `http.request.headers.*`                    | `string` | The request HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, refer to the corresponding [Library configuration][5].  |
 | `http.response.headers.*`                   | `string` | The response HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, refer to the corresponding [Library configuration][5]. |
 
@@ -123,9 +123,8 @@ The following span tags can be used to describe errors associated with spans:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
-[2]: /tracing/configure_data_security/#http-data-collected
-[3]: /tracing/setup_overview/
-[4]: /tracing/visualization/#span-tags
+[1]: /tracing/setup_overview/
+[2]: /tracing/visualization/#span-tags
+[3]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
+[4]: /tracing/setup_overview/configure_data_security/
 [5]: /tracing/trace_collection/library_config/
-[6]: /tracing/setup_overview/configure_data_security/  
