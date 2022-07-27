@@ -1,18 +1,17 @@
 ---
 title: Registering Services through the Datadog Service Definition API
-kind: faq
-is_beta: true
+kind: documentation
+aliases:
+- /tracing/faq/service_definition_api/
 further_reading:
-- link: "/tracing/faq/service_catalog/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Datadog Service Catalog"
 ---
 
-<div class="alert alert-warning">This feature is in private beta and the endpoints are likely to change.</div>
-
 ## Overview
 
-A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor services consistently across multiple telemetry types, including infrastructure metrics, logs, and traces. If you want to define a service using additional criteria, customize the service definition that fits your architectural style. View the service list and gain insights into all services' reliability and security in the [Datadog Service Catalog][2].
+A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor services consistently across multiple telemetry types, including infrastructure metrics, logs, and traces. If you want to define a service using additional criteria, customize the service definition that fits your architectural style and register it using this API. View the service list and gain insights into all services' reliability and security in the [Datadog Service Catalog][2].
 
 ## Requirements
 
@@ -72,6 +71,8 @@ POST /api/v2/services/definitions
 
 #### Body data (required)
 
+You can generate this body data on the [Service Catalog Getting Started page][7].
+
 ##### Model 
 | Field                       | Type            | Description |
 | --------------------------- | --------------- | ------------------------------------------------------- |
@@ -119,9 +120,9 @@ POST /api/v2/services/definitions
 
 ### Response
 
-Status: 
-`200 OK` 
-`400 Invalid Request` 
+Status: <br>
+`200 OK` <br>
+`400 Invalid Request` <br>
 `429 Too Many Requests` 
 
 
@@ -356,13 +357,14 @@ curl --location --request DELETE 'https://api.datadoghq.com/api/v2/services/defi
 --header 'DD-APPLICATION-KEY: <APPLICATION_KEY>'
 {{< /code-block >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/unified-service-tagging/
-[2]: /tracing/faq/service_catalog/
+[2]: /tracing/service_catalog/
 [3]: /account_management/api-app-keys/
 [4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
+[7]: https://app.datadoghq.com/services/setup
