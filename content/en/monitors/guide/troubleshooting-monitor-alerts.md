@@ -48,7 +48,7 @@ If using recovery thresholds, check the conditions listed in the [recovery thres
 
 For both monitor evaluations and state, status is tracked by group. 
 
-For a multi-alert monitor, a group is a set of tags with one value for each grouping key (for example, `env:dev`,`host:myhost` for a monitor grouped by `env` and `host`). For a simple alert, there is only one group (`*`), representing everything within the monitor's scope. 
+For a multi-alert monitor, a group is a set of tags with one value for each grouping key (for example, `env:dev, host:myhost` for a monitor grouped by `env` and `host`). For a simple alert, there is only one group (`*`), representing everything within the monitor's scope. 
 
 By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. See [Monitor settings changes not taking effect][9] for more information.
 
