@@ -41,8 +41,8 @@ All the major Cloud providers ([AWS](https://docs.datadoghq.com/integrations/ama
     link: "/integrations/#cat-cloud"
     image: "int_cloud.png"
   - name: "Windows Performance Counters"
-    description: "Windows performance counters can be collected with the PDH integration."
-    link: "/integrations/pdh_check"
+    description: "Use the Windows performance counters integration to monitor performance and behavior in Windows environments."
+    link: "/integrations/windows_performance_counters/"
     image: "int_wpc.png"
 
 
