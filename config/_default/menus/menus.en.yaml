@@ -534,6 +534,16 @@ main:
     parent: containers
     identifier: ecs_fargate
     weight: 6
+  - name: Troubleshooting
+    url: containers/troubleshooting/
+    parent: containers
+    identifier: containers_troubleshooting
+    weight: 7
+  - name: Duplicate hosts
+    url: containers/troubleshooting/duplicate_hosts
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_duplicate_hosts
+    weight: 701
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
