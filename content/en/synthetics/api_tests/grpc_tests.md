@@ -27,9 +27,7 @@ Unary Calls
 : Send gRPC requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, header, or body content.
 
 Health Checks 
-: gRPC health checks are a standard for reporting the health of gRPC services. Determine if your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).
-
-By implementing gRPC health checks, you can run gRPC health checks tests without having to provide a `.proto` file to Datadog. For more information, see the [example health checks `.proto` file][1] shared by the gRPC community.
+: gRPC health checks are a standard for reporting the health of gRPC services. Determine if your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).<br> By implementing gRPC health checks, you can run gRPC health checks tests without having to provide a `.proto` file to Datadog. For more information, see the [example health checks `.proto` file][1] shared by the gRPC community.
 
 gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][4].
 
@@ -44,7 +42,7 @@ After choosing to create a `gRPC` test, define your test's request.
 {{< tabs >}}
 {{% tab "Unary Call" %}}
 
-2. Upload a [`.proto` file][1] to define the data structure you want to serialize.
+2. Upload a [`.proto` file][1] that defines your gRPC server.
 
    - Select the service and method you want to send a gRPC message to from the dropdown menu. 
    - Add a request message.  
@@ -65,7 +63,7 @@ After choosing to create a `gRPC` test, define your test's request.
    {{% tab "Request Options" %}}
    
    * **Timeout**: Specify the amount of time in seconds before the test times out.
-   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * **Ignore server certificate error**: Select to have your gRPC test go on with connection even if there are errors when validating the SSL certificate.
    * **gRPC metadata**: Add and define metadata to your gRPC request to pass metadata between services.
 
    {{% /tab %}}
