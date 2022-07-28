@@ -57,6 +57,8 @@ Supported languages
 
 If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+. The profiler ships together with the tracer, so install it using the following steps, depending on your operating system.
 
+**Note:** The profiler ships with the tracer starting with version 2.8.0. If you're using an older version of the tracer, you need to upgrade first.
+
 {{< tabs >}}
 
 {{% tab "Linux" %}}
