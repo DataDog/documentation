@@ -222,7 +222,7 @@ You can monitor application security for Python apps running in Docker, Kubernet
 | Django               | 1.8                       |
 | Flask                | 0.10                      |
 
-Support for query strings is not yet available for Flask.
+Support for query strings is not available for Flask.
 
 {{< /programming-lang >}}
 

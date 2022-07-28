@@ -16,26 +16,26 @@ further_reading:
       text: "Troubleshooting Application Security Monitoring"
 ---
 
-You can monitor application security for Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor the security of your Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
 ## Get started
 
-1. **Update your Datadog Python library package** to at least version 1.2.2 or later, by running:
+1. Update your Datadog Python library package to at least version 1.2.2 or later. Run the following:
    ```shell
     pip install --upgrade ddtrace
    ```
 
-   For information about which language and framework versions are supported by the library, see [Compatibility][1].
+   For information about which language and framework versions are supported by the library, see the [Compatibility][1] section of the ASM Setup and Configure documentation.
 
-2. **Enable ASM when starting the Python application.**
+2. Enable ASM when starting the Python application.
 
 ```bash
 DD_APPSEC_ENABLED=true ddtrace-run python app.py
 ```
 
-    Or one of the following methods, depending on where your application runs:
+    You can also use one of the following methods, depending on where your application runs:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
@@ -57,7 +57,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your configuration yaml file container for APM and add the AppSec env variable:
+Update your configuration YAML file container for APM and add the `DD_APPSEC_ENABLED` environment variable:
 
 ```yaml
 spec:
@@ -74,7 +74,7 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the environment section:
+Update your ECS task definition JSON file by adding the following in the environment section:
 
 ```json
 "environment": [
@@ -89,7 +89,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
+Initialize ASM in your code or set the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
 ```shell
 DD_APPSEC_ENABLED=true ddtrace-run python app.py
 ```
