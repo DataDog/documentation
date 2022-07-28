@@ -54,7 +54,7 @@ Select the **Locations** for your Multistep API test. Multistep API tests can ru
 
 To create an HTTP request step, click **Create Your First Step**.
 
-{{< img src="synthetics/api_tests/create_request2.png" alt="Create your Multistep API test requests" style="width:100%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Create your Multistep API test requests" style="width:100%;" >}}
 
 **Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a> to increase the limit.
 
@@ -121,7 +121,7 @@ To create an HTTP request step, click **Create Your First Step**.
 
 Click **Test URL** to try out the request configuration. A response preview appears.
 
-{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 #### Add assertions
 
@@ -138,7 +138,7 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
-{{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_multi.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -168,7 +168,7 @@ To parse your variable:
     * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
     * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][9].
 
-{{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 You can extract up to ten variables per test step.
 
