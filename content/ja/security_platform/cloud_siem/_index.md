@@ -1,6 +1,10 @@
 ---
 aliases:
 - /ja/security_monitoring/
+further_reading:
+- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
+  tag: ブログ
+  text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
 kind: documentation
 title: Cloud SIEM
 ---
@@ -19,9 +23,13 @@ Datadog Cloud SIEM (Security Information and Event Management) は、開発、�
 
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/cloud_siem/getting_started">}}完全なセットアップとコンフィギュレーション{{< /nextlink >}}
-  {{< nextlink href="/security_platform/default_rules#cat-log-detection">}}すぐに使える Cloud SIEM の検出ルール{{< /nextlink >}}
+  {{< nextlink href="/security_platform/default_rules#cat-cloud-siem">}}すぐに使える Cloud SIEM の検出ルール{{< /nextlink >}}
   {{< nextlink href="/security_platform/detection_rules">}}独自の検出ルールを作成{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/security_platform/explorer
 [2]: /ja/security_platform/default_rules#cat-cloud-siem

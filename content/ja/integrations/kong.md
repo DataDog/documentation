@@ -1,52 +1,75 @@
 ---
+app_id: kong
+app_uuid: 41e7a8cb-07b6-46cc-a087-53e87736b5c7
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Kong Overview: assets/dashboards/kong_overview.json
     kong: assets/dashboards/kong_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kong.total_requests
+      metadata_path: metadata.csv
+      prefix: kong.
+    process_signatures:
+    - kong start
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kong
   logs:
     source: kong
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
     kong_processes: assets/saved_views/kong_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - log collection
 - autodiscovery
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kong/README.md
-display_name: Kong
+display_on_public_website: true
 draft: false
 git_integration_title: kong
-guid: f1098d6f-b393-4374-81c0-47c0a142aeef
 integration_id: kong
 integration_title: Kong
-integration_version: 2.1.0
+integration_version: 2.1.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kong.
-metric_to_check: kong.total_requests
+manifest_version: 2.0.0
 name: kong
-process_signatures:
-- kong start
-public_title: Datadog-Kong インテグレーション
+oauth: {}
+public_title: Kong
 short_description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kong
 ---
 
 

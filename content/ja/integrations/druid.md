@@ -1,43 +1,66 @@
 ---
+app_id: druid
+app_uuid: 15b15f01-b342-4001-89ac-9e92fc4f3234
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Druid Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: druid.service.health
+      metadata_path: metadata.csv
+      prefix: druid.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Druid
   logs:
     source: druid
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - 処理
 - data store
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/druid/README.md
-display_name: Druid
+display_on_public_website: true
 draft: false
 git_integration_title: druid
-guid: 8abd92f8-7383-45f2-a412-d6ee960baa15
 integration_id: druid
 integration_title: Druid
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: druid.
-metric_to_check: druid.service.health
+manifest_version: 2.0.0
 name: druid
-public_title: Datadog-Druid インテグレーション
+oauth: {}
+public_title: Druid
 short_description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Processing
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Druid
 ---
 
 

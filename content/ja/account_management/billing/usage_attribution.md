@@ -58,7 +58,7 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 
 レポートの生成が始まると、レポートは日々更新され、この表で毎月集計されます。
 
-{{< img src="account_management/billing/usage_attribution/total-usage.png" alt="Datadog で適用されたタグ" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-v2-Total-Usage.png" alt="Datadog で適用されたタグ" style="width:100%;" >}}
 
 - アプリ別、サービス別など、選択したすべてのタグキーでデータを表示します。
 - 左側のドロップダウンから、特定の組織やタグのキーでデータを表示することができます。
@@ -125,6 +125,6 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-the-list-of-available-monthly-custom-reports
-[2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-the-list-of-available-daily-custom-reports
+[1]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-monthly-usage-attribution
+[2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags
