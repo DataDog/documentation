@@ -76,12 +76,11 @@ Monthly data can also be pulled using the tool's public API. For more informatio
 
 ### Daily usage attribution
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-{{< /site-region >}}
-
+{{< site-region region="us,eu" >}}
 <div class="alert alert-info">
 Daily usage attribution is only available for organizations in a US1 or EU1 datacenter.
 </div>
+
 
 This section provides daily reports at an hourly granularity to dig into time frames. It also provides a concatenation of all reports during a given month.
 
@@ -91,6 +90,19 @@ This section provides daily reports at an hourly granularity to dig into time fr
 {{< img src="account_management/billing/usage_attribution/daily-usage-attribution.png" alt="Daily Usage Attribution data" style="width:100%;" >}}
 
 Daily data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
+
+{{< /site-region >}}
+{{< site-region region="us3,us5,gov" >}}
+
+<div class="alert alert-info">
+Daily usage attribution is only available for organizations in a US1 or EU1 datacenter.
+</div>
+
+To download a report for the last day of usage: 
+1. From your [Usage][3] page, select `Past 1 Day` in the time frame selector.
+1. Click **Download as CSV**.
+
+{{< /site-region >}}
 
 ### Interpreting the data
 
@@ -105,7 +117,7 @@ The table below shows a sample daily report for Infra usage by two tags: `app` a
 - An `<empty>` value means the resource was tagged with the respective tag but did not have a value.
 - No value means the resource was not tagged with that particular tag.
 - `|` (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
-- A valid tag value (see the [Defining Tags documentation][3]) refers to the actual value of the respective tag.
+- A valid tag value (see the [Defining Tags documentation][4]) refers to the actual value of the respective tag.
 
 #### Further data analysis
 
@@ -134,4 +146,5 @@ Each color block represents a unique tag value for each tag.
 
 [1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
 [2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
-[3]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
+[3]: https://app.datadoghq.com/billing/usage
+[4]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
