@@ -91,6 +91,7 @@ This section provides daily reports at an hourly granularity to dig into time fr
 
 Daily data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
 
+
 {{< /site-region >}}
 {{< site-region region="us3,us5,gov" >}}
 
@@ -101,6 +102,7 @@ Daily usage attribution is only available for organizations in a US1 or EU1 data
 To download a report for the last day of usage: 
 1. From your [Usage][3] page, select `Past 1 Day` in the time frame selector.
 1. Click **Download as CSV**.
+
 
 {{< /site-region >}}
 
