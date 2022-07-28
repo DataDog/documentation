@@ -1,6 +1,8 @@
 ---
 title: Events Guides
 kind: documentation
+private: true
+disable_toc: true
 further_reading:
 - link: "/events/explorer/"
   tag: "Documentation"
