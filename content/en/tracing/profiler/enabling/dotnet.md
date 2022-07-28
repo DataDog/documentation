@@ -33,7 +33,7 @@ Supported operating systems for .NET Framework
 Windows Server starting from version 2012
 
 Supported operating systems for .NET Core and .NET 5+
-: Linux with glibc 2.18+ (for example CentOS 7 is not supported)<br/>
+: Linux with glibc 2.17+ (ex: CentOS 7...) and musl-based (Alpine) <br/>
 Windows 10<br/>
 Windows Server starting from version 2012
 
@@ -69,7 +69,7 @@ To install the .NET Profiler machine-wide:
    Debian or Ubuntu
    : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
 
-   CentOS 8+ or Fedora
+   CentOS 7+ or Fedora
    : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
 
    Alpine or other musl-based distributions
