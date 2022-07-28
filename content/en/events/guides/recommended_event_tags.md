@@ -12,9 +12,7 @@ further_reading:
 As a best practice, Datadog recommends the use of [unified service tagging][1], plus other tags listed below for all events to help you:
 - Identify potential issues faster
 - Locate other related events
-- Filter to more accurately e.g to a particular environment
-
-If using the [API][1], they can be added within the tags param or to learn more about to how add them to certain integrations, check out [assigning_tags][2]
+- Filter to more accurately in the event explorer e.g to a particular environment
 
 ### Recommended Core Attributes
 
@@ -26,6 +24,20 @@ If using the [API][1], they can be added within the tags param or to learn more 
 | team          | The team which owns the event, so that they can be notified if need be                                                                                                                       |
 | version       | Enables you to know that you know that an event/outage for instance is only related to a particular version released                                                                         |
 
+#### Improving your Tagging
+
+- API
+When using the [API][2], tags can be added within the tags field.
+
+- Monitor
+When creating or editing a monitor, you can add the recommended tags within the [whats happening section][5]
+
+- Integrations
+To learn more about to how add tags to integrations, check out [assigning_tags][3] or the specific [integrations page][4]
+
+
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /api/latest/events/#post-an-event
 [3]: /getting_started/tagging/assigning_tags
+[4]: /integrations/
+[5]: /getting_started/monitors/#notify-your-team
