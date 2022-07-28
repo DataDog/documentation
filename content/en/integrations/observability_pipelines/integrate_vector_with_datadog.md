@@ -1,8 +1,6 @@
 ---
 title: Integrate Vector with Datadog
 kind: documentation
-aliases:
-  - /agent/vector_aggregation/
 dependencies:
   ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/integrate_vector_with_datadog.md"]
 further_reading:
@@ -23,26 +21,26 @@ further_reading:
   text: "Working with data using Vector"
 ---
 
-## Overview 
+## Overview
 
 Vector integrates with Datadog to aggregate logs, metrics, and traces from Datadog Agents and route collected telemetry to Datadog.
 
-`Datadog Agent -> Vector -> Datadog` 
+`Datadog Agent -> Vector -> Datadog`
 
 ## Prerequisites
 
 Before collecting your observability data from the Datadog Agent using Vector, you must:
 
 - Have the [Datadog Agent v6.35+ or v7.35+ installed][1].
-- Have [Vector installed][2]. To collect traces, you must have Vector v0.23.0 or above. 
+- Have [Vector installed][2]. To collect traces, you must have Vector v0.23.0 or above.
 - Have a [basic understanding of configuring Vector][3].
 
 ## Set up the Datadog Agent and your environment
- 
+
 You must configure the [Datadog Agent](#datadog-agent-configuration) before setting up Vector to collect, transform, and route logs, metrics, or traces from the Datadog Agent to Datadog. If you are using Kubernetes, you must also configure [Kubernetes](#kubernetes-configuration) before setting up Vector.
 
 ### Datadog Agent configuration
- 
+
 To send logs to Vector, update the Agent configuration file, `datadog.yaml`, with the following:
 
 ```yaml
@@ -77,7 +75,7 @@ If you are using Docker, add the following to your Agent configuration file:
 
 ### Kubernetes configuration
 
-Use the official Datadog Helm chart, and add the [Agent configuration settings](#datadog-agent-configuration) to the `agents.customAgentConfig` value. 
+Use the official Datadog Helm chart, and add the [Agent configuration settings](#datadog-agent-configuration) to the `agents.customAgentConfig` value.
 
 **Note:** `agent.useConfigMap` must be set to `true` for `agents.customAgentConfig` to be taken into account.
 
@@ -91,7 +89,7 @@ Vector's chart can hold any valid Vector configuration in the `values.yaml` file
 
 ## Vector configurations
 
-See the [Vector documentation][7] for all available configuration parameters and transforms that can be applied to all data processed by Vector. 
+See the [Vector documentation][7] for all available configuration parameters and transforms that can be applied to all data processed by Vector.
 
 ### Source configuration
 
@@ -139,7 +137,7 @@ sources:
 
 ### Add Vector-specific tags
 
-Logs, metrics, and traces sent by the Datadog Agent to Vector can be manipulated or formatted as explained in [working with data][9]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][10] for more information. 
+Logs, metrics, and traces sent by the Datadog Agent to Vector can be manipulated or formatted as explained in [working with data][9]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][10] for more information.
 
 Vector can also directly collect logs and metrics from [alternative sources][11]. When doing so, third-party logs may not include proper tagging. Use the [Vector Remap Language][12] to [add tags][13], sources, or service values.
 
@@ -155,7 +153,7 @@ remap_logs_for_datadog:
   type: remap
   inputs:
         - datadog_agents
-  source: | 
+  source: |
   # Parse the received .ddtags field so we can easily access the contained tags
     .ddtags = parse_key_value!(.ddtags, key_value_delimiter: ":" field_delimiter: ",")
     .ddtags.sender = "vector"
@@ -163,7 +161,7 @@ remap_logs_for_datadog:
 
   # Re-encode Datadog tags as a string for the `datadog_logs` sink
     .ddtags = encode_key_value(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
-  
+
   # Datadog Agents pass a "status" field that is stripped when ingested
     del(.status)
 ```
@@ -197,7 +195,7 @@ source = """
     "inputs": [
       "datadog_agents"
     ],
-    "source": 
+    "source":
 "# Parse the received .ddtags field so we can more easily access the contained tags
 .ddtags = parse_key_value!(.ddtags, key_value_delimiter: \":\", field_delimiter: \",\")
 .ddtags.sender = \"vector\"\n.ddtags.vector_aggregator = get_hostname!()
@@ -222,7 +220,7 @@ These tags can be used to validate whether Vector sent the data. More specifical
 
 #### Metrics
 
-Similarly, to send metrics to Datadog with Vector specific tags, see the following example:  
+Similarly, to send metrics to Datadog with Vector specific tags, see the following example:
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -260,7 +258,7 @@ source = """
     "inputs": [
       "some_input_id"
     ],
-    "source": 
+    "source":
        .tags.sender = "vector"
        .tags.vector_aggregator = get_hostname!()
   }
@@ -309,7 +307,7 @@ source = """
     "inputs": [
       "some_input_id"
     ],
-    "source": 
+    "source":
         append(.tags, [join("sender:", “vector”)])
         append(.tags, [join("vector_aggregator:", to_string(get_hostname!()))])
 }
@@ -320,7 +318,7 @@ source = """
 
 ## Sink configuration
 
-To send logs to Datadog, Vector must be configured with at least one [datadog_logs sink][14]. See the following example: 
+To send logs to Datadog, Vector must be configured with at least one [datadog_logs sink][14]. See the following example:
 
 {{< tabs >}}
 {{% tab "YAML" %}}
