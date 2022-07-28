@@ -102,10 +102,10 @@ Daily usage attribution is only available for organizations in a US1 or EU1 data
 </div>
 
 To download a report for the last day of usage: 
-1. From your [Usage][2] page, select `Past 1 Day` in the time frame selector.
+1. From your [Usage][3] page, select `Past 1 Day` in the time frame selector.
 1. Click **Download as CSV**.
 
-[2]: https://app.datadoghq.com/billing/usage
+[3]: https://app.datadoghq.com/billing/usage
 {{< /site-region >}}
 
 ### Interpreting the data
@@ -121,7 +121,7 @@ The table below shows a sample daily report for Infra usage by two tags: `app` a
 - An `<empty>` value means the resource was tagged with the respective tag but did not have a value.
 - No value means the resource was not tagged with that particular tag.
 - `|` (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
-- A valid tag value (see the [Defining Tags documentation][3]) refers to the actual value of the respective tag.
+- A valid tag value (see the [Defining Tags documentation][4]) refers to the actual value of the respective tag.
 
 #### Further data analysis
 
@@ -149,4 +149,4 @@ Each color block represents a unique tag value for each tag.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
-[3]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
+[4]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
