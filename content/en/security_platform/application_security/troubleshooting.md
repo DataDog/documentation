@@ -404,23 +404,26 @@ If you don’t see ASM threat information in the [Trace and Signals Explorer][2]
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-If you don’t see ASM threat information in the [Trace and Signals Explorer][2] for your Python application, follow these steps to troubleshoot the issue:
+If you don’t see ASM threat information in the [Trace and Signals Explorer][2] for your Python application, check that ASM is running and that your tracer is working.
 
 1. Set your application's log level to `DEBUG` to confirm that ASM is running:
 
-  ```python
-  import logging
-  logging.basicConfig(level=logging.DEBUG)
-  ```
+   ```python
+   import logging
+   logging.basicConfig(level=logging.DEBUG)
+   ```
+  
    Then, run any HTTP call to the application. You should see the following log:
-  ```
-  DEBUG:ddtrace.appsec.processor:[DDAS-001-00] Executing AppSec In-App WAF with parameters:
-  ```
+  
+   ```
+   DEBUG:ddtrace.appsec.processor:[DDAS-001-00] Executing AppSec In-App WAF with parameters:
+   ```
+  
    If this log is not present, ASM is not running.
 
 2. Is the tracer working? Can you see relevant traces on the APM dashboard?
 
-   ASM relies on the tracer so if you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][5].
+   ASM relies on the tracer. If you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][5].
 
 
 [2]: https://app.datadoghq.com/security/appsec/
