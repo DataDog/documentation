@@ -3323,7 +3323,7 @@ main:
     parent: administration_heading
     weight: 240000
   - name: Aggregating Agents
-    url: integrations/observability_pipelines/integrate_vector_with_datadog/
+    url: agent/vector_aggregation/
     parent: agent
     identifier: vector_aggregation
     weight: 13

@@ -1,6 +1,8 @@
 ---
 title: Integrate Vector with Datadog
 kind: documentation
+aliases:
+  - /agent/vector_aggregation/
 dependencies:
   ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/integrate_vector_with_datadog.md"]
 further_reading:
