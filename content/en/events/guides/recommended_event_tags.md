@@ -26,15 +26,15 @@ As a best practice, Datadog recommends the use of [unified service tagging][1], 
 
 #### Improving your Tagging
 
-- API
+- *API*
 
 When using the [API][2], tags can be added within the tags field.
 
-- Monitor
+- *Monitor*
 
 When creating or editing a monitor, you can add the recommended tags within the [whats happening section][5]
 
-- Integrations
+- *Integrations*
 
 To learn more about to how add tags to integrations, check out [assigning_tags][3] or the specific [integrations page][4]
 
