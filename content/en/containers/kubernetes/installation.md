@@ -204,6 +204,22 @@ The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` param
 
 If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][11] to map your previous settings with the new fields.
 
+### Kube state metrics core in chart v2.x
+In the chart v3 (future release), kube-state-metrics core will be enabled by default in the helm chart and the legacy check will be disabled.
+
+In NEW deployments (deployments that have not enabled the kube-state-metrics legacy integration and do not have monitors and dasboards using deprecated tags and metrics), we recommend deploying using kube-state-metrics with the following values:
+
+```yaml
+...
+datadog:
+...
+  kubeStateMetricsCore:
+    enabled: true
+...
+```
+
+For existing deployments, refer to the [kube-state-metrics core migration guide][12].
+
 ### Unprivileged
 
 (Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
@@ -229,6 +245,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [9]: https://gallery.ecr.aws/datadog/
 [10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
+[12]: https://docs.datadoghq.com/integrations/kubernetes_state_core/?tab=helm#migration-from-kubernetes_state-to-kubernetes_state_core
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
