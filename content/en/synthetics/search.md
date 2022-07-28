@@ -23,7 +23,7 @@ You can search, access, and manage all of your tests on the [Synthetic Tests pag
 
 To better understand the state of your application, click **Show Metrics**. The **Overview Metrics** section appears with graphs about your overall tests' uptime and response time. For more information about the data displayed, see [Synthetic Monitoring Metrics][2].
 
-Use facets to find Synthetic tests that matter to you, manage your tests with bulk actions, and monitor events tracking changes to your Synthetic Monitoring configuration. Explore [out-of-the-box Synthetic dashboards][3] to comprehend your testing coverage.
+You can use facets to find Synthetic tests, manage your tests with bulk actions, and monitor events to track changes to your Synthetic Monitoring configuration. Explore [out-of-the-box Synthetic dashboards][3] to better understand your testing coverage.
 
 ## Search for tests
 
@@ -64,7 +64,7 @@ Search for tests by clicking on the facets to the left or by writing your own cu
 When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch in the search bar to select and deselect the facets on the left. 
 
 * **Search on free text**: Enter your text in the search bar to search on a test name.
-* **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click on an additional value's checkbox or add the additional value with an `OR` Boolean operator and wrap the values using quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
+* **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click on an additional value's checkbox. You can also add the additional value with an `OR` Boolean operator and wrap the values using quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
 * **Search on multiple facets and text**: Click on facet values from different facet types to customize a search query that filters for multiple facets. For example, `type:api region:aws:us-east-2`. You can also mix facets and text. For example, `checkout type:browser`. Although invisible, the `AND` Boolean operator is applied when searching on multiple terms.
 * **Search on message**: Add a message to create a search query that filters on your tests’ notification messages configured in the [test monitor][5]. For example, `message:testcontent`.
 * **Exclude facets or text**: Click on an already-filled checkbox to deselect a facet value or prepend a term with `-` to exclude it from the search query. For example, `-state:paused`.
@@ -88,9 +88,9 @@ Hovering over a test populates option icons on the right such as `Pause`, `Run T
 
 ### Track events
 
-Creating, adding, and deleting Synthetic tests, global variables, and private locations generates events in the [Events Explorer][6]. Events describe changes that occurred and display the user who performed the change.
+Creating, adding, and deleting Synthetic tests, global variables, and private locations generates events in the [Events Explorer][6]. Events describe changes that occurred and display the users who performed the changes.
 
-Find all Synthetics-related changes by searching for your test monitors' alerts in the search bar or selecting an event type under the **Event** template variable. For example, `Event Type:synthetics_alert`.
+Find all Synthetics-related changes by searching for your test monitors' alerts in the search bar, or by selecting an event type under the **Event** template variable. For example, `Event Type:synthetics_alert`.
 
 ## Further Reading
 

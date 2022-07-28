@@ -319,7 +319,7 @@ To filter RUM event data by tags, use the search bar or facet checkboxes. The se
 
 The [Synthetic Tests][1] page lists your Synthetic tests. 
 
-To filter tests by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `tag:mini-website`. For advanced search, see [Search and Manage Synthetic Tests][2].
+To filter tests by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `tag:mini-website`. For advanced search, see [Search and Manage Synthetic Tests][2].
 
 {{< img src="tagging/using_tags/syntheticstags.png" alt="Synthetics Tags" style="width:80%;">}}
 
@@ -331,7 +331,7 @@ To filter tests by tags, use the search bar or facet checkboxes. The search bar 
 
 The [CI Results Explorer][1] displays your browser test results running in a [CI pipeline][2]. 
 
-To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `@ci.provider.name:github`. For advanced search, see [Search and Manage Synthetic Tests][3].
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search and Manage Synthetic Tests][3].
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics and CI Tags" style="width:80%;">}}
 

@@ -347,7 +347,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the DogStatsD client automatically adds the corresponding tags to your custom metrics.
 
-   **Note**: The Datadog DogStatsD clients for .NET and PHP do not yet support this functionality.
+   **Note**: The Datadog DogStatsD clients for .NET and PHP do not support this functionality.
 
 [1]: /metrics/
    {{% /tab %}}
@@ -395,7 +395,7 @@ To form a single point of configuration for all telemetry emitted directly from 
          service: nginx-web-app
    ```
 
-   **Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
+   **Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion when you are interpreting the metrics, it is recommended that you configure the `service` tag only in the configuration of the process check.
 
 [1]: /agent/guide/agent-configuration-files
 [2]: /integrations/process
@@ -404,7 +404,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 ### Serverless environment
 
-For more information about AWS Lambda function, see [how to connect your Lambda telemetry using tags][13].
+For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][13].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
