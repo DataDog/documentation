@@ -33,7 +33,7 @@ The following span tags are the core concepts for describing the instrumentation
 ### Network communications
 The following span tags can be used to describe work units corresponding to network communications:
 
-| **Fullname**                    | **Type** | **Description**                                                           |
+| **Name**                    | **Type** | **Description**                                                           |
 |---------------------------------|----------|---------------------------------------------------------------------------|
 | `network.client.ip`             | `string` | The IP address of the client that initiated the inbound connection.        |
 | `network.destination.ip`        | `string` | The IP address to where the outbound connection is being made.             |
@@ -49,7 +49,7 @@ The following span tags can be used to describe work units corresponding to netw
 ### HTTP requests
 The following span tags can be used to describe the HTTP client and server spans:
 
-| **Fullname**                                | **Type** | **Description**                                                                                                                                                                                                              |
+| **Name**                                | **Type** | **Description**                                                                                                                                                                                                              |
 |---------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `http.status_code`                          | `string` | The HTTP response status code.                                                                                                                                                                                                |
 | `http.url`                                  | `string` | The URL of the HTTP request, including the obfuscated query string. For more information on obfuscation, see [Configure Data Security][4].                                                         |
@@ -69,7 +69,7 @@ The following span tags can be used to describe the HTTP client and server spans
 ### Database
 The following span tags can be used to describe database spans:
 
-| **Fullname**           | **Type** | **Description**                                                                                              |
+| **Name**           | **Type** | **Description**                                                                                              |
 |------------------------|----------|--------------------------------------------------------------------------------------------------------------|
 | `db.system`            | `string` | Identifier for the database management system (DBMS product being used).                                       |
 | `db.connection_string` | `string` | The connection string used to connect to the database.                                                        |
@@ -85,7 +85,7 @@ Additional attributes for specific database technologies will use the prefix `db
 ### Message Queue
 The following span tags can be used to describe spans corresponding to messaging systems:
 
-| **Fullname**                     | **Type** | **Description**                                                                                                                                                                                                                  |
+| **Name**                     | **Type** | **Description**                                                                                                                                                                                                                  |
 |----------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `messaging.system`               | `string` | The identifier of the messaging system.                                                                                                                                                                                               |
 | `messaging.destination`          | `string` | The message destination name.                                                                                                                                                                                                     |
@@ -104,7 +104,7 @@ Additional attributes for specific database technologies will use the prefix `me
 ### Remote procedure calls
 The following span tags can be used to describe spans corresponding to remote procedure calls such as RMI or gRPC:
 
-| **Fullname**  | **Type** | **Description**                      |
+| **Name**  | **Type** | **Description**                      |
 |---------------|----------|--------------------------------------|
 | `rpc.system`  | `string` | The identifier of the remote system.    |
 | `rpc.service` | `string` | The name of the service being called. |
@@ -113,7 +113,7 @@ The following span tags can be used to describe spans corresponding to remote pr
 ### Errors
 The following span tags can be used to describe errors associated with spans:
 
-| **Fullname**    | **Type** | **Description**                                                  |
+| **Name**    | **Type** | **Description**                                                  |
 |-----------------|----------|------------------------------------------------------------------|
 | `error.message` | `string` | The error type or kind (or code in some cases).                  |
 | `error.type`    | `string` | A concise, human-readable, one-line message explaining the event. |
