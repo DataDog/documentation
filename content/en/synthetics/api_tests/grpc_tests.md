@@ -1,7 +1,7 @@
 ---
 title: GRPC Tests
 kind: documentation
-description: Simulate gRPC requests to monitor public and internal API endpoints
+description: Simulate gRPC requests to monitor public and internal API endpoints.
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -9,9 +9,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/"
   tag: "Blog"
   text: "Monitor your gRPC APIs with Datadog"
-- link: "https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/"
-  tag: "Blog"
-  text: "Monitor gRPC APIs with Datadog Synthetic Monitoring"
 - link: 'https://learn.datadoghq.com/course/view.php?id=39'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
@@ -24,17 +21,15 @@ further_reading:
 ---
 ## Overview
 
-gRPC tests allow you to proactively monitor your gRPC services.
-Two types of gRPC tests are available:
-- **Unary Calls**  
-gRPC unary tests allow you to send gRPC requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, header, or body content.
+gRPC tests allow you to proactively monitor your gRPC services and servers. You can choose from two types:
 
-- **Health Checks**  
-gRPC health checks is a standard for reporting the health of gRPC services. It allows you to determine if your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).<br>
-With gRPC health checks implemented, you can run gRPC health checks tests without providing Datadog a .proto file.<br>
-To implement gRPC health checks on your servers, here is the [health checks proto file example][1] shared by the gRPC community.
+Unary Calls
+: Send gRPC requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, header, or body content.
 
-<!-- You can implement the health checking mechanism as a gRPC service on a gRPC server. To access the health checks proto file example shared by the gRPC community, see the [open-source gRPC repository][1]. -->
+Health Checks 
+: gRPC health checks are a standard for reporting the health of gRPC services. Determine if your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).
+
+By implementing gRPC health checks, you can run gRPC health checks tests without having to provide a `.proto` file to Datadog. For more information, see the [example health checks `.proto` file][1] shared by the gRPC community.
 
 gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][4].
 
@@ -49,7 +44,7 @@ After choosing to create a `gRPC` test, define your test's request.
 {{< tabs >}}
 {{% tab "Unary Call" %}}
 
-2. Upload a [proto file][1] to define the data structure you want to serialize.
+2. Upload a [`.proto` file][1] to define the data structure you want to serialize.
 
    - Select the service and method you want to send a gRPC message to from the dropdown menu. 
    - Add a request message.  
@@ -109,7 +104,12 @@ Assertions define what an expected test result is. After you click **Test Servic
 | Type                    | Operator                                        | Value type                           |
 |-------------------------|-------------------------------------------------|--------------------------------------|
 | response time           | `is less than`                                  | _Integer (ms)_                       |
-| gRPC response           | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][6], [`xpath`][7] | _String_ <br> _[Regex][8]_ |
+| gRPC response           | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][1], [`xpath`][2] | _String_ <br> _[Regex][3]_ |
+
+
+[1]: https://restfulapi.net/json-jsonpath/
+[2]: https://www.w3schools.com/xml/xpath_syntax.asp
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
 {{% tab "Health Check" %}}
 | Type                    | Operator                                        | Value type                           |
@@ -262,7 +262,7 @@ You can restrict access to a browser test based on the roles in your organizatio
 [2]: /api/v1/synthetics/#get-all-locations-public-and-private
 [3]: /synthetics/private_locations
 [4]: /synthetics/cicd_testing
-[5]: https://restfulapi.net/json-jsonpath/
+[5]: /synthetics/search/#search
 [6]: /monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
