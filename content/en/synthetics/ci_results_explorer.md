@@ -23,7 +23,7 @@ The CI Results Explorer provides visibility into the CI jobs executing your Synt
 
 {{< img src="synthetics/ci_results_explorer/ci_results_explorer_1.png" alt="CI Results Explorer" style="width:100%;">}}
 
-You can:
+You can accomplish the following actions:
 
 * Investigate each CI job execution to identify and troubleshoot failing test results.
 * Compare test results executed against various devices and browsers to pinpoint cross browser and device issues.
