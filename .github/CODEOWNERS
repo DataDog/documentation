@@ -18,4 +18,8 @@ package.json              @DataDog/corpweb @DataDog/documentation
 /layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/documentation
 
 # Database Management
-/content/en/database_management/                        @DataDog/database-monitoring-app @DataDog/documentation
+/content/en/database_management/                        @DataDog/database-monitoring @DataDog/documentation
+/layouts/partials/dbm/                                  @DataDog/database-monitoring @DataDog/documentation
+
+# Agent Shared Component
+/content/en/agent/proxy.md                              @DataDog/agent-shared-components @DataDog/documentation

@@ -7,17 +7,17 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - OS & システム
+- OS & システム
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
+- https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
 display_name: Systemd
 draft: false
 git_integration_title: systemd
 guid: acd470e7-5413-4deb-95fc-4b034d904691
 integration_id: systemd
 integration_title: Systemd
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -25,12 +25,15 @@ manifest_version: 1.0.0
 metric_prefix: systemd.
 metric_to_check: systemd.units_by_state
 name: systemd
-public_title: Datadog-Systemd インテグレーション
+public_title: Systemd インテグレーション
 short_description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
 support: コア
 supported_os:
-  - linux
+- linux
 ---
+
+
+
 ## 概要
 
 このチェックは、[Systemd][1] と、Systemd が Datadog Agent を介して管理するユニットを監視します。
@@ -42,6 +45,10 @@ supported_os:
 
 ### インストール
 
+Systemd チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+
+### コンフィギュレーション
+
 {{< tabs >}}
 {{% tab "Host" %}}
 
@@ -49,9 +56,14 @@ supported_os:
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
-Systemd チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `systemd.d/conf.yaml` ファイルを編集して、
+   Systemd パフォーマンスデータの収集を開始します。
+   使用可能なすべての構成オプションの詳細については、[サンプル systemd.d/conf.yaml][1] を参照してください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+2. [Agent を再起動します][2]。
+
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -65,25 +77,15 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup/:ro \
               -v /run/systemd/:/host/run/systemd/:ro \
               -e DD_API_KEY=<YOUR_API_KEY> \
-              gcr.io/datadoghq/agent:latest
+              datadog/agent:latest
 ```
 
-### コンフィギュレーション
-
-1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `systemd.d/conf.yaml` ファイルを編集して、
-   Systemd パフォーマンスデータの収集を開始します。
-   使用可能なすべての構成オプションの詳細については、[サンプル systemd.d/conf.yaml][1] を参照してください。
-
-2. [Agent を再起動します][2]。
-
-[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][2]し、Checks セクションの `systemd` を探します。
+[Agent の status サブコマンドを実行][3]し、Checks セクションの `systemd` を探します。
 
 ## 収集データ
 
@@ -113,10 +115,11 @@ Systemd チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

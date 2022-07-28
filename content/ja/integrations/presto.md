@@ -19,7 +19,6 @@ categories:
 - data store
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/presto/README.md
 display_name: Presto
@@ -36,7 +35,7 @@ manifest_version: 1.0.0
 metric_prefix: presto.
 metric_to_check: presto.failure_detector.active_count
 name: presto
-public_title: Datadog-Presto インテグレーション
+public_title: Presto インテグレーション
 short_description: PrestoSQL クラスターのパフォーマンスや使用状況の統計などを収集
 support: コア
 supported_os:

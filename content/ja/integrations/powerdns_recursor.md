@@ -19,7 +19,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
 display_name: PowerDNS Recursor
@@ -39,7 +38,7 @@ name: powerdns_recursor
 process_signatures:
 - pdns_server
 - systemctl start pdns@
-public_title: Datadog-Power DNS Recursor インテグレーション
+public_title: Power DNS Recursor インテグレーション
 short_description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
 support: コア
 supported_os:

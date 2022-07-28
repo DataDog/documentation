@@ -14,7 +14,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
 display_name: MapReduce
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: mapreduce.
 metric_to_check: mapreduce.job.elapsed_time.max
 name: mapreduce
-public_title: Datadog-Map Reduce インテグレーション
+public_title: Map Reduce インテグレーション
 short_description: マップのステータスと期間を監視し、タスクを削減。
 support: コア
 supported_os:

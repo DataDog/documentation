@@ -14,7 +14,6 @@ categories:
 - data store
 - autodiscovery
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
 display_name: TokuMX
@@ -32,7 +31,7 @@ metric_prefix: tokumx.
 metric_to_check: tokumx.uptime
 name: tokumx
 process_signatures: []
-public_title: Datadog-TokuMX インテグレーション
+public_title: TokuMX インテグレーション
 short_description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
 support: コア
 supported_os:

@@ -89,6 +89,13 @@ The selected CSV is upserted into the table, meaning that:
  
 Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the update to complete. 
 
+## Delete a Reference Table
+
+To delete a Reference Table, select a table, click the gear icon in the top right corner, and then click **Delete Table**.
+The table and all associated rows is deleted.
+
+If there is a Lookup Processor using a Reference Table for Log enrichment, then the enrichment stops. It may take up to 10 minutes for the enrichment to stop.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

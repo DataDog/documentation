@@ -21,7 +21,6 @@ categories:
 - data store
 - log collection
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mysql/README.md
 description: MySQL インテグレーションは、MySQL サーバーインスタンスからパフォーマンスメトリクスと可用性メトリクスを収集するのに役立ちます。
@@ -31,7 +30,7 @@ git_integration_title: mysql
 guid: 056bfc7f-4775-4581-9442-502078593d10
 integration_id: mysql
 integration_title: MySQL
-integration_version: 8.3.0
+integration_version: 8.4.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -41,7 +40,7 @@ metric_to_check: mysql.net.connections
 name: MySQL
 process_signatures:
 - mysqld
-public_title: Datadog-MySQL インテグレーション
+public_title: MySQL インテグレーション
 short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
 support: コア
 supported_os:
@@ -592,7 +591,7 @@ MySQL チェックには、イベントは含まれません。
 - [SQL Server インテグレーションで名前付きインスタンスを使用できますか][9]
 - [Google CloudSQL で dd-agent MySQL チェックをセットアップできますか][10]
 - [MySQL カスタムクエリ][11]
-- [sys.dm_os_performance_counters テーブルにあるメトリクス以外の SQL Server パフォーマンスメトリクスを収集できますか？WMI をお試しください][12]
+- [WMI を使用して、より多くの SQL Server パフォーマンスメトリクスを収集する][12]
 - [SQL Server インテグレーションからさらに多くのメトリクスを収集するには？][13]
 - [データベースユーザーに権限がありません][14]
 - [SQL ストアドプロシージャを使用してメトリクスを収集する方法][15]
@@ -615,7 +614,7 @@ MySQL チェックには、イベントは含まれません。
 [9]: https://docs.datadoghq.com/ja/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
 [10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
 [11]: https://docs.datadoghq.com/ja/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
-[12]: https://docs.datadoghq.com/ja/integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi/
+[12]: https://docs.datadoghq.com/ja/integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics/
 [13]: https://docs.datadoghq.com/ja/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
 [14]: https://docs.datadoghq.com/ja/integrations/faq/database-user-lacks-privileges/
 [15]: https://docs.datadoghq.com/ja/integrations/guide/collect-sql-server-custom-metrics/#collecting-metrics-from-a-custom-procedure

@@ -16,7 +16,6 @@ categories:
 - web
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
 display_name: PHP-FPM
@@ -25,7 +24,7 @@ git_integration_title: php_fpm
 guid: 47f2c337-83ac-4767-b460-1927d8343764
 integration_id: php-fpm
 integration_title: PHP FPM
-integration_version: 2.1.0
+integration_version: 2.1.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -43,7 +42,7 @@ process_signatures:
 - restart php-fpm
 - systemctl restart php-fpm.service
 - php7.0-fpm.service
-public_title: Datadog-PHP FPM インテグレーション
+public_title: PHP FPM インテグレーション
 short_description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
 support: コア
 supported_os:
