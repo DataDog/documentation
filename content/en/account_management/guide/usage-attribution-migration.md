@@ -14,7 +14,7 @@ deprecated, and there are two types: The monthly
 API ([Get usage attribution][1]), and the file
 based APIs ([Get the list of available daily custom reports][2], [Get specified daily custom reports][3],
 [Get the list of available monthly custom reports][4], and
-[Get specified monthly custom reports][5]). To use this guide, find the section below for the v1 APIs you are currently using, and follow the instructions to migrate to the corresponding v2 APIs.
+[Get specified monthly custom reports][5]). To use this guide, find the section below for the v1 APIs you are currently use, and follow the instructions to migrate to the corresponding v2 APIs.
 
 ## Monthly API
 
@@ -28,10 +28,10 @@ See the sections below for the differences between the v1 and v2 API, and recomm
 
 #### Pagination
 
-In the v1 API, pagination is configured through the query parameters `offset` and `limit`. The value in
+In the v1 API, you configure pagination through the query parameters `offset` and `limit`. The value in
 `metadata.pagination.total_number_of_records` provides the total number of records in all pages.
 
-In the v2 API, pagination is configured through the `next_record_id` query parameter. The starting value for the next page is
+In the v2 API, you configure pagination through the `next_record_id` query parameter. The starting value for the next page is
 returned in `metadata.pagination.next_record_id`. There is no total number of records in the response.
 
 To migrate to the v2 API, use the `next_record_id` to advance through pages as described on the API documentation page.
@@ -108,8 +108,8 @@ this API.
 
 ### [Get specified daily custom reports][3]
 
-This API returns a link to download a zip file of the usage attribution data for all products, for a given day. The zip
-file contains a tsv file for each product.
+This API returns a link to download a zip file of the usage attribution data for all products for a given day. The zip
+file contains a TSV (tab separated value) file for each product.
 
 The [Get hourly usage attribution][8]
 API provides this same data.
@@ -118,7 +118,7 @@ See the sections below for differences between the v1 and v2 API and recommendat
 
 #### Response format
 
-In the v1 API, the response contains a link to a zip file, that contains a tsv file per product.
+In the v1 API, the response contains a link to a ZIP file, that contains a TSV file per product.
 
 In the v2 API, the response returns the usage attribution data in JSON format.
 
@@ -135,7 +135,7 @@ To migrate to the v2 API, specify all chosen tags in the `tag_breakdown_keys` qu
 
 #### Tag keys
 
-In the v1 API, chosen tag keys are presented as headers in the tsv file. Example:
+In the v1 API, chosen tag keys are presented as headers in the TSV file. Example:
 
 ```
 public_id       formatted_timestamp     env     service total_usage
@@ -158,7 +158,7 @@ In the v2 API, chosen tags are keys in the `tags` object of each item in the usa
 ...
 ```
 
-To migrate to the v2 API, retrieve from the `tags` object on each row of the response.
+To migrate to the v2 API, retrieve from the `tags` object on each response row.
 
 #### Tag values
 
@@ -174,7 +174,7 @@ abc123          2022-01-01 00:00:00     prod    authentication|web    100
 ```
 
 In the v2 API, the value corresponding to each tag key in the `tags` object is an array. If a resource has the
-same tag multiple times, there are multiple items in this list.
+same tag multiple times, then it indicates that there are multiple items in this list.
 
 Example:
 
@@ -198,7 +198,7 @@ response, so you can join the array with pipe characters to produce the same tag
 
 #### Total usage
 
-In the v1 API, the total usage is called `total_usage` in the csv header.
+In the v1 API, the total usage is called `total_usage` in the CSV header.
 
 In the v2 API, the total usage is called `total_usage_sum`, and is a key in each object in the usage array.
 
@@ -206,7 +206,7 @@ To migrate to the v2 API, use the key `total_usage_sum` to extract the usage val
 
 #### Total usage data type
 
-The v1 API uses csv, which has no way to specify data types (although total usage is always a number).
+The v1 API uses CSV, which has no way to specify data types (although total usage is always a number).
 
 In the v2 API, total usage is an integer.
 
@@ -309,13 +309,13 @@ To migrate to the v2 API, use the new usage types for retrieving synthetics usag
 
 ### [Get the list of available monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-the-list-of-available-monthly-custom-reports)
 
-This API produces a list of available downloads. Since the file downloads are deprecated there is no replacement for
+This API produces a list of available downloads. Since the file downloads are deprecated, there is no replacement for
 this API.
 
 ### [Get specified monthly custom reports][5]
 
-This API returns a link to download a zip file of the usage attribution data for all products, for a given month. The zip
-file contains a tsv file for each product, as well as a summary file for each tag. The approaches to replicate the two different types of files are described below.
+This API returns a link to download a ZIP file of the usage attribution data for all products for a given month. The ZIP
+file contains a TSV file for each product, as well as a summary file for each tag. The approaches to replicate the two different types of files are described below.
 
 ### Hourly data by product files
 
@@ -329,7 +329,7 @@ API provides this same data.
 
 As the hourly data files are very similar to files available
 from [Get specified daily custom reports][3]
-, the same guide applies, with the exception of the recommendation for time ranges. To migrate from the v1 monthly files,
+, the same guide applies, except the recommendation for time ranges. To migrate from the v1 monthly files,
 request all pages for each day in the month. Requests are limited to 24 hours at a time in the v2 API.
 
 ### Monthly summary by tag files
@@ -342,7 +342,7 @@ See the sections below for differences between the v1 API and v2 API and recomme
 
 #### Response format
 
-The v1 API response contains a link to a zip file, which contains a tsv file for each chosen tag.
+The v1 API response contains a link to a ZIP file, containing a TSV file for each chosen tag.
 
 The v2 API response returns the usage attribution data in JSON format.
 
@@ -351,7 +351,7 @@ as needed to the JSON data to create the format that best suits your needs.
 
 #### Tag breakdown
 
-In the v1 API, there is a separate tsv file for each chosen tag.
+In the v1 API, there is a separate TSV file for each chosen tag.
 
 In the v2 API, you can select the tag breakdown by supplying a tag configuration in `tag_breakdown_keys` as a comma-separated list.
 

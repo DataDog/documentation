@@ -9,7 +9,7 @@ further_reading:
 
 ## Summary
 Users of the v1 APIs should recognize familiar concepts in the v2 hourly usage API,
-albeit represented in slightly different format.
+just represented in a slightly different format.
 
 The most notable differences between the v1 API and the v2 API are that the v2 API:
 * Consolidates all products to one endpoint
@@ -26,39 +26,39 @@ and time period. The initial set of product families mostly aligns with the v1 A
 with the full mapping outlined below. There is also a special `all` product family that retrieves
 the usage for all other product families.
 
-The families and usage types are as follows:
-1. **all**
+The families and usage types:
+- **all**
     * _Contains all other product families_
-2. **analyzed_logs**
+- **analyzed_logs**
     * `analyzed_logs`
-3. **application_security**
+- **application_security**
     * `app_sec_host_count`
-4. **audit_logs**
+- **audit_logs**
     * `lines_indexed`
-5. **serverless**
+- **serverless**
     * `func_count`
     * `invocations_sum`
-6. **ci_app**
+- **ci_app**
     * `ci_pipeline_indexed_spans`
     * `ci_test_indexed_spans`
     * `ci_visibility_pipeline_committers`
     * `ci_visibility_test_committers`
-7. **cspm**
+- **cspm**
     * `aas_host_count`
     * `azure_host_count`
     * `compliance_host_count`
     * `container_count`
     * `host_count`
-8. **cws**
+- **cws**
     * `cws_container_count`
     * `cws_host_count`
-9. **dbm**
+- **dbm**
     * `dbm_host_count`
     * `dbm_queries_count`
-10. **fargate**
+- **fargate**
     * `avg_profiled_fargate_tasks`
     * `tasks_count`
-11. **infra_hosts**
+- **infra_hosts**
     * `agent_host_count`
     * `alibaba_host_count`
     * `apm_azure_app_service_host_count`
@@ -72,9 +72,9 @@ The families and usage types are as follows:
     * `infra_azure_app_service`
     * `opentelemetry_host_count`
     * `vsphere_host_count`
-12. **incident_management**
+- **incident_management**
     * `monthly_active_users`
-13. **indexed_logs**
+- **indexed_logs**
     * `logs_indexed_events_3_day_count`
     * `logs_live_indexed_events_3_day_count`
     * `logs_rehydrated_indexed_events_3_day_count`
@@ -105,15 +105,15 @@ The families and usage types are as follows:
     * `logs_indexed_events_custom_day_count`
     * `logs_live_indexed_events_custom_day_count`
     * `logs_rehydrated_indexed_events_custom_day_count`
-14. **indexed_spans**
+- **indexed_spans**
     * `indexed_events_count`
     * `ingested_spans`
     * `ingested_events_bytes`
-15. **iot**
+- **iot**
     * `iot_device_count`
-16. **lambda_traced_invocations**
+- **lambda_traced_invocations**
     * `lambda_traced_invocations_count`
-17. **logs**
+- **logs**
     * `billable_ingested_bytes`
     * `indexed_events_count`
     * `ingested_events_bytes`
@@ -121,45 +121,45 @@ The families and usage types are as follows:
     * `logs_live_ingested_bytes`
     * `logs_rehydrated_indexed_count`
     * `logs_rehydrated_ingested_bytes`
-18. **network_flows**
+- **network_flows**
     * `indexed_events_count`
-19. **network_hosts**
+- **network_hosts**
     * `host_count`
-20. **observability_pipelines**
+- **observability_pipelines**
     * `observability_pipelines_bytes_processed`
-21. **online_archive**
+- **online_archive**
     * `online_archive_events_count`
-22. **profiling**
+- **profiling**
     * `avg_container_agent_count`
     * `host_count`
-23. **rum**
+- **rum**
     * `browser_rum_units`
     * `mobile_rum_units`
     * `rum_units`
-24. **rum_browser_sessions**
+- **rum_browser_sessions**
     * `replay_session_count`
     * `session_count`
-25. **rum_mobile_sessions**
+- **rum_mobile_sessions**
     * `session_count`
     * `session_count_android`
     * `session_count_ios`
     * `session_count_reactnative`
-26. **sds**
+- **sds**
     * `logs_scanned_bytes`
     * `total_scanned_bytes`
-27. **snmp**
+- **snmp**
     * `snmp_devices`
-28. **synthetics_api**
+- **synthetics_api**
     * `check_calls_count`
-29. **synthetics_browser**
+- **synthetics_browser**
     * `browser_check_calls_count`
-30. **timeseries**
+- **timeseries**
     * `num_custom_input_timeseries`
     * `num_custom_output_timeseries`
     * `num_custom_timeseries`
 
 
-The following table shows how the families and usage types above map to the v1 hourly usage endpoints. Usage type and datapoint are the same, except where explicitly noted otherwise:
+This list shows how the families and usage types above map to the v1 hourly usage endpoints. Usage type and datapoint are the same, except where explicitly noted otherwise:
 
 ENDPOINT | PRODUCT FAMILY
 `<base_url>/api/v1/usage/hosts` | infra_hosts
@@ -450,7 +450,7 @@ If a result has more pages, the record ID of the next page is returned in the fi
 `meta.pagination.next_record_id`. Clients should then pass that id in the parameter `pagination[next_record_id]`. There
 are no more pages to retrieve when the `meta.pagination.next_record_id` field is not set.
 
-### Pseudo-code example
+### Code example
 ```
 response := GetHourlyUsage(start_time, end_time, product_families)
 cursor := response.metadata.pagination.next_record_id
