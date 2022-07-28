@@ -51,7 +51,7 @@ With these three tags, you can:
 
 ## Configuration
 
-To begin configuration of unified service tagging, choose your environment:
+To start configuring unified service tagging, choose your environment:
 
 - [Containerized](#containerized-environment)
 - [Non-Containerized](#non-containerized-environment)
@@ -284,7 +284,7 @@ If your service has no need for the Datadog environment variables (for example, 
 
 Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, Datadog recommends scoping these environment variables to a single process.
 
-To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], and [StatsD metrics][10], either:
+To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], [RUM resources][10], [Synthetics tests][11], [StatsD metrics][12], or system metrics, either:
 
 1. Export the environment variables in the command for your executable:
    
@@ -292,7 +292,7 @@ To form a single point of configuration for all telemetry emitted directly from 
    DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
    ```
 
-2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. When the service process starts, it has access to those variables.
+2. Or use [Chef][13], [Ansible][14], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. When the service process starts, it has access to those variables.
 
    {{< tabs >}}
    {{% tab "Traces" %}}
@@ -354,57 +354,55 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    {{% tab "System Metrics" %}}
 
-   You can add `env` and `service` tags to your infrastructure metrics.
+   You can add `env` and `service` tags to your infrastructure metrics. In non-containerized contexts, tagging for service metrics is configured at the Agent level.
 
-   The tagging configuration for service metrics lives closer to the Agent in non-containerized contexts.
-   Given that this configuration does not change for each invocation of a service's process, adding `version`
-   to the configuration is not recommended.
+   Because this configuration does not change for each invocation of a service's process, adding `version` is not recommended.
 
-   #### Single service per host
+#### Single service per host
 
-   Set the following configuration in the Agent's [main configuration file][1]:
+Set the following configuration in the Agent's [main configuration file][1]:
 
-   ```yaml
-   env: <ENV>
-   tags:
-       - service:<SERVICE>
-   ```
+```yaml
+env: <ENV>
+tags:
+  - service:<SERVICE>
+```
 
-   This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.
+This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.
 
-   #### Multiple services per host
+#### Multiple services per host
 
-   Set the following configuration in the Agent's [main configuration file][1]:
+Set the following configuration in the Agent's [main configuration file][1]:
 
-   ```yaml
-   env: <ENV>
-   ```
+```yaml
+env: <ENV>
+```
 
-   To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
+To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
 
-   ```yaml
-   init_config:
-   instances:
-       - name: web-app
-         search_string: ["/bin/web-app"]
-         exact_match: false
-         service: web-app
-       - name: nginx
-         search_string: ["nginx"]
-         exact_match: false
-         service: nginx-web-app
-   ```
+```yaml
+init_config:
+instances:
+    - name: web-app
+      search_string: ["/bin/web-app"]
+      exact_match: false
+      service: web-app
+    - name: nginx
+      search_string: ["nginx"]
+      exact_match: false
+      service: nginx-web-app
+```
 
-   **Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion when you are interpreting the metrics, it is recommended that you configure the `service` tag only in the configuration of the process check.
+**Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
 
 [1]: /agent/guide/agent-configuration-files
 [2]: /integrations/process
-   {{% /tab %}}
-   {{< /tabs >}}
+    {{% /tab %}}
+    {{< /tabs >}}
 
 ### Serverless environment
 
-For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][13].
+For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][15].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -418,7 +416,9 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/
-[10]: /integrations/statsd/
-[11]: https://www.chef.io/
-[12]: https://www.ansible.com/
-[13]: /serverless/configuration/#connect-telemetry-using-tags
+[10]: /real_user_monitoring/connect_rum_and_traces/
+[11]: /getting_started/synthetics/
+[12]: /integrations/statsd/
+[13]: https://www.chef.io/
+[14]: https://www.ansible.com/
+[15]: /serverless/configuration/#connect-telemetry-using-tags
