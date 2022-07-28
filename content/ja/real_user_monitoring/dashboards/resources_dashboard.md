@@ -1,12 +1,15 @@
 ---
-title: RUM リソースダッシュボード
-kind: documentation
 further_reading:
-  - link: /real_user_monitoring/explorer
-    tag: ドキュメント
-    text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer
+  tag: ドキュメント
+  text: RUM エクスプローラーについて
+kind: documentation
+title: RUM リソースダッシュボード
 ---
-リソースダッシュボードから、アプリケーションのリソースに関するインサイトを入手できます。ダッシュボードは4つのセクションに分かれています。
+
+## 概要
+
+リソースダッシュボードから、アプリケーションのリソースに関するインサイトを入手できます。以下が表示されます。
 
 - **Resources overview**:
     最もロードされているリソースとその関連ステータスコード、そしてリソースタイプ別に分割されたサイズを視覚的に表示します。
@@ -15,11 +18,11 @@ further_reading:
 - **Third party resources**:
     サードパーティのリソースに関するインサイトを表示します。リソースのカテゴリーに関する詳細は、[リソースドキュメント][1]を参照してください。
 - **Resource load timings**:
-    ブラウザ API から収集した[リソースのタイミング][2]傾向を監視します。
+    ブラウザ SDK によって収集した[リソースのタイミング][2]傾向を監視します。
 
 {{< img src="real_user_monitoring/dashboards/resources_dashboard.png" alt="リソースダッシュボード" >}}
 
-表示される情報に関する詳細は、[RUM データ収集のドキュメント][3]を参照してください。
+表示されるデータの詳細については、[RUM ブラウザデータ収集][3]を参照してください。
 
 ## その他の参考資料
 
