@@ -21,7 +21,7 @@ further_reading:
 
 ## Compatibility
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -195,6 +195,34 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 | Framework Web Server    | Minimum Framework Version   |
 | ----------------------- | --------------------------- |
 | Express                 | 4.0                         |
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+
+### Supported Python versions
+
+The Datadog Python library supports the following Python versions:
+
+- Python 2.7, 3.5 and higher
+
+These are supported on the following architectures:
+
+- Linux (GNU) x86-64
+- Alpine Linux (musl) x86-64
+- macOS (Darwin) x86-64
+- Windows (msvc) x86, x86-64
+
+You can monitor application security for Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+
+### Supported frameworks
+
+| Framework Web Server | Minimum Framework Version |
+|----------------------|---------------------------|
+| Django               | 1.8                       |
+| Flask                | 0.10                      |
+
+Support for query strings is not available for Flask.
 
 {{< /programming-lang >}}
 
@@ -436,7 +464,7 @@ To protect users' data, sensitive data scanning is activated by default in ASM. 
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the values and any child nodes associated with the key are redacted.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
 
-<div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong> 
+<div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong>
 
 <p>You can also configure scanning patterns in code:</p>
 
