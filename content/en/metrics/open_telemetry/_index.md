@@ -18,7 +18,7 @@ There are three available workflows for sending OTel metrics to Datadog. Choose 
 - If you are collecting telemetry data from only OTel SDKs and the Datadog Agent, and you do not plan on routing data to vendors other than Datadog:
   - Use the [OTLP ingestion](#otlp-ingest) workflow.
 - Otherwise, if you are collecting telemetry data from a variety of sources (for example: Prometheus metrics) or you are routing data to multiple vendors:
-  - If you require full range of Datadog capabilities (for example: Datadog Agent capabilities, infrastructure monitoring, container monitoring, integrations):
+  - If you require a full range of Datadog capabilities (for example: Datadog Agent capabilities, infrastructure monitoring, container monitoring, integrations):
     - Use the [OTLP Exporter](#otlp-exporter) workflow.
   - Otherwise, if you do not require these capabilities:
     - Use the [Datadog Exporter](#datadog-exporter) workflow.
