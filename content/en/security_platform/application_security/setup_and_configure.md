@@ -205,7 +205,7 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 The Datadog Python library supports the following Python versions:
 
 - Python 2.7.0 and higher
-- Python 3.5.0 and higher
+2.7, 3.5 and higher
 
 These are supported on the following architectures:
 
