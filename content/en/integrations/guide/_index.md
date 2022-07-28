@@ -1,7 +1,7 @@
 ---
 title: Integration Guides
 kind: guide
-disable_sidebar: true
+disable_toc: true
 private: true
 ---
 

@@ -4,7 +4,7 @@ kind: guide
 aliases:
   - /synthetics/faq/uptime-check-internal-website/ 
 private: true
-disable_sidebar: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="General Guides:" >}}
