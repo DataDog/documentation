@@ -22,14 +22,14 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 ## Get started
 
-1. Update your Datadog Python library package to at least version 1.2.2 or later. Run the following:
+1. **Update your Datadog Python library package** to at least version 1.2.2 or later. Run the following:
    ```shell
     pip install --upgrade ddtrace
    ```
 
    For information about which language and framework versions are supported by the library, see the [Compatibility][1] section of the ASM Setup and Configure documentation.
 
-2. Enable ASM when starting the Python application.
+2. **Enable ASM when starting the Python application**.
 
    ```bash
    DD_APPSEC_ENABLED=true ddtrace-run python app.py
