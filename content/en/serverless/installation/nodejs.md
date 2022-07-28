@@ -241,6 +241,11 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     - Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+    - If you are using ESModule with the container, you will need to remove the `handler.js` file. This file exists for Node 12 and will be removed when AWS deprecates Node 12 support.
+      ```dockerfile
+      RUN rm node_modules/datadog-lambda-js/dist/handler.js
+      CMD ["node_modules/datadog-lambda-js/dist/handler.handler"]
+      ```
 
     **Note**: If your Lambda function runs on `arm64`, you must either build your container image in an arm64-based Amazon Linux environment or [apply the Datadog wrapper in your function code][2] instead. You may also need to do that if you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection.
 
