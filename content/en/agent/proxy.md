@@ -287,7 +287,7 @@ frontend network_devices_snmp_traps_frontend
     default_backend datadog-network-devices-snmp-traps
 
 # This declares the endpoint where your Agents connect for
-# sending Instrumentations Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
+# sending Instrumentation Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
 frontend instrumentation_telemetry_data_frontend
     bind *:3843
     mode tcp
@@ -537,7 +537,7 @@ frontend network_devices_snmp_traps_frontend
 
 
 # This declares the endpoint where your Agents connect for
-# sending Instrumentations Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
+# sending Instrumentation Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
 frontend instrumentation_telemetry_data_frontend
     bind *:3843 ssl crt <PATH_TO_PROXY_CERTIFICATE>
     mode tcp
