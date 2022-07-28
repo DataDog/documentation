@@ -6,17 +6,37 @@
         {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
         {{ $object_id := md5 $rel_path -}}
         {{ $title := $page.Params.integration_title | default $page.Title }}
+        {{ $tags := slice }}
 
+        {{- /* Better way to do this? */ -}}
+        {{ if in $page.RelPermalink "api/latest" }}
+            {{ $tags = $tags | append "api_latest" }}
+        {{ else if in $page.RelPermalink "/guide/" }}
+            {{ $tags = $tags | append "guide" }}
+        {{ else if in $page.RelPermalink "account_management/rbac/permissions" }}
+            {{ $tags = $tags | append "rbac_permissions" }}
+        {{ else if in $page.RelPermalink "/getting_started/" }}
+            {{ $tags = $tags | append "getting_started" }}
+        {{ else if in $page.RelPermalink "/security_platform/default_rules" }}
+            {{ $tags = $tags | append "default_rules" }}
+        {{ else if in $page.RelPermalink "/integrations/" }}
+            {{ $tags = $tags | append "integrations" }}
+        {{ else }}
+            {{ $tags = $tags | append "docs" }}
+        {{ end }}
+    
         {{- $.Scratch.Add "algoliaindex" (
             dict "objectID" $object_id 
             "title" $title
             "description" $page.Description
             "type" $page.Type
-            "content" $page.Plain
             "permalink" $page.Permalink
             "relpermalink" $page.RelPermalink
             "language" $page.Language.Lang
+            "tags" $tags
             ) -}}
     {{- end -}}
 {{- end -}}
+
+{{- /* Outputs final JSON object, copied to public/ folder. */ -}}
 {{- $.Scratch.Get "algoliaindex" | jsonify -}}
