@@ -99,7 +99,7 @@ Vector integrates with Datadog and offers out-of-the-box integrations with 60 di
 | [Vector][80]                          | Relay observability data to another Vector instance.                                      |
 
 ## Datadog Agent
-- [Aggregating Datadog agents with Vector](https://docs.datadoghq.com/agent/vector_aggregation/ )
+- [Aggregating Datadog agents with Vector][81]
 
 [1]: https://vector.dev/docs/reference/configuration/sources/apache_metrics/
 [2]: https://vector.dev/docs/reference/configuration/sources/aws_ecs_metrics/
@@ -181,3 +181,4 @@ Vector integrates with Datadog and offers out-of-the-box integrations with 60 di
 [78]: https://vector.dev/docs/reference/configuration/sinks/splunk_hec_metrics/
 [79]: https://vector.dev/docs/reference/configuration/sinks/statsd/
 [80]: https://vector.dev/docs/reference/configuration/sinks/vector/
+[81]: /integrations/observability_pipelines/integrate_vector_with_datadog/
