@@ -57,45 +57,45 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    {{% /tab %}}
    {{% tab "Kubernetes" %}}
 
-Update your configuration YAML file container for APM and add the `DD_APPSEC_ENABLED` environment variable:
+   Update your configuration YAML file container for APM and add the `DD_APPSEC_ENABLED` environment variable:
 
-```yaml
-spec:
-  template:
-    spec:
-      containers:
-        - name: <CONTAINER_NAME>
-          image: <CONTAINER_IMAGE>/<TAG>
-          env:
-            - name: DD_APPSEC_ENABLED
-              value: "true"
-```
+   ```yaml
+   spec:
+     template:
+       spec:
+         containers:
+           - name: <CONTAINER_NAME>
+             image: <CONTAINER_IMAGE>/<TAG>
+             env:
+               - name: DD_APPSEC_ENABLED
+                 value: "true"
+   ```
 
-{{% /tab %}}
-{{% tab "AWS ECS" %}}
+   {{% /tab %}}
+   {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file by adding the following in the environment section:
+   Update your ECS task definition JSON file by adding the following in the environment section:
 
-```json
-"environment": [
-  ...,
-  {
-    "name": "DD_APPSEC_ENABLED",
-    "value": "true"
-  }
-]
-```
+   ```json
+   "environment": [
+     ...,
+     {
+       "name": "DD_APPSEC_ENABLED",
+       "value": "true"
+     }
+   ]
+   ```
 
-{{% /tab %}}
-{{% tab "AWS Fargate" %}}
+   {{% /tab %}}
+   {{% tab "AWS Fargate" %}}
 
-Initialize ASM in your code or set the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
-```shell
-DD_APPSEC_ENABLED=true ddtrace-run python app.py
-```
+   Initialize ASM in your code or set the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
+   ```shell
+   DD_APPSEC_ENABLED=true ddtrace-run python app.py
+   ```
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
 {{% appsec-getstarted-2-canary %}}
 
