@@ -7,7 +7,7 @@ requests:
     description: "The JMX integration enables collection of metrics, logs, and traces from JVM-based applications. For example, the JMX integration is already used for official integrations like Solr, Tomcat, Cassandra, and more. Metrics generated through JMX-based integrations not natively supported by Datadog are considered [custom metrics](https://docs.datadoghq.com/metrics/custom_metrics/)."
     link: "/integrations/java"
     image: "int_jmx.png"
-  - name: "Custom Metrics and Integrations"
+  - name: "Custom metrics and integrations"
     description: "Submit custom metrics for business stats using [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/) and the [API](https://docs.datadoghq.com/api/latest/metrics/). Datadog Agent integrations are Python files querying for metrics. All Agent code is open source, so it's possible to write your own [custom Agent check](https://docs.datadoghq.com/developers/custom_checks/) or [custom Agent integration](https://docs.datadoghq.com/developers/integrations/). The [integrations-extras GitHub repository](https://github.com/DataDog/integrations-extras) contains many community-developed custom integrations."
     link: "metrics/custom_metrics"
     image: "int_custom_metrics.png"
