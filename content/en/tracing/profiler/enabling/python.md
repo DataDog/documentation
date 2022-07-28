@@ -82,11 +82,11 @@ prof.start()
 ## Caveats
 
 When your process forks using `os.fork`, the profiler is actually stopped in
-the child process and needs to be restarted. For Python 3.7+ on Unix platforms,
-a new profiler is automatically started.
+the child process and needs to be restarted. For Python 3.7+, a new profiler is
+automatically started.
 
-If you use Python < 3.7, or run on a non-Unix platform, you need to manually
-start a new profiler in your child process.
+If you use Python < 3.7, you need to manually start a new profiler in your
+child process.
 
 ```python
 # For ddtrace-run users, call this in your child process
