@@ -183,9 +183,6 @@ Real User Monitoring から生成されたトレースが、APM インデック�
 `x-datadog-sampling-priority: 1`
 : Agent がトレースを維持するようにします。
 
-`x-datadog-sampled: 1`
-Real User Monitoring SDK から生成されます。このリクエストがサンプリング用に選択されていることを示します。
-
 **注**: 上記 HTTP ヘッダーは CORS セーフリストに登録されていないため、SDK が監視するように設定されているリクエストを扱うサーバーで [Access-Control-Allow-Headers を構成][16]する必要があります。サーバーは、すべてのリクエストの前に SDK によって作られる[プレフライトリクエスト][17]も許可する必要があります (OPTIONS リクエスト)。
 
 ## APM クオータへの影響

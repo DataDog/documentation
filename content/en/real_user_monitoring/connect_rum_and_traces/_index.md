@@ -183,9 +183,6 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 `x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
 
-`x-datadog-sampled: 1`
-: Generated from the Real User Monitoring SDK. Indicates this request is selected for sampling.
-
 **Note**: These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][16] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][17] (OPTIONS requests), which are made by the SDK prior to every request.
 
 ## How are APM quotas affected?
