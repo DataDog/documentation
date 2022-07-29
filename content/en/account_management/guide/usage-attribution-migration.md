@@ -14,7 +14,7 @@ deprecated, and there are two types: The monthly
 API ([Get usage attribution][1]), and the file
 based APIs ([Get the list of available daily custom reports][2], [Get specified daily custom reports][3],
 [Get the list of available monthly custom reports][4], and
-[Get specified monthly custom reports][5]). To use this guide, find the section below for the v1 APIs you are currently use, and follow the instructions to migrate to the corresponding v2 APIs.
+[Get specified monthly custom reports][5]). To use this guide, find the section below for the v1 APIs you are currently using, and follow the instructions to migrate to the corresponding v2 APIs.
 
 ## Monthly API
 
@@ -238,7 +238,7 @@ request.
 In the v2 API, you can retrieve data for arbitrary time bounds, up to 24 hours at a time, using the `start_hr`
 and `end_hr` parameters.
 
-To migrate to the v2 API, request data with `start_hr` as midnight (00 hour) on the desired day
+To migrate to the v2 API, request data with `start_hr` as midnight (`00` hour) on the desired day
 and `end_hr` as midnight on the next day.
 
 #### Pagination
@@ -403,9 +403,8 @@ To migrate to the v2 API, retrieve total usage from the `metadata.aggregates` se
 In the v1 API, some usage is returned with decimal precision. Example:
 
 ```
-... container_usage ...
-... 55.4            ...
-...
+container_usage
+55.4
 ```
 
 In the v2 API, usage is returned with integer precision. Example:
@@ -421,9 +420,6 @@ of the parent, because tag configurations are also applied to child orgs.
 In the v2 API, if the parameter `include_descendants=true` is supplied (this is the default), the response contains data for the parent org and all children of the parent. This includes all data from tag configurations
 inherited from the parent org to the child orgs, and also includes any tag configurations set directly on those child orgs. The origin of a given tag configuration can be discerned from the `tag_config_source` field.
 
-In the v2 API, if the parameter `include_descendants=true` is supplied (this is the default), the response
-contains data for the parent org and all children of the parent. This includes all data from tag configurations
-inherited from the parent org to the child orgs, and also includes any tag configurations set directly on those child orgs.
 
 #### Serverless Monitoring Usage
 
