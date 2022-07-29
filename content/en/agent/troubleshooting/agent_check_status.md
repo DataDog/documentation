@@ -18,6 +18,7 @@ If you are experiencing issues with a given Agent Check, use these commands for 
 - [Further Reading](#further-reading)
 
 **Note**: Replace `<CHECK_NAME>` in the examples below with any Agent check. For example: `activemq`, `ceph`, or `elastic`. Review an [integration's documentation][1] to confirm the Agent check name.
+
 **Note**: To disable a service check, rename `/conf.d/<CHECK_NAME>.d/conf.yaml` to something other than `.yaml`, `.yml` file extension, like `conf.yaml.disable`.
 
 ## Linux
