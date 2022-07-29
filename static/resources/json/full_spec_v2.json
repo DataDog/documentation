@@ -91921,7 +91921,7 @@
             }
           },
           {
-            "description": "Comma separated list of product families to retrieve. Available families are `all`, `analyzed_logs`,\n`application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `cws`, `dbm`, `fargate`,\n`infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`, `iot`,\n`lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `observability_pipelines`,\n`online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`, `sds`, `snmp`,\n`synthetics_api`, `synthetics_browser`, and `timeseries`.",
+            "description": "Comma separated list of product families to retrieve. Available families are `all`, `analyzed_logs`,\n`application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,\n`infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`, `iot`,\n`lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `observability_pipelines`,\n`online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`, `sds`, `snmp`,\n`synthetics_api`, `synthetics_browser`, and `timeseries`.",
             "in": "query",
             "name": "filter[product_families]",
             "required": true,
