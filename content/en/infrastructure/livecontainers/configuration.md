@@ -56,7 +56,7 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 
     **Note**: For the `apps` apiGroups, Live Containers need permissions
     to collect common kubernetes resources (`pods`, `services`, `nodes`, etc.),
-    which should be already in the RBAC if you followed [Cluster Agent Setup][1]. But if they are missing, ensure they are added (after `deployments`, `replicasets`):
+    which should be already in the RBAC if you followed [Cluster Agent Setup][2]. But if they are missing, ensure they are added (after `deployments`, `replicasets`):
 
     ```yaml
       ClusterRole:
