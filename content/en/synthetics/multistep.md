@@ -27,13 +27,13 @@ further_reading:
 
 Multistep API tests allow you to chain several [HTTP requests][1] at once to proactively monitor and ensure that the sophisticated journeys on your key services are available at anytime, and from anywhere. If you want to perform single requests to your services, leverage [API tests][2].
 
-You can:
+You can do the following actions:
 
 * Execute HTTP requests on API endpoints requiring authentication (for example, through a token)
 * Monitor key business transactions at the API level
 * Simulate end-to-end mobile application journeys
 
-{{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}}
+{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Multiple test requests as steps in a multistep API test" style="width:90%;" >}}
 
 If one of your services starts answering more slowly, or in an unexpected way (for example, unexpected response body or status code), your test can [**alert your team**][3], [**block your CI pipeline**][4], or even [**roll back the faulty deployment**][4].
 
@@ -54,9 +54,9 @@ Select the **Locations** for your Multistep API test. Multistep API tests can ru
 
 To create an HTTP request step, click **Create Your First Step**.
 
-{{< img src="synthetics/api_tests/create_request2.png" alt="Create your Multistep API test requests" style="width:100%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Create your Multistep API test requests" style="width:90%;" >}}
 
-**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a> to increase the limit.
+By default, a maximum of 10 steps can be created. To increase this limit, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 
 #### Define the request
 
@@ -121,7 +121,7 @@ To create an HTTP request step, click **Create Your First Step**.
 
 Click **Test URL** to try out the request configuration. A response preview appears.
 
-{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 #### Add assertions
 
@@ -138,7 +138,7 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
-{{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_multi.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -168,7 +168,7 @@ To parse your variable:
     * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
     * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][9].
 
-{{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 You can extract up to ten variables per test step.
 
@@ -291,7 +291,7 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][17] c
 
 If you are using the [custom role feature][18], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
-## Restrict access
+### Restrict access
 
 Access restriction is available for customers using [custom roles][19] on their accounts.
 
