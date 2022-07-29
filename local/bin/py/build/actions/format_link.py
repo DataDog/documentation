@@ -33,10 +33,20 @@ def prepare_file(file):
                 main_section.append(line)
                 if (
                     re.search(r"{{< tabs >}}", line.strip()) or
-                    re.search(r"{{< programming-lang-wrapper", line.strip()) or
-                    re.search(r"{{< site-region", line.strip())
+                    re.search(r"{{< programming-lang-wrapper", line.strip())
                    ):
                     state = 'tabs'
+                if re.search(r"{{< site-region", line.strip()):
+                    state = 'region'
+            elif state == 'region':
+                if re.search(r"{{< /site-region >}}", line.strip()):
+                    main_section.append(line)
+                    sub_sections.append(temp_section)
+                    temp_section = []
+                    state = 'main'
+                else:
+                    temp_section.append(line)
+
             elif state == 'tabs':
                 main_section.append(line)
                 if (
@@ -46,8 +56,7 @@ def prepare_file(file):
                     state = 'tab'
                 if (
                     re.search(r"{{< /tabs >}}", line.strip()) or
-                    re.search(r"{{< /programming-lang-wrapper >}}", line.strip()) or
-                    re.search(r"{{< /site-region >}}", line.strip())
+                    re.search(r"{{< /programming-lang-wrapper >}}", line.strip())
                    ):
                     state = 'main'
             elif state == 'tab':
@@ -60,10 +69,9 @@ def prepare_file(file):
                     sub_sections.append(temp_section)
                     temp_section = []
                 else:
-                    temp_section.append(line)
-
+                    temp_section.append(line)            
     if state != 'main':
-        raise ValueError
+        raise ValueError      
 
     return [main_section] + sub_sections
 
