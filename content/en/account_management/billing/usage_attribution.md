@@ -78,7 +78,7 @@ Monthly data can also be pulled using the tool's public API. For more informatio
 
 {{< site-region region="us,eu" >}}
 <div class="alert alert-info">
-Daily usage attribution is only available for organizations in a US1 or EU1 datacenter.
+Daily usage attribution is available for organizations in a US1 or EU1 datacenter.
 </div>
 
 
@@ -98,7 +98,7 @@ Daily data can also be pulled using the tool's public API. For more information,
 {{< site-region region="us3,us5,gov" >}}
 
 <div class="alert alert-info">
-Daily usage attribution is only available for organizations in a US1 or EU1 datacenter.
+Daily usage attribution is only available for organizations in a US1 or EU1 datacenter. On US3, US5, and FedGov, you can instead download a report.
 </div>
 
 To download a report for the last day of usage: 
