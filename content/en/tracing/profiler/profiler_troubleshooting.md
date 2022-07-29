@@ -7,7 +7,7 @@ further_reading:
       text: 'APM Troubleshooting'
 ---
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,linux" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,ddprof" >}}
 {{< programming-lang lang="java" >}}
 
 ## Missing profiles in the profile search page
@@ -273,7 +273,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 [1]: /help/
 {{< /programming-lang >}}
 
-{{< programming-lang lang="linux" >}}
+{{< programming-lang lang="ddprof" >}}
 
 ## Missing profiles in the profile search page
 
@@ -301,7 +301,7 @@ echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 
 There are two capabilities you can use to override the value of `perf_event_paranoid`:
 - `CAP_SYS_ADMIN`: adds many permissions and thus may be discouraged
-- `CAP_PERFMON`: adds BPF and perf_event_open capabilities (available on Linux v5.8 or later)
+- `CAP_PERFMON`: adds BPF and `perf_event_open` capabilities (available on Linux v5.8 or later)
 
 There are a few less common permissions issues:
 - The profiler is not always able to instrument processes that change their UID on startup. This is common for many webservers and databases.
@@ -328,7 +328,7 @@ The root of your profile is the frame annotated with the application name in par
 
 ## Error while loading shared libraries
 
-When using the Continuous Profiler for Linux as a dynamic library, your application may fail to launch with the following error:
+When using the Continuous Profiler for Compiled Languages as a dynamic library, your application may fail to launch with the following error:
 
 ```
 error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
@@ -341,8 +341,8 @@ This happens when your application is built with `libdd_profiling.so` as a depen
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-[3]: /tracing/profiler/enabling/linux/?tab=environmentvariables#configuration
-[4]: /tracing/profiler/enabling/linux/
+[3]: /tracing/profiler/enabling/ddprof/?tab=environmentvariables#configuration
+[4]: /tracing/profiler/enabling/ddprof/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
