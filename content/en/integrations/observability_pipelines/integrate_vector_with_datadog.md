@@ -27,8 +27,6 @@ Vector integrates with Datadog to aggregate logs, metrics, and traces from Datad
 
 `Datadog Agent -> Vector -> Datadog`
 
-## Prerequisites
-
 Before collecting your observability data from the Datadog Agent using Vector, you must:
 
 - Have the [Datadog Agent v6.35+ or v7.35+ installed][1].
@@ -61,8 +59,6 @@ vector:
 ```
 
 `VECTOR_HOST` is the hostname of the system running Vector, which should include the TCP port on which the Vector `datadog_agent` source is listening.
-
-#### Docker
 
 If you are using Docker, add the following to your Agent configuration file:
 
@@ -318,6 +314,8 @@ source = """
 
 ### Sink configuration
 
+#### Logs
+
 To send logs to Datadog, Vector must be configured with at least one [datadog_logs sink][14]. See the following example:
 
 {{< tabs >}}
@@ -370,6 +368,8 @@ default_api_key = "${DATADOG_API_KEY}"
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Metrics
+
 Similarly to send metrics to Datadog, Vector must be configured with at least one [datadog_metrics sink][15]. See the following example:
 
 {{< tabs >}}
@@ -418,6 +418,8 @@ sinks:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Traces
 
 To send traces to Datadog, Vector must be configured with a [datadog_traces sink][16]. See the following example:
 
