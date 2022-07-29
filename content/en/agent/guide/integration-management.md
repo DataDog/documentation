@@ -7,6 +7,11 @@ kind: guide
 
 The Agent comes with a set of bundled official Datadog integrations to allow users to start monitoring their applications quickly. These integrations are available as single Python packages, and you can upgrade them separately.
 
+{{< site-region region="us" >}}
+Testing [a link][1]
+
+{{< /site-region >}}
+
 For Agent v6.8+, the `datadog-agent integration` command allows users to manage the official Datadog integrations that are available for the Agent. It has the following subcommands:
 
  * [install](#install)
@@ -22,7 +27,7 @@ For Linux, execute the command as the `dd-agent` user. For Windows, execute the 
 ### Workflow
 
 1. Check the version of the integration installed in your Agent with the `show` command.
-2. Review the changelog of the specific integration on the [integrations-core][1] repository to identify the version you want.
+2. Review the changelog of the specific integration on the [integrations-core][2] repository to identify the version you want.
 3. Install the integration with the `install` command.
 4. Restart your Agent.
 
@@ -30,12 +35,12 @@ For Linux, execute the command as the `dd-agent` user. For Windows, execute the 
 
 ### Install
 
-Use the `datadog-agent integration install` command to install a specific version of an official Datadog integration (available on the [integrations-core repository][1]), provided that it is compatible with the version of the Agent. The command does this verification and exits with a failure in case of incompatibilities.
+Use the `datadog-agent integration install` command to install a specific version of an official Datadog integration (available on the [integrations-core repository][2]), provided that it is compatible with the version of the Agent. The command does this verification and exits with a failure in case of incompatibilities.
 
 An integration is compatible and installable if both conditions are met:
 
-1. The version is newer than the one [shipped with the Agent][2].
-2. It is compatible with the version of the [datadog_checks_base][3] in the installed Agent.
+1. The version is newer than the one [shipped with the Agent][3].
+2. It is compatible with the version of the [datadog_checks_base][4] in the installed Agent.
 
 **Note**: `datadog_checks_base` cannot be manually installed. The base check can only be upgraded by upgrading the Agent.
 
@@ -121,6 +126,7 @@ Windows:
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration freeze
 ```
 
-[1]: https://github.com/DataDog/integrations-core
-[2]: https://github.com/DataDog/integrations-core/blob/master/AGENT_INTEGRATIONS.md
-[3]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
+[1]: https://google.com
+[2]: https://github.com/DataDog/integrations-core
+[3]: https://github.com/DataDog/integrations-core/blob/master/AGENT_INTEGRATIONS.md
+[4]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
