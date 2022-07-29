@@ -316,7 +316,7 @@ source = """
 {{% /tab %}}
 {{< /tabs >}}
 
-## Sink configuration
+### Sink configuration
 
 To send logs to Datadog, Vector must be configured with at least one [datadog_logs sink][14]. See the following example:
 
