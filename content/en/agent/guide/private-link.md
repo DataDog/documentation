@@ -84,14 +84,18 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
     ```
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][3].
-12. [Restart your Agent][4] to send data to Datadog through AWS PrivateLink.
+    
+12. If your Lambda Extension loads the Datadog API Key from AWS Secrets Manager using the ARN specified by the environment variable `DD_API_KEY_SECRET_ARN`, you need to [create a VPC endpoint for Secrets Manager][4].
+
+13. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
 
 
 
 [1]: /help/
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [3]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
-[4]: /agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
+[5]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 
 {{% tab "VPC peering" %}}
@@ -211,8 +215,10 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
     ```
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][8].
+    
+2. If your Lambda Extension loads the Datadog API Key from AWS Secrets Manager using the ARN specified by the environment variable `DD_API_KEY_SECRET_ARN`, you need to [create a VPC endpoint for Secrets Manager][9].
 
-2. [Restart the Agent][6].
+3. [Restart the Agent][6].
 
 
 [1]: /help/
@@ -223,6 +229,7 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 [6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [8]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 {{% /tab %}}
 {{< /tabs >}}
 
