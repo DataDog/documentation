@@ -665,7 +665,7 @@
               text: "Learn how to explore your RUM data"
     
     - action: pull-and-push-file
-      branch: alai97/front-matter-migration
+      branch: master
       globs:
       - 'docs/rum_collection/crash_reporting.md'
       options:
@@ -676,7 +676,7 @@
           kind: documentation
           beta: true
           description: "Set up Error Tracking for your iOS projects."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/alai97/front-matter-migration/docs/rum_collection/crash_reporting.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/crash_reporting.md"]
           aliases:
             - /real_user_monitoring/ios/crash_reporting/
           further_reading:
@@ -792,7 +792,7 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: louiszawadzki/rumm-2249/crash-reporting-docs
+      branch: main
       globs:
       - 'docs/crash_reporting.md'
       options:
@@ -803,7 +803,7 @@
           kind: documentation
           beta: true
           description: Set up Error Tracking for your React Native projects.
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/louiszawadzki/rumm-2249/crash-reporting-docs/docs/crash_reporting.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/crash_reporting.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "GitHub"
