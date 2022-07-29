@@ -33,6 +33,7 @@ If you are using the official [Datadog Helm Chart][1]:
         processAgent:
             enabled: true
     ```
+
 - Deploy a new release.
 
 In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
@@ -53,11 +54,9 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 
 2. Set the Cluster Agent ClusterRole with the following RBAC permissions.
 
-    Note in particular that for the `apps` and `batch` apiGroups, Live Containers need
-    permissions to collect common kubernetes resources (`pods`, `services`,
-    `nodes`, etc.), which should be already in the RBAC if you followed [Cluster
-    Agent Setup][2]. But if they are missing, ensure they are
-    added (after `deployments`, `replicasets`):
+    **Note**: For the `apps` apiGroups, Live Containers need permissions
+    to collect common kubernetes resources (`pods`, `services`, `nodes`, etc.),
+    which should be already in the RBAC if you followed [Cluster Agent Setup][1]. But if they are missing, ensure they are added (after `deployments`, `replicasets`):
 
     ```yaml
       ClusterRole:
@@ -82,6 +81,8 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
         resources:
         - deployments
         - replicasets
+        - daemonsets
+        - statefulsets
         verbs:
         - list
         - get
@@ -95,8 +96,16 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
         - list
         - get
         - watch
+      - apiGroups:
+       - networking.k8s.io
+       resources:
+       - ingresses
+       verbs:
+       - list
+       - watch
       ...
     ```
+
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect supported Kubernetes resources.
 
     If the `cluster-id` ConfigMap isn't created by the Cluster Agent, the Agent pod cannot collect resources. In such a case, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap, and then restart the Agent pod.
@@ -145,7 +154,7 @@ The following table presents the list of collected resources and the minimal Age
 | Services | 7.27.0 | 1.11.0 | 2.10.0 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
 
-### Instructions for previous Agent and Cluster Agent versions.
+### Instructions for previous Agent and Cluster Agent versions
 
 The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][2] and [Cluster Agent version >= 1.9.0][3] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and full instructions are retained here for reference.
 
@@ -169,60 +178,7 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 
 The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup][1] for configuration.
 
-1. Set the Cluster Agent container with the following environment variable:
-
-    ```yaml
-      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-        value: "true"
-    ```
-
-2. Set the Cluster Agent ClusterRole with the following RBAC permissions.
-
-    **Note**: For the `apps` apiGroups, Live Containers need permissions
-    to collect common kubernetes resources (`pods`, `services`, `nodes`, etc.),
-    which should be already in the RBAC if you followed [Cluster Agent Setup][1]. But if they are missing, ensure they are added (after `deployments`, `replicasets`):
-
-    ```yaml
-      ClusterRole:
-      - apiGroups:  # To create the datadog-cluster-id ConfigMap
-        - ""
-        resources:
-        - configmaps
-        verbs:
-        - create
-        - get
-        - update
-      ...
-      - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
-        - ""
-        resources:
-        - namespaces
-        verbs:
-        - get
-      ...
-      - apiGroups:  # To collect new resource types
-        - "apps"
-        resources:
-        - deployments
-        - replicasets
-        - daemonsets
-        - statefulsets
-        verbs:
-        - list
-        - get
-        - watch
-     - apiGroups:
-       - networking.k8s.io
-       resources:
-       - ingresses
-       verbs:
-       - list
-       - watch
-    ```
-
-    These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
-
-    If the `cluster-id` ConfigMap doesn't get created by the Cluster Agent, the Agent pod does not start, and falls into `CreateContainerConfigError` status. If the Agent pod is stuck because the ConfigMap doesn't exist, update the Cluster Agent permissions and restart its pods. This creates the ConfigMap and the Agent pod recovers automatically.
+**Note**: Please refer to the [latest configuration instructions][2] for steps **1** and **2**, only step **3** differs:
 
 3. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
 
@@ -244,6 +200,7 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
   ```
 
 [1]: /agent/cluster_agent/setup/
+[2]: /infrastructure/livecontainers/#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -254,7 +211,6 @@ You can add custom tags to Kubernetes resources to ease filtering inside the Kub
 Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable.
 
 **Note**: These tags only show up in the Kubernetes resources view.
-
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -273,7 +229,6 @@ If you are using the official Helm chart, add the environment variable on both t
       - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
         value: "tag1:value1 tag2:value2"
 ```
-
 
 Then deploy a new release.
 
@@ -295,8 +250,8 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 
 It is possible to include and/or exclude containers from real-time collection:
 
-* Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
-* Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.
+- Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
+- Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.
 
 Both arguments take an **image name** as value; regular expressions are also supported.
 
