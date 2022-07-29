@@ -33,7 +33,7 @@ You can:
 * Monitor key business transactions at the API level
 * Simulate end-to-end mobile application journeys
 
-{{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}}
+{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Multiple test requests as steps in a multistep API test" style="width:90%;" >}}
 
 If one of your services starts answering more slowly, or in an unexpected way (for example, unexpected response body or status code), your test can [**alert your team**][3], [**block your CI pipeline**][4], or even [**roll back the faulty deployment**][4].
 
@@ -54,9 +54,9 @@ Select the **Locations** for your Multistep API test. Multistep API tests can ru
 
 To create an HTTP request step, click **Create Your First Step**.
 
-{{< img src="synthetics/api_tests/ms_create_request.png" alt="Create your Multistep API test requests" style="width:100%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Create your Multistep API test requests" style="width:90%;" >}}
 
-**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a> to increase the limit.
+By default, a maximum of 10 steps can be created. To increase this limit, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 
 #### Define the request
 
