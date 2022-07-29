@@ -45,6 +45,6 @@ If you'd like your orchestrator (such as Kubernetes) to handle your memory limit
 
 This setting defines the maximum CPU percentage that the APM agent should be using. In non-Kubernetes environments it defaults to 50, which is equivalent to 0.5 cores (100 = 1 core). After this limit is reached, payloads will be refused until the CPU usage goes below the limit again. This is reflected by the `datadog.trace_agent.receiver.ratelimit` which represents the percentage of payloads that are currently being dropped (a value of 1 meaning that no traces are being dropped). This may also be visible in the [Service Table View][1] as a `Limited Resource` warning.
 
-If you'd like to leave it up to your orchestrator (or an external service) to manage resource limitations for the Datadog Agent, we recommend disabling this by setting the environment variable `DD_APM_MAX_CPU_PERCENT` to `0` (supported since Datadog Agent 7.23.0).
+If you want your orchestrator (or an external service) to manage resource limitations for the Datadog Agent, Datadog recommends disabling this by setting the environment variable `DD_APM_MAX_CPU_PERCENT` to `0` (supported since Datadog Agent 7.23.0).
 
 [1]: /tracing/trace_pipeline/ingestion_controls/#service-table-view
