@@ -72,7 +72,7 @@ If your application uses json logs format instead of appending trace_id and span
 ```php
 <?php
   $context = \DDTrace\current_context();
-  $logger->pushProcessor(function ($record) {
+  $logger->pushProcessor(function ($record) use ($context) {
       $record['dd'] = [
           'trace_id' => $context['trace_id'],
           'span_id'  => $context['span_id'],
