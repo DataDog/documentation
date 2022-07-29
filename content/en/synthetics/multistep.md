@@ -291,7 +291,7 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][17] c
 
 If you are using the [custom role feature][18], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
-## Restrict access
+### Restrict access
 
 Access restriction is available for customers using [custom roles][19] on their accounts.
 
