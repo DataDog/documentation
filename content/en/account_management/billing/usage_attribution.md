@@ -19,9 +19,9 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 Administrators can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 
 - Lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
-- Generates daily `.tsv` (tab separated values) files for most usage types.
+- Generates daily tab separated values (TSV) files for most usage types.
 - Summarizes usage at the end of each month.
-- Surfaces the data both in the UI and as a `.tsv` download.
+- Surfaces the data both in the UI and as a TSV download.
 
 The following usage types are not supported in this tool:
 
@@ -70,43 +70,23 @@ Once the reports start to be generated, they are updated daily and aggregated mo
 - If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
 - Previous months' reports are accessible through the time selector.
 - Monthly reports are not generated until the month is over. Each monthly report should appear by the second day of the following month.
-- Reports are downloadable with the **Download as CSV** button. These `.tsv` reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks.
+- Reports are downloadable in TSV format. These TSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks.
 
 Monthly data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][1].
 
 ### Daily usage attribution
 
 {{< site-region region="us,eu" >}}
-<div class="alert alert-info">
-Daily usage attribution is available for organizations in a US1 or EU1 datacenter.
-</div>
-
 
 This section provides daily reports at an hourly granularity to dig into time frames. It also provides a concatenation of all reports during a given month.
 
-- Clicking on a specific time period expands a view on the right where reports can be downloaded as a `.tsv`.
+- Clicking on a specific time period expands a view on the right where reports can be downloaded as a TSV file.
 - Data can be downloaded daily or at the end of the month.
 
 {{< img src="account_management/billing/usage_attribution/daily-usage-attribution.png" alt="Daily Usage Attribution data" style="width:100%;" >}}
 
 Daily data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
 
-[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
-
-
-{{< /site-region >}}
-{{< site-region region="us3,us5,gov" >}}
-
-<div class="alert alert-info">
-Daily usage attribution is only available for organizations in a US1 or EU1 datacenter. On US3, US5, and FedGov, you can instead download a report.
-</div>
-
-To download a report for the last day of usage: 
-1. From your [Usage][3] page, select `Past 1 Day` in the time frame selector.
-1. Click **Download as CSV**.
-
-[3]: https://app.datadoghq.com/billing/usage
-{{< /site-region >}}
 
 ### Interpreting the data
 
@@ -121,7 +101,7 @@ The table below shows a sample daily report for Infra usage by two tags: `app` a
 - An `<empty>` value means the resource was tagged with the respective tag but did not have a value.
 - No value means the resource was not tagged with that particular tag.
 - `|` (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
-- A valid tag value (see the [Defining Tags documentation][4]) refers to the actual value of the respective tag.
+- A valid tag value (see the [Defining Tags documentation][3]) refers to the actual value of the respective tag.
 
 #### Further data analysis
 
@@ -149,4 +129,5 @@ Each color block represents a unique tag value for each tag.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
-[4]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
+[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
+[3]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
