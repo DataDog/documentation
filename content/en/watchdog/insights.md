@@ -13,9 +13,26 @@ further_reading:
 
 ## Overview
 
-Watchdog Insights inform you of anomalies and error outliers that relate to your current view, including any facets or search terms. During an incident, use Watchdog Insights to focus on the highest priority data and speed up investigation.
+Datadog Watchdog constantly runs in the background, scanning for anomalies in your organization's entire data set. In contrast, Watchdog Insights meet you where you are within Datadog. Insights operate on your active product and your active query to show you a filtered, sorted list of anomalies. Using Watchdog Insights draws your attention to the most important data and accelerates your incident investigations.
 
-Each Insight highlights one outlier or anomaly affecting a subset of users. Depending on the product area, Watchdog Insights can detect different types of anomalies.
+Each Insight highlights one outlier or anomaly affecting a subset of users. Depending on the product area, Watchdog Insights can detect different types of anomalies. Examples include the following:
+- Error outliers
+- Latency outliers
+- Log anomalies
+- Lock pressure
+- Deadlocked threads
+
+## Navigation
+
+{{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights banner on the Logs Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" >}}
+
+The Watchdog Insights banner sits near the top of each page. Expand the banner for an overview. The highest priority Insights appear on the left. 
+
+Click **View all** to expand the panel.
+
+To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the Insight.
+
+For a detailed view of an Insight, click on the individual card. The full side panel opens from the right.
 
 ## Locations within Datadog
 
@@ -54,19 +71,8 @@ For more information, see [Watchdog Insights for RUM][6].
 Watchdog Insights appear on several pages within APM:
 - [Trace Explorer][7]
 - [Continuous Profiler][8]
-- Service Catalog (beta)
 - [Service Page][9]
 - [Resource Page][10]
-
-## Navigation
-
-{{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights banner on the Logs Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" >}}
-
-The Watchdog Insights banner sits near the top of each page. Expand the banner for an overview. The highest priority Insights appear on the left. 
-
-Click **View all** to expand the panel.
-
-Click an individual panel for a detailed view.
 
 [1]: /logs/explorer/watchdog_insights/#log-anomaly-detection
 [2]: /logs/explorer/watchdog_insights/#error-outliers
