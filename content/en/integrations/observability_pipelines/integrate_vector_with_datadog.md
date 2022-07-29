@@ -39,6 +39,8 @@ You must configure the [Datadog Agent](#datadog-agent-configuration) before sett
 
 ### Datadog Agent configuration
 
+#### Send logs to Vector
+
 To send logs to Vector, update the Agent configuration file, `datadog.yaml`, with the following:
 
 ```yaml
@@ -48,6 +50,8 @@ vector:
   logs.url: "http://<VECTOR_HOST>"
 
 ```
+
+#### Send metrics to Vector
 
 To send metrics, update the `datadog.yaml` file with the following:
 
@@ -60,7 +64,9 @@ vector:
 
 `VECTOR_HOST` is the hostname of the system running Vector, which should include the TCP port on which the Vector `datadog_agent` source is listening.
 
-If you are using Docker, add the following to your Agent configuration file:
+#### Using Docker
+
+If you are using Docker, add the following to your Agent configuration file, `datadog.yaml`:
 
 ```
 -e DD_VECTOR_METRICS_URL=http://<VECTOR_HOST>:<VECTOR_PORT>
@@ -530,6 +536,7 @@ compression = "gzip"
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Disk space
 
 You should provision at least 36 GiB per vCPU * of disk space. If you follow the recommendation of 8 vCPUs, you would provision 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs), allocating ​​48 GiB for metrics and 240 GiB for logs. You can add a volume to the Vector instances to hold the buffer in your Helm chart:
 
