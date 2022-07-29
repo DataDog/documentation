@@ -85,8 +85,8 @@ Images generated in reports show all data regardless of granular read restrictio
 [1]: /dashboards/widgets/change/
 [2]: /dashboards/widgets/distribution/
 [3]: /dashboards/widgets/geomap/
-[4]: /widgets/group/
-[5]: /widgets/heat_map/
+[4]: /dashboards/widgets/group/
+[5]: /dashboards/widgets/heat_map/
 [6]: /dashboards/widgets/monitor_summary/
 [7]: /dashboards/widgets/note/
 [8]: /dashboards/widgets/scatter_plot/
