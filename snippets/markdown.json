@@ -1,0 +1,189 @@
+{
+	"Region selector":{
+		"prefix": "region",
+		"body": [
+			"{{< site-region region=\"us,us3,us5,eu,gov\" >}}",
+			"{{< /site-region >}}"
+		],
+		"description": "Site region shortcode"
+	},
+	
+	"Frontmatter":{
+		"prefix": "frontmatter",
+		"body": [
+			"---",
+			"title: Doc Title",
+			"kind: <UPDATE>",
+			"disable_toc: false",
+			"aliases:",
+			"- /path-to-old-doc/",
+			"further_reading:",
+			"- link: \"logs/processing/pipelines\"",
+			"  tag: \"Documentation\"",
+			"  text: \"Log processing pipelines\"",
+            "---"
+		],
+		"description": "Frontmatter"
+	},
+	
+	"Further reading footer": {
+		"prefix": "further",
+		"body": [
+			"## Further reading",
+			"",
+			"{{< partial name=\"whats-next/whats-next.html\" >}}"
+		]
+	},
+	
+	"Further reading footer - integrations": {
+	"prefix": "further",
+	"body": [
+		"## Further reading",
+		"",
+		"Additional helpful documentation, links, and articles:",
+		"- [First link][1]"
+	]
+	},
+	
+	"Alert box":{
+		"prefix": "alert",
+		"body": [
+			"<div class=\"alert alert-${1|info,danger,warning|}\">Text containing an <a href=\"https://google.com\">HTML link.</a></div>"
+		],
+		"description": "Alert box with choice of info, danger, or warning"
+	},
+	
+	"Beta callout":{
+		"prefix": "beta",
+		"body": [
+			"{{< beta-callout url=\"https://google.com\" d-toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\">}}",
+			"Datadog Apps is currently in beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!",
+			  "{{< /beta-callout >}}"
+		],
+		"description": "Beta callout with all parameters"
+	},
+	
+	"Integration count":{
+		"prefix": "integration",
+		"body": [
+			"{{< translate key=\"integration_count\" >}}"
+		],
+		"description": "Integration count"
+	},
+	
+	"Tabs":{
+		"prefix": "tab",
+		"body": [
+			"{{< tabs >}}",
+			"{{% tab \"${1}\" %}}",
+			"",
+			"{{% /tab %}}",
+			"",
+			"{{% tab \"${2}\" %}}",
+			"",
+			"{{% /tab %}}",
+			"{{< /tabs >}}"
+		],
+		"description": "Tabs"
+	},
+	
+	"Tabs - integrations":{
+		"prefix": "tab",
+		"body": [
+			"<!-- xxx tabs xxx -->",
+			"<!-- xxx tab \"${1}\" xxx -->",
+			"",
+			"<!-- xxz tab xxx -->",
+			"",
+			"<!-- xxx tab \"${2}\" xxx -->",
+			"",
+			"<!-- xxz tab xxx -->",
+			"<!-- xxz tabs xxx -->"
+		],
+		"description": "Tabs - integrations"
+	},
+	
+	"Programming language":{
+		"prefix": "lang",
+		"body": [
+			"{{< programming-lang-wrapper langs=\"python\" >}}",
+			"",
+			"{{< programming-lang lang=\"python\" >}}",
+			"",
+			"{{< /programming-lang >}}",
+			"{{< /programming-lang-wrapper >}}"
+			
+		],
+		"description": "Programming language"
+	},
+	
+	"Table":{
+		"prefix": "table",
+		"body": [
+			"|      | Required    | Description |",
+			"| ---  | ----------- | ----------- |",
+			"|${1}|${2}|${3}|"
+			
+		],
+		"description": "Table"
+	},
+	
+	"Description list":{
+		"prefix": "list",
+		"body": [
+			"Service",
+			"",
+			": Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.",
+			"",
+			"Resource",
+			"",
+			": Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.",
+			"",
+			"`clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`",
+			": Required. A list of node selector terms. The terms are ORed.",
+			"`site`",
+			": Set the site of the Datadog intake for Agent data:  {{< region-param key=\"dd_site\" code=\"true\" >}}. Defaults to `datadoghq.com`."			
+		],
+		"description": "Description list"
+	},
+	
+	
+	"Agent config":{
+		"prefix": "agent",
+		"body": [
+			"{{< agent-config type=\"${1|basic configuration,advanced configuration,log collection configuration,trace collection configuration,process collection configuration,system probe configuration,dogstatsd configuration,jmx configuration,logging configuration,autoconfig configuration,container autodiscovery configuration,cluster check configuration,container detection,docker tag extraction,kubernetes tag extraction,ecs integration configuration,cri integration configuration,containerd integration configuration,kubernetes kubelet connectivity configuration,kubernetes apiserver integration configuration|}\" filename=\"datadog.yaml\" collapsible=\"true\" disable_copy=\"true\">}}"
+		],
+		"description": "Description list"
+	},
+	
+	"Reuse":{
+		"prefix": "reuse",
+		"body": [
+			"{{% reuse/prodname/reuse_filename %}}"
+		],
+		"description": "General reuse shortcode"
+	},
+	
+	"Code block":{
+		"prefix": "code",
+		"body": [
+			"{{< code-block lang=\"java\" filename=\"block.java\" disable_copy=\"true\" collapsible=\"true\" >}}",
+			"import com.datadoge.docs.SweetCodeBlock;",
+			"import com.datadoge.docs.TryItOut;",
+			"public class CodeBlocksForLife {",
+			"    do stuff",
+			"    }",
+			"}",
+			"{{< /code-block >}}"
+		],
+		"description": "Code block"
+	},
+	
+	"Check mark":{
+		"prefix": "check",
+		"body": [
+			"{{< X >}}"
+		],
+		"description": "Check mark"
+	}
+}
