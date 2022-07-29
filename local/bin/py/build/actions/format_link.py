@@ -71,7 +71,7 @@ def prepare_file(file):
                 else:
                     temp_section.append(line)            
     if state != 'main':
-        raise ValueError      
+        raise ValueError
 
     return [main_section] + sub_sections
 
