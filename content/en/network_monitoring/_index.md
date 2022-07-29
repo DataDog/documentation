@@ -16,6 +16,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
     tag: "Blog"
     text: "Monitor datacenters and network devices with Datadog"
+  - link: "https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/"
+    tag: "Blog"
+    text: "Monitor Cilium-managed infrastructure with Datadog"
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}
