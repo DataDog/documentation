@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Datadog Watchdog constantly runs in the background, scanning for anomalies in your organization's entire data set. In contrast, Watchdog Insights meet you where you are within Datadog. Insights operate on your active product and your active query to show you a filtered, sorted list of anomalies. Using Watchdog Insights draws your attention to the most important data and accelerates your incident investigations.
+Datadog Watchdog constantly runs in the background, scanning for anomalies in your organization's entire data set. In contrast, Watchdog Insights meet you where you are within Datadog. Insights operate on your active product and your active query to show you a filtered and sorted list of anomalies. Using Watchdog Insights draws your attention to the most important data and accelerates your incident investigations.
 
 Each Insight highlights one outlier or anomaly affecting a subset of users. Depending on the product area, Watchdog Insights can detect different types of anomalies. Examples include the following:
 - Error outliers
@@ -73,6 +73,10 @@ Watchdog Insights appear on several pages within APM:
 - [Continuous Profiler][8]
 - [Service Page][9]
 - [Resource Page][10]
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/watchdog_insights/#log-anomaly-detection
 [2]: /logs/explorer/watchdog_insights/#error-outliers
