@@ -680,12 +680,12 @@
           aliases:
             - /real_user_monitoring/ios/crash_reporting/
           further_reading:
-            - link: "https://datadoghq.com/blog/ios-crash-reporting-datadog/"
-              tag: "Blog"
-              text: "Introducing iOS Crash Reporting and Error Tracking"
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "GitHub"
               text: "dd-sdk-ios Source code"
+            - link: "https://datadoghq.com/blog/ios-crash-reporting-datadog/"
+              tag: "Blog"
+              text: "Introducing iOS Crash Reporting and Error Tracking"
             - link: "real_user_monitoring/error_tracking/"
               tag: "Documentation"
               text: "Learn about Error Tracking"
@@ -742,12 +742,12 @@
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "GitHub"
               text: "dd-sdk-reactnative Source code"
-            - link: "real_user_monitoring/explorer/"
-              tag: "Documentation"
-              text: "Learn how to explore your RUM data"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
-              text: "Monitor your React Native applications"   
+              text: "Monitor your React Native applications" 
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"  
     - action: pull-and-push-file
       branch: main
       globs:
