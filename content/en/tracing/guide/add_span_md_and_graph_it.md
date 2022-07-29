@@ -207,7 +207,7 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
           $span = \DDTrace\active_span();
           if (null !== $span) {
               // customer_id -> 254889
-              $span->setTag('customer_id', $request->get('customer_id'));
+              $span->meta['customer_id'] = $request->get('customer_id');
           }
 
           // [...]
