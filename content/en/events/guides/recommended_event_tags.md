@@ -18,23 +18,23 @@ As a best practice, Datadog recommends the use of [unified service tagging][1], 
 
 | **Attribute** | **Notes**                                                                                                                                                                                    |
 |---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| env           | The environment in which the event is from e.g production, edge, staging. <br>Ensures that events from a lower environment are not confused to be of a higher priority                        |
-| service       | Enables you to:<br>- know which service/services will be impacted if an event is from an error<br>- pivot to that service quickly  <br>- filter to all events with that given service |
+| env           | The environment in which the event is from e.g production, edge, staging. <br>Ensures that events from a lower environment are not confused to be of a higher priority                       |
+| service       | Enables you to:<br>- know which service/services will be impacted if an event is related out an error<br>- pivot to that service quickly  <br>- filter to all events with that given service |
 | host          | Adds the ability to: <br>- auto enrich event at intake with additional host tags<br>- pivot to the host infrastructure and metrics tabs easily in event explorer                             |
 | team          | The team which owns the event, so that they can be notified if need be                                                                                                                       |
-| version       | Enables you to know that you know that an event/outage for instance is only related to a particular version released                                                                         |
+| version       | Enables you to know that you know that an event/outage for instance is only related to a particular version released                                                                         |                                                                      |
 
 #### Improving your Tagging
 
-- *API*
+- **API**
 
 When using the [API][2], tags can be added within the tags field.
 
-- *Monitor*
+- **Monitor**
 
 When creating or editing a monitor, you can add the recommended tags within the [whats happening section][5]
 
-- *Integrations*
+- **Integrations**
 
 To learn more about to how add tags to integrations, check out [assigning_tags][3] or the specific [integrations page][4]
 
