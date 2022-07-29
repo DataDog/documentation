@@ -816,15 +816,20 @@ main:
     parent: dashboards
     weight: 8
     identifier: dashboards_temp_variables
+  - name: Reporting
+    url: dashboards/reporting/
+    parent: dashboards
+    weight: 9
+    identifier: dashboards_reporting
   - name: Sharing
     url: dashboards/sharing/
     parent: dashboards
-    weight: 9
+    weight: 10
   - name: Graphing with JSON
     url: dashboards/graphing_json/
     parent: dashboards
     identifier: graphing_json
-    weight: 10
+    weight: 11
   - name: Widget JSON schema
     url: dashboards/graphing_json/widget_json/
     parent: graphing_json
@@ -837,7 +842,7 @@ main:
     url: dashboards/guide/
     parent: dashboards
     identifier: guides
-    weight: 11
+    weight: 12
   - name: Mobile Application
     url: mobile/
     identifier: mobile
