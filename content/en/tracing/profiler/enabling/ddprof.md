@@ -24,10 +24,10 @@ The Datadog Profiler for compiled languages (`ddprof`) uses OS level APIs to col
 ## Requirements
 
 Supported operating systems
-: Linux kernel v4.17+, libc 2.23+<br/>
+: Linux kernel v4.17+, libc 2.23+
 
 Supported architecture
-: `amd64` or `arm64` processors<br/>
+: `amd64` or `arm64` processors
 
 Serverless
 : `ddprof` is not supported on serverless platforms, such as AWS Lambda.
