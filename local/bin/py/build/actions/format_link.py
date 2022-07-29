@@ -31,10 +31,7 @@ def prepare_file(file):
         for line in f:
             if state == 'main':
                 main_section.append(line)
-                if (
-                    re.search(r"{{< tabs >}}", line.strip()) or
-                    re.search(r"{{< programming-lang-wrapper", line.strip())
-                   ):
+                if (re.search(r"{{< tabs >}}", line.strip()) or re.search(r"{{< programming-lang-wrapper", line.strip())):
                     state = 'tabs'
                 if re.search(r"{{< site-region", line.strip()):
                     state = 'region'
@@ -46,24 +43,14 @@ def prepare_file(file):
                     state = 'main'
                 else:
                     temp_section.append(line)
-
             elif state == 'tabs':
                 main_section.append(line)
-                if (
-                    re.search(r"{{% tab ", line.strip()) or
-                    re.search(r"{{< programming-lang ", line.strip())
-                   ):
+                if (re.search(r"{{% tab ", line.strip()) or re.search(r"{{< programming-lang ", line.strip())):
                     state = 'tab'
-                if (
-                    re.search(r"{{< /tabs >}}", line.strip()) or
-                    re.search(r"{{< /programming-lang-wrapper >}}", line.strip())
-                   ):
+                if (re.search(r"{{< /tabs >}}", line.strip()) or re.search(r"{{< /programming-lang-wrapper >}}", line.strip())):
                     state = 'main'
             elif state == 'tab':
-                if (
-                    re.search(r"{{% /tab %}}", line.strip()) or
-                    re.search(r"{{< /programming-lang >}}", line.strip())
-                   ):
+                if (re.search(r"{{% /tab %}}", line.strip()) or re.search(r"{{< /programming-lang >}}", line.strip())):
                     state = 'tabs'
                     main_section.append(line)
                     sub_sections.append(temp_section)
