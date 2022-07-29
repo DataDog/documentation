@@ -1,5 +1,5 @@
 ---
-title: Enabling the profiler for compiled languages
+title: Enabling the Profiler for Compiled Languages
 kind: Documentation
 code_lang: ddprof
 type: multi-code-lang
