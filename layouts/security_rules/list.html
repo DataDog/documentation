@@ -44,10 +44,14 @@
                         {{ end }}
                     </div>
                     <div class="d-inline font-semibold ml-1">
-                        {{ if eq (len $v.Key) 3 }}
-                            {{ title $v.Key | title | upper }}
-                        {{ else }}
-                            {{ title $v.Key | humanize | title }}
+                        <!-- If first word/only word is 3 letters long e.g aws or gcp then lets capitalize -->
+                        {{ $words := (split (humanize $v.Key) " ") }}
+                        {{ range $index, $word := $words }}
+                          {{ if (and (eq $index 0) (eq (len $word) 3)) }}
+                            {{ $word | upper }}
+                          {{ else }}
+                            {{ $word | title }}
+                          {{ end }}
                         {{ end }}
                     </div>
                     <div class="js-group-header__arrow">></div>
