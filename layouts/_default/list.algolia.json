@@ -29,11 +29,13 @@
             dict "objectID" $object_id 
             "title" $title
             "description" $page.Description
+            "content" $page.Plain | truncate 250
             "type" $page.Type
             "permalink" $page.Permalink
             "relpermalink" $page.RelPermalink
             "language" $page.Language.Lang
             "tags" $tags
+            "lastmod" $page.Lastmod.UTC.Unix
             ) -}}
     {{- end -}}
 {{- end -}}
