@@ -533,6 +533,16 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 {{ .matched }} the host name
 ```
 
+### URL Encode
+
+If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
+
+**Example**: If your monitor message includes a URL to the APM services page filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) add `{{ urlencode "<variable>"}}` syntax in the URL:
+
+```
+https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
+```
+
 [1]: /monitors/create/configuration/#alert-grouping
 [2]: /monitors/create/types/log/
 [3]: /monitors/create/types/apm/?tab=analytics
