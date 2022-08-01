@@ -51,6 +51,6 @@ Datadog のデータ収集、解決、保持の概要は以下のとおりです
 
 
 [1]: /ja/tracing/guide/trace_sampling_and_storage/?tab=java#trace-storage
-[2]: /ja/integrations/faq/cloud-metric-delay/#faster-metrics
+[2]: /ja/integrations/guide/cloud-metric-delay/#faster-metrics
 [3]: /ja/synthetics/cicd_integrations#use-the-api
 [4]: /ja/synthetics/cicd_integrations#use-the-cli

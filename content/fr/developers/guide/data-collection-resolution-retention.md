@@ -51,6 +51,6 @@ Le tableau ci-dessous synthétise la collecte, la résolution et la rétention d
 
 
 [1]: /fr/tracing/guide/trace_sampling_and_storage/?tab=java#trace-storage
-[2]: /fr/integrations/faq/cloud-metric-delay/#faster-metrics
+[2]: /fr/integrations/guide/cloud-metric-delay/#faster-metrics
 [3]: /fr/synthetics/cicd_integrations#use-the-api
 [4]: /fr/synthetics/cicd_integrations#use-the-cli
