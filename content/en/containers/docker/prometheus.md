@@ -40,6 +40,7 @@ Launch the Docker Agent next to your other containers by replacing `<DATADOG_API
 
 ```shell
 docker run -d --cgroupns host \
+    --pid host \
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -v /proc/:/host/proc/:ro \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -143,6 +144,7 @@ To get started with collecting metrics exposed by Prometheus running within a co
 
 ```shell
 docker run -d --cgroupns host \
+    --pid host \
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -v /proc/:/host/proc/:ro \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
