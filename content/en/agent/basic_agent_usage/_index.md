@@ -182,7 +182,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [SUSE Enterprise Linux][7] | SUSE 11 SP4+           |
 | [Fedora][8]                | Fedora 26+             |
 | [MacOS][9]                 | macOS 10.10+           |
-| [Windows Server][10]       | Windows Server 2008r2+ |
+| [Windows Server][10]       | Windows Server 2008+   |
 | [Windows][10]              | Windows 7+             |
 
 **Notes**:

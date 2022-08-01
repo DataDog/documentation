@@ -33,7 +33,7 @@ Supported operating systems for .NET Framework
 Windows Server starting from version 2012
 
 Supported operating systems for .NET Core and .NET 5+
-: Linux with glibc 2.18+ (for example CentOS 7 is not supported)<br/>
+: Linux with glibc 2.17+ (for example, CentOS 7+) and musl-based (Alpine) <br/>
 Windows 10<br/>
 Windows Server starting from version 2012
 
@@ -71,7 +71,7 @@ To install the .NET Profiler machine-wide:
    Debian or Ubuntu
    : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
 
-   CentOS 8+ or Fedora
+   CentOS 7+ or Fedora
    : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
 
    Alpine or other musl-based distributions
@@ -121,10 +121,12 @@ To install the .NET Profiler machine-wide:
 
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
-{{< /tabs >}}
+[1]: https://app.datadoghq.com/profiling
+{{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}
-3. Set needed environment variables to configure and enable Profiler. To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables in the Registry under `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes.
+3. Set needed environment variables to configure and enable Profiler.
+ To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry under `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes.
 
    **With the Registry Editor:**
 
@@ -170,7 +172,7 @@ To install the .NET Profiler machine-wide:
 {{% /tab %}}
 
 {{% tab "Windows services" %}}
-3. Set needed environment variables to configure and enable Profiler. To enable the Profiler for your service, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables in the Registry key associated to the service.
+3. Set needed environment variables to configure and enable Profiler. To enable the Profiler for your service, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry key associated to the service. If the profiler is running alone (the tracer is deactivated), you can optionally add the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables.
 
    **With the Registry Editor:**
 
@@ -232,7 +234,7 @@ To install the .NET Profiler machine-wide:
 {{% /tab %}}
 
 {{% tab "Windows Standalone applications" %}}
-3. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED`, `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables. The recommended approach is to create a batch file that sets these and starts the application, and run your application using the batch file.
+3. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED` environment variable. If the profiler is running alone (the tracer is deactivated), you can optionally set the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables. The recommended approach is to create a batch file that sets these and starts the application, and run your application using the batch file.
 
    For .NET Core and .NET 5+:
    ```cmd

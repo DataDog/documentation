@@ -196,21 +196,21 @@ RUM とトレースを接続すると、APM の取り込み量が大幅に増加
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing
-[2]: /ja/tracing/setup_overview/setup/python/
+[2]: /ja/tracing/trace_collection/dd_libraries/python/
 [3]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[4]: /ja/tracing/setup_overview/setup/go/
+[4]: /ja/tracing/trace_collection/dd_libraries/go/
 [5]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[6]: /ja/tracing/setup_overview/setup/java/
+[6]: /ja/tracing/trace_collection/dd_libraries/java/
 [7]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[8]: /ja/tracing/setup_overview/setup/ruby/
+[8]: /ja/tracing/trace_collection/dd_libraries/ruby/
 [9]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[10]: /ja/tracing/setup_overview/setup/nodejs/
+[10]: /ja/tracing/trace_collection/dd_libraries/nodejs/
 [11]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[12]: /ja/tracing/setup_overview/setup/php/
+[12]: /ja/tracing/trace_collection/dd_libraries/php/
 [13]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[14]: /ja/tracing/setup_overview/setup/dotnet-core/
+[14]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
 [17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
 [18]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
-[19]: /ja/tracing/trace_retention/#retention-filters
+[19]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters

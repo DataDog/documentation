@@ -91,16 +91,18 @@ content/en/real_user_monitoring/android/mobile_vitals.md
 content/en/real_user_monitoring/android/troubleshooting.md
 content/en/real_user_monitoring/android/web_view_tracking.md
 content/en/real_user_monitoring/error_tracking/android.md
+content/en/real_user_monitoring/error_tracking/ios.md
 content/en/real_user_monitoring/browser/_index.md
 content/en/logs/log_collection/javascript.md
 content/en/real_user_monitoring/ios/_index.md
-content/en/real_user_monitoring/ios/crash_reporting.md
 content/en/real_user_monitoring/ios/mobile_vitals.md
+content/en/real_user_monitoring/ios/crash_reporting.md
 content/en/real_user_monitoring/ios/*
 content/en/real_user_monitoring/reactnative/_index.md
 content/en/real_user_monitoring/reactnative/integrated_libraries.md
 content/en/real_user_monitoring/reactnative/mobile_vitals.md
 content/en/real_user_monitoring/reactnative/expo.md
+content/en/real_user_monitoring/error_tracking/reactnative.md
 content/en/real_user_monitoring/flutter/_index.md
 
 # Synthetics

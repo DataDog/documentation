@@ -811,18 +811,6 @@
       "description": "Get cost across multi-org account returns \"OK\" response"
     }
   ],
-  "GetEstimatedCostByOrg": [
-    {
-      "group": "usage_metering",
-      "suffix": "_627383212",
-      "description": "Get estimated cost across multi-org account with date returns \"OK\" response"
-    },
-    {
-      "group": "usage_metering",
-      "suffix": "_1171921972",
-      "description": "Get estimated cost across multi-org account with month returns \"OK\" response"
-    }
-  ],
   "GetHourlyUsage": [
     {
       "group": "usage_metering",
@@ -849,6 +837,13 @@
       "group": "usage_metering",
       "suffix": "_970725512",
       "description": "Get hourly usage for Observability Pipelines returns \"OK\" response"
+    }
+  ],
+  "GetEstimatedCostByOrg": [
+    {
+      "group": "usage_metering",
+      "suffix": "_2734954020",
+      "description": "GetEstimatedCostByOrg with start_date returns \"OK\" response"
     }
   ],
   "CreateServiceAccount": [

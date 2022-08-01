@@ -28,7 +28,7 @@
           </a>
         </td>
         <td><strong>{{.name}}</strong></td>
-        <td>{{.description}}</td>
+        <td>{{ .description | markdownify }}</td>
       </tr>
     {{ end }}
   </tbody>

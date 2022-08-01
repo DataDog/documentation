@@ -658,6 +658,10 @@
     "description": "Get cost across multi-org account. Cost by org data for a given month becomes available no later than the 16th of the following month.",
     "summary": "Get cost across multi-org account"
   },
+  "GetEstimatedCostByOrg": {
+    "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month. To access historical costs prior to this, use the /cost_by_org endpoint.",
+    "summary": "Get estimated cost across your account"
+  },
   "GetHourlyUsage": {
     "description": "Get hourly usage by product family",
     "summary": "Get hourly usage by product family"
