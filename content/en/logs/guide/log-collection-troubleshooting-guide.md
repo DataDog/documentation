@@ -74,7 +74,7 @@ Logs Agent
     Status: Error: file /var/log/application/error.log does not exist
 ```
 
-Run the `namei` command to obtain more information about the file permissions:
+Run the `namei` command with the `-m` flag to obtain more information about the file permissions:
 
 ```text
 > namei -m /var/log/application/error.log
