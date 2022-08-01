@@ -31,37 +31,16 @@ Metrics that are not reported in the last 24 hours do not appear in the drop dow
 
 ### Scope
 
-Define a filtering scope with the **Over** text box by selecting or searching for tag values. For example, you can use the **Over** text box to filter metric values from a specific host, cluster, environment, region, etc.
+Define a filtering scope with the **from** text box by selecting or searching for tag values. For example, you can use the **from** text box to filter metric values from a specific host, cluster, environment, or region.
 
 ### Grouping
 
-Define the grouping with the **One graph per** text box by selecting or searching for tag keys. For example, you can split a single metric into multiple graphs by host, container, region, environment, etc. Metrics tagged with the `<KEY>:<VALUE>` format can be grouped.
+Your queries are displayed together automatically into a single graph. To split a graph into individual graphs per metric, click **Split Graph in Notebook**. For example, you can split a single metric into multiple graphs by host, container, region, or environment.
 
-### Space aggregation
-
-Define the [space aggregation][5] used to combine a metric's values with the **On each graph, aggregate with the** text box. The possible options are:
-
-* Average of reported values (default)
-* Max of reported values
-* Min of reported values
-* Sum of reported values
-
-**Note**: The options may differ based on the metric type selected.
-
-### Options
-
-You can update the following options for the metrics explorer:
-
-* Prefix graph titles with `<VALUE>`: The default is blank.
-* Show up to `<NUMBER>` graphs at a time: The default is 20.
 
 ### Export
 
-Export all graphs to a new or existing timeboard with the buttons at the bottom left. Individual graphs can be exported by clicking the export icon on the top right of each graph.
-
-### Snapshot
-
-Create a snapshot of an individual graph by using the share icon in the upper right. Clicking on the icon displays a dropdown menu with the **Send snapshot...** option.
+Export your graph to a dashboard or notebook with the buttons at the top right.
 
 ## Further reading
 
@@ -71,4 +50,3 @@ Create a snapshot of an individual graph by using the share icon in the upper ri
 [2]: /notebooks/
 [3]: /dashboards/#screenboards
 [4]: /dashboards/#timeboards
-[5]: /metrics/introduction/#space-aggregation
