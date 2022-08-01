@@ -5,7 +5,7 @@ description: Record Steps for a Synthetic Browser Test
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
-  text: "Learn how to configure Advanced Options for your browser test"
+  text: "Learn about advanced options for browser tests"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
   tag: "Terraform"
   text: "Create and manage Synthetic Global Variables with Terraform"
@@ -205,34 +205,15 @@ By default, Datadog waits for a page to be fully loaded before performing a step
 
 **Note**: This additional time is systematically added to **each run** of your browser test scenario.
 
-### Variable
+### Variables
 
 {{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables" style="width:60%;">}}
 
-To create a variable, first give it a name then define its value using one of the below methods. To learn how to use variables inside of your steps, see [Using variables](#using-variables).
-
-#### Pattern
-
-Create a variable by defining its value from one of the below available builtins:
-
-`{{ numeric(n) }}`
-: Generates a numeric string with `n` digits.
-
-`{{ alphabetic(n) }}`
-: Generates an alphabetic string with `n` letters.
-
-`{{ alphanumeric(n) }}`
-: Generates an alphanumeric string with `n` characters.
-
-`{{ date(n, format) }}`
-: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
-
-`{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
+To create a variable, first give it a name then define its value using one of the below methods. To learn how to use variables inside of your steps, see [Use variables](#use-variables).
 
 #### Element
 
-Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
+Create a variable from content like a `span` or `div` by extracting the text of this element.
 
 #### JavaScript
 
@@ -276,9 +257,7 @@ Pick any global variables defined in [Synthetic Monitoring Settings][7].
 
 Pick any MFA global variables defined in [Synthetic Monitoring Settings][7].
 
-This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows.
-
-For more information about TOTP-based MFA in a browser test, see this [TOTP guide][8].
+This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows. For more information, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][8].
 
 #### Email
 
@@ -305,7 +284,7 @@ You can run HTTP requests as part of your browser tests.
 To define your HTTP request:
 
 1. Choose the **Method** and **URL** to query. Available methods include `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
-2. Optionally specify **Advanced Options**:
+2. Optionally, specify **Advanced Options**:
      * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
      * Allow insecure certificates: Toggle to have your HTTP test continue the connection even if there is an error when validating the certificate.
      * Headers: Defined headers override the default browser headers.
@@ -342,37 +321,30 @@ You can also optionally extract a variable from the response of your HTTP reques
 To parse your variable:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
-2. Decide whether to extract your variable from the response headers, or from the response body:
+2. Decide whether to extract your variable from the response headers, from the response body, or using the full response body.
 
     * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][15].
     * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][15], a [`JSONPath`][13], or a [`XPath`][14].
+    * Extract the value using the **full response body**.
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;">}}
 
-Once created, this variable can be used in the [following steps](#using-variables) of your browser test.
+Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
 
-## Using variables
+## Use variables
 
-### On manually added steps
+To see all available variables on manually added steps, type `{{` in the input field.
 
-All step input fields with a `{{` indication support variables:
-
-{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator" style="width:70%;">}}
-
-To see all available variables, type `{{` in the input field and choose your variable of interest.
-
-### On automatically recorded steps
-
-If you want to record a step leveraging a variable, you can use the little hand on your variable box:
+If you want to use a variable on automatically recorded steps, click **Inject this variable** icon:
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true" width="100%" >}}
 
 At recording, this translates into the actual value of the variable being injected on your website's input (consequently allowing you to move on with the rest of your steps) and creates an associated `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`.
 At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value.
 
-Some variables only get computed at runtime (for example, a variable from HTTP request or from JavaScript step). To record a step using one of these variables, record a step with the actual variable value, then replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step definition before saving your test. 
+Some variables are only computed at runtime (for example, a variable from HTTP request or from JavaScript step). To record a step using one of these variables, record a step with the actual variable value, then replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step definition before saving your test. 
 
-**Note:** If a variable gets assigned different values along your browser test steps (for example, across subtests), the variable systematically uses the value that was first assigned to it.
+If a variable is assigned different values along your browser test steps (for example, across subtests), the variable systematically uses the value that was first assigned to it.
 
 ## Further Reading
 
