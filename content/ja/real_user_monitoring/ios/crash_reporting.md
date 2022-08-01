@@ -1,16 +1,6 @@
 ---
-beta: true
 dependencies:
 - https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/crash_reporting.md
-further_reading:
-- link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
-  tag: ブログ
-  text: iOS のクラッシュレポートとエラー追跡のご紹介
-- link: /real_user_monitoring
-  tag: ドキュメント
-  text: RUM データの調査方法
-kind: documentation
-title: iOS のクラッシュレポートとエラー追跡
 ---
 ## 概要
 
