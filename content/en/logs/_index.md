@@ -59,7 +59,7 @@ Leverage the pillars of observability by connecting your logs to metrics and tra
 
 Start exploring your ingested logs in the [Log Explorer][1].
 
-{{< img src="/logs/explore.jpg" alt="Explore your ingested logs" style="width:80%;">}}
+{{< img src="/logs/explore.png" alt="Explore your ingested logs" style="width:80%;">}}
 
 - [Search][7]: Search through all of your logs.
 - [Live Tail][8]: See your ingested logs in real time across all your environments.
