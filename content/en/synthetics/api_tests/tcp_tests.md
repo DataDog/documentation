@@ -130,10 +130,10 @@ To create a local variable, click **Create Local Variable** at the top right han
 : Generates an alphanumeric string with `n` characters.
 
 `{{ date(n, format) }}`
-: Generates a date in one of Datadog's accepted formats with a value corresponding to the date the test is initiated + or - `n` days.
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated + or - `n` days.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the timestamp the test is initiated at + or - `n` units.
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
 
 To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 

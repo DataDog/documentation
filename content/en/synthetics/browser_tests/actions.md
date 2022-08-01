@@ -209,7 +209,7 @@ By default, Datadog waits for a page to be fully loaded before performing a step
 
 {{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables" style="width:60%;">}}
 
-To create a variable, first give it a name then define its value using one of the below methods. To learn how to use variables inside of your steps, see [Use variables](#use-variables).
+To create a variable, give it a name and define the value using one of the following methods. To learn how to use variables inside of your steps, see [Use variables](#use-variables).
 
 #### Element
 
@@ -231,7 +231,7 @@ The JavaScript function comes with the following parameters and requires a retur
 
 {{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%">}}
 
-Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise, for example:
+Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (such as libraries, built-ins, and global variables). To load external libraries, use a promise, for example:
 
 ```javascript
 const script = document.createElement('script');
@@ -247,7 +247,7 @@ await promise
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
-**Note**: The way Browser tests load external JavaScript is by adding it to the page, so it will only work if your website accepts it.
+Because browser tests load external JavaScript by adding it to the page, it only works if your website accepts it.
 
 #### Global variable
 
