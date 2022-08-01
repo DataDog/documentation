@@ -20,9 +20,9 @@ As a best practice, Datadog recommends the use of [unified service tagging][1], 
 |---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | env           | The environment in which the event is from e.g production, edge, staging. <br>Ensures that events from a lower environment are not confused to be of a higher priority                       |
 | service       | Enables you to:<br>- know which service/services will be impacted if an event is related out an error<br>- pivot to that service quickly  <br>- filter to all events with that given service |
+| version       | Enables you to know that you know that an event/outage for instance is only related to a particular version released                                                                         |
 | host          | Adds the ability to: <br>- auto enrich event at intake with additional host tags<br>- pivot to the host infrastructure and metrics tabs easily in event explorer                             |
-| team          | The team which owns the event, so that they can be notified if need be                                                                                                                       |
-| version       | Enables you to know that you know that an event/outage for instance is only related to a particular version released                                                                         |                                                                      |
+| team          | The team which owns the event, so that they can be notified if need be                                                                                                                       |                                                          |
 
 #### Improving your Tagging
 
