@@ -411,6 +411,8 @@ backend datadog-appsec-events # deprecated
 {{% /tab %}}
 {{% tab "HTTPS" %}}
 
+This configuration adds SSL/TLS encryption on communication between the Agent and HAProxy. The variable `<PATH_TO_PROXY_CERTIFICATE_PEM>` should be replaced by the path to the proxy certificate bundle (*.pem).
+
 ```conf
 # Basic configuration
 global
@@ -453,7 +455,7 @@ resolvers my-dns
 # This declares the endpoint where your Agents connects for
 # sending metrics (for example, the value of "dd_url").
 frontend metrics-forwarder
-    bind *:3834 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3834 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
     option tcplog
     default_backend datadog-metrics
@@ -465,7 +467,7 @@ frontend metrics-forwarder
 # sending traces (for example, the value of "endpoint" in the APM
 # configuration section).
 frontend traces-forwarder
-    bind *:3835 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3835 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode tcp
     option tcplog
     default_backend datadog-traces
@@ -473,7 +475,7 @@ frontend traces-forwarder
 # This declares the endpoint where your Agents connects for
 # sending profiles (for example, the value of "apm_config.profiling_dd_url").
 frontend profiles-forwarder
-    bind *:3836 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3836 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode tcp
     option tcplog
     default_backend datadog-profiles
@@ -482,7 +484,7 @@ frontend profiles-forwarder
 # sending processes (for example, the value of "url" in the process
 # configuration section).
 frontend processes-forwarder
-    bind *:3837 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3837 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode tcp
     option tcplog
     default_backend datadog-processes
@@ -491,14 +493,14 @@ frontend processes-forwarder
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 # If sending logs with use_http: true
 frontend logs_http_frontend
-    bind *:3838 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3838 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
     option tcplog
     default_backend datadog-logs-http
 
 # If sending logs with use_tcp: true
 # frontend logs_frontend
-#    bind *:10514 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+#    bind *:10514 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
 #    mode tcp
 #    option tcplog
 #    default_backend datadog-logs
@@ -506,7 +508,7 @@ frontend logs_http_frontend
 # This declares the endpoint where your Agents connects for
 # sending database monitoring metrics and activity (e.g the value of "database_monitoring.metrics.dd_url" and "database_monitoring.activity.dd_url")
 frontend database_monitoring_metrics_frontend
-    bind *:3839 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3839 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
     option tcplog
     default_backend datadog-database-monitoring-metrics
@@ -514,7 +516,7 @@ frontend database_monitoring_metrics_frontend
 # This declares the endpoint where your Agents connects for
 # sending database monitoring samples (e.g the value of "database_monitoring.samples.dd_url")
 frontend database_monitoring_samples_frontend
-    bind *:3840 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3840 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
     option tcplog
     default_backend datadog-database-monitoring-samples
@@ -522,7 +524,7 @@ frontend database_monitoring_samples_frontend
 # This declares the endpoint where your Agents connects for
 # sending Network Devices Monitoring metadata (e.g the value of "network_devices.metadata.dd_url")
 frontend network_devices_metadata_frontend
-    bind *:3841 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3841 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
     option tcplog
     default_backend datadog-network-devices-metadata
@@ -530,7 +532,7 @@ frontend network_devices_metadata_frontend
 # This declares the endpoint where your Agents connects for
 # sending Network Devices SNMP Traps data (e.g the value of "network_devices.snmp_traps.forwarder.dd_url")
 frontend network_devices_snmp_traps_frontend
-    bind *:3842 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3842 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
     option tcplog
     default_backend datadog-network-devices-snmp-traps
@@ -539,7 +541,7 @@ frontend network_devices_snmp_traps_frontend
 # This declares the endpoint where your Agents connect for
 # sending Instrumentation Telemetry data (e.g. the value of "apm_config.telemetry.dd_url")
 frontend instrumentation_telemetry_data_frontend
-    bind *:3843 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3843 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode tcp
     option tcplog
     default_backend datadog-instrumentations-telemetry
@@ -547,7 +549,7 @@ frontend instrumentation_telemetry_data_frontend
 # This declares the endpoint where your Agents connect for
 # sending appsec events (deprecated).
 frontend appsec-events-frontend
-    bind *:3844 ssl crt <PATH_TO_PROXY_CERTIFICATE>
+    bind *:3844 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode tcp
     option tcplog
     default_backend datadog-appsec-events
@@ -685,7 +687,7 @@ This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: <SCHEME>://haproxy.example.com:3834`
 
-Replace `<SCHEME>` by `https` if you want your data to be encrypted between the Agent and HAProxy, or by `http` otherwise.
+Replace `<SCHEME>` by `https` if you previously chose the HAProxy `HTTPS` configuration, or by `http` otherwise.
 
 To send traces, profiles, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
 
@@ -917,6 +919,9 @@ stream {
 {{% /tab %}}
 {{% tab "HTTPS" %}}
 
+
+This configuration adds SSL/TLS encryption on communication between the Agent and NGINX. The variable `<PATH_TO_PROXY_CERTIFICATE>` should be replaced by the path to the proxy public certificate and `<PATH_TO_PROXY_CERTIFICATE_KEY>` by the path to the private key.
+
 ```conf
 user nginx;
 worker_processes auto;
@@ -1043,7 +1048,7 @@ This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: "<SCHEME>://nginx.example.com:3834"`
 
-Replace `<SCHEME>` by `https` if you want your data to be encrypted between the Agent and NGINX, or by `http` otherwise.
+Replace `<SCHEME>` by `https` if you previously chose the NGINX `HTTPS` configuration, or by `http` otherwise.
 
 To send traces, profiles, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
 
