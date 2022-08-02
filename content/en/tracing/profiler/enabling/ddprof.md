@@ -36,7 +36,7 @@ OS Settings
 : `perf_event_paranoid` kernel setting is 2 or less (see [Troubleshooting][1])
 
 Debugging information
-: Symbols should be available
+: Symbols should be available. The profiler cannot provide human-readable function names if the symbol table is stripped.
 
 ## Installation
 
