@@ -328,7 +328,7 @@ The root of your profile is the frame annotated with the application name in par
 
 ## Error while loading shared libraries
 
-When using the Continuous Profiler for Compiled Languages as a dynamic library, your application may fail to launch with the following error:
+When using the Continuous Profiler for compiled languages as a dynamic library, your application may fail to launch with the following error:
 
 ```
 error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
