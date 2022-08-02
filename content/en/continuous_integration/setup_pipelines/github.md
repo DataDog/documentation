@@ -62,6 +62,14 @@ To enable logs, follow these steps:
 
 Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Note that logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings.
 
+### Infrastructure metric correlation
+
+If you are running the GitHub runners you can correlate your jobs to the host is running. To do so make sure the GitHub runner name
+matches the hostname of the machine it is running on. CI Visibility will automatically detect the runner name and link it to the
+infrastructure metrics. To see the metrics just click on a job span in the trace view as shown below.
+
+{{< img src="ci/github-host-correlation.png" alt="GitHub job and infrastructure metric correlation" style="width:100%;" >}}
+
 ## Visualize pipeline data in Datadog
 
 The [Pipelines][7] and [Pipeline Executions][8] pages populate with data after the pipelines finish.
