@@ -2685,10 +2685,20 @@ main:
     identifier: synthetics_testing_tunnel
     weight: 605
   - name: CI Results Explorer
-    url: /synthetics/ci_results_explorer
+    url: /synthetics/explorer
     parent: synthetics
-    identifier: synthetics_ci_results_explorer
+    identifier: synthetics_explorer
     weight: 7
+  - name: Search Test Batches
+    url: /synthetics/explorer/search
+    parent: synthetics_explorer
+    identifier: synthetics_explorer_search
+    weight: 701
+  - name: Search Syntax
+    url: /synthetics/explorer/search_syntax
+    parent: synthetics_explorer
+    identifier: synthetics_explorer_search_syntax
+    weight: 701
   - name: Dashboards
     url: synthetics/dashboards
     parent: synthetics

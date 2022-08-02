@@ -7,6 +7,9 @@ Description:
 Builds a string to the integration logo.
 :param basename: string of integration name without any variant or extension e.g "aws" or "amazon-ecs"
 :param variant: string of the variant e.g "avatar" or "small" or "large"
+:param fallback: string of the fallback method
+    "none" is the default and causes warning message and no data returned
+    "cloud" falls back to the cloud generic logo where possible from the string passed e.g aws_foobar returns aws generic logo
 :return: the string to the integration logo image or an empty string on failure
 
 ------------------
@@ -31,6 +34,7 @@ Both of these should return the same image.
 {{- $basename := (lower .basename) -}}
 {{- $variant := .variant | default "large" -}}
 {{- $extension := .extension | default ".svg" -}}
+{{- $fallback := .fallback | default "none" -}}
 {{- $img_url := $ctx.Site.Params.integrations_img_url -}}
 {{- $imagesJSON := getJSON "https://s3.amazonaws.com/origin-static-assets/websites-integrations/images.json" -}}
 {{- $integrationLogosList := index $imagesJSON "integrationLogosList" | default slice -}}
@@ -104,6 +108,21 @@ Both of these should return the same image.
   {{- end -}}
 {{- end -}}
 
+<!--{{/* if fallback settings */}}-->
+{{- if not $imageExists -}}
+  {{- if eq ($fallback | lower) "cloud" -}}
+    {{ warnf "fallback %q %q %q" $basename (or (hasPrefix $basename "gcp") (hasPrefix $basename "google")) (or (hasPrefix $basename "aws") (hasPrefix $basename "amazon")) }}
+    {{- if (or (hasPrefix $basename "gcp") (hasPrefix $basename "google")) -}}
+      {{- $basename = "google-cloud-platform" -}}
+      {{- $imageExists = true -}}
+    {{- else if (or (hasPrefix $basename "aws") (hasPrefix $basename "amazon")) -}}
+      {{- $basename = "amazon-web-services" -}}
+      {{- $imageExists = true -}}
+    {{- end -}}
+  {{- else -}}
+    <!-- Anything else we act like none -->
+  {{- end -}}
+{{- end -}}
 
 <!--{{/* Build the image path and return it or return empty string */}}-->
 {{- if $imageExists -}}
