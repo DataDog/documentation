@@ -271,7 +271,7 @@ The profiler has a fixed overhead. The exact value can vary but should be expect
  -  200ms of CPU time per second on Linux (0.2 CPU)
  -  20ms of CPU time per second on Windows (0.02 CPU)
 
-This fixed cost means that the relative overhead of the profiler can be significant in very small containers. For instance, if running in a Linux container with 0.4 CPU assigned, the fixed cost of 0.2 CPU means that the relative overhead will be of 50%. It is recommended to adjust the container limits accordingly.
+This fixed cost means that the relative overhead of the profiler can be significant in very small containers. For example, if you run the profiler in a Linux container with 0.4 CPU assigned, the fixed cost of 0.2 CPU means that the relative overhead is 50%. Adjust the container limits accordingly.
 
 
 
