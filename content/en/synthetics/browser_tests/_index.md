@@ -101,7 +101,7 @@ Define the configuration of your browser test.
    - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels. 
    - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
    - For a small mobile device, the dimensions are 320 pixels x 550 pixels.  
-6. Select **managed and private locations**: Set the Datadog managed locations to run your test from. Many AWS locations are available from around the world for each site. You can also set up [private locations][1] to run your browser test from custom locations or from inside private networks. See a full list of locations in the [UI][2] or use the [API][3]. {{< site-region region="gov" >}}**Note**: The West US (AWS GovCloud) location is supported on the Datadog for Government site.{{< /site-region >}}
+6. Select **managed and private locations**: Set locations around the world that are managed by Datadog to run your test from. You can also create [private locations][1] to run your test from custom locations or inside private networks. For a full list of locations, navigate to the [UI][2] or use the [API][3]. {{< site-region region="gov" >}}**Note**: The West US (AWS GovCloud) location is supported on the Datadog for Government site.{{< /site-region >}}
 7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][4].
 
 ## Variables
