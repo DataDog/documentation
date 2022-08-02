@@ -228,7 +228,7 @@ This requires elevated permissions (for example, running as root or granting `CA
     ./ddprof --environment staging --global yes --service_version full-host-profile
     ```
 
-When the profiler has root UID, all visible processes are instrumented.
+When the profiler is run as the root user, all visible processes are instrumented.
 For most configurations, this consists of all processes visible within the profiler's PID namespace.
 
 ## Not sure what to do next?
