@@ -64,8 +64,8 @@ Immediately after toggling logs collection, workflow job logs are forwarded to D
 
 ### Infrastructure metric correlation
 
-If you are running the GitHub runners you can correlate your jobs to the host is running. To do so make sure the GitHub runner name
-matches the hostname of the machine it is running on. CI Visibility will automatically detect the runner name and link it to the
+If you are using self-hosted GitHub runners you can correlate jobs to the host that is running them. To do so make sure the GitHub runner name
+matches the hostname of the machine it is running on. CI Visibility uses this to link to
 infrastructure metrics. To see the metrics just click on a job span in the trace view as shown below.
 
 {{< img src="ci/github-host-correlation.png" alt="GitHub job and infrastructure metric correlation" style="width:100%;" >}}
