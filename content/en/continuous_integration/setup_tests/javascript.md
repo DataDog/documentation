@@ -125,6 +125,8 @@ You can add custom tags and metrics to your test by grabbing the current active 
   })
 ```
 
+For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][7].
+
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -160,6 +162,8 @@ You can add custom tags and metrics to your test by grabbing the current active 
     // your test step continues normally
   });
 ```
+
+For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][7].
 
 {{% /tab %}}
 
