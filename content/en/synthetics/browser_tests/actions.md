@@ -356,7 +356,7 @@ Once created, this variable can be used in the [following steps](#use-variables)
 
 To see all available variables on manually added steps, type `{{` in the input field.
 
-If you want to use a variable on automatically recorded steps, click **Inject this variable** icon:
+If you want to use a variable on automatically recorded steps, click the **Inject this variable** icon:
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true" width="100%" >}}
 
