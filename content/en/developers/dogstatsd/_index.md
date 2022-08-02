@@ -86,6 +86,7 @@ By default, DogStatsD listens on UDP port **8125**, so you need to bind this por
 
 ```shell
 docker run -d --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \

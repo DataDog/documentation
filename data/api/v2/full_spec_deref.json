@@ -91895,6 +91895,248 @@
         }
       }
     },
+    "/api/v2/usage/estimated_cost": {
+      "get": {
+        "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month. To access historical costs prior to this, use the /cost_by_org endpoint.",
+        "operationId": "GetEstimatedCostByOrg",
+        "parameters": [
+          {
+            "description": "String to specify whether cost is broken down at a parent-org level or at the sub-org level. Currently, only the 'sub-org' view is supported.",
+            "in": "query",
+            "name": "view",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost beginning this month. Either start_month or start_date should be specified, but not both. (start_month cannot go beyond two months in the past)",
+            "in": "query",
+            "name": "start_month",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost ending this month.",
+            "in": "query",
+            "name": "end_month",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost beginning this day. Either start_month or start_date should be specified, but not both. (start_date cannot go beyond two months in the past)",
+            "in": "query",
+            "name": "start_date",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost ending this day.",
+            "in": "query",
+            "name": "end_date",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "Chargeback Summary response.",
+                  "properties": {
+                    "data": {
+                      "description": "Response containing Chargeback Summary.",
+                      "items": {
+                        "description": "Cost data.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Cost attributes data.",
+                            "properties": {
+                              "charges": {
+                                "description": "List of charges data reported for the requested month.",
+                                "items": {
+                                  "description": "Charges breakdown.",
+                                  "properties": {
+                                    "charge_type": {
+                                      "description": "The type of charge for a particular product.",
+                                      "example": "on_demand",
+                                      "type": "string"
+                                    },
+                                    "cost": {
+                                      "description": "The cost for a particular product and charge type during a given month.",
+                                      "format": "double",
+                                      "type": "number"
+                                    },
+                                    "product_name": {
+                                      "description": "The product for which cost is being reported.",
+                                      "example": "infra_host",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "date": {
+                                "description": "The month requested.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "org_name": {
+                                "description": "The organization name.",
+                                "type": "string"
+                              },
+                              "public_id": {
+                                "description": "The organization public ID.",
+                                "type": "string"
+                              },
+                              "total_cost": {
+                                "description": "The total cost of products for the month.",
+                                "format": "double",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the response.",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "cost_by_org",
+                            "description": "Type of cost data.",
+                            "enum": [
+                              "cost_by_org"
+                            ],
+                            "example": "cost_by_org",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "COST_BY_ORG"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden - User is not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "usage_read"
+            ]
+          }
+        ],
+        "summary": "Get estimated cost across your account",
+        "tags": [
+          "Usage Metering"
+        ],
+        "x-menu-order": 39,
+        "x-undo": {
+          "type": "safe"
+        },
+        "x-unstable": "**Note**: This endpoint is in public beta.\nOnly the sub-org view is available currently, the summary view will be released at a later date."
+      }
+    },
     "/api/v2/usage/hourly_usage": {
       "get": {
         "description": "Get hourly usage by product family",
@@ -91921,7 +92163,7 @@
             }
           },
           {
-            "description": "Comma separated list of product families to retrieve. Available families are `all`, `analyzed_logs`,\n`application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `cws`, `dbm`, `fargate`,\n`infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`, `iot`,\n`lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `observability_pipelines`,\n`online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`, `sds`, `snmp`,\n`synthetics_api`, `synthetics_browser`, and `timeseries`.",
+            "description": "Comma separated list of product families to retrieve. Available families are `all`, `analyzed_logs`,\n`application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,\n`infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`, `iot`,\n`lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `observability_pipelines`,\n`online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`, `sds`, `snmp`,\n`synthetics_api`, `synthetics_browser`, and `timeseries`.",
             "in": "query",
             "name": "filter[product_families]",
             "required": true,

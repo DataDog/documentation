@@ -13,7 +13,6 @@ categories:
 - data store
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
 display_name: Vertica
@@ -22,7 +21,7 @@ git_integration_title: vertica
 guid: 884d1895-6791-487c-ac8e-7ccaad45db0b
 integration_id: vertica
 integration_title: Vertica
-integration_version: 3.3.1
+integration_version: 3.3.2
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,7 +29,7 @@ manifest_version: 1.0.0
 metric_prefix: vertica.
 metric_to_check: vertica.connection.active
 name: vertica
-public_title: Datadog-Vertica インテグレーション
+public_title: Vertica インテグレーション
 short_description: Vertica のプロジェクションストレージやライセンスの使用状況などを監視します。
 support: コア
 supported_os:
