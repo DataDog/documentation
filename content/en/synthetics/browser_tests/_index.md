@@ -108,7 +108,7 @@ Define the configuration of your browser test.
 
 ### Create local variables
 
-To create a local variable, click **Create Local Variable** at the top right hand corner. You can select one of the following available builtins:
+To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.

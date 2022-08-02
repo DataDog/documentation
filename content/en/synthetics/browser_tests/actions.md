@@ -35,7 +35,7 @@ Choose from:
 
 ### Type text
 
-[Datadog browser test recorder extension][3] automatically records text inputted in any fields of your website (forms, text areas, etc.):
+[Datadog browser test recorder extension][3] automatically records text inputted in any fields of your website (such as forms or text areas):
 
 {{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="100%">}}
 
@@ -86,15 +86,15 @@ Asserts that some specific text is **NOT** present on the current page.
 
 #### Test the content of the URL of the active page
 
-Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.
+Takes the URL of the last page that was interacted with, then asserts whether a specific value (such as `string`, `number`, or `regex`) is present within it.
 
 #### Test that an element is present on the active page
 
-Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.
+Asserts that an element (such as a specific `span`, `div`, `h`, or `a`) is present on the current page.
 
 #### Test that an email was received
 
-Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][4], you consequently first need to create an email variable to be able to use a `Test that an email was received` assertion.
+Asserts that an email was sent and whether specific values (such as `string`, `number`, and `regex`) are present within the email subject or body. This assertion leverages [email variables][4], you consequently first need to create an email variable to be able to use a `Test that an email was received` assertion.
 
 #### Test your UI with custom JavaScript
 
@@ -112,7 +112,7 @@ The JavaScript assertion function comes with the following parameters and requir
 
 {{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%">}}
 
-Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise. For example:
+Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (such as libraries, built-ins, and global variables). To load external libraries, use a promise. For example:
 
 ```javascript
 const script = document.createElement('script');
