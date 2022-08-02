@@ -19,7 +19,7 @@ further_reading:
 The compiled languages profiler, <code>ddprof</code> is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is best suited for languages like Rust, C, or C++. It can also be helpful to diagnose system level performance issues.
+The Datadog Profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
 
 ## Requirements
 
@@ -34,6 +34,9 @@ Serverless
 
 OS Settings
 : `perf_event_paranoid` kernel setting is 2 or less (see [Troubleshooting][1])
+
+Debugging information
+: Symbols should be available
 
 ## Installation
 
@@ -102,6 +105,8 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][3].
 
 ### Library
+
+The library exposes a C API.
 
 1. Download a release of [ddprof][2] with library support (v0.8.0 or later) and extract the tarball. For example:
 
