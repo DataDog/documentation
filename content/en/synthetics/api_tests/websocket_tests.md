@@ -148,8 +148,8 @@ To create a local variable, click **Create a Local Variable** at the top right h
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
-`{{ date(n, format) }}`
-: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated + or - `n` days.
+`{{ date(n unit, format) }}`
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
 : Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
