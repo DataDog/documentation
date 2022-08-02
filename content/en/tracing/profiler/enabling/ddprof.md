@@ -19,7 +19,7 @@ further_reading:
 The compiled languages profiler, <code>ddprof</code> is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
+The Datadog Continuous Profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
 
 ## Requirements
 
