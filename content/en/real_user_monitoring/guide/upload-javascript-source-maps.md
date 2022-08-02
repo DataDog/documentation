@@ -14,7 +14,7 @@ further_reading:
 
 If your front-end JavaScript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace. Datadog can also link stack frames to your source code in your repository.
 
-<div class="alert alert-info">Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> can be unminified.</div>
+<div class="alert alert-info">Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</div>
 
 ## Instrument your code
 
@@ -118,7 +118,7 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 To minimize overhead on your CI's performance, the CLI is optimized to upload as many source maps as you need in a short amount of time (typically a few seconds).
 
-The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events. For more information on how to setup these tags, refer to the [Browser SDK initialization documentation][2]. The uploaded sourcemaps are used to de-obfuscate errors collected by the RUM Browser SDK.
+The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events and browser logs. For more information on how to setup these tags, refer to the [Browser RUM SDK initialization documentation][2] or [Browser Logs Collection documentation][3]. The uploaded sourcemaps are used to de-obfuscate errors collected by the RUM Browser SDK, and logs collected by the browser logs SDK.
 
 <div class="alert alert-info">If you have defined multiple services in your RUM application, run the CI command as many times as there are services, even if you have one set of sourcemaps for the entire RUM application.</div>
 
@@ -130,7 +130,7 @@ Only source maps with the `.js.map` extension work to correctly unminify stack t
 
 ### Link stack frames to your source code
 
-If you run `datadog-ci sourcemaps upload` within a Git working directory, Datadog collects repository metadata. The `datadog-ci` command collects the repository URL, the current commit hash, and the list of file paths in the repository that relate to your source maps. For more details about Git metadata collection, refer to the [datadog-ci documentation][3].
+If you run `datadog-ci sourcemaps upload` within a Git working directory, Datadog collects repository metadata. The `datadog-ci` command collects the repository URL, the current commit hash, and the list of file paths in the repository that relate to your source maps. For more details about Git metadata collection, refer to the [datadog-ci documentation][4].
 
 Datadog displays links to your source code on unminified stack frames.
 
@@ -152,4 +152,5 @@ On the other hand, an unminified stack trace provides you with all the context y
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/real_user_monitoring/browser/#initialization-parameters
-[3]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
+[3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
+[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
