@@ -59,6 +59,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 | Facet       | Description                               |
 |-------------|-------------------------------------------|
+| `Author Email` | The email address of the commit author. |
 | `Branch`    | The branch associated with the batch.     |
 | `Commit SHA`| The commit SHA associated with the batch. |
 | `Repository URL`| The URL of the Git repository associated with the batch. |
