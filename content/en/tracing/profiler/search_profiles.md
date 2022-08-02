@@ -65,7 +65,7 @@ Four tabs are below the profile header:
 
 In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs.
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,linux" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,ddprof" >}}
 {{< programming-lang lang="java" >}}
 
 {{< img src="tracing/profiling/profile.png" alt="A specific profile">}}
@@ -210,7 +210,7 @@ Wall Time
 : Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
 {{< /programming-lang >}}
-{{< programming-lang lang="linux" >}}
+{{< programming-lang lang="ddprof" >}}
 
 Once enabled, the following profile types are collected:
 

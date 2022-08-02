@@ -1,9 +1,11 @@
 ---
-title: Enabling ddprof, a profiler for compiled languages
+title: Enabling the Profiler for Compiled Languages
 kind: Documentation
 code_lang: ddprof
 type: multi-code-lang
 code_lang_weight: 90
+aliases:
+  - /tracing/profiler/enabling/linux/
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
@@ -14,21 +16,21 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-ddprof is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+The compiled languages profiler, <code>ddprof</code> is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Profiler for compiled languages (ddprof) uses OS level APIs to collect profiling data. It is best suited for languages like Rust, C or C++. It can also be helpful to diagnose system level performance issues.
+The Datadog Profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is best suited for languages like Rust, C, or C++. It can also be helpful to diagnose system level performance issues.
 
 ## Requirements
 
 Supported operating systems
-: Linux kernel v4.17+, libc 2.23+<br/>
+: Linux kernel v4.17+, libc 2.23+
 
 Supported architecture
-: `amd64` or `arm64` processors<br/>
+: `amd64` or `arm64` processors
 
 Serverless
-: ddprof is not supported on serverless platforms, such as AWS Lambda.
+: `ddprof` is not supported on serverless platforms, such as AWS Lambda.
 
 OS Settings
 : `perf_event_paranoid` kernel setting is 2 or less (see [Troubleshooting][1])
@@ -39,7 +41,7 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
 ### Standalone
 
-1. Download the appropriate [ddprof release][4] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` (aka `x86_64`) platform:
+1. Download the appropriate [`ddprof` release][2] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` (aka `x86_64`) platform:
 
    ```bash
    curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.2/ddprof-0.9.2-amd64-unknown-linux-gnu.tar.xz
@@ -96,11 +98,12 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 {{% /tab %}}
 {{< /tabs >}}
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][5].
+
+5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][3].
 
 ### Library
 
-1. Download a release of [ddprof][4] with library support (v0.8.0 or later) and extract the tarball. For example:
+1. Download a release of [ddprof][2] with library support (v0.8.0 or later) and extract the tarball. For example:
 
    ```bash
    curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.2/ddprof-0.9.2-amd64-unknown-linux-gnu.tar.xz
@@ -172,9 +175,9 @@ Configuration for the profiler can be set by command line parameters, environmen
 
 | Environment variable            | Long name       | Short name | Default   | Description                                                                                                                          |
 | ------------------------------- | --------------- | ---------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| DD_ENV                          | environment     | E          |           | The [environment][6] name, for example, `production`.                                                                                |
-| DD_SERVICE                      | service         | S          | myservice | The [service][6] name, for example, `web-backend`.                                                                                   |
-| DD_VERSION                      | service_version | V          |           | The [version][6] of your service.                                                                                                    |
+| DD_ENV                          | environment     | E          |           | The [environment][4] name, for example, `production`.                                                                                |
+| DD_SERVICE                      | service         | S          | myservice | The [service][4] name, for example, `web-backend`.                                                                                   |
+| DD_VERSION                      | service_version | V          |           | The [version][4] of your service.                                                                                                    |
 | DD_AGENT_HOST                   | host            | H          | localhost | The hostname for the Datadog agent.                                                                                                  |
 | DD_TRACE_AGENT_PORT             | port            | P          | 8126      | The Datadog agent listening port.                                                                                                    |
 | DD_TRACE_AGENT_URL              | url             | U          |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                                |
@@ -225,16 +228,14 @@ For most configurations, this consists of all processes visible within the profi
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][7] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/profiler/profiler_troubleshooting
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://github.com/DataDog/ddprof/releases
-[5]: https://app.datadoghq.com/profiling
-[6]: /getting_started/tagging/unified_service_tagging
-[7]: /getting_started/profiler/
+[2]: https://github.com/DataDog/ddprof/releases
+[3]: https://app.datadoghq.com/profiling
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: /getting_started/profiler/

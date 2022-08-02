@@ -52,11 +52,6 @@ Profiling your service to visualize all your stack traces in one place takes jus
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-
-For applications that are written in compiled languages such as **C**, **C++**, or **Rust**:
-
-{{< partial name="profiling/profiling-unmanaged-code.html" >}}
-
 ## Guide to using the profiler
 
 The [Getting Started with Profiler][1] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.

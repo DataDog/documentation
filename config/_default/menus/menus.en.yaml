@@ -1800,10 +1800,10 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_php
     weight: 107
-  - name: Enabling the Linux Profiler
-    url: tracing/profiler/enabling/linux/
+  - name: Enabling the Compiled Languages Profiler
+    url: tracing/profiler/enabling/ddprof/
     parent: profiler_enabling
-    identifier: profiler_enabling_linux
+    identifier: profiler_enabling_ddprof
     weight: 108
   - name: Search Profiles
     url: tracing/profiler/search_profiles/
