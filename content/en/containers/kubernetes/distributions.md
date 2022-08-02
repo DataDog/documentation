@@ -498,7 +498,8 @@ Custom `values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  kubelet:
+  kublet:
+    # set tlsVerify to false since the Kubelet certificates are self-signed
     tlsVerify: false
   # Disable the `kube-state-metrics` dependency chart installation.
   kubeStateMetricsEnabled: false
@@ -537,6 +538,7 @@ spec:
   agent:
     config:
       kubelet:
+        # set tlsVerify to false since the Kubelet certificates are self-signed
         tlsVerify: false
       # Add a toleration so that the agent can be scheduled on the control plane nodes.
       tolerations:
