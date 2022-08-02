@@ -21,7 +21,7 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 
 Use the query editor to customize the graph displayed on the Metrics Explorer page.
 
-You can specify the time frame in the top right corner of the page, the default is **Past 1 Hour**.
+You can specify the time frame in the top right corner of the page. The default is **Past 1 Hour**.
 
 {{< img src="metrics/explorer/metrics_explorer.png" alt="Metrics Explorer displaying two queries on a bar graph" style="width:80%;" >}}
 
