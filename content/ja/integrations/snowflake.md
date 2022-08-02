@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Snowflake: assets/dashboards/snowflake.json
+    Snowflake Organization Metrics: assets/dashboards/organization_metrics.json
   metrics_metadata: metadata.csv
   monitors:
     Snowflake failed logins: assets/recommended_monitors/snowflake_failed_logins.json
@@ -166,16 +167,16 @@ datadog-agent integration install datadog-snowflake==2.0.1
 
 注: 組織のメトリクスを監視するには、`user` が `ORGADMIN` ロールである必要があります。
 
-    ```yaml
-       - schema: ORGANIZATION_USAGE
-         min_collection_interval: 43200
-    ```
+  ```yaml
+      - schema: ORGANIZATION_USAGE
+        min_collection_interval: 43200
+  ```
 
 
 さらに、アカウントと組織の両方のメトリクスを同時に監視することができます。
 
-    ```yaml
-    instances:
+  ```yaml
+      instances:
       - account: example-inc
         username: DATADOG_ORG_ADMIN
         password: '<PASSWORD>'
@@ -191,7 +192,7 @@ datadog-agent integration install datadog-snowflake==2.0.1
         schema: ACCOUNT_USAGE
         database: SNOWFLAKE
         min_collection_interval: 3600
-    ```
+  ```
 
 #### 複数環境のデータ収集
 
