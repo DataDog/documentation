@@ -36,7 +36,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     npm install -g @datadog/datadog-ci
     ```
 
-2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
+2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps on this page. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
 
     ```sh
     datadog-ci lambda instrument -i
@@ -48,13 +48,13 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 4. Configure the Datadog site
 
-    Specify the [Datadog site][2] where the telemetry should be sent to. The default is `datadoghq.com`.
+    Specify the [Datadog site][2] where the telemetry should be sent. The default is `datadoghq.com`.
 
     ```sh
     export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu or ddog-gov.com
     ```
 
-5. Configure the Datadog API key
+5. Configure your Datadog API key
 
     Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
 
@@ -70,7 +70,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 6. Instrument your Lambda functions
 
-    **Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+    **Note**: Instrument your Lambda functions in a dev or staging environment first. If your instrumentation results are unsatisfactory, you can run `uninstrument` with the same arguments to revert the changes.
 
     To instrument your Lambda functions, run the following command.
 
