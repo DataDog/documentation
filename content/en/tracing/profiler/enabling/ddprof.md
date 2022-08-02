@@ -39,10 +39,10 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
 ### Standalone
 
-1. Download the appropriate [ddprof release][4] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` platform:
+1. Download the appropriate [ddprof release][4] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` (aka `x86_64`) platform:
 
    ```bash
-   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.0/ddprof-0.9.0-x86_64-unknown-linux-gnu.tar.xz
+   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.2/ddprof-0.9.2-amd64-unknown-linux-gnu.tar.xz
    tar xvf ddprof-x86_64-linux-gnu.tar.xz
    mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
@@ -96,7 +96,6 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 {{% /tab %}}
 {{< /tabs >}}
 
-
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][5].
 
 ### Library
@@ -104,7 +103,7 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 1. Download a release of [ddprof][4] with library support (v0.8.0 or later) and extract the tarball. For example:
 
    ```bash
-   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.0/ddprof-0.9.0-x86_64-unknown-linux-gnu.tar.xz
+   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.2/ddprof-0.9.2-amd64-unknown-linux-gnu.tar.xz
    tar xvf ddprof-x86_64-linux-gnu.tar.xz --directory /tmp
    ```
 
@@ -214,11 +213,15 @@ When a PID is specified in this way, only child processes (both forks and thread
 
 ### Globalmode
 
-When globalmode is engaged, the profiler attempts to profile as many processes as possible. Usually, this requires elevated permissions (for example, running as root or granting `CAP_PERFMON`) or setting `perf_event_paranoid` to `-1`.
+Global mode is intended for debug purposes. When `global` is set to `yes`, the profiler attempts to profile all the visible processes. 
+This requires elevated permissions (for example, running as root or granting `CAP_PERFMON`, `CAP_SYSADMIN`) or setting `perf_event_paranoid` to `-1`.
 
-When the profiler has non-root UID, usually only processes owned by the matching UID are instrumented.
+    ```bash
+    ./ddprof --environment staging --global yes --service_version full-host-profile
+    ```
 
-When the profiler has root UID, all visible processes are instrumented. For most configurations, this consists of all processes visible within the profiler's PID namespace, as well as some other processes (such as the container runtime--these external processes are listed as "PID 0" in the UI).
+When the profiler has root UID, all visible processes are instrumented.
+For most configurations, this consists of all processes visible within the profiler's PID namespace.
 
 ## Not sure what to do next?
 
