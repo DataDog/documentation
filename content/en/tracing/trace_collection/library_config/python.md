@@ -62,8 +62,8 @@ Propagation styles to use when extracting tracing headers. When multiple values 
 : A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.
 
 `DD_TRACE_HEADER_TAGS`
-**Default**: `null`<br>
-CSV of header names that are reported on the root span as tags. E.g. `DD_TRACE_HEADER_TAGS="User-Agent:http.user_agent,Referer:http.referer,Content-Type:http.content_type,Etag:http.etag"`.
+: **Default**: `null`<br>
+CSV of header names that are reported on the root span as tags. For example `DD_TRACE_HEADER_TAGS="User-Agent:http.user_agent,Referer:http.referer,Content-Type:http.content_type,Etag:http.etag"`.
 
 `DD_TRACE_ENABLED`
 : **Default**: `true`<br>
