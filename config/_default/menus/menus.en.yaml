@@ -1800,7 +1800,7 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_php
     weight: 107
-  - name: Enabling the Compiled Languages Profiler
+  - name: Enabling the Profiler for Compiled Languages
     url: tracing/profiler/enabling/ddprof/
     parent: profiler_enabling
     identifier: profiler_enabling_ddprof
