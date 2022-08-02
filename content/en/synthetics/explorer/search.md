@@ -47,7 +47,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 | Facet            | Description                                                                                             |
 |------------------|---------------------------------------------------------------------------------------------------------|
-| `Execution Rule` | The execution rule associated with the test result of the batch: `Blocking`, `Non Blocking`, and `Skipped`. |
+| <code>Execution&nbsp;Rule</code> | The execution rule associated with the test result of the batch: `Blocking`, `Non Blocking`, and `Skipped`. |
 | `Fast Retries`   | The number of fast retries associated with the test result of the batch.                                |
 | `Location`       | The location associated with the test result of the batch.                                              |
 | `Test ID`        | The test ID associated with the test result of the batch.                                               |

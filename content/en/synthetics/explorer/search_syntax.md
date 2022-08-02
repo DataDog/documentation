@@ -15,13 +15,13 @@ A query is composed of terms and operators.
 There are two types of terms:
 
 - A **single term** is a single word such as `test` or `hello`.
-- A **sequence** is a group of wods surrounded by double quotes, such as `"hello dolly"`.
+- A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
 To combine multiple terms into a complex query, you can use any of the following Boolean operators:
 
 | Operator | Description                                                                                        |
 |--------------|------------------------------------------------------------------------------------------------------- |
-| `AND`        | **Intersection**: Both terms are in the selected views (if nothing is added, AND is taken by default). |
+| `AND`        | **Intersection**: Both terms are in the selected views. If no operator is used, `AND` is used by default. |
 | `OR`         | **Union**: Either term is contained in the selected views.                                             |
 | `-`          | **Exclusion**: The following term is not in the view.                                                  |
 

@@ -2689,7 +2689,7 @@ main:
     parent: synthetics
     identifier: synthetics_explorer
     weight: 7
-  - name: Search
+  - name: Search Test Batches
     url: /synthetics/explorer/search
     parent: synthetics_explorer
     identifier: synthetics_explorer_search
