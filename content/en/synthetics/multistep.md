@@ -214,6 +214,9 @@ For more information, see [Using Synthetic Test Monitors][14].
 
 ## Variables
 
+### Extract variables
+
+In addition to creating local variables, you can [extract variables from any step](#extract-variables-from-the-response) of your multistep API test and [re-inject the values in subsequent steps](#use-variables).
 ### Create local variables
 
 To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
@@ -234,10 +237,6 @@ To create a local variable, click **Create a Local Variable** at the top right h
 : Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
 
 To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
-
-### Extract variables
-
-You can [extract variables from any step](#extract-variables-from-the-response) of your multistep API test and [re-inject the values in subsequent steps](#use-variables).
 
 ### Use variables
 

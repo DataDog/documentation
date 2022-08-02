@@ -123,26 +123,30 @@ To create a local variable, click **Create a Local Variable** at the top right h
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` chosen unit.
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
 
 To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
 ### Use global variables
 
-You can use the [global variables defined in **Settings**][5] in the **Starting URL** in addition to the **Advanced Options** of your browser tests. To display your list of variables, type `{{` in the desired field.
+You can use the [global variables defined in **Settings**][5] in the **Starting URL** and **Advanced Options** of your browser test details, as well as in your test recording to define local variables. To display a list of available variables, type `{{` in the desired field.
 
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="Inserting a global variable in the request header of a browser test" video="true" width="80%" >}}
+{{< img src="synthetics/browser_tests/recording_global_variable.mp4" alt="Defining a local variable from global variables" video="true" width="90%" >}}
 
-For more information about using variables in your browser test recording, see [Browser Test Steps][6].
+Define the variables you want to incorporate into the user journey before you start recording.
+
+{{< img src="synthetics/browser_tests/recording_inject_variable.mp4" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
+
+You can inject the variables available to you while recording. For more information about using variables in your browser test recording, see [Browser Test Steps][6].
 
 ### Define alert conditions
 
 You can customize alert conditions to define the circumstances under which you want a test to send a notification alert.
 
+{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule" style="width:80%" >}}
+
 * An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and on how many locations a test needs to fail before triggering the notification.
 * Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured with the [API][7].
-
-{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule" >}}
 
 ### Configure the test monitor
 
@@ -152,50 +156,51 @@ A notification is sent according to the set of alerting conditions. Use this sec
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | Show when monitor alerts                                            |
-    | `{{^is_alert}}`            | Show unless monitor alerts                                          |
-    | `{{#is_recovery}}`         | Show when monitor recovers from either ALERT   |
-    | `{{^is_recovery}}`         | Show unless monitor recovers from either ALERT |
-    | `{{#is_renotify}}`         | Show when the monitor renotifies.   |
-    | `{{^is_renotify}}`         | Show unless the monitor renotifies. |
-    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).   |
-    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).  |
+    | `{{#is_alert}}`            | Show when the monitor alerts.                                       |
+    | `{{^is_alert}}`            | Show unless the monitor alerts.                                     |
+    | `{{#is_recovery}}`         | Show when the monitor recovers from alert.                          |
+    | `{{^is_recovery}}`         | Show unless the monitor recovers from alert.                        |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
+    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
+    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
+    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
     Notification messages include the **message** defined in this section and information about the failing locations.
 
-2. Choose your [services][10] or team members to notify.
+2. Choose team members and/or services to notify.
 3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 4. Click **Save Details and Record Test** to save your test configuration and record your browser steps.
 
-For more information, see [Using Synthetic Test Monitors][11].
+For more information, see [Using Synthetic Test Monitors][10].
 
 ## Record your steps
 
-Tests can be only recorded from [Google Chrome][12]. To record your test, download the [Datadog Record Test extension for Google Chrome][13].
+Tests can be only recorded from [Google Chrome][11]. To record your test, download the [Datadog Record Test extension for Google Chrome][12].
 
-You can switch tabs in a browser test recording in order to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][14]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
+You can switch tabs in a browser test recording in order to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][13]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
 
-{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="80%" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="90%" >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in **Incognito mode** to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
-2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][15]. 
+2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][14]. 
 3. Click **Start Recording** to begin recording your browser test.
-4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][16] within your browser test scenario on the left.
-5. In addition to the automatically recorded steps, you can also use the [steps][16] available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;">}}
+4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][15] within your browser test scenario on the left.
+5. In addition to the automatically recorded steps, you can also use the [steps][15] available in the upper left corner to enrich your scenario:
 
-    **Note**: You should always make sure to **end your browser test with an [assertion][14]** to confirm the journey executed by the browser test resulted in the expected state.
+   {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:70%;">}}
+
+   Datadog recommends ending your browser test with an **[assertion][13]** to confirm the journey executed by the browser test resulted in the expected state.
 6. Once you have finished your scenario, click **Save and Launch Test**.
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][17] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][17].
+By default, only users with the [Datadog Admin and Datadog Standard roles][16] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][16].
 
-If you are using the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][16], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][18] on their accounts.
+Access restriction is available for customers using [custom roles][17] on their accounts.
 
 You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -214,12 +219,11 @@ You can restrict access to a browser test based on the roles in your organizatio
 [7]: /api/v1/synthetics/#create-or-clone-a-test
 [8]: http://daringfireball.net/projects/markdown/syntax
 [9]: /monitors/notify/?tab=is_alert#integrations
-[10]: /integrations/#cat-notification
-[11]: /synthetics/guide/synthetic-test-monitors
-[12]: https://www.google.com/chrome
-[13]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[14]: /synthetics/browser_tests/actions/#assertion
-[15]: /synthetics/guide/explore-rum-through-synthetics/
-[16]: /synthetics/browser_tests/actions/
-[17]: /account_management/rbac#custom-roles
-[18]: /account_management/rbac/#create-a-custom-role
+[10]: /synthetics/guide/synthetic-test-monitors
+[11]: https://www.google.com/chrome
+[12]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[13]: /synthetics/browser_tests/actions/#assertion
+[14]: /synthetics/guide/explore-rum-through-synthetics/
+[15]: /synthetics/browser_tests/actions/
+[16]: /account_management/rbac#custom-roles
+[17]: /account_management/rbac/#create-a-custom-role
