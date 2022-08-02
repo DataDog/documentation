@@ -63,7 +63,7 @@ Propagation styles to use when extracting tracing headers. When multiple values 
 
 `DD_TRACE_HEADER_TAGS`
 : **Default**: `null`<br>
-CSV of header names that are reported on the root span as tags. For example `DD_TRACE_HEADER_TAGS="User-Agent:http.user_agent,Referer:http.referer,Content-Type:http.content_type,Etag:http.etag"`.
+Comma-separated list of header names that are reported on the root span as tags. For example, `DD_TRACE_HEADER_TAGS="User-Agent:http.user_agent,Referer:http.referer,Content-Type:http.content_type,Etag:http.etag"`.
 
 `DD_TRACE_ENABLED`
 : **Default**: `true`<br>
