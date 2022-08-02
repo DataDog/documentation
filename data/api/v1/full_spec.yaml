@@ -21792,8 +21792,8 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
+        '204':
+          description: No Content
         '403':
           content:
             application/json:
