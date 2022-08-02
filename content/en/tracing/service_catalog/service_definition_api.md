@@ -100,7 +100,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
                     "warnings": []
                 },
                 "schema": {
-                    "dd-service": "shopping-service"
+                    "dd-service": "shopping-service",
                     "schema-version": "v2",
                     "links": [],
                     "contacts": [],
@@ -109,7 +109,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
                     "tags": null,
                     "integrations": {},
                     "team": "",
-                    "extensions": {},
+                    "extensions": {}
                 }
             },
             "type": "service-definition"
