@@ -15,7 +15,7 @@ On the Service Catalog page, if the **Registered** column has a green check mark
 
 Any service that sends tracing data to Datadog APM is automatically listed in the Service Catalog. Until you register it, it shows a gray check mark when you hover over it.
 
-To register the service and add ownership information, related links such as runbooks, and links to source code repositories by [update the service definition][1].
+To register the service and add ownership information, related links such as runbooks, and links to source code repositories, [update the service definition][1].
 
 Go to [Service Catalog > Get Started][2] to get help forming valid JSON to post with the API.
 
