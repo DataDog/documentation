@@ -498,7 +498,7 @@ Custom `values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  kublet:
+  kubelet:
     # Set tlsVerify to false since the Kubelet certificates are self-signed
     tlsVerify: false
   # Disable the `kube-state-metrics` dependency chart installation.
