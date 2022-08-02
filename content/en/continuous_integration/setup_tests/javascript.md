@@ -121,12 +121,14 @@ You can add custom tags and metrics to your test by grabbing the current active 
     const testSpan = require('dd-trace').scope().active()
     testSpan.setTag('team.owner', 'calculator')
     testSpan.setTag('test.importance', 2)
-    // your test continues normally
+    // test continues normally
+    // ...
   })
 ```
 
-For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][7].
+For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
 
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -159,12 +161,14 @@ You can add custom tags and metrics to your test by grabbing the current active 
     const stepSpan = require('dd-trace').scope().active()
     stepSpan.setTag('team.owner', 'calculator')
     stepSpan.setTag('test.importance', 2)
-    // your test step continues normally
+    // test continues normally
+    // ...
   });
 ```
 
-For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][7].
+For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
 
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
