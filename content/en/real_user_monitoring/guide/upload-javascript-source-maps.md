@@ -81,9 +81,7 @@ See the following example:
 
 The best way to upload source maps is to add an extra step in your CI pipeline and run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files.
 
-{{< tabs >}}
-{{% tab "US" %}}
-
+{{< site-region region="us" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command once per service in your RUM application:
@@ -97,12 +95,12 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
 
+{{< site-region region="eu,us3,us5,gov" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
-3. Configure the CLI to upload files to the EU region by exporting two environment variables: `export DATADOG_SITE="datadoghq.eu"` and `export DATADOG_API_HOST="api.datadoghq.eu"`.
+3. Configure the CLI to upload files to the {{<region-param key="dd_site_name">}} site by exporting two environment variables: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} and `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
 4. Run the following command once per service in your RUM application:
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
@@ -113,8 +111,7 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 To minimize overhead on your CI's performance, the CLI is optimized to upload as many source maps as you need in a short amount of time (typically a few seconds).
 
