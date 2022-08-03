@@ -284,7 +284,7 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
 
-Use [Notification Variables][1] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The attributes can be seen on a signal in the Overview tab and in the JSON section. Use the following syntax to access the attributes in the notification: `{{@attribute}}`. Use the JSON dot notation (for example, `{{@attribute.inner_key}}`) to access the inner keys of the event attributes.
+Use [Notification Variables][1] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The attributes are in the JSON section of the Overview tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation (for example, `{{@attribute.inner_key}}`) to access the inner keys of the event attributes.
 
 This JSON object is an example of event attributes which may be associated with a security signal:
 

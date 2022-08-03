@@ -23,7 +23,7 @@ When you [create or modify a new Detection Rule][1], you can use the Set Rule Ca
 
 ### Set rule case
 
-In the Set Rule Case section, add rule cases to determine when a Detection Rule triggers a security signal and the severity of the signal. Add a notification in the Notify option so that signals generated from that case send a notification to the selected target. 
+In the Set Rule Case section, add rule cases to determine when a Detection Rule triggers a security signal and the severity of the signal. Use the Notify dropdown to send a notification to the selected target for signals generated from that case. 
 
 ### Say what's happening
 
@@ -51,4 +51,4 @@ Notification Rules allow you to set general alerting preferences so that you don
 
 [1]: /security_platform/detection_rules/#creating-and-managing-detection-rules
 [2]: /security_platform/notifications/variables/
-[3]: /security_platform/notifications/notification/rules/
+[3]: /security_platform/notifications/rules/

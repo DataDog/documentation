@@ -1,15 +1,22 @@
 ---
 title: Variables
 kind: documentation
+further_reading:
+- link: "/security_platform/detection_rules/"
+  tag: "Documentation"
+  text: "Explore security detection rules"
+- link: "/security_platform/notifications/"
+  tag: "Documentation"
+  text: "Learn more about Security Platform notifications"
 ---
 
 ## Overview
 
-When [creating a new detection rule or modifying an existing one][1], use [template variables](#template-variables), such as [attributes](#attribute-variables) and [signal tags](#tag-variables), and [conditional variables](#conditional-variables) to customize a rule’s notification message. When a signal is generated from the rule, the variables are populated with values related to that signal. 
+When [creating a new detection rule or modifying an existing one][1], use [template variables](#template-variables), such as attributes and signal tags, and [conditional variables](#conditional-variables) to customize a rule’s notification message. When a signal is generated from the rule, the variables are populated with values related to that signal. 
 
 ## Template Variables
 
-Template variables permit injection of dynamic context from triggered logs or traces directly into a security signal and its associated notifications.
+Use template variables to inject dynamic context from triggered logs or traces directly into a security signal and its associated notifications.
 
 The following variables are available:
 
@@ -25,18 +32,11 @@ The following variables are available:
 | `{{rule_name}}`       | Name of the associated rule.                                                                  |
 | `{{case_name}}`       | Name of the triggering rule case.                                                             |
 
-Epoch template variables create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string in a notification. For example:
-
-```
-{{eval "first_seen_epoch-15*60*1000"}}
-```
-See [Evaluation](#evaluation) for more information on the `eval` function.
-
 ### Dynamic links
 
 Use template variables to dynamically link to a related resource for your investigation. 
 
-For example, if the signal detects a suspicious user login, use `{{@user.id}}` to create a dynamic link to another resource:
+For example, if a signal detects a suspicious user login, use `{{@user.id}}` to create a dynamic link to another resource:
 
 ```
 * [Investigate user in the authentication dashboard](https://app.datadoghq.com/example/integration/security-monitoring---authentication-events?tpl_var_username={{@usr.id}})
@@ -48,23 +48,37 @@ Or, if a signal is tagged with a specific service, use the `{{@service}}` variab
 * [Investigate service in the services dashboard](https://app.datadoghq.com/example/integration/application-security---service-events?tpl_var_service={{@service}})
 ```
 
-### Evaluation
+### Evaluation of numerical values
 
 For template variables that return numerical values, use `eval` to perform mathematical operations or change the value’s format. For full details, see [Template Variable Evaluation][2].
 
+### Epoch
+
+Epoch template variables create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string in a notification. For example:
+
+```
+{{eval "first_seen_epoch-15*60*1000"}}
+```
+
+For more information on the `eval` function, see [Template Variable Evaluation][2].
+
 ### Local time
 
-Use the local_time function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: {{local_time 'time_variable' 'timezone'}}. For example, to add the last triggered time of the signal in the Tokyo time zone in your notification, include the following in the notification message:
+Use the local_time function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time 'time_variable' 'timezone'}}`. 
+
+For example, to add the last triggered time of the signal in the Tokyo time zone in your notification, include the following in the notification message:
+
 ```
 {{local_time 'last_triggered_at' 'Asia/Tokyo'}}
 ```
 
-The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`. For example, `2021-05-31 23:43:27+09:00`. See the [list of TZ database time zones][3], specifically the `TZ database name` column to see the list of available time zone values.
+The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example, `2021-05-31 23:43:27+09:00`. See the [list of TZ database time zones][3], specifically the `TZ database name` column to see the list of available time zone values.
 
 ## Attribute variables
 
 Use attribute variables to customize signal notifications with specific information about the triggered signal. 
-To see a signal’s list of event attributes, click JSON at the bottom of the signal’s side panel. Use these event attributes in your rule notifications with the following syntax: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation. For example, `{{@attribute.inner_key}})`.
+
+To see a signal’s list of event attributes, click **JSON** at the bottom of the Overview tab in the signal’s side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
 
 The following is an example JSON object with event attributes that may be associated with a security signal:
 
@@ -125,7 +139,7 @@ user@domain.com just logged in without MFA from 1.2.3.4.
 }
 ```
 
-If you use the following in the “Say what’s happening” section:
+If you use the following in the Say What's Happening section:
 
 ```
 Real routes targeted for {{@service}}.
@@ -151,11 +165,11 @@ The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}}
 ```
 ## Tag variables
 
-To add a tag variable to your rule’s notification message, use the following syntax: `{{tag_name}}`. 
+Use the following syntax to add a tag variable to your rule’s notification message: `{{tag_name}}`. 
 
 For tags following the `key:value` syntax, use the variable: `{{key.name}}`. This renders the value associated with the key in the notification. For example, if a signal has the tag key `region`, use the variable `{{region.name}}` in your notification message.
 
-Note: There is no need to use `@` to access the tag value.
+**Note:** There is no need to use `@` to access the tag value.
 
 If a tag key includes a period, use brackets around the full key when using a tag variable. For example, if your tag is `dot.key.test:five`, use `{{[dot.key.test].name}}`.
 
@@ -167,7 +181,7 @@ For example, if a signal has a `service` tag, you can have your notifications ro
 @slack-{{service.name}} There is a security issue with {{service.name}}.
 ```
 
-So, if the signal has the `service:ad-server`, the notification is sent to the `#ad-server` Slack channel with the following content:
+For example, if the signal has the `service:ad-server`, the notification is sent to the `#ad-server` Slack channel with the following content:
 
 ```
 @slack-ad-server There is an ongoing issue with ad-server.
@@ -212,7 +226,7 @@ Use if-else logic to see if an attribute matches a value:
 
 ### Raw format
 
-If your signal notification needs to send double curly braces, such as `{{ <TEXT> }}`, use `{{{{raw}}}}` formatting. For example, the following:
+Use the `{{{{raw}}}}` format if your signal notification needs to send double curly braces, such as `{{ <TEXT> }}`. For example, the following syntax:
 
 ```
 {{{{raw}}}}
@@ -226,7 +240,7 @@ Outputs:
 {{ <TEXT_1> }} {{ <TEXT_2> }}
 ```
 
-The `^|#` helpers used in conditional variables cannot be used with `{{{{raw}}}}` formatting and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable use the following template:
+The `^|#` helpers used in conditional variables cannot be used with the `{{{{raw}}}}` format and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable, use the following template:
 
 ```
 {{{{is_match "host.name" "<HOST_NAME>"}}}}
@@ -234,11 +248,15 @@ The `^|#` helpers used in conditional variables cannot be used with `{{{{raw}}}}
 {{{{/is_match}}}}
 ```
 
-If host.name matches `<HOST_NAME>`, the template outputs:
+If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 ```
 {{ .matched }} the host name
 ```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_platform/detection_rules/#creating-and-managing-detection-rules
 [2]: /monitors/guide/template-variable-evaluation/
