@@ -34,12 +34,11 @@ The following widget types are supported:
 - [Heat Map][5]
 - [Monitor Summary][6]
 - [Notes and Links][7]
-- [Scatter Plot][8]
-- [Service Summary][9]
+- [Query Value][8]
+- [Scatter Plot][9]
 - [Table][10]
 - [Timeseries][11]
 - [Top List][12]
-- [Query Value][13]
 
 ### Set a schedule
 
@@ -74,7 +73,7 @@ From the configuration modal that opens, you can pause an existing report or cre
 
 Only users with the **Dashboard Report Write** permission can generate a report. This permission is turned on by default for Admins and off for all other roles. 
 
-Images generated in reports show all data regardless of granular read restrictions. We recommend limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn more about managing roles and permissions, read our [account management documentation][14]. 
+Images generated in reports show all data regardless of granular read restrictions. We recommend limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn more about managing roles and permissions, read our [account management documentation][13]. 
 
 {{< img src="dashboards/reporting/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:100%;" >}}
 
@@ -89,10 +88,9 @@ Images generated in reports show all data regardless of granular read restrictio
 [5]: /dashboards/widgets/heat_map/
 [6]: /dashboards/widgets/monitor_summary/
 [7]: /dashboards/widgets/note/
-[8]: /dashboards/widgets/scatter_plot/
-[9]: /dashboards/widgets/service_summary/
+[8]: /dashboards/widgets/query_value/
+[9]: /dashboards/widgets/scatter_plot/
 [10]: /dashboards/widgets/table/
 [11]: /dashboards/widgets/timeseries/
 [12]: /dashboards/widgets/top_list/
-[13]: /dashboards/widgets/query_value/
-[14]: /account_management/users/#edit-a-user-s-roles
+[13]: /account_management/users/#edit-a-user-s-roles

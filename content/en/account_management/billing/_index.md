@@ -21,8 +21,9 @@ It is recommended that containers are monitored with a single containerized Agen
 
 ### Serverless
 
-Datadog bills based on the sum of AWS Lambda invocations across the month for your accounts. Pro and Enterprise plans include 150,000 Indexed Spans and 5 custom metrics per million invocations. Billing for serverless APM depends on the total number of [Indexed Spans][4] exceeding the bundled quantity submitted to the Datadog APM service at the end of the month. There are no billable [APM Hosts][4] when using serverless.
+Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. Pro and Enterprise plans include five custom metrics per billable function.
 
+Billing for serverless APM is based on the sum of AWS Lambda invocations connected to APM ingested spans in a given month. You will also be billed for the total number of [indexed spans][4] submitted to the Datadog APM service exceeding the bundled quantity at the end of the month. There are no billable [APM Hosts][4] when using serverless.
 
 For more information, see the [Serverless billing page][5] and the [Datadog Pricing page][6].
 

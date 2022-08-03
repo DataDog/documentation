@@ -265,6 +265,16 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 - Application type (for example, Web application running in IIS).
 
 
+## High CPU usage when enabling the profiler
+
+The profiler has a fixed overhead. The exact value can vary but should be expected to be about:
+ -  200ms of CPU time per second on Linux (0.2 CPU)
+ -  20ms of CPU time per second on Windows (0.02 CPU)
+
+This fixed cost means that the relative overhead of the profiler can be significant in very small containers. For example, if you run the profiler in a Linux container with 0.4 CPU assigned, the fixed cost of 0.2 CPU means that the relative overhead is 50%. Adjust the container limits accordingly.
+
+
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 {{< /programming-lang >}}
