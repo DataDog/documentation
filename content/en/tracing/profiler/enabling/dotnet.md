@@ -16,10 +16,6 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-<div class="alert alert-warning">
-Datadog .NET Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
-</div>
-
 The following profiling features are available:
 - **Method durations** shows the overall time taken by each method from your code.
 - **CPU** shows the time taken executing CPU tasks (see Configuration section to enable it).
