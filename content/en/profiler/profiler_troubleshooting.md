@@ -5,6 +5,8 @@ further_reading:
     - link: '/tracing/troubleshooting'
       tag: 'Documentation'
       text: 'APM Troubleshooting'
+aliases:
+  - /tracing/profiler/profiler_troubleshooting/
 ---
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,linux" >}}
@@ -361,8 +363,8 @@ This happens when your application is built with `libdd_profiling.so` as a depen
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-[3]: /tracing/profiler/enabling/linux/?tab=environmentvariables#configuration
-[4]: /tracing/profiler/enabling/linux/
+[3]: /profiler/enabling/linux/?tab=environmentvariables#configuration
+[4]: /profiler/enabling/linux/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

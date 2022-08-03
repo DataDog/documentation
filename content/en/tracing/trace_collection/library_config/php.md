@@ -389,6 +389,6 @@ When the application runs in a docker container, the path `/proc/self` should al
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [3]: /tracing/setup/nginx/#nginx-and-fastcgi
-[4]: /tracing/profiler/enabling/php/
+[4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
 [6]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

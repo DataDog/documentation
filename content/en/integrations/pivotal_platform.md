@@ -468,4 +468,4 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [27]: /integrations/ntp/#metrics
 [28]: https://github.com/cloudfoundry/loggregator-api
 [29]: https://docs.cloudfoundry.org/running/all_metrics.html
-[30]: /tracing/profiler/enabling/
+[30]: /profiler/enabling/

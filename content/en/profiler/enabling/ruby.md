@@ -8,15 +8,17 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'tracing/profiler/search_profiles'
+    - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: 'tracing/profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
     - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
       tag: 'Blog'
       text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
+aliases:
+  - /tracing/profiler/enabling/ruby/
 ---
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.

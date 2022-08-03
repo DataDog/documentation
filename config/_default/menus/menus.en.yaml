@@ -8,7 +8,7 @@ main:
   - name: Infrastructure
     identifier: infrastructure_heading
     weight: 3000000
-  - name: APM
+  - name: Application Performance
     identifier: apm_heading
     weight: 4000000
   - name: Log Management
@@ -1296,7 +1296,7 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
-  - name: APM & Continuous Profiler
+  - name: APM
     url: tracing/
     pre: apm
     identifier: tracing
@@ -1765,76 +1765,6 @@ main:
     parent: tracing_services
     identifier: tracing_apm_monitors
     weight: 607
-  - name: Continuous Profiler
-    url: tracing/profiler/
-    parent: tracing
-    identifier: profiler
-    weight: 8
-  - name: Enabling the Profiler
-    url: tracing/profiler/enabling/java/
-    parent: profiler
-    identifier: profiler_enabling
-    weight: 701
-  - name: Enabling the Java Profiler
-    url: tracing/profiler/enabling/java/
-    parent: profiler_enabling
-    identifier: profiler_enabling_java
-    weight: 101
-  - name: Enabling the Python Profiler
-    url: tracing/profiler/enabling/python/
-    parent: profiler_enabling
-    identifier: profiler_enabling_python
-    weight: 102
-  - name: Enabling the Go Profiler
-    url: tracing/profiler/enabling/go/
-    parent: profiler_enabling
-    identifier: profiler_enabling_go
-    weight: 103
-  - name: Enabling the Ruby Profiler
-    url: tracing/profiler/enabling/ruby/
-    parent: profiler_enabling
-    identifier: profiler_enabling_ruby
-    weight: 104
-  - name: Enabling the Node.js Profiler
-    url: tracing/profiler/enabling/nodejs/
-    parent: profiler_enabling
-    identifier: profiler_enabling_nodejs
-    weight: 105
-  - name: Enabling the .NET Profiler
-    url: tracing/profiler/enabling/dotnet/
-    parent: profiler_enabling
-    identifier: profiler_enabling_dotnet
-    weight: 106
-  - name: Enabling the PHP Profiler
-    url: tracing/profiler/enabling/php/
-    parent: profiler_enabling
-    identifier: profiler_enabling_php
-    weight: 107
-  - name: Enabling the Linux Profiler
-    url: tracing/profiler/enabling/linux/
-    parent: profiler_enabling
-    identifier: profiler_enabling_linux
-    weight: 108
-  - name: Search Profiles
-    url: tracing/profiler/search_profiles/
-    parent: profiler
-    identifier: profiler_search_profiles
-    weight: 702
-  - name: Investigate Slow Traces or Endpoints
-    url: tracing/profiler/connect_traces_and_profiles/
-    parent: profiler
-    identifier: profiler_traces_profiles
-    weight: 703
-  - name: Compare Profiles
-    url: tracing/profiler/compare_profiles
-    parent: profiler
-    identifier: profiler_compare
-    weight: 704
-  - name: Profiler Troubleshooting
-    url: tracing/profiler/profiler_troubleshooting/
-    parent: profiler
-    identifier: profiler_profiler_troubleshooting
-    weight: 705
   - name: Service Catalog
     url: tracing/service_catalog/
     parent: tracing
@@ -1930,6 +1860,77 @@ main:
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
     weight: 1208
+  - name: Continuous Profiler
+    url: profiler/
+    pre: profiling-1
+    identifier: profiler
+    parent: apm_heading
+    weight: 145000
+  - name: Enabling the Profiler
+    url: profiler/enabling/java/
+    parent: profiler
+    identifier: profiler_enabling
+    weight: 1
+  - name: Java
+    url: profiler/enabling/java/
+    parent: profiler_enabling
+    identifier: profiler_enabling_java
+    weight: 101
+  - name: Python
+    url: profiler/enabling/python/
+    parent: profiler_enabling
+    identifier: profiler_enabling_python
+    weight: 102
+  - name: Go
+    url: profiler/enabling/go/
+    parent: profiler_enabling
+    identifier: profiler_enabling_go
+    weight: 103
+  - name: Ruby
+    url: profiler/enabling/ruby/
+    parent: profiler_enabling
+    identifier: profiler_enabling_ruby
+    weight: 104
+  - name: Node.js
+    url: profiler/enabling/nodejs/
+    parent: profiler_enabling
+    identifier: profiler_enabling_nodejs
+    weight: 105
+  - name: .NET
+    url: profiler/enabling/dotnet/
+    parent: profiler_enabling
+    identifier: profiler_enabling_dotnet
+    weight: 106
+  - name: PHP
+    url: profiler/enabling/php/
+    parent: profiler_enabling
+    identifier: profiler_enabling_php
+    weight: 107
+  - name: Linux
+    url: profiler/enabling/linux/
+    parent: profiler_enabling
+    identifier: profiler_enabling_linux
+    weight: 108
+  - name: Search Profiles
+    url: profiler/search_profiles/
+    parent: profiler
+    identifier: profiler_search_profiles
+    weight: 2
+  - name: Investigate Slow Traces or Endpoints
+    url: profiler/connect_traces_and_profiles/
+    parent: profiler
+    identifier: profiler_traces_profiles
+    weight: 3
+  - name: Compare Profiles
+    url: profiler/compare_profiles
+    parent: profiler
+    identifier: profiler_compare
+    weight: 4
+  - name: Profiler Troubleshooting
+    url: profiler/profiler_troubleshooting/
+    parent: profiler
+    identifier: profiler_profiler_troubleshooting
+    weight: 5
   - name: CI Visibility
     url: continuous_integration/
     pre: ci

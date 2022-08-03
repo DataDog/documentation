@@ -2,15 +2,16 @@
 title: Continuous Profiler
 kind: Documentation
 aliases:
-    - /tracing/profiling
+    - /tracing/profiling/
+    - /tracing/profiler/
 further_reading:
-    - link: '/tracing/profiler/enabling'
+    - link: '/profiler/enabling'
       tag: 'Documentation'
       text: 'Enable continuous profiler for your application.'
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Continuous Profiler'
-    - link: 'tracing/profiler/search_profiles'
+    - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
     - link: '/developers/guide/data-collection-resolution-retention/'
@@ -69,19 +70,19 @@ After you've configured your application to send profiles to Datadog, start gett
 
 [Use tags to search profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
 
-{{< img src="tracing/profiling/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
 
 ### Track function performance over deployments
 
 Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
 
-{{< img src="tracing/profiling/profiling-metric-dashboard.mp4" alt="Add profiling metrics to your dashboards." video=true >}}
+{{< img src="profiler/profiling-metric-dashboard.mp4" alt="Add profiling metrics to your dashboards." video=true >}}
 
 ### Connect traces to profiling data
 
 Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][4] to find specific lines of code related to performance issues.
 
-{{< img src="tracing/profiling/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
 ### Find changes in performance by comparing profiles
 
@@ -92,7 +93,7 @@ Comparing similar profiles from different times, environments, or deployments ca
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/profiler/
-[2]: /tracing/profiling/search_profiles
+[2]: /profiler/search_profiles
 [3]: /tracing/
-[4]: /tracing/profiler/connect_traces_and_profiles/
-[5]: /tracing/profiler/compare_profiles/
+[4]: /profiler/connect_traces_and_profiles/
+[5]: /profiler/compare_profiles/

@@ -2,9 +2,10 @@
 title: Search Profiles
 kind: documentation
 aliases:
-    - /tracing/profiling/search_profiles
+    - /tracing/profiling/search_profiles/
+    - /tracing/profiler/search_profiles/
 further_reading:
-    - link: 'tracing/profiler/enabling'
+    - link: 'profiler/enabling'
       tag: 'Documentation'
       text: 'Enable continuous profiler for your application'
     - link: 'getting_started/profiler'
@@ -15,7 +16,7 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog'
 ---
 
-{{< img src="tracing/profiling/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
 
 Each row is a profile of a process for a short amount of time. By default, profiles are uploaded once a minute. Depending on the language, these processes are profiled between 15s and 60s.
 
@@ -42,7 +43,7 @@ The following measures are available:
 
 Click on a line to view a specific profile:
 
-{{< img src="tracing/profiling/profiling_flamegraph.mp4" alt="A specific profile" video=true >}}
+{{< img src="profiler/profiling_flamegraph.mp4" alt="A specific profile" video=true >}}
 
 The header contains information associated with your profile, like the service that generated it, or the environment and code version associated to it.
 
@@ -68,7 +69,7 @@ In the **Profiles** tab, you can see all profile types available for a given lan
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,linux" >}}
 {{< programming-lang lang="java" >}}
 
-{{< img src="tracing/profiling/profile.png" alt="A specific profile">}}
+{{< img src="profiler/profile.png" alt="A specific profile">}}
 
 Once enabled, the following profile types are collected:
 
@@ -194,7 +195,7 @@ Heap Live Size
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-{{< img src="tracing/profiling/profile_dotnet.png" alt="A .NET profile">}}
+{{< img src="profiler/profile_dotnet.png" alt="A .NET profile">}}
 
 Once enabled, the following profile type is collected:
 

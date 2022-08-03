@@ -168,4 +168,4 @@ In the [Continuous Profiler][4], you can directly access traces in the source re
 [1]: https://app.datadoghq.com/apm/error-tracking
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
 [3]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
-[4]: https://docs.datadoghq.com/tracing/profiler/search_profiles/
+[4]: /profiler/search_profiles/

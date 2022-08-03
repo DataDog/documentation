@@ -313,12 +313,12 @@ Java APM has minimal impact on the overhead of an application:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/profiler/enabling/?code-lang=java
+[1]: /profiler/enabling/?code-lang=java
 [2]: /tracing/compatibility_requirements/java
 [3]: https://app.datadoghq.com/apm/docs
 [4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
 [5]: /account_management/billing/apm_tracing_profiler/
-[6]: /tracing/profiler/
+[6]: /profiler/
 [7]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [8]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [9]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html

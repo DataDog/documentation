@@ -8,12 +8,14 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'tracing/profiler/search_profiles'
+    - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: 'tracing/profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
+aliases:
+  - /tracing/profiler/enabling/java/
 ---
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
@@ -113,11 +115,11 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 
 [1]: /tracing/trace_collection/
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
-[3]: /tracing/profiler/profiler_troubleshooting/#java-8-support
+[3]: /profiler/profiler_troubleshooting/#java-8-support
 [4]: https://app.datadoghq.com/account/settings#agent/overview
 [5]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://app.datadoghq.com/profiling
-[8]: /tracing/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
+[8]: /profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /getting_started/profiler/

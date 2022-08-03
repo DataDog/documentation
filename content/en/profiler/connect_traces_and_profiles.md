@@ -5,12 +5,14 @@ further_reading:
     - link: 'tracing'
       tag: 'Documentation'
       text: 'APM Distributed Tracing'
-    - link: '/tracing/profiler/enabling'
+    - link: '/profiler/enabling'
       tag: 'Documentation'
       text: 'Enable Continuous Profiler for Your Application.'
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
+aliases:
+  - /tracing/profiler/connect_traces_and_profiles/
 ---
 
 If your application is showing performance problems in production, integrating distributed tracing with code stack trace benchmarks from profiling is a powerful way to identify the performance bottlenecks. Application processes that have both APM distributed tracing and continuous profiler enabled are automatically linked. 
@@ -19,7 +21,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ## Identify code hotspots in slow traces
 
-{{< img src="tracing/profiling/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
 ### Prerequisites
 
@@ -43,7 +45,7 @@ Requires:
 - If on OpenJDK 8: 8u282 or greater and tracing library version 0.77.0 or greater.
 
 
-[1]: /tracing/profiler/enabling/java
+[1]: /profiler/enabling/java
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -52,7 +54,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 Requires tracing library version 0.44.0 or greater.
 
 
-[1]: /tracing/profiler/enabling/python
+[1]: /profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -61,7 +63,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 Requires tracing library version 0.49.0 or greater.
 
 
-[1]: /tracing/profiler/enabling/ruby
+[1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -74,7 +76,7 @@ To enable Code Hotspots identification for Go, [turn on profiling for your servi
 
 **Warning:** Go 1.17 and below has several bugs (see [GH-35057][8], [GH-48577][9], [CL-369741][10], [CL-369983][11]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
 
-[1]: /tracing/profiler/enabling/go
+[1]: /profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/releases
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerCodeHotspots
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
@@ -92,7 +94,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires tracing library version 2.7.0 or greater.
 
-[1]: /tracing/profiler/enabling/dotnet
+[1]: /profiler/enabling/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -100,7 +102,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires tracing library version 0.71 or greater.
 
-[1]: /tracing/profiler/enabling/php
+[1]: /profiler/enabling/php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -134,7 +136,7 @@ It is not uncommon to have a small amount of **Other** unexplained time (less th
 
 ### Viewing a profile from a trace
 
-{{< img src="tracing/profiling/flamegraph_view.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
+{{< img src="profiler/flamegraph_view.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
 
 For each type from the breakdown, click **View profile** to view the same data as what is shown in the flame graph.
 Click the **Span/Trace/Full profile** selector to define the scope of the data:
@@ -153,7 +155,7 @@ Click the **Span/Trace/Full profile** selector to define the scope of the data:
 Endpoint profiling is enabled by default when you turn on profiling for your [Python][1] service. It requires `dd-trace-py` version 0.54.0 or greater.
 <p></p>
 
-[1]: /tracing/profiler/enabling/python
+[1]: /profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 Endpoint profiling is disabled by default when you turn on profiling for your [Go][1] service. To enable it, you need to ensure that:
@@ -163,7 +165,7 @@ Endpoint profiling is disabled by default when you turn on profiling for your [G
 
 **Warning:** Go 1.17 and below has several bugs (see [GH-35057][5], [GH-48577][6], [CL-369741][7], [CL-369983][8]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
 
-[1]: /tracing/profiler/enabling/go
+[1]: /profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/releases
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithProfilerEndpoints
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#Start
@@ -177,7 +179,7 @@ Endpoint profiling is disabled by default when you turn on profiling for your [G
 Endpoint profiling is enabled by default when you turn on profiling for your [Ruby][1] service. It requires `dd-trace-rb` version 0.54.0 or greater.
 <p></p>
 
-[1]: /tracing/profiler/enabling/ruby
+[1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -191,18 +193,18 @@ With endpoint profiling you can:
 - Isolate the top endpoints responsible for the consumption of valuable resources such as CPU and wall time. This is particularly helpful when you are generally trying to optimize your service for performance gains.
 - Understand if third party code or runtime libraries are the reason for your endpoints being slow or resource-consumption heavy.
 
-{{< img src="tracing/profiling/endpoint_agg_gif.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
+{{< img src="profiler/endpoint_agg_gif.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
 
 
 ### Track the endpoints that consume the most resources
 
 It is valuable to track top endpoints that are consuming valuable resources such as CPU and wall time. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service. 
 
-{{< img src="tracing/profiling/endpoint_metric.mp4" alt="Graphing top endpoints in terms of resource consumption" video=true >}}
+{{< img src="profiler/endpoint_metric.mp4" alt="Graphing top endpoints in terms of resource consumption" video=true >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/profiler/profiler_troubleshooting#reduce-overhead-from-default-setup
+[1]: /profiler/profiler_troubleshooting#reduce-overhead-from-default-setup
 [2]: /tracing/trace_collection/custom_instrumentation/java#manually-creating-a-new-span

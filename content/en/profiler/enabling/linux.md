@@ -8,7 +8,7 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'tracing/profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 ---
@@ -228,7 +228,7 @@ The [Getting Started with Profiler][7] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/profiler/profiler_troubleshooting
+[1]: /profiler/profiler_troubleshooting
 [2]: https://app.datadoghq.com/account/settings#agent/overview
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [4]: https://github.com/DataDog/ddprof/releases

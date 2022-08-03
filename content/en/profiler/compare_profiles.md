@@ -2,7 +2,7 @@
 title: Compare Profiles
 kind: documentation
 further_reading:
-    - link: 'tracing/profiler/enabling'
+    - link: 'profiler/enabling'
       tag: 'Documentation'
       text: 'Enable continuous profiler for your application'
     - link: 'getting_started/profiler'
@@ -17,6 +17,8 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
       tags: 'Blog'
       text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
+aliases:
+  - /profiler/compare_profiles/
 ---
 
 The Continuous Profiler can compare two profiles or profile aggregations with each other to help you identify code performance improvements, regressions, and structural changes. You can compare a profile with:
@@ -49,7 +51,7 @@ On the Profiler Search view, select a profile from the list. Click **Compare** t
 
 Select the metric you want to compare (the list varies based on code language). This can be helpful, for example, for looking at allocation spikes while investigating CPU profiles.
 
-{{< img src="tracing/profiling/compare_time_frames.mp4" alt="Opening the comparison view to compare a profile with an aggregation for a time frame." video="true">}}
+{{< img src="profiler/compare_time_frames.mp4" alt="Opening the comparison view to compare a profile with an aggregation for a time frame." video="true">}}
 
 Take note of the legend colors, which show:
  - Deepening shades of red for methods that take more time in profile B.
@@ -59,17 +61,17 @@ Take note of the legend colors, which show:
 
 These colors help you identify structural changes in your code between versions, time ranges, or canaries, and how they affect performance.
 
-{{< img src="tracing/profiling/comparison_legend.png" alt="Legend for profile comparison." >}}
+{{< img src="profiler/comparison_legend.png" alt="Legend for profile comparison." >}}
 
 Hover over methods in the profile to see specific metrics about the methods that are taking more or less time, or making fewer or more allocations, than in the compared profile.
 
-{{< img src="tracing/profiling/compare_hover.png" alt="Hover over a method in the profile to see metrics comparison" >}}
+{{< img src="profiler/compare_hover.png" alt="Hover over a method in the profile to see metrics comparison" >}}
 
 ### Comparing recent versions
 
 On the Aggregation view, select a service to see its aggregated profile for a particular metric (for example, wall time) over the selected time frame. Then click **Compare** to compare it to the aggregated profile of another version. 
 
-{{< img src="tracing/profiling/compare_recent_versions.mp4" alt="Opening the comparison view for two versions." video="true">}}
+{{< img src="profiler/compare_recent_versions.mp4" alt="Opening the comparison view for two versions." video="true">}}
 
 ### Side-by-side and combined comparison views
 
