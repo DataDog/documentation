@@ -87,7 +87,7 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 The dashed `Committed` line shows commitments per product, without any allowances (such as Custom Metrics or Containers). 
 
-{{< img src="account_management/billing/CommittedLine.png" alt="Committed usage line" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/CommittedLine.png" alt="Committed usage line on APM Hosts graph configured with the value 10" style="width:100%; align:left" >}}
 
  
 
