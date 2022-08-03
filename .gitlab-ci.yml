@@ -173,7 +173,9 @@ index_algolia_preview:
   interruptible: true
 
 atomic_algolia_preview:manual:
-  <<: *base_template
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  tags:
+    - "runner:main"
   stage: post-deploy
   environment: "preview"
   cache:
