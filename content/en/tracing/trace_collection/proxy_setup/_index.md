@@ -311,7 +311,7 @@ A workaround for this is to run Nginx from a Docker container. An example Docker
 The following plugins must be installed:
 
 - Nginx plugin for OpenTracing - [linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz][3] - installed in `/usr/lib/nginx/modules`
-- Datadog OpenTracing C++ Plugin - [linux-amd64-libdd_opentracing_plugin.so.gz][4] - installed somewhere accessible to Nginx, eg `/usr/local/lib`
+- Datadog OpenTracing C++ Plugin - [linux-amd64-libdd_opentracing_plugin.so.gz][4] - installed somewhere accessible to Nginx, for example `/usr/local/lib`
 
 Commands to download and install these modules:
 
