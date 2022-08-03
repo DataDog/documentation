@@ -1,4 +1,4 @@
----
+s---
 title: List Widget
 kind: documentation
 widget_type: "toplist"
@@ -15,20 +15,17 @@ further_reading:
 
 The list widget enables you to display a list of top issues.
 
-{{< img src="dashboards/widgets/toplist/toplist.png" alt="Top List" >}}
+{{< img src="dashboards/widgets/list/list_overview.png" alt="List widget displaying a list of Java errors and their error count." >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/toplist/toplist_setup.png" alt="Top List" style="width:80%;">}}
+{{< img src="dashboards/widgets/list/list_setup.png" alt="List widget configuration modal" style="width:80%;">}}
 
 ### Configuration
 
-1. Choose the data to graph:
-    * Metric: See the [querying][1] documentation to configure a metric query.
-    * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
-    * Log Events: See the [Log search documentation][3] to configure a log event query.
+1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, or Events.
 
-2. Optional: configure conditional formatting depending on your entries' values.
+2. Optional: Give your graph a title (or leave blank for suggested title)
 
 ### Options
 
@@ -36,19 +33,11 @@ The list widget enables you to display a list of top issues.
 
 On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
 
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
-
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][4] for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
 
-The dedicated [widget JSON schema definition][5] for the top list widget is:
+The dedicated [widget JSON schema definition][2] for the top list widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -56,8 +45,5 @@ The dedicated [widget JSON schema definition][5] for the top list widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/querying/
-[2]: /tracing/app_analytics/search/#search-bar
-[3]: /logs/search_syntax/
-[4]: /api/v1/dashboards/
-[5]: /dashboards/graphing_json/widget_json/
+[1]: /api/v1/dashboards/
+[2]: /dashboards/graphing_json/widget_json/
