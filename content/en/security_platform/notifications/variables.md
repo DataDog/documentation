@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-When creating a [new detection rule or modifying an existing one][1], use [template variables](#template-variables), such as [attributes](#attribute-variables) and [signal tags](#tag-variables), and [conditional variables](#conditional-variables) to customize a rule’s notification message. When a signal is generated from the rule, the variables are populated with values related to that signal. 
+When [creating a new detection rule or modifying an existing one][1], use [template variables](#template-variables), such as [attributes](#attribute-variables) and [signal tags](#tag-variables), and [conditional variables](#conditional-variables) to customize a rule’s notification message. When a signal is generated from the rule, the variables are populated with values related to that signal. 
 
 ## Template Variables
 

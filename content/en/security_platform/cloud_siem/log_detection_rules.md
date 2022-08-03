@@ -333,7 +333,7 @@ You can use if-else logic to see if an attribute matches a value:
 
 See [Notification Variables][1] for more information.
 
-Use the Tag resulting signals dropdown, to tag your signals with different tags. For example, `security:attack` or `technique:T1110-brute-force`.
+Use the Tag resulting signals dropdown to tag your signals with different tags. For example, `security:attack` or `technique:T1110-brute-force`.
 
 **Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
