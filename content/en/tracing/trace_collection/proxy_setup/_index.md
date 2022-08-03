@@ -214,7 +214,7 @@ stats_config:
 
 ## Sampling
 
-To control the volume of traces starting from Envoy that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Envoy are sent.
+To control the volume of Envoy traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Envoy are sent.
 
 To use the [Datadog Agent calculated sampling rates][2] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
@@ -468,7 +468,7 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 
 ### Sampling
 
-To control the volume of traces starting from Nginx that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Nginx are sent. The Kubernetes Nginx ingress controller uses [v1.2.1][11] of the `dd-opentracing-cpp` library).
+To control the volume of Ingress Controller traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Nginx are sent. The Kubernetes Nginx ingress controller uses [v1.2.1][11] of the `dd-opentracing-cpp` library).
 
 For example, to keep 10% of the traces starting from the `ingress-nginx` service:
 
@@ -573,7 +573,7 @@ of the higher-level `CronJob`.
 
 ### Sampling
 
-To control the volume of traces starting from Istio that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent.
+To control the volume of Istio traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent.
 
 **Note**: These environment variables apply only to the subset of traces indicated by the `values.pilot.traceSampling` setting, hence the required `--set values.pilot.traceSampling=100.0` during Istio configuration.
 
