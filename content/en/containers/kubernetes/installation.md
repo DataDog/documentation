@@ -244,7 +244,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [9]: https://gallery.ecr.aws/datadog/
 [10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
-[12]: https://docs.datadoghq.com/integrations/kubernetes_state_core
+[12]: /integrations/kubernetes_state_core
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
