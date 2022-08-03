@@ -163,7 +163,7 @@ Or use if-else logic to see if an attribute matches a value:
 
 See [Template Variables][6] for more information.
 
-Use the Tag resulting signals dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`.
+Use the Tag Resulting Signals dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`.
 
 **Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 

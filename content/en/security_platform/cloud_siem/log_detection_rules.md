@@ -284,7 +284,7 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
 
-Use [Notification Variables][1] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The attributes are in the JSON section of the Overview tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation (for example, `{{@attribute.inner_key}}`) to access the inner keys of the event attributes.
+Use [Notification Variables][1] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the JSON section of the Overview tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
 
 This JSON object is an example of event attributes which may be associated with a security signal:
 
@@ -333,7 +333,7 @@ You can use if-else logic to see if an attribute matches a value:
 
 See [Notification Variables][1] for more information.
 
-Use the Tag resulting signals dropdown to tag your signals with different tags. For example, `security:attack` or `technique:T1110-brute-force`.
+Use the Tag Resulting Signals dropdown to tag your signals with different tags. For example, `security:attack` or `technique:T1110-brute-force`.
 
 **Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 

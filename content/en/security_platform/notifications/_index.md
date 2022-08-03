@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-A security signal is generated when a threat is detected in the Datadog Security Platform. You can send notifications to keep your team informed when these signals are generated. Customize the notifications based on the signal's severity and with specific context on the threat. Notifications can be set up for specific [Detection Rules](#detection-rules-notifications) and also more broadly with [Notification Rules](#notification-rules).
+A security signal is generated when a threat is detected in the Datadog Security Platform. You can send notifications to keep your team informed when these signals are generated. Notifications can be set up for specific [Detection Rules](#detection-rules-notifications) and also more broadly with [Notification Rules](#notification-rules). See [Notification Variables][1] on how to customize the notifications based on the signal's severity and specific context on the threat. 
 
 ### Notification channels
 
@@ -32,16 +32,16 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 
 | Integration    | Prefix       | Examples       |
 |----------------|--------------|----------------|
-| [Jira][1]      | `@jira`      | [Examples][2]  |
-| [PagerDuty][3] | `@pagerduty` | [Examples][4]  |
-| [Slack][5]     | `@slack`     | [Examples][6]  |
-| [Webhooks][7]  | `@webhook`   | [Examples][8] |
+| [Jira][2]      | `@jira`      | [Examples][3]  |
+| [PagerDuty][4] | `@pagerduty` | [Examples][5]  |
+| [Slack][6]     | `@slack`     | [Examples][7]  |
+| [Webhooks][8]  | `@webhook`   | [Examples][9] |
 
 **Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
 
 ## Detection Rule notifications
 
-When you [create or modify a new Detection Rule][9], you can use the Set Rule Case or Say What’s Happening section to define the notifications that are sent. 
+When you [create or modify a new Detection Rule][10], you can use the Set Rule Case or Say What’s Happening section to define the notifications that are sent. 
 
 ### Set rule case
 
@@ -57,7 +57,7 @@ Add a rule name for your detection rule. The rule name appears in the Detection 
 
 #### Message
 
-Use standard Markdown and [Notification Variables][10] to provide specific details about the signal by referencing its tags and event attributes.
+Use standard Markdown and [Notification Variables][1] to provide specific details about the signal by referencing its tags and event attributes.
 
 #### Tags
 
@@ -71,14 +71,14 @@ Notification Rules allow you to set general alerting preferences so that you don
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/jira/
-[2]: /integrations/jira/#usage
-[3]: /integrations/pagerduty/
-[4]: /integrations/pagerduty/#send-a-notification-to-a-specific-pagerduty-service
-[5]: /integrations/slack/
-[6]: /integrations/slack/#mentions-in-slack-from-monitor-alert
-[7]: /integrations/webhooks/
-[8]: /integrations/webhooks/#usage
-[9]: /security_platform/detection_rules/#creating-and-managing-detection-rules
-[10]: /security_platform/notifications/variables/
+[1]: /security_platform/notifications/variables/
+[2]: /integrations/jira/
+[3]: /integrations/jira/#usage
+[4]: /integrations/pagerduty/
+[5]: /integrations/pagerduty/#send-a-notification-to-a-specific-pagerduty-service
+[6]: /integrations/slack/
+[7]: /integrations/slack/#mentions-in-slack-from-monitor-alert
+[8]: /integrations/webhooks/
+[9]: /integrations/webhooks/#usage
+[10]: /security_platform/detection_rules/#creating-and-managing-detection-rules
 [11]: /security_platform/notifications/rules/
