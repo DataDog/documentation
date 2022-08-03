@@ -71,7 +71,7 @@ The [Usage Trends][10] section contains product usage graphs displaying summed u
 
 For products with subtypes, each category is distinguished on the graph for that product. 
 
-{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="Usage graphs by product tab" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="Usage summary with infrastructure tab selected and multiple graphs for infrastructure usage subtypes such as infra hosts, agent hosts, and containers" style="width:100%; align:left" >}}
 
 More detailed product subtype graphs can be found on each product’s tab.  For example, a breakdown by host type is available on the Infrastructure tab.
 
