@@ -67,27 +67,27 @@ Month-to-date usage of each product is calculated as follows:
 
 The [Usage Trends][10] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable via the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product. 
 
-{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Usage Trends graphs" style="width:80%; align:left" >}}
+{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Usage Trends graphs" style="width:100%; align:left" >}}
 
 For products with subtypes, each category is distinguished on the graph for that product. 
 
-{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="Usage graphs by product tab" style="width:80%; align:left" >}}
+{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="Usage graphs by product tab" style="width:100%; align:left" >}}
 
 More detailed product subtype graphs can be found on each product’s tab.  For example, a breakdown by host type is available on the Infrastructure tab.
 
-{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Usage breakdown by product subtype" style="width:80%; align:left" >}}
+{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Usage breakdown by product subtype" style="width:100%; align:left" >}}
  
 Cumulative usage over time is available for sum-based products.
 
-{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Summed cumulative usage over time" style="width:80%; align:left" >}}
+{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Summed cumulative usage over time" style="width:100%; align:left" >}}
 
 Time selection contains options to view usage graphs at daily, weekly, monthly or yearly intervals.
 
-{{< img src="account_management/billing/TimeGranularity.png" alt="Time intervals on usage graphs" style="width:80%; align:left" >}}
+{{< img src="account_management/billing/TimeGranularity.png" alt="Time intervals on usage graphs" style="width:100%; align:left" >}}
 
 The dashed “Committed” line shows commitments per product, without any allowances (such as Custom Metrics or Containers). 
 
-{{< img src="account_management/billing/CommittedLine.png" alt="Committed usage line" style="width:80%; align:left" >}}
+{{< img src="account_management/billing/CommittedLine.png" alt="Committed usage line" style="width:100%; align:left" >}}
 
  
 
