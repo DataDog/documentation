@@ -65,7 +65,7 @@ Month-to-date usage of each product is calculated as follows:
 
 ## Usage trends
 
-The [Usage Trends][10] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable via the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product. 
+The [Usage Trends][10] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable through the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product. 
 
 {{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Usage Trends graphs" style="width:100%; align:left" >}}
 
