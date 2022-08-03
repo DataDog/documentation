@@ -102,7 +102,7 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 {{< /tabs >}}
 
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][3].
+5. A few minutes after starting your application, your profiles appear on the [Datadog APM > Profiler page][3].
 
 ### Library
 
@@ -224,9 +224,9 @@ When a PID is specified in this way, only child processes (both forks and thread
 Global mode is intended for debug purposes. When `global` is set to `yes`, the profiler attempts to profile all the visible processes. 
 This requires elevated permissions (for example, running as root or granting `CAP_PERFMON`, `CAP_SYSADMIN`) or setting `perf_event_paranoid` to `-1`.
 
-    ```bash
-    ./ddprof --environment staging --global yes --service_version full-host-profile
-    ```
+```bash
+./ddprof --environment staging --global yes --service_version full-host-profile
+```
 
 When the profiler is run as the root user, all visible processes are instrumented.
 For most configurations, this consists of all processes visible within the profiler's PID namespace.
