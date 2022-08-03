@@ -79,7 +79,7 @@ More detailed product subtype graphs can be found on each product’s tab.  For 
  
 Cumulative usage over time is available for sum-based products.
 
-{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Summed cumulative usage over time" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Graphs for Ingested Spans and Indexed Spans, each plotting data for the daily and cumulative sums of their respective spans" style="width:100%; align:left" >}}
 
 Time selection contains options to view usage graphs at daily, weekly, monthly or yearly intervals.
 
