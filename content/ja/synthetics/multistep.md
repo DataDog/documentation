@@ -51,7 +51,7 @@ Multistep API テストの**ロケーション**を選択します。Multistep A
 
 HTTP リクエストのステップを作成するには、**Create Your First Step** をクリックします。
 
-{{< img src="synthetics/api_tests/create_request2.png" alt="Multistep API テストリクエストを作成する" style="width:100%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Multistep API テストリクエストを作成する" style="width:100%;" >}}
 
 **注:** デフォルトでは、最大 10 個のステップを作成できます。<a href="https://docs.datadoghq.com/help/">Datadog サポートチーム</a>に連絡して上限を増やしてください。
 
@@ -118,7 +118,7 @@ HTTP リクエストのステップを作成するには、**Create Your First S
 
 **Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。応答プレビューが表示されます。
 
-{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Multistep API テストのリクエストを定義する" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_define_request.png" alt="Multistep API テストのリクエストを定義する" style="width:90%;" >}}
 
 #### アサーションの追加
 
@@ -135,7 +135,7 @@ HTTP リクエストのステップを作成するには、**Create Your First S
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、ステップごとに最大 20 個のアサーションを作成できます。
 
-{{< img src="synthetics/api_tests/assertions2.png" alt="Multistep API テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_multi.png" alt="Multistep API テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
 
 テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
 
@@ -165,7 +165,7 @@ HTTP リクエストのステップを作成するには、**Create Your First S
     * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[`regex`][10] によりパースします。
     * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[`regex`][10]、[`JSONPath`][8] または [`XPath`][9] によりパースします。
 
-{{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Multistep API テストで HTTP リクエストから変数を抽出する" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Multistep API テストで HTTP リクエストから変数を抽出する" style="width:90%;" >}}
 
 一度作成すると、この変数は Multistep API テストの次のステップで使用することができます。詳しくは、[変数の使用](#use-variables)を参照してください。
 

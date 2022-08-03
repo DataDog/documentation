@@ -111,8 +111,8 @@ Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Pr
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: Not available<br>
-**Default**: `0`<br>
-Enable the experimental CPU profile type. Added in version `0.69.0`.
+**Default**: `1`<br>
+Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
 
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: Not available<br>

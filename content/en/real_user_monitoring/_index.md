@@ -30,12 +30,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
   tag: "Blog"
   text: "Get better RUM data with our custom React components"
-- link: "/real_user_monitoring/browser/data_collected/"
-  tag: "Documentation"
-  text: "RUM Browser Data Collected"
 - link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
   tag: "Blog"
   text: "Monitor your hybrid mobile applications with Datadog"
+- link: "/real_user_monitoring/browser/data_collected/"
+  tag: "Documentation"
+  text: "RUM Browser Data Collected"
 ---
 
 {{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
@@ -48,6 +48,8 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 * **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions.
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
+
+A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes page views and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again. 
 
 ## What is Session Replay?
 
@@ -109,7 +111,7 @@ Watch [browser recordings][11] of real users interacting with your website and s
 
 Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][13].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

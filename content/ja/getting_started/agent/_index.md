@@ -25,7 +25,7 @@ title: Agent の概要
 
 Datadog Agent は、ホスト上で実行されるソフトウェアです。ホストからイベントやメトリクスを収集し、Datadog に送信し、モニタリングやパフォーマンスデータを分析することができます。ローカルホスト (Windows、MacOS)、コンテナ環境 (Docker、Kubernetes)、オンプレミスデータセンターで実行することが可能です。構成管理ツール (Chef、Puppet、Ansible) を使って、インストールと構成が可能です。
 
-Agent は、15～20 秒ごとに 75～100 のシステムレベルメトリクスを収集することができます。また、追加のセットアップと構成により、Agent はライブプロセスデータ、ログ、トレースを Datadog プラットフォームに送信することができます。Datadog Agent はオープンソースで、ソースコードは GitHub の [DataDog/datadog-agent][1] で公開されています。
+Agent は、15～20 秒ごとに 75～100 のシステムレベルメトリクスを収集することができます。また、追加の構成により、Agent は実行中のプロセスからライブプロセスデータ、ログ、トレースを Datadog プラットフォームに送信することができます。Datadog Agent はオープンソースで、ソースコードは GitHub の [DataDog/datadog-agent][1] で公開されています。
 
 ### Agent のオーバーヘッド
 
@@ -302,7 +302,7 @@ Agent のトラブルシューティングに関するヘルプ
 [25]: /ja/agent/guide/agent-commands/#restart-the-agent
 [26]: /ja/logs/
 [27]: /ja/infrastructure/process/?tab=linuxwindows#introduction
-[28]: /ja/tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/?tab=host
+[28]: /ja/tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host
 [29]: /ja/agent/logs/advanced_log_collection/
 [30]: /ja/developers/dogstatsd/?tab=hostagent
 [31]: /ja/agent/guide/agent-commands/

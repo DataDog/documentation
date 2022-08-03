@@ -1,28 +1,29 @@
 ---
-title: PHP ログ収集
-kind: documentation
 aliases:
-  - /ja/logs/languages/php
+- /ja/logs/languages/php
 further_reading:
-  - link: https://www.datadoghq.com/blog/php-logging-guide
-    tag: ブログ
-    text: PHP ログの収集、カスタマイズ、分析方法
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: パースの詳細
-  - link: /logs/explorer/
-    tag: Documentation
-    text: ログの調査方法
-  - link: /logs/explorer/#visualize
-    tag: Documentation
-    text: ログ分析の実行
-  - link: /logs/faq/log-collection-troubleshooting-guide
-    tag: FAQ
-    text: ログ収集のトラブルシューティングガイド
+- link: https://www.datadoghq.com/blog/php-logging-guide
+  tag: ブログ
+  text: PHP ログの収集、カスタマイズ、分析方法
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: ログの処理方法
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: パースの詳細
+- link: /logs/explorer/
+  tag: Documentation
+  text: ログの調査方法
+- link: /logs/explorer/#visualize
+  tag: Documentation
+  text: ログ分析の実行
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: FAQ
+  text: ログ収集のトラブルシューティングガイド
+kind: documentation
+title: PHP ログ収集
 ---
+
 ## 概要
 
 Monolog、Zend-Log、Symfony の各ロギングライブラリから選択して PHP ログをファイルに書き込み、[Agent を使用して][1] Datadog に転送します。
@@ -539,7 +540,7 @@ class AppServiceProvider extends ServiceProvider
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/logs/
-[2]: /ja/tracing/connect_logs_and_traces/php/
+[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/php/
 [3]: /ja/logs/log_collection/php/#symfony-v2-v3
 [4]: /ja/logs/log_collection/php/#ppi
 [5]: /ja/logs/log_collection/php/#laravel

@@ -1,47 +1,71 @@
 ---
+app_id: confluent-platform
+app_uuid: 14e9ea66-bd7c-4c84-b642-a0290166deb4
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Confluent Platform Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: confluent.kafka.producer.outgoing_byte_rate
+      metadata_path: metadata.csv
+      prefix: confluent.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Confluent Platform
   logs:
     source: confluent_platform
-  metrics_metadata: metadata.csv
   monitors:
     '[Confluent Platform] Unclean leader election': assets/monitors/unclean_leader_election.json
     '[Confluent Platform] Unused topic partition': assets/monitors/unused_partition.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - 処理
 - メッセージング
 - オートディスカバリー
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
-display_name: Confluent Platform
+display_on_public_website: true
 draft: false
 git_integration_title: confluent_platform
-guid: 8e4a6d7e-44bc-440c-aafa-a0f98df87cc0
 integration_id: confluent-platform
 integration_title: Confluent Platform
 integration_version: 1.8.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: confluent.
-metric_to_check: confluent.kafka.producer.outgoing_byte_rate
+manifest_version: 2.0.0
 name: confluent_platform
-public_title: Datadog-Confluent Platform インテグレーション
+oauth: {}
+public_title: Confluent Platform
 short_description: Confluent Platform のコンポーネントを監視する。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Processing
+  - Category::Messaging
+  - Category::Autodiscovery
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Confluent Platform のコンポーネントを監視する。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Confluent Platform
 ---
 
 

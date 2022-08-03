@@ -14572,6 +14572,97 @@ paths:
       x-menu-order: 5
       x-undo:
         type: safe
+  /api/v2/usage/estimated_cost:
+    get:
+      description: 'Get estimated cost across multi-org and single root-org accounts.
+
+        Estimated cost data is only available for the current month and previous month.
+        To access historical costs prior to this, use the /cost_by_org endpoint.'
+      operationId: GetEstimatedCostByOrg
+      parameters:
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Currently, only the 'sub-org' view is supported.
+        in: query
+        name: view
+        required: true
+        schema:
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost beginning this month. Either start_month or start_date should be
+          specified, but not both. (start_month cannot go beyond two months in the
+          past)'
+        in: query
+        name: start_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
+          for cost beginning this day. Either start_month or start_date should be
+          specified, but not both. (start_date cannot go beyond two months in the
+          past)'
+        in: query
+        name: start_date
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
+          for cost ending this day.'
+        in: query
+        name: end_date
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/CostByOrgResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get estimated cost across your account
+      tags:
+      - Usage Metering
+      x-menu-order: 39
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        Only the sub-org view is available currently, the summary view will be released
+        at a later date.'
   /api/v2/usage/hourly_usage:
     get:
       description: Get hourly usage by product family
@@ -14596,8 +14687,8 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `cws`,
-          `dbm`, `fargate`,
+          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `custom_events`,
+          `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,

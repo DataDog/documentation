@@ -10,7 +10,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
-- link: "https://learn.datadoghq.com/course/view.php?id=39"
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
   tag: "Learning Center"
   text: "Introduction to Synthetic Tests"
 - link: "/getting_started/synthetics/api_test"

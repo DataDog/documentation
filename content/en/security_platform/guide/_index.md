@@ -4,6 +4,7 @@ kind: guide
 aliases:
   - /security_monitoring/guide/
 private: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="General Guides:" >}}

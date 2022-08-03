@@ -13,8 +13,6 @@ further_reading:
       text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-<div class="alert alert-warning">The Datadog Lambda Extension only supports the `x86_64` architecture for .NET Lambda functions. If your .NET Lambda function uses the `arm64` architecture, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_dotnet">instrument using the Datadog Forwarder</a> instead.</div>
-
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 ## Installation
@@ -121,7 +119,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 1. Install the Datadog Lambda Extension
 
     ```dockerfile
-    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
     ```
 
     Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
@@ -133,10 +131,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     RUN wget https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
     RUN mkdir /opt/datadog
     RUN tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
-    ENV CORECLR_ENABLE_PROFILING=1
-    ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-    ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-    ENV DD_DOTNET_TRACER_HOME=/opt/datadog
+    ENV AWS_LAMBDA_EXEC_WRAPPER /opt/datadog_wrapper
     ```
 
     Replace `<TRACER_VERSION>` with the version number of `dd-trace-dotnet` you would like to use (for example, `2.3.0`). The minimum supported version is `2.3.0`. You can see the latest versions of `dd-trace-dotnet` in [GitHub][2].
@@ -152,38 +147,49 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-1. Install the Datadog Lambda Extension
+1. Install the Datadog Tracer
 
     [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
 
-2. Install the Datadog .NET APM client
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    ```
+
+    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
+
+2. Install the Datadog Lambda Extension
 
     [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-     ```sh
-      # Use this format for x86-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
 
-      # Use this format for arm64-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 
-      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
 
-      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadogdd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-      ```
-      
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
     Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
     
 3. Set the required environment variables
 
-    - Set `CORECLR_ENABLE_PROFILING` to `1`.
-    - Set `CORECLR_PROFILER` to `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`.
-    - Set `CORECLR_PROFILER_PATH` to `/opt/datadog/Datadog.Trace.ClrProfiler.Native.so`.
-    - Set `DD_DOTNET_TRACER_HOME` to `/opt/datadog`.
+    - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
     - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 

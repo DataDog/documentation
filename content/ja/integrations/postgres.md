@@ -25,7 +25,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
 display_name: Postgres
@@ -34,7 +33,7 @@ git_integration_title: postgres
 guid: e9ca29d5-5b4f-4478-8989-20d89afda0c9
 integration_id: postgres
 integration_title: Postgres
-integration_version: 12.4.0
+integration_version: 12.5.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -48,7 +47,7 @@ process_signatures:
 - postgres -D
 - pg_ctl start -l logfile
 - postgres -c 'pg_ctl start -D -l
-public_title: Datadog-Postgres インテグレーション
+public_title: Postgres インテグレーション
 short_description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
 support: コア
 supported_os:

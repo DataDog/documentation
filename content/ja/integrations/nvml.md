@@ -10,7 +10,6 @@ assets:
 categories:
 - OS & システム
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nvml/README.md
 display_name: nvml
@@ -19,7 +18,7 @@ git_integration_title: nvml
 guid: 5e997a76-f6a3-48e8-875f-6fbb2559f9e9
 integration_id: nvml
 integration_title: Nvidia NVML
-integration_version: 1.0.1
+integration_version: 1.0.4
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -111,7 +110,7 @@ NVML には、イベントは含まれません。
 [7]: https://github.com/DataDog/integrations-extras/blob/master/nvml/datadog_checks/nvml/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/nvml/metadata.csv
+[10]: https://github.com/DataDog/integrations-extras/blob/master/nvml/metadata.csv
 [11]: https://docs.nvidia.com/deploy/nvml-api/group__nvmlDeviceQueries.html
 [12]: https://github.com/DataDog/integrations-extras/blob/master/nvml/assets/service_checks.json
 [13]: https://docs.datadoghq.com/ja/help

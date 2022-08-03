@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-If you experience unexpected behavior with Datadog Application Security Monitoring (ASM), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. 
+If you experience unexpected behavior with Datadog Application Security Monitoring (ASM), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
 ## ASM rate limits
 
@@ -43,13 +43,13 @@ ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM s
 
 ### Send a test attack to your application
 
- To test your ASM setup, trigger the [Security Scanner Detected][7] rule by running a file that contains the following curl script: 
+ To test your ASM setup, trigger the [Security Scanner Detected][7] rule by running a file that contains the following curl script:
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
 {{< programming-lang lang="java" >}}
 
 ```bash
-for ((i=1;i<=200;i++)); 
+for ((i=1;i<=200;i++));
 do
 # Target existing service’s routes
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -64,7 +64,7 @@ done
 {{< programming-lang lang=".NET" >}}
 
 ```bash
-for ((i=1;i<=200;i++)); 
+for ((i=1;i<=200;i++));
 do
 # Target existing service’s routes
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -79,7 +79,7 @@ done
 {{< programming-lang lang="go" >}}
 
  ```bash
- for ((i=1;i<=200;i++)); 
+ for ((i=1;i<=200;i++));
 do
 # Target existing service’s routes
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -92,7 +92,7 @@ done
 {{< programming-lang lang="ruby" >}}
 
  ```bash
- for ((i=1;i<=200;i++)); 
+ for ((i=1;i<=200;i++));
 do
 # Target existing service’s routes
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -105,7 +105,7 @@ done
 {{< programming-lang lang="PHP" >}}
 
 ```bash
-for ((i=1;i<=200;i++)); 
+for ((i=1;i<=200;i++));
 do
 # Target existing service’s routes
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -120,7 +120,7 @@ done
 {{< programming-lang lang="NodeJS" >}}
 
 ```bash
-for ((i=1;i<=200;i++)); 
+for ((i=1;i<=200;i++));
 do
 # Target existing service’s routes
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -129,6 +129,19 @@ curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
 **Note:** The `dd-test-scanner-log` value is supported in the most recent releases.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+```bash
+for ((i=1;i<=200;i++));
+do
+# Target existing service’s routes
+curl https://your-application-url/existing-route -A dd-test-scanner-log;
+# Target non existing service’s routes
+curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
+done
+```
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -224,10 +237,10 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 
 ### Check Datadog Agent configuration
 
- To troubleshoot this step of the process, do the following: 
+ To troubleshoot this step of the process, do the following:
 
-- Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`. 
-- Ensure there are no Agent transmission errors related to spans in your [tracer logs][7]. 
+- Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`.
+- Ensure there are no Agent transmission errors related to spans in your [tracer logs][7].
 - If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
 
 ### Check if spans are successfully transmitted to Datadog
@@ -248,7 +261,7 @@ If spans are not being transmitted, then the tracer logs will contain logs simil
 
 Below are additional troubleshooting steps for specific languages.
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
 {{< programming-lang lang="java" >}}
 The Java library uses [SLF4J][1] for logging. Add the following runtime flags so that the tracer logs to a file:
 
@@ -279,7 +292,7 @@ The log files are available in the following directories:
 
 For PHP, to start troubleshooting issues with the Datadog ASM extension, enable debug logs in the ASM extension’s `.ini` file.
 
-The extension's `ini` file is usually found in `/etc/php/<version>/xxx/conf.d/98-ddtrace.ini`, but the location may differ depending on your installation. Look at the beginning of the `phpinfo()` output to identify the directory that is scanned for `.ini` files, if any. In the `.ini` file, set the following configuration options with the following: 
+The extension's `ini` file is usually found in `/etc/php/<version>/xxx/conf.d/98-ddtrace.ini`, but the location may differ depending on your installation. Look at the beginning of the `phpinfo()` output to identify the directory that is scanned for `.ini` files, if any. In the `.ini` file, set the following configuration options with the following:
 
 ```php
 datadog.appsec.log_level=‘debug’
@@ -318,7 +331,7 @@ PHP Warning:  Unknown: [ddappsec] Call to bind() failed: Permission denied
 PHP Warning:  Unknown: [ddappsec] Failed to unlink /tmp/ddappsec.sock: Operation not permitted
 ```
 
-This indicates that the lock file or socket file used by the extension has invalid permissions, or the user executing the PHP process does not have write access to the `tmp` directory. 
+This indicates that the lock file or socket file used by the extension has invalid permissions, or the user executing the PHP process does not have write access to the `tmp` directory.
 
 If the lock file or socket file has invalid permissions, you can either delete them and restart Apache/FPM or adjust the `user:group` to match the one used by Apache/FPM, for example, `www-data`.
 
@@ -364,19 +377,19 @@ If you don’t see ASM threat information in the [Trace and Signals Explorer][2]
 
     c. If `appsec_enabled` is not in the startup logs, the latest ASM version needs to be installed. See [installation instructions][4].
 
-2. Is the tracer working? Can you see relevant traces on the APM dashboard? 
+2. Is the tracer working? Can you see relevant traces on the APM dashboard?
 
     ASM relies on the tracer so if you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][5].
 
 3. In your application directory, run the command `npm explore @datadog/native-appsec -- npm run install` and restart your app.
 
     a. If `@datadog/native-appsec` is not found then the installation is incorrect. See [installation instructions][4].
-    
+
     b. If `@datadog/native-appsec` is found when starting your application, add the command to your runtime start script.
 
     c. If the tracer still does not work, you might be running an unsupported runtime.
 
-4. To enable logs, add the following environment variables: 
+4. To enable logs, add the following environment variables:
 
     ```
     DD_TRACE_DEBUG=1
@@ -384,6 +397,35 @@ If you don’t see ASM threat information in the [Trace and Signals Explorer][2]
     ```
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[2]: https://app.datadoghq.com/security/appsec/
+[3]: /tracing/troubleshooting/tracer_startup_logs/
+[4]: /security_platform/application_security/getting_started/nodejs/?tab=dockercli
+[5]: /tracing/troubleshooting/
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+If you don’t see ASM threat information in the [Trace and Signals Explorer][2] for your Python application, check that ASM is running and that your tracer is working.
+
+1. Set your application's log level to `DEBUG` to confirm that ASM is running:
+
+   ```python
+   import logging
+   logging.basicConfig(level=logging.DEBUG)
+   ```
+  
+   Then, run any HTTP call to the application. You should see the following log:
+  
+   ```
+   DEBUG:ddtrace.appsec.processor:[DDAS-001-00] Executing AppSec In-App WAF with parameters:
+   ```
+  
+   If this log is not present, ASM is not running.
+
+2. Is the tracer working? Can you see relevant traces on the APM dashboard?
+
+   ASM relies on the tracer. If you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][5].
+
+
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /tracing/troubleshooting/tracer_startup_logs/
 [4]: /security_platform/application_security/getting_started/nodejs/?tab=dockercli
@@ -413,7 +455,7 @@ D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib
 
 If you do not see those logs, check the following:
 
-- If the correct ASM environment variables are set for your application process. 
+- If the correct ASM environment variables are set for your application process.
 - The latest gem version is installed.
 - The tracer is configured correctly and sending APM traces to your APM dashboard.
 
@@ -430,7 +472,7 @@ D, [2022-01-19T21:25:50.581061 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloek
 
 If you don’t see those logs, try the following:
 
-- Check that another upstream security system is not filtering requests based on the test header value, which would prevent the request from reaching the application. 
+- Check that another upstream security system is not filtering requests based on the test header value, which would prevent the request from reaching the application.
 - Send another [test attack](#send-a-test-attack-to-your-application) using another user agent value in the curl command to see if the threat information is successfully sent.
 - Look in the application logs for the exact request you ran to confirm the request reached the application, and was not responded to by another upstream system.
 
@@ -452,7 +494,7 @@ To confirm that ASM is detecting security threats, trigger a [test attack](#send
 ```
 D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/appsec/contrib/rack/reactive/request.rb:63:in `block in subscribe') WAF: #<struct Datadog::AppSec::WAF::Result action=:monitor, data=[{"rule"=>{"id"=>"ua0-600-10x", "name"=>"Nessus", "tags"=>{"type"=>"security_scanner", "category"=>"attack_attempt"}}, "rule_matches"=>[{"operator"=>"match_regex", "operator_value"=>"(?i)^Nessus(/|([ :]+SOAP))", "parameters"=>[{"address"=>"server.request.headers.no_cookies", "key_path"=>["user-agent"], "value"=>"Nessus SOAP", "highlight"=>["Nessus SOAP"]}]}]}], perf_data=nil, perf_total_runtime=20519>
 ```
-If you don’t see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value. 
+If you don’t see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value.
 
 #### Is the tracer sending traces with security data?
 ASM data is sent with APM traces. To confirm that ASM correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
@@ -491,9 +533,9 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-If you continue to have issues with ASM, contact [Datadog support][1] with the following information: 
+If you continue to have issues with ASM, contact [Datadog support][1] with the following information:
 
-- Confirmation that the [test attack](#send-a-test-attack-to-your-application) was successfully sent 
+- Confirmation that the [test attack](#send-a-test-attack-to-your-application) was successfully sent
 - Tracer [startup][8] or [debug][10] logs
 
 ## Further Reading
