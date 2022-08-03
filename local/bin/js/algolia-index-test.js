@@ -1,17 +1,10 @@
 const atomicalgolia = require('atomic-algolia')
-const indexName = 'docs_test_preview'
-
-const data = [
-    {
-        objectID: "1",
-        title: "An example record"
-    }
-]
+const localAlogliaSearchIndex = require('../../../public/algolia.json')
+const indexName = 'docs_test_preview' // for now
 
 const cb = (error, result) => {
     if (error) throw error
-
-    console.log(result)
+    console.log(result) // todo: use DD
 }
 
-atomicalgolia(indexName, data, cb)
+atomicalgolia(indexName, localAlogliaSearchIndex, { verbose: true }, cb)

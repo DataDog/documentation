@@ -8,7 +8,7 @@
         {{ $title := $page.Params.integration_title | default $page.Title }}
         {{ $tags := slice }}
 
-        {{- /* Better way to do this? */ -}}
+        {{- /* Better way to do this?  Frontmatter (cascading) probably? */ -}}
         {{ if in $page.RelPermalink "api/latest" }}
             {{ $tags = $tags | append "api_latest" }}
         {{ else if in $page.RelPermalink "/guide/" }}
@@ -29,7 +29,7 @@
             dict "objectID" $object_id 
             "title" $title
             "description" $page.Description
-            "content" $page.Plain | truncate 250
+            "content" ($page.Plain | truncate 2500)
             "type" $page.Type
             "permalink" $page.Permalink
             "relpermalink" $page.RelPermalink

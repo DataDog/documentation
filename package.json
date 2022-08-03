@@ -5,7 +5,7 @@
     "private": true,
     "scripts": {
         "algolia:config": "node ./local/bin/js/algolia-config.js",
-        "algolia:atomic": "ALGOLIA_APP_ID=K8XL4ROVCR ALGOLIA_ADMIN_KEY= node local/bin/js/algolia-index-test.js",
+        "algolia:atomic": "node ./local/bin/js/algolia-index-test.js",
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public && npx hugo mod clean",
         "docker:start": "/usr/local/bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache --bind 0.0.0.0",
