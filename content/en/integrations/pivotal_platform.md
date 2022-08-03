@@ -121,7 +121,7 @@ cf restage <YOUR_APP>
 
 #### Trace and profile collection
 
-The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM Setup][12] and [Profiling setup][30].
+The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM setup][12] and [Profiling setup][30].
 
 #### Log collection
 
