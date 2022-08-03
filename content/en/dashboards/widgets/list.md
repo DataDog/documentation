@@ -1,4 +1,4 @@
-s---
+---
 title: List Widget
 kind: documentation
 widget_type: "toplist"
