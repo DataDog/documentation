@@ -75,7 +75,7 @@ For products with subtypes, each category is distinguished on the graph for that
 
 More detailed product subtype graphs can be found on each product’s tab.  For example, a breakdown by host type is available on the Infrastructure tab.
 
-{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Usage breakdown by product subtype" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Usage trends section of the Infrastructure tab with Infra Hosts graph containing Agent hosts and AWS hosts, Indexed Logs graph containing Daily Indexed Live Logs and Cumulative Indexed Live Logs" style="width:100%; align:left" >}}
  
 Cumulative usage over time is available for sum-based products.
 
