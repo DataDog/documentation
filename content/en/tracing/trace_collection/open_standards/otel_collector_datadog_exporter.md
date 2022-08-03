@@ -43,6 +43,7 @@ processors:
 exporters:
   datadog:
     api:
+      site: {{< region-param key="dd_site" code="true" >}}
       key: ${DD_API_KEY}
 
 service:
@@ -61,7 +62,7 @@ The above configuration enables the receiving of OTLP data from OpenTelemetry in
 
 ### Advanced configuration
 
-A fully documented example configuration file can be found [here][6], illustrating all possible configuration options for the Datadog Exporter. There may be other options relevant to your deployment, such as `site` or `host_metadata`.
+A fully documented example configuration file can be found [here][6], illustrating all possible configuration options for the Datadog Exporter. There may be other options relevant to your deployment, such as `api::site` or the ones on the `host_metadata` section.
 
 ### Host name resolution
 
@@ -81,9 +82,7 @@ There are a few things you could do to make sure you get better metadata for tra
 
 ### Resource Detectors
 
-The OpenTelemetry specification requires that SDKs implement [resource detectors][8] for common platforms and environments (such as Docker, Kubernetes, EKS, ECS, GKE, etc.). For example, the Go repository [has them available][9] for AWS and GCP.
-
-We strongly recommend using these if available in your SDK.
+If provided by the language SDK, it can be useful to attach container information as resource attributes. For example, in Go this can be done using the [`WithContainer()`](https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer) resource option.
 
 ### Unified Service Tagging
 
@@ -92,7 +91,7 @@ Unified service tagging ties Datadog telemetry together through using three esse
 * The deployment environment
 * The service version
 
-The application should send these as the semantical OpenTelemetry resource attributes: `service.name`, `deployment.environment` and `service.version`.
+The application should set these using the OpenTelemetry semantic conventions: `service.name`, `deployment.environment` and `service.version`.
 
 ## Using Docker
 
@@ -109,7 +108,7 @@ Follow these steps if you wish to run the OpenTelemetry Collector as a Docker im
 
 1. Create a `collector.yaml` file. You may use the [example template above](#configuring-the-datadog-exporter) to get started.
 
-2. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib:latest`][10].
+2. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib:<VERSION>`][10].
 
 3. Determine which ports to open on your container. OpenTelemetry traces are sent to the OpenTelemetry Collector over HTTP on two ports, depending on whether you are using gRPC or not. These ports must be exposed on the container. By default, traces are sent over gRPC on port 4317.
 
@@ -178,7 +177,7 @@ Some essential configuration options that are [visible in the example][12] as we
           hostPort: 4318
         - containerPort: 4317 # default port for OpenTelemetry gRPC receiver.
           hostPort: 4317
-        - containerPort: 8888  # Default endpoint for querying metrics.
+        - containerPort: 8888  # Default endpoint for querying Collector observability metrics.
 # ...
 ```
 
