@@ -110,15 +110,26 @@ Typical integrations relying on these attributes include [Apache][4], [Varnish][
 
 The following attributes are related to the geolocation of IP addresses used in network communication. All fields are prefixed by `network.client.geoip` or `network.destination.geoip`.
 
-| **Fullname**                                | **Type** | **Description**                                                                                                                      |
-| :------------------------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| `network.client.geoip.country.name`         | `string` | Name of the country                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | `string` | [ISO Code][6] of the country (example: `US` for the United States, `FR` for France)                                                  |
-| `network.client.geoip.continent.code`       | `string` | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
-| `network.client.geoip.continent.name`       | `string` | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
-| `network.client.geoip.subdivision.name`     | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
-| `network.client.geoip.subdivision.iso_code` | `string` | [ISO Code][6] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
-| `network.client.geoip.city.name`            | `String` | The name of the city (example `Paris`, `New York`)                                                                                   |
+`network.client.geoip.country.name` 
+: Type: `string` <br> Name of the country. 
+
+`network.client.geoip.country.iso_code` 
+: Type: `string` <br> [ISO Code][6] of the country (example: `US` for the United States, `FR` for France).
+
+`network.client.geoip.continent.code` 
+: Type: `string` <br> ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
+
+`network.client.geoip.continent.name`
+:  Type: `string` <br> Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).
+
+`network.client.geoip.subdivision.name`
+:  Type: `string` <br> Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France).
+
+`network.client.geoip.subdivision.iso_code`
+: Type: `string` <br> [ISO Code][6] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France).
+
+`network.client.geoip.city.name`
+: Type: `string` <br> The name of the city (example `Paris`, `New York`)
 
 #### HTTP requests
 
@@ -180,12 +191,17 @@ Typical integrations relying on these attributes are: _Java_, _NodeJs_, _.NET_, 
 
 Database related attributes are prefixed by `db`.
 
-| **Fullname**   | **Type** | **Description**                                                                                                                       |
-| :------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| `db.instance`  | `string` | Database instance name. For example, in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.       |
-| `db.statement` | `string` | A database statement for the given database type. For example, for mySQL: `"SELECT * FROM wuser_table";` for Redis: `"SET mykey 'WuValue'"`. |
-| `db.operation` | `string` | The operation that was performed ("query", "update", "delete",...).                                                                   |
-| `db.user`      | `string` | User that performs the operation.                                                                                                     |
+`db.instance` 
+: Type: `string` <br> Database instance name. For example, in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`. 
+
+`db.statement`
+: Type: `string` <br> A database statement for the given database type. For example, for mySQL: `"SELECT * FROM wuser_table";` for Redis: `"SET mykey 'WuValue'"`.
+
+`db.operation`
+: Type: `string` <br> The operation that was performed ("query", "update", "delete",...). 
+
+`db.user`
+: Type: `string` <br> User that performs the operation.
 
 Typical integrations relying on these attributes are: [Cassandra][15], [MySQL][16], [RDS][17], [Elasticsearch][18], etc.
 
