@@ -57,7 +57,16 @@ See live data:
 
 ### Enable Remote Configuration Management
 
-**!!!TODO: create minimal Remote Configuration on boarding docs!!!**
+Go to the [Remote Configuration Keys page][7] in the Organization settings and
+create a new Remote Configuration key by clicking on the "New Key" button.
+
+Give a name to your new key and follow the instructions in the modal.
+
+**Note**
+: You will have to update the datadog-agent configuration.
+: You have to be admin to create a Remote Configuration key. This should be a
+one-time setup per environment. If you do not have the necessary access rights,
+please approach an admin.
 
 ### Create a Logs index
 
@@ -66,10 +75,10 @@ your application logs. To avoid snapshots being sampled, you must ensure they
 are sent to an index that retains all messages. It is recommended you create a
 logs index with the name `live-debugger-snapshots`.
 
-[Configure the index][7] to the desired retention and make sure that no
+[Configure the index][8] to the desired retention and make sure that no
 sampling is configured. Use the filter `dd_source:debugger`. You should also
 make sure that the new index is at a position in the list that is not
-[superceeded][8] by any other filters. Logs enter the first index whose filter
+[superceeded][9] by any other filters. Logs enter the first index whose filter
 they match on.
 
 Snapshots are rate-limited in the Debugger libraries to at most one per second,
@@ -137,5 +146,6 @@ randomly-selected instance per service, environment and version combination.
 [4]: https://github.com/DataDog/dd-trace-dotnet
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: https://docs.datadog.com/integrations/guide/source-code-integration
-[7]: /logs/log_configuration/indexes/#add-indexes
-[8]: /logs/log_configuration/indexes/#indexes-filters
+[7]: https://app.datadoghq.com/organization-settings/remote-config
+[8]: /logs/log_configuration/indexes/#add-indexes
+[9]: /logs/log_configuration/indexes/#indexes-filters
