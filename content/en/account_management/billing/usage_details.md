@@ -85,7 +85,7 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 {{< img src="account_management/billing/TimeGranularity.png" alt="Time intervals on usage graphs" style="width:100%; align:left" >}}
 
-The dashed “Committed” line shows commitments per product, without any allowances (such as Custom Metrics or Containers). 
+The dashed `Committed` line shows commitments per product, without any allowances (such as Custom Metrics or Containers). 
 
 {{< img src="account_management/billing/CommittedLine.png" alt="Committed usage line" style="width:100%; align:left" >}}
 
