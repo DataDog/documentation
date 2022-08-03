@@ -212,7 +212,7 @@ stats_config:
       - prefix: "cluster.datadog_agent."
 ```
 
-## Sampling
+## Envoy Sampling
 
 To control the volume of Envoy traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Envoy are sent.
 
@@ -384,7 +384,7 @@ Complete examples:
 
 After completing this configuration, HTTP requests to Nginx will initiate and propagate Datadog traces, and will appear in the APM UI.
 
-#### Sampling
+#### Nginx Sampling
 
 To control the volume of Nginx traces that are sent to Datadog, specify a sampling rate in the config file `dd-config.json` by setting the `sample_rate` parameter to a value between `0.0` (0%) and `1.0` (100%):
 
@@ -466,42 +466,35 @@ To set a different service name per Ingress using annotations:
 ```
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
-### Sampling
+### Ingress Controller Sampling
 
-To control the volume of Ingress Controller traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Nginx are sent. The Kubernetes Nginx ingress controller uses [v1.2.1][11] of the `dd-opentracing-cpp` library).
+To control the volume of Ingress Controller traces that are sent to Datadog, specify a sampling rule that matches all traces. The `sample_rate` configured in the rule will determine the proportion of traces that are sampled.
 
-For example, to keep 10% of the traces starting from the `ingress-nginx` service:
+Sampling rules are specified via the `DD_TRACE_SAMPLING_RULES` environment
+variable. To define sampling rules in the Ingress Controller, two pieces of
+configuration must be modified.
 
-```
-DD_TRACE_SAMPLING_RULES=[{"service":"ingress-nginx","sample_rate":0.1}]
-```
-
-To use the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
-
-```
-DD_TRACE_SAMPLING_RULES=[]
-```
-
-To configure `DD_TRACE_SAMPLING_RULES`, add a `main-snippet` entry in the `data` section of the controller's ConfigMap:
-
-```
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  labels:
-	  app.kubernetes.io/name: ingress-nginx
-	  app.kubernetes.io/instance: ingress-nginx
-	  app.kubernetes.io/component: controller
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
+First, instruct Nginx to forward the environment variable to its worker processes. Add the following [main-snippet][13] to the `data` section of the Ingress Controller's `ConfigMap`:
+```yaml
 data:
-  enable-opentracing: "true"
-  datadog-collector-host: $HOST_IP
-  http-snippet: |
-	  opentracing_trace_locations off;
-  main-snippet: |
-	  env DD_TRACE_SAMPLING_RULES=[];
+  main-snippet: "env DD_TRACE_SAMPLING_RULES;"
 ```
+
+Second, specify a value for the environment variable in the `env` section of the Ingress Controller's `Deployment`.  For example, to keep 10% of traces originating from the Ingress Controller:
+```yaml
+env:
+- name: DD_TRACE_SAMPLING_RULES
+  value: '[{"sample_rate": 0.1}]'
+```
+
+To use the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent by default), specify an empty array of sampling rules:
+```yaml
+env:
+- name: DD_TRACE_SAMPLING_RULES
+  value: '[]'
+```
+
+If no rules are specified, then sampling defaults to 100%.
 
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
@@ -571,7 +564,7 @@ template:
 For [CronJobs][8], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
 of the higher-level `CronJob`.
 
-### Sampling
+### Istio Sampling
 
 To control the volume of Istio traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent.
 
@@ -679,6 +672,7 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[13]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
 {{% /tab %}}
 {{< /tabs >}}
 
