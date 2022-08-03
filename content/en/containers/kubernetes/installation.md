@@ -206,7 +206,7 @@ If your current chart version deployed is earlier than `v2.0.0`, follow the [mig
 
 ### Kube state metrics core in chart v2.x
 
-In new deployments, Datadog recommends using the newer kube-state-metrics core with the following values:
+In new deployments, Datadog recommends using the newer `kube-state-metrics` core with the following values:
 
 ```yaml
 ...
