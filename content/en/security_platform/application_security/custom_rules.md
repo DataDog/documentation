@@ -11,6 +11,9 @@ further_reading:
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshoot common Datadog Application Security Monitoring issues"
+- link: "/security_platform/notifications/variables/"
+  tag: "Documentation"
+  text: "Learn more about Security Platform notification variables"
 ---
 
 ## Overview
@@ -89,11 +92,11 @@ Additional cases can be added by clicking the **Add Case** button.
 
 The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the signal.
 
-The notification box has the same Markdown and preview features.
+Use [Notification Variables][5] to provide specific details about the signal by referencing its tags and event attributes.
 
 #### Template variables
 
-Detection rules support template variables within the Markdown notification box. Template variables permit injection of dynamic context from traces directly into a security signal and its associated notifications.
+Use [template variables][6] to inject dynamic context from traces directly into a security signal and its associated notifications.
 
 Template variables also permit deep linking into Datadog or a partner portal for quick access to next steps for investigation. For example:
 
@@ -158,7 +161,9 @@ Or use if-else logic to see if an attribute matches a value:
 {{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
 ```
 
-Tag your signals with different tags, for example, `attack:sql-injection-attempt`.
+See [Template Variables][6] for more information.
+
+Use the Tag resulting signals dropdown, to tag your signals with different tags. For example, `attack:sql-injection-attempt`.
 
 **Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
@@ -169,4 +174,6 @@ Tag your signals with different tags, for example, `attack:sql-injection-attempt
 [1]: /security_platform/default_rules/#cat-application-security
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
 [3]: /monitors/notify/?tab=is_alert#integrations
-[4]: /security_platform/notification_rules/
+[4]: /security_platform/notifications/rules/
+[5]: /security_platform/notifications/variables/
+[6]: /security_platform/notifications/variables/#template-variables

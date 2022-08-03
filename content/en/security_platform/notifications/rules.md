@@ -1,5 +1,5 @@
 ---
-title: Notification Rules
+title: Rules
 kind: documentation
 description: "Create notification rules to automatically notify your team and integrations when security detection rules trigger."
 aliases:
