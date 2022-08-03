@@ -1,9 +1,7 @@
 ---
 title: List Widget
 kind: documentation
-widget_type: "toplist"
-aliases:
-    - /graphing/widgets/top_list/
+widget_type: "list"
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
