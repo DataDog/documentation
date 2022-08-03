@@ -67,7 +67,7 @@ Month-to-date usage of each product is calculated as follows:
 
 The [Usage Trends][10] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable through the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product. 
 
-{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Usage Trends graphs" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Usage Trends graphs page in the Datadog application with Download as CSV option highlighted" style="width:100%; align:left" >}}
 
 For products with subtypes, each category is distinguished on the graph for that product. 
 
