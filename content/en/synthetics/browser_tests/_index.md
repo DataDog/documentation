@@ -158,8 +158,8 @@ A notification is sent according to the set of alerting conditions. Use this sec
     |----------------------------|---------------------------------------------------------------------|
     | `{{#is_alert}}`            | Show when the monitor alerts.                                       |
     | `{{^is_alert}}`            | Show unless the monitor alerts.                                     |
-    | `{{#is_recovery}}`         | Show when the monitor recovers from alert.                          |
-    | `{{^is_recovery}}`         | Show unless the monitor recovers from alert.                        |
+    | `{{#is_recovery}}`         | Show when the monitor recovers from `alert`.                          |
+    | `{{^is_recovery}}`         | Show unless the monitor recovers from `alert`.                        |
     | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
     | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
