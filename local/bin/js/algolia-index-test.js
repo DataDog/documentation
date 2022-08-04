@@ -3,7 +3,11 @@ const localAlogliaSearchIndex = require('../../../public/algolia.json')
 const indexName = 'docs_test_preview' // for now
 
 const cb = (error, result) => {
-    if (error) throw error
+    if (error) {
+        console.log(error)
+        throw error
+    }
+
     console.log(result) // todo: use DD
 }
 

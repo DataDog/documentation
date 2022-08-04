@@ -7,7 +7,7 @@
         {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
         {{ $object_id := md5 $rel_path -}}
         {{ $title := $page.Params.integration_title | default $page.Title }}
-        {{ $content := $page.Plain }}
+        {{ $content := $page.Plain | truncate 2000 }}
         {{ $tags := slice }}
         {{ $rank := 0 }}
 
