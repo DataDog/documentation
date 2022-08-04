@@ -17,7 +17,7 @@ Datadog Lambda layers `dd-trace-java:5` and `Datadog-Extension:25` introduce the
 2. Remove `DDLambda` and the import statement from your function code.
 3. Set environment variable `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
 4. Increment the `dd-trace-java` version to `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` and `Datadog-Extension` to `{{< latest-lambda-layer-version layer="extension" >}}`.
-5. If you are submitting custom metrics using the `DDLambda.metric()` helper function, use the standard [DogStatsD clent for Java][4] and follow the [sample code][5] to submit a metric as a distribution. Note, you can [only use distribution in Lambda][6] and previously `DDLambda.metric()` submit metrics as distribution as well.
+5. If you are submitting custom metrics using the `DDLambda.metric()` helper function, use the standard [DogStatsD client for Java][4] and follow the [sample code][5] to submit a metric as a distribution. Note that [in Lambda, you can only use distributions][6].
     
 [1]: https://github.com/DataDog/datadog-lambda-java
 [2]: /serverless/installation/java/?tab=datadogcli
