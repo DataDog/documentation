@@ -2511,10 +2511,10 @@ main:
     parent: appsec_getting_started
     identifier: appsec_nodejs
     weight: 106
-  - name: Understanding Application Security Monitoring
+  - name: How It Works
     url: security_platform/application_security/how-appsec-works/
     parent: application_security
-    identifier: appsec_understand
+    identifier: appsec_howitworks
     weight: 402
   - name: OOTB Rules
     url: security_platform/default_rules/#cat-application-security

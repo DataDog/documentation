@@ -12,7 +12,7 @@ further_reading:
   text: "Introducing Datadog Application Security"
 - link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "Understanding Application Security Monitoring"
+  text: "How Application Security Monitoring Works"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
   text: "Datadog Application Security Monitoring"
@@ -32,7 +32,7 @@ With ASM, you can cut through the noise of continuous trace data to focus on sec
 
 ## Understanding how application security is implemented in Datadog
 
-If you're curious how Application Security Monitoring is structured and how it uses tracing data to identify security problems, read [Understanding Application Security][3].
+If you're curious how Application Security Monitoring is structured and how it uses tracing data to identify security problems, read [How Application Security Monitoring Works][3].
 
 ## Configure your environment
 
