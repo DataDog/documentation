@@ -45,7 +45,7 @@
         "@datadog/browser-rum": "^4.13.0",
         "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz",
         "algoliasearch": "4.11.0",
-        "atomic-algolia": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/atomic-algolia/atomic-algolia-v0.3.21.tgz",
+        "atomic-algolia": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/atomic-algolia/atomic-algolia-v0.3.22.tgz",
         "bootstrap": "4.3.1",
         "del": "4.1.1",
         "docsearch.js": "^2.6.3",

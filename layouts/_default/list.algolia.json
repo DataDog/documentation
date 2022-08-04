@@ -12,13 +12,13 @@
         {{ $rank := 0 }}
 
         {{- /* Better way to do this?  Frontmatter (cascading) probably? */ -}}
-        {{ if in $page.RelPermalink "api/latest" }}
+        {{ if in $page.RelPermalink "/api/latest" }}
             {{ $tags = $tags | append "api_latest" }}
             {{ $rank = 10 }}
         {{ else if in $page.RelPermalink "/guide/" }}
             {{ $tags = $tags | append "guide" }}
             {{ $rank = 20 }}
-        {{ else if in $page.RelPermalink "account_management/rbac/permissions" }}
+        {{ else if in $page.RelPermalink "/account_management/rbac/permissions" }}
             {{ $tags = $tags | append "rbac_permissions" }}
             {{ $rank = 60 }}
         {{ else if in $page.RelPermalink "/getting_started/" }}
