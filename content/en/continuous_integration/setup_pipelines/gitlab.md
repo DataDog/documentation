@@ -146,7 +146,7 @@ For this feature to work the GitLab runner must have a tag of the form `host:<ho
 [registering a new runner][6] or through the UI, in **Settings > CI/CD > Runners** and editing the appropiate runner,
 or by manually updating the `config.toml` for existing runners.
 
-Once setup CI Visibility will automatically detect the host. To see the metrics just click on a job span in the trace
+After this steps, CI Visibility adds the hostname to each job. To see the metrics click on a job span in the trace
 view and in the drawer a new tab named **Infrastructure** will show which contains the host metrics.
 
 ## Enable job log collection (beta)
