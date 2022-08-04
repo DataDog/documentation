@@ -43,7 +43,7 @@ To create a custom metric from a search query in the [RUM Explorer][4], click th
 4. Choose a field to track from the dropdown menu next to **Count**. 
 
    - Select `*` to generate a count of all RUM events that match your search query. 
-   - Optionally, enter an event attribute such as `@action.target` to aggregate a numeric value and create a corresponding `count` metric. 
+   - Optionally, enter an event attribute such as `@action.target` to aggregate a numeric value and create a corresponding `count` or `distribution` metric. 
 
    If the RUM attribute facet is a measure, the metric value is the RUM attribute value.
 
@@ -52,14 +52,7 @@ To create a custom metric from a search query in the [RUM Explorer][4], click th
    <div class="alert alert-warning">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a>. Datadog recommends avoiding grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs. For more information, see <a href="/data_security/logs/">Log Management Data Security</a>.
    </div>
 
-6. For custom metrics created on sessions and views, select **The active session/view starts matching the query** or **The session/view becomes inactive or is completed** to set the matching criteria for sessions and views.   
-
-   Sessions and views are considered active when there is ongoing application or user activity in a RUM application. For example, as a user opens new pages, these page views are collected in the user session. As a user interacts with buttons on a page, these actions are collected in the page views.
-
-   For example, say you have a RUM-based custom metric that counts the number of user sessions containing more than five errors, and a session ID `123` that reaches five errors at 11 AM and closes at 12 PM.
-
-   - By accounting for the session or view as soon as it matches the query, you incrementally increase the count metric's value by one at the 11 AM timestamp.
-   - By accounting for the session or view that is inactive, you incrementally increase the count metric's value by one at the 12 PM timestamp.
+6. For custom metrics created on sessions and views, select **The active session/view starts matching the query** or **The session/view becomes inactive or is completed** to set the matching criteria for sessions and views. For more information, see [Add a RUM-based metric on sessions and views](#add-a-rum-based-metric-on-sessions-and-views).
 
 7. Add percentile aggregations for distribution metrics. You can opt-in for advanced query functionality and use globally accurate percentiles (such as P50, P75, P90, P95, and P99). 
 
@@ -70,6 +63,15 @@ To create a custom metric from a search query in the [RUM Explorer][4], click th
 Your RUM-based custom metric appears in the list below **Custom RUM Metrics**, and there may be a short delay for your metric to become available in [dashboards][9] and [monitors][10]. 
 
 Data points are not created for metrics with historical data. Data points for your RUM-based custom metric generate on a ten second interval. Metrics data is retained for 15 months. 
+
+### Add a RUM-based metric on sessions and views
+
+Sessions and views are considered active when there is ongoing application or user activity in a RUM application. For example, as a user opens new pages, these page views are collected in the user session. As a user interacts with buttons on a page, these actions are collected in the page views.
+
+   Let's assume you have a RUM-based custom metric that counts the number of user sessions containing more than five errors, and a session ID `123` that reaches five errors at 11 AM and closes at 12 PM.
+
+   - By accounting for the session or view as soon as it matches the query, you increment the count metric's value by one at the 11 AM timestamp.
+   - By accounting for the session or view that is inactive, you increment the count metric's value by one at the 12 PM timestamp.
 
 ## Manage RUM-based custom metrics
 
