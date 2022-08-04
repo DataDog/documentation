@@ -24,7 +24,7 @@ aliases:
 
 ## Overview
 
-Tracing application metrics are collected after you [enable trace collection and [instrument your application][1].
+Tracing application metrics are collected after you [enable trace collection and instrument your application][1].
 
 {{< img src="tracing/apm_lifecycle/trace_metrics.png" style="width:70%; background:none; border:none; box-shadow:none;" alt="Trace Metrics" >}}
 

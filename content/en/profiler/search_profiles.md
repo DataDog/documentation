@@ -66,7 +66,7 @@ Four tabs are below the profile header:
 
 In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs.
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,linux" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,ddprof" >}}
 {{< programming-lang lang="java" >}}
 
 {{< img src="profiler/profile.png" alt="A specific profile">}}
@@ -87,7 +87,7 @@ Class Load
 : Shows the number of classes loaded by each method.
 
 Thrown Exceptions
-: Shows the number of errors and exceptions thrown by each method.
+: Shows the number of errors and exceptions thrown by each method, as well as their type.
 
 File I/O
 : Shows the time each method spent reading from and writing to files.
@@ -120,7 +120,7 @@ Allocations
 : Shows the number of heap allocations made by each function, including allocations which were subsequently freed.
 
 Thrown Exceptions
-: Shows the number of caught or uncaught exceptions raised by each function.
+: Shows the number of caught or uncaught exceptions raised by each function, as well as their type.
 
 Lock Wait Time
 : Shows the time each function spent waiting for a lock.
@@ -200,7 +200,13 @@ Heap Live Size
 Once enabled, the following profile type is collected:
 
 Wall Time
-: Shows the elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. 
+: Shows the elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
+
+CPU
+: Shows the time each method spent running on the CPU.
+
+Thrown Exceptions
+: Shows the number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
@@ -211,7 +217,7 @@ Wall Time
 : Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
 {{< /programming-lang >}}
-{{< programming-lang lang="linux" >}}
+{{< programming-lang lang="ddprof" >}}
 
 Once enabled, the following profile types are collected:
 

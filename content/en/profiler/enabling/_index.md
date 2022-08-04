@@ -20,15 +20,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 Select your language below to learn how to enable a profiler for your application:
 
-## Managed runtimes
 
 {{< partial name="profiling/profiling-languages.html" >}}
-
-## Unmanaged runtimes
-
-The following profiling library can be used for applications that are written in compiled languages such as **C**, **C++**, or **Rust**. You can also use this to profile services such as nginx and Postgres: 
-
-{{< partial name="profiling/profiling-unmanaged-code.html" >}}
 
 
 ## Further Reading

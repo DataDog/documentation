@@ -132,6 +132,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 | CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
 | デプロイ | 7.27.0 | 1.11.0 | 2.10.0 |
+| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
 | ジョブ | 7.27.0 | 1.13.1 | 2.15.5 |
 | ノード | 7.27.0 | 1.11.0 | 2.10.0 |
 | PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
@@ -210,6 +211,13 @@ Cluster Agent が動作していて、Agent が通信可能である必要があ
         - list
         - get
         - watch
+     - apiGroups:
+       - networking.k8s.io
+       resources:
+       - ingresses
+       verbs:
+       - list
+       - watch
     ```
 
     これらのアクセス許可は、Agent DaemonSet や Cluster Agent Deployment と同じネームスペースに `datadog-cluster-id` ConfigMap を作成したり、デプロイや ReplicaSets を収集するために必要です。
