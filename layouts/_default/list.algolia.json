@@ -11,11 +11,11 @@
         {{ $tags := slice }}
 
         {{- /* Better way to do this?  Frontmatter (cascading) probably? */ -}}
-        {{ if in $page.RelPermalink "api/latest" }}
+        {{ if in $page.RelPermalink "/api/latest" }}
             {{ $tags = $tags | append "api_latest" }}
         {{ else if in $page.RelPermalink "/guide/" }}
             {{ $tags = $tags | append "guide" }}
-        {{ else if in $page.RelPermalink "account_management/rbac/permissions" }}
+        {{ else if in $page.RelPermalink "/account_management/rbac/permissions" }}
             {{ $tags = $tags | append "rbac_permissions" }}
         {{ else if in $page.RelPermalink "/getting_started/" }}
             {{ $tags = $tags | append "getting_started" }}
