@@ -141,7 +141,7 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 ### Infrastructure metric correlation
 
-If you are using self-hosted GitLab runners you can correlate jobs to the infrastructure that it is running it.
+If you are using self-hosted GitLab runners you can correlate jobs to the infrastructure that it is running them.
 For this feature to work the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added whilst
 [registering a new runner][6] or through the UI, in **Settings > CI/CD > Runners** and editing the appropiate runner,
 or by manually updating the `config.toml` for existing runners.
