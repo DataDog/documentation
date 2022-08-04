@@ -112,9 +112,9 @@ You can fix it by setting `NODE_OPTIONS` to the following:
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
-### Adding custom tags and metrics to testss
+### Adding custom tags to tests
 
-You can add custom tags and metrics to your test by grabbing the current active span:
+You can add custom tags to your test by grabbing the current active span:
 
 ```javascript
   it('sum function can sum', () => {
@@ -152,9 +152,9 @@ You can fix it by setting `NODE_OPTIONS` to the following:
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
-### Adding custom tags and metrics to tests
+### Adding custom tags to tests
 
-You can add custom tags and metrics to your test by grabbing the current active span:
+You can add custom tags to your test by grabbing the current active span:
 
 ```javascript
   When('the function is called', function () {
@@ -245,7 +245,7 @@ module.exports = defineConfig({
 {{< /code-block >}}
 
 
-### Adding custom tags and metrics to tests
+### Adding custom tags to tests
 
 To add additional information to your tests, such as the team owner, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
 
