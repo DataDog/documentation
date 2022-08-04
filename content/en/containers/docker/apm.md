@@ -106,6 +106,8 @@ As a first step, create a user-defined bridge network:
 docker network create <NETWORK_NAME>
 ```
 
+**Note**: The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
+
 Then start the Agent and the application container, connected to the network previously created:
 
 {{< tabs >}}
