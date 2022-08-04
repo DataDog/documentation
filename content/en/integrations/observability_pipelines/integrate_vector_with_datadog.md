@@ -27,6 +27,7 @@ further_reading:
 
 Vector integrates with Datadog to aggregate logs, metrics, and traces from Datadog Agents and route collected telemetry to Datadog.
 
+Data flows along the following path:
 `Datadog Agent -> Vector -> Datadog`
 
 Before collecting your observability data from the Datadog Agent using Vector, you must:
