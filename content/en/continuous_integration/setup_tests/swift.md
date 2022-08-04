@@ -546,6 +546,21 @@ Additional Git configuration for physical device testing:
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
 {{% /tab %}}
+{{% tab "Xcode Cloud" %}}
+
+| Environment variable    | Value                   |
+| ----------------------- | ----------------------- |
+| `DD_GIT_REPOSITORY_URL` | The repository URL      |
+| `CI_WORKSPACE`          | `$(CI_WORKSPACE)`       |
+| `CI_COMMIT`             | `$(CI_COMMIT)`          |
+| `CI_BUILD_ID`           | `$(CI_BUILD_ID)`        |
+| `CI_BUILD_NUMBER`       | `$(CI_BUILD_NUMBER)`    |
+| `CI_WORKFLOW`           | `$(CI_WORKFLOW)`        |
+| `CI_TAG`                | `$(CI_TAG)`             |
+| `CI_BRANCH`             | `$(CI_BRANCH)`          |
+| `CI_GIT_REF`            | `$(CI_GIT_REF)`         |
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Manual testing API
