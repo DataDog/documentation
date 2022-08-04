@@ -27,11 +27,11 @@ The Agent can Autodiscover and attach tags to all data emitted by containers. Th
 
 | Tag                 | Cardinality  | Requirement                                 |
 |----------------------|--------------|---------------------------------------------|
-| `container_name`     | High         | N/A                                         |
+| `container_name`     | High         | N/A<br/> **Note**: not included for the containerd runtime.                                         |
 | `container_id`       | High         | N/A                                         |
 | `rancher_container`  | High         | Rancher environment                         |
 | `mesos_task`         | Orchestrator | Mesos environment                           |
-| `docker_image`       | Low          | N/A                                         |
+| `docker_image`       | Low          | N/A<br/> **Note**: not included for the containerd runtime.                                         |
 | `image_name`         | Low          | N/A                                         |
 | `short_image`        | Low          | N/A                                         |
 | `image_tag`          | Low          | N/A                                         |
@@ -50,8 +50,6 @@ The Agent can Autodiscover and attach tags to all data emitted by containers. Th
 | `nomad_group`        | Low          | Nomad environment                           |
 | `git.commit.sha`     | Low          | [org.opencontainers.image.revision][3] used |
 | `git.repository_url` | Low          | [org.opencontainers.image.source][3] used   |
-
-**Note**: `container_name` and `docker_image` are not included for containerd. 
 
 ### Unified service tagging
 
