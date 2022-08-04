@@ -11435,7 +11435,34 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthWeb'
       - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
       - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
       type: object
+    SyntheticsBasicAuthDigest:
+      description: Object to handle digest authentication when performing the test.
+      properties:
+        password:
+          description: Password to use for the digest authentication.
+          example: PaSSw0RD!
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthDigestType'
+        username:
+          description: Username to use for the digest authentication.
+          example: my_username
+          type: string
+      required:
+      - password
+      - username
+      type: object
+    SyntheticsBasicAuthDigestType:
+      default: digest
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - digest
+      example: digest
+      type: string
+      x-enum-varnames:
+      - DIGEST
     SyntheticsBasicAuthNTLM:
       description: Object to handle `NTLM` authentication when performing the test.
       properties:
