@@ -139,19 +139,28 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+### Infrastructure metric correlation
+
+If you are using self-hosted GitLab runners you can correlate jobs to the infrastructure that it is running it.
+For this feature to work the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added whilst
+[registering a new runner][6] or through the UI, in **Settings > CI/CD > Runners** and editing the appropiate runner,
+or by manually updating the `config.toml` for existing runners.
+
+Once setup CI Visibility will automatically detect the host. To see the metrics just click on a job span in the trace
+view and in the drawer a new tab named **Infrastructure** will show which contains the host metrics.
 
 ## Enable job log collection (beta)
 
 The following GitLab versions support collecting job logs:
 * GitLab.com (SaaS)
-* GitLab >= 14.8 (self-hosted) only if using [object storage to store job logs][6]
+* GitLab >= 14.8 (self-hosted) only if using [object storage to store job logs][7]
 
 To enable collection of job logs:
 
-1. Enable the `datadog_integration_logs_collection` [feature flag][7] in your GitLab self-hosted or GitLab.com account. This reveals the `Enable logs collection` option in the Datadog integration.
+1. Enable the `datadog_integration_logs_collection` [feature flag][8] in your GitLab self-hosted or GitLab.com account. This reveals the `Enable logs collection` option in the Datadog integration.
 2. Enable the `Enable logs collection` option and save the changes.
 
-Job logs are collected in the [Logs][8] product and automatically correlated with the GitLab pipeline within CI Visibility.
+Job logs are collected in the [Logs][9] product and automatically correlated with the GitLab pipeline within CI Visibility.
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility</div>
 
@@ -164,6 +173,7 @@ Job logs are collected in the [Logs][8] product and automatically correlated wit
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
-[7]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[8]: /logs/
+[6]: https://docs.gitlab.com/runner/register/
+[7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
+[8]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[9]: /logs/
