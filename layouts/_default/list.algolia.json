@@ -30,7 +30,6 @@
             dict "objectID" $object_id 
             "title" $title
             "description" $page.Description
-            "content" ($page.Plain | truncate 2500)
             "type" $page.Type
             "permalink" $page.Permalink
             "relpermalink" $page.RelPermalink
