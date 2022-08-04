@@ -5,16 +5,16 @@ const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID || '';
 let ALGOLIA_INDEX_NAME = process.env.ALGOLIA_INDEX_NAME || '';
 
 if (process.env.CI_ENVIRONMENT_NAME && !ALGOLIA_INDEX_NAME) {
-    const configCorp = require('../../../config-corp');
+    const configDocs = require('../../../assets/scripts/config/config-docs');
     switch (process.env.CI_ENVIRONMENT_NAME) {
         case 'live':
-            ALGOLIA_INDEX_NAME = configCorp['production'].algoliaIndexes.primary_index;
+            ALGOLIA_INDEX_NAME = configDocs['production'].algoliaIndexes.primary_index;
             break;
         case 'preview':
-            ALGOLIA_INDEX_NAME = configCorp['preview'].algoliaIndexes.primary_index;
+            ALGOLIA_INDEX_NAME = configDocs['preview'].algoliaIndexes.primary_index;
             break;
         case 'staging':
-            ALGOLIA_INDEX_NAME = configCorp['staging'].algoliaIndexes.primary_index;
+            ALGOLIA_INDEX_NAME = configDocs['staging'].algoliaIndexes.primary_index;
             break;
         default:
             ALGOLIA_INDEX_NAME = '';
