@@ -9,22 +9,30 @@
         {{ $title := $page.Params.integration_title | default $page.Title }}
         {{ $content := $page.Plain }}
         {{ $tags := slice }}
+        {{ $rank := 0 }}
 
         {{- /* Better way to do this?  Frontmatter (cascading) probably? */ -}}
         {{ if in $page.RelPermalink "api/latest" }}
             {{ $tags = $tags | append "api_latest" }}
+            {{ $rank = 10 }}
         {{ else if in $page.RelPermalink "/guide/" }}
             {{ $tags = $tags | append "guide" }}
+            {{ $rank = 20 }}
         {{ else if in $page.RelPermalink "account_management/rbac/permissions" }}
             {{ $tags = $tags | append "rbac_permissions" }}
+            {{ $rank = 60 }}
         {{ else if in $page.RelPermalink "/getting_started/" }}
             {{ $tags = $tags | append "getting_started" }}
+            {{ $rank = 70 }}
         {{ else if in $page.RelPermalink "/security_platform/default_rules" }}
             {{ $tags = $tags | append "default_rules" }}
+            {{ $rank = 30 }}
         {{ else if in $page.RelPermalink "/integrations/" }}
             {{ $tags = $tags | append "integrations" }}
+            {{ $rank = 40 }}
         {{ else }}
             {{ $tags = $tags | append "docs" }}
+            {{ $rank = 50 }}
         {{ end }}
     
         {{- $.Scratch.Add "algoliaindex" (
@@ -37,6 +45,7 @@
             "relpermalink" $page.RelPermalink
             "language" $page.Language.Lang
             "tags" $tags
+            "rank" $rank
             ) -}}
     {{- end -}}
 {{- end -}}
