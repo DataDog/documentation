@@ -1,5 +1,9 @@
 const algoliasearch = require('algoliasearch');
 
+const ALGOLIA_ADMIN_KEY = process.env.ALGOLIA_ADMIN_KEY || '';
+const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID || '';
+let ALGOLIA_INDEX_NAME = process.env.ALGOLIA_INDEX_NAME || '';
+
 if (process.env.CI_ENVIRONMENT_NAME && !ALGOLIA_INDEX_NAME) {
     const configCorp = require('../../../config-corp');
     switch (process.env.CI_ENVIRONMENT_NAME) {
