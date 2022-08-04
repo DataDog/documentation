@@ -21,7 +21,7 @@ aliases:
 
 <div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_java">instrumenting using the Datadog Forwarder</a>.</div>
 
-<div class="alert alert-warning">If you are currently using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), you need to follow the <a href="https://docs.datadoghq.com/serverless/guide/upgrade_java_instrumentation">special instructions to upgrade</a>.</div>
+<div class="alert alert-warning">If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the <a href="https://docs.datadoghq.com/serverless/guide/upgrade_java_instrumentation">special instructions to upgrade</a>.</div>
 
 ## Installation
 
