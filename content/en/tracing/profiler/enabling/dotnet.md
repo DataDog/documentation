@@ -16,11 +16,7 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-The following profiling features are available:
-- **Method durations** shows the overall time taken by each method from your code.
-- **CPU** shows the time taken executing CPU tasks (see Configuration section to enable it).
-- **Exceptions** shows the type and messages of thrown exceptions (see Configuration section to enable it).
-
+The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 

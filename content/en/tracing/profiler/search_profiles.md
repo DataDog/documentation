@@ -86,7 +86,7 @@ Class Load
 : Shows the number of classes loaded by each method.
 
 Thrown Exceptions
-: Shows the number of errors and exceptions thrown by each method.
+: Shows the number of errors and exceptions thrown by each method, as well as their type.
 
 File I/O
 : Shows the time each method spent reading from and writing to files.
@@ -119,7 +119,7 @@ Allocations
 : Shows the number of heap allocations made by each function, including allocations which were subsequently freed.
 
 Thrown Exceptions
-: Shows the number of caught or uncaught exceptions raised by each function.
+: Shows the number of caught or uncaught exceptions raised by each function, as well as their type.
 
 Lock Wait Time
 : Shows the time each function spent waiting for a lock.
@@ -199,7 +199,13 @@ Heap Live Size
 Once enabled, the following profile type is collected:
 
 Wall Time
-: Shows the elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. 
+: Shows the elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
+
+CPU
+: Shows the time each method spent running on the CPU.
+
+Thrown Exceptions
+: Shows the number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
