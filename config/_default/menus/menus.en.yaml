@@ -247,6 +247,11 @@ main:
     url: agent/basic_agent_usage/source/
     weight: 116
     parent: basic_agent_usage
+  - name: Containers
+    url: containers/
+    parent: agent
+    identifier: agent_containers
+    weight: 2
   - name: IoT
     url: agent/iot/
     parent: agent
