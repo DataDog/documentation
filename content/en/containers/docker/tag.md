@@ -23,7 +23,7 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 ### Out-of-the-box tagging
 
-The Agent can autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1].
+The Agent can Autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1].
 
 | Tag                 | Cardinality  | Requirement                                 |
 |----------------------|--------------|---------------------------------------------|
@@ -50,6 +50,8 @@ The Agent can autodiscover and attach tags to all data emitted by containers. Th
 | `nomad_group`        | Low          | Nomad environment                           |
 | `git.commit.sha`     | Low          | [org.opencontainers.image.revision][3] used |
 | `git.repository_url` | Low          | [org.opencontainers.image.source][3] used   |
+
+**Note**: `container_name` and `docker_image` are not included for containerd. 
 
 ### Unified service tagging
 
