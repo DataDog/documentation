@@ -282,7 +282,7 @@ Users can interact with either the aliased (source) or standard (destination) fa
 - Attributes can only be aliased to standard attributes.
 - To respect the JSON structure of logs, it is not possible to have one standard attribute as the child of another (for example, `user` and `user.name` cannot both be standard attributes).
 
-See the [associated documentation][29] for additional information.
+See [Alias Facets][29] for additional information.
 
 ## Further Reading
 
