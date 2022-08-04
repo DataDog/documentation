@@ -6,6 +6,7 @@ type: multi-code-lang
 code_lang_weight: 90
 aliases:
   - /tracing/profiler/enabling/linux/
+  - /tracing/profiler/enabling/ddprof/
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
