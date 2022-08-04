@@ -3,6 +3,8 @@ title: Integrate Vector with Datadog
 kind: documentation
 dependencies:
   ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/integrate_vector_with_datadog.md"]
+aliases:
+  - /agent/vector_aggregation/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
