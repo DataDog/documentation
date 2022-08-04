@@ -2511,31 +2511,36 @@ main:
     parent: appsec_getting_started
     identifier: appsec_nodejs
     weight: 106
+  - name: Understanding Application Security Monitoring
+    url: security_platform/application_security/how-appsec-works/
+    parent: application_security
+    identifier: appsec_understand
+    weight: 402
   - name: OOTB Rules
     url: security_platform/default_rules/#cat-application-security
     parent: application_security
     identifier: appsec_default_rules
-    weight: 402
+    weight: 403
   - name: Setup and Configure
     url: security_platform/application_security/setup_and_configure/
     parent: application_security
     identifier: appsec_configuration
-    weight: 403
+    weight: 404
   - name: Custom Detection Rules
     url: security_platform/application_security/custom_rules/
     parent: application_security
     identifier: appsec_custom_rules
-    weight: 404
+    weight: 405
   - name: Event Rules
     url: security_platform/application_security/event_rules/
     parent: application_security
     identifier: appsec_event_rules
-    weight: 405
+    weight: 406
   - name: Troubleshooting
     url: security_platform/application_security/troubleshooting
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 406
+    weight: 407
   - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform

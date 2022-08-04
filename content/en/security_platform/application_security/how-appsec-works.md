@@ -1,6 +1,18 @@
 ---
 title: How Application Security Monitoring Works in Datadog
-kind: guide
+kind: documentation
+aliases:
+  - /security_platform/guide/how-appsec-works/
+further_reading:
+- link: "/security_platform/application_security/setup_and_configure/#compatibility"
+  tag: "Documentation"
+  text: "Learn more about language and framework compatibility"
+- link: "https://www.datadoghq.com/blog/datadog-application-security/"
+  tag: "Blog"
+  text: "Introducing Datadog Application Security"
+- link: "/security_platform/application_security/getting_started/"
+  tag: "Documentation"
+  text: "Get started with Application Security Monitoring"
 ---
 
 ## Overview
