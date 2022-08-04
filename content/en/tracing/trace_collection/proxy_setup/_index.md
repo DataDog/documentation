@@ -474,7 +474,7 @@ Sampling rules are specified via the `DD_TRACE_SAMPLING_RULES` environment
 variable. To define sampling rules in the Ingress Controller, two pieces of
 configuration must be modified.
 
-First, instruct Nginx to forward the environment variable to its worker processes. Add the following [main-snippet][13] to the `data` section of the Ingress Controller's `ConfigMap`:
+First, instruct Nginx to forward the environment variable to its worker processes. Add the following [main-snippet][12] to the `data` section of the Ingress Controller's `ConfigMap`:
 ```yaml
 data:
   main-snippet: "env DD_TRACE_SAMPLING_RULES;"
@@ -507,6 +507,7 @@ If no rules are specified, then sampling defaults to 100%.
 [9]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [10]: https://github.com/kubernetes/ingress-nginx
 [11]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
+[12]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
 {{% /tab %}}
 {{% tab "Istio" %}}
 
@@ -672,7 +673,6 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
-[13]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
 {{% /tab %}}
 {{< /tabs >}}
 
