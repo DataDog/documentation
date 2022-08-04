@@ -30,7 +30,7 @@ This guide discusses several use cases to enrich your RUM & Session Replay data 
 
 Once you have set up the Datadog RUM SDK, enrich your [browser][2] or mobile ([iOS][3] and [Android][4]) data with attributes to customize the data according to your use case. For example, adding contextual information allows you to [identify sessions that are tied to specific users][4].
 
-## Monitor page traffic and button usage
+## Monitor page traffic and feature usage
 
 If you are interested in learning what buttons your users click on the most, you can track page traffic and the usage of buttons in your application. 
 
@@ -153,9 +153,9 @@ For example:
 
 Use the [funnel visualization type][6] to track the conversion rate across crucial areas in your website. 
 
-Once you have created a funnel based on views and actions on your website, you can do the following actions:
+Once you have created a funnel based on views or actions on your website, you can use it in the following ways:
 
-* Create a [saved view][7] to reference it in the RUM Explorer 
+* Create a [saved view][7] to reference it in the RUM & Session Replay
 * [Export][8] it to a dashboard where you can analyze the conversion rate in the context of additional telemetry data
 * Click on a funnel step to display the **Funnel Analysis** [side panel](#view-funnel-analysis)
 
