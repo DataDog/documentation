@@ -1,45 +1,49 @@
 ---
 title: Best Practices For Tagging Events
-kind: documentation
+kind: guide
 description: Learn about recommended event tags and how to add them.
 further_reading:
 - link: "/getting_started/tagging/assigning_tags"
   tag: "Documentation"
   text: "Learn about assigning tags"
-
 ---
 
-As a best practice, Datadog recommends the use of [unified service tagging][1], plus other tags listed below for all events to help you:
+## Overview
+
+Datadog recommends using [unified service tagging][1] and the tags listed below on all your events for the following benefits:
+
 - Identify potential issues faster
-- Locate other related events
-- Filter to more accurately in the event explorer e.g to a particular environment
+- Locate related events
+- Filter more accurately in the [Events Explorer][2], for example, to a specific environment
 
-### Recommended Core Attributes
+## Add tags
 
-| **Attribute** | **Notes**                                                                                                                                                                                    |
+You have multiple options to improve your tagging strategy for events:
+
+- API: When using the [API][3], you can add tags in the `tags` field.
+
+- Monitor: When creating or editing a monitor, you can add recommended tags in the [**Say what's happening** section][4].
+
+- Integrations: For more information about adding tags to integrations, see [Assigning Tags][5] or the specific [integration][6].
+
+You can add the following core attributes to your events:
+
+| **Attribute** | **Description**                                                                                                                                                                                    |
 |---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| env           | The environment in which the event is from e.g production, edge, staging. <br>Ensures that events from a lower environment are not confused to be of a higher priority                       |
-| service       | Enables you to:<br>- know which service/services will be impacted if an event is related out an error<br>- pivot to that service quickly  <br>- filter to all events with that given service |
-| version       | Enables you to know that you know that an event/outage for instance is only related to a particular version released                                                                         |
-| host          | Adds the ability to: <br>- auto enrich event at intake with additional host tags<br>- pivot to the host infrastructure and metrics tabs easily in event explorer                             |
-| team          | The team which owns the event, so that they can be notified if need be                                                                                                                       |                                                          |
+| env           | The environment in which the event is from, such as production, edge, or staging. This enables you to ensure that events from a lower environment are not confused as high priority.                       |
+| service       | The service name. Enables you to:<br>- Know which service(s) are impacted if an event is related to an error<br>- Pivot to the impacted service  <br>- Filter for all events with that service |
+| version       | The build or service version. This allows you to identify, for example, if an outage or event is related to a particular version.                                                                         |
+| host          | The host name. Enables you to: <br>- Automatically enrich events at intake with additional host tags<br>- Pivot to the **Host Infrastructure** and **Metrics** tabs in the [Events Explorer][7].                             |
+| team          | The team that owns the event and are notified if need be.                                                                                                                       |                                                          |
 
-#### Improving your Tagging
+## Further reading
 
-- **API**
-
-When using the [API][2], tags can be added within the tags field.
-
-- **Monitor**
-
-When creating or editing a monitor, you can add the recommended tags within the [whats happening section][5]
-
-- **Integrations**
-
-To learn more about to how add tags to integrations, check out [assigning_tags][3] or the specific [integrations page][4]
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging
-[2]: /api/latest/events/#post-an-event
-[3]: /getting_started/tagging/assigning_tags
-[4]: /integrations/
-[5]: /getting_started/monitors/#notify-your-team
+[2]: /events/explorer
+[3]: /api/latest/events/#post-an-event
+[4]: /getting_started/monitors/#notify-your-team
+[5]: /getting_started/tagging/assigning_tags
+[6]: /integrations/
+[7]: https://app.datadoghq.com/event/explorer
