@@ -5,7 +5,7 @@ kind: documentation
 
 This document contains instructions for upgrading your Datadog for Java Lambda instrumentation. If you are setting up instrumentation for the first time, follow the [Java Lambda installation instructions][7] instead.
 
-Datadog Lambda layers `dd-trace-java:5` and `Datadog-Extension:25` introduce the following changes to the process of seetting up instrumentation on Java Lambda functions:
+Datadog Lambda layers `dd-trace-java:5` and `Datadog-Extension:25` introduce the following changes to the process of setting up instrumentation on Java Lambda functions:
 
 1. The [datadog-lambda-java][1] library is deprecated and not required.
 2. No code changes (such as the `DDLambda` wrapper) are required, except for custom instrumentation.
