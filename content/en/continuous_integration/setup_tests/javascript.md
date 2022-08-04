@@ -112,7 +112,7 @@ You can fix it by setting `NODE_OPTIONS` to the following:
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
-### Add extra tags to your tests
+### Adding custom tags and metrics to testss
 
 You can add custom tags and metrics to your test by grabbing the current active span:
 
@@ -126,7 +126,7 @@ You can add custom tags and metrics to your test by grabbing the current active 
   })
 ```
 
-For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
+If you want to create filters or group bys for these tags you need to create facets for them. For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
@@ -152,7 +152,7 @@ You can fix it by setting `NODE_OPTIONS` to the following:
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
-### Add extra tags to your tests
+### Adding custom tags and metrics to tests
 
 You can add custom tags and metrics to your test by grabbing the current active span:
 
@@ -166,7 +166,7 @@ You can add custom tags and metrics to your test by grabbing the current active 
   });
 ```
 
-For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
+If you want to create filters or group bys for these tags you need to create facets for them. For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
@@ -245,7 +245,7 @@ module.exports = defineConfig({
 {{< /code-block >}}
 
 
-### Add extra tags to your test
+### Adding custom tags and metrics to tests
 
 To add additional information to your tests, such as the team owner, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
 
@@ -267,6 +267,8 @@ it('renders a hello world', () => {
     .should('have.text', 'Hello World')
 })
 ```
+
+If you want to create filters or group bys for these tags you need to create facets for them. For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
 
 ### Cypress - RUM integration
 
