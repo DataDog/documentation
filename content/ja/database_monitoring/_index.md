@@ -19,10 +19,6 @@ title: データベース モニタリング
 
 {{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 Datadog Database Monitoring は、すべてのホストにわたるデータベースの詳細な可視性を提供します。データベースの正常性とパフォーマンスを理解し、問題が発生したときにトラブルシューティングを行うために、過去のクエリパフォーマンスメトリクスを掘り下げ、計画とホストレベルのメトリクスをすべて 1 か所で説明します。
 
 ## はじめに

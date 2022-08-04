@@ -4,7 +4,6 @@ aliases:
 categories:
 - collaboration
 - notification
-ddtype: crawler
 dependencies: []
 description: Datadog のアラートとグラフをチームの Slack チャンネルに送信。
 doc_link: https://docs.datadoghq.com/integrations/slack/
@@ -224,6 +223,18 @@ Notifying @slack-infrastructure <!subteam^12345>
 または、特定のメールに直接アクセスする **@メンション**を作成します。
 
 - `@team-{{team.name}}@company.com` は、チームのメーリングリストにメールを送信します。
+
+### Slack の通知内容を完全に制御する
+
+Slack チャンネルのモニターアラートは、いくつかのフィールドを含んでいます。
+* **メッセージ**
+* モニターのトリガーとなったクエリの**スナップショット** (グラフ)
+* 関連する**タグ**
+* 誰が**通知**されたのか 
+
+Slack インテグレーションタイルで、各フィールドのオン/オフを切り替えることができます。各チャンネルで、通知に含めたい各フィールドの横にあるチェックボックスを選択します。その他のチェックボックスはチェックを外したままにしてください。
+
+{{< img src="integrations/slack/slack_notifications_config.png" alt="Slack 通知構成" style="width:80%;">}}
 
 ## 収集データ
 

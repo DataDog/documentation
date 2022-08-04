@@ -41,6 +41,7 @@ assets:
     RapDev ServerTech PDU Gen4 Dashboard: assets/dashboards/rapdev_servertech_pdu_gen4_dashboard.json
     RapDev Servertech PDU Gen3 Dashboard: assets/dashboards/rapdev_servertech_pdu_gen3_dashboard.json
     RapDev Servertech PDU Gen4 Dashboard: assets/dashboards/rapdev_servertech_pdu_gen4_dashboard.json
+    RapDev Sophos XG Firewall Dashboard: assets/dashboards/rapdev_sophos_xg_firewall_dashboard.json
     RapDev Steelhead Riverbed Dashboard: assets/dashboards/rapdev_steelhead_riverbed_dashboard.json
     RapDev Tripplite PDU Dashboard: assets/dashboards/rapdev_tripplite_pdu_dashboard.json
     RapDev iDRAC Dashboard: assets/dashboards/rapdev_idrac_dashboard.json
@@ -89,13 +90,6 @@ author:
 categories:
 - マーケットプレイス
 - snmp
-classifier_tags:
-- サポートされる OS::Linux
-- サポートされる OS::Mac OS
-- サポートされる OS::Windows
-- Category::Marketplace
-- Category::SNMP
-- Offering::Integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -127,6 +121,13 @@ supported_os:
 - windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::SNMP
+  - Offering::Integration
   configuration: README.md#Setup
   description: オートディスカバリーデバイスプロファイルによる SNMP デバイスへの観測性
   media:

@@ -1,24 +1,26 @@
 ---
 categories:
-  - Collaboration
-  - issue tracking
-ddtype: crawler
+- Collaboration
+- issue tracking
 dependencies: []
 description: イベントストリームで、新規、オープン、保留中、解決済みのケースを確認および議論。
-doc_link: 'https://docs.datadoghq.com/integrations/desk/'
+doc_link: https://docs.datadoghq.com/integrations/desk/
 draft: false
 git_integration_title: desk
 has_logo: true
 integration_id: desk
 integration_title: Desk
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: desk
 public_title: Datadog-Desk インテグレーション
 short_description: イベントストリームで、新規、オープン、保留中、解決済みのケースを確認および議論。
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 Desk を Datadog に接続すると、以下のことが可能です。
@@ -36,8 +38,9 @@ Desk アカウントから、Settings -> API -> My Applications ページで、A
 
 {{< img src="integrations/desk/desk_config.png" alt="Desk コンフィグ" popup="true">}}
 
-次に、Datadog アカウントから、対応する情報を [Desk タイル][1]に入力します。会社固有の Desk ドメイン名も入力する必要があります。
-インストールボタンを押すと、設定が完了します。すぐに、desk.\* メトリクスをカスタムダッシュボードで選択したり、所定の [Desk ダッシュボード][2]で表示できるようになります。(このインテグレーションについては、[Datadog のブログ記事][3]も参照してください。)
+次に、Datadog アカウントから、対応する情報を [Desk タイル][1]、および会社固有の Desk ドメイン名を入力します。インストールボタンを押すと、設定が完了します。
+
+インストール後、`desk.*` メトリクスをカスタムダッシュボードで選択し、所定の [Desk ダッシュボード][2]で表示できます。詳しくは、[Salesforce Desk インテグレーションと同じページでサポートを維持][3]をご参照ください。
 
 ## 収集データ
 

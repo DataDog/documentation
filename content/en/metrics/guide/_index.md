@@ -5,7 +5,7 @@ description: Index of Metrics Guides
 aliases:
     - /metrics/custom_metrics/guide/
 private: true
-disable_sidebar: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="General guides:" >}}

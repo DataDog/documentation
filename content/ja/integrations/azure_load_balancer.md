@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_loadbalancer
+- /ja/integrations/azure_loadbalancer
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Load Balancer のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_load_balancer/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure Load Balancer インテグレーション
 short_description: Azure Load Balancer のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Load Balancer は、インバウンドとアウトバウンドのどちらのシナリオもサポートし、低レイテンシーと高スループットを実現して、あらゆる TCP および UDP アプリケーションの数百万のフローにスケールアップできます。

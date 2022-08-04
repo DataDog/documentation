@@ -29,7 +29,7 @@ Ensure log collection is configured.  See [Java Log Collection][1] for Log4j, Lo
 
 Starting in version 0.74.0, the Java tracer automatically injects trace correlation identifiers into logs.  For earlier versions, enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property, or through the environment variable `DD_LOGS_INJECTION=true`.  Full configuration details can be found on the [Java tracer configuration][2] page.
 
-**Note**: If the `attribute.path` for your trace ID is *not* `dd.trace_id`, ensure that your trace ID reserved attribute settings account for the `attribute.path`. For more information, see the [FAQ on this topic][3].
+**Note**: If the `attribute.path` for your trace ID is *not* `dd.trace_id`, ensure that your trace ID reserved attribute settings account for the `attribute.path`. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][3].
 
 ## Manual injection
 
@@ -77,7 +77,7 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you are [not using a Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. For more information, see the [FAQ on this topic][5].
+**Note**: If you are [not using a Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][5].
 
 [See the Java log collection documentation][1] for more details about specific logger implementation and instructions for logging in JSON format.
 
@@ -87,6 +87,6 @@ try {
 
 [1]: /logs/log_collection/java/
 [2]: /tracing/trace_collection/dd_libraries/java/
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=jsonlogs#trace_id-option
+[3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?
 [4]: /logs/log_collection/java/#raw-format
-[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[5]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

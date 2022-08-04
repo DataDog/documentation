@@ -11,6 +11,9 @@ further_reading:
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshoot common Datadog Application Security Monitoring issues"
+- link: "/tracing/trace_explorer/query_syntax/"
+  tag: "Documentation"
+  text: "Syntax for defining the ASM query"
 ---
 
 ## Overview
@@ -29,7 +32,7 @@ To customize an OOTB detection rule, you must first clone an existing rule. Navi
 
 ### Define an ASM query
 
-Construct an ASM query. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
+Construct an ASM query using the [same query syntax as in the APM Trace Explorer][5]. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user or IP). The group-by is also used to [join the queries together](#joining-queries).
 
@@ -170,3 +173,4 @@ Tag your signals with different tags, for example, `attack:sql-injection-attempt
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
 [3]: /monitors/notify/?tab=is_alert#integrations
 [4]: /security_platform/notification_rules/
+[5]: /tracing/trace_explorer/query_syntax/

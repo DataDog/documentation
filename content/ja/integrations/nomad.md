@@ -11,17 +11,17 @@ assets:
     Nomad Pending Jobs: assets/monitors/nomad_pending_jobs.json
   service_checks: assets/service_checks.json
 categories:
-  - provisioning
+- provisioning
 creates_events: true
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md
 display_name: Nomad
 draft: false
 git_integration_title: nomad
 guid: 09fec09d-69ef-435f-bb0d-f586652b9bc7
 integration_id: nomad
 integration_title: Nomad
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: irabinovitch
@@ -29,14 +29,17 @@ manifest_version: 1.0.0
 metric_prefix: nomad
 metric_to_check: nomad.client.host.cpu.user
 name: nomad
-public_title: Datadog-Nomad インテグレーション
+public_title: Nomad
 short_description: アプリケーションをあらゆる規模で簡単にスケジュール、デプロイ
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Nomad ダッシュボード][1]
 
 ## 概要
@@ -52,7 +55,7 @@ Nomad クラスターからメトリクスを収集して、以下のことが�
 
 ### インストール
 
-Nomad は、メトリクスを DogStatsD 経由で Datadog に送信します。Nomad インテグレーションを有効にするには、各クライアントおよびサーバーホストに [Datadog Agent をインストール][2]します。
+Nomad は、メトリクスを DogStatsD を通じて Datadog に送信します。Nomad インテグレーションを有効にするには、各クライアントおよびサーバーホストに [Datadog Agent をインストール][2]します。
 
 ### コンフィギュレーション
 

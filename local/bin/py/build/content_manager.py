@@ -57,33 +57,43 @@ def update_globs(new_path, globs):
     """
     new_globs = []
     for item in globs:
-        new_globs.append("{}{}".format(new_path, item))
+        new_globs.append(os.path.join(new_path, item))
     return new_globs
 
 
 def local_or_upstream(github_token, extract_dir, list_of_contents):
     """
-    This goes through the list_of_contents and check for each repo specified
-    If a local version exists otherwise we download it from the upstream repo on Github
-    Local version of the repo should be in the same folder as the documentation/ folder.
+    This goes through the list_of_contents and check for each repo specified in order:
+      * [ONLY LOCAL DEV] Check if a locally cloned version is on this developer machine; one level above this documentation repo
+      * [ONLY LOCAL DEV] Check if this docs build has already pulled and stored the repos in an extract folder
+      * [LOCAL DEV AND CI] If neither of the above exist, pull the remote repo to use and store in the extract folder
     :param github_token: A valide Github token to download content with the Github Class
     :param extract_dir: Directory into which to put all content downloaded.
     :param list_of_content: List of content to check if available locally or if it needs to be downloaded from Github
     """
+    is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
     for content in list_of_contents:
-        repo_name = "../" + content["repo_name"] + sep
-        if isdir(repo_name):
-            print("\x1b[32mINFO\x1b[0m: Local version of {} found".format(
-                content["repo_name"]))
+        local_repo_path = os.path.join("..", content["repo_name"])
+        repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
+        if isdir(local_repo_path) and not is_in_ci:
+            print(f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found in: {local_repo_path}")
             content["globs"] = update_globs(
-                repo_name,
+                local_repo_path,
+                content["globs"],
+            )
+        elif isdir(repo_path_last_extract) and not is_in_ci:
+            print(
+                f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found from previous extract in:"
+                f" {repo_path_last_extract} "
+            )
+            content["globs"] = update_globs(
+                repo_path_last_extract,
                 content["globs"],
             )
         elif github_token != "false":
             print(
-                "\x1b[32mINFO\x1b[0m: No local version of {} found, downloading content from upstream version".format(
-                    content["repo_name"]
-                )
+                f"\x1b[32mINFO\x1b[0m: No local version of {content['repo_name']} found, downloading content from "
+                f"upstream version and placing in: {extract_dir}"
             )
             download_from_repo(github_token,
                                content["org_name"],
@@ -166,10 +176,10 @@ def prepare_content(configuration, github_token, extract_dir):
     try:
         list_of_contents = local_or_upstream(
             github_token, extract_dir, extract_config(configuration))
-    except:
-        if getenv("LOCAL") == 'True':
+    except Exception as e:
+        if not getenv("CI_COMMIT_REF_NAME"):
             print(
-                "\x1b[33mWARNING\x1b[0m: Downloading files failed, documentation is now in degraded mode.")
+                f"\x1b[33mWARNING\x1b[0m: Downloading files failed, documentation is now in degraded mode. {e}")
         else:
             print(
                 "\x1b[31mERROR\x1b[0m: Downloading files failed, stopping build.")

@@ -15,6 +15,10 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
+  "events": {
+    "name": "Events",
+    "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters.\nIf an event is sent out with a message containing more than 4000 characters, only the\nfirst 4000 characters are displayed."
+  },
   "incident-services": {
     "name": "Incident Services",
     "description": "Create, update, delete, and retrieve services which can be associated with incidents."

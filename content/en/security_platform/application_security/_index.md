@@ -10,9 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-application-security/"
   tag: "Blog"
   text: "Introducing Datadog Application Security"
-- link: "/security_platform/guide/how-appsec-works/"
+- link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Monitoring Works in Datadog"
+  text: "How Application Security Monitoring Works"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
   text: "Datadog Application Security Monitoring"
@@ -30,15 +30,19 @@ Once a signal is triggered, quickly pivot to investigate in Datadog. Leverage th
 
 With ASM, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
 
+## Understanding how application security is implemented in Datadog
+
+If you're curious how Application Security Monitoring is structured and how it uses tracing data to identify security problems, read [How Application Security Monitoring Works][3].
+
 ## Configure your environment
 
-Powered by provided [out-of-the-box rules][3], ASM detects threats without manual configuration. If you're already using Datadog [APM][1], setup only requires setting one environment variable to get started.
+Powered by provided [out-of-the-box rules][4], ASM detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, setup only requires setting one environment variable to get started.
 
-To start configuring your environment to detect threats with ASM, follow the [Getting Started documentation][4]. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][5].
+To start configuring your environment to detect threats with ASM, follow the [Getting Started documentation][5]. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
 
 ## Investigate and remediate security signals
 
-In the [Security Signals Explorer][5], click on any security signal to see what happened and the suggested steps to remediate the issue. In the same panel, view traces with their correlated attack flow and request information to gain further context.
+In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to remediate the issue. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
 ## Next steps
 
@@ -46,6 +50,7 @@ In the [Security Signals Explorer][5], click on any security signal to see what 
 
 [1]: /tracing/
 [2]: /agent/
-[3]: /security_platform/default_rules/#cat-application-security
-[4]: /security_platform/application_security/getting_started/
-[5]: /security_platform/explorer/
+[3]: /security_platform/application_security/how-appsec-works/
+[4]: /security_platform/default_rules/#cat-application-security
+[5]: /security_platform/application_security/getting_started/
+[6]: /security_platform/explorer/

@@ -121,6 +121,7 @@ In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESO
 {{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -236,7 +237,7 @@ The Ruby tracer has a post-processing pipeline that deletes traces that meet cer
 For example, if the resource name is `Api::HealthchecksController#index`, use the `trace.delete_if` method to delete traces that contain the resource name. This filter can also be used to match on other metadata available for the [span object][2].
 
 ```
-Datadog::Tracing::Pipeline.before_flush do |trace|
+Datadog::Tracing.before_flush do |trace|
   trace.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
 end
 ```

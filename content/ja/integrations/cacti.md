@@ -1,39 +1,58 @@
 ---
+app_id: cacti
+app_uuid: b18f92f2-2aa5-435e-b04e-84ce3538fa2d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cacti.rrd.count
+      metadata_path: metadata.csv
+      prefix: cacti.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cacti
   logs:
     source: cacti
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - monitoring
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cacti/README.md
-display_name: Cacti
+display_on_public_website: true
 draft: false
 git_integration_title: cacti
-guid: 566466b0-1422-44ef-b14f-493a64e7b58a
 integration_id: cacti
 integration_title: Cacti
 integration_version: 1.11.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: cacti.
-metric_to_check: cacti.rrd.count
+manifest_version: 2.0.0
 name: cacti
-public_title: Datadog-Cacti インテグレーション
+oauth: {}
+public_title: Cacti
 short_description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
-support: コア
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Monitoring
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cacti
 ---
 
 

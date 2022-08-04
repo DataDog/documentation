@@ -98,6 +98,8 @@ Below, there’s a list of [resources][11] associated with your service. Sort th
 
 {{< img src="tracing/visualization/service/resources_tab.jpg" alt="Resources"  style="width:100%;">}}
 
+Click on a resource to open a side panel that displays the resource's out-of-the-box graphs (about requests, errors, and latency), a resource dependency map, and a span summary table. Use keyboard navigation keys to toggle between resources on the **Resources** list and compare resources in a service. To view the full resource page, click **Open Full Page**.
+
 [Refer to the dedicated resource documentation to learn more][2].
 
 ### Columns

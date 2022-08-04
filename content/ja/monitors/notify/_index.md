@@ -161,7 +161,7 @@ Disk space is low @ops-team@company.com
 
 ### イベント
 
-テスト通知は、イベントストリーム内で検索できるイベントを生成します。テストを開始したユーザーをメッセージ本文で示し、通知のタイトルに `[TEST]` が付きます。
+テスト通知は、イベントエクスプローラー内で検索できるイベントを生成します。テストを開始したユーザーをメッセージ本文で示し、通知のタイトルに `[TEST]` が付きます。
 
 タグ変数は、Datadog 子イベントのテキストにのみ入力されます。親イベントは、集計サマリーのみを表示します。
 
@@ -183,10 +183,10 @@ Disk space is low @ops-team@company.com
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /ja/monitors/notify/variables/
 [5]: /ja/monitors/notify/variables/#conditional-variables
-[6]: /ja/monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
-[7]: /ja/monitors/notify/variables/?tab=is_renotify#examples
+[6]: /ja/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
+[7]: /ja/monitors/notify/variables/?tab=is_renotify#examples 
 [8]: /ja/integrations/jira/
-[9]: /ja/integrations/jira/#use-cases
+[9]: /ja/integrations/jira/#usage
 [10]: /ja/integrations/pagerduty/
 [11]: /ja/integrations/pagerduty/#troubleshooting
 [12]: /ja/integrations/slack/
@@ -200,5 +200,5 @@ Disk space is low @ops-team@company.com
 [20]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
 [21]: /ja/account_management/rbac/?tab=datadogapplication
 [22]: /ja/monitors/guide/how-to-set-up-rbac-for-monitors/
-[23]: /ja/monitors/create/
-[24]: /ja/monitors/faq/what-are-recovery-thresholds/
+[23]: /ja/monitors/create/#monitor-types
+[24]: /ja/monitors/guide/recovery-thresholds/

@@ -25,12 +25,22 @@ def pull_and_push_file(content, content_dir):
     """
     with open("".join(content["globs"]), mode="r+") as f:
         file_content = f.read()
+        boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+        split = boundary.split(file_content, 2)
+        new_yml = {}
+        txt = file_content
+        if len(split) == 3:
+            _, fm, txt = split
+            new_yml = yaml.safe_load(fm)
+        elif len(split) == 1:
+            txt = split[0]
         # If options include front params, then the H1 title of the source file is striped
         # and the options front params are inlined
         if "front_matters" in content["options"]:
-            front_matter = yaml.dump(content["options"]["front_matters"], default_flow_style=False).strip()
+            new_yml.update(content["options"]["front_matters"])
+            front_matter = yaml.dump(new_yml, default_flow_style=False).strip()
             # remove h1 if exists
-            file_content = re.sub(re.compile(r"^#{1}(?!#)(.*)", re.MULTILINE), "", file_content, count=1)
+            file_content = re.sub(re.compile(r"^#{1}(?!#)(.*)", re.MULTILINE), "", txt, count=1)
             file_content = TEMPLATE.format(front_matter=front_matter, content=file_content.strip())
         elif "datadog-agent" in content["repo_name"] and "config_template.yaml" in "".join(content["globs"]):
             process_agent_config(file_content)

@@ -1,44 +1,62 @@
 ---
-aliases:
-- /ja/integrations/amazon_eks_fargate/
+app_id: eks-fargate
+app_uuid: f5919a4b-4142-4889-b9c0-6ecdab299ebb
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: eks.fargate.pods.running
+      metadata_path: metadata.csv
+      prefix: eks.fargate.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: EKS Fargate
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - AWS
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md
-description: Amazon EKS のメトリクス、トレース、およびログを収集します。
-display_name: EKS Fargate
+display_on_public_website: true
 draft: false
 git_integration_title: eks_fargate
-guid: e9e58fb9-696b-4e3c-9058-c144a1d9a737
 integration_id: eks-fargate
 integration_title: Amazon EKS on AWS Fargate
 integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: eks.fargate.
-metric_to_check: eks.fargate.pods.running
+manifest_version: 2.0.0
 name: eks_fargate
-public_title: '"Datadog-Amazon EKS on AWS Fargate インテグレーション"'
+oauth: {}
+public_title: Amazon EKS on AWS Fargate
 short_description: Amazon EKS のメトリクス、トレース、およびログを収集します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::AWS
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Amazon EKS のメトリクス、トレース、およびログを収集します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amazon EKS on AWS Fargate
 ---
 
 
@@ -507,9 +525,11 @@ eks_fargate にはイベントが含まれていません。
 
 ## その他の参考資料
 
-- ブログ記事: [AWS Fargate 監視のための主要メトリクス][28]
-- ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][29]
-- ブログ記事: [Datadog を使用した AWS Fargate モニタリング][30]
+お役に立つドキュメント、リンクや記事:
+
+- [AWS Fargate 監視のための主要メトリクス][29]
+- [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][30]
+- [Datadog を使用した AWS Fargate モニタリング][31]
 
 [1]: http://docs.datadoghq.com/integrations/ecs_fargate/
 [2]: http://docs.datadoghq.com/integrations/amazon_eks/
@@ -539,5 +559,6 @@ eks_fargate にはイベントが含まれていません。
 [26]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/forwarder/
 [27]: http://docs.datadoghq.com/tracing/#send-traces-to-datadog
 [28]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#process-collection
-[29]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
-[30]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
+[29]: https://www.datadoghq.com/blog/aws-fargate-metrics/
+[30]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
+[31]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/

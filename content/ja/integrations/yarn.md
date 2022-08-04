@@ -15,7 +15,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
 display_name: Yarn
@@ -32,7 +31,7 @@ manifest_version: 1.0.0
 metric_prefix: yarn.
 metric_to_check: yarn.metrics.total_mb
 name: yarn
-public_title: Datadog-Yarn インテグレーション
+public_title: Yarn インテグレーション
 short_description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
 support: コア
 supported_os:

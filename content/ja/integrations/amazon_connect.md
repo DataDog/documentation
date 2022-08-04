@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Connect のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_connect/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Connect インテグレーション
 short_description: Amazon Connect のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Connect は、セルフサービスの構成を提供し、動的でパーソナルかつ自然な顧客エンゲージメントを可能にします。

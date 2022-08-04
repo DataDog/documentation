@@ -1,8 +1,7 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Automation のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_automation/
@@ -20,6 +19,7 @@ public_title: Datadog-Microsoft Azure Automation インテグレーション
 short_description: Azure Automation のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Automation は、Azure 環境と非 Azure 環境の両方を一貫して管理できる、クラウドベースの自動化および構成サービスを提供します。

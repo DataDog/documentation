@@ -6,7 +6,7 @@ disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring
   tag: リリースノート
-  text: Datadog RUM の最新リリースをチェック！ (アプリログインが必要です)。
+  text: Datadog RUM の最新リリースをチェック！ (アプリログインが必要です)
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: ブログ
   text: Datadog リアルユーザーモニタリングのご紹介
@@ -28,12 +28,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection
   tag: ブログ
   text: カスタム React コンポーネントでより良い RUM データを取得する
-- link: /real_user_monitoring/browser/data_collected/
-  tag: ドキュメント
-  text: 収集された RUM ブラウザデータ
 - link: https://www.datadoghq.com/blog/hybrid-app-monitoring/
   tag: ブログ
   text: Datadog でハイブリッドモバイルアプリケーションを監視する
+- link: /real_user_monitoring/browser/data_collected/
+  tag: ドキュメント
+  text: 収集された RUM ブラウザデータ
 kind: documentation
 title: RUM & セッションリプレイ
 ---
@@ -48,6 +48,8 @@ Datadog の*リアルユーザーモニタリング (RUM)* は、個々のユー
 * **Error Management**: 進行中のバグと問題を監視し、時間とバージョンにわたってそれを追跡します。
 * **Analytics / Usage**: アプリケーションを使用しているユーザーを理解し (国、デバイス、OS)、個々のユーザージャーニーを監視し、ユーザーによるアプリケーションの操作を分析します (アクセスされた最も一般的なページ、クリック、インタラクション、機能の使用)。
 * **Support**: 1 つのユーザーセッションに関連するすべての情報を取得して、問題をトラブルシューティングします (セッションの継続時間、アクセスしたページ、インタラクション、読み込まれたリソース、エラー)。
+
+ユーザーセッションとは、Web アプリケーションまたはモバイルアプリケーションにおける最長 4 時間のユーザージャーニーのことです。セッションには通常、ページビューと関連するテレメトリーが含まれます。ユーザーが 15 分間アプリケーションと対話しなかった場合、そのセッションは完了したとみなされます。ユーザーがアプリケーションと再び対話すると、新しいセッションが開始されます。
 
 ## セッションリプレイとは
 
@@ -67,7 +69,7 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 
 ### すぐに使えるダッシュボード
 
-[すぐに使えるダッシュボード][1]を使用して、ユーザージャーニー、パフォーマンス、ネットワークリクエスト、自動的に収集されたエラーに関する情報を分析します。
+[すぐに使える RUM ダッシュボード][1]で自動的に収集されたユーザーセッション、パフォーマンス、モバイルアプリケーション、フラストレーションシグナル、ネットワークリソース、エラーに関する情報を分析することができます。
 
 {{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM ダッシュボード" >}}
 
@@ -89,9 +91,13 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM エラー追跡" video=true >}}
 
+### Web とモバイルバイタル
+
+[iOS および tvOS][7] または [Android および Android TV アプリケーション][8]の Core Web Vitals および Mobile Vitals などの[ブラウザアプリケーション][6]のパフォーマンススコアとメトリクスを表示します。
+
 ### Web ビュー追跡
 
-[iOS][6] および [Android][7] 用の Web ビュー追跡を使用して、ネイティブ Web アプリケーションから情報を収集し、ハイブリッドビューを調査します。
+[iOS と tvOS][9] または [Android と Android TV][10] 用の Web ビュー追跡を使用して、ネイティブ Web アプリケーションから情報を収集し、ハイブリッドビューを調査します。
 
 {{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="RUM エクスプローラーのユーザーセッションで取得した Web ビュー" >}}
 
@@ -99,11 +105,11 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 
 ### セッションリプレイ
 
-Web サイトを利用する実際のユーザーの[ブラウザ記録][8]を見て、組織の[プライバシーコントロール][9]を設定します。
+Web サイトを利用する実際のユーザーの[ブラウザ記録][11]を見て、組織の[プライバシーコントロール][12]を設定します。
 
 ### 開発ツール
 
-[ブラウザ開発ツール][6]を使用してアプリケーションの問題をトラブルシューティングする際に、トリガーされたログ、エラー、およびパフォーマンス情報にアクセスできます。
+[ブラウザ開発ツール][13]を使用してアプリケーションの問題をトラブルシューティングする際に、トリガーされたログ、エラー、およびパフォーマンス情報にアクセスできます。
 
 ## その他の参考資料
 
@@ -114,7 +120,11 @@ Web サイトを利用する実際のユーザーの[ブラウザ記録][8]を�
 [3]: /ja/monitors/create/types/real_user_monitoring/
 [4]: /ja/real_user_monitoring/connect_rum_and_traces/
 [5]: /ja/real_user_monitoring/error_tracking/
-[6]: /ja/real_user_monitoring/ios/web_view_tracking/
-[7]: /ja/real_user_monitoring/android/web_view_tracking/
-[8]: /ja/real_user_monitoring/session_replay/
-[9]: /ja/real_user_monitoring/session_replay/privacy_options/
+[6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[7]: /ja/real_user_monitoring/ios/mobile_vitals/
+[8]: /ja/real_user_monitoring/android/mobile_vitals/
+[9]: /ja/real_user_monitoring/ios/web_view_tracking/
+[10]: /ja/real_user_monitoring/android/web_view_tracking/
+[11]: /ja/real_user_monitoring/session_replay/
+[12]: /ja/real_user_monitoring/session_replay/privacy_options/
+[13]: /ja/real_user_monitoring/session_replay/developer_tools/

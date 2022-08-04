@@ -1,5 +1,6 @@
 # make
-.PHONY: clean clean-all clean-build clean-examples clean-go-examples clean-java-examples clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
+SHELL = /bin/bash
+.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -18,292 +19,142 @@ ifeq ($(wildcard $(CONFIG_FILE)),)
 endif
 include $(CONFIG_FILE)
 
+# API Code Examples
+BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
+EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
+EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript
+
+# Set defaults when no makefile.config or missing entries
+# Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
+GITHUB_TOKEN ?= ""
+DD_API_KEY ?= false
+DD_APP_KEY ?= false
+DATADOG_API_KEY ?= $(DD_API_KEY)
+DATADOG_APP_KEY ?= $(DD_APP_KEY)
+CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
+
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-clean: stop  ## Clean all make installs.
-	@echo "cleaning up..."
-	make clean-build
-	make clean-integrations
-	make clean-auto-doc
+clean-all: clean clean-examples clean-dependent-repos ## Clean everything (environment, sourced repos, generated files)
+	rm -rf ./node_modules ./hugpython ./public
 
-clean-all: stop  ## Clean everything.
-	make clean-build
-	make clean-exe
-	make clean-integrations
-	make clean-auto-doc
-	make clean-node
-	make clean-virt
-	make clean-examples
+clean-dependent-repos:
+	rm -rf ./integrations_data
 
-clean-build:  ## Remove build artifacts.
-	@if [ -d public ]; then rm -rf public; fi
-	@if [ static/images/integrations_logos/2020w2.pdf ]; then \
-	rm -f static/images/integrations_logos/2020w2.pdf ;fi
+# remove build generated content
+# removing only git ignored files
+clean:  ## Clean generated files placed in the hugo site
+	@git clean -Xf ./content
+	@git clean -Xf ./data
+	@git clean -Xf ./static/images/marketplace
 
-clean-exe:  ## Remove execs.
-	@rm -rf ${EXE_LIST}
+# if .dockerenv exists we are running from inside a docker container
+# if node_modules was generated in docker when using local or vice versa
+# then generate new node_modules first to avoid binary incompatibilities
+server:
+	@if [[ -f /.dockerenv ]]; then \
+		echo "Running docker build...."; \
+		file node_modules/hugo-bin/vendor/hugo | grep "Mach-O" && make -B node_modules; \
+		yarn run prestart && yarn run docker:start; \
+	else \
+	  echo "Running regular build...."; \
+	  file node_modules/hugo-bin/vendor/hugo | grep "Mach-O" || make -B node_modules; \
+	  yarn run prestart && yarn run start; \
+	fi;
 
-clean-integrations:  ## Remove built integrations files.
-	@rm -rf ./integrations_data/
-	@if [ -d data/integrations ]; then \
-		find ./data/integrations -type f -maxdepth 1 \
-	    -a -not -name '*.fr.yaml' \
-	    -a -not -name '*.ja.yaml' \
-		-a -not -name 'docker_daemon.yaml' \
-	    -exec rm -rf {} \; ;fi
-	@if [ -d data/service_checks ]; then \
-		find ./data/service_checks -type f -maxdepth 1 \
-	    -a -not -name '*.fr.json' \
-	    -a -not -name '*.ja.json' \
-	    -exec rm -rf {} \; ;fi
-	@find ./content/en/integrations -type f -maxdepth 1 \
-		-a -not -name '_index.md' \
-		-a -not -name 'adobe_experience_manager.md' \
-		-a -not -name 'kubernetes_audit_logs.md' \
-		-a -not -name 'alcide.md' \
-		-a -not -name 'amazon_guardduty.md' \
-		-a -not -name 'amazon_cloudhsm.md' \
-		-a -not -name 'apigee.md' \
-		-a -not -name 'pivotal_platform.md' \
-		-a -not -name 'carbon_black.md' \
-		-a -not -name 'cloudability.md' \
-		-a -not -name 'cloudcheckr.md' \
-		-a -not -name 'fluentbit.md' \
-		-a -not -name 'iam_access_analyzer.md' \
-		-a -not -name 'integration_sdk.md' \
-		-a -not -name 'journald.md' \
-		-a -not -name 'kubernetes.md' \
-		-a -not -name 'kubernetes_state_core.md' \
-		-a -not -name 'nxlog.md' \
-		-a -not -name 'rss.md' \
-		-a -not -name 'rsyslog.md' \
-		-a -not -name 'sidekiq.md' \
-		-a -not -name 'sinatra.md' \
-		-a -not -name 'snyk.md' \
-		-a -not -name 'stunnel.md' \
-		-a -not -name 'syslog_ng.md' \
-		-a -not -name 'system.md' \
-		-a -not -name 'tcp_rtt.md' \
-		-a -not -name 'uwsgi.md' \
-		-exec rm -rf {} \;
-	@find ./content/en/security_platform/default_rules -type f -maxdepth 1 \
-		-a -not -name '_index.md' \
-		-exec rm -rf {} \;
-	@if [ -d static/images/marketplace ]; then \
-		find ./static/images/marketplace -type f \
-	    -exec rm -rf {} \; ;fi
+# Download all dependencies and run the site
+start: dependencies ## Build and run docs including external content.
+	@make server
 
-clean-auto-doc: ##Remove all doc automatically created
-	@if [ -d content/en/developers/integrations ]; then \
-	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
-	@if [ content/en/agent/basic_agent_usage/ansible.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/ansible.md ;fi
-	@if [ content/en/agent/basic_agent_usage/chef.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/chef.md ;fi
-	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
-	@if [ content/en/agent/basic_agent_usage/puppet.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
-	@if [ content/en/agent/basic_agent_usage/saltstack.md ]; then \
-	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
-	@if [ content/en/serverless/libraries_integrations/plugin.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/plugin.md ;fi
-	@if [ content/en/serverless/libraries_integrations/macro.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
-	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/cli.md ;fi
-	@if [ content/en/serverless/libraries_integrations/extension.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/extension.md ;fi
-	@if [ content/en/serverless/libraries_integrations/cdk.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/cdk.md ;fi
-	@if [ content/en/synthetics/cicd_integrations/circleci_orb.md ]; then \
-	rm -f content/en/synthetics/cicd_integrations/circleci_orb.md ;fi
-	@if [ content/en/synthetics/cicd_integrations/github_actions.md ]; then \
-	rm -f content/en/synthetics/cicd_integrations/github_actions.md ;fi
-	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/android/_index.md ;fi
-	@if [ content/en/real_user_monitoring/android/data_collected.md ]; then \
-	rm -f content/en/real_user_monitoring/android/data_collected.md ;fi
-	@if [ content/en/real_user_monitoring/android/advanced_configuration.md ]; then \
-	rm -f content/en/real_user_monitoring/android/advanced_configuration.md ;fi
-	@if [ content/en/real_user_monitoring/android/integrated_libraries.md ]; then \
-	rm -f content/en/real_user_monitoring/android/integrated_libraries.md ;fi
-	@if [ content/en/real_user_monitoring/android/mobile_vitals.md ]; then \
-	rm -f content/en/real_user_monitoring/android/mobile_vitals.md ;fi
-	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
-	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
-	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
-	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
-	@if [ content/en/real_user_monitoring/error_tracking/ios.md ]; then \
-	rm -f content/en/real_user_monitoring/error_tracking/ios.md ;fi
-	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
-	@if [ content/en/real_user_monitoring/ios/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/ios/_index.md ;fi
-	@if [ content/en/real_user_monitoring/ios/crash_reporting.md ]; then \
-	rm -f content/en/real_user_monitoring/ios/crash_reporting.md ;fi
-	@if [ content/en/real_user_monitoring/ios/mobile_vitals.md ]; then \
-	rm -f content/en/real_user_monitoring/ios/mobile_vitals.md ;fi
-	@if [ -d content/en/real_user_monitoring/ios ]; then \
-	find ./content/en/real_user_monitoring/ios -type f -maxdepth 1 -exec rm -rf {} \; ;fi
-	@if [ content/en/real_user_monitoring/reactnative/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/reactnative/_index.md ;fi
-	@if [ content/en/real_user_monitoring/reactnative/integrated_libraries.md ]; then \
-	rm -f content/en/real_user_monitoring/reactnative/integrated_libraries.md ;fi
-	@if [ content/en/real_user_monitoring/reactnative/mobile_vitals.md ]; then \
-	rm -f content/en/real_user_monitoring/reactnative/mobile_vitals.md ;fi
-	@if [ content/en/real_user_monitoring/reactnative/expo.md ]; then \
-	rm -f content/en/real_user_monitoring/reactnative/expo.md ;fi
-	@if [ content/en/real_user_monitoring/flutter/_index.md ]; then \
-	rm -f content/en/real_user_monitoring/flutter/_index.md ;fi
-	@if [ content/en/tracing/setup/ruby.md ]; then \
-	rm -f content/en/tracing/setup/ruby.md ;fi
-	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
-	rm -f content/en/tracing/setup_overview/setup/ruby.md ;fi
-	@if [ content/en/tracing/trace_collection/dd_libraries/ruby.md ]; then \
-	rm -f content/en/tracing/trace_collection/dd_libraries/ruby.md ;fi
-	@if [ content/en/integrations/guide/amazon_cloudformation.md ]; then \
-	rm -f content/en/integrations/guide/amazon_cloudformation.md ;fi
-	@if [ content/en/logs/log_collection/android.md ]; then \
-	rm -f content/en/logs/log_collection/android.md ;fi
-	@if [ content/en/logs/log_collection/ios.md ]; then \
-	rm -f content/en/logs/log_collection/ios.md ;fi
-	@if [ content/en/logs/log_collection/javascript.md ]; then \
-	rm -f content/en/logs/log_collection/javascript.md ;fi
-	@if [ content/en/logs/guide/forwarder.md ]; then \
-	rm -f content/en/logs/guide/forwarder.md ;fi
-	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
-	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
-	@if [ content/en/tracing/trace_collection/dd_libraries/android.md ]; then \
-	rm -f content/en/tracing/trace_collection/dd_libraries/android.md ;fi
-	@if [ content/en/tracing/setup_overview/setup/ios.md ]; then \
-	rm -f content/en/tracing/setup_overview/setup/ios.md ;fi
-	@if [ content/en/tracing/trace_collection/dd_libraries/ios.md ]; then \
-	rm -f content/en/tracing/trace_collection/dd_libraries/ios.md ;fi
-	@if [ content/en/security_platform/cloud_workload_security/agent_expressions.md ]; then \
-	rm -f content/en/security_platform/cloud_workload_security/agent_expressions.md ;fi
-	@if [ content/en/security_platform/cloud_workload_security/backend.md ]; then \
-	rm -f content/en/security_platform/cloud_workload_security/backend.md ;fi
+# Skip downloading any dependencies and run the site (hugo needs at the least node)
+start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make server
 
-clean-node:  ## Remove node_modules.
-	@if [ -d node_modules ]; then rm -r node_modules; fi
-
-clean-virt:  ## Remove python virtual env.
-	@if [ -d ${VIRENV} ]; then rm -rf $(VIRENV); fi
-
-hugpython: hugpython/bin/activate  ## Build virtualenv used for tests.
-
-hugpython/bin/activate: local/etc/requirements3.txt  ## Start python virtual environment.
-	@if [ ${PY3} != "false" ]; then \
-		test -x ${VIRENV}/bin/pip || ${PY3} -m venv --clear ${VIRENV}; \
-		$(VIRENV)/bin/pip install -r local/etc/requirements3.txt; \
-	else printf "\e[93mPython 3 is required to fetch integrations and run tests.\033[0m Try https://github.com/pyenv/pyenv.\n"; fi
-
-source-helpers: # Source the helper functions used in build, test, deploy.
-	@if [ "${DOCKER}" != "true" ]; then make hugpython; fi
-	@mkdir -p ${EXEDIR}
-	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
-	@cp -r local/githooks/* .git/hooks
-
-start: clean source-helpers examples ## Build the documentation with all external content.
-	@echo "\033[35m\033[1m\nBuilding the documentation with ALL external content:\033[0m"
-	@if [ ${PY3} != "false" ]; then \
-		. ${VIRENV}/bin/activate; \
-		GITHUB_TOKEN=${GITHUB_TOKEN} \
-		DD_API_KEY=${DD_API_KEY} \
-		DD_APP_KEY=${DD_APP_KEY} \
-		RUN_SERVER=${RUN_SERVER} \
-		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
-		PULL_RBAC_PERMISSIONS=${PULL_RBAC_PERMISSIONS} \
-		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
-		LOCAL=${LOCAL}\
-		LANGS_TO_IGNORE=${LANGS_TO_IGNORE} \
-		DOCKER=${DOCKER} \
-		run-site.sh; \
-	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
-
-start-no-pre-build: clean source-helpers ## Build the documentation without automatically pulled content.
-	@echo "\033[35m\033[1m\nBuilding the documentation with NO external content:\033[0m"
-	@if [ ${PY3} != "false" ]; then \
-		. ${VIRENV}/bin/activate; \
-		RUN_SERVER=${RUN_SERVER} \
-		LANGS_TO_IGNORE=${LANGS_TO_IGNORE} \
-		DOCKER=${DOCKER} \
-		run-site-no-pre-build.sh; \
-	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
-
-stop:  ## Stop wepack watch/hugo server.
-	@echo "stopping previous..."
-
-clean-go-examples:
-	@git clean -xdf content/en/api/**/*.go
-
-clean-java-examples:
-	@git clean -xdf content/en/api/**/*.java
-
-clean-python-examples:
-	@git clean -xdf content/en/api/**/*.py*
-
-clean-ruby-examples:
-	@git clean -xdf content/en/api/**/*.rb*
-
-clean-typescript-examples:
-	@git clean -xdf content/en/api/**/*.ts*
-
-clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples clean-typescript-examples
-	@rm -rf examples
-
-BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
-
-examples/datadog-api-client-go:
-	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-go.git $@ || git clone --depth 1 --branch $(shell grep -A1 "datadog-api-client-go" data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '"') https://github.com/DataDog/datadog-api-client-go.git $@
-	@cd $@
-
-examples/datadog-api-client-java:
-	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-java.git $@ || git clone --depth 1 --branch $(shell grep -A1 "datadog-api-client-java" data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '"') https://github.com/DataDog/datadog-api-client-java.git $@
-	@cd $@
-
-examples/datadog-api-client-python:
-	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-python.git $@ || git clone --depth 1 --branch $(shell grep -A1 "datadog-api-client-python" data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '"') https://github.com/DataDog/datadog-api-client-python.git $@
-	@cd $@
-
-examples/datadog-api-client-ruby:
-	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-ruby.git $@ || git clone --depth 1 --branch $(shell grep -A1 "datadog-api-client-ruby" data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '"') https://github.com/DataDog/datadog-api-client-ruby.git $@
-	@cd $@
-
-examples/datadog-api-client-typescript:
-	@git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/datadog-api-client-typescript.git $@ || git clone --depth 1 --branch $(shell grep -A1 "datadog-api-client-typescript" data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '"') https://github.com/DataDog/datadog-api-client-typescript.git $@
-	@cd $@
-
-.PHONY: examples/go examples/java examples/python examples/ruby examples/typescript examples
-
-EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
-
-examples/go: examples/datadog-api-client-go clean-go-examples
-	-cp -Rn examples/datadog-api-client-go/examples/v* ./content/en/api/
-
-examples/java: examples/datadog-api-client-java clean-java-examples
-	-cp -Rn examples/datadog-api-client-java/examples/v* ./content/en/api/
-
-examples/python: examples/datadog-api-client-python clean-python-examples
-	-find examples/datadog-api-client-python/examples -iname \*.py -exec mv {} {}beta \;
-	-cp -Rn examples/datadog-api-client-python/examples/v* ./content/en/api
-
-examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
-	-find examples/datadog-api-client-ruby/examples -iname \*.rb -exec mv {} {}beta \;
-	-cp -Rn examples/datadog-api-client-ruby/examples/v* ./content/en/api
-
-examples/typescript: examples/datadog-api-client-typescript clean-typescript-examples
-	-cp -Rn examples/datadog-api-client-typescript/examples/v* ./content/en/api
-
-examples: examples/go examples/java examples/python examples/ruby examples/typescript
-
-start-docker: clean
+start-docker: clean  ## Build and run docs including external content via docker
 	@export REPO_PATH=$(PWD) && \
-	export GITHUB_TOKEN=${GITHUB_TOKEN} && \
-	export FULL_BUILD=${FULL_BUILD} && \
+	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
 	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -p docs-local -f ./docker-compose-docs.yml up
 
-stop-docker:
-	docker-compose -f ./docker-compose-docs.yml down
+stop-docker: ## Stop the running docker container.
+	@docker-compose -f ./docker-compose-docs.yml down
+
+# install the root level node modules
+node_modules: package.json yarn.lock
+	@yarn install --immutable
+
+# All the requirements for a full build
+dependencies: clean hugpython all-examples data/permissions.json update_pre_build node_modules
+	@make placeholders
+
+# builds permissions json from rbac
+# Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
+data/permissions.json:
+	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py "$(DATADOG_API_KEY)" "$(DATADOG_APP_KEY)"
+
+# only build placeholders in ci
+placeholders:
+	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
+
+# create the virtual environment
+hugpython: local/etc/requirements3.txt
+	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install -r $<
+
+update_pre_build:
+	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
+
+# Only to be run during deployment
+# Updates hugo preview config file for feature branch naming scheme
+config:
+	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/config.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/config.yaml"; \
+	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/params.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/params.yaml"; \
+	echo -e "\nbranch: ${CI_COMMIT_REF_NAME}" >> config/$(CI_ENVIRONMENT_NAME)/params.yaml;
+
+#######################################################################################################################
+# API Code Examples
+#######################################################################################################################
+
+# template for extracting example repos
+define EXAMPLES_template
+examples/$(1):
+	git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch $(shell grep -A1 $(1) data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '"') https://github.com/DataDog/$(1).git examples/$(1);
+
+.PHONY: examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)) examples/$(patsubst datadog-api-client-%,%,$(1))
+
+examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)):
+	@if [ "$$@" = "examples/clean-python-examples" ]; then \
+		echo "Cleaning .py*"; \
+		git clean -xdf content/en/api/**/*.py*; \
+	elif [ "$$@" = "examples/clean-ruby-examples" ]; then \
+		echo "Cleaning .rb*"; \
+		git clean -xdf content/en/api/**/*.rb*; \
+	elif [ "$$@" = "examples/clean-typescript-examples" ]; then \
+		echo "Cleaning .ts*"; \
+		git clean -xdf content/en/api/**/*.ts*; \
+	else \
+		echo "Cleaning .$(subst datadog-api-client-,,$(1))"; \
+		git clean -xdf content/en/api/**/*.$(subst datadog-api-client-,,$(1)); \
+	fi
+
+examples/$(patsubst datadog-api-client-%,%,$(1)): examples/$(1) examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1))
+	-find examples/$(1)/examples -iname \*.py -exec mv {} {}beta \;
+	-find examples/$(1)/examples -iname \*.rb -exec mv {} {}beta \;
+	-cp -Rn examples/$(1)/examples/v* ./content/en/api
+endef
+
+# generate rules for each repo from the template/function
+# e.g
+# with repo datadog-api-client-go we would get targets
+# examples/datadog-api-client-go/.git
+# examples/go
+# examples/clean-go-examples
+$(foreach repo,$(EXAMPLES_REPOS),$(eval $(call EXAMPLES_template,$(repo))))
+
+# build all examples
+# dynamic prerequisites equivalent to examples/go examples/java examples/python etc.
+all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,%,$(repo))))
+
+# clean all examples
+# dynamic prerequisites equivalent to examples/clean-go-examples examples/clean-java-examples examples/clean-python-examples etc.
+clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
+	@rm -rf examples

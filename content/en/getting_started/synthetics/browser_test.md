@@ -2,21 +2,24 @@
 title: Getting Started with Browser Tests
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/course/view.php?id=39'
-      tag: 'Learning Center'
-      text: 'Introduction to Synthetic Tests'
-    - link: '/synthetics/browser_tests'
-      tag: 'Documentation'
-      text: 'Learn more about browser tests'
-    - link: '/getting_started/synthetics/private_location'
-      tag: 'Documentation'
-      text: 'Learn about private locations'
-    - link: '/synthetics/cicd_integrations'
-      tag: 'Documentation'
-      text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
-    - link: '/synthetics/identify_synthetics_bots'
-      tag: 'Documentation'
-      text: 'Learn how to identify Synthetic bots for API tests'
+- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
+- link: '/synthetics/browser_tests'
+  tag: 'Documentation'
+  text: 'Learn more about browser tests'
+- link: '/getting_started/synthetics/private_location'
+  tag: 'Documentation'
+  text: 'Learn about private locations'
+- link: '/synthetics/cicd_integrations'
+  tag: 'Documentation'
+  text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
+- link: '/synthetics/identify_synthetics_bots'
+  tag: 'Documentation'
+  text: 'Learn how to identify Synthetic bots for API tests'
+- link: '/synthetics/guide/synthetic-test-monitors'
+  tag: 'Documentation'
+  text: 'Learn about Synthetic test monitors'
       
 ---
 
@@ -45,7 +48,7 @@ The example below demonstrates the creation of a browser test that maps a user's
     - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
     - Choose the browsers and devices you want to test with. 
 
-#### Select locations
+### Select locations
 
 Select one or more **Managed Locations** or **Private Locations** to run your test from.
 
@@ -53,14 +56,13 @@ Managed locations allow you to test public-facing websites and endpoints. To tes
 
 The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from.
 
-#### Specify test frequency
+### Specify test frequency
 
 Select the frequency at which you want your test to execute. You can leave the default frequency of 1 hour.
 
-**Note:** In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][5].
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][5].
 
-
-#### Define alert conditions
+### Define alert conditions
 
 You can define alert conditions to ensure your test does not trigger for things like a sporadic network blip, so that you only get alerted in case of real issues with your application.
 
@@ -76,7 +78,7 @@ You can also configure your test to only trigger a notification when your applic
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-#### Notify your team
+### Configure the test monitor
 
 Design your alert message and add an email address you want your test to send alerts to.
 
@@ -84,11 +86,13 @@ Design your alert message and add an email address you want your test to send al
 
 You can also use [notifications integrations][6] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][7].
 
-When you're ready to record your test, click **Save Details & Record Test**.
+When you're ready to save your test configuration and monitor, click **Save & Edit Recording**.
 
-### Create recording
+For more information, see [Using Synthetic Test Monitors][8].
 
-Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][8] Chrome extension. 
+## Create recording
+
+Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][9] Chrome extension. 
 
 Once you have installed the extension, click **Start Recording** to begin recording your test steps.
 
@@ -108,19 +112,19 @@ It is important to finish your browser test with an **Assertion** to ensure your
 
 {{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps" video="true"  >}}
 
-**Note**: The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you receive an email notification when the test fails and recovers.
+The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you receive an email notification when the test fails and recovers.
 
 ## Look at test results
 
 The **Browser Test** details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
-To troubleshoot a [failed test][9], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][10]**, **[Resources][11]**, and **[Core Web Vitals][12]** to diagnose the issue. 
+To troubleshoot a [failed test][10], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][11]**, **[Resources][12]**, and **[Core Web Vitals][13]** to diagnose the issue. 
 
 In the example below, the test failed as the result of a server timeout.
 
 {{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure" video="true"  >}}
 
-Use Datadog's [APM integration with Synthetic Monitoring][13] to view traces generated from your backend by the test runs from the **Traces** tab.
+Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the **Traces** tab.
 
 ## Further Reading
 
@@ -134,9 +138,10 @@ Use Datadog's [APM integration with Synthetic Monitoring][13] to view traces gen
 [5]: /synthetics/cicd_integrations
 [6]: /integrations/#cat-notification
 [7]: https://app.datadoghq.com/account/settings
-[8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[9]: /synthetics/browser_tests/test_results#test-failure
-[10]: /synthetics/browser_tests/test_results#errors
-[11]: /synthetics/browser_tests/test_results#resources
-[12]: /synthetics/browser_tests/test_results#page-performance
-[13]: /synthetics/apm/
+[8]: /synthetics/guide/synthetic-test-monitors
+[9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[10]: /synthetics/browser_tests/test_results#test-failure
+[11]: /synthetics/browser_tests/test_results#errors
+[12]: /synthetics/browser_tests/test_results#resources
+[13]: /synthetics/browser_tests/test_results#page-performance
+[14]: /synthetics/apm/

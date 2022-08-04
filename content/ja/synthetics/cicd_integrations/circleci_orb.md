@@ -142,7 +142,7 @@ CircleCI パイプラインの `pollingTimeout` のカスタマイズなど、�
 `test_search_query` | 文字列 | _なし_ | 検索クエリに対応するテストをトリガーします。
 `tunnel` | boolean | `false` | テストトンネルを使用してテストをトリガーします。
 `variables` | 文字列 | _なし_ | テストに変数を注入するための Key-Value ペア。`KEY=VALUE` という形式である必要があります。
-`version` | 文字列 | `v1.4.0` | 使用する `datadog-ci` のバージョン。
+`version` | 文字列 | `v1.7.0` | 使用する `datadog-ci` のバージョン。
 
 ## その他の参考資料
 

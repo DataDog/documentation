@@ -17,8 +17,8 @@ categories:
 - notification
 - network
 - autodiscovery
+- snmp
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp/README.md
 display_name: SNMP
@@ -34,7 +34,7 @@ maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: snmp.
 name: snmp
-public_title: Datadog-SNMP インテグレーション
+public_title: SNMP インテグレーション
 short_description: ネットワークデバイスから SNMP メトリクスを収集。
 support: コア
 supported_os:

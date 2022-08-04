@@ -5,30 +5,33 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - cloud
+- cloud
 creates_events: false
-ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/convox/README.md'
+- https://github.com/DataDog/integrations-extras/blob/master/convox/README.md
 display_name: Convox
 draft: false
 git_integration_title: convox
 guid: e8b1f8a7-8859-4c85-81bd-044400854e59
 integration_id: convox
 integration_title: Convox
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 name: convox
-public_title: Datadog-Convox インテグレーション
+public_title: Convox
 short_description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 Convox からリアルタイムにメトリクスを取得して、コンテナのパフォーマンスを視覚化します。
@@ -37,7 +40,7 @@ Convox からリアルタイムにメトリクスを取得して、コンテナ�
 
 ## セットアップ
 
-[Convox のセットアップに関するドキュメントページ][2]を参照してください。
+[Datadog の設定][2]は、Convox のドキュメントを参照してください。
 
 ### Datadog Agent のデプロイ
 

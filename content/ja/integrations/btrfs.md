@@ -1,39 +1,58 @@
 ---
+app_id: btrfs
+app_uuid: 471f9447-678b-4199-9503-7170b65d07c5
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     btrfs: assets/dashboards/btrfs_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.disk.btrfs.total
+      metadata_path: metadata.csv
+      prefix: btrfs.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Btrfs
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md
-display_name: Btrfs
+display_on_public_website: true
 draft: false
 git_integration_title: btrfs
-guid: 54f9329a-8270-4f5a-bd4b-cd169abfc791
 integration_id: btrfs
 integration_title: Btrfs
 integration_version: 1.14.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: btrfs.
-metric_to_check: system.disk.btrfs.total
+manifest_version: 2.0.0
 name: btrfs
-public_title: Datadog-Btrfs インテグレーション
+oauth: {}
+public_title: Btrfs
 short_description: Btrfs ボリュームに空きがなくなる前に対応できるように使用状況を監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Btrfs ボリュームに空きがなくなる前に対応できるように使用状況を監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Btrfs
 ---
 
 

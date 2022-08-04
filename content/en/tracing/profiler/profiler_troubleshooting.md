@@ -7,7 +7,7 @@ further_reading:
       text: 'APM Troubleshooting'
 ---
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,linux" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,ddprof" >}}
 {{< programming-lang lang="java" >}}
 
 ## Missing profiles in the profile search page
@@ -115,14 +115,14 @@ Remember to turn this setting back on after you've returned to a more typical ra
 
 The following OpenJDK 8 vendors are supported for Continuous Profiling because they include JDK Flight Recorder in their latest versions:
 
-| Vendor                      | JDK version that includes Flight Recorder                      |
-| --------------------------- | -------------------------------------------------------------- |
-| Azul                        | u212 (u262 is recommended)                                     |
-| AdoptOpenJDK                | u262                                                           |
-| RedHat                      | u262                                                           |
-| Amazon (Corretto)           | u262                                                           |
-| Bell-Soft (Liberica)        | u262                                                           |
-| All vendors upstream builds | u272                                                           |
+| Vendor                      | JDK version that includes Flight Recorder |
+| --------------------------- | ----------------------------------------- |
+| Azul                        | u212 (u262 is recommended)                |
+| AdoptOpenJDK                | u262                                      |
+| RedHat                      | u262                                      |
+| Amazon (Corretto)           | u262                                      |
+| Bell-Soft (Liberica)        | u262                                      |
+| All vendors upstream builds | u272                                      |
 
 If your vendor is not on the list, [open a support ticket][2], as other vendors may be in development or available for beta support.
 
@@ -146,7 +146,7 @@ Override templates let you specify profiling properties to override. However, th
 3. When running your application with `dd-java-agent`, your service invocation must point to the override file with `-Ddd.profiling.jfr-template-override-file=</path/to/override.jfp>`, for example:
 
     ```
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
@@ -209,12 +209,22 @@ variable to `1`, as described in the
 
 Without this flag, profiles for short-lived Resque jobs will be unavailable.
 
+## Profiling does not turn on because compilation of the Ruby VM just-in-time header failed
+
+There is a known incompatibility between Ruby 2.7 and older GCC versions (4.8 and below) that impacts the profiler ([upstream Ruby report][6], [`dd-trace-rb` bug report][7]). This can result in the following error message: "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken."
+
+
+To fix this, update your operating system or Docker image so that the GCC version is something more recent than v4.8.
+
+For further help with this issue, [contact support][2] and include the output of running `DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` and the resulting `mkmf.log` file.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 [3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
 [4]: https://github.com/resque/resque
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
+[6]: https://bugs.ruby-lang.org/issues/18073
+[7]: https://github.com/DataDog/dd-trace-rb/issues/1799
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -255,6 +265,16 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 - Application type (for example, Web application running in IIS).
 
 
+## High CPU usage when enabling the profiler
+
+The profiler has a fixed overhead. The exact value can vary but should be expected to be about:
+ -  200ms of CPU time per second on Linux (0.2 CPU)
+ -  20ms of CPU time per second on Windows (0.02 CPU)
+
+This fixed cost means that the relative overhead of the profiler can be significant in very small containers. For example, if you run the profiler in a Linux container with 0.4 CPU assigned, the fixed cost of 0.2 CPU means that the relative overhead is 50%. Adjust the container limits accordingly.
+
+
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 {{< /programming-lang >}}
@@ -273,7 +293,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 [1]: /help/
 {{< /programming-lang >}}
 
-{{< programming-lang lang="linux" >}}
+{{< programming-lang lang="ddprof" >}}
 
 ## Missing profiles in the profile search page
 
@@ -297,11 +317,11 @@ echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 
 ```
 
-**Note**: This must be executed from a mount namespace in which the `/proc/sys/kernel/perf_event_paranoid` object exists and is writable. Typically, this would be the root mount namespace--in other words, the host rather than any normal container. 
+**Note**: This must be executed from a mount namespace in which the `/proc/sys/kernel/perf_event_paranoid` object exists and is writable. Within a container, this setting is inherited from the host.
 
 There are two capabilities you can use to override the value of `perf_event_paranoid`:
-- `CAP_SYS_ADMIN` (adds many permissions and thus may be discouraged by some organizations)
-- `CAP_PERFMON` (available on Linux v5.8 or later)
+- `CAP_SYS_ADMIN`: adds many permissions and thus may be discouraged
+- `CAP_PERFMON`: adds BPF and `perf_event_open` capabilities (available on Linux v5.8 or later)
 
 There are a few less common permissions issues:
 - The profiler is not always able to instrument processes that change their UID on startup. This is common for many webservers and databases.
@@ -328,7 +348,7 @@ The root of your profile is the frame annotated with the application name in par
 
 ## Error while loading shared libraries
 
-When using the Continuous Profiler for Linux as a dynamic library, your application may fail to launch with the following error:
+When using the Continuous Profiler for compiled languages as a dynamic library, your application may fail to launch with the following error:
 
 ```
 error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
@@ -341,8 +361,8 @@ This happens when your application is built with `libdd_profiling.so` as a depen
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-[3]: /tracing/profiler/enabling/linux/?tab=environmentvariables#configuration
-[4]: /tracing/profiler/enabling/linux/
+[3]: /tracing/profiler/enabling/ddprof/?tab=environmentvariables#configuration
+[4]: /tracing/profiler/enabling/ddprof/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

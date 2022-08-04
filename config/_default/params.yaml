@@ -86,6 +86,7 @@ code_language_ids:
     other: Other
     linux: Linux
     opentelemetry: OpenTelemetry
+    ddprof: "Rust/C/C++"
 
 branch: ""
 

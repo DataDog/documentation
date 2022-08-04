@@ -7,7 +7,6 @@ assets:
 categories:
 - os & system
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md
 display_name: Reboot required
@@ -22,7 +21,7 @@ kind: インテグレーション
 maintainer: support@krugerheavyindustries.com
 manifest_version: 1.0.0
 name: reboot_required
-public_title: Datadog-Reboot Required インテグレーション
+public_title: Reboot Required
 short_description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
 support: contrib
 supported_os:

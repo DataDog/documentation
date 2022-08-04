@@ -14,7 +14,6 @@ categories:
 - ログの収集
 - オートディスカバリー
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
 display_name: JBoss/WildFly
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: jboss.
 metric_to_check: jboss.jdbc_connections.count
 name: jboss_wildfly
-public_title: Datadog-JBoss/WildFly インテグレーション
+public_title: JBoss/WildFly インテグレーション
 short_description: JBoss および WildFly アプリケーションからさまざまな JMX メトリクスを収集
 support: コア
 supported_os:

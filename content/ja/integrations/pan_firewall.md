@@ -16,7 +16,6 @@ categories:
 - ログの収集
 - security
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pan_firewall/README.md
 display_name: Palo Alto Networks Firewall
@@ -34,7 +33,7 @@ metric_prefix: pan.firewall
 metric_to_check: ''
 name: pan_firewall
 process_signatures: []
-public_title: Datadog-Palo Alto Networks Firewall インテグレーション
+public_title: Palo Alto Networks Firewall インテグレーション
 short_description: Palo Alto Networks Firewall ログイベント
 support: コア
 supported_os:
@@ -102,7 +101,7 @@ Datadog の Alto Networks Firewall ログインテグレーションにより、
 
 ## 収集データ
 
-### ログ
+### ログ管理
 
 PANOS インテグレーションは、Palo Alto Networks ファイアウォールインテグレーションからログを収集し、それを Datadog に転送します。
 
