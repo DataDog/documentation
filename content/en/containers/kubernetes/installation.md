@@ -217,7 +217,7 @@ datadog:
 ...
 ```
 
-For details about `kube-state-metrics` core, read the [`kube-state-metrics` core documentation][12].
+For details about `kube-state-metrics` core, read the [Kubernetes State Metrics Core documentation][12].
 
 ### Unprivileged
 
