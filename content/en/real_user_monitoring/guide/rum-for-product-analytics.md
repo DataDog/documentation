@@ -42,7 +42,7 @@ This example displays the top actions on Shopist's `/cart` page.
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
 
-For example: 
+Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON**: 
 
 {{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
 {
@@ -93,7 +93,7 @@ To investigate which users are clicking on these buttons, modify the search quer
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
-For example:
+Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON**:
 
 {{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
 {
@@ -167,7 +167,7 @@ Once you have created a funnel based on views or actions on your website, you ca
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_funnel_export.png" alt="Export a funnel visualization in the RUM Explorer" style="width:90%;" >}}
 
-For example:
+Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON****:
 
 {{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
 {
@@ -218,7 +218,7 @@ This query searches for top pages where at least two frustration signals have oc
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query.png" alt="Search query for views containing more than two frustration signals in the RUM Explorer" style="width:90%;" >}}
 
-For example:
+Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON**:
 
 {{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
 {
@@ -276,7 +276,7 @@ This query lists anytime a user expresses any type of frustration signal and cou
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search.png" alt="Search query that lists and counts actions where a user expressed three types of frustration signals on Shopist's Cart page" style="width:90%;">}}
 
-For example:
+Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON**:
 
 {{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
 {

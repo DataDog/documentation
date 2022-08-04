@@ -10,7 +10,7 @@ disable_toc: true
     {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Create alerts with RUM data{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Create alerts for conversion rates{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}Monitor user behavior and analyze product usage in RUM & Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}Use RUM & Session Replay for Product Analytics{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
