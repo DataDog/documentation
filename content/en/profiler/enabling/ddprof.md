@@ -240,18 +240,8 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<<<<<<<< HEAD:content/en/profiler/enabling/linux.md
 [1]: /profiler/profiler_troubleshooting
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://github.com/DataDog/ddprof/releases
-[5]: https://app.datadoghq.com/profiling
-[6]: /getting_started/tagging/unified_service_tagging
-[7]: /getting_started/profiler/
-========
-[1]: /tracing/profiler/profiler_troubleshooting
 [2]: https://github.com/DataDog/ddprof/releases
 [3]: https://app.datadoghq.com/profiling
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /getting_started/profiler/
->>>>>>>> master:content/en/profiler/enabling/ddprof.md
