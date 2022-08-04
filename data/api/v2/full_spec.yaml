@@ -14511,7 +14511,7 @@ paths:
       summary: Get hourly usage for application security
       tags:
       - Usage Metering
-      x-menu-order: 37
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v2/usage/cost_by_org:
@@ -14656,7 +14656,7 @@ paths:
       summary: Get estimated cost across your account
       tags:
       - Usage Metering
-      x-menu-order: 39
+      x-menu-order: 6
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -14836,7 +14836,7 @@ paths:
       summary: Get hourly usage for lambda traced invocations
       tags:
       - Usage Metering
-      x-menu-order: 36
+      x-menu-order: 37
       x-undo:
         type: safe
   /api/v2/usage/observability_pipelines:
@@ -14898,7 +14898,7 @@ paths:
       summary: Get hourly usage for observability pipelines
       tags:
       - Usage Metering
-      x-menu-order: 38
+      x-menu-order: 39
       x-undo:
         type: safe
   /api/v2/user_invitations:
