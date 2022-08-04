@@ -69,8 +69,6 @@ In the **Profiles** tab, you can see all profile types available for a given lan
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,ddprof" >}}
 {{< programming-lang lang="java" >}}
 
-{{< img src="profiler/profile.png" alt="A specific profile">}}
-
 Once enabled, the following profile types are collected:
 
 
@@ -194,8 +192,6 @@ Heap Live Size
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-
-{{< img src="profiler/profile_dotnet.png" alt="A .NET profile">}}
 
 Once enabled, the following profile type is collected:
 
