@@ -114,22 +114,22 @@ The following attributes are related to the geolocation of IP addresses used in 
 : Type: `string` <br> Name of the country. 
 
 `network.client.geoip.country.iso_code` 
-: Type: `string` <br> [ISO Code][6] of the country (example: `US` for the United States, `FR` for France).
+: Type: `string` <br> [ISO Code][6] of the country (for example, `US` for the United States, `FR` for France).
 
 `network.client.geoip.continent.code` 
 : Type: `string` <br> ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
 
 `network.client.geoip.continent.name`
-:  Type: `string` <br> Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).
+: Type: `string` <br> Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).
 
 `network.client.geoip.subdivision.name`
-:  Type: `string` <br> Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France).
+: Type: `string` <br> Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France).
 
 `network.client.geoip.subdivision.iso_code`
-: Type: `string` <br> [ISO Code][6] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France).
+: Type: `string` <br> [ISO Code][6] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).
 
 `network.client.geoip.city.name`
-: Type: `string` <br> The name of the city (example `Paris`, `New York`)
+: Type: `string` <br> The name of the city (for example, `Paris`, `New York`).
 
 #### HTTP requests
 
@@ -195,10 +195,10 @@ Database related attributes are prefixed by `db`.
 : Type: `string` <br> Database instance name. For example, in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`. 
 
 `db.statement`
-: Type: `string` <br> A database statement for the given database type. For example, for mySQL: `"SELECT * FROM wuser_table";` for Redis: `"SET mykey 'WuValue'"`.
+: Type: `string` <br> A database statement for the given database type. For example, for mySQL: `"SELECT * FROM wuser_table";` and for Redis: `"SET mykey 'WuValue'"`.
 
 `db.operation`
-: Type: `string` <br> The operation that was performed ("query", "update", "delete",...). 
+: Type: `string` <br> The operation that was performed ("query", "update", "delete", and so on). 
 
 `db.user`
 : Type: `string` <br> User that performs the operation.
