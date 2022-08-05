@@ -88,9 +88,11 @@ end
 
 ### Configuring Datadog
 
-To enable testing instrumentation, add the following environment variables to your test target (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). You must also select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
+To enable testing instrumentation, add the following environment variables to your test target (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). You **must** select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
+
+<div class="alert alert-warning"><strong>Remember</strong>: You should have your main target in the variables expansion of the environment variables as indicated in previous paragraph; if not selected, variables are not valid </div>
 
 For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
@@ -308,14 +310,15 @@ Alternatively to setting environment variables, all configuration values can be 
 {{< tabs >}}
 {{% tab "Jenkins" %}}
 
-| Environment variable | Value             |
-| -------------------- | ----------------- |
-| `JENKINS_URL`        | `$(JENKINS_URL)`  |
-| `WORKSPACE`          | `$(WORKSPACE)`    |
-| `BUILD_TAG`          | `$(BUILD_TAG)`    |
-| `BUILD_NUMBER`       | `$(BUILD_NUMBER)` |
-| `BUILD_URL`          | `$(BUILD_URL)`    |
-| `JOB_NAME`           | `$(JOB_NAME)`     |
+| Environment variable | Value                  |
+| -------------------- | ---------------------- |
+| `JENKINS_URL`        | `$(JENKINS_URL)`       |
+| `WORKSPACE`          | `$(WORKSPACE)`         |
+| `BUILD_TAG`          | `$(BUILD_TAG)`         |
+| `BUILD_NUMBER`       | `$(BUILD_NUMBER)`      |
+| `BUILD_URL`          | `$(BUILD_URL)`         |
+| `JOB_NAME`           | `$(JOB_NAME)`          |
+| `DD_CUSTOM_TRACE_ID` | `$(DD_CUSTOM_TRACE_ID)`|
 
 Additional Git configuration for physical device testing:
 
@@ -361,6 +364,8 @@ Additional Git configuration for physical device testing:
 | `CI_PIPELINE_IID`    | `$(CI_PIPELINE_IID)` |
 | `CI_PIPELINE_URL`    | `$(CI_PIPELINE_URL)` |
 | `CI_PROJECT_PATH`    | `$(CI_PROJECT_PATH)` |
+| `CI_PROJECT_URL`     | `$(CI_PROJECT_URL)`  |
+
 
 Additional Git configuration for physical device testing:
 
