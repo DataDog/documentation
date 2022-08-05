@@ -118,4 +118,4 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 [13]: /tracing/services/services_map/
 [14]: /tracing/services/service_page/
 [15]: /tracing/services/deployment_tracking/
-[16]: /tracing/profiler/
+[16]: /profiler/

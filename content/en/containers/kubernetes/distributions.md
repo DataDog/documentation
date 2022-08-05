@@ -35,6 +35,7 @@ These configuration can then be customized to add any Datadog feature.
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
 * [Oracle Container Engine for Kubernetes (OKE)](#OKE)
+* [vSphere Tanzu Kubernetes Grid (TKG)](#TKG)
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
@@ -482,6 +483,75 @@ spec:
 
 More `values.yaml` examples can be found in the [Helm chart repository][1]
 More `DatadogAgent` examples can be found in the [Datadog Operator repository][2]
+
+## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
+
+TKG requires some small configuration changes, shown below. For example, setting a toleration is required for the controller to schedule the Node Agent on the `master` nodes.
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Custom `values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  kubelet:
+    # Set tlsVerify to false since the Kubelet certificates are self-signed
+    tlsVerify: false
+  # Disable the `kube-state-metrics` dependency chart installation.
+  kubeStateMetricsEnabled: false
+  # Enable the new `kubernetes_state_core` check.
+  kubeStateMetricsCore:
+    enabled: true
+# Add a toleration so that the agent can be scheduled on the control plane nodes.
+agents:
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      effect: NoSchedule
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiSecret:
+      secretName: datadog-secret
+      keyName: api-key
+    appSecret:
+      secretName: datadog-secret
+      keyName: app-key
+  features:
+    # Enable the new `kubernetes_state_core` check.
+    kubeStateMetricsCore:
+      enabled: true
+  agent:
+    config:
+      kubelet:
+        # Set tlsVerify to false since the Kubelet certificates are self-signed
+        tlsVerify: false
+      # Add a toleration so that the agent can be scheduled on the control plane nodes.
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+  clusterAgent:
+    config:
+      collectEvents: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

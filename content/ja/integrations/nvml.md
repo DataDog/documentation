@@ -18,7 +18,7 @@ git_integration_title: nvml
 guid: 5e997a76-f6a3-48e8-875f-6fbb2559f9e9
 integration_id: nvml
 integration_title: Nvidia NVML
-integration_version: 1.0.4
+integration_version: 1.0.5
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

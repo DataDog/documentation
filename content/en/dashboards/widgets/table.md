@@ -61,7 +61,7 @@ In the following example, the `Average` column calculates a ratio of `Total Ente
 [2]: /logs/search_syntax/
 [3]: /tracing/trace_explorer/query_syntax/
 [4]: /real_user_monitoring/explorer/search_syntax
-[5]: /tracing/profiler/search_profiles
+[5]: /profiler/search_profiles
 [6]: /security_monitoring/explorer/
 [7]: /dashboards/querying/#configuring-an-apm-stats-graph
 [8]: /api/v1/dashboards/

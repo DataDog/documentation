@@ -3,6 +3,7 @@ aliases:
 - /ja/agent/tagging
 - /ja/getting_started/tagging/assigning_tags
 - /ja/tagging/assigning_tags/
+description: Datadog でタグを割り当てる方法について説明します。
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
@@ -43,7 +44,7 @@ title: タグの付け方
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグ付けの方法
+## タグの割り当て方法
 
 ### 構成ファイル
 

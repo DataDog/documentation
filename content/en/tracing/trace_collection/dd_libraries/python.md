@@ -26,8 +26,9 @@ further_reading:
       text: 'Advanced Usage'
 ---
 ## Compatibility requirements
+The latest Python Tracer supports CPython versions 2.7 and 3.5-3.10.
 
-The Python library supports CPython versions 2.7 and 3.5-3.10 on Linux, MacOS and Windows. For more information about Datadog's Python version support, see the [Compatibility Requirements][1] page.
+For a full list of Datadog’s Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -38,30 +39,6 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
 - Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
-
-Otherwise, to begin tracing applications written in Python, install the Datadog Tracing library, `ddtrace`, using pip:
-
-```python
-pip install ddtrace
-```
-
-**Note:** This command requires pip version `18.0.0` or greater.  For Ubuntu, Debian, or another package manager, update your pip version with the following command:
-
-```python
-pip install --upgrade pip
-```
-
-Then to instrument your Python application use the included `ddtrace-run` command. To use it, prefix your Python entry-point command with `ddtrace-run`.
-
-For example, if your application is started with `python app.py` then:
-
-```shell
-ddtrace-run python app.py
-```
-
-### Upgrading to v1
-
-If you are upgrading to ddtrace v1, review the [upgrade guide][3] and the [release notes][4] in the library documentation for full details.
 
 ### Configure the Datadog Agent for APM
 
@@ -156,12 +133,37 @@ For other environments, please refer to the [Integrations][5] documentation for 
 {{% /tab %}}
 {{< /tabs >}}
 
+### Instrument Your Application
+
+Once the agent is installed, to begin tracing applications written in Python, install the Datadog Tracing library, `ddtrace`, using pip:
+
+```python
+pip install ddtrace
+```
+
+**Note:** This command requires pip version `18.0.0` or greater.  For Ubuntu, Debian, or another package manager, update your pip version with the following command:
+
+```python
+pip install --upgrade pip
+```
+
+Then to instrument your Python application use the included `ddtrace-run` command. To use it, prefix your Python entry-point command with `ddtrace-run`.
+
+For example, if your application is started with `python app.py` then:
+
+```shell
+ddtrace-run python app.py
+```
+
 Once you've finished setup and are running the tracer with your application, you can run `ddtrace-run --info` to check that configurations are working as expected. Note that the output from this command does not reflect configuration changes made during runtime in code.
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
+### Upgrading to v1
+
+If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [release notes][5] in the library documentation for full details.
 
 ## Further Reading
 
@@ -169,6 +171,6 @@ If needed, configure the tracing library to send application performance telemet
 
 [1]: /tracing/compatibility_requirements/python
 [2]: https://app.datadoghq.com/apm/docs
-[3]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
-[4]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
-[5]: /tracing/trace_collection/library_config/python/
+[3]: /tracing/trace_collection/library_config/python/
+[4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
+[5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0

@@ -15,7 +15,7 @@ A service is an independent, deployable unit of software. Datadog [Unified Servi
 
 ## Requirements
 
-Before you begin, you need a [Datadog API and app key][3].
+Before you begin, you need a [Datadog API and app key][2].
 
 
 ## Service Definition Schema (v2)
@@ -50,7 +50,7 @@ contacts:
 External Resources (Optional)
 {{< /code-block >}}
 
-See full schema on [GitHub][4].
+See full schema on [GitHub][3].
 
 ## Post a service definition
 
@@ -64,19 +64,19 @@ POST /api/v2/services/definitions
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][6]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][5]. |
 
 ### Request
 
 #### Body data (required)
 
-You can generate this body data on the [Service Catalog Getting Started page][7].
+You can generate this body data on the [Service Catalog Getting Started page][6].
 
 ##### Model 
 | Field                       | Type            | Description |
 | --------------------------- | --------------- | ------------------------------------------------------- |
-| Request Body                | JSON or YAML    | See Service Definition Schema [v2][4] |
+| Request Body                | JSON or YAML    | See Service Definition Schema [v2][3] |
 
 #### Example
 {{< code-block lang="json" filename="service.definition.json" collapsible="true" >}}
@@ -100,7 +100,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
                     "warnings": []
                 },
                 "schema": {
-                    "dd-service": "shopping-service"
+                    "dd-service": "shopping-service",
                     "schema-version": "v2",
                     "links": [],
                     "contacts": [],
@@ -109,7 +109,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
                     "tags": null,
                     "integrations": {},
                     "team": "",
-                    "extensions": {},
+                    "extensions": {}
                 }
             },
             "type": "service-definition"
@@ -159,8 +159,8 @@ GET /api/v2/services/definitions/<service_name>
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][6]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, to to the [Application keys page][5]. |
 
 ### Response
 
@@ -252,8 +252,8 @@ GET /api/v2/services/definitions
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][6]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][5]. |
 
 ### Response
 
@@ -342,8 +342,8 @@ DELETE /api/v2/services/definitions/<service_name>
 
 | Required field  | Description |
 | ---------- | ----------- |
-| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][5]. |
-| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][6]. |
+| `DD-API-KEY` | Identifies an organization. To create or reuse existing keys, go to the [API keys page][4]. |
+| `DD-APPLICATION-KEY` | Identifies a user. To create or reuse existing keys, go to the [Application keys page][5]. |
 
 ### Response
 
@@ -362,9 +362,8 @@ curl --location --request DELETE 'https://api.datadoghq.com/api/v2/services/defi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/unified-service-tagging/
-[2]: /tracing/service_catalog/
-[3]: /account_management/api-app-keys/
-[4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: https://app.datadoghq.com/organization-settings/application-keys
-[7]: https://app.datadoghq.com/services/setup
+[2]: /account_management/api-app-keys/
+[3]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: https://app.datadoghq.com/organization-settings/application-keys
+[6]: https://app.datadoghq.com/services/setup

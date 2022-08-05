@@ -14,6 +14,8 @@ further_reading:
   text: "Manage monitors"
 ---
 
+## Overview
+
 Use variables in notification message to display conditional messaging and route notification to different teams using [conditional variables](#conditional-variables), or to enrich its content by using [attribute and tag variables](#attribute-and-tag-variables) and [template variables](#template-variables).
 
 ## Conditional variables
@@ -156,6 +158,15 @@ To notify your dev team if a triggering host has the name `production`, use the 
 {{#is_exact_match "host.name" "production"}}
   This displays if the host that triggered the alert is exactly
   named production. @dev-team@company.com
+{{/is_exact_match}}
+```
+
+The `is_exact_match` condition also supports matching multiple strings:
+
+```text
+{{#is_exact_match "host.name" "production" "staging"}}
+  This displays if the host that triggered the alert is exactly
+  named production or staging. @dev-team@company.com
 {{/is_exact_match}}
 ```
 
@@ -532,6 +543,19 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 ```text
 {{ .matched }} the host name
 ```
+### URL Encode
+
+If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
+
+**Example**: If your monitor message includes a URL to the APM services page filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+
+```
+https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
+```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/create/configuration/#alert-grouping
 [2]: /monitors/create/types/log/

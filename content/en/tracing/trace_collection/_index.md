@@ -38,4 +38,4 @@ After you set up tracing, you are [one step from accessing profiling data by ena
 
 [1]: /tracing/glossary/#trace
 [2]: /developers/community/libraries/#apm-tracing-client-libraries
-[3]: /tracing/profiler/enabling/
+[3]: /profiler/enabling/

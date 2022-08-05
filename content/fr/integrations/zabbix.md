@@ -11,7 +11,6 @@ categories:
 - network
 - monitoring
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_name: Zabbix
@@ -65,16 +64,33 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Configuration
 
-1. Modifiez le fichier `zabbix.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Zabbix. Consultez le [fichier d'exemple zabbix.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+1. Assurez-vous que le fuseau d'horaire de votre serveur Zabbix est défini sur UTC. Pour en savoir plus sur les fuseaux horaires de Zabbix, consultez la [documentation Zabbix][5] (en anglais).
 
-2. [Redémarrez l'Agent][6].
+2. Modifiez le fichier `zabbix.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Zabbix. Consultez le [fichier d'exemple zabbix.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][7].
 
 #### Collecte d'événements
 
 ##### Créer un type de support Datadog
 
 1. Accédez à *Administration > Media Types > Create Media Type*.
-2. Ajoutez la clé d'API Datadog en tant que paramètre, puis les template variables Zabbix suivantes en tant que paramètres : {ALERT.MESSAGE}, {ALERT.SUBJECT}, {EVENT.DATE}, {EVENT.NAME}, {EVENT.NSEVERITY}, {EVENT.TAGSJSON}, {EVENT.TIME}, {EVENT.VALUE}, {ITEM.NAME}.
+2. Ajoutez des paramètres au webhook à l'aide des template variables Zabbix. Ajoutez votre api_key Datadog et les template variables Zabbix suivantes sous forme de paramètres :
+
+| Paramètre            | Valeur                                |
+| -------------------- | ------------------------------------ |
+| `api_key`            | `Votre clé d'API Datadog`               |
+| `event_date`         | `{EVENT.DATE}`                       |
+| `event_name`         | `{EVENT.NAME}`                       |
+| `event_nseverity`    | `{EVENT.NSEVERITY}`                  |
+| `event_tags`         | `{EVENT.TAGSJSON}`                   |
+| `event_time`         | `{EVENT.TIME}`                       |
+| `event_value`        | `{EVENT.VALUE}`                      |
+| `item_name`          | `{ITEM.NAME}`                        |
+| `alert_message`      | `{ALERT.MESSAGE}`                    |
+| `alert_subject`      | `{ALERT.SUBJECT}`                    |
+
+
 3. Définissez **Name** sur `Datadog`, **Type** sur `Webhook` et **Script** sur le code suivant :
 ``` 
     try {
@@ -116,7 +132,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 ### Validation
 
-Lancez la [sous-commande status de l'Agent][7] et cherchez `zabbix` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][8] et cherchez `zabbix` dans la section Checks.
 
 ## Données collectées
 
@@ -134,16 +150,17 @@ Les alertes Zabbix sont recueillies en tant qu'événements dans le flux d'évé
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 
 [1]: https://www.zabbix.com/
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/fr/getting_started/integrations/
-[5]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/datadog_checks/zabbix/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/metadata.csv
-[9]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/assets/service_checks.json
-[10]: https://docs.datadoghq.com/fr/help/
+[5]: https://www.zabbix.com/documentation/current/en/manual/web_interface/time_zone
+[6]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/datadog_checks/zabbix/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/metadata.csv
+[10]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/assets/service_checks.json
+[11]: https://docs.datadoghq.com/fr/help/

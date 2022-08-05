@@ -74,8 +74,6 @@ tile:
 
 [StormForge Optimize Live][1] は、観測可能性メトリクスに機械学習を適用し、Kubernetes で実行されるあらゆるデプロイのリソースリクエストに対してリアルタイムに提案を行うことができます。
 
-Optimize Live へのアクセスについては、StormForge の営業担当まで[直接][2]ご連絡ください。
-
 **StormForge Optimize Live を使用すると、以下のことが可能になります。**
 - リソース効率の向上
 - 既存の観測可能性データの活用
@@ -89,13 +87,13 @@ Optimize Live へのアクセスについては、StormForge の営業担当ま�
 
 ### コンフィギュレーション
 
-1. [Datadog API キー][3]を作成します。
-2. [Datadog アプリケーションキー][4]を作成します。
-3. Datadog API およびアプリケーションキーを [StormForge Datadog インテグレーション][5]に追加します。
+1. [Datadog API キー][2]を作成します。
+2. [Datadog アプリケーションキー][3]を作成します。
+3. Datadog API およびアプリケーションキーを [StormForge Datadog インテグレーション][4]に追加します。
 4. Optimize Live のデプロイ
-5. [StormForge][6] 内でアプリケーションをセットアップします。
+5. [StormForge][5] 内でアプリケーションをセットアップします。
 
-より詳細な手順は、StormForge [スタートアップガイド][7]に記載されています。
+より詳細な手順は、StormForge [スタートアップガイド][6]に記載されています。
 
 ## 収集データ
 
@@ -115,13 +113,13 @@ StormForge インテグレーションには、サービスのチェック機能
 
 ## サポート
 
-ご質問やその他のサポートについては、[メール][2]で StormForge にご連絡ください。
+ご質問やその他のサポートについては、[メール][8]で StormForge にご連絡ください。
 
 [1]: https://www.stormforge.io/how-stormforge-optimize-live-works/
-[2]: mailto:support@stormforge.io
-[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#application-keys
-[5]: https://docs.stormforge.io/optimize-live/install/#datadog-metrics
-[6]: https://app.stormforge.io
-[7]: https://docs.stormforge.io/optimize-live/
-[8]: https://github.com/DataDog/integrations-extras/blob/master/stormforge/metadata.csv
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
+[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#application-keys
+[4]: https://docs.stormforge.io/optimize-live/install/#datadog-metrics
+[5]: https://app.stormforge.io
+[6]: https://docs.stormforge.io/optimize-live/
+[7]: https://github.com/DataDog/integrations-extras/blob/master/stormforge/metadata.csv
+[8]: mailto:support@stormforge.io

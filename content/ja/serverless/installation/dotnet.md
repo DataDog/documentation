@@ -133,10 +133,7 @@ Datadog サーバーレスプラグインをインストールして構成する
     RUN wget https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
     RUN mkdir /opt/datadog
     RUN tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz
-    ENV CORECLR_ENABLE_PROFILING=1
-    ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-    ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-    ENV DD_DOTNET_TRACER_HOME=/opt/datadog
+    ENV AWS_LAMBDA_EXEC_WRAPPER /opt/datadog_wrapper
     ```
 
    `<TRACER_VERSION>` を使用したい `dd-trace-dotnet` のバージョン番号に置き換えてください (例: `2.3.0`)。サポートされる最小バージョンは `2.3.0` です。最新の `dd-trace-dotnet` のバージョンは [GitHub][2] で確認することができます。
@@ -144,12 +141,11 @@ Datadog サーバーレスプラグインをインストールして構成する
 3. 必要な環境変数を設定する
 
     - 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
-    - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+    - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://github.com/DataDog/dd-trace-dotnet/releases
-[3]: https://docs.datadoghq.com/ja/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -181,16 +177,12 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 3. 必要な環境変数を設定する
 
-    - `CORECLR_ENABLE_PROFILING` を `1` に設定します。
-    - `CORECLR_PROFILER` を `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` に設定します。
-    - `CORECLR_PROFILER_PATH` を `/opt/datadog/Datadog.Trace.ClrProfiler.Native.so` に設定します。
-    - `DD_DOTNET_TRACER_HOME` を `/opt/datadog` に設定します。
+    - `AWS_LAMBDA_EXEC_WRAPPER` を `/opt/datadog_wrapper` に設定します。
     - `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
-    - `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+    - `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][2]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://docs.datadoghq.com/ja/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 

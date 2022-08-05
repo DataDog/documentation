@@ -27,7 +27,7 @@ further_reading:
 
 The Go Tracer requires Go `1.16+` and Datadog Agent `>= 5.21.1`. For a full list of supported libraries, see the [Compatibility Requirements][1] page.
 
-## Installation and getting started
+## Install and configure the Agent
 
 For configuration instructions and details about using the API, see the Datadog [API documentation][2].
 
@@ -48,11 +48,7 @@ Follow the [Quickstart instructions][7] within the Datadog app for the best expe
 - Enable the Continuous Profiler, ingesting 100% of traces , and Trace ID injection into logs during setup.
 
 
-Otherwise, follow the instructions below to add the Datadog Tracing Library to your code.
-
-## Automatic instrumentation
-
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. To trace these integrations, import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
+Otherwise, follow the instructions below to add the Datadog Tracing Library to your code and to initiate the Go integration.
 
 ### Configure the Datadog Agent for APM
 
@@ -132,7 +128,12 @@ For other environments, please refer to the [Integrations][5] documentation for 
 {{< /tabs >}}
 
 
-## Configuration
+## Activate Go integrations to create spans
+
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
+
+
+## Library configuration
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][8] for details.
 
@@ -145,6 +146,6 @@ If needed, configure the tracing library to send application performance telemet
 [3]: /tracing/glossary/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: /tracing/profiler/enabling/?code-lang=go
+[6]: /profiler/enabling/?code-lang=go
 [7]: https://app.datadoghq.com/apm/docs
 [8]: /tracing/trace_collection/library_config/go/
