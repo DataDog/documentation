@@ -84,7 +84,7 @@ You can set profiler parameters in code with these functions:
 |  WithService     | String        | The Datadog [service][8] name, for example `my-web-app`.             |
 |  WithEnv         | String        | The Datadog [environment][9] name, for example, `production`.         |
 |  WithVersion     | String        | The version of your application.                                                                             |
-|  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
+|  WithTags        | List of strings        | A list of tags to apply to an uploaded profile. Tags must be of the format `<KEY>:<VALUE>`. |
 
 Alternatively you can set profiler configuration using environment variables:
 
