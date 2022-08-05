@@ -161,10 +161,12 @@ To notify your dev team if a triggering host has the name `production`, use the 
 
 The `is_exact_match` condition also supports matching multiple strings:
 
+```text
 {{#is_exact_match "host.name" "production" "staging"}}
   This displays if the host that triggered the alert is exactly
   named production or staging. @dev-team@company.com
 {{/is_exact_match}}
+```
 
 The `is_exact_match` conditional variable also supports [`{{value}}` template variables](#template-variables):
 
