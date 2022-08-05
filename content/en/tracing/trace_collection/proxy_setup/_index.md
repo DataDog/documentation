@@ -467,10 +467,13 @@ To set a different service name per Ingress using annotations:
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
 ### Ingress Controller Sampling
+The Nginx Ingress Controller for Kubernetes uses [v1.2.1][11] of the Datadog
+tracing library, `dd-opentracing-cpp`.
 
-To control the volume of Ingress Controller traces that are sent to Datadog, specify a sampling rule that matches all traces. The `sample_rate` configured in the rule will determine the proportion of traces that are sampled.
-
-**Note**: If no rules are specified, 100% of the traces are sent to Datadog.
+To control the volume of Ingress Controller traces that are sent to Datadog,
+specify a sampling rule that matches all traces. The `sample_rate` configured
+in the rule will determine the proportion of traces that are sampled. If no
+rules are specified, then sampling defaults to 100%.
 
 Sampling rules are specified via the `DD_TRACE_SAMPLING_RULES` environment
 variable. To define sampling rules in the Ingress Controller, two pieces of
@@ -496,10 +499,6 @@ env:
   value: '[]'
 ```
 
-If no rules are specified, then sampling defaults to 100%.
-
-**Note**: The Kubernetes Nginx ingress controller uses [v1.2.1][12] of the `dd-opentracing-cpp` library).
-
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
 [3]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
@@ -511,7 +510,6 @@ If no rules are specified, then sampling defaults to 100%.
 [9]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [10]: https://github.com/kubernetes/ingress-nginx
 [11]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
-[12]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
 {{% /tab %}}
 {{% tab "Istio" %}}
 
