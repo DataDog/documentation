@@ -567,7 +567,7 @@ of the higher-level `CronJob`.
 
 To control the volume of Istio traces that are sent to Datadog, configure a
 sampling rule whose `"sample_rate"` is a value between `0.0` (0%) and `1.0`
-(100%).  Sampling rules are configured via the `DD_TRACE_SAMPLING_RULES`
+(100%). Configure sampling rules with the `DD_TRACE_SAMPLING_RULES`
 environment variable. If `DD_TRACE_SAMPLING_RULES` is not specified, then 100%
 of Istio traces are sent to Datadog.
 
