@@ -44,4 +44,3 @@ For billing questions, contact your [Customer Success][7] Manager.
 [5]: /infrastructure/
 [6]: /help/
 [7]: mailto:success@datadoghq.com
-[8]: https://docs.datadoghq.com/api/latest/aws-integration/#set-an-aws-tag-filter

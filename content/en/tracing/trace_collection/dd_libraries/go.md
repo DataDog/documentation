@@ -145,6 +145,6 @@ If needed, configure the tracing library to send application performance telemet
 [3]: /tracing/glossary/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: /tracing/profiler/enabling/?code-lang=go
+[6]: /profiler/enabling/?code-lang=go
 [7]: https://app.datadoghq.com/apm/docs
 [8]: /tracing/trace_collection/library_config/go/
