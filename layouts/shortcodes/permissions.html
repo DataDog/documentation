@@ -9,7 +9,7 @@
     {{ partial "rbac-permissions-table.html" (dict "data" $permissions_data "group" $single_permission_group) }}
   {{ else }}
     {{- range $group_name, $group_permissions_data := $permissions_data -}}
-      {{- if and (ne $group_name "General") (ne $group_name "Logs") -}}
+      {{- if ne $group_name "General" -}}
         <h2 id="{{ anchorize $group_name }}">
           {{- $group_name -}}
         </h2>
