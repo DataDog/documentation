@@ -209,7 +209,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 [7]: /synthetics/api_tests/http_tests?tab=requestoptions#use-variables
 [8]: /synthetics/multistep?tab=requestoptions#use-variables
 [9]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
-[10]: /synthetics/browser_tests/actions#using-variables
+[10]: /synthetics/browser_tests/actions#use-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /account_management/rbac/?tab=datadogapplication#custom-role
 [13]: /account_management/rbac/#create-a-custom-role
