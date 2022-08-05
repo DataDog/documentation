@@ -16,7 +16,7 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired.
+After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][6], optionally configure the tracing library as desired.
 
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
