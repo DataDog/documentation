@@ -468,7 +468,10 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 
 ### Ingress Controller Sampling
 
-To control the volume of Ingress Controller traces that are sent to Datadog, specify a sampling rule that matches all traces. The `sample_rate` configured in the rule will determine the proportion of traces that are sampled.
+To control the volume of Ingress Controller traces that are sent to Datadog,
+specify a sampling rule that matches all traces. The `sample_rate` configured
+in the rule will determine the proportion of traces that are sampled. If no
+rules are specified, then sampling defaults to 100%.
 
 Sampling rules are specified via the `DD_TRACE_SAMPLING_RULES` environment
 variable. To define sampling rules in the Ingress Controller, two pieces of
@@ -493,8 +496,6 @@ env:
 - name: DD_TRACE_SAMPLING_RULES
   value: '[]'
 ```
-
-If no rules are specified, then sampling defaults to 100%.
 
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
