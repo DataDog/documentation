@@ -8,6 +8,9 @@ further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
   text: "Datadog Events API"
+- link: "/events/guides/recommended_event_tags/"
+  tag: "Documentation"
+  text: "Best Practices for Tagging Events"
 ---
 
 {{< img src="events/events-overview.png" alt="Events explorer" >}}
