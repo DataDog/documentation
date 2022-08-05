@@ -144,7 +144,7 @@ Consider a composite monitor that uses two individual monitors: `A` and `B`. The
 
 A composite monitor and its individual monitors are independent of each other.
 
-**Downtime on composite monitor**
+#### Downtime on a composite monitor
 
 Consider a composite monitor `C` that consists of two individual monitors with the condition `A || B`. Creating a downtime on the composite monitor will suppress notifications from `C` only.
 
