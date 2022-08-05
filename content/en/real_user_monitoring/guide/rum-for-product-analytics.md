@@ -206,9 +206,7 @@ The side panel contains detailed information about the load time of an individua
 
 ## Identify your most frustrated users
 
-[Frustration Signals][10] surface moments where users express frustrated behavior (a rage click, dead click, or error click) and you can address the most pressing issues that users are facing. 
-
-When examining user behavior, you want to comprehend the areas of your website where users are getting stuck. 
+[Frustration Signals][10] surface moments where users express frustrated behavior (a rage click, dead click, or error click) so you can address the most pressing issues that users are facing. Examine user behavior to identify the areas of your website where users are getting stuck. 
 
 1. In the [RUM Explorer][5], select **Views** from the dropdown menu.
 2. Enter `@view.frustration.count:>=2` in the search query and select the **Top List** visualization type.
@@ -344,7 +342,7 @@ With Session Replay, you can identify what parts of your product are confusing t
 
 ## Track usage patterns in powerpacks
 
-[Powerpacks][12] are templated groups of widgets for common monitoring patterns and product analytics. 
+[Powerpacks][12] are templated groups of dashboard widgets for common monitoring patterns and product analytics. 
 
 Use the out-of-the-box RUM Feature Usage powerpack to better understand different traffic patterns for a specific action in your application.
 
