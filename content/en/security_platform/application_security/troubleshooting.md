@@ -11,7 +11,7 @@ further_reading:
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
-- link: "/security_platform/guide/how-appsec-works/"
+- link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Monitoring Works in Datadog"
 ---
@@ -404,7 +404,7 @@ If you don’t see ASM threat information in the [Trace and Signals Explorer][2]
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-If you don’t see ASM threat information in the [Trace and Signals Explorer][2] for your Python application, check that ASM is running and that your tracer is working.
+If you don’t see ASM threat information in the [Trace and Signals Explorer][1] for your Python application, check that ASM is running and that your tracer is working.
 
 1. Set your application's log level to `DEBUG` to confirm that ASM is running:
 
@@ -423,13 +423,11 @@ If you don’t see ASM threat information in the [Trace and Signals Explorer][2]
 
 2. Is the tracer working? Can you see relevant traces on the APM dashboard?
 
-   ASM relies on the tracer. If you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][5].
+   ASM relies on the tracer. If you don’t see traces, then the tracer might not be working. See [APM Troubleshooting][2].
 
 
-[2]: https://app.datadoghq.com/security/appsec/
-[3]: /tracing/troubleshooting/tracer_startup_logs/
-[4]: /security_platform/application_security/getting_started/nodejs/?tab=dockercli
-[5]: /tracing/troubleshooting/
+[1]: https://app.datadoghq.com/security/appsec/
+[2]: /tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 

@@ -1,6 +1,18 @@
 ---
 title: How Application Security Monitoring Works in Datadog
-kind: guide
+kind: documentation
+aliases:
+  - /security_platform/guide/how-appsec-works/
+further_reading:
+- link: "/security_platform/application_security/setup_and_configure/#compatibility"
+  tag: "Documentation"
+  text: "Learn more about language and framework compatibility"
+- link: "https://www.datadoghq.com/blog/datadog-application-security/"
+  tag: "Blog"
+  text: "Introducing Datadog Application Security"
+- link: "/security_platform/application_security/getting_started/"
+  tag: "Documentation"
+  text: "Get started with Application Security Monitoring"
 ---
 
 ## Overview
@@ -11,17 +23,17 @@ APM records information about each HTTP request, referred to as traces. Datadog 
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. For ASM to be effective, it must be embedded in the application to get access to the data. Datadog ASM leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal to noise ratio, lowering false positives.
 
-### Compatibility
+## Compatibility
 
 For Datadog ASM to be compatible with your Datadog configuration, you must have APM enabled, and [send traces to Datadog][1]. ASM uses the same libraries used by APM, so you don't need to deploy and maintain another library. Steps to enable Datadog ASM are specific to runtime language. Check to see if your language is supported in the [ASM prerequisites][2].
 
-### Performance
+## Performance
 
 Datadog ASM uses processes already contained in the Agent and APM, so there are negligible performance implications when using it. When APM is enabled, the Datadog Library generates distributed traces. Datadog ASM flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
 
-{{< img src="security_platform/guide/How_Application_Security_Works_d1.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
+{{< img src="security_platform/application_security/How_Application_Security_Works_d1.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
 
-### Data privacy
+## Data privacy
 
 There are multiple methods used to avoid your sensitive information being indexed. To take further action, you can set up [custom and static scrubbers][3], and use [exclusion filters][4].
 
@@ -53,9 +65,13 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 * Cross-Site Scripting (XSS)
 * Sever-side Request Forgery (SSRF)
 
-### How Datadog ASM protects against Log4Shell
+## How Datadog ASM protects against Log4Shell
 
  Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][8], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
 [2]: /security_platform/application_security/getting_started/#prerequisites

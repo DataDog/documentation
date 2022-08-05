@@ -47,11 +47,11 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 4. Configure the Datadog site
 
-    Specify the [Datadog site][2] where the telemetry should be sent to. The default is `datadoghq.com`.
-
     ```sh
-    export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu or ddog-gov.com
+    export DATADOG_SITE="<DATADOG_SITE>"
     ```
+
+    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
 
 5. Configure the Datadog API key
 
@@ -81,12 +81,11 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
     - Replace `<aws_region>` with the AWS region name.
 
-    Additional parameters can be found in the [CLI documentation][3].
+    Additional parameters can be found in the [CLI documentation][2].
 
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -110,15 +109,14 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
 
     To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][3] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
 
     For more information and additional settings, see the [plugin documentation][1].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
-[3]: https://docs.datadoghq.com/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -154,8 +152,8 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
     ```
 
     To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][4] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][5] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found in the [macro documentation][1].
 
@@ -163,8 +161,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://docs.datadoghq.com/getting_started/site/
-[5]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -199,14 +196,13 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     ```
 
     To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with your [Datadog site][2] to send the telemetry to.
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
