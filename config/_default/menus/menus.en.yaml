@@ -1906,8 +1906,8 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_php
     weight: 107
-  - name: Linux
-    url: profiler/enabling/linux/
+  - name: C/C++/Rust
+    url: profiler/enabling/ddprof/
     parent: profiler_enabling
     identifier: profiler_enabling_linux
     weight: 108
