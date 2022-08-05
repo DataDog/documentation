@@ -37,7 +37,7 @@ const settings = {
         'relpermalink',
         'sectionHeader',
         'type, tags',
-        'unordered(description), unordered(content)'
+        'unordered(description, content)'
     ],
     ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
     customRanking: ['desc(rank)'],
