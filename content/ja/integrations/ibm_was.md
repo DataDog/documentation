@@ -1,68 +1,43 @@
 ---
-app_id: ibm-was
-app_uuid: c4c79ae5-b702-415c-bc76-a7b71efd43d8
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     IBM_WAS: assets/dashboards/overview.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: ibm_was.can_connect
-      metadata_path: metadata.csv
-      prefix: ibm_was.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: IBM WAS
   logs:
     source: ibm_was
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
+  metrics_metadata: metadata.csv
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
 - web
 - OS & システム
 - ログの収集
 - オートディスカバリー
+creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
-display_on_public_website: true
+display_name: IBM WAS
 draft: false
 git_integration_title: ibm_was
+guid: ba177bb7-1bad-4ea8-ac59-1bc8a016f4f7
 integration_id: ibm-was
 integration_title: IBM WAS
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-manifest_version: 2.0.0
+maintainer: help@datadoghq.com
+manifest_version: 1.0.0
+metric_prefix: ibm_was.
+metric_to_check: ibm_was.can_connect
 name: ibm_was
-oauth: {}
-public_title: IBM WAS
+public_title: IBM WAS インテグレーション
 short_description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
+support: コア
 supported_os:
 - linux
-- macos
+- mac_os
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
-  - Category::OS & System
-  - Category::Log Collection
-  - Category::Autodiscovery
-  configuration: README.md#Setup
-  description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: IBM WAS
 ---
 
 

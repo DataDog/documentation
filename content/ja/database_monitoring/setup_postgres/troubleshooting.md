@@ -142,21 +142,14 @@ SELECT DISTINCT address FROM customers WHERE id = ANY(ARRAY[ ?
 Agent が実行計画を収集できるように、**すべてのデータベース**に関数を作成します。
 
 ```SQL
-CREATE OR REPLACE FUNCTION datadog.explain_statement(
-   l_query TEXT,
-   OUT explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement (
+   l_query text,
+   out explain JSON
 )
 RETURNS SETOF JSON AS
 $$
-DECLARE
-curs REFCURSOR;
-plan JSON;
-
 BEGIN
-   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
-   FETCH curs INTO plan;
-   CLOSE curs;
-   RETURN QUERY SELECT plan;
+   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
 END;
 $$
 LANGUAGE 'plpgsql'

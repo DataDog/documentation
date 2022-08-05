@@ -1,71 +1,48 @@
 ---
-app_id: istio
-app_uuid: de5b5443-5038-46cf-a052-0484348776d6
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Istio Overview 1.5: assets/dashboards/istio_1_5_overview.json
     Istio Overview 1.5 (OpenMetrics): assets/dashboards/istio_1_5_openmetrics_overview.json
     Istio base dashboard: assets/dashboards/istio_overview.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check:
-      - istio.mixer.process.cpu_seconds_total
-      - istio.mesh.request.count
-      - istio.galley.endpoint_no_pod
-      metadata_path: metadata.csv
-      prefix: istio.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Istio
   logs:
     source: istio
+  metrics_metadata: metadata.csv
   monitors:
     Failed sidecar injections: assets/monitors/failed_sidecar_injection.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+  service_checks: assets/service_checks.json
 categories:
 - data store
 - log collection
+creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/istio/README.md
-display_on_public_website: true
+description: istio インテグレーションで、istio サービスメッシュおよびミキサーからデータを収集。
+display_name: Istio
 draft: false
 git_integration_title: istio
+guid: d8bd53c0-0884-4357-9517-11858bf6aa9d
 integration_id: istio
 integration_title: Istio
 integration_version: 4.2.1
 is_public: true
 kind: インテグレーション
-manifest_version: 2.0.0
+maintainer: help@datadoghq.com
+manifest_version: 1.0.0
+metric_prefix: istio.
+metric_to_check:
+- istio.mixer.process.cpu_seconds_total
+- istio.mesh.request.count
+- istio.galley.endpoint_no_pod
 name: istio
-oauth: {}
-public_title: Istio
+public_title: Istio インテグレーション
 short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
+support: コア
 supported_os:
 - linux
-- macos
+- mac_os
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::データストア
-  - Category::ログの収集
-  configuration: README.md#Setup
-  description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Istio
 ---
 
 

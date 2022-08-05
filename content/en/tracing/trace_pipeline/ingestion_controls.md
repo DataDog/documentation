@@ -66,11 +66,11 @@ Infrastructure
 : Hosts, containers, and functions on which the service is running.
 
 Service status
-: Shows `Limited Resource` when some spans are dropped due to the Datadog Agent reaching CPU or RAM limits set [in its configuration][9], `Legacy Setup` when some spans are ingested through the legacy [App Analytics mechanism][6], and `OK` the rest of the time.
+: Shows `Limited Resource` when some spans are dropped due to the Datadog Agent reaching CPU or RAM limits, `Legacy Setup` when some spans are ingested through the legacy [App Analytics mechanism][6], and `OK` the rest of the time.
 
 Filter the page by environment, configuration, and status to view services for which you need to take an action. To reduce the global ingestion volume, sort the table by the `Downstream Bytes/s` column to view services responsible for the largest share of your ingestion.
 
-**Note**: The table is powered by the [usage metrics][10] `datadog.estimated_usage.apm.ingested_spans` and `datadog.estimated_usage.apm.ingested_bytes`. These metrics are tagged by `service`, `env` and `ingestion_reason`.
+**Note**: The table is powered by the [usage metrics][9] `datadog.estimated_usage.apm.ingested_spans` and `datadog.estimated_usage.apm.ingested_bytes`. These metrics are tagged by `service`, `env` and `ingestion_reason`.
 
 ### Traffic breakdown
 
@@ -96,11 +96,11 @@ Click on any service row to view the Service Ingestion Summary, a detailed view 
 
 {{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_summary.png" style="width:100%;" alt="Service Ingestion Summary" >}}
 
-Explore the **Ingestion reasons breakdown** to see which mechanisms are responsible for your service ingestion. Each ingestion reason relates to one specific [ingestion mechanism][11]. After changing your service ingestion configuration, you can observe the increase or decrease of ingested bytes and spans in this timeseries graph based on the past hour of ingested data.
+Explore the **Ingestion reasons breakdown** to see which mechanisms are responsible for your service ingestion. Each ingestion reason relates to one specific [ingestion mechanism][10]. After changing your service ingestion configuration, you can observe the increase or decrease of ingested bytes and spans in this timeseries graph based on the past hour of ingested data.
 
 If most of your service ingestion is due to decisions taken by upstream services, investigate the detail of the top upstream decision makers. For example, if your service is non-root, (meaning that it **never decides** to sample traces), observe all upstream services responsible for your non-root service ingestion. Configure upstream root services to reduce your overall ingestion volume.
 
-For further investigations, use the [APM Trace - Estimated Usage Dashboard][12], which provides global ingestion information as well as breakdown graphs by `service`, `env` and `ingestion reason`.
+For further investigations, use the [APM Trace - Estimated Usage Dashboard][11], which provides global ingestion information as well as breakdown graphs by `service`, `env` and `ingestion reason`.
 
 ### Configure the service ingestion rate
 
@@ -129,7 +129,6 @@ To specify that a specific percentage of a service's traffic should be sent, add
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#single-spans-app-analytics
 [7]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
-[9]: /tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
-[10]: /tracing/trace_pipeline/metrics
-[11]: /tracing/trace_pipeline/ingestion_mechanisms/
-[12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
+[9]: /tracing/trace_pipeline/metrics
+[10]: /tracing/trace_pipeline/ingestion_mechanisms/
+[11]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage

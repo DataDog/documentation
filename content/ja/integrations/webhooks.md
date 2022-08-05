@@ -1,6 +1,7 @@
 ---
 categories:
 - notification
+ddtype: crawler
 dependencies: []
 description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
 doc_link: https://docs.datadoghq.com/integrations/webhooks/
@@ -71,8 +72,7 @@ $ALERT_STATUS
 **例**: `system.load.1 over host:my-host was > 0 at least once during the last 1m`
 
 $ALERT_TITLE
-: アラートのタイトル<br />
-**例**: `error`、`warning`、`success`、`info`
+: アラートのタイトル。
 
 $ALERT_TRANSITION
 : アラート通知のタイプ。<br />
@@ -242,10 +242,6 @@ $SYNTHETICS_SUMMARY
 $TAGS
 : イベントタグのカンマ区切りリスト。<br />
 **例**: `monitor, name:myService, role:computing-node`
-
-$TAGS[key]
-: `key` タグの値。もし `key` タグがない場合、あるいは `key` タグに値がない場合、この式は空の文字列に評価されます。
-**例**: もし `$TAGS` が `role:computing-node` を含むなら、`$TAGS[role]` は `computing-node` と評価されます。
 
 $TEXT_ONLY_MSG
 : マークダウン書式設定なしのイベントのテキスト。

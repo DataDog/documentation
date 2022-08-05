@@ -816,20 +816,15 @@ main:
     parent: dashboards
     weight: 8
     identifier: dashboards_temp_variables
-  - name: Reporting
-    url: dashboards/reporting/
-    parent: dashboards
-    weight: 9
-    identifier: dashboards_reporting
   - name: Sharing
     url: dashboards/sharing/
     parent: dashboards
-    weight: 10
+    weight: 9
   - name: Graphing with JSON
     url: dashboards/graphing_json/
     parent: dashboards
     identifier: graphing_json
-    weight: 11
+    weight: 10
   - name: Widget JSON schema
     url: dashboards/graphing_json/widget_json/
     parent: graphing_json
@@ -842,7 +837,7 @@ main:
     url: dashboards/guide/
     parent: dashboards
     identifier: guides
-    weight: 12
+    weight: 11
   - name: Mobile Application
     url: mobile/
     identifier: mobile
@@ -2842,26 +2837,31 @@ main:
     parent: rum_ios
     identifier: rum_ios_data_collected
     weight: 301
+  - name: Crash Reporting
+    url: real_user_monitoring/ios/crash_reporting/
+    parent: rum_ios
+    identifier: rum_ios_crash_reporting
+    weight: 302
   - name: Advanced Configuration
     url: real_user_monitoring/ios/advanced_configuration/
     parent: rum_ios
     identifier: rum_ios_advanced
-    weight: 302
+    weight: 303
   - name: Mobile Vitals
     url: real_user_monitoring/ios/mobile_vitals/
     parent: rum_ios
     identifier: rum_ios_mobile_vitals
-    weight: 303
+    weight: 304
   - name: Web View Tracking
     url: real_user_monitoring/ios/web_view_tracking/
     parent: rum_ios
     identifier: rum_ios_web_view_tracking
-    weight: 304
+    weight: 305
   - name: Troubleshooting
     url: real_user_monitoring/ios/troubleshooting/
     parent: rum_ios
     identifier: rum_troubleshooting_ios
-    weight: 305
+    weight: 306
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
@@ -3011,27 +3011,22 @@ main:
     url: real_user_monitoring/error_tracking/explorer/
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 1201
+    weight: 2201
   - name: Track Browser Errors
-    url: real_user_monitoring/error_tracking/browser/
+    url: real_user_monitoring/error_tracking/browser_errors/
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
-    weight: 1202
+    weight: 2202
   - name: Track Android Errors
     url: real_user_monitoring/error_tracking/android/
     parent: rum_error_tracking
     identifier: rum_error_tracking_android
-    weight: 1203
+    weight: 2203
   - name: Track iOS Errors
-    url: real_user_monitoring/error_tracking/ios/
+    url: real_user_monitoring/ios/crash_reporting/
     parent: rum_error_tracking
     identifier: rum_error_tracking_ios
-    weight: 1204
-  - name: Track React Native Errors
-    url: real_user_monitoring/error_tracking/reactnative/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_reactnative
-    weight: 1205
+    weight: 2204
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
@@ -3338,10 +3333,6 @@ main:
     weight: 8
   - name: Multi-org Accounts
     url: account_management/multi_organization/
-    parent: account_management
-    weight: 8
-  - name: Guides
-    url: account_management/guide/
     parent: account_management
     weight: 9
   - name: Data Security
@@ -6292,19 +6283,6 @@ api:
         - GetHourlyUsage
       unstable: []
       order: 1
-  - name: Get estimated cost across your account
-    url: '#get-estimated-cost-across-your-account'
-    identifier: usage-metering-get-estimated-cost-across-your-account
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetEstimatedCostByOrg
-      unstable:
-        - v2
-      order: 39
   - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
     identifier: usage-metering-get-cost-across-multi-org-account

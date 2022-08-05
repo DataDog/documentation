@@ -1,24 +1,13 @@
 ---
-app_id: iis
-app_uuid: 4620121f-b5ca-4b9c-aca2-c69bf18bc362
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     IIS-Overview: assets/dashboards/iis_overview.json
     iis: assets/dashboards/iis_dashboard.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: iis.uptime
-      metadata_path: metadata.csv
-      prefix: iis.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: IIS
   logs:
     source: iis
+  metrics_metadata: metadata.csv
   monitors:
     '[IIS] Anomalous amount of requests for site: {{site.name}}': assets/monitors/req.json
     '[IIS] Increase of locked error per second for site: {{site.name}}': assets/monitors/lock.json
@@ -29,45 +18,34 @@ assets:
     bot_errors: assets/saved_views/bot_errors.json
     response_time_overview: assets/saved_views/response_time.json
     status_code_overview: assets/saved_views/status_code_overview.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
+  service_checks: assets/service_checks.json
 categories:
 - web
 - ログの収集
 - オートディスカバリー
+creates_events: false
+ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/iis/README.md
-display_on_public_website: true
+display_name: IIS
 draft: false
 git_integration_title: iis
+guid: 6ad932f0-8816-467a-8860-72af44d4f3ba
 integration_id: iis
 integration_title: IIS
-integration_version: 2.17.0
+integration_version: 2.16.2
 is_public: true
 kind: インテグレーション
-manifest_version: 2.0.0
+maintainer: help@datadoghq.com
+manifest_version: 1.0.0
+metric_prefix: iis.
+metric_to_check: iis.uptime
 name: iis
-oauth: {}
-public_title: IIS
+public_title: Datadog-IIS インテグレーション
 short_description: 全体またはサイトごとのメトリクスを追跡し、各サイトの稼働/停止状態を監視。
+support: コア
 supported_os:
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Windows
-  - Category::Web
-  - Category::Log Collection
-  - Category::Autodiscovery
-  configuration: README.md#Setup
-  description: 全体またはサイトごとのメトリクスを追跡し、各サイトの稼働/停止状態を監視。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: IIS
 ---
 
 
