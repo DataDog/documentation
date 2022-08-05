@@ -114,7 +114,7 @@ NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 
 ### Adding custom tags to tests
 
-You can add custom tags to your test by grabbing the current active span:
+You can add custom tags to your tests by using the current active span:
 
 ```javascript
   it('sum function can sum', () => {
@@ -126,13 +126,13 @@ You can add custom tags to your test by grabbing the current active span:
   })
 ```
 
-If you want to create filters or group bys for these tags you need to create facets for them. For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
+To create filters or group bys for these tags, you need to create facets for them. For more information about custom instrumentation read the [NodeJS Custom Instrumentation][1] documentation.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
-Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
 {{< code-block lang="bash" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
@@ -166,7 +166,7 @@ You can add custom tags to your test by grabbing the current active span:
   });
 ```
 
-If you want to create filters or group bys for these tags you need to create facets for them. For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
+To create filters or group bys for these tags, you must create facets for them. For more information about custom instrumentation, read the [NodeJS Custom Instrumentation][1] documentation.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
@@ -268,7 +268,7 @@ it('renders a hello world', () => {
 })
 ```
 
-If you want to create filters or group bys for these tags you need to create facets for them. For more information about custom instrumentation you can read [NodeJS Custom Instrumentation][1].
+To create filters or group bys for these tags, you must create facets for them. For more information about custom instrumentation, read the [NodeJS Custom Instrumentation][1] documentation.
 
 ### Cypress - RUM integration
 
