@@ -154,7 +154,7 @@ If monitor `A` or monitor `B` notify services or teams in their respective monit
 
 Creating a downtime on an individual monitor `A`, which is used within a composite monitor, does not mute the composite monitor.
 
-For example, a downtime mutes monitor `A`, specifically its group `env:staging`. Once the group `env:staging` reaches an alert-worthy state, the notification coming from individual monitor is suppressed while the composite monitor sends an alert notification.
+For example, a downtime mutes monitor `A`, specifically its group `env:staging`. Once the group `env:staging` reaches an alert-worthy state, the notification coming from the individual monitor is suppressed while the composite monitor sends an alert notification.
 
 ### Number of alerts
 
