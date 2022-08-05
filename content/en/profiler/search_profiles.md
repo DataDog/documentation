@@ -193,7 +193,7 @@ Heap Live Size
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Once enabled, the following profile type is collected:
+Once enabled, the following profile types are collected:
 
 Wall Time
 : Shows the elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
