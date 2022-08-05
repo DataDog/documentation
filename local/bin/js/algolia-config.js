@@ -32,11 +32,17 @@ replicas[`${ALGOLIA_INDEX_NAME}_API`] = {
 };
 
 const settings = {
-    searchableAttributes: ['title', 'relpermalink', 'type, tags', 'unordered(description), unordered(content)'],
+    searchableAttributes: [
+        'title',
+        'relpermalink',
+        'sectionHeader',
+        'type, tags',
+        'unordered(description), unordered(content)'
+    ],
     ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
     customRanking: ['desc(rank)'],
     replicas: Object.keys(replicas),
-    attributesToHighlight: ['title', 'description', 'content', 'type', 'tags'],
+    attributesToHighlight: ['title', 'sectionHeader', 'description', 'content', 'type', 'tags'],
     indexLanguages: ['ja', 'en', 'fr'],
     queryLanguages: ['ja', 'en', 'fr'],
     attributeForDistinct: 'relpermalink',

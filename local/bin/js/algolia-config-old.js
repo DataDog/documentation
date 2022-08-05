@@ -30,46 +30,32 @@ if (ALGOLIA_APP_ID === '' || ALGOLIA_INDEX_NAME === '' || ALGOLIA_ADMIN_KEY === 
 const replicas = {};
 replicas[`${ALGOLIA_INDEX_NAME}_api`] = {
     attributesToIndex: [
-      "unordered(hierarchy_radio_camel.lvl0)",
-      "unordered(hierarchy_radio.lvl0)",
-      "unordered(hierarchy_radio_camel.lvl1)",
-      "unordered(hierarchy_radio.lvl1)",
-      "unordered(hierarchy_radio_camel.lvl2)",
-      "unordered(hierarchy_radio.lvl2)",
-      "unordered(hierarchy_radio_camel.lvl3)",
-      "unordered(hierarchy_radio.lvl3)",
-      "unordered(hierarchy_radio_camel.lvl4)",
-      "unordered(hierarchy_radio.lvl4)",
-      "unordered(hierarchy_camel.lvl0)",
-      "unordered(hierarchy.lvl0)",
-      "unordered(hierarchy_camel.lvl1)",
-      "unordered(hierarchy.lvl1)",
-      "unordered(hierarchy_camel.lvl2)",
-      "unordered(hierarchy.lvl2)",
-      "unordered(hierarchy_camel.lvl3)",
-      "unordered(hierarchy.lvl3)",
-      "unordered(hierarchy_camel.lvl4)",
-      "unordered(hierarchy.lvl4)",
-      "content",
-      "unordered(tags)"
+        'unordered(hierarchy_radio_camel.lvl0)',
+        'unordered(hierarchy_radio.lvl0)',
+        'unordered(hierarchy_radio_camel.lvl1)',
+        'unordered(hierarchy_radio.lvl1)',
+        'unordered(hierarchy_radio_camel.lvl2)',
+        'unordered(hierarchy_radio.lvl2)',
+        'unordered(hierarchy_radio_camel.lvl3)',
+        'unordered(hierarchy_radio.lvl3)',
+        'unordered(hierarchy_radio_camel.lvl4)',
+        'unordered(hierarchy_radio.lvl4)',
+        'unordered(hierarchy_camel.lvl0)',
+        'unordered(hierarchy.lvl0)',
+        'unordered(hierarchy_camel.lvl1)',
+        'unordered(hierarchy.lvl1)',
+        'unordered(hierarchy_camel.lvl2)',
+        'unordered(hierarchy.lvl2)',
+        'unordered(hierarchy_camel.lvl3)',
+        'unordered(hierarchy.lvl3)',
+        'unordered(hierarchy_camel.lvl4)',
+        'unordered(hierarchy.lvl4)',
+        'content',
+        'unordered(tags)'
     ],
-    attributesToRetrieve: [
-      "anchor",
-      "content",
-      "hierarchy",
-      "tags",
-      "url"
-    ],
-    attributesForFaceting: [
-      "language",
-      "searchable(tags)"
-    ],
-    customRanking: [
-      "asc(tags)",
-      "desc(weight.page_rank)",
-      "desc(weight.level)",
-      "asc(weight.position)"
-    ]
+    attributesToRetrieve: ['anchor', 'content', 'hierarchy', 'tags', 'url'],
+    attributesForFaceting: ['language', 'searchable(tags)'],
+    customRanking: ['asc(tags)', 'desc(weight.page_rank)', 'desc(weight.level)', 'asc(weight.position)']
 };
 
 const settings = { replicas: Object.keys(replicas) };
