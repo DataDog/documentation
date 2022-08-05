@@ -24,7 +24,7 @@ further_reading:
 
 [RUM & Session Replay][1] allows you to monitor trends in consumer behavior and uncover answers to product usage questions about your web and mobile applications.
 
-This guide discusses several use cases to enrich your RUM & Session Replay data and provides example queries you can use to answer questions about product analytics.
+This guide discusses several use cases to enrich your RUM & Session Replay data and answer questions related to product analytics.
 
 ## Setup
 
@@ -42,112 +42,9 @@ This example displays the top actions on Shopist's `/cart` page.
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
 
-Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON**: 
-
-{{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
-{
-    "viz": "toplist",
-    "requests": [
-        {
-            "response_format": "scalar",
-            "queries": [
-                {
-                    "data_source": "rum",
-                    "name": "query1",
-                    "search": {
-                        "query": "@type:action @view.name:\"/cart\""
-                    },
-                    "indexes": [
-                        "*"
-                    ],
-                    "compute": {
-                        "aggregation": "count"
-                    },
-                    "group_by": [
-                        {
-                            "facet": "@action.name",
-                            "limit": 10,
-                            "sort": {
-                                "aggregation": "count",
-                                "order": "desc"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "formulas": [
-                {
-                    "formula": "query1",
-                    "limit": {
-                        "count": 10,
-                        "order": "desc"
-                    }
-                }
-            ]
-        }
-    ]
-}
-{{< /code-block >}}
-
 To investigate which users are clicking on these buttons, modify the search query by selecting the **Table** visualization type and clicking **+** to add another `group` field for `@user.name`.
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
-
-Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON**:
-
-{{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
-{
-    "viz": "query_table",
-    "requests": [
-        {
-            "response_format": "scalar",
-            "queries": [
-                {
-                    "data_source": "rum",
-                    "name": "query1",
-                    "indexes": [
-                        "*"
-                    ],
-                    "compute": {
-                        "aggregation": "count"
-                    },
-                    "search": {
-                        "query": "@type:action @view.name:\"/cart\""
-                    },
-                    "group_by": [
-                        {
-                            "facet": "@action.name",
-                            "limit": 5,
-                            "sort": {
-                                "aggregation": "count",
-                                "order": "desc"
-                            }
-                        },
-                        {
-                            "facet": "@usr.name",
-                            "limit": 5,
-                            "sort": {
-                                "aggregation": "count",
-                                "order": "desc"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "formulas": [
-                {
-                    "formula": "query1",
-                    "limit": {
-                        "count": 25,
-                        "order": "desc"
-                    }
-                }
-            ]
-        }
-    ],
-    "has_search_bar": "auto"
-}
-{{< /code-block >}}
 
 ## Analyze the conversion rate of core workflows
 
@@ -167,37 +64,6 @@ Once you have created a funnel based on views or actions on your website, you ca
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_funnel_export.png" alt="Export a funnel visualization in the RUM Explorer" style="width:90%;" >}}
 
-Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON****:
-
-{{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
-{
-    "viz": "funnel",
-    "requests": [
-        {
-            "query": {
-                "query_string": "@type:session",
-                "data_source": "rum",
-                "steps": [
-                    {
-                        "facet": "@view.name",
-                        "value": "/"
-                    },
-                    {
-                        "facet": "@view.name",
-                        "value": "/department/chairs"
-                    },
-                    {
-                        "facet": "@view.name",
-                        "value": "/cart"
-                    }
-                ]
-            },
-            "request_type": "funnel"
-        }
-    ]
-}
-{{< /code-block >}}
-
 ### View funnel analysis
 
 The side panel contains detailed information about the load time of an individual view, the conversion and drop off rates based on the country, device type, browser, and version, and outstanding [issues][9] that occurred on the page.
@@ -216,53 +82,6 @@ This query searches for top pages where at least two frustration signals have oc
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query.png" alt="Search query for views containing more than two frustration signals in the RUM Explorer" style="width:90%;" >}}
 
-Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON**:
-
-{{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
-{
-    "viz": "toplist",
-    "requests": [
-        {
-            "response_format": "scalar",
-            "queries": [
-                {
-                    "data_source": "rum",
-                    "name": "query1",
-                    "search": {
-                        "query": "@type:view @view.frustration.count:>=2"
-                    },
-                    "indexes": [
-                        "*"
-                    ],
-                    "compute": {
-                        "aggregation": "count"
-                    },
-                    "group_by": [
-                        {
-                            "facet": "@view.name",
-                            "limit": 10,
-                            "sort": {
-                                "aggregation": "count",
-                                "order": "desc"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "formulas": [
-                {
-                    "formula": "query1",
-                    "limit": {
-                        "count": 10,
-                        "order": "desc"
-                    }
-                }
-            ]
-        }
-    ]
-}
-{{< /code-block >}}
-
 In addition to analyzing top views, you also want to investigate the buttons and elements that users are expressing frustration with. 
 
 1. Select **Actions** from the dropdown menu.
@@ -273,62 +92,6 @@ In addition to analyzing top views, you also want to investigate the buttons and
 This query lists anytime a user expresses any type of frustration signal and counts the unique actions where frustration occurred.
 
 {{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search.png" alt="Search query that lists and counts actions where a user expressed three types of frustration signals on Shopist's Cart page" style="width:90%;">}}
-
-Import this into a dashboard by copying the code snippet and selecting **Import dashboard JSON**:
-
-{{< code-block lang="json" filename="json" disable_copy="false" collapsible="true" >}}
-{
-    "viz": "query_table",
-    "requests": [
-        {
-            "response_format": "scalar",
-            "queries": [
-                {
-                    "data_source": "rum",
-                    "name": "query1",
-                    "indexes": [
-                        "*"
-                    ],
-                    "compute": {
-                        "aggregation": "count"
-                    },
-                    "search": {
-                        "query": "@type:action @action.frustration.type:(error_click OR dead_click OR rage_click)"
-                    },
-                    "group_by": [
-                        {
-                            "facet": "@action.name",
-                            "limit": 10,
-                            "sort": {
-                                "aggregation": "count",
-                                "order": "desc"
-                            }
-                        },
-                        {
-                            "facet": "@action.frustration.type",
-                            "limit": 10,
-                            "sort": {
-                                "aggregation": "count",
-                                "order": "desc"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "formulas": [
-                {
-                    "formula": "query1",
-                    "limit": {
-                        "count": 100,
-                        "order": "desc"
-                    }
-                }
-            ]
-        }
-    ],
-    "has_search_bar": "auto"
-}
-{{< /code-block >}}
 
 ## Watch the user experience in Session Replay
 
