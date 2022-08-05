@@ -9,7 +9,7 @@
         {{ $title := $page.Params.integration_title | default $page.Title }}
         {{ $sectionHeader := "" }}
         {{ $sectionContent := "" }}
-        {{ $content := $page.Plain | truncate 2000 }}
+        {{ $content := htmlUnescape $page.Plain | truncate 10000 }}
         {{ $tags := slice }}
         {{ $rank := 0 }}
 
