@@ -384,7 +384,7 @@ Complete examples:
 
 After completing this configuration, HTTP requests to Nginx will initiate and propagate Datadog traces, and will appear in the APM UI.
 
-#### Nginx Sampling
+### Nginx Sampling
 
 To control the volume of Nginx traces that are sent to Datadog, specify a sampling rate in the config file `dd-config.json` by setting the `sample_rate` parameter to a value between `0.0` (0%) and `1.0` (100%):
 
@@ -417,7 +417,7 @@ For example, to send 50% of the traces for the service named `nginx`, up to `50`
 
 Read more about sampling configuration options of the [dd-opentracing-cpp][8] library in the [respository documentation][9].
 
-#### Nginx and FastCGI
+### Nginx and FastCGI
 
 When the location is serving a FastCGI backend instead of HTTP, the `location` block should use `opentracing_fastcgi_propagate_context` instead of `opentracing_propagate_context`.
 
@@ -476,7 +476,7 @@ Sampling rules are specified via the `DD_TRACE_SAMPLING_RULES` environment
 variable. To define sampling rules in the Ingress Controller, two pieces of
 configuration must be modified.
 
-First, instruct Nginx to forward the environment variable to its worker processes. Add the following [main-snippet][12] to the `data` section of the Ingress Controller's `ConfigMap`:
+First, instruct Nginx to forward the environment variable to its worker processes. Add the following [main-snippet][11] to the `data` section of the Ingress Controller's `ConfigMap`:
 ```yaml
 data:
   main-snippet: "env DD_TRACE_SAMPLING_RULES;"
@@ -498,7 +498,7 @@ env:
 
 If no rules are specified, then sampling defaults to 100%.
 
-**Note**: The Kubernetes Nginx ingress controller uses [v1.2.1][11] of the `dd-opentracing-cpp` library).
+**Note**: The Kubernetes Nginx ingress controller uses [v1.2.1][12] of the `dd-opentracing-cpp` library).
 
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
@@ -510,8 +510,8 @@ If no rules are specified, then sampling defaults to 100%.
 [8]: https://github.com/DataDog/dd-opentracing-cpp/
 [9]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [10]: https://github.com/kubernetes/ingress-nginx
-[11]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
-[12]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
+[11]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
+[12]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
 {{% /tab %}}
 {{% tab "Istio" %}}
 
@@ -523,18 +523,16 @@ Datadog monitors every aspect of your Istio environment, so you can:
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][3].
 
-## Configuration
-
 Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
 
-### Datadog Agent installation
+## Datadog Agent installation
 
 1. [Install the Agent][4]
 2. [Make sure APM is enabled for your Agent][5].
 3. Uncomment the `hostPort` setting so that Istio sidecars can connect to the Agent and submit traces.
 
 
-### Istio configuration and installation
+## Istio configuration and installation
 
 To enable Datadog APM, a [custom Istio installation][6] is required to set two extra options when installing Istio.
 
@@ -569,7 +567,7 @@ template:
 For [CronJobs][8], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
 of the higher-level `CronJob`.
 
-### Istio Sampling
+## Istio Sampling
 
 To control the volume of Istio traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent.
 
@@ -594,7 +592,7 @@ spec:
         apm.datadoghq.com/env: '{"DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1", "DD_TRACE_SAMPLING_RULES": "[]"}'
 ```
 
-### Environment variables
+## Environment variables
 
 Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation. This is unique for deployments employing Istio sidecars and is set in addition to the [labels for unified service tagging][10].
 ```yaml
@@ -627,7 +625,7 @@ The available [environment variables][11] depend on the version of the C++ trace
 | v1.1.3 | v0.4.2 |
 
 
-### Deployment and service
+## Deployment and service
 
 If the Agents on your cluster are running as a deployment and service instead of the default DaemonSet, then an additional option is required to specify the DNS address and port of the Agent.
 For a service named `datadog-agent` in the `default` namespace, that address would be `datadog-agent.default.svc.cluster.local:8126`.
