@@ -75,7 +75,7 @@ Need help? Contact [Datadog support][11].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.fluentbit.io/manual/output/datadog
-[2]: /integrations/ecs_fargate/#fluent-bit-and-firelens
+[2]: /integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
 [3]: https://app.datadoghq.com/signup
 [4]: /account_management/api-app-keys/
 [5]: https://app.datadoghq.com/logs/activation
