@@ -73,7 +73,7 @@ Select **Save & Exit** to save your new SLO.
 
 {{< img src="monitors/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated"  >}}
 
-Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups—unless specific groups have been selected, in which case the SLO status is calculated with only those groups. If no specific groups are selected, the UI displays the status of the five groups with the worst statuses.
+Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups—unless specific groups have been selected, in which case the SLO status is calculated with only those groups. If no specific groups are selected, the UI displays the five groups with the worst statuses.
 
 Monitor-based SLOs treat the `WARN` state as `OK`. The definition of an SLO requires a binary distinction between good and bad behavior. SLO calculations treat `WARN` as good behavior since `WARN` is not severe enough to indicate bad behavior.
 
