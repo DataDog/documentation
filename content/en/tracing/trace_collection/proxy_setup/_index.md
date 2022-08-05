@@ -467,6 +467,8 @@ To set a different service name per Ingress using annotations:
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
 ### Ingress Controller Sampling
+The Nginx Ingress Controller for Kubernetes uses [v1.2.1][11] of the Datadog
+tracing library, `dd-opentracing-cpp`.
 
 To control the volume of Ingress Controller traces that are sent to Datadog,
 specify a sampling rule that matches all traces. The `sample_rate` configured
