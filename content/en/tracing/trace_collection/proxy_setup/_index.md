@@ -498,6 +498,8 @@ env:
 
 If no rules are specified, then sampling defaults to 100%.
 
+**Note**: The Kubernetes Nginx ingress controller uses [v1.2.1][11] of the `dd-opentracing-cpp` library).
+
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
 [3]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
