@@ -5,10 +5,13 @@ description: Learn about Synthetic monitors created with your Synthetic tests.
 further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
-  text: "Manage Monitors"
+  text: "Learn how to manage monitors"
+- link: "/monitors/guide/integrate-monitors-with-statuspage/"
+  tag: "Documentation"
+  text: "Learn how to integrate monitors with Statuspage"
 - link: "/synthetics/metrics/"
   tag: "Documentation"
-  text: "Synthetic Monitoring Metrics"
+  text: "Learn about Synthetic Monitoring metrics"
 ---
 
 ## Overview
@@ -41,17 +44,19 @@ To enable the alerting monitor to renotify, click the toggle left of `If this mo
 
 ## Integrate your Synthetic test monitor with Statuspage
 
-If you use [Atlassian Statuspage][6] for visibility into your applications' and services' uptime, you can update the status of your systems with  Synthetic test monitor notifications.
+If you use [Atlassian Statuspage][6] for visibility into your applications' and services' uptime, you can update the status of your systems with Synthetic test monitor notifications.
 
 {{< img src="synthetics/guide/synthetics_test_monitors/statuspage_monitor_setup.png" alt="Add a Statuspage email address and status to the monitor name in your Synthetic test" style="width:95%;">}}
 
 1. See the [Statuspage documentation][7] to generate a component-specific email address.
 2. Add the generated email address into your test's notification message. For example, `@custom-statuspage-email@notifications.statuspage.io`.
 3. Customize the monitor name to return `UP` or `DOWN` depending on the test state. For example, `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`.
-4. Fill out the monitor notification section and add a summary in the monitor name. For eaxmple, `Shopist Checkout Functionality`.
+4. Fill out the monitor notification section and add a summary in the monitor name. For example, `Shopist Checkout Functionality`.
 5. Once you have configured your monitor, click **Save & Exit**.
 
-## Further Reading
+For more information, see [Integrating Monitors with Statuspage][8].
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -62,3 +67,4 @@ If you use [Atlassian Statuspage][6] for visibility into your applications' and 
 [5]: /monitors/notify/#renotify
 [6]: https://support.atlassian.com/statuspage/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
+[8]: /monitors/guide/integrate-monitors-with-statuspage/
