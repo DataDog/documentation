@@ -146,7 +146,7 @@ A composite monitor and its individual monitors are independent of each other.
 
 **Downtime on composite monitor**
 
-Take a composite monitor that consists of two individual monitors with the condition `A || B`. Creating a downtime on the composite monitor will surppress notifications from said composite only.
+Consider a composite monitor `C` that consists of two individual monitors with the condition `A || B`. Creating a downtime on the composite monitor will suppress notifications from `C` only.
 
 In case monitor `A` or monitor `B` notify services or teams as well in their respective monitor configurations, the downtime on the composite alone does not mute any notifications caused by them. To achieve this, one or more downtimes on the underlying monitors are needed.
 
