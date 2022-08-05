@@ -150,7 +150,7 @@ Consider a composite monitor `C` that consists of two individual monitors with t
 
 If monitor `A` or monitor `B` notify services or teams in their respective monitor configurations, the downtime on the composite `C` does not mute any notifications caused by `A` or `B`. To mute notifications from `A` or `B`, set downtime on those monitors.
 
-**Downtime on an individual monitor used in a composite monitor**
+#### Downtime on an individual monitor used in a composite monitor
 
 Creating a downtime on an individual monitor `A`, which is used within a composite monitor, does not mute the composite monitor.
 
