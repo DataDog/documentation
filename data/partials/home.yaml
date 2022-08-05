@@ -55,7 +55,7 @@ nav_sections:
       - title: Continuous Profiler
         link: profiler/
         icon: profiling-1
-        desc: See and compare performance snapshots and find problem code
+        desc: Compare performance snapshots and investigate bottlenecks
       - title: Log Management
         link: logs/
         icon: log

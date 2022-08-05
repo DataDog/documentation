@@ -7,7 +7,7 @@ further_reading:
       text: 'APM Distributed Tracing'
     - link: '/profiler/enabling'
       tag: 'Documentation'
-      text: 'Enable Continuous Profiler for Your Application.'
+      text: 'Enable Continuous Profiler for Your Application'
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
