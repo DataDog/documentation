@@ -51,7 +51,7 @@
             {{ end }}
 
             {{ if ne $sectionHeader "" }}
-                /* Each section on a page gets indexed with own "sectionHeader" and  "content" */
+                {{- /* Each section on a page gets indexed with own "sectionHeader" and  "content" */ -}}
                 {{- $.Scratch.Add "algoliaindex" (
                 dict "objectID" $object_id 
                 "title" $title
@@ -69,7 +69,7 @@
         {{ end }}
         {{ end }}
 
-        /* Each page gets indexed without "sectionHeader" and with truncated "content" */
+        {{- /* Each page gets indexed without "sectionHeader" and with truncated "content" */ -}}
         {{- $.Scratch.Add "algoliaindex" (
         dict "objectID" $object_id 
         "title" $title
