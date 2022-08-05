@@ -264,7 +264,7 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure your Datadog Agent
+### Configure the Datadog Agent
 
 Once [log collection is enabled][2], set up [custom log collection][3] to tail your log files and send them to Datadog.
 
