@@ -472,32 +472,30 @@ tracing library, `dd-opentracing-cpp`.
 
 To control the volume of Ingress Controller traces that are sent to Datadog,
 specify a sampling rule that matches all traces. The `sample_rate` configured
-in the rule will determine the proportion of traces that are sampled. If no
+in the rule determines the proportion of traces that are sampled. If no
 rules are specified, then sampling defaults to 100%.
 
-Sampling rules are specified via the `DD_TRACE_SAMPLING_RULES` environment
-variable. To define sampling rules in the Ingress Controller, two pieces of
-configuration must be modified.
+Specify sampling rules by using the `DD_TRACE_SAMPLING_RULES` environment
+variable. To define sampling rules in the Ingress Controller:
 
-First, instruct Nginx to forward the environment variable to its worker processes. Add the following [main-snippet][11] to the `data` section of the Ingress Controller's `ConfigMap`:
-```yaml
-data:
-  main-snippet: "env DD_TRACE_SAMPLING_RULES;"
-```
+1. Instruct Nginx to forward the environment variable to its worker processes by adding the following [main-snippet][11] to the `data` section of the Ingress Controller's `ConfigMap`:
+   ```yaml
+   data:
+     main-snippet: "env DD_TRACE_SAMPLING_RULES;"
+   ```
 
-Second, specify a value for the environment variable in the `env` section of the Ingress Controller's `Deployment`.  For example, to keep 10% of traces originating from the Ingress Controller:
-```yaml
-env:
-- name: DD_TRACE_SAMPLING_RULES
-  value: '[{"sample_rate": 0.1}]'
-```
-
-To use the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent by default), specify an empty array of sampling rules:
-```yaml
-env:
-- name: DD_TRACE_SAMPLING_RULES
-  value: '[]'
-```
+2. Specify a value for the environment variable in the `env` section of the Ingress Controller's `Deployment`.  For example, to keep 10% of traces originating from the Ingress Controller:
+   ```yaml
+   env:
+   - name: DD_TRACE_SAMPLING_RULES
+     value: '[{"sample_rate": 0.1}]'
+   ```
+   To use the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent by default), specify an empty array of sampling rules:
+   ```yaml
+   env:
+   - name: DD_TRACE_SAMPLING_RULES
+     value: '[]'
+   ```
 
 [1]: http://nginx.org/en/linux_packages.html#stable
 [2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
