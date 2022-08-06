@@ -84,14 +84,18 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
     ```
 
     この構成は、AWS PrivateLink と Datadog Agent で Datadog にログを送信する際に必要で、Lambda Extension では必要ありません。詳しくは、[Agent のログ収集][3]をご参照ください。
-12. [Agent を再起動][4]し、AWS PrivateLink 経由で Datadog にデータを送信します。
+
+12. Lambda 拡張機能で、環境変数 `DD_API_KEY_SECRET_ARN` で指定した ARN を使って AWS Secrets Manager から Datadog API キーを読み込む場合、[Secrets Manager 用の VPC エンドポイントを作成][4]する必要があります。
+
+13. [Agent を再起動][5]し、AWS PrivateLink 経由で Datadog にデータを送信します。
 
 
 
 [1]: /ja/help/
 [2]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [3]: /ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
-[4]: /ja/agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
+[5]: /ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 
 {{% tab "VPC ピアリング" %}}
@@ -110,7 +114,7 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
 | Datadog                   | PrivateLink サービス名                                  |
 |---------------------------| --------------------------------------------------------- |
 | メトリクス                   | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` |
-| ログ ( Agent の HTTP 取り込み)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
+| ログ (Agent の HTTP 取り込み)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
 | ログ (ユーザーの HTTP 取り込み)   | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` |
 | API                       | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` |
 | プロセス                   | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
@@ -132,12 +136,13 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
 
 8. VPC エンドポイントの ID をクリックしてステータスを確認します。
 9. ステータスが _Pending_ から _Available_ に変わるまでお待ちください。約 10 分要する場合があります。
+10. これを作成したら、他のリージョンからプライベートリンクを使用して Datadog にデータを送信するようトラフィックをルーティングします。詳しくは、AWS のドキュメント [VPC ピアリング接続での作業][2]を参照してください。
 
 {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC のステータス" style="width:80%;" >}}
 
 ### Amazon Route53
 
-1. AWS PrivateLink のエンドポイントを作成した各サービスに対して、[Route53 プライベートホストゾーン][2]を作成します。プライベートホストゾーンを`us-east-1` の VPC にアタッチします。
+1. AWS PrivateLink のエンドポイントを作成した各サービスに対して、[Route53 プライベートホストゾーン][3]を作成します。プライベートホストゾーンを`us-east-1` の VPC にアタッチします。
 
 {{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Route53 のプライベートホストゾーンを作成する" style="width:80%;" >}}
 
@@ -146,7 +151,7 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
   | Datadog                   | PrivateLink サービス名                                  | プライベート DNS 名                                   |
   |---------------------------| --------------------------------------------------------- | -------------------------------------------------- |
   | メトリクス                   | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` | `metrics.agent.datadoghq.com`                     |
-  | ログ ( Agent の HTTP 取り込み)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` | `agent-http-intake.logs.datadoghq.com`            |
+  | ログ (Agent の HTTP 取り込み)  | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` | `agent-http-intake.logs.datadoghq.com`            |
   | ログ (ユーザーの HTTP 取り込み)   | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` | `http-intake.logs.datadoghq.com`                  |
   | API                       | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` | `api.datadoghq.com`                               |
   | プロセス                   | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
@@ -166,7 +171,7 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
 
 2. それぞれの新しい Route53 プライベートホストゾーン内に、同じ名前で A レコードを作成します。**Alias** オプションをトグルし、**Route traffic to** で、**Alias to VPC endpoint**、**us-east-1** を選び、DNS 名と関連付けられた VPC エンドポイントの DNS 名を入力します。
 
-   **注**: DNS 名を取得するには、[エンドポイントサービスのプライベート DNS 名構成ドキュメントを表示する][3]を参照してください。
+   **注**: DNS 名を取得するには、[エンドポイントサービスのプライベート DNS 名構成ドキュメントを表示する][2]を参照してください。
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="A レコードの作成" style="width:90%;" >}}
 
@@ -211,17 +216,20 @@ DNS は正しく解決しているのに、`port 443` への接続に失敗す�
 
    この構成は、AWS PrivateLink と Datadog Agent で Datadog にログを送信する際に必要で、Lambda Extension では必要ありません。詳しくは、[Agent のログ収集][8]をご参照ください。
 
-2. [Agent を再起動します][6]。
+2. Lambda 拡張機能で、環境変数 `DD_API_KEY_SECRET_ARN` で指定した ARN を使って AWS Secrets Manager から Datadog API キーを読み込む場合、[Secrets Manager 用の VPC エンドポイントを作成][9]する必要があります。
+
+3. [Agent を再起動します][6]。
 
 
 [1]: /ja/help/
-[2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html
-[3]: https://docs.aws.amazon.com/vpc/latest/privatelink/view-vpc-endpoint-service-dns-name.html
+[2]: https://docs.aws.amazon.com/vpc/latest/privatelink/view-vpc-endpoint-service-dns-name.html
+[3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html
 [4]: https://docs.amazonaws.cn/en_us/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
 [5]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-considerations.html#hosted-zone-private-considerations-vpc-settings
 [6]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [8]: https://docs.datadoghq.com/ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 {{% /tab %}}
 {{< /tabs >}}
 
