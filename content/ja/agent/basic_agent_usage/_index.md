@@ -183,7 +183,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 | [SUSE Enterprise Linux][7] | SUSE 11 SP4 以上           |
 | [Fedora][8]                | Fedora 26 以上             |
 | [MacOS][9]                 | macOS 10.10 以上           |
-| [Windows Server][10]       | Windows Server 2008r2 以上 |
+| [Windows Server][10]       | Windows Server 2008 以上   |
 | [Windows][10]              | Windows 7 以上             |
 
 **注**:
