@@ -97,3 +97,6 @@ LambdaTest でできることは以下の通りです。
 メール: [support@lambdatest.com](mailto:support@lambdatest.com)
 電話: +1-(866)-430-7087
 Web: https://www.lambdatest.com/
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/lambdatest-software-license" target="_blank">こちらをクリック</a>してください。
