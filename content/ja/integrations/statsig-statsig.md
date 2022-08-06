@@ -1,49 +1,81 @@
 ---
-"assets":
-  "dashboards": {}
-  "logs": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"author":
-  "homepage": "https://www.statsig.com"
-  "name": Statsig
-"categories":
+app_id: statsig-statsig
+app_uuid: 289b74cb-ad37-4a0e-98f5-4d5c6f3e3d19
+assets:
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: ''
+      metadata_path: metadata.csv
+      prefix: statsig.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Statsig ライセンス
+author:
+  homepage: https://www.statsig.com
+  name: Statsig
+  sales_email: serviceadmin@statsig.com
+  support_email: support@statsig.com
+  vendor_id: statsig
+categories:
 - マーケットプレイス
-"creates_events": true
-"ddtype": "crawler"
-"dependencies": []
-"display_name": "Statsig ライセンス"
-"draft": false
-"git_integration_title": "statsig-statsig"
-"guid": "d9535bd9-569e-4da9-ba3c-47f4dd262007"
-"integration_id": "statsig-statsig"
-"integration_title": "Statsig"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"maintainer": "support@statsig.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "statsig."
-"metric_to_check": ""
-"name": "statsig-statsig"
-"pricing":
-- "billing_type": tag_count
-  "metric": datadog.marketplace.statsig.log
-  "tag": イベント
-  "unit_label": 1000 件の Statsig ログイベント
-  "unit_price": !!float "0.1"
-"public_title": "Statsig"
-"short_description": "顧客が必要とする機能をすばやく構築、計測、そして納品。"
-"support": "パートナー"
-"supported_os":
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: statsig-statsig
+integration_id: statsig-statsig
+integration_title: Statsig
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: statsig-statsig
+oauth: {}
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.statsig.log
+  product_id: statsig
+  short_description: Statsig ログイベント 1000 件あたりの単価
+  tag: イベント
+  unit_label: 1000 件の Statsig ログイベント
+  unit_price: 0.1
+public_title: Statsig
+short_description: 顧客が必要とする機能をすばやく構築、計測、そして納品
+supported_os:
 - linux
-- mac_os
+- mac os
 - windows
-"terms":
-  "eula": assets/eula.pdf
-  "legal_email": serviceadmin@statsig.com
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Offering::Software License
+  configuration: README.md#Setup
+  description: 顧客が必要とする機能をすばやく構築、計測、そして納品
+  media:
+  - caption: Feature Gates を使用した新機能の安全なロールアウトとターゲット設定
+    image_url: images/tile_gates.png
+    media_type: image
+  - caption: Feature Gate で自動的に生成される Pulse の結果から、機能がトップラインのメトリクスに与える影響を観察します
+    image_url: images/tile_pulse.png
+    media_type: image
+  - caption: Ultrasound を使用して、メトリクスにポジティブまたはネガティブな影響を与える機能を特定します
+    image_url: images/tile_ultrasound.png
+    media_type: image
+  - caption: Datadog で機能のデプロイメントが他のプロダクションスタックにどのような影響を与えるかを確認します
+    image_url: images/tile_datadog_dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Statsig
 ---
 
 
@@ -76,3 +108,5 @@ Statsig インテグレーションにより、Statsig でのコンフィギュ�
 
 ヘルプが必要な場合は、Statsig サポート（support@statsig.com）または[弊社までお問い合わせ](https://www.statsig.com/contact)ください。
 
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">こちらをクリック</a>してください。
