@@ -9,7 +9,7 @@ further_reading:
   tag: ドキュメント
   text: エクスプローラーでエラー追跡データを視覚化する
 kind: documentation
-title: Android エラー追跡
+title: Android のクラッシュレポートとエラー追跡
 ---
 ## 概要
 
