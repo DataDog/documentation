@@ -33,7 +33,7 @@ Jira は、ソフトウェアチーム向けの課題およびプロジェクト
 1. Jira に移動します。
 2. 右端の歯車アイコンをクリックし、** Products** を選択します。
 3. 左メニューの **Integrations** の下にある **Application links** をクリックします。
-4. URL `https://app.datadoghq.com/` を入力し、**Create new link** をクリックします。
+4. URL {{<region-param key="dd_full_site" code="true">}} を入力し、**Create new link** をクリックします。
 5. "No response was received from the URL you entered” (入力した URL から応答がありません) という警告を無視して、**Continue** をクリックします。
 6. 下記のようにフォームに入力し、**Continue** をクリックします。
 
