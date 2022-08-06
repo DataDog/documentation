@@ -84,7 +84,7 @@ IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれていま�
 ##### Unix
 
 ```text
-/opt/datadog-agent/embedded/bin/pip install ibm_db==3.0.1
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.0.1
 ```
 
 ##### Windows
