@@ -38,3 +38,13 @@ CRITICAL | (pkg/trace/osutil/file.go:39 in Exitf) | OOM
 ```
 
 Agent の最大メモリ制限を増やすには、Agent のコンフィギュレーションファイルの `apm_config` セクションで `max_memory` 属性を構成します。コンテナ型のデプロイメント (例えば、Docker や Kubernetes) の場合は、環境変数 `DD_APM_MAX_MEMORY` を使用します。
+
+Kubernetes などのオーケストレーターでメモリ制限を処理したい場合、Datadog Agent 7.23.0 以降、この制限を `0` に設定することで無効にすることができます。
+
+## 最大 CPU 使用率
+
+この設定は、APM Agent が使用する最大 CPU パーセントを定義します。Kubernetes 以外の環境では、デフォルトで 50 に設定されており、これは 0.5 コアに相当します (100 = 1 コア)。この制限に達すると、CPU 使用量が再び制限を下回るまでペイロードは拒否されます。これは `datadog.trace_agent.receiver.ratelimit` によって反映され、現在ドロップされているペイロードの割合を表します (値が 1 の場合は、トレースがドロップされていないことを意味します)。これは、[Service Table View][1] で、`Limited Resource` という警告として表示されることもあります。
+
+オーケストレーター (または外部サービス) に Datadog Agent のリソース制限を管理させたい場合、Datadog では環境変数 `DD_APM_MAX_CPU_PERCENT` を `0` に設定してこれを無効にすることを推奨します (Datadog Agent 7.23.0 からサポートされるようになりました)。
+
+[1]: /ja/tracing/trace_pipeline/ingestion_controls/#service-table-view
