@@ -268,3 +268,6 @@ z/IRIS に関するご質問は、[サポートリクエスト](https://service.
 デモをご希望の方は、[sales@mainstorconcept.com](mailto:sales@mainstorconcept.com) までご連絡ください。
 
 北米地域のローカルサポートをお探しの場合は、パートナーである [SEA- Software Engineering of America](mailto:support@seasoft.com) にメールまたは電話 (800) 272-7322 でお問い合わせください。
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/mainstorconcept-ziris" target="_blank">こちらをクリック</a>してください。
