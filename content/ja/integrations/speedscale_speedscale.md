@@ -82,3 +82,6 @@ Speedscale は、お客様が成功するために必要なツールや情報を
 [3]: https://docs.speedscale.com/
 [4]: https://slack.speedscale.com/
 [5]: mailto:support@speedscale.com
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/speedscale-speedscale" target="_blank">こちらをクリック</a>してください。
