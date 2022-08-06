@@ -36,14 +36,6 @@ categories:
 - マーケットプレイス
 - cloud
 - data store
-classifier_tags:
-- サポートされる OS::Linux
-- サポートされる OS::Mac OS
-- サポートされる OS::Windows
-- Category::Marketplace
-- Category::Cloud
-- Category::Data Store
-- Offering::Integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -75,6 +67,14 @@ supported_os:
 - windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::Cloud
+  - Category::Data Store
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
   media:
@@ -127,4 +127,4 @@ RapDev Nutanix VM
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック](https://app.datadoghq.com/marketplace/app/rapdev-nutanix/pricing) してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-nutanix" target="_blank">こちらをクリック</a>してください。
