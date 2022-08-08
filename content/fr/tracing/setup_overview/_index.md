@@ -33,7 +33,7 @@ Dans les environnements conteneurisés, les environnements sans serveur et certa
 
 Pour instrumenter une application écrite dans un langage qui n'est pas encore pris en charge par une bibliothèque officielle, consultez la liste des [bibliothèques de tracing de notre communauté][2].
 
-Une fois le tracing configuré, il ne vous reste plus qu'à [activer le profileur en contenu pour pouvoir accéder aux données de profiling][3]. Le profileur est disponible en Java, Python, Go et Ruby (version bêta).
+Une fois le tracing configuré, il ne vous reste plus qu'à [activer le profileur en continu pour pouvoir accéder aux données de profiling][3]. Le profileur est disponible en Java, Python, Go, Ruby, Node.js, PHP (bêta) et .NET (bêta) ainsi que pour Linux (bêta).
 
 [1]: /fr/tracing/visualization/#trace
 [2]: /fr/developers/community/libraries/#apm-tracing-client-libraries
